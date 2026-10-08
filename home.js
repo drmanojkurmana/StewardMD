@@ -2163,7 +2163,7 @@
       eligible: function () { try { var q = (location.search.match(/[?&]tokos=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on" || q === "true"; return localStorage.getItem("smd_tokos") !== "0"; } catch (e) { return true; } } },
     // PrepNucleus (prep.js, loaded on first open by prep-loader.js): the NEET-PG, INI-CET, NEET-SS and USMLE question
     // bank (vault/plans/PrepNucleus.md). ON for all (owner 2026-10-06); smd_prep="0" or ?prep=0 hides it.
-    { act: "prep", ic: "quiz", tt: "PrepNucleus", sub: "Exam question bank",
+    { act: "prep", ic: "quiz", anim: "prep", tt: "PrepNucleus", sub: "Exam question bank",
       eligible: function () { try { var q = (location.search.match(/[?&]prep=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on" || q === "true"; return localStorage.getItem("smd_prep") !== "0"; } catch (e) { return true; } } },
     // Narkē (narke.js on the specialty engine, loaded on first open by narke-loader.js): Anaesthesia learning. ON for all
     // (owner 2026-10-06); kill switch smd_narke="0" or ?narke=0. Content stays "draft" until an anaesthesiologist approves it.
@@ -2370,7 +2370,9 @@
     // which works because the PNG is alpha-masked rather than a white-background image.
     // Not a loop of motion but a blade glint (owner, 2026-09-27: "SurgX should shine like a sharp
     // knife"): redesign-system.css sweeps a streak of light across the mark, clipped to its shape.
-    surgx: '<img class="ai-brandmark ai-surgx-img" src="/surgx-logo.png" alt="">'
+    surgx: '<img class="ai-brandmark ai-surgx-img" src="/surgx-logo.png" alt="">',
+    // PrepNucleus: the 4K nucleus mark (prepnucleus-logo.png), alpha-masked; brightness(0) invert(1) forces it white on this badge.
+    prep: '<img class="ai-brandmark ai-prep-img" src="/prepnucleus-logo.png" alt="PrepNucleus">'
   };
   /* Role box (owner, 2026-09-26): tools outside the user's role stay on Home but locked, after the
    * open ones, and explain themselves on tap. role-features.js owns the map; this is presentation
@@ -2855,8 +2857,9 @@
     }
     return s;
   }
-  function openSheet(html) { var s = sheetEl(); s.classList.remove("rds-hospital-sheet"); s.removeAttribute("aria-labelledby"); s.innerHTML = '<div class="hv-sheet-wrap"><div class="hv-grab"></div>' + html + '</div>'; s.scrollTop = 0; document.getElementById("hvScrim").classList.add("on"); s.classList.add("on"); document.body.classList.add("hv-sheet-open"); }
-  function closeSheet() { var s = sheetEl(); s.classList.remove("on"); document.getElementById("hvScrim").classList.remove("on"); document.body.classList.remove("hv-sheet-open"); }
+  var displayOnClose = null;
+  function openSheet(html) { displayOnClose = null; var s = sheetEl(); s.classList.remove("rds-hospital-sheet", "settings-display"); s.removeAttribute("aria-labelledby"); s.innerHTML = '<div class="hv-sheet-wrap"><div class="hv-grab"></div>' + html + '</div>'; s.scrollTop = 0; document.getElementById("hvScrim").classList.add("on"); s.classList.add("on"); document.body.classList.add("hv-sheet-open"); }
+  function closeSheet() { var s = sheetEl(); s.classList.remove("on"); document.getElementById("hvScrim").classList.remove("on"); document.body.classList.remove("hv-sheet-open"); var after = displayOnClose; displayOnClose = null; if (after) after(); }
 
   // ---- Knowledge Units: header chip + progress panel ----
   function kuFmt(n) { n = Number(n) || 0; return n >= 1000 ? (Math.round(n / 100) / 10 + "").replace(/\.0$/, "") + "k" : String(n); }
@@ -10128,7 +10131,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     } catch (e) {}
   }
   var DPRE = { default: { fontScale: 1, density: "default" }, small: { fontScale: .9, density: "compact" }, large: { fontScale: 1.15, density: "comfortable" }, senior: { fontScale: 1.25, density: "large" }, access: { fontScale: 1.75, density: "large" } };
-  function openDisplay() {
+  function openDisplay(options) {
     openSheet('<div class="hv-sh-t">Display &amp; Accessibility</div>' +
       '<div class="hv-d-sec"><div class="hv-d-row"><h4 style="margin:0">Font size</h4><span class="hv-d-val" id="hvFsv">100%</span></div><input type="range" id="hvFs" min="80" max="200" step="5" value="100" aria-label="Font size percent"><div class="hv-info" style="margin-top:6px">Up to 200% for low vision. Follows your device text size if set larger.</div></div>' +
       '<div class="hv-d-sec"><h4>Display density</h4><div class="hv-seg" id="hvDens"><button data-d="compact">Compact</button><button data-d="default">Default</button><button data-d="comfortable">Comfort</button><button data-d="large">Large</button></div></div>' +
@@ -10164,6 +10167,21 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       '<button class="hv-reset" id="hvReset">Reset to defaults</button>' +
       '<div class="hv-info" style="margin-top:12px">Changes readability &amp; spacing only — never medical content. Saved on this device.</div>');
     var s = sheetEl();
+    if (window.SMD_SETTINGS_UI && SMD_SETTINGS_UI.enabled()) {
+      s.classList.add("settings-display");
+      displayOnClose = options && options.onClose;
+      var done = document.createElement("button"); done.className = "settings-done"; done.textContent = displayOnClose ? "Back to Settings" : "Done";
+      done.addEventListener("click", closeSheet); s.querySelector(".hv-sheet-wrap").insertBefore(done, s.querySelector(".hv-sheet-wrap").firstChild);
+      done.focus({ preventScroll: true });
+      var atmosphere = s.querySelector("#hvMaikAtmoSec");
+      if (atmosphere) {
+        var disclosure = document.createElement("details"); disclosure.className = "settings-display-detail";
+        var summary = document.createElement("summary"); summary.textContent = "MaiK background & motion";
+        atmosphere.parentNode.insertBefore(disclosure, atmosphere); disclosure.appendChild(summary); disclosure.appendChild(atmosphere);
+        var badge = atmosphere.querySelector(".hv-d-badge"); if (badge) badge.remove();
+        atmosphere.querySelector("h4").textContent = "Assistant background";
+      }
+    }
     try { var _z = 1 / (Math.min(2, Math.max(.8, +ds.fontScale || 1))); s.style.zoom = _z; var _sc0 = document.getElementById("hvScrim"); if (_sc0) _sc0.style.zoom = _z; } catch (e) {}
     s.querySelector("#hvFs").addEventListener("input", function () { ds.autoFit = false; ds.userSet = true; ds.fontScale = (+this.value) / 100; applyD(); refreshD(); });
     s.querySelectorAll("#hvDens button").forEach(function (b) { b.addEventListener("click", function () { ds.autoFit = false; ds.density = b.getAttribute("data-d"); applyD(); refreshD(); }); });
@@ -10300,11 +10318,13 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     s.querySelectorAll("#hvDens button").forEach(function (b) { b.classList.toggle("on", b.getAttribute("data-d") === ds.density); });
     var a = s.querySelector("#hvAuto"); if (a) a.classList.toggle("on", ds.autoFit);
     var hp = s.querySelector("#hvHaptics"); if (hp) hp.classList.toggle("on", !!(window.SMD_HAPTICS && SMD_HAPTICS.enabled()));
+    [a, hp].forEach(function (b) { if (b) { b.setAttribute("role", "switch"); b.setAttribute("aria-checked", String(b.classList.contains("on"))); b.setAttribute("aria-label", b === a ? "Optimise for this device" : "Vibration feedback on tap"); } });
     var d = s.querySelector("#hvDet"); if (d) d.textContent = window.innerWidth + "×" + window.innerHeight + " · DPR " + (window.devicePixelRatio || 1).toFixed(2);
     s.querySelectorAll("#hvTheme .hv-th").forEach(function (b) { b.classList.toggle("on", b.getAttribute("data-t") === ds.theme); });
     s.querySelectorAll("#hvAppear button").forEach(function (b) { b.classList.toggle("on", b.getAttribute("data-a") === ds.appearance); });
     s.querySelectorAll("#hvFont .hv-fn").forEach(function (b) { b.classList.toggle("on", b.getAttribute("data-f") === ds.font); });
     s.querySelectorAll("#hvHead button").forEach(function (b) { b.classList.toggle("on", b.getAttribute("data-h") === ds.headingStyle); });
+    s.querySelectorAll("#hvDens button,#hvTheme button,#hvAppear button,#hvFont button,#hvHead button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.classList.contains("on"))); });
   }
 
   // ---- toast ----

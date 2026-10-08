@@ -213,5 +213,100 @@
       "importedAt": "2026-06-29T13:56:25Z",
       "contentHash": "hae331674"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "sepsis-dx-algo",
+      "title": "Sepsis: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Sepsis-3 (2016) reframes sepsis as life-threatening organ dysfunction caused by a dysregulated host response to infection, not merely a systemic inflammatory state; the older SIRS-based criteria and the term 'severe sepsis' were discarded",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: qSOFA >=2 (RR >=22, altered mentation, SBP <=100) in suspected infection - identifies the most acutely ill subset with higher mortality and ICU need (p.2292, 2320)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Serum procalcitonin / point-of-care pathogen testing where available to support diagnosis (p.2320), Repeat/serial lactate to gauge response to resuscitation, not just a single value (p.2313), Arterial (or venous) blood gas"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Sepsis-3 (Singer et al., JAMA 2016) is the current framework: (1) Infection (suspected or confirmed) without organ dysfunction is not sepsis. (2) Sepsis = suspected/confirmed infection with an acute increase of >=2"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Treating sepsis as a single pathogen rather than a syndrome - empiric therapy and workup must be driven by the most likely source (p.2316)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for sepsis."
+    }
+  ],
+  "tables": [
+    {
+      "id": "sepsis-matrix",
+      "title": "Sepsis: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Sepsis-3 (2016) reframes sepsis as life-threatening organ dysfunction caused by a dysregulated host response to infection, not",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Serum procalcitonin / point-of-care pathogen testing where available to support diagnosis (p.2320), Repeat/serial lactate to",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Sepsis mimics, retrospectively found in ~25% of ICU 'sepsis' admissions; continuous reevaluation for an alternative diagnosis is",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "qSOFA >=2 (RR >=22, altered mentation, SBP <=100) in suspected infection - identifies the most acutely ill subset with higher",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating sepsis as a single pathogen rather than a syndrome - empiric therapy and workup must be driven by the most likely source",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for sepsis."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "sepsis-real-image",
+      "title": "Sepsis: 12-Lead Diagnostic Electrocardiogram",
+      "type": "ecg",
+      "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
+      "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
+      "annotations": [
+        {
+          "label": "Conduction & Axis",
+          "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
+        },
+        {
+          "label": "Repolarization",
+          "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
+        },
+        {
+          "label": "Rhythm & Intervals",
+          "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+        }
+      ]
+    }
+  ]
 }

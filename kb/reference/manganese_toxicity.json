@@ -1,77 +1,172 @@
 {
-  "id": "manganese_toxicity",
-  "name": "Manganese toxicity",
-  "aliases": [
-    "manganism",
-    "manganese poisoning"
+ "id": "manganese_toxicity",
+ "name": "Manganese toxicity",
+ "aliases": [
+  "manganism",
+  "manganese poisoning"
+ ],
+ "class": "non_infective",
+ "system": "Toxicology / Neurology",
+ "specialty": "Toxicology / Neurology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Toxicology references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A neurotoxic syndrome from excess manganese exposure, classically in welders, miners, smelters and battery workers",
+   "Also occurs with chronic liver failure (impaired biliary excretion) and prolonged parenteral nutrition, particularly in infants",
+   "Produces an extrapyramidal, parkinsonism-like picture that is often poorly responsive to levodopa",
+   "Early features include behavioural change, irritability and psychiatric symptoms (historically termed manganese madness)",
+   "A characteristic gait with retropulsion and dystonia (cock-walk) may develop",
+   "MRI classically shows symmetrical high signal in the basal ganglia (globus pallidus) on T1-weighted images",
+   "Management focuses on removing the exposure source; chelation has limited benefit"
   ],
-  "class": "non_infective",
-  "system": "Toxicology / Neurology",
-  "specialty": "Toxicology / Neurology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Toxicology references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A neurotoxic syndrome from excess manganese exposure, classically in welders, miners, smelters and battery workers",
-      "Also occurs with chronic liver failure (impaired biliary excretion) and prolonged parenteral nutrition, particularly in infants",
-      "Produces an extrapyramidal, parkinsonism-like picture that is often poorly responsive to levodopa",
-      "Early features include behavioural change, irritability and psychiatric symptoms (historically termed manganese madness)",
-      "A characteristic gait with retropulsion and dystonia (cock-walk) may develop",
-      "MRI classically shows symmetrical high signal in the basal ganglia (globus pallidus) on T1-weighted images",
-      "Management focuses on removing the exposure source; chelation has limited benefit"
+  "pathophysiology": "Manganese is an essential trace element normally regulated by intestinal absorption and biliary excretion. Excess exposure, or reduced clearance in liver failure, allows accumulation in the brain, especially the basal ganglia and globus pallidus, where manganese is paramagnetic and produces the characteristic T1 hyperintensity. Accumulated manganese impairs mitochondrial function, promotes oxidative stress and disrupts dopaminergic and other neurotransmitter systems, producing an extrapyramidal movement disorder distinct from idiopathic Parkinson's disease and typically levodopa-unresponsive.",
+  "additionalDifferentials": [
+   "Idiopathic Parkinson's disease",
+   "Drug-induced parkinsonism",
+   "Wilson disease",
+   "Other causes of basal ganglia T1 hyperintensity (chronic liver disease, parenteral nutrition)",
+   "Progressive supranuclear palsy and other atypical parkinsonism",
+   "Neurodegeneration with brain iron accumulation"
+  ],
+  "additionalInvestigations": [
+   "Whole-blood manganese concentration (imperfect marker of brain burden)",
+   "Brain MRI looking for symmetrical pallidal T1 hyperintensity",
+   "Occupational and nutritional exposure history",
+   "Liver function assessment",
+   "Review of parenteral nutrition manganese content where relevant",
+   "Exclusion of Wilson disease"
+  ],
+  "redFlags": [
+   "Rapidly progressive parkinsonism or dystonia",
+   "Significant psychiatric disturbance",
+   "Ongoing high-level occupational exposure",
+   "Infant on long-term parenteral nutrition with neurological change"
+  ],
+  "prognosis": "Neurological deficits may stabilise or partially improve after exposure ceases but can be persistent or progressive; early recognition and source removal give the best outcome.",
+  "pitfalls": [
+   "Misdiagnosing it as idiopathic Parkinson's disease and expecting a levodopa response",
+   "Overlooking parenteral nutrition or chronic liver disease as non-occupational sources",
+   "Relying on blood manganese alone, which correlates poorly with brain accumulation",
+   "Failing to take an occupational history"
+  ],
+  "references": [
+   "Goldfrank's Toxicologic Emergencies (standard reference)",
+   "Occupational neurology references"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Identify and remove the source of exposure, whether occupational, by reducing manganese content of parenteral nutrition, or by treating the underlying liver failure impairing biliary excretion",
+   "Consider chelation therapy such as calcium disodium EDTA to enhance urinary excretion, recognising limited neurological benefit",
+   "Trial levodopa while noting the extrapyramidal syndrome is often poorly responsive, and treat parkinsonism and dystonia symptomatically",
+   "Manage hepatic dysfunction contributing to impaired manganese clearance",
+   "Provide psychiatric and behavioural support for irritability and mood disturbance",
+   "Implement occupational health measures with workplace exposure limits and biological monitoring",
+   "Follow up with neurology and toxicology, monitoring whole-blood manganese and pallidal signal on brain MRI"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "manganese_toxicity-pathway",
+   "title": "Manganese toxicity: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A neurotoxic syndrome from excess manganese exposure, classically in welders, miners, smelters and battery workers",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapidly progressive parkinsonism or dystonia",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Whole-blood manganese concentration (imperfect marker of brain burden), Brain MRI looking for symmetrical pallidal T1 hyperintensity, Occupational and nutritional exposure history"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Identify and remove the source of exposure, whether occupational, by reducing manganese content of parenteral nutrition, or by treating the underlying liver failure impairing biliary excretion"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Misdiagnosing it as idiopathic Parkinson's disease and expecting a levodopa response"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of manganese toxicity."
+  }
+ ],
+ "tables": [
+  {
+   "id": "manganese_toxicity-matrix",
+   "title": "Manganese toxicity: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A neurotoxic syndrome from excess manganese exposure, classically in welders, miners, smelters and battery workers",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Manganese is an essential trace element normally regulated by intestinal absorption and biliary excretion. Excess exposure, or reduced clearance in liver failure, allows accumulation in the brain, especially the basal ganglia and globus pallidus, where manganese is paramagnetic and produces the characteristic T1 hyperintensity. Accumulated manganese impairs mitochondrial function, promotes oxidative stress and disrupts dopaminergic and other neurotransmitter systems, producing an extrapyramidal movement disorder distinct from idiopathic Parkinson's disease and typically levodopa-unresponsive.",
-    "additionalDifferentials": [
-      "Idiopathic Parkinson's disease",
-      "Drug-induced parkinsonism",
-      "Wilson disease",
-      "Other causes of basal ganglia T1 hyperintensity (chronic liver disease, parenteral nutrition)",
-      "Progressive supranuclear palsy and other atypical parkinsonism",
-      "Neurodegeneration with brain iron accumulation"
+    [
+     "Key Investigations",
+     "Whole-blood manganese concentration (imperfect marker of brain burden), Brain MRI looking for symmetrical pallidal T1",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Whole-blood manganese concentration (imperfect marker of brain burden)",
-      "Brain MRI looking for symmetrical pallidal T1 hyperintensity",
-      "Occupational and nutritional exposure history",
-      "Liver function assessment",
-      "Review of parenteral nutrition manganese content where relevant",
-      "Exclusion of Wilson disease"
+    [
+     "Primary Differentials",
+     "Idiopathic Parkinson's disease, Drug-induced parkinsonism, Wilson disease",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rapidly progressive parkinsonism or dystonia",
-      "Significant psychiatric disturbance",
-      "Ongoing high-level occupational exposure",
-      "Infant on long-term parenteral nutrition with neurological change"
+    [
+     "Management Strategy",
+     "Identify and remove the source of exposure, whether occupational, by reducing manganese content of parenteral nutrition, or by",
+     "Core treatment modality"
     ],
-    "prognosis": "Neurological deficits may stabilise or partially improve after exposure ceases but can be persistent or progressive; early recognition and source removal give the best outcome.",
-    "pitfalls": [
-      "Misdiagnosing it as idiopathic Parkinson's disease and expecting a levodopa response",
-      "Overlooking parenteral nutrition or chronic liver disease as non-occupational sources",
-      "Relying on blood manganese alone, which correlates poorly with brain accumulation",
-      "Failing to take an occupational history"
-    ],
-    "references": [
-      "Goldfrank's Toxicologic Emergencies (standard reference)",
-      "Occupational neurology references"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Identify and remove the source of exposure, whether occupational, by reducing manganese content of parenteral nutrition, or by treating the underlying liver failure impairing biliary excretion",
-      "Consider chelation therapy such as calcium disodium EDTA to enhance urinary excretion, recognising limited neurological benefit",
-      "Trial levodopa while noting the extrapyramidal syndrome is often poorly responsive, and treat parkinsonism and dystonia symptomatically",
-      "Manage hepatic dysfunction contributing to impaired manganese clearance",
-      "Provide psychiatric and behavioural support for irritability and mood disturbance",
-      "Implement occupational health measures with workplace exposure limits and biological monitoring",
-      "Follow up with neurology and toxicology, monitoring whole-blood manganese and pallidal signal on brain MRI"
+    [
+     "Clinical Pitfall",
+     "Misdiagnosing it as idiopathic Parkinson's disease and expecting a levodopa response",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for manganese toxicity."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "manganese-toxicity-real-image",
+   "title": "Manganese toxicity: Diagnostic Head Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
+   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
+   "annotations": [
+    {
+     "label": "Cerebral Parenchyma",
+     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+    },
+    {
+     "label": "Extra-Axial Spaces",
+     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+    }
+   ]
+  }
+ ]
 }

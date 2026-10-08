@@ -135,5 +135,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "h92d33a23"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "sah-dx-algo",
+      "title": "Subarachnoid hemorrhage: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "The single most important feature of aneurysmal SAH headache is its sudden (abrupt) onset, even more than its severity; ruptures may occasionally present as only moderate headache or as a change in the patient's usual headache pattern",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Sudden unexplained headache of any location may represent a sentinel bleed (small aneurysmal leak) heralding imminent major haemorrhage and must be investigated (p.3459)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Noncontrast CT detects >95% of cases when obtained within 72 h; sensitivity falls as time from ictus increases (p.3459), Four-vessel conventional x-ray (catheter) angiography - gold standard to localise/define aneurysm"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Two presentation-based clinical grading scales are used: the Hunt-Hess scale (1 = asymptomatic/minimal headache and slight nuchal rigidity through 5 = coma with reflex posturing or flaccidity) and the World Federation of"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: A normal CT does not exclude SAH, especially as time elapses or with small or infratentorial bleeds; if CT is non-diagnostic and there is no mass lesion/obstructive hydrocephalus, lumbar puncture for xanthochromia is"
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for subarachnoid hemorrhage."
+    }
+  ],
+  "tables": [
+    {
+      "id": "sah-matrix",
+      "title": "Subarachnoid hemorrhage: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The single most important feature of aneurysmal SAH headache is its sudden (abrupt) onset, even more than its severity; ruptures",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Noncontrast CT detects >95% of cases when obtained within 72 h; sensitivity falls as time from ictus increases (p.3459),",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Primary thunderclap headache / reversible cerebral vasoconstriction syndrome (RCVS) - many otherwise-undiagnosed thunderclap",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Sudden unexplained headache of any location may represent a sentinel bleed (small aneurysmal leak) heralding imminent major",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "A normal CT does not exclude SAH, especially as time elapses or with small or infratentorial bleeds; if CT is non-diagnostic and",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for subarachnoid hemorrhage."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "sah-real-image",
+      "title": "Subarachnoid hemorrhage: Non-Contrast Head CT (Subarachnoid Hemorrhage)",
+      "type": "ct",
+      "src": "/assets/kb-real-images/subarachnoid-hemorrhage-ct.jpg?v=kbri3",
+      "caption": "Real axial non-contrast computed tomography scan demonstrating high-attenuation acute blood filling the basal cisterns, sylvian fissures, and sulci.",
+      "annotations": [
+        {
+          "label": "Basal Cistern Blood",
+          "description": "Hyperdense extravasated blood filling the suprasellar and interpeduncular cisterns."
+        },
+        {
+          "label": "Sylvian Fissure Blood",
+          "description": "Casting of high-density blood into the bilateral sylvian fissures."
+        },
+        {
+          "label": "Hydrocephalus Screen",
+          "description": "Temporal horn enlargement signaling acute obstructive ventriculomegaly."
+        }
+      ]
+    }
+  ]
 }

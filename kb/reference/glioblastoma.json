@@ -1,78 +1,173 @@
 {
-  "id": "glioblastoma",
-  "name": "Glioblastoma",
-  "aliases": [
-    "GBM",
-    "glioblastoma multiforme",
-    "grade 4 astrocytoma",
-    "high-grade glioma"
+ "id": "glioblastoma",
+ "name": "Glioblastoma",
+ "aliases": [
+  "GBM",
+  "glioblastoma multiforme",
+  "grade 4 astrocytoma",
+  "high-grade glioma"
+ ],
+ "class": "non_infective",
+ "system": "Neurosurgery / Neurology",
+ "specialty": "Neurosurgery",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Youmans & Winn Neurological Surgery / Harrison's Principles of Internal Medicine",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Glioblastoma is the most common and most aggressive primary malignant brain tumour in adults, classified as a grade 4 glioma",
+   "Presentation is usually subacute over weeks, with progressive headache, focal deficits, cognitive or personality change, and seizures",
+   "Headaches suggesting raised intracranial pressure, worse in the morning or with Valsalva, and new focal neurology should prompt urgent imaging",
+   "On MRI it typically appears as an irregularly enhancing mass with central necrosis and surrounding vasogenic oedema, often crossing the corpus callosum as a butterfly lesion",
+   "Definitive diagnosis and molecular characterisation require tissue from biopsy or resection, with markers such as IDH status and MGMT promoter methylation guiding prognosis and therapy",
+   "Corticosteroids are used to control symptomatic peritumoural oedema and mass effect while treatment is planned",
+   "Standard management combines maximal safe surgical resection with subsequent radiotherapy and chemotherapy, individualised to patient fitness and molecular profile",
+   "Despite multimodal treatment the tumour almost always recurs, so realistic goal-setting and supportive care are integral"
   ],
-  "class": "non_infective",
-  "system": "Neurosurgery / Neurology",
-  "specialty": "Neurosurgery",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Youmans & Winn Neurological Surgery / Harrison's Principles of Internal Medicine",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Glioblastoma is the most common and most aggressive primary malignant brain tumour in adults, classified as a grade 4 glioma",
-      "Presentation is usually subacute over weeks, with progressive headache, focal deficits, cognitive or personality change, and seizures",
-      "Headaches suggesting raised intracranial pressure, worse in the morning or with Valsalva, and new focal neurology should prompt urgent imaging",
-      "On MRI it typically appears as an irregularly enhancing mass with central necrosis and surrounding vasogenic oedema, often crossing the corpus callosum as a butterfly lesion",
-      "Definitive diagnosis and molecular characterisation require tissue from biopsy or resection, with markers such as IDH status and MGMT promoter methylation guiding prognosis and therapy",
-      "Corticosteroids are used to control symptomatic peritumoural oedema and mass effect while treatment is planned",
-      "Standard management combines maximal safe surgical resection with subsequent radiotherapy and chemotherapy, individualised to patient fitness and molecular profile",
-      "Despite multimodal treatment the tumour almost always recurs, so realistic goal-setting and supportive care are integral"
+  "pathophysiology": "Glioblastoma is a highly malignant, infiltrative tumour arising from glial (astrocytic-lineage) cells. It is characterised histologically by marked cellular atypia, brisk mitotic activity, microvascular proliferation, and regions of necrosis. The tumour cells invade diffusely along white matter tracts well beyond the enhancing margin seen on imaging, which underlies the difficulty of complete removal and the near-inevitable recurrence. Aberrant angiogenesis produces leaky vessels that generate surrounding vasogenic oedema and contribute to mass effect and raised intracranial pressure. Distinct molecular alterations define subgroups with differing behaviour and treatment response.",
+  "additionalDifferentials": [
+   "Brain metastasis",
+   "Primary CNS lymphoma",
+   "Cerebral abscess",
+   "Lower-grade glioma",
+   "Tumefactive demyelination",
+   "Subacute infarct with mass effect"
+  ],
+  "additionalInvestigations": [
+   "MRI brain with contrast, including advanced sequences (perfusion, spectroscopy) to characterise the lesion",
+   "Histopathological and molecular analysis of biopsy or resection tissue (including IDH and MGMT status)",
+   "Staging or systemic imaging when metastasis is a differential",
+   "Assessment of performance status and comorbidity to guide treatment intensity"
+  ],
+  "redFlags": [
+   "Rapidly progressive neurological deficit or declining consciousness from mass effect",
+   "Symptoms and signs of raised intracranial pressure with impending herniation",
+   "New-onset seizures, including status epilepticus",
+   "Acute deterioration from intratumoural haemorrhage or worsening oedema"
+  ],
+  "prognosis": "Glioblastoma carries a poor prognosis with median survival typically measured in months to a couple of years even with optimal multimodal therapy; younger age, good performance status, greater extent of resection, and favourable molecular markers such as MGMT methylation are associated with better outcomes.",
+  "pitfalls": [
+   "Assuming a solitary enhancing lesion is glioblastoma without considering metastasis, lymphoma, or abscess",
+   "Starting high-dose steroids before biopsy when lymphoma is a possibility, as this can obscure the diagnosis",
+   "Underestimating infiltration beyond the enhancing margin when planning treatment",
+   "Neglecting seizure control, symptom management, and early supportive care discussions"
+  ],
+  "references": [
+   "Youmans & Winn Neurological Surgery",
+   "Harrison's Principles of Internal Medicine, 22e"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Maximal safe surgical resection to reduce tumour burden and obtain tissue for histological and molecular diagnosis",
+   "Adjuvant fractionated radiotherapy with concurrent and maintenance temozolomide chemotherapy as standard combined-modality treatment",
+   "Corticosteroids such as dexamethasone to control symptomatic peritumoural vasogenic oedema and mass effect",
+   "Antiepileptic drugs for seizure control and venous thromboembolism prophylaxis given the prothrombotic risk",
+   "Use MGMT promoter methylation and IDH status to guide therapy, and consider tumour-treating fields or bevacizumab for progressive or recurrent disease",
+   "Manage acute raised intracranial pressure with corticosteroids and urgent neurosurgical review",
+   "Coordinate care through a neuro-oncology multidisciplinary team with early integration of palliative and supportive care"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "glioblastoma-pathway",
+   "title": "Glioblastoma: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Glioblastoma is the most common and most aggressive primary malignant brain tumour in adults, classified as a grade 4 glioma",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapidly progressive neurological deficit or declining consciousness from mass effect",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: MRI brain with contrast, including advanced sequences (perfusion, spectroscopy) to characterise the lesion, Histopathological and molecular analysis of biopsy or resection tissue (including IDH and MGMT status), Staging or"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Maximal safe surgical resection to reduce tumour burden and obtain tissue for histological and molecular diagnosis"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Assuming a solitary enhancing lesion is glioblastoma without considering metastasis, lymphoma, or abscess"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of glioblastoma."
+  }
+ ],
+ "tables": [
+  {
+   "id": "glioblastoma-matrix",
+   "title": "Glioblastoma: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Glioblastoma is the most common and most aggressive primary malignant brain tumour in adults, classified as a grade 4 glioma",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Glioblastoma is a highly malignant, infiltrative tumour arising from glial (astrocytic-lineage) cells. It is characterised histologically by marked cellular atypia, brisk mitotic activity, microvascular proliferation, and regions of necrosis. The tumour cells invade diffusely along white matter tracts well beyond the enhancing margin seen on imaging, which underlies the difficulty of complete removal and the near-inevitable recurrence. Aberrant angiogenesis produces leaky vessels that generate surrounding vasogenic oedema and contribute to mass effect and raised intracranial pressure. Distinct molecular alterations define subgroups with differing behaviour and treatment response.",
-    "additionalDifferentials": [
-      "Brain metastasis",
-      "Primary CNS lymphoma",
-      "Cerebral abscess",
-      "Lower-grade glioma",
-      "Tumefactive demyelination",
-      "Subacute infarct with mass effect"
+    [
+     "Key Investigations",
+     "MRI brain with contrast, including advanced sequences (perfusion, spectroscopy) to characterise the lesion, Histopathological and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "MRI brain with contrast, including advanced sequences (perfusion, spectroscopy) to characterise the lesion",
-      "Histopathological and molecular analysis of biopsy or resection tissue (including IDH and MGMT status)",
-      "Staging or systemic imaging when metastasis is a differential",
-      "Assessment of performance status and comorbidity to guide treatment intensity"
+    [
+     "Primary Differentials",
+     "Brain metastasis, Primary CNS lymphoma, Cerebral abscess",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rapidly progressive neurological deficit or declining consciousness from mass effect",
-      "Symptoms and signs of raised intracranial pressure with impending herniation",
-      "New-onset seizures, including status epilepticus",
-      "Acute deterioration from intratumoural haemorrhage or worsening oedema"
+    [
+     "Management Strategy",
+     "Maximal safe surgical resection to reduce tumour burden and obtain tissue for histological and molecular diagnosis",
+     "Core treatment modality"
     ],
-    "prognosis": "Glioblastoma carries a poor prognosis with median survival typically measured in months to a couple of years even with optimal multimodal therapy; younger age, good performance status, greater extent of resection, and favourable molecular markers such as MGMT methylation are associated with better outcomes.",
-    "pitfalls": [
-      "Assuming a solitary enhancing lesion is glioblastoma without considering metastasis, lymphoma, or abscess",
-      "Starting high-dose steroids before biopsy when lymphoma is a possibility, as this can obscure the diagnosis",
-      "Underestimating infiltration beyond the enhancing margin when planning treatment",
-      "Neglecting seizure control, symptom management, and early supportive care discussions"
-    ],
-    "references": [
-      "Youmans & Winn Neurological Surgery",
-      "Harrison's Principles of Internal Medicine, 22e"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Maximal safe surgical resection to reduce tumour burden and obtain tissue for histological and molecular diagnosis",
-      "Adjuvant fractionated radiotherapy with concurrent and maintenance temozolomide chemotherapy as standard combined-modality treatment",
-      "Corticosteroids such as dexamethasone to control symptomatic peritumoural vasogenic oedema and mass effect",
-      "Antiepileptic drugs for seizure control and venous thromboembolism prophylaxis given the prothrombotic risk",
-      "Use MGMT promoter methylation and IDH status to guide therapy, and consider tumour-treating fields or bevacizumab for progressive or recurrent disease",
-      "Manage acute raised intracranial pressure with corticosteroids and urgent neurosurgical review",
-      "Coordinate care through a neuro-oncology multidisciplinary team with early integration of palliative and supportive care"
+    [
+     "Clinical Pitfall",
+     "Assuming a solitary enhancing lesion is glioblastoma without considering metastasis, lymphoma, or abscess",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for glioblastoma."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "glioblastoma-real-image",
+   "title": "Glioblastoma: Diagnostic Head Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
+   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
+   "annotations": [
+    {
+     "label": "Cerebral Parenchyma",
+     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+    },
+    {
+     "label": "Extra-Axial Spaces",
+     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+    }
+   ]
+  }
+ ]
 }

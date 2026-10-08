@@ -118,5 +118,100 @@
  "review": {
   "status": "ai_drafted",
   "compiled": "2026-09-25"
- }
+ },
+ "algorithms": [
+  {
+   "id": "self-harm-and-suicide-risk-pathway",
+   "title": "Self-harm and suicide risk (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "A mental health professional should carry out a psychosocial assessment at the earliest opportunity after every episode; do not delay it until medical treatment is finished or use breath or blood alcohol levels to delay it.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Treat the injury or poisoning without delay (see Acute poisoning: general approach (adult) and specific poisoning protocols). In any overdose, check a paracetamol level because early features may be absent.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Identify historic factors (previous self-harm, abuse), changeable factors (mental illness, alcohol or drugs, pain, relationships, debt, housing, work), upcoming events, and protective factors (family, children, reasons for living)."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Develop a written safety plan with the person: triggers and warning signs, own coping strategies, people and places for distraction, family or friends who can help, professional and crisis contacts (including out of hours), and making the"
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Discharging on the basis of a risk score or a low risk label without a psychosocial assessment."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for self-harm and suicide risk (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "self-harm-and-suicide-risk-summary-matrix",
+   "title": "Self-harm and suicide risk (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A mental health professional should carry out a psychosocial assessment at the earliest opportunity after every episode; do not delay it",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Treat the injury or poisoning without delay (see Acute poisoning: general approach (adult) and specific poisoning protocols). In any",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Targeted Treatment",
+     "Develop a written safety plan with the person: triggers and warning signs, own coping strategies, people and places for distraction, family",
+     "Definitive management protocol"
+    ],
+    [
+     "Critical Pitfall",
+     "Discharging on the basis of a risk score or a low risk label without a psychosocial assessment.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for self-harm and suicide risk (adult)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "self-harm-and-suicide-risk-real-image",
+   "title": "Self-harm and suicide risk (adult): Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

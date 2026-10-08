@@ -1,78 +1,173 @@
 {
-  "id": "sedation_complications",
-  "name": "Sedation complications",
-  "aliases": [
-    "procedural sedation complications",
-    "conscious sedation complications",
-    "sedation-related adverse events"
+ "id": "sedation_complications",
+ "name": "Sedation complications",
+ "aliases": [
+  "procedural sedation complications",
+  "conscious sedation complications",
+  "sedation-related adverse events"
+ ],
+ "class": "non_infective",
+ "system": "Anaesthesia / Perioperative",
+ "specialty": "Anaesthesiology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Miller's Anesthesia / standard perioperative references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Sedation exists on a continuum from minimal sedation to general anaesthesia, and patients can drift into a deeper level than intended, so providers must be able to rescue from the next deeper level",
+   "The most common serious complications are respiratory: airway obstruction, hypoventilation, apnoea, and hypoxaemia, which can progress rapidly if unrecognised",
+   "Cardiovascular effects include hypotension and bradycardia, and combining sedatives with opioids markedly increases the risk of respiratory depression",
+   "Continuous monitoring of oxygenation with pulse oximetry and of ventilation with capnography, plus regular assessment of conscious level, is essential throughout and during recovery",
+   "Appropriate patient selection and pre-procedure assessment (airway, comorbidities, aspiration risk, and fasting status) reduce complications",
+   "Resuscitation equipment, oxygen, suction, and reversal agents must be immediately available, and staff must be trained to manage airway and cardiovascular emergencies",
+   "Reversal agents (such as an opioid antagonist for opioids and a benzodiazepine antagonist for benzodiazepines) can be used, but their duration may be shorter than the sedative, risking re-sedation",
+   "Elderly, frail, obese, and sleep-apnoea patients, and those at the extremes of age, are especially vulnerable and warrant conservative dosing and heightened vigilance"
   ],
-  "class": "non_infective",
-  "system": "Anaesthesia / Perioperative",
-  "specialty": "Anaesthesiology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Miller's Anesthesia / standard perioperative references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Sedation exists on a continuum from minimal sedation to general anaesthesia, and patients can drift into a deeper level than intended, so providers must be able to rescue from the next deeper level",
-      "The most common serious complications are respiratory: airway obstruction, hypoventilation, apnoea, and hypoxaemia, which can progress rapidly if unrecognised",
-      "Cardiovascular effects include hypotension and bradycardia, and combining sedatives with opioids markedly increases the risk of respiratory depression",
-      "Continuous monitoring of oxygenation with pulse oximetry and of ventilation with capnography, plus regular assessment of conscious level, is essential throughout and during recovery",
-      "Appropriate patient selection and pre-procedure assessment (airway, comorbidities, aspiration risk, and fasting status) reduce complications",
-      "Resuscitation equipment, oxygen, suction, and reversal agents must be immediately available, and staff must be trained to manage airway and cardiovascular emergencies",
-      "Reversal agents (such as an opioid antagonist for opioids and a benzodiazepine antagonist for benzodiazepines) can be used, but their duration may be shorter than the sedative, risking re-sedation",
-      "Elderly, frail, obese, and sleep-apnoea patients, and those at the extremes of age, are especially vulnerable and warrant conservative dosing and heightened vigilance"
+  "pathophysiology": "Sedative and analgesic agents depress the central nervous system in a dose-dependent way, reducing conscious level, blunting protective airway reflexes, and depressing respiratory drive and upper airway muscle tone. Loss of pharyngeal tone causes obstruction, while reduced central drive causes hypoventilation and apnoea, together producing hypoxaemia and hypercapnia. Many agents also cause vasodilation and myocardial depression, leading to hypotension, and some blunt compensatory reflexes. Because effects are additive, combinations of sedatives and opioids produce disproportionate respiratory and cardiovascular depression. Depressed reflexes also raise the risk of aspiration in patients with a full stomach.",
+  "additionalDifferentials": [
+   "Airway obstruction from other causes",
+   "Aspiration of gastric contents",
+   "Anaphylaxis to a sedative agent",
+   "Underlying cardiac or respiratory disease causing deterioration",
+   "Hypoglycaemia or metabolic disturbance altering consciousness",
+   "Local anaesthetic systemic toxicity when combined with local blocks"
+  ],
+  "additionalInvestigations": [
+   "Continuous pulse oximetry and capnography during sedation and recovery",
+   "Regular assessment of sedation depth and responsiveness",
+   "Blood pressure and ECG monitoring appropriate to patient risk",
+   "Arterial or capillary blood gas if significant hypoventilation is suspected",
+   "Glucose check if altered consciousness is unexplained"
+  ],
+  "redFlags": [
+   "Apnoea, severe hypoventilation, or airway obstruction with falling oxygen saturation",
+   "Unintended progression to deep sedation or general anaesthesia without rescue capability",
+   "Significant hypotension or bradycardia",
+   "Aspiration during sedation in an at-risk patient"
+  ],
+  "prognosis": "With appropriate patient selection, monitoring, and prompt rescue, procedural sedation is generally safe; unrecognised respiratory depression can cause hypoxic injury or death, and most serious events are linked to inadequate monitoring or rescue.",
+  "pitfalls": [
+   "Providing sedation without the skills or equipment to rescue a deeper-than-intended level",
+   "Relying on oximetry alone and missing early hypoventilation that capnography would detect",
+   "Underestimating the additive respiratory depression of sedative-opioid combinations",
+   "Assuming a reversal agent fully solves the problem despite its shorter duration and risk of re-sedation",
+   "Inadequate pre-procedure assessment of airway, comorbidity, and aspiration risk"
+  ],
+  "references": [
+   "Miller's Anesthesia"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Prevent complications through pre-procedure assessment of airway, comorbidity, aspiration risk and fasting status, with appropriate patient selection",
+   "Monitor oxygenation with pulse oximetry and ventilation with capnography, and assess conscious level throughout the procedure and recovery",
+   "Manage respiratory depression with supplemental oxygen, airway-opening manoeuvres, airway adjuncts and assisted ventilation",
+   "Administer reversal agents where appropriate, naloxone for opioids and flumazenil for benzodiazepines",
+   "Support the circulation with intravenous fluids and vasopressors for hypotension and an antimuscarinic such as atropine for bradycardia",
+   "Ensure immediate availability of oxygen, suction and resuscitation and airway equipment, with staff trained to rescue from a deeper-than-intended level of sedation",
+   "Escalate to anaesthetic and critical care support for failure to rescue or aspiration"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "sedation_complications-pathway",
+   "title": "Sedation complications: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Sedation exists on a continuum from minimal sedation to general anaesthesia, and patients can drift into a deeper level than intended, so providers must be able to rescue from the next deeper level",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Apnoea, severe hypoventilation, or airway obstruction with falling oxygen saturation",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Continuous pulse oximetry and capnography during sedation and recovery, Regular assessment of sedation depth and responsiveness, Blood pressure and ECG monitoring appropriate to patient risk"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Prevent complications through pre-procedure assessment of airway, comorbidity, aspiration risk and fasting status, with appropriate patient selection"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Providing sedation without the skills or equipment to rescue a deeper-than-intended level"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of sedation complications."
+  }
+ ],
+ "tables": [
+  {
+   "id": "sedation_complications-matrix",
+   "title": "Sedation complications: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Sedation exists on a continuum from minimal sedation to general anaesthesia, and patients can drift into a deeper level than",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Sedative and analgesic agents depress the central nervous system in a dose-dependent way, reducing conscious level, blunting protective airway reflexes, and depressing respiratory drive and upper airway muscle tone. Loss of pharyngeal tone causes obstruction, while reduced central drive causes hypoventilation and apnoea, together producing hypoxaemia and hypercapnia. Many agents also cause vasodilation and myocardial depression, leading to hypotension, and some blunt compensatory reflexes. Because effects are additive, combinations of sedatives and opioids produce disproportionate respiratory and cardiovascular depression. Depressed reflexes also raise the risk of aspiration in patients with a full stomach.",
-    "additionalDifferentials": [
-      "Airway obstruction from other causes",
-      "Aspiration of gastric contents",
-      "Anaphylaxis to a sedative agent",
-      "Underlying cardiac or respiratory disease causing deterioration",
-      "Hypoglycaemia or metabolic disturbance altering consciousness",
-      "Local anaesthetic systemic toxicity when combined with local blocks"
+    [
+     "Key Investigations",
+     "Continuous pulse oximetry and capnography during sedation and recovery, Regular assessment of sedation depth and responsiveness,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Continuous pulse oximetry and capnography during sedation and recovery",
-      "Regular assessment of sedation depth and responsiveness",
-      "Blood pressure and ECG monitoring appropriate to patient risk",
-      "Arterial or capillary blood gas if significant hypoventilation is suspected",
-      "Glucose check if altered consciousness is unexplained"
+    [
+     "Primary Differentials",
+     "Airway obstruction from other causes, Aspiration of gastric contents, Anaphylaxis to a sedative agent",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Apnoea, severe hypoventilation, or airway obstruction with falling oxygen saturation",
-      "Unintended progression to deep sedation or general anaesthesia without rescue capability",
-      "Significant hypotension or bradycardia",
-      "Aspiration during sedation in an at-risk patient"
+    [
+     "Management Strategy",
+     "Prevent complications through pre-procedure assessment of airway, comorbidity, aspiration risk and fasting status, with",
+     "Core treatment modality"
     ],
-    "prognosis": "With appropriate patient selection, monitoring, and prompt rescue, procedural sedation is generally safe; unrecognised respiratory depression can cause hypoxic injury or death, and most serious events are linked to inadequate monitoring or rescue.",
-    "pitfalls": [
-      "Providing sedation without the skills or equipment to rescue a deeper-than-intended level",
-      "Relying on oximetry alone and missing early hypoventilation that capnography would detect",
-      "Underestimating the additive respiratory depression of sedative-opioid combinations",
-      "Assuming a reversal agent fully solves the problem despite its shorter duration and risk of re-sedation",
-      "Inadequate pre-procedure assessment of airway, comorbidity, and aspiration risk"
-    ],
-    "references": [
-      "Miller's Anesthesia"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Prevent complications through pre-procedure assessment of airway, comorbidity, aspiration risk and fasting status, with appropriate patient selection",
-      "Monitor oxygenation with pulse oximetry and ventilation with capnography, and assess conscious level throughout the procedure and recovery",
-      "Manage respiratory depression with supplemental oxygen, airway-opening manoeuvres, airway adjuncts and assisted ventilation",
-      "Administer reversal agents where appropriate, naloxone for opioids and flumazenil for benzodiazepines",
-      "Support the circulation with intravenous fluids and vasopressors for hypotension and an antimuscarinic such as atropine for bradycardia",
-      "Ensure immediate availability of oxygen, suction and resuscitation and airway equipment, with staff trained to rescue from a deeper-than-intended level of sedation",
-      "Escalate to anaesthetic and critical care support for failure to rescue or aspiration"
+    [
+     "Clinical Pitfall",
+     "Providing sedation without the skills or equipment to rescue a deeper-than-intended level",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for sedation complications."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "sedation-complications-real-image",
+   "title": "Sedation complications: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

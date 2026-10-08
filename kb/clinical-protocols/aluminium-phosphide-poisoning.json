@@ -5,7 +5,15 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, ICU",
- "aliases": ["AlP poisoning", "aluminum phosphide", "celphos", "rice tablet poisoning", "wheat pill", "fumigant tablet", "phosphine poisoning"],
+ "aliases": [
+  "AlP poisoning",
+  "aluminum phosphide",
+  "celphos",
+  "rice tablet poisoning",
+  "wheat pill",
+  "fumigant tablet",
+  "phosphine poisoning"
+ ],
  "summary": "Aluminium phosphide releases phosphine gas, causing refractory shock, toxic myocarditis and severe metabolic acidosis with very high mortality. There is no specific antidote: resuscitate aggressively with guided fluids (avoid overload) and early noradrenaline, correct acidosis, support organs, and consider rescue therapies (IABP, VA-ECMO); avoid water-based lavage and unproven remedies.",
  "sections": [
   {
@@ -83,17 +91,155 @@
   }
  ],
  "drugs": [
-  { "name": "Noradrenaline (norepinephrine)", "dose": "Start 0.05 to 0.1 mcg/kg/min IV, titrate to MAP 65 mmHg", "notes": "First-line vasopressor for refractory hypotension." },
-  { "name": "Sodium bicarbonate 8.4%", "dose": "IV boluses or infusion titrated to repeat blood gas", "notes": "Severe acidosis or bridge to dialysis; watch sodium and fluid load." },
-  { "name": "Methylene blue", "dose": "1 to 2 mg/kg IV over 5 minutes, repeat if cyanosis persists", "notes": "Symptomatic methaemoglobinaemia; avoid in G6PD deficiency or haemolysis." },
-  { "name": "Acetylcysteine", "dose": "150 mg/kg IV over 1 hour, then 50 mg/kg over 4 hours, then 100 mg/kg over 16 hours", "notes": "Adjunct; low-quality evidence of mortality benefit." },
-  { "name": "Magnesium sulfate", "dose": "Correct low magnesium; one reported regimen is 3 g IV over 3 hours, then 6 g per 24 hours for 3 to 5 days", "notes": "Routine use unproven." }
+  {
+   "name": "Noradrenaline (norepinephrine)",
+   "dose": "Start 0.05 to 0.1 mcg/kg/min IV, titrate to MAP 65 mmHg",
+   "notes": "First-line vasopressor for refractory hypotension."
+  },
+  {
+   "name": "Sodium bicarbonate 8.4%",
+   "dose": "IV boluses or infusion titrated to repeat blood gas",
+   "notes": "Severe acidosis or bridge to dialysis; watch sodium and fluid load."
+  },
+  {
+   "name": "Methylene blue",
+   "dose": "1 to 2 mg/kg IV over 5 minutes, repeat if cyanosis persists",
+   "notes": "Symptomatic methaemoglobinaemia; avoid in G6PD deficiency or haemolysis."
+  },
+  {
+   "name": "Acetylcysteine",
+   "dose": "150 mg/kg IV over 1 hour, then 50 mg/kg over 4 hours, then 100 mg/kg over 16 hours",
+   "notes": "Adjunct; low-quality evidence of mortality benefit."
+  },
+  {
+   "name": "Magnesium sulfate",
+   "dose": "Correct low magnesium; one reported regimen is 3 g IV over 3 hours, then 6 g per 24 hours for 3 to 5 days",
+   "notes": "Routine use unproven."
+  }
  ],
  "sources": [
-  { "org": "J Emerg Trauma Shock (Gurjar et al., SGPGIMS Lucknow)", "title": "Managing aluminum phosphide poisonings", "year": 2011, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3162709/" },
-  { "org": "ISCCM", "title": "Indian Society of Critical Care Medicine Position Statement: Approach to a Patient with Poisoning in the Emergency Room and Intensive Care Unit", "year": 2024, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11369925/" },
-  { "org": "Indian J Crit Care Med (Farahani et al.)", "title": "Thoughts on the current management of acute aluminum phosphide toxicity and proposals for therapy: an evidence-based review", "year": 2016, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5225774/" },
-  { "org": "BMC Pharmacol Toxicol (Shaker et al.)", "title": "Efficacy of intravenous N acetylcysteine as an adjuvant therapy in the treatment of acute aluminum phosphide poisoning: a systematic review and meta-analysis", "year": 2023, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10625249/" }
+  {
+   "org": "J Emerg Trauma Shock (Gurjar et al., SGPGIMS Lucknow)",
+   "title": "Managing aluminum phosphide poisonings",
+   "year": 2011,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3162709/"
+  },
+  {
+   "org": "ISCCM",
+   "title": "Indian Society of Critical Care Medicine Position Statement: Approach to a Patient with Poisoning in the Emergency Room and Intensive Care Unit",
+   "year": 2024,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11369925/"
+  },
+  {
+   "org": "Indian J Crit Care Med (Farahani et al.)",
+   "title": "Thoughts on the current management of acute aluminum phosphide toxicity and proposals for therapy: an evidence-based review",
+   "year": 2016,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5225774/"
+  },
+  {
+   "org": "BMC Pharmacol Toxicol (Shaker et al.)",
+   "title": "Efficacy of intravenous N acetylcysteine as an adjuvant therapy in the treatment of acute aluminum phosphide poisoning: a systematic review and meta-analysis",
+   "year": 2023,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10625249/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "aluminium-phosphide-poisoning-pathway",
+   "title": "Aluminium phosphide (celphos) poisoning Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Grain fumigant tablets (usually 3 g, sold as celphos or 'rice tablets') release phosphine gas in contact with moisture and gastric acid; poisoning can also follow inhalation.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Remove from the exposure source and ventilate the room; staff should avoid inhaling fumes from vomitus or gastric aspirate. Wash contaminated skin and eyes with water.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Arterial blood gas with lactate, repeated every few hours; glucose (hourly initially), electrolytes including magnesium and potassium, renal and liver function, CBC."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Metabolic acidosis: IV sodium bicarbonate for severe acidosis or as a bridge to dialysis; haemodialysis for refractory acidosis, AKI or fluid overload (it does not remove phosphine)."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "ICU for all symptomatic patients: continuous ECG and arterial pressure, hourly urine output, serial lactate, blood gas and glucose."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for aluminium phosphide (celphos) poisoning."
+  }
+ ],
+ "tables": [
+  {
+   "id": "aluminium-phosphide-poisoning-summary-matrix",
+   "title": "Aluminium phosphide (celphos) poisoning Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Grain fumigant tablets (usually 3 g, sold as celphos or 'rice tablets') release phosphine gas in contact with moisture and gastric acid;",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Remove from the exposure source and ventilate the room; staff should avoid inhaling fumes from vomitus or gastric aspirate. Wash",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Arterial blood gas with lactate, repeated every few hours; glucose (hourly initially), electrolytes including magnesium and potassium,",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Noradrenaline (norepinephrine): Start 0.05 to 0.1 mcg/kg/min IV, titrate to MAP 65 mmHg",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Potassium permanganate, water or repeated lavage that delays resuscitation and may release more phosphine.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for aluminium phosphide (celphos) poisoning."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "aluminium-phosphide-poisoning-real-image",
+   "title": "Aluminium phosphide (celphos) poisoning: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

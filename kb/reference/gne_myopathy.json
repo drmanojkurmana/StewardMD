@@ -1,80 +1,175 @@
 {
-  "id": "gne_myopathy",
-  "name": "GNE myopathy",
-  "aliases": [
-    "GNE",
-    "hereditary inclusion body myopathy",
-    "HIBM",
-    "distal myopathy with rimmed vacuoles",
-    "Nonaka myopathy",
-    "quadriceps-sparing myopathy"
+ "id": "gne_myopathy",
+ "name": "GNE myopathy",
+ "aliases": [
+  "GNE",
+  "hereditary inclusion body myopathy",
+  "HIBM",
+  "distal myopathy with rimmed vacuoles",
+  "Nonaka myopathy",
+  "quadriceps-sparing myopathy"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system / Neuromuscular",
+ "specialty": "Neurology / Neuromuscular",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Bradley and Daroff Neurology in Clinical Practice / GeneReviews",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A slowly progressive distal myopathy typically presenting in early adulthood with foot drop and weakness of the tibialis anterior",
+   "Characteristically spares the quadriceps until late in the disease, a feature that helps distinguish it from many other myopathies",
+   "Inherited in an autosomal recessive manner and caused by mutations in GNE, the gene for the key enzyme of sialic acid biosynthesis",
+   "Muscle biopsy shows rimmed vacuoles and cytoplasmic inclusions but characteristically lacks the inflammation of sporadic inclusion body myositis",
+   "Creatine kinase is usually normal or only modestly raised despite progressive weakness",
+   "Weakness advances proximally over years and can eventually affect the upper limbs and, later, the hip girdle, with relative sparing of facial and ocular muscles",
+   "Sialic acid replacement strategies have been investigated experimentally, so accurate genetic diagnosis is important for prognosis, counselling and trial eligibility"
   ],
-  "class": "non_infective",
-  "system": "Nervous system / Neuromuscular",
-  "specialty": "Neurology / Neuromuscular",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Bradley and Daroff Neurology in Clinical Practice / GeneReviews",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A slowly progressive distal myopathy typically presenting in early adulthood with foot drop and weakness of the tibialis anterior",
-      "Characteristically spares the quadriceps until late in the disease, a feature that helps distinguish it from many other myopathies",
-      "Inherited in an autosomal recessive manner and caused by mutations in GNE, the gene for the key enzyme of sialic acid biosynthesis",
-      "Muscle biopsy shows rimmed vacuoles and cytoplasmic inclusions but characteristically lacks the inflammation of sporadic inclusion body myositis",
-      "Creatine kinase is usually normal or only modestly raised despite progressive weakness",
-      "Weakness advances proximally over years and can eventually affect the upper limbs and, later, the hip girdle, with relative sparing of facial and ocular muscles",
-      "Sialic acid replacement strategies have been investigated experimentally, so accurate genetic diagnosis is important for prognosis, counselling and trial eligibility"
+  "pathophysiology": "GNE myopathy is caused by biallelic mutations in GNE, which encodes the bifunctional enzyme UDP-N-acetylglucosamine 2-epimerase/N-acetylmannosamine kinase that catalyses the rate-limiting steps of sialic acid biosynthesis. Reduced enzyme activity leads to hyposialylation of muscle glycoproteins and glycolipids, which is thought to impair muscle-cell function and promote the accumulation of autophagic and protein aggregates seen histologically as rimmed vacuoles and inclusions. The resulting slow degeneration of muscle fibres produces the characteristic distal-onset, quadriceps-sparing pattern of weakness, although the precise link between hyposialylation and fibre loss is incompletely understood.",
+  "additionalDifferentials": [
+   "Sporadic inclusion body myositis",
+   "Other distal myopathies such as Miyoshi myopathy",
+   "Myofibrillar myopathies",
+   "Limb-girdle muscular dystrophies with distal features",
+   "Chronic inflammatory or hereditary neuropathies causing foot drop",
+   "Distal spinal muscular atrophy"
+  ],
+  "additionalInvestigations": [
+   "Serum creatine kinase, typically normal or mildly elevated",
+   "Electromyography showing a myopathic pattern, sometimes with mixed features",
+   "Muscle magnetic resonance imaging to show the distal and quadriceps-sparing pattern of involvement",
+   "Muscle biopsy demonstrating rimmed vacuoles and inclusions without significant inflammation",
+   "Targeted GNE genetic testing",
+   "Nerve conduction studies to exclude a neuropathic cause of foot drop"
+  ],
+  "redFlags": [
+   "Rapidly progressive weakness suggesting an inflammatory rather than genetic myopathy",
+   "Prominent inflammation on biopsy that would favour sporadic inclusion body myositis",
+   "Respiratory muscle involvement in advanced disease",
+   "Loss of ambulation requiring mobility and falls assessment"
+  ],
+  "prognosis": "GNE myopathy is slowly progressive, with many patients losing independent ambulation roughly one to two decades after onset, but life expectancy is usually preserved as respiratory and cardiac involvement are uncommon and generally late.",
+  "pitfalls": [
+   "Misdiagnosing it as sporadic inclusion body myositis and treating with immunotherapy, which is ineffective",
+   "Being reassured by a normal creatine kinase and dismissing a genetic myopathy",
+   "Attributing the foot drop to a peripheral neuropathy without recognising the myopathic pattern",
+   "Overlooking the characteristic quadriceps sparing that points to the diagnosis"
+  ],
+  "references": [
+   "Bradley and Daroff Neurology in Clinical Practice",
+   "GeneReviews: GNE Myopathy"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Manage supportively and rehabilitatively, as no disease-modifying therapy is established and sialic acid or N-acetylmannosamine substrate replacement remains investigational",
+   "Use physiotherapy and tailored low-impact exercise to preserve strength and function while avoiding overexertion",
+   "Provide ankle-foot orthoses and mobility aids for foot drop and gait, with occupational therapy and falls prevention",
+   "Monitor respiratory function, and cardiac function where indicated, over the slowly progressive course",
+   "Coordinate multidisciplinary neuromuscular care including physiotherapy, occupational therapy and orthotics",
+   "Offer genetic counselling and family screening for autosomal recessive GNE disease"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "gne_myopathy-pathway",
+   "title": "GNE myopathy: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A slowly progressive distal myopathy typically presenting in early adulthood with foot drop and weakness of the tibialis anterior",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapidly progressive weakness suggesting an inflammatory rather than genetic myopathy",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Serum creatine kinase, typically normal or mildly elevated, Electromyography showing a myopathic pattern, sometimes with mixed features, Muscle magnetic resonance imaging to show the distal and quadriceps-sparing pattern"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Manage supportively and rehabilitatively, as no disease-modifying therapy is established and sialic acid or N-acetylmannosamine substrate replacement remains investigational"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Misdiagnosing it as sporadic inclusion body myositis and treating with immunotherapy, which is ineffective"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of gne myopathy."
+  }
+ ],
+ "tables": [
+  {
+   "id": "gne_myopathy-matrix",
+   "title": "GNE myopathy: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A slowly progressive distal myopathy typically presenting in early adulthood with foot drop and weakness of the tibialis anterior",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "GNE myopathy is caused by biallelic mutations in GNE, which encodes the bifunctional enzyme UDP-N-acetylglucosamine 2-epimerase/N-acetylmannosamine kinase that catalyses the rate-limiting steps of sialic acid biosynthesis. Reduced enzyme activity leads to hyposialylation of muscle glycoproteins and glycolipids, which is thought to impair muscle-cell function and promote the accumulation of autophagic and protein aggregates seen histologically as rimmed vacuoles and inclusions. The resulting slow degeneration of muscle fibres produces the characteristic distal-onset, quadriceps-sparing pattern of weakness, although the precise link between hyposialylation and fibre loss is incompletely understood.",
-    "additionalDifferentials": [
-      "Sporadic inclusion body myositis",
-      "Other distal myopathies such as Miyoshi myopathy",
-      "Myofibrillar myopathies",
-      "Limb-girdle muscular dystrophies with distal features",
-      "Chronic inflammatory or hereditary neuropathies causing foot drop",
-      "Distal spinal muscular atrophy"
+    [
+     "Key Investigations",
+     "Serum creatine kinase, typically normal or mildly elevated, Electromyography showing a myopathic pattern, sometimes with mixed",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Serum creatine kinase, typically normal or mildly elevated",
-      "Electromyography showing a myopathic pattern, sometimes with mixed features",
-      "Muscle magnetic resonance imaging to show the distal and quadriceps-sparing pattern of involvement",
-      "Muscle biopsy demonstrating rimmed vacuoles and inclusions without significant inflammation",
-      "Targeted GNE genetic testing",
-      "Nerve conduction studies to exclude a neuropathic cause of foot drop"
+    [
+     "Primary Differentials",
+     "Sporadic inclusion body myositis, Other distal myopathies such as Miyoshi myopathy, Myofibrillar myopathies",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rapidly progressive weakness suggesting an inflammatory rather than genetic myopathy",
-      "Prominent inflammation on biopsy that would favour sporadic inclusion body myositis",
-      "Respiratory muscle involvement in advanced disease",
-      "Loss of ambulation requiring mobility and falls assessment"
+    [
+     "Management Strategy",
+     "Manage supportively and rehabilitatively, as no disease-modifying therapy is established and sialic acid or N-acetylmannosamine",
+     "Core treatment modality"
     ],
-    "prognosis": "GNE myopathy is slowly progressive, with many patients losing independent ambulation roughly one to two decades after onset, but life expectancy is usually preserved as respiratory and cardiac involvement are uncommon and generally late.",
-    "pitfalls": [
-      "Misdiagnosing it as sporadic inclusion body myositis and treating with immunotherapy, which is ineffective",
-      "Being reassured by a normal creatine kinase and dismissing a genetic myopathy",
-      "Attributing the foot drop to a peripheral neuropathy without recognising the myopathic pattern",
-      "Overlooking the characteristic quadriceps sparing that points to the diagnosis"
-    ],
-    "references": [
-      "Bradley and Daroff Neurology in Clinical Practice",
-      "GeneReviews: GNE Myopathy"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Manage supportively and rehabilitatively, as no disease-modifying therapy is established and sialic acid or N-acetylmannosamine substrate replacement remains investigational",
-      "Use physiotherapy and tailored low-impact exercise to preserve strength and function while avoiding overexertion",
-      "Provide ankle-foot orthoses and mobility aids for foot drop and gait, with occupational therapy and falls prevention",
-      "Monitor respiratory function, and cardiac function where indicated, over the slowly progressive course",
-      "Coordinate multidisciplinary neuromuscular care including physiotherapy, occupational therapy and orthotics",
-      "Offer genetic counselling and family screening for autosomal recessive GNE disease"
+    [
+     "Clinical Pitfall",
+     "Misdiagnosing it as sporadic inclusion body myositis and treating with immunotherapy, which is ineffective",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for gne myopathy."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "gne-myopathy-real-image",
+   "title": "GNE myopathy: Diagnostic Head Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
+   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
+   "annotations": [
+    {
+     "label": "Cerebral Parenchyma",
+     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+    },
+    {
+     "label": "Extra-Axial Spaces",
+     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+    }
+   ]
+  }
+ ]
 }

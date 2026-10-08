@@ -1,81 +1,176 @@
 {
-  "id": "systemic_sclerosis_diffuse",
-  "name": "Diffuse cutaneous systemic sclerosis",
-  "aliases": [
-    "diffuse scleroderma",
-    "dcSSc",
-    "anti-Scl-70",
-    "anti-topoisomerase I",
-    "anti-RNA polymerase III"
+ "id": "systemic_sclerosis_diffuse",
+ "name": "Diffuse cutaneous systemic sclerosis",
+ "aliases": [
+  "diffuse scleroderma",
+  "dcSSc",
+  "anti-Scl-70",
+  "anti-topoisomerase I",
+  "anti-RNA polymerase III"
+ ],
+ "class": "non_infective",
+ "system": "Rheumatology / Vascular",
+ "specialty": "Rheumatology / Vascular Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Kelley & Firestein's Textbook of Rheumatology / EULAR systemic sclerosis guidance",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Skin thickening extends proximal to the elbows and knees and onto the trunk, often progressing rapidly in the first years",
+   "Raynaud phenomenon typically appears close in time to skin change rather than long before it",
+   "Anti-topoisomerase I (anti-Scl-70) associates with interstitial lung disease, while anti-RNA polymerase III associates with rapid skin progression and renal crisis",
+   "Interstitial lung disease is a leading cause of mortality and warrants early screening and monitoring",
+   "The risk of scleroderma renal crisis is highest early in diffuse disease and is increased by glucocorticoid exposure",
+   "Tendon friction rubs, arthralgia, and rapidly worsening skin score suggest active, progressive disease",
+   "The modified Rodnan skin score is used to track cutaneous extent and disease activity"
   ],
-  "class": "non_infective",
-  "system": "Rheumatology / Vascular",
-  "specialty": "Rheumatology / Vascular Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Kelley & Firestein's Textbook of Rheumatology / EULAR systemic sclerosis guidance",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Skin thickening extends proximal to the elbows and knees and onto the trunk, often progressing rapidly in the first years",
-      "Raynaud phenomenon typically appears close in time to skin change rather than long before it",
-      "Anti-topoisomerase I (anti-Scl-70) associates with interstitial lung disease, while anti-RNA polymerase III associates with rapid skin progression and renal crisis",
-      "Interstitial lung disease is a leading cause of mortality and warrants early screening and monitoring",
-      "The risk of scleroderma renal crisis is highest early in diffuse disease and is increased by glucocorticoid exposure",
-      "Tendon friction rubs, arthralgia, and rapidly worsening skin score suggest active, progressive disease",
-      "The modified Rodnan skin score is used to track cutaneous extent and disease activity"
+  "pathophysiology": "Diffuse cutaneous systemic sclerosis is characterised by widespread immune-driven fibrosis and obliterative vasculopathy. Endothelial injury, T-cell and B-cell activation, and profibrotic mediators including transforming growth factor beta drive fibroblast-to-myofibroblast transformation and excessive collagen deposition across skin and internal organs. Autoantibodies such as anti-topoisomerase I and anti-RNA polymerase III mark distinct clinical phenotypes. Rapidly progressive fibrosis of the lungs produces interstitial disease, while intimal proliferation in renal vessels predisposes to renal crisis.",
+  "additionalDifferentials": [
+   "Limited cutaneous systemic sclerosis",
+   "Mixed connective tissue disease",
+   "Eosinophilic fasciitis",
+   "Scleromyxoedema",
+   "Nephrogenic systemic fibrosis",
+   "Chronic graft-versus-host disease"
+  ],
+  "additionalInvestigations": [
+   "Antinuclear antibody with anti-Scl-70 and anti-RNA polymerase III testing",
+   "High-resolution CT of the chest for interstitial lung disease",
+   "Pulmonary function tests including forced vital capacity and diffusing capacity",
+   "Transthoracic echocardiography to assess for pulmonary hypertension",
+   "Blood pressure and renal function monitoring for early renal crisis",
+   "Nailfold capillaroscopy for scleroderma-pattern microangiopathy"
+  ],
+  "redFlags": [
+   "Abrupt hypertension with rising creatinine indicating scleroderma renal crisis",
+   "Rapidly declining forced vital capacity from progressive interstitial lung disease",
+   "New exertional breathlessness suggesting pulmonary hypertension",
+   "Fulminant skin progression with tendon friction rubs",
+   "Digital gangrene from severe vasculopathy"
+  ],
+  "prognosis": "Diffuse disease carries higher morbidity and mortality than limited disease, driven mainly by interstitial lung disease, pulmonary hypertension, and renal crisis. Skin may stabilise or soften after the early active phase, and early organ-directed therapy improves outcomes.",
+  "pitfalls": [
+   "Using higher-dose glucocorticoids and precipitating scleroderma renal crisis",
+   "Delaying lung disease screening until symptoms are advanced",
+   "Misreading softening skin as remission while internal organ disease progresses",
+   "Failing to recognise anti-RNA polymerase III as a marker of renal crisis risk"
+  ],
+  "references": [
+   "Kelley & Firestein's Textbook of Rheumatology",
+   "EULAR recommendations for the treatment of systemic sclerosis"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Immunosuppression to control rapidly progressive skin and interstitial lung disease with mycophenolate, cyclophosphamide, rituximab or tocilizumab, adding nintedanib for progressive pulmonary fibrosis",
+   "Early ACE-inhibitor treatment for scleroderma renal crisis, and avoidance of high-dose corticosteroids given their role in precipitating it",
+   "Vasodilators for Raynaud phenomenon and digital ulcers, including calcium channel blockers, phosphodiesterase-5 inhibitors and endothelin receptor antagonists",
+   "Proton pump inhibitors and prokinetics for oesophageal and gastrointestinal dysmotility",
+   "Blood-pressure and renal monitoring, especially early in diffuse disease, alongside pulmonary function and echocardiographic surveillance",
+   "Consideration of autologous haematopoietic stem cell transplantation in selected patients with rapidly progressive disease",
+   "Multidisciplinary specialist care with physiotherapy for skin and joint contractures"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "systemic_sclerosis_diffuse-pathway",
+   "title": "Diffuse cutaneous systemic sclerosis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Skin thickening extends proximal to the elbows and knees and onto the trunk, often progressing rapidly in the first years",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Abrupt hypertension with rising creatinine indicating scleroderma renal crisis",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Antinuclear antibody with anti-Scl-70 and anti-RNA polymerase III testing, High-resolution CT of the chest for interstitial lung disease, Pulmonary function tests including forced vital capacity and diffusing capacity"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Immunosuppression to control rapidly progressive skin and interstitial lung disease with mycophenolate, cyclophosphamide, rituximab or tocilizumab, adding nintedanib for progressive pulmonary fibrosis"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Using higher-dose glucocorticoids and precipitating scleroderma renal crisis"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of diffuse cutaneous systemic sclerosis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "systemic_sclerosis_diffuse-matrix",
+   "title": "Diffuse cutaneous systemic sclerosis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Skin thickening extends proximal to the elbows and knees and onto the trunk, often progressing rapidly in the first years",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Diffuse cutaneous systemic sclerosis is characterised by widespread immune-driven fibrosis and obliterative vasculopathy. Endothelial injury, T-cell and B-cell activation, and profibrotic mediators including transforming growth factor beta drive fibroblast-to-myofibroblast transformation and excessive collagen deposition across skin and internal organs. Autoantibodies such as anti-topoisomerase I and anti-RNA polymerase III mark distinct clinical phenotypes. Rapidly progressive fibrosis of the lungs produces interstitial disease, while intimal proliferation in renal vessels predisposes to renal crisis.",
-    "additionalDifferentials": [
-      "Limited cutaneous systemic sclerosis",
-      "Mixed connective tissue disease",
-      "Eosinophilic fasciitis",
-      "Scleromyxoedema",
-      "Nephrogenic systemic fibrosis",
-      "Chronic graft-versus-host disease"
+    [
+     "Key Investigations",
+     "Antinuclear antibody with anti-Scl-70 and anti-RNA polymerase III testing, High-resolution CT of the chest for interstitial lung",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Antinuclear antibody with anti-Scl-70 and anti-RNA polymerase III testing",
-      "High-resolution CT of the chest for interstitial lung disease",
-      "Pulmonary function tests including forced vital capacity and diffusing capacity",
-      "Transthoracic echocardiography to assess for pulmonary hypertension",
-      "Blood pressure and renal function monitoring for early renal crisis",
-      "Nailfold capillaroscopy for scleroderma-pattern microangiopathy"
+    [
+     "Primary Differentials",
+     "Limited cutaneous systemic sclerosis, Mixed connective tissue disease, Eosinophilic fasciitis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Abrupt hypertension with rising creatinine indicating scleroderma renal crisis",
-      "Rapidly declining forced vital capacity from progressive interstitial lung disease",
-      "New exertional breathlessness suggesting pulmonary hypertension",
-      "Fulminant skin progression with tendon friction rubs",
-      "Digital gangrene from severe vasculopathy"
+    [
+     "Management Strategy",
+     "Immunosuppression to control rapidly progressive skin and interstitial lung disease with mycophenolate, cyclophosphamide,",
+     "Core treatment modality"
     ],
-    "prognosis": "Diffuse disease carries higher morbidity and mortality than limited disease, driven mainly by interstitial lung disease, pulmonary hypertension, and renal crisis. Skin may stabilise or soften after the early active phase, and early organ-directed therapy improves outcomes.",
-    "pitfalls": [
-      "Using higher-dose glucocorticoids and precipitating scleroderma renal crisis",
-      "Delaying lung disease screening until symptoms are advanced",
-      "Misreading softening skin as remission while internal organ disease progresses",
-      "Failing to recognise anti-RNA polymerase III as a marker of renal crisis risk"
-    ],
-    "references": [
-      "Kelley & Firestein's Textbook of Rheumatology",
-      "EULAR recommendations for the treatment of systemic sclerosis"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Immunosuppression to control rapidly progressive skin and interstitial lung disease with mycophenolate, cyclophosphamide, rituximab or tocilizumab, adding nintedanib for progressive pulmonary fibrosis",
-      "Early ACE-inhibitor treatment for scleroderma renal crisis, and avoidance of high-dose corticosteroids given their role in precipitating it",
-      "Vasodilators for Raynaud phenomenon and digital ulcers, including calcium channel blockers, phosphodiesterase-5 inhibitors and endothelin receptor antagonists",
-      "Proton pump inhibitors and prokinetics for oesophageal and gastrointestinal dysmotility",
-      "Blood-pressure and renal monitoring, especially early in diffuse disease, alongside pulmonary function and echocardiographic surveillance",
-      "Consideration of autologous haematopoietic stem cell transplantation in selected patients with rapidly progressive disease",
-      "Multidisciplinary specialist care with physiotherapy for skin and joint contractures"
+    [
+     "Clinical Pitfall",
+     "Using higher-dose glucocorticoids and precipitating scleroderma renal crisis",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for diffuse cutaneous systemic sclerosis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "systemic-sclerosis-diffuse-real-image",
+   "title": "Diffuse cutaneous systemic sclerosis: 12-Lead Diagnostic Electrocardiogram",
+   "type": "ecg",
+   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
+   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
+   "annotations": [
+    {
+     "label": "Conduction & Axis",
+     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
+    },
+    {
+     "label": "Repolarization",
+     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
+    },
+    {
+     "label": "Rhythm & Intervals",
+     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+    }
+   ]
+  }
+ ]
 }

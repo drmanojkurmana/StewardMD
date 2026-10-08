@@ -5,7 +5,19 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, surgical ward, operating theatre",
- "aliases": ["appendicitis", "appendicectomy", "appendectomy", "RIF pain", "right iliac fossa pain", "Alvarado score", "AIR score", "appendicular mass", "appendicular abscess", "perforated appendix", "WSES Jerusalem"],
+ "aliases": [
+  "appendicitis",
+  "appendicectomy",
+  "appendectomy",
+  "RIF pain",
+  "right iliac fossa pain",
+  "Alvarado score",
+  "AIR score",
+  "appendicular mass",
+  "appendicular abscess",
+  "perforated appendix",
+  "WSES Jerusalem"
+ ],
  "summary": "Stratify risk with the AIR or Alvarado score, image intermediate-risk patients (ultrasound first, low-dose CT if negative), and perform laparoscopic appendicectomy within 24 hours with a single preoperative antibiotic dose; antibiotic-first treatment is an option for selected uncomplicated cases without an appendicolith (WSES 2020).",
  "sections": [
   {
@@ -84,16 +96,149 @@
   }
  ],
  "drugs": [
-  { "name": "Cefazolin plus metronidazole (prophylaxis)", "dose": "Cefazolin 2 g IV (3 g if 120 kg or more) plus metronidazole 500 mg IV, single dose within 60 minutes before incision", "notes": "Redose cefazolin if surgery exceeds 4 hours." },
-  { "name": "Ceftriaxone", "dose": "2 g IV once daily", "notes": "Combine with metronidazole for non-operative or complicated appendicitis." },
-  { "name": "Metronidazole", "dose": "500 mg IV every 6 to 8 hours", "notes": "Anaerobic cover with a cephalosporin." },
-  { "name": "Amoxicillin-clavulanate", "dose": "1.2 g IV every 6 to 8 hours", "notes": "Check local E. coli resistance before using as monotherapy." },
-  { "name": "Ertapenem", "dose": "1 g IV once daily", "notes": "Reserve for ESBL risk; reduce dose if creatinine clearance is 30 mL/min or less." }
+  {
+   "name": "Cefazolin plus metronidazole (prophylaxis)",
+   "dose": "Cefazolin 2 g IV (3 g if 120 kg or more) plus metronidazole 500 mg IV, single dose within 60 minutes before incision",
+   "notes": "Redose cefazolin if surgery exceeds 4 hours."
+  },
+  {
+   "name": "Ceftriaxone",
+   "dose": "2 g IV once daily",
+   "notes": "Combine with metronidazole for non-operative or complicated appendicitis."
+  },
+  {
+   "name": "Metronidazole",
+   "dose": "500 mg IV every 6 to 8 hours",
+   "notes": "Anaerobic cover with a cephalosporin."
+  },
+  {
+   "name": "Amoxicillin-clavulanate",
+   "dose": "1.2 g IV every 6 to 8 hours",
+   "notes": "Check local E. coli resistance before using as monotherapy."
+  },
+  {
+   "name": "Ertapenem",
+   "dose": "1 g IV once daily",
+   "notes": "Reserve for ESBL risk; reduce dose if creatinine clearance is 30 mL/min or less."
+  }
  ],
  "sources": [
-  { "org": "WSES", "title": "Diagnosis and treatment of acute appendicitis: 2020 update of the WSES Jerusalem guidelines", "year": 2020, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7386163/" },
-  { "org": "CODA Collaborative", "title": "A randomized trial comparing antibiotics with appendectomy for appendicitis (N Engl J Med 2020)", "year": 2020, "url": "https://www.nejm.org/doi/full/10.1056/NEJMoa2014320" },
-  { "org": "ASHP / IDSA / SIS / SHEA", "title": "Clinical practice guidelines for antimicrobial prophylaxis in surgery", "year": 2013, "url": "https://academic.oup.com/ajhp/article/70/3/195/5112717" }
+  {
+   "org": "WSES",
+   "title": "Diagnosis and treatment of acute appendicitis: 2020 update of the WSES Jerusalem guidelines",
+   "year": 2020,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7386163/"
+  },
+  {
+   "org": "CODA Collaborative",
+   "title": "A randomized trial comparing antibiotics with appendectomy for appendicitis (N Engl J Med 2020)",
+   "year": 2020,
+   "url": "https://www.nejm.org/doi/full/10.1056/NEJMoa2014320"
+  },
+  {
+   "org": "ASHP / IDSA / SIS / SHEA",
+   "title": "Clinical practice guidelines for antimicrobial prophylaxis in surgery",
+   "year": 2013,
+   "url": "https://academic.oup.com/ajhp/article/70/3/195/5112717"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "acute-appendicitis-pathway",
+   "title": "Acute appendicitis (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Classic picture: central abdominal pain migrating to the right iliac fossa, anorexia, nausea or vomiting, low-grade fever, and RIF tenderness with guarding or rebound.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Presentation is often atypical in older adults, pregnancy (pain may be higher), and with a retrocaecal or pelvic appendix; perforation risk rises with delay.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Alvarado score (0 to 10): migration of pain 1, anorexia 1, nausea or vomiting 1, RIF tenderness 2, rebound 1, temperature 37.3°C or more 1, leucocytosis 2, neutrophilia 1. Useful to exclude appendicitis; do not use it to confirm the"
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Abscess: antibiotics with percutaneous drainage where available if laparoscopic expertise is lacking; laparoscopic surgery is the treatment of choice where advanced expertise exists, with a low threshold for conversion."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Using the Alvarado score to confirm rather than exclude appendicitis."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for acute appendicitis (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "acute-appendicitis-summary-matrix",
+   "title": "Acute appendicitis (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Classic picture: central abdominal pain migrating to the right iliac fossa, anorexia, nausea or vomiting, low-grade fever, and RIF",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Abscess: antibiotics with percutaneous drainage where available if laparoscopic expertise is lacking; laparoscopic surgery is the treatment",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Alvarado score (0 to 10): migration of pain 1, anorexia 1, nausea or vomiting 1, RIF tenderness 2, rebound 1, temperature 37.3°C or more 1,",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Cefazolin plus metronidazole (prophylaxis): Cefazolin 2 g IV (3 g if 120 kg or more) plus metronidazole 500 mg IV, single dose within 60",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Using the Alvarado score to confirm rather than exclude appendicitis.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for acute appendicitis (adult)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "acute-appendicitis-real-image",
+   "title": "Acute appendicitis (adult): Abdominal CT (Acute Appendicitis)",
+   "type": "ct",
+   "src": "/assets/kb-real-images/appendicitis-ct.jpg?v=kbri3",
+   "caption": "Real axial contrast-enhanced abdominal computed tomography scan demonstrating appendiceal wall thickening, luminal distension, and surrounding fat stranding.",
+   "annotations": [
+    {
+     "label": "Appendiceal Caliber",
+     "description": "Dilated appendix (>6 mm outer diameter) with non-compressible blind ending."
+    },
+    {
+     "label": "Wall Hyperenhancement",
+     "description": "Circumferential mural thickening with intense contrast enhancement."
+    },
+    {
+     "label": "Pericecal Stranding",
+     "description": "Inflammatory infiltration and haziness of the mesoappendix and pericecal fat."
+    }
+   ]
+  }
+ ]
 }

@@ -1,80 +1,175 @@
 {
-  "id": "mogs_cdg",
-  "name": "MOGS-CDG (congenital disorder of glycosylation type IIb)",
-  "aliases": [
-    "CDG-IIb",
-    "Glucosidase I deficiency",
-    "GCS1 deficiency"
+ "id": "mogs_cdg",
+ "name": "MOGS-CDG (congenital disorder of glycosylation type IIb)",
+ "aliases": [
+  "CDG-IIb",
+  "Glucosidase I deficiency",
+  "GCS1 deficiency"
+ ],
+ "class": "non_infective",
+ "system": "Metabolic / Glycosylation & peroxisomal",
+ "specialty": "Metabolic medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Metabolic medicine references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "MOGS encodes endoplasmic reticulum mannosyl-oligosaccharide glucosidase (glucosidase I), which removes the outermost terminal alpha-1,2-linked glucose from the newly transferred N-glycan, the first trimming step of glycan processing.",
+   "It is therefore classified as a type II CDG (a processing or trimming defect) rather than an assembly defect.",
+   "A crucial diagnostic trap is that serum transferrin isoelectric focusing is typically normal, because the defect does not alter the sialylation-dependent charge that this test detects.",
+   "Diagnosis instead rests on urine oligosaccharide analysis, which shows a characteristic glucose-rich tetrasaccharide derived from the unprocessed precursor.",
+   "The clinical picture is a severe neonatal multisystem disorder with dysmorphism, generalised hypotonia, seizures, feeding difficulty and hepatomegaly.",
+   "Hypogammaglobulinaemia is characteristic, yet a paradoxical relative resistance to certain enveloped viruses has been described because their envelope glycoproteins depend on glucosylated N-glycans.",
+   "Multisystem neurological and hepatic involvement usually dominates the clinical course despite the immunological abnormality."
   ],
-  "class": "non_infective",
-  "system": "Metabolic / Glycosylation & peroxisomal",
-  "specialty": "Metabolic medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Metabolic medicine references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "MOGS encodes endoplasmic reticulum mannosyl-oligosaccharide glucosidase (glucosidase I), which removes the outermost terminal alpha-1,2-linked glucose from the newly transferred N-glycan, the first trimming step of glycan processing.",
-      "It is therefore classified as a type II CDG (a processing or trimming defect) rather than an assembly defect.",
-      "A crucial diagnostic trap is that serum transferrin isoelectric focusing is typically normal, because the defect does not alter the sialylation-dependent charge that this test detects.",
-      "Diagnosis instead rests on urine oligosaccharide analysis, which shows a characteristic glucose-rich tetrasaccharide derived from the unprocessed precursor.",
-      "The clinical picture is a severe neonatal multisystem disorder with dysmorphism, generalised hypotonia, seizures, feeding difficulty and hepatomegaly.",
-      "Hypogammaglobulinaemia is characteristic, yet a paradoxical relative resistance to certain enveloped viruses has been described because their envelope glycoproteins depend on glucosylated N-glycans.",
-      "Multisystem neurological and hepatic involvement usually dominates the clinical course despite the immunological abnormality."
+  "pathophysiology": "MOGS (glucosidase I) catalyses the first step in processing of the N-linked oligosaccharide after it is transferred en bloc onto nascent glycoproteins in the endoplasmic reticulum, cleaving the terminal alpha-1,2-glucose from the triglucosylated precursor Glc3Man9GlcNAc2. This trimming is required for entry into the calnexin and calreticulin quality-control cycle and for orderly glycoprotein folding and onward processing. Loss of function leaves glycoproteins bearing unprocessed, still-glucosylated glycans, disrupts protein folding and quality control, and causes accumulation and urinary excretion of glucose-rich oligosaccharides. Because the sialylation of transferrin is unaffected, the standard transferrin screening test remains normal, which is the principal reason the disorder is missed. Inheritance is autosomal recessive.",
+  "additionalDifferentials": [
+   "Other type II CDGs (for example MGAT2, B4GALT1, SLC35 transporter and COG-complex defects)",
+   "Type I CDGs presenting with neonatal hypotonia and seizures",
+   "Primary hypogammaglobulinaemia or combined immunodeficiency",
+   "Lysosomal oligosaccharidoses (overlapping urine oligosaccharide findings)",
+   "Peroxisomal disorders with neonatal hypotonia and hepatopathy",
+   "Other syndromic neonatal encephalopathies with dysmorphism"
+  ],
+  "additionalInvestigations": [
+   "Urine oligosaccharide analysis for the characteristic glucose-rich tetrasaccharide (key confirmatory test)",
+   "Serum transferrin isoelectric focusing (characteristically normal, which supports rather than excludes the diagnosis)",
+   "MOGS molecular genetic testing via a CDG panel or exome sequencing",
+   "Immunoglobulin levels and functional immune assessment",
+   "Liver function tests and hepatic imaging",
+   "Glucosidase I enzyme activity assay in a specialist laboratory",
+   "Electroencephalography and neuroimaging"
+  ],
+  "redFlags": [
+   "Neonatal seizures with encephalopathy and feeding failure",
+   "Progressive hepatic dysfunction",
+   "Serious or recurrent bacterial infection in the setting of hypogammaglobulinaemia",
+   "Apnoea or respiratory compromise in a hypotonic neonate"
+  ],
+  "prognosis": "Reported cases have generally followed a severe course with death in early infancy, although the full phenotypic range is still being defined as more affected individuals are identified.",
+  "pitfalls": [
+   "Excluding a CDG because transferrin isoelectric focusing is normal, the classic way MOGS-CDG is overlooked",
+   "Failing to request urine oligosaccharide analysis in a hypotonic dysmorphic neonate",
+   "Attributing recurrent infection solely to a primary immunodeficiency without considering a glycosylation disorder",
+   "Misinterpreting the urinary oligosaccharide pattern as a lysosomal storage disorder"
+  ],
+  "references": [
+   "Inherited metabolic disease textbooks",
+   "Congenital disorders of glycosylation review literature"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Recognise there is no disease-specific therapy and provide supportive, multidisciplinary care for this severe neonatal multisystem disorder",
+   "Control seizures with antiepileptic drugs",
+   "Support feeding and nutrition for feeding difficulty and failure to thrive, using tube feeding where needed",
+   "Address the generalised hypotonia with physiotherapy and developmental input",
+   "Give immunoglobulin replacement and infection prevention for the characteristic hypogammaglobulinaemia",
+   "Monitor hepatic involvement and hepatomegaly with liver function tests and imaging",
+   "Offer genetic counselling for autosomal recessive MOGS inheritance with family testing",
+   "Involve palliative care given the frequently life-limiting course, alongside metabolic specialist coordination"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "mogs_cdg-pathway",
+   "title": "MOGS-CDG (congenital disorder of glycosylation type IIb): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "MOGS encodes endoplasmic reticulum mannosyl-oligosaccharide glucosidase (glucosidase I), which removes the outermost terminal alpha-1,2-linked glucose from the newly transferred N-glycan, the first trimming step of glycan processing.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Neonatal seizures with encephalopathy and feeding failure",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Urine oligosaccharide analysis for the characteristic glucose-rich tetrasaccharide (key confirmatory test), Serum transferrin isoelectric focusing (characteristically normal, which supports rather than excludes the"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Recognise there is no disease-specific therapy and provide supportive, multidisciplinary care for this severe neonatal multisystem disorder"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Excluding a CDG because transferrin isoelectric focusing is normal, the classic way MOGS-CDG is overlooked"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of mogs-cdg (congenital disorder of glycosylation type iib)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "mogs_cdg-matrix",
+   "title": "MOGS-CDG (congenital disorder of glycosylation type IIb): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "MOGS encodes endoplasmic reticulum mannosyl-oligosaccharide glucosidase (glucosidase I), which removes the outermost terminal",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "MOGS (glucosidase I) catalyses the first step in processing of the N-linked oligosaccharide after it is transferred en bloc onto nascent glycoproteins in the endoplasmic reticulum, cleaving the terminal alpha-1,2-glucose from the triglucosylated precursor Glc3Man9GlcNAc2. This trimming is required for entry into the calnexin and calreticulin quality-control cycle and for orderly glycoprotein folding and onward processing. Loss of function leaves glycoproteins bearing unprocessed, still-glucosylated glycans, disrupts protein folding and quality control, and causes accumulation and urinary excretion of glucose-rich oligosaccharides. Because the sialylation of transferrin is unaffected, the standard transferrin screening test remains normal, which is the principal reason the disorder is missed. Inheritance is autosomal recessive.",
-    "additionalDifferentials": [
-      "Other type II CDGs (for example MGAT2, B4GALT1, SLC35 transporter and COG-complex defects)",
-      "Type I CDGs presenting with neonatal hypotonia and seizures",
-      "Primary hypogammaglobulinaemia or combined immunodeficiency",
-      "Lysosomal oligosaccharidoses (overlapping urine oligosaccharide findings)",
-      "Peroxisomal disorders with neonatal hypotonia and hepatopathy",
-      "Other syndromic neonatal encephalopathies with dysmorphism"
+    [
+     "Key Investigations",
+     "Urine oligosaccharide analysis for the characteristic glucose-rich tetrasaccharide (key confirmatory test), Serum transferrin",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Urine oligosaccharide analysis for the characteristic glucose-rich tetrasaccharide (key confirmatory test)",
-      "Serum transferrin isoelectric focusing (characteristically normal, which supports rather than excludes the diagnosis)",
-      "MOGS molecular genetic testing via a CDG panel or exome sequencing",
-      "Immunoglobulin levels and functional immune assessment",
-      "Liver function tests and hepatic imaging",
-      "Glucosidase I enzyme activity assay in a specialist laboratory",
-      "Electroencephalography and neuroimaging"
+    [
+     "Primary Differentials",
+     "Other type II CDGs (for example MGAT2, B4GALT1, SLC35 transporter and COG-complex defects), Type I CDGs presenting with neonatal",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Neonatal seizures with encephalopathy and feeding failure",
-      "Progressive hepatic dysfunction",
-      "Serious or recurrent bacterial infection in the setting of hypogammaglobulinaemia",
-      "Apnoea or respiratory compromise in a hypotonic neonate"
+    [
+     "Management Strategy",
+     "Recognise there is no disease-specific therapy and provide supportive, multidisciplinary care for this severe neonatal",
+     "Core treatment modality"
     ],
-    "prognosis": "Reported cases have generally followed a severe course with death in early infancy, although the full phenotypic range is still being defined as more affected individuals are identified.",
-    "pitfalls": [
-      "Excluding a CDG because transferrin isoelectric focusing is normal, the classic way MOGS-CDG is overlooked",
-      "Failing to request urine oligosaccharide analysis in a hypotonic dysmorphic neonate",
-      "Attributing recurrent infection solely to a primary immunodeficiency without considering a glycosylation disorder",
-      "Misinterpreting the urinary oligosaccharide pattern as a lysosomal storage disorder"
-    ],
-    "references": [
-      "Inherited metabolic disease textbooks",
-      "Congenital disorders of glycosylation review literature"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Recognise there is no disease-specific therapy and provide supportive, multidisciplinary care for this severe neonatal multisystem disorder",
-      "Control seizures with antiepileptic drugs",
-      "Support feeding and nutrition for feeding difficulty and failure to thrive, using tube feeding where needed",
-      "Address the generalised hypotonia with physiotherapy and developmental input",
-      "Give immunoglobulin replacement and infection prevention for the characteristic hypogammaglobulinaemia",
-      "Monitor hepatic involvement and hepatomegaly with liver function tests and imaging",
-      "Offer genetic counselling for autosomal recessive MOGS inheritance with family testing",
-      "Involve palliative care given the frequently life-limiting course, alongside metabolic specialist coordination"
+    [
+     "Clinical Pitfall",
+     "Excluding a CDG because transferrin isoelectric focusing is normal, the classic way MOGS-CDG is overlooked",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for mogs-cdg (congenital disorder of glycosylation type iib)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "mogs-cdg-real-image",
+   "title": "MOGS-CDG (congenital disorder of glycosylation type IIb): Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

@@ -1,78 +1,173 @@
 {
-  "id": "miller_fisher_syndrome",
-  "name": "Miller Fisher syndrome",
-  "aliases": [
-    "Fisher syndrome",
-    "Miller-Fisher variant of Guillain-Barre syndrome",
-    "anti-GQ1b antibody syndrome (ophthalmoplegic variant)"
+ "id": "miller_fisher_syndrome",
+ "name": "Miller Fisher syndrome",
+ "aliases": [
+  "Fisher syndrome",
+  "Miller-Fisher variant of Guillain-Barre syndrome",
+  "anti-GQ1b antibody syndrome (ophthalmoplegic variant)"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system / Neuroimmunology",
+ "specialty": "Neurology / Neuroimmunology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Bradley and Daroff's Neurology in Clinical Practice",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Classically presents with the triad of ophthalmoplegia, ataxia, and areflexia, often after a preceding respiratory or gastrointestinal infection",
+   "Regarded as a variant of Guillain-Barre syndrome and part of the anti-GQ1b antibody spectrum",
+   "Serum anti-GQ1b antibodies are positive in the great majority of cases and strongly support the diagnosis",
+   "Consciousness is preserved, distinguishing it from Bickerstaff brainstem encephalitis, which shares the anti-GQ1b mechanism but adds encephalopathy",
+   "Cerebrospinal fluid often shows albuminocytological dissociation, though this may be absent early",
+   "Overlap with limb-weakness Guillain-Barre syndrome can occur, so monitoring for respiratory and bulbar involvement is important",
+   "Treatment mirrors Guillain-Barre syndrome using intravenous immunoglobulin or plasma exchange, with many patients also recovering spontaneously"
   ],
-  "class": "non_infective",
-  "system": "Nervous system / Neuroimmunology",
-  "specialty": "Neurology / Neuroimmunology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Bradley and Daroff's Neurology in Clinical Practice",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Classically presents with the triad of ophthalmoplegia, ataxia, and areflexia, often after a preceding respiratory or gastrointestinal infection",
-      "Regarded as a variant of Guillain-Barre syndrome and part of the anti-GQ1b antibody spectrum",
-      "Serum anti-GQ1b antibodies are positive in the great majority of cases and strongly support the diagnosis",
-      "Consciousness is preserved, distinguishing it from Bickerstaff brainstem encephalitis, which shares the anti-GQ1b mechanism but adds encephalopathy",
-      "Cerebrospinal fluid often shows albuminocytological dissociation, though this may be absent early",
-      "Overlap with limb-weakness Guillain-Barre syndrome can occur, so monitoring for respiratory and bulbar involvement is important",
-      "Treatment mirrors Guillain-Barre syndrome using intravenous immunoglobulin or plasma exchange, with many patients also recovering spontaneously"
+  "pathophysiology": "Miller Fisher syndrome is an acute immune-mediated neuropathy triggered by infection, in which antibodies against the GQ1b ganglioside are generated through molecular mimicry with microbial (often Campylobacter jejuni) lipo-oligosaccharide. GQ1b is densely expressed in the oculomotor, trochlear, and abducens nerves and in muscle-spindle afferents, so antibody binding there produces ophthalmoplegia and sensory ataxia, while impaired large-fibre afferent function causes areflexia. The peripheral, largely nodal-paranodal site of injury and the self-limiting immune response underlie the generally favourable outcome.",
+  "additionalDifferentials": [
+   "Bickerstaff brainstem encephalitis",
+   "Guillain-Barre syndrome (classic form)",
+   "Myasthenia gravis",
+   "Brainstem stroke",
+   "Wernicke encephalopathy",
+   "Botulism"
+  ],
+  "additionalInvestigations": [
+   "Serum anti-GQ1b ganglioside antibody testing",
+   "Cerebrospinal fluid analysis for albuminocytological dissociation",
+   "Nerve conduction studies, which may show reduced sensory responses or subtle changes",
+   "MRI of the brain to exclude brainstem lesions when the picture is atypical",
+   "Screening for preceding Campylobacter or other infection",
+   "Respiratory function monitoring where overlap weakness is suspected"
+  ],
+  "redFlags": [
+   "Evolving limb weakness or respiratory compromise indicating overlap with Guillain-Barre syndrome",
+   "Bulbar dysfunction threatening swallowing and the airway",
+   "Declining consciousness suggesting Bickerstaff brainstem encephalitis",
+   "Rapid deterioration requiring escalation of care"
+  ],
+  "prognosis": "The prognosis is generally excellent, with most patients recovering fully over weeks to months, though those with overlapping Guillain-Barre features may have a more prolonged course.",
+  "pitfalls": [
+   "Assuming a benign course and missing evolving respiratory or bulbar weakness",
+   "Attributing ophthalmoplegia to myasthenia or stroke",
+   "Excluding the diagnosis when early cerebrospinal fluid protein is normal",
+   "Overlooking the encephalopathy that would reclassify the case as Bickerstaff brainstem encephalitis"
+  ],
+  "references": [
+   "Bradley and Daroff's Neurology in Clinical Practice",
+   "Adams and Victor's Principles of Neurology",
+   "Continuum: Peripheral Nervous System Disorders"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Treat with immunotherapy, either intravenous immunoglobulin or plasma exchange, particularly where there is significant disability or Guillain-Barre overlap",
+   "Monitor respiratory and bulbar function closely for overlapping Guillain-Barre weakness, escalating to ventilatory support if required",
+   "Provide supportive care including venous thromboembolism prophylaxis and physiotherapy during recovery",
+   "Manage the ophthalmoplegia symptomatically with monocular occlusion for diplopia and ocular lubrication",
+   "Watch for and treat autonomic instability",
+   "Manage under neurology and neuroimmunology, reassuring that recovery is usually complete over weeks to months"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "miller_fisher_syndrome-pathway",
+   "title": "Miller Fisher syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Classically presents with the triad of ophthalmoplegia, ataxia, and areflexia, often after a preceding respiratory or gastrointestinal infection",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Evolving limb weakness or respiratory compromise indicating overlap with Guillain-Barre syndrome",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Serum anti-GQ1b ganglioside antibody testing, Cerebrospinal fluid analysis for albuminocytological dissociation, Nerve conduction studies, which may show reduced sensory responses or subtle changes"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Treat with immunotherapy, either intravenous immunoglobulin or plasma exchange, particularly where there is significant disability or Guillain-Barre overlap"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Assuming a benign course and missing evolving respiratory or bulbar weakness"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of miller fisher syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "miller_fisher_syndrome-matrix",
+   "title": "Miller Fisher syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Classically presents with the triad of ophthalmoplegia, ataxia, and areflexia, often after a preceding respiratory or",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Miller Fisher syndrome is an acute immune-mediated neuropathy triggered by infection, in which antibodies against the GQ1b ganglioside are generated through molecular mimicry with microbial (often Campylobacter jejuni) lipo-oligosaccharide. GQ1b is densely expressed in the oculomotor, trochlear, and abducens nerves and in muscle-spindle afferents, so antibody binding there produces ophthalmoplegia and sensory ataxia, while impaired large-fibre afferent function causes areflexia. The peripheral, largely nodal-paranodal site of injury and the self-limiting immune response underlie the generally favourable outcome.",
-    "additionalDifferentials": [
-      "Bickerstaff brainstem encephalitis",
-      "Guillain-Barre syndrome (classic form)",
-      "Myasthenia gravis",
-      "Brainstem stroke",
-      "Wernicke encephalopathy",
-      "Botulism"
+    [
+     "Key Investigations",
+     "Serum anti-GQ1b ganglioside antibody testing, Cerebrospinal fluid analysis for albuminocytological dissociation, Nerve conduction",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Serum anti-GQ1b ganglioside antibody testing",
-      "Cerebrospinal fluid analysis for albuminocytological dissociation",
-      "Nerve conduction studies, which may show reduced sensory responses or subtle changes",
-      "MRI of the brain to exclude brainstem lesions when the picture is atypical",
-      "Screening for preceding Campylobacter or other infection",
-      "Respiratory function monitoring where overlap weakness is suspected"
+    [
+     "Primary Differentials",
+     "Bickerstaff brainstem encephalitis, Guillain-Barre syndrome (classic form), Myasthenia gravis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Evolving limb weakness or respiratory compromise indicating overlap with Guillain-Barre syndrome",
-      "Bulbar dysfunction threatening swallowing and the airway",
-      "Declining consciousness suggesting Bickerstaff brainstem encephalitis",
-      "Rapid deterioration requiring escalation of care"
+    [
+     "Management Strategy",
+     "Treat with immunotherapy, either intravenous immunoglobulin or plasma exchange, particularly where there is significant",
+     "Core treatment modality"
     ],
-    "prognosis": "The prognosis is generally excellent, with most patients recovering fully over weeks to months, though those with overlapping Guillain-Barre features may have a more prolonged course.",
-    "pitfalls": [
-      "Assuming a benign course and missing evolving respiratory or bulbar weakness",
-      "Attributing ophthalmoplegia to myasthenia or stroke",
-      "Excluding the diagnosis when early cerebrospinal fluid protein is normal",
-      "Overlooking the encephalopathy that would reclassify the case as Bickerstaff brainstem encephalitis"
-    ],
-    "references": [
-      "Bradley and Daroff's Neurology in Clinical Practice",
-      "Adams and Victor's Principles of Neurology",
-      "Continuum: Peripheral Nervous System Disorders"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Treat with immunotherapy, either intravenous immunoglobulin or plasma exchange, particularly where there is significant disability or Guillain-Barre overlap",
-      "Monitor respiratory and bulbar function closely for overlapping Guillain-Barre weakness, escalating to ventilatory support if required",
-      "Provide supportive care including venous thromboembolism prophylaxis and physiotherapy during recovery",
-      "Manage the ophthalmoplegia symptomatically with monocular occlusion for diplopia and ocular lubrication",
-      "Watch for and treat autonomic instability",
-      "Manage under neurology and neuroimmunology, reassuring that recovery is usually complete over weeks to months"
+    [
+     "Clinical Pitfall",
+     "Assuming a benign course and missing evolving respiratory or bulbar weakness",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for miller fisher syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "miller-fisher-syndrome-real-image",
+   "title": "Miller Fisher syndrome: Diagnostic Head Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
+   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
+   "annotations": [
+    {
+     "label": "Cerebral Parenchyma",
+     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+    },
+    {
+     "label": "Extra-Axial Spaces",
+     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+    }
+   ]
+  }
+ ]
 }

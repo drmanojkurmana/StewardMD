@@ -5,7 +5,20 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, ICU, neurosurgery",
- "aliases": ["TBI", "head injury", "head trauma", "raised ICP", "intracranial pressure", "Canadian CT Head Rule", "CT head criteria", "CRASH-3", "mannitol", "hypertonic saline", "extradural haematoma", "subdural haematoma"],
+ "aliases": [
+  "TBI",
+  "head injury",
+  "head trauma",
+  "raised ICP",
+  "intracranial pressure",
+  "Canadian CT Head Rule",
+  "CT head criteria",
+  "CRASH-3",
+  "mannitol",
+  "hypertonic saline",
+  "extradural haematoma",
+  "subdural haematoma"
+ ],
  "summary": "Classify by GCS, scan with CT using NICE 2023 criteria (derived from the Canadian CT Head Rule), prevent secondary brain injury by avoiding hypoxia and hypotension, give tranexamic acid within 3 hours for mild to moderate TBI, and treat raised ICP in tiers with early neurosurgical input.",
  "sections": [
   {
@@ -93,19 +106,165 @@
   }
  ],
  "drugs": [
-  { "name": "Tranexamic acid", "dose": "1 g IV over 10 minutes, then 1 g IV over 8 hours, within 3 hours of injury", "notes": "NICE 2023 alternative for GCS 12 or less without extracranial bleeding: 2 g IV bolus within 2 hours." },
-  { "name": "Mannitol 20%", "dose": "0.25 to 1 g/kg IV bolus for raised ICP", "notes": "Causes osmotic diuresis; avoid in hypotension; hold if serum osmolality is above 320 mOsm/kg." },
-  { "name": "Hypertonic saline 3%", "dose": "250 mL IV bolus, repeat guided by ICP and serum sodium", "notes": "Useful when hypotensive; monitor sodium at least every 4 to 6 hours." },
-  { "name": "Phenytoin", "dose": "Loading 20 mg/kg IV at no more than 50 mg/min, then 100 mg IV or oral every 8 hours for 7 days", "notes": "ECG and BP monitoring during loading; check levels; many interactions." },
-  { "name": "Levetiracetam", "dose": "500 to 1000 mg IV or oral every 12 hours for 7 days", "notes": "Common alternative to phenytoin; reduce dose in renal impairment." },
-  { "name": "Prothrombin complex concentrate (4-factor) with vitamin K", "dose": "PCC 25 to 50 units/kg IV by INR and weight, plus vitamin K (phytomenadione) 5 to 10 mg IV", "notes": "Warfarin reversal; PCC 25 to 50 units/kg also used for factor Xa inhibitors when andexanet is unavailable." },
-  { "name": "Idarucizumab", "dose": "5 g IV", "notes": "Dabigatran reversal in life-threatening bleeding." }
+  {
+   "name": "Tranexamic acid",
+   "dose": "1 g IV over 10 minutes, then 1 g IV over 8 hours, within 3 hours of injury",
+   "notes": "NICE 2023 alternative for GCS 12 or less without extracranial bleeding: 2 g IV bolus within 2 hours."
+  },
+  {
+   "name": "Mannitol 20%",
+   "dose": "0.25 to 1 g/kg IV bolus for raised ICP",
+   "notes": "Causes osmotic diuresis; avoid in hypotension; hold if serum osmolality is above 320 mOsm/kg."
+  },
+  {
+   "name": "Hypertonic saline 3%",
+   "dose": "250 mL IV bolus, repeat guided by ICP and serum sodium",
+   "notes": "Useful when hypotensive; monitor sodium at least every 4 to 6 hours."
+  },
+  {
+   "name": "Phenytoin",
+   "dose": "Loading 20 mg/kg IV at no more than 50 mg/min, then 100 mg IV or oral every 8 hours for 7 days",
+   "notes": "ECG and BP monitoring during loading; check levels; many interactions."
+  },
+  {
+   "name": "Levetiracetam",
+   "dose": "500 to 1000 mg IV or oral every 12 hours for 7 days",
+   "notes": "Common alternative to phenytoin; reduce dose in renal impairment."
+  },
+  {
+   "name": "Prothrombin complex concentrate (4-factor) with vitamin K",
+   "dose": "PCC 25 to 50 units/kg IV by INR and weight, plus vitamin K (phytomenadione) 5 to 10 mg IV",
+   "notes": "Warfarin reversal; PCC 25 to 50 units/kg also used for factor Xa inhibitors when andexanet is unavailable."
+  },
+  {
+   "name": "Idarucizumab",
+   "dose": "5 g IV",
+   "notes": "Dabigatran reversal in life-threatening bleeding."
+  }
  ],
  "sources": [
-  { "org": "Brain Trauma Foundation", "title": "Guidelines for the Management of Severe Traumatic Brain Injury, Fourth Edition", "year": 2017, "url": "https://pubmed.ncbi.nlm.nih.gov/27654000/" },
-  { "org": "NICE", "title": "Head injury: assessment and early management (NG232)", "year": 2023, "url": "https://www.nice.org.uk/guidance/ng232/chapter/recommendations" },
-  { "org": "CRASH-3 trial collaborators (Lancet)", "title": "Effects of tranexamic acid in acute traumatic brain injury (CRASH-3): a randomised, placebo-controlled trial", "year": 2019, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6853170/" },
-  { "org": "European Task Force for Advanced Bleeding Care in Trauma", "title": "The European guideline on management of major bleeding and coagulopathy following trauma: sixth edition", "year": 2023, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9977110/" }
+  {
+   "org": "Brain Trauma Foundation",
+   "title": "Guidelines for the Management of Severe Traumatic Brain Injury, Fourth Edition",
+   "year": 2017,
+   "url": "https://pubmed.ncbi.nlm.nih.gov/27654000/"
+  },
+  {
+   "org": "NICE",
+   "title": "Head injury: assessment and early management (NG232)",
+   "year": 2023,
+   "url": "https://www.nice.org.uk/guidance/ng232/chapter/recommendations"
+  },
+  {
+   "org": "CRASH-3 trial collaborators (Lancet)",
+   "title": "Effects of tranexamic acid in acute traumatic brain injury (CRASH-3): a randomised, placebo-controlled trial",
+   "year": 2019,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6853170/"
+  },
+  {
+   "org": "European Task Force for Advanced Bleeding Care in Trauma",
+   "title": "The European guideline on management of major bleeding and coagulopathy following trauma: sixth edition",
+   "year": 2023,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9977110/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "traumatic-brain-injury-pathway",
+   "title": "Traumatic brain injury (adult): acute management Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Severity by GCS after resuscitation: mild 13 to 15, moderate 9 to 12, severe 3 to 8. Record eye, verbal and motor scores separately; the motor score carries the most weight.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Intubate for GCS 8 or less, loss of protective laryngeal reflexes, hypoxaemia or hypercarbia, irregular breathing, or before transfer with a falling motor score, copious oral bleeding or seizures.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "CT head within 1 hour for any of: GCS 12 or less on first ED assessment, GCS below 15 at 2 hours after injury, suspected open or depressed skull fracture, or signs of basal skull fracture (haemotympanum, panda eyes, CSF from ear or nose,"
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Severe TBI: give prophylaxis for 7 days to reduce early post-traumatic seizures. Phenytoin is the agent with guideline support; levetiracetam is widely used, though evidence to prefer it is insufficient."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Neuro observations (GCS, pupils, limb movements, vital signs, SpO2) half-hourly until GCS 15; then half-hourly for 2 hours, hourly for 4 hours, then 2-hourly (NICE)."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for traumatic brain injury (adult): acute management."
+  }
+ ],
+ "tables": [
+  {
+   "id": "traumatic-brain-injury-summary-matrix",
+   "title": "Traumatic brain injury (adult): acute management Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Severity by GCS after resuscitation: mild 13 to 15, moderate 9 to 12, severe 3 to 8. Record eye, verbal and motor scores separately; the",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Intubate for GCS 8 or less, loss of protective laryngeal reflexes, hypoxaemia or hypercarbia, irregular breathing, or before transfer with",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "CT head within 1 hour for any of: GCS 12 or less on first ED assessment, GCS below 15 at 2 hours after injury, suspected open or depressed",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Tranexamic acid: 1 g IV over 10 minutes, then 1 g IV over 8 hours, within 3 hours of injury",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "A single episode of hypoxia or hypotension, especially during intubation or transfer.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for traumatic brain injury (adult): acute management."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "traumatic-brain-injury-real-image",
+   "title": "Traumatic brain injury (adult): acute management: Diagnostic Head Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
+   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
+   "annotations": [
+    {
+     "label": "Cerebral Parenchyma",
+     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+    },
+    {
+     "label": "Extra-Axial Spaces",
+     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+    }
+   ]
+  }
+ ]
 }

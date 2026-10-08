@@ -1,81 +1,176 @@
 {
-  "id": "frontonasal_dysplasia",
-  "name": "Frontonasal dysplasia",
-  "aliases": [
-    "frontonasal malformation",
-    "median cleft face syndrome",
-    "frontonasal dysplasia sequence",
-    "FND"
+ "id": "frontonasal_dysplasia",
+ "name": "Frontonasal dysplasia",
+ "aliases": [
+  "frontonasal malformation",
+  "median cleft face syndrome",
+  "frontonasal dysplasia sequence",
+  "FND"
+ ],
+ "class": "non_infective",
+ "system": "Genetics / Craniofacial",
+ "specialty": "Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Smith's Recognizable Patterns of Human Malformation",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Characterised by a midline facial malformation with widely spaced eyes (hypertelorism), a broad nasal root, and midline defects of the nose and upper lip",
+   "Features may include a median cleft of the nose or lip, a widow's peak hairline, and a bifid nasal tip",
+   "It reflects abnormal development of the frontonasal prominence, from which the central face derives",
+   "Severity ranges from mild hypertelorism to severe midline clefting with anterior cranium bifidum",
+   "It may be isolated or form part of defined syndromes, some caused by variants in the ALX family of genes",
+   "Associated midline brain anomalies can occur, so intracranial imaging is important when clefting is significant",
+   "The degree of cognitive involvement varies and often relates to accompanying central nervous system malformation rather than the facial defect alone"
   ],
-  "class": "non_infective",
-  "system": "Genetics / Craniofacial",
-  "specialty": "Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Smith's Recognizable Patterns of Human Malformation",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Characterised by a midline facial malformation with widely spaced eyes (hypertelorism), a broad nasal root, and midline defects of the nose and upper lip",
-      "Features may include a median cleft of the nose or lip, a widow's peak hairline, and a bifid nasal tip",
-      "It reflects abnormal development of the frontonasal prominence, from which the central face derives",
-      "Severity ranges from mild hypertelorism to severe midline clefting with anterior cranium bifidum",
-      "It may be isolated or form part of defined syndromes, some caused by variants in the ALX family of genes",
-      "Associated midline brain anomalies can occur, so intracranial imaging is important when clefting is significant",
-      "The degree of cognitive involvement varies and often relates to accompanying central nervous system malformation rather than the facial defect alone"
+  "pathophysiology": "Frontonasal dysplasia arises from disturbed development of the frontonasal prominence, the midline facial process that gives rise to the forehead, nasal bridge, nasal tip, philtrum, and primary palate. Failure of the medial nasal processes to migrate and merge normally in the midline results in the widened, clefted central face and hypertelorism. Because midline facial and forebrain development are intimately linked, disruption in this region can be accompanied by midline central nervous system anomalies. Several genetic forms are recognised, notably those due to variants in the ALX homeobox genes governing craniofacial midline patterning, though many cases are sporadic and aetiologically heterogeneous.",
+  "additionalDifferentials": [
+   "Holoprosencephaly spectrum (with hypotelorism at the severe end)",
+   "Craniofrontonasal syndrome (EFNB1)",
+   "Median cleft lip from other causes",
+   "Encephalocele or nasal glioma presenting with a midline mass",
+   "Acrofrontofacionasal dysostosis",
+   "Oral-facial-digital syndromes"
+  ],
+  "additionalInvestigations": [
+   "Cranial magnetic resonance imaging to detect midline brain anomalies and distinguish encephalocele",
+   "Craniofacial computed tomography to define the bony defect for surgical planning",
+   "Ophthalmological assessment of orbital position and vision",
+   "Molecular testing including ALX-related genes where indicated",
+   "Developmental assessment",
+   "Genetic counselling based on the specific diagnosis identified"
+  ],
+  "redFlags": [
+   "A midline nasal mass that may represent an encephalocele with a risk of cerebrospinal fluid leak or meningitis",
+   "Associated significant central nervous system malformation",
+   "Visual compromise from severe orbital displacement",
+   "Airway concerns where nasal anatomy is markedly abnormal",
+   "Features indicating a broader syndrome requiring multisystem evaluation"
+  ],
+  "prognosis": "Outcome depends on the extent of facial clefting and, crucially, on any associated brain malformation; isolated milder forms have a good prognosis with staged reconstruction and normal cognition, whereas central nervous system involvement worsens developmental outlook.",
+  "pitfalls": [
+   "Biopsying or operating on a midline nasal mass before excluding an encephalocele",
+   "Attributing all developmental concern to the facial appearance rather than to brain anomalies",
+   "Failing to obtain intracranial imaging in significant midline clefting",
+   "Overlooking the genetic heterogeneity and the need for tailored counselling",
+   "Assuming hypertelorism is purely cosmetic without assessing vision and orbital anatomy"
+  ],
+  "references": [
+   "Smith's Recognizable Patterns of Human Malformation",
+   "Gorlin's Syndromes of the Head and Neck"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Staged craniofacial surgical reconstruction to correct the midline cleft, hypertelorism and nasal deformity, timed to facial growth",
+   "Neonatal assessment and support of feeding and airway where midline clefting is significant",
+   "Intracranial imaging and neurosurgical management of any associated midline brain anomaly or encephalocele",
+   "Ophthalmological assessment and management of orbital malposition and visual function",
+   "Developmental assessment and support, with intervention where central nervous system involvement affects cognition",
+   "Multidisciplinary craniofacial team care coordinating plastic surgery, neurosurgery, ophthalmology and genetics",
+   "Genetic counselling based on the specific diagnosis, including ALX-related recessive forms where identified"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "frontonasal_dysplasia-pathway",
+   "title": "Frontonasal dysplasia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Characterised by a midline facial malformation with widely spaced eyes (hypertelorism), a broad nasal root, and midline defects of the nose and upper lip",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: A midline nasal mass that may represent an encephalocele with a risk of cerebrospinal fluid leak or meningitis",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Cranial magnetic resonance imaging to detect midline brain anomalies and distinguish encephalocele, Craniofacial computed tomography to define the bony defect for surgical planning, Ophthalmological assessment of orbital"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Staged craniofacial surgical reconstruction to correct the midline cleft, hypertelorism and nasal deformity, timed to facial growth"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Biopsying or operating on a midline nasal mass before excluding an encephalocele"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of frontonasal dysplasia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "frontonasal_dysplasia-matrix",
+   "title": "Frontonasal dysplasia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Characterised by a midline facial malformation with widely spaced eyes (hypertelorism), a broad nasal root, and midline defects",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Frontonasal dysplasia arises from disturbed development of the frontonasal prominence, the midline facial process that gives rise to the forehead, nasal bridge, nasal tip, philtrum, and primary palate. Failure of the medial nasal processes to migrate and merge normally in the midline results in the widened, clefted central face and hypertelorism. Because midline facial and forebrain development are intimately linked, disruption in this region can be accompanied by midline central nervous system anomalies. Several genetic forms are recognised, notably those due to variants in the ALX homeobox genes governing craniofacial midline patterning, though many cases are sporadic and aetiologically heterogeneous.",
-    "additionalDifferentials": [
-      "Holoprosencephaly spectrum (with hypotelorism at the severe end)",
-      "Craniofrontonasal syndrome (EFNB1)",
-      "Median cleft lip from other causes",
-      "Encephalocele or nasal glioma presenting with a midline mass",
-      "Acrofrontofacionasal dysostosis",
-      "Oral-facial-digital syndromes"
+    [
+     "Key Investigations",
+     "Cranial magnetic resonance imaging to detect midline brain anomalies and distinguish encephalocele, Craniofacial computed",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Cranial magnetic resonance imaging to detect midline brain anomalies and distinguish encephalocele",
-      "Craniofacial computed tomography to define the bony defect for surgical planning",
-      "Ophthalmological assessment of orbital position and vision",
-      "Molecular testing including ALX-related genes where indicated",
-      "Developmental assessment",
-      "Genetic counselling based on the specific diagnosis identified"
+    [
+     "Primary Differentials",
+     "Holoprosencephaly spectrum (with hypotelorism at the severe end), Craniofrontonasal syndrome (EFNB1), Median cleft lip from other",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "A midline nasal mass that may represent an encephalocele with a risk of cerebrospinal fluid leak or meningitis",
-      "Associated significant central nervous system malformation",
-      "Visual compromise from severe orbital displacement",
-      "Airway concerns where nasal anatomy is markedly abnormal",
-      "Features indicating a broader syndrome requiring multisystem evaluation"
+    [
+     "Management Strategy",
+     "Staged craniofacial surgical reconstruction to correct the midline cleft, hypertelorism and nasal deformity, timed to facial",
+     "Core treatment modality"
     ],
-    "prognosis": "Outcome depends on the extent of facial clefting and, crucially, on any associated brain malformation; isolated milder forms have a good prognosis with staged reconstruction and normal cognition, whereas central nervous system involvement worsens developmental outlook.",
-    "pitfalls": [
-      "Biopsying or operating on a midline nasal mass before excluding an encephalocele",
-      "Attributing all developmental concern to the facial appearance rather than to brain anomalies",
-      "Failing to obtain intracranial imaging in significant midline clefting",
-      "Overlooking the genetic heterogeneity and the need for tailored counselling",
-      "Assuming hypertelorism is purely cosmetic without assessing vision and orbital anatomy"
-    ],
-    "references": [
-      "Smith's Recognizable Patterns of Human Malformation",
-      "Gorlin's Syndromes of the Head and Neck"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Staged craniofacial surgical reconstruction to correct the midline cleft, hypertelorism and nasal deformity, timed to facial growth",
-      "Neonatal assessment and support of feeding and airway where midline clefting is significant",
-      "Intracranial imaging and neurosurgical management of any associated midline brain anomaly or encephalocele",
-      "Ophthalmological assessment and management of orbital malposition and visual function",
-      "Developmental assessment and support, with intervention where central nervous system involvement affects cognition",
-      "Multidisciplinary craniofacial team care coordinating plastic surgery, neurosurgery, ophthalmology and genetics",
-      "Genetic counselling based on the specific diagnosis, including ALX-related recessive forms where identified"
+    [
+     "Clinical Pitfall",
+     "Biopsying or operating on a midline nasal mass before excluding an encephalocele",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for frontonasal dysplasia."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "frontonasal-dysplasia-real-image",
+   "title": "Frontonasal dysplasia: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

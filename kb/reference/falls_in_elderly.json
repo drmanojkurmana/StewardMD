@@ -1,82 +1,177 @@
 {
-  "id": "falls_in_elderly",
-  "name": "Falls in the elderly",
-  "aliases": [
-    "geriatric falls",
-    "recurrent falls",
-    "fall risk",
-    "falls syndrome"
+ "id": "falls_in_elderly",
+ "name": "Falls in the elderly",
+ "aliases": [
+  "geriatric falls",
+  "recurrent falls",
+  "fall risk",
+  "falls syndrome"
+ ],
+ "class": "non_infective",
+ "system": "Geriatrics / Palliative",
+ "specialty": "Geriatrics & Palliative Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Hazzard's Geriatric Medicine and Gerontology / palliative care guidelines",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Falls in older adults are usually multifactorial, and each additional risk factor further increases the likelihood of falling",
+   "A single fall warrants a gait and balance assessment, while recurrent falls or a fall with injury warrant a full multifactorial evaluation",
+   "Key contributors include muscle weakness, gait and balance disorders, visual impairment, cognitive impairment, environmental hazards, and culprit medications",
+   "Psychoactive drugs, antihypertensives, and drugs causing orthostatic hypotension are among the most modifiable medication-related risks",
+   "Always ask about loss of consciousness; syncopal falls point toward cardiac or neurological causes and require separate evaluation",
+   "Fear of falling is common after a fall and can itself cause activity restriction, deconditioning, and further falls",
+   "Multicomponent interventions, particularly progressive strength and balance exercise, are the most effective evidence-based prevention strategy",
+   "Vitamin D repletion in deficient individuals, home hazard modification, and correcting visual and footwear problems reduce fall risk",
+   "Screen for and manage osteoporosis, since the clinical consequence of falls is largely determined by fracture risk"
   ],
-  "class": "non_infective",
-  "system": "Geriatrics / Palliative",
-  "specialty": "Geriatrics & Palliative Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Hazzard's Geriatric Medicine and Gerontology / palliative care guidelines",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Falls in older adults are usually multifactorial, and each additional risk factor further increases the likelihood of falling",
-      "A single fall warrants a gait and balance assessment, while recurrent falls or a fall with injury warrant a full multifactorial evaluation",
-      "Key contributors include muscle weakness, gait and balance disorders, visual impairment, cognitive impairment, environmental hazards, and culprit medications",
-      "Psychoactive drugs, antihypertensives, and drugs causing orthostatic hypotension are among the most modifiable medication-related risks",
-      "Always ask about loss of consciousness; syncopal falls point toward cardiac or neurological causes and require separate evaluation",
-      "Fear of falling is common after a fall and can itself cause activity restriction, deconditioning, and further falls",
-      "Multicomponent interventions, particularly progressive strength and balance exercise, are the most effective evidence-based prevention strategy",
-      "Vitamin D repletion in deficient individuals, home hazard modification, and correcting visual and footwear problems reduce fall risk",
-      "Screen for and manage osteoporosis, since the clinical consequence of falls is largely determined by fracture risk"
+  "pathophysiology": "Safe mobility depends on the integration of sensory input (vision, vestibular function, proprioception), central processing, and effector musculoskeletal responses. Ageing degrades each of these: sensory acuity declines, reaction times lengthen, postural reflexes slow, and sarcopenia reduces the strength needed for recovery. Superimposed disease (neurodegenerative disorders, arthritis, cardiovascular instability), medications, and environmental hazards further erode the margin of safety, so that balance perturbations that a younger person would correct instead result in a fall.",
+  "additionalDifferentials": [
+   "Syncope from cardiac arrhythmia, structural heart disease, or vasovagal cause",
+   "Orthostatic hypotension",
+   "Transient ischaemic attack or stroke",
+   "Seizure",
+   "Vertigo from vestibular disease including benign paroxysmal positional vertigo",
+   "Mechanical or purely accidental trips related to environment"
+  ],
+  "additionalInvestigations": [
+   "Multifactorial falls assessment including gait, balance, and lower-limb strength testing",
+   "Orthostatic blood pressure measurement (lying and standing)",
+   "Medication review focused on psychoactive and hypotensive agents",
+   "Vision assessment and cognitive screening",
+   "Cardiac evaluation (ECG and further testing) when syncope is suspected",
+   "Bone health assessment including fracture risk and consideration of DXA"
+  ],
+  "redFlags": [
+   "Fall with head injury, especially on anticoagulants, raising concern for intracranial haemorrhage",
+   "Fall causing fracture or significant soft-tissue injury",
+   "Fall associated with loss of consciousness or suspected cardiac syncope",
+   "Long lie on the floor after a fall, with risk of rhabdomyolysis, pressure injury, hypothermia, and dehydration",
+   "New focal neurological signs suggesting stroke"
+  ],
+  "prognosis": "Falls are a leading cause of injury, disability, and loss of independence in older people. A fall with fracture, particularly hip fracture, carries substantial morbidity and elevated one-year mortality. Recurrent falls predict functional decline and institutionalisation, but structured multifactorial intervention meaningfully reduces future falls in many patients.",
+  "pitfalls": [
+   "Treating a fall as a simple mechanical accident and not searching for contributing medical causes",
+   "Overlooking orthostatic hypotension and culprit medications",
+   "Failing to distinguish a syncopal fall from a mechanical one",
+   "Ignoring bone health so that fracture risk is left unaddressed",
+   "Neglecting fear of falling and the resulting deconditioning spiral"
+  ],
+  "references": [
+   "Hazzard's Geriatric Medicine and Gerontology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Multifactorial falls assessment with interventions targeted at each identified risk factor",
+   "Progressive strength and balance training through physiotherapy, such as an Otago-style exercise programme",
+   "Medication review to reduce or withdraw psychoactive, sedative and hypotensive agents that provoke falls",
+   "Treatment of orthostatic hypotension and cardiac causes of syncope, and correction of visual impairment",
+   "Bone-health optimisation with calcium and vitamin D, fracture-risk assessment and bone-protective therapy such as bisphosphonates where indicated",
+   "Home hazard assessment and modification, appropriate footwear, walking aids and podiatry",
+   "Addressing fear of falling and deconditioning, with referral to a multidisciplinary falls service for recurrent or injurious falls"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "falls_in_elderly-pathway",
+   "title": "Falls in the elderly: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Falls in older adults are usually multifactorial, and each additional risk factor further increases the likelihood of falling",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Fall with head injury, especially on anticoagulants, raising concern for intracranial haemorrhage",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Multifactorial falls assessment including gait, balance, and lower-limb strength testing, Orthostatic blood pressure measurement (lying and standing), Medication review focused on psychoactive and hypotensive agents"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Multifactorial falls assessment with interventions targeted at each identified risk factor"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Treating a fall as a simple mechanical accident and not searching for contributing medical causes"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of falls in the elderly."
+  }
+ ],
+ "tables": [
+  {
+   "id": "falls_in_elderly-matrix",
+   "title": "Falls in the elderly: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Falls in older adults are usually multifactorial, and each additional risk factor further increases the likelihood of falling",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Safe mobility depends on the integration of sensory input (vision, vestibular function, proprioception), central processing, and effector musculoskeletal responses. Ageing degrades each of these: sensory acuity declines, reaction times lengthen, postural reflexes slow, and sarcopenia reduces the strength needed for recovery. Superimposed disease (neurodegenerative disorders, arthritis, cardiovascular instability), medications, and environmental hazards further erode the margin of safety, so that balance perturbations that a younger person would correct instead result in a fall.",
-    "additionalDifferentials": [
-      "Syncope from cardiac arrhythmia, structural heart disease, or vasovagal cause",
-      "Orthostatic hypotension",
-      "Transient ischaemic attack or stroke",
-      "Seizure",
-      "Vertigo from vestibular disease including benign paroxysmal positional vertigo",
-      "Mechanical or purely accidental trips related to environment"
+    [
+     "Key Investigations",
+     "Multifactorial falls assessment including gait, balance, and lower-limb strength testing, Orthostatic blood pressure measurement",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Multifactorial falls assessment including gait, balance, and lower-limb strength testing",
-      "Orthostatic blood pressure measurement (lying and standing)",
-      "Medication review focused on psychoactive and hypotensive agents",
-      "Vision assessment and cognitive screening",
-      "Cardiac evaluation (ECG and further testing) when syncope is suspected",
-      "Bone health assessment including fracture risk and consideration of DXA"
+    [
+     "Primary Differentials",
+     "Syncope from cardiac arrhythmia, structural heart disease, or vasovagal cause, Orthostatic hypotension, Transient ischaemic",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Fall with head injury, especially on anticoagulants, raising concern for intracranial haemorrhage",
-      "Fall causing fracture or significant soft-tissue injury",
-      "Fall associated with loss of consciousness or suspected cardiac syncope",
-      "Long lie on the floor after a fall, with risk of rhabdomyolysis, pressure injury, hypothermia, and dehydration",
-      "New focal neurological signs suggesting stroke"
+    [
+     "Management Strategy",
+     "Multifactorial falls assessment with interventions targeted at each identified risk factor",
+     "Core treatment modality"
     ],
-    "prognosis": "Falls are a leading cause of injury, disability, and loss of independence in older people. A fall with fracture, particularly hip fracture, carries substantial morbidity and elevated one-year mortality. Recurrent falls predict functional decline and institutionalisation, but structured multifactorial intervention meaningfully reduces future falls in many patients.",
-    "pitfalls": [
-      "Treating a fall as a simple mechanical accident and not searching for contributing medical causes",
-      "Overlooking orthostatic hypotension and culprit medications",
-      "Failing to distinguish a syncopal fall from a mechanical one",
-      "Ignoring bone health so that fracture risk is left unaddressed",
-      "Neglecting fear of falling and the resulting deconditioning spiral"
-    ],
-    "references": [
-      "Hazzard's Geriatric Medicine and Gerontology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Multifactorial falls assessment with interventions targeted at each identified risk factor",
-      "Progressive strength and balance training through physiotherapy, such as an Otago-style exercise programme",
-      "Medication review to reduce or withdraw psychoactive, sedative and hypotensive agents that provoke falls",
-      "Treatment of orthostatic hypotension and cardiac causes of syncope, and correction of visual impairment",
-      "Bone-health optimisation with calcium and vitamin D, fracture-risk assessment and bone-protective therapy such as bisphosphonates where indicated",
-      "Home hazard assessment and modification, appropriate footwear, walking aids and podiatry",
-      "Addressing fear of falling and deconditioning, with referral to a multidisciplinary falls service for recurrent or injurious falls"
+    [
+     "Clinical Pitfall",
+     "Treating a fall as a simple mechanical accident and not searching for contributing medical causes",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for falls in the elderly."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "falls-in-elderly-real-image",
+   "title": "Falls in the elderly: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

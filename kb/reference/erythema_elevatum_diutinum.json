@@ -1,77 +1,172 @@
 {
-  "id": "erythema_elevatum_diutinum",
-  "name": "Erythema elevatum diutinum",
-  "aliases": [
-    "EED",
-    "chronic fibrosing leukocytoclastic vasculitis",
-    "extracellular cholesterosis (historical)"
+ "id": "erythema_elevatum_diutinum",
+ "name": "Erythema elevatum diutinum",
+ "aliases": [
+  "EED",
+  "chronic fibrosing leukocytoclastic vasculitis",
+  "extracellular cholesterosis (historical)"
+ ],
+ "class": "non_infective",
+ "system": "Dermatology",
+ "specialty": "Dermatology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A rare chronic cutaneous vasculitis presenting as persistent red-brown to violaceous papules, plaques, and nodules",
+   "Lesions are characteristically symmetrical over extensor surfaces and joints, notably the dorsal hands, elbows, knees, and ankles",
+   "Early lesions are soft and inflammatory but become firm and fibrotic over time as the disease persists",
+   "It is considered a chronic form of leukocytoclastic vasculitis with secondary dermal fibrosis",
+   "Strong associations include IgA monoclonal gammopathy, HIV infection, autoimmune and inflammatory disorders, and haematological disease",
+   "Histology evolves from a neutrophilic leukocytoclastic vasculitis to a fibrotic picture in older lesions",
+   "Dapsone is often strikingly effective, reflecting the neutrophilic nature of the infiltrate"
   ],
-  "class": "non_infective",
-  "system": "Dermatology",
-  "specialty": "Dermatology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A rare chronic cutaneous vasculitis presenting as persistent red-brown to violaceous papules, plaques, and nodules",
-      "Lesions are characteristically symmetrical over extensor surfaces and joints, notably the dorsal hands, elbows, knees, and ankles",
-      "Early lesions are soft and inflammatory but become firm and fibrotic over time as the disease persists",
-      "It is considered a chronic form of leukocytoclastic vasculitis with secondary dermal fibrosis",
-      "Strong associations include IgA monoclonal gammopathy, HIV infection, autoimmune and inflammatory disorders, and haematological disease",
-      "Histology evolves from a neutrophilic leukocytoclastic vasculitis to a fibrotic picture in older lesions",
-      "Dapsone is often strikingly effective, reflecting the neutrophilic nature of the infiltrate"
+  "pathophysiology": "Erythema elevatum diutinum is regarded as a chronic, localised leukocytoclastic vasculitis, probably driven by immune-complex deposition in dermal vessels. Repeated bouts of neutrophilic small-vessel inflammation, with leukocytoclasis and fibrin deposition, lead over time to reactive dermal fibrosis, giving the persistent firm papules and plaques over joints. Circulating immune complexes, frequently in the setting of IgA gammopathy, HIV, or other chronic immune stimulation, are thought to underlie the recurrent vascular injury, which explains both the extensor-surface distribution and the responsiveness to dapsone.",
+  "additionalDifferentials": [
+   "Granuloma annulare",
+   "Sweet syndrome (acute febrile neutrophilic dermatosis)",
+   "Cutaneous leukocytoclastic vasculitis of other cause",
+   "Rheumatoid nodules",
+   "Bacillary angiomatosis or Kaposi sarcoma (especially in HIV)",
+   "Xanthomas"
+  ],
+  "additionalInvestigations": [
+   "Skin biopsy showing leukocytoclastic vasculitis in early lesions and fibrosis in older ones",
+   "Serum protein electrophoresis and immunofixation for IgA monoclonal gammopathy",
+   "HIV testing",
+   "Autoimmune and inflammatory disease screening (including for rheumatoid and connective-tissue disorders)",
+   "Full blood count and evaluation for haematological disease",
+   "Glucose-6-phosphate dehydrogenase level before dapsone therapy"
+  ],
+  "redFlags": [
+   "Detection of a monoclonal gammopathy or haematological disorder requiring haematology review",
+   "Newly identified HIV infection needing specialist management",
+   "An underlying systemic autoimmune or inflammatory disease",
+   "Progressive nodular disease impairing joint function"
+  ],
+  "prognosis": "Erythema elevatum diutinum is typically chronic and persistent over years, often waxing and waning; it frequently responds well to dapsone, but relapse on withdrawal is common and outcome is influenced by any associated systemic condition.",
+  "pitfalls": [
+   "Mistaking it for granuloma annulare or rheumatoid nodules and missing the vasculitic basis",
+   "Failing to screen for IgA gammopathy and HIV",
+   "Assuming a single acute vasculitis rather than recognising the chronic fibrosing course",
+   "Starting dapsone without checking glucose-6-phosphate dehydrogenase status"
+  ],
+  "references": [
+   "Rook's Textbook of Dermatology",
+   "Fitzpatrick's Dermatology in General Medicine"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Dapsone as first-line therapy, which typically produces a good response in this chronic leukocytoclastic vasculitis",
+   "Measurement of glucose-6-phosphate dehydrogenase activity before starting dapsone to avoid haemolysis",
+   "Identification and treatment of associated conditions, including IgA monoclonal gammopathy, HIV infection with antiretroviral therapy, and autoimmune or haematological disease",
+   "Alternative anti-inflammatory agents such as colchicine, niacinamide or systemic and intralesional corticosteroids where dapsone is not tolerated or insufficient",
+   "Surgical excision of late fibrotic nodules causing functional impairment over joints",
+   "Monitoring for relapse on dapsone withdrawal, which is common, and periodic review for evolving systemic associations"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "erythema_elevatum_diutinum-pathway",
+   "title": "Erythema elevatum diutinum: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A rare chronic cutaneous vasculitis presenting as persistent red-brown to violaceous papules, plaques, and nodules",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Detection of a monoclonal gammopathy or haematological disorder requiring haematology review",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Skin biopsy showing leukocytoclastic vasculitis in early lesions and fibrosis in older ones, Serum protein electrophoresis and immunofixation for IgA monoclonal gammopathy, HIV testing"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Dapsone as first-line therapy, which typically produces a good response in this chronic leukocytoclastic vasculitis"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking it for granuloma annulare or rheumatoid nodules and missing the vasculitic basis"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of erythema elevatum diutinum."
+  }
+ ],
+ "tables": [
+  {
+   "id": "erythema_elevatum_diutinum-matrix",
+   "title": "Erythema elevatum diutinum: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A rare chronic cutaneous vasculitis presenting as persistent red-brown to violaceous papules, plaques, and nodules",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Erythema elevatum diutinum is regarded as a chronic, localised leukocytoclastic vasculitis, probably driven by immune-complex deposition in dermal vessels. Repeated bouts of neutrophilic small-vessel inflammation, with leukocytoclasis and fibrin deposition, lead over time to reactive dermal fibrosis, giving the persistent firm papules and plaques over joints. Circulating immune complexes, frequently in the setting of IgA gammopathy, HIV, or other chronic immune stimulation, are thought to underlie the recurrent vascular injury, which explains both the extensor-surface distribution and the responsiveness to dapsone.",
-    "additionalDifferentials": [
-      "Granuloma annulare",
-      "Sweet syndrome (acute febrile neutrophilic dermatosis)",
-      "Cutaneous leukocytoclastic vasculitis of other cause",
-      "Rheumatoid nodules",
-      "Bacillary angiomatosis or Kaposi sarcoma (especially in HIV)",
-      "Xanthomas"
+    [
+     "Key Investigations",
+     "Skin biopsy showing leukocytoclastic vasculitis in early lesions and fibrosis in older ones, Serum protein electrophoresis and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Skin biopsy showing leukocytoclastic vasculitis in early lesions and fibrosis in older ones",
-      "Serum protein electrophoresis and immunofixation for IgA monoclonal gammopathy",
-      "HIV testing",
-      "Autoimmune and inflammatory disease screening (including for rheumatoid and connective-tissue disorders)",
-      "Full blood count and evaluation for haematological disease",
-      "Glucose-6-phosphate dehydrogenase level before dapsone therapy"
+    [
+     "Primary Differentials",
+     "Granuloma annulare, Sweet syndrome (acute febrile neutrophilic dermatosis), Cutaneous leukocytoclastic vasculitis of other cause",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Detection of a monoclonal gammopathy or haematological disorder requiring haematology review",
-      "Newly identified HIV infection needing specialist management",
-      "An underlying systemic autoimmune or inflammatory disease",
-      "Progressive nodular disease impairing joint function"
+    [
+     "Management Strategy",
+     "Dapsone as first-line therapy, which typically produces a good response in this chronic leukocytoclastic vasculitis",
+     "Core treatment modality"
     ],
-    "prognosis": "Erythema elevatum diutinum is typically chronic and persistent over years, often waxing and waning; it frequently responds well to dapsone, but relapse on withdrawal is common and outcome is influenced by any associated systemic condition.",
-    "pitfalls": [
-      "Mistaking it for granuloma annulare or rheumatoid nodules and missing the vasculitic basis",
-      "Failing to screen for IgA gammopathy and HIV",
-      "Assuming a single acute vasculitis rather than recognising the chronic fibrosing course",
-      "Starting dapsone without checking glucose-6-phosphate dehydrogenase status"
-    ],
-    "references": [
-      "Rook's Textbook of Dermatology",
-      "Fitzpatrick's Dermatology in General Medicine"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Dapsone as first-line therapy, which typically produces a good response in this chronic leukocytoclastic vasculitis",
-      "Measurement of glucose-6-phosphate dehydrogenase activity before starting dapsone to avoid haemolysis",
-      "Identification and treatment of associated conditions, including IgA monoclonal gammopathy, HIV infection with antiretroviral therapy, and autoimmune or haematological disease",
-      "Alternative anti-inflammatory agents such as colchicine, niacinamide or systemic and intralesional corticosteroids where dapsone is not tolerated or insufficient",
-      "Surgical excision of late fibrotic nodules causing functional impairment over joints",
-      "Monitoring for relapse on dapsone withdrawal, which is common, and periodic review for evolving systemic associations"
+    [
+     "Clinical Pitfall",
+     "Mistaking it for granuloma annulare or rheumatoid nodules and missing the vasculitic basis",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for erythema elevatum diutinum."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "erythema-elevatum-diutinum-real-image",
+   "title": "Erythema elevatum diutinum: Clinical Cutaneous Dermatology Photograph",
+   "type": "diagram",
+   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
+   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
+   "annotations": [
+    {
+     "label": "Primary Lesions",
+     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
+    },
+    {
+     "label": "Demarcation & Margins",
+     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
+    },
+    {
+     "label": "Anatomical Distribution",
+     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+    }
+   ]
+  }
+ ]
 }

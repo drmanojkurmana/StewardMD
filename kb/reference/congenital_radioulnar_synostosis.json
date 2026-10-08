@@ -1,76 +1,171 @@
 {
-  "id": "congenital_radioulnar_synostosis",
-  "name": "Congenital radioulnar synostosis",
-  "aliases": [
-    "radioulnar synostosis",
-    "proximal radioulnar synostosis",
-    "congenital forearm synostosis",
-    "congenital fusion of the forearm bones"
+ "id": "congenital_radioulnar_synostosis",
+ "name": "Congenital radioulnar synostosis",
+ "aliases": [
+  "radioulnar synostosis",
+  "proximal radioulnar synostosis",
+  "congenital forearm synostosis",
+  "congenital fusion of the forearm bones"
+ ],
+ "class": "non_infective",
+ "system": "Paediatric orthopaedics",
+ "specialty": "Paediatric Hand & Upper Limb",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Green's Operative Hand Surgery / Tachdjian's Pediatric Orthopaedics",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A bony or fibrous bridge unites the proximal radius and ulna, so forearm rotation (pronation and supination) is absent or severely restricted while the elbow and wrist may move normally",
+   "The forearm is characteristically fixed in pronation, and the degree of fixed pronation determines the functional disability",
+   "Presentation is often delayed because children compensate with shoulder and wrist motion; difficulty with supination-dependent tasks (accepting coins, catching, self-feeding) prompts recognition",
+   "It is frequently bilateral and may be associated with chromosomal abnormalities (including sex-chromosome aneuploidies) and other syndromes",
+   "Radiographs confirm the proximal fusion; the radial head may be absent, hypoplastic, or dislocated posteriorly",
+   "Mild deformity with acceptable pronation frequently needs no treatment, and surgery is considered only for severe fixed pronation limiting function",
+   "Surgery is usually a derotational osteotomy to reposition the forearm nearer neutral rather than an attempt to restore rotation, because recreating a mobile joint is unreliable and prone to re-fusion"
   ],
-  "class": "non_infective",
-  "system": "Paediatric orthopaedics",
-  "specialty": "Paediatric Hand & Upper Limb",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Green's Operative Hand Surgery / Tachdjian's Pediatric Orthopaedics",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A bony or fibrous bridge unites the proximal radius and ulna, so forearm rotation (pronation and supination) is absent or severely restricted while the elbow and wrist may move normally",
-      "The forearm is characteristically fixed in pronation, and the degree of fixed pronation determines the functional disability",
-      "Presentation is often delayed because children compensate with shoulder and wrist motion; difficulty with supination-dependent tasks (accepting coins, catching, self-feeding) prompts recognition",
-      "It is frequently bilateral and may be associated with chromosomal abnormalities (including sex-chromosome aneuploidies) and other syndromes",
-      "Radiographs confirm the proximal fusion; the radial head may be absent, hypoplastic, or dislocated posteriorly",
-      "Mild deformity with acceptable pronation frequently needs no treatment, and surgery is considered only for severe fixed pronation limiting function",
-      "Surgery is usually a derotational osteotomy to reposition the forearm nearer neutral rather than an attempt to restore rotation, because recreating a mobile joint is unreliable and prone to re-fusion"
+  "pathophysiology": "Early in limb development the proximal radius and ulna share a common cartilaginous anlage and normally undergo longitudinal segmentation to separate; congenital radioulnar synostosis reflects a failure of this differentiation, leaving the bones fused proximally. Because the forearm forms in a pronated position, the fused segment locks the limb in fixed pronation. The abnormality is therefore one of failure of differentiation and segmentation rather than of formation, and it may be linked to genetic or chromosomal disturbances, which explains its frequent bilaterality and syndromic associations.",
+  "additionalDifferentials": [
+   "Post-traumatic (acquired) radioulnar synostosis",
+   "Congenital dislocation of the radial head without synostosis",
+   "Pulled elbow (nursemaid's elbow), which is transient",
+   "Arthrogryposis affecting the elbow and forearm",
+   "Multiple hereditary exostoses tethering the forearm",
+   "Malunion after a forearm fracture limiting rotation"
+  ],
+  "additionalInvestigations": [
+   "Anteroposterior and lateral radiographs of the forearm and elbow to confirm proximal fusion and assess the radial head",
+   "CT with three-dimensional reconstruction to define the bony bridge before surgical planning",
+   "Clinical measurement of the forearm rotation arc and the fixed pronation angle",
+   "Karyotype or targeted genetic evaluation when syndromic features or bilateral involvement are present",
+   "Examination for associated musculoskeletal anomalies in other limbs, the hips, and the knees"
+  ],
+  "redFlags": [
+   "Severe fixed hyperpronation of both forearms causing major functional limitation",
+   "An associated syndromic or chromosomal disorder requiring broader assessment",
+   "Neurovascular compromise or compartment syndrome following a large corrective osteotomy"
+  ],
+  "prognosis": "Many children function surprisingly well through compensatory shoulder and wrist motion and need no intervention; when correction is required, derotational osteotomy reliably improves the resting position of the hand, although forearm rotation itself is not restored and large corrections carry a risk of neurovascular complications.",
+  "pitfalls": [
+   "Attempting to excise the synostosis to restore rotation, which commonly re-fuses and disappoints",
+   "Over-correcting the derotational osteotomy and precipitating compartment syndrome or neurovascular injury",
+   "Missing bilaterality and an associated syndrome",
+   "Delaying diagnosis because unilateral cases compensate so well"
+  ],
+  "references": [
+   "Green's Operative Hand Surgery",
+   "Tachdjian's Pediatric Orthopaedics"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Manage mild deformity with acceptable resting pronation by observation alone, since compensatory shoulder and wrist motion usually preserves function",
+   "Reserve derotational osteotomy of the fused segment for severe fixed pronation that limits function, repositioning the hand into a more neutral posture (forearm rotation itself is not restored)",
+   "Provide occupational therapy and adaptive strategies for supination-dependent tasks such as self-feeding and receiving objects",
+   "Monitor for neurovascular compromise after large corrections, staging or limiting the correction to reduce this risk",
+   "Arrange karyotype or targeted genetic evaluation when the synostosis is bilateral or syndromic, and screen for associated anomalies of the other limbs, hips and knees",
+   "Offer genetic counselling to families given the association with chromosomal and syndromic disorders"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "congenital_radioulnar_synostosis-pathway",
+   "title": "Congenital radioulnar synostosis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A bony or fibrous bridge unites the proximal radius and ulna, so forearm rotation (pronation and supination) is absent or severely restricted while the elbow and wrist may move normally",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Severe fixed hyperpronation of both forearms causing major functional limitation",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Anteroposterior and lateral radiographs of the forearm and elbow to confirm proximal fusion and assess the radial head, CT with three-dimensional reconstruction to define the bony bridge before surgical planning, Clinical"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Manage mild deformity with acceptable resting pronation by observation alone, since compensatory shoulder and wrist motion usually preserves function"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attempting to excise the synostosis to restore rotation, which commonly re-fuses and disappoints"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of congenital radioulnar synostosis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "congenital_radioulnar_synostosis-matrix",
+   "title": "Congenital radioulnar synostosis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A bony or fibrous bridge unites the proximal radius and ulna, so forearm rotation (pronation and supination) is absent or",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Early in limb development the proximal radius and ulna share a common cartilaginous anlage and normally undergo longitudinal segmentation to separate; congenital radioulnar synostosis reflects a failure of this differentiation, leaving the bones fused proximally. Because the forearm forms in a pronated position, the fused segment locks the limb in fixed pronation. The abnormality is therefore one of failure of differentiation and segmentation rather than of formation, and it may be linked to genetic or chromosomal disturbances, which explains its frequent bilaterality and syndromic associations.",
-    "additionalDifferentials": [
-      "Post-traumatic (acquired) radioulnar synostosis",
-      "Congenital dislocation of the radial head without synostosis",
-      "Pulled elbow (nursemaid's elbow), which is transient",
-      "Arthrogryposis affecting the elbow and forearm",
-      "Multiple hereditary exostoses tethering the forearm",
-      "Malunion after a forearm fracture limiting rotation"
+    [
+     "Key Investigations",
+     "Anteroposterior and lateral radiographs of the forearm and elbow to confirm proximal fusion and assess the radial head, CT with",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Anteroposterior and lateral radiographs of the forearm and elbow to confirm proximal fusion and assess the radial head",
-      "CT with three-dimensional reconstruction to define the bony bridge before surgical planning",
-      "Clinical measurement of the forearm rotation arc and the fixed pronation angle",
-      "Karyotype or targeted genetic evaluation when syndromic features or bilateral involvement are present",
-      "Examination for associated musculoskeletal anomalies in other limbs, the hips, and the knees"
+    [
+     "Primary Differentials",
+     "Post-traumatic (acquired) radioulnar synostosis, Congenital dislocation of the radial head without synostosis, Pulled elbow",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Severe fixed hyperpronation of both forearms causing major functional limitation",
-      "An associated syndromic or chromosomal disorder requiring broader assessment",
-      "Neurovascular compromise or compartment syndrome following a large corrective osteotomy"
+    [
+     "Management Strategy",
+     "Manage mild deformity with acceptable resting pronation by observation alone, since compensatory shoulder and wrist motion",
+     "Core treatment modality"
     ],
-    "prognosis": "Many children function surprisingly well through compensatory shoulder and wrist motion and need no intervention; when correction is required, derotational osteotomy reliably improves the resting position of the hand, although forearm rotation itself is not restored and large corrections carry a risk of neurovascular complications.",
-    "pitfalls": [
-      "Attempting to excise the synostosis to restore rotation, which commonly re-fuses and disappoints",
-      "Over-correcting the derotational osteotomy and precipitating compartment syndrome or neurovascular injury",
-      "Missing bilaterality and an associated syndrome",
-      "Delaying diagnosis because unilateral cases compensate so well"
-    ],
-    "references": [
-      "Green's Operative Hand Surgery",
-      "Tachdjian's Pediatric Orthopaedics"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Manage mild deformity with acceptable resting pronation by observation alone, since compensatory shoulder and wrist motion usually preserves function",
-      "Reserve derotational osteotomy of the fused segment for severe fixed pronation that limits function, repositioning the hand into a more neutral posture (forearm rotation itself is not restored)",
-      "Provide occupational therapy and adaptive strategies for supination-dependent tasks such as self-feeding and receiving objects",
-      "Monitor for neurovascular compromise after large corrections, staging or limiting the correction to reduce this risk",
-      "Arrange karyotype or targeted genetic evaluation when the synostosis is bilateral or syndromic, and screen for associated anomalies of the other limbs, hips and knees",
-      "Offer genetic counselling to families given the association with chromosomal and syndromic disorders"
+    [
+     "Clinical Pitfall",
+     "Attempting to excise the synostosis to restore rotation, which commonly re-fuses and disappoints",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for congenital radioulnar synostosis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "congenital-radioulnar-synostosis-real-image",
+   "title": "Congenital radioulnar synostosis: Diagnostic Musculoskeletal Radiograph",
+   "type": "xray",
+   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
+   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
+   "annotations": [
+    {
+     "label": "Cortical Margins",
+     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
+    },
+    {
+     "label": "Trabecular Architecture",
+     "description": "Medullary bone density, lucencies, and subchondral mineralization."
+    },
+    {
+     "label": "Joint Articulation",
+     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+    }
+   ]
+  }
+ ]
 }

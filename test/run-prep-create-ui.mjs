@@ -88,10 +88,12 @@ let chromeErr = ""; chrome.stderr.on("data", (d) => { chromeErr += d; });
 let msgId = 1; const pending = new Map(); let ws, sessionId; const errors = [];
 const call = (m, p) => { const i = msgId++; return new Promise((r) => { pending.set(i, r); ws.send(JSON.stringify({ id: i, method: m, params: p || {}, sessionId })); }); };
 const ev = async (e) => { const r = await call("Runtime.evaluate", { expression: `(function(){try{${e}}catch(x){return "ERR:"+String(x&&x.message||x)}})()`, returnByValue: true }); return r.result && r.result.result ? r.result.result.value : undefined; };
+// Screenshots land on the final frame: finite animations (entrances, ring draw) are finished first; loops keep running.
+const shotCall = async (p) => { await ev(`document.getAnimations().forEach(function (a) { try { var t = a.effect && a.effect.getTiming(); if (t && t.iterations !== Infinity) a.finish(); } catch (e) {} }); return 1;`); return call("Page.captureScreenshot", p); };
 const until = async (e, ms = 10000) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { if (await ev(e) === true) return true; await sleep(150); } return false; };
 let fails = 0; const ok = (c, m) => { console.log((c ? "PASS " : "FAIL ") + m); if (!c) fails++; };
 const click = (sel) => ev(`var b=document.querySelector(${JSON.stringify(sel)}); if(!b) return "missing"; b.click(); return 1;`);
-const shot = async (name) => { if (!process.env.SHOTS) return; const r = await call("Page.captureScreenshot", { format: "png" }); if (r.result) writeFileSync(join(process.env.SHOTS, "prep-c-" + name + ".png"), Buffer.from(r.result.data, "base64")); };
+const shot = async (name) => { if (!process.env.SHOTS) return; await ev(process.env.PN_LIGHT ? `if (!document.getElementById("pnNoTr")) { var t = document.createElement("style"); t.id = "pnNoTr"; t.textContent = "*{transition:none!important}"; document.head.appendChild(t); } document.body.classList.remove("dark"); return 1;` : `document.body.classList.add("dark"); return 1;`); await sleep(150); const r = await shotCall({ format: "png" }); if (r.result) writeFileSync(join(process.env.SHOTS, "prep-c-" + (process.env.PN_LIGHT ? "light-" : "") + name + ".png"), Buffer.from(r.result.data, "base64")); };
 const screenText = () => ev(`var r=document.getElementById("smdPrep"); return r ? r.innerText : "";`);
 // Every visible button in the current Layer C screen is at least 44 CSS px tall (offsetHeight: the app zooms the page to 0.95).
 const smallButtons = () => ev(`var r=document.getElementById("smdPrep"); if(!r) return "none"; return [].filter.call(r.querySelectorAll("button"), function(b){ return b.offsetParent && b.offsetHeight < 44; }).map(function(b){ return (b.getAttribute("data-act")||"") + ":" + b.offsetHeight; }).join(",");`);
@@ -148,7 +150,7 @@ try {
   // Every /api/ request stops here and is answered locally: serve.mjs would otherwise proxy it to a real host.
   await call("Fetch.enable", { patterns: [{ urlPattern: "*/api/*", requestStage: "Request" }] });
   await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
-  await call("Page.addScriptToEvaluateOnNewDocument", { source: `window.SMD_PREP_BASE=${JSON.stringify(FIX)}; window.SMD_PREP_BANK_API=${JSON.stringify(FIX + "api/")}; window.confirm=function(){return true;}; window.SMD_PREP_ONBOARD=false; try{localStorage.setItem("smd_prep","1");}catch(e){}` });
+  await call("Page.addScriptToEvaluateOnNewDocument", { source: `window.SMD_PREP_BANK_VER="v1"; window.SMD_PREP_BASE=${JSON.stringify(FIX)}; window.SMD_PREP_BANK_API=${JSON.stringify(FIX + "api/")}; window.confirm=function(){return true;}; window.SMD_PREP_ONBOARD=false; try{localStorage.setItem("smd_prep","1");}catch(e){}` });
   const clean = `["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); return 1;`;
   await call("Page.navigate", { url: BASE });
   ok(await until(`return !!(window.PREP && window.SMD_showHome);`, 30000), "app boots with the PrepNucleus loader");
@@ -197,12 +199,12 @@ try {
   ok(factsSents[0].h === "Iron deficiency anaemia" && factsSents[15].h === "Haemolytic anaemia" && factsSents[5].tx === "Call his son on [removed] before the transfusion." && !factsSents.some((s) => /^\[removed\]/.test(s.tx)), "sentence headings come from the note headings; a line left empty by the scrub is not sent");
   const text = await screenText();
   ok(/14\s+new questions/.test(text) && /14 in the deck/.test(text), "progress result: 14 new questions" + (/14\s+new/.test(text) ? "" : ": " + text.slice(0, 200)));
-  ok(/AI cost so far: Rs /.test(text) && /4 of 10 decks this month, 1 of 3 today/.test(text), "shows the cost line and the cap line from the server's counters");
+  ok(!/Cost so far|tokens\)/.test(text) && !/\bAI\b/.test(text) && /4 of 10 decks this month, 1 of 3 today/.test(text), "no cost or token line for the student (owner rule); the cap line comes from the server's counters");
   ok(!DASH.test(text), "no em or en dash on screen");
 
   // ---- the deck in the list
   await click('#smdPrep [data-act="c-done"]');
-  ok(await until(`var d=document.querySelectorAll("#pcDecks .pc-deck"); return d.length === 1 && /14 questions/.test(d[0].textContent) && /AI-generated educational content/.test(d[0].textContent);`, 10000), "Your decks lists the deck: 14 questions, labelled AI-generated");
+  ok(await until(`var d=document.querySelectorAll("#pcDecks .pc-deck"); return d.length === 1 && /14 questions/.test(d[0].textContent) && !/AI-generated/.test(d[0].textContent);`, 10000), "Your decks lists the deck: 14 questions, no AI label (owner rule)");
   ok(await smallButtons() === "", "deck list: every button is at least 44 px tall " + await smallButtons());
   ok(await unlabelled() === 0, "every button has a label");
   ok(/4 of 10 decks this month/.test(await screenText()), "the cap line shows on Your decks");
@@ -214,7 +216,7 @@ try {
   await click('#smdPrep [data-act="c-prac"]');
   ok(await until(`return !!document.querySelector("#smdPrep .pn-opt");`, 10000), "Practise opens the shared question runner");
   await click('#smdPrep .pn-opt[data-k="0"]');
-  ok(await until(`var f=document.querySelector("#smdPrep .pn-fb"); return !!f && /Correct/.test(f.textContent) && /AI-generated, auto-checked/.test(f.textContent);`, 5000), "the answer is marked and the item is labelled AI-generated");
+  ok(await until(`var f=document.querySelector("#smdPrep .pn-fb"); return !!f && /Correct/.test(f.textContent) && !/AI-generated/.test(f.textContent);`, 5000), "the answer is marked, with no AI label (owner rule)");
   const keys = await ev(`return Object.keys(JSON.parse(localStorage.getItem("smd_prep_v1")).cards).join(",");`);
   ok(keys.split(",").some((k) => k.indexOf("p:deck-" + deckId + ":q_") === 0), "an FSRS card is written under p:deck-<id>: " + keys.slice(0, 80));
   await shot("practise");
@@ -231,7 +233,7 @@ try {
   await click('#smdPrep [data-act="c-cards"]');
   ok(await until(`return !!document.getElementById("pcFlip") && !!document.querySelector("#pcCardsView .pc-front");`, 5000), "Cards shows a front and Show answer");
   await click("#pcFlip");
-  ok(await until(`var b=document.getElementById("pcBack"); return !!b && /From your source: (Iron deficiency anaemia|MEGALOBLASTIC ANAEMIA|Haemolytic anaemia)/.test(b.textContent);`, 5000), "the back shows the fact and the section it came from");
+  ok(await until(`var b=document.getElementById("pcBack"); return !!b && b.textContent.trim().length > 0 && !/From your source|AI-generated/.test(b.textContent);`, 5000), "the back shows the fact, with no source or AI line (owner rule)");
   ok(await smallButtons() === "", "cards: every button is at least 44 px tall " + await smallButtons());
   await shot("card");
   await click('#smdPrep [data-act="c-kyes"]');
@@ -330,7 +332,7 @@ try {
   ok(/1 page read by on-device OCR/.test(await screenText()), "the progress screen says a page was read by OCR");
   ok(!JSON.stringify(api.calls).includes("data:image"), "no image is ever sent to the server");
   await click('#smdPrep [data-act="c-done"]');
-  ok(await until(`return [].some.call(document.querySelectorAll("#pcDecks .pc-deck"), function (d) { return /Marrow scan/.test(d.textContent) && /partly read by OCR/.test(d.textContent); });`, 5000), "the deck list marks the deck as partly read by OCR");
+  ok(await until(`return [].some.call(document.querySelectorAll("#pcDecks .pc-deck"), function (d) { return /Marrow scan/.test(d.textContent) && /Partly read by OCR/.test(d.textContent); });`, 5000), "the deck list marks the deck as partly read by OCR");
   await ev(`delete window.SMD_NATIVE; return 1;`);
 
   ok(api.other.every((u) => /\/api\//.test(u)), "every other /api/ request was answered locally (" + api.other.length + "), none left the machine");

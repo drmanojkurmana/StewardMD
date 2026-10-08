@@ -5,7 +5,19 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Outpatient, ward, primary care",
- "aliases": ["IDA", "iron deficiency", "microcytic anaemia", "low ferritin", "oral iron", "IV iron", "ferric carboxymaltose", "FCM", "iron sucrose", "Anaemia Mukt Bharat", "AMB"],
+ "aliases": [
+  "IDA",
+  "iron deficiency",
+  "microcytic anaemia",
+  "low ferritin",
+  "oral iron",
+  "IV iron",
+  "ferric carboxymaltose",
+  "FCM",
+  "iron sucrose",
+  "Anaemia Mukt Bharat",
+  "AMB"
+ ],
  "summary": "Confirm iron deficiency with ferritin (below 15 micrograms/L diagnostic, below 45 suggestive, higher with inflammation), start once-daily or alternate-day oral iron, switch to IV iron if oral fails or is unsuitable, and always find the cause, including bidirectional endoscopy in men and postmenopausal women.",
  "sections": [
   {
@@ -85,15 +97,144 @@
   }
  ],
  "drugs": [
-  { "name": "Ferrous sulfate", "dose": "200 mg tablet (65 mg elemental iron) orally once daily or on alternate days", "notes": "Continue about 3 months after Hb normalises." },
-  { "name": "Ferric carboxymaltose", "dose": "20 mg/kg IV per infusion, maximum 1000 mg, over at least 15 minutes; may repeat after 7 days", "notes": "Monitor phosphate with repeated doses. Avoid in first trimester and during bacteraemia." },
-  { "name": "Iron sucrose", "dose": "200 mg IV over 30 minutes per dose, up to 3 times a week, until the total deficit is replaced", "notes": "Needs multiple visits." },
-  { "name": "Albendazole", "dose": "400 mg orally, single dose", "notes": "Deworming where hookworm is endemic." }
+  {
+   "name": "Ferrous sulfate",
+   "dose": "200 mg tablet (65 mg elemental iron) orally once daily or on alternate days",
+   "notes": "Continue about 3 months after Hb normalises."
+  },
+  {
+   "name": "Ferric carboxymaltose",
+   "dose": "20 mg/kg IV per infusion, maximum 1000 mg, over at least 15 minutes; may repeat after 7 days",
+   "notes": "Monitor phosphate with repeated doses. Avoid in first trimester and during bacteraemia."
+  },
+  {
+   "name": "Iron sucrose",
+   "dose": "200 mg IV over 30 minutes per dose, up to 3 times a week, until the total deficit is replaced",
+   "notes": "Needs multiple visits."
+  },
+  {
+   "name": "Albendazole",
+   "dose": "400 mg orally, single dose",
+   "notes": "Deworming where hookworm is endemic."
+  }
  ],
  "sources": [
-  { "org": "British Society of Gastroenterology", "title": "BSG guidelines for the management of iron deficiency anaemia in adults", "year": 2021, "url": "https://pubmed.ncbi.nlm.nih.gov/34497146/" },
-  { "org": "American Gastroenterological Association", "title": "AGA clinical practice update on management of iron deficiency anemia: expert review", "year": 2024, "url": "https://pubmed.ncbi.nlm.nih.gov/38864796/" },
-  { "org": "American Gastroenterological Association", "title": "AGA clinical practice guidelines on the gastrointestinal evaluation of iron deficiency anemia", "year": 2020, "url": "https://www.gastrojournal.org/article/S0016-5085(20)34847-2/fulltext" }
+  {
+   "org": "British Society of Gastroenterology",
+   "title": "BSG guidelines for the management of iron deficiency anaemia in adults",
+   "year": 2021,
+   "url": "https://pubmed.ncbi.nlm.nih.gov/34497146/"
+  },
+  {
+   "org": "American Gastroenterological Association",
+   "title": "AGA clinical practice update on management of iron deficiency anemia: expert review",
+   "year": 2024,
+   "url": "https://pubmed.ncbi.nlm.nih.gov/38864796/"
+  },
+  {
+   "org": "American Gastroenterological Association",
+   "title": "AGA clinical practice guidelines on the gastrointestinal evaluation of iron deficiency anemia",
+   "year": 2020,
+   "url": "https://www.gastrojournal.org/article/S0016-5085(20)34847-2/fulltext"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "iron-deficiency-anaemia-pathway",
+   "title": "Iron deficiency anaemia (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Anaemia: Hb below 13 g/dL in men and below 12 g/dL in non-pregnant women. Confirm iron deficiency with iron studies before investigating the cause.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Serum ferritin is the single most useful test: below 15 micrograms/L is highly specific; below 30 generally indicates iron deficiency; AGA uses a cut-off of 45 ng/mL for better sensitivity.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "History: diet (vegetarian), menstrual loss, pregnancies, blood donation, GI symptoms, NSAIDs or antithrombotics, previous gastric or bariatric surgery, family history of GI cancer or bleeding disorder."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Use IV iron if oral iron is not tolerated or ineffective, absorption is impaired (active IBD, coeliac disease, bariatric surgery), there is ongoing blood loss, rapid correction is needed, or in CKD and heart failure."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Check FBC every 4 weeks until Hb is normal, then about 3-monthly for a year and 6-monthly for 2 to 3 years to detect recurrence."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for iron deficiency anaemia (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "iron-deficiency-anaemia-summary-matrix",
+   "title": "Iron deficiency anaemia (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Anaemia: Hb below 13 g/dL in men and below 12 g/dL in non-pregnant women. Confirm iron deficiency with iron studies before investigating",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Use IV iron if oral iron is not tolerated or ineffective, absorption is impaired (active IBD, coeliac disease, bariatric surgery), there is",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "History: diet (vegetarian), menstrual loss, pregnancies, blood donation, GI symptoms, NSAIDs or antithrombotics, previous gastric or",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Ferrous sulfate: 200 mg tablet (65 mg elemental iron) orally once daily or on alternate days",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Treating with iron but not looking for GI blood loss or cancer in men and postmenopausal women.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for iron deficiency anaemia (adult)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "iron-deficiency-anaemia-real-image",
+   "title": "Iron deficiency anaemia (adult): Diagnostic Peripheral Blood Smear Examination",
+   "type": "diagram",
+   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
+   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
+   "annotations": [
+    {
+     "label": "Erythrocyte Indices",
+     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
+    },
+    {
+     "label": "Leukocyte Differential",
+     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
+    },
+    {
+     "label": "Platelet Count",
+     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+    }
+   ]
+  }
+ ]
 }

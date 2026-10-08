@@ -1,80 +1,175 @@
 {
-  "id": "radiation_enteritis",
-  "name": "Radiation enteritis",
-  "aliases": [
-    "radiation enteropathy"
+ "id": "radiation_enteritis",
+ "name": "Radiation enteritis",
+ "aliases": [
+  "radiation enteropathy"
+ ],
+ "class": "non_infective",
+ "system": "Gastrointestinal",
+ "specialty": "Gastroenterology / Clinical oncology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Gastroenterology and oncology references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Small-bowel injury from abdominal or pelvic radiotherapy, in acute and chronic forms",
+   "Acute enteritis causes nausea, cramping, diarrhoea and malabsorption during and shortly after treatment and usually settles",
+   "Chronic radiation enteropathy develops months to years later with obstruction, malabsorption, bleeding or fistulae",
+   "Fixed loops of small bowel in the pelvis (for example after surgery) are especially vulnerable",
+   "Chronic disease reflects progressive obliterative endarteritis, ischaemia and fibrosis",
+   "Management is largely supportive and nutritional; surgery for strictures or fistulae is high-risk in irradiated tissue"
   ],
-  "class": "non_infective",
-  "system": "Gastrointestinal",
-  "specialty": "Gastroenterology / Clinical oncology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Gastroenterology and oncology references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Small-bowel injury from abdominal or pelvic radiotherapy, in acute and chronic forms",
-      "Acute enteritis causes nausea, cramping, diarrhoea and malabsorption during and shortly after treatment and usually settles",
-      "Chronic radiation enteropathy develops months to years later with obstruction, malabsorption, bleeding or fistulae",
-      "Fixed loops of small bowel in the pelvis (for example after surgery) are especially vulnerable",
-      "Chronic disease reflects progressive obliterative endarteritis, ischaemia and fibrosis",
-      "Management is largely supportive and nutritional; surgery for strictures or fistulae is high-risk in irradiated tissue"
+  "pathophysiology": "Radiation enteritis arises from ionising radiation injury to the rapidly dividing small-bowel mucosa and to the bowel vasculature. Acute injury causes mucosal cell loss, villous blunting and inflammation with malabsorption and diarrhoea, and usually recovers. Chronic radiation enteropathy results from progressive submucosal fibrosis and obliterative endarteritis, producing ischaemia, strictures, dysmotility, bacterial overgrowth, bleeding from telangiectasia and fistula formation. Risk relates to dose, technique and factors that fix bowel loops within the radiation field.",
+  "additionalDifferentials": [
+   "Recurrent malignancy causing obstruction",
+   "Inflammatory bowel disease",
+   "Small intestinal bacterial overgrowth",
+   "Adhesional small-bowel obstruction",
+   "Coeliac or other malabsorptive disease"
+  ],
+  "additionalInvestigations": [
+   "History of abdominal/pelvic radiotherapy",
+   "Cross-sectional imaging or contrast studies of the small bowel",
+   "Assessment of nutritional status and malabsorption",
+   "Endoscopy where accessible bowel is involved",
+   "Evaluation for bacterial overgrowth and bile acid malabsorption"
+  ],
+  "redFlags": [
+   "Small-bowel obstruction",
+   "Enteric fistula formation",
+   "Significant gastrointestinal bleeding",
+   "Severe malnutrition or features suggesting recurrent tumour"
+  ],
+  "prognosis": "Acute enteritis usually resolves after treatment; chronic enteropathy is progressive and difficult to manage, with surgery carrying high complication rates in irradiated bowel.",
+  "pitfalls": [
+   "Attributing chronic symptoms to recurrent cancer without considering radiation enteropathy (and vice versa)",
+   "Underestimating the surgical risk in irradiated bowel",
+   "Overlooking bacterial overgrowth and bile acid malabsorption as treatable contributors",
+   "Neglecting nutritional support"
+  ],
+  "references": [
+   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+   "Clinical oncology references (standard reference)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Acute radiation enteritis is usually self limited, resolving within two to six months, so early management is symptomatic control of diarrhea, cramping and urgency plus attention to hydration",
+   "Antidiarrheal agents, antispasmodics, and a low residue low fat diet are commonly used during treatment to reduce stool frequency and mucosal irritation",
+   "Bile acid sequestrants can be considered when bile salt malabsorption is contributing to radiotherapy induced diarrhea",
+   "Radiotherapy is not routinely interrupted for mild to moderate acute enteritis; treatment breaks are decided case by case for severe symptoms",
+   "In chronic late phase enteropathy, evaluate for and treat bacterial overgrowth, especially when strictures or enterocolic fistulas are present",
+   "Distinguish radiation induced pancolitis from true inflammatory bowel disease when a colitis picture develops, since management differs",
+   "For late radiation proctitis, Grade 2 rectal bleeding can be treated with steroid suppositories, sitz baths, and increased dietary fiber",
+   "Avoid deep rectal biopsies and cauterization procedures unless absolutely necessary due to increased risk of mucosal trauma and fistula formation",
+   "For proctitis not responding to conservative measures, argon beam plasma laser coagulation can reduce rectal bleeding episodes, and hyperbaric oxygen therapy may also help",
+   "Reserve surgery for structural complications such as obstruction, stricture, or fistula, recognizing that operating on irradiated bowel carries a high complication rate",
+   "When radiation enteritis contributes to malignant bowel obstruction, use standard supportive measures including nasogastric decompression, intravenous hydration, and antisecretory agents, steroids or scopolamine, plus analgesics and antiemetics",
+   "Consider home parenteral nutrition only in patients with good performance status, caretaker support, and an expected survival long enough to justify it, with quality of life as the primary consideration in the palliative setting",
+   "Monitor nutritional status, weight, and signs of malabsorption or bacterial overgrowth longitudinally in chronic radiation enteropathy",
+   "Refer to gastroenterology, colorectal surgery, or nutrition and palliative care when conservative measures fail, when obstruction, stricture or fistula develops, or when parenteral nutrition is being considered"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "radiation_enteritis-pathway",
+   "title": "Radiation enteritis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Small-bowel injury from abdominal or pelvic radiotherapy, in acute and chronic forms",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Small-bowel obstruction",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: History of abdominal/pelvic radiotherapy, Cross-sectional imaging or contrast studies of the small bowel, Assessment of nutritional status and malabsorption"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Acute radiation enteritis is usually self limited, resolving within two to six months, so early management is symptomatic control of diarrhea, cramping and urgency plus attention to hydration"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing chronic symptoms to recurrent cancer without considering radiation enteropathy (and vice versa)"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of radiation enteritis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "radiation_enteritis-matrix",
+   "title": "Radiation enteritis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Small-bowel injury from abdominal or pelvic radiotherapy, in acute and chronic forms",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Radiation enteritis arises from ionising radiation injury to the rapidly dividing small-bowel mucosa and to the bowel vasculature. Acute injury causes mucosal cell loss, villous blunting and inflammation with malabsorption and diarrhoea, and usually recovers. Chronic radiation enteropathy results from progressive submucosal fibrosis and obliterative endarteritis, producing ischaemia, strictures, dysmotility, bacterial overgrowth, bleeding from telangiectasia and fistula formation. Risk relates to dose, technique and factors that fix bowel loops within the radiation field.",
-    "additionalDifferentials": [
-      "Recurrent malignancy causing obstruction",
-      "Inflammatory bowel disease",
-      "Small intestinal bacterial overgrowth",
-      "Adhesional small-bowel obstruction",
-      "Coeliac or other malabsorptive disease"
+    [
+     "Key Investigations",
+     "History of abdominal/pelvic radiotherapy, Cross-sectional imaging or contrast studies of the small bowel, Assessment of",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "History of abdominal/pelvic radiotherapy",
-      "Cross-sectional imaging or contrast studies of the small bowel",
-      "Assessment of nutritional status and malabsorption",
-      "Endoscopy where accessible bowel is involved",
-      "Evaluation for bacterial overgrowth and bile acid malabsorption"
+    [
+     "Primary Differentials",
+     "Recurrent malignancy causing obstruction, Inflammatory bowel disease, Small intestinal bacterial overgrowth",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Small-bowel obstruction",
-      "Enteric fistula formation",
-      "Significant gastrointestinal bleeding",
-      "Severe malnutrition or features suggesting recurrent tumour"
+    [
+     "Management Strategy",
+     "Acute radiation enteritis is usually self limited, resolving within two to six months, so early management is symptomatic control",
+     "Core treatment modality"
     ],
-    "prognosis": "Acute enteritis usually resolves after treatment; chronic enteropathy is progressive and difficult to manage, with surgery carrying high complication rates in irradiated bowel.",
-    "pitfalls": [
-      "Attributing chronic symptoms to recurrent cancer without considering radiation enteropathy (and vice versa)",
-      "Underestimating the surgical risk in irradiated bowel",
-      "Overlooking bacterial overgrowth and bile acid malabsorption as treatable contributors",
-      "Neglecting nutritional support"
-    ],
-    "references": [
-      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-      "Clinical oncology references (standard reference)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Acute radiation enteritis is usually self limited, resolving within two to six months, so early management is symptomatic control of diarrhea, cramping and urgency plus attention to hydration",
-      "Antidiarrheal agents, antispasmodics, and a low residue low fat diet are commonly used during treatment to reduce stool frequency and mucosal irritation",
-      "Bile acid sequestrants can be considered when bile salt malabsorption is contributing to radiotherapy induced diarrhea",
-      "Radiotherapy is not routinely interrupted for mild to moderate acute enteritis; treatment breaks are decided case by case for severe symptoms",
-      "In chronic late phase enteropathy, evaluate for and treat bacterial overgrowth, especially when strictures or enterocolic fistulas are present",
-      "Distinguish radiation induced pancolitis from true inflammatory bowel disease when a colitis picture develops, since management differs",
-      "For late radiation proctitis, Grade 2 rectal bleeding can be treated with steroid suppositories, sitz baths, and increased dietary fiber",
-      "Avoid deep rectal biopsies and cauterization procedures unless absolutely necessary due to increased risk of mucosal trauma and fistula formation",
-      "For proctitis not responding to conservative measures, argon beam plasma laser coagulation can reduce rectal bleeding episodes, and hyperbaric oxygen therapy may also help",
-      "Reserve surgery for structural complications such as obstruction, stricture, or fistula, recognizing that operating on irradiated bowel carries a high complication rate",
-      "When radiation enteritis contributes to malignant bowel obstruction, use standard supportive measures including nasogastric decompression, intravenous hydration, and antisecretory agents, steroids or scopolamine, plus analgesics and antiemetics",
-      "Consider home parenteral nutrition only in patients with good performance status, caretaker support, and an expected survival long enough to justify it, with quality of life as the primary consideration in the palliative setting",
-      "Monitor nutritional status, weight, and signs of malabsorption or bacterial overgrowth longitudinally in chronic radiation enteropathy",
-      "Refer to gastroenterology, colorectal surgery, or nutrition and palliative care when conservative measures fail, when obstruction, stricture or fistula develops, or when parenteral nutrition is being considered"
+    [
+     "Clinical Pitfall",
+     "Attributing chronic symptoms to recurrent cancer without considering radiation enteropathy (and vice versa)",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for radiation enteritis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "radiation-enteritis-real-image",
+   "title": "Radiation enteritis: Diagnostic Abdominal Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
+   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
+   "annotations": [
+    {
+     "label": "Solid Viscera",
+     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
+    },
+    {
+     "label": "Gastrointestinal Tract",
+     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
+    },
+    {
+     "label": "Mesentery & Peritoneum",
+     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+    }
+   ]
+  }
+ ]
 }

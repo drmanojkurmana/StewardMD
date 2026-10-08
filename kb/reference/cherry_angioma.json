@@ -1,79 +1,174 @@
 {
-  "id": "cherry_angioma",
-  "name": "cherry angioma",
-  "aliases": [
-    "Campbell de Morgan spot",
-    "senile angioma",
-    "cherry haemangioma"
+ "id": "cherry_angioma",
+ "name": "cherry angioma",
+ "aliases": [
+  "Campbell de Morgan spot",
+  "senile angioma",
+  "cherry haemangioma"
+ ],
+ "class": "non_infective",
+ "system": "integumentary",
+ "specialty": "dermatology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Rook's Textbook of Dermatology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Presents as a small, bright cherry-red to violaceous dome-shaped papule, most numerous on the trunk of middle-aged and older adults.",
+   "Lesions are usually multiple and increase in number and size with advancing age; they are among the commonest acquired vascular proliferations.",
+   "Diascopy shows only partial blanching because the vascular spaces are relatively fixed, distinguishing them from simple telangiectasia.",
+   "Dermoscopy reveals well-demarcated red or red-blue lacunae separated by pale septa, confirming the vascular nature.",
+   "Traumatised lesions may bleed briskly or thrombose, turning dark and mimicking a melanocytic or vascular malignancy.",
+   "An abrupt eruption of numerous lesions has been associated with pregnancy, certain chemical exposures and some drugs, though most cases are idiopathic.",
+   "No treatment is required; electrocautery, laser or shave removal is used for cosmetic reasons or recurrent bleeding.",
+   "A rapidly enlarging or atypical solitary vascular papule should be biopsied to exclude amelanotic melanoma or other malignancy."
   ],
-  "class": "non_infective",
-  "system": "integumentary",
-  "specialty": "dermatology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Rook's Textbook of Dermatology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Presents as a small, bright cherry-red to violaceous dome-shaped papule, most numerous on the trunk of middle-aged and older adults.",
-      "Lesions are usually multiple and increase in number and size with advancing age; they are among the commonest acquired vascular proliferations.",
-      "Diascopy shows only partial blanching because the vascular spaces are relatively fixed, distinguishing them from simple telangiectasia.",
-      "Dermoscopy reveals well-demarcated red or red-blue lacunae separated by pale septa, confirming the vascular nature.",
-      "Traumatised lesions may bleed briskly or thrombose, turning dark and mimicking a melanocytic or vascular malignancy.",
-      "An abrupt eruption of numerous lesions has been associated with pregnancy, certain chemical exposures and some drugs, though most cases are idiopathic.",
-      "No treatment is required; electrocautery, laser or shave removal is used for cosmetic reasons or recurrent bleeding.",
-      "A rapidly enlarging or atypical solitary vascular papule should be biopsied to exclude amelanotic melanoma or other malignancy."
+  "pathophysiology": "Cherry angiomas are benign proliferations of dilated post-capillary venules and capillaries within the papillary dermis, lined by flattened endothelium and often accompanied by dermal oedema and collagen homogenisation. Increased local expression of angiogenic factors and somatic mutations affecting the GNAQ and GNA11 signalling pathway have been implicated in their development. Their strong association with ageing, and reported clustering during pregnancy or after certain chemical and drug exposures, points to hormonal and environmental modulation of cutaneous angiogenesis. The lesions are stable, non-involuting vascular hamartomatous proliferations without malignant potential.",
+  "additionalDifferentials": [
+   "angiokeratoma",
+   "pyogenic granuloma",
+   "amelanotic or nodular melanoma",
+   "spider naevus",
+   "petechia or purpura",
+   "Kaposi sarcoma",
+   "glomus tumour"
+  ],
+  "additionalInvestigations": [
+   "dermoscopy demonstrating red lacunae",
+   "diascopy to assess blanching",
+   "clinical photography for monitoring multiple lesions",
+   "excisional biopsy of an atypical or rapidly changing lesion",
+   "review of medication and chemical exposure history in eruptive cases"
+  ],
+  "redFlags": [
+   "a rapidly enlarging or ulcerated solitary vascular lesion raising concern for amelanotic melanoma or angiosarcoma",
+   "an eruptive shower of angiomas prompting review of drug and chemical exposures",
+   "persistent bleeding uncontrolled by simple pressure",
+   "atypical dermoscopic features lacking the characteristic lacunar pattern"
+  ],
+  "prognosis": "Cherry angiomas are entirely benign and persist indefinitely without malignant transformation. Cosmetic removal is generally curative, though new lesions continue to appear with age.",
+  "pitfalls": [
+   "Mistaking a thrombosed cherry angioma for a melanocytic lesion because of its dark colour.",
+   "Attributing an eruptive crop solely to ageing and overlooking a drug or chemical trigger.",
+   "Assuming any red papule is benign and missing an amelanotic melanoma or pyogenic granuloma.",
+   "Inadequate haemostasis during removal leading to troublesome bleeding."
+  ],
+  "references": [
+   "Rook's Textbook of Dermatology",
+   "Bolognia Dermatology",
+   "Andrews' Diseases of the Skin"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Reassurance that the lesions are entirely benign vascular proliferations with no malignant potential, so no treatment is required",
+   "Cosmetic removal for unwanted or bothersome lesions by electrodessication, laser such as pulsed-dye or KTP, or shave excision",
+   "Haemostasis with cautery for traumatised or briskly bleeding lesions",
+   "Excisional biopsy and histology of any atypical, rapidly changing or thrombosed lesion to exclude a vascular or melanocytic malignancy",
+   "Review of medication and chemical exposure history where there is an abrupt eruption of numerous lesions",
+   "Advise that new lesions commonly continue to appear with advancing age"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "cherry_angioma-pathway",
+   "title": "cherry angioma: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Presents as a small, bright cherry-red to violaceous dome-shaped papule, most numerous on the trunk of middle-aged and older adults.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: a rapidly enlarging or ulcerated solitary vascular lesion raising concern for amelanotic melanoma or angiosarcoma",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: dermoscopy demonstrating red lacunae, diascopy to assess blanching, clinical photography for monitoring multiple lesions"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Reassurance that the lesions are entirely benign vascular proliferations with no malignant potential, so no treatment is required"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking a thrombosed cherry angioma for a melanocytic lesion because of its dark colour."
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of cherry angioma."
+  }
+ ],
+ "tables": [
+  {
+   "id": "cherry_angioma-matrix",
+   "title": "cherry angioma: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Presents as a small, bright cherry-red to violaceous dome-shaped papule, most numerous on the trunk of middle-aged and older",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Cherry angiomas are benign proliferations of dilated post-capillary venules and capillaries within the papillary dermis, lined by flattened endothelium and often accompanied by dermal oedema and collagen homogenisation. Increased local expression of angiogenic factors and somatic mutations affecting the GNAQ and GNA11 signalling pathway have been implicated in their development. Their strong association with ageing, and reported clustering during pregnancy or after certain chemical and drug exposures, points to hormonal and environmental modulation of cutaneous angiogenesis. The lesions are stable, non-involuting vascular hamartomatous proliferations without malignant potential.",
-    "additionalDifferentials": [
-      "angiokeratoma",
-      "pyogenic granuloma",
-      "amelanotic or nodular melanoma",
-      "spider naevus",
-      "petechia or purpura",
-      "Kaposi sarcoma",
-      "glomus tumour"
+    [
+     "Key Investigations",
+     "dermoscopy demonstrating red lacunae, diascopy to assess blanching, clinical photography for monitoring multiple lesions",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "dermoscopy demonstrating red lacunae",
-      "diascopy to assess blanching",
-      "clinical photography for monitoring multiple lesions",
-      "excisional biopsy of an atypical or rapidly changing lesion",
-      "review of medication and chemical exposure history in eruptive cases"
+    [
+     "Primary Differentials",
+     "angiokeratoma, pyogenic granuloma, amelanotic or nodular melanoma",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "a rapidly enlarging or ulcerated solitary vascular lesion raising concern for amelanotic melanoma or angiosarcoma",
-      "an eruptive shower of angiomas prompting review of drug and chemical exposures",
-      "persistent bleeding uncontrolled by simple pressure",
-      "atypical dermoscopic features lacking the characteristic lacunar pattern"
+    [
+     "Management Strategy",
+     "Reassurance that the lesions are entirely benign vascular proliferations with no malignant potential, so no treatment is required",
+     "Core treatment modality"
     ],
-    "prognosis": "Cherry angiomas are entirely benign and persist indefinitely without malignant transformation. Cosmetic removal is generally curative, though new lesions continue to appear with age.",
-    "pitfalls": [
-      "Mistaking a thrombosed cherry angioma for a melanocytic lesion because of its dark colour.",
-      "Attributing an eruptive crop solely to ageing and overlooking a drug or chemical trigger.",
-      "Assuming any red papule is benign and missing an amelanotic melanoma or pyogenic granuloma.",
-      "Inadequate haemostasis during removal leading to troublesome bleeding."
-    ],
-    "references": [
-      "Rook's Textbook of Dermatology",
-      "Bolognia Dermatology",
-      "Andrews' Diseases of the Skin"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Reassurance that the lesions are entirely benign vascular proliferations with no malignant potential, so no treatment is required",
-      "Cosmetic removal for unwanted or bothersome lesions by electrodessication, laser such as pulsed-dye or KTP, or shave excision",
-      "Haemostasis with cautery for traumatised or briskly bleeding lesions",
-      "Excisional biopsy and histology of any atypical, rapidly changing or thrombosed lesion to exclude a vascular or melanocytic malignancy",
-      "Review of medication and chemical exposure history where there is an abrupt eruption of numerous lesions",
-      "Advise that new lesions commonly continue to appear with advancing age"
+    [
+     "Clinical Pitfall",
+     "Mistaking a thrombosed cherry angioma for a melanocytic lesion because of its dark colour.",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for cherry angioma."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "cherry-angioma-real-image",
+   "title": "cherry angioma: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

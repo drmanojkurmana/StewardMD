@@ -232,7 +232,7 @@
     else if (st.on) html += '<button type="button" class="pn-btn sm pl-now" data-act="p-n-now"' + (st.busy ? " disabled" : "") + ">" + (st.busy ? "Syncing" : "Sync now") + "</button>";
     return html + '<p class="pn-mut pn-small">Progress is encrypted on this phone before upload. StewardMD cannot read it without your account.</p>';
   }
-  function syncHtml() { return sync() ? '<h3 class="pl-sh">Sync</h3><div class="pl-sync" id="plSync">' + syncInner() + "</div>" : ""; }
+  function syncHtml() { return sync() ? '<section class="pl-grp pl-g-sync"><h3 class="pl-sh"><span class="pl-sic" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 18a4.5 4.5 0 0 1-.6-9 6 6 0 0 1 11.4 1.6A3.8 3.8 0 0 1 17 18zM12 11v5M9.5 13.5L12 11l2.5 2.5"/></svg></span>Sync</h3><div class="pl-sync" id="plSync">' + syncInner() + "</div></section>" : ""; }
   function redrawSync(focus) {
     var r = root(), box = r && r.querySelector("#plSync"); if (!box) return;
     var a = focus || (G.document.activeElement && box.contains(G.document.activeElement) ? G.document.activeElement.getAttribute("data-act") : null);

@@ -1,78 +1,173 @@
 {
-  "id": "oesophagostomiasis",
-  "name": "Oesophagostomiasis",
-  "aliases": [
-    "Oesophagostomum infection",
-    "esophagostomiasis",
-    "nodular worm disease",
-    "Dapaong tumour"
+ "id": "oesophagostomiasis",
+ "name": "Oesophagostomiasis",
+ "aliases": [
+  "Oesophagostomum infection",
+  "esophagostomiasis",
+  "nodular worm disease",
+  "Dapaong tumour"
+ ],
+ "class": "infective",
+ "system": "Infectious disease",
+ "specialty": "Infectious Diseases / Tropical Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Manson's Tropical Diseases / Mandell",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Caused by Oesophagostomum species, nodular worms of the large bowel, with human disease concentrated in parts of West Africa, notably northern Togo and Ghana",
+   "Acquired by ingesting infective larvae from soil or contaminated food and water, the larvae burrowing into the intestinal wall",
+   "The hallmark is formation of inflammatory nodules or abscesses in the colonic wall, which may coalesce into a palpable abdominal mass",
+   "The classic uninodular presentation, the Dapaong tumour, is a painful abdominal wall or intra-abdominal mass, while multinodular disease causes diffuse colitis-like symptoms",
+   "Presentations include abdominal pain, diarrhoea, weight loss and a palpable mass, often with marked eosinophilia",
+   "Diagnosis relies on imaging showing bowel wall nodules and on histology of excised or biopsied lesions; larvae may not appear in the stool",
+   "Treatment is with a benzimidazole anthelmintic such as albendazole, with surgical drainage or excision for large nodules or abscesses"
   ],
-  "class": "infective",
-  "system": "Infectious disease",
-  "specialty": "Infectious Diseases / Tropical Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Manson's Tropical Diseases / Mandell",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Caused by Oesophagostomum species, nodular worms of the large bowel, with human disease concentrated in parts of West Africa, notably northern Togo and Ghana",
-      "Acquired by ingesting infective larvae from soil or contaminated food and water, the larvae burrowing into the intestinal wall",
-      "The hallmark is formation of inflammatory nodules or abscesses in the colonic wall, which may coalesce into a palpable abdominal mass",
-      "The classic uninodular presentation, the Dapaong tumour, is a painful abdominal wall or intra-abdominal mass, while multinodular disease causes diffuse colitis-like symptoms",
-      "Presentations include abdominal pain, diarrhoea, weight loss and a palpable mass, often with marked eosinophilia",
-      "Diagnosis relies on imaging showing bowel wall nodules and on histology of excised or biopsied lesions; larvae may not appear in the stool",
-      "Treatment is with a benzimidazole anthelmintic such as albendazole, with surgical drainage or excision for large nodules or abscesses"
+  "pathophysiology": "Oesophagostomum species are nematodes related to hookworms whose natural hosts include primates, pigs and ruminants. Humans acquire infection by ingesting infective larvae from contaminated soil, food or water. In the intestine the larvae invade the wall of the colon and terminal ileum, where they encyst and provoke an intense inflammatory reaction. The host response forms characteristic granulomatous nodules and abscesses around the developing larvae, which may remain solitary as a large tumour-like mass or occur as multiple smaller nodules producing a colitis-like picture. Some larvae complete development, emerge into the lumen and mature into adult worms in the large bowel, while others remain trapped and die within the nodules. The inflammatory nodules account for the palpable masses, abdominal pain and, when they erupt or become secondarily infected, for abscess formation and local complications.",
+  "additionalDifferentials": [
+   "Intestinal tuberculosis with an ileocaecal mass",
+   "Crohn's disease and other inflammatory bowel disease",
+   "Colonic or caecal carcinoma",
+   "Amoeboma or other infective mass lesion",
+   "Appendicular or other intra-abdominal abscess",
+   "Other tissue-invasive helminth infection with eosinophilia"
+  ],
+  "additionalInvestigations": [
+   "Cross-sectional imaging or ultrasound demonstrating bowel wall nodules or an abdominal mass",
+   "Full blood count showing marked eosinophilia",
+   "Histopathology of excised or biopsied nodules identifying the larvae",
+   "Stool microscopy, recognising that eggs and larvae may be absent",
+   "Colonoscopy with biopsy when malignancy or inflammatory bowel disease is considered",
+   "Inflammatory markers and assessment for abscess formation"
+  ],
+  "redFlags": [
+   "A large or enlarging abdominal mass raising concern for malignancy or abscess",
+   "Signs of intestinal obstruction or perforation",
+   "Systemic sepsis from a secondarily infected nodule",
+   "Persistent symptoms after treatment prompting reassessment"
+  ],
+  "prognosis": "Prognosis is generally good with anthelmintic treatment and, where needed, surgical management of nodules; complications such as large abscesses or obstruction increase morbidity but are usually treatable.",
+  "pitfalls": [
+   "Mistaking a nodular mass for colonic carcinoma, tuberculosis or Crohn's disease",
+   "Relying on stool examination, which is frequently negative in tissue-dwelling disease",
+   "Overlooking the diagnosis in travellers or residents from endemic West African foci",
+   "Failing to drain or excise large abscesses in addition to giving anthelmintic therapy"
+  ],
+  "references": [
+   "Manson's Tropical Diseases",
+   "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Anthelmintic therapy with a benzimidazole such as albendazole or mebendazole as the mainstay, with pyrantel pamoate as an alternative",
+   "Surgical excision or drainage of symptomatic nodules, abscesses (the Dapaong tumour) or an obstructing bowel mass",
+   "Supportive care for diarrhoea, abdominal pain and nutrition, with correction of associated losses",
+   "Confirm treatment response through resolution of eosinophilia and follow-up imaging of the bowel-wall nodules",
+   "Identify and treat complications such as large abscess formation or bowel obstruction",
+   "Public-health and preventive measures in endemic areas: safe food and water, sanitation and hand hygiene to prevent reinfection"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "oesophagostomiasis-pathway",
+   "title": "Oesophagostomiasis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Caused by Oesophagostomum species, nodular worms of the large bowel, with human disease concentrated in parts of West Africa, notably northern Togo and Ghana",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: A large or enlarging abdominal mass raising concern for malignancy or abscess",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Cross-sectional imaging or ultrasound demonstrating bowel wall nodules or an abdominal mass, Full blood count showing marked eosinophilia, Histopathology of excised or biopsied nodules identifying the larvae"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Anthelmintic therapy with a benzimidazole such as albendazole or mebendazole as the mainstay, with pyrantel pamoate as an alternative"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking a nodular mass for colonic carcinoma, tuberculosis or Crohn's disease"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of oesophagostomiasis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "oesophagostomiasis-matrix",
+   "title": "Oesophagostomiasis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Caused by Oesophagostomum species, nodular worms of the large bowel, with human disease concentrated in parts of West Africa,",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Oesophagostomum species are nematodes related to hookworms whose natural hosts include primates, pigs and ruminants. Humans acquire infection by ingesting infective larvae from contaminated soil, food or water. In the intestine the larvae invade the wall of the colon and terminal ileum, where they encyst and provoke an intense inflammatory reaction. The host response forms characteristic granulomatous nodules and abscesses around the developing larvae, which may remain solitary as a large tumour-like mass or occur as multiple smaller nodules producing a colitis-like picture. Some larvae complete development, emerge into the lumen and mature into adult worms in the large bowel, while others remain trapped and die within the nodules. The inflammatory nodules account for the palpable masses, abdominal pain and, when they erupt or become secondarily infected, for abscess formation and local complications.",
-    "additionalDifferentials": [
-      "Intestinal tuberculosis with an ileocaecal mass",
-      "Crohn's disease and other inflammatory bowel disease",
-      "Colonic or caecal carcinoma",
-      "Amoeboma or other infective mass lesion",
-      "Appendicular or other intra-abdominal abscess",
-      "Other tissue-invasive helminth infection with eosinophilia"
+    [
+     "Key Investigations",
+     "Cross-sectional imaging or ultrasound demonstrating bowel wall nodules or an abdominal mass, Full blood count showing marked",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Cross-sectional imaging or ultrasound demonstrating bowel wall nodules or an abdominal mass",
-      "Full blood count showing marked eosinophilia",
-      "Histopathology of excised or biopsied nodules identifying the larvae",
-      "Stool microscopy, recognising that eggs and larvae may be absent",
-      "Colonoscopy with biopsy when malignancy or inflammatory bowel disease is considered",
-      "Inflammatory markers and assessment for abscess formation"
+    [
+     "Primary Differentials",
+     "Intestinal tuberculosis with an ileocaecal mass, Crohn's disease and other inflammatory bowel disease, Colonic or caecal carcinoma",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "A large or enlarging abdominal mass raising concern for malignancy or abscess",
-      "Signs of intestinal obstruction or perforation",
-      "Systemic sepsis from a secondarily infected nodule",
-      "Persistent symptoms after treatment prompting reassessment"
+    [
+     "Management Strategy",
+     "Anthelmintic therapy with a benzimidazole such as albendazole or mebendazole as the mainstay, with pyrantel pamoate as an",
+     "Core treatment modality"
     ],
-    "prognosis": "Prognosis is generally good with anthelmintic treatment and, where needed, surgical management of nodules; complications such as large abscesses or obstruction increase morbidity but are usually treatable.",
-    "pitfalls": [
-      "Mistaking a nodular mass for colonic carcinoma, tuberculosis or Crohn's disease",
-      "Relying on stool examination, which is frequently negative in tissue-dwelling disease",
-      "Overlooking the diagnosis in travellers or residents from endemic West African foci",
-      "Failing to drain or excise large abscesses in addition to giving anthelmintic therapy"
-    ],
-    "references": [
-      "Manson's Tropical Diseases",
-      "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Anthelmintic therapy with a benzimidazole such as albendazole or mebendazole as the mainstay, with pyrantel pamoate as an alternative",
-      "Surgical excision or drainage of symptomatic nodules, abscesses (the Dapaong tumour) or an obstructing bowel mass",
-      "Supportive care for diarrhoea, abdominal pain and nutrition, with correction of associated losses",
-      "Confirm treatment response through resolution of eosinophilia and follow-up imaging of the bowel-wall nodules",
-      "Identify and treat complications such as large abscess formation or bowel obstruction",
-      "Public-health and preventive measures in endemic areas: safe food and water, sanitation and hand hygiene to prevent reinfection"
+    [
+     "Clinical Pitfall",
+     "Mistaking a nodular mass for colonic carcinoma, tuberculosis or Crohn's disease",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for oesophagostomiasis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "oesophagostomiasis-real-image",
+   "title": "Oesophagostomiasis: Diagnostic Abdominal Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
+   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
+   "annotations": [
+    {
+     "label": "Solid Viscera",
+     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
+    },
+    {
+     "label": "Gastrointestinal Tract",
+     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
+    },
+    {
+     "label": "Mesentery & Peritoneum",
+     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+    }
+   ]
+  }
+ ]
 }

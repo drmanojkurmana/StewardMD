@@ -182,5 +182,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "h56391f68"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "cystitis-dx-algo",
+      "title": "Acute Uncomplicated Cystitis: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Bacteria in the urine without related symptoms is asymptomatic bacteriuria (ASB), not UTI; ASB usually needs no treatment and the diagnosis of cystitis requires symptoms, not merely a positive culture or pyuria (p.1086-1087).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Fever, rigors, or unilateral back/costovertebral or flank pain suggesting pyelonephritis or other extension beyond the bladder (p.1089)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Urine dipstick for nitrite and leukocyte esterase as point-of-care testing, used mainly to help rule out UTI when the clinical diagnosis is unclear (p.1091), Microscopic urinalysis (white and red cell counts); pyuria is"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Uncomplicated UTI is infection confined to the bladder in a woman or man without a urinary catheter; complicated UTI is infection extending beyond the bladder (prostatitis, pyelonephritis, bacteremia) or occurring with"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Treating ASB as if it were UTI; the degree of pyuria in an asymptomatic patient should not drive a UTI diagnosis, and very high pyuria is common with urinary stasis (e.g., end-stage renal disease, obstructed catheters)"
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for acute uncomplicated cystitis."
+    }
+  ],
+  "tables": [
+    {
+      "id": "cystitis-matrix",
+      "title": "Acute Uncomplicated Cystitis: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Bacteria in the urine without related symptoms is asymptomatic bacteriuria (ASB), not UTI; ASB usually needs no treatment and the",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Urine dipstick for nitrite and leukocyte esterase as point-of-care testing, used mainly to help rule out UTI when the clinical",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Cervicitis (Chlamydia trachomatis, Neisseria gonorrhoeae) presenting with dysuria (p.1090), Urethritis, including",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Fever, rigors, or unilateral back/costovertebral or flank pain suggesting pyelonephritis or other extension beyond the bladder",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating ASB as if it were UTI; the degree of pyuria in an asymptomatic patient should not drive a UTI diagnosis, and very high",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for acute uncomplicated cystitis."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "cystitis-real-image",
+      "title": "Acute Uncomplicated Cystitis: Diagnostic Renal Ultrasonography",
+      "type": "ultrasound",
+      "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
+      "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
+      "annotations": [
+        {
+          "label": "Renal Cortex",
+          "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
+        },
+        {
+          "label": "Corticomedullary Junction",
+          "description": "Medullary pyramid definition and structural architecture."
+        },
+        {
+          "label": "Collecting System",
+          "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+        }
+      ]
+    }
+  ]
 }

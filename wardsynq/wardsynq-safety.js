@@ -98,19 +98,24 @@ function resolveGeneric(text, pack) {
   const direct = hit(t);
   if (direct) return direct;
 
+  /* A class-level entry (a key that is one of its own class tags: bare "insulin") is the LAST resort.
+   * "Insulin Actrapid 10 IU" is regular insulin, and reading it as "insulin" turned a second active order
+   * of the same regular insulin from SAME_DRUG_ACTIVE into a mere hypoglycaemia-class warning (R1). */
+  const classLevel = (g) => !(pack instanceof Set) && pack.drugClasses && pack.drugClasses.get(g) && pack.drugClasses.get(g).has(g);
+  let fallback = null;
   // Drop strength/form noise: pure numbers, units and anything starting with a digit ("500mg").
   const tokens = t.split(/[^a-z0-9-]+/).filter((w) => w.length >= 4 && !/^\d/.test(w));
   // Longest spans first, so "penicillin g" wins over "penicillin" when both are present.
   for (let span = Math.min(3, tokens.length); span >= 1; span--) {
     for (let i = 0; i + span <= tokens.length; i++) {
       const run = tokens.slice(i, i + span);
-      const spaced = hit(run.join(" "));
-      if (spaced) return spaced;
-      const hyphenated = hit(run.join("-"));
-      if (hyphenated) return hyphenated;
+      for (const g of [hit(run.join(" ")), hit(run.join("-"))]) {
+        if (g && !classLevel(g)) return g;
+        if (g && !fallback) fallback = g;
+      }
     }
   }
-  return null;
+  return fallback;
 }
 
 /* ------------------------------------------------------------------ rule pack */
@@ -193,7 +198,9 @@ function compileRulePack(raw) {
       type: rule.type || "pair",
       severity: SEVERITY_ORDER.includes(rule.severity) ? rule.severity : SEVERITY.MONITOR,
       disposition: rule.disposition || null, // resolved later against the policy default
-      subjects: rule.subjects.map((s) => ({ kind: s.kind === "generic" ? "generic" : "class", value: lower(s.value) })),
+      // `except`: generics that never fill this class slot (aspirin is not the NSAID of the bleeding triad).
+      subjects: rule.subjects.map((s) => ({ kind: s.kind === "generic" ? "generic" : "class", value: lower(s.value),
+        ...(Array.isArray(s.except) && s.except.length ? { except: s.except.map(lower) } : {}) })),
       mechanism: rule.mechanism || "",
       effect: rule.effect || "",
       action: rule.action || "",
@@ -316,9 +323,13 @@ function resolveComponents(text, pack) {
   if (combos) {
     const whole = combos.get(lower(t));
     if (whole) return whole.slice();
-    const first = lower(t).split(/[\s/,()+-]+/)[0];
-    const byFirst = first && combos.get(first);
-    if (byFirst) return byFirst.slice();
+    // Leading word as written: "Pan-D 40" and "Pan D 40" are the brand "pan-d", not "pan"
+    // (pantoprazole alone, dropping the domperidone); then the bare first word ("Bactrim DS").
+    const w = lower(t).split(/\s+/);
+    for (const k of [w[0], w[0] + "-" + (w[1] || ""), w[0].split(/[/,()+-]+/)[0]]) {
+      const byFirst = k && combos.get(k);
+      if (byFirst) return byFirst.slice();
+    }
   }
 
   const parts = t.split("+").map((p) => p.replace(/\([^)]*\)/g, "").trim()).filter(Boolean);
@@ -449,9 +460,10 @@ function checkInteractions(pack, order, activeMeds, opts) {
   if (!orderedGenerics.length) return out;
 
   const list = orderedGenerics.map((g) => ({ generic: g, isOrdered: true, label: order.drug }));
+  // Every molecule of an active combination too: warfarin ordered on top of an active Combiflam is
+  // warfarin + ibuprofen, whichever of the two happened to be prescribed first.
   for (const med of activeMeds || []) {
-    const g = resolveGeneric(med.drugCode || med.drug, pack);
-    if (g) list.push({ generic: g, isOrdered: false, label: med.drug || g });
+    for (const g of resolveComponents(med.drugCode || med.drug, pack)) list.push({ generic: g, isOrdered: false, label: med.drug || g });
   }
   if (list.length < 2) return out;
 
@@ -584,7 +596,8 @@ function satisfyDuplicationRule(rule, entries, distinctOnly) {
 function satisfyRule(rule, entries) {
   const used = new Set();
   const chosen = [];
-  const matches = (subject, entry) => (subject.kind === "generic" ? entry.generic === subject.value : entry.tokens.has(subject.value));
+  const matches = (subject, entry) => (subject.kind === "generic" ? entry.generic === subject.value
+    : entry.tokens.has(subject.value) && !(subject.except && subject.except.includes(entry.generic)));
   const walk = (i) => {
     if (i === rule.subjects.length) return true;
     for (let j = 0; j < entries.length; j++) {
@@ -620,7 +633,35 @@ function checkDose(pack, order, clinical) {
   const out = [];
   const generic = resolveGeneric(order.drugCode || order.drug, pack);
   const limits = generic ? pack.doseLimits.get(generic) : null;
-  if (!limits) return out;
+  if (!limits) {
+    // A combination's dose is the product's, not one molecule's, so no single ceiling applies. Say
+    // which ceilings went unchecked rather than return nothing, which reads as a clean pass.
+    const all = generic ? [] : resolveComponents(order.drugCode || order.drug, pack);
+    const parts = all.filter((g) => pack.doseLimits.get(g));
+    if (parts.length) {
+      const ceilOf = (g) => (pack.doseLimits.get(g) || {}).absoluteCeilingSingle;
+      const ceil = (g) => { const c = ceilOf(g); return c ? `${g} ${c.value} ${c.unit}` : g; };
+      const d = order.dose, numeric = d && typeof d.value === "number" && Number.isFinite(d.value);
+      const inUnit = (c) => c && numeric && lower(c.unit) === lower(d.unit);
+      const over = numeric && parts.some((g) => inUnit(ceilOf(g)) && d.value > ceilOf(g).value);
+      /* Above the SUM of every ingredient's ceiling (Combiflam: ibuprofen 800 + paracetamol 1000 mg) no
+       * split of the dose keeps every ingredient within its limit: the same Category 1 hard stop as a
+       * single molecule over its ceiling. Only when EVERY ingredient has a ceiling in this unit. Between
+       * an ingredient's ceiling and the sum it needs a reason; below, it informs, so a routine Combiflam
+       * is not an override. No numeric dose needs a reason, as DOSE_UNPARSEABLE does. */
+      const sum = all.every((g) => inUnit(ceilOf(g))) ? all.reduce((t, g) => t + ceilOf(g).value, 0) : null;
+      const block = sum !== null && d.value > sum;
+      const gate = !numeric || over;
+      out.push(finding(block ? "DOSE_COMBINATION_CEILING" : "DOSE_COMBINATION_UNCHECKED",
+        block ? DISPOSITION.BLOCK : gate ? DISPOSITION.OVERRIDABLE : DISPOSITION.WARN,
+        block ? SEVERITY.CONTRAINDICATED : gate ? SEVERITY.MAJOR : SEVERITY.MONITOR,
+        block ? `${d.value} ${d.unit} of ${order.drug} is above the combined single-dose ceilings of its ingredients (${parts.map(ceil).join(" + ")} = ${sum} ${d.unit}).`
+          : `${order.drug} is a combination product; per-ingredient dose ceilings (${parts.map(ceil).join(", ")} per dose) were not checked`
+            + (!numeric ? " and the order has no numeric dose." : over ? `, and ${d.value} ${d.unit} is above one of them.` : "."),
+        { generics: parts }));
+    }
+    return out;
+  }
 
   const dose = order.dose;
   if (!dose || typeof dose.value !== "number" || !Number.isFinite(dose.value)) {
@@ -955,7 +996,7 @@ class SafetyEngine {
      * same order, one silently missing major bleeding-risk interaction. Which of the patient's own
      * medicines could not be checked is therefore reported alongside. */
     const unresolvedActiveMeds = (activeMeds || [])
-      .filter((m) => m && !resolveGeneric(m.drugCode || m.drug, this.rulePack))
+      .filter((m) => m && !resolveComponents(m.drugCode || m.drug, this.rulePack).length)
       .map((m) => String(m.drug || m.drugCode || "unknown"));
 
     return {

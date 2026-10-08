@@ -1,81 +1,176 @@
 {
-  "id": "benedikt_syndrome",
-  "name": "Benedikt syndrome",
-  "aliases": [
-    "paramedian midbrain tegmental syndrome",
-    "Benedikt's syndrome",
-    "midbrain tegmentum syndrome"
+ "id": "benedikt_syndrome",
+ "name": "Benedikt syndrome",
+ "aliases": [
+  "paramedian midbrain tegmental syndrome",
+  "Benedikt's syndrome",
+  "midbrain tegmentum syndrome"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system / Cerebrovascular",
+ "specialty": "Neurology / Stroke",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Bradley and Daroff Neurology in Clinical Practice",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Caused by a lesion of the midbrain tegmentum involving the red nucleus, supplied by paramedian branches of the posterior cerebral and basilar arteries",
+   "Combines an ipsilateral third nerve palsy with contralateral involuntary movements such as tremor, chorea, or ataxia",
+   "The extrapyramidal signs arise from damage to the red nucleus and adjacent cerebellothalamic (dentatorubrothalamic) fibres",
+   "Contralateral limb ataxia and a coarse rubral (Holmes) tremor help distinguish it from the purely pyramidal Weber syndrome",
+   "Some patients also show contralateral hemiparesis if the lesion extends ventrally towards the cerebral peduncle",
+   "The ipsilateral third nerve palsy gives a dilated pupil, ptosis, and a down-and-out eye, as in other midbrain syndromes",
+   "It represents a tegmental crossed midbrain syndrome, intermediate in territory between Weber and Claude"
   ],
-  "class": "non_infective",
-  "system": "Nervous system / Cerebrovascular",
-  "specialty": "Neurology / Stroke",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Bradley and Daroff Neurology in Clinical Practice",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Caused by a lesion of the midbrain tegmentum involving the red nucleus, supplied by paramedian branches of the posterior cerebral and basilar arteries",
-      "Combines an ipsilateral third nerve palsy with contralateral involuntary movements such as tremor, chorea, or ataxia",
-      "The extrapyramidal signs arise from damage to the red nucleus and adjacent cerebellothalamic (dentatorubrothalamic) fibres",
-      "Contralateral limb ataxia and a coarse rubral (Holmes) tremor help distinguish it from the purely pyramidal Weber syndrome",
-      "Some patients also show contralateral hemiparesis if the lesion extends ventrally towards the cerebral peduncle",
-      "The ipsilateral third nerve palsy gives a dilated pupil, ptosis, and a down-and-out eye, as in other midbrain syndromes",
-      "It represents a tegmental crossed midbrain syndrome, intermediate in territory between Weber and Claude"
+  "pathophysiology": "Benedikt syndrome follows infarction or haemorrhage in the paramedian midbrain tegmentum, supplied by perforating branches of the posterior cerebral and basilar arteries. The lesion involves the oculomotor fascicles passing through the tegmentum, producing an ipsilateral third nerve palsy, together with the red nucleus and the crossing dentatorubrothalamic fibres, producing contralateral tremor, chorea, or ataxia. When damage extends ventrally to the medial lemniscus or corticospinal fibres, contralateral sensory loss or weakness may be added. The result is an alternating syndrome dominated by involuntary movements, contrasting with the pure hemiparesis of Weber syndrome.",
+  "additionalDifferentials": [
+   "Weber syndrome (ventral midbrain)",
+   "Claude syndrome (dorsal tegmental)",
+   "Holmes tremor from other midbrain or thalamic lesions",
+   "Midbrain demyelination or tumour",
+   "Wilson disease or other causes of secondary movement disorder",
+   "Posterior communicating artery aneurysm with third nerve compression"
+  ],
+  "additionalInvestigations": [
+   "Diffusion-weighted MRI of the midbrain tegmentum to localise the infarct",
+   "MR or CT angiography of the posterior circulation and circle of Willis",
+   "Detailed examination of tremor, ataxia, and pupillary function",
+   "Vascular and stroke risk workup including ECG and metabolic profiling",
+   "Copper studies where a metabolic movement disorder is suspected",
+   "Vessel wall imaging when basilar atherosclerosis or dissection is considered"
+  ],
+  "redFlags": [
+   "Pupil-involving third nerve palsy prompting exclusion of a compressive aneurysm",
+   "Declining consciousness suggesting extension into the reticular formation",
+   "Bilateral tegmental signs implying a larger paramedian midbrain event",
+   "Rapid deterioration indicating evolving basilar occlusion"
+  ],
+  "prognosis": "The oculomotor palsy may recover partially, but the rubral tremor and ataxia are often persistent and disabling, and the movement disorder may respond only incompletely to symptomatic treatment.",
+  "pitfalls": [
+   "Labelling the picture as Weber syndrome and missing the tegmental movement disorder",
+   "Attributing a pupil-involving third nerve palsy to microvascular disease without vascular imaging",
+   "Overlooking a delayed-onset Holmes tremor emerging weeks after the stroke",
+   "Failing to distinguish contralateral ataxia from weakness at the bedside"
+  ],
+  "references": [
+   "Bradley and Daroff Neurology in Clinical Practice",
+   "Adams and Victor's Principles of Neurology"
+  ],
+  "crossLinks": [
+   "weber_syndrome",
+   "claude_syndrome",
+   "dejerine_roussy_syndrome"
+  ],
+  "management": [
+   "Treat the underlying acute midbrain stroke on a stroke unit, with reperfusion by thrombolysis or thrombectomy in eligible patients",
+   "Institute secondary stroke prevention with antiplatelet therapy, statins and control of hypertension and other vascular risk factors",
+   "Investigate and treat the vascular aetiology, including cardioembolic sources and basilar atherosclerosis or dissection",
+   "Manage the disabling rubral (Holmes) tremor symptomatically with agents such as levodopa, anticholinergics or clonazepam, considering deep brain stimulation for refractory tremor",
+   "Provide neurorehabilitation with physiotherapy and occupational therapy for ataxia and movement disorder",
+   "Manage the oculomotor palsy and diplopia with prisms or occlusion, and refer to ophthalmology or orthoptics"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "benedikt_syndrome-pathway",
+   "title": "Benedikt syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Caused by a lesion of the midbrain tegmentum involving the red nucleus, supplied by paramedian branches of the posterior cerebral and basilar arteries",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Pupil-involving third nerve palsy prompting exclusion of a compressive aneurysm",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Diffusion-weighted MRI of the midbrain tegmentum to localise the infarct, MR or CT angiography of the posterior circulation and circle of Willis, Detailed examination of tremor, ataxia, and pupillary function"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Treat the underlying acute midbrain stroke on a stroke unit, with reperfusion by thrombolysis or thrombectomy in eligible patients"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Labelling the picture as Weber syndrome and missing the tegmental movement disorder"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of benedikt syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "benedikt_syndrome-matrix",
+   "title": "Benedikt syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Caused by a lesion of the midbrain tegmentum involving the red nucleus, supplied by paramedian branches of the posterior cerebral",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Benedikt syndrome follows infarction or haemorrhage in the paramedian midbrain tegmentum, supplied by perforating branches of the posterior cerebral and basilar arteries. The lesion involves the oculomotor fascicles passing through the tegmentum, producing an ipsilateral third nerve palsy, together with the red nucleus and the crossing dentatorubrothalamic fibres, producing contralateral tremor, chorea, or ataxia. When damage extends ventrally to the medial lemniscus or corticospinal fibres, contralateral sensory loss or weakness may be added. The result is an alternating syndrome dominated by involuntary movements, contrasting with the pure hemiparesis of Weber syndrome.",
-    "additionalDifferentials": [
-      "Weber syndrome (ventral midbrain)",
-      "Claude syndrome (dorsal tegmental)",
-      "Holmes tremor from other midbrain or thalamic lesions",
-      "Midbrain demyelination or tumour",
-      "Wilson disease or other causes of secondary movement disorder",
-      "Posterior communicating artery aneurysm with third nerve compression"
+    [
+     "Key Investigations",
+     "Diffusion-weighted MRI of the midbrain tegmentum to localise the infarct, MR or CT angiography of the posterior circulation and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Diffusion-weighted MRI of the midbrain tegmentum to localise the infarct",
-      "MR or CT angiography of the posterior circulation and circle of Willis",
-      "Detailed examination of tremor, ataxia, and pupillary function",
-      "Vascular and stroke risk workup including ECG and metabolic profiling",
-      "Copper studies where a metabolic movement disorder is suspected",
-      "Vessel wall imaging when basilar atherosclerosis or dissection is considered"
+    [
+     "Primary Differentials",
+     "Weber syndrome (ventral midbrain), Claude syndrome (dorsal tegmental), Holmes tremor from other midbrain or thalamic lesions",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Pupil-involving third nerve palsy prompting exclusion of a compressive aneurysm",
-      "Declining consciousness suggesting extension into the reticular formation",
-      "Bilateral tegmental signs implying a larger paramedian midbrain event",
-      "Rapid deterioration indicating evolving basilar occlusion"
+    [
+     "Management Strategy",
+     "Treat the underlying acute midbrain stroke on a stroke unit, with reperfusion by thrombolysis or thrombectomy in eligible patients",
+     "Core treatment modality"
     ],
-    "prognosis": "The oculomotor palsy may recover partially, but the rubral tremor and ataxia are often persistent and disabling, and the movement disorder may respond only incompletely to symptomatic treatment.",
-    "pitfalls": [
-      "Labelling the picture as Weber syndrome and missing the tegmental movement disorder",
-      "Attributing a pupil-involving third nerve palsy to microvascular disease without vascular imaging",
-      "Overlooking a delayed-onset Holmes tremor emerging weeks after the stroke",
-      "Failing to distinguish contralateral ataxia from weakness at the bedside"
-    ],
-    "references": [
-      "Bradley and Daroff Neurology in Clinical Practice",
-      "Adams and Victor's Principles of Neurology"
-    ],
-    "crossLinks": [
-      "weber_syndrome",
-      "claude_syndrome",
-      "dejerine_roussy_syndrome"
-    ],
-    "management": [
-      "Treat the underlying acute midbrain stroke on a stroke unit, with reperfusion by thrombolysis or thrombectomy in eligible patients",
-      "Institute secondary stroke prevention with antiplatelet therapy, statins and control of hypertension and other vascular risk factors",
-      "Investigate and treat the vascular aetiology, including cardioembolic sources and basilar atherosclerosis or dissection",
-      "Manage the disabling rubral (Holmes) tremor symptomatically with agents such as levodopa, anticholinergics or clonazepam, considering deep brain stimulation for refractory tremor",
-      "Provide neurorehabilitation with physiotherapy and occupational therapy for ataxia and movement disorder",
-      "Manage the oculomotor palsy and diplopia with prisms or occlusion, and refer to ophthalmology or orthoptics"
+    [
+     "Clinical Pitfall",
+     "Labelling the picture as Weber syndrome and missing the tegmental movement disorder",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for benedikt syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "benedikt-syndrome-real-image",
+   "title": "Benedikt syndrome: Diagnostic Head Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
+   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
+   "annotations": [
+    {
+     "label": "Cerebral Parenchyma",
+     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+    },
+    {
+     "label": "Extra-Axial Spaces",
+     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+    }
+   ]
+  }
+ ]
 }

@@ -1,78 +1,173 @@
 {
-  "id": "meier_gorlin_syndrome",
-  "name": "Meier-Gorlin syndrome",
-  "aliases": [
-    "ear-patella-short stature syndrome",
-    "microtia-absent patellae-micrognathia syndrome",
-    "MGORS"
+ "id": "meier_gorlin_syndrome",
+ "name": "Meier-Gorlin syndrome",
+ "aliases": [
+  "ear-patella-short stature syndrome",
+  "microtia-absent patellae-micrognathia syndrome",
+  "MGORS"
+ ],
+ "class": "non_infective",
+ "system": "Genetics / Dysmorphology",
+ "specialty": "Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Smith's Recognizable Patterns of Human Malformation",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A microcephalic primordial dwarfism defined by the triad of bilateral microtia, absent or hypoplastic patellae, and severe short stature",
+   "Growth restriction begins prenatally and continues postnatally, with microcephaly usually present but cognition often relatively preserved",
+   "Additional features include micrognathia, a small mouth, full lips, and mammary hypoplasia in affected females",
+   "Caused by biallelic variants in genes of the pre-replication complex that licenses DNA replication origins, including ORC1, ORC4, ORC6, CDT1, CDC6, and related genes",
+   "Inherited in an autosomal recessive pattern, although some genotypes produce a dominant form, so accurate molecular diagnosis refines counselling",
+   "Feeding difficulties and recurrent respiratory or airway problems may complicate infancy",
+   "Genital and pubertal abnormalities and, in some genotypes, a degree of learning difficulty may be present"
   ],
-  "class": "non_infective",
-  "system": "Genetics / Dysmorphology",
-  "specialty": "Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Smith's Recognizable Patterns of Human Malformation",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A microcephalic primordial dwarfism defined by the triad of bilateral microtia, absent or hypoplastic patellae, and severe short stature",
-      "Growth restriction begins prenatally and continues postnatally, with microcephaly usually present but cognition often relatively preserved",
-      "Additional features include micrognathia, a small mouth, full lips, and mammary hypoplasia in affected females",
-      "Caused by biallelic variants in genes of the pre-replication complex that licenses DNA replication origins, including ORC1, ORC4, ORC6, CDT1, CDC6, and related genes",
-      "Inherited in an autosomal recessive pattern, although some genotypes produce a dominant form, so accurate molecular diagnosis refines counselling",
-      "Feeding difficulties and recurrent respiratory or airway problems may complicate infancy",
-      "Genital and pubertal abnormalities and, in some genotypes, a degree of learning difficulty may be present"
+  "pathophysiology": "Meier-Gorlin syndrome results from variants in components of the origin recognition complex and other pre-replication complex proteins that license origins of DNA replication before each cell division. Impaired replication licensing limits the proliferative capacity of cells during development, reducing overall growth and producing severe short stature, microcephaly, and the characteristic skeletal and ear anomalies. The tissue-specific hallmarks such as absent patellae reflect the sensitivity of particular developmental programmes to reduced cell proliferation.",
+  "additionalDifferentials": [
+   "Seckel syndrome and other microcephalic primordial dwarfisms",
+   "Microcephalic osteodysplastic primordial dwarfism (MOPD types)",
+   "Silver-Russell syndrome",
+   "Nager and other acrofacial dysostoses with microtia",
+   "3-M syndrome",
+   "CHARGE syndrome"
+  ],
+  "additionalInvestigations": [
+   "Gene panel or exome sequencing covering ORC1, ORC4, ORC6, CDT1, CDC6, GMNN and related pre-replication complex genes",
+   "Chromosomal microarray to exclude copy-number causes",
+   "Radiographs of the knees to confirm absent or hypoplastic patellae and assess the skeleton",
+   "Audiological and ENT assessment for microtia and hearing",
+   "Growth and endocrine evaluation including growth axis assessment",
+   "Airway and feeding assessment in infancy"
+  ],
+  "redFlags": [
+   "Airway obstruction or apnoea related to micrognathia and small airways",
+   "Severe faltering growth requiring nutritional intervention",
+   "Recurrent aspiration or respiratory compromise",
+   "Hearing loss impairing communication and development"
+  ],
+  "prognosis": "Short stature is lifelong and remains marked despite endocrine input, but cognition is frequently within or near the normal range and most individuals do well with orthopaedic, ENT, and supportive care. Airway and feeding difficulties in infancy are the main early risks.",
+  "pitfalls": [
+   "Missing absent patellae because they are not radiologically visible until the knees ossify in later childhood",
+   "Confusing the disorder with Seckel syndrome and other primordial dwarfisms without molecular testing",
+   "Underestimating airway compromise from micrognathia in the newborn",
+   "Assuming intellectual disability when cognition is often relatively preserved"
+  ],
+  "references": [
+   "Smith's Recognizable Patterns of Human Malformation",
+   "GeneReviews: Meier-Gorlin Syndrome"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Offer a trial of growth hormone therapy where indicated, recognising the response in this primordial dwarfism is often limited",
+   "Assess and support the airway and feeding in infancy, the main early risks",
+   "Manage microtia with ENT and reconstructive input and provide audiological rehabilitation for hearing loss",
+   "Arrange orthopaedic assessment and management of absent or hypoplastic patellae and other skeletal problems",
+   "Monitor development, noting that cognition is frequently near-normal",
+   "Provide genetic counselling reflecting the autosomal recessive inheritance and rarer dominant genotypes",
+   "Coordinate multidisciplinary paediatric, endocrine, ENT and orthopaedic care"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "meier_gorlin_syndrome-pathway",
+   "title": "Meier-Gorlin syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A microcephalic primordial dwarfism defined by the triad of bilateral microtia, absent or hypoplastic patellae, and severe short stature",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Airway obstruction or apnoea related to micrognathia and small airways",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Gene panel or exome sequencing covering ORC1, ORC4, ORC6, CDT1, CDC6, GMNN and related pre-replication complex genes, Chromosomal microarray to exclude copy-number causes, Radiographs of the knees to confirm absent or"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Offer a trial of growth hormone therapy where indicated, recognising the response in this primordial dwarfism is often limited"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Missing absent patellae because they are not radiologically visible until the knees ossify in later childhood"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of meier-gorlin syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "meier_gorlin_syndrome-matrix",
+   "title": "Meier-Gorlin syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A microcephalic primordial dwarfism defined by the triad of bilateral microtia, absent or hypoplastic patellae, and severe short",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Meier-Gorlin syndrome results from variants in components of the origin recognition complex and other pre-replication complex proteins that license origins of DNA replication before each cell division. Impaired replication licensing limits the proliferative capacity of cells during development, reducing overall growth and producing severe short stature, microcephaly, and the characteristic skeletal and ear anomalies. The tissue-specific hallmarks such as absent patellae reflect the sensitivity of particular developmental programmes to reduced cell proliferation.",
-    "additionalDifferentials": [
-      "Seckel syndrome and other microcephalic primordial dwarfisms",
-      "Microcephalic osteodysplastic primordial dwarfism (MOPD types)",
-      "Silver-Russell syndrome",
-      "Nager and other acrofacial dysostoses with microtia",
-      "3-M syndrome",
-      "CHARGE syndrome"
+    [
+     "Key Investigations",
+     "Gene panel or exome sequencing covering ORC1, ORC4, ORC6, CDT1, CDC6, GMNN and related pre-replication complex genes, Chromosomal",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Gene panel or exome sequencing covering ORC1, ORC4, ORC6, CDT1, CDC6, GMNN and related pre-replication complex genes",
-      "Chromosomal microarray to exclude copy-number causes",
-      "Radiographs of the knees to confirm absent or hypoplastic patellae and assess the skeleton",
-      "Audiological and ENT assessment for microtia and hearing",
-      "Growth and endocrine evaluation including growth axis assessment",
-      "Airway and feeding assessment in infancy"
+    [
+     "Primary Differentials",
+     "Seckel syndrome and other microcephalic primordial dwarfisms, Microcephalic osteodysplastic primordial dwarfism (MOPD types),",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Airway obstruction or apnoea related to micrognathia and small airways",
-      "Severe faltering growth requiring nutritional intervention",
-      "Recurrent aspiration or respiratory compromise",
-      "Hearing loss impairing communication and development"
+    [
+     "Management Strategy",
+     "Offer a trial of growth hormone therapy where indicated, recognising the response in this primordial dwarfism is often limited",
+     "Core treatment modality"
     ],
-    "prognosis": "Short stature is lifelong and remains marked despite endocrine input, but cognition is frequently within or near the normal range and most individuals do well with orthopaedic, ENT, and supportive care. Airway and feeding difficulties in infancy are the main early risks.",
-    "pitfalls": [
-      "Missing absent patellae because they are not radiologically visible until the knees ossify in later childhood",
-      "Confusing the disorder with Seckel syndrome and other primordial dwarfisms without molecular testing",
-      "Underestimating airway compromise from micrognathia in the newborn",
-      "Assuming intellectual disability when cognition is often relatively preserved"
-    ],
-    "references": [
-      "Smith's Recognizable Patterns of Human Malformation",
-      "GeneReviews: Meier-Gorlin Syndrome"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Offer a trial of growth hormone therapy where indicated, recognising the response in this primordial dwarfism is often limited",
-      "Assess and support the airway and feeding in infancy, the main early risks",
-      "Manage microtia with ENT and reconstructive input and provide audiological rehabilitation for hearing loss",
-      "Arrange orthopaedic assessment and management of absent or hypoplastic patellae and other skeletal problems",
-      "Monitor development, noting that cognition is frequently near-normal",
-      "Provide genetic counselling reflecting the autosomal recessive inheritance and rarer dominant genotypes",
-      "Coordinate multidisciplinary paediatric, endocrine, ENT and orthopaedic care"
+    [
+     "Clinical Pitfall",
+     "Missing absent patellae because they are not radiologically visible until the knees ossify in later childhood",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for meier-gorlin syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "meier-gorlin-syndrome-real-image",
+   "title": "Meier-Gorlin syndrome: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

@@ -161,5 +161,100 @@
       "importedAt": "2026-06-29T13:45:37Z",
       "contentHash": "h9ea5239d"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "sle_flare-dx-algo",
+      "title": "SLE / autoimmune flare: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Roughly 90% of SLE patients are women, most of childbearing age; prevalence is highest among Black women, then Hispanic, White, and Asian/Pacific Islander women; disease tends to be more severe in non-White patients (p.2827).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Rapidly declining eGFR, rising proteinuria, or active urinary sediment - class III/IV proliferative lupus nephritis; ~20% of class IV patients die or reach ESRD within 10 years (p.2830)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: ANA by immunofluorescence is the best screening test (positive in ~95%; titer ≥1:80 favors SLE); repeated negatives make SLE unlikely but ~5% are ANA-negative (p.2831-2832), Anti-dsDNA (highly specific, ~40-70% prevalence)"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Disease activity is graded for treatment using SLEDAI/SLEDAI-2K (low disease activity = SLEDAI 0-4; remission/DORIS = SLEDAI 0). EULAR severity tiers: mild (constitutional symptoms, mild arthritis, rash 18% BSA; SLEDAI"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Distinguishing flare from infection is a central challenge: cytopenias and constitutional symptoms can stem from disease activity, medication, OR infection, and acute lupus pneumonitis can look identical to pneumonia on"
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for sle / autoimmune flare."
+    }
+  ],
+  "tables": [
+    {
+      "id": "sle_flare-matrix",
+      "title": "SLE / autoimmune flare: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Roughly 90% of SLE patients are women, most of childbearing age; prevalence is highest among Black women, then Hispanic, White,",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "ANA by immunofluorescence is the best screening test (positive in ~95%; titer ≥1:80 favors SLE); repeated negatives make SLE",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Rosacea (malar rash mimic - but rosacea involves the nasolabial folds, whereas lupus malar rash spares them) (p.2829), Rheumatoid",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Rapidly declining eGFR, rising proteinuria, or active urinary sediment - class III/IV proliferative lupus nephritis; ~20% of",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Distinguishing flare from infection is a central challenge: cytopenias and constitutional symptoms can stem from disease",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for sle / autoimmune flare."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "sle-flare-real-image",
+      "title": "SLE / autoimmune flare: Diagnostic Imaging Evaluation",
+      "type": "xray",
+      "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+      "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+      "annotations": [
+        {
+          "label": "Cardiothoracic Ratio",
+          "description": "Heart size, mediastinal width, and great vessel contours."
+        },
+        {
+          "label": "Visceral Fields",
+          "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+        },
+        {
+          "label": "Bony Thorax & Soft Tissues",
+          "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+        }
+      ]
+    }
+  ]
 }

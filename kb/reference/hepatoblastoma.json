@@ -1,88 +1,183 @@
 {
-  "id": "hepatoblastoma",
-  "name": "hepatoblastoma",
-  "aliases": [
-    "HB",
-    "embryonal hepatoblastoma"
+ "id": "hepatoblastoma",
+ "name": "hepatoblastoma",
+ "aliases": [
+  "HB",
+  "embryonal hepatoblastoma"
+ ],
+ "class": "non_infective",
+ "system": "hepatobiliary",
+ "specialty": "paediatric oncology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Nelson Textbook of Pediatrics",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "The commonest primary hepatic malignancy of childhood, typically presenting within the first three years of life as a painless, progressively enlarging right upper quadrant mass.",
+   "Serum alpha-fetoprotein is markedly elevated in the great majority and serves as both a diagnostic clue and a treatment-monitoring marker.",
+   "A low or normal alpha-fetoprotein should raise concern for the small cell undifferentiated subtype, which behaves aggressively and may show loss of SMARCB1 (INI1).",
+   "Strong associations exist with Beckwith-Wiedemann syndrome, familial adenomatous polyposis (germline APC), and extreme prematurity or very low birth weight.",
+   "Aberrant Wnt/beta-catenin signalling, frequently driven by CTNNB1 mutation with nuclear beta-catenin accumulation, is the central oncogenic pathway.",
+   "Disease extent is defined by the PRETEXT (PRE-Treatment EXTent of disease) system, which groups the liver into four sections and guides resectability and transplant decisions.",
+   "Neoadjuvant cisplatin-based chemotherapy typically shrinks initially unresectable tumours to permit complete resection, which remains the cornerstone of cure.",
+   "Orthotopic liver transplantation is the preferred option for tumours confined to the liver that remain unresectable after chemotherapy."
   ],
-  "class": "non_infective",
-  "system": "hepatobiliary",
-  "specialty": "paediatric oncology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Nelson Textbook of Pediatrics",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "The commonest primary hepatic malignancy of childhood, typically presenting within the first three years of life as a painless, progressively enlarging right upper quadrant mass.",
-      "Serum alpha-fetoprotein is markedly elevated in the great majority and serves as both a diagnostic clue and a treatment-monitoring marker.",
-      "A low or normal alpha-fetoprotein should raise concern for the small cell undifferentiated subtype, which behaves aggressively and may show loss of SMARCB1 (INI1).",
-      "Strong associations exist with Beckwith-Wiedemann syndrome, familial adenomatous polyposis (germline APC), and extreme prematurity or very low birth weight.",
-      "Aberrant Wnt/beta-catenin signalling, frequently driven by CTNNB1 mutation with nuclear beta-catenin accumulation, is the central oncogenic pathway.",
-      "Disease extent is defined by the PRETEXT (PRE-Treatment EXTent of disease) system, which groups the liver into four sections and guides resectability and transplant decisions.",
-      "Neoadjuvant cisplatin-based chemotherapy typically shrinks initially unresectable tumours to permit complete resection, which remains the cornerstone of cure.",
-      "Orthotopic liver transplantation is the preferred option for tumours confined to the liver that remain unresectable after chemotherapy."
+  "pathophysiology": "Hepatoblastoma arises from immature hepatic precursor cells (hepatoblasts) that recapitulate stages of hepatocyte development, producing epithelial patterns (fetal, embryonal, macrotrabecular, small cell undifferentiated) and mixed epithelial-mesenchymal patterns. Constitutive activation of the Wnt/beta-catenin pathway, most often through activating CTNNB1 mutation with nuclear beta-catenin accumulation, drives proliferation, and germline APC loss in familial adenomatous polyposis converges on the same axis. Genomic imprinting disturbance at the 11p15 locus underlies the association with Beckwith-Wiedemann syndrome, while the small cell undifferentiated subtype is characterised by loss of SMARCB1 (INI1). The tumour is usually unifocal in the right lobe but may be multifocal, and it disseminates most often to the lungs.",
+  "additionalDifferentials": [
+   "Infantile hepatic haemangioma",
+   "Mesenchymal hamartoma of the liver",
+   "Hepatocellular carcinoma (older children, often with chronic liver disease)",
+   "Metastatic neuroblastoma to the liver",
+   "Undifferentiated embryonal sarcoma of the liver",
+   "Focal nodular hyperplasia",
+   "Metastatic Wilms tumour"
+  ],
+  "additionalInvestigations": [
+   "Serum alpha-fetoprotein at diagnosis and serially, interpreted against the age-related physiological decline of infancy",
+   "Abdominal ultrasound with Doppler to characterise the mass and its vascular relations",
+   "Contrast-enhanced CT or MRI of the abdomen for PRETEXT assignment and surgical planning",
+   "CT of the chest to detect pulmonary metastases",
+   "Core needle or open biopsy for histological subtyping when upfront resection is not planned",
+   "Beta-hCG if there are features of precocious puberty (rare paraneoplastic virilisation)",
+   "Baseline audiometry and renal function before platinum-based chemotherapy"
+  ],
+  "redFlags": [
+   "Acute abdominal pain with haemodynamic instability suggesting tumour rupture and intraperitoneal haemorrhage",
+   "Respiratory compromise from massive hepatomegaly or diaphragmatic splinting",
+   "Rapidly rising alpha-fetoprotein after treatment, indicating relapse or progression",
+   "Isosexual precocious puberty from beta-hCG secretion"
+  ],
+  "prognosis": "Completely resected, standard-risk epithelial tumours carry an excellent outcome with modern cisplatin-based therapy and surgery. Metastatic disease, a low alpha-fetoprotein, and the small cell undifferentiated subtype confer a substantially poorer prognosis.",
+  "pitfalls": [
+   "Interpreting alpha-fetoprotein without reference to the normally high but declining levels of early infancy, causing false reassurance or false alarm.",
+   "Overlooking a very low alpha-fetoprotein, which may signal the aggressive small cell undifferentiated variant rather than a benign lesion.",
+   "Attempting primary resection of a tumour better downstaged by neoadjuvant chemotherapy, risking incomplete excision.",
+   "Failing to screen for Beckwith-Wiedemann syndrome and familial adenomatous polyposis, missing familial cancer risk."
+  ],
+  "references": [
+   "Nelson Textbook of Pediatrics - paediatric hepatic tumours",
+   "Children's Hepatic tumours International Collaboration (CHIC) risk stratification and PRETEXT guidance",
+   "WHO Classification of Tumours: Digestive System Tumours"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Surgical resection is first-line when the liver tumour is confined and completely resectable at diagnosis.",
+   "For initially unresectable liver-confined disease, neoadjuvant chemotherapy is used to shrink the tumour toward resectability, guided by PRETEXT staging.",
+   "Cisplatin-based chemotherapy is the systemic backbone, used as a single agent or in combination depending on risk stratification, and continued perioperatively.",
+   "Tumours that remain unresectable after chemotherapy but stay confined to the liver (no distant metastasis) are managed with total hepatectomy and liver transplantation.",
+   "Primary resection should be avoided when the tumour is likely to downstage well with chemotherapy, since attempting it risks an incomplete excision.",
+   "Metastatic disease (most often pulmonary) is managed with intensified chemotherapy alongside resection or treatment of metastatic sites.",
+   "No radiotherapy role is described for hepatoblastoma.",
+   "Serum alpha-fetoprotein is tracked serially as a marker of response and relapse, interpreted against age-adjusted infant reference ranges.",
+   "A low or normal alpha-fetoprotein at diagnosis should raise suspicion for the small cell undifferentiated subtype, which is more aggressive.",
+   "Follow-up imaging should include ongoing surveillance for pulmonary metastasis.",
+   "Ototoxicity and renal function should be monitored during platinum-based treatment, with otoprotective strategies considered.",
+   "Children with suspected hepatoblastoma should be managed by a paediatric oncology multidisciplinary team with hepatobiliary and transplant surgery input from the outset.",
+   "Extensive or centrally located tumours by PRETEXT staging should be referred early to a centre capable of both complex hepatic resection and transplantation.",
+   "Children with hepatoblastoma or a family history suggestive of Beckwith-Wiedemann syndrome or familial adenomatous polyposis warrant genetic counselling and family screening referral."
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "hepatoblastoma-pathway",
+   "title": "hepatoblastoma: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "The commonest primary hepatic malignancy of childhood, typically presenting within the first three years of life as a painless, progressively enlarging right upper quadrant mass.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Acute abdominal pain with haemodynamic instability suggesting tumour rupture and intraperitoneal haemorrhage",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Serum alpha-fetoprotein at diagnosis and serially, interpreted against the age-related physiological decline of infancy, Abdominal ultrasound with Doppler to characterise the mass and its vascular relations,"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Surgical resection is first-line when the liver tumour is confined and completely resectable at diagnosis."
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Interpreting alpha-fetoprotein without reference to the normally high but declining levels of early infancy, causing false reassurance or false alarm."
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of hepatoblastoma."
+  }
+ ],
+ "tables": [
+  {
+   "id": "hepatoblastoma-matrix",
+   "title": "hepatoblastoma: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The commonest primary hepatic malignancy of childhood, typically presenting within the first three years of life as a painless,",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Hepatoblastoma arises from immature hepatic precursor cells (hepatoblasts) that recapitulate stages of hepatocyte development, producing epithelial patterns (fetal, embryonal, macrotrabecular, small cell undifferentiated) and mixed epithelial-mesenchymal patterns. Constitutive activation of the Wnt/beta-catenin pathway, most often through activating CTNNB1 mutation with nuclear beta-catenin accumulation, drives proliferation, and germline APC loss in familial adenomatous polyposis converges on the same axis. Genomic imprinting disturbance at the 11p15 locus underlies the association with Beckwith-Wiedemann syndrome, while the small cell undifferentiated subtype is characterised by loss of SMARCB1 (INI1). The tumour is usually unifocal in the right lobe but may be multifocal, and it disseminates most often to the lungs.",
-    "additionalDifferentials": [
-      "Infantile hepatic haemangioma",
-      "Mesenchymal hamartoma of the liver",
-      "Hepatocellular carcinoma (older children, often with chronic liver disease)",
-      "Metastatic neuroblastoma to the liver",
-      "Undifferentiated embryonal sarcoma of the liver",
-      "Focal nodular hyperplasia",
-      "Metastatic Wilms tumour"
+    [
+     "Key Investigations",
+     "Serum alpha-fetoprotein at diagnosis and serially, interpreted against the age-related physiological decline of infancy,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Serum alpha-fetoprotein at diagnosis and serially, interpreted against the age-related physiological decline of infancy",
-      "Abdominal ultrasound with Doppler to characterise the mass and its vascular relations",
-      "Contrast-enhanced CT or MRI of the abdomen for PRETEXT assignment and surgical planning",
-      "CT of the chest to detect pulmonary metastases",
-      "Core needle or open biopsy for histological subtyping when upfront resection is not planned",
-      "Beta-hCG if there are features of precocious puberty (rare paraneoplastic virilisation)",
-      "Baseline audiometry and renal function before platinum-based chemotherapy"
+    [
+     "Primary Differentials",
+     "Infantile hepatic haemangioma, Mesenchymal hamartoma of the liver, Hepatocellular carcinoma (older children, often with chronic",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Acute abdominal pain with haemodynamic instability suggesting tumour rupture and intraperitoneal haemorrhage",
-      "Respiratory compromise from massive hepatomegaly or diaphragmatic splinting",
-      "Rapidly rising alpha-fetoprotein after treatment, indicating relapse or progression",
-      "Isosexual precocious puberty from beta-hCG secretion"
+    [
+     "Management Strategy",
+     "Surgical resection is first-line when the liver tumour is confined and completely resectable at diagnosis.",
+     "Core treatment modality"
     ],
-    "prognosis": "Completely resected, standard-risk epithelial tumours carry an excellent outcome with modern cisplatin-based therapy and surgery. Metastatic disease, a low alpha-fetoprotein, and the small cell undifferentiated subtype confer a substantially poorer prognosis.",
-    "pitfalls": [
-      "Interpreting alpha-fetoprotein without reference to the normally high but declining levels of early infancy, causing false reassurance or false alarm.",
-      "Overlooking a very low alpha-fetoprotein, which may signal the aggressive small cell undifferentiated variant rather than a benign lesion.",
-      "Attempting primary resection of a tumour better downstaged by neoadjuvant chemotherapy, risking incomplete excision.",
-      "Failing to screen for Beckwith-Wiedemann syndrome and familial adenomatous polyposis, missing familial cancer risk."
-    ],
-    "references": [
-      "Nelson Textbook of Pediatrics - paediatric hepatic tumours",
-      "Children's Hepatic tumours International Collaboration (CHIC) risk stratification and PRETEXT guidance",
-      "WHO Classification of Tumours: Digestive System Tumours"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Surgical resection is first-line when the liver tumour is confined and completely resectable at diagnosis.",
-      "For initially unresectable liver-confined disease, neoadjuvant chemotherapy is used to shrink the tumour toward resectability, guided by PRETEXT staging.",
-      "Cisplatin-based chemotherapy is the systemic backbone, used as a single agent or in combination depending on risk stratification, and continued perioperatively.",
-      "Tumours that remain unresectable after chemotherapy but stay confined to the liver (no distant metastasis) are managed with total hepatectomy and liver transplantation.",
-      "Primary resection should be avoided when the tumour is likely to downstage well with chemotherapy, since attempting it risks an incomplete excision.",
-      "Metastatic disease (most often pulmonary) is managed with intensified chemotherapy alongside resection or treatment of metastatic sites.",
-      "No radiotherapy role is described for hepatoblastoma.",
-      "Serum alpha-fetoprotein is tracked serially as a marker of response and relapse, interpreted against age-adjusted infant reference ranges.",
-      "A low or normal alpha-fetoprotein at diagnosis should raise suspicion for the small cell undifferentiated subtype, which is more aggressive.",
-      "Follow-up imaging should include ongoing surveillance for pulmonary metastasis.",
-      "Ototoxicity and renal function should be monitored during platinum-based treatment, with otoprotective strategies considered.",
-      "Children with suspected hepatoblastoma should be managed by a paediatric oncology multidisciplinary team with hepatobiliary and transplant surgery input from the outset.",
-      "Extensive or centrally located tumours by PRETEXT staging should be referred early to a centre capable of both complex hepatic resection and transplantation.",
-      "Children with hepatoblastoma or a family history suggestive of Beckwith-Wiedemann syndrome or familial adenomatous polyposis warrant genetic counselling and family screening referral."
+    [
+     "Clinical Pitfall",
+     "Interpreting alpha-fetoprotein without reference to the normally high but declining levels of early infancy, causing false",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for hepatoblastoma."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "hepatoblastoma-real-image",
+   "title": "hepatoblastoma: Diagnostic Abdominal Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
+   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
+   "annotations": [
+    {
+     "label": "Solid Viscera",
+     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
+    },
+    {
+     "label": "Gastrointestinal Tract",
+     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
+    },
+    {
+     "label": "Mesentery & Peritoneum",
+     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+    }
+   ]
+  }
+ ]
 }

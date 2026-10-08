@@ -1,80 +1,175 @@
 {
-  "id": "transfusion_hyperkalaemia",
-  "name": "Transfusion-associated hyperkalaemia",
-  "aliases": [
-    "Transfusion hyperkalaemia",
-    "Hyperkalaemic cardiac arrest of transfusion"
+ "id": "transfusion_hyperkalaemia",
+ "name": "Transfusion-associated hyperkalaemia",
+ "aliases": [
+  "Transfusion hyperkalaemia",
+  "Hyperkalaemic cardiac arrest of transfusion"
+ ],
+ "class": "non_infective",
+ "system": "Haematology / Transfusion medicine",
+ "specialty": "Haematology / Transfusion medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "AABB Technical Manual",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Potassium leaks from stored red cells into the supernatant over time, so older units carry a higher extracellular potassium load.",
+   "Clinically important hyperkalaemia is most likely with rapid, large-volume transfusion through central lines, and in neonatal and paediatric large-volume or exchange transfusion.",
+   "Irradiation of red cells accelerates potassium leakage, so irradiated units are best transfused promptly and within a shortened shelf life.",
+   "The feared outcome is transfusion-associated hyperkalaemic cardiac arrest, particularly in small infants during rapid infusion.",
+   "Risk is compounded by renal impairment, acidosis, hypocalcaemia and hypothermia which impair potassium handling and cardiac stability.",
+   "Electrocardiographic changes progress from peaked T waves to widened QRS and sine-wave patterns before arrest.",
+   "Preventive measures include using fresher or washed red cells for at-risk recipients and controlling infusion rate and line position.",
+   "Emergency management follows standard hyperkalaemia treatment with cardiac membrane stabilisation and measures to shift and remove potassium."
   ],
-  "class": "non_infective",
-  "system": "Haematology / Transfusion medicine",
-  "specialty": "Haematology / Transfusion medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "AABB Technical Manual",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Potassium leaks from stored red cells into the supernatant over time, so older units carry a higher extracellular potassium load.",
-      "Clinically important hyperkalaemia is most likely with rapid, large-volume transfusion through central lines, and in neonatal and paediatric large-volume or exchange transfusion.",
-      "Irradiation of red cells accelerates potassium leakage, so irradiated units are best transfused promptly and within a shortened shelf life.",
-      "The feared outcome is transfusion-associated hyperkalaemic cardiac arrest, particularly in small infants during rapid infusion.",
-      "Risk is compounded by renal impairment, acidosis, hypocalcaemia and hypothermia which impair potassium handling and cardiac stability.",
-      "Electrocardiographic changes progress from peaked T waves to widened QRS and sine-wave patterns before arrest.",
-      "Preventive measures include using fresher or washed red cells for at-risk recipients and controlling infusion rate and line position.",
-      "Emergency management follows standard hyperkalaemia treatment with cardiac membrane stabilisation and measures to shift and remove potassium."
+  "pathophysiology": "During refrigerated storage, red cells progressively lose intracellular potassium because the energy-dependent sodium-potassium membrane pump is inactive at cold temperatures, so potassium accumulates in the unit's supernatant, increasing with storage age and after irradiation, which damages the membrane. When such units are transfused slowly the load is trivial, but rapid infusion of large volumes, especially directly into the central circulation, can deliver a potassium bolus faster than it can be redistributed or excreted. Neonates and infants are especially vulnerable because of their small blood volume and the relatively large transfused volumes used in exchange and massive transfusion. Superimposed renal impairment, acidosis, hypocalcaemia and hypothermia reduce potassium tolerance and myocardial stability, and the resulting acute hyperkalaemia can cause conduction disturbance and cardiac arrest.",
+  "additionalDifferentials": [
+   "Hyperkalaemia from renal failure",
+   "Hyperkalaemia from tissue injury, rhabdomyolysis or tumour lysis",
+   "Citrate toxicity causing hypocalcaemic arrhythmia",
+   "Acute haemolytic transfusion reaction releasing intracellular potassium",
+   "Acidosis-driven potassium shift",
+   "Drug-induced hyperkalaemia"
+  ],
+  "additionalInvestigations": [
+   "Serum or point-of-care potassium during rapid or large-volume transfusion",
+   "Electrocardiogram for peaked T waves and QRS widening",
+   "Ionised calcium given the interplay with citrate",
+   "Arterial blood gas for acidosis and potassium",
+   "Renal function tests",
+   "Review of red-cell storage age and irradiation status in at-risk recipients"
+  ],
+  "redFlags": [
+   "Peaked T waves or widening QRS during transfusion",
+   "Bradycardia or cardiac arrest during rapid transfusion in an infant",
+   "Rapid central infusion of old or irradiated red cells",
+   "Hyperkalaemia in a recipient with renal impairment or acidosis",
+   "Large-volume or exchange transfusion in a neonate"
+  ],
+  "prognosis": "When anticipated and prevented by choice of fresher or washed cells and controlled infusion, the risk is low; however, transfusion-associated hyperkalaemic cardiac arrest, though rare, has a high mortality, particularly in infants. Prompt recognition and standard hyperkalaemia management are life-saving.",
+  "pitfalls": [
+   "Using the oldest or freshly irradiated units for rapid large-volume paediatric transfusion.",
+   "Assuming a normal baseline potassium removes the risk during rapid infusion.",
+   "Overlooking the additive risks of acidosis, hypocalcaemia and hypothermia.",
+   "Failing to monitor the electrocardiogram and potassium during high-risk transfusion.",
+   "Confusing hyperkalaemic changes with citrate-induced hypocalcaemic arrhythmia."
+  ],
+  "references": [
+   "AABB Technical Manual, current edition",
+   "British Society for Haematology guidelines on transfusion for neonates and older children",
+   "Mollison's Blood Transfusion in Clinical Medicine"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Prevention through component choice: transfuse fresher, washed or volume-reduced red cells for neonatal, exchange and massive transfusion, and use irradiated units promptly within a shortened shelf life",
+   "Control delivery by avoiding rapid, large-volume boluses through central lines and using slower controlled infusion in vulnerable patients",
+   "Monitor potassium, ionised calcium and the electrocardiogram during rapid or large-volume transfusion, watching for peaked T waves and QRS widening",
+   "Treat established hyperkalaemia urgently with calcium salts for myocardial stabilisation, then insulin-dextrose and nebulised salbutamol to shift potassium intracellularly",
+   "Correct compounding factors of acidosis, hypocalcaemia and hypothermia that reduce potassium tolerance and cardiac stability",
+   "Be prepared to manage transfusion-associated hyperkalaemic cardiac arrest, especially in small infants during rapid infusion"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "transfusion_hyperkalaemia-pathway",
+   "title": "Transfusion-associated hyperkalaemia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Potassium leaks from stored red cells into the supernatant over time, so older units carry a higher extracellular potassium load.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Peaked T waves or widening QRS during transfusion",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Serum or point-of-care potassium during rapid or large-volume transfusion, Electrocardiogram for peaked T waves and QRS widening, Ionised calcium given the interplay with citrate"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Prevention through component choice: transfuse fresher, washed or volume-reduced red cells for neonatal, exchange and massive transfusion, and use irradiated units promptly within a shortened shelf life"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Using the oldest or freshly irradiated units for rapid large-volume paediatric transfusion."
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of transfusion-associated hyperkalaemia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "transfusion_hyperkalaemia-matrix",
+   "title": "Transfusion-associated hyperkalaemia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Potassium leaks from stored red cells into the supernatant over time, so older units carry a higher extracellular potassium load.",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "During refrigerated storage, red cells progressively lose intracellular potassium because the energy-dependent sodium-potassium membrane pump is inactive at cold temperatures, so potassium accumulates in the unit's supernatant, increasing with storage age and after irradiation, which damages the membrane. When such units are transfused slowly the load is trivial, but rapid infusion of large volumes, especially directly into the central circulation, can deliver a potassium bolus faster than it can be redistributed or excreted. Neonates and infants are especially vulnerable because of their small blood volume and the relatively large transfused volumes used in exchange and massive transfusion. Superimposed renal impairment, acidosis, hypocalcaemia and hypothermia reduce potassium tolerance and myocardial stability, and the resulting acute hyperkalaemia can cause conduction disturbance and cardiac arrest.",
-    "additionalDifferentials": [
-      "Hyperkalaemia from renal failure",
-      "Hyperkalaemia from tissue injury, rhabdomyolysis or tumour lysis",
-      "Citrate toxicity causing hypocalcaemic arrhythmia",
-      "Acute haemolytic transfusion reaction releasing intracellular potassium",
-      "Acidosis-driven potassium shift",
-      "Drug-induced hyperkalaemia"
+    [
+     "Key Investigations",
+     "Serum or point-of-care potassium during rapid or large-volume transfusion, Electrocardiogram for peaked T waves and QRS widening,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Serum or point-of-care potassium during rapid or large-volume transfusion",
-      "Electrocardiogram for peaked T waves and QRS widening",
-      "Ionised calcium given the interplay with citrate",
-      "Arterial blood gas for acidosis and potassium",
-      "Renal function tests",
-      "Review of red-cell storage age and irradiation status in at-risk recipients"
+    [
+     "Primary Differentials",
+     "Hyperkalaemia from renal failure, Hyperkalaemia from tissue injury, rhabdomyolysis or tumour lysis, Citrate toxicity causing",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Peaked T waves or widening QRS during transfusion",
-      "Bradycardia or cardiac arrest during rapid transfusion in an infant",
-      "Rapid central infusion of old or irradiated red cells",
-      "Hyperkalaemia in a recipient with renal impairment or acidosis",
-      "Large-volume or exchange transfusion in a neonate"
+    [
+     "Management Strategy",
+     "Prevention through component choice: transfuse fresher, washed or volume-reduced red cells for neonatal, exchange and massive",
+     "Core treatment modality"
     ],
-    "prognosis": "When anticipated and prevented by choice of fresher or washed cells and controlled infusion, the risk is low; however, transfusion-associated hyperkalaemic cardiac arrest, though rare, has a high mortality, particularly in infants. Prompt recognition and standard hyperkalaemia management are life-saving.",
-    "pitfalls": [
-      "Using the oldest or freshly irradiated units for rapid large-volume paediatric transfusion.",
-      "Assuming a normal baseline potassium removes the risk during rapid infusion.",
-      "Overlooking the additive risks of acidosis, hypocalcaemia and hypothermia.",
-      "Failing to monitor the electrocardiogram and potassium during high-risk transfusion.",
-      "Confusing hyperkalaemic changes with citrate-induced hypocalcaemic arrhythmia."
-    ],
-    "references": [
-      "AABB Technical Manual, current edition",
-      "British Society for Haematology guidelines on transfusion for neonates and older children",
-      "Mollison's Blood Transfusion in Clinical Medicine"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Prevention through component choice: transfuse fresher, washed or volume-reduced red cells for neonatal, exchange and massive transfusion, and use irradiated units promptly within a shortened shelf life",
-      "Control delivery by avoiding rapid, large-volume boluses through central lines and using slower controlled infusion in vulnerable patients",
-      "Monitor potassium, ionised calcium and the electrocardiogram during rapid or large-volume transfusion, watching for peaked T waves and QRS widening",
-      "Treat established hyperkalaemia urgently with calcium salts for myocardial stabilisation, then insulin-dextrose and nebulised salbutamol to shift potassium intracellularly",
-      "Correct compounding factors of acidosis, hypocalcaemia and hypothermia that reduce potassium tolerance and cardiac stability",
-      "Be prepared to manage transfusion-associated hyperkalaemic cardiac arrest, especially in small infants during rapid infusion"
+    [
+     "Clinical Pitfall",
+     "Using the oldest or freshly irradiated units for rapid large-volume paediatric transfusion.",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for transfusion-associated hyperkalaemia."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "transfusion-hyperkalaemia-real-image",
+   "title": "Transfusion-associated hyperkalaemia: Diagnostic Peripheral Blood Smear Examination",
+   "type": "diagram",
+   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
+   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
+   "annotations": [
+    {
+     "label": "Erythrocyte Indices",
+     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
+    },
+    {
+     "label": "Leukocyte Differential",
+     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
+    },
+    {
+     "label": "Platelet Count",
+     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+    }
+   ]
+  }
+ ]
 }

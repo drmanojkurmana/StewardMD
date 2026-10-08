@@ -1,79 +1,174 @@
 {
-  "id": "reduplicative_paramnesia",
-  "name": "Reduplicative Paramnesia",
-  "aliases": [
-    "Delusional place reduplication",
-    "Environmental reduplication"
+ "id": "reduplicative_paramnesia",
+ "name": "Reduplicative Paramnesia",
+ "aliases": [
+  "Delusional place reduplication",
+  "Environmental reduplication"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system / Psychiatry",
+ "specialty": "Psychiatry / Neurology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Lishman's Organic Psychiatry",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A delusional misidentification syndrome for place: the conviction that a location, such as the hospital, has been duplicated, relocated, or exists in two places at once.",
+   "The patient may insist that the current hospital is a replica situated near their home, despite clear evidence to the contrary.",
+   "Strongly associated with organic brain disease, especially right-hemisphere and bifrontal lesions from trauma, stroke, tumour, or dementia.",
+   "One of the classic content-specific, monothematic delusions, alongside the Capgras and Fregoli delusions.",
+   "Often accompanied by confabulation, disorientation, and anosognosia.",
+   "The term was originally introduced by Pick, with place reduplication as the prototypical form.",
+   "Its presence should prompt neurological and neuroimaging evaluation rather than an assumption of primary psychiatric illness."
   ],
-  "class": "non_infective",
-  "system": "Nervous system / Psychiatry",
-  "specialty": "Psychiatry / Neurology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Lishman's Organic Psychiatry",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A delusional misidentification syndrome for place: the conviction that a location, such as the hospital, has been duplicated, relocated, or exists in two places at once.",
-      "The patient may insist that the current hospital is a replica situated near their home, despite clear evidence to the contrary.",
-      "Strongly associated with organic brain disease, especially right-hemisphere and bifrontal lesions from trauma, stroke, tumour, or dementia.",
-      "One of the classic content-specific, monothematic delusions, alongside the Capgras and Fregoli delusions.",
-      "Often accompanied by confabulation, disorientation, and anosognosia.",
-      "The term was originally introduced by Pick, with place reduplication as the prototypical form.",
-      "Its presence should prompt neurological and neuroimaging evaluation rather than an assumption of primary psychiatric illness."
+  "pathophysiology": "Reduplicative paramnesia is a monothematic delusion arising from combined right-hemisphere and frontal dysfunction. Right-hemisphere damage impairs the perceptual, spatial, and familiarity mechanisms that anchor a place to a single location, while frontal executive dysfunction impairs the monitoring and belief-evaluation processes that would normally reject the incongruity, so the patient accepts and maintains the reduplication belief. It commonly co-occurs with confabulation and disorientation, reflecting shared frontal contributions, and is typically seen in traumatic brain injury, stroke, tumours, and neurodegenerative disease affecting these regions.",
+  "additionalDifferentials": [
+   "Capgras and Fregoli delusions of person misidentification",
+   "Delirium",
+   "Dementia (Alzheimer's, vascular, or Lewy body type)",
+   "Traumatic brain injury with confabulation",
+   "Korsakoff syndrome and other confabulatory states",
+   "Right-hemisphere stroke or tumour",
+   "Primary psychotic disorder, less commonly"
+  ],
+  "additionalInvestigations": [
+   "Structural neuroimaging (MRI or CT) attentive to right frontal and parietal pathology",
+   "Cognitive assessment including memory, executive function, and orientation",
+   "Delirium screen for infection and metabolic disturbance",
+   "Bloods including vitamin B12, thyroid function, glucose, and calcium",
+   "EEG where seizures or encephalopathy are suspected",
+   "Neuropsychological testing",
+   "Collateral history on onset and progression"
+  ],
+  "redFlags": [
+   "A new focal neurological deficit",
+   "Acute onset with fluctuating consciousness suggesting delirium or encephalitis",
+   "Rapidly progressive cognitive decline",
+   "Signs of raised intracranial pressure or a space-occupying lesion"
+  ],
+  "prognosis": "Prognosis depends on the underlying neurological cause; reduplication may resolve as an acute brain insult recovers but tends to persist or progress in neurodegenerative disease.",
+  "pitfalls": [
+   "Mistaking an organic delusion for primary psychiatric illness and omitting neuroimaging",
+   "Overlooking coexisting delirium",
+   "Attempting to argue the patient out of the belief rather than investigating the cause",
+   "Missing associated anosognosia and its safety implications"
+  ],
+  "references": [
+   "Lishman's Organic Psychiatry",
+   "New Oxford Textbook of Psychiatry",
+   "Principles of Behavioral and Cognitive Neurology (Mesulam)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Identify and treat the underlying neurological cause, such as stroke, traumatic brain injury, tumour or neurodegenerative disease",
+   "Reverse contributing delirium by treating infection and metabolic or electrolyte disturbance and reviewing offending medications",
+   "Use reorientation strategies, a consistent environment and cognitive support rather than confronting the delusion directly",
+   "Reserve cautious low-dose antipsychotic therapy for delusions causing significant distress or risk, weighing the hazards in the elderly and in dementia",
+   "Ensure safety and supervision given the disorientation and impaired insight",
+   "Neuropsychological assessment and cognitive rehabilitation with multidisciplinary neurology, psychiatry and rehabilitation input"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "reduplicative_paramnesia-pathway",
+   "title": "Reduplicative Paramnesia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A delusional misidentification syndrome for place: the conviction that a location, such as the hospital, has been duplicated, relocated, or exists in two places at once.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: A new focal neurological deficit",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Structural neuroimaging (MRI or CT) attentive to right frontal and parietal pathology, Cognitive assessment including memory, executive function, and orientation, Delirium screen for infection and metabolic disturbance"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Identify and treat the underlying neurological cause, such as stroke, traumatic brain injury, tumour or neurodegenerative disease"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking an organic delusion for primary psychiatric illness and omitting neuroimaging"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of reduplicative paramnesia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "reduplicative_paramnesia-matrix",
+   "title": "Reduplicative Paramnesia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A delusional misidentification syndrome for place: the conviction that a location, such as the hospital, has been duplicated,",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Reduplicative paramnesia is a monothematic delusion arising from combined right-hemisphere and frontal dysfunction. Right-hemisphere damage impairs the perceptual, spatial, and familiarity mechanisms that anchor a place to a single location, while frontal executive dysfunction impairs the monitoring and belief-evaluation processes that would normally reject the incongruity, so the patient accepts and maintains the reduplication belief. It commonly co-occurs with confabulation and disorientation, reflecting shared frontal contributions, and is typically seen in traumatic brain injury, stroke, tumours, and neurodegenerative disease affecting these regions.",
-    "additionalDifferentials": [
-      "Capgras and Fregoli delusions of person misidentification",
-      "Delirium",
-      "Dementia (Alzheimer's, vascular, or Lewy body type)",
-      "Traumatic brain injury with confabulation",
-      "Korsakoff syndrome and other confabulatory states",
-      "Right-hemisphere stroke or tumour",
-      "Primary psychotic disorder, less commonly"
+    [
+     "Key Investigations",
+     "Structural neuroimaging (MRI or CT) attentive to right frontal and parietal pathology, Cognitive assessment including memory,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Structural neuroimaging (MRI or CT) attentive to right frontal and parietal pathology",
-      "Cognitive assessment including memory, executive function, and orientation",
-      "Delirium screen for infection and metabolic disturbance",
-      "Bloods including vitamin B12, thyroid function, glucose, and calcium",
-      "EEG where seizures or encephalopathy are suspected",
-      "Neuropsychological testing",
-      "Collateral history on onset and progression"
+    [
+     "Primary Differentials",
+     "Capgras and Fregoli delusions of person misidentification, Delirium, Dementia (Alzheimer's, vascular, or Lewy body type)",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "A new focal neurological deficit",
-      "Acute onset with fluctuating consciousness suggesting delirium or encephalitis",
-      "Rapidly progressive cognitive decline",
-      "Signs of raised intracranial pressure or a space-occupying lesion"
+    [
+     "Management Strategy",
+     "Identify and treat the underlying neurological cause, such as stroke, traumatic brain injury, tumour or neurodegenerative disease",
+     "Core treatment modality"
     ],
-    "prognosis": "Prognosis depends on the underlying neurological cause; reduplication may resolve as an acute brain insult recovers but tends to persist or progress in neurodegenerative disease.",
-    "pitfalls": [
-      "Mistaking an organic delusion for primary psychiatric illness and omitting neuroimaging",
-      "Overlooking coexisting delirium",
-      "Attempting to argue the patient out of the belief rather than investigating the cause",
-      "Missing associated anosognosia and its safety implications"
-    ],
-    "references": [
-      "Lishman's Organic Psychiatry",
-      "New Oxford Textbook of Psychiatry",
-      "Principles of Behavioral and Cognitive Neurology (Mesulam)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Identify and treat the underlying neurological cause, such as stroke, traumatic brain injury, tumour or neurodegenerative disease",
-      "Reverse contributing delirium by treating infection and metabolic or electrolyte disturbance and reviewing offending medications",
-      "Use reorientation strategies, a consistent environment and cognitive support rather than confronting the delusion directly",
-      "Reserve cautious low-dose antipsychotic therapy for delusions causing significant distress or risk, weighing the hazards in the elderly and in dementia",
-      "Ensure safety and supervision given the disorientation and impaired insight",
-      "Neuropsychological assessment and cognitive rehabilitation with multidisciplinary neurology, psychiatry and rehabilitation input"
+    [
+     "Clinical Pitfall",
+     "Mistaking an organic delusion for primary psychiatric illness and omitting neuroimaging",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for reduplicative paramnesia."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "reduplicative-paramnesia-real-image",
+   "title": "Reduplicative Paramnesia: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

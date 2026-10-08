@@ -1,74 +1,169 @@
 {
-  "id": "exercise_associated_hyponatremia",
-  "name": "Exercise-associated hyponatraemia",
-  "aliases": [
-    "EAH",
-    "exercise-induced hyponatraemia"
+ "id": "exercise_associated_hyponatremia",
+ "name": "Exercise-associated hyponatraemia",
+ "aliases": [
+  "EAH",
+  "exercise-induced hyponatraemia"
+ ],
+ "class": "non_infective",
+ "system": "Multisystem / Renal / Nervous system",
+ "specialty": "Sports medicine / Emergency medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Sports medicine and emergency medicine references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A dilutional fall in serum sodium developing during or up to a day after prolonged endurance exercise",
+   "The main mechanism is excessive intake of hypotonic fluid, often compounded by inappropriate secretion of antidiuretic hormone",
+   "Mild cases may be asymptomatic, while severe cases cause nausea, headache, confusion, seizures and life-threatening cerebral oedema",
+   "It can be mistaken for dehydration, and giving more hypotonic fluid worsens it",
+   "Severe symptomatic cases are treated with hypertonic saline, not with additional free water",
+   "Prevention centres on drinking to thirst rather than overdrinking during endurance events"
   ],
-  "class": "non_infective",
-  "system": "Multisystem / Renal / Nervous system",
-  "specialty": "Sports medicine / Emergency medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Sports medicine and emergency medicine references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A dilutional fall in serum sodium developing during or up to a day after prolonged endurance exercise",
-      "The main mechanism is excessive intake of hypotonic fluid, often compounded by inappropriate secretion of antidiuretic hormone",
-      "Mild cases may be asymptomatic, while severe cases cause nausea, headache, confusion, seizures and life-threatening cerebral oedema",
-      "It can be mistaken for dehydration, and giving more hypotonic fluid worsens it",
-      "Severe symptomatic cases are treated with hypertonic saline, not with additional free water",
-      "Prevention centres on drinking to thirst rather than overdrinking during endurance events"
+  "pathophysiology": "Exercise-associated hyponatraemia develops when total body water is in excess relative to sodium, chiefly from drinking hypotonic fluid beyond what is lost. Non-osmotic release of antidiuretic hormone during prolonged exercise impairs the ability to excrete the excess water, and failure to mobilise sodium stores contributes. The resulting fall in plasma osmolality drives water into cells, and cerebral oedema produces the dangerous neurological manifestations. Because the problem is water excess rather than sodium deficit, hypotonic fluids aggravate it.",
+  "additionalDifferentials": [
+   "Dehydration and hypernatraemia",
+   "Exertional heat stroke",
+   "Other causes of hyponatraemia (SIADH, adrenal insufficiency)",
+   "Hypoglycaemia",
+   "Exercise-associated collapse of other cause"
+  ],
+  "additionalInvestigations": [
+   "Point-of-care or laboratory serum sodium measurement",
+   "Assessment of fluid intake during the event and body-weight change if known",
+   "Neurological assessment for cerebral oedema",
+   "Exclusion of other causes of collapse such as heat stroke and hypoglycaemia",
+   "Monitoring of sodium during correction"
+  ],
+  "redFlags": [
+   "Altered mental state, seizures or signs of cerebral oedema",
+   "Vomiting with progressive neurological symptoms",
+   "Pulmonary oedema",
+   "Rapidly falling or very low serum sodium"
+  ],
+  "prognosis": "Mild cases resolve with fluid restriction, and severe symptomatic cases usually respond to prompt hypertonic saline; delayed recognition with cerebral or pulmonary oedema can be fatal.",
+  "pitfalls": [
+   "Assuming dehydration and giving hypotonic fluids that worsen hyponatraemia",
+   "Confusing it with heat stroke",
+   "Failing to use hypertonic saline for severe symptomatic cases",
+   "Encouraging overdrinking as a prevention strategy"
+  ],
+  "references": [
+   "Sports medicine references (standard reference)",
+   "Tintinalli's Emergency Medicine"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Treat severe symptomatic disease (confusion, seizures, cerebral oedema) with hypertonic saline to reverse the fall in plasma osmolality",
+   "Manage mild or asymptomatic cases with fluid restriction and observation, allowing spontaneous water excretion",
+   "Avoid giving further hypotonic or free water, which worsens the dilutional state",
+   "Monitor serum sodium closely during correction and perform serial neurological assessment",
+   "Provide airway protection and seizure control in severe cerebral oedema",
+   "Exclude other causes of exercise-associated collapse such as heat stroke and hypoglycaemia",
+   "Prevent recurrence by advising athletes to drink to thirst rather than overdrink during endurance events"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "exercise_associated_hyponatremia-pathway",
+   "title": "Exercise-associated hyponatraemia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A dilutional fall in serum sodium developing during or up to a day after prolonged endurance exercise",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Altered mental state, seizures or signs of cerebral oedema",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Point-of-care or laboratory serum sodium measurement, Assessment of fluid intake during the event and body-weight change if known, Neurological assessment for cerebral oedema"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Treat severe symptomatic disease (confusion, seizures, cerebral oedema) with hypertonic saline to reverse the fall in plasma osmolality"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Assuming dehydration and giving hypotonic fluids that worsen hyponatraemia"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of exercise-associated hyponatraemia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "exercise_associated_hyponatremia-matrix",
+   "title": "Exercise-associated hyponatraemia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A dilutional fall in serum sodium developing during or up to a day after prolonged endurance exercise",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Exercise-associated hyponatraemia develops when total body water is in excess relative to sodium, chiefly from drinking hypotonic fluid beyond what is lost. Non-osmotic release of antidiuretic hormone during prolonged exercise impairs the ability to excrete the excess water, and failure to mobilise sodium stores contributes. The resulting fall in plasma osmolality drives water into cells, and cerebral oedema produces the dangerous neurological manifestations. Because the problem is water excess rather than sodium deficit, hypotonic fluids aggravate it.",
-    "additionalDifferentials": [
-      "Dehydration and hypernatraemia",
-      "Exertional heat stroke",
-      "Other causes of hyponatraemia (SIADH, adrenal insufficiency)",
-      "Hypoglycaemia",
-      "Exercise-associated collapse of other cause"
+    [
+     "Key Investigations",
+     "Point-of-care or laboratory serum sodium measurement, Assessment of fluid intake during the event and body-weight change if",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Point-of-care or laboratory serum sodium measurement",
-      "Assessment of fluid intake during the event and body-weight change if known",
-      "Neurological assessment for cerebral oedema",
-      "Exclusion of other causes of collapse such as heat stroke and hypoglycaemia",
-      "Monitoring of sodium during correction"
+    [
+     "Primary Differentials",
+     "Dehydration and hypernatraemia, Exertional heat stroke, Other causes of hyponatraemia (SIADH, adrenal insufficiency)",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Altered mental state, seizures or signs of cerebral oedema",
-      "Vomiting with progressive neurological symptoms",
-      "Pulmonary oedema",
-      "Rapidly falling or very low serum sodium"
+    [
+     "Management Strategy",
+     "Treat severe symptomatic disease (confusion, seizures, cerebral oedema) with hypertonic saline to reverse the fall in plasma",
+     "Core treatment modality"
     ],
-    "prognosis": "Mild cases resolve with fluid restriction, and severe symptomatic cases usually respond to prompt hypertonic saline; delayed recognition with cerebral or pulmonary oedema can be fatal.",
-    "pitfalls": [
-      "Assuming dehydration and giving hypotonic fluids that worsen hyponatraemia",
-      "Confusing it with heat stroke",
-      "Failing to use hypertonic saline for severe symptomatic cases",
-      "Encouraging overdrinking as a prevention strategy"
-    ],
-    "references": [
-      "Sports medicine references (standard reference)",
-      "Tintinalli's Emergency Medicine"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Treat severe symptomatic disease (confusion, seizures, cerebral oedema) with hypertonic saline to reverse the fall in plasma osmolality",
-      "Manage mild or asymptomatic cases with fluid restriction and observation, allowing spontaneous water excretion",
-      "Avoid giving further hypotonic or free water, which worsens the dilutional state",
-      "Monitor serum sodium closely during correction and perform serial neurological assessment",
-      "Provide airway protection and seizure control in severe cerebral oedema",
-      "Exclude other causes of exercise-associated collapse such as heat stroke and hypoglycaemia",
-      "Prevent recurrence by advising athletes to drink to thirst rather than overdrink during endurance events"
+    [
+     "Clinical Pitfall",
+     "Assuming dehydration and giving hypotonic fluids that worsen hyponatraemia",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for exercise-associated hyponatraemia."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "exercise-associated-hyponatremia-real-image",
+   "title": "Exercise-associated hyponatraemia: Diagnostic Renal Ultrasonography",
+   "type": "ultrasound",
+   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
+   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
+   "annotations": [
+    {
+     "label": "Renal Cortex",
+     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
+    },
+    {
+     "label": "Corticomedullary Junction",
+     "description": "Medullary pyramid definition and structural architecture."
+    },
+    {
+     "label": "Collecting System",
+     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+    }
+   ]
+  }
+ ]
 }

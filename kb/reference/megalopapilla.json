@@ -1,78 +1,173 @@
 {
-  "id": "megalopapilla",
-  "name": "megalopapilla",
-  "aliases": [
-    "megalopapilla",
-    "abnormally large optic disc"
+ "id": "megalopapilla",
+ "name": "megalopapilla",
+ "aliases": [
+  "megalopapilla",
+  "abnormally large optic disc"
+ ],
+ "class": "non_infective",
+ "system": "ophthalmic",
+ "specialty": "ophthalmology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Kanski's Clinical Ophthalmology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A congenital anomaly defined by an abnormally large optic disc, conventionally with a horizontal or vertical diameter of roughly 2.1 mm or more.",
+   "Two forms are described: a common form with generalised disc enlargement and a large but round cup, and a form with a superotemporal or inferonasal enlargement resembling a coloboma.",
+   "The enlarged cup produces a raised cup-to-disc ratio that can be mistaken for glaucomatous cupping.",
+   "The neuroretinal rim remains healthy and of normal colour, and the cup shape is typically round and central rather than notched.",
+   "Frequently bilateral and usually associated with normal or near-normal visual acuity.",
+   "May show an enlarged blind spot on perimetry but generally without progressive glaucomatous field loss.",
+   "Distinguished from glaucoma by a normal intraocular pressure, an intact rim, and a stable, non-progressive course.",
+   "Rarely associated with midline anomalies such as basal encephalocoele, so imaging is considered when other features are present."
   ],
-  "class": "non_infective",
-  "system": "ophthalmic",
-  "specialty": "ophthalmology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Kanski's Clinical Ophthalmology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A congenital anomaly defined by an abnormally large optic disc, conventionally with a horizontal or vertical diameter of roughly 2.1 mm or more.",
-      "Two forms are described: a common form with generalised disc enlargement and a large but round cup, and a form with a superotemporal or inferonasal enlargement resembling a coloboma.",
-      "The enlarged cup produces a raised cup-to-disc ratio that can be mistaken for glaucomatous cupping.",
-      "The neuroretinal rim remains healthy and of normal colour, and the cup shape is typically round and central rather than notched.",
-      "Frequently bilateral and usually associated with normal or near-normal visual acuity.",
-      "May show an enlarged blind spot on perimetry but generally without progressive glaucomatous field loss.",
-      "Distinguished from glaucoma by a normal intraocular pressure, an intact rim, and a stable, non-progressive course.",
-      "Rarely associated with midline anomalies such as basal encephalocoele, so imaging is considered when other features are present."
+  "pathophysiology": "Megalopapilla reflects a congenital enlargement of the scleral canal and optic nerve head, resulting in an abnormally large disc with a correspondingly large optic cup. The normal complement of retinal ganglion cell axons is distributed across a wider canal, so the cup-to-disc ratio increases while the neuroretinal rim tissue remains structurally and functionally intact. Because the enlargement is a primary developmental variant of canal size rather than a loss of axons, there is no progressive excavation or rim thinning as seen in glaucoma. The larger disc surface projects a correspondingly larger blind spot, but ganglion cell function and the visual field are otherwise typically preserved.",
+  "additionalDifferentials": [
+   "Glaucomatous optic disc cupping",
+   "Optic nerve coloboma",
+   "Morning glory disc anomaly",
+   "Physiological large cup",
+   "Peripapillary staphyloma",
+   "Optic disc pit",
+   "Tilted disc syndrome"
+  ],
+  "additionalInvestigations": [
+   "Stereoscopic disc examination and disc photography to assess rim integrity",
+   "Optical coherence tomography of the disc and retinal nerve fibre layer",
+   "Intraocular pressure measurement to exclude glaucoma",
+   "Automated perimetry to document any enlarged blind spot and exclude glaucomatous loss",
+   "Measurement of disc diameter and cup-to-disc ratio",
+   "Neuroimaging when a basal encephalocoele or midline anomaly is suspected"
+  ],
+  "redFlags": [
+   "Progressive cup enlargement or neuroretinal rim thinning suggesting coexisting glaucoma",
+   "Raised intraocular pressure with a suspicious disc",
+   "Midline facial anomalies or features suggesting basal encephalocoele",
+   "Development of a glaucomatous or arcuate visual field defect over time"
+  ],
+  "prognosis": "Megalopapilla is a stationary developmental variant with an excellent visual prognosis and normal acuity in most cases. Recognising it prevents overdiagnosis and unnecessary treatment for glaucoma.",
+  "pitfalls": [
+   "Misdiagnosing the large physiological cup as glaucomatous cupping and starting pressure-lowering therapy unnecessarily.",
+   "Failing to appreciate that the neuroretinal rim is intact when interpreting a high cup-to-disc ratio.",
+   "Overlooking coexisting glaucoma in a large disc by assuming all cupping is congenital.",
+   "Neglecting to consider a midline encephalocoele in atypical or syndromic presentations."
+  ],
+  "references": [
+   "Kanski's Clinical Ophthalmology: A Systematic Approach",
+   "American Academy of Ophthalmology Basic and Clinical Science Course, Pediatric Ophthalmology and Strabismus"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Reassure and observe, as this is a stationary developmental disc variant requiring no active treatment",
+   "Measure intraocular pressure to exclude glaucoma masquerading behind the raised cup-to-disc ratio",
+   "Perform stereoscopic disc assessment and optical coherence tomography of the retinal nerve fibre layer to confirm a healthy neuroretinal rim",
+   "Obtain baseline and interval perimetry to document the enlarged blind spot and exclude progressive glaucomatous field loss",
+   "Arrange neuroimaging where a basal encephalocoele or midline anomaly is suspected",
+   "Avoid unnecessary anti-glaucoma treatment through correct recognition of the variant"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "megalopapilla-pathway",
+   "title": "megalopapilla: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A congenital anomaly defined by an abnormally large optic disc, conventionally with a horizontal or vertical diameter of roughly 2.1 mm or more.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Progressive cup enlargement or neuroretinal rim thinning suggesting coexisting glaucoma",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Stereoscopic disc examination and disc photography to assess rim integrity, Optical coherence tomography of the disc and retinal nerve fibre layer, Intraocular pressure measurement to exclude glaucoma"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Reassure and observe, as this is a stationary developmental disc variant requiring no active treatment"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Misdiagnosing the large physiological cup as glaucomatous cupping and starting pressure-lowering therapy unnecessarily."
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of megalopapilla."
+  }
+ ],
+ "tables": [
+  {
+   "id": "megalopapilla-matrix",
+   "title": "megalopapilla: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A congenital anomaly defined by an abnormally large optic disc, conventionally with a horizontal or vertical diameter of roughly",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Megalopapilla reflects a congenital enlargement of the scleral canal and optic nerve head, resulting in an abnormally large disc with a correspondingly large optic cup. The normal complement of retinal ganglion cell axons is distributed across a wider canal, so the cup-to-disc ratio increases while the neuroretinal rim tissue remains structurally and functionally intact. Because the enlargement is a primary developmental variant of canal size rather than a loss of axons, there is no progressive excavation or rim thinning as seen in glaucoma. The larger disc surface projects a correspondingly larger blind spot, but ganglion cell function and the visual field are otherwise typically preserved.",
-    "additionalDifferentials": [
-      "Glaucomatous optic disc cupping",
-      "Optic nerve coloboma",
-      "Morning glory disc anomaly",
-      "Physiological large cup",
-      "Peripapillary staphyloma",
-      "Optic disc pit",
-      "Tilted disc syndrome"
+    [
+     "Key Investigations",
+     "Stereoscopic disc examination and disc photography to assess rim integrity, Optical coherence tomography of the disc and retinal",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Stereoscopic disc examination and disc photography to assess rim integrity",
-      "Optical coherence tomography of the disc and retinal nerve fibre layer",
-      "Intraocular pressure measurement to exclude glaucoma",
-      "Automated perimetry to document any enlarged blind spot and exclude glaucomatous loss",
-      "Measurement of disc diameter and cup-to-disc ratio",
-      "Neuroimaging when a basal encephalocoele or midline anomaly is suspected"
+    [
+     "Primary Differentials",
+     "Glaucomatous optic disc cupping, Optic nerve coloboma, Morning glory disc anomaly",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Progressive cup enlargement or neuroretinal rim thinning suggesting coexisting glaucoma",
-      "Raised intraocular pressure with a suspicious disc",
-      "Midline facial anomalies or features suggesting basal encephalocoele",
-      "Development of a glaucomatous or arcuate visual field defect over time"
+    [
+     "Management Strategy",
+     "Reassure and observe, as this is a stationary developmental disc variant requiring no active treatment",
+     "Core treatment modality"
     ],
-    "prognosis": "Megalopapilla is a stationary developmental variant with an excellent visual prognosis and normal acuity in most cases. Recognising it prevents overdiagnosis and unnecessary treatment for glaucoma.",
-    "pitfalls": [
-      "Misdiagnosing the large physiological cup as glaucomatous cupping and starting pressure-lowering therapy unnecessarily.",
-      "Failing to appreciate that the neuroretinal rim is intact when interpreting a high cup-to-disc ratio.",
-      "Overlooking coexisting glaucoma in a large disc by assuming all cupping is congenital.",
-      "Neglecting to consider a midline encephalocoele in atypical or syndromic presentations."
-    ],
-    "references": [
-      "Kanski's Clinical Ophthalmology: A Systematic Approach",
-      "American Academy of Ophthalmology Basic and Clinical Science Course, Pediatric Ophthalmology and Strabismus"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Reassure and observe, as this is a stationary developmental disc variant requiring no active treatment",
-      "Measure intraocular pressure to exclude glaucoma masquerading behind the raised cup-to-disc ratio",
-      "Perform stereoscopic disc assessment and optical coherence tomography of the retinal nerve fibre layer to confirm a healthy neuroretinal rim",
-      "Obtain baseline and interval perimetry to document the enlarged blind spot and exclude progressive glaucomatous field loss",
-      "Arrange neuroimaging where a basal encephalocoele or midline anomaly is suspected",
-      "Avoid unnecessary anti-glaucoma treatment through correct recognition of the variant"
+    [
+     "Clinical Pitfall",
+     "Misdiagnosing the large physiological cup as glaucomatous cupping and starting pressure-lowering therapy unnecessarily.",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for megalopapilla."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "megalopapilla-real-image",
+   "title": "megalopapilla: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

@@ -1,77 +1,172 @@
 {
-  "id": "ureteropelvic_junction_obstruction",
-  "name": "Ureteropelvic junction obstruction",
-  "aliases": [
-    "pelviureteric junction obstruction",
-    "PUJ obstruction",
-    "UPJ obstruction"
+ "id": "ureteropelvic_junction_obstruction",
+ "name": "Ureteropelvic junction obstruction",
+ "aliases": [
+  "pelviureteric junction obstruction",
+  "PUJ obstruction",
+  "UPJ obstruction"
+ ],
+ "class": "non_infective",
+ "system": "Renal / Urology",
+ "specialty": "Urology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Campbell-Walsh-Wein Urology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "The commonest cause of congenital hydronephrosis, producing dilatation of the renal pelvis and calyces with a non-dilated ureter below the obstruction",
+   "Frequently detected on antenatal ultrasound as unilateral hydronephrosis, though it may present later with loin pain, a palpable mass, infection, or haematuria",
+   "Intrinsic causes include an aperistaltic segment or intrinsic stenosis; extrinsic causes include a crossing lower-pole vessel, more relevant in older children and adults",
+   "The diuretic renogram (MAG3) is key: an obstructed pattern shows continued tracer accumulation with a rising or non-washout drainage curve after diuretic, whereas a prompt washout suggests no significant obstruction",
+   "Differential renal function on renography guides the decision to intervene or observe",
+   "Many mild antenatally detected cases stabilise or resolve, so serial imaging and expectant management are often appropriate",
+   "Surgical treatment is dismembered pyeloplasty when there is significant or deteriorating obstruction, symptoms, or falling function"
   ],
-  "class": "non_infective",
-  "system": "Renal / Urology",
-  "specialty": "Urology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Campbell-Walsh-Wein Urology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "The commonest cause of congenital hydronephrosis, producing dilatation of the renal pelvis and calyces with a non-dilated ureter below the obstruction",
-      "Frequently detected on antenatal ultrasound as unilateral hydronephrosis, though it may present later with loin pain, a palpable mass, infection, or haematuria",
-      "Intrinsic causes include an aperistaltic segment or intrinsic stenosis; extrinsic causes include a crossing lower-pole vessel, more relevant in older children and adults",
-      "The diuretic renogram (MAG3) is key: an obstructed pattern shows continued tracer accumulation with a rising or non-washout drainage curve after diuretic, whereas a prompt washout suggests no significant obstruction",
-      "Differential renal function on renography guides the decision to intervene or observe",
-      "Many mild antenatally detected cases stabilise or resolve, so serial imaging and expectant management are often appropriate",
-      "Surgical treatment is dismembered pyeloplasty when there is significant or deteriorating obstruction, symptoms, or falling function"
+  "pathophysiology": "Ureteropelvic junction obstruction is a functional or anatomical impedance to urine flow from the renal pelvis into the proximal ureter. Intrinsic obstruction usually results from a congenitally abnormal, aperistaltic or narrowed segment where disorganised smooth muscle and excess collagen prevent effective peristalsis, so a bolus of urine is not propagated across the junction. Extrinsic obstruction may be caused by an aberrant or accessory lower-pole renal artery crossing and kinking the junction. The resulting rise in intrapelvic pressure and stasis produces progressive pelvicalyceal dilatation and, if severe and prolonged, loss of renal parenchyma and function.",
+  "additionalDifferentials": [
+   "Vesicoureteric reflux causing pelvicalyceal dilatation",
+   "Primary obstructive megaureter (obstruction at the vesicoureteric junction)",
+   "Multicystic dysplastic kidney (non-communicating cysts, no function)",
+   "Extrarenal pelvis without true obstruction",
+   "Calyceal or parapelvic cysts",
+   "Ureteric obstruction from stone or stricture in older patients"
+  ],
+  "additionalInvestigations": [
+   "Renal ultrasound to grade pelvicalyceal dilatation and assess parenchymal thickness",
+   "MAG3 diuretic renogram to assess drainage and differential function",
+   "Micturating cystourethrogram (MCUG) to exclude coexisting reflux",
+   "CT or MR urography to define anatomy and detect a crossing vessel, especially in adults",
+   "Serial ultrasound for surveillance of antenatally detected hydronephrosis",
+   "Urinalysis and culture if infection is suspected"
+  ],
+  "redFlags": [
+   "Declining differential renal function on serial renography",
+   "Increasing hydronephrosis or thinning renal parenchyma",
+   "Febrile urinary tract infection or pyonephrosis in an obstructed system",
+   "Severe or recurrent loin pain, or obstruction in a solitary kidney"
+  ],
+  "prognosis": "Many mild antenatally detected cases resolve or remain stable with observation, and pyeloplasty for significant obstruction has a high success rate with preservation or improvement of function; severe long-standing obstruction, however, may leave irreversible parenchymal loss.",
+  "pitfalls": [
+   "Interpreting a diuretic renogram without accounting for a full bladder, dehydration, or an immature neonatal kidney, which can mimic obstruction",
+   "Rushing to surgery for mild stable hydronephrosis that would resolve spontaneously",
+   "Missing a crossing lower-pole vessel that alters the surgical approach",
+   "Overlooking coexisting vesicoureteric reflux before attributing all dilatation to junction obstruction"
+  ],
+  "references": [
+   "Campbell-Walsh-Wein Urology",
+   "Gearhart, Rink & Mouriquand: Pediatric Urology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Manage mild antenatally detected hydronephrosis expectantly with serial renal ultrasound and diuretic renography, since many cases stabilise or resolve",
+   "Perform dismembered (Anderson-Hynes) pyeloplasty for significant obstruction, deteriorating differential function, symptoms, stones, or recurrent infection",
+   "Transpose or relieve an obstructing crossing lower-pole vessel in extrinsic obstruction",
+   "Provide temporary drainage with a nephrostomy or JJ ureteric stent for an infected, obstructed system or acute decompensation",
+   "Treat associated urinary tract infection and offer antibiotic prophylaxis where indicated",
+   "Monitor drainage and preservation of differential renal function with post-operative renography and ultrasound surveillance"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "ureteropelvic_junction_obstruction-pathway",
+   "title": "Ureteropelvic junction obstruction: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "The commonest cause of congenital hydronephrosis, producing dilatation of the renal pelvis and calyces with a non-dilated ureter below the obstruction",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Declining differential renal function on serial renography",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Renal ultrasound to grade pelvicalyceal dilatation and assess parenchymal thickness, MAG3 diuretic renogram to assess drainage and differential function, Micturating cystourethrogram (MCUG) to exclude coexisting reflux"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Manage mild antenatally detected hydronephrosis expectantly with serial renal ultrasound and diuretic renography, since many cases stabilise or resolve"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Interpreting a diuretic renogram without accounting for a full bladder, dehydration, or an immature neonatal kidney, which can mimic obstruction"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of ureteropelvic junction obstruction."
+  }
+ ],
+ "tables": [
+  {
+   "id": "ureteropelvic_junction_obstruction-matrix",
+   "title": "Ureteropelvic junction obstruction: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The commonest cause of congenital hydronephrosis, producing dilatation of the renal pelvis and calyces with a non-dilated ureter",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Ureteropelvic junction obstruction is a functional or anatomical impedance to urine flow from the renal pelvis into the proximal ureter. Intrinsic obstruction usually results from a congenitally abnormal, aperistaltic or narrowed segment where disorganised smooth muscle and excess collagen prevent effective peristalsis, so a bolus of urine is not propagated across the junction. Extrinsic obstruction may be caused by an aberrant or accessory lower-pole renal artery crossing and kinking the junction. The resulting rise in intrapelvic pressure and stasis produces progressive pelvicalyceal dilatation and, if severe and prolonged, loss of renal parenchyma and function.",
-    "additionalDifferentials": [
-      "Vesicoureteric reflux causing pelvicalyceal dilatation",
-      "Primary obstructive megaureter (obstruction at the vesicoureteric junction)",
-      "Multicystic dysplastic kidney (non-communicating cysts, no function)",
-      "Extrarenal pelvis without true obstruction",
-      "Calyceal or parapelvic cysts",
-      "Ureteric obstruction from stone or stricture in older patients"
+    [
+     "Key Investigations",
+     "Renal ultrasound to grade pelvicalyceal dilatation and assess parenchymal thickness, MAG3 diuretic renogram to assess drainage",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Renal ultrasound to grade pelvicalyceal dilatation and assess parenchymal thickness",
-      "MAG3 diuretic renogram to assess drainage and differential function",
-      "Micturating cystourethrogram (MCUG) to exclude coexisting reflux",
-      "CT or MR urography to define anatomy and detect a crossing vessel, especially in adults",
-      "Serial ultrasound for surveillance of antenatally detected hydronephrosis",
-      "Urinalysis and culture if infection is suspected"
+    [
+     "Primary Differentials",
+     "Vesicoureteric reflux causing pelvicalyceal dilatation, Primary obstructive megaureter (obstruction at the vesicoureteric",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Declining differential renal function on serial renography",
-      "Increasing hydronephrosis or thinning renal parenchyma",
-      "Febrile urinary tract infection or pyonephrosis in an obstructed system",
-      "Severe or recurrent loin pain, or obstruction in a solitary kidney"
+    [
+     "Management Strategy",
+     "Manage mild antenatally detected hydronephrosis expectantly with serial renal ultrasound and diuretic renography, since many",
+     "Core treatment modality"
     ],
-    "prognosis": "Many mild antenatally detected cases resolve or remain stable with observation, and pyeloplasty for significant obstruction has a high success rate with preservation or improvement of function; severe long-standing obstruction, however, may leave irreversible parenchymal loss.",
-    "pitfalls": [
-      "Interpreting a diuretic renogram without accounting for a full bladder, dehydration, or an immature neonatal kidney, which can mimic obstruction",
-      "Rushing to surgery for mild stable hydronephrosis that would resolve spontaneously",
-      "Missing a crossing lower-pole vessel that alters the surgical approach",
-      "Overlooking coexisting vesicoureteric reflux before attributing all dilatation to junction obstruction"
-    ],
-    "references": [
-      "Campbell-Walsh-Wein Urology",
-      "Gearhart, Rink & Mouriquand: Pediatric Urology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Manage mild antenatally detected hydronephrosis expectantly with serial renal ultrasound and diuretic renography, since many cases stabilise or resolve",
-      "Perform dismembered (Anderson-Hynes) pyeloplasty for significant obstruction, deteriorating differential function, symptoms, stones, or recurrent infection",
-      "Transpose or relieve an obstructing crossing lower-pole vessel in extrinsic obstruction",
-      "Provide temporary drainage with a nephrostomy or JJ ureteric stent for an infected, obstructed system or acute decompensation",
-      "Treat associated urinary tract infection and offer antibiotic prophylaxis where indicated",
-      "Monitor drainage and preservation of differential renal function with post-operative renography and ultrasound surveillance"
+    [
+     "Clinical Pitfall",
+     "Interpreting a diuretic renogram without accounting for a full bladder, dehydration, or an immature neonatal kidney, which can",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for ureteropelvic junction obstruction."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "ureteropelvic-junction-obstruction-real-image",
+   "title": "Ureteropelvic junction obstruction: Diagnostic Renal Ultrasonography",
+   "type": "ultrasound",
+   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
+   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
+   "annotations": [
+    {
+     "label": "Renal Cortex",
+     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
+    },
+    {
+     "label": "Corticomedullary Junction",
+     "description": "Medullary pyramid definition and structural architecture."
+    },
+    {
+     "label": "Collecting System",
+     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+    }
+   ]
+  }
+ ]
 }

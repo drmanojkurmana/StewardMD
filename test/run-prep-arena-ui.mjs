@@ -74,20 +74,36 @@ function arena(method, path, body) {
 let msgId = 1; const pending = new Map(); let ws, sessionId; const errors = []; const reqs = [];
 const call = (m, p) => { const i = msgId++; return new Promise((r) => { pending.set(i, r); ws.send(JSON.stringify({ id: i, method: m, params: p || {}, sessionId })); }); };
 const ev = async (e) => { const r = await call("Runtime.evaluate", { expression: `(function(){try{${e}}catch(x){return "ERR:"+String(x&&x.message||x)}})()`, returnByValue: true }); return r.result && r.result.result ? r.result.result.value : undefined; };
+const evA = async (e) => { const r = await call("Runtime.evaluate", { expression: e, awaitPromise: true, returnByValue: true }); return r.result && r.result.result ? r.result.result.value : undefined; };
+// Screenshots land on the final frame: after 150 ms (Motion starts its animations on the next frame), finite animations
+// (entrances, ring draw) are finished; loops keep running.
+const shotCall = async (p) => { await sleep(150); await ev(`document.getAnimations().forEach(function (a) { try { var t = a.effect && a.effect.getTiming(); if (t && t.iterations !== Infinity) a.finish(); } catch (e) {} }); return 1;`); return call("Page.captureScreenshot", p); };
 const until = async (e, ms = 10000) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { if (await ev(e) === true) return true; await sleep(120); } return false; };
 let fails = 0; const ok = (c, m) => { console.log((c ? "PASS " : "FAIL ") + m); if (!c) fails++; };
 const click = (sel) => ev(`var b=document.querySelector(${JSON.stringify(sel)}); if(!b) return "missing"; b.click(); return 1;`);
 // Dark and light, each at 390x844 and, when the body scrolls, also the whole body ("-full").
+// Motion strips (STRIP=<dir>): every running animation is paused and stepped to each time in ms, one frame a step.
+const strip = async (name, ts) => {
+  if (!process.env.STRIP) return;
+  const fsx = await import("node:fs");
+  if (process.env.PN_LIGHT) await ev(`document.body.classList.remove("dark"); return 1;`);
+  for (const t of ts) {
+    await ev(`document.getAnimations().forEach(function (a) { try { a.pause(); a.currentTime = ${t}; } catch (e) {} }); return 1;`);
+    const r = await call("Page.captureScreenshot", { format: "png" });
+    if (r.result) fsx.writeFileSync(join(process.env.STRIP, name + "-" + (process.env.PN_LIGHT ? "light" : "dark") + "-" + String(t).padStart(4, "0") + ".png"), Buffer.from(r.result.data, "base64"));
+  }
+  await ev(`document.getAnimations().forEach(function (a) { try { a.play(); } catch (e) {} }); return 1;`);
+};
 const shot = async (name) => {
   if (!process.env.SHOTS) return;
   for (const mode of ["dark", "light"]) {
     await ev(`document.body.classList.toggle("dark", ${mode === "dark"}); return 1;`); await sleep(120);
-    let r = await call("Page.captureScreenshot", { format: "png" });
+    let r = await shotCall({ format: "png" });
     if (r.result) fs.writeFileSync(join(process.env.SHOTS, `arena-${mode}-${name}.png`), Buffer.from(r.result.data, "base64"));
     const h = await ev(`var b=document.querySelector("#smdPrep .pn-body"); return b && b.scrollHeight > b.clientHeight + 4 ? Math.ceil(b.scrollHeight - b.clientHeight + 844) : 0;`);
     if (h) {
       await call("Emulation.setDeviceMetricsOverride", { width: 390, height: Math.min(h, 4000), deviceScaleFactor: 2, mobile: true }); await sleep(200);
-      r = await call("Page.captureScreenshot", { format: "png" });
+      r = await shotCall({ format: "png" });
       if (r.result) fs.writeFileSync(join(process.env.SHOTS, `arena-${mode}-${name}-full.png`), Buffer.from(r.result.data, "base64"));
       await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true }); await sleep(120);
     }
@@ -129,7 +145,7 @@ try {
   const { result: { sessionId: sid } } = await call("Target.attachToTarget", { targetId, flatten: true }); sessionId = sid;
   await call("Runtime.enable", {}); await call("Network.enable", {}); await call("Page.enable", {});
   await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
-  await call("Page.addScriptToEvaluateOnNewDocument", { source: `window.SMD_PREP_BASE=${JSON.stringify(FIX)}; window.SMD_PREP_BANK_API=${JSON.stringify(FIX + "api/")}; window.SMD_PREP_FLAG_API=${JSON.stringify(FIX + "hidden.json")}; window.confirm=function(){return true;}; window.SMD_PREP_ONBOARD=false; ${WS_STUB}` });
+  await call("Page.addScriptToEvaluateOnNewDocument", { source: `window.SMD_PREP_BANK_VER="v1"; window.SMD_PREP_BASE=${JSON.stringify(FIX)}; window.SMD_PREP_BANK_API=${JSON.stringify(FIX + "api/")}; window.SMD_PREP_FLAG_API=${JSON.stringify(FIX + "hidden.json")}; window.confirm=function(){return true;}; window.SMD_PREP_ONBOARD=false; ${WS_STUB}` });
   await call("Fetch.enable", { patterns: [{ urlPattern: "*/api/prep/arena/*" }] });
   const clean = `["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); return 1;`;
   const load = async (url) => { reqs.length = 0; await call("Page.navigate", { url }); await until(`return !!(window.PREP && window.SMD_showHome);`, 30000); await ev(clean); await sleep(300); };
@@ -151,6 +167,10 @@ try {
   await click("#smdPrep [data-act=a-stats]");
   ok(await until(`return /My stats/.test(document.querySelector("#smdPrep .pn-t h1").textContent) && document.querySelectorAll("#smdPrep .pn-days i").length===30;`, 5000), "My stats works with the arena off: 30 day bars");
   ok(await ev(`var t=document.querySelector("#smdPrep .pn-acc").textContent; return /Anatomy/.test(t) && /61%/.test(t);`) === true, "accuracy by subject sums the subject's modules (11 of 18 = 61%)");
+  ok(await ev(`var g=document.querySelectorAll("#smdPrep .pn-heat-g i"), lit=document.querySelectorAll("#smdPrep .pn-heat-g i.l1,#smdPrep .pn-heat-g i.l2,#smdPrep .pn-heat-g i.l3,#smdPrep .pn-heat-g i.l4"); return g.length===84 && lit.length===4 && !!document.querySelector("#smdPrep .pn-heat-g i.l2.t") && /4 active days/.test(document.querySelector("#smdPrep .pn-heat").getAttribute("aria-label"));`) === true, "the study calendar: 12 weeks of days, the 4 study days lit, today ringed");
+  ok(await ev(`var r=Array.from(document.querySelectorAll("#smdPrep .pn-streaks b")).map(function(b){return b.textContent;}).join(","); return r;`) === "2,2,18,61%", "streak 2, best 2, 18 answered, 61% right");
+  ok(await ev(`var l=document.querySelector("#smdPrep .pn-lvb"); return !!l && /Level 1/.test(l.getAttribute("aria-label")) && /Fresher/.test(l.textContent) && !!l.querySelector("[data-act=a-share]");`) === true, "the level card names the rank and offers Share my progress");
+  ok(await evA(`PREP_ARENA._a.drawCard().then(function (cv) { var d=cv.getContext("2d").getImageData(540, 700, 1, 1).data; return cv.width===1080 && cv.height===1350 && (d[0]+d[1]+d[2]) > 0; })`) === true, "the share card renders 1080 x 1350 from this phone's stats");
   ok(await ev(`return /NEET-PG pattern \\(mini\\)/.test(document.querySelector("#smdPrep .pn-body").textContent) && !document.getElementById("pnArenaStats");`) === true, "mock history shows; no Arena section while the flag is off");
   await shot("stats-local");
   ok(!S.calls.length && !reqs.some((u) => /\/api\/prep\/arena/.test(u)), "arena off: no Arena request: " + S.calls.join(", "));
@@ -249,6 +269,9 @@ try {
   await shot("battle-queue");
   await ev(`__ws[0].emit({t:"waiting"}); __ws[0].emit({t:"match",id:"b1",opp:{name:"Rohan Mehta",rating:1240},n:7,secs:20}); return 1;`);
   ok(await until(`return /Rohan Mehta/.test(document.querySelector("#smdPrep .pn-vs").textContent);`, 3000), "match: versus header with the opponent");
+  ok(await ev(`var v=document.querySelector("#smdPrep .pn-vsi"); if(!v) return false; var av=v.querySelectorAll(".pn-av"); return av.length===2 && av[1].textContent==="RM" && /Rating 1240/.test(v.textContent) && !!v.querySelector(".pn-bolt") && /7 questions, 20 seconds each/.test(v.textContent);`) === true, "the VS screen: both players, initials in rings, the rating and a bolt between them");
+  if (process.env.STRIP) await strip("vs-intro", [0, 80, 160, 240, 320, 420, 560, 760]);
+  await sleep(700); await shot("battle-vs");
   const q = (i) => `__ws[0].emit({t:"q",i:${i},q:"Battle question ${i + 1}: drug of choice for absence seizures in a 7 year old?",o:["Ethosuximide","Phenytoin","Carbamazepine","Gabapentin"],deadline:Date.now()+20000}); return 1;`;
   await ev(q(0));
   ok(await until(`return !!document.querySelector("#smdPrep .pn-tbar i") && document.querySelectorAll("#smdPrep .pn-opt").length===4 && /Round 1 of 7/.test(document.querySelector("#smdPrep .pn-t h1").textContent);`, 3000), "round 1: question, options and a timer bar");

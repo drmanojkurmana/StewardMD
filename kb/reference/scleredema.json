@@ -1,79 +1,174 @@
 {
-  "id": "scleredema",
-  "name": "Scleredema (of Buschke)",
-  "aliases": [
-    "scleredema of Buschke",
-    "scleredema adultorum",
-    "scleredema diabeticorum",
-    "Buschke disease"
+ "id": "scleredema",
+ "name": "Scleredema (of Buschke)",
+ "aliases": [
+  "scleredema of Buschke",
+  "scleredema adultorum",
+  "scleredema diabeticorum",
+  "Buschke disease"
+ ],
+ "class": "non_infective",
+ "system": "Dermatology",
+ "specialty": "Dermatology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Rook's Textbook of Dermatology / Bolognia Dermatology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A deposition dermatosis with diffuse, non-pitting induration and thickening of the skin, typically over the upper back, posterior neck, and shoulders",
+   "The affected skin feels woody and firm, and movement of the neck and trunk can become restricted",
+   "Three recognised clinical settings: a post-infectious form after streptococcal or viral illness, an association with monoclonal gammopathy, and a form linked to long-standing diabetes (scleredema diabeticorum)",
+   "Unlike systemic sclerosis it spares the fingers and lacks Raynaud phenomenon, sclerodactyly, and nailfold capillary changes",
+   "Histology shows thickened dermis with widely separated collagen bundles and accumulation of mucin (glycosaminoglycans)",
+   "The diabetes-associated form tends to be chronic and persistent, whereas the post-infectious form may resolve over months",
+   "There is no uniformly effective treatment; options explored include physiotherapy, phototherapy, and immunomodulatory approaches, alongside management of the underlying association"
   ],
-  "class": "non_infective",
-  "system": "Dermatology",
-  "specialty": "Dermatology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Rook's Textbook of Dermatology / Bolognia Dermatology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A deposition dermatosis with diffuse, non-pitting induration and thickening of the skin, typically over the upper back, posterior neck, and shoulders",
-      "The affected skin feels woody and firm, and movement of the neck and trunk can become restricted",
-      "Three recognised clinical settings: a post-infectious form after streptococcal or viral illness, an association with monoclonal gammopathy, and a form linked to long-standing diabetes (scleredema diabeticorum)",
-      "Unlike systemic sclerosis it spares the fingers and lacks Raynaud phenomenon, sclerodactyly, and nailfold capillary changes",
-      "Histology shows thickened dermis with widely separated collagen bundles and accumulation of mucin (glycosaminoglycans)",
-      "The diabetes-associated form tends to be chronic and persistent, whereas the post-infectious form may resolve over months",
-      "There is no uniformly effective treatment; options explored include physiotherapy, phototherapy, and immunomodulatory approaches, alongside management of the underlying association"
+  "pathophysiology": "Scleredema is characterised by excessive deposition of collagen and mucopolysaccharide (mucin) in the reticular dermis, which thickens the skin and produces its firm, non-pitting induration. Fibroblasts in affected skin appear to be stimulated to overproduce collagen and glycosaminoglycans. The mechanisms differ by clinical context: a post-infectious immune response is implicated after streptococcal or viral illness, non-enzymatic glycosylation and altered collagen metabolism are thought relevant in diabetes, and a paraproteinaemic form is associated with monoclonal gammopathy, sometimes progressing to a plasma-cell dyscrasia. The dermal expansion, not oedema fluid, explains why the swelling does not pit.",
+  "additionalDifferentials": [
+   "Systemic sclerosis (scleroderma)",
+   "Scleromyxoedema",
+   "Nephrogenic systemic fibrosis",
+   "Eosinophilic fasciitis",
+   "Myxoedema of hypothyroidism",
+   "Chronic graft-versus-host disease with sclerosis"
+  ],
+  "additionalInvestigations": [
+   "Skin biopsy showing dermal thickening, separated collagen bundles, and mucin deposition",
+   "Serum and urine protein electrophoresis with immunofixation for monoclonal gammopathy",
+   "Fasting glucose and HbA1c to assess for diabetes",
+   "Streptococcal and viral serology when a post-infectious form is suspected",
+   "Thyroid function to exclude myxoedema",
+   "Autoantibody screen to help exclude systemic sclerosis"
+  ],
+  "redFlags": [
+   "Detection of a monoclonal protein warranting haematological evaluation for myeloma or related dyscrasia",
+   "Restriction of chest wall movement or dysphagia from extensive induration",
+   "Rapidly progressive or widespread skin involvement",
+   "Features suggesting an alternative systemic sclerosing disease"
+  ],
+  "prognosis": "The post-infectious form often improves spontaneously over months to a couple of years, whereas the diabetes-associated and paraproteinaemic forms tend to be chronic and refractory; overall prognosis depends on any underlying disorder.",
+  "pitfalls": [
+   "Mistaking it for systemic sclerosis and missing that the fingers are spared without Raynaud phenomenon",
+   "Failing to screen for a monoclonal gammopathy that may herald a plasma-cell disorder",
+   "Overlooking poorly controlled diabetes as the underlying association",
+   "Interpreting the non-pitting swelling as simple oedema"
+  ],
+  "references": [
+   "Rook's Textbook of Dermatology",
+   "Bolognia Dermatology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Treat the underlying association — optimise glycaemic control in scleredema diabeticorum, treat streptococcal or viral infection in the post-infectious form, and manage any monoclonal gammopathy",
+   "Recognise there is no reliably effective specific therapy, with phototherapy such as UVA1 or PUVA offering variable benefit for skin induration",
+   "Consider immunomodulatory approaches such as methotrexate, systemic corticosteroids or intravenous immunoglobulin for progressive or disabling disease",
+   "In the paraproteinaemic form direct treatment at a clinically significant plasma-cell dyscrasia with haematology input",
+   "Provide physiotherapy to preserve neck and trunk mobility restricted by the woody induration",
+   "Distinguish from systemic sclerosis to avoid inappropriate treatment, given sparing of the fingers and absence of Raynaud phenomenon",
+   "Monitor the post-infectious form for spontaneous resolution and follow chronic diabetes- or paraprotein-associated disease long term"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "scleredema-pathway",
+   "title": "Scleredema (of Buschke): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A deposition dermatosis with diffuse, non-pitting induration and thickening of the skin, typically over the upper back, posterior neck, and shoulders",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Detection of a monoclonal protein warranting haematological evaluation for myeloma or related dyscrasia",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Skin biopsy showing dermal thickening, separated collagen bundles, and mucin deposition, Serum and urine protein electrophoresis with immunofixation for monoclonal gammopathy, Fasting glucose and HbA1c to assess for"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Treat the underlying association - optimise glycaemic control in scleredema diabeticorum, treat streptococcal or viral infection in the post-infectious form, and manage any monoclonal gammopathy"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking it for systemic sclerosis and missing that the fingers are spared without Raynaud phenomenon"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of scleredema (of buschke)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "scleredema-matrix",
+   "title": "Scleredema (of Buschke): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A deposition dermatosis with diffuse, non-pitting induration and thickening of the skin, typically over the upper back, posterior",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Scleredema is characterised by excessive deposition of collagen and mucopolysaccharide (mucin) in the reticular dermis, which thickens the skin and produces its firm, non-pitting induration. Fibroblasts in affected skin appear to be stimulated to overproduce collagen and glycosaminoglycans. The mechanisms differ by clinical context: a post-infectious immune response is implicated after streptococcal or viral illness, non-enzymatic glycosylation and altered collagen metabolism are thought relevant in diabetes, and a paraproteinaemic form is associated with monoclonal gammopathy, sometimes progressing to a plasma-cell dyscrasia. The dermal expansion, not oedema fluid, explains why the swelling does not pit.",
-    "additionalDifferentials": [
-      "Systemic sclerosis (scleroderma)",
-      "Scleromyxoedema",
-      "Nephrogenic systemic fibrosis",
-      "Eosinophilic fasciitis",
-      "Myxoedema of hypothyroidism",
-      "Chronic graft-versus-host disease with sclerosis"
+    [
+     "Key Investigations",
+     "Skin biopsy showing dermal thickening, separated collagen bundles, and mucin deposition, Serum and urine protein electrophoresis",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Skin biopsy showing dermal thickening, separated collagen bundles, and mucin deposition",
-      "Serum and urine protein electrophoresis with immunofixation for monoclonal gammopathy",
-      "Fasting glucose and HbA1c to assess for diabetes",
-      "Streptococcal and viral serology when a post-infectious form is suspected",
-      "Thyroid function to exclude myxoedema",
-      "Autoantibody screen to help exclude systemic sclerosis"
+    [
+     "Primary Differentials",
+     "Systemic sclerosis (scleroderma), Scleromyxoedema, Nephrogenic systemic fibrosis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Detection of a monoclonal protein warranting haematological evaluation for myeloma or related dyscrasia",
-      "Restriction of chest wall movement or dysphagia from extensive induration",
-      "Rapidly progressive or widespread skin involvement",
-      "Features suggesting an alternative systemic sclerosing disease"
+    [
+     "Management Strategy",
+     "Treat the underlying association - optimise glycaemic control in scleredema diabeticorum, treat streptococcal or viral infection",
+     "Core treatment modality"
     ],
-    "prognosis": "The post-infectious form often improves spontaneously over months to a couple of years, whereas the diabetes-associated and paraproteinaemic forms tend to be chronic and refractory; overall prognosis depends on any underlying disorder.",
-    "pitfalls": [
-      "Mistaking it for systemic sclerosis and missing that the fingers are spared without Raynaud phenomenon",
-      "Failing to screen for a monoclonal gammopathy that may herald a plasma-cell disorder",
-      "Overlooking poorly controlled diabetes as the underlying association",
-      "Interpreting the non-pitting swelling as simple oedema"
-    ],
-    "references": [
-      "Rook's Textbook of Dermatology",
-      "Bolognia Dermatology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Treat the underlying association — optimise glycaemic control in scleredema diabeticorum, treat streptococcal or viral infection in the post-infectious form, and manage any monoclonal gammopathy",
-      "Recognise there is no reliably effective specific therapy, with phototherapy such as UVA1 or PUVA offering variable benefit for skin induration",
-      "Consider immunomodulatory approaches such as methotrexate, systemic corticosteroids or intravenous immunoglobulin for progressive or disabling disease",
-      "In the paraproteinaemic form direct treatment at a clinically significant plasma-cell dyscrasia with haematology input",
-      "Provide physiotherapy to preserve neck and trunk mobility restricted by the woody induration",
-      "Distinguish from systemic sclerosis to avoid inappropriate treatment, given sparing of the fingers and absence of Raynaud phenomenon",
-      "Monitor the post-infectious form for spontaneous resolution and follow chronic diabetes- or paraprotein-associated disease long term"
+    [
+     "Clinical Pitfall",
+     "Mistaking it for systemic sclerosis and missing that the fingers are spared without Raynaud phenomenon",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for scleredema (of buschke)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "scleredema-real-image",
+   "title": "Scleredema (of Buschke): Clinical Cutaneous Dermatology Photograph",
+   "type": "diagram",
+   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
+   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
+   "annotations": [
+    {
+     "label": "Primary Lesions",
+     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
+    },
+    {
+     "label": "Demarcation & Margins",
+     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
+    },
+    {
+     "label": "Anatomical Distribution",
+     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+    }
+   ]
+  }
+ ]
 }

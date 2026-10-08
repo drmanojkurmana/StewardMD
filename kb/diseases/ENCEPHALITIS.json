@@ -245,5 +245,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "hb07b9eb4"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "encephalitis-dx-algo",
+      "title": "Encephalitis: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Encephalitis differs from meningitis by the presence of altered brain function itself - altered consciousness (confusion, behavioural change, lethargy to coma) and focal or diffuse neurologic signs - whereas uncomplicated meningitis spares",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Focal neurologic findings on examination, neuroimaging, or EEG in suspected encephalitis - strongly suggest HSV and mandate immediate empiric aciclovir while testing proceeds",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Diffusion-weighted and FLAIR MRI sequences in addition to standard MRI - increase sensitivity for HSV temporal-lobe lesions (detect ~90% when added), Repeat CSF HSV PCR if the initial test is obtained within the first ~72"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Differentiate from top mimics: Rabies (encephalitic/furious form with hydrophobia and aerophobia, or paralytic form) - bat exposure is the key risk in the US and a bite history may be lacking, Cytomegalovirus, EBV, HHV-6 encephalitis"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Do not wait for CSF PCR confirmation before starting aciclovir in suspected HSV encephalitis - early treatment improves outcome, and PCR can be falsely negative in the first ~72 h (start empirically, repeat PCR if"
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for encephalitis."
+    }
+  ],
+  "tables": [
+    {
+      "id": "encephalitis-matrix",
+      "title": "Encephalitis: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Encephalitis differs from meningitis by the presence of altered brain function itself - altered consciousness (confusion,",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Diffusion-weighted and FLAIR MRI sequences in addition to standard MRI - increase sensitivity for HSV temporal-lobe lesions",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Rabies (encephalitic/furious form with hydrophobia and aerophobia, or paralytic form) - bat exposure is the key risk in the US",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Focal neurologic findings on examination, neuroimaging, or EEG in suspected encephalitis - strongly suggest HSV and mandate",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Do not wait for CSF PCR confirmation before starting aciclovir in suspected HSV encephalitis - early treatment improves outcome,",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for encephalitis."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "encephalitis-real-image",
+      "title": "Encephalitis: Diagnostic Head Computed Tomography",
+      "type": "ct",
+      "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
+      "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
+      "annotations": [
+        {
+          "label": "Cerebral Parenchyma",
+          "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+        },
+        {
+          "label": "Ventricular System",
+          "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+        },
+        {
+          "label": "Extra-Axial Spaces",
+          "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+        }
+      ]
+    }
+  ]
 }

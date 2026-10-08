@@ -1,78 +1,173 @@
 {
-  "id": "seckel_syndrome",
-  "name": "Seckel syndrome",
-  "aliases": [
-    "microcephalic primordial dwarfism",
-    "bird-headed dwarfism",
-    "nanocephalic dwarfism"
+ "id": "seckel_syndrome",
+ "name": "Seckel syndrome",
+ "aliases": [
+  "microcephalic primordial dwarfism",
+  "bird-headed dwarfism",
+  "nanocephalic dwarfism"
+ ],
+ "class": "non_infective",
+ "system": "Genetics / Dysmorphology",
+ "specialty": "Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Smith's Recognizable Patterns of Human Malformation",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A microcephalic primordial dwarfism with severe proportionate pre- and postnatal growth restriction and marked microcephaly",
+   "The characteristic facies is often described as bird-headed, with a receding forehead, prominent beaked nose, micrognathia, and low-set dysmorphic ears",
+   "Intellectual disability is usual and typically moderate to severe, reflecting the profoundly small brain",
+   "Genetically heterogeneous, caused by biallelic variants in genes of the DNA damage response and centrosome/replication machinery, most classically ATR, with several other loci implicated",
+   "Inherited in an autosomal recessive pattern, so consanguinity increases risk and recurrence risk to siblings is significant",
+   "Haematological complications, including cytopenias and a reported risk of myelodysplasia or leukaemia, can occur and warrant monitoring",
+   "It overlaps with other microcephalic primordial dwarfisms such as MOPD, so precise molecular diagnosis guides prognosis and counselling"
   ],
-  "class": "non_infective",
-  "system": "Genetics / Dysmorphology",
-  "specialty": "Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Smith's Recognizable Patterns of Human Malformation",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A microcephalic primordial dwarfism with severe proportionate pre- and postnatal growth restriction and marked microcephaly",
-      "The characteristic facies is often described as bird-headed, with a receding forehead, prominent beaked nose, micrognathia, and low-set dysmorphic ears",
-      "Intellectual disability is usual and typically moderate to severe, reflecting the profoundly small brain",
-      "Genetically heterogeneous, caused by biallelic variants in genes of the DNA damage response and centrosome/replication machinery, most classically ATR, with several other loci implicated",
-      "Inherited in an autosomal recessive pattern, so consanguinity increases risk and recurrence risk to siblings is significant",
-      "Haematological complications, including cytopenias and a reported risk of myelodysplasia or leukaemia, can occur and warrant monitoring",
-      "It overlaps with other microcephalic primordial dwarfisms such as MOPD, so precise molecular diagnosis guides prognosis and counselling"
+  "pathophysiology": "Seckel syndrome is a genetically heterogeneous microcephalic primordial dwarfism arising from biallelic variants in genes controlling the DNA damage response, DNA replication, and centrosome function, of which ATR is the prototype. Impaired handling of replication stress and defective cell-cycle control reduce the number of cell divisions during development, most conspicuously in the brain, producing severe proportionate growth restriction and profound microcephaly. The same genome-maintenance defects underlie the associated haematological and other systemic complications.",
+  "additionalDifferentials": [
+   "Microcephalic osteodysplastic primordial dwarfism (MOPD types)",
+   "Meier-Gorlin syndrome",
+   "Primary autosomal recessive microcephaly (MCPH)",
+   "Cornelia de Lange syndrome",
+   "Silver-Russell syndrome",
+   "Fetal alcohol spectrum disorder"
+  ],
+  "additionalInvestigations": [
+   "Gene panel or exome sequencing covering ATR and other primordial dwarfism/DNA repair genes",
+   "Chromosomal microarray to exclude copy-number causes",
+   "Serial head circumference and growth measurement to characterise proportionate restriction",
+   "Full blood count monitoring for cytopenias and haematological malignancy risk",
+   "Brain imaging to assess microcephaly and any structural anomaly",
+   "Developmental and neuropsychological assessment"
+  ],
+  "redFlags": [
+   "Unexplained cytopenias or features suggesting myelodysplasia or leukaemia",
+   "Signs of an intracranial vascular anomaly, which have been reported in some primordial dwarfisms",
+   "Feeding failure and severe faltering growth requiring nutritional support",
+   "New neurological deficit prompting imaging"
+  ],
+  "prognosis": "Growth restriction and microcephaly are lifelong and stature remains far below normal, while cognitive impairment is usually significant. Prognosis is influenced by the specific gene involved and by haematological and other systemic complications, and survival into adulthood is possible with supportive care.",
+  "pitfalls": [
+   "Grouping all microcephalic primordial dwarfisms together without molecular confirmation, obscuring differing risks",
+   "Overlooking evolving haematological complications",
+   "Attributing the phenotype to intrauterine environmental factors and missing the recessive genetic cause",
+   "Failing to counsel consanguineous families about substantial recurrence risk"
+  ],
+  "references": [
+   "Smith's Recognizable Patterns of Human Malformation",
+   "GeneReviews: Microcephalic Primordial Dwarfism / Seckel Syndrome Spectrum"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Provide supportive, multidisciplinary care as there is no disease-specific or curative therapy",
+   "Offer developmental, educational and physiotherapy or occupational support for intellectual disability",
+   "Ensure nutritional support and monitor growth, recognising growth hormone is generally ineffective in this primordial dwarfism",
+   "Undertake haematological surveillance with regular full blood counts for cytopenias, myelodysplasia and leukaemia",
+   "Manage systemic and structural complications as they arise, involving relevant specialists",
+   "Offer genetic counselling for autosomal recessive inheritance, addressing consanguinity and sibling recurrence risk",
+   "Provide family screening and reproductive counselling"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "seckel_syndrome-pathway",
+   "title": "Seckel syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A microcephalic primordial dwarfism with severe proportionate pre- and postnatal growth restriction and marked microcephaly",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Unexplained cytopenias or features suggesting myelodysplasia or leukaemia",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Gene panel or exome sequencing covering ATR and other primordial dwarfism/DNA repair genes, Chromosomal microarray to exclude copy-number causes, Serial head circumference and growth measurement to characterise"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Provide supportive, multidisciplinary care as there is no disease-specific or curative therapy"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Grouping all microcephalic primordial dwarfisms together without molecular confirmation, obscuring differing risks"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of seckel syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "seckel_syndrome-matrix",
+   "title": "Seckel syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A microcephalic primordial dwarfism with severe proportionate pre- and postnatal growth restriction and marked microcephaly",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Seckel syndrome is a genetically heterogeneous microcephalic primordial dwarfism arising from biallelic variants in genes controlling the DNA damage response, DNA replication, and centrosome function, of which ATR is the prototype. Impaired handling of replication stress and defective cell-cycle control reduce the number of cell divisions during development, most conspicuously in the brain, producing severe proportionate growth restriction and profound microcephaly. The same genome-maintenance defects underlie the associated haematological and other systemic complications.",
-    "additionalDifferentials": [
-      "Microcephalic osteodysplastic primordial dwarfism (MOPD types)",
-      "Meier-Gorlin syndrome",
-      "Primary autosomal recessive microcephaly (MCPH)",
-      "Cornelia de Lange syndrome",
-      "Silver-Russell syndrome",
-      "Fetal alcohol spectrum disorder"
+    [
+     "Key Investigations",
+     "Gene panel or exome sequencing covering ATR and other primordial dwarfism/DNA repair genes, Chromosomal microarray to exclude",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Gene panel or exome sequencing covering ATR and other primordial dwarfism/DNA repair genes",
-      "Chromosomal microarray to exclude copy-number causes",
-      "Serial head circumference and growth measurement to characterise proportionate restriction",
-      "Full blood count monitoring for cytopenias and haematological malignancy risk",
-      "Brain imaging to assess microcephaly and any structural anomaly",
-      "Developmental and neuropsychological assessment"
+    [
+     "Primary Differentials",
+     "Microcephalic osteodysplastic primordial dwarfism (MOPD types), Meier-Gorlin syndrome, Primary autosomal recessive microcephaly",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Unexplained cytopenias or features suggesting myelodysplasia or leukaemia",
-      "Signs of an intracranial vascular anomaly, which have been reported in some primordial dwarfisms",
-      "Feeding failure and severe faltering growth requiring nutritional support",
-      "New neurological deficit prompting imaging"
+    [
+     "Management Strategy",
+     "Provide supportive, multidisciplinary care as there is no disease-specific or curative therapy",
+     "Core treatment modality"
     ],
-    "prognosis": "Growth restriction and microcephaly are lifelong and stature remains far below normal, while cognitive impairment is usually significant. Prognosis is influenced by the specific gene involved and by haematological and other systemic complications, and survival into adulthood is possible with supportive care.",
-    "pitfalls": [
-      "Grouping all microcephalic primordial dwarfisms together without molecular confirmation, obscuring differing risks",
-      "Overlooking evolving haematological complications",
-      "Attributing the phenotype to intrauterine environmental factors and missing the recessive genetic cause",
-      "Failing to counsel consanguineous families about substantial recurrence risk"
-    ],
-    "references": [
-      "Smith's Recognizable Patterns of Human Malformation",
-      "GeneReviews: Microcephalic Primordial Dwarfism / Seckel Syndrome Spectrum"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Provide supportive, multidisciplinary care as there is no disease-specific or curative therapy",
-      "Offer developmental, educational and physiotherapy or occupational support for intellectual disability",
-      "Ensure nutritional support and monitor growth, recognising growth hormone is generally ineffective in this primordial dwarfism",
-      "Undertake haematological surveillance with regular full blood counts for cytopenias, myelodysplasia and leukaemia",
-      "Manage systemic and structural complications as they arise, involving relevant specialists",
-      "Offer genetic counselling for autosomal recessive inheritance, addressing consanguinity and sibling recurrence risk",
-      "Provide family screening and reproductive counselling"
+    [
+     "Clinical Pitfall",
+     "Grouping all microcephalic primordial dwarfisms together without molecular confirmation, obscuring differing risks",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for seckel syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "seckel-syndrome-real-image",
+   "title": "Seckel syndrome: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

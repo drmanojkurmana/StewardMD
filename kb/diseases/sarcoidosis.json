@@ -187,5 +187,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "h8683fd48"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "sarcoidosis-dx-algo",
+      "title": "Sarcoidosis: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Sarcoidosis is a systemic granulomatous disease of unknown cause; the lung is involved in over 90% of cases, but roughly half of patients have extrapulmonary disease and almost any organ can be affected (p.2921, p.2924).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Exclude infection (especially TB and fungi such as histoplasmosis) before starting immunosuppression - abundant necrosis on biopsy points away from sarcoidosis toward infection",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Pulmonary function tests at baseline and serially to track impairment/progression, Baseline ophthalmologic examination to detect clinically silent uveitis, Baseline ECG in every patient to screen for conduction block, ST-T"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Scadding chest x-ray stages describe the pulmonary pattern and correlate with spontaneous resolution rates (NOT with activity or prognosis in the individual): Stage 1 = bilateral hilar lymphadenopathy without parenchymal"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: A normal BAL CD4:CD8 ratio, normal PFTs, or a normal lung exam does NOT exclude sarcoidosis despite active granulomatous inflammation (p.2924)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for sarcoidosis."
+    }
+  ],
+  "tables": [
+    {
+      "id": "sarcoidosis-matrix",
+      "title": "Sarcoidosis: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Sarcoidosis is a systemic granulomatous disease of unknown cause; the lung is involved in over 90% of cases, but roughly half of",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Pulmonary function tests at baseline and serially to track impairment/progression, Baseline ophthalmologic examination to detect",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Hypersensitivity pneumonitis (granulomas are loosely formed and nonnecrotizing), Chronic beryllium disease, Silicosis",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Exclude infection (especially TB and fungi such as histoplasmosis) before starting immunosuppression - abundant necrosis on",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "A normal BAL CD4:CD8 ratio, normal PFTs, or a normal lung exam does NOT exclude sarcoidosis despite active granulomatous",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for sarcoidosis."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "sarcoidosis-real-image",
+      "title": "Sarcoidosis: Diagnostic Chest Radiograph",
+      "type": "xray",
+      "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
+      "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
+      "annotations": [
+        {
+          "label": "Parenchyma & Airspaces",
+          "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
+        },
+        {
+          "label": "Bronchovascular Tree",
+          "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
+        },
+        {
+          "label": "Pleural Margins",
+          "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+        }
+      ]
+    }
+  ]
 }

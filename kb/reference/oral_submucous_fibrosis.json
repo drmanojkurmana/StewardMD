@@ -1,74 +1,169 @@
 {
-  "id": "oral_submucous_fibrosis",
-  "name": "Oral submucous fibrosis",
-  "aliases": [
-    "OSMF",
-    "oral submucosal fibrosis"
+ "id": "oral_submucous_fibrosis",
+ "name": "Oral submucous fibrosis",
+ "aliases": [
+  "OSMF",
+  "oral submucosal fibrosis"
+ ],
+ "class": "non_infective",
+ "system": "Oral cavity",
+ "specialty": "Oral medicine / Oral and maxillofacial surgery",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Oral medicine and oral pathology reference texts",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A chronic progressive fibrosing disease of the oral mucosa strongly linked to areca (betel) nut chewing",
+   "Patients develop burning on eating spicy food, blanching and stiffening of the mucosa and progressive limitation of mouth opening",
+   "Palpable fibrous bands in the buccal mucosa and a rigid, pale mucosa are characteristic",
+   "It is a recognised oral potentially malignant disorder with a significant risk of squamous cell carcinoma",
+   "It is most prevalent in South and South-East Asian populations and their diaspora",
+   "Management includes strict habit cessation, medical measures to improve mouth opening and surgery for severe trismus, with lifelong cancer surveillance"
   ],
-  "class": "non_infective",
-  "system": "Oral cavity",
-  "specialty": "Oral medicine / Oral and maxillofacial surgery",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Oral medicine and oral pathology reference texts",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A chronic progressive fibrosing disease of the oral mucosa strongly linked to areca (betel) nut chewing",
-      "Patients develop burning on eating spicy food, blanching and stiffening of the mucosa and progressive limitation of mouth opening",
-      "Palpable fibrous bands in the buccal mucosa and a rigid, pale mucosa are characteristic",
-      "It is a recognised oral potentially malignant disorder with a significant risk of squamous cell carcinoma",
-      "It is most prevalent in South and South-East Asian populations and their diaspora",
-      "Management includes strict habit cessation, medical measures to improve mouth opening and surgery for severe trismus, with lifelong cancer surveillance"
+  "pathophysiology": "Oral submucous fibrosis is driven chiefly by arecoline and other alkaloids in areca nut, which stimulate fibroblast proliferation and collagen synthesis while reducing collagen breakdown, leading to excessive deposition of dense fibrous tissue in the lamina propria and submucosa. Chronic inflammation and juxta-epithelial hyalinisation cause progressive mucosal stiffening and trismus, and epithelial atrophy with altered turnover increases susceptibility to malignant transformation. The result is an irreversible fibrotic and potentially premalignant state.",
+  "additionalDifferentials": [
+   "Scleroderma with orofacial involvement",
+   "Oral leukoplakia or erythroplakia",
+   "Oral lichen planus",
+   "Radiation-induced fibrosis",
+   "Squamous cell carcinoma"
+  ],
+  "additionalInvestigations": [
+   "Clinical assessment of mouth opening and fibrous bands",
+   "Biopsy to confirm fibrosis and exclude dysplasia or carcinoma",
+   "Detailed habit history of areca nut and tobacco use",
+   "Regular surveillance for malignant change",
+   "Assessment of nutritional status and anaemia where relevant"
+  ],
+  "redFlags": [
+   "Development of a non-healing ulcer, red patch or mass suggesting carcinoma",
+   "Rapidly worsening trismus",
+   "Induration or dysplasia on biopsy",
+   "Weight loss or difficulty maintaining nutrition"
+  ],
+  "prognosis": "The fibrosis is largely irreversible and progressive if the habit continues; cessation and treatment can improve symptoms, but the elevated lifelong risk of oral cancer necessitates ongoing surveillance.",
+  "pitfalls": [
+   "Failing to counsel firmly on areca nut and tobacco cessation",
+   "Overlooking malignant transformation during follow-up",
+   "Confusing early disease with lichen planus or leukoplakia",
+   "Underestimating the functional impact of progressive trismus"
+  ],
+  "references": [
+   "Oral medicine reference texts (standard reference)",
+   "Oral pathology reference texts (standard reference)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Secure complete and permanent cessation of areca (betel) nut and tobacco use as the essential first step",
+   "Give intralesional corticosteroid injections, often with hyaluronidase, plus adjuncts such as pentoxifylline and antioxidants (e.g., lycopene) to improve mucosal suppleness",
+   "Institute mouth-opening physiotherapy with jaw-stretching exercises and interincisal devices to counter trismus",
+   "Undertake surgical release of fibrous bands with grafting or flap coverage for severe, disabling trismus",
+   "Correct nutritional deficiencies and anaemia with iron and vitamin supplementation",
+   "Maintain lifelong surveillance with biopsy of suspicious areas given the risk of squamous cell carcinoma",
+   "Refer to oral and maxillofacial surgery for advanced disease"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "oral_submucous_fibrosis-pathway",
+   "title": "Oral submucous fibrosis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A chronic progressive fibrosing disease of the oral mucosa strongly linked to areca (betel) nut chewing",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Development of a non-healing ulcer, red patch or mass suggesting carcinoma",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Clinical assessment of mouth opening and fibrous bands, Biopsy to confirm fibrosis and exclude dysplasia or carcinoma, Detailed habit history of areca nut and tobacco use"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Secure complete and permanent cessation of areca (betel) nut and tobacco use as the essential first step"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Failing to counsel firmly on areca nut and tobacco cessation"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of oral submucous fibrosis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "oral_submucous_fibrosis-matrix",
+   "title": "Oral submucous fibrosis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A chronic progressive fibrosing disease of the oral mucosa strongly linked to areca (betel) nut chewing",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Oral submucous fibrosis is driven chiefly by arecoline and other alkaloids in areca nut, which stimulate fibroblast proliferation and collagen synthesis while reducing collagen breakdown, leading to excessive deposition of dense fibrous tissue in the lamina propria and submucosa. Chronic inflammation and juxta-epithelial hyalinisation cause progressive mucosal stiffening and trismus, and epithelial atrophy with altered turnover increases susceptibility to malignant transformation. The result is an irreversible fibrotic and potentially premalignant state.",
-    "additionalDifferentials": [
-      "Scleroderma with orofacial involvement",
-      "Oral leukoplakia or erythroplakia",
-      "Oral lichen planus",
-      "Radiation-induced fibrosis",
-      "Squamous cell carcinoma"
+    [
+     "Key Investigations",
+     "Clinical assessment of mouth opening and fibrous bands, Biopsy to confirm fibrosis and exclude dysplasia or carcinoma, Detailed",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Clinical assessment of mouth opening and fibrous bands",
-      "Biopsy to confirm fibrosis and exclude dysplasia or carcinoma",
-      "Detailed habit history of areca nut and tobacco use",
-      "Regular surveillance for malignant change",
-      "Assessment of nutritional status and anaemia where relevant"
+    [
+     "Primary Differentials",
+     "Scleroderma with orofacial involvement, Oral leukoplakia or erythroplakia, Oral lichen planus",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Development of a non-healing ulcer, red patch or mass suggesting carcinoma",
-      "Rapidly worsening trismus",
-      "Induration or dysplasia on biopsy",
-      "Weight loss or difficulty maintaining nutrition"
+    [
+     "Management Strategy",
+     "Secure complete and permanent cessation of areca (betel) nut and tobacco use as the essential first step",
+     "Core treatment modality"
     ],
-    "prognosis": "The fibrosis is largely irreversible and progressive if the habit continues; cessation and treatment can improve symptoms, but the elevated lifelong risk of oral cancer necessitates ongoing surveillance.",
-    "pitfalls": [
-      "Failing to counsel firmly on areca nut and tobacco cessation",
-      "Overlooking malignant transformation during follow-up",
-      "Confusing early disease with lichen planus or leukoplakia",
-      "Underestimating the functional impact of progressive trismus"
-    ],
-    "references": [
-      "Oral medicine reference texts (standard reference)",
-      "Oral pathology reference texts (standard reference)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Secure complete and permanent cessation of areca (betel) nut and tobacco use as the essential first step",
-      "Give intralesional corticosteroid injections, often with hyaluronidase, plus adjuncts such as pentoxifylline and antioxidants (e.g., lycopene) to improve mucosal suppleness",
-      "Institute mouth-opening physiotherapy with jaw-stretching exercises and interincisal devices to counter trismus",
-      "Undertake surgical release of fibrous bands with grafting or flap coverage for severe, disabling trismus",
-      "Correct nutritional deficiencies and anaemia with iron and vitamin supplementation",
-      "Maintain lifelong surveillance with biopsy of suspicious areas given the risk of squamous cell carcinoma",
-      "Refer to oral and maxillofacial surgery for advanced disease"
+    [
+     "Clinical Pitfall",
+     "Failing to counsel firmly on areca nut and tobacco cessation",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for oral submucous fibrosis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "oral-submucous-fibrosis-real-image",
+   "title": "Oral submucous fibrosis: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

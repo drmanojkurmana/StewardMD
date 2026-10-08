@@ -1,78 +1,173 @@
 {
-  "id": "brown_syndrome",
-  "name": "Brown syndrome (superior oblique tendon)",
-  "aliases": [
-    "Brown's syndrome",
-    "superior oblique tendon sheath syndrome",
-    "SO tendon sheath syndrome"
+ "id": "brown_syndrome",
+ "name": "Brown syndrome (superior oblique tendon)",
+ "aliases": [
+  "Brown's syndrome",
+  "superior oblique tendon sheath syndrome",
+  "SO tendon sheath syndrome"
+ ],
+ "class": "non_infective",
+ "system": "Eye / Ophthalmology",
+ "specialty": "Ophthalmology / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Kanski / Taylor & Hoyt Paediatric Ophthalmology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A restrictive strabismus in which elevation of the eye is limited in adduction owing to impaired free movement of the superior oblique tendon through the trochlea",
+   "Elevation improves in abduction, giving a characteristic V-pattern and a positive forced duction test in adduction",
+   "May be congenital or acquired; acquired forms can follow trauma, sinus or orbital surgery, or inflammation of the trochlear region",
+   "There is usually little or no primary-position deviation, and a downshoot on adduction (an inverted-Y or divergence in upgaze) may be seen",
+   "A palpable or audible click on movement suggests an intermittent form as the tendon catches at the trochlea",
+   "Congenital cases are often stable and may improve spontaneously; painful acquired inflammatory cases can respond to anti-inflammatory treatment",
+   "Surgery, typically a superior oblique weakening procedure, is reserved for a significant hypotropia in primary position or an anomalous head posture"
   ],
-  "class": "non_infective",
-  "system": "Eye / Ophthalmology",
-  "specialty": "Ophthalmology / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Kanski / Taylor & Hoyt Paediatric Ophthalmology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A restrictive strabismus in which elevation of the eye is limited in adduction owing to impaired free movement of the superior oblique tendon through the trochlea",
-      "Elevation improves in abduction, giving a characteristic V-pattern and a positive forced duction test in adduction",
-      "May be congenital or acquired; acquired forms can follow trauma, sinus or orbital surgery, or inflammation of the trochlear region",
-      "There is usually little or no primary-position deviation, and a downshoot on adduction (an inverted-Y or divergence in upgaze) may be seen",
-      "A palpable or audible click on movement suggests an intermittent form as the tendon catches at the trochlea",
-      "Congenital cases are often stable and may improve spontaneously; painful acquired inflammatory cases can respond to anti-inflammatory treatment",
-      "Surgery, typically a superior oblique weakening procedure, is reserved for a significant hypotropia in primary position or an anomalous head posture"
+  "pathophysiology": "Brown syndrome results from mechanical restriction of the superior oblique tendon-trochlea complex, preventing the tendon from sliding freely and thereby limiting elevation of the eye when it is adducted. Congenital forms involve a structurally short or inelastic tendon or an abnormal trochlear apparatus, while acquired forms follow inflammation, scarring, trauma or surgery around the trochlea that impairs tendon excursion. Because the restriction is mechanical, forced ductions are positive and elevation is worst in adduction, where the tendon pulley effect is greatest, but improves in abduction. Intermittent catching of a swollen or nodular tendon at the trochlea can produce a click and variable limitation.",
+  "additionalDifferentials": [
+   "Inferior oblique palsy",
+   "Congenital fibrosis of the extraocular muscles",
+   "Orbital floor fracture with entrapment",
+   "Congenital third nerve palsy",
+   "Double elevator palsy (monocular elevation deficiency)",
+   "Thyroid eye disease with restriction"
+  ],
+  "additionalInvestigations": [
+   "Orthoptic assessment of ductions, versions and pattern deviations",
+   "Forced duction testing to confirm mechanical restriction",
+   "Assessment of head posture and primary-position deviation",
+   "Orbital imaging when an acquired or inflammatory cause is suspected",
+   "Inflammatory markers or systemic screen in suspected inflammatory Brown syndrome",
+   "Cycloplegic refraction and amblyopia assessment"
+  ],
+  "redFlags": [
+   "Painful acquired restriction suggesting active trochlear inflammation or a systemic inflammatory disorder",
+   "Progressive or fluctuating restriction requiring imaging to exclude an orbital lesion",
+   "A large primary-position hypotropia with anomalous head posture affecting development",
+   "Recent trauma or surgery indicating possible entrapment"
+  ],
+  "prognosis": "Congenital Brown syndrome is often stable and can improve without intervention, and acquired inflammatory forms may resolve with treatment; surgery is effective for persistent, functionally significant cases though overcorrection can occur.",
+  "pitfalls": [
+   "Mistaking it for an inferior oblique palsy despite the different pattern",
+   "Failing to perform forced duction testing and missing the mechanical restriction",
+   "Overlooking an inflammatory or orbital cause in acquired cases",
+   "Operating on a mild congenital case that would have improved spontaneously"
+  ],
+  "references": [
+   "Kanski's Clinical Ophthalmology",
+   "Taylor & Hoyt's Paediatric Ophthalmology and Strabismus"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Observe congenital cases without significant head posture, hypotropia or amblyopia, as many are stable or improve spontaneously",
+   "Treat acquired inflammatory forms with anti-inflammatory therapy, using systemic or local peritrochlear corticosteroids and non-steroidal agents to relieve pain and restore tendon excursion",
+   "Identify and treat any underlying inflammatory, sinus or orbital cause driving acquired restriction",
+   "Correct refractive error on cycloplegic refraction and treat amblyopia in affected children",
+   "Reserve strabismus surgery (superior oblique tendon weakening or lengthening) for persistent, functionally significant restriction with abnormal head posture or primary-position hypotropia",
+   "Undertake serial orthoptic monitoring of ductions, versions, pattern deviation and head posture, and counsel on the risk of postoperative overcorrection",
+   "Refer to paediatric ophthalmology and strabismus services for assessment and operative planning"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "brown_syndrome-pathway",
+   "title": "Brown syndrome (superior oblique tendon): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A restrictive strabismus in which elevation of the eye is limited in adduction owing to impaired free movement of the superior oblique tendon through the trochlea",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Painful acquired restriction suggesting active trochlear inflammation or a systemic inflammatory disorder",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Orthoptic assessment of ductions, versions and pattern deviations, Forced duction testing to confirm mechanical restriction, Assessment of head posture and primary-position deviation"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Observe congenital cases without significant head posture, hypotropia or amblyopia, as many are stable or improve spontaneously"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking it for an inferior oblique palsy despite the different pattern"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of brown syndrome (superior oblique tendon)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "brown_syndrome-matrix",
+   "title": "Brown syndrome (superior oblique tendon): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A restrictive strabismus in which elevation of the eye is limited in adduction owing to impaired free movement of the superior",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Brown syndrome results from mechanical restriction of the superior oblique tendon-trochlea complex, preventing the tendon from sliding freely and thereby limiting elevation of the eye when it is adducted. Congenital forms involve a structurally short or inelastic tendon or an abnormal trochlear apparatus, while acquired forms follow inflammation, scarring, trauma or surgery around the trochlea that impairs tendon excursion. Because the restriction is mechanical, forced ductions are positive and elevation is worst in adduction, where the tendon pulley effect is greatest, but improves in abduction. Intermittent catching of a swollen or nodular tendon at the trochlea can produce a click and variable limitation.",
-    "additionalDifferentials": [
-      "Inferior oblique palsy",
-      "Congenital fibrosis of the extraocular muscles",
-      "Orbital floor fracture with entrapment",
-      "Congenital third nerve palsy",
-      "Double elevator palsy (monocular elevation deficiency)",
-      "Thyroid eye disease with restriction"
+    [
+     "Key Investigations",
+     "Orthoptic assessment of ductions, versions and pattern deviations, Forced duction testing to confirm mechanical restriction,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Orthoptic assessment of ductions, versions and pattern deviations",
-      "Forced duction testing to confirm mechanical restriction",
-      "Assessment of head posture and primary-position deviation",
-      "Orbital imaging when an acquired or inflammatory cause is suspected",
-      "Inflammatory markers or systemic screen in suspected inflammatory Brown syndrome",
-      "Cycloplegic refraction and amblyopia assessment"
+    [
+     "Primary Differentials",
+     "Inferior oblique palsy, Congenital fibrosis of the extraocular muscles, Orbital floor fracture with entrapment",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Painful acquired restriction suggesting active trochlear inflammation or a systemic inflammatory disorder",
-      "Progressive or fluctuating restriction requiring imaging to exclude an orbital lesion",
-      "A large primary-position hypotropia with anomalous head posture affecting development",
-      "Recent trauma or surgery indicating possible entrapment"
+    [
+     "Management Strategy",
+     "Observe congenital cases without significant head posture, hypotropia or amblyopia, as many are stable or improve spontaneously",
+     "Core treatment modality"
     ],
-    "prognosis": "Congenital Brown syndrome is often stable and can improve without intervention, and acquired inflammatory forms may resolve with treatment; surgery is effective for persistent, functionally significant cases though overcorrection can occur.",
-    "pitfalls": [
-      "Mistaking it for an inferior oblique palsy despite the different pattern",
-      "Failing to perform forced duction testing and missing the mechanical restriction",
-      "Overlooking an inflammatory or orbital cause in acquired cases",
-      "Operating on a mild congenital case that would have improved spontaneously"
-    ],
-    "references": [
-      "Kanski's Clinical Ophthalmology",
-      "Taylor & Hoyt's Paediatric Ophthalmology and Strabismus"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Observe congenital cases without significant head posture, hypotropia or amblyopia, as many are stable or improve spontaneously",
-      "Treat acquired inflammatory forms with anti-inflammatory therapy, using systemic or local peritrochlear corticosteroids and non-steroidal agents to relieve pain and restore tendon excursion",
-      "Identify and treat any underlying inflammatory, sinus or orbital cause driving acquired restriction",
-      "Correct refractive error on cycloplegic refraction and treat amblyopia in affected children",
-      "Reserve strabismus surgery (superior oblique tendon weakening or lengthening) for persistent, functionally significant restriction with abnormal head posture or primary-position hypotropia",
-      "Undertake serial orthoptic monitoring of ductions, versions, pattern deviation and head posture, and counsel on the risk of postoperative overcorrection",
-      "Refer to paediatric ophthalmology and strabismus services for assessment and operative planning"
+    [
+     "Clinical Pitfall",
+     "Mistaking it for an inferior oblique palsy despite the different pattern",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for brown syndrome (superior oblique tendon)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "brown-syndrome-real-image",
+   "title": "Brown syndrome (superior oblique tendon): Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

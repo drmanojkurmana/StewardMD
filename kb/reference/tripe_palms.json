@@ -1,77 +1,172 @@
 {
-  "id": "tripe_palms",
-  "name": "tripe palms",
-  "aliases": [
-    "acanthosis palmaris",
-    "pachydermatoglyphy"
+ "id": "tripe_palms",
+ "name": "tripe palms",
+ "aliases": [
+  "acanthosis palmaris",
+  "pachydermatoglyphy"
+ ],
+ "class": "non_infective",
+ "system": "Integumentary",
+ "specialty": "Dermatology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Rook's Textbook of Dermatology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Characterised by thickened, velvety palms with exaggerated dermatoglyphics giving a ridged, honeycomb appearance resembling the surface of bovine foregut (tripe).",
+   "Strongly paraneoplastic, with the great majority of reported cases occurring in association with an underlying malignancy.",
+   "The tumour association depends on coexisting acanthosis nigricans: tripe palms with acanthosis nigricans most often signals gastric carcinoma, whereas isolated tripe palms more often signals pulmonary carcinoma.",
+   "May be accompanied by the sign of Leser-Trelat and florid cutaneous papillomatosis as part of the same paraneoplastic spectrum.",
+   "Yellowish keratotic thickening of the palm with accentuated ridges over the finger pulps is typical.",
+   "Onset may precede diagnosis of the tumour and should trigger investigation for gastric and pulmonary primaries.",
+   "Skin changes may regress with treatment of the underlying malignancy and recur with relapse."
   ],
-  "class": "non_infective",
-  "system": "Integumentary",
-  "specialty": "Dermatology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Rook's Textbook of Dermatology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Characterised by thickened, velvety palms with exaggerated dermatoglyphics giving a ridged, honeycomb appearance resembling the surface of bovine foregut (tripe).",
-      "Strongly paraneoplastic, with the great majority of reported cases occurring in association with an underlying malignancy.",
-      "The tumour association depends on coexisting acanthosis nigricans: tripe palms with acanthosis nigricans most often signals gastric carcinoma, whereas isolated tripe palms more often signals pulmonary carcinoma.",
-      "May be accompanied by the sign of Leser-Trelat and florid cutaneous papillomatosis as part of the same paraneoplastic spectrum.",
-      "Yellowish keratotic thickening of the palm with accentuated ridges over the finger pulps is typical.",
-      "Onset may precede diagnosis of the tumour and should trigger investigation for gastric and pulmonary primaries.",
-      "Skin changes may regress with treatment of the underlying malignancy and recur with relapse."
+  "pathophysiology": "Tripe palms share the growth-factor-driven mechanism of malignant acanthosis nigricans, with which they frequently coexist. Tumour secretion of transforming growth factor alpha, acting through the epidermal growth factor receptor, together with fibroblast growth factor and insulin-like growth factor 1, stimulates keratinocyte and dermal fibroblast proliferation. The result is marked palmar epidermal hyperplasia with accentuation of the normal dermatoglyphic ridges, producing the characteristic rugose, velvety surface.",
+  "additionalDifferentials": [
+   "Hereditary or acquired palmoplantar keratoderma",
+   "Malignant acanthosis nigricans (frequently coexists)",
+   "Pachydermoperiostosis",
+   "Hyperkeratotic hand eczema or palmar psoriasis",
+   "Occupational or frictional keratoderma",
+   "Keratoderma climactericum"
+  ],
+  "additionalInvestigations": [
+   "CT of the chest to identify lung carcinoma, especially with isolated disease",
+   "Upper gastrointestinal endoscopy with biopsy for gastric carcinoma when acanthosis nigricans coexists",
+   "CT of abdomen and pelvis for other primaries",
+   "Skin biopsy showing hyperkeratosis, papillomatosis and acanthosis",
+   "Sputum cytology or bronchoscopy where a lung primary is suspected",
+   "Tumour markers directed by the suspected primary"
+  ],
+  "redFlags": [
+   "New tripe palms in an adult, particularly a smoker",
+   "Coexistent acanthosis nigricans or the sign of Leser-Trelat",
+   "Associated weight loss or systemic symptoms",
+   "Rapidly progressive palmar thickening"
+  ],
+  "prognosis": "Tripe palms indicate an underlying, frequently advanced gastric or pulmonary malignancy; prognosis is that of the associated tumour and is often poor.",
+  "pitfalls": [
+   "Mistaking tripe palms for chronic eczema or occupational keratoderma",
+   "Not tailoring the tumour search to whether acanthosis nigricans coexists (gastric versus lung)",
+   "Missing an occult lung primary in a patient with isolated tripe palms",
+   "Failing to recognise recurrence as a sign of tumour relapse"
+  ],
+  "references": [
+   "Rook's Textbook of Dermatology",
+   "Bolognia Dermatology",
+   "Fitzpatrick's Dermatology in General Medicine"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Direct treatment at the underlying malignancy, since the palmar changes typically improve when the causative gastric or pulmonary tumour is controlled",
+   "Investigate urgently for an occult primary, prioritising pulmonary carcinoma in isolated disease and gastric carcinoma when acanthosis nigricans coexists",
+   "Offer symptomatic skin softening with topical keratolytics such as urea, salicylic acid or topical retinoids",
+   "Monitor the palmar changes as a cutaneous marker, with recurrence prompting a search for tumour relapse or progression",
+   "Look for and address associated paraneoplastic signs including the sign of Leser-Trelat and malignant acanthosis nigricans",
+   "Coordinate care between dermatology and oncology, with tumour-directed treatment guided by stage"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "tripe_palms-pathway",
+   "title": "tripe palms: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Characterised by thickened, velvety palms with exaggerated dermatoglyphics giving a ridged, honeycomb appearance resembling the surface of bovine foregut (tripe).",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: New tripe palms in an adult, particularly a smoker",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: CT of the chest to identify lung carcinoma, especially with isolated disease, Upper gastrointestinal endoscopy with biopsy for gastric carcinoma when acanthosis nigricans coexists, CT of abdomen and pelvis for other"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Direct treatment at the underlying malignancy, since the palmar changes typically improve when the causative gastric or pulmonary tumour is controlled"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking tripe palms for chronic eczema or occupational keratoderma"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of tripe palms."
+  }
+ ],
+ "tables": [
+  {
+   "id": "tripe_palms-matrix",
+   "title": "tripe palms: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Characterised by thickened, velvety palms with exaggerated dermatoglyphics giving a ridged, honeycomb appearance resembling the",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Tripe palms share the growth-factor-driven mechanism of malignant acanthosis nigricans, with which they frequently coexist. Tumour secretion of transforming growth factor alpha, acting through the epidermal growth factor receptor, together with fibroblast growth factor and insulin-like growth factor 1, stimulates keratinocyte and dermal fibroblast proliferation. The result is marked palmar epidermal hyperplasia with accentuation of the normal dermatoglyphic ridges, producing the characteristic rugose, velvety surface.",
-    "additionalDifferentials": [
-      "Hereditary or acquired palmoplantar keratoderma",
-      "Malignant acanthosis nigricans (frequently coexists)",
-      "Pachydermoperiostosis",
-      "Hyperkeratotic hand eczema or palmar psoriasis",
-      "Occupational or frictional keratoderma",
-      "Keratoderma climactericum"
+    [
+     "Key Investigations",
+     "CT of the chest to identify lung carcinoma, especially with isolated disease, Upper gastrointestinal endoscopy with biopsy for",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "CT of the chest to identify lung carcinoma, especially with isolated disease",
-      "Upper gastrointestinal endoscopy with biopsy for gastric carcinoma when acanthosis nigricans coexists",
-      "CT of abdomen and pelvis for other primaries",
-      "Skin biopsy showing hyperkeratosis, papillomatosis and acanthosis",
-      "Sputum cytology or bronchoscopy where a lung primary is suspected",
-      "Tumour markers directed by the suspected primary"
+    [
+     "Primary Differentials",
+     "Hereditary or acquired palmoplantar keratoderma, Malignant acanthosis nigricans (frequently coexists), Pachydermoperiostosis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "New tripe palms in an adult, particularly a smoker",
-      "Coexistent acanthosis nigricans or the sign of Leser-Trelat",
-      "Associated weight loss or systemic symptoms",
-      "Rapidly progressive palmar thickening"
+    [
+     "Management Strategy",
+     "Direct treatment at the underlying malignancy, since the palmar changes typically improve when the causative gastric or pulmonary",
+     "Core treatment modality"
     ],
-    "prognosis": "Tripe palms indicate an underlying, frequently advanced gastric or pulmonary malignancy; prognosis is that of the associated tumour and is often poor.",
-    "pitfalls": [
-      "Mistaking tripe palms for chronic eczema or occupational keratoderma",
-      "Not tailoring the tumour search to whether acanthosis nigricans coexists (gastric versus lung)",
-      "Missing an occult lung primary in a patient with isolated tripe palms",
-      "Failing to recognise recurrence as a sign of tumour relapse"
-    ],
-    "references": [
-      "Rook's Textbook of Dermatology",
-      "Bolognia Dermatology",
-      "Fitzpatrick's Dermatology in General Medicine"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Direct treatment at the underlying malignancy, since the palmar changes typically improve when the causative gastric or pulmonary tumour is controlled",
-      "Investigate urgently for an occult primary, prioritising pulmonary carcinoma in isolated disease and gastric carcinoma when acanthosis nigricans coexists",
-      "Offer symptomatic skin softening with topical keratolytics such as urea, salicylic acid or topical retinoids",
-      "Monitor the palmar changes as a cutaneous marker, with recurrence prompting a search for tumour relapse or progression",
-      "Look for and address associated paraneoplastic signs including the sign of Leser-Trelat and malignant acanthosis nigricans",
-      "Coordinate care between dermatology and oncology, with tumour-directed treatment guided by stage"
+    [
+     "Clinical Pitfall",
+     "Mistaking tripe palms for chronic eczema or occupational keratoderma",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for tripe palms."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "tripe-palms-real-image",
+   "title": "tripe palms: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

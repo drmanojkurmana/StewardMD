@@ -1,77 +1,172 @@
 {
-  "id": "subglottic_stenosis",
-  "name": "Subglottic stenosis",
-  "aliases": [
-    "SGS",
-    "subglottic narrowing",
-    "laryngotracheal stenosis"
+ "id": "subglottic_stenosis",
+ "name": "Subglottic stenosis",
+ "aliases": [
+  "SGS",
+  "subglottic narrowing",
+  "laryngotracheal stenosis"
+ ],
+ "class": "non_infective",
+ "system": "ENT / Otorhinolaryngology",
+ "specialty": "ENT",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Dhingra, Diseases of Ear, Nose and Throat",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Narrowing of the airway at the subglottis, the region just below the vocal cords, which is the narrowest part of the paediatric airway and bounded by the complete cricoid ring",
+   "It may be congenital or acquired, and prolonged endotracheal intubation is the leading acquired cause",
+   "Presents with biphasic stridor, recurrent or prolonged croup-like episodes, exertional breathlessness, and in severe cases respiratory distress",
+   "In infants it can masquerade as recurrent croup or failure to extubate after ventilation",
+   "Endoscopic assessment of the airway defines the site, length, and severity of narrowing, and grading systems (such as Cotton-Myer) quantify the degree of luminal loss",
+   "Management depends on severity and ranges from observation and endoscopic dilatation or laser to open reconstruction such as laryngotracheal reconstruction or cricotracheal resection",
+   "A tracheostomy may be needed to secure the airway in severe or complex cases before or during definitive repair",
+   "Minimising intubation trauma and duration, and using appropriately sized tubes, helps prevent acquired stenosis"
   ],
-  "class": "non_infective",
-  "system": "ENT / Otorhinolaryngology",
-  "specialty": "ENT",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Dhingra, Diseases of Ear, Nose and Throat",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Narrowing of the airway at the subglottis, the region just below the vocal cords, which is the narrowest part of the paediatric airway and bounded by the complete cricoid ring",
-      "It may be congenital or acquired, and prolonged endotracheal intubation is the leading acquired cause",
-      "Presents with biphasic stridor, recurrent or prolonged croup-like episodes, exertional breathlessness, and in severe cases respiratory distress",
-      "In infants it can masquerade as recurrent croup or failure to extubate after ventilation",
-      "Endoscopic assessment of the airway defines the site, length, and severity of narrowing, and grading systems (such as Cotton-Myer) quantify the degree of luminal loss",
-      "Management depends on severity and ranges from observation and endoscopic dilatation or laser to open reconstruction such as laryngotracheal reconstruction or cricotracheal resection",
-      "A tracheostomy may be needed to secure the airway in severe or complex cases before or during definitive repair",
-      "Minimising intubation trauma and duration, and using appropriately sized tubes, helps prevent acquired stenosis"
+  "pathophysiology": "Subglottic stenosis is a fixed reduction in the cross-sectional area of the subglottic airway. The congenital form reflects abnormal development of the cricoid cartilage producing an inherently narrow lumen. The acquired form typically follows mucosal injury, most often from a tightly fitting or prolonged endotracheal tube, which causes pressure ischaemia, ulceration, perichondritis, and healing by fibrosis with scar contracture; trauma, infection, inflammatory disease, and prior airway surgery are other causes. Because the cricoid is a complete non-expansile ring, even modest circumferential scarring or oedema markedly reduces the lumen and airflow.",
+  "additionalDifferentials": [
+   "Laryngomalacia",
+   "Vocal cord palsy",
+   "Recurrent croup (laryngotracheobronchitis)",
+   "Subglottic haemangioma in an infant",
+   "Vascular ring or extrinsic tracheal compression",
+   "Granulomatosis with polyangiitis affecting the airway"
+  ],
+  "additionalInvestigations": [
+   "Flexible and rigid endoscopy of the airway to assess and grade the stenosis",
+   "Sizing of the airway with endotracheal tubes to quantify the degree of narrowing",
+   "Cross-sectional imaging to map the length of the stenotic segment and exclude external compression",
+   "Evaluation for inflammatory or autoimmune disease when clinically suspected",
+   "Assessment of reflux, which can aggravate airway inflammation"
+  ],
+  "redFlags": [
+   "Progressive stridor with respiratory distress indicating critical airway narrowing requiring urgent airway control",
+   "Failure to extubate or recurrent severe respiratory episodes in an infant",
+   "Rapidly worsening obstruction suggesting superimposed oedema or infection on a fixed stenosis",
+   "Signs of an underlying systemic inflammatory disease driving the stenosis"
+  ],
+  "prognosis": "Mild congenital stenosis often improves as the airway grows, and mild acquired disease may respond to endoscopic measures; more severe or long-segment stenosis usually needs open reconstruction, which has good success in restoring an adequate airway, though multiple procedures and temporary tracheostomy are sometimes required.",
+  "pitfalls": [
+   "Repeatedly treating a child for croup while missing a fixed subglottic stenosis",
+   "Using oversized endotracheal tubes and prolonging intubation, promoting acquired stenosis",
+   "Underestimating severity by relying on symptoms alone without endoscopic grading",
+   "Overlooking an inflammatory cause such as granulomatosis with polyangiitis"
+  ],
+  "references": [
+   "Dhingra, Diseases of Ear, Nose and Throat"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Observe mild congenital stenosis, which often improves as the airway grows",
+   "Endoscopic balloon dilatation, with laser scar division and adjunctive intralesional corticosteroid or mitomycin, for suitable short-segment disease",
+   "Open reconstruction by laryngotracheal reconstruction with cartilage grafting or cricotracheal resection for severe or long-segment stenosis",
+   "Tracheostomy to secure the airway in severe or acute obstruction",
+   "Treat aggravating gastro-oesophageal reflux with acid suppression and control airway inflammation",
+   "Institute immunosuppression where an underlying inflammatory or autoimmune disease such as granulomatosis with polyangiitis is identified",
+   "Manage within a specialist airway multidisciplinary team, anticipating that staged or repeated procedures may be needed"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "subglottic_stenosis-pathway",
+   "title": "Subglottic stenosis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Narrowing of the airway at the subglottis, the region just below the vocal cords, which is the narrowest part of the paediatric airway and bounded by the complete cricoid ring",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Progressive stridor with respiratory distress indicating critical airway narrowing requiring urgent airway control",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Flexible and rigid endoscopy of the airway to assess and grade the stenosis, Sizing of the airway with endotracheal tubes to quantify the degree of narrowing, Cross-sectional imaging to map the length of the stenotic"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Observe mild congenital stenosis, which often improves as the airway grows"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Repeatedly treating a child for croup while missing a fixed subglottic stenosis"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of subglottic stenosis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "subglottic_stenosis-matrix",
+   "title": "Subglottic stenosis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Narrowing of the airway at the subglottis, the region just below the vocal cords, which is the narrowest part of the paediatric",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Subglottic stenosis is a fixed reduction in the cross-sectional area of the subglottic airway. The congenital form reflects abnormal development of the cricoid cartilage producing an inherently narrow lumen. The acquired form typically follows mucosal injury, most often from a tightly fitting or prolonged endotracheal tube, which causes pressure ischaemia, ulceration, perichondritis, and healing by fibrosis with scar contracture; trauma, infection, inflammatory disease, and prior airway surgery are other causes. Because the cricoid is a complete non-expansile ring, even modest circumferential scarring or oedema markedly reduces the lumen and airflow.",
-    "additionalDifferentials": [
-      "Laryngomalacia",
-      "Vocal cord palsy",
-      "Recurrent croup (laryngotracheobronchitis)",
-      "Subglottic haemangioma in an infant",
-      "Vascular ring or extrinsic tracheal compression",
-      "Granulomatosis with polyangiitis affecting the airway"
+    [
+     "Key Investigations",
+     "Flexible and rigid endoscopy of the airway to assess and grade the stenosis, Sizing of the airway with endotracheal tubes to",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Flexible and rigid endoscopy of the airway to assess and grade the stenosis",
-      "Sizing of the airway with endotracheal tubes to quantify the degree of narrowing",
-      "Cross-sectional imaging to map the length of the stenotic segment and exclude external compression",
-      "Evaluation for inflammatory or autoimmune disease when clinically suspected",
-      "Assessment of reflux, which can aggravate airway inflammation"
+    [
+     "Primary Differentials",
+     "Laryngomalacia, Vocal cord palsy, Recurrent croup (laryngotracheobronchitis)",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Progressive stridor with respiratory distress indicating critical airway narrowing requiring urgent airway control",
-      "Failure to extubate or recurrent severe respiratory episodes in an infant",
-      "Rapidly worsening obstruction suggesting superimposed oedema or infection on a fixed stenosis",
-      "Signs of an underlying systemic inflammatory disease driving the stenosis"
+    [
+     "Management Strategy",
+     "Observe mild congenital stenosis, which often improves as the airway grows",
+     "Core treatment modality"
     ],
-    "prognosis": "Mild congenital stenosis often improves as the airway grows, and mild acquired disease may respond to endoscopic measures; more severe or long-segment stenosis usually needs open reconstruction, which has good success in restoring an adequate airway, though multiple procedures and temporary tracheostomy are sometimes required.",
-    "pitfalls": [
-      "Repeatedly treating a child for croup while missing a fixed subglottic stenosis",
-      "Using oversized endotracheal tubes and prolonging intubation, promoting acquired stenosis",
-      "Underestimating severity by relying on symptoms alone without endoscopic grading",
-      "Overlooking an inflammatory cause such as granulomatosis with polyangiitis"
-    ],
-    "references": [
-      "Dhingra, Diseases of Ear, Nose and Throat"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Observe mild congenital stenosis, which often improves as the airway grows",
-      "Endoscopic balloon dilatation, with laser scar division and adjunctive intralesional corticosteroid or mitomycin, for suitable short-segment disease",
-      "Open reconstruction by laryngotracheal reconstruction with cartilage grafting or cricotracheal resection for severe or long-segment stenosis",
-      "Tracheostomy to secure the airway in severe or acute obstruction",
-      "Treat aggravating gastro-oesophageal reflux with acid suppression and control airway inflammation",
-      "Institute immunosuppression where an underlying inflammatory or autoimmune disease such as granulomatosis with polyangiitis is identified",
-      "Manage within a specialist airway multidisciplinary team, anticipating that staged or repeated procedures may be needed"
+    [
+     "Clinical Pitfall",
+     "Repeatedly treating a child for croup while missing a fixed subglottic stenosis",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for subglottic stenosis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "subglottic-stenosis-real-image",
+   "title": "Subglottic stenosis: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

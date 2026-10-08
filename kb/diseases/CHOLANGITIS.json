@@ -12,9 +12,16 @@
     "rule": {
       "allOf": [
         "rightUpperQuadrantPain",
-        { "anyOf": ["feverGU", "rigors"] },
+        {
+          "anyOf": [
+            "feverGU",
+            "rigors"
+          ]
+        },
         "jaundice",
-        { "not": "singleLesion" }
+        {
+          "not": "singleLesion"
+        }
       ]
     },
     "score": {
@@ -24,7 +31,12 @@
           "when": {
             "allOf": [
               "rightUpperQuadrantPain",
-              { "anyOf": ["feverGU", "rigors"] },
+              {
+                "anyOf": [
+                  "feverGU",
+                  "rigors"
+                ]
+              },
               "jaundice"
             ]
           },
@@ -209,5 +221,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "hf1334216"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "cholangitis-dx-algo",
+      "title": "Acute Cholangitis: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "The classic presentation is Charcot's triad: biliary pain, jaundice, and spiking fevers with rigors; it is present in roughly 70% of patients with ascending cholangitis (Harrison 22e p.2489, p.2735).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Reynolds's pentad (Charcot's triad plus shock and confusion) indicating suppurative cholangitis and high mortality",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Serum alkaline phosphatase (almost always elevated in biliary obstruction; rise may precede clinical jaundice), Serum aminotransferases (two- to tenfold elevation, especially with acute obstruction), ERCP with endoscopic"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Harrison distinguishes nonsuppurative acute cholangitis (the more common, milder form responsive to antibiotics) from suppurative acute cholangitis (pus under pressure in a completely obstructed duct, with severe"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Relying on antibiotics alone in suppurative cholangitis; biliary decompression is required because antibiotic response is poor and mortality is very high without it."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for acute cholangitis."
+    }
+  ],
+  "tables": [
+    {
+      "id": "cholangitis-matrix",
+      "title": "Acute Cholangitis: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The classic presentation is Charcot's triad: biliary pain, jaundice, and spiking fevers with rigors; it is present in roughly 70%",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Serum alkaline phosphatase (almost always elevated in biliary obstruction; rise may precede clinical jaundice), Serum",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Biliary colic / choledocholithiasis without infection, Acute cholecystitis, Gallstone pancreatitis",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Reynolds's pentad (Charcot's triad plus shock and confusion) indicating suppurative cholangitis and high mortality",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Relying on antibiotics alone in suppurative cholangitis; biliary decompression is required because antibiotic response is poor",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for acute cholangitis."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "cholangitis-real-image",
+      "title": "Acute Cholangitis: Diagnostic Abdominal Computed Tomography",
+      "type": "ct",
+      "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
+      "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
+      "annotations": [
+        {
+          "label": "Solid Viscera",
+          "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
+        },
+        {
+          "label": "Gastrointestinal Tract",
+          "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
+        },
+        {
+          "label": "Mesentery & Peritoneum",
+          "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+        }
+      ]
+    }
+  ]
 }

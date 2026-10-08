@@ -1,81 +1,176 @@
 {
-  "id": "drug_induced_interstitial_lung_disease",
-  "name": "Drug-induced interstitial lung disease",
-  "aliases": [
-    "drug-induced ILD",
-    "drug-induced pneumonitis",
-    "drug-induced lung disease",
-    "iatrogenic interstitial lung disease"
+ "id": "drug_induced_interstitial_lung_disease",
+ "name": "Drug-induced interstitial lung disease",
+ "aliases": [
+  "drug-induced ILD",
+  "drug-induced pneumonitis",
+  "drug-induced lung disease",
+  "iatrogenic interstitial lung disease"
+ ],
+ "class": "non_infective",
+ "system": "Respiratory",
+ "specialty": "Respiratory Medicine / Occupational Lung Disease",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Respiratory Medicine reference texts and pneumotox literature",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A diagnosis of exclusion requiring a temporal link between a culprit drug and new interstitial lung disease, with improvement after withdrawal supporting causation",
+   "Classic offenders include amiodarone, methotrexate, nitrofurantoin, bleomycin and other chemotherapy agents, and increasingly immune checkpoint inhibitors and molecular targeted therapies",
+   "Radiological and histological patterns vary widely, encompassing organising pneumonia, non-specific interstitial pneumonia, hypersensitivity-like pneumonitis, diffuse alveolar damage, and eosinophilic pneumonia",
+   "Amiodarone toxicity is suggested by high-attenuation liver and lung deposits on CT reflecting the iodinated drug",
+   "Nitrofurantoin can cause both an acute hypersensitivity reaction and a chronic fibrosing pneumonitis with long-term use",
+   "Checkpoint-inhibitor pneumonitis is an immune-related adverse event that can be rapidly progressive and may require drug cessation and immunosuppression",
+   "A thorough medication history, including over-the-counter drugs, recent chemotherapy, and radiotherapy, is essential"
   ],
-  "class": "non_infective",
-  "system": "Respiratory",
-  "specialty": "Respiratory Medicine / Occupational Lung Disease",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Respiratory Medicine reference texts and pneumotox literature",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A diagnosis of exclusion requiring a temporal link between a culprit drug and new interstitial lung disease, with improvement after withdrawal supporting causation",
-      "Classic offenders include amiodarone, methotrexate, nitrofurantoin, bleomycin and other chemotherapy agents, and increasingly immune checkpoint inhibitors and molecular targeted therapies",
-      "Radiological and histological patterns vary widely, encompassing organising pneumonia, non-specific interstitial pneumonia, hypersensitivity-like pneumonitis, diffuse alveolar damage, and eosinophilic pneumonia",
-      "Amiodarone toxicity is suggested by high-attenuation liver and lung deposits on CT reflecting the iodinated drug",
-      "Nitrofurantoin can cause both an acute hypersensitivity reaction and a chronic fibrosing pneumonitis with long-term use",
-      "Checkpoint-inhibitor pneumonitis is an immune-related adverse event that can be rapidly progressive and may require drug cessation and immunosuppression",
-      "A thorough medication history, including over-the-counter drugs, recent chemotherapy, and radiotherapy, is essential"
+  "pathophysiology": "Drugs injure the lung through several mechanisms: direct cytotoxicity to alveolar epithelial and endothelial cells (as with cytotoxic chemotherapy), oxidant-mediated damage, phospholipid accumulation (as with amiodarone), and immune or hypersensitivity reactions in which the drug or its metabolites trigger an inflammatory response. The resulting injury manifests as varied histological patterns depending on the agent, dose, and host susceptibility, ranging from reversible inflammatory pneumonitis and organising pneumonia to diffuse alveolar damage and established fibrosis. Immune checkpoint inhibitors act differently, unleashing T-cell-mediated inflammation of the lung as an autoimmune-like adverse event. Recognition of the offending drug and its withdrawal are central, as continued exposure risks progression to irreversible fibrosis.",
+  "additionalDifferentials": [
+   "Infection, including opportunistic pneumonia in immunosuppressed patients",
+   "Idiopathic interstitial pneumonias",
+   "Radiation pneumonitis",
+   "Connective tissue disease-associated interstitial lung disease",
+   "Cardiogenic pulmonary oedema",
+   "Progression or lymphangitic spread of underlying malignancy",
+   "Diffuse alveolar haemorrhage"
+  ],
+  "additionalInvestigations": [
+   "High-resolution CT to define the pattern and distribution of disease",
+   "Comprehensive drug and treatment history cross-referenced against known pulmonary toxins",
+   "Bronchoalveolar lavage to characterise cellularity and exclude infection",
+   "Pulmonary function tests with diffusing capacity",
+   "Lung biopsy in selected cases where diagnosis remains uncertain",
+   "Exclusion of infection with microbiological and serological testing",
+   "Monitoring of response after withdrawal of the suspected agent"
+  ],
+  "redFlags": [
+   "Rapidly progressive hypoxaemia suggesting diffuse alveolar damage or severe checkpoint-inhibitor pneumonitis",
+   "Continued administration of a suspected culprit drug despite deterioration",
+   "Respiratory failure requiring urgent escalation",
+   "Concurrent features of infection that could be masked or worsened by immunosuppression"
+  ],
+  "prognosis": "Many inflammatory patterns improve after drug withdrawal, with or without corticosteroids for drug-induced ILD, but agents causing diffuse alveolar damage or established fibrosis, and severe checkpoint-inhibitor pneumonitis, carry a substantial risk of persistent impairment or death.",
+  "pitfalls": [
+   "Failing to obtain a complete drug history and missing the causative agent",
+   "Attributing all new infiltrates to infection or malignancy progression in oncology patients",
+   "Continuing the offending drug because the diagnosis was not considered",
+   "Overlooking that some agents (e.g. nitrofurantoin) cause both acute and chronic forms"
+  ],
+  "references": [
+   "Murray & Nadel's Textbook of Respiratory Medicine",
+   "Pneumotox / drug-induced respiratory disease reference database"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Promptly withdraw the offending drug (for example amiodarone, methotrexate, nitrofurantoin, bleomycin or a checkpoint inhibitor) and avoid re-exposure, as continued use worsens the injury",
+   "Give systemic corticosteroids for significant inflammatory patterns such as organising pneumonia, hypersensitivity-like pneumonitis or eosinophilic pneumonia and for symptomatic drug-induced disease",
+   "Treat immune-checkpoint-inhibitor pneumonitis by holding the drug and giving corticosteroids, escalating to additional immunosuppression such as mycophenolate or infliximab if steroid-refractory",
+   "Provide supportive care with supplemental oxygen and pulmonary rehabilitation",
+   "Monitor response and progression with high-resolution CT and pulmonary function tests including diffusing capacity",
+   "Support severe respiratory failure or diffuse alveolar damage with ventilatory support in critical care",
+   "Manage jointly with respiratory medicine and the prescribing specialty (oncology or cardiology) and document the drug as a cause"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "drug_induced_interstitial_lung_disease-pathway",
+   "title": "Drug-induced interstitial lung disease: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A diagnosis of exclusion requiring a temporal link between a culprit drug and new interstitial lung disease, with improvement after withdrawal supporting causation",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapidly progressive hypoxaemia suggesting diffuse alveolar damage or severe checkpoint-inhibitor pneumonitis",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: High-resolution CT to define the pattern and distribution of disease, Comprehensive drug and treatment history cross-referenced against known pulmonary toxins, Bronchoalveolar lavage to characterise cellularity and exclude"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Promptly withdraw the offending drug (for example amiodarone, methotrexate, nitrofurantoin, bleomycin or a checkpoint inhibitor) and avoid re-exposure, as continued use worsens the injury"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Failing to obtain a complete drug history and missing the causative agent"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of drug-induced interstitial lung disease."
+  }
+ ],
+ "tables": [
+  {
+   "id": "drug_induced_interstitial_lung_disease-matrix",
+   "title": "Drug-induced interstitial lung disease: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A diagnosis of exclusion requiring a temporal link between a culprit drug and new interstitial lung disease, with improvement",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Drugs injure the lung through several mechanisms: direct cytotoxicity to alveolar epithelial and endothelial cells (as with cytotoxic chemotherapy), oxidant-mediated damage, phospholipid accumulation (as with amiodarone), and immune or hypersensitivity reactions in which the drug or its metabolites trigger an inflammatory response. The resulting injury manifests as varied histological patterns depending on the agent, dose, and host susceptibility, ranging from reversible inflammatory pneumonitis and organising pneumonia to diffuse alveolar damage and established fibrosis. Immune checkpoint inhibitors act differently, unleashing T-cell-mediated inflammation of the lung as an autoimmune-like adverse event. Recognition of the offending drug and its withdrawal are central, as continued exposure risks progression to irreversible fibrosis.",
-    "additionalDifferentials": [
-      "Infection, including opportunistic pneumonia in immunosuppressed patients",
-      "Idiopathic interstitial pneumonias",
-      "Radiation pneumonitis",
-      "Connective tissue disease-associated interstitial lung disease",
-      "Cardiogenic pulmonary oedema",
-      "Progression or lymphangitic spread of underlying malignancy",
-      "Diffuse alveolar haemorrhage"
+    [
+     "Key Investigations",
+     "High-resolution CT to define the pattern and distribution of disease, Comprehensive drug and treatment history cross-referenced",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "High-resolution CT to define the pattern and distribution of disease",
-      "Comprehensive drug and treatment history cross-referenced against known pulmonary toxins",
-      "Bronchoalveolar lavage to characterise cellularity and exclude infection",
-      "Pulmonary function tests with diffusing capacity",
-      "Lung biopsy in selected cases where diagnosis remains uncertain",
-      "Exclusion of infection with microbiological and serological testing",
-      "Monitoring of response after withdrawal of the suspected agent"
+    [
+     "Primary Differentials",
+     "Infection, including opportunistic pneumonia in immunosuppressed patients, Idiopathic interstitial pneumonias, Radiation",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rapidly progressive hypoxaemia suggesting diffuse alveolar damage or severe checkpoint-inhibitor pneumonitis",
-      "Continued administration of a suspected culprit drug despite deterioration",
-      "Respiratory failure requiring urgent escalation",
-      "Concurrent features of infection that could be masked or worsened by immunosuppression"
+    [
+     "Management Strategy",
+     "Promptly withdraw the offending drug (for example amiodarone, methotrexate, nitrofurantoin, bleomycin or a checkpoint inhibitor)",
+     "Core treatment modality"
     ],
-    "prognosis": "Many inflammatory patterns improve after drug withdrawal, with or without corticosteroids for drug-induced ILD, but agents causing diffuse alveolar damage or established fibrosis, and severe checkpoint-inhibitor pneumonitis, carry a substantial risk of persistent impairment or death.",
-    "pitfalls": [
-      "Failing to obtain a complete drug history and missing the causative agent",
-      "Attributing all new infiltrates to infection or malignancy progression in oncology patients",
-      "Continuing the offending drug because the diagnosis was not considered",
-      "Overlooking that some agents (e.g. nitrofurantoin) cause both acute and chronic forms"
-    ],
-    "references": [
-      "Murray & Nadel's Textbook of Respiratory Medicine",
-      "Pneumotox / drug-induced respiratory disease reference database"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Promptly withdraw the offending drug (for example amiodarone, methotrexate, nitrofurantoin, bleomycin or a checkpoint inhibitor) and avoid re-exposure, as continued use worsens the injury",
-      "Give systemic corticosteroids for significant inflammatory patterns such as organising pneumonia, hypersensitivity-like pneumonitis or eosinophilic pneumonia and for symptomatic drug-induced disease",
-      "Treat immune-checkpoint-inhibitor pneumonitis by holding the drug and giving corticosteroids, escalating to additional immunosuppression such as mycophenolate or infliximab if steroid-refractory",
-      "Provide supportive care with supplemental oxygen and pulmonary rehabilitation",
-      "Monitor response and progression with high-resolution CT and pulmonary function tests including diffusing capacity",
-      "Support severe respiratory failure or diffuse alveolar damage with ventilatory support in critical care",
-      "Manage jointly with respiratory medicine and the prescribing specialty (oncology or cardiology) and document the drug as a cause"
+    [
+     "Clinical Pitfall",
+     "Failing to obtain a complete drug history and missing the causative agent",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for drug-induced interstitial lung disease."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "drug-induced-interstitial-lung-disease-real-image",
+   "title": "Drug-induced interstitial lung disease: Diagnostic Chest Radiograph",
+   "type": "xray",
+   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
+   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
+   "annotations": [
+    {
+     "label": "Parenchyma & Airspaces",
+     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
+    },
+    {
+     "label": "Bronchovascular Tree",
+     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
+    },
+    {
+     "label": "Pleural Margins",
+     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+    }
+   ]
+  }
+ ]
 }

@@ -1,78 +1,173 @@
 {
-  "id": "congenital_cataract_syndromic",
-  "name": "Syndromic congenital cataract",
-  "aliases": [
-    "syndromic infantile cataract",
-    "congenital lens opacity",
-    "metabolic congenital cataract",
-    "hereditary congenital cataract"
+ "id": "congenital_cataract_syndromic",
+ "name": "Syndromic congenital cataract",
+ "aliases": [
+  "syndromic infantile cataract",
+  "congenital lens opacity",
+  "metabolic congenital cataract",
+  "hereditary congenital cataract"
+ ],
+ "class": "non_infective",
+ "system": "Eye / Ophthalmology",
+ "specialty": "Ophthalmology / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Kanski's Clinical Ophthalmology / Taylor and Hoyt's Pediatric Ophthalmology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Congenital cataract may occur in isolation or as part of a wider syndrome, so a systemic evaluation is essential",
+   "Presents with leukocoria, an absent or abnormal red reflex, nystagmus, or failure to fixate in infancy",
+   "Metabolic causes such as galactosaemia are important because they are treatable and may be reversible if caught early",
+   "Associated syndromes include chromosomal disorders such as trisomy 21, and conditions such as Lowe syndrome, myotonic dystrophy and congenital infection (part of a wider differential)",
+   "Bilateral cataracts more often have a metabolic, genetic or systemic cause, whereas unilateral cataracts are more often sporadic and local",
+   "Dense central cataracts cause deprivation amblyopia, so timely surgery within the critical period of visual development is crucial",
+   "A careful family history and examination of parents can reveal an inherited pattern, often autosomal dominant"
   ],
-  "class": "non_infective",
-  "system": "Eye / Ophthalmology",
-  "specialty": "Ophthalmology / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Kanski's Clinical Ophthalmology / Taylor and Hoyt's Pediatric Ophthalmology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Congenital cataract may occur in isolation or as part of a wider syndrome, so a systemic evaluation is essential",
-      "Presents with leukocoria, an absent or abnormal red reflex, nystagmus, or failure to fixate in infancy",
-      "Metabolic causes such as galactosaemia are important because they are treatable and may be reversible if caught early",
-      "Associated syndromes include chromosomal disorders such as trisomy 21, and conditions such as Lowe syndrome, myotonic dystrophy and congenital infection (part of a wider differential)",
-      "Bilateral cataracts more often have a metabolic, genetic or systemic cause, whereas unilateral cataracts are more often sporadic and local",
-      "Dense central cataracts cause deprivation amblyopia, so timely surgery within the critical period of visual development is crucial",
-      "A careful family history and examination of parents can reveal an inherited pattern, often autosomal dominant"
+  "pathophysiology": "Congenital cataract is an opacification of the lens present at or soon after birth, arising when the normal transparency and orderly arrangement of lens fibres is disturbed during development. In syndromic forms this may result from mutations in genes encoding lens crystallins, membrane and cytoskeletal proteins, or developmental transcription factors, or from systemic metabolic derangements (such as abnormal galactose metabolism) that alter the osmotic and biochemical environment of the lens. Chromosomal abnormalities and multisystem genetic syndromes disrupt lens development as one of several affected tissues. A dense opacity blocks formation of a clear retinal image during the sensitive period, causing amblyopia unless treated promptly.",
+  "additionalDifferentials": [
+   "Isolated (non-syndromic) hereditary congenital cataract",
+   "Retinoblastoma and other causes of leukocoria",
+   "Persistent fetal vasculature",
+   "Congenital glaucoma with corneal clouding",
+   "Retinopathy of prematurity",
+   "Corneal opacity from anterior segment dysgenesis"
+  ],
+  "additionalInvestigations": [
+   "Red reflex testing and slit-lamp or handheld examination to characterise the opacity",
+   "Metabolic screen including tests for galactosaemia and relevant urine and blood studies",
+   "Systemic and dysmorphology assessment for associated syndromic features",
+   "Ocular ultrasound where the fundus cannot be visualised, to assess the posterior segment",
+   "Chromosomal and molecular genetic testing guided by the clinical picture"
+  ],
+  "redFlags": [
+   "Dense bilateral cataract in an infant requiring urgent referral to prevent amblyopia",
+   "Associated systemic illness or failure to thrive suggesting a metabolic disorder",
+   "Signs of raised intraocular pressure or coexisting glaucoma",
+   "Leukocoria where retinoblastoma has not yet been excluded"
+  ],
+  "prognosis": "Visual outcome depends on the density and laterality of the cataract and the timeliness of surgery and amblyopia therapy; early treatment of bilateral cataracts and of reversible metabolic causes can give good vision, whereas late-treated dense unilateral cataracts often have a guarded prognosis.",
+  "pitfalls": [
+   "Missing a treatable metabolic cause such as galactosaemia by omitting a metabolic screen",
+   "Delaying surgery beyond the critical period and allowing irreversible deprivation amblyopia",
+   "Treating the cataract as isolated and failing to look for syndromic or systemic disease",
+   "Overlooking coexisting glaucoma or posterior segment pathology"
+  ],
+  "references": [
+   "Kanski's Clinical Ophthalmology",
+   "Taylor and Hoyt's Pediatric Ophthalmology and Strabismus"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Perform early cataract surgery (lensectomy) within the critical period for dense or visually significant opacities to prevent deprivation amblyopia",
+   "Treat reversible metabolic causes promptly, with dietary galactose restriction for galactosaemia",
+   "Provide postoperative optical correction with aphakic contact lenses, spectacles or intraocular lens, and continue amblyopia therapy",
+   "Undertake systemic and metabolic evaluation and manage the underlying syndrome",
+   "Monitor for postoperative complications, particularly glaucoma and visual axis opacification",
+   "Offer genetic counselling and family assessment for heritable forms",
+   "Coordinate multidisciplinary care across paediatric ophthalmology, clinical genetics and paediatrics"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "congenital_cataract_syndromic-pathway",
+   "title": "Syndromic congenital cataract: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Congenital cataract may occur in isolation or as part of a wider syndrome, so a systemic evaluation is essential",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Dense bilateral cataract in an infant requiring urgent referral to prevent amblyopia",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Red reflex testing and slit-lamp or handheld examination to characterise the opacity, Metabolic screen including tests for galactosaemia and relevant urine and blood studies, Systemic and dysmorphology assessment for"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Perform early cataract surgery (lensectomy) within the critical period for dense or visually significant opacities to prevent deprivation amblyopia"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Missing a treatable metabolic cause such as galactosaemia by omitting a metabolic screen"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of syndromic congenital cataract."
+  }
+ ],
+ "tables": [
+  {
+   "id": "congenital_cataract_syndromic-matrix",
+   "title": "Syndromic congenital cataract: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Congenital cataract may occur in isolation or as part of a wider syndrome, so a systemic evaluation is essential",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Congenital cataract is an opacification of the lens present at or soon after birth, arising when the normal transparency and orderly arrangement of lens fibres is disturbed during development. In syndromic forms this may result from mutations in genes encoding lens crystallins, membrane and cytoskeletal proteins, or developmental transcription factors, or from systemic metabolic derangements (such as abnormal galactose metabolism) that alter the osmotic and biochemical environment of the lens. Chromosomal abnormalities and multisystem genetic syndromes disrupt lens development as one of several affected tissues. A dense opacity blocks formation of a clear retinal image during the sensitive period, causing amblyopia unless treated promptly.",
-    "additionalDifferentials": [
-      "Isolated (non-syndromic) hereditary congenital cataract",
-      "Retinoblastoma and other causes of leukocoria",
-      "Persistent fetal vasculature",
-      "Congenital glaucoma with corneal clouding",
-      "Retinopathy of prematurity",
-      "Corneal opacity from anterior segment dysgenesis"
+    [
+     "Key Investigations",
+     "Red reflex testing and slit-lamp or handheld examination to characterise the opacity, Metabolic screen including tests for",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Red reflex testing and slit-lamp or handheld examination to characterise the opacity",
-      "Metabolic screen including tests for galactosaemia and relevant urine and blood studies",
-      "Systemic and dysmorphology assessment for associated syndromic features",
-      "Ocular ultrasound where the fundus cannot be visualised, to assess the posterior segment",
-      "Chromosomal and molecular genetic testing guided by the clinical picture"
+    [
+     "Primary Differentials",
+     "Isolated (non-syndromic) hereditary congenital cataract, Retinoblastoma and other causes of leukocoria, Persistent fetal",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Dense bilateral cataract in an infant requiring urgent referral to prevent amblyopia",
-      "Associated systemic illness or failure to thrive suggesting a metabolic disorder",
-      "Signs of raised intraocular pressure or coexisting glaucoma",
-      "Leukocoria where retinoblastoma has not yet been excluded"
+    [
+     "Management Strategy",
+     "Perform early cataract surgery (lensectomy) within the critical period for dense or visually significant opacities to prevent",
+     "Core treatment modality"
     ],
-    "prognosis": "Visual outcome depends on the density and laterality of the cataract and the timeliness of surgery and amblyopia therapy; early treatment of bilateral cataracts and of reversible metabolic causes can give good vision, whereas late-treated dense unilateral cataracts often have a guarded prognosis.",
-    "pitfalls": [
-      "Missing a treatable metabolic cause such as galactosaemia by omitting a metabolic screen",
-      "Delaying surgery beyond the critical period and allowing irreversible deprivation amblyopia",
-      "Treating the cataract as isolated and failing to look for syndromic or systemic disease",
-      "Overlooking coexisting glaucoma or posterior segment pathology"
-    ],
-    "references": [
-      "Kanski's Clinical Ophthalmology",
-      "Taylor and Hoyt's Pediatric Ophthalmology and Strabismus"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Perform early cataract surgery (lensectomy) within the critical period for dense or visually significant opacities to prevent deprivation amblyopia",
-      "Treat reversible metabolic causes promptly, with dietary galactose restriction for galactosaemia",
-      "Provide postoperative optical correction with aphakic contact lenses, spectacles or intraocular lens, and continue amblyopia therapy",
-      "Undertake systemic and metabolic evaluation and manage the underlying syndrome",
-      "Monitor for postoperative complications, particularly glaucoma and visual axis opacification",
-      "Offer genetic counselling and family assessment for heritable forms",
-      "Coordinate multidisciplinary care across paediatric ophthalmology, clinical genetics and paediatrics"
+    [
+     "Clinical Pitfall",
+     "Missing a treatable metabolic cause such as galactosaemia by omitting a metabolic screen",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for syndromic congenital cataract."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "congenital-cataract-syndromic-real-image",
+   "title": "Syndromic congenital cataract: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

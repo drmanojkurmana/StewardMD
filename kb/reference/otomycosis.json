@@ -1,75 +1,170 @@
 {
-  "id": "otomycosis",
-  "name": "Otomycosis",
-  "aliases": [
-    "fungal otitis externa",
-    "mycotic otitis externa",
-    "singapore ear"
+ "id": "otomycosis",
+ "name": "Otomycosis",
+ "aliases": [
+  "fungal otitis externa",
+  "mycotic otitis externa",
+  "singapore ear"
+ ],
+ "class": "infective",
+ "system": "ENT / Otorhinolaryngology",
+ "specialty": "ENT",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Dhingra, Diseases of Ear, Nose and Throat",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Fungal infection of the external auditory canal presenting with intense itching, a feeling of blockage, discharge, and sometimes dull pain and reduced hearing",
+   "Aspergillus (often niger) and Candida are the usual organisms, and Aspergillus classically shows blotting-paper or wet newspaper debris with black or fungal spore heads",
+   "It is more common in hot humid climates, in swimmers, in diabetics, and after prolonged use of topical antibiotic-steroid ear drops",
+   "Diagnosis is largely clinical on otoscopy, supported by microscopy and culture of the debris when the picture is unclear",
+   "The mainstay of treatment is thorough and repeated aural toilet to remove fungal debris, followed by topical antifungal agents and keeping the ear dry",
+   "Correcting predisposing factors such as excessive moisture, glucose control in diabetics, and stopping unnecessary topical antibiotics is important to prevent recurrence",
+   "An intact tympanic membrane should be confirmed, as this influences the choice of topical agent",
+   "Recurrence is common if debris is incompletely cleared or predisposing factors persist"
   ],
-  "class": "infective",
-  "system": "ENT / Otorhinolaryngology",
-  "specialty": "ENT",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Dhingra, Diseases of Ear, Nose and Throat",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Fungal infection of the external auditory canal presenting with intense itching, a feeling of blockage, discharge, and sometimes dull pain and reduced hearing",
-      "Aspergillus (often niger) and Candida are the usual organisms, and Aspergillus classically shows blotting-paper or wet newspaper debris with black or fungal spore heads",
-      "It is more common in hot humid climates, in swimmers, in diabetics, and after prolonged use of topical antibiotic-steroid ear drops",
-      "Diagnosis is largely clinical on otoscopy, supported by microscopy and culture of the debris when the picture is unclear",
-      "The mainstay of treatment is thorough and repeated aural toilet to remove fungal debris, followed by topical antifungal agents and keeping the ear dry",
-      "Correcting predisposing factors such as excessive moisture, glucose control in diabetics, and stopping unnecessary topical antibiotics is important to prevent recurrence",
-      "An intact tympanic membrane should be confirmed, as this influences the choice of topical agent",
-      "Recurrence is common if debris is incompletely cleared or predisposing factors persist"
+  "pathophysiology": "Otomycosis is a superficial fungal infection of the squamous epithelium lining the external auditory canal. A warm, moist, and often macerated canal, frequently after water exposure or suppression of normal flora by topical antibiotics, favours colonisation by saprophytic fungi such as Aspergillus and Candida. The fungi proliferate over the canal skin and cerumen, producing hyphal mats and spores that trigger itching and inflammation. Accumulated debris obstructs the canal and can retain moisture, perpetuating the cycle. In immunocompromised or diabetic patients infection may be more aggressive.",
+  "additionalDifferentials": [
+   "Bacterial otitis externa",
+   "Chronic suppurative otitis media with discharge",
+   "Eczematous or seborrhoeic otitis externa",
+   "Keratosis obturans",
+   "Necrotising (malignant) otitis externa in a diabetic or immunocompromised patient",
+   "Contact dermatitis to ear drops"
+  ],
+  "additionalInvestigations": [
+   "Otoscopy to identify characteristic fungal debris and confirm tympanic membrane integrity",
+   "Microscopy and fungal culture of canal debris when diagnosis is uncertain or disease is resistant",
+   "Blood glucose or diabetic screening in recurrent or severe cases",
+   "Consideration of underlying immunosuppression in aggressive or persistent infection"
+  ],
+  "redFlags": [
+   "Severe deep pain, granulations at the bony-cartilaginous junction, or cranial nerve signs suggesting necrotising otitis externa in a diabetic or immunocompromised patient",
+   "Facial weakness or systemic upset indicating spread beyond the canal",
+   "Failure to respond to appropriate treatment raising concern for invasive fungal disease",
+   "Discharge through a perforation suggesting middle-ear involvement"
+  ],
+  "prognosis": "With thorough aural toilet, topical antifungal treatment, and control of predisposing factors the outlook is excellent, though recurrences are frequent when the ear is not kept dry or debris is inadequately cleared; invasive disease is rare and confined largely to immunocompromised hosts.",
+  "pitfalls": [
+   "Prescribing topical antifungals without first removing the fungal debris, which limits their effect",
+   "Continuing antibiotic-steroid drops that promoted the fungal overgrowth in the first place",
+   "Missing an underlying diabetes or immunosuppression in recurrent disease",
+   "Failing to recognise early necrotising otitis externa in an at-risk patient"
+  ],
+  "references": [
+   "Dhingra, Diseases of Ear, Nose and Throat"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Repeated thorough aural toilet under otoscopy or microsuction to remove fungal debris, the mainstay of treatment",
+   "Topical antifungal agents such as clotrimazole applied after debris clearance",
+   "Keep the ear dry and avoid water exposure to interrupt the moist environment that sustains fungal growth",
+   "Stop unnecessary topical antibiotic-corticosteroid drops that suppress normal flora and predispose to fungal overgrowth",
+   "Optimise glycaemic control in diabetics and consider underlying immunosuppression in aggressive or persistent disease",
+   "Microscopy and culture of debris to guide therapy in resistant cases, with follow-up given the frequent recurrences"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "otomycosis-pathway",
+   "title": "Otomycosis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Fungal infection of the external auditory canal presenting with intense itching, a feeling of blockage, discharge, and sometimes dull pain and reduced hearing",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Severe deep pain, granulations at the bony-cartilaginous junction, or cranial nerve signs suggesting necrotising otitis externa in a diabetic or immunocompromised patient",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Otoscopy to identify characteristic fungal debris and confirm tympanic membrane integrity, Microscopy and fungal culture of canal debris when diagnosis is uncertain or disease is resistant, Blood glucose or diabetic"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Repeated thorough aural toilet under otoscopy or microsuction to remove fungal debris, the mainstay of treatment"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Prescribing topical antifungals without first removing the fungal debris, which limits their effect"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of otomycosis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "otomycosis-matrix",
+   "title": "Otomycosis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Fungal infection of the external auditory canal presenting with intense itching, a feeling of blockage, discharge, and sometimes",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Otomycosis is a superficial fungal infection of the squamous epithelium lining the external auditory canal. A warm, moist, and often macerated canal, frequently after water exposure or suppression of normal flora by topical antibiotics, favours colonisation by saprophytic fungi such as Aspergillus and Candida. The fungi proliferate over the canal skin and cerumen, producing hyphal mats and spores that trigger itching and inflammation. Accumulated debris obstructs the canal and can retain moisture, perpetuating the cycle. In immunocompromised or diabetic patients infection may be more aggressive.",
-    "additionalDifferentials": [
-      "Bacterial otitis externa",
-      "Chronic suppurative otitis media with discharge",
-      "Eczematous or seborrhoeic otitis externa",
-      "Keratosis obturans",
-      "Necrotising (malignant) otitis externa in a diabetic or immunocompromised patient",
-      "Contact dermatitis to ear drops"
+    [
+     "Key Investigations",
+     "Otoscopy to identify characteristic fungal debris and confirm tympanic membrane integrity, Microscopy and fungal culture of canal",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Otoscopy to identify characteristic fungal debris and confirm tympanic membrane integrity",
-      "Microscopy and fungal culture of canal debris when diagnosis is uncertain or disease is resistant",
-      "Blood glucose or diabetic screening in recurrent or severe cases",
-      "Consideration of underlying immunosuppression in aggressive or persistent infection"
+    [
+     "Primary Differentials",
+     "Bacterial otitis externa, Chronic suppurative otitis media with discharge, Eczematous or seborrhoeic otitis externa",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Severe deep pain, granulations at the bony-cartilaginous junction, or cranial nerve signs suggesting necrotising otitis externa in a diabetic or immunocompromised patient",
-      "Facial weakness or systemic upset indicating spread beyond the canal",
-      "Failure to respond to appropriate treatment raising concern for invasive fungal disease",
-      "Discharge through a perforation suggesting middle-ear involvement"
+    [
+     "Management Strategy",
+     "Repeated thorough aural toilet under otoscopy or microsuction to remove fungal debris, the mainstay of treatment",
+     "Core treatment modality"
     ],
-    "prognosis": "With thorough aural toilet, topical antifungal treatment, and control of predisposing factors the outlook is excellent, though recurrences are frequent when the ear is not kept dry or debris is inadequately cleared; invasive disease is rare and confined largely to immunocompromised hosts.",
-    "pitfalls": [
-      "Prescribing topical antifungals without first removing the fungal debris, which limits their effect",
-      "Continuing antibiotic-steroid drops that promoted the fungal overgrowth in the first place",
-      "Missing an underlying diabetes or immunosuppression in recurrent disease",
-      "Failing to recognise early necrotising otitis externa in an at-risk patient"
-    ],
-    "references": [
-      "Dhingra, Diseases of Ear, Nose and Throat"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Repeated thorough aural toilet under otoscopy or microsuction to remove fungal debris, the mainstay of treatment",
-      "Topical antifungal agents such as clotrimazole applied after debris clearance",
-      "Keep the ear dry and avoid water exposure to interrupt the moist environment that sustains fungal growth",
-      "Stop unnecessary topical antibiotic-corticosteroid drops that suppress normal flora and predispose to fungal overgrowth",
-      "Optimise glycaemic control in diabetics and consider underlying immunosuppression in aggressive or persistent disease",
-      "Microscopy and culture of debris to guide therapy in resistant cases, with follow-up given the frequent recurrences"
+    [
+     "Clinical Pitfall",
+     "Prescribing topical antifungals without first removing the fungal debris, which limits their effect",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for otomycosis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "otomycosis-real-image",
+   "title": "Otomycosis: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

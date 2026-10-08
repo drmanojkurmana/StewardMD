@@ -5,7 +5,15 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, HDU, ICU",
- "aliases": ["HHS", "HONK", "HHNS", "hyperosmolar non-ketotic coma", "hyperglycaemic hyperosmolar state", "mixed DKA HHS", "hyperglycaemic crisis"],
+ "aliases": [
+  "HHS",
+  "HONK",
+  "HHNS",
+  "hyperosmolar non-ketotic coma",
+  "hyperglycaemic hyperosmolar state",
+  "mixed DKA HHS",
+  "hyperglycaemic crisis"
+ ],
  "summary": "Restore volume with 0.9% saline first, lower osmolality slowly (3 to 8 mOsm/kg/h), start low-dose insulin 0.05 units/kg/h only once glucose stops falling with fluids (earlier if ketonaemic), and give LMWH and foot protection.",
  "sections": [
   {
@@ -90,15 +98,143 @@
   }
  ],
  "drugs": [
-  { "name": "0.9% sodium chloride", "dose": "1 L IV over the first hour, then 0.5 to 1 L/h; target positive balance 2 to 3 L by 6 hours and 3 to 6 L by 12 hours", "notes": "0.45% saline only if osmolality is not falling despite adequate positive balance." },
-  { "name": "Regular (soluble) insulin, IV fixed-rate infusion", "dose": "0.05 units/kg/h IV once glucose stops falling with fluids; 0.1 units/kg/h for mixed DKA/HHS", "notes": "Start at once if BOHB above 1.0 mmol/L. Increase to 0.1 units/kg/h if glucose not falling despite adequate fluids." },
-  { "name": "Potassium chloride", "dose": "40 mmol per litre of fluid when K is 3.5 to 5.5 mmol/L; none if above 5.5 mmol/L", "notes": "K below 3.5 mmol/L: senior review, more potassium needed, cardiac monitoring." },
-  { "name": "Glucose 5% or 10%", "dose": "125 mL/h IV when glucose falls below 250 mg/dL (14 mmol/L), alongside 0.9% saline", "notes": "Target glucose 180 to 270 mg/dL (10 to 15 mmol/L) in the first 24 hours." },
-  { "name": "Enoxaparin (LMWH prophylaxis)", "dose": "40 mg SC once daily for the whole admission", "notes": "Reduce dose if creatinine clearance is below 30 mL/min. Consider extended prophylaxis if very high risk." }
+  {
+   "name": "0.9% sodium chloride",
+   "dose": "1 L IV over the first hour, then 0.5 to 1 L/h; target positive balance 2 to 3 L by 6 hours and 3 to 6 L by 12 hours",
+   "notes": "0.45% saline only if osmolality is not falling despite adequate positive balance."
+  },
+  {
+   "name": "Regular (soluble) insulin, IV fixed-rate infusion",
+   "dose": "0.05 units/kg/h IV once glucose stops falling with fluids; 0.1 units/kg/h for mixed DKA/HHS",
+   "notes": "Start at once if BOHB above 1.0 mmol/L. Increase to 0.1 units/kg/h if glucose not falling despite adequate fluids."
+  },
+  {
+   "name": "Potassium chloride",
+   "dose": "40 mmol per litre of fluid when K is 3.5 to 5.5 mmol/L; none if above 5.5 mmol/L",
+   "notes": "K below 3.5 mmol/L: senior review, more potassium needed, cardiac monitoring."
+  },
+  {
+   "name": "Glucose 5% or 10%",
+   "dose": "125 mL/h IV when glucose falls below 250 mg/dL (14 mmol/L), alongside 0.9% saline",
+   "notes": "Target glucose 180 to 270 mg/dL (10 to 15 mmol/L) in the first 24 hours."
+  },
+  {
+   "name": "Enoxaparin (LMWH prophylaxis)",
+   "dose": "40 mg SC once daily for the whole admission",
+   "notes": "Reduce dose if creatinine clearance is below 30 mL/min. Consider extended prophylaxis if very high risk."
+  }
  ],
  "sources": [
-  { "org": "ADA / EASD / JBDS / AACE / DTS", "title": "Hyperglycemic crises in adults with diabetes: a consensus report", "year": 2024, "url": "https://diabetesjournals.org/care/article/47/8/1257/156808/Hyperglycemic-Crises-in-Adults-With-Diabetes-A" },
-  { "org": "JBDS-IP", "title": "The management of the hyperosmolar hyperglycaemic state (HHS) in adults", "year": 2022, "url": "https://abcd.care/sites/default/files/site_uploads/JBDS_Guidelines_Current/JBDS_06_The_Management_of_Hyperosmolar_Hyperglycaemic_State_HHS_%20in_Adults_FINAL_0.pdf" }
+  {
+   "org": "ADA / EASD / JBDS / AACE / DTS",
+   "title": "Hyperglycemic crises in adults with diabetes: a consensus report",
+   "year": 2024,
+   "url": "https://diabetesjournals.org/care/article/47/8/1257/156808/Hyperglycemic-Crises-in-Adults-With-Diabetes-A"
+  },
+  {
+   "org": "JBDS-IP",
+   "title": "The management of the hyperosmolar hyperglycaemic state (HHS) in adults",
+   "year": 2022,
+   "url": "https://abcd.care/sites/default/files/site_uploads/JBDS_Guidelines_Current/JBDS_06_The_Management_of_Hyperosmolar_Hyperglycaemic_State_HHS_%20in_Adults_FINAL_0.pdf"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "hyperosmolar-hyperglycaemic-state-pathway",
+   "title": "Hyperosmolar hyperglycaemic state (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "All four needed (2024 consensus): glucose 600 mg/dL (33.3 mmol/L) or more; effective osmolality (2 x Na + glucose, mmol/L) above 300 or total (plus urea) above 320 mOsm/kg; BOHB below 3.0 mmol/L or urine ketones below 2+; pH 7.3 or above",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "0.9% saline 1 L IV over the first hour (faster if systolic BP below 90 mmHg), then 0.5 to 1 L/h guided by clinical state. Aim for a positive balance of 2 to 3 L by 6 hours.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Glucose (lab and capillary), sodium, potassium, urea, creatinine, calculated osmolality (use 2 x Na + glucose until urea is available), venous gas with lactate, capillary ketones, CBC, CRP."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Osmolality should fall 3.0 to 8.0 mOsm/kg/h. Glucose fall should not exceed 90 mg/dL/h (5 mmol/L/h). Sodium should fall no more than 10 mmol/L in 24 hours."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Hourly capillary glucose and fluid balance (urine output at least 0.5 mL/kg/h); sodium and osmolality 2-hourly from 6 to 12 hours, then 4-hourly if improving; check ketones until resolution."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for hyperosmolar hyperglycaemic state (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "hyperosmolar-hyperglycaemic-state-summary-matrix",
+   "title": "Hyperosmolar hyperglycaemic state (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "All four needed (2024 consensus): glucose 600 mg/dL (33.3 mmol/L) or more; effective osmolality (2 x Na + glucose, mmol/L) above 300 or",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "0.9% saline 1 L IV over the first hour (faster if systolic BP below 90 mmHg), then 0.5 to 1 L/h guided by clinical state. Aim for a",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Glucose (lab and capillary), sodium, potassium, urea, creatinine, calculated osmolality (use 2 x Na + glucose until urea is available),",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "0.9% sodium chloride: 1 L IV over the first hour, then 0.5 to 1 L/h; target positive balance 2 to 3 L by 6 hours and 3 to 6 L by 12 hours",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Starting insulin at DKA doses before fluids in pure HHS.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for hyperosmolar hyperglycaemic state (adult)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "hyperosmolar-hyperglycaemic-state-real-image",
+   "title": "Hyperosmolar hyperglycaemic state (adult): Diagnostic Endocrine Cross-Sectional Imaging",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
+   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
+   "annotations": [
+    {
+     "label": "Gland Morphology",
+     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
+    },
+    {
+     "label": "Focal Lesions",
+     "description": "Nodularity, adenoma attenuation, and washout dynamics."
+    },
+    {
+     "label": "Surrounding Structures",
+     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+    }
+   ]
+  }
+ ]
 }

@@ -1,74 +1,169 @@
 {
-  "id": "pulmonary_atresia",
-  "name": "Pulmonary atresia",
-  "aliases": [
-    "pulmonary atresia with intact ventricular septum",
-    "pulmonary atresia with ventricular septal defect"
+ "id": "pulmonary_atresia",
+ "name": "Pulmonary atresia",
+ "aliases": [
+  "pulmonary atresia with intact ventricular septum",
+  "pulmonary atresia with ventricular septal defect"
+ ],
+ "class": "non_infective",
+ "system": "Cardiovascular",
+ "specialty": "Cardiology / Congenital heart disease",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Congenital heart disease references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Complete obstruction of the right ventricular outflow to the pulmonary arteries, so there is no antegrade pulmonary blood flow",
+   "It occurs with an intact ventricular septum or with a ventricular septal defect, which differ in physiology and management",
+   "Pulmonary blood flow is duct-dependent, so neonates become profoundly cyanotic as the duct closes",
+   "In the intact-septum form the right ventricle is often hypoplastic and may have coronary sinusoids or right-ventricle-dependent coronary circulation",
+   "The form with a ventricular septal defect resembles severe tetralogy of Fallot and may have major aortopulmonary collaterals",
+   "Prostaglandin to maintain the duct is the immediate priority, followed by staged surgical or catheter intervention"
   ],
-  "class": "non_infective",
-  "system": "Cardiovascular",
-  "specialty": "Cardiology / Congenital heart disease",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Congenital heart disease references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Complete obstruction of the right ventricular outflow to the pulmonary arteries, so there is no antegrade pulmonary blood flow",
-      "It occurs with an intact ventricular septum or with a ventricular septal defect, which differ in physiology and management",
-      "Pulmonary blood flow is duct-dependent, so neonates become profoundly cyanotic as the duct closes",
-      "In the intact-septum form the right ventricle is often hypoplastic and may have coronary sinusoids or right-ventricle-dependent coronary circulation",
-      "The form with a ventricular septal defect resembles severe tetralogy of Fallot and may have major aortopulmonary collaterals",
-      "Prostaglandin to maintain the duct is the immediate priority, followed by staged surgical or catheter intervention"
+  "pathophysiology": "In pulmonary atresia there is no patent pathway from the right ventricle to the pulmonary arteries, so pulmonary perfusion depends on the arterial duct or on aortopulmonary collateral arteries. With an intact ventricular septum, blood cannot leave the right ventricle, which becomes hypertensive and often hypoplastic, sometimes maintaining fistulous connections (sinusoids) to the coronary arteries; closure of the duct causes life-threatening hypoxaemia. With a ventricular septal defect, the right ventricle decompresses through the defect and pulmonary supply comes from the duct or collaterals, giving a spectrum that overlaps with severe tetralogy of Fallot.",
+  "additionalDifferentials": [
+   "Critical pulmonary stenosis",
+   "Tetralogy of Fallot",
+   "Tricuspid atresia",
+   "Other duct-dependent pulmonary circulation lesions",
+   "Ebstein anomaly with functional pulmonary atresia"
+  ],
+  "additionalInvestigations": [
+   "Echocardiography defining outflow obstruction and ventricular size",
+   "Assessment for coronary sinusoids and right-ventricle-dependent coronary circulation",
+   "Imaging of pulmonary arteries and any aortopulmonary collaterals",
+   "Pre- and post-ductal saturations",
+   "Cardiac catheterisation for detailed anatomy"
+  ],
+  "redFlags": [
+   "Profound cyanosis as the duct closes",
+   "Right-ventricle-dependent coronary circulation (contraindicates decompression)",
+   "Inadequate or discontinuous pulmonary arteries",
+   "Severe hypoxaemia despite prostaglandin"
+  ],
+  "prognosis": "Outcome depends on the subtype and pulmonary artery and right ventricular anatomy; many children require staged intervention, achieving biventricular or single-ventricle circulations with variable long-term results.",
+  "pitfalls": [
+   "Failing to start prostaglandin promptly",
+   "Decompressing a right ventricle that supplies the coronary circulation, causing ischaemia",
+   "Underestimating collateral-dependent pulmonary supply",
+   "Confusing the two subtypes, which need different strategies"
+  ],
+  "references": [
+   "Congenital heart disease references (standard reference)",
+   "Braunwald's Heart Disease"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Immediate prostaglandin E infusion to maintain ductal patency and preserve pulmonary blood flow in the duct-dependent neonate",
+   "Balloon atrial septostomy or ductal stenting as early palliation where indicated",
+   "Staged surgical intervention tailored to anatomy, including systemic-to-pulmonary shunt, right ventricular outflow reconstruction, or unifocalisation of major aortopulmonary collaterals",
+   "Assess for right-ventricle-dependent coronary circulation and coronary sinusoids in the intact-septum form, since these contraindicate right ventricular decompression and direct single-ventricle pathways",
+   "Plan toward biventricular, one-and-a-half ventricle or single-ventricle Fontan palliation according to right ventricular size and pulmonary artery anatomy",
+   "Neonatal intensive care support with correction of hypoxaemia, acidosis and heart failure",
+   "Lifelong congenital cardiology follow-up for arrhythmia, conduit or shunt failure and reintervention, with family counselling"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "pulmonary_atresia-pathway",
+   "title": "Pulmonary atresia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Complete obstruction of the right ventricular outflow to the pulmonary arteries, so there is no antegrade pulmonary blood flow",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Profound cyanosis as the duct closes",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Echocardiography defining outflow obstruction and ventricular size, Assessment for coronary sinusoids and right-ventricle-dependent coronary circulation, Imaging of pulmonary arteries and any aortopulmonary collaterals"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Immediate prostaglandin E infusion to maintain ductal patency and preserve pulmonary blood flow in the duct-dependent neonate"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Failing to start prostaglandin promptly"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of pulmonary atresia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "pulmonary_atresia-matrix",
+   "title": "Pulmonary atresia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Complete obstruction of the right ventricular outflow to the pulmonary arteries, so there is no antegrade pulmonary blood flow",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "In pulmonary atresia there is no patent pathway from the right ventricle to the pulmonary arteries, so pulmonary perfusion depends on the arterial duct or on aortopulmonary collateral arteries. With an intact ventricular septum, blood cannot leave the right ventricle, which becomes hypertensive and often hypoplastic, sometimes maintaining fistulous connections (sinusoids) to the coronary arteries; closure of the duct causes life-threatening hypoxaemia. With a ventricular septal defect, the right ventricle decompresses through the defect and pulmonary supply comes from the duct or collaterals, giving a spectrum that overlaps with severe tetralogy of Fallot.",
-    "additionalDifferentials": [
-      "Critical pulmonary stenosis",
-      "Tetralogy of Fallot",
-      "Tricuspid atresia",
-      "Other duct-dependent pulmonary circulation lesions",
-      "Ebstein anomaly with functional pulmonary atresia"
+    [
+     "Key Investigations",
+     "Echocardiography defining outflow obstruction and ventricular size, Assessment for coronary sinusoids and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Echocardiography defining outflow obstruction and ventricular size",
-      "Assessment for coronary sinusoids and right-ventricle-dependent coronary circulation",
-      "Imaging of pulmonary arteries and any aortopulmonary collaterals",
-      "Pre- and post-ductal saturations",
-      "Cardiac catheterisation for detailed anatomy"
+    [
+     "Primary Differentials",
+     "Critical pulmonary stenosis, Tetralogy of Fallot, Tricuspid atresia",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Profound cyanosis as the duct closes",
-      "Right-ventricle-dependent coronary circulation (contraindicates decompression)",
-      "Inadequate or discontinuous pulmonary arteries",
-      "Severe hypoxaemia despite prostaglandin"
+    [
+     "Management Strategy",
+     "Immediate prostaglandin E infusion to maintain ductal patency and preserve pulmonary blood flow in the duct-dependent neonate",
+     "Core treatment modality"
     ],
-    "prognosis": "Outcome depends on the subtype and pulmonary artery and right ventricular anatomy; many children require staged intervention, achieving biventricular or single-ventricle circulations with variable long-term results.",
-    "pitfalls": [
-      "Failing to start prostaglandin promptly",
-      "Decompressing a right ventricle that supplies the coronary circulation, causing ischaemia",
-      "Underestimating collateral-dependent pulmonary supply",
-      "Confusing the two subtypes, which need different strategies"
-    ],
-    "references": [
-      "Congenital heart disease references (standard reference)",
-      "Braunwald's Heart Disease"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Immediate prostaglandin E infusion to maintain ductal patency and preserve pulmonary blood flow in the duct-dependent neonate",
-      "Balloon atrial septostomy or ductal stenting as early palliation where indicated",
-      "Staged surgical intervention tailored to anatomy, including systemic-to-pulmonary shunt, right ventricular outflow reconstruction, or unifocalisation of major aortopulmonary collaterals",
-      "Assess for right-ventricle-dependent coronary circulation and coronary sinusoids in the intact-septum form, since these contraindicate right ventricular decompression and direct single-ventricle pathways",
-      "Plan toward biventricular, one-and-a-half ventricle or single-ventricle Fontan palliation according to right ventricular size and pulmonary artery anatomy",
-      "Neonatal intensive care support with correction of hypoxaemia, acidosis and heart failure",
-      "Lifelong congenital cardiology follow-up for arrhythmia, conduit or shunt failure and reintervention, with family counselling"
+    [
+     "Clinical Pitfall",
+     "Failing to start prostaglandin promptly",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for pulmonary atresia."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "pulmonary-atresia-real-image",
+   "title": "Pulmonary atresia: 12-Lead Diagnostic Electrocardiogram",
+   "type": "ecg",
+   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
+   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
+   "annotations": [
+    {
+     "label": "Conduction & Axis",
+     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
+    },
+    {
+     "label": "Repolarization",
+     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
+    },
+    {
+     "label": "Rhythm & Intervals",
+     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+    }
+   ]
+  }
+ ]
 }

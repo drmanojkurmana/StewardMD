@@ -5,7 +5,16 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, ward, post-operative",
- "aliases": ["hypocalcemia", "low calcium", "tetany", "post-thyroidectomy hypocalcaemia", "hungry bone syndrome", "calcium gluconate infusion", "hypoparathyroidism", "alfacalcidol"],
+ "aliases": [
+  "hypocalcemia",
+  "low calcium",
+  "tetany",
+  "post-thyroidectomy hypocalcaemia",
+  "hungry bone syndrome",
+  "calcium gluconate infusion",
+  "hypoparathyroidism",
+  "alfacalcidol"
+ ],
  "summary": "Treat severe or symptomatic hypocalcaemia with 10 to 20 mL of 10% calcium gluconate IV over 10 minutes then a calcium gluconate infusion, correct magnesium, and treat the cause with oral calcium, active vitamin D or vitamin D repletion.",
  "sections": [
   {
@@ -80,17 +89,154 @@
   }
  ],
  "drugs": [
-  { "name": "Calcium gluconate 10% (bolus)", "dose": "10 to 20 mL in 50 to 100 mL 5% dextrose IV over 10 minutes, repeat until asymptomatic", "notes": "10 mL contains 2.2 mmol calcium. ECG monitoring." },
-  { "name": "Calcium gluconate 10% (infusion)", "dose": "100 mL in 1 L 0.9% saline or 5% dextrose at 50 to 100 mL/h, titrated to calcium", "notes": "Continue until the cause is treated; recheck calcium every 4 to 6 hours." },
-  { "name": "Magnesium sulphate", "dose": "24 mmol (6 g) IV in 500 mL over 24 hours", "notes": "If hypomagnesaemia coexists; recheck magnesium." },
-  { "name": "Alfacalcidol or calcitriol", "dose": "0.25 to 0.5 mcg orally daily to start", "notes": "Hypoparathyroidism; risk of hypercalcaemia, monitor closely." },
-  { "name": "Oral calcium (elemental)", "dose": "About 1 to 2 g daily in divided doses for mild hypocalcaemia", "notes": "Higher post-thyroidectomy doses per SfE." },
-  { "name": "Cholecalciferol", "dose": "Total about 300,000 units over 6 to 10 weeks", "notes": "Vitamin D deficiency; give with calcium." }
+  {
+   "name": "Calcium gluconate 10% (bolus)",
+   "dose": "10 to 20 mL in 50 to 100 mL 5% dextrose IV over 10 minutes, repeat until asymptomatic",
+   "notes": "10 mL contains 2.2 mmol calcium. ECG monitoring."
+  },
+  {
+   "name": "Calcium gluconate 10% (infusion)",
+   "dose": "100 mL in 1 L 0.9% saline or 5% dextrose at 50 to 100 mL/h, titrated to calcium",
+   "notes": "Continue until the cause is treated; recheck calcium every 4 to 6 hours."
+  },
+  {
+   "name": "Magnesium sulphate",
+   "dose": "24 mmol (6 g) IV in 500 mL over 24 hours",
+   "notes": "If hypomagnesaemia coexists; recheck magnesium."
+  },
+  {
+   "name": "Alfacalcidol or calcitriol",
+   "dose": "0.25 to 0.5 mcg orally daily to start",
+   "notes": "Hypoparathyroidism; risk of hypercalcaemia, monitor closely."
+  },
+  {
+   "name": "Oral calcium (elemental)",
+   "dose": "About 1 to 2 g daily in divided doses for mild hypocalcaemia",
+   "notes": "Higher post-thyroidectomy doses per SfE."
+  },
+  {
+   "name": "Cholecalciferol",
+   "dose": "Total about 300,000 units over 6 to 10 weeks",
+   "notes": "Vitamin D deficiency; give with calcium."
+  }
  ],
  "sources": [
-  { "org": "Society for Endocrinology", "title": "Emergency management of acute hypocalcaemia in adult patients", "year": 2016, "url": "https://journals.bioscientifica.com/ec/article/5/5/G7/35180/SOCIETY-FOR-ENDOCRINOLOGY-ENDOCRINE-EMERGENCY" },
-  { "org": "Society for Endocrinology", "title": "Emergency management of acute hypocalcaemia in adult patients: addendum on calcium chloride equivalence", "year": 2019, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8117371/" },
-  { "org": "Kent and Medway NHS (formulary)", "title": "Treatment of acute hypocalcaemia in adults", "year": 2024, "url": "https://kentandmedwayformulary.nhs.uk/media/02rlgfzp/treatment-of-acute-hypocalcaemia-in-adults-2024.pdf" }
+  {
+   "org": "Society for Endocrinology",
+   "title": "Emergency management of acute hypocalcaemia in adult patients",
+   "year": 2016,
+   "url": "https://journals.bioscientifica.com/ec/article/5/5/G7/35180/SOCIETY-FOR-ENDOCRINOLOGY-ENDOCRINE-EMERGENCY"
+  },
+  {
+   "org": "Society for Endocrinology",
+   "title": "Emergency management of acute hypocalcaemia in adult patients: addendum on calcium chloride equivalence",
+   "year": 2019,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8117371/"
+  },
+  {
+   "org": "Kent and Medway NHS (formulary)",
+   "title": "Treatment of acute hypocalcaemia in adults",
+   "year": 2024,
+   "url": "https://kentandmedwayformulary.nhs.uk/media/02rlgfzp/treatment-of-acute-hypocalcaemia-in-adults-2024.pdf"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "hypocalcaemia-pathway",
+   "title": "Hypocalcaemia (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Use albumin-adjusted calcium: adjusted calcium (mmol/L) = measured + 0.02 x (40 minus albumin in g/L). Check ionised calcium in critical illness or with very abnormal albumin.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "This is an emergency. Give 10 to 20 mL of 10% calcium gluconate in 50 to 100 mL of 5% dextrose IV over 10 minutes with ECG monitoring. Repeat until symptoms resolve.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Adjusted calcium, phosphate, magnesium, PTH, 25-hydroxy vitamin D, creatinine and electrolytes, ALP, and ECG for QT interval."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Correct low magnesium first, or calcium will not stay up: stop the culprit drug and give magnesium sulphate 24 mmol (6 g) IV in 500 mL 0.9% saline or 5% dextrose over 24 hours, then recheck."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "During IV infusion: adjusted calcium every 4 to 6 hours and 1 to 2 hours after a bolus; ECG monitoring."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for hypocalcaemia (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "hypocalcaemia-summary-matrix",
+   "title": "Hypocalcaemia (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Use albumin-adjusted calcium: adjusted calcium (mmol/L) = measured + 0.02 x (40 minus albumin in g/L). Check ionised calcium in critical",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "This is an emergency. Give 10 to 20 mL of 10% calcium gluconate in 50 to 100 mL of 5% dextrose IV over 10 minutes with ECG monitoring.",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Adjusted calcium, phosphate, magnesium, PTH, 25-hydroxy vitamin D, creatinine and electrolytes, ALP, and ECG for QT interval.",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Calcium gluconate 10% (bolus): 10 to 20 mL in 50 to 100 mL 5% dextrose IV over 10 minutes, repeat until asymptomatic",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Treating calcium without checking magnesium.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for hypocalcaemia (adult)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "hypocalcaemia-real-image",
+   "title": "Hypocalcaemia (adult): Diagnostic Renal Ultrasonography",
+   "type": "ultrasound",
+   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
+   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
+   "annotations": [
+    {
+     "label": "Renal Cortex",
+     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
+    },
+    {
+     "label": "Corticomedullary Junction",
+     "description": "Medullary pyramid definition and structural architecture."
+    },
+    {
+     "label": "Collecting System",
+     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+    }
+   ]
+  }
+ ]
 }

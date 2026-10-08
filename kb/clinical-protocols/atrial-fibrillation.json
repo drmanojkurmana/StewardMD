@@ -5,7 +5,21 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, ward, outpatient clinic",
- "aliases": ["AF", "AFib", "atrial fibrillation", "fast AF", "AF with RVR", "rapid ventricular rate", "CHA2DS2-VA", "CHA2DS2-VASc", "DOAC", "NOAC", "cardioversion", "rate control", "AF-CARE"],
+ "aliases": [
+  "AF",
+  "AFib",
+  "atrial fibrillation",
+  "fast AF",
+  "AF with RVR",
+  "rapid ventricular rate",
+  "CHA2DS2-VA",
+  "CHA2DS2-VASc",
+  "DOAC",
+  "NOAC",
+  "cardioversion",
+  "rate control",
+  "AF-CARE"
+ ],
  "summary": "Cardiovert immediately if unstable; otherwise control rate (initial target below 110/min) with a beta-blocker, diltiazem or verapamil (LVEF above 40%) or digoxin, delay cardioversion beyond 24 hours unless anticoagulated for 3 weeks or TOE-cleared, and anticoagulate with a DOAC when CHA2DS2-VA is 2 or more.",
  "sections": [
   {
@@ -82,20 +96,168 @@
   }
  ],
  "drugs": [
-  { "name": "Metoprolol", "dose": "2.5 to 5 mg IV bolus over 2 minutes, repeat up to 4 doses; oral metoprolol tartrate 25 to 100 mg twice daily", "notes": "Avoid in decompensated HF, severe asthma, hypotension." },
-  { "name": "Esmolol", "dose": "500 mcg/kg IV over 1 minute, then 50 to 300 mcg/kg/min infusion", "notes": "Short-acting; useful in critically ill or peri-operative patients." },
-  { "name": "Diltiazem", "dose": "0.25 mg/kg IV over 5 minutes, then 5 to 15 mg/h infusion; oral 60 mg three times daily up to 360 mg/day (modified release once daily)", "notes": "Only if LVEF above 40%. Hypotension." },
-  { "name": "Verapamil", "dose": "2.5 to 10 mg IV over 5 minutes; oral 40 mg twice daily up to 480 mg/day", "notes": "Only if LVEF above 40%. Interacts with dabigatran and digoxin." },
-  { "name": "Digoxin", "dose": "0.5 mg IV bolus, total 0.75 to 1.5 mg over 24 hours in divided doses; oral maintenance 62.5 to 250 mcg once daily", "notes": "Reduce in CKD and elderly. Slow onset; useful in HF and low BP." },
-  { "name": "Amiodarone", "dose": "300 mg IV in 250 mL 5% glucose over 30 to 60 minutes, then 900 to 1200 mg IV over 24 hours (central line preferred); oral 200 mg three times daily for about 4 weeks then 200 mg daily", "notes": "Rate or rhythm control in HF or haemodynamic instability. Can cardiovert, so consider stroke risk. Thyroid, liver, lung toxicity long term." },
-  { "name": "Apixaban", "dose": "5 mg orally twice daily; 2.5 mg twice daily if 2 of: age 80 or older, weight 60 kg or less, serum creatinine 1.5 mg/dL (133 micromol/L) or more", "notes": "Avoid if CrCl below 15 mL/min." },
-  { "name": "Rivaroxaban", "dose": "20 mg orally once daily with the evening meal; 15 mg once daily if CrCl 15 to 49 mL/min", "notes": "Must be taken with food." },
-  { "name": "Dabigatran", "dose": "150 mg orally twice daily; 110 mg twice daily if age 80 or older or taking verapamil (consider if 75 to 80, CrCl 30 to 50, gastritis or high bleeding risk)", "notes": "Contraindicated if CrCl below 30 mL/min." },
-  { "name": "Edoxaban", "dose": "60 mg orally once daily; 30 mg once daily if CrCl 15 to 50 mL/min, weight 60 kg or less, or strong P-gp inhibitor (ciclosporin, dronedarone, erythromycin, ketoconazole)", "notes": "Avoid if CrCl below 15 mL/min." }
+  {
+   "name": "Metoprolol",
+   "dose": "2.5 to 5 mg IV bolus over 2 minutes, repeat up to 4 doses; oral metoprolol tartrate 25 to 100 mg twice daily",
+   "notes": "Avoid in decompensated HF, severe asthma, hypotension."
+  },
+  {
+   "name": "Esmolol",
+   "dose": "500 mcg/kg IV over 1 minute, then 50 to 300 mcg/kg/min infusion",
+   "notes": "Short-acting; useful in critically ill or peri-operative patients."
+  },
+  {
+   "name": "Diltiazem",
+   "dose": "0.25 mg/kg IV over 5 minutes, then 5 to 15 mg/h infusion; oral 60 mg three times daily up to 360 mg/day (modified release once daily)",
+   "notes": "Only if LVEF above 40%. Hypotension."
+  },
+  {
+   "name": "Verapamil",
+   "dose": "2.5 to 10 mg IV over 5 minutes; oral 40 mg twice daily up to 480 mg/day",
+   "notes": "Only if LVEF above 40%. Interacts with dabigatran and digoxin."
+  },
+  {
+   "name": "Digoxin",
+   "dose": "0.5 mg IV bolus, total 0.75 to 1.5 mg over 24 hours in divided doses; oral maintenance 62.5 to 250 mcg once daily",
+   "notes": "Reduce in CKD and elderly. Slow onset; useful in HF and low BP."
+  },
+  {
+   "name": "Amiodarone",
+   "dose": "300 mg IV in 250 mL 5% glucose over 30 to 60 minutes, then 900 to 1200 mg IV over 24 hours (central line preferred); oral 200 mg three times daily for about 4 weeks then 200 mg daily",
+   "notes": "Rate or rhythm control in HF or haemodynamic instability. Can cardiovert, so consider stroke risk. Thyroid, liver, lung toxicity long term."
+  },
+  {
+   "name": "Apixaban",
+   "dose": "5 mg orally twice daily; 2.5 mg twice daily if 2 of: age 80 or older, weight 60 kg or less, serum creatinine 1.5 mg/dL (133 micromol/L) or more",
+   "notes": "Avoid if CrCl below 15 mL/min."
+  },
+  {
+   "name": "Rivaroxaban",
+   "dose": "20 mg orally once daily with the evening meal; 15 mg once daily if CrCl 15 to 49 mL/min",
+   "notes": "Must be taken with food."
+  },
+  {
+   "name": "Dabigatran",
+   "dose": "150 mg orally twice daily; 110 mg twice daily if age 80 or older or taking verapamil (consider if 75 to 80, CrCl 30 to 50, gastritis or high bleeding risk)",
+   "notes": "Contraindicated if CrCl below 30 mL/min."
+  },
+  {
+   "name": "Edoxaban",
+   "dose": "60 mg orally once daily; 30 mg once daily if CrCl 15 to 50 mL/min, weight 60 kg or less, or strong P-gp inhibitor (ciclosporin, dronedarone, erythromycin, ketoconazole)",
+   "notes": "Avoid if CrCl below 15 mL/min."
+  }
  ],
  "sources": [
-  { "org": "ESC / EACTS", "title": "2024 ESC Guidelines for the management of atrial fibrillation", "year": 2024, "url": "https://academic.oup.com/eurheartj/article/45/36/3314/7738779" },
-  { "org": "ACC / AHA / ACCP / HRS", "title": "2023 ACC/AHA/ACCP/HRS Guideline for the Diagnosis and Management of Atrial Fibrillation", "year": 2023, "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001193" }
+  {
+   "org": "ESC / EACTS",
+   "title": "2024 ESC Guidelines for the management of atrial fibrillation",
+   "year": 2024,
+   "url": "https://academic.oup.com/eurheartj/article/45/36/3314/7738779"
+  },
+  {
+   "org": "ACC / AHA / ACCP / HRS",
+   "title": "2023 ACC/AHA/ACCP/HRS Guideline for the Diagnosis and Management of Atrial Fibrillation",
+   "year": 2023,
+   "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001193"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "atrial-fibrillation-pathway",
+   "title": "Atrial fibrillation: rapid ventricular rate, rhythm control and anticoagulation Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Irregularly irregular narrow-complex rhythm without distinct P waves on a 12-lead ECG (or a 30-second single-lead strip). Irregular broad-complex tachycardia at very fast rates suggests pre-excited AF (WPW).",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Haemodynamically unstable: urgent synchronised DC cardioversion under sedation; start heparin without delaying the shock. If cardioversion fails or AF recurs, IV amiodarone for rate control.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "12-lead ECG, CBC, creatinine and creatinine clearance (Cockcroft-Gault for DOAC dosing), electrolytes including magnesium, liver function, TSH, glucose."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "CHA2DS2-VA (ESC 2024, sex removed): congestive heart failure 1, hypertension 1, age 75 or older 2, diabetes 1, prior stroke, TIA or thromboembolism 2, vascular disease 1, age 65 to 74 1."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Cardioverting AF of more than 24 hours or unknown duration without anticoagulation or TOE."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for atrial fibrillation: rapid ventricular rate, rhythm control and anticoagulation."
+  }
+ ],
+ "tables": [
+  {
+   "id": "atrial-fibrillation-summary-matrix",
+   "title": "Atrial fibrillation: rapid ventricular rate, rhythm control and anticoagulation Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Irregularly irregular narrow-complex rhythm without distinct P waves on a 12-lead ECG (or a 30-second single-lead strip). Irregular",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Haemodynamically unstable: urgent synchronised DC cardioversion under sedation; start heparin without delaying the shock. If cardioversion",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "12-lead ECG, CBC, creatinine and creatinine clearance (Cockcroft-Gault for DOAC dosing), electrolytes including magnesium, liver function,",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Metoprolol: 2.5 to 5 mg IV bolus over 2 minutes, repeat up to 4 doses; oral metoprolol tartrate 25 to 100 mg twice daily",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Cardioverting AF of more than 24 hours or unknown duration without anticoagulation or TOE.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for atrial fibrillation: rapid ventricular rate, rhythm control and anticoagulation."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "atrial-fibrillation-real-image",
+   "title": "Atrial fibrillation: rapid ventricular rate, rhythm control and anticoagulation: 12-Lead Diagnostic ECG (Atrial Fibrillation)",
+   "type": "ecg",
+   "src": "/assets/kb-real-images/atrial-fibrillation-ecg.jpg?v=kbri3",
+   "caption": "Real electrocardiogram demonstrating irregularly irregular ventricular rhythm, absent distinct P waves, and fine fibrillatory baseline waves.",
+   "annotations": [
+    {
+     "label": "Absent P Waves",
+     "description": "Complete absence of organized atrial P waves replaced by fibrillatory oscillations."
+    },
+    {
+     "label": "Irregular R-R Intervals",
+     "description": "Variable AV nodal decremental conduction producing irregularly irregular rhythm."
+    },
+    {
+     "label": "QRS Morphology",
+     "description": "Narrow QRS complexes indicating supraventricular origin without bundle branch block."
+    }
+   ]
+  }
+ ]
 }

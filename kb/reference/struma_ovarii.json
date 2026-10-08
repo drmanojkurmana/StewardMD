@@ -1,81 +1,176 @@
 {
-  "id": "struma_ovarii",
-  "name": "Struma ovarii",
-  "aliases": [
-    "ovarian struma",
-    "thyroid-type ovarian teratoma",
-    "monodermal teratoma with thyroid tissue"
+ "id": "struma_ovarii",
+ "name": "Struma ovarii",
+ "aliases": [
+  "ovarian struma",
+  "thyroid-type ovarian teratoma",
+  "monodermal teratoma with thyroid tissue"
+ ],
+ "class": "non_infective",
+ "system": "Endocrine",
+ "specialty": "Endocrinology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Williams Textbook of Endocrinology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A rare ovarian teratoma composed predominantly of mature thyroid tissue, classified as a monodermal teratoma",
+   "Most present as an incidental adnexal or pelvic mass rather than with thyroid symptoms",
+   "A minority secrete enough thyroid hormone to cause hyperthyroidism arising from ectopic ovarian tissue",
+   "Ectopic thyroid hormone production suppresses the eutopic thyroid, so neck radioiodine uptake is low while pelvic uptake may be demonstrable",
+   "It should be considered in unexplained thyrotoxicosis when the neck gland appears normal or shows suppressed uptake",
+   "Rarely it is associated with ascites and a raised tumour marker, mimicking ovarian malignancy",
+   "Malignant transformation into thyroid-type carcinoma can occur but is uncommon",
+   "Treatment is surgical removal of the affected ovary, with thyroid-directed management for any associated malignant histology"
   ],
-  "class": "non_infective",
-  "system": "Endocrine",
-  "specialty": "Endocrinology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Williams Textbook of Endocrinology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A rare ovarian teratoma composed predominantly of mature thyroid tissue, classified as a monodermal teratoma",
-      "Most present as an incidental adnexal or pelvic mass rather than with thyroid symptoms",
-      "A minority secrete enough thyroid hormone to cause hyperthyroidism arising from ectopic ovarian tissue",
-      "Ectopic thyroid hormone production suppresses the eutopic thyroid, so neck radioiodine uptake is low while pelvic uptake may be demonstrable",
-      "It should be considered in unexplained thyrotoxicosis when the neck gland appears normal or shows suppressed uptake",
-      "Rarely it is associated with ascites and a raised tumour marker, mimicking ovarian malignancy",
-      "Malignant transformation into thyroid-type carcinoma can occur but is uncommon",
-      "Treatment is surgical removal of the affected ovary, with thyroid-directed management for any associated malignant histology"
+  "pathophysiology": "Struma ovarii is a germ-cell tumour of the ovary in which mature thyroid tissue forms the dominant or exclusive component. The ectopic thyroid follicular cells can retain the capacity to synthesise thyroid hormone, and when active in sufficient quantity they cause thyrotoxicosis independent of pituitary control, thereby suppressing thyroid-stimulating hormone and the normal cervical thyroid. Most tumours are benign, but the same follicular epithelium can rarely undergo malignant change resembling papillary or follicular thyroid carcinoma, with potential for spread. The mass itself may produce local pelvic symptoms or, uncommonly, ascites and pleural effusion.",
+  "additionalDifferentials": [
+   "Graves disease or toxic nodular thyroid disease",
+   "Other functioning or non-functioning ovarian tumours",
+   "Ovarian epithelial malignancy",
+   "Mature cystic teratoma without significant thyroid tissue",
+   "Factitious or exogenous thyrotoxicosis",
+   "Subacute or silent thyroiditis"
+  ],
+  "additionalInvestigations": [
+   "Thyroid function tests demonstrating thyrotoxicosis when present",
+   "Radioiodine or radionuclide imaging showing suppressed neck uptake with pelvic uptake",
+   "Pelvic ultrasound and cross-sectional imaging of the adnexal mass",
+   "Tumour markers where ovarian malignancy is in the differential",
+   "Histological examination of the resected specimen",
+   "Thyroglobulin monitoring if malignant struma is identified"
+  ],
+  "redFlags": [
+   "Severe thyrotoxicosis with cardiovascular compromise",
+   "Features suggesting malignant transformation or metastatic spread",
+   "Rapidly enlarging pelvic mass with ascites",
+   "Ovarian torsion of the tumour-bearing ovary",
+   "Unexplained thyrotoxicosis with a normal-appearing neck gland"
+  ],
+  "prognosis": "The great majority are benign and cured by surgical removal, with resolution of any associated thyrotoxicosis; malignant struma ovarii is uncommon and generally indolent, though it warrants thyroid-cancer-style follow-up.",
+  "pitfalls": [
+   "Attributing thyrotoxicosis solely to the neck thyroid and overlooking an ovarian source",
+   "Misinterpreting suppressed cervical radioiodine uptake without seeking a pelvic source",
+   "Assuming an adnexal mass with ascites is primary ovarian cancer",
+   "Failing to examine resected tissue for malignant thyroid histology",
+   "Neglecting thyroid-directed surveillance after removal of malignant struma"
+  ],
+  "references": [
+   "Williams Textbook of Endocrinology",
+   "DeGroot's Endocrinology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Definitive surgical resection of the ovarian tumour by cystectomy or oophorectomy, which is curative and resolves any associated thyrotoxicosis",
+   "Control thyrotoxic symptoms preoperatively with beta-blockade, adding antithyroid drugs where needed to render the patient euthyroid before surgery",
+   "Histological examination of the resected specimen to exclude malignant struma resembling papillary or follicular thyroid carcinoma",
+   "For malignant struma, consider completion total thyroidectomy to enable radioiodine ablation and thyroglobulin surveillance",
+   "Monitor thyroid function postoperatively to confirm resolution of the thyrotoxicosis",
+   "Long-term surveillance with thyroglobulin and imaging where malignant struma is identified",
+   "Multidisciplinary input from gynaecology and endocrinology, with endocrine oncology involvement if malignant"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "struma_ovarii-pathway",
+   "title": "Struma ovarii: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A rare ovarian teratoma composed predominantly of mature thyroid tissue, classified as a monodermal teratoma",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Severe thyrotoxicosis with cardiovascular compromise",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Thyroid function tests demonstrating thyrotoxicosis when present, Radioiodine or radionuclide imaging showing suppressed neck uptake with pelvic uptake, Pelvic ultrasound and cross-sectional imaging of the adnexal mass"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Definitive surgical resection of the ovarian tumour by cystectomy or oophorectomy, which is curative and resolves any associated thyrotoxicosis"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing thyrotoxicosis solely to the neck thyroid and overlooking an ovarian source"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of struma ovarii."
+  }
+ ],
+ "tables": [
+  {
+   "id": "struma_ovarii-matrix",
+   "title": "Struma ovarii: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A rare ovarian teratoma composed predominantly of mature thyroid tissue, classified as a monodermal teratoma",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Struma ovarii is a germ-cell tumour of the ovary in which mature thyroid tissue forms the dominant or exclusive component. The ectopic thyroid follicular cells can retain the capacity to synthesise thyroid hormone, and when active in sufficient quantity they cause thyrotoxicosis independent of pituitary control, thereby suppressing thyroid-stimulating hormone and the normal cervical thyroid. Most tumours are benign, but the same follicular epithelium can rarely undergo malignant change resembling papillary or follicular thyroid carcinoma, with potential for spread. The mass itself may produce local pelvic symptoms or, uncommonly, ascites and pleural effusion.",
-    "additionalDifferentials": [
-      "Graves disease or toxic nodular thyroid disease",
-      "Other functioning or non-functioning ovarian tumours",
-      "Ovarian epithelial malignancy",
-      "Mature cystic teratoma without significant thyroid tissue",
-      "Factitious or exogenous thyrotoxicosis",
-      "Subacute or silent thyroiditis"
+    [
+     "Key Investigations",
+     "Thyroid function tests demonstrating thyrotoxicosis when present, Radioiodine or radionuclide imaging showing suppressed neck",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Thyroid function tests demonstrating thyrotoxicosis when present",
-      "Radioiodine or radionuclide imaging showing suppressed neck uptake with pelvic uptake",
-      "Pelvic ultrasound and cross-sectional imaging of the adnexal mass",
-      "Tumour markers where ovarian malignancy is in the differential",
-      "Histological examination of the resected specimen",
-      "Thyroglobulin monitoring if malignant struma is identified"
+    [
+     "Primary Differentials",
+     "Graves disease or toxic nodular thyroid disease, Other functioning or non-functioning ovarian tumours, Ovarian epithelial",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Severe thyrotoxicosis with cardiovascular compromise",
-      "Features suggesting malignant transformation or metastatic spread",
-      "Rapidly enlarging pelvic mass with ascites",
-      "Ovarian torsion of the tumour-bearing ovary",
-      "Unexplained thyrotoxicosis with a normal-appearing neck gland"
+    [
+     "Management Strategy",
+     "Definitive surgical resection of the ovarian tumour by cystectomy or oophorectomy, which is curative and resolves any associated",
+     "Core treatment modality"
     ],
-    "prognosis": "The great majority are benign and cured by surgical removal, with resolution of any associated thyrotoxicosis; malignant struma ovarii is uncommon and generally indolent, though it warrants thyroid-cancer-style follow-up.",
-    "pitfalls": [
-      "Attributing thyrotoxicosis solely to the neck thyroid and overlooking an ovarian source",
-      "Misinterpreting suppressed cervical radioiodine uptake without seeking a pelvic source",
-      "Assuming an adnexal mass with ascites is primary ovarian cancer",
-      "Failing to examine resected tissue for malignant thyroid histology",
-      "Neglecting thyroid-directed surveillance after removal of malignant struma"
-    ],
-    "references": [
-      "Williams Textbook of Endocrinology",
-      "DeGroot's Endocrinology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Definitive surgical resection of the ovarian tumour by cystectomy or oophorectomy, which is curative and resolves any associated thyrotoxicosis",
-      "Control thyrotoxic symptoms preoperatively with beta-blockade, adding antithyroid drugs where needed to render the patient euthyroid before surgery",
-      "Histological examination of the resected specimen to exclude malignant struma resembling papillary or follicular thyroid carcinoma",
-      "For malignant struma, consider completion total thyroidectomy to enable radioiodine ablation and thyroglobulin surveillance",
-      "Monitor thyroid function postoperatively to confirm resolution of the thyrotoxicosis",
-      "Long-term surveillance with thyroglobulin and imaging where malignant struma is identified",
-      "Multidisciplinary input from gynaecology and endocrinology, with endocrine oncology involvement if malignant"
+    [
+     "Clinical Pitfall",
+     "Attributing thyrotoxicosis solely to the neck thyroid and overlooking an ovarian source",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for struma ovarii."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "struma-ovarii-real-image",
+   "title": "Struma ovarii: Diagnostic Endocrine Cross-Sectional Imaging",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
+   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
+   "annotations": [
+    {
+     "label": "Gland Morphology",
+     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
+    },
+    {
+     "label": "Focal Lesions",
+     "description": "Nodularity, adenoma attenuation, and washout dynamics."
+    },
+    {
+     "label": "Surrounding Structures",
+     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+    }
+   ]
+  }
+ ]
 }

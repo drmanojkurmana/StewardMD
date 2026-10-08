@@ -1,79 +1,174 @@
 {
-  "id": "lunotriquetral_instability",
-  "name": "lunotriquetral instability",
-  "aliases": [
-    "lunotriquetral ligament injury",
-    "LT dissociation"
+ "id": "lunotriquetral_instability",
+ "name": "lunotriquetral instability",
+ "aliases": [
+  "lunotriquetral ligament injury",
+  "LT dissociation"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal",
+ "specialty": "Hand and wrist surgery",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Green's Operative Hand Surgery",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Lunotriquetral instability arises from injury to the lunotriquetral interosseous ligament, causing ulnar-sided wrist pain and a sense of clunking.",
+   "It may occur in isolation, often after a fall on the extended, radially deviated and pronated wrist, or as part of a reverse perilunate (progressive perilunar) injury.",
+   "The Reagan ballottement test and the Kleinman shear test reproduce pain and abnormal motion at the lunotriquetral interval.",
+   "When secondary stabilisers also fail, the lunate follows the scaphoid into flexion, producing a volar intercalated segment instability (VISI) posture.",
+   "Static radiographs are often normal; a break in the smooth proximal Gilula arcs or a lunotriquetral step-off is suggestive.",
+   "Ulnar impaction syndrome frequently coexists and should be assessed, as positive ulnar variance may need addressing.",
+   "Arthroscopy is the reference standard for confirming and grading the tear when imaging is inconclusive."
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal",
-  "specialty": "Hand and wrist surgery",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Green's Operative Hand Surgery",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Lunotriquetral instability arises from injury to the lunotriquetral interosseous ligament, causing ulnar-sided wrist pain and a sense of clunking.",
-      "It may occur in isolation, often after a fall on the extended, radially deviated and pronated wrist, or as part of a reverse perilunate (progressive perilunar) injury.",
-      "The Reagan ballottement test and the Kleinman shear test reproduce pain and abnormal motion at the lunotriquetral interval.",
-      "When secondary stabilisers also fail, the lunate follows the scaphoid into flexion, producing a volar intercalated segment instability (VISI) posture.",
-      "Static radiographs are often normal; a break in the smooth proximal Gilula arcs or a lunotriquetral step-off is suggestive.",
-      "Ulnar impaction syndrome frequently coexists and should be assessed, as positive ulnar variance may need addressing.",
-      "Arthroscopy is the reference standard for confirming and grading the tear when imaging is inconclusive."
+  "pathophysiology": "The lunotriquetral interosseous ligament, strongest volarly, tightly couples the lunate and triquetrum within the proximal carpal row. Disruption, whether traumatic or degenerative and often associated with ulnar impaction, uncouples this linkage. With loss of the palmar lunotriquetral ligament and secondary volar stabilisers, the triquetrum extends while the lunate, still tethered to the scaphoid, is drawn into flexion, generating a VISI collapse pattern. The resulting abnormal midcarpal kinematics produce pain, clicking and reduced load tolerance on the ulnar side of the wrist.",
+  "additionalDifferentials": [
+   "Triangular fibrocartilage complex (TFCC) tear",
+   "Ulnar impaction syndrome",
+   "Extensor carpi ulnaris tendinopathy or subluxation",
+   "Pisotriquetral arthritis",
+   "Midcarpal instability",
+   "Distal radioulnar joint pathology",
+   "Hamate or triquetral fracture"
+  ],
+  "additionalInvestigations": [
+   "PA, lateral and clenched-fist radiographs assessing Gilula arcs and carpal alignment",
+   "Lateral view to detect a VISI pattern with abnormal scaphoid flexion and capitolunate angulation",
+   "MRI or MR arthrography of the lunotriquetral ligament and TFCC",
+   "Wrist arthroscopy for definitive diagnosis and grading",
+   "Assessment of ulnar variance",
+   "Fluoroscopic dynamic motion study",
+   "Contralateral comparison views"
+  ],
+  "redFlags": [
+   "Features of a progressive perilunate injury or dislocation",
+   "Fixed VISI deformity indicating chronic complete disruption",
+   "Associated ulnar impaction with lunate or triquetral chondral change",
+   "Neurovascular compromise after a high-energy injury"
+  ],
+  "prognosis": "Isolated partial injuries often respond to non-operative care, whereas complete or chronic instability may require repair, reconstruction or lunotriquetral arthrodesis, with outcomes influenced by coexisting ulnar impaction.",
+  "pitfalls": [
+   "Overlooking associated ulnar impaction and treating the ligament in isolation.",
+   "Interpreting normal static radiographs as excluding instability.",
+   "Missing a reverse perilunate injury pattern.",
+   "Confusing lunotriquetral instability with a primary TFCC tear."
+  ],
+  "references": [
+   "Green's Operative Hand Surgery",
+   "Rockwood and Green's Fractures in Adults",
+   "Wheeless' Textbook of Orthopaedics"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Treat isolated partial or acute injuries non-operatively with wrist splinting, activity modification, hand therapy and a corticosteroid injection into the lunotriquetral interval",
+   "Address coexisting ulnar impaction, including an ulnar shortening osteotomy or wafer procedure for positive ulnar variance",
+   "Confirm and grade the instability with MR arthrography and wrist arthroscopy when the diagnosis is unclear or symptoms persist",
+   "Offer ligament repair or reconstruction for complete or symptomatic chronic instability without fixed deformity",
+   "Perform lunotriquetral arthrodesis for refractory or chronic instability, particularly when a VISI deformity is established",
+   "Rehabilitate with hand therapy after intervention and refer to a hand and wrist surgeon for persistent ulnar-sided pain or clunking"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "lunotriquetral_instability-pathway",
+   "title": "lunotriquetral instability: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Lunotriquetral instability arises from injury to the lunotriquetral interosseous ligament, causing ulnar-sided wrist pain and a sense of clunking.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Features of a progressive perilunate injury or dislocation",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: PA, lateral and clenched-fist radiographs assessing Gilula arcs and carpal alignment, Lateral view to detect a VISI pattern with abnormal scaphoid flexion and capitolunate angulation, MRI or MR arthrography of the"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Treat isolated partial or acute injuries non-operatively with wrist splinting, activity modification, hand therapy and a corticosteroid injection into the lunotriquetral interval"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Overlooking associated ulnar impaction and treating the ligament in isolation."
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of lunotriquetral instability."
+  }
+ ],
+ "tables": [
+  {
+   "id": "lunotriquetral_instability-matrix",
+   "title": "lunotriquetral instability: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Lunotriquetral instability arises from injury to the lunotriquetral interosseous ligament, causing ulnar-sided wrist pain and a",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "The lunotriquetral interosseous ligament, strongest volarly, tightly couples the lunate and triquetrum within the proximal carpal row. Disruption, whether traumatic or degenerative and often associated with ulnar impaction, uncouples this linkage. With loss of the palmar lunotriquetral ligament and secondary volar stabilisers, the triquetrum extends while the lunate, still tethered to the scaphoid, is drawn into flexion, generating a VISI collapse pattern. The resulting abnormal midcarpal kinematics produce pain, clicking and reduced load tolerance on the ulnar side of the wrist.",
-    "additionalDifferentials": [
-      "Triangular fibrocartilage complex (TFCC) tear",
-      "Ulnar impaction syndrome",
-      "Extensor carpi ulnaris tendinopathy or subluxation",
-      "Pisotriquetral arthritis",
-      "Midcarpal instability",
-      "Distal radioulnar joint pathology",
-      "Hamate or triquetral fracture"
+    [
+     "Key Investigations",
+     "PA, lateral and clenched-fist radiographs assessing Gilula arcs and carpal alignment, Lateral view to detect a VISI pattern with",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "PA, lateral and clenched-fist radiographs assessing Gilula arcs and carpal alignment",
-      "Lateral view to detect a VISI pattern with abnormal scaphoid flexion and capitolunate angulation",
-      "MRI or MR arthrography of the lunotriquetral ligament and TFCC",
-      "Wrist arthroscopy for definitive diagnosis and grading",
-      "Assessment of ulnar variance",
-      "Fluoroscopic dynamic motion study",
-      "Contralateral comparison views"
+    [
+     "Primary Differentials",
+     "Triangular fibrocartilage complex (TFCC) tear, Ulnar impaction syndrome, Extensor carpi ulnaris tendinopathy or subluxation",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Features of a progressive perilunate injury or dislocation",
-      "Fixed VISI deformity indicating chronic complete disruption",
-      "Associated ulnar impaction with lunate or triquetral chondral change",
-      "Neurovascular compromise after a high-energy injury"
+    [
+     "Management Strategy",
+     "Treat isolated partial or acute injuries non-operatively with wrist splinting, activity modification, hand therapy and a",
+     "Core treatment modality"
     ],
-    "prognosis": "Isolated partial injuries often respond to non-operative care, whereas complete or chronic instability may require repair, reconstruction or lunotriquetral arthrodesis, with outcomes influenced by coexisting ulnar impaction.",
-    "pitfalls": [
-      "Overlooking associated ulnar impaction and treating the ligament in isolation.",
-      "Interpreting normal static radiographs as excluding instability.",
-      "Missing a reverse perilunate injury pattern.",
-      "Confusing lunotriquetral instability with a primary TFCC tear."
-    ],
-    "references": [
-      "Green's Operative Hand Surgery",
-      "Rockwood and Green's Fractures in Adults",
-      "Wheeless' Textbook of Orthopaedics"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Treat isolated partial or acute injuries non-operatively with wrist splinting, activity modification, hand therapy and a corticosteroid injection into the lunotriquetral interval",
-      "Address coexisting ulnar impaction, including an ulnar shortening osteotomy or wafer procedure for positive ulnar variance",
-      "Confirm and grade the instability with MR arthrography and wrist arthroscopy when the diagnosis is unclear or symptoms persist",
-      "Offer ligament repair or reconstruction for complete or symptomatic chronic instability without fixed deformity",
-      "Perform lunotriquetral arthrodesis for refractory or chronic instability, particularly when a VISI deformity is established",
-      "Rehabilitate with hand therapy after intervention and refer to a hand and wrist surgeon for persistent ulnar-sided pain or clunking"
+    [
+     "Clinical Pitfall",
+     "Overlooking associated ulnar impaction and treating the ligament in isolation.",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for lunotriquetral instability."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "lunotriquetral-instability-real-image",
+   "title": "lunotriquetral instability: Diagnostic Musculoskeletal Radiograph",
+   "type": "xray",
+   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
+   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
+   "annotations": [
+    {
+     "label": "Cortical Margins",
+     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
+    },
+    {
+     "label": "Trabecular Architecture",
+     "description": "Medullary bone density, lucencies, and subchondral mineralization."
+    },
+    {
+     "label": "Joint Articulation",
+     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+    }
+   ]
+  }
+ ]
 }

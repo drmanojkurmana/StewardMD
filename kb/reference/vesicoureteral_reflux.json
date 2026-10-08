@@ -1,78 +1,173 @@
 {
-  "id": "vesicoureteral_reflux",
-  "name": "Vesicoureteral reflux",
-  "aliases": [
-    "vesicoureteric reflux",
-    "VUR",
-    "reflux nephropathy"
+ "id": "vesicoureteral_reflux",
+ "name": "Vesicoureteral reflux",
+ "aliases": [
+  "vesicoureteric reflux",
+  "VUR",
+  "reflux nephropathy"
+ ],
+ "class": "non_infective",
+ "system": "Renal / Urology",
+ "specialty": "Urology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Campbell-Walsh-Wein Urology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Retrograde flow of urine from the bladder into the ureter and sometimes the renal pelvis, which may be primary (congenital incompetence of the ureterovesical junction) or secondary to raised bladder pressure or outlet obstruction",
+   "Graded I to V on micturating cystourethrogram, from reflux into a non-dilated ureter (grade I) to gross dilatation and tortuosity with loss of papillary detail (grade V)",
+   "Often detected during evaluation of antenatal hydronephrosis or after a febrile urinary tract infection in a child",
+   "The main long-term concern is reflux nephropathy: renal scarring that can lead to hypertension, proteinuria, and chronic kidney disease, particularly when reflux and infection coexist",
+   "Lower grades frequently resolve spontaneously with growth as the intramural ureter lengthens",
+   "Bladder and bowel dysfunction strongly influences persistence, infection risk, and treatment success and should be actively addressed",
+   "Management options include surveillance, continuous antibiotic prophylaxis, and, for higher grades or breakthrough infections, ureteric reimplantation or endoscopic injection"
   ],
-  "class": "non_infective",
-  "system": "Renal / Urology",
-  "specialty": "Urology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Campbell-Walsh-Wein Urology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Retrograde flow of urine from the bladder into the ureter and sometimes the renal pelvis, which may be primary (congenital incompetence of the ureterovesical junction) or secondary to raised bladder pressure or outlet obstruction",
-      "Graded I to V on micturating cystourethrogram, from reflux into a non-dilated ureter (grade I) to gross dilatation and tortuosity with loss of papillary detail (grade V)",
-      "Often detected during evaluation of antenatal hydronephrosis or after a febrile urinary tract infection in a child",
-      "The main long-term concern is reflux nephropathy: renal scarring that can lead to hypertension, proteinuria, and chronic kidney disease, particularly when reflux and infection coexist",
-      "Lower grades frequently resolve spontaneously with growth as the intramural ureter lengthens",
-      "Bladder and bowel dysfunction strongly influences persistence, infection risk, and treatment success and should be actively addressed",
-      "Management options include surveillance, continuous antibiotic prophylaxis, and, for higher grades or breakthrough infections, ureteric reimplantation or endoscopic injection"
+  "pathophysiology": "The normal ureterovesical junction acts as a one-way flap valve because the intravesical ureter runs obliquely through the bladder wall and is compressed during filling and voiding. In primary reflux this valve is incompetent, usually because of a short intramural ureteric tunnel or a laterally placed ureteric orifice. Secondary reflux develops when abnormally high bladder pressures, as in outlet obstruction or neurogenic or dysfunctional bladders, overwhelm a marginally competent junction. Reflux of infected urine, and possibly of sterile urine at high pressure, delivers pathogens and pressure to the renal papillae, producing pyelonephritic inflammation and scarring known as reflux nephropathy.",
+  "additionalDifferentials": [
+   "Ureteropelvic junction obstruction causing hydronephrosis",
+   "Primary obstructive megaureter",
+   "Duplex collecting system with a refluxing lower moiety",
+   "Neurogenic or dysfunctional bladder",
+   "Posterior urethral valves in males",
+   "Simple recurrent lower urinary tract infection without reflux"
+  ],
+  "additionalInvestigations": [
+   "Micturating cystourethrogram (MCUG) to confirm and grade reflux",
+   "Renal and bladder ultrasound to assess dilatation, scarring, and bladder wall",
+   "DMSA scintigraphy to detect renal scarring and differential function",
+   "Assessment of bladder and bowel function, including a voiding diary",
+   "Urinalysis and culture during suspected infection",
+   "Blood pressure measurement and renal function tests during follow-up"
+  ],
+  "redFlags": [
+   "Breakthrough febrile urinary tract infections despite prophylaxis",
+   "New or progressive renal scarring on serial imaging",
+   "Hypertension or proteinuria indicating reflux nephropathy",
+   "Bilateral high-grade reflux with declining renal function"
+  ],
+  "prognosis": "Low-grade reflux commonly resolves spontaneously with an excellent prognosis, whereas high-grade bilateral reflux, especially with recurrent pyelonephritis and pre-existing dysplasia, carries a meaningful risk of scarring, hypertension, and chronic kidney disease requiring long-term monitoring.",
+  "pitfalls": [
+   "Attributing all renal damage to reflux when congenital dysplasia may account for much of it",
+   "Ignoring underlying bladder and bowel dysfunction, which undermines both medical and surgical treatment",
+   "Over-investigating or over-treating low-grade reflux likely to resolve spontaneously",
+   "Failing to monitor blood pressure and renal function in children with established scarring"
+  ],
+  "references": [
+   "Campbell-Walsh-Wein Urology",
+   "Gearhart, Rink & Mouriquand: Pediatric Urology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Active management of bladder and bowel dysfunction with a bowel-emptying regimen, timed voiding and treatment of constipation, as this drives reflux persistence and infection risk",
+   "Continuous low-dose antibiotic prophylaxis in selected infants and children with higher-grade reflux or recurrent febrile urinary tract infections to prevent pyelonephritis",
+   "Conservative watchful waiting for low-grade primary reflux, which commonly resolves spontaneously as the intramural ureter lengthens with growth",
+   "Prompt antibiotic treatment of febrile urinary tract infections with urine culture to guide therapy and limit renal scarring",
+   "Surgical correction by ureteric reimplantation or endoscopic subureteric bulking injection for high-grade reflux, breakthrough infections or new scarring",
+   "Long-term surveillance with renal-bladder ultrasound, DMSA scintigraphy for scarring, blood pressure monitoring and renal function testing",
+   "Refer to paediatric urology and nephrology, escalating when hypertension, proteinuria or declining renal function emerge"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "vesicoureteral_reflux-pathway",
+   "title": "Vesicoureteral reflux: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Retrograde flow of urine from the bladder into the ureter and sometimes the renal pelvis, which may be primary (congenital incompetence of the ureterovesical junction) or secondary to raised bladder pressure or outlet obstruction",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Breakthrough febrile urinary tract infections despite prophylaxis",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Micturating cystourethrogram (MCUG) to confirm and grade reflux, Renal and bladder ultrasound to assess dilatation, scarring, and bladder wall, DMSA scintigraphy to detect renal scarring and differential function"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Active management of bladder and bowel dysfunction with a bowel-emptying regimen, timed voiding and treatment of constipation, as this drives reflux persistence and infection risk"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing all renal damage to reflux when congenital dysplasia may account for much of it"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of vesicoureteral reflux."
+  }
+ ],
+ "tables": [
+  {
+   "id": "vesicoureteral_reflux-matrix",
+   "title": "Vesicoureteral reflux: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Retrograde flow of urine from the bladder into the ureter and sometimes the renal pelvis, which may be primary (congenital",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "The normal ureterovesical junction acts as a one-way flap valve because the intravesical ureter runs obliquely through the bladder wall and is compressed during filling and voiding. In primary reflux this valve is incompetent, usually because of a short intramural ureteric tunnel or a laterally placed ureteric orifice. Secondary reflux develops when abnormally high bladder pressures, as in outlet obstruction or neurogenic or dysfunctional bladders, overwhelm a marginally competent junction. Reflux of infected urine, and possibly of sterile urine at high pressure, delivers pathogens and pressure to the renal papillae, producing pyelonephritic inflammation and scarring known as reflux nephropathy.",
-    "additionalDifferentials": [
-      "Ureteropelvic junction obstruction causing hydronephrosis",
-      "Primary obstructive megaureter",
-      "Duplex collecting system with a refluxing lower moiety",
-      "Neurogenic or dysfunctional bladder",
-      "Posterior urethral valves in males",
-      "Simple recurrent lower urinary tract infection without reflux"
+    [
+     "Key Investigations",
+     "Micturating cystourethrogram (MCUG) to confirm and grade reflux, Renal and bladder ultrasound to assess dilatation, scarring, and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Micturating cystourethrogram (MCUG) to confirm and grade reflux",
-      "Renal and bladder ultrasound to assess dilatation, scarring, and bladder wall",
-      "DMSA scintigraphy to detect renal scarring and differential function",
-      "Assessment of bladder and bowel function, including a voiding diary",
-      "Urinalysis and culture during suspected infection",
-      "Blood pressure measurement and renal function tests during follow-up"
+    [
+     "Primary Differentials",
+     "Ureteropelvic junction obstruction causing hydronephrosis, Primary obstructive megaureter, Duplex collecting system with a",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Breakthrough febrile urinary tract infections despite prophylaxis",
-      "New or progressive renal scarring on serial imaging",
-      "Hypertension or proteinuria indicating reflux nephropathy",
-      "Bilateral high-grade reflux with declining renal function"
+    [
+     "Management Strategy",
+     "Active management of bladder and bowel dysfunction with a bowel-emptying regimen, timed voiding and treatment of constipation, as",
+     "Core treatment modality"
     ],
-    "prognosis": "Low-grade reflux commonly resolves spontaneously with an excellent prognosis, whereas high-grade bilateral reflux, especially with recurrent pyelonephritis and pre-existing dysplasia, carries a meaningful risk of scarring, hypertension, and chronic kidney disease requiring long-term monitoring.",
-    "pitfalls": [
-      "Attributing all renal damage to reflux when congenital dysplasia may account for much of it",
-      "Ignoring underlying bladder and bowel dysfunction, which undermines both medical and surgical treatment",
-      "Over-investigating or over-treating low-grade reflux likely to resolve spontaneously",
-      "Failing to monitor blood pressure and renal function in children with established scarring"
-    ],
-    "references": [
-      "Campbell-Walsh-Wein Urology",
-      "Gearhart, Rink & Mouriquand: Pediatric Urology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Active management of bladder and bowel dysfunction with a bowel-emptying regimen, timed voiding and treatment of constipation, as this drives reflux persistence and infection risk",
-      "Continuous low-dose antibiotic prophylaxis in selected infants and children with higher-grade reflux or recurrent febrile urinary tract infections to prevent pyelonephritis",
-      "Conservative watchful waiting for low-grade primary reflux, which commonly resolves spontaneously as the intramural ureter lengthens with growth",
-      "Prompt antibiotic treatment of febrile urinary tract infections with urine culture to guide therapy and limit renal scarring",
-      "Surgical correction by ureteric reimplantation or endoscopic subureteric bulking injection for high-grade reflux, breakthrough infections or new scarring",
-      "Long-term surveillance with renal-bladder ultrasound, DMSA scintigraphy for scarring, blood pressure monitoring and renal function testing",
-      "Refer to paediatric urology and nephrology, escalating when hypertension, proteinuria or declining renal function emerge"
+    [
+     "Clinical Pitfall",
+     "Attributing all renal damage to reflux when congenital dysplasia may account for much of it",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for vesicoureteral reflux."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "vesicoureteral-reflux-real-image",
+   "title": "Vesicoureteral reflux: Diagnostic Renal Ultrasonography",
+   "type": "ultrasound",
+   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
+   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
+   "annotations": [
+    {
+     "label": "Renal Cortex",
+     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
+    },
+    {
+     "label": "Corticomedullary Junction",
+     "description": "Medullary pyramid definition and structural architecture."
+    },
+    {
+     "label": "Collecting System",
+     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+    }
+   ]
+  }
+ ]
 }

@@ -222,6 +222,9 @@
   }
 
   /* ---------- limit sheet ---------- */
+  var SV = function (d) { return '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + d + "</svg>"; };
+  var ICL = { sun: SV('<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>'),
+    moon: SV('<path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/>'), key: SV('<circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l3 3M15 8l2 2"/>') };
   var WHAT = { questions: ["questions", "free questions"], lessons: ["lesson", "free lesson"], cards: ["cards", "free flashcards"] };
   function openLimit(feature) {
     var H = host(), root = H && H.root(); if (!root) return false;
@@ -230,11 +233,11 @@
     var el = D.createElement("div");
     el.className = "pn-sheet-wrap"; el.id = "ppSheet";
     el.innerHTML = '<div class="pn-scrim" data-act="pro-close"></div><section class="pn-sheet pp-sheet" role="dialog" aria-modal="true" aria-labelledby="ppSheetT" tabindex="-1">' +
-      '<span class="pn-grab" aria-hidden="true"></span><h2 id="ppSheetT">You have used today’s ' + w[1] + "</h2>" +
-      '<p class="pp-used"><b>' + u + " of " + n + "</b> " + w[0] + " used today</p>" +
-      '<ul class="pp-list"><li><b>Still free today:</b> the daily sprint, and the first ' + CFG.open + " modules of every subject.</li>" +
-      "<li><b>Tomorrow:</b> your free questions, lesson and cards reset at midnight.</li>" +
-      "<li><b>With Pro:</b> every module, lesson and card, with no daily limit.</li></ul>" +
+      '<span class="pn-grab" aria-hidden="true"></span><div class="pp-lhead"><span class="pp-lart" aria-hidden="true"></span><h2 id="ppSheetT">You have used today’s ' + w[1] + "</h2></div>" +
+      '<div class="pp-usedw"><p class="pp-used"><b>' + u + " of " + n + "</b> " + w[0] + ' used today</p><span class="pn-prog pp-ubar" aria-hidden="true"><i style="transform:scaleX(' + (n ? Math.min(1, u / n) : 1).toFixed(3) + ')"></i></span></div>' +
+      '<ul class="pp-list"><li><span class="pp-li" aria-hidden="true">' + ICL.sun + '</span><span><b>Still free today:</b> the daily sprint, and the first ' + CFG.open + " modules of every subject.</span></li>" +
+      '<li><span class="pp-li" aria-hidden="true">' + ICL.moon + "</span><span><b>Tomorrow:</b> your free questions, lesson and cards reset at midnight.</span></li>" +
+      '<li><span class="pp-li pro" aria-hidden="true">' + ICL.key + "</span><span><b>With Pro:</b> every module, lesson and card, with no daily limit.</span></li></ul>" +
       '<div class="pn-sheet-act"><button type="button" class="pn-btn pri" data-act="pro-see">See Pro</button><button type="button" class="pn-btn" data-act="pro-close">Close</button></div></section>';
     P.prevFocus = D.activeElement;
     root.appendChild(el); P.sheet = el;

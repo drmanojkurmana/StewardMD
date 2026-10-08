@@ -5,7 +5,18 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Outpatient, primary care",
- "aliases": ["CIC", "chronic constipation", "functional constipation", "laxatives", "PEG", "macrogol", "prucalopride", "linaclotide", "dyssynergic defecation", "Rome IV constipation"],
+ "aliases": [
+  "CIC",
+  "chronic constipation",
+  "functional constipation",
+  "laxatives",
+  "PEG",
+  "macrogol",
+  "prucalopride",
+  "linaclotide",
+  "dyssynergic defecation",
+  "Rome IV constipation"
+ ],
  "summary": "Exclude alarm features and secondary causes, then step up: fibre, polyethylene glycol (strong recommendation), magnesium oxide or lactulose, stimulant laxatives (bisacodyl or sodium picosulfate, senna), and for refractory cases linaclotide, plecanatide, lubiprostone or prucalopride. Test for a defecatory disorder if laxatives fail.",
  "sections": [
   {
@@ -78,19 +89,162 @@
   }
  ],
  "drugs": [
-  { "name": "Psyllium (ispaghula) husk", "dose": "About 5 g orally once or twice daily with a full glass of water, increased gradually", "notes": "Take with adequate fluid; bloating early on." },
-  { "name": "Polyethylene glycol 3350 (macrogol)", "dose": "17 g orally once daily dissolved in about 240 mL of fluid, titrate to response", "notes": "Strong recommendation; suitable long term." },
-  { "name": "Magnesium oxide", "dose": "400 to 500 mg orally daily, titrate to response", "notes": "Avoid in renal impairment." },
-  { "name": "Lactulose", "dose": "15 mL (about 10 g) orally once or twice daily, adjusted to response", "notes": "Bloating and flatulence are common." },
-  { "name": "Senna (sennosides)", "dose": "8.6 to 17.2 mg orally at night", "notes": "Conditional recommendation." },
-  { "name": "Bisacodyl", "dose": "5 to 10 mg orally once daily", "notes": "Short term or rescue; abdominal cramps." },
-  { "name": "Sodium picosulfate", "dose": "5 to 10 mg orally at night", "notes": "Short term or rescue." },
-  { "name": "Linaclotide", "dose": "145 mcg orally once daily (72 mcg if not tolerated), at least 30 minutes before the first meal", "notes": "Diarrhoea is the main adverse effect." },
-  { "name": "Prucalopride", "dose": "2 mg orally once daily; 1 mg once daily if eGFR below 30 mL/min", "notes": "Strong recommendation for refractory CIC." },
-  { "name": "Lubiprostone", "dose": "24 mcg orally twice daily with food", "notes": "Nausea is common." }
+  {
+   "name": "Psyllium (ispaghula) husk",
+   "dose": "About 5 g orally once or twice daily with a full glass of water, increased gradually",
+   "notes": "Take with adequate fluid; bloating early on."
+  },
+  {
+   "name": "Polyethylene glycol 3350 (macrogol)",
+   "dose": "17 g orally once daily dissolved in about 240 mL of fluid, titrate to response",
+   "notes": "Strong recommendation; suitable long term."
+  },
+  {
+   "name": "Magnesium oxide",
+   "dose": "400 to 500 mg orally daily, titrate to response",
+   "notes": "Avoid in renal impairment."
+  },
+  {
+   "name": "Lactulose",
+   "dose": "15 mL (about 10 g) orally once or twice daily, adjusted to response",
+   "notes": "Bloating and flatulence are common."
+  },
+  {
+   "name": "Senna (sennosides)",
+   "dose": "8.6 to 17.2 mg orally at night",
+   "notes": "Conditional recommendation."
+  },
+  {
+   "name": "Bisacodyl",
+   "dose": "5 to 10 mg orally once daily",
+   "notes": "Short term or rescue; abdominal cramps."
+  },
+  {
+   "name": "Sodium picosulfate",
+   "dose": "5 to 10 mg orally at night",
+   "notes": "Short term or rescue."
+  },
+  {
+   "name": "Linaclotide",
+   "dose": "145 mcg orally once daily (72 mcg if not tolerated), at least 30 minutes before the first meal",
+   "notes": "Diarrhoea is the main adverse effect."
+  },
+  {
+   "name": "Prucalopride",
+   "dose": "2 mg orally once daily; 1 mg once daily if eGFR below 30 mL/min",
+   "notes": "Strong recommendation for refractory CIC."
+  },
+  {
+   "name": "Lubiprostone",
+   "dose": "24 mcg orally twice daily with food",
+   "notes": "Nausea is common."
+  }
  ],
  "sources": [
-  { "org": "American Gastroenterological Association / American College of Gastroenterology", "title": "AGA-ACG Clinical Practice Guideline: Pharmacological Management of Chronic Idiopathic Constipation (Am J Gastroenterol 2023;118:936-954)", "year": 2023, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10544839/" }
+  {
+   "org": "American Gastroenterological Association / American College of Gastroenterology",
+   "title": "AGA-ACG Clinical Practice Guideline: Pharmacological Management of Chronic Idiopathic Constipation (Am J Gastroenterol 2023;118:936-954)",
+   "year": 2023,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10544839/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "chronic-constipation-pathway",
+   "title": "Chronic idiopathic constipation (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Rome IV: 2 or more of straining, hard or lumpy stools, incomplete evacuation, sense of blockage, or manual manoeuvres (each in over a quarter of defecations), or under 3 spontaneous bowel movements a week; for 3 months, onset 6 months or",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Alarm features needing colonoscopy or referral: rectal bleeding, iron deficiency anaemia, unexplained weight loss, new onset or sudden change after age 50, family history of colorectal cancer or IBD, positive faecal immunochemical test, or",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "History of diet, fluids, medicines and toilet habits, and a digital rectal examination (look for impaction, anal fissure, rectocele and paradoxical anal contraction on straining)."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Secretagogues: linaclotide or plecanatide (strong recommendations) or lubiprostone (conditional). Diarrhoea is the main adverse effect of linaclotide and plecanatide; nausea is common with lubiprostone."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Missing colorectal cancer in new-onset constipation after 50 or with alarm features."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for chronic idiopathic constipation (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "chronic-constipation-summary-matrix",
+   "title": "Chronic idiopathic constipation (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Rome IV: 2 or more of straining, hard or lumpy stools, incomplete evacuation, sense of blockage, or manual manoeuvres (each in over a",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Secretagogues: linaclotide or plecanatide (strong recommendations) or lubiprostone (conditional). Diarrhoea is the main adverse effect of",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "History of diet, fluids, medicines and toilet habits, and a digital rectal examination (look for impaction, anal fissure, rectocele and",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Psyllium (ispaghula) husk: About 5 g orally once or twice daily with a full glass of water, increased gradually",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Missing colorectal cancer in new-onset constipation after 50 or with alarm features.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for chronic idiopathic constipation (adult)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "chronic-constipation-real-image",
+   "title": "Chronic idiopathic constipation (adult): Diagnostic Abdominal Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
+   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
+   "annotations": [
+    {
+     "label": "Solid Viscera",
+     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
+    },
+    {
+     "label": "Gastrointestinal Tract",
+     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
+    },
+    {
+     "label": "Mesentery & Peritoneum",
+     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+    }
+   ]
+  }
+ ]
 }

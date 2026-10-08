@@ -149,5 +149,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "h8aec285a"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "peptic_ulcer-dx-algo",
+      "title": "Peptic ulcer disease / upper GI bleed: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Around two-thirds of patients with peptic ulcer disease have no abdominal pain, and up to ~87% of those with NSAID-related mucosal injury first present with a complication (bleeding, perforation, or obstruction) without any preceding",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Alarm features warranting prompt endoscopy rather than empirical test-and-treat - nausea, vomiting, weight loss, evidence of GI bleeding, or age >=60 years with new dyspepsia (pp.2523, 2531).",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Endoscopy is the most sensitive and specific test, allowing direct visualisation, biopsy to exclude malignancy (GU) and to test for H. pylori, and identification of a bleeding source (p.2523)., Barium studies of the upper"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Differentiate from top mimics: Functional (non-ulcer/essential) dyspepsia - the commonest cause of upper abdominal discomfort, subdivided into postprandial distress syndrome and epigastric pain syndrome; up to ~80% of patients evaluated"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Every gastric ulcer must be biopsied (multiple samples) at discovery because a GU may be malignant, and healing on therapy does not exclude cancer - about 70% of GUs ultimately found malignant show significant (usually"
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for peptic ulcer disease / upper gi bleed."
+    }
+  ],
+  "tables": [
+    {
+      "id": "peptic_ulcer-matrix",
+      "title": "Peptic ulcer disease / upper GI bleed: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Around two-thirds of patients with peptic ulcer disease have no abdominal pain, and up to ~87% of those with NSAID-related",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Endoscopy is the most sensitive and specific test, allowing direct visualisation, biopsy to exclude malignancy (GU) and to test",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Functional (non-ulcer/essential) dyspepsia - the commonest cause of upper abdominal discomfort, subdivided into postprandial",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Alarm features warranting prompt endoscopy rather than empirical test-and-treat - nausea, vomiting, weight loss, evidence of GI",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Every gastric ulcer must be biopsied (multiple samples) at discovery because a GU may be malignant, and healing on therapy does",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for peptic ulcer disease / upper gi bleed."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "peptic-ulcer-real-image",
+      "title": "Peptic ulcer disease / upper GI bleed: Diagnostic Abdominal Computed Tomography",
+      "type": "ct",
+      "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
+      "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
+      "annotations": [
+        {
+          "label": "Solid Viscera",
+          "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
+        },
+        {
+          "label": "Gastrointestinal Tract",
+          "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
+        },
+        {
+          "label": "Mesentery & Peritoneum",
+          "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+        }
+      ]
+    }
+  ]
 }

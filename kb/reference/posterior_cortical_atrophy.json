@@ -1,80 +1,175 @@
 {
-  "id": "posterior_cortical_atrophy",
-  "name": "Posterior cortical atrophy",
-  "aliases": [
-    "PCA",
-    "Benson syndrome",
-    "visual variant of Alzheimer disease",
-    "posterior cortical atrophy syndrome"
+ "id": "posterior_cortical_atrophy",
+ "name": "Posterior cortical atrophy",
+ "aliases": [
+  "PCA",
+  "Benson syndrome",
+  "visual variant of Alzheimer disease",
+  "posterior cortical atrophy syndrome"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system / Neurology",
+ "specialty": "Neurology / Cognitive & Movement",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Bradley and Daroff Neurology in Clinical Practice",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Presents with progressive impairment of higher visual and spatial processing, with early memory and insight relatively preserved",
+   "Patients struggle with reading, judging distances, locating objects and dressing, despite normal basic acuity and eyes, reflecting cortical rather than ocular visual failure",
+   "Features may include components of Balint syndrome (simultanagnosia, optic ataxia, oculomotor apraxia) and Gerstmann syndrome (acalculia, agraphia, finger agnosia, left-right disorientation)",
+   "Onset is often at a relatively young age, and patients are frequently referred first to ophthalmology because the problem seems visual",
+   "Alzheimer disease is the most common underlying pathology, though corticobasal degeneration, Lewy body disease and prion disease can also produce the syndrome",
+   "Imaging shows atrophy and hypometabolism concentrated in the parieto-occipital and posterior temporal cortex",
+   "Amyloid imaging and cerebrospinal fluid biomarkers help confirm underlying Alzheimer pathology"
   ],
-  "class": "non_infective",
-  "system": "Nervous system / Neurology",
-  "specialty": "Neurology / Cognitive & Movement",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Bradley and Daroff Neurology in Clinical Practice",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Presents with progressive impairment of higher visual and spatial processing, with early memory and insight relatively preserved",
-      "Patients struggle with reading, judging distances, locating objects and dressing, despite normal basic acuity and eyes, reflecting cortical rather than ocular visual failure",
-      "Features may include components of Balint syndrome (simultanagnosia, optic ataxia, oculomotor apraxia) and Gerstmann syndrome (acalculia, agraphia, finger agnosia, left-right disorientation)",
-      "Onset is often at a relatively young age, and patients are frequently referred first to ophthalmology because the problem seems visual",
-      "Alzheimer disease is the most common underlying pathology, though corticobasal degeneration, Lewy body disease and prion disease can also produce the syndrome",
-      "Imaging shows atrophy and hypometabolism concentrated in the parieto-occipital and posterior temporal cortex",
-      "Amyloid imaging and cerebrospinal fluid biomarkers help confirm underlying Alzheimer pathology"
+  "pathophysiology": "Posterior cortical atrophy is a clinical-radiological syndrome caused by neurodegeneration concentrated in the posterior cortical regions responsible for higher-order visual and spatial processing, including the occipital, parietal and posterior temporal lobes. The commonest underlying pathology is Alzheimer disease, in which amyloid plaques and tau neurofibrillary tangles accumulate predominantly in these posterior networks rather than the medial temporal memory regions, producing a visual-predominant rather than amnestic phenotype. Progressive damage to the dorsal and ventral visual pathways disrupts the integration of visual information, spatial localisation and object recognition, while primary visual acuity and the eyes themselves remain intact.",
+  "additionalDifferentials": [
+   "Typical amnestic Alzheimer disease",
+   "Dementia with Lewy bodies",
+   "Corticobasal syndrome",
+   "Creutzfeldt-Jakob disease",
+   "Primary ophthalmological or optic pathway disease",
+   "Occipital stroke or structural posterior lesion",
+   "Delirium or a primary psychiatric disorder"
+  ],
+  "additionalInvestigations": [
+   "MRI of the brain to demonstrate parieto-occipital and posterior temporal atrophy",
+   "FDG-PET to show posterior cortical hypometabolism",
+   "Amyloid PET or cerebrospinal fluid amyloid and tau markers to confirm Alzheimer pathology",
+   "Formal ophthalmological and visual acuity assessment to exclude primary eye disease",
+   "Detailed neuropsychological testing of visuospatial and higher visual functions",
+   "Assessment for parkinsonian or myoclonic features suggesting alternative pathology"
+  ],
+  "redFlags": [
+   "Rapid progression or myoclonus raising concern for prion disease",
+   "Development of parkinsonism or asymmetrical limb apraxia suggesting corticobasal degeneration",
+   "Visual disability causing falls, driving hazards and loss of independence",
+   "Marked fluctuations or visual hallucinations pointing to Lewy body disease"
+  ],
+  "prognosis": "Posterior cortical atrophy is progressive, with worsening visual and spatial disability and eventual spread to involve broader cognitive domains resembling more generalised dementia; prognosis reflects the underlying pathology, and management is supportive with visual aids, environmental adaptation and caregiver support.",
+  "pitfalls": [
+   "Repeatedly investigating the eyes when the problem is cortical visual processing",
+   "Missing the diagnosis because early memory and insight are preserved",
+   "Assuming all cases are Alzheimer disease without considering Lewy body, corticobasal or prion pathology",
+   "Underestimating the safety impact of cortical visual failure on driving and daily living"
+  ],
+  "references": [
+   "Bradley and Daroff Neurology in Clinical Practice",
+   "Adams and Victor's Principles of Neurology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Offer cholinesterase inhibitors such as donepezil, rivastigmine or galantamine where underlying Alzheimer pathology is confirmed, as for typical Alzheimer dementia",
+   "Provide occupational therapy and environmental adaptation (decluttering, high-contrast markings, consistent object placement) to compensate for the visuospatial deficit",
+   "Supply low-vision aids and reading and navigation strategies, recognising the failure is cortical rather than ocular",
+   "Treat associated depression and anxiety with psychological support and antidepressants as needed",
+   "Coordinate multidisciplinary care across neurology, ophthalmology, occupational therapy and cognitive services, with early involvement given the often young onset",
+   "Monitor for spread to broader cognitive domains and for emergent parkinsonian or myoclonic features suggesting an alternative underlying pathology",
+   "Provide carer support, driving cessation advice and advance care planning"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "posterior_cortical_atrophy-pathway",
+   "title": "Posterior cortical atrophy: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Presents with progressive impairment of higher visual and spatial processing, with early memory and insight relatively preserved",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapid progression or myoclonus raising concern for prion disease",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: MRI of the brain to demonstrate parieto-occipital and posterior temporal atrophy, FDG-PET to show posterior cortical hypometabolism, Amyloid PET or cerebrospinal fluid amyloid and tau markers to confirm Alzheimer pathology"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Offer cholinesterase inhibitors such as donepezil, rivastigmine or galantamine where underlying Alzheimer pathology is confirmed, as for typical Alzheimer dementia"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Repeatedly investigating the eyes when the problem is cortical visual processing"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of posterior cortical atrophy."
+  }
+ ],
+ "tables": [
+  {
+   "id": "posterior_cortical_atrophy-matrix",
+   "title": "Posterior cortical atrophy: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Presents with progressive impairment of higher visual and spatial processing, with early memory and insight relatively preserved",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Posterior cortical atrophy is a clinical-radiological syndrome caused by neurodegeneration concentrated in the posterior cortical regions responsible for higher-order visual and spatial processing, including the occipital, parietal and posterior temporal lobes. The commonest underlying pathology is Alzheimer disease, in which amyloid plaques and tau neurofibrillary tangles accumulate predominantly in these posterior networks rather than the medial temporal memory regions, producing a visual-predominant rather than amnestic phenotype. Progressive damage to the dorsal and ventral visual pathways disrupts the integration of visual information, spatial localisation and object recognition, while primary visual acuity and the eyes themselves remain intact.",
-    "additionalDifferentials": [
-      "Typical amnestic Alzheimer disease",
-      "Dementia with Lewy bodies",
-      "Corticobasal syndrome",
-      "Creutzfeldt-Jakob disease",
-      "Primary ophthalmological or optic pathway disease",
-      "Occipital stroke or structural posterior lesion",
-      "Delirium or a primary psychiatric disorder"
+    [
+     "Key Investigations",
+     "MRI of the brain to demonstrate parieto-occipital and posterior temporal atrophy, FDG-PET to show posterior cortical",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "MRI of the brain to demonstrate parieto-occipital and posterior temporal atrophy",
-      "FDG-PET to show posterior cortical hypometabolism",
-      "Amyloid PET or cerebrospinal fluid amyloid and tau markers to confirm Alzheimer pathology",
-      "Formal ophthalmological and visual acuity assessment to exclude primary eye disease",
-      "Detailed neuropsychological testing of visuospatial and higher visual functions",
-      "Assessment for parkinsonian or myoclonic features suggesting alternative pathology"
+    [
+     "Primary Differentials",
+     "Typical amnestic Alzheimer disease, Dementia with Lewy bodies, Corticobasal syndrome",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rapid progression or myoclonus raising concern for prion disease",
-      "Development of parkinsonism or asymmetrical limb apraxia suggesting corticobasal degeneration",
-      "Visual disability causing falls, driving hazards and loss of independence",
-      "Marked fluctuations or visual hallucinations pointing to Lewy body disease"
+    [
+     "Management Strategy",
+     "Offer cholinesterase inhibitors such as donepezil, rivastigmine or galantamine where underlying Alzheimer pathology is confirmed,",
+     "Core treatment modality"
     ],
-    "prognosis": "Posterior cortical atrophy is progressive, with worsening visual and spatial disability and eventual spread to involve broader cognitive domains resembling more generalised dementia; prognosis reflects the underlying pathology, and management is supportive with visual aids, environmental adaptation and caregiver support.",
-    "pitfalls": [
-      "Repeatedly investigating the eyes when the problem is cortical visual processing",
-      "Missing the diagnosis because early memory and insight are preserved",
-      "Assuming all cases are Alzheimer disease without considering Lewy body, corticobasal or prion pathology",
-      "Underestimating the safety impact of cortical visual failure on driving and daily living"
-    ],
-    "references": [
-      "Bradley and Daroff Neurology in Clinical Practice",
-      "Adams and Victor's Principles of Neurology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Offer cholinesterase inhibitors such as donepezil, rivastigmine or galantamine where underlying Alzheimer pathology is confirmed, as for typical Alzheimer dementia",
-      "Provide occupational therapy and environmental adaptation (decluttering, high-contrast markings, consistent object placement) to compensate for the visuospatial deficit",
-      "Supply low-vision aids and reading and navigation strategies, recognising the failure is cortical rather than ocular",
-      "Treat associated depression and anxiety with psychological support and antidepressants as needed",
-      "Coordinate multidisciplinary care across neurology, ophthalmology, occupational therapy and cognitive services, with early involvement given the often young onset",
-      "Monitor for spread to broader cognitive domains and for emergent parkinsonian or myoclonic features suggesting an alternative underlying pathology",
-      "Provide carer support, driving cessation advice and advance care planning"
+    [
+     "Clinical Pitfall",
+     "Repeatedly investigating the eyes when the problem is cortical visual processing",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for posterior cortical atrophy."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "posterior-cortical-atrophy-real-image",
+   "title": "Posterior cortical atrophy: Diagnostic Head Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
+   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
+   "annotations": [
+    {
+     "label": "Cerebral Parenchyma",
+     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+    },
+    {
+     "label": "Extra-Axial Spaces",
+     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+    }
+   ]
+  }
+ ]
 }

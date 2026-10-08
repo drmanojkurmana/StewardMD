@@ -1,75 +1,170 @@
 {
-  "id": "zinc_deficiency",
-  "name": "Zinc deficiency",
-  "aliases": [
-    "hypozincaemia",
-    "acrodermatitis enteropathica"
+ "id": "zinc_deficiency",
+ "name": "Zinc deficiency",
+ "aliases": [
+  "hypozincaemia",
+  "acrodermatitis enteropathica"
+ ],
+ "class": "non_infective",
+ "system": "Nutrition / Metabolic",
+ "specialty": "Nutrition & Metabolic Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Harrison's Principles of Internal Medicine / WHO nutrition guidance",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Characteristic features include a periorificial and acral dermatitis, diarrhoea, alopecia, impaired wound healing, and altered taste",
+   "In children it causes growth faltering, recurrent infection, and delayed sexual maturation",
+   "Acquired deficiency arises with malabsorption, high-phytate cereal-based diets, chronic diarrhoea, extensive burns, and prolonged unsupplemented parenteral nutrition",
+   "The inherited disorder acrodermatitis enteropathica reflects defective intestinal zinc absorption and presents in infancy",
+   "Zinc supplementation reduces the duration and severity of acute diarrhoea in young children, a key public health measure in India and other low-income settings",
+   "The rash can closely mimic other nutritional dermatoses and is often initially misdiagnosed",
+   "Serum zinc is an imperfect marker because it falls with inflammation and hypoalbuminaemia, so results need cautious interpretation"
   ],
-  "class": "non_infective",
-  "system": "Nutrition / Metabolic",
-  "specialty": "Nutrition & Metabolic Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Harrison's Principles of Internal Medicine / WHO nutrition guidance",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Characteristic features include a periorificial and acral dermatitis, diarrhoea, alopecia, impaired wound healing, and altered taste",
-      "In children it causes growth faltering, recurrent infection, and delayed sexual maturation",
-      "Acquired deficiency arises with malabsorption, high-phytate cereal-based diets, chronic diarrhoea, extensive burns, and prolonged unsupplemented parenteral nutrition",
-      "The inherited disorder acrodermatitis enteropathica reflects defective intestinal zinc absorption and presents in infancy",
-      "Zinc supplementation reduces the duration and severity of acute diarrhoea in young children, a key public health measure in India and other low-income settings",
-      "The rash can closely mimic other nutritional dermatoses and is often initially misdiagnosed",
-      "Serum zinc is an imperfect marker because it falls with inflammation and hypoalbuminaemia, so results need cautious interpretation"
+  "pathophysiology": "Zinc is a component or regulator of hundreds of enzymes and transcription factors and is essential for cell division, protein synthesis, immune function, and epithelial integrity. Deficiency therefore most affects rapidly dividing and metabolically active tissues, producing dermatitis, impaired wound healing, mucosal disease, immune dysfunction, and, in children, growth and developmental impairment. Dietary phytates in cereals and legumes bind zinc and reduce its absorption, while malabsorptive states, excess gastrointestinal or urinary losses, and increased demand in growth, pregnancy, and tissue repair contribute to negative balance.",
+  "additionalDifferentials": [
+   "Other nutritional deficiency dermatoses (for example essential fatty acid or biotin deficiency)",
+   "Necrolytic migratory erythema of glucagonoma",
+   "Atopic or seborrhoeic dermatitis",
+   "Chronic mucocutaneous candidiasis",
+   "Other causes of growth failure in children"
+  ],
+  "additionalInvestigations": [
+   "Serum zinc, interpreted alongside albumin and inflammatory markers",
+   "Assessment for malabsorption and chronic gastrointestinal losses",
+   "Dietary history focusing on cereal-based, high-phytate diets",
+   "Skin examination and biopsy if the diagnosis is uncertain",
+   "Evaluation for the inherited disorder in an infant with typical features"
+  ],
+  "redFlags": [
+   "Severe dermatitis with secondary infection or extensive skin breakdown",
+   "Failure to thrive with recurrent serious infection in a child",
+   "Severe or persistent diarrhoea with dehydration",
+   "Deficiency in a patient on prolonged parenteral nutrition without trace element supplementation"
+  ],
+  "prognosis": "Both acquired and inherited deficiency respond well to zinc repletion, with rapid resolution of skin and gastrointestinal features; the inherited form requires lifelong supplementation.",
+  "pitfalls": [
+   "Interpreting a low serum zinc without accounting for inflammation and low albumin",
+   "Mistaking the dermatitis for eczema or another primary skin disease",
+   "Forgetting trace element provision during long-term parenteral nutrition",
+   "Overlooking high dietary phytate as a cause of poor absorption"
+  ],
+  "references": [
+   "Harrison's Principles of Internal Medicine, 22e",
+   "WHO nutrition guidance"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Correct the deficiency with oral zinc salt supplementation such as zinc sulphate or gluconate, which rapidly reverses the dermatitis, diarrhoea and taste disturbance",
+   "Treat the underlying cause, whether malabsorption, chronic gastrointestinal losses or burns, and add zinc to prolonged parenteral nutrition",
+   "Give dietary advice to increase bioavailable zinc and reduce the high-phytate cereal-based intake that impairs absorption",
+   "Provide lifelong zinc supplementation in the inherited disorder acrodermatitis enteropathica",
+   "Use adjunctive zinc supplementation in young children with acute diarrhoea to reduce its duration and severity",
+   "Monitor serum zinc, interpreted alongside albumin and inflammatory markers, and clinical response to guide dosing",
+   "Refer children with growth faltering, or an infant with typical inherited features, for specialist and genetic assessment"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "zinc_deficiency-pathway",
+   "title": "Zinc deficiency: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Characteristic features include a periorificial and acral dermatitis, diarrhoea, alopecia, impaired wound healing, and altered taste",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Severe dermatitis with secondary infection or extensive skin breakdown",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Serum zinc, interpreted alongside albumin and inflammatory markers, Assessment for malabsorption and chronic gastrointestinal losses, Dietary history focusing on cereal-based, high-phytate diets"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Correct the deficiency with oral zinc salt supplementation such as zinc sulphate or gluconate, which rapidly reverses the dermatitis, diarrhoea and taste disturbance"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Interpreting a low serum zinc without accounting for inflammation and low albumin"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of zinc deficiency."
+  }
+ ],
+ "tables": [
+  {
+   "id": "zinc_deficiency-matrix",
+   "title": "Zinc deficiency: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Characteristic features include a periorificial and acral dermatitis, diarrhoea, alopecia, impaired wound healing, and altered",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Zinc is a component or regulator of hundreds of enzymes and transcription factors and is essential for cell division, protein synthesis, immune function, and epithelial integrity. Deficiency therefore most affects rapidly dividing and metabolically active tissues, producing dermatitis, impaired wound healing, mucosal disease, immune dysfunction, and, in children, growth and developmental impairment. Dietary phytates in cereals and legumes bind zinc and reduce its absorption, while malabsorptive states, excess gastrointestinal or urinary losses, and increased demand in growth, pregnancy, and tissue repair contribute to negative balance.",
-    "additionalDifferentials": [
-      "Other nutritional deficiency dermatoses (for example essential fatty acid or biotin deficiency)",
-      "Necrolytic migratory erythema of glucagonoma",
-      "Atopic or seborrhoeic dermatitis",
-      "Chronic mucocutaneous candidiasis",
-      "Other causes of growth failure in children"
+    [
+     "Key Investigations",
+     "Serum zinc, interpreted alongside albumin and inflammatory markers, Assessment for malabsorption and chronic gastrointestinal",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Serum zinc, interpreted alongside albumin and inflammatory markers",
-      "Assessment for malabsorption and chronic gastrointestinal losses",
-      "Dietary history focusing on cereal-based, high-phytate diets",
-      "Skin examination and biopsy if the diagnosis is uncertain",
-      "Evaluation for the inherited disorder in an infant with typical features"
+    [
+     "Primary Differentials",
+     "Other nutritional deficiency dermatoses (for example essential fatty acid or biotin deficiency), Necrolytic migratory erythema of",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Severe dermatitis with secondary infection or extensive skin breakdown",
-      "Failure to thrive with recurrent serious infection in a child",
-      "Severe or persistent diarrhoea with dehydration",
-      "Deficiency in a patient on prolonged parenteral nutrition without trace element supplementation"
+    [
+     "Management Strategy",
+     "Correct the deficiency with oral zinc salt supplementation such as zinc sulphate or gluconate, which rapidly reverses the",
+     "Core treatment modality"
     ],
-    "prognosis": "Both acquired and inherited deficiency respond well to zinc repletion, with rapid resolution of skin and gastrointestinal features; the inherited form requires lifelong supplementation.",
-    "pitfalls": [
-      "Interpreting a low serum zinc without accounting for inflammation and low albumin",
-      "Mistaking the dermatitis for eczema or another primary skin disease",
-      "Forgetting trace element provision during long-term parenteral nutrition",
-      "Overlooking high dietary phytate as a cause of poor absorption"
-    ],
-    "references": [
-      "Harrison's Principles of Internal Medicine, 22e",
-      "WHO nutrition guidance"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Correct the deficiency with oral zinc salt supplementation such as zinc sulphate or gluconate, which rapidly reverses the dermatitis, diarrhoea and taste disturbance",
-      "Treat the underlying cause, whether malabsorption, chronic gastrointestinal losses or burns, and add zinc to prolonged parenteral nutrition",
-      "Give dietary advice to increase bioavailable zinc and reduce the high-phytate cereal-based intake that impairs absorption",
-      "Provide lifelong zinc supplementation in the inherited disorder acrodermatitis enteropathica",
-      "Use adjunctive zinc supplementation in young children with acute diarrhoea to reduce its duration and severity",
-      "Monitor serum zinc, interpreted alongside albumin and inflammatory markers, and clinical response to guide dosing",
-      "Refer children with growth faltering, or an infant with typical inherited features, for specialist and genetic assessment"
+    [
+     "Clinical Pitfall",
+     "Interpreting a low serum zinc without accounting for inflammation and low albumin",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for zinc deficiency."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "zinc-deficiency-real-image",
+   "title": "Zinc deficiency: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

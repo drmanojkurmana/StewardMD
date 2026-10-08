@@ -1,78 +1,173 @@
 {
-  "id": "fucosidosis",
-  "name": "Fucosidosis",
-  "aliases": [
-    "alpha-L-fucosidase deficiency",
-    "FUCA1 deficiency",
-    "alpha-fucosidase deficiency"
+ "id": "fucosidosis",
+ "name": "Fucosidosis",
+ "aliases": [
+  "alpha-L-fucosidase deficiency",
+  "FUCA1 deficiency",
+  "alpha-fucosidase deficiency"
+ ],
+ "class": "non_infective",
+ "system": "Metabolic / Genetics",
+ "specialty": "Metabolic Medicine / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Nelson Textbook of Pediatrics / Scriver's OMMBID",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Caused by deficiency of alpha-L-fucosidase, leading to accumulation of fucose-containing oligosaccharides, glycolipids, and glycoproteins",
+   "Presents along a spectrum, from a severe rapidly progressive infantile form to a milder, slowly progressive form with longer survival",
+   "Progressive neurological decline, coarse facies, dysostosis multiplex, and growth failure are core features",
+   "Angiokeratoma corporis diffusum, similar to that of Fabry disease, is characteristic, particularly in longer-surviving patients",
+   "Recurrent infections and dysautonomia with abnormal sweating can occur",
+   "Urinary oligosaccharide screening reveals fucosylated compounds rather than glycosaminoglycans",
+   "Diagnosis is confirmed by deficient alpha-L-fucosidase activity and FUCA1 gene testing"
   ],
-  "class": "non_infective",
-  "system": "Metabolic / Genetics",
-  "specialty": "Metabolic Medicine / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Nelson Textbook of Pediatrics / Scriver's OMMBID",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Caused by deficiency of alpha-L-fucosidase, leading to accumulation of fucose-containing oligosaccharides, glycolipids, and glycoproteins",
-      "Presents along a spectrum, from a severe rapidly progressive infantile form to a milder, slowly progressive form with longer survival",
-      "Progressive neurological decline, coarse facies, dysostosis multiplex, and growth failure are core features",
-      "Angiokeratoma corporis diffusum, similar to that of Fabry disease, is characteristic, particularly in longer-surviving patients",
-      "Recurrent infections and dysautonomia with abnormal sweating can occur",
-      "Urinary oligosaccharide screening reveals fucosylated compounds rather than glycosaminoglycans",
-      "Diagnosis is confirmed by deficient alpha-L-fucosidase activity and FUCA1 gene testing"
+  "pathophysiology": "Fucosidosis is caused by biallelic pathogenic variants in FUCA1, encoding the lysosomal enzyme alpha-L-fucosidase. This enzyme cleaves terminal fucose residues from fucose-containing glycoproteins, glycolipids, and oligosaccharides during their lysosomal degradation. Its deficiency causes accumulation of these fucosylated substrates in tissues throughout the body, including the nervous system, skin, and viscera, with excretion of fucosylated oligosaccharides in the urine. Storage in the central nervous system drives the progressive neurodegeneration, while systemic accumulation produces the coarse features, skeletal changes, and cutaneous angiokeratomas. Residual enzyme activity broadly correlates with the range from severe infantile to attenuated later-onset disease. Inheritance is autosomal recessive.",
+  "additionalDifferentials": [
+   "Other oligosaccharidoses such as alpha-mannosidosis and beta-mannosidosis",
+   "Fabry disease, given overlapping angiokeratomas",
+   "Mucopolysaccharidoses with coarse facies and dysostosis multiplex",
+   "Sialidosis and galactosialidosis",
+   "GM1 gangliosidosis",
+   "Other causes of progressive neurodegeneration with organomegaly"
+  ],
+  "additionalInvestigations": [
+   "Leucocyte or fibroblast alpha-L-fucosidase enzyme assay",
+   "Urinary oligosaccharide analysis showing fucosylated compounds",
+   "FUCA1 gene sequencing",
+   "Brain MRI for white matter and basal ganglia changes",
+   "Skeletal survey for dysostosis multiplex",
+   "Skin examination and biopsy for angiokeratomas"
+  ],
+  "redFlags": [
+   "Progressive developmental regression and spasticity",
+   "Seizures signalling advancing neurodegeneration",
+   "Recurrent respiratory infections and failure to thrive",
+   "Cardiac involvement in more advanced disease"
+  ],
+  "prognosis": "Prognosis depends on the phenotype; severe infantile disease progresses rapidly with early mortality, while attenuated forms allow survival into later childhood or adulthood with progressive disability. Management is largely supportive, though haematopoietic stem cell transplantation has been attempted in selected cases.",
+  "pitfalls": [
+   "Confusing the angiokeratomas with Fabry disease without appropriate enzyme testing",
+   "Screening only for glycosaminoglycans and missing the oligosaccharide pattern",
+   "Assuming a uniform severe course despite the wide clinical spectrum",
+   "Overlooking dysautonomia as part of the disorder"
+  ],
+  "references": [
+   "Nelson Textbook of Pediatrics",
+   "Scriver's Online Metabolic and Molecular Bases of Inherited Disease"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Consider haematopoietic stem cell transplantation, which has been attempted and may slow neurological decline in selected early cases",
+   "Supportive neurological care with antiepileptic drugs for seizures and treatment of spasticity",
+   "Physiotherapy, occupational therapy and orthopaedic care for dysostosis multiplex and contractures",
+   "Prompt treatment of recurrent infections and attention to dysautonomia with abnormal sweating",
+   "Nutritional support for feeding difficulties and growth failure",
+   "Dermatological review of angiokeratoma corporis diffusum",
+   "Multidisciplinary metabolic, developmental and palliative care with genetic counselling and family testing for this autosomal recessive disorder"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "fucosidosis-pathway",
+   "title": "Fucosidosis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Caused by deficiency of alpha-L-fucosidase, leading to accumulation of fucose-containing oligosaccharides, glycolipids, and glycoproteins",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Progressive developmental regression and spasticity",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Leucocyte or fibroblast alpha-L-fucosidase enzyme assay, Urinary oligosaccharide analysis showing fucosylated compounds, FUCA1 gene sequencing"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Consider haematopoietic stem cell transplantation, which has been attempted and may slow neurological decline in selected early cases"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Confusing the angiokeratomas with Fabry disease without appropriate enzyme testing"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of fucosidosis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "fucosidosis-matrix",
+   "title": "Fucosidosis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Caused by deficiency of alpha-L-fucosidase, leading to accumulation of fucose-containing oligosaccharides, glycolipids, and",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Fucosidosis is caused by biallelic pathogenic variants in FUCA1, encoding the lysosomal enzyme alpha-L-fucosidase. This enzyme cleaves terminal fucose residues from fucose-containing glycoproteins, glycolipids, and oligosaccharides during their lysosomal degradation. Its deficiency causes accumulation of these fucosylated substrates in tissues throughout the body, including the nervous system, skin, and viscera, with excretion of fucosylated oligosaccharides in the urine. Storage in the central nervous system drives the progressive neurodegeneration, while systemic accumulation produces the coarse features, skeletal changes, and cutaneous angiokeratomas. Residual enzyme activity broadly correlates with the range from severe infantile to attenuated later-onset disease. Inheritance is autosomal recessive.",
-    "additionalDifferentials": [
-      "Other oligosaccharidoses such as alpha-mannosidosis and beta-mannosidosis",
-      "Fabry disease, given overlapping angiokeratomas",
-      "Mucopolysaccharidoses with coarse facies and dysostosis multiplex",
-      "Sialidosis and galactosialidosis",
-      "GM1 gangliosidosis",
-      "Other causes of progressive neurodegeneration with organomegaly"
+    [
+     "Key Investigations",
+     "Leucocyte or fibroblast alpha-L-fucosidase enzyme assay, Urinary oligosaccharide analysis showing fucosylated compounds, FUCA1",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Leucocyte or fibroblast alpha-L-fucosidase enzyme assay",
-      "Urinary oligosaccharide analysis showing fucosylated compounds",
-      "FUCA1 gene sequencing",
-      "Brain MRI for white matter and basal ganglia changes",
-      "Skeletal survey for dysostosis multiplex",
-      "Skin examination and biopsy for angiokeratomas"
+    [
+     "Primary Differentials",
+     "Other oligosaccharidoses such as alpha-mannosidosis and beta-mannosidosis, Fabry disease, given overlapping angiokeratomas,",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Progressive developmental regression and spasticity",
-      "Seizures signalling advancing neurodegeneration",
-      "Recurrent respiratory infections and failure to thrive",
-      "Cardiac involvement in more advanced disease"
+    [
+     "Management Strategy",
+     "Consider haematopoietic stem cell transplantation, which has been attempted and may slow neurological decline in selected early",
+     "Core treatment modality"
     ],
-    "prognosis": "Prognosis depends on the phenotype; severe infantile disease progresses rapidly with early mortality, while attenuated forms allow survival into later childhood or adulthood with progressive disability. Management is largely supportive, though haematopoietic stem cell transplantation has been attempted in selected cases.",
-    "pitfalls": [
-      "Confusing the angiokeratomas with Fabry disease without appropriate enzyme testing",
-      "Screening only for glycosaminoglycans and missing the oligosaccharide pattern",
-      "Assuming a uniform severe course despite the wide clinical spectrum",
-      "Overlooking dysautonomia as part of the disorder"
-    ],
-    "references": [
-      "Nelson Textbook of Pediatrics",
-      "Scriver's Online Metabolic and Molecular Bases of Inherited Disease"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Consider haematopoietic stem cell transplantation, which has been attempted and may slow neurological decline in selected early cases",
-      "Supportive neurological care with antiepileptic drugs for seizures and treatment of spasticity",
-      "Physiotherapy, occupational therapy and orthopaedic care for dysostosis multiplex and contractures",
-      "Prompt treatment of recurrent infections and attention to dysautonomia with abnormal sweating",
-      "Nutritional support for feeding difficulties and growth failure",
-      "Dermatological review of angiokeratoma corporis diffusum",
-      "Multidisciplinary metabolic, developmental and palliative care with genetic counselling and family testing for this autosomal recessive disorder"
+    [
+     "Clinical Pitfall",
+     "Confusing the angiokeratomas with Fabry disease without appropriate enzyme testing",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for fucosidosis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "fucosidosis-real-image",
+   "title": "Fucosidosis: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

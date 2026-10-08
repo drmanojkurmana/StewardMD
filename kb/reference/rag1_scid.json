@@ -1,84 +1,179 @@
 {
-  "id": "rag1_scid",
-  "name": "RAG1-deficient severe combined immunodeficiency",
-  "aliases": [
-    "RAG1 SCID",
-    "recombination-activating gene 1 deficiency",
-    "T-B-NK+ SCID"
+ "id": "rag1_scid",
+ "name": "RAG1-deficient severe combined immunodeficiency",
+ "aliases": [
+  "RAG1 SCID",
+  "recombination-activating gene 1 deficiency",
+  "T-B-NK+ SCID"
+ ],
+ "class": "non_infective",
+ "system": "Immunology / Combined immunodeficiency",
+ "specialty": "Immunology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Immunology references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Caused by biallelic loss-of-function mutations in RAG1, which encodes a core component of the recombinase that initiates V(D)J recombination of antigen-receptor genes.",
+   "Classic immunophenotype is T-B-NK+: both T and B lymphocytes are absent because neither can rearrange their antigen receptors, while natural killer cells develop normally as they do not require V(D)J recombination.",
+   "Autosomal recessive inheritance affects both sexes equally, distinguishing it clinically from X-linked SCID.",
+   "Complete (null) mutations cause classic SCID in early infancy, whereas hypomorphic mutations produce distinct phenotypes such as Omenn syndrome or delayed-onset combined immunodeficiency with granulomas and autoimmunity.",
+   "Omenn syndrome presents with erythroderma, alopecia, lymphadenopathy, hepatosplenomegaly, eosinophilia and raised IgE from expansion of oligoclonal autoreactive T cells.",
+   "Radiosensitivity is not a feature (unlike Artemis or other DNA-repair SCIDs), which helps in transplant conditioning decisions.",
+   "Curative treatment is haematopoietic stem cell transplantation; early transplantation before infective complications gives the best survival.",
+   "Newborn TREC screening identifies affected infants before symptoms because T-cell output is profoundly reduced."
   ],
-  "class": "non_infective",
-  "system": "Immunology / Combined immunodeficiency",
-  "specialty": "Immunology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Immunology references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Caused by biallelic loss-of-function mutations in RAG1, which encodes a core component of the recombinase that initiates V(D)J recombination of antigen-receptor genes.",
-      "Classic immunophenotype is T-B-NK+: both T and B lymphocytes are absent because neither can rearrange their antigen receptors, while natural killer cells develop normally as they do not require V(D)J recombination.",
-      "Autosomal recessive inheritance affects both sexes equally, distinguishing it clinically from X-linked SCID.",
-      "Complete (null) mutations cause classic SCID in early infancy, whereas hypomorphic mutations produce distinct phenotypes such as Omenn syndrome or delayed-onset combined immunodeficiency with granulomas and autoimmunity.",
-      "Omenn syndrome presents with erythroderma, alopecia, lymphadenopathy, hepatosplenomegaly, eosinophilia and raised IgE from expansion of oligoclonal autoreactive T cells.",
-      "Radiosensitivity is not a feature (unlike Artemis or other DNA-repair SCIDs), which helps in transplant conditioning decisions.",
-      "Curative treatment is haematopoietic stem cell transplantation; early transplantation before infective complications gives the best survival.",
-      "Newborn TREC screening identifies affected infants before symptoms because T-cell output is profoundly reduced."
+  "pathophysiology": "RAG1 partners with RAG2 to form the lymphoid-specific recombinase that introduces DNA double-strand breaks at recombination signal sequences flanking the variable, diversity and joining gene segments of the immunoglobulin and T-cell receptor loci. This V(D)J recombination is the essential first step in generating a diverse antigen-receptor repertoire. Complete loss of RAG1 function blocks recombination entirely, arresting T-cell development in the thymus and B-cell development in the marrow at the point where a functional pre-antigen receptor is required, so mature T and B cells fail to emerge. Natural killer cells, whose receptors are germline-encoded and do not require recombination, develop normally, yielding the T-B-NK+ pattern. Hypomorphic mutations that retain partial recombinase activity permit generation of a small, skewed repertoire; the surviving oligoclonal T cells may be autoreactive and infiltrate tissues, producing Omenn syndrome, or immune dysregulation with granulomatous inflammation and autoimmunity in later-onset forms.",
+  "additionalDifferentials": [
+   "RAG2 deficiency (indistinguishable T-B-NK+ immunophenotype)",
+   "Artemis (DCLRE1C) deficiency and other radiosensitive T-B-NK+ SCIDs",
+   "Adenosine deaminase deficiency (usually T-B-NK-)",
+   "X-linked and JAK3 SCID (T-B+NK-) excluded by the presence of B cells",
+   "Omenn syndrome from other causes when erythroderma predominates",
+   "Complete DiGeorge syndrome with athymia",
+   "Severe congenital infection causing secondary lymphopenia"
+  ],
+  "additionalInvestigations": [
+   "Lymphocyte subset flow cytometry confirming the T-B-NK+ pattern",
+   "Serum immunoglobulins and specific antibody responses (accounting for maternal IgG)",
+   "T-cell receptor repertoire analysis showing absent or markedly restricted oligoclonal diversity",
+   "RAG1 gene sequencing to define null versus hypomorphic mutations",
+   "Eosinophil count and IgE where Omenn syndrome is suspected",
+   "Assessment for maternal T-cell engraftment as a confounder of subset analysis",
+   "HLA typing of patient and family for transplant planning"
+  ],
+  "redFlags": [
+   "Opportunistic or overwhelming infection with failure to thrive in early infancy",
+   "Generalised erythroderma with alopecia, lymphadenopathy and hepatosplenomegaly suggesting Omenn syndrome",
+   "Absent thymic shadow with impalpable lymphoid tissue",
+   "Signs of transfusion-associated graft-versus-host disease after non-irradiated blood products",
+   "Persistent granulomatous inflammation or autoimmunity in the delayed-onset hypomorphic form"
+  ],
+  "prognosis": "Classic RAG1 SCID is fatal in infancy without immune reconstitution, but early haematopoietic stem cell transplantation achieves high survival and durable recovery. Omenn syndrome and delayed hypomorphic forms carry additional risk from immune dysregulation and require careful pre-transplant control.",
+  "pitfalls": [
+   "Hypomorphic mutations can present beyond infancy with autoimmunity or granulomas rather than classic SCID, delaying recognition.",
+   "In Omenn syndrome the expanded autoreactive T cells can give a misleadingly normal or raised T-cell count.",
+   "Maternal engraftment may produce circulating T cells that obscure the underlying T-cell absence.",
+   "Live vaccines and non-irradiated cellular blood products must be withheld once SCID is suspected.",
+   "Maternal IgG can normalise measured immunoglobulins early, masking the humoral defect."
+  ],
+  "references": [
+   "Standard clinical immunology textbook",
+   "International primary immunodeficiency classification and management guidelines",
+   "National newborn screening and SCID management guidance"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Early allogeneic haematopoietic stem cell transplantation as the definitive, curative treatment restoring T- and B-cell immunity",
+   "Protective isolation with antimicrobial prophylaxis against Pneumocystis, fungal and viral infection, and immunoglobulin replacement",
+   "Avoidance of live vaccines and use of irradiated, CMV-safe, leucodepleted blood products",
+   "Immunosuppression to control the immune dysregulation of Omenn syndrome or hypomorphic disease before transplant conditioning",
+   "Recognition that radiosensitivity is absent, so standard rather than DNA-damage-sparing conditioning can be used",
+   "Specialist immunology and transplant centre care, with emerging gene-directed therapy as an evolving option",
+   "Genetic counselling for this autosomal recessive disorder and testing of siblings and at-risk relatives"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "rag1_scid-pathway",
+   "title": "RAG1-deficient severe combined immunodeficiency: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Caused by biallelic loss-of-function mutations in RAG1, which encodes a core component of the recombinase that initiates V(D)J recombination of antigen-receptor genes.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Opportunistic or overwhelming infection with failure to thrive in early infancy",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Lymphocyte subset flow cytometry confirming the T-B-NK+ pattern, Serum immunoglobulins and specific antibody responses (accounting for maternal IgG), T-cell receptor repertoire analysis showing absent or markedly"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Early allogeneic haematopoietic stem cell transplantation as the definitive, curative treatment restoring T- and B-cell immunity"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Hypomorphic mutations can present beyond infancy with autoimmunity or granulomas rather than classic SCID, delaying recognition."
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of rag1-deficient severe combined immunodeficiency."
+  }
+ ],
+ "tables": [
+  {
+   "id": "rag1_scid-matrix",
+   "title": "RAG1-deficient severe combined immunodeficiency: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Caused by biallelic loss-of-function mutations in RAG1, which encodes a core component of the recombinase that initiates V(D)J",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "RAG1 partners with RAG2 to form the lymphoid-specific recombinase that introduces DNA double-strand breaks at recombination signal sequences flanking the variable, diversity and joining gene segments of the immunoglobulin and T-cell receptor loci. This V(D)J recombination is the essential first step in generating a diverse antigen-receptor repertoire. Complete loss of RAG1 function blocks recombination entirely, arresting T-cell development in the thymus and B-cell development in the marrow at the point where a functional pre-antigen receptor is required, so mature T and B cells fail to emerge. Natural killer cells, whose receptors are germline-encoded and do not require recombination, develop normally, yielding the T-B-NK+ pattern. Hypomorphic mutations that retain partial recombinase activity permit generation of a small, skewed repertoire; the surviving oligoclonal T cells may be autoreactive and infiltrate tissues, producing Omenn syndrome, or immune dysregulation with granulomatous inflammation and autoimmunity in later-onset forms.",
-    "additionalDifferentials": [
-      "RAG2 deficiency (indistinguishable T-B-NK+ immunophenotype)",
-      "Artemis (DCLRE1C) deficiency and other radiosensitive T-B-NK+ SCIDs",
-      "Adenosine deaminase deficiency (usually T-B-NK-)",
-      "X-linked and JAK3 SCID (T-B+NK-) excluded by the presence of B cells",
-      "Omenn syndrome from other causes when erythroderma predominates",
-      "Complete DiGeorge syndrome with athymia",
-      "Severe congenital infection causing secondary lymphopenia"
+    [
+     "Key Investigations",
+     "Lymphocyte subset flow cytometry confirming the T-B-NK+ pattern, Serum immunoglobulins and specific antibody responses",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Lymphocyte subset flow cytometry confirming the T-B-NK+ pattern",
-      "Serum immunoglobulins and specific antibody responses (accounting for maternal IgG)",
-      "T-cell receptor repertoire analysis showing absent or markedly restricted oligoclonal diversity",
-      "RAG1 gene sequencing to define null versus hypomorphic mutations",
-      "Eosinophil count and IgE where Omenn syndrome is suspected",
-      "Assessment for maternal T-cell engraftment as a confounder of subset analysis",
-      "HLA typing of patient and family for transplant planning"
+    [
+     "Primary Differentials",
+     "RAG2 deficiency (indistinguishable T-B-NK+ immunophenotype), Artemis (DCLRE1C) deficiency and other radiosensitive T-B-NK+ SCIDs,",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Opportunistic or overwhelming infection with failure to thrive in early infancy",
-      "Generalised erythroderma with alopecia, lymphadenopathy and hepatosplenomegaly suggesting Omenn syndrome",
-      "Absent thymic shadow with impalpable lymphoid tissue",
-      "Signs of transfusion-associated graft-versus-host disease after non-irradiated blood products",
-      "Persistent granulomatous inflammation or autoimmunity in the delayed-onset hypomorphic form"
+    [
+     "Management Strategy",
+     "Early allogeneic haematopoietic stem cell transplantation as the definitive, curative treatment restoring T- and B-cell immunity",
+     "Core treatment modality"
     ],
-    "prognosis": "Classic RAG1 SCID is fatal in infancy without immune reconstitution, but early haematopoietic stem cell transplantation achieves high survival and durable recovery. Omenn syndrome and delayed hypomorphic forms carry additional risk from immune dysregulation and require careful pre-transplant control.",
-    "pitfalls": [
-      "Hypomorphic mutations can present beyond infancy with autoimmunity or granulomas rather than classic SCID, delaying recognition.",
-      "In Omenn syndrome the expanded autoreactive T cells can give a misleadingly normal or raised T-cell count.",
-      "Maternal engraftment may produce circulating T cells that obscure the underlying T-cell absence.",
-      "Live vaccines and non-irradiated cellular blood products must be withheld once SCID is suspected.",
-      "Maternal IgG can normalise measured immunoglobulins early, masking the humoral defect."
-    ],
-    "references": [
-      "Standard clinical immunology textbook",
-      "International primary immunodeficiency classification and management guidelines",
-      "National newborn screening and SCID management guidance"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Early allogeneic haematopoietic stem cell transplantation as the definitive, curative treatment restoring T- and B-cell immunity",
-      "Protective isolation with antimicrobial prophylaxis against Pneumocystis, fungal and viral infection, and immunoglobulin replacement",
-      "Avoidance of live vaccines and use of irradiated, CMV-safe, leucodepleted blood products",
-      "Immunosuppression to control the immune dysregulation of Omenn syndrome or hypomorphic disease before transplant conditioning",
-      "Recognition that radiosensitivity is absent, so standard rather than DNA-damage-sparing conditioning can be used",
-      "Specialist immunology and transplant centre care, with emerging gene-directed therapy as an evolving option",
-      "Genetic counselling for this autosomal recessive disorder and testing of siblings and at-risk relatives"
+    [
+     "Clinical Pitfall",
+     "Hypomorphic mutations can present beyond infancy with autoimmunity or granulomas rather than classic SCID, delaying recognition.",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for rag1-deficient severe combined immunodeficiency."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "rag1-scid-real-image",
+   "title": "RAG1-deficient severe combined immunodeficiency: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

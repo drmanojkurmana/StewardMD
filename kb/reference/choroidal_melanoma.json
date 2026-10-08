@@ -1,79 +1,174 @@
 {
-  "id": "choroidal_melanoma",
-  "name": "Choroidal melanoma",
-  "aliases": [
-    "uveal melanoma",
-    "posterior uveal melanoma",
-    "malignant choroidal melanoma"
+ "id": "choroidal_melanoma",
+ "name": "Choroidal melanoma",
+ "aliases": [
+  "uveal melanoma",
+  "posterior uveal melanoma",
+  "malignant choroidal melanoma"
+ ],
+ "class": "non_infective",
+ "system": "Eye / Ophthalmology",
+ "specialty": "Ophthalmology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "It is the most common primary intraocular malignancy in adults and may be found incidentally or present with blurred vision, floaters, photopsia, or a visual field defect",
+   "Fundus examination classically shows a pigmented dome-shaped or collar-stud (mushroom) mass, often with overlying orange lipofuscin pigment and secondary serous retinal detachment",
+   "Amelanotic lesions occur and can be mistaken for other tumours or inflammatory masses",
+   "Features that favour melanoma over a benign naevus include thickness greater than about 2 mm, subretinal fluid, orange pigment, symptoms, and proximity to the optic disc",
+   "Ultrasound (B-scan) typically shows low internal reflectivity, acoustic hollowing, and choroidal excavation that support the diagnosis",
+   "Metastasis is haematogenous and the liver is the dominant site, so systemic staging with liver imaging is essential",
+   "Treatment aims to preserve the eye and vision where possible using plaque brachytherapy or proton beam radiotherapy, reserving enucleation for large or advanced tumours",
+   "Prognosis relates strongly to tumour size, cell type, extraocular extension, and cytogenetic markers such as monosomy 3"
   ],
-  "class": "non_infective",
-  "system": "Eye / Ophthalmology",
-  "specialty": "Ophthalmology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "It is the most common primary intraocular malignancy in adults and may be found incidentally or present with blurred vision, floaters, photopsia, or a visual field defect",
-      "Fundus examination classically shows a pigmented dome-shaped or collar-stud (mushroom) mass, often with overlying orange lipofuscin pigment and secondary serous retinal detachment",
-      "Amelanotic lesions occur and can be mistaken for other tumours or inflammatory masses",
-      "Features that favour melanoma over a benign naevus include thickness greater than about 2 mm, subretinal fluid, orange pigment, symptoms, and proximity to the optic disc",
-      "Ultrasound (B-scan) typically shows low internal reflectivity, acoustic hollowing, and choroidal excavation that support the diagnosis",
-      "Metastasis is haematogenous and the liver is the dominant site, so systemic staging with liver imaging is essential",
-      "Treatment aims to preserve the eye and vision where possible using plaque brachytherapy or proton beam radiotherapy, reserving enucleation for large or advanced tumours",
-      "Prognosis relates strongly to tumour size, cell type, extraocular extension, and cytogenetic markers such as monosomy 3"
+  "pathophysiology": "Choroidal melanoma arises from malignant transformation of melanocytes within the choroidal stroma. Growth breaches Bruch membrane in many tumours, producing the characteristic mushroom shape and disrupting the overlying retinal pigment epithelium and retina, which leads to serous detachment and lipofuscin deposition. Chromosomal changes, notably loss of one copy of chromosome 3 and gains of chromosome 8q, correlate with an aggressive metastatic phenotype. Spread is almost exclusively haematogenous with a strong hepatic tropism, sometimes appearing years after successful local treatment.",
+  "additionalDifferentials": [
+   "Choroidal naevus",
+   "Choroidal metastasis from a distant primary",
+   "Congenital hypertrophy of the retinal pigment epithelium",
+   "Choroidal haemangioma",
+   "Peripheral exudative haemorrhagic chorioretinopathy",
+   "Age-related macular degeneration with haemorrhagic pigment epithelial detachment"
+  ],
+  "additionalInvestigations": [
+   "B-scan and standardised A-scan ultrasonography to assess dimensions and internal reflectivity",
+   "Dilated indirect ophthalmoscopy and fundus photography to document the lesion and detect risk features",
+   "Optical coherence tomography to detect subretinal fluid and confirm dome shape",
+   "Systemic staging with liver imaging and liver function tests to detect metastasis",
+   "Fine-needle aspiration biopsy for cytogenetic and gene-expression prognostication in selected cases",
+   "Fundus autofluorescence to highlight lipofuscin (orange pigment)"
+  ],
+  "redFlags": [
+   "A malignant intraocular tumour with potential to metastasise, particularly to the liver, requiring urgent oncology referral",
+   "Extraocular or optic nerve extension indicating advanced disease",
+   "Rapid growth or documented enlargement of a previously stable pigmented lesion",
+   "Signs of hepatic metastasis such as deranged liver function or a liver mass"
+  ],
+  "prognosis": "Prognosis is determined mainly by tumour size, cell type, extraocular extension, and cytogenetics; small tumours with disomy 3 have a favourable survival outlook, whereas large tumours with monosomy 3 or chromosome 8q gain carry a high risk of fatal hepatic metastasis, and local eye-preserving radiotherapy controls the tumour without necessarily altering metastatic risk.",
+  "pitfalls": [
+   "Dismissing a small pigmented lesion as a benign naevus without documenting risk features and arranging follow-up",
+   "Overlooking an amelanotic melanoma and mistaking it for a benign or inflammatory mass",
+   "Failing to arrange systemic staging and long-term surveillance for liver metastasis",
+   "Assuming successful local treatment eliminates the risk of later distant spread"
+  ],
+  "references": [
+   "Parsons' Diseases of the Eye",
+   "Kanski's Clinical Ophthalmology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Treat suitable tumours with eye-preserving radiotherapy — plaque brachytherapy or proton-beam therapy — as the mainstay of local control",
+   "Reserve enucleation for large tumours, extensive local invasion or a blind painful eye not amenable to conservative treatment",
+   "Consider adjunctive transpupillary thermotherapy or local resection in selected cases",
+   "Undertake cytogenetic and gene-expression prognostication for monosomy 3 and chromosome 8q gain on biopsy material to stratify metastatic risk",
+   "Stage systemically with liver imaging and maintain lifelong surveillance for the characteristic hepatic metastasis",
+   "Refer metastatic disease to medical oncology for options including tebentafusp in HLA-A*02:01-positive patients and liver-directed therapy",
+   "Manage through an ocular oncology multidisciplinary team, treating radiation complications such as radiation retinopathy and neovascular glaucoma and providing visual rehabilitation"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "choroidal_melanoma-pathway",
+   "title": "Choroidal melanoma: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "It is the most common primary intraocular malignancy in adults and may be found incidentally or present with blurred vision, floaters, photopsia, or a visual field defect",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: A malignant intraocular tumour with potential to metastasise, particularly to the liver, requiring urgent oncology referral",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: B-scan and standardised A-scan ultrasonography to assess dimensions and internal reflectivity, Dilated indirect ophthalmoscopy and fundus photography to document the lesion and detect risk features, Optical coherence"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Treat suitable tumours with eye-preserving radiotherapy - plaque brachytherapy or proton-beam therapy - as the mainstay of local control"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Dismissing a small pigmented lesion as a benign naevus without documenting risk features and arranging follow-up"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of choroidal melanoma."
+  }
+ ],
+ "tables": [
+  {
+   "id": "choroidal_melanoma-matrix",
+   "title": "Choroidal melanoma: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "It is the most common primary intraocular malignancy in adults and may be found incidentally or present with blurred vision,",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Choroidal melanoma arises from malignant transformation of melanocytes within the choroidal stroma. Growth breaches Bruch membrane in many tumours, producing the characteristic mushroom shape and disrupting the overlying retinal pigment epithelium and retina, which leads to serous detachment and lipofuscin deposition. Chromosomal changes, notably loss of one copy of chromosome 3 and gains of chromosome 8q, correlate with an aggressive metastatic phenotype. Spread is almost exclusively haematogenous with a strong hepatic tropism, sometimes appearing years after successful local treatment.",
-    "additionalDifferentials": [
-      "Choroidal naevus",
-      "Choroidal metastasis from a distant primary",
-      "Congenital hypertrophy of the retinal pigment epithelium",
-      "Choroidal haemangioma",
-      "Peripheral exudative haemorrhagic chorioretinopathy",
-      "Age-related macular degeneration with haemorrhagic pigment epithelial detachment"
+    [
+     "Key Investigations",
+     "B-scan and standardised A-scan ultrasonography to assess dimensions and internal reflectivity, Dilated indirect ophthalmoscopy",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "B-scan and standardised A-scan ultrasonography to assess dimensions and internal reflectivity",
-      "Dilated indirect ophthalmoscopy and fundus photography to document the lesion and detect risk features",
-      "Optical coherence tomography to detect subretinal fluid and confirm dome shape",
-      "Systemic staging with liver imaging and liver function tests to detect metastasis",
-      "Fine-needle aspiration biopsy for cytogenetic and gene-expression prognostication in selected cases",
-      "Fundus autofluorescence to highlight lipofuscin (orange pigment)"
+    [
+     "Primary Differentials",
+     "Choroidal naevus, Choroidal metastasis from a distant primary, Congenital hypertrophy of the retinal pigment epithelium",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "A malignant intraocular tumour with potential to metastasise, particularly to the liver, requiring urgent oncology referral",
-      "Extraocular or optic nerve extension indicating advanced disease",
-      "Rapid growth or documented enlargement of a previously stable pigmented lesion",
-      "Signs of hepatic metastasis such as deranged liver function or a liver mass"
+    [
+     "Management Strategy",
+     "Treat suitable tumours with eye-preserving radiotherapy - plaque brachytherapy or proton-beam therapy - as the mainstay of local",
+     "Core treatment modality"
     ],
-    "prognosis": "Prognosis is determined mainly by tumour size, cell type, extraocular extension, and cytogenetics; small tumours with disomy 3 have a favourable survival outlook, whereas large tumours with monosomy 3 or chromosome 8q gain carry a high risk of fatal hepatic metastasis, and local eye-preserving radiotherapy controls the tumour without necessarily altering metastatic risk.",
-    "pitfalls": [
-      "Dismissing a small pigmented lesion as a benign naevus without documenting risk features and arranging follow-up",
-      "Overlooking an amelanotic melanoma and mistaking it for a benign or inflammatory mass",
-      "Failing to arrange systemic staging and long-term surveillance for liver metastasis",
-      "Assuming successful local treatment eliminates the risk of later distant spread"
-    ],
-    "references": [
-      "Parsons' Diseases of the Eye",
-      "Kanski's Clinical Ophthalmology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Treat suitable tumours with eye-preserving radiotherapy — plaque brachytherapy or proton-beam therapy — as the mainstay of local control",
-      "Reserve enucleation for large tumours, extensive local invasion or a blind painful eye not amenable to conservative treatment",
-      "Consider adjunctive transpupillary thermotherapy or local resection in selected cases",
-      "Undertake cytogenetic and gene-expression prognostication for monosomy 3 and chromosome 8q gain on biopsy material to stratify metastatic risk",
-      "Stage systemically with liver imaging and maintain lifelong surveillance for the characteristic hepatic metastasis",
-      "Refer metastatic disease to medical oncology for options including tebentafusp in HLA-A*02:01-positive patients and liver-directed therapy",
-      "Manage through an ocular oncology multidisciplinary team, treating radiation complications such as radiation retinopathy and neovascular glaucoma and providing visual rehabilitation"
+    [
+     "Clinical Pitfall",
+     "Dismissing a small pigmented lesion as a benign naevus without documenting risk features and arranging follow-up",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for choroidal melanoma."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "choroidal-melanoma-real-image",
+   "title": "Choroidal melanoma: Clinical Cutaneous Dermatology Photograph",
+   "type": "diagram",
+   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
+   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
+   "annotations": [
+    {
+     "label": "Primary Lesions",
+     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
+    },
+    {
+     "label": "Demarcation & Margins",
+     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
+    },
+    {
+     "label": "Anatomical Distribution",
+     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+    }
+   ]
+  }
+ ]
 }

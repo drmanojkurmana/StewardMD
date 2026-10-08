@@ -1,78 +1,173 @@
 {
-  "id": "malakoplakia",
-  "name": "Malakoplakia",
-  "aliases": [
-    "malacoplakia",
-    "Michaelis-Gutmann body disease",
-    "von Hansemann histiocyte disease"
+ "id": "malakoplakia",
+ "name": "Malakoplakia",
+ "aliases": [
+  "malacoplakia",
+  "Michaelis-Gutmann body disease",
+  "von Hansemann histiocyte disease"
+ ],
+ "class": "infective",
+ "system": "Infectious disease",
+ "specialty": "Infectious Diseases",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Mandell, Douglas and Bennett",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Malakoplakia is a rare chronic granulomatous inflammatory condition arising from defective macrophage killing of bacteria, most often coliforms such as Escherichia coli",
+   "It most commonly affects the urinary tract, particularly the bladder, but can involve the kidneys, gastrointestinal tract, skin and other organs",
+   "It is strongly associated with immunosuppression, chronic infection, malignancy and debilitated states",
+   "Cystoscopically it appears as soft yellow-brown mucosal plaques or nodules",
+   "The diagnostic histological hallmark is the Michaelis-Gutmann body, a laminated calcified inclusion within large macrophages (von Hansemann cells)",
+   "Management combines prolonged antibiotics that concentrate intracellularly, such as fluoroquinolones or trimethoprim-sulfamethoxazole, with reduction of immunosuppression where possible",
+   "Surgical excision may be required for large, obstructive or destructive lesions"
   ],
-  "class": "infective",
-  "system": "Infectious disease",
-  "specialty": "Infectious Diseases",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Mandell, Douglas and Bennett",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Malakoplakia is a rare chronic granulomatous inflammatory condition arising from defective macrophage killing of bacteria, most often coliforms such as Escherichia coli",
-      "It most commonly affects the urinary tract, particularly the bladder, but can involve the kidneys, gastrointestinal tract, skin and other organs",
-      "It is strongly associated with immunosuppression, chronic infection, malignancy and debilitated states",
-      "Cystoscopically it appears as soft yellow-brown mucosal plaques or nodules",
-      "The diagnostic histological hallmark is the Michaelis-Gutmann body, a laminated calcified inclusion within large macrophages (von Hansemann cells)",
-      "Management combines prolonged antibiotics that concentrate intracellularly, such as fluoroquinolones or trimethoprim-sulfamethoxazole, with reduction of immunosuppression where possible",
-      "Surgical excision may be required for large, obstructive or destructive lesions"
+  "pathophysiology": "Malakoplakia is thought to arise from a defect in the intracellular killing and digestion of phagocytosed bacteria, typically coliform organisms, by macrophages. Incompletely degraded bacterial fragments accumulate within these cells, and mineralisation of the residual material with calcium and iron produces the characteristic laminated Michaelis-Gutmann bodies. The resulting collections of engorged macrophages form the soft plaques and nodules seen clinically. Because the underlying problem is impaired bacterial clearance, the condition is closely linked to immunosuppression and chronic infection, and can produce mass-like or obstructive lesions in affected organs.",
+  "additionalDifferentials": [
+   "Genitourinary or gastrointestinal malignancy",
+   "Xanthogranulomatous pyelonephritis",
+   "Tuberculosis or other chronic granulomatous infection",
+   "Inflammatory pseudotumour",
+   "Other chronic inflammatory or infective plaques",
+   "Whipple disease when the gut is involved"
+  ],
+  "additionalInvestigations": [
+   "Biopsy for histology demonstrating von Hansemann macrophages and Michaelis-Gutmann bodies",
+   "Special stains (von Kossa for calcium, Perls for iron, periodic acid-Schiff) to highlight the inclusions",
+   "Urine and tissue cultures, commonly yielding coliform organisms",
+   "Cystoscopy or endoscopy to characterise mucosal plaques",
+   "Cross-sectional imaging to define the extent of organ involvement",
+   "Assessment of immune status and screening for underlying malignancy"
+  ],
+  "redFlags": [
+   "Obstructive uropathy or renal impairment from urinary tract lesions",
+   "Mass lesions mimicking or coexisting with malignancy",
+   "Systemic infection in an immunosuppressed patient",
+   "Progressive or destructive organ involvement"
+  ],
+  "prognosis": "Localised disease often responds to prolonged intracellularly active antibiotics and control of predisposing factors, but extensive or renal involvement, particularly in immunosuppressed patients, carries a worse outlook and may require surgery.",
+  "pitfalls": [
+   "Mistaking mass-forming lesions for malignancy without biopsy",
+   "Choosing antibiotics that do not penetrate macrophages well",
+   "Overlooking and failing to reduce contributory immunosuppression",
+   "Underestimating the risk of urinary obstruction and renal damage"
+  ],
+  "references": [
+   "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
+   "Manson's Tropical Diseases"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Prolonged courses of antibiotics that concentrate intracellularly, such as fluoroquinolones or trimethoprim-sulfamethoxazole, directed by urine and tissue culture of the causative coliform organisms",
+   "Adjunctive agents that enhance macrophage bactericidal function, such as bethanechol and ascorbic acid",
+   "Reduce or modify immunosuppression wherever clinically feasible to restore intracellular bacterial clearance",
+   "Surgical excision or debulking for mass-like, obstructive or medically refractory lesions",
+   "Identify and treat predisposing factors, including screening for occult malignancy and correcting debilitated or immunosuppressed states",
+   "Monitor with repeat imaging, cystoscopy or endoscopy for resolution and to detect recurrence, as therapy is often prolonged",
+   "Refer for urological, surgical or infectious diseases input according to the organ involved"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "malakoplakia-pathway",
+   "title": "Malakoplakia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Malakoplakia is a rare chronic granulomatous inflammatory condition arising from defective macrophage killing of bacteria, most often coliforms such as Escherichia coli",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Obstructive uropathy or renal impairment from urinary tract lesions",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Biopsy for histology demonstrating von Hansemann macrophages and Michaelis-Gutmann bodies, Special stains (von Kossa for calcium, Perls for iron, periodic acid-Schiff) to highlight the inclusions, Urine and tissue"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Prolonged courses of antibiotics that concentrate intracellularly, such as fluoroquinolones or trimethoprim-sulfamethoxazole, directed by urine and tissue culture of the causative coliform organisms"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking mass-forming lesions for malignancy without biopsy"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of malakoplakia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "malakoplakia-matrix",
+   "title": "Malakoplakia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Malakoplakia is a rare chronic granulomatous inflammatory condition arising from defective macrophage killing of bacteria, most",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Malakoplakia is thought to arise from a defect in the intracellular killing and digestion of phagocytosed bacteria, typically coliform organisms, by macrophages. Incompletely degraded bacterial fragments accumulate within these cells, and mineralisation of the residual material with calcium and iron produces the characteristic laminated Michaelis-Gutmann bodies. The resulting collections of engorged macrophages form the soft plaques and nodules seen clinically. Because the underlying problem is impaired bacterial clearance, the condition is closely linked to immunosuppression and chronic infection, and can produce mass-like or obstructive lesions in affected organs.",
-    "additionalDifferentials": [
-      "Genitourinary or gastrointestinal malignancy",
-      "Xanthogranulomatous pyelonephritis",
-      "Tuberculosis or other chronic granulomatous infection",
-      "Inflammatory pseudotumour",
-      "Other chronic inflammatory or infective plaques",
-      "Whipple disease when the gut is involved"
+    [
+     "Key Investigations",
+     "Biopsy for histology demonstrating von Hansemann macrophages and Michaelis-Gutmann bodies, Special stains (von Kossa for calcium,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Biopsy for histology demonstrating von Hansemann macrophages and Michaelis-Gutmann bodies",
-      "Special stains (von Kossa for calcium, Perls for iron, periodic acid-Schiff) to highlight the inclusions",
-      "Urine and tissue cultures, commonly yielding coliform organisms",
-      "Cystoscopy or endoscopy to characterise mucosal plaques",
-      "Cross-sectional imaging to define the extent of organ involvement",
-      "Assessment of immune status and screening for underlying malignancy"
+    [
+     "Primary Differentials",
+     "Genitourinary or gastrointestinal malignancy, Xanthogranulomatous pyelonephritis, Tuberculosis or other chronic granulomatous",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Obstructive uropathy or renal impairment from urinary tract lesions",
-      "Mass lesions mimicking or coexisting with malignancy",
-      "Systemic infection in an immunosuppressed patient",
-      "Progressive or destructive organ involvement"
+    [
+     "Management Strategy",
+     "Prolonged courses of antibiotics that concentrate intracellularly, such as fluoroquinolones or trimethoprim-sulfamethoxazole,",
+     "Core treatment modality"
     ],
-    "prognosis": "Localised disease often responds to prolonged intracellularly active antibiotics and control of predisposing factors, but extensive or renal involvement, particularly in immunosuppressed patients, carries a worse outlook and may require surgery.",
-    "pitfalls": [
-      "Mistaking mass-forming lesions for malignancy without biopsy",
-      "Choosing antibiotics that do not penetrate macrophages well",
-      "Overlooking and failing to reduce contributory immunosuppression",
-      "Underestimating the risk of urinary obstruction and renal damage"
-    ],
-    "references": [
-      "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
-      "Manson's Tropical Diseases"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Prolonged courses of antibiotics that concentrate intracellularly, such as fluoroquinolones or trimethoprim-sulfamethoxazole, directed by urine and tissue culture of the causative coliform organisms",
-      "Adjunctive agents that enhance macrophage bactericidal function, such as bethanechol and ascorbic acid",
-      "Reduce or modify immunosuppression wherever clinically feasible to restore intracellular bacterial clearance",
-      "Surgical excision or debulking for mass-like, obstructive or medically refractory lesions",
-      "Identify and treat predisposing factors, including screening for occult malignancy and correcting debilitated or immunosuppressed states",
-      "Monitor with repeat imaging, cystoscopy or endoscopy for resolution and to detect recurrence, as therapy is often prolonged",
-      "Refer for urological, surgical or infectious diseases input according to the organ involved"
+    [
+     "Clinical Pitfall",
+     "Mistaking mass-forming lesions for malignancy without biopsy",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for malakoplakia."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "malakoplakia-real-image",
+   "title": "Malakoplakia: Diagnostic Microbiological / Smear Examination",
+   "type": "diagram",
+   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
+   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
+   "annotations": [
+    {
+     "label": "Pathogen Detection",
+     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
+    },
+    {
+     "label": "Inflammatory Response",
+     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
+    },
+    {
+     "label": "Diagnostic Confirmation",
+     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+    }
+   ]
+  }
+ ]
 }

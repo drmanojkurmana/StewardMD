@@ -1,82 +1,177 @@
 {
-  "id": "mcad_deficiency",
-  "name": "Medium-chain acyl-CoA dehydrogenase deficiency",
-  "aliases": [
-    "ACADM deficiency",
-    "MCAD deficiency",
-    "MCADD",
-    "medium chain acyl coa deficiency",
-    "medium-chain acyl-CoA dehydrogenase deficiency",
-    "medium-chain acyl-coenzyme A dehydrogenase deficiency"
+ "id": "mcad_deficiency",
+ "name": "Medium-chain acyl-CoA dehydrogenase deficiency",
+ "aliases": [
+  "ACADM deficiency",
+  "MCAD deficiency",
+  "MCADD",
+  "medium chain acyl coa deficiency",
+  "medium-chain acyl-CoA dehydrogenase deficiency",
+  "medium-chain acyl-coenzyme A dehydrogenase deficiency"
+ ],
+ "class": "non_infective",
+ "system": "Metabolic / Genetics",
+ "specialty": "Metabolic Medicine / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Commonest inherited disorder of fatty-acid oxidation, caused by biallelic ACADM variants; the c.985A>G (p.Lys304Glu) allele predominates in populations of northern European ancestry",
+   "The defective enzyme cannot dehydrogenate medium-chain (C6-C10) acyl-CoA substrates, so beta-oxidation stalls once glycogen stores are exhausted during fasting or intercurrent illness",
+   "Classic decompensation is hypoketotic hypoglycaemia with lethargy, vomiting and encephalopathy, often after a period of poor feeding or a viral illness",
+   "Newborn screening detects a characteristic acylcarnitine profile with elevated octanoylcarnitine (C8) and a raised C8:C10 ratio",
+   "Urine organic acids during crisis show medium-chain dicarboxylic aciduria with inappropriately low ketones",
+   "Cornerstone of management is avoidance of prolonged fasting, an emergency regimen with oral or intravenous glucose during illness, and prompt presentation when unwell",
+   "Many diagnosed on screening remain asymptomatic if fasting is avoided, but sudden unexpected death and Reye-like presentations occurred historically before screening"
   ],
-  "class": "non_infective",
-  "system": "Metabolic / Genetics",
-  "specialty": "Metabolic Medicine / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Commonest inherited disorder of fatty-acid oxidation, caused by biallelic ACADM variants; the c.985A>G (p.Lys304Glu) allele predominates in populations of northern European ancestry",
-      "The defective enzyme cannot dehydrogenate medium-chain (C6-C10) acyl-CoA substrates, so beta-oxidation stalls once glycogen stores are exhausted during fasting or intercurrent illness",
-      "Classic decompensation is hypoketotic hypoglycaemia with lethargy, vomiting and encephalopathy, often after a period of poor feeding or a viral illness",
-      "Newborn screening detects a characteristic acylcarnitine profile with elevated octanoylcarnitine (C8) and a raised C8:C10 ratio",
-      "Urine organic acids during crisis show medium-chain dicarboxylic aciduria with inappropriately low ketones",
-      "Cornerstone of management is avoidance of prolonged fasting, an emergency regimen with oral or intravenous glucose during illness, and prompt presentation when unwell",
-      "Many diagnosed on screening remain asymptomatic if fasting is avoided, but sudden unexpected death and Reye-like presentations occurred historically before screening"
+  "pathophysiology": "Medium-chain acyl-CoA dehydrogenase catalyses the first, rate-limiting dehydrogenation step of mitochondrial beta-oxidation for medium-chain fatty acyl-CoA esters. When the enzyme is deficient, fatty acids cannot be fully oxidised to supply acetyl-CoA and hepatic ketone bodies during fasting, so tissues that depend on ketones and fatty-acid-derived energy are compromised and hypoglycaemia develops once hepatic glycogen is depleted. Accumulating medium-chain acyl-CoA intermediates are diverted to carnitine esters and dicarboxylic acids, and the shortage of acetyl-CoA impairs ureagenesis, producing hyperammonaemia in severe crises.",
+  "additionalDifferentials": [
+   "Other fatty-acid oxidation defects (VLCAD, LCHAD/trifunctional protein, SCAD deficiencies)",
+   "Carnitine cycle disorders (CPT1, CPT2, translocase, primary carnitine deficiency)",
+   "Reye syndrome and salicylate-associated encephalopathy",
+   "Ketotic hypoglycaemia and glycogen storage disorders",
+   "Hyperinsulinaemic hypoglycaemia",
+   "Sepsis or acute viral encephalopathy in an unwell infant"
+  ],
+  "additionalInvestigations": [
+   "Plasma acylcarnitine profile by tandem mass spectrometry (elevated C8, raised C8:C10)",
+   "Urine organic acids seeking medium-chain dicarboxylic aciduria and hexanoylglycine/suberylglycine",
+   "Blood glucose, ketones (beta-hydroxybutyrate), ammonia and lactate during acute illness",
+   "Plasma free and total carnitine",
+   "ACADM molecular genetic testing to confirm the diagnosis",
+   "Enzyme assay in fibroblasts or leucocytes where genotype is inconclusive"
+  ],
+  "redFlags": [
+   "Reduced consciousness or seizures with documented hypoketotic hypoglycaemia",
+   "Vomiting and refusal to feed during intercurrent illness in a known or at-risk infant",
+   "Hyperammonaemia or hepatic dysfunction suggesting metabolic decompensation",
+   "Apparent life-threatening event or sudden unexpected collapse in a young infant"
+  ],
+  "prognosis": "With newborn screening, education on fasting avoidance and a written emergency regimen, the long-term outlook is excellent and most individuals develop normally. Risk of morbidity and death concentrates in the first decompensation, so prevention and early recognition are decisive.",
+  "pitfalls": [
+   "Attributing hypoglycaemia to a simple viral illness and missing the underlying oxidation defect",
+   "Expecting ketosis to accompany hypoglycaemia, when the hallmark is that ketones are inappropriately low",
+   "Allowing prolonged fasting for procedures or investigations without a glucose-containing infusion",
+   "Assuming an asymptomatic screen-detected infant needs no emergency plan"
+  ],
+  "references": [
+   "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
+   "Nelson Textbook of Paediatrics"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Strict avoidance of prolonged fasting with regular carbohydrate-rich feeds and age-appropriate maximum fasting intervals",
+   "Written emergency regimen using oral glucose polymer during intercurrent illness, escalating to intravenous glucose if oral intake fails",
+   "During decompensation, intravenous dextrose to reverse hypoketotic hypoglycaemia and suppress lipolysis, with correction of hyperammonaemia",
+   "Low threshold for prompt hospital attendance during any febrile or vomiting illness",
+   "Avoid medium-chain triglyceride supplements and fat-loading, with metabolic dietitian involvement",
+   "Consider L-carnitine supplementation where secondary carnitine depletion is documented",
+   "Genetic counselling for this autosomal recessive disorder, with sibling testing and newborn-screening cascade",
+   "Provide emergency alert documentation identifying the metabolic diagnosis"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "mcad_deficiency-pathway",
+   "title": "Medium-chain acyl-CoA dehydrogenase deficiency: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Commonest inherited disorder of fatty-acid oxidation, caused by biallelic ACADM variants; the c.985A>G (p.Lys304Glu) allele predominates in populations of northern European ancestry",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Reduced consciousness or seizures with documented hypoketotic hypoglycaemia",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Plasma acylcarnitine profile by tandem mass spectrometry (elevated C8, raised C8:C10), Urine organic acids seeking medium-chain dicarboxylic aciduria and hexanoylglycine/suberylglycine, Blood glucose, ketones"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Strict avoidance of prolonged fasting with regular carbohydrate-rich feeds and age-appropriate maximum fasting intervals"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing hypoglycaemia to a simple viral illness and missing the underlying oxidation defect"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of medium-chain acyl-coa dehydrogenase deficiency."
+  }
+ ],
+ "tables": [
+  {
+   "id": "mcad_deficiency-matrix",
+   "title": "Medium-chain acyl-CoA dehydrogenase deficiency: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Commonest inherited disorder of fatty-acid oxidation, caused by biallelic ACADM variants; the c.985A>G (p.Lys304Glu) allele",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Medium-chain acyl-CoA dehydrogenase catalyses the first, rate-limiting dehydrogenation step of mitochondrial beta-oxidation for medium-chain fatty acyl-CoA esters. When the enzyme is deficient, fatty acids cannot be fully oxidised to supply acetyl-CoA and hepatic ketone bodies during fasting, so tissues that depend on ketones and fatty-acid-derived energy are compromised and hypoglycaemia develops once hepatic glycogen is depleted. Accumulating medium-chain acyl-CoA intermediates are diverted to carnitine esters and dicarboxylic acids, and the shortage of acetyl-CoA impairs ureagenesis, producing hyperammonaemia in severe crises.",
-    "additionalDifferentials": [
-      "Other fatty-acid oxidation defects (VLCAD, LCHAD/trifunctional protein, SCAD deficiencies)",
-      "Carnitine cycle disorders (CPT1, CPT2, translocase, primary carnitine deficiency)",
-      "Reye syndrome and salicylate-associated encephalopathy",
-      "Ketotic hypoglycaemia and glycogen storage disorders",
-      "Hyperinsulinaemic hypoglycaemia",
-      "Sepsis or acute viral encephalopathy in an unwell infant"
+    [
+     "Key Investigations",
+     "Plasma acylcarnitine profile by tandem mass spectrometry (elevated C8, raised C8:C10), Urine organic acids seeking medium-chain",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Plasma acylcarnitine profile by tandem mass spectrometry (elevated C8, raised C8:C10)",
-      "Urine organic acids seeking medium-chain dicarboxylic aciduria and hexanoylglycine/suberylglycine",
-      "Blood glucose, ketones (beta-hydroxybutyrate), ammonia and lactate during acute illness",
-      "Plasma free and total carnitine",
-      "ACADM molecular genetic testing to confirm the diagnosis",
-      "Enzyme assay in fibroblasts or leucocytes where genotype is inconclusive"
+    [
+     "Primary Differentials",
+     "Other fatty-acid oxidation defects (VLCAD, LCHAD/trifunctional protein, SCAD deficiencies), Carnitine cycle disorders (CPT1,",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Reduced consciousness or seizures with documented hypoketotic hypoglycaemia",
-      "Vomiting and refusal to feed during intercurrent illness in a known or at-risk infant",
-      "Hyperammonaemia or hepatic dysfunction suggesting metabolic decompensation",
-      "Apparent life-threatening event or sudden unexpected collapse in a young infant"
+    [
+     "Management Strategy",
+     "Strict avoidance of prolonged fasting with regular carbohydrate-rich feeds and age-appropriate maximum fasting intervals",
+     "Core treatment modality"
     ],
-    "prognosis": "With newborn screening, education on fasting avoidance and a written emergency regimen, the long-term outlook is excellent and most individuals develop normally. Risk of morbidity and death concentrates in the first decompensation, so prevention and early recognition are decisive.",
-    "pitfalls": [
-      "Attributing hypoglycaemia to a simple viral illness and missing the underlying oxidation defect",
-      "Expecting ketosis to accompany hypoglycaemia, when the hallmark is that ketones are inappropriately low",
-      "Allowing prolonged fasting for procedures or investigations without a glucose-containing infusion",
-      "Assuming an asymptomatic screen-detected infant needs no emergency plan"
-    ],
-    "references": [
-      "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
-      "Nelson Textbook of Paediatrics"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Strict avoidance of prolonged fasting with regular carbohydrate-rich feeds and age-appropriate maximum fasting intervals",
-      "Written emergency regimen using oral glucose polymer during intercurrent illness, escalating to intravenous glucose if oral intake fails",
-      "During decompensation, intravenous dextrose to reverse hypoketotic hypoglycaemia and suppress lipolysis, with correction of hyperammonaemia",
-      "Low threshold for prompt hospital attendance during any febrile or vomiting illness",
-      "Avoid medium-chain triglyceride supplements and fat-loading, with metabolic dietitian involvement",
-      "Consider L-carnitine supplementation where secondary carnitine depletion is documented",
-      "Genetic counselling for this autosomal recessive disorder, with sibling testing and newborn-screening cascade",
-      "Provide emergency alert documentation identifying the metabolic diagnosis"
+    [
+     "Clinical Pitfall",
+     "Attributing hypoglycaemia to a simple viral illness and missing the underlying oxidation defect",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for medium-chain acyl-coa dehydrogenase deficiency."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "mcad-deficiency-real-image",
+   "title": "Medium-chain acyl-CoA dehydrogenase deficiency: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

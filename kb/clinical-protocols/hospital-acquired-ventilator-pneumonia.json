@@ -5,7 +5,16 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Ward, ICU",
- "aliases": ["HAP", "VAP", "nosocomial pneumonia", "hospital-acquired pneumonia", "ventilator-associated pneumonia", "MDR pneumonia", "late-onset VAP", "carbapenem-resistant pneumonia"],
+ "aliases": [
+  "HAP",
+  "VAP",
+  "nosocomial pneumonia",
+  "hospital-acquired pneumonia",
+  "ventilator-associated pneumonia",
+  "MDR pneumonia",
+  "late-onset VAP",
+  "carbapenem-resistant pneumonia"
+ ],
  "summary": "Send blood and lower respiratory cultures, then start empirical anti-pseudomonal therapy chosen by MDR risk and the local antibiogram, adding a second Gram-negative agent and MRSA cover only when risk or unit resistance justifies it. De-escalate on culture results and treat for 7 days if responding.",
  "sections": [
   {
@@ -84,20 +93,168 @@
   }
  ],
  "drugs": [
-  { "name": "Piperacillin-tazobactam", "dose": "4.5 g IV every 6 hours", "notes": "Anti-pseudomonal beta-lactam. Renal adjustment." },
-  { "name": "Cefepime", "dose": "2 g IV every 8 hours", "notes": "Renal adjustment; neurotoxicity in renal failure." },
-  { "name": "Cefoperazone-sulbactam", "dose": "3 g IV every 12 hours", "notes": "ICMR option for early-onset or low-exposure HAP/VAP." },
-  { "name": "Meropenem", "dose": "1 g IV every 8 hours", "notes": "Imipenem-cilastatin 500 mg IV every 6 hours is an alternative. Renal adjustment." },
-  { "name": "Amikacin", "dose": "15 to 20 mg/kg IV once daily", "notes": "Second Gram-negative agent only, never alone. Monitor levels and creatinine." },
-  { "name": "Levofloxacin", "dose": "750 mg IV or orally once daily", "notes": "Second anti-pseudomonal agent or step-down if susceptible; exclude TB. Renal adjustment." },
-  { "name": "Vancomycin", "dose": "15 mg/kg IV every 8 to 12 hours, adjusted to levels", "notes": "MRSA cover. IDSA/ATS 2016 trough target 15 to 20 mg/L." },
-  { "name": "Linezolid", "dose": "600 mg IV or orally every 12 hours", "notes": "MRSA cover; monitor platelets. Teicoplanin 400 mg IV every 12 hours for 3 doses then 10 mg/kg once daily is an alternative (ICMR)." },
-  { "name": "Colistin (colistimethate)", "dose": "9 million units IV loading dose, then 4.5 million units IV every 12 hours", "notes": "Carbapenem-resistant isolates only (ICMR). Adjust maintenance for renal function; nephrotoxic and neurotoxic." },
-  { "name": "Polymyxin B", "dose": "15,000 to 25,000 units/kg/day IV in 2 divided doses", "notes": "Carbapenem-resistant isolates only (ICMR). Nephrotoxic and neurotoxic; monitor creatinine." }
+  {
+   "name": "Piperacillin-tazobactam",
+   "dose": "4.5 g IV every 6 hours",
+   "notes": "Anti-pseudomonal beta-lactam. Renal adjustment."
+  },
+  {
+   "name": "Cefepime",
+   "dose": "2 g IV every 8 hours",
+   "notes": "Renal adjustment; neurotoxicity in renal failure."
+  },
+  {
+   "name": "Cefoperazone-sulbactam",
+   "dose": "3 g IV every 12 hours",
+   "notes": "ICMR option for early-onset or low-exposure HAP/VAP."
+  },
+  {
+   "name": "Meropenem",
+   "dose": "1 g IV every 8 hours",
+   "notes": "Imipenem-cilastatin 500 mg IV every 6 hours is an alternative. Renal adjustment."
+  },
+  {
+   "name": "Amikacin",
+   "dose": "15 to 20 mg/kg IV once daily",
+   "notes": "Second Gram-negative agent only, never alone. Monitor levels and creatinine."
+  },
+  {
+   "name": "Levofloxacin",
+   "dose": "750 mg IV or orally once daily",
+   "notes": "Second anti-pseudomonal agent or step-down if susceptible; exclude TB. Renal adjustment."
+  },
+  {
+   "name": "Vancomycin",
+   "dose": "15 mg/kg IV every 8 to 12 hours, adjusted to levels",
+   "notes": "MRSA cover. IDSA/ATS 2016 trough target 15 to 20 mg/L."
+  },
+  {
+   "name": "Linezolid",
+   "dose": "600 mg IV or orally every 12 hours",
+   "notes": "MRSA cover; monitor platelets. Teicoplanin 400 mg IV every 12 hours for 3 doses then 10 mg/kg once daily is an alternative (ICMR)."
+  },
+  {
+   "name": "Colistin (colistimethate)",
+   "dose": "9 million units IV loading dose, then 4.5 million units IV every 12 hours",
+   "notes": "Carbapenem-resistant isolates only (ICMR). Adjust maintenance for renal function; nephrotoxic and neurotoxic."
+  },
+  {
+   "name": "Polymyxin B",
+   "dose": "15,000 to 25,000 units/kg/day IV in 2 divided doses",
+   "notes": "Carbapenem-resistant isolates only (ICMR). Nephrotoxic and neurotoxic; monitor creatinine."
+  }
  ],
  "sources": [
-  { "org": "IDSA / ATS", "title": "Management of adults with hospital-acquired and ventilator-associated pneumonia: 2016 clinical practice guidelines", "year": 2016, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4981759/" },
-  { "org": "ICMR", "title": "Treatment Guidelines for Antimicrobial Use in Common Syndromes, 2nd edition (HAP/VAP)", "year": 2019, "url": "https://iamrsn.icmr.org.in/index.php/resources/guidelines" }
+  {
+   "org": "IDSA / ATS",
+   "title": "Management of adults with hospital-acquired and ventilator-associated pneumonia: 2016 clinical practice guidelines",
+   "year": 2016,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4981759/"
+  },
+  {
+   "org": "ICMR",
+   "title": "Treatment Guidelines for Antimicrobial Use in Common Syndromes, 2nd edition (HAP/VAP)",
+   "year": 2019,
+   "url": "https://iamrsn.icmr.org.in/index.php/resources/guidelines"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "hospital-acquired-ventilator-pneumonia-pathway",
+   "title": "Hospital-acquired and ventilator-associated pneumonia (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "HAP: pneumonia developing 48 hours or more after admission and not incubating at admission. VAP: pneumonia developing more than 48 hours after starting mechanical ventilation.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Suspect when there is a new or progressive infiltrate plus at least 2 of: fever above 38 C (100.4 F), WBC above 12,000 or below 4000/microL, new purulent or changed sputum, worsening gas exchange (rising FiO2), new or worse cough or",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Blood cultures x 2 and a lower respiratory sample before antibiotics, without delaying treatment in unstable patients."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Early onset or minimal prior antibiotics: cefoperazone-sulbactam or piperacillin-tazobactam, alone or with amikacin."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Review at 48 to 72 hours: temperature, WBC, oxygenation and FiO2, secretions, haemodynamics, culture results."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for hospital-acquired and ventilator-associated pneumonia (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "hospital-acquired-ventilator-pneumonia-summary-matrix",
+   "title": "Hospital-acquired and ventilator-associated pneumonia (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "HAP: pneumonia developing 48 hours or more after admission and not incubating at admission. VAP: pneumonia developing more than 48 hours",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Early onset or minimal prior antibiotics: cefoperazone-sulbactam or piperacillin-tazobactam, alone or with amikacin.",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Blood cultures x 2 and a lower respiratory sample before antibiotics, without delaying treatment in unstable patients.",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Piperacillin-tazobactam: 4.5 g IV every 6 hours",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Treating a positive endotracheal aspirate without clinical or radiological pneumonia (colonisation).",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for hospital-acquired and ventilator-associated pneumonia (adult)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "hospital-acquired-ventilator-pneumonia-real-image",
+   "title": "Hospital-acquired and ventilator-associated pneumonia (adult): Diagnostic Chest Radiograph",
+   "type": "xray",
+   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
+   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
+   "annotations": [
+    {
+     "label": "Parenchyma & Airspaces",
+     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
+    },
+    {
+     "label": "Bronchovascular Tree",
+     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
+    },
+    {
+     "label": "Pleural Margins",
+     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+    }
+   ]
+  }
+ ]
 }

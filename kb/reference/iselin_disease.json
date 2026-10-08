@@ -1,79 +1,174 @@
 {
-  "id": "iselin_disease",
-  "name": "Iselin disease",
-  "aliases": [
-    "Iselin's disease",
-    "fifth metatarsal base apophysitis",
-    "traction apophysitis of the fifth metatarsal",
-    "osteochondrosis of the fifth metatarsal base"
+ "id": "iselin_disease",
+ "name": "Iselin disease",
+ "aliases": [
+  "Iselin's disease",
+  "fifth metatarsal base apophysitis",
+  "traction apophysitis of the fifth metatarsal",
+  "osteochondrosis of the fifth metatarsal base"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal / Orthopaedics",
+ "specialty": "Orthopaedics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Tachdjian's Pediatric Orthopaedics / Campbell's Operative Orthopaedics",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A traction apophysitis at the base of the fifth metatarsal rather than a true osteonecrosis",
+   "Affected site is the apophysis at the base of the fifth metatarsal, at the insertion of the peroneus brevis tendon",
+   "Typically affects active children, roughly eight to thirteen years of age around the time the apophysis appears",
+   "Presents with pain, tenderness and sometimes swelling over the lateral border of the midfoot, aggravated by running and cutting or inversion activities",
+   "The radiographic hallmark is an enlarged or fragmented apophysis at the fifth metatarsal base oriented obliquely, roughly parallel to the shaft",
+   "A key distinction is that the normal apophysis and its fragmentation lie parallel to the metatarsal, whereas an avulsion fracture line runs transversely across the bone",
+   "Pain is reproduced by resisted eversion or passive inversion that tensions the peroneus brevis",
+   "Management is conservative with activity modification, offloading and short-term immobilisation for symptom control as needed"
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal / Orthopaedics",
-  "specialty": "Orthopaedics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Tachdjian's Pediatric Orthopaedics / Campbell's Operative Orthopaedics",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A traction apophysitis at the base of the fifth metatarsal rather than a true osteonecrosis",
-      "Affected site is the apophysis at the base of the fifth metatarsal, at the insertion of the peroneus brevis tendon",
-      "Typically affects active children, roughly eight to thirteen years of age around the time the apophysis appears",
-      "Presents with pain, tenderness and sometimes swelling over the lateral border of the midfoot, aggravated by running and cutting or inversion activities",
-      "The radiographic hallmark is an enlarged or fragmented apophysis at the fifth metatarsal base oriented obliquely, roughly parallel to the shaft",
-      "A key distinction is that the normal apophysis and its fragmentation lie parallel to the metatarsal, whereas an avulsion fracture line runs transversely across the bone",
-      "Pain is reproduced by resisted eversion or passive inversion that tensions the peroneus brevis",
-      "Management is conservative with activity modification, offloading and short-term immobilisation for symptom control as needed"
+  "pathophysiology": "Iselin disease is a traction apophysitis of the secondary ossification centre at the base of the fifth metatarsal, the site of insertion of the peroneus brevis tendon. During the period when this apophysis is developing, repetitive traction from the peroneus brevis, particularly during running, jumping and side-to-side cutting movements, stresses the cartilaginous bone-tendon junction. The repeated microtrauma causes inflammation, and the apophysis may appear enlarged or fragmented on imaging. Because the apophysis lies obliquely, roughly parallel to the long axis of the metatarsal, it can be mistaken for an avulsion fracture, which instead produces a transverse lucent line. The condition resolves once the apophysis fuses at skeletal maturity.",
+  "additionalDifferentials": [
+   "Avulsion fracture of the fifth metatarsal base",
+   "Jones fracture of the proximal fifth metatarsal",
+   "Peroneal tendinopathy or peroneus brevis insertional pathology",
+   "Lateral ankle sprain",
+   "Os vesalianum (accessory ossicle at the fifth metatarsal base)",
+   "Osteomyelitis of the fifth metatarsal"
+  ],
+  "additionalInvestigations": [
+   "Foot radiographs including an oblique view to assess the apophysis and exclude a fracture",
+   "Recognition of the obliquely oriented apophyseal line versus a transverse fracture line",
+   "Comparison views of the contralateral foot to gauge normal apophyseal appearance",
+   "Magnetic resonance imaging in atypical, unilateral or persistent cases",
+   "Clinical provocation with resisted eversion tensioning the peroneus brevis",
+   "Inflammatory markers if infection is suspected"
+  ],
+  "redFlags": [
+   "A transverse lucent line indicating an avulsion or Jones fracture rather than apophysitis",
+   "Inability to bear weight or acute severe pain after an inversion injury",
+   "Rest pain, night pain or systemic features suggesting infection or tumour",
+   "Persistent unilateral symptoms not settling with conservative treatment"
+  ],
+  "prognosis": "The prognosis is excellent; symptoms are self-limiting and resolve as the apophysis fuses at skeletal maturity, with activity modification and offloading controlling pain and no long-term sequelae expected.",
+  "pitfalls": [
+   "Mistaking the normal obliquely oriented apophysis for an avulsion fracture, or vice versa",
+   "Overlooking a Jones fracture, which requires different management and has a risk of nonunion",
+   "Failing to consider infection when there is swelling, warmth or systemic upset",
+   "Prolonged immobilisation when graded activity modification would suffice"
+  ],
+  "references": [
+   "Tachdjian's Pediatric Orthopaedics",
+   "Campbell's Operative Orthopaedics"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Relative rest and activity modification, reducing running, jumping and cutting movements until symptoms settle",
+   "Ice and simple analgesia or non-steroidal anti-inflammatory drugs for pain over the fifth metatarsal base",
+   "A short period of immobilisation in a stiff-soled shoe or walking boot for more severe or persistent pain",
+   "Peroneus brevis and calf stretching with a graded strengthening programme before return to sport",
+   "Reassurance that the condition is self-limiting and resolves once the apophysis fuses at skeletal maturity",
+   "Gradual, symptom-guided return to activity once local tenderness has resolved"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "iselin_disease-pathway",
+   "title": "Iselin disease: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A traction apophysitis at the base of the fifth metatarsal rather than a true osteonecrosis",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: A transverse lucent line indicating an avulsion or Jones fracture rather than apophysitis",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Foot radiographs including an oblique view to assess the apophysis and exclude a fracture, Recognition of the obliquely oriented apophyseal line versus a transverse fracture line, Comparison views of the contralateral foot"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Relative rest and activity modification, reducing running, jumping and cutting movements until symptoms settle"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking the normal obliquely oriented apophysis for an avulsion fracture, or vice versa"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of iselin disease."
+  }
+ ],
+ "tables": [
+  {
+   "id": "iselin_disease-matrix",
+   "title": "Iselin disease: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A traction apophysitis at the base of the fifth metatarsal rather than a true osteonecrosis",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Iselin disease is a traction apophysitis of the secondary ossification centre at the base of the fifth metatarsal, the site of insertion of the peroneus brevis tendon. During the period when this apophysis is developing, repetitive traction from the peroneus brevis, particularly during running, jumping and side-to-side cutting movements, stresses the cartilaginous bone-tendon junction. The repeated microtrauma causes inflammation, and the apophysis may appear enlarged or fragmented on imaging. Because the apophysis lies obliquely, roughly parallel to the long axis of the metatarsal, it can be mistaken for an avulsion fracture, which instead produces a transverse lucent line. The condition resolves once the apophysis fuses at skeletal maturity.",
-    "additionalDifferentials": [
-      "Avulsion fracture of the fifth metatarsal base",
-      "Jones fracture of the proximal fifth metatarsal",
-      "Peroneal tendinopathy or peroneus brevis insertional pathology",
-      "Lateral ankle sprain",
-      "Os vesalianum (accessory ossicle at the fifth metatarsal base)",
-      "Osteomyelitis of the fifth metatarsal"
+    [
+     "Key Investigations",
+     "Foot radiographs including an oblique view to assess the apophysis and exclude a fracture, Recognition of the obliquely oriented",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Foot radiographs including an oblique view to assess the apophysis and exclude a fracture",
-      "Recognition of the obliquely oriented apophyseal line versus a transverse fracture line",
-      "Comparison views of the contralateral foot to gauge normal apophyseal appearance",
-      "Magnetic resonance imaging in atypical, unilateral or persistent cases",
-      "Clinical provocation with resisted eversion tensioning the peroneus brevis",
-      "Inflammatory markers if infection is suspected"
+    [
+     "Primary Differentials",
+     "Avulsion fracture of the fifth metatarsal base, Jones fracture of the proximal fifth metatarsal, Peroneal tendinopathy or",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "A transverse lucent line indicating an avulsion or Jones fracture rather than apophysitis",
-      "Inability to bear weight or acute severe pain after an inversion injury",
-      "Rest pain, night pain or systemic features suggesting infection or tumour",
-      "Persistent unilateral symptoms not settling with conservative treatment"
+    [
+     "Management Strategy",
+     "Relative rest and activity modification, reducing running, jumping and cutting movements until symptoms settle",
+     "Core treatment modality"
     ],
-    "prognosis": "The prognosis is excellent; symptoms are self-limiting and resolve as the apophysis fuses at skeletal maturity, with activity modification and offloading controlling pain and no long-term sequelae expected.",
-    "pitfalls": [
-      "Mistaking the normal obliquely oriented apophysis for an avulsion fracture, or vice versa",
-      "Overlooking a Jones fracture, which requires different management and has a risk of nonunion",
-      "Failing to consider infection when there is swelling, warmth or systemic upset",
-      "Prolonged immobilisation when graded activity modification would suffice"
-    ],
-    "references": [
-      "Tachdjian's Pediatric Orthopaedics",
-      "Campbell's Operative Orthopaedics"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Relative rest and activity modification, reducing running, jumping and cutting movements until symptoms settle",
-      "Ice and simple analgesia or non-steroidal anti-inflammatory drugs for pain over the fifth metatarsal base",
-      "A short period of immobilisation in a stiff-soled shoe or walking boot for more severe or persistent pain",
-      "Peroneus brevis and calf stretching with a graded strengthening programme before return to sport",
-      "Reassurance that the condition is self-limiting and resolves once the apophysis fuses at skeletal maturity",
-      "Gradual, symptom-guided return to activity once local tenderness has resolved"
+    [
+     "Clinical Pitfall",
+     "Mistaking the normal obliquely oriented apophysis for an avulsion fracture, or vice versa",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for iselin disease."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "iselin-disease-real-image",
+   "title": "Iselin disease: Diagnostic Musculoskeletal Radiograph",
+   "type": "xray",
+   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
+   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
+   "annotations": [
+    {
+     "label": "Cortical Margins",
+     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
+    },
+    {
+     "label": "Trabecular Architecture",
+     "description": "Medullary bone density, lucencies, and subchondral mineralization."
+    },
+    {
+     "label": "Joint Articulation",
+     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+    }
+   ]
+  }
+ ]
 }

@@ -1,77 +1,172 @@
 {
-  "id": "anterior_uveitis",
-  "name": "Anterior uveitis",
-  "aliases": [
-    "iritis",
-    "iridocyclitis",
-    "acute anterior uveitis",
-    "AAU"
+ "id": "anterior_uveitis",
+ "name": "Anterior uveitis",
+ "aliases": [
+  "iritis",
+  "iridocyclitis",
+  "acute anterior uveitis",
+  "AAU"
+ ],
+ "class": "non_infective",
+ "system": "Eye / Ophthalmology",
+ "specialty": "Ophthalmology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Presents with a painful red eye, photophobia, tearing, and blurred vision, typically with circumcorneal (ciliary) injection rather than diffuse redness",
+   "The pupil is often small (miotic) and may be irregular if posterior synechiae have formed",
+   "Slit-lamp examination shows cells and flare in the anterior chamber; a hypopyon (layered pus) indicates severe inflammation",
+   "Keratic precipitates on the corneal endothelium help characterise the inflammation as granulomatous or non-granulomatous",
+   "Strongly associated with HLA-B27 and its related systemic conditions (ankylosing spondylitis, reactive arthritis, inflammatory bowel disease, psoriatic arthritis)",
+   "Management principles are topical corticosteroids to suppress inflammation and cycloplegic/mydriatic drops to relieve ciliary spasm and prevent or break synechiae",
+   "Recurrent, bilateral, or granulomatous uveitis warrants investigation for underlying systemic or infective causes"
   ],
-  "class": "non_infective",
-  "system": "Eye / Ophthalmology",
-  "specialty": "Ophthalmology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Presents with a painful red eye, photophobia, tearing, and blurred vision, typically with circumcorneal (ciliary) injection rather than diffuse redness",
-      "The pupil is often small (miotic) and may be irregular if posterior synechiae have formed",
-      "Slit-lamp examination shows cells and flare in the anterior chamber; a hypopyon (layered pus) indicates severe inflammation",
-      "Keratic precipitates on the corneal endothelium help characterise the inflammation as granulomatous or non-granulomatous",
-      "Strongly associated with HLA-B27 and its related systemic conditions (ankylosing spondylitis, reactive arthritis, inflammatory bowel disease, psoriatic arthritis)",
-      "Management principles are topical corticosteroids to suppress inflammation and cycloplegic/mydriatic drops to relieve ciliary spasm and prevent or break synechiae",
-      "Recurrent, bilateral, or granulomatous uveitis warrants investigation for underlying systemic or infective causes"
+  "pathophysiology": "Anterior uveitis is inflammation of the iris and ciliary body (anterior uveal tract). Breakdown of the blood-aqueous barrier allows inflammatory cells and protein to leak into the anterior chamber, seen clinically as cells and flare. The process may be immune-mediated (often HLA-B27 associated or linked to systemic autoimmune disease), infective, or triggered by trauma. Inflammatory adhesions can form between the iris and lens (posterior synechiae) or the iris and trabecular meshwork (peripheral anterior synechiae), and secondary complications include raised intraocular pressure, cataract, and macular oedema.",
+  "additionalDifferentials": [
+   "Acute angle-closure glaucoma",
+   "Bacterial or viral conjunctivitis",
+   "Bacterial keratitis or corneal ulcer",
+   "Scleritis and episcleritis",
+   "Endophthalmitis",
+   "Acute red eye from subconjunctival haemorrhage"
+  ],
+  "additionalInvestigations": [
+   "Slit-lamp examination to grade anterior chamber cells and flare and identify keratic precipitates",
+   "Intraocular pressure measurement to detect secondary glaucoma",
+   "Dilated fundus examination to exclude intermediate/posterior involvement and macular oedema",
+   "HLA-B27 typing and targeted systemic workup in recurrent or bilateral disease",
+   "Investigations for infective or granulomatous causes (e.g. syphilis, tuberculosis, sarcoidosis) when indicated"
+  ],
+  "redFlags": [
+   "Hypopyon or severe inflammation suggesting aggressive or infective uveitis, or endophthalmitis",
+   "Marked pain with a red eye and raised intraocular pressure requiring differentiation from angle closure",
+   "Bilateral, recurrent, or granulomatous disease pointing to serious systemic illness",
+   "Progressive visual loss from macular oedema or dense synechiae"
+  ],
+  "prognosis": "Most acute, non-granulomatous, HLA-B27-associated episodes respond well to prompt topical treatment, but recurrent or chronic uveitis can lead to cataract, glaucoma, and macular oedema with lasting visual loss.",
+  "pitfalls": [
+   "Prescribing topical steroids without excluding herpetic or other infective keratitis, which steroids can worsen",
+   "Failing to use a cycloplegic, allowing painful ciliary spasm and permanent posterior synechiae",
+   "Missing raised intraocular pressure or steroid-induced pressure rise during treatment",
+   "Not investigating recurrent or bilateral cases for an underlying systemic cause"
+  ],
+  "references": [
+   "Parsons' Diseases of the Eye",
+   "Kanski's Clinical Ophthalmology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Topical corticosteroids to suppress anterior-chamber inflammation, tapered according to response",
+   "Cycloplegic/mydriatic drops to relieve ciliary spasm and pain and to prevent or break posterior synechiae",
+   "Monitor intraocular pressure and treat secondary ocular hypertension or glaucoma, including steroid-induced pressure rise",
+   "Identify and treat any underlying systemic association (HLA-B27-related spondyloarthropathy, inflammatory bowel disease) or infective cause",
+   "Escalate refractory, chronic or bilateral disease to systemic corticosteroids and steroid-sparing immunosuppression or biologic therapy under specialist care",
+   "Surveillance for sight-threatening complications including cataract and macular oedema, with prompt ophthalmology referral for recurrent disease"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "anterior_uveitis-pathway",
+   "title": "Anterior uveitis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Presents with a painful red eye, photophobia, tearing, and blurred vision, typically with circumcorneal (ciliary) injection rather than diffuse redness",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Hypopyon or severe inflammation suggesting aggressive or infective uveitis, or endophthalmitis",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Slit-lamp examination to grade anterior chamber cells and flare and identify keratic precipitates, Intraocular pressure measurement to detect secondary glaucoma, Dilated fundus examination to exclude intermediate/posterior"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Topical corticosteroids to suppress anterior-chamber inflammation, tapered according to response"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Prescribing topical steroids without excluding herpetic or other infective keratitis, which steroids can worsen"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of anterior uveitis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "anterior_uveitis-matrix",
+   "title": "Anterior uveitis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Presents with a painful red eye, photophobia, tearing, and blurred vision, typically with circumcorneal (ciliary) injection",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Anterior uveitis is inflammation of the iris and ciliary body (anterior uveal tract). Breakdown of the blood-aqueous barrier allows inflammatory cells and protein to leak into the anterior chamber, seen clinically as cells and flare. The process may be immune-mediated (often HLA-B27 associated or linked to systemic autoimmune disease), infective, or triggered by trauma. Inflammatory adhesions can form between the iris and lens (posterior synechiae) or the iris and trabecular meshwork (peripheral anterior synechiae), and secondary complications include raised intraocular pressure, cataract, and macular oedema.",
-    "additionalDifferentials": [
-      "Acute angle-closure glaucoma",
-      "Bacterial or viral conjunctivitis",
-      "Bacterial keratitis or corneal ulcer",
-      "Scleritis and episcleritis",
-      "Endophthalmitis",
-      "Acute red eye from subconjunctival haemorrhage"
+    [
+     "Key Investigations",
+     "Slit-lamp examination to grade anterior chamber cells and flare and identify keratic precipitates, Intraocular pressure",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Slit-lamp examination to grade anterior chamber cells and flare and identify keratic precipitates",
-      "Intraocular pressure measurement to detect secondary glaucoma",
-      "Dilated fundus examination to exclude intermediate/posterior involvement and macular oedema",
-      "HLA-B27 typing and targeted systemic workup in recurrent or bilateral disease",
-      "Investigations for infective or granulomatous causes (e.g. syphilis, tuberculosis, sarcoidosis) when indicated"
+    [
+     "Primary Differentials",
+     "Acute angle-closure glaucoma, Bacterial or viral conjunctivitis, Bacterial keratitis or corneal ulcer",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Hypopyon or severe inflammation suggesting aggressive or infective uveitis, or endophthalmitis",
-      "Marked pain with a red eye and raised intraocular pressure requiring differentiation from angle closure",
-      "Bilateral, recurrent, or granulomatous disease pointing to serious systemic illness",
-      "Progressive visual loss from macular oedema or dense synechiae"
+    [
+     "Management Strategy",
+     "Topical corticosteroids to suppress anterior-chamber inflammation, tapered according to response",
+     "Core treatment modality"
     ],
-    "prognosis": "Most acute, non-granulomatous, HLA-B27-associated episodes respond well to prompt topical treatment, but recurrent or chronic uveitis can lead to cataract, glaucoma, and macular oedema with lasting visual loss.",
-    "pitfalls": [
-      "Prescribing topical steroids without excluding herpetic or other infective keratitis, which steroids can worsen",
-      "Failing to use a cycloplegic, allowing painful ciliary spasm and permanent posterior synechiae",
-      "Missing raised intraocular pressure or steroid-induced pressure rise during treatment",
-      "Not investigating recurrent or bilateral cases for an underlying systemic cause"
-    ],
-    "references": [
-      "Parsons' Diseases of the Eye",
-      "Kanski's Clinical Ophthalmology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Topical corticosteroids to suppress anterior-chamber inflammation, tapered according to response",
-      "Cycloplegic/mydriatic drops to relieve ciliary spasm and pain and to prevent or break posterior synechiae",
-      "Monitor intraocular pressure and treat secondary ocular hypertension or glaucoma, including steroid-induced pressure rise",
-      "Identify and treat any underlying systemic association (HLA-B27-related spondyloarthropathy, inflammatory bowel disease) or infective cause",
-      "Escalate refractory, chronic or bilateral disease to systemic corticosteroids and steroid-sparing immunosuppression or biologic therapy under specialist care",
-      "Surveillance for sight-threatening complications including cataract and macular oedema, with prompt ophthalmology referral for recurrent disease"
+    [
+     "Clinical Pitfall",
+     "Prescribing topical steroids without excluding herpetic or other infective keratitis, which steroids can worsen",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for anterior uveitis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "anterior-uveitis-real-image",
+   "title": "Anterior uveitis: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

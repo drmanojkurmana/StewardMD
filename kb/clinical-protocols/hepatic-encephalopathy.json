@@ -5,7 +5,18 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, ward, HDU, ICU, clinic",
- "aliases": ["HE", "OHE", "overt hepatic encephalopathy", "portosystemic encephalopathy", "hepatic coma", "West Haven", "lactulose", "rifaximin", "covert HE", "minimal HE"],
+ "aliases": [
+  "HE",
+  "OHE",
+  "overt hepatic encephalopathy",
+  "portosystemic encephalopathy",
+  "hepatic coma",
+  "West Haven",
+  "lactulose",
+  "rifaximin",
+  "covert HE",
+  "minimal HE"
+ ],
  "summary": "Grade with West Haven, protect the airway in grade 3 to 4, search for and treat precipitants (infection, bleeding, constipation, electrolytes, sedatives), give lactulose to 2 to 3 soft stools a day with early rifaximin, and continue secondary prophylaxis after the first episode.",
  "sections": [
   {
@@ -84,15 +95,143 @@
   }
  ],
  "drugs": [
-  { "name": "Lactulose (oral or NG)", "dose": "10 to 20 g (15 to 30 mL) every 2 hours until 2 soft stools, then 2 to 4 times daily to 2 to 3 soft stools a day", "notes": "Same target for long-term secondary prophylaxis. Titrate with stool frequency and Bristol stool scale." },
-  { "name": "Lactulose enema", "dose": "300 mL lactulose solution in 700 mL water or 0.9% saline, retained 30 to 60 minutes, every 4 to 6 hours", "notes": "When oral or NG route is unsafe; needs preserved anal tone." },
-  { "name": "Rifaximin", "dose": "550 mg orally twice daily", "notes": "Add to lactulose in acute overt HE and for recurrence despite lactulose; start 14 days before elective TIPS." },
-  { "name": "Polyethylene glycol 3350-electrolyte solution", "dose": "4 L orally or via nasogastric tube", "notes": "Alternative cathartic to lactulose (ACG 2026 conditional recommendation)." },
-  { "name": "Thiamine", "dose": "100 mg IV before glucose-containing fluids", "notes": "Alcohol use or malnutrition. Use higher treatment doses if Wernicke encephalopathy is suspected." }
+  {
+   "name": "Lactulose (oral or NG)",
+   "dose": "10 to 20 g (15 to 30 mL) every 2 hours until 2 soft stools, then 2 to 4 times daily to 2 to 3 soft stools a day",
+   "notes": "Same target for long-term secondary prophylaxis. Titrate with stool frequency and Bristol stool scale."
+  },
+  {
+   "name": "Lactulose enema",
+   "dose": "300 mL lactulose solution in 700 mL water or 0.9% saline, retained 30 to 60 minutes, every 4 to 6 hours",
+   "notes": "When oral or NG route is unsafe; needs preserved anal tone."
+  },
+  {
+   "name": "Rifaximin",
+   "dose": "550 mg orally twice daily",
+   "notes": "Add to lactulose in acute overt HE and for recurrence despite lactulose; start 14 days before elective TIPS."
+  },
+  {
+   "name": "Polyethylene glycol 3350-electrolyte solution",
+   "dose": "4 L orally or via nasogastric tube",
+   "notes": "Alternative cathartic to lactulose (ACG 2026 conditional recommendation)."
+  },
+  {
+   "name": "Thiamine",
+   "dose": "100 mg IV before glucose-containing fluids",
+   "notes": "Alcohol use or malnutrition. Use higher treatment doses if Wernicke encephalopathy is suspected."
+  }
  ],
  "sources": [
-  { "org": "American College of Gastroenterology", "title": "ACG Clinical Guideline: Hepatic Encephalopathy (Bajaj et al., Am J Gastroenterol)", "year": 2026, "url": "https://www.ovid.com/jnls/ajg/fulltext/10.14309/ajg.0000000000003899~acg-clinical-guideline-hepatic-encephalopathy" },
-  { "org": "Journal of Hospital Medicine", "title": "Clinical guideline: ACG clinical guideline on hepatic encephalopathy (summary for hospitalists)", "year": 2026, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13534892/" }
+  {
+   "org": "American College of Gastroenterology",
+   "title": "ACG Clinical Guideline: Hepatic Encephalopathy (Bajaj et al., Am J Gastroenterol)",
+   "year": 2026,
+   "url": "https://www.ovid.com/jnls/ajg/fulltext/10.14309/ajg.0000000000003899~acg-clinical-guideline-hepatic-encephalopathy"
+  },
+  {
+   "org": "Journal of Hospital Medicine",
+   "title": "Clinical guideline: ACG clinical guideline on hepatic encephalopathy (summary for hospitalists)",
+   "year": 2026,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13534892/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "hepatic-encephalopathy-pathway",
+   "title": "Hepatic encephalopathy in cirrhosis Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Suspect in any patient with cirrhosis, TIPS or a portosystemic shunt who has confusion, disorientation, sleep reversal, personality change, somnolence or coma. HE is a diagnosis of exclusion.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Grade 3 to 4 or falling GCS: admit to HDU or ICU; intubate if the airway cannot be protected (aspiration risk).",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Infection: blood and urine cultures, diagnostic paracentesis if ascites is present (SBP), chest X-ray."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Treat each precipitant: antibiotics for proven or strongly suspected infection (no empirical broad-spectrum antibiotics without evidence of infection), correct electrolytes and volume, stop sedatives, hold diuretics if volume depleted."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "West Haven grade or GCS at least daily (more often in grade 3 to 4), stool frequency and consistency, fluid balance."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for hepatic encephalopathy in cirrhosis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "hepatic-encephalopathy-summary-matrix",
+   "title": "Hepatic encephalopathy in cirrhosis Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Suspect in any patient with cirrhosis, TIPS or a portosystemic shunt who has confusion, disorientation, sleep reversal, personality change,",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Grade 3 to 4 or falling GCS: admit to HDU or ICU; intubate if the airway cannot be protected (aspiration risk).",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Infection: blood and urine cultures, diagnostic paracentesis if ascites is present (SBP), chest X-ray.",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Lactulose (oral or NG): 10 to 20 g (15 to 30 mL) every 2 hours until 2 soft stools, then 2 to 4 times daily to 2 to 3 soft stools a day",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Relying on blood ammonia to diagnose or titrate treatment.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for hepatic encephalopathy in cirrhosis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "hepatic-encephalopathy-real-image",
+   "title": "Hepatic encephalopathy in cirrhosis: Diagnostic Head Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
+   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
+   "annotations": [
+    {
+     "label": "Cerebral Parenchyma",
+     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+    },
+    {
+     "label": "Extra-Axial Spaces",
+     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+    }
+   ]
+  }
+ ]
 }

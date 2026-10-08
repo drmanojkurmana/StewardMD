@@ -1,79 +1,174 @@
 {
-  "id": "renal_papillary_necrosis",
-  "name": "Renal papillary necrosis",
-  "aliases": [
-    "papillary necrosis",
-    "necrotising papillitis",
-    "renal medullary necrosis",
-    "sloughed papilla"
+ "id": "renal_papillary_necrosis",
+ "name": "Renal papillary necrosis",
+ "aliases": [
+  "papillary necrosis",
+  "necrotising papillitis",
+  "renal medullary necrosis",
+  "sloughed papilla"
+ ],
+ "class": "non_infective",
+ "system": "Renal / Nephrology",
+ "specialty": "Nephrology / Urology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Comprehensive Clinical Nephrology / Campbell-Walsh-Wein Urology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Ischaemic necrosis and sloughing of the renal papillae, fragments of which can pass into the urine and cause colic or obstruction",
+   "The classic causes are captured by the mnemonic POSTCARDS: Pyelonephritis, Obstruction, Sickle cell disease, Tuberculosis, Cirrhosis or chronic alcoholism, Analgesics, Renal vein thrombosis, Diabetes mellitus and Systemic vasculitis",
+   "Diabetes mellitus and chronic analgesic overuse are among the most frequent contributors, and several insults often coexist in one patient",
+   "Presentations include haematuria, loin pain, passage of tissue fragments, recurrent infection or features of obstruction",
+   "The renal medulla is especially vulnerable because it operates on a marginal blood and oxygen supply",
+   "CT urography, or the older intravenous urogram, shows a ring shadow or clubbed, irregular calyces where a papilla has sloughed",
+   "Management is largely supportive: treat infection, relieve obstruction caused by a sloughed papilla, and control the underlying disease",
+   "Withdrawing offending analgesics and optimising glycaemic control help to prevent progression"
   ],
-  "class": "non_infective",
-  "system": "Renal / Nephrology",
-  "specialty": "Nephrology / Urology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Comprehensive Clinical Nephrology / Campbell-Walsh-Wein Urology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Ischaemic necrosis and sloughing of the renal papillae, fragments of which can pass into the urine and cause colic or obstruction",
-      "The classic causes are captured by the mnemonic POSTCARDS: Pyelonephritis, Obstruction, Sickle cell disease, Tuberculosis, Cirrhosis or chronic alcoholism, Analgesics, Renal vein thrombosis, Diabetes mellitus and Systemic vasculitis",
-      "Diabetes mellitus and chronic analgesic overuse are among the most frequent contributors, and several insults often coexist in one patient",
-      "Presentations include haematuria, loin pain, passage of tissue fragments, recurrent infection or features of obstruction",
-      "The renal medulla is especially vulnerable because it operates on a marginal blood and oxygen supply",
-      "CT urography, or the older intravenous urogram, shows a ring shadow or clubbed, irregular calyces where a papilla has sloughed",
-      "Management is largely supportive: treat infection, relieve obstruction caused by a sloughed papilla, and control the underlying disease",
-      "Withdrawing offending analgesics and optimising glycaemic control help to prevent progression"
+  "pathophysiology": "The renal papilla lies at the tip of the medulla and is perfused by the vasa recta in a region of relatively low oxygen tension, making it highly susceptible to ischaemia. Conditions that reduce medullary blood flow or heighten its metabolic vulnerability, such as diabetic microvascular disease, analgesic-induced vascular injury, sickling of red cells within the hypertonic medulla, infection with oedema and raised intrarenal pressure, and obstruction, cause coagulative necrosis of one or more papillae. The necrotic tissue may calcify in situ or detach and pass down the ureter, where it can obstruct and mimic a calculus.",
+  "additionalDifferentials": [
+   "Ureteric calculus causing obstruction",
+   "Urothelial tumour or blood clot presenting as a filling defect",
+   "Acute pyelonephritis without necrosis",
+   "Renal tuberculosis",
+   "Medullary sponge kidney",
+   "Reflux nephropathy with calyceal clubbing"
+  ],
+  "additionalInvestigations": [
+   "CT urography or intravenous urogram showing ring shadows and calyceal deformity",
+   "Urine microscopy and cytology, which may reveal sloughed papillary tissue",
+   "Urine culture to identify infection",
+   "Assessment for underlying disease including glucose or HbA1c, sickle screen and analgesic history",
+   "Renal function and electrolytes",
+   "Non-contrast CT to distinguish a sloughed papilla from a calculus"
+  ],
+  "redFlags": [
+   "Sepsis from infection with obstruction by necrotic tissue",
+   "Acute kidney injury, especially with bilateral papillary involvement",
+   "Massive haematuria",
+   "Rapid deterioration in a solitary functioning kidney"
+  ],
+  "prognosis": "Outcome depends on the number of papillae affected and control of the underlying causes; an isolated event with a single reversible cause may have little lasting impact, whereas recurrent necrosis, as in combined diabetes and analgesic use, can cause progressive chronic kidney disease.",
+  "pitfalls": [
+   "Mistaking a sloughed papilla for a calculus on imaging",
+   "Failing to look for multiple coexisting causes, such as diabetes together with analgesics",
+   "Overlooking analgesic overuse in the drug history",
+   "Missing an infected obstructed system caused by necrotic tissue"
+  ],
+  "references": [
+   "Comprehensive Clinical Nephrology (Feehally et al.)",
+   "Campbell-Walsh-Wein Urology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Remove the precipitating insult: stop chronic analgesic and NSAID overuse, optimise glycaemic control in diabetes, and manage sickle cell disease to reduce medullary sickling",
+   "Treat superimposed infection promptly with appropriate antibiotics, including antituberculous therapy where tuberculosis is implicated",
+   "Provide adequate hydration and analgesia for loin pain and colic from passage of sloughed papillary fragments",
+   "Relieve acute ureteric obstruction from a sloughed papilla with ureteric stenting or percutaneous nephrostomy, and treat any obstructing urosepsis urgently",
+   "Monitor renal function and urine for progression, recurrent infection and further papillary sloughing",
+   "Refer to urology for obstruction or diagnostic uncertainty and to nephrology to preserve remaining renal function"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "renal_papillary_necrosis-pathway",
+   "title": "Renal papillary necrosis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Ischaemic necrosis and sloughing of the renal papillae, fragments of which can pass into the urine and cause colic or obstruction",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Sepsis from infection with obstruction by necrotic tissue",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: CT urography or intravenous urogram showing ring shadows and calyceal deformity, Urine microscopy and cytology, which may reveal sloughed papillary tissue, Urine culture to identify infection"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Remove the precipitating insult: stop chronic analgesic and NSAID overuse, optimise glycaemic control in diabetes, and manage sickle cell disease to reduce medullary sickling"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking a sloughed papilla for a calculus on imaging"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of renal papillary necrosis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "renal_papillary_necrosis-matrix",
+   "title": "Renal papillary necrosis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Ischaemic necrosis and sloughing of the renal papillae, fragments of which can pass into the urine and cause colic or obstruction",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "The renal papilla lies at the tip of the medulla and is perfused by the vasa recta in a region of relatively low oxygen tension, making it highly susceptible to ischaemia. Conditions that reduce medullary blood flow or heighten its metabolic vulnerability, such as diabetic microvascular disease, analgesic-induced vascular injury, sickling of red cells within the hypertonic medulla, infection with oedema and raised intrarenal pressure, and obstruction, cause coagulative necrosis of one or more papillae. The necrotic tissue may calcify in situ or detach and pass down the ureter, where it can obstruct and mimic a calculus.",
-    "additionalDifferentials": [
-      "Ureteric calculus causing obstruction",
-      "Urothelial tumour or blood clot presenting as a filling defect",
-      "Acute pyelonephritis without necrosis",
-      "Renal tuberculosis",
-      "Medullary sponge kidney",
-      "Reflux nephropathy with calyceal clubbing"
+    [
+     "Key Investigations",
+     "CT urography or intravenous urogram showing ring shadows and calyceal deformity, Urine microscopy and cytology, which may reveal",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "CT urography or intravenous urogram showing ring shadows and calyceal deformity",
-      "Urine microscopy and cytology, which may reveal sloughed papillary tissue",
-      "Urine culture to identify infection",
-      "Assessment for underlying disease including glucose or HbA1c, sickle screen and analgesic history",
-      "Renal function and electrolytes",
-      "Non-contrast CT to distinguish a sloughed papilla from a calculus"
+    [
+     "Primary Differentials",
+     "Ureteric calculus causing obstruction, Urothelial tumour or blood clot presenting as a filling defect, Acute pyelonephritis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Sepsis from infection with obstruction by necrotic tissue",
-      "Acute kidney injury, especially with bilateral papillary involvement",
-      "Massive haematuria",
-      "Rapid deterioration in a solitary functioning kidney"
+    [
+     "Management Strategy",
+     "Remove the precipitating insult: stop chronic analgesic and NSAID overuse, optimise glycaemic control in diabetes, and manage",
+     "Core treatment modality"
     ],
-    "prognosis": "Outcome depends on the number of papillae affected and control of the underlying causes; an isolated event with a single reversible cause may have little lasting impact, whereas recurrent necrosis, as in combined diabetes and analgesic use, can cause progressive chronic kidney disease.",
-    "pitfalls": [
-      "Mistaking a sloughed papilla for a calculus on imaging",
-      "Failing to look for multiple coexisting causes, such as diabetes together with analgesics",
-      "Overlooking analgesic overuse in the drug history",
-      "Missing an infected obstructed system caused by necrotic tissue"
-    ],
-    "references": [
-      "Comprehensive Clinical Nephrology (Feehally et al.)",
-      "Campbell-Walsh-Wein Urology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Remove the precipitating insult: stop chronic analgesic and NSAID overuse, optimise glycaemic control in diabetes, and manage sickle cell disease to reduce medullary sickling",
-      "Treat superimposed infection promptly with appropriate antibiotics, including antituberculous therapy where tuberculosis is implicated",
-      "Provide adequate hydration and analgesia for loin pain and colic from passage of sloughed papillary fragments",
-      "Relieve acute ureteric obstruction from a sloughed papilla with ureteric stenting or percutaneous nephrostomy, and treat any obstructing urosepsis urgently",
-      "Monitor renal function and urine for progression, recurrent infection and further papillary sloughing",
-      "Refer to urology for obstruction or diagnostic uncertainty and to nephrology to preserve remaining renal function"
+    [
+     "Clinical Pitfall",
+     "Mistaking a sloughed papilla for a calculus on imaging",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for renal papillary necrosis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "renal-papillary-necrosis-real-image",
+   "title": "Renal papillary necrosis: Diagnostic Renal Ultrasonography",
+   "type": "ultrasound",
+   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
+   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
+   "annotations": [
+    {
+     "label": "Renal Cortex",
+     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
+    },
+    {
+     "label": "Corticomedullary Junction",
+     "description": "Medullary pyramid definition and structural architecture."
+    },
+    {
+     "label": "Collecting System",
+     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+    }
+   ]
+  }
+ ]
 }

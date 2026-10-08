@@ -1,77 +1,172 @@
 {
-  "id": "hailey_hailey_disease",
-  "name": "Hailey-Hailey disease",
-  "aliases": [
-    "ATP2C1",
-    "benign familial pemphigus",
-    "familial benign chronic pemphigus",
-    "HHD"
+ "id": "hailey_hailey_disease",
+ "name": "Hailey-Hailey disease",
+ "aliases": [
+  "ATP2C1",
+  "benign familial pemphigus",
+  "familial benign chronic pemphigus",
+  "HHD"
+ ],
+ "class": "non_infective",
+ "system": "Dermatology / Genetics",
+ "specialty": "Dermatology / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Rook's Textbook of Dermatology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Autosomal dominant disorder caused by variants in ATP2C1, encoding a Golgi calcium/manganese pump (SPCA1)",
+   "Presents in early adulthood with recurrent flaccid vesicles, erosions, and macerated fissured plaques in the flexures (axillae, groin, neck, inframammary folds)",
+   "Lesions have a characteristic macerated appearance with painful longitudinal 'ripped-fabric' fissures",
+   "Friction, sweating, heat, and secondary infection are major aggravating factors",
+   "Unlike pemphigus it is not autoimmune; direct immunofluorescence is negative",
+   "Histology shows widespread suprabasal acantholysis giving a 'dilapidated brick wall' appearance",
+   "Secondary bacterial, candidal, or herpetic infection frequently drives flares and malodour"
   ],
-  "class": "non_infective",
-  "system": "Dermatology / Genetics",
-  "specialty": "Dermatology / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Rook's Textbook of Dermatology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Autosomal dominant disorder caused by variants in ATP2C1, encoding a Golgi calcium/manganese pump (SPCA1)",
-      "Presents in early adulthood with recurrent flaccid vesicles, erosions, and macerated fissured plaques in the flexures (axillae, groin, neck, inframammary folds)",
-      "Lesions have a characteristic macerated appearance with painful longitudinal 'ripped-fabric' fissures",
-      "Friction, sweating, heat, and secondary infection are major aggravating factors",
-      "Unlike pemphigus it is not autoimmune; direct immunofluorescence is negative",
-      "Histology shows widespread suprabasal acantholysis giving a 'dilapidated brick wall' appearance",
-      "Secondary bacterial, candidal, or herpetic infection frequently drives flares and malodour"
+  "pathophysiology": "Hailey-Hailey disease is caused by loss-of-function variants in ATP2C1, encoding SPCA1, a pump that transports calcium and manganese into the Golgi apparatus of keratinocytes. Disturbed intracellular calcium homeostasis impairs the processing and trafficking of proteins needed for desmosomal adhesion, weakening keratinocyte cohesion. The resulting acantholysis is most pronounced in flexural skin subjected to heat, sweat, and friction, which further stress the fragile epidermis. The defect is partial and mosaic in effect, which is why lesions are localised to intertriginous sites rather than generalised.",
+  "additionalDifferentials": [
+   "Darier disease",
+   "Intertrigo (candidal or bacterial)",
+   "Inverse psoriasis",
+   "Pemphigus vegetans",
+   "Contact dermatitis of the flexures",
+   "Extramammary Paget disease (persistent unilateral plaque)"
+  ],
+  "additionalInvestigations": [
+   "Skin biopsy showing extensive suprabasal acantholysis ('dilapidated brick wall')",
+   "Direct immunofluorescence (negative, to exclude pemphigus)",
+   "ATP2C1 molecular genetic testing",
+   "Bacterial, fungal, and viral swabs during flares to identify superinfection",
+   "Family history assessment for dominant inheritance"
+  ],
+  "redFlags": [
+   "Sudden painful vesicular flare suggesting herpes simplex superinfection",
+   "Spreading cellulitis or systemic features from bacterial superinfection",
+   "A persistent, non-healing, or indurated plaque raising concern for squamous carcinoma within chronic lesions"
+  ],
+  "prognosis": "It is a chronic relapsing condition with a benign course that does not affect life expectancy, but recurrent flexural erosions can substantially impair quality of life; symptoms often improve in later life and some patients respond well to measures reducing friction and infection.",
+  "pitfalls": [
+   "Diagnosing recurrent intertrigo or candidiasis and missing the underlying genodermatosis",
+   "Failing to look for and treat secondary herpetic or bacterial infection during flares",
+   "Confusing it with autoimmune pemphigus and initiating inappropriate immunosuppression",
+   "Overlooking rare squamous change in longstanding lesions"
+  ],
+  "references": [
+   "Rook's Textbook of Dermatology",
+   "Fitzpatrick's Dermatology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Reduce aggravating factors by minimising heat, sweating and friction with lightweight breathable clothing and weight management",
+   "Topical corticosteroids as the mainstay for flares, with topical calcineurin inhibitors as a steroid-sparing option",
+   "Prompt treatment of bacterial, fungal or viral superinfection with the appropriate antibiotic, antifungal or antiviral agent",
+   "Oral antibiotics for widespread or infected flares and oral retinoids in more resistant disease",
+   "Systemic immunomodulators such as ciclosporin, methotrexate or dapsone reserved for refractory cases",
+   "Procedural options including intralesional botulinum toxin to reduce sweating, ablative laser, dermabrasion, or surgical excision with grafting for recalcitrant flexural sites",
+   "Genetic counselling for affected families given autosomal dominant inheritance"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "hailey_hailey_disease-pathway",
+   "title": "Hailey-Hailey disease: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Autosomal dominant disorder caused by variants in ATP2C1, encoding a Golgi calcium/manganese pump (SPCA1)",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Sudden painful vesicular flare suggesting herpes simplex superinfection",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Skin biopsy showing extensive suprabasal acantholysis ('dilapidated brick wall'), Direct immunofluorescence (negative, to exclude pemphigus), ATP2C1 molecular genetic testing"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Reduce aggravating factors by minimising heat, sweating and friction with lightweight breathable clothing and weight management"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Diagnosing recurrent intertrigo or candidiasis and missing the underlying genodermatosis"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of hailey-hailey disease."
+  }
+ ],
+ "tables": [
+  {
+   "id": "hailey_hailey_disease-matrix",
+   "title": "Hailey-Hailey disease: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Autosomal dominant disorder caused by variants in ATP2C1, encoding a Golgi calcium/manganese pump (SPCA1)",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Hailey-Hailey disease is caused by loss-of-function variants in ATP2C1, encoding SPCA1, a pump that transports calcium and manganese into the Golgi apparatus of keratinocytes. Disturbed intracellular calcium homeostasis impairs the processing and trafficking of proteins needed for desmosomal adhesion, weakening keratinocyte cohesion. The resulting acantholysis is most pronounced in flexural skin subjected to heat, sweat, and friction, which further stress the fragile epidermis. The defect is partial and mosaic in effect, which is why lesions are localised to intertriginous sites rather than generalised.",
-    "additionalDifferentials": [
-      "Darier disease",
-      "Intertrigo (candidal or bacterial)",
-      "Inverse psoriasis",
-      "Pemphigus vegetans",
-      "Contact dermatitis of the flexures",
-      "Extramammary Paget disease (persistent unilateral plaque)"
+    [
+     "Key Investigations",
+     "Skin biopsy showing extensive suprabasal acantholysis ('dilapidated brick wall'), Direct immunofluorescence (negative, to exclude",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Skin biopsy showing extensive suprabasal acantholysis ('dilapidated brick wall')",
-      "Direct immunofluorescence (negative, to exclude pemphigus)",
-      "ATP2C1 molecular genetic testing",
-      "Bacterial, fungal, and viral swabs during flares to identify superinfection",
-      "Family history assessment for dominant inheritance"
+    [
+     "Primary Differentials",
+     "Darier disease, Intertrigo (candidal or bacterial), Inverse psoriasis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Sudden painful vesicular flare suggesting herpes simplex superinfection",
-      "Spreading cellulitis or systemic features from bacterial superinfection",
-      "A persistent, non-healing, or indurated plaque raising concern for squamous carcinoma within chronic lesions"
+    [
+     "Management Strategy",
+     "Reduce aggravating factors by minimising heat, sweating and friction with lightweight breathable clothing and weight management",
+     "Core treatment modality"
     ],
-    "prognosis": "It is a chronic relapsing condition with a benign course that does not affect life expectancy, but recurrent flexural erosions can substantially impair quality of life; symptoms often improve in later life and some patients respond well to measures reducing friction and infection.",
-    "pitfalls": [
-      "Diagnosing recurrent intertrigo or candidiasis and missing the underlying genodermatosis",
-      "Failing to look for and treat secondary herpetic or bacterial infection during flares",
-      "Confusing it with autoimmune pemphigus and initiating inappropriate immunosuppression",
-      "Overlooking rare squamous change in longstanding lesions"
-    ],
-    "references": [
-      "Rook's Textbook of Dermatology",
-      "Fitzpatrick's Dermatology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Reduce aggravating factors by minimising heat, sweating and friction with lightweight breathable clothing and weight management",
-      "Topical corticosteroids as the mainstay for flares, with topical calcineurin inhibitors as a steroid-sparing option",
-      "Prompt treatment of bacterial, fungal or viral superinfection with the appropriate antibiotic, antifungal or antiviral agent",
-      "Oral antibiotics for widespread or infected flares and oral retinoids in more resistant disease",
-      "Systemic immunomodulators such as ciclosporin, methotrexate or dapsone reserved for refractory cases",
-      "Procedural options including intralesional botulinum toxin to reduce sweating, ablative laser, dermabrasion, or surgical excision with grafting for recalcitrant flexural sites",
-      "Genetic counselling for affected families given autosomal dominant inheritance"
+    [
+     "Clinical Pitfall",
+     "Diagnosing recurrent intertrigo or candidiasis and missing the underlying genodermatosis",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for hailey-hailey disease."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "hailey-hailey-disease-real-image",
+   "title": "Hailey-Hailey disease: Clinical Cutaneous Dermatology Photograph",
+   "type": "diagram",
+   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
+   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
+   "annotations": [
+    {
+     "label": "Primary Lesions",
+     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
+    },
+    {
+     "label": "Demarcation & Margins",
+     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
+    },
+    {
+     "label": "Anatomical Distribution",
+     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+    }
+   ]
+  }
+ ]
 }

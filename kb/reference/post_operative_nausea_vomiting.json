@@ -1,77 +1,172 @@
 {
-  "id": "post_operative_nausea_vomiting",
-  "name": "Postoperative nausea and vomiting",
-  "aliases": [
-    "PONV",
-    "post-anaesthetic nausea and vomiting",
-    "postoperative emesis"
+ "id": "post_operative_nausea_vomiting",
+ "name": "Postoperative nausea and vomiting",
+ "aliases": [
+  "PONV",
+  "post-anaesthetic nausea and vomiting",
+  "postoperative emesis"
+ ],
+ "class": "non_infective",
+ "system": "Anaesthesia / Perioperative",
+ "specialty": "Anaesthesiology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Miller's Anesthesia / standard perioperative references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A common and distressing complication after anaesthesia that reduces patient satisfaction, delays discharge, and occasionally causes serious complications",
+   "Established patient risk factors include female sex, non-smoking status, history of PONV or motion sickness, and younger age, often summarised in simplified risk scores",
+   "Anaesthetic and surgical factors include use of volatile agents and nitrous oxide, perioperative opioids, and longer or certain types of surgery",
+   "A multimodal approach works best: reducing baseline risk (opioid-sparing analgesia, regional techniques, total intravenous anaesthesia) and combining antiemetics from different classes",
+   "Prophylactic agents span several receptor targets, including serotonin antagonists, corticosteroids, dopamine antagonists, and antihistamines, chosen according to risk",
+   "For breakthrough symptoms, an antiemetic from a class not already used for prophylaxis is preferred rather than repeating the same drug",
+   "Adequate hydration, avoidance of unnecessary opioids, and treatment of pain and hypotension help reduce symptoms",
+   "Persistent or severe postoperative vomiting should prompt consideration of surgical, metabolic, or intracranial causes rather than assuming simple PONV"
   ],
-  "class": "non_infective",
-  "system": "Anaesthesia / Perioperative",
-  "specialty": "Anaesthesiology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Miller's Anesthesia / standard perioperative references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A common and distressing complication after anaesthesia that reduces patient satisfaction, delays discharge, and occasionally causes serious complications",
-      "Established patient risk factors include female sex, non-smoking status, history of PONV or motion sickness, and younger age, often summarised in simplified risk scores",
-      "Anaesthetic and surgical factors include use of volatile agents and nitrous oxide, perioperative opioids, and longer or certain types of surgery",
-      "A multimodal approach works best: reducing baseline risk (opioid-sparing analgesia, regional techniques, total intravenous anaesthesia) and combining antiemetics from different classes",
-      "Prophylactic agents span several receptor targets, including serotonin antagonists, corticosteroids, dopamine antagonists, and antihistamines, chosen according to risk",
-      "For breakthrough symptoms, an antiemetic from a class not already used for prophylaxis is preferred rather than repeating the same drug",
-      "Adequate hydration, avoidance of unnecessary opioids, and treatment of pain and hypotension help reduce symptoms",
-      "Persistent or severe postoperative vomiting should prompt consideration of surgical, metabolic, or intracranial causes rather than assuming simple PONV"
+  "pathophysiology": "Nausea and vomiting are coordinated by brainstem centres receiving input from the chemoreceptor trigger zone, vestibular system, higher cortical centres, and vagal afferents from the gastrointestinal tract. Multiple neurotransmitters, including serotonin, dopamine, histamine, acetylcholine, and substance P, mediate these pathways. Anaesthetic agents, opioids, gastric distension, hypotension, and surgical stimulation activate one or more of these inputs. Because several receptor systems contribute, blocking a single pathway is often insufficient, which is why combining antiemetics acting at different receptors is more effective than escalating a single agent.",
+  "additionalDifferentials": [
+   "Bowel obstruction or ileus",
+   "Gastric distension from mask ventilation",
+   "Raised intracranial pressure or neurological cause",
+   "Metabolic disturbance such as hyponatraemia or hypoglycaemia",
+   "Medication or opioid effect",
+   "Hypotension or hypovolaemia"
+  ],
+  "additionalInvestigations": [
+   "Clinical assessment of hydration, pain, and haemodynamics",
+   "Review of anaesthetic and analgesic agents administered",
+   "Electrolytes and glucose if vomiting is persistent",
+   "Abdominal imaging if obstruction or ileus is suspected",
+   "Neurological assessment if a central cause is possible"
+  ],
+  "redFlags": [
+   "Persistent vomiting causing dehydration, electrolyte disturbance, or aspiration risk",
+   "Vomiting with headache, focal neurology, or reduced consciousness suggesting an intracranial cause",
+   "Bilious or feculent vomiting indicating bowel obstruction",
+   "Vomiting with severe abdominal pain suggesting a surgical complication"
+  ],
+  "prognosis": "PONV is usually self-limiting and responds to multimodal prophylaxis and treatment, but uncontrolled symptoms can delay recovery, cause dehydration, and rarely lead to aspiration or wound complications.",
+  "pitfalls": [
+   "Relying on a single antiemetic in high-risk patients instead of combining agents",
+   "Repeating the same drug class for breakthrough symptoms",
+   "Overlooking modifiable contributors such as opioids, hypotension, and dehydration",
+   "Assuming all postoperative vomiting is benign and missing a surgical or neurological cause",
+   "Failing to risk-stratify and tailor prophylaxis preoperatively"
+  ],
+  "references": [
+   "Miller's Anesthesia"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Reduction of baseline risk with opioid-sparing multimodal analgesia, regional anaesthetic techniques and total intravenous anaesthesia using propofol while avoiding volatile agents and nitrous oxide",
+   "Multimodal antiemetic prophylaxis combining agents from different receptor classes, such as serotonin-receptor antagonists, the corticosteroid dexamethasone, dopamine antagonists, antihistamines, an anticholinergic patch and a neurokinin-receptor antagonist, according to risk",
+   "Treatment of breakthrough symptoms with an antiemetic from a class not already used for prophylaxis rather than repeating the same drug",
+   "Supportive care with intravenous fluids for hydration and correction of electrolyte disturbance from persistent vomiting",
+   "Correction of contributing factors including uncontrolled pain, hypotension and gastric distension",
+   "Escalation and investigation for a surgical or central cause when vomiting is persistent, with imaging if obstruction or ileus is suspected"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "post_operative_nausea_vomiting-pathway",
+   "title": "Postoperative nausea and vomiting: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A common and distressing complication after anaesthesia that reduces patient satisfaction, delays discharge, and occasionally causes serious complications",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Persistent vomiting causing dehydration, electrolyte disturbance, or aspiration risk",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Clinical assessment of hydration, pain, and haemodynamics, Review of anaesthetic and analgesic agents administered, Electrolytes and glucose if vomiting is persistent"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Reduction of baseline risk with opioid-sparing multimodal analgesia, regional anaesthetic techniques and total intravenous anaesthesia using propofol while avoiding volatile agents and nitrous oxide"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Relying on a single antiemetic in high-risk patients instead of combining agents"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of postoperative nausea and vomiting."
+  }
+ ],
+ "tables": [
+  {
+   "id": "post_operative_nausea_vomiting-matrix",
+   "title": "Postoperative nausea and vomiting: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A common and distressing complication after anaesthesia that reduces patient satisfaction, delays discharge, and occasionally",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Nausea and vomiting are coordinated by brainstem centres receiving input from the chemoreceptor trigger zone, vestibular system, higher cortical centres, and vagal afferents from the gastrointestinal tract. Multiple neurotransmitters, including serotonin, dopamine, histamine, acetylcholine, and substance P, mediate these pathways. Anaesthetic agents, opioids, gastric distension, hypotension, and surgical stimulation activate one or more of these inputs. Because several receptor systems contribute, blocking a single pathway is often insufficient, which is why combining antiemetics acting at different receptors is more effective than escalating a single agent.",
-    "additionalDifferentials": [
-      "Bowel obstruction or ileus",
-      "Gastric distension from mask ventilation",
-      "Raised intracranial pressure or neurological cause",
-      "Metabolic disturbance such as hyponatraemia or hypoglycaemia",
-      "Medication or opioid effect",
-      "Hypotension or hypovolaemia"
+    [
+     "Key Investigations",
+     "Clinical assessment of hydration, pain, and haemodynamics, Review of anaesthetic and analgesic agents administered, Electrolytes",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Clinical assessment of hydration, pain, and haemodynamics",
-      "Review of anaesthetic and analgesic agents administered",
-      "Electrolytes and glucose if vomiting is persistent",
-      "Abdominal imaging if obstruction or ileus is suspected",
-      "Neurological assessment if a central cause is possible"
+    [
+     "Primary Differentials",
+     "Bowel obstruction or ileus, Gastric distension from mask ventilation, Raised intracranial pressure or neurological cause",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Persistent vomiting causing dehydration, electrolyte disturbance, or aspiration risk",
-      "Vomiting with headache, focal neurology, or reduced consciousness suggesting an intracranial cause",
-      "Bilious or feculent vomiting indicating bowel obstruction",
-      "Vomiting with severe abdominal pain suggesting a surgical complication"
+    [
+     "Management Strategy",
+     "Reduction of baseline risk with opioid-sparing multimodal analgesia, regional anaesthetic techniques and total intravenous",
+     "Core treatment modality"
     ],
-    "prognosis": "PONV is usually self-limiting and responds to multimodal prophylaxis and treatment, but uncontrolled symptoms can delay recovery, cause dehydration, and rarely lead to aspiration or wound complications.",
-    "pitfalls": [
-      "Relying on a single antiemetic in high-risk patients instead of combining agents",
-      "Repeating the same drug class for breakthrough symptoms",
-      "Overlooking modifiable contributors such as opioids, hypotension, and dehydration",
-      "Assuming all postoperative vomiting is benign and missing a surgical or neurological cause",
-      "Failing to risk-stratify and tailor prophylaxis preoperatively"
-    ],
-    "references": [
-      "Miller's Anesthesia"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Reduction of baseline risk with opioid-sparing multimodal analgesia, regional anaesthetic techniques and total intravenous anaesthesia using propofol while avoiding volatile agents and nitrous oxide",
-      "Multimodal antiemetic prophylaxis combining agents from different receptor classes, such as serotonin-receptor antagonists, the corticosteroid dexamethasone, dopamine antagonists, antihistamines, an anticholinergic patch and a neurokinin-receptor antagonist, according to risk",
-      "Treatment of breakthrough symptoms with an antiemetic from a class not already used for prophylaxis rather than repeating the same drug",
-      "Supportive care with intravenous fluids for hydration and correction of electrolyte disturbance from persistent vomiting",
-      "Correction of contributing factors including uncontrolled pain, hypotension and gastric distension",
-      "Escalation and investigation for a surgical or central cause when vomiting is persistent, with imaging if obstruction or ileus is suspected"
+    [
+     "Clinical Pitfall",
+     "Relying on a single antiemetic in high-risk patients instead of combining agents",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for postoperative nausea and vomiting."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "post-operative-nausea-vomiting-real-image",
+   "title": "Postoperative nausea and vomiting: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

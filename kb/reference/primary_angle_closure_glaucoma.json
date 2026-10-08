@@ -1,81 +1,176 @@
 {
-  "id": "primary_angle_closure_glaucoma",
-  "name": "Primary angle-closure glaucoma",
-  "aliases": [
-    "PACG",
-    "angle-closure glaucoma",
-    "closed-angle glaucoma",
-    "acute angle-closure glaucoma"
+ "id": "primary_angle_closure_glaucoma",
+ "name": "Primary angle-closure glaucoma",
+ "aliases": [
+  "PACG",
+  "angle-closure glaucoma",
+  "closed-angle glaucoma",
+  "acute angle-closure glaucoma"
+ ],
+ "class": "non_infective",
+ "system": "Eye / Ophthalmology",
+ "specialty": "Ophthalmology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Kanski's Clinical Ophthalmology / Shields' Textbook of Glaucoma",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Occurs when the peripheral iris obstructs the trabecular meshwork, blocking aqueous outflow and raising intraocular pressure, often in hypermetropic eyes with shallow anterior chambers",
+   "An acute attack presents as an ophthalmic emergency with a severely painful red eye, blurred vision, haloes around lights, headache, and frequently nausea and vomiting that can be mistaken for an abdominal or neurological problem",
+   "Classic signs include a mid-dilated fixed vertically-oval pupil, a hazy oedematous cornea, a shallow anterior chamber, ciliary injection, and a stony-hard eye on palpation",
+   "Relative pupillary block is the usual mechanism, in which aqueous is trapped behind the iris, bowing it forward to appose the drainage angle",
+   "Gonioscopy of both eyes is essential to confirm a closed or occludable angle and to guide prophylactic treatment of the fellow eye",
+   "Initial treatment lowers pressure medically with topical intraocular-pressure-lowering agents and systemic acetazolamide, followed by laser peripheral iridotomy once the cornea clears to re-establish aqueous flow",
+   "The fellow eye is at high risk of a subsequent attack and should receive prophylactic laser iridotomy",
+   "Chronic angle closure may be insidious and painless, producing progressive optic-nerve cupping and field loss that mimics open-angle glaucoma"
   ],
-  "class": "non_infective",
-  "system": "Eye / Ophthalmology",
-  "specialty": "Ophthalmology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Kanski's Clinical Ophthalmology / Shields' Textbook of Glaucoma",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Occurs when the peripheral iris obstructs the trabecular meshwork, blocking aqueous outflow and raising intraocular pressure, often in hypermetropic eyes with shallow anterior chambers",
-      "An acute attack presents as an ophthalmic emergency with a severely painful red eye, blurred vision, haloes around lights, headache, and frequently nausea and vomiting that can be mistaken for an abdominal or neurological problem",
-      "Classic signs include a mid-dilated fixed vertically-oval pupil, a hazy oedematous cornea, a shallow anterior chamber, ciliary injection, and a stony-hard eye on palpation",
-      "Relative pupillary block is the usual mechanism, in which aqueous is trapped behind the iris, bowing it forward to appose the drainage angle",
-      "Gonioscopy of both eyes is essential to confirm a closed or occludable angle and to guide prophylactic treatment of the fellow eye",
-      "Initial treatment lowers pressure medically with topical intraocular-pressure-lowering agents and systemic acetazolamide, followed by laser peripheral iridotomy once the cornea clears to re-establish aqueous flow",
-      "The fellow eye is at high risk of a subsequent attack and should receive prophylactic laser iridotomy",
-      "Chronic angle closure may be insidious and painless, producing progressive optic-nerve cupping and field loss that mimics open-angle glaucoma"
+  "pathophysiology": "In primary angle closure the peripheral iris comes into contact with the trabecular meshwork and obstructs aqueous drainage, causing intraocular pressure to rise. The commonest mechanism is relative pupillary block, where resistance to aqueous passing between the lens and iris margin lets pressure build in the posterior chamber, bowing the peripheral iris forward against the angle. Predisposing anatomy includes a shallow anterior chamber, short axial length (hypermetropia), a relatively anterior and thick lens, and a crowded angle; pupillary mid-dilation in dim light or with mydriatics can precipitate acute closure. Sustained apposition damages the trabecular meshwork and may form permanent peripheral anterior synechiae, while a sudden pressure spike causes corneal oedema, iris ischaemia, and optic-nerve injury.",
+  "additionalDifferentials": [
+   "Acute anterior uveitis",
+   "Neovascular glaucoma with angle closure",
+   "Acute conjunctivitis or keratitis causing a red eye",
+   "Malignant glaucoma (aqueous misdirection)",
+   "Phacomorphic glaucoma from an intumescent lens",
+   "Secondary angle closure from a posterior segment mass or effusion"
+  ],
+  "additionalInvestigations": [
+   "Gonioscopy of both eyes to assess angle configuration and detect peripheral anterior synechiae",
+   "Applanation tonometry to measure the height of the pressure rise",
+   "Anterior segment assessment of chamber depth, optionally with anterior segment OCT or ultrasound biomicroscopy",
+   "Optic disc evaluation and OCT of the retinal nerve fibre layer for glaucomatous cupping",
+   "Automated perimetry to document any field loss once the eye settles"
+  ],
+  "redFlags": [
+   "Acutely painful red eye with haloes, a mid-dilated pupil, and a stony-hard globe indicating an acute attack requiring emergency pressure reduction",
+   "Nausea and vomiting misattributed to a systemic cause while the eye is overlooked",
+   "Corneal oedema with markedly reduced vision that may become permanent if pressure is not lowered promptly",
+   "An untreated occludable fellow eye at imminent risk of its own acute attack"
+  ],
+  "prognosis": "Prompt medical pressure reduction followed by laser iridotomy usually aborts an acute attack and prevents recurrence, but delayed treatment can cause permanent optic-nerve damage, peripheral anterior synechiae, cataract, and lasting visual loss. Chronic angle closure carries a substantial risk of progressive glaucomatous field loss if unrecognised.",
+  "pitfalls": [
+   "Attributing the headache, nausea, and vomiting to a gastrointestinal or neurological cause and missing the ocular emergency",
+   "Dilating a susceptible shallow-chamber eye and precipitating an acute attack",
+   "Failing to examine and treat the occludable fellow eye prophylactically",
+   "Assuming laser iridotomy alone controls pressure when extensive synechial closure or coexisting open-angle damage requires further therapy",
+   "Overlooking chronic painless angle closure presenting as apparent open-angle glaucoma"
+  ],
+  "references": [
+   "Kanski's Clinical Ophthalmology",
+   "Shields' Textbook of Glaucoma"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Lower intraocular pressure urgently with topical agents (beta-blocker, alpha-agonist, pilocarpine) and systemic acetazolamide, adding a hyperosmotic such as mannitol if needed",
+   "Perform definitive laser peripheral iridotomy once the cornea clears to relieve pupillary block",
+   "Give prophylactic laser peripheral iridotomy to the fellow occludable eye",
+   "Provide analgesia and antiemetics during the acute attack",
+   "Consider lens extraction where a bulky or cataractous lens is driving angle closure",
+   "Avoid mydriasis and use caution with anticholinergic and dilating drugs that can precipitate closure",
+   "Monitor intraocular pressure, optic disc, and visual fields long term, adding topical pressure-lowering therapy for chronic angle closure",
+   "Refer emergently to ophthalmology"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "primary_angle_closure_glaucoma-pathway",
+   "title": "Primary angle-closure glaucoma: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Occurs when the peripheral iris obstructs the trabecular meshwork, blocking aqueous outflow and raising intraocular pressure, often in hypermetropic eyes with shallow anterior chambers",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Acutely painful red eye with haloes, a mid-dilated pupil, and a stony-hard globe indicating an acute attack requiring emergency pressure reduction",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Gonioscopy of both eyes to assess angle configuration and detect peripheral anterior synechiae, Applanation tonometry to measure the height of the pressure rise, Anterior segment assessment of chamber depth, optionally"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Lower intraocular pressure urgently with topical agents (beta-blocker, alpha-agonist, pilocarpine) and systemic acetazolamide, adding a hyperosmotic such as mannitol if needed"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing the headache, nausea, and vomiting to a gastrointestinal or neurological cause and missing the ocular emergency"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of primary angle-closure glaucoma."
+  }
+ ],
+ "tables": [
+  {
+   "id": "primary_angle_closure_glaucoma-matrix",
+   "title": "Primary angle-closure glaucoma: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Occurs when the peripheral iris obstructs the trabecular meshwork, blocking aqueous outflow and raising intraocular pressure,",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "In primary angle closure the peripheral iris comes into contact with the trabecular meshwork and obstructs aqueous drainage, causing intraocular pressure to rise. The commonest mechanism is relative pupillary block, where resistance to aqueous passing between the lens and iris margin lets pressure build in the posterior chamber, bowing the peripheral iris forward against the angle. Predisposing anatomy includes a shallow anterior chamber, short axial length (hypermetropia), a relatively anterior and thick lens, and a crowded angle; pupillary mid-dilation in dim light or with mydriatics can precipitate acute closure. Sustained apposition damages the trabecular meshwork and may form permanent peripheral anterior synechiae, while a sudden pressure spike causes corneal oedema, iris ischaemia, and optic-nerve injury.",
-    "additionalDifferentials": [
-      "Acute anterior uveitis",
-      "Neovascular glaucoma with angle closure",
-      "Acute conjunctivitis or keratitis causing a red eye",
-      "Malignant glaucoma (aqueous misdirection)",
-      "Phacomorphic glaucoma from an intumescent lens",
-      "Secondary angle closure from a posterior segment mass or effusion"
+    [
+     "Key Investigations",
+     "Gonioscopy of both eyes to assess angle configuration and detect peripheral anterior synechiae, Applanation tonometry to measure",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Gonioscopy of both eyes to assess angle configuration and detect peripheral anterior synechiae",
-      "Applanation tonometry to measure the height of the pressure rise",
-      "Anterior segment assessment of chamber depth, optionally with anterior segment OCT or ultrasound biomicroscopy",
-      "Optic disc evaluation and OCT of the retinal nerve fibre layer for glaucomatous cupping",
-      "Automated perimetry to document any field loss once the eye settles"
+    [
+     "Primary Differentials",
+     "Acute anterior uveitis, Neovascular glaucoma with angle closure, Acute conjunctivitis or keratitis causing a red eye",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Acutely painful red eye with haloes, a mid-dilated pupil, and a stony-hard globe indicating an acute attack requiring emergency pressure reduction",
-      "Nausea and vomiting misattributed to a systemic cause while the eye is overlooked",
-      "Corneal oedema with markedly reduced vision that may become permanent if pressure is not lowered promptly",
-      "An untreated occludable fellow eye at imminent risk of its own acute attack"
+    [
+     "Management Strategy",
+     "Lower intraocular pressure urgently with topical agents (beta-blocker, alpha-agonist, pilocarpine) and systemic acetazolamide,",
+     "Core treatment modality"
     ],
-    "prognosis": "Prompt medical pressure reduction followed by laser iridotomy usually aborts an acute attack and prevents recurrence, but delayed treatment can cause permanent optic-nerve damage, peripheral anterior synechiae, cataract, and lasting visual loss. Chronic angle closure carries a substantial risk of progressive glaucomatous field loss if unrecognised.",
-    "pitfalls": [
-      "Attributing the headache, nausea, and vomiting to a gastrointestinal or neurological cause and missing the ocular emergency",
-      "Dilating a susceptible shallow-chamber eye and precipitating an acute attack",
-      "Failing to examine and treat the occludable fellow eye prophylactically",
-      "Assuming laser iridotomy alone controls pressure when extensive synechial closure or coexisting open-angle damage requires further therapy",
-      "Overlooking chronic painless angle closure presenting as apparent open-angle glaucoma"
-    ],
-    "references": [
-      "Kanski's Clinical Ophthalmology",
-      "Shields' Textbook of Glaucoma"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Lower intraocular pressure urgently with topical agents (beta-blocker, alpha-agonist, pilocarpine) and systemic acetazolamide, adding a hyperosmotic such as mannitol if needed",
-      "Perform definitive laser peripheral iridotomy once the cornea clears to relieve pupillary block",
-      "Give prophylactic laser peripheral iridotomy to the fellow occludable eye",
-      "Provide analgesia and antiemetics during the acute attack",
-      "Consider lens extraction where a bulky or cataractous lens is driving angle closure",
-      "Avoid mydriasis and use caution with anticholinergic and dilating drugs that can precipitate closure",
-      "Monitor intraocular pressure, optic disc, and visual fields long term, adding topical pressure-lowering therapy for chronic angle closure",
-      "Refer emergently to ophthalmology"
+    [
+     "Clinical Pitfall",
+     "Attributing the headache, nausea, and vomiting to a gastrointestinal or neurological cause and missing the ocular emergency",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for primary angle-closure glaucoma."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "primary-angle-closure-glaucoma-real-image",
+   "title": "Primary angle-closure glaucoma: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

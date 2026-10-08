@@ -5,7 +5,17 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Outpatient, emergency department, ward, ICU",
- "aliases": ["CAP", "pneumonia", "lobar pneumonia", "severe CAP", "CURB-65", "CRB-65", "IDSA ATS criteria", "LRTI", "ICMR pneumonia"],
+ "aliases": [
+  "CAP",
+  "pneumonia",
+  "lobar pneumonia",
+  "severe CAP",
+  "CURB-65",
+  "CRB-65",
+  "IDSA ATS criteria",
+  "LRTI",
+  "ICMR pneumonia"
+ ],
  "summary": "Stratify by CURB-65 and IDSA/ATS criteria; outpatients get co-amoxiclav (plus a macrolide or doxycycline if comorbid), inpatients ceftriaxone plus a macrolide or doxycycline, with anti-pseudomonal or MRSA cover only for specific risks. Avoid empirical fluoroquinolones in India (TB), and stop at 5 days (outpatient) or about 7 days (inpatient) once stable.",
  "sections": [
   {
@@ -94,21 +104,174 @@
   }
  ],
  "drugs": [
-  { "name": "Amoxicillin-clavulanate", "dose": "625 mg orally three times daily or 1 g twice daily; 1.2 g IV every 8 hours", "notes": "ICMR preferred outpatient agent. Reduce dose if eGFR below 30 mL/min." },
-  { "name": "Cefuroxime / cefpodoxime", "dose": "Cefuroxime 500 mg orally twice daily (1.5 g IV twice daily); cefpodoxime 200 mg orally twice daily", "notes": "Outpatient alternatives." },
-  { "name": "Azithromycin", "dose": "500 mg orally or IV once daily", "notes": "Atypical cover in combination; check QTc." },
-  { "name": "Clarithromycin", "dose": "500 mg orally twice daily", "notes": "Alternative macrolide; drug interactions." },
-  { "name": "Doxycycline", "dose": "100 mg orally twice daily", "notes": "Alternative to macrolide in combination; also covers scrub typhus and leptospirosis. Avoid in pregnancy." },
-  { "name": "Ceftriaxone", "dose": "2 g IV once daily (IDSA/ATS range 1 to 2 g daily)", "notes": "Ward and ICU backbone. Cefotaxime 2 g IV every 8 hours is an alternative." },
-  { "name": "Piperacillin-tazobactam", "dose": "4.5 g IV every 6 hours (IDSA/ATS; ICMR lists every 8 hours)", "notes": "Only with Pseudomonas risk. Renal adjustment." },
-  { "name": "Meropenem", "dose": "1 g IV every 8 hours", "notes": "Pseudomonas or ESBL risk with septic shock. Renal adjustment." },
-  { "name": "Vancomycin / teicoplanin", "dose": "Vancomycin 15 mg/kg IV every 12 hours adjusted to levels; teicoplanin 400 mg IV every 12 hours for 3 doses, then 400 mg once daily", "notes": "MRSA risk only; stop if cultures negative at 48 hours." },
-  { "name": "Oseltamivir", "dose": "75 mg orally twice daily for 5 days", "notes": "Influenza outbreak or positive test. 30 mg twice daily if CrCl 31 to 60 mL/min." }
+  {
+   "name": "Amoxicillin-clavulanate",
+   "dose": "625 mg orally three times daily or 1 g twice daily; 1.2 g IV every 8 hours",
+   "notes": "ICMR preferred outpatient agent. Reduce dose if eGFR below 30 mL/min."
+  },
+  {
+   "name": "Cefuroxime / cefpodoxime",
+   "dose": "Cefuroxime 500 mg orally twice daily (1.5 g IV twice daily); cefpodoxime 200 mg orally twice daily",
+   "notes": "Outpatient alternatives."
+  },
+  {
+   "name": "Azithromycin",
+   "dose": "500 mg orally or IV once daily",
+   "notes": "Atypical cover in combination; check QTc."
+  },
+  {
+   "name": "Clarithromycin",
+   "dose": "500 mg orally twice daily",
+   "notes": "Alternative macrolide; drug interactions."
+  },
+  {
+   "name": "Doxycycline",
+   "dose": "100 mg orally twice daily",
+   "notes": "Alternative to macrolide in combination; also covers scrub typhus and leptospirosis. Avoid in pregnancy."
+  },
+  {
+   "name": "Ceftriaxone",
+   "dose": "2 g IV once daily (IDSA/ATS range 1 to 2 g daily)",
+   "notes": "Ward and ICU backbone. Cefotaxime 2 g IV every 8 hours is an alternative."
+  },
+  {
+   "name": "Piperacillin-tazobactam",
+   "dose": "4.5 g IV every 6 hours (IDSA/ATS; ICMR lists every 8 hours)",
+   "notes": "Only with Pseudomonas risk. Renal adjustment."
+  },
+  {
+   "name": "Meropenem",
+   "dose": "1 g IV every 8 hours",
+   "notes": "Pseudomonas or ESBL risk with septic shock. Renal adjustment."
+  },
+  {
+   "name": "Vancomycin / teicoplanin",
+   "dose": "Vancomycin 15 mg/kg IV every 12 hours adjusted to levels; teicoplanin 400 mg IV every 12 hours for 3 doses, then 400 mg once daily",
+   "notes": "MRSA risk only; stop if cultures negative at 48 hours."
+  },
+  {
+   "name": "Oseltamivir",
+   "dose": "75 mg orally twice daily for 5 days",
+   "notes": "Influenza outbreak or positive test. 30 mg twice daily if CrCl 31 to 60 mL/min."
+  }
  ],
  "sources": [
-  { "org": "ATS / IDSA", "title": "Diagnosis and treatment of adults with community-acquired pneumonia (2019)", "year": 2019, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6812437/" },
-  { "org": "ATS", "title": "Diagnosis and management of community-acquired pneumonia: an official ATS clinical practice guideline (2025 update)", "year": 2025, "url": "https://academic.oup.com/ajrccm/article/212/1/24/8435770" },
-  { "org": "ICMR", "title": "Treatment Guidelines for Antimicrobial Use in Common Syndromes, 2nd edition (community-acquired pneumonia)", "year": 2019, "url": "https://iamrsn.icmr.org.in/index.php/resources/guidelines" }
+  {
+   "org": "ATS / IDSA",
+   "title": "Diagnosis and treatment of adults with community-acquired pneumonia (2019)",
+   "year": 2019,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6812437/"
+  },
+  {
+   "org": "ATS",
+   "title": "Diagnosis and management of community-acquired pneumonia: an official ATS clinical practice guideline (2025 update)",
+   "year": 2025,
+   "url": "https://academic.oup.com/ajrccm/article/212/1/24/8435770"
+  },
+  {
+   "org": "ICMR",
+   "title": "Treatment Guidelines for Antimicrobial Use in Common Syndromes, 2nd edition (community-acquired pneumonia)",
+   "year": 2019,
+   "url": "https://iamrsn.icmr.org.in/index.php/resources/guidelines"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "community-acquired-pneumonia-pathway",
+   "title": "Community-acquired pneumonia (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Acute lower respiratory symptoms (cough, dyspnoea, pleuritic pain) for under 1 week, a systemic feature (temperature above 37.7 C, rigors or severe malaise), new focal chest signs, and a new shadow on chest X-ray with no other cause (ICMR).",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "CURB-65, 1 point each: Confusion; Urea above 7 mmol/L (blood urea above 42 mg/dL); Respiratory rate 30/min or more; Blood pressure systolic below 90 or diastolic 60 mmHg or less; age 65 or more. Score 0 to 1: usually home; 2: hospital; 3",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Chest X-ray (lung ultrasound is an acceptable alternative where trained operators are available, ATS 2025). CBC, urea, creatinine, electrolytes, LFT, glucose, CRP; blood gas if SpO2 is low or the patient is severe."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Ward: ceftriaxone plus azithromycin (or doxycycline). Alternatives: cefotaxime or IV amoxicillin-clavulanate plus a macrolide or doxycycline. Severe beta-lactam allergy: levofloxacin or moxifloxacin only after TB has been excluded."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Clinical stability: temperature 37.8 C or less, heart rate 100/min or less, respiratory rate 24/min or less, systolic BP 90 mmHg or more, SpO2 90% or more on air, normal mentation, eating."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for community-acquired pneumonia (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "community-acquired-pneumonia-summary-matrix",
+   "title": "Community-acquired pneumonia (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Acute lower respiratory symptoms (cough, dyspnoea, pleuritic pain) for under 1 week, a systemic feature (temperature above 37.7 C, rigors",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Ward: ceftriaxone plus azithromycin (or doxycycline). Alternatives: cefotaxime or IV amoxicillin-clavulanate plus a macrolide or",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Chest X-ray (lung ultrasound is an acceptable alternative where trained operators are available, ATS 2025). CBC, urea, creatinine,",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Amoxicillin-clavulanate: 625 mg orally three times daily or 1 g twice daily; 1.2 g IV every 8 hours",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Empirical fluoroquinolone or linezolid in India, masking TB and selecting resistance.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for community-acquired pneumonia (adult)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "community-acquired-pneumonia-real-image",
+   "title": "Community-acquired pneumonia (adult): Diagnostic Chest Radiograph",
+   "type": "xray",
+   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
+   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
+   "annotations": [
+    {
+     "label": "Parenchyma & Airspaces",
+     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
+    },
+    {
+     "label": "Bronchovascular Tree",
+     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
+    },
+    {
+     "label": "Pleural Margins",
+     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+    }
+   ]
+  }
+ ]
 }

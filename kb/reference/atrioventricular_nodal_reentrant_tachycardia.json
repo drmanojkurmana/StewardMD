@@ -1,79 +1,174 @@
 {
-  "id": "atrioventricular_nodal_reentrant_tachycardia",
-  "name": "atrioventricular nodal reentrant tachycardia",
-  "aliases": [
-    "AVNRT",
-    "AV nodal reentry tachycardia"
+ "id": "atrioventricular_nodal_reentrant_tachycardia",
+ "name": "atrioventricular nodal reentrant tachycardia",
+ "aliases": [
+  "AVNRT",
+  "AV nodal reentry tachycardia"
+ ],
+ "class": "non_infective",
+ "system": "cardiovascular",
+ "specialty": "cardiology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Braunwald's Heart Disease",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Commonest regular paroxysmal supraventricular tachycardia, disproportionately affecting women, typically presenting with abrupt-onset, abrupt-offset palpitations.",
+   "Substrate is dual atrioventricular nodal physiology: a slow pathway with short refractoriness and a fast pathway with longer refractoriness, permitting a reentry circuit within or adjacent to the compact node.",
+   "Typical (slow-fast) AVNRT conducts antegradely down the slow pathway and retrogradely up the fast pathway, giving near-simultaneous atrial and ventricular activation.",
+   "On the surface ECG the retrograde P wave is usually buried in the QRS or produces a pseudo-r' in V1 and a pseudo-S in the inferior leads, a valuable diagnostic clue.",
+   "Vagal manoeuvres and adenosine terminate the arrhythmia by transiently blocking the AV node, distinguishing it from atrial tachycardias that continue despite block.",
+   "A neck-pounding sensation (frog sign) reflects simultaneous atrial and ventricular contraction against closed AV valves producing cannon A waves.",
+   "Atypical (fast-slow or slow-slow) variants show a long RP interval with the retrograde P separated from the QRS, mimicking atrial tachycardia or PJRT.",
+   "Catheter ablation of the slow pathway near the coronary sinus os is curative in the great majority with a low risk of inadvertent AV block."
   ],
-  "class": "non_infective",
-  "system": "cardiovascular",
-  "specialty": "cardiology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Braunwald's Heart Disease",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Commonest regular paroxysmal supraventricular tachycardia, disproportionately affecting women, typically presenting with abrupt-onset, abrupt-offset palpitations.",
-      "Substrate is dual atrioventricular nodal physiology: a slow pathway with short refractoriness and a fast pathway with longer refractoriness, permitting a reentry circuit within or adjacent to the compact node.",
-      "Typical (slow-fast) AVNRT conducts antegradely down the slow pathway and retrogradely up the fast pathway, giving near-simultaneous atrial and ventricular activation.",
-      "On the surface ECG the retrograde P wave is usually buried in the QRS or produces a pseudo-r' in V1 and a pseudo-S in the inferior leads, a valuable diagnostic clue.",
-      "Vagal manoeuvres and adenosine terminate the arrhythmia by transiently blocking the AV node, distinguishing it from atrial tachycardias that continue despite block.",
-      "A neck-pounding sensation (frog sign) reflects simultaneous atrial and ventricular contraction against closed AV valves producing cannon A waves.",
-      "Atypical (fast-slow or slow-slow) variants show a long RP interval with the retrograde P separated from the QRS, mimicking atrial tachycardia or PJRT.",
-      "Catheter ablation of the slow pathway near the coronary sinus os is curative in the great majority with a low risk of inadvertent AV block."
+  "pathophysiology": "AVNRT arises from functionally and anatomically distinct conduction pathways in the region of the atrioventricular node. A fast pathway conducts rapidly but has a long refractory period, whereas a slow pathway conducts slowly but recovers quickly. A critically timed atrial premature beat blocks in the fast pathway and descends the slow pathway; by the time it reaches the distal node the fast pathway has recovered, allowing retrograde conduction back to the atrium and initiation of a sustained reentrant circuit. In typical slow-fast AVNRT this produces near-simultaneous atrial and ventricular depolarisation, while atypical forms reverse or vary the pathways used. The circuit incorporates perinodal atrial tissue and does not require an accessory pathway or the ventricles for its maintenance.",
+  "additionalDifferentials": [
+   "atrioventricular reentrant tachycardia using a concealed accessory pathway",
+   "focal atrial tachycardia",
+   "atrial flutter with regular conduction",
+   "sinus tachycardia (including inappropriate sinus tachycardia)",
+   "permanent junctional reciprocating tachycardia",
+   "junctional ectopic tachycardia"
+  ],
+  "additionalInvestigations": [
+   "twelve-lead ECG during tachycardia and in sinus rhythm to seek pseudo-r' or pseudo-S waves",
+   "ambulatory or event monitoring to capture onset and offset if episodes are infrequent",
+   "vagal manoeuvre or adenosine administration with continuous ECG to observe response",
+   "transthoracic echocardiography to exclude structural heart disease",
+   "electrophysiological study demonstrating dual AV nodal physiology and a jump in the AH interval",
+   "thyroid function and full blood count to identify precipitants"
+  ],
+  "redFlags": [
+   "haemodynamic compromise with hypotension, chest pain or syncope during tachycardia",
+   "very rapid rates in patients with pre-existing coronary or structural heart disease",
+   "syncope at onset suggesting an accessory pathway or additional arrhythmia",
+   "signs of decompensated heart failure during sustained episodes"
+  ],
+  "prognosis": "AVNRT is a benign arrhythmia with an excellent long-term prognosis and is not associated with increased mortality in structurally normal hearts. Slow-pathway catheter ablation offers a durable cure in the great majority, and episodes otherwise remain intermittent and self-limiting.",
+  "pitfalls": [
+   "Mistaking the pseudo-r' in V1 for genuine incomplete right bundle branch block and overlooking retrograde atrial activation.",
+   "Assuming failure of adenosine to terminate excludes a nodal-dependent arrhythmia when subtherapeutic dosing or rapid metabolism is the cause.",
+   "Labelling atypical long-RP AVNRT as atrial tachycardia and choosing an inappropriate ablation target.",
+   "Attributing palpitations to anxiety in young women and delaying definitive rhythm documentation.",
+   "Overlooking coexisting dual pathophysiology when AVNRT and an accessory pathway occur in the same patient."
+  ],
+  "references": [
+   "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
+   "ESC Guidelines for the management of patients with supraventricular tachycardia",
+   "Zipes Cardiac Electrophysiology: From Cell to Bedside"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Terminate the acute episode with vagal manoeuvres, escalating to intravenous adenosine to transiently block the atrioventricular node",
+   "Use intravenous verapamil or a beta-blocker as an alternative when adenosine fails, and perform synchronised cardioversion if the patient is haemodynamically unstable",
+   "Offer chronic pharmacological prophylaxis with atrioventricular nodal agents such as beta-blockers or non-dihydropyridine calcium channel blockers for recurrent episodes",
+   "Offer slow-pathway catheter ablation as the durable curative treatment for troublesome or recurrent AVNRT",
+   "Teach patients self-administered vagal manoeuvres and reassure them of the benign nature of the arrhythmia",
+   "Screen for precipitants such as thyroid dysfunction and anaemia"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "atrioventricular_nodal_reentrant_tachycardia-pathway",
+   "title": "atrioventricular nodal reentrant tachycardia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Commonest regular paroxysmal supraventricular tachycardia, disproportionately affecting women, typically presenting with abrupt-onset, abrupt-offset palpitations.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: haemodynamic compromise with hypotension, chest pain or syncope during tachycardia",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: twelve-lead ECG during tachycardia and in sinus rhythm to seek pseudo-r' or pseudo-S waves, ambulatory or event monitoring to capture onset and offset if episodes are infrequent, vagal manoeuvre or adenosine administration"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Terminate the acute episode with vagal manoeuvres, escalating to intravenous adenosine to transiently block the atrioventricular node"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking the pseudo-r' in V1 for genuine incomplete right bundle branch block and overlooking retrograde atrial activation."
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of atrioventricular nodal reentrant tachycardia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "atrioventricular_nodal_reentrant_tachycardia-matrix",
+   "title": "atrioventricular nodal reentrant tachycardia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Commonest regular paroxysmal supraventricular tachycardia, disproportionately affecting women, typically presenting with",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "AVNRT arises from functionally and anatomically distinct conduction pathways in the region of the atrioventricular node. A fast pathway conducts rapidly but has a long refractory period, whereas a slow pathway conducts slowly but recovers quickly. A critically timed atrial premature beat blocks in the fast pathway and descends the slow pathway; by the time it reaches the distal node the fast pathway has recovered, allowing retrograde conduction back to the atrium and initiation of a sustained reentrant circuit. In typical slow-fast AVNRT this produces near-simultaneous atrial and ventricular depolarisation, while atypical forms reverse or vary the pathways used. The circuit incorporates perinodal atrial tissue and does not require an accessory pathway or the ventricles for its maintenance.",
-    "additionalDifferentials": [
-      "atrioventricular reentrant tachycardia using a concealed accessory pathway",
-      "focal atrial tachycardia",
-      "atrial flutter with regular conduction",
-      "sinus tachycardia (including inappropriate sinus tachycardia)",
-      "permanent junctional reciprocating tachycardia",
-      "junctional ectopic tachycardia"
+    [
+     "Key Investigations",
+     "twelve-lead ECG during tachycardia and in sinus rhythm to seek pseudo-r' or pseudo-S waves, ambulatory or event monitoring to",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "twelve-lead ECG during tachycardia and in sinus rhythm to seek pseudo-r' or pseudo-S waves",
-      "ambulatory or event monitoring to capture onset and offset if episodes are infrequent",
-      "vagal manoeuvre or adenosine administration with continuous ECG to observe response",
-      "transthoracic echocardiography to exclude structural heart disease",
-      "electrophysiological study demonstrating dual AV nodal physiology and a jump in the AH interval",
-      "thyroid function and full blood count to identify precipitants"
+    [
+     "Primary Differentials",
+     "atrioventricular reentrant tachycardia using a concealed accessory pathway, focal atrial tachycardia, atrial flutter with regular",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "haemodynamic compromise with hypotension, chest pain or syncope during tachycardia",
-      "very rapid rates in patients with pre-existing coronary or structural heart disease",
-      "syncope at onset suggesting an accessory pathway or additional arrhythmia",
-      "signs of decompensated heart failure during sustained episodes"
+    [
+     "Management Strategy",
+     "Terminate the acute episode with vagal manoeuvres, escalating to intravenous adenosine to transiently block the atrioventricular",
+     "Core treatment modality"
     ],
-    "prognosis": "AVNRT is a benign arrhythmia with an excellent long-term prognosis and is not associated with increased mortality in structurally normal hearts. Slow-pathway catheter ablation offers a durable cure in the great majority, and episodes otherwise remain intermittent and self-limiting.",
-    "pitfalls": [
-      "Mistaking the pseudo-r' in V1 for genuine incomplete right bundle branch block and overlooking retrograde atrial activation.",
-      "Assuming failure of adenosine to terminate excludes a nodal-dependent arrhythmia when subtherapeutic dosing or rapid metabolism is the cause.",
-      "Labelling atypical long-RP AVNRT as atrial tachycardia and choosing an inappropriate ablation target.",
-      "Attributing palpitations to anxiety in young women and delaying definitive rhythm documentation.",
-      "Overlooking coexisting dual pathophysiology when AVNRT and an accessory pathway occur in the same patient."
-    ],
-    "references": [
-      "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
-      "ESC Guidelines for the management of patients with supraventricular tachycardia",
-      "Zipes Cardiac Electrophysiology: From Cell to Bedside"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Terminate the acute episode with vagal manoeuvres, escalating to intravenous adenosine to transiently block the atrioventricular node",
-      "Use intravenous verapamil or a beta-blocker as an alternative when adenosine fails, and perform synchronised cardioversion if the patient is haemodynamically unstable",
-      "Offer chronic pharmacological prophylaxis with atrioventricular nodal agents such as beta-blockers or non-dihydropyridine calcium channel blockers for recurrent episodes",
-      "Offer slow-pathway catheter ablation as the durable curative treatment for troublesome or recurrent AVNRT",
-      "Teach patients self-administered vagal manoeuvres and reassure them of the benign nature of the arrhythmia",
-      "Screen for precipitants such as thyroid dysfunction and anaemia"
+    [
+     "Clinical Pitfall",
+     "Mistaking the pseudo-r' in V1 for genuine incomplete right bundle branch block and overlooking retrograde atrial activation.",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for atrioventricular nodal reentrant tachycardia."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "atrioventricular-nodal-reentrant-tachycardia-real-image",
+   "title": "atrioventricular nodal reentrant tachycardia: 12-Lead Diagnostic Electrocardiogram",
+   "type": "ecg",
+   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
+   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
+   "annotations": [
+    {
+     "label": "Conduction & Axis",
+     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
+    },
+    {
+     "label": "Repolarization",
+     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
+    },
+    {
+     "label": "Rhythm & Intervals",
+     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+    }
+   ]
+  }
+ ]
 }

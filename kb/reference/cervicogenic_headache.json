@@ -1,75 +1,170 @@
 {
-  "id": "cervicogenic_headache",
-  "name": "Cervicogenic headache",
-  "aliases": [
-    "CGH",
-    "cervical headache"
+ "id": "cervicogenic_headache",
+ "name": "Cervicogenic headache",
+ "aliases": [
+  "CGH",
+  "cervical headache"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system / Headache",
+ "specialty": "Neurology / Headache",
+ "referenceOnly": true,
+ "reference": {
+  "source": "ICHD-3 / International Classification of Sleep Disorders",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Pain is referred to the head from a disorder of the cervical spine, typically the upper C1 to C3 segments",
+   "It is usually side-locked and unilateral without side-shift, beginning in the neck or occiput and radiating to the fronto-temporal region",
+   "Attacks are provoked by neck movement, sustained awkward postures, or pressure over the upper cervical joints or muscles",
+   "Restricted cervical range of motion and ipsilateral neck, shoulder or arm discomfort are common",
+   "Relief of pain after a diagnostic anaesthetic block of a cervical structure or nerve strongly supports the diagnosis",
+   "Autonomic and migrainous features are usually mild, helping distinguish it from migraine and the trigeminal autonomic cephalalgias",
+   "Imaging changes of cervical spondylosis are common with age and do not by themselves confirm causation"
   ],
-  "class": "non_infective",
-  "system": "Nervous system / Headache",
-  "specialty": "Neurology / Headache",
-  "referenceOnly": true,
-  "reference": {
-    "source": "ICHD-3 / International Classification of Sleep Disorders",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Pain is referred to the head from a disorder of the cervical spine, typically the upper C1 to C3 segments",
-      "It is usually side-locked and unilateral without side-shift, beginning in the neck or occiput and radiating to the fronto-temporal region",
-      "Attacks are provoked by neck movement, sustained awkward postures, or pressure over the upper cervical joints or muscles",
-      "Restricted cervical range of motion and ipsilateral neck, shoulder or arm discomfort are common",
-      "Relief of pain after a diagnostic anaesthetic block of a cervical structure or nerve strongly supports the diagnosis",
-      "Autonomic and migrainous features are usually mild, helping distinguish it from migraine and the trigeminal autonomic cephalalgias",
-      "Imaging changes of cervical spondylosis are common with age and do not by themselves confirm causation"
+  "pathophysiology": "Cervicogenic headache arises because sensory afferents from the upper three cervical segments converge with trigeminal afferents in the trigeminocervical complex of the upper spinal cord and lower brainstem. Nociceptive input from the upper cervical joints, discs, ligaments or muscles is therefore perceived as pain in trigeminal territory, that is, in the head, and the pattern of referral depends on the specific cervical structure generating the pain.",
+  "additionalDifferentials": [
+   "Migraine, especially when accompanied by neck pain",
+   "Tension-type headache",
+   "Occipital neuralgia",
+   "Hemicrania continua",
+   "Temporomandibular joint disorder",
+   "Cervical radiculopathy or myelopathy"
+  ],
+  "additionalInvestigations": [
+   "Examination of cervical range of motion and provocation of pain by neck manoeuvres",
+   "Assessment of upper cervical joint and muscle tenderness",
+   "Cervical spine imaging with X-ray or MRI when structural or red-flag features are present",
+   "Diagnostic anaesthetic blocks of cervical facet joints or nerves for confirmation",
+   "Review for migrainous features to distinguish overlapping headache types"
+  ],
+  "redFlags": [
+   "Neurological signs of cervical myelopathy or radiculopathy",
+   "A history of significant neck trauma, malignancy or infection",
+   "Systemic symptoms, fever or unexplained weight loss",
+   "Sudden severe neck pain with headache suggesting arterial dissection"
+  ],
+  "prognosis": "Prognosis depends on the underlying cervical disorder; many patients improve with physiotherapy, manual therapy and targeted injections, though pain can be chronic and recurrent when degenerative changes persist.",
+  "pitfalls": [
+   "Attributing headache to incidental cervical spondylosis seen on imaging",
+   "Missing vertebral or carotid artery dissection presenting with neck pain and headache",
+   "Confusing it with migraine, which also frequently involves neck pain",
+   "Relying on imaging rather than on clinical provocation and diagnostic blocks"
+  ],
+  "references": [
+   "International Classification of Headache Disorders, 3rd edition (ICHD-3)",
+   "The Headaches (Olesen et al.)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Direct treatment at the underlying cervical source with physiotherapy comprising manual therapy, cervical mobilisation, targeted neck strengthening and postural correction",
+   "Provide symptomatic analgesia while limiting reliance on simple analgesics to avoid medication-overuse headache",
+   "Offer a diagnostic and therapeutic anaesthetic block of the implicated cervical facet joint or a greater occipital nerve block, both to confirm the source and relieve pain",
+   "Consider radiofrequency neurotomy of the responsible cervical medial branches when blocks give reproducible but temporary relief",
+   "Advise ergonomic and postural modification and avoidance of sustained awkward neck positions that provoke attacks",
+   "Refer to a headache specialist or pain service for chronic or refractory pain and to reassess for coexisting migraine"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "cervicogenic_headache-pathway",
+   "title": "Cervicogenic headache: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Pain is referred to the head from a disorder of the cervical spine, typically the upper C1 to C3 segments",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Neurological signs of cervical myelopathy or radiculopathy",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Examination of cervical range of motion and provocation of pain by neck manoeuvres, Assessment of upper cervical joint and muscle tenderness, Cervical spine imaging with X-ray or MRI when structural or red-flag features"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Direct treatment at the underlying cervical source with physiotherapy comprising manual therapy, cervical mobilisation, targeted neck strengthening and postural correction"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing headache to incidental cervical spondylosis seen on imaging"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of cervicogenic headache."
+  }
+ ],
+ "tables": [
+  {
+   "id": "cervicogenic_headache-matrix",
+   "title": "Cervicogenic headache: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Pain is referred to the head from a disorder of the cervical spine, typically the upper C1 to C3 segments",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Cervicogenic headache arises because sensory afferents from the upper three cervical segments converge with trigeminal afferents in the trigeminocervical complex of the upper spinal cord and lower brainstem. Nociceptive input from the upper cervical joints, discs, ligaments or muscles is therefore perceived as pain in trigeminal territory, that is, in the head, and the pattern of referral depends on the specific cervical structure generating the pain.",
-    "additionalDifferentials": [
-      "Migraine, especially when accompanied by neck pain",
-      "Tension-type headache",
-      "Occipital neuralgia",
-      "Hemicrania continua",
-      "Temporomandibular joint disorder",
-      "Cervical radiculopathy or myelopathy"
+    [
+     "Key Investigations",
+     "Examination of cervical range of motion and provocation of pain by neck manoeuvres, Assessment of upper cervical joint and muscle",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Examination of cervical range of motion and provocation of pain by neck manoeuvres",
-      "Assessment of upper cervical joint and muscle tenderness",
-      "Cervical spine imaging with X-ray or MRI when structural or red-flag features are present",
-      "Diagnostic anaesthetic blocks of cervical facet joints or nerves for confirmation",
-      "Review for migrainous features to distinguish overlapping headache types"
+    [
+     "Primary Differentials",
+     "Migraine, especially when accompanied by neck pain, Tension-type headache, Occipital neuralgia",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Neurological signs of cervical myelopathy or radiculopathy",
-      "A history of significant neck trauma, malignancy or infection",
-      "Systemic symptoms, fever or unexplained weight loss",
-      "Sudden severe neck pain with headache suggesting arterial dissection"
+    [
+     "Management Strategy",
+     "Direct treatment at the underlying cervical source with physiotherapy comprising manual therapy, cervical mobilisation, targeted",
+     "Core treatment modality"
     ],
-    "prognosis": "Prognosis depends on the underlying cervical disorder; many patients improve with physiotherapy, manual therapy and targeted injections, though pain can be chronic and recurrent when degenerative changes persist.",
-    "pitfalls": [
-      "Attributing headache to incidental cervical spondylosis seen on imaging",
-      "Missing vertebral or carotid artery dissection presenting with neck pain and headache",
-      "Confusing it with migraine, which also frequently involves neck pain",
-      "Relying on imaging rather than on clinical provocation and diagnostic blocks"
-    ],
-    "references": [
-      "International Classification of Headache Disorders, 3rd edition (ICHD-3)",
-      "The Headaches (Olesen et al.)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Direct treatment at the underlying cervical source with physiotherapy comprising manual therapy, cervical mobilisation, targeted neck strengthening and postural correction",
-      "Provide symptomatic analgesia while limiting reliance on simple analgesics to avoid medication-overuse headache",
-      "Offer a diagnostic and therapeutic anaesthetic block of the implicated cervical facet joint or a greater occipital nerve block, both to confirm the source and relieve pain",
-      "Consider radiofrequency neurotomy of the responsible cervical medial branches when blocks give reproducible but temporary relief",
-      "Advise ergonomic and postural modification and avoidance of sustained awkward neck positions that provoke attacks",
-      "Refer to a headache specialist or pain service for chronic or refractory pain and to reassess for coexisting migraine"
+    [
+     "Clinical Pitfall",
+     "Attributing headache to incidental cervical spondylosis seen on imaging",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for cervicogenic headache."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "cervicogenic-headache-real-image",
+   "title": "Cervicogenic headache: Diagnostic Head Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
+   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
+   "annotations": [
+    {
+     "label": "Cerebral Parenchyma",
+     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+    },
+    {
+     "label": "Extra-Axial Spaces",
+     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+    }
+   ]
+  }
+ ]
 }

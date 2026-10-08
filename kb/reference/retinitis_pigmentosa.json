@@ -1,78 +1,173 @@
 {
-  "id": "retinitis_pigmentosa",
-  "name": "Retinitis pigmentosa",
-  "aliases": [
-    "RP",
-    "rod-cone dystrophy",
-    "hereditary retinal dystrophy"
+ "id": "retinitis_pigmentosa",
+ "name": "Retinitis pigmentosa",
+ "aliases": [
+  "RP",
+  "rod-cone dystrophy",
+  "hereditary retinal dystrophy"
+ ],
+ "class": "non_infective",
+ "system": "Eye / Ophthalmology",
+ "specialty": "Ophthalmology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A group of inherited retinal dystrophies in which rod photoreceptors degenerate first, so patients present with night blindness (nyctalopia) and progressive peripheral field loss",
+   "Field constriction advances to tunnel vision, with central acuity typically preserved until late unless the macula becomes involved",
+   "The classic fundus triad is bone-spicule pigmentation in the mid-periphery, waxy pallor of the optic disc, and attenuated retinal arterioles",
+   "It may be isolated or part of a syndrome, notably Usher syndrome (with sensorineural deafness) and Bardet-Biedl syndrome, so associated systemic features should be sought",
+   "Inheritance can be autosomal dominant, autosomal recessive, or X-linked, which influences prognosis and genetic counselling",
+   "Common complications include posterior subcapsular cataract and cystoid macular oedema, both of which are treatable and can improve residual vision",
+   "Management focuses on genetic counselling, low-vision support, monitoring for treatable complications, and emerging gene-based therapies for specific mutations"
   ],
-  "class": "non_infective",
-  "system": "Eye / Ophthalmology",
-  "specialty": "Ophthalmology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A group of inherited retinal dystrophies in which rod photoreceptors degenerate first, so patients present with night blindness (nyctalopia) and progressive peripheral field loss",
-      "Field constriction advances to tunnel vision, with central acuity typically preserved until late unless the macula becomes involved",
-      "The classic fundus triad is bone-spicule pigmentation in the mid-periphery, waxy pallor of the optic disc, and attenuated retinal arterioles",
-      "It may be isolated or part of a syndrome, notably Usher syndrome (with sensorineural deafness) and Bardet-Biedl syndrome, so associated systemic features should be sought",
-      "Inheritance can be autosomal dominant, autosomal recessive, or X-linked, which influences prognosis and genetic counselling",
-      "Common complications include posterior subcapsular cataract and cystoid macular oedema, both of which are treatable and can improve residual vision",
-      "Management focuses on genetic counselling, low-vision support, monitoring for treatable complications, and emerging gene-based therapies for specific mutations"
+  "pathophysiology": "Retinitis pigmentosa comprises inherited dystrophies caused by mutations in numerous genes essential to photoreceptor and retinal pigment epithelium function. Progressive apoptosis of rod photoreceptors, followed later by cones, leads to loss of peripheral and night vision that spreads centrally over time. Degenerating photoreceptors and migration of retinal pigment epithelial cells into the retina produce the characteristic bone-spicule pigmentation, while secondary changes cause arteriolar narrowing and optic disc pallor. The underlying genetic defect determines the pattern of inheritance and the rate of progression.",
+  "additionalDifferentials": [
+   "Cone-rod dystrophy",
+   "Choroideremia",
+   "Gyrate atrophy",
+   "Leber congenital amaurosis",
+   "Pigmentary retinopathy secondary to drug toxicity (e.g. phenothiazines), infection, or inflammation",
+   "Congenital stationary night blindness"
+  ],
+  "additionalInvestigations": [
+   "Electroretinography to demonstrate reduced or extinguished rod and later cone responses",
+   "Visual field testing to document peripheral constriction",
+   "Optical coherence tomography to assess the macula and detect cystoid macular oedema",
+   "Fundus autofluorescence imaging to map areas of degeneration",
+   "Genetic testing to identify the causative mutation and guide counselling and therapy",
+   "Systemic evaluation, including audiology, when a syndromic form is suspected"
+  ],
+  "redFlags": [
+   "Sudden or accelerated central visual loss suggesting macular oedema or another superimposed problem",
+   "Associated hearing loss indicating Usher syndrome requiring multidisciplinary care",
+   "Systemic features pointing to a syndromic association needing broader evaluation",
+   "New symptoms inconsistent with the expected slow progression, prompting search for another cause"
+  ],
+  "prognosis": "Retinitis pigmentosa is generally slowly progressive, and although many patients retain useful central vision into adulthood, most eventually experience severe peripheral field loss; prognosis varies with genotype and inheritance pattern.",
+  "pitfalls": [
+   "Overlooking treatable complications such as cystoid macular oedema and cataract that can improve vision",
+   "Failing to identify a syndromic association such as Usher or Bardet-Biedl syndrome",
+   "Not offering genetic counselling and testing to patients and at-risk relatives",
+   "Mistaking a pigmentary retinopathy from drug toxicity or prior inflammation for hereditary disease"
+  ],
+  "references": [
+   "Parsons' Diseases of the Eye",
+   "Kanski's Clinical Ophthalmology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Offer gene-replacement therapy with voretigene neparvovec for confirmed biallelic RPE65-mediated disease",
+   "Treat cystoid macular oedema with a carbonic anhydrase inhibitor such as oral acetazolamide or topical dorzolamide, and remove visually significant posterior subcapsular cataract surgically",
+   "Provide low-vision rehabilitation, visual aids, and ultraviolet-protective tinted lenses",
+   "Confirm the genotype with genetic testing to guide prognosis, counselling and eligibility for targeted therapy",
+   "Screen for and manage syndromic associations, including audiology for Usher syndrome and evaluation for Bardet-Biedl syndrome",
+   "Offer genetic counselling and family screening according to the inheritance pattern",
+   "Monitor with serial visual fields, optical coherence tomography and electroretinography, and consider emerging options such as retinal prostheses in advanced disease"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "retinitis_pigmentosa-pathway",
+   "title": "Retinitis pigmentosa: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A group of inherited retinal dystrophies in which rod photoreceptors degenerate first, so patients present with night blindness (nyctalopia) and progressive peripheral field loss",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Sudden or accelerated central visual loss suggesting macular oedema or another superimposed problem",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Electroretinography to demonstrate reduced or extinguished rod and later cone responses, Visual field testing to document peripheral constriction, Optical coherence tomography to assess the macula and detect cystoid"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Offer gene-replacement therapy with voretigene neparvovec for confirmed biallelic RPE65-mediated disease"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Overlooking treatable complications such as cystoid macular oedema and cataract that can improve vision"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of retinitis pigmentosa."
+  }
+ ],
+ "tables": [
+  {
+   "id": "retinitis_pigmentosa-matrix",
+   "title": "Retinitis pigmentosa: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A group of inherited retinal dystrophies in which rod photoreceptors degenerate first, so patients present with night blindness",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Retinitis pigmentosa comprises inherited dystrophies caused by mutations in numerous genes essential to photoreceptor and retinal pigment epithelium function. Progressive apoptosis of rod photoreceptors, followed later by cones, leads to loss of peripheral and night vision that spreads centrally over time. Degenerating photoreceptors and migration of retinal pigment epithelial cells into the retina produce the characteristic bone-spicule pigmentation, while secondary changes cause arteriolar narrowing and optic disc pallor. The underlying genetic defect determines the pattern of inheritance and the rate of progression.",
-    "additionalDifferentials": [
-      "Cone-rod dystrophy",
-      "Choroideremia",
-      "Gyrate atrophy",
-      "Leber congenital amaurosis",
-      "Pigmentary retinopathy secondary to drug toxicity (e.g. phenothiazines), infection, or inflammation",
-      "Congenital stationary night blindness"
+    [
+     "Key Investigations",
+     "Electroretinography to demonstrate reduced or extinguished rod and later cone responses, Visual field testing to document",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Electroretinography to demonstrate reduced or extinguished rod and later cone responses",
-      "Visual field testing to document peripheral constriction",
-      "Optical coherence tomography to assess the macula and detect cystoid macular oedema",
-      "Fundus autofluorescence imaging to map areas of degeneration",
-      "Genetic testing to identify the causative mutation and guide counselling and therapy",
-      "Systemic evaluation, including audiology, when a syndromic form is suspected"
+    [
+     "Primary Differentials",
+     "Cone-rod dystrophy, Choroideremia, Gyrate atrophy",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Sudden or accelerated central visual loss suggesting macular oedema or another superimposed problem",
-      "Associated hearing loss indicating Usher syndrome requiring multidisciplinary care",
-      "Systemic features pointing to a syndromic association needing broader evaluation",
-      "New symptoms inconsistent with the expected slow progression, prompting search for another cause"
+    [
+     "Management Strategy",
+     "Offer gene-replacement therapy with voretigene neparvovec for confirmed biallelic RPE65-mediated disease",
+     "Core treatment modality"
     ],
-    "prognosis": "Retinitis pigmentosa is generally slowly progressive, and although many patients retain useful central vision into adulthood, most eventually experience severe peripheral field loss; prognosis varies with genotype and inheritance pattern.",
-    "pitfalls": [
-      "Overlooking treatable complications such as cystoid macular oedema and cataract that can improve vision",
-      "Failing to identify a syndromic association such as Usher or Bardet-Biedl syndrome",
-      "Not offering genetic counselling and testing to patients and at-risk relatives",
-      "Mistaking a pigmentary retinopathy from drug toxicity or prior inflammation for hereditary disease"
-    ],
-    "references": [
-      "Parsons' Diseases of the Eye",
-      "Kanski's Clinical Ophthalmology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Offer gene-replacement therapy with voretigene neparvovec for confirmed biallelic RPE65-mediated disease",
-      "Treat cystoid macular oedema with a carbonic anhydrase inhibitor such as oral acetazolamide or topical dorzolamide, and remove visually significant posterior subcapsular cataract surgically",
-      "Provide low-vision rehabilitation, visual aids, and ultraviolet-protective tinted lenses",
-      "Confirm the genotype with genetic testing to guide prognosis, counselling and eligibility for targeted therapy",
-      "Screen for and manage syndromic associations, including audiology for Usher syndrome and evaluation for Bardet-Biedl syndrome",
-      "Offer genetic counselling and family screening according to the inheritance pattern",
-      "Monitor with serial visual fields, optical coherence tomography and electroretinography, and consider emerging options such as retinal prostheses in advanced disease"
+    [
+     "Clinical Pitfall",
+     "Overlooking treatable complications such as cystoid macular oedema and cataract that can improve vision",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for retinitis pigmentosa."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "retinitis-pigmentosa-real-image",
+   "title": "Retinitis pigmentosa: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

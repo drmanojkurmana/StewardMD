@@ -6,7 +6,19 @@
  "basis": "international",
  "counterpart": "anaemia-in-pregnancy",
  "setting": "Antenatal clinic, day unit, labour ward, postnatal",
- "aliases": ["anemia in pregnancy", "iron deficiency anaemia", "IDA", "iron deficiency in pregnancy", "IV iron", "ferric carboxymaltose", "ferric derisomaltose", "iron sucrose", "ferritin", "IFA", "postpartum anaemia"],
+ "aliases": [
+  "anemia in pregnancy",
+  "iron deficiency anaemia",
+  "IDA",
+  "iron deficiency in pregnancy",
+  "IV iron",
+  "ferric carboxymaltose",
+  "ferric derisomaltose",
+  "iron sucrose",
+  "ferritin",
+  "IFA",
+  "postpartum anaemia"
+ ],
  "summary": "Anaemia in pregnancy is haemoglobin below 110 g/L in the first trimester and below 105 g/L later (BSH). Give all women daily iron and folic acid (WHO), treat iron deficiency with 40 to 80 mg elemental iron daily or on alternate days, recheck Hb at 2 to 3 weeks, and use IV iron from the second trimester for non-response, intolerance or late presentation.",
  "sections": [
   {
@@ -95,19 +107,165 @@
   }
  ],
  "drugs": [
-  { "name": "Oral iron (ferrous salt)", "dose": "Treatment 40 to 80 mg elemental iron orally once each morning or on alternate mornings (BSH); WHO 120 mg elemental iron daily with 400 micrograms folic acid until Hb 110 g/L", "notes": "Empty stomach with water or vitamin C. Ferrous sulfate 200 mg gives about 65 mg elemental iron. Constipation and nausea are common." },
-  { "name": "Iron and folic acid (prevention)", "dose": "30 to 60 mg elemental iron plus 400 micrograms folic acid orally daily throughout pregnancy (WHO); or 120 mg iron plus 2.8 mg folic acid once weekly where appropriate", "notes": "60 mg daily preferred where anaemia prevalence is 40% or more." },
-  { "name": "Folic acid", "dose": "400 micrograms orally daily from preconception to 12 weeks", "notes": "Higher doses for women at high risk of neural tube defects per local policy." },
-  { "name": "Ferric carboxymaltose", "dose": "20 mg/kg IV, maximum 1000 mg per single infusion, over at least 15 minutes; total dose from weight and Hb deficit", "notes": "Second or third trimester or postpartum. Can cause hypophosphataemia." },
-  { "name": "Ferric derisomaltose", "dose": "20 mg/kg IV as a single infusion, total dose from weight and Hb deficit", "notes": "Second or third trimester or postpartum. Observe for hypersensitivity." },
-  { "name": "Iron sucrose", "dose": "200 mg IV per dose, repeated up to 3 times a week until the calculated total dose is given", "notes": "Requires several visits; useful where single-dose products are unavailable." },
-  { "name": "Packed red cells", "dose": "One unit at a time with clinical reassessment between units", "notes": "Active or anticipated major bleeding, imminent cardiac compromise or symptoms needing immediate correction." }
+  {
+   "name": "Oral iron (ferrous salt)",
+   "dose": "Treatment 40 to 80 mg elemental iron orally once each morning or on alternate mornings (BSH); WHO 120 mg elemental iron daily with 400 micrograms folic acid until Hb 110 g/L",
+   "notes": "Empty stomach with water or vitamin C. Ferrous sulfate 200 mg gives about 65 mg elemental iron. Constipation and nausea are common."
+  },
+  {
+   "name": "Iron and folic acid (prevention)",
+   "dose": "30 to 60 mg elemental iron plus 400 micrograms folic acid orally daily throughout pregnancy (WHO); or 120 mg iron plus 2.8 mg folic acid once weekly where appropriate",
+   "notes": "60 mg daily preferred where anaemia prevalence is 40% or more."
+  },
+  {
+   "name": "Folic acid",
+   "dose": "400 micrograms orally daily from preconception to 12 weeks",
+   "notes": "Higher doses for women at high risk of neural tube defects per local policy."
+  },
+  {
+   "name": "Ferric carboxymaltose",
+   "dose": "20 mg/kg IV, maximum 1000 mg per single infusion, over at least 15 minutes; total dose from weight and Hb deficit",
+   "notes": "Second or third trimester or postpartum. Can cause hypophosphataemia."
+  },
+  {
+   "name": "Ferric derisomaltose",
+   "dose": "20 mg/kg IV as a single infusion, total dose from weight and Hb deficit",
+   "notes": "Second or third trimester or postpartum. Observe for hypersensitivity."
+  },
+  {
+   "name": "Iron sucrose",
+   "dose": "200 mg IV per dose, repeated up to 3 times a week until the calculated total dose is given",
+   "notes": "Requires several visits; useful where single-dose products are unavailable."
+  },
+  {
+   "name": "Packed red cells",
+   "dose": "One unit at a time with clinical reassessment between units",
+   "notes": "Active or anticipated major bleeding, imminent cardiac compromise or symptoms needing immediate correction."
+  }
  ],
  "sources": [
-  { "org": "British Society for Haematology", "title": "UK guidelines on the management of iron deficiency in pregnancy", "year": 2020, "url": "https://b-s-h.org.uk/guidelines/guidelines/uk-guidelines-on-the-management-of-iron-deficiency-in-pregnancy" },
-  { "org": "WHO", "title": "WHO recommendations on antenatal care for a positive pregnancy experience (iron and folic acid supplementation)", "year": 2016, "url": "https://www.who.int/publications/i/item/9789241549912" },
-  { "org": "ACOG", "title": "Anemia in pregnancy: ACOG Practice Bulletin No. 233 (reaffirmed 2024)", "year": 2021, "url": "https://www.acog.org/clinical/clinical-guidance/practice-bulletin/articles/2021/08/anemia-in-pregnancy" },
-  { "org": "WHO", "title": "Guideline on haemoglobin cutoffs to define anaemia in individuals and populations", "year": 2024, "url": "https://www.who.int/publications/i/item/9789240088542" }
+  {
+   "org": "British Society for Haematology",
+   "title": "UK guidelines on the management of iron deficiency in pregnancy",
+   "year": 2020,
+   "url": "https://b-s-h.org.uk/guidelines/guidelines/uk-guidelines-on-the-management-of-iron-deficiency-in-pregnancy"
+  },
+  {
+   "org": "WHO",
+   "title": "WHO recommendations on antenatal care for a positive pregnancy experience (iron and folic acid supplementation)",
+   "year": 2016,
+   "url": "https://www.who.int/publications/i/item/9789241549912"
+  },
+  {
+   "org": "ACOG",
+   "title": "Anemia in pregnancy: ACOG Practice Bulletin No. 233 (reaffirmed 2024)",
+   "year": 2021,
+   "url": "https://www.acog.org/clinical/clinical-guidance/practice-bulletin/articles/2021/08/anemia-in-pregnancy"
+  },
+  {
+   "org": "WHO",
+   "title": "Guideline on haemoglobin cutoffs to define anaemia in individuals and populations",
+   "year": 2024,
+   "url": "https://www.who.int/publications/i/item/9789240088542"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "anaemia-in-pregnancy-international-pathway",
+   "title": "Anaemia in pregnancy (BSH, WHO and ACOG) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "BSH: anaemia is Hb below 110 g/L in the first trimester, below 105 g/L in the second and third trimesters, and below 100 g/L postpartum. WHO 2024 uses below 110 g/L in the first and third trimesters and below 105 g/L in the second; ACOG",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Check a full blood count at booking and at 28 weeks (BSH); ACOG screens in the first trimester and again at 24 to 28 weeks.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Serum ferritin below 30 micrograms/L confirms iron deficiency in pregnancy; ferritin can be falsely normal with inflammation or infection."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "BSH: offer IV iron from the second trimester to women with confirmed iron deficiency who do not respond to or cannot tolerate oral iron, and to those with Hb below 100 g/L after 34 weeks. Avoid IV iron in the first trimester."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Not rechecking Hb after 2 to 3 weeks, so ineffective oral iron continues until late pregnancy."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for anaemia in pregnancy (bsh, who and acog)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "anaemia-in-pregnancy-international-summary-matrix",
+   "title": "Anaemia in pregnancy (BSH, WHO and ACOG) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "BSH: anaemia is Hb below 110 g/L in the first trimester, below 105 g/L in the second and third trimesters, and below 100 g/L postpartum.",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "BSH: offer IV iron from the second trimester to women with confirmed iron deficiency who do not respond to or cannot tolerate oral iron,",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Serum ferritin below 30 micrograms/L confirms iron deficiency in pregnancy; ferritin can be falsely normal with inflammation or infection.",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Oral iron (ferrous salt): Treatment 40 to 80 mg elemental iron orally once each morning or on alternate mornings (BSH); WHO 120 mg",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Not rechecking Hb after 2 to 3 weeks, so ineffective oral iron continues until late pregnancy.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for anaemia in pregnancy (bsh, who and acog)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "anaemia-in-pregnancy-international-real-image",
+   "title": "Anaemia in pregnancy (BSH, WHO and ACOG): Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

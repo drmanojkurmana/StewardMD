@@ -1,79 +1,174 @@
 {
-  "id": "overlap_syndrome_rheum",
-  "name": "Rheumatological overlap syndrome",
-  "aliases": [
-    "overlap syndrome",
-    "connective tissue overlap",
-    "scleromyositis",
-    "anti-PM/Scl",
-    "anti-Ku"
+ "id": "overlap_syndrome_rheum",
+ "name": "Rheumatological overlap syndrome",
+ "aliases": [
+  "overlap syndrome",
+  "connective tissue overlap",
+  "scleromyositis",
+  "anti-PM/Scl",
+  "anti-Ku"
+ ],
+ "class": "non_infective",
+ "system": "Rheumatology / Vascular",
+ "specialty": "Rheumatology / Vascular Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Kelley & Firestein's Textbook of Rheumatology / international connective tissue disease guidance",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Patients simultaneously fulfil criteria for two or more distinct connective tissue or autoimmune diseases",
+   "Common combinations include systemic sclerosis with inflammatory myositis (scleromyositis) or lupus with rheumatoid arthritis",
+   "Specific autoantibodies such as anti-PM/Scl and anti-Ku help characterise particular overlap phenotypes",
+   "Unlike mixed connective tissue disease, overlap syndromes meet full criteria for each component disorder rather than sharing a single defining antibody",
+   "Management is directed at the dominant and most threatening organ involvement across the combined diseases",
+   "Careful serological and clinical mapping guides prognosis and treatment intensity",
+   "The overlapping features may appear together or accrue sequentially over time"
   ],
-  "class": "non_infective",
-  "system": "Rheumatology / Vascular",
-  "specialty": "Rheumatology / Vascular Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Kelley & Firestein's Textbook of Rheumatology / international connective tissue disease guidance",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Patients simultaneously fulfil criteria for two or more distinct connective tissue or autoimmune diseases",
-      "Common combinations include systemic sclerosis with inflammatory myositis (scleromyositis) or lupus with rheumatoid arthritis",
-      "Specific autoantibodies such as anti-PM/Scl and anti-Ku help characterise particular overlap phenotypes",
-      "Unlike mixed connective tissue disease, overlap syndromes meet full criteria for each component disorder rather than sharing a single defining antibody",
-      "Management is directed at the dominant and most threatening organ involvement across the combined diseases",
-      "Careful serological and clinical mapping guides prognosis and treatment intensity",
-      "The overlapping features may appear together or accrue sequentially over time"
+  "pathophysiology": "Rheumatological overlap syndromes arise when autoimmune mechanisms characteristic of more than one defined connective tissue disease coexist in a single patient. Shared genetic susceptibility and dysregulated adaptive immunity generate autoantibodies and tissue inflammation spanning several disorders, sometimes marked by antibodies such as anti-PM/Scl or anti-Ku that associate with combined phenotypes. The resulting clinical picture blends the vasculopathy, fibrosis, synovitis, and myositis of the component diseases, and organ involvement reflects the summed pathology.",
+  "additionalDifferentials": [
+   "Mixed connective tissue disease",
+   "Systemic lupus erythematosus",
+   "Systemic sclerosis",
+   "Idiopathic inflammatory myopathy",
+   "Rheumatoid arthritis",
+   "Undifferentiated connective tissue disease"
+  ],
+  "additionalInvestigations": [
+   "Antinuclear antibody with a broad extractable nuclear antigen and myositis-specific/associated antibody panel",
+   "Anti-PM/Scl and anti-Ku testing when scleromyositis is suspected",
+   "Creatine kinase and inflammatory markers for myositis",
+   "Transthoracic echocardiography and pulmonary function tests for cardiopulmonary involvement",
+   "High-resolution CT for interstitial lung disease",
+   "Renal function and urinalysis to detect nephritis"
+  ],
+  "redFlags": [
+   "Severe myositis with respiratory or bulbar involvement",
+   "Progressive interstitial lung disease or pulmonary hypertension",
+   "Lupus-type nephritis with declining renal function",
+   "Digital or systemic ischaemia from active vasculopathy"
+  ],
+  "prognosis": "Outcome is determined by the combination and severity of component diseases and their organ involvement; some overlaps behave indolently while others, particularly those with significant lung, cardiac, or renal disease, carry substantial morbidity. Tailored immunosuppression can control inflammation across the overlapping conditions.",
+  "pitfalls": [
+   "Treating only the most obvious component and neglecting concurrent organ-threatening disease",
+   "Confusing an overlap syndrome with mixed connective tissue disease and mislabelling the serology",
+   "Missing evolving features of a second disorder over time",
+   "Under-recognising myositis-associated interstitial lung disease"
+  ],
+  "references": [
+   "Kelley & Firestein's Textbook of Rheumatology",
+   "International literature on connective tissue overlap syndromes"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Direct treatment at the dominant and most organ-threatening manifestation across the coexisting connective tissue diseases rather than at a single label",
+   "Use corticosteroids with a steroid-sparing immunosuppressant such as methotrexate, azathioprine or mycophenolate for the inflammatory arthritis and myositis components",
+   "Escalate to potent agents such as cyclophosphamide or rituximab for severe organ involvement including nephritis or progressive interstitial lung disease",
+   "Manage scleroderma-spectrum features with Raynaud measures including a calcium-channel blocker, and treat pulmonary arterial hypertension where present",
+   "Monitor across systems with creatine kinase, renal function and urinalysis, pulmonary function tests, echocardiography and high-resolution CT",
+   "Coordinate care through rheumatology with respiratory, nephrology and cardiology input, adjusting immunosuppression intensity to the combined phenotype"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "overlap_syndrome_rheum-pathway",
+   "title": "Rheumatological overlap syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Patients simultaneously fulfil criteria for two or more distinct connective tissue or autoimmune diseases",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Severe myositis with respiratory or bulbar involvement",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Antinuclear antibody with a broad extractable nuclear antigen and myositis-specific/associated antibody panel, Anti-PM/Scl and anti-Ku testing when scleromyositis is suspected, Creatine kinase and inflammatory markers for"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Direct treatment at the dominant and most organ-threatening manifestation across the coexisting connective tissue diseases rather than at a single label"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Treating only the most obvious component and neglecting concurrent organ-threatening disease"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of rheumatological overlap syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "overlap_syndrome_rheum-matrix",
+   "title": "Rheumatological overlap syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Patients simultaneously fulfil criteria for two or more distinct connective tissue or autoimmune diseases",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Rheumatological overlap syndromes arise when autoimmune mechanisms characteristic of more than one defined connective tissue disease coexist in a single patient. Shared genetic susceptibility and dysregulated adaptive immunity generate autoantibodies and tissue inflammation spanning several disorders, sometimes marked by antibodies such as anti-PM/Scl or anti-Ku that associate with combined phenotypes. The resulting clinical picture blends the vasculopathy, fibrosis, synovitis, and myositis of the component diseases, and organ involvement reflects the summed pathology.",
-    "additionalDifferentials": [
-      "Mixed connective tissue disease",
-      "Systemic lupus erythematosus",
-      "Systemic sclerosis",
-      "Idiopathic inflammatory myopathy",
-      "Rheumatoid arthritis",
-      "Undifferentiated connective tissue disease"
+    [
+     "Key Investigations",
+     "Antinuclear antibody with a broad extractable nuclear antigen and myositis-specific/associated antibody panel, Anti-PM/Scl and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Antinuclear antibody with a broad extractable nuclear antigen and myositis-specific/associated antibody panel",
-      "Anti-PM/Scl and anti-Ku testing when scleromyositis is suspected",
-      "Creatine kinase and inflammatory markers for myositis",
-      "Transthoracic echocardiography and pulmonary function tests for cardiopulmonary involvement",
-      "High-resolution CT for interstitial lung disease",
-      "Renal function and urinalysis to detect nephritis"
+    [
+     "Primary Differentials",
+     "Mixed connective tissue disease, Systemic lupus erythematosus, Systemic sclerosis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Severe myositis with respiratory or bulbar involvement",
-      "Progressive interstitial lung disease or pulmonary hypertension",
-      "Lupus-type nephritis with declining renal function",
-      "Digital or systemic ischaemia from active vasculopathy"
+    [
+     "Management Strategy",
+     "Direct treatment at the dominant and most organ-threatening manifestation across the coexisting connective tissue diseases rather",
+     "Core treatment modality"
     ],
-    "prognosis": "Outcome is determined by the combination and severity of component diseases and their organ involvement; some overlaps behave indolently while others, particularly those with significant lung, cardiac, or renal disease, carry substantial morbidity. Tailored immunosuppression can control inflammation across the overlapping conditions.",
-    "pitfalls": [
-      "Treating only the most obvious component and neglecting concurrent organ-threatening disease",
-      "Confusing an overlap syndrome with mixed connective tissue disease and mislabelling the serology",
-      "Missing evolving features of a second disorder over time",
-      "Under-recognising myositis-associated interstitial lung disease"
-    ],
-    "references": [
-      "Kelley & Firestein's Textbook of Rheumatology",
-      "International literature on connective tissue overlap syndromes"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Direct treatment at the dominant and most organ-threatening manifestation across the coexisting connective tissue diseases rather than at a single label",
-      "Use corticosteroids with a steroid-sparing immunosuppressant such as methotrexate, azathioprine or mycophenolate for the inflammatory arthritis and myositis components",
-      "Escalate to potent agents such as cyclophosphamide or rituximab for severe organ involvement including nephritis or progressive interstitial lung disease",
-      "Manage scleroderma-spectrum features with Raynaud measures including a calcium-channel blocker, and treat pulmonary arterial hypertension where present",
-      "Monitor across systems with creatine kinase, renal function and urinalysis, pulmonary function tests, echocardiography and high-resolution CT",
-      "Coordinate care through rheumatology with respiratory, nephrology and cardiology input, adjusting immunosuppression intensity to the combined phenotype"
+    [
+     "Clinical Pitfall",
+     "Treating only the most obvious component and neglecting concurrent organ-threatening disease",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for rheumatological overlap syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "overlap-syndrome-rheum-real-image",
+   "title": "Rheumatological overlap syndrome: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

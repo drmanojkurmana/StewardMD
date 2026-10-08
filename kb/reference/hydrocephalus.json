@@ -1,78 +1,173 @@
 {
-  "id": "hydrocephalus",
-  "name": "Hydrocephalus",
-  "aliases": [
-    "obstructive hydrocephalus",
-    "communicating hydrocephalus",
-    "normal pressure hydrocephalus",
-    "NPH"
+ "id": "hydrocephalus",
+ "name": "Hydrocephalus",
+ "aliases": [
+  "obstructive hydrocephalus",
+  "communicating hydrocephalus",
+  "normal pressure hydrocephalus",
+  "NPH"
+ ],
+ "class": "non_infective",
+ "system": "Neurosurgery / Neurology",
+ "specialty": "Neurosurgery",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Youmans & Winn Neurological Surgery / Harrison's Principles of Internal Medicine",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Hydrocephalus reflects an imbalance between cerebrospinal fluid production and absorption or a blockage to its flow, producing ventricular enlargement",
+   "It is broadly divided into obstructive (non-communicating), where flow is blocked within the ventricular system, and communicating, where absorption at the arachnoid granulations is impaired",
+   "Acute obstructive hydrocephalus is a neurosurgical emergency presenting with headache, vomiting, reduced consciousness, and papilloedema from rapidly rising intracranial pressure",
+   "In infants, before fusion of the sutures, features include an enlarging head circumference, bulging fontanelle, splayed sutures, and the sunsetting sign of downward-deviated eyes",
+   "Normal pressure hydrocephalus classically presents in older adults with the triad of gait apraxia, cognitive decline, and urinary incontinence, and gait often improves after CSF drainage",
+   "Treatment principles include relieving the obstruction where possible and diverting CSF, commonly by ventriculoperitoneal shunting or endoscopic third ventriculostomy for suitable obstructive cases",
+   "Shunt complications such as infection, blockage, over-drainage, and disconnection are common and should be considered in any shunted patient who deteriorates",
+   "Imaging helps distinguish true hydrocephalus with raised pressure from ex vacuo ventricular enlargement due to brain atrophy"
   ],
-  "class": "non_infective",
-  "system": "Neurosurgery / Neurology",
-  "specialty": "Neurosurgery",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Youmans & Winn Neurological Surgery / Harrison's Principles of Internal Medicine",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Hydrocephalus reflects an imbalance between cerebrospinal fluid production and absorption or a blockage to its flow, producing ventricular enlargement",
-      "It is broadly divided into obstructive (non-communicating), where flow is blocked within the ventricular system, and communicating, where absorption at the arachnoid granulations is impaired",
-      "Acute obstructive hydrocephalus is a neurosurgical emergency presenting with headache, vomiting, reduced consciousness, and papilloedema from rapidly rising intracranial pressure",
-      "In infants, before fusion of the sutures, features include an enlarging head circumference, bulging fontanelle, splayed sutures, and the sunsetting sign of downward-deviated eyes",
-      "Normal pressure hydrocephalus classically presents in older adults with the triad of gait apraxia, cognitive decline, and urinary incontinence, and gait often improves after CSF drainage",
-      "Treatment principles include relieving the obstruction where possible and diverting CSF, commonly by ventriculoperitoneal shunting or endoscopic third ventriculostomy for suitable obstructive cases",
-      "Shunt complications such as infection, blockage, over-drainage, and disconnection are common and should be considered in any shunted patient who deteriorates",
-      "Imaging helps distinguish true hydrocephalus with raised pressure from ex vacuo ventricular enlargement due to brain atrophy"
+  "pathophysiology": "Hydrocephalus is an abnormal accumulation of cerebrospinal fluid within the ventricular system, usually resulting in ventricular dilatation and, when acute, raised intracranial pressure. CSF is produced largely by the choroid plexus, circulates through the ventricles and subarachnoid space, and is absorbed at the arachnoid granulations. Obstruction along this pathway (for example at the aqueduct, fourth ventricular outflow, or by a mass or blood clot) causes non-communicating hydrocephalus, while impaired absorption after haemorrhage, infection, or inflammation causes communicating hydrocephalus. Rising pressure and ventricular expansion compress adjacent white matter and, if unrelieved, can lead to herniation.",
+  "additionalDifferentials": [
+   "Cerebral atrophy with ex vacuo ventriculomegaly",
+   "Intracranial mass causing focal obstruction",
+   "Idiopathic intracranial hypertension",
+   "Neurodegenerative dementia (in suspected NPH)",
+   "Shunt malfunction in a previously treated patient"
+  ],
+  "additionalInvestigations": [
+   "CT or MRI brain to assess ventricular size, the level of obstruction, and periventricular changes",
+   "MRI with CSF flow studies when aqueductal or outflow obstruction is suspected",
+   "Head circumference monitoring and cranial ultrasound in infants with an open fontanelle",
+   "Large-volume lumbar puncture or external drainage trial to predict shunt response in suspected NPH",
+   "Shunt series and imaging to evaluate suspected shunt malfunction"
+  ],
+  "redFlags": [
+   "Acute obstructive hydrocephalus with falling conscious level, severe headache, and vomiting requiring emergency CSF diversion",
+   "Signs of impending herniation from rapidly rising intracranial pressure",
+   "Rapidly enlarging head with bulging fontanelle and sunsetting eyes in an infant",
+   "Shunt malfunction or shunt infection presenting with headache, drowsiness, or fever in a shunted patient"
+  ],
+  "prognosis": "Prognosis depends on the cause, speed of onset, and timeliness of treatment; well-selected patients do well after CSF diversion, but outcomes are limited by the underlying pathology and by recurrent shunt complications, and untreated acute obstruction can be rapidly fatal.",
+  "pitfalls": [
+   "Mistaking ex vacuo ventriculomegaly from atrophy for treatable hydrocephalus",
+   "Delaying CSF diversion in acute obstructive hydrocephalus while awaiting further tests",
+   "Overlooking shunt malfunction as a cause of deterioration in a shunted patient",
+   "Attributing the NPH triad solely to ageing or dementia and missing a reversible component"
+  ],
+  "references": [
+   "Youmans & Winn Neurological Surgery",
+   "Harrison's Principles of Internal Medicine, 22e"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Cerebrospinal fluid diversion is the definitive treatment, most commonly ventriculoperitoneal shunting, with endoscopic third ventriculostomy for suitable obstructive cases",
+   "Treatment of the underlying cause where possible, such as resection of an obstructing tumour or clearance of a clot",
+   "Emergency external ventricular drainage for acute obstructive hydrocephalus with raised intracranial pressure",
+   "Shunt insertion in normal pressure hydrocephalus for patients selected by a positive large-volume lumbar puncture or external drainage trial",
+   "Long-term shunt surveillance with prompt imaging and shunt series for suspected malfunction, and revision or antibiotic treatment for shunt infection",
+   "Head circumference monitoring and cranial ultrasound in infants with an open fontanelle",
+   "Multidisciplinary neurosurgical follow-up with attention to neurodevelopmental outcome"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "hydrocephalus-pathway",
+   "title": "Hydrocephalus: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Hydrocephalus reflects an imbalance between cerebrospinal fluid production and absorption or a blockage to its flow, producing ventricular enlargement",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Acute obstructive hydrocephalus with falling conscious level, severe headache, and vomiting requiring emergency CSF diversion",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: CT or MRI brain to assess ventricular size, the level of obstruction, and periventricular changes, MRI with CSF flow studies when aqueductal or outflow obstruction is suspected, Head circumference monitoring and cranial"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Cerebrospinal fluid diversion is the definitive treatment, most commonly ventriculoperitoneal shunting, with endoscopic third ventriculostomy for suitable obstructive cases"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking ex vacuo ventriculomegaly from atrophy for treatable hydrocephalus"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of hydrocephalus."
+  }
+ ],
+ "tables": [
+  {
+   "id": "hydrocephalus-matrix",
+   "title": "Hydrocephalus: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Hydrocephalus reflects an imbalance between cerebrospinal fluid production and absorption or a blockage to its flow, producing",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Hydrocephalus is an abnormal accumulation of cerebrospinal fluid within the ventricular system, usually resulting in ventricular dilatation and, when acute, raised intracranial pressure. CSF is produced largely by the choroid plexus, circulates through the ventricles and subarachnoid space, and is absorbed at the arachnoid granulations. Obstruction along this pathway (for example at the aqueduct, fourth ventricular outflow, or by a mass or blood clot) causes non-communicating hydrocephalus, while impaired absorption after haemorrhage, infection, or inflammation causes communicating hydrocephalus. Rising pressure and ventricular expansion compress adjacent white matter and, if unrelieved, can lead to herniation.",
-    "additionalDifferentials": [
-      "Cerebral atrophy with ex vacuo ventriculomegaly",
-      "Intracranial mass causing focal obstruction",
-      "Idiopathic intracranial hypertension",
-      "Neurodegenerative dementia (in suspected NPH)",
-      "Shunt malfunction in a previously treated patient"
+    [
+     "Key Investigations",
+     "CT or MRI brain to assess ventricular size, the level of obstruction, and periventricular changes, MRI with CSF flow studies when",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "CT or MRI brain to assess ventricular size, the level of obstruction, and periventricular changes",
-      "MRI with CSF flow studies when aqueductal or outflow obstruction is suspected",
-      "Head circumference monitoring and cranial ultrasound in infants with an open fontanelle",
-      "Large-volume lumbar puncture or external drainage trial to predict shunt response in suspected NPH",
-      "Shunt series and imaging to evaluate suspected shunt malfunction"
+    [
+     "Primary Differentials",
+     "Cerebral atrophy with ex vacuo ventriculomegaly, Intracranial mass causing focal obstruction, Idiopathic intracranial hypertension",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Acute obstructive hydrocephalus with falling conscious level, severe headache, and vomiting requiring emergency CSF diversion",
-      "Signs of impending herniation from rapidly rising intracranial pressure",
-      "Rapidly enlarging head with bulging fontanelle and sunsetting eyes in an infant",
-      "Shunt malfunction or shunt infection presenting with headache, drowsiness, or fever in a shunted patient"
+    [
+     "Management Strategy",
+     "Cerebrospinal fluid diversion is the definitive treatment, most commonly ventriculoperitoneal shunting, with endoscopic third",
+     "Core treatment modality"
     ],
-    "prognosis": "Prognosis depends on the cause, speed of onset, and timeliness of treatment; well-selected patients do well after CSF diversion, but outcomes are limited by the underlying pathology and by recurrent shunt complications, and untreated acute obstruction can be rapidly fatal.",
-    "pitfalls": [
-      "Mistaking ex vacuo ventriculomegaly from atrophy for treatable hydrocephalus",
-      "Delaying CSF diversion in acute obstructive hydrocephalus while awaiting further tests",
-      "Overlooking shunt malfunction as a cause of deterioration in a shunted patient",
-      "Attributing the NPH triad solely to ageing or dementia and missing a reversible component"
-    ],
-    "references": [
-      "Youmans & Winn Neurological Surgery",
-      "Harrison's Principles of Internal Medicine, 22e"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Cerebrospinal fluid diversion is the definitive treatment, most commonly ventriculoperitoneal shunting, with endoscopic third ventriculostomy for suitable obstructive cases",
-      "Treatment of the underlying cause where possible, such as resection of an obstructing tumour or clearance of a clot",
-      "Emergency external ventricular drainage for acute obstructive hydrocephalus with raised intracranial pressure",
-      "Shunt insertion in normal pressure hydrocephalus for patients selected by a positive large-volume lumbar puncture or external drainage trial",
-      "Long-term shunt surveillance with prompt imaging and shunt series for suspected malfunction, and revision or antibiotic treatment for shunt infection",
-      "Head circumference monitoring and cranial ultrasound in infants with an open fontanelle",
-      "Multidisciplinary neurosurgical follow-up with attention to neurodevelopmental outcome"
+    [
+     "Clinical Pitfall",
+     "Mistaking ex vacuo ventriculomegaly from atrophy for treatable hydrocephalus",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for hydrocephalus."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "hydrocephalus-real-image",
+   "title": "Hydrocephalus: Diagnostic Head Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
+   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
+   "annotations": [
+    {
+     "label": "Cerebral Parenchyma",
+     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+    },
+    {
+     "label": "Extra-Axial Spaces",
+     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+    }
+   ]
+  }
+ ]
 }

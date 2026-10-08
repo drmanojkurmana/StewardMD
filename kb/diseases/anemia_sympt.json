@@ -166,5 +166,100 @@
       "importedAt": "2026-06-29T13:50:09Z",
       "contentHash": "h1ef23694"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "anemia_sympt-dx-algo",
+      "title": "Symptomatic anaemia: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Symptoms and signs of anemia correlate poorly with the actual haemoglobin/haematocrit; clinical severity reflects the rate of onset and the patient's cardiovascular reserve rather than the absolute level (p.444).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Circulating blasts or other immature white cells, severe pancytopenia, or a very low reticulocyte count (<0.1%) mandating urgent marrow examination (p.448)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Corrected (or absolute) reticulocyte count as the first mechanistic discriminator (p.447-448), Red cell indices and RDW (MCV-based microcytic/normocytic/macrocytic classification; RDW to separate iron deficiency from"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Two complementary classifications. (1) By red-cell size (Wintrobe): microcytic (iron deficiency, thalassaemia, sideroblastic, anemia of inflammation), normocytic (renal disease, marrow invasion, myeloma, aplastic anemia,"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Anchoring on a normal haemoglobin in early acute haemorrhage and underestimating blood loss; an abrupt fall in haemoglobin should prompt suspicion of acute posthemorrhagic anemia regardless of the given history (p.850)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for symptomatic anaemia."
+    }
+  ],
+  "tables": [
+    {
+      "id": "anemia_sympt-matrix",
+      "title": "Symptomatic anaemia: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Symptoms and signs of anemia correlate poorly with the actual haemoglobin/haematocrit; clinical severity reflects the rate of",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Corrected (or absolute) reticulocyte count as the first mechanistic discriminator (p.447-448), Red cell indices and RDW",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Anemia of inflammation/chronic disease (diagnosis of exclusion; MCV often normal; hepcidin-mediated block of iron reutilization)",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Circulating blasts or other immature white cells, severe pancytopenia, or a very low reticulocyte count (<0.1%) mandating urgent",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Anchoring on a normal haemoglobin in early acute haemorrhage and underestimating blood loss; an abrupt fall in haemoglobin should",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for symptomatic anaemia."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "anemia-sympt-real-image",
+      "title": "Symptomatic anaemia: Diagnostic Imaging Evaluation",
+      "type": "xray",
+      "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+      "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+      "annotations": [
+        {
+          "label": "Cardiothoracic Ratio",
+          "description": "Heart size, mediastinal width, and great vessel contours."
+        },
+        {
+          "label": "Visceral Fields",
+          "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+        },
+        {
+          "label": "Bony Thorax & Soft Tissues",
+          "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+        }
+      ]
+    }
+  ]
 }

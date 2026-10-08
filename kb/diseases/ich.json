@@ -153,5 +153,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "h34696e7b"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "ich-dx-algo",
+      "title": "Intracerebral hemorrhage: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "ICH typically presents as abrupt-onset focal deficit; compared with ischaemic stroke, headache is more common, but imaging is still required to distinguish the two (p.3453).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: 'Spot sign' on CTA/post-contrast CT - associated with increased haematoma expansion, higher mortality and lower likelihood of favourable outcome (p.3455)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Non-contrast CT head - highly sensitive/specific for acute intracranial blood and defines location; preferred for acute stroke evaluation (p.3453,3455), Platelet count, prothrombin time, partial thromboplastin time and INR"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: ICH Score (Hemphill et al., Stroke 2001) - validated grading scale for mortality/outcome stratification, summing five factors: age >=80 (1 pt), haematoma volume >=30 cc (1 pt), intraventricular haemorrhage present (1"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Cerebellar haemorrhage can deteriorate precipitously from brainstem compression or obstructive hydrocephalus; immediate surgical evacuation before severe brainstem compression may be lifesaving, and hydrocephalus from a"
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for intracerebral hemorrhage."
+    }
+  ],
+  "tables": [
+    {
+      "id": "ich-matrix",
+      "title": "Intracerebral hemorrhage: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "ICH typically presents as abrupt-onset focal deficit; compared with ischaemic stroke, headache is more common, but imaging is",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Non-contrast CT head - highly sensitive/specific for acute intracranial blood and defines location; preferred for acute stroke",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Hypertensive deep ICH (putamen, globus pallidus, thalamus, cerebellar hemisphere, pons) (p.3453), Lobar ICH from cerebral amyloid",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "'Spot sign' on CTA/post-contrast CT - associated with increased haematoma expansion, higher mortality and lower likelihood of",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Cerebellar haemorrhage can deteriorate precipitously from brainstem compression or obstructive hydrocephalus; immediate surgical",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for intracerebral hemorrhage."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "ich-real-image",
+      "title": "Intracerebral hemorrhage: Non-Contrast Head CT (Acute Intracranial Hemorrhage)",
+      "type": "ct",
+      "src": "/assets/kb-real-images/epidural-hematoma-ct.jpg?v=kbri3",
+      "caption": "Real non-contrast head computed tomography scan displaying hyperdense acute extravasated blood collection with mass effect.",
+      "annotations": [
+        {
+          "label": "Hyperdense Hematoma",
+          "description": "Dense attenuation (60-80 Hounsfield units) representing acute clotted blood."
+        },
+        {
+          "label": "Perilesional Edema",
+          "description": "Hypodense rim of perihematomal vasogenic and cytotoxic edema."
+        },
+        {
+          "label": "Mass Effect",
+          "description": "Effacement of adjacent ipsilateral ventricles and subfalcine midline shift."
+        }
+      ]
+    }
+  ]
 }

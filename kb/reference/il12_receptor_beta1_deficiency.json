@@ -1,82 +1,177 @@
 {
-  "id": "il12_receptor_beta1_deficiency",
-  "name": "Interleukin-12 receptor beta-1 deficiency",
-  "aliases": [
-    "IL12RB1 deficiency",
-    "IL-12Rbeta1 deficiency"
+ "id": "il12_receptor_beta1_deficiency",
+ "name": "Interleukin-12 receptor beta-1 deficiency",
+ "aliases": [
+  "IL12RB1 deficiency",
+  "IL-12Rbeta1 deficiency"
+ ],
+ "class": "non_infective",
+ "system": "Immunology / Inborn errors of immunity",
+ "specialty": "Immunology / Infectious disease",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Clinical immunology references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "The most common single-gene cause of Mendelian susceptibility to mycobacterial disease worldwide.",
+   "Autosomal recessive loss of the IL-12 receptor beta-1 chain, which is shared by the receptors for both IL-12 and IL-23.",
+   "Loss of IL-12 and IL-23 responsiveness impairs interferon-gamma production and Th17/IL-17 immunity together.",
+   "Typical presentations are BCG disease, environmental non-tuberculous mycobacterial infection and recurrent non-typhoidal salmonellosis; mucocutaneous candidiasis may accompany because of the IL-23/IL-17 defect.",
+   "The course is generally milder than complete interferon-gamma receptor deficiency, with incomplete clinical penetrance so that some genetically affected relatives remain healthy.",
+   "Recombinant interferon-gamma is effective because the downstream interferon-gamma receptor and STAT1 signalling remain intact.",
+   "Salmonella infection, including recurrent bacteraemia, is disproportionately common in this defect."
   ],
-  "class": "non_infective",
-  "system": "Immunology / Inborn errors of immunity",
-  "specialty": "Immunology / Infectious disease",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Clinical immunology references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "The most common single-gene cause of Mendelian susceptibility to mycobacterial disease worldwide.",
-      "Autosomal recessive loss of the IL-12 receptor beta-1 chain, which is shared by the receptors for both IL-12 and IL-23.",
-      "Loss of IL-12 and IL-23 responsiveness impairs interferon-gamma production and Th17/IL-17 immunity together.",
-      "Typical presentations are BCG disease, environmental non-tuberculous mycobacterial infection and recurrent non-typhoidal salmonellosis; mucocutaneous candidiasis may accompany because of the IL-23/IL-17 defect.",
-      "The course is generally milder than complete interferon-gamma receptor deficiency, with incomplete clinical penetrance so that some genetically affected relatives remain healthy.",
-      "Recombinant interferon-gamma is effective because the downstream interferon-gamma receptor and STAT1 signalling remain intact.",
-      "Salmonella infection, including recurrent bacteraemia, is disproportionately common in this defect."
+  "pathophysiology": "IL12RB1 encodes the beta-1 chain that pairs with IL-12 receptor beta-2 to form the IL-12 receptor and with IL-23R to form the IL-23 receptor on T and natural killer cells. Autosomal recessive loss-of-function mutations abolish surface expression of a functional receptor, so cells cannot respond to either IL-12 or IL-23. Because IL-12 is the principal signal driving interferon-gamma secretion, its loss blunts the interferon-gamma-macrophage activation axis and impairs control of intracellular mycobacteria and Salmonella; concurrent loss of IL-23 signalling impairs maintenance of interleukin-17-producing (Th17) cells, explaining the mucocutaneous candidiasis seen in some patients. Because the interferon-gamma receptor and its STAT1 signalling are intact, exogenous interferon-gamma can bypass the block, and clinical penetrance is incomplete.",
+  "additionalDifferentials": [
+   "Interleukin-12 subunit p40 deficiency (IL12B)",
+   "Interferon-gamma receptor (IFNGR1/IFNGR2) deficiency",
+   "STAT1 loss-of-function deficiency",
+   "Chronic granulomatous disease",
+   "GATA2 deficiency",
+   "Chronic mucocutaneous candidiasis from other causes such as STAT1 gain-of-function or IL-17 pathway defects",
+   "Anti-interferon-gamma autoantibody syndrome"
+  ],
+  "additionalInvestigations": [
+   "Flow cytometry for IL-12 receptor beta-1 surface expression on activated T and natural killer cells",
+   "Whole-blood interferon-gamma production after stimulation with IL-12 (absent response) and BCG",
+   "Sequencing of IL12RB1",
+   "Plasma IL-12 and interferon-gamma concentrations",
+   "Mycobacterial and Salmonella cultures with species identification",
+   "Assessment of Th17/IL-17 responses when candidiasis is present",
+   "Broader inborn-errors-of-immunity gene panel to exclude phenocopies"
+  ],
+  "redFlags": [
+   "Disseminated BCG disease after vaccination",
+   "Recurrent invasive non-typhoidal Salmonella infection",
+   "Environmental non-tuberculous mycobacterial disease in a child",
+   "Mucocutaneous candidiasis combined with mycobacterial or salmonella disease",
+   "Family history of childhood mycobacterial or salmonella infection, especially with consanguinity"
+  ],
+  "prognosis": "Prognosis is comparatively favourable among MSMD genotypes: many patients respond to antimicrobials and recombinant interferon-gamma and some genetically affected individuals remain asymptomatic, although disseminated disease can still be life-threatening.",
+  "pitfalls": [
+   "Expecting full penetrance, since asymptomatic mutation carriers exist and a negative family history does not exclude the diagnosis.",
+   "Overlooking candidiasis as a clue to the shared IL-23/IL-17 defect.",
+   "Treating recurrent Salmonella bacteraemia as simple reinfection without an immunological work-up.",
+   "Misidentifying BCG disease as tuberculosis without typing.",
+   "Stopping antimicrobials prematurely given the tendency to relapse."
+  ],
+  "references": [
+   "International Union of Immunological Societies (IUIS) inborn errors of immunity classification",
+   "Clinical immunology reference texts",
+   "Paediatric infectious diseases reference texts"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Treat mycobacterial and non-typhoidal Salmonella infections with prolonged targeted antimicrobial regimens guided by culture and susceptibility",
+   "Use recombinant interferon-gamma as adjunctive therapy, effective because the downstream interferon-gamma receptor and STAT1 signalling remain intact",
+   "Treat mucocutaneous candidiasis with antifungal agents, reflecting the associated interleukin-23 and interleukin-17 defect",
+   "Provide antimicrobial prophylaxis for recurrent infection and strictly avoid live BCG and other live vaccines",
+   "Manage disseminated or febrile deterioration promptly with cultures and directed antimicrobials",
+   "Monitor with serial mycobacterial and Salmonella cultures and clinical surveillance for relapse",
+   "Offer genetic counselling and cascade family screening, noting the incomplete penetrance of this recessive disorder"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "il12_receptor_beta1_deficiency-pathway",
+   "title": "Interleukin-12 receptor beta-1 deficiency: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "The most common single-gene cause of Mendelian susceptibility to mycobacterial disease worldwide.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Disseminated BCG disease after vaccination",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Flow cytometry for IL-12 receptor beta-1 surface expression on activated T and natural killer cells, Whole-blood interferon-gamma production after stimulation with IL-12 (absent response) and BCG, Sequencing of IL12RB1"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Treat mycobacterial and non-typhoidal Salmonella infections with prolonged targeted antimicrobial regimens guided by culture and susceptibility"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Expecting full penetrance, since asymptomatic mutation carriers exist and a negative family history does not exclude the diagnosis."
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of interleukin-12 receptor beta-1 deficiency."
+  }
+ ],
+ "tables": [
+  {
+   "id": "il12_receptor_beta1_deficiency-matrix",
+   "title": "Interleukin-12 receptor beta-1 deficiency: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The most common single-gene cause of Mendelian susceptibility to mycobacterial disease worldwide.",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "IL12RB1 encodes the beta-1 chain that pairs with IL-12 receptor beta-2 to form the IL-12 receptor and with IL-23R to form the IL-23 receptor on T and natural killer cells. Autosomal recessive loss-of-function mutations abolish surface expression of a functional receptor, so cells cannot respond to either IL-12 or IL-23. Because IL-12 is the principal signal driving interferon-gamma secretion, its loss blunts the interferon-gamma-macrophage activation axis and impairs control of intracellular mycobacteria and Salmonella; concurrent loss of IL-23 signalling impairs maintenance of interleukin-17-producing (Th17) cells, explaining the mucocutaneous candidiasis seen in some patients. Because the interferon-gamma receptor and its STAT1 signalling are intact, exogenous interferon-gamma can bypass the block, and clinical penetrance is incomplete.",
-    "additionalDifferentials": [
-      "Interleukin-12 subunit p40 deficiency (IL12B)",
-      "Interferon-gamma receptor (IFNGR1/IFNGR2) deficiency",
-      "STAT1 loss-of-function deficiency",
-      "Chronic granulomatous disease",
-      "GATA2 deficiency",
-      "Chronic mucocutaneous candidiasis from other causes such as STAT1 gain-of-function or IL-17 pathway defects",
-      "Anti-interferon-gamma autoantibody syndrome"
+    [
+     "Key Investigations",
+     "Flow cytometry for IL-12 receptor beta-1 surface expression on activated T and natural killer cells, Whole-blood interferon-gamma",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Flow cytometry for IL-12 receptor beta-1 surface expression on activated T and natural killer cells",
-      "Whole-blood interferon-gamma production after stimulation with IL-12 (absent response) and BCG",
-      "Sequencing of IL12RB1",
-      "Plasma IL-12 and interferon-gamma concentrations",
-      "Mycobacterial and Salmonella cultures with species identification",
-      "Assessment of Th17/IL-17 responses when candidiasis is present",
-      "Broader inborn-errors-of-immunity gene panel to exclude phenocopies"
+    [
+     "Primary Differentials",
+     "Interleukin-12 subunit p40 deficiency (IL12B), Interferon-gamma receptor (IFNGR1/IFNGR2) deficiency, STAT1 loss-of-function",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Disseminated BCG disease after vaccination",
-      "Recurrent invasive non-typhoidal Salmonella infection",
-      "Environmental non-tuberculous mycobacterial disease in a child",
-      "Mucocutaneous candidiasis combined with mycobacterial or salmonella disease",
-      "Family history of childhood mycobacterial or salmonella infection, especially with consanguinity"
+    [
+     "Management Strategy",
+     "Treat mycobacterial and non-typhoidal Salmonella infections with prolonged targeted antimicrobial regimens guided by culture and",
+     "Core treatment modality"
     ],
-    "prognosis": "Prognosis is comparatively favourable among MSMD genotypes: many patients respond to antimicrobials and recombinant interferon-gamma and some genetically affected individuals remain asymptomatic, although disseminated disease can still be life-threatening.",
-    "pitfalls": [
-      "Expecting full penetrance, since asymptomatic mutation carriers exist and a negative family history does not exclude the diagnosis.",
-      "Overlooking candidiasis as a clue to the shared IL-23/IL-17 defect.",
-      "Treating recurrent Salmonella bacteraemia as simple reinfection without an immunological work-up.",
-      "Misidentifying BCG disease as tuberculosis without typing.",
-      "Stopping antimicrobials prematurely given the tendency to relapse."
-    ],
-    "references": [
-      "International Union of Immunological Societies (IUIS) inborn errors of immunity classification",
-      "Clinical immunology reference texts",
-      "Paediatric infectious diseases reference texts"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Treat mycobacterial and non-typhoidal Salmonella infections with prolonged targeted antimicrobial regimens guided by culture and susceptibility",
-      "Use recombinant interferon-gamma as adjunctive therapy, effective because the downstream interferon-gamma receptor and STAT1 signalling remain intact",
-      "Treat mucocutaneous candidiasis with antifungal agents, reflecting the associated interleukin-23 and interleukin-17 defect",
-      "Provide antimicrobial prophylaxis for recurrent infection and strictly avoid live BCG and other live vaccines",
-      "Manage disseminated or febrile deterioration promptly with cultures and directed antimicrobials",
-      "Monitor with serial mycobacterial and Salmonella cultures and clinical surveillance for relapse",
-      "Offer genetic counselling and cascade family screening, noting the incomplete penetrance of this recessive disorder"
+    [
+     "Clinical Pitfall",
+     "Expecting full penetrance, since asymptomatic mutation carriers exist and a negative family history does not exclude the",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for interleukin-12 receptor beta-1 deficiency."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "il12-receptor-beta1-deficiency-real-image",
+   "title": "Interleukin-12 receptor beta-1 deficiency: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

@@ -1,77 +1,172 @@
 {
-  "id": "bullous_pemphigoid",
-  "name": "Bullous pemphigoid",
-  "aliases": [
-    "pemphigoid",
-    "BP"
+ "id": "bullous_pemphigoid",
+ "name": "Bullous pemphigoid",
+ "aliases": [
+  "pemphigoid",
+  "BP"
+ ],
+ "class": "non_infective",
+ "system": "Skin / Dermatology",
+ "specialty": "Dermatology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "The commonest autoimmune blistering disease, typically affecting older adults",
+   "Classically produces large, tense, fluid-filled blisters on an erythematous or urticarial base, favouring the trunk, flexures, and limbs",
+   "Blisters are tense and relatively robust because the split is subepidermal, unlike the fragile flaccid blisters of pemphigus",
+   "A prodromal phase of intense itch with urticarial or eczematous plaques may precede blistering by weeks or months and is easily misdiagnosed",
+   "Mucosal involvement is uncommon and usually mild, which helps distinguish it from pemphigus vulgaris",
+   "Diagnosis is confirmed by subepidermal blistering on histology and linear IgG and C3 deposition along the basement membrane zone on direct immunofluorescence",
+   "Management uses potent topical corticosteroids for localised disease and systemic corticosteroids or steroid-sparing immunomodulators for widespread involvement",
+   "Consider a drug trigger, since certain medications (including some diabetes and immunotherapy agents) can precipitate pemphigoid"
   ],
-  "class": "non_infective",
-  "system": "Skin / Dermatology",
-  "specialty": "Dermatology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "The commonest autoimmune blistering disease, typically affecting older adults",
-      "Classically produces large, tense, fluid-filled blisters on an erythematous or urticarial base, favouring the trunk, flexures, and limbs",
-      "Blisters are tense and relatively robust because the split is subepidermal, unlike the fragile flaccid blisters of pemphigus",
-      "A prodromal phase of intense itch with urticarial or eczematous plaques may precede blistering by weeks or months and is easily misdiagnosed",
-      "Mucosal involvement is uncommon and usually mild, which helps distinguish it from pemphigus vulgaris",
-      "Diagnosis is confirmed by subepidermal blistering on histology and linear IgG and C3 deposition along the basement membrane zone on direct immunofluorescence",
-      "Management uses potent topical corticosteroids for localised disease and systemic corticosteroids or steroid-sparing immunomodulators for widespread involvement",
-      "Consider a drug trigger, since certain medications (including some diabetes and immunotherapy agents) can precipitate pemphigoid"
+  "pathophysiology": "Bullous pemphigoid is caused by autoantibodies directed against hemidesmosomal proteins of the dermal-epidermal junction, principally BP180 (collagen XVII) and BP230. Antibody binding activates complement and recruits inflammatory cells, particularly eosinophils, which release proteases that degrade the anchoring structures holding the epidermis to the dermis. This produces a subepidermal split, giving tense blisters with an intact epidermal roof. The urticarial prodrome reflects the inflammatory phase before frank blistering. Disease predominates in the elderly and may be associated with neurological disease and, in some cases, drug exposure.",
+  "additionalDifferentials": [
+   "Pemphigus vulgaris (flaccid blisters, mucosal erosions, intraepidermal split)",
+   "Dermatitis herpetiformis",
+   "Epidermolysis bullosa acquisita",
+   "Bullous drug eruption",
+   "Bullous impetigo",
+   "Urticaria or eczema during the non-bullous prodromal phase"
+  ],
+  "additionalInvestigations": [
+   "Lesional skin biopsy showing a subepidermal blister with eosinophils",
+   "Perilesional direct immunofluorescence showing linear IgG and C3 at the basement membrane zone",
+   "Serum indirect immunofluorescence and ELISA for BP180 and BP230 antibodies",
+   "Salt-split skin studies to localise antibody binding when distinguishing from related disorders",
+   "Review of medication history for possible drug-induced pemphigoid"
+  ],
+  "redFlags": [
+   "Extensive blistering with widespread skin barrier loss and secondary infection risk",
+   "Signs of sepsis or systemic deterioration, particularly in frail elderly patients",
+   "Complications of systemic corticosteroid or immunosuppressive therapy",
+   "Rapidly progressive disease unresponsive to initial treatment"
+  ],
+  "prognosis": "Bullous pemphigoid is often a self-limiting disease over months to a few years and generally responds to treatment, but morbidity and mortality are notable in elderly patients, largely driven by comorbidity and treatment-related complications.",
+  "pitfalls": [
+   "Missing the non-bullous urticarial or eczematous prodrome and delaying diagnosis",
+   "Confusing it with pemphigus vulgaris and misjudging prognosis and mucosal risk",
+   "Over-reliance on high-dose systemic steroids in frail patients when potent topical steroids may suffice",
+   "Failing to identify a drug trigger that could be withdrawn"
+  ],
+  "references": [
+   "Fitzpatrick's Dermatology",
+   "Rook's Textbook of Dermatology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Use potent topical corticosteroids such as clobetasol as first-line therapy, which controls even extensive disease with fewer systemic effects in frail elderly patients",
+   "Add systemic corticosteroids for widespread or resistant disease, tapering to the lowest effective dose once controlled",
+   "Employ steroid-sparing adjuncts including doxycycline with or without nicotinamide, and immunosuppressants such as azathioprine, methotrexate or mycophenolate, reserving rituximab or omalizumab for refractory disease",
+   "Provide wound care of blisters and erosions with attention to skin hygiene and prevention of secondary infection",
+   "Review medication history and withdraw any drug implicated in drug-induced pemphigoid",
+   "Monitor for treatment-related complications in the elderly, including infection, hyperglycaemia and osteoporosis, with bone protection during prolonged steroid use",
+   "Refer to dermatology and coordinate management of comorbidities, including associated neurological disease"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "bullous_pemphigoid-pathway",
+   "title": "Bullous pemphigoid: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "The commonest autoimmune blistering disease, typically affecting older adults",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Extensive blistering with widespread skin barrier loss and secondary infection risk",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Lesional skin biopsy showing a subepidermal blister with eosinophils, Perilesional direct immunofluorescence showing linear IgG and C3 at the basement membrane zone, Serum indirect immunofluorescence and ELISA for BP180"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Use potent topical corticosteroids such as clobetasol as first-line therapy, which controls even extensive disease with fewer systemic effects in frail elderly patients"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Missing the non-bullous urticarial or eczematous prodrome and delaying diagnosis"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of bullous pemphigoid."
+  }
+ ],
+ "tables": [
+  {
+   "id": "bullous_pemphigoid-matrix",
+   "title": "Bullous pemphigoid: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The commonest autoimmune blistering disease, typically affecting older adults",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Bullous pemphigoid is caused by autoantibodies directed against hemidesmosomal proteins of the dermal-epidermal junction, principally BP180 (collagen XVII) and BP230. Antibody binding activates complement and recruits inflammatory cells, particularly eosinophils, which release proteases that degrade the anchoring structures holding the epidermis to the dermis. This produces a subepidermal split, giving tense blisters with an intact epidermal roof. The urticarial prodrome reflects the inflammatory phase before frank blistering. Disease predominates in the elderly and may be associated with neurological disease and, in some cases, drug exposure.",
-    "additionalDifferentials": [
-      "Pemphigus vulgaris (flaccid blisters, mucosal erosions, intraepidermal split)",
-      "Dermatitis herpetiformis",
-      "Epidermolysis bullosa acquisita",
-      "Bullous drug eruption",
-      "Bullous impetigo",
-      "Urticaria or eczema during the non-bullous prodromal phase"
+    [
+     "Key Investigations",
+     "Lesional skin biopsy showing a subepidermal blister with eosinophils, Perilesional direct immunofluorescence showing linear IgG",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Lesional skin biopsy showing a subepidermal blister with eosinophils",
-      "Perilesional direct immunofluorescence showing linear IgG and C3 at the basement membrane zone",
-      "Serum indirect immunofluorescence and ELISA for BP180 and BP230 antibodies",
-      "Salt-split skin studies to localise antibody binding when distinguishing from related disorders",
-      "Review of medication history for possible drug-induced pemphigoid"
+    [
+     "Primary Differentials",
+     "Pemphigus vulgaris (flaccid blisters, mucosal erosions, intraepidermal split), Dermatitis herpetiformis, Epidermolysis bullosa",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Extensive blistering with widespread skin barrier loss and secondary infection risk",
-      "Signs of sepsis or systemic deterioration, particularly in frail elderly patients",
-      "Complications of systemic corticosteroid or immunosuppressive therapy",
-      "Rapidly progressive disease unresponsive to initial treatment"
+    [
+     "Management Strategy",
+     "Use potent topical corticosteroids such as clobetasol as first-line therapy, which controls even extensive disease with fewer",
+     "Core treatment modality"
     ],
-    "prognosis": "Bullous pemphigoid is often a self-limiting disease over months to a few years and generally responds to treatment, but morbidity and mortality are notable in elderly patients, largely driven by comorbidity and treatment-related complications.",
-    "pitfalls": [
-      "Missing the non-bullous urticarial or eczematous prodrome and delaying diagnosis",
-      "Confusing it with pemphigus vulgaris and misjudging prognosis and mucosal risk",
-      "Over-reliance on high-dose systemic steroids in frail patients when potent topical steroids may suffice",
-      "Failing to identify a drug trigger that could be withdrawn"
-    ],
-    "references": [
-      "Fitzpatrick's Dermatology",
-      "Rook's Textbook of Dermatology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Use potent topical corticosteroids such as clobetasol as first-line therapy, which controls even extensive disease with fewer systemic effects in frail elderly patients",
-      "Add systemic corticosteroids for widespread or resistant disease, tapering to the lowest effective dose once controlled",
-      "Employ steroid-sparing adjuncts including doxycycline with or without nicotinamide, and immunosuppressants such as azathioprine, methotrexate or mycophenolate, reserving rituximab or omalizumab for refractory disease",
-      "Provide wound care of blisters and erosions with attention to skin hygiene and prevention of secondary infection",
-      "Review medication history and withdraw any drug implicated in drug-induced pemphigoid",
-      "Monitor for treatment-related complications in the elderly, including infection, hyperglycaemia and osteoporosis, with bone protection during prolonged steroid use",
-      "Refer to dermatology and coordinate management of comorbidities, including associated neurological disease"
+    [
+     "Clinical Pitfall",
+     "Missing the non-bullous urticarial or eczematous prodrome and delaying diagnosis",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for bullous pemphigoid."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "bullous-pemphigoid-real-image",
+   "title": "Bullous pemphigoid: Clinical Cutaneous Dermatology Photograph",
+   "type": "diagram",
+   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
+   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
+   "annotations": [
+    {
+     "label": "Primary Lesions",
+     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
+    },
+    {
+     "label": "Demarcation & Margins",
+     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
+    },
+    {
+     "label": "Anatomical Distribution",
+     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+    }
+   ]
+  }
+ ]
 }

@@ -5,7 +5,24 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Primary care, outpatient clinic, ward",
- "aliases": ["B12 deficiency", "vitamin B12", "cobalamin", "pernicious anaemia", "autoimmune gastritis", "folate deficiency", "folic acid", "megaloblastic anaemia", "macrocytic anaemia", "macrocytosis", "hydroxocobalamin", "subacute combined degeneration", "SACD", "nitrous oxide", "methylmalonic acid", "holotranscobalamin"],
+ "aliases": [
+  "B12 deficiency",
+  "vitamin B12",
+  "cobalamin",
+  "pernicious anaemia",
+  "autoimmune gastritis",
+  "folate deficiency",
+  "folic acid",
+  "megaloblastic anaemia",
+  "macrocytic anaemia",
+  "macrocytosis",
+  "hydroxocobalamin",
+  "subacute combined degeneration",
+  "SACD",
+  "nitrous oxide",
+  "methylmalonic acid",
+  "holotranscobalamin"
+ ],
  "summary": "Test when a symptom and a risk factor coexist. Treat B12 deficiency with IM hydroxocobalamin 1 mg (three times weekly for 2 weeks, or alternate days if neurological, then every 2 to 3 months) or oral B12 at least 1 mg daily where suitable; never give folic acid alone until B12 deficiency is excluded or treated.",
  "sections": [
   {
@@ -84,14 +101,138 @@
   }
  ],
  "drugs": [
-  { "name": "Hydroxocobalamin", "dose": "1 mg IM three times weekly for 2 weeks, then 1 mg every 3 months; with neurological involvement 1 mg IM on alternate days until no further improvement, then 1 mg every 2 months", "notes": "Lifelong in autoimmune gastritis, total gastrectomy or terminal ileal resection." },
-  { "name": "Cyanocobalamin (oral)", "dose": "1 mg orally daily for malabsorption or in pregnancy and breastfeeding; 50 to 150 micrograms daily can suffice for purely dietary deficiency", "notes": "Increase to the maximum licensed dose or switch to IM if response is poor." },
-  { "name": "Folic acid (treatment)", "dose": "5 mg orally daily for 4 months; if the cause persists, 5 mg every 1 to 7 days", "notes": "Only when B12 is replete or being replaced." },
-  { "name": "Folic acid (neural tube defect prevention)", "dose": "400 micrograms orally daily from before conception to 12 weeks; 5 mg daily if high risk", "notes": "High risk: previous NTD, diabetes, antiepileptic drugs, BMI 30 or more, sickle cell disease, malabsorption." }
+  {
+   "name": "Hydroxocobalamin",
+   "dose": "1 mg IM three times weekly for 2 weeks, then 1 mg every 3 months; with neurological involvement 1 mg IM on alternate days until no further improvement, then 1 mg every 2 months",
+   "notes": "Lifelong in autoimmune gastritis, total gastrectomy or terminal ileal resection."
+  },
+  {
+   "name": "Cyanocobalamin (oral)",
+   "dose": "1 mg orally daily for malabsorption or in pregnancy and breastfeeding; 50 to 150 micrograms daily can suffice for purely dietary deficiency",
+   "notes": "Increase to the maximum licensed dose or switch to IM if response is poor."
+  },
+  {
+   "name": "Folic acid (treatment)",
+   "dose": "5 mg orally daily for 4 months; if the cause persists, 5 mg every 1 to 7 days",
+   "notes": "Only when B12 is replete or being replaced."
+  },
+  {
+   "name": "Folic acid (neural tube defect prevention)",
+   "dose": "400 micrograms orally daily from before conception to 12 weeks; 5 mg daily if high risk",
+   "notes": "High risk: previous NTD, diabetes, antiepileptic drugs, BMI 30 or more, sickle cell disease, malabsorption."
+  }
  ],
  "sources": [
-  { "org": "NICE", "title": "Vitamin B12 deficiency in over 16s: diagnosis and management (NG239)", "year": 2024, "url": "https://www.nice.org.uk/guidance/ng239" },
-  { "org": "British Society for Haematology", "title": "Guidelines for the diagnosis and treatment of cobalamin and folate disorders", "year": 2014, "url": "https://doi.org/10.1111/bjh.12959" }
+  {
+   "org": "NICE",
+   "title": "Vitamin B12 deficiency in over 16s: diagnosis and management (NG239)",
+   "year": 2024,
+   "url": "https://www.nice.org.uk/guidance/ng239"
+  },
+  {
+   "org": "British Society for Haematology",
+   "title": "Guidelines for the diagnosis and treatment of cobalamin and folate disorders",
+   "year": 2014,
+   "url": "https://doi.org/10.1111/bjh.12959"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "vitamin-b12-and-folate-deficiency-pathway",
+   "title": "Vitamin B12 and folate deficiency (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Features: anaemia or macrocytosis (deficiency can occur without either), fatigue, glossitis, poor concentration or memory, depression, anxiety or psychosis, paraesthesia and peripheral neuropathy, ataxia and falls from impaired",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "B12 risk factors: diet low in animal foods without fortified foods or supplements (vegan or vegetarian, including for religious reasons), autoimmune gastritis or other autoimmune disease, gastrectomy, bariatric surgery, ileal resection,",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "CBC and blood film (macrocytosis, hypersegmented neutrophils), reticulocytes, ferritin; severe megaloblastic anaemia can cause pancytopenia and raised LDH and bilirubin. Take samples before any replacement."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Folic acid 5 mg orally daily for 4 months (longer if the cause persists), only once B12 deficiency is excluded or B12 treatment has started: folic acid alone can precipitate or worsen subacute combined degeneration."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Reticulocytosis peaks at about day 7 and haemoglobin rises within 1 to 2 weeks, normalising over about 8 weeks; neurological recovery is slower and may be incomplete."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for vitamin b12 and folate deficiency (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "vitamin-b12-and-folate-deficiency-summary-matrix",
+   "title": "Vitamin B12 and folate deficiency (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Features: anaemia or macrocytosis (deficiency can occur without either), fatigue, glossitis, poor concentration or memory, depression,",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Folic acid 5 mg orally daily for 4 months (longer if the cause persists), only once B12 deficiency is excluded or B12 treatment has",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "CBC and blood film (macrocytosis, hypersegmented neutrophils), reticulocytes, ferritin; severe megaloblastic anaemia can cause pancytopenia",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Hydroxocobalamin: 1 mg IM three times weekly for 2 weeks, then 1 mg every 3 months; with neurological involvement 1 mg IM on alternate days",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Giving folic acid alone to a patient with unrecognised B12 deficiency.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for vitamin b12 and folate deficiency (adult)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "vitamin-b12-and-folate-deficiency-real-image",
+   "title": "Vitamin B12 and folate deficiency (adult): Diagnostic Peripheral Blood Smear Examination",
+   "type": "diagram",
+   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
+   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
+   "annotations": [
+    {
+     "label": "Erythrocyte Indices",
+     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
+    },
+    {
+     "label": "Leukocyte Differential",
+     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
+    },
+    {
+     "label": "Platelet Count",
+     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+    }
+   ]
+  }
+ ]
 }

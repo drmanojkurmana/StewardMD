@@ -1,79 +1,174 @@
 {
-  "id": "harlequin_ichthyosis",
-  "name": "Harlequin ichthyosis",
-  "aliases": [
-    "ABCA12",
-    "harlequin fetus",
-    "ichthyosis congenita gravis",
-    "HI"
+ "id": "harlequin_ichthyosis",
+ "name": "Harlequin ichthyosis",
+ "aliases": [
+  "ABCA12",
+  "harlequin fetus",
+  "ichthyosis congenita gravis",
+  "HI"
+ ],
+ "class": "non_infective",
+ "system": "Dermatology / Genetics",
+ "specialty": "Dermatology / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Rook's Textbook of Dermatology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Most severe autosomal recessive congenital ichthyosis, caused by biallelic loss-of-function variants in ABCA12, a lipid transporter essential for lamellar granule function",
+   "Neonates are encased in thick, plate-like armoured scale separated by deep erythematous fissures",
+   "Severe ectropion, eclabium, flattened ears, and constricting bands on digits are characteristic",
+   "The rigid encasing membrane restricts chest expansion and feeding and predisposes to constriction ischaemia of extremities",
+   "Barrier failure causes profound transepidermal water loss, hypernatraemic dehydration, temperature instability, and high infection risk",
+   "Early systemic retinoid therapy has substantially improved survival when combined with intensive neonatal supportive care",
+   "Survivors typically transition to a severe erythrodermic ichthyosis phenotype resembling congenital ichthyosiform erythroderma"
   ],
-  "class": "non_infective",
-  "system": "Dermatology / Genetics",
-  "specialty": "Dermatology / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Rook's Textbook of Dermatology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Most severe autosomal recessive congenital ichthyosis, caused by biallelic loss-of-function variants in ABCA12, a lipid transporter essential for lamellar granule function",
-      "Neonates are encased in thick, plate-like armoured scale separated by deep erythematous fissures",
-      "Severe ectropion, eclabium, flattened ears, and constricting bands on digits are characteristic",
-      "The rigid encasing membrane restricts chest expansion and feeding and predisposes to constriction ischaemia of extremities",
-      "Barrier failure causes profound transepidermal water loss, hypernatraemic dehydration, temperature instability, and high infection risk",
-      "Early systemic retinoid therapy has substantially improved survival when combined with intensive neonatal supportive care",
-      "Survivors typically transition to a severe erythrodermic ichthyosis phenotype resembling congenital ichthyosiform erythroderma"
+  "pathophysiology": "Harlequin ichthyosis is caused by loss of function of ABCA12, an ATP-binding cassette transporter that loads lipids into lamellar granules within keratinocytes. Without functional ABCA12, lipids cannot be delivered to the extracellular space of the stratum corneum, so the lamellar lipid bilayers that normally provide the epidermal permeability barrier fail to form. The result is grossly abnormal cornification with massive hyperkeratosis, a rigid non-pliable scale, and a catastrophically leaky barrier. This produces extreme transepidermal water loss and impaired thermoregulation and defence against infection from birth.",
+  "additionalDifferentials": [
+   "Lamellar ichthyosis / congenital ichthyosiform erythroderma (collodion presentations)",
+   "Collodion baby of other causes",
+   "Restrictive dermopathy",
+   "Neu-Laxova syndrome",
+   "Severe Netherton syndrome in the neonate"
+  ],
+  "additionalInvestigations": [
+   "ABCA12 molecular genetic testing to confirm diagnosis",
+   "Serum electrolytes and close monitoring of fluid balance",
+   "Skin biopsy showing massive compact orthohyperkeratosis with electron microscopy showing absent or abnormal lamellar granules",
+   "Ophthalmology assessment for ectropion and corneal exposure",
+   "Sepsis screen and cultures for suspected infection",
+   "Prenatal genetic diagnosis or fetal ultrasound in at-risk pregnancies"
+  ],
+  "redFlags": [
+   "Respiratory compromise from restricted chest wall movement",
+   "Hypernatraemic dehydration and thermoregulatory collapse",
+   "Digital or limb ischaemia from constricting bands",
+   "Overwhelming neonatal sepsis"
+  ],
+  "prognosis": "Historically usually fatal in the neonatal period, but with modern neonatal intensive care and early systemic retinoid therapy a majority of infants now survive, transitioning to a chronic severe ichthyosis with lifelong skin and ocular problems.",
+  "pitfalls": [
+   "Delaying transfer to neonatal intensive care and delaying consideration of systemic retinoids",
+   "Underestimating fluid and electrolyte losses through the defective barrier",
+   "Missing digital constriction bands that threaten limb viability",
+   "Neglecting corneal protection in the presence of severe ectropion"
+  ],
+  "references": [
+   "Rook's Textbook of Dermatology",
+   "Fitzpatrick's Dermatology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Start early systemic retinoid therapy such as acitretin to soften and shed the armoured scale and improve survival",
+   "Nurse in a humidified incubator with meticulous replacement of fluid and electrolytes to counter massive transepidermal water loss and hypernatraemic dehydration",
+   "Apply liberal emollients and gentle wound care, watching constricting bands on the digits for ischaemia and releasing them if perfusion is threatened",
+   "Prevent and promptly treat sepsis given the failed skin barrier",
+   "Provide high-calorie nutritional support for the raised metabolic demand and impaired feeding",
+   "Obtain ophthalmology review with lubrication for ectropion and corneal exposure",
+   "Coordinate multidisciplinary neonatal intensive care across dermatology, ophthalmology, and clinical genetics",
+   "Offer genetic counselling and prenatal diagnosis for future pregnancies given autosomal recessive ABCA12 disease"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "harlequin_ichthyosis-pathway",
+   "title": "Harlequin ichthyosis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Most severe autosomal recessive congenital ichthyosis, caused by biallelic loss-of-function variants in ABCA12, a lipid transporter essential for lamellar granule function",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Respiratory compromise from restricted chest wall movement",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: ABCA12 molecular genetic testing to confirm diagnosis, Serum electrolytes and close monitoring of fluid balance, Skin biopsy showing massive compact orthohyperkeratosis with electron microscopy showing absent or abnormal"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Start early systemic retinoid therapy such as acitretin to soften and shed the armoured scale and improve survival"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Delaying transfer to neonatal intensive care and delaying consideration of systemic retinoids"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of harlequin ichthyosis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "harlequin_ichthyosis-matrix",
+   "title": "Harlequin ichthyosis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Most severe autosomal recessive congenital ichthyosis, caused by biallelic loss-of-function variants in ABCA12, a lipid",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Harlequin ichthyosis is caused by loss of function of ABCA12, an ATP-binding cassette transporter that loads lipids into lamellar granules within keratinocytes. Without functional ABCA12, lipids cannot be delivered to the extracellular space of the stratum corneum, so the lamellar lipid bilayers that normally provide the epidermal permeability barrier fail to form. The result is grossly abnormal cornification with massive hyperkeratosis, a rigid non-pliable scale, and a catastrophically leaky barrier. This produces extreme transepidermal water loss and impaired thermoregulation and defence against infection from birth.",
-    "additionalDifferentials": [
-      "Lamellar ichthyosis / congenital ichthyosiform erythroderma (collodion presentations)",
-      "Collodion baby of other causes",
-      "Restrictive dermopathy",
-      "Neu-Laxova syndrome",
-      "Severe Netherton syndrome in the neonate"
+    [
+     "Key Investigations",
+     "ABCA12 molecular genetic testing to confirm diagnosis, Serum electrolytes and close monitoring of fluid balance, Skin biopsy",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "ABCA12 molecular genetic testing to confirm diagnosis",
-      "Serum electrolytes and close monitoring of fluid balance",
-      "Skin biopsy showing massive compact orthohyperkeratosis with electron microscopy showing absent or abnormal lamellar granules",
-      "Ophthalmology assessment for ectropion and corneal exposure",
-      "Sepsis screen and cultures for suspected infection",
-      "Prenatal genetic diagnosis or fetal ultrasound in at-risk pregnancies"
+    [
+     "Primary Differentials",
+     "Lamellar ichthyosis / congenital ichthyosiform erythroderma (collodion presentations), Collodion baby of other causes,",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Respiratory compromise from restricted chest wall movement",
-      "Hypernatraemic dehydration and thermoregulatory collapse",
-      "Digital or limb ischaemia from constricting bands",
-      "Overwhelming neonatal sepsis"
+    [
+     "Management Strategy",
+     "Start early systemic retinoid therapy such as acitretin to soften and shed the armoured scale and improve survival",
+     "Core treatment modality"
     ],
-    "prognosis": "Historically usually fatal in the neonatal period, but with modern neonatal intensive care and early systemic retinoid therapy a majority of infants now survive, transitioning to a chronic severe ichthyosis with lifelong skin and ocular problems.",
-    "pitfalls": [
-      "Delaying transfer to neonatal intensive care and delaying consideration of systemic retinoids",
-      "Underestimating fluid and electrolyte losses through the defective barrier",
-      "Missing digital constriction bands that threaten limb viability",
-      "Neglecting corneal protection in the presence of severe ectropion"
-    ],
-    "references": [
-      "Rook's Textbook of Dermatology",
-      "Fitzpatrick's Dermatology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Start early systemic retinoid therapy such as acitretin to soften and shed the armoured scale and improve survival",
-      "Nurse in a humidified incubator with meticulous replacement of fluid and electrolytes to counter massive transepidermal water loss and hypernatraemic dehydration",
-      "Apply liberal emollients and gentle wound care, watching constricting bands on the digits for ischaemia and releasing them if perfusion is threatened",
-      "Prevent and promptly treat sepsis given the failed skin barrier",
-      "Provide high-calorie nutritional support for the raised metabolic demand and impaired feeding",
-      "Obtain ophthalmology review with lubrication for ectropion and corneal exposure",
-      "Coordinate multidisciplinary neonatal intensive care across dermatology, ophthalmology, and clinical genetics",
-      "Offer genetic counselling and prenatal diagnosis for future pregnancies given autosomal recessive ABCA12 disease"
+    [
+     "Clinical Pitfall",
+     "Delaying transfer to neonatal intensive care and delaying consideration of systemic retinoids",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for harlequin ichthyosis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "harlequin-ichthyosis-real-image",
+   "title": "Harlequin ichthyosis: Clinical Cutaneous Dermatology Photograph",
+   "type": "diagram",
+   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
+   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
+   "annotations": [
+    {
+     "label": "Primary Lesions",
+     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
+    },
+    {
+     "label": "Demarcation & Margins",
+     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
+    },
+    {
+     "label": "Anatomical Distribution",
+     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+    }
+   ]
+  }
+ ]
 }

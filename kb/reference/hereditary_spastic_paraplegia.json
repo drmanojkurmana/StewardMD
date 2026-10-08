@@ -1,80 +1,175 @@
 {
-  "id": "hereditary_spastic_paraplegia",
-  "name": "Hereditary spastic paraplegia",
-  "aliases": [
-    "HSP",
-    "familial spastic paraparesis",
-    "Strumpell-Lorrain disease",
-    "SPG"
+ "id": "hereditary_spastic_paraplegia",
+ "name": "Hereditary spastic paraplegia",
+ "aliases": [
+  "HSP",
+  "familial spastic paraparesis",
+  "Strumpell-Lorrain disease",
+  "SPG"
+ ],
+ "class": "non_infective",
+ "system": "Neurology",
+ "specialty": "Neurology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Bradley's Neurology in Clinical Practice / Harrison's Principles of Internal Medicine",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A genetically diverse group of inherited disorders defined by length-dependent degeneration of the corticospinal tracts, producing progressive lower-limb spasticity and weakness",
+   "Inheritance may be autosomal dominant, autosomal recessive, or X-linked, with many causative genes designated by SPG numbers",
+   "Divided clinically into pure forms, with predominantly spastic paraparesis and bladder symptoms, and complicated forms with additional features such as ataxia, neuropathy, cognitive impairment, or retinopathy",
+   "SPG4 (spastin) is the most common autosomal dominant pure form, while SPG7 and others contribute to recessive and complicated cases",
+   "Spasticity typically dominates over weakness, so gait is stiff and scissoring, and brisk reflexes with extensor plantar responses are expected",
+   "Bladder urgency and mild reduction of vibration sense at the toes are common accompaniments in pure forms",
+   "Diagnosis requires excluding acquired myelopathies and structural cord lesions, supported by family history and gene panel testing",
+   "Management centres on spasticity control, physiotherapy, gait aids, and bladder care, as no cure exists"
   ],
-  "class": "non_infective",
-  "system": "Neurology",
-  "specialty": "Neurology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Bradley's Neurology in Clinical Practice / Harrison's Principles of Internal Medicine",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A genetically diverse group of inherited disorders defined by length-dependent degeneration of the corticospinal tracts, producing progressive lower-limb spasticity and weakness",
-      "Inheritance may be autosomal dominant, autosomal recessive, or X-linked, with many causative genes designated by SPG numbers",
-      "Divided clinically into pure forms, with predominantly spastic paraparesis and bladder symptoms, and complicated forms with additional features such as ataxia, neuropathy, cognitive impairment, or retinopathy",
-      "SPG4 (spastin) is the most common autosomal dominant pure form, while SPG7 and others contribute to recessive and complicated cases",
-      "Spasticity typically dominates over weakness, so gait is stiff and scissoring, and brisk reflexes with extensor plantar responses are expected",
-      "Bladder urgency and mild reduction of vibration sense at the toes are common accompaniments in pure forms",
-      "Diagnosis requires excluding acquired myelopathies and structural cord lesions, supported by family history and gene panel testing",
-      "Management centres on spasticity control, physiotherapy, gait aids, and bladder care, as no cure exists"
+  "pathophysiology": "Hereditary spastic paraplegia is characterised by a distal, length-dependent axonopathy that preferentially affects the longest fibres of the corticospinal tracts and, in some forms, the dorsal columns. The many implicated genes converge on cellular processes including axonal transport, mitochondrial function, myelination, and membrane trafficking, and their disruption leads to progressive degeneration of the terminal portions of long descending motor axons. This anatomy explains the predominance of lower-limb spasticity with relatively preserved upper limbs in pure forms.",
+  "additionalDifferentials": [
+   "Compressive or structural spinal cord lesions",
+   "Multiple sclerosis and other inflammatory myelopathies",
+   "Adrenomyeloneuropathy",
+   "Subacute combined degeneration from vitamin B12 deficiency",
+   "Dopa-responsive dystonia and primary lateral sclerosis",
+   "Tropical spastic paraparesis and infective myelopathies"
+  ],
+  "additionalInvestigations": [
+   "Spinal cord and brain MRI to exclude structural and demyelinating disease",
+   "Gene panel testing for SPG and related genes",
+   "Very-long-chain fatty acids and vitamin B12 to exclude mimics",
+   "Nerve conduction studies where a complicated form with neuropathy is suspected",
+   "Cognitive, ophthalmological, or other targeted assessment in complicated forms",
+   "Detailed family history and examination of relatives"
+  ],
+  "redFlags": [
+   "Rapid or asymmetric progression suggesting a compressive or inflammatory cause",
+   "Sensory level or sphincter failure pointing to an acquired myelopathy",
+   "Prominent bulbar or upper-limb involvement inconsistent with a pure form",
+   "Systemic features suggesting a treatable metabolic or inflammatory mimic"
+  ],
+  "prognosis": "Pure forms are typically slowly progressive with preserved life expectancy but gradually increasing gait disability and reliance on aids; complicated forms carry more variable outcomes depending on the associated neurological features.",
+  "pitfalls": [
+   "Labelling a progressive spastic paraparesis as hereditary before excluding treatable acquired causes",
+   "Overlooking the significance of subtle family history",
+   "Missing associated features that indicate a complicated subtype",
+   "Neglecting bladder and spasticity management that improve function"
+  ],
+  "references": [
+   "Bradley's Neurology in Clinical Practice",
+   "Harrison's Principles of Internal Medicine, 22e"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Reduce lower-limb spasticity with oral antispasticity agents such as baclofen or tizanidine, focal botulinum toxin injections, and intrathecal baclofen in severe refractory cases",
+   "Maintain function and prevent contractures with physiotherapy, stretching programmes, gait and mobility aids and occupational therapy",
+   "Manage bladder urgency with antimuscarinic agents and bladder training",
+   "Provide orthopaedic input including orthoses and tendon-lengthening surgery for fixed deformity or contracture",
+   "In complicated forms, target associated features such as ataxia, peripheral neuropathy, cognitive impairment or retinopathy",
+   "Deliver care through a multidisciplinary neurorehabilitation team",
+   "Offer genetic counselling reflecting autosomal dominant, autosomal recessive or X-linked inheritance with assessment of relatives"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "hereditary_spastic_paraplegia-pathway",
+   "title": "Hereditary spastic paraplegia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A genetically diverse group of inherited disorders defined by length-dependent degeneration of the corticospinal tracts, producing progressive lower-limb spasticity and weakness",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapid or asymmetric progression suggesting a compressive or inflammatory cause",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Spinal cord and brain MRI to exclude structural and demyelinating disease, Gene panel testing for SPG and related genes, Very-long-chain fatty acids and vitamin B12 to exclude mimics"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Reduce lower-limb spasticity with oral antispasticity agents such as baclofen or tizanidine, focal botulinum toxin injections, and intrathecal baclofen in severe refractory cases"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Labelling a progressive spastic paraparesis as hereditary before excluding treatable acquired causes"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of hereditary spastic paraplegia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "hereditary_spastic_paraplegia-matrix",
+   "title": "Hereditary spastic paraplegia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A genetically diverse group of inherited disorders defined by length-dependent degeneration of the corticospinal tracts,",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Hereditary spastic paraplegia is characterised by a distal, length-dependent axonopathy that preferentially affects the longest fibres of the corticospinal tracts and, in some forms, the dorsal columns. The many implicated genes converge on cellular processes including axonal transport, mitochondrial function, myelination, and membrane trafficking, and their disruption leads to progressive degeneration of the terminal portions of long descending motor axons. This anatomy explains the predominance of lower-limb spasticity with relatively preserved upper limbs in pure forms.",
-    "additionalDifferentials": [
-      "Compressive or structural spinal cord lesions",
-      "Multiple sclerosis and other inflammatory myelopathies",
-      "Adrenomyeloneuropathy",
-      "Subacute combined degeneration from vitamin B12 deficiency",
-      "Dopa-responsive dystonia and primary lateral sclerosis",
-      "Tropical spastic paraparesis and infective myelopathies"
+    [
+     "Key Investigations",
+     "Spinal cord and brain MRI to exclude structural and demyelinating disease, Gene panel testing for SPG and related genes,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Spinal cord and brain MRI to exclude structural and demyelinating disease",
-      "Gene panel testing for SPG and related genes",
-      "Very-long-chain fatty acids and vitamin B12 to exclude mimics",
-      "Nerve conduction studies where a complicated form with neuropathy is suspected",
-      "Cognitive, ophthalmological, or other targeted assessment in complicated forms",
-      "Detailed family history and examination of relatives"
+    [
+     "Primary Differentials",
+     "Compressive or structural spinal cord lesions, Multiple sclerosis and other inflammatory myelopathies, Adrenomyeloneuropathy",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rapid or asymmetric progression suggesting a compressive or inflammatory cause",
-      "Sensory level or sphincter failure pointing to an acquired myelopathy",
-      "Prominent bulbar or upper-limb involvement inconsistent with a pure form",
-      "Systemic features suggesting a treatable metabolic or inflammatory mimic"
+    [
+     "Management Strategy",
+     "Reduce lower-limb spasticity with oral antispasticity agents such as baclofen or tizanidine, focal botulinum toxin injections,",
+     "Core treatment modality"
     ],
-    "prognosis": "Pure forms are typically slowly progressive with preserved life expectancy but gradually increasing gait disability and reliance on aids; complicated forms carry more variable outcomes depending on the associated neurological features.",
-    "pitfalls": [
-      "Labelling a progressive spastic paraparesis as hereditary before excluding treatable acquired causes",
-      "Overlooking the significance of subtle family history",
-      "Missing associated features that indicate a complicated subtype",
-      "Neglecting bladder and spasticity management that improve function"
-    ],
-    "references": [
-      "Bradley's Neurology in Clinical Practice",
-      "Harrison's Principles of Internal Medicine, 22e"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Reduce lower-limb spasticity with oral antispasticity agents such as baclofen or tizanidine, focal botulinum toxin injections, and intrathecal baclofen in severe refractory cases",
-      "Maintain function and prevent contractures with physiotherapy, stretching programmes, gait and mobility aids and occupational therapy",
-      "Manage bladder urgency with antimuscarinic agents and bladder training",
-      "Provide orthopaedic input including orthoses and tendon-lengthening surgery for fixed deformity or contracture",
-      "In complicated forms, target associated features such as ataxia, peripheral neuropathy, cognitive impairment or retinopathy",
-      "Deliver care through a multidisciplinary neurorehabilitation team",
-      "Offer genetic counselling reflecting autosomal dominant, autosomal recessive or X-linked inheritance with assessment of relatives"
+    [
+     "Clinical Pitfall",
+     "Labelling a progressive spastic paraparesis as hereditary before excluding treatable acquired causes",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for hereditary spastic paraplegia."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "hereditary-spastic-paraplegia-real-image",
+   "title": "Hereditary spastic paraplegia: Diagnostic Head Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
+   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
+   "annotations": [
+    {
+     "label": "Cerebral Parenchyma",
+     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+    },
+    {
+     "label": "Extra-Axial Spaces",
+     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+    }
+   ]
+  }
+ ]
 }

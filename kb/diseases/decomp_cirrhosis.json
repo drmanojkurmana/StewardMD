@@ -158,5 +158,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "h4e8e6c78"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "decomp_cirrhosis-dx-algo",
+      "title": "Decompensated cirrhosis: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Compensated cirrhosis can be asymptomatic for a decade or more; the transition to decompensation is marked by the first major event - ascites/edema, variceal hemorrhage, hepatic encephalopathy, or jaundice. (p.2756, p.2754)",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Variceal hemorrhage carries a 20-30% mortality per bleeding episode and is an immediate life-threatening event (p.2756)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Diagnostic paracentesis with serum-ascites albumin gradient (SAAG): ≥1.1 g/dL indicates portal-hypertensive ascites, <1.1 g/dL indicates non-portal-hypertensive cause (p.371), Ascitic fluid cell count/differential, total"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Child-Pugh score (5 factors: bilirubin, albumin, prothrombin time/INR, ascites, encephalopathy; range 5-15) classifies cirrhosis as class A (5-6, compensated), B (7-9), or C (10-15); a score ≥7 (class B) defines"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Relying on ammonia levels to diagnose or track hepatic encephalopathy - they correlate poorly with disease severity (p.2759)"
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for decompensated cirrhosis."
+    }
+  ],
+  "tables": [
+    {
+      "id": "decomp_cirrhosis-matrix",
+      "title": "Decompensated cirrhosis: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Compensated cirrhosis can be asymptomatic for a decade or more; the transition to decompensation is marked by the first major",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Diagnostic paracentesis with serum-ascites albumin gradient (SAAG): ≥1.1 g/dL indicates portal-hypertensive ascites, <1.1 g/dL",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Cardiac ascites / constrictive pericarditis (high-SAAG ascites; pro-BNP elevated, ascitic protein typically ≥2.5 g/dL) (p.371),",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Variceal hemorrhage carries a 20-30% mortality per bleeding episode and is an immediate life-threatening event (p.2756)",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Relying on ammonia levels to diagnose or track hepatic encephalopathy - they correlate poorly with disease severity (p.2759)",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for decompensated cirrhosis."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "decomp-cirrhosis-real-image",
+      "title": "Decompensated cirrhosis: Diagnostic Abdominal Computed Tomography",
+      "type": "ct",
+      "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
+      "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
+      "annotations": [
+        {
+          "label": "Solid Viscera",
+          "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
+        },
+        {
+          "label": "Gastrointestinal Tract",
+          "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
+        },
+        {
+          "label": "Mesentery & Peritoneum",
+          "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+        }
+      ]
+    }
+  ]
 }

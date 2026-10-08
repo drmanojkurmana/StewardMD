@@ -1,77 +1,172 @@
 {
-  "id": "chance_fracture",
-  "name": "Chance fracture (flexion-distraction)",
-  "aliases": [
-    "seatbelt fracture",
-    "flexion-distraction injury of the spine",
-    "horizontal splitting vertebral fracture"
+ "id": "chance_fracture",
+ "name": "Chance fracture (flexion-distraction)",
+ "aliases": [
+  "seatbelt fracture",
+  "flexion-distraction injury of the spine",
+  "horizontal splitting vertebral fracture"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal / Trauma",
+ "specialty": "Orthopaedic Trauma",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Rockwood and Green's Fractures in Adults",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A flexion-distraction injury of the spine, classically at the thoracolumbar junction, from a lap belt in rapid deceleration",
+   "The classic bony Chance fracture runs horizontally, splitting the posterior elements, pedicles and vertebral body",
+   "The fulcrum lies anterior to the spine, so the posterior and middle columns fail under tension while the anterior column acts as a hinge",
+   "There is a strong association with intra-abdominal injuries (hollow viscus, mesenteric and pancreatic), heralded by the seatbelt sign bruise across the abdomen",
+   "Purely osseous injuries through cancellous bone may heal in a hyperextension brace, whereas ligamentous variants and those with neurological deficit or instability require surgical fixation",
+   "Look specifically for abdominal wall ecchymosis and screen for visceral injury",
+   "Increased interspinous distance on imaging is a clue to the distraction component"
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal / Trauma",
-  "specialty": "Orthopaedic Trauma",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Rockwood and Green's Fractures in Adults",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A flexion-distraction injury of the spine, classically at the thoracolumbar junction, from a lap belt in rapid deceleration",
-      "The classic bony Chance fracture runs horizontally, splitting the posterior elements, pedicles and vertebral body",
-      "The fulcrum lies anterior to the spine, so the posterior and middle columns fail under tension while the anterior column acts as a hinge",
-      "There is a strong association with intra-abdominal injuries (hollow viscus, mesenteric and pancreatic), heralded by the seatbelt sign bruise across the abdomen",
-      "Purely osseous injuries through cancellous bone may heal in a hyperextension brace, whereas ligamentous variants and those with neurological deficit or instability require surgical fixation",
-      "Look specifically for abdominal wall ecchymosis and screen for visceral injury",
-      "Increased interspinous distance on imaging is a clue to the distraction component"
+  "pathophysiology": "A flexion-distraction force with its fulcrum anterior to the spine, as when a lap belt restrains the pelvis during sudden deceleration, places the posterior and middle spinal columns under tension. Failure propagates horizontally, either through bone in the classic Chance fracture, through the disc and ligaments in a purely soft-tissue variant, or through a combination of both. The same abrupt flexion compresses the abdominal viscera against the spine, explaining the frequent association with hollow viscus and mesenteric injuries. Whether the injury is stable depends on the integrity of the posterior ligamentous complex.",
+  "additionalDifferentials": [
+   "Burst fracture",
+   "Compression (wedge) fracture",
+   "Fracture-dislocation of the spine",
+   "Purely ligamentous flexion-distraction injury",
+   "Pathological fracture",
+   "Fracture in ankylosing spondylitis or diffuse skeletal hyperostosis"
+  ],
+  "additionalInvestigations": [
+   "Anteroposterior and lateral spinal radiographs, noting increased interspinous distance",
+   "CT to define the bony injury and involvement of the spinal columns",
+   "MRI to assess the posterior ligamentous complex and the spinal cord or soft tissues",
+   "CT of the abdomen and pelvis to screen for associated visceral injuries",
+   "Documented neurological examination"
+  ],
+  "redFlags": [
+   "Associated intra-abdominal or visceral injury signalled by a seatbelt sign",
+   "Any neurological deficit",
+   "A ligamentous (unstable) variant of the injury",
+   "Progressive kyphotic deformity"
+  ],
+  "prognosis": "Purely osseous injuries through cancellous bone generally heal well with bracing, whereas ligamentous variants are unstable and require fixation; associated abdominal injuries may dominate the early clinical course.",
+  "pitfalls": [
+   "Missing the associated intra-abdominal injury",
+   "Failing to recognise a ligamentous variant by relying on CT without MRI",
+   "Underestimating the instability of the injury",
+   "Overlooking the fracture on inadequate imaging"
+  ],
+  "references": [
+   "Rockwood and Green's Fractures in Adults",
+   "The Spine (Rothman-Simeone)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Manage stable, purely osseous Chance fractures with immobilisation in a hyperextension thoracolumbosacral orthosis and serial radiographic follow-up",
+   "Treat ligamentous or unstable variants, and those with neurological deficit, with posterior instrumented fixation and fusion",
+   "Screen actively for associated intra-abdominal injury involving hollow viscus, mesentery and pancreas, prompted by a seatbelt-sign bruise, with CT imaging and early surgical involvement",
+   "Perform and document a full neurological examination and maintain spinal precautions and log-rolling until stability is established",
+   "Provide analgesia, venous thromboembolism prophylaxis and early mobilisation once the injury is stabilised",
+   "Refer to orthopaedic or spinal trauma services, with trauma-team and general-surgical input for concomitant visceral injury",
+   "Arrange rehabilitation and monitor brace-treated fractures for loss of reduction or progressive deformity"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "chance_fracture-pathway",
+   "title": "Chance fracture (flexion-distraction): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A flexion-distraction injury of the spine, classically at the thoracolumbar junction, from a lap belt in rapid deceleration",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Associated intra-abdominal or visceral injury signalled by a seatbelt sign",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Anteroposterior and lateral spinal radiographs, noting increased interspinous distance, CT to define the bony injury and involvement of the spinal columns, MRI to assess the posterior ligamentous complex and the spinal"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Manage stable, purely osseous Chance fractures with immobilisation in a hyperextension thoracolumbosacral orthosis and serial radiographic follow-up"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Missing the associated intra-abdominal injury"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of chance fracture (flexion-distraction)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "chance_fracture-matrix",
+   "title": "Chance fracture (flexion-distraction): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A flexion-distraction injury of the spine, classically at the thoracolumbar junction, from a lap belt in rapid deceleration",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "A flexion-distraction force with its fulcrum anterior to the spine, as when a lap belt restrains the pelvis during sudden deceleration, places the posterior and middle spinal columns under tension. Failure propagates horizontally, either through bone in the classic Chance fracture, through the disc and ligaments in a purely soft-tissue variant, or through a combination of both. The same abrupt flexion compresses the abdominal viscera against the spine, explaining the frequent association with hollow viscus and mesenteric injuries. Whether the injury is stable depends on the integrity of the posterior ligamentous complex.",
-    "additionalDifferentials": [
-      "Burst fracture",
-      "Compression (wedge) fracture",
-      "Fracture-dislocation of the spine",
-      "Purely ligamentous flexion-distraction injury",
-      "Pathological fracture",
-      "Fracture in ankylosing spondylitis or diffuse skeletal hyperostosis"
+    [
+     "Key Investigations",
+     "Anteroposterior and lateral spinal radiographs, noting increased interspinous distance, CT to define the bony injury and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Anteroposterior and lateral spinal radiographs, noting increased interspinous distance",
-      "CT to define the bony injury and involvement of the spinal columns",
-      "MRI to assess the posterior ligamentous complex and the spinal cord or soft tissues",
-      "CT of the abdomen and pelvis to screen for associated visceral injuries",
-      "Documented neurological examination"
+    [
+     "Primary Differentials",
+     "Burst fracture, Compression (wedge) fracture, Fracture-dislocation of the spine",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Associated intra-abdominal or visceral injury signalled by a seatbelt sign",
-      "Any neurological deficit",
-      "A ligamentous (unstable) variant of the injury",
-      "Progressive kyphotic deformity"
+    [
+     "Management Strategy",
+     "Manage stable, purely osseous Chance fractures with immobilisation in a hyperextension thoracolumbosacral orthosis and serial",
+     "Core treatment modality"
     ],
-    "prognosis": "Purely osseous injuries through cancellous bone generally heal well with bracing, whereas ligamentous variants are unstable and require fixation; associated abdominal injuries may dominate the early clinical course.",
-    "pitfalls": [
-      "Missing the associated intra-abdominal injury",
-      "Failing to recognise a ligamentous variant by relying on CT without MRI",
-      "Underestimating the instability of the injury",
-      "Overlooking the fracture on inadequate imaging"
-    ],
-    "references": [
-      "Rockwood and Green's Fractures in Adults",
-      "The Spine (Rothman-Simeone)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Manage stable, purely osseous Chance fractures with immobilisation in a hyperextension thoracolumbosacral orthosis and serial radiographic follow-up",
-      "Treat ligamentous or unstable variants, and those with neurological deficit, with posterior instrumented fixation and fusion",
-      "Screen actively for associated intra-abdominal injury involving hollow viscus, mesentery and pancreas, prompted by a seatbelt-sign bruise, with CT imaging and early surgical involvement",
-      "Perform and document a full neurological examination and maintain spinal precautions and log-rolling until stability is established",
-      "Provide analgesia, venous thromboembolism prophylaxis and early mobilisation once the injury is stabilised",
-      "Refer to orthopaedic or spinal trauma services, with trauma-team and general-surgical input for concomitant visceral injury",
-      "Arrange rehabilitation and monitor brace-treated fractures for loss of reduction or progressive deformity"
+    [
+     "Clinical Pitfall",
+     "Missing the associated intra-abdominal injury",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for chance fracture (flexion-distraction)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "chance-fracture-real-image",
+   "title": "Chance fracture (flexion-distraction): Diagnostic Musculoskeletal Radiograph",
+   "type": "xray",
+   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
+   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
+   "annotations": [
+    {
+     "label": "Cortical Margins",
+     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
+    },
+    {
+     "label": "Trabecular Architecture",
+     "description": "Medullary bone density, lucencies, and subchondral mineralization."
+    },
+    {
+     "label": "Joint Articulation",
+     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+    }
+   ]
+  }
+ ]
 }

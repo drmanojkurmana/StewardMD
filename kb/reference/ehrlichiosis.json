@@ -1,84 +1,179 @@
 {
-  "id": "ehrlichiosis",
-  "name": "Ehrlichiosis",
-  "aliases": [
-    "human monocytic ehrlichiosis",
-    "HME",
-    "Ehrlichia infection",
-    "human granulocytic anaplasmosis (related)"
+ "id": "ehrlichiosis",
+ "name": "Ehrlichiosis",
+ "aliases": [
+  "human monocytic ehrlichiosis",
+  "HME",
+  "Ehrlichia infection",
+  "human granulocytic anaplasmosis (related)"
+ ],
+ "class": "infective",
+ "system": "Infectious Diseases",
+ "specialty": "Infectious Diseases",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Harrison's Principles of Internal Medicine / WHO",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A tick-borne infection caused by intracellular bacteria of the genus Ehrlichia (human monocytic ehrlichiosis), closely related to anaplasmosis, both transmitted by ixodid ticks",
+   "Presents as an acute undifferentiated febrile illness with headache, myalgia, and malaise, often without a rash, so a history of tick exposure is a key clue",
+   "The classic laboratory triad is leukopenia, thrombocytopenia, and elevated hepatic transaminases in a febrile patient",
+   "Morulae, clusters of organisms within the cytoplasm of leukocytes, may be seen on a peripheral blood smear and support the diagnosis",
+   "Severe disease can include respiratory failure, renal failure, meningoencephalitis, and a toxic-shock-like picture, more often in older or immunocompromised patients",
+   "Because serology is often negative early, treatment should be started empirically on clinical suspicion rather than waiting for confirmation",
+   "A tetracycline-class antibiotic is the treatment of choice, and a prompt clinical response supports the diagnosis"
   ],
-  "class": "infective",
-  "system": "Infectious Diseases",
-  "specialty": "Infectious Diseases",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Harrison's Principles of Internal Medicine / WHO",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A tick-borne infection caused by intracellular bacteria of the genus Ehrlichia (human monocytic ehrlichiosis), closely related to anaplasmosis, both transmitted by ixodid ticks",
-      "Presents as an acute undifferentiated febrile illness with headache, myalgia, and malaise, often without a rash, so a history of tick exposure is a key clue",
-      "The classic laboratory triad is leukopenia, thrombocytopenia, and elevated hepatic transaminases in a febrile patient",
-      "Morulae, clusters of organisms within the cytoplasm of leukocytes, may be seen on a peripheral blood smear and support the diagnosis",
-      "Severe disease can include respiratory failure, renal failure, meningoencephalitis, and a toxic-shock-like picture, more often in older or immunocompromised patients",
-      "Because serology is often negative early, treatment should be started empirically on clinical suspicion rather than waiting for confirmation",
-      "A tetracycline-class antibiotic is the treatment of choice, and a prompt clinical response supports the diagnosis"
+  "pathophysiology": "Ehrlichia species are small obligate intracellular bacteria that, after inoculation by a tick bite, infect leukocytes (monocytes in monocytic ehrlichiosis) and replicate within cytoplasmic vacuoles to form morulae. Infection of these cells and the ensuing host inflammatory response cause a systemic febrile illness with cytopenias from marrow effects and peripheral consumption, hepatic inflammation, and, in severe cases, widespread endothelial and organ involvement resembling sepsis. Immune dysregulation contributes to the most severe, hyperinflammatory presentations.",
+  "additionalDifferentials": [
+   "Rocky Mountain spotted fever and other rickettsioses",
+   "Anaplasmosis",
+   "Scrub typhus and other typhus-group infections",
+   "Leptospirosis",
+   "Viral haemorrhagic fever or severe dengue",
+   "Sepsis from other causes"
+  ],
+  "infectionMimics": [
+   "Rocky Mountain spotted fever",
+   "Scrub typhus",
+   "Leptospirosis",
+   "Viral febrile illness with cytopenias"
+  ],
+  "additionalInvestigations": [
+   "Peripheral blood smear examination for morulae in leukocytes",
+   "PCR for Ehrlichia DNA in acute blood samples (most useful early)",
+   "Paired acute and convalescent serology (indirect immunofluorescence)",
+   "Full blood count and liver function tests to detect the characteristic cytopenias and transaminitis",
+   "Investigations to exclude other tick-borne and severe febrile illnesses"
+  ],
+  "redFlags": [
+   "Respiratory distress or hypoxia suggesting ARDS",
+   "Confusion, meningism, or focal neurological signs indicating CNS involvement",
+   "Rising creatinine, marked coagulopathy, or a toxic-shock-like syndrome",
+   "Severe disease in an immunocompromised, asplenic, or elderly patient"
+  ],
+  "prognosis": "With early appropriate antibiotic therapy most patients recover fully and rapidly; delayed treatment or severe disease, particularly in immunocompromised or older patients, can lead to organ failure and death.",
+  "pitfalls": [
+   "Withholding empirical treatment while waiting for confirmatory serology, which is often negative in the acute phase",
+   "Dismissing the diagnosis because there is no rash, unlike Rocky Mountain spotted fever",
+   "Missing tick exposure history in a patient with unexplained fever and cytopenias",
+   "Failing to recognise progression to severe multi-organ disease in high-risk hosts"
+  ],
+  "references": [
+   "Harrison's Principles of Internal Medicine, 22e",
+   "WHO guidelines"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Prompt empirical doxycycline started on clinical suspicion without awaiting serological confirmation, as the first-line tetracycline for all ages including children",
+   "Rifampicin as an alternative agent in true tetracycline intolerance or pregnancy",
+   "Supportive care with antipyretics, fluid resuscitation and correction of complications arising from the cytopenias",
+   "Monitoring of the full blood count and liver function for resolving leukopenia, thrombocytopenia and transaminitis, expecting rapid clinical response after starting therapy",
+   "Escalation to critical care for severe disease with respiratory failure, renal failure, meningoencephalitis or a toxic-shock-like picture, especially in older or immunocompromised patients",
+   "Consideration and testing for co-infection with other ixodid tick-borne diseases such as anaplasmosis, treating accordingly",
+   "Tick-bite prevention counselling covering protective clothing, repellents and prompt tick removal"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "ehrlichiosis-pathway",
+   "title": "Ehrlichiosis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A tick-borne infection caused by intracellular bacteria of the genus Ehrlichia (human monocytic ehrlichiosis), closely related to anaplasmosis, both transmitted by ixodid ticks",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Respiratory distress or hypoxia suggesting ARDS",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Peripheral blood smear examination for morulae in leukocytes, PCR for Ehrlichia DNA in acute blood samples (most useful early), Paired acute and convalescent serology (indirect immunofluorescence)"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Prompt empirical doxycycline started on clinical suspicion without awaiting serological confirmation, as the first-line tetracycline for all ages including children"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Withholding empirical treatment while waiting for confirmatory serology, which is often negative in the acute phase"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of ehrlichiosis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "ehrlichiosis-matrix",
+   "title": "Ehrlichiosis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A tick-borne infection caused by intracellular bacteria of the genus Ehrlichia (human monocytic ehrlichiosis), closely related to",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Ehrlichia species are small obligate intracellular bacteria that, after inoculation by a tick bite, infect leukocytes (monocytes in monocytic ehrlichiosis) and replicate within cytoplasmic vacuoles to form morulae. Infection of these cells and the ensuing host inflammatory response cause a systemic febrile illness with cytopenias from marrow effects and peripheral consumption, hepatic inflammation, and, in severe cases, widespread endothelial and organ involvement resembling sepsis. Immune dysregulation contributes to the most severe, hyperinflammatory presentations.",
-    "additionalDifferentials": [
-      "Rocky Mountain spotted fever and other rickettsioses",
-      "Anaplasmosis",
-      "Scrub typhus and other typhus-group infections",
-      "Leptospirosis",
-      "Viral haemorrhagic fever or severe dengue",
-      "Sepsis from other causes"
+    [
+     "Key Investigations",
+     "Peripheral blood smear examination for morulae in leukocytes, PCR for Ehrlichia DNA in acute blood samples (most useful early),",
+     "Confirmatory diagnostic workup"
     ],
-    "infectionMimics": [
-      "Rocky Mountain spotted fever",
-      "Scrub typhus",
-      "Leptospirosis",
-      "Viral febrile illness with cytopenias"
+    [
+     "Primary Differentials",
+     "Rocky Mountain spotted fever and other rickettsioses, Anaplasmosis, Scrub typhus and other typhus-group infections",
+     "Rule out key mimics"
     ],
-    "additionalInvestigations": [
-      "Peripheral blood smear examination for morulae in leukocytes",
-      "PCR for Ehrlichia DNA in acute blood samples (most useful early)",
-      "Paired acute and convalescent serology (indirect immunofluorescence)",
-      "Full blood count and liver function tests to detect the characteristic cytopenias and transaminitis",
-      "Investigations to exclude other tick-borne and severe febrile illnesses"
+    [
+     "Management Strategy",
+     "Prompt empirical doxycycline started on clinical suspicion without awaiting serological confirmation, as the first-line",
+     "Core treatment modality"
     ],
-    "redFlags": [
-      "Respiratory distress or hypoxia suggesting ARDS",
-      "Confusion, meningism, or focal neurological signs indicating CNS involvement",
-      "Rising creatinine, marked coagulopathy, or a toxic-shock-like syndrome",
-      "Severe disease in an immunocompromised, asplenic, or elderly patient"
-    ],
-    "prognosis": "With early appropriate antibiotic therapy most patients recover fully and rapidly; delayed treatment or severe disease, particularly in immunocompromised or older patients, can lead to organ failure and death.",
-    "pitfalls": [
-      "Withholding empirical treatment while waiting for confirmatory serology, which is often negative in the acute phase",
-      "Dismissing the diagnosis because there is no rash, unlike Rocky Mountain spotted fever",
-      "Missing tick exposure history in a patient with unexplained fever and cytopenias",
-      "Failing to recognise progression to severe multi-organ disease in high-risk hosts"
-    ],
-    "references": [
-      "Harrison's Principles of Internal Medicine, 22e",
-      "WHO guidelines"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Prompt empirical doxycycline started on clinical suspicion without awaiting serological confirmation, as the first-line tetracycline for all ages including children",
-      "Rifampicin as an alternative agent in true tetracycline intolerance or pregnancy",
-      "Supportive care with antipyretics, fluid resuscitation and correction of complications arising from the cytopenias",
-      "Monitoring of the full blood count and liver function for resolving leukopenia, thrombocytopenia and transaminitis, expecting rapid clinical response after starting therapy",
-      "Escalation to critical care for severe disease with respiratory failure, renal failure, meningoencephalitis or a toxic-shock-like picture, especially in older or immunocompromised patients",
-      "Consideration and testing for co-infection with other ixodid tick-borne diseases such as anaplasmosis, treating accordingly",
-      "Tick-bite prevention counselling covering protective clothing, repellents and prompt tick removal"
+    [
+     "Clinical Pitfall",
+     "Withholding empirical treatment while waiting for confirmatory serology, which is often negative in the acute phase",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for ehrlichiosis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "ehrlichiosis-real-image",
+   "title": "Ehrlichiosis: Diagnostic Microbiological / Smear Examination",
+   "type": "diagram",
+   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
+   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
+   "annotations": [
+    {
+     "label": "Pathogen Detection",
+     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
+    },
+    {
+     "label": "Inflammatory Response",
+     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
+    },
+    {
+     "label": "Diagnostic Confirmation",
+     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+    }
+   ]
+  }
+ ]
 }

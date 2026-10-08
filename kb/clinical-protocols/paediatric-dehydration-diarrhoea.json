@@ -143,5 +143,100 @@
  "review": {
   "status": "ai_drafted",
   "compiled": "2026-09-25"
- }
+ },
+ "algorithms": [
+  {
+   "id": "paediatric-dehydration-diarrhoea-pathway",
+   "title": "Acute diarrhoea with dehydration in children Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Severe dehydration: two or more of lethargy or unconsciousness, sunken eyes, unable to drink or drinking poorly, skin pinch goes back very slowly (2 seconds or more).",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Start IV fluid immediately; give ORS by mouth while the drip is set up if the child can drink. Use Ringer lactate (0.9% saline if unavailable); 5% dextrose alone is not effective.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "No dehydration: not enough signs to classify as some or severe dehydration."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Do not give antibiotics for acute watery diarrhoea (WHO 2024), and do not give antidiarrhoeal drugs or antiemetics to young children."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "During IV rehydration watch pulse volume, capillary refill, consciousness, urine output and signs of overhydration (puffy eyelids, rising respiratory rate, crackles, enlarging liver)."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for acute diarrhoea with dehydration in children."
+  }
+ ],
+ "tables": [
+  {
+   "id": "paediatric-dehydration-diarrhoea-summary-matrix",
+   "title": "Acute diarrhoea with dehydration in children Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Severe dehydration: two or more of lethargy or unconsciousness, sunken eyes, unable to drink or drinking poorly, skin pinch goes back very",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Start IV fluid immediately; give ORS by mouth while the drip is set up if the child can drink. Use Ringer lactate (0.9% saline if",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Low-osmolarity ORS: Plan B: 75 mL/kg over 4 hours; Plan A: 50 to 100 mL (under 2 years) or 100 to 200 mL (2 years or older) after each",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Using standard ORS or rapid IV boluses in children with severe acute malnutrition; they need ReSoMal and the SAM shock protocol.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for acute diarrhoea with dehydration in children."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "paediatric-dehydration-diarrhoea-real-image",
+   "title": "Acute diarrhoea with dehydration in children: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

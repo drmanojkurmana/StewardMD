@@ -1,76 +1,171 @@
 {
-  "id": "xxyy_syndrome",
-  "name": "48,XXYY syndrome",
-  "aliases": [
-    "48,XXYY",
-    "XXYY syndrome",
-    "XXYY variant of Klinefelter syndrome"
+ "id": "xxyy_syndrome",
+ "name": "48,XXYY syndrome",
+ "aliases": [
+  "48,XXYY",
+  "XXYY syndrome",
+  "XXYY variant of Klinefelter syndrome"
+ ],
+ "class": "non_infective",
+ "system": "Genetics",
+ "specialty": "Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "GeneReviews / Smith's Recognizable Patterns of Human Malformation",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Regarded as part of the Klinefelter spectrum but with a more pronounced neurodevelopmental and behavioural profile, sometimes termed Klinefelter-plus",
+   "Tall stature, often above average adult male height, with eunuchoid body proportions",
+   "Hypergonadotropic hypogonadism with small testes, low testosterone, infertility, and frequently gynaecomastia, so testosterone supplementation is often required from adolescence",
+   "Intellectual ability is usually in the low-average to mildly impaired range, lower than in 47,XXY",
+   "High rates of attention-deficit/hyperactivity, autism spectrum traits, anxiety, mood dysregulation, and other behavioural difficulties",
+   "Increased risk of tremor, seizures, dental problems, deep-vein thrombosis and peripheral vascular disease, and congenital malformations",
+   "Arises from sequential non-disjunction during paternal gametogenesis, adding both an X and a Y chromosome"
   ],
-  "class": "non_infective",
-  "system": "Genetics",
-  "specialty": "Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "GeneReviews / Smith's Recognizable Patterns of Human Malformation",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Regarded as part of the Klinefelter spectrum but with a more pronounced neurodevelopmental and behavioural profile, sometimes termed Klinefelter-plus",
-      "Tall stature, often above average adult male height, with eunuchoid body proportions",
-      "Hypergonadotropic hypogonadism with small testes, low testosterone, infertility, and frequently gynaecomastia, so testosterone supplementation is often required from adolescence",
-      "Intellectual ability is usually in the low-average to mildly impaired range, lower than in 47,XXY",
-      "High rates of attention-deficit/hyperactivity, autism spectrum traits, anxiety, mood dysregulation, and other behavioural difficulties",
-      "Increased risk of tremor, seizures, dental problems, deep-vein thrombosis and peripheral vascular disease, and congenital malformations",
-      "Arises from sequential non-disjunction during paternal gametogenesis, adding both an X and a Y chromosome"
+  "pathophysiology": "48,XXYY results from the presence of two extra sex chromosomes, one additional X and one additional Y, in a male, arising through sequential non-disjunction during paternal gametogenesis. As in Klinefelter syndrome, testicular dysgenesis produces hypergonadotropic hypogonadism, while the extra X, with genes escaping inactivation, and the extra Y increase gene dosage that affects growth and neurodevelopment more markedly than a single extra sex chromosome. The greater chromosomal imbalance underlies the more pronounced cognitive, behavioural, and physical features compared with 47,XXY.",
+  "additionalDifferentials": [
+   "Klinefelter syndrome (47,XXY)",
+   "Higher-grade sex-chromosome polysomies such as 48,XXXY and 49,XXXXY",
+   "47,XYY syndrome",
+   "Fragile X syndrome, for tall stature, behaviour, and learning difficulty",
+   "Non-syndromic hypogonadism"
+  ],
+  "additionalInvestigations": [
+   "Karyotype, which is diagnostic",
+   "Chromosomal microarray",
+   "Gonadotrophins and testosterone from adolescence to assess for hypogonadism",
+   "Developmental, cognitive, and behavioural assessment",
+   "Screening for thrombotic and vascular problems where indicated",
+   "Dental review, and EEG if seizures occur"
+  ],
+  "redFlags": [
+   "Symptoms of deep-vein thrombosis or peripheral vascular disease",
+   "Seizures",
+   "Significant mental-health disturbance or a behavioural crisis"
+  ],
+  "prognosis": "Lifespan is generally near-normal but influenced by vascular and thrombotic and other complications; most individuals require lifelong endocrine, educational, and behavioural support, and infertility is the rule.",
+  "pitfalls": [
+   "Labelling the condition as simple Klinefelter syndrome and underestimating the neurodevelopmental needs",
+   "Overlooking the raised thrombotic and vascular risk",
+   "Delaying assessment and replacement of testosterone in adolescence",
+   "Attributing behavioural difficulties to environment alone"
+  ],
+  "references": [
+   "GeneReviews",
+   "Smith's Recognizable Patterns of Human Malformation"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Commence testosterone replacement from adolescence for the hypergonadotropic hypogonadism to support virilisation, bone health and wellbeing",
+   "Provide neurodevelopmental, educational and behavioural support, treating co-existing ADHD, autism spectrum traits, anxiety and mood dysregulation with behavioural therapy and medication as indicated",
+   "Offer speech and language, occupational and physiotherapy for developmental delay and motor difficulties",
+   "Monitor for and manage tremor and seizures, arranging EEG and neurology input where seizures occur",
+   "Assess and reduce thrombotic and peripheral vascular risk, with thromboprophylaxis during high-risk periods such as surgery",
+   "Provide regular dental review and manage gynaecomastia, with surgery if troublesome",
+   "Counsel about infertility and refer to reproductive services, and offer genetic counselling explaining the sporadic paternal-origin sex-chromosome aneuploidy"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "xxyy_syndrome-pathway",
+   "title": "48,XXYY syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Regarded as part of the Klinefelter spectrum but with a more pronounced neurodevelopmental and behavioural profile, sometimes termed Klinefelter-plus",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Symptoms of deep-vein thrombosis or peripheral vascular disease",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Karyotype, which is diagnostic, Chromosomal microarray, Gonadotrophins and testosterone from adolescence to assess for hypogonadism"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Commence testosterone replacement from adolescence for the hypergonadotropic hypogonadism to support virilisation, bone health and wellbeing"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Labelling the condition as simple Klinefelter syndrome and underestimating the neurodevelopmental needs"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of 48,xxyy syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "xxyy_syndrome-matrix",
+   "title": "48,XXYY syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Regarded as part of the Klinefelter spectrum but with a more pronounced neurodevelopmental and behavioural profile, sometimes",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "48,XXYY results from the presence of two extra sex chromosomes, one additional X and one additional Y, in a male, arising through sequential non-disjunction during paternal gametogenesis. As in Klinefelter syndrome, testicular dysgenesis produces hypergonadotropic hypogonadism, while the extra X, with genes escaping inactivation, and the extra Y increase gene dosage that affects growth and neurodevelopment more markedly than a single extra sex chromosome. The greater chromosomal imbalance underlies the more pronounced cognitive, behavioural, and physical features compared with 47,XXY.",
-    "additionalDifferentials": [
-      "Klinefelter syndrome (47,XXY)",
-      "Higher-grade sex-chromosome polysomies such as 48,XXXY and 49,XXXXY",
-      "47,XYY syndrome",
-      "Fragile X syndrome, for tall stature, behaviour, and learning difficulty",
-      "Non-syndromic hypogonadism"
+    [
+     "Key Investigations",
+     "Karyotype, which is diagnostic, Chromosomal microarray, Gonadotrophins and testosterone from adolescence to assess for",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Karyotype, which is diagnostic",
-      "Chromosomal microarray",
-      "Gonadotrophins and testosterone from adolescence to assess for hypogonadism",
-      "Developmental, cognitive, and behavioural assessment",
-      "Screening for thrombotic and vascular problems where indicated",
-      "Dental review, and EEG if seizures occur"
+    [
+     "Primary Differentials",
+     "Klinefelter syndrome (47,XXY), Higher-grade sex-chromosome polysomies such as 48,XXXY and 49,XXXXY, 47,XYY syndrome",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Symptoms of deep-vein thrombosis or peripheral vascular disease",
-      "Seizures",
-      "Significant mental-health disturbance or a behavioural crisis"
+    [
+     "Management Strategy",
+     "Commence testosterone replacement from adolescence for the hypergonadotropic hypogonadism to support virilisation, bone health",
+     "Core treatment modality"
     ],
-    "prognosis": "Lifespan is generally near-normal but influenced by vascular and thrombotic and other complications; most individuals require lifelong endocrine, educational, and behavioural support, and infertility is the rule.",
-    "pitfalls": [
-      "Labelling the condition as simple Klinefelter syndrome and underestimating the neurodevelopmental needs",
-      "Overlooking the raised thrombotic and vascular risk",
-      "Delaying assessment and replacement of testosterone in adolescence",
-      "Attributing behavioural difficulties to environment alone"
-    ],
-    "references": [
-      "GeneReviews",
-      "Smith's Recognizable Patterns of Human Malformation"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Commence testosterone replacement from adolescence for the hypergonadotropic hypogonadism to support virilisation, bone health and wellbeing",
-      "Provide neurodevelopmental, educational and behavioural support, treating co-existing ADHD, autism spectrum traits, anxiety and mood dysregulation with behavioural therapy and medication as indicated",
-      "Offer speech and language, occupational and physiotherapy for developmental delay and motor difficulties",
-      "Monitor for and manage tremor and seizures, arranging EEG and neurology input where seizures occur",
-      "Assess and reduce thrombotic and peripheral vascular risk, with thromboprophylaxis during high-risk periods such as surgery",
-      "Provide regular dental review and manage gynaecomastia, with surgery if troublesome",
-      "Counsel about infertility and refer to reproductive services, and offer genetic counselling explaining the sporadic paternal-origin sex-chromosome aneuploidy"
+    [
+     "Clinical Pitfall",
+     "Labelling the condition as simple Klinefelter syndrome and underestimating the neurodevelopmental needs",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for 48,xxyy syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "xxyy-syndrome-real-image",
+   "title": "48,XXYY syndrome: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

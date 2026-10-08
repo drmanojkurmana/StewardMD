@@ -1,83 +1,178 @@
 {
-  "id": "amnesic_shellfish_poisoning",
-  "name": "Amnesic shellfish poisoning",
-  "aliases": [
-    "ASP",
-    "Domoic acid poisoning"
+ "id": "amnesic_shellfish_poisoning",
+ "name": "Amnesic shellfish poisoning",
+ "aliases": [
+  "ASP",
+  "Domoic acid poisoning"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system / Gastrointestinal",
+ "specialty": "Toxicology / Emergency medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Toxicology references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Caused by domoic acid, a heat-stable excitatory amino acid concentrated by filter-feeding bivalves (notably mussels) that ingest blooms of Pseudo-nitzschia diatoms; cooking does not destroy the toxin.",
+   "Hallmark is the combination of early gastrointestinal upset (nausea, vomiting, abdominal cramps, diarrhoea) within hours followed by neurological features, classically including short-term memory loss that may be permanent.",
+   "Domoic acid is a kainate/AMPA glutamate-receptor agonist causing excitotoxicity, with the hippocampus being particularly vulnerable, explaining the amnestic syndrome that gives the condition its name.",
+   "Severe cases progress to confusion, disorientation, seizures, myoclonus, autonomic instability and coma; a mixed motor-sensory peripheral neuropathy or axonopathy may develop.",
+   "Older patients and those with impaired renal function (reduced toxin clearance) are at higher risk of severe and lasting neurological injury.",
+   "Diagnosis is clinical and epidemiological, supported by detection of domoic acid in implicated shellfish or in patient body fluids by regulatory laboratories; there is no bedside test.",
+   "Management is entirely supportive: aggressive control of seizures, fluid and electrolyte correction, and airway protection; there is no specific antidote.",
+   "Regulatory shellfish-monitoring programmes closing harvesting when toxin levels rise are the principal means of prevention, since the shellfish appear and taste normal."
   ],
-  "class": "non_infective",
-  "system": "Nervous system / Gastrointestinal",
-  "specialty": "Toxicology / Emergency medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Toxicology references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Caused by domoic acid, a heat-stable excitatory amino acid concentrated by filter-feeding bivalves (notably mussels) that ingest blooms of Pseudo-nitzschia diatoms; cooking does not destroy the toxin.",
-      "Hallmark is the combination of early gastrointestinal upset (nausea, vomiting, abdominal cramps, diarrhoea) within hours followed by neurological features, classically including short-term memory loss that may be permanent.",
-      "Domoic acid is a kainate/AMPA glutamate-receptor agonist causing excitotoxicity, with the hippocampus being particularly vulnerable, explaining the amnestic syndrome that gives the condition its name.",
-      "Severe cases progress to confusion, disorientation, seizures, myoclonus, autonomic instability and coma; a mixed motor-sensory peripheral neuropathy or axonopathy may develop.",
-      "Older patients and those with impaired renal function (reduced toxin clearance) are at higher risk of severe and lasting neurological injury.",
-      "Diagnosis is clinical and epidemiological, supported by detection of domoic acid in implicated shellfish or in patient body fluids by regulatory laboratories; there is no bedside test.",
-      "Management is entirely supportive: aggressive control of seizures, fluid and electrolyte correction, and airway protection; there is no specific antidote.",
-      "Regulatory shellfish-monitoring programmes closing harvesting when toxin levels rise are the principal means of prevention, since the shellfish appear and taste normal."
+  "pathophysiology": "Amnesic shellfish poisoning results from ingestion of domoic acid, a rigid tricarboxylic amino acid structurally analogous to glutamate and kainate that is synthesised by marine diatoms of the genus Pseudo-nitzschia during blooms. Filter-feeding bivalves and some fish and crustaceans bioaccumulate the toxin without harm to themselves. Once absorbed in humans, domoic acid acts as a potent agonist at kainate and AMPA subtypes of the ionotropic glutamate receptor, producing sustained neuronal depolarisation and massive calcium influx. This excitotoxic cascade is amplified by secondary release of endogenous glutamate and impairment of glutamate reuptake, culminating in neuronal swelling and death. Regions rich in kainate receptors, above all the CA1 and CA3 fields of the hippocampus and the amygdala, are selectively damaged, which accounts for the characteristic anterograde memory impairment; the thalamus and other limbic structures may also be affected. The toxin is heat-stable so remains active after cooking, is poorly metabolised, and is cleared largely unchanged by the kidneys, so that reduced renal function prolongs exposure and worsens central nervous system injury.",
+  "additionalDifferentials": [
+   "Other shellfish toxin syndromes (paralytic, neurotoxic and diarrhoeic shellfish poisoning)",
+   "Viral or bacterial gastroenteritis with incidental confusion",
+   "Herpes simplex or other limbic encephalitis",
+   "Anti-NMDA-receptor or other autoimmune limbic encephalitis",
+   "Non-convulsive status epilepticus from another cause",
+   "Wernicke encephalopathy or other metabolic encephalopathy",
+   "Serotonin syndrome or other toxidrome causing agitation and myoclonus"
+  ],
+  "additionalInvestigations": [
+   "Detection of domoic acid in implicated shellfish and in serum or urine by a reference toxicology laboratory",
+   "Serum electrolytes, renal function and glucose to guide supportive care and gauge clearance",
+   "Electroencephalography where seizures or non-convulsive status are suspected",
+   "Neuroimaging (MRI) which may show hippocampal and limbic signal change or atrophy in severe cases",
+   "Formal neuropsychological testing to characterise and follow memory deficits",
+   "Nerve conduction studies and electromyography if peripheral neuropathy is suspected",
+   "Arterial blood gas and cardiac monitoring in patients with reduced consciousness or autonomic instability"
+  ],
+  "redFlags": [
+   "New anterograde memory loss or disorientation after a shellfish meal",
+   "Seizures, myoclonus or reduced level of consciousness",
+   "Autonomic instability such as labile blood pressure or arrhythmia",
+   "Progressive weakness suggesting evolving neuropathy",
+   "Advanced age or renal impairment predicting delayed toxin clearance"
+  ],
+  "prognosis": "Mild cases resolve over days with supportive care, but survivors of severe poisoning may be left with permanent short-term memory impairment, chronic epilepsy or a residual peripheral neuropathy. Death occurs in a minority, chiefly among elderly or renally impaired patients with severe central nervous system involvement.",
+  "pitfalls": [
+   "Attributing the illness to ordinary gastroenteritis and missing the neurological phase, since gastrointestinal symptoms come first",
+   "Assuming cooking or freezing makes contaminated shellfish safe, as domoic acid is heat-stable",
+   "Overlooking permanent memory deficit because early confusion is mistakenly judged transient",
+   "Failing to consider reduced renal clearance when triaging elderly patients as low risk",
+   "Waiting for a confirmatory toxin assay before instituting seizure control and supportive care"
+  ],
+  "references": [
+   "Standard clinical toxicology textbooks",
+   "Marine biotoxin and shellfish-safety guidance documents",
+   "Emergency medicine reference texts"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Provide supportive care, as there is no specific antidote, with attention to hydration, electrolytes and airway protection",
+   "Control seizures with a benzodiazepine as first-line therapy and add further antiseizure medication for persistent seizures or status epilepticus",
+   "Manage autonomic instability and monitor cardiac and respiratory function in severe poisoning",
+   "Consider activated charcoal early after ingestion and support toxin clearance, recognising that renal impairment prolongs elimination",
+   "Escalate to intensive care for coma or non-convulsive status epilepticus",
+   "Arrange neuropsychological assessment and rehabilitation for persistent short-term memory impairment",
+   "Report to public health and regulatory laboratories to confirm domoic acid and prevent further cases"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "amnesic_shellfish_poisoning-pathway",
+   "title": "Amnesic shellfish poisoning: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Caused by domoic acid, a heat-stable excitatory amino acid concentrated by filter-feeding bivalves (notably mussels) that ingest blooms of Pseudo-nitzschia diatoms; cooking does not destroy the toxin.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: New anterograde memory loss or disorientation after a shellfish meal",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Detection of domoic acid in implicated shellfish and in serum or urine by a reference toxicology laboratory, Serum electrolytes, renal function and glucose to guide supportive care and gauge clearance,"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Provide supportive care, as there is no specific antidote, with attention to hydration, electrolytes and airway protection"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing the illness to ordinary gastroenteritis and missing the neurological phase, since gastrointestinal symptoms come first"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of amnesic shellfish poisoning."
+  }
+ ],
+ "tables": [
+  {
+   "id": "amnesic_shellfish_poisoning-matrix",
+   "title": "Amnesic shellfish poisoning: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Caused by domoic acid, a heat-stable excitatory amino acid concentrated by filter-feeding bivalves (notably mussels) that ingest",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Amnesic shellfish poisoning results from ingestion of domoic acid, a rigid tricarboxylic amino acid structurally analogous to glutamate and kainate that is synthesised by marine diatoms of the genus Pseudo-nitzschia during blooms. Filter-feeding bivalves and some fish and crustaceans bioaccumulate the toxin without harm to themselves. Once absorbed in humans, domoic acid acts as a potent agonist at kainate and AMPA subtypes of the ionotropic glutamate receptor, producing sustained neuronal depolarisation and massive calcium influx. This excitotoxic cascade is amplified by secondary release of endogenous glutamate and impairment of glutamate reuptake, culminating in neuronal swelling and death. Regions rich in kainate receptors, above all the CA1 and CA3 fields of the hippocampus and the amygdala, are selectively damaged, which accounts for the characteristic anterograde memory impairment; the thalamus and other limbic structures may also be affected. The toxin is heat-stable so remains active after cooking, is poorly metabolised, and is cleared largely unchanged by the kidneys, so that reduced renal function prolongs exposure and worsens central nervous system injury.",
-    "additionalDifferentials": [
-      "Other shellfish toxin syndromes (paralytic, neurotoxic and diarrhoeic shellfish poisoning)",
-      "Viral or bacterial gastroenteritis with incidental confusion",
-      "Herpes simplex or other limbic encephalitis",
-      "Anti-NMDA-receptor or other autoimmune limbic encephalitis",
-      "Non-convulsive status epilepticus from another cause",
-      "Wernicke encephalopathy or other metabolic encephalopathy",
-      "Serotonin syndrome or other toxidrome causing agitation and myoclonus"
+    [
+     "Key Investigations",
+     "Detection of domoic acid in implicated shellfish and in serum or urine by a reference toxicology laboratory, Serum electrolytes,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Detection of domoic acid in implicated shellfish and in serum or urine by a reference toxicology laboratory",
-      "Serum electrolytes, renal function and glucose to guide supportive care and gauge clearance",
-      "Electroencephalography where seizures or non-convulsive status are suspected",
-      "Neuroimaging (MRI) which may show hippocampal and limbic signal change or atrophy in severe cases",
-      "Formal neuropsychological testing to characterise and follow memory deficits",
-      "Nerve conduction studies and electromyography if peripheral neuropathy is suspected",
-      "Arterial blood gas and cardiac monitoring in patients with reduced consciousness or autonomic instability"
+    [
+     "Primary Differentials",
+     "Other shellfish toxin syndromes (paralytic, neurotoxic and diarrhoeic shellfish poisoning), Viral or bacterial gastroenteritis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "New anterograde memory loss or disorientation after a shellfish meal",
-      "Seizures, myoclonus or reduced level of consciousness",
-      "Autonomic instability such as labile blood pressure or arrhythmia",
-      "Progressive weakness suggesting evolving neuropathy",
-      "Advanced age or renal impairment predicting delayed toxin clearance"
+    [
+     "Management Strategy",
+     "Provide supportive care, as there is no specific antidote, with attention to hydration, electrolytes and airway protection",
+     "Core treatment modality"
     ],
-    "prognosis": "Mild cases resolve over days with supportive care, but survivors of severe poisoning may be left with permanent short-term memory impairment, chronic epilepsy or a residual peripheral neuropathy. Death occurs in a minority, chiefly among elderly or renally impaired patients with severe central nervous system involvement.",
-    "pitfalls": [
-      "Attributing the illness to ordinary gastroenteritis and missing the neurological phase, since gastrointestinal symptoms come first",
-      "Assuming cooking or freezing makes contaminated shellfish safe, as domoic acid is heat-stable",
-      "Overlooking permanent memory deficit because early confusion is mistakenly judged transient",
-      "Failing to consider reduced renal clearance when triaging elderly patients as low risk",
-      "Waiting for a confirmatory toxin assay before instituting seizure control and supportive care"
-    ],
-    "references": [
-      "Standard clinical toxicology textbooks",
-      "Marine biotoxin and shellfish-safety guidance documents",
-      "Emergency medicine reference texts"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Provide supportive care, as there is no specific antidote, with attention to hydration, electrolytes and airway protection",
-      "Control seizures with a benzodiazepine as first-line therapy and add further antiseizure medication for persistent seizures or status epilepticus",
-      "Manage autonomic instability and monitor cardiac and respiratory function in severe poisoning",
-      "Consider activated charcoal early after ingestion and support toxin clearance, recognising that renal impairment prolongs elimination",
-      "Escalate to intensive care for coma or non-convulsive status epilepticus",
-      "Arrange neuropsychological assessment and rehabilitation for persistent short-term memory impairment",
-      "Report to public health and regulatory laboratories to confirm domoic acid and prevent further cases"
+    [
+     "Clinical Pitfall",
+     "Attributing the illness to ordinary gastroenteritis and missing the neurological phase, since gastrointestinal symptoms come first",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for amnesic shellfish poisoning."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "amnesic-shellfish-poisoning-real-image",
+   "title": "Amnesic shellfish poisoning: Diagnostic Abdominal Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
+   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
+   "annotations": [
+    {
+     "label": "Solid Viscera",
+     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
+    },
+    {
+     "label": "Gastrointestinal Tract",
+     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
+    },
+    {
+     "label": "Mesentery & Peritoneum",
+     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+    }
+   ]
+  }
+ ]
 }

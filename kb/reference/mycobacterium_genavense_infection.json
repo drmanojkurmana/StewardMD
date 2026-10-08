@@ -1,77 +1,172 @@
 {
-  "id": "mycobacterium_genavense_infection",
-  "name": "Mycobacterium genavense infection",
-  "aliases": [
-    "M. genavense infection",
-    "disseminated Mycobacterium genavense infection"
+ "id": "mycobacterium_genavense_infection",
+ "name": "Mycobacterium genavense infection",
+ "aliases": [
+  "M. genavense infection",
+  "disseminated Mycobacterium genavense infection"
+ ],
+ "class": "infective",
+ "system": "Infectious disease",
+ "specialty": "Infectious Diseases",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Mandell, Douglas and Bennett / ATS-IDSA NTM guidance",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "An extremely fastidious slow-growing mycobacterium that grows poorly or not at all on solid media and often requires liquid culture, mycobactin J supplementation, and prolonged incubation",
+   "Frequently identified only by molecular methods because conventional culture is so slow and insensitive",
+   "Chiefly causes disseminated disease in severely immunosuppressed patients, especially those with advanced HIV and very low CD4 counts",
+   "Presents with fever, weight loss, hepatosplenomegaly, lymphadenopathy, anaemia, and prominent gastrointestinal involvement",
+   "Clinically and pathologically mimics disseminated Mycobacterium avium complex infection",
+   "Also recognised in pet birds and in other immunosuppressed groups such as transplant recipients",
+   "Management uses macrolide-based multidrug therapy as for disseminated MAC, together with restoration of immune function such as antiretroviral therapy"
   ],
-  "class": "infective",
-  "system": "Infectious disease",
-  "specialty": "Infectious Diseases",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Mandell, Douglas and Bennett / ATS-IDSA NTM guidance",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "An extremely fastidious slow-growing mycobacterium that grows poorly or not at all on solid media and often requires liquid culture, mycobactin J supplementation, and prolonged incubation",
-      "Frequently identified only by molecular methods because conventional culture is so slow and insensitive",
-      "Chiefly causes disseminated disease in severely immunosuppressed patients, especially those with advanced HIV and very low CD4 counts",
-      "Presents with fever, weight loss, hepatosplenomegaly, lymphadenopathy, anaemia, and prominent gastrointestinal involvement",
-      "Clinically and pathologically mimics disseminated Mycobacterium avium complex infection",
-      "Also recognised in pet birds and in other immunosuppressed groups such as transplant recipients",
-      "Management uses macrolide-based multidrug therapy as for disseminated MAC, together with restoration of immune function such as antiretroviral therapy"
+  "pathophysiology": "Mycobacterium genavense is a highly fastidious slow-growing mycobacterium of environmental and avian origin. It causes disease almost exclusively in hosts with profound impairment of cell-mediated immunity, in whom the portal of entry is thought to be the gastrointestinal tract with subsequent widespread dissemination to liver, spleen, bone marrow, and lymph nodes. Tissues carry a heavy organism burden with a poorly formed granulomatous response, and the illness closely resembles disseminated M. avium complex disease. Because the organism requires mycobactin J and prolonged incubation, and grows poorly on solid media, diagnosis often depends on nucleic-acid sequencing of blood or tissue.",
+  "additionalDifferentials": [
+   "Disseminated Mycobacterium avium complex infection",
+   "Disseminated tuberculosis",
+   "Other disseminated NTM in advanced HIV",
+   "Visceral leishmaniasis",
+   "Lymphoma",
+   "Disseminated histoplasmosis or other endemic mycosis"
+  ],
+  "additionalInvestigations": [
+   "Blood and tissue mycobacterial culture using liquid media with mycobactin J and prolonged incubation",
+   "Molecular identification by 16S ribosomal RNA gene sequencing, often required when culture is negative",
+   "Biopsy of liver, marrow, or lymph node showing acid-fast bacilli with a poor granulomatous response",
+   "CD4 count and HIV testing",
+   "Imaging for organomegaly and lymphadenopathy",
+   "Screening for gastrointestinal involvement"
+  ],
+  "redFlags": [
+   "Profound immunosuppression such as advanced HIV with a very low CD4 count",
+   "Progressive wasting and organ dysfunction from high organism burden",
+   "Failure to isolate any organism despite a compatible disseminated illness, prompting molecular testing",
+   "Concurrent opportunistic infections"
+  ],
+  "prognosis": "Prognosis is largely determined by the underlying immunodeficiency. With macrolide-based therapy and effective restoration of immunity, particularly antiretroviral therapy in HIV, outcomes have improved, but untreated or profoundly immunosuppressed patients fare poorly and diagnosis is often delayed by the organism's fastidious growth.",
+  "pitfalls": [
+   "Assuming a negative conventional culture excludes mycobacterial disease when molecular testing is required",
+   "Not supplementing media with mycobactin J or allowing sufficiently prolonged incubation",
+   "Failing to prioritise immune reconstitution alongside antimicrobials",
+   "Mislabelling the illness as disseminated MAC without species confirmation"
+  ],
+  "references": [
+   "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
+   "ATS/IDSA guideline on nontuberculous mycobacterial diseases"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Treat with prolonged macrolide-based multidrug antimycobacterial therapy, typically a macrolide such as clarithromycin combined with ethambutol and a rifamycin such as rifabutin, sometimes with a fluoroquinolone",
+   "Restore cell-mediated immunity as the decisive intervention, starting antiretroviral therapy in advanced HIV and reducing immunosuppression in transplant recipients where possible",
+   "Provide supportive care for the systemic illness, including nutritional support, transfusion for anaemia, and management of gastrointestinal involvement",
+   "Anticipate and manage immune reconstitution inflammatory syndrome when antiretroviral therapy is introduced",
+   "Account for interactions between rifamycins and antiretrovirals, adjusting agents and doses under specialist guidance",
+   "Continue therapy for a prolonged period given the fastidious, slow-growing organism and monitor response clinically and radiologically",
+   "Manage jointly with infectious diseases and HIV specialists, as prognosis is largely determined by the underlying immunodeficiency"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "mycobacterium_genavense_infection-pathway",
+   "title": "Mycobacterium genavense infection: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "An extremely fastidious slow-growing mycobacterium that grows poorly or not at all on solid media and often requires liquid culture, mycobactin J supplementation, and prolonged incubation",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Profound immunosuppression such as advanced HIV with a very low CD4 count",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Blood and tissue mycobacterial culture using liquid media with mycobactin J and prolonged incubation, Molecular identification by 16S ribosomal RNA gene sequencing, often required when culture is negative, Biopsy of liver,"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Treat with prolonged macrolide-based multidrug antimycobacterial therapy, typically a macrolide such as clarithromycin combined with ethambutol and a rifamycin such as rifabutin, sometimes with a fluoroquinolone"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Assuming a negative conventional culture excludes mycobacterial disease when molecular testing is required"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of mycobacterium genavense infection."
+  }
+ ],
+ "tables": [
+  {
+   "id": "mycobacterium_genavense_infection-matrix",
+   "title": "Mycobacterium genavense infection: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "An extremely fastidious slow-growing mycobacterium that grows poorly or not at all on solid media and often requires liquid",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Mycobacterium genavense is a highly fastidious slow-growing mycobacterium of environmental and avian origin. It causes disease almost exclusively in hosts with profound impairment of cell-mediated immunity, in whom the portal of entry is thought to be the gastrointestinal tract with subsequent widespread dissemination to liver, spleen, bone marrow, and lymph nodes. Tissues carry a heavy organism burden with a poorly formed granulomatous response, and the illness closely resembles disseminated M. avium complex disease. Because the organism requires mycobactin J and prolonged incubation, and grows poorly on solid media, diagnosis often depends on nucleic-acid sequencing of blood or tissue.",
-    "additionalDifferentials": [
-      "Disseminated Mycobacterium avium complex infection",
-      "Disseminated tuberculosis",
-      "Other disseminated NTM in advanced HIV",
-      "Visceral leishmaniasis",
-      "Lymphoma",
-      "Disseminated histoplasmosis or other endemic mycosis"
+    [
+     "Key Investigations",
+     "Blood and tissue mycobacterial culture using liquid media with mycobactin J and prolonged incubation, Molecular identification by",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Blood and tissue mycobacterial culture using liquid media with mycobactin J and prolonged incubation",
-      "Molecular identification by 16S ribosomal RNA gene sequencing, often required when culture is negative",
-      "Biopsy of liver, marrow, or lymph node showing acid-fast bacilli with a poor granulomatous response",
-      "CD4 count and HIV testing",
-      "Imaging for organomegaly and lymphadenopathy",
-      "Screening for gastrointestinal involvement"
+    [
+     "Primary Differentials",
+     "Disseminated Mycobacterium avium complex infection, Disseminated tuberculosis, Other disseminated NTM in advanced HIV",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Profound immunosuppression such as advanced HIV with a very low CD4 count",
-      "Progressive wasting and organ dysfunction from high organism burden",
-      "Failure to isolate any organism despite a compatible disseminated illness, prompting molecular testing",
-      "Concurrent opportunistic infections"
+    [
+     "Management Strategy",
+     "Treat with prolonged macrolide-based multidrug antimycobacterial therapy, typically a macrolide such as clarithromycin combined",
+     "Core treatment modality"
     ],
-    "prognosis": "Prognosis is largely determined by the underlying immunodeficiency. With macrolide-based therapy and effective restoration of immunity, particularly antiretroviral therapy in HIV, outcomes have improved, but untreated or profoundly immunosuppressed patients fare poorly and diagnosis is often delayed by the organism's fastidious growth.",
-    "pitfalls": [
-      "Assuming a negative conventional culture excludes mycobacterial disease when molecular testing is required",
-      "Not supplementing media with mycobactin J or allowing sufficiently prolonged incubation",
-      "Failing to prioritise immune reconstitution alongside antimicrobials",
-      "Mislabelling the illness as disseminated MAC without species confirmation"
-    ],
-    "references": [
-      "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
-      "ATS/IDSA guideline on nontuberculous mycobacterial diseases"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Treat with prolonged macrolide-based multidrug antimycobacterial therapy, typically a macrolide such as clarithromycin combined with ethambutol and a rifamycin such as rifabutin, sometimes with a fluoroquinolone",
-      "Restore cell-mediated immunity as the decisive intervention, starting antiretroviral therapy in advanced HIV and reducing immunosuppression in transplant recipients where possible",
-      "Provide supportive care for the systemic illness, including nutritional support, transfusion for anaemia, and management of gastrointestinal involvement",
-      "Anticipate and manage immune reconstitution inflammatory syndrome when antiretroviral therapy is introduced",
-      "Account for interactions between rifamycins and antiretrovirals, adjusting agents and doses under specialist guidance",
-      "Continue therapy for a prolonged period given the fastidious, slow-growing organism and monitor response clinically and radiologically",
-      "Manage jointly with infectious diseases and HIV specialists, as prognosis is largely determined by the underlying immunodeficiency"
+    [
+     "Clinical Pitfall",
+     "Assuming a negative conventional culture excludes mycobacterial disease when molecular testing is required",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for mycobacterium genavense infection."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "mycobacterium-genavense-infection-real-image",
+   "title": "Mycobacterium genavense infection: Diagnostic Microbiological / Smear Examination",
+   "type": "diagram",
+   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
+   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
+   "annotations": [
+    {
+     "label": "Pathogen Detection",
+     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
+    },
+    {
+     "label": "Inflammatory Response",
+     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
+    },
+    {
+     "label": "Diagnostic Confirmation",
+     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+    }
+   ]
+  }
+ ]
 }

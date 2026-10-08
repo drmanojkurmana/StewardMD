@@ -119,5 +119,100 @@
       "importedAt": "2026-06-29T13:39:19Z",
       "contentHash": "h6a0ef5ef"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "hhs-dx-algo",
+      "title": "Hyperosmolar hyperglycaemic state: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Typical patient is an older adult with type 2 diabetes presenting after a several-week prodrome of polyuria, weight loss and falling oral intake, progressing to confusion, lethargy or coma (p.3219).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: HHS carries a substantially higher mortality than DKA (up to ~15% in some series), reflecting older patients, more pronounced dehydration and serious precipitating events with comorbidities (p.3219).",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Plasma glucose - typically markedly elevated, may be >55.5 mmol/L (1000 mg/dL) (p.3219)., Serum osmolality - characteristically >300 mOsm/L (p.3219)., Corrected serum sodium - measured Na may be normal or low, but"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Harrison does not give a graded severity classification specific to HHS (unlike DKA, which is graded mild/moderate/severe by pH, bicarbonate and mental status). HHS is instead defined by marked hyperglycaemia,"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: A normal or low measured serum sodium can be falsely reassuring - it must be corrected for hyperglycaemia, after which it is usually elevated and reveals a profound water deficit (p.3219)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for hyperosmolar hyperglycaemic state."
+    }
+  ],
+  "tables": [
+    {
+      "id": "hhs-matrix",
+      "title": "Hyperosmolar hyperglycaemic state: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Typical patient is an older adult with type 2 diabetes presenting after a several-week prodrome of polyuria, weight loss and",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Plasma glucose - typically markedly elevated, may be >55.5 mmol/L (1000 mg/dL) (p.3219)., Serum osmolality - characteristically",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Diabetic ketoacidosis (and the DKA/HHS overlap presentation) (p.3216)., Other causes of an altered/hyperosmolar sensorium - the",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "HHS carries a substantially higher mortality than DKA (up to ~15% in some series), reflecting older patients, more pronounced",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "A normal or low measured serum sodium can be falsely reassuring - it must be corrected for hyperglycaemia, after which it is",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for hyperosmolar hyperglycaemic state."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "hhs-real-image",
+      "title": "Hyperosmolar hyperglycaemic state: Diagnostic Endocrine Cross-Sectional Imaging",
+      "type": "ct",
+      "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
+      "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
+      "annotations": [
+        {
+          "label": "Gland Morphology",
+          "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
+        },
+        {
+          "label": "Focal Lesions",
+          "description": "Nodularity, adenoma attenuation, and washout dynamics."
+        },
+        {
+          "label": "Surrounding Structures",
+          "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+        }
+      ]
+    }
+  ]
 }

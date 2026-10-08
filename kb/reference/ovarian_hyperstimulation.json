@@ -1,83 +1,178 @@
 {
-  "id": "ovarian_hyperstimulation",
-  "name": "Ovarian Hyperstimulation Syndrome",
-  "aliases": [
-    "OHSS",
-    "Ovarian hyperstimulation syndrome",
-    "ovarian hyperstimulation",
-    "ovarian hyperstimulation syndrome"
+ "id": "ovarian_hyperstimulation",
+ "name": "Ovarian Hyperstimulation Syndrome",
+ "aliases": [
+  "OHSS",
+  "Ovarian hyperstimulation syndrome",
+  "ovarian hyperstimulation",
+  "ovarian hyperstimulation syndrome"
+ ],
+ "class": "non_infective",
+ "system": "Obstetrics / Gynaecology",
+ "specialty": "Obstetrics & Gynaecology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Williams Obstetrics / Novak's Gynecology / Campbell-Walsh Urology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Ovarian hyperstimulation syndrome is an iatrogenic complication of controlled ovarian stimulation for assisted reproduction, characterised by enlarged ovaries and a fluid shift out of the intravascular space",
+   "It is classified by severity from mild (abdominal distension and discomfort) through moderate (ascites on imaging, nausea, vomiting) to severe and critical (tense ascites, haemoconcentration, oliguria, thromboembolism, and organ dysfunction)",
+   "Early OHSS occurs within days of the ovulation trigger and relates to the trigger itself, whereas late OHSS occurs later and is driven by endogenous hCG from an established pregnancy, tending to be more severe",
+   "Key risk factors are young age, low body weight, polycystic ovary syndrome, high antral follicle count or anti-Mullerian hormone, and a strong ovarian response with many follicles and high oestradiol",
+   "Prevention strategies include individualised stimulation, use of a GnRH antagonist protocol with a GnRH agonist trigger, freezing all embryos to avoid pregnancy-related hCG, and cabergoline",
+   "Management of significant disease is largely supportive: symptom control, careful fluid balance, and thromboprophylaxis because of the prothrombotic haemoconcentrated state",
+   "Tense, symptomatic ascites can be relieved by paracentesis, which improves comfort, respiratory function, and urine output",
+   "Because of the venous thromboembolism risk, thromboprophylaxis and a low threshold for imaging unusual or persistent symptoms are important, including for atypical thrombosis",
+   "Pelvic pain with an enlarged ovary should also raise suspicion of ovarian torsion, a surgical emergency that can complicate OHSS"
   ],
-  "class": "non_infective",
-  "system": "Obstetrics / Gynaecology",
-  "specialty": "Obstetrics & Gynaecology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Williams Obstetrics / Novak's Gynecology / Campbell-Walsh Urology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Ovarian hyperstimulation syndrome is an iatrogenic complication of controlled ovarian stimulation for assisted reproduction, characterised by enlarged ovaries and a fluid shift out of the intravascular space",
-      "It is classified by severity from mild (abdominal distension and discomfort) through moderate (ascites on imaging, nausea, vomiting) to severe and critical (tense ascites, haemoconcentration, oliguria, thromboembolism, and organ dysfunction)",
-      "Early OHSS occurs within days of the ovulation trigger and relates to the trigger itself, whereas late OHSS occurs later and is driven by endogenous hCG from an established pregnancy, tending to be more severe",
-      "Key risk factors are young age, low body weight, polycystic ovary syndrome, high antral follicle count or anti-Mullerian hormone, and a strong ovarian response with many follicles and high oestradiol",
-      "Prevention strategies include individualised stimulation, use of a GnRH antagonist protocol with a GnRH agonist trigger, freezing all embryos to avoid pregnancy-related hCG, and cabergoline",
-      "Management of significant disease is largely supportive: symptom control, careful fluid balance, and thromboprophylaxis because of the prothrombotic haemoconcentrated state",
-      "Tense, symptomatic ascites can be relieved by paracentesis, which improves comfort, respiratory function, and urine output",
-      "Because of the venous thromboembolism risk, thromboprophylaxis and a low threshold for imaging unusual or persistent symptoms are important, including for atypical thrombosis",
-      "Pelvic pain with an enlarged ovary should also raise suspicion of ovarian torsion, a surgical emergency that can complicate OHSS"
+  "pathophysiology": "Exogenous gonadotrophin stimulation, followed by an hCG or agonist trigger, produces multiple corpora lutea that secrete large amounts of vasoactive mediators, principally vascular endothelial growth factor. hCG amplifies this response, which is why an established pregnancy prolongs and worsens the syndrome. VEGF-driven increases in vascular permeability allow protein-rich fluid to shift from the intravascular compartment into the peritoneal, and sometimes pleural, spaces. This produces ascites, intravascular volume depletion, haemoconcentration, and a hypercoagulable state, which in severe cases lead to oliguria, electrolyte disturbance, thromboembolism, and multi-organ compromise.",
+  "additionalDifferentials": [
+   "Ovarian torsion",
+   "Ruptured ovarian cyst with haemoperitoneum",
+   "Ectopic pregnancy",
+   "Intra-abdominal or pelvic infection",
+   "Appendicitis or other acute abdomen",
+   "Venous thromboembolism from other cause"
+  ],
+  "additionalInvestigations": [
+   "Full blood count and haematocrit to assess haemoconcentration",
+   "Serum electrolytes, renal and liver function tests",
+   "Coagulation profile given the prothrombotic state",
+   "Pelvic and abdominal ultrasound to document ovarian size and ascites",
+   "Serum or urine hCG to confirm pregnancy contributing to late OHSS",
+   "Chest imaging or echocardiography where pleural effusion or respiratory compromise is suspected"
+  ],
+  "redFlags": [
+   "Tense ascites with breathlessness or respiratory compromise",
+   "Features of venous thromboembolism, including atypical sites such as upper limb or cerebral veins",
+   "Haemoconcentration with oliguria, hypotension, or evidence of renal impairment",
+   "Severe abdominal pain suggesting ovarian torsion or cyst rupture",
+   "Rapid clinical deterioration or signs of organ dysfunction requiring hospital admission"
+  ],
+  "prognosis": "Most cases are mild and self-limiting, resolving as hCG levels fall, typically within one to two weeks unless pregnancy sustains the process. Severe and critical OHSS, though uncommon, can be life-threatening from thromboembolism, renal failure, or respiratory compromise, but with prompt supportive care and thromboprophylaxis outcomes are generally good. Preventive strategies have markedly reduced the incidence of severe disease.",
+  "pitfalls": [
+   "Aggressive intravenous crystalloid loading that worsens third-space fluid shift rather than judicious fluid management",
+   "Omitting thromboprophylaxis and missing atypical-site thrombosis",
+   "Failing to consider ovarian torsion in a woman with an enlarged ovary and acute pain",
+   "Not recognising that pregnancy-driven late OHSS may be more severe and prolonged",
+   "Overlooking the option of freezing all embryos or agonist trigger to prevent the syndrome in high responders"
+  ],
+  "references": [
+   "Williams Obstetrics",
+   "Novak's Gynecology",
+   "Campbell-Walsh Urology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Withhold further gonadotrophin and hCG exposure and, in at-risk cycles, pre-empt progression with a GnRH-agonist trigger, a freeze-all embryo strategy, and a dopamine agonist (cabergoline) to blunt VEGF-mediated capillary leak",
+   "Provide symptomatic supportive care with analgesia and antiemetics and judicious fluid replacement titrated to urine output, avoiding NSAIDs that impair renal perfusion",
+   "Give low-molecular-weight heparin thromboprophylaxis because haemoconcentration and the hypercoagulable state carry a high venous thromboembolism risk",
+   "Drain tense ascites or a symptomatic pleural effusion by ultrasound-guided paracentesis or thoracocentesis to relieve dyspnoea and restore renal perfusion",
+   "Monitor haematocrit, renal function, electrolytes and coagulation alongside serial pelvic ultrasound for ovarian size and fluid accumulation, watching for oliguria, thromboembolism and organ dysfunction",
+   "Admit severe or critical disease for inpatient or high-dependency care under reproductive medicine, escalating for worsening haemoconcentration, respiratory compromise or suspected thrombosis"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "ovarian_hyperstimulation-pathway",
+   "title": "Ovarian Hyperstimulation Syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Ovarian hyperstimulation syndrome is an iatrogenic complication of controlled ovarian stimulation for assisted reproduction, characterised by enlarged ovaries and a fluid shift out of the intravascular space",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Tense ascites with breathlessness or respiratory compromise",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Full blood count and haematocrit to assess haemoconcentration, Serum electrolytes, renal and liver function tests, Coagulation profile given the prothrombotic state"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Withhold further gonadotrophin and hCG exposure and, in at-risk cycles, pre-empt progression with a GnRH-agonist trigger, a freeze-all embryo strategy, and a dopamine agonist (cabergoline) to blunt VEGF-mediated"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Aggressive intravenous crystalloid loading that worsens third-space fluid shift rather than judicious fluid management"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of ovarian hyperstimulation syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "ovarian_hyperstimulation-matrix",
+   "title": "Ovarian Hyperstimulation Syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Ovarian hyperstimulation syndrome is an iatrogenic complication of controlled ovarian stimulation for assisted reproduction,",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Exogenous gonadotrophin stimulation, followed by an hCG or agonist trigger, produces multiple corpora lutea that secrete large amounts of vasoactive mediators, principally vascular endothelial growth factor. hCG amplifies this response, which is why an established pregnancy prolongs and worsens the syndrome. VEGF-driven increases in vascular permeability allow protein-rich fluid to shift from the intravascular compartment into the peritoneal, and sometimes pleural, spaces. This produces ascites, intravascular volume depletion, haemoconcentration, and a hypercoagulable state, which in severe cases lead to oliguria, electrolyte disturbance, thromboembolism, and multi-organ compromise.",
-    "additionalDifferentials": [
-      "Ovarian torsion",
-      "Ruptured ovarian cyst with haemoperitoneum",
-      "Ectopic pregnancy",
-      "Intra-abdominal or pelvic infection",
-      "Appendicitis or other acute abdomen",
-      "Venous thromboembolism from other cause"
+    [
+     "Key Investigations",
+     "Full blood count and haematocrit to assess haemoconcentration, Serum electrolytes, renal and liver function tests, Coagulation",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Full blood count and haematocrit to assess haemoconcentration",
-      "Serum electrolytes, renal and liver function tests",
-      "Coagulation profile given the prothrombotic state",
-      "Pelvic and abdominal ultrasound to document ovarian size and ascites",
-      "Serum or urine hCG to confirm pregnancy contributing to late OHSS",
-      "Chest imaging or echocardiography where pleural effusion or respiratory compromise is suspected"
+    [
+     "Primary Differentials",
+     "Ovarian torsion, Ruptured ovarian cyst with haemoperitoneum, Ectopic pregnancy",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Tense ascites with breathlessness or respiratory compromise",
-      "Features of venous thromboembolism, including atypical sites such as upper limb or cerebral veins",
-      "Haemoconcentration with oliguria, hypotension, or evidence of renal impairment",
-      "Severe abdominal pain suggesting ovarian torsion or cyst rupture",
-      "Rapid clinical deterioration or signs of organ dysfunction requiring hospital admission"
+    [
+     "Management Strategy",
+     "Withhold further gonadotrophin and hCG exposure and, in at-risk cycles, pre-empt progression with a GnRH-agonist trigger, a",
+     "Core treatment modality"
     ],
-    "prognosis": "Most cases are mild and self-limiting, resolving as hCG levels fall, typically within one to two weeks unless pregnancy sustains the process. Severe and critical OHSS, though uncommon, can be life-threatening from thromboembolism, renal failure, or respiratory compromise, but with prompt supportive care and thromboprophylaxis outcomes are generally good. Preventive strategies have markedly reduced the incidence of severe disease.",
-    "pitfalls": [
-      "Aggressive intravenous crystalloid loading that worsens third-space fluid shift rather than judicious fluid management",
-      "Omitting thromboprophylaxis and missing atypical-site thrombosis",
-      "Failing to consider ovarian torsion in a woman with an enlarged ovary and acute pain",
-      "Not recognising that pregnancy-driven late OHSS may be more severe and prolonged",
-      "Overlooking the option of freezing all embryos or agonist trigger to prevent the syndrome in high responders"
-    ],
-    "references": [
-      "Williams Obstetrics",
-      "Novak's Gynecology",
-      "Campbell-Walsh Urology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Withhold further gonadotrophin and hCG exposure and, in at-risk cycles, pre-empt progression with a GnRH-agonist trigger, a freeze-all embryo strategy, and a dopamine agonist (cabergoline) to blunt VEGF-mediated capillary leak",
-      "Provide symptomatic supportive care with analgesia and antiemetics and judicious fluid replacement titrated to urine output, avoiding NSAIDs that impair renal perfusion",
-      "Give low-molecular-weight heparin thromboprophylaxis because haemoconcentration and the hypercoagulable state carry a high venous thromboembolism risk",
-      "Drain tense ascites or a symptomatic pleural effusion by ultrasound-guided paracentesis or thoracocentesis to relieve dyspnoea and restore renal perfusion",
-      "Monitor haematocrit, renal function, electrolytes and coagulation alongside serial pelvic ultrasound for ovarian size and fluid accumulation, watching for oliguria, thromboembolism and organ dysfunction",
-      "Admit severe or critical disease for inpatient or high-dependency care under reproductive medicine, escalating for worsening haemoconcentration, respiratory compromise or suspected thrombosis"
+    [
+     "Clinical Pitfall",
+     "Aggressive intravenous crystalloid loading that worsens third-space fluid shift rather than judicious fluid management",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for ovarian hyperstimulation syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "ovarian-hyperstimulation-real-image",
+   "title": "Ovarian Hyperstimulation Syndrome: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

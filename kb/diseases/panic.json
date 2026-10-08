@@ -131,5 +131,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "h8020709d"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "panic-dx-algo",
+      "title": "Panic attack / anxiety: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Up to ~10% of patients presenting to emergency departments with acute chest discomfort have an underlying panic disorder or a related condition (p.104).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Normocapnia together with hypoxemia in a hyperventilating patient is a warning sign that may herald impending respiratory failure - do not assume benign anxiety (p.376)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Resting 12-lead ECG, with serial tracings, to exclude arrhythmia and ischemia in palpitations/chest discomfort (p.291); note hyperventilation in panic can itself produce nonspecific ST-segment and T-wave abnormalities"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Differentiate from top mimics: Hyperventilation syndrome (respiratory alkalosis) - itself a diagnosis of exclusion (p.376), Generalized anxiety disorder and somatization presenting with palpitations or pseudo-syncope (p.161, p.291),"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Anchoring on anxiety/panic prematurely: because attacks mimic ACS, PE, arrhythmia, thyrotoxicosis, pheochromocytoma and hypoglycemia, organic emergencies must be excluded - panic disorder and the hyperventilation"
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for panic attack / anxiety."
+    }
+  ],
+  "tables": [
+    {
+      "id": "panic-matrix",
+      "title": "Panic attack / anxiety: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Up to ~10% of patients presenting to emergency departments with acute chest discomfort have an underlying panic disorder or a",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Resting 12-lead ECG, with serial tracings, to exclude arrhythmia and ischemia in palpitations/chest discomfort (p.291); note",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Hyperventilation syndrome (respiratory alkalosis) - itself a diagnosis of exclusion (p.376), Generalized anxiety disorder and",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Normocapnia together with hypoxemia in a hyperventilating patient is a warning sign that may herald impending respiratory failure",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Anchoring on anxiety/panic prematurely: because attacks mimic ACS, PE, arrhythmia, thyrotoxicosis, pheochromocytoma and",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for panic attack / anxiety."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "panic-real-image",
+      "title": "Panic attack / anxiety: Diagnostic Imaging Evaluation",
+      "type": "xray",
+      "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+      "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+      "annotations": [
+        {
+          "label": "Cardiothoracic Ratio",
+          "description": "Heart size, mediastinal width, and great vessel contours."
+        },
+        {
+          "label": "Visceral Fields",
+          "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+        },
+        {
+          "label": "Bony Thorax & Soft Tissues",
+          "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+        }
+      ]
+    }
+  ]
 }

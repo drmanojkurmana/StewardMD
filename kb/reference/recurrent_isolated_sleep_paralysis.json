@@ -1,79 +1,174 @@
 {
-  "id": "recurrent_isolated_sleep_paralysis",
-  "name": "Recurrent isolated sleep paralysis",
-  "aliases": [
-    "RISP",
-    "isolated sleep paralysis",
-    "sleep paralysis"
+ "id": "recurrent_isolated_sleep_paralysis",
+ "name": "Recurrent isolated sleep paralysis",
+ "aliases": [
+  "RISP",
+  "isolated sleep paralysis",
+  "sleep paralysis"
+ ],
+ "class": "non_infective",
+ "system": "Sleep medicine",
+ "specialty": "Sleep Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "ICHD-3 / International Classification of Sleep Disorders",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Recurrent episodes of inability to move the trunk and limbs while falling asleep or on waking, with full awareness of the surroundings",
+   "Episodes last seconds to a few minutes and resolve spontaneously or when the person is touched or spoken to",
+   "Frightening hypnagogic or hypnopompic hallucinations are common, such as a sensed intruder, chest pressure or a floating sensation",
+   "The term isolated indicates that it occurs without narcolepsy, and recurrent troublesome episodes define the disorder",
+   "It represents intrusion of the muscle atonia of REM sleep into wakefulness",
+   "Sleep deprivation, irregular sleep schedules, the supine position and psychological stress are recognised precipitants",
+   "Management centres on reassurance and improved sleep habits, while persistent daytime sleepiness or cataplexy should prompt evaluation for narcolepsy"
   ],
-  "class": "non_infective",
-  "system": "Sleep medicine",
-  "specialty": "Sleep Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "ICHD-3 / International Classification of Sleep Disorders",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Recurrent episodes of inability to move the trunk and limbs while falling asleep or on waking, with full awareness of the surroundings",
-      "Episodes last seconds to a few minutes and resolve spontaneously or when the person is touched or spoken to",
-      "Frightening hypnagogic or hypnopompic hallucinations are common, such as a sensed intruder, chest pressure or a floating sensation",
-      "The term isolated indicates that it occurs without narcolepsy, and recurrent troublesome episodes define the disorder",
-      "It represents intrusion of the muscle atonia of REM sleep into wakefulness",
-      "Sleep deprivation, irregular sleep schedules, the supine position and psychological stress are recognised precipitants",
-      "Management centres on reassurance and improved sleep habits, while persistent daytime sleepiness or cataplexy should prompt evaluation for narcolepsy"
+  "pathophysiology": "Sleep paralysis occurs when the muscle atonia that normally accompanies REM sleep persists into, or intrudes upon, wakefulness at the boundaries of sleep. The person is conscious but temporarily unable to move voluntary muscles, while dream-related imagery may carry over as vivid hallucinations. Factors that disrupt or fragment REM sleep, such as sleep deprivation and irregular schedules, increase the likelihood of these dissociated states.",
+  "additionalDifferentials": [
+   "Narcolepsy, in which sleep paralysis is one feature",
+   "Nocturnal panic attacks",
+   "Nocturnal seizures, for example of frontal lobe origin",
+   "Cataplexy",
+   "Hypokalaemic or other periodic paralysis",
+   "Nightmare disorder with awakening"
+  ],
+  "additionalInvestigations": [
+   "Clinical history establishing the timing, preserved awareness and brief duration of episodes",
+   "Screening for narcolepsy features such as excessive sleepiness and cataplexy",
+   "Sleep diary and assessment of sleep deprivation and schedule regularity",
+   "Polysomnography and multiple sleep latency testing if narcolepsy is suspected",
+   "Review of stress, psychiatric symptoms and substance use"
+  ],
+  "redFlags": [
+   "Excessive daytime sleepiness or cataplexy suggesting narcolepsy",
+   "Features atypical for sleep paralysis that suggest nocturnal seizures",
+   "Episodes occurring away from the sleep-wake transition",
+   "Severe distress or avoidance of sleep because of the episodes"
+  ],
+  "prognosis": "The condition is benign and often improves with better sleep habits and reassurance; episodes may recur intermittently, especially with sleep loss or stress, but do not indicate serious disease once narcolepsy has been excluded.",
+  "pitfalls": [
+   "Missing underlying narcolepsy when sleepiness or cataplexy is also present",
+   "Mistaking episodes for nocturnal seizures or panic attacks",
+   "Underestimating the fear and sleep avoidance the episodes can cause",
+   "Neglecting sleep deprivation and irregular schedules as remediable triggers"
+  ],
+  "references": [
+   "International Classification of Sleep Disorders, 3rd edition (ICSD-3)",
+   "Principles and Practice of Sleep Medicine (Kryger, Roth, Dement)"
+  ],
+  "crossLinks": [
+   "rem_sleep_behavior_disorder",
+   "exploding_head_syndrome"
+  ],
+  "management": [
+   "Reassure and explain that episodes are benign intrusions of REM-sleep atonia into wakefulness once narcolepsy is excluded",
+   "Reinforce sleep hygiene with regular schedules and adequate sleep duration to reduce REM fragmentation",
+   "Address precipitants by avoiding sleep deprivation, discouraging the supine sleeping position and managing psychological stress",
+   "Treat comorbid anxiety, depression or stress that provoke episodes",
+   "Consider REM-suppressing antidepressant therapy only for frequent, distressing episodes",
+   "Screen for narcolepsy features such as excessive sleepiness and cataplexy, and refer to sleep medicine for polysomnography if an underlying disorder is suspected"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "recurrent_isolated_sleep_paralysis-pathway",
+   "title": "Recurrent isolated sleep paralysis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Recurrent episodes of inability to move the trunk and limbs while falling asleep or on waking, with full awareness of the surroundings",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Excessive daytime sleepiness or cataplexy suggesting narcolepsy",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Clinical history establishing the timing, preserved awareness and brief duration of episodes, Screening for narcolepsy features such as excessive sleepiness and cataplexy, Sleep diary and assessment of sleep deprivation"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Reassure and explain that episodes are benign intrusions of REM-sleep atonia into wakefulness once narcolepsy is excluded"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Missing underlying narcolepsy when sleepiness or cataplexy is also present"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of recurrent isolated sleep paralysis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "recurrent_isolated_sleep_paralysis-matrix",
+   "title": "Recurrent isolated sleep paralysis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Recurrent episodes of inability to move the trunk and limbs while falling asleep or on waking, with full awareness of the",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Sleep paralysis occurs when the muscle atonia that normally accompanies REM sleep persists into, or intrudes upon, wakefulness at the boundaries of sleep. The person is conscious but temporarily unable to move voluntary muscles, while dream-related imagery may carry over as vivid hallucinations. Factors that disrupt or fragment REM sleep, such as sleep deprivation and irregular schedules, increase the likelihood of these dissociated states.",
-    "additionalDifferentials": [
-      "Narcolepsy, in which sleep paralysis is one feature",
-      "Nocturnal panic attacks",
-      "Nocturnal seizures, for example of frontal lobe origin",
-      "Cataplexy",
-      "Hypokalaemic or other periodic paralysis",
-      "Nightmare disorder with awakening"
+    [
+     "Key Investigations",
+     "Clinical history establishing the timing, preserved awareness and brief duration of episodes, Screening for narcolepsy features",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Clinical history establishing the timing, preserved awareness and brief duration of episodes",
-      "Screening for narcolepsy features such as excessive sleepiness and cataplexy",
-      "Sleep diary and assessment of sleep deprivation and schedule regularity",
-      "Polysomnography and multiple sleep latency testing if narcolepsy is suspected",
-      "Review of stress, psychiatric symptoms and substance use"
+    [
+     "Primary Differentials",
+     "Narcolepsy, in which sleep paralysis is one feature, Nocturnal panic attacks, Nocturnal seizures, for example of frontal lobe",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Excessive daytime sleepiness or cataplexy suggesting narcolepsy",
-      "Features atypical for sleep paralysis that suggest nocturnal seizures",
-      "Episodes occurring away from the sleep-wake transition",
-      "Severe distress or avoidance of sleep because of the episodes"
+    [
+     "Management Strategy",
+     "Reassure and explain that episodes are benign intrusions of REM-sleep atonia into wakefulness once narcolepsy is excluded",
+     "Core treatment modality"
     ],
-    "prognosis": "The condition is benign and often improves with better sleep habits and reassurance; episodes may recur intermittently, especially with sleep loss or stress, but do not indicate serious disease once narcolepsy has been excluded.",
-    "pitfalls": [
-      "Missing underlying narcolepsy when sleepiness or cataplexy is also present",
-      "Mistaking episodes for nocturnal seizures or panic attacks",
-      "Underestimating the fear and sleep avoidance the episodes can cause",
-      "Neglecting sleep deprivation and irregular schedules as remediable triggers"
-    ],
-    "references": [
-      "International Classification of Sleep Disorders, 3rd edition (ICSD-3)",
-      "Principles and Practice of Sleep Medicine (Kryger, Roth, Dement)"
-    ],
-    "crossLinks": [
-      "rem_sleep_behavior_disorder",
-      "exploding_head_syndrome"
-    ],
-    "management": [
-      "Reassure and explain that episodes are benign intrusions of REM-sleep atonia into wakefulness once narcolepsy is excluded",
-      "Reinforce sleep hygiene with regular schedules and adequate sleep duration to reduce REM fragmentation",
-      "Address precipitants by avoiding sleep deprivation, discouraging the supine sleeping position and managing psychological stress",
-      "Treat comorbid anxiety, depression or stress that provoke episodes",
-      "Consider REM-suppressing antidepressant therapy only for frequent, distressing episodes",
-      "Screen for narcolepsy features such as excessive sleepiness and cataplexy, and refer to sleep medicine for polysomnography if an underlying disorder is suspected"
+    [
+     "Clinical Pitfall",
+     "Missing underlying narcolepsy when sleepiness or cataplexy is also present",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for recurrent isolated sleep paralysis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "recurrent-isolated-sleep-paralysis-real-image",
+   "title": "Recurrent isolated sleep paralysis: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

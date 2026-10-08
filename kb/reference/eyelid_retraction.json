@@ -1,73 +1,168 @@
 {
-  "id": "eyelid_retraction",
-  "name": "Eyelid retraction",
-  "aliases": [
-    "lid retraction"
+ "id": "eyelid_retraction",
+ "name": "Eyelid retraction",
+ "aliases": [
+  "lid retraction"
+ ],
+ "class": "non_infective",
+ "system": "Eye / Orbit and adnexa",
+ "specialty": "Ophthalmology / Oculoplastics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Oculoplastic surgery references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "An abnormally elevated upper lid or depressed lower lid position exposing sclera, giving a staring appearance",
+   "Thyroid eye disease is by far the commonest cause and may show upper lid retraction and lid lag on downgaze",
+   "Upper lid retraction with impaired upgaze and light-near dissociation suggests dorsal midbrain (Parinaud) syndrome",
+   "Other causes include prior lid or orbital surgery, facial nerve palsy affecting the lower lid, and cicatricial changes",
+   "Retraction causes ocular surface exposure with dryness, irritation and risk of exposure keratopathy",
+   "Management addresses the underlying cause and protects the ocular surface, with surgical lid lengthening for stable cases"
   ],
-  "class": "non_infective",
-  "system": "Eye / Orbit and adnexa",
-  "specialty": "Ophthalmology / Oculoplastics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Oculoplastic surgery references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "An abnormally elevated upper lid or depressed lower lid position exposing sclera, giving a staring appearance",
-      "Thyroid eye disease is by far the commonest cause and may show upper lid retraction and lid lag on downgaze",
-      "Upper lid retraction with impaired upgaze and light-near dissociation suggests dorsal midbrain (Parinaud) syndrome",
-      "Other causes include prior lid or orbital surgery, facial nerve palsy affecting the lower lid, and cicatricial changes",
-      "Retraction causes ocular surface exposure with dryness, irritation and risk of exposure keratopathy",
-      "Management addresses the underlying cause and protects the ocular surface, with surgical lid lengthening for stable cases"
+  "pathophysiology": "Eyelid retraction reflects an imbalance between the lid retractors and their antagonists, or mechanical tethering of the lid. In thyroid eye disease, sympathetic overactivity and inflammation and fibrosis of the levator-Muller complex elevate the upper lid, while proptosis compounds scleral show. Neurogenic retraction occurs when dorsal midbrain lesions disinhibit lid elevation. Cicatricial and post-surgical retraction results from scarring that pulls the lid away from the globe. The resulting exposure of the ocular surface predisposes to drying and keratopathy.",
+  "additionalDifferentials": [
+   "Thyroid eye disease",
+   "Contralateral ptosis causing apparent retraction",
+   "Dorsal midbrain (Parinaud) syndrome",
+   "Proptosis from orbital disease",
+   "Post-surgical or cicatricial retraction",
+   "Facial nerve palsy (lower lid)"
+  ],
+  "additionalInvestigations": [
+   "Measurement of lid position and margin-reflex distances",
+   "Thyroid function and thyroid antibody testing",
+   "Assessment of ocular motility, proptosis and pupil responses",
+   "Corneal assessment for exposure keratopathy",
+   "Neuroimaging if a midbrain or orbital cause is suspected"
+  ],
+  "redFlags": [
+   "Exposure keratopathy or corneal breakdown",
+   "Optic nerve compromise in thyroid eye disease",
+   "Neurological signs suggesting a midbrain lesion",
+   "Rapidly progressive proptosis"
+  ],
+  "prognosis": "Prognosis depends on the cause; retraction from active thyroid eye disease may change with disease activity, and surgical correction is reserved for stable disease with generally good functional and cosmetic results.",
+  "pitfalls": [
+   "Overlooking thyroid eye disease as the underlying cause",
+   "Mistaking contralateral ptosis for retraction",
+   "Neglecting corneal exposure and surface protection",
+   "Operating before the underlying disease is stable"
+  ],
+  "references": [
+   "Oculoplastic surgery references (standard reference)",
+   "Kanski's Clinical Ophthalmology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Treat the underlying cause: control active thyroid eye disease and address neurogenic or cicatricial contributors",
+   "Protect the exposed ocular surface with lubricant drops and ointment, moisture chambers, taping or punctal plugs to prevent exposure keratopathy",
+   "For active thyroid eye disease, manage the systemic thyroid disorder and use corticosteroids, teprotumumab or orbital radiotherapy as indicated",
+   "Temporise upper-lid retraction with botulinum toxin injection into the levator-Muller complex",
+   "Reserve surgical lid-lengthening (retractor recession) for stable, inactive disease",
+   "Monitor the cornea for exposure keratopathy and refer to ophthalmology/oculoplastics"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "eyelid_retraction-pathway",
+   "title": "Eyelid retraction: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "An abnormally elevated upper lid or depressed lower lid position exposing sclera, giving a staring appearance",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Exposure keratopathy or corneal breakdown",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Measurement of lid position and margin-reflex distances, Thyroid function and thyroid antibody testing, Assessment of ocular motility, proptosis and pupil responses"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Treat the underlying cause: control active thyroid eye disease and address neurogenic or cicatricial contributors"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Overlooking thyroid eye disease as the underlying cause"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of eyelid retraction."
+  }
+ ],
+ "tables": [
+  {
+   "id": "eyelid_retraction-matrix",
+   "title": "Eyelid retraction: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "An abnormally elevated upper lid or depressed lower lid position exposing sclera, giving a staring appearance",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Eyelid retraction reflects an imbalance between the lid retractors and their antagonists, or mechanical tethering of the lid. In thyroid eye disease, sympathetic overactivity and inflammation and fibrosis of the levator-Muller complex elevate the upper lid, while proptosis compounds scleral show. Neurogenic retraction occurs when dorsal midbrain lesions disinhibit lid elevation. Cicatricial and post-surgical retraction results from scarring that pulls the lid away from the globe. The resulting exposure of the ocular surface predisposes to drying and keratopathy.",
-    "additionalDifferentials": [
-      "Thyroid eye disease",
-      "Contralateral ptosis causing apparent retraction",
-      "Dorsal midbrain (Parinaud) syndrome",
-      "Proptosis from orbital disease",
-      "Post-surgical or cicatricial retraction",
-      "Facial nerve palsy (lower lid)"
+    [
+     "Key Investigations",
+     "Measurement of lid position and margin-reflex distances, Thyroid function and thyroid antibody testing, Assessment of ocular",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Measurement of lid position and margin-reflex distances",
-      "Thyroid function and thyroid antibody testing",
-      "Assessment of ocular motility, proptosis and pupil responses",
-      "Corneal assessment for exposure keratopathy",
-      "Neuroimaging if a midbrain or orbital cause is suspected"
+    [
+     "Primary Differentials",
+     "Thyroid eye disease, Contralateral ptosis causing apparent retraction, Dorsal midbrain (Parinaud) syndrome",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Exposure keratopathy or corneal breakdown",
-      "Optic nerve compromise in thyroid eye disease",
-      "Neurological signs suggesting a midbrain lesion",
-      "Rapidly progressive proptosis"
+    [
+     "Management Strategy",
+     "Treat the underlying cause: control active thyroid eye disease and address neurogenic or cicatricial contributors",
+     "Core treatment modality"
     ],
-    "prognosis": "Prognosis depends on the cause; retraction from active thyroid eye disease may change with disease activity, and surgical correction is reserved for stable disease with generally good functional and cosmetic results.",
-    "pitfalls": [
-      "Overlooking thyroid eye disease as the underlying cause",
-      "Mistaking contralateral ptosis for retraction",
-      "Neglecting corneal exposure and surface protection",
-      "Operating before the underlying disease is stable"
-    ],
-    "references": [
-      "Oculoplastic surgery references (standard reference)",
-      "Kanski's Clinical Ophthalmology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Treat the underlying cause: control active thyroid eye disease and address neurogenic or cicatricial contributors",
-      "Protect the exposed ocular surface with lubricant drops and ointment, moisture chambers, taping or punctal plugs to prevent exposure keratopathy",
-      "For active thyroid eye disease, manage the systemic thyroid disorder and use corticosteroids, teprotumumab or orbital radiotherapy as indicated",
-      "Temporise upper-lid retraction with botulinum toxin injection into the levator-Muller complex",
-      "Reserve surgical lid-lengthening (retractor recession) for stable, inactive disease",
-      "Monitor the cornea for exposure keratopathy and refer to ophthalmology/oculoplastics"
+    [
+     "Clinical Pitfall",
+     "Overlooking thyroid eye disease as the underlying cause",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for eyelid retraction."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "eyelid-retraction-real-image",
+   "title": "Eyelid retraction: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

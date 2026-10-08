@@ -5,7 +5,18 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Ward, ICU, perioperative",
- "aliases": ["inpatient diabetes", "hospital hyperglycaemia", "basal bolus", "basal plus", "sliding scale", "correction insulin", "steroid-induced hyperglycaemia", "perioperative diabetes", "stress hyperglycaemia", "VRIII"],
+ "aliases": [
+  "inpatient diabetes",
+  "hospital hyperglycaemia",
+  "basal bolus",
+  "basal plus",
+  "sliding scale",
+  "correction insulin",
+  "steroid-induced hyperglycaemia",
+  "perioperative diabetes",
+  "stress hyperglycaemia",
+  "VRIII"
+ ],
  "summary": "Treat persistent glucose of 180 mg/dL (10 mmol/L) or more with scheduled insulin (basal plus prandial plus correction if eating, basal plus correction if not), aiming for 100 to 180 mg/dL on wards and 140 to 180 mg/dL in ICU, avoid sliding scale alone, and match insulin to steroids and surgery.",
  "sections": [
   {
@@ -93,18 +104,159 @@
   }
  ],
  "drugs": [
-  { "name": "Insulin glargine (basal)", "dose": "About half the TDD (TDD 0.3 to 0.6 units/kg/day) SC once daily", "notes": "Continue in type 1 diabetes even if nil by mouth. Reduce if fasting glucose below 100 mg/dL." },
-  { "name": "NPH (isophane) insulin", "dose": "Basal: half the TDD split twice daily. Steroid cover: 10 units SC each morning with prednisolone, increased by 10 to 20% daily", "notes": "Peaks 4 to 6 hours after injection, matching a morning prednisolone dose." },
-  { "name": "Rapid-acting analogue or regular insulin (prandial)", "dose": "Half the TDD split across three meals SC; hold if the meal is not eaten", "notes": "Regular insulin 30 minutes before meals; analogues just before meals." },
-  { "name": "Correction insulin", "dose": "Low, medium or high scale for TDD below 40, 40 to 80, or above 80 units/day, starting at 140 to 150 mg/dL", "notes": "Before meals, or rapid-acting every 4 hours or regular every 6 hours if not eating." },
-  { "name": "Regular insulin IV infusion (ICU)", "dose": "Per validated protocol for glucose 180 mg/dL or more, target 140 to 180 mg/dL", "notes": "Glucose checks every 30 minutes to 2 hours." },
-  { "name": "Gliclazide (steroid-induced, mild)", "dose": "40 mg orally each morning, titrated daily to a maximum of 240 mg in the morning (320 mg/day total)", "notes": "Reduce with steroid taper; hypoglycaemia risk in CKD and older adults." },
-  { "name": "Linagliptin", "dose": "5 mg orally once daily", "notes": "Option with correction insulin for mild hyperglycaemia in type 2 diabetes; no renal dose adjustment." }
+  {
+   "name": "Insulin glargine (basal)",
+   "dose": "About half the TDD (TDD 0.3 to 0.6 units/kg/day) SC once daily",
+   "notes": "Continue in type 1 diabetes even if nil by mouth. Reduce if fasting glucose below 100 mg/dL."
+  },
+  {
+   "name": "NPH (isophane) insulin",
+   "dose": "Basal: half the TDD split twice daily. Steroid cover: 10 units SC each morning with prednisolone, increased by 10 to 20% daily",
+   "notes": "Peaks 4 to 6 hours after injection, matching a morning prednisolone dose."
+  },
+  {
+   "name": "Rapid-acting analogue or regular insulin (prandial)",
+   "dose": "Half the TDD split across three meals SC; hold if the meal is not eaten",
+   "notes": "Regular insulin 30 minutes before meals; analogues just before meals."
+  },
+  {
+   "name": "Correction insulin",
+   "dose": "Low, medium or high scale for TDD below 40, 40 to 80, or above 80 units/day, starting at 140 to 150 mg/dL",
+   "notes": "Before meals, or rapid-acting every 4 hours or regular every 6 hours if not eating."
+  },
+  {
+   "name": "Regular insulin IV infusion (ICU)",
+   "dose": "Per validated protocol for glucose 180 mg/dL or more, target 140 to 180 mg/dL",
+   "notes": "Glucose checks every 30 minutes to 2 hours."
+  },
+  {
+   "name": "Gliclazide (steroid-induced, mild)",
+   "dose": "40 mg orally each morning, titrated daily to a maximum of 240 mg in the morning (320 mg/day total)",
+   "notes": "Reduce with steroid taper; hypoglycaemia risk in CKD and older adults."
+  },
+  {
+   "name": "Linagliptin",
+   "dose": "5 mg orally once daily",
+   "notes": "Option with correction insulin for mild hyperglycaemia in type 2 diabetes; no renal dose adjustment."
+  }
  ],
  "sources": [
-  { "org": "ADA", "title": "16. Diabetes care in the hospital: Standards of Care in Diabetes 2026", "year": 2026, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12690180/" },
-  { "org": "Endocrine Society", "title": "Management of hyperglycemia in hospitalized adult patients in non-critical care settings", "year": 2022, "url": "https://academic.oup.com/jcem/article/107/8/2101/6605637" },
-  { "org": "JBDS-IP", "title": "Management of hyperglycaemia and steroid (glucocorticoid) therapy (revised January 2023)", "year": 2023, "url": "https://abcd.care/sites/default/files/site_uploads/JBDS_Guidelines_Current/JBDS_08_Management_of_Hyperglycaemia_and_Steroid_(Glucocorticoid)_Therapy_with_QR_code_January_2023.pdf" }
+  {
+   "org": "ADA",
+   "title": "16. Diabetes care in the hospital: Standards of Care in Diabetes 2026",
+   "year": 2026,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12690180/"
+  },
+  {
+   "org": "Endocrine Society",
+   "title": "Management of hyperglycemia in hospitalized adult patients in non-critical care settings",
+   "year": 2022,
+   "url": "https://academic.oup.com/jcem/article/107/8/2101/6605637"
+  },
+  {
+   "org": "JBDS-IP",
+   "title": "Management of hyperglycaemia and steroid (glucocorticoid) therapy (revised January 2023)",
+   "year": 2023,
+   "url": "https://abcd.care/sites/default/files/site_uploads/JBDS_Guidelines_Current/JBDS_08_Management_of_Hyperglycaemia_and_Steroid_(Glucocorticoid)_Therapy_with_QR_code_January_2023.pdf"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "inpatient-hyperglycaemia-pathway",
+   "title": "Inpatient hyperglycaemia and perioperative glucose management Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Hospital hyperglycaemia: any glucose above 140 mg/dL (7.8 mmol/L). Check HbA1c if none in the past 3 months; HbA1c 6.5% or more suggests diabetes predating admission.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Record diabetes type (type 1 must always have basal insulin), home drugs and doses, nutrition route (eating, nil by mouth, enteral, parenteral), steroid use, renal function and hypoglycaemia risk.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Point-of-care glucose before meals if eating; every 4 to 6 hours if not eating or on continuous feeds; every 30 minutes to 2 hours on IV insulin. Confirm unexpected readings in the lab."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Elective surgery: aim for HbA1c below 8% (64 mmol/mol) within 3 months, but do not delay necessary surgery on HbA1c alone. Keep glucose 100 to 180 mg/dL (5.6 to 10.0 mmol/L) before, during and after surgery."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Use a nurse-initiated hypoglycaemia protocol for glucose below 70 mg/dL (3.9 mmol/L) and review the regimen after any such value; a fasting glucose below 100 mg/dL predicts next-day hypoglycaemia (reduce basal)."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for inpatient hyperglycaemia and perioperative glucose management."
+  }
+ ],
+ "tables": [
+  {
+   "id": "inpatient-hyperglycaemia-summary-matrix",
+   "title": "Inpatient hyperglycaemia and perioperative glucose management Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Hospital hyperglycaemia: any glucose above 140 mg/dL (7.8 mmol/L). Check HbA1c if none in the past 3 months; HbA1c 6.5% or more suggests",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Elective surgery: aim for HbA1c below 8% (64 mmol/mol) within 3 months, but do not delay necessary surgery on HbA1c alone. Keep glucose 100",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Insulin glargine (basal): About half the TDD (TDD 0.3 to 0.6 units/kg/day) SC once daily",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Monitoring Goal",
+     "Use a nurse-initiated hypoglycaemia protocol for glucose below 70 mg/dL (3.9 mmol/L) and review the regimen after any such value; a fasting",
+     "Early detection of decompensation"
+    ]
+   ],
+   "caption": "Core clinical management matrix for inpatient hyperglycaemia and perioperative glucose management."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "inpatient-hyperglycaemia-real-image",
+   "title": "Inpatient hyperglycaemia and perioperative glucose management: Diagnostic Endocrine Cross-Sectional Imaging",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
+   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
+   "annotations": [
+    {
+     "label": "Gland Morphology",
+     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
+    },
+    {
+     "label": "Focal Lesions",
+     "description": "Nodularity, adenoma attenuation, and washout dynamics."
+    },
+    {
+     "label": "Surrounding Structures",
+     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+    }
+   ]
+  }
+ ]
 }

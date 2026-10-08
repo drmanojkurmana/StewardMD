@@ -1,70 +1,165 @@
 {
-  "id": "dyslipidemia",
-  "name": "Dyslipidemia",
-  "system": "Endocrine / Metabolic",
-  "class": "non_infective",
-  "chapter": 419,
-  "page": 3237,
-  "aliases": [
-    "hyperlipidemia",
-    "hypercholesterolemia",
-    "hypertriglyceridemia"
+ "id": "dyslipidemia",
+ "name": "Dyslipidemia",
+ "system": "Endocrine / Metabolic",
+ "class": "non_infective",
+ "chapter": 419,
+ "page": 3237,
+ "aliases": [
+  "hyperlipidemia",
+  "hypercholesterolemia",
+  "hypertriglyceridemia"
+ ],
+ "referenceOnly": true,
+ "review": {
+  "status": "ai_drafted"
+ },
+ "harrison": {
+  "pages": "Harrison 22e p.3237",
+  "clinicalPearls": [
+   "Elevated plasma LDL cholesterol is a major modifiable driver of atherosclerotic cardiovascular disease; globally high LDL is estimated to contribute to ~41% of ischemic heart disease deaths and ~9% of stroke deaths (Harrison 22e p.2017).",
+   "Lipoprotein(a) appears to be an independent predictor of cardiovascular risk beyond total or LDL cholesterol, and is elevated in roughly 20% of the global population; levels are reported higher in those of African descent and intermediate in East and South Asians (Harrison 22e p.2017).",
+   "Tendon xanthomas (e.g., Achilles and extensor finger tendons), xanthelasma, and plane/tuberous xanthomas reflect hypercholesterolemia (hyperlipoproteinemia types II and III); eruptive xanthomas are most commonly associated with hypertriglyceridemia (types I, IV, V) (Harrison 22e p.234, p.1860).",
+   "Palmar (palmar crease) xanthomas are specific for type III hyperlipoproteinemia, and severe hypertriglyceridemia can produce eruptive xanthomatosis and lipemia retinalis (Harrison 22e p.1860).",
+   "Loss-of-function PCSK9 variants are associated with lower LDL cholesterol and reduced coronary artery disease, which led to development of PCSK9 monoclonal antibodies; rare gain-of-function PCSK9 variants are a cause of familial hypercholesterolemia (Harrison 22e p.260)."
   ],
-  "referenceOnly": true,
-  "review": {
-    "status": "ai_drafted"
-  },
-  "harrison": {
-    "pages": "Harrison 22e p.3237",
-    "clinicalPearls": [
-      "Elevated plasma LDL cholesterol is a major modifiable driver of atherosclerotic cardiovascular disease; globally high LDL is estimated to contribute to ~41% of ischemic heart disease deaths and ~9% of stroke deaths (Harrison 22e p.2017).",
-      "Lipoprotein(a) appears to be an independent predictor of cardiovascular risk beyond total or LDL cholesterol, and is elevated in roughly 20% of the global population; levels are reported higher in those of African descent and intermediate in East and South Asians (Harrison 22e p.2017).",
-      "Tendon xanthomas (e.g., Achilles and extensor finger tendons), xanthelasma, and plane/tuberous xanthomas reflect hypercholesterolemia (hyperlipoproteinemia types II and III); eruptive xanthomas are most commonly associated with hypertriglyceridemia (types I, IV, V) (Harrison 22e p.234, p.1860).",
-      "Palmar (palmar crease) xanthomas are specific for type III hyperlipoproteinemia, and severe hypertriglyceridemia can produce eruptive xanthomatosis and lipemia retinalis (Harrison 22e p.1860).",
-      "Loss-of-function PCSK9 variants are associated with lower LDL cholesterol and reduced coronary artery disease, which led to development of PCSK9 monoclonal antibodies; rare gain-of-function PCSK9 variants are a cause of familial hypercholesterolemia (Harrison 22e p.260)."
-    ],
-    "pathophysiology": "Atherogenic lipoproteins, principally LDL, deposit cholesterol within the arterial wall and disturb normal endothelial functions (control of vascular tone, maintenance of an antithrombotic surface, and regulation of inflammatory cell adhesion and diapedesis), promoting atherosclerosis; LDL, cigarette smoking, hypertension, and diabetes mellitus vary in their relative impact on these endothelial functions. Lipoprotein(a) is thought to add risk through increased cellular lipid accumulation, endothelial dysfunction, and effects on coagulation. Severe hypertriglyceridemia (chylomicron/VLDL accumulation) can precipitate acute pancreatitis (Harrison 22e p.2017, p.2046).",
-    "additionalDifferentials": [],
-    "infectionMimics": [],
-    "nonInfectiousMimics": [],
-    "additionalInvestigations": [
-      "Fasting lipid profile: total cholesterol, LDL, HDL, and triglycerides (Harrison 22e p.2046).",
-      "Lipoprotein(a) measurement, given its role as an independent cardiovascular risk predictor (Harrison 22e p.2017, p.2046).",
-      "Apolipoprotein B as a marker of atherogenic particle burden (Harrison 22e p.3237).",
-      "Screening for secondary contributors: glucose/HbA1c and urinalysis for diabetes and renal disease, and thyroid function testing when indicated (Harrison 22e p.2046).",
-      "High-sensitivity C-reactive protein may be considered as an independent cardiovascular risk marker informing therapeutic decisions (Harrison 22e p.2046)."
-    ],
-    "redFlags": [
-      "Tendon xanthomas with premature coronary artery disease, suggesting familial hypercholesterolemia (Harrison 22e p.234, p.260).",
-      "Severe hypertriglyceridemia, which can precipitate acute pancreatitis and may manifest with eruptive xanthomatosis and lipemia retinalis (Harrison 22e p.1860)."
-    ],
-    "prognosis": "LDL-driven dyslipidemia is a leading contributor to atherosclerotic cardiovascular morbidity and mortality, including ischemic heart disease and stroke; lowering LDL (e.g., a 50% or greater reduction with high-intensity statin therapy in patients with established atherosclerotic disease) reduces the risk of myocardial infarction, stroke, and death (Harrison 22e p.2017, p.2056).",
-    "pitfalls": [
-      "Attributing dyslipidemia solely to primary lipid disorders while overlooking secondary causes such as diabetes mellitus, hypothyroidism, nephrotic syndrome, and excess alcohol intake (Harrison 22e p.2046).",
-      "Underrecognizing familial hypercholesterolemia in patients with tendon xanthomas and premature coronary disease (Harrison 22e p.234, p.260)."
-    ],
-    "severityClassification": "",
-    "references": [
-      "Harrison 22e p.3237",
-      "Harrison 22e p.2017",
-      "Harrison 22e p.2046",
-      "Harrison 22e p.234",
-      "Harrison 22e p.1860",
-      "Harrison 22e p.260"
-    ],
-    "crossLinks": [
-      "acs",
-      "pancreatitis",
-      "diabetes_mellitus"
-    ],
-    "management": [
-      "Start high-intensity statin therapy as first-line LDL-lowering to reduce atherosclerotic cardiovascular risk",
-      "Add ezetimibe and, where LDL remains elevated or in familial hypercholesterolaemia, a PCSK9 monoclonal antibody",
-      "Advise lifestyle modification: saturated-fat reduction, weight management, regular physical activity and smoking cessation",
-      "For severe hypertriglyceridaemia, restrict dietary fat, reduce alcohol and add a fibrate or omega-3 fatty acids to lower pancreatitis risk",
-      "Identify and treat secondary contributors such as diabetes mellitus, hypothyroidism and renal disease",
-      "Measure lipoprotein(a) for residual-risk assessment and undertake cascade screening of families with familial hypercholesterolaemia",
-      "Monitor lipid response and statin tolerability, including myopathy and transaminase changes, and titrate therapy to the individual's cardiovascular risk"
-    ]
+  "pathophysiology": "Atherogenic lipoproteins, principally LDL, deposit cholesterol within the arterial wall and disturb normal endothelial functions (control of vascular tone, maintenance of an antithrombotic surface, and regulation of inflammatory cell adhesion and diapedesis), promoting atherosclerosis; LDL, cigarette smoking, hypertension, and diabetes mellitus vary in their relative impact on these endothelial functions. Lipoprotein(a) is thought to add risk through increased cellular lipid accumulation, endothelial dysfunction, and effects on coagulation. Severe hypertriglyceridemia (chylomicron/VLDL accumulation) can precipitate acute pancreatitis (Harrison 22e p.2017, p.2046).",
+  "additionalDifferentials": [],
+  "infectionMimics": [],
+  "nonInfectiousMimics": [],
+  "additionalInvestigations": [
+   "Fasting lipid profile: total cholesterol, LDL, HDL, and triglycerides (Harrison 22e p.2046).",
+   "Lipoprotein(a) measurement, given its role as an independent cardiovascular risk predictor (Harrison 22e p.2017, p.2046).",
+   "Apolipoprotein B as a marker of atherogenic particle burden (Harrison 22e p.3237).",
+   "Screening for secondary contributors: glucose/HbA1c and urinalysis for diabetes and renal disease, and thyroid function testing when indicated (Harrison 22e p.2046).",
+   "High-sensitivity C-reactive protein may be considered as an independent cardiovascular risk marker informing therapeutic decisions (Harrison 22e p.2046)."
+  ],
+  "redFlags": [
+   "Tendon xanthomas with premature coronary artery disease, suggesting familial hypercholesterolemia (Harrison 22e p.234, p.260).",
+   "Severe hypertriglyceridemia, which can precipitate acute pancreatitis and may manifest with eruptive xanthomatosis and lipemia retinalis (Harrison 22e p.1860)."
+  ],
+  "prognosis": "LDL-driven dyslipidemia is a leading contributor to atherosclerotic cardiovascular morbidity and mortality, including ischemic heart disease and stroke; lowering LDL (e.g., a 50% or greater reduction with high-intensity statin therapy in patients with established atherosclerotic disease) reduces the risk of myocardial infarction, stroke, and death (Harrison 22e p.2017, p.2056).",
+  "pitfalls": [
+   "Attributing dyslipidemia solely to primary lipid disorders while overlooking secondary causes such as diabetes mellitus, hypothyroidism, nephrotic syndrome, and excess alcohol intake (Harrison 22e p.2046).",
+   "Underrecognizing familial hypercholesterolemia in patients with tendon xanthomas and premature coronary disease (Harrison 22e p.234, p.260)."
+  ],
+  "severityClassification": "",
+  "references": [
+   "Harrison 22e p.3237",
+   "Harrison 22e p.2017",
+   "Harrison 22e p.2046",
+   "Harrison 22e p.234",
+   "Harrison 22e p.1860",
+   "Harrison 22e p.260"
+  ],
+  "crossLinks": [
+   "acs",
+   "pancreatitis",
+   "diabetes_mellitus"
+  ],
+  "management": [
+   "Start high-intensity statin therapy as first-line LDL-lowering to reduce atherosclerotic cardiovascular risk",
+   "Add ezetimibe and, where LDL remains elevated or in familial hypercholesterolaemia, a PCSK9 monoclonal antibody",
+   "Advise lifestyle modification: saturated-fat reduction, weight management, regular physical activity and smoking cessation",
+   "For severe hypertriglyceridaemia, restrict dietary fat, reduce alcohol and add a fibrate or omega-3 fatty acids to lower pancreatitis risk",
+   "Identify and treat secondary contributors such as diabetes mellitus, hypothyroidism and renal disease",
+   "Measure lipoprotein(a) for residual-risk assessment and undertake cascade screening of families with familial hypercholesterolaemia",
+   "Monitor lipid response and statin tolerability, including myopathy and transaminase changes, and titrate therapy to the individual's cardiovascular risk"
+  ]
+ },
+ "algorithms": [
+  {
+   "id": "dyslipidemia-pathway",
+   "title": "Dyslipidemia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Elevated plasma LDL cholesterol is a major modifiable driver of atherosclerotic cardiovascular disease; globally high LDL is estimated to contribute to ~41% of ischemic heart disease deaths and ~9% of stroke deaths (Harrison 22e p.2017).",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Tendon xanthomas with premature coronary artery disease, suggesting familial hypercholesterolemia (Harrison 22e p.234, p.260).",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Fasting lipid profile: total cholesterol, LDL, HDL, and triglycerides (Harrison 22e p.2046)., Lipoprotein(a) measurement, given its role as an independent cardiovascular risk predictor (Harrison 22e p.2017, p.2046).,"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Start high-intensity statin therapy as first-line LDL-lowering to reduce atherosclerotic cardiovascular risk"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing dyslipidemia solely to primary lipid disorders while overlooking secondary causes such as diabetes mellitus, hypothyroidism, nephrotic syndrome, and excess alcohol intake (Harrison 22e p.2046)."
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of dyslipidemia."
   }
+ ],
+ "tables": [
+  {
+   "id": "dyslipidemia-matrix",
+   "title": "Dyslipidemia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Elevated plasma LDL cholesterol is a major modifiable driver of atherosclerotic cardiovascular disease; globally high LDL is",
+     "Cardinal clinical findings"
+    ],
+    [
+     "Key Investigations",
+     "Fasting lipid profile: total cholesterol, LDL, HDL, and triglycerides (Harrison 22e p.2046)., Lipoprotein(a) measurement, given",
+     "Confirmatory diagnostic workup"
+    ],
+    [
+     "Primary Differentials",
+     "Alternative etiologies and clinical mimics",
+     "Rule out key mimics"
+    ],
+    [
+     "Management Strategy",
+     "Start high-intensity statin therapy as first-line LDL-lowering to reduce atherosclerotic cardiovascular risk",
+     "Core treatment modality"
+    ],
+    [
+     "Clinical Pitfall",
+     "Attributing dyslipidemia solely to primary lipid disorders while overlooking secondary causes such as diabetes mellitus,",
+     "Prevent diagnostic or management error"
+    ]
+   ],
+   "caption": "Overview comparison matrix for dyslipidemia."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "dyslipidemia-real-image",
+   "title": "Dyslipidemia: Diagnostic Endocrine Cross-Sectional Imaging",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
+   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
+   "annotations": [
+    {
+     "label": "Gland Morphology",
+     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
+    },
+    {
+     "label": "Focal Lesions",
+     "description": "Nodularity, adenoma attenuation, and washout dynamics."
+    },
+    {
+     "label": "Surrounding Structures",
+     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+    }
+   ]
+  }
+ ]
 }

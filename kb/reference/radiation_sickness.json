@@ -1,78 +1,173 @@
 {
-  "id": "radiation_sickness",
-  "name": "Acute radiation syndrome",
-  "aliases": [
-    "ARS",
-    "acute radiation syndrome",
-    "radiation sickness"
+ "id": "radiation_sickness",
+ "name": "Acute radiation syndrome",
+ "aliases": [
+  "ARS",
+  "acute radiation syndrome",
+  "radiation sickness"
+ ],
+ "class": "non_infective",
+ "system": "Occupational / Environmental",
+ "specialty": "Occupational & Environmental Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Hunter's Diseases of Occupations / WHO",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Acute radiation syndrome follows a high, acute whole-body or large partial-body dose of penetrating ionising radiation, as in criticality accidents or radiological incidents",
+   "It classically evolves through a prodromal phase (nausea, vomiting, malaise), a latent phase, a manifest illness phase and then either recovery or death",
+   "The speed of onset of vomiting is a useful early guide to dose severity, with earlier vomiting indicating higher exposure",
+   "Recognised dose-dependent sub-syndromes affect the bone marrow (haematopoietic), the gastrointestinal tract, and at very high doses the cardiovascular and central nervous systems",
+   "Serial lymphocyte counts over the first day or two are a practical biological indicator of the dose received and prognosis",
+   "Management is supportive with infection prevention, blood product and fluid support, and treatment of the failing organ systems, ideally with specialist and haematology input",
+   "Contamination with radioactive material must be distinguished from irradiation, and decontamination plus staff protection are early priorities",
+   "Localised high-dose exposure can cause cutaneous radiation injury with erythema, blistering and later necrosis, sometimes appearing after a delay"
   ],
-  "class": "non_infective",
-  "system": "Occupational / Environmental",
-  "specialty": "Occupational & Environmental Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Hunter's Diseases of Occupations / WHO",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Acute radiation syndrome follows a high, acute whole-body or large partial-body dose of penetrating ionising radiation, as in criticality accidents or radiological incidents",
-      "It classically evolves through a prodromal phase (nausea, vomiting, malaise), a latent phase, a manifest illness phase and then either recovery or death",
-      "The speed of onset of vomiting is a useful early guide to dose severity, with earlier vomiting indicating higher exposure",
-      "Recognised dose-dependent sub-syndromes affect the bone marrow (haematopoietic), the gastrointestinal tract, and at very high doses the cardiovascular and central nervous systems",
-      "Serial lymphocyte counts over the first day or two are a practical biological indicator of the dose received and prognosis",
-      "Management is supportive with infection prevention, blood product and fluid support, and treatment of the failing organ systems, ideally with specialist and haematology input",
-      "Contamination with radioactive material must be distinguished from irradiation, and decontamination plus staff protection are early priorities",
-      "Localised high-dose exposure can cause cutaneous radiation injury with erythema, blistering and later necrosis, sometimes appearing after a delay"
+  "pathophysiology": "Ionising radiation deposits energy that damages DNA and cellular structures, with the greatest harm to rapidly dividing tissues. Loss of proliferating stem cells in the bone marrow causes pancytopenia, while injury to the intestinal crypt cells breaks down the mucosal barrier, leading to fluid loss, bleeding and sepsis. Very high doses cause vascular and neurological injury. The clinical course reflects the differing turnover rates of these tissues, giving the characteristic phased illness.",
+  "additionalDifferentials": [
+   "Acute gastroenteritis or food poisoning",
+   "Sepsis of other cause",
+   "Chemotherapy or other cytotoxic drug toxicity",
+   "Acute leukaemia or bone marrow failure of other cause",
+   "Chemical or toxic exposure causing vomiting"
+  ],
+  "additionalInvestigations": [
+   "Serial full blood counts with attention to the rate of lymphocyte decline",
+   "Estimation of absorbed dose using time to vomiting and available dosimetry",
+   "Biological dosimetry such as chromosome aberration analysis where available",
+   "Assessment and monitoring for radioactive contamination",
+   "Baseline organ function tests and cultures to guide supportive care"
+  ],
+  "redFlags": [
+   "MEDICAL EMERGENCY: high-dose exposure with very early vomiting, rapidly falling lymphocytes, or neurological or cardiovascular signs indicates severe, potentially fatal illness",
+   "Signs of gastrointestinal syndrome with intractable diarrhoea and bleeding",
+   "Profound neutropenia with infection or sepsis",
+   "Confusion, hypotension or seizures suggesting a very high dose"
+  ],
+  "prognosis": "Outcome is strongly dose-dependent: lower doses causing mainly marrow suppression may recover with intensive support, whereas gastrointestinal and neurovascular syndromes from very high doses carry a poor to near-uniformly fatal outlook despite treatment.",
+  "pitfalls": [
+   "Mistaking early prodromal vomiting for simple gastroenteritis",
+   "Being reassured by the latent phase and underestimating impending marrow failure",
+   "Confusing external irradiation with radioactive contamination and neglecting decontamination",
+   "Failing to protect staff and control the scene during care",
+   "Not obtaining serial lymphocyte counts for dose estimation"
+  ],
+  "references": [
+   "Hunter's Diseases of Occupations",
+   "WHO guidance"
+  ],
+  "crossLinks": [],
+  "management": [
+   "External decontamination with removal of clothing and skin washing, plus management of any internal radioactive contamination",
+   "Haematopoietic growth factors such as G-CSF together with blood-product transfusion support for the marrow sub-syndrome",
+   "Infection prevention with neutropenic precautions and prompt broad-spectrum antimicrobials for the profoundly immunosuppressed patient",
+   "Aggressive fluid, electrolyte and nutritional support for the gastrointestinal sub-syndrome with its mucosal barrier breakdown",
+   "Antiemetics and symptomatic care through the prodromal and manifest illness phases",
+   "Dose estimation from time to vomiting and serial lymphocyte counts to guide prognosis and triage, with consideration of stem-cell transplantation in severe marrow failure",
+   "Coordination with haematology and radiation-emergency specialists"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "radiation_sickness-pathway",
+   "title": "Acute radiation syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Acute radiation syndrome follows a high, acute whole-body or large partial-body dose of penetrating ionising radiation, as in criticality accidents or radiological incidents",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: MEDICAL EMERGENCY: high-dose exposure with very early vomiting, rapidly falling lymphocytes, or neurological or cardiovascular signs indicates severe, potentially fatal illness",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Serial full blood counts with attention to the rate of lymphocyte decline, Estimation of absorbed dose using time to vomiting and available dosimetry, Biological dosimetry such as chromosome aberration analysis where"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: External decontamination with removal of clothing and skin washing, plus management of any internal radioactive contamination"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking early prodromal vomiting for simple gastroenteritis"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of acute radiation syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "radiation_sickness-matrix",
+   "title": "Acute radiation syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Acute radiation syndrome follows a high, acute whole-body or large partial-body dose of penetrating ionising radiation, as in",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Ionising radiation deposits energy that damages DNA and cellular structures, with the greatest harm to rapidly dividing tissues. Loss of proliferating stem cells in the bone marrow causes pancytopenia, while injury to the intestinal crypt cells breaks down the mucosal barrier, leading to fluid loss, bleeding and sepsis. Very high doses cause vascular and neurological injury. The clinical course reflects the differing turnover rates of these tissues, giving the characteristic phased illness.",
-    "additionalDifferentials": [
-      "Acute gastroenteritis or food poisoning",
-      "Sepsis of other cause",
-      "Chemotherapy or other cytotoxic drug toxicity",
-      "Acute leukaemia or bone marrow failure of other cause",
-      "Chemical or toxic exposure causing vomiting"
+    [
+     "Key Investigations",
+     "Serial full blood counts with attention to the rate of lymphocyte decline, Estimation of absorbed dose using time to vomiting and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Serial full blood counts with attention to the rate of lymphocyte decline",
-      "Estimation of absorbed dose using time to vomiting and available dosimetry",
-      "Biological dosimetry such as chromosome aberration analysis where available",
-      "Assessment and monitoring for radioactive contamination",
-      "Baseline organ function tests and cultures to guide supportive care"
+    [
+     "Primary Differentials",
+     "Acute gastroenteritis or food poisoning, Sepsis of other cause, Chemotherapy or other cytotoxic drug toxicity",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "MEDICAL EMERGENCY: high-dose exposure with very early vomiting, rapidly falling lymphocytes, or neurological or cardiovascular signs indicates severe, potentially fatal illness",
-      "Signs of gastrointestinal syndrome with intractable diarrhoea and bleeding",
-      "Profound neutropenia with infection or sepsis",
-      "Confusion, hypotension or seizures suggesting a very high dose"
+    [
+     "Management Strategy",
+     "External decontamination with removal of clothing and skin washing, plus management of any internal radioactive contamination",
+     "Core treatment modality"
     ],
-    "prognosis": "Outcome is strongly dose-dependent: lower doses causing mainly marrow suppression may recover with intensive support, whereas gastrointestinal and neurovascular syndromes from very high doses carry a poor to near-uniformly fatal outlook despite treatment.",
-    "pitfalls": [
-      "Mistaking early prodromal vomiting for simple gastroenteritis",
-      "Being reassured by the latent phase and underestimating impending marrow failure",
-      "Confusing external irradiation with radioactive contamination and neglecting decontamination",
-      "Failing to protect staff and control the scene during care",
-      "Not obtaining serial lymphocyte counts for dose estimation"
-    ],
-    "references": [
-      "Hunter's Diseases of Occupations",
-      "WHO guidance"
-    ],
-    "crossLinks": [],
-    "management": [
-      "External decontamination with removal of clothing and skin washing, plus management of any internal radioactive contamination",
-      "Haematopoietic growth factors such as G-CSF together with blood-product transfusion support for the marrow sub-syndrome",
-      "Infection prevention with neutropenic precautions and prompt broad-spectrum antimicrobials for the profoundly immunosuppressed patient",
-      "Aggressive fluid, electrolyte and nutritional support for the gastrointestinal sub-syndrome with its mucosal barrier breakdown",
-      "Antiemetics and symptomatic care through the prodromal and manifest illness phases",
-      "Dose estimation from time to vomiting and serial lymphocyte counts to guide prognosis and triage, with consideration of stem-cell transplantation in severe marrow failure",
-      "Coordination with haematology and radiation-emergency specialists"
+    [
+     "Clinical Pitfall",
+     "Mistaking early prodromal vomiting for simple gastroenteritis",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for acute radiation syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "radiation-sickness-real-image",
+   "title": "Acute radiation syndrome: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

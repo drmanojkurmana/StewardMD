@@ -1,78 +1,173 @@
 {
-  "id": "patellar_tendinopathy",
-  "name": "Patellar tendinopathy (jumper knee)",
-  "aliases": [
-    "jumper's knee",
-    "patellar tendinosis",
-    "patellar tendon overuse injury",
-    "infrapatellar tendinopathy"
+ "id": "patellar_tendinopathy",
+ "name": "Patellar tendinopathy (jumper knee)",
+ "aliases": [
+  "jumper's knee",
+  "patellar tendinosis",
+  "patellar tendon overuse injury",
+  "infrapatellar tendinopathy"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal / Sports & Soft tissue",
+ "specialty": "Sports Medicine / Rheumatology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Brukner and Khan's Clinical Sports Medicine",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Anterior knee pain localised to the inferior pole of the patella, typical of jumping and change-of-direction sports",
+   "Load-related pain that characteristically warms up with activity and worsens afterwards",
+   "A degenerative tendinopathy from repetitive high-tensile, energy-storage loading, not a primary inflammation",
+   "The single-leg decline squat reproduces and helps monitor tendon pain",
+   "Tenderness is maximal at the proximal patellar tendon at the inferior patellar pole",
+   "Ultrasound and MRI can confirm tendinopathy, but changes may be present in asymptomatic tendons, so correlate with the clinical picture",
+   "Management is progressive loading (isometric then heavy slow or eccentric resistance) guided by physiotherapy with load management, avoiding complete rest",
+   "Corticosteroid injection into the tendon is generally avoided because of rupture risk; shockwave and other adjuncts may help resistant cases"
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal / Sports & Soft tissue",
-  "specialty": "Sports Medicine / Rheumatology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Brukner and Khan's Clinical Sports Medicine",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Anterior knee pain localised to the inferior pole of the patella, typical of jumping and change-of-direction sports",
-      "Load-related pain that characteristically warms up with activity and worsens afterwards",
-      "A degenerative tendinopathy from repetitive high-tensile, energy-storage loading, not a primary inflammation",
-      "The single-leg decline squat reproduces and helps monitor tendon pain",
-      "Tenderness is maximal at the proximal patellar tendon at the inferior patellar pole",
-      "Ultrasound and MRI can confirm tendinopathy, but changes may be present in asymptomatic tendons, so correlate with the clinical picture",
-      "Management is progressive loading (isometric then heavy slow or eccentric resistance) guided by physiotherapy with load management, avoiding complete rest",
-      "Corticosteroid injection into the tendon is generally avoided because of rupture risk; shockwave and other adjuncts may help resistant cases"
+  "pathophysiology": "Patellar tendinopathy results from repetitive energy-storage loading of the extensor mechanism, as in jumping and deceleration, most often affecting the deep posterior fibres at the inferior pole of the patella. Cumulative overload exceeds the tendon's adaptive repair capacity, producing degenerative change with disorganised collagen, increased ground substance, neovascularisation and neural ingrowth, and little classic inflammation, hence tendinosis. A continuum model describes progression from reactive tendinopathy through disrepair to degenerative tendinopathy depending on the balance of load and recovery.",
+  "additionalDifferentials": [
+   "Patellofemoral pain syndrome",
+   "Osgood-Schlatter or Sinding-Larsen-Johansson disease in adolescents",
+   "Fat pad (Hoffa) impingement",
+   "Quadriceps tendinopathy",
+   "Partial patellar tendon tear",
+   "Chondral or meniscal pathology"
+  ],
+  "additionalInvestigations": [
+   "Single-leg decline squat and other load tests to reproduce and grade pain",
+   "Ultrasound to assess tendon structure and neovascularity",
+   "MRI to characterise tendinopathy and exclude a partial tear or other pathology",
+   "Comparison with the asymptomatic side, recognising that imaging change can be incidental",
+   "Biomechanical and kinetic-chain assessment of the ankle, hip and landing mechanics"
+  ],
+  "redFlags": [
+   "Sudden pain with loss of active knee extension suggesting tendon rupture",
+   "Night pain, systemic upset or a mass suggesting other pathology",
+   "Locking or giving way suggesting intra-articular derangement",
+   "Failure to progress despite appropriate loading"
+  ],
+  "prognosis": "Often responsive to a structured loading programme, but rehabilitation may take many months and symptoms can be persistent or recurrent, particularly if training load is not managed.",
+  "pitfalls": [
+   "Prescribing complete rest instead of progressive tendon loading",
+   "Intratendinous corticosteroid injection with its attendant rupture risk",
+   "Over-interpreting imaging change that can occur in pain-free tendons",
+   "Ignoring the wider kinetic chain and training-load errors"
+  ],
+  "references": [
+   "Brukner and Khan's Clinical Sports Medicine",
+   "British Journal of Sports Medicine"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Base treatment on progressive tendon loading, beginning with isometric quadriceps holds for pain relief and advancing to heavy slow-resistance or eccentric decline-squat exercise",
+   "Modify training load with relative rest from jumping and deceleration rather than complete inactivity",
+   "Correct contributing kinetic-chain factors, including ankle and hip strength and landing mechanics",
+   "Consider extracorporeal shockwave therapy for recalcitrant cases and avoid intratendinous corticosteroid injection, which risks tendon rupture",
+   "Set realistic expectations of prolonged rehabilitation and monitor pain with tools such as the single-leg decline squat",
+   "Reserve surgery for symptoms refractory to a sustained structured loading programme"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "patellar_tendinopathy-pathway",
+   "title": "Patellar tendinopathy (jumper knee): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Anterior knee pain localised to the inferior pole of the patella, typical of jumping and change-of-direction sports",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Sudden pain with loss of active knee extension suggesting tendon rupture",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Single-leg decline squat and other load tests to reproduce and grade pain, Ultrasound to assess tendon structure and neovascularity, MRI to characterise tendinopathy and exclude a partial tear or other pathology"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Base treatment on progressive tendon loading, beginning with isometric quadriceps holds for pain relief and advancing to heavy slow-resistance or eccentric decline-squat exercise"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Prescribing complete rest instead of progressive tendon loading"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of patellar tendinopathy (jumper knee)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "patellar_tendinopathy-matrix",
+   "title": "Patellar tendinopathy (jumper knee): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Anterior knee pain localised to the inferior pole of the patella, typical of jumping and change-of-direction sports",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Patellar tendinopathy results from repetitive energy-storage loading of the extensor mechanism, as in jumping and deceleration, most often affecting the deep posterior fibres at the inferior pole of the patella. Cumulative overload exceeds the tendon's adaptive repair capacity, producing degenerative change with disorganised collagen, increased ground substance, neovascularisation and neural ingrowth, and little classic inflammation, hence tendinosis. A continuum model describes progression from reactive tendinopathy through disrepair to degenerative tendinopathy depending on the balance of load and recovery.",
-    "additionalDifferentials": [
-      "Patellofemoral pain syndrome",
-      "Osgood-Schlatter or Sinding-Larsen-Johansson disease in adolescents",
-      "Fat pad (Hoffa) impingement",
-      "Quadriceps tendinopathy",
-      "Partial patellar tendon tear",
-      "Chondral or meniscal pathology"
+    [
+     "Key Investigations",
+     "Single-leg decline squat and other load tests to reproduce and grade pain, Ultrasound to assess tendon structure and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Single-leg decline squat and other load tests to reproduce and grade pain",
-      "Ultrasound to assess tendon structure and neovascularity",
-      "MRI to characterise tendinopathy and exclude a partial tear or other pathology",
-      "Comparison with the asymptomatic side, recognising that imaging change can be incidental",
-      "Biomechanical and kinetic-chain assessment of the ankle, hip and landing mechanics"
+    [
+     "Primary Differentials",
+     "Patellofemoral pain syndrome, Osgood-Schlatter or Sinding-Larsen-Johansson disease in adolescents, Fat pad (Hoffa) impingement",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Sudden pain with loss of active knee extension suggesting tendon rupture",
-      "Night pain, systemic upset or a mass suggesting other pathology",
-      "Locking or giving way suggesting intra-articular derangement",
-      "Failure to progress despite appropriate loading"
+    [
+     "Management Strategy",
+     "Base treatment on progressive tendon loading, beginning with isometric quadriceps holds for pain relief and advancing to heavy",
+     "Core treatment modality"
     ],
-    "prognosis": "Often responsive to a structured loading programme, but rehabilitation may take many months and symptoms can be persistent or recurrent, particularly if training load is not managed.",
-    "pitfalls": [
-      "Prescribing complete rest instead of progressive tendon loading",
-      "Intratendinous corticosteroid injection with its attendant rupture risk",
-      "Over-interpreting imaging change that can occur in pain-free tendons",
-      "Ignoring the wider kinetic chain and training-load errors"
-    ],
-    "references": [
-      "Brukner and Khan's Clinical Sports Medicine",
-      "British Journal of Sports Medicine"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Base treatment on progressive tendon loading, beginning with isometric quadriceps holds for pain relief and advancing to heavy slow-resistance or eccentric decline-squat exercise",
-      "Modify training load with relative rest from jumping and deceleration rather than complete inactivity",
-      "Correct contributing kinetic-chain factors, including ankle and hip strength and landing mechanics",
-      "Consider extracorporeal shockwave therapy for recalcitrant cases and avoid intratendinous corticosteroid injection, which risks tendon rupture",
-      "Set realistic expectations of prolonged rehabilitation and monitor pain with tools such as the single-leg decline squat",
-      "Reserve surgery for symptoms refractory to a sustained structured loading programme"
+    [
+     "Clinical Pitfall",
+     "Prescribing complete rest instead of progressive tendon loading",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for patellar tendinopathy (jumper knee)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "patellar-tendinopathy-real-image",
+   "title": "Patellar tendinopathy (jumper knee): Diagnostic Musculoskeletal Radiograph",
+   "type": "xray",
+   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
+   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
+   "annotations": [
+    {
+     "label": "Cortical Margins",
+     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
+    },
+    {
+     "label": "Trabecular Architecture",
+     "description": "Medullary bone density, lucencies, and subchondral mineralization."
+    },
+    {
+     "label": "Joint Articulation",
+     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+    }
+   ]
+  }
+ ]
 }

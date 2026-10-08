@@ -1,81 +1,176 @@
 {
-  "id": "facet_joint_syndrome",
-  "name": "Facet joint syndrome",
-  "aliases": [
-    "facet arthropathy",
-    "zygapophysial joint pain",
-    "facet joint osteoarthritis",
-    "facet syndrome"
+ "id": "facet_joint_syndrome",
+ "name": "Facet joint syndrome",
+ "aliases": [
+  "facet arthropathy",
+  "zygapophysial joint pain",
+  "facet joint osteoarthritis",
+  "facet syndrome"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal / Spine",
+ "specialty": "Spinal Surgery / Neurosurgery",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Rothman-Simeone and Herkowitz's The Spine",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Osteoarthritis of the facet (zygapophysial) joints causing axial, mechanical spinal pain",
+   "Pain is typically worse with extension, rotation, and standing, and often eased by flexion or sitting",
+   "Lumbar facet pain may refer to the buttock and posterior thigh but characteristically not below the knee",
+   "Localised paraspinal tenderness over the facets and pain on extension and rotation are suggestive but not specific",
+   "No clinical test reliably diagnoses facet-mediated pain, and imaging findings of facet hypertrophy and effusion correlate poorly with symptoms",
+   "Diagnostic medial branch blocks are the most specific way to implicate the facet joint",
+   "Management is conservative (physiotherapy, analgesia), and intra-articular or medial branch injections may help selected patients",
+   "Radiofrequency denervation of the medial branches can give medium-term relief when diagnostic blocks are positive"
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal / Spine",
-  "specialty": "Spinal Surgery / Neurosurgery",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Rothman-Simeone and Herkowitz's The Spine",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Osteoarthritis of the facet (zygapophysial) joints causing axial, mechanical spinal pain",
-      "Pain is typically worse with extension, rotation, and standing, and often eased by flexion or sitting",
-      "Lumbar facet pain may refer to the buttock and posterior thigh but characteristically not below the knee",
-      "Localised paraspinal tenderness over the facets and pain on extension and rotation are suggestive but not specific",
-      "No clinical test reliably diagnoses facet-mediated pain, and imaging findings of facet hypertrophy and effusion correlate poorly with symptoms",
-      "Diagnostic medial branch blocks are the most specific way to implicate the facet joint",
-      "Management is conservative (physiotherapy, analgesia), and intra-articular or medial branch injections may help selected patients",
-      "Radiofrequency denervation of the medial branches can give medium-term relief when diagnostic blocks are positive"
+  "pathophysiology": "Facet joint syndrome refers to pain arising from the synovial zygapophysial joints of the spine. These joints, richly innervated by the medial branches of the dorsal rami, undergo osteoarthritic change (cartilage loss, capsular hypertrophy, osteophytosis, and effusion) as part of the degenerative cascade, frequently alongside disc degeneration. Mechanical loading in extension and rotation together with inflammation of the joint capsule stimulates nociceptors and produces axial pain. Facet hypertrophy can also contribute to lateral recess and foraminal narrowing.",
+  "additionalDifferentials": [
+   "Degenerative disc (discogenic) pain",
+   "Sacroiliac joint dysfunction",
+   "Lumbar spinal stenosis",
+   "Muscular or myofascial pain",
+   "Spondylolysis or spondylolisthesis",
+   "Inflammatory spondyloarthropathy"
+  ],
+  "additionalInvestigations": [
+   "MRI or CT showing facet arthropathy, hypertrophy, and effusions",
+   "Plain radiographs for alignment and degenerative change",
+   "Diagnostic medial branch blocks or intra-articular facet injection to confirm the pain source",
+   "SPECT/CT to identify metabolically active painful facets in selected cases",
+   "Inflammatory screen if spondyloarthropathy is a consideration"
+  ],
+  "redFlags": [
+   "New neurological deficit or radicular symptoms",
+   "Constitutional symptoms suggesting infection or malignancy",
+   "Features of inflammatory back pain such as morning stiffness, night pain, and young age"
+  ],
+  "prognosis": "Facet-mediated pain typically follows a fluctuating chronic course; many patients are managed conservatively, and those with confirmed facet pain often gain useful, though sometimes temporary, relief from injections or radiofrequency denervation.",
+  "pitfalls": [
+   "Diagnosing facet syndrome on imaging alone given the poor correlation between imaging and symptoms",
+   "Neglecting a structured conservative programme before interventional procedures",
+   "Overlooking concurrent discogenic or sacroiliac pain sources"
+  ],
+  "references": [
+   "Rothman-Simeone and Herkowitz's The Spine",
+   "Bogduk: Clinical Anatomy of the Lumbar Spine and Sacrum"
+  ],
+  "crossLinks": [
+   "degenerative_disc_disease",
+   "sacroiliac_joint_dysfunction",
+   "lumbar_spinal_stenosis"
+  ],
+  "management": [
+   "First-line conservative care with physiotherapy targeting core and paraspinal strengthening, posture and activity modification that avoids provocative extension and rotation",
+   "Simple analgesia with paracetamol and short courses of NSAIDs for symptomatic flares",
+   "Diagnostic medial branch blocks to confirm the facet joint as the pain source before intervention",
+   "Radiofrequency medial branch neurotomy for confirmed, recurrent facet-mediated pain",
+   "Intra-articular corticosteroid and local anaesthetic injection for symptomatic relief in selected cases",
+   "Weight management and correction of modifiable postural and occupational loading factors",
+   "Referral to a pain or spinal specialist for refractory pain, with escalation if red-flag or radicular neurological features emerge"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "facet_joint_syndrome-pathway",
+   "title": "Facet joint syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Osteoarthritis of the facet (zygapophysial) joints causing axial, mechanical spinal pain",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: New neurological deficit or radicular symptoms",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: MRI or CT showing facet arthropathy, hypertrophy, and effusions, Plain radiographs for alignment and degenerative change, Diagnostic medial branch blocks or intra-articular facet injection to confirm the pain source"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: First-line conservative care with physiotherapy targeting core and paraspinal strengthening, posture and activity modification that avoids provocative extension and rotation"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Diagnosing facet syndrome on imaging alone given the poor correlation between imaging and symptoms"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of facet joint syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "facet_joint_syndrome-matrix",
+   "title": "Facet joint syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Osteoarthritis of the facet (zygapophysial) joints causing axial, mechanical spinal pain",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Facet joint syndrome refers to pain arising from the synovial zygapophysial joints of the spine. These joints, richly innervated by the medial branches of the dorsal rami, undergo osteoarthritic change (cartilage loss, capsular hypertrophy, osteophytosis, and effusion) as part of the degenerative cascade, frequently alongside disc degeneration. Mechanical loading in extension and rotation together with inflammation of the joint capsule stimulates nociceptors and produces axial pain. Facet hypertrophy can also contribute to lateral recess and foraminal narrowing.",
-    "additionalDifferentials": [
-      "Degenerative disc (discogenic) pain",
-      "Sacroiliac joint dysfunction",
-      "Lumbar spinal stenosis",
-      "Muscular or myofascial pain",
-      "Spondylolysis or spondylolisthesis",
-      "Inflammatory spondyloarthropathy"
+    [
+     "Key Investigations",
+     "MRI or CT showing facet arthropathy, hypertrophy, and effusions, Plain radiographs for alignment and degenerative change,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "MRI or CT showing facet arthropathy, hypertrophy, and effusions",
-      "Plain radiographs for alignment and degenerative change",
-      "Diagnostic medial branch blocks or intra-articular facet injection to confirm the pain source",
-      "SPECT/CT to identify metabolically active painful facets in selected cases",
-      "Inflammatory screen if spondyloarthropathy is a consideration"
+    [
+     "Primary Differentials",
+     "Degenerative disc (discogenic) pain, Sacroiliac joint dysfunction, Lumbar spinal stenosis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "New neurological deficit or radicular symptoms",
-      "Constitutional symptoms suggesting infection or malignancy",
-      "Features of inflammatory back pain such as morning stiffness, night pain, and young age"
+    [
+     "Management Strategy",
+     "First-line conservative care with physiotherapy targeting core and paraspinal strengthening, posture and activity modification",
+     "Core treatment modality"
     ],
-    "prognosis": "Facet-mediated pain typically follows a fluctuating chronic course; many patients are managed conservatively, and those with confirmed facet pain often gain useful, though sometimes temporary, relief from injections or radiofrequency denervation.",
-    "pitfalls": [
-      "Diagnosing facet syndrome on imaging alone given the poor correlation between imaging and symptoms",
-      "Neglecting a structured conservative programme before interventional procedures",
-      "Overlooking concurrent discogenic or sacroiliac pain sources"
-    ],
-    "references": [
-      "Rothman-Simeone and Herkowitz's The Spine",
-      "Bogduk: Clinical Anatomy of the Lumbar Spine and Sacrum"
-    ],
-    "crossLinks": [
-      "degenerative_disc_disease",
-      "sacroiliac_joint_dysfunction",
-      "lumbar_spinal_stenosis"
-    ],
-    "management": [
-      "First-line conservative care with physiotherapy targeting core and paraspinal strengthening, posture and activity modification that avoids provocative extension and rotation",
-      "Simple analgesia with paracetamol and short courses of NSAIDs for symptomatic flares",
-      "Diagnostic medial branch blocks to confirm the facet joint as the pain source before intervention",
-      "Radiofrequency medial branch neurotomy for confirmed, recurrent facet-mediated pain",
-      "Intra-articular corticosteroid and local anaesthetic injection for symptomatic relief in selected cases",
-      "Weight management and correction of modifiable postural and occupational loading factors",
-      "Referral to a pain or spinal specialist for refractory pain, with escalation if red-flag or radicular neurological features emerge"
+    [
+     "Clinical Pitfall",
+     "Diagnosing facet syndrome on imaging alone given the poor correlation between imaging and symptoms",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for facet joint syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "facet-joint-syndrome-real-image",
+   "title": "Facet joint syndrome: Diagnostic Musculoskeletal Radiograph",
+   "type": "xray",
+   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
+   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
+   "annotations": [
+    {
+     "label": "Cortical Margins",
+     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
+    },
+    {
+     "label": "Trabecular Architecture",
+     "description": "Medullary bone density, lucencies, and subchondral mineralization."
+    },
+    {
+     "label": "Joint Articulation",
+     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+    }
+   ]
+  }
+ ]
 }

@@ -1,79 +1,174 @@
 {
-  "id": "epidermolysis_bullosa_acquisita",
-  "name": "Epidermolysis bullosa acquisita",
-  "aliases": [
-    "EBA",
-    "acquired epidermolysis bullosa",
-    "anti-type-VII collagen bullous dermatosis",
-    "anti-p290 pemphigoid"
+ "id": "epidermolysis_bullosa_acquisita",
+ "name": "Epidermolysis bullosa acquisita",
+ "aliases": [
+  "EBA",
+  "acquired epidermolysis bullosa",
+  "anti-type-VII collagen bullous dermatosis",
+  "anti-p290 pemphigoid"
+ ],
+ "class": "non_infective",
+ "system": "Dermatology",
+ "specialty": "Dermatology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "An acquired autoimmune subepidermal blistering disease caused by autoantibodies to type-VII collagen, the major component of anchoring fibrils",
+   "The classic mechanobullous form produces skin-fragile, non-inflammatory tense blisters at trauma-prone sites (hands, feet, elbows, knees) that heal with scarring and milia",
+   "An inflammatory form can closely mimic bullous pemphigoid, mucous membrane pemphigoid, or linear IgA disease",
+   "Because anchoring fibrils are lost, healing may leave scarring, milia, and nail dystrophy, echoing inherited dystrophic epidermolysis bullosa",
+   "Salt-split skin immunofluorescence localises IgG to the dermal (floor) side of the split, in contrast to bullous pemphigoid which binds the epidermal roof",
+   "Associations with inflammatory bowel disease, particularly Crohn disease, are recognised",
+   "It is characteristically treatment-resistant compared with bullous pemphigoid"
   ],
-  "class": "non_infective",
-  "system": "Dermatology",
-  "specialty": "Dermatology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "An acquired autoimmune subepidermal blistering disease caused by autoantibodies to type-VII collagen, the major component of anchoring fibrils",
-      "The classic mechanobullous form produces skin-fragile, non-inflammatory tense blisters at trauma-prone sites (hands, feet, elbows, knees) that heal with scarring and milia",
-      "An inflammatory form can closely mimic bullous pemphigoid, mucous membrane pemphigoid, or linear IgA disease",
-      "Because anchoring fibrils are lost, healing may leave scarring, milia, and nail dystrophy, echoing inherited dystrophic epidermolysis bullosa",
-      "Salt-split skin immunofluorescence localises IgG to the dermal (floor) side of the split, in contrast to bullous pemphigoid which binds the epidermal roof",
-      "Associations with inflammatory bowel disease, particularly Crohn disease, are recognised",
-      "It is characteristically treatment-resistant compared with bullous pemphigoid"
+  "pathophysiology": "Epidermolysis bullosa acquisita is mediated by IgG (and sometimes IgA) autoantibodies against type-VII collagen, the structural protein of the anchoring fibrils that tether the epidermal basement membrane to the papillary dermis. Antibody binding beneath the lamina densa impairs dermo-epidermal adhesion; in the mechanobullous form this produces fragile skin that blisters with minor trauma, whereas complement activation and inflammatory cell recruitment drive the inflammatory variants. Because the cleavage plane lies below the lamina densa and anchoring fibrils are damaged, healing is often accompanied by scarring and milia, mirroring hereditary dystrophic epidermolysis bullosa.",
+  "additionalDifferentials": [
+   "Bullous pemphigoid",
+   "Mucous membrane (cicatricial) pemphigoid",
+   "Linear IgA bullous dermatosis",
+   "Porphyria cutanea tarda",
+   "Bullous systemic lupus erythematosus",
+   "Inherited dystrophic epidermolysis bullosa"
+  ],
+  "additionalInvestigations": [
+   "Perilesional biopsy for direct immunofluorescence showing linear IgG/C3 at the basement membrane zone",
+   "Salt-split skin immunofluorescence to localise binding to the dermal floor",
+   "Serum indirect immunofluorescence and ELISA for anti-type-VII collagen antibodies",
+   "Lesional histology confirming a subepidermal blister",
+   "Screening for inflammatory bowel disease when gastrointestinal symptoms are present",
+   "Porphyrin studies to exclude porphyria cutanea tarda in acral bullous disease"
+  ],
+  "redFlags": [
+   "Mucosal or ocular scarring threatening function and vision",
+   "Oesophageal or laryngeal involvement causing dysphagia or airway compromise",
+   "Widespread erosions with secondary infection",
+   "Progressive disease refractory to standard immunosuppression"
+  ],
+  "prognosis": "Epidermolysis bullosa acquisita tends to run a chronic, relapsing course and is often refractory to treatment; scarring, milia, and functional impairment from mucosal disease can accumulate over time.",
+  "pitfalls": [
+   "Diagnosing bullous pemphigoid without a salt-split skin study to identify dermal-side binding",
+   "Underestimating scarring and mucosal complications, including ocular disease",
+   "Confusing acral blistering with porphyria cutanea tarda",
+   "Expecting a prompt response to therapy when the disease is characteristically resistant"
+  ],
+  "references": [
+   "Rook's Textbook of Dermatology",
+   "Fitzpatrick's Dermatology in General Medicine"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Suppress the autoantibody response against type-VII collagen with systemic corticosteroids combined with steroid-sparing agents such as colchicine, dapsone, ciclosporin, azathioprine or mycophenolate mofetil",
+   "Escalate refractory or severe disease to rituximab or intravenous immunoglobulin",
+   "Protect skin in the mechanobullous form with trauma avoidance and non-adherent dressings, and provide wound care for erosions, milia and scarring",
+   "Manage mucosal involvement, including ocular, oral and oesophageal disease, with appropriate specialist input and stricture dilatation",
+   "Screen for and treat associated inflammatory bowel disease, particularly Crohn disease",
+   "Monitor for treatment-related toxicity from prolonged immunosuppression",
+   "Refer to dermatology for coordinated long-term care of this chronic relapsing disease"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "epidermolysis_bullosa_acquisita-pathway",
+   "title": "Epidermolysis bullosa acquisita: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "An acquired autoimmune subepidermal blistering disease caused by autoantibodies to type-VII collagen, the major component of anchoring fibrils",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Mucosal or ocular scarring threatening function and vision",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Perilesional biopsy for direct immunofluorescence showing linear IgG/C3 at the basement membrane zone, Salt-split skin immunofluorescence to localise binding to the dermal floor, Serum indirect immunofluorescence and ELISA"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Suppress the autoantibody response against type-VII collagen with systemic corticosteroids combined with steroid-sparing agents such as colchicine, dapsone, ciclosporin, azathioprine or mycophenolate mofetil"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Diagnosing bullous pemphigoid without a salt-split skin study to identify dermal-side binding"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of epidermolysis bullosa acquisita."
+  }
+ ],
+ "tables": [
+  {
+   "id": "epidermolysis_bullosa_acquisita-matrix",
+   "title": "Epidermolysis bullosa acquisita: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "An acquired autoimmune subepidermal blistering disease caused by autoantibodies to type-VII collagen, the major component of",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Epidermolysis bullosa acquisita is mediated by IgG (and sometimes IgA) autoantibodies against type-VII collagen, the structural protein of the anchoring fibrils that tether the epidermal basement membrane to the papillary dermis. Antibody binding beneath the lamina densa impairs dermo-epidermal adhesion; in the mechanobullous form this produces fragile skin that blisters with minor trauma, whereas complement activation and inflammatory cell recruitment drive the inflammatory variants. Because the cleavage plane lies below the lamina densa and anchoring fibrils are damaged, healing is often accompanied by scarring and milia, mirroring hereditary dystrophic epidermolysis bullosa.",
-    "additionalDifferentials": [
-      "Bullous pemphigoid",
-      "Mucous membrane (cicatricial) pemphigoid",
-      "Linear IgA bullous dermatosis",
-      "Porphyria cutanea tarda",
-      "Bullous systemic lupus erythematosus",
-      "Inherited dystrophic epidermolysis bullosa"
+    [
+     "Key Investigations",
+     "Perilesional biopsy for direct immunofluorescence showing linear IgG/C3 at the basement membrane zone, Salt-split skin",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Perilesional biopsy for direct immunofluorescence showing linear IgG/C3 at the basement membrane zone",
-      "Salt-split skin immunofluorescence to localise binding to the dermal floor",
-      "Serum indirect immunofluorescence and ELISA for anti-type-VII collagen antibodies",
-      "Lesional histology confirming a subepidermal blister",
-      "Screening for inflammatory bowel disease when gastrointestinal symptoms are present",
-      "Porphyrin studies to exclude porphyria cutanea tarda in acral bullous disease"
+    [
+     "Primary Differentials",
+     "Bullous pemphigoid, Mucous membrane (cicatricial) pemphigoid, Linear IgA bullous dermatosis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Mucosal or ocular scarring threatening function and vision",
-      "Oesophageal or laryngeal involvement causing dysphagia or airway compromise",
-      "Widespread erosions with secondary infection",
-      "Progressive disease refractory to standard immunosuppression"
+    [
+     "Management Strategy",
+     "Suppress the autoantibody response against type-VII collagen with systemic corticosteroids combined with steroid-sparing agents",
+     "Core treatment modality"
     ],
-    "prognosis": "Epidermolysis bullosa acquisita tends to run a chronic, relapsing course and is often refractory to treatment; scarring, milia, and functional impairment from mucosal disease can accumulate over time.",
-    "pitfalls": [
-      "Diagnosing bullous pemphigoid without a salt-split skin study to identify dermal-side binding",
-      "Underestimating scarring and mucosal complications, including ocular disease",
-      "Confusing acral blistering with porphyria cutanea tarda",
-      "Expecting a prompt response to therapy when the disease is characteristically resistant"
-    ],
-    "references": [
-      "Rook's Textbook of Dermatology",
-      "Fitzpatrick's Dermatology in General Medicine"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Suppress the autoantibody response against type-VII collagen with systemic corticosteroids combined with steroid-sparing agents such as colchicine, dapsone, ciclosporin, azathioprine or mycophenolate mofetil",
-      "Escalate refractory or severe disease to rituximab or intravenous immunoglobulin",
-      "Protect skin in the mechanobullous form with trauma avoidance and non-adherent dressings, and provide wound care for erosions, milia and scarring",
-      "Manage mucosal involvement, including ocular, oral and oesophageal disease, with appropriate specialist input and stricture dilatation",
-      "Screen for and treat associated inflammatory bowel disease, particularly Crohn disease",
-      "Monitor for treatment-related toxicity from prolonged immunosuppression",
-      "Refer to dermatology for coordinated long-term care of this chronic relapsing disease"
+    [
+     "Clinical Pitfall",
+     "Diagnosing bullous pemphigoid without a salt-split skin study to identify dermal-side binding",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for epidermolysis bullosa acquisita."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "epidermolysis-bullosa-acquisita-real-image",
+   "title": "Epidermolysis bullosa acquisita: Clinical Cutaneous Dermatology Photograph",
+   "type": "diagram",
+   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
+   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
+   "annotations": [
+    {
+     "label": "Primary Lesions",
+     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
+    },
+    {
+     "label": "Demarcation & Margins",
+     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
+    },
+    {
+     "label": "Anatomical Distribution",
+     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+    }
+   ]
+  }
+ ]
 }

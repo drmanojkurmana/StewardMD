@@ -5,7 +5,21 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Outpatient clinic, ward",
- "aliases": ["IPF", "UIP", "usual interstitial pneumonia", "PPF", "progressive pulmonary fibrosis", "ILD", "interstitial lung disease", "fibrotic ILD", "antifibrotic", "nintedanib", "pirfenidone", "AE-IPF", "cryptogenic fibrosing alveolitis"],
+ "aliases": [
+  "IPF",
+  "UIP",
+  "usual interstitial pneumonia",
+  "PPF",
+  "progressive pulmonary fibrosis",
+  "ILD",
+  "interstitial lung disease",
+  "fibrotic ILD",
+  "antifibrotic",
+  "nintedanib",
+  "pirfenidone",
+  "AE-IPF",
+  "cryptogenic fibrosing alveolitis"
+ ],
  "summary": "Diagnose IPF by multidisciplinary discussion from a UIP pattern on HRCT after excluding exposures, drugs and connective tissue disease; offer nintedanib 150 mg twice daily or pirfenidone titrated to 801 mg three times daily with liver test monitoring, plus oxygen, rehabilitation and early transplant or palliative referral.",
  "sections": [
   {
@@ -96,15 +110,144 @@
   }
  ],
  "drugs": [
-  { "name": "Nintedanib", "dose": "150 mg orally twice daily with food, about 12 hours apart", "notes": "Reduce to 100 mg twice daily for intolerance or raised liver enzymes. Avoid in moderate or severe hepatic impairment; bleeding risk; teratogenic." },
-  { "name": "Pirfenidone", "dose": "267 mg orally three times daily for 7 days, then 534 mg three times daily for 7 days, then 801 mg three times daily (2403 mg/day), with food", "notes": "Photosensitivity, rash, nausea. Avoid with fluvoxamine, in severe hepatic impairment and with CrCl below 30 mL/min." },
-  { "name": "Nerandomilast", "dose": "18 mg orally twice daily", "notes": "PDE4B inhibitor approved in the US in 2025; not in the 2022 guideline. Diarrhoea is common. Specialist use." },
-  { "name": "Loperamide", "dose": "4 mg orally at the first loose stool, then 2 mg after each loose stool (max 16 mg/day)", "notes": "Nintedanib-associated diarrhoea; start at first sign, with fluids." }
+  {
+   "name": "Nintedanib",
+   "dose": "150 mg orally twice daily with food, about 12 hours apart",
+   "notes": "Reduce to 100 mg twice daily for intolerance or raised liver enzymes. Avoid in moderate or severe hepatic impairment; bleeding risk; teratogenic."
+  },
+  {
+   "name": "Pirfenidone",
+   "dose": "267 mg orally three times daily for 7 days, then 534 mg three times daily for 7 days, then 801 mg three times daily (2403 mg/day), with food",
+   "notes": "Photosensitivity, rash, nausea. Avoid with fluvoxamine, in severe hepatic impairment and with CrCl below 30 mL/min."
+  },
+  {
+   "name": "Nerandomilast",
+   "dose": "18 mg orally twice daily",
+   "notes": "PDE4B inhibitor approved in the US in 2025; not in the 2022 guideline. Diarrhoea is common. Specialist use."
+  },
+  {
+   "name": "Loperamide",
+   "dose": "4 mg orally at the first loose stool, then 2 mg after each loose stool (max 16 mg/day)",
+   "notes": "Nintedanib-associated diarrhoea; start at first sign, with fluids."
+  }
  ],
  "sources": [
-  { "org": "ATS / ERS / JRS / ALAT", "title": "Idiopathic pulmonary fibrosis (an update) and progressive pulmonary fibrosis in adults: an official ATS/ERS/JRS/ALAT clinical practice guideline", "year": 2022, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9851481/" },
-  { "org": "ATS / ERS / JRS / ALAT", "title": "An official ATS/ERS/JRS/ALAT clinical practice guideline: treatment of idiopathic pulmonary fibrosis. An update of the 2011 clinical practice guideline", "year": 2015, "url": "https://pubmed.ncbi.nlm.nih.gov/26177183/" },
-  { "org": "ATS / ERS / JRS / ALAT", "title": "An official ATS/ERS/JRS/ALAT statement: idiopathic pulmonary fibrosis: evidence-based guidelines for diagnosis and management", "year": 2011, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5450933/" }
+  {
+   "org": "ATS / ERS / JRS / ALAT",
+   "title": "Idiopathic pulmonary fibrosis (an update) and progressive pulmonary fibrosis in adults: an official ATS/ERS/JRS/ALAT clinical practice guideline",
+   "year": 2022,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9851481/"
+  },
+  {
+   "org": "ATS / ERS / JRS / ALAT",
+   "title": "An official ATS/ERS/JRS/ALAT clinical practice guideline: treatment of idiopathic pulmonary fibrosis. An update of the 2011 clinical practice guideline",
+   "year": 2015,
+   "url": "https://pubmed.ncbi.nlm.nih.gov/26177183/"
+  },
+  {
+   "org": "ATS / ERS / JRS / ALAT",
+   "title": "An official ATS/ERS/JRS/ALAT statement: idiopathic pulmonary fibrosis: evidence-based guidelines for diagnosis and management",
+   "year": 2011,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5450933/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "idiopathic-pulmonary-fibrosis-pathway",
+   "title": "Idiopathic pulmonary fibrosis (IPF) and progressive pulmonary fibrosis Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Typical patient: over 60, often male and an ex-smoker, with months of progressive exertional breathlessness and dry cough, fine bibasal inspiratory ('velcro') crackles, and sometimes finger clubbing.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Admit; look for and treat triggers and mimics: infection, PE, pneumothorax, heart failure and aspiration (CT pulmonary angiography, echo, cultures, viral PCR).",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Thin-section HRCT chest (with prone and expiratory images) reported by a radiologist experienced in ILD."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Long-term oxygen for significant resting hypoxaemia; ambulatory oxygen for exertional desaturation that limits activity."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Nintedanib: liver tests before starting, monthly for 3 months, then every 3 months. Interrupt or reduce for ALT or AST above 3 times the upper limit; avoid in moderate or severe hepatic impairment (Child-Pugh B or C)."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for idiopathic pulmonary fibrosis (ipf) and progressive pulmonary fibrosis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "idiopathic-pulmonary-fibrosis-summary-matrix",
+   "title": "Idiopathic pulmonary fibrosis (IPF) and progressive pulmonary fibrosis Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Typical patient: over 60, often male and an ex-smoker, with months of progressive exertional breathlessness and dry cough, fine bibasal",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Admit; look for and treat triggers and mimics: infection, PE, pneumothorax, heart failure and aspiration (CT pulmonary angiography, echo,",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Thin-section HRCT chest (with prone and expiratory images) reported by a radiologist experienced in ILD.",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Nintedanib: 150 mg orally twice daily with food, about 12 hours apart",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Treating IPF with corticosteroids or immunosuppression, which does not help and can cause harm.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for idiopathic pulmonary fibrosis (ipf) and progressive pulmonary fibrosis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "idiopathic-pulmonary-fibrosis-real-image",
+   "title": "Idiopathic pulmonary fibrosis (IPF) and progressive pulmonary fibrosis: Diagnostic Chest Radiograph",
+   "type": "xray",
+   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
+   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
+   "annotations": [
+    {
+     "label": "Parenchyma & Airspaces",
+     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
+    },
+    {
+     "label": "Bronchovascular Tree",
+     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
+    },
+    {
+     "label": "Pleural Margins",
+     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+    }
+   ]
+  }
+ ]
 }

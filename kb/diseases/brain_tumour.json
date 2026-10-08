@@ -153,5 +153,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "h64c7b6bb"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "brain_tumour-dx-algo",
+      "title": "Brain tumour / mass lesion: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Presenting features split into general (raised-ICP) symptoms - headache +/- nausea/vomiting, cognitive change, personality change, gait disorder - and focal/lateralizing signs such as hemiparesis, aphasia or visual field loss; many",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Progressive, subacute focal/lateralizing deficit (hemiparesis, aphasia, visual field loss) (p.716)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: MRI with gadolinium is the preferred test; CT only if MRI cannot be done (p.716), Neuroimaging is often the only test needed to diagnose a brain tumour; laboratory tests are rarely useful (p.716), FLAIR sequences to detect"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: WHO CNS grading (2021 integrated histologic + molecular classification): diffuse gliomas graded 2-4 by histologic malignancy and molecular markers, with CDKN2A/B homozygous deletion conferring grade 4 to otherwise"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: A ring-enhancing lesion is non-specific - the differential includes brain abscess, toxoplasmosis, PCNSL, demyelination, sarcoidosis, radiation necrosis and primary brain tumour, so do not assume tumour without context"
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for brain tumour / mass lesion."
+    }
+  ],
+  "tables": [
+    {
+      "id": "brain_tumour-matrix",
+      "title": "Brain tumour / mass lesion: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presenting features split into general (raised-ICP) symptoms - headache +/- nausea/vomiting, cognitive change, personality",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "MRI with gadolinium is the preferred test; CT only if MRI cannot be done (p.716), Neuroimaging is often the only test needed to",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Metastatic brain tumour - three times more common than all primary brain tumours combined in adults; commonest sources lung and",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Progressive, subacute focal/lateralizing deficit (hemiparesis, aphasia, visual field loss) (p.716)",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "A ring-enhancing lesion is non-specific - the differential includes brain abscess, toxoplasmosis, PCNSL, demyelination,",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for brain tumour / mass lesion."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "brain-tumour-real-image",
+      "title": "Brain tumour / mass lesion: Diagnostic Head Computed Tomography",
+      "type": "ct",
+      "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
+      "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
+      "annotations": [
+        {
+          "label": "Cerebral Parenchyma",
+          "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+        },
+        {
+          "label": "Ventricular System",
+          "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+        },
+        {
+          "label": "Extra-Axial Spaces",
+          "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+        }
+      ]
+    }
+  ]
 }

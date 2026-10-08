@@ -1,76 +1,171 @@
 {
-  "id": "pectus_excavatum",
-  "name": "Pectus excavatum",
-  "aliases": [
-    "funnel chest",
-    "sunken chest",
-    "PE"
+ "id": "pectus_excavatum",
+ "name": "Pectus excavatum",
+ "aliases": [
+  "funnel chest",
+  "sunken chest",
+  "PE"
+ ],
+ "class": "non_infective",
+ "system": "Paediatric surgery / Thoracic",
+ "specialty": "Paediatric Surgery",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Nelson Textbook of Pediatrics / Bailey & Love (paediatric surgery)",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "The most common congenital chest wall deformity, characterised by an inward depression of the sternum and adjacent costal cartilages producing a sunken appearance",
+   "It is often noticed in early childhood and typically becomes more pronounced during the adolescent growth spurt",
+   "Many patients are asymptomatic, and the main concern is cosmetic and psychological, particularly body-image distress in adolescents",
+   "Severe depression can displace and compress the heart and reduce exercise tolerance, causing exertional breathlessness or palpitations in some patients",
+   "There is a recognised association with connective tissue disorders such as Marfan syndrome and with scoliosis, which should be looked for",
+   "Severity is commonly quantified with the Haller index derived from CT, comparing chest width with the narrowest sternovertebral distance",
+   "Surgical correction, when indicated, is most often by the minimally invasive Nuss procedure using a retrosternal bar, or by the open Ravitch technique",
+   "Non-operative options such as vacuum bell therapy may benefit selected younger patients with milder, flexible deformities"
   ],
-  "class": "non_infective",
-  "system": "Paediatric surgery / Thoracic",
-  "specialty": "Paediatric Surgery",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Nelson Textbook of Pediatrics / Bailey & Love (paediatric surgery)",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "The most common congenital chest wall deformity, characterised by an inward depression of the sternum and adjacent costal cartilages producing a sunken appearance",
-      "It is often noticed in early childhood and typically becomes more pronounced during the adolescent growth spurt",
-      "Many patients are asymptomatic, and the main concern is cosmetic and psychological, particularly body-image distress in adolescents",
-      "Severe depression can displace and compress the heart and reduce exercise tolerance, causing exertional breathlessness or palpitations in some patients",
-      "There is a recognised association with connective tissue disorders such as Marfan syndrome and with scoliosis, which should be looked for",
-      "Severity is commonly quantified with the Haller index derived from CT, comparing chest width with the narrowest sternovertebral distance",
-      "Surgical correction, when indicated, is most often by the minimally invasive Nuss procedure using a retrosternal bar, or by the open Ravitch technique",
-      "Non-operative options such as vacuum bell therapy may benefit selected younger patients with milder, flexible deformities"
+  "pathophysiology": "Pectus excavatum results from abnormal, excessive growth of the costal cartilages that pushes the sternum posteriorly, creating a concave anterior chest wall. The precise cause is unknown but is thought to involve disordered cartilage growth, and there is a familial tendency and links with connective tissue disease. In marked deformity the depressed sternum can compress and rotate the heart and reduce the space available for cardiac filling, which may impair cardiopulmonary performance, particularly during exertion.",
+  "additionalDifferentials": [
+   "Pectus carinatum (protrusion deformity)",
+   "Poland syndrome (with chest wall and pectoral muscle hypoplasia)",
+   "Marfan or other connective tissue syndrome with chest involvement",
+   "Acquired chest wall deformity after thoracic surgery",
+   "Kyphoscoliosis affecting chest shape"
+  ],
+  "additionalInvestigations": [
+   "CT or MRI of the chest to calculate the Haller (or correction) index and assess cardiac compression",
+   "Echocardiography to evaluate cardiac displacement and function",
+   "Pulmonary function testing to assess any restrictive impairment",
+   "Cardiopulmonary exercise testing in symptomatic patients",
+   "Assessment for connective tissue disorders and scoliosis where suspected"
+  ],
+  "redFlags": [
+   "Progressive exertional dyspnoea or exercise intolerance suggesting significant cardiopulmonary compromise",
+   "Echocardiographic evidence of marked cardiac compression or displacement",
+   "Features of an underlying connective tissue disorder such as Marfan syndrome",
+   "Arrhythmia or syncope on exertion warranting cardiac evaluation"
+  ],
+  "prognosis": "The deformity itself is rarely dangerous, and many patients do well without surgery. Operative correction in appropriately selected patients generally produces good cosmetic and functional results with high satisfaction, though the retrosternal bar requires later removal and there is a small risk of recurrence.",
+  "pitfalls": [
+   "Dismissing the condition as purely cosmetic and overlooking genuine cardiopulmonary symptoms",
+   "Failing to screen for associated connective tissue disorders and scoliosis",
+   "Offering surgery based on appearance alone without objective severity and functional assessment",
+   "Underestimating the psychological impact on adolescents"
+  ],
+  "references": [
+   "Nelson Textbook of Pediatrics, 22e",
+   "Bailey & Love's Short Practice of Surgery"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Observe mild, asymptomatic deformity, as many patients do well without intervention",
+   "Offer non-surgical vacuum bell therapy and exercise or physiotherapy programmes for flexible or milder chest-wall depression",
+   "Correct severe or symptomatic deformity surgically, using the minimally invasive Nuss bar procedure or an open Ravitch repair, with later planned bar removal",
+   "Address body-image distress with psychological support, particularly in adolescents",
+   "Screen for and manage associated conditions, notably Marfan syndrome and scoliosis",
+   "Assess cardiopulmonary impact with imaging, echocardiography and exercise testing to guide the decision to operate, and refer symptomatic patients to paediatric or thoracic surgery"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "pectus_excavatum-pathway",
+   "title": "Pectus excavatum: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "The most common congenital chest wall deformity, characterised by an inward depression of the sternum and adjacent costal cartilages producing a sunken appearance",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Progressive exertional dyspnoea or exercise intolerance suggesting significant cardiopulmonary compromise",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: CT or MRI of the chest to calculate the Haller (or correction) index and assess cardiac compression, Echocardiography to evaluate cardiac displacement and function, Pulmonary function testing to assess any restrictive"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Observe mild, asymptomatic deformity, as many patients do well without intervention"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Dismissing the condition as purely cosmetic and overlooking genuine cardiopulmonary symptoms"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of pectus excavatum."
+  }
+ ],
+ "tables": [
+  {
+   "id": "pectus_excavatum-matrix",
+   "title": "Pectus excavatum: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The most common congenital chest wall deformity, characterised by an inward depression of the sternum and adjacent costal",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Pectus excavatum results from abnormal, excessive growth of the costal cartilages that pushes the sternum posteriorly, creating a concave anterior chest wall. The precise cause is unknown but is thought to involve disordered cartilage growth, and there is a familial tendency and links with connective tissue disease. In marked deformity the depressed sternum can compress and rotate the heart and reduce the space available for cardiac filling, which may impair cardiopulmonary performance, particularly during exertion.",
-    "additionalDifferentials": [
-      "Pectus carinatum (protrusion deformity)",
-      "Poland syndrome (with chest wall and pectoral muscle hypoplasia)",
-      "Marfan or other connective tissue syndrome with chest involvement",
-      "Acquired chest wall deformity after thoracic surgery",
-      "Kyphoscoliosis affecting chest shape"
+    [
+     "Key Investigations",
+     "CT or MRI of the chest to calculate the Haller (or correction) index and assess cardiac compression, Echocardiography to evaluate",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "CT or MRI of the chest to calculate the Haller (or correction) index and assess cardiac compression",
-      "Echocardiography to evaluate cardiac displacement and function",
-      "Pulmonary function testing to assess any restrictive impairment",
-      "Cardiopulmonary exercise testing in symptomatic patients",
-      "Assessment for connective tissue disorders and scoliosis where suspected"
+    [
+     "Primary Differentials",
+     "Pectus carinatum (protrusion deformity), Poland syndrome (with chest wall and pectoral muscle hypoplasia), Marfan or other",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Progressive exertional dyspnoea or exercise intolerance suggesting significant cardiopulmonary compromise",
-      "Echocardiographic evidence of marked cardiac compression or displacement",
-      "Features of an underlying connective tissue disorder such as Marfan syndrome",
-      "Arrhythmia or syncope on exertion warranting cardiac evaluation"
+    [
+     "Management Strategy",
+     "Observe mild, asymptomatic deformity, as many patients do well without intervention",
+     "Core treatment modality"
     ],
-    "prognosis": "The deformity itself is rarely dangerous, and many patients do well without surgery. Operative correction in appropriately selected patients generally produces good cosmetic and functional results with high satisfaction, though the retrosternal bar requires later removal and there is a small risk of recurrence.",
-    "pitfalls": [
-      "Dismissing the condition as purely cosmetic and overlooking genuine cardiopulmonary symptoms",
-      "Failing to screen for associated connective tissue disorders and scoliosis",
-      "Offering surgery based on appearance alone without objective severity and functional assessment",
-      "Underestimating the psychological impact on adolescents"
-    ],
-    "references": [
-      "Nelson Textbook of Pediatrics, 22e",
-      "Bailey & Love's Short Practice of Surgery"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Observe mild, asymptomatic deformity, as many patients do well without intervention",
-      "Offer non-surgical vacuum bell therapy and exercise or physiotherapy programmes for flexible or milder chest-wall depression",
-      "Correct severe or symptomatic deformity surgically, using the minimally invasive Nuss bar procedure or an open Ravitch repair, with later planned bar removal",
-      "Address body-image distress with psychological support, particularly in adolescents",
-      "Screen for and manage associated conditions, notably Marfan syndrome and scoliosis",
-      "Assess cardiopulmonary impact with imaging, echocardiography and exercise testing to guide the decision to operate, and refer symptomatic patients to paediatric or thoracic surgery"
+    [
+     "Clinical Pitfall",
+     "Dismissing the condition as purely cosmetic and overlooking genuine cardiopulmonary symptoms",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for pectus excavatum."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "pectus-excavatum-real-image",
+   "title": "Pectus excavatum: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

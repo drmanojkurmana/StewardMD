@@ -1,88 +1,183 @@
 {
-  "id": "phenytoin_hypersensitivity_syndrome",
-  "name": "Anticonvulsant hypersensitivity syndrome",
-  "aliases": [
-    "phenytoin hypersensitivity syndrome",
-    "anticonvulsant hypersensitivity syndrome",
-    "AHS",
-    "DRESS syndrome",
-    "drug reaction with eosinophilia and systemic symptoms",
-    "carbamazepine hypersensitivity",
-    "HLA-B*15:02",
-    "HLA-A*31:01"
+ "id": "phenytoin_hypersensitivity_syndrome",
+ "name": "Anticonvulsant hypersensitivity syndrome",
+ "aliases": [
+  "phenytoin hypersensitivity syndrome",
+  "anticonvulsant hypersensitivity syndrome",
+  "AHS",
+  "DRESS syndrome",
+  "drug reaction with eosinophilia and systemic symptoms",
+  "carbamazepine hypersensitivity",
+  "HLA-B*15:02",
+  "HLA-A*31:01"
+ ],
+ "class": "non_infective",
+ "system": "Clinical pharmacology / Toxicology",
+ "specialty": "Clinical Pharmacology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Rook's Textbook of Dermatology / Harrison's Principles of Internal Medicine",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A severe multiorgan drug reaction, part of the DRESS spectrum, classically caused by aromatic anticonvulsants such as phenytoin, carbamazepine and phenobarbital",
+   "Onset is typically delayed, often two to eight weeks after starting the drug, distinguishing it from immediate reactions",
+   "The triad of fever, widespread rash and internal organ involvement (especially hepatitis) is characteristic, frequently with lymphadenopathy",
+   "Blood tests commonly show eosinophilia and atypical lymphocytes",
+   "Facial oedema is a useful clinical clue to DRESS",
+   "There is cross-reactivity among the aromatic anticonvulsants, so all should generally be avoided once one has caused the syndrome",
+   "HLA associations exist (for example HLA-B*15:02 with carbamazepine-related Stevens-Johnson syndrome/toxic epidermal necrolysis and HLA-A*31:01 with carbamazepine hypersensitivity), supporting pharmacogenomic screening in at-risk groups",
+   "Management is prompt drug withdrawal, supportive care and systemic corticosteroids for significant organ involvement"
   ],
-  "class": "non_infective",
-  "system": "Clinical pharmacology / Toxicology",
-  "specialty": "Clinical Pharmacology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Rook's Textbook of Dermatology / Harrison's Principles of Internal Medicine",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A severe multiorgan drug reaction, part of the DRESS spectrum, classically caused by aromatic anticonvulsants such as phenytoin, carbamazepine and phenobarbital",
-      "Onset is typically delayed, often two to eight weeks after starting the drug, distinguishing it from immediate reactions",
-      "The triad of fever, widespread rash and internal organ involvement (especially hepatitis) is characteristic, frequently with lymphadenopathy",
-      "Blood tests commonly show eosinophilia and atypical lymphocytes",
-      "Facial oedema is a useful clinical clue to DRESS",
-      "There is cross-reactivity among the aromatic anticonvulsants, so all should generally be avoided once one has caused the syndrome",
-      "HLA associations exist (for example HLA-B*15:02 with carbamazepine-related Stevens-Johnson syndrome/toxic epidermal necrolysis and HLA-A*31:01 with carbamazepine hypersensitivity), supporting pharmacogenomic screening in at-risk groups",
-      "Management is prompt drug withdrawal, supportive care and systemic corticosteroids for significant organ involvement"
+  "pathophysiology": "The syndrome is a delayed, T-cell-mediated drug hypersensitivity reaction. Aromatic anticonvulsants are metabolised by cytochrome P450 to reactive arene oxide intermediates, which are normally detoxified by epoxide hydrolase. Deficient or defective detoxification allows reactive metabolites to accumulate, act as haptens and trigger an immune response, with genetic variation in detoxifying enzymes contributing to susceptibility. Specific HLA alleles predispose to particular reactions by shaping which drug-modified peptides are presented to T cells. Reactivation of human herpesviruses, particularly HHV-6, is often associated with DRESS and may contribute to the prolonged, relapsing course. The immune activation produces fever, an extensive cutaneous eruption, eosinophilia and inflammation of internal organs, most often the liver but also kidneys, lungs and heart.",
+  "additionalDifferentials": [
+   "Stevens-Johnson syndrome / toxic epidermal necrolysis",
+   "Acute generalised exanthematous pustulosis",
+   "Viral exanthem or acute viral infection (e.g. EBV, CMV)",
+   "Sepsis",
+   "Acute cutaneous lupus or Still's disease",
+   "Lymphoma or other haematological malignancy",
+   "Serum sickness"
+  ],
+  "additionalInvestigations": [
+   "Full blood count with differential for eosinophilia and atypical lymphocytes",
+   "Liver function tests and renal function to detect organ involvement",
+   "Inflammatory markers and temperature charting",
+   "Skin biopsy where the diagnosis is uncertain",
+   "Screening for viral reactivation (e.g. HHV-6) in appropriate settings",
+   "HLA typing (e.g. HLA-B*15:02, HLA-A*31:01) in at-risk populations before prescribing",
+   "Thyroid function follow-up given the risk of late autoimmune sequelae"
+  ],
+  "redFlags": [
+   "Marked transaminitis or evidence of acute liver failure",
+   "Extensive rash with mucosal involvement or skin detachment suggesting overlap with SJS/TEN",
+   "Renal impairment, myocarditis or pneumonitis",
+   "Haemodynamic instability or high persistent fever",
+   "Rapidly rising eosinophil count with organ dysfunction"
+  ],
+  "prognosis": "With early drug withdrawal and supportive care most patients recover, but the syndrome can be fatal, largely from hepatic or other organ failure. The course may be prolonged and relapsing, and late autoimmune sequelae such as thyroid disease can occur, warranting follow-up.",
+  "pitfalls": [
+   "Attributing the delayed rash and fever to infection and continuing the anticonvulsant",
+   "Switching to another aromatic anticonvulsant with which there is cross-reactivity",
+   "Underestimating internal organ involvement because the rash appears mild",
+   "Stopping corticosteroids too quickly and precipitating relapse",
+   "Not screening at-risk populations for relevant HLA alleles before prescribing"
+  ],
+  "references": [
+   "Rook's Textbook of Dermatology",
+   "Harrison's Principles of Internal Medicine"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Immediate withdrawal of the culprit aromatic anticonvulsant as the single most important step",
+   "Systemic corticosteroids for significant multiorgan involvement, especially hepatitis, with a slow taper given the prolonged, relapsing course",
+   "Supportive care with temperature control, fluid and skin care, and topical corticosteroids and emollients for the cutaneous eruption",
+   "Substitution with a structurally unrelated non-aromatic anticonvulsant, avoiding the cross-reactive aromatic agents phenytoin, carbamazepine and phenobarbital lifelong",
+   "Monitoring and management of hepatic, renal and haematological involvement and consideration of herpesvirus reactivation such as HHV-6",
+   "HLA screening for alleles such as HLA-B*15:02 and HLA-A*31:01 in at-risk populations before prescribing, with a documented allergy alert and counselling of relatives who may share the alleles",
+   "Long-term follow-up for late autoimmune sequelae such as thyroid disease, escalating to intensive care and specialist input for organ failure"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "phenytoin_hypersensitivity_syndrome-pathway",
+   "title": "Anticonvulsant hypersensitivity syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A severe multiorgan drug reaction, part of the DRESS spectrum, classically caused by aromatic anticonvulsants such as phenytoin, carbamazepine and phenobarbital",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Marked transaminitis or evidence of acute liver failure",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Full blood count with differential for eosinophilia and atypical lymphocytes, Liver function tests and renal function to detect organ involvement, Inflammatory markers and temperature charting"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Immediate withdrawal of the culprit aromatic anticonvulsant as the single most important step"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing the delayed rash and fever to infection and continuing the anticonvulsant"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of anticonvulsant hypersensitivity syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "phenytoin_hypersensitivity_syndrome-matrix",
+   "title": "Anticonvulsant hypersensitivity syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A severe multiorgan drug reaction, part of the DRESS spectrum, classically caused by aromatic anticonvulsants such as phenytoin,",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "The syndrome is a delayed, T-cell-mediated drug hypersensitivity reaction. Aromatic anticonvulsants are metabolised by cytochrome P450 to reactive arene oxide intermediates, which are normally detoxified by epoxide hydrolase. Deficient or defective detoxification allows reactive metabolites to accumulate, act as haptens and trigger an immune response, with genetic variation in detoxifying enzymes contributing to susceptibility. Specific HLA alleles predispose to particular reactions by shaping which drug-modified peptides are presented to T cells. Reactivation of human herpesviruses, particularly HHV-6, is often associated with DRESS and may contribute to the prolonged, relapsing course. The immune activation produces fever, an extensive cutaneous eruption, eosinophilia and inflammation of internal organs, most often the liver but also kidneys, lungs and heart.",
-    "additionalDifferentials": [
-      "Stevens-Johnson syndrome / toxic epidermal necrolysis",
-      "Acute generalised exanthematous pustulosis",
-      "Viral exanthem or acute viral infection (e.g. EBV, CMV)",
-      "Sepsis",
-      "Acute cutaneous lupus or Still's disease",
-      "Lymphoma or other haematological malignancy",
-      "Serum sickness"
+    [
+     "Key Investigations",
+     "Full blood count with differential for eosinophilia and atypical lymphocytes, Liver function tests and renal function to detect",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Full blood count with differential for eosinophilia and atypical lymphocytes",
-      "Liver function tests and renal function to detect organ involvement",
-      "Inflammatory markers and temperature charting",
-      "Skin biopsy where the diagnosis is uncertain",
-      "Screening for viral reactivation (e.g. HHV-6) in appropriate settings",
-      "HLA typing (e.g. HLA-B*15:02, HLA-A*31:01) in at-risk populations before prescribing",
-      "Thyroid function follow-up given the risk of late autoimmune sequelae"
+    [
+     "Primary Differentials",
+     "Stevens-Johnson syndrome / toxic epidermal necrolysis, Acute generalised exanthematous pustulosis, Viral exanthem or acute viral",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Marked transaminitis or evidence of acute liver failure",
-      "Extensive rash with mucosal involvement or skin detachment suggesting overlap with SJS/TEN",
-      "Renal impairment, myocarditis or pneumonitis",
-      "Haemodynamic instability or high persistent fever",
-      "Rapidly rising eosinophil count with organ dysfunction"
+    [
+     "Management Strategy",
+     "Immediate withdrawal of the culprit aromatic anticonvulsant as the single most important step",
+     "Core treatment modality"
     ],
-    "prognosis": "With early drug withdrawal and supportive care most patients recover, but the syndrome can be fatal, largely from hepatic or other organ failure. The course may be prolonged and relapsing, and late autoimmune sequelae such as thyroid disease can occur, warranting follow-up.",
-    "pitfalls": [
-      "Attributing the delayed rash and fever to infection and continuing the anticonvulsant",
-      "Switching to another aromatic anticonvulsant with which there is cross-reactivity",
-      "Underestimating internal organ involvement because the rash appears mild",
-      "Stopping corticosteroids too quickly and precipitating relapse",
-      "Not screening at-risk populations for relevant HLA alleles before prescribing"
-    ],
-    "references": [
-      "Rook's Textbook of Dermatology",
-      "Harrison's Principles of Internal Medicine"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Immediate withdrawal of the culprit aromatic anticonvulsant as the single most important step",
-      "Systemic corticosteroids for significant multiorgan involvement, especially hepatitis, with a slow taper given the prolonged, relapsing course",
-      "Supportive care with temperature control, fluid and skin care, and topical corticosteroids and emollients for the cutaneous eruption",
-      "Substitution with a structurally unrelated non-aromatic anticonvulsant, avoiding the cross-reactive aromatic agents phenytoin, carbamazepine and phenobarbital lifelong",
-      "Monitoring and management of hepatic, renal and haematological involvement and consideration of herpesvirus reactivation such as HHV-6",
-      "HLA screening for alleles such as HLA-B*15:02 and HLA-A*31:01 in at-risk populations before prescribing, with a documented allergy alert and counselling of relatives who may share the alleles",
-      "Long-term follow-up for late autoimmune sequelae such as thyroid disease, escalating to intensive care and specialist input for organ failure"
+    [
+     "Clinical Pitfall",
+     "Attributing the delayed rash and fever to infection and continuing the anticonvulsant",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for anticonvulsant hypersensitivity syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "phenytoin-hypersensitivity-syndrome-real-image",
+   "title": "Anticonvulsant hypersensitivity syndrome: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

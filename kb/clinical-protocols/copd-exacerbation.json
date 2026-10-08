@@ -5,7 +5,15 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, ward, HDU, ICU, outpatient",
- "aliases": ["AECOPD", "acute exacerbation of COPD", "COPD flare", "hypercapnic respiratory failure", "type 2 respiratory failure", "NIV in COPD", "GOLD 2026"],
+ "aliases": [
+  "AECOPD",
+  "acute exacerbation of COPD",
+  "COPD flare",
+  "hypercapnic respiratory failure",
+  "type 2 respiratory failure",
+  "NIV in COPD",
+  "GOLD 2026"
+ ],
  "summary": "Controlled oxygen to SpO2 88 to 92%, short-acting bronchodilators, prednisolone 40 mg daily for 5 days, antibiotics for 5 days only when sputum is purulent or ventilation is needed, and NIV for respiratory acidosis (PaCO2 45 mmHg or more with pH 7.35 or less). Start LABA+LAMA before discharge.",
  "sections": [
   {
@@ -85,18 +93,159 @@
   }
  ],
  "drugs": [
-  { "name": "Salbutamol", "dose": "2.5 to 5 mg nebulised (air-driven if hypercapnic) or 100 to 200 mcg by pMDI and spacer every hour for 2 to 3 doses, then every 2 to 4 hours", "notes": "Avoid high cumulative doses; monitor heart rate and potassium." },
-  { "name": "Ipratropium bromide", "dose": "0.5 mg nebulised up to every 6 hours with salbutamol", "notes": "Stop once long-acting antimuscarinic is restarted." },
-  { "name": "Prednisolone", "dose": "40 mg orally once daily for 5 days", "notes": "IV hydrocortisone only if oral route not possible." },
-  { "name": "Amoxicillin-clavulanate", "dose": "625 mg orally three times daily (or 1.2 g IV every 8 hours) for 5 days", "notes": "ICMR adult doses. Reduce dose if eGFR below 30 mL/min." },
-  { "name": "Doxycycline", "dose": "100 mg orally twice daily for 5 days", "notes": "Alternative in penicillin allergy." },
-  { "name": "Clarithromycin", "dose": "500 mg orally twice daily for 5 days", "notes": "Alternative; check QTc and interactions (statins, warfarin)." },
-  { "name": "Piperacillin-tazobactam", "dose": "4.5 g IV every 6 hours", "notes": "Only with Pseudomonas risk, after sputum culture; adjust to renal function and antibiogram." }
+  {
+   "name": "Salbutamol",
+   "dose": "2.5 to 5 mg nebulised (air-driven if hypercapnic) or 100 to 200 mcg by pMDI and spacer every hour for 2 to 3 doses, then every 2 to 4 hours",
+   "notes": "Avoid high cumulative doses; monitor heart rate and potassium."
+  },
+  {
+   "name": "Ipratropium bromide",
+   "dose": "0.5 mg nebulised up to every 6 hours with salbutamol",
+   "notes": "Stop once long-acting antimuscarinic is restarted."
+  },
+  {
+   "name": "Prednisolone",
+   "dose": "40 mg orally once daily for 5 days",
+   "notes": "IV hydrocortisone only if oral route not possible."
+  },
+  {
+   "name": "Amoxicillin-clavulanate",
+   "dose": "625 mg orally three times daily (or 1.2 g IV every 8 hours) for 5 days",
+   "notes": "ICMR adult doses. Reduce dose if eGFR below 30 mL/min."
+  },
+  {
+   "name": "Doxycycline",
+   "dose": "100 mg orally twice daily for 5 days",
+   "notes": "Alternative in penicillin allergy."
+  },
+  {
+   "name": "Clarithromycin",
+   "dose": "500 mg orally twice daily for 5 days",
+   "notes": "Alternative; check QTc and interactions (statins, warfarin)."
+  },
+  {
+   "name": "Piperacillin-tazobactam",
+   "dose": "4.5 g IV every 6 hours",
+   "notes": "Only with Pseudomonas risk, after sputum culture; adjust to renal function and antibiogram."
+  }
  ],
  "sources": [
-  { "org": "GOLD", "title": "Global Strategy for the Diagnosis, Management, and Prevention of COPD, 2026 report (Chapter 4: exacerbations)", "year": 2026, "url": "https://goldcopd.org/wp-content/uploads/2026/01/GOLD-REPORT-2026-v1.3-8Dec2025_WMV2.pdf" },
-  { "org": "BTS", "title": "BTS guideline for oxygen use in adults in healthcare and emergency settings", "year": 2017, "url": "https://www.brit-thoracic.org.uk/clinical-resources/guidelines/emergency-oxygen/" },
-  { "org": "ICMR", "title": "Treatment Guidelines for Antimicrobial Use in Common Syndromes, 2nd edition", "year": 2019, "url": "https://iamrsn.icmr.org.in/index.php/resources/guidelines" }
+  {
+   "org": "GOLD",
+   "title": "Global Strategy for the Diagnosis, Management, and Prevention of COPD, 2026 report (Chapter 4: exacerbations)",
+   "year": 2026,
+   "url": "https://goldcopd.org/wp-content/uploads/2026/01/GOLD-REPORT-2026-v1.3-8Dec2025_WMV2.pdf"
+  },
+  {
+   "org": "BTS",
+   "title": "BTS guideline for oxygen use in adults in healthcare and emergency settings",
+   "year": 2017,
+   "url": "https://www.brit-thoracic.org.uk/clinical-resources/guidelines/emergency-oxygen/"
+  },
+  {
+   "org": "ICMR",
+   "title": "Treatment Guidelines for Antimicrobial Use in Common Syndromes, 2nd edition",
+   "year": 2019,
+   "url": "https://iamrsn.icmr.org.in/index.php/resources/guidelines"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "copd-exacerbation-pathway",
+   "title": "COPD exacerbation (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Acute worsening of dyspnoea, cough and/or sputum over up to 14 days, often with tachypnoea and tachycardia. Exclude mimics: pneumonia, pulmonary embolism, acute heart failure, pneumothorax, arrhythmia or acute coronary syndrome.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Controlled oxygen to a target SpO2 of 88 to 92% (24% Venturi at 2 to 4 L/min, 28% Venturi at 4 L/min, or nasal cannula 1 to 2 L/min) pending blood gas (BTS 2017). If PaCO2 is normal and there is no history of hypercapnic failure needing",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Arterial blood gas; repeat after oxygen changes and 1 to 2 hours after starting NIV. A venous gas can track pH and PaCO2 trend."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Give antibiotics if increased sputum purulence plus at least one of increased dyspnoea, increased sputum volume or fever; or a previous positive sputum culture; or need for NIV or invasive ventilation. Point-of-care CRP can help withhold"
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: High-concentration oxygen or oxygen-driven nebulisers in a CO2 retainer causing worsening acidosis."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for copd exacerbation (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "copd-exacerbation-summary-matrix",
+   "title": "COPD exacerbation (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Acute worsening of dyspnoea, cough and/or sputum over up to 14 days, often with tachypnoea and tachycardia. Exclude mimics: pneumonia,",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Controlled oxygen to a target SpO2 of 88 to 92% (24% Venturi at 2 to 4 L/min, 28% Venturi at 4 L/min, or nasal cannula 1 to 2 L/min)",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Arterial blood gas; repeat after oxygen changes and 1 to 2 hours after starting NIV. A venous gas can track pH and PaCO2 trend.",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Salbutamol: 2.5 to 5 mg nebulised (air-driven if hypercapnic) or 100 to 200 mcg by pMDI and spacer every hour for 2 to 3 doses, then every",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "High-concentration oxygen or oxygen-driven nebulisers in a CO2 retainer causing worsening acidosis.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for copd exacerbation (adult)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "copd-exacerbation-real-image",
+   "title": "COPD exacerbation (adult): Diagnostic Chest Radiograph",
+   "type": "xray",
+   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
+   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
+   "annotations": [
+    {
+     "label": "Parenchyma & Airspaces",
+     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
+    },
+    {
+     "label": "Bronchovascular Tree",
+     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
+    },
+    {
+     "label": "Pleural Margins",
+     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+    }
+   ]
+  }
+ ]
 }

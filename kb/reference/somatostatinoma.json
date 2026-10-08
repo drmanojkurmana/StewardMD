@@ -1,81 +1,176 @@
 {
-  "id": "somatostatinoma",
-  "name": "Somatostatinoma",
-  "aliases": [
-    "somatostatin-secreting tumour",
-    "somatostatin-secreting neuroendocrine tumour",
-    "D-cell tumour"
+ "id": "somatostatinoma",
+ "name": "Somatostatinoma",
+ "aliases": [
+  "somatostatin-secreting tumour",
+  "somatostatin-secreting neuroendocrine tumour",
+  "D-cell tumour"
+ ],
+ "class": "non_infective",
+ "system": "Endocrine",
+ "specialty": "Endocrinology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Williams Textbook of Endocrinology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "The classic triad reflects somatostatin's inhibitory actions: diabetes mellitus, gallstones, and steatorrhoea with weight loss",
+   "The full syndrome is uncommon; many tumours are found incidentally or present with mass effect rather than florid hormonal features",
+   "Pancreatic tumours more often produce the complete inhibitory syndrome, whereas duodenal or periampullary lesions may present with obstructive jaundice or bleeding",
+   "Diabetes tends to be mild because somatostatin suppresses both insulin and glucagon",
+   "Gallstones arise from reduced gallbladder contractility and diminished cholecystokinin-driven emptying",
+   "Steatorrhoea results from inhibition of pancreatic exocrine secretion and bile flow",
+   "A markedly elevated plasma somatostatin supports the diagnosis, and somatostatin-receptor imaging aids localisation and staging",
+   "Duodenal tumours may be associated with neurofibromatosis type 1, and pancreatic lesions with multiple endocrine neoplasia type 1"
   ],
-  "class": "non_infective",
-  "system": "Endocrine",
-  "specialty": "Endocrinology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Williams Textbook of Endocrinology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "The classic triad reflects somatostatin's inhibitory actions: diabetes mellitus, gallstones, and steatorrhoea with weight loss",
-      "The full syndrome is uncommon; many tumours are found incidentally or present with mass effect rather than florid hormonal features",
-      "Pancreatic tumours more often produce the complete inhibitory syndrome, whereas duodenal or periampullary lesions may present with obstructive jaundice or bleeding",
-      "Diabetes tends to be mild because somatostatin suppresses both insulin and glucagon",
-      "Gallstones arise from reduced gallbladder contractility and diminished cholecystokinin-driven emptying",
-      "Steatorrhoea results from inhibition of pancreatic exocrine secretion and bile flow",
-      "A markedly elevated plasma somatostatin supports the diagnosis, and somatostatin-receptor imaging aids localisation and staging",
-      "Duodenal tumours may be associated with neurofibromatosis type 1, and pancreatic lesions with multiple endocrine neoplasia type 1"
+  "pathophysiology": "Somatostatinoma is a rare neuroendocrine tumour of pancreatic delta cells or duodenal somatostatin-producing cells. Excess somatostatin exerts broad inhibitory effects across the gastroenteropancreatic axis, suppressing insulin and glucagon (producing mild diabetes), reducing gallbladder motility and cholecystokinin action (favouring gallstone formation), and dampening pancreatic exocrine and biliary secretion (causing fat malabsorption and steatorrhoea). Many tumours are large and metastatic at diagnosis, and periampullary lesions may declare themselves through local obstruction rather than hormonal excess.",
+  "additionalDifferentials": [
+   "Other functioning pancreatic neuroendocrine tumours such as glucagonoma or VIPoma",
+   "Non-functioning pancreatic neuroendocrine tumour",
+   "Pancreatic ductal adenocarcinoma",
+   "Chronic pancreatitis with exocrine insufficiency",
+   "Cholelithiasis from unrelated causes",
+   "Coeliac disease or other malabsorptive states"
+  ],
+  "additionalInvestigations": [
+   "Fasting plasma somatostatin concentration",
+   "Somatostatin-receptor imaging such as gallium DOTATATE positron emission tomography",
+   "Cross-sectional imaging and endoscopic ultrasound to localise and stage the tumour",
+   "Assessment of glycaemic status and pancreatic exocrine function",
+   "Abdominal imaging to document gallstones",
+   "Screening for neurofibromatosis type 1 and multiple endocrine neoplasia type 1 where relevant"
+  ],
+  "redFlags": [
+   "Obstructive jaundice from a periampullary tumour",
+   "Hepatic metastases at presentation",
+   "Progressive weight loss and malnutrition from severe steatorrhoea",
+   "Gastrointestinal haemorrhage from a duodenal lesion",
+   "Features suggesting an inherited tumour syndrome"
+  ],
+  "prognosis": "Outlook depends heavily on stage; small, completely resected tumours can be cured, but a large proportion are advanced with hepatic or nodal metastases at diagnosis, when surgical resection and somatostatin analogues aim to control disease and symptoms rather than cure.",
+  "pitfalls": [
+   "Missing the diagnosis because the full inhibitory triad is often incomplete or subtle",
+   "Attributing the mild diabetes and gallstones to common coincidental disease",
+   "Overlooking a periampullary tumour presenting purely with obstructive symptoms",
+   "Failing to screen for associated neurofibromatosis type 1 or multiple endocrine neoplasia type 1",
+   "Assuming resectability without adequate somatostatin-receptor and cross-sectional staging"
+  ],
+  "references": [
+   "Williams Textbook of Endocrinology",
+   "DeGroot's Endocrinology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Complete surgical resection by enucleation or pancreaticoduodenectomy is the mainstay and potentially curative for localised tumours",
+   "Somatostatin analogues such as octreotide or lanreotide to control hormonal symptoms and slow progression in advanced disease",
+   "Peptide receptor radionuclide therapy with lutetium-177 DOTATATE for progressive somatostatin-receptor-positive metastatic disease",
+   "Manage syndrome components with insulin or oral hypoglycaemic agents for diabetes and pancreatic enzyme replacement for steatorrhoea",
+   "Cholecystectomy for symptomatic gallstones, often performed at the time of tumour resection",
+   "Liver-directed therapy such as embolisation or metastasectomy for hepatic metastases",
+   "Screen for associated neurofibromatosis type 1 and MEN1, with referral for genetic counselling where relevant"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "somatostatinoma-pathway",
+   "title": "Somatostatinoma: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "The classic triad reflects somatostatin's inhibitory actions: diabetes mellitus, gallstones, and steatorrhoea with weight loss",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Obstructive jaundice from a periampullary tumour",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Fasting plasma somatostatin concentration, Somatostatin-receptor imaging such as gallium DOTATATE positron emission tomography, Cross-sectional imaging and endoscopic ultrasound to localise and stage the tumour"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Complete surgical resection by enucleation or pancreaticoduodenectomy is the mainstay and potentially curative for localised tumours"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Missing the diagnosis because the full inhibitory triad is often incomplete or subtle"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of somatostatinoma."
+  }
+ ],
+ "tables": [
+  {
+   "id": "somatostatinoma-matrix",
+   "title": "Somatostatinoma: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The classic triad reflects somatostatin's inhibitory actions: diabetes mellitus, gallstones, and steatorrhoea with weight loss",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Somatostatinoma is a rare neuroendocrine tumour of pancreatic delta cells or duodenal somatostatin-producing cells. Excess somatostatin exerts broad inhibitory effects across the gastroenteropancreatic axis, suppressing insulin and glucagon (producing mild diabetes), reducing gallbladder motility and cholecystokinin action (favouring gallstone formation), and dampening pancreatic exocrine and biliary secretion (causing fat malabsorption and steatorrhoea). Many tumours are large and metastatic at diagnosis, and periampullary lesions may declare themselves through local obstruction rather than hormonal excess.",
-    "additionalDifferentials": [
-      "Other functioning pancreatic neuroendocrine tumours such as glucagonoma or VIPoma",
-      "Non-functioning pancreatic neuroendocrine tumour",
-      "Pancreatic ductal adenocarcinoma",
-      "Chronic pancreatitis with exocrine insufficiency",
-      "Cholelithiasis from unrelated causes",
-      "Coeliac disease or other malabsorptive states"
+    [
+     "Key Investigations",
+     "Fasting plasma somatostatin concentration, Somatostatin-receptor imaging such as gallium DOTATATE positron emission tomography,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Fasting plasma somatostatin concentration",
-      "Somatostatin-receptor imaging such as gallium DOTATATE positron emission tomography",
-      "Cross-sectional imaging and endoscopic ultrasound to localise and stage the tumour",
-      "Assessment of glycaemic status and pancreatic exocrine function",
-      "Abdominal imaging to document gallstones",
-      "Screening for neurofibromatosis type 1 and multiple endocrine neoplasia type 1 where relevant"
+    [
+     "Primary Differentials",
+     "Other functioning pancreatic neuroendocrine tumours such as glucagonoma or VIPoma, Non-functioning pancreatic neuroendocrine",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Obstructive jaundice from a periampullary tumour",
-      "Hepatic metastases at presentation",
-      "Progressive weight loss and malnutrition from severe steatorrhoea",
-      "Gastrointestinal haemorrhage from a duodenal lesion",
-      "Features suggesting an inherited tumour syndrome"
+    [
+     "Management Strategy",
+     "Complete surgical resection by enucleation or pancreaticoduodenectomy is the mainstay and potentially curative for localised",
+     "Core treatment modality"
     ],
-    "prognosis": "Outlook depends heavily on stage; small, completely resected tumours can be cured, but a large proportion are advanced with hepatic or nodal metastases at diagnosis, when surgical resection and somatostatin analogues aim to control disease and symptoms rather than cure.",
-    "pitfalls": [
-      "Missing the diagnosis because the full inhibitory triad is often incomplete or subtle",
-      "Attributing the mild diabetes and gallstones to common coincidental disease",
-      "Overlooking a periampullary tumour presenting purely with obstructive symptoms",
-      "Failing to screen for associated neurofibromatosis type 1 or multiple endocrine neoplasia type 1",
-      "Assuming resectability without adequate somatostatin-receptor and cross-sectional staging"
-    ],
-    "references": [
-      "Williams Textbook of Endocrinology",
-      "DeGroot's Endocrinology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Complete surgical resection by enucleation or pancreaticoduodenectomy is the mainstay and potentially curative for localised tumours",
-      "Somatostatin analogues such as octreotide or lanreotide to control hormonal symptoms and slow progression in advanced disease",
-      "Peptide receptor radionuclide therapy with lutetium-177 DOTATATE for progressive somatostatin-receptor-positive metastatic disease",
-      "Manage syndrome components with insulin or oral hypoglycaemic agents for diabetes and pancreatic enzyme replacement for steatorrhoea",
-      "Cholecystectomy for symptomatic gallstones, often performed at the time of tumour resection",
-      "Liver-directed therapy such as embolisation or metastasectomy for hepatic metastases",
-      "Screen for associated neurofibromatosis type 1 and MEN1, with referral for genetic counselling where relevant"
+    [
+     "Clinical Pitfall",
+     "Missing the diagnosis because the full inhibitory triad is often incomplete or subtle",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for somatostatinoma."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "somatostatinoma-real-image",
+   "title": "Somatostatinoma: Diagnostic Endocrine Cross-Sectional Imaging",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
+   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
+   "annotations": [
+    {
+     "label": "Gland Morphology",
+     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
+    },
+    {
+     "label": "Focal Lesions",
+     "description": "Nodularity, adenoma attenuation, and washout dynamics."
+    },
+    {
+     "label": "Surrounding Structures",
+     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+    }
+   ]
+  }
+ ]
 }

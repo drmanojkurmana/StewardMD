@@ -140,5 +140,100 @@
       "importedAt": "2026-06-29T13:50:09Z",
       "contentHash": "h9bd9dee"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "itp-dx-algo",
+      "title": "Immune thrombocytopenia (ITP): Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "ITP is an acquired disorder of immune-mediated platelet destruction, with possible additional inhibition of platelet release from megakaryocytes (p.924).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Wet purpura (oral blood blisters) - may herald life-threatening bleeding (p.924, p.922)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: CBC with peripheral blood smear review to confirm isolated thrombocytopenia and exclude clumping/schistocytes (p.922, p.924), HIV and hepatitis C testing to evaluate for secondary ITP (p.924), Serologic testing for SLE"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Harrison does not give a formal grading scale. Practical thresholds noted: platelet counts >30,000/uL are not associated with increased mortality; ~5000-10,000/uL is the level needed to maintain microvascular integrity;"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Treating presumed ITP without excluding secondary causes (HIV, HCV, SLE, drugs) (p.924)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for immune thrombocytopenia (itp)."
+    }
+  ],
+  "tables": [
+    {
+      "id": "itp-matrix",
+      "title": "Immune thrombocytopenia (ITP): Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "ITP is an acquired disorder of immune-mediated platelet destruction, with possible additional inhibition of platelet release from",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "CBC with peripheral blood smear review to confirm isolated thrombocytopenia and exclude clumping/schistocytes (p.922, p.924), HIV",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Drug-induced thrombocytopenia (e.g., quinine, sulfonamides, vancomycin; classic drug-dependent antibodies react with platelet",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Wet purpura (oral blood blisters) - may herald life-threatening bleeding (p.924, p.922)",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating presumed ITP without excluding secondary causes (HIV, HCV, SLE, drugs) (p.924).",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for immune thrombocytopenia (itp)."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "itp-real-image",
+      "title": "Immune thrombocytopenia (ITP): Diagnostic Peripheral Blood Smear Examination",
+      "type": "diagram",
+      "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
+      "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
+      "annotations": [
+        {
+          "label": "Erythrocyte Indices",
+          "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
+        },
+        {
+          "label": "Leukocyte Differential",
+          "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
+        },
+        {
+          "label": "Platelet Count",
+          "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+        }
+      ]
+    }
+  ]
 }

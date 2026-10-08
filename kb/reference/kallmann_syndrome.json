@@ -1,77 +1,172 @@
 {
-  "id": "kallmann_syndrome",
-  "name": "Kallmann syndrome (hypogonadotropic hypogonadism + anosmia)",
-  "aliases": [
-    "Kallmann syndrome",
-    "congenital hypogonadotropic hypogonadism with anosmia",
-    "ANOS1",
-    "KAL1",
-    "FGFR1-related Kallmann syndrome"
+ "id": "kallmann_syndrome",
+ "name": "Kallmann syndrome (hypogonadotropic hypogonadism + anosmia)",
+ "aliases": [
+  "Kallmann syndrome",
+  "congenital hypogonadotropic hypogonadism with anosmia",
+  "ANOS1",
+  "KAL1",
+  "FGFR1-related Kallmann syndrome"
+ ],
+ "class": "non_infective",
+ "system": "Endocrine / Genetics",
+ "specialty": "Endocrinology / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Williams Textbook of Endocrinology / Nelson Textbook of Pediatrics",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A form of congenital hypogonadotropic hypogonadism combined with impaired or absent sense of smell (anosmia or hyposmia)",
+   "Results from defective embryonic migration of gonadotropin-releasing hormone neurons alongside the olfactory nerves",
+   "Genetically heterogeneous, with X-linked ANOS1 and autosomal genes such as FGFR1 among the recognised causes",
+   "Typically presents as absent or incomplete puberty with low sex steroids and inappropriately low or normal gonadotropins",
+   "Associated features vary by gene and can include midline defects such as cleft lip or palate, dental agenesis, and unilateral renal agenesis",
+   "Synkinesia (mirror movements) is a recognised feature of some X-linked cases",
+   "Fertility can often be achieved with gonadotropin therapy or pulsatile GnRH, distinguishing it from primary gonadal failure"
   ],
-  "class": "non_infective",
-  "system": "Endocrine / Genetics",
-  "specialty": "Endocrinology / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Williams Textbook of Endocrinology / Nelson Textbook of Pediatrics",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A form of congenital hypogonadotropic hypogonadism combined with impaired or absent sense of smell (anosmia or hyposmia)",
-      "Results from defective embryonic migration of gonadotropin-releasing hormone neurons alongside the olfactory nerves",
-      "Genetically heterogeneous, with X-linked ANOS1 and autosomal genes such as FGFR1 among the recognised causes",
-      "Typically presents as absent or incomplete puberty with low sex steroids and inappropriately low or normal gonadotropins",
-      "Associated features vary by gene and can include midline defects such as cleft lip or palate, dental agenesis, and unilateral renal agenesis",
-      "Synkinesia (mirror movements) is a recognised feature of some X-linked cases",
-      "Fertility can often be achieved with gonadotropin therapy or pulsatile GnRH, distinguishing it from primary gonadal failure"
+  "pathophysiology": "During development, gonadotropin-releasing hormone (GnRH) neurons originate in the olfactory placode and migrate along the olfactory nerve fibres to reach the hypothalamus. In Kallmann syndrome, mutations affecting the genes that guide this migration disrupt both the olfactory pathway and the arrival of GnRH neurons in the hypothalamus. The resulting deficiency of hypothalamic GnRH leads to reduced pituitary secretion of luteinising and follicle-stimulating hormones and consequent hypogonadism, while the shared developmental defect explains the coexisting impairment of smell.",
+  "additionalDifferentials": [
+   "Normosmic congenital hypogonadotropic hypogonadism",
+   "Constitutional delay of growth and puberty",
+   "Functional hypogonadotropic hypogonadism from illness, stress or excessive exercise",
+   "Hyperprolactinaemia or other pituitary lesions suppressing gonadotropins",
+   "Primary (hypergonadotropic) gonadal failure"
+  ],
+  "additionalInvestigations": [
+   "Basal luteinising hormone, follicle-stimulating hormone and sex steroid measurement",
+   "Formal or structured assessment of the sense of smell",
+   "Pituitary and hypothalamic MRI, which may show olfactory bulb hypoplasia or aplasia",
+   "Molecular genetic testing of ANOS1, FGFR1 and other associated genes",
+   "Renal imaging and screening for associated midline or skeletal anomalies"
+  ],
+  "redFlags": [
+   "Features suggesting an expanding pituitary or hypothalamic mass rather than a congenital defect",
+   "Associated anomalies such as renal agenesis or midline defects requiring dedicated evaluation",
+   "Absence of any pubertal progression by the expected age warranting prompt endocrine assessment",
+   "Signs of broader pituitary hormone deficiency indicating combined hypopituitarism"
+  ],
+  "prognosis": "With appropriate hormone replacement, secondary sexual characteristics and bone health can be maintained, and fertility is frequently achievable with gonadotropin or pulsatile GnRH therapy; a minority experience reversal of the hypogonadism.",
+  "pitfalls": [
+   "Attributing delayed puberty to constitutional delay and missing a genuine congenital deficiency",
+   "Failing to test the sense of smell, which is a key discriminating clinical feature",
+   "Overlooking associated anomalies such as unilateral renal agenesis",
+   "Assuming infertility is irreversible rather than treatable with gonadotropin therapy"
+  ],
+  "references": [
+   "Williams Textbook of Endocrinology",
+   "Nelson Textbook of Pediatrics"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Replace sex steroids, with testosterone in males and oestrogen-progestogen in females, to induce and maintain secondary sexual characteristics and bone health",
+   "Induce fertility when desired with gonadotropin therapy or pulsatile GnRH",
+   "Monitor and optimise bone mineral density given the hypogonadism",
+   "Screen for associated anomalies such as unilateral renal agenesis, cleft lip or palate and dental agenesis",
+   "Offer genetic counselling with testing of ANOS1, FGFR1 and other associated genes",
+   "Coordinate multidisciplinary endocrinology, fertility and clinical genetics care with psychological support"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "kallmann_syndrome-pathway",
+   "title": "Kallmann syndrome (hypogonadotropic hypogonadism + anosmia): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A form of congenital hypogonadotropic hypogonadism combined with impaired or absent sense of smell (anosmia or hyposmia)",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Features suggesting an expanding pituitary or hypothalamic mass rather than a congenital defect",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Basal luteinising hormone, follicle-stimulating hormone and sex steroid measurement, Formal or structured assessment of the sense of smell, Pituitary and hypothalamic MRI, which may show olfactory bulb hypoplasia or aplasia"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Replace sex steroids, with testosterone in males and oestrogen-progestogen in females, to induce and maintain secondary sexual characteristics and bone health"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing delayed puberty to constitutional delay and missing a genuine congenital deficiency"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of kallmann syndrome (hypogonadotropic hypogonadism + anosmia)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "kallmann_syndrome-matrix",
+   "title": "Kallmann syndrome (hypogonadotropic hypogonadism + anosmia): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A form of congenital hypogonadotropic hypogonadism combined with impaired or absent sense of smell (anosmia or hyposmia)",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "During development, gonadotropin-releasing hormone (GnRH) neurons originate in the olfactory placode and migrate along the olfactory nerve fibres to reach the hypothalamus. In Kallmann syndrome, mutations affecting the genes that guide this migration disrupt both the olfactory pathway and the arrival of GnRH neurons in the hypothalamus. The resulting deficiency of hypothalamic GnRH leads to reduced pituitary secretion of luteinising and follicle-stimulating hormones and consequent hypogonadism, while the shared developmental defect explains the coexisting impairment of smell.",
-    "additionalDifferentials": [
-      "Normosmic congenital hypogonadotropic hypogonadism",
-      "Constitutional delay of growth and puberty",
-      "Functional hypogonadotropic hypogonadism from illness, stress or excessive exercise",
-      "Hyperprolactinaemia or other pituitary lesions suppressing gonadotropins",
-      "Primary (hypergonadotropic) gonadal failure"
+    [
+     "Key Investigations",
+     "Basal luteinising hormone, follicle-stimulating hormone and sex steroid measurement, Formal or structured assessment of the sense",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Basal luteinising hormone, follicle-stimulating hormone and sex steroid measurement",
-      "Formal or structured assessment of the sense of smell",
-      "Pituitary and hypothalamic MRI, which may show olfactory bulb hypoplasia or aplasia",
-      "Molecular genetic testing of ANOS1, FGFR1 and other associated genes",
-      "Renal imaging and screening for associated midline or skeletal anomalies"
+    [
+     "Primary Differentials",
+     "Normosmic congenital hypogonadotropic hypogonadism, Constitutional delay of growth and puberty, Functional hypogonadotropic",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Features suggesting an expanding pituitary or hypothalamic mass rather than a congenital defect",
-      "Associated anomalies such as renal agenesis or midline defects requiring dedicated evaluation",
-      "Absence of any pubertal progression by the expected age warranting prompt endocrine assessment",
-      "Signs of broader pituitary hormone deficiency indicating combined hypopituitarism"
+    [
+     "Management Strategy",
+     "Replace sex steroids, with testosterone in males and oestrogen-progestogen in females, to induce and maintain secondary sexual",
+     "Core treatment modality"
     ],
-    "prognosis": "With appropriate hormone replacement, secondary sexual characteristics and bone health can be maintained, and fertility is frequently achievable with gonadotropin or pulsatile GnRH therapy; a minority experience reversal of the hypogonadism.",
-    "pitfalls": [
-      "Attributing delayed puberty to constitutional delay and missing a genuine congenital deficiency",
-      "Failing to test the sense of smell, which is a key discriminating clinical feature",
-      "Overlooking associated anomalies such as unilateral renal agenesis",
-      "Assuming infertility is irreversible rather than treatable with gonadotropin therapy"
-    ],
-    "references": [
-      "Williams Textbook of Endocrinology",
-      "Nelson Textbook of Pediatrics"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Replace sex steroids, with testosterone in males and oestrogen-progestogen in females, to induce and maintain secondary sexual characteristics and bone health",
-      "Induce fertility when desired with gonadotropin therapy or pulsatile GnRH",
-      "Monitor and optimise bone mineral density given the hypogonadism",
-      "Screen for associated anomalies such as unilateral renal agenesis, cleft lip or palate and dental agenesis",
-      "Offer genetic counselling with testing of ANOS1, FGFR1 and other associated genes",
-      "Coordinate multidisciplinary endocrinology, fertility and clinical genetics care with psychological support"
+    [
+     "Clinical Pitfall",
+     "Attributing delayed puberty to constitutional delay and missing a genuine congenital deficiency",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for kallmann syndrome (hypogonadotropic hypogonadism + anosmia)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "kallmann-syndrome-real-image",
+   "title": "Kallmann syndrome (hypogonadotropic hypogonadism + anosmia): Diagnostic Endocrine Cross-Sectional Imaging",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
+   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
+   "annotations": [
+    {
+     "label": "Gland Morphology",
+     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
+    },
+    {
+     "label": "Focal Lesions",
+     "description": "Nodularity, adenoma attenuation, and washout dynamics."
+    },
+    {
+     "label": "Surrounding Structures",
+     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+    }
+   ]
+  }
+ ]
 }

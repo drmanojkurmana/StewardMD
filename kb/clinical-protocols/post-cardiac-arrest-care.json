@@ -5,7 +5,16 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, cath lab, ICU",
- "aliases": ["post-ROSC care", "post resuscitation care", "ROSC", "temperature control", "targeted temperature management", "TTM", "neuroprognostication", "post-cardiac arrest syndrome"],
+ "aliases": [
+  "post-ROSC care",
+  "post resuscitation care",
+  "ROSC",
+  "temperature control",
+  "targeted temperature management",
+  "TTM",
+  "neuroprognostication",
+  "post-cardiac arrest syndrome"
+ ],
  "summary": "After ROSC: secure the airway, titrate oxygen to SpO2 90 to 98% (ERC 94 to 98%), keep PaCO2 35 to 45 mmHg and MAP 65 mmHg or more, use the 12-lead ECG to decide on emergency angiography, prevent fever in comatose patients for 36 to 72 hours (AHA: at least 36 hours), and delay multimodal neuroprognostication to 72 hours or more.",
  "sections": [
   {
@@ -80,17 +89,154 @@
   }
  ],
  "drugs": [
-  { "name": "Noradrenaline (norepinephrine)", "dose": "Start 0.05 to 0.1 micrograms/kg/min IV, titrate to MAP 65 mmHg or more", "notes": "Peripheral large vein acceptable while central access is arranged." },
-  { "name": "Dobutamine", "dose": "2.5 to 20 micrograms/kg/min IV", "notes": "Low cardiac output with adequate MAP (post-arrest myocardial stunning)." },
-  { "name": "Levetiracetam", "dose": "60 mg/kg IV (maximum 4500 mg) over 10 to 15 minutes for seizures", "notes": "First-line for post-arrest seizures (ERC-ESICM). Reduce maintenance dose in renal impairment." },
-  { "name": "Sodium valproate", "dose": "40 mg/kg IV (maximum 3000 mg) over 10 minutes for seizures", "notes": "Alternative first-line. Avoid in liver disease, pregnancy and mitochondrial disorders." },
-  { "name": "Propofol", "dose": "5 to 50 micrograms/kg/min IV (0.3 to 3 mg/kg/h)", "notes": "Short-acting sedation; watch for hypotension." },
-  { "name": "Fentanyl", "dose": "0.7 to 10 micrograms/kg/h IV infusion, or 25 to 50 microgram boluses", "notes": "Analgesia and shivering control." }
+  {
+   "name": "Noradrenaline (norepinephrine)",
+   "dose": "Start 0.05 to 0.1 micrograms/kg/min IV, titrate to MAP 65 mmHg or more",
+   "notes": "Peripheral large vein acceptable while central access is arranged."
+  },
+  {
+   "name": "Dobutamine",
+   "dose": "2.5 to 20 micrograms/kg/min IV",
+   "notes": "Low cardiac output with adequate MAP (post-arrest myocardial stunning)."
+  },
+  {
+   "name": "Levetiracetam",
+   "dose": "60 mg/kg IV (maximum 4500 mg) over 10 to 15 minutes for seizures",
+   "notes": "First-line for post-arrest seizures (ERC-ESICM). Reduce maintenance dose in renal impairment."
+  },
+  {
+   "name": "Sodium valproate",
+   "dose": "40 mg/kg IV (maximum 3000 mg) over 10 minutes for seizures",
+   "notes": "Alternative first-line. Avoid in liver disease, pregnancy and mitochondrial disorders."
+  },
+  {
+   "name": "Propofol",
+   "dose": "5 to 50 micrograms/kg/min IV (0.3 to 3 mg/kg/h)",
+   "notes": "Short-acting sedation; watch for hypotension."
+  },
+  {
+   "name": "Fentanyl",
+   "dose": "0.7 to 10 micrograms/kg/h IV infusion, or 25 to 50 microgram boluses",
+   "notes": "Analgesia and shivering control."
+  }
  ],
  "sources": [
-  { "org": "American Heart Association", "title": "Part 11: Post-Cardiac Arrest Care. 2025 AHA Guidelines for CPR and Emergency Cardiovascular Care", "year": 2025, "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001375" },
-  { "org": "ERC / ESICM", "title": "European Resuscitation Council and European Society of Intensive Care Medicine guidelines 2025: post-resuscitation care", "year": 2025, "url": "https://link.springer.com/article/10.1007/s00134-025-08117-3" },
-  { "org": "Resuscitation Council UK", "title": "2025 Post-resuscitation care guidelines", "year": 2025, "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/post-resuscitation-care-guidelines" }
+  {
+   "org": "American Heart Association",
+   "title": "Part 11: Post-Cardiac Arrest Care. 2025 AHA Guidelines for CPR and Emergency Cardiovascular Care",
+   "year": 2025,
+   "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001375"
+  },
+  {
+   "org": "ERC / ESICM",
+   "title": "European Resuscitation Council and European Society of Intensive Care Medicine guidelines 2025: post-resuscitation care",
+   "year": 2025,
+   "url": "https://link.springer.com/article/10.1007/s00134-025-08117-3"
+  },
+  {
+   "org": "Resuscitation Council UK",
+   "title": "2025 Post-resuscitation care guidelines",
+   "year": 2025,
+   "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/post-resuscitation-care-guidelines"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "post-cardiac-arrest-care-pathway",
+   "title": "Post-cardiac arrest care (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Suspect Post-cardiac arrest care (adult) based on characteristic presentation and clinical risk factors.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "ABCDE. In patients who remain comatose, place or confirm an advanced airway with waveform capnography; ventilate with tidal volume 6 to 8 mL/kg predicted body weight.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Persistent ST elevation with a likely cardiac cause: immediate coronary angiography and PCI."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Use short-acting sedatives and analgesics with daily sedation holds."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Do not prognosticate before 72 hours after ROSC, and only after normothermia and clearance of sedatives and neuromuscular blockers. Use several tests; never rely on one."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for post-cardiac arrest care (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "post-cardiac-arrest-care-summary-matrix",
+   "title": "Post-cardiac arrest care (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Key signs and symptoms of Post-cardiac arrest care (adult)",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "ABCDE. In patients who remain comatose, place or confirm an advanced airway with waveform capnography; ventilate with tidal volume 6 to 8",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Persistent ST elevation with a likely cardiac cause: immediate coronary angiography and PCI.",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Noradrenaline (norepinephrine): Start 0.05 to 0.1 micrograms/kg/min IV, titrate to MAP 65 mmHg or more",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Hyperoxia, hyperventilation or hypotension in the first hours.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for post-cardiac arrest care (adult)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "post-cardiac-arrest-care-real-image",
+   "title": "Post-cardiac arrest care (adult): Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

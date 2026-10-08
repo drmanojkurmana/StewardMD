@@ -1,77 +1,172 @@
 {
-  "id": "compartment_syndrome",
-  "name": "Acute compartment syndrome",
-  "aliases": [
-    "compartment syndrome",
-    "acute limb compartment syndrome",
-    "ACS"
+ "id": "compartment_syndrome",
+ "name": "Acute compartment syndrome",
+ "aliases": [
+  "compartment syndrome",
+  "acute limb compartment syndrome",
+  "ACS"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal / Orthopaedics",
+ "specialty": "Orthopaedics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Apley & Solomon's System of Orthopaedics and Fractures",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A surgical emergency in which raised pressure within a closed fascial compartment compromises tissue perfusion, leading to muscle and nerve ischaemia if not decompressed",
+   "The cardinal early sign is pain out of proportion to the injury and pain on passive stretch of the muscles in the affected compartment",
+   "It commonly follows tibial or forearm fractures, crush injuries, reperfusion after vascular occlusion, or tight casts and dressings",
+   "Pulselessness, pallor, paraesthesia, and paralysis are late signs; waiting for them risks irreversible damage, so a normal distal pulse does not exclude the diagnosis",
+   "Diagnosis is largely clinical, supported by compartment pressure measurement, particularly in the unconscious or unreliable patient",
+   "Definitive treatment is urgent open fasciotomy to decompress all involved compartments; casts and constrictive dressings must be split or removed immediately while preparing for surgery",
+   "The limb should be kept at heart level rather than elevated, and hypotension avoided, to maintain perfusion pressure",
+   "Missed or delayed treatment leads to Volkmann's ischaemic contracture, permanent deficit, rhabdomyolysis with renal failure, and potential limb loss"
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal / Orthopaedics",
-  "specialty": "Orthopaedics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Apley & Solomon's System of Orthopaedics and Fractures",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A surgical emergency in which raised pressure within a closed fascial compartment compromises tissue perfusion, leading to muscle and nerve ischaemia if not decompressed",
-      "The cardinal early sign is pain out of proportion to the injury and pain on passive stretch of the muscles in the affected compartment",
-      "It commonly follows tibial or forearm fractures, crush injuries, reperfusion after vascular occlusion, or tight casts and dressings",
-      "Pulselessness, pallor, paraesthesia, and paralysis are late signs; waiting for them risks irreversible damage, so a normal distal pulse does not exclude the diagnosis",
-      "Diagnosis is largely clinical, supported by compartment pressure measurement, particularly in the unconscious or unreliable patient",
-      "Definitive treatment is urgent open fasciotomy to decompress all involved compartments; casts and constrictive dressings must be split or removed immediately while preparing for surgery",
-      "The limb should be kept at heart level rather than elevated, and hypotension avoided, to maintain perfusion pressure",
-      "Missed or delayed treatment leads to Volkmann's ischaemic contracture, permanent deficit, rhabdomyolysis with renal failure, and potential limb loss"
+  "pathophysiology": "Acute compartment syndrome develops when pressure within a non-compliant osseofascial compartment rises to a level that impedes capillary perfusion. Bleeding, oedema, or external constriction increases compartment volume or reduces its capacity, raising interstitial pressure until it exceeds the perfusion gradient. Ischaemia increases capillary permeability, causing further oedema in a vicious cycle. Muscle and nerve are highly sensitive to ischaemia; sustained pressure elevation for a few hours produces irreversible necrosis. Because arterial inflow pressure is much higher than compartment pressure, distal pulses are often preserved until very late, making them an unreliable marker.",
+  "additionalDifferentials": [
+   "Arterial injury or acute limb ischaemia",
+   "Deep vein thrombosis",
+   "Cellulitis or necrotising soft-tissue infection",
+   "Fracture or crush injury pain without compartment syndrome",
+   "Peripheral nerve injury",
+   "Chronic exertional compartment syndrome (in the appropriate setting)"
+  ],
+  "additionalInvestigations": [
+   "Serial clinical assessment of pain, pain on passive stretch, and neurology (the mainstay)",
+   "Intracompartmental pressure measurement, especially in obtunded or equivocal cases",
+   "Serum creatine kinase and renal function to detect rhabdomyolysis",
+   "Urinalysis for myoglobinuria",
+   "Radiographs to characterise any underlying fracture"
+  ],
+  "redFlags": [
+   "SURGICAL EMERGENCY: pain out of proportion and pain on passive stretch mandate urgent fasciotomy without delay",
+   "Do not wait for pulselessness or paralysis, which are late and indicate established ischaemic damage",
+   "Rapidly rising creatine kinase with dark urine indicating rhabdomyolysis and impending renal failure",
+   "A tense, swollen limb after fracture, crush, or reperfusion, or beneath a tight cast"
+  ],
+  "prognosis": "With prompt fasciotomy, usually within a few hours of onset, muscle and nerve can recover fully; delay leads to ischaemic necrosis, fixed contracture (Volkmann's), sensory and motor deficits, chronic pain, and in severe cases systemic complications or amputation.",
+  "pitfalls": [
+   "Relying on the presence of distal pulses to exclude compartment syndrome",
+   "Attributing escalating analgesic requirements solely to the fracture rather than recognising ischaemic pain",
+   "Elevating the limb above heart level, which reduces perfusion pressure",
+   "Delaying decompression pending imaging or specialist availability, allowing irreversible injury"
+  ],
+  "references": [
+   "Apley & Solomon's System of Orthopaedics and Fractures"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Immediately split or remove all constrictive casts, dressings and circumferential bandages and place the limb at the level of the heart rather than elevating it",
+   "Perform urgent open fasciotomy to decompress every involved compartment as the definitive treatment, without waiting for late ischaemic signs",
+   "Provide adequate analgesia and supplemental oxygen while ensuring pain control does not mask evolving deterioration",
+   "Give intravenous fluid resuscitation and monitor renal function and urine for myoglobinuria to detect and treat rhabdomyolysis",
+   "Undertake serial clinical assessment of pain, pain on passive stretch and neurology, supported by intracompartmental pressure measurement in obtunded or equivocal patients",
+   "Refer urgently to orthopaedic or general surgery, addressing the underlying cause such as fracture stabilisation or reperfusion injury",
+   "Plan delayed wound closure or skin grafting once compartment swelling subsides"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "compartment_syndrome-pathway",
+   "title": "Acute compartment syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A surgical emergency in which raised pressure within a closed fascial compartment compromises tissue perfusion, leading to muscle and nerve ischaemia if not decompressed",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: SURGICAL EMERGENCY: pain out of proportion and pain on passive stretch mandate urgent fasciotomy without delay",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Serial clinical assessment of pain, pain on passive stretch, and neurology (the mainstay), Intracompartmental pressure measurement, especially in obtunded or equivocal cases, Serum creatine kinase and renal function to"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Immediately split or remove all constrictive casts, dressings and circumferential bandages and place the limb at the level of the heart rather than elevating it"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Relying on the presence of distal pulses to exclude compartment syndrome"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of acute compartment syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "compartment_syndrome-matrix",
+   "title": "Acute compartment syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A surgical emergency in which raised pressure within a closed fascial compartment compromises tissue perfusion, leading to muscle",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Acute compartment syndrome develops when pressure within a non-compliant osseofascial compartment rises to a level that impedes capillary perfusion. Bleeding, oedema, or external constriction increases compartment volume or reduces its capacity, raising interstitial pressure until it exceeds the perfusion gradient. Ischaemia increases capillary permeability, causing further oedema in a vicious cycle. Muscle and nerve are highly sensitive to ischaemia; sustained pressure elevation for a few hours produces irreversible necrosis. Because arterial inflow pressure is much higher than compartment pressure, distal pulses are often preserved until very late, making them an unreliable marker.",
-    "additionalDifferentials": [
-      "Arterial injury or acute limb ischaemia",
-      "Deep vein thrombosis",
-      "Cellulitis or necrotising soft-tissue infection",
-      "Fracture or crush injury pain without compartment syndrome",
-      "Peripheral nerve injury",
-      "Chronic exertional compartment syndrome (in the appropriate setting)"
+    [
+     "Key Investigations",
+     "Serial clinical assessment of pain, pain on passive stretch, and neurology (the mainstay), Intracompartmental pressure",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Serial clinical assessment of pain, pain on passive stretch, and neurology (the mainstay)",
-      "Intracompartmental pressure measurement, especially in obtunded or equivocal cases",
-      "Serum creatine kinase and renal function to detect rhabdomyolysis",
-      "Urinalysis for myoglobinuria",
-      "Radiographs to characterise any underlying fracture"
+    [
+     "Primary Differentials",
+     "Arterial injury or acute limb ischaemia, Deep vein thrombosis, Cellulitis or necrotising soft-tissue infection",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "SURGICAL EMERGENCY: pain out of proportion and pain on passive stretch mandate urgent fasciotomy without delay",
-      "Do not wait for pulselessness or paralysis, which are late and indicate established ischaemic damage",
-      "Rapidly rising creatine kinase with dark urine indicating rhabdomyolysis and impending renal failure",
-      "A tense, swollen limb after fracture, crush, or reperfusion, or beneath a tight cast"
+    [
+     "Management Strategy",
+     "Immediately split or remove all constrictive casts, dressings and circumferential bandages and place the limb at the level of the",
+     "Core treatment modality"
     ],
-    "prognosis": "With prompt fasciotomy, usually within a few hours of onset, muscle and nerve can recover fully; delay leads to ischaemic necrosis, fixed contracture (Volkmann's), sensory and motor deficits, chronic pain, and in severe cases systemic complications or amputation.",
-    "pitfalls": [
-      "Relying on the presence of distal pulses to exclude compartment syndrome",
-      "Attributing escalating analgesic requirements solely to the fracture rather than recognising ischaemic pain",
-      "Elevating the limb above heart level, which reduces perfusion pressure",
-      "Delaying decompression pending imaging or specialist availability, allowing irreversible injury"
-    ],
-    "references": [
-      "Apley & Solomon's System of Orthopaedics and Fractures"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Immediately split or remove all constrictive casts, dressings and circumferential bandages and place the limb at the level of the heart rather than elevating it",
-      "Perform urgent open fasciotomy to decompress every involved compartment as the definitive treatment, without waiting for late ischaemic signs",
-      "Provide adequate analgesia and supplemental oxygen while ensuring pain control does not mask evolving deterioration",
-      "Give intravenous fluid resuscitation and monitor renal function and urine for myoglobinuria to detect and treat rhabdomyolysis",
-      "Undertake serial clinical assessment of pain, pain on passive stretch and neurology, supported by intracompartmental pressure measurement in obtunded or equivocal patients",
-      "Refer urgently to orthopaedic or general surgery, addressing the underlying cause such as fracture stabilisation or reperfusion injury",
-      "Plan delayed wound closure or skin grafting once compartment swelling subsides"
+    [
+     "Clinical Pitfall",
+     "Relying on the presence of distal pulses to exclude compartment syndrome",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for acute compartment syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "compartment-syndrome-real-image",
+   "title": "Acute compartment syndrome: Diagnostic Musculoskeletal Radiograph",
+   "type": "xray",
+   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
+   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
+   "annotations": [
+    {
+     "label": "Cortical Margins",
+     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
+    },
+    {
+     "label": "Trabecular Architecture",
+     "description": "Medullary bone density, lucencies, and subchondral mineralization."
+    },
+    {
+     "label": "Joint Articulation",
+     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+    }
+   ]
+  }
+ ]
 }

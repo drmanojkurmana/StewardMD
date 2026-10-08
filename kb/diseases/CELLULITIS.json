@@ -208,5 +208,100 @@
       "importedAt": "2026-06-29T13:34:16Z",
       "contentHash": "h3b2f7e90"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "cellulitis-dx-algo",
+      "title": "Cellulitis: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Non-purulent cellulitis (no associated abscess, focal purulence, or drainage) is a rapidly spreading, diffuse process typically due to S. pyogenes, often accompanied by lymphangitis and fever; purulent cellulitis arising from a focal",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Purple/hemorrhagic bullae, ecchymosis, or cutaneous anesthesia suggesting loss of vascular integrity and possible necrotizing fasciitis or myonecrosis (Harrison 22e p.1095)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Gram stain and culture of drainage, open wound, or identifiable portal of entry when present, for definitive etiology (Harrison 22e p.1095), Needle aspiration of the leading edge or punch biopsy of involved skin in"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Harrison distinguishes non-purulent cellulitis (diffuse, spreading, typically streptococcal, often with lymphangitis and fever) from purulent cellulitis (associated with a focal lesion such as furuncle, carbuncle,"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Routine cultures of intact cellulitic skin are frequently negative (positive in only ~20% even with aspiration or biopsy), so negative cultures do NOT exclude cellulitis (Harrison 22e p.1095)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for cellulitis."
+    }
+  ],
+  "tables": [
+    {
+      "id": "cellulitis-matrix",
+      "title": "Cellulitis: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Non-purulent cellulitis (no associated abscess, focal purulence, or drainage) is a rapidly spreading, diffuse process typically",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Gram stain and culture of drainage, open wound, or identifiable portal of entry when present, for definitive etiology (Harrison",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Erysipelas (S. pyogenes superficial dermal/lymphatic infection with sharply demarcated, raised, indurated borders and abrupt",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Purple/hemorrhagic bullae, ecchymosis, or cutaneous anesthesia suggesting loss of vascular integrity and possible necrotizing",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Routine cultures of intact cellulitic skin are frequently negative (positive in only ~20% even with aspiration or biopsy), so",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for cellulitis."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "cellulitis-real-image",
+      "title": "Cellulitis: Clinical Cutaneous Dermatology Photograph",
+      "type": "diagram",
+      "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
+      "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
+      "annotations": [
+        {
+          "label": "Primary Lesions",
+          "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
+        },
+        {
+          "label": "Demarcation & Margins",
+          "description": "Edge borders, surrounding erythema, and epidermal surface changes."
+        },
+        {
+          "label": "Anatomical Distribution",
+          "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+        }
+      ]
+    }
+  ]
 }

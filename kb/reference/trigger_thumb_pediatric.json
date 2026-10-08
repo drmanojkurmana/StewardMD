@@ -1,77 +1,172 @@
 {
-  "id": "trigger_thumb_pediatric",
-  "name": "Paediatric trigger thumb",
-  "aliases": [
-    "congenital trigger thumb",
-    "paediatric trigger thumb",
-    "pollex flexus",
-    "Notta's node",
-    "stenosing tenosynovitis of the thumb in children"
+ "id": "trigger_thumb_pediatric",
+ "name": "Paediatric trigger thumb",
+ "aliases": [
+  "congenital trigger thumb",
+  "paediatric trigger thumb",
+  "pollex flexus",
+  "Notta's node",
+  "stenosing tenosynovitis of the thumb in children"
+ ],
+ "class": "non_infective",
+ "system": "Paediatric orthopaedics",
+ "specialty": "Paediatric Hand & Upper Limb",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Green's Operative Hand Surgery / Tachdjian's Pediatric Orthopaedics",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Presents as a fixed or catching flexion of the interphalangeal joint of the thumb, usually noticed in toddlers rather than at birth, so it is frequently not truly congenital",
+   "A palpable nodule (Notta's node) is felt at the level of the A1 pulley over the volar aspect of the metacarpophalangeal region, representing thickening of the flexor pollicis longus tendon",
+   "The underlying problem is a size mismatch or stenosis between the flexor pollicis longus tendon and the A1 pulley, restricting smooth tendon gliding",
+   "Unlike in adults, painful triggering is uncommon; the usual presentation is a thumb held flexed at the interphalangeal joint, sometimes discovered when the child cannot straighten it",
+   "It is often bilateral, so both thumbs should be examined; the differential includes a congenital clasped thumb and a thumb-in-palm deformity",
+   "Many cases resolve spontaneously, particularly in the youngest children, so a period of observation with or without stretching and splinting is reasonable",
+   "Persistent fixed deformity is treated by surgical release of the A1 pulley, which is highly effective and durable"
   ],
-  "class": "non_infective",
-  "system": "Paediatric orthopaedics",
-  "specialty": "Paediatric Hand & Upper Limb",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Green's Operative Hand Surgery / Tachdjian's Pediatric Orthopaedics",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Presents as a fixed or catching flexion of the interphalangeal joint of the thumb, usually noticed in toddlers rather than at birth, so it is frequently not truly congenital",
-      "A palpable nodule (Notta's node) is felt at the level of the A1 pulley over the volar aspect of the metacarpophalangeal region, representing thickening of the flexor pollicis longus tendon",
-      "The underlying problem is a size mismatch or stenosis between the flexor pollicis longus tendon and the A1 pulley, restricting smooth tendon gliding",
-      "Unlike in adults, painful triggering is uncommon; the usual presentation is a thumb held flexed at the interphalangeal joint, sometimes discovered when the child cannot straighten it",
-      "It is often bilateral, so both thumbs should be examined; the differential includes a congenital clasped thumb and a thumb-in-palm deformity",
-      "Many cases resolve spontaneously, particularly in the youngest children, so a period of observation with or without stretching and splinting is reasonable",
-      "Persistent fixed deformity is treated by surgical release of the A1 pulley, which is highly effective and durable"
+  "pathophysiology": "The condition arises from a mismatch between the flexor pollicis longus tendon and the mouth of the A1 pulley at the base of the thumb. Thickening of the tendon, forming the palpable Notta's node, together with relative narrowing of the pulley, impedes smooth gliding so that the thumb catches or becomes locked in flexion at the interphalangeal joint. Because the deformity is commonly absent at birth and only appears later in infancy or early childhood, it is regarded as a developmental or acquired stenosing tenosynovitis rather than a truly congenital anomaly.",
+  "additionalDifferentials": [
+   "Congenital clasped thumb (an extensor deficiency)",
+   "Thumb-in-palm deformity, for example in cerebral palsy or spasticity",
+   "Trigger finger affecting the other digits",
+   "Arthrogryposis with thumb contracture",
+   "Post-traumatic tendon or joint injury",
+   "A skeletal anomaly limiting interphalangeal joint extension"
+  ],
+  "additionalInvestigations": [
+   "Clinical diagnosis by palpation of Notta's node and demonstration of fixed interphalangeal flexion or triggering",
+   "Examination of both thumbs given frequent bilaterality, and of the other digits",
+   "Assessment for associated neurological or arthrogrypotic conditions when the presentation is atypical",
+   "Radiographs only if a bony abnormality or an alternative diagnosis is suspected",
+   "Serial documentation of passive and active interphalangeal extension to track spontaneous resolution"
+  ],
+  "redFlags": [
+   "A thumb that cannot be passively extended, suggesting a fixed contracture rather than simple triggering",
+   "Atypical features suggesting a neurological or syndromic cause",
+   "Multiple-digit involvement raising suspicion of a metabolic storage disorder (such as a mucopolysaccharidosis)"
+  ],
+  "prognosis": "A substantial proportion resolve spontaneously, especially when identified in infancy; for thumbs that remain fixed, release of the A1 pulley gives reliable and lasting correction with a low complication rate.",
+  "pitfalls": [
+   "Assuming the condition is present from birth and labelling it congenital, when it usually appears later",
+   "Confusing it with a congenital clasped thumb, which is an extensor problem",
+   "Operating too early, before allowing a reasonable chance of spontaneous resolution",
+   "Injuring the digital nerves, which lie close to the A1 pulley, during release"
+  ],
+  "references": [
+   "Green's Operative Hand Surgery",
+   "Tachdjian's Pediatric Orthopaedics"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Offer initial observation, as many cases resolve spontaneously, particularly in the youngest children",
+   "Trial passive interphalangeal extension stretching and night extension splinting during the observation period",
+   "Reserve open release of the stenosed A1 pulley for thumbs that remain fixed in flexion or fail to resolve",
+   "Examine both thumbs and the other digits at each review given the frequent bilaterality",
+   "Document serial passive and active interphalangeal extension to track spontaneous resolution",
+   "Refer to a paediatric hand surgeon when the thumb stays locked or persistent triggering impairs function"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "trigger_thumb_pediatric-pathway",
+   "title": "Paediatric trigger thumb: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Presents as a fixed or catching flexion of the interphalangeal joint of the thumb, usually noticed in toddlers rather than at birth, so it is frequently not truly congenital",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: A thumb that cannot be passively extended, suggesting a fixed contracture rather than simple triggering",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Clinical diagnosis by palpation of Notta's node and demonstration of fixed interphalangeal flexion or triggering, Examination of both thumbs given frequent bilaterality, and of the other digits, Assessment for associated"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Offer initial observation, as many cases resolve spontaneously, particularly in the youngest children"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Assuming the condition is present from birth and labelling it congenital, when it usually appears later"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of paediatric trigger thumb."
+  }
+ ],
+ "tables": [
+  {
+   "id": "trigger_thumb_pediatric-matrix",
+   "title": "Paediatric trigger thumb: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Presents as a fixed or catching flexion of the interphalangeal joint of the thumb, usually noticed in toddlers rather than at",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "The condition arises from a mismatch between the flexor pollicis longus tendon and the mouth of the A1 pulley at the base of the thumb. Thickening of the tendon, forming the palpable Notta's node, together with relative narrowing of the pulley, impedes smooth gliding so that the thumb catches or becomes locked in flexion at the interphalangeal joint. Because the deformity is commonly absent at birth and only appears later in infancy or early childhood, it is regarded as a developmental or acquired stenosing tenosynovitis rather than a truly congenital anomaly.",
-    "additionalDifferentials": [
-      "Congenital clasped thumb (an extensor deficiency)",
-      "Thumb-in-palm deformity, for example in cerebral palsy or spasticity",
-      "Trigger finger affecting the other digits",
-      "Arthrogryposis with thumb contracture",
-      "Post-traumatic tendon or joint injury",
-      "A skeletal anomaly limiting interphalangeal joint extension"
+    [
+     "Key Investigations",
+     "Clinical diagnosis by palpation of Notta's node and demonstration of fixed interphalangeal flexion or triggering, Examination of",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Clinical diagnosis by palpation of Notta's node and demonstration of fixed interphalangeal flexion or triggering",
-      "Examination of both thumbs given frequent bilaterality, and of the other digits",
-      "Assessment for associated neurological or arthrogrypotic conditions when the presentation is atypical",
-      "Radiographs only if a bony abnormality or an alternative diagnosis is suspected",
-      "Serial documentation of passive and active interphalangeal extension to track spontaneous resolution"
+    [
+     "Primary Differentials",
+     "Congenital clasped thumb (an extensor deficiency), Thumb-in-palm deformity, for example in cerebral palsy or spasticity, Trigger",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "A thumb that cannot be passively extended, suggesting a fixed contracture rather than simple triggering",
-      "Atypical features suggesting a neurological or syndromic cause",
-      "Multiple-digit involvement raising suspicion of a metabolic storage disorder (such as a mucopolysaccharidosis)"
+    [
+     "Management Strategy",
+     "Offer initial observation, as many cases resolve spontaneously, particularly in the youngest children",
+     "Core treatment modality"
     ],
-    "prognosis": "A substantial proportion resolve spontaneously, especially when identified in infancy; for thumbs that remain fixed, release of the A1 pulley gives reliable and lasting correction with a low complication rate.",
-    "pitfalls": [
-      "Assuming the condition is present from birth and labelling it congenital, when it usually appears later",
-      "Confusing it with a congenital clasped thumb, which is an extensor problem",
-      "Operating too early, before allowing a reasonable chance of spontaneous resolution",
-      "Injuring the digital nerves, which lie close to the A1 pulley, during release"
-    ],
-    "references": [
-      "Green's Operative Hand Surgery",
-      "Tachdjian's Pediatric Orthopaedics"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Offer initial observation, as many cases resolve spontaneously, particularly in the youngest children",
-      "Trial passive interphalangeal extension stretching and night extension splinting during the observation period",
-      "Reserve open release of the stenosed A1 pulley for thumbs that remain fixed in flexion or fail to resolve",
-      "Examine both thumbs and the other digits at each review given the frequent bilaterality",
-      "Document serial passive and active interphalangeal extension to track spontaneous resolution",
-      "Refer to a paediatric hand surgeon when the thumb stays locked or persistent triggering impairs function"
+    [
+     "Clinical Pitfall",
+     "Assuming the condition is present from birth and labelling it congenital, when it usually appears later",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for paediatric trigger thumb."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "trigger-thumb-pediatric-real-image",
+   "title": "Paediatric trigger thumb: Diagnostic Musculoskeletal Radiograph",
+   "type": "xray",
+   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
+   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
+   "annotations": [
+    {
+     "label": "Cortical Margins",
+     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
+    },
+    {
+     "label": "Trabecular Architecture",
+     "description": "Medullary bone density, lucencies, and subchondral mineralization."
+    },
+    {
+     "label": "Joint Articulation",
+     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+    }
+   ]
+  }
+ ]
 }

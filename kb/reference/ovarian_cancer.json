@@ -1,82 +1,177 @@
 {
-  "id": "ovarian_cancer",
-  "name": "Ovarian Cancer",
-  "aliases": [
-    "carcinoma of the ovary",
-    "ovarian carcinoma",
-    "epithelial ovarian cancer",
-    "ovarian malignancy"
+ "id": "ovarian_cancer",
+ "name": "Ovarian Cancer",
+ "aliases": [
+  "carcinoma of the ovary",
+  "ovarian carcinoma",
+  "epithelial ovarian cancer",
+  "ovarian malignancy"
+ ],
+ "class": "non_infective",
+ "system": "Obstetrics / Gynaecology",
+ "specialty": "Obstetrics & Gynaecology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Williams Obstetrics / Novak's Gynecology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Most cases are epithelial in origin, and high-grade serous carcinoma, now thought largely to arise from the distal fallopian tube, is the commonest and most aggressive subtype",
+   "Symptoms are frequently vague and persistent, including abdominal bloating, early satiety, pelvic or abdominal discomfort, and urinary urgency, so a high index of suspicion is needed particularly in women over fifty",
+   "Because there is no reliable early symptom or screening test, the majority present with advanced intra-abdominal disease",
+   "Inherited mutations in BRCA1 and BRCA2 and Lynch syndrome markedly increase lifetime risk and should prompt genetic assessment",
+   "A pelvic mass combined with ascites and a raised CA-125 in a postmenopausal woman is highly suggestive and warrants specialist referral",
+   "Management centres on maximal cytoreductive surgery to remove all visible tumour combined with platinum-based chemotherapy",
+   "Risk assessment tools that combine ultrasound features, menopausal status, and CA-125 help triage women to gynaecological oncology",
+   "Germ cell and sex cord-stromal tumours are important in younger women and can produce hormonal effects or tumour markers such as AFP, hCG, or inhibin"
   ],
-  "class": "non_infective",
-  "system": "Obstetrics / Gynaecology",
-  "specialty": "Obstetrics & Gynaecology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Williams Obstetrics / Novak's Gynecology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Most cases are epithelial in origin, and high-grade serous carcinoma, now thought largely to arise from the distal fallopian tube, is the commonest and most aggressive subtype",
-      "Symptoms are frequently vague and persistent, including abdominal bloating, early satiety, pelvic or abdominal discomfort, and urinary urgency, so a high index of suspicion is needed particularly in women over fifty",
-      "Because there is no reliable early symptom or screening test, the majority present with advanced intra-abdominal disease",
-      "Inherited mutations in BRCA1 and BRCA2 and Lynch syndrome markedly increase lifetime risk and should prompt genetic assessment",
-      "A pelvic mass combined with ascites and a raised CA-125 in a postmenopausal woman is highly suggestive and warrants specialist referral",
-      "Management centres on maximal cytoreductive surgery to remove all visible tumour combined with platinum-based chemotherapy",
-      "Risk assessment tools that combine ultrasound features, menopausal status, and CA-125 help triage women to gynaecological oncology",
-      "Germ cell and sex cord-stromal tumours are important in younger women and can produce hormonal effects or tumour markers such as AFP, hCG, or inhibin"
+  "pathophysiology": "High-grade serous ovarian cancer is now believed to originate frequently from serous tubal intraepithelial carcinoma in the fimbrial end of the fallopian tube, with early TP53 mutation and genomic instability, often in the context of homologous recombination deficiency from BRCA pathway defects. Malignant cells exfoliate and disseminate across the peritoneal cavity, seeding the omentum, bowel serosa, and diaphragm, producing ascites through increased vascular permeability and lymphatic obstruction. Other histological types arise from ovarian surface epithelium, germ cells, or sex cord-stromal cells with distinct biology.",
+  "additionalDifferentials": [
+   "Benign ovarian cyst or endometrioma",
+   "Functional ovarian cyst",
+   "Uterine fibroids or other pelvic mass",
+   "Metastatic gastrointestinal cancer to the ovary (Krukenberg tumour)",
+   "Tubo-ovarian abscess",
+   "Primary peritoneal or fallopian tube carcinoma"
+  ],
+  "additionalInvestigations": [
+   "Transvaginal and transabdominal pelvic ultrasound to characterise the mass",
+   "Serum CA-125 and, in younger women, germ cell markers (AFP, hCG, LDH) and inhibin",
+   "CT of the abdomen and pelvis to assess disease extent and operability",
+   "Risk-of-malignancy scoring combining ultrasound, menopausal status and tumour markers",
+   "Histological confirmation from surgical specimen or image-guided biopsy where surgery is not upfront",
+   "Genetic testing for BRCA and mismatch repair mutations"
+  ],
+  "redFlags": [
+   "Rapidly accumulating ascites with breathlessness or abdominal distension",
+   "Bowel obstruction from peritoneal or omental disease",
+   "Marked weight loss and cachexia suggesting advanced malignancy",
+   "Pleural effusion indicating spread beyond the abdomen",
+   "A complex solid-cystic pelvic mass with markedly elevated CA-125 in a postmenopausal woman"
+  ],
+  "prognosis": "Overall survival is dominated by stage at presentation and by the completeness of surgical cytoreduction; disease confined to the ovary is potentially curable, whereas widespread peritoneal disease carries a poorer outlook despite platinum sensitivity. Tumour grade, histological subtype, and BRCA/homologous recombination status influence response to chemotherapy and to maintenance agents such as PARP inhibitors, and relapse is common in advanced disease.",
+  "pitfalls": [
+   "Dismissing persistent bloating and abdominal symptoms in older women as functional bowel disturbance",
+   "Assuming a normal CA-125 excludes malignancy, as it can be normal in early or non-serous tumours",
+   "Rupturing or morcellating an undiagnosed malignant cyst during surgery",
+   "Failing to refer suspicious masses to a gynaecological oncology centre before intervention",
+   "Overlooking germ cell tumours in young women by not checking age-appropriate tumour markers"
+  ],
+  "references": [
+   "Williams Obstetrics",
+   "Novak's Gynecology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Maximal cytoreductive surgery aiming to remove all visible tumour, performed either upfront or as interval debulking after neoadjuvant chemotherapy",
+   "Platinum-based chemotherapy, typically carboplatin with paclitaxel, as the backbone of systemic treatment",
+   "PARP-inhibitor maintenance for BRCA-mutated or homologous-recombination-deficient disease, with anti-angiogenic bevacizumab in selected cases",
+   "Serial CA-125 alongside cross-sectional imaging to monitor treatment response and detect relapse",
+   "Genetic testing for BRCA and mismatch-repair mutations, with cascade family testing and risk-reducing salpingo-oophorectomy for carriers",
+   "Manage symptomatic ascites with paracentesis and provide early palliative and supportive care in advanced disease",
+   "Coordinate care through a gynaecological-oncology multidisciplinary team"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "ovarian_cancer-pathway",
+   "title": "Ovarian Cancer: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Most cases are epithelial in origin, and high-grade serous carcinoma, now thought largely to arise from the distal fallopian tube, is the commonest and most aggressive subtype",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapidly accumulating ascites with breathlessness or abdominal distension",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Transvaginal and transabdominal pelvic ultrasound to characterise the mass, Serum CA-125 and, in younger women, germ cell markers (AFP, hCG, LDH) and inhibin, CT of the abdomen and pelvis to assess disease extent and"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Maximal cytoreductive surgery aiming to remove all visible tumour, performed either upfront or as interval debulking after neoadjuvant chemotherapy"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Dismissing persistent bloating and abdominal symptoms in older women as functional bowel disturbance"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of ovarian cancer."
+  }
+ ],
+ "tables": [
+  {
+   "id": "ovarian_cancer-matrix",
+   "title": "Ovarian Cancer: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Most cases are epithelial in origin, and high-grade serous carcinoma, now thought largely to arise from the distal fallopian",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "High-grade serous ovarian cancer is now believed to originate frequently from serous tubal intraepithelial carcinoma in the fimbrial end of the fallopian tube, with early TP53 mutation and genomic instability, often in the context of homologous recombination deficiency from BRCA pathway defects. Malignant cells exfoliate and disseminate across the peritoneal cavity, seeding the omentum, bowel serosa, and diaphragm, producing ascites through increased vascular permeability and lymphatic obstruction. Other histological types arise from ovarian surface epithelium, germ cells, or sex cord-stromal cells with distinct biology.",
-    "additionalDifferentials": [
-      "Benign ovarian cyst or endometrioma",
-      "Functional ovarian cyst",
-      "Uterine fibroids or other pelvic mass",
-      "Metastatic gastrointestinal cancer to the ovary (Krukenberg tumour)",
-      "Tubo-ovarian abscess",
-      "Primary peritoneal or fallopian tube carcinoma"
+    [
+     "Key Investigations",
+     "Transvaginal and transabdominal pelvic ultrasound to characterise the mass, Serum CA-125 and, in younger women, germ cell markers",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Transvaginal and transabdominal pelvic ultrasound to characterise the mass",
-      "Serum CA-125 and, in younger women, germ cell markers (AFP, hCG, LDH) and inhibin",
-      "CT of the abdomen and pelvis to assess disease extent and operability",
-      "Risk-of-malignancy scoring combining ultrasound, menopausal status and tumour markers",
-      "Histological confirmation from surgical specimen or image-guided biopsy where surgery is not upfront",
-      "Genetic testing for BRCA and mismatch repair mutations"
+    [
+     "Primary Differentials",
+     "Benign ovarian cyst or endometrioma, Functional ovarian cyst, Uterine fibroids or other pelvic mass",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rapidly accumulating ascites with breathlessness or abdominal distension",
-      "Bowel obstruction from peritoneal or omental disease",
-      "Marked weight loss and cachexia suggesting advanced malignancy",
-      "Pleural effusion indicating spread beyond the abdomen",
-      "A complex solid-cystic pelvic mass with markedly elevated CA-125 in a postmenopausal woman"
+    [
+     "Management Strategy",
+     "Maximal cytoreductive surgery aiming to remove all visible tumour, performed either upfront or as interval debulking after",
+     "Core treatment modality"
     ],
-    "prognosis": "Overall survival is dominated by stage at presentation and by the completeness of surgical cytoreduction; disease confined to the ovary is potentially curable, whereas widespread peritoneal disease carries a poorer outlook despite platinum sensitivity. Tumour grade, histological subtype, and BRCA/homologous recombination status influence response to chemotherapy and to maintenance agents such as PARP inhibitors, and relapse is common in advanced disease.",
-    "pitfalls": [
-      "Dismissing persistent bloating and abdominal symptoms in older women as functional bowel disturbance",
-      "Assuming a normal CA-125 excludes malignancy, as it can be normal in early or non-serous tumours",
-      "Rupturing or morcellating an undiagnosed malignant cyst during surgery",
-      "Failing to refer suspicious masses to a gynaecological oncology centre before intervention",
-      "Overlooking germ cell tumours in young women by not checking age-appropriate tumour markers"
-    ],
-    "references": [
-      "Williams Obstetrics",
-      "Novak's Gynecology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Maximal cytoreductive surgery aiming to remove all visible tumour, performed either upfront or as interval debulking after neoadjuvant chemotherapy",
-      "Platinum-based chemotherapy, typically carboplatin with paclitaxel, as the backbone of systemic treatment",
-      "PARP-inhibitor maintenance for BRCA-mutated or homologous-recombination-deficient disease, with anti-angiogenic bevacizumab in selected cases",
-      "Serial CA-125 alongside cross-sectional imaging to monitor treatment response and detect relapse",
-      "Genetic testing for BRCA and mismatch-repair mutations, with cascade family testing and risk-reducing salpingo-oophorectomy for carriers",
-      "Manage symptomatic ascites with paracentesis and provide early palliative and supportive care in advanced disease",
-      "Coordinate care through a gynaecological-oncology multidisciplinary team"
+    [
+     "Clinical Pitfall",
+     "Dismissing persistent bloating and abdominal symptoms in older women as functional bowel disturbance",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for ovarian cancer."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "ovarian-cancer-real-image",
+   "title": "Ovarian Cancer: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

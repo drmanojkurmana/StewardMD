@@ -1,70 +1,165 @@
 {
-  "id": "caput_succedaneum",
-  "name": "Caput succedaneum",
-  "aliases": [
-    "caput"
+ "id": "caput_succedaneum",
+ "name": "Caput succedaneum",
+ "aliases": [
+  "caput"
+ ],
+ "class": "non_infective",
+ "system": "Neonatal",
+ "specialty": "Neonatology / Paediatrics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Neonatology reference texts",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A diffuse, boggy swelling of the fetal scalp caused by pressure during delivery",
+   "The swelling crosses suture lines, distinguishing it from a cephalohaematoma",
+   "It is present at birth and typically resolves within a few days",
+   "It may be associated with overlying bruising or petechiae and, with vacuum delivery, a chignon",
+   "Because it lies above the periosteum and crosses sutures, it does not cause the significant blood loss seen in subgaleal haemorrhage",
+   "Management is expectant, with reassurance to parents"
   ],
-  "class": "non_infective",
-  "system": "Neonatal",
-  "specialty": "Neonatology / Paediatrics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Neonatology reference texts",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A diffuse, boggy swelling of the fetal scalp caused by pressure during delivery",
-      "The swelling crosses suture lines, distinguishing it from a cephalohaematoma",
-      "It is present at birth and typically resolves within a few days",
-      "It may be associated with overlying bruising or petechiae and, with vacuum delivery, a chignon",
-      "Because it lies above the periosteum and crosses sutures, it does not cause the significant blood loss seen in subgaleal haemorrhage",
-      "Management is expectant, with reassurance to parents"
+  "pathophysiology": "Caput succedaneum is oedema of the scalp soft tissues, in the subcutaneous layer above the periosteum, produced by pressure from the cervix and birth canal (or a vacuum cup) against the presenting part. This pressure impedes venous and lymphatic return, causing serosanguinous fluid to accumulate diffusely in the scalp. Because the fluid is superficial and not confined by periosteal attachments, it crosses suture lines and resolves quickly as the fluid is reabsorbed.",
+  "additionalDifferentials": [
+   "Cephalohaematoma",
+   "Subgaleal haemorrhage",
+   "Cranial meningocele or encephalocele",
+   "Scalp oedema from other causes"
+  ],
+  "additionalInvestigations": [
+   "Clinical diagnosis from the diffuse swelling crossing sutures",
+   "Assessment for associated bruising and jaundice risk",
+   "Distinguishing it from subgaleal haemorrhage, which is more diffuse, fluctuant and dangerous",
+   "No imaging usually required"
+  ],
+  "redFlags": [
+   "A rapidly enlarging, fluctuant swelling suggesting subgaleal haemorrhage",
+   "Signs of significant blood loss or shock",
+   "A swelling with a bony defect or pulsation suggesting a congenital lesion",
+   "Excessive jaundice from resorption"
+  ],
+  "prognosis": "Caput succedaneum is benign and resolves spontaneously within days without sequelae.",
+  "pitfalls": [
+   "Mistaking a dangerous subgaleal haemorrhage for benign caput",
+   "Confusing it with a cephalohaematoma (which is confined by sutures)",
+   "Overlooking associated jaundice from resorbing blood",
+   "Unnecessary investigation of a clearly benign swelling"
+  ],
+  "references": [
+   "Neonatology reference texts (standard reference)",
+   "Paediatric examination references (standard reference)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Expectant management, as the scalp oedema reabsorbs spontaneously over a few days",
+   "Parental reassurance and explanation of the benign, self-limiting nature",
+   "Routine observation of the swelling for expected resolution, distinguishing it from a cephalohaematoma and subgaleal haemorrhage",
+   "Monitoring for and management of neonatal jaundice arising from resorption of associated bruising",
+   "Standard newborn care without imaging or intervention",
+   "Escalation if the swelling is unexpectedly fluctuant, enlarging or accompanied by haemodynamic instability, suggesting subgaleal haemorrhage"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "caput_succedaneum-pathway",
+   "title": "Caput succedaneum: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A diffuse, boggy swelling of the fetal scalp caused by pressure during delivery",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: A rapidly enlarging, fluctuant swelling suggesting subgaleal haemorrhage",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Clinical diagnosis from the diffuse swelling crossing sutures, Assessment for associated bruising and jaundice risk, Distinguishing it from subgaleal haemorrhage, which is more diffuse, fluctuant and dangerous"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Expectant management, as the scalp oedema reabsorbs spontaneously over a few days"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking a dangerous subgaleal haemorrhage for benign caput"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of caput succedaneum."
+  }
+ ],
+ "tables": [
+  {
+   "id": "caput_succedaneum-matrix",
+   "title": "Caput succedaneum: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A diffuse, boggy swelling of the fetal scalp caused by pressure during delivery",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Caput succedaneum is oedema of the scalp soft tissues, in the subcutaneous layer above the periosteum, produced by pressure from the cervix and birth canal (or a vacuum cup) against the presenting part. This pressure impedes venous and lymphatic return, causing serosanguinous fluid to accumulate diffusely in the scalp. Because the fluid is superficial and not confined by periosteal attachments, it crosses suture lines and resolves quickly as the fluid is reabsorbed.",
-    "additionalDifferentials": [
-      "Cephalohaematoma",
-      "Subgaleal haemorrhage",
-      "Cranial meningocele or encephalocele",
-      "Scalp oedema from other causes"
+    [
+     "Key Investigations",
+     "Clinical diagnosis from the diffuse swelling crossing sutures, Assessment for associated bruising and jaundice risk,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Clinical diagnosis from the diffuse swelling crossing sutures",
-      "Assessment for associated bruising and jaundice risk",
-      "Distinguishing it from subgaleal haemorrhage, which is more diffuse, fluctuant and dangerous",
-      "No imaging usually required"
+    [
+     "Primary Differentials",
+     "Cephalohaematoma, Subgaleal haemorrhage, Cranial meningocele or encephalocele",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "A rapidly enlarging, fluctuant swelling suggesting subgaleal haemorrhage",
-      "Signs of significant blood loss or shock",
-      "A swelling with a bony defect or pulsation suggesting a congenital lesion",
-      "Excessive jaundice from resorption"
+    [
+     "Management Strategy",
+     "Expectant management, as the scalp oedema reabsorbs spontaneously over a few days",
+     "Core treatment modality"
     ],
-    "prognosis": "Caput succedaneum is benign and resolves spontaneously within days without sequelae.",
-    "pitfalls": [
-      "Mistaking a dangerous subgaleal haemorrhage for benign caput",
-      "Confusing it with a cephalohaematoma (which is confined by sutures)",
-      "Overlooking associated jaundice from resorbing blood",
-      "Unnecessary investigation of a clearly benign swelling"
-    ],
-    "references": [
-      "Neonatology reference texts (standard reference)",
-      "Paediatric examination references (standard reference)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Expectant management, as the scalp oedema reabsorbs spontaneously over a few days",
-      "Parental reassurance and explanation of the benign, self-limiting nature",
-      "Routine observation of the swelling for expected resolution, distinguishing it from a cephalohaematoma and subgaleal haemorrhage",
-      "Monitoring for and management of neonatal jaundice arising from resorption of associated bruising",
-      "Standard newborn care without imaging or intervention",
-      "Escalation if the swelling is unexpectedly fluctuant, enlarging or accompanied by haemodynamic instability, suggesting subgaleal haemorrhage"
+    [
+     "Clinical Pitfall",
+     "Mistaking a dangerous subgaleal haemorrhage for benign caput",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for caput succedaneum."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "caput-succedaneum-real-image",
+   "title": "Caput succedaneum: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

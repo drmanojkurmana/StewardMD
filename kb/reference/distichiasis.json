@@ -1,72 +1,167 @@
 {
-  "id": "distichiasis",
-  "name": "Distichiasis",
-  "aliases": [
-    "accessory eyelash row"
+ "id": "distichiasis",
+ "name": "Distichiasis",
+ "aliases": [
+  "accessory eyelash row"
+ ],
+ "class": "non_infective",
+ "system": "Eye / Orbit and adnexa",
+ "specialty": "Ophthalmology / Oculoplastics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Kanski's Clinical Ophthalmology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "An abnormal additional row of eyelashes emerging from the meibomian gland orifices along the posterior lid margin",
+   "These aberrant lashes are often finer and less pigmented and may rub on the cornea causing irritation",
+   "It may be congenital, sometimes inherited, or acquired following chronic lid inflammation or cicatrisation",
+   "The congenital form is associated with lymphoedema-distichiasis syndrome linked to FOXC2 mutations",
+   "It should be distinguished from trichiasis, in which normally sited lashes are misdirected",
+   "Treatment targets the aberrant follicles with cryotherapy, electrolysis or lid-splitting procedures"
   ],
-  "class": "non_infective",
-  "system": "Eye / Orbit and adnexa",
-  "specialty": "Ophthalmology / Oculoplastics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Kanski's Clinical Ophthalmology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "An abnormal additional row of eyelashes emerging from the meibomian gland orifices along the posterior lid margin",
-      "These aberrant lashes are often finer and less pigmented and may rub on the cornea causing irritation",
-      "It may be congenital, sometimes inherited, or acquired following chronic lid inflammation or cicatrisation",
-      "The congenital form is associated with lymphoedema-distichiasis syndrome linked to FOXC2 mutations",
-      "It should be distinguished from trichiasis, in which normally sited lashes are misdirected",
-      "Treatment targets the aberrant follicles with cryotherapy, electrolysis or lid-splitting procedures"
+  "pathophysiology": "Distichiasis arises when meibomian glands, which are modified sebaceous glands, differentiate abnormally into complete pilosebaceous units that produce lashes from the posterior lid margin. In the congenital form this reflects a developmental abnormality, classically with FOXC2 mutations in lymphoedema-distichiasis syndrome, whereas acquired distichiasis follows metaplasia of the glands after chronic inflammation or cicatrising conjunctival disease. The posteriorly placed lashes can abrade the ocular surface, causing irritation and, if chronic, corneal damage.",
+  "additionalDifferentials": [
+   "Trichiasis",
+   "Entropion",
+   "Epiblepharon",
+   "Cicatricial conjunctival disease",
+   "Chronic blepharitis"
+  ],
+  "additionalInvestigations": [
+   "Slit-lamp examination identifying lashes from meibomian orifices",
+   "Assessment of corneal involvement with fluorescein",
+   "Family history and examination for limb lymphoedema (lymphoedema-distichiasis syndrome)",
+   "Genetic evaluation where a hereditary syndrome is suspected",
+   "Assessment for underlying cicatrising disease in acquired cases"
+  ],
+  "redFlags": [
+   "Corneal abrasion or scarring threatening vision",
+   "Associated lymphoedema suggesting a genetic syndrome",
+   "Progressive cicatrising conjunctival disease",
+   "Extensive or recurrent aberrant lashes"
+  ],
+  "prognosis": "Vision is preserved with appropriate follicle-directed treatment, though recurrence can occur; the associated lymphoedema-distichiasis syndrome carries its own systemic implications.",
+  "pitfalls": [
+   "Confusing distichiasis with trichiasis, which differ in origin and treatment",
+   "Missing lymphoedema-distichiasis syndrome and its cardiovascular associations",
+   "Overlooking corneal damage",
+   "Simple epilation alone, which is followed by regrowth"
+  ],
+  "references": [
+   "Kanski's Clinical Ophthalmology",
+   "Oculoplastic surgery references (standard reference)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Definitive treatment directed at the aberrant follicles with cryotherapy, electrolysis, radiofrequency ablation or lid-splitting with cryoablation",
+   "Ocular surface protection with lubricant drops and ointment, plus epilation or a bandage contact lens for temporary relief of corneal irritation",
+   "Slit-lamp surveillance with fluorescein staining for corneal abrasion and keratopathy",
+   "Identify and treat any underlying cicatrising conjunctival disease driving acquired distichiasis",
+   "Oculoplastic referral for surgical follicle ablation, with examination for limb lymphoedema suggesting lymphoedema-distichiasis syndrome",
+   "Genetic counselling and FOXC2 evaluation where hereditary lymphoedema-distichiasis syndrome is suspected"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "distichiasis-pathway",
+   "title": "Distichiasis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "An abnormal additional row of eyelashes emerging from the meibomian gland orifices along the posterior lid margin",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Corneal abrasion or scarring threatening vision",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Slit-lamp examination identifying lashes from meibomian orifices, Assessment of corneal involvement with fluorescein, Family history and examination for limb lymphoedema (lymphoedema-distichiasis syndrome)"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Definitive treatment directed at the aberrant follicles with cryotherapy, electrolysis, radiofrequency ablation or lid-splitting with cryoablation"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Confusing distichiasis with trichiasis, which differ in origin and treatment"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of distichiasis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "distichiasis-matrix",
+   "title": "Distichiasis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "An abnormal additional row of eyelashes emerging from the meibomian gland orifices along the posterior lid margin",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Distichiasis arises when meibomian glands, which are modified sebaceous glands, differentiate abnormally into complete pilosebaceous units that produce lashes from the posterior lid margin. In the congenital form this reflects a developmental abnormality, classically with FOXC2 mutations in lymphoedema-distichiasis syndrome, whereas acquired distichiasis follows metaplasia of the glands after chronic inflammation or cicatrising conjunctival disease. The posteriorly placed lashes can abrade the ocular surface, causing irritation and, if chronic, corneal damage.",
-    "additionalDifferentials": [
-      "Trichiasis",
-      "Entropion",
-      "Epiblepharon",
-      "Cicatricial conjunctival disease",
-      "Chronic blepharitis"
+    [
+     "Key Investigations",
+     "Slit-lamp examination identifying lashes from meibomian orifices, Assessment of corneal involvement with fluorescein, Family",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Slit-lamp examination identifying lashes from meibomian orifices",
-      "Assessment of corneal involvement with fluorescein",
-      "Family history and examination for limb lymphoedema (lymphoedema-distichiasis syndrome)",
-      "Genetic evaluation where a hereditary syndrome is suspected",
-      "Assessment for underlying cicatrising disease in acquired cases"
+    [
+     "Primary Differentials",
+     "Trichiasis, Entropion, Epiblepharon",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Corneal abrasion or scarring threatening vision",
-      "Associated lymphoedema suggesting a genetic syndrome",
-      "Progressive cicatrising conjunctival disease",
-      "Extensive or recurrent aberrant lashes"
+    [
+     "Management Strategy",
+     "Definitive treatment directed at the aberrant follicles with cryotherapy, electrolysis, radiofrequency ablation or lid-splitting",
+     "Core treatment modality"
     ],
-    "prognosis": "Vision is preserved with appropriate follicle-directed treatment, though recurrence can occur; the associated lymphoedema-distichiasis syndrome carries its own systemic implications.",
-    "pitfalls": [
-      "Confusing distichiasis with trichiasis, which differ in origin and treatment",
-      "Missing lymphoedema-distichiasis syndrome and its cardiovascular associations",
-      "Overlooking corneal damage",
-      "Simple epilation alone, which is followed by regrowth"
-    ],
-    "references": [
-      "Kanski's Clinical Ophthalmology",
-      "Oculoplastic surgery references (standard reference)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Definitive treatment directed at the aberrant follicles with cryotherapy, electrolysis, radiofrequency ablation or lid-splitting with cryoablation",
-      "Ocular surface protection with lubricant drops and ointment, plus epilation or a bandage contact lens for temporary relief of corneal irritation",
-      "Slit-lamp surveillance with fluorescein staining for corneal abrasion and keratopathy",
-      "Identify and treat any underlying cicatrising conjunctival disease driving acquired distichiasis",
-      "Oculoplastic referral for surgical follicle ablation, with examination for limb lymphoedema suggesting lymphoedema-distichiasis syndrome",
-      "Genetic counselling and FOXC2 evaluation where hereditary lymphoedema-distichiasis syndrome is suspected"
+    [
+     "Clinical Pitfall",
+     "Confusing distichiasis with trichiasis, which differ in origin and treatment",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for distichiasis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "distichiasis-real-image",
+   "title": "Distichiasis: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

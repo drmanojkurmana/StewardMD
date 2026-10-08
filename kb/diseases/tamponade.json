@@ -133,5 +133,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "hacb76a42"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "tamponade-dx-algo",
+      "title": "Cardiac tamponade: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Tamponade is fundamentally a clinical diagnosis in an unstable patient; the textbook triad is hypotension, raised jugular venous pressure with neck-vein distention, and quiet/muffled heart sounds (p.630).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Hypotension with tachycardia in a chest-pain patient mandates rapid evaluation for tamponade as one of the immediately life-threatening causes (p.147)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Pericardiocentesis under echocardiographic guidance, with pericardial fluid sent for biochemical, cytologic, and microbiologic analysis (p.630, p.1432), Pericardial fluid cytology when malignancy is suspected (diagnostic"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Differentiate from top mimics: Constrictive pericarditis (also impairs cardiac filling via a thick, noncompliant pericardium; on the differential for dyspnea) (p.1938), Acute right ventricular dysfunction (can mimic the elevated JVP /"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Do not delay decompression in a hemodynamically unstable patient waiting for confirmatory tests; tamponade is a clinical/emergency diagnosis and instability requires immediate drainage (p.147, p.630)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for cardiac tamponade."
+    }
+  ],
+  "tables": [
+    {
+      "id": "tamponade-matrix",
+      "title": "Cardiac tamponade: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Tamponade is fundamentally a clinical diagnosis in an unstable patient; the textbook triad is hypotension, raised jugular venous",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Pericardiocentesis under echocardiographic guidance, with pericardial fluid sent for biochemical, cytologic, and microbiologic",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Constrictive pericarditis (also impairs cardiac filling via a thick, noncompliant pericardium; on the differential for dyspnea)",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Hypotension with tachycardia in a chest-pain patient mandates rapid evaluation for tamponade as one of the immediately",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Do not delay decompression in a hemodynamically unstable patient waiting for confirmatory tests; tamponade is a",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for cardiac tamponade."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "tamponade-real-image",
+      "title": "Cardiac tamponade: 12-Lead Diagnostic Electrocardiogram",
+      "type": "ecg",
+      "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
+      "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
+      "annotations": [
+        {
+          "label": "Conduction & Axis",
+          "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
+        },
+        {
+          "label": "Repolarization",
+          "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
+        },
+        {
+          "label": "Rhythm & Intervals",
+          "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+        }
+      ]
+    }
+  ]
 }

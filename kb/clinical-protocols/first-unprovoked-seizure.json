@@ -5,7 +5,16 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, first seizure clinic, outpatient",
- "aliases": ["first seizure", "first fit", "new onset seizure", "single seizure", "unprovoked seizure", "new-onset epilepsy", "convulsion", "blackout with jerking"],
+ "aliases": [
+  "first seizure",
+  "first fit",
+  "new onset seizure",
+  "single seizure",
+  "unprovoked seizure",
+  "new-onset epilepsy",
+  "convulsion",
+  "blackout with jerking"
+ ],
  "summary": "Confirm an epileptic seizure, exclude provoking causes (glucose, sodium, calcium, alcohol, drugs, infection), do an ECG and neuroimaging, arrange EEG and specialist review within 2 weeks, give driving and safety advice, and start antiseizure medication only when recurrence risk is high or the patient chooses.",
  "sections": [
   {
@@ -86,16 +95,150 @@
   }
  ],
  "drugs": [
-  { "name": "Levetiracetam", "dose": "250 to 500 mg orally twice daily, increase every 2 weeks as needed, max 1500 mg twice daily", "notes": "Reduce dose in renal impairment. Mood and behavioural adverse effects." },
-  { "name": "Lamotrigine", "dose": "25 mg orally once daily for 14 days, 50 mg once daily for 14 days, then increase by up to 100 mg every 1 to 2 weeks to 100 to 200 mg daily", "notes": "Rash risk with fast titration; use the slower schedule when taken with valproate." },
-  { "name": "Thiamine", "dose": "100 mg IV before glucose", "notes": "Alcohol use, malnutrition." },
-  { "name": "Dextrose 50%", "dose": "50 mL IV for glucose below 60 mg/dL (3.3 mmol/L)", "notes": "Recheck glucose after 15 minutes." }
+  {
+   "name": "Levetiracetam",
+   "dose": "250 to 500 mg orally twice daily, increase every 2 weeks as needed, max 1500 mg twice daily",
+   "notes": "Reduce dose in renal impairment. Mood and behavioural adverse effects."
+  },
+  {
+   "name": "Lamotrigine",
+   "dose": "25 mg orally once daily for 14 days, 50 mg once daily for 14 days, then increase by up to 100 mg every 1 to 2 weeks to 100 to 200 mg daily",
+   "notes": "Rash risk with fast titration; use the slower schedule when taken with valproate."
+  },
+  {
+   "name": "Thiamine",
+   "dose": "100 mg IV before glucose",
+   "notes": "Alcohol use, malnutrition."
+  },
+  {
+   "name": "Dextrose 50%",
+   "dose": "50 mL IV for glucose below 60 mg/dL (3.3 mmol/L)",
+   "notes": "Recheck glucose after 15 minutes."
+  }
  ],
  "sources": [
-  { "org": "AAN / AES", "title": "Evidence-based guideline: Management of an unprovoked first seizure in adults", "year": 2015, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4409581/" },
-  { "org": "NICE", "title": "Epilepsies in children, young people and adults (NG217): diagnosis and assessment of epilepsy", "year": 2022, "url": "https://www.nice.org.uk/guidance/ng217/chapter/1-Diagnosis-and-assessment-of-epilepsy" },
-  { "org": "NICE", "title": "Epilepsies in children, young people and adults (NG217): principles of treatment, when to start antiseizure medication", "year": 2022, "url": "https://www.nice.org.uk/guidance/ng217/chapter/4-Principles-of-treatment-safety-monitoring-and-withdrawal" },
-  { "org": "DVLA (UK)", "title": "Neurological disorders: assessing fitness to drive", "year": 2025, "url": "https://www.gov.uk/guidance/neurological-disorders-assessing-fitness-to-drive" }
+  {
+   "org": "AAN / AES",
+   "title": "Evidence-based guideline: Management of an unprovoked first seizure in adults",
+   "year": 2015,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4409581/"
+  },
+  {
+   "org": "NICE",
+   "title": "Epilepsies in children, young people and adults (NG217): diagnosis and assessment of epilepsy",
+   "year": 2022,
+   "url": "https://www.nice.org.uk/guidance/ng217/chapter/1-Diagnosis-and-assessment-of-epilepsy"
+  },
+  {
+   "org": "NICE",
+   "title": "Epilepsies in children, young people and adults (NG217): principles of treatment, when to start antiseizure medication",
+   "year": 2022,
+   "url": "https://www.nice.org.uk/guidance/ng217/chapter/4-Principles-of-treatment-safety-monitoring-and-withdrawal"
+  },
+  {
+   "org": "DVLA (UK)",
+   "title": "Neurological disorders: assessing fitness to drive",
+   "year": 2025,
+   "url": "https://www.gov.uk/guidance/neurological-disorders-assessing-fitness-to-drive"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "first-unprovoked-seizure-pathway",
+   "title": "First unprovoked seizure (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Take a detailed eyewitness history and use video if available: warning, stiffening then jerking, duration, lateral tongue bite, incontinence, prolonged post-ictal confusion.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Seizure lasting 5 minutes or more, or recurrent without recovery: treat as status epilepticus (see that protocol).",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Bloods: glucose, sodium, calcium, magnesium, renal and liver function, CBC; pregnancy test in women who could be pregnant; alcohol and toxicology when relevant."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Recurrence risk is highest in the first 2 years (21 to 45%) and is higher with a prior brain insult, epileptiform EEG, significant imaging abnormality or a seizure during sleep (AAN/AES 2015)."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Labelling convulsive syncope or an arrhythmia as epilepsy: always do an ECG."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for first unprovoked seizure (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "first-unprovoked-seizure-summary-matrix",
+   "title": "First unprovoked seizure (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Take a detailed eyewitness history and use video if available: warning, stiffening then jerking, duration, lateral tongue bite,",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Seizure lasting 5 minutes or more, or recurrent without recovery: treat as status epilepticus (see that protocol).",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Bloods: glucose, sodium, calcium, magnesium, renal and liver function, CBC; pregnancy test in women who could be pregnant; alcohol and",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Levetiracetam: 250 to 500 mg orally twice daily, increase every 2 weeks as needed, max 1500 mg twice daily",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Labelling convulsive syncope or an arrhythmia as epilepsy: always do an ECG.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for first unprovoked seizure (adult)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "first-unprovoked-seizure-real-image",
+   "title": "First unprovoked seizure (adult): Diagnostic Head Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
+   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
+   "annotations": [
+    {
+     "label": "Cerebral Parenchyma",
+     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+    },
+    {
+     "label": "Extra-Axial Spaces",
+     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+    }
+   ]
+  }
+ ]
 }

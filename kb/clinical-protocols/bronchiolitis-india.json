@@ -6,7 +6,18 @@
  "basis": "india",
  "counterpart": "bronchiolitis",
  "setting": "Primary care, emergency department, paediatric ward, PICU",
- "aliases": ["acute bronchiolitis", "viral bronchiolitis", "RSV", "RSV bronchiolitis", "wheezy infant", "HFNC bronchiolitis", "CPAP bronchiolitis", "nebulised hypertonic saline", "palivizumab", "IAP STG bronchiolitis"],
+ "aliases": [
+  "acute bronchiolitis",
+  "viral bronchiolitis",
+  "RSV",
+  "RSV bronchiolitis",
+  "wheezy infant",
+  "HFNC bronchiolitis",
+  "CPAP bronchiolitis",
+  "nebulised hypertonic saline",
+  "palivizumab",
+  "IAP STG bronchiolitis"
+ ],
  "summary": "Bronchiolitis is a clinical diagnosis in children under 2 years with coryza followed by cough, fast breathing, recession and wheeze or crackles. Care is supportive: nasal saline and suction, feeding support, oxygen below SpO2 90% (92% under 6 weeks or with comorbidity), and CPAP or high-flow for impending failure; antibiotics, steroids and routine bronchodilators have no role.",
  "sections": [
   {
@@ -82,12 +93,127 @@
   }
  ],
  "drugs": [
-  { "name": "Oxygen", "dose": "To keep SpO2 at or above 90% (over 6 weeks) or 92% (under 6 weeks or comorbidity)", "notes": "CPAP or high-flow nasal cannula for impending respiratory failure." },
-  { "name": "Nebulised adrenaline (1:1000)", "dose": "0.1 to 0.3 mL/kg per dose", "notes": "Rescue only; inconsistent, short-lived benefit." },
-  { "name": "Palivizumab (prophylaxis)", "dose": "15 mg/kg IM every 30 days during the RSV season, up to 5 doses", "notes": "High-risk infants under 12 months; no role in acute illness." }
+  {
+   "name": "Oxygen",
+   "dose": "To keep SpO2 at or above 90% (over 6 weeks) or 92% (under 6 weeks or comorbidity)",
+   "notes": "CPAP or high-flow nasal cannula for impending respiratory failure."
+  },
+  {
+   "name": "Nebulised adrenaline (1:1000)",
+   "dose": "0.1 to 0.3 mL/kg per dose",
+   "notes": "Rescue only; inconsistent, short-lived benefit."
+  },
+  {
+   "name": "Palivizumab (prophylaxis)",
+   "dose": "15 mg/kg IM every 30 days during the RSV season, up to 5 doses",
+   "notes": "High-risk infants under 12 months; no role in acute illness."
+  }
  ],
  "sources": [
-  { "org": "Indian Academy of Pediatrics", "title": "IAP Standard Treatment Guidelines 2022: Bronchiolitis", "year": 2022, "url": "https://iapindia.org/pdf/Ch-027-STG-Bronchiolitis.pdf" }
+  {
+   "org": "Indian Academy of Pediatrics",
+   "title": "IAP Standard Treatment Guidelines 2022: Bronchiolitis",
+   "year": 2022,
+   "url": "https://iapindia.org/pdf/Ch-027-STG-Bronchiolitis.pdf"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "bronchiolitis-india-pathway",
+   "title": "Bronchiolitis (India, IAP) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Coryza for 1 to 3 days, then persistent cough, tachypnoea with or without chest recession, and wheeze and/or crackles in a child under 2 years (usually under 1 year, peak 3 to 6 months).",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Persistent respiratory rate above 60/min, grunting or recession.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "No routine blood tests or chest X-ray. Use pulse oximetry to detect hypoxia and guide admission."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Clear the nose with saline drops and gentle suction (suction the upper airway for apnoea, secretions or feeding difficulty); nurse propped up with the head end elevated; paracetamol for fever."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Prescribing antibiotics, steroids or repeated salbutamol nebulisation without response."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for bronchiolitis (india, iap)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "bronchiolitis-india-summary-matrix",
+   "title": "Bronchiolitis (India, IAP) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Coryza for 1 to 3 days, then persistent cough, tachypnoea with or without chest recession, and wheeze and/or crackles in a child under 2",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Persistent respiratory rate above 60/min, grunting or recession.",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "No routine blood tests or chest X-ray. Use pulse oximetry to detect hypoxia and guide admission.",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Oxygen: To keep SpO2 at or above 90% (over 6 weeks) or 92% (under 6 weeks or comorbidity)",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Prescribing antibiotics, steroids or repeated salbutamol nebulisation without response.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for bronchiolitis (india, iap)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "bronchiolitis-india-real-image",
+   "title": "Bronchiolitis (India, IAP): Diagnostic Chest Radiograph",
+   "type": "xray",
+   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
+   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
+   "annotations": [
+    {
+     "label": "Parenchyma & Airspaces",
+     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
+    },
+    {
+     "label": "Bronchovascular Tree",
+     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
+    },
+    {
+     "label": "Pleural Margins",
+     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+    }
+   ]
+  }
+ ]
 }

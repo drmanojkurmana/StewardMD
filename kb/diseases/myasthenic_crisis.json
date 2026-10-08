@@ -147,5 +147,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "h700665a"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "myasthenic_crisis-dx-algo",
+      "title": "Myasthenic crisis: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Myasthenic crisis is an exacerbation of weakness severe enough to endanger life, typically with ventilatory failure from diaphragmatic and intercostal muscle weakness; by definition, ventilatory weakness requiring intubation or noninvasive",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Ventilatory failure from diaphragmatic/intercostal weakness is the life-threatening feature defining crisis; need for intubation or noninvasive ventilation to avoid intubation marks the transition from",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Repetitive nerve stimulation showing a decrement of >10% at 2-3 Hz in weak/proximal muscles supports MG; acetylcholinesterase inhibitors should be stopped 12-24 h beforehand (p.3627)., Single-fiber EMG (jitter and blocking"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Harrison distinguishes ocular MG (weakness confined to ocular muscles; if restricted for 3 years, generalization is unlikely) from generalized MG (facial, bulbar, axial, or limb involvement, occurring in ~85%). Worsening"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Failing to distinguish myasthenic crisis from cholinergic crisis (deterioration due to excessive anticholinesterase medication); the latter is now unlikely because very high cholinesterase-inhibitor doses are rarely used"
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for myasthenic crisis."
+    }
+  ],
+  "tables": [
+    {
+      "id": "myasthenic_crisis-matrix",
+      "title": "Myasthenic crisis: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Myasthenic crisis is an exacerbation of weakness severe enough to endanger life, typically with ventilatory failure from",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Repetitive nerve stimulation showing a decrement of >10% at 2-3 Hz in weak/proximal muscles supports MG; acetylcholinesterase",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Lambert-Eaton myasthenic syndrome (LEMS): presynaptic P/Q-type calcium-channel antibody disorder; proximal lower-limb weakness",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Ventilatory failure from diaphragmatic/intercostal weakness is the life-threatening feature defining crisis; need for intubation",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to distinguish myasthenic crisis from cholinergic crisis (deterioration due to excessive anticholinesterase medication);",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for myasthenic crisis."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "myasthenic-crisis-real-image",
+      "title": "Myasthenic crisis: Diagnostic Head Computed Tomography",
+      "type": "ct",
+      "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
+      "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
+      "annotations": [
+        {
+          "label": "Cerebral Parenchyma",
+          "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+        },
+        {
+          "label": "Ventricular System",
+          "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+        },
+        {
+          "label": "Extra-Axial Spaces",
+          "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+        }
+      ]
+    }
+  ]
 }

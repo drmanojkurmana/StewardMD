@@ -1,80 +1,175 @@
 {
-  "id": "vici_syndrome",
-  "name": "Vici syndrome",
-  "aliases": [
-    "immunodeficiency with cleft lip/palate, cataract, hypopigmentation and absent corpus callosum",
-    "congenital disorder of autophagy",
-    "EPG5-related disorder",
-    "EPG5"
+ "id": "vici_syndrome",
+ "name": "Vici syndrome",
+ "aliases": [
+  "immunodeficiency with cleft lip/palate, cataract, hypopigmentation and absent corpus callosum",
+  "congenital disorder of autophagy",
+  "EPG5-related disorder",
+  "EPG5"
+ ],
+ "class": "non_infective",
+ "system": "Metabolic / Genetics",
+ "specialty": "Metabolic Medicine / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Emery and Rimoin's Principles and Practice of Medical Genetics / Nelson Textbook of Paediatrics",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A severe autosomal recessive multisystem disorder and a prototypical congenital disorder of autophagy caused by biallelic variants in EPG5",
+   "The classic pentad is agenesis of the corpus callosum, cataract, cardiomyopathy, combined immunodeficiency, and cutaneous hypopigmentation",
+   "Profound developmental delay, progressive microcephaly, and failure to thrive are almost universal",
+   "Recurrent infections reflect a combined immunodeficiency affecting both cellular and humoral arms",
+   "A progressive cardiomyopathy (often dilated) is a major cause of morbidity and death",
+   "Skeletal or cardiac muscle biopsy may show a vacuolar myopathy with abnormal autophagic vacuoles",
+   "Sensorineural hearing loss and seizures are common additional features",
+   "Care is entirely supportive, addressing infections, cardiac function, feeding, and seizures, with genetic counselling for families"
   ],
-  "class": "non_infective",
-  "system": "Metabolic / Genetics",
-  "specialty": "Metabolic Medicine / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Emery and Rimoin's Principles and Practice of Medical Genetics / Nelson Textbook of Paediatrics",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A severe autosomal recessive multisystem disorder and a prototypical congenital disorder of autophagy caused by biallelic variants in EPG5",
-      "The classic pentad is agenesis of the corpus callosum, cataract, cardiomyopathy, combined immunodeficiency, and cutaneous hypopigmentation",
-      "Profound developmental delay, progressive microcephaly, and failure to thrive are almost universal",
-      "Recurrent infections reflect a combined immunodeficiency affecting both cellular and humoral arms",
-      "A progressive cardiomyopathy (often dilated) is a major cause of morbidity and death",
-      "Skeletal or cardiac muscle biopsy may show a vacuolar myopathy with abnormal autophagic vacuoles",
-      "Sensorineural hearing loss and seizures are common additional features",
-      "Care is entirely supportive, addressing infections, cardiac function, feeding, and seizures, with genetic counselling for families"
+  "pathophysiology": "Vici syndrome is caused by loss-of-function variants in EPG5, which encodes a key regulator of the late steps of autophagy, particularly the maturation of autophagosomes and their fusion with lysosomes. Defective autophagic clearance leads to accumulation of dysfunctional proteins and organelles within cells that are highly dependent on autophagy, including neurons, cardiomyocytes, skeletal myocytes, immune cells, and melanocytes. This explains the multisystem phenotype: impaired neurodevelopment with callosal agenesis, cardiomyopathy, a vacuolar myopathy, combined immunodeficiency, and defective melanin handling producing hypopigmentation. The disorder illustrates how disruption of a fundamental cellular degradation pathway produces widespread, progressive tissue dysfunction.",
+  "additionalDifferentials": [
+   "Other congenital disorders of autophagy and lysosomal disorders",
+   "Chediak-Higashi and Griscelli syndromes (hypopigmentation with immune defects)",
+   "Mitochondrial disease with cardiomyopathy and neurodegeneration",
+   "Congenital muscular dystrophies with brain involvement",
+   "Primary combined immunodeficiencies with syndromic features",
+   "Other causes of corpus callosum agenesis with multisystem disease"
+  ],
+  "additionalInvestigations": [
+   "Brain MRI to demonstrate agenesis of the corpus callosum and other malformations",
+   "Echocardiography and cardiac monitoring for cardiomyopathy",
+   "Immunological workup including lymphocyte subsets and immunoglobulins",
+   "Ophthalmological assessment for cataract",
+   "Muscle biopsy where a vacuolar myopathy is suspected",
+   "EPG5 molecular genetic testing to confirm the diagnosis"
+  ],
+  "redFlags": [
+   "Progressive heart failure from deteriorating cardiomyopathy",
+   "Overwhelming or opportunistic infection due to combined immunodeficiency",
+   "Respiratory failure or aspiration from neuromuscular weakness and feeding difficulty",
+   "Refractory seizures and neurological deterioration"
+  ],
+  "prognosis": "The prognosis is poor, with most affected children dying in early childhood from cardiac failure or infection; survival beyond a few years is uncommon.",
+  "pitfalls": [
+   "Attributing recurrent infection to isolated immunodeficiency without recognising the syndromic context",
+   "Overlooking evolving cardiomyopathy in a child labelled with a static encephalopathy",
+   "Assuming hypopigmentation is incidental rather than part of the phenotype",
+   "Delaying genetic diagnosis and counselling for at-risk families"
+  ],
+  "references": [
+   "Emery and Rimoin's Principles and Practice of Medical Genetics",
+   "Nelson Textbook of Paediatrics"
+  ],
+  "crossLinks": [],
+  "management": [
+   "No disease-modifying therapy exists, so care is supportive and directed at the multisystem manifestations of this congenital disorder of autophagy",
+   "Heart failure management of the progressive cardiomyopathy with diuretics, ACE inhibitors and other standard anti-failure therapy",
+   "Protection against the combined immunodeficiency with prophylactic antimicrobials, immunoglobulin replacement and prompt aggressive treatment of infections",
+   "Nutritional support for failure to thrive, often requiring nasogastric or gastrostomy feeding",
+   "Anticonvulsants for seizures, developmental and neurodisability support, and surgical management of cataract",
+   "Coordinated multidisciplinary and palliative care, with early discussion of goals given the poor prognosis",
+   "Genetic counselling and family screening for this autosomal recessive EPG5 disorder, with prenatal testing offered in future pregnancies"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "vici_syndrome-pathway",
+   "title": "Vici syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A severe autosomal recessive multisystem disorder and a prototypical congenital disorder of autophagy caused by biallelic variants in EPG5",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Progressive heart failure from deteriorating cardiomyopathy",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Brain MRI to demonstrate agenesis of the corpus callosum and other malformations, Echocardiography and cardiac monitoring for cardiomyopathy, Immunological workup including lymphocyte subsets and immunoglobulins"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: No disease-modifying therapy exists, so care is supportive and directed at the multisystem manifestations of this congenital disorder of autophagy"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing recurrent infection to isolated immunodeficiency without recognising the syndromic context"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of vici syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "vici_syndrome-matrix",
+   "title": "Vici syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A severe autosomal recessive multisystem disorder and a prototypical congenital disorder of autophagy caused by biallelic",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Vici syndrome is caused by loss-of-function variants in EPG5, which encodes a key regulator of the late steps of autophagy, particularly the maturation of autophagosomes and their fusion with lysosomes. Defective autophagic clearance leads to accumulation of dysfunctional proteins and organelles within cells that are highly dependent on autophagy, including neurons, cardiomyocytes, skeletal myocytes, immune cells, and melanocytes. This explains the multisystem phenotype: impaired neurodevelopment with callosal agenesis, cardiomyopathy, a vacuolar myopathy, combined immunodeficiency, and defective melanin handling producing hypopigmentation. The disorder illustrates how disruption of a fundamental cellular degradation pathway produces widespread, progressive tissue dysfunction.",
-    "additionalDifferentials": [
-      "Other congenital disorders of autophagy and lysosomal disorders",
-      "Chediak-Higashi and Griscelli syndromes (hypopigmentation with immune defects)",
-      "Mitochondrial disease with cardiomyopathy and neurodegeneration",
-      "Congenital muscular dystrophies with brain involvement",
-      "Primary combined immunodeficiencies with syndromic features",
-      "Other causes of corpus callosum agenesis with multisystem disease"
+    [
+     "Key Investigations",
+     "Brain MRI to demonstrate agenesis of the corpus callosum and other malformations, Echocardiography and cardiac monitoring for",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Brain MRI to demonstrate agenesis of the corpus callosum and other malformations",
-      "Echocardiography and cardiac monitoring for cardiomyopathy",
-      "Immunological workup including lymphocyte subsets and immunoglobulins",
-      "Ophthalmological assessment for cataract",
-      "Muscle biopsy where a vacuolar myopathy is suspected",
-      "EPG5 molecular genetic testing to confirm the diagnosis"
+    [
+     "Primary Differentials",
+     "Other congenital disorders of autophagy and lysosomal disorders, Chediak-Higashi and Griscelli syndromes (hypopigmentation with",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Progressive heart failure from deteriorating cardiomyopathy",
-      "Overwhelming or opportunistic infection due to combined immunodeficiency",
-      "Respiratory failure or aspiration from neuromuscular weakness and feeding difficulty",
-      "Refractory seizures and neurological deterioration"
+    [
+     "Management Strategy",
+     "No disease-modifying therapy exists, so care is supportive and directed at the multisystem manifestations of this congenital",
+     "Core treatment modality"
     ],
-    "prognosis": "The prognosis is poor, with most affected children dying in early childhood from cardiac failure or infection; survival beyond a few years is uncommon.",
-    "pitfalls": [
-      "Attributing recurrent infection to isolated immunodeficiency without recognising the syndromic context",
-      "Overlooking evolving cardiomyopathy in a child labelled with a static encephalopathy",
-      "Assuming hypopigmentation is incidental rather than part of the phenotype",
-      "Delaying genetic diagnosis and counselling for at-risk families"
-    ],
-    "references": [
-      "Emery and Rimoin's Principles and Practice of Medical Genetics",
-      "Nelson Textbook of Paediatrics"
-    ],
-    "crossLinks": [],
-    "management": [
-      "No disease-modifying therapy exists, so care is supportive and directed at the multisystem manifestations of this congenital disorder of autophagy",
-      "Heart failure management of the progressive cardiomyopathy with diuretics, ACE inhibitors and other standard anti-failure therapy",
-      "Protection against the combined immunodeficiency with prophylactic antimicrobials, immunoglobulin replacement and prompt aggressive treatment of infections",
-      "Nutritional support for failure to thrive, often requiring nasogastric or gastrostomy feeding",
-      "Anticonvulsants for seizures, developmental and neurodisability support, and surgical management of cataract",
-      "Coordinated multidisciplinary and palliative care, with early discussion of goals given the poor prognosis",
-      "Genetic counselling and family screening for this autosomal recessive EPG5 disorder, with prenatal testing offered in future pregnancies"
+    [
+     "Clinical Pitfall",
+     "Attributing recurrent infection to isolated immunodeficiency without recognising the syndromic context",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for vici syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "vici-syndrome-real-image",
+   "title": "Vici syndrome: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

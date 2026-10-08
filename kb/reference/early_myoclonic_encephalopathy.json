@@ -1,77 +1,172 @@
 {
-  "id": "early_myoclonic_encephalopathy",
-  "name": "Early myoclonic encephalopathy",
-  "aliases": [
-    "EME",
-    "early myoclonic epileptic encephalopathy",
-    "neonatal myoclonic encephalopathy"
+ "id": "early_myoclonic_encephalopathy",
+ "name": "Early myoclonic encephalopathy",
+ "aliases": [
+  "EME",
+  "early myoclonic epileptic encephalopathy",
+  "neonatal myoclonic encephalopathy"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system / Neurology",
+ "specialty": "Neurology / Epileptology / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "ILAE classification / Nelson Textbook of Paediatrics",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Onset is in the neonatal period or first weeks of life with erratic, fragmentary myoclonus that migrates over different body parts, often followed by focal seizures and later tonic spasms",
+   "The EEG shows a burst-suppression pattern that is frequently more pronounced during sleep",
+   "Inborn errors of metabolism, especially non-ketotic hyperglycinaemia and other neurotransmitter or organic acid disorders, are characteristic underlying causes",
+   "Development is profoundly impaired from onset and seizures are typically refractory",
+   "It is distinguished from Ohtahara syndrome mainly by the predominant erratic myoclonus and the metabolic rather than structural aetiology",
+   "A systematic metabolic and genetic workup is essential to identify a potentially treatable cause",
+   "Vitamin-responsive epilepsies should be excluded early with therapeutic trials"
   ],
-  "class": "non_infective",
-  "system": "Nervous system / Neurology",
-  "specialty": "Neurology / Epileptology / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "ILAE classification / Nelson Textbook of Paediatrics",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Onset is in the neonatal period or first weeks of life with erratic, fragmentary myoclonus that migrates over different body parts, often followed by focal seizures and later tonic spasms",
-      "The EEG shows a burst-suppression pattern that is frequently more pronounced during sleep",
-      "Inborn errors of metabolism, especially non-ketotic hyperglycinaemia and other neurotransmitter or organic acid disorders, are characteristic underlying causes",
-      "Development is profoundly impaired from onset and seizures are typically refractory",
-      "It is distinguished from Ohtahara syndrome mainly by the predominant erratic myoclonus and the metabolic rather than structural aetiology",
-      "A systematic metabolic and genetic workup is essential to identify a potentially treatable cause",
-      "Vitamin-responsive epilepsies should be excluded early with therapeutic trials"
+  "pathophysiology": "Early myoclonic encephalopathy is a neonatal-onset developmental and epileptic encephalopathy strongly linked to inborn errors of metabolism, particularly non-ketotic hyperglycinaemia. Accumulation of neurotoxic metabolites and disturbance of excitatory and inhibitory neurotransmission in the immature brain produce marked cortical and subcortical hyperexcitability. This generates erratic fragmentary myoclonus and the burst-suppression pattern, while the underlying metabolic derangement causes the severe and early developmental impairment.",
+  "additionalDifferentials": [
+   "Ohtahara syndrome",
+   "Non-ketotic hyperglycinaemia and other inborn errors of metabolism",
+   "Pyridoxine-dependent and other vitamin-responsive epilepsies",
+   "Benign neonatal sleep myoclonus",
+   "Hypoxic-ischaemic encephalopathy with neonatal seizures",
+   "Malformations of cortical development"
+  ],
+  "additionalInvestigations": [
+   "EEG showing burst-suppression, often accentuated in sleep",
+   "Comprehensive metabolic screen including plasma and CSF amino acids and glycine",
+   "Trials of vitamin-responsive treatments such as pyridoxine",
+   "Epilepsy and metabolic gene panels or exome sequencing",
+   "Brain MRI to exclude structural pathology"
+  ],
+  "redFlags": [
+   "Refractory neonatal myoclonus with burst-suppression suggesting a metabolic encephalopathy",
+   "Elevated CSF glycine indicating non-ketotic hyperglycinaemia",
+   "Failure of vitamin-responsive trials",
+   "Rapid clinical deterioration pointing to a progressive metabolic disorder"
+  ],
+  "prognosis": "The prognosis is generally very poor with high early mortality and profound neurodevelopmental disability in survivors, largely determined by the underlying metabolic disorder. Seizures are usually refractory to antiseizure medication.",
+  "pitfalls": [
+   "Failing to send CSF and plasma glycine to detect non-ketotic hyperglycinaemia",
+   "Not trialling vitamin-responsive therapies before concluding refractoriness",
+   "Confusing erratic myoclonus with benign neonatal sleep myoclonus",
+   "Attributing seizures to structural causes without a full metabolic workup"
+  ],
+  "references": [
+   "ILAE classification of the epilepsies",
+   "Nelson Textbook of Paediatrics"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Undertake an urgent metabolic and genetic workup with empirical vitamin trials of pyridoxine, pyridoxal phosphate and folinic acid to identify a treatable cause",
+   "Treat the underlying inborn error of metabolism where identified, for example measures for non-ketotic hyperglycinaemia such as sodium benzoate and dextromethorphan",
+   "Use antiseizure medication for seizure control while recognising that seizures are frequently refractory",
+   "Provide supportive neonatal and paediatric care including feeding support, respiratory monitoring and developmental input",
+   "Offer genetic counselling and family testing given the heritable metabolic aetiologies",
+   "Involve paediatric neurology and metabolic specialists early to guide diagnosis, treatment and prognosis",
+   "Introduce palliative care discussions given the generally poor prognosis and high early mortality"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "early_myoclonic_encephalopathy-pathway",
+   "title": "Early myoclonic encephalopathy: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Onset is in the neonatal period or first weeks of life with erratic, fragmentary myoclonus that migrates over different body parts, often followed by focal seizures and later tonic spasms",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Refractory neonatal myoclonus with burst-suppression suggesting a metabolic encephalopathy",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: EEG showing burst-suppression, often accentuated in sleep, Comprehensive metabolic screen including plasma and CSF amino acids and glycine, Trials of vitamin-responsive treatments such as pyridoxine"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Undertake an urgent metabolic and genetic workup with empirical vitamin trials of pyridoxine, pyridoxal phosphate and folinic acid to identify a treatable cause"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Failing to send CSF and plasma glycine to detect non-ketotic hyperglycinaemia"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of early myoclonic encephalopathy."
+  }
+ ],
+ "tables": [
+  {
+   "id": "early_myoclonic_encephalopathy-matrix",
+   "title": "Early myoclonic encephalopathy: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Onset is in the neonatal period or first weeks of life with erratic, fragmentary myoclonus that migrates over different body",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Early myoclonic encephalopathy is a neonatal-onset developmental and epileptic encephalopathy strongly linked to inborn errors of metabolism, particularly non-ketotic hyperglycinaemia. Accumulation of neurotoxic metabolites and disturbance of excitatory and inhibitory neurotransmission in the immature brain produce marked cortical and subcortical hyperexcitability. This generates erratic fragmentary myoclonus and the burst-suppression pattern, while the underlying metabolic derangement causes the severe and early developmental impairment.",
-    "additionalDifferentials": [
-      "Ohtahara syndrome",
-      "Non-ketotic hyperglycinaemia and other inborn errors of metabolism",
-      "Pyridoxine-dependent and other vitamin-responsive epilepsies",
-      "Benign neonatal sleep myoclonus",
-      "Hypoxic-ischaemic encephalopathy with neonatal seizures",
-      "Malformations of cortical development"
+    [
+     "Key Investigations",
+     "EEG showing burst-suppression, often accentuated in sleep, Comprehensive metabolic screen including plasma and CSF amino acids",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "EEG showing burst-suppression, often accentuated in sleep",
-      "Comprehensive metabolic screen including plasma and CSF amino acids and glycine",
-      "Trials of vitamin-responsive treatments such as pyridoxine",
-      "Epilepsy and metabolic gene panels or exome sequencing",
-      "Brain MRI to exclude structural pathology"
+    [
+     "Primary Differentials",
+     "Ohtahara syndrome, Non-ketotic hyperglycinaemia and other inborn errors of metabolism, Pyridoxine-dependent and other",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Refractory neonatal myoclonus with burst-suppression suggesting a metabolic encephalopathy",
-      "Elevated CSF glycine indicating non-ketotic hyperglycinaemia",
-      "Failure of vitamin-responsive trials",
-      "Rapid clinical deterioration pointing to a progressive metabolic disorder"
+    [
+     "Management Strategy",
+     "Undertake an urgent metabolic and genetic workup with empirical vitamin trials of pyridoxine, pyridoxal phosphate and folinic",
+     "Core treatment modality"
     ],
-    "prognosis": "The prognosis is generally very poor with high early mortality and profound neurodevelopmental disability in survivors, largely determined by the underlying metabolic disorder. Seizures are usually refractory to antiseizure medication.",
-    "pitfalls": [
-      "Failing to send CSF and plasma glycine to detect non-ketotic hyperglycinaemia",
-      "Not trialling vitamin-responsive therapies before concluding refractoriness",
-      "Confusing erratic myoclonus with benign neonatal sleep myoclonus",
-      "Attributing seizures to structural causes without a full metabolic workup"
-    ],
-    "references": [
-      "ILAE classification of the epilepsies",
-      "Nelson Textbook of Paediatrics"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Undertake an urgent metabolic and genetic workup with empirical vitamin trials of pyridoxine, pyridoxal phosphate and folinic acid to identify a treatable cause",
-      "Treat the underlying inborn error of metabolism where identified, for example measures for non-ketotic hyperglycinaemia such as sodium benzoate and dextromethorphan",
-      "Use antiseizure medication for seizure control while recognising that seizures are frequently refractory",
-      "Provide supportive neonatal and paediatric care including feeding support, respiratory monitoring and developmental input",
-      "Offer genetic counselling and family testing given the heritable metabolic aetiologies",
-      "Involve paediatric neurology and metabolic specialists early to guide diagnosis, treatment and prognosis",
-      "Introduce palliative care discussions given the generally poor prognosis and high early mortality"
+    [
+     "Clinical Pitfall",
+     "Failing to send CSF and plasma glycine to detect non-ketotic hyperglycinaemia",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for early myoclonic encephalopathy."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "early-myoclonic-encephalopathy-real-image",
+   "title": "Early myoclonic encephalopathy: Diagnostic Head Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
+   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
+   "annotations": [
+    {
+     "label": "Cerebral Parenchyma",
+     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+    },
+    {
+     "label": "Extra-Axial Spaces",
+     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+    }
+   ]
+  }
+ ]
 }

@@ -147,5 +147,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "ha9ad616a"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "pleural_effusion-dx-algo",
+      "title": "Pleural effusion: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "On examination an effusion gives dullness to percussion, reduced or absent breath sounds, and decreased tactile fremitus over the fluid; this contrasts with consolidation, where fremitus is increased (Harrison 22e p.2243).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Frank pus, organisms on microscopy, or pleural fluid pH <=7.1 in a parapneumonic effusion - diagnostic of empyema and mandates aggressive complete drainage, usually via chest tube (Harrison 22e p.1235).",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Diagnostic thoracentesis to determine whether the fluid is a transudate or an exudate and to identify the underlying cause (Harrison 22e p.1430)., Pleural fluid pH - a value of ≤7.1 in a parapneumonic setting indicates"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Parapneumonic effusions are distinguished from empyema by their character: an uncomplicated parapneumonic effusion is a self-limited reaction to adjacent pneumonia, whereas frank pus, visible organisms, or a pleural"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Avoid attributing every quiet, dull hemithorax to effusion - confirm with percussion and fremitus, since pneumothorax and consolidation differ (Harrison 22e p.2243)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for pleural effusion."
+    }
+  ],
+  "tables": [
+    {
+      "id": "pleural_effusion-matrix",
+      "title": "Pleural effusion: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "On examination an effusion gives dullness to percussion, reduced or absent breath sounds, and decreased tactile fremitus over the",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Diagnostic thoracentesis to determine whether the fluid is a transudate or an exudate and to identify the underlying cause",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Congestive heart failure (typically bilateral transudative effusions) (Harrison 22e p.314), Cirrhosis / hepatic hydrothorax",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Frank pus, organisms on microscopy, or pleural fluid pH <=7.1 in a parapneumonic effusion - diagnostic of empyema and mandates",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Avoid attributing every quiet, dull hemithorax to effusion - confirm with percussion and fremitus, since pneumothorax and",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for pleural effusion."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "pleural-effusion-real-image",
+      "title": "Pleural effusion: Chest Radiograph (Pleural Effusion Meniscus Sign)",
+      "type": "xray",
+      "src": "/assets/kb-real-images/pleural-effusion-xray.jpg?v=kbri3",
+      "caption": "Real upright posteroanterior radiograph showing blunting of the costophrenic angle and a classic homogenous fluid meniscus sign.",
+      "annotations": [
+        {
+          "label": "Meniscus Sign",
+          "description": "Smooth concave curved upper fluid border higher laterally than medially."
+        },
+        {
+          "label": "Costophrenic Blunting",
+          "description": "Obliteration of the posterior and lateral costophrenic recesses by pleural fluid."
+        },
+        {
+          "label": "Homogeneous Opacity",
+          "description": "Dense dependent gravitational opacity obscuring underlying lung markings."
+        }
+      ]
+    }
+  ]
 }

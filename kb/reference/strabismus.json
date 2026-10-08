@@ -1,80 +1,175 @@
 {
-  "id": "strabismus",
-  "name": "Strabismus",
-  "aliases": [
-    "squint",
-    "ocular misalignment",
-    "esotropia",
-    "exotropia",
-    "heterotropia"
+ "id": "strabismus",
+ "name": "Strabismus",
+ "aliases": [
+  "squint",
+  "ocular misalignment",
+  "esotropia",
+  "exotropia",
+  "heterotropia"
+ ],
+ "class": "non_infective",
+ "system": "Eye / Ophthalmology",
+ "specialty": "Ophthalmology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Strabismus is a misalignment of the visual axes and is described by direction: esotropia (inward), exotropia (outward), hypertropia (upward), and hypotropia (downward)",
+   "It is classified as concomitant (the deviation is similar in all directions of gaze, typical of childhood squints) or incomitant (varying with gaze, suggesting a nerve palsy or restriction)",
+   "In children the main concern is amblyopia in the deviating eye, whereas new-onset strabismus in adults usually causes diplopia",
+   "The cover test (cover-uncover and alternate cover) is the key clinical method for detecting and characterising a manifest or latent deviation",
+   "Accommodative esotropia is linked to uncorrected hypermetropia and often improves substantially with the appropriate glasses",
+   "A new incomitant squint, especially with a cranial nerve palsy pattern, warrants investigation for a neurological cause",
+   "Management principles include correcting refractive error, treating any amblyopia (e.g. occlusion), and surgical realignment of the extraocular muscles when indicated",
+   "Leukocoria or a sudden squint in a child requires urgent examination to exclude retinoblastoma or other serious pathology"
   ],
-  "class": "non_infective",
-  "system": "Eye / Ophthalmology",
-  "specialty": "Ophthalmology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Strabismus is a misalignment of the visual axes and is described by direction: esotropia (inward), exotropia (outward), hypertropia (upward), and hypotropia (downward)",
-      "It is classified as concomitant (the deviation is similar in all directions of gaze, typical of childhood squints) or incomitant (varying with gaze, suggesting a nerve palsy or restriction)",
-      "In children the main concern is amblyopia in the deviating eye, whereas new-onset strabismus in adults usually causes diplopia",
-      "The cover test (cover-uncover and alternate cover) is the key clinical method for detecting and characterising a manifest or latent deviation",
-      "Accommodative esotropia is linked to uncorrected hypermetropia and often improves substantially with the appropriate glasses",
-      "A new incomitant squint, especially with a cranial nerve palsy pattern, warrants investigation for a neurological cause",
-      "Management principles include correcting refractive error, treating any amblyopia (e.g. occlusion), and surgical realignment of the extraocular muscles when indicated",
-      "Leukocoria or a sudden squint in a child requires urgent examination to exclude retinoblastoma or other serious pathology"
+  "pathophysiology": "Strabismus arises from a failure of the normal binocular alignment maintained by coordinated extraocular muscle action and central fusional control. Causes include refractive error (notably hypermetropia driving accommodative esotropia), sensory deprivation from poor vision in one eye, abnormalities of the neuromuscular pathways (cranial nerve palsies), mechanical restriction of muscles, and disorders of central fusion. In children, misalignment during the critical period of visual development leads to suppression of the deviating eye's image and can result in amblyopia and loss of binocular single vision.",
+  "additionalDifferentials": [
+   "Pseudostrabismus from prominent epicanthic folds or facial asymmetry",
+   "Cranial nerve palsy (third, fourth, or sixth nerve)",
+   "Restrictive myopathy (e.g. thyroid eye disease, orbital fracture)",
+   "Myasthenia gravis",
+   "Internuclear ophthalmoplegia and other supranuclear disorders",
+   "Retinoblastoma or other cause of sensory deprivation in a child"
+  ],
+  "additionalInvestigations": [
+   "Cover-uncover and alternate cover tests to detect and measure the deviation",
+   "Assessment of visual acuity in each eye to detect amblyopia",
+   "Cycloplegic refraction to identify a correctable refractive cause",
+   "Ocular motility examination and assessment of binocular function/stereopsis",
+   "Neuroimaging when an incomitant or paralytic squint suggests a neurological lesion"
+  ],
+  "redFlags": [
+   "New-onset incomitant squint with features of a cranial nerve palsy suggesting intracranial pathology",
+   "Leukocoria or a squint accompanying poor vision in a child, raising concern for retinoblastoma",
+   "Sudden diplopia with headache or other neurological signs",
+   "Painful or restricted eye movements suggesting orbital or inflammatory disease"
+  ],
+  "prognosis": "Outcomes are generally favourable when strabismus and any associated amblyopia are detected and treated early in childhood, with good prospects for alignment and, in some cases, binocular vision; late detection reduces the chance of restoring binocularity, and adult acquired strabismus depends on the underlying cause.",
+  "pitfalls": [
+   "Dismissing a genuine squint as pseudostrabismus and delaying amblyopia treatment",
+   "Failing to perform cycloplegic refraction and missing correctable accommodative esotropia",
+   "Not investigating a new incomitant or paralytic squint for a neurological cause",
+   "Overlooking a serious underlying cause such as retinoblastoma in a child presenting with a squint"
+  ],
+  "references": [
+   "Parsons' Diseases of the Eye",
+   "Kanski's Clinical Ophthalmology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Correct refractive error, particularly hypermetropia, with spectacles for accommodative esotropia",
+   "Treat amblyopia in children with occlusion (patching) or atropine penalisation of the better-seeing eye",
+   "Prisms incorporated into spectacles to relieve diplopia in acquired adult strabismus",
+   "Extraocular muscle surgery to realign the visual axes where non-surgical measures are insufficient",
+   "Botulinum toxin injection to extraocular muscles in selected cases",
+   "Investigate and manage any underlying neurological cause of an incomitant or paralytic squint",
+   "Orthoptic assessment and long-term follow-up of alignment, binocular function and stereopsis"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "strabismus-pathway",
+   "title": "Strabismus: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Strabismus is a misalignment of the visual axes and is described by direction: esotropia (inward), exotropia (outward), hypertropia (upward), and hypotropia (downward)",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: New-onset incomitant squint with features of a cranial nerve palsy suggesting intracranial pathology",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Cover-uncover and alternate cover tests to detect and measure the deviation, Assessment of visual acuity in each eye to detect amblyopia, Cycloplegic refraction to identify a correctable refractive cause"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Correct refractive error, particularly hypermetropia, with spectacles for accommodative esotropia"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Dismissing a genuine squint as pseudostrabismus and delaying amblyopia treatment"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of strabismus."
+  }
+ ],
+ "tables": [
+  {
+   "id": "strabismus-matrix",
+   "title": "Strabismus: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Strabismus is a misalignment of the visual axes and is described by direction: esotropia (inward), exotropia (outward),",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Strabismus arises from a failure of the normal binocular alignment maintained by coordinated extraocular muscle action and central fusional control. Causes include refractive error (notably hypermetropia driving accommodative esotropia), sensory deprivation from poor vision in one eye, abnormalities of the neuromuscular pathways (cranial nerve palsies), mechanical restriction of muscles, and disorders of central fusion. In children, misalignment during the critical period of visual development leads to suppression of the deviating eye's image and can result in amblyopia and loss of binocular single vision.",
-    "additionalDifferentials": [
-      "Pseudostrabismus from prominent epicanthic folds or facial asymmetry",
-      "Cranial nerve palsy (third, fourth, or sixth nerve)",
-      "Restrictive myopathy (e.g. thyroid eye disease, orbital fracture)",
-      "Myasthenia gravis",
-      "Internuclear ophthalmoplegia and other supranuclear disorders",
-      "Retinoblastoma or other cause of sensory deprivation in a child"
+    [
+     "Key Investigations",
+     "Cover-uncover and alternate cover tests to detect and measure the deviation, Assessment of visual acuity in each eye to detect",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Cover-uncover and alternate cover tests to detect and measure the deviation",
-      "Assessment of visual acuity in each eye to detect amblyopia",
-      "Cycloplegic refraction to identify a correctable refractive cause",
-      "Ocular motility examination and assessment of binocular function/stereopsis",
-      "Neuroimaging when an incomitant or paralytic squint suggests a neurological lesion"
+    [
+     "Primary Differentials",
+     "Pseudostrabismus from prominent epicanthic folds or facial asymmetry, Cranial nerve palsy (third, fourth, or sixth nerve),",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "New-onset incomitant squint with features of a cranial nerve palsy suggesting intracranial pathology",
-      "Leukocoria or a squint accompanying poor vision in a child, raising concern for retinoblastoma",
-      "Sudden diplopia with headache or other neurological signs",
-      "Painful or restricted eye movements suggesting orbital or inflammatory disease"
+    [
+     "Management Strategy",
+     "Correct refractive error, particularly hypermetropia, with spectacles for accommodative esotropia",
+     "Core treatment modality"
     ],
-    "prognosis": "Outcomes are generally favourable when strabismus and any associated amblyopia are detected and treated early in childhood, with good prospects for alignment and, in some cases, binocular vision; late detection reduces the chance of restoring binocularity, and adult acquired strabismus depends on the underlying cause.",
-    "pitfalls": [
-      "Dismissing a genuine squint as pseudostrabismus and delaying amblyopia treatment",
-      "Failing to perform cycloplegic refraction and missing correctable accommodative esotropia",
-      "Not investigating a new incomitant or paralytic squint for a neurological cause",
-      "Overlooking a serious underlying cause such as retinoblastoma in a child presenting with a squint"
-    ],
-    "references": [
-      "Parsons' Diseases of the Eye",
-      "Kanski's Clinical Ophthalmology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Correct refractive error, particularly hypermetropia, with spectacles for accommodative esotropia",
-      "Treat amblyopia in children with occlusion (patching) or atropine penalisation of the better-seeing eye",
-      "Prisms incorporated into spectacles to relieve diplopia in acquired adult strabismus",
-      "Extraocular muscle surgery to realign the visual axes where non-surgical measures are insufficient",
-      "Botulinum toxin injection to extraocular muscles in selected cases",
-      "Investigate and manage any underlying neurological cause of an incomitant or paralytic squint",
-      "Orthoptic assessment and long-term follow-up of alignment, binocular function and stereopsis"
+    [
+     "Clinical Pitfall",
+     "Dismissing a genuine squint as pseudostrabismus and delaying amblyopia treatment",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for strabismus."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "strabismus-real-image",
+   "title": "Strabismus: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

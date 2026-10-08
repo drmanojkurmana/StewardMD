@@ -1,76 +1,171 @@
 {
-  "id": "focal_nodular_hyperplasia",
-  "name": "Focal nodular hyperplasia",
-  "aliases": [
-    "FNH",
-    "focal nodular hyperplasia of the liver"
+ "id": "focal_nodular_hyperplasia",
+ "name": "Focal nodular hyperplasia",
+ "aliases": [
+  "FNH",
+  "focal nodular hyperplasia of the liver"
+ ],
+ "class": "non_infective",
+ "system": "Gastroenterology / Hepatology",
+ "specialty": "Hepatology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Sherlock's Diseases of the Liver and Biliary System / EASL benign liver tumour guidance",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "The second most common benign liver tumour, usually an incidental finding in women of reproductive age and typically solitary",
+   "Regarded as a hyperplastic response to a pre-existing arterial malformation rather than a true neoplasm, with essentially no malignant potential and very low bleeding risk",
+   "The characteristic feature is a central stellate scar containing a large feeding artery, best appreciated on cross-sectional imaging",
+   "Contrast studies show intense, uniform arterial-phase enhancement with a spoke-wheel vascular pattern and delayed enhancement of the central scar",
+   "Hepatobiliary contrast-enhanced MRI is particularly useful, as FNH characteristically retains contrast in the hepatobiliary phase, helping distinguish it from adenoma",
+   "Unlike hepatocellular adenoma, it is not strongly driven by oestrogen and generally does not require oral-contraceptive cessation or resection",
+   "Asymptomatic, radiologically typical lesions are managed conservatively with reassurance and, if desired, interval imaging"
   ],
-  "class": "non_infective",
-  "system": "Gastroenterology / Hepatology",
-  "specialty": "Hepatology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Sherlock's Diseases of the Liver and Biliary System / EASL benign liver tumour guidance",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "The second most common benign liver tumour, usually an incidental finding in women of reproductive age and typically solitary",
-      "Regarded as a hyperplastic response to a pre-existing arterial malformation rather than a true neoplasm, with essentially no malignant potential and very low bleeding risk",
-      "The characteristic feature is a central stellate scar containing a large feeding artery, best appreciated on cross-sectional imaging",
-      "Contrast studies show intense, uniform arterial-phase enhancement with a spoke-wheel vascular pattern and delayed enhancement of the central scar",
-      "Hepatobiliary contrast-enhanced MRI is particularly useful, as FNH characteristically retains contrast in the hepatobiliary phase, helping distinguish it from adenoma",
-      "Unlike hepatocellular adenoma, it is not strongly driven by oestrogen and generally does not require oral-contraceptive cessation or resection",
-      "Asymptomatic, radiologically typical lesions are managed conservatively with reassurance and, if desired, interval imaging"
+  "pathophysiology": "Focal nodular hyperplasia is a polyclonal, non-neoplastic proliferation believed to arise from a localised hyperplastic hepatocyte response to an anomalous dystrophic artery. The aberrant arterial supply produces a central fibrous scar containing thick-walled vessels that radiate outward, dividing the lesion into nodules separated by fibrous septa containing malformed ductules. Because the architecture is a reactive rather than clonal neoplastic process, the lesion carries negligible risk of haemorrhage or malignant transformation, in contrast to hepatocellular adenoma.",
+  "additionalDifferentials": [
+   "Hepatocellular adenoma",
+   "Fibrolamellar hepatocellular carcinoma",
+   "Hepatocellular carcinoma with central scar",
+   "Hypervascular metastasis",
+   "Haemangioma",
+   "Regenerative nodule in cirrhosis"
+  ],
+  "additionalInvestigations": [
+   "Multiphase contrast-enhanced MRI or CT to demonstrate arterial enhancement and central scar",
+   "Hepatobiliary contrast agent MRI to show retention in the hepatobiliary phase",
+   "Contrast-enhanced ultrasound demonstrating a spoke-wheel arterial pattern",
+   "Liver function tests, usually normal",
+   "Alpha-fetoprotein and clinical context to help exclude malignancy",
+   "Percutaneous biopsy reserved for lesions with atypical imaging features"
+  ],
+  "redFlags": [
+   "Atypical imaging features raising concern for fibrolamellar or hepatocellular carcinoma",
+   "Rapid growth or new symptoms in a previously stable lesion",
+   "Diagnostic uncertainty in a patient with chronic liver disease or known malignancy",
+   "Abnormal liver biochemistry or rising tumour markers"
+  ],
+  "prognosis": "The prognosis is excellent; most lesions remain stable or regress, complications are rare, and there is no meaningful risk of malignant transformation, so intervention is seldom needed.",
+  "pitfalls": [
+   "Confusing FNH with hepatocellular adenoma and mismanaging bleeding and malignancy risk",
+   "Overlooking fibrolamellar carcinoma, which can also feature a central scar",
+   "Performing unnecessary resection of a radiologically classic, asymptomatic lesion",
+   "Attributing all central-scar lesions to FNH without adequate imaging characterisation"
+  ],
+  "references": [
+   "Sherlock's Diseases of the Liver and Biliary System",
+   "EASL Clinical Practice Guidelines on the management of benign liver tumours"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Reassurance and conservative observation, as the lesion is benign with negligible risk of haemorrhage or malignant transformation",
+   "Confirmation of diagnosis with hepatobiliary contrast-enhanced MRI showing the central scar and hepatobiliary-phase contrast retention",
+   "No requirement to stop oral contraceptives, unlike hepatocellular adenoma, since the lesion is not strongly oestrogen-driven",
+   "Follow-up imaging only where the diagnosis is uncertain or the lesion is atypical, otherwise no routine surveillance",
+   "Intervention such as resection reserved for genuinely symptomatic or enlarging lesions or persistent diagnostic doubt",
+   "Hepatology referral, with biopsy reserved for lesions with atypical imaging features"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "focal_nodular_hyperplasia-pathway",
+   "title": "Focal nodular hyperplasia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "The second most common benign liver tumour, usually an incidental finding in women of reproductive age and typically solitary",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Atypical imaging features raising concern for fibrolamellar or hepatocellular carcinoma",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Multiphase contrast-enhanced MRI or CT to demonstrate arterial enhancement and central scar, Hepatobiliary contrast agent MRI to show retention in the hepatobiliary phase, Contrast-enhanced ultrasound demonstrating a"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Reassurance and conservative observation, as the lesion is benign with negligible risk of haemorrhage or malignant transformation"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Confusing FNH with hepatocellular adenoma and mismanaging bleeding and malignancy risk"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of focal nodular hyperplasia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "focal_nodular_hyperplasia-matrix",
+   "title": "Focal nodular hyperplasia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The second most common benign liver tumour, usually an incidental finding in women of reproductive age and typically solitary",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Focal nodular hyperplasia is a polyclonal, non-neoplastic proliferation believed to arise from a localised hyperplastic hepatocyte response to an anomalous dystrophic artery. The aberrant arterial supply produces a central fibrous scar containing thick-walled vessels that radiate outward, dividing the lesion into nodules separated by fibrous septa containing malformed ductules. Because the architecture is a reactive rather than clonal neoplastic process, the lesion carries negligible risk of haemorrhage or malignant transformation, in contrast to hepatocellular adenoma.",
-    "additionalDifferentials": [
-      "Hepatocellular adenoma",
-      "Fibrolamellar hepatocellular carcinoma",
-      "Hepatocellular carcinoma with central scar",
-      "Hypervascular metastasis",
-      "Haemangioma",
-      "Regenerative nodule in cirrhosis"
+    [
+     "Key Investigations",
+     "Multiphase contrast-enhanced MRI or CT to demonstrate arterial enhancement and central scar, Hepatobiliary contrast agent MRI to",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Multiphase contrast-enhanced MRI or CT to demonstrate arterial enhancement and central scar",
-      "Hepatobiliary contrast agent MRI to show retention in the hepatobiliary phase",
-      "Contrast-enhanced ultrasound demonstrating a spoke-wheel arterial pattern",
-      "Liver function tests, usually normal",
-      "Alpha-fetoprotein and clinical context to help exclude malignancy",
-      "Percutaneous biopsy reserved for lesions with atypical imaging features"
+    [
+     "Primary Differentials",
+     "Hepatocellular adenoma, Fibrolamellar hepatocellular carcinoma, Hepatocellular carcinoma with central scar",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Atypical imaging features raising concern for fibrolamellar or hepatocellular carcinoma",
-      "Rapid growth or new symptoms in a previously stable lesion",
-      "Diagnostic uncertainty in a patient with chronic liver disease or known malignancy",
-      "Abnormal liver biochemistry or rising tumour markers"
+    [
+     "Management Strategy",
+     "Reassurance and conservative observation, as the lesion is benign with negligible risk of haemorrhage or malignant transformation",
+     "Core treatment modality"
     ],
-    "prognosis": "The prognosis is excellent; most lesions remain stable or regress, complications are rare, and there is no meaningful risk of malignant transformation, so intervention is seldom needed.",
-    "pitfalls": [
-      "Confusing FNH with hepatocellular adenoma and mismanaging bleeding and malignancy risk",
-      "Overlooking fibrolamellar carcinoma, which can also feature a central scar",
-      "Performing unnecessary resection of a radiologically classic, asymptomatic lesion",
-      "Attributing all central-scar lesions to FNH without adequate imaging characterisation"
-    ],
-    "references": [
-      "Sherlock's Diseases of the Liver and Biliary System",
-      "EASL Clinical Practice Guidelines on the management of benign liver tumours"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Reassurance and conservative observation, as the lesion is benign with negligible risk of haemorrhage or malignant transformation",
-      "Confirmation of diagnosis with hepatobiliary contrast-enhanced MRI showing the central scar and hepatobiliary-phase contrast retention",
-      "No requirement to stop oral contraceptives, unlike hepatocellular adenoma, since the lesion is not strongly oestrogen-driven",
-      "Follow-up imaging only where the diagnosis is uncertain or the lesion is atypical, otherwise no routine surveillance",
-      "Intervention such as resection reserved for genuinely symptomatic or enlarging lesions or persistent diagnostic doubt",
-      "Hepatology referral, with biopsy reserved for lesions with atypical imaging features"
+    [
+     "Clinical Pitfall",
+     "Confusing FNH with hepatocellular adenoma and mismanaging bleeding and malignancy risk",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for focal nodular hyperplasia."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "focal-nodular-hyperplasia-real-image",
+   "title": "Focal nodular hyperplasia: Diagnostic Abdominal Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
+   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
+   "annotations": [
+    {
+     "label": "Solid Viscera",
+     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
+    },
+    {
+     "label": "Gastrointestinal Tract",
+     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
+    },
+    {
+     "label": "Mesentery & Peritoneum",
+     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+    }
+   ]
+  }
+ ]
 }

@@ -6,7 +6,19 @@
  "basis": "india",
  "counterpart": "heat-stroke-international",
  "setting": "Prehospital, emergency department, ICU",
- "aliases": ["heatstroke", "exertional heat stroke", "EHS", "classic heat stroke", "non-exertional heat stroke", "hyperthermia", "heat-related illness", "HRI", "sunstroke", "heat exhaustion", "heatwave"],
+ "aliases": [
+  "heatstroke",
+  "exertional heat stroke",
+  "EHS",
+  "classic heat stroke",
+  "non-exertional heat stroke",
+  "hyperthermia",
+  "heat-related illness",
+  "HRI",
+  "sunstroke",
+  "heat exhaustion",
+  "heatwave"
+ ],
  "summary": "Core temperature above 40 degrees C with CNS dysfunction after heat exposure or exertion is heat stroke: cool first, transport second. Start whole-body cooling within 30 minutes (cold-water immersion for exertional cases, evaporative plus ice for frail classic cases) to 38 to 39 degrees C, then support failing organs. Antipyretics do not work.",
  "sections": [
   {
@@ -101,17 +113,155 @@
   }
  ],
  "drugs": [
-  { "name": "Lorazepam", "dose": "Adult 4 mg IV (0.1 mg/kg, maximum 4 mg); child 0.05 to 0.1 mg/kg IV over 2 to 5 minutes (maximum 4 mg); may repeat once", "notes": "Seizures or excessive shivering during cooling. Watch for respiratory depression." },
-  { "name": "Midazolam", "dose": "Adult 10 mg IM if no IV access (5 mg if 13 to 40 kg)", "notes": "Seizures when IV access is not available." },
-  { "name": "Crystalloid (0.9% saline, Ringer lactate)", "dose": "Adult: small boluses with reassessment; child in shock: 0.9% saline 20 mL/kg, repeat to a total of 60 mL/kg", "notes": "Watch for pulmonary oedema, especially in the elderly. Continue maintenance fluids after shock is corrected." },
-  { "name": "Dextrose", "dose": "Adult: 25 g IV (100 mL of 25% or 250 mL of 10%); child: 10% dextrose 2 mL/kg IV", "notes": "If glucose below 70 mg/dL (3.9 mmol/L); recheck in 15 minutes." },
-  { "name": "Oral rehydration solution (ORS)", "dose": "Sip frequently as tolerated for heat exhaustion", "notes": "Only if fully alert and able to swallow." }
+  {
+   "name": "Lorazepam",
+   "dose": "Adult 4 mg IV (0.1 mg/kg, maximum 4 mg); child 0.05 to 0.1 mg/kg IV over 2 to 5 minutes (maximum 4 mg); may repeat once",
+   "notes": "Seizures or excessive shivering during cooling. Watch for respiratory depression."
+  },
+  {
+   "name": "Midazolam",
+   "dose": "Adult 10 mg IM if no IV access (5 mg if 13 to 40 kg)",
+   "notes": "Seizures when IV access is not available."
+  },
+  {
+   "name": "Crystalloid (0.9% saline, Ringer lactate)",
+   "dose": "Adult: small boluses with reassessment; child in shock: 0.9% saline 20 mL/kg, repeat to a total of 60 mL/kg",
+   "notes": "Watch for pulmonary oedema, especially in the elderly. Continue maintenance fluids after shock is corrected."
+  },
+  {
+   "name": "Dextrose",
+   "dose": "Adult: 25 g IV (100 mL of 25% or 250 mL of 10%); child: 10% dextrose 2 mL/kg IV",
+   "notes": "If glucose below 70 mg/dL (3.9 mmol/L); recheck in 15 minutes."
+  },
+  {
+   "name": "Oral rehydration solution (ORS)",
+   "dose": "Sip frequently as tolerated for heat exhaustion",
+   "notes": "Only if fully alert and able to swallow."
+  }
  ],
  "sources": [
-  { "org": "NCDC, MoHFW (NPCCHH)", "title": "Emergency cooling for severe heat related illnesses", "year": 2024, "url": "https://ncdc.mohfw.gov.in/uploads/pdf/heat11.pdf" },
-  { "org": "NCDC, MoHFW (NPCCHH)", "title": "National Action Plan on Heat Related Illnesses", "year": 2021, "url": "https://ncdc.mohfw.gov.in/uploads/pdf/heat12.pdf" },
-  { "org": "NCDC, MoHFW (NPCCHH)", "title": "Public Health Advisory: Extreme Heat/Heatwave 2025", "year": 2025, "url": "https://ncdc.mohfw.gov.in/uploads/pdf/heat2.pdf" },
-  { "org": "Resuscitation Council UK / ERC", "title": "2025 Special circumstances guidelines (hyperthermia)", "year": 2025, "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/special-circumstances-guidelines" }
+  {
+   "org": "NCDC, MoHFW (NPCCHH)",
+   "title": "Emergency cooling for severe heat related illnesses",
+   "year": 2024,
+   "url": "https://ncdc.mohfw.gov.in/uploads/pdf/heat11.pdf"
+  },
+  {
+   "org": "NCDC, MoHFW (NPCCHH)",
+   "title": "National Action Plan on Heat Related Illnesses",
+   "year": 2021,
+   "url": "https://ncdc.mohfw.gov.in/uploads/pdf/heat12.pdf"
+  },
+  {
+   "org": "NCDC, MoHFW (NPCCHH)",
+   "title": "Public Health Advisory: Extreme Heat/Heatwave 2025",
+   "year": 2025,
+   "url": "https://ncdc.mohfw.gov.in/uploads/pdf/heat2.pdf"
+  },
+  {
+   "org": "Resuscitation Council UK / ERC",
+   "title": "2025 Special circumstances guidelines (hyperthermia)",
+   "year": 2025,
+   "url": "https://www.resus.org.uk/professional-library/2025-resuscitation-guidelines/special-circumstances-guidelines"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "heat-stroke-pathway",
+   "title": "Heat stroke (India, NCDC) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Heat stroke: core temperature above 40 degrees C (104 degrees F) with CNS dysfunction (confusion, delirium, ataxia, seizures, coma) after heat exposure or exertion. Skin may be hot and dry, but sweating often persists in exertional heat",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Begin whole-body cooling immediately, at the scene or on arrival, and within 30 minutes of presentation; aim for a cooling rate of at least 0.15 degrees C per minute.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Glucose, sodium, potassium, calcium, phosphate, urea and creatinine, CK and urine myoglobin, liver enzymes (peak around 48 hours; jaundice at 36 to 72 hours), CBC, PT/INR, fibrinogen and D-dimer, ABG with lactate, ECG, troponin."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Fluids: IV crystalloid in small boluses with frequent reassessment; many patients are not severely depleted and elderly patients are prone to pulmonary oedema. Children in shock: 0.9% saline 20 mL/kg, reassess, repeat to a total of 60"
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Continuous rectal (or oesophageal) temperature during cooling, then every 15 to 30 minutes to detect rebound hyperthermia or overshoot hypothermia."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for heat stroke (india, ncdc)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "heat-stroke-summary-matrix",
+   "title": "Heat stroke (India, NCDC) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Heat stroke: core temperature above 40 degrees C (104 degrees F) with CNS dysfunction (confusion, delirium, ataxia, seizures, coma) after",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Begin whole-body cooling immediately, at the scene or on arrival, and within 30 minutes of presentation; aim for a cooling rate of at least",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Glucose, sodium, potassium, calcium, phosphate, urea and creatinine, CK and urine myoglobin, liver enzymes (peak around 48 hours; jaundice",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Lorazepam: Adult 4 mg IV (0.1 mg/kg, maximum 4 mg); child 0.05 to 0.1 mg/kg IV over 2 to 5 minutes (maximum 4 mg); may repeat once",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Transporting before cooling, or relying on ice packs and fans in a hot ambulance.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for heat stroke (india, ncdc)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "heat-stroke-real-image",
+   "title": "Heat stroke (India, NCDC): Diagnostic Head Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
+   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
+   "annotations": [
+    {
+     "label": "Cerebral Parenchyma",
+     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+    },
+    {
+     "label": "Extra-Axial Spaces",
+     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+    }
+   ]
+  }
+ ]
 }

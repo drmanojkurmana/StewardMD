@@ -1,92 +1,195 @@
 {
-  "id": "HEPATORENAL_SYNDROME",
-  "name": "Hepatorenal syndrome",
-  "system": "Hepatology",
-  "class": "non_infective",
-  "chapter": null,
-  "page": null,
-  "aliases": [
-    "hepatorenal",
-    "HRS",
-    "HRS-AKI",
-    "HRS-NAKI",
-    "type 1 hepatorenal syndrome",
-    "type 2 hepatorenal syndrome",
-    "functional renal failure of cirrhosis"
+ "id": "HEPATORENAL_SYNDROME",
+ "name": "Hepatorenal syndrome",
+ "system": "Hepatology",
+ "class": "non_infective",
+ "chapter": null,
+ "page": null,
+ "aliases": [
+  "hepatorenal",
+  "HRS",
+  "HRS-AKI",
+  "HRS-NAKI",
+  "type 1 hepatorenal syndrome",
+  "type 2 hepatorenal syndrome",
+  "functional renal failure of cirrhosis"
+ ],
+ "referenceOnly": true,
+ "review": {
+  "status": "ai_drafted"
+ },
+ "reference": {
+  "clinicalPearls": [
+   "A diagnosis of exclusion: renal failure in advanced cirrhosis/portal hypertension (with or without ascites) that fails to improve after volume expansion and stopping diuretics",
+   "Kidneys are structurally normal — HRS is a functional, potentially reversible form of renal hypoperfusion driven by splanchnic vasodilation and effective arterial underfilling",
+   "Newer nomenclature classifies HRS as HRS-AKI (rapidly progressive, formerly type 1) versus HRS-NAKI (slower, chronic course, formerly type 2)",
+   "Urinalysis and urine sediment are typically bland, with minimal proteinuria and few cells or casts",
+   "Urine sodium is usually very low, reflecting intense renal sodium avidity from neurohormonal activation",
+   "A common precipitant is spontaneous bacterial peritonitis or other infection, so sepsis must always be actively sought and excluded",
+   "Trial of volume expansion (typically with albumin) for 48 hours with cessation of diuretics/nephrotoxins is required before the diagnosis can be confirmed",
+   "Definitive treatment is liver transplantation; medical therapy is a bridge, not a cure"
   ],
-  "referenceOnly": true,
-  "review": {
-    "status": "ai_drafted"
-  },
-  "harrison": {
-    "clinicalPearls": [
-      "A diagnosis of exclusion: renal failure in advanced cirrhosis/portal hypertension (with or without ascites) that fails to improve after volume expansion and stopping diuretics",
-      "Kidneys are structurally normal — HRS is a functional, potentially reversible form of renal hypoperfusion driven by splanchnic vasodilation and effective arterial underfilling",
-      "Newer nomenclature classifies HRS as HRS-AKI (rapidly progressive, formerly type 1) versus HRS-NAKI (slower, chronic course, formerly type 2)",
-      "Urinalysis and urine sediment are typically bland, with minimal proteinuria and few cells or casts",
-      "Urine sodium is usually very low, reflecting intense renal sodium avidity from neurohormonal activation",
-      "A common precipitant is spontaneous bacterial peritonitis or other infection, so sepsis must always be actively sought and excluded",
-      "Trial of volume expansion (typically with albumin) for 48 hours with cessation of diuretics/nephrotoxins is required before the diagnosis can be confirmed",
-      "Definitive treatment is liver transplantation; medical therapy is a bridge, not a cure"
-    ],
-    "pathophysiology": "Advanced liver disease with portal hypertension causes marked splanchnic arterial vasodilation, which reduces effective circulating arterial volume despite total-body volume overload. This triggers compensatory activation of the renin-angiotensin-aldosterone system, sympathetic nervous system, and vasopressin release, producing intense renal vasoconstriction and a progressive fall in glomerular filtration despite normal renal histology. Systemic inflammation and bacterial translocation from the gut further worsen splanchnic vasodilation and renal hypoperfusion, and superimposed infection frequently precipitates the acute form.",
-    "additionalDifferentials": [
-      "Prerenal azotemia from volume depletion (vomiting, diarrhea, over-diuresis, GI bleeding)",
-      "Acute tubular necrosis from ischemia, sepsis, or nephrotoxin exposure",
-      "Drug-induced acute kidney injury (NSAIDs, aminoglycosides, contrast, ACE inhibitors/ARBs)",
-      "Glomerulonephritis associated with chronic liver disease (e.g., IgA nephropathy, membranoproliferative pattern in hepatitis C)",
-      "Abdominal compartment syndrome from tense ascites",
-      "Obstructive uropathy"
-    ],
-    "infectionMimics": [
-      "Sepsis-associated acute kidney injury",
-      "Spontaneous bacterial peritonitis with secondary renal hypoperfusion",
-      "Urinary tract infection with associated prerenal physiology"
-    ],
-    "nonInfectiousMimics": [
-      "Acute tubular necrosis",
-      "Prerenal azotemia from diuretic overuse or GI losses",
-      "Contrast-associated or drug-induced nephropathy",
-      "Cardiorenal syndrome from cirrhotic cardiomyopathy or coexistent heart failure",
-      "Abdominal compartment syndrome"
-    ],
-    "additionalInvestigations": [
-      "Serum creatinine trend and estimated GFR — establishes rate and severity of renal decline defining HRS-AKI vs HRS-NAKI",
-      "Urinalysis with microscopy — bland sediment supports HRS over intrinsic renal disease",
-      "Urine sodium and fractional excretion of sodium — typically very low, reflecting avid sodium retention",
-      "Renal ultrasound — excludes obstruction and assesses for underlying structural kidney disease",
-      "Diagnostic paracentesis with ascitic fluid cell count and culture — excludes spontaneous bacterial peritonitis as a precipitant",
-      "Blood and urine cultures — identify occult infection precipitating renal decline",
-      "Response to albumin volume challenge with diuretic withdrawal — required to confirm the diagnosis",
-      "Liver function panel and coagulation studies — assess severity of underlying hepatic decompensation and transplant urgency"
-    ],
-    "redFlags": [
-      "Rapidly rising creatinine meeting acute kidney injury criteria in a cirrhotic patient (HRS-AKI)",
-      "Concurrent signs of sepsis or spontaneous bacterial peritonitis requiring urgent source control",
-      "Oliguria or anuria with worsening encephalopathy or hemodynamic instability",
-      "Failure to respond to albumin challenge and vasoconstrictor therapy, indicating need for urgent transplant evaluation",
-      "Coexistent gastrointestinal bleeding masking or worsening true volume depletion",
-      "Multiorgan involvement suggesting acute-on-chronic liver failure"
-    ],
-    "pitfalls": [
-      "Diagnosing HRS before adequately excluding hypovolemia and completing an albumin challenge with diuretic withdrawal",
-      "Overlooking an occult infection (especially spontaneous bacterial peritonitis) as the precipitating trigger",
-      "Assuming a bland urinalysis excludes intrinsic renal disease entirely without considering overlap syndromes",
-      "Delaying nephrology and hepatology/transplant referral while pursuing prolonged medical trials in a rapidly deteriorating patient"
-    ],
-    "prognosis": "Historically associated with very high short-term mortality, particularly the rapidly progressive form, unless renal function improves with therapy or the patient undergoes timely liver transplantation. Even with treatment response, underlying hepatic decompensation continues to drive long-term outcomes.",
-    "references": [
-      "Harrison's Principles of Internal Medicine, 22e — Cirrhosis and Its Complications; Acute Kidney Injury"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Give a vasoconstrictor — terlipressin or noradrenaline — together with intravenous albumin to counter splanchnic vasodilation and restore effective arterial volume",
-      "Withdraw diuretics, non-selective beta-blockers, and nephrotoxins, and expand volume with albumin as both diagnostic challenge and treatment",
-      "Actively seek and treat precipitants, giving antibiotics for spontaneous bacterial peritonitis or other infection and albumin to prevent renal injury in peritonitis",
-      "Use renal replacement therapy as a bridge in those awaiting transplantation or with a reversible precipitant",
-      "Prioritise liver transplantation as the definitive treatment, since the renal dysfunction is functional and often reversible once liver function is restored",
-      "Consider a transjugular intrahepatic portosystemic shunt in selected patients to reduce portal pressure",
-      "Monitor renal function, urine output, and for infection, escalating to intensive care for the rapidly progressive form"
-    ]
+  "pathophysiology": "Advanced liver disease with portal hypertension causes marked splanchnic arterial vasodilation, which reduces effective circulating arterial volume despite total-body volume overload. This triggers compensatory activation of the renin-angiotensin-aldosterone system, sympathetic nervous system, and vasopressin release, producing intense renal vasoconstriction and a progressive fall in glomerular filtration despite normal renal histology. Systemic inflammation and bacterial translocation from the gut further worsen splanchnic vasodilation and renal hypoperfusion, and superimposed infection frequently precipitates the acute form.",
+  "additionalDifferentials": [
+   "Prerenal azotemia from volume depletion (vomiting, diarrhea, over-diuresis, GI bleeding)",
+   "Acute tubular necrosis from ischemia, sepsis, or nephrotoxin exposure",
+   "Drug-induced acute kidney injury (NSAIDs, aminoglycosides, contrast, ACE inhibitors/ARBs)",
+   "Glomerulonephritis associated with chronic liver disease (e.g., IgA nephropathy, membranoproliferative pattern in hepatitis C)",
+   "Abdominal compartment syndrome from tense ascites",
+   "Obstructive uropathy"
+  ],
+  "infectionMimics": [
+   "Sepsis-associated acute kidney injury",
+   "Spontaneous bacterial peritonitis with secondary renal hypoperfusion",
+   "Urinary tract infection with associated prerenal physiology"
+  ],
+  "nonInfectiousMimics": [
+   "Acute tubular necrosis",
+   "Prerenal azotemia from diuretic overuse or GI losses",
+   "Contrast-associated or drug-induced nephropathy",
+   "Cardiorenal syndrome from cirrhotic cardiomyopathy or coexistent heart failure",
+   "Abdominal compartment syndrome"
+  ],
+  "additionalInvestigations": [
+   "Serum creatinine trend and estimated GFR — establishes rate and severity of renal decline defining HRS-AKI vs HRS-NAKI",
+   "Urinalysis with microscopy — bland sediment supports HRS over intrinsic renal disease",
+   "Urine sodium and fractional excretion of sodium — typically very low, reflecting avid sodium retention",
+   "Renal ultrasound — excludes obstruction and assesses for underlying structural kidney disease",
+   "Diagnostic paracentesis with ascitic fluid cell count and culture — excludes spontaneous bacterial peritonitis as a precipitant",
+   "Blood and urine cultures — identify occult infection precipitating renal decline",
+   "Response to albumin volume challenge with diuretic withdrawal — required to confirm the diagnosis",
+   "Liver function panel and coagulation studies — assess severity of underlying hepatic decompensation and transplant urgency"
+  ],
+  "redFlags": [
+   "Rapidly rising creatinine meeting acute kidney injury criteria in a cirrhotic patient (HRS-AKI)",
+   "Concurrent signs of sepsis or spontaneous bacterial peritonitis requiring urgent source control",
+   "Oliguria or anuria with worsening encephalopathy or hemodynamic instability",
+   "Failure to respond to albumin challenge and vasoconstrictor therapy, indicating need for urgent transplant evaluation",
+   "Coexistent gastrointestinal bleeding masking or worsening true volume depletion",
+   "Multiorgan involvement suggesting acute-on-chronic liver failure"
+  ],
+  "pitfalls": [
+   "Diagnosing HRS before adequately excluding hypovolemia and completing an albumin challenge with diuretic withdrawal",
+   "Overlooking an occult infection (especially spontaneous bacterial peritonitis) as the precipitating trigger",
+   "Assuming a bland urinalysis excludes intrinsic renal disease entirely without considering overlap syndromes",
+   "Delaying nephrology and hepatology/transplant referral while pursuing prolonged medical trials in a rapidly deteriorating patient"
+  ],
+  "prognosis": "Historically associated with very high short-term mortality, particularly the rapidly progressive form, unless renal function improves with therapy or the patient undergoes timely liver transplantation. Even with treatment response, underlying hepatic decompensation continues to drive long-term outcomes.",
+  "references": [
+   "Harrison's Principles of Internal Medicine, 22e — Cirrhosis and Its Complications; Acute Kidney Injury"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Give a vasoconstrictor — terlipressin or noradrenaline — together with intravenous albumin to counter splanchnic vasodilation and restore effective arterial volume",
+   "Withdraw diuretics, non-selective beta-blockers, and nephrotoxins, and expand volume with albumin as both diagnostic challenge and treatment",
+   "Actively seek and treat precipitants, giving antibiotics for spontaneous bacterial peritonitis or other infection and albumin to prevent renal injury in peritonitis",
+   "Use renal replacement therapy as a bridge in those awaiting transplantation or with a reversible precipitant",
+   "Prioritise liver transplantation as the definitive treatment, since the renal dysfunction is functional and often reversible once liver function is restored",
+   "Consider a transjugular intrahepatic portosystemic shunt in selected patients to reduce portal pressure",
+   "Monitor renal function, urine output, and for infection, escalating to intensive care for the rapidly progressive form"
+  ]
+ },
+ "specialty": "Gastroenterology & Hepatology",
+ "algorithms": [
+  {
+   "id": "hrs-diagnostic-algo",
+   "title": "ICA-HRS Diagnostic Criteria and Management Pathway (EASL/AASLD 2023)",
+   "steps": [
+    {
+     "step": "Cirrhosis with Acute Kidney Injury",
+     "action": "Patient with cirrhosis and ascites presenting with AKI: serum creatinine increase >= 0.3 mg/dL within 48h OR >= 50% increase from baseline.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Precipitation Reversal & Diuretic Withdrawal",
+     "action": "Immediately stop all diuretics (spironolactone, furosemide), withhold vasodilators/beta-blockers, and discontinue all potential nephrotoxins (NSAIDs, aminoglycosides). Treat underlying infection/SBP aggressively.",
+     "critical": true
+    },
+    {
+     "step": "Volume Challenge with IV Albumin",
+     "action": "Administer IV Albumin 1 g/kg/day (maximum 100 g/day) for 48 hours. Assess response.",
+     "critical": true
+    },
+    {
+     "step": "HRS-AKI Confirmation Criteria",
+     "branch": "No response after 48h albumin",
+     "action": "Absence of shock, no current/recent nephrotoxic drug exposure, absence of structural kidney disease (proteinuria < 500 mg/day, microhematuria < 50 RBC/HPF, normal renal ultrasound)."
+    },
+    {
+     "step": "First-Line Pharmacologic Vasoconstrictor Therapy",
+     "branch": "HRS-AKI Confirmed",
+     "action": "Initiate IV Terlipressin (continuous infusion 2 to 4 mg/day, titrate up to 12 mg/day) PLUS IV Albumin 20 to 40 g/day. Alternative if terlipressin unavailable: IV Noradrenaline infusion in ICU or Midodrine + Octreotide. Definite cure is liver transplantation.",
+     "critical": true
+    }
+   ],
+   "caption": "International Club of Ascites (ICA) consensus diagnostic pathway."
   }
+ ],
+ "tables": [
+  {
+   "id": "hrs-classification-matrix",
+   "title": "Differentiation of Renal Failure Phenotypes in Advanced Cirrhosis",
+   "headers": [
+    "Clinical Diagnostic Entity",
+    "Urine Sodium / FENa",
+    "Urine Sediment / Protein",
+    "Response to 48h Albumin Challenge",
+    "First-Line Management"
+   ],
+   "rows": [
+    [
+     "Pre-renal Azotemia",
+     "FENa < 0.2% (avid sodium retention)",
+     "Bland sediment; no protein",
+     "Rapid improvement; creatinine returns to baseline",
+     "Volume expansion with isotonic fluids or albumin; treat fluid losses"
+    ],
+    [
+     "HRS-AKI (Hepatorenal Syndrome AKI)",
+     "FENa < 0.2% (extreme renal vasoconstriction)",
+     "Bland sediment; minimal or no proteinuria (< 500 mg/day)",
+     "No response after 48h volume expansion with albumin",
+     "Terlipressin + IV Albumin; evaluation for emergency liver transplantation"
+    ],
+    [
+     "Acute Tubular Necrosis (ATN)",
+     "FENa > 1% to 2% (tubular epithelial dysfunction)",
+     "Muddy brown granular casts, tubular epithelial cells, proteinuria",
+     "No improvement; slow tubular recovery over 1 to 3 weeks",
+     "Supportive hemodialysis / CRRT; treat shock and sepsis; avoid fluid overload"
+    ],
+    [
+     "Glomerulonephritis (e.g. IgA, Cryoglobulinemic)",
+     "Variable FENa",
+     "Dysmorphic red cells, RBC casts, significant proteinuria (> 1 g/day)",
+     "No response to volume expansion",
+     "Nephrology consultation; renal biopsy; disease-specific immunosuppression"
+    ]
+   ],
+   "caption": "Early differentiation between HRS-AKI and ATN is critical because vasoconstrictor response declines with prolonged ischemia."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "hepatorenal-syndrome-real-image",
+   "title": "Hepatorenal syndrome: Diagnostic Abdominal Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
+   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
+   "annotations": [
+    {
+     "label": "Solid Viscera",
+     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
+    },
+    {
+     "label": "Gastrointestinal Tract",
+     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
+    },
+    {
+     "label": "Mesentery & Peritoneum",
+     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+    }
+   ]
+  }
+ ]
 }

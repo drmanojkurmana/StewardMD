@@ -1,79 +1,174 @@
 {
-  "id": "bardet_biedl_atypical",
-  "name": "Atypical/oligogenic Bardet-Biedl spectrum",
-  "aliases": [
-    "atypical Bardet-Biedl syndrome",
-    "oligogenic Bardet-Biedl syndrome",
-    "triallelic Bardet-Biedl syndrome",
-    "BBS spectrum",
-    "BBSome"
+ "id": "bardet_biedl_atypical",
+ "name": "Atypical/oligogenic Bardet-Biedl spectrum",
+ "aliases": [
+  "atypical Bardet-Biedl syndrome",
+  "oligogenic Bardet-Biedl syndrome",
+  "triallelic Bardet-Biedl syndrome",
+  "BBS spectrum",
+  "BBSome"
+ ],
+ "class": "non_infective",
+ "system": "Genetics / Ciliopathy",
+ "specialty": "Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "GeneReviews / Smith's Recognizable Patterns",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Bardet-Biedl syndrome is a multisystem ciliopathy whose cardinal features are rod-cone dystrophy, obesity, postaxial polydactyly, learning difficulties, hypogonadism and renal anomalies",
+   "Atypical cases lack one or more cardinal features or show unusual combinations, making clinical diagnosis difficult",
+   "More than twenty BBS genes are recognised, most encoding components of the BBSome or its chaperonins that mediate ciliary transport",
+   "In some families inheritance is oligogenic, with variants at a second locus modifying penetrance or severity (so-called triallelic inheritance)",
+   "A single heterozygous variant is generally insufficient, but modifier alleles can influence expression",
+   "Renal disease is a major cause of morbidity and may be the presenting or dominant feature in atypical cases",
+   "Because features emerge over time, diagnosis is often delayed and requires reassessment as the phenotype evolves"
   ],
-  "class": "non_infective",
-  "system": "Genetics / Ciliopathy",
-  "specialty": "Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "GeneReviews / Smith's Recognizable Patterns",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Bardet-Biedl syndrome is a multisystem ciliopathy whose cardinal features are rod-cone dystrophy, obesity, postaxial polydactyly, learning difficulties, hypogonadism and renal anomalies",
-      "Atypical cases lack one or more cardinal features or show unusual combinations, making clinical diagnosis difficult",
-      "More than twenty BBS genes are recognised, most encoding components of the BBSome or its chaperonins that mediate ciliary transport",
-      "In some families inheritance is oligogenic, with variants at a second locus modifying penetrance or severity (so-called triallelic inheritance)",
-      "A single heterozygous variant is generally insufficient, but modifier alleles can influence expression",
-      "Renal disease is a major cause of morbidity and may be the presenting or dominant feature in atypical cases",
-      "Because features emerge over time, diagnosis is often delayed and requires reassessment as the phenotype evolves"
+  "pathophysiology": "Bardet-Biedl syndrome results from dysfunction of the BBSome, a protein complex, and its associated chaperonins that together traffic membrane proteins into and along the primary cilium. Because the primary cilium is a near-ubiquitous sensory and signalling organelle, its impairment affects many tissues, producing the retinal photoreceptor degeneration, hypothalamic dysregulation of appetite, limb patterning defect, gonadal and renal maldevelopment and cognitive effects that define the syndrome. Most cases follow autosomal recessive inheritance, but in some families the phenotype is modulated by additional variants at a second BBS locus (oligogenic or triallelic inheritance), which helps explain the variable expression and the atypical presentations in which one or more cardinal features are absent or a single organ dominates.",
+  "additionalDifferentials": [
+   "Alstrom syndrome",
+   "McKusick-Kaufman syndrome",
+   "Biemond syndrome II",
+   "Cohen syndrome",
+   "Non-syndromic retinitis pigmentosa with obesity",
+   "Other nephronophthisis-related ciliopathies"
+  ],
+  "additionalInvestigations": [
+   "Ophthalmological assessment with electroretinography for rod-cone dystrophy",
+   "Renal ultrasound and function testing for structural and functional kidney disease",
+   "Radiographs of the hands and feet to detect postaxial polydactyly",
+   "Metabolic and endocrine assessment for obesity, diabetes and hypogonadism",
+   "Broad Bardet-Biedl / ciliopathy gene panel or exome analysis with attention to oligogenic contributions"
+  ],
+  "redFlags": [
+   "Progressive renal impairment towards end-stage disease",
+   "Rapidly deteriorating vision",
+   "Complications of obesity such as type 2 diabetes and hypertension",
+   "Hepatic or cardiac involvement in atypical presentations"
+  ],
+  "prognosis": "Long-term outlook is dominated by renal disease and progressive visual loss, compounded by the metabolic consequences of obesity; the atypical and oligogenic forms show wide variability, so prognosis must be individualised.",
+  "pitfalls": [
+   "Excluding the diagnosis when a cardinal feature is absent in an atypical case",
+   "Relying on a single gene result and missing an oligogenic contribution",
+   "Overlooking renal disease, an important cause of morbidity",
+   "Failing to reassess the diagnosis as the phenotype evolves through childhood"
+  ],
+  "references": [
+   "GeneReviews: Bardet-Biedl Syndrome Overview",
+   "Smith's Recognizable Patterns of Human Malformation"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Manage hyperphagia and obesity with dietary, activity and behavioural measures, and consider the melanocortin-4 receptor pathway agonist setmelanotide for Bardet-Biedl-associated obesity",
+   "Provide ophthalmological care for rod-cone dystrophy with low-vision aids, support and monitoring of visual function",
+   "Nephrology surveillance and management of renal structural and functional disease, progressing to renal replacement therapy where needed",
+   "Screen for and treat metabolic and endocrine complications including type 2 diabetes, dyslipidaemia and hypogonadism, with hormone replacement where indicated",
+   "Surgical correction of postaxial polydactyly and developmental and educational support for learning difficulties",
+   "Coordinate lifelong multidisciplinary care across ophthalmology, nephrology, endocrinology and clinical genetics",
+   "Provide genetic counselling covering autosomal recessive and oligogenic or triallelic inheritance, with family testing and cascade screening"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "bardet_biedl_atypical-pathway",
+   "title": "Atypical/oligogenic Bardet-Biedl spectrum: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Bardet-Biedl syndrome is a multisystem ciliopathy whose cardinal features are rod-cone dystrophy, obesity, postaxial polydactyly, learning difficulties, hypogonadism and renal anomalies",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Progressive renal impairment towards end-stage disease",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Ophthalmological assessment with electroretinography for rod-cone dystrophy, Renal ultrasound and function testing for structural and functional kidney disease, Radiographs of the hands and feet to detect postaxial"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Manage hyperphagia and obesity with dietary, activity and behavioural measures, and consider the melanocortin-4 receptor pathway agonist setmelanotide for Bardet-Biedl-associated obesity"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Excluding the diagnosis when a cardinal feature is absent in an atypical case"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of atypical/oligogenic bardet-biedl spectrum."
+  }
+ ],
+ "tables": [
+  {
+   "id": "bardet_biedl_atypical-matrix",
+   "title": "Atypical/oligogenic Bardet-Biedl spectrum: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Bardet-Biedl syndrome is a multisystem ciliopathy whose cardinal features are rod-cone dystrophy, obesity, postaxial polydactyly,",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Bardet-Biedl syndrome results from dysfunction of the BBSome, a protein complex, and its associated chaperonins that together traffic membrane proteins into and along the primary cilium. Because the primary cilium is a near-ubiquitous sensory and signalling organelle, its impairment affects many tissues, producing the retinal photoreceptor degeneration, hypothalamic dysregulation of appetite, limb patterning defect, gonadal and renal maldevelopment and cognitive effects that define the syndrome. Most cases follow autosomal recessive inheritance, but in some families the phenotype is modulated by additional variants at a second BBS locus (oligogenic or triallelic inheritance), which helps explain the variable expression and the atypical presentations in which one or more cardinal features are absent or a single organ dominates.",
-    "additionalDifferentials": [
-      "Alstrom syndrome",
-      "McKusick-Kaufman syndrome",
-      "Biemond syndrome II",
-      "Cohen syndrome",
-      "Non-syndromic retinitis pigmentosa with obesity",
-      "Other nephronophthisis-related ciliopathies"
+    [
+     "Key Investigations",
+     "Ophthalmological assessment with electroretinography for rod-cone dystrophy, Renal ultrasound and function testing for structural",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Ophthalmological assessment with electroretinography for rod-cone dystrophy",
-      "Renal ultrasound and function testing for structural and functional kidney disease",
-      "Radiographs of the hands and feet to detect postaxial polydactyly",
-      "Metabolic and endocrine assessment for obesity, diabetes and hypogonadism",
-      "Broad Bardet-Biedl / ciliopathy gene panel or exome analysis with attention to oligogenic contributions"
+    [
+     "Primary Differentials",
+     "Alstrom syndrome, McKusick-Kaufman syndrome, Biemond syndrome II",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Progressive renal impairment towards end-stage disease",
-      "Rapidly deteriorating vision",
-      "Complications of obesity such as type 2 diabetes and hypertension",
-      "Hepatic or cardiac involvement in atypical presentations"
+    [
+     "Management Strategy",
+     "Manage hyperphagia and obesity with dietary, activity and behavioural measures, and consider the melanocortin-4 receptor pathway",
+     "Core treatment modality"
     ],
-    "prognosis": "Long-term outlook is dominated by renal disease and progressive visual loss, compounded by the metabolic consequences of obesity; the atypical and oligogenic forms show wide variability, so prognosis must be individualised.",
-    "pitfalls": [
-      "Excluding the diagnosis when a cardinal feature is absent in an atypical case",
-      "Relying on a single gene result and missing an oligogenic contribution",
-      "Overlooking renal disease, an important cause of morbidity",
-      "Failing to reassess the diagnosis as the phenotype evolves through childhood"
-    ],
-    "references": [
-      "GeneReviews: Bardet-Biedl Syndrome Overview",
-      "Smith's Recognizable Patterns of Human Malformation"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Manage hyperphagia and obesity with dietary, activity and behavioural measures, and consider the melanocortin-4 receptor pathway agonist setmelanotide for Bardet-Biedl-associated obesity",
-      "Provide ophthalmological care for rod-cone dystrophy with low-vision aids, support and monitoring of visual function",
-      "Nephrology surveillance and management of renal structural and functional disease, progressing to renal replacement therapy where needed",
-      "Screen for and treat metabolic and endocrine complications including type 2 diabetes, dyslipidaemia and hypogonadism, with hormone replacement where indicated",
-      "Surgical correction of postaxial polydactyly and developmental and educational support for learning difficulties",
-      "Coordinate lifelong multidisciplinary care across ophthalmology, nephrology, endocrinology and clinical genetics",
-      "Provide genetic counselling covering autosomal recessive and oligogenic or triallelic inheritance, with family testing and cascade screening"
+    [
+     "Clinical Pitfall",
+     "Excluding the diagnosis when a cardinal feature is absent in an atypical case",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for atypical/oligogenic bardet-biedl spectrum."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "bardet-biedl-atypical-real-image",
+   "title": "Atypical/oligogenic Bardet-Biedl spectrum: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

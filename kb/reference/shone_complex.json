@@ -1,79 +1,174 @@
 {
-  "id": "shone_complex",
-  "name": "Shone complex",
-  "aliases": [
-    "Shone syndrome",
-    "Shone's anomaly",
-    "parachute mitral valve complex",
-    "multilevel left heart obstruction"
+ "id": "shone_complex",
+ "name": "Shone complex",
+ "aliases": [
+  "Shone syndrome",
+  "Shone's anomaly",
+  "parachute mitral valve complex",
+  "multilevel left heart obstruction"
+ ],
+ "class": "non_infective",
+ "system": "Cardiovascular / Congenital",
+ "specialty": "Congenital Cardiology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A constellation of multiple left-heart obstructive lesions arranged in series along the inflow and outflow of the left ventricle",
+   "The classic four components are a supravalvar mitral ring, parachute mitral valve, subaortic stenosis and coarctation of the aorta",
+   "Incomplete forms with two or three components are common, and lesions may be at valvar, subvalvar or supravalvar level",
+   "Obstruction at several levels compounds the load on the left heart and drives pulmonary venous hypertension",
+   "Presentation depends on the dominant and most severe lesion, ranging from a critically ill neonate with coarctation to an older child with exertional symptoms",
+   "A thorough echocardiographic survey is essential because a single obvious lesion may distract from additional serial obstructions",
+   "Management is staged surgical or catheter relief of each significant obstruction, with the mitral apparatus often the most challenging to address"
   ],
-  "class": "non_infective",
-  "system": "Cardiovascular / Congenital",
-  "specialty": "Congenital Cardiology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A constellation of multiple left-heart obstructive lesions arranged in series along the inflow and outflow of the left ventricle",
-      "The classic four components are a supravalvar mitral ring, parachute mitral valve, subaortic stenosis and coarctation of the aorta",
-      "Incomplete forms with two or three components are common, and lesions may be at valvar, subvalvar or supravalvar level",
-      "Obstruction at several levels compounds the load on the left heart and drives pulmonary venous hypertension",
-      "Presentation depends on the dominant and most severe lesion, ranging from a critically ill neonate with coarctation to an older child with exertional symptoms",
-      "A thorough echocardiographic survey is essential because a single obvious lesion may distract from additional serial obstructions",
-      "Management is staged surgical or catheter relief of each significant obstruction, with the mitral apparatus often the most challenging to address"
+  "pathophysiology": "Shone complex is a spectrum of developmental left-heart obstructions occurring in series, so that blood entering and leaving the left ventricle meets resistance at multiple levels. A supravalvar mitral ring and a parachute mitral valve (chordae inserting into a single papillary muscle) impede left atrial emptying and mimic mitral stenosis, raising pulmonary venous pressure. Subaortic and aortic obstruction, together with coarctation, impede left ventricular ejection and impose pressure loading. Because the obstructions are additive, even individually mild lesions can combine to produce significant pulmonary venous hypertension, left atrial and pulmonary vascular changes, and impaired systemic output. The neonatal coarctation component may render the systemic circulation duct-dependent.",
+  "additionalDifferentials": [
+   "Isolated coarctation of the aorta",
+   "Hypoplastic left heart syndrome",
+   "Isolated congenital mitral stenosis",
+   "Cor triatriatum",
+   "Isolated subaortic or valvar aortic stenosis",
+   "Endocardial fibroelastosis"
+  ],
+  "additionalInvestigations": [
+   "Comprehensive transthoracic echocardiography to map every level of left-heart obstruction",
+   "Doppler gradients across the mitral apparatus, subaortic region, aortic valve and aortic arch",
+   "Cardiac MR or CT angiography to define arch anatomy and coarctation",
+   "Cardiac catheterisation to assess pulmonary vascular resistance and residual gradients",
+   "Chest radiograph and electrocardiogram for chamber enlargement and pulmonary congestion",
+   "Serial imaging to track progression of individual lesions over time"
+  ],
+  "redFlags": [
+   "Neonatal circulatory collapse from a duct-dependent coarctation component",
+   "Severe pulmonary venous hypertension or pulmonary oedema",
+   "Rising left atrial pressure with a restrictive mitral apparatus",
+   "Progressive left ventricular dysfunction from combined obstructions"
+  ],
+  "prognosis": "Outcome depends on the number and severity of lesions and especially on the mitral valve, which is difficult to repair and prone to residual stenosis; multilevel and mitral-dominant disease carries a guarded prognosis and often needs repeated intervention.",
+  "pitfalls": [
+   "Relieving one obvious obstruction while overlooking additional serial lesions that limit benefit",
+   "Underestimating the mitral component, which frequently dictates long-term outcome",
+   "Assuming an isolated coarctation and missing the wider complex",
+   "Failing to reassess for progression of previously mild lesions after intervention"
+  ],
+  "references": [
+   "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
+   "Anderson's Paediatric Cardiology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Surgical relief of each obstructive lesion in turn: coarctation repair, resection of subaortic stenosis and supravalvar mitral ring, and mitral or aortic valve repair or replacement",
+   "Prostaglandin infusion to maintain ductal patency in the duct-dependent critically ill neonate pending intervention",
+   "Medical support of heart failure and pulmonary venous congestion with diuretics and afterload reduction",
+   "Comprehensive echocardiographic mapping and serial imaging to detect every level of obstruction and track progression",
+   "Lifelong cardiology surveillance for residual or recurrent obstruction, mitral valve dysfunction, and pulmonary hypertension",
+   "Endocarditis prophylaxis and staged reintervention as lesions recur or the child grows",
+   "Manage through a congenital cardiac surgical and cardiology multidisciplinary team"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "shone_complex-pathway",
+   "title": "Shone complex: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A constellation of multiple left-heart obstructive lesions arranged in series along the inflow and outflow of the left ventricle",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Neonatal circulatory collapse from a duct-dependent coarctation component",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Comprehensive transthoracic echocardiography to map every level of left-heart obstruction, Doppler gradients across the mitral apparatus, subaortic region, aortic valve and aortic arch, Cardiac MR or CT angiography to"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Surgical relief of each obstructive lesion in turn: coarctation repair, resection of subaortic stenosis and supravalvar mitral ring, and mitral or aortic valve repair or replacement"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Relieving one obvious obstruction while overlooking additional serial lesions that limit benefit"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of shone complex."
+  }
+ ],
+ "tables": [
+  {
+   "id": "shone_complex-matrix",
+   "title": "Shone complex: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A constellation of multiple left-heart obstructive lesions arranged in series along the inflow and outflow of the left ventricle",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Shone complex is a spectrum of developmental left-heart obstructions occurring in series, so that blood entering and leaving the left ventricle meets resistance at multiple levels. A supravalvar mitral ring and a parachute mitral valve (chordae inserting into a single papillary muscle) impede left atrial emptying and mimic mitral stenosis, raising pulmonary venous pressure. Subaortic and aortic obstruction, together with coarctation, impede left ventricular ejection and impose pressure loading. Because the obstructions are additive, even individually mild lesions can combine to produce significant pulmonary venous hypertension, left atrial and pulmonary vascular changes, and impaired systemic output. The neonatal coarctation component may render the systemic circulation duct-dependent.",
-    "additionalDifferentials": [
-      "Isolated coarctation of the aorta",
-      "Hypoplastic left heart syndrome",
-      "Isolated congenital mitral stenosis",
-      "Cor triatriatum",
-      "Isolated subaortic or valvar aortic stenosis",
-      "Endocardial fibroelastosis"
+    [
+     "Key Investigations",
+     "Comprehensive transthoracic echocardiography to map every level of left-heart obstruction, Doppler gradients across the mitral",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Comprehensive transthoracic echocardiography to map every level of left-heart obstruction",
-      "Doppler gradients across the mitral apparatus, subaortic region, aortic valve and aortic arch",
-      "Cardiac MR or CT angiography to define arch anatomy and coarctation",
-      "Cardiac catheterisation to assess pulmonary vascular resistance and residual gradients",
-      "Chest radiograph and electrocardiogram for chamber enlargement and pulmonary congestion",
-      "Serial imaging to track progression of individual lesions over time"
+    [
+     "Primary Differentials",
+     "Isolated coarctation of the aorta, Hypoplastic left heart syndrome, Isolated congenital mitral stenosis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Neonatal circulatory collapse from a duct-dependent coarctation component",
-      "Severe pulmonary venous hypertension or pulmonary oedema",
-      "Rising left atrial pressure with a restrictive mitral apparatus",
-      "Progressive left ventricular dysfunction from combined obstructions"
+    [
+     "Management Strategy",
+     "Surgical relief of each obstructive lesion in turn: coarctation repair, resection of subaortic stenosis and supravalvar mitral",
+     "Core treatment modality"
     ],
-    "prognosis": "Outcome depends on the number and severity of lesions and especially on the mitral valve, which is difficult to repair and prone to residual stenosis; multilevel and mitral-dominant disease carries a guarded prognosis and often needs repeated intervention.",
-    "pitfalls": [
-      "Relieving one obvious obstruction while overlooking additional serial lesions that limit benefit",
-      "Underestimating the mitral component, which frequently dictates long-term outcome",
-      "Assuming an isolated coarctation and missing the wider complex",
-      "Failing to reassess for progression of previously mild lesions after intervention"
-    ],
-    "references": [
-      "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
-      "Anderson's Paediatric Cardiology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Surgical relief of each obstructive lesion in turn: coarctation repair, resection of subaortic stenosis and supravalvar mitral ring, and mitral or aortic valve repair or replacement",
-      "Prostaglandin infusion to maintain ductal patency in the duct-dependent critically ill neonate pending intervention",
-      "Medical support of heart failure and pulmonary venous congestion with diuretics and afterload reduction",
-      "Comprehensive echocardiographic mapping and serial imaging to detect every level of obstruction and track progression",
-      "Lifelong cardiology surveillance for residual or recurrent obstruction, mitral valve dysfunction, and pulmonary hypertension",
-      "Endocarditis prophylaxis and staged reintervention as lesions recur or the child grows",
-      "Manage through a congenital cardiac surgical and cardiology multidisciplinary team"
+    [
+     "Clinical Pitfall",
+     "Relieving one obvious obstruction while overlooking additional serial lesions that limit benefit",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for shone complex."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "shone-complex-real-image",
+   "title": "Shone complex: 12-Lead Diagnostic Electrocardiogram",
+   "type": "ecg",
+   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
+   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
+   "annotations": [
+    {
+     "label": "Conduction & Axis",
+     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
+    },
+    {
+     "label": "Repolarization",
+     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
+    },
+    {
+     "label": "Rhythm & Intervals",
+     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+    }
+   ]
+  }
+ ]
 }

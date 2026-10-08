@@ -5,7 +5,23 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Primary care, dermatology clinic",
- "aliases": ["psoriasis", "plaque psoriasis", "psoriasis vulgaris", "scalp psoriasis", "guttate psoriasis", "pustular psoriasis", "erythrodermic psoriasis", "PASI", "DLQI", "calcipotriol", "methotrexate", "biologic", "psoriatic arthritis", "PsA", "PEST"],
+ "aliases": [
+  "psoriasis",
+  "plaque psoriasis",
+  "psoriasis vulgaris",
+  "scalp psoriasis",
+  "guttate psoriasis",
+  "pustular psoriasis",
+  "erythrodermic psoriasis",
+  "PASI",
+  "DLQI",
+  "calcipotriol",
+  "methotrexate",
+  "biologic",
+  "psoriatic arthritis",
+  "PsA",
+  "PEST"
+ ],
  "summary": "Treat mild disease topically (potent corticosteroid plus a vitamin D analogue), move to narrowband UVB or methotrexate when disease is extensive or uncontrolled, and to biologics when PASI is 10 or more and DLQI above 10 despite conventional therapy. Screen annually for psoriatic arthritis and assess cardiovascular risk.",
  "sections": [
   {
@@ -83,20 +99,170 @@
   }
  ],
  "drugs": [
-  { "name": "Calcipotriol 50 micrograms/g", "dose": "Apply once or twice daily; maximum 100 g per week in adults", "notes": "Irritant on face and flexures; hypercalcaemia with excessive use." },
-  { "name": "Calcipotriol with betamethasone dipropionate", "dose": "Apply once daily for up to 4 weeks (gel or ointment)", "notes": "Body and scalp; not face or flexures." },
-  { "name": "Betamethasone valerate 0.1% (potent)", "dose": "Apply once daily for up to 4 weeks", "notes": "Maximum 8 weeks continuous; not face, flexures or genitals." },
-  { "name": "Methotrexate", "dose": "Start 5 to 10 mg orally once weekly; increase gradually to effective dose, maximum 25 mg once weekly", "notes": "With folic acid; weekly only. Monitor CBC, liver and renal function; liver fibrosis monitoring (for example PIIINP or elastography)." },
-  { "name": "Ciclosporin", "dose": "2.5 to 3 mg/kg/day orally in 2 divided doses; up to 5 mg/kg/day after 4 weeks if needed", "notes": "Maximum 1 year continuous. Reduce or stop if BP rises or creatinine rises more than 25% above baseline." },
-  { "name": "Acitretin", "dose": "25 to 30 mg orally daily initially, then 25 to 50 mg daily according to response", "notes": "Teratogenic for 3 years after stopping; monitor lipids and liver function." },
-  { "name": "Apremilast", "dose": "Titrate over 5 days to 30 mg orally twice daily", "notes": "Diarrhoea, nausea, weight loss, low mood." },
-  { "name": "Adalimumab", "dose": "80 mg subcutaneously once, then 40 mg every 2 weeks starting 1 week later", "notes": "Screen TB and hepatitis first; review response at 16 weeks." }
+  {
+   "name": "Calcipotriol 50 micrograms/g",
+   "dose": "Apply once or twice daily; maximum 100 g per week in adults",
+   "notes": "Irritant on face and flexures; hypercalcaemia with excessive use."
+  },
+  {
+   "name": "Calcipotriol with betamethasone dipropionate",
+   "dose": "Apply once daily for up to 4 weeks (gel or ointment)",
+   "notes": "Body and scalp; not face or flexures."
+  },
+  {
+   "name": "Betamethasone valerate 0.1% (potent)",
+   "dose": "Apply once daily for up to 4 weeks",
+   "notes": "Maximum 8 weeks continuous; not face, flexures or genitals."
+  },
+  {
+   "name": "Methotrexate",
+   "dose": "Start 5 to 10 mg orally once weekly; increase gradually to effective dose, maximum 25 mg once weekly",
+   "notes": "With folic acid; weekly only. Monitor CBC, liver and renal function; liver fibrosis monitoring (for example PIIINP or elastography)."
+  },
+  {
+   "name": "Ciclosporin",
+   "dose": "2.5 to 3 mg/kg/day orally in 2 divided doses; up to 5 mg/kg/day after 4 weeks if needed",
+   "notes": "Maximum 1 year continuous. Reduce or stop if BP rises or creatinine rises more than 25% above baseline."
+  },
+  {
+   "name": "Acitretin",
+   "dose": "25 to 30 mg orally daily initially, then 25 to 50 mg daily according to response",
+   "notes": "Teratogenic for 3 years after stopping; monitor lipids and liver function."
+  },
+  {
+   "name": "Apremilast",
+   "dose": "Titrate over 5 days to 30 mg orally twice daily",
+   "notes": "Diarrhoea, nausea, weight loss, low mood."
+  },
+  {
+   "name": "Adalimumab",
+   "dose": "80 mg subcutaneously once, then 40 mg every 2 weeks starting 1 week later",
+   "notes": "Screen TB and hepatitis first; review response at 16 weeks."
+  }
  ],
  "sources": [
-  { "org": "NICE", "title": "Psoriasis: assessment and management (CG153, updated 2017)", "year": 2012, "url": "https://www.nice.org.uk/guidance/cg153/chapter/recommendations" },
-  { "org": "AAD / National Psoriasis Foundation", "title": "Joint AAD-NPF guidelines of care for the management and treatment of psoriasis with biologics", "year": 2019, "url": "https://www.jaad.org/article/S0190-9622%2818%2933001-9/fulltext" },
-  { "org": "AAD / National Psoriasis Foundation", "title": "Joint AAD-NPF guidelines of care for the management of psoriasis with systemic nonbiologic therapies", "year": 2020, "url": "https://www.jaad.org/article/S0190-9622(20)30284-X/fulltext" },
-  { "org": "AAD / National Psoriasis Foundation", "title": "Joint AAD-NPF guidelines of care for the management and treatment of psoriasis with topical therapy and alternative medicine modalities", "year": 2021, "url": "https://www.jaad.org/article/S0190-9622(20)32288-X/fulltext" }
+  {
+   "org": "NICE",
+   "title": "Psoriasis: assessment and management (CG153, updated 2017)",
+   "year": 2012,
+   "url": "https://www.nice.org.uk/guidance/cg153/chapter/recommendations"
+  },
+  {
+   "org": "AAD / National Psoriasis Foundation",
+   "title": "Joint AAD-NPF guidelines of care for the management and treatment of psoriasis with biologics",
+   "year": 2019,
+   "url": "https://www.jaad.org/article/S0190-9622%2818%2933001-9/fulltext"
+  },
+  {
+   "org": "AAD / National Psoriasis Foundation",
+   "title": "Joint AAD-NPF guidelines of care for the management of psoriasis with systemic nonbiologic therapies",
+   "year": 2020,
+   "url": "https://www.jaad.org/article/S0190-9622(20)30284-X/fulltext"
+  },
+  {
+   "org": "AAD / National Psoriasis Foundation",
+   "title": "Joint AAD-NPF guidelines of care for the management and treatment of psoriasis with topical therapy and alternative medicine modalities",
+   "year": 2021,
+   "url": "https://www.jaad.org/article/S0190-9622(20)32288-X/fulltext"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "psoriasis-pathway",
+   "title": "Psoriasis (adult): topical, phototherapy and systemic treatment Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Well-demarcated red plaques with silvery scale on extensor elbows and knees, scalp, lower back, umbilicus and natal cleft; nail pitting and onycholysis; flexural (inverse) psoriasis has little scale.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Guttate psoriasis: small drop-like papules about 2 to 3 weeks after a streptococcal throat infection, mainly in young people.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Offer annual screening for psoriatic arthritis with a validated tool such as PEST (it does not detect axial disease), especially in the first 10 years; refer to rheumatology as soon as PsA is suspected."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Consider a biologic (NICE) when PASI is 10 or more and DLQI above 10 and conventional systemic therapy and phototherapy have failed, are not tolerated or are contraindicated."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Missing psoriatic arthritis (dactylitis, enthesitis, inflammatory back pain, nail disease) until joint damage has occurred."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for psoriasis (adult): topical, phototherapy and systemic treatment."
+  }
+ ],
+ "tables": [
+  {
+   "id": "psoriasis-summary-matrix",
+   "title": "Psoriasis (adult): topical, phototherapy and systemic treatment Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Well-demarcated red plaques with silvery scale on extensor elbows and knees, scalp, lower back, umbilicus and natal cleft; nail pitting and",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Consider a biologic (NICE) when PASI is 10 or more and DLQI above 10 and conventional systemic therapy and phototherapy have failed, are",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Offer annual screening for psoriatic arthritis with a validated tool such as PEST (it does not detect axial disease), especially in the",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Calcipotriol 50 micrograms/g: Apply once or twice daily; maximum 100 g per week in adults",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Missing psoriatic arthritis (dactylitis, enthesitis, inflammatory back pain, nail disease) until joint damage has occurred.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for psoriasis (adult): topical, phototherapy and systemic treatment."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "psoriasis-real-image",
+   "title": "Psoriasis (adult): topical, phototherapy and systemic treatment: Clinical Dermatology Photograph (Plaque Psoriasis)",
+   "type": "diagram",
+   "src": "/assets/kb-real-images/psoriasis-plaque.jpg?v=kbri3",
+   "caption": "Real clinical photograph showing sharply demarcated erythematous plaques covered by silvery micaceous scales.",
+   "annotations": [
+    {
+     "label": "Erythematous Plaques",
+     "description": "Sharply marginated, raised, salmon-pink erythematous cutaneous plaques."
+    },
+    {
+     "label": "Micaceous Scaling",
+     "description": "Thick, layered, silvery-white scales characteristic of accelerated epidermal turnover."
+    },
+    {
+     "label": "Auspitz Phenomenon",
+     "description": "Punctate bleeding upon gentle detachment of adherent scales."
+    }
+   ]
+  }
+ ]
 }

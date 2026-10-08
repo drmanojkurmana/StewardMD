@@ -1,77 +1,172 @@
 {
-  "id": "quebec_platelet_disorder",
-  "name": "Quebec platelet disorder",
-  "aliases": [
-    "QPD",
-    "PLAU duplication disorder",
-    "urokinase plasminogen activator overexpression"
+ "id": "quebec_platelet_disorder",
+ "name": "Quebec platelet disorder",
+ "aliases": [
+  "QPD",
+  "PLAU duplication disorder",
+  "urokinase plasminogen activator overexpression"
+ ],
+ "class": "non_infective",
+ "system": "Haematology",
+ "specialty": "Haematology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Williams Hematology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A rare autosomal dominant bleeding disorder characterised by delayed-onset bleeding after trauma or surgery, often hours to a day later",
+   "Bleeding is typically responsive to antifibrinolytic therapy but not to platelet transfusion, a distinctive and clinically important feature",
+   "The platelet count is usually normal or only mildly reduced, so it is a qualitative defect",
+   "The underlying lesion is a tandem duplication of the PLAU gene, causing marked overexpression of urokinase-type plasminogen activator within megakaryocytes and platelets",
+   "Excess intraplatelet urokinase drives premature plasmin generation and proteolytic degradation of alpha-granule proteins",
+   "It can be mistaken for an alpha-granule storage pool defect because of the secondary loss of granule contents",
+   "Recognition matters because antifibrinolytic cover, rather than platelet transfusion, is the effective haemostatic strategy"
   ],
-  "class": "non_infective",
-  "system": "Haematology",
-  "specialty": "Haematology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Williams Hematology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A rare autosomal dominant bleeding disorder characterised by delayed-onset bleeding after trauma or surgery, often hours to a day later",
-      "Bleeding is typically responsive to antifibrinolytic therapy but not to platelet transfusion, a distinctive and clinically important feature",
-      "The platelet count is usually normal or only mildly reduced, so it is a qualitative defect",
-      "The underlying lesion is a tandem duplication of the PLAU gene, causing marked overexpression of urokinase-type plasminogen activator within megakaryocytes and platelets",
-      "Excess intraplatelet urokinase drives premature plasmin generation and proteolytic degradation of alpha-granule proteins",
-      "It can be mistaken for an alpha-granule storage pool defect because of the secondary loss of granule contents",
-      "Recognition matters because antifibrinolytic cover, rather than platelet transfusion, is the effective haemostatic strategy"
+  "pathophysiology": "Quebec platelet disorder is caused by a tandem duplication of PLAU, the gene encoding urokinase-type plasminogen activator. Overexpression of urokinase within developing megakaryocytes leads to accumulation of the enzyme in platelet alpha granules, where it generates plasmin intracellularly. This premature, localised plasmin activity degrades stored alpha-granule proteins such as factor V, fibrinogen, von Willebrand factor, and others. The net effect is an intraplatelet hyperfibrinolytic state that undermines clot stability at sites of injury, producing characteristically delayed bleeding despite a relatively preserved platelet count.",
+  "additionalDifferentials": [
+   "Platelet alpha-granule storage pool deficiency (including gray platelet syndrome)",
+   "Von Willebrand disease",
+   "Mild factor V deficiency",
+   "Other inherited platelet function disorders",
+   "Alpha-2-antiplasmin deficiency and other hyperfibrinolytic bleeding states",
+   "Acquired platelet dysfunction from drugs"
+  ],
+  "additionalInvestigations": [
+   "Detailed bleeding history emphasising delayed post-traumatic or postoperative bleeding",
+   "Platelet aggregation studies, which may show a reduced response to certain agonists",
+   "Assay or immunoblot demonstrating increased platelet urokinase-type plasminogen activator",
+   "Measurement of reduced platelet alpha-granule protein content",
+   "Genetic testing for the PLAU tandem duplication to confirm the diagnosis",
+   "Von Willebrand factor and coagulation factor assays to exclude alternative disorders"
+  ],
+  "redFlags": [
+   "Severe delayed bleeding after surgery, trauma, or dental extraction",
+   "Bleeding that fails to respond to platelet transfusion",
+   "Joint or deep-tissue bleeding suggesting a significant haemostatic defect",
+   "Unrecognised diagnosis leading to inappropriate transfusion before an invasive procedure"
+  ],
+  "prognosis": "With correct diagnosis and antifibrinolytic cover around haemostatic challenges, most patients do well and lead normal lives. Failure to recognise the disorder can lead to preventable, sometimes serious, delayed haemorrhage.",
+  "pitfalls": [
+   "Relying on platelet transfusion, which is ineffective, rather than antifibrinolytic therapy",
+   "Misclassifying it as a simple alpha-granule storage pool defect",
+   "Being reassured by a normal platelet count and near-normal routine coagulation screen",
+   "Underestimating risk because bleeding is delayed rather than immediate"
+  ],
+  "references": [
+   "Williams Hematology",
+   "Hoffman: Hematology - Basic Principles and Practice"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Treat and prevent bleeding with antifibrinolytic agents such as tranexamic acid or epsilon-aminocaproic acid, which are the mainstay and counter the intraplatelet hyperfibrinolysis",
+   "Give antifibrinolytic cover prophylactically before surgery, dental procedures and after trauma, and continue it to pre-empt the characteristic delayed bleeding",
+   "Avoid platelet transfusion, which is ineffective in this disorder, reserving it only for exceptional circumstances",
+   "Avoid antiplatelet drugs and non-steroidal anti-inflammatory agents that would further impair haemostasis",
+   "Refer for genetic counselling and family screening given autosomal dominant inheritance of the PLAU duplication",
+   "Provide a clear bleeding-disorder care plan and haematology follow-up so delayed haemorrhage is anticipated and managed"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "quebec_platelet_disorder-pathway",
+   "title": "Quebec platelet disorder: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A rare autosomal dominant bleeding disorder characterised by delayed-onset bleeding after trauma or surgery, often hours to a day later",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Severe delayed bleeding after surgery, trauma, or dental extraction",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Detailed bleeding history emphasising delayed post-traumatic or postoperative bleeding, Platelet aggregation studies, which may show a reduced response to certain agonists, Assay or immunoblot demonstrating increased"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Treat and prevent bleeding with antifibrinolytic agents such as tranexamic acid or epsilon-aminocaproic acid, which are the mainstay and counter the intraplatelet hyperfibrinolysis"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Relying on platelet transfusion, which is ineffective, rather than antifibrinolytic therapy"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of quebec platelet disorder."
+  }
+ ],
+ "tables": [
+  {
+   "id": "quebec_platelet_disorder-matrix",
+   "title": "Quebec platelet disorder: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A rare autosomal dominant bleeding disorder characterised by delayed-onset bleeding after trauma or surgery, often hours to a day",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Quebec platelet disorder is caused by a tandem duplication of PLAU, the gene encoding urokinase-type plasminogen activator. Overexpression of urokinase within developing megakaryocytes leads to accumulation of the enzyme in platelet alpha granules, where it generates plasmin intracellularly. This premature, localised plasmin activity degrades stored alpha-granule proteins such as factor V, fibrinogen, von Willebrand factor, and others. The net effect is an intraplatelet hyperfibrinolytic state that undermines clot stability at sites of injury, producing characteristically delayed bleeding despite a relatively preserved platelet count.",
-    "additionalDifferentials": [
-      "Platelet alpha-granule storage pool deficiency (including gray platelet syndrome)",
-      "Von Willebrand disease",
-      "Mild factor V deficiency",
-      "Other inherited platelet function disorders",
-      "Alpha-2-antiplasmin deficiency and other hyperfibrinolytic bleeding states",
-      "Acquired platelet dysfunction from drugs"
+    [
+     "Key Investigations",
+     "Detailed bleeding history emphasising delayed post-traumatic or postoperative bleeding, Platelet aggregation studies, which may",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Detailed bleeding history emphasising delayed post-traumatic or postoperative bleeding",
-      "Platelet aggregation studies, which may show a reduced response to certain agonists",
-      "Assay or immunoblot demonstrating increased platelet urokinase-type plasminogen activator",
-      "Measurement of reduced platelet alpha-granule protein content",
-      "Genetic testing for the PLAU tandem duplication to confirm the diagnosis",
-      "Von Willebrand factor and coagulation factor assays to exclude alternative disorders"
+    [
+     "Primary Differentials",
+     "Platelet alpha-granule storage pool deficiency (including gray platelet syndrome), Von Willebrand disease, Mild factor V",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Severe delayed bleeding after surgery, trauma, or dental extraction",
-      "Bleeding that fails to respond to platelet transfusion",
-      "Joint or deep-tissue bleeding suggesting a significant haemostatic defect",
-      "Unrecognised diagnosis leading to inappropriate transfusion before an invasive procedure"
+    [
+     "Management Strategy",
+     "Treat and prevent bleeding with antifibrinolytic agents such as tranexamic acid or epsilon-aminocaproic acid, which are the",
+     "Core treatment modality"
     ],
-    "prognosis": "With correct diagnosis and antifibrinolytic cover around haemostatic challenges, most patients do well and lead normal lives. Failure to recognise the disorder can lead to preventable, sometimes serious, delayed haemorrhage.",
-    "pitfalls": [
-      "Relying on platelet transfusion, which is ineffective, rather than antifibrinolytic therapy",
-      "Misclassifying it as a simple alpha-granule storage pool defect",
-      "Being reassured by a normal platelet count and near-normal routine coagulation screen",
-      "Underestimating risk because bleeding is delayed rather than immediate"
-    ],
-    "references": [
-      "Williams Hematology",
-      "Hoffman: Hematology - Basic Principles and Practice"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Treat and prevent bleeding with antifibrinolytic agents such as tranexamic acid or epsilon-aminocaproic acid, which are the mainstay and counter the intraplatelet hyperfibrinolysis",
-      "Give antifibrinolytic cover prophylactically before surgery, dental procedures and after trauma, and continue it to pre-empt the characteristic delayed bleeding",
-      "Avoid platelet transfusion, which is ineffective in this disorder, reserving it only for exceptional circumstances",
-      "Avoid antiplatelet drugs and non-steroidal anti-inflammatory agents that would further impair haemostasis",
-      "Refer for genetic counselling and family screening given autosomal dominant inheritance of the PLAU duplication",
-      "Provide a clear bleeding-disorder care plan and haematology follow-up so delayed haemorrhage is anticipated and managed"
+    [
+     "Clinical Pitfall",
+     "Relying on platelet transfusion, which is ineffective, rather than antifibrinolytic therapy",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for quebec platelet disorder."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "quebec-platelet-disorder-real-image",
+   "title": "Quebec platelet disorder: Diagnostic Peripheral Blood Smear Examination",
+   "type": "diagram",
+   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
+   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
+   "annotations": [
+    {
+     "label": "Erythrocyte Indices",
+     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
+    },
+    {
+     "label": "Leukocyte Differential",
+     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
+    },
+    {
+     "label": "Platelet Count",
+     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+    }
+   ]
+  }
+ ]
 }

@@ -1,78 +1,173 @@
 {
-  "id": "punctate_inner_choroidopathy",
-  "name": "Punctate inner choroidopathy (PIC)",
-  "aliases": [
-    "PIC",
-    "punctate inner choroidopathy"
+ "id": "punctate_inner_choroidopathy",
+ "name": "Punctate inner choroidopathy (PIC)",
+ "aliases": [
+  "PIC",
+  "punctate inner choroidopathy"
+ ],
+ "class": "non_infective",
+ "system": "Eye / Ophthalmology",
+ "specialty": "Ophthalmology / Retina",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Kanski's Clinical Ophthalmology / Ryan's Retina",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Typically affects young, myopic women",
+   "Produces small yellow-white punctate lesions at the level of the inner choroid and outer retina at the posterior pole",
+   "There is characteristically little or no vitritis, which helps distinguish it from multifocal choroiditis",
+   "Symptoms include blurred vision, scotomata, photopsia and metamorphopsia",
+   "The principal sight-threatening complication is choroidal neovascularisation",
+   "Lesions typically evolve into small atrophic, punched-out chorioretinal scars",
+   "Management is observation for inactive lesions, intravitreal anti-VEGF therapy for choroidal neovascularisation, and corticosteroids or immunosuppression for aggressive inflammation"
   ],
-  "class": "non_infective",
-  "system": "Eye / Ophthalmology",
-  "specialty": "Ophthalmology / Retina",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Kanski's Clinical Ophthalmology / Ryan's Retina",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Typically affects young, myopic women",
-      "Produces small yellow-white punctate lesions at the level of the inner choroid and outer retina at the posterior pole",
-      "There is characteristically little or no vitritis, which helps distinguish it from multifocal choroiditis",
-      "Symptoms include blurred vision, scotomata, photopsia and metamorphopsia",
-      "The principal sight-threatening complication is choroidal neovascularisation",
-      "Lesions typically evolve into small atrophic, punched-out chorioretinal scars",
-      "Management is observation for inactive lesions, intravitreal anti-VEGF therapy for choroidal neovascularisation, and corticosteroids or immunosuppression for aggressive inflammation"
+  "pathophysiology": "PIC is an idiopathic inflammatory process affecting the inner choroid and outer retina that produces focal punctate lesions. Associated disruption and breaks in Bruch's membrane, together with the inflammatory environment, predispose to the growth of a choroidal neovascular membrane, which is the main threat to central vision. Individual lesions heal to leave atrophic chorioretinal scars.",
+  "additionalDifferentials": [
+   "Multifocal choroiditis and panuveitis",
+   "Multiple evanescent white dot syndrome",
+   "Myopic degeneration with lacquer cracks and neovascularisation",
+   "Presumed ocular histoplasmosis syndrome",
+   "Birdshot chorioretinopathy",
+   "Sarcoid choroiditis",
+   "Neovascular age-related macular degeneration in older patients"
+  ],
+  "additionalInvestigations": [
+   "Dilated fundus examination to identify the punctate lesions",
+   "Optical coherence tomography to localise lesions and detect subretinal fluid or neovascularisation",
+   "Optical coherence tomography angiography to detect choroidal neovascularisation",
+   "Fluorescein angiography showing staining of lesions and leakage from any neovascular membrane",
+   "Indocyanine green angiography showing hypofluorescent spots",
+   "Investigations to exclude tuberculosis and syphilis"
+  ],
+  "redFlags": [
+   "New metamorphopsia, central scotoma or subretinal fluid or haemorrhage indicating choroidal neovascularisation",
+   "Rapid progression with heavy inflammation suggesting multifocal choroiditis",
+   "Bilateral aggressive disease",
+   "Profound central visual loss"
+  ],
+  "prognosis": "The outlook is good when the disease remains uncomplicated, but choroidal neovascularisation can cause significant central visual loss; prompt treatment of neovascularisation improves the outcome.",
+  "pitfalls": [
+   "Missing choroidal neovascularisation, which requires regular Amsler and optical coherence tomography monitoring",
+   "Confusing it with multifocal choroiditis, which shows vitritis, or with myopic neovascularisation",
+   "Failing to exclude tuberculosis and syphilis",
+   "Delaying anti-VEGF treatment once neovascularisation develops"
+  ],
+  "references": [
+   "Kanski's Clinical Ophthalmology",
+   "Ryan's Retina",
+   "American Academy of Ophthalmology, Basic and Clinical Science Course: Uveitis and Ocular Inflammation"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Treat sight-threatening choroidal neovascularisation, the principal complication, with intravitreal anti-VEGF injections",
+   "Use corticosteroids, systemic or periocular, and consider steroid-sparing immunosuppression for active inflammatory disease",
+   "Observe uncomplicated punctate lesions, which often heal to atrophic scars without treatment",
+   "Exclude tuberculosis and syphilis before starting immunosuppressive therapy",
+   "Monitor with optical coherence tomography and OCT angiography, and advise Amsler grid self-monitoring for new distortion",
+   "Refer to a medical retina or uveitis specialist for ongoing management"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "punctate_inner_choroidopathy-pathway",
+   "title": "Punctate inner choroidopathy (PIC): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Typically affects young, myopic women",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: New metamorphopsia, central scotoma or subretinal fluid or haemorrhage indicating choroidal neovascularisation",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Dilated fundus examination to identify the punctate lesions, Optical coherence tomography to localise lesions and detect subretinal fluid or neovascularisation, Optical coherence tomography angiography to detect choroidal"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Treat sight-threatening choroidal neovascularisation, the principal complication, with intravitreal anti-VEGF injections"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Missing choroidal neovascularisation, which requires regular Amsler and optical coherence tomography monitoring"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of punctate inner choroidopathy (pic)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "punctate_inner_choroidopathy-matrix",
+   "title": "Punctate inner choroidopathy (PIC): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Typically affects young, myopic women",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "PIC is an idiopathic inflammatory process affecting the inner choroid and outer retina that produces focal punctate lesions. Associated disruption and breaks in Bruch's membrane, together with the inflammatory environment, predispose to the growth of a choroidal neovascular membrane, which is the main threat to central vision. Individual lesions heal to leave atrophic chorioretinal scars.",
-    "additionalDifferentials": [
-      "Multifocal choroiditis and panuveitis",
-      "Multiple evanescent white dot syndrome",
-      "Myopic degeneration with lacquer cracks and neovascularisation",
-      "Presumed ocular histoplasmosis syndrome",
-      "Birdshot chorioretinopathy",
-      "Sarcoid choroiditis",
-      "Neovascular age-related macular degeneration in older patients"
+    [
+     "Key Investigations",
+     "Dilated fundus examination to identify the punctate lesions, Optical coherence tomography to localise lesions and detect",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Dilated fundus examination to identify the punctate lesions",
-      "Optical coherence tomography to localise lesions and detect subretinal fluid or neovascularisation",
-      "Optical coherence tomography angiography to detect choroidal neovascularisation",
-      "Fluorescein angiography showing staining of lesions and leakage from any neovascular membrane",
-      "Indocyanine green angiography showing hypofluorescent spots",
-      "Investigations to exclude tuberculosis and syphilis"
+    [
+     "Primary Differentials",
+     "Multifocal choroiditis and panuveitis, Multiple evanescent white dot syndrome, Myopic degeneration with lacquer cracks and",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "New metamorphopsia, central scotoma or subretinal fluid or haemorrhage indicating choroidal neovascularisation",
-      "Rapid progression with heavy inflammation suggesting multifocal choroiditis",
-      "Bilateral aggressive disease",
-      "Profound central visual loss"
+    [
+     "Management Strategy",
+     "Treat sight-threatening choroidal neovascularisation, the principal complication, with intravitreal anti-VEGF injections",
+     "Core treatment modality"
     ],
-    "prognosis": "The outlook is good when the disease remains uncomplicated, but choroidal neovascularisation can cause significant central visual loss; prompt treatment of neovascularisation improves the outcome.",
-    "pitfalls": [
-      "Missing choroidal neovascularisation, which requires regular Amsler and optical coherence tomography monitoring",
-      "Confusing it with multifocal choroiditis, which shows vitritis, or with myopic neovascularisation",
-      "Failing to exclude tuberculosis and syphilis",
-      "Delaying anti-VEGF treatment once neovascularisation develops"
-    ],
-    "references": [
-      "Kanski's Clinical Ophthalmology",
-      "Ryan's Retina",
-      "American Academy of Ophthalmology, Basic and Clinical Science Course: Uveitis and Ocular Inflammation"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Treat sight-threatening choroidal neovascularisation, the principal complication, with intravitreal anti-VEGF injections",
-      "Use corticosteroids, systemic or periocular, and consider steroid-sparing immunosuppression for active inflammatory disease",
-      "Observe uncomplicated punctate lesions, which often heal to atrophic scars without treatment",
-      "Exclude tuberculosis and syphilis before starting immunosuppressive therapy",
-      "Monitor with optical coherence tomography and OCT angiography, and advise Amsler grid self-monitoring for new distortion",
-      "Refer to a medical retina or uveitis specialist for ongoing management"
+    [
+     "Clinical Pitfall",
+     "Missing choroidal neovascularisation, which requires regular Amsler and optical coherence tomography monitoring",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for punctate inner choroidopathy (pic)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "punctate-inner-choroidopathy-real-image",
+   "title": "Punctate inner choroidopathy (PIC): Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

@@ -1,78 +1,173 @@
 {
-  "id": "sjogren_larsson_syndrome",
-  "name": "Sjogren-Larsson syndrome",
-  "aliases": [
-    "ALDH3A2",
-    "fatty aldehyde dehydrogenase deficiency",
-    "FALDH deficiency",
-    "SLS"
+ "id": "sjogren_larsson_syndrome",
+ "name": "Sjogren-Larsson syndrome",
+ "aliases": [
+  "ALDH3A2",
+  "fatty aldehyde dehydrogenase deficiency",
+  "FALDH deficiency",
+  "SLS"
+ ],
+ "class": "non_infective",
+ "system": "Dermatology / Genetics",
+ "specialty": "Dermatology / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Rook's Textbook of Dermatology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Classic triad of congenital ichthyosis, spastic diplegia or tetraplegia, and intellectual disability",
+   "The ichthyosis is generalised with fine to plate-like scaling, often prominent in flexures, and pruritus is characteristic",
+   "A pathognomonic ophthalmological sign is glistening white/yellow dots (crystalline maculopathy) at the macula",
+   "Autosomal recessive; caused by mutations in ALDH3A2 encoding fatty aldehyde dehydrogenase (FALDH)",
+   "Neurological features typically emerge in infancy with delayed motor milestones and spasticity, and seizures may occur",
+   "Photophobia and reduced visual acuity accompany the macular changes",
+   "Management is supportive with emollients/keratolytics for the skin, physiotherapy and spasticity care, and specialist neurological and ophthalmological follow-up"
   ],
-  "class": "non_infective",
-  "system": "Dermatology / Genetics",
-  "specialty": "Dermatology / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Rook's Textbook of Dermatology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Classic triad of congenital ichthyosis, spastic diplegia or tetraplegia, and intellectual disability",
-      "The ichthyosis is generalised with fine to plate-like scaling, often prominent in flexures, and pruritus is characteristic",
-      "A pathognomonic ophthalmological sign is glistening white/yellow dots (crystalline maculopathy) at the macula",
-      "Autosomal recessive; caused by mutations in ALDH3A2 encoding fatty aldehyde dehydrogenase (FALDH)",
-      "Neurological features typically emerge in infancy with delayed motor milestones and spasticity, and seizures may occur",
-      "Photophobia and reduced visual acuity accompany the macular changes",
-      "Management is supportive with emollients/keratolytics for the skin, physiotherapy and spasticity care, and specialist neurological and ophthalmological follow-up"
+  "pathophysiology": "Sjogren-Larsson syndrome is an autosomal recessive disorder caused by mutations in ALDH3A2, which encodes fatty aldehyde dehydrogenase, a component of the fatty alcohol:NAD oxidoreductase complex. Deficient enzyme activity blocks the oxidation of long-chain fatty aldehydes and alcohols, which accumulate and are incorporated abnormally into lipids. In the epidermis this disrupts the lamellar lipid membranes essential for the permeability barrier, producing ichthyosis; in the developing central nervous system abnormal lipid metabolism and myelin disturbance underlie the spasticity and cognitive impairment; and lipid deposition in the retina produces the characteristic glistening macular dots.",
+  "additionalDifferentials": [
+   "Other congenital ichthyoses (lamellar ichthyosis, congenital ichthyosiform erythroderma)",
+   "Refsum disease and other peroxisomal disorders",
+   "Chanarin-Dorfman syndrome (neutral lipid storage disease with ichthyosis)",
+   "Cerebral palsy of other cause with coincidental xerosis",
+   "Trichothiodystrophy with ichthyosis",
+   "Netherton syndrome"
+  ],
+  "additionalInvestigations": [
+   "Assay of fatty aldehyde dehydrogenase activity in cultured fibroblasts or leucocytes",
+   "Molecular genetic testing of ALDH3A2",
+   "Ophthalmological examination for glistening macular dots and photophobia",
+   "Magnetic resonance imaging of the brain (white-matter change) and MR spectroscopy showing an abnormal lipid peak",
+   "Skin biopsy showing hyperkeratosis with a variably reduced or thickened granular layer",
+   "Developmental and neurological assessment"
+  ],
+  "redFlags": [
+   "Progressive loss of motor function or new-onset seizures",
+   "Marked visual deterioration",
+   "Feeding difficulty or failure to thrive in the affected infant",
+   "Barrier compromise with recurrent skin infection"
+  ],
+  "prognosis": "Neurological impairment is usually static or slowly progressive and largely irreversible; most patients have lasting spasticity and intellectual disability. The ichthyosis and pruritus can be controlled but not cured, and lifespan varies with the severity of neurological and swallowing involvement.",
+  "pitfalls": [
+   "Diagnosing isolated cerebral palsy and missing the associated ichthyosis and macular dots",
+   "Attributing pruritus to eczema rather than recognising it as a characteristic feature",
+   "Failing to arrange fundoscopy, which can reveal the near-specific glistening dots",
+   "Overlooking the recessive inheritance and the value of genetic counselling for the family"
+  ],
+  "references": [
+   "Rook's Textbook of Dermatology",
+   "Harper's Textbook of Paediatric Dermatology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Control the ichthyosis with regular emollients, keratolytics such as topical urea or lactic acid, and systemic retinoids for severe scaling",
+   "Target the characteristic pruritus with leukotriene-synthesis inhibitors such as zileuton alongside antihistamines and diligent skin care",
+   "Manage spasticity with physiotherapy, antispasticity agents such as baclofen and orthotic support, and treat any seizures with antiseizure medication",
+   "Provide ophthalmology surveillance for the crystalline maculopathy and photophobia, supplying tinted lenses and low-vision support",
+   "Deliver multidisciplinary developmental support with special education and speech and occupational therapy for the intellectual disability, monitoring nutrition and swallowing",
+   "Offer genetic counselling and carrier and family testing given autosomal recessive ALDH3A2 inheritance"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "sjogren_larsson_syndrome-pathway",
+   "title": "Sjogren-Larsson syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Classic triad of congenital ichthyosis, spastic diplegia or tetraplegia, and intellectual disability",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Progressive loss of motor function or new-onset seizures",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Assay of fatty aldehyde dehydrogenase activity in cultured fibroblasts or leucocytes, Molecular genetic testing of ALDH3A2, Ophthalmological examination for glistening macular dots and photophobia"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Control the ichthyosis with regular emollients, keratolytics such as topical urea or lactic acid, and systemic retinoids for severe scaling"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Diagnosing isolated cerebral palsy and missing the associated ichthyosis and macular dots"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of sjogren-larsson syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "sjogren_larsson_syndrome-matrix",
+   "title": "Sjogren-Larsson syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Classic triad of congenital ichthyosis, spastic diplegia or tetraplegia, and intellectual disability",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Sjogren-Larsson syndrome is an autosomal recessive disorder caused by mutations in ALDH3A2, which encodes fatty aldehyde dehydrogenase, a component of the fatty alcohol:NAD oxidoreductase complex. Deficient enzyme activity blocks the oxidation of long-chain fatty aldehydes and alcohols, which accumulate and are incorporated abnormally into lipids. In the epidermis this disrupts the lamellar lipid membranes essential for the permeability barrier, producing ichthyosis; in the developing central nervous system abnormal lipid metabolism and myelin disturbance underlie the spasticity and cognitive impairment; and lipid deposition in the retina produces the characteristic glistening macular dots.",
-    "additionalDifferentials": [
-      "Other congenital ichthyoses (lamellar ichthyosis, congenital ichthyosiform erythroderma)",
-      "Refsum disease and other peroxisomal disorders",
-      "Chanarin-Dorfman syndrome (neutral lipid storage disease with ichthyosis)",
-      "Cerebral palsy of other cause with coincidental xerosis",
-      "Trichothiodystrophy with ichthyosis",
-      "Netherton syndrome"
+    [
+     "Key Investigations",
+     "Assay of fatty aldehyde dehydrogenase activity in cultured fibroblasts or leucocytes, Molecular genetic testing of ALDH3A2,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Assay of fatty aldehyde dehydrogenase activity in cultured fibroblasts or leucocytes",
-      "Molecular genetic testing of ALDH3A2",
-      "Ophthalmological examination for glistening macular dots and photophobia",
-      "Magnetic resonance imaging of the brain (white-matter change) and MR spectroscopy showing an abnormal lipid peak",
-      "Skin biopsy showing hyperkeratosis with a variably reduced or thickened granular layer",
-      "Developmental and neurological assessment"
+    [
+     "Primary Differentials",
+     "Other congenital ichthyoses (lamellar ichthyosis, congenital ichthyosiform erythroderma), Refsum disease and other peroxisomal",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Progressive loss of motor function or new-onset seizures",
-      "Marked visual deterioration",
-      "Feeding difficulty or failure to thrive in the affected infant",
-      "Barrier compromise with recurrent skin infection"
+    [
+     "Management Strategy",
+     "Control the ichthyosis with regular emollients, keratolytics such as topical urea or lactic acid, and systemic retinoids for",
+     "Core treatment modality"
     ],
-    "prognosis": "Neurological impairment is usually static or slowly progressive and largely irreversible; most patients have lasting spasticity and intellectual disability. The ichthyosis and pruritus can be controlled but not cured, and lifespan varies with the severity of neurological and swallowing involvement.",
-    "pitfalls": [
-      "Diagnosing isolated cerebral palsy and missing the associated ichthyosis and macular dots",
-      "Attributing pruritus to eczema rather than recognising it as a characteristic feature",
-      "Failing to arrange fundoscopy, which can reveal the near-specific glistening dots",
-      "Overlooking the recessive inheritance and the value of genetic counselling for the family"
-    ],
-    "references": [
-      "Rook's Textbook of Dermatology",
-      "Harper's Textbook of Paediatric Dermatology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Control the ichthyosis with regular emollients, keratolytics such as topical urea or lactic acid, and systemic retinoids for severe scaling",
-      "Target the characteristic pruritus with leukotriene-synthesis inhibitors such as zileuton alongside antihistamines and diligent skin care",
-      "Manage spasticity with physiotherapy, antispasticity agents such as baclofen and orthotic support, and treat any seizures with antiseizure medication",
-      "Provide ophthalmology surveillance for the crystalline maculopathy and photophobia, supplying tinted lenses and low-vision support",
-      "Deliver multidisciplinary developmental support with special education and speech and occupational therapy for the intellectual disability, monitoring nutrition and swallowing",
-      "Offer genetic counselling and carrier and family testing given autosomal recessive ALDH3A2 inheritance"
+    [
+     "Clinical Pitfall",
+     "Diagnosing isolated cerebral palsy and missing the associated ichthyosis and macular dots",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for sjogren-larsson syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "sjogren-larsson-syndrome-real-image",
+   "title": "Sjogren-Larsson syndrome: Clinical Cutaneous Dermatology Photograph",
+   "type": "diagram",
+   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
+   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
+   "annotations": [
+    {
+     "label": "Primary Lesions",
+     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
+    },
+    {
+     "label": "Demarcation & Margins",
+     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
+    },
+    {
+     "label": "Anatomical Distribution",
+     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+    }
+   ]
+  }
+ ]
 }

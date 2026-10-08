@@ -5,7 +5,20 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, psychiatric ward, general ward",
- "aliases": ["rapid tranquillisation", "RT", "agitated patient", "violent patient", "aggression", "chemical restraint", "acute behavioural disturbance", "haloperidol promethazine", "IM lorazepam", "IM olanzapine", "Project BETA", "NICE NG10"],
+ "aliases": [
+  "rapid tranquillisation",
+  "RT",
+  "agitated patient",
+  "violent patient",
+  "aggression",
+  "chemical restraint",
+  "acute behavioural disturbance",
+  "haloperidol promethazine",
+  "IM lorazepam",
+  "IM olanzapine",
+  "Project BETA",
+  "NICE NG10"
+ ],
  "summary": "Look for medical causes and de-escalate first; offer oral medication; if rapid tranquillisation is needed use IM lorazepam alone or IM haloperidol with IM promethazine (NICE NG10), with olanzapine or midazolam as alternatives. Use lower doses in the elderly, avoid haloperidol without an ECG or with cardiac disease, and monitor vital signs afterwards.",
  "sections": [
   {
@@ -83,17 +96,154 @@
   }
  ],
  "drugs": [
-  { "name": "Lorazepam", "dose": "1 to 2 mg orally or IM; repeat after 30 to 60 minutes if partial response", "notes": "First choice if antipsychotic-naive, no ECG, or cardiac disease." },
-  { "name": "Haloperidol", "dose": "2.5 to 5 mg orally or 5 mg IM (elderly 0.5 to 1 mg)", "notes": "IM only with promethazine for rapid tranquillisation, never alone; ECG first; risk of dystonia and QTc prolongation." },
-  { "name": "Promethazine", "dose": "25 to 50 mg orally, or 25 to 50 mg IM given with haloperidol", "notes": "Sedative and reduces dystonia risk; do not give IM haloperidol without it." },
-  { "name": "Olanzapine", "dose": "5 to 10 mg orally or 10 mg IM; maximum 20 mg/day", "notes": "No parenteral benzodiazepine within 1 hour of IM olanzapine." },
-  { "name": "Midazolam", "dose": "5 mg IM (10 mg if severe)", "notes": "Emergency department use with airway monitoring." },
-  { "name": "Risperidone", "dose": "1 to 2 mg orally", "notes": "Oral option for psychotic agitation." }
+  {
+   "name": "Lorazepam",
+   "dose": "1 to 2 mg orally or IM; repeat after 30 to 60 minutes if partial response",
+   "notes": "First choice if antipsychotic-naive, no ECG, or cardiac disease."
+  },
+  {
+   "name": "Haloperidol",
+   "dose": "2.5 to 5 mg orally or 5 mg IM (elderly 0.5 to 1 mg)",
+   "notes": "IM only with promethazine for rapid tranquillisation, never alone; ECG first; risk of dystonia and QTc prolongation."
+  },
+  {
+   "name": "Promethazine",
+   "dose": "25 to 50 mg orally, or 25 to 50 mg IM given with haloperidol",
+   "notes": "Sedative and reduces dystonia risk; do not give IM haloperidol without it."
+  },
+  {
+   "name": "Olanzapine",
+   "dose": "5 to 10 mg orally or 10 mg IM; maximum 20 mg/day",
+   "notes": "No parenteral benzodiazepine within 1 hour of IM olanzapine."
+  },
+  {
+   "name": "Midazolam",
+   "dose": "5 mg IM (10 mg if severe)",
+   "notes": "Emergency department use with airway monitoring."
+  },
+  {
+   "name": "Risperidone",
+   "dose": "1 to 2 mg orally",
+   "notes": "Oral option for psychotic agitation."
+  }
  ],
  "sources": [
-  { "org": "NICE", "title": "Violence and aggression: short-term management in mental health, health and community settings (NG10)", "year": 2015, "url": "https://www.nice.org.uk/guidance/ng10" },
-  { "org": "American Association for Emergency Psychiatry (Project BETA)", "title": "The psychopharmacology of agitation: consensus statement of the American Association for Emergency Psychiatry Project BETA Psychopharmacology Workgroup", "year": 2012, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3298219/" },
-  { "org": "JACEP Open (Roppolo et al.)", "title": "Improving the management of acutely agitated patients in the emergency department through implementation of Project BETA", "year": 2020, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7593430/" }
+  {
+   "org": "NICE",
+   "title": "Violence and aggression: short-term management in mental health, health and community settings (NG10)",
+   "year": 2015,
+   "url": "https://www.nice.org.uk/guidance/ng10"
+  },
+  {
+   "org": "American Association for Emergency Psychiatry (Project BETA)",
+   "title": "The psychopharmacology of agitation: consensus statement of the American Association for Emergency Psychiatry Project BETA Psychopharmacology Workgroup",
+   "year": 2012,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3298219/"
+  },
+  {
+   "org": "JACEP Open (Roppolo et al.)",
+   "title": "Improving the management of acutely agitated patients in the emergency department through implementation of Project BETA",
+   "year": 2020,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7593430/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "acute-agitation-pathway",
+   "title": "Acute agitation and rapid tranquillisation (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Always consider medical causes: hypoxia, hypoglycaemia, head injury, delirium, sepsis, alcohol or drug intoxication or withdrawal, thyrotoxicosis, anticholinergic or stimulant toxicity.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Ensure enough trained staff, clear exits and removal of potential weapons; one staff member leads communication.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "The aim is a calm patient who can still talk and take part in assessment, not deep sedation."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "NICE NG10: use either IM lorazepam alone or IM haloperidol combined with IM promethazine. Use IM lorazepam if there is too little information to guide choice or the patient has not taken antipsychotics before."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Check pulse, BP, respiratory rate, temperature, hydration and level of consciousness at least hourly until there are no concerns (NICE NG10)."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for acute agitation and rapid tranquillisation (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "acute-agitation-summary-matrix",
+   "title": "Acute agitation and rapid tranquillisation (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Always consider medical causes: hypoxia, hypoglycaemia, head injury, delirium, sepsis, alcohol or drug intoxication or withdrawal,",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Ensure enough trained staff, clear exits and removal of potential weapons; one staff member leads communication.",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Lorazepam: 1 to 2 mg orally or IM; repeat after 30 to 60 minutes if partial response",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Sedating before excluding hypoglycaemia, hypoxia, head injury or delirium.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for acute agitation and rapid tranquillisation (adult)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "acute-agitation-real-image",
+   "title": "Acute agitation and rapid tranquillisation (adult): Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

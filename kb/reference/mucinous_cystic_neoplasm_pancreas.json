@@ -1,81 +1,176 @@
 {
-  "id": "mucinous_cystic_neoplasm_pancreas",
-  "name": "Mucinous cystic neoplasm of the pancreas",
-  "aliases": [
-    "MCN",
-    "mucinous cystadenoma of the pancreas",
-    "pancreatic mucinous cystic neoplasm"
+ "id": "mucinous_cystic_neoplasm_pancreas",
+ "name": "Mucinous cystic neoplasm of the pancreas",
+ "aliases": [
+  "MCN",
+  "mucinous cystadenoma of the pancreas",
+  "pancreatic mucinous cystic neoplasm"
+ ],
+ "class": "non_infective",
+ "system": "Gastroenterology / Hepatobiliary",
+ "specialty": "Hepatobiliary / Pancreatology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A mucin-producing cystic neoplasm that arises almost exclusively in women, typically in middle age",
+   "Characteristically located in the body or tail of the pancreas and, unlike IPMN, does not communicate with the pancreatic duct",
+   "Defined histologically by an ovarian-type stroma beneath the mucinous epithelium, a hallmark distinguishing it from other cystic lesions",
+   "Usually a single, large, thick-walled cyst that may contain septa and peripheral (eggshell) calcification",
+   "Considered a premalignant lesion with potential for progression to invasive mucinous cystadenocarcinoma",
+   "Cyst fluid typically shows a raised CEA reflecting its mucinous nature",
+   "Because of malignant potential and the generally younger, surgically fit population, resection is commonly recommended, particularly for larger or symptomatic lesions or those with worrisome features"
   ],
-  "class": "non_infective",
-  "system": "Gastroenterology / Hepatobiliary",
-  "specialty": "Hepatobiliary / Pancreatology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A mucin-producing cystic neoplasm that arises almost exclusively in women, typically in middle age",
-      "Characteristically located in the body or tail of the pancreas and, unlike IPMN, does not communicate with the pancreatic duct",
-      "Defined histologically by an ovarian-type stroma beneath the mucinous epithelium, a hallmark distinguishing it from other cystic lesions",
-      "Usually a single, large, thick-walled cyst that may contain septa and peripheral (eggshell) calcification",
-      "Considered a premalignant lesion with potential for progression to invasive mucinous cystadenocarcinoma",
-      "Cyst fluid typically shows a raised CEA reflecting its mucinous nature",
-      "Because of malignant potential and the generally younger, surgically fit population, resection is commonly recommended, particularly for larger or symptomatic lesions or those with worrisome features"
+  "pathophysiology": "Mucinous cystic neoplasms are thought to develop from primitive stroma, giving rise to the characteristic ovarian-type stroma that supports an overlying mucin-secreting columnar epithelium. This distinctive stroma expresses hormone receptors, in keeping with the striking female predominance. The lesions form solitary, septated cysts that, in contrast to intraductal papillary mucinous neoplasms, do not connect with the ductal system. The epithelium can progress through increasing grades of dysplasia to invasive cystadenocarcinoma, so the presence and extent of any invasive component determines behaviour; non-invasive lesions are cured by complete resection.",
+  "additionalDifferentials": [
+   "Branch-duct intraductal papillary mucinous neoplasm",
+   "Serous cystadenoma",
+   "Pancreatic pseudocyst",
+   "Solid pseudopapillary neoplasm with cystic change",
+   "Cystic pancreatic neuroendocrine tumour",
+   "Lymphoepithelial cyst"
+  ],
+  "additionalInvestigations": [
+   "MRI with MRCP to assess cyst morphology and confirm absence of ductal communication",
+   "Endoscopic ultrasound with fine-needle aspiration for fluid analysis and wall assessment",
+   "Cyst fluid CEA (typically elevated) and cytology",
+   "Cyst fluid molecular testing for KRAS mutation to support a mucinous diagnosis",
+   "Contrast-enhanced CT to detect mural nodules, solid components, and calcification",
+   "Serum CA 19-9 when malignancy is a concern"
+  ],
+  "redFlags": [
+   "An enhancing mural nodule or solid component within the cyst",
+   "Rapid increase in size",
+   "Associated pancreatic duct dilatation or a discrete mass suggesting invasion",
+   "New symptoms such as pain, weight loss, or jaundice",
+   "Positive or atypical cytology"
+  ],
+  "prognosis": "Non-invasive mucinous cystic neoplasms are cured by complete surgical resection with an excellent long-term outlook; once invasive cystadenocarcinoma has developed, prognosis depends on stage and resembles that of pancreatic adenocarcinoma.",
+  "pitfalls": [
+   "Confusing a mucinous cystic neoplasm with a benign serous cystadenoma or a pseudocyst",
+   "Assuming a body or tail cyst in a woman is benign without appropriate characterisation",
+   "Attributing the lesion to prior pancreatitis and mislabelling it a pseudocyst, delaying resection",
+   "Incomplete resection leaving residual neoplastic epithelium",
+   "Failing to appreciate that the absence of ductal communication helps separate it from IPMN"
+  ],
+  "references": [
+   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+   "European evidence-based guidelines on pancreatic cystic neoplasms",
+   "WHO classification of tumours of the digestive system"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Surgical resection, typically distal pancreatectomy for these body and tail lesions, is the definitive treatment and is curative when the lesion is non-invasive",
+   "Preserve the spleen where oncologically appropriate during distal pancreatectomy",
+   "Risk-stratify before surgery with cross-sectional imaging and endoscopic ultrasound with fine-needle aspiration, using cyst fluid CEA, cytology and KRAS testing",
+   "Consider imaging surveillance for small, low-risk lesions that do not meet resection criteria",
+   "When invasive cystadenocarcinoma is present, add adjuvant chemotherapy and manage as for pancreatic adenocarcinoma",
+   "Monitor for postoperative exocrine insufficiency and diabetes after pancreatic resection",
+   "Manage within a hepatobiliary and pancreatic multidisciplinary team"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "mucinous_cystic_neoplasm_pancreas-pathway",
+   "title": "Mucinous cystic neoplasm of the pancreas: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A mucin-producing cystic neoplasm that arises almost exclusively in women, typically in middle age",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: An enhancing mural nodule or solid component within the cyst",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: MRI with MRCP to assess cyst morphology and confirm absence of ductal communication, Endoscopic ultrasound with fine-needle aspiration for fluid analysis and wall assessment, Cyst fluid CEA (typically elevated) and cytology"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Surgical resection, typically distal pancreatectomy for these body and tail lesions, is the definitive treatment and is curative when the lesion is non-invasive"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Confusing a mucinous cystic neoplasm with a benign serous cystadenoma or a pseudocyst"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of mucinous cystic neoplasm of the pancreas."
+  }
+ ],
+ "tables": [
+  {
+   "id": "mucinous_cystic_neoplasm_pancreas-matrix",
+   "title": "Mucinous cystic neoplasm of the pancreas: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A mucin-producing cystic neoplasm that arises almost exclusively in women, typically in middle age",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Mucinous cystic neoplasms are thought to develop from primitive stroma, giving rise to the characteristic ovarian-type stroma that supports an overlying mucin-secreting columnar epithelium. This distinctive stroma expresses hormone receptors, in keeping with the striking female predominance. The lesions form solitary, septated cysts that, in contrast to intraductal papillary mucinous neoplasms, do not connect with the ductal system. The epithelium can progress through increasing grades of dysplasia to invasive cystadenocarcinoma, so the presence and extent of any invasive component determines behaviour; non-invasive lesions are cured by complete resection.",
-    "additionalDifferentials": [
-      "Branch-duct intraductal papillary mucinous neoplasm",
-      "Serous cystadenoma",
-      "Pancreatic pseudocyst",
-      "Solid pseudopapillary neoplasm with cystic change",
-      "Cystic pancreatic neuroendocrine tumour",
-      "Lymphoepithelial cyst"
+    [
+     "Key Investigations",
+     "MRI with MRCP to assess cyst morphology and confirm absence of ductal communication, Endoscopic ultrasound with fine-needle",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "MRI with MRCP to assess cyst morphology and confirm absence of ductal communication",
-      "Endoscopic ultrasound with fine-needle aspiration for fluid analysis and wall assessment",
-      "Cyst fluid CEA (typically elevated) and cytology",
-      "Cyst fluid molecular testing for KRAS mutation to support a mucinous diagnosis",
-      "Contrast-enhanced CT to detect mural nodules, solid components, and calcification",
-      "Serum CA 19-9 when malignancy is a concern"
+    [
+     "Primary Differentials",
+     "Branch-duct intraductal papillary mucinous neoplasm, Serous cystadenoma, Pancreatic pseudocyst",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "An enhancing mural nodule or solid component within the cyst",
-      "Rapid increase in size",
-      "Associated pancreatic duct dilatation or a discrete mass suggesting invasion",
-      "New symptoms such as pain, weight loss, or jaundice",
-      "Positive or atypical cytology"
+    [
+     "Management Strategy",
+     "Surgical resection, typically distal pancreatectomy for these body and tail lesions, is the definitive treatment and is curative",
+     "Core treatment modality"
     ],
-    "prognosis": "Non-invasive mucinous cystic neoplasms are cured by complete surgical resection with an excellent long-term outlook; once invasive cystadenocarcinoma has developed, prognosis depends on stage and resembles that of pancreatic adenocarcinoma.",
-    "pitfalls": [
-      "Confusing a mucinous cystic neoplasm with a benign serous cystadenoma or a pseudocyst",
-      "Assuming a body or tail cyst in a woman is benign without appropriate characterisation",
-      "Attributing the lesion to prior pancreatitis and mislabelling it a pseudocyst, delaying resection",
-      "Incomplete resection leaving residual neoplastic epithelium",
-      "Failing to appreciate that the absence of ductal communication helps separate it from IPMN"
-    ],
-    "references": [
-      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-      "European evidence-based guidelines on pancreatic cystic neoplasms",
-      "WHO classification of tumours of the digestive system"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Surgical resection, typically distal pancreatectomy for these body and tail lesions, is the definitive treatment and is curative when the lesion is non-invasive",
-      "Preserve the spleen where oncologically appropriate during distal pancreatectomy",
-      "Risk-stratify before surgery with cross-sectional imaging and endoscopic ultrasound with fine-needle aspiration, using cyst fluid CEA, cytology and KRAS testing",
-      "Consider imaging surveillance for small, low-risk lesions that do not meet resection criteria",
-      "When invasive cystadenocarcinoma is present, add adjuvant chemotherapy and manage as for pancreatic adenocarcinoma",
-      "Monitor for postoperative exocrine insufficiency and diabetes after pancreatic resection",
-      "Manage within a hepatobiliary and pancreatic multidisciplinary team"
+    [
+     "Clinical Pitfall",
+     "Confusing a mucinous cystic neoplasm with a benign serous cystadenoma or a pseudocyst",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for mucinous cystic neoplasm of the pancreas."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "mucinous-cystic-neoplasm-pancreas-real-image",
+   "title": "Mucinous cystic neoplasm of the pancreas: Diagnostic Abdominal Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
+   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
+   "annotations": [
+    {
+     "label": "Solid Viscera",
+     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
+    },
+    {
+     "label": "Gastrointestinal Tract",
+     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
+    },
+    {
+     "label": "Mesentery & Peritoneum",
+     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+    }
+   ]
+  }
+ ]
 }

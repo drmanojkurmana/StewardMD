@@ -1,76 +1,171 @@
 {
-  "id": "lichen_nitidus",
-  "name": "Lichen nitidus",
-  "aliases": [
-    "lichen nitidus"
+ "id": "lichen_nitidus",
+ "name": "Lichen nitidus",
+ "aliases": [
+  "lichen nitidus"
+ ],
+ "class": "non_infective",
+ "system": "Dermatology",
+ "specialty": "Dermatology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Characterised by numerous tiny, pinpoint (around 1 mm), flat-topped, shiny papules that are skin-coloured or hypopigmented",
+   "Papules are typically grouped in clusters on the flexor forearms, genitalia (often the penile shaft), abdomen, and chest",
+   "The Koebner phenomenon is common, with lesions appearing in a line along sites of scratching or trauma",
+   "Predominantly affects children and young adults and is usually asymptomatic",
+   "Considered by some to be a variant or close relative of lichen planus, though most regard it as a distinct entity",
+   "Nail changes (ridging, pitting) and, uncommonly, palmoplantar or generalised forms may occur",
+   "Histology is characteristic, showing a well-circumscribed lymphohistiocytic infiltrate embraced by elongated rete ridges in a ball-and-claw configuration",
+   "Usually self-limiting; treatment (topical corticosteroids, occasionally phototherapy) is reserved for symptomatic or cosmetically troublesome disease"
   ],
-  "class": "non_infective",
-  "system": "Dermatology",
-  "specialty": "Dermatology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Characterised by numerous tiny, pinpoint (around 1 mm), flat-topped, shiny papules that are skin-coloured or hypopigmented",
-      "Papules are typically grouped in clusters on the flexor forearms, genitalia (often the penile shaft), abdomen, and chest",
-      "The Koebner phenomenon is common, with lesions appearing in a line along sites of scratching or trauma",
-      "Predominantly affects children and young adults and is usually asymptomatic",
-      "Considered by some to be a variant or close relative of lichen planus, though most regard it as a distinct entity",
-      "Nail changes (ridging, pitting) and, uncommonly, palmoplantar or generalised forms may occur",
-      "Histology is characteristic, showing a well-circumscribed lymphohistiocytic infiltrate embraced by elongated rete ridges in a ball-and-claw configuration",
-      "Usually self-limiting; treatment (topical corticosteroids, occasionally phototherapy) is reserved for symptomatic or cosmetically troublesome disease"
+  "pathophysiology": "Lichen nitidus is an inflammatory dermatosis in which a focal, cell-mediated response involving T-lymphocytes and histiocytes targets the epidermis, producing the characteristic sharply circumscribed papular infiltrate. The precise trigger is unknown, and although it shares a lichenoid tissue reaction with lichen planus, the two are usually considered separate conditions. The dense but tiny granulomatous focus, held between elongated rete ridges, corresponds to the minute shiny papule seen clinically, and the tendency to Koebnerise reflects an antigen-independent response to local trauma.",
+  "additionalDifferentials": [
+   "Lichen planus",
+   "Keratosis pilaris",
+   "Lichen scrofulosorum",
+   "Molluscum contagiosum",
+   "Plane warts (verruca plana)",
+   "Frictional lichenoid dermatitis",
+   "Papular eczema"
+  ],
+  "additionalInvestigations": [
+   "Skin biopsy demonstrating the characteristic ball-and-claw granulomatous focus in the papillary dermis",
+   "Dermoscopy to appreciate the uniform, shiny, discrete papules",
+   "Assessment for the Koebner phenomenon along scratch lines as a diagnostic clue",
+   "Nail examination where nail dystrophy is suspected",
+   "Review for features of lichen planus overlap (oral, nail, and scalp involvement)",
+   "Evaluation for tuberculosis where lichen scrofulosorum is a serious consideration"
+  ],
+  "redFlags": [
+   "Widespread or generalised eruption that fails to remit and warrants reassessment",
+   "Features suggesting lichen scrofulosorum, prompting evaluation for underlying tuberculosis",
+   "Nail dystrophy or mucosal change suggesting overlap with lichen planus"
+  ],
+  "prognosis": "Benign, typically resolving spontaneously over months to a few years without scarring, although the course can occasionally be more protracted.",
+  "pitfalls": [
+   "Confusing the pinpoint papules with keratosis pilaris or plane warts",
+   "Overlooking the Koebner phenomenon as a helpful diagnostic feature",
+   "Failing to distinguish it from lichen scrofulosorum, which mandates a tuberculosis workup"
+  ],
+  "references": [
+   "Rook's Textbook of Dermatology",
+   "Fitzpatrick's Dermatology in General Medicine"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Reassure that the condition is benign and usually self-resolving, so active treatment is often unnecessary",
+   "Prescribe topical corticosteroids for pruritic or cosmetically troublesome papules",
+   "Use topical calcineurin inhibitors (tacrolimus or pimecrolimus) as a steroid-sparing option on the face and genitalia",
+   "Offer oral antihistamines to relieve itch",
+   "Consider narrowband UVB phototherapy for widespread, generalised or persistent disease",
+   "Advise minimising scratching and local trauma to reduce Koebnerisation",
+   "Refer to dermatology for biopsy in atypical cases and evaluate for tuberculosis where lichen scrofulosorum is a serious consideration"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "lichen_nitidus-pathway",
+   "title": "Lichen nitidus: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Characterised by numerous tiny, pinpoint (around 1 mm), flat-topped, shiny papules that are skin-coloured or hypopigmented",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Widespread or generalised eruption that fails to remit and warrants reassessment",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Skin biopsy demonstrating the characteristic ball-and-claw granulomatous focus in the papillary dermis, Dermoscopy to appreciate the uniform, shiny, discrete papules, Assessment for the Koebner phenomenon along scratch"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Reassure that the condition is benign and usually self-resolving, so active treatment is often unnecessary"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Confusing the pinpoint papules with keratosis pilaris or plane warts"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of lichen nitidus."
+  }
+ ],
+ "tables": [
+  {
+   "id": "lichen_nitidus-matrix",
+   "title": "Lichen nitidus: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Characterised by numerous tiny, pinpoint (around 1 mm), flat-topped, shiny papules that are skin-coloured or hypopigmented",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Lichen nitidus is an inflammatory dermatosis in which a focal, cell-mediated response involving T-lymphocytes and histiocytes targets the epidermis, producing the characteristic sharply circumscribed papular infiltrate. The precise trigger is unknown, and although it shares a lichenoid tissue reaction with lichen planus, the two are usually considered separate conditions. The dense but tiny granulomatous focus, held between elongated rete ridges, corresponds to the minute shiny papule seen clinically, and the tendency to Koebnerise reflects an antigen-independent response to local trauma.",
-    "additionalDifferentials": [
-      "Lichen planus",
-      "Keratosis pilaris",
-      "Lichen scrofulosorum",
-      "Molluscum contagiosum",
-      "Plane warts (verruca plana)",
-      "Frictional lichenoid dermatitis",
-      "Papular eczema"
+    [
+     "Key Investigations",
+     "Skin biopsy demonstrating the characteristic ball-and-claw granulomatous focus in the papillary dermis, Dermoscopy to appreciate",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Skin biopsy demonstrating the characteristic ball-and-claw granulomatous focus in the papillary dermis",
-      "Dermoscopy to appreciate the uniform, shiny, discrete papules",
-      "Assessment for the Koebner phenomenon along scratch lines as a diagnostic clue",
-      "Nail examination where nail dystrophy is suspected",
-      "Review for features of lichen planus overlap (oral, nail, and scalp involvement)",
-      "Evaluation for tuberculosis where lichen scrofulosorum is a serious consideration"
+    [
+     "Primary Differentials",
+     "Lichen planus, Keratosis pilaris, Lichen scrofulosorum",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Widespread or generalised eruption that fails to remit and warrants reassessment",
-      "Features suggesting lichen scrofulosorum, prompting evaluation for underlying tuberculosis",
-      "Nail dystrophy or mucosal change suggesting overlap with lichen planus"
+    [
+     "Management Strategy",
+     "Reassure that the condition is benign and usually self-resolving, so active treatment is often unnecessary",
+     "Core treatment modality"
     ],
-    "prognosis": "Benign, typically resolving spontaneously over months to a few years without scarring, although the course can occasionally be more protracted.",
-    "pitfalls": [
-      "Confusing the pinpoint papules with keratosis pilaris or plane warts",
-      "Overlooking the Koebner phenomenon as a helpful diagnostic feature",
-      "Failing to distinguish it from lichen scrofulosorum, which mandates a tuberculosis workup"
-    ],
-    "references": [
-      "Rook's Textbook of Dermatology",
-      "Fitzpatrick's Dermatology in General Medicine"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Reassure that the condition is benign and usually self-resolving, so active treatment is often unnecessary",
-      "Prescribe topical corticosteroids for pruritic or cosmetically troublesome papules",
-      "Use topical calcineurin inhibitors (tacrolimus or pimecrolimus) as a steroid-sparing option on the face and genitalia",
-      "Offer oral antihistamines to relieve itch",
-      "Consider narrowband UVB phototherapy for widespread, generalised or persistent disease",
-      "Advise minimising scratching and local trauma to reduce Koebnerisation",
-      "Refer to dermatology for biopsy in atypical cases and evaluate for tuberculosis where lichen scrofulosorum is a serious consideration"
+    [
+     "Clinical Pitfall",
+     "Confusing the pinpoint papules with keratosis pilaris or plane warts",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for lichen nitidus."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "lichen-nitidus-real-image",
+   "title": "Lichen nitidus: Clinical Cutaneous Dermatology Photograph",
+   "type": "diagram",
+   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
+   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
+   "annotations": [
+    {
+     "label": "Primary Lesions",
+     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
+    },
+    {
+     "label": "Demarcation & Margins",
+     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
+    },
+    {
+     "label": "Anatomical Distribution",
+     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+    }
+   ]
+  }
+ ]
 }

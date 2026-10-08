@@ -140,5 +140,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "h26fdb332"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "dvt-dx-algo",
+      "title": "Deep vein thrombosis: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "The classic DVT symptom is a calf cramp or 'charley horse' that persists and worsens over several days, rather than a sudden event (Harrison 22e p.2159).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Phlegmasia cerulea dolens - massive proximal DVT with a diffusely swollen, painful, cyanotic limb, the most serious form of DVT (Harrison 22e p.2159).",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Loss of vein compressibility is the primary ultrasound criterion for DVT; a normal vein collapses (a 'wink') under gentle transducer pressure, whereas an acutely thrombosed vein stays distended and may show central,"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Wells clinical prediction rule for DVT (Harrison 22e p.2159): low likelihood if score =3. Points: active cancer +1; paralysis/paresis or recent cast +1; bedridden >3 days or major surgery 3 cm +1; pitting edema +1;"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Not all leg pain is DVT - sudden severe calf pain may be a ruptured Baker's cyst, and fever/chills point more to cellulitis (Harrison 22e p.2159)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for deep vein thrombosis."
+    }
+  ],
+  "tables": [
+    {
+      "id": "dvt-matrix",
+      "title": "Deep vein thrombosis: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The classic DVT symptom is a calf cramp or 'charley horse' that persists and worsens over several days, rather than a sudden",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Loss of vein compressibility is the primary ultrasound criterion for DVT; a normal vein collapses (a 'wink') under gentle",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Ruptured Baker's cyst (sudden severe calf discomfort) (Harrison 22e p.2159), Muscle strain or injury (Harrison 22e p.2159), Acute",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Phlegmasia cerulea dolens - massive proximal DVT with a diffusely swollen, painful, cyanotic limb, the most serious form of DVT",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Not all leg pain is DVT - sudden severe calf pain may be a ruptured Baker's cyst, and fever/chills point more to cellulitis",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for deep vein thrombosis."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "dvt-real-image",
+      "title": "Deep vein thrombosis: Diagnostic Peripheral Blood Smear Examination",
+      "type": "diagram",
+      "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
+      "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
+      "annotations": [
+        {
+          "label": "Erythrocyte Indices",
+          "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
+        },
+        {
+          "label": "Leukocyte Differential",
+          "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
+        },
+        {
+          "label": "Platelet Count",
+          "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+        }
+      ]
+    }
+  ]
 }

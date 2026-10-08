@@ -1,73 +1,168 @@
 {
-  "id": "mast_cell_leukaemia",
-  "name": "Mast cell leukaemia",
-  "aliases": [
-    "MCL"
+ "id": "mast_cell_leukaemia",
+ "name": "Mast cell leukaemia",
+ "aliases": [
+  "MCL"
+ ],
+ "class": "non_infective",
+ "system": "Haematology",
+ "specialty": "Haematology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "WHO haematolymphoid classification / mastocytosis literature",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A rare, aggressive form of systemic mastocytosis defined by a high proportion of atypical mast cells in the bone marrow",
+   "Circulating mast cells may or may not be present (classical versus aleukaemic variants)",
+   "Presents with rapidly progressive organ dysfunction, cytopenias, hepatosplenomegaly and severe mediator symptoms",
+   "Serum tryptase is typically very high",
+   "It carries a poor prognosis with short survival in many cases",
+   "Management involves cytoreductive and KIT-targeted therapies and consideration of stem cell transplantation, alongside aggressive mediator control"
   ],
-  "class": "non_infective",
-  "system": "Haematology",
-  "specialty": "Haematology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "WHO haematolymphoid classification / mastocytosis literature",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A rare, aggressive form of systemic mastocytosis defined by a high proportion of atypical mast cells in the bone marrow",
-      "Circulating mast cells may or may not be present (classical versus aleukaemic variants)",
-      "Presents with rapidly progressive organ dysfunction, cytopenias, hepatosplenomegaly and severe mediator symptoms",
-      "Serum tryptase is typically very high",
-      "It carries a poor prognosis with short survival in many cases",
-      "Management involves cytoreductive and KIT-targeted therapies and consideration of stem cell transplantation, alongside aggressive mediator control"
+  "pathophysiology": "Mast cell leukaemia is the most aggressive category of systemic mastocytosis, characterised by extensive proliferation of atypical, often immature, clonal mast cells that heavily infiltrate the bone marrow and impair normal haematopoiesis. Although KIT mutations are common, the mutation profile can differ from indolent disease and influences response to targeted therapy. The massive mast cell burden causes both marrow failure with cytopenias and organ infiltration, and profuse mediator release producing severe systemic symptoms.",
+  "additionalDifferentials": [
+   "Aggressive systemic mastocytosis",
+   "Acute myeloid leukaemia",
+   "Other systemic mastocytosis with an associated haematological neoplasm",
+   "Basophilic leukaemia",
+   "Reactive mast cell hyperplasia"
+  ],
+  "additionalInvestigations": [
+   "Bone marrow aspirate and trephine with mast cell quantification and immunophenotyping",
+   "Blood film for circulating mast cells",
+   "Serum tryptase",
+   "KIT and broader mutation analysis",
+   "Staging of organ involvement and assessment for transplant candidacy"
+  ],
+  "redFlags": [
+   "Rapidly progressive cytopenias and organ failure",
+   "Severe, refractory mediator crises",
+   "Very high mast cell burden on marrow",
+   "Features of an associated haematological neoplasm"
+  ],
+  "prognosis": "Mast cell leukaemia has a poor prognosis with short median survival in many series, though newer KIT-targeted agents and transplantation may improve outcomes in selected patients.",
+  "pitfalls": [
+   "Delaying marrow examination in rapidly progressive mastocytosis",
+   "Assuming standard KIT-targeted therapy will work regardless of mutation profile",
+   "Underestimating the risk of catastrophic mediator release",
+   "Missing an associated haematological neoplasm"
+  ],
+  "references": [
+   "WHO classification of haematolymphoid tumours",
+   "Mastocytosis clinical guidelines (standard reference)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "KIT-targeted tyrosine kinase inhibitors (midostaurin or avapritinib) directed by the KIT mutation profile",
+   "Cytoreductive chemotherapy such as cladribine to reduce the mast cell burden",
+   "Consider allogeneic haematopoietic stem cell transplantation in eligible patients",
+   "Aggressive mediator control with H1- and H2-antihistamines, mast cell stabilisers and self-injectable adrenaline for anaphylaxis",
+   "Supportive care for marrow failure, including transfusion of blood products and treatment of infection",
+   "Osteoporosis surveillance with bone-protective therapy",
+   "Manage through a specialist haematology multidisciplinary team with transplant assessment"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "mast_cell_leukaemia-pathway",
+   "title": "Mast cell leukaemia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A rare, aggressive form of systemic mastocytosis defined by a high proportion of atypical mast cells in the bone marrow",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapidly progressive cytopenias and organ failure",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Bone marrow aspirate and trephine with mast cell quantification and immunophenotyping, Blood film for circulating mast cells, Serum tryptase"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: KIT-targeted tyrosine kinase inhibitors (midostaurin or avapritinib) directed by the KIT mutation profile"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Delaying marrow examination in rapidly progressive mastocytosis"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of mast cell leukaemia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "mast_cell_leukaemia-matrix",
+   "title": "Mast cell leukaemia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A rare, aggressive form of systemic mastocytosis defined by a high proportion of atypical mast cells in the bone marrow",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Mast cell leukaemia is the most aggressive category of systemic mastocytosis, characterised by extensive proliferation of atypical, often immature, clonal mast cells that heavily infiltrate the bone marrow and impair normal haematopoiesis. Although KIT mutations are common, the mutation profile can differ from indolent disease and influences response to targeted therapy. The massive mast cell burden causes both marrow failure with cytopenias and organ infiltration, and profuse mediator release producing severe systemic symptoms.",
-    "additionalDifferentials": [
-      "Aggressive systemic mastocytosis",
-      "Acute myeloid leukaemia",
-      "Other systemic mastocytosis with an associated haematological neoplasm",
-      "Basophilic leukaemia",
-      "Reactive mast cell hyperplasia"
+    [
+     "Key Investigations",
+     "Bone marrow aspirate and trephine with mast cell quantification and immunophenotyping, Blood film for circulating mast cells,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Bone marrow aspirate and trephine with mast cell quantification and immunophenotyping",
-      "Blood film for circulating mast cells",
-      "Serum tryptase",
-      "KIT and broader mutation analysis",
-      "Staging of organ involvement and assessment for transplant candidacy"
+    [
+     "Primary Differentials",
+     "Aggressive systemic mastocytosis, Acute myeloid leukaemia, Other systemic mastocytosis with an associated haematological neoplasm",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rapidly progressive cytopenias and organ failure",
-      "Severe, refractory mediator crises",
-      "Very high mast cell burden on marrow",
-      "Features of an associated haematological neoplasm"
+    [
+     "Management Strategy",
+     "KIT-targeted tyrosine kinase inhibitors (midostaurin or avapritinib) directed by the KIT mutation profile",
+     "Core treatment modality"
     ],
-    "prognosis": "Mast cell leukaemia has a poor prognosis with short median survival in many series, though newer KIT-targeted agents and transplantation may improve outcomes in selected patients.",
-    "pitfalls": [
-      "Delaying marrow examination in rapidly progressive mastocytosis",
-      "Assuming standard KIT-targeted therapy will work regardless of mutation profile",
-      "Underestimating the risk of catastrophic mediator release",
-      "Missing an associated haematological neoplasm"
-    ],
-    "references": [
-      "WHO classification of haematolymphoid tumours",
-      "Mastocytosis clinical guidelines (standard reference)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "KIT-targeted tyrosine kinase inhibitors (midostaurin or avapritinib) directed by the KIT mutation profile",
-      "Cytoreductive chemotherapy such as cladribine to reduce the mast cell burden",
-      "Consider allogeneic haematopoietic stem cell transplantation in eligible patients",
-      "Aggressive mediator control with H1- and H2-antihistamines, mast cell stabilisers and self-injectable adrenaline for anaphylaxis",
-      "Supportive care for marrow failure, including transfusion of blood products and treatment of infection",
-      "Osteoporosis surveillance with bone-protective therapy",
-      "Manage through a specialist haematology multidisciplinary team with transplant assessment"
+    [
+     "Clinical Pitfall",
+     "Delaying marrow examination in rapidly progressive mastocytosis",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for mast cell leukaemia."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "mast-cell-leukaemia-real-image",
+   "title": "Mast cell leukaemia: Diagnostic Peripheral Blood Smear Examination",
+   "type": "diagram",
+   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
+   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
+   "annotations": [
+    {
+     "label": "Erythrocyte Indices",
+     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
+    },
+    {
+     "label": "Leukocyte Differential",
+     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
+    },
+    {
+     "label": "Platelet Count",
+     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+    }
+   ]
+  }
+ ]
 }

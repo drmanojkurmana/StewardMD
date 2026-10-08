@@ -5,7 +5,18 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, ward, haematology clinic",
- "aliases": ["ITP", "idiopathic thrombocytopenic purpura", "immune thrombocytopenic purpura", "autoimmune thrombocytopenia", "low platelets", "IVIg", "dexamethasone pulse", "eltrombopag", "romiplostim", "TPO-RA"],
+ "aliases": [
+  "ITP",
+  "idiopathic thrombocytopenic purpura",
+  "immune thrombocytopenic purpura",
+  "autoimmune thrombocytopenia",
+  "low platelets",
+  "IVIg",
+  "dexamethasone pulse",
+  "eltrombopag",
+  "romiplostim",
+  "TPO-RA"
+ ],
  "summary": "ITP is a diagnosis of exclusion. Treat newly diagnosed adults with platelets below 30 x 10^9/L or bleeding using prednisolone 0.5 to 2 mg/kg/day (6 weeks or less in total) or dexamethasone 40 mg daily for 4 days, add IVIg 1 g/kg for bleeding or when a rapid rise is needed, and escalate urgently for life-threatening bleeding.",
  "sections": [
   {
@@ -83,17 +94,153 @@
   }
  ],
  "drugs": [
-  { "name": "Prednisolone", "dose": "0.5 to 2 mg/kg/day orally (commonly 1 mg/kg, maximum 80 mg), tapered so the total course is 6 weeks or less", "notes": "First line for platelets below 30 x 10^9/L or bleeding." },
-  { "name": "Dexamethasone", "dose": "40 mg orally or IV once daily for 4 days", "notes": "Faster response at 7 days than prednisolone." },
-  { "name": "IV immunoglobulin (IVIg)", "dose": "1 g/kg IV once, repeat once if needed", "notes": "Bleeding, rapid rise needed, or steroids contraindicated. Watch renal function, thrombosis and headache." },
-  { "name": "Methylprednisolone", "dose": "1 g IV once daily for 3 days", "notes": "Life-threatening bleeding, with IVIg and platelets." },
-  { "name": "Tranexamic acid", "dose": "1 g IV every 8 hours", "notes": "Adjunct for mucosal bleeding. Reduce in renal impairment." },
-  { "name": "Eltrombopag", "dose": "50 mg orally once daily (25 mg in East or Southeast Asian ancestry or hepatic impairment), maximum 75 mg", "notes": "Monitor liver function." },
-  { "name": "Romiplostim", "dose": "1 mcg/kg SC weekly, titrate by 1 mcg/kg weekly, maximum 10 mcg/kg", "notes": "Target platelets 50 x 10^9/L or more." }
+  {
+   "name": "Prednisolone",
+   "dose": "0.5 to 2 mg/kg/day orally (commonly 1 mg/kg, maximum 80 mg), tapered so the total course is 6 weeks or less",
+   "notes": "First line for platelets below 30 x 10^9/L or bleeding."
+  },
+  {
+   "name": "Dexamethasone",
+   "dose": "40 mg orally or IV once daily for 4 days",
+   "notes": "Faster response at 7 days than prednisolone."
+  },
+  {
+   "name": "IV immunoglobulin (IVIg)",
+   "dose": "1 g/kg IV once, repeat once if needed",
+   "notes": "Bleeding, rapid rise needed, or steroids contraindicated. Watch renal function, thrombosis and headache."
+  },
+  {
+   "name": "Methylprednisolone",
+   "dose": "1 g IV once daily for 3 days",
+   "notes": "Life-threatening bleeding, with IVIg and platelets."
+  },
+  {
+   "name": "Tranexamic acid",
+   "dose": "1 g IV every 8 hours",
+   "notes": "Adjunct for mucosal bleeding. Reduce in renal impairment."
+  },
+  {
+   "name": "Eltrombopag",
+   "dose": "50 mg orally once daily (25 mg in East or Southeast Asian ancestry or hepatic impairment), maximum 75 mg",
+   "notes": "Monitor liver function."
+  },
+  {
+   "name": "Romiplostim",
+   "dose": "1 mcg/kg SC weekly, titrate by 1 mcg/kg weekly, maximum 10 mcg/kg",
+   "notes": "Target platelets 50 x 10^9/L or more."
+  }
  ],
  "sources": [
-  { "org": "American Society of Hematology", "title": "ASH 2019 guidelines for immune thrombocytopenia", "year": 2019, "url": "https://ashpublications.org/bloodadvances/article/3/23/3829/429213/American-Society-of-Hematology-2019-guidelines-for" },
-  { "org": "American Society of Hematology", "title": "The 2022 review of the 2019 ASH guidelines on immune thrombocytopenia", "year": 2024, "url": "https://ashpublications.org/bloodadvances/article/8/13/3578/515729/The-2022-review-of-the-2019-American-Society-of" }
+  {
+   "org": "American Society of Hematology",
+   "title": "ASH 2019 guidelines for immune thrombocytopenia",
+   "year": 2019,
+   "url": "https://ashpublications.org/bloodadvances/article/3/23/3829/429213/American-Society-of-Hematology-2019-guidelines-for"
+  },
+  {
+   "org": "American Society of Hematology",
+   "title": "The 2022 review of the 2019 ASH guidelines on immune thrombocytopenia",
+   "year": 2024,
+   "url": "https://ashpublications.org/bloodadvances/article/8/13/3578/515729/The-2022-review-of-the-2019-American-Society-of"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "immune-thrombocytopenia-pathway",
+   "title": "Immune thrombocytopenia (ITP) in adults Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Isolated thrombocytopenia (platelets below 100 x 10^9/L) with an otherwise normal blood count and film. Bleeding is usually mucocutaneous: petechiae, purpura, epistaxis, gum bleeding, menorrhagia. Many patients are asymptomatic.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Intracranial, major GI or other life-threatening bleeding, or emergency surgery: resuscitate and involve haematology immediately.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "FBC with blood film reviewed by a haematologist, reticulocytes, renal and liver function."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Options: thrombopoietin receptor agonist (eltrombopag, romiplostim), rituximab, or splenectomy; ASH suggests a TPO-RA or splenectomy, rituximab over splenectomy, and a TPO-RA over rituximab. Choose with the patient."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Treating a count of 30 x 10^9/L or more without bleeding or risk factors."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for immune thrombocytopenia (itp) in adults."
+  }
+ ],
+ "tables": [
+  {
+   "id": "immune-thrombocytopenia-summary-matrix",
+   "title": "Immune thrombocytopenia (ITP) in adults Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Isolated thrombocytopenia (platelets below 100 x 10^9/L) with an otherwise normal blood count and film. Bleeding is usually mucocutaneous:",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Intracranial, major GI or other life-threatening bleeding, or emergency surgery: resuscitate and involve haematology immediately.",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "FBC with blood film reviewed by a haematologist, reticulocytes, renal and liver function.",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Prednisolone: 0.5 to 2 mg/kg/day orally (commonly 1 mg/kg, maximum 80 mg), tapered so the total course is 6 weeks or less",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Treating a count of 30 x 10^9/L or more without bleeding or risk factors.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for immune thrombocytopenia (itp) in adults."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "immune-thrombocytopenia-real-image",
+   "title": "Immune thrombocytopenia (ITP) in adults: Diagnostic Peripheral Blood Smear Examination",
+   "type": "diagram",
+   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
+   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
+   "annotations": [
+    {
+     "label": "Erythrocyte Indices",
+     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
+    },
+    {
+     "label": "Leukocyte Differential",
+     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
+    },
+    {
+     "label": "Platelet Count",
+     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+    }
+   ]
+  }
+ ]
 }

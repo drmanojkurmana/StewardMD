@@ -5,7 +5,17 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Operating theatre, pre-operative ward",
- "aliases": ["SAP", "antibiotic prophylaxis", "perioperative antibiotics", "surgical prophylaxis", "cefazolin prophylaxis", "SSI prevention", "surgical site infection", "antibiotic redosing", "penicillin allergy surgery"],
+ "aliases": [
+  "SAP",
+  "antibiotic prophylaxis",
+  "perioperative antibiotics",
+  "surgical prophylaxis",
+  "cefazolin prophylaxis",
+  "SSI prevention",
+  "surgical site infection",
+  "antibiotic redosing",
+  "penicillin allergy surgery"
+ ],
  "summary": "Give one IV dose of the right agent (usually cefazolin 2 g, 3 g if 120 kg or more) within 60 minutes before incision (120 minutes for vancomycin and fluoroquinolones), redose for long operations or blood loss over 1500 mL, and stop within 24 hours.",
  "sections": [
   {
@@ -85,19 +95,163 @@
   }
  ],
  "drugs": [
-  { "name": "Cefazolin", "dose": "2 g IV (3 g if 120 kg or more); children 30 mg/kg (maximum adult dose)", "notes": "Redose every 4 hours intraoperatively." },
-  { "name": "Cefuroxime", "dose": "1.5 g IV; children 50 mg/kg (maximum adult dose)", "notes": "Redose every 4 hours." },
-  { "name": "Cefoxitin", "dose": "2 g IV; children 40 mg/kg (maximum adult dose)", "notes": "Redose every 2 hours." },
-  { "name": "Clindamycin", "dose": "900 mg IV; children 10 mg/kg (maximum adult dose)", "notes": "Redose every 6 hours. Beta-lactam allergy alternative." },
-  { "name": "Vancomycin", "dose": "15 mg/kg IV infused over at least 60 minutes, starting within 120 minutes before incision; children 15 mg/kg", "notes": "No intraoperative redosing. Reserve for MRSA colonisation or severe beta-lactam allergy." },
-  { "name": "Gentamicin", "dose": "5 mg/kg IV single dose; children 2.5 mg/kg", "notes": "Use adjusted weight in obesity; avoid repeated doses in renal impairment." },
-  { "name": "Metronidazole", "dose": "500 mg IV; children 15 mg/kg (maximum adult dose)", "notes": "Anaerobic cover for colorectal, appendix, head and neck and gynaecological surgery." },
-  { "name": "Ertapenem", "dose": "1 g IV single dose; children 15 mg/kg (maximum adult dose)", "notes": "Colorectal option; avoid routine use where carbapenem resistance is a concern." },
-  { "name": "Ceftriaxone", "dose": "2 g IV single dose", "notes": "Biliary surgery, or colorectal with metronidazole." }
+  {
+   "name": "Cefazolin",
+   "dose": "2 g IV (3 g if 120 kg or more); children 30 mg/kg (maximum adult dose)",
+   "notes": "Redose every 4 hours intraoperatively."
+  },
+  {
+   "name": "Cefuroxime",
+   "dose": "1.5 g IV; children 50 mg/kg (maximum adult dose)",
+   "notes": "Redose every 4 hours."
+  },
+  {
+   "name": "Cefoxitin",
+   "dose": "2 g IV; children 40 mg/kg (maximum adult dose)",
+   "notes": "Redose every 2 hours."
+  },
+  {
+   "name": "Clindamycin",
+   "dose": "900 mg IV; children 10 mg/kg (maximum adult dose)",
+   "notes": "Redose every 6 hours. Beta-lactam allergy alternative."
+  },
+  {
+   "name": "Vancomycin",
+   "dose": "15 mg/kg IV infused over at least 60 minutes, starting within 120 minutes before incision; children 15 mg/kg",
+   "notes": "No intraoperative redosing. Reserve for MRSA colonisation or severe beta-lactam allergy."
+  },
+  {
+   "name": "Gentamicin",
+   "dose": "5 mg/kg IV single dose; children 2.5 mg/kg",
+   "notes": "Use adjusted weight in obesity; avoid repeated doses in renal impairment."
+  },
+  {
+   "name": "Metronidazole",
+   "dose": "500 mg IV; children 15 mg/kg (maximum adult dose)",
+   "notes": "Anaerobic cover for colorectal, appendix, head and neck and gynaecological surgery."
+  },
+  {
+   "name": "Ertapenem",
+   "dose": "1 g IV single dose; children 15 mg/kg (maximum adult dose)",
+   "notes": "Colorectal option; avoid routine use where carbapenem resistance is a concern."
+  },
+  {
+   "name": "Ceftriaxone",
+   "dose": "2 g IV single dose",
+   "notes": "Biliary surgery, or colorectal with metronidazole."
+  }
  ],
  "sources": [
-  { "org": "ASHP / IDSA / SIS / SHEA", "title": "Clinical practice guidelines for antimicrobial prophylaxis in surgery", "year": 2013, "url": "https://academic.oup.com/ajhp/article/70/3/195/5112717" },
-  { "org": "WHO", "title": "Global guidelines for the prevention of surgical site infection, second edition", "year": 2018, "url": "https://www.who.int/publications/i/item/9789241550475" }
+  {
+   "org": "ASHP / IDSA / SIS / SHEA",
+   "title": "Clinical practice guidelines for antimicrobial prophylaxis in surgery",
+   "year": 2013,
+   "url": "https://academic.oup.com/ajhp/article/70/3/195/5112717"
+  },
+  {
+   "org": "WHO",
+   "title": "Global guidelines for the prevention of surgical site infection, second edition",
+   "year": 2018,
+   "url": "https://www.who.int/publications/i/item/9789241550475"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "surgical-antibiotic-prophylaxis-pathway",
+   "title": "Surgical antibiotic prophylaxis (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Clean-contaminated procedures (entry into the gut, biliary, respiratory, genital or urinary tract) and clean procedures with an implant or where infection would be disastrous (cardiac, joint replacement, vascular graft, neurosurgery).",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Start the dose within 60 minutes before incision; start vancomycin and fluoroquinolones within 120 minutes because of long infusion times (ASHP 2013). WHO accepts administration within 120 minutes before incision; ASHP timing is followed",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Contaminated or dirty surgery (perforated viscus, established infection, open fracture) needs a treatment course, not prophylaxis."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Cefazolin: cardiac, vascular, neurosurgery, hernia repair, breast, joint replacement, hip fracture fixation, gastroduodenal surgery, caesarean delivery, hysterectomy."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Giving the dose after incision, or more than 60 minutes before it (120 minutes for vancomycin)."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for surgical antibiotic prophylaxis (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "surgical-antibiotic-prophylaxis-summary-matrix",
+   "title": "Surgical antibiotic prophylaxis (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Clean-contaminated procedures (entry into the gut, biliary, respiratory, genital or urinary tract) and clean procedures with an implant or",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Start the dose within 60 minutes before incision; start vancomycin and fluoroquinolones within 120 minutes because of long infusion times",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Cefazolin: 2 g IV (3 g if 120 kg or more); children 30 mg/kg (maximum adult dose)",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Giving the dose after incision, or more than 60 minutes before it (120 minutes for vancomycin).",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for surgical antibiotic prophylaxis (adult)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "surgical-antibiotic-prophylaxis-real-image",
+   "title": "Surgical antibiotic prophylaxis (adult): Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

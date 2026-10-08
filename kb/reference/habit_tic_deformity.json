@@ -1,77 +1,172 @@
 {
-  "id": "habit_tic_deformity",
-  "name": "Habit-tic nail deformity",
-  "aliases": [
-    "habit tic deformity",
-    "onychotillomania-related ridging",
-    "washboard nail"
+ "id": "habit_tic_deformity",
+ "name": "Habit-tic nail deformity",
+ "aliases": [
+  "habit tic deformity",
+  "onychotillomania-related ridging",
+  "washboard nail"
+ ],
+ "class": "non_infective",
+ "system": "Dermatology / Nail",
+ "specialty": "Dermatology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Rook's Textbook of Dermatology / Baran and Dawber's Diseases of the Nails",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Habit-tic deformity is a self-induced nail change produced by repetitive picking or rubbing of the proximal nail fold, most often of the thumb",
+   "It classically shows a central longitudinal depression crossed by many parallel transverse ridges, giving a washboard or fir-tree appearance",
+   "An enlarged lunula and damage to the cuticle of the affected nail are common accompanying signs",
+   "The habit is frequently subconscious, and patients may not connect the repeated manipulation with the nail change",
+   "It is distinguished from median canaliform dystrophy, which shows a central split or canal rather than a picked-fold pattern, although the two overlap",
+   "Diagnosis is clinical, based on the pattern and a history of manipulation, and no biopsy is usually needed",
+   "Management focuses on behavioural awareness and physically protecting the nail fold, for example with occlusive tape or a barrier, to allow normal growth"
   ],
-  "class": "non_infective",
-  "system": "Dermatology / Nail",
-  "specialty": "Dermatology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Rook's Textbook of Dermatology / Baran and Dawber's Diseases of the Nails",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Habit-tic deformity is a self-induced nail change produced by repetitive picking or rubbing of the proximal nail fold, most often of the thumb",
-      "It classically shows a central longitudinal depression crossed by many parallel transverse ridges, giving a washboard or fir-tree appearance",
-      "An enlarged lunula and damage to the cuticle of the affected nail are common accompanying signs",
-      "The habit is frequently subconscious, and patients may not connect the repeated manipulation with the nail change",
-      "It is distinguished from median canaliform dystrophy, which shows a central split or canal rather than a picked-fold pattern, although the two overlap",
-      "Diagnosis is clinical, based on the pattern and a history of manipulation, and no biopsy is usually needed",
-      "Management focuses on behavioural awareness and physically protecting the nail fold, for example with occlusive tape or a barrier, to allow normal growth"
+  "pathophysiology": "Habit-tic deformity results from chronic mechanical trauma inflicted by the patient on their own proximal nail fold and cuticle, typically by picking or rubbing with an adjacent finger. The repeated injury to the region overlying the matrix produces a series of transverse depressions in the plate as it is laid down, arranged around a central longitudinal groove, so that the nail acquires a rippled, washboard surface. Because the damage is to the soft tissue over the matrix rather than the matrix being intrinsically diseased, the nail can recover fully once the manipulation stops, and the enlarged lunula reflects the ongoing disturbance of the proximal nail unit.",
+  "additionalDifferentials": [
+   "Median canaliform dystrophy of Heller",
+   "Beau lines from systemic matrix arrest",
+   "Nail changes of chronic eczema of the fingertip",
+   "Onychotillomania and other self-induced nail disorders",
+   "Myxoid cyst causing a longitudinal groove",
+   "Trachyonychia with longitudinal ridging"
+  ],
+  "additionalInvestigations": [
+   "History specifically exploring picking, rubbing, or other repetitive nail manipulation",
+   "Clinical inspection for the central groove, transverse ridges, and enlarged lunula",
+   "Examination of the cuticle and proximal nail fold for chronic damage",
+   "Onychoscopy to characterise the ridging pattern",
+   "Assessment for underlying anxiety or a body-focused repetitive behaviour",
+   "Photographic monitoring to confirm improvement once manipulation ceases"
+  ],
+  "redFlags": [
+   "Severe or extensive self-injury suggesting an underlying psychological disorder needing support",
+   "Signs of secondary infection of the traumatised nail fold",
+   "Features atypical for habit-tic that raise concern for a tumour causing a groove",
+   "Failure to improve despite cessation of manipulation, prompting reconsideration of the diagnosis"
+  ],
+  "prognosis": "The deformity is benign and reversible, and the nail grows out normally once the repetitive trauma stops, although relapse is common if the underlying habit persists and behavioural change can be difficult to sustain.",
+  "pitfalls": [
+   "Failing to elicit the self-manipulation history and mislabelling the change as intrinsic nail disease",
+   "Confusing it with median canaliform dystrophy and applying the wrong management",
+   "Overlooking an associated body-focused repetitive behaviour or anxiety disorder",
+   "Expecting improvement without addressing the causative habit"
+  ],
+  "references": [
+   "Rook's Textbook of Dermatology",
+   "Baran and Dawber's Diseases of the Nails and their Management"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Stop the repetitive picking or rubbing of the proximal nail fold, as behavioural cessation is the definitive treatment that allows the nail to regrow normally",
+   "Use physical barrier measures such as occlusive tape or an adhesive dressing over the nail fold, or a fixed nail cover, to interrupt the habit",
+   "Offer habit-reversal behavioural therapy and treat any underlying anxiety or body-focused repetitive behaviour",
+   "Restore the damaged cuticle and proximal nail fold with emollients and cuticle care",
+   "Consider a selective serotonin reuptake inhibitor or N-acetylcysteine for an associated body-focused repetitive behaviour when behavioural measures fail",
+   "Use photographic monitoring to demonstrate improvement and reinforce cessation, referring to psychology or psychiatry if the habit is entrenched"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "habit_tic_deformity-pathway",
+   "title": "Habit-tic nail deformity: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Habit-tic deformity is a self-induced nail change produced by repetitive picking or rubbing of the proximal nail fold, most often of the thumb",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Severe or extensive self-injury suggesting an underlying psychological disorder needing support",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: History specifically exploring picking, rubbing, or other repetitive nail manipulation, Clinical inspection for the central groove, transverse ridges, and enlarged lunula, Examination of the cuticle and proximal nail fold"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Stop the repetitive picking or rubbing of the proximal nail fold, as behavioural cessation is the definitive treatment that allows the nail to regrow normally"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Failing to elicit the self-manipulation history and mislabelling the change as intrinsic nail disease"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of habit-tic nail deformity."
+  }
+ ],
+ "tables": [
+  {
+   "id": "habit_tic_deformity-matrix",
+   "title": "Habit-tic nail deformity: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Habit-tic deformity is a self-induced nail change produced by repetitive picking or rubbing of the proximal nail fold, most often",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Habit-tic deformity results from chronic mechanical trauma inflicted by the patient on their own proximal nail fold and cuticle, typically by picking or rubbing with an adjacent finger. The repeated injury to the region overlying the matrix produces a series of transverse depressions in the plate as it is laid down, arranged around a central longitudinal groove, so that the nail acquires a rippled, washboard surface. Because the damage is to the soft tissue over the matrix rather than the matrix being intrinsically diseased, the nail can recover fully once the manipulation stops, and the enlarged lunula reflects the ongoing disturbance of the proximal nail unit.",
-    "additionalDifferentials": [
-      "Median canaliform dystrophy of Heller",
-      "Beau lines from systemic matrix arrest",
-      "Nail changes of chronic eczema of the fingertip",
-      "Onychotillomania and other self-induced nail disorders",
-      "Myxoid cyst causing a longitudinal groove",
-      "Trachyonychia with longitudinal ridging"
+    [
+     "Key Investigations",
+     "History specifically exploring picking, rubbing, or other repetitive nail manipulation, Clinical inspection for the central",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "History specifically exploring picking, rubbing, or other repetitive nail manipulation",
-      "Clinical inspection for the central groove, transverse ridges, and enlarged lunula",
-      "Examination of the cuticle and proximal nail fold for chronic damage",
-      "Onychoscopy to characterise the ridging pattern",
-      "Assessment for underlying anxiety or a body-focused repetitive behaviour",
-      "Photographic monitoring to confirm improvement once manipulation ceases"
+    [
+     "Primary Differentials",
+     "Median canaliform dystrophy of Heller, Beau lines from systemic matrix arrest, Nail changes of chronic eczema of the fingertip",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Severe or extensive self-injury suggesting an underlying psychological disorder needing support",
-      "Signs of secondary infection of the traumatised nail fold",
-      "Features atypical for habit-tic that raise concern for a tumour causing a groove",
-      "Failure to improve despite cessation of manipulation, prompting reconsideration of the diagnosis"
+    [
+     "Management Strategy",
+     "Stop the repetitive picking or rubbing of the proximal nail fold, as behavioural cessation is the definitive treatment that",
+     "Core treatment modality"
     ],
-    "prognosis": "The deformity is benign and reversible, and the nail grows out normally once the repetitive trauma stops, although relapse is common if the underlying habit persists and behavioural change can be difficult to sustain.",
-    "pitfalls": [
-      "Failing to elicit the self-manipulation history and mislabelling the change as intrinsic nail disease",
-      "Confusing it with median canaliform dystrophy and applying the wrong management",
-      "Overlooking an associated body-focused repetitive behaviour or anxiety disorder",
-      "Expecting improvement without addressing the causative habit"
-    ],
-    "references": [
-      "Rook's Textbook of Dermatology",
-      "Baran and Dawber's Diseases of the Nails and their Management"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Stop the repetitive picking or rubbing of the proximal nail fold, as behavioural cessation is the definitive treatment that allows the nail to regrow normally",
-      "Use physical barrier measures such as occlusive tape or an adhesive dressing over the nail fold, or a fixed nail cover, to interrupt the habit",
-      "Offer habit-reversal behavioural therapy and treat any underlying anxiety or body-focused repetitive behaviour",
-      "Restore the damaged cuticle and proximal nail fold with emollients and cuticle care",
-      "Consider a selective serotonin reuptake inhibitor or N-acetylcysteine for an associated body-focused repetitive behaviour when behavioural measures fail",
-      "Use photographic monitoring to demonstrate improvement and reinforce cessation, referring to psychology or psychiatry if the habit is entrenched"
+    [
+     "Clinical Pitfall",
+     "Failing to elicit the self-manipulation history and mislabelling the change as intrinsic nail disease",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for habit-tic nail deformity."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "habit-tic-deformity-real-image",
+   "title": "Habit-tic nail deformity: Clinical Cutaneous Dermatology Photograph",
+   "type": "diagram",
+   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
+   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
+   "annotations": [
+    {
+     "label": "Primary Lesions",
+     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
+    },
+    {
+     "label": "Demarcation & Margins",
+     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
+    },
+    {
+     "label": "Anatomical Distribution",
+     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+    }
+   ]
+  }
+ ]
 }

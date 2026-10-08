@@ -1,76 +1,171 @@
 {
-  "id": "klinefelter_syndrome",
-  "name": "Klinefelter syndrome",
-  "aliases": [
-    "47,XXY",
-    "XXY syndrome",
-    "seminiferous tubule dysgenesis"
+ "id": "klinefelter_syndrome",
+ "name": "Klinefelter syndrome",
+ "aliases": [
+  "47,XXY",
+  "XXY syndrome",
+  "seminiferous tubule dysgenesis"
+ ],
+ "class": "non_infective",
+ "system": "Genetic / Paediatrics",
+ "specialty": "Medical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Nelson Textbook of Pediatrics / standard medical genetics references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Most common sex chromosome aneuploidy in males, caused by one or more extra X chromosomes, typically a 47,XXY karyotype",
+   "Often unrecognised until adolescence or adulthood, when hypogonadism and infertility prompt evaluation",
+   "Characteristic features include tall stature with long legs, small firm testes, reduced facial and body hair, and gynaecomastia",
+   "Testicular failure produces low testosterone with elevated gonadotrophins and, usually, azoospermia",
+   "Learning difficulties, particularly with language and executive function, are common though intelligence is usually within the normal range",
+   "Testosterone replacement supports pubertal development, bone health, and wellbeing but does not restore fertility",
+   "Sperm retrieval techniques can occasionally allow biological fatherhood in selected men",
+   "Associated with an increased risk of osteoporosis, metabolic syndrome, venous thromboembolism, and certain tumours"
   ],
-  "class": "non_infective",
-  "system": "Genetic / Paediatrics",
-  "specialty": "Medical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Nelson Textbook of Pediatrics / standard medical genetics references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Most common sex chromosome aneuploidy in males, caused by one or more extra X chromosomes, typically a 47,XXY karyotype",
-      "Often unrecognised until adolescence or adulthood, when hypogonadism and infertility prompt evaluation",
-      "Characteristic features include tall stature with long legs, small firm testes, reduced facial and body hair, and gynaecomastia",
-      "Testicular failure produces low testosterone with elevated gonadotrophins and, usually, azoospermia",
-      "Learning difficulties, particularly with language and executive function, are common though intelligence is usually within the normal range",
-      "Testosterone replacement supports pubertal development, bone health, and wellbeing but does not restore fertility",
-      "Sperm retrieval techniques can occasionally allow biological fatherhood in selected men",
-      "Associated with an increased risk of osteoporosis, metabolic syndrome, venous thromboembolism, and certain tumours"
+  "pathophysiology": "Klinefelter syndrome results from the presence of one or more supernumerary X chromosomes in a phenotypic male, most commonly a single extra X producing a 47,XXY karyotype, arising from meiotic nondisjunction in either parent. The additional X chromosome material leads to progressive seminiferous tubule fibrosis and hyalinisation, causing primary testicular failure with impaired spermatogenesis and reduced testosterone production, while Leydig cell dysfunction raises luteinising and follicle-stimulating hormone levels. Extra X-linked gene dosage, including genes escaping X-inactivation, is thought to underlie the tall stature, cognitive profile, and other systemic features. Higher-grade aneuploidies produce more severe phenotypes.",
+  "additionalDifferentials": [
+   "Other causes of primary hypogonadism",
+   "Kallmann syndrome and hypogonadotropic hypogonadism",
+   "Marfan syndrome (for tall stature)",
+   "Fragile X syndrome (for learning difficulties)",
+   "Constitutional tall stature"
+  ],
+  "additionalInvestigations": [
+   "Karyotype to confirm the diagnosis and define any mosaicism or higher-grade aneuploidy",
+   "Testosterone with luteinising and follicle-stimulating hormone measurement",
+   "Semen analysis when fertility is a concern",
+   "Bone density assessment given osteoporosis risk",
+   "Metabolic screening for glucose intolerance and dyslipidaemia"
+  ],
+  "redFlags": [
+   "Untreated hypogonadism leading to osteoporosis and fragility fractures",
+   "Increased risk of venous thromboembolism",
+   "Mediastinal germ cell tumours and a raised risk of male breast cancer",
+   "Significant psychosocial and educational difficulties requiring support"
+  ],
+  "prognosis": "Life expectancy is close to normal, and with testosterone replacement and multidisciplinary support most men lead full lives, though infertility is usual and comorbidity risk is increased.",
+  "pitfalls": [
+   "Delaying diagnosis by attributing tall stature and learning issues to other causes",
+   "Overlooking hypogonadism and its long-term skeletal and metabolic consequences",
+   "Assuming complete infertility without offering fertility counselling and sperm retrieval options",
+   "Not screening for associated metabolic and thromboembolic risks"
+  ],
+  "references": [
+   "Nelson Textbook of Pediatrics, 22e"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Testosterone replacement therapy to support virilisation, bone health, muscle mass, mood and wellbeing, recognising it does not restore fertility",
+   "Fertility counselling with testicular sperm extraction and assisted reproduction where paternity is desired",
+   "Bone density monitoring and management of osteoporosis",
+   "Metabolic surveillance and management of glucose intolerance, dyslipidaemia and cardiovascular risk, with treatment of troublesome gynaecomastia",
+   "Educational and speech and language support for language and executive difficulties, alongside psychological support",
+   "Surveillance for associated conditions including breast malignancy, venous thromboembolism and autoimmune disease",
+   "Genetic counselling and karyotype confirmation, with multidisciplinary endocrine, andrology and fertility input"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "klinefelter_syndrome-pathway",
+   "title": "Klinefelter syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Most common sex chromosome aneuploidy in males, caused by one or more extra X chromosomes, typically a 47,XXY karyotype",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Untreated hypogonadism leading to osteoporosis and fragility fractures",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Karyotype to confirm the diagnosis and define any mosaicism or higher-grade aneuploidy, Testosterone with luteinising and follicle-stimulating hormone measurement, Semen analysis when fertility is a concern"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Testosterone replacement therapy to support virilisation, bone health, muscle mass, mood and wellbeing, recognising it does not restore fertility"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Delaying diagnosis by attributing tall stature and learning issues to other causes"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of klinefelter syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "klinefelter_syndrome-matrix",
+   "title": "Klinefelter syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Most common sex chromosome aneuploidy in males, caused by one or more extra X chromosomes, typically a 47,XXY karyotype",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Klinefelter syndrome results from the presence of one or more supernumerary X chromosomes in a phenotypic male, most commonly a single extra X producing a 47,XXY karyotype, arising from meiotic nondisjunction in either parent. The additional X chromosome material leads to progressive seminiferous tubule fibrosis and hyalinisation, causing primary testicular failure with impaired spermatogenesis and reduced testosterone production, while Leydig cell dysfunction raises luteinising and follicle-stimulating hormone levels. Extra X-linked gene dosage, including genes escaping X-inactivation, is thought to underlie the tall stature, cognitive profile, and other systemic features. Higher-grade aneuploidies produce more severe phenotypes.",
-    "additionalDifferentials": [
-      "Other causes of primary hypogonadism",
-      "Kallmann syndrome and hypogonadotropic hypogonadism",
-      "Marfan syndrome (for tall stature)",
-      "Fragile X syndrome (for learning difficulties)",
-      "Constitutional tall stature"
+    [
+     "Key Investigations",
+     "Karyotype to confirm the diagnosis and define any mosaicism or higher-grade aneuploidy, Testosterone with luteinising and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Karyotype to confirm the diagnosis and define any mosaicism or higher-grade aneuploidy",
-      "Testosterone with luteinising and follicle-stimulating hormone measurement",
-      "Semen analysis when fertility is a concern",
-      "Bone density assessment given osteoporosis risk",
-      "Metabolic screening for glucose intolerance and dyslipidaemia"
+    [
+     "Primary Differentials",
+     "Other causes of primary hypogonadism, Kallmann syndrome and hypogonadotropic hypogonadism, Marfan syndrome (for tall stature)",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Untreated hypogonadism leading to osteoporosis and fragility fractures",
-      "Increased risk of venous thromboembolism",
-      "Mediastinal germ cell tumours and a raised risk of male breast cancer",
-      "Significant psychosocial and educational difficulties requiring support"
+    [
+     "Management Strategy",
+     "Testosterone replacement therapy to support virilisation, bone health, muscle mass, mood and wellbeing, recognising it does not",
+     "Core treatment modality"
     ],
-    "prognosis": "Life expectancy is close to normal, and with testosterone replacement and multidisciplinary support most men lead full lives, though infertility is usual and comorbidity risk is increased.",
-    "pitfalls": [
-      "Delaying diagnosis by attributing tall stature and learning issues to other causes",
-      "Overlooking hypogonadism and its long-term skeletal and metabolic consequences",
-      "Assuming complete infertility without offering fertility counselling and sperm retrieval options",
-      "Not screening for associated metabolic and thromboembolic risks"
-    ],
-    "references": [
-      "Nelson Textbook of Pediatrics, 22e"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Testosterone replacement therapy to support virilisation, bone health, muscle mass, mood and wellbeing, recognising it does not restore fertility",
-      "Fertility counselling with testicular sperm extraction and assisted reproduction where paternity is desired",
-      "Bone density monitoring and management of osteoporosis",
-      "Metabolic surveillance and management of glucose intolerance, dyslipidaemia and cardiovascular risk, with treatment of troublesome gynaecomastia",
-      "Educational and speech and language support for language and executive difficulties, alongside psychological support",
-      "Surveillance for associated conditions including breast malignancy, venous thromboembolism and autoimmune disease",
-      "Genetic counselling and karyotype confirmation, with multidisciplinary endocrine, andrology and fertility input"
+    [
+     "Clinical Pitfall",
+     "Delaying diagnosis by attributing tall stature and learning issues to other causes",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for klinefelter syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "klinefelter-syndrome-real-image",
+   "title": "Klinefelter syndrome: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

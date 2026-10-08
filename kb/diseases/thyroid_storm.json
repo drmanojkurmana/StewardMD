@@ -121,5 +121,100 @@
       "importedAt": "2026-06-29T13:39:19Z",
       "contentHash": "he9a967d7"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "thyroid_storm-dx-algo",
+      "title": "Thyroid storm: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Thyrotoxic crisis (thyroid storm) is a rare, life-threatening exacerbation of hyperthyroidism (Harrison 22e p.3080).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Fever, delirium, seizures or coma in a thyrotoxic patient indicate thyroid storm (Harrison 22e p.3080).",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Suppressed TSH with elevated total and unbound (free) T4 and T3 (Harrison 22e p.3078)., T3 toxicosis (only T3 raised) in 2-5% of patients, more in areas of borderline iodine intake; T4 toxicosis (raised T4, normal T3) is"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Differentiate from top mimics: Other causes of thyrotoxicosis besides Graves' disease must be considered (e.g. toxic adenoma, toxic multinodular goitre, destructive thyroiditis, ectopic thyroid tissue, factitious thyrotoxicosis);"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Radioiodine therapy in a patient with partially treated or untreated hyperthyroidism can itself precipitate thyrotoxic crisis (Harrison 22e p.3080)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for thyroid storm."
+    }
+  ],
+  "tables": [
+    {
+      "id": "thyroid_storm-matrix",
+      "title": "Thyroid storm: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Thyrotoxic crisis (thyroid storm) is a rare, life-threatening exacerbation of hyperthyroidism (Harrison 22e p.3080).",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Suppressed TSH with elevated total and unbound (free) T4 and T3 (Harrison 22e p.3078)., T3 toxicosis (only T3 raised) in 2-5% of",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Other causes of thyrotoxicosis besides Graves' disease must be considered (e.g. toxic adenoma, toxic multinodular goitre,",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Fever, delirium, seizures or coma in a thyrotoxic patient indicate thyroid storm (Harrison 22e p.3080).",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Radioiodine therapy in a patient with partially treated or untreated hyperthyroidism can itself precipitate thyrotoxic crisis",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for thyroid storm."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "thyroid-storm-real-image",
+      "title": "Thyroid storm: Diagnostic Endocrine Cross-Sectional Imaging",
+      "type": "ct",
+      "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
+      "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
+      "annotations": [
+        {
+          "label": "Gland Morphology",
+          "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
+        },
+        {
+          "label": "Focal Lesions",
+          "description": "Nodularity, adenoma attenuation, and washout dynamics."
+        },
+        {
+          "label": "Surrounding Structures",
+          "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+        }
+      ]
+    }
+  ]
 }

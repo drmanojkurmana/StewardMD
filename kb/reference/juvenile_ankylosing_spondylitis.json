@@ -1,85 +1,180 @@
 {
-  "id": "juvenile_ankylosing_spondylitis",
-  "name": "Juvenile ankylosing spondylitis",
-  "aliases": [
-    "juvenile-onset ankylosing spondylitis",
-    "JAS",
-    "juvenile axial spondyloarthritis",
-    "juvenile spondyloarthropathy"
+ "id": "juvenile_ankylosing_spondylitis",
+ "name": "Juvenile ankylosing spondylitis",
+ "aliases": [
+  "juvenile-onset ankylosing spondylitis",
+  "JAS",
+  "juvenile axial spondyloarthritis",
+  "juvenile spondyloarthropathy"
+ ],
+ "class": "non_infective",
+ "system": "Rheumatology / Paediatrics",
+ "specialty": "Paediatric Rheumatology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Textbook of Pediatric Rheumatology / ILAR & PRINTO criteria",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A juvenile-onset axial spondyloarthritis sharing strong HLA-B27 association and clinical features with enthesitis-related arthritis",
+   "In children, peripheral arthritis and enthesitis of the lower limbs and hips often precede axial symptoms by years",
+   "Inflammatory back pain (worse at rest and in the early morning, improving with activity) and buttock pain from sacroiliitis mark axial disease",
+   "Hip involvement is common in juvenile-onset disease and is an important cause of long-term disability",
+   "Acute symptomatic anterior uveitis (painful red eye) can occur, in contrast to the chronic silent uveitis of oligoarticular JIA",
+   "MRI detects active sacroiliitis before plain radiographs show structural change, aiding early diagnosis",
+   "Management uses NSAIDs and physiotherapy first line, with TNF inhibition for persistent axial disease or inadequate response"
   ],
-  "class": "non_infective",
-  "system": "Rheumatology / Paediatrics",
-  "specialty": "Paediatric Rheumatology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Textbook of Pediatric Rheumatology / ILAR & PRINTO criteria",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A juvenile-onset axial spondyloarthritis sharing strong HLA-B27 association and clinical features with enthesitis-related arthritis",
-      "In children, peripheral arthritis and enthesitis of the lower limbs and hips often precede axial symptoms by years",
-      "Inflammatory back pain (worse at rest and in the early morning, improving with activity) and buttock pain from sacroiliitis mark axial disease",
-      "Hip involvement is common in juvenile-onset disease and is an important cause of long-term disability",
-      "Acute symptomatic anterior uveitis (painful red eye) can occur, in contrast to the chronic silent uveitis of oligoarticular JIA",
-      "MRI detects active sacroiliitis before plain radiographs show structural change, aiding early diagnosis",
-      "Management uses NSAIDs and physiotherapy first line, with TNF inhibition for persistent axial disease or inadequate response"
+  "pathophysiology": "Juvenile ankylosing spondylitis is an axial spondyloarthritis in which HLA-B27-associated immune dysregulation, with prominent involvement of the interleukin-23/interleukin-17 pathway, drives inflammation at entheses, sacroiliac joints and the spine. Enthesitis and osteitis are followed by reparative new bone formation, which over time can produce syndesmophytes, joint fusion and progressive loss of spinal and sacroiliac mobility. Because the skeleton is still growing, hip and axial involvement in childhood can have particularly significant functional and structural consequences.",
+  "additionalDifferentials": [
+   "Enthesitis-related arthritis and other juvenile spondyloarthritis",
+   "Mechanical back pain and postural causes",
+   "Chronic non-bacterial osteomyelitis affecting the spine",
+   "Infective sacroiliitis or discitis",
+   "Inflammatory bowel disease-associated arthritis",
+   "Other JIA subtypes",
+   "Malignancy involving the spine or pelvis"
+  ],
+  "additionalInvestigations": [
+   "HLA-B27 typing to support the diagnosis",
+   "MRI of the sacroiliac joints and spine to detect early inflammatory change",
+   "Inflammatory markers (erythrocyte sedimentation rate and C-reactive protein)",
+   "Radiographs of the sacroiliac joints and spine in established disease",
+   "Assessment of spinal mobility and posture for monitoring",
+   "Ophthalmology review for symptomatic anterior uveitis",
+   "Screening for inflammatory bowel disease when gastrointestinal symptoms occur"
+  ],
+  "redFlags": [
+   "Progressive loss of spinal mobility or fixed deformity",
+   "Significant hip involvement threatening mobility",
+   "Acute painful red eye requiring urgent ophthalmology assessment",
+   "Neurological symptoms or severe night pain suggesting an alternative serious cause",
+   "Systemic features suggesting infection or inflammatory bowel disease"
+  ],
+  "prognosis": "Juvenile-onset disease tends to have more peripheral and hip involvement than adult-onset ankylosing spondylitis and can progress to significant axial disease and disability over years. Early diagnosis, physiotherapy and TNF inhibition improve symptom control and may limit structural progression.",
+  "pitfalls": [
+   "Attributing inflammatory back and buttock pain to mechanical causes and delaying imaging",
+   "Relying on plain radiographs, which are insensitive to early sacroiliitis",
+   "Underestimating hip disease as a driver of disability",
+   "Assuming HLA-B27 negativity excludes the diagnosis",
+   "Missing associated uveitis or inflammatory bowel disease"
+  ],
+  "references": [
+   "Textbook of Pediatric Rheumatology",
+   "Consensus guidance on juvenile spondyloarthritis",
+   "ASAS criteria for axial spondyloarthritis (adapted to juvenile disease)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Use non-steroidal anti-inflammatory drugs as first-line therapy for inflammatory back pain and enthesitis",
+   "Escalate to TNF inhibitors for active axial disease inadequately controlled by NSAIDs, with IL-17 inhibitors as an alternative biologic",
+   "Add sulfasalazine for predominant peripheral arthritis",
+   "Provide structured physiotherapy and regular exercise to preserve spinal mobility, posture and hip function",
+   "Use intra-articular corticosteroid injection for troublesome peripheral joint or entheseal inflammation",
+   "Screen for and treat symptomatic acute anterior uveitis with topical corticosteroids and mydriatics alongside ophthalmology",
+   "Monitor hip involvement and refer for arthroplasty where destruction causes disability",
+   "Follow axial disease with clinical mobility assessment and MRI to detect active sacroiliitis"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "juvenile_ankylosing_spondylitis-pathway",
+   "title": "Juvenile ankylosing spondylitis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A juvenile-onset axial spondyloarthritis sharing strong HLA-B27 association and clinical features with enthesitis-related arthritis",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Progressive loss of spinal mobility or fixed deformity",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: HLA-B27 typing to support the diagnosis, MRI of the sacroiliac joints and spine to detect early inflammatory change, Inflammatory markers (erythrocyte sedimentation rate and C-reactive protein)"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Use non-steroidal anti-inflammatory drugs as first-line therapy for inflammatory back pain and enthesitis"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing inflammatory back and buttock pain to mechanical causes and delaying imaging"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of juvenile ankylosing spondylitis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "juvenile_ankylosing_spondylitis-matrix",
+   "title": "Juvenile ankylosing spondylitis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A juvenile-onset axial spondyloarthritis sharing strong HLA-B27 association and clinical features with enthesitis-related",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Juvenile ankylosing spondylitis is an axial spondyloarthritis in which HLA-B27-associated immune dysregulation, with prominent involvement of the interleukin-23/interleukin-17 pathway, drives inflammation at entheses, sacroiliac joints and the spine. Enthesitis and osteitis are followed by reparative new bone formation, which over time can produce syndesmophytes, joint fusion and progressive loss of spinal and sacroiliac mobility. Because the skeleton is still growing, hip and axial involvement in childhood can have particularly significant functional and structural consequences.",
-    "additionalDifferentials": [
-      "Enthesitis-related arthritis and other juvenile spondyloarthritis",
-      "Mechanical back pain and postural causes",
-      "Chronic non-bacterial osteomyelitis affecting the spine",
-      "Infective sacroiliitis or discitis",
-      "Inflammatory bowel disease-associated arthritis",
-      "Other JIA subtypes",
-      "Malignancy involving the spine or pelvis"
+    [
+     "Key Investigations",
+     "HLA-B27 typing to support the diagnosis, MRI of the sacroiliac joints and spine to detect early inflammatory change, Inflammatory",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "HLA-B27 typing to support the diagnosis",
-      "MRI of the sacroiliac joints and spine to detect early inflammatory change",
-      "Inflammatory markers (erythrocyte sedimentation rate and C-reactive protein)",
-      "Radiographs of the sacroiliac joints and spine in established disease",
-      "Assessment of spinal mobility and posture for monitoring",
-      "Ophthalmology review for symptomatic anterior uveitis",
-      "Screening for inflammatory bowel disease when gastrointestinal symptoms occur"
+    [
+     "Primary Differentials",
+     "Enthesitis-related arthritis and other juvenile spondyloarthritis, Mechanical back pain and postural causes, Chronic",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Progressive loss of spinal mobility or fixed deformity",
-      "Significant hip involvement threatening mobility",
-      "Acute painful red eye requiring urgent ophthalmology assessment",
-      "Neurological symptoms or severe night pain suggesting an alternative serious cause",
-      "Systemic features suggesting infection or inflammatory bowel disease"
+    [
+     "Management Strategy",
+     "Use non-steroidal anti-inflammatory drugs as first-line therapy for inflammatory back pain and enthesitis",
+     "Core treatment modality"
     ],
-    "prognosis": "Juvenile-onset disease tends to have more peripheral and hip involvement than adult-onset ankylosing spondylitis and can progress to significant axial disease and disability over years. Early diagnosis, physiotherapy and TNF inhibition improve symptom control and may limit structural progression.",
-    "pitfalls": [
-      "Attributing inflammatory back and buttock pain to mechanical causes and delaying imaging",
-      "Relying on plain radiographs, which are insensitive to early sacroiliitis",
-      "Underestimating hip disease as a driver of disability",
-      "Assuming HLA-B27 negativity excludes the diagnosis",
-      "Missing associated uveitis or inflammatory bowel disease"
-    ],
-    "references": [
-      "Textbook of Pediatric Rheumatology",
-      "Consensus guidance on juvenile spondyloarthritis",
-      "ASAS criteria for axial spondyloarthritis (adapted to juvenile disease)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Use non-steroidal anti-inflammatory drugs as first-line therapy for inflammatory back pain and enthesitis",
-      "Escalate to TNF inhibitors for active axial disease inadequately controlled by NSAIDs, with IL-17 inhibitors as an alternative biologic",
-      "Add sulfasalazine for predominant peripheral arthritis",
-      "Provide structured physiotherapy and regular exercise to preserve spinal mobility, posture and hip function",
-      "Use intra-articular corticosteroid injection for troublesome peripheral joint or entheseal inflammation",
-      "Screen for and treat symptomatic acute anterior uveitis with topical corticosteroids and mydriatics alongside ophthalmology",
-      "Monitor hip involvement and refer for arthroplasty where destruction causes disability",
-      "Follow axial disease with clinical mobility assessment and MRI to detect active sacroiliitis"
+    [
+     "Clinical Pitfall",
+     "Attributing inflammatory back and buttock pain to mechanical causes and delaying imaging",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for juvenile ankylosing spondylitis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "juvenile-ankylosing-spondylitis-real-image",
+   "title": "Juvenile ankylosing spondylitis: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

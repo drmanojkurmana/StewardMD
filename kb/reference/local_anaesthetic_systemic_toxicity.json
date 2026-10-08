@@ -1,78 +1,173 @@
 {
-  "id": "local_anaesthetic_systemic_toxicity",
-  "name": "Local anaesthetic systemic toxicity",
-  "aliases": [
-    "LAST",
-    "local anaesthetic toxicity",
-    "systemic local anaesthetic poisoning"
+ "id": "local_anaesthetic_systemic_toxicity",
+ "name": "Local anaesthetic systemic toxicity",
+ "aliases": [
+  "LAST",
+  "local anaesthetic toxicity",
+  "systemic local anaesthetic poisoning"
+ ],
+ "class": "non_infective",
+ "system": "Anaesthesia / Perioperative",
+ "specialty": "Anaesthesiology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Miller's Anesthesia / standard perioperative references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Occurs when plasma levels of local anaesthetic rise excessively, usually from inadvertent intravascular injection or absorption from a large or repeated dose",
+   "Classic progression moves from early neurological signs (perioral numbness, tinnitus, metallic taste, agitation, dysarthria) to seizures, then to cardiovascular collapse, but atypical or delayed presentations are common",
+   "Cardiac toxicity can appear with little warning, especially with more lipophilic and potent agents such as bupivacaine, and may manifest as conduction block, arrhythmia, or refractory arrest",
+   "Immediate priorities are stopping the injection, calling for help, securing the airway with oxygenation, and controlling seizures while avoiding large doses of propofol in the unstable patient",
+   "Lipid emulsion therapy (intravenous lipid rescue) is the specific antidote and should be started early alongside high-quality resuscitation",
+   "During arrest, resuscitation is often prolonged; cardiopulmonary bypass or extracorporeal support may be needed and efforts should not be abandoned prematurely",
+   "Prevention relies on aspiration before injection, incremental dosing, use of a test dose, ultrasound guidance, and staying within weight-based maximum limits",
+   "Standard-dose adrenaline may be less effective and vasopressin is generally avoided; arrhythmias are managed while lipid rescue takes effect"
   ],
-  "class": "non_infective",
-  "system": "Anaesthesia / Perioperative",
-  "specialty": "Anaesthesiology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Miller's Anesthesia / standard perioperative references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Occurs when plasma levels of local anaesthetic rise excessively, usually from inadvertent intravascular injection or absorption from a large or repeated dose",
-      "Classic progression moves from early neurological signs (perioral numbness, tinnitus, metallic taste, agitation, dysarthria) to seizures, then to cardiovascular collapse, but atypical or delayed presentations are common",
-      "Cardiac toxicity can appear with little warning, especially with more lipophilic and potent agents such as bupivacaine, and may manifest as conduction block, arrhythmia, or refractory arrest",
-      "Immediate priorities are stopping the injection, calling for help, securing the airway with oxygenation, and controlling seizures while avoiding large doses of propofol in the unstable patient",
-      "Lipid emulsion therapy (intravenous lipid rescue) is the specific antidote and should be started early alongside high-quality resuscitation",
-      "During arrest, resuscitation is often prolonged; cardiopulmonary bypass or extracorporeal support may be needed and efforts should not be abandoned prematurely",
-      "Prevention relies on aspiration before injection, incremental dosing, use of a test dose, ultrasound guidance, and staying within weight-based maximum limits",
-      "Standard-dose adrenaline may be less effective and vasopressin is generally avoided; arrhythmias are managed while lipid rescue takes effect"
+  "pathophysiology": "Local anaesthetics block voltage-gated sodium channels. When systemic concentrations become excessive, they also disrupt cardiac and central nervous system membrane excitability and interfere with cardiac ion channels, mitochondrial energy production, and myocardial fatty acid metabolism. The central nervous system is affected first because inhibitory pathways are suppressed before excitatory ones, producing an excitatory phase followed by global depression. Cardiac effects include impaired conduction, reduced contractility, and malignant arrhythmias. More potent, lipid-soluble agents bind cardiac tissue avidly, making toxicity harder to reverse. Lipid emulsion is thought to act as a circulating sink that sequesters drug away from tissue and to support myocardial energetics.",
+  "additionalDifferentials": [
+   "Vasovagal syncope or simple faint during a block",
+   "High or total spinal anaesthesia",
+   "Primary cardiac arrhythmia or ischaemic event",
+   "Anaphylaxis to an injected agent or additive",
+   "Hyperventilation or panic reaction",
+   "Adrenaline effect from an epinephrine-containing solution"
+  ],
+  "additionalInvestigations": [
+   "Continuous ECG and cardiovascular monitoring for arrhythmia and conduction abnormality",
+   "Pulse oximetry and capnography to confirm oxygenation and ventilation",
+   "Arterial blood gas to assess acidosis and guide resuscitation",
+   "Serial electrolytes and glucose during prolonged resuscitation",
+   "Plasma local anaesthetic level where available (rarely used acutely)"
+  ],
+  "redFlags": [
+   "Seizure activity or rapidly declining consciousness after a regional block",
+   "Cardiovascular collapse, malignant arrhythmia, or cardiac arrest following local anaesthetic administration",
+   "Refractory hypotension or wide-complex rhythms unresponsive to standard measures",
+   "Progressive symptoms after a large-volume or repeated injection suggesting rising systemic levels"
+  ],
+  "prognosis": "With early recognition, prompt lipid emulsion therapy, and sustained high-quality resuscitation, many patients recover fully; delayed treatment or severe bupivacaine-related arrest carries a higher risk of death or hypoxic injury.",
+  "pitfalls": [
+   "Attributing early neurological symptoms to anxiety and continuing injection",
+   "Delaying lipid emulsion until after prolonged, unsuccessful resuscitation",
+   "Abandoning resuscitation too early despite the potential for good recovery",
+   "Exceeding weight-based maximum doses or omitting aspiration and incremental dosing",
+   "Using large sedative doses that worsen cardiovascular instability"
+  ],
+  "references": [
+   "Miller's Anesthesia"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Stop injecting the local anaesthetic immediately and call for help",
+   "Manage the airway with high-flow oxygen and ventilation to prevent hypoxia and acidosis",
+   "Control seizures with a benzodiazepine, avoiding large doses of propofol in the haemodynamically unstable patient",
+   "Give intravenous lipid emulsion (lipid rescue) as the specific antidote, started early as a bolus and infusion",
+   "Use modified high-quality resuscitation for arrest, giving small adrenaline doses and avoiding vasopressin, calcium-channel blockers and certain antiarrhythmics",
+   "Continue resuscitation for a prolonged period, with early recourse to cardiopulmonary bypass or extracorporeal life support",
+   "Prevent recurrence through dose limits, aspiration before injection, incremental dosing and ultrasound guidance, with post-event monitoring for delayed toxicity"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "local_anaesthetic_systemic_toxicity-pathway",
+   "title": "Local anaesthetic systemic toxicity: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Occurs when plasma levels of local anaesthetic rise excessively, usually from inadvertent intravascular injection or absorption from a large or repeated dose",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Seizure activity or rapidly declining consciousness after a regional block",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Continuous ECG and cardiovascular monitoring for arrhythmia and conduction abnormality, Pulse oximetry and capnography to confirm oxygenation and ventilation, Arterial blood gas to assess acidosis and guide resuscitation"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Stop injecting the local anaesthetic immediately and call for help"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing early neurological symptoms to anxiety and continuing injection"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of local anaesthetic systemic toxicity."
+  }
+ ],
+ "tables": [
+  {
+   "id": "local_anaesthetic_systemic_toxicity-matrix",
+   "title": "Local anaesthetic systemic toxicity: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Occurs when plasma levels of local anaesthetic rise excessively, usually from inadvertent intravascular injection or absorption",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Local anaesthetics block voltage-gated sodium channels. When systemic concentrations become excessive, they also disrupt cardiac and central nervous system membrane excitability and interfere with cardiac ion channels, mitochondrial energy production, and myocardial fatty acid metabolism. The central nervous system is affected first because inhibitory pathways are suppressed before excitatory ones, producing an excitatory phase followed by global depression. Cardiac effects include impaired conduction, reduced contractility, and malignant arrhythmias. More potent, lipid-soluble agents bind cardiac tissue avidly, making toxicity harder to reverse. Lipid emulsion is thought to act as a circulating sink that sequesters drug away from tissue and to support myocardial energetics.",
-    "additionalDifferentials": [
-      "Vasovagal syncope or simple faint during a block",
-      "High or total spinal anaesthesia",
-      "Primary cardiac arrhythmia or ischaemic event",
-      "Anaphylaxis to an injected agent or additive",
-      "Hyperventilation or panic reaction",
-      "Adrenaline effect from an epinephrine-containing solution"
+    [
+     "Key Investigations",
+     "Continuous ECG and cardiovascular monitoring for arrhythmia and conduction abnormality, Pulse oximetry and capnography to confirm",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Continuous ECG and cardiovascular monitoring for arrhythmia and conduction abnormality",
-      "Pulse oximetry and capnography to confirm oxygenation and ventilation",
-      "Arterial blood gas to assess acidosis and guide resuscitation",
-      "Serial electrolytes and glucose during prolonged resuscitation",
-      "Plasma local anaesthetic level where available (rarely used acutely)"
+    [
+     "Primary Differentials",
+     "Vasovagal syncope or simple faint during a block, High or total spinal anaesthesia, Primary cardiac arrhythmia or ischaemic event",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Seizure activity or rapidly declining consciousness after a regional block",
-      "Cardiovascular collapse, malignant arrhythmia, or cardiac arrest following local anaesthetic administration",
-      "Refractory hypotension or wide-complex rhythms unresponsive to standard measures",
-      "Progressive symptoms after a large-volume or repeated injection suggesting rising systemic levels"
+    [
+     "Management Strategy",
+     "Stop injecting the local anaesthetic immediately and call for help",
+     "Core treatment modality"
     ],
-    "prognosis": "With early recognition, prompt lipid emulsion therapy, and sustained high-quality resuscitation, many patients recover fully; delayed treatment or severe bupivacaine-related arrest carries a higher risk of death or hypoxic injury.",
-    "pitfalls": [
-      "Attributing early neurological symptoms to anxiety and continuing injection",
-      "Delaying lipid emulsion until after prolonged, unsuccessful resuscitation",
-      "Abandoning resuscitation too early despite the potential for good recovery",
-      "Exceeding weight-based maximum doses or omitting aspiration and incremental dosing",
-      "Using large sedative doses that worsen cardiovascular instability"
-    ],
-    "references": [
-      "Miller's Anesthesia"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Stop injecting the local anaesthetic immediately and call for help",
-      "Manage the airway with high-flow oxygen and ventilation to prevent hypoxia and acidosis",
-      "Control seizures with a benzodiazepine, avoiding large doses of propofol in the haemodynamically unstable patient",
-      "Give intravenous lipid emulsion (lipid rescue) as the specific antidote, started early as a bolus and infusion",
-      "Use modified high-quality resuscitation for arrest, giving small adrenaline doses and avoiding vasopressin, calcium-channel blockers and certain antiarrhythmics",
-      "Continue resuscitation for a prolonged period, with early recourse to cardiopulmonary bypass or extracorporeal life support",
-      "Prevent recurrence through dose limits, aspiration before injection, incremental dosing and ultrasound guidance, with post-event monitoring for delayed toxicity"
+    [
+     "Clinical Pitfall",
+     "Attributing early neurological symptoms to anxiety and continuing injection",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for local anaesthetic systemic toxicity."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "local-anaesthetic-systemic-toxicity-real-image",
+   "title": "Local anaesthetic systemic toxicity: 12-Lead Diagnostic Electrocardiogram",
+   "type": "ecg",
+   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
+   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
+   "annotations": [
+    {
+     "label": "Conduction & Axis",
+     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
+    },
+    {
+     "label": "Repolarization",
+     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
+    },
+    {
+     "label": "Rhythm & Intervals",
+     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+    }
+   ]
+  }
+ ]
 }

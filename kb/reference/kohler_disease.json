@@ -1,79 +1,174 @@
 {
-  "id": "kohler_disease",
-  "name": "Kohler disease",
-  "aliases": [
-    "Kohler's bone disease",
-    "tarsal navicular osteochondrosis",
-    "osteonecrosis of the tarsal navicular",
-    "navicular osteochondrosis of childhood"
+ "id": "kohler_disease",
+ "name": "Kohler disease",
+ "aliases": [
+  "Kohler's bone disease",
+  "tarsal navicular osteochondrosis",
+  "osteonecrosis of the tarsal navicular",
+  "navicular osteochondrosis of childhood"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal / Orthopaedics",
+ "specialty": "Orthopaedics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Tachdjian's Pediatric Orthopaedics / Campbell's Operative Orthopaedics",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A true osteonecrosis of the tarsal navicular occurring in the immature foot, not a traction apophysitis",
+   "Affected bone is the tarsal navicular, the last tarsal bone to ossify, which is vulnerable during its ossification",
+   "Typically affects children aged around four to seven years and is more common in boys",
+   "Presents with a painful limp, tenderness and sometimes swelling over the medial midfoot, with weight-bearing on the outer border of the foot",
+   "The radiographic hallmark is a flattened, sclerotic and fragmented navicular with narrowing of the ossific nucleus",
+   "Frequently unilateral, though it can be bilateral, and radiographic changes may lag or persist behind clinical improvement",
+   "It is a self-limiting condition, with the navicular typically reconstituting to a normal or near-normal shape over time",
+   "Management is supportive with offloading, activity modification and short-term immobilisation for symptom relief as needed"
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal / Orthopaedics",
-  "specialty": "Orthopaedics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Tachdjian's Pediatric Orthopaedics / Campbell's Operative Orthopaedics",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A true osteonecrosis of the tarsal navicular occurring in the immature foot, not a traction apophysitis",
-      "Affected bone is the tarsal navicular, the last tarsal bone to ossify, which is vulnerable during its ossification",
-      "Typically affects children aged around four to seven years and is more common in boys",
-      "Presents with a painful limp, tenderness and sometimes swelling over the medial midfoot, with weight-bearing on the outer border of the foot",
-      "The radiographic hallmark is a flattened, sclerotic and fragmented navicular with narrowing of the ossific nucleus",
-      "Frequently unilateral, though it can be bilateral, and radiographic changes may lag or persist behind clinical improvement",
-      "It is a self-limiting condition, with the navicular typically reconstituting to a normal or near-normal shape over time",
-      "Management is supportive with offloading, activity modification and short-term immobilisation for symptom relief as needed"
+  "pathophysiology": "Kohler disease is an osteochondrosis of the tarsal navicular caused by temporary interruption of its blood supply during a vulnerable period of ossification. Because the navicular is the last tarsal bone to ossify and lies at the apex of the medial longitudinal arch, it is subjected to compressive forces at a time when its single ossific nucleus and vascular supply are still immature. Transient ischaemia leads to sclerosis, flattening and fragmentation of the developing bone, which is often exacerbated by weight-bearing stress. Because the vascular insult is temporary and the child continues to grow, revascularisation and remodelling usually restore normal or near-normal navicular architecture, distinguishing it from the adult navicular osteonecrosis of Mueller-Weiss syndrome.",
+  "additionalDifferentials": [
+   "Mueller-Weiss syndrome (adult tarsal navicular osteonecrosis)",
+   "Tarsal navicular stress fracture",
+   "Septic arthritis or osteomyelitis of the midfoot",
+   "Juvenile idiopathic arthritis of the midfoot",
+   "Accessory navicular syndrome",
+   "Normal irregular or multicentric ossification of the navicular"
+  ],
+  "additionalInvestigations": [
+   "Weight-bearing foot radiographs demonstrating navicular sclerosis, flattening and fragmentation",
+   "Comparison views of the contralateral foot to distinguish disease from normal ossification variation",
+   "Magnetic resonance imaging where the diagnosis is uncertain or infection is suspected",
+   "Inflammatory markers and full blood count if septic arthritis or osteomyelitis is a concern",
+   "Clinical assessment of gait and site of maximal tenderness over the medial midfoot",
+   "Follow-up radiographs to document reconstitution of the navicular"
+  ],
+  "redFlags": [
+   "Fever, marked swelling or systemic upset suggesting infection rather than osteochondrosis",
+   "Rest pain or night pain raising concern for an alternative pathology",
+   "Failure of symptoms to settle over the expected course prompting reassessment of the diagnosis",
+   "Bilateral or atypical disease warranting consideration of a systemic condition"
+  ],
+  "prognosis": "The prognosis is excellent; Kohler disease is self-limiting and the navicular almost always reconstitutes to normal shape with resolution of symptoms, typically within months to a couple of years and without long-term sequelae.",
+  "pitfalls": [
+   "Mistaking normal irregular navicular ossification for disease and over-investigating an asymptomatic child",
+   "Failing to consider infection when swelling, warmth or systemic features are present",
+   "Confusing the benign childhood condition with the more serious adult Mueller-Weiss navicular osteonecrosis",
+   "Prolonged unnecessary immobilisation given the naturally self-limiting course"
+  ],
+  "references": [
+   "Tachdjian's Pediatric Orthopaedics",
+   "Campbell's Operative Orthopaedics"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Reassurance, as the navicular osteochondrosis is self-limiting with an excellent prognosis and near-universal reconstitution of the bone",
+   "Simple analgesia and activity or weight-bearing modification for pain",
+   "A short-leg walking cast or immobilisation for a period in more painful cases to hasten symptom relief",
+   "Medial arch support or orthoses for comfort once immobilisation is discontinued",
+   "Avoidance of surgery, which is not indicated",
+   "Clinical and radiographic follow-up to confirm reconstitution, recognising radiographic change lags behind clinical improvement"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "kohler_disease-pathway",
+   "title": "Kohler disease: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A true osteonecrosis of the tarsal navicular occurring in the immature foot, not a traction apophysitis",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Fever, marked swelling or systemic upset suggesting infection rather than osteochondrosis",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Weight-bearing foot radiographs demonstrating navicular sclerosis, flattening and fragmentation, Comparison views of the contralateral foot to distinguish disease from normal ossification variation, Magnetic resonance"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Reassurance, as the navicular osteochondrosis is self-limiting with an excellent prognosis and near-universal reconstitution of the bone"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking normal irregular navicular ossification for disease and over-investigating an asymptomatic child"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of kohler disease."
+  }
+ ],
+ "tables": [
+  {
+   "id": "kohler_disease-matrix",
+   "title": "Kohler disease: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A true osteonecrosis of the tarsal navicular occurring in the immature foot, not a traction apophysitis",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Kohler disease is an osteochondrosis of the tarsal navicular caused by temporary interruption of its blood supply during a vulnerable period of ossification. Because the navicular is the last tarsal bone to ossify and lies at the apex of the medial longitudinal arch, it is subjected to compressive forces at a time when its single ossific nucleus and vascular supply are still immature. Transient ischaemia leads to sclerosis, flattening and fragmentation of the developing bone, which is often exacerbated by weight-bearing stress. Because the vascular insult is temporary and the child continues to grow, revascularisation and remodelling usually restore normal or near-normal navicular architecture, distinguishing it from the adult navicular osteonecrosis of Mueller-Weiss syndrome.",
-    "additionalDifferentials": [
-      "Mueller-Weiss syndrome (adult tarsal navicular osteonecrosis)",
-      "Tarsal navicular stress fracture",
-      "Septic arthritis or osteomyelitis of the midfoot",
-      "Juvenile idiopathic arthritis of the midfoot",
-      "Accessory navicular syndrome",
-      "Normal irregular or multicentric ossification of the navicular"
+    [
+     "Key Investigations",
+     "Weight-bearing foot radiographs demonstrating navicular sclerosis, flattening and fragmentation, Comparison views of the",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Weight-bearing foot radiographs demonstrating navicular sclerosis, flattening and fragmentation",
-      "Comparison views of the contralateral foot to distinguish disease from normal ossification variation",
-      "Magnetic resonance imaging where the diagnosis is uncertain or infection is suspected",
-      "Inflammatory markers and full blood count if septic arthritis or osteomyelitis is a concern",
-      "Clinical assessment of gait and site of maximal tenderness over the medial midfoot",
-      "Follow-up radiographs to document reconstitution of the navicular"
+    [
+     "Primary Differentials",
+     "Mueller-Weiss syndrome (adult tarsal navicular osteonecrosis), Tarsal navicular stress fracture, Septic arthritis or",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Fever, marked swelling or systemic upset suggesting infection rather than osteochondrosis",
-      "Rest pain or night pain raising concern for an alternative pathology",
-      "Failure of symptoms to settle over the expected course prompting reassessment of the diagnosis",
-      "Bilateral or atypical disease warranting consideration of a systemic condition"
+    [
+     "Management Strategy",
+     "Reassurance, as the navicular osteochondrosis is self-limiting with an excellent prognosis and near-universal reconstitution of",
+     "Core treatment modality"
     ],
-    "prognosis": "The prognosis is excellent; Kohler disease is self-limiting and the navicular almost always reconstitutes to normal shape with resolution of symptoms, typically within months to a couple of years and without long-term sequelae.",
-    "pitfalls": [
-      "Mistaking normal irregular navicular ossification for disease and over-investigating an asymptomatic child",
-      "Failing to consider infection when swelling, warmth or systemic features are present",
-      "Confusing the benign childhood condition with the more serious adult Mueller-Weiss navicular osteonecrosis",
-      "Prolonged unnecessary immobilisation given the naturally self-limiting course"
-    ],
-    "references": [
-      "Tachdjian's Pediatric Orthopaedics",
-      "Campbell's Operative Orthopaedics"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Reassurance, as the navicular osteochondrosis is self-limiting with an excellent prognosis and near-universal reconstitution of the bone",
-      "Simple analgesia and activity or weight-bearing modification for pain",
-      "A short-leg walking cast or immobilisation for a period in more painful cases to hasten symptom relief",
-      "Medial arch support or orthoses for comfort once immobilisation is discontinued",
-      "Avoidance of surgery, which is not indicated",
-      "Clinical and radiographic follow-up to confirm reconstitution, recognising radiographic change lags behind clinical improvement"
+    [
+     "Clinical Pitfall",
+     "Mistaking normal irregular navicular ossification for disease and over-investigating an asymptomatic child",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for kohler disease."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "kohler-disease-real-image",
+   "title": "Kohler disease: Diagnostic Musculoskeletal Radiograph",
+   "type": "xray",
+   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
+   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
+   "annotations": [
+    {
+     "label": "Cortical Margins",
+     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
+    },
+    {
+     "label": "Trabecular Architecture",
+     "description": "Medullary bone density, lucencies, and subchondral mineralization."
+    },
+    {
+     "label": "Joint Articulation",
+     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+    }
+   ]
+  }
+ ]
 }

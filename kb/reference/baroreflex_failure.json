@@ -1,78 +1,173 @@
 {
-  "id": "baroreflex_failure",
-  "name": "Baroreflex failure",
-  "aliases": [
-    "baroreceptor failure",
-    "baroreflex dysfunction"
+ "id": "baroreflex_failure",
+ "name": "Baroreflex failure",
+ "aliases": [
+  "baroreceptor failure",
+  "baroreflex dysfunction"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system / Autonomic",
+ "specialty": "Neurology / Autonomic",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Bradley and Daroff Neurology in Clinical Practice / Low's Clinical Autonomic Disorders",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Presents with labile, volatile blood pressure, with episodic severe hypertension alternating with hypotension, reflecting loss of buffering of blood-pressure fluctuations",
+   "Hypertensive surges are often accompanied by tachycardia, headache, flushing, sweating, and emotional distress",
+   "Commonly follows neck surgery or radiotherapy for head and neck cancer, bilateral carotid body tumour resection, or damage to the glossopharyngeal and vagal afferents",
+   "May mimic phaeochromocytoma because of paroxysmal hypertension with catecholamine surges",
+   "A later chronic phase can show orthostatic tachycardia and pressure lability rather than sustained hypertension",
+   "A reduced parasympathetic component can produce marked tachycardia, and the volatile swings make treatment difficult",
+   "Diagnosis is supported by demonstrating impaired baroreflex sensitivity on autonomic testing",
+   "Management focuses on damping the swings and avoiding emotional and physical triggers, with specialist input"
   ],
-  "class": "non_infective",
-  "system": "Nervous system / Autonomic",
-  "specialty": "Neurology / Autonomic",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Bradley and Daroff Neurology in Clinical Practice / Low's Clinical Autonomic Disorders",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Presents with labile, volatile blood pressure, with episodic severe hypertension alternating with hypotension, reflecting loss of buffering of blood-pressure fluctuations",
-      "Hypertensive surges are often accompanied by tachycardia, headache, flushing, sweating, and emotional distress",
-      "Commonly follows neck surgery or radiotherapy for head and neck cancer, bilateral carotid body tumour resection, or damage to the glossopharyngeal and vagal afferents",
-      "May mimic phaeochromocytoma because of paroxysmal hypertension with catecholamine surges",
-      "A later chronic phase can show orthostatic tachycardia and pressure lability rather than sustained hypertension",
-      "A reduced parasympathetic component can produce marked tachycardia, and the volatile swings make treatment difficult",
-      "Diagnosis is supported by demonstrating impaired baroreflex sensitivity on autonomic testing",
-      "Management focuses on damping the swings and avoiding emotional and physical triggers, with specialist input"
+  "pathophysiology": "The arterial baroreflex normally buffers moment-to-moment changes in blood pressure: baroreceptors in the carotid sinus and aortic arch sense arterial stretch and, via glossopharyngeal and vagal afferents to the brainstem, adjust sympathetic and parasympathetic outflow to keep pressure stable. Baroreflex failure occurs when these afferent limbs or their central connections are damaged, for example by surgery, radiotherapy, tumour, or neck trauma, so that blood pressure is no longer buffered. Sympathetic outflow becomes unrestrained and highly sensitive to arousal and stress, producing large surges of hypertension and tachycardia interspersed with hypotension when sympathetic drive falls. Loss of vagal baroreflex control adds heart-rate instability.",
+  "additionalDifferentials": [
+   "Phaeochromocytoma or paraganglioma",
+   "Essential or secondary hypertension with anxiety",
+   "Autonomic failure with supine hypertension",
+   "Panic disorder",
+   "Renovascular hypertension",
+   "Drug or sympathomimetic effect"
+  ],
+  "additionalInvestigations": [
+   "Continuous or ambulatory blood-pressure monitoring to document lability",
+   "Baroreflex sensitivity testing during formal autonomic assessment",
+   "Plasma and urinary metanephrines to exclude phaeochromocytoma",
+   "Imaging of the neck to identify prior surgery, radiotherapy, or tumour-related damage",
+   "Cardiovascular autonomic reflex tests including the Valsalva manoeuvre and deep breathing",
+   "Heart-rate variability analysis"
+  ],
+  "redFlags": [
+   "Severe hypertensive surges risking stroke or cardiac events",
+   "Symptoms strongly suggesting phaeochromocytoma requiring exclusion",
+   "Profound hypotensive episodes causing syncope and injury",
+   "A new neurological deficit occurring during a surge"
+  ],
+  "prognosis": "Blood-pressure lability may lessen over time as partial compensation develops, but many patients have persistent, difficult-to-control fluctuations; prognosis depends on the extent of afferent damage and on avoiding hypertensive complications.",
+  "pitfalls": [
+   "Misdiagnosing the paroxysmal hypertension as phaeochromocytoma and missing the true cause",
+   "Treating the hypertension aggressively and precipitating dangerous hypotension",
+   "Overlooking a history of neck surgery or radiotherapy",
+   "Underestimating the role of emotional and physical arousal as triggers"
+  ],
+  "references": [
+   "Bradley and Daroff's Neurology in Clinical Practice",
+   "Low's Clinical Autonomic Disorders"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Central sympatholytic agents such as clonidine to blunt hypertensive surges and sympathetic overactivity",
+   "Benzodiazepines to reduce arousal- and stress-triggered pressure surges",
+   "Short-acting vasodilators for acute hypertensive crises, with cautious pressor or fluid support during hypotensive episodes",
+   "Avoidance of physical and emotional triggers that provoke sympathetic surges",
+   "Management of the reduced parasympathetic component, including cardiac pacing where profound bradycardia or heart-rate instability occurs",
+   "Continuous or ambulatory blood-pressure monitoring to guide titration of therapy",
+   "Referral to an autonomic specialist centre for baroreflex assessment and individualised management"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "baroreflex_failure-pathway",
+   "title": "Baroreflex failure: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Presents with labile, volatile blood pressure, with episodic severe hypertension alternating with hypotension, reflecting loss of buffering of blood-pressure fluctuations",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Severe hypertensive surges risking stroke or cardiac events",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Continuous or ambulatory blood-pressure monitoring to document lability, Baroreflex sensitivity testing during formal autonomic assessment, Plasma and urinary metanephrines to exclude phaeochromocytoma"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Central sympatholytic agents such as clonidine to blunt hypertensive surges and sympathetic overactivity"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Misdiagnosing the paroxysmal hypertension as phaeochromocytoma and missing the true cause"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of baroreflex failure."
+  }
+ ],
+ "tables": [
+  {
+   "id": "baroreflex_failure-matrix",
+   "title": "Baroreflex failure: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Presents with labile, volatile blood pressure, with episodic severe hypertension alternating with hypotension, reflecting loss of",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "The arterial baroreflex normally buffers moment-to-moment changes in blood pressure: baroreceptors in the carotid sinus and aortic arch sense arterial stretch and, via glossopharyngeal and vagal afferents to the brainstem, adjust sympathetic and parasympathetic outflow to keep pressure stable. Baroreflex failure occurs when these afferent limbs or their central connections are damaged, for example by surgery, radiotherapy, tumour, or neck trauma, so that blood pressure is no longer buffered. Sympathetic outflow becomes unrestrained and highly sensitive to arousal and stress, producing large surges of hypertension and tachycardia interspersed with hypotension when sympathetic drive falls. Loss of vagal baroreflex control adds heart-rate instability.",
-    "additionalDifferentials": [
-      "Phaeochromocytoma or paraganglioma",
-      "Essential or secondary hypertension with anxiety",
-      "Autonomic failure with supine hypertension",
-      "Panic disorder",
-      "Renovascular hypertension",
-      "Drug or sympathomimetic effect"
+    [
+     "Key Investigations",
+     "Continuous or ambulatory blood-pressure monitoring to document lability, Baroreflex sensitivity testing during formal autonomic",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Continuous or ambulatory blood-pressure monitoring to document lability",
-      "Baroreflex sensitivity testing during formal autonomic assessment",
-      "Plasma and urinary metanephrines to exclude phaeochromocytoma",
-      "Imaging of the neck to identify prior surgery, radiotherapy, or tumour-related damage",
-      "Cardiovascular autonomic reflex tests including the Valsalva manoeuvre and deep breathing",
-      "Heart-rate variability analysis"
+    [
+     "Primary Differentials",
+     "Phaeochromocytoma or paraganglioma, Essential or secondary hypertension with anxiety, Autonomic failure with supine hypertension",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Severe hypertensive surges risking stroke or cardiac events",
-      "Symptoms strongly suggesting phaeochromocytoma requiring exclusion",
-      "Profound hypotensive episodes causing syncope and injury",
-      "A new neurological deficit occurring during a surge"
+    [
+     "Management Strategy",
+     "Central sympatholytic agents such as clonidine to blunt hypertensive surges and sympathetic overactivity",
+     "Core treatment modality"
     ],
-    "prognosis": "Blood-pressure lability may lessen over time as partial compensation develops, but many patients have persistent, difficult-to-control fluctuations; prognosis depends on the extent of afferent damage and on avoiding hypertensive complications.",
-    "pitfalls": [
-      "Misdiagnosing the paroxysmal hypertension as phaeochromocytoma and missing the true cause",
-      "Treating the hypertension aggressively and precipitating dangerous hypotension",
-      "Overlooking a history of neck surgery or radiotherapy",
-      "Underestimating the role of emotional and physical arousal as triggers"
-    ],
-    "references": [
-      "Bradley and Daroff's Neurology in Clinical Practice",
-      "Low's Clinical Autonomic Disorders"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Central sympatholytic agents such as clonidine to blunt hypertensive surges and sympathetic overactivity",
-      "Benzodiazepines to reduce arousal- and stress-triggered pressure surges",
-      "Short-acting vasodilators for acute hypertensive crises, with cautious pressor or fluid support during hypotensive episodes",
-      "Avoidance of physical and emotional triggers that provoke sympathetic surges",
-      "Management of the reduced parasympathetic component, including cardiac pacing where profound bradycardia or heart-rate instability occurs",
-      "Continuous or ambulatory blood-pressure monitoring to guide titration of therapy",
-      "Referral to an autonomic specialist centre for baroreflex assessment and individualised management"
+    [
+     "Clinical Pitfall",
+     "Misdiagnosing the paroxysmal hypertension as phaeochromocytoma and missing the true cause",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for baroreflex failure."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "baroreflex-failure-real-image",
+   "title": "Baroreflex failure: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

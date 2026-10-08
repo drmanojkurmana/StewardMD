@@ -1,77 +1,172 @@
 {
-  "id": "fibromuscular_dysplasia",
-  "name": "Fibromuscular dysplasia",
-  "aliases": [
-    "FMD",
-    "fibromuscular hyperplasia",
-    "medial fibroplasia"
+ "id": "fibromuscular_dysplasia",
+ "name": "Fibromuscular dysplasia",
+ "aliases": [
+  "FMD",
+  "fibromuscular hyperplasia",
+  "medial fibroplasia"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system / Cerebrovascular",
+ "specialty": "Neurology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Adams and Victor's Principles of Neurology / vascular medicine consensus documents",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Non-atherosclerotic, non-inflammatory arteriopathy that predominantly affects women",
+   "Most commonly involves the renal and internal carotid or vertebral arteries",
+   "The multifocal medial subtype produces the classic angiographic string-of-beads appearance",
+   "Renal involvement typically presents with early-onset or resistant hypertension",
+   "Cervical involvement may cause headache, pulsatile tinnitus, cervical bruit, dissection, or stroke",
+   "Screening for aneurysms elsewhere, including intracranial aneurysms, is recommended once diagnosed",
+   "Management includes antiplatelet therapy, blood pressure control, and angioplasty for significant renal stenosis"
   ],
-  "class": "non_infective",
-  "system": "Nervous system / Cerebrovascular",
-  "specialty": "Neurology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Adams and Victor's Principles of Neurology / vascular medicine consensus documents",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Non-atherosclerotic, non-inflammatory arteriopathy that predominantly affects women",
-      "Most commonly involves the renal and internal carotid or vertebral arteries",
-      "The multifocal medial subtype produces the classic angiographic string-of-beads appearance",
-      "Renal involvement typically presents with early-onset or resistant hypertension",
-      "Cervical involvement may cause headache, pulsatile tinnitus, cervical bruit, dissection, or stroke",
-      "Screening for aneurysms elsewhere, including intracranial aneurysms, is recommended once diagnosed",
-      "Management includes antiplatelet therapy, blood pressure control, and angioplasty for significant renal stenosis"
+  "pathophysiology": "Fibromuscular dysplasia is an idiopathic, segmental, non-inflammatory and non-atherosclerotic disorder of medium-sized arteries. Abnormal proliferation and disorganised deposition of collagen and fibrous tissue within the arterial wall, most often the media, create alternating areas of stenosis and mural dilatation that give the beaded angiographic pattern; focal forms produce discrete stenoses. The disordered wall architecture predisposes to dissection, aneurysm formation, and thromboembolism, so cerebrovascular events may arise from stenosis, dissection, or embolism rather than from atherosclerotic plaque.",
+  "additionalDifferentials": [
+   "Atherosclerotic renal or carotid stenosis",
+   "Vasculitis such as Takayasu or polyarteritis nodosa",
+   "Segmental arterial mediolysis",
+   "Ehlers-Danlos and other connective tissue arteriopathies",
+   "Spontaneous cervical artery dissection from other causes",
+   "Standing arterial spasm or reversible vasoconstriction"
+  ],
+  "additionalInvestigations": [
+   "Catheter angiography or CT and MR angiography showing the string-of-beads or focal stenosis",
+   "Duplex ultrasound of renal and cervical arteries for screening and follow-up",
+   "Intracranial vascular imaging to detect associated aneurysms",
+   "Blood pressure evaluation and assessment of renovascular hypertension",
+   "Whole-arterial-bed imaging because the disease is frequently multifocal"
+  ],
+  "redFlags": [
+   "Arterial dissection presenting with neck pain, Horner syndrome, or stroke",
+   "Rupture of an associated intracranial aneurysm",
+   "Accelerated or resistant hypertension from renal artery involvement",
+   "Recurrent transient ischaemic attacks or infarction"
+  ],
+  "prognosis": "Many patients have a benign course, but complications such as dissection, aneurysm rupture, and stroke can be serious; renal disease often responds well to angioplasty, and overall outlook depends on the vascular beds involved.",
+  "pitfalls": [
+   "Assuming stenosis is atherosclerotic in a young patient and missing the diagnosis",
+   "Failing to screen for intracranial and other aneurysms after diagnosis",
+   "Overlooking arterial dissection as the cause of a stroke in cervical FMD",
+   "Not imaging additional arterial beds given the multifocal nature of the disease"
+  ],
+  "references": [
+   "Adams and Victor's Principles of Neurology",
+   "Bradley's Neurology in Clinical Practice"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Offer antiplatelet therapy such as aspirin to reduce thromboembolic and stroke risk unless contraindicated",
+   "Treat renovascular hypertension with antihypertensive agents, particularly renin-angiotensin system blockade",
+   "Perform percutaneous transluminal balloon angioplasty for haemodynamically significant renal artery stenosis causing resistant or early-onset hypertension",
+   "Manage arterial dissection with antithrombotic therapy and repair aneurysms by endovascular or surgical means",
+   "Arrange whole-arterial-bed imaging with screening for intracranial and other aneurysms once diagnosed, and follow up periodically",
+   "Treat acute stroke or dissection along standard cerebrovascular emergency pathways",
+   "Advise smoking cessation and vascular risk-factor modification, and refer to hypertension or vascular medicine specialists"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "fibromuscular_dysplasia-pathway",
+   "title": "Fibromuscular dysplasia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Non-atherosclerotic, non-inflammatory arteriopathy that predominantly affects women",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Arterial dissection presenting with neck pain, Horner syndrome, or stroke",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Catheter angiography or CT and MR angiography showing the string-of-beads or focal stenosis, Duplex ultrasound of renal and cervical arteries for screening and follow-up, Intracranial vascular imaging to detect associated"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Offer antiplatelet therapy such as aspirin to reduce thromboembolic and stroke risk unless contraindicated"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Assuming stenosis is atherosclerotic in a young patient and missing the diagnosis"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of fibromuscular dysplasia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "fibromuscular_dysplasia-matrix",
+   "title": "Fibromuscular dysplasia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Non-atherosclerotic, non-inflammatory arteriopathy that predominantly affects women",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Fibromuscular dysplasia is an idiopathic, segmental, non-inflammatory and non-atherosclerotic disorder of medium-sized arteries. Abnormal proliferation and disorganised deposition of collagen and fibrous tissue within the arterial wall, most often the media, create alternating areas of stenosis and mural dilatation that give the beaded angiographic pattern; focal forms produce discrete stenoses. The disordered wall architecture predisposes to dissection, aneurysm formation, and thromboembolism, so cerebrovascular events may arise from stenosis, dissection, or embolism rather than from atherosclerotic plaque.",
-    "additionalDifferentials": [
-      "Atherosclerotic renal or carotid stenosis",
-      "Vasculitis such as Takayasu or polyarteritis nodosa",
-      "Segmental arterial mediolysis",
-      "Ehlers-Danlos and other connective tissue arteriopathies",
-      "Spontaneous cervical artery dissection from other causes",
-      "Standing arterial spasm or reversible vasoconstriction"
+    [
+     "Key Investigations",
+     "Catheter angiography or CT and MR angiography showing the string-of-beads or focal stenosis, Duplex ultrasound of renal and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Catheter angiography or CT and MR angiography showing the string-of-beads or focal stenosis",
-      "Duplex ultrasound of renal and cervical arteries for screening and follow-up",
-      "Intracranial vascular imaging to detect associated aneurysms",
-      "Blood pressure evaluation and assessment of renovascular hypertension",
-      "Whole-arterial-bed imaging because the disease is frequently multifocal"
+    [
+     "Primary Differentials",
+     "Atherosclerotic renal or carotid stenosis, Vasculitis such as Takayasu or polyarteritis nodosa, Segmental arterial mediolysis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Arterial dissection presenting with neck pain, Horner syndrome, or stroke",
-      "Rupture of an associated intracranial aneurysm",
-      "Accelerated or resistant hypertension from renal artery involvement",
-      "Recurrent transient ischaemic attacks or infarction"
+    [
+     "Management Strategy",
+     "Offer antiplatelet therapy such as aspirin to reduce thromboembolic and stroke risk unless contraindicated",
+     "Core treatment modality"
     ],
-    "prognosis": "Many patients have a benign course, but complications such as dissection, aneurysm rupture, and stroke can be serious; renal disease often responds well to angioplasty, and overall outlook depends on the vascular beds involved.",
-    "pitfalls": [
-      "Assuming stenosis is atherosclerotic in a young patient and missing the diagnosis",
-      "Failing to screen for intracranial and other aneurysms after diagnosis",
-      "Overlooking arterial dissection as the cause of a stroke in cervical FMD",
-      "Not imaging additional arterial beds given the multifocal nature of the disease"
-    ],
-    "references": [
-      "Adams and Victor's Principles of Neurology",
-      "Bradley's Neurology in Clinical Practice"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Offer antiplatelet therapy such as aspirin to reduce thromboembolic and stroke risk unless contraindicated",
-      "Treat renovascular hypertension with antihypertensive agents, particularly renin-angiotensin system blockade",
-      "Perform percutaneous transluminal balloon angioplasty for haemodynamically significant renal artery stenosis causing resistant or early-onset hypertension",
-      "Manage arterial dissection with antithrombotic therapy and repair aneurysms by endovascular or surgical means",
-      "Arrange whole-arterial-bed imaging with screening for intracranial and other aneurysms once diagnosed, and follow up periodically",
-      "Treat acute stroke or dissection along standard cerebrovascular emergency pathways",
-      "Advise smoking cessation and vascular risk-factor modification, and refer to hypertension or vascular medicine specialists"
+    [
+     "Clinical Pitfall",
+     "Assuming stenosis is atherosclerotic in a young patient and missing the diagnosis",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for fibromuscular dysplasia."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "fibromuscular-dysplasia-real-image",
+   "title": "Fibromuscular dysplasia: Diagnostic Head Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
+   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
+   "annotations": [
+    {
+     "label": "Cerebral Parenchyma",
+     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+    },
+    {
+     "label": "Extra-Axial Spaces",
+     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+    }
+   ]
+  }
+ ]
 }

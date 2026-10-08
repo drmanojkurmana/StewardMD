@@ -1,83 +1,178 @@
 {
-  "id": "il7r_scid",
-  "name": "Interleukin-7 receptor alpha deficiency SCID",
-  "aliases": [
-    "IL7RA deficiency",
-    "IL-7R alpha chain SCID",
-    "T-B+NK+ SCID"
+ "id": "il7r_scid",
+ "name": "Interleukin-7 receptor alpha deficiency SCID",
+ "aliases": [
+  "IL7RA deficiency",
+  "IL-7R alpha chain SCID",
+  "T-B+NK+ SCID"
+ ],
+ "class": "non_infective",
+ "system": "Immunology / Combined immunodeficiency",
+ "specialty": "Immunology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Immunology references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Caused by biallelic mutations in IL7R encoding the alpha chain of the interleukin-7 receptor, which pairs with the common gamma chain to drive thymic T-cell development.",
+   "Distinctive immunophenotype is T-B+NK+: T cells are profoundly absent while both B cells and natural killer cells are preserved.",
+   "The preserved NK compartment separates it from X-linked and JAK3 SCID (T-B+NK-), because NK development depends on interleukin-15 rather than interleukin-7.",
+   "Autosomal recessive inheritance affects both sexes; it is one of the more frequent causes of SCID identified through newborn screening.",
+   "B cells are present but functionally inadequate without T-cell help, so antibody responses are poor despite normal B-cell numbers.",
+   "Presents in early infancy with failure to thrive, chronic diarrhoea, persistent candidiasis and opportunistic infections such as Pneumocystis pneumonia.",
+   "Haematopoietic stem cell transplantation is curative and most successful when undertaken early; the disorder is not radiosensitive.",
+   "Live vaccines and non-irradiated cellular blood products must be avoided to prevent disseminated infection and transfusion-associated graft-versus-host disease."
   ],
-  "class": "non_infective",
-  "system": "Immunology / Combined immunodeficiency",
-  "specialty": "Immunology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Immunology references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Caused by biallelic mutations in IL7R encoding the alpha chain of the interleukin-7 receptor, which pairs with the common gamma chain to drive thymic T-cell development.",
-      "Distinctive immunophenotype is T-B+NK+: T cells are profoundly absent while both B cells and natural killer cells are preserved.",
-      "The preserved NK compartment separates it from X-linked and JAK3 SCID (T-B+NK-), because NK development depends on interleukin-15 rather than interleukin-7.",
-      "Autosomal recessive inheritance affects both sexes; it is one of the more frequent causes of SCID identified through newborn screening.",
-      "B cells are present but functionally inadequate without T-cell help, so antibody responses are poor despite normal B-cell numbers.",
-      "Presents in early infancy with failure to thrive, chronic diarrhoea, persistent candidiasis and opportunistic infections such as Pneumocystis pneumonia.",
-      "Haematopoietic stem cell transplantation is curative and most successful when undertaken early; the disorder is not radiosensitive.",
-      "Live vaccines and non-irradiated cellular blood products must be avoided to prevent disseminated infection and transfusion-associated graft-versus-host disease."
+  "pathophysiology": "The interleukin-7 receptor is a heterodimer of the IL-7 receptor alpha chain (encoded by IL7R) and the common gamma chain. Signalling through this receptor via the JAK-STAT pathway delivers the survival and proliferation cues that developing thymocytes require to progress through T-cell maturation. Loss of the alpha chain abolishes interleukin-7 signalling specifically, arresting T-cell development and producing profound T lymphopenia. Because the common gamma chain and the interleukin-15 pathway that governs natural killer cell development remain intact, NK cells are generated normally; B-cell development, which in humans does not depend on interleukin-7 signalling to the same degree, is also preserved. The result is the T-B+NK+ immunophenotype. Although B cells are present, the absence of functional T-cell help leaves humoral immunity ineffective, so the infant suffers the full combined immunodeficiency susceptibility to viral, fungal, bacterial and opportunistic pathogens once maternal antibody declines.",
+  "additionalDifferentials": [
+   "X-linked (IL2RG) and JAK3 SCID, distinguished by absent NK cells (T-B+NK-)",
+   "CD3 chain or CD45 deficiency causing T-cell-negative combined immunodeficiency",
+   "Coronin-1A deficiency with impaired thymic egress",
+   "Complete DiGeorge syndrome with athymia",
+   "RAG or Artemis deficiency, excluded by the presence of B cells",
+   "Adenosine deaminase deficiency (typically T-B-NK-)",
+   "Secondary lymphopenia from severe congenital infection"
+  ],
+  "additionalInvestigations": [
+   "Lymphocyte subset flow cytometry demonstrating the T-B+NK+ pattern",
+   "Serum immunoglobulins and specific antibody responses interpreted against maternal IgG",
+   "T-cell proliferation assays to mitogens showing absent responses",
+   "T-cell receptor repertoire analysis revealing markedly restricted diversity",
+   "IL7R gene sequencing to confirm the causative mutation",
+   "Evaluation for maternal T-cell engraftment as a confounder",
+   "HLA typing of patient and family to plan transplantation"
+  ],
+  "redFlags": [
+   "Opportunistic infection such as Pneumocystis pneumonia in an infant",
+   "Failure to thrive with persistent thrush and chronic diarrhoea",
+   "Absent thymic shadow on chest imaging",
+   "Erythroderma or hepatosplenomegaly suggesting engraftment or transfusion-associated graft-versus-host disease",
+   "Severe isolated T lymphopenia with preserved B and NK cells on screening"
+  ],
+  "prognosis": "Without immune reconstitution the disorder is fatal in early childhood from infection. Early haematopoietic stem cell transplantation yields high survival and good T-cell recovery, and the preserved NK and B compartments can favour engraftment outcomes.",
+  "pitfalls": [
+   "Normal total lymphocyte or B-cell counts can mask the profound T-cell defect if naive T cells are not specifically assessed.",
+   "Maternal IgG may normalise measured immunoglobulins in early infancy despite absent functional antibody.",
+   "The preserved NK compartment may be mistaken for reassuring immune competence.",
+   "Live vaccines and non-irradiated blood products are hazardous once SCID is suspected.",
+   "Maternal engraftment can generate circulating T cells that confound subset interpretation."
+  ],
+  "references": [
+   "Standard clinical immunology textbook",
+   "International primary immunodeficiency classification and management guidelines",
+   "National newborn screening and SCID management guidance"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Arrange urgent allogeneic haematopoietic stem cell transplantation, the only curative treatment, ideally before infection supervenes",
+   "Institute protective isolation, avoid all live vaccines, and use only irradiated, CMV-negative, leucodepleted blood products",
+   "Give antimicrobial prophylaxis including co-trimoxazole against Pneumocystis, together with antifungal and antiviral cover",
+   "Provide immunoglobulin replacement to compensate for absent T-cell help and poor antibody responses despite preserved B cells",
+   "Treat active opportunistic infections aggressively and support failure to thrive with nutritional care",
+   "Offer genetic counselling and cascade family screening for this autosomal recessive disorder, flagged through newborn screening"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "il7r_scid-pathway",
+   "title": "Interleukin-7 receptor alpha deficiency SCID: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Caused by biallelic mutations in IL7R encoding the alpha chain of the interleukin-7 receptor, which pairs with the common gamma chain to drive thymic T-cell development.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Opportunistic infection such as Pneumocystis pneumonia in an infant",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Lymphocyte subset flow cytometry demonstrating the T-B+NK+ pattern, Serum immunoglobulins and specific antibody responses interpreted against maternal IgG, T-cell proliferation assays to mitogens showing absent responses"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Arrange urgent allogeneic haematopoietic stem cell transplantation, the only curative treatment, ideally before infection supervenes"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Normal total lymphocyte or B-cell counts can mask the profound T-cell defect if naive T cells are not specifically assessed."
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of interleukin-7 receptor alpha deficiency scid."
+  }
+ ],
+ "tables": [
+  {
+   "id": "il7r_scid-matrix",
+   "title": "Interleukin-7 receptor alpha deficiency SCID: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Caused by biallelic mutations in IL7R encoding the alpha chain of the interleukin-7 receptor, which pairs with the common gamma",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "The interleukin-7 receptor is a heterodimer of the IL-7 receptor alpha chain (encoded by IL7R) and the common gamma chain. Signalling through this receptor via the JAK-STAT pathway delivers the survival and proliferation cues that developing thymocytes require to progress through T-cell maturation. Loss of the alpha chain abolishes interleukin-7 signalling specifically, arresting T-cell development and producing profound T lymphopenia. Because the common gamma chain and the interleukin-15 pathway that governs natural killer cell development remain intact, NK cells are generated normally; B-cell development, which in humans does not depend on interleukin-7 signalling to the same degree, is also preserved. The result is the T-B+NK+ immunophenotype. Although B cells are present, the absence of functional T-cell help leaves humoral immunity ineffective, so the infant suffers the full combined immunodeficiency susceptibility to viral, fungal, bacterial and opportunistic pathogens once maternal antibody declines.",
-    "additionalDifferentials": [
-      "X-linked (IL2RG) and JAK3 SCID, distinguished by absent NK cells (T-B+NK-)",
-      "CD3 chain or CD45 deficiency causing T-cell-negative combined immunodeficiency",
-      "Coronin-1A deficiency with impaired thymic egress",
-      "Complete DiGeorge syndrome with athymia",
-      "RAG or Artemis deficiency, excluded by the presence of B cells",
-      "Adenosine deaminase deficiency (typically T-B-NK-)",
-      "Secondary lymphopenia from severe congenital infection"
+    [
+     "Key Investigations",
+     "Lymphocyte subset flow cytometry demonstrating the T-B+NK+ pattern, Serum immunoglobulins and specific antibody responses",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Lymphocyte subset flow cytometry demonstrating the T-B+NK+ pattern",
-      "Serum immunoglobulins and specific antibody responses interpreted against maternal IgG",
-      "T-cell proliferation assays to mitogens showing absent responses",
-      "T-cell receptor repertoire analysis revealing markedly restricted diversity",
-      "IL7R gene sequencing to confirm the causative mutation",
-      "Evaluation for maternal T-cell engraftment as a confounder",
-      "HLA typing of patient and family to plan transplantation"
+    [
+     "Primary Differentials",
+     "X-linked (IL2RG) and JAK3 SCID, distinguished by absent NK cells (T-B+NK-), CD3 chain or CD45 deficiency causing T-cell-negative",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Opportunistic infection such as Pneumocystis pneumonia in an infant",
-      "Failure to thrive with persistent thrush and chronic diarrhoea",
-      "Absent thymic shadow on chest imaging",
-      "Erythroderma or hepatosplenomegaly suggesting engraftment or transfusion-associated graft-versus-host disease",
-      "Severe isolated T lymphopenia with preserved B and NK cells on screening"
+    [
+     "Management Strategy",
+     "Arrange urgent allogeneic haematopoietic stem cell transplantation, the only curative treatment, ideally before infection",
+     "Core treatment modality"
     ],
-    "prognosis": "Without immune reconstitution the disorder is fatal in early childhood from infection. Early haematopoietic stem cell transplantation yields high survival and good T-cell recovery, and the preserved NK and B compartments can favour engraftment outcomes.",
-    "pitfalls": [
-      "Normal total lymphocyte or B-cell counts can mask the profound T-cell defect if naive T cells are not specifically assessed.",
-      "Maternal IgG may normalise measured immunoglobulins in early infancy despite absent functional antibody.",
-      "The preserved NK compartment may be mistaken for reassuring immune competence.",
-      "Live vaccines and non-irradiated blood products are hazardous once SCID is suspected.",
-      "Maternal engraftment can generate circulating T cells that confound subset interpretation."
-    ],
-    "references": [
-      "Standard clinical immunology textbook",
-      "International primary immunodeficiency classification and management guidelines",
-      "National newborn screening and SCID management guidance"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Arrange urgent allogeneic haematopoietic stem cell transplantation, the only curative treatment, ideally before infection supervenes",
-      "Institute protective isolation, avoid all live vaccines, and use only irradiated, CMV-negative, leucodepleted blood products",
-      "Give antimicrobial prophylaxis including co-trimoxazole against Pneumocystis, together with antifungal and antiviral cover",
-      "Provide immunoglobulin replacement to compensate for absent T-cell help and poor antibody responses despite preserved B cells",
-      "Treat active opportunistic infections aggressively and support failure to thrive with nutritional care",
-      "Offer genetic counselling and cascade family screening for this autosomal recessive disorder, flagged through newborn screening"
+    [
+     "Clinical Pitfall",
+     "Normal total lymphocyte or B-cell counts can mask the profound T-cell defect if naive T cells are not specifically assessed.",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for interleukin-7 receptor alpha deficiency scid."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "il7r-scid-real-image",
+   "title": "Interleukin-7 receptor alpha deficiency SCID: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

@@ -1,82 +1,177 @@
 {
-  "id": "southeast_asian_ovalocytosis",
-  "name": "Southeast Asian ovalocytosis",
-  "aliases": [
-    "SAO",
-    "Melanesian ovalocytosis",
-    "Stomatocytic elliptocytosis",
-    "Band 3 ovalocytosis"
+ "id": "southeast_asian_ovalocytosis",
+ "name": "Southeast Asian ovalocytosis",
+ "aliases": [
+  "SAO",
+  "Melanesian ovalocytosis",
+  "Stomatocytic elliptocytosis",
+  "Band 3 ovalocytosis"
+ ],
+ "class": "non_infective",
+ "system": "Haematology",
+ "specialty": "Haematology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Haematology references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Autosomal dominant red cell membrane disorder common in Malaysia, Papua New Guinea, the Philippines and Indonesia.",
+   "Caused by a characteristic in-frame deletion in SLC4A1 (band 3, anion exchanger 1), producing rigid oval red cells.",
+   "Usually asymptomatic with little or no haemolysis, and often an incidental blood-film finding.",
+   "Film shows oval (elliptical) red cells, some crossed by one or two transverse ridges or a central slit (stomatocytic ovalocytes).",
+   "Increased membrane rigidity reduces red cell deformability, and osmotic fragility is decreased so the cells resist lysis.",
+   "Confers protection against severe and cerebral falciparum malaria, explaining its high frequency as a balanced polymorphism.",
+   "The homozygous state is thought to be lethal and is not observed.",
+   "May be co-inherited with distal renal tubular acidosis caused by other SLC4A1 alleles."
   ],
-  "class": "non_infective",
-  "system": "Haematology",
-  "specialty": "Haematology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Haematology references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Autosomal dominant red cell membrane disorder common in Malaysia, Papua New Guinea, the Philippines and Indonesia.",
-      "Caused by a characteristic in-frame deletion in SLC4A1 (band 3, anion exchanger 1), producing rigid oval red cells.",
-      "Usually asymptomatic with little or no haemolysis, and often an incidental blood-film finding.",
-      "Film shows oval (elliptical) red cells, some crossed by one or two transverse ridges or a central slit (stomatocytic ovalocytes).",
-      "Increased membrane rigidity reduces red cell deformability, and osmotic fragility is decreased so the cells resist lysis.",
-      "Confers protection against severe and cerebral falciparum malaria, explaining its high frequency as a balanced polymorphism.",
-      "The homozygous state is thought to be lethal and is not observed.",
-      "May be co-inherited with distal renal tubular acidosis caused by other SLC4A1 alleles."
+  "pathophysiology": "Southeast Asian ovalocytosis is an autosomal dominant red cell membrane disorder caused by a characteristic in-frame deletion in SLC4A1, the gene encoding band 3 (anion exchanger 1). The mutant band 3 misfolds and binds more tightly to the underlying membrane skeleton, greatly increasing membrane rigidity and reducing red cell deformability while impairing anion transport; the resulting cells are oval, often crossed by one or two transverse ridges. The rigid, poorly deformable membrane hinders invasion and growth of malaria parasites and reduces cytoadherence of infected cells, conferring protection against Plasmodium falciparum, including cerebral malaria, and Plasmodium vivax, which is thought to explain the high gene frequency in endemic regions as a balanced polymorphism. The homozygous state is believed to be incompatible with life and is not observed. Certain other SLC4A1 alleles cause distal renal tubular acidosis, and the ovalocytosis deletion can be co-inherited with and modify such phenotypes.",
+  "additionalDifferentials": [
+   "Hereditary elliptocytosis from spectrin or protein 4.1 defects",
+   "Hereditary spherocytosis",
+   "Hereditary pyropoikilocytosis",
+   "Iron deficiency (elliptocytes and pencil cells)",
+   "Megaloblastic anaemia (oval macrocytes)",
+   "Myelodysplastic syndrome (acquired elliptocytosis)",
+   "Other SLC4A1-related band 3 disorders and distal renal tubular acidosis"
+  ],
+  "additionalInvestigations": [
+   "Peripheral blood film showing oval red cells with transverse ridges or a central slit",
+   "Full blood count and red cell indices, usually near-normal",
+   "Reticulocyte count and haemolysis markers, typically minimal",
+   "Osmotic fragility testing showing reduced fragility and increased osmotic resistance",
+   "SLC4A1 molecular testing for the ovalocytosis deletion",
+   "Ektacytometry or eosin-5-maleimide binding to assess deformability and membrane protein",
+   "Acid-base and urinary pH assessment if renal tubular acidosis is suspected"
+  ],
+  "redFlags": [
+   "Significant unexplained anaemia or haemolysis, pointing to a co-existing disorder rather than ovalocytosis alone",
+   "Features of distal renal tubular acidosis such as faltering growth or nephrocalcinosis",
+   "Marked neonatal jaundice suggesting a compound membrane defect",
+   "Clinical severity out of keeping with a benign trait, prompting reconsideration of the diagnosis"
+  ],
+  "prognosis": "Southeast Asian ovalocytosis is essentially a benign trait with normal life expectancy. Its significance lies in malaria protection, correct blood-film recognition and its occasional association with renal tubular acidosis.",
+  "pitfalls": [
+   "Misreading the film as myelodysplasia or a pathological elliptocytosis",
+   "Attributing meaningful haemolysis to ovalocytosis, which is usually benign; look for a co-inherited condition",
+   "Overlooking co-inherited distal renal tubular acidosis",
+   "Assuming that a homozygous form can occur"
+  ],
+  "references": [
+   "Haematology references",
+   "Red cell membrane disorder references",
+   "Tropical medicine references"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Reassurance and no specific treatment, as the trait is benign and usually asymptomatic",
+   "Ensure correct peripheral blood-film recognition to avoid misdiagnosis and unnecessary investigation",
+   "Monitor for and treat associated distal renal tubular acidosis with oral alkali such as bicarbonate or citrate if it develops",
+   "Consider folic acid supplementation during pregnancy or periods of increased erythropoietic stress",
+   "Genetic counselling for this autosomal dominant band 3 (SLC4A1) disorder, noting that homozygosity is generally lethal in utero",
+   "Continue standard antimalarial precautions when travelling despite the trait's partial protection against falciparum malaria"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "southeast_asian_ovalocytosis-pathway",
+   "title": "Southeast Asian ovalocytosis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Autosomal dominant red cell membrane disorder common in Malaysia, Papua New Guinea, the Philippines and Indonesia.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Significant unexplained anaemia or haemolysis, pointing to a co-existing disorder rather than ovalocytosis alone",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Peripheral blood film showing oval red cells with transverse ridges or a central slit, Full blood count and red cell indices, usually near-normal, Reticulocyte count and haemolysis markers, typically minimal"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Reassurance and no specific treatment, as the trait is benign and usually asymptomatic"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Misreading the film as myelodysplasia or a pathological elliptocytosis"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of southeast asian ovalocytosis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "southeast_asian_ovalocytosis-matrix",
+   "title": "Southeast Asian ovalocytosis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Autosomal dominant red cell membrane disorder common in Malaysia, Papua New Guinea, the Philippines and Indonesia.",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Southeast Asian ovalocytosis is an autosomal dominant red cell membrane disorder caused by a characteristic in-frame deletion in SLC4A1, the gene encoding band 3 (anion exchanger 1). The mutant band 3 misfolds and binds more tightly to the underlying membrane skeleton, greatly increasing membrane rigidity and reducing red cell deformability while impairing anion transport; the resulting cells are oval, often crossed by one or two transverse ridges. The rigid, poorly deformable membrane hinders invasion and growth of malaria parasites and reduces cytoadherence of infected cells, conferring protection against Plasmodium falciparum, including cerebral malaria, and Plasmodium vivax, which is thought to explain the high gene frequency in endemic regions as a balanced polymorphism. The homozygous state is believed to be incompatible with life and is not observed. Certain other SLC4A1 alleles cause distal renal tubular acidosis, and the ovalocytosis deletion can be co-inherited with and modify such phenotypes.",
-    "additionalDifferentials": [
-      "Hereditary elliptocytosis from spectrin or protein 4.1 defects",
-      "Hereditary spherocytosis",
-      "Hereditary pyropoikilocytosis",
-      "Iron deficiency (elliptocytes and pencil cells)",
-      "Megaloblastic anaemia (oval macrocytes)",
-      "Myelodysplastic syndrome (acquired elliptocytosis)",
-      "Other SLC4A1-related band 3 disorders and distal renal tubular acidosis"
+    [
+     "Key Investigations",
+     "Peripheral blood film showing oval red cells with transverse ridges or a central slit, Full blood count and red cell indices,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Peripheral blood film showing oval red cells with transverse ridges or a central slit",
-      "Full blood count and red cell indices, usually near-normal",
-      "Reticulocyte count and haemolysis markers, typically minimal",
-      "Osmotic fragility testing showing reduced fragility and increased osmotic resistance",
-      "SLC4A1 molecular testing for the ovalocytosis deletion",
-      "Ektacytometry or eosin-5-maleimide binding to assess deformability and membrane protein",
-      "Acid-base and urinary pH assessment if renal tubular acidosis is suspected"
+    [
+     "Primary Differentials",
+     "Hereditary elliptocytosis from spectrin or protein 4.1 defects, Hereditary spherocytosis, Hereditary pyropoikilocytosis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Significant unexplained anaemia or haemolysis, pointing to a co-existing disorder rather than ovalocytosis alone",
-      "Features of distal renal tubular acidosis such as faltering growth or nephrocalcinosis",
-      "Marked neonatal jaundice suggesting a compound membrane defect",
-      "Clinical severity out of keeping with a benign trait, prompting reconsideration of the diagnosis"
+    [
+     "Management Strategy",
+     "Reassurance and no specific treatment, as the trait is benign and usually asymptomatic",
+     "Core treatment modality"
     ],
-    "prognosis": "Southeast Asian ovalocytosis is essentially a benign trait with normal life expectancy. Its significance lies in malaria protection, correct blood-film recognition and its occasional association with renal tubular acidosis.",
-    "pitfalls": [
-      "Misreading the film as myelodysplasia or a pathological elliptocytosis",
-      "Attributing meaningful haemolysis to ovalocytosis, which is usually benign; look for a co-inherited condition",
-      "Overlooking co-inherited distal renal tubular acidosis",
-      "Assuming that a homozygous form can occur"
-    ],
-    "references": [
-      "Haematology references",
-      "Red cell membrane disorder references",
-      "Tropical medicine references"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Reassurance and no specific treatment, as the trait is benign and usually asymptomatic",
-      "Ensure correct peripheral blood-film recognition to avoid misdiagnosis and unnecessary investigation",
-      "Monitor for and treat associated distal renal tubular acidosis with oral alkali such as bicarbonate or citrate if it develops",
-      "Consider folic acid supplementation during pregnancy or periods of increased erythropoietic stress",
-      "Genetic counselling for this autosomal dominant band 3 (SLC4A1) disorder, noting that homozygosity is generally lethal in utero",
-      "Continue standard antimalarial precautions when travelling despite the trait's partial protection against falciparum malaria"
+    [
+     "Clinical Pitfall",
+     "Misreading the film as myelodysplasia or a pathological elliptocytosis",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for southeast asian ovalocytosis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "southeast-asian-ovalocytosis-real-image",
+   "title": "Southeast Asian ovalocytosis: Diagnostic Peripheral Blood Smear Examination",
+   "type": "diagram",
+   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
+   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
+   "annotations": [
+    {
+     "label": "Erythrocyte Indices",
+     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
+    },
+    {
+     "label": "Leukocyte Differential",
+     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
+    },
+    {
+     "label": "Platelet Count",
+     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+    }
+   ]
+  }
+ ]
 }

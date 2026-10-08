@@ -36,12 +36,14 @@ let chromeErr = ""; chrome.stderr.on("data", (d) => { chromeErr += d; });
 let msgId = 1; const pending = new Map(); let ws, sessionId; const errors = [];
 const call = (m, p) => { const i = msgId++; return new Promise((r) => { pending.set(i, r); ws.send(JSON.stringify({ id: i, method: m, params: p || {}, sessionId })); }); };
 const ev = async (e) => { const r = await call("Runtime.evaluate", { expression: `(function(){try{${e}}catch(x){return "ERR:"+String(x&&x.message||x)}})()`, returnByValue: true }); return r.result && r.result.result ? r.result.result.value : undefined; };
+// Screenshots land on the final frame: finite animations (entrances, ring draw) are finished first; loops keep running.
+const shotCall = async (p) => { await ev(`document.getAnimations().forEach(function (a) { try { var t = a.effect && a.effect.getTiming(); if (t && t.iterations !== Infinity) a.finish(); } catch (e) {} }); return 1;`); return call("Page.captureScreenshot", p); };
 const until = async (e, ms = 10000) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { if (await ev(e) === true) return true; await sleep(150); } return false; };
 const reqs = []; let fails = 0; const ok = (c, m) => { console.log((c ? "PASS " : "FAIL ") + m); if (!c) fails++; };
 const click = (sel) => ev(`var b=document.querySelector(${JSON.stringify(sel)}); if(!b) return "missing"; b.click(); return 1;`);
 const text = (sel) => ev(`var e=document.querySelector(${JSON.stringify(sel)}); return e ? e.textContent.replace(/\\s+/g," ").trim() : "";`);
 const store = (expr) => ev(`var s=JSON.parse(localStorage.getItem("smd_prep_v1")||"{}"); return ${expr};`);
-const shot = async (name) => { if (!process.env.SHOTS) return; await sleep(350); const r = await call("Page.captureScreenshot", { format: "png" }); if (r.result) fs.writeFileSync(join(process.env.SHOTS, "plan-" + (process.env.PN_LIGHT ? "light-" : "") + name + ".png"), Buffer.from(r.result.data, "base64")); };
+const shot = async (name) => { if (!process.env.SHOTS) return; await sleep(350); const r = await shotCall({ format: "png" }); if (r.result) fs.writeFileSync(join(process.env.SHOTS, "plan-" + (process.env.PN_LIGHT ? "light-" : "") + name + ".png"), Buffer.from(r.result.data, "base64")); };
 // An ISO date n days from today, local time.
 const isoIn = (n) => { const d = new Date(); d.setDate(d.getDate() + n); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); };
 // The fixture has no lessons: the lesson index is stubbed with one fixture module, so the plan can offer it.
@@ -61,12 +63,12 @@ try {
   const { result: { sessionId: sid } } = await call("Target.attachToTarget", { targetId, flatten: true }); sessionId = sid;
   await call("Runtime.enable", {}); await call("Network.enable", {}); await call("Page.enable", {});
   await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
-  await call("Page.addScriptToEvaluateOnNewDocument", { source: `window.SMD_PREP_BASE=${JSON.stringify(FIX)}; window.SMD_PREP_BANK_API=${JSON.stringify(FIX + "api/")}; window.SMD_PREP_FLAG_API=${JSON.stringify(FIX + "hidden.json")}; window.confirm=function(){return true;};` });
+  await call("Page.addScriptToEvaluateOnNewDocument", { source: `window.SMD_PREP_BANK_VER="v1"; window.SMD_PREP_BASE=${JSON.stringify(FIX)}; window.SMD_PREP_BANK_API=${JSON.stringify(FIX + "api/")}; window.SMD_PREP_FLAG_API=${JSON.stringify(FIX + "hidden.json")}; window.confirm=function(){return true;};` });
   const clean = `["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); return 1;`;
   await call("Page.navigate", { url: BASE }); await until(`return !!window.PREP;`, 30000);
   await ev(`try{localStorage.setItem("smd_prep","1"); localStorage.removeItem("smd_prep_v1"); localStorage.removeItem("smd_prep_arena");}catch(e){} indexedDB.deleteDatabase("prep-bank"); return 1;`);
   await call("Page.navigate", { url: BASE + "?prep=1" }); await until(`return !!(window.PREP && window.SMD_showHome);`, 30000); await ev(clean);
-  await ev(process.env.PN_LIGHT ? `document.body.classList.remove("dark"); return 1;` : `document.body.classList.add("dark"); return 1;`);
+  await ev(process.env.PN_LIGHT ? `if (!document.getElementById("pnNoTr")) { var t = document.createElement("style"); t.id = "pnNoTr"; t.textContent = "*{transition:none!important}"; document.head.appendChild(t); } document.body.classList.remove("dark"); return 1;` : `document.body.classList.add("dark"); return 1;`);
 
   // ---- onboarding
   await ev(`PREP.open(); return 1;`);
@@ -140,6 +142,23 @@ try {
   ok(await ev(`return document.querySelectorAll("#pnPlanSheet .pl-w").length;`) === 1 && /Anatomy/.test(await text("#pnPlanSheet .pl-w")), "weakest subjects listed (the fixture exam has one)");
   ok(await ev(`return document.querySelectorAll("#pnPlanSheet .pl-w .pn-btn").length;`) === 1, "one action per weak subject: " + await text("#pnPlanSheet .pl-w .pn-btn"));
   await shot("why");
+  // Round 5: the breakdown is three rings in the order of the formula, each drawn to its part, and the factor meters.
+  const rings = JSON.parse(await ev(`var ms=Array.from(document.querySelectorAll("#pnPlanSheet .pl-meters .pl-m")); return JSON.stringify({ n: ms.length, labels: ms.map(function(m){return m.querySelector(".pl-ml").textContent;}).join("|"), arcs: ms.map(function(m){var rv=m.querySelector(".rv"); return rv ? parseFloat(rv.getAttribute("stroke-dasharray")) : 0;}), pct: Array.from(document.querySelectorAll("#pnPlanSheet .pl-f .pl-fv")).map(function(v){return parseFloat(v.textContent);}), bars: Array.from(document.querySelectorAll("#pnPlanSheet .pl-fbar i")).map(function(i){return i.style.transform;}), score: document.querySelector("#pnPlanSheet .pl-rnum").textContent, h2: document.getElementById("pnWhyT").textContent });`));
+  ok(rings.n === 3 && rings.labels === "Coverage|Retention|Accuracy" && rings.arcs.join() === rings.pct.join() && rings.bars.length === 3 && rings.bars.every((t, i) => Math.abs(parseFloat(t.slice(7)) * 100 - rings.pct[i]) <= 0.6) && /^\d+$/.test(rings.score) && /readiness: \d+$/.test(rings.h2), "readiness meters: three rings and three bars drawn to the three parts, the score on the band: " + JSON.stringify(rings));
+  // Drag to dismiss (touch): a short pull springs back; a flick down dismisses through the sheet's own close.
+  const pull = (dy, steps, ms) => ev(`var sh=document.querySelector("#pnPlanSheet .pn-sheet"), r=sh.getBoundingClientRect(), x=r.left+r.width/2, y=r.top+20, o={bubbles:true,pointerType:"touch",isPrimary:true,pointerId:9};
+    sh.querySelector(".pn-grab").dispatchEvent(new PointerEvent("pointerdown",Object.assign({clientX:x,clientY:y},o)));
+    var t0=performance.now(); while(performance.now()-t0<${ms}){}
+    for (var i=1;i<=${steps};i++){ sh.dispatchEvent(new PointerEvent("pointermove",Object.assign({clientX:x,clientY:y+${dy}*i/${steps}},o))); }
+    var tr=sh.style.transform, op=sh.parentNode.querySelector(".pn-scrim").style.opacity;
+    sh.dispatchEvent(new PointerEvent("pointerup",Object.assign({clientX:x,clientY:y+${dy}},o))); return JSON.stringify({tr:tr, op:op});`);
+  const p1 = JSON.parse(await pull(50, 5, 120));
+  ok(/translateY\(50(\.0)?px\)/.test(p1.tr) && +p1.op < 1 && await until(`var sh=document.querySelector("#pnPlanSheet .pn-sheet"); return !!sh && !document.getAnimations().some(function(a){return a.effect&&a.effect.target===sh&&a.playState==="running";}) && !/translateY\\((?!0)/.test(sh.style.transform);`, 2000), "a 50 px pull follows the finger 1:1, dims the scrim and springs back: " + JSON.stringify(p1));
+  await sleep(400);
+  const p2 = JSON.parse(await pull(220, 3, 0));
+  ok(/translateY\(220/.test(p2.tr) && await until(`return !document.getElementById("pnPlanSheet") && !!document.querySelector("#smdPrep .pl-hero");`, 2000), "a flick down dismisses the sheet and home stays: " + JSON.stringify(p2));
+  await click("#smdPrep .pl-hero");
+  await until(`return !!document.querySelector("#pnPlanSheet .pl-w");`, 3000);
   await click("#pnPlanSheet .pl-w .pn-btn");
   ok(await until(`return !document.getElementById("pnPlanSheet") && !!document.querySelector("#smdPrep #pnModPanel");`, 5000), "the action opens that module");
   await ev(`PREP.back(); return 1;`);

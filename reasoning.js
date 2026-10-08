@@ -3007,6 +3007,49 @@
     if (e.severityClassification) cp += '<div class="ev-subh">Severity</div><p>' + medFormat(stripCite(e.severityClassification)) + '</p>';
     if (e.prognosis) cp += '<div class="ev-subh">Prognosis</div><p>' + medFormat(stripCite(e.prognosis)) + '</p>';
     if (cp) sections.push({ ic: rIco("trend"), title: "Course & prognosis", html: cp });
+
+    if (e.algorithms && e.algorithms.length) {
+      var algHtml = e.algorithms.map(function (a) {
+        var steps = (a.steps || []).map(function (st, idx) {
+          return '<div class="kbp-flow-node' + (st.critical ? " kbp-flow-crit" : "") + '" style="margin-bottom:8px;padding:8px 10px;border:1px solid #cbd5e1;border-radius:8px;background:#f8fafc">' +
+            '<div style="display:flex;align-items:center;gap:6px;font-weight:700;font-size:12px;margin-bottom:4px"><span style="display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:#0284c7;color:#fff;font-size:10px">' + (idx + 1) + '</span><span>' + esc(st.step) + '</span>' +
+            (st.branch ? '<span style="margin-left:auto;padding:1px 6px;border-radius:4px;background:#e0f2fe;color:#0369a1;font-size:10px">' + esc(st.branch) + '</span>' : '') + '</div>' +
+            '<div style="font-size:12px;line-height:1.45;color:#334155">' + esc(st.action) + '</div></div>';
+        }).join("");
+        return '<div style="margin-bottom:12px"><strong style="display:block;margin-bottom:6px;color:#0f172a;font-size:13px">' + esc(a.title) + '</strong>' + steps + (a.caption ? '<p style="font-size:11px;color:#64748b;font-style:italic;margin:4px 0 0">' + esc(a.caption) + '</p>' : '') + '</div>';
+      }).join("");
+      sections.push({ ic: rIco("route"), title: "Clinical algorithm & pathway", html: algHtml });
+    }
+
+    if (e.tables && e.tables.length) {
+      var tblHtml = e.tables.map(function (t) {
+        var ths = (t.headers || []).map(function (h) { return '<th style="padding:6px 8px;background:#f1f5f9;border:1px solid #cbd5e1;font-size:11.5px;font-weight:700;color:#1e293b;text-align:left">' + esc(h) + '</th>'; }).join("");
+        var trs = (t.rows || []).map(function (row) {
+          return '<tr>' + (row || []).map(function (cell) { return '<td style="padding:6px 8px;border:1px solid #e2e8f0;font-size:11.5px;line-height:1.4;color:#334155;vertical-align:top">' + esc(cell) + '</td>'; }).join("") + '</tr>';
+        }).join("");
+        return '<div style="margin-bottom:14px;overflow-x:auto"><strong style="display:block;margin-bottom:6px;color:#0f172a;font-size:13px">' + esc(t.title) + '</strong><table style="width:100%;border-collapse:collapse"><thead><tr>' + ths + '</tr></thead><tbody>' + trs + '</tbody></table>' + (t.caption ? '<p style="font-size:11px;color:#64748b;font-style:italic;margin:4px 0 0">' + esc(t.caption) + '</p>' : '') + '</div>';
+      }).join("");
+      sections.push({ ic: rIco("table"), title: "Clinical diagnostic matrix", html: tblHtml });
+    }
+    // Annotated clinical diagrams and diagnostic imaging (ECG, X-ray, CT schematic) carried
+    // through kb.enrichment.js. Rendered in the clinical reasoning drawer with figure/caption
+    // and structured callout badges for annotations.
+    if (e.diagrams && e.diagrams.length) {
+      var DTYPES = { ecg: "ECG", xray: "X-ray", ct: "CT", diagram: "Diagram", ultrasound: "Ultrasound" };
+      var dgHtml = e.diagrams.map(function (d) {
+        var dsrc = String(d.src || "");
+        var media = dsrc.charAt(0) === "#"
+          ? '<svg role="img" aria-label="' + esc(d.title) + '" style="display:block;width:100%;height:auto;border:1px solid #e2e8f0;border-radius:8px;background:#f8fafc"><use href="' + esc(dsrc) + '"></use></svg>'
+          : '<img src="' + esc(dsrc) + '" alt="' + esc(d.title) + '" loading="lazy" style="display:block;width:100%;max-width:100%;height:auto;border:1px solid #e2e8f0;border-radius:8px;background:#f8fafc">';
+        var ann = (d.annotations && d.annotations.length)
+          ? '<ul style="list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:6px">' + d.annotations.map(function (a) {
+              return '<li style="padding:6px 8px;border:1px solid #e2e8f0;border-radius:6px;background:#f0fdfa;font-size:11.5px;line-height:1.4;color:#334155"><strong style="color:#0f766e">' + esc(a.label) + '</strong> ' + esc(a.description) + '</li>';
+            }).join("") + '</ul>' : '';
+        return '<figure style="margin:0 0 12px;min-width:0;overflow:hidden"><span style="display:inline-block;margin-bottom:6px;padding:1px 8px;border-radius:999px;background:#ccfbf1;color:#0f766e;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">' + esc(DTYPES[d.type] || d.type) + '</span>' +
+          media + '<figcaption style="margin-top:6px"><strong style="display:block;color:#0f172a;font-size:13px">' + esc(d.title) + '</strong><span style="display:block;font-size:12px;line-height:1.5;color:#475569">' + esc(d.caption) + '</span></figcaption>' + ann + '</figure>';
+      }).join("");
+      sections.push({ ic: rIco("pulse"), title: "Clinical diagrams and imaging", html: dgHtml });
+    }
     // Expanded clinical detail uses the same citation-free presentation as the summary.
     var rawUl = function (arr) { return (arr && arr.length) ? '<ul class="ev-ul">' + arr.map(function (x) { return '<li>' + medFormat(x) + '</li>'; }).join("") + '</ul>' : ""; };
     var full = "";
@@ -3298,9 +3341,6 @@
   function evBodyHTML(src) {
     // the clinician briefing belongs to the disease — show it once, in the primary (Harrison) panel.
     var h = '<div class="ev-body">' + (src.srcKey === "harrison" ? evBriefing(src._id) : "");
-    if (src.srcKey === "harrison" && src.fullHTML) {
-      return h + '<div class="ev-full">' + src.fullHTML + '</div><div class="ev-cite">' + src.cite + '</div></div>';
-    }
     if (src.pearls && src.pearls.length) {
       h += '<div class="ev-pearls"><div class="ev-pearls-h"><span class="ev-tick"></span>' + esc(src.pearlsLabel || "Key clinical pearls") + '</div>' +
         src.pearls.map(function (p) { var k = pearlKind(p); return '<div class="ev-pearl ev-pearl--' + k.a + '"><span class="ev-pearl-ic">' + rIco(k.ic) + '</span><div class="ev-pearl-bd"><span class="ev-pearl-tag ev-tag--' + k.a + '">' + k.label + '</span>' + medFormat(stripCite(p)) + '</div></div>'; }).join("") +
@@ -3312,9 +3352,13 @@
         '<div class="ev-sec-p"><div class="ev-sec-in">' + s.html + '</div></div></div>';
     });
     if (src.fullHTML) {
-      h += '<div class="ev-sec ev-full"><button type="button" class="ev-sec-h">' +
-        '<span class="ev-sec-ic">' + rIco("note") + '</span><span class="ev-sec-t">Clinical details</span><span class="ev-chev">' + DX_CHEV + '</span></button>' +
-        '<div class="ev-sec-p"><div class="ev-sec-in">' + src.fullHTML + '</div></div></div>';
+      if (src.srcKey === "harrison") {
+        h += '<div class="ev-full">' + src.fullHTML + '</div>';
+      } else {
+        h += '<div class="ev-sec ev-full"><button type="button" class="ev-sec-h">' +
+          '<span class="ev-sec-ic">' + rIco("note") + '</span><span class="ev-sec-t">Clinical details</span><span class="ev-chev">' + DX_CHEV + '</span></button>' +
+          '<div class="ev-sec-p"><div class="ev-sec-in">' + src.fullHTML + '</div></div></div>';
+      }
     }
     h += '<div class="ev-cite">' + src.cite + '</div></div>';
     return h;
@@ -4399,6 +4443,50 @@
     var backLabel = "‹ Back to differential";
     if (opts && opts.from === "onco-home") backLabel = "‹ ONCQIS";
     else if (opts && (opts.standalone || opts.from === "syndromes" || opts.from === "knowledge-library" || _libReturnScroll !== null)) backLabel = "‹ Library";
+    var visualSecs = "";
+    if (H) {
+      if (H.algorithms && H.algorithms.length) {
+        var algHtml = H.algorithms.map(function (a) {
+          var steps = (a.steps || []).map(function (st, idx) {
+            return '<div class="kbp-flow-node' + (st.critical ? " kbp-flow-crit" : "") + '" style="margin-bottom:8px;padding:10px 12px;border:1px solid #cbd5e1;border-radius:10px;background:#f8fafc">' +
+              '<div style="display:flex;align-items:center;gap:8px;font-weight:700;font-size:13px;margin-bottom:4px"><span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:#0284c7;color:#fff;font-size:11px">' + (idx + 1) + '</span><span>' + esc(st.step) + '</span>' +
+              (st.branch ? '<span style="margin-left:auto;padding:2px 8px;border-radius:4px;background:#e0f2fe;color:#0369a1;font-size:11px">' + esc(st.branch) + '</span>' : '') + '</div>' +
+              '<div style="font-size:13px;line-height:1.5;color:#334155">' + esc(st.action) + '</div></div>';
+          }).join("");
+          return '<div style="margin-bottom:14px"><strong style="display:block;margin-bottom:8px;color:#0f172a;font-size:14px">' + esc(a.title) + '</strong>' + steps + (a.caption ? '<p style="font-size:12px;color:#64748b;font-style:italic;margin:6px 0 0">' + esc(a.caption) + '</p>' : '') + '</div>';
+        }).join("");
+        visualSecs += '<section class="dx-reader-sec dx-reader-algo"><h3 style="margin:20px 0 10px;font:600 19px/1.25 var(--rd-serif);letter-spacing:-.01em;color:var(--rd-ink)">Clinical Algorithm &amp; Pathway</h3>' + algHtml + '</section>';
+      }
+
+      if (H.tables && H.tables.length) {
+        var tblHtml = H.tables.map(function (t) {
+          var ths = (t.headers || []).map(function (h) { return '<th style="padding:8px 10px;background:#f1f5f9;border:1px solid #cbd5e1;font-size:12px;font-weight:700;color:#1e293b;text-align:left">' + esc(h) + '</th>'; }).join("");
+          var trs = (t.rows || []).map(function (row) {
+            return '<tr>' + (row || []).map(function (cell) { return '<td style="padding:8px 10px;border:1px solid #e2e8f0;font-size:12px;line-height:1.45;color:#334155;vertical-align:top">' + esc(cell) + '</td>'; }).join("") + '</tr>';
+          }).join("");
+          return '<div style="margin-bottom:16px;overflow-x:auto"><strong style="display:block;margin-bottom:8px;color:#0f172a;font-size:14px">' + esc(t.title) + '</strong><table style="width:100%;border-collapse:collapse"><thead><tr>' + ths + '</tr></thead><tbody>' + trs + '</tbody></table>' + (t.caption ? '<p style="font-size:12px;color:#64748b;font-style:italic;margin:6px 0 0">' + esc(t.caption) + '</p>' : '') + '</div>';
+        }).join("");
+        visualSecs += '<section class="dx-reader-sec dx-reader-matrix"><h3 style="margin:20px 0 10px;font:600 19px/1.25 var(--rd-serif);letter-spacing:-.01em;color:var(--rd-ink)">Clinical Diagnostic Matrix</h3>' + tblHtml + '</section>';
+      }
+
+      if (H.diagrams && H.diagrams.length) {
+        var DTYPES = { ecg: "ECG", xray: "X-ray", ct: "CT", diagram: "Diagram", ultrasound: "Ultrasound" };
+        var dgHtml = H.diagrams.map(function (d) {
+          var dsrc = String(d.src || "");
+          var media = dsrc.charAt(0) === "#"
+            ? '<svg role="img" aria-label="' + esc(d.title) + '" style="display:block;width:100%;height:auto;border:1px solid #e2e8f0;border-radius:10px;background:#f8fafc"><use href="' + esc(dsrc) + '"></use></svg>'
+            : '<img src="' + esc(dsrc) + '" alt="' + esc(d.title) + '" loading="lazy" style="display:block;width:100%;max-width:100%;height:auto;border:1px solid #e2e8f0;border-radius:10px;background:#f8fafc">';
+          var ann = (d.annotations && d.annotations.length)
+            ? '<ul style="list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:6px">' + d.annotations.map(function (a) {
+                return '<li style="padding:8px 10px;border:1px solid #e2e8f0;border-radius:8px;background:#f0fdfa;font-size:12px;line-height:1.45;color:#334155"><strong style="color:#0f766e">' + esc(a.label) + '</strong> ' + esc(a.description) + '</li>';
+              }).join("") + '</ul>' : '';
+          return '<figure style="margin:0 0 16px;min-width:0;overflow:hidden"><span style="display:inline-block;margin-bottom:8px;padding:2px 10px;border-radius:999px;background:#ccfbf1;color:#0f766e;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">' + esc(DTYPES[d.type] || d.type) + '</span>' +
+            media + '<figcaption style="margin-top:8px"><strong style="display:block;color:#0f172a;font-size:14px">' + esc(d.title) + '</strong><span style="display:block;font-size:12.5px;line-height:1.5;color:#475569;margin-top:2px">' + esc(d.caption) + '</span></figcaption>' + ann + '</figure>';
+        }).join("");
+        visualSecs += '<section class="dx-reader-sec dx-reader-diagrams"><h3 style="margin:20px 0 10px;font:600 19px/1.25 var(--rd-serif);letter-spacing:-.01em;color:var(--rd-ink)">Clinical Diagrams &amp; Imaging</h3>' + dgHtml + '</section>';
+      }
+    }
+
     el.innerHTML = '<div class="dx-mgmt-top"><button class="dx-back" id="dxMgmtBack" type="button">' + backLabel + '</button>' +
         '<div class="dx-reader-brand"><strong>Knowledge Library</strong><span>Clinical disease reference</span></div><span class="dx-reader-spacer" aria-hidden="true"></span></div>' +
       '<div class="dx-mgmt-body">' +
@@ -4413,6 +4501,7 @@
           mgmtFold +
         '</div><div class="dx-reader-content">' +
         mgmtHtml +   // "Why this" is not repeated here: the same sentence opens At a glance above
+        visualSecs +
         (harrisonRef(id, { expanded: true, omit: { redFlags: !!(H && H.redFlags && H.redFlags.length), investigations: !!(H && H.additionalInvestigations && H.additionalInvestigations.length) } }) || '<p class="dx-sel-empty">No reference loaded for this disease.</p>') +
 
         '</div>' +

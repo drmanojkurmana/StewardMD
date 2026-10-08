@@ -1,78 +1,173 @@
 {
-  "id": "triosephosphate_isomerase_deficiency",
-  "name": "Triosephosphate isomerase deficiency",
-  "aliases": [
-    "TPI deficiency",
-    "triose phosphate isomerase deficiency",
-    "TPI1 gene"
+ "id": "triosephosphate_isomerase_deficiency",
+ "name": "Triosephosphate isomerase deficiency",
+ "aliases": [
+  "TPI deficiency",
+  "triose phosphate isomerase deficiency",
+  "TPI1 gene"
+ ],
+ "class": "non_infective",
+ "system": "Haematology / Genetics",
+ "specialty": "Haematology / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Williams Hematology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "The most severe of the glycolytic enzymopathies, combining chronic non-spherocytic haemolytic anaemia with progressive neuromuscular disease",
+   "Inherited as an autosomal recessive trait, frequently with consanguinity, and most patients present in infancy",
+   "A progressive neurological syndrome with spasticity, dystonia, tremor and motor neurone-type weakness typically emerges after the first months of life",
+   "Recurrent infections and increased susceptibility to bacterial illness are characteristic and contribute to early mortality",
+   "Cardiac involvement and sudden death may occur, adding to the poor prognosis",
+   "The metabolic hallmark is a marked accumulation of dihydroxyacetone phosphate in red cells, with reduced enzyme activity on assay and a confirmatory TPI1 mutation",
+   "Management is supportive with transfusion, folate and vigilant treatment of infections; no disease-modifying therapy exists and splenectomy offers limited benefit"
   ],
-  "class": "non_infective",
-  "system": "Haematology / Genetics",
-  "specialty": "Haematology / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Williams Hematology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "The most severe of the glycolytic enzymopathies, combining chronic non-spherocytic haemolytic anaemia with progressive neuromuscular disease",
-      "Inherited as an autosomal recessive trait, frequently with consanguinity, and most patients present in infancy",
-      "A progressive neurological syndrome with spasticity, dystonia, tremor and motor neurone-type weakness typically emerges after the first months of life",
-      "Recurrent infections and increased susceptibility to bacterial illness are characteristic and contribute to early mortality",
-      "Cardiac involvement and sudden death may occur, adding to the poor prognosis",
-      "The metabolic hallmark is a marked accumulation of dihydroxyacetone phosphate in red cells, with reduced enzyme activity on assay and a confirmatory TPI1 mutation",
-      "Management is supportive with transfusion, folate and vigilant treatment of infections; no disease-modifying therapy exists and splenectomy offers limited benefit"
+  "pathophysiology": "Triosephosphate isomerase interconverts dihydroxyacetone phosphate and glyceraldehyde-3-phosphate, ensuring both triose phosphates feed into the ATP-yielding steps of glycolysis. Deficiency causes accumulation of dihydroxyacetone phosphate and a fall in glycolytic energy production; in the red cell this shortens survival to produce a chronic non-spherocytic haemolytic anaemia, while in neural and muscle tissue the same energy failure, together with toxic effects of the accumulated substrate, drives a progressive and often fatal neuromuscular disorder with heightened susceptibility to infection.",
+  "additionalDifferentials": [
+   "Pyruvate kinase deficiency",
+   "Glucose phosphate isomerase deficiency with neuromuscular features",
+   "Congenital neurodegenerative and mitochondrial disorders",
+   "Autoimmune haemolytic anaemia",
+   "Other severe glycolytic enzymopathies",
+   "Hereditary spastic paraplegia and motor neurone disorders of infancy"
+  ],
+  "additionalInvestigations": [
+   "Red-cell triosephosphate isomerase enzyme assay",
+   "Measurement of red-cell dihydroxyacetone phosphate accumulation",
+   "Full blood count, reticulocytes and blood film",
+   "Haemolysis screen with bilirubin, lactate dehydrogenase and haptoglobin",
+   "Neurological assessment with neurophysiology and imaging",
+   "Molecular testing of the TPI1 gene"
+  ],
+  "redFlags": [
+   "Progressive neuromuscular deterioration with respiratory compromise",
+   "Recurrent or severe bacterial infections",
+   "Cardiac involvement predisposing to sudden death",
+   "Severe neonatal jaundice requiring exchange transfusion",
+   "Aplastic crisis after parvovirus B19 infection"
+  ],
+  "prognosis": "The classic infantile form carries a poor prognosis, with progressive neurological decline, susceptibility to infection and frequent death in early childhood; rare milder variants with residual enzyme activity have a better course.",
+  "pitfalls": [
+   "Focusing on the anaemia while missing the emerging neuromuscular syndrome",
+   "Underestimating infection risk and delaying antimicrobial treatment",
+   "Expecting splenectomy to substantially alter the systemic disease",
+   "Failing to offer genetic counselling given the recessive inheritance and severe phenotype"
+  ],
+  "references": [
+   "Williams Hematology",
+   "Wintrobe's Clinical Hematology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Manage the chronic non-spherocytic haemolytic anaemia with folic acid supplementation and red-cell transfusion during severe anaemia or aplastic crises",
+   "Prevent and treat infection aggressively with vaccination and prompt antibiotics given the marked susceptibility to bacterial illness",
+   "Provide neuromuscular supportive care with physiotherapy and management of spasticity and dystonia, adding respiratory support as weakness progresses",
+   "Undertake cardiac surveillance for arrhythmia and cardiomyopathy given the risk of sudden death",
+   "Coordinate multidisciplinary care across haematology, neurology, cardiology and paediatrics, with early palliative involvement in the severe infantile form",
+   "Offer genetic counselling and family screening for the autosomal recessive TPI1 defect"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "triosephosphate_isomerase_deficiency-pathway",
+   "title": "Triosephosphate isomerase deficiency: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "The most severe of the glycolytic enzymopathies, combining chronic non-spherocytic haemolytic anaemia with progressive neuromuscular disease",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Progressive neuromuscular deterioration with respiratory compromise",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Red-cell triosephosphate isomerase enzyme assay, Measurement of red-cell dihydroxyacetone phosphate accumulation, Full blood count, reticulocytes and blood film"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Manage the chronic non-spherocytic haemolytic anaemia with folic acid supplementation and red-cell transfusion during severe anaemia or aplastic crises"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Focusing on the anaemia while missing the emerging neuromuscular syndrome"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of triosephosphate isomerase deficiency."
+  }
+ ],
+ "tables": [
+  {
+   "id": "triosephosphate_isomerase_deficiency-matrix",
+   "title": "Triosephosphate isomerase deficiency: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The most severe of the glycolytic enzymopathies, combining chronic non-spherocytic haemolytic anaemia with progressive",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Triosephosphate isomerase interconverts dihydroxyacetone phosphate and glyceraldehyde-3-phosphate, ensuring both triose phosphates feed into the ATP-yielding steps of glycolysis. Deficiency causes accumulation of dihydroxyacetone phosphate and a fall in glycolytic energy production; in the red cell this shortens survival to produce a chronic non-spherocytic haemolytic anaemia, while in neural and muscle tissue the same energy failure, together with toxic effects of the accumulated substrate, drives a progressive and often fatal neuromuscular disorder with heightened susceptibility to infection.",
-    "additionalDifferentials": [
-      "Pyruvate kinase deficiency",
-      "Glucose phosphate isomerase deficiency with neuromuscular features",
-      "Congenital neurodegenerative and mitochondrial disorders",
-      "Autoimmune haemolytic anaemia",
-      "Other severe glycolytic enzymopathies",
-      "Hereditary spastic paraplegia and motor neurone disorders of infancy"
+    [
+     "Key Investigations",
+     "Red-cell triosephosphate isomerase enzyme assay, Measurement of red-cell dihydroxyacetone phosphate accumulation, Full blood",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Red-cell triosephosphate isomerase enzyme assay",
-      "Measurement of red-cell dihydroxyacetone phosphate accumulation",
-      "Full blood count, reticulocytes and blood film",
-      "Haemolysis screen with bilirubin, lactate dehydrogenase and haptoglobin",
-      "Neurological assessment with neurophysiology and imaging",
-      "Molecular testing of the TPI1 gene"
+    [
+     "Primary Differentials",
+     "Pyruvate kinase deficiency, Glucose phosphate isomerase deficiency with neuromuscular features, Congenital neurodegenerative and",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Progressive neuromuscular deterioration with respiratory compromise",
-      "Recurrent or severe bacterial infections",
-      "Cardiac involvement predisposing to sudden death",
-      "Severe neonatal jaundice requiring exchange transfusion",
-      "Aplastic crisis after parvovirus B19 infection"
+    [
+     "Management Strategy",
+     "Manage the chronic non-spherocytic haemolytic anaemia with folic acid supplementation and red-cell transfusion during severe",
+     "Core treatment modality"
     ],
-    "prognosis": "The classic infantile form carries a poor prognosis, with progressive neurological decline, susceptibility to infection and frequent death in early childhood; rare milder variants with residual enzyme activity have a better course.",
-    "pitfalls": [
-      "Focusing on the anaemia while missing the emerging neuromuscular syndrome",
-      "Underestimating infection risk and delaying antimicrobial treatment",
-      "Expecting splenectomy to substantially alter the systemic disease",
-      "Failing to offer genetic counselling given the recessive inheritance and severe phenotype"
-    ],
-    "references": [
-      "Williams Hematology",
-      "Wintrobe's Clinical Hematology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Manage the chronic non-spherocytic haemolytic anaemia with folic acid supplementation and red-cell transfusion during severe anaemia or aplastic crises",
-      "Prevent and treat infection aggressively with vaccination and prompt antibiotics given the marked susceptibility to bacterial illness",
-      "Provide neuromuscular supportive care with physiotherapy and management of spasticity and dystonia, adding respiratory support as weakness progresses",
-      "Undertake cardiac surveillance for arrhythmia and cardiomyopathy given the risk of sudden death",
-      "Coordinate multidisciplinary care across haematology, neurology, cardiology and paediatrics, with early palliative involvement in the severe infantile form",
-      "Offer genetic counselling and family screening for the autosomal recessive TPI1 defect"
+    [
+     "Clinical Pitfall",
+     "Focusing on the anaemia while missing the emerging neuromuscular syndrome",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for triosephosphate isomerase deficiency."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "triosephosphate-isomerase-deficiency-real-image",
+   "title": "Triosephosphate isomerase deficiency: Diagnostic Peripheral Blood Smear Examination",
+   "type": "diagram",
+   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
+   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
+   "annotations": [
+    {
+     "label": "Erythrocyte Indices",
+     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
+    },
+    {
+     "label": "Leukocyte Differential",
+     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
+    },
+    {
+     "label": "Platelet Count",
+     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+    }
+   ]
+  }
+ ]
 }

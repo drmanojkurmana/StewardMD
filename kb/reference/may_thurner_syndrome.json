@@ -1,78 +1,173 @@
 {
-  "id": "may_thurner_syndrome",
-  "name": "May-Thurner syndrome",
-  "aliases": [
-    "iliac vein compression syndrome",
-    "Cockett syndrome",
-    "iliocaval compression syndrome"
+ "id": "may_thurner_syndrome",
+ "name": "May-Thurner syndrome",
+ "aliases": [
+  "iliac vein compression syndrome",
+  "Cockett syndrome",
+  "iliocaval compression syndrome"
+ ],
+ "class": "non_infective",
+ "system": "Cardiovascular / Vascular",
+ "specialty": "Vascular Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Rutherford's Vascular Surgery and Endovascular Therapy",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Compression of the left common iliac vein between the overlying right common iliac artery and the underlying lumbar vertebra, typically at L5",
+   "Chronic pulsatile compression produces intraluminal venous spurs or webs and predisposes to left iliofemoral deep vein thrombosis and left-sided venous hypertension",
+   "Classically presents in young to middle-aged women with left leg swelling, pain, varicosities, or an unprovoked left iliofemoral DVT",
+   "Should be suspected in left-sided iliofemoral DVT, especially when unprovoked or recurrent",
+   "Cross-sectional venography (CT or MR) demonstrates the compression, while intravascular ultrasound best quantifies the stenosis and any post-thrombotic change",
+   "Management of the acute thrombotic presentation combines anticoagulation with catheter-directed thrombolysis or thrombectomy in selected patients, followed by angioplasty and stenting of the compressed segment",
+   "Correcting the underlying compression with venous stenting reduces post-thrombotic morbidity and rethrombosis"
   ],
-  "class": "non_infective",
-  "system": "Cardiovascular / Vascular",
-  "specialty": "Vascular Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Rutherford's Vascular Surgery and Endovascular Therapy",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Compression of the left common iliac vein between the overlying right common iliac artery and the underlying lumbar vertebra, typically at L5",
-      "Chronic pulsatile compression produces intraluminal venous spurs or webs and predisposes to left iliofemoral deep vein thrombosis and left-sided venous hypertension",
-      "Classically presents in young to middle-aged women with left leg swelling, pain, varicosities, or an unprovoked left iliofemoral DVT",
-      "Should be suspected in left-sided iliofemoral DVT, especially when unprovoked or recurrent",
-      "Cross-sectional venography (CT or MR) demonstrates the compression, while intravascular ultrasound best quantifies the stenosis and any post-thrombotic change",
-      "Management of the acute thrombotic presentation combines anticoagulation with catheter-directed thrombolysis or thrombectomy in selected patients, followed by angioplasty and stenting of the compressed segment",
-      "Correcting the underlying compression with venous stenting reduces post-thrombotic morbidity and rethrombosis"
+  "pathophysiology": "May-Thurner syndrome arises from the anatomical position of the right common iliac artery crossing over and compressing the left common iliac vein against the fifth lumbar vertebra. Repetitive arterial pulsation and mechanical compression cause endothelial injury and the development of intraluminal venous spurs or webs, producing a fixed venous stenosis. This impairs venous outflow from the left leg, causing venous hypertension and greatly increasing the risk of left iliofemoral deep vein thrombosis, which may present acutely or lead to chronic post-thrombotic sequelae.",
+  "additionalDifferentials": [
+   "Deep vein thrombosis from other causes",
+   "Post-thrombotic syndrome",
+   "Lymphoedema",
+   "Chronic venous insufficiency from superficial reflux",
+   "Extrinsic iliac vein compression by tumour or other mass",
+   "Cellulitis"
+  ],
+  "additionalInvestigations": [
+   "Venous duplex ultrasound as an initial assessment, though it visualises the iliac segments poorly",
+   "CT or MR venography to demonstrate iliac vein compression and collaterals",
+   "Intravascular ultrasound to quantify the stenosis and guide stenting",
+   "Contrast venography during intervention",
+   "Thrombophilia screen in unprovoked or recurrent thrombosis where appropriate",
+   "Assessment for post-thrombotic changes in chronic presentations"
+  ],
+  "redFlags": [
+   "Acute massive iliofemoral DVT with limb compromise (phlegmasia)",
+   "Recurrent thrombosis despite adequate anticoagulation",
+   "Signs of pulmonary embolism",
+   "An extrinsic pelvic mass causing the compression"
+  ],
+  "prognosis": "With recognition and treatment of the underlying compression by stenting, alongside thrombus removal and anticoagulation, outcomes are good with high stent patency; untreated compression predisposes to recurrent thrombosis and post-thrombotic syndrome.",
+  "pitfalls": [
+   "Treating left iliofemoral DVT with anticoagulation alone and missing the underlying compression",
+   "Relying on duplex alone, which visualises the iliac veins poorly",
+   "Under-recognising the syndrome in young women with left leg swelling",
+   "Failing to use intravascular ultrasound and thereby underestimating the degree of stenosis"
+  ],
+  "references": [
+   "Rutherford's Vascular Surgery and Endovascular Therapy",
+   "ESVS Clinical Practice Guidelines on Venous Disease"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Anticoagulation for acute left iliofemoral deep vein thrombosis",
+   "Catheter-directed thrombolysis or pharmacomechanical thrombectomy for extensive acute iliofemoral thrombosis in selected patients",
+   "Endovascular angioplasty and stenting of the compressed iliac vein segment as the definitive treatment of the underlying compression",
+   "Graduated compression therapy for limb swelling and post-thrombotic syndrome",
+   "Surveillance of stent patency with duplex imaging and continuation of antithrombotic therapy after stenting",
+   "Thrombophilia evaluation in unprovoked or recurrent thrombosis",
+   "Refer to vascular and interventional specialists for assessment and intervention"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "may_thurner_syndrome-pathway",
+   "title": "May-Thurner syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Compression of the left common iliac vein between the overlying right common iliac artery and the underlying lumbar vertebra, typically at L5",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Acute massive iliofemoral DVT with limb compromise (phlegmasia)",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Venous duplex ultrasound as an initial assessment, though it visualises the iliac segments poorly, CT or MR venography to demonstrate iliac vein compression and collaterals, Intravascular ultrasound to quantify the"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Anticoagulation for acute left iliofemoral deep vein thrombosis"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Treating left iliofemoral DVT with anticoagulation alone and missing the underlying compression"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of may-thurner syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "may_thurner_syndrome-matrix",
+   "title": "May-Thurner syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Compression of the left common iliac vein between the overlying right common iliac artery and the underlying lumbar vertebra,",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "May-Thurner syndrome arises from the anatomical position of the right common iliac artery crossing over and compressing the left common iliac vein against the fifth lumbar vertebra. Repetitive arterial pulsation and mechanical compression cause endothelial injury and the development of intraluminal venous spurs or webs, producing a fixed venous stenosis. This impairs venous outflow from the left leg, causing venous hypertension and greatly increasing the risk of left iliofemoral deep vein thrombosis, which may present acutely or lead to chronic post-thrombotic sequelae.",
-    "additionalDifferentials": [
-      "Deep vein thrombosis from other causes",
-      "Post-thrombotic syndrome",
-      "Lymphoedema",
-      "Chronic venous insufficiency from superficial reflux",
-      "Extrinsic iliac vein compression by tumour or other mass",
-      "Cellulitis"
+    [
+     "Key Investigations",
+     "Venous duplex ultrasound as an initial assessment, though it visualises the iliac segments poorly, CT or MR venography to",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Venous duplex ultrasound as an initial assessment, though it visualises the iliac segments poorly",
-      "CT or MR venography to demonstrate iliac vein compression and collaterals",
-      "Intravascular ultrasound to quantify the stenosis and guide stenting",
-      "Contrast venography during intervention",
-      "Thrombophilia screen in unprovoked or recurrent thrombosis where appropriate",
-      "Assessment for post-thrombotic changes in chronic presentations"
+    [
+     "Primary Differentials",
+     "Deep vein thrombosis from other causes, Post-thrombotic syndrome, Lymphoedema",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Acute massive iliofemoral DVT with limb compromise (phlegmasia)",
-      "Recurrent thrombosis despite adequate anticoagulation",
-      "Signs of pulmonary embolism",
-      "An extrinsic pelvic mass causing the compression"
+    [
+     "Management Strategy",
+     "Anticoagulation for acute left iliofemoral deep vein thrombosis",
+     "Core treatment modality"
     ],
-    "prognosis": "With recognition and treatment of the underlying compression by stenting, alongside thrombus removal and anticoagulation, outcomes are good with high stent patency; untreated compression predisposes to recurrent thrombosis and post-thrombotic syndrome.",
-    "pitfalls": [
-      "Treating left iliofemoral DVT with anticoagulation alone and missing the underlying compression",
-      "Relying on duplex alone, which visualises the iliac veins poorly",
-      "Under-recognising the syndrome in young women with left leg swelling",
-      "Failing to use intravascular ultrasound and thereby underestimating the degree of stenosis"
-    ],
-    "references": [
-      "Rutherford's Vascular Surgery and Endovascular Therapy",
-      "ESVS Clinical Practice Guidelines on Venous Disease"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Anticoagulation for acute left iliofemoral deep vein thrombosis",
-      "Catheter-directed thrombolysis or pharmacomechanical thrombectomy for extensive acute iliofemoral thrombosis in selected patients",
-      "Endovascular angioplasty and stenting of the compressed iliac vein segment as the definitive treatment of the underlying compression",
-      "Graduated compression therapy for limb swelling and post-thrombotic syndrome",
-      "Surveillance of stent patency with duplex imaging and continuation of antithrombotic therapy after stenting",
-      "Thrombophilia evaluation in unprovoked or recurrent thrombosis",
-      "Refer to vascular and interventional specialists for assessment and intervention"
+    [
+     "Clinical Pitfall",
+     "Treating left iliofemoral DVT with anticoagulation alone and missing the underlying compression",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for may-thurner syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "may-thurner-syndrome-real-image",
+   "title": "May-Thurner syndrome: 12-Lead Diagnostic Electrocardiogram",
+   "type": "ecg",
+   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
+   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
+   "annotations": [
+    {
+     "label": "Conduction & Axis",
+     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
+    },
+    {
+     "label": "Repolarization",
+     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
+    },
+    {
+     "label": "Rhythm & Intervals",
+     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+    }
+   ]
+  }
+ ]
 }

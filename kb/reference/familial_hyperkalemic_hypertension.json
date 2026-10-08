@@ -1,82 +1,177 @@
 {
-  "id": "familial_hyperkalemic_hypertension",
-  "name": "Familial hyperkalaemic hypertension (Gordon, WNK)",
-  "aliases": [
-    "familial hyperkalaemic hypertension",
-    "Gordon syndrome",
-    "pseudohypoaldosteronism type 2",
-    "PHA2",
-    "WNK1",
-    "WNK4",
-    "KLHL3",
-    "CUL3"
+ "id": "familial_hyperkalemic_hypertension",
+ "name": "Familial hyperkalaemic hypertension (Gordon, WNK)",
+ "aliases": [
+  "familial hyperkalaemic hypertension",
+  "Gordon syndrome",
+  "pseudohypoaldosteronism type 2",
+  "PHA2",
+  "WNK1",
+  "WNK4",
+  "KLHL3",
+  "CUL3"
+ ],
+ "class": "non_infective",
+ "system": "Renal / Genetics",
+ "specialty": "Nephrology / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Comprehensive Clinical Nephrology / OMIM",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Also called Gordon syndrome or pseudohypoaldosteronism type 2, caused by variants in WNK1, WNK4, KLHL3, or CUL3",
+   "The biochemical hallmark is hyperkalaemia with hypertension, hyperchloraemic metabolic acidosis, and a suppressed plasma renin",
+   "It is essentially the mirror image of Gitelman syndrome, arising from overactivity rather than loss of the sodium-chloride cotransporter",
+   "Hyperkalaemia occurs despite a normal or high glomerular filtration rate, distinguishing it from renal failure",
+   "Aldosterone levels are variable but the picture behaves like relative mineralocorticoid resistance for potassium and hydrogen handling",
+   "Thiazide diuretics are strikingly effective, correcting both the hypertension and the electrolyte abnormalities by inhibiting the overactive cotransporter",
+   "Consider Gordon syndrome in a young hypertensive patient with unexplained hyperkalaemia and normal renal function"
   ],
-  "class": "non_infective",
-  "system": "Renal / Genetics",
-  "specialty": "Nephrology / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Comprehensive Clinical Nephrology / OMIM",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Also called Gordon syndrome or pseudohypoaldosteronism type 2, caused by variants in WNK1, WNK4, KLHL3, or CUL3",
-      "The biochemical hallmark is hyperkalaemia with hypertension, hyperchloraemic metabolic acidosis, and a suppressed plasma renin",
-      "It is essentially the mirror image of Gitelman syndrome, arising from overactivity rather than loss of the sodium-chloride cotransporter",
-      "Hyperkalaemia occurs despite a normal or high glomerular filtration rate, distinguishing it from renal failure",
-      "Aldosterone levels are variable but the picture behaves like relative mineralocorticoid resistance for potassium and hydrogen handling",
-      "Thiazide diuretics are strikingly effective, correcting both the hypertension and the electrolyte abnormalities by inhibiting the overactive cotransporter",
-      "Consider Gordon syndrome in a young hypertensive patient with unexplained hyperkalaemia and normal renal function"
+  "pathophysiology": "The WNK kinases WNK1 and WNK4, regulated by the KLHL3-CUL3 ubiquitin ligase complex, control the activity of the thiazide-sensitive sodium-chloride cotransporter in the distal convoluted tubule. Disease-causing variants increase WNK signalling, either directly or by impairing degradation of the kinases, which enhances cotransporter activity and boosts distal sodium chloride reabsorption. The resulting volume expansion produces hypertension and suppresses renin. Because more sodium is reabsorbed electroneutrally in the distal convoluted tubule, less sodium reaches the collecting duct for exchange with potassium and hydrogen, reducing potassium and acid secretion and causing hyperkalaemia with hyperchloraemic metabolic acidosis. Thiazides reverse the process by blocking the overactive cotransporter.",
+  "additionalDifferentials": [
+   "Chronic kidney disease with hyperkalaemia",
+   "Primary hypoaldosteronism or Addison disease",
+   "Type 4 renal tubular acidosis",
+   "Drug effects (ACE inhibitors, ARBs, potassium-sparing diuretics)",
+   "Pseudohypoaldosteronism type 1",
+   "Other monogenic forms of hypertension"
+  ],
+  "additionalInvestigations": [
+   "Serum electrolytes showing hyperkalaemia and hyperchloraemia",
+   "Venous blood gas confirming metabolic acidosis",
+   "Plasma renin activity, characteristically suppressed",
+   "Aldosterone measurement and assessment of the renin-aldosterone axis",
+   "Estimated glomerular filtration rate to exclude renal failure as the cause",
+   "Sequencing of WNK1, WNK4, KLHL3, and CUL3"
+  ],
+  "redFlags": [
+   "Severe hyperkalaemia with electrocardiographic changes",
+   "Accelerated or resistant hypertension causing end-organ damage",
+   "Hyperkalaemia worsened by inadvertent use of ACE inhibitors or potassium-sparing agents"
+  ],
+  "prognosis": "The prognosis is excellent when recognised, because thiazide therapy typically normalises blood pressure and electrolytes; unrecognised disease can lead to complications of chronic hypertension and hyperkalaemia.",
+  "pitfalls": [
+   "Attributing the hyperkalaemia to renal failure despite a normal filtration rate",
+   "Prescribing renin-angiotensin blockade, which aggravates the hyperkalaemia",
+   "Overlooking the diagnosis in a young patient labelled as essential hypertension",
+   "Failing to recognise the dramatic responsiveness to low-dose thiazide"
+  ],
+  "references": [
+   "Comprehensive Clinical Nephrology",
+   "OMIM entry for pseudohypoaldosteronism type 2"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Low-dose thiazide diuretic as the strikingly effective disease-specific therapy, correcting both hypertension and the electrolyte disturbance by inhibiting the overactive sodium-chloride cotransporter",
+   "Dietary sodium restriction to complement thiazide therapy",
+   "Dietary potassium restriction with monitoring to manage the hyperkalaemia",
+   "Regular monitoring of blood pressure, serum potassium and acid-base status",
+   "Surveillance for and management of hypertensive end-organ complications",
+   "Genetic counselling with sequencing of WNK1, WNK4, KLHL3 and CUL3 and cascade family screening",
+   "Nephrology referral for diagnosis and ongoing management"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "familial_hyperkalemic_hypertension-pathway",
+   "title": "Familial hyperkalaemic hypertension (Gordon, WNK): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Also called Gordon syndrome or pseudohypoaldosteronism type 2, caused by variants in WNK1, WNK4, KLHL3, or CUL3",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Severe hyperkalaemia with electrocardiographic changes",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Serum electrolytes showing hyperkalaemia and hyperchloraemia, Venous blood gas confirming metabolic acidosis, Plasma renin activity, characteristically suppressed"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Low-dose thiazide diuretic as the strikingly effective disease-specific therapy, correcting both hypertension and the electrolyte disturbance by inhibiting the overactive sodium-chloride cotransporter"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing the hyperkalaemia to renal failure despite a normal filtration rate"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of familial hyperkalaemic hypertension (gordon, wnk)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "familial_hyperkalemic_hypertension-matrix",
+   "title": "Familial hyperkalaemic hypertension (Gordon, WNK): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Also called Gordon syndrome or pseudohypoaldosteronism type 2, caused by variants in WNK1, WNK4, KLHL3, or CUL3",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "The WNK kinases WNK1 and WNK4, regulated by the KLHL3-CUL3 ubiquitin ligase complex, control the activity of the thiazide-sensitive sodium-chloride cotransporter in the distal convoluted tubule. Disease-causing variants increase WNK signalling, either directly or by impairing degradation of the kinases, which enhances cotransporter activity and boosts distal sodium chloride reabsorption. The resulting volume expansion produces hypertension and suppresses renin. Because more sodium is reabsorbed electroneutrally in the distal convoluted tubule, less sodium reaches the collecting duct for exchange with potassium and hydrogen, reducing potassium and acid secretion and causing hyperkalaemia with hyperchloraemic metabolic acidosis. Thiazides reverse the process by blocking the overactive cotransporter.",
-    "additionalDifferentials": [
-      "Chronic kidney disease with hyperkalaemia",
-      "Primary hypoaldosteronism or Addison disease",
-      "Type 4 renal tubular acidosis",
-      "Drug effects (ACE inhibitors, ARBs, potassium-sparing diuretics)",
-      "Pseudohypoaldosteronism type 1",
-      "Other monogenic forms of hypertension"
+    [
+     "Key Investigations",
+     "Serum electrolytes showing hyperkalaemia and hyperchloraemia, Venous blood gas confirming metabolic acidosis, Plasma renin",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Serum electrolytes showing hyperkalaemia and hyperchloraemia",
-      "Venous blood gas confirming metabolic acidosis",
-      "Plasma renin activity, characteristically suppressed",
-      "Aldosterone measurement and assessment of the renin-aldosterone axis",
-      "Estimated glomerular filtration rate to exclude renal failure as the cause",
-      "Sequencing of WNK1, WNK4, KLHL3, and CUL3"
+    [
+     "Primary Differentials",
+     "Chronic kidney disease with hyperkalaemia, Primary hypoaldosteronism or Addison disease, Type 4 renal tubular acidosis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Severe hyperkalaemia with electrocardiographic changes",
-      "Accelerated or resistant hypertension causing end-organ damage",
-      "Hyperkalaemia worsened by inadvertent use of ACE inhibitors or potassium-sparing agents"
+    [
+     "Management Strategy",
+     "Low-dose thiazide diuretic as the strikingly effective disease-specific therapy, correcting both hypertension and the electrolyte",
+     "Core treatment modality"
     ],
-    "prognosis": "The prognosis is excellent when recognised, because thiazide therapy typically normalises blood pressure and electrolytes; unrecognised disease can lead to complications of chronic hypertension and hyperkalaemia.",
-    "pitfalls": [
-      "Attributing the hyperkalaemia to renal failure despite a normal filtration rate",
-      "Prescribing renin-angiotensin blockade, which aggravates the hyperkalaemia",
-      "Overlooking the diagnosis in a young patient labelled as essential hypertension",
-      "Failing to recognise the dramatic responsiveness to low-dose thiazide"
-    ],
-    "references": [
-      "Comprehensive Clinical Nephrology",
-      "OMIM entry for pseudohypoaldosteronism type 2"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Low-dose thiazide diuretic as the strikingly effective disease-specific therapy, correcting both hypertension and the electrolyte disturbance by inhibiting the overactive sodium-chloride cotransporter",
-      "Dietary sodium restriction to complement thiazide therapy",
-      "Dietary potassium restriction with monitoring to manage the hyperkalaemia",
-      "Regular monitoring of blood pressure, serum potassium and acid-base status",
-      "Surveillance for and management of hypertensive end-organ complications",
-      "Genetic counselling with sequencing of WNK1, WNK4, KLHL3 and CUL3 and cascade family screening",
-      "Nephrology referral for diagnosis and ongoing management"
+    [
+     "Clinical Pitfall",
+     "Attributing the hyperkalaemia to renal failure despite a normal filtration rate",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for familial hyperkalaemic hypertension (gordon, wnk)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "familial-hyperkalemic-hypertension-real-image",
+   "title": "Familial hyperkalaemic hypertension (Gordon, WNK): 12-Lead Diagnostic Electrocardiogram",
+   "type": "ecg",
+   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
+   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
+   "annotations": [
+    {
+     "label": "Conduction & Axis",
+     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
+    },
+    {
+     "label": "Repolarization",
+     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
+    },
+    {
+     "label": "Rhythm & Intervals",
+     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+    }
+   ]
+  }
+ ]
 }

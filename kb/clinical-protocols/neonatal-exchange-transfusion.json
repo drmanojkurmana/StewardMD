@@ -87,5 +87,100 @@
  "review": {
   "status": "ai_drafted",
   "compiled": "2026-09-30"
- }
+ },
+ "algorithms": [
+  {
+   "id": "neonatal-exchange-transfusion-pathway",
+   "title": "Exchange transfusion in neonates (double-volume) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Decide on exchange using the thresholds in the Neonatal jaundice protocol. The procedure should be done by experienced staff with informed parental consent.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Use an open bed to prevent heat loss. Nil by mouth is not required; empty the stomach by nasogastric tube if needed. Have resuscitation equipment ready and monitor throughout.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Obtain baseline laboratory investigations, biomarkers, and targeted imaging."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Access: umbilical venous catheter, 8 Fr recommended for exchange."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Measure serum bilirubin within 2 hours of the procedure."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for exchange transfusion in neonates (double-volume)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "neonatal-exchange-transfusion-summary-matrix",
+   "title": "Exchange transfusion in neonates (double-volume) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Decide on exchange using the thresholds in the Neonatal jaundice protocol. The procedure should be done by experienced staff with informed",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Use an open bed to prevent heat loss. Nil by mouth is not required; empty the stomach by nasogastric tube if needed. Have resuscitation",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Targeted Treatment",
+     "Access: umbilical venous catheter, 8 Fr recommended for exchange.",
+     "Definitive management protocol"
+    ],
+    [
+     "Critical Pitfall",
+     "Apnoea, bradycardia, hypotension or hypertension, hypocalcaemia, hypo- or hyperglycaemia, hyperkalaemia, thrombocytopenia, neutropenia,",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for exchange transfusion in neonates (double-volume)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "neonatal-exchange-transfusion-real-image",
+   "title": "Exchange transfusion in neonates (double-volume): Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

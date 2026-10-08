@@ -1,78 +1,173 @@
 {
-  "id": "venous_malformation",
-  "name": "Venous malformation",
-  "aliases": [
-    "VM",
-    "Cavernous haemangioma (obsolete term)"
+ "id": "venous_malformation",
+ "name": "Venous malformation",
+ "aliases": [
+  "VM",
+  "Cavernous haemangioma (obsolete term)"
+ ],
+ "class": "non_infective",
+ "system": "Skin / Vascular",
+ "specialty": "Dermatology / Vascular anomalies / Paediatrics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Mulliken and Young's Vascular Anomalies: Hemangiomas and Malformations",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Slow-flow malformation of dysplastic venous channels present at birth, though sometimes only apparent later; grows proportionately and does not involute.",
+   "Soft, compressible, blue-purple lesion that swells with dependency, Valsalva or crying and empties on compression or elevation.",
+   "Phleboliths (calcified thrombi) are pathognomonic and a common cause of localised pain.",
+   "Sporadic lesions commonly harbour somatic TIE2 (TEK) mutations; PIK3CA mutations also occur, and familial mucocutaneous forms are TEK-related.",
+   "Localised intravascular coagulopathy with raised D-dimer and low fibrinogen is common and can worsen with intervention or in extensive lesions.",
+   "Sclerotherapy is first-line for most symptomatic lesions; surgery is reserved for well-localised disease.",
+   "Glomuvenous malformations (glomulin gene) are firmer, more nodular and painful on compression, forming a distinct subtype.",
+   "MRI best characterises extent, while ultrasound shows compressible channels with slow or absent flow."
   ],
-  "class": "non_infective",
-  "system": "Skin / Vascular",
-  "specialty": "Dermatology / Vascular anomalies / Paediatrics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Mulliken and Young's Vascular Anomalies: Hemangiomas and Malformations",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Slow-flow malformation of dysplastic venous channels present at birth, though sometimes only apparent later; grows proportionately and does not involute.",
-      "Soft, compressible, blue-purple lesion that swells with dependency, Valsalva or crying and empties on compression or elevation.",
-      "Phleboliths (calcified thrombi) are pathognomonic and a common cause of localised pain.",
-      "Sporadic lesions commonly harbour somatic TIE2 (TEK) mutations; PIK3CA mutations also occur, and familial mucocutaneous forms are TEK-related.",
-      "Localised intravascular coagulopathy with raised D-dimer and low fibrinogen is common and can worsen with intervention or in extensive lesions.",
-      "Sclerotherapy is first-line for most symptomatic lesions; surgery is reserved for well-localised disease.",
-      "Glomuvenous malformations (glomulin gene) are firmer, more nodular and painful on compression, forming a distinct subtype.",
-      "MRI best characterises extent, while ultrasound shows compressible channels with slow or absent flow."
+  "pathophysiology": "Venous malformation is a congenital slow-flow vascular malformation composed of ectatic, thin-walled venous channels lined by flat, quiescent endothelium with a deficient and irregular smooth-muscle layer, which impairs contraction and causes progressive dilatation and stasis. Most sporadic lesions arise from somatic activating mutations in the endothelial receptor TIE2 (TEK) or in PIK3CA, driving PI3K/AKT/mTOR signalling. Venous stasis within the malformation activates coagulation locally, producing a chronic localised intravascular coagulopathy with thrombosis, phlebolith formation and pain.",
+  "additionalDifferentials": [
+   "Lymphatic malformation",
+   "Infantile or congenital haemangioma",
+   "Arteriovenous malformation",
+   "Glomuvenous malformation",
+   "Kaposiform haemangioendothelioma",
+   "Soft-tissue tumour such as a haemangiopericytoma"
+  ],
+  "additionalInvestigations": [
+   "Doppler ultrasound showing compressible channels with monophasic slow or absent flow",
+   "Contrast-enhanced MRI (T2-hyperintense lobulated lesion with phleboliths)",
+   "Plain radiograph demonstrating phleboliths",
+   "Coagulation screen including D-dimer and fibrinogen",
+   "Direct phlebography at the time of sclerotherapy",
+   "Genetic testing (TEK, PIK3CA) in selected or familial cases"
+  ],
+  "redFlags": [
+   "Rapid painful swelling suggesting acute thrombosis",
+   "Airway, orbital or visceral involvement",
+   "Extensive lesions with severe localised intravascular coagulopathy risking haemorrhage",
+   "Functional impairment or neurological compression"
+  ],
+  "prognosis": "Venous malformations are chronic and tend to enlarge slowly over life, particularly around puberty. Symptoms are often controllable with sclerotherapy and compression, but complete cure is uncommon in extensive lesions.",
+  "pitfalls": [
+   "Using the obsolete term cavernous haemangioma and implying that the lesion will involute.",
+   "Neglecting to assess and correct localised intravascular coagulopathy before intervention.",
+   "Mistaking phlebolith pain for another cause.",
+   "Assuming surgery alone will cure a diffuse lesion."
+  ],
+  "references": [
+   "Standard textbook of dermatology",
+   "ISSVA classification of vascular anomalies",
+   "Consensus guidance on diagnosis and management of venous malformations"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Offer sclerotherapy as first-line treatment for most symptomatic lesions, reserving surgical resection for well-localised disease",
+   "Consider the mTOR inhibitor sirolimus for extensive or complex malformations not amenable to sclerotherapy or surgery",
+   "Provide conservative measures including graduated compression garments, analgesia and aspirin for pain from localised intravascular coagulopathy and phleboliths",
+   "Monitor and manage the localised intravascular coagulopathy with D-dimer and fibrinogen, giving low-molecular-weight heparin around procedures in extensive lesions",
+   "Consider targeted therapy directed at PIK3CA in selected genetically defined cases",
+   "Manage through a multidisciplinary vascular anomalies team with long-term follow-up, as lesions enlarge around puberty and are rarely cured when extensive"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "venous_malformation-pathway",
+   "title": "Venous malformation: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Slow-flow malformation of dysplastic venous channels present at birth, though sometimes only apparent later; grows proportionately and does not involute.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapid painful swelling suggesting acute thrombosis",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Doppler ultrasound showing compressible channels with monophasic slow or absent flow, Contrast-enhanced MRI (T2-hyperintense lobulated lesion with phleboliths), Plain radiograph demonstrating phleboliths"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Offer sclerotherapy as first-line treatment for most symptomatic lesions, reserving surgical resection for well-localised disease"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Using the obsolete term cavernous haemangioma and implying that the lesion will involute."
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of venous malformation."
+  }
+ ],
+ "tables": [
+  {
+   "id": "venous_malformation-matrix",
+   "title": "Venous malformation: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Slow-flow malformation of dysplastic venous channels present at birth, though sometimes only apparent later; grows",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Venous malformation is a congenital slow-flow vascular malformation composed of ectatic, thin-walled venous channels lined by flat, quiescent endothelium with a deficient and irregular smooth-muscle layer, which impairs contraction and causes progressive dilatation and stasis. Most sporadic lesions arise from somatic activating mutations in the endothelial receptor TIE2 (TEK) or in PIK3CA, driving PI3K/AKT/mTOR signalling. Venous stasis within the malformation activates coagulation locally, producing a chronic localised intravascular coagulopathy with thrombosis, phlebolith formation and pain.",
-    "additionalDifferentials": [
-      "Lymphatic malformation",
-      "Infantile or congenital haemangioma",
-      "Arteriovenous malformation",
-      "Glomuvenous malformation",
-      "Kaposiform haemangioendothelioma",
-      "Soft-tissue tumour such as a haemangiopericytoma"
+    [
+     "Key Investigations",
+     "Doppler ultrasound showing compressible channels with monophasic slow or absent flow, Contrast-enhanced MRI (T2-hyperintense",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Doppler ultrasound showing compressible channels with monophasic slow or absent flow",
-      "Contrast-enhanced MRI (T2-hyperintense lobulated lesion with phleboliths)",
-      "Plain radiograph demonstrating phleboliths",
-      "Coagulation screen including D-dimer and fibrinogen",
-      "Direct phlebography at the time of sclerotherapy",
-      "Genetic testing (TEK, PIK3CA) in selected or familial cases"
+    [
+     "Primary Differentials",
+     "Lymphatic malformation, Infantile or congenital haemangioma, Arteriovenous malformation",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rapid painful swelling suggesting acute thrombosis",
-      "Airway, orbital or visceral involvement",
-      "Extensive lesions with severe localised intravascular coagulopathy risking haemorrhage",
-      "Functional impairment or neurological compression"
+    [
+     "Management Strategy",
+     "Offer sclerotherapy as first-line treatment for most symptomatic lesions, reserving surgical resection for well-localised disease",
+     "Core treatment modality"
     ],
-    "prognosis": "Venous malformations are chronic and tend to enlarge slowly over life, particularly around puberty. Symptoms are often controllable with sclerotherapy and compression, but complete cure is uncommon in extensive lesions.",
-    "pitfalls": [
-      "Using the obsolete term cavernous haemangioma and implying that the lesion will involute.",
-      "Neglecting to assess and correct localised intravascular coagulopathy before intervention.",
-      "Mistaking phlebolith pain for another cause.",
-      "Assuming surgery alone will cure a diffuse lesion."
-    ],
-    "references": [
-      "Standard textbook of dermatology",
-      "ISSVA classification of vascular anomalies",
-      "Consensus guidance on diagnosis and management of venous malformations"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Offer sclerotherapy as first-line treatment for most symptomatic lesions, reserving surgical resection for well-localised disease",
-      "Consider the mTOR inhibitor sirolimus for extensive or complex malformations not amenable to sclerotherapy or surgery",
-      "Provide conservative measures including graduated compression garments, analgesia and aspirin for pain from localised intravascular coagulopathy and phleboliths",
-      "Monitor and manage the localised intravascular coagulopathy with D-dimer and fibrinogen, giving low-molecular-weight heparin around procedures in extensive lesions",
-      "Consider targeted therapy directed at PIK3CA in selected genetically defined cases",
-      "Manage through a multidisciplinary vascular anomalies team with long-term follow-up, as lesions enlarge around puberty and are rarely cured when extensive"
+    [
+     "Clinical Pitfall",
+     "Using the obsolete term cavernous haemangioma and implying that the lesion will involute.",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for venous malformation."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "venous-malformation-real-image",
+   "title": "Venous malformation: Clinical Cutaneous Dermatology Photograph",
+   "type": "diagram",
+   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
+   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
+   "annotations": [
+    {
+     "label": "Primary Lesions",
+     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
+    },
+    {
+     "label": "Demarcation & Margins",
+     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
+    },
+    {
+     "label": "Anatomical Distribution",
+     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+    }
+   ]
+  }
+ ]
 }

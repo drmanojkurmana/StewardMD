@@ -1,82 +1,177 @@
 {
-  "id": "ataxia_with_oculomotor_apraxia_type_1",
-  "name": "Ataxia with Oculomotor Apraxia Type 1",
-  "aliases": [
-    "AOA1",
-    "Early-onset ataxia with oculomotor apraxia and hypoalbuminaemia",
-    "EAOH"
+ "id": "ataxia_with_oculomotor_apraxia_type_1",
+ "name": "Ataxia with Oculomotor Apraxia Type 1",
+ "aliases": [
+  "AOA1",
+  "Early-onset ataxia with oculomotor apraxia and hypoalbuminaemia",
+  "EAOH"
+ ],
+ "class": "non_infective",
+ "system": "Neurology / Hereditary ataxia",
+ "specialty": "Neurology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Neurogenetics references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Autosomal recessive early-onset cerebellar ataxia caused by biallelic APTX mutations affecting aprataxin, an enzyme that resolves abortive intermediates during DNA single-strand break repair.",
+   "Onset is usually in early childhood with progressive gait ataxia, followed by oculomotor apraxia and a severe axonal sensorimotor peripheral neuropathy.",
+   "Oculomotor apraxia manifests as difficulty initiating voluntary horizontal saccades with compensatory head thrusts, and may evolve towards limitation of gaze.",
+   "Extrapyramidal features, particularly chorea and choreoathetosis, are often prominent early and may later be overshadowed by neuropathy, areflexia and distal amyotrophy.",
+   "A characteristic biochemical signature of hypoalbuminaemia and hypercholesterolaemia develops as the disease progresses.",
+   "Serum alpha-fetoprotein is normal or only mildly raised, an important discriminator from ataxia with oculomotor apraxia type 2 and from ataxia-telangiectasia.",
+   "There is no cutaneous telangiectasia, immunodeficiency, radiosensitivity or increased malignancy risk, distinguishing it from ataxia-telangiectasia.",
+   "Brain imaging shows cerebellar atrophy, particularly of the vermis, and cognition may be variably affected over time."
   ],
-  "class": "non_infective",
-  "system": "Neurology / Hereditary ataxia",
-  "specialty": "Neurology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Neurogenetics references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Autosomal recessive early-onset cerebellar ataxia caused by biallelic APTX mutations affecting aprataxin, an enzyme that resolves abortive intermediates during DNA single-strand break repair.",
-      "Onset is usually in early childhood with progressive gait ataxia, followed by oculomotor apraxia and a severe axonal sensorimotor peripheral neuropathy.",
-      "Oculomotor apraxia manifests as difficulty initiating voluntary horizontal saccades with compensatory head thrusts, and may evolve towards limitation of gaze.",
-      "Extrapyramidal features, particularly chorea and choreoathetosis, are often prominent early and may later be overshadowed by neuropathy, areflexia and distal amyotrophy.",
-      "A characteristic biochemical signature of hypoalbuminaemia and hypercholesterolaemia develops as the disease progresses.",
-      "Serum alpha-fetoprotein is normal or only mildly raised, an important discriminator from ataxia with oculomotor apraxia type 2 and from ataxia-telangiectasia.",
-      "There is no cutaneous telangiectasia, immunodeficiency, radiosensitivity or increased malignancy risk, distinguishing it from ataxia-telangiectasia.",
-      "Brain imaging shows cerebellar atrophy, particularly of the vermis, and cognition may be variably affected over time."
+  "pathophysiology": "AOA1 results from loss-of-function variants in APTX, encoding aprataxin, a nuclear protein that participates in single-strand break repair by removing adenosine monophosphate groups from the 5' ends of DNA left by abortive ligation reactions. Without functional aprataxin these adenylated, blocked ends accumulate and unrepaired single-strand breaks persist, imposing chronic genotoxic stress on long-lived, non-dividing cells. Cerebellar Purkinje neurons and dorsal root ganglion neurons appear especially vulnerable, producing the combination of cerebellar cortical degeneration and a severe sensorimotor axonal neuropathy that defines the disorder. The associated hypoalbuminaemia and hypercholesterolaemia are consistent metabolic accompaniments whose precise mechanistic link to defective DNA repair remains incompletely understood, but they serve as reproducible biochemical markers that support the clinical diagnosis.",
+  "additionalDifferentials": [
+   "Ataxia-telangiectasia",
+   "Ataxia with oculomotor apraxia type 2 (SETX-related)",
+   "Friedreich ataxia",
+   "Ataxia with oculomotor apraxia type 4 (PNKP-related)",
+   "Ataxia-telangiectasia-like disorder (MRE11-related)",
+   "Abetalipoproteinaemia and vitamin E deficiency as treatable mimics",
+   "Other early-onset autosomal recessive cerebellar ataxias"
+  ],
+  "additionalInvestigations": [
+   "Serum albumin and fasting lipid profile",
+   "Serum alpha-fetoprotein and immunoglobulin levels",
+   "Nerve conduction studies demonstrating an axonal sensorimotor neuropathy",
+   "Brain MRI assessing cerebellar and vermian atrophy",
+   "Targeted APTX sequencing or a recessive ataxia gene panel",
+   "Clinical saccade assessment or oculography for oculomotor apraxia",
+   "Serial monitoring of albumin and cholesterol over time"
+  ],
+  "redFlags": [
+   "Rapidly progressive loss of independent ambulation",
+   "New bulbar symptoms with swallowing difficulty and aspiration risk",
+   "Progressive cognitive decline",
+   "Nutritional compromise associated with marked hypoalbuminaemia",
+   "Progressive scoliosis or contractures threatening respiratory function"
+  ],
+  "prognosis": "The disorder is progressive, with most affected individuals becoming wheelchair-dependent within one to two decades of onset, although lifespan is often relatively preserved. Cognitive function is variably affected and neuropathy tends to dominate the later disability.",
+  "pitfalls": [
+   "Attributing prominent early chorea to a primary movement disorder and missing the underlying recessive ataxia.",
+   "Treating a normal alpha-fetoprotein as reassurance against a DNA-repair ataxia, when it is precisely the feature that points towards AOA1 rather than AOA2 or ataxia-telangiectasia.",
+   "Pursuing hepatic or renal causes for hypoalbuminaemia rather than recognising it as a diagnostic clue.",
+   "Confusing AOA1 with ataxia-telangiectasia and thereby mismanaging radiosensitivity or malignancy-surveillance considerations."
+  ],
+  "references": [
+   "Neurogenetics reference texts",
+   "Hereditary ataxia consensus reviews",
+   "Clinical neurology reference texts"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Supportive neurorehabilitation with physiotherapy, occupational therapy and speech therapy, plus mobility aids and wheelchair provision as ambulation is lost",
+   "Management of the axonal sensorimotor neuropathy with orthoses, foot care and neuropathic-pain treatment, and symptomatic treatment of chorea and other extrapyramidal features",
+   "Monitoring and management of the associated hypercholesterolaemia and hypoalbuminaemia, with lipid-lowering therapy where indicated",
+   "Occupational and visual adaptation strategies for oculomotor apraxia",
+   "Multidisciplinary neurology follow-up tracking progressive disability",
+   "Genetic counselling and family testing for this autosomal recessive APTX-related disorder"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "ataxia_with_oculomotor_apraxia_type_1-pathway",
+   "title": "Ataxia with Oculomotor Apraxia Type 1: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Autosomal recessive early-onset cerebellar ataxia caused by biallelic APTX mutations affecting aprataxin, an enzyme that resolves abortive intermediates during DNA single-strand break repair.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapidly progressive loss of independent ambulation",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Serum albumin and fasting lipid profile, Serum alpha-fetoprotein and immunoglobulin levels, Nerve conduction studies demonstrating an axonal sensorimotor neuropathy"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Supportive neurorehabilitation with physiotherapy, occupational therapy and speech therapy, plus mobility aids and wheelchair provision as ambulation is lost"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing prominent early chorea to a primary movement disorder and missing the underlying recessive ataxia."
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of ataxia with oculomotor apraxia type 1."
+  }
+ ],
+ "tables": [
+  {
+   "id": "ataxia_with_oculomotor_apraxia_type_1-matrix",
+   "title": "Ataxia with Oculomotor Apraxia Type 1: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Autosomal recessive early-onset cerebellar ataxia caused by biallelic APTX mutations affecting aprataxin, an enzyme that resolves",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "AOA1 results from loss-of-function variants in APTX, encoding aprataxin, a nuclear protein that participates in single-strand break repair by removing adenosine monophosphate groups from the 5' ends of DNA left by abortive ligation reactions. Without functional aprataxin these adenylated, blocked ends accumulate and unrepaired single-strand breaks persist, imposing chronic genotoxic stress on long-lived, non-dividing cells. Cerebellar Purkinje neurons and dorsal root ganglion neurons appear especially vulnerable, producing the combination of cerebellar cortical degeneration and a severe sensorimotor axonal neuropathy that defines the disorder. The associated hypoalbuminaemia and hypercholesterolaemia are consistent metabolic accompaniments whose precise mechanistic link to defective DNA repair remains incompletely understood, but they serve as reproducible biochemical markers that support the clinical diagnosis.",
-    "additionalDifferentials": [
-      "Ataxia-telangiectasia",
-      "Ataxia with oculomotor apraxia type 2 (SETX-related)",
-      "Friedreich ataxia",
-      "Ataxia with oculomotor apraxia type 4 (PNKP-related)",
-      "Ataxia-telangiectasia-like disorder (MRE11-related)",
-      "Abetalipoproteinaemia and vitamin E deficiency as treatable mimics",
-      "Other early-onset autosomal recessive cerebellar ataxias"
+    [
+     "Key Investigations",
+     "Serum albumin and fasting lipid profile, Serum alpha-fetoprotein and immunoglobulin levels, Nerve conduction studies",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Serum albumin and fasting lipid profile",
-      "Serum alpha-fetoprotein and immunoglobulin levels",
-      "Nerve conduction studies demonstrating an axonal sensorimotor neuropathy",
-      "Brain MRI assessing cerebellar and vermian atrophy",
-      "Targeted APTX sequencing or a recessive ataxia gene panel",
-      "Clinical saccade assessment or oculography for oculomotor apraxia",
-      "Serial monitoring of albumin and cholesterol over time"
+    [
+     "Primary Differentials",
+     "Ataxia-telangiectasia, Ataxia with oculomotor apraxia type 2 (SETX-related), Friedreich ataxia",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rapidly progressive loss of independent ambulation",
-      "New bulbar symptoms with swallowing difficulty and aspiration risk",
-      "Progressive cognitive decline",
-      "Nutritional compromise associated with marked hypoalbuminaemia",
-      "Progressive scoliosis or contractures threatening respiratory function"
+    [
+     "Management Strategy",
+     "Supportive neurorehabilitation with physiotherapy, occupational therapy and speech therapy, plus mobility aids and wheelchair",
+     "Core treatment modality"
     ],
-    "prognosis": "The disorder is progressive, with most affected individuals becoming wheelchair-dependent within one to two decades of onset, although lifespan is often relatively preserved. Cognitive function is variably affected and neuropathy tends to dominate the later disability.",
-    "pitfalls": [
-      "Attributing prominent early chorea to a primary movement disorder and missing the underlying recessive ataxia.",
-      "Treating a normal alpha-fetoprotein as reassurance against a DNA-repair ataxia, when it is precisely the feature that points towards AOA1 rather than AOA2 or ataxia-telangiectasia.",
-      "Pursuing hepatic or renal causes for hypoalbuminaemia rather than recognising it as a diagnostic clue.",
-      "Confusing AOA1 with ataxia-telangiectasia and thereby mismanaging radiosensitivity or malignancy-surveillance considerations."
-    ],
-    "references": [
-      "Neurogenetics reference texts",
-      "Hereditary ataxia consensus reviews",
-      "Clinical neurology reference texts"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Supportive neurorehabilitation with physiotherapy, occupational therapy and speech therapy, plus mobility aids and wheelchair provision as ambulation is lost",
-      "Management of the axonal sensorimotor neuropathy with orthoses, foot care and neuropathic-pain treatment, and symptomatic treatment of chorea and other extrapyramidal features",
-      "Monitoring and management of the associated hypercholesterolaemia and hypoalbuminaemia, with lipid-lowering therapy where indicated",
-      "Occupational and visual adaptation strategies for oculomotor apraxia",
-      "Multidisciplinary neurology follow-up tracking progressive disability",
-      "Genetic counselling and family testing for this autosomal recessive APTX-related disorder"
+    [
+     "Clinical Pitfall",
+     "Attributing prominent early chorea to a primary movement disorder and missing the underlying recessive ataxia.",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for ataxia with oculomotor apraxia type 1."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "ataxia-with-oculomotor-apraxia-type-1-real-image",
+   "title": "Ataxia with Oculomotor Apraxia Type 1: Diagnostic Head Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
+   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
+   "annotations": [
+    {
+     "label": "Cerebral Parenchyma",
+     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+    },
+    {
+     "label": "Extra-Axial Spaces",
+     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+    }
+   ]
+  }
+ ]
 }

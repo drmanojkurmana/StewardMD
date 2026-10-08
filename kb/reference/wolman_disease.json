@@ -1,76 +1,171 @@
 {
-  "id": "wolman_disease",
-  "name": "Wolman disease",
-  "aliases": [
-    "lysosomal acid lipase deficiency",
-    "LAL deficiency",
-    "acid cholesteryl ester hydrolase deficiency"
+ "id": "wolman_disease",
+ "name": "Wolman disease",
+ "aliases": [
+  "lysosomal acid lipase deficiency",
+  "LAL deficiency",
+  "acid cholesteryl ester hydrolase deficiency"
+ ],
+ "class": "non_infective",
+ "system": "Genetic / Metabolic",
+ "specialty": "Metabolic Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Nelson Textbook of Pediatrics / standard metabolic references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "An autosomal recessive disorder caused by deficiency of the enzyme lysosomal acid lipase, leading to accumulation of cholesteryl esters and triglycerides within lysosomes",
+   "Wolman disease is the severe infantile end of the spectrum, presenting in the first weeks of life with vomiting, diarrhoea, and failure to thrive",
+   "Marked hepatosplenomegaly with progressive liver dysfunction is a prominent feature",
+   "Bilateral adrenal enlargement with calcification is a characteristic and helpful imaging clue",
+   "Malabsorption and steatorrhoea contribute to profound failure to thrive and early death if untreated",
+   "The milder, later-onset variant caused by the same enzyme deficiency is cholesteryl ester storage disease, presenting with hepatomegaly and dyslipidaemia",
+   "A dyslipidaemic profile with elevated LDL cholesterol and low HDL is typical, reflecting impaired lipid handling",
+   "Enzyme replacement therapy is available for lysosomal acid lipase deficiency, and haematopoietic stem cell transplantation has been used in selected cases, alongside nutritional support"
   ],
-  "class": "non_infective",
-  "system": "Genetic / Metabolic",
-  "specialty": "Metabolic Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Nelson Textbook of Pediatrics / standard metabolic references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "An autosomal recessive disorder caused by deficiency of the enzyme lysosomal acid lipase, leading to accumulation of cholesteryl esters and triglycerides within lysosomes",
-      "Wolman disease is the severe infantile end of the spectrum, presenting in the first weeks of life with vomiting, diarrhoea, and failure to thrive",
-      "Marked hepatosplenomegaly with progressive liver dysfunction is a prominent feature",
-      "Bilateral adrenal enlargement with calcification is a characteristic and helpful imaging clue",
-      "Malabsorption and steatorrhoea contribute to profound failure to thrive and early death if untreated",
-      "The milder, later-onset variant caused by the same enzyme deficiency is cholesteryl ester storage disease, presenting with hepatomegaly and dyslipidaemia",
-      "A dyslipidaemic profile with elevated LDL cholesterol and low HDL is typical, reflecting impaired lipid handling",
-      "Enzyme replacement therapy is available for lysosomal acid lipase deficiency, and haematopoietic stem cell transplantation has been used in selected cases, alongside nutritional support"
+  "pathophysiology": "Wolman disease is caused by biallelic pathogenic variants in LIPA, encoding lysosomal acid lipase, the enzyme that hydrolyses cholesteryl esters and triglycerides delivered to the lysosome. Deficient activity causes these lipids to accumulate within lysosomes of the liver, spleen, intestine, adrenal glands, and macrophages throughout the body. Massive lipid storage produces hepatosplenomegaly, hepatic dysfunction, adrenal infiltration with calcification, and intestinal involvement causing malabsorption. Disrupted intracellular cholesterol sensing also drives a proatherogenic dyslipidaemia. The severe infantile phenotype reflects near-absent enzyme activity, whereas residual activity underlies the milder cholesteryl ester storage disease.",
+  "additionalDifferentials": [
+   "Other lysosomal storage disorders with hepatosplenomegaly such as Niemann-Pick disease",
+   "Other causes of neonatal failure to thrive with malabsorption",
+   "Infantile cholestatic and metabolic liver disease",
+   "Familial hyperlipidaemias for the milder phenotype",
+   "Non-alcoholic fatty liver disease in later-onset presentations"
+  ],
+  "additionalInvestigations": [
+   "Assay of lysosomal acid lipase enzyme activity, including dried blood spot testing",
+   "LIPA molecular genetic testing to confirm the diagnosis",
+   "Abdominal imaging demonstrating hepatosplenomegaly and adrenal calcification",
+   "Liver function tests and fasting lipid profile",
+   "Assessment of nutrition, growth, and malabsorption"
+  ],
+  "redFlags": [
+   "Profound failure to thrive with vomiting and diarrhoea in early infancy",
+   "Progressive liver dysfunction or hepatic failure",
+   "Adrenal insufficiency associated with adrenal involvement",
+   "Severe malabsorption with rapid clinical deterioration"
+  ],
+  "prognosis": "Untreated infantile Wolman disease is rapidly progressive and usually fatal within the first months of life. Enzyme replacement therapy has substantially improved survival in this severe form, and the later-onset cholesteryl ester storage disease has a more chronic course dominated by liver disease and dyslipidaemia with associated cardiovascular risk.",
+  "pitfalls": [
+   "Overlooking the diagnosis in a neonate with failure to thrive and hepatosplenomegaly",
+   "Missing adrenal calcification on imaging as a diagnostic pointer",
+   "Failing to recognise the milder cholesteryl ester storage disease as the same enzyme deficiency",
+   "Delaying enzyme replacement therapy, which is most beneficial when started early"
+  ],
+  "references": [
+   "Nelson Textbook of Pediatrics, 22e"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Enzyme replacement therapy with recombinant lysosomal acid lipase (sebelipase alfa) is the disease-specific treatment and has transformed survival in the severe infantile form",
+   "Nutritional support with a modified low-fat regimen and parenteral nutrition to counter malabsorption, steatorrhoea and profound failure to thrive",
+   "Lipid-lowering therapy such as a statin with ezetimibe for the proatherogenic dyslipidaemia, particularly in the milder cholesteryl ester storage disease spectrum",
+   "Haematopoietic stem cell transplantation considered in selected cases as an alternative disease-directed approach",
+   "Monitoring of liver function, growth, nutritional status and adrenal function given adrenal infiltration and calcification",
+   "Multidisciplinary metabolic care with escalation for hepatic failure",
+   "Genetic counselling for this autosomal recessive LIPA disorder, with family screening"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "wolman_disease-pathway",
+   "title": "Wolman disease: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "An autosomal recessive disorder caused by deficiency of the enzyme lysosomal acid lipase, leading to accumulation of cholesteryl esters and triglycerides within lysosomes",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Profound failure to thrive with vomiting and diarrhoea in early infancy",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Assay of lysosomal acid lipase enzyme activity, including dried blood spot testing, LIPA molecular genetic testing to confirm the diagnosis, Abdominal imaging demonstrating hepatosplenomegaly and adrenal calcification"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Enzyme replacement therapy with recombinant lysosomal acid lipase (sebelipase alfa) is the disease-specific treatment and has transformed survival in the severe infantile form"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Overlooking the diagnosis in a neonate with failure to thrive and hepatosplenomegaly"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of wolman disease."
+  }
+ ],
+ "tables": [
+  {
+   "id": "wolman_disease-matrix",
+   "title": "Wolman disease: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "An autosomal recessive disorder caused by deficiency of the enzyme lysosomal acid lipase, leading to accumulation of cholesteryl",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Wolman disease is caused by biallelic pathogenic variants in LIPA, encoding lysosomal acid lipase, the enzyme that hydrolyses cholesteryl esters and triglycerides delivered to the lysosome. Deficient activity causes these lipids to accumulate within lysosomes of the liver, spleen, intestine, adrenal glands, and macrophages throughout the body. Massive lipid storage produces hepatosplenomegaly, hepatic dysfunction, adrenal infiltration with calcification, and intestinal involvement causing malabsorption. Disrupted intracellular cholesterol sensing also drives a proatherogenic dyslipidaemia. The severe infantile phenotype reflects near-absent enzyme activity, whereas residual activity underlies the milder cholesteryl ester storage disease.",
-    "additionalDifferentials": [
-      "Other lysosomal storage disorders with hepatosplenomegaly such as Niemann-Pick disease",
-      "Other causes of neonatal failure to thrive with malabsorption",
-      "Infantile cholestatic and metabolic liver disease",
-      "Familial hyperlipidaemias for the milder phenotype",
-      "Non-alcoholic fatty liver disease in later-onset presentations"
+    [
+     "Key Investigations",
+     "Assay of lysosomal acid lipase enzyme activity, including dried blood spot testing, LIPA molecular genetic testing to confirm the",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Assay of lysosomal acid lipase enzyme activity, including dried blood spot testing",
-      "LIPA molecular genetic testing to confirm the diagnosis",
-      "Abdominal imaging demonstrating hepatosplenomegaly and adrenal calcification",
-      "Liver function tests and fasting lipid profile",
-      "Assessment of nutrition, growth, and malabsorption"
+    [
+     "Primary Differentials",
+     "Other lysosomal storage disorders with hepatosplenomegaly such as Niemann-Pick disease, Other causes of neonatal failure to",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Profound failure to thrive with vomiting and diarrhoea in early infancy",
-      "Progressive liver dysfunction or hepatic failure",
-      "Adrenal insufficiency associated with adrenal involvement",
-      "Severe malabsorption with rapid clinical deterioration"
+    [
+     "Management Strategy",
+     "Enzyme replacement therapy with recombinant lysosomal acid lipase (sebelipase alfa) is the disease-specific treatment and has",
+     "Core treatment modality"
     ],
-    "prognosis": "Untreated infantile Wolman disease is rapidly progressive and usually fatal within the first months of life. Enzyme replacement therapy has substantially improved survival in this severe form, and the later-onset cholesteryl ester storage disease has a more chronic course dominated by liver disease and dyslipidaemia with associated cardiovascular risk.",
-    "pitfalls": [
-      "Overlooking the diagnosis in a neonate with failure to thrive and hepatosplenomegaly",
-      "Missing adrenal calcification on imaging as a diagnostic pointer",
-      "Failing to recognise the milder cholesteryl ester storage disease as the same enzyme deficiency",
-      "Delaying enzyme replacement therapy, which is most beneficial when started early"
-    ],
-    "references": [
-      "Nelson Textbook of Pediatrics, 22e"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Enzyme replacement therapy with recombinant lysosomal acid lipase (sebelipase alfa) is the disease-specific treatment and has transformed survival in the severe infantile form",
-      "Nutritional support with a modified low-fat regimen and parenteral nutrition to counter malabsorption, steatorrhoea and profound failure to thrive",
-      "Lipid-lowering therapy such as a statin with ezetimibe for the proatherogenic dyslipidaemia, particularly in the milder cholesteryl ester storage disease spectrum",
-      "Haematopoietic stem cell transplantation considered in selected cases as an alternative disease-directed approach",
-      "Monitoring of liver function, growth, nutritional status and adrenal function given adrenal infiltration and calcification",
-      "Multidisciplinary metabolic care with escalation for hepatic failure",
-      "Genetic counselling for this autosomal recessive LIPA disorder, with family screening"
+    [
+     "Clinical Pitfall",
+     "Overlooking the diagnosis in a neonate with failure to thrive and hepatosplenomegaly",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for wolman disease."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "wolman-disease-real-image",
+   "title": "Wolman disease: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

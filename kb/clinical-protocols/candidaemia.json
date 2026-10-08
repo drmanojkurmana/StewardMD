@@ -5,7 +5,16 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Ward, ICU, haematology",
- "aliases": ["candidemia", "Candida bloodstream infection", "invasive candidiasis", "fungaemia", "Candida auris", "C. auris", "echinocandin", "caspofungin"],
+ "aliases": [
+  "candidemia",
+  "Candida bloodstream infection",
+  "invasive candidiasis",
+  "fungaemia",
+  "Candida auris",
+  "C. auris",
+  "echinocandin",
+  "caspofungin"
+ ],
  "summary": "Treat every Candida-positive blood culture: start an echinocandin, remove the central line, repeat cultures until negative, arrange a dilated eye examination, step down to fluconazole after 5 to 7 days if stable and susceptible, and treat for 14 days after the first negative culture.",
  "sections": [
   {
@@ -81,16 +90,148 @@
   }
  ],
  "drugs": [
-  { "name": "Caspofungin", "dose": "70 mg IV loading, then 50 mg IV once daily", "notes": "First line. 35 mg maintenance in moderate hepatic impairment." },
-  { "name": "Micafungin", "dose": "100 mg IV once daily", "notes": "First line." },
-  { "name": "Anidulafungin", "dose": "200 mg IV loading, then 100 mg IV once daily", "notes": "First line; no hepatic or renal adjustment." },
-  { "name": "Fluconazole", "dose": "800 mg (12 mg/kg) loading, then 400 mg (6 mg/kg) orally or IV once daily; C. glabrata step-down 800 mg (12 mg/kg) daily", "notes": "Step-down for susceptible isolates. Halve maintenance if creatinine clearance 50 mL/min or less. Many drug interactions; QT prolongation." },
-  { "name": "Voriconazole", "dose": "400 mg (6 mg/kg) twice daily for 2 doses, then 200 to 300 mg (3 to 4 mg/kg) twice daily", "notes": "C. krusei or susceptible C. glabrata step-down. Therapeutic drug monitoring; visual and hepatic toxicity." },
-  { "name": "Lipid amphotericin B", "dose": "3 to 5 mg/kg IV once daily", "notes": "Intolerance or resistance; echinocandin-resistant C. auris 5 mg/kg (liposomal). Monitor potassium, magnesium and creatinine." }
+  {
+   "name": "Caspofungin",
+   "dose": "70 mg IV loading, then 50 mg IV once daily",
+   "notes": "First line. 35 mg maintenance in moderate hepatic impairment."
+  },
+  {
+   "name": "Micafungin",
+   "dose": "100 mg IV once daily",
+   "notes": "First line."
+  },
+  {
+   "name": "Anidulafungin",
+   "dose": "200 mg IV loading, then 100 mg IV once daily",
+   "notes": "First line; no hepatic or renal adjustment."
+  },
+  {
+   "name": "Fluconazole",
+   "dose": "800 mg (12 mg/kg) loading, then 400 mg (6 mg/kg) orally or IV once daily; C. glabrata step-down 800 mg (12 mg/kg) daily",
+   "notes": "Step-down for susceptible isolates. Halve maintenance if creatinine clearance 50 mL/min or less. Many drug interactions; QT prolongation."
+  },
+  {
+   "name": "Voriconazole",
+   "dose": "400 mg (6 mg/kg) twice daily for 2 doses, then 200 to 300 mg (3 to 4 mg/kg) twice daily",
+   "notes": "C. krusei or susceptible C. glabrata step-down. Therapeutic drug monitoring; visual and hepatic toxicity."
+  },
+  {
+   "name": "Lipid amphotericin B",
+   "dose": "3 to 5 mg/kg IV once daily",
+   "notes": "Intolerance or resistance; echinocandin-resistant C. auris 5 mg/kg (liposomal). Monitor potassium, magnesium and creatinine."
+  }
  ],
  "sources": [
-  { "org": "IDSA", "title": "Clinical practice guideline for the management of candidiasis: 2016 update", "year": 2016, "url": "https://www.idsociety.org/practice-guideline/candidiasis/" },
-  { "org": "CDC", "title": "Clinical treatment of Candida auris infections", "year": 2024, "url": "https://www.cdc.gov/candida-auris/hcp/clinical-care/index.html" }
+  {
+   "org": "IDSA",
+   "title": "Clinical practice guideline for the management of candidiasis: 2016 update",
+   "year": 2016,
+   "url": "https://www.idsociety.org/practice-guideline/candidiasis/"
+  },
+  {
+   "org": "CDC",
+   "title": "Clinical treatment of Candida auris infections",
+   "year": 2024,
+   "url": "https://www.cdc.gov/candida-auris/hcp/clinical-care/index.html"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "candidaemia-pathway",
+   "title": "Candidaemia and invasive candidiasis (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Any Candida species in a blood culture is significant: never dismiss it as a contaminant.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Start an echinocandin (IDSA 2016): caspofungin 70 mg IV loading then 50 mg daily, or micafungin 100 mg IV daily, or anidulafungin 200 mg IV loading then 100 mg daily.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Dilated fundoscopy by an ophthalmologist within the first week in non-neutropenic patients, and after neutrophil recovery in neutropenic patients; endophthalmitis changes drug choice and duration."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Step down to fluconazole 400 mg (6 mg/kg) orally daily, usually after 5 to 7 days, when clinically stable, the isolate is fluconazole-susceptible and repeat blood cultures are negative."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Treating Candida in blood as a contaminant, or stopping before 14 days after clearance."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for candidaemia and invasive candidiasis (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "candidaemia-summary-matrix",
+   "title": "Candidaemia and invasive candidiasis (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Any Candida species in a blood culture is significant: never dismiss it as a contaminant.",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Start an echinocandin (IDSA 2016): caspofungin 70 mg IV loading then 50 mg daily, or micafungin 100 mg IV daily, or anidulafungin 200 mg IV",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Dilated fundoscopy by an ophthalmologist within the first week in non-neutropenic patients, and after neutrophil recovery in neutropenic",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Caspofungin: 70 mg IV loading, then 50 mg IV once daily",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Treating Candida in blood as a contaminant, or stopping before 14 days after clearance.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for candidaemia and invasive candidiasis (adult)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "candidaemia-real-image",
+   "title": "Candidaemia and invasive candidiasis (adult): Diagnostic Microbiological / Smear Examination",
+   "type": "diagram",
+   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
+   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
+   "annotations": [
+    {
+     "label": "Pathogen Detection",
+     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
+    },
+    {
+     "label": "Inflammatory Response",
+     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
+    },
+    {
+     "label": "Diagnostic Confirmation",
+     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+    }
+   ]
+  }
+ ]
 }

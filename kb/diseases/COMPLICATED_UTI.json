@@ -230,5 +230,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "h5281d3d4"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "complicated_uti-dx-algo",
+      "title": "Complicated Urinary Tract Infection: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Harrison defines complicated UTI as infection extending beyond the bladder (e.g., prostatitis, pyelonephritis, bacteremia) or UTI occurring in the setting of intermittent or indwelling catheterization; this is a shift from the older",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Fever, rigors, nausea/vomiting, and flank pain suggesting severe pyelonephritis or infection beyond the bladder (p.1133)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: CT or ultrasound imaging in men with febrile UTI to evaluate for anatomic abnormality or obstruction (p.1132), Blood cultures when complicated UTI, pyelonephritis, or systemic features are present (p.1134 diagnostic"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Harrison frames the practical categorization around whether infection is confined to the bladder (uncomplicated cystitis) versus extends beyond it (complicated UTI: prostatitis, pyelonephritis, bacteremia) and whether"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Treating asymptomatic bacteriuria outside pregnancy or pre-urologic-procedure settings: it does not reduce future UTI and may even increase risk, possibly by promoting colonization with more virulent/resistant pathogens"
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for complicated urinary tract infection."
+    }
+  ],
+  "tables": [
+    {
+      "id": "complicated_uti-matrix",
+      "title": "Complicated Urinary Tract Infection: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Harrison defines complicated UTI as infection extending beyond the bladder (e.g., prostatitis, pyelonephritis, bacteremia) or UTI",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "CT or ultrasound imaging in men with febrile UTI to evaluate for anatomic abnormality or obstruction (p.1132), Blood cultures",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Acute bacterial prostatitis (consider in men with UTI plus systemic symptoms and no other clear anatomic source) (p.1132),",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Fever, rigors, nausea/vomiting, and flank pain suggesting severe pyelonephritis or infection beyond the bladder (p.1133)",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating asymptomatic bacteriuria outside pregnancy or pre-urologic-procedure settings: it does not reduce future UTI and may",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for complicated urinary tract infection."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "complicated-uti-real-image",
+      "title": "Complicated Urinary Tract Infection: Diagnostic Renal Ultrasonography",
+      "type": "ultrasound",
+      "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
+      "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
+      "annotations": [
+        {
+          "label": "Renal Cortex",
+          "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
+        },
+        {
+          "label": "Corticomedullary Junction",
+          "description": "Medullary pyramid definition and structural architecture."
+        },
+        {
+          "label": "Collecting System",
+          "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+        }
+      ]
+    }
+  ]
 }

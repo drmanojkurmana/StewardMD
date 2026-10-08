@@ -1,75 +1,170 @@
 {
-  "id": "morgagni_hernia",
-  "name": "Morgagni hernia",
-  "aliases": [
-    "retrosternal diaphragmatic hernia",
-    "anterior diaphragmatic hernia",
-    "foramen of Morgagni hernia"
+ "id": "morgagni_hernia",
+ "name": "Morgagni hernia",
+ "aliases": [
+  "retrosternal diaphragmatic hernia",
+  "anterior diaphragmatic hernia",
+  "foramen of Morgagni hernia"
+ ],
+ "class": "non_infective",
+ "system": "Respiratory / Thoracic",
+ "specialty": "Respiratory / Thoracic Surgery",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Shields' General Thoracic Surgery",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A congenital anterior diaphragmatic hernia through the retrosternal foramen of Morgagni, usually on the right side",
+   "The least common type of congenital diaphragmatic hernia and often presents late in adulthood, frequently as an incidental finding",
+   "May contain omentum, transverse colon, stomach, or liver within a peritoneal sac",
+   "Appears on a chest radiograph as a well-defined right cardiophrenic angle mass or opacity",
+   "CT confirms the diagnosis by showing herniated abdominal contents, often with a characteristic band of omental fat and vessels crossing the defect",
+   "Symptoms, when present, include vague chest or upper abdominal discomfort, cough, or gastrointestinal symptoms from herniated bowel",
+   "Surgical repair is generally recommended even when asymptomatic because of the risk of incarceration or strangulation of contents"
   ],
-  "class": "non_infective",
-  "system": "Respiratory / Thoracic",
-  "specialty": "Respiratory / Thoracic Surgery",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Shields' General Thoracic Surgery",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A congenital anterior diaphragmatic hernia through the retrosternal foramen of Morgagni, usually on the right side",
-      "The least common type of congenital diaphragmatic hernia and often presents late in adulthood, frequently as an incidental finding",
-      "May contain omentum, transverse colon, stomach, or liver within a peritoneal sac",
-      "Appears on a chest radiograph as a well-defined right cardiophrenic angle mass or opacity",
-      "CT confirms the diagnosis by showing herniated abdominal contents, often with a characteristic band of omental fat and vessels crossing the defect",
-      "Symptoms, when present, include vague chest or upper abdominal discomfort, cough, or gastrointestinal symptoms from herniated bowel",
-      "Surgical repair is generally recommended even when asymptomatic because of the risk of incarceration or strangulation of contents"
+  "pathophysiology": "The foramen of Morgagni is a small anterior triangular gap between the sternal and costal muscular origins of the diaphragm, where the superior epigastric vessels pass. A congenital weakness or failure of muscular fusion at this point leaves a retrosternal defect through which abdominal contents, carried within a peritoneal sac, can herniate into the thorax. Raised intra-abdominal pressure from obesity, pregnancy, constipation, or exertion promotes progressive herniation, which is why many cases only become apparent in adult life. Herniated omentum or bowel is usually asymptomatic but can become obstructed, incarcerated, or strangulated.",
+  "additionalDifferentials": [
+   "Pericardial fat pad",
+   "Pericardial cyst",
+   "Anterior mediastinal mass or thymic lesion",
+   "Bochdalek (posterolateral) diaphragmatic hernia",
+   "Diaphragmatic eventration",
+   "Lung or pleural-based mass at the cardiophrenic angle"
+  ],
+  "additionalInvestigations": [
+   "Chest radiograph showing a right cardiophrenic angle opacity",
+   "Contrast-enhanced CT of the thorax and abdomen to confirm herniated contents and the fatty band sign",
+   "Contrast studies of the gastrointestinal tract when bowel is thought to be involved",
+   "MRI in selected cases to characterise soft-tissue contents",
+   "Assessment for associated congenital anomalies in younger patients"
+  ],
+  "redFlags": [
+   "Acute obstruction, incarceration, or strangulation of herniated bowel with pain and vomiting",
+   "Signs of ischaemia of herniated contents",
+   "Respiratory compromise from a large hernia",
+   "Rapidly increasing size of a cardiophrenic mass"
+  ],
+  "prognosis": "The outlook after elective repair is excellent with low recurrence, whereas emergency presentation with incarceration or strangulation carries higher morbidity, which is the rationale for repairing even asymptomatic hernias.",
+  "pitfalls": [
+   "Mistaking the hernia for a benign pericardial fat pad or cyst and leaving it unassessed",
+   "Failing to recognise herniated bowel at risk of obstruction",
+   "Overlooking the diagnosis on a plain radiograph and attributing the opacity to a mediastinal mass",
+   "Underestimating the risk of complications when advising conservative management"
+  ],
+  "references": [
+   "Shields' General Thoracic Surgery",
+   "Murray & Nadel's Textbook of Respiratory Medicine"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Surgical repair is the definitive treatment and is generally recommended even when asymptomatic because of the risk of obstruction and strangulation, comprising reduction of contents, excision of the peritoneal sac and closure of the retrosternal defect by an open or minimally invasive laparoscopic or thoracoscopic approach, with mesh reinforcement for large defects",
+   "Emergency surgery for incarceration, strangulation or bowel obstruction",
+   "Preoperative confirmation and operative planning with contrast-enhanced CT of the thorax and abdomen",
+   "Assess for associated congenital anomalies in paediatric presentations",
+   "Perioperative supportive care with postoperative follow-up to detect the uncommon recurrence"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "morgagni_hernia-pathway",
+   "title": "Morgagni hernia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A congenital anterior diaphragmatic hernia through the retrosternal foramen of Morgagni, usually on the right side",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Acute obstruction, incarceration, or strangulation of herniated bowel with pain and vomiting",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Chest radiograph showing a right cardiophrenic angle opacity, Contrast-enhanced CT of the thorax and abdomen to confirm herniated contents and the fatty band sign, Contrast studies of the gastrointestinal tract when bowel"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Surgical repair is the definitive treatment and is generally recommended even when asymptomatic because of the risk of obstruction and strangulation, comprising reduction of contents, excision of the peritoneal sac and"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking the hernia for a benign pericardial fat pad or cyst and leaving it unassessed"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of morgagni hernia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "morgagni_hernia-matrix",
+   "title": "Morgagni hernia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A congenital anterior diaphragmatic hernia through the retrosternal foramen of Morgagni, usually on the right side",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "The foramen of Morgagni is a small anterior triangular gap between the sternal and costal muscular origins of the diaphragm, where the superior epigastric vessels pass. A congenital weakness or failure of muscular fusion at this point leaves a retrosternal defect through which abdominal contents, carried within a peritoneal sac, can herniate into the thorax. Raised intra-abdominal pressure from obesity, pregnancy, constipation, or exertion promotes progressive herniation, which is why many cases only become apparent in adult life. Herniated omentum or bowel is usually asymptomatic but can become obstructed, incarcerated, or strangulated.",
-    "additionalDifferentials": [
-      "Pericardial fat pad",
-      "Pericardial cyst",
-      "Anterior mediastinal mass or thymic lesion",
-      "Bochdalek (posterolateral) diaphragmatic hernia",
-      "Diaphragmatic eventration",
-      "Lung or pleural-based mass at the cardiophrenic angle"
+    [
+     "Key Investigations",
+     "Chest radiograph showing a right cardiophrenic angle opacity, Contrast-enhanced CT of the thorax and abdomen to confirm herniated",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Chest radiograph showing a right cardiophrenic angle opacity",
-      "Contrast-enhanced CT of the thorax and abdomen to confirm herniated contents and the fatty band sign",
-      "Contrast studies of the gastrointestinal tract when bowel is thought to be involved",
-      "MRI in selected cases to characterise soft-tissue contents",
-      "Assessment for associated congenital anomalies in younger patients"
+    [
+     "Primary Differentials",
+     "Pericardial fat pad, Pericardial cyst, Anterior mediastinal mass or thymic lesion",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Acute obstruction, incarceration, or strangulation of herniated bowel with pain and vomiting",
-      "Signs of ischaemia of herniated contents",
-      "Respiratory compromise from a large hernia",
-      "Rapidly increasing size of a cardiophrenic mass"
+    [
+     "Management Strategy",
+     "Surgical repair is the definitive treatment and is generally recommended even when asymptomatic because of the risk of",
+     "Core treatment modality"
     ],
-    "prognosis": "The outlook after elective repair is excellent with low recurrence, whereas emergency presentation with incarceration or strangulation carries higher morbidity, which is the rationale for repairing even asymptomatic hernias.",
-    "pitfalls": [
-      "Mistaking the hernia for a benign pericardial fat pad or cyst and leaving it unassessed",
-      "Failing to recognise herniated bowel at risk of obstruction",
-      "Overlooking the diagnosis on a plain radiograph and attributing the opacity to a mediastinal mass",
-      "Underestimating the risk of complications when advising conservative management"
-    ],
-    "references": [
-      "Shields' General Thoracic Surgery",
-      "Murray & Nadel's Textbook of Respiratory Medicine"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Surgical repair is the definitive treatment and is generally recommended even when asymptomatic because of the risk of obstruction and strangulation, comprising reduction of contents, excision of the peritoneal sac and closure of the retrosternal defect by an open or minimally invasive laparoscopic or thoracoscopic approach, with mesh reinforcement for large defects",
-      "Emergency surgery for incarceration, strangulation or bowel obstruction",
-      "Preoperative confirmation and operative planning with contrast-enhanced CT of the thorax and abdomen",
-      "Assess for associated congenital anomalies in paediatric presentations",
-      "Perioperative supportive care with postoperative follow-up to detect the uncommon recurrence"
+    [
+     "Clinical Pitfall",
+     "Mistaking the hernia for a benign pericardial fat pad or cyst and leaving it unassessed",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for morgagni hernia."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "morgagni-hernia-real-image",
+   "title": "Morgagni hernia: Diagnostic Chest Radiograph",
+   "type": "xray",
+   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
+   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
+   "annotations": [
+    {
+     "label": "Parenchyma & Airspaces",
+     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
+    },
+    {
+     "label": "Bronchovascular Tree",
+     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
+    },
+    {
+     "label": "Pleural Margins",
+     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+    }
+   ]
+  }
+ ]
 }

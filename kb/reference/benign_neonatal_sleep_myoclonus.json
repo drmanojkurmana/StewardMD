@@ -1,79 +1,174 @@
 {
-  "id": "benign_neonatal_sleep_myoclonus",
-  "name": "Benign neonatal sleep myoclonus",
-  "aliases": [
-    "benign neonatal sleep myoclonus",
-    "benign sleep myoclonus of infancy"
+ "id": "benign_neonatal_sleep_myoclonus",
+ "name": "Benign neonatal sleep myoclonus",
+ "aliases": [
+  "benign neonatal sleep myoclonus",
+  "benign sleep myoclonus of infancy"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system",
+ "specialty": "Paediatric neurology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Volpe's Neurology of the Newborn / Swaiman's Pediatric Neurology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A benign non-epileptic movement disorder of the newborn characterised by myoclonic jerks occurring exclusively during sleep",
+   "Onset is typically in the first days to weeks of life in an otherwise healthy neonate, with spontaneous resolution usually by 2-4 months of age",
+   "Jerks are bilateral or multifocal and often rhythmic, involving the limbs (especially the distal upper limbs) and sometimes the trunk or face, occurring in clusters during quiet (non-REM) sleep",
+   "The defining feature is that myoclonus occurs only during sleep and stops abruptly and reliably on waking the infant",
+   "Movements may be intensified rather than suppressed by gentle restraint, and rocking or benzodiazepines can paradoxically worsen them",
+   "Neurological examination, development and the interictal EEG are normal, and the ictal EEG during the jerks shows no epileptiform correlate",
+   "Diagnosis is clinical, strongly supported by a home video showing sleep-only jerks that cease on arousal; further investigation is usually unnecessary",
+   "Recognition avoids unnecessary antiepileptic treatment, invasive investigation and parental anxiety"
   ],
-  "class": "non_infective",
-  "system": "Nervous system",
-  "specialty": "Paediatric neurology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Volpe's Neurology of the Newborn / Swaiman's Pediatric Neurology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A benign non-epileptic movement disorder of the newborn characterised by myoclonic jerks occurring exclusively during sleep",
-      "Onset is typically in the first days to weeks of life in an otherwise healthy neonate, with spontaneous resolution usually by 2-4 months of age",
-      "Jerks are bilateral or multifocal and often rhythmic, involving the limbs (especially the distal upper limbs) and sometimes the trunk or face, occurring in clusters during quiet (non-REM) sleep",
-      "The defining feature is that myoclonus occurs only during sleep and stops abruptly and reliably on waking the infant",
-      "Movements may be intensified rather than suppressed by gentle restraint, and rocking or benzodiazepines can paradoxically worsen them",
-      "Neurological examination, development and the interictal EEG are normal, and the ictal EEG during the jerks shows no epileptiform correlate",
-      "Diagnosis is clinical, strongly supported by a home video showing sleep-only jerks that cease on arousal; further investigation is usually unnecessary",
-      "Recognition avoids unnecessary antiepileptic treatment, invasive investigation and parental anxiety"
+  "pathophysiology": "The precise mechanism is unknown but is presumed to reflect transient immaturity of brainstem and spinal motor control and of serotonergic pathways that regulate sleep-related motor activity in the developing nervous system. The strict confinement to sleep and the reliable cessation on arousal indicate a non-epileptic, subcortical generator (most likely brainstem or spinal) rather than a cortical epileptic process. The disorder is self-limiting and resolves as the nervous system matures.",
+  "additionalDifferentials": [
+   "Neonatal seizures, particularly clonic or myoclonic seizures",
+   "Early myoclonic encephalopathy and early infantile epileptic encephalopathy",
+   "Jitteriness or tremulousness of the newborn",
+   "Hyperekplexia with exaggerated startle",
+   "Neonatal drug withdrawal causing tremor or myoclonus",
+   "Metabolic disturbance such as hypocalcaemia or hypoglycaemia causing jerks"
+  ],
+  "additionalInvestigations": [
+   "Home video demonstrating sleep-only jerks that stop on arousal",
+   "Bedside demonstration that gently waking the infant abolishes the movements",
+   "EEG (interictal and, where possible, ictal) which is normal without epileptiform discharge",
+   "Basic metabolic screen including glucose, calcium and electrolytes if there is any doubt",
+   "Neurological examination confirming normal tone, reflexes and development",
+   "Neuroimaging reserved for atypical cases or an abnormal examination"
+  ],
+  "redFlags": [
+   "Jerks that persist or occur during wakefulness",
+   "Abnormal neurological examination, encephalopathy or poor feeding",
+   "Failure to abolish the movements by waking the infant",
+   "Associated apnoea, colour change or autonomic features",
+   "Developmental delay or regression, or persistence beyond several months"
+  ],
+  "prognosis": "The outlook is excellent; it is a self-limiting benign condition that resolves spontaneously within the first few months of life with a normal neurodevelopmental outcome.",
+  "pitfalls": [
+   "Misdiagnosis as neonatal seizures leading to unnecessary antiepileptic drugs and investigation",
+   "Attempting to suppress the jerks by restraint, which can worsen them",
+   "Prescribing benzodiazepines, which may paradoxically increase the myoclonus",
+   "Not obtaining a home video to demonstrate the sleep-only, arousal-abolished pattern",
+   "Overlooking hyperekplexia or a metabolic cause when features are atypical"
+  ],
+  "references": [
+   "Volpe's Neurology of the Newborn",
+   "Swaiman's Pediatric Neurology: Principles and Practice"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Reassure parents that this is a benign self-limiting condition confined to sleep that resolves as the nervous system matures",
+   "Withhold antiepileptic drugs, recognising that benzodiazepines may paradoxically worsen the jerks",
+   "Confirm the diagnosis at the bedside by demonstrating that gently arousing the infant reliably abolishes the movements, supported by a normal EEG",
+   "Avoid gentle restraint or rocking, which can intensify rather than settle the myoclonus",
+   "Undertake developmental and neurological follow-up to confirm normal progress",
+   "Reconsider the diagnosis with EEG and metabolic screening if jerks persist into wakefulness or the examination becomes abnormal"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "benign_neonatal_sleep_myoclonus-pathway",
+   "title": "Benign neonatal sleep myoclonus: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A benign non-epileptic movement disorder of the newborn characterised by myoclonic jerks occurring exclusively during sleep",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Jerks that persist or occur during wakefulness",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Home video demonstrating sleep-only jerks that stop on arousal, Bedside demonstration that gently waking the infant abolishes the movements, EEG (interictal and, where possible, ictal) which is normal without epileptiform"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Reassure parents that this is a benign self-limiting condition confined to sleep that resolves as the nervous system matures"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Misdiagnosis as neonatal seizures leading to unnecessary antiepileptic drugs and investigation"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of benign neonatal sleep myoclonus."
+  }
+ ],
+ "tables": [
+  {
+   "id": "benign_neonatal_sleep_myoclonus-matrix",
+   "title": "Benign neonatal sleep myoclonus: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A benign non-epileptic movement disorder of the newborn characterised by myoclonic jerks occurring exclusively during sleep",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "The precise mechanism is unknown but is presumed to reflect transient immaturity of brainstem and spinal motor control and of serotonergic pathways that regulate sleep-related motor activity in the developing nervous system. The strict confinement to sleep and the reliable cessation on arousal indicate a non-epileptic, subcortical generator (most likely brainstem or spinal) rather than a cortical epileptic process. The disorder is self-limiting and resolves as the nervous system matures.",
-    "additionalDifferentials": [
-      "Neonatal seizures, particularly clonic or myoclonic seizures",
-      "Early myoclonic encephalopathy and early infantile epileptic encephalopathy",
-      "Jitteriness or tremulousness of the newborn",
-      "Hyperekplexia with exaggerated startle",
-      "Neonatal drug withdrawal causing tremor or myoclonus",
-      "Metabolic disturbance such as hypocalcaemia or hypoglycaemia causing jerks"
+    [
+     "Key Investigations",
+     "Home video demonstrating sleep-only jerks that stop on arousal, Bedside demonstration that gently waking the infant abolishes the",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Home video demonstrating sleep-only jerks that stop on arousal",
-      "Bedside demonstration that gently waking the infant abolishes the movements",
-      "EEG (interictal and, where possible, ictal) which is normal without epileptiform discharge",
-      "Basic metabolic screen including glucose, calcium and electrolytes if there is any doubt",
-      "Neurological examination confirming normal tone, reflexes and development",
-      "Neuroimaging reserved for atypical cases or an abnormal examination"
+    [
+     "Primary Differentials",
+     "Neonatal seizures, particularly clonic or myoclonic seizures, Early myoclonic encephalopathy and early infantile epileptic",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Jerks that persist or occur during wakefulness",
-      "Abnormal neurological examination, encephalopathy or poor feeding",
-      "Failure to abolish the movements by waking the infant",
-      "Associated apnoea, colour change or autonomic features",
-      "Developmental delay or regression, or persistence beyond several months"
+    [
+     "Management Strategy",
+     "Reassure parents that this is a benign self-limiting condition confined to sleep that resolves as the nervous system matures",
+     "Core treatment modality"
     ],
-    "prognosis": "The outlook is excellent; it is a self-limiting benign condition that resolves spontaneously within the first few months of life with a normal neurodevelopmental outcome.",
-    "pitfalls": [
-      "Misdiagnosis as neonatal seizures leading to unnecessary antiepileptic drugs and investigation",
-      "Attempting to suppress the jerks by restraint, which can worsen them",
-      "Prescribing benzodiazepines, which may paradoxically increase the myoclonus",
-      "Not obtaining a home video to demonstrate the sleep-only, arousal-abolished pattern",
-      "Overlooking hyperekplexia or a metabolic cause when features are atypical"
-    ],
-    "references": [
-      "Volpe's Neurology of the Newborn",
-      "Swaiman's Pediatric Neurology: Principles and Practice"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Reassure parents that this is a benign self-limiting condition confined to sleep that resolves as the nervous system matures",
-      "Withhold antiepileptic drugs, recognising that benzodiazepines may paradoxically worsen the jerks",
-      "Confirm the diagnosis at the bedside by demonstrating that gently arousing the infant reliably abolishes the movements, supported by a normal EEG",
-      "Avoid gentle restraint or rocking, which can intensify rather than settle the myoclonus",
-      "Undertake developmental and neurological follow-up to confirm normal progress",
-      "Reconsider the diagnosis with EEG and metabolic screening if jerks persist into wakefulness or the examination becomes abnormal"
+    [
+     "Clinical Pitfall",
+     "Misdiagnosis as neonatal seizures leading to unnecessary antiepileptic drugs and investigation",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for benign neonatal sleep myoclonus."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "benign-neonatal-sleep-myoclonus-real-image",
+   "title": "Benign neonatal sleep myoclonus: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

@@ -1,79 +1,174 @@
 {
-  "id": "spinal_epidural_lipomatosis",
-  "name": "Spinal epidural lipomatosis",
-  "aliases": [
-    "SEL",
-    "epidural lipomatosis",
-    "epidural fat overgrowth",
-    "spinal epidural lipomatous hypertrophy"
+ "id": "spinal_epidural_lipomatosis",
+ "name": "Spinal epidural lipomatosis",
+ "aliases": [
+  "SEL",
+  "epidural lipomatosis",
+  "epidural fat overgrowth",
+  "spinal epidural lipomatous hypertrophy"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal / Spine",
+ "specialty": "Spinal Surgery / Neurosurgery",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Rothman-Simeone and Herkowitz's The Spine",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Pathological overgrowth of normal, unencapsulated fat in the epidural space that can compress the thecal sac and nerve roots",
+   "Strongly associated with exogenous corticosteroid excess (long-term steroid therapy or Cushing syndrome) and with obesity",
+   "Most often affects the thoracic and lumbar spine",
+   "Presentations include back pain, radiculopathy, neurogenic claudication, and, in severe thoracic disease, myelopathy",
+   "MRI is diagnostic, showing abundant high-T1-signal epidural fat compressing the sac, classically in a stellate or Y-shaped pattern in the lumbar region",
+   "Identifying and reversing the underlying cause is central to management",
+   "First-line treatment is conservative, with weight reduction and tapering or stopping exogenous corticosteroids where possible",
+   "Surgical decompression with debulking of epidural fat is reserved for severe neurological compromise or failure of conservative measures"
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal / Spine",
-  "specialty": "Spinal Surgery / Neurosurgery",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Rothman-Simeone and Herkowitz's The Spine",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Pathological overgrowth of normal, unencapsulated fat in the epidural space that can compress the thecal sac and nerve roots",
-      "Strongly associated with exogenous corticosteroid excess (long-term steroid therapy or Cushing syndrome) and with obesity",
-      "Most often affects the thoracic and lumbar spine",
-      "Presentations include back pain, radiculopathy, neurogenic claudication, and, in severe thoracic disease, myelopathy",
-      "MRI is diagnostic, showing abundant high-T1-signal epidural fat compressing the sac, classically in a stellate or Y-shaped pattern in the lumbar region",
-      "Identifying and reversing the underlying cause is central to management",
-      "First-line treatment is conservative, with weight reduction and tapering or stopping exogenous corticosteroids where possible",
-      "Surgical decompression with debulking of epidural fat is reserved for severe neurological compromise or failure of conservative measures"
+  "pathophysiology": "Spinal epidural lipomatosis is the abnormal accumulation of histologically normal adipose tissue within the epidural space. It is most commonly driven by states of corticosteroid excess, whether from prolonged exogenous steroid use or endogenous Cushing syndrome, and by obesity, although idiopathic cases are also described. The excess fat encroaches on the limited epidural space and compresses the thecal sac and its neural contents. In the lumbar region the compressed sac takes on a characteristic stellate or Y-shaped configuration, whereas thoracic disease can compress the cord and cause myelopathy.",
+  "additionalDifferentials": [
+   "Lumbar spinal stenosis from disc, facet, and ligamentum changes",
+   "Epidural haematoma or abscess",
+   "Epidural tumour, metastasis, or lymphoma",
+   "Disc herniation with canal compromise",
+   "Arachnoiditis",
+   "Angiolipoma or other epidural fatty tumour"
+  ],
+  "additionalInvestigations": [
+   "MRI of the spine as the diagnostic test, showing excess high-T1-signal epidural fat compressing the sac",
+   "CT demonstrating low-attenuation epidural fat when MRI is unavailable",
+   "Review of corticosteroid exposure and assessment for Cushing syndrome",
+   "Metabolic and endocrine work-up, including for hypercortisolism, where clinically indicated",
+   "Assessment of body-mass index and obesity-related comorbidities"
+  ],
+  "redFlags": [
+   "Progressive myelopathy or cauda equina features such as saddle anaesthesia and sphincter dysfunction",
+   "Rapidly progressive neurological deficit",
+   "Severe canal compromise on imaging with neurological signs"
+  ],
+  "prognosis": "Symptoms often stabilise or improve when the underlying cause is addressed, notably with weight loss and reduction of corticosteroids; severe or myelopathic cases may need surgery, after which outcomes depend on the degree and duration of pre-operative compression.",
+  "pitfalls": [
+   "Failing to review and reduce exogenous corticosteroids as the treatable driver",
+   "Overlooking undiagnosed Cushing syndrome",
+   "Attributing canal compromise solely to degenerative stenosis and missing the excess epidural fat"
+  ],
+  "references": [
+   "Rothman-Simeone and Herkowitz's The Spine",
+   "Fogel et al: Spinal epidural lipomatosis review, The Spine Journal"
+  ],
+  "crossLinks": [
+   "lumbar_spinal_stenosis",
+   "cervical_spondylotic_myelopathy"
+  ],
+  "management": [
+   "Identify and reverse the underlying cause by tapering exogenous corticosteroids where possible and treating endogenous Cushing syndrome",
+   "Institute structured weight loss and management of obesity-related comorbidities as the cornerstone in obese patients",
+   "Provide analgesia and physiotherapy for back pain, radiculopathy and neurogenic claudication",
+   "Reserve surgical decompression, such as laminectomy with debulking of epidural fat, for severe, progressive or myelopathic disease",
+   "Monitor neurological status and repeat MRI to track the epidural fat burden and response to cause-directed treatment",
+   "Refer to endocrinology for hypercortisolism assessment and to spinal surgery for compressive or myelopathic presentations"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "spinal_epidural_lipomatosis-pathway",
+   "title": "Spinal epidural lipomatosis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Pathological overgrowth of normal, unencapsulated fat in the epidural space that can compress the thecal sac and nerve roots",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Progressive myelopathy or cauda equina features such as saddle anaesthesia and sphincter dysfunction",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: MRI of the spine as the diagnostic test, showing excess high-T1-signal epidural fat compressing the sac, CT demonstrating low-attenuation epidural fat when MRI is unavailable, Review of corticosteroid exposure and"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Identify and reverse the underlying cause by tapering exogenous corticosteroids where possible and treating endogenous Cushing syndrome"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Failing to review and reduce exogenous corticosteroids as the treatable driver"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of spinal epidural lipomatosis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "spinal_epidural_lipomatosis-matrix",
+   "title": "Spinal epidural lipomatosis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Pathological overgrowth of normal, unencapsulated fat in the epidural space that can compress the thecal sac and nerve roots",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Spinal epidural lipomatosis is the abnormal accumulation of histologically normal adipose tissue within the epidural space. It is most commonly driven by states of corticosteroid excess, whether from prolonged exogenous steroid use or endogenous Cushing syndrome, and by obesity, although idiopathic cases are also described. The excess fat encroaches on the limited epidural space and compresses the thecal sac and its neural contents. In the lumbar region the compressed sac takes on a characteristic stellate or Y-shaped configuration, whereas thoracic disease can compress the cord and cause myelopathy.",
-    "additionalDifferentials": [
-      "Lumbar spinal stenosis from disc, facet, and ligamentum changes",
-      "Epidural haematoma or abscess",
-      "Epidural tumour, metastasis, or lymphoma",
-      "Disc herniation with canal compromise",
-      "Arachnoiditis",
-      "Angiolipoma or other epidural fatty tumour"
+    [
+     "Key Investigations",
+     "MRI of the spine as the diagnostic test, showing excess high-T1-signal epidural fat compressing the sac, CT demonstrating",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "MRI of the spine as the diagnostic test, showing excess high-T1-signal epidural fat compressing the sac",
-      "CT demonstrating low-attenuation epidural fat when MRI is unavailable",
-      "Review of corticosteroid exposure and assessment for Cushing syndrome",
-      "Metabolic and endocrine work-up, including for hypercortisolism, where clinically indicated",
-      "Assessment of body-mass index and obesity-related comorbidities"
+    [
+     "Primary Differentials",
+     "Lumbar spinal stenosis from disc, facet, and ligamentum changes, Epidural haematoma or abscess, Epidural tumour, metastasis, or",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Progressive myelopathy or cauda equina features such as saddle anaesthesia and sphincter dysfunction",
-      "Rapidly progressive neurological deficit",
-      "Severe canal compromise on imaging with neurological signs"
+    [
+     "Management Strategy",
+     "Identify and reverse the underlying cause by tapering exogenous corticosteroids where possible and treating endogenous Cushing",
+     "Core treatment modality"
     ],
-    "prognosis": "Symptoms often stabilise or improve when the underlying cause is addressed, notably with weight loss and reduction of corticosteroids; severe or myelopathic cases may need surgery, after which outcomes depend on the degree and duration of pre-operative compression.",
-    "pitfalls": [
-      "Failing to review and reduce exogenous corticosteroids as the treatable driver",
-      "Overlooking undiagnosed Cushing syndrome",
-      "Attributing canal compromise solely to degenerative stenosis and missing the excess epidural fat"
-    ],
-    "references": [
-      "Rothman-Simeone and Herkowitz's The Spine",
-      "Fogel et al: Spinal epidural lipomatosis review, The Spine Journal"
-    ],
-    "crossLinks": [
-      "lumbar_spinal_stenosis",
-      "cervical_spondylotic_myelopathy"
-    ],
-    "management": [
-      "Identify and reverse the underlying cause by tapering exogenous corticosteroids where possible and treating endogenous Cushing syndrome",
-      "Institute structured weight loss and management of obesity-related comorbidities as the cornerstone in obese patients",
-      "Provide analgesia and physiotherapy for back pain, radiculopathy and neurogenic claudication",
-      "Reserve surgical decompression, such as laminectomy with debulking of epidural fat, for severe, progressive or myelopathic disease",
-      "Monitor neurological status and repeat MRI to track the epidural fat burden and response to cause-directed treatment",
-      "Refer to endocrinology for hypercortisolism assessment and to spinal surgery for compressive or myelopathic presentations"
+    [
+     "Clinical Pitfall",
+     "Failing to review and reduce exogenous corticosteroids as the treatable driver",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for spinal epidural lipomatosis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "spinal-epidural-lipomatosis-real-image",
+   "title": "Spinal epidural lipomatosis: Diagnostic Head Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
+   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
+   "annotations": [
+    {
+     "label": "Cerebral Parenchyma",
+     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+    },
+    {
+     "label": "Extra-Axial Spaces",
+     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+    }
+   ]
+  }
+ ]
 }

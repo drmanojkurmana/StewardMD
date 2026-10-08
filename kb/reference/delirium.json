@@ -1,80 +1,175 @@
 {
-  "id": "delirium",
-  "name": "Delirium",
-  "aliases": [
-    "acute confusional state",
-    "acute brain syndrome",
-    "toxic-metabolic encephalopathy (psychiatric framing)"
+ "id": "delirium",
+ "name": "Delirium",
+ "aliases": [
+  "acute confusional state",
+  "acute brain syndrome",
+  "toxic-metabolic encephalopathy (psychiatric framing)"
+ ],
+ "class": "non_infective",
+ "system": "Psychiatry / Mental health",
+ "specialty": "Psychiatry",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "An acute, fluctuating disturbance of attention and awareness accompanied by additional cognitive changes such as disorientation, memory deficit, or perceptual disturbance",
+   "Onset is acute (hours to days) and the course typically fluctuates over the day, often with worsening in the evening and at night (sundowning)",
+   "It is a direct physiological consequence of a medical condition, substance intoxication or withdrawal, medication, or multiple causes, and is best regarded as acute brain failure",
+   "Recognised as hyperactive, hypoactive, or mixed; the hypoactive form is easily missed and carries a worse prognosis",
+   "The essential intervention is identifying and treating the underlying cause and reviewing offending medications, together with supportive care",
+   "Non-pharmacological measures are first-line: reorientation, sensory aids, sleep-wake regulation, mobilisation, hydration, and a calm familiar environment",
+   "Antipsychotics are reserved for severe agitation or distress that threatens safety, at the lowest effective level, while benzodiazepines are generally avoided except in alcohol or sedative withdrawal",
+   "Distinguish from dementia (chronic, stable, with preserved alertness early) and from primary psychiatric illness; delirium can be superimposed on dementia"
   ],
-  "class": "non_infective",
-  "system": "Psychiatry / Mental health",
-  "specialty": "Psychiatry",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "An acute, fluctuating disturbance of attention and awareness accompanied by additional cognitive changes such as disorientation, memory deficit, or perceptual disturbance",
-      "Onset is acute (hours to days) and the course typically fluctuates over the day, often with worsening in the evening and at night (sundowning)",
-      "It is a direct physiological consequence of a medical condition, substance intoxication or withdrawal, medication, or multiple causes, and is best regarded as acute brain failure",
-      "Recognised as hyperactive, hypoactive, or mixed; the hypoactive form is easily missed and carries a worse prognosis",
-      "The essential intervention is identifying and treating the underlying cause and reviewing offending medications, together with supportive care",
-      "Non-pharmacological measures are first-line: reorientation, sensory aids, sleep-wake regulation, mobilisation, hydration, and a calm familiar environment",
-      "Antipsychotics are reserved for severe agitation or distress that threatens safety, at the lowest effective level, while benzodiazepines are generally avoided except in alcohol or sedative withdrawal",
-      "Distinguish from dementia (chronic, stable, with preserved alertness early) and from primary psychiatric illness; delirium can be superimposed on dementia"
+  "pathophysiology": "Delirium reflects diffuse, usually reversible cerebral dysfunction arising from systemic insults. Proposed mechanisms include neurotransmitter imbalance (notably cholinergic deficiency and dopaminergic excess), neuroinflammation, impaired oxidative metabolism, and disruption of neuronal networks supporting attention and arousal. Common precipitants include infection, hypoxia, metabolic and electrolyte derangements, drug effects and withdrawal, and the disorder is often multifactorial in vulnerable individuals such as the elderly.",
+  "additionalDifferentials": [
+   "Dementia and other major neurocognitive disorders",
+   "Depression, especially where hypoactive delirium mimics low mood",
+   "Acute psychosis or mania",
+   "Non-convulsive status epilepticus",
+   "Wernicke encephalopathy",
+   "Alcohol or sedative withdrawal states",
+   "Focal neurological events such as stroke"
+  ],
+  "additionalInvestigations": [
+   "Bedside attention testing and validated delirium screening instruments",
+   "Search for precipitants: infection screen, oxygenation, glucose, electrolytes, renal and liver function",
+   "Medication review for deliriogenic drugs",
+   "Neuroimaging when a structural cause is suspected",
+   "EEG if non-convulsive seizures are considered"
+  ],
+  "redFlags": [
+   "Underlying life-threatening cause such as sepsis, hypoxia, or hypoglycaemia",
+   "Sudden focal neurological signs suggesting stroke or intracranial pathology",
+   "Delirium tremens or severe withdrawal states",
+   "Profound hypoactive delirium with reduced consciousness and aspiration risk"
+  ],
+  "prognosis": "Delirium often resolves once the precipitant is treated, but it is associated with prolonged hospital stay, functional decline, increased risk of subsequent dementia, and higher mortality, particularly in older and hypoactive cases. Recovery can be incomplete and protracted in vulnerable patients.",
+  "pitfalls": [
+   "Missing hypoactive delirium and mislabelling it as depression or fatigue",
+   "Attributing acute confusion to dementia and failing to seek a reversible cause",
+   "Using benzodiazepines routinely and worsening confusion (outside alcohol or sedative withdrawal)",
+   "Sedating agitation without identifying and treating the underlying medical trigger",
+   "Overlooking medication and polypharmacy as precipitants"
+  ],
+  "references": [
+   "Kaplan & Sadock's Synopsis of Psychiatry",
+   "DSM-5-TR"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Identify and treat the underlying precipitant(s) — infection, hypoxia, metabolic or electrolyte derangement, urinary retention, constipation and pain — as the essential intervention",
+   "Review and rationalise medications, withdrawing deliriogenic drugs and managing substance intoxication or withdrawal",
+   "First-line multicomponent non-pharmacological care: reorientation, sensory aids such as glasses and hearing aids, sleep-wake regulation, early mobilisation, hydration and a calm, familiar environment",
+   "Reserve short-term low-dose antipsychotics such as haloperidol for severe agitation or distress posing a safety risk, using benzodiazepines only for alcohol or sedative withdrawal",
+   "Ensure patient and staff safety, avoiding physical restraint where possible, and attend to hydration and nutrition",
+   "Monitor attention and cognition with validated screening tools, tracking resolution and actively seeking the easily missed hypoactive form",
+   "Multidisciplinary care with follow-up and discharge planning given the risks of functional decline and subsequent dementia"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "delirium-pathway",
+   "title": "Delirium: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "An acute, fluctuating disturbance of attention and awareness accompanied by additional cognitive changes such as disorientation, memory deficit, or perceptual disturbance",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Underlying life-threatening cause such as sepsis, hypoxia, or hypoglycaemia",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Bedside attention testing and validated delirium screening instruments, Search for precipitants: infection screen, oxygenation, glucose, electrolytes, renal and liver function, Medication review for deliriogenic drugs"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Identify and treat the underlying precipitant(s) - infection, hypoxia, metabolic or electrolyte derangement, urinary retention, constipation and pain - as the essential intervention"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Missing hypoactive delirium and mislabelling it as depression or fatigue"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of delirium."
+  }
+ ],
+ "tables": [
+  {
+   "id": "delirium-matrix",
+   "title": "Delirium: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "An acute, fluctuating disturbance of attention and awareness accompanied by additional cognitive changes such as disorientation,",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Delirium reflects diffuse, usually reversible cerebral dysfunction arising from systemic insults. Proposed mechanisms include neurotransmitter imbalance (notably cholinergic deficiency and dopaminergic excess), neuroinflammation, impaired oxidative metabolism, and disruption of neuronal networks supporting attention and arousal. Common precipitants include infection, hypoxia, metabolic and electrolyte derangements, drug effects and withdrawal, and the disorder is often multifactorial in vulnerable individuals such as the elderly.",
-    "additionalDifferentials": [
-      "Dementia and other major neurocognitive disorders",
-      "Depression, especially where hypoactive delirium mimics low mood",
-      "Acute psychosis or mania",
-      "Non-convulsive status epilepticus",
-      "Wernicke encephalopathy",
-      "Alcohol or sedative withdrawal states",
-      "Focal neurological events such as stroke"
+    [
+     "Key Investigations",
+     "Bedside attention testing and validated delirium screening instruments, Search for precipitants: infection screen, oxygenation,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Bedside attention testing and validated delirium screening instruments",
-      "Search for precipitants: infection screen, oxygenation, glucose, electrolytes, renal and liver function",
-      "Medication review for deliriogenic drugs",
-      "Neuroimaging when a structural cause is suspected",
-      "EEG if non-convulsive seizures are considered"
+    [
+     "Primary Differentials",
+     "Dementia and other major neurocognitive disorders, Depression, especially where hypoactive delirium mimics low mood, Acute",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Underlying life-threatening cause such as sepsis, hypoxia, or hypoglycaemia",
-      "Sudden focal neurological signs suggesting stroke or intracranial pathology",
-      "Delirium tremens or severe withdrawal states",
-      "Profound hypoactive delirium with reduced consciousness and aspiration risk"
+    [
+     "Management Strategy",
+     "Identify and treat the underlying precipitant(s) - infection, hypoxia, metabolic or electrolyte derangement, urinary retention,",
+     "Core treatment modality"
     ],
-    "prognosis": "Delirium often resolves once the precipitant is treated, but it is associated with prolonged hospital stay, functional decline, increased risk of subsequent dementia, and higher mortality, particularly in older and hypoactive cases. Recovery can be incomplete and protracted in vulnerable patients.",
-    "pitfalls": [
-      "Missing hypoactive delirium and mislabelling it as depression or fatigue",
-      "Attributing acute confusion to dementia and failing to seek a reversible cause",
-      "Using benzodiazepines routinely and worsening confusion (outside alcohol or sedative withdrawal)",
-      "Sedating agitation without identifying and treating the underlying medical trigger",
-      "Overlooking medication and polypharmacy as precipitants"
-    ],
-    "references": [
-      "Kaplan & Sadock's Synopsis of Psychiatry",
-      "DSM-5-TR"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Identify and treat the underlying precipitant(s) — infection, hypoxia, metabolic or electrolyte derangement, urinary retention, constipation and pain — as the essential intervention",
-      "Review and rationalise medications, withdrawing deliriogenic drugs and managing substance intoxication or withdrawal",
-      "First-line multicomponent non-pharmacological care: reorientation, sensory aids such as glasses and hearing aids, sleep-wake regulation, early mobilisation, hydration and a calm, familiar environment",
-      "Reserve short-term low-dose antipsychotics such as haloperidol for severe agitation or distress posing a safety risk, using benzodiazepines only for alcohol or sedative withdrawal",
-      "Ensure patient and staff safety, avoiding physical restraint where possible, and attend to hydration and nutrition",
-      "Monitor attention and cognition with validated screening tools, tracking resolution and actively seeking the easily missed hypoactive form",
-      "Multidisciplinary care with follow-up and discharge planning given the risks of functional decline and subsequent dementia"
+    [
+     "Clinical Pitfall",
+     "Missing hypoactive delirium and mislabelling it as depression or fatigue",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for delirium."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "delirium-real-image",
+   "title": "Delirium: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

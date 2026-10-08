@@ -1,76 +1,171 @@
 {
-  "id": "quadricuspid_pulmonary_valve",
-  "name": "Quadricuspid pulmonary valve",
-  "aliases": [
-    "QPV",
-    "quadricuspid pulmonic valve",
-    "four-cusped pulmonary valve"
+ "id": "quadricuspid_pulmonary_valve",
+ "name": "Quadricuspid pulmonary valve",
+ "aliases": [
+  "QPV",
+  "quadricuspid pulmonic valve",
+  "four-cusped pulmonary valve"
+ ],
+ "class": "non_infective",
+ "system": "Cardiovascular",
+ "specialty": "Cardiology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Braunwald's Heart Disease",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A rare congenital anomaly in which the pulmonary valve has four cusps, usually of unequal size, arising from abnormal septation of the truncal cushions",
+   "More frequently identified at the pulmonary than the aortic position, and often an incidental finding",
+   "Commonly functions normally, but the asymmetric cusps can produce pulmonary regurgitation and, less often, stenosis over time",
+   "May coexist with other congenital cardiac lesions and with anomalies of the coronary arteries, warranting a careful search for associated defects",
+   "Frequently detected incidentally on echocardiography or on cross-sectional imaging performed for another indication",
+   "Transoesophageal echocardiography, cardiac CT, or MRI best delineate the number and arrangement of cusps and quantify any regurgitation",
+   "Most patients need only periodic surveillance, with valve repair or replacement reserved for significant regurgitation or stenosis"
   ],
-  "class": "non_infective",
-  "system": "Cardiovascular",
-  "specialty": "Cardiology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Braunwald's Heart Disease",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A rare congenital anomaly in which the pulmonary valve has four cusps, usually of unequal size, arising from abnormal septation of the truncal cushions",
-      "More frequently identified at the pulmonary than the aortic position, and often an incidental finding",
-      "Commonly functions normally, but the asymmetric cusps can produce pulmonary regurgitation and, less often, stenosis over time",
-      "May coexist with other congenital cardiac lesions and with anomalies of the coronary arteries, warranting a careful search for associated defects",
-      "Frequently detected incidentally on echocardiography or on cross-sectional imaging performed for another indication",
-      "Transoesophageal echocardiography, cardiac CT, or MRI best delineate the number and arrangement of cusps and quantify any regurgitation",
-      "Most patients need only periodic surveillance, with valve repair or replacement reserved for significant regurgitation or stenosis"
+  "pathophysiology": "A quadricuspid pulmonary valve results from abnormal division of the mesenchymal cushions of the developing outflow tract, yielding four cusps that are usually unequal in size. The uneven leaflet geometry disturbs normal coaptation, so that over time the valve tends towards incompetence, producing pulmonary regurgitation, while fibrosis or thickening of the redundant cusps can occasionally cause obstruction. Chronic significant regurgitation imposes a volume load on the right ventricle, which dilates and may eventually fail, and the developmental origin explains the recognised associations with other outflow-tract and coronary anomalies.",
+  "additionalDifferentials": [
+   "Normal trileaflet pulmonary valve with functional regurgitation",
+   "Bicuspid pulmonary valve",
+   "Dysplastic pulmonary valve",
+   "Valvular pulmonary stenosis",
+   "Carcinoid pulmonary valve disease",
+   "Pulmonary regurgitation after prior valvotomy or repair"
+  ],
+  "additionalInvestigations": [
+   "Transthoracic echocardiography to assess valve function and right ventricular size",
+   "Transoesophageal echocardiography to define the number and arrangement of cusps",
+   "Cardiac MRI to quantify pulmonary regurgitant fraction and right ventricular volumes",
+   "Cardiac CT to delineate valve anatomy and screen for associated coronary anomalies",
+   "Right heart catheterisation when non-invasive assessment of severity is inconclusive"
+  ],
+  "redFlags": [
+   "Severe pulmonary regurgitation with progressive right ventricular dilatation or dysfunction",
+   "Significant stenosis producing right ventricular pressure overload",
+   "Associated congenital cardiac or coronary anomalies requiring intervention",
+   "Symptoms of right heart failure or declining exercise tolerance"
+  ],
+  "prognosis": "The anomaly is usually benign and often carries a normal life expectancy, but a minority develop progressive pulmonary regurgitation or stenosis needing intervention, so periodic surveillance is appropriate.",
+  "pitfalls": [
+   "Overlooking the fourth cusp on transthoracic imaging and misclassifying the valve",
+   "Failing to search for associated congenital or coronary anomalies",
+   "Attributing pulmonary regurgitation solely to functional causes without inspecting valve morphology",
+   "Neglecting serial assessment of right ventricular size in significant regurgitation"
+  ],
+  "references": [
+   "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
+   "ESC Guidelines for the management of adult congenital heart disease"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Manage this usually benign lesion with periodic surveillance",
+   "Refer for pulmonary valve replacement, surgical or transcatheter, when pulmonary regurgitation is severe with progressive right ventricular dilatation or dysfunction, or when significant stenosis develops",
+   "Search for and manage associated congenital cardiac and coronary artery anomalies",
+   "Monitor with serial echocardiography and cardiac MRI to quantify the pulmonary regurgitant fraction and right ventricular volumes",
+   "Advise good dental hygiene and endocarditis awareness",
+   "Refer to cardiology for ongoing follow-up"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "quadricuspid_pulmonary_valve-pathway",
+   "title": "Quadricuspid pulmonary valve: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A rare congenital anomaly in which the pulmonary valve has four cusps, usually of unequal size, arising from abnormal septation of the truncal cushions",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Severe pulmonary regurgitation with progressive right ventricular dilatation or dysfunction",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Transthoracic echocardiography to assess valve function and right ventricular size, Transoesophageal echocardiography to define the number and arrangement of cusps, Cardiac MRI to quantify pulmonary regurgitant fraction"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Manage this usually benign lesion with periodic surveillance"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Overlooking the fourth cusp on transthoracic imaging and misclassifying the valve"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of quadricuspid pulmonary valve."
+  }
+ ],
+ "tables": [
+  {
+   "id": "quadricuspid_pulmonary_valve-matrix",
+   "title": "Quadricuspid pulmonary valve: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A rare congenital anomaly in which the pulmonary valve has four cusps, usually of unequal size, arising from abnormal septation",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "A quadricuspid pulmonary valve results from abnormal division of the mesenchymal cushions of the developing outflow tract, yielding four cusps that are usually unequal in size. The uneven leaflet geometry disturbs normal coaptation, so that over time the valve tends towards incompetence, producing pulmonary regurgitation, while fibrosis or thickening of the redundant cusps can occasionally cause obstruction. Chronic significant regurgitation imposes a volume load on the right ventricle, which dilates and may eventually fail, and the developmental origin explains the recognised associations with other outflow-tract and coronary anomalies.",
-    "additionalDifferentials": [
-      "Normal trileaflet pulmonary valve with functional regurgitation",
-      "Bicuspid pulmonary valve",
-      "Dysplastic pulmonary valve",
-      "Valvular pulmonary stenosis",
-      "Carcinoid pulmonary valve disease",
-      "Pulmonary regurgitation after prior valvotomy or repair"
+    [
+     "Key Investigations",
+     "Transthoracic echocardiography to assess valve function and right ventricular size, Transoesophageal echocardiography to define",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Transthoracic echocardiography to assess valve function and right ventricular size",
-      "Transoesophageal echocardiography to define the number and arrangement of cusps",
-      "Cardiac MRI to quantify pulmonary regurgitant fraction and right ventricular volumes",
-      "Cardiac CT to delineate valve anatomy and screen for associated coronary anomalies",
-      "Right heart catheterisation when non-invasive assessment of severity is inconclusive"
+    [
+     "Primary Differentials",
+     "Normal trileaflet pulmonary valve with functional regurgitation, Bicuspid pulmonary valve, Dysplastic pulmonary valve",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Severe pulmonary regurgitation with progressive right ventricular dilatation or dysfunction",
-      "Significant stenosis producing right ventricular pressure overload",
-      "Associated congenital cardiac or coronary anomalies requiring intervention",
-      "Symptoms of right heart failure or declining exercise tolerance"
+    [
+     "Management Strategy",
+     "Manage this usually benign lesion with periodic surveillance",
+     "Core treatment modality"
     ],
-    "prognosis": "The anomaly is usually benign and often carries a normal life expectancy, but a minority develop progressive pulmonary regurgitation or stenosis needing intervention, so periodic surveillance is appropriate.",
-    "pitfalls": [
-      "Overlooking the fourth cusp on transthoracic imaging and misclassifying the valve",
-      "Failing to search for associated congenital or coronary anomalies",
-      "Attributing pulmonary regurgitation solely to functional causes without inspecting valve morphology",
-      "Neglecting serial assessment of right ventricular size in significant regurgitation"
-    ],
-    "references": [
-      "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
-      "ESC Guidelines for the management of adult congenital heart disease"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Manage this usually benign lesion with periodic surveillance",
-      "Refer for pulmonary valve replacement, surgical or transcatheter, when pulmonary regurgitation is severe with progressive right ventricular dilatation or dysfunction, or when significant stenosis develops",
-      "Search for and manage associated congenital cardiac and coronary artery anomalies",
-      "Monitor with serial echocardiography and cardiac MRI to quantify the pulmonary regurgitant fraction and right ventricular volumes",
-      "Advise good dental hygiene and endocarditis awareness",
-      "Refer to cardiology for ongoing follow-up"
+    [
+     "Clinical Pitfall",
+     "Overlooking the fourth cusp on transthoracic imaging and misclassifying the valve",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for quadricuspid pulmonary valve."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "quadricuspid-pulmonary-valve-real-image",
+   "title": "Quadricuspid pulmonary valve: 12-Lead Diagnostic Electrocardiogram",
+   "type": "ecg",
+   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
+   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
+   "annotations": [
+    {
+     "label": "Conduction & Axis",
+     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
+    },
+    {
+     "label": "Repolarization",
+     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
+    },
+    {
+     "label": "Rhythm & Intervals",
+     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+    }
+   ]
+  }
+ ]
 }

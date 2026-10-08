@@ -1,78 +1,173 @@
 {
-  "id": "balantidiasis",
-  "name": "Balantidiasis (Balantidium coli)",
-  "aliases": [
-    "Balantidium coli infection",
-    "Balantidiosis",
-    "Neobalantidium coli infection",
-    "ciliate dysentery"
+ "id": "balantidiasis",
+ "name": "Balantidiasis (Balantidium coli)",
+ "aliases": [
+  "Balantidium coli infection",
+  "Balantidiosis",
+  "Neobalantidium coli infection",
+  "ciliate dysentery"
+ ],
+ "class": "infective",
+ "system": "Infectious disease",
+ "specialty": "Infectious Diseases / Tropical Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Mandell/Manson's Tropical Diseases",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Balantidium coli is the largest protozoan parasite of humans and the only ciliate that causes human disease",
+   "Pigs are the principal reservoir, and infection follows ingestion of cysts in food or water contaminated by porcine faeces, so it clusters where people live in close contact with pigs",
+   "Most infections are asymptomatic, but invasive disease produces a colitis resembling amoebic dysentery with abdominal pain, tenesmus and bloody, mucoid diarrhoea",
+   "The trophozoite is large, ciliated and rapidly motile on a fresh wet stool preparation, with a characteristic macronucleus, making it recognisable microscopically",
+   "Colonic ulceration mirrors that of amoebiasis and can lead to perforation; extraintestinal spread is rare but described",
+   "Malnutrition, alcoholism and immunosuppression predispose to symptomatic and severe disease",
+   "Tetracycline is the usual first-line treatment, with metronidazole as an effective alternative"
   ],
-  "class": "infective",
-  "system": "Infectious disease",
-  "specialty": "Infectious Diseases / Tropical Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Mandell/Manson's Tropical Diseases",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Balantidium coli is the largest protozoan parasite of humans and the only ciliate that causes human disease",
-      "Pigs are the principal reservoir, and infection follows ingestion of cysts in food or water contaminated by porcine faeces, so it clusters where people live in close contact with pigs",
-      "Most infections are asymptomatic, but invasive disease produces a colitis resembling amoebic dysentery with abdominal pain, tenesmus and bloody, mucoid diarrhoea",
-      "The trophozoite is large, ciliated and rapidly motile on a fresh wet stool preparation, with a characteristic macronucleus, making it recognisable microscopically",
-      "Colonic ulceration mirrors that of amoebiasis and can lead to perforation; extraintestinal spread is rare but described",
-      "Malnutrition, alcoholism and immunosuppression predispose to symptomatic and severe disease",
-      "Tetracycline is the usual first-line treatment, with metronidazole as an effective alternative"
+  "pathophysiology": "Balantidium coli exists as a large motile trophozoite and a resistant cyst that transmits infection. After cysts are ingested, excystation in the small intestine releases trophozoites that colonise the large bowel. Secreting proteolytic enzymes such as hyaluronidase, the trophozoites can invade the colonic mucosa, producing flask-shaped ulcers closely resembling those of amoebic colitis with surrounding inflammation and haemorrhage. Tissue invasion drives the dysenteric illness, and in severe cases confluent ulceration may cause perforation and peritonitis. Host factors such as malnutrition, achlorhydria and immunosuppression favour invasion and more severe disease.",
+  "additionalDifferentials": [
+   "Amoebic colitis",
+   "Bacillary dysentery (shigellosis)",
+   "Inflammatory bowel disease",
+   "Campylobacter or non-typhoidal Salmonella colitis",
+   "Ischaemic colitis",
+   "Other invasive enteric protozoa"
+  ],
+  "additionalInvestigations": [
+   "Fresh stool wet-mount microscopy for large motile ciliated trophozoites",
+   "Stool concentration methods to detect cysts",
+   "Repeated stool examination because shedding is intermittent",
+   "Sigmoidoscopy or colonoscopy with biopsy of ulcer edges in invasive disease",
+   "Full blood count and markers of inflammation and dehydration",
+   "Assessment of nutritional and immune status"
+  ],
+  "redFlags": [
+   "Severe bloody dysentery with dehydration and haemodynamic compromise",
+   "Signs of colonic perforation or peritonitis",
+   "Fulminant colitis in a malnourished or immunosuppressed patient",
+   "Failure to respond to appropriate therapy"
+  ],
+  "prognosis": "Asymptomatic carriage and mild disease resolve well with treatment; invasive colitis carries a more serious outlook, and fulminant or perforating disease, particularly in debilitated hosts, can be fatal.",
+  "pitfalls": [
+   "Mistaking invasive balantidial colitis for amoebiasis and not identifying the ciliate",
+   "Relying on a single stool sample despite intermittent trophozoite and cyst shedding",
+   "Overlooking the epidemiological clue of pig contact",
+   "Underestimating severity in malnourished or immunosuppressed patients"
+  ],
+  "references": [
+   "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
+   "Manson's Tropical Diseases"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Treat with antiparasitic therapy, using a tetracycline such as doxycycline first-line, with metronidazole or iodoquinol as alternatives",
+   "Provide supportive care with rehydration and correction of electrolyte disturbance in dysenteric illness",
+   "Monitor for and surgically manage complications of invasive colitis such as perforation and peritonitis",
+   "Address predisposing factors by treating malnutrition and assessing and managing immunosuppression",
+   "Improve sanitation and reduce contact with pig faeces, screening or treating close contacts where indicated",
+   "Confirm parasitological clearance with follow-up stool examination given intermittent shedding"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "balantidiasis-pathway",
+   "title": "Balantidiasis (Balantidium coli): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Balantidium coli is the largest protozoan parasite of humans and the only ciliate that causes human disease",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Severe bloody dysentery with dehydration and haemodynamic compromise",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Fresh stool wet-mount microscopy for large motile ciliated trophozoites, Stool concentration methods to detect cysts, Repeated stool examination because shedding is intermittent"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Treat with antiparasitic therapy, using a tetracycline such as doxycycline first-line, with metronidazole or iodoquinol as alternatives"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking invasive balantidial colitis for amoebiasis and not identifying the ciliate"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of balantidiasis (balantidium coli)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "balantidiasis-matrix",
+   "title": "Balantidiasis (Balantidium coli): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Balantidium coli is the largest protozoan parasite of humans and the only ciliate that causes human disease",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Balantidium coli exists as a large motile trophozoite and a resistant cyst that transmits infection. After cysts are ingested, excystation in the small intestine releases trophozoites that colonise the large bowel. Secreting proteolytic enzymes such as hyaluronidase, the trophozoites can invade the colonic mucosa, producing flask-shaped ulcers closely resembling those of amoebic colitis with surrounding inflammation and haemorrhage. Tissue invasion drives the dysenteric illness, and in severe cases confluent ulceration may cause perforation and peritonitis. Host factors such as malnutrition, achlorhydria and immunosuppression favour invasion and more severe disease.",
-    "additionalDifferentials": [
-      "Amoebic colitis",
-      "Bacillary dysentery (shigellosis)",
-      "Inflammatory bowel disease",
-      "Campylobacter or non-typhoidal Salmonella colitis",
-      "Ischaemic colitis",
-      "Other invasive enteric protozoa"
+    [
+     "Key Investigations",
+     "Fresh stool wet-mount microscopy for large motile ciliated trophozoites, Stool concentration methods to detect cysts, Repeated",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Fresh stool wet-mount microscopy for large motile ciliated trophozoites",
-      "Stool concentration methods to detect cysts",
-      "Repeated stool examination because shedding is intermittent",
-      "Sigmoidoscopy or colonoscopy with biopsy of ulcer edges in invasive disease",
-      "Full blood count and markers of inflammation and dehydration",
-      "Assessment of nutritional and immune status"
+    [
+     "Primary Differentials",
+     "Amoebic colitis, Bacillary dysentery (shigellosis), Inflammatory bowel disease",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Severe bloody dysentery with dehydration and haemodynamic compromise",
-      "Signs of colonic perforation or peritonitis",
-      "Fulminant colitis in a malnourished or immunosuppressed patient",
-      "Failure to respond to appropriate therapy"
+    [
+     "Management Strategy",
+     "Treat with antiparasitic therapy, using a tetracycline such as doxycycline first-line, with metronidazole or iodoquinol as",
+     "Core treatment modality"
     ],
-    "prognosis": "Asymptomatic carriage and mild disease resolve well with treatment; invasive colitis carries a more serious outlook, and fulminant or perforating disease, particularly in debilitated hosts, can be fatal.",
-    "pitfalls": [
-      "Mistaking invasive balantidial colitis for amoebiasis and not identifying the ciliate",
-      "Relying on a single stool sample despite intermittent trophozoite and cyst shedding",
-      "Overlooking the epidemiological clue of pig contact",
-      "Underestimating severity in malnourished or immunosuppressed patients"
-    ],
-    "references": [
-      "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
-      "Manson's Tropical Diseases"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Treat with antiparasitic therapy, using a tetracycline such as doxycycline first-line, with metronidazole or iodoquinol as alternatives",
-      "Provide supportive care with rehydration and correction of electrolyte disturbance in dysenteric illness",
-      "Monitor for and surgically manage complications of invasive colitis such as perforation and peritonitis",
-      "Address predisposing factors by treating malnutrition and assessing and managing immunosuppression",
-      "Improve sanitation and reduce contact with pig faeces, screening or treating close contacts where indicated",
-      "Confirm parasitological clearance with follow-up stool examination given intermittent shedding"
+    [
+     "Clinical Pitfall",
+     "Mistaking invasive balantidial colitis for amoebiasis and not identifying the ciliate",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for balantidiasis (balantidium coli)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "balantidiasis-real-image",
+   "title": "Balantidiasis (Balantidium coli): Diagnostic Microbiological / Smear Examination",
+   "type": "diagram",
+   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
+   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
+   "annotations": [
+    {
+     "label": "Pathogen Detection",
+     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
+    },
+    {
+     "label": "Inflammatory Response",
+     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
+    },
+    {
+     "label": "Diagnostic Confirmation",
+     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+    }
+   ]
+  }
+ ]
 }

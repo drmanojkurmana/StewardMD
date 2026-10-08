@@ -36,12 +36,14 @@ let chromeErr = ""; chrome.stderr.on("data", (d) => { chromeErr += d; });
 let msgId = 1; const pending = new Map(); let ws, sessionId; const errors = [];
 const call = (m, p) => { const i = msgId++; return new Promise((r) => { pending.set(i, r); ws.send(JSON.stringify({ id: i, method: m, params: p || {}, sessionId })); }); };
 const ev = async (e) => { const r = await call("Runtime.evaluate", { expression: `(function(){try{${e}}catch(x){return "ERR:"+String(x&&x.message||x)}})()`, returnByValue: true }); return r.result && r.result.result ? r.result.result.value : undefined; };
+// Screenshots land on the final frame: finite animations (entrances, ring draw) are finished first; loops keep running.
+const shotCall = async (p) => { await ev(`document.getAnimations().forEach(function (a) { try { var t = a.effect && a.effect.getTiming(); if (t && t.iterations !== Infinity) a.finish(); } catch (e) {} }); return 1;`); return call("Page.captureScreenshot", p); };
 const until = async (e, ms = 10000) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { if (await ev(e) === true) return true; await sleep(150); } return false; };
 const reqs = []; let fails = 0; const ok = (c, m) => { console.log((c ? "PASS " : "FAIL ") + m); if (!c) fails++; };
 const click = (sel) => ev(`var b=document.querySelector(${JSON.stringify(sel)}); if(!b) return "missing"; b.click(); return 1;`);
 const text = (sel) => ev(`var e=document.querySelector(${JSON.stringify(sel)}); return e ? e.textContent.replace(/\\s+/g," ").trim() : "";`);
 const store = (expr) => ev(`var s=JSON.parse(localStorage.getItem("smd_prep_v1")||"{}"); return ${expr};`);
-const shot = async (name) => { if (!process.env.SHOTS) return; await sleep(400); const r = await call("Page.captureScreenshot", { format: "png" }); if (r.result) fs.writeFileSync(join(process.env.SHOTS, "native-" + name + ".png"), Buffer.from(r.result.data, "base64")); };
+const shot = async (name) => { if (!process.env.SHOTS) return; await sleep(400); const r = await shotCall({ format: "png" }); if (r.result) fs.writeFileSync(join(process.env.SHOTS, "native-" + name + ".png"), Buffer.from(r.result.data, "base64")); };
 // The fixture has no lessons: the lesson index is stubbed with one fixture module, so the plan can offer it.
 
 const MOCKS = `(function(){
@@ -78,7 +80,7 @@ try {
   const { result: { sessionId: sid } } = await call("Target.attachToTarget", { targetId, flatten: true }); sessionId = sid;
   await call("Runtime.enable", {}); await call("Network.enable", {}); await call("Page.enable", {});
   await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
-  await call("Page.addScriptToEvaluateOnNewDocument", { source: `window.SMD_PREP_BASE=${JSON.stringify(FIX)}; window.SMD_PREP_BANK_API=${JSON.stringify(FIX + "api/")}; window.SMD_PREP_FLAG_API=${JSON.stringify(FIX + "hidden.json")}; window.confirm=function(){return true;};` });
+  await call("Page.addScriptToEvaluateOnNewDocument", { source: `window.SMD_PREP_BANK_VER="v1"; window.SMD_PREP_BASE=${JSON.stringify(FIX)}; window.SMD_PREP_BANK_API=${JSON.stringify(FIX + "api/")}; window.SMD_PREP_FLAG_API=${JSON.stringify(FIX + "hidden.json")}; window.confirm=function(){return true;};` });
   const clean = `["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); return 1;`;
   await call("Page.navigate", { url: BASE }); await until(`return !!window.PREP;`, 30000);
   await ev(`localStorage.setItem("smd_prep","1"); localStorage.removeItem("smd_prep_rem"); localStorage.removeItem("smd_prep_la"); localStorage.setItem("smd_prep_v1", JSON.stringify({ v: 1, exam: "neet-pg", pl: { ob: 1, exam: "neet-pg", date: null, min: 30, rem: "07:30" } })); indexedDB.deleteDatabase("prep-bank"); return 1;`);
@@ -153,7 +155,7 @@ try {
   ok(await ev(`return document.querySelector("#pnPlanSheet [data-act=p-n-rem]").getAttribute("aria-checked");`) === "true" && /Every day at 07:30/.test(await text("#pnPlanSheet [data-act=p-n-rem]")), "the switch is on and names the time");
   await ev(`document.querySelector("#pnPlanSheet .pl-sheet").scrollTop = 0; document.querySelector("#pnPlanSheet [data-act=p-n-rem]").scrollIntoView({block:"center"}); return 1;`);
   await shot("sheet-reminder-on-dark");
-  await ev(`document.body.classList.remove("dark"); return 1;`);
+  await ev(`if (!document.getElementById("pnNoTr")) { var t = document.createElement("style"); t.id = "pnNoTr"; t.textContent = "*{transition:none!important}"; document.head.appendChild(t); } document.body.classList.remove("dark"); return 1;`);
   await shot("sheet-reminder-on-light");
   await ev(`document.querySelector("#pnPlanSheet .pl-sheet").scrollTop = 1e6; return 1;`);
   await shot("sheet-sync-light");

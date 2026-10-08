@@ -175,5 +175,100 @@
       "importedAt": "2026-06-29T13:56:25Z",
       "contentHash": "h45be3672"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "mixed_malaria-dx-algo",
+      "title": "Mixed Malaria (P. falciparum + P. vivax): Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Mixed infections (most commonly P. falciparum together with P. vivax) are frequently under-detected by light microscopy and rapid antigen tests; PCR is the most sensitive method and is increasingly used specifically for speciation and",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Coma, obtundation, delirium, or abnormal behavior (cerebral malaria) - attributable to the falciparum component",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Thick and thin Giemsa-stained blood films examined immediately for parasite demonstration AND species identification; examine 100-200 fields before calling a thick film negative, PCR amplification for definitive speciation"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Severity is governed by the P. falciparum component per Harrison Table 231-2 (Manifestations of Severe Falciparum Malaria): major criteria include unarousable coma/cerebral malaria, acidosis (arterial pH =5 mmol/L),"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Treating an apparently single-species falciparum infection as if vivax were absent: the coexisting vivax hypnozoite reservoir is not cleared by blood-stage drugs and later causes relapse - manage mixed infection as"
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for mixed malaria (p. falciparum + p. vivax)."
+    }
+  ],
+  "tables": [
+    {
+      "id": "mixed_malaria-matrix",
+      "title": "Mixed Malaria (P. falciparum + P. vivax): Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Mixed infections (most commonly P. falciparum together with P. vivax) are frequently under-detected by light microscopy and rapid",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Thick and thin Giemsa-stained blood films examined immediately for parasite demonstration AND species identification; examine",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Single-species P. falciparum malaria with an undetected coexisting vivax/ovale component (the central diagnostic trap of mixed",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Coma, obtundation, delirium, or abnormal behavior (cerebral malaria) - attributable to the falciparum component",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating an apparently single-species falciparum infection as if vivax were absent: the coexisting vivax hypnozoite reservoir is",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for mixed malaria (p. falciparum + p. vivax)."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "mixed-malaria-real-image",
+      "title": "Mixed Malaria (P. falciparum + P. vivax): Diagnostic Microbiological / Smear Examination",
+      "type": "diagram",
+      "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
+      "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
+      "annotations": [
+        {
+          "label": "Pathogen Detection",
+          "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
+        },
+        {
+          "label": "Inflammatory Response",
+          "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
+        },
+        {
+          "label": "Diagnostic Confirmation",
+          "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+        }
+      ]
+    }
+  ]
 }

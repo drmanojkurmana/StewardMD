@@ -1,80 +1,175 @@
 {
-  "id": "non24_sleep_wake_disorder",
-  "name": "Non-24-hour sleep-wake rhythm disorder",
-  "aliases": [
-    "N24",
-    "Non-24",
-    "free-running disorder",
-    "hypernychthemeral syndrome",
-    "non 24 hour sleep wake disorder",
-    "non-24"
+ "id": "non24_sleep_wake_disorder",
+ "name": "Non-24-hour sleep-wake rhythm disorder",
+ "aliases": [
+  "N24",
+  "Non-24",
+  "free-running disorder",
+  "hypernychthemeral syndrome",
+  "non 24 hour sleep wake disorder",
+  "non-24"
+ ],
+ "class": "non_infective",
+ "system": "Sleep medicine",
+ "specialty": "Sleep Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "ICHD-3 / International Classification of Sleep Disorders",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A circadian rhythm disorder in which the internal clock fails to entrain to the 24-hour day, so sleep and wake times drift progressively later",
+   "The sleep period cycles in and out of alignment with the desired schedule, giving alternating good and bad periods",
+   "It is most common in totally blind people, who lack the light input needed to entrain the clock",
+   "In sighted individuals it is rare and may relate to reduced light sensitivity, behavioural factors or an underlying delayed sleep phase",
+   "A prolonged sleep diary or actigraphy demonstrating the steadily drifting sleep pattern is central to diagnosis",
+   "Appropriately timed melatonin or a melatonin-receptor agonist can entrain the rhythm, particularly in blind patients",
+   "In sighted patients, timed bright-light exposure combined with melatonin is used to reinforce entrainment"
   ],
-  "class": "non_infective",
-  "system": "Sleep medicine",
-  "specialty": "Sleep Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "ICHD-3 / International Classification of Sleep Disorders",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A circadian rhythm disorder in which the internal clock fails to entrain to the 24-hour day, so sleep and wake times drift progressively later",
-      "The sleep period cycles in and out of alignment with the desired schedule, giving alternating good and bad periods",
-      "It is most common in totally blind people, who lack the light input needed to entrain the clock",
-      "In sighted individuals it is rare and may relate to reduced light sensitivity, behavioural factors or an underlying delayed sleep phase",
-      "A prolonged sleep diary or actigraphy demonstrating the steadily drifting sleep pattern is central to diagnosis",
-      "Appropriately timed melatonin or a melatonin-receptor agonist can entrain the rhythm, particularly in blind patients",
-      "In sighted patients, timed bright-light exposure combined with melatonin is used to reinforce entrainment"
+  "pathophysiology": "The suprachiasmatic nucleus generates an intrinsic rhythm that is on average slightly longer than 24 hours and is normally reset each day, mainly by light reaching the retina. When this entraining signal is absent, as in total blindness, or is ineffective, the clock runs free at its own period and sleep-wake timing drifts later day by day. Melatonin, secreted by the pineal gland under circadian control, provides a complementary timing signal that can be supplied exogenously to help re-entrain the rhythm.",
+  "additionalDifferentials": [
+   "Delayed sleep-wake phase disorder",
+   "Irregular sleep-wake rhythm disorder",
+   "Insomnia disorder",
+   "Behaviourally induced insufficient sleep",
+   "Mood disorder with disrupted sleep",
+   "Shift-work disorder"
+  ],
+  "additionalInvestigations": [
+   "Sleep diary maintained over several weeks to reveal the progressively drifting pattern",
+   "Actigraphy over an extended period to document the free-running sleep-wake timing",
+   "Assessment of visual function and light perception",
+   "Circadian phase markers such as dim-light melatonin onset where available",
+   "Review of medication, substance use and daytime light exposure"
+  ],
+  "redFlags": [
+   "New circadian disruption with neurological or cognitive decline suggesting a central cause",
+   "Severe daytime impairment with occupational or safety risk",
+   "Coexisting untreated mood disorder or suicidal ideation",
+   "Features suggesting a structural hypothalamic or pineal lesion"
+  ],
+  "prognosis": "With correctly timed melatonin or a melatonin-receptor agonist, and light therapy in sighted patients, many achieve entrainment and stable sleep, though relapse is common if treatment timing lapses, and management is a long-term commitment.",
+  "pitfalls": [
+   "Mislabelling the drifting pattern as simple insomnia and prescribing hypnotics",
+   "Giving melatonin at the wrong circadian time, which can fail to entrain or even worsen misalignment",
+   "Not recognising total blindness as the key predisposing factor",
+   "Overlooking the need for sustained, correctly timed treatment"
+  ],
+  "references": [
+   "International Classification of Sleep Disorders, 3rd edition (ICSD-3)",
+   "Principles and Practice of Sleep Medicine (Kryger, Roth, Dement)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Entrain the circadian clock with correctly timed exogenous melatonin or a melatonin-receptor agonist such as tasimelteon, which is particularly effective in totally blind patients",
+   "Add timed morning bright-light therapy in sighted patients to strengthen photic entrainment",
+   "Reinforce a fixed sleep-wake schedule, good sleep hygiene, and regular social and activity time cues",
+   "Track response with an ongoing sleep diary and actigraphy to confirm entrainment and fine-tune the timing of treatment",
+   "Identify and treat associated mood disturbance arising from chronic circadian misalignment",
+   "Maintain treatment as a long-term commitment, since relapse is common when the timing of melatonin lapses",
+   "Refer to a sleep medicine specialist for circadian phase assessment and to guide dosing timing relative to circadian markers"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "non24_sleep_wake_disorder-pathway",
+   "title": "Non-24-hour sleep-wake rhythm disorder: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A circadian rhythm disorder in which the internal clock fails to entrain to the 24-hour day, so sleep and wake times drift progressively later",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: New circadian disruption with neurological or cognitive decline suggesting a central cause",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Sleep diary maintained over several weeks to reveal the progressively drifting pattern, Actigraphy over an extended period to document the free-running sleep-wake timing, Assessment of visual function and light perception"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Entrain the circadian clock with correctly timed exogenous melatonin or a melatonin-receptor agonist such as tasimelteon, which is particularly effective in totally blind patients"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mislabelling the drifting pattern as simple insomnia and prescribing hypnotics"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of non-24-hour sleep-wake rhythm disorder."
+  }
+ ],
+ "tables": [
+  {
+   "id": "non24_sleep_wake_disorder-matrix",
+   "title": "Non-24-hour sleep-wake rhythm disorder: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A circadian rhythm disorder in which the internal clock fails to entrain to the 24-hour day, so sleep and wake times drift",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "The suprachiasmatic nucleus generates an intrinsic rhythm that is on average slightly longer than 24 hours and is normally reset each day, mainly by light reaching the retina. When this entraining signal is absent, as in total blindness, or is ineffective, the clock runs free at its own period and sleep-wake timing drifts later day by day. Melatonin, secreted by the pineal gland under circadian control, provides a complementary timing signal that can be supplied exogenously to help re-entrain the rhythm.",
-    "additionalDifferentials": [
-      "Delayed sleep-wake phase disorder",
-      "Irregular sleep-wake rhythm disorder",
-      "Insomnia disorder",
-      "Behaviourally induced insufficient sleep",
-      "Mood disorder with disrupted sleep",
-      "Shift-work disorder"
+    [
+     "Key Investigations",
+     "Sleep diary maintained over several weeks to reveal the progressively drifting pattern, Actigraphy over an extended period to",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Sleep diary maintained over several weeks to reveal the progressively drifting pattern",
-      "Actigraphy over an extended period to document the free-running sleep-wake timing",
-      "Assessment of visual function and light perception",
-      "Circadian phase markers such as dim-light melatonin onset where available",
-      "Review of medication, substance use and daytime light exposure"
+    [
+     "Primary Differentials",
+     "Delayed sleep-wake phase disorder, Irregular sleep-wake rhythm disorder, Insomnia disorder",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "New circadian disruption with neurological or cognitive decline suggesting a central cause",
-      "Severe daytime impairment with occupational or safety risk",
-      "Coexisting untreated mood disorder or suicidal ideation",
-      "Features suggesting a structural hypothalamic or pineal lesion"
+    [
+     "Management Strategy",
+     "Entrain the circadian clock with correctly timed exogenous melatonin or a melatonin-receptor agonist such as tasimelteon, which",
+     "Core treatment modality"
     ],
-    "prognosis": "With correctly timed melatonin or a melatonin-receptor agonist, and light therapy in sighted patients, many achieve entrainment and stable sleep, though relapse is common if treatment timing lapses, and management is a long-term commitment.",
-    "pitfalls": [
-      "Mislabelling the drifting pattern as simple insomnia and prescribing hypnotics",
-      "Giving melatonin at the wrong circadian time, which can fail to entrain or even worsen misalignment",
-      "Not recognising total blindness as the key predisposing factor",
-      "Overlooking the need for sustained, correctly timed treatment"
-    ],
-    "references": [
-      "International Classification of Sleep Disorders, 3rd edition (ICSD-3)",
-      "Principles and Practice of Sleep Medicine (Kryger, Roth, Dement)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Entrain the circadian clock with correctly timed exogenous melatonin or a melatonin-receptor agonist such as tasimelteon, which is particularly effective in totally blind patients",
-      "Add timed morning bright-light therapy in sighted patients to strengthen photic entrainment",
-      "Reinforce a fixed sleep-wake schedule, good sleep hygiene, and regular social and activity time cues",
-      "Track response with an ongoing sleep diary and actigraphy to confirm entrainment and fine-tune the timing of treatment",
-      "Identify and treat associated mood disturbance arising from chronic circadian misalignment",
-      "Maintain treatment as a long-term commitment, since relapse is common when the timing of melatonin lapses",
-      "Refer to a sleep medicine specialist for circadian phase assessment and to guide dosing timing relative to circadian markers"
+    [
+     "Clinical Pitfall",
+     "Mislabelling the drifting pattern as simple insomnia and prescribing hypnotics",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for non-24-hour sleep-wake rhythm disorder."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "non24-sleep-wake-disorder-real-image",
+   "title": "Non-24-hour sleep-wake rhythm disorder: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

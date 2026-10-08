@@ -1,89 +1,184 @@
 {
-  "id": "isovaleric_acidaemia",
-  "name": "Isovaleric acidaemia",
-  "aliases": [
-    "IVA",
-    "Isovaleric acidemia",
-    "Isovaleric aciduria",
-    "Isovaleryl-CoA dehydrogenase deficiency",
-    "isovaleric acidemia",
-    "isovaleric aciduria",
-    "isovaleryl-CoA dehydrogenase deficiency",
-    "sweaty feet syndrome"
+ "id": "isovaleric_acidaemia",
+ "name": "Isovaleric acidaemia",
+ "aliases": [
+  "IVA",
+  "Isovaleric acidemia",
+  "Isovaleric aciduria",
+  "Isovaleryl-CoA dehydrogenase deficiency",
+  "isovaleric acidemia",
+  "isovaleric aciduria",
+  "isovaleryl-CoA dehydrogenase deficiency",
+  "sweaty feet syndrome"
+ ],
+ "class": "non_infective",
+ "system": "Metabolic / Inborn errors",
+ "specialty": "Metabolic medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Metabolic medicine references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Autosomal recessive organic acidaemia caused by deficiency of isovaleryl-CoA dehydrogenase (IVD), a step in leucine catabolism.",
+   "Accumulating isovaleric acid gives a characteristic odour of sweaty feet during acute decompensation, a valuable bedside clue.",
+   "Presents in two broad patterns: an acute neonatal encephalopathic crisis and a chronic intermittent form with recurrent episodes triggered by illness or protein load.",
+   "Acute crises feature vomiting, poor feeding, lethargy progressing to coma, high-anion-gap metabolic acidosis, ketosis and often hyperammonaemia.",
+   "Bone-marrow suppression with neutropenia, thrombocytopenia or pancytopenia is common during acute episodes.",
+   "Diagnosis is confirmed by the acylcarnitine profile (raised isovalerylcarnitine, C5) and urine organic acids showing isovalerylglycine and 3-hydroxyisovaleric acid; it is detectable on newborn screening.",
+   "Long-term management uses a leucine-restricted diet with glycine and carnitine supplementation to enhance conjugation and excretion of isovaleryl-CoA.",
+   "Acute management reverses catabolism with generous energy provision, stops protein transiently and treats intercurrent illness aggressively."
   ],
-  "class": "non_infective",
-  "system": "Metabolic / Inborn errors",
-  "specialty": "Metabolic medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Metabolic medicine references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Autosomal recessive organic acidaemia caused by deficiency of isovaleryl-CoA dehydrogenase (IVD), a step in leucine catabolism.",
-      "Accumulating isovaleric acid gives a characteristic odour of sweaty feet during acute decompensation, a valuable bedside clue.",
-      "Presents in two broad patterns: an acute neonatal encephalopathic crisis and a chronic intermittent form with recurrent episodes triggered by illness or protein load.",
-      "Acute crises feature vomiting, poor feeding, lethargy progressing to coma, high-anion-gap metabolic acidosis, ketosis and often hyperammonaemia.",
-      "Bone-marrow suppression with neutropenia, thrombocytopenia or pancytopenia is common during acute episodes.",
-      "Diagnosis is confirmed by the acylcarnitine profile (raised isovalerylcarnitine, C5) and urine organic acids showing isovalerylglycine and 3-hydroxyisovaleric acid; it is detectable on newborn screening.",
-      "Long-term management uses a leucine-restricted diet with glycine and carnitine supplementation to enhance conjugation and excretion of isovaleryl-CoA.",
-      "Acute management reverses catabolism with generous energy provision, stops protein transiently and treats intercurrent illness aggressively."
+  "pathophysiology": "Isovaleric acidaemia is caused by biallelic loss-of-function variants in IVD, encoding the mitochondrial flavoenzyme isovaleryl-CoA dehydrogenase, which catalyses the third step in the catabolism of the branched-chain amino acid leucine, converting isovaleryl-CoA to 3-methylcrotonyl-CoA. When the enzyme is deficient, isovaleryl-CoA and its derivatives accumulate upstream of the block. The excess isovaleryl-CoA is hydrolysed to free isovaleric acid, which is directly toxic and responsible for the characteristic odour, and is conjugated with glycine and carnitine to form isovalerylglycine and isovalerylcarnitine that are excreted in urine; these conjugation pathways are the basis of both diagnosis and treatment. Accumulating organic acids and coenzyme-A esters disturb mitochondrial energy metabolism and inhibit other pathways, contributing to high-anion-gap metabolic acidosis, secondary hyperammonaemia through interference with ureagenesis, and ketosis. Bone-marrow precursors are sensitive to these metabolites, producing the neutropenia, thrombocytopenia and sometimes pancytopenia seen in acute episodes. Because leucine is derived both from dietary protein and from endogenous protein breakdown, any catabolic stress such as fasting, infection or a protein load accelerates flux through the blocked pathway and can precipitate life-threatening decompensation, particularly in the neonatal period and during intercurrent illness.",
+  "additionalDifferentials": [
+   "Other organic acidaemias (methylmalonic and propionic acidaemia)",
+   "Maple syrup urine disease",
+   "Urea cycle disorders presenting with hyperammonaemia",
+   "Multiple acyl-CoA dehydrogenase deficiency (glutaric aciduria type 2)",
+   "Neonatal sepsis and other causes of neonatal encephalopathy",
+   "Fatty-acid oxidation disorders",
+   "Ketotic hypoglycaemia and other causes of high-anion-gap acidosis"
+  ],
+  "additionalInvestigations": [
+   "Plasma acylcarnitine profile showing raised isovalerylcarnitine (C5)",
+   "Urine organic acids showing isovalerylglycine and 3-hydroxyisovaleric acid",
+   "Blood gas, anion gap, glucose, ketones, lactate and ammonia during illness",
+   "Full blood count to detect neutropenia, thrombocytopenia or pancytopenia",
+   "Plasma amino acids and carnitine status",
+   "IVD gene sequencing for confirmation and family counselling",
+   "Newborn screening result review and confirmatory testing"
+  ],
+  "redFlags": [
+   "Progressive lethargy, seizures or coma indicating metabolic encephalopathy",
+   "Severe high-anion-gap metabolic acidosis unresponsive to initial resuscitation",
+   "Significant hyperammonaemia",
+   "Neutropenic sepsis or severe cytopenias during an acute crisis",
+   "Signs of cerebral oedema or raised intracranial pressure"
+  ],
+  "prognosis": "With newborn screening, prompt treatment of crises and a leucine-restricted diet with glycine and carnitine, many patients achieve normal or near-normal development, though severe neonatal crises can be fatal or leave neurological sequelae.",
+  "pitfalls": [
+   "Attributing a neonatal presentation to sepsis alone and missing the underlying metabolic disorder",
+   "Continuing normal protein intake or allowing fasting during acute illness, worsening decompensation",
+   "Overlooking the characteristic odour as a diagnostic clue",
+   "Misreading the acute cytopenias as primary haematological or infective disease",
+   "Under-treating intercurrent illnesses that can rapidly precipitate a crisis"
+  ],
+  "references": [
+   "Inherited Metabolic Diseases (standard reference text)",
+   "Newborn screening and metabolic medicine guidelines",
+   "Clinical biochemistry references"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Lifelong leucine (protein) restriction with a specialised metabolic formula to limit isovaleryl-CoA accumulation",
+   "Glycine and L-carnitine supplementation to conjugate isovaleric acid into non-toxic, readily excreted products",
+   "Emergency sick-day regimen during intercurrent illness: temporary withdrawal of natural protein with high-energy intake and intravenous glucose to reverse catabolism",
+   "Acute crisis management with fluids and glucose, correction of high anion-gap metabolic acidosis and ammonia-lowering measures, escalating to haemodialysis for severe hyperammonaemia",
+   "Monitoring of growth and development, acylcarnitine profile, ammonia and full blood count for neutropenia and thrombocytopenia",
+   "Genetic counselling for autosomal recessive inheritance with sibling and family screening, aided by newborn screening detection",
+   "Involvement of a metabolic dietitian and specialist metabolic team for coordinated long-term care"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "isovaleric_acidaemia-pathway",
+   "title": "Isovaleric acidaemia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Autosomal recessive organic acidaemia caused by deficiency of isovaleryl-CoA dehydrogenase (IVD), a step in leucine catabolism.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Progressive lethargy, seizures or coma indicating metabolic encephalopathy",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Plasma acylcarnitine profile showing raised isovalerylcarnitine (C5), Urine organic acids showing isovalerylglycine and 3-hydroxyisovaleric acid, Blood gas, anion gap, glucose, ketones, lactate and ammonia during illness"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Lifelong leucine (protein) restriction with a specialised metabolic formula to limit isovaleryl-CoA accumulation"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing a neonatal presentation to sepsis alone and missing the underlying metabolic disorder"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of isovaleric acidaemia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "isovaleric_acidaemia-matrix",
+   "title": "Isovaleric acidaemia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Autosomal recessive organic acidaemia caused by deficiency of isovaleryl-CoA dehydrogenase (IVD), a step in leucine catabolism.",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Isovaleric acidaemia is caused by biallelic loss-of-function variants in IVD, encoding the mitochondrial flavoenzyme isovaleryl-CoA dehydrogenase, which catalyses the third step in the catabolism of the branched-chain amino acid leucine, converting isovaleryl-CoA to 3-methylcrotonyl-CoA. When the enzyme is deficient, isovaleryl-CoA and its derivatives accumulate upstream of the block. The excess isovaleryl-CoA is hydrolysed to free isovaleric acid, which is directly toxic and responsible for the characteristic odour, and is conjugated with glycine and carnitine to form isovalerylglycine and isovalerylcarnitine that are excreted in urine; these conjugation pathways are the basis of both diagnosis and treatment. Accumulating organic acids and coenzyme-A esters disturb mitochondrial energy metabolism and inhibit other pathways, contributing to high-anion-gap metabolic acidosis, secondary hyperammonaemia through interference with ureagenesis, and ketosis. Bone-marrow precursors are sensitive to these metabolites, producing the neutropenia, thrombocytopenia and sometimes pancytopenia seen in acute episodes. Because leucine is derived both from dietary protein and from endogenous protein breakdown, any catabolic stress such as fasting, infection or a protein load accelerates flux through the blocked pathway and can precipitate life-threatening decompensation, particularly in the neonatal period and during intercurrent illness.",
-    "additionalDifferentials": [
-      "Other organic acidaemias (methylmalonic and propionic acidaemia)",
-      "Maple syrup urine disease",
-      "Urea cycle disorders presenting with hyperammonaemia",
-      "Multiple acyl-CoA dehydrogenase deficiency (glutaric aciduria type 2)",
-      "Neonatal sepsis and other causes of neonatal encephalopathy",
-      "Fatty-acid oxidation disorders",
-      "Ketotic hypoglycaemia and other causes of high-anion-gap acidosis"
+    [
+     "Key Investigations",
+     "Plasma acylcarnitine profile showing raised isovalerylcarnitine (C5), Urine organic acids showing isovalerylglycine and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Plasma acylcarnitine profile showing raised isovalerylcarnitine (C5)",
-      "Urine organic acids showing isovalerylglycine and 3-hydroxyisovaleric acid",
-      "Blood gas, anion gap, glucose, ketones, lactate and ammonia during illness",
-      "Full blood count to detect neutropenia, thrombocytopenia or pancytopenia",
-      "Plasma amino acids and carnitine status",
-      "IVD gene sequencing for confirmation and family counselling",
-      "Newborn screening result review and confirmatory testing"
+    [
+     "Primary Differentials",
+     "Other organic acidaemias (methylmalonic and propionic acidaemia), Maple syrup urine disease, Urea cycle disorders presenting with",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Progressive lethargy, seizures or coma indicating metabolic encephalopathy",
-      "Severe high-anion-gap metabolic acidosis unresponsive to initial resuscitation",
-      "Significant hyperammonaemia",
-      "Neutropenic sepsis or severe cytopenias during an acute crisis",
-      "Signs of cerebral oedema or raised intracranial pressure"
+    [
+     "Management Strategy",
+     "Lifelong leucine (protein) restriction with a specialised metabolic formula to limit isovaleryl-CoA accumulation",
+     "Core treatment modality"
     ],
-    "prognosis": "With newborn screening, prompt treatment of crises and a leucine-restricted diet with glycine and carnitine, many patients achieve normal or near-normal development, though severe neonatal crises can be fatal or leave neurological sequelae.",
-    "pitfalls": [
-      "Attributing a neonatal presentation to sepsis alone and missing the underlying metabolic disorder",
-      "Continuing normal protein intake or allowing fasting during acute illness, worsening decompensation",
-      "Overlooking the characteristic odour as a diagnostic clue",
-      "Misreading the acute cytopenias as primary haematological or infective disease",
-      "Under-treating intercurrent illnesses that can rapidly precipitate a crisis"
-    ],
-    "references": [
-      "Inherited Metabolic Diseases (standard reference text)",
-      "Newborn screening and metabolic medicine guidelines",
-      "Clinical biochemistry references"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Lifelong leucine (protein) restriction with a specialised metabolic formula to limit isovaleryl-CoA accumulation",
-      "Glycine and L-carnitine supplementation to conjugate isovaleric acid into non-toxic, readily excreted products",
-      "Emergency sick-day regimen during intercurrent illness: temporary withdrawal of natural protein with high-energy intake and intravenous glucose to reverse catabolism",
-      "Acute crisis management with fluids and glucose, correction of high anion-gap metabolic acidosis and ammonia-lowering measures, escalating to haemodialysis for severe hyperammonaemia",
-      "Monitoring of growth and development, acylcarnitine profile, ammonia and full blood count for neutropenia and thrombocytopenia",
-      "Genetic counselling for autosomal recessive inheritance with sibling and family screening, aided by newborn screening detection",
-      "Involvement of a metabolic dietitian and specialist metabolic team for coordinated long-term care"
+    [
+     "Clinical Pitfall",
+     "Attributing a neonatal presentation to sepsis alone and missing the underlying metabolic disorder",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for isovaleric acidaemia."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "isovaleric-acidaemia-real-image",
+   "title": "Isovaleric acidaemia: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

@@ -1,83 +1,178 @@
 {
-  "id": "talaromycosis",
-  "name": "Talaromycosis",
-  "aliases": [
-    "penicilliosis",
-    "Talaromyces marneffei infection",
-    "Penicillium marneffei infection"
+ "id": "talaromycosis",
+ "name": "Talaromycosis",
+ "aliases": [
+  "penicilliosis",
+  "Talaromyces marneffei infection",
+  "Penicillium marneffei infection"
+ ],
+ "class": "infective",
+ "system": "Infectious Diseases",
+ "specialty": "Infectious Diseases",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Harrison's Principles of Internal Medicine / WHO / India NTEP",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "An invasive mycosis caused by the dimorphic fungus Talaromyces marneffei, endemic to South-East Asia, southern China and parts of north-eastern India",
+   "It occurs predominantly in people with advanced HIV and low CD4 counts, and is an AIDS-defining opportunistic infection in endemic regions",
+   "Typical features are fever, weight loss, anaemia, hepatosplenomegaly, lymphadenopathy and characteristic umbilicated, molluscum-like skin papules often on the face and trunk",
+   "Exposure to bamboo rats and their habitats is epidemiologically linked, though the precise mode of human acquisition is thought to be inhalational",
+   "Diagnosis is confirmed by culture from blood, skin, bone marrow or lymph node, with the fungus showing characteristic fission-yeast morphology and a diffusible red pigment in culture",
+   "It closely mimics disseminated tuberculosis, histoplasmosis and cryptococcosis, so a high index of suspicion is essential in HIV-positive travellers or residents from endemic areas",
+   "Treatment follows an induction phase with amphotericin-based therapy followed by azole consolidation and, in HIV, secondary prophylaxis until immune reconstitution"
   ],
-  "class": "infective",
-  "system": "Infectious Diseases",
-  "specialty": "Infectious Diseases",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Harrison's Principles of Internal Medicine / WHO / India NTEP",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "An invasive mycosis caused by the dimorphic fungus Talaromyces marneffei, endemic to South-East Asia, southern China and parts of north-eastern India",
-      "It occurs predominantly in people with advanced HIV and low CD4 counts, and is an AIDS-defining opportunistic infection in endemic regions",
-      "Typical features are fever, weight loss, anaemia, hepatosplenomegaly, lymphadenopathy and characteristic umbilicated, molluscum-like skin papules often on the face and trunk",
-      "Exposure to bamboo rats and their habitats is epidemiologically linked, though the precise mode of human acquisition is thought to be inhalational",
-      "Diagnosis is confirmed by culture from blood, skin, bone marrow or lymph node, with the fungus showing characteristic fission-yeast morphology and a diffusible red pigment in culture",
-      "It closely mimics disseminated tuberculosis, histoplasmosis and cryptococcosis, so a high index of suspicion is essential in HIV-positive travellers or residents from endemic areas",
-      "Treatment follows an induction phase with amphotericin-based therapy followed by azole consolidation and, in HIV, secondary prophylaxis until immune reconstitution"
+  "pathophysiology": "Talaromyces marneffei is inhaled as conidia that convert to a pathogenic yeast-like form dividing by fission at body temperature. In hosts with intact cell-mediated immunity infection is usually contained, but in advanced HIV or other T-cell deficiency the organism proliferates within macrophages of the reticuloendothelial system. Haematogenous dissemination follows, seeding skin, bone marrow, liver, spleen and lymph nodes, producing a granulomatous, suppurative or necrotising reaction depending on immune status. Uncontrolled fungaemia leads to sepsis and multiorgan involvement.",
+  "additionalDifferentials": [
+   "Disseminated tuberculosis",
+   "Disseminated histoplasmosis",
+   "Cryptococcosis",
+   "Molluscum contagiosum (for skin lesions)",
+   "Disseminated non-tuberculous mycobacterial infection"
+  ],
+  "infectionMimics": [
+   "Disseminated tuberculosis",
+   "Histoplasmosis",
+   "Cryptococcosis with umbilicated skin lesions",
+   "Molluscum contagiosum in HIV"
+  ],
+  "additionalInvestigations": [
+   "Fungal culture of blood, skin lesion, bone marrow or lymph node aspirate",
+   "Microscopy of skin scrapings or tissue for intracellular fission yeasts",
+   "HIV testing and CD4 count in all suspected cases",
+   "Antigen-based assays where available for earlier diagnosis",
+   "Assessment for concurrent opportunistic infections such as tuberculosis"
+  ],
+  "redFlags": [
+   "Disseminated disease with sepsis and multiorgan involvement",
+   "Advanced HIV with very low CD4 count and high fungal burden",
+   "Respiratory failure or haemodynamic instability",
+   "Delayed diagnosis due to mimicry of tuberculosis, which markedly increases mortality"
+  ],
+  "prognosis": "Untreated disseminated talaromycosis is almost uniformly fatal, but early antifungal induction and consolidation with antiretroviral therapy and secondary prophylaxis achieve good outcomes; mortality remains high when diagnosis is delayed or the patient presents with sepsis.",
+  "pitfalls": [
+   "Misdiagnosing it as tuberculosis and delaying antifungal therapy",
+   "Stopping antifungals or secondary prophylaxis prematurely before immune reconstitution",
+   "Overlooking the diagnosis in HIV patients with relevant travel or residence history",
+   "Attributing umbilicated skin lesions solely to molluscum contagiosum"
+  ],
+  "references": [
+   "Harrison's Principles of Internal Medicine, 22e",
+   "WHO/NTEP guidelines"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Treat disseminated disease with induction antifungal therapy using liposomal amphotericin B",
+   "Follow induction with consolidation itraconazole therapy, with voriconazole as an alternative",
+   "Continue secondary antifungal prophylaxis with itraconazole until immune reconstitution on antiretroviral therapy",
+   "Initiate or optimise antiretroviral therapy in HIV-associated disease, timing it to reduce immune reconstitution inflammatory syndrome",
+   "Provide supportive care for sepsis, anaemia and organ dysfunction during the acute illness",
+   "Screen for and manage concurrent opportunistic infections such as tuberculosis",
+   "Monitor CD4 count and treatment response, escalating for severe sepsis or multiorgan involvement",
+   "Coordinate care between infectious diseases and HIV services"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "talaromycosis-pathway",
+   "title": "Talaromycosis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "An invasive mycosis caused by the dimorphic fungus Talaromyces marneffei, endemic to South-East Asia, southern China and parts of north-eastern India",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Disseminated disease with sepsis and multiorgan involvement",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Fungal culture of blood, skin lesion, bone marrow or lymph node aspirate, Microscopy of skin scrapings or tissue for intracellular fission yeasts, HIV testing and CD4 count in all suspected cases"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Treat disseminated disease with induction antifungal therapy using liposomal amphotericin B"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Misdiagnosing it as tuberculosis and delaying antifungal therapy"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of talaromycosis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "talaromycosis-matrix",
+   "title": "Talaromycosis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "An invasive mycosis caused by the dimorphic fungus Talaromyces marneffei, endemic to South-East Asia, southern China and parts of",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Talaromyces marneffei is inhaled as conidia that convert to a pathogenic yeast-like form dividing by fission at body temperature. In hosts with intact cell-mediated immunity infection is usually contained, but in advanced HIV or other T-cell deficiency the organism proliferates within macrophages of the reticuloendothelial system. Haematogenous dissemination follows, seeding skin, bone marrow, liver, spleen and lymph nodes, producing a granulomatous, suppurative or necrotising reaction depending on immune status. Uncontrolled fungaemia leads to sepsis and multiorgan involvement.",
-    "additionalDifferentials": [
-      "Disseminated tuberculosis",
-      "Disseminated histoplasmosis",
-      "Cryptococcosis",
-      "Molluscum contagiosum (for skin lesions)",
-      "Disseminated non-tuberculous mycobacterial infection"
+    [
+     "Key Investigations",
+     "Fungal culture of blood, skin lesion, bone marrow or lymph node aspirate, Microscopy of skin scrapings or tissue for",
+     "Confirmatory diagnostic workup"
     ],
-    "infectionMimics": [
-      "Disseminated tuberculosis",
-      "Histoplasmosis",
-      "Cryptococcosis with umbilicated skin lesions",
-      "Molluscum contagiosum in HIV"
+    [
+     "Primary Differentials",
+     "Disseminated tuberculosis, Disseminated histoplasmosis, Cryptococcosis",
+     "Rule out key mimics"
     ],
-    "additionalInvestigations": [
-      "Fungal culture of blood, skin lesion, bone marrow or lymph node aspirate",
-      "Microscopy of skin scrapings or tissue for intracellular fission yeasts",
-      "HIV testing and CD4 count in all suspected cases",
-      "Antigen-based assays where available for earlier diagnosis",
-      "Assessment for concurrent opportunistic infections such as tuberculosis"
+    [
+     "Management Strategy",
+     "Treat disseminated disease with induction antifungal therapy using liposomal amphotericin B",
+     "Core treatment modality"
     ],
-    "redFlags": [
-      "Disseminated disease with sepsis and multiorgan involvement",
-      "Advanced HIV with very low CD4 count and high fungal burden",
-      "Respiratory failure or haemodynamic instability",
-      "Delayed diagnosis due to mimicry of tuberculosis, which markedly increases mortality"
-    ],
-    "prognosis": "Untreated disseminated talaromycosis is almost uniformly fatal, but early antifungal induction and consolidation with antiretroviral therapy and secondary prophylaxis achieve good outcomes; mortality remains high when diagnosis is delayed or the patient presents with sepsis.",
-    "pitfalls": [
-      "Misdiagnosing it as tuberculosis and delaying antifungal therapy",
-      "Stopping antifungals or secondary prophylaxis prematurely before immune reconstitution",
-      "Overlooking the diagnosis in HIV patients with relevant travel or residence history",
-      "Attributing umbilicated skin lesions solely to molluscum contagiosum"
-    ],
-    "references": [
-      "Harrison's Principles of Internal Medicine, 22e",
-      "WHO/NTEP guidelines"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Treat disseminated disease with induction antifungal therapy using liposomal amphotericin B",
-      "Follow induction with consolidation itraconazole therapy, with voriconazole as an alternative",
-      "Continue secondary antifungal prophylaxis with itraconazole until immune reconstitution on antiretroviral therapy",
-      "Initiate or optimise antiretroviral therapy in HIV-associated disease, timing it to reduce immune reconstitution inflammatory syndrome",
-      "Provide supportive care for sepsis, anaemia and organ dysfunction during the acute illness",
-      "Screen for and manage concurrent opportunistic infections such as tuberculosis",
-      "Monitor CD4 count and treatment response, escalating for severe sepsis or multiorgan involvement",
-      "Coordinate care between infectious diseases and HIV services"
+    [
+     "Clinical Pitfall",
+     "Misdiagnosing it as tuberculosis and delaying antifungal therapy",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for talaromycosis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "talaromycosis-real-image",
+   "title": "Talaromycosis: Diagnostic Microbiological / Smear Examination",
+   "type": "diagram",
+   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
+   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
+   "annotations": [
+    {
+     "label": "Pathogen Detection",
+     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
+    },
+    {
+     "label": "Inflammatory Response",
+     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
+    },
+    {
+     "label": "Diagnostic Confirmation",
+     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+    }
+   ]
+  }
+ ]
 }

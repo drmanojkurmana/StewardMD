@@ -204,5 +204,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "h8959e946"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "lung_abscess-dx-algo",
+      "title": "Lung Abscess: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Roughly 80% of lung abscesses are primary, arising from aspiration in the absence of an underlying pulmonary or systemic disease; the remaining ~20% are secondary to a predisposing process such as bronchial obstruction or immunocompromise",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Life-threatening hemoptysis (p.1036)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: CT chest, which defines cavitation earlier than plain film, can reveal an underlying cause such as malignancy, and helps separate a peripheral abscess from a pleural infection (p.1035), Molecular methods such as 16S rRNA"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Lung abscesses are classified as primary (~80%, aspiration-related, anaerobe-predominant, no underlying lung/systemic disease) versus secondary (underlying obstruction, systemic illness, or immunocompromise); and by"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Failure to exclude an obstructing malignancy: in older patients, those with malignancy risk factors, or those lacking clear aspiration risk, early bronchoscopy/biopsy and CT are indicated rather than assuming a primary"
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for lung abscess."
+    }
+  ],
+  "tables": [
+    {
+      "id": "lung_abscess-matrix",
+      "title": "Lung Abscess: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Roughly 80% of lung abscesses are primary, arising from aspiration in the absence of an underlying pulmonary or systemic disease;",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "CT chest, which defines cavitation earlier than plain film, can reveal an underlying cause such as malignancy, and helps separate",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Pulmonary malignancy presenting as a cavitary lesion (p.1035), Pulmonary infarction (p.1035), Pulmonary sequestration (p.1035)",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Life-threatening hemoptysis (p.1036)",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failure to exclude an obstructing malignancy: in older patients, those with malignancy risk factors, or those lacking clear",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for lung abscess."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "lung-abscess-real-image",
+      "title": "Lung Abscess: Diagnostic Chest Radiograph",
+      "type": "xray",
+      "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
+      "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
+      "annotations": [
+        {
+          "label": "Parenchyma & Airspaces",
+          "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
+        },
+        {
+          "label": "Bronchovascular Tree",
+          "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
+        },
+        {
+          "label": "Pleural Margins",
+          "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+        }
+      ]
+    }
+  ]
 }

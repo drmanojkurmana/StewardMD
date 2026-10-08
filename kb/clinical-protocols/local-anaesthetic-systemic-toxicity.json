@@ -5,7 +5,18 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Operating theatre, labour ward, emergency department, day-care and procedure rooms",
- "aliases": ["LAST", "local anesthetic toxicity", "LA toxicity", "lignocaine toxicity", "lidocaine toxicity", "bupivacaine toxicity", "lipid emulsion", "Intralipid", "lipid rescue", "maximum dose local anaesthetic"],
+ "aliases": [
+  "LAST",
+  "local anesthetic toxicity",
+  "LA toxicity",
+  "lignocaine toxicity",
+  "lidocaine toxicity",
+  "bupivacaine toxicity",
+  "lipid emulsion",
+  "Intralipid",
+  "lipid rescue",
+  "maximum dose local anaesthetic"
+ ],
  "summary": "Stop the injection, call for help, secure the airway with 100% oxygen, treat seizures with a benzodiazepine, give 20% lipid emulsion early (1.5 mL/kg bolus over 1 minute, then 15 mL/kg/h, which is 0.25 mL/kg/min; maximum 12 mL/kg), and run modified resuscitation with small adrenaline doses and no vasopressin or lidocaine.",
  "sections": [
   {
@@ -83,18 +94,160 @@
   }
  ],
  "drugs": [
-  { "name": "Lipid emulsion 20% (for example Intralipid)", "dose": "1.5 mL/kg IV bolus over 1 minute, then 15 mL/kg/h (0.25 mL/kg/min). Over 70 kg (ASRA 2020): about 100 mL over 2 to 3 min, then 200 to 250 mL over 15 to 20 min", "notes": "If unstable at 5 minutes: up to 2 repeat boluses 5 minutes apart and double the infusion to 30 mL/kg/h. Continue at least 15 minutes after stability. Maximum cumulative dose 12 mL/kg." },
-  { "name": "Adrenaline (epinephrine)", "dose": "1 mcg/kg IV or less per bolus in LAST arrest or hypotension", "notes": "Avoid standard 1 mg doses; avoid vasopressin." },
-  { "name": "Lorazepam", "dose": "0.1 mg/kg IV (max 4 mg), may repeat once after 5 to 10 minutes", "notes": "Midazolam in small IV increments is an alternative; benzodiazepines are preferred for LAST seizures." },
-  { "name": "Amiodarone", "dose": "300 mg IV bolus for shock-refractory VF or pulseless VT (adult ALS dosing)", "notes": "Preferred antiarrhythmic; do not use lidocaine." },
-  { "name": "Lidocaine (lignocaine) maximum dose", "dose": "Plain 4.5 mg/kg (max 300 mg); with adrenaline 7 mg/kg (max 500 mg)", "notes": "Some references allow 5 mg/kg plain." },
-  { "name": "Bupivacaine maximum dose", "dose": "About 2 mg/kg (max 150 mg per UK labelling, 175 mg in some references)", "notes": "Most cardiotoxic; resuscitation can be prolonged." }
+  {
+   "name": "Lipid emulsion 20% (for example Intralipid)",
+   "dose": "1.5 mL/kg IV bolus over 1 minute, then 15 mL/kg/h (0.25 mL/kg/min). Over 70 kg (ASRA 2020): about 100 mL over 2 to 3 min, then 200 to 250 mL over 15 to 20 min",
+   "notes": "If unstable at 5 minutes: up to 2 repeat boluses 5 minutes apart and double the infusion to 30 mL/kg/h. Continue at least 15 minutes after stability. Maximum cumulative dose 12 mL/kg."
+  },
+  {
+   "name": "Adrenaline (epinephrine)",
+   "dose": "1 mcg/kg IV or less per bolus in LAST arrest or hypotension",
+   "notes": "Avoid standard 1 mg doses; avoid vasopressin."
+  },
+  {
+   "name": "Lorazepam",
+   "dose": "0.1 mg/kg IV (max 4 mg), may repeat once after 5 to 10 minutes",
+   "notes": "Midazolam in small IV increments is an alternative; benzodiazepines are preferred for LAST seizures."
+  },
+  {
+   "name": "Amiodarone",
+   "dose": "300 mg IV bolus for shock-refractory VF or pulseless VT (adult ALS dosing)",
+   "notes": "Preferred antiarrhythmic; do not use lidocaine."
+  },
+  {
+   "name": "Lidocaine (lignocaine) maximum dose",
+   "dose": "Plain 4.5 mg/kg (max 300 mg); with adrenaline 7 mg/kg (max 500 mg)",
+   "notes": "Some references allow 5 mg/kg plain."
+  },
+  {
+   "name": "Bupivacaine maximum dose",
+   "dose": "About 2 mg/kg (max 150 mg per UK labelling, 175 mg in some references)",
+   "notes": "Most cardiotoxic; resuscitation can be prolonged."
+  }
  ],
  "sources": [
-  { "org": "ASRA Pain Medicine", "title": "Checklist for treatment of local anesthetic systemic toxicity (LAST), 2020 version", "year": 2020, "url": "https://asra.com/news-publications/asra-updates/blog-landing/guidelines/2020/11/01/checklist-for-treatment-of-local-anesthetic-systemic-toxicity" },
-  { "org": "ASRA Pain Medicine", "title": "Local anesthetic systemic toxicity checklist (printable PDF)", "year": 2020, "url": "https://asra.com/docs/default-source/guidelines-articles/local-anesthetic-systemic-toxicity-rgb.pdf?sfvrsn=33b348e_2" },
-  { "org": "Local and Regional Anesthesia (El-Boghdadly, Pawa, Chin)", "title": "Local anesthetic systemic toxicity: current perspectives", "year": 2018, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6087022/" },
-  { "org": "Association of Anaesthetists", "title": "Management of severe local anaesthetic toxicity (2010 guideline, archived; now Quick Reference Handbook 3-10)", "year": 2010, "url": "https://anaesthetists.org/Home/Resources-publications/Guidelines/Archived-guidelines/Management-of-severe-local-anaesthetic-toxicity" }
+  {
+   "org": "ASRA Pain Medicine",
+   "title": "Checklist for treatment of local anesthetic systemic toxicity (LAST), 2020 version",
+   "year": 2020,
+   "url": "https://asra.com/news-publications/asra-updates/blog-landing/guidelines/2020/11/01/checklist-for-treatment-of-local-anesthetic-systemic-toxicity"
+  },
+  {
+   "org": "ASRA Pain Medicine",
+   "title": "Local anesthetic systemic toxicity checklist (printable PDF)",
+   "year": 2020,
+   "url": "https://asra.com/docs/default-source/guidelines-articles/local-anesthetic-systemic-toxicity-rgb.pdf?sfvrsn=33b348e_2"
+  },
+  {
+   "org": "Local and Regional Anesthesia (El-Boghdadly, Pawa, Chin)",
+   "title": "Local anesthetic systemic toxicity: current perspectives",
+   "year": 2018,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6087022/"
+  },
+  {
+   "org": "Association of Anaesthetists",
+   "title": "Management of severe local anaesthetic toxicity (2010 guideline, archived; now Quick Reference Handbook 3-10)",
+   "year": 2010,
+   "url": "https://anaesthetists.org/Home/Resources-publications/Guidelines/Archived-guidelines/Management-of-severe-local-anaesthetic-toxicity"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "local-anaesthetic-systemic-toxicity-pathway",
+   "title": "Local anaesthetic systemic toxicity (LAST) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Usually within seconds to minutes of injection, but can be delayed (up to hours with fascial plane blocks or continuous infusions, sometimes days into an infusion).",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Stop injecting. Call for help and get the LAST kit (20% lipid emulsion and checklist). Consider alerting a cardiopulmonary bypass or ECMO team early.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Cardiovascular: early hypertension and tachycardia, then bradycardia, conduction block, hypotension, ventricular arrhythmias and asystole. About one in five episodes has cardiovascular signs without CNS warning."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "20% lipid emulsion: bolus 1.5 mL/kg (lean body weight) IV over 1 minute (AAGBI; ASRA gives it over 2 to 3 minutes), then infuse 15 mL/kg/h (0.25 mL/kg/min); consider a pump if under 40 kg."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Once stable, observe at least 2 hours after an isolated seizure and 4 to 6 hours after cardiovascular instability; after cardiac arrest, admit to ICU."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for local anaesthetic systemic toxicity (last)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "local-anaesthetic-systemic-toxicity-summary-matrix",
+   "title": "Local anaesthetic systemic toxicity (LAST) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Usually within seconds to minutes of injection, but can be delayed (up to hours with fascial plane blocks or continuous infusions,",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Stop injecting. Call for help and get the LAST kit (20% lipid emulsion and checklist). Consider alerting a cardiopulmonary bypass or ECMO",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Lipid emulsion 20% (for example Intralipid): 1.5 mL/kg IV bolus over 1 minute, then 15 mL/kg/h (0.25 mL/kg/min). Over 70 kg (ASRA 2020):",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Treating LAST cardiac arrest with standard 1 mg adrenaline doses, vasopressin or lidocaine.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for local anaesthetic systemic toxicity (last)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "local-anaesthetic-systemic-toxicity-real-image",
+   "title": "Local anaesthetic systemic toxicity (LAST): 12-Lead Diagnostic Electrocardiogram",
+   "type": "ecg",
+   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
+   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
+   "annotations": [
+    {
+     "label": "Conduction & Axis",
+     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
+    },
+    {
+     "label": "Repolarization",
+     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
+    },
+    {
+     "label": "Rhythm & Intervals",
+     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+    }
+   ]
+  }
+ ]
 }

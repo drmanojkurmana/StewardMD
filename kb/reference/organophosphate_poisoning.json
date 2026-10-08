@@ -1,83 +1,178 @@
 {
-  "id": "organophosphate_poisoning",
-  "name": "Organophosphate/carbamate poisoning",
-  "aliases": [
-    "organophosphate poisoning",
-    "carbamate poisoning",
-    "cholinesterase inhibitor poisoning",
-    "nerve agent poisoning",
-    "anticholinesterase toxicity"
+ "id": "organophosphate_poisoning",
+ "name": "Organophosphate/carbamate poisoning",
+ "aliases": [
+  "organophosphate poisoning",
+  "carbamate poisoning",
+  "cholinesterase inhibitor poisoning",
+  "nerve agent poisoning",
+  "anticholinesterase toxicity"
+ ],
+ "class": "non_infective",
+ "system": "Toxicology",
+ "specialty": "Clinical Toxicology / Emergency Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Goldfrank's Toxicologic Emergencies",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "The cholinergic toxidrome combines muscarinic features summarised as SLUDGE (salivation, lacrimation, urination, defecation, gastrointestinal distress, emesis) with nicotinic effects",
+   "The most life-threatening features are the 'killer Bs': bronchorrhoea, bronchospasm and bradycardia causing respiratory failure",
+   "A garlic or solvent-like odour and a history of agricultural, pesticide or occupational exposure support the diagnosis",
+   "Nicotinic overstimulation produces muscle fasciculations, weakness and, later, paralysis, while central effects cause agitation, seizures and coma",
+   "Carbamate inhibition of cholinesterase is reversible and generally shorter-lived than organophosphate poisoning, which can become irreversible after enzyme 'ageing'",
+   "Management centres on aggressive antimuscarinic therapy with atropine titrated to drying of secretions, plus an oxime reactivator for organophosphates, with airway protection paramount",
+   "An intermediate syndrome of proximal and respiratory muscle weakness can appear one to four days later, and delayed peripheral neuropathy may follow certain agents",
+   "Decontamination with removal of clothing and skin washing protects both patient and staff, who should wear protective equipment"
   ],
-  "class": "non_infective",
-  "system": "Toxicology",
-  "specialty": "Clinical Toxicology / Emergency Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Goldfrank's Toxicologic Emergencies",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "The cholinergic toxidrome combines muscarinic features summarised as SLUDGE (salivation, lacrimation, urination, defecation, gastrointestinal distress, emesis) with nicotinic effects",
-      "The most life-threatening features are the 'killer Bs': bronchorrhoea, bronchospasm and bradycardia causing respiratory failure",
-      "A garlic or solvent-like odour and a history of agricultural, pesticide or occupational exposure support the diagnosis",
-      "Nicotinic overstimulation produces muscle fasciculations, weakness and, later, paralysis, while central effects cause agitation, seizures and coma",
-      "Carbamate inhibition of cholinesterase is reversible and generally shorter-lived than organophosphate poisoning, which can become irreversible after enzyme 'ageing'",
-      "Management centres on aggressive antimuscarinic therapy with atropine titrated to drying of secretions, plus an oxime reactivator for organophosphates, with airway protection paramount",
-      "An intermediate syndrome of proximal and respiratory muscle weakness can appear one to four days later, and delayed peripheral neuropathy may follow certain agents",
-      "Decontamination with removal of clothing and skin washing protects both patient and staff, who should wear protective equipment"
+  "pathophysiology": "Organophosphates and carbamates inhibit acetylcholinesterase, preventing the breakdown of acetylcholine at muscarinic, nicotinic and central synapses. The resulting accumulation of acetylcholine overstimulates cholinergic receptors, producing the mixed muscarinic and nicotinic cholinergic crisis. Organophosphate-enzyme bonds can undergo 'ageing', becoming permanent and refractory to oxime reactivation, whereas carbamate inhibition spontaneously reverses. Excess cholinergic activity at the neuromuscular junction first causes fasciculations, then depolarising blockade and weakness, while central accumulation drives seizures and depressed consciousness.",
+  "additionalDifferentials": [
+   "Carbamate versus organophosphate agent (affecting reversibility and oxime use)",
+   "Nerve agent exposure in a mass-casualty or deliberate setting",
+   "Muscarinic mushroom poisoning",
+   "Acute pulmonary oedema or asthma from another cause",
+   "Sepsis or gastroenteritis with hypersecretion",
+   "Other causes of cholinergic-appearing crisis such as pyridostigmine excess"
+  ],
+  "additionalInvestigations": [
+   "Red-cell (acetyl) cholinesterase and plasma (butyryl) cholinesterase activity to support diagnosis and monitor recovery",
+   "Arterial blood gas and continuous oxygen saturation to detect respiratory failure",
+   "Electrocardiogram for bradyarrhythmias and QT prolongation",
+   "Serum electrolytes, glucose and renal function",
+   "Chest radiograph for aspiration or pulmonary oedema",
+   "Serial neuromuscular assessment for intermediate syndrome"
+  ],
+  "redFlags": [
+   "Copious bronchorrhoea and bronchospasm threatening the airway",
+   "Bradycardia with haemodynamic compromise",
+   "Seizures or deteriorating consciousness",
+   "Progressive muscle weakness or respiratory failure suggesting intermediate syndrome",
+   "Inadequate response to escalating antimuscarinic therapy"
+  ],
+  "prognosis": "With early airway control, adequate atropinisation and oxime therapy, many patients recover fully, though severe poisoning, delayed presentation or intermediate syndrome may require prolonged ventilation; mortality is driven mainly by respiratory failure and aspiration.",
+  "pitfalls": [
+   "Under-dosing atropine and failing to titrate to clearing of bronchial secretions",
+   "Neglecting staff and rescuer decontamination, risking secondary exposure",
+   "Missing the delayed intermediate syndrome after apparent recovery",
+   "Relying on a single cholinesterase measurement rather than trends",
+   "Assuming carbamate poisoning is always trivial and omitting close respiratory monitoring"
+  ],
+  "references": [
+   "Goldfrank's Toxicologic Emergencies",
+   "UpToDate: Organophosphate and carbamate poisoning"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Decontaminate by removing contaminated clothing and washing the skin, using staff personal protective equipment to prevent secondary exposure",
+   "Protect the airway and give high-flow oxygen and mechanical ventilation for respiratory failure and bronchorrhoea",
+   "Administer antimuscarinic therapy with atropine titrated to drying of pulmonary secretions and reversal of bradycardia as the central pillar",
+   "Give an oxime reactivator (pralidoxime) for organophosphate poisoning, before enzyme ageing, to reverse nicotinic effects",
+   "Control seizures and agitation with benzodiazepines (diazepam)",
+   "Monitor in intensive care with serial cholinesterase activity and vigilance for the delayed intermediate syndrome requiring prolonged ventilation",
+   "Provide supportive care and avoid contraindicated agents such as depolarising neuromuscular blockers"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "organophosphate_poisoning-pathway",
+   "title": "Organophosphate/carbamate poisoning: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "The cholinergic toxidrome combines muscarinic features summarised as SLUDGE (salivation, lacrimation, urination, defecation, gastrointestinal distress, emesis) with nicotinic effects",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Copious bronchorrhoea and bronchospasm threatening the airway",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Red-cell (acetyl) cholinesterase and plasma (butyryl) cholinesterase activity to support diagnosis and monitor recovery, Arterial blood gas and continuous oxygen saturation to detect respiratory failure, Electrocardiogram"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Decontaminate by removing contaminated clothing and washing the skin, using staff personal protective equipment to prevent secondary exposure"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Under-dosing atropine and failing to titrate to clearing of bronchial secretions"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of organophosphate/carbamate poisoning."
+  }
+ ],
+ "tables": [
+  {
+   "id": "organophosphate_poisoning-matrix",
+   "title": "Organophosphate/carbamate poisoning: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The cholinergic toxidrome combines muscarinic features summarised as SLUDGE (salivation, lacrimation, urination, defecation,",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Organophosphates and carbamates inhibit acetylcholinesterase, preventing the breakdown of acetylcholine at muscarinic, nicotinic and central synapses. The resulting accumulation of acetylcholine overstimulates cholinergic receptors, producing the mixed muscarinic and nicotinic cholinergic crisis. Organophosphate-enzyme bonds can undergo 'ageing', becoming permanent and refractory to oxime reactivation, whereas carbamate inhibition spontaneously reverses. Excess cholinergic activity at the neuromuscular junction first causes fasciculations, then depolarising blockade and weakness, while central accumulation drives seizures and depressed consciousness.",
-    "additionalDifferentials": [
-      "Carbamate versus organophosphate agent (affecting reversibility and oxime use)",
-      "Nerve agent exposure in a mass-casualty or deliberate setting",
-      "Muscarinic mushroom poisoning",
-      "Acute pulmonary oedema or asthma from another cause",
-      "Sepsis or gastroenteritis with hypersecretion",
-      "Other causes of cholinergic-appearing crisis such as pyridostigmine excess"
+    [
+     "Key Investigations",
+     "Red-cell (acetyl) cholinesterase and plasma (butyryl) cholinesterase activity to support diagnosis and monitor recovery, Arterial",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Red-cell (acetyl) cholinesterase and plasma (butyryl) cholinesterase activity to support diagnosis and monitor recovery",
-      "Arterial blood gas and continuous oxygen saturation to detect respiratory failure",
-      "Electrocardiogram for bradyarrhythmias and QT prolongation",
-      "Serum electrolytes, glucose and renal function",
-      "Chest radiograph for aspiration or pulmonary oedema",
-      "Serial neuromuscular assessment for intermediate syndrome"
+    [
+     "Primary Differentials",
+     "Carbamate versus organophosphate agent (affecting reversibility and oxime use), Nerve agent exposure in a mass-casualty or",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Copious bronchorrhoea and bronchospasm threatening the airway",
-      "Bradycardia with haemodynamic compromise",
-      "Seizures or deteriorating consciousness",
-      "Progressive muscle weakness or respiratory failure suggesting intermediate syndrome",
-      "Inadequate response to escalating antimuscarinic therapy"
+    [
+     "Management Strategy",
+     "Decontaminate by removing contaminated clothing and washing the skin, using staff personal protective equipment to prevent",
+     "Core treatment modality"
     ],
-    "prognosis": "With early airway control, adequate atropinisation and oxime therapy, many patients recover fully, though severe poisoning, delayed presentation or intermediate syndrome may require prolonged ventilation; mortality is driven mainly by respiratory failure and aspiration.",
-    "pitfalls": [
-      "Under-dosing atropine and failing to titrate to clearing of bronchial secretions",
-      "Neglecting staff and rescuer decontamination, risking secondary exposure",
-      "Missing the delayed intermediate syndrome after apparent recovery",
-      "Relying on a single cholinesterase measurement rather than trends",
-      "Assuming carbamate poisoning is always trivial and omitting close respiratory monitoring"
-    ],
-    "references": [
-      "Goldfrank's Toxicologic Emergencies",
-      "UpToDate: Organophosphate and carbamate poisoning"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Decontaminate by removing contaminated clothing and washing the skin, using staff personal protective equipment to prevent secondary exposure",
-      "Protect the airway and give high-flow oxygen and mechanical ventilation for respiratory failure and bronchorrhoea",
-      "Administer antimuscarinic therapy with atropine titrated to drying of pulmonary secretions and reversal of bradycardia as the central pillar",
-      "Give an oxime reactivator (pralidoxime) for organophosphate poisoning, before enzyme ageing, to reverse nicotinic effects",
-      "Control seizures and agitation with benzodiazepines (diazepam)",
-      "Monitor in intensive care with serial cholinesterase activity and vigilance for the delayed intermediate syndrome requiring prolonged ventilation",
-      "Provide supportive care and avoid contraindicated agents such as depolarising neuromuscular blockers"
+    [
+     "Clinical Pitfall",
+     "Under-dosing atropine and failing to titrate to clearing of bronchial secretions",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for organophosphate/carbamate poisoning."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "organophosphate-poisoning-real-image",
+   "title": "Organophosphate/carbamate poisoning: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

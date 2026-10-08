@@ -1,76 +1,171 @@
 {
-  "id": "necrolytic_acral_erythema",
-  "name": "Necrolytic acral erythema",
-  "aliases": [
-    "NAE",
-    "acral necrolytic erythema"
+ "id": "necrolytic_acral_erythema",
+ "name": "Necrolytic acral erythema",
+ "aliases": [
+  "NAE",
+  "acral necrolytic erythema"
+ ],
+ "class": "non_infective",
+ "system": "Dermatology",
+ "specialty": "Dermatology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Rook's Textbook of Dermatology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Presents as well-demarcated, dusky erythematous to violaceous plaques with a rim of scale, erosions and later hyperkeratosis, characteristically on the dorsa of the feet and lower legs",
+   "Lesions are often symmetrical, may be pruritic or painful, and can be mistaken for psoriasis or eczema",
+   "It is strongly associated with chronic hepatitis C virus infection and is regarded as a cutaneous marker of it",
+   "Zinc deficiency frequently coexists and zinc repletion can lead to marked improvement",
+   "It belongs to the family of necrolytic erythemas that includes necrolytic migratory erythema and nutritional deficiency dermatoses",
+   "Biopsy shows psoriasiform hyperplasia with upper epidermal pallor, necrosis of keratinocytes and parakeratosis, overlapping with other necrolytic erythemas",
+   "Management combines treatment of the underlying hepatitis C with correction of zinc and other nutritional deficiencies"
   ],
-  "class": "non_infective",
-  "system": "Dermatology",
-  "specialty": "Dermatology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Rook's Textbook of Dermatology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Presents as well-demarcated, dusky erythematous to violaceous plaques with a rim of scale, erosions and later hyperkeratosis, characteristically on the dorsa of the feet and lower legs",
-      "Lesions are often symmetrical, may be pruritic or painful, and can be mistaken for psoriasis or eczema",
-      "It is strongly associated with chronic hepatitis C virus infection and is regarded as a cutaneous marker of it",
-      "Zinc deficiency frequently coexists and zinc repletion can lead to marked improvement",
-      "It belongs to the family of necrolytic erythemas that includes necrolytic migratory erythema and nutritional deficiency dermatoses",
-      "Biopsy shows psoriasiform hyperplasia with upper epidermal pallor, necrosis of keratinocytes and parakeratosis, overlapping with other necrolytic erythemas",
-      "Management combines treatment of the underlying hepatitis C with correction of zinc and other nutritional deficiencies"
+  "pathophysiology": "Necrolytic acral erythema is a necrolytic erythema most consistently linked to chronic hepatitis C virus infection. Its pathogenesis is thought to involve metabolic and nutritional disturbances associated with liver disease, particularly zinc deficiency and abnormalities of amino-acid, albumin and fatty-acid metabolism, which impair epidermal keratinocyte integrity. The nutrient-deprived upper epidermis undergoes necrolysis with the characteristic pallor, vacuolisation and parakeratosis. The frequent response to zinc supplementation supports a central role for micronutrient deficiency in genetically or hepatically susceptible individuals.",
+  "additionalDifferentials": [
+   "Psoriasis",
+   "Necrolytic migratory erythema (glucagonoma)",
+   "Acrodermatitis enteropathica / zinc deficiency",
+   "Chronic eczema / lichen simplex",
+   "Pellagra",
+   "Contact dermatitis"
+  ],
+  "additionalInvestigations": [
+   "Hepatitis C serology and confirmatory viral RNA testing",
+   "Liver function tests and assessment of chronic liver disease",
+   "Serum zinc level",
+   "Plasma amino-acid profile and albumin",
+   "Skin biopsy for the necrolytic epidermal pattern",
+   "Serum glucagon if necrolytic migratory erythema is a consideration"
+  ],
+  "redFlags": [
+   "Undiagnosed chronic hepatitis C with progression to cirrhosis or hepatocellular carcinoma",
+   "Extensive erosions with secondary bacterial infection",
+   "Failure to respond, prompting reassessment for glucagonoma or other cause",
+   "Features of decompensated liver disease"
+  ],
+  "prognosis": "Lesions can be chronic and refractory to topical therapy alone but often improve substantially with zinc repletion and successful antiviral treatment of hepatitis C; long-term outcome is influenced by the course of the underlying liver disease.",
+  "pitfalls": [
+   "Treating it as recalcitrant psoriasis or eczema without testing for hepatitis C",
+   "Not checking or replacing zinc despite its therapeutic value",
+   "Confusing it with necrolytic migratory erythema and missing a glucagonoma, or vice versa",
+   "Overlooking progression of underlying chronic liver disease"
+  ],
+  "references": [
+   "Rook's Textbook of Dermatology",
+   "Bolognia Dermatology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Oral zinc supplementation, which frequently produces marked improvement",
+   "Antiviral treatment of the underlying chronic hepatitis C with direct-acting antivirals",
+   "Correction of associated nutritional deficiencies, including amino acids and albumin",
+   "Adjunctive topical corticosteroids, recognising that topical therapy alone is often insufficient",
+   "Monitoring and management of the underlying chronic liver disease",
+   "Referral to hepatology and dermatology for coordinated care"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "necrolytic_acral_erythema-pathway",
+   "title": "Necrolytic acral erythema: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Presents as well-demarcated, dusky erythematous to violaceous plaques with a rim of scale, erosions and later hyperkeratosis, characteristically on the dorsa of the feet and lower legs",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Undiagnosed chronic hepatitis C with progression to cirrhosis or hepatocellular carcinoma",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Hepatitis C serology and confirmatory viral RNA testing, Liver function tests and assessment of chronic liver disease, Serum zinc level"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Oral zinc supplementation, which frequently produces marked improvement"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Treating it as recalcitrant psoriasis or eczema without testing for hepatitis C"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of necrolytic acral erythema."
+  }
+ ],
+ "tables": [
+  {
+   "id": "necrolytic_acral_erythema-matrix",
+   "title": "Necrolytic acral erythema: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Presents as well-demarcated, dusky erythematous to violaceous plaques with a rim of scale, erosions and later hyperkeratosis,",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Necrolytic acral erythema is a necrolytic erythema most consistently linked to chronic hepatitis C virus infection. Its pathogenesis is thought to involve metabolic and nutritional disturbances associated with liver disease, particularly zinc deficiency and abnormalities of amino-acid, albumin and fatty-acid metabolism, which impair epidermal keratinocyte integrity. The nutrient-deprived upper epidermis undergoes necrolysis with the characteristic pallor, vacuolisation and parakeratosis. The frequent response to zinc supplementation supports a central role for micronutrient deficiency in genetically or hepatically susceptible individuals.",
-    "additionalDifferentials": [
-      "Psoriasis",
-      "Necrolytic migratory erythema (glucagonoma)",
-      "Acrodermatitis enteropathica / zinc deficiency",
-      "Chronic eczema / lichen simplex",
-      "Pellagra",
-      "Contact dermatitis"
+    [
+     "Key Investigations",
+     "Hepatitis C serology and confirmatory viral RNA testing, Liver function tests and assessment of chronic liver disease, Serum zinc",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Hepatitis C serology and confirmatory viral RNA testing",
-      "Liver function tests and assessment of chronic liver disease",
-      "Serum zinc level",
-      "Plasma amino-acid profile and albumin",
-      "Skin biopsy for the necrolytic epidermal pattern",
-      "Serum glucagon if necrolytic migratory erythema is a consideration"
+    [
+     "Primary Differentials",
+     "Psoriasis, Necrolytic migratory erythema (glucagonoma), Acrodermatitis enteropathica / zinc deficiency",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Undiagnosed chronic hepatitis C with progression to cirrhosis or hepatocellular carcinoma",
-      "Extensive erosions with secondary bacterial infection",
-      "Failure to respond, prompting reassessment for glucagonoma or other cause",
-      "Features of decompensated liver disease"
+    [
+     "Management Strategy",
+     "Oral zinc supplementation, which frequently produces marked improvement",
+     "Core treatment modality"
     ],
-    "prognosis": "Lesions can be chronic and refractory to topical therapy alone but often improve substantially with zinc repletion and successful antiviral treatment of hepatitis C; long-term outcome is influenced by the course of the underlying liver disease.",
-    "pitfalls": [
-      "Treating it as recalcitrant psoriasis or eczema without testing for hepatitis C",
-      "Not checking or replacing zinc despite its therapeutic value",
-      "Confusing it with necrolytic migratory erythema and missing a glucagonoma, or vice versa",
-      "Overlooking progression of underlying chronic liver disease"
-    ],
-    "references": [
-      "Rook's Textbook of Dermatology",
-      "Bolognia Dermatology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Oral zinc supplementation, which frequently produces marked improvement",
-      "Antiviral treatment of the underlying chronic hepatitis C with direct-acting antivirals",
-      "Correction of associated nutritional deficiencies, including amino acids and albumin",
-      "Adjunctive topical corticosteroids, recognising that topical therapy alone is often insufficient",
-      "Monitoring and management of the underlying chronic liver disease",
-      "Referral to hepatology and dermatology for coordinated care"
+    [
+     "Clinical Pitfall",
+     "Treating it as recalcitrant psoriasis or eczema without testing for hepatitis C",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for necrolytic acral erythema."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "necrolytic-acral-erythema-real-image",
+   "title": "Necrolytic acral erythema: Clinical Cutaneous Dermatology Photograph",
+   "type": "diagram",
+   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
+   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
+   "annotations": [
+    {
+     "label": "Primary Lesions",
+     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
+    },
+    {
+     "label": "Demarcation & Margins",
+     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
+    },
+    {
+     "label": "Anatomical Distribution",
+     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+    }
+   ]
+  }
+ ]
 }

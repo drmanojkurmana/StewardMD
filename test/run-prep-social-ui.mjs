@@ -80,6 +80,8 @@ function arena(method, path) {
 let msgId = 1; const pending = new Map(); let ws, sessionId; const errors = [];
 const call = (m, p) => { const i = msgId++; return new Promise((r) => { pending.set(i, r); ws.send(JSON.stringify({ id: i, method: m, params: p || {}, sessionId })); }); };
 const ev = async (e) => { const r = await call("Runtime.evaluate", { expression: `(function(){try{${e}}catch(x){return "ERR:"+String(x&&x.message||x)}})()`, returnByValue: true }); return r.result && r.result.result ? r.result.result.value : undefined; };
+// Screenshots land on the final frame: finite animations (entrances, ring draw) are finished first; loops keep running.
+const shotCall = async (p) => { await ev(`document.getAnimations().forEach(function (a) { try { var t = a.effect && a.effect.getTiming(); if (t && t.iterations !== Infinity) a.finish(); } catch (e) {} }); return 1;`); return call("Page.captureScreenshot", p); };
 const until = async (e, ms = 8000) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { if (await ev(e) === true) return true; await sleep(120); } return false; };
 let fails = 0; const ok = (c, m) => { console.log((c ? "PASS " : "FAIL ") + m); if (!c) fails++; };
 const click = (sel) => ev(`var b=document.querySelector(${JSON.stringify(sel)}); if(!b) return "missing"; b.click(); return 1;`);
@@ -90,12 +92,12 @@ const text = () => ev(`return document.querySelector("#smdPrep").textContent;`);
 const shot = async (name, sel = "#smdPrep .pn-body") => {
   for (const mode of ["light", "dark"]) {
     await ev(`document.body.classList.toggle("dark", ${mode === "dark"}); return 1;`); await sleep(150);
-    let r = await call("Page.captureScreenshot", { format: "png" });
+    let r = await shotCall({ format: "png" });
     if (r.result) fs.writeFileSync(join(SHOTS, `${name}-${mode}.png`), Buffer.from(r.result.data, "base64"));
     const h = await ev(`var b=document.querySelector(${JSON.stringify(sel)}); return b && b.scrollHeight > b.clientHeight + 4 ? Math.ceil(b.scrollHeight - b.clientHeight + 844) : 0;`);
     if (h) {
       await call("Emulation.setDeviceMetricsOverride", { width: 390, height: Math.min(h, 5000), deviceScaleFactor: 2, mobile: true }); await sleep(200);
-      r = await call("Page.captureScreenshot", { format: "png" });
+      r = await shotCall({ format: "png" });
       if (r.result) fs.writeFileSync(join(SHOTS, `${name}-${mode}-full.png`), Buffer.from(r.result.data, "base64"));
       await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true }); await sleep(120);
     }
@@ -133,7 +135,7 @@ try {
   const { result: { sessionId: sid } } = await call("Target.attachToTarget", { targetId, flatten: true }); sessionId = sid;
   await call("Runtime.enable", {}); await call("Page.enable", {});
   await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
-  await call("Page.addScriptToEvaluateOnNewDocument", { source: `window.SMD_PREP_BASE=${JSON.stringify(FIX)}; window.SMD_PREP_BANK_API=${JSON.stringify(FIX + "api/")}; window.SMD_PREP_FLAG_API=${JSON.stringify(FIX + "hidden.json")}; window.confirm=function(m){(window.__confirms=window.__confirms||[]).push(m);return true;}; window.SMD_PREP_ONBOARD=false; window.toast=function(m){(window.__toasts=window.__toasts||[]).push(m);}; ${WS_STUB}` });
+  await call("Page.addScriptToEvaluateOnNewDocument", { source: `window.SMD_PREP_BANK_VER="v1"; window.SMD_PREP_BASE=${JSON.stringify(FIX)}; window.SMD_PREP_BANK_API=${JSON.stringify(FIX + "api/")}; window.SMD_PREP_FLAG_API=${JSON.stringify(FIX + "hidden.json")}; window.confirm=function(m){(window.__confirms=window.__confirms||[]).push(m);return true;}; window.SMD_PREP_ONBOARD=false; window.toast=function(m){(window.__toasts=window.__toasts||[]).push(m);}; ${WS_STUB}` });
   await call("Fetch.enable", { patterns: [{ urlPattern: "*/api/prep/social/*" }, { urlPattern: "*/api/prep/arena/*" }] });
   await call("Page.navigate", { url: BASE + "?prep=1&tour=0" });
   await until(`return !!(window.PREP && window.SMD_showHome);`, 30000);
@@ -239,9 +241,9 @@ try {
 
   // ---- accuracy in the app
   await ev(`PrepSocial.openAccuracy(); return 1;`);
-  ok(await until(`var b=document.querySelector("#smdPrep .ps-acc"); return !!b && document.querySelectorAll("#smdPrep .ps-bars li").length>=10 && /Not yet published/.test(b.textContent) && /How these numbers are made/.test(b.textContent) && /Generated \\d{4}-\\d{2}-\\d{2}/.test(b.textContent);`, 15000), "in-app accuracy: per subject bars, Not yet published, how made, generation date");
+  ok(await until(`var b=document.querySelector("#smdPrep .ps-acc"); return !!b && document.querySelectorAll("#smdPrep .ps-bars li").length>=10 && /Not yet published/.test(b.textContent) && /How these numbers are made/.test(b.textContent) && /Updated \\d{4}-\\d{2}-\\d{2}/.test(b.textContent) && !/\\bAI\\b|MedMCQA/.test(b.textContent);`, 15000), "in-app accuracy: per subject bars, Not yet published, how made, update date, no AI or source naming (owner rule)");
   const acc = JSON.parse(fs.readFileSync(join(HERE, "..", "prep/accuracy.json"), "utf8"));
-  ok(await ev(`return document.querySelector("#smdPrep .ps-acc").textContent;`).then((t) => t.includes(acc.keys.disputed.toLocaleString("en-IN")) && t.includes(acc.ai.questions.accepted.toLocaleString("en-IN"))), "the figures shown are accuracy.json's");
+  ok(await ev(`return document.querySelector("#smdPrep .ps-acc").textContent;`).then((t) => t.includes(acc.keys.disputed.toLocaleString("en-IN")) && t.includes(acc.keys.screened.toLocaleString("en-IN"))), "the figures shown are accuracy.json's");
   await shot("accuracy-app");
   await ev(`PREP.close(); return 1;`);
 
@@ -253,7 +255,7 @@ try {
   for (const mode of ["light", "dark"]) {
     await call("Emulation.setEmulatedMedia", { features: [{ name: "prefers-color-scheme", value: mode }] });
     await call("Emulation.setDeviceMetricsOverride", { width: 1280, height: 900, deviceScaleFactor: 1, mobile: false }); await sleep(250);
-    const r = await call("Page.captureScreenshot", { format: "png" }); if (r.result) fs.writeFileSync(join(SHOTS, `accuracy-web-desktop-${mode}.png`), Buffer.from(r.result.data, "base64"));
+    const r = await shotCall({ format: "png" }); if (r.result) fs.writeFileSync(join(SHOTS, `accuracy-web-desktop-${mode}.png`), Buffer.from(r.result.data, "base64"));
   }
   ok(await ev(`return document.body.classList.contains("dark");`) === true, "the web page follows the system dark setting");
 

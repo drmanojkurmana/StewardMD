@@ -137,5 +137,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "h6e052034"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "aortic_stenosis-dx-algo",
+      "title": "Aortic stenosis (syncope): Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "The murmur of AS is a crescendo-decrescendo (midsystolic/ejection) murmur, usually loudest in the second right intercostal space and radiating into the carotids; it is the most common midsystolic murmur in adults (Harrison 22e p.328).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: A weak and delayed carotid pulse (pulsus parvus et tardus) indicates severe AS (Harrison 22e p.329, 1905).",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Transthoracic echocardiography to assess valve anatomy (tricuspid/bicuspid, leaflet calcification, excursion), stenosis severity, LV size/wall thickness/function, and aortic root and proximal ascending aorta (Harrison 22e"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Echo: peak instantaneous velocities of 3.0 m/s or higher (often >4.0 m/s) correspond to gradients of ~36 and ~64 mmHg and indicate at least moderate AS; aortic valve area 40 mmHg indicates severe AS (Harrison 22e"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Avoid aggressive preload/afterload reduction: aggressive treatment of cardiac failure with diuretics and/or vasodilators can precipitate orthostatic hypotension in patients with structural disease such as AS (Harrison"
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for aortic stenosis (syncope)."
+    }
+  ],
+  "tables": [
+    {
+      "id": "aortic_stenosis-matrix",
+      "title": "Aortic stenosis (syncope): Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The murmur of AS is a crescendo-decrescendo (midsystolic/ejection) murmur, usually loudest in the second right intercostal space",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Transthoracic echocardiography to assess valve anatomy (tricuspid/bicuspid, leaflet calcification, excursion), stenosis severity,",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Aortic sclerosis (focal leaflet thickening/calcification without obstruction; Doppler jet velocity 2.5 m/s or less) can produce a",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "A weak and delayed carotid pulse (pulsus parvus et tardus) indicates severe AS (Harrison 22e p.329, 1905).",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Avoid aggressive preload/afterload reduction: aggressive treatment of cardiac failure with diuretics and/or vasodilators can",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for aortic stenosis (syncope)."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "aortic-stenosis-real-image",
+      "title": "Aortic stenosis (syncope): 12-Lead Diagnostic Electrocardiogram",
+      "type": "ecg",
+      "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
+      "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
+      "annotations": [
+        {
+          "label": "Conduction & Axis",
+          "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
+        },
+        {
+          "label": "Repolarization",
+          "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
+        },
+        {
+          "label": "Rhythm & Intervals",
+          "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+        }
+      ]
+    }
+  ]
 }

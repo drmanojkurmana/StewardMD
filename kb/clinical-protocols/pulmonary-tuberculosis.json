@@ -6,7 +6,23 @@
  "basis": "india",
  "counterpart": "pulmonary-tuberculosis-international",
  "setting": "Outpatient, TB unit, ward",
- "aliases": ["TB", "PTB", "tuberculosis", "koch's", "DS-TB", "NTEP", "RNTCP", "ATT", "anti-tubercular treatment", "HRZE", "CBNAAT", "Truenat", "Ni-kshay", "Nikshay Poshan Yojana", "UDST"],
+ "aliases": [
+  "TB",
+  "PTB",
+  "tuberculosis",
+  "koch's",
+  "DS-TB",
+  "NTEP",
+  "RNTCP",
+  "ATT",
+  "anti-tubercular treatment",
+  "HRZE",
+  "CBNAAT",
+  "Truenat",
+  "Ni-kshay",
+  "Nikshay Poshan Yojana",
+  "UDST"
+ ],
  "summary": "Test every presumptive TB patient upfront with NAAT (CBNAAT or Truenat) and rapid drug resistance testing, notify on Ni-kshay, triage for severe illness, and treat drug-susceptible pulmonary TB with daily 2HRZE/4HRE fixed-dose combinations by weight band, with nutrition support (Rs 1000/month), monthly review and post-treatment follow-up.",
  "sections": [
   {
@@ -87,16 +103,150 @@
   }
  ],
  "drugs": [
-  { "name": "4FDC HRZE (isoniazid 75 mg, rifampicin 150 mg, pyrazinamide 400 mg, ethambutol 275 mg)", "dose": "Orally once daily for 2 months: 25 to 34 kg 2 tablets; 35 to 49 kg 3; 50 to 64 kg 4; 65 to 75 kg 5; above 75 kg 6", "notes": "Approximates H 5, R 10, Z 25, E 15 mg/kg/day." },
-  { "name": "3FDC HRE (isoniazid 75 mg, rifampicin 150 mg, ethambutol 275 mg)", "dose": "Orally once daily for 4 months, same number of tablets as in the intensive phase", "notes": "Adjust band if weight changes by 5 kg or more." },
-  { "name": "Pyridoxine (vitamin B6)", "dose": "10 to 25 mg orally once daily with isoniazid", "notes": "For those at risk of neuropathy: diabetes, alcohol use, undernutrition, HIV, CKD, pregnancy, breastfeeding." },
-  { "name": "H mono/poly-resistant regimen (6)Lfx-REZ", "dose": "Daily for 6 months. 30 to 45 kg: rifampicin 450 mg, ethambutol 800 mg, pyrazinamide 1250 mg, levofloxacin 750 mg. 46 to 70 kg: 600 mg, 1200 mg, 1750 mg, 1000 mg. Above 70 kg: 750 mg, 1600 mg, 2000 mg, 1000 mg", "notes": "Only after rifampicin resistance is excluded; extend to 9 months for extensive disease or month-4 smear positive (NTEP DR-TB 2025)." }
+  {
+   "name": "4FDC HRZE (isoniazid 75 mg, rifampicin 150 mg, pyrazinamide 400 mg, ethambutol 275 mg)",
+   "dose": "Orally once daily for 2 months: 25 to 34 kg 2 tablets; 35 to 49 kg 3; 50 to 64 kg 4; 65 to 75 kg 5; above 75 kg 6",
+   "notes": "Approximates H 5, R 10, Z 25, E 15 mg/kg/day."
+  },
+  {
+   "name": "3FDC HRE (isoniazid 75 mg, rifampicin 150 mg, ethambutol 275 mg)",
+   "dose": "Orally once daily for 4 months, same number of tablets as in the intensive phase",
+   "notes": "Adjust band if weight changes by 5 kg or more."
+  },
+  {
+   "name": "Pyridoxine (vitamin B6)",
+   "dose": "10 to 25 mg orally once daily with isoniazid",
+   "notes": "For those at risk of neuropathy: diabetes, alcohol use, undernutrition, HIV, CKD, pregnancy, breastfeeding."
+  },
+  {
+   "name": "H mono/poly-resistant regimen (6)Lfx-REZ",
+   "dose": "Daily for 6 months. 30 to 45 kg: rifampicin 450 mg, ethambutol 800 mg, pyrazinamide 1250 mg, levofloxacin 750 mg. 46 to 70 kg: 600 mg, 1200 mg, 1750 mg, 1000 mg. Above 70 kg: 750 mg, 1600 mg, 2000 mg, 1000 mg",
+   "notes": "Only after rifampicin resistance is excluded; extend to 9 months for extensive disease or month-4 smear positive (NTEP DR-TB 2025)."
+  }
  ],
  "sources": [
-  { "org": "NTEP, MoHFW (Central TB Division)", "title": "National Guidelines for Management of Drug Resistant TB (integrated diagnostic algorithm, Ni-kshay Poshan Yojana)", "year": 2025, "url": "https://tbcindia.mohfw.gov.in/wp-content/uploads/2025/03/National-Guidelines-for-Management-of-DR-TB_27-3-2025.pdf" },
-  { "org": "NTEP, MoHFW (Central TB Division)", "title": "National Guidance on Differentiated TB Care", "year": 2025, "url": "https://tbcindia.mohfw.gov.in/wp-content/uploads/2025/07/National-Guidance-on-Differential-TB-Care_Final_March-2025-3.pdf" },
-  { "org": "NTEP, MoHFW (Central TB Division)", "title": "Training Module on Extrapulmonary TB (first-line regimen and FDC weight bands)", "year": 2023, "url": "https://tbcindia.mohfw.gov.in/wp-content/uploads/2023/05/7702334778Training_Module_on_Extrapulmonary_TB_-_Book_24032023.pdf" },
-  { "org": "WHO", "title": "WHO consolidated guidelines on tuberculosis. Module 4: treatment. Drug-susceptible tuberculosis treatment", "year": 2022, "url": "https://www.who.int/publications/i/item/9789240048126" }
+  {
+   "org": "NTEP, MoHFW (Central TB Division)",
+   "title": "National Guidelines for Management of Drug Resistant TB (integrated diagnostic algorithm, Ni-kshay Poshan Yojana)",
+   "year": 2025,
+   "url": "https://tbcindia.mohfw.gov.in/wp-content/uploads/2025/03/National-Guidelines-for-Management-of-DR-TB_27-3-2025.pdf"
+  },
+  {
+   "org": "NTEP, MoHFW (Central TB Division)",
+   "title": "National Guidance on Differentiated TB Care",
+   "year": 2025,
+   "url": "https://tbcindia.mohfw.gov.in/wp-content/uploads/2025/07/National-Guidance-on-Differential-TB-Care_Final_March-2025-3.pdf"
+  },
+  {
+   "org": "NTEP, MoHFW (Central TB Division)",
+   "title": "Training Module on Extrapulmonary TB (first-line regimen and FDC weight bands)",
+   "year": 2023,
+   "url": "https://tbcindia.mohfw.gov.in/wp-content/uploads/2023/05/7702334778Training_Module_on_Extrapulmonary_TB_-_Book_24032023.pdf"
+  },
+  {
+   "org": "WHO",
+   "title": "WHO consolidated guidelines on tuberculosis. Module 4: treatment. Drug-susceptible tuberculosis treatment",
+   "year": 2022,
+   "url": "https://www.who.int/publications/i/item/9789240048126"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "pulmonary-tuberculosis-pathway",
+   "title": "Pulmonary tuberculosis, drug-susceptible (adult, NTEP) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Presumptive TB: cough for more than 2 weeks, fever, night sweats, haemoptysis, chest pain, breathlessness, weight or appetite loss, fatigue, neck swelling, or any chest X-ray abnormality suggestive of TB.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Actively screen contacts, people with HIV, diabetes, undernutrition, smoking or alcohol use, previous TB, prisoners and other vulnerable groups.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Send sputum (two specimens) for upfront NAAT (CBNAAT or Truenat) in all presumptive TB; use induced sputum or BAL if no sputum. Chest X-ray early to screen and support diagnosis."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "2HRZE / 4HRE daily: intensive phase 2 months of isoniazid, rifampicin, pyrazinamide and ethambutol, then 4 months of isoniazid, rifampicin and ethambutol, using NTEP fixed-dose combination tablets."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Monthly review: symptoms, adherence, adverse drug reactions, weight and BMI, vital signs, SpO2, jaundice, oedema. Chest X-ray at the end of 2 months and as indicated."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for pulmonary tuberculosis, drug-susceptible (adult, ntep)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "pulmonary-tuberculosis-summary-matrix",
+   "title": "Pulmonary tuberculosis, drug-susceptible (adult, NTEP) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Presumptive TB: cough for more than 2 weeks, fever, night sweats, haemoptysis, chest pain, breathlessness, weight or appetite loss,",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "2HRZE / 4HRE daily: intensive phase 2 months of isoniazid, rifampicin, pyrazinamide and ethambutol, then 4 months of isoniazid, rifampicin",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Send sputum (two specimens) for upfront NAAT (CBNAAT or Truenat) in all presumptive TB; use induced sputum or BAL if no sputum. Chest X-ray",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "4FDC HRZE (isoniazid 75 mg, rifampicin 150 mg, pyrazinamide 400 mg, ethambutol 275 mg): Orally once daily for 2 months: 25 to 34 kg 2",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Treating an undiagnosed or 'non-resolving' chest infection with fluoroquinolones (levofloxacin, moxifloxacin) before TB is excluded: this",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for pulmonary tuberculosis, drug-susceptible (adult, ntep)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "pulmonary-tuberculosis-real-image",
+   "title": "Pulmonary tuberculosis, drug-susceptible (adult, NTEP): Diagnostic Chest Radiograph",
+   "type": "xray",
+   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
+   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
+   "annotations": [
+    {
+     "label": "Parenchyma & Airspaces",
+     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
+    },
+    {
+     "label": "Bronchovascular Tree",
+     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
+    },
+    {
+     "label": "Pleural Margins",
+     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+    }
+   ]
+  }
+ ]
 }

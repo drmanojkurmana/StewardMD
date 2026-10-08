@@ -218,5 +218,100 @@
       "importedAt": "2026-06-29T13:56:25Z",
       "contentHash": "hd62af4a3"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "dengue-dx-algo",
+      "title": "Dengue Fever: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Symptomatic dengue evolves through three phases: febrile, critical (plasma leakage), and recovery; most patients never enter the critical phase, but the possibility must be actively considered in every case (p.1714).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Onset of restlessness or lethargy together with thrombocytopenia (<100,000/uL) and hemoconcentration 2-5 days into illness, typically at defervescence (p.1721)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Antigen-detection ELISA or RT-PCR (nucleic acid amplification) during the acute phase, useful within roughly the first 5 days of illness (p.1714, 1721), Combination point-of-care testing pairing NS1 antigen with IgM"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Harrison endorses the WHO pragmatic categories that replaced the older 'dengue fever / dengue hemorrhagic fever / dengue shock syndrome' terminology: dengue without warning signs, dengue with warning signs (which directs"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Anchoring on the febrile phase and missing the critical phase, which paradoxically begins as fever declines rather than at its peak (p.1721)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for dengue fever."
+    }
+  ],
+  "tables": [
+    {
+      "id": "dengue-matrix",
+      "title": "Dengue Fever: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Symptomatic dengue evolves through three phases: febrile, critical (plasma leakage), and recovery; most patients never enter the",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Antigen-detection ELISA or RT-PCR (nucleic acid amplification) during the acute phase, useful within roughly the first 5 days of",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Zika virus disease (often misdiagnosed as dengue; low-grade fever, itchy maculopapular rash, arthralgia/myalgia, nonpurulent",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Onset of restlessness or lethargy together with thrombocytopenia (<100,000/uL) and hemoconcentration 2-5 days into illness,",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Anchoring on the febrile phase and missing the critical phase, which paradoxically begins as fever declines rather than at its",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for dengue fever."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "dengue-real-image",
+      "title": "Dengue Fever: Clinical Dermatology Photograph (Dengue Confluent Rash)",
+      "type": "diagram",
+      "src": "/assets/kb-real-images/dengue-rash.jpg?v=kbri3",
+      "caption": "Real clinical photograph displaying confluent erythematous flushing with sparing 'islands of white' and petechial eruptions typical of dengue.",
+      "annotations": [
+        {
+          "label": "Confluent Erythema",
+          "description": "Diffuse macular flushing over trunk and limbs during defervescence."
+        },
+        {
+          "label": "Islands of White",
+          "description": "Characteristic small round patches of pale normal skin within generalized erythema."
+        },
+        {
+          "label": "Petechial Purpura",
+          "description": "Microvascular capillary fragility manifestations aggravated by thrombocytopenia."
+        }
+      ]
+    }
+  ]
 }

@@ -1,74 +1,169 @@
 {
-  "id": "angular_cheilitis",
-  "name": "Angular cheilitis",
-  "aliases": [
-    "angular stomatitis",
-    "perleche",
-    "angular cheilosis"
+ "id": "angular_cheilitis",
+ "name": "Angular cheilitis",
+ "aliases": [
+  "angular stomatitis",
+  "perleche",
+  "angular cheilosis"
+ ],
+ "class": "non_infective",
+ "system": "Oral cavity / Skin",
+ "specialty": "Oral medicine / Dermatology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Oral medicine and dermatology reference texts",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Inflammation, fissuring and crusting at one or both angles of the mouth, often sore or burning",
+   "It is typically multifactorial, combining mechanical, microbial and nutritional influences",
+   "Chronic accumulation of saliva at the commissures macerates the skin, promoting overgrowth of Candida and Staphylococcus aureus",
+   "Reduced facial height from tooth loss or ill-fitting dentures deepens the folds and predisposes to it",
+   "Nutritional deficiencies (iron, B vitamins, zinc) and immunosuppression are recognised contributors",
+   "Treatment addresses the underlying cause alongside topical antifungal or antibacterial and barrier preparations"
   ],
-  "class": "non_infective",
-  "system": "Oral cavity / Skin",
-  "specialty": "Oral medicine / Dermatology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Oral medicine and dermatology reference texts",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Inflammation, fissuring and crusting at one or both angles of the mouth, often sore or burning",
-      "It is typically multifactorial, combining mechanical, microbial and nutritional influences",
-      "Chronic accumulation of saliva at the commissures macerates the skin, promoting overgrowth of Candida and Staphylococcus aureus",
-      "Reduced facial height from tooth loss or ill-fitting dentures deepens the folds and predisposes to it",
-      "Nutritional deficiencies (iron, B vitamins, zinc) and immunosuppression are recognised contributors",
-      "Treatment addresses the underlying cause alongside topical antifungal or antibacterial and barrier preparations"
+  "pathophysiology": "Angular cheilitis develops where a persistently moist, occluded skin fold at the corner of the mouth becomes macerated and inflamed. Saliva pooling in deepened commissural folds, often due to reduced vertical facial height or drooling, creates conditions favouring colonisation by Candida species and Staphylococcus aureus, which perpetuate the inflammation. Systemic factors such as iron, vitamin B or zinc deficiency and immunosuppression impair mucocutaneous integrity and predispose to the condition, so it is best understood as a multifactorial reactive process rather than a single infection.",
+  "additionalDifferentials": [
+   "Herpes simplex or impetigo of the lip",
+   "Contact or irritant dermatitis of the perioral skin",
+   "Actinic cheilitis",
+   "Nutritional deficiency states",
+   "Orofacial granulomatosis or Crohn disease involvement"
+  ],
+  "additionalInvestigations": [
+   "Clinical diagnosis from the characteristic commissural involvement",
+   "Assessment of dentition, dentures and vertical facial height",
+   "Microbiological swab where infection needs targeting",
+   "Screening for nutritional deficiencies and diabetes where recurrent",
+   "Consideration of underlying immunosuppression or systemic disease"
+  ],
+  "redFlags": [
+   "Persistent or recurrent disease despite treatment suggesting systemic cause",
+   "Features of underlying immunosuppression or diabetes",
+   "Extension beyond the commissures or induration",
+   "Associated widespread candidosis"
+  ],
+  "prognosis": "The condition responds well once contributory factors are corrected, though it recurs if the underlying cause (denture problems, deficiency, dry environment) is not addressed.",
+  "pitfalls": [
+   "Treating only the surface infection without correcting mechanical or nutritional causes",
+   "Overlooking iron or vitamin deficiency in recurrent cases",
+   "Missing underlying diabetes or immunosuppression",
+   "Confusing it with herpes labialis or impetigo"
+  ],
+  "references": [
+   "Oral medicine reference texts (standard reference)",
+   "Dermatology reference texts (standard reference)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Apply a topical antifungal (such as miconazole) and, where Staphylococcus aureus is implicated, a topical antibacterial such as fusidic acid, guided by commissural swab",
+   "Use a barrier ointment or paste to protect the macerated angles from continued saliva contact",
+   "Correct the mechanical cause by adjusting ill-fitting dentures, reinforcing denture hygiene, and restoring lost vertical facial height",
+   "Screen for and replace nutritional deficiencies of iron, B-group vitamins, or zinc",
+   "Optimise contributory systemic factors such as diabetes control, xerostomia, and immunosuppression",
+   "Refer to oral medicine or dermatology for recurrent or refractory disease and address the underlying cause to prevent relapse"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "angular_cheilitis-pathway",
+   "title": "Angular cheilitis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Inflammation, fissuring and crusting at one or both angles of the mouth, often sore or burning",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Persistent or recurrent disease despite treatment suggesting systemic cause",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Clinical diagnosis from the characteristic commissural involvement, Assessment of dentition, dentures and vertical facial height, Microbiological swab where infection needs targeting"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Apply a topical antifungal (such as miconazole) and, where Staphylococcus aureus is implicated, a topical antibacterial such as fusidic acid, guided by commissural swab"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Treating only the surface infection without correcting mechanical or nutritional causes"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of angular cheilitis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "angular_cheilitis-matrix",
+   "title": "Angular cheilitis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Inflammation, fissuring and crusting at one or both angles of the mouth, often sore or burning",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Angular cheilitis develops where a persistently moist, occluded skin fold at the corner of the mouth becomes macerated and inflamed. Saliva pooling in deepened commissural folds, often due to reduced vertical facial height or drooling, creates conditions favouring colonisation by Candida species and Staphylococcus aureus, which perpetuate the inflammation. Systemic factors such as iron, vitamin B or zinc deficiency and immunosuppression impair mucocutaneous integrity and predispose to the condition, so it is best understood as a multifactorial reactive process rather than a single infection.",
-    "additionalDifferentials": [
-      "Herpes simplex or impetigo of the lip",
-      "Contact or irritant dermatitis of the perioral skin",
-      "Actinic cheilitis",
-      "Nutritional deficiency states",
-      "Orofacial granulomatosis or Crohn disease involvement"
+    [
+     "Key Investigations",
+     "Clinical diagnosis from the characteristic commissural involvement, Assessment of dentition, dentures and vertical facial height,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Clinical diagnosis from the characteristic commissural involvement",
-      "Assessment of dentition, dentures and vertical facial height",
-      "Microbiological swab where infection needs targeting",
-      "Screening for nutritional deficiencies and diabetes where recurrent",
-      "Consideration of underlying immunosuppression or systemic disease"
+    [
+     "Primary Differentials",
+     "Herpes simplex or impetigo of the lip, Contact or irritant dermatitis of the perioral skin, Actinic cheilitis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Persistent or recurrent disease despite treatment suggesting systemic cause",
-      "Features of underlying immunosuppression or diabetes",
-      "Extension beyond the commissures or induration",
-      "Associated widespread candidosis"
+    [
+     "Management Strategy",
+     "Apply a topical antifungal (such as miconazole) and, where Staphylococcus aureus is implicated, a topical antibacterial such as",
+     "Core treatment modality"
     ],
-    "prognosis": "The condition responds well once contributory factors are corrected, though it recurs if the underlying cause (denture problems, deficiency, dry environment) is not addressed.",
-    "pitfalls": [
-      "Treating only the surface infection without correcting mechanical or nutritional causes",
-      "Overlooking iron or vitamin deficiency in recurrent cases",
-      "Missing underlying diabetes or immunosuppression",
-      "Confusing it with herpes labialis or impetigo"
-    ],
-    "references": [
-      "Oral medicine reference texts (standard reference)",
-      "Dermatology reference texts (standard reference)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Apply a topical antifungal (such as miconazole) and, where Staphylococcus aureus is implicated, a topical antibacterial such as fusidic acid, guided by commissural swab",
-      "Use a barrier ointment or paste to protect the macerated angles from continued saliva contact",
-      "Correct the mechanical cause by adjusting ill-fitting dentures, reinforcing denture hygiene, and restoring lost vertical facial height",
-      "Screen for and replace nutritional deficiencies of iron, B-group vitamins, or zinc",
-      "Optimise contributory systemic factors such as diabetes control, xerostomia, and immunosuppression",
-      "Refer to oral medicine or dermatology for recurrent or refractory disease and address the underlying cause to prevent relapse"
+    [
+     "Clinical Pitfall",
+     "Treating only the surface infection without correcting mechanical or nutritional causes",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for angular cheilitis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "angular-cheilitis-real-image",
+   "title": "Angular cheilitis: Clinical Cutaneous Dermatology Photograph",
+   "type": "diagram",
+   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
+   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
+   "annotations": [
+    {
+     "label": "Primary Lesions",
+     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
+    },
+    {
+     "label": "Demarcation & Margins",
+     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
+    },
+    {
+     "label": "Anatomical Distribution",
+     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+    }
+   ]
+  }
+ ]
 }

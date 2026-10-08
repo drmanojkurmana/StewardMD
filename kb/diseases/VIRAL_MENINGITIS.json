@@ -210,5 +210,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "hebe40f2c"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "viral_meningitis-dx-algo",
+      "title": "Viral (Aseptic) Meningitis: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Profound alterations in consciousness (stupor, coma, marked confusion), seizures, focal neurologic signs, or neuroimaging evidence of parenchymal involvement do NOT occur in viral meningitis; their presence points instead to encephalitis",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Depressed or markedly altered consciousness (stupor, coma, marked confusion) - suggests encephalitis or alternative diagnosis, not simple viral meningitis (p.1166)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: CSF reverse transcriptase PCR (RT-PCR) for enteroviruses: diagnostic procedure of choice, highest sensitivity if done within 48 h of symptom onset, falling rapidly after day 5 (p.1166, 1168), FilmArray"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Harrison does not give a formal severity grading for viral meningitis; it instead frames disposition by risk. Immunocompetent patients with a classic CSF profile (lymphocytic pleocytosis, normal glucose, negative Gram"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Failing to recognize partially or incompletely treated bacterial meningitis, which can produce a lymphocytic-predominant CSF that mimics viral meningitis (p.1167)"
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for viral (aseptic) meningitis."
+    }
+  ],
+  "tables": [
+    {
+      "id": "viral_meningitis-matrix",
+      "title": "Viral (Aseptic) Meningitis: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Profound alterations in consciousness (stupor, coma, marked confusion), seizures, focal neurologic signs, or neuroimaging",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "CSF reverse transcriptase PCR (RT-PCR) for enteroviruses: diagnostic procedure of choice, highest sensitivity if done within 48 h",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Arthropod-borne (arbovirus) meningitis, notably West Nile virus; consider when meningitis/encephalitis clusters occur in a",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Depressed or markedly altered consciousness (stupor, coma, marked confusion) - suggests encephalitis or alternative diagnosis,",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to recognize partially or incompletely treated bacterial meningitis, which can produce a lymphocytic-predominant CSF that",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for viral (aseptic) meningitis."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "viral-meningitis-real-image",
+      "title": "Viral (Aseptic) Meningitis: Diagnostic Head Computed Tomography",
+      "type": "ct",
+      "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
+      "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
+      "annotations": [
+        {
+          "label": "Cerebral Parenchyma",
+          "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+        },
+        {
+          "label": "Ventricular System",
+          "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+        },
+        {
+          "label": "Extra-Axial Spaces",
+          "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+        }
+      ]
+    }
+  ]
 }

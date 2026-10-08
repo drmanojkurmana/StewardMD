@@ -1,81 +1,176 @@
 {
-  "id": "complement_factor_i_deficiency",
-  "name": "Complement factor I deficiency",
-  "aliases": [
-    "C3b/C4b inactivator deficiency",
-    "CFI deficiency",
-    "Factor I deficiency",
-    "factor I deficiency",
-    "factor i deficiency"
+ "id": "complement_factor_i_deficiency",
+ "name": "Complement factor I deficiency",
+ "aliases": [
+  "C3b/C4b inactivator deficiency",
+  "CFI deficiency",
+  "Factor I deficiency",
+  "factor I deficiency",
+  "factor i deficiency"
+ ],
+ "class": "non_infective",
+ "system": "Immunology / Genetics",
+ "specialty": "Immunology / Clinical genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Clinical immunology references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Factor I is the serine protease that inactivates C3b and C4b; complete deficiency removes a key brake on the alternative complement pathway",
+   "Uncontrolled C3 consumption produces a persistently low C3 with a normal C4 and characteristic secondary reduction of factor B and factor H",
+   "The dominant clinical problem in complete deficiency is recurrent invasive infection with encapsulated organisms, especially meningococcal and pneumococcal disease, resembling primary C3 deficiency",
+   "Factor I is only active in the presence of cofactors (factor H and complement receptor 1 for C3b; C4b-binding protein and membrane cofactor protein/CD46 for C4b), so its deficiency phenotypically overlaps with factor H deficiency",
+   "Heterozygous CFI variants are recognised risk factors for atypical haemolytic uraemic syndrome and C3 glomerulopathy",
+   "Some patients show autoimmune or inflammatory features that reflect impaired clearance of immune complexes and complement activation products",
+   "Complete deficiency is inherited in an autosomal recessive manner, so family screening and genetic counselling are appropriate"
   ],
-  "class": "non_infective",
-  "system": "Immunology / Genetics",
-  "specialty": "Immunology / Clinical genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Clinical immunology references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Factor I is the serine protease that inactivates C3b and C4b; complete deficiency removes a key brake on the alternative complement pathway",
-      "Uncontrolled C3 consumption produces a persistently low C3 with a normal C4 and characteristic secondary reduction of factor B and factor H",
-      "The dominant clinical problem in complete deficiency is recurrent invasive infection with encapsulated organisms, especially meningococcal and pneumococcal disease, resembling primary C3 deficiency",
-      "Factor I is only active in the presence of cofactors (factor H and complement receptor 1 for C3b; C4b-binding protein and membrane cofactor protein/CD46 for C4b), so its deficiency phenotypically overlaps with factor H deficiency",
-      "Heterozygous CFI variants are recognised risk factors for atypical haemolytic uraemic syndrome and C3 glomerulopathy",
-      "Some patients show autoimmune or inflammatory features that reflect impaired clearance of immune complexes and complement activation products",
-      "Complete deficiency is inherited in an autosomal recessive manner, so family screening and genetic counselling are appropriate"
+  "pathophysiology": "Factor I, encoded by CFI, is a plasma serine protease whose physiological role is the regulated proteolytic inactivation of the central complement opsonins C3b and C4b, acting only when the appropriate cofactor proteins are present (factor H and complement receptor 1 for C3b; C4b-binding protein and membrane cofactor protein for C4b). Loss of factor I activity removes the principal means of degrading C3b, so the alternative pathway amplification loop runs unchecked, continuously regenerating C3 convertase and consuming C3 and factor B; circulating C3 therefore falls while classical-pathway-dependent C4 remains normal, and factor H is consumed secondarily. The persistently depleted C3 impairs opsonisation and terminal pathway activity, leaving the host vulnerable to encapsulated bacteria in a pattern that mirrors C3 deficiency. When regulation is only partially impaired, the residual unchecked complement activity is expressed at vulnerable surfaces such as the glomerular endothelium, producing thrombotic microangiopathy or C3 glomerulopathy rather than the infection phenotype.",
+  "additionalDifferentials": [
+   "Factor H deficiency and other alternative pathway regulator defects (membrane cofactor protein/CD46)",
+   "Primary C3 deficiency",
+   "Terminal complement component or properdin deficiency presenting with neisserial infection",
+   "Gain-of-function C3 or factor B variants driving complement consumption",
+   "Other causes of atypical haemolytic uraemic syndrome or C3 glomerulopathy",
+   "Secondary hypocomplementaemia from immune complex disease or sepsis"
+  ],
+  "additionalInvestigations": [
+   "Complement screen demonstrating low C3 with normal C4",
+   "Factor I antigenic level and functional activity",
+   "Factor H and factor B levels, which are often secondarily reduced and help distinguish the pattern",
+   "CFI gene sequencing, with consideration of variants in cofactor genes",
+   "Alternative and total complement functional assays (AP50 and CH50)",
+   "Renal biopsy with complement staining if glomerulopathy or thrombotic microangiopathy is suspected"
+  ],
+  "redFlags": [
+   "Signs of invasive meningococcal or pneumococcal disease requiring emergency treatment",
+   "Recurrent or unusually severe bacterial meningitis or septicaemia",
+   "Acute kidney injury with microangiopathic haemolysis suggesting atypical haemolytic uraemic syndrome",
+   "Rapidly progressive glomerulonephritis"
+  ],
+  "prognosis": "With immunisation against encapsulated organisms and prompt treatment of infection the outlook for complete deficiency is generally good, though a lifelong infection risk persists. The associated renal phenotypes (atypical haemolytic uraemic syndrome and C3 glomerulopathy) may progress to kidney failure but can respond to complement-directed therapy.",
+  "pitfalls": [
+   "Missing the diagnosis because a low C3 with normal C4 is not recognised as an alternative pathway regulator defect",
+   "Confusing the biochemical picture with factor H deficiency without measuring factor I directly",
+   "Assuming a normal antigenic factor I level excludes a functional defect",
+   "Neglecting encapsulated-organism vaccination and a standby antibiotic plan",
+   "Overlooking heterozygous carriers, who may still be at risk of complement-mediated kidney disease"
+  ],
+  "references": [
+   "Clinical immunology reference texts",
+   "National complement deficiency guidance",
+   "GeneReviews, University of Washington, Seattle"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Immunise against encapsulated organisms - meningococcal, pneumococcal and Haemophilus influenzae type b vaccines - as the mainstay of preventing invasive infection",
+   "Treat pyogenic and neisserial infections promptly with appropriate antibiotics and consider long-term antibiotic prophylaxis",
+   "Provide patients with an emergency plan and a low threshold for urgent assessment and empirical antibiotics in febrile illness",
+   "Treat associated atypical haemolytic uraemic syndrome with a terminal complement C5 inhibitor and renal replacement therapy as required, with meningococcal cover before dosing",
+   "Manage C3 glomerulopathy and other renal involvement with complement-directed therapy and nephrology support",
+   "Provide genetic counselling and family screening given the autosomal recessive inheritance"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "complement_factor_i_deficiency-pathway",
+   "title": "Complement factor I deficiency: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Factor I is the serine protease that inactivates C3b and C4b; complete deficiency removes a key brake on the alternative complement pathway",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Signs of invasive meningococcal or pneumococcal disease requiring emergency treatment",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Complement screen demonstrating low C3 with normal C4, Factor I antigenic level and functional activity, Factor H and factor B levels, which are often secondarily reduced and help distinguish the pattern"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Immunise against encapsulated organisms - meningococcal, pneumococcal and Haemophilus influenzae type b vaccines - as the mainstay of preventing invasive infection"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Missing the diagnosis because a low C3 with normal C4 is not recognised as an alternative pathway regulator defect"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of complement factor i deficiency."
+  }
+ ],
+ "tables": [
+  {
+   "id": "complement_factor_i_deficiency-matrix",
+   "title": "Complement factor I deficiency: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Factor I is the serine protease that inactivates C3b and C4b; complete deficiency removes a key brake on the alternative",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Factor I, encoded by CFI, is a plasma serine protease whose physiological role is the regulated proteolytic inactivation of the central complement opsonins C3b and C4b, acting only when the appropriate cofactor proteins are present (factor H and complement receptor 1 for C3b; C4b-binding protein and membrane cofactor protein for C4b). Loss of factor I activity removes the principal means of degrading C3b, so the alternative pathway amplification loop runs unchecked, continuously regenerating C3 convertase and consuming C3 and factor B; circulating C3 therefore falls while classical-pathway-dependent C4 remains normal, and factor H is consumed secondarily. The persistently depleted C3 impairs opsonisation and terminal pathway activity, leaving the host vulnerable to encapsulated bacteria in a pattern that mirrors C3 deficiency. When regulation is only partially impaired, the residual unchecked complement activity is expressed at vulnerable surfaces such as the glomerular endothelium, producing thrombotic microangiopathy or C3 glomerulopathy rather than the infection phenotype.",
-    "additionalDifferentials": [
-      "Factor H deficiency and other alternative pathway regulator defects (membrane cofactor protein/CD46)",
-      "Primary C3 deficiency",
-      "Terminal complement component or properdin deficiency presenting with neisserial infection",
-      "Gain-of-function C3 or factor B variants driving complement consumption",
-      "Other causes of atypical haemolytic uraemic syndrome or C3 glomerulopathy",
-      "Secondary hypocomplementaemia from immune complex disease or sepsis"
+    [
+     "Key Investigations",
+     "Complement screen demonstrating low C3 with normal C4, Factor I antigenic level and functional activity, Factor H and factor B",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Complement screen demonstrating low C3 with normal C4",
-      "Factor I antigenic level and functional activity",
-      "Factor H and factor B levels, which are often secondarily reduced and help distinguish the pattern",
-      "CFI gene sequencing, with consideration of variants in cofactor genes",
-      "Alternative and total complement functional assays (AP50 and CH50)",
-      "Renal biopsy with complement staining if glomerulopathy or thrombotic microangiopathy is suspected"
+    [
+     "Primary Differentials",
+     "Factor H deficiency and other alternative pathway regulator defects (membrane cofactor protein/CD46), Primary C3 deficiency,",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Signs of invasive meningococcal or pneumococcal disease requiring emergency treatment",
-      "Recurrent or unusually severe bacterial meningitis or septicaemia",
-      "Acute kidney injury with microangiopathic haemolysis suggesting atypical haemolytic uraemic syndrome",
-      "Rapidly progressive glomerulonephritis"
+    [
+     "Management Strategy",
+     "Immunise against encapsulated organisms - meningococcal, pneumococcal and Haemophilus influenzae type b vaccines - as the",
+     "Core treatment modality"
     ],
-    "prognosis": "With immunisation against encapsulated organisms and prompt treatment of infection the outlook for complete deficiency is generally good, though a lifelong infection risk persists. The associated renal phenotypes (atypical haemolytic uraemic syndrome and C3 glomerulopathy) may progress to kidney failure but can respond to complement-directed therapy.",
-    "pitfalls": [
-      "Missing the diagnosis because a low C3 with normal C4 is not recognised as an alternative pathway regulator defect",
-      "Confusing the biochemical picture with factor H deficiency without measuring factor I directly",
-      "Assuming a normal antigenic factor I level excludes a functional defect",
-      "Neglecting encapsulated-organism vaccination and a standby antibiotic plan",
-      "Overlooking heterozygous carriers, who may still be at risk of complement-mediated kidney disease"
-    ],
-    "references": [
-      "Clinical immunology reference texts",
-      "National complement deficiency guidance",
-      "GeneReviews, University of Washington, Seattle"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Immunise against encapsulated organisms - meningococcal, pneumococcal and Haemophilus influenzae type b vaccines - as the mainstay of preventing invasive infection",
-      "Treat pyogenic and neisserial infections promptly with appropriate antibiotics and consider long-term antibiotic prophylaxis",
-      "Provide patients with an emergency plan and a low threshold for urgent assessment and empirical antibiotics in febrile illness",
-      "Treat associated atypical haemolytic uraemic syndrome with a terminal complement C5 inhibitor and renal replacement therapy as required, with meningococcal cover before dosing",
-      "Manage C3 glomerulopathy and other renal involvement with complement-directed therapy and nephrology support",
-      "Provide genetic counselling and family screening given the autosomal recessive inheritance"
+    [
+     "Clinical Pitfall",
+     "Missing the diagnosis because a low C3 with normal C4 is not recognised as an alternative pathway regulator defect",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for complement factor i deficiency."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "complement-factor-i-deficiency-real-image",
+   "title": "Complement factor I deficiency: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

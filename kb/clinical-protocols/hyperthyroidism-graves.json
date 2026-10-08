@@ -188,5 +188,100 @@
  "review": {
   "status": "ai_drafted",
   "compiled": "2026-09-25"
- }
+ },
+ "algorithms": [
+  {
+   "id": "hyperthyroidism-graves-pathway",
+   "title": "Hyperthyroidism and Graves' disease (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Symptoms: weight loss, heat intolerance, palpitations, tremor, anxiety, diarrhoea, oligomenorrhoea. Older people may present with atrial fibrillation, heart failure or apathy alone.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Thyrotoxicosis: suppressed TSH with raised FT4 and/or FT3 (T3 toxicosis: normal FT4, raised FT3). Subclinical hyperthyroidism: low TSH with normal FT4 and FT3.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "TSH first; if low, measure FT4 and FT3 on the same sample."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Shared decision: ETA advises antithyroid drugs first in new Graves' disease; NICE offers radioiodine as first-line definitive treatment unless drugs are likely to achieve remission or radioiodine is unsuitable."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "On antithyroid drugs: TSH, FT4 and FT3 every 6 weeks until TSH is in range, then TSH every 3 months until the drug is stopped (NICE)."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for hyperthyroidism and graves' disease (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "hyperthyroidism-graves-summary-matrix",
+   "title": "Hyperthyroidism and Graves' disease (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Symptoms: weight loss, heat intolerance, palpitations, tremor, anxiety, diarrhoea, oligomenorrhoea. Older people may present with atrial",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Shared decision: ETA advises antithyroid drugs first in new Graves' disease; NICE offers radioiodine as first-line definitive treatment",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "TSH first; if low, measure FT4 and FT3 on the same sample.",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Carbimazole: 15 to 40 mg orally once daily initially by severity, then titrate to the lowest maintenance dose",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Not warning the patient: fever, sore throat or mouth ulcers on an antithyroid drug means stop the drug and get an urgent full blood count",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for hyperthyroidism and graves' disease (adult)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "hyperthyroidism-graves-real-image",
+   "title": "Hyperthyroidism and Graves' disease (adult): Diagnostic Endocrine Cross-Sectional Imaging",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
+   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
+   "annotations": [
+    {
+     "label": "Gland Morphology",
+     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
+    },
+    {
+     "label": "Focal Lesions",
+     "description": "Nodularity, adenoma attenuation, and washout dynamics."
+    },
+    {
+     "label": "Surrounding Structures",
+     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+    }
+   ]
+  }
+ ]
 }

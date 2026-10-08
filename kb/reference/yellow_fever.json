@@ -1,84 +1,179 @@
 {
-  "id": "yellow_fever",
-  "name": "Yellow fever",
-  "aliases": [
-    "YF",
-    "yellow fever virus infection",
-    "yellow jack"
+ "id": "yellow_fever",
+ "name": "Yellow fever",
+ "aliases": [
+  "YF",
+  "yellow fever virus infection",
+  "yellow jack"
+ ],
+ "class": "infective",
+ "system": "Infectious / Tropical",
+ "specialty": "Infectious Diseases",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Harrison's Principles of Internal Medicine / WHO / India national programmes",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A mosquito-borne flaviviral haemorrhagic fever endemic to parts of sub-Saharan Africa and tropical South America, transmitted by Aedes and forest mosquitoes",
+   "India has no endemic yellow fever, but requires proof of vaccination from travellers arriving from endemic areas because the competent Aedes vector is present, posing an introduction risk",
+   "Illness is often biphasic: an initial febrile phase with headache and myalgia, sometimes followed after a brief remission by a toxic phase with jaundice, haemorrhage and organ failure",
+   "The toxic phase is characterised by hepatic and renal injury, coagulopathy and bleeding, and carries high mortality",
+   "A relative bradycardia despite high fever (Faget sign) is a described clinical clue",
+   "There is no specific antiviral treatment; care is supportive with management of bleeding, liver and kidney failure",
+   "A single dose of the live attenuated vaccine confers durable, likely lifelong immunity and is the cornerstone of prevention and international travel requirements",
+   "Diagnosis uses RT-PCR in early illness and serology (IgM), with care to distinguish from other flaviviruses and viral haemorrhagic fevers"
   ],
-  "class": "infective",
-  "system": "Infectious / Tropical",
-  "specialty": "Infectious Diseases",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Harrison's Principles of Internal Medicine / WHO / India national programmes",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A mosquito-borne flaviviral haemorrhagic fever endemic to parts of sub-Saharan Africa and tropical South America, transmitted by Aedes and forest mosquitoes",
-      "India has no endemic yellow fever, but requires proof of vaccination from travellers arriving from endemic areas because the competent Aedes vector is present, posing an introduction risk",
-      "Illness is often biphasic: an initial febrile phase with headache and myalgia, sometimes followed after a brief remission by a toxic phase with jaundice, haemorrhage and organ failure",
-      "The toxic phase is characterised by hepatic and renal injury, coagulopathy and bleeding, and carries high mortality",
-      "A relative bradycardia despite high fever (Faget sign) is a described clinical clue",
-      "There is no specific antiviral treatment; care is supportive with management of bleeding, liver and kidney failure",
-      "A single dose of the live attenuated vaccine confers durable, likely lifelong immunity and is the cornerstone of prevention and international travel requirements",
-      "Diagnosis uses RT-PCR in early illness and serology (IgM), with care to distinguish from other flaviviruses and viral haemorrhagic fevers"
+  "pathophysiology": "Yellow fever virus, an RNA flavivirus, is inoculated by an infected mosquito and spreads via lymphatics and blood to target organs, with marked hepatotropism. Infection and death of hepatocytes (with characteristic midzonal necrosis and Councilman bodies) impair synthesis of clotting factors and cause jaundice, while direct renal injury produces acute kidney injury. The combination of coagulopathy, thrombocytopenia and vascular injury drives the haemorrhagic manifestations, and a dysregulated inflammatory response contributes to shock and multi-organ failure in the toxic phase.",
+  "additionalDifferentials": [
+   "Other viral haemorrhagic fevers (e.g. Ebola, Lassa, Marburg)",
+   "Severe malaria",
+   "Leptospirosis (Weil disease)",
+   "Viral hepatitis with fulminant course",
+   "Severe dengue",
+   "Rickettsial infection"
+  ],
+  "infectionMimics": [
+   "Fulminant viral hepatitis of other cause",
+   "Sepsis with disseminated intravascular coagulation",
+   "Other flaviviral illnesses",
+   "Drug-induced or toxic hepatic failure"
+  ],
+  "additionalInvestigations": [
+   "RT-PCR for yellow fever virus in early illness",
+   "Yellow fever IgM serology with confirmatory testing given flavivirus cross-reactivity",
+   "Liver function tests and coagulation profile to assess hepatic injury and coagulopathy",
+   "Renal function and urinalysis to detect kidney involvement",
+   "Concurrent testing to exclude malaria, leptospirosis and other haemorrhagic fevers"
+  ],
+  "redFlags": [
+   "Entry into the toxic phase with jaundice, bleeding and organ dysfunction, a life-threatening emergency",
+   "Haemorrhagic manifestations with coagulopathy and shock",
+   "Acute kidney injury or fulminant hepatic failure",
+   "A febrile returning traveller from an endemic region, requiring isolation, notification and exclusion of other viral haemorrhagic fevers"
+  ],
+  "prognosis": "Many infections are mild or self-limiting and recover fully. Once the toxic phase develops, mortality is high, with death typically from hepatic and renal failure, bleeding and shock; survivors of the toxic phase generally recover without chronic sequelae.",
+  "pitfalls": [
+   "Failing to elicit a travel history and consider yellow fever in a febrile traveller from an endemic area",
+   "Mistaking the early phase for uncomplicated dengue or influenza and missing progression to the toxic phase",
+   "Overlooking vaccination requirements and prevention counselling for travellers",
+   "Not instituting appropriate isolation and public-health notification pending exclusion of viral haemorrhagic fever"
+  ],
+  "references": [
+   "Harrison's Principles of Internal Medicine, 22e",
+   "WHO guidelines"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Provide supportive care as the mainstay, since there is no specific antiviral: fluid resuscitation, correction of coagulopathy and management of shock",
+   "Manage toxic-phase organ failure with supportive care of hepatic failure, transfusion of blood and clotting products for haemorrhage, and renal replacement therapy for acute kidney injury",
+   "Avoid aspirin and NSAIDs because of bleeding risk, and monitor for hypoglycaemia and secondary infection",
+   "Nurse under mosquito precautions during viraemia to prevent onward transmission",
+   "Prevent disease with yellow fever vaccination for travellers and residents of endemic areas and support vector control",
+   "Manage severe disease in a high-dependency or intensive care setting, escalating for shock, multi-organ failure and uncontrolled bleeding",
+   "Notify public health authorities and exclude co-existing malaria, leptospirosis and other haemorrhagic fevers"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "yellow_fever-pathway",
+   "title": "Yellow fever: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A mosquito-borne flaviviral haemorrhagic fever endemic to parts of sub-Saharan Africa and tropical South America, transmitted by Aedes and forest mosquitoes",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Entry into the toxic phase with jaundice, bleeding and organ dysfunction, a life-threatening emergency",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: RT-PCR for yellow fever virus in early illness, Yellow fever IgM serology with confirmatory testing given flavivirus cross-reactivity, Liver function tests and coagulation profile to assess hepatic injury and coagulopathy"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Provide supportive care as the mainstay, since there is no specific antiviral: fluid resuscitation, correction of coagulopathy and management of shock"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Failing to elicit a travel history and consider yellow fever in a febrile traveller from an endemic area"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of yellow fever."
+  }
+ ],
+ "tables": [
+  {
+   "id": "yellow_fever-matrix",
+   "title": "Yellow fever: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A mosquito-borne flaviviral haemorrhagic fever endemic to parts of sub-Saharan Africa and tropical South America, transmitted by",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Yellow fever virus, an RNA flavivirus, is inoculated by an infected mosquito and spreads via lymphatics and blood to target organs, with marked hepatotropism. Infection and death of hepatocytes (with characteristic midzonal necrosis and Councilman bodies) impair synthesis of clotting factors and cause jaundice, while direct renal injury produces acute kidney injury. The combination of coagulopathy, thrombocytopenia and vascular injury drives the haemorrhagic manifestations, and a dysregulated inflammatory response contributes to shock and multi-organ failure in the toxic phase.",
-    "additionalDifferentials": [
-      "Other viral haemorrhagic fevers (e.g. Ebola, Lassa, Marburg)",
-      "Severe malaria",
-      "Leptospirosis (Weil disease)",
-      "Viral hepatitis with fulminant course",
-      "Severe dengue",
-      "Rickettsial infection"
+    [
+     "Key Investigations",
+     "RT-PCR for yellow fever virus in early illness, Yellow fever IgM serology with confirmatory testing given flavivirus",
+     "Confirmatory diagnostic workup"
     ],
-    "infectionMimics": [
-      "Fulminant viral hepatitis of other cause",
-      "Sepsis with disseminated intravascular coagulation",
-      "Other flaviviral illnesses",
-      "Drug-induced or toxic hepatic failure"
+    [
+     "Primary Differentials",
+     "Other viral haemorrhagic fevers (e.g. Ebola, Lassa, Marburg), Severe malaria, Leptospirosis (Weil disease)",
+     "Rule out key mimics"
     ],
-    "additionalInvestigations": [
-      "RT-PCR for yellow fever virus in early illness",
-      "Yellow fever IgM serology with confirmatory testing given flavivirus cross-reactivity",
-      "Liver function tests and coagulation profile to assess hepatic injury and coagulopathy",
-      "Renal function and urinalysis to detect kidney involvement",
-      "Concurrent testing to exclude malaria, leptospirosis and other haemorrhagic fevers"
+    [
+     "Management Strategy",
+     "Provide supportive care as the mainstay, since there is no specific antiviral: fluid resuscitation, correction of coagulopathy",
+     "Core treatment modality"
     ],
-    "redFlags": [
-      "Entry into the toxic phase with jaundice, bleeding and organ dysfunction, a life-threatening emergency",
-      "Haemorrhagic manifestations with coagulopathy and shock",
-      "Acute kidney injury or fulminant hepatic failure",
-      "A febrile returning traveller from an endemic region, requiring isolation, notification and exclusion of other viral haemorrhagic fevers"
-    ],
-    "prognosis": "Many infections are mild or self-limiting and recover fully. Once the toxic phase develops, mortality is high, with death typically from hepatic and renal failure, bleeding and shock; survivors of the toxic phase generally recover without chronic sequelae.",
-    "pitfalls": [
-      "Failing to elicit a travel history and consider yellow fever in a febrile traveller from an endemic area",
-      "Mistaking the early phase for uncomplicated dengue or influenza and missing progression to the toxic phase",
-      "Overlooking vaccination requirements and prevention counselling for travellers",
-      "Not instituting appropriate isolation and public-health notification pending exclusion of viral haemorrhagic fever"
-    ],
-    "references": [
-      "Harrison's Principles of Internal Medicine, 22e",
-      "WHO guidelines"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Provide supportive care as the mainstay, since there is no specific antiviral: fluid resuscitation, correction of coagulopathy and management of shock",
-      "Manage toxic-phase organ failure with supportive care of hepatic failure, transfusion of blood and clotting products for haemorrhage, and renal replacement therapy for acute kidney injury",
-      "Avoid aspirin and NSAIDs because of bleeding risk, and monitor for hypoglycaemia and secondary infection",
-      "Nurse under mosquito precautions during viraemia to prevent onward transmission",
-      "Prevent disease with yellow fever vaccination for travellers and residents of endemic areas and support vector control",
-      "Manage severe disease in a high-dependency or intensive care setting, escalating for shock, multi-organ failure and uncontrolled bleeding",
-      "Notify public health authorities and exclude co-existing malaria, leptospirosis and other haemorrhagic fevers"
+    [
+     "Clinical Pitfall",
+     "Failing to elicit a travel history and consider yellow fever in a febrile traveller from an endemic area",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for yellow fever."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "yellow-fever-real-image",
+   "title": "Yellow fever: Diagnostic Microbiological / Smear Examination",
+   "type": "diagram",
+   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
+   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
+   "annotations": [
+    {
+     "label": "Pathogen Detection",
+     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
+    },
+    {
+     "label": "Inflammatory Response",
+     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
+    },
+    {
+     "label": "Diagnostic Confirmation",
+     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+    }
+   ]
+  }
+ ]
 }

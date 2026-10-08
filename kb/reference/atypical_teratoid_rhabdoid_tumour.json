@@ -1,93 +1,188 @@
 {
-  "id": "atypical_teratoid_rhabdoid_tumour",
-  "name": "atypical teratoid rhabdoid tumour",
-  "aliases": [
-    "AT/RT",
-    "ATRT",
-    "Atypical teratoid/rhabdoid tumour (SMARCB1)",
-    "CNS WHO grade 4 rhabdoid tumour",
-    "INI1-deficient tumour",
-    "SMARCA4-deficient ATRT",
-    "SMARCB1-deficient rhabdoid tumour",
-    "atypical teratoid rhabdoid tumor",
-    "atypical teratoid/rhabdoid tumour"
+ "id": "atypical_teratoid_rhabdoid_tumour",
+ "name": "atypical teratoid rhabdoid tumour",
+ "aliases": [
+  "AT/RT",
+  "ATRT",
+  "Atypical teratoid/rhabdoid tumour (SMARCB1)",
+  "CNS WHO grade 4 rhabdoid tumour",
+  "INI1-deficient tumour",
+  "SMARCA4-deficient ATRT",
+  "SMARCB1-deficient rhabdoid tumour",
+  "atypical teratoid rhabdoid tumor",
+  "atypical teratoid/rhabdoid tumour"
+ ],
+ "class": "non_infective",
+ "system": "central nervous system",
+ "specialty": "paediatric neuro-oncology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "WHO Classification of Tumours of the Central Nervous System",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A highly malignant embryonal central nervous system tumour of infancy and early childhood, classified as WHO CNS grade 4.",
+   "Defined molecularly by loss of SMARCB1 (INI1), or rarely SMARCA4 (BRG1), with absent nuclear INI1 staining on immunohistochemistry being diagnostic.",
+   "Histology is heterogeneous, containing rhabdoid cells alongside primitive neuroectodermal, mesenchymal, and epithelial elements, historically causing confusion with medulloblastoma and other embryonal tumours.",
+   "Three epigenetic molecular subgroups are recognised (ATRT-TYR, ATRT-SHH, and ATRT-MYC), differing in age, location, and outcome.",
+   "It occurs in both the posterior fossa and supratentorial compartments, with infratentorial tumours predominating in the youngest infants.",
+   "Leptomeningeal dissemination is common, mandating imaging of the whole neuraxis and cerebrospinal fluid cytology at staging.",
+   "A significant proportion carry a germline SMARCB1/SMARCA4 mutation (rhabdoid tumour predisposition syndrome), warranting germline testing and screening for synchronous extracranial rhabdoid tumours.",
+   "Presentation reflects raised intracranial pressure and posterior fossa dysfunction: vomiting, lethargy, a bulging fontanelle, head tilt, ataxia, and cranial neuropathies."
   ],
-  "class": "non_infective",
-  "system": "central nervous system",
-  "specialty": "paediatric neuro-oncology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "WHO Classification of Tumours of the Central Nervous System",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A highly malignant embryonal central nervous system tumour of infancy and early childhood, classified as WHO CNS grade 4.",
-      "Defined molecularly by loss of SMARCB1 (INI1), or rarely SMARCA4 (BRG1), with absent nuclear INI1 staining on immunohistochemistry being diagnostic.",
-      "Histology is heterogeneous, containing rhabdoid cells alongside primitive neuroectodermal, mesenchymal, and epithelial elements, historically causing confusion with medulloblastoma and other embryonal tumours.",
-      "Three epigenetic molecular subgroups are recognised (ATRT-TYR, ATRT-SHH, and ATRT-MYC), differing in age, location, and outcome.",
-      "It occurs in both the posterior fossa and supratentorial compartments, with infratentorial tumours predominating in the youngest infants.",
-      "Leptomeningeal dissemination is common, mandating imaging of the whole neuraxis and cerebrospinal fluid cytology at staging.",
-      "A significant proportion carry a germline SMARCB1/SMARCA4 mutation (rhabdoid tumour predisposition syndrome), warranting germline testing and screening for synchronous extracranial rhabdoid tumours.",
-      "Presentation reflects raised intracranial pressure and posterior fossa dysfunction: vomiting, lethargy, a bulging fontanelle, head tilt, ataxia, and cranial neuropathies."
+  "pathophysiology": "Atypical teratoid/rhabdoid tumour is driven by biallelic inactivation of SMARCB1 (INI1/hSNF5), or less often SMARCA4 (BRG1), core subunits of the SWI/SNF (BAF) chromatin-remodelling complex. Loss of these subunits deregulates chromatin accessibility and enhancer activity, blocking differentiation and driving an aggressive embryonal phenotype, yet the genome is otherwise strikingly stable with SMARCB1 loss frequently the sole recurrent event. Distinct DNA-methylation and expression programmes define the ATRT-TYR (tyrosinase, melanosomal), ATRT-SHH (sonic hedgehog and NOTCH), and ATRT-MYC subgroups. The tumour recapitulates rhabdoid morphology with variable teratoid components and disseminates readily through the cerebrospinal fluid; a germline SMARCB1/SMARCA4 alteration predisposes to multifocal central nervous system and synchronous extracranial rhabdoid tumours.",
+  "additionalDifferentials": [
+   "Medulloblastoma",
+   "Other central nervous system embryonal tumours (e.g., embryonal tumour with multilayered rosettes)",
+   "Ependymoma",
+   "Choroid plexus carcinoma",
+   "High-grade glioma",
+   "Central nervous system metastasis of an extracranial rhabdoid tumour",
+   "Pineoblastoma for pineal-region lesions"
+  ],
+  "additionalInvestigations": [
+   "MRI of the brain and whole spine with contrast for tumour extent and drop metastases",
+   "Cerebrospinal fluid cytology once safe with respect to intracranial pressure",
+   "SMARCB1/INI1 and SMARCA4 immunohistochemistry on tumour tissue",
+   "DNA-methylation profiling for molecular subgroup assignment",
+   "Germline SMARCB1/SMARCA4 testing and genetic counselling",
+   "Abdominal and renal imaging to exclude synchronous extracranial rhabdoid tumour",
+   "Ophthalmological and baseline endocrine assessment where relevant to tumour site"
+  ],
+  "redFlags": [
+   "Rapidly progressive raised intracranial pressure with impaired consciousness",
+   "Acute hydrocephalus requiring urgent cerebrospinal fluid diversion",
+   "Evidence of leptomeningeal dissemination on neuraxis imaging",
+   "A concurrent renal or soft-tissue mass suggesting germline predisposition"
+  ],
+  "prognosis": "Historically dismal, though intensified multimodal regimens (surgery, high-dose or conventional chemotherapy, and radiotherapy where age permits) have improved survival for some. Very young age, metastatic disease, incomplete resection, and germline predisposition remain adverse factors.",
+  "pitfalls": [
+   "Misdiagnosing the tumour as medulloblastoma or another embryonal tumour without INI1 immunohistochemistry.",
+   "Omitting germline SMARCB1/SMARCA4 testing and failing to screen for synchronous extracranial rhabdoid tumours.",
+   "Understaging by not imaging the whole neuraxis or sampling cerebrospinal fluid.",
+   "Withholding or delaying molecular subgrouping that increasingly informs risk-adapted therapy."
+  ],
+  "references": [
+   "WHO Classification of Tumours of the Central Nervous System",
+   "Nelson Textbook of Pediatrics",
+   "European Rhabdoid Registry (EU-RHAB) and international ATRT consensus guidance"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Treat with curative intent using a coordinated multimodal approach through a paediatric neuro-oncology team, balancing tumour control against the neurocognitive cost of therapy in developing brains",
+   "Maximal safe surgical resection is the foundation of initial management, with extent of resection being one of the strongest modifiable prognostic factors",
+   "Intensive multi-agent chemotherapy follows surgery, often incorporating a high dose chemotherapy phase with autologous stem cell rescue in appropriately selected, fit patients, guided by risk and molecular subgroup",
+   "Focal or craniospinal radiotherapy is used where age allows, but is reserved or delayed in the youngest infants due to disproportionate neurocognitive toxicity",
+   "Intrathecal chemotherapy and directed treatment of leptomeningeal drop metastases are used given the tumour's propensity for early cerebrospinal fluid dissemination",
+   "Relapsed or refractory disease is managed on a case by case basis, with clinical trial enrolment favoured given historically poor salvage outcomes",
+   "EZH2 targeting agents are being studied in trials across SMARCB1 deficient neoplasms including malignant rhabdoid tumour, reflecting the epigenetic consequences of SMARCB1/INI1 loss, but remain investigational rather than established therapy",
+   "Consider germline SMARCB1 or SMARCA4 testing when rhabdoid tumour predisposition syndrome is suspected, with genetic counselling and screening for synchronous extracranial rhabdoid tumours when identified or suspected",
+   "Perform surveillance imaging of the whole neuraxis given the tumour's propensity for cerebrospinal fluid dissemination",
+   "Include cerebrospinal fluid cytology as part of relapse surveillance where safe to obtain",
+   "Provide ongoing neurocognitive, endocrine, and developmental follow-up given the young age at treatment and the toxicity of intensive multimodal therapy",
+   "Refer promptly to a specialist paediatric neuro-oncology centre with neurosurgery, radiation oncology, and access to intensive or high dose chemotherapy with stem cell rescue support"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "atypical_teratoid_rhabdoid_tumour-pathway",
+   "title": "atypical teratoid rhabdoid tumour: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A highly malignant embryonal central nervous system tumour of infancy and early childhood, classified as WHO CNS grade 4.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapidly progressive raised intracranial pressure with impaired consciousness",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: MRI of the brain and whole spine with contrast for tumour extent and drop metastases, Cerebrospinal fluid cytology once safe with respect to intracranial pressure, SMARCB1/INI1 and SMARCA4 immunohistochemistry on tumour"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Treat with curative intent using a coordinated multimodal approach through a paediatric neuro-oncology team, balancing tumour control against the neurocognitive cost of therapy in developing brains"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Misdiagnosing the tumour as medulloblastoma or another embryonal tumour without INI1 immunohistochemistry."
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of atypical teratoid rhabdoid tumour."
+  }
+ ],
+ "tables": [
+  {
+   "id": "atypical_teratoid_rhabdoid_tumour-matrix",
+   "title": "atypical teratoid rhabdoid tumour: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A highly malignant embryonal central nervous system tumour of infancy and early childhood, classified as WHO CNS grade 4.",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Atypical teratoid/rhabdoid tumour is driven by biallelic inactivation of SMARCB1 (INI1/hSNF5), or less often SMARCA4 (BRG1), core subunits of the SWI/SNF (BAF) chromatin-remodelling complex. Loss of these subunits deregulates chromatin accessibility and enhancer activity, blocking differentiation and driving an aggressive embryonal phenotype, yet the genome is otherwise strikingly stable with SMARCB1 loss frequently the sole recurrent event. Distinct DNA-methylation and expression programmes define the ATRT-TYR (tyrosinase, melanosomal), ATRT-SHH (sonic hedgehog and NOTCH), and ATRT-MYC subgroups. The tumour recapitulates rhabdoid morphology with variable teratoid components and disseminates readily through the cerebrospinal fluid; a germline SMARCB1/SMARCA4 alteration predisposes to multifocal central nervous system and synchronous extracranial rhabdoid tumours.",
-    "additionalDifferentials": [
-      "Medulloblastoma",
-      "Other central nervous system embryonal tumours (e.g., embryonal tumour with multilayered rosettes)",
-      "Ependymoma",
-      "Choroid plexus carcinoma",
-      "High-grade glioma",
-      "Central nervous system metastasis of an extracranial rhabdoid tumour",
-      "Pineoblastoma for pineal-region lesions"
+    [
+     "Key Investigations",
+     "MRI of the brain and whole spine with contrast for tumour extent and drop metastases, Cerebrospinal fluid cytology once safe with",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "MRI of the brain and whole spine with contrast for tumour extent and drop metastases",
-      "Cerebrospinal fluid cytology once safe with respect to intracranial pressure",
-      "SMARCB1/INI1 and SMARCA4 immunohistochemistry on tumour tissue",
-      "DNA-methylation profiling for molecular subgroup assignment",
-      "Germline SMARCB1/SMARCA4 testing and genetic counselling",
-      "Abdominal and renal imaging to exclude synchronous extracranial rhabdoid tumour",
-      "Ophthalmological and baseline endocrine assessment where relevant to tumour site"
+    [
+     "Primary Differentials",
+     "Medulloblastoma, Other central nervous system embryonal tumours (e.g., embryonal tumour with multilayered rosettes), Ependymoma",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rapidly progressive raised intracranial pressure with impaired consciousness",
-      "Acute hydrocephalus requiring urgent cerebrospinal fluid diversion",
-      "Evidence of leptomeningeal dissemination on neuraxis imaging",
-      "A concurrent renal or soft-tissue mass suggesting germline predisposition"
+    [
+     "Management Strategy",
+     "Treat with curative intent using a coordinated multimodal approach through a paediatric neuro-oncology team, balancing tumour",
+     "Core treatment modality"
     ],
-    "prognosis": "Historically dismal, though intensified multimodal regimens (surgery, high-dose or conventional chemotherapy, and radiotherapy where age permits) have improved survival for some. Very young age, metastatic disease, incomplete resection, and germline predisposition remain adverse factors.",
-    "pitfalls": [
-      "Misdiagnosing the tumour as medulloblastoma or another embryonal tumour without INI1 immunohistochemistry.",
-      "Omitting germline SMARCB1/SMARCA4 testing and failing to screen for synchronous extracranial rhabdoid tumours.",
-      "Understaging by not imaging the whole neuraxis or sampling cerebrospinal fluid.",
-      "Withholding or delaying molecular subgrouping that increasingly informs risk-adapted therapy."
-    ],
-    "references": [
-      "WHO Classification of Tumours of the Central Nervous System",
-      "Nelson Textbook of Pediatrics",
-      "European Rhabdoid Registry (EU-RHAB) and international ATRT consensus guidance"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Treat with curative intent using a coordinated multimodal approach through a paediatric neuro-oncology team, balancing tumour control against the neurocognitive cost of therapy in developing brains",
-      "Maximal safe surgical resection is the foundation of initial management, with extent of resection being one of the strongest modifiable prognostic factors",
-      "Intensive multi-agent chemotherapy follows surgery, often incorporating a high dose chemotherapy phase with autologous stem cell rescue in appropriately selected, fit patients, guided by risk and molecular subgroup",
-      "Focal or craniospinal radiotherapy is used where age allows, but is reserved or delayed in the youngest infants due to disproportionate neurocognitive toxicity",
-      "Intrathecal chemotherapy and directed treatment of leptomeningeal drop metastases are used given the tumour's propensity for early cerebrospinal fluid dissemination",
-      "Relapsed or refractory disease is managed on a case by case basis, with clinical trial enrolment favoured given historically poor salvage outcomes",
-      "EZH2 targeting agents are being studied in trials across SMARCB1 deficient neoplasms including malignant rhabdoid tumour, reflecting the epigenetic consequences of SMARCB1/INI1 loss, but remain investigational rather than established therapy",
-      "Consider germline SMARCB1 or SMARCA4 testing when rhabdoid tumour predisposition syndrome is suspected, with genetic counselling and screening for synchronous extracranial rhabdoid tumours when identified or suspected",
-      "Perform surveillance imaging of the whole neuraxis given the tumour's propensity for cerebrospinal fluid dissemination",
-      "Include cerebrospinal fluid cytology as part of relapse surveillance where safe to obtain",
-      "Provide ongoing neurocognitive, endocrine, and developmental follow-up given the young age at treatment and the toxicity of intensive multimodal therapy",
-      "Refer promptly to a specialist paediatric neuro-oncology centre with neurosurgery, radiation oncology, and access to intensive or high dose chemotherapy with stem cell rescue support"
+    [
+     "Clinical Pitfall",
+     "Misdiagnosing the tumour as medulloblastoma or another embryonal tumour without INI1 immunohistochemistry.",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for atypical teratoid rhabdoid tumour."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "atypical-teratoid-rhabdoid-tumour-real-image",
+   "title": "atypical teratoid rhabdoid tumour: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

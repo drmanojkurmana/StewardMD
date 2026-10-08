@@ -1,73 +1,168 @@
 {
-  "id": "dacryoadenitis",
-  "name": "Dacryoadenitis",
-  "aliases": [
-    "lacrimal gland inflammation"
+ "id": "dacryoadenitis",
+ "name": "Dacryoadenitis",
+ "aliases": [
+  "lacrimal gland inflammation"
+ ],
+ "class": "infective",
+ "system": "Eye / Orbit and adnexa",
+ "specialty": "Ophthalmology / Oculoplastics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Kanski's Clinical Ophthalmology / orbital disease literature",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Inflammation of the lacrimal gland presenting with pain, swelling and redness over the outer third of the upper eyelid",
+   "The upper lid may take on a characteristic S-shaped contour from lateral gland enlargement",
+   "Acute dacryoadenitis is most often infective, classically viral (such as mumps or Epstein-Barr virus) or bacterial",
+   "Chronic or bilateral disease is more often non-infective, from sarcoidosis, IgG4-related disease, Sjogren syndrome or granulomatosis with polyangiitis",
+   "Fever, preauricular lymphadenopathy and systemic symptoms point to an infective cause",
+   "Imaging and, in atypical or chronic cases, biopsy help distinguish infection from inflammatory or neoplastic disease"
   ],
-  "class": "infective",
-  "system": "Eye / Orbit and adnexa",
-  "specialty": "Ophthalmology / Oculoplastics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Kanski's Clinical Ophthalmology / orbital disease literature",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Inflammation of the lacrimal gland presenting with pain, swelling and redness over the outer third of the upper eyelid",
-      "The upper lid may take on a characteristic S-shaped contour from lateral gland enlargement",
-      "Acute dacryoadenitis is most often infective, classically viral (such as mumps or Epstein-Barr virus) or bacterial",
-      "Chronic or bilateral disease is more often non-infective, from sarcoidosis, IgG4-related disease, Sjogren syndrome or granulomatosis with polyangiitis",
-      "Fever, preauricular lymphadenopathy and systemic symptoms point to an infective cause",
-      "Imaging and, in atypical or chronic cases, biopsy help distinguish infection from inflammatory or neoplastic disease"
+  "pathophysiology": "Dacryoadenitis is inflammation of the lacrimal gland that may be infective or non-infective. Acute infective dacryoadenitis follows viral or bacterial infection reaching the gland, producing acute painful enlargement with an inflammatory response. Non-infective forms arise from systemic granulomatous or autoimmune disease infiltrating the gland. The enlarged, inflamed gland displaces the globe and deforms the upper lid, and untreated bacterial infection can progress to abscess or orbital involvement.",
+  "additionalDifferentials": [
+   "Idiopathic orbital inflammation (lacrimal subtype)",
+   "Lacrimal gland tumour (pleomorphic adenoma, lymphoma, carcinoma)",
+   "IgG4-related dacryoadenitis",
+   "Sarcoidosis",
+   "Preseptal or orbital cellulitis",
+   "Ruptured dermoid cyst"
+  ],
+  "additionalInvestigations": [
+   "Assessment for systemic infective features and preauricular nodes",
+   "CT or MRI of the orbit where the diagnosis is unclear or orbital extension is suspected",
+   "Viral and bacterial studies as clinically indicated",
+   "Serum IgG4, angiotensin-converting enzyme and autoimmune screen for chronic disease",
+   "Lacrimal gland biopsy for chronic, bilateral or mass-like presentations"
+  ],
+  "redFlags": [
+   "Proptosis, ophthalmoplegia or visual loss suggesting orbital extension",
+   "A firm mass or chronic painless enlargement suggesting tumour",
+   "Systemic features suggesting sarcoidosis or vasculitis",
+   "Failure to respond to appropriate treatment"
+  ],
+  "prognosis": "Acute infective dacryoadenitis usually resolves with treatment of the underlying infection; prognosis of non-infective disease depends on the systemic condition, and a neoplastic cause must not be missed.",
+  "pitfalls": [
+   "Assuming all lacrimal swelling is infective and missing a tumour or IgG4-related disease",
+   "Overlooking orbital extension of a bacterial infection",
+   "Failing to investigate chronic or bilateral disease for a systemic cause",
+   "Delaying biopsy of a suspicious mass"
+  ],
+  "references": [
+   "Kanski's Clinical Ophthalmology",
+   "Rootman Orbital Disease (standard reference)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Treat bacterial acute dacryoadenitis with systemic antibiotics active against staphylococci and streptococci, together with warm compresses and analgesia",
+   "Manage viral dacryoadenitis, such as mumps or Epstein-Barr virus, supportively as it is usually self-limiting",
+   "Treat non-infective granulomatous or autoimmune disease according to the underlying cause, for example corticosteroids or immunosuppression for sarcoidosis, IgG4-related disease, Sjogren syndrome or granulomatosis with polyangiitis",
+   "Drain a lacrimal gland abscess surgically if one develops, and give intravenous antibiotics if orbital extension is suspected",
+   "Image the orbit with CT or MRI and biopsy chronic, bilateral or mass-like disease to exclude neoplasm and characterise inflammatory causes",
+   "Refer to oculoplastics and to the relevant specialist, such as rheumatology, for systemic disease"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "dacryoadenitis-pathway",
+   "title": "Dacryoadenitis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Inflammation of the lacrimal gland presenting with pain, swelling and redness over the outer third of the upper eyelid",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Proptosis, ophthalmoplegia or visual loss suggesting orbital extension",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Assessment for systemic infective features and preauricular nodes, CT or MRI of the orbit where the diagnosis is unclear or orbital extension is suspected, Viral and bacterial studies as clinically indicated"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Treat bacterial acute dacryoadenitis with systemic antibiotics active against staphylococci and streptococci, together with warm compresses and analgesia"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Assuming all lacrimal swelling is infective and missing a tumour or IgG4-related disease"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of dacryoadenitis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "dacryoadenitis-matrix",
+   "title": "Dacryoadenitis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Inflammation of the lacrimal gland presenting with pain, swelling and redness over the outer third of the upper eyelid",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Dacryoadenitis is inflammation of the lacrimal gland that may be infective or non-infective. Acute infective dacryoadenitis follows viral or bacterial infection reaching the gland, producing acute painful enlargement with an inflammatory response. Non-infective forms arise from systemic granulomatous or autoimmune disease infiltrating the gland. The enlarged, inflamed gland displaces the globe and deforms the upper lid, and untreated bacterial infection can progress to abscess or orbital involvement.",
-    "additionalDifferentials": [
-      "Idiopathic orbital inflammation (lacrimal subtype)",
-      "Lacrimal gland tumour (pleomorphic adenoma, lymphoma, carcinoma)",
-      "IgG4-related dacryoadenitis",
-      "Sarcoidosis",
-      "Preseptal or orbital cellulitis",
-      "Ruptured dermoid cyst"
+    [
+     "Key Investigations",
+     "Assessment for systemic infective features and preauricular nodes, CT or MRI of the orbit where the diagnosis is unclear or",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Assessment for systemic infective features and preauricular nodes",
-      "CT or MRI of the orbit where the diagnosis is unclear or orbital extension is suspected",
-      "Viral and bacterial studies as clinically indicated",
-      "Serum IgG4, angiotensin-converting enzyme and autoimmune screen for chronic disease",
-      "Lacrimal gland biopsy for chronic, bilateral or mass-like presentations"
+    [
+     "Primary Differentials",
+     "Idiopathic orbital inflammation (lacrimal subtype), Lacrimal gland tumour (pleomorphic adenoma, lymphoma, carcinoma),",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Proptosis, ophthalmoplegia or visual loss suggesting orbital extension",
-      "A firm mass or chronic painless enlargement suggesting tumour",
-      "Systemic features suggesting sarcoidosis or vasculitis",
-      "Failure to respond to appropriate treatment"
+    [
+     "Management Strategy",
+     "Treat bacterial acute dacryoadenitis with systemic antibiotics active against staphylococci and streptococci, together with warm",
+     "Core treatment modality"
     ],
-    "prognosis": "Acute infective dacryoadenitis usually resolves with treatment of the underlying infection; prognosis of non-infective disease depends on the systemic condition, and a neoplastic cause must not be missed.",
-    "pitfalls": [
-      "Assuming all lacrimal swelling is infective and missing a tumour or IgG4-related disease",
-      "Overlooking orbital extension of a bacterial infection",
-      "Failing to investigate chronic or bilateral disease for a systemic cause",
-      "Delaying biopsy of a suspicious mass"
-    ],
-    "references": [
-      "Kanski's Clinical Ophthalmology",
-      "Rootman Orbital Disease (standard reference)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Treat bacterial acute dacryoadenitis with systemic antibiotics active against staphylococci and streptococci, together with warm compresses and analgesia",
-      "Manage viral dacryoadenitis, such as mumps or Epstein-Barr virus, supportively as it is usually self-limiting",
-      "Treat non-infective granulomatous or autoimmune disease according to the underlying cause, for example corticosteroids or immunosuppression for sarcoidosis, IgG4-related disease, Sjogren syndrome or granulomatosis with polyangiitis",
-      "Drain a lacrimal gland abscess surgically if one develops, and give intravenous antibiotics if orbital extension is suspected",
-      "Image the orbit with CT or MRI and biopsy chronic, bilateral or mass-like disease to exclude neoplasm and characterise inflammatory causes",
-      "Refer to oculoplastics and to the relevant specialist, such as rheumatology, for systemic disease"
+    [
+     "Clinical Pitfall",
+     "Assuming all lacrimal swelling is infective and missing a tumour or IgG4-related disease",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for dacryoadenitis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "dacryoadenitis-real-image",
+   "title": "Dacryoadenitis: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

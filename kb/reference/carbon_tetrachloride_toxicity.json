@@ -1,76 +1,171 @@
 {
-  "id": "carbon_tetrachloride_toxicity",
-  "name": "Carbon tetrachloride toxicity",
-  "aliases": [
-    "CCl4 poisoning",
-    "tetrachloromethane poisoning"
+ "id": "carbon_tetrachloride_toxicity",
+ "name": "Carbon tetrachloride toxicity",
+ "aliases": [
+  "CCl4 poisoning",
+  "tetrachloromethane poisoning"
+ ],
+ "class": "non_infective",
+ "system": "Toxicology / Hepatic and renal",
+ "specialty": "Toxicology / Occupational medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Toxicology references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A halogenated hydrocarbon solvent that is a potent hepatotoxin and nephrotoxin, historically used in cleaning fluids, fire extinguishers and refrigerants",
+   "Exposure is by inhalation, ingestion or skin contact, often occupational or through solvent misuse",
+   "Acute high-dose exposure causes central nervous system depression, followed after a latent period by hepatic and renal failure",
+   "Concurrent alcohol use markedly potentiates its hepatotoxicity",
+   "Centrilobular hepatic necrosis and acute tubular necrosis are the characteristic organ injuries",
+   "It is a recognised human carcinogen with chronic exposure",
+   "Management is supportive with removal from exposure; N-acetylcysteine has been used given the oxidative mechanism"
   ],
-  "class": "non_infective",
-  "system": "Toxicology / Hepatic and renal",
-  "specialty": "Toxicology / Occupational medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Toxicology references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A halogenated hydrocarbon solvent that is a potent hepatotoxin and nephrotoxin, historically used in cleaning fluids, fire extinguishers and refrigerants",
-      "Exposure is by inhalation, ingestion or skin contact, often occupational or through solvent misuse",
-      "Acute high-dose exposure causes central nervous system depression, followed after a latent period by hepatic and renal failure",
-      "Concurrent alcohol use markedly potentiates its hepatotoxicity",
-      "Centrilobular hepatic necrosis and acute tubular necrosis are the characteristic organ injuries",
-      "It is a recognised human carcinogen with chronic exposure",
-      "Management is supportive with removal from exposure; N-acetylcysteine has been used given the oxidative mechanism"
+  "pathophysiology": "Carbon tetrachloride is metabolised by hepatic cytochrome P450 (particularly CYP2E1, which is induced by alcohol) to the highly reactive trichloromethyl and trichloromethyl-peroxyl radicals. These initiate lipid peroxidation of cell membranes, causing centrilobular hepatocyte necrosis and, through similar oxidative injury, acute tubular necrosis in the kidney. Its initial anaesthetic effect reflects central nervous system depression typical of lipophilic solvents. The delay before organ failure reflects the time for metabolic activation and progressive oxidative damage.",
+  "additionalDifferentials": [
+   "Paracetamol and other drug-induced hepatotoxicity",
+   "Acute viral hepatitis",
+   "Other solvent or hydrocarbon exposure",
+   "Amatoxin (mushroom) poisoning",
+   "Ischaemic hepatitis",
+   "Other causes of acute kidney injury"
+  ],
+  "additionalInvestigations": [
+   "Liver function tests and coagulation profile",
+   "Renal function and urinalysis",
+   "Exposure history (occupational, solvent misuse, alcohol co-use)",
+   "Assessment for central nervous system depression",
+   "Exclusion of other hepatotoxins including paracetamol"
+  ],
+  "redFlags": [
+   "Progressive hepatic failure with coagulopathy or encephalopathy",
+   "Acute kidney injury and oliguria",
+   "Reduced consciousness after exposure",
+   "Concurrent heavy alcohol use"
+  ],
+  "prognosis": "Outcome depends on the exposure dose and speed of supportive care; severe hepatic and renal failure carries significant mortality, whereas milder exposures may recover with organ support.",
+  "pitfalls": [
+   "Being falsely reassured by an asymptomatic latent period before organ failure",
+   "Underestimating toxicity in a patient who also drinks alcohol",
+   "Failing to take a solvent or occupational exposure history",
+   "Overlooking the delayed nephrotoxicity while focused on the liver"
+  ],
+  "references": [
+   "Goldfrank's Toxicologic Emergencies (standard reference)",
+   "Occupational toxicology references"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Immediate removal from exposure with decontamination of skin and clothing and staff personal protection",
+   "Supportive care as the mainstay, with no specific antidote; N-acetylcysteine is used by some as an antioxidant to limit oxidative hepatic injury",
+   "Avoidance of alcohol and other hepatotoxins that potentiate the liver injury",
+   "Monitoring and support of hepatic failure, including correction of coagulopathy",
+   "Monitoring and support of renal function, with renal replacement therapy for acute tubular necrosis where needed",
+   "Referral to a specialist liver unit with transplantation assessment in fulminant hepatic failure",
+   "Occupational health review and long-term surveillance given the carcinogenic potential of chronic exposure"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "carbon_tetrachloride_toxicity-pathway",
+   "title": "Carbon tetrachloride toxicity: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A halogenated hydrocarbon solvent that is a potent hepatotoxin and nephrotoxin, historically used in cleaning fluids, fire extinguishers and refrigerants",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Progressive hepatic failure with coagulopathy or encephalopathy",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Liver function tests and coagulation profile, Renal function and urinalysis, Exposure history (occupational, solvent misuse, alcohol co-use)"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Immediate removal from exposure with decontamination of skin and clothing and staff personal protection"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Being falsely reassured by an asymptomatic latent period before organ failure"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of carbon tetrachloride toxicity."
+  }
+ ],
+ "tables": [
+  {
+   "id": "carbon_tetrachloride_toxicity-matrix",
+   "title": "Carbon tetrachloride toxicity: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A halogenated hydrocarbon solvent that is a potent hepatotoxin and nephrotoxin, historically used in cleaning fluids, fire",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Carbon tetrachloride is metabolised by hepatic cytochrome P450 (particularly CYP2E1, which is induced by alcohol) to the highly reactive trichloromethyl and trichloromethyl-peroxyl radicals. These initiate lipid peroxidation of cell membranes, causing centrilobular hepatocyte necrosis and, through similar oxidative injury, acute tubular necrosis in the kidney. Its initial anaesthetic effect reflects central nervous system depression typical of lipophilic solvents. The delay before organ failure reflects the time for metabolic activation and progressive oxidative damage.",
-    "additionalDifferentials": [
-      "Paracetamol and other drug-induced hepatotoxicity",
-      "Acute viral hepatitis",
-      "Other solvent or hydrocarbon exposure",
-      "Amatoxin (mushroom) poisoning",
-      "Ischaemic hepatitis",
-      "Other causes of acute kidney injury"
+    [
+     "Key Investigations",
+     "Liver function tests and coagulation profile, Renal function and urinalysis, Exposure history (occupational, solvent misuse,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Liver function tests and coagulation profile",
-      "Renal function and urinalysis",
-      "Exposure history (occupational, solvent misuse, alcohol co-use)",
-      "Assessment for central nervous system depression",
-      "Exclusion of other hepatotoxins including paracetamol"
+    [
+     "Primary Differentials",
+     "Paracetamol and other drug-induced hepatotoxicity, Acute viral hepatitis, Other solvent or hydrocarbon exposure",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Progressive hepatic failure with coagulopathy or encephalopathy",
-      "Acute kidney injury and oliguria",
-      "Reduced consciousness after exposure",
-      "Concurrent heavy alcohol use"
+    [
+     "Management Strategy",
+     "Immediate removal from exposure with decontamination of skin and clothing and staff personal protection",
+     "Core treatment modality"
     ],
-    "prognosis": "Outcome depends on the exposure dose and speed of supportive care; severe hepatic and renal failure carries significant mortality, whereas milder exposures may recover with organ support.",
-    "pitfalls": [
-      "Being falsely reassured by an asymptomatic latent period before organ failure",
-      "Underestimating toxicity in a patient who also drinks alcohol",
-      "Failing to take a solvent or occupational exposure history",
-      "Overlooking the delayed nephrotoxicity while focused on the liver"
-    ],
-    "references": [
-      "Goldfrank's Toxicologic Emergencies (standard reference)",
-      "Occupational toxicology references"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Immediate removal from exposure with decontamination of skin and clothing and staff personal protection",
-      "Supportive care as the mainstay, with no specific antidote; N-acetylcysteine is used by some as an antioxidant to limit oxidative hepatic injury",
-      "Avoidance of alcohol and other hepatotoxins that potentiate the liver injury",
-      "Monitoring and support of hepatic failure, including correction of coagulopathy",
-      "Monitoring and support of renal function, with renal replacement therapy for acute tubular necrosis where needed",
-      "Referral to a specialist liver unit with transplantation assessment in fulminant hepatic failure",
-      "Occupational health review and long-term surveillance given the carcinogenic potential of chronic exposure"
+    [
+     "Clinical Pitfall",
+     "Being falsely reassured by an asymptomatic latent period before organ failure",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for carbon tetrachloride toxicity."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "carbon-tetrachloride-toxicity-real-image",
+   "title": "Carbon tetrachloride toxicity: Diagnostic Abdominal Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
+   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
+   "annotations": [
+    {
+     "label": "Solid Viscera",
+     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
+    },
+    {
+     "label": "Gastrointestinal Tract",
+     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
+    },
+    {
+     "label": "Mesentery & Peritoneum",
+     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+    }
+   ]
+  }
+ ]
 }

@@ -6,7 +6,19 @@
  "basis": "india",
  "counterpart": "enteric-fever-international",
  "setting": "Outpatient, emergency department, ward",
- "aliases": ["typhoid", "paratyphoid", "Salmonella Typhi", "Salmonella Paratyphi A", "S. Typhi", "enteric", "MDR typhoid", "XDR typhoid", "typhoid perforation", "Widal", "TCV"],
+ "aliases": [
+  "typhoid",
+  "paratyphoid",
+  "Salmonella Typhi",
+  "Salmonella Paratyphi A",
+  "S. Typhi",
+  "enteric",
+  "MDR typhoid",
+  "XDR typhoid",
+  "typhoid perforation",
+  "Widal",
+  "TCV"
+ ],
  "summary": "Confirm with blood culture before antibiotics; Widal is unreliable. Fluoroquinolone resistance is widespread in India, so treat uncomplicated disease with oral azithromycin (cefixime is an alternative) and complicated disease with IV ceftriaxone, adjusting to susceptibility, for 10 to 14 days in total.",
  "sections": [
   {
@@ -94,18 +106,160 @@
   }
  ],
  "drugs": [
-  { "name": "Azithromycin", "dose": "20 mg/kg/day orally or IV once daily, maximum 1 g/day (adults 1 g/day)", "notes": "Preferred oral agent for uncomplicated disease; usually 7 days (ICMR total typhoid treatment 10 to 14 days). Check QTc with interacting drugs." },
-  { "name": "Cefixime", "dose": "20 mg/kg/day orally in 2 divided doses for 14 days", "notes": "Alternative oral agent (ICMR; IAP 15 to 20 mg/kg/day). Higher failure rates." },
-  { "name": "Ceftriaxone", "dose": "Adults 2 g IV once daily; children 50 to 75 mg/kg/day IV in 1 or 2 doses", "notes": "Complicated or severe disease; total 10 to 14 days. Do not exceed the adult daily dose in children." },
-  { "name": "Co-trimoxazole", "dose": "Adults 1 double-strength tablet (160/800 mg) orally twice daily", "notes": "Uncomplicated disease, 2 weeks (NCDC 2025 first-line option alongside azithromycin, cefixime as alternative); also an oral step-down after IV treatment. Tailor to susceptibility where known." },
-  { "name": "Meropenem", "dose": "1 g IV 8-hourly", "notes": "Complicated XDR typhoid. Adjust for renal function." },
-  { "name": "Dexamethasone", "dose": "3 mg/kg IV over 30 minutes, then 1 mg/kg IV every 6 hours for 8 doses", "notes": "Severe typhoid with encephalopathy or shock." }
+  {
+   "name": "Azithromycin",
+   "dose": "20 mg/kg/day orally or IV once daily, maximum 1 g/day (adults 1 g/day)",
+   "notes": "Preferred oral agent for uncomplicated disease; usually 7 days (ICMR total typhoid treatment 10 to 14 days). Check QTc with interacting drugs."
+  },
+  {
+   "name": "Cefixime",
+   "dose": "20 mg/kg/day orally in 2 divided doses for 14 days",
+   "notes": "Alternative oral agent (ICMR; IAP 15 to 20 mg/kg/day). Higher failure rates."
+  },
+  {
+   "name": "Ceftriaxone",
+   "dose": "Adults 2 g IV once daily; children 50 to 75 mg/kg/day IV in 1 or 2 doses",
+   "notes": "Complicated or severe disease; total 10 to 14 days. Do not exceed the adult daily dose in children."
+  },
+  {
+   "name": "Co-trimoxazole",
+   "dose": "Adults 1 double-strength tablet (160/800 mg) orally twice daily",
+   "notes": "Uncomplicated disease, 2 weeks (NCDC 2025 first-line option alongside azithromycin, cefixime as alternative); also an oral step-down after IV treatment. Tailor to susceptibility where known."
+  },
+  {
+   "name": "Meropenem",
+   "dose": "1 g IV 8-hourly",
+   "notes": "Complicated XDR typhoid. Adjust for renal function."
+  },
+  {
+   "name": "Dexamethasone",
+   "dose": "3 mg/kg IV over 30 minutes, then 1 mg/kg IV every 6 hours for 8 doses",
+   "notes": "Severe typhoid with encephalopathy or shock."
+  }
  ],
  "sources": [
-  { "org": "NCDC, MoHFW", "title": "National Treatment Guidelines for Antimicrobial Use in Infectious Disease Syndromes 2025", "year": 2025, "url": "https://ncdc.mohfw.gov.in/wp-content/uploads/2025/12/National-Treatment-Guidelines-for-AMU-in-ID-syndromes-2025.pdf" },
-  { "org": "ICMR", "title": "Treatment Guidelines for Antimicrobial Use in Common Syndromes 2019", "year": 2019, "url": "https://www.icmr.gov.in/icmrobject/custom_data/pdf/resource-guidelines/Treatment_Guidelines_2019_Final.pdf" },
-  { "org": "Indian Academy of Pediatrics", "title": "IAP Task Force Report: Management of Enteric Fever in Children", "year": 2006, "url": "https://www.indianpediatrics.net/oct2006/884.pdf" },
-  { "org": "CDC", "title": "Typhoid and Paratyphoid Fever, CDC Yellow Book 2026", "year": 2025, "url": "https://www.cdc.gov/yellow-book/hcp/travel-associated-infections-diseases/typhoid-and-paratyphoid-fever.html" }
+  {
+   "org": "NCDC, MoHFW",
+   "title": "National Treatment Guidelines for Antimicrobial Use in Infectious Disease Syndromes 2025",
+   "year": 2025,
+   "url": "https://ncdc.mohfw.gov.in/wp-content/uploads/2025/12/National-Treatment-Guidelines-for-AMU-in-ID-syndromes-2025.pdf"
+  },
+  {
+   "org": "ICMR",
+   "title": "Treatment Guidelines for Antimicrobial Use in Common Syndromes 2019",
+   "year": 2019,
+   "url": "https://www.icmr.gov.in/icmrobject/custom_data/pdf/resource-guidelines/Treatment_Guidelines_2019_Final.pdf"
+  },
+  {
+   "org": "Indian Academy of Pediatrics",
+   "title": "IAP Task Force Report: Management of Enteric Fever in Children",
+   "year": 2006,
+   "url": "https://www.indianpediatrics.net/oct2006/884.pdf"
+  },
+  {
+   "org": "CDC",
+   "title": "Typhoid and Paratyphoid Fever, CDC Yellow Book 2026",
+   "year": 2025,
+   "url": "https://www.cdc.gov/yellow-book/hcp/travel-associated-infections-diseases/typhoid-and-paratyphoid-fever.html"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "enteric-fever-pathway",
+   "title": "Enteric fever (typhoid and paratyphoid, India) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Suspect in continuous fever for several days with gastrointestinal symptoms (abdominal pain, constipation or diarrhoea), headache, coated tongue, relative bradycardia, hepatosplenomegaly.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Caused by Salmonella Typhi and Paratyphi A; paratyphoid is clinically indistinguishable and is not prevented by typhoid vaccines.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Blood culture before antibiotics: a single culture is positive in about 50%; repeat cultures raise the yield. Bone marrow culture is about 80% sensitive and stays positive after antibiotics have been started."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Ceftriaxone 2 g IV once daily in adults (ICMR); children 50 to 75 mg/kg/day IV in 1 or 2 doses (IAP), not exceeding the adult daily dose. Total treatment 10 to 14 days (switch to an oral agent, such as cefixime or co-trimoxazole (NCDC"
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Fever commonly takes up to a week to settle, and longer with cephalosporins (ICMR); do not change antibiotics for fever alone if the patient is otherwise improving. Reassess formally at day 5."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for enteric fever (typhoid and paratyphoid, india)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "enteric-fever-summary-matrix",
+   "title": "Enteric fever (typhoid and paratyphoid, India) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Suspect in continuous fever for several days with gastrointestinal symptoms (abdominal pain, constipation or diarrhoea), headache, coated",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Ceftriaxone 2 g IV once daily in adults (ICMR); children 50 to 75 mg/kg/day IV in 1 or 2 doses (IAP), not exceeding the adult daily dose.",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Blood culture before antibiotics: a single culture is positive in about 50%; repeat cultures raise the yield. Bone marrow culture is about",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Azithromycin: 20 mg/kg/day orally or IV once daily, maximum 1 g/day (adults 1 g/day)",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Diagnosing typhoid on a single Widal titre and missing malaria, dengue, scrub typhus or tuberculosis.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for enteric fever (typhoid and paratyphoid, india)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "enteric-fever-real-image",
+   "title": "Enteric fever (typhoid and paratyphoid, India): Diagnostic Microbiological / Smear Examination",
+   "type": "diagram",
+   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
+   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
+   "annotations": [
+    {
+     "label": "Pathogen Detection",
+     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
+    },
+    {
+     "label": "Inflammatory Response",
+     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
+    },
+    {
+     "label": "Diagnostic Confirmation",
+     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+    }
+   ]
+  }
+ ]
 }

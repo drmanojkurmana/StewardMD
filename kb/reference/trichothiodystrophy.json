@@ -1,82 +1,177 @@
 {
-  "id": "trichothiodystrophy",
-  "name": "Trichothiodystrophy",
-  "aliases": [
-    "TTD",
-    "sulphur-deficient brittle hair syndrome",
-    "Tay syndrome",
-    "ERCC2",
-    "ERCC3",
-    "GTF2H5"
+ "id": "trichothiodystrophy",
+ "name": "Trichothiodystrophy",
+ "aliases": [
+  "TTD",
+  "sulphur-deficient brittle hair syndrome",
+  "Tay syndrome",
+  "ERCC2",
+  "ERCC3",
+  "GTF2H5"
+ ],
+ "class": "non_infective",
+ "system": "Genetics / Immunology",
+ "specialty": "Clinical Genetics / Immunology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "OMIM / GeneReviews (NCBI) and standard clinical genetics texts",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Autosomal recessive multisystem disorder defined by sulphur-deficient brittle hair, frequently caused by variants in nucleotide excision repair genes such as ERCC2 (XPD), ERCC3 (XPB) or GTF2H5",
+   "Hair shows a diagnostic alternating light and dark banding (tiger-tail pattern) under polarised light microscopy",
+   "The clinical spectrum is captured by the mnemonic PIBIDS: photosensitivity, ichthyosis, brittle hair, intellectual impairment, decreased fertility and short stature",
+   "Photosensitivity occurs in a subset but, unlike xeroderma pigmentosum, is not associated with a raised skin-cancer risk",
+   "Neurological features include developmental delay, ataxia and dysmyelination on neuroimaging",
+   "Recurrent infections and a tendency to febrile illness are recognised, and some patients have features overlapping immunodeficiency",
+   "Analysis of hair amino acid content demonstrates a low cysteine and sulphur level, supporting the diagnosis",
+   "Diagnosis integrates the hair microscopy pattern, biochemical hair analysis, DNA-repair testing and molecular confirmation"
   ],
-  "class": "non_infective",
-  "system": "Genetics / Immunology",
-  "specialty": "Clinical Genetics / Immunology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "OMIM / GeneReviews (NCBI) and standard clinical genetics texts",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Autosomal recessive multisystem disorder defined by sulphur-deficient brittle hair, frequently caused by variants in nucleotide excision repair genes such as ERCC2 (XPD), ERCC3 (XPB) or GTF2H5",
-      "Hair shows a diagnostic alternating light and dark banding (tiger-tail pattern) under polarised light microscopy",
-      "The clinical spectrum is captured by the mnemonic PIBIDS: photosensitivity, ichthyosis, brittle hair, intellectual impairment, decreased fertility and short stature",
-      "Photosensitivity occurs in a subset but, unlike xeroderma pigmentosum, is not associated with a raised skin-cancer risk",
-      "Neurological features include developmental delay, ataxia and dysmyelination on neuroimaging",
-      "Recurrent infections and a tendency to febrile illness are recognised, and some patients have features overlapping immunodeficiency",
-      "Analysis of hair amino acid content demonstrates a low cysteine and sulphur level, supporting the diagnosis",
-      "Diagnosis integrates the hair microscopy pattern, biochemical hair analysis, DNA-repair testing and molecular confirmation"
+  "pathophysiology": "Trichothiodystrophy most commonly results from variants affecting components of the transcription factor TFIIH, which functions in both nucleotide excision repair and basal transcription. Impaired TFIIH activity reduces synthesis of cysteine-rich structural proteins of the hair shaft, producing the sulphur deficiency and brittleness, while defective repair and transcription in other tissues account for the neuroectodermal, cutaneous and developmental manifestations. Non-photosensitive forms arise from variants in genes affecting hair-specific structural or regulatory proteins.",
+  "additionalDifferentials": [
+   "Xeroderma pigmentosum",
+   "Cockayne syndrome",
+   "Netherton syndrome",
+   "Menkes disease and other hair-shaft dysplasias",
+   "Congenital ichthyoses",
+   "Other syndromic causes of brittle hair with developmental delay"
+  ],
+  "additionalInvestigations": [
+   "Polarised light microscopy of the hair shaft for the tiger-tail banding pattern",
+   "Biochemical analysis of hair cysteine and sulphur content",
+   "Molecular genetic testing including ERCC2, ERCC3 and GTF2H5",
+   "Functional DNA-repair assay in photosensitive forms",
+   "MRI brain for dysmyelination",
+   "Developmental, immunological and growth assessment"
+  ],
+  "redFlags": [
+   "Recurrent or severe infections suggesting associated immune compromise",
+   "Failure to thrive or feeding difficulty in infancy",
+   "Progressive neurological decline",
+   "Severe ichthyosis with skin barrier failure in the neonate"
+  ],
+  "prognosis": "Outcome varies widely with severity, from early death in severe neonatal ichthyosiform presentations to survival into adulthood with milder disease. Recurrent infection contributes significantly to morbidity and mortality, and care is supportive.",
+  "pitfalls": [
+   "Overlooking the diagnosis without polarised light hair microscopy",
+   "Assuming photosensitivity implies xeroderma pigmentosum and a high cancer risk",
+   "Missing associated immune deficiency and infection risk",
+   "Attributing the brittle hair to an acquired or nutritional cause"
+  ],
+  "references": [
+   "GeneReviews (NCBI): Trichothiodystrophy",
+   "OMIM: Trichothiodystrophy"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Recognise there is no curative or disease-specific therapy, so provide coordinated supportive multisystem care tailored to each patient's manifestations",
+   "Institute strict photoprotection with broad-spectrum sunscreen, protective clothing and ultraviolet avoidance in the photosensitive subgroup",
+   "Manage the ichthyosis with emollients and keratolytics and provide gentle skin and hair care",
+   "Treat infections promptly and aggressively, ensure immunisations are up to date and monitor for features of immunodeficiency, given recurrent infection is a major cause of morbidity",
+   "Support neurodevelopment with physiotherapy, occupational therapy, speech therapy and special educational input for intellectual impairment, ataxia and dysmyelination, alongside nutritional and growth monitoring",
+   "Coordinate care through clinical genetics, dermatology, neurology, immunology and paediatrics",
+   "Offer genetic counselling and family and prenatal testing, reflecting autosomal recessive inheritance and the nucleotide-excision-repair genes ERCC2, ERCC3 and GTF2H5"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "trichothiodystrophy-pathway",
+   "title": "Trichothiodystrophy: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Autosomal recessive multisystem disorder defined by sulphur-deficient brittle hair, frequently caused by variants in nucleotide excision repair genes such as ERCC2 (XPD), ERCC3 (XPB) or GTF2H5",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Recurrent or severe infections suggesting associated immune compromise",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Polarised light microscopy of the hair shaft for the tiger-tail banding pattern, Biochemical analysis of hair cysteine and sulphur content, Molecular genetic testing including ERCC2, ERCC3 and GTF2H5"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Recognise there is no curative or disease-specific therapy, so provide coordinated supportive multisystem care tailored to each patient's manifestations"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Overlooking the diagnosis without polarised light hair microscopy"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of trichothiodystrophy."
+  }
+ ],
+ "tables": [
+  {
+   "id": "trichothiodystrophy-matrix",
+   "title": "Trichothiodystrophy: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Autosomal recessive multisystem disorder defined by sulphur-deficient brittle hair, frequently caused by variants in nucleotide",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Trichothiodystrophy most commonly results from variants affecting components of the transcription factor TFIIH, which functions in both nucleotide excision repair and basal transcription. Impaired TFIIH activity reduces synthesis of cysteine-rich structural proteins of the hair shaft, producing the sulphur deficiency and brittleness, while defective repair and transcription in other tissues account for the neuroectodermal, cutaneous and developmental manifestations. Non-photosensitive forms arise from variants in genes affecting hair-specific structural or regulatory proteins.",
-    "additionalDifferentials": [
-      "Xeroderma pigmentosum",
-      "Cockayne syndrome",
-      "Netherton syndrome",
-      "Menkes disease and other hair-shaft dysplasias",
-      "Congenital ichthyoses",
-      "Other syndromic causes of brittle hair with developmental delay"
+    [
+     "Key Investigations",
+     "Polarised light microscopy of the hair shaft for the tiger-tail banding pattern, Biochemical analysis of hair cysteine and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Polarised light microscopy of the hair shaft for the tiger-tail banding pattern",
-      "Biochemical analysis of hair cysteine and sulphur content",
-      "Molecular genetic testing including ERCC2, ERCC3 and GTF2H5",
-      "Functional DNA-repair assay in photosensitive forms",
-      "MRI brain for dysmyelination",
-      "Developmental, immunological and growth assessment"
+    [
+     "Primary Differentials",
+     "Xeroderma pigmentosum, Cockayne syndrome, Netherton syndrome",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Recurrent or severe infections suggesting associated immune compromise",
-      "Failure to thrive or feeding difficulty in infancy",
-      "Progressive neurological decline",
-      "Severe ichthyosis with skin barrier failure in the neonate"
+    [
+     "Management Strategy",
+     "Recognise there is no curative or disease-specific therapy, so provide coordinated supportive multisystem care tailored to each",
+     "Core treatment modality"
     ],
-    "prognosis": "Outcome varies widely with severity, from early death in severe neonatal ichthyosiform presentations to survival into adulthood with milder disease. Recurrent infection contributes significantly to morbidity and mortality, and care is supportive.",
-    "pitfalls": [
-      "Overlooking the diagnosis without polarised light hair microscopy",
-      "Assuming photosensitivity implies xeroderma pigmentosum and a high cancer risk",
-      "Missing associated immune deficiency and infection risk",
-      "Attributing the brittle hair to an acquired or nutritional cause"
-    ],
-    "references": [
-      "GeneReviews (NCBI): Trichothiodystrophy",
-      "OMIM: Trichothiodystrophy"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Recognise there is no curative or disease-specific therapy, so provide coordinated supportive multisystem care tailored to each patient's manifestations",
-      "Institute strict photoprotection with broad-spectrum sunscreen, protective clothing and ultraviolet avoidance in the photosensitive subgroup",
-      "Manage the ichthyosis with emollients and keratolytics and provide gentle skin and hair care",
-      "Treat infections promptly and aggressively, ensure immunisations are up to date and monitor for features of immunodeficiency, given recurrent infection is a major cause of morbidity",
-      "Support neurodevelopment with physiotherapy, occupational therapy, speech therapy and special educational input for intellectual impairment, ataxia and dysmyelination, alongside nutritional and growth monitoring",
-      "Coordinate care through clinical genetics, dermatology, neurology, immunology and paediatrics",
-      "Offer genetic counselling and family and prenatal testing, reflecting autosomal recessive inheritance and the nucleotide-excision-repair genes ERCC2, ERCC3 and GTF2H5"
+    [
+     "Clinical Pitfall",
+     "Overlooking the diagnosis without polarised light hair microscopy",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for trichothiodystrophy."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "trichothiodystrophy-real-image",
+   "title": "Trichothiodystrophy: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

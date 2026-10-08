@@ -5,7 +5,18 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, CCU, ward",
- "aliases": ["NSTEMI", "NSTE-ACS", "non-STEMI", "unstable angina", "UA", "ACS", "GRACE score", "hs-troponin", "0h/1h algorithm", "early invasive strategy"],
+ "aliases": [
+  "NSTEMI",
+  "NSTE-ACS",
+  "non-STEMI",
+  "unstable angina",
+  "UA",
+  "ACS",
+  "GRACE score",
+  "hs-troponin",
+  "0h/1h algorithm",
+  "early invasive strategy"
+ ],
  "summary": "Confirm with serial high-sensitivity troponin, stratify risk, give aspirin and a parenteral anticoagulant, time angiography to risk (within 2 hours if very high risk, within 24 hours if high risk, otherwise selective), and use DAPT for 12 months by default.",
  "sections": [
   {
@@ -83,19 +94,162 @@
   }
  ],
  "drugs": [
-  { "name": "Aspirin", "dose": "150 to 300 mg orally loading, then 75 to 100 mg once daily" },
-  { "name": "Prasugrel", "dose": "60 mg orally loading at PCI, then 10 mg once daily; 5 mg daily if 75 years or older or weight under 60 kg", "notes": "Contraindicated after previous stroke or TIA." },
-  { "name": "Ticagrelor", "dose": "180 mg orally loading, then 90 mg twice daily", "notes": "Dyspnoea is common and usually benign. Avoid after intracranial haemorrhage." },
-  { "name": "Clopidogrel", "dose": "300 to 600 mg orally loading, then 75 mg once daily", "notes": "For patients on oral anticoagulation or when potent agents are contraindicated." },
-  { "name": "Fondaparinux", "dose": "2.5 mg SC once daily", "notes": "Preferred when angiography is not expected within 24 hours. Give a full UFH bolus at PCI. Contraindicated if eGFR below 20." },
-  { "name": "Enoxaparin", "dose": "1 mg/kg SC every 12 hours", "notes": "eGFR 15 to 29: 1 mg/kg once daily; avoid below 15." },
-  { "name": "Unfractionated heparin (UFH)", "dose": "60 to 70 IU/kg IV bolus (max 5000 IU), then 12 to 15 IU/kg/h (max 1000 IU/h), aPTT 1.5 to 2.5 times control; at PCI 70 to 100 IU/kg IV, ACT-guided", "notes": "Use in severe renal impairment." },
-  { "name": "Atorvastatin (or rosuvastatin)", "dose": "Atorvastatin 40 to 80 mg orally once daily (or rosuvastatin 20 to 40 mg once daily)", "notes": "Start in hospital." },
-  { "name": "Isosorbide dinitrate or glyceryl trinitrate", "dose": "Isosorbide dinitrate 5 mg sublingual, or glyceryl trinitrate 0.4 to 0.5 mg sublingual, repeated every 5 minutes up to 3 doses", "notes": "IV glyceryl trinitrate for persistent pain or hypertension. Avoid if SBP below 90 mmHg or PDE5 inhibitor in the last 24 to 48 hours." }
+  {
+   "name": "Aspirin",
+   "dose": "150 to 300 mg orally loading, then 75 to 100 mg once daily"
+  },
+  {
+   "name": "Prasugrel",
+   "dose": "60 mg orally loading at PCI, then 10 mg once daily; 5 mg daily if 75 years or older or weight under 60 kg",
+   "notes": "Contraindicated after previous stroke or TIA."
+  },
+  {
+   "name": "Ticagrelor",
+   "dose": "180 mg orally loading, then 90 mg twice daily",
+   "notes": "Dyspnoea is common and usually benign. Avoid after intracranial haemorrhage."
+  },
+  {
+   "name": "Clopidogrel",
+   "dose": "300 to 600 mg orally loading, then 75 mg once daily",
+   "notes": "For patients on oral anticoagulation or when potent agents are contraindicated."
+  },
+  {
+   "name": "Fondaparinux",
+   "dose": "2.5 mg SC once daily",
+   "notes": "Preferred when angiography is not expected within 24 hours. Give a full UFH bolus at PCI. Contraindicated if eGFR below 20."
+  },
+  {
+   "name": "Enoxaparin",
+   "dose": "1 mg/kg SC every 12 hours",
+   "notes": "eGFR 15 to 29: 1 mg/kg once daily; avoid below 15."
+  },
+  {
+   "name": "Unfractionated heparin (UFH)",
+   "dose": "60 to 70 IU/kg IV bolus (max 5000 IU), then 12 to 15 IU/kg/h (max 1000 IU/h), aPTT 1.5 to 2.5 times control; at PCI 70 to 100 IU/kg IV, ACT-guided",
+   "notes": "Use in severe renal impairment."
+  },
+  {
+   "name": "Atorvastatin (or rosuvastatin)",
+   "dose": "Atorvastatin 40 to 80 mg orally once daily (or rosuvastatin 20 to 40 mg once daily)",
+   "notes": "Start in hospital."
+  },
+  {
+   "name": "Isosorbide dinitrate or glyceryl trinitrate",
+   "dose": "Isosorbide dinitrate 5 mg sublingual, or glyceryl trinitrate 0.4 to 0.5 mg sublingual, repeated every 5 minutes up to 3 doses",
+   "notes": "IV glyceryl trinitrate for persistent pain or hypertension. Avoid if SBP below 90 mmHg or PDE5 inhibitor in the last 24 to 48 hours."
+  }
  ],
  "sources": [
-  { "org": "ESC", "title": "2023 ESC Guidelines for the management of acute coronary syndromes", "year": 2023, "url": "https://academic.oup.com/eurheartj/article/44/38/3720/7243210" },
-  { "org": "ACC / AHA / ACEP / NAEMSP / SCAI", "title": "2025 Guideline for the Management of Patients With Acute Coronary Syndromes", "year": 2025, "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001309" }
+  {
+   "org": "ESC",
+   "title": "2023 ESC Guidelines for the management of acute coronary syndromes",
+   "year": 2023,
+   "url": "https://academic.oup.com/eurheartj/article/44/38/3720/7243210"
+  },
+  {
+   "org": "ACC / AHA / ACEP / NAEMSP / SCAI",
+   "title": "2025 Guideline for the Management of Patients With Acute Coronary Syndromes",
+   "year": 2025,
+   "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001309"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "nste-acs-pathway",
+   "title": "Non-ST-elevation acute coronary syndrome (NSTEMI and unstable angina) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Ischaemic chest discomfort at rest, new-onset or crescendo angina, or equivalents (breathlessness, epigastric pain, sweating), without persistent ST elevation.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Continuous ECG monitoring. Oxygen only if SpO2 is below 90%. Sublingual or IV nitrate for ongoing angina (avoid with hypotension, RV infarction or recent PDE5 inhibitor).",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Very high risk: immediate angiography (within 2 hours): haemodynamic instability or cardiogenic shock, recurrent or refractory chest pain despite medical treatment, life-threatening arrhythmias, mechanical complications, acute heart"
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "DAPT: aspirin plus prasugrel or ticagrelor. Prasugrel should be considered in preference to ticagrelor in patients proceeding to PCI; ticagrelor if managed without PCI. Clopidogrel if both are contraindicated or unavailable, or if oral"
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Ruling out on a single troponin taken early after symptom onset when the validated hs-troponin algorithm does not allow it."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for non-st-elevation acute coronary syndrome (nstemi and unstable angina)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "nste-acs-summary-matrix",
+   "title": "Non-ST-elevation acute coronary syndrome (NSTEMI and unstable angina) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Ischaemic chest discomfort at rest, new-onset or crescendo angina, or equivalents (breathlessness, epigastric pain, sweating), without",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Continuous ECG monitoring. Oxygen only if SpO2 is below 90%. Sublingual or IV nitrate for ongoing angina (avoid with hypotension, RV",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Very high risk: immediate angiography (within 2 hours): haemodynamic instability or cardiogenic shock, recurrent or refractory chest pain",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Aspirin: 150 to 300 mg orally loading, then 75 to 100 mg once daily",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Ruling out on a single troponin taken early after symptom onset when the validated hs-troponin algorithm does not allow it.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for non-st-elevation acute coronary syndrome (nstemi and unstable angina)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "nste-acs-real-image",
+   "title": "Non-ST-elevation acute coronary syndrome (NSTEMI and unstable angina): 12-Lead Diagnostic Electrocardiogram",
+   "type": "ecg",
+   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
+   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
+   "annotations": [
+    {
+     "label": "Conduction & Axis",
+     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
+    },
+    {
+     "label": "Repolarization",
+     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
+    },
+    {
+     "label": "Rhythm & Intervals",
+     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+    }
+   ]
+  }
+ ]
 }

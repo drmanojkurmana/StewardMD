@@ -129,7 +129,7 @@
   }
   function costLine(cost) {
     if (!cost || !(cost.inTok || cost.outTok)) return "";
-    return "AI cost so far: Rs " + (+cost.inr || 0).toFixed(2) + " (" + (cost.inTok + cost.outTok + (cost.thinkTok || 0)) + " tokens)";
+    return "Cost so far: Rs " + (+cost.inr || 0).toFixed(2) + " (" + (cost.inTok + cost.outTok + (cost.thinkTok || 0)) + " tokens)";
   }
 
   /* ---------- server responses -> stored records ---------- */
@@ -526,18 +526,23 @@
   /* ---------- Your decks ---------- */
   function renderDecks(host) {
     var esc = host.esc, cl = capsNow();
-    host.paint(host.bar("Your decks", "Questions and cards from your PDF or notes", "back") + '<div class="pn-body" id="pcDecksView">' +
+    host.paint(host.bar("Your decks", "Questions and cards from your PDF or notes", "back") + '<div class="pn-body" id="pcDecksView"><div id="pcHb"></div>' +
       '<button type="button" class="pn-btn pri" data-act="c-new">' + host.ico("plus") + " Make a deck</button>" +
       (cl ? '<p class="pn-mut pn-small" id="pcCapLine">' + esc(cl) + "</p>" : "") +
       (job && !jobResult ? '<button type="button" class="pn-mod" data-act="c-prog"><span class="pn-mb"><b>Making questions for ' + esc(job.m.title) + "</b><small>Show progress</small></span>" + host.ico("chev") + "</button>" : "") +
-      '<div id="pcDecks" class="pc-decks"><p class="pn-load" role="status">Loading your decks</p></div>' +
+      '<div id="pcDecks" class="pc-decks"><p class="pn-load" role="status">Loading your decks…</p></div>' +
       '<p class="pn-note">Decks stay on this phone. Removing the app or clearing its data deletes them.</p></div>');
     DK.listDecks().then(function (list) {
       var box = host.root() && host.root().querySelector("#pcDecks");
       if (!box) return;
-      var s = host.store(), td = host.today();
+      var s = host.store(), td = host.today(), hb = host.root().querySelector("#pcHb");
+      if (hb && list.length && host.hband) {
+        var nq = 0, nc = 0, due = 0;
+        list.forEach(function (m) { var pg = deckProgress(s, m.id, td); nq += DK.questionCount(m); nc += m.stats.cards || 0; due += (pg.due || 0) + (pg.cardsDue || 0); });
+        hb.innerHTML = host.hband("decks", host.fmt(list.length), list.length === 1 ? "deck" : "decks", host.fmt(nq) + (nq === 1 ? " question" : " questions") + " and " + host.fmt(nc) + (nc === 1 ? " card" : " cards") + (due ? ", " + host.fmt(due) + " due today." : ", all on this phone."));
+      }
       box.innerHTML = list.length ? list.map(function (m) { return deckRow(host, m, deckProgress(s, m.id, td)); }).join("") :
-        '<p class="pn-empty">No decks yet. Make one from a PDF or your notes, and practise it like any module.</p>';
+        '<p class="pn-empty pn-art-decks">No decks yet. Make one from a PDF or your notes, and practise it like any module.</p>';
     }, function () {
       var box = host.root() && host.root().querySelector("#pcDecks");
       if (box) box.innerHTML = '<p class="pn-err" role="alert">Your decks could not be read on this phone.</p>';
@@ -547,7 +552,7 @@
     var esc = host.esc, n = DK.questionCount(m), t = esc(m.title), id = esc(m.id), busy = job && !jobResult && job.deckId === m.id;
     var line = host.fmt(n) + (n === 1 ? " question" : " questions") + " · " + host.fmt(m.stats.cards || 0) + " cards" + (pg.due ? " · " + host.fmt(pg.due) + " due" : "") + (pg.cardsDue ? " · " + host.fmt(pg.cardsDue) + " cards due" : "");
     return '<section class="pn-panel pc-deck" aria-label="' + t + '"><div class="pc-dh"><span class="pn-mb"><b>' + t + "</b><small>" + line + "</small>" +
-      '<small class="pc-lab">' + esc(m.label || DK.LABEL) + (m.source && m.source.ocr ? " · partly read by OCR" : "") + (m.cost && m.cost.stopped ? " · stopped: " + esc(stopWord(m.cost.stopped)) : "") + "</small></span>" +
+      ((m.source && m.source.ocr) || (m.cost && m.cost.stopped) ? '<small class="pc-lab">' + [m.source && m.source.ocr ? "Partly read by OCR" : "", m.cost && m.cost.stopped ? "Stopped: " + esc(stopWord(m.cost.stopped)) : ""].filter(Boolean).join(" · ") + "</small>" : "") + "</span>" +
       '<button type="button" class="pn-ib" data-act="c-del" data-d="' + id + '" aria-label="Delete the deck ' + t + '">' + host.ico("x") + "</button></div>" +
       '<div class="pc-acts">' +
       '<button type="button" class="pn-btn sm pri" data-act="c-prac" data-d="' + id + '" aria-label="Practise ' + t + '"' + (n ? "" : " disabled") + ">" + host.ico("play") + " Practise</button>" +
@@ -578,7 +583,7 @@
       '<p class="pn-mut pn-small">Questions are written for ' + esc(ex.label) + ". Change the exam on the PrepNucleus home.</p>" +
       '<button type="button" class="pc-check" data-act="c-own" aria-pressed="' + cs.own + '"><span class="pc-box" aria-hidden="true">' + (cs.own ? host.ico("check") : "") + "</span>" +
       "<span>These are my own notes, or material I am allowed to use for study.</span></button>" +
-      '<p class="pn-mut pn-small">Before anything is sent, names, phone numbers and ID numbers are looked for and removed. Only the text is sent, never the file. Questions are written by AI and checked automatically.</p>' +
+      '<p class="pn-mut pn-small">Before anything is sent, names, phone numbers and ID numbers are looked for and removed. Only the text is sent, never the file. Questions are made from it and checked automatically.</p>' +
       (cl ? '<p class="pn-mut pn-small" id="pcCapLine">' + esc(cl) + "</p>" : "") +
       (cs.err ? '<p class="pn-err" role="alert" id="pcErr" tabindex="-1">' + esc(cs.err) + "</p>" : "") +
       '<button type="button" class="pn-btn pri" data-act="c-go"' + (cs.busy ? " disabled" : "") + ">Make 10 questions</button>" +
@@ -592,7 +597,7 @@
     if (fi) fi.addEventListener("change", function () { if (fi.files && fi.files[0]) pickPdf(fi.files[0], host); });
   }
   function pickPdf(file, host) {
-    cs.err = ""; cs.pdf = null; cs.busy = "Opening the PDF";
+    cs.err = ""; cs.pdf = null; cs.busy = "Opening the PDF…";
     host.rerender();
     SR.openPdf(file).then(function (pdf) {
       cs.busy = ""; cs.pdf = pdf; cs.pagesSpec = SR.defaultPages(pdf.pages);
@@ -617,14 +622,14 @@
     if (!cs.pdf) return createError(host, "Choose a PDF first.");
     var pp = SR.parsePages(cs.pagesSpec, cs.pdf.pages);
     if (pp.error) return createError(host, pp.error);
-    cs.busy = "Reading page 1 of " + pp.pages.length;
+    cs.busy = "Reading page 1 of " + pp.pages.length + "…";
     host.rerender();
     var ocrOn = SR.canOcr();
     SR.readPdfPages(cs.pdf.doc, pp.pages, function (d, n, phase) {
       var el = host.root() && host.root().querySelector("#pcCreateView .pn-load");
       if (!el) return;
       if (phase === "ocr") el.textContent = d < n ? "Reading scanned page " + (d + 1) + " of " + n + " on this phone" : "Scanned pages read";
-      else if (d < n) el.textContent = "Reading page " + (d + 1) + " of " + n;
+      else if (d < n) el.textContent = "Reading page " + (d + 1) + " of " + n + "…";
     }).then(function (rd) {
       cs.busy = "";
       if (!rd.pages.length) return createError(host, unreadableMessage(rd, ocrOn));
@@ -699,14 +704,14 @@
   function progressBits(host) {
     var r = job.round, pct = Math.min(100, Math.round(r.accepted * 100 / r.target));
     var net = job.phase === "facts" || job.phase === "mcq" || job.phase === "solve" || job.phase === "review";
-    return { pct: pct, count: r.accepted + " of " + r.target, phase: (PHASE[job.phase] || "Getting ready") + (net ? " (step " + (job.steps + 1) + ")" : ""), cost: costLine(job.m.cost), caps: capsNow() };
+    return { pct: pct, count: r.accepted + " of " + r.target, phase: (PHASE[job.phase] || "Getting ready") + (net ? " (step " + (job.steps + 1) + ")" : ""), caps: capsNow() };
   }
   function renderProgress(host) {
     if (!job) return host.back();
     var esc = host.esc, b = progressBits(host), res = jobResult, id = esc(job.deckId), body;
     if (!res) body = '<section class="pn-panel pc-progp" aria-live="polite"><p class="pn-big" id="pcCount">' + b.count + "</p><p class=\"pn-mut\">questions ready</p>" +
-      '<span class="pn-prog pc-bar" aria-hidden="true"><i id="pcBarI" style="width:' + b.pct + '%"></i></span>' +
-      '<p id="pcPhase">' + esc(b.phase) + '</p><p class="pn-mut pn-small" id="pcCost">' + esc(b.cost) + '</p><p class="pn-mut pn-small" id="pcCaps">' + esc(b.caps) + "</p></section>" +
+      '<span class="pn-prog pc-bar" aria-hidden="true"><i id="pcBarI" style="transform:scaleX(' + (b.pct / 100) + ')"></i></span>' +
+      '<p id="pcPhase">' + esc(b.phase) + '</p><p class="pn-mut pn-small" id="pcCaps">' + esc(b.caps) + "</p></section>" +
       '<button type="button" class="pn-btn" data-act="c-stop"' + (job.stopReq ? " disabled" : "") + ">" + (job.stopReq ? "Stopping after this step" : "Stop after this step") + "</button>" +
       (note ? '<p class="pn-mut pn-small" id="pcNote">' + esc(note) + "</p>" : "") +
       '<p class="pn-mut pn-small">Each step is checked before the next. You can go back; the deck keeps building.</p>';
@@ -718,7 +723,7 @@
     } else {
       var n = res.accepted, has = DK.questionCount(job.m);
       body = '<section class="pn-panel pn-score"><p class="pn-big">' + n + '</p><p class="pn-mut">' + (n === 1 ? "new question" : "new questions") + " · " + has + " in the deck</p>" +
-        (b.cost ? '<p class="pn-mut pn-small">' + esc(b.cost) + "</p>" : "") + (b.caps ? '<p class="pn-mut pn-small" id="pcCaps">' + esc(b.caps) + "</p>" : "") + "</section>" +
+        (b.caps ? '<p class="pn-mut pn-small" id="pcCaps">' + esc(b.caps) + "</p>" : "") + "</section>" +
         (note ? '<p class="pn-mut pn-small" id="pcNote">' + esc(note) + "</p>" : "") +
         (res.ok ? '<p class="pn-mut">' + (res.stopped ? "Stopped. What was made is saved." : n ? "Saved on this phone." : res.more ? "No question passed the checks this time. Try 10 more." : "Every part of this source has been used. Make a new deck from more material.") + "</p>" :
           '<p class="pn-err" role="alert" id="pcErr" tabindex="-1">' + esc(res.message) + "</p>") +
@@ -734,8 +739,8 @@
     var r = host.root();
     if (!r || !r.querySelector("#pcProgView") || jobResult) return;
     var b = progressBits(host), set = function (sel, t) { var el = r.querySelector(sel); if (el) el.textContent = t; };
-    set("#pcCount", b.count); set("#pcPhase", b.phase); set("#pcCost", b.cost); set("#pcCaps", b.caps);
-    var bar = r.querySelector("#pcBarI"); if (bar) bar.style.width = b.pct + "%";
+    set("#pcCount", b.count); set("#pcPhase", b.phase); set("#pcCaps", b.caps);
+    var bar = r.querySelector("#pcBarI"); if (bar) bar.style.transform = "scaleX(" + (b.pct / 100) + ")";
   }
   function resume(host) {
     if (!job || !jobResult || jobResult.ok) return;

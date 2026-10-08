@@ -39,15 +39,18 @@
      only repeat them. */
   function accuracyHtml(j) {
     if (!j) return '<p class="pn-err" role="alert">The accuracy numbers did not load. Check the connection and try again.</p>';
-    var NA = '<span class="ps-na">Not yet published</span>', k = j.keys, q = j.ai && j.ai.questions, l = j.ai && j.ai.lessons, c = j.ai && j.ai.cards;
+    // Owner rule (2026-10-07): keys and reports only; how content is written and where it comes from is in the Terms.
+    var NA = '<span class="ps-na">Not yet published</span>', k = j.keys;
     var max = 0, h = "";
     h += '<p class="ps-lede">Every number on this page is computed by a script from our own build records, not typed by hand. Where we have no record yet, we say so.</p>';
+    // Round 4: the one figure first (keys that matched the independent check), then the detail.
+    if (k && k.screened) h += '<section class="ps-hero" aria-label="Answer keys that matched"><b>' + pct(1 - k.rate, 1) + "</b><span>of answer keys matched an independent check</span><small>" + fmt(k.screened) + " questions checked</small></section>";
     h += '<h2 class="pn-h">Answer keys</h2>';
     if (k) {
       (k.subjects || []).forEach(function (s) { if (s.rate > max) max = s.rate; });
-      h += '<p class="ps-say">An independent AI model answered all <b>' + fmt(k.screened) + "</b> questions in the bank without seeing the key. It chose a different answer on <b>" +
+      h += '<p class="ps-say">An independent check answered all <b>' + fmt(k.screened) + "</b> questions in the bank without seeing the key. It chose a different answer on <b>" +
         fmt(k.disputed) + "</b> (" + pct(k.rate, 1) + "). Those questions are hidden from practice until they are reviewed.</p>" +
-        '<section class="ps-chart" aria-labelledby="psKeysT"><h3 class="pn-sec" id="psKeysT">Disputed keys by subject</h3><p class="pn-mut pn-small">Share of each subject\'s questions where the model disagreed, highest first.</p>' +
+        '<section class="ps-chart" aria-labelledby="psKeysT"><h3 class="pn-sec" id="psKeysT">Disputed keys by subject</h3><p class="pn-mut pn-small">Share of each subject\'s questions where the check disagreed, highest first.</p>' +
         '<ol class="ps-bars">' + (k.subjects || []).map(function (s) {
           return '<li><span class="ps-bn">' + esc(s.name) + '</span><span class="ps-bv">' + pct(s.rate, 1) + '</span><span class="ps-bar" aria-hidden="true"><i style="width:' + (max ? Math.max(1, Math.round(s.rate * 1000 / max) / 10) : 0) + '%"></i></span>' +
             '<small class="ps-bs">' + fmt(s.disputed) + " of " + fmt(s.screened) + "</small></li>";
@@ -58,22 +61,11 @@
       "<div><dt>Hidden after " + esc(String((j.reports && j.reports.hideAfter) || 3)) + " separate reports</dt><dd>" + (j.reports && j.reports.autoHidden != null ? fmt(j.reports.autoHidden) : NA) + "</dd></div>" +
       "<div><dt>Median time from a report to its fix</dt><dd>" + (j.fixTime && j.fixTime.medianHours != null ? esc(String(j.fixTime.medianHours)) + " hours" : NA) + "</dd></div></dl>" +
       '<p class="pn-mut pn-small">Reports are stored on our server. These counts appear here once we export them.</p>';
-    h += '<h2 class="pn-h">AI-written questions</h2>';
-    if (q) {
-      h += '<p class="ps-say"><b>' + fmt(q.accepted) + "</b> of <b>" + fmt(q.generated) + "</b> drafted questions (" + pct(q.passRate, 1) + ") passed every check, across " + fmt(q.modules) + " modules. The rest were thrown away.</p>" +
-        '<p class="pn-mut pn-small">Each draft must pass all of these checks. Drafts rejected by each:</p><table class="ps-gates"><thead><tr><th scope="col">Check</th><th scope="col">Rejected</th></tr></thead><tbody>' +
-        q.gates.map(function (g) { return "<tr" + (g.rejected ? "" : ' class="z"') + "><td>" + esc(g.label) + "</td><td>" + fmt(g.rejected) + "</td></tr>"; }).join("") + "</tbody></table>";
-    } else h += "<p>" + NA + "</p>";
-    h += '<h2 class="pn-h">AI-written lessons and cards</h2>';
-    h += l ? '<p class="ps-say"><b>' + fmt(l.lessons) + "</b> AI lessons are published with <b>" + fmt(l.steps) + "</b> steps. Every step is checked for its numbers, drug doses, copied wording and support in the source; " +
-      fmt(l.redone) + " steps were rewritten after failing a check and " + fmt(l.dropped) + " were dropped (" + pct(l.passRate, 1) + " kept). " + (l.hand ? fmt(l.hand) + " more " + (l.hand === 1 ? "lesson is" : "lessons are") + " written by hand." : "") + "</p>" : "<p>" + NA + "</p>";
-    if (c) h += '<p class="ps-say">' + (c.ai ? fmt(c.ai) + " of " + fmt(c.cards) + " published flashcards are AI-written." : "All " + fmt(c.cards) + " published flashcards are written by hand. No AI cards are published yet.") + "</p>";
     h += '<h2 class="pn-h">How these numbers are made</h2><ul class="ps-how">' +
-      "<li>A script (tools/prep-accuracy.mjs) reads the records our build tools write and makes accuracy.json. This page shows that file and nothing else.</li>" +
-      "<li>Answer keys: the newest key screen" + (k && k.date ? " (" + esc(k.date) + (k.model ? ", model " + esc(k.model) : "") + ")" : "") + ". A different answer is a dispute, not proof the key is wrong; a person checks it before it returns.</li>" +
-      "<li>AI questions and lessons: the reports written when each module was made. Drafts that fail are never shown to students.</li>" +
+      "<li>A script reads the records our build tools write. This page shows those numbers and nothing else.</li>" +
+      "<li>Answer keys: the newest key screen" + (k && k.date ? " (" + esc(k.date) + ")" : "") + ". A different answer is a dispute, not proof the key is wrong; a person checks it before it returns.</li>" +
       "<li>Reports and fix times come from the report button on every question. Until we export them, they read “Not yet published”.</li></ul>" +
-      '<p class="pn-note">Generated ' + esc(j.generated || "") + "</p>";
+      '<p class="pn-note">Updated ' + esc(j.generated || "") + "</p>";
     return h;
   }
   var PURE = { esc: esc, initials: initials, left: left, cleanId: cleanId, errWord: errWord, accuracyHtml: accuracyHtml };
@@ -136,7 +128,7 @@
   }
   function renderAccuracy() {
     H.paint(H.bar("Accuracy", "How often our questions are wrong", "back") + '<div class="pn-body ps-acc">' +
-      (S.acc == null ? '<p class="pn-load" role="status">Loading the numbers</p>' : accuracyHtml(S.acc || null)) + "</div>");
+      (S.acc == null ? '<p class="pn-load" role="status">Loading the numbers…</p>' : accuracyHtml(S.acc || null)) + "</div>");
   }
 
   /* ---------- data ---------- */
@@ -205,7 +197,9 @@
       var n = (x.to && x.to.name) || "your friend";
       return person(n, esc(BATTLE_EXAMS[x.exam] || "NEET-PG") + " · waiting for them · " + left(x.expiresAt, now), btn("s-chjoin", "Join", x.room, "", "Join the battle room for " + n, x.exam));
     }).join("") + "</ul>";
-    if (!f) return h + '<p class="pn-load" role="status">Loading your friends</p>';
+    if (!f) return h + '<p class="pn-load" role="status">Loading your friends…</p>';
+    var nf = (f.friends || []).length, nreq = (f.incoming || []).length;
+    if (H.hband) h = H.hband("friends", String(nf), nf === 1 ? "friend" : "friends", inc.length ? inc.length + (inc.length === 1 ? " challenge is" : " challenges are") + " waiting for you." : nreq ? nreq + (nreq === 1 ? " friend request" : " friend requests") + " to answer." : nf ? "Challenge one to a 1v1 battle." : "Add a friend by their StewardMD ID, then challenge them.") + h;
     if ((f.incoming || []).length) h += '<h2 class="pn-sec">Friend requests</h2><ul class="ps-list">' + f.incoming.map(function (x) {
       return person(x.name, "Asked " + esc(day(x.at)), btn("s-frno", "Decline", x.smdId, "", "Decline " + x.name) + btn("s-fryes", "Accept", x.smdId, "pri", "Accept " + x.name));
     }).join("") + "</ul>";
@@ -225,7 +219,7 @@
   /* ---------- college boards ---------- */
   function boardsHtml() {
     var c = S.college;
-    if (c == null) return '<p class="pn-load" role="status">Loading</p>';
+    if (c == null) return '<p class="pn-load" role="status">Loading…</p>';
     if (!c) {
       var list = S.colleges || [], states = {};
       list.forEach(function (x) { if (x.state) states[x.state] = 1; });
@@ -237,7 +231,7 @@
         '<button type="submit" class="pn-btn pri">Show my college boards</button>' + msg("psColMsg") + "</form>";
     }
     var b = S.board, rows = "";
-    if (!b) rows = '<p class="pn-load" role="status">Loading the board</p>';
+    if (!b) rows = '<p class="pn-load" role="status">Loading the board…</p>';
     else if (b.error) rows = '<p class="pn-err" role="alert">' + esc(b.error) + "</p>";
     else if (!(b.rows || []).length) rows = '<p class="ps-empty">No one else from your ' + (S.scope === "state" ? "state" : "college") + " is on this board yet.</p>";
     else {
@@ -256,7 +250,7 @@
   /* ---------- study groups ---------- */
   function groupsHtml() {
     var g = S.groups;
-    if (!g) return '<p class="pn-load" role="status">Loading your groups</p>';
+    if (!g) return '<p class="pn-load" role="status">Loading your groups…</p>';
     var h = '<h2 class="pn-sec">Your groups</h2>' + (g.length ? '<div class="pn-group">' + g.map(function (x) {
       var m = x.members || [], done = m.filter(function (y) { return (y.todayDone || 0) >= (x.dailyTarget || 1); }).length;
       return H.row("s-group", '<span class="ps-gi">' + esc(initials(x.name)) + "</span>", esc(x.name), (x.mine ? "Yours · " : "") + m.length + (m.length === 1 ? " member" : " members") + " · " + done + " hit " + fmt(x.dailyTarget) + " today", ' data-v="' + esc(x.code) + '"');
@@ -280,7 +274,7 @@
         var d = x.todayDone || 0, ok = d >= t;
         return '<li class="' + (ok ? "ok" : "") + '"><span class="ps-mn">' + esc(String(x.name || "Doctor").slice(0, 40)) + '</span><span class="ps-mv">' + (ok ? ico("check") : "") + fmt(d) + '<small> / ' + fmt(t) + '</small></span><span class="pn-meter" aria-hidden="true"><i style="width:' + Math.min(100, Math.round(d * 100 / t)) + '%"></i></span></li>';
       }).join("") + "</ul>" +
-      '<h2 class="pn-sec">This week\'s sprint</h2>' + (!b ? '<p class="pn-load" role="status">Loading the week</p>' : b.error ? '<p class="pn-err" role="alert">' + esc(b.error) + "</p>" : !(b.rows || []).length ? '<p class="ps-empty">No sprint scores this week yet.</p>' :
+      '<h2 class="pn-sec">This week\'s sprint</h2>' + (!b ? '<p class="pn-load" role="status">Loading the week…</p>' : b.error ? '<p class="pn-err" role="alert">' + esc(b.error) + "</p>" : !(b.rows || []).length ? '<p class="ps-empty">No sprint scores this week yet.</p>' :
         '<ol class="pn-board" aria-label="This week">' + b.rows.map(function (x, i) { return '<li class="pn-lb"><span class="pn-lb-r">' + (i + 1) + '</span><span class="pn-lb-n">' + esc(String(x.name || "Doctor").slice(0, 40)) + '</span><span class="pn-lb-v">' + fmt(x.score) + "</span></li>"; }).join("") + "</ol>" +
         (b.week ? '<p class="pn-mut pn-small">Daily sprint scores added up, ' + esc(String(b.week)) + "</p>" : "")) +
       '<button type="button" class="pn-link pn-danger" data-act="s-gleave" data-v="' + esc(g.code) + '">' + ico("leave") + " Leave this group</button></div>");
@@ -303,7 +297,7 @@
   function battle(room, exam) { G.PREP_ARENA.startBattle({ room: room, exam: exam || "neet-pg" }, H); }
   function act(a, b) {
     var v = b.getAttribute("data-v");
-    if (a === "s-tab") { S.tab = v; renderMain(); return load(); }
+    if (a === "s-tab") { S.tab = v; if (H && H.nav) H.nav(0); renderMain(); return load(); }
     if (a === "s-reload") { S.err[S.tab] = null; renderMain(); return load(); }
     if (a === "s-leave") return G.PREP_ARENA.leaveArena(H);
     if (a === "s-fryes") return post("friends/accept", { smdId: v }, b, null, function () { H.toast("Friend added."); load(); });

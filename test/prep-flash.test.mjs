@@ -151,6 +151,8 @@ test("interval preview equals what the grade writes; swipe, due counts, next due
   assert.equal(F.swipeGrade(-120, 10, 400), 1); assert.equal(F.swipeGrade(120, 0, 400), 3);
   assert.equal(F.swipeGrade(60, 0, 800), 0, "short and slow"); assert.equal(F.swipeGrade(60, 0, 200), 3, "a flick");
   assert.equal(F.swipeGrade(40, 120, 100), 0, "vertical"); assert.equal(F.swipeGrade(10, 0, 5), 0, "a tap");
+  assert.equal(F.swipeGrade(10, -120, 400), 4, "up is Easy"); assert.equal(F.swipeGrade(20, -60, 200), 4, "an upward flick");
+  assert.equal(F.swipeGrade(0, -40, 900), 0, "short and slow up"); assert.equal(F.swipeGrade(80, -80, 100), 0, "diagonal");
   F.grade(s, "m2", "a", 1, today - 1, C);
   assert.equal(F.dueByModule(s, today).m2, 1); assert.equal(F.dueByModule(s, today - 4).m2, undefined);
   assert.ok(F.hasCards(s)); assert.equal(F.hasCards(P.emptyStore()), false);

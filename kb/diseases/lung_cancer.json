@@ -160,5 +160,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "hc27d98c6"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "lung_cancer-dx-algo",
+      "title": "Lung cancer: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Histology splits into small-cell lung cancer (SCLC) and three non-small-cell types (adenocarcinoma, squamous cell, large-cell) grouped as NSCLC; these four account for about 90% of epithelial lung cancers and the SCLC/NSCLC distinction",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Chronic cough with or without haemoptysis in a smoker/former smoker with COPD aged 40+, even with a normal chest x-ray (p.618)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Core biopsy (preferred over FNA) for adequate tissue, obtained by bronchoscopic/transbronchial biopsy, image-guided percutaneous biopsy, or EBUS/EUS-guided sampling depending on location (p.620), Next-generation sequencing"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: NSCLC: TNM (8th edition, effective 2018; 9th edition expected 2024). T by size/invasion - T1 1-2, T1c >2-3), T2 >3-5cm or visceral pleura/main bronchus/atelectasis (T2a >3-4, T2b >4-5), T3 >5-7cm or chest"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Treating a non-resolving pneumonia with further antibiotics rather than investigating risks losing the chance at early cancer diagnosis (analogous principle stated for head/neck cancer p.611; applied to lung p.618)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for lung cancer."
+    }
+  ],
+  "tables": [
+    {
+      "id": "lung_cancer-matrix",
+      "title": "Lung cancer: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Histology splits into small-cell lung cancer (SCLC) and three non-small-cell types (adenocarcinoma, squamous cell, large-cell)",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Core biopsy (preferred over FNA) for adequate tissue, obtained by bronchoscopic/transbronchial biopsy, image-guided percutaneous",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Pulmonary metastases from non-lung primaries and other neoplasms metastatic to the lung, which constitutional symptoms cannot",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Chronic cough with or without haemoptysis in a smoker/former smoker with COPD aged 40+, even with a normal chest x-ray (p.618)",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating a non-resolving pneumonia with further antibiotics rather than investigating risks losing the chance at early cancer",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for lung cancer."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "lung-cancer-real-image",
+      "title": "Lung cancer: Diagnostic Chest Radiograph",
+      "type": "xray",
+      "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
+      "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
+      "annotations": [
+        {
+          "label": "Parenchyma & Airspaces",
+          "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
+        },
+        {
+          "label": "Bronchovascular Tree",
+          "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
+        },
+        {
+          "label": "Pleural Margins",
+          "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+        }
+      ]
+    }
+  ]
 }

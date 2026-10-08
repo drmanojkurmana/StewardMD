@@ -1,72 +1,167 @@
 {
-  "id": "narcotic_bowel_syndrome",
-  "name": "Narcotic bowel syndrome",
-  "aliases": [
-    "opioid-induced gastrointestinal hyperalgesia"
+ "id": "narcotic_bowel_syndrome",
+ "name": "Narcotic bowel syndrome",
+ "aliases": [
+  "opioid-induced gastrointestinal hyperalgesia"
+ ],
+ "class": "non_infective",
+ "system": "Gastrointestinal / Nervous system",
+ "specialty": "Gastroenterology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Rome IV criteria / gastroenterology references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A paradoxical worsening of chronic abdominal pain with continued or escalating opioid use",
+   "The pain increases as opioid doses rise, in contrast to the expected analgesic effect",
+   "It is a form of opioid-induced hyperalgesia affecting the gut and is distinct from simple opioid-induced constipation",
+   "It should be suspected when abdominal pain persists or worsens despite high or increasing opioid doses without another explanation",
+   "The key intervention is a planned, supported withdrawal of opioids, often with adjunctive medication and psychological support",
+   "Pain typically flares transiently during withdrawal before improving, which must be anticipated and explained"
   ],
-  "class": "non_infective",
-  "system": "Gastrointestinal / Nervous system",
-  "specialty": "Gastroenterology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Rome IV criteria / gastroenterology references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A paradoxical worsening of chronic abdominal pain with continued or escalating opioid use",
-      "The pain increases as opioid doses rise, in contrast to the expected analgesic effect",
-      "It is a form of opioid-induced hyperalgesia affecting the gut and is distinct from simple opioid-induced constipation",
-      "It should be suspected when abdominal pain persists or worsens despite high or increasing opioid doses without another explanation",
-      "The key intervention is a planned, supported withdrawal of opioids, often with adjunctive medication and psychological support",
-      "Pain typically flares transiently during withdrawal before improving, which must be anticipated and explained"
+  "pathophysiology": "Narcotic bowel syndrome is a manifestation of opioid-induced hyperalgesia, in which chronic opioid exposure produces neuroplastic changes that paradoxically enhance pain sensitivity. Mechanisms include activation of pronociceptive pathways, central sensitisation and glial activation, so that escalating opioids further amplify rather than relieve visceral pain. Opioid effects on gut motility may compound symptoms, but the defining feature is the worsening pain with increasing opioid dose, which resolves only when opioids are withdrawn.",
+  "additionalDifferentials": [
+   "Centrally mediated abdominal pain syndrome",
+   "Opioid-induced constipation with pain",
+   "Structural intra-abdominal disease",
+   "Chronic pancreatitis",
+   "Opioid withdrawal (during treatment)"
+  ],
+  "additionalInvestigations": [
+   "Careful opioid and pain history documenting the dose-pain relationship",
+   "Targeted investigation to exclude structural disease rather than repeated testing",
+   "Assessment of psychological comorbidity and functional impact",
+   "Planning of a structured opioid withdrawal programme",
+   "Review of previous investigations to avoid duplication"
+  ],
+  "redFlags": [
+   "New alarm features suggesting organic disease",
+   "Signs of a surgical abdomen",
+   "Severe psychological distress complicating withdrawal",
+   "Escalating opioid requirements without benefit"
+  ],
+  "prognosis": "Pain usually improves substantially after supported opioid withdrawal, though relapse is common if opioids are resumed; long-term success depends on a multidisciplinary approach.",
+  "pitfalls": [
+   "Escalating opioids in response to worsening pain",
+   "Attributing the pain to undiagnosed structural disease and operating",
+   "Not preparing the patient for the transient flare during withdrawal",
+   "Failing to provide psychological and multidisciplinary support"
+  ],
+  "references": [
+   "Rome IV diagnostic criteria",
+   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Undertake a planned, supported opioid withdrawal (structured taper or detoxification) as the definitive treatment, explaining the expected transient pain flare",
+   "Bridge withdrawal with adjunctive non-opioid analgesia and neuromodulators such as tricyclic antidepressants, SNRIs or gabapentinoids for visceral pain",
+   "Manage withdrawal symptoms with supportive agents such as clonidine and antiemetics, and treat associated constipation",
+   "Provide psychological support, including cognitive behavioural therapy and treatment of anxiety and depression, as an integral part of the programme",
+   "Build a firm therapeutic alliance with clear explanation and avoid repeated invasive investigations once structural disease is excluded",
+   "Coordinate multidisciplinary care across gastroenterology, pain medicine and psychology, with relapse-prevention planning since resuming opioids reproduces the syndrome"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "narcotic_bowel_syndrome-pathway",
+   "title": "Narcotic bowel syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A paradoxical worsening of chronic abdominal pain with continued or escalating opioid use",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: New alarm features suggesting organic disease",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Careful opioid and pain history documenting the dose-pain relationship, Targeted investigation to exclude structural disease rather than repeated testing, Assessment of psychological comorbidity and functional impact"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Undertake a planned, supported opioid withdrawal (structured taper or detoxification) as the definitive treatment, explaining the expected transient pain flare"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Escalating opioids in response to worsening pain"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of narcotic bowel syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "narcotic_bowel_syndrome-matrix",
+   "title": "Narcotic bowel syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A paradoxical worsening of chronic abdominal pain with continued or escalating opioid use",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Narcotic bowel syndrome is a manifestation of opioid-induced hyperalgesia, in which chronic opioid exposure produces neuroplastic changes that paradoxically enhance pain sensitivity. Mechanisms include activation of pronociceptive pathways, central sensitisation and glial activation, so that escalating opioids further amplify rather than relieve visceral pain. Opioid effects on gut motility may compound symptoms, but the defining feature is the worsening pain with increasing opioid dose, which resolves only when opioids are withdrawn.",
-    "additionalDifferentials": [
-      "Centrally mediated abdominal pain syndrome",
-      "Opioid-induced constipation with pain",
-      "Structural intra-abdominal disease",
-      "Chronic pancreatitis",
-      "Opioid withdrawal (during treatment)"
+    [
+     "Key Investigations",
+     "Careful opioid and pain history documenting the dose-pain relationship, Targeted investigation to exclude structural disease",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Careful opioid and pain history documenting the dose-pain relationship",
-      "Targeted investigation to exclude structural disease rather than repeated testing",
-      "Assessment of psychological comorbidity and functional impact",
-      "Planning of a structured opioid withdrawal programme",
-      "Review of previous investigations to avoid duplication"
+    [
+     "Primary Differentials",
+     "Centrally mediated abdominal pain syndrome, Opioid-induced constipation with pain, Structural intra-abdominal disease",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "New alarm features suggesting organic disease",
-      "Signs of a surgical abdomen",
-      "Severe psychological distress complicating withdrawal",
-      "Escalating opioid requirements without benefit"
+    [
+     "Management Strategy",
+     "Undertake a planned, supported opioid withdrawal (structured taper or detoxification) as the definitive treatment, explaining the",
+     "Core treatment modality"
     ],
-    "prognosis": "Pain usually improves substantially after supported opioid withdrawal, though relapse is common if opioids are resumed; long-term success depends on a multidisciplinary approach.",
-    "pitfalls": [
-      "Escalating opioids in response to worsening pain",
-      "Attributing the pain to undiagnosed structural disease and operating",
-      "Not preparing the patient for the transient flare during withdrawal",
-      "Failing to provide psychological and multidisciplinary support"
-    ],
-    "references": [
-      "Rome IV diagnostic criteria",
-      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Undertake a planned, supported opioid withdrawal (structured taper or detoxification) as the definitive treatment, explaining the expected transient pain flare",
-      "Bridge withdrawal with adjunctive non-opioid analgesia and neuromodulators such as tricyclic antidepressants, SNRIs or gabapentinoids for visceral pain",
-      "Manage withdrawal symptoms with supportive agents such as clonidine and antiemetics, and treat associated constipation",
-      "Provide psychological support, including cognitive behavioural therapy and treatment of anxiety and depression, as an integral part of the programme",
-      "Build a firm therapeutic alliance with clear explanation and avoid repeated invasive investigations once structural disease is excluded",
-      "Coordinate multidisciplinary care across gastroenterology, pain medicine and psychology, with relapse-prevention planning since resuming opioids reproduces the syndrome"
+    [
+     "Clinical Pitfall",
+     "Escalating opioids in response to worsening pain",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for narcotic bowel syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "narcotic-bowel-syndrome-real-image",
+   "title": "Narcotic bowel syndrome: Diagnostic Abdominal Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
+   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
+   "annotations": [
+    {
+     "label": "Solid Viscera",
+     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
+    },
+    {
+     "label": "Gastrointestinal Tract",
+     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
+    },
+    {
+     "label": "Mesentery & Peritoneum",
+     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+    }
+   ]
+  }
+ ]
 }

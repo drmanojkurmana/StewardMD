@@ -1,73 +1,168 @@
 {
-  "id": "rhabdomyolysis",
-  "name": "Rhabdomyolysis",
-  "aliases": [
-    "muscle breakdown syndrome"
+ "id": "rhabdomyolysis",
+ "name": "Rhabdomyolysis",
+ "aliases": [
+  "muscle breakdown syndrome"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal / Renal",
+ "specialty": "Emergency medicine / Nephrology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Emergency medicine and nephrology references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Breakdown of skeletal muscle releases intracellular contents, notably myoglobin, potassium, phosphate and creatine kinase, into the circulation",
+   "The classic triad is muscle pain, weakness and dark (tea-coloured) urine, though many patients lack all three",
+   "A markedly raised creatine kinase is the key laboratory finding",
+   "Acute kidney injury from myoglobin, and life-threatening hyperkalaemia, are the main dangers",
+   "Causes are diverse, including crush and trauma, prolonged immobility, extreme exertion, seizures, drugs, toxins, ischaemia and metabolic myopathies",
+   "Early and generous intravenous fluid resuscitation to maintain urine output is the cornerstone of treatment"
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal / Renal",
-  "specialty": "Emergency medicine / Nephrology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Emergency medicine and nephrology references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Breakdown of skeletal muscle releases intracellular contents, notably myoglobin, potassium, phosphate and creatine kinase, into the circulation",
-      "The classic triad is muscle pain, weakness and dark (tea-coloured) urine, though many patients lack all three",
-      "A markedly raised creatine kinase is the key laboratory finding",
-      "Acute kidney injury from myoglobin, and life-threatening hyperkalaemia, are the main dangers",
-      "Causes are diverse, including crush and trauma, prolonged immobility, extreme exertion, seizures, drugs, toxins, ischaemia and metabolic myopathies",
-      "Early and generous intravenous fluid resuscitation to maintain urine output is the cornerstone of treatment"
+  "pathophysiology": "Rhabdomyolysis occurs when injury to skeletal muscle disrupts the sarcolemma and releases myoglobin and other intracellular constituents. Myoglobin is filtered by the kidney where it causes tubular obstruction, direct tubular toxicity and renal vasoconstriction, producing acute kidney injury, particularly when the patient is volume-depleted and the urine is acidic. Release of potassium and phosphate and sequestration of calcium in damaged muscle cause dangerous electrolyte disturbances, while a compartment syndrome can both cause and result from the muscle injury.",
+  "additionalDifferentials": [
+   "Acute kidney injury of another cause",
+   "Myocardial infarction (for raised enzymes)",
+   "Inflammatory myopathy",
+   "Haemolysis causing pigmenturia",
+   "Compartment syndrome",
+   "Primary hyperkalaemia"
+  ],
+  "additionalInvestigations": [
+   "Serum creatine kinase and serial trends",
+   "Renal function, potassium, phosphate and calcium",
+   "Urinalysis showing blood on dipstick without red cells (myoglobinuria)",
+   "Electrocardiogram for hyperkalaemic changes",
+   "Investigation of the underlying cause, including compartment pressures if indicated"
+  ],
+  "redFlags": [
+   "Hyperkalaemia with electrocardiographic changes",
+   "Oliguria or established acute kidney injury",
+   "Signs of compartment syndrome",
+   "Very high or rising creatine kinase with volume depletion"
+  ],
+  "prognosis": "With prompt fluid resuscitation many patients avoid or recover from kidney injury; prognosis worsens with severe hyperkalaemia, established renal failure or the underlying precipitating condition.",
+  "pitfalls": [
+   "Delaying fluid resuscitation",
+   "Missing hyperkalaemia as an immediate threat",
+   "Overlooking compartment syndrome",
+   "Attributing dark urine to haematuria without checking for myoglobinuria"
+  ],
+  "references": [
+   "Nephrology reference texts (standard reference)",
+   "Tintinalli's Emergency Medicine"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Give early, generous intravenous fluid resuscitation to maintain a high urine output and prevent myoglobin-induced acute kidney injury",
+   "Identify, remove and treat the precipitating cause such as crush injury, drugs, toxins, prolonged immobility or seizures",
+   "Detect and treat life-threatening hyperkalaemia urgently, with continuous ECG monitoring for hyperkalaemic changes",
+   "Correct associated electrolyte disturbances, treating symptomatic hypocalcaemia but otherwise avoiding calcium",
+   "Monitor serial creatine kinase, renal function and urine output, and institute renal replacement therapy for refractory hyperkalaemia, acidosis or fluid overload",
+   "Assess for and decompress compartment syndrome with fasciotomy where present"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "rhabdomyolysis-pathway",
+   "title": "Rhabdomyolysis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Breakdown of skeletal muscle releases intracellular contents, notably myoglobin, potassium, phosphate and creatine kinase, into the circulation",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Hyperkalaemia with electrocardiographic changes",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Serum creatine kinase and serial trends, Renal function, potassium, phosphate and calcium, Urinalysis showing blood on dipstick without red cells (myoglobinuria)"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Give early, generous intravenous fluid resuscitation to maintain a high urine output and prevent myoglobin-induced acute kidney injury"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Delaying fluid resuscitation"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of rhabdomyolysis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "rhabdomyolysis-matrix",
+   "title": "Rhabdomyolysis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Breakdown of skeletal muscle releases intracellular contents, notably myoglobin, potassium, phosphate and creatine kinase, into",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Rhabdomyolysis occurs when injury to skeletal muscle disrupts the sarcolemma and releases myoglobin and other intracellular constituents. Myoglobin is filtered by the kidney where it causes tubular obstruction, direct tubular toxicity and renal vasoconstriction, producing acute kidney injury, particularly when the patient is volume-depleted and the urine is acidic. Release of potassium and phosphate and sequestration of calcium in damaged muscle cause dangerous electrolyte disturbances, while a compartment syndrome can both cause and result from the muscle injury.",
-    "additionalDifferentials": [
-      "Acute kidney injury of another cause",
-      "Myocardial infarction (for raised enzymes)",
-      "Inflammatory myopathy",
-      "Haemolysis causing pigmenturia",
-      "Compartment syndrome",
-      "Primary hyperkalaemia"
+    [
+     "Key Investigations",
+     "Serum creatine kinase and serial trends, Renal function, potassium, phosphate and calcium, Urinalysis showing blood on dipstick",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Serum creatine kinase and serial trends",
-      "Renal function, potassium, phosphate and calcium",
-      "Urinalysis showing blood on dipstick without red cells (myoglobinuria)",
-      "Electrocardiogram for hyperkalaemic changes",
-      "Investigation of the underlying cause, including compartment pressures if indicated"
+    [
+     "Primary Differentials",
+     "Acute kidney injury of another cause, Myocardial infarction (for raised enzymes), Inflammatory myopathy",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Hyperkalaemia with electrocardiographic changes",
-      "Oliguria or established acute kidney injury",
-      "Signs of compartment syndrome",
-      "Very high or rising creatine kinase with volume depletion"
+    [
+     "Management Strategy",
+     "Give early, generous intravenous fluid resuscitation to maintain a high urine output and prevent myoglobin-induced acute kidney",
+     "Core treatment modality"
     ],
-    "prognosis": "With prompt fluid resuscitation many patients avoid or recover from kidney injury; prognosis worsens with severe hyperkalaemia, established renal failure or the underlying precipitating condition.",
-    "pitfalls": [
-      "Delaying fluid resuscitation",
-      "Missing hyperkalaemia as an immediate threat",
-      "Overlooking compartment syndrome",
-      "Attributing dark urine to haematuria without checking for myoglobinuria"
-    ],
-    "references": [
-      "Nephrology reference texts (standard reference)",
-      "Tintinalli's Emergency Medicine"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Give early, generous intravenous fluid resuscitation to maintain a high urine output and prevent myoglobin-induced acute kidney injury",
-      "Identify, remove and treat the precipitating cause such as crush injury, drugs, toxins, prolonged immobility or seizures",
-      "Detect and treat life-threatening hyperkalaemia urgently, with continuous ECG monitoring for hyperkalaemic changes",
-      "Correct associated electrolyte disturbances, treating symptomatic hypocalcaemia but otherwise avoiding calcium",
-      "Monitor serial creatine kinase, renal function and urine output, and institute renal replacement therapy for refractory hyperkalaemia, acidosis or fluid overload",
-      "Assess for and decompress compartment syndrome with fasciotomy where present"
+    [
+     "Clinical Pitfall",
+     "Delaying fluid resuscitation",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for rhabdomyolysis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "rhabdomyolysis-real-image",
+   "title": "Rhabdomyolysis: Diagnostic Abdominal Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
+   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
+   "annotations": [
+    {
+     "label": "Solid Viscera",
+     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
+    },
+    {
+     "label": "Gastrointestinal Tract",
+     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
+    },
+    {
+     "label": "Mesentery & Peritoneum",
+     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+    }
+   ]
+  }
+ ]
 }

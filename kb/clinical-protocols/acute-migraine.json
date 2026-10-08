@@ -145,5 +145,100 @@
  "review": {
   "status": "ai_drafted",
   "compiled": "2026-09-25"
- }
+ },
+ "algorithms": [
+  {
+   "id": "acute-migraine-pathway",
+   "title": "Acute migraine attack (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Migraine: recurrent attacks lasting 4 to 72 hours, often unilateral and pulsating, moderate to severe, worse with activity, with nausea or light and sound sensitivity; some patients have aura.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Red flags needing imaging or LP: thunderclap onset, new headache after 50, fever or neck stiffness, focal deficit, papilloedema, altered consciousness, seizure, pregnancy or postpartum, cancer or immunosuppression, positional headache,",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Status migrainosus: a debilitating attack lasting more than 72 hours."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Treat early in the attack. Offer an oral triptan with an NSAID or paracetamol, and consider an antiemetic (metoclopramide 10 mg or domperidone 10 mg orally) even without nausea (NICE)."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Assuming migraine because pain improved with treatment: SAH, cerebral venous thrombosis, meningitis, carbon monoxide poisoning and hypertensive emergency can also improve."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for acute migraine attack (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "acute-migraine-summary-matrix",
+   "title": "Acute migraine attack (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Migraine: recurrent attacks lasting 4 to 72 hours, often unilateral and pulsating, moderate to severe, worse with activity, with nausea or",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Treat early in the attack. Offer an oral triptan with an NSAID or paracetamol, and consider an antiemetic (metoclopramide 10 mg or",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Prochlorperazine: 10 mg IV once",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Assuming migraine because pain improved with treatment: SAH, cerebral venous thrombosis, meningitis, carbon monoxide poisoning and",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for acute migraine attack (adult)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "acute-migraine-real-image",
+   "title": "Acute migraine attack (adult): Diagnostic Head Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
+   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
+   "annotations": [
+    {
+     "label": "Cerebral Parenchyma",
+     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+    },
+    {
+     "label": "Extra-Axial Spaces",
+     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+    }
+   ]
+  }
+ ]
 }

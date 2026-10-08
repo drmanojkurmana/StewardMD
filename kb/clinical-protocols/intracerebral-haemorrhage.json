@@ -176,5 +176,100 @@
  "review": {
   "status": "ai_drafted",
   "compiled": "2026-09-25"
- }
+ },
+ "algorithms": [
+  {
+   "id": "intracerebral-haemorrhage-pathway",
+   "title": "Spontaneous intracerebral haemorrhage (ICH) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Sudden focal deficit with headache, vomiting, very high BP or falling GCS suggests ICH, but clinical features cannot separate it from infarction: image immediately.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Airway: intubate if GCS 8 or less or airway at risk. Admit to a stroke unit or neuro ICU.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "CT or MR angiography to look for a structural cause (AVM, aneurysm, venous sinus thrombosis, tumour), especially in lobar ICH, younger patients, no hypertension history, or isolated IVH."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Refer immediately for evacuation (with or without EVD): cerebellar ICH of 15 mL or more, brainstem compression, hydrocephalus from ventricular obstruction, or neurological deterioration."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Hourly GCS and pupils for the first 24 hours; repeat CT within 24 hours and immediately with any deterioration (haematoma expansion is early)."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for spontaneous intracerebral haemorrhage (ich)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "intracerebral-haemorrhage-summary-matrix",
+   "title": "Spontaneous intracerebral haemorrhage (ICH) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Sudden focal deficit with headache, vomiting, very high BP or falling GCS suggests ICH, but clinical features cannot separate it from",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Airway: intubate if GCS 8 or less or airway at risk. Admit to a stroke unit or neuro ICU.",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Labetalol: 10 to 20 mg IV over 1 to 2 minutes, may repeat; then infusion 2 to 8 mg/min",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Overshooting BP: systolic below 130 mmHg, or a fall of more than 60 mmHg within 1 hour.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for spontaneous intracerebral haemorrhage (ich)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "intracerebral-haemorrhage-real-image",
+   "title": "Spontaneous intracerebral haemorrhage (ICH): Diagnostic Head Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
+   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
+   "annotations": [
+    {
+     "label": "Cerebral Parenchyma",
+     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+    },
+    {
+     "label": "Extra-Axial Spaces",
+     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+    }
+   ]
+  }
+ ]
 }

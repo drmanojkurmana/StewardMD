@@ -154,5 +154,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "hf5ba3290"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "cardiogenic_shock-dx-algo",
+      "title": "Cardiogenic shock: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Defined haemodynamically as a low cardiac-output state producing life-threatening end-organ hypoperfusion: persistent SBP 2 mmol/L (p.2324).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Lactate >8 mmol/L (places patient in SCAI stage E) (p.2326)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Arterial blood gas (typically hypoxaemia with anion-gap metabolic acidosis) and serial arterial lactate (p.2326), Chest radiograph (pulmonary vascular congestion/oedema; normal in up to a third; enlarged heart suggests"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: SCAI shock classification (2019, updated): Stage A 'at risk' - no current signs/symptoms; Stage B 'beginning'/preshock - relative hypotension or tachycardia without hypoperfusion; Stage C 'classic' - manifest"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Assuming normotension excludes shock - BP may be preserved by markedly elevated SVR (p.2326)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for cardiogenic shock."
+    }
+  ],
+  "tables": [
+    {
+      "id": "cardiogenic_shock-matrix",
+      "title": "Cardiogenic shock: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Defined haemodynamically as a low cardiac-output state producing life-threatening end-organ hypoperfusion: persistent SBP 2",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Arterial blood gas (typically hypoxaemia with anion-gap metabolic acidosis) and serial arterial lactate (p.2326), Chest",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Acute fulminant myocarditis, End-stage / decompensated cardiomyopathy, Takotsubo (apical ballooning) syndrome as a transient cause",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Lactate >8 mmol/L (places patient in SCAI stage E) (p.2326)",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming normotension excludes shock - BP may be preserved by markedly elevated SVR (p.2326).",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for cardiogenic shock."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "cardiogenic-shock-real-image",
+      "title": "Cardiogenic shock: 12-Lead Diagnostic Electrocardiogram",
+      "type": "ecg",
+      "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
+      "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
+      "annotations": [
+        {
+          "label": "Conduction & Axis",
+          "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
+        },
+        {
+          "label": "Repolarization",
+          "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
+        },
+        {
+          "label": "Rhythm & Intervals",
+          "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+        }
+      ]
+    }
+  ]
 }

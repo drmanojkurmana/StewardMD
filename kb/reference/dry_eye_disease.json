@@ -1,80 +1,175 @@
 {
-  "id": "dry_eye_disease",
-  "name": "Dry eye disease",
-  "aliases": [
-    "keratoconjunctivitis sicca",
-    "dry eye syndrome",
-    "ocular surface disease",
-    "DED"
+ "id": "dry_eye_disease",
+ "name": "Dry eye disease",
+ "aliases": [
+  "keratoconjunctivitis sicca",
+  "dry eye syndrome",
+  "ocular surface disease",
+  "DED"
+ ],
+ "class": "non_infective",
+ "system": "Eye / Ophthalmology",
+ "specialty": "Ophthalmology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Presents with grittiness, burning, foreign body sensation, fluctuating vision, and paradoxical reflex tearing",
+   "Broadly divided into aqueous-deficient (reduced tear production) and evaporative (mostly meibomian gland dysfunction) types, though many patients have mixed disease",
+   "Symptoms often exceed clinical signs, and vision that clears on blinking is characteristic",
+   "Useful clinical tests include tear film break-up time, ocular surface staining with fluorescein or lissamine green, and the Schirmer test",
+   "Aqueous-deficient dry eye may signal Sjogren syndrome, so ask about dry mouth and joint symptoms",
+   "A stepwise management approach begins with lubricants, lid hygiene, and environmental measures, escalating to anti-inflammatory therapy, punctal occlusion, and secretagogues",
+   "Meibomian gland dysfunction is managed with warm compresses, lid hygiene, and treatment of associated blepharitis and rosacea",
+   "Untreated severe disease can cause filamentary keratitis, persistent epithelial defects, and, rarely, corneal melting or perforation"
   ],
-  "class": "non_infective",
-  "system": "Eye / Ophthalmology",
-  "specialty": "Ophthalmology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Presents with grittiness, burning, foreign body sensation, fluctuating vision, and paradoxical reflex tearing",
-      "Broadly divided into aqueous-deficient (reduced tear production) and evaporative (mostly meibomian gland dysfunction) types, though many patients have mixed disease",
-      "Symptoms often exceed clinical signs, and vision that clears on blinking is characteristic",
-      "Useful clinical tests include tear film break-up time, ocular surface staining with fluorescein or lissamine green, and the Schirmer test",
-      "Aqueous-deficient dry eye may signal Sjogren syndrome, so ask about dry mouth and joint symptoms",
-      "A stepwise management approach begins with lubricants, lid hygiene, and environmental measures, escalating to anti-inflammatory therapy, punctal occlusion, and secretagogues",
-      "Meibomian gland dysfunction is managed with warm compresses, lid hygiene, and treatment of associated blepharitis and rosacea",
-      "Untreated severe disease can cause filamentary keratitis, persistent epithelial defects, and, rarely, corneal melting or perforation"
+  "pathophysiology": "Dry eye disease is a multifactorial disorder of the ocular surface characterised by loss of tear film homeostasis. Reduced aqueous production (as in Sjogren and non-Sjogren lacrimal dysfunction) or excessive evaporation (chiefly from meibomian gland dysfunction with an unstable lipid layer) leads to tear hyperosmolarity. Hyperosmolarity triggers a self-perpetuating cycle of ocular surface inflammation, epithelial damage, and neurosensory dysfunction, which further destabilises the tear film. Goblet cell loss and reduced mucin worsen wetting, sustaining the inflammatory cascade.",
+  "additionalDifferentials": [
+   "Allergic conjunctivitis",
+   "Blepharitis and meibomian gland dysfunction",
+   "Chronic conjunctivitis (infective or toxic)",
+   "Corneal epithelial disease or recurrent erosion",
+   "Neurotrophic keratopathy",
+   "Medication-induced ocular surface toxicity"
+  ],
+  "additionalInvestigations": [
+   "Tear film break-up time to assess tear stability",
+   "Ocular surface staining with fluorescein and lissamine green",
+   "Schirmer test to quantify aqueous production",
+   "Tear osmolarity measurement where available",
+   "Meibomian gland assessment and expression",
+   "Autoantibody and systemic testing when Sjogren syndrome is suspected"
+  ],
+  "redFlags": [
+   "Persistent epithelial defect, corneal thinning, or melt indicating severe surface breakdown",
+   "Features of Sjogren syndrome or other systemic autoimmune disease requiring investigation",
+   "Marked reduction in corneal sensation suggesting neurotrophic keratopathy",
+   "Rapidly worsening pain, photophobia, or infiltrate suggesting secondary infection"
+  ],
+  "prognosis": "Dry eye disease is usually chronic and requires ongoing management; most patients achieve good symptom control, but severe or autoimmune-associated disease can cause persistent surface damage and visual impairment.",
+  "pitfalls": [
+   "Focusing on aqueous supplementation while neglecting meibomian gland dysfunction and lid disease",
+   "Overlooking underlying Sjogren syndrome in aqueous-deficient patients",
+   "Attributing all irritation to dryness and missing allergy, infection, or medication toxicity",
+   "Long-term use of preserved drops aggravating ocular surface toxicity"
+  ],
+  "references": [
+   "Parsons' Diseases of the Eye",
+   "Kanski's Clinical Ophthalmology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Begin with ocular surface lubrication using preservative-free artificial tears and lubricating ointments, escalating viscosity with severity",
+   "Treat evaporative disease and meibomian gland dysfunction with warm compresses, lid hygiene and lid massage, adding oral tetracyclines for refractory posterior blepharitis",
+   "Advise environmental and behavioural measures such as humidification, deliberate blinking and screen breaks, and review any contributory systemic or topical drying medications",
+   "Add anti-inflammatory therapy for persistent disease with topical ciclosporin or lifitegrast, and short pulses of topical corticosteroid for inflammatory flares",
+   "Consider punctal occlusion in aqueous-deficient disease and autologous serum drops or scleral contact lenses for severe surface breakdown",
+   "Screen for and refer suspected Sjogren syndrome, asking about dry mouth and arthralgia and arranging autoantibody testing",
+   "Monitor the ocular surface with staining and tear film break-up time, watching for filamentary keratitis, persistent epithelial defects and secondary infection"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "dry_eye_disease-pathway",
+   "title": "Dry eye disease: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Presents with grittiness, burning, foreign body sensation, fluctuating vision, and paradoxical reflex tearing",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Persistent epithelial defect, corneal thinning, or melt indicating severe surface breakdown",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Tear film break-up time to assess tear stability, Ocular surface staining with fluorescein and lissamine green, Schirmer test to quantify aqueous production"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Begin with ocular surface lubrication using preservative-free artificial tears and lubricating ointments, escalating viscosity with severity"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Focusing on aqueous supplementation while neglecting meibomian gland dysfunction and lid disease"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of dry eye disease."
+  }
+ ],
+ "tables": [
+  {
+   "id": "dry_eye_disease-matrix",
+   "title": "Dry eye disease: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Presents with grittiness, burning, foreign body sensation, fluctuating vision, and paradoxical reflex tearing",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Dry eye disease is a multifactorial disorder of the ocular surface characterised by loss of tear film homeostasis. Reduced aqueous production (as in Sjogren and non-Sjogren lacrimal dysfunction) or excessive evaporation (chiefly from meibomian gland dysfunction with an unstable lipid layer) leads to tear hyperosmolarity. Hyperosmolarity triggers a self-perpetuating cycle of ocular surface inflammation, epithelial damage, and neurosensory dysfunction, which further destabilises the tear film. Goblet cell loss and reduced mucin worsen wetting, sustaining the inflammatory cascade.",
-    "additionalDifferentials": [
-      "Allergic conjunctivitis",
-      "Blepharitis and meibomian gland dysfunction",
-      "Chronic conjunctivitis (infective or toxic)",
-      "Corneal epithelial disease or recurrent erosion",
-      "Neurotrophic keratopathy",
-      "Medication-induced ocular surface toxicity"
+    [
+     "Key Investigations",
+     "Tear film break-up time to assess tear stability, Ocular surface staining with fluorescein and lissamine green, Schirmer test to",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Tear film break-up time to assess tear stability",
-      "Ocular surface staining with fluorescein and lissamine green",
-      "Schirmer test to quantify aqueous production",
-      "Tear osmolarity measurement where available",
-      "Meibomian gland assessment and expression",
-      "Autoantibody and systemic testing when Sjogren syndrome is suspected"
+    [
+     "Primary Differentials",
+     "Allergic conjunctivitis, Blepharitis and meibomian gland dysfunction, Chronic conjunctivitis (infective or toxic)",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Persistent epithelial defect, corneal thinning, or melt indicating severe surface breakdown",
-      "Features of Sjogren syndrome or other systemic autoimmune disease requiring investigation",
-      "Marked reduction in corneal sensation suggesting neurotrophic keratopathy",
-      "Rapidly worsening pain, photophobia, or infiltrate suggesting secondary infection"
+    [
+     "Management Strategy",
+     "Begin with ocular surface lubrication using preservative-free artificial tears and lubricating ointments, escalating viscosity",
+     "Core treatment modality"
     ],
-    "prognosis": "Dry eye disease is usually chronic and requires ongoing management; most patients achieve good symptom control, but severe or autoimmune-associated disease can cause persistent surface damage and visual impairment.",
-    "pitfalls": [
-      "Focusing on aqueous supplementation while neglecting meibomian gland dysfunction and lid disease",
-      "Overlooking underlying Sjogren syndrome in aqueous-deficient patients",
-      "Attributing all irritation to dryness and missing allergy, infection, or medication toxicity",
-      "Long-term use of preserved drops aggravating ocular surface toxicity"
-    ],
-    "references": [
-      "Parsons' Diseases of the Eye",
-      "Kanski's Clinical Ophthalmology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Begin with ocular surface lubrication using preservative-free artificial tears and lubricating ointments, escalating viscosity with severity",
-      "Treat evaporative disease and meibomian gland dysfunction with warm compresses, lid hygiene and lid massage, adding oral tetracyclines for refractory posterior blepharitis",
-      "Advise environmental and behavioural measures such as humidification, deliberate blinking and screen breaks, and review any contributory systemic or topical drying medications",
-      "Add anti-inflammatory therapy for persistent disease with topical ciclosporin or lifitegrast, and short pulses of topical corticosteroid for inflammatory flares",
-      "Consider punctal occlusion in aqueous-deficient disease and autologous serum drops or scleral contact lenses for severe surface breakdown",
-      "Screen for and refer suspected Sjogren syndrome, asking about dry mouth and arthralgia and arranging autoantibody testing",
-      "Monitor the ocular surface with staining and tear film break-up time, watching for filamentary keratitis, persistent epithelial defects and secondary infection"
+    [
+     "Clinical Pitfall",
+     "Focusing on aqueous supplementation while neglecting meibomian gland dysfunction and lid disease",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for dry eye disease."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "dry-eye-disease-real-image",
+   "title": "Dry eye disease: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

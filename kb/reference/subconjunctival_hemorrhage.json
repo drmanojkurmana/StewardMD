@@ -1,75 +1,170 @@
 {
-  "id": "subconjunctival_hemorrhage",
-  "name": "Subconjunctival haemorrhage",
-  "aliases": [
-    "subconjunctival hemorrhage",
-    "hyposphagma",
-    "SCH"
+ "id": "subconjunctival_hemorrhage",
+ "name": "Subconjunctival haemorrhage",
+ "aliases": [
+  "subconjunctival hemorrhage",
+  "hyposphagma",
+  "SCH"
+ ],
+ "class": "non_infective",
+ "system": "Eye / Ophthalmology",
+ "specialty": "Ophthalmology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Presents as a painless, flat, bright red patch of blood beneath the conjunctiva with a sharply defined border and normal vision",
+   "Usually benign and self-limiting, resolving over one to two weeks as the blood is reabsorbed and changes colour",
+   "Common precipitants include Valsalva-type events such as coughing, sneezing, straining, or vomiting, minor trauma, and rubbing",
+   "Recurrent or bilateral haemorrhages should prompt review of hypertension, anticoagulant or antiplatelet use, and bleeding disorders",
+   "The absence of pain, discharge, and visual disturbance distinguishes it from more serious causes of a red eye",
+   "A haemorrhage without a visible posterior margin after trauma may indicate a source from behind the orbit, raising concern for orbital fracture or ruptured globe",
+   "Reassurance is the mainstay; lubricants may ease mild irritation"
   ],
-  "class": "non_infective",
-  "system": "Eye / Ophthalmology",
-  "specialty": "Ophthalmology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Presents as a painless, flat, bright red patch of blood beneath the conjunctiva with a sharply defined border and normal vision",
-      "Usually benign and self-limiting, resolving over one to two weeks as the blood is reabsorbed and changes colour",
-      "Common precipitants include Valsalva-type events such as coughing, sneezing, straining, or vomiting, minor trauma, and rubbing",
-      "Recurrent or bilateral haemorrhages should prompt review of hypertension, anticoagulant or antiplatelet use, and bleeding disorders",
-      "The absence of pain, discharge, and visual disturbance distinguishes it from more serious causes of a red eye",
-      "A haemorrhage without a visible posterior margin after trauma may indicate a source from behind the orbit, raising concern for orbital fracture or ruptured globe",
-      "Reassurance is the mainstay; lubricants may ease mild irritation"
+  "pathophysiology": "A subconjunctival haemorrhage is bleeding from small conjunctival or episcleral vessels into the potential space between the conjunctiva and the underlying sclera. Because blood is confined to this superficial layer, it appears as a well-demarcated red sheet without affecting the cornea or intraocular structures. Rises in venous pressure (Valsalva), fragile vessels, trauma, or impaired haemostasis predispose to rupture. The blood is gradually cleared by resorption, passing through the usual colour changes of a resolving bruise.",
+  "additionalDifferentials": [
+   "Conjunctivitis (bacterial, viral, haemorrhagic)",
+   "Ruptured globe with subconjunctival bleeding after trauma",
+   "Conjunctival or Kaposi lesion mimicking haemorrhage",
+   "Anterior uveitis or scleritis (painful red eye)",
+   "Bleeding from orbital or retrobulbar haemorrhage"
+  ],
+  "additionalInvestigations": [
+   "Blood pressure measurement, especially in recurrent cases",
+   "Review of anticoagulant and antiplatelet medication",
+   "Coagulation studies and platelet count when bleeding is recurrent or spontaneous",
+   "Slit-lamp examination to exclude other causes of red eye",
+   "Assessment for globe rupture or orbital injury when trauma is involved"
+  ],
+  "redFlags": [
+   "History of significant trauma with a haemorrhage lacking a posterior border, suggesting globe rupture or orbital fracture",
+   "Associated pain, reduced vision, or a relative afferent pupillary defect",
+   "Recurrent or spontaneous bilateral haemorrhages indicating a systemic bleeding disorder or uncontrolled hypertension",
+   "Proptosis or restricted eye movements suggesting orbital pathology"
+  ],
+  "prognosis": "Isolated spontaneous subconjunctival haemorrhage resolves completely without treatment and carries no visual risk; prognosis depends on any underlying systemic or traumatic cause.",
+  "pitfalls": [
+   "Attributing a traumatic haemorrhage to a benign cause and missing an occult globe rupture",
+   "Failing to check blood pressure and clotting in recurrent cases",
+   "Overlooking anticoagulant overtreatment as a contributor",
+   "Providing unnecessary antibiotics for a non-infective condition"
+  ],
+  "references": [
+   "Parsons' Diseases of the Eye",
+   "Kanski's Clinical Ophthalmology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Reassurance that an isolated spontaneous haemorrhage is benign and self-limiting, resorbing without treatment",
+   "Ocular lubricants or artificial tears for any mild surface irritation",
+   "Identify and address precipitants, managing Valsalva triggers such as cough, straining, vomiting and constipation",
+   "Review blood pressure and anticoagulant or antiplatelet use in recurrent or bilateral cases",
+   "Coagulation studies and platelet count where haemorrhages are recurrent or spontaneous to exclude a bleeding disorder",
+   "Urgent ophthalmology referral where trauma raises concern for globe rupture or orbital fracture, particularly a haemorrhage without a visible posterior margin"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "subconjunctival_hemorrhage-pathway",
+   "title": "Subconjunctival haemorrhage: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Presents as a painless, flat, bright red patch of blood beneath the conjunctiva with a sharply defined border and normal vision",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: History of significant trauma with a haemorrhage lacking a posterior border, suggesting globe rupture or orbital fracture",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Blood pressure measurement, especially in recurrent cases, Review of anticoagulant and antiplatelet medication, Coagulation studies and platelet count when bleeding is recurrent or spontaneous"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Reassurance that an isolated spontaneous haemorrhage is benign and self-limiting, resorbing without treatment"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing a traumatic haemorrhage to a benign cause and missing an occult globe rupture"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of subconjunctival haemorrhage."
+  }
+ ],
+ "tables": [
+  {
+   "id": "subconjunctival_hemorrhage-matrix",
+   "title": "Subconjunctival haemorrhage: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Presents as a painless, flat, bright red patch of blood beneath the conjunctiva with a sharply defined border and normal vision",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "A subconjunctival haemorrhage is bleeding from small conjunctival or episcleral vessels into the potential space between the conjunctiva and the underlying sclera. Because blood is confined to this superficial layer, it appears as a well-demarcated red sheet without affecting the cornea or intraocular structures. Rises in venous pressure (Valsalva), fragile vessels, trauma, or impaired haemostasis predispose to rupture. The blood is gradually cleared by resorption, passing through the usual colour changes of a resolving bruise.",
-    "additionalDifferentials": [
-      "Conjunctivitis (bacterial, viral, haemorrhagic)",
-      "Ruptured globe with subconjunctival bleeding after trauma",
-      "Conjunctival or Kaposi lesion mimicking haemorrhage",
-      "Anterior uveitis or scleritis (painful red eye)",
-      "Bleeding from orbital or retrobulbar haemorrhage"
+    [
+     "Key Investigations",
+     "Blood pressure measurement, especially in recurrent cases, Review of anticoagulant and antiplatelet medication, Coagulation",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Blood pressure measurement, especially in recurrent cases",
-      "Review of anticoagulant and antiplatelet medication",
-      "Coagulation studies and platelet count when bleeding is recurrent or spontaneous",
-      "Slit-lamp examination to exclude other causes of red eye",
-      "Assessment for globe rupture or orbital injury when trauma is involved"
+    [
+     "Primary Differentials",
+     "Conjunctivitis (bacterial, viral, haemorrhagic), Ruptured globe with subconjunctival bleeding after trauma, Conjunctival or",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "History of significant trauma with a haemorrhage lacking a posterior border, suggesting globe rupture or orbital fracture",
-      "Associated pain, reduced vision, or a relative afferent pupillary defect",
-      "Recurrent or spontaneous bilateral haemorrhages indicating a systemic bleeding disorder or uncontrolled hypertension",
-      "Proptosis or restricted eye movements suggesting orbital pathology"
+    [
+     "Management Strategy",
+     "Reassurance that an isolated spontaneous haemorrhage is benign and self-limiting, resorbing without treatment",
+     "Core treatment modality"
     ],
-    "prognosis": "Isolated spontaneous subconjunctival haemorrhage resolves completely without treatment and carries no visual risk; prognosis depends on any underlying systemic or traumatic cause.",
-    "pitfalls": [
-      "Attributing a traumatic haemorrhage to a benign cause and missing an occult globe rupture",
-      "Failing to check blood pressure and clotting in recurrent cases",
-      "Overlooking anticoagulant overtreatment as a contributor",
-      "Providing unnecessary antibiotics for a non-infective condition"
-    ],
-    "references": [
-      "Parsons' Diseases of the Eye",
-      "Kanski's Clinical Ophthalmology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Reassurance that an isolated spontaneous haemorrhage is benign and self-limiting, resorbing without treatment",
-      "Ocular lubricants or artificial tears for any mild surface irritation",
-      "Identify and address precipitants, managing Valsalva triggers such as cough, straining, vomiting and constipation",
-      "Review blood pressure and anticoagulant or antiplatelet use in recurrent or bilateral cases",
-      "Coagulation studies and platelet count where haemorrhages are recurrent or spontaneous to exclude a bleeding disorder",
-      "Urgent ophthalmology referral where trauma raises concern for globe rupture or orbital fracture, particularly a haemorrhage without a visible posterior margin"
+    [
+     "Clinical Pitfall",
+     "Attributing a traumatic haemorrhage to a benign cause and missing an occult globe rupture",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for subconjunctival haemorrhage."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "subconjunctival-hemorrhage-real-image",
+   "title": "Subconjunctival haemorrhage: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

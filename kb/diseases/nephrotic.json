@@ -143,5 +143,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "h24266262"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "nephrotic-dx-algo",
+      "title": "Nephrotic syndrome: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Heavy proteinuria (>3.5 g/d) can occur WITHOUT the full nephrotic picture (no hypoalbuminaemia/oedema/hyperlipidaemia) in several renal diseases, notably diabetes; proteinuria is not synonymous with nephrotic syndrome (p.385, p.2357).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Heavy proteinuria with new haematuria suggesting renal vein thrombosis (p.384)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Spot morning urine albumin-to-creatinine or protein-to-creatinine ratio (normalised to creatinine to discount urine dilution) or 24-h urine protein/albumin - preferred over dipstick for quantification (p.385, p.2357),"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Albuminuria categories (Ch.55 Fig.55-3): moderately increased 30-300 mg/d or mg/g (formerly microalbuminuria); severely increased 300-3500 mg/d or mg/g (formerly macroalbuminuria); nephrotic range >3500 mg/d or mg/g."
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Assuming any nephrotic-range proteinuria equals classic nephrotic syndrome - heavy proteinuria can occur without hypoalbuminaemia/oedema (p.385)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for nephrotic syndrome."
+    }
+  ],
+  "tables": [
+    {
+      "id": "nephrotic-matrix",
+      "title": "Nephrotic syndrome: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Heavy proteinuria (>3.5 g/d) can occur WITHOUT the full nephrotic picture (no hypoalbuminaemia/oedema/hyperlipidaemia) in several",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Spot morning urine albumin-to-creatinine or protein-to-creatinine ratio (normalised to creatinine to discount urine dilution) or",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Minimal change disease (idiopathic; secondary to Hodgkin's lymphoma or other lymphoproliferative disorders) - predominant cause",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Heavy proteinuria with new haematuria suggesting renal vein thrombosis (p.384)",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming any nephrotic-range proteinuria equals classic nephrotic syndrome - heavy proteinuria can occur without",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for nephrotic syndrome."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "nephrotic-real-image",
+      "title": "Nephrotic syndrome: Diagnostic Renal Ultrasonography",
+      "type": "ultrasound",
+      "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
+      "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
+      "annotations": [
+        {
+          "label": "Renal Cortex",
+          "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
+        },
+        {
+          "label": "Corticomedullary Junction",
+          "description": "Medullary pyramid definition and structural architecture."
+        },
+        {
+          "label": "Collecting System",
+          "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+        }
+      ]
+    }
+  ]
 }

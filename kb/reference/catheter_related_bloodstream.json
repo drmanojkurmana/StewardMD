@@ -1,85 +1,180 @@
 {
-  "id": "catheter_related_bloodstream",
-  "name": "Catheter-related bloodstream infection",
-  "aliases": [
-    "CRBSI",
-    "CLABSI",
-    "central line-associated bloodstream infection",
-    "line infection"
+ "id": "catheter_related_bloodstream",
+ "name": "Catheter-related bloodstream infection",
+ "aliases": [
+  "CRBSI",
+  "CLABSI",
+  "central line-associated bloodstream infection",
+  "line infection"
+ ],
+ "class": "infective",
+ "system": "Infectious Diseases",
+ "specialty": "Infectious Diseases",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Harrison's Principles of Internal Medicine / IDSA",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A bloodstream infection attributable to an intravascular catheter, most often a central venous line, in a patient with no other apparent source",
+   "Coagulase-negative staphylococci, Staphylococcus aureus, enterococci, Gram-negative bacilli, and Candida species are the usual culprits",
+   "Diagnosis is supported by paired blood cultures drawn simultaneously from the catheter and a peripheral vein, with a shorter time to positivity from the catheter (differential time to positivity)",
+   "Purulence or erythema at the exit site, or clinical improvement after line removal, supports the diagnosis but is not always present",
+   "Management principles centre on removing or exchanging the catheter, particularly for S. aureus, Candida, Pseudomonas, or complicated infection, alongside targeted antibiotics",
+   "Antibiotic lock therapy may allow catheter salvage in selected long-term lines infected with less virulent organisms",
+   "S. aureus and candidal line infections mandate a search for metastatic complications such as endocarditis, and echocardiography should be considered",
+   "Prevention relies on strict insertion and maintenance bundles, hand hygiene, and prompt removal of unnecessary lines"
   ],
-  "class": "infective",
-  "system": "Infectious Diseases",
-  "specialty": "Infectious Diseases",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Harrison's Principles of Internal Medicine / IDSA",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A bloodstream infection attributable to an intravascular catheter, most often a central venous line, in a patient with no other apparent source",
-      "Coagulase-negative staphylococci, Staphylococcus aureus, enterococci, Gram-negative bacilli, and Candida species are the usual culprits",
-      "Diagnosis is supported by paired blood cultures drawn simultaneously from the catheter and a peripheral vein, with a shorter time to positivity from the catheter (differential time to positivity)",
-      "Purulence or erythema at the exit site, or clinical improvement after line removal, supports the diagnosis but is not always present",
-      "Management principles centre on removing or exchanging the catheter, particularly for S. aureus, Candida, Pseudomonas, or complicated infection, alongside targeted antibiotics",
-      "Antibiotic lock therapy may allow catheter salvage in selected long-term lines infected with less virulent organisms",
-      "S. aureus and candidal line infections mandate a search for metastatic complications such as endocarditis, and echocardiography should be considered",
-      "Prevention relies on strict insertion and maintenance bundles, hand hygiene, and prompt removal of unnecessary lines"
+  "pathophysiology": "Intravascular catheters can become infected by several routes: migration of skin flora along the external catheter surface to the tip, contamination of the catheter hub and lumen during handling, haematogenous seeding from a distant focus, or, rarely, contaminated infusate. Microorganisms adhere to the catheter and form a biofilm within a matrix that shields them from host defences and antibiotics, allowing persistent shedding of organisms into the bloodstream. This biofilm explains why eradication frequently requires removing the device rather than antibiotics alone.",
+  "additionalDifferentials": [
+   "Bloodstream infection from another source (urinary, respiratory, abdominal)",
+   "Contaminated blood culture from skin flora",
+   "Infective endocarditis",
+   "Localised exit-site or tunnel infection without bacteraemia",
+   "Non-infective causes of fever in a hospitalised patient"
+  ],
+  "infectionMimics": [
+   "Blood culture contamination with coagulase-negative staphylococci",
+   "Drug fever or transfusion reaction",
+   "Thrombophlebitis without infection",
+   "Post-operative or malignancy-associated fever"
+  ],
+  "additionalInvestigations": [
+   "Paired peripheral and catheter-drawn blood cultures for differential time to positivity",
+   "Culture of the catheter tip after removal",
+   "Echocardiography when S. aureus, candidal, or persistent bacteraemia is present",
+   "Repeat blood cultures to document clearance after starting treatment",
+   "Imaging to seek metastatic foci if bacteraemia persists"
+  ],
+  "redFlags": [
+   "Severe sepsis or septic shock arising from the line infection requiring urgent resuscitation and line removal",
+   "Persistent bacteraemia despite appropriate therapy suggesting endocarditis, septic thrombophlebitis, or a retained infected device",
+   "S. aureus or Candida bloodstream infection with risk of metastatic seeding",
+   "Signs of tunnel or pocket infection or septic thrombosis of the cannulated vein"
+  ],
+  "prognosis": "Prognosis depends on the organism and host; uncomplicated coagulase-negative staphylococcal infection often resolves with line removal, whereas S. aureus, Candida, or complicated infections carry higher morbidity, mortality, and risk of metastatic complications.",
+  "pitfalls": [
+   "Continuing to use an infected catheter, especially with S. aureus or Candida, instead of removing it",
+   "Misinterpreting a single coagulase-negative staphylococcal culture as contamination or as true infection without corroboration",
+   "Failing to seek endocarditis or metastatic foci in S. aureus or candidal bacteraemia",
+   "Not confirming clearance of bacteraemia with repeat cultures"
+  ],
+  "references": [
+   "Harrison's Principles of Internal Medicine, 22e",
+   "IDSA guidelines"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Remove or exchange the infected catheter, mandatory for Staphylococcus aureus, Candida, Pseudomonas or complicated infection given biofilm-protected organisms",
+   "Start empirical broad-spectrum cover with a glycopeptide such as vancomycin plus Gram-negative cover, then de-escalate to targeted therapy on culture and sensitivities",
+   "Add an echinocandin antifungal when candidaemia is suspected or confirmed",
+   "Antibiotic lock therapy to attempt salvage of selected long-term lines infected with low-virulence organisms",
+   "Repeat blood cultures to document clearance and define the duration of therapy",
+   "Echocardiography and imaging for endocarditis or metastatic foci in persistent or high-risk bacteraemia",
+   "Sepsis supportive care with fluid resuscitation and haemodynamic support as needed",
+   "Reinforce insertion and maintenance care bundles and remove unnecessary intravascular devices to prevent recurrence"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "catheter_related_bloodstream-pathway",
+   "title": "Catheter-related bloodstream infection: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A bloodstream infection attributable to an intravascular catheter, most often a central venous line, in a patient with no other apparent source",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Severe sepsis or septic shock arising from the line infection requiring urgent resuscitation and line removal",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Paired peripheral and catheter-drawn blood cultures for differential time to positivity, Culture of the catheter tip after removal, Echocardiography when S. aureus, candidal, or persistent bacteraemia is present"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Remove or exchange the infected catheter, mandatory for Staphylococcus aureus, Candida, Pseudomonas or complicated infection given biofilm-protected organisms"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Continuing to use an infected catheter, especially with S. aureus or Candida, instead of removing it"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of catheter-related bloodstream infection."
+  }
+ ],
+ "tables": [
+  {
+   "id": "catheter_related_bloodstream-matrix",
+   "title": "Catheter-related bloodstream infection: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A bloodstream infection attributable to an intravascular catheter, most often a central venous line, in a patient with no other",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Intravascular catheters can become infected by several routes: migration of skin flora along the external catheter surface to the tip, contamination of the catheter hub and lumen during handling, haematogenous seeding from a distant focus, or, rarely, contaminated infusate. Microorganisms adhere to the catheter and form a biofilm within a matrix that shields them from host defences and antibiotics, allowing persistent shedding of organisms into the bloodstream. This biofilm explains why eradication frequently requires removing the device rather than antibiotics alone.",
-    "additionalDifferentials": [
-      "Bloodstream infection from another source (urinary, respiratory, abdominal)",
-      "Contaminated blood culture from skin flora",
-      "Infective endocarditis",
-      "Localised exit-site or tunnel infection without bacteraemia",
-      "Non-infective causes of fever in a hospitalised patient"
+    [
+     "Key Investigations",
+     "Paired peripheral and catheter-drawn blood cultures for differential time to positivity, Culture of the catheter tip after",
+     "Confirmatory diagnostic workup"
     ],
-    "infectionMimics": [
-      "Blood culture contamination with coagulase-negative staphylococci",
-      "Drug fever or transfusion reaction",
-      "Thrombophlebitis without infection",
-      "Post-operative or malignancy-associated fever"
+    [
+     "Primary Differentials",
+     "Bloodstream infection from another source (urinary, respiratory, abdominal), Contaminated blood culture from skin flora,",
+     "Rule out key mimics"
     ],
-    "additionalInvestigations": [
-      "Paired peripheral and catheter-drawn blood cultures for differential time to positivity",
-      "Culture of the catheter tip after removal",
-      "Echocardiography when S. aureus, candidal, or persistent bacteraemia is present",
-      "Repeat blood cultures to document clearance after starting treatment",
-      "Imaging to seek metastatic foci if bacteraemia persists"
+    [
+     "Management Strategy",
+     "Remove or exchange the infected catheter, mandatory for Staphylococcus aureus, Candida, Pseudomonas or complicated infection",
+     "Core treatment modality"
     ],
-    "redFlags": [
-      "Severe sepsis or septic shock arising from the line infection requiring urgent resuscitation and line removal",
-      "Persistent bacteraemia despite appropriate therapy suggesting endocarditis, septic thrombophlebitis, or a retained infected device",
-      "S. aureus or Candida bloodstream infection with risk of metastatic seeding",
-      "Signs of tunnel or pocket infection or septic thrombosis of the cannulated vein"
-    ],
-    "prognosis": "Prognosis depends on the organism and host; uncomplicated coagulase-negative staphylococcal infection often resolves with line removal, whereas S. aureus, Candida, or complicated infections carry higher morbidity, mortality, and risk of metastatic complications.",
-    "pitfalls": [
-      "Continuing to use an infected catheter, especially with S. aureus or Candida, instead of removing it",
-      "Misinterpreting a single coagulase-negative staphylococcal culture as contamination or as true infection without corroboration",
-      "Failing to seek endocarditis or metastatic foci in S. aureus or candidal bacteraemia",
-      "Not confirming clearance of bacteraemia with repeat cultures"
-    ],
-    "references": [
-      "Harrison's Principles of Internal Medicine, 22e",
-      "IDSA guidelines"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Remove or exchange the infected catheter, mandatory for Staphylococcus aureus, Candida, Pseudomonas or complicated infection given biofilm-protected organisms",
-      "Start empirical broad-spectrum cover with a glycopeptide such as vancomycin plus Gram-negative cover, then de-escalate to targeted therapy on culture and sensitivities",
-      "Add an echinocandin antifungal when candidaemia is suspected or confirmed",
-      "Antibiotic lock therapy to attempt salvage of selected long-term lines infected with low-virulence organisms",
-      "Repeat blood cultures to document clearance and define the duration of therapy",
-      "Echocardiography and imaging for endocarditis or metastatic foci in persistent or high-risk bacteraemia",
-      "Sepsis supportive care with fluid resuscitation and haemodynamic support as needed",
-      "Reinforce insertion and maintenance care bundles and remove unnecessary intravascular devices to prevent recurrence"
+    [
+     "Clinical Pitfall",
+     "Continuing to use an infected catheter, especially with S. aureus or Candida, instead of removing it",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for catheter-related bloodstream infection."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "catheter-related-bloodstream-real-image",
+   "title": "Catheter-related bloodstream infection: Diagnostic Microbiological / Smear Examination",
+   "type": "diagram",
+   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
+   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
+   "annotations": [
+    {
+     "label": "Pathogen Detection",
+     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
+    },
+    {
+     "label": "Inflammatory Response",
+     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
+    },
+    {
+     "label": "Diagnostic Confirmation",
+     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+    }
+   ]
+  }
+ ]
 }

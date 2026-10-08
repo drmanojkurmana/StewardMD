@@ -1,79 +1,174 @@
 {
-  "id": "enteric_hyperoxaluria",
-  "name": "Enteric hyperoxaluria",
-  "aliases": [
-    "secondary hyperoxaluria",
-    "malabsorptive hyperoxaluria",
-    "bariatric hyperoxaluria",
-    "enteric oxalosis"
+ "id": "enteric_hyperoxaluria",
+ "name": "Enteric hyperoxaluria",
+ "aliases": [
+  "secondary hyperoxaluria",
+  "malabsorptive hyperoxaluria",
+  "bariatric hyperoxaluria",
+  "enteric oxalosis"
+ ],
+ "class": "non_infective",
+ "system": "Renal / Nephrology",
+ "specialty": "Nephrology / Urology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Comprehensive Clinical Nephrology / Campbell-Walsh-Wein Urology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Increased urinary oxalate excretion caused by intestinal fat malabsorption, leading to calcium oxalate stones and, when severe, oxalate nephropathy",
+   "Typical settings are Crohn's disease, extensive small-bowel resection, chronic pancreatic insufficiency and malabsorptive bariatric surgery such as Roux-en-Y gastric bypass",
+   "Malabsorbed fatty acids bind luminal calcium (saponification), leaving free oxalate available for colonic absorption, while unabsorbed bile salts increase colonic permeability to oxalate",
+   "Patients often also have a low urine volume, low urinary citrate and low urinary calcium, all compounding the stone risk",
+   "It must be distinguished from primary hyperoxaluria, which is a genetic overproduction of oxalate rather than a malabsorptive state",
+   "Severe cases can cause tubulointerstitial oxalate deposition (oxalate nephropathy) and progressive renal failure",
+   "Management includes a low-oxalate and low-fat diet, oral calcium or calcium citrate taken with meals to bind luminal oxalate, generous fluids and citrate supplementation",
+   "Treating the underlying malabsorption and maintaining hydration are central to prevention"
   ],
-  "class": "non_infective",
-  "system": "Renal / Nephrology",
-  "specialty": "Nephrology / Urology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Comprehensive Clinical Nephrology / Campbell-Walsh-Wein Urology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Increased urinary oxalate excretion caused by intestinal fat malabsorption, leading to calcium oxalate stones and, when severe, oxalate nephropathy",
-      "Typical settings are Crohn's disease, extensive small-bowel resection, chronic pancreatic insufficiency and malabsorptive bariatric surgery such as Roux-en-Y gastric bypass",
-      "Malabsorbed fatty acids bind luminal calcium (saponification), leaving free oxalate available for colonic absorption, while unabsorbed bile salts increase colonic permeability to oxalate",
-      "Patients often also have a low urine volume, low urinary citrate and low urinary calcium, all compounding the stone risk",
-      "It must be distinguished from primary hyperoxaluria, which is a genetic overproduction of oxalate rather than a malabsorptive state",
-      "Severe cases can cause tubulointerstitial oxalate deposition (oxalate nephropathy) and progressive renal failure",
-      "Management includes a low-oxalate and low-fat diet, oral calcium or calcium citrate taken with meals to bind luminal oxalate, generous fluids and citrate supplementation",
-      "Treating the underlying malabsorption and maintaining hydration are central to prevention"
+  "pathophysiology": "In health, dietary oxalate in the gut lumen binds calcium and is excreted in the stool. When fat is malabsorbed, unabsorbed long-chain fatty acids preferentially bind calcium (saponification), leaving oxalate free and soluble for absorption in the colon; unabsorbed bile acids further increase colonic permeability to oxalate. The excess absorbed oxalate is excreted by the kidney, raising urinary oxalate which, together with the low urine volume and low citrate that commonly accompany diarrhoeal states, drives calcium oxalate supersaturation and stone formation. With a heavy oxalate burden, tubulointerstitial deposition of calcium oxalate can injure the kidney directly.",
+  "additionalDifferentials": [
+   "Primary hyperoxaluria (genetic)",
+   "Dietary hyperoxaluria from excessive oxalate intake",
+   "Idiopathic calcium oxalate stone disease",
+   "Other causes of chronic tubulointerstitial disease",
+   "Distal renal tubular acidosis with stones"
+  ],
+  "additionalInvestigations": [
+   "24-hour urine showing raised oxalate with low volume and low citrate",
+   "Assessment of the underlying gastrointestinal disorder, including surgical history and malabsorption workup",
+   "Serum renal function and electrolytes",
+   "Stone analysis confirming calcium oxalate composition",
+   "Faecal fat or other markers of fat malabsorption where relevant",
+   "Renal biopsy where oxalate nephropathy is suspected"
+  ],
+  "redFlags": [
+   "A rising creatinine suggesting oxalate nephropathy",
+   "Rapid stone recurrence with declining renal function",
+   "Severe malabsorption with dehydration",
+   "Progression toward end-stage renal disease"
+  ],
+  "prognosis": "With dietary modification, luminal calcium binding, hydration and control of the bowel disease the stone risk can be reduced; heavy persistent hyperoxaluria may cause oxalate nephropathy and progressive chronic kidney disease.",
+  "pitfalls": [
+   "Confusing enteric with primary hyperoxaluria",
+   "Restricting dietary calcium, which worsens oxalate absorption",
+   "Overlooking hyperoxaluria as a cause of renal decline after bariatric surgery",
+   "Neglecting hydration and citrate replacement in chronic diarrhoeal states"
+  ],
+  "references": [
+   "Comprehensive Clinical Nephrology (Feehally et al.)",
+   "Campbell-Walsh-Wein Urology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Adopt a low-oxalate, low-fat diet while maintaining dietary calcium to bind luminal oxalate and reduce its absorption",
+   "Give oral calcium with meals as an oxalate binder, and consider a bile-acid sequestrant such as cholestyramine where unabsorbed bile salts drive colonic oxalate absorption",
+   "Maintain a high fluid intake to raise urine volume and reduce calcium oxalate supersaturation",
+   "Correct hypocitraturia with potassium citrate or alkali therapy to inhibit stone formation",
+   "Treat the underlying gastrointestinal disorder and fat malabsorption, whether Crohn's disease, pancreatic insufficiency or post-bariatric anatomy",
+   "Monitor urinary oxalate, citrate and volume with renal function, and manage stones urologically as needed",
+   "Watch for and manage oxalate nephropathy and progressive chronic kidney disease with nephrology input"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "enteric_hyperoxaluria-pathway",
+   "title": "Enteric hyperoxaluria: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Increased urinary oxalate excretion caused by intestinal fat malabsorption, leading to calcium oxalate stones and, when severe, oxalate nephropathy",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: A rising creatinine suggesting oxalate nephropathy",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: 24-hour urine showing raised oxalate with low volume and low citrate, Assessment of the underlying gastrointestinal disorder, including surgical history and malabsorption workup, Serum renal function and electrolytes"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Adopt a low-oxalate, low-fat diet while maintaining dietary calcium to bind luminal oxalate and reduce its absorption"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Confusing enteric with primary hyperoxaluria"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of enteric hyperoxaluria."
+  }
+ ],
+ "tables": [
+  {
+   "id": "enteric_hyperoxaluria-matrix",
+   "title": "Enteric hyperoxaluria: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Increased urinary oxalate excretion caused by intestinal fat malabsorption, leading to calcium oxalate stones and, when severe,",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "In health, dietary oxalate in the gut lumen binds calcium and is excreted in the stool. When fat is malabsorbed, unabsorbed long-chain fatty acids preferentially bind calcium (saponification), leaving oxalate free and soluble for absorption in the colon; unabsorbed bile acids further increase colonic permeability to oxalate. The excess absorbed oxalate is excreted by the kidney, raising urinary oxalate which, together with the low urine volume and low citrate that commonly accompany diarrhoeal states, drives calcium oxalate supersaturation and stone formation. With a heavy oxalate burden, tubulointerstitial deposition of calcium oxalate can injure the kidney directly.",
-    "additionalDifferentials": [
-      "Primary hyperoxaluria (genetic)",
-      "Dietary hyperoxaluria from excessive oxalate intake",
-      "Idiopathic calcium oxalate stone disease",
-      "Other causes of chronic tubulointerstitial disease",
-      "Distal renal tubular acidosis with stones"
+    [
+     "Key Investigations",
+     "24-hour urine showing raised oxalate with low volume and low citrate, Assessment of the underlying gastrointestinal disorder,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "24-hour urine showing raised oxalate with low volume and low citrate",
-      "Assessment of the underlying gastrointestinal disorder, including surgical history and malabsorption workup",
-      "Serum renal function and electrolytes",
-      "Stone analysis confirming calcium oxalate composition",
-      "Faecal fat or other markers of fat malabsorption where relevant",
-      "Renal biopsy where oxalate nephropathy is suspected"
+    [
+     "Primary Differentials",
+     "Primary hyperoxaluria (genetic), Dietary hyperoxaluria from excessive oxalate intake, Idiopathic calcium oxalate stone disease",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "A rising creatinine suggesting oxalate nephropathy",
-      "Rapid stone recurrence with declining renal function",
-      "Severe malabsorption with dehydration",
-      "Progression toward end-stage renal disease"
+    [
+     "Management Strategy",
+     "Adopt a low-oxalate, low-fat diet while maintaining dietary calcium to bind luminal oxalate and reduce its absorption",
+     "Core treatment modality"
     ],
-    "prognosis": "With dietary modification, luminal calcium binding, hydration and control of the bowel disease the stone risk can be reduced; heavy persistent hyperoxaluria may cause oxalate nephropathy and progressive chronic kidney disease.",
-    "pitfalls": [
-      "Confusing enteric with primary hyperoxaluria",
-      "Restricting dietary calcium, which worsens oxalate absorption",
-      "Overlooking hyperoxaluria as a cause of renal decline after bariatric surgery",
-      "Neglecting hydration and citrate replacement in chronic diarrhoeal states"
-    ],
-    "references": [
-      "Comprehensive Clinical Nephrology (Feehally et al.)",
-      "Campbell-Walsh-Wein Urology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Adopt a low-oxalate, low-fat diet while maintaining dietary calcium to bind luminal oxalate and reduce its absorption",
-      "Give oral calcium with meals as an oxalate binder, and consider a bile-acid sequestrant such as cholestyramine where unabsorbed bile salts drive colonic oxalate absorption",
-      "Maintain a high fluid intake to raise urine volume and reduce calcium oxalate supersaturation",
-      "Correct hypocitraturia with potassium citrate or alkali therapy to inhibit stone formation",
-      "Treat the underlying gastrointestinal disorder and fat malabsorption, whether Crohn's disease, pancreatic insufficiency or post-bariatric anatomy",
-      "Monitor urinary oxalate, citrate and volume with renal function, and manage stones urologically as needed",
-      "Watch for and manage oxalate nephropathy and progressive chronic kidney disease with nephrology input"
+    [
+     "Clinical Pitfall",
+     "Confusing enteric with primary hyperoxaluria",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for enteric hyperoxaluria."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "enteric-hyperoxaluria-real-image",
+   "title": "Enteric hyperoxaluria: Diagnostic Renal Ultrasonography",
+   "type": "ultrasound",
+   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
+   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
+   "annotations": [
+    {
+     "label": "Renal Cortex",
+     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
+    },
+    {
+     "label": "Corticomedullary Junction",
+     "description": "Medullary pyramid definition and structural architecture."
+    },
+    {
+     "label": "Collecting System",
+     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+    }
+   ]
+  }
+ ]
 }

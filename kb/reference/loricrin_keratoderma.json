@@ -1,79 +1,174 @@
 {
-  "id": "loricrin_keratoderma",
-  "name": "Loricrin keratoderma",
-  "aliases": [
-    "Vohwinkel syndrome variant with ichthyosis",
-    "mutilating keratoderma with ichthyosis",
-    "LOR"
+ "id": "loricrin_keratoderma",
+ "name": "Loricrin keratoderma",
+ "aliases": [
+  "Vohwinkel syndrome variant with ichthyosis",
+  "mutilating keratoderma with ichthyosis",
+  "LOR"
+ ],
+ "class": "non_infective",
+ "system": "Dermatology / Genetics",
+ "specialty": "Dermatology / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Rook's Textbook of Dermatology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "An autosomal dominant disorder of keratinisation caused by variants in LOR, which encodes loricrin, a major protein of the cornified cell envelope",
+   "Presents as a mutilating (Vohwinkel-like) palmoplantar keratoderma combined with a generalised ichthyosis",
+   "The palmoplantar keratoderma typically has a honeycomb surface and may show starfish-shaped keratoses over the knuckles",
+   "Constricting fibrous bands (pseudo-ainhum) can form around digits and threaten autoamputation",
+   "Unlike classic connexin-related Vohwinkel syndrome, the loricrin variant is associated with ichthyosis rather than sensorineural deafness",
+   "Diagnosis is clinical, supported by biopsy showing hyperkeratosis with retained nuclei and by LOR molecular testing",
+   "Management is supportive with keratolytics, emollients and foot care, oral retinoids for severe keratoderma, and surgical release of constricting bands where necessary"
   ],
-  "class": "non_infective",
-  "system": "Dermatology / Genetics",
-  "specialty": "Dermatology / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Rook's Textbook of Dermatology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "An autosomal dominant disorder of keratinisation caused by variants in LOR, which encodes loricrin, a major protein of the cornified cell envelope",
-      "Presents as a mutilating (Vohwinkel-like) palmoplantar keratoderma combined with a generalised ichthyosis",
-      "The palmoplantar keratoderma typically has a honeycomb surface and may show starfish-shaped keratoses over the knuckles",
-      "Constricting fibrous bands (pseudo-ainhum) can form around digits and threaten autoamputation",
-      "Unlike classic connexin-related Vohwinkel syndrome, the loricrin variant is associated with ichthyosis rather than sensorineural deafness",
-      "Diagnosis is clinical, supported by biopsy showing hyperkeratosis with retained nuclei and by LOR molecular testing",
-      "Management is supportive with keratolytics, emollients and foot care, oral retinoids for severe keratoderma, and surgical release of constricting bands where necessary"
+  "pathophysiology": "Loricrin keratoderma arises from frameshift variants in LOR that alter loricrin, the principal structural protein of the cornified cell envelope. The mutant protein carries an abnormal carboxy-terminal extension with a nuclear localisation signal, causing it to be mistargeted to the nucleus rather than incorporated correctly into the cornified envelope. Defective envelope assembly impairs the epidermal barrier and terminal differentiation, producing generalised ichthyosis and a thick mutilating palmoplantar keratoderma, with chronic fibrosis around digits generating pseudo-ainhum.",
+  "additionalDifferentials": [
+   "Vohwinkel syndrome due to GJB2 (connexin 26) with deafness",
+   "Mal de Meleda",
+   "Olmsted syndrome",
+   "Other mutilating keratodermas",
+   "Bart-Pumphrey syndrome",
+   "Diffuse epidermolytic palmoplantar keratoderma"
+  ],
+  "additionalInvestigations": [
+   "Molecular genetic testing of LOR",
+   "Skin biopsy showing hyperkeratosis with retained nuclei (parakeratosis) in the stratum corneum",
+   "Examination for pseudo-ainhum and starfish keratoses",
+   "Audiological assessment to distinguish from connexin-related Vohwinkel syndrome",
+   "Family history and pedigree analysis",
+   "Assessment of foot and hand function"
+  ],
+  "redFlags": [
+   "Constricting bands (pseudo-ainhum) risking digital autoamputation",
+   "Deep secondary infection of fissured keratoderma",
+   "Rapid or asymmetrical change raising concern for malignant transformation",
+   "Severe functional impairment of hands or feet"
+  ],
+  "prognosis": "The disorder is lifelong; with keratolytic and emollient care, retinoids and timely surgical release of constricting bands most patients preserve function, though pseudo-ainhum and disability can complicate severe disease.",
+  "pitfalls": [
+   "Confusing it with connexin-related Vohwinkel syndrome and overlooking the associated ichthyosis",
+   "Missing early pseudo-ainhum before irreversible digital constriction",
+   "Failing to arrange audiology to distinguish the two forms of mutilating keratoderma",
+   "Delaying surgical release of constricting bands"
+  ],
+  "references": [
+   "Rook's Textbook of Dermatology",
+   "Harper's Textbook of Paediatric Dermatology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Provide intensive topical care with emollients and keratolytics such as urea or salicylic acid to soften the palmoplantar keratoderma and ichthyosis",
+   "Use systemic retinoids such as acitretin to reduce hyperkeratosis in severe disease, monitoring for their side effects",
+   "Arrange timely surgical or medical release of constricting fibrous bands (pseudo-ainhum) to prevent digital strangulation and autoamputation",
+   "Treat secondary bacterial or fungal infection of fissured hyperkeratotic skin",
+   "Support hand and foot function with podiatry, physiotherapy and appropriate footwear",
+   "Distinguish from connexin-related Vohwinkel syndrome with audiological assessment given the differing associations",
+   "Offer genetic counselling for this autosomal dominant LOR disorder with family screening",
+   "Coordinate lifelong care through dermatology, clinical genetics and surgical teams, escalating urgently for threatened digits"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "loricrin_keratoderma-pathway",
+   "title": "Loricrin keratoderma: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "An autosomal dominant disorder of keratinisation caused by variants in LOR, which encodes loricrin, a major protein of the cornified cell envelope",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Constricting bands (pseudo-ainhum) risking digital autoamputation",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Molecular genetic testing of LOR, Skin biopsy showing hyperkeratosis with retained nuclei (parakeratosis) in the stratum corneum, Examination for pseudo-ainhum and starfish keratoses"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Provide intensive topical care with emollients and keratolytics such as urea or salicylic acid to soften the palmoplantar keratoderma and ichthyosis"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Confusing it with connexin-related Vohwinkel syndrome and overlooking the associated ichthyosis"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of loricrin keratoderma."
+  }
+ ],
+ "tables": [
+  {
+   "id": "loricrin_keratoderma-matrix",
+   "title": "Loricrin keratoderma: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "An autosomal dominant disorder of keratinisation caused by variants in LOR, which encodes loricrin, a major protein of the",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Loricrin keratoderma arises from frameshift variants in LOR that alter loricrin, the principal structural protein of the cornified cell envelope. The mutant protein carries an abnormal carboxy-terminal extension with a nuclear localisation signal, causing it to be mistargeted to the nucleus rather than incorporated correctly into the cornified envelope. Defective envelope assembly impairs the epidermal barrier and terminal differentiation, producing generalised ichthyosis and a thick mutilating palmoplantar keratoderma, with chronic fibrosis around digits generating pseudo-ainhum.",
-    "additionalDifferentials": [
-      "Vohwinkel syndrome due to GJB2 (connexin 26) with deafness",
-      "Mal de Meleda",
-      "Olmsted syndrome",
-      "Other mutilating keratodermas",
-      "Bart-Pumphrey syndrome",
-      "Diffuse epidermolytic palmoplantar keratoderma"
+    [
+     "Key Investigations",
+     "Molecular genetic testing of LOR, Skin biopsy showing hyperkeratosis with retained nuclei (parakeratosis) in the stratum corneum,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Molecular genetic testing of LOR",
-      "Skin biopsy showing hyperkeratosis with retained nuclei (parakeratosis) in the stratum corneum",
-      "Examination for pseudo-ainhum and starfish keratoses",
-      "Audiological assessment to distinguish from connexin-related Vohwinkel syndrome",
-      "Family history and pedigree analysis",
-      "Assessment of foot and hand function"
+    [
+     "Primary Differentials",
+     "Vohwinkel syndrome due to GJB2 (connexin 26) with deafness, Mal de Meleda, Olmsted syndrome",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Constricting bands (pseudo-ainhum) risking digital autoamputation",
-      "Deep secondary infection of fissured keratoderma",
-      "Rapid or asymmetrical change raising concern for malignant transformation",
-      "Severe functional impairment of hands or feet"
+    [
+     "Management Strategy",
+     "Provide intensive topical care with emollients and keratolytics such as urea or salicylic acid to soften the palmoplantar",
+     "Core treatment modality"
     ],
-    "prognosis": "The disorder is lifelong; with keratolytic and emollient care, retinoids and timely surgical release of constricting bands most patients preserve function, though pseudo-ainhum and disability can complicate severe disease.",
-    "pitfalls": [
-      "Confusing it with connexin-related Vohwinkel syndrome and overlooking the associated ichthyosis",
-      "Missing early pseudo-ainhum before irreversible digital constriction",
-      "Failing to arrange audiology to distinguish the two forms of mutilating keratoderma",
-      "Delaying surgical release of constricting bands"
-    ],
-    "references": [
-      "Rook's Textbook of Dermatology",
-      "Harper's Textbook of Paediatric Dermatology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Provide intensive topical care with emollients and keratolytics such as urea or salicylic acid to soften the palmoplantar keratoderma and ichthyosis",
-      "Use systemic retinoids such as acitretin to reduce hyperkeratosis in severe disease, monitoring for their side effects",
-      "Arrange timely surgical or medical release of constricting fibrous bands (pseudo-ainhum) to prevent digital strangulation and autoamputation",
-      "Treat secondary bacterial or fungal infection of fissured hyperkeratotic skin",
-      "Support hand and foot function with podiatry, physiotherapy and appropriate footwear",
-      "Distinguish from connexin-related Vohwinkel syndrome with audiological assessment given the differing associations",
-      "Offer genetic counselling for this autosomal dominant LOR disorder with family screening",
-      "Coordinate lifelong care through dermatology, clinical genetics and surgical teams, escalating urgently for threatened digits"
+    [
+     "Clinical Pitfall",
+     "Confusing it with connexin-related Vohwinkel syndrome and overlooking the associated ichthyosis",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for loricrin keratoderma."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "loricrin-keratoderma-real-image",
+   "title": "Loricrin keratoderma: Clinical Cutaneous Dermatology Photograph",
+   "type": "diagram",
+   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
+   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
+   "annotations": [
+    {
+     "label": "Primary Lesions",
+     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
+    },
+    {
+     "label": "Demarcation & Margins",
+     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
+    },
+    {
+     "label": "Anatomical Distribution",
+     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+    }
+   ]
+  }
+ ]
 }

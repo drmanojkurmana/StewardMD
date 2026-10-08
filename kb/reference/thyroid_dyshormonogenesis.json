@@ -1,81 +1,176 @@
 {
-  "id": "thyroid_dyshormonogenesis",
-  "name": "Thyroid dyshormonogenesis",
-  "aliases": [
-    "dyshormonogenetic goitre",
-    "thyroid hormone synthesis defect",
-    "TPO deficiency",
-    "TG deficiency",
-    "Pendred syndrome (SLC26A4)",
-    "DUOX2 deficiency"
+ "id": "thyroid_dyshormonogenesis",
+ "name": "Thyroid dyshormonogenesis",
+ "aliases": [
+  "dyshormonogenetic goitre",
+  "thyroid hormone synthesis defect",
+  "TPO deficiency",
+  "TG deficiency",
+  "Pendred syndrome (SLC26A4)",
+  "DUOX2 deficiency"
+ ],
+ "class": "non_infective",
+ "system": "Endocrine / Genetics",
+ "specialty": "Endocrinology / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Standard endocrinology texts and congenital hypothyroidism guidance",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A cause of congenital hypothyroidism in which the thyroid gland is present, often enlarged (goitre), but cannot make hormone normally",
+   "Usually autosomal recessive, arising from defects in steps of hormone synthesis such as iodide transport, organification (thyroid peroxidase), thyroglobulin, or hydrogen peroxide generation (DUOX2)",
+   "Detected in many countries through newborn screening showing a raised thyroid-stimulating hormone",
+   "Distinguished from thyroid dysgenesis by the presence of a normally sited or enlarged gland on imaging",
+   "Pendred syndrome combines an organification defect with sensorineural hearing loss, so hearing should be assessed",
+   "A perchlorate discharge test can demonstrate an organification defect where such testing is available",
+   "Prompt levothyroxine replacement started in the neonatal period prevents the neurodevelopmental consequences of untreated congenital hypothyroidism"
   ],
-  "class": "non_infective",
-  "system": "Endocrine / Genetics",
-  "specialty": "Endocrinology / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Standard endocrinology texts and congenital hypothyroidism guidance",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A cause of congenital hypothyroidism in which the thyroid gland is present, often enlarged (goitre), but cannot make hormone normally",
-      "Usually autosomal recessive, arising from defects in steps of hormone synthesis such as iodide transport, organification (thyroid peroxidase), thyroglobulin, or hydrogen peroxide generation (DUOX2)",
-      "Detected in many countries through newborn screening showing a raised thyroid-stimulating hormone",
-      "Distinguished from thyroid dysgenesis by the presence of a normally sited or enlarged gland on imaging",
-      "Pendred syndrome combines an organification defect with sensorineural hearing loss, so hearing should be assessed",
-      "A perchlorate discharge test can demonstrate an organification defect where such testing is available",
-      "Prompt levothyroxine replacement started in the neonatal period prevents the neurodevelopmental consequences of untreated congenital hypothyroidism"
+  "pathophysiology": "Thyroid dyshormonogenesis is caused by inherited defects in the enzymatic machinery the thyroid uses to synthesise hormone. Depending on the gene involved, iodide may not be trapped or organified, thyroglobulin may be abnormal, or the hydrogen peroxide needed for organification may be deficient. Impaired hormone output lowers circulating thyroid hormone and, through loss of negative feedback, raises thyroid-stimulating hormone. The resulting chronic stimulation causes the gland to enlarge into a goitre, while the hormone deficiency itself threatens growth and, critically in infancy, neurodevelopment.",
+  "additionalDifferentials": [
+   "Thyroid dysgenesis (aplasia, hypoplasia, or ectopia)",
+   "Transient neonatal hypothyroidism from maternal or iodine factors",
+   "Central (secondary) hypothyroidism",
+   "Iodine deficiency or excess",
+   "Resistance to thyroid hormone",
+   "Maternal antithyroid drug or antibody effects"
+  ],
+  "additionalInvestigations": [
+   "Serum thyroid-stimulating hormone and free thyroxine",
+   "Thyroid ultrasound to confirm a present or enlarged gland",
+   "Radionuclide uptake scan to assess trapping and gland location",
+   "Perchlorate discharge test for organification defects",
+   "Serum and urine thyroglobulin and iodine studies",
+   "Genetic testing of relevant synthesis genes and audiology for suspected Pendred syndrome"
+  ],
+  "redFlags": [
+   "Delayed recognition or treatment in a neonate risking irreversible neurodevelopmental impairment",
+   "A rapidly enlarging or compressive goitre",
+   "Associated sensorineural hearing loss suggesting Pendred syndrome",
+   "Severe hypothyroid features such as feeding difficulty and hypotonia in infancy"
+  ],
+  "prognosis": "When congenital hypothyroidism is detected by screening and treated promptly with adequate replacement, growth and neurodevelopment are usually normal; delayed treatment risks permanent cognitive impairment, and the goitre generally regresses once hormone levels are restored.",
+  "pitfalls": [
+   "Assuming a present gland excludes a hormone synthesis defect",
+   "Missing associated deafness in Pendred syndrome",
+   "Delaying replacement while awaiting confirmatory imaging or genetics in a neonate",
+   "Under-dosing replacement and allowing persistent goitre or hypothyroidism"
+  ],
+  "references": [
+   "European Society for Paediatric Endocrinology congenital hypothyroidism guidance",
+   "Standard endocrinology texts"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Start prompt, lifelong levothyroxine replacement titrated to restore euthyroidism as soon as congenital hypothyroidism is confirmed on newborn screening",
+   "Titrate the levothyroxine dose against thyroid function and clinical response, ensuring adequate replacement through infancy to protect neurodevelopment",
+   "Monitor growth, developmental milestones and thyroid function at regular intervals, expecting the goitre to regress once hormone levels are restored",
+   "Assess hearing with audiology where Pendred syndrome is suspected, and provide aural rehabilitation for sensorineural hearing loss",
+   "Adjust replacement during intercurrent illness, growth and puberty to avoid under-treatment",
+   "Offer genetic counselling and family screening, as the disorder is usually autosomal recessive",
+   "Refer to paediatric endocrinology and clinical genetics for coordinated care"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "thyroid_dyshormonogenesis-pathway",
+   "title": "Thyroid dyshormonogenesis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A cause of congenital hypothyroidism in which the thyroid gland is present, often enlarged (goitre), but cannot make hormone normally",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Delayed recognition or treatment in a neonate risking irreversible neurodevelopmental impairment",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Serum thyroid-stimulating hormone and free thyroxine, Thyroid ultrasound to confirm a present or enlarged gland, Radionuclide uptake scan to assess trapping and gland location"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Start prompt, lifelong levothyroxine replacement titrated to restore euthyroidism as soon as congenital hypothyroidism is confirmed on newborn screening"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Assuming a present gland excludes a hormone synthesis defect"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of thyroid dyshormonogenesis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "thyroid_dyshormonogenesis-matrix",
+   "title": "Thyroid dyshormonogenesis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A cause of congenital hypothyroidism in which the thyroid gland is present, often enlarged (goitre), but cannot make hormone",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Thyroid dyshormonogenesis is caused by inherited defects in the enzymatic machinery the thyroid uses to synthesise hormone. Depending on the gene involved, iodide may not be trapped or organified, thyroglobulin may be abnormal, or the hydrogen peroxide needed for organification may be deficient. Impaired hormone output lowers circulating thyroid hormone and, through loss of negative feedback, raises thyroid-stimulating hormone. The resulting chronic stimulation causes the gland to enlarge into a goitre, while the hormone deficiency itself threatens growth and, critically in infancy, neurodevelopment.",
-    "additionalDifferentials": [
-      "Thyroid dysgenesis (aplasia, hypoplasia, or ectopia)",
-      "Transient neonatal hypothyroidism from maternal or iodine factors",
-      "Central (secondary) hypothyroidism",
-      "Iodine deficiency or excess",
-      "Resistance to thyroid hormone",
-      "Maternal antithyroid drug or antibody effects"
+    [
+     "Key Investigations",
+     "Serum thyroid-stimulating hormone and free thyroxine, Thyroid ultrasound to confirm a present or enlarged gland, Radionuclide",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Serum thyroid-stimulating hormone and free thyroxine",
-      "Thyroid ultrasound to confirm a present or enlarged gland",
-      "Radionuclide uptake scan to assess trapping and gland location",
-      "Perchlorate discharge test for organification defects",
-      "Serum and urine thyroglobulin and iodine studies",
-      "Genetic testing of relevant synthesis genes and audiology for suspected Pendred syndrome"
+    [
+     "Primary Differentials",
+     "Thyroid dysgenesis (aplasia, hypoplasia, or ectopia), Transient neonatal hypothyroidism from maternal or iodine factors, Central",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Delayed recognition or treatment in a neonate risking irreversible neurodevelopmental impairment",
-      "A rapidly enlarging or compressive goitre",
-      "Associated sensorineural hearing loss suggesting Pendred syndrome",
-      "Severe hypothyroid features such as feeding difficulty and hypotonia in infancy"
+    [
+     "Management Strategy",
+     "Start prompt, lifelong levothyroxine replacement titrated to restore euthyroidism as soon as congenital hypothyroidism is",
+     "Core treatment modality"
     ],
-    "prognosis": "When congenital hypothyroidism is detected by screening and treated promptly with adequate replacement, growth and neurodevelopment are usually normal; delayed treatment risks permanent cognitive impairment, and the goitre generally regresses once hormone levels are restored.",
-    "pitfalls": [
-      "Assuming a present gland excludes a hormone synthesis defect",
-      "Missing associated deafness in Pendred syndrome",
-      "Delaying replacement while awaiting confirmatory imaging or genetics in a neonate",
-      "Under-dosing replacement and allowing persistent goitre or hypothyroidism"
-    ],
-    "references": [
-      "European Society for Paediatric Endocrinology congenital hypothyroidism guidance",
-      "Standard endocrinology texts"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Start prompt, lifelong levothyroxine replacement titrated to restore euthyroidism as soon as congenital hypothyroidism is confirmed on newborn screening",
-      "Titrate the levothyroxine dose against thyroid function and clinical response, ensuring adequate replacement through infancy to protect neurodevelopment",
-      "Monitor growth, developmental milestones and thyroid function at regular intervals, expecting the goitre to regress once hormone levels are restored",
-      "Assess hearing with audiology where Pendred syndrome is suspected, and provide aural rehabilitation for sensorineural hearing loss",
-      "Adjust replacement during intercurrent illness, growth and puberty to avoid under-treatment",
-      "Offer genetic counselling and family screening, as the disorder is usually autosomal recessive",
-      "Refer to paediatric endocrinology and clinical genetics for coordinated care"
+    [
+     "Clinical Pitfall",
+     "Assuming a present gland excludes a hormone synthesis defect",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for thyroid dyshormonogenesis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "thyroid-dyshormonogenesis-real-image",
+   "title": "Thyroid dyshormonogenesis: Diagnostic Endocrine Cross-Sectional Imaging",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
+   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
+   "annotations": [
+    {
+     "label": "Gland Morphology",
+     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
+    },
+    {
+     "label": "Focal Lesions",
+     "description": "Nodularity, adenoma attenuation, and washout dynamics."
+    },
+    {
+     "label": "Surrounding Structures",
+     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+    }
+   ]
+  }
+ ]
 }

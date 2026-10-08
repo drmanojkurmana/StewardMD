@@ -151,5 +151,100 @@
  "review": {
   "status": "ai_drafted",
   "compiled": "2026-09-25"
- }
+ },
+ "algorithms": [
+  {
+   "id": "hypothyroidism-pathway",
+   "title": "Primary hypothyroidism (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Symptoms are non-specific: fatigue, cold intolerance, weight gain, constipation, dry skin, hoarse voice, menstrual change, low mood, slow-relaxing reflexes. One symptom alone rarely indicates thyroid disease.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Overt primary hypothyroidism: TSH above the reference range with low FT4. Subclinical hypothyroidism: raised TSH with normal FT4. Central hypothyroidism (pituitary or hypothalamic disease): low FT4 with low or inappropriately normal TSH.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Measure TSH first; if it is above the range, measure FT4 on the same sample. Measure TSH and FT4 together when pituitary disease is suspected."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Confirm on 2 occasions 3 months apart: about half of TSH values of 5 to 10 mIU/L return to normal without treatment (NICE)."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Aim for TSH within the reference range (typically about 0.5 to 4 mIU/L). Avoid doses that lower TSH below the range, especially below 0.1 mIU/L: atrial fibrillation and osteoporosis risk in older people and postmenopausal women."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for primary hypothyroidism (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "hypothyroidism-summary-matrix",
+   "title": "Primary hypothyroidism (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Symptoms are non-specific: fatigue, cold intolerance, weight gain, constipation, dry skin, hoarse voice, menstrual change, low mood,",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Confirm on 2 occasions 3 months apart: about half of TSH values of 5 to 10 mIU/L return to normal without treatment (NICE).",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Measure TSH first; if it is above the range, measure FT4 on the same sample. Measure TSH and FT4 together when pituitary disease is",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Levothyroxine (adult under 65, no heart disease): 1.6 mcg/kg/day orally once daily, rounded to the nearest 25 mcg",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Treating a single raised TSH, or a TSH measured during acute illness or recovery from it.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for primary hypothyroidism (adult)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "hypothyroidism-real-image",
+   "title": "Primary hypothyroidism (adult): Diagnostic Endocrine Cross-Sectional Imaging",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
+   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
+   "annotations": [
+    {
+     "label": "Gland Morphology",
+     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
+    },
+    {
+     "label": "Focal Lesions",
+     "description": "Nodularity, adenoma attenuation, and washout dynamics."
+    },
+    {
+     "label": "Surrounding Structures",
+     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+    }
+   ]
+  }
+ ]
 }

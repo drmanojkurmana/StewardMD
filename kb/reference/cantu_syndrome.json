@@ -1,83 +1,178 @@
 {
-  "id": "cantu_syndrome",
-  "name": "Cantú syndrome",
-  "aliases": [
-    "Hypertrichotic osteochondrodysplasia",
-    "Cantu syndrome"
+ "id": "cantu_syndrome",
+ "name": "Cantú syndrome",
+ "aliases": [
+  "Hypertrichotic osteochondrodysplasia",
+  "Cantu syndrome"
+ ],
+ "class": "non_infective",
+ "system": "Clinical genetics",
+ "specialty": "Clinical genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Clinical genetics references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Consider Cantú syndrome when congenital generalised hypertrichosis, coarse ('acromegaloid') facial features and cardiomegaly occur together.",
+   "It is caused by gain-of-function variants in the ATP-sensitive potassium (KATP) channel genes ABCC9 (SUR2) and, less often, KCNJ8 (Kir6.1); inheritance is autosomal dominant and most cases are de novo.",
+   "The phenotype closely mirrors chronic exposure to the KATP-channel opener minoxidil, a useful mnemonic linking hypertrichosis, oedema and pericardial effusion to channel opening.",
+   "Neonates are often macrosomic with generalised oedema, a large head and thick scalp hair present from birth.",
+   "Cardiovascular involvement drives morbidity: cardiomegaly, patent ductus arteriosus, pericardial effusion, dilated or tortuous vessels and pulmonary hypertension.",
+   "Skeletal (osteochondrodysplastic) features include a narrow thorax, broad ribs, platyspondyly, widened metaphyses and Erlenmeyer-flask deformity of the femora.",
+   "Cognition is usually normal or near-normal, helping to distinguish it from many other coarse-facies syndromes.",
+   "KATP-channel blockers such as sulfonylureas are under investigation as targeted therapy; care is otherwise supportive with cardiology surveillance."
   ],
-  "class": "non_infective",
-  "system": "Clinical genetics",
-  "specialty": "Clinical genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Clinical genetics references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Consider Cantú syndrome when congenital generalised hypertrichosis, coarse ('acromegaloid') facial features and cardiomegaly occur together.",
-      "It is caused by gain-of-function variants in the ATP-sensitive potassium (KATP) channel genes ABCC9 (SUR2) and, less often, KCNJ8 (Kir6.1); inheritance is autosomal dominant and most cases are de novo.",
-      "The phenotype closely mirrors chronic exposure to the KATP-channel opener minoxidil, a useful mnemonic linking hypertrichosis, oedema and pericardial effusion to channel opening.",
-      "Neonates are often macrosomic with generalised oedema, a large head and thick scalp hair present from birth.",
-      "Cardiovascular involvement drives morbidity: cardiomegaly, patent ductus arteriosus, pericardial effusion, dilated or tortuous vessels and pulmonary hypertension.",
-      "Skeletal (osteochondrodysplastic) features include a narrow thorax, broad ribs, platyspondyly, widened metaphyses and Erlenmeyer-flask deformity of the femora.",
-      "Cognition is usually normal or near-normal, helping to distinguish it from many other coarse-facies syndromes.",
-      "KATP-channel blockers such as sulfonylureas are under investigation as targeted therapy; care is otherwise supportive with cardiology surveillance."
+  "pathophysiology": "Cantú syndrome is caused by gain-of-function variants in ABCC9, encoding the sulfonylurea receptor SUR2, and less often in KCNJ8, encoding the pore-forming Kir6.1 subunit; together these assemble the ATP-sensitive potassium (KATP) channel expressed in vascular smooth muscle, cardiac and skeletal muscle. Mutant channels are less sensitive to inhibitory intracellular ATP and open more readily, hyperpolarising the membrane, reducing calcium entry and relaxing vascular smooth muscle. The resulting fall in systemic vascular resistance drives a compensatory high-output circulatory state with cardiomegaly, fluid retention, oedema and pericardial effusion, while chronic channel opening in the dermal papillae promotes generalised hypertrichosis. The disorder essentially phenocopies chronic exposure to the KATP-channel opener minoxidil, which likewise produces hypertrichosis, pericardial effusion and fluid retention. Inheritance is autosomal dominant, with the majority of cases arising de novo.",
+  "additionalDifferentials": [
+   "Mucopolysaccharidoses and other lysosomal storage disorders (coarse facies with hypertrichosis)",
+   "Congenital hypertrichosis lanuginosa or universalis",
+   "Zimmermann-Laband syndrome (hypertrichosis with gingival overgrowth; other ion-channel genes)",
+   "Coffin-Siris syndrome",
+   "Berardinelli-Seip congenital generalised lipodystrophy",
+   "Fetal exposure syndromes (alcohol, hydantoin, valproate) and prenatal minoxidil effect",
+   "Acromegaly or growth-hormone excess (acromegaloid appearance)"
+  ],
+  "additionalInvestigations": [
+   "Molecular genetic testing for ABCC9 and KCNJ8 variants",
+   "Echocardiography for cardiomegaly, patent ductus arteriosus, pericardial effusion and pulmonary artery pressure",
+   "Electrocardiography",
+   "Skeletal survey for osteochondrodysplastic changes",
+   "Cardiac MRI where echocardiographic windows are limited",
+   "Cranial and vascular imaging for ventriculomegaly and tortuous or aneurysmal vessels",
+   "Assessment for lymphoedema and, in adults, surveillance for vascular complications"
+  ],
+  "redFlags": [
+   "Signs of high-output cardiac failure or progressively worsening cardiomegaly",
+   "Large or tamponading pericardial effusion",
+   "Pulmonary hypertension",
+   "New or enlarging vascular aneurysm",
+   "Persistent, haemodynamically significant patent ductus arteriosus"
+  ],
+  "prognosis": "Life expectancy is often near-normal and intellect is usually preserved, but morbidity is driven by cardiovascular complications such as pericardial effusion, pulmonary hypertension and vascular disease, which warrant lifelong surveillance.",
+  "pitfalls": [
+   "Mislabelling the coarse facies and hypertrichosis as a mucopolysaccharidosis, prompting unnecessary enzyme assays.",
+   "Interpreting cardiomegaly as a primary cardiomyopathy and missing the underlying channelopathy.",
+   "Overlooking a persistent patent ductus arteriosus or pericardial effusion that needs intervention.",
+   "Attributing the picture to prenatal drug exposure without considering the genetic diagnosis.",
+   "Failing to counsel that, although most cases are de novo, the disorder is autosomal dominant with a transmission risk to offspring."
+  ],
+  "references": [
+   "Emery and Rimoin's Principles and Practice of Medical Genetics",
+   "GeneReviews (clinical genetics summaries)",
+   "Paediatric cardiology and clinical genetics reference texts"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Provide organ-directed care, as no curative therapy exists for this KATP-channel gain-of-function disorder",
+   "Undertake cardiovascular surveillance with serial echocardiography for cardiomegaly, pericardial effusion, patent ductus arteriosus and pulmonary hypertension",
+   "Drain a haemodynamically significant pericardial effusion and manage tamponade",
+   "Close a persistent patent ductus arteriosus and treat pulmonary hypertension with specialist cardiology input",
+   "Consider a KATP-channel-blocking sulfonylurea such as glibenclamide as an emerging targeted therapy directed at the underlying channel defect",
+   "Manage the skeletal and orthopaedic manifestations of the osteochondrodysplasia",
+   "Offer genetic counselling for the autosomal dominant ABCC9 and KCNJ8 variants, most of which arise de novo"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "cantu_syndrome-pathway",
+   "title": "Cantú syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Consider Cantú syndrome when congenital generalised hypertrichosis, coarse ('acromegaloid') facial features and cardiomegaly occur together.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Signs of high-output cardiac failure or progressively worsening cardiomegaly",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Molecular genetic testing for ABCC9 and KCNJ8 variants, Echocardiography for cardiomegaly, patent ductus arteriosus, pericardial effusion and pulmonary artery pressure, Electrocardiography"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Provide organ-directed care, as no curative therapy exists for this KATP-channel gain-of-function disorder"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mislabelling the coarse facies and hypertrichosis as a mucopolysaccharidosis, prompting unnecessary enzyme assays."
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of cantú syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "cantu_syndrome-matrix",
+   "title": "Cantú syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Consider Cantú syndrome when congenital generalised hypertrichosis, coarse ('acromegaloid') facial features and cardiomegaly",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Cantú syndrome is caused by gain-of-function variants in ABCC9, encoding the sulfonylurea receptor SUR2, and less often in KCNJ8, encoding the pore-forming Kir6.1 subunit; together these assemble the ATP-sensitive potassium (KATP) channel expressed in vascular smooth muscle, cardiac and skeletal muscle. Mutant channels are less sensitive to inhibitory intracellular ATP and open more readily, hyperpolarising the membrane, reducing calcium entry and relaxing vascular smooth muscle. The resulting fall in systemic vascular resistance drives a compensatory high-output circulatory state with cardiomegaly, fluid retention, oedema and pericardial effusion, while chronic channel opening in the dermal papillae promotes generalised hypertrichosis. The disorder essentially phenocopies chronic exposure to the KATP-channel opener minoxidil, which likewise produces hypertrichosis, pericardial effusion and fluid retention. Inheritance is autosomal dominant, with the majority of cases arising de novo.",
-    "additionalDifferentials": [
-      "Mucopolysaccharidoses and other lysosomal storage disorders (coarse facies with hypertrichosis)",
-      "Congenital hypertrichosis lanuginosa or universalis",
-      "Zimmermann-Laband syndrome (hypertrichosis with gingival overgrowth; other ion-channel genes)",
-      "Coffin-Siris syndrome",
-      "Berardinelli-Seip congenital generalised lipodystrophy",
-      "Fetal exposure syndromes (alcohol, hydantoin, valproate) and prenatal minoxidil effect",
-      "Acromegaly or growth-hormone excess (acromegaloid appearance)"
+    [
+     "Key Investigations",
+     "Molecular genetic testing for ABCC9 and KCNJ8 variants, Echocardiography for cardiomegaly, patent ductus arteriosus, pericardial",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Molecular genetic testing for ABCC9 and KCNJ8 variants",
-      "Echocardiography for cardiomegaly, patent ductus arteriosus, pericardial effusion and pulmonary artery pressure",
-      "Electrocardiography",
-      "Skeletal survey for osteochondrodysplastic changes",
-      "Cardiac MRI where echocardiographic windows are limited",
-      "Cranial and vascular imaging for ventriculomegaly and tortuous or aneurysmal vessels",
-      "Assessment for lymphoedema and, in adults, surveillance for vascular complications"
+    [
+     "Primary Differentials",
+     "Mucopolysaccharidoses and other lysosomal storage disorders (coarse facies with hypertrichosis), Congenital hypertrichosis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Signs of high-output cardiac failure or progressively worsening cardiomegaly",
-      "Large or tamponading pericardial effusion",
-      "Pulmonary hypertension",
-      "New or enlarging vascular aneurysm",
-      "Persistent, haemodynamically significant patent ductus arteriosus"
+    [
+     "Management Strategy",
+     "Provide organ-directed care, as no curative therapy exists for this KATP-channel gain-of-function disorder",
+     "Core treatment modality"
     ],
-    "prognosis": "Life expectancy is often near-normal and intellect is usually preserved, but morbidity is driven by cardiovascular complications such as pericardial effusion, pulmonary hypertension and vascular disease, which warrant lifelong surveillance.",
-    "pitfalls": [
-      "Mislabelling the coarse facies and hypertrichosis as a mucopolysaccharidosis, prompting unnecessary enzyme assays.",
-      "Interpreting cardiomegaly as a primary cardiomyopathy and missing the underlying channelopathy.",
-      "Overlooking a persistent patent ductus arteriosus or pericardial effusion that needs intervention.",
-      "Attributing the picture to prenatal drug exposure without considering the genetic diagnosis.",
-      "Failing to counsel that, although most cases are de novo, the disorder is autosomal dominant with a transmission risk to offspring."
-    ],
-    "references": [
-      "Emery and Rimoin's Principles and Practice of Medical Genetics",
-      "GeneReviews (clinical genetics summaries)",
-      "Paediatric cardiology and clinical genetics reference texts"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Provide organ-directed care, as no curative therapy exists for this KATP-channel gain-of-function disorder",
-      "Undertake cardiovascular surveillance with serial echocardiography for cardiomegaly, pericardial effusion, patent ductus arteriosus and pulmonary hypertension",
-      "Drain a haemodynamically significant pericardial effusion and manage tamponade",
-      "Close a persistent patent ductus arteriosus and treat pulmonary hypertension with specialist cardiology input",
-      "Consider a KATP-channel-blocking sulfonylurea such as glibenclamide as an emerging targeted therapy directed at the underlying channel defect",
-      "Manage the skeletal and orthopaedic manifestations of the osteochondrodysplasia",
-      "Offer genetic counselling for the autosomal dominant ABCC9 and KCNJ8 variants, most of which arise de novo"
+    [
+     "Clinical Pitfall",
+     "Mislabelling the coarse facies and hypertrichosis as a mucopolysaccharidosis, prompting unnecessary enzyme assays.",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for cantú syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "cantu-syndrome-real-image",
+   "title": "Cantú syndrome: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

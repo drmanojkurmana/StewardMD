@@ -1,94 +1,189 @@
 {
-  "id": "SARCOID_NEURO",
-  "name": "Neurosarcoidosis",
-  "system": "Neurology",
-  "class": "non_infective",
-  "chapter": null,
-  "page": null,
-  "aliases": [
-    "CNS sarcoidosis",
-    "neurologic sarcoidosis",
-    "neurological sarcoidosis",
-    "neurosarcoid",
-    "neurosarcoidosis",
-    "sarcoid neuropathy",
-    "sarcoidosis of the nervous system"
+ "id": "SARCOID_NEURO",
+ "name": "Neurosarcoidosis",
+ "system": "Neurology",
+ "class": "non_infective",
+ "chapter": null,
+ "page": null,
+ "aliases": [
+  "CNS sarcoidosis",
+  "neurologic sarcoidosis",
+  "neurological sarcoidosis",
+  "neurosarcoid",
+  "neurosarcoidosis",
+  "sarcoid neuropathy",
+  "sarcoidosis of the nervous system"
+ ],
+ "referenceOnly": true,
+ "review": {
+  "status": "ai_drafted"
+ },
+ "harrison": {
+  "clinicalPearls": [
+   "Symptomatic nervous-system involvement occurs in roughly 5-10% of sarcoidosis patients, though subclinical granulomas are more common at autopsy",
+   "Facial nerve palsy (often bilateral or recurrent) is the single most characteristic cranial neuropathy seen",
+   "Basilar leptomeningeal enhancement on MRI is a classic pattern, reflecting the predilection for meninges at the base of the brain",
+   "Hypothalamic-pituitary involvement can cause diabetes insipidus, hyperprolactinemia, or other endocrinopathies and should prompt pituitary axis testing",
+   "CSF findings are nonspecific — lymphocytic pleocytosis, elevated protein, and sometimes low glucose — mimicking tuberculous or fungal meningitis",
+   "Neurologic disease can be the presenting manifestation of sarcoidosis before systemic disease is recognized, so tissue confirmation elsewhere (e.g., mediastinal nodes, skin) is valuable",
+   "Spinal cord involvement can mimic a longitudinally extensive myelitis or an intramedullary tumor on imaging",
+   "Response to immunosuppression supports but does not confirm the diagnosis, since some infections also transiently respond to steroids"
   ],
-  "referenceOnly": true,
-  "review": {
-    "status": "ai_drafted"
-  },
-  "harrison": {
-    "clinicalPearls": [
-      "Symptomatic nervous-system involvement occurs in roughly 5-10% of sarcoidosis patients, though subclinical granulomas are more common at autopsy",
-      "Facial nerve palsy (often bilateral or recurrent) is the single most characteristic cranial neuropathy seen",
-      "Basilar leptomeningeal enhancement on MRI is a classic pattern, reflecting the predilection for meninges at the base of the brain",
-      "Hypothalamic-pituitary involvement can cause diabetes insipidus, hyperprolactinemia, or other endocrinopathies and should prompt pituitary axis testing",
-      "CSF findings are nonspecific — lymphocytic pleocytosis, elevated protein, and sometimes low glucose — mimicking tuberculous or fungal meningitis",
-      "Neurologic disease can be the presenting manifestation of sarcoidosis before systemic disease is recognized, so tissue confirmation elsewhere (e.g., mediastinal nodes, skin) is valuable",
-      "Spinal cord involvement can mimic a longitudinally extensive myelitis or an intramedullary tumor on imaging",
-      "Response to immunosuppression supports but does not confirm the diagnosis, since some infections also transiently respond to steroids"
-    ],
-    "pathophysiology": "Neurosarcoidosis results from non-caseating granulomatous inflammation infiltrating the meninges, cranial nerves, hypothalamic-pituitary axis, brain parenchyma, or spinal cord. The granulomas provoke a perivascular and leptomeningeal inflammatory response that can cause direct compressive or infiltrative neurologic deficits, hydrocephalus from impaired CSF flow, or vasculopathy. Because it is part of a systemic multisystem granulomatous disease, isolated CNS presentations without other organ involvement are diagnostically challenging.",
-    "additionalDifferentials": [
-      "Tuberculous meningitis",
-      "Fungal meningitis (cryptococcal, coccidioidal)",
-      "CNS lymphoma",
-      "Multiple sclerosis / other demyelinating disease",
-      "CNS vasculitis",
-      "Lymphomatoid granulomatosis or other granulomatous CNS disorders"
-    ],
-    "infectionMimics": [
-      "Tuberculous meningitis",
-      "Cryptococcal meningitis",
-      "Neurosyphilis",
-      "Lyme neuroborreliosis"
-    ],
-    "nonInfectiousMimics": [
-      "Multiple sclerosis",
-      "CNS lymphoma",
-      "Primary CNS vasculitis",
-      "IgG4-related disease",
-      "Idiopathic hypertrophic pachymeningitis"
-    ],
-    "additionalInvestigations": [
-      "Brain and spine MRI with gadolinium — assesses leptomeningeal enhancement, parenchymal lesions, and cord involvement",
-      "CSF analysis with cell count, protein, glucose, ACE, and cytology — evaluates for lymphocytic pleocytosis and excludes malignancy/infection",
-      "Serum and CSF ACE levels — supportive but neither sensitive nor specific",
-      "Chest CT and/or whole-body FDG-PET — identifies occult systemic (especially thoracic) granulomatous disease for biopsy targeting",
-      "Tissue biopsy of an accessible extraneural site (lymph node, skin, lacrimal gland) — establishes histologic diagnosis of non-caseating granulomas",
-      "Pituitary hormone panel — screens for hypothalamic-pituitary axis dysfunction when relevant symptoms present",
-      "Ophthalmologic slit-lamp exam — detects concurrent uveitis supporting systemic sarcoidosis",
-      "Infectious workup (AFB stain/culture, fungal antigen, treponemal serology) on CSF — excludes key infectious mimics before immunosuppression"
-    ],
-    "redFlags": [
-      "Rapidly progressive myelopathy or brainstem signs suggesting need for urgent imaging and treatment",
-      "Hydrocephalus or signs of raised intracranial pressure from basilar meningeal involvement",
-      "Unexplained diabetes insipidus or panhypopituitarism in a patient with known or suspected sarcoidosis",
-      "New seizures or mass-like parenchymal lesions requiring exclusion of malignancy or infection before immunosuppressive therapy",
-      "Optic neuropathy, which can threaten vision and warrants prompt treatment"
-    ],
-    "pitfalls": [
-      "Starting empiric immunosuppression before adequately excluding infectious mimics (especially TB and fungal disease) can worsen unrecognized infection",
-      "Relying solely on elevated CSF or serum ACE for diagnosis, as this is neither sensitive nor specific",
-      "Assuming a favorable steroid response confirms sarcoidosis, since infections and other inflammatory conditions may also improve transiently",
-      "Overlooking neurosarcoidosis in a patient without known systemic sarcoidosis, since isolated CNS presentation occurs in a meaningful subset of cases"
-    ],
-    "prognosis": "Course is variable — many patients respond to immunosuppressive therapy with partial or complete resolution, but a subset experience chronic, relapsing, or progressive disease, particularly with parenchymal brain or spinal cord involvement, which carries a worse functional outcome.",
-    "references": [
-      "Harrison's Principles of Internal Medicine, 22e — Sarcoidosis chapter (Nervous System Involvement)"
-    ],
-    "crossLinks": [
-      "sarcoidosis"
-    ],
-    "management": [
-      "Induce remission with systemic corticosteroids, the first-line therapy for active neurosarcoidosis",
-      "Add a steroid-sparing immunosuppressant such as methotrexate, azathioprine or mycophenolate for prolonged control and to limit corticosteroid toxicity",
-      "Escalate refractory or severe parenchymal or spinal-cord disease to a TNF-alpha inhibitor such as infliximab",
-      "Replace deficient hormones for hypothalamic-pituitary involvement, using desmopressin for cranial diabetes insipidus and other pituitary hormone replacement, and control symptomatic seizures with antiepileptic drugs",
-      "Divert cerebrospinal fluid with a shunt for symptomatic hydrocephalus",
-      "Monitor disease activity and treatment response with serial neuroimaging and screen for corticosteroid and immunosuppressant complications",
-      "Manage within a multidisciplinary team spanning neurology, respiratory or sarcoidosis specialists, endocrinology and neurosurgery"
-    ]
+  "pathophysiology": "Neurosarcoidosis results from non-caseating granulomatous inflammation infiltrating the meninges, cranial nerves, hypothalamic-pituitary axis, brain parenchyma, or spinal cord. The granulomas provoke a perivascular and leptomeningeal inflammatory response that can cause direct compressive or infiltrative neurologic deficits, hydrocephalus from impaired CSF flow, or vasculopathy. Because it is part of a systemic multisystem granulomatous disease, isolated CNS presentations without other organ involvement are diagnostically challenging.",
+  "additionalDifferentials": [
+   "Tuberculous meningitis",
+   "Fungal meningitis (cryptococcal, coccidioidal)",
+   "CNS lymphoma",
+   "Multiple sclerosis / other demyelinating disease",
+   "CNS vasculitis",
+   "Lymphomatoid granulomatosis or other granulomatous CNS disorders"
+  ],
+  "infectionMimics": [
+   "Tuberculous meningitis",
+   "Cryptococcal meningitis",
+   "Neurosyphilis",
+   "Lyme neuroborreliosis"
+  ],
+  "nonInfectiousMimics": [
+   "Multiple sclerosis",
+   "CNS lymphoma",
+   "Primary CNS vasculitis",
+   "IgG4-related disease",
+   "Idiopathic hypertrophic pachymeningitis"
+  ],
+  "additionalInvestigations": [
+   "Brain and spine MRI with gadolinium — assesses leptomeningeal enhancement, parenchymal lesions, and cord involvement",
+   "CSF analysis with cell count, protein, glucose, ACE, and cytology — evaluates for lymphocytic pleocytosis and excludes malignancy/infection",
+   "Serum and CSF ACE levels — supportive but neither sensitive nor specific",
+   "Chest CT and/or whole-body FDG-PET — identifies occult systemic (especially thoracic) granulomatous disease for biopsy targeting",
+   "Tissue biopsy of an accessible extraneural site (lymph node, skin, lacrimal gland) — establishes histologic diagnosis of non-caseating granulomas",
+   "Pituitary hormone panel — screens for hypothalamic-pituitary axis dysfunction when relevant symptoms present",
+   "Ophthalmologic slit-lamp exam — detects concurrent uveitis supporting systemic sarcoidosis",
+   "Infectious workup (AFB stain/culture, fungal antigen, treponemal serology) on CSF — excludes key infectious mimics before immunosuppression"
+  ],
+  "redFlags": [
+   "Rapidly progressive myelopathy or brainstem signs suggesting need for urgent imaging and treatment",
+   "Hydrocephalus or signs of raised intracranial pressure from basilar meningeal involvement",
+   "Unexplained diabetes insipidus or panhypopituitarism in a patient with known or suspected sarcoidosis",
+   "New seizures or mass-like parenchymal lesions requiring exclusion of malignancy or infection before immunosuppressive therapy",
+   "Optic neuropathy, which can threaten vision and warrants prompt treatment"
+  ],
+  "pitfalls": [
+   "Starting empiric immunosuppression before adequately excluding infectious mimics (especially TB and fungal disease) can worsen unrecognized infection",
+   "Relying solely on elevated CSF or serum ACE for diagnosis, as this is neither sensitive nor specific",
+   "Assuming a favorable steroid response confirms sarcoidosis, since infections and other inflammatory conditions may also improve transiently",
+   "Overlooking neurosarcoidosis in a patient without known systemic sarcoidosis, since isolated CNS presentation occurs in a meaningful subset of cases"
+  ],
+  "prognosis": "Course is variable — many patients respond to immunosuppressive therapy with partial or complete resolution, but a subset experience chronic, relapsing, or progressive disease, particularly with parenchymal brain or spinal cord involvement, which carries a worse functional outcome.",
+  "references": [
+   "Harrison's Principles of Internal Medicine, 22e — Sarcoidosis chapter (Nervous System Involvement)"
+  ],
+  "crossLinks": [
+   "sarcoidosis"
+  ],
+  "management": [
+   "Induce remission with systemic corticosteroids, the first-line therapy for active neurosarcoidosis",
+   "Add a steroid-sparing immunosuppressant such as methotrexate, azathioprine or mycophenolate for prolonged control and to limit corticosteroid toxicity",
+   "Escalate refractory or severe parenchymal or spinal-cord disease to a TNF-alpha inhibitor such as infliximab",
+   "Replace deficient hormones for hypothalamic-pituitary involvement, using desmopressin for cranial diabetes insipidus and other pituitary hormone replacement, and control symptomatic seizures with antiepileptic drugs",
+   "Divert cerebrospinal fluid with a shunt for symptomatic hydrocephalus",
+   "Monitor disease activity and treatment response with serial neuroimaging and screen for corticosteroid and immunosuppressant complications",
+   "Manage within a multidisciplinary team spanning neurology, respiratory or sarcoidosis specialists, endocrinology and neurosurgery"
+  ]
+ },
+ "algorithms": [
+  {
+   "id": "sarcoid_neuro-pathway",
+   "title": "Neurosarcoidosis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Symptomatic nervous-system involvement occurs in roughly 5-10% of sarcoidosis patients, though subclinical granulomas are more common at autopsy",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapidly progressive myelopathy or brainstem signs suggesting need for urgent imaging and treatment",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Brain and spine MRI with gadolinium - assesses leptomeningeal enhancement, parenchymal lesions, and cord involvement, CSF analysis with cell count, protein, glucose, ACE, and cytology - evaluates for lymphocytic"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Induce remission with systemic corticosteroids, the first-line therapy for active neurosarcoidosis"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Starting empiric immunosuppression before adequately excluding infectious mimics (especially TB and fungal disease) can worsen unrecognized infection"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of neurosarcoidosis."
   }
+ ],
+ "tables": [
+  {
+   "id": "sarcoid_neuro-matrix",
+   "title": "Neurosarcoidosis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Symptomatic nervous-system involvement occurs in roughly 5-10% of sarcoidosis patients, though subclinical granulomas are more",
+     "Cardinal clinical findings"
+    ],
+    [
+     "Key Investigations",
+     "Brain and spine MRI with gadolinium - assesses leptomeningeal enhancement, parenchymal lesions, and cord involvement, CSF",
+     "Confirmatory diagnostic workup"
+    ],
+    [
+     "Primary Differentials",
+     "Tuberculous meningitis, Fungal meningitis (cryptococcal, coccidioidal), CNS lymphoma",
+     "Rule out key mimics"
+    ],
+    [
+     "Management Strategy",
+     "Induce remission with systemic corticosteroids, the first-line therapy for active neurosarcoidosis",
+     "Core treatment modality"
+    ],
+    [
+     "Clinical Pitfall",
+     "Starting empiric immunosuppression before adequately excluding infectious mimics (especially TB and fungal disease) can worsen",
+     "Prevent diagnostic or management error"
+    ]
+   ],
+   "caption": "Overview comparison matrix for neurosarcoidosis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "sarcoid-neuro-real-image",
+   "title": "Neurosarcoidosis: Diagnostic Head Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
+   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
+   "annotations": [
+    {
+     "label": "Cerebral Parenchyma",
+     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+    },
+    {
+     "label": "Extra-Axial Spaces",
+     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+    }
+   ]
+  }
+ ]
 }

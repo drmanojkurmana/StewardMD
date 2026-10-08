@@ -1,77 +1,172 @@
 {
-  "id": "keratosis_follicularis_spinulosa_decalvans",
-  "name": "Keratosis follicularis spinulosa decalvans",
-  "aliases": [
-    "KFSD",
-    "Siemens-1 syndrome",
-    "MBTPS2"
+ "id": "keratosis_follicularis_spinulosa_decalvans",
+ "name": "Keratosis follicularis spinulosa decalvans",
+ "aliases": [
+  "KFSD",
+  "Siemens-1 syndrome",
+  "MBTPS2"
+ ],
+ "class": "non_infective",
+ "system": "Dermatology / Genetics",
+ "specialty": "Dermatology / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Rook's Textbook of Dermatology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A rare disorder of follicular keratinisation causing widespread spiny follicular papules with progressive scarring alopecia of the scalp, eyebrows and eyelashes",
+   "The classic X-linked form is caused by variants in MBTPS2, the same gene implicated in IFAP syndrome, giving considerable clinical overlap",
+   "Facial follicular keratoses often appear in infancy, followed by cicatricial loss of eyebrows, lashes and scalp hair",
+   "Photophobia and corneal changes can occur, echoing the ocular involvement of IFAP syndrome",
+   "Palmoplantar keratoderma and nail changes are reported in some patients",
+   "Diagnosis is clinical, supported by biopsy showing follicular hyperkeratosis and perifollicular inflammation with later scarring, and by MBTPS2 molecular testing",
+   "Management is supportive with keratolytics and emollients, treatment of secondary inflammation and infection, and ophthalmology input for ocular involvement"
   ],
-  "class": "non_infective",
-  "system": "Dermatology / Genetics",
-  "specialty": "Dermatology / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Rook's Textbook of Dermatology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A rare disorder of follicular keratinisation causing widespread spiny follicular papules with progressive scarring alopecia of the scalp, eyebrows and eyelashes",
-      "The classic X-linked form is caused by variants in MBTPS2, the same gene implicated in IFAP syndrome, giving considerable clinical overlap",
-      "Facial follicular keratoses often appear in infancy, followed by cicatricial loss of eyebrows, lashes and scalp hair",
-      "Photophobia and corneal changes can occur, echoing the ocular involvement of IFAP syndrome",
-      "Palmoplantar keratoderma and nail changes are reported in some patients",
-      "Diagnosis is clinical, supported by biopsy showing follicular hyperkeratosis and perifollicular inflammation with later scarring, and by MBTPS2 molecular testing",
-      "Management is supportive with keratolytics and emollients, treatment of secondary inflammation and infection, and ophthalmology input for ocular involvement"
+  "pathophysiology": "Keratosis follicularis spinulosa decalvans is usually caused by variants in MBTPS2, encoding a membrane-bound zinc metalloprotease required for regulated intramembrane proteolysis governing sterol and lipid homeostasis and the endoplasmic reticulum stress response. Disturbed function impairs follicular keratinisation, producing spiny follicular plugs, while chronic perifollicular inflammation gradually destroys hair follicles to give a scarring (cicatricial) alopecia. Because the same gene underlies IFAP syndrome, the two conditions represent an allelic spectrum with overlapping cutaneous and ocular features.",
+  "additionalDifferentials": [
+   "IFAP syndrome",
+   "Keratosis pilaris atrophicans faciei (Ulerythema ophryogenes)",
+   "Lichen spinulosus",
+   "Folliculitis decalvans",
+   "Ichthyosis follicularis of other cause",
+   "Graham-Little-Piccardi-Lassueur syndrome"
+  ],
+  "additionalInvestigations": [
+   "Molecular genetic testing of MBTPS2",
+   "Skin/scalp biopsy showing follicular hyperkeratosis, perifollicular inflammation and later fibrosis",
+   "Ophthalmological assessment including slit-lamp examination for corneal changes",
+   "Trichoscopy of the scarring alopecia",
+   "Bacterial swabs where secondary infection is suspected",
+   "Family history and pedigree analysis"
+  ],
+  "redFlags": [
+   "Progressive corneal disease threatening vision",
+   "Extensive rapidly progressive scarring alopecia",
+   "Recurrent secondary infection of inflamed follicular lesions",
+   "Features suggesting the broader IFAP phenotype"
+  ],
+  "prognosis": "The follicular keratoses may improve after puberty, but the associated scarring alopecia is permanent; visual prognosis depends on the extent of corneal involvement.",
+  "pitfalls": [
+   "Not recognising the shared MBTPS2 basis and overlap with IFAP syndrome",
+   "Mistaking early disease for ordinary keratosis pilaris and missing the scarring alopecia",
+   "Neglecting ophthalmological surveillance for corneal disease",
+   "Delaying anti-inflammatory measures that might limit follicular scarring"
+  ],
+  "references": [
+   "Rook's Textbook of Dermatology",
+   "Harper's Textbook of Paediatric Dermatology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Emollients and keratolytics such as urea- or salicylic-acid-based preparations to soften the spiny follicular keratoses",
+   "Topical or systemic retinoids for widespread follicular hyperkeratosis, with variable benefit",
+   "Anti-inflammatory and antibacterial treatment of perifollicular inflammation and secondary infection to limit follicular destruction",
+   "Ophthalmological management of photophobia and corneal changes",
+   "Camouflage, wigs or eyebrow reconstruction for the permanent scarring alopecia, which does not regrow",
+   "Clinical genetics referral and counselling for this usually X-linked MBTPS2-related disorder with family assessment"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "keratosis_follicularis_spinulosa_decalvans-pathway",
+   "title": "Keratosis follicularis spinulosa decalvans: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A rare disorder of follicular keratinisation causing widespread spiny follicular papules with progressive scarring alopecia of the scalp, eyebrows and eyelashes",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Progressive corneal disease threatening vision",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Molecular genetic testing of MBTPS2, Skin/scalp biopsy showing follicular hyperkeratosis, perifollicular inflammation and later fibrosis, Ophthalmological assessment including slit-lamp examination for corneal changes"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Emollients and keratolytics such as urea- or salicylic-acid-based preparations to soften the spiny follicular keratoses"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Not recognising the shared MBTPS2 basis and overlap with IFAP syndrome"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of keratosis follicularis spinulosa decalvans."
+  }
+ ],
+ "tables": [
+  {
+   "id": "keratosis_follicularis_spinulosa_decalvans-matrix",
+   "title": "Keratosis follicularis spinulosa decalvans: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A rare disorder of follicular keratinisation causing widespread spiny follicular papules with progressive scarring alopecia of",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Keratosis follicularis spinulosa decalvans is usually caused by variants in MBTPS2, encoding a membrane-bound zinc metalloprotease required for regulated intramembrane proteolysis governing sterol and lipid homeostasis and the endoplasmic reticulum stress response. Disturbed function impairs follicular keratinisation, producing spiny follicular plugs, while chronic perifollicular inflammation gradually destroys hair follicles to give a scarring (cicatricial) alopecia. Because the same gene underlies IFAP syndrome, the two conditions represent an allelic spectrum with overlapping cutaneous and ocular features.",
-    "additionalDifferentials": [
-      "IFAP syndrome",
-      "Keratosis pilaris atrophicans faciei (Ulerythema ophryogenes)",
-      "Lichen spinulosus",
-      "Folliculitis decalvans",
-      "Ichthyosis follicularis of other cause",
-      "Graham-Little-Piccardi-Lassueur syndrome"
+    [
+     "Key Investigations",
+     "Molecular genetic testing of MBTPS2, Skin/scalp biopsy showing follicular hyperkeratosis, perifollicular inflammation and later",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Molecular genetic testing of MBTPS2",
-      "Skin/scalp biopsy showing follicular hyperkeratosis, perifollicular inflammation and later fibrosis",
-      "Ophthalmological assessment including slit-lamp examination for corneal changes",
-      "Trichoscopy of the scarring alopecia",
-      "Bacterial swabs where secondary infection is suspected",
-      "Family history and pedigree analysis"
+    [
+     "Primary Differentials",
+     "IFAP syndrome, Keratosis pilaris atrophicans faciei (Ulerythema ophryogenes), Lichen spinulosus",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Progressive corneal disease threatening vision",
-      "Extensive rapidly progressive scarring alopecia",
-      "Recurrent secondary infection of inflamed follicular lesions",
-      "Features suggesting the broader IFAP phenotype"
+    [
+     "Management Strategy",
+     "Emollients and keratolytics such as urea- or salicylic-acid-based preparations to soften the spiny follicular keratoses",
+     "Core treatment modality"
     ],
-    "prognosis": "The follicular keratoses may improve after puberty, but the associated scarring alopecia is permanent; visual prognosis depends on the extent of corneal involvement.",
-    "pitfalls": [
-      "Not recognising the shared MBTPS2 basis and overlap with IFAP syndrome",
-      "Mistaking early disease for ordinary keratosis pilaris and missing the scarring alopecia",
-      "Neglecting ophthalmological surveillance for corneal disease",
-      "Delaying anti-inflammatory measures that might limit follicular scarring"
-    ],
-    "references": [
-      "Rook's Textbook of Dermatology",
-      "Harper's Textbook of Paediatric Dermatology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Emollients and keratolytics such as urea- or salicylic-acid-based preparations to soften the spiny follicular keratoses",
-      "Topical or systemic retinoids for widespread follicular hyperkeratosis, with variable benefit",
-      "Anti-inflammatory and antibacterial treatment of perifollicular inflammation and secondary infection to limit follicular destruction",
-      "Ophthalmological management of photophobia and corneal changes",
-      "Camouflage, wigs or eyebrow reconstruction for the permanent scarring alopecia, which does not regrow",
-      "Clinical genetics referral and counselling for this usually X-linked MBTPS2-related disorder with family assessment"
+    [
+     "Clinical Pitfall",
+     "Not recognising the shared MBTPS2 basis and overlap with IFAP syndrome",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for keratosis follicularis spinulosa decalvans."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "keratosis-follicularis-spinulosa-decalvans-real-image",
+   "title": "Keratosis follicularis spinulosa decalvans: Clinical Cutaneous Dermatology Photograph",
+   "type": "diagram",
+   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
+   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
+   "annotations": [
+    {
+     "label": "Primary Lesions",
+     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
+    },
+    {
+     "label": "Demarcation & Margins",
+     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
+    },
+    {
+     "label": "Anatomical Distribution",
+     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+    }
+   ]
+  }
+ ]
 }

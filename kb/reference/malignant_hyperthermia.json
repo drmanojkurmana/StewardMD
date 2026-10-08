@@ -1,79 +1,174 @@
 {
-  "id": "malignant_hyperthermia",
-  "name": "Malignant hyperthermia",
-  "aliases": [
-    "MH",
-    "malignant hyperpyrexia",
-    "anaesthetic-induced hypermetabolic crisis"
+ "id": "malignant_hyperthermia",
+ "name": "Malignant hyperthermia",
+ "aliases": [
+  "MH",
+  "malignant hyperpyrexia",
+  "anaesthetic-induced hypermetabolic crisis"
+ ],
+ "class": "non_infective",
+ "system": "Anaesthesia / Perioperative",
+ "specialty": "Anaesthesiology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Miller's Anesthesia / standard perioperative references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A pharmacogenetic hypermetabolic crisis triggered by volatile anaesthetics and depolarising neuromuscular blockers in susceptible individuals",
+   "The earliest and most sensitive sign is an unexplained rise in end-tidal carbon dioxide despite increased ventilation, often with tachycardia and mixed acidosis",
+   "Masseter or generalised muscle rigidity, rapidly rising temperature, and dark urine from myoglobin are later features; hyperthermia is frequently a late rather than early sign",
+   "Immediate management is to stop triggering agents, call for help and the emergency supply of dantrolene, hyperventilate with high-flow oxygen, and switch to a non-triggering technique",
+   "Dantrolene is the specific antidote and should be given without delay and repeated until the hypermetabolic state resolves",
+   "Supportive care includes active cooling, treating hyperkalaemia and arrhythmias, correcting acidosis, and maintaining urine output to protect against myoglobinuric renal injury",
+   "Susceptibility is largely inherited (commonly RYR1 gene variants) and is linked to certain myopathies; a family or personal history should prompt a trigger-free anaesthetic",
+   "Confirmatory testing uses the in-vitro contracture (caffeine-halothane) test with genetic testing, and survivors should be counselled and referred to an MH unit"
   ],
-  "class": "non_infective",
-  "system": "Anaesthesia / Perioperative",
-  "specialty": "Anaesthesiology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Miller's Anesthesia / standard perioperative references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A pharmacogenetic hypermetabolic crisis triggered by volatile anaesthetics and depolarising neuromuscular blockers in susceptible individuals",
-      "The earliest and most sensitive sign is an unexplained rise in end-tidal carbon dioxide despite increased ventilation, often with tachycardia and mixed acidosis",
-      "Masseter or generalised muscle rigidity, rapidly rising temperature, and dark urine from myoglobin are later features; hyperthermia is frequently a late rather than early sign",
-      "Immediate management is to stop triggering agents, call for help and the emergency supply of dantrolene, hyperventilate with high-flow oxygen, and switch to a non-triggering technique",
-      "Dantrolene is the specific antidote and should be given without delay and repeated until the hypermetabolic state resolves",
-      "Supportive care includes active cooling, treating hyperkalaemia and arrhythmias, correcting acidosis, and maintaining urine output to protect against myoglobinuric renal injury",
-      "Susceptibility is largely inherited (commonly RYR1 gene variants) and is linked to certain myopathies; a family or personal history should prompt a trigger-free anaesthetic",
-      "Confirmatory testing uses the in-vitro contracture (caffeine-halothane) test with genetic testing, and survivors should be counselled and referred to an MH unit"
+  "pathophysiology": "Malignant hyperthermia results from abnormal regulation of skeletal muscle calcium, most often due to mutations affecting the ryanodine receptor (RYR1) that controls calcium release from the sarcoplasmic reticulum. On exposure to volatile agents or succinylcholine, uncontrolled calcium release produces sustained muscle contraction and a massive increase in aerobic and anaerobic metabolism. This drives rapid carbon dioxide and heat generation, oxygen consumption, lactic acidosis, ATP depletion, and eventually muscle breakdown with hyperkalaemia, myoglobinaemia, and rhabdomyolysis. Dantrolene reduces calcium release from the sarcoplasmic reticulum and interrupts the cycle.",
+  "additionalDifferentials": [
+   "Inadequate anaesthesia or analgesia with sympathetic response",
+   "Sepsis or systemic inflammatory response",
+   "Thyroid storm or phaeochromocytoma crisis",
+   "Neuroleptic malignant syndrome or serotonin syndrome",
+   "Equipment-related rebreathing or exhausted carbon dioxide absorbent",
+   "Environmental or iatrogenic hyperthermia"
+  ],
+  "additionalInvestigations": [
+   "Continuous capnography and core temperature monitoring to detect the crisis early",
+   "Arterial blood gas showing combined respiratory and metabolic acidosis",
+   "Serial potassium, creatine kinase, and myoglobin to track rhabdomyolysis",
+   "Coagulation studies to detect disseminated intravascular coagulation",
+   "Later in-vitro contracture testing and RYR1 genetic analysis for confirmation"
+  ],
+  "redFlags": [
+   "Rapidly rising end-tidal carbon dioxide with tachycardia and rigidity indicating an evolving MH crisis",
+   "Severe hyperthermia with mixed acidosis and hyperkalaemia threatening arrhythmia and arrest",
+   "Cardiac arrhythmia or arrest during or after a triggering anaesthetic",
+   "Dark urine and rising creatine kinase signalling rhabdomyolysis and renal risk"
+  ],
+  "prognosis": "Mortality has fallen dramatically with early recognition and prompt dantrolene, but delayed treatment can lead to disseminated intravascular coagulation, renal failure, and death; survivors and relatives require testing and lifelong trigger avoidance.",
+  "pitfalls": [
+   "Attributing rising carbon dioxide or tachycardia to light anaesthesia and delaying diagnosis",
+   "Failing to have dantrolene immediately available or delaying its administration",
+   "Confusing an isolated masseter spasm with a full crisis or, conversely, dismissing it entirely",
+   "Neglecting active cooling and management of hyperkalaemia and myoglobinuria",
+   "Not counselling the patient and family or arranging specialist referral after recovery"
+  ],
+  "references": [
+   "Miller's Anesthesia"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Immediately discontinue all volatile anaesthetics and succinylcholine, call for help and the emergency dantrolene supply, and convert to a trigger-free anaesthetic technique",
+   "Administer intravenous dantrolene without delay, repeating until the hypermetabolic state resolves",
+   "Hyperventilate with high-flow oxygen and remove or flush the volatile agent from the breathing circuit",
+   "Institute active cooling while avoiding overcooling",
+   "Treat hyperkalaemia with insulin and dextrose, calcium and other measures, and manage arrhythmias, avoiding calcium channel blockers alongside dantrolene",
+   "Correct metabolic acidosis and maintain a brisk urine output with fluids to protect against myoglobinuric renal injury",
+   "Admit to critical care for continued monitoring, watching for disseminated intravascular coagulation and recrudescence",
+   "Refer the patient and relatives for RYR1 genetic and in-vitro contracture testing, document the reaction and counsel on lifelong trigger avoidance"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "malignant_hyperthermia-pathway",
+   "title": "Malignant hyperthermia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A pharmacogenetic hypermetabolic crisis triggered by volatile anaesthetics and depolarising neuromuscular blockers in susceptible individuals",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapidly rising end-tidal carbon dioxide with tachycardia and rigidity indicating an evolving MH crisis",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Continuous capnography and core temperature monitoring to detect the crisis early, Arterial blood gas showing combined respiratory and metabolic acidosis, Serial potassium, creatine kinase, and myoglobin to track"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Immediately discontinue all volatile anaesthetics and succinylcholine, call for help and the emergency dantrolene supply, and convert to a trigger-free anaesthetic technique"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing rising carbon dioxide or tachycardia to light anaesthesia and delaying diagnosis"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of malignant hyperthermia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "malignant_hyperthermia-matrix",
+   "title": "Malignant hyperthermia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A pharmacogenetic hypermetabolic crisis triggered by volatile anaesthetics and depolarising neuromuscular blockers in susceptible",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Malignant hyperthermia results from abnormal regulation of skeletal muscle calcium, most often due to mutations affecting the ryanodine receptor (RYR1) that controls calcium release from the sarcoplasmic reticulum. On exposure to volatile agents or succinylcholine, uncontrolled calcium release produces sustained muscle contraction and a massive increase in aerobic and anaerobic metabolism. This drives rapid carbon dioxide and heat generation, oxygen consumption, lactic acidosis, ATP depletion, and eventually muscle breakdown with hyperkalaemia, myoglobinaemia, and rhabdomyolysis. Dantrolene reduces calcium release from the sarcoplasmic reticulum and interrupts the cycle.",
-    "additionalDifferentials": [
-      "Inadequate anaesthesia or analgesia with sympathetic response",
-      "Sepsis or systemic inflammatory response",
-      "Thyroid storm or phaeochromocytoma crisis",
-      "Neuroleptic malignant syndrome or serotonin syndrome",
-      "Equipment-related rebreathing or exhausted carbon dioxide absorbent",
-      "Environmental or iatrogenic hyperthermia"
+    [
+     "Key Investigations",
+     "Continuous capnography and core temperature monitoring to detect the crisis early, Arterial blood gas showing combined",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Continuous capnography and core temperature monitoring to detect the crisis early",
-      "Arterial blood gas showing combined respiratory and metabolic acidosis",
-      "Serial potassium, creatine kinase, and myoglobin to track rhabdomyolysis",
-      "Coagulation studies to detect disseminated intravascular coagulation",
-      "Later in-vitro contracture testing and RYR1 genetic analysis for confirmation"
+    [
+     "Primary Differentials",
+     "Inadequate anaesthesia or analgesia with sympathetic response, Sepsis or systemic inflammatory response, Thyroid storm or",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rapidly rising end-tidal carbon dioxide with tachycardia and rigidity indicating an evolving MH crisis",
-      "Severe hyperthermia with mixed acidosis and hyperkalaemia threatening arrhythmia and arrest",
-      "Cardiac arrhythmia or arrest during or after a triggering anaesthetic",
-      "Dark urine and rising creatine kinase signalling rhabdomyolysis and renal risk"
+    [
+     "Management Strategy",
+     "Immediately discontinue all volatile anaesthetics and succinylcholine, call for help and the emergency dantrolene supply, and",
+     "Core treatment modality"
     ],
-    "prognosis": "Mortality has fallen dramatically with early recognition and prompt dantrolene, but delayed treatment can lead to disseminated intravascular coagulation, renal failure, and death; survivors and relatives require testing and lifelong trigger avoidance.",
-    "pitfalls": [
-      "Attributing rising carbon dioxide or tachycardia to light anaesthesia and delaying diagnosis",
-      "Failing to have dantrolene immediately available or delaying its administration",
-      "Confusing an isolated masseter spasm with a full crisis or, conversely, dismissing it entirely",
-      "Neglecting active cooling and management of hyperkalaemia and myoglobinuria",
-      "Not counselling the patient and family or arranging specialist referral after recovery"
-    ],
-    "references": [
-      "Miller's Anesthesia"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Immediately discontinue all volatile anaesthetics and succinylcholine, call for help and the emergency dantrolene supply, and convert to a trigger-free anaesthetic technique",
-      "Administer intravenous dantrolene without delay, repeating until the hypermetabolic state resolves",
-      "Hyperventilate with high-flow oxygen and remove or flush the volatile agent from the breathing circuit",
-      "Institute active cooling while avoiding overcooling",
-      "Treat hyperkalaemia with insulin and dextrose, calcium and other measures, and manage arrhythmias, avoiding calcium channel blockers alongside dantrolene",
-      "Correct metabolic acidosis and maintain a brisk urine output with fluids to protect against myoglobinuric renal injury",
-      "Admit to critical care for continued monitoring, watching for disseminated intravascular coagulation and recrudescence",
-      "Refer the patient and relatives for RYR1 genetic and in-vitro contracture testing, document the reaction and counsel on lifelong trigger avoidance"
+    [
+     "Clinical Pitfall",
+     "Attributing rising carbon dioxide or tachycardia to light anaesthesia and delaying diagnosis",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for malignant hyperthermia."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "malignant-hyperthermia-real-image",
+   "title": "Malignant hyperthermia: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

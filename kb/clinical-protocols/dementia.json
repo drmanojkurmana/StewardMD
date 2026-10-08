@@ -145,5 +145,100 @@
  "review": {
   "status": "ai_drafted",
   "compiled": "2026-09-25"
- }
+ },
+ "algorithms": [
+  {
+   "id": "dementia-pathway",
+   "title": "Dementia: assessment and management Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Suspect dementia with progressive decline in memory or other cognitive domains that affects daily function. Take a history from the person and from someone who knows them well (IQCODE or FAQ can help).",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Use a validated brief cognitive test (for example Mini-Cog, 6CIT, Memory Impairment Screen, 10-point cognitive screener); a normal score does not rule out dementia.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Bloods: CBC, renal and liver function, calcium, glucose or HbA1c, thyroid function, vitamin B12 and folate; syphilis and HIV serology if there are risk factors."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "First do a structured assessment for causes: pain, delirium, infection, constipation, urinary retention, hunger or thirst, sensory loss, the environment or the way care is given. Use personalised activities and psychosocial measures first."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Give a named care coordinator, information and carer support. Discuss driving (inform the licensing authority), work, finances and legal planning (for example power of attorney) early."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for dementia: assessment and management."
+  }
+ ],
+ "tables": [
+  {
+   "id": "dementia-summary-matrix",
+   "title": "Dementia: assessment and management Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Suspect dementia with progressive decline in memory or other cognitive domains that affects daily function. Take a history from the person",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "First do a structured assessment for causes: pain, delirium, infection, constipation, urinary retention, hunger or thirst, sensory loss,",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Bloods: CBC, renal and liver function, calcium, glucose or HbA1c, thyroid function, vitamin B12 and folate; syphilis and HIV serology if",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Donepezil: 5 mg orally once daily at night for at least 1 month, then 10 mg once daily if tolerated (max 10 mg)",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Diagnosing dementia during delirium or untreated depression.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for dementia: assessment and management."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "dementia-real-image",
+   "title": "Dementia: assessment and management: Diagnostic Head Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
+   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
+   "annotations": [
+    {
+     "label": "Cerebral Parenchyma",
+     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+    },
+    {
+     "label": "Extra-Axial Spaces",
+     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+    }
+   ]
+  }
+ ]
 }

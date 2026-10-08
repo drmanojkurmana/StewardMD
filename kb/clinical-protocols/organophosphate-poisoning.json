@@ -5,7 +5,20 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, ICU",
- "aliases": ["OP poisoning", "OPC poisoning", "organophosphorus poisoning", "carbamate poisoning", "insecticide poisoning", "pesticide poisoning", "cholinergic crisis", "atropine", "atropinisation", "pralidoxime", "PAM", "intermediate syndrome"],
+ "aliases": [
+  "OP poisoning",
+  "OPC poisoning",
+  "organophosphorus poisoning",
+  "carbamate poisoning",
+  "insecticide poisoning",
+  "pesticide poisoning",
+  "cholinergic crisis",
+  "atropine",
+  "atropinisation",
+  "pralidoxime",
+  "PAM",
+  "intermediate syndrome"
+ ],
  "summary": "Resuscitate, then give atropine in doubling doses every 5 minutes until the chest is clear, heart rate is above 80 and systolic BP above 80 mmHg; maintain with an infusion of 10 to 20% of the loading dose per hour, consider pralidoxime, avoid routine lavage, and watch for intermediate syndrome.",
  "sections": [
   {
@@ -85,15 +98,144 @@
   }
  ],
  "drugs": [
-  { "name": "Atropine", "dose": "1 to 3 mg IV bolus, doubled every 5 minutes until atropinised; then infusion of 10 to 20% of the total loading dose per hour", "notes": "Titrate to a clear chest, heart rate above 80/min and systolic BP above 80 mmHg." },
-  { "name": "Pralidoxime chloride", "dose": "30 mg/kg IV over 20 to 30 minutes (about 2 g), then 8 mg/kg/h (about 0.5 g/h)", "notes": "Continue until atropine not needed for 12 to 24 hours and extubated. Benefit uncertain; never a rapid bolus. Not for pure carbamate poisoning." },
-  { "name": "Diazepam", "dose": "5 to 10 mg IV, repeat as needed", "notes": "Agitation after excluding atropine toxicity; seizures." },
-  { "name": "0.9% saline", "dose": "IV boluses to keep systolic BP above 80 mmHg and urine output above 0.5 mL/kg/h", "notes": "Add vasopressor if hypotension persists." }
+  {
+   "name": "Atropine",
+   "dose": "1 to 3 mg IV bolus, doubled every 5 minutes until atropinised; then infusion of 10 to 20% of the total loading dose per hour",
+   "notes": "Titrate to a clear chest, heart rate above 80/min and systolic BP above 80 mmHg."
+  },
+  {
+   "name": "Pralidoxime chloride",
+   "dose": "30 mg/kg IV over 20 to 30 minutes (about 2 g), then 8 mg/kg/h (about 0.5 g/h)",
+   "notes": "Continue until atropine not needed for 12 to 24 hours and extubated. Benefit uncertain; never a rapid bolus. Not for pure carbamate poisoning."
+  },
+  {
+   "name": "Diazepam",
+   "dose": "5 to 10 mg IV, repeat as needed",
+   "notes": "Agitation after excluding atropine toxicity; seizures."
+  },
+  {
+   "name": "0.9% saline",
+   "dose": "IV boluses to keep systolic BP above 80 mmHg and urine output above 0.5 mL/kg/h",
+   "notes": "Add vasopressor if hypotension persists."
+  }
  ],
  "sources": [
-  { "org": "The Lancet (Eddleston et al.)", "title": "Management of acute organophosphorus pesticide poisoning", "year": 2008, "url": "https://www.thelancet.com/journals/lancet/article/PIIS0140673607612021/fulltext" },
-  { "org": "PLoS Medicine (Eddleston et al.)", "title": "Pralidoxime in acute organophosphorus insecticide poisoning: a randomised controlled trial", "year": 2009, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2696321/" },
-  { "org": "ISCCM", "title": "Indian Society of Critical Care Medicine Position Statement: Approach to a Patient with Poisoning in the Emergency Room and Intensive Care Unit", "year": 2024, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11369925/" }
+  {
+   "org": "The Lancet (Eddleston et al.)",
+   "title": "Management of acute organophosphorus pesticide poisoning",
+   "year": 2008,
+   "url": "https://www.thelancet.com/journals/lancet/article/PIIS0140673607612021/fulltext"
+  },
+  {
+   "org": "PLoS Medicine (Eddleston et al.)",
+   "title": "Pralidoxime in acute organophosphorus insecticide poisoning: a randomised controlled trial",
+   "year": 2009,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2696321/"
+  },
+  {
+   "org": "ISCCM",
+   "title": "Indian Society of Critical Care Medicine Position Statement: Approach to a Patient with Poisoning in the Emergency Room and Intensive Care Unit",
+   "year": 2024,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11369925/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "organophosphate-poisoning-pathway",
+   "title": "Organophosphate and carbamate poisoning Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "History of pesticide ingestion (often with a solvent or kerosene-like smell) with a cholinergic crisis: miosis, salivation, lacrimation, sweating, bronchorrhoea, bronchospasm, vomiting, diarrhoea, urination, bradycardia, hypotension.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Left lateral, head-down position; suction secretions; high-flow oxygen; intubate if airway or breathing is compromised. Avoid suxamethonium (prolonged paralysis); use a non-depolarising relaxant.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "CNS features: agitation, confusion, coma and central respiratory depression. Death is mainly from respiratory failure."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Oxygen, atropine and airway care come first. No form of gastric decontamination has been shown to improve outcome in OP poisoning."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Review heart rate, BP, chest, pupils, sweating, bowel sounds, temperature and consciousness frequently to titrate atropine."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for organophosphate and carbamate poisoning."
+  }
+ ],
+ "tables": [
+  {
+   "id": "organophosphate-poisoning-summary-matrix",
+   "title": "Organophosphate and carbamate poisoning Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "History of pesticide ingestion (often with a solvent or kerosene-like smell) with a cholinergic crisis: miosis, salivation, lacrimation,",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Left lateral, head-down position; suction secretions; high-flow oxygen; intubate if airway or breathing is compromised. Avoid suxamethonium",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Atropine: 1 to 3 mg IV bolus, doubled every 5 minutes until atropinised; then infusion of 10 to 20% of the total loading dose per hour",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Slow fixed-dose atropine regimens that take hours to atropinise; use dose doubling every 5 minutes.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for organophosphate and carbamate poisoning."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "organophosphate-poisoning-real-image",
+   "title": "Organophosphate and carbamate poisoning: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

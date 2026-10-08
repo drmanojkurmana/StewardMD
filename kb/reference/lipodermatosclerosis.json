@@ -1,78 +1,173 @@
 {
-  "id": "lipodermatosclerosis",
-  "name": "Lipodermatosclerosis (sclerosing panniculitis)",
-  "aliases": [
-    "sclerosing panniculitis",
-    "hypodermitis sclerodermiformis",
-    "chronic panniculitis with lipomembranous change"
+ "id": "lipodermatosclerosis",
+ "name": "Lipodermatosclerosis (sclerosing panniculitis)",
+ "aliases": [
+  "sclerosing panniculitis",
+  "hypodermitis sclerodermiformis",
+  "chronic panniculitis with lipomembranous change"
+ ],
+ "class": "non_infective",
+ "system": "Dermatology",
+ "specialty": "Dermatology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Rook's Textbook of Dermatology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Presents on the lower legs of middle-aged and older adults, especially women, as induration, erythema, hyperpigmentation and tenderness above the medial malleolus",
+   "Chronic disease produces the characteristic 'inverted champagne bottle' or 'bowling pin' leg, with a hard, constricted gaiter area and swelling above",
+   "It is a manifestation of chronic venous insufficiency and venous hypertension, often with associated varicosities, oedema and venous ulceration",
+   "The acute phase can mimic cellulitis with a hot, red, painful leg, but it is usually bilateral or recurrent and afebrile",
+   "Biopsy, when needed, shows a mostly lobular panniculitis with fat necrosis, septal fibrosis and lipomembranous (membranocystic) change",
+   "Duplex ultrasound helps confirm underlying venous reflux",
+   "Compression therapy is the cornerstone of treatment, alongside leg elevation, exercise and management of venous disease"
   ],
-  "class": "non_infective",
-  "system": "Dermatology",
-  "specialty": "Dermatology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Rook's Textbook of Dermatology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Presents on the lower legs of middle-aged and older adults, especially women, as induration, erythema, hyperpigmentation and tenderness above the medial malleolus",
-      "Chronic disease produces the characteristic 'inverted champagne bottle' or 'bowling pin' leg, with a hard, constricted gaiter area and swelling above",
-      "It is a manifestation of chronic venous insufficiency and venous hypertension, often with associated varicosities, oedema and venous ulceration",
-      "The acute phase can mimic cellulitis with a hot, red, painful leg, but it is usually bilateral or recurrent and afebrile",
-      "Biopsy, when needed, shows a mostly lobular panniculitis with fat necrosis, septal fibrosis and lipomembranous (membranocystic) change",
-      "Duplex ultrasound helps confirm underlying venous reflux",
-      "Compression therapy is the cornerstone of treatment, alongside leg elevation, exercise and management of venous disease"
+  "pathophysiology": "Lipodermatosclerosis is a sclerosing panniculitis driven by chronic venous insufficiency. Sustained venous hypertension leads to capillary proliferation, leakage of fibrinogen and red cells into the dermis, and localised tissue ischaemia and hypoxia. Fibrin cuffs around capillaries, activation of leucocytes and release of proteolytic and profibrotic mediators cause progressive fat necrosis followed by fibrosis of the subcutis and dermis. Over time the affected lower leg becomes woody and constricted, and the compromised skin is prone to ulceration.",
+  "additionalDifferentials": [
+   "Cellulitis / erysipelas",
+   "Erythema nodosum",
+   "Morphoea (localised scleroderma)",
+   "Necrobiosis lipoidica",
+   "Deep vein thrombosis",
+   "Stasis dermatitis without sclerosis"
+  ],
+  "additionalInvestigations": [
+   "Venous duplex ultrasound to assess reflux and exclude thrombosis",
+   "Ankle-brachial pressure index before applying compression",
+   "Skin biopsy only if the diagnosis is unclear, taken with care given poor healing",
+   "Inflammatory markers to help distinguish from cellulitis",
+   "Assessment of oedema and cardiac/renal contributors",
+   "Wound swab if an ulcer shows signs of infection"
+  ],
+  "redFlags": [
+   "Genuine superimposed cellulitis with fever and systemic upset",
+   "Coexisting deep vein thrombosis presenting as acute unilateral swelling",
+   "Significant peripheral arterial disease that contraindicates firm compression",
+   "Non-healing or atypical ulceration raising concern for malignancy"
+  ],
+  "prognosis": "The condition is chronic and progressive if venous hypertension is untreated, but consistent compression and management of venous disease can relieve pain, halt progression and reduce ulceration; established sclerosis and skin changes are only partially reversible.",
+  "pitfalls": [
+   "Repeatedly treating recurrent episodes as cellulitis with antibiotics rather than recognising venous disease",
+   "Applying compression without first excluding significant arterial insufficiency",
+   "Performing an unnecessary biopsy on a poorly healing leg",
+   "Overlooking a coexisting deep vein thrombosis in an acutely swollen leg"
+  ],
+  "references": [
+   "Rook's Textbook of Dermatology",
+   "Bolognia Dermatology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Graduated compression therapy is the mainstay, applied after the ankle-brachial pressure index has excluded significant arterial disease",
+   "Treat the underlying chronic venous insufficiency with leg elevation and duplex-guided venous intervention such as endovenous ablation for correctable reflux",
+   "Provide skin care and emollients, and manage any associated venous ulceration with appropriate dressings",
+   "Offer analgesia, and consider an anabolic agent such as stanozolol or pentoxifylline for the painful acute inflammatory phase, with appropriate monitoring",
+   "Encourage calf-muscle-pump activation through exercise and weight management to reduce venous hypertension",
+   "Distinguish the acute presentation from cellulitis, since it is usually bilateral, recurrent and afebrile, to avoid unnecessary antibiotics",
+   "Refer for specialist venous assessment where reflux or ulceration is not controlled by conservative measures"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "lipodermatosclerosis-pathway",
+   "title": "Lipodermatosclerosis (sclerosing panniculitis): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Presents on the lower legs of middle-aged and older adults, especially women, as induration, erythema, hyperpigmentation and tenderness above the medial malleolus",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Genuine superimposed cellulitis with fever and systemic upset",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Venous duplex ultrasound to assess reflux and exclude thrombosis, Ankle-brachial pressure index before applying compression, Skin biopsy only if the diagnosis is unclear, taken with care given poor healing"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Graduated compression therapy is the mainstay, applied after the ankle-brachial pressure index has excluded significant arterial disease"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Repeatedly treating recurrent episodes as cellulitis with antibiotics rather than recognising venous disease"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of lipodermatosclerosis (sclerosing panniculitis)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "lipodermatosclerosis-matrix",
+   "title": "Lipodermatosclerosis (sclerosing panniculitis): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Presents on the lower legs of middle-aged and older adults, especially women, as induration, erythema, hyperpigmentation and",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Lipodermatosclerosis is a sclerosing panniculitis driven by chronic venous insufficiency. Sustained venous hypertension leads to capillary proliferation, leakage of fibrinogen and red cells into the dermis, and localised tissue ischaemia and hypoxia. Fibrin cuffs around capillaries, activation of leucocytes and release of proteolytic and profibrotic mediators cause progressive fat necrosis followed by fibrosis of the subcutis and dermis. Over time the affected lower leg becomes woody and constricted, and the compromised skin is prone to ulceration.",
-    "additionalDifferentials": [
-      "Cellulitis / erysipelas",
-      "Erythema nodosum",
-      "Morphoea (localised scleroderma)",
-      "Necrobiosis lipoidica",
-      "Deep vein thrombosis",
-      "Stasis dermatitis without sclerosis"
+    [
+     "Key Investigations",
+     "Venous duplex ultrasound to assess reflux and exclude thrombosis, Ankle-brachial pressure index before applying compression, Skin",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Venous duplex ultrasound to assess reflux and exclude thrombosis",
-      "Ankle-brachial pressure index before applying compression",
-      "Skin biopsy only if the diagnosis is unclear, taken with care given poor healing",
-      "Inflammatory markers to help distinguish from cellulitis",
-      "Assessment of oedema and cardiac/renal contributors",
-      "Wound swab if an ulcer shows signs of infection"
+    [
+     "Primary Differentials",
+     "Cellulitis / erysipelas, Erythema nodosum, Morphoea (localised scleroderma)",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Genuine superimposed cellulitis with fever and systemic upset",
-      "Coexisting deep vein thrombosis presenting as acute unilateral swelling",
-      "Significant peripheral arterial disease that contraindicates firm compression",
-      "Non-healing or atypical ulceration raising concern for malignancy"
+    [
+     "Management Strategy",
+     "Graduated compression therapy is the mainstay, applied after the ankle-brachial pressure index has excluded significant arterial",
+     "Core treatment modality"
     ],
-    "prognosis": "The condition is chronic and progressive if venous hypertension is untreated, but consistent compression and management of venous disease can relieve pain, halt progression and reduce ulceration; established sclerosis and skin changes are only partially reversible.",
-    "pitfalls": [
-      "Repeatedly treating recurrent episodes as cellulitis with antibiotics rather than recognising venous disease",
-      "Applying compression without first excluding significant arterial insufficiency",
-      "Performing an unnecessary biopsy on a poorly healing leg",
-      "Overlooking a coexisting deep vein thrombosis in an acutely swollen leg"
-    ],
-    "references": [
-      "Rook's Textbook of Dermatology",
-      "Bolognia Dermatology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Graduated compression therapy is the mainstay, applied after the ankle-brachial pressure index has excluded significant arterial disease",
-      "Treat the underlying chronic venous insufficiency with leg elevation and duplex-guided venous intervention such as endovenous ablation for correctable reflux",
-      "Provide skin care and emollients, and manage any associated venous ulceration with appropriate dressings",
-      "Offer analgesia, and consider an anabolic agent such as stanozolol or pentoxifylline for the painful acute inflammatory phase, with appropriate monitoring",
-      "Encourage calf-muscle-pump activation through exercise and weight management to reduce venous hypertension",
-      "Distinguish the acute presentation from cellulitis, since it is usually bilateral, recurrent and afebrile, to avoid unnecessary antibiotics",
-      "Refer for specialist venous assessment where reflux or ulceration is not controlled by conservative measures"
+    [
+     "Clinical Pitfall",
+     "Repeatedly treating recurrent episodes as cellulitis with antibiotics rather than recognising venous disease",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for lipodermatosclerosis (sclerosing panniculitis)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "lipodermatosclerosis-real-image",
+   "title": "Lipodermatosclerosis (sclerosing panniculitis): Clinical Cutaneous Dermatology Photograph",
+   "type": "diagram",
+   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
+   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
+   "annotations": [
+    {
+     "label": "Primary Lesions",
+     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
+    },
+    {
+     "label": "Demarcation & Margins",
+     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
+    },
+    {
+     "label": "Anatomical Distribution",
+     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+    }
+   ]
+  }
+ ]
 }

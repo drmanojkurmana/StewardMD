@@ -1,74 +1,169 @@
 {
-  "id": "nevus_of_ito",
-  "name": "Naevus of Ito",
-  "aliases": [
-    "nevus of Ito",
-    "naevus fuscoceruleus acromiodeltoideus",
-    "acromiodeltoid dermal melanocytosis"
+ "id": "nevus_of_ito",
+ "name": "Naevus of Ito",
+ "aliases": [
+  "nevus of Ito",
+  "naevus fuscoceruleus acromiodeltoideus",
+  "acromiodeltoid dermal melanocytosis"
+ ],
+ "class": "non_infective",
+ "system": "Dermatology / Pigmentary",
+ "specialty": "Dermatology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Rook's Textbook of Dermatology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Blue-grey dermal melanocytic pigmentation over the shoulder, supraclavicular, scapular and deltoid region, following the posterior supraclavicular and lateral brachial cutaneous nerves",
+   "Analogous to naevus of Ota but affecting the shoulder girdle rather than the face, and without ocular involvement",
+   "May coexist with an ipsilateral naevus of Ota in the same individual",
+   "The pigment is dermal, so it shows no Wood-lamp accentuation and topical agents are ineffective",
+   "More common in Asian populations and in females",
+   "Pigment-specific laser is the mainstay of treatment where cosmetic improvement is desired",
+   "Malignant transformation is very rare but has been reported, so persistent change warrants review"
   ],
-  "class": "non_infective",
-  "system": "Dermatology / Pigmentary",
-  "specialty": "Dermatology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Rook's Textbook of Dermatology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Blue-grey dermal melanocytic pigmentation over the shoulder, supraclavicular, scapular and deltoid region, following the posterior supraclavicular and lateral brachial cutaneous nerves",
-      "Analogous to naevus of Ota but affecting the shoulder girdle rather than the face, and without ocular involvement",
-      "May coexist with an ipsilateral naevus of Ota in the same individual",
-      "The pigment is dermal, so it shows no Wood-lamp accentuation and topical agents are ineffective",
-      "More common in Asian populations and in females",
-      "Pigment-specific laser is the mainstay of treatment where cosmetic improvement is desired",
-      "Malignant transformation is very rare but has been reported, so persistent change warrants review"
+  "pathophysiology": "As in naevus of Ota, the lesion results from melanocytes of neural crest origin that fail to complete their migration to the epidermis and remain within the dermis. These dermal melanocytes produce melanin whose deep location scatters light to give the blue-grey colour. The distribution corresponds to the shoulder-girdle cutaneous nerves rather than the trigeminal territory.",
+  "additionalDifferentials": [
+   "Mongolian spot (congenital dermal melanocytosis)",
+   "Naevus of Ota",
+   "Blue naevus",
+   "Bruise or resolving haematoma",
+   "Post-inflammatory hyperpigmentation",
+   "Congenital melanocytic naevus"
+  ],
+  "additionalInvestigations": [
+   "Dermoscopy to confirm the dermal melanocytic pattern",
+   "Full skin examination to detect a coexisting naevus of Ota",
+   "Serial photography to monitor stability",
+   "Wood-lamp examination to confirm the pigment is dermal",
+   "Biopsy of any nodular or atypical area to exclude melanoma"
+  ],
+  "redFlags": [
+   "Development of a nodule or focal change suggesting melanoma",
+   "Rapid growth or ulceration within the lesion",
+   "New symptoms such as bleeding or persistent tenderness"
+  ],
+  "prognosis": "The lesion is benign and persists lifelong if untreated, with good cosmetic response to pigment-specific laser and only a very small risk of malignant change.",
+  "pitfalls": [
+   "Mistaking the blue-grey patch for a persistent bruise",
+   "Attempting to treat dermal pigment with topical lightening agents",
+   "Failing to look for a coexisting naevus of Ota",
+   "Overlooking a rare melanoma developing within the naevus"
+  ],
+  "references": [
+   "Rook's Textbook of Dermatology",
+   "Bolognia Dermatology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Reassure that the lesion is benign, undertaking treatment only for cosmetic reasons",
+   "Offer pigment-specific Q-switched or picosecond laser as the mainstay of cosmetic treatment, noting that topical agents are ineffective on dermal pigment",
+   "Examine the whole skin for a coexisting ipsilateral naevus of Ota",
+   "Monitor with serial photography for stability",
+   "Biopsy any nodular or atypical area to exclude melanoma"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "nevus_of_ito-pathway",
+   "title": "Naevus of Ito: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Blue-grey dermal melanocytic pigmentation over the shoulder, supraclavicular, scapular and deltoid region, following the posterior supraclavicular and lateral brachial cutaneous nerves",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Development of a nodule or focal change suggesting melanoma",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Dermoscopy to confirm the dermal melanocytic pattern, Full skin examination to detect a coexisting naevus of Ota, Serial photography to monitor stability"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Reassure that the lesion is benign, undertaking treatment only for cosmetic reasons"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking the blue-grey patch for a persistent bruise"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of naevus of ito."
+  }
+ ],
+ "tables": [
+  {
+   "id": "nevus_of_ito-matrix",
+   "title": "Naevus of Ito: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Blue-grey dermal melanocytic pigmentation over the shoulder, supraclavicular, scapular and deltoid region, following the",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "As in naevus of Ota, the lesion results from melanocytes of neural crest origin that fail to complete their migration to the epidermis and remain within the dermis. These dermal melanocytes produce melanin whose deep location scatters light to give the blue-grey colour. The distribution corresponds to the shoulder-girdle cutaneous nerves rather than the trigeminal territory.",
-    "additionalDifferentials": [
-      "Mongolian spot (congenital dermal melanocytosis)",
-      "Naevus of Ota",
-      "Blue naevus",
-      "Bruise or resolving haematoma",
-      "Post-inflammatory hyperpigmentation",
-      "Congenital melanocytic naevus"
+    [
+     "Key Investigations",
+     "Dermoscopy to confirm the dermal melanocytic pattern, Full skin examination to detect a coexisting naevus of Ota, Serial",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Dermoscopy to confirm the dermal melanocytic pattern",
-      "Full skin examination to detect a coexisting naevus of Ota",
-      "Serial photography to monitor stability",
-      "Wood-lamp examination to confirm the pigment is dermal",
-      "Biopsy of any nodular or atypical area to exclude melanoma"
+    [
+     "Primary Differentials",
+     "Mongolian spot (congenital dermal melanocytosis), Naevus of Ota, Blue naevus",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Development of a nodule or focal change suggesting melanoma",
-      "Rapid growth or ulceration within the lesion",
-      "New symptoms such as bleeding or persistent tenderness"
+    [
+     "Management Strategy",
+     "Reassure that the lesion is benign, undertaking treatment only for cosmetic reasons",
+     "Core treatment modality"
     ],
-    "prognosis": "The lesion is benign and persists lifelong if untreated, with good cosmetic response to pigment-specific laser and only a very small risk of malignant change.",
-    "pitfalls": [
-      "Mistaking the blue-grey patch for a persistent bruise",
-      "Attempting to treat dermal pigment with topical lightening agents",
-      "Failing to look for a coexisting naevus of Ota",
-      "Overlooking a rare melanoma developing within the naevus"
-    ],
-    "references": [
-      "Rook's Textbook of Dermatology",
-      "Bolognia Dermatology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Reassure that the lesion is benign, undertaking treatment only for cosmetic reasons",
-      "Offer pigment-specific Q-switched or picosecond laser as the mainstay of cosmetic treatment, noting that topical agents are ineffective on dermal pigment",
-      "Examine the whole skin for a coexisting ipsilateral naevus of Ota",
-      "Monitor with serial photography for stability",
-      "Biopsy any nodular or atypical area to exclude melanoma"
+    [
+     "Clinical Pitfall",
+     "Mistaking the blue-grey patch for a persistent bruise",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for naevus of ito."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "nevus-of-ito-real-image",
+   "title": "Naevus of Ito: Clinical Cutaneous Dermatology Photograph",
+   "type": "diagram",
+   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
+   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
+   "annotations": [
+    {
+     "label": "Primary Lesions",
+     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
+    },
+    {
+     "label": "Demarcation & Margins",
+     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
+    },
+    {
+     "label": "Anatomical Distribution",
+     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+    }
+   ]
+  }
+ ]
 }

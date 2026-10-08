@@ -5,7 +5,18 @@
  "population": "Children",
  "basis": "international",
  "setting": "Primary care, emergency department, paediatric ward",
- "aliases": ["childhood pneumonia", "paediatric pneumonia", "pediatric CAP", "CAP child", "fast breathing pneumonia", "chest indrawing pneumonia", "severe pneumonia", "IMCI pneumonia", "ALRI", "WHO pneumonia classification"],
+ "aliases": [
+  "childhood pneumonia",
+  "paediatric pneumonia",
+  "pediatric CAP",
+  "CAP child",
+  "fast breathing pneumonia",
+  "chest indrawing pneumonia",
+  "severe pneumonia",
+  "IMCI pneumonia",
+  "ALRI",
+  "WHO pneumonia classification"
+ ],
  "summary": "Classify with WHO signs: fast breathing or chest indrawing without danger signs is pneumonia treated at home with oral amoxicillin (at least 40 mg/kg twice daily); any danger sign or hypoxaemia is severe pneumonia needing admission, oxygen and injectable ampicillin plus gentamicin.",
  "sections": [
   {
@@ -96,18 +107,160 @@
   }
  ],
  "drugs": [
-  { "name": "Amoxicillin (oral)", "dose": "At least 40 mg/kg per dose twice daily (80 mg/kg/day; max 2 g per dose) for 5 days", "notes": "WHO first line for fast breathing or chest indrawing pneumonia. 3 days for fast breathing alone in low HIV prevalence areas; NICE uses 3 days at 3 months to 11 years." },
-  { "name": "Ampicillin", "dose": "50 mg/kg IV or IM every 6 hours (max 2 g per dose) for at least 5 days", "notes": "Severe pneumonia, with gentamicin. Alternative: benzylpenicillin 50 000 units/kg IV or IM every 6 hours." },
-  { "name": "Gentamicin", "dose": "7.5 mg/kg IV or IM once daily for at least 5 days", "notes": "With ampicillin or penicillin. Check renal function; measure levels where available." },
-  { "name": "Ceftriaxone", "dose": "50 to 80 mg/kg IV or IM once daily (max 4 g/day)", "notes": "Second line after failure of ampicillin plus gentamicin; first-line option in HIV-infected or exposed children." },
-  { "name": "Co-amoxiclav (IV)", "dose": "30 mg/kg IV three times daily (max 1.2 g per dose); twice daily at 1 to 2 months", "notes": "NICE first line for severe pneumonia; step down to oral co-amoxiclav to complete 5 days." },
-  { "name": "Clarithromycin", "dose": "7.5 mg/kg orally or IV twice daily (max 500 mg per dose)", "notes": "Penicillin allergy or suspected atypical pathogen; NICE gives weight-banded oral doses." }
+  {
+   "name": "Amoxicillin (oral)",
+   "dose": "At least 40 mg/kg per dose twice daily (80 mg/kg/day; max 2 g per dose) for 5 days",
+   "notes": "WHO first line for fast breathing or chest indrawing pneumonia. 3 days for fast breathing alone in low HIV prevalence areas; NICE uses 3 days at 3 months to 11 years."
+  },
+  {
+   "name": "Ampicillin",
+   "dose": "50 mg/kg IV or IM every 6 hours (max 2 g per dose) for at least 5 days",
+   "notes": "Severe pneumonia, with gentamicin. Alternative: benzylpenicillin 50 000 units/kg IV or IM every 6 hours."
+  },
+  {
+   "name": "Gentamicin",
+   "dose": "7.5 mg/kg IV or IM once daily for at least 5 days",
+   "notes": "With ampicillin or penicillin. Check renal function; measure levels where available."
+  },
+  {
+   "name": "Ceftriaxone",
+   "dose": "50 to 80 mg/kg IV or IM once daily (max 4 g/day)",
+   "notes": "Second line after failure of ampicillin plus gentamicin; first-line option in HIV-infected or exposed children."
+  },
+  {
+   "name": "Co-amoxiclav (IV)",
+   "dose": "30 mg/kg IV three times daily (max 1.2 g per dose); twice daily at 1 to 2 months",
+   "notes": "NICE first line for severe pneumonia; step down to oral co-amoxiclav to complete 5 days."
+  },
+  {
+   "name": "Clarithromycin",
+   "dose": "7.5 mg/kg orally or IV twice daily (max 500 mg per dose)",
+   "notes": "Penicillin allergy or suspected atypical pathogen; NICE gives weight-banded oral doses."
+  }
  ],
  "sources": [
-  { "org": "WHO", "title": "Guideline on management of pneumonia and diarrhoea in children up to 10 years of age", "year": 2024, "url": "https://www.who.int/publications/i/item/9789240103412" },
-  { "org": "WHO", "title": "Revised WHO classification and treatment of childhood pneumonia at health facilities", "year": 2014, "url": "https://www.who.int/publications/i/item/9789241507813" },
-  { "org": "British Thoracic Society", "title": "BTS guidelines for the management of community acquired pneumonia in children: update 2011", "year": 2011, "url": "https://pubmed.ncbi.nlm.nih.gov/21903691/" },
-  { "org": "NICE", "title": "Pneumonia: diagnosis and management (NG250)", "year": 2025, "url": "https://www.nice.org.uk/guidance/ng250" }
+  {
+   "org": "WHO",
+   "title": "Guideline on management of pneumonia and diarrhoea in children up to 10 years of age",
+   "year": 2024,
+   "url": "https://www.who.int/publications/i/item/9789240103412"
+  },
+  {
+   "org": "WHO",
+   "title": "Revised WHO classification and treatment of childhood pneumonia at health facilities",
+   "year": 2014,
+   "url": "https://www.who.int/publications/i/item/9789241507813"
+  },
+  {
+   "org": "British Thoracic Society",
+   "title": "BTS guidelines for the management of community acquired pneumonia in children: update 2011",
+   "year": 2011,
+   "url": "https://pubmed.ncbi.nlm.nih.gov/21903691/"
+  },
+  {
+   "org": "NICE",
+   "title": "Pneumonia: diagnosis and management (NG250)",
+   "year": 2025,
+   "url": "https://www.nice.org.uk/guidance/ng250"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "childhood-pneumonia-pathway",
+   "title": "Community-acquired pneumonia (child) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Fast breathing (count a full minute in a calm child): 50 breaths/min or more at 2 to 11 months, 40 or more at 12 to 59 months. Under 2 months, 60 or more: manage as possible serious bacterial infection.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Chest indrawing: the lower chest wall moves in on inspiration. Fast breathing and/or chest indrawing without danger signs is classed as pneumonia and treated with oral amoxicillin (WHO 2014, reconfirmed 2024).",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Pneumonia managed at home: no routine chest X-ray, blood tests or microbiology (BTS, NICE)."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Give the first antibiotic dose and refer urgently. Admit; clear the airway, give oxygen, maintain fluids and feeds, and treat fever, hypoglycaemia and wheeze."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Counting the respiratory rate for less than a full minute, or in a crying child."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for community-acquired pneumonia (child)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "childhood-pneumonia-summary-matrix",
+   "title": "Community-acquired pneumonia (child) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Fast breathing (count a full minute in a calm child): 50 breaths/min or more at 2 to 11 months, 40 or more at 12 to 59 months. Under 2",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Give the first antibiotic dose and refer urgently. Admit; clear the airway, give oxygen, maintain fluids and feeds, and treat fever,",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Pneumonia managed at home: no routine chest X-ray, blood tests or microbiology (BTS, NICE).",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Amoxicillin (oral): At least 40 mg/kg per dose twice daily (80 mg/kg/day; max 2 g per dose) for 5 days",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Counting the respiratory rate for less than a full minute, or in a crying child.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for community-acquired pneumonia (child)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "childhood-pneumonia-real-image",
+   "title": "Community-acquired pneumonia (child): Diagnostic Chest Radiograph",
+   "type": "xray",
+   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
+   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
+   "annotations": [
+    {
+     "label": "Parenchyma & Airspaces",
+     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
+    },
+    {
+     "label": "Bronchovascular Tree",
+     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
+    },
+    {
+     "label": "Pleural Margins",
+     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+    }
+   ]
+  }
+ ]
 }

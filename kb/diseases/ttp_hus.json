@@ -157,5 +157,100 @@
       "importedAt": "2026-06-29T13:50:09Z",
       "contentHash": "h4865889"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "ttp_hus-dx-algo",
+      "title": "Thrombotic microangiopathy (TTP/HUS): Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "The thrombotic microangiopathies are unified by microangiopathic haemolytic anaemia (MAHA): thrombocytopenia plus fragmented red cells (schistocytes) on the smear, biochemical haemolysis (high LDH, high unconjugated bilirubin, low",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: New unexplained thrombocytopenia with MAHA is a haematologic emergency - TTP is devastating if not recognised and treated promptly (Harrison 22e p.968)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: ADAMTS13 activity level AND anti-ADAMTS13 inhibitor/antibody assay (activity <10% diagnostic of TTP) (Harrison 22e p.968), PT and aPTT - characteristically NORMAL in TTP/HUS; abnormal results point toward DIC (Harrison 22e"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Harrison does not give a formal TTP/HUS severity score in this material. Functional stratification used: ADAMTS13 activity <10% is diagnostic of TTP and severe deficiency at presentation predicts relapse and worse"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Do not reflexively transfuse platelets in TTP - platelet transfusion may fuel further microvascular thrombosis and is reserved for life-threatening bleeding (principle, Harrison 22e Chap. 120)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for thrombotic microangiopathy (ttp/hus)."
+    }
+  ],
+  "tables": [
+    {
+      "id": "ttp_hus-matrix",
+      "title": "Thrombotic microangiopathy (TTP/HUS): Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The thrombotic microangiopathies are unified by microangiopathic haemolytic anaemia (MAHA): thrombocytopenia plus fragmented red",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "ADAMTS13 activity level AND anti-ADAMTS13 inhibitor/antibody assay (activity <10% diagnostic of TTP) (Harrison 22e p.968), PT and",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Disseminated intravascular coagulation (DIC) - also gives thrombocytopenia and microangiopathy, but a consumptive coagulopathy",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "New unexplained thrombocytopenia with MAHA is a haematologic emergency - TTP is devastating if not recognised and treated",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Do not reflexively transfuse platelets in TTP - platelet transfusion may fuel further microvascular thrombosis and is reserved",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for thrombotic microangiopathy (ttp/hus)."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "ttp-hus-real-image",
+      "title": "Thrombotic microangiopathy (TTP/HUS): Diagnostic Peripheral Blood Smear Examination",
+      "type": "diagram",
+      "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
+      "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
+      "annotations": [
+        {
+          "label": "Erythrocyte Indices",
+          "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
+        },
+        {
+          "label": "Leukocyte Differential",
+          "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
+        },
+        {
+          "label": "Platelet Count",
+          "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+        }
+      ]
+    }
+  ]
 }

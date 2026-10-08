@@ -5,7 +5,18 @@
  "population": "Children",
  "basis": "international",
  "setting": "Primary care, emergency department, paediatric ward",
- "aliases": ["fever without source", "FWS", "febrile child", "febrile infant", "traffic light system", "NICE NG143", "fever under 3 months", "serious bacterial infection", "SBI", "pyrexia child"],
+ "aliases": [
+  "fever without source",
+  "FWS",
+  "febrile child",
+  "febrile infant",
+  "traffic light system",
+  "NICE NG143",
+  "fever under 3 months",
+  "serious bacterial infection",
+  "SBI",
+  "pyrexia child"
+ ],
  "summary": "Check every febrile child under 5 for life-threatening features and the NICE traffic light signs; infants under 3 months with 38 °C or more are high risk. Investigate and treat by risk, give parenteral ceftriaxone if shocked, unrousable or meningococcal, and use antipyretics only for distress.",
  "sections": [
   {
@@ -102,18 +113,159 @@
   }
  ],
  "drugs": [
-  { "name": "Paracetamol", "dose": "15 mg/kg orally every 4 to 6 hours when distressed (max 4 doses and 60 mg/kg in 24 hours; max 1 g per dose)", "notes": "For distress, not to lower the temperature or prevent seizures." },
-  { "name": "Ibuprofen", "dose": "10 mg/kg orally every 6 to 8 hours (max 30 mg/kg/day; max 400 mg per dose)", "notes": "From 3 months of age. Avoid if dehydrated or if dengue is possible." },
-  { "name": "Ceftriaxone", "dose": "80 mg/kg IV once daily (max 4 g/day), age 28 days and over", "notes": "Community-acquired sepsis or serious bacterial infection. Neonates under 28 days: 50 mg/kg once daily, or cefotaxime 50 mg/kg every 6 to 12 hours if 40 weeks corrected age or less or on IV calcium (NICE)." },
-  { "name": "Ampicillin or amoxicillin (IV)", "dose": "Infants 1 to 3 months: 50 mg/kg IV every 6 hours (max 2 g per dose); use meningitic dosing if meningitis is suspected", "notes": "Listeria cover in infants under 3 months, with ceftriaxone. Neonatal doses: see Neonatal sepsis protocol." },
-  { "name": "Benzylpenicillin (pre-hospital)", "dose": "Single IM or IV dose: under 1 year 300 mg; 1 to 9 years 600 mg; 10 years and over 1.2 g", "notes": "Suspected meningococcal disease before transfer; do not delay transfer." },
-  { "name": "Aciclovir", "dose": "IV every 8 hours: 20 mg/kg under 3 months; 500 mg/m2 at 3 months to 11 years", "notes": "Suspected herpes simplex encephalitis. Keep well hydrated; adjust for renal impairment." },
-  { "name": "Crystalloid bolus", "dose": "10 mL/kg IV or IO over less than 10 minutes (max 250 mL); reassess, may repeat once", "notes": "Glucose-free, sodium 130 to 154 mmol/L. Smaller volumes with heart or kidney disease." }
+  {
+   "name": "Paracetamol",
+   "dose": "15 mg/kg orally every 4 to 6 hours when distressed (max 4 doses and 60 mg/kg in 24 hours; max 1 g per dose)",
+   "notes": "For distress, not to lower the temperature or prevent seizures."
+  },
+  {
+   "name": "Ibuprofen",
+   "dose": "10 mg/kg orally every 6 to 8 hours (max 30 mg/kg/day; max 400 mg per dose)",
+   "notes": "From 3 months of age. Avoid if dehydrated or if dengue is possible."
+  },
+  {
+   "name": "Ceftriaxone",
+   "dose": "80 mg/kg IV once daily (max 4 g/day), age 28 days and over",
+   "notes": "Community-acquired sepsis or serious bacterial infection. Neonates under 28 days: 50 mg/kg once daily, or cefotaxime 50 mg/kg every 6 to 12 hours if 40 weeks corrected age or less or on IV calcium (NICE)."
+  },
+  {
+   "name": "Ampicillin or amoxicillin (IV)",
+   "dose": "Infants 1 to 3 months: 50 mg/kg IV every 6 hours (max 2 g per dose); use meningitic dosing if meningitis is suspected",
+   "notes": "Listeria cover in infants under 3 months, with ceftriaxone. Neonatal doses: see Neonatal sepsis protocol."
+  },
+  {
+   "name": "Benzylpenicillin (pre-hospital)",
+   "dose": "Single IM or IV dose: under 1 year 300 mg; 1 to 9 years 600 mg; 10 years and over 1.2 g",
+   "notes": "Suspected meningococcal disease before transfer; do not delay transfer."
+  },
+  {
+   "name": "Aciclovir",
+   "dose": "IV every 8 hours: 20 mg/kg under 3 months; 500 mg/m2 at 3 months to 11 years",
+   "notes": "Suspected herpes simplex encephalitis. Keep well hydrated; adjust for renal impairment."
+  },
+  {
+   "name": "Crystalloid bolus",
+   "dose": "10 mL/kg IV or IO over less than 10 minutes (max 250 mL); reassess, may repeat once",
+   "notes": "Glucose-free, sodium 130 to 154 mmol/L. Smaller volumes with heart or kidney disease."
+  }
  ],
  "sources": [
-  { "org": "NICE", "title": "Fever in under 5s: assessment and initial management (NG143)", "year": 2019, "url": "https://www.nice.org.uk/guidance/ng143/chapter/recommendations" },
-  { "org": "NICE", "title": "Suspected sepsis in under 16s: recognition, diagnosis and early management (NG254): antibiotic therapy, IV fluid and oxygen", "year": 2025, "url": "https://www.nice.org.uk/guidance/ng254/chapter/Antibiotic-therapy-intravenous-fluid-and-oxygen" },
-  { "org": "AAP", "title": "Fever and antipyretic use in children (clinical report)", "year": 2011, "url": "https://publications.aap.org/pediatrics/article/127/3/e20103852/65016/Fever-and-Antipyretic-Use-in-Children" }
+  {
+   "org": "NICE",
+   "title": "Fever in under 5s: assessment and initial management (NG143)",
+   "year": 2019,
+   "url": "https://www.nice.org.uk/guidance/ng143/chapter/recommendations"
+  },
+  {
+   "org": "NICE",
+   "title": "Suspected sepsis in under 16s: recognition, diagnosis and early management (NG254): antibiotic therapy, IV fluid and oxygen",
+   "year": 2025,
+   "url": "https://www.nice.org.uk/guidance/ng254/chapter/Antibiotic-therapy-intravenous-fluid-and-oxygen"
+  },
+  {
+   "org": "AAP",
+   "title": "Fever and antipyretic use in children (clinical report)",
+   "year": 2011,
+   "url": "https://publications.aap.org/pediatrics/article/127/3/e20103852/65016/Fever-and-Antipyretic-Use-in-Children"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "fever-in-under-5s-pathway",
+   "title": "Fever in children under 5: assessment and initial management Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Meningococcal disease: fever with non-blanching rash, especially if ill-looking, purpura over 2 mm, capillary refill 3 seconds or more, or neck stiffness. Meningitis: neck stiffness, bulging fontanelle, reduced consciousness or convulsive",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Shock: IV or IO bolus of 10 mL/kg glucose-free crystalloid (sodium 130 to 154 mmol/L) over less than 10 minutes (max 250 mL). Reassess; if no better, give a second bolus, then call a consultant to attend (NICE sepsis).",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Under 3 months: observe and record temperature, heart rate and respiratory rate. Do FBC, blood culture, CRP and urine testing; chest X-ray only with respiratory signs; stool culture if diarrhoea."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Antipyretics do not prevent febrile seizures and should not be used for that purpose, nor solely to lower the temperature."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Judging severity by the height of the temperature (after 6 months) or its duration alone."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for fever in children under 5: assessment and initial management."
+  }
+ ],
+ "tables": [
+  {
+   "id": "fever-in-under-5s-summary-matrix",
+   "title": "Fever in children under 5: assessment and initial management Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Meningococcal disease: fever with non-blanching rash, especially if ill-looking, purpura over 2 mm, capillary refill 3 seconds or more, or",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Shock: IV or IO bolus of 10 mL/kg glucose-free crystalloid (sodium 130 to 154 mmol/L) over less than 10 minutes (max 250 mL). Reassess; if",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Under 3 months: observe and record temperature, heart rate and respiratory rate. Do FBC, blood culture, CRP and urine testing; chest X-ray",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Paracetamol: 15 mg/kg orally every 4 to 6 hours when distressed (max 4 doses and 60 mg/kg in 24 hours; max 1 g per dose)",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Judging severity by the height of the temperature (after 6 months) or its duration alone.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for fever in children under 5: assessment and initial management."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "fever-in-under-5s-real-image",
+   "title": "Fever in children under 5: assessment and initial management: Diagnostic Microbiological / Smear Examination",
+   "type": "diagram",
+   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
+   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
+   "annotations": [
+    {
+     "label": "Pathogen Detection",
+     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
+    },
+    {
+     "label": "Inflammatory Response",
+     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
+    },
+    {
+     "label": "Diagnostic Confirmation",
+     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+    }
+   ]
+  }
+ ]
 }

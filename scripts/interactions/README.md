@@ -54,6 +54,13 @@ the `curated/legacy_*.json` seeds so the migration preserved every existing rule
 The pipeline **only reads** `curated/`; never hand-edit the generated
 `interaction-rules.js`.
 
+The app reads `interaction-rules.js`; WardSynq and the Worker read `data/interaction-rules.json`.
+They must stay identical, and every shipped rule and class fix must also be in `curated/`, or the
+next rebuild erases it. In August 2026 twenty R1-reviewed rules were edited into the `.js` only and
+WardSynq ran without them until 2026-10-02. `test/interaction-data-sync.test.mjs` now fails on any of
+that. If a fix cannot wait for a rebuild (the `build/` cache is gitignored and refetching changes far
+more than the fix), put it in `curated/` AND apply the same delta to both artifacts.
+
 | File | Purpose |
 |---|---|
 | `class_taxonomy.json` | RxClass class → internal snake_case tag |

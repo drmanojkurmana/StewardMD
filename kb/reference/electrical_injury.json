@@ -1,80 +1,175 @@
 {
-  "id": "electrical_injury",
-  "name": "Electrical injury",
-  "aliases": [
-    "electric shock injury",
-    "electrocution",
-    "electrical burn",
-    "lightning injury"
+ "id": "electrical_injury",
+ "name": "Electrical injury",
+ "aliases": [
+  "electric shock injury",
+  "electrocution",
+  "electrical burn",
+  "lightning injury"
+ ],
+ "class": "non_infective",
+ "system": "Toxicology / Environmental",
+ "specialty": "Toxicology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Harrison's Principles of Internal Medicine / WHO & national toxicology guidance",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "The visible skin injury often grossly underestimates deep tissue damage, because current follows low-resistance structures (nerves, blood vessels, muscle) and injures tissue along its path",
+   "Alternating current is particularly dangerous as it can cause tetanic muscle contraction that prevents release from the source and prolongs exposure",
+   "Cardiac effects range from benign ECG changes to ventricular fibrillation or asystole; all significant exposures need an ECG and a period of cardiac monitoring",
+   "Deep muscle necrosis causes rhabdomyolysis and myoglobinuria, threatening acute kidney injury, so aggressive fluid resuscitation and monitoring of urine output are essential",
+   "Compartment syndrome and progressive deep tissue necrosis may develop, requiring serial examination and sometimes fasciotomy or debridement",
+   "Always look for associated trauma - falls and violent muscle contractions can cause fractures, dislocations (including posterior shoulder dislocation), and spinal injury",
+   "Lightning injury differs from high-voltage contact: it is a brief massive shock that commonly causes cardiac and respiratory arrest, transient limb paralysis (keraunoparalysis), and a characteristic feathering skin pattern",
+   "High-voltage and lightning victims warrant a low threshold for prolonged resuscitation, as recovery from apparent cardiorespiratory arrest can occur"
   ],
-  "class": "non_infective",
-  "system": "Toxicology / Environmental",
-  "specialty": "Toxicology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Harrison's Principles of Internal Medicine / WHO & national toxicology guidance",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "The visible skin injury often grossly underestimates deep tissue damage, because current follows low-resistance structures (nerves, blood vessels, muscle) and injures tissue along its path",
-      "Alternating current is particularly dangerous as it can cause tetanic muscle contraction that prevents release from the source and prolongs exposure",
-      "Cardiac effects range from benign ECG changes to ventricular fibrillation or asystole; all significant exposures need an ECG and a period of cardiac monitoring",
-      "Deep muscle necrosis causes rhabdomyolysis and myoglobinuria, threatening acute kidney injury, so aggressive fluid resuscitation and monitoring of urine output are essential",
-      "Compartment syndrome and progressive deep tissue necrosis may develop, requiring serial examination and sometimes fasciotomy or debridement",
-      "Always look for associated trauma - falls and violent muscle contractions can cause fractures, dislocations (including posterior shoulder dislocation), and spinal injury",
-      "Lightning injury differs from high-voltage contact: it is a brief massive shock that commonly causes cardiac and respiratory arrest, transient limb paralysis (keraunoparalysis), and a characteristic feathering skin pattern",
-      "High-voltage and lightning victims warrant a low threshold for prolonged resuscitation, as recovery from apparent cardiorespiratory arrest can occur"
+  "pathophysiology": "Electrical injury results from the passage of current through the body, converting electrical energy to heat and causing direct cellular membrane damage (electroporation). Tissue injury depends on voltage, current type and magnitude, resistance of tissues, current pathway, and contact duration. Current traversing the thorax can disrupt cardiac rhythm, causing ventricular fibrillation or asystole, while passage through the head or chest can arrest respiration centrally or by paralysing respiratory muscles. Deep tissues, especially muscle, sustain extensive thermal and electroporation injury that may exceed the visible cutaneous burn, releasing myoglobin that can precipitate acute kidney injury, and swelling within fascial compartments can compromise perfusion.",
+  "additionalDifferentials": [
+   "Thermal burns from other causes",
+   "Primary cardiac arrest",
+   "Traumatic injury from another mechanism",
+   "Seizure with secondary injury",
+   "Crush injury with rhabdomyolysis"
+  ],
+  "additionalInvestigations": [
+   "12-lead ECG and cardiac monitoring",
+   "Serum creatine kinase and urine myoglobin for rhabdomyolysis",
+   "Renal function and electrolytes including potassium",
+   "Urinalysis for pigment and monitoring of urine output",
+   "Imaging for suspected fractures, dislocations, or spinal injury"
+  ],
+  "redFlags": [
+   "Cardiac arrhythmia, arrest, or ischaemic ECG changes",
+   "Dark pigmented urine or markedly raised creatine kinase indicating rhabdomyolysis",
+   "Signs of compartment syndrome (severe pain, tense swelling, sensory or perfusion deficit)",
+   "High-voltage or lightning exposure with deep injury along the current path",
+   "Associated major trauma such as spinal injury or fractures from falls or tetany"
+  ],
+  "prognosis": "Low-voltage injuries without loss of consciousness or ECG change usually do well, whereas high-voltage injuries can cause extensive deep tissue loss, limb amputation, renal failure, and death; lightning strike mortality is driven mainly by immediate cardiorespiratory arrest, and survivors may have lasting neurological sequelae.",
+  "pitfalls": [
+   "Judging severity from the surface burn and missing extensive deep tissue injury",
+   "Under-resuscitating with fluids and allowing myoglobinuric renal failure to develop",
+   "Failing to screen for and monitor cardiac arrhythmia after significant exposure",
+   "Overlooking associated fractures, dislocations, or spinal injury from falls and tetanic contraction"
+  ],
+  "references": [
+   "Harrison's Principles of Internal Medicine, 22e",
+   "WHO/national toxicology guidance"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Ensuring scene safety and removal from the current source before rescue, then immediate resuscitation with prolonged cardiopulmonary resuscitation, particularly after lightning strike, and defibrillation for ventricular fibrillation",
+   "Aggressive intravenous fluid resuscitation titrated to urine output to prevent myoglobinuric acute kidney injury from rhabdomyolysis",
+   "Twelve-lead ECG and continuous cardiac monitoring for arrhythmia in all significant exposures, with correction of hyperkalaemia and other electrolyte disturbance",
+   "Wound and burn care recognising that deep tissue injury exceeds the visible cutaneous burn, with tetanus prophylaxis",
+   "Serial limb examination for compartment syndrome with fasciotomy, and debridement of necrotic tissue as required",
+   "Assessment for associated trauma from falls and tetanic contraction, including fractures, posterior shoulder dislocation and spinal injury",
+   "Referral to a specialist burns centre for high-voltage injury, with multidisciplinary rehabilitation for neurological and functional sequelae",
+   "Escalation to critical care for haemodynamic instability, extensive tissue loss or renal failure"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "electrical_injury-pathway",
+   "title": "Electrical injury: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "The visible skin injury often grossly underestimates deep tissue damage, because current follows low-resistance structures (nerves, blood vessels, muscle) and injures tissue along its path",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Cardiac arrhythmia, arrest, or ischaemic ECG changes",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: 12-lead ECG and cardiac monitoring, Serum creatine kinase and urine myoglobin for rhabdomyolysis, Renal function and electrolytes including potassium"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Ensuring scene safety and removal from the current source before rescue, then immediate resuscitation with prolonged cardiopulmonary resuscitation, particularly after lightning strike, and defibrillation for"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Judging severity from the surface burn and missing extensive deep tissue injury"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of electrical injury."
+  }
+ ],
+ "tables": [
+  {
+   "id": "electrical_injury-matrix",
+   "title": "Electrical injury: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The visible skin injury often grossly underestimates deep tissue damage, because current follows low-resistance structures",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Electrical injury results from the passage of current through the body, converting electrical energy to heat and causing direct cellular membrane damage (electroporation). Tissue injury depends on voltage, current type and magnitude, resistance of tissues, current pathway, and contact duration. Current traversing the thorax can disrupt cardiac rhythm, causing ventricular fibrillation or asystole, while passage through the head or chest can arrest respiration centrally or by paralysing respiratory muscles. Deep tissues, especially muscle, sustain extensive thermal and electroporation injury that may exceed the visible cutaneous burn, releasing myoglobin that can precipitate acute kidney injury, and swelling within fascial compartments can compromise perfusion.",
-    "additionalDifferentials": [
-      "Thermal burns from other causes",
-      "Primary cardiac arrest",
-      "Traumatic injury from another mechanism",
-      "Seizure with secondary injury",
-      "Crush injury with rhabdomyolysis"
+    [
+     "Key Investigations",
+     "12-lead ECG and cardiac monitoring, Serum creatine kinase and urine myoglobin for rhabdomyolysis, Renal function and electrolytes",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "12-lead ECG and cardiac monitoring",
-      "Serum creatine kinase and urine myoglobin for rhabdomyolysis",
-      "Renal function and electrolytes including potassium",
-      "Urinalysis for pigment and monitoring of urine output",
-      "Imaging for suspected fractures, dislocations, or spinal injury"
+    [
+     "Primary Differentials",
+     "Thermal burns from other causes, Primary cardiac arrest, Traumatic injury from another mechanism",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Cardiac arrhythmia, arrest, or ischaemic ECG changes",
-      "Dark pigmented urine or markedly raised creatine kinase indicating rhabdomyolysis",
-      "Signs of compartment syndrome (severe pain, tense swelling, sensory or perfusion deficit)",
-      "High-voltage or lightning exposure with deep injury along the current path",
-      "Associated major trauma such as spinal injury or fractures from falls or tetany"
+    [
+     "Management Strategy",
+     "Ensuring scene safety and removal from the current source before rescue, then immediate resuscitation with prolonged",
+     "Core treatment modality"
     ],
-    "prognosis": "Low-voltage injuries without loss of consciousness or ECG change usually do well, whereas high-voltage injuries can cause extensive deep tissue loss, limb amputation, renal failure, and death; lightning strike mortality is driven mainly by immediate cardiorespiratory arrest, and survivors may have lasting neurological sequelae.",
-    "pitfalls": [
-      "Judging severity from the surface burn and missing extensive deep tissue injury",
-      "Under-resuscitating with fluids and allowing myoglobinuric renal failure to develop",
-      "Failing to screen for and monitor cardiac arrhythmia after significant exposure",
-      "Overlooking associated fractures, dislocations, or spinal injury from falls and tetanic contraction"
-    ],
-    "references": [
-      "Harrison's Principles of Internal Medicine, 22e",
-      "WHO/national toxicology guidance"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Ensuring scene safety and removal from the current source before rescue, then immediate resuscitation with prolonged cardiopulmonary resuscitation, particularly after lightning strike, and defibrillation for ventricular fibrillation",
-      "Aggressive intravenous fluid resuscitation titrated to urine output to prevent myoglobinuric acute kidney injury from rhabdomyolysis",
-      "Twelve-lead ECG and continuous cardiac monitoring for arrhythmia in all significant exposures, with correction of hyperkalaemia and other electrolyte disturbance",
-      "Wound and burn care recognising that deep tissue injury exceeds the visible cutaneous burn, with tetanus prophylaxis",
-      "Serial limb examination for compartment syndrome with fasciotomy, and debridement of necrotic tissue as required",
-      "Assessment for associated trauma from falls and tetanic contraction, including fractures, posterior shoulder dislocation and spinal injury",
-      "Referral to a specialist burns centre for high-voltage injury, with multidisciplinary rehabilitation for neurological and functional sequelae",
-      "Escalation to critical care for haemodynamic instability, extensive tissue loss or renal failure"
+    [
+     "Clinical Pitfall",
+     "Judging severity from the surface burn and missing extensive deep tissue injury",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for electrical injury."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "electrical-injury-real-image",
+   "title": "Electrical injury: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

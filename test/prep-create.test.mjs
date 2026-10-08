@@ -324,7 +324,7 @@ test("cap and cost lines from the server's counters", () => {
   assert.equal(PC.capsAfterStop(caps, "ai-failed", "2026-10-05"), caps);
   const cost = PC.addUsage(PC.addUsage({ inTok: 0, outTok: 0, thinkTok: 0, inr: 0 }, { inTok: 1000, outTok: 200, thinkTok: 0, inr: 0.054 }), { inTok: 500, outTok: 100, inr: 0.02 });
   assert.deepEqual(cost, { inTok: 1500, outTok: 300, thinkTok: 0, inr: 0.074 });
-  assert.equal(PC.costLine(cost), "AI cost so far: Rs 0.07 (1800 tokens)");
+  assert.equal(PC.costLine(cost), "Cost so far: Rs 0.07 (1800 tokens)");
   assert.equal(PC.costLine({ inTok: 0, outTok: 0 }), "");
 });
 

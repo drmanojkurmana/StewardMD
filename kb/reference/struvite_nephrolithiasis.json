@@ -1,81 +1,176 @@
 {
-  "id": "struvite_nephrolithiasis",
-  "name": "Struvite (infection) nephrolithiasis",
-  "aliases": [
-    "struvite stones",
-    "infection stones",
-    "triple phosphate stones",
-    "magnesium ammonium phosphate stones",
-    "urease stones"
+ "id": "struvite_nephrolithiasis",
+ "name": "Struvite (infection) nephrolithiasis",
+ "aliases": [
+  "struvite stones",
+  "infection stones",
+  "triple phosphate stones",
+  "magnesium ammonium phosphate stones",
+  "urease stones"
+ ],
+ "class": "non_infective",
+ "system": "Renal / Nephrology",
+ "specialty": "Nephrology / Urology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Comprehensive Clinical Nephrology / Campbell-Walsh-Wein Urology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Struvite (magnesium ammonium phosphate) stones form only in urine infected by urease-producing organisms, classically Proteus mirabilis and also Klebsiella, Pseudomonas and Ureaplasma",
+   "The enzyme urease splits urea into ammonia and carbon dioxide, alkalinising the urine and supplying the ammonium and carbonate needed for crystallisation",
+   "These are the archetypal stones that grow rapidly and fill the collecting system as staghorn calculi",
+   "They occur more often in women and in patients with recurrent urinary infection, neurogenic bladder, indwelling catheters or urinary diversion",
+   "A persistently alkaline urine with recurrent urea-splitting organisms is an important diagnostic clue",
+   "Coffin-lid shaped crystals may be seen on urine microscopy",
+   "Cure requires complete surgical clearance of every fragment, because residual material harbours bacteria and seeds regrowth",
+   "Culture-directed antibiotics against the urease organism, sometimes with a urease inhibitor and urinary acidification, support treatment but cannot substitute for complete stone clearance"
   ],
-  "class": "non_infective",
-  "system": "Renal / Nephrology",
-  "specialty": "Nephrology / Urology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Comprehensive Clinical Nephrology / Campbell-Walsh-Wein Urology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Struvite (magnesium ammonium phosphate) stones form only in urine infected by urease-producing organisms, classically Proteus mirabilis and also Klebsiella, Pseudomonas and Ureaplasma",
-      "The enzyme urease splits urea into ammonia and carbon dioxide, alkalinising the urine and supplying the ammonium and carbonate needed for crystallisation",
-      "These are the archetypal stones that grow rapidly and fill the collecting system as staghorn calculi",
-      "They occur more often in women and in patients with recurrent urinary infection, neurogenic bladder, indwelling catheters or urinary diversion",
-      "A persistently alkaline urine with recurrent urea-splitting organisms is an important diagnostic clue",
-      "Coffin-lid shaped crystals may be seen on urine microscopy",
-      "Cure requires complete surgical clearance of every fragment, because residual material harbours bacteria and seeds regrowth",
-      "Culture-directed antibiotics against the urease organism, sometimes with a urease inhibitor and urinary acidification, support treatment but cannot substitute for complete stone clearance"
+  "pathophysiology": "Struvite stones are a direct consequence of chronic urinary infection with bacteria that produce urease. Urease hydrolyses urea to ammonia and carbon dioxide; the ammonia raises the urine pH and generates ammonium while carbon dioxide yields carbonate. In this persistently alkaline environment magnesium ammonium phosphate (struvite) and carbonate apatite become supersaturated and precipitate rapidly, frequently incorporating bacteria within the stone matrix. Because organisms are sequestered inside the stone, infection cannot be eradicated by antibiotics alone, and any retained fragment allows the process to recur and the stone to enlarge.",
+  "additionalDifferentials": [
+   "Calcium stones forming a staghorn configuration",
+   "Cystine staghorn calculus",
+   "Uric acid stone with secondary infection",
+   "Renal tuberculosis with calcification",
+   "Xanthogranulomatous pyelonephritis",
+   "Medullary sponge kidney with stones"
+  ],
+  "additionalInvestigations": [
+   "Non-contrast CT to define the stone burden and staghorn configuration",
+   "Urine culture to identify the urease-producing organism and guide antibiotics",
+   "Urine pH, which is characteristically alkaline, and microscopy for crystals",
+   "Stone analysis confirming struvite and carbonate apatite composition",
+   "Serum renal function and, in bilateral disease, assessment of split renal function",
+   "Metabolic evaluation to exclude a coexisting metabolic stone nidus"
+  ],
+  "redFlags": [
+   "Sepsis arising from an infected obstructed system",
+   "Rapid staghorn growth threatening renal function",
+   "Progressive loss of function in the affected kidney",
+   "Xanthogranulomatous pyelonephritis that may require nephrectomy"
+  ],
+  "prognosis": "If every fragment is cleared and infection eradicated, cure is achievable; incomplete clearance leads to a high recurrence rate, and long-standing staghorn calculi can destroy renal function and, rarely, are associated with squamous cell carcinoma of the collecting system.",
+  "pitfalls": [
+   "Treating with antibiotics alone and expecting cure without complete stone removal",
+   "Leaving residual fragments that reseed both infection and stone",
+   "Missing a coexisting metabolic abnormality that acted as the initial nidus",
+   "Underestimating the sepsis risk when instrumenting an infected stone"
+  ],
+  "references": [
+   "Comprehensive Clinical Nephrology (Feehally et al.)",
+   "Campbell-Walsh-Wein Urology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Definitive complete surgical stone clearance, principally percutaneous nephrolithotomy for staghorn calculi, aiming for a wholly stone-free state",
+   "Culture-directed antibiotics to treat the associated urinary infection perioperatively, recognising that antibiotics alone cannot eradicate organisms sequestered within the stone",
+   "Consider urease inhibition with acetohydroxamic acid in selected patients unfit for surgery or with unavoidable residual stone",
+   "Address predisposing factors: manage neurogenic bladder, change or remove indwelling catheters, and relieve urinary stasis and obstruction",
+   "Surveillance imaging and urine culture for residual fragments and recurrence given rapid regrowth from any retained nidus",
+   "Metabolic evaluation to identify and treat a coexisting metabolic stone-forming tendency",
+   "Nephrectomy considered for a non-functioning, chronically infected kidney, with urology referral for operative planning"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "struvite_nephrolithiasis-pathway",
+   "title": "Struvite (infection) nephrolithiasis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Struvite (magnesium ammonium phosphate) stones form only in urine infected by urease-producing organisms, classically Proteus mirabilis and also Klebsiella, Pseudomonas and Ureaplasma",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Sepsis arising from an infected obstructed system",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Non-contrast CT to define the stone burden and staghorn configuration, Urine culture to identify the urease-producing organism and guide antibiotics, Urine pH, which is characteristically alkaline, and microscopy for"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Definitive complete surgical stone clearance, principally percutaneous nephrolithotomy for staghorn calculi, aiming for a wholly stone-free state"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Treating with antibiotics alone and expecting cure without complete stone removal"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of struvite (infection) nephrolithiasis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "struvite_nephrolithiasis-matrix",
+   "title": "Struvite (infection) nephrolithiasis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Struvite (magnesium ammonium phosphate) stones form only in urine infected by urease-producing organisms, classically Proteus",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Struvite stones are a direct consequence of chronic urinary infection with bacteria that produce urease. Urease hydrolyses urea to ammonia and carbon dioxide; the ammonia raises the urine pH and generates ammonium while carbon dioxide yields carbonate. In this persistently alkaline environment magnesium ammonium phosphate (struvite) and carbonate apatite become supersaturated and precipitate rapidly, frequently incorporating bacteria within the stone matrix. Because organisms are sequestered inside the stone, infection cannot be eradicated by antibiotics alone, and any retained fragment allows the process to recur and the stone to enlarge.",
-    "additionalDifferentials": [
-      "Calcium stones forming a staghorn configuration",
-      "Cystine staghorn calculus",
-      "Uric acid stone with secondary infection",
-      "Renal tuberculosis with calcification",
-      "Xanthogranulomatous pyelonephritis",
-      "Medullary sponge kidney with stones"
+    [
+     "Key Investigations",
+     "Non-contrast CT to define the stone burden and staghorn configuration, Urine culture to identify the urease-producing organism",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Non-contrast CT to define the stone burden and staghorn configuration",
-      "Urine culture to identify the urease-producing organism and guide antibiotics",
-      "Urine pH, which is characteristically alkaline, and microscopy for crystals",
-      "Stone analysis confirming struvite and carbonate apatite composition",
-      "Serum renal function and, in bilateral disease, assessment of split renal function",
-      "Metabolic evaluation to exclude a coexisting metabolic stone nidus"
+    [
+     "Primary Differentials",
+     "Calcium stones forming a staghorn configuration, Cystine staghorn calculus, Uric acid stone with secondary infection",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Sepsis arising from an infected obstructed system",
-      "Rapid staghorn growth threatening renal function",
-      "Progressive loss of function in the affected kidney",
-      "Xanthogranulomatous pyelonephritis that may require nephrectomy"
+    [
+     "Management Strategy",
+     "Definitive complete surgical stone clearance, principally percutaneous nephrolithotomy for staghorn calculi, aiming for a wholly",
+     "Core treatment modality"
     ],
-    "prognosis": "If every fragment is cleared and infection eradicated, cure is achievable; incomplete clearance leads to a high recurrence rate, and long-standing staghorn calculi can destroy renal function and, rarely, are associated with squamous cell carcinoma of the collecting system.",
-    "pitfalls": [
-      "Treating with antibiotics alone and expecting cure without complete stone removal",
-      "Leaving residual fragments that reseed both infection and stone",
-      "Missing a coexisting metabolic abnormality that acted as the initial nidus",
-      "Underestimating the sepsis risk when instrumenting an infected stone"
-    ],
-    "references": [
-      "Comprehensive Clinical Nephrology (Feehally et al.)",
-      "Campbell-Walsh-Wein Urology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Definitive complete surgical stone clearance, principally percutaneous nephrolithotomy for staghorn calculi, aiming for a wholly stone-free state",
-      "Culture-directed antibiotics to treat the associated urinary infection perioperatively, recognising that antibiotics alone cannot eradicate organisms sequestered within the stone",
-      "Consider urease inhibition with acetohydroxamic acid in selected patients unfit for surgery or with unavoidable residual stone",
-      "Address predisposing factors: manage neurogenic bladder, change or remove indwelling catheters, and relieve urinary stasis and obstruction",
-      "Surveillance imaging and urine culture for residual fragments and recurrence given rapid regrowth from any retained nidus",
-      "Metabolic evaluation to identify and treat a coexisting metabolic stone-forming tendency",
-      "Nephrectomy considered for a non-functioning, chronically infected kidney, with urology referral for operative planning"
+    [
+     "Clinical Pitfall",
+     "Treating with antibiotics alone and expecting cure without complete stone removal",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for struvite (infection) nephrolithiasis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "struvite-nephrolithiasis-real-image",
+   "title": "Struvite (infection) nephrolithiasis: Diagnostic Renal Ultrasonography",
+   "type": "ultrasound",
+   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
+   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
+   "annotations": [
+    {
+     "label": "Renal Cortex",
+     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
+    },
+    {
+     "label": "Corticomedullary Junction",
+     "description": "Medullary pyramid definition and structural architecture."
+    },
+    {
+     "label": "Collecting System",
+     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+    }
+   ]
+  }
+ ]
 }

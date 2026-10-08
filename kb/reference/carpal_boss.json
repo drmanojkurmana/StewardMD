@@ -1,79 +1,174 @@
 {
-  "id": "carpal_boss",
-  "name": "carpal boss",
-  "aliases": [
-    "carpometacarpal boss",
-    "carpal bossing",
-    "os styloideum"
+ "id": "carpal_boss",
+ "name": "carpal boss",
+ "aliases": [
+  "carpometacarpal boss",
+  "carpal bossing",
+  "os styloideum"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal",
+ "specialty": "Hand and wrist surgery",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Green's Operative Hand Surgery",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A carpal boss is a firm bony prominence on the dorsum of the hand at the base of the second and third carpometacarpal joints, over the capitate-trapezoid-metacarpal junction.",
+   "It may represent a degenerative osteophyte or an accessory ossicle (os styloideum) and is frequently associated with dorsal carpometacarpal osteoarthritis.",
+   "The prominence becomes more visible with the wrist flexed and is hard and fixed, distinguishing it from the softer, mobile dorsal wrist ganglion.",
+   "A dorsal wrist ganglion may coexist and arise adjacent to the boss, complicating the clinical picture.",
+   "Many bosses are asymptomatic and found incidentally; symptomatic cases usually present with activity-related dorsal pain.",
+   "Extensor tendons may snap over the prominence, and a small overlying bursa or extensor tendon irritation can develop.",
+   "A dedicated carpal boss view, taken partially supinated, ulnar-deviated and slightly flexed, best profiles the ossicle."
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal",
-  "specialty": "Hand and wrist surgery",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Green's Operative Hand Surgery",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A carpal boss is a firm bony prominence on the dorsum of the hand at the base of the second and third carpometacarpal joints, over the capitate-trapezoid-metacarpal junction.",
-      "It may represent a degenerative osteophyte or an accessory ossicle (os styloideum) and is frequently associated with dorsal carpometacarpal osteoarthritis.",
-      "The prominence becomes more visible with the wrist flexed and is hard and fixed, distinguishing it from the softer, mobile dorsal wrist ganglion.",
-      "A dorsal wrist ganglion may coexist and arise adjacent to the boss, complicating the clinical picture.",
-      "Many bosses are asymptomatic and found incidentally; symptomatic cases usually present with activity-related dorsal pain.",
-      "Extensor tendons may snap over the prominence, and a small overlying bursa or extensor tendon irritation can develop.",
-      "A dedicated carpal boss view, taken partially supinated, ulnar-deviated and slightly flexed, best profiles the ossicle."
+  "pathophysiology": "The carpal boss is a bony excrescence at the second and third carpometacarpal joints, arising either as a degenerative osteophyte from the carpometacarpal articulation or from an unfused ossification centre (os styloideum) that persists as an accessory bone. Repetitive dorsal stress and osteoarthritic change at these tightly constrained carpometacarpal joints generate the prominence, which can mechanically irritate the overlying extensor tendons and a superficial bursa, producing localised dorsal pain.",
+  "additionalDifferentials": [
+   "Dorsal wrist ganglion",
+   "Extensor tendon tenosynovitis",
+   "Second or third carpometacarpal osteoarthritis",
+   "Gouty tophus or crystal deposition",
+   "Dorsal osteophyte from scaphotrapeziotrapezoid arthritis",
+   "Anomalous extensor digitorum brevis manus muscle",
+   "Osteochondroma or other bony tumour"
+  ],
+  "additionalInvestigations": [
+   "Focused dorsal hand radiographs including a partially supinated oblique carpal boss view",
+   "Lateral radiograph with the wrist slightly flexed to profile the prominence",
+   "CT to define an os styloideum and associated carpometacarpal arthritis",
+   "MRI if a soft-tissue mass or occult ganglion is suspected",
+   "Ultrasound to distinguish a solid boss from a cystic ganglion",
+   "Diagnostic local anaesthetic injection to confirm the pain source"
+  ],
+  "redFlags": [
+   "Rapidly enlarging or aggressive-looking bony lesion suggesting neoplasm",
+   "Features of inflammatory or crystal arthropathy",
+   "Extensor tendon attrition or rupture over the prominence"
+  ],
+  "prognosis": "Most carpal bosses are benign and either asymptomatic or settle with activity modification; surgical excision relieves symptoms in refractory cases, though recurrence and residual dorsal ache can occur.",
+  "pitfalls": [
+   "Confusing a hard, fixed carpal boss with a mobile dorsal ganglion.",
+   "Missing coexisting carpometacarpal osteoarthritis as the true pain source.",
+   "Using inadequate radiographic views that fail to demonstrate the ossicle.",
+   "Performing incomplete excision, which leads to symptomatic recurrence."
+  ],
+  "references": [
+   "Green's Operative Hand Surgery",
+   "Wheeless' Textbook of Orthopaedics",
+   "Rockwood and Green's Fractures in Adults"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Activity modification and avoidance of repetitive dorsal wrist loading as first-line conservative management",
+   "Wrist splinting or bracing to rest the second and third carpometacarpal joints and relieve dorsal pain",
+   "Simple analgesia and non-steroidal anti-inflammatory drugs for symptomatic relief",
+   "Local corticosteroid injection into the associated bursa or joint for persistent symptoms",
+   "Surgical excision of the bony prominence, with carpometacarpal arthrodesis where there is established osteoarthritis, reserved for refractory cases",
+   "Counselling about the possibility of recurrence and residual dorsal ache after excision",
+   "Referral to hand surgery for persistent or diagnostically uncertain cases"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "carpal_boss-pathway",
+   "title": "carpal boss: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A carpal boss is a firm bony prominence on the dorsum of the hand at the base of the second and third carpometacarpal joints, over the capitate-trapezoid-metacarpal junction.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapidly enlarging or aggressive-looking bony lesion suggesting neoplasm",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Focused dorsal hand radiographs including a partially supinated oblique carpal boss view, Lateral radiograph with the wrist slightly flexed to profile the prominence, CT to define an os styloideum and associated"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Activity modification and avoidance of repetitive dorsal wrist loading as first-line conservative management"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Confusing a hard, fixed carpal boss with a mobile dorsal ganglion."
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of carpal boss."
+  }
+ ],
+ "tables": [
+  {
+   "id": "carpal_boss-matrix",
+   "title": "carpal boss: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A carpal boss is a firm bony prominence on the dorsum of the hand at the base of the second and third carpometacarpal joints,",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "The carpal boss is a bony excrescence at the second and third carpometacarpal joints, arising either as a degenerative osteophyte from the carpometacarpal articulation or from an unfused ossification centre (os styloideum) that persists as an accessory bone. Repetitive dorsal stress and osteoarthritic change at these tightly constrained carpometacarpal joints generate the prominence, which can mechanically irritate the overlying extensor tendons and a superficial bursa, producing localised dorsal pain.",
-    "additionalDifferentials": [
-      "Dorsal wrist ganglion",
-      "Extensor tendon tenosynovitis",
-      "Second or third carpometacarpal osteoarthritis",
-      "Gouty tophus or crystal deposition",
-      "Dorsal osteophyte from scaphotrapeziotrapezoid arthritis",
-      "Anomalous extensor digitorum brevis manus muscle",
-      "Osteochondroma or other bony tumour"
+    [
+     "Key Investigations",
+     "Focused dorsal hand radiographs including a partially supinated oblique carpal boss view, Lateral radiograph with the wrist",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Focused dorsal hand radiographs including a partially supinated oblique carpal boss view",
-      "Lateral radiograph with the wrist slightly flexed to profile the prominence",
-      "CT to define an os styloideum and associated carpometacarpal arthritis",
-      "MRI if a soft-tissue mass or occult ganglion is suspected",
-      "Ultrasound to distinguish a solid boss from a cystic ganglion",
-      "Diagnostic local anaesthetic injection to confirm the pain source"
+    [
+     "Primary Differentials",
+     "Dorsal wrist ganglion, Extensor tendon tenosynovitis, Second or third carpometacarpal osteoarthritis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rapidly enlarging or aggressive-looking bony lesion suggesting neoplasm",
-      "Features of inflammatory or crystal arthropathy",
-      "Extensor tendon attrition or rupture over the prominence"
+    [
+     "Management Strategy",
+     "Activity modification and avoidance of repetitive dorsal wrist loading as first-line conservative management",
+     "Core treatment modality"
     ],
-    "prognosis": "Most carpal bosses are benign and either asymptomatic or settle with activity modification; surgical excision relieves symptoms in refractory cases, though recurrence and residual dorsal ache can occur.",
-    "pitfalls": [
-      "Confusing a hard, fixed carpal boss with a mobile dorsal ganglion.",
-      "Missing coexisting carpometacarpal osteoarthritis as the true pain source.",
-      "Using inadequate radiographic views that fail to demonstrate the ossicle.",
-      "Performing incomplete excision, which leads to symptomatic recurrence."
-    ],
-    "references": [
-      "Green's Operative Hand Surgery",
-      "Wheeless' Textbook of Orthopaedics",
-      "Rockwood and Green's Fractures in Adults"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Activity modification and avoidance of repetitive dorsal wrist loading as first-line conservative management",
-      "Wrist splinting or bracing to rest the second and third carpometacarpal joints and relieve dorsal pain",
-      "Simple analgesia and non-steroidal anti-inflammatory drugs for symptomatic relief",
-      "Local corticosteroid injection into the associated bursa or joint for persistent symptoms",
-      "Surgical excision of the bony prominence, with carpometacarpal arthrodesis where there is established osteoarthritis, reserved for refractory cases",
-      "Counselling about the possibility of recurrence and residual dorsal ache after excision",
-      "Referral to hand surgery for persistent or diagnostically uncertain cases"
+    [
+     "Clinical Pitfall",
+     "Confusing a hard, fixed carpal boss with a mobile dorsal ganglion.",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for carpal boss."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "carpal-boss-real-image",
+   "title": "carpal boss: Diagnostic Musculoskeletal Radiograph",
+   "type": "xray",
+   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
+   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
+   "annotations": [
+    {
+     "label": "Cortical Margins",
+     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
+    },
+    {
+     "label": "Trabecular Architecture",
+     "description": "Medullary bone density, lucencies, and subchondral mineralization."
+    },
+    {
+     "label": "Joint Articulation",
+     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+    }
+   ]
+  }
+ ]
 }

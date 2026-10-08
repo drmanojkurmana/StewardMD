@@ -1,74 +1,169 @@
 {
-  "id": "opioid_toxidrome",
-  "name": "Opioid toxidrome",
-  "aliases": [
-    "opioid toxicity",
-    "opioid overdose syndrome"
+ "id": "opioid_toxidrome",
+ "name": "Opioid toxidrome",
+ "aliases": [
+  "opioid toxicity",
+  "opioid overdose syndrome"
+ ],
+ "class": "non_infective",
+ "system": "Multisystem / Toxicology",
+ "specialty": "Emergency medicine / Toxicology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Standard toxicology references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "The classic triad is depressed consciousness, respiratory depression and pinpoint pupils",
+   "Respiratory depression is the immediate life threat and the target of resuscitation",
+   "Naloxone, an opioid antagonist, reverses toxicity and is titrated to restore adequate ventilation rather than full alertness",
+   "Miosis may be absent with certain agents or co-ingestants, so its absence does not exclude opioid toxicity",
+   "Long-acting or sustained-release opioids and potent synthetic opioids may need repeated doses or an infusion of antagonist",
+   "Non-cardiogenic pulmonary oedema and aspiration are recognised complications"
   ],
-  "class": "non_infective",
-  "system": "Multisystem / Toxicology",
-  "specialty": "Emergency medicine / Toxicology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Standard toxicology references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "The classic triad is depressed consciousness, respiratory depression and pinpoint pupils",
-      "Respiratory depression is the immediate life threat and the target of resuscitation",
-      "Naloxone, an opioid antagonist, reverses toxicity and is titrated to restore adequate ventilation rather than full alertness",
-      "Miosis may be absent with certain agents or co-ingestants, so its absence does not exclude opioid toxicity",
-      "Long-acting or sustained-release opioids and potent synthetic opioids may need repeated doses or an infusion of antagonist",
-      "Non-cardiogenic pulmonary oedema and aspiration are recognised complications"
+  "pathophysiology": "The opioid toxidrome results from agonism at mu-opioid receptors in the central nervous system, depressing the brainstem respiratory drive and level of consciousness and causing pupillary constriction. Hypoventilation leads to hypercapnia and hypoxia, which are the principal causes of death. The duration and severity depend on the agent's potency and pharmacokinetics, so long-acting and highly potent synthetic opioids can outlast a single dose of antagonist and cause recurrent toxicity.",
+  "additionalDifferentials": [
+   "Sedative-hypnotic or alcohol intoxication",
+   "Clonidine or other central sympatholytic overdose",
+   "Pontine haemorrhage or other brainstem lesion (for pinpoint pupils)",
+   "Hypoglycaemia or other metabolic coma",
+   "CNS infection"
+  ],
+  "additionalInvestigations": [
+   "Clinical recognition and response to a trial of opioid antagonist",
+   "Oxygenation and ventilation assessment, including capnography where available",
+   "Blood glucose and basic metabolic screen to exclude mimics",
+   "Chest imaging if pulmonary oedema or aspiration is suspected",
+   "Consideration of co-ingestants such as paracetamol in combination products"
+  ],
+  "redFlags": [
+   "Inadequate ventilation or hypoxia",
+   "Recurrent toxicity after initial antagonist, suggesting a long-acting agent",
+   "Signs of aspiration or pulmonary oedema",
+   "Coma with an uncertain airway"
+  ],
+  "prognosis": "With timely airway and ventilatory support and opioid antagonist, recovery is usually rapid and complete; death results mainly from unrecognised respiratory failure or complications such as aspiration and hypoxic brain injury.",
+  "pitfalls": [
+   "Excluding opioid toxicity because pupils are not pinpoint",
+   "Giving a single antagonist dose for a long-acting opioid and missing recurrence",
+   "Overzealous antagonist dosing precipitating severe withdrawal",
+   "Overlooking co-ingested paracetamol in combination analgesics"
+  ],
+  "references": [
+   "Goldfrank's Toxicologic Emergencies",
+   "Tintinalli's Emergency Medicine"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Manage the airway and support ventilation and oxygenation immediately, as hypoventilation is the principal life threat",
+   "Give the opioid antagonist naloxone titrated to restore adequate ventilation rather than full alertness",
+   "Use repeated naloxone doses or a continuous infusion for long-acting, sustained-release or potent synthetic opioids that outlast a single antagonist dose",
+   "Observe for a prolonged period to detect recurrent toxicity after the initial response",
+   "Provide supportive care for complications such as non-cardiogenic pulmonary oedema and aspiration",
+   "Screen for co-ingestants, particularly paracetamol in combination products, and exclude metabolic mimics",
+   "Refer to addiction services and provide take-home naloxone on recovery"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "opioid_toxidrome-pathway",
+   "title": "Opioid toxidrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "The classic triad is depressed consciousness, respiratory depression and pinpoint pupils",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Inadequate ventilation or hypoxia",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Clinical recognition and response to a trial of opioid antagonist, Oxygenation and ventilation assessment, including capnography where available, Blood glucose and basic metabolic screen to exclude mimics"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Manage the airway and support ventilation and oxygenation immediately, as hypoventilation is the principal life threat"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Excluding opioid toxicity because pupils are not pinpoint"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of opioid toxidrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "opioid_toxidrome-matrix",
+   "title": "Opioid toxidrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The classic triad is depressed consciousness, respiratory depression and pinpoint pupils",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "The opioid toxidrome results from agonism at mu-opioid receptors in the central nervous system, depressing the brainstem respiratory drive and level of consciousness and causing pupillary constriction. Hypoventilation leads to hypercapnia and hypoxia, which are the principal causes of death. The duration and severity depend on the agent's potency and pharmacokinetics, so long-acting and highly potent synthetic opioids can outlast a single dose of antagonist and cause recurrent toxicity.",
-    "additionalDifferentials": [
-      "Sedative-hypnotic or alcohol intoxication",
-      "Clonidine or other central sympatholytic overdose",
-      "Pontine haemorrhage or other brainstem lesion (for pinpoint pupils)",
-      "Hypoglycaemia or other metabolic coma",
-      "CNS infection"
+    [
+     "Key Investigations",
+     "Clinical recognition and response to a trial of opioid antagonist, Oxygenation and ventilation assessment, including capnography",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Clinical recognition and response to a trial of opioid antagonist",
-      "Oxygenation and ventilation assessment, including capnography where available",
-      "Blood glucose and basic metabolic screen to exclude mimics",
-      "Chest imaging if pulmonary oedema or aspiration is suspected",
-      "Consideration of co-ingestants such as paracetamol in combination products"
+    [
+     "Primary Differentials",
+     "Sedative-hypnotic or alcohol intoxication, Clonidine or other central sympatholytic overdose, Pontine haemorrhage or other",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Inadequate ventilation or hypoxia",
-      "Recurrent toxicity after initial antagonist, suggesting a long-acting agent",
-      "Signs of aspiration or pulmonary oedema",
-      "Coma with an uncertain airway"
+    [
+     "Management Strategy",
+     "Manage the airway and support ventilation and oxygenation immediately, as hypoventilation is the principal life threat",
+     "Core treatment modality"
     ],
-    "prognosis": "With timely airway and ventilatory support and opioid antagonist, recovery is usually rapid and complete; death results mainly from unrecognised respiratory failure or complications such as aspiration and hypoxic brain injury.",
-    "pitfalls": [
-      "Excluding opioid toxicity because pupils are not pinpoint",
-      "Giving a single antagonist dose for a long-acting opioid and missing recurrence",
-      "Overzealous antagonist dosing precipitating severe withdrawal",
-      "Overlooking co-ingested paracetamol in combination analgesics"
-    ],
-    "references": [
-      "Goldfrank's Toxicologic Emergencies",
-      "Tintinalli's Emergency Medicine"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Manage the airway and support ventilation and oxygenation immediately, as hypoventilation is the principal life threat",
-      "Give the opioid antagonist naloxone titrated to restore adequate ventilation rather than full alertness",
-      "Use repeated naloxone doses or a continuous infusion for long-acting, sustained-release or potent synthetic opioids that outlast a single antagonist dose",
-      "Observe for a prolonged period to detect recurrent toxicity after the initial response",
-      "Provide supportive care for complications such as non-cardiogenic pulmonary oedema and aspiration",
-      "Screen for co-ingestants, particularly paracetamol in combination products, and exclude metabolic mimics",
-      "Refer to addiction services and provide take-home naloxone on recovery"
+    [
+     "Clinical Pitfall",
+     "Excluding opioid toxicity because pupils are not pinpoint",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for opioid toxidrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "opioid-toxidrome-real-image",
+   "title": "Opioid toxidrome: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

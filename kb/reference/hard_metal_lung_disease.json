@@ -1,80 +1,175 @@
 {
-  "id": "hard_metal_lung_disease",
-  "name": "Hard metal lung disease",
-  "aliases": [
-    "cobalt lung",
-    "giant-cell interstitial pneumonia",
-    "GIP",
-    "tungsten carbide pneumoconiosis",
-    "hard metal pneumoconiosis"
+ "id": "hard_metal_lung_disease",
+ "name": "Hard metal lung disease",
+ "aliases": [
+  "cobalt lung",
+  "giant-cell interstitial pneumonia",
+  "GIP",
+  "tungsten carbide pneumoconiosis",
+  "hard metal pneumoconiosis"
+ ],
+ "class": "non_infective",
+ "system": "Respiratory",
+ "specialty": "Respiratory Medicine / Occupational Lung Disease",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Occupational and Environmental Respiratory Medicine reference texts",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Occurs in workers exposed to hard metal, an alloy of tungsten carbide bound with cobalt, used in cutting tools, drill bits, and diamond polishing",
+   "Cobalt is regarded as the key sensitising and toxic component driving lung injury",
+   "Presents as an interstitial lung disease with cough and progressive exertional breathlessness, sometimes with an occupational asthma phenotype",
+   "The histological hallmark is giant-cell interstitial pneumonia, with bizarre multinucleated giant cells and cannibalistic cell-in-cell appearances",
+   "Bronchoalveolar lavage may reveal characteristic multinucleated giant cells and support the diagnosis",
+   "Disease can occur even with low measured exposure, and susceptibility appears to have an immunological or individual component",
+   "Diamond polishers using cobalt-containing discs can develop similar disease even without tungsten carbide (cobalt lung)"
   ],
-  "class": "non_infective",
-  "system": "Respiratory",
-  "specialty": "Respiratory Medicine / Occupational Lung Disease",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Occupational and Environmental Respiratory Medicine reference texts",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Occurs in workers exposed to hard metal, an alloy of tungsten carbide bound with cobalt, used in cutting tools, drill bits, and diamond polishing",
-      "Cobalt is regarded as the key sensitising and toxic component driving lung injury",
-      "Presents as an interstitial lung disease with cough and progressive exertional breathlessness, sometimes with an occupational asthma phenotype",
-      "The histological hallmark is giant-cell interstitial pneumonia, with bizarre multinucleated giant cells and cannibalistic cell-in-cell appearances",
-      "Bronchoalveolar lavage may reveal characteristic multinucleated giant cells and support the diagnosis",
-      "Disease can occur even with low measured exposure, and susceptibility appears to have an immunological or individual component",
-      "Diamond polishers using cobalt-containing discs can develop similar disease even without tungsten carbide (cobalt lung)"
+  "pathophysiology": "Inhaled cobalt, particularly in combination with tungsten carbide, generates reactive oxygen species and acts as a haptenic sensitiser, provoking both toxic and immune-mediated injury to alveolar and bronchiolar epithelium. The resulting inflammatory response produces interstitial fibrosis and the distinctive giant-cell interstitial pneumonia pattern, characterised by numerous multinucleated giant cells within alveolar spaces and interstitium, some engulfing other inflammatory cells. Continued exposure drives progressive fibrosis, while an asthmatic or hypersensitivity component reflects the sensitising nature of cobalt. Individual susceptibility means severity does not correlate simply with measured dust levels.",
+  "additionalDifferentials": [
+   "Idiopathic interstitial pneumonias (including UIP/NSIP patterns)",
+   "Hypersensitivity pneumonitis",
+   "Sarcoidosis",
+   "Other pneumoconioses (silicosis, berylliosis)",
+   "Connective tissue disease-associated interstitial lung disease",
+   "Occupational asthma from other sensitisers"
+  ],
+  "additionalInvestigations": [
+   "High-resolution CT to define the interstitial pattern and fibrosis",
+   "Bronchoalveolar lavage looking for multinucleated giant cells",
+   "Lung biopsy demonstrating giant-cell interstitial pneumonia when needed",
+   "Detailed occupational history and workplace exposure assessment",
+   "Pulmonary function tests including diffusing capacity",
+   "Cobalt exposure biomarkers (urine or blood cobalt) where available"
+  ],
+  "redFlags": [
+   "Rapidly progressive breathlessness and hypoxaemia indicating accelerating fibrosis",
+   "Continued workplace exposure despite established disease",
+   "Development of respiratory failure or cor pulmonale",
+   "Features suggesting superimposed infection in an immunosuppressed treated patient"
+  ],
+  "prognosis": "Outcome varies from stabilisation or improvement after exposure cessation and corticosteroids to relentless progression to fibrosis and respiratory failure; early recognition and removal from exposure offer the best chance of recovery.",
+  "pitfalls": [
+   "Missing the occupational link and labelling the disease idiopathic interstitial pneumonia",
+   "Assuming low measured cobalt levels exclude the diagnosis",
+   "Overlooking a coexisting occupational asthma component",
+   "Allowing continued exposure, which perpetuates injury despite treatment"
+  ],
+  "references": [
+   "Murray & Nadel's Textbook of Respiratory Medicine",
+   "Parkes' Occupational Lung Disorders"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Remove the worker from cobalt and hard metal exposure, as cessation of exposure is the single most important intervention",
+   "Give systemic corticosteroids to suppress the active giant-cell interstitial pneumonia and inflammatory component",
+   "Provide supportive care with supplemental oxygen, pulmonary rehabilitation, and inhaled therapy for any airflow-obstruction or occupational-asthma phenotype",
+   "Monitor with serial pulmonary function including diffusing capacity and high-resolution CT to track fibrosis",
+   "Undertake workplace exposure control and report as an occupational lung disease",
+   "Manage jointly through a multidisciplinary team of respiratory and occupational medicine specialists",
+   "Refer for antifibrotic consideration or lung transplantation assessment when fibrosis progresses towards respiratory failure"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "hard_metal_lung_disease-pathway",
+   "title": "Hard metal lung disease: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Occurs in workers exposed to hard metal, an alloy of tungsten carbide bound with cobalt, used in cutting tools, drill bits, and diamond polishing",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapidly progressive breathlessness and hypoxaemia indicating accelerating fibrosis",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: High-resolution CT to define the interstitial pattern and fibrosis, Bronchoalveolar lavage looking for multinucleated giant cells, Lung biopsy demonstrating giant-cell interstitial pneumonia when needed"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Remove the worker from cobalt and hard metal exposure, as cessation of exposure is the single most important intervention"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Missing the occupational link and labelling the disease idiopathic interstitial pneumonia"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of hard metal lung disease."
+  }
+ ],
+ "tables": [
+  {
+   "id": "hard_metal_lung_disease-matrix",
+   "title": "Hard metal lung disease: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Occurs in workers exposed to hard metal, an alloy of tungsten carbide bound with cobalt, used in cutting tools, drill bits, and",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Inhaled cobalt, particularly in combination with tungsten carbide, generates reactive oxygen species and acts as a haptenic sensitiser, provoking both toxic and immune-mediated injury to alveolar and bronchiolar epithelium. The resulting inflammatory response produces interstitial fibrosis and the distinctive giant-cell interstitial pneumonia pattern, characterised by numerous multinucleated giant cells within alveolar spaces and interstitium, some engulfing other inflammatory cells. Continued exposure drives progressive fibrosis, while an asthmatic or hypersensitivity component reflects the sensitising nature of cobalt. Individual susceptibility means severity does not correlate simply with measured dust levels.",
-    "additionalDifferentials": [
-      "Idiopathic interstitial pneumonias (including UIP/NSIP patterns)",
-      "Hypersensitivity pneumonitis",
-      "Sarcoidosis",
-      "Other pneumoconioses (silicosis, berylliosis)",
-      "Connective tissue disease-associated interstitial lung disease",
-      "Occupational asthma from other sensitisers"
+    [
+     "Key Investigations",
+     "High-resolution CT to define the interstitial pattern and fibrosis, Bronchoalveolar lavage looking for multinucleated giant",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "High-resolution CT to define the interstitial pattern and fibrosis",
-      "Bronchoalveolar lavage looking for multinucleated giant cells",
-      "Lung biopsy demonstrating giant-cell interstitial pneumonia when needed",
-      "Detailed occupational history and workplace exposure assessment",
-      "Pulmonary function tests including diffusing capacity",
-      "Cobalt exposure biomarkers (urine or blood cobalt) where available"
+    [
+     "Primary Differentials",
+     "Idiopathic interstitial pneumonias (including UIP/NSIP patterns), Hypersensitivity pneumonitis, Sarcoidosis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rapidly progressive breathlessness and hypoxaemia indicating accelerating fibrosis",
-      "Continued workplace exposure despite established disease",
-      "Development of respiratory failure or cor pulmonale",
-      "Features suggesting superimposed infection in an immunosuppressed treated patient"
+    [
+     "Management Strategy",
+     "Remove the worker from cobalt and hard metal exposure, as cessation of exposure is the single most important intervention",
+     "Core treatment modality"
     ],
-    "prognosis": "Outcome varies from stabilisation or improvement after exposure cessation and corticosteroids to relentless progression to fibrosis and respiratory failure; early recognition and removal from exposure offer the best chance of recovery.",
-    "pitfalls": [
-      "Missing the occupational link and labelling the disease idiopathic interstitial pneumonia",
-      "Assuming low measured cobalt levels exclude the diagnosis",
-      "Overlooking a coexisting occupational asthma component",
-      "Allowing continued exposure, which perpetuates injury despite treatment"
-    ],
-    "references": [
-      "Murray & Nadel's Textbook of Respiratory Medicine",
-      "Parkes' Occupational Lung Disorders"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Remove the worker from cobalt and hard metal exposure, as cessation of exposure is the single most important intervention",
-      "Give systemic corticosteroids to suppress the active giant-cell interstitial pneumonia and inflammatory component",
-      "Provide supportive care with supplemental oxygen, pulmonary rehabilitation, and inhaled therapy for any airflow-obstruction or occupational-asthma phenotype",
-      "Monitor with serial pulmonary function including diffusing capacity and high-resolution CT to track fibrosis",
-      "Undertake workplace exposure control and report as an occupational lung disease",
-      "Manage jointly through a multidisciplinary team of respiratory and occupational medicine specialists",
-      "Refer for antifibrotic consideration or lung transplantation assessment when fibrosis progresses towards respiratory failure"
+    [
+     "Clinical Pitfall",
+     "Missing the occupational link and labelling the disease idiopathic interstitial pneumonia",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for hard metal lung disease."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "hard-metal-lung-disease-real-image",
+   "title": "Hard metal lung disease: Diagnostic Chest Radiograph",
+   "type": "xray",
+   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
+   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
+   "annotations": [
+    {
+     "label": "Parenchyma & Airspaces",
+     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
+    },
+    {
+     "label": "Bronchovascular Tree",
+     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
+    },
+    {
+     "label": "Pleural Margins",
+     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+    }
+   ]
+  }
+ ]
 }

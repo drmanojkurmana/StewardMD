@@ -398,6 +398,136 @@ Owner decisions: [[decisions/Decisions]] "PrepNucleus pricing, free tier and soc
 10. Only after step 9: set `smd_prep_pro_enforce` on (it is a client flag today: localStorage / `?prepenforce=1`; a remote default needs a remote-config entry).
 11. Optional config: `PREP_STUDENT_DISCOUNT_PCT`, `PREP_REFERRAL_DAYS`, `PREP_LAUNCH_ENDS`, `PREP_INTRO_AFTER_LAUNCH`, `PREP_WINBACK_*` in KV `billing:cfg`.
 
+## Premium UI (2026-10-07, branch `feat/prep-premium-ui`, `?v=prep14`)
+- World: night-teal room lit from the top (`--pn-aura` on `.pn-root`), one deep teal hero surface (`--pn-hero`) for readiness,
+  finish screens (`.pn-score`, `.pn-lsn-fin`, `.pk-end`) and the Arena lobby; tokens are re-scoped inside the hero so children
+  read on teal. Rounded numerals (`--pn-num`: ui-rounded, system fallback). Gradient icon squircles hued by `--h`
+  (`subjHue()` in prep.js for subjects, `[data-act]` rules in prep.css for actions). Light cards: shadow, no border; dark
+  cards: hairline `--pn-edge`.
+- Home hero (`heroHtml` in prep-plan.js): readiness ring, exam countdown, chips for streak (`CORE.streak`), answers today
+  (`days[today]`) and lesson XP (sum of `ls[*].xp`). Practise and Compete rows render as two-column tiles (CSS only).
+- `prep-motion.js` (optional in the loader): MutationObserver on the overlay; ring draw and count-up, ease-out entrances,
+  spring pop on finish screens and sheets, answer lift or shake with `SMD_HAPTICS` success/error, mouse-only tile tilt.
+  Uses a modern Motion build (`/vendor/motion/motion.js`, evaluated privately because index.html keeps an older Motion One
+  on `window.Motion` for OncoTree). Off under reduced motion; CSS shows the final state without it. CSS-only effects:
+  aurora drift and meteors on hero surfaces (paused off screen), rotating light border on Solve next and the Daily sprint
+  tile, shimmer on the plan placeholder.
+- Owner rule (2026-10-07): no "AI-generated" labels and no per-item source or credit lines anywhere in PrepNucleus (runner,
+  lessons, cards, decks, accuracy page). Credits and how content is made live in terms.html section 31 and privacy.html
+  section 26. Data fields (`gen`, `prov`, deck `label`) stay in the JSON; only the PYQ paper type line still shows.
+- Headless suites finish finite animations before each screenshot (`shotCall`), so shots show final frames.
+
+## Premium UI round 2 (2026-10-07, same branch, `?v=prep15`)
+- Art: 14 WebP illustrations in `prep/art/` (about 300 KB; `scripts/build-www.sh` copies them): `hero-dark`/`hero-light`
+  (home and onboarding sky), `ob-exam|date|min|rem`, `fin-mock` (set, test and event results), `fin-lesson` (lesson and
+  cards finish), `fin-win`/`fin-loss` (battle end; draw uses loss), `arena` (lobby banner, battle card), `empty-bm|nb|sc`.
+  Made with Vertex `gemini-3.1-flash-image` at 1K ($0.067 an image; Imagen 4 ids were discontinued 2026-06-30 and 404),
+  15 billed calls, $1.01. No text, people or logos in them.
+- Home scene: `.pn-sky` is the first child of the root on home and onboarding (CSS picks the theme's image); bar, tabs and
+  body sit above it (z-index 1). prep-motion.js moves it with the body scroll (0.42x, 1x under reduced motion) and fades
+  it; without prep-motion.js it stays put. Readiness card is frosted glass over it.
+- Level: `xpOf(store)` = answers + right answers + lesson XP; `levelOf(xp)`: level n starts at 50n(n-1) XP, ranks Fresher
+  (1), Intern (3), Resident (5), Registrar (8), Consultant (12). Shown in the hero and explained in the readiness sheet.
+  The lesson XP chip is gone (it is inside the XP now).
+- Section heads have a `.pn-eb` line above (outside `.pn-h`, so tests reading `.pn-h` text are unchanged). Compete with
+  more than one row is a snap carousel; the battle card shows the arena art.
+- Finish art is a `::after` on `.pn-score`, `.pn-lsn-fin`, `.pk-end`, `.pn-lobby`; empty states use `.pn-empty.pn-art-*`.
+- Motion: sparkles replaced round 1's meteors (a meteor crossing the ring read as a stray line); confetti on a battle win,
+  a lesson's first XP and a set at 70% or better; lesson XP counts up; the level bar fills; spotlight and tilt on tiles
+  for mouse or trackpad only. Children of hero surfaces are `position: relative`, so the confetti layer is excluded.
+
+## Premium UI round 3 (2026-10-07, same branch, `?v=prep16`)
+- Runner focus mode (prep.js `renderRun`): `.pn-qprog` strip under the bar (one segment a question up to 30: right,
+  wrong, answered, marked, current; a plain fill beyond), `runStreak` chip "N in a row" (3 or more, practice only, from
+  this set's answers), a pace ring around the test clock (empties over limit / questions; `.over` turns it amber),
+  bookmark and report as labelled icon buttons in the bar (`.pn-acts`), larger stem, options press to 0.97.
+  The reveal plays once per answer: `r.fresh` puts `.pn-new` on the feedback card only on the paint right after a tap
+  (a bookmark or tag repaint keeps still; a key answer sets `st.kb` and skips it). prep-motion.js: chosen option lifts
+  or shakes once, the right option glows (CSS `pn-glow` via `:has(.pn-new)`), the card springs up 36 px.
+- Runner swipe (`bindRunSwipe`, touch and pen only): left = next once answered (any time in a test), right = previous in
+  a test; rubber band where it cannot go; commit past 80 px or 0.5 px/ms; the next question enters from that side
+  (`.pn-qw.in-r/in-l`). A drag that settles back sets `st.dragAt` so its trailing click is not an answer (cleared on the
+  next press). Keys (`onRunKey`): A to D or 1 to 4 answer, Enter or right arrow next, left arrow back in a test.
+- Cards: `swipeGrade` adds up = Easy (4); drag tint and stamp per grade (`.pk-tint.l/r/u`, stamp is a tab above the
+  card), next two cards peek (`.pk-stack .pk-peek`, blank backs) and the first rises with the throw; a thrown card
+  carries on from the finger; a short throw settles on a spring (`PREP_MOTION.settle`); one haptic when the commit line
+  is crossed. Progress is a ring in the bar (`.pk-ring`, cards left inside, animated from `K.ringAt`).
+- Lessons: step dots (current a lit pill, `i.on` semantics unchanged), 21 px reading type with key terms on a
+  highlighter stroke, image visuals edge to edge under 752 px, Play pill with a waveform that moves only while speaking,
+  32 px shared-axis step slide, pinch zoom on the enlarged image (`bindPinch`, 1x to 4x around the midpoint, pan when
+  zoomed, tap toggles 2.2x; transform only).
+- Arena: initials avatars in gradient rings (`hueOf(name)`); the match screen is a VS moment over `prep/art/vs.webp`
+  (`vsIntroHtml`, `.pn-vs.pn-vsi`, prep-motion.js `vsIntro`); scores roll when they change (`.tick`), a round's points
+  float up once (`.pn-pts`, CSS only); the end counts the rating to its new value (`.pn-rtick`) with a delta chip.
+- My stats is a profile: level card (`levelOf`/`xpOf` from prep-plan.js, `prep/art/level.webp`), day streak, best
+  streak (`bestStreak`), answered, share right, a 12-week study calendar (`heatWeeks`, Monday first, `heatLevel` 0 to 4 at
+  1/10/25/50 answers), "Subject mastery" bars (the accuracy list, fill by transform). "Share my progress" draws a
+  1080 x 1350 PNG on a canvas (`drawCard`: hero-dark and streak art, level, streak, calendar, totals; no name or ID) and
+  opens the native share sheet through Filesystem + Share (as atlas3d.js), else Web Share with a file, else a download.
+- Art: `streak.webp`, `level.webp`, `vs.webp` (51 KB), 3 calls, $0.20 (log in the job's imagen/log.tsv).
+- Headless suites wait 150 ms before each screenshot (Motion starts its animations on the next frame). `STRIP=<dir>`
+  on run-prep-ui, run-prep-flash-ui and run-prep-arena-ui writes motion frames (paused animations stepped in ms).
+
+## Premium UI round 4 (2026-10-07, same branch, `?v=prep17`)
+- Navigation motion: prep.js `nav(dir)` marks the next `paint()` (push 1, back -1, tab or filter 0; the mark lapses after
+  1.5 s; Escape never marks). prep-motion.js `nav(root, d)` runs WAAPI on `:scope > .pn-body` (28 px shared-axis slide plus
+  fade, 240 ms) and the title and tabs (12 px, 200 ms); a tab cross-fades the body (180 ms); reduced motion is a 160 ms fade.
+  The first 450 ms after the overlay opens are not animated. Marked: push, back, runner start, done, exam tab, subject
+  filter, mistakes filter, onboarding steps (prep-plan.js), social tabs (prep-social.js), Arena board tabs (prep-arena.js).
+  `HOST.nav` exposes it to the other files.
+- Loading: every `.pn-load` is a CSS skeleton (four card shapes from one pseudo-element's box-shadows, a shimmer that moves
+  by transform, `contain: paint`); the status text stays as a small label. Exempt: `.pn-sheet .pn-load` and
+  `#pcCreateView .pn-load`. No JS change, so every module's loading state got it.
+- Screens: subject hero (`.pn-subhead`, hue-tinted deep surface, icon, ring via `mring()`, reviews due), module panel
+  `.pn-modp` (answered ring, hue glow; also the PYQ panels), mistakes filters on one scrolling line (`.pn-wrap.pn-scroll`)
+  with a tag-hued mark per row, search field glyph and a prompt state (`.pn-hint`), bookmarks and downloads with subject
+  tiles, downloads art (`empty-dl.webp`), custom module in two panels with a summary line, mock banner (`mock.webp`),
+  per-subject meters in the mock analysis, question grid key, PYQ papers banner (`#pnYq::before`, `papers.webp`),
+  pricing plan art (`pro.webp`), accuracy hero figure (`.ps-hero`, share of keys that matched the independent check).
+- Perf: the readiness card lost its 22 px backdrop blur (it scrolls over the moving sky) and gained `contain: paint`;
+  `.pn-qw` has `will-change` only while dragging; the Layer C progress bar fills by `scaleX`; `.pl-num` is solid white (no
+  gradient text). Art: 4 calls, $0.27 (job imagen/log.tsv).
+- A11y: chips, tabs and small buttons are 44 px tall; the custom-module rows reflow at 130% zoom.
+- Headless: run-prep-ui.mjs checks the push and back slides, the tab cross-fade, Escape without animation, the reduced
+  motion fade, the skeleton and the search prompt.
+
+## Premium UI round 5 (2026-10-08, same branch, `?v=prep18`)
+- Sheets (prep.js `bindSheetDrag`): every `.pn-sheet-wrap > .pn-sheet` follows a touch or pen drag down 1:1 (rubber band
+  up), the scrim dims with it; release past 30% of the height (max 160 px) or faster than 0.5 px/ms (measured over the
+  last 100 ms of movement, else the whole drag) slides it out from the finger and taps the sheet's own `.pn-scrim`, so
+  each module closes it its own way; anything less springs back (`PREP_MOTION.settle`). A sheet scrolled into its
+  content scrolls first unless the drag starts on `.pn-grab`; form fields never drag; a non-passive `touchmove` stops
+  the top-of-sheet overscroll from stealing the gesture; the trusted click that ends a drag is swallowed (350 ms).
+  Actions are a row (primary right); scrolling sheets keep them sticky at the bottom.
+- Settings sheet (prep-plan.js `drawSettings`): header with `plan.webp` and the plan in one line, sections
+  `.pl-grp.pl-g-<k>` with hued icon tiles (`.pl-sic`), exam and minutes as grouped rows (hairlines, check on the chosen,
+  minutes detail only on the chosen row), date, time, reminder and sync (`prep-native.js syncHtml`) as cells.
+- Readiness sheet (`whySheet`): `ready.webp` band with the score (`.pl-rnum`, the h2 text stays "X readiness: N"),
+  three rings coverage x retention x accuracy (`.pl-meters .pl-m`, drawn by CSS `pn-draw`, staggered), the three
+  factor rows with meters filling by scaleX (`.pl-fbar`, colour per factor), a level card (`.pl-rlv`, level.webp), the
+  weakest subjects with subject icon tiles, a score pill and one action each.
+- Limit sheet (prep-pro.js): `limit.webp`, used/limit meter, three icon rows.
+- Teacher (prep-teacher.js `explain`, `explainStep`): a chat. `.pt-ctx` pins the stem (3-line clamp) with "You chose X"
+  and "Answer Y" pills; the ask is the student's bubble; MaiK (`maik.webp` avatar) types (`.pt-dots`) while the phone
+  works, then the checked reply (`.pt-ans-b`, "MaiK explains" sender line) with the check note under it; chips "Back to
+  the question" and, after a good reply, "Show the stored explanation" (a native `details`). Nothing is streamed.
+- List screens: `hband(art, figure, label, line)` in prep.js (`HOST.hband`) is a painted band with one big figure:
+  bookmarks, mistakes (most common reason), custom module (live count), downloads (n of m offline), question grid
+  (answered, marked), Your decks (prep-create.js, after the list loads), Friends (prep-social.js). The figure rolls up
+  (prep-motion.js `rollNum`, WAAPI-clocked). Rows of `.pn-mods`, `.pc-decks`, `.ps-list` stagger in (35 ms) only on the
+  first paint after a push (or a list arriving within 1.5 s of it), and the readiness rows when that sheet opens.
+  The module hero carries the subject's icon tile above its figure (`.pn-modi`; a large glyph watermark was tried and
+  dropped: the anatomy figure read as a stick man over the text); the PYQ paper panel the papers art;
+  the accuracy hero the balance art; search hits a hued icon tile; mistakes and decks empty states have art.
+- Owner rule: the student no longer sees "Cost so far: Rs ... (N tokens)" on the Layer C progress or saved screens
+  (`costLine` stays for internal accounting and its tests). Every loading or busy label ends with the single
+  character ellipsis.
+- Art: 11 calls, $0.74 (job imagen/log.tsv): `accuracy custom decks friends grid limit maik mistakes empty-mt plan ready`.
+- Headless: run-prep-plan-ui.mjs checks the readiness rings and bars against the factors and drag-to-dismiss (a 50 px
+  pull springs back, a flick dismisses); run-prep-ui.mjs checks the teacher chat (stubbed native runtime).
+- Screenshots in dark need the OS in dark mode or Chrome started with `--force-dark-mode` (the app follows
+  prefers-color-scheme at boot).
+
 ## Store
 localStorage `smd_prep_v1`: `{v, cards, conf, days, mod:{t,ok,last}, bm, rep, exam, last, dl, hid, mt, goal, mh, ls, lsp, pl, pt, ra, fc}` (`ls`/`lsp`: Lessons;
 `pl`/`pt`/`ra`: Plan; `fc`: Cards). FSRS deck key

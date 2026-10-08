@@ -1,81 +1,176 @@
 {
-  "id": "cobalamin_a_b_defect",
-  "name": "Cobalamin A/B defect (vitamin B12-responsive methylmalonic acidaemia)",
-  "aliases": [
-    "cblA defect",
-    "cblB defect",
-    "MMAA deficiency",
-    "MMAB deficiency",
-    "vitamin B12-responsive methylmalonic aciduria",
-    "adenosylcobalamin deficiency"
+ "id": "cobalamin_a_b_defect",
+ "name": "Cobalamin A/B defect (vitamin B12-responsive methylmalonic acidaemia)",
+ "aliases": [
+  "cblA defect",
+  "cblB defect",
+  "MMAA deficiency",
+  "MMAB deficiency",
+  "vitamin B12-responsive methylmalonic aciduria",
+  "adenosylcobalamin deficiency"
+ ],
+ "class": "non_infective",
+ "system": "Metabolic / Genetics",
+ "specialty": "Metabolic Medicine / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Autosomal recessive disorders of intramitochondrial adenosylcobalamin synthesis (cblA due to MMAA, cblB due to MMAB) that impair methylmalonyl-CoA mutase, causing isolated methylmalonic acidaemia",
+   "They are the classic vitamin B12-responsive forms of methylmalonic acidaemia, and the cblA subtype in particular often responds well to hydroxocobalamin",
+   "Present with metabolic acidosis, hyperammonaemia, vomiting, lethargy and failure to thrive, typically precipitated by protein load or catabolic illness",
+   "Because adenosylcobalamin (not methylcobalamin) synthesis is affected, homocysteine is normal, distinguishing these from the combined cblC/cblD defects",
+   "Urine organic acids show markedly elevated methylmalonic acid; blood acylcarnitines show raised propionylcarnitine (C3)",
+   "A cobalamin-responsiveness trial with hydroxocobalamin is a key part of assessment, alongside protein restriction and carnitine supplementation",
+   "Management combines vitamin B12 (hydroxocobalamin) for responsive patients, avoidance of fasting and protein moderation, an emergency regimen with glucose during illness, and treatment of hyperammonaemia during crises"
   ],
-  "class": "non_infective",
-  "system": "Metabolic / Genetics",
-  "specialty": "Metabolic Medicine / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Autosomal recessive disorders of intramitochondrial adenosylcobalamin synthesis (cblA due to MMAA, cblB due to MMAB) that impair methylmalonyl-CoA mutase, causing isolated methylmalonic acidaemia",
-      "They are the classic vitamin B12-responsive forms of methylmalonic acidaemia, and the cblA subtype in particular often responds well to hydroxocobalamin",
-      "Present with metabolic acidosis, hyperammonaemia, vomiting, lethargy and failure to thrive, typically precipitated by protein load or catabolic illness",
-      "Because adenosylcobalamin (not methylcobalamin) synthesis is affected, homocysteine is normal, distinguishing these from the combined cblC/cblD defects",
-      "Urine organic acids show markedly elevated methylmalonic acid; blood acylcarnitines show raised propionylcarnitine (C3)",
-      "A cobalamin-responsiveness trial with hydroxocobalamin is a key part of assessment, alongside protein restriction and carnitine supplementation",
-      "Management combines vitamin B12 (hydroxocobalamin) for responsive patients, avoidance of fasting and protein moderation, an emergency regimen with glucose during illness, and treatment of hyperammonaemia during crises"
+  "pathophysiology": "Methylmalonyl-CoA mutase requires adenosylcobalamin as its cofactor to convert methylmalonyl-CoA to succinyl-CoA in the pathway that handles propiogenic substrates (certain amino acids, odd-chain fatty acids and cholesterol side-chains). The cblA (MMAA) and cblB (MMAB) defects impair the mitochondrial synthesis and delivery of adenosylcobalamin, so mutase activity is reduced despite a structurally normal enzyme. Methylmalonyl-CoA and its derivative methylmalonic acid accumulate, and propionyl-CoA is diverted to propionylcarnitine and related metabolites; secondary inhibition of the urea cycle contributes to hyperammonaemia during decompensation. Because only adenosylcobalamin is affected, methionine synthase activity and homocysteine remain normal. Provision of pharmacological hydroxocobalamin can restore cofactor supply in responsive patients, particularly the cblA type.",
+  "additionalDifferentials": [
+   "Methylmalonic acidaemia from methylmalonyl-CoA mutase (mut) deficiency",
+   "Combined methylmalonic acidaemia and homocystinuria (cblC/cblD defects)",
+   "Propionic acidaemia",
+   "Dietary or maternal vitamin B12 deficiency",
+   "Other organic acidaemias with hyperammonaemia",
+   "Transcobalamin and intrinsic-factor cobalamin transport defects"
+  ],
+  "additionalInvestigations": [
+   "Urine organic acids demonstrating markedly elevated methylmalonic acid",
+   "Plasma acylcarnitine profile showing raised propionylcarnitine (C3)",
+   "Plasma total homocysteine (normal here, distinguishing from cblC/cblD)",
+   "Blood gas, ammonia, glucose and lactate during acute presentations",
+   "A supervised hydroxocobalamin responsiveness trial",
+   "Complementation studies and MMAA/MMAB molecular genetic testing to define the subtype"
+  ],
+  "redFlags": [
+   "Severe metabolic acidosis with hyperammonaemia and encephalopathy during a crisis",
+   "Recurrent vomiting, lethargy and poor feeding with failure to thrive",
+   "Rapid deterioration triggered by protein load or intercurrent illness",
+   "Evolving renal impairment, a recognised long-term complication of methylmalonic acidaemia"
+  ],
+  "prognosis": "The cobalamin-responsive forms, especially cblA, generally have a better prognosis than mutase-deficient methylmalonic acidaemia, and many respond well to hydroxocobalamin with dietary management; nonetheless, poorly controlled disease carries risks of neurological injury and progressive renal impairment.",
+  "pitfalls": [
+   "Not performing a formal cobalamin-responsiveness trial and missing a treatable form",
+   "Failing to measure homocysteine and thereby confusing these defects with combined cblC/cblD disease",
+   "Overlooking hyperammonaemia and secondary carnitine deficiency during crises",
+   "Neglecting long-term monitoring of renal function"
+  ],
+  "references": [
+   "Scriver's OMMBID: Disorders of Cobalamin Metabolism and Methylmalonic Acidaemia",
+   "Saudubray, Baumgartner & Walter, Inborn Metabolic Diseases: Diagnosis and Treatment"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Pharmacological hydroxocobalamin as the disease-specific therapy, to which cobalamin-responsive forms, especially cblA, respond well.",
+   "Dietary restriction of propiogenic protein with a specialised methylmalonic acidaemia formula to limit substrate load.",
+   "L-carnitine supplementation to promote excretion of accumulated propionyl groups and prevent secondary carnitine depletion.",
+   "An emergency sick-day regimen during intercurrent illness, reversing catabolism with high-energy glucose feeds and reduced protein intake.",
+   "Aggressive management of acute metabolic decompensation, correcting metabolic acidosis and treating hyperammonaemia with nitrogen-scavenging drugs and, if severe, haemofiltration or dialysis.",
+   "Long-term monitoring of methylmalonic acid, acylcarnitines, growth and renal function, with surveillance for chronic renal impairment.",
+   "Multidisciplinary metabolic care with a specialist dietitian, and genetic counselling for these autosomal recessive MMAA and MMAB disorders."
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "cobalamin_a_b_defect-pathway",
+   "title": "Cobalamin A/B defect (vitamin B12-responsive methylmalonic acidaemia): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Autosomal recessive disorders of intramitochondrial adenosylcobalamin synthesis (cblA due to MMAA, cblB due to MMAB) that impair methylmalonyl-CoA mutase, causing isolated methylmalonic acidaemia",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Severe metabolic acidosis with hyperammonaemia and encephalopathy during a crisis",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Urine organic acids demonstrating markedly elevated methylmalonic acid, Plasma acylcarnitine profile showing raised propionylcarnitine (C3), Plasma total homocysteine (normal here, distinguishing from cblC/cblD)"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Pharmacological hydroxocobalamin as the disease-specific therapy, to which cobalamin-responsive forms, especially cblA, respond well."
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Not performing a formal cobalamin-responsiveness trial and missing a treatable form"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of cobalamin a/b defect (vitamin b12-responsive methylmalonic acidaemia)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "cobalamin_a_b_defect-matrix",
+   "title": "Cobalamin A/B defect (vitamin B12-responsive methylmalonic acidaemia): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Autosomal recessive disorders of intramitochondrial adenosylcobalamin synthesis (cblA due to MMAA, cblB due to MMAB) that impair",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Methylmalonyl-CoA mutase requires adenosylcobalamin as its cofactor to convert methylmalonyl-CoA to succinyl-CoA in the pathway that handles propiogenic substrates (certain amino acids, odd-chain fatty acids and cholesterol side-chains). The cblA (MMAA) and cblB (MMAB) defects impair the mitochondrial synthesis and delivery of adenosylcobalamin, so mutase activity is reduced despite a structurally normal enzyme. Methylmalonyl-CoA and its derivative methylmalonic acid accumulate, and propionyl-CoA is diverted to propionylcarnitine and related metabolites; secondary inhibition of the urea cycle contributes to hyperammonaemia during decompensation. Because only adenosylcobalamin is affected, methionine synthase activity and homocysteine remain normal. Provision of pharmacological hydroxocobalamin can restore cofactor supply in responsive patients, particularly the cblA type.",
-    "additionalDifferentials": [
-      "Methylmalonic acidaemia from methylmalonyl-CoA mutase (mut) deficiency",
-      "Combined methylmalonic acidaemia and homocystinuria (cblC/cblD defects)",
-      "Propionic acidaemia",
-      "Dietary or maternal vitamin B12 deficiency",
-      "Other organic acidaemias with hyperammonaemia",
-      "Transcobalamin and intrinsic-factor cobalamin transport defects"
+    [
+     "Key Investigations",
+     "Urine organic acids demonstrating markedly elevated methylmalonic acid, Plasma acylcarnitine profile showing raised",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Urine organic acids demonstrating markedly elevated methylmalonic acid",
-      "Plasma acylcarnitine profile showing raised propionylcarnitine (C3)",
-      "Plasma total homocysteine (normal here, distinguishing from cblC/cblD)",
-      "Blood gas, ammonia, glucose and lactate during acute presentations",
-      "A supervised hydroxocobalamin responsiveness trial",
-      "Complementation studies and MMAA/MMAB molecular genetic testing to define the subtype"
+    [
+     "Primary Differentials",
+     "Methylmalonic acidaemia from methylmalonyl-CoA mutase (mut) deficiency, Combined methylmalonic acidaemia and homocystinuria",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Severe metabolic acidosis with hyperammonaemia and encephalopathy during a crisis",
-      "Recurrent vomiting, lethargy and poor feeding with failure to thrive",
-      "Rapid deterioration triggered by protein load or intercurrent illness",
-      "Evolving renal impairment, a recognised long-term complication of methylmalonic acidaemia"
+    [
+     "Management Strategy",
+     "Pharmacological hydroxocobalamin as the disease-specific therapy, to which cobalamin-responsive forms, especially cblA, respond",
+     "Core treatment modality"
     ],
-    "prognosis": "The cobalamin-responsive forms, especially cblA, generally have a better prognosis than mutase-deficient methylmalonic acidaemia, and many respond well to hydroxocobalamin with dietary management; nonetheless, poorly controlled disease carries risks of neurological injury and progressive renal impairment.",
-    "pitfalls": [
-      "Not performing a formal cobalamin-responsiveness trial and missing a treatable form",
-      "Failing to measure homocysteine and thereby confusing these defects with combined cblC/cblD disease",
-      "Overlooking hyperammonaemia and secondary carnitine deficiency during crises",
-      "Neglecting long-term monitoring of renal function"
-    ],
-    "references": [
-      "Scriver's OMMBID: Disorders of Cobalamin Metabolism and Methylmalonic Acidaemia",
-      "Saudubray, Baumgartner & Walter, Inborn Metabolic Diseases: Diagnosis and Treatment"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Pharmacological hydroxocobalamin as the disease-specific therapy, to which cobalamin-responsive forms, especially cblA, respond well.",
-      "Dietary restriction of propiogenic protein with a specialised methylmalonic acidaemia formula to limit substrate load.",
-      "L-carnitine supplementation to promote excretion of accumulated propionyl groups and prevent secondary carnitine depletion.",
-      "An emergency sick-day regimen during intercurrent illness, reversing catabolism with high-energy glucose feeds and reduced protein intake.",
-      "Aggressive management of acute metabolic decompensation, correcting metabolic acidosis and treating hyperammonaemia with nitrogen-scavenging drugs and, if severe, haemofiltration or dialysis.",
-      "Long-term monitoring of methylmalonic acid, acylcarnitines, growth and renal function, with surveillance for chronic renal impairment.",
-      "Multidisciplinary metabolic care with a specialist dietitian, and genetic counselling for these autosomal recessive MMAA and MMAB disorders."
+    [
+     "Clinical Pitfall",
+     "Not performing a formal cobalamin-responsiveness trial and missing a treatable form",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for cobalamin a/b defect (vitamin b12-responsive methylmalonic acidaemia)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "cobalamin-a-b-defect-real-image",
+   "title": "Cobalamin A/B defect (vitamin B12-responsive methylmalonic acidaemia): Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

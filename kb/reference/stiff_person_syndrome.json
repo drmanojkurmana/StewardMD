@@ -1,77 +1,172 @@
 {
-  "id": "stiff_person_syndrome",
-  "name": "Stiff-person syndrome",
-  "aliases": [
-    "SPS",
-    "stiff-man syndrome",
-    "Moersch-Woltman syndrome"
+ "id": "stiff_person_syndrome",
+ "name": "Stiff-person syndrome",
+ "aliases": [
+  "SPS",
+  "stiff-man syndrome",
+  "Moersch-Woltman syndrome"
+ ],
+ "class": "non_infective",
+ "system": "Neurology",
+ "specialty": "Neurology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Bradley's Neurology in Clinical Practice / Harrison's Principles of Internal Medicine",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "An immune-mediated disorder of central nervous system inhibition characterised by progressive axial and proximal muscle rigidity with superimposed painful spasms",
+   "Rigidity typically involves the trunk and abdominal wall, producing an exaggerated lumbar lordosis and a stiff, board-like posture",
+   "Spasms are often triggered by startle, emotional stress, or sudden movement and can be severe enough to cause falls or fractures",
+   "Most cases are associated with high-titre antibodies to glutamic acid decarboxylase (GAD65); a smaller subset relate to antibodies against amphiphysin or glycine receptors",
+   "It commonly coexists with other autoimmune conditions, particularly type 1 diabetes, thyroid disease, and pernicious anaemia",
+   "A paraneoplastic form, often linked to amphiphysin antibodies and breast or other tumours, should be considered especially with atypical or rapidly progressive disease",
+   "Electromyography characteristically shows continuous motor unit activity in agonist and antagonist muscles that persists at rest",
+   "Treatment principles combine GABA-enhancing symptomatic therapy for rigidity and spasm with immunotherapy directed at the underlying autoimmune process"
   ],
-  "class": "non_infective",
-  "system": "Neurology",
-  "specialty": "Neurology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Bradley's Neurology in Clinical Practice / Harrison's Principles of Internal Medicine",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "An immune-mediated disorder of central nervous system inhibition characterised by progressive axial and proximal muscle rigidity with superimposed painful spasms",
-      "Rigidity typically involves the trunk and abdominal wall, producing an exaggerated lumbar lordosis and a stiff, board-like posture",
-      "Spasms are often triggered by startle, emotional stress, or sudden movement and can be severe enough to cause falls or fractures",
-      "Most cases are associated with high-titre antibodies to glutamic acid decarboxylase (GAD65); a smaller subset relate to antibodies against amphiphysin or glycine receptors",
-      "It commonly coexists with other autoimmune conditions, particularly type 1 diabetes, thyroid disease, and pernicious anaemia",
-      "A paraneoplastic form, often linked to amphiphysin antibodies and breast or other tumours, should be considered especially with atypical or rapidly progressive disease",
-      "Electromyography characteristically shows continuous motor unit activity in agonist and antagonist muscles that persists at rest",
-      "Treatment principles combine GABA-enhancing symptomatic therapy for rigidity and spasm with immunotherapy directed at the underlying autoimmune process"
+  "pathophysiology": "Stiff-person syndrome is thought to arise from impaired GABAergic inhibition in the central nervous system, largely on an autoimmune basis. Antibodies to glutamic acid decarboxylase, the enzyme that synthesises the inhibitory neurotransmitter GABA, or to other synaptic proteins such as glycine receptors and amphiphysin, are associated with reduced inhibitory tone in spinal and brainstem circuits. The loss of descending and segmental inhibition leads to continuous co-contraction of agonist and antagonist muscles, producing sustained rigidity and stimulus-sensitive spasms.",
+  "additionalDifferentials": [
+   "Tetanus",
+   "Neuromyotonia and other peripheral hyperexcitability syndromes",
+   "Dystonia and other movement disorders",
+   "Parkinsonism and progressive supranuclear palsy with axial rigidity",
+   "Functional (psychogenic) movement disorder",
+   "Myelopathy with spasticity"
+  ],
+  "additionalInvestigations": [
+   "Anti-GAD65 antibodies, with glycine receptor and amphiphysin antibodies when indicated",
+   "Electromyography demonstrating continuous motor unit activity",
+   "Screening for associated autoimmune disease including diabetes and thyroid disorders",
+   "Investigation for an underlying malignancy in suspected paraneoplastic cases",
+   "MRI to exclude structural spinal or cerebral causes of rigidity"
+  ],
+  "redFlags": [
+   "Spasms severe enough to impair breathing or cause fractures and falls",
+   "Rapid progression or atypical features suggesting a paraneoplastic cause",
+   "Autonomic instability during severe spasm episodes",
+   "New systemic symptoms prompting malignancy search"
+  ],
+  "prognosis": "The course is usually chronic and progressive but often responsive, at least partially, to symptomatic and immunomodulatory treatment; some patients stabilise or improve, while paraneoplastic cases depend on treatment of the underlying tumour and can be more refractory.",
+  "pitfalls": [
+   "Mistaking the disorder for a functional or psychiatric condition given the stress-sensitive spasms",
+   "Failing to check for associated autoimmune diseases and an occult malignancy",
+   "Overlooking the diagnostic value of anti-GAD antibodies and characteristic EMG findings",
+   "Relying on symptomatic drugs alone without considering immunotherapy"
+  ],
+  "references": [
+   "Bradley's Neurology in Clinical Practice",
+   "Harrison's Principles of Internal Medicine, 22e"
+  ],
+  "crossLinks": [],
+  "management": [
+   "GABAergic symptomatic therapy with benzodiazepines and/or baclofen to control axial rigidity and spasms",
+   "Immunotherapy with intravenous immunoglobulin, corticosteroids or plasma exchange, with rituximab for refractory disease",
+   "Physiotherapy, gait aids and fall/fracture prevention for spasm-related instability",
+   "Screen for and manage coexisting autoimmune conditions, particularly type 1 diabetes, thyroid disease and pernicious anaemia",
+   "Investigate for and treat an underlying malignancy in suspected paraneoplastic amphiphysin-associated disease, including breast imaging",
+   "Neurology referral with monitoring of disease progression and treatment response"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "stiff_person_syndrome-pathway",
+   "title": "Stiff-person syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "An immune-mediated disorder of central nervous system inhibition characterised by progressive axial and proximal muscle rigidity with superimposed painful spasms",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Spasms severe enough to impair breathing or cause fractures and falls",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Anti-GAD65 antibodies, with glycine receptor and amphiphysin antibodies when indicated, Electromyography demonstrating continuous motor unit activity, Screening for associated autoimmune disease including diabetes and"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: GABAergic symptomatic therapy with benzodiazepines and/or baclofen to control axial rigidity and spasms"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking the disorder for a functional or psychiatric condition given the stress-sensitive spasms"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of stiff-person syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "stiff_person_syndrome-matrix",
+   "title": "Stiff-person syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "An immune-mediated disorder of central nervous system inhibition characterised by progressive axial and proximal muscle rigidity",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Stiff-person syndrome is thought to arise from impaired GABAergic inhibition in the central nervous system, largely on an autoimmune basis. Antibodies to glutamic acid decarboxylase, the enzyme that synthesises the inhibitory neurotransmitter GABA, or to other synaptic proteins such as glycine receptors and amphiphysin, are associated with reduced inhibitory tone in spinal and brainstem circuits. The loss of descending and segmental inhibition leads to continuous co-contraction of agonist and antagonist muscles, producing sustained rigidity and stimulus-sensitive spasms.",
-    "additionalDifferentials": [
-      "Tetanus",
-      "Neuromyotonia and other peripheral hyperexcitability syndromes",
-      "Dystonia and other movement disorders",
-      "Parkinsonism and progressive supranuclear palsy with axial rigidity",
-      "Functional (psychogenic) movement disorder",
-      "Myelopathy with spasticity"
+    [
+     "Key Investigations",
+     "Anti-GAD65 antibodies, with glycine receptor and amphiphysin antibodies when indicated, Electromyography demonstrating continuous",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Anti-GAD65 antibodies, with glycine receptor and amphiphysin antibodies when indicated",
-      "Electromyography demonstrating continuous motor unit activity",
-      "Screening for associated autoimmune disease including diabetes and thyroid disorders",
-      "Investigation for an underlying malignancy in suspected paraneoplastic cases",
-      "MRI to exclude structural spinal or cerebral causes of rigidity"
+    [
+     "Primary Differentials",
+     "Tetanus, Neuromyotonia and other peripheral hyperexcitability syndromes, Dystonia and other movement disorders",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Spasms severe enough to impair breathing or cause fractures and falls",
-      "Rapid progression or atypical features suggesting a paraneoplastic cause",
-      "Autonomic instability during severe spasm episodes",
-      "New systemic symptoms prompting malignancy search"
+    [
+     "Management Strategy",
+     "GABAergic symptomatic therapy with benzodiazepines and/or baclofen to control axial rigidity and spasms",
+     "Core treatment modality"
     ],
-    "prognosis": "The course is usually chronic and progressive but often responsive, at least partially, to symptomatic and immunomodulatory treatment; some patients stabilise or improve, while paraneoplastic cases depend on treatment of the underlying tumour and can be more refractory.",
-    "pitfalls": [
-      "Mistaking the disorder for a functional or psychiatric condition given the stress-sensitive spasms",
-      "Failing to check for associated autoimmune diseases and an occult malignancy",
-      "Overlooking the diagnostic value of anti-GAD antibodies and characteristic EMG findings",
-      "Relying on symptomatic drugs alone without considering immunotherapy"
-    ],
-    "references": [
-      "Bradley's Neurology in Clinical Practice",
-      "Harrison's Principles of Internal Medicine, 22e"
-    ],
-    "crossLinks": [],
-    "management": [
-      "GABAergic symptomatic therapy with benzodiazepines and/or baclofen to control axial rigidity and spasms",
-      "Immunotherapy with intravenous immunoglobulin, corticosteroids or plasma exchange, with rituximab for refractory disease",
-      "Physiotherapy, gait aids and fall/fracture prevention for spasm-related instability",
-      "Screen for and manage coexisting autoimmune conditions, particularly type 1 diabetes, thyroid disease and pernicious anaemia",
-      "Investigate for and treat an underlying malignancy in suspected paraneoplastic amphiphysin-associated disease, including breast imaging",
-      "Neurology referral with monitoring of disease progression and treatment response"
+    [
+     "Clinical Pitfall",
+     "Mistaking the disorder for a functional or psychiatric condition given the stress-sensitive spasms",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for stiff-person syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "stiff-person-syndrome-real-image",
+   "title": "Stiff-person syndrome: Diagnostic Head Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
+   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
+   "annotations": [
+    {
+     "label": "Cerebral Parenchyma",
+     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+    },
+    {
+     "label": "Extra-Axial Spaces",
+     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+    }
+   ]
+  }
+ ]
 }

@@ -153,5 +153,100 @@
       "importedAt": "2026-06-29T13:50:09Z",
       "contentHash": "he377da05"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "acute_leukemia-dx-algo",
+      "title": "Acute leukaemia: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "AML accounts for ~31% of new acute leukaemias but ~62% of leukaemic deaths; it is the commonest acute leukaemia in older adults (median age ~69), whereas ALL peaks in young children (age 3-4) and again in the elderly (Harrison 22e p.825,",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Suspected APL (ecchymoses/oozing from IV sites, DIC) - a haematologic emergency; coagulopathy can be rapidly fatal and warrants prompt differentiation therapy (Harrison 22e p.828, p.834)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Peripheral blood smear (Wright-Giemsa) with manual differential - essential at presentation; look for blasts and Auer rods (Harrison 22e p.828, p.844), Bone marrow aspirate and biopsy for morphology, cytochemistry,"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: AML is classified by the WHO 2022 system primarily on defining genetic abnormalities (e.g. PML-RARA, RUNX1-RUNX1T1, CBFB-MYH11, KMT2A rearrangement, NPM1 or CEBPA mutation) and, where genetics are absent, by"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Relying on an automated blood count can miss acute leukaemia - 8% of ALL patients (and <5% of AML) have no circulating blasts; review the smear (Harrison 22e p.828, p.844)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for acute leukaemia."
+    }
+  ],
+  "tables": [
+    {
+      "id": "acute_leukemia-matrix",
+      "title": "Acute leukaemia: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "AML accounts for ~31% of new acute leukaemias but ~62% of leukaemic deaths; it is the commonest acute leukaemia in older adults",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Peripheral blood smear (Wright-Giemsa) with manual differential - essential at presentation; look for blasts and Auer rods",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Acute myeloid leukaemia vs acute lymphoblastic leukaemia - distinguished by morphology (Auer rods imply AML), cytochemistry,",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Suspected APL (ecchymoses/oozing from IV sites, DIC) - a haematologic emergency; coagulopathy can be rapidly fatal and warrants",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Relying on an automated blood count can miss acute leukaemia - 8% of ALL patients (and <5% of AML) have no circulating blasts;",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for acute leukaemia."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "acute-leukemia-real-image",
+      "title": "Acute leukaemia: Diagnostic Imaging Evaluation",
+      "type": "xray",
+      "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+      "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+      "annotations": [
+        {
+          "label": "Cardiothoracic Ratio",
+          "description": "Heart size, mediastinal width, and great vessel contours."
+        },
+        {
+          "label": "Visceral Fields",
+          "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+        },
+        {
+          "label": "Bony Thorax & Soft Tissues",
+          "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+        }
+      ]
+    }
+  ]
 }

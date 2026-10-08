@@ -6,7 +6,22 @@
  "basis": "international",
  "counterpart": "pulmonary-tuberculosis",
  "setting": "Outpatient, TB clinic, ward",
- "aliases": ["TB", "PTB", "tuberculosis", "DS-TB", "HRZE", "RIPE", "2HRZE/4HR", "HPMZ", "2HPMZ/2HPM", "4-month TB regimen", "rifapentine moxifloxacin", "Study 31", "ATT", "anti-tubercular treatment"],
+ "aliases": [
+  "TB",
+  "PTB",
+  "tuberculosis",
+  "DS-TB",
+  "HRZE",
+  "RIPE",
+  "2HRZE/4HR",
+  "HPMZ",
+  "2HPMZ/2HPM",
+  "4-month TB regimen",
+  "rifapentine moxifloxacin",
+  "Study 31",
+  "ATT",
+  "anti-tubercular treatment"
+ ],
  "summary": "Confirm TB with a rapid molecular test that also detects rifampicin resistance, then treat drug-susceptible pulmonary TB with daily 2HRZE/4HR for 6 months, or the 4-month 2HPMZ/2HPM regimen in eligible patients aged 12 or more weighing over 40 kg, with ART within 2 weeks for people with HIV and monthly review.",
  "sections": [
   {
@@ -89,20 +104,170 @@
   }
  ],
  "drugs": [
-  { "name": "HRZE FDC (isoniazid 75 mg, rifampicin 150 mg, pyrazinamide 400 mg, ethambutol 275 mg)", "dose": "Orally once daily for 2 months (WHO 2025 bands): 25 to 29 kg 2 tablets; 30 to 34 kg 3; 35 to 64 kg 4; 65 kg and above 5", "notes": "Then HR 75/150 mg FDC with the same number of tablets for 4 months." },
-  { "name": "Isoniazid", "dose": "5 mg/kg (4 to 6 mg/kg) orally once daily, usually 300 mg", "notes": "Hepatitis, peripheral neuropathy; give pyridoxine if at risk." },
-  { "name": "Rifampicin", "dose": "10 mg/kg (8 to 12 mg/kg) orally once daily, usually 600 mg", "notes": "Empty stomach. Orange body fluids; strong enzyme inducer with many interactions." },
-  { "name": "Pyrazinamide", "dose": "25 mg/kg (20 to 30 mg/kg) orally once daily, maximum 2 g", "notes": "Creatinine clearance below 30 mL/min: 25 to 35 mg/kg three times weekly after dialysis. Hepatotoxic; raises urate." },
-  { "name": "Ethambutol", "dose": "15 mg/kg (15 to 25 mg/kg) orally once daily", "notes": "Creatinine clearance below 30 mL/min: 15 to 25 mg/kg three times weekly. Optic neuritis: check vision." },
-  { "name": "Rifapentine (4-month regimen)", "dose": "1200 mg orally once daily with food for 17 weeks", "notes": "With isoniazid 300 mg and moxifloxacin 400 mg daily, plus weight-banded pyrazinamide for the first 8 weeks." },
-  { "name": "Moxifloxacin (4-month regimen)", "dose": "400 mg orally once daily for 17 weeks", "notes": "QT prolongation; avoid with other QT-prolonging drugs." },
-  { "name": "Pyridoxine (vitamin B6)", "dose": "10 to 25 mg orally once daily with isoniazid in at-risk patients (CDC 25 to 50 mg daily with the 4-month regimen); 100 mg daily for established neuropathy", "notes": "Routinely in pregnancy, breastfeeding, HIV, diabetes, alcohol use, undernutrition and CKD." }
+  {
+   "name": "HRZE FDC (isoniazid 75 mg, rifampicin 150 mg, pyrazinamide 400 mg, ethambutol 275 mg)",
+   "dose": "Orally once daily for 2 months (WHO 2025 bands): 25 to 29 kg 2 tablets; 30 to 34 kg 3; 35 to 64 kg 4; 65 kg and above 5",
+   "notes": "Then HR 75/150 mg FDC with the same number of tablets for 4 months."
+  },
+  {
+   "name": "Isoniazid",
+   "dose": "5 mg/kg (4 to 6 mg/kg) orally once daily, usually 300 mg",
+   "notes": "Hepatitis, peripheral neuropathy; give pyridoxine if at risk."
+  },
+  {
+   "name": "Rifampicin",
+   "dose": "10 mg/kg (8 to 12 mg/kg) orally once daily, usually 600 mg",
+   "notes": "Empty stomach. Orange body fluids; strong enzyme inducer with many interactions."
+  },
+  {
+   "name": "Pyrazinamide",
+   "dose": "25 mg/kg (20 to 30 mg/kg) orally once daily, maximum 2 g",
+   "notes": "Creatinine clearance below 30 mL/min: 25 to 35 mg/kg three times weekly after dialysis. Hepatotoxic; raises urate."
+  },
+  {
+   "name": "Ethambutol",
+   "dose": "15 mg/kg (15 to 25 mg/kg) orally once daily",
+   "notes": "Creatinine clearance below 30 mL/min: 15 to 25 mg/kg three times weekly. Optic neuritis: check vision."
+  },
+  {
+   "name": "Rifapentine (4-month regimen)",
+   "dose": "1200 mg orally once daily with food for 17 weeks",
+   "notes": "With isoniazid 300 mg and moxifloxacin 400 mg daily, plus weight-banded pyrazinamide for the first 8 weeks."
+  },
+  {
+   "name": "Moxifloxacin (4-month regimen)",
+   "dose": "400 mg orally once daily for 17 weeks",
+   "notes": "QT prolongation; avoid with other QT-prolonging drugs."
+  },
+  {
+   "name": "Pyridoxine (vitamin B6)",
+   "dose": "10 to 25 mg orally once daily with isoniazid in at-risk patients (CDC 25 to 50 mg daily with the 4-month regimen); 100 mg daily for established neuropathy",
+   "notes": "Routinely in pregnancy, breastfeeding, HIV, diabetes, alcohol use, undernutrition and CKD."
+  }
  ],
  "sources": [
-  { "org": "WHO", "title": "WHO consolidated guidelines on tuberculosis. Module 4: treatment and care", "year": 2025, "url": "https://www.who.int/publications/b/77823" },
-  { "org": "WHO", "title": "Module 4: treatment and care (TB Knowledge Sharing Platform, with operational handbook dosing)", "year": 2025, "url": "https://tbksp.who.int/en/node/2951" },
-  { "org": "CDC", "title": "Interim guidance: 4-month rifapentine-moxifloxacin regimen for the treatment of drug-susceptible pulmonary tuberculosis, United States, 2022", "year": 2022, "url": "https://www.cdc.gov/mmwr/volumes/71/wr/pdfs/mm7108a1-H.pdf" },
-  { "org": "ATS / CDC / IDSA (ERS endorsed)", "title": "Official clinical practice guidelines: treatment of drug-susceptible tuberculosis", "year": 2016, "url": "https://www.idsociety.org/practice-guideline/treatment-of-drug-susceptible-tb/" }
+  {
+   "org": "WHO",
+   "title": "WHO consolidated guidelines on tuberculosis. Module 4: treatment and care",
+   "year": 2025,
+   "url": "https://www.who.int/publications/b/77823"
+  },
+  {
+   "org": "WHO",
+   "title": "Module 4: treatment and care (TB Knowledge Sharing Platform, with operational handbook dosing)",
+   "year": 2025,
+   "url": "https://tbksp.who.int/en/node/2951"
+  },
+  {
+   "org": "CDC",
+   "title": "Interim guidance: 4-month rifapentine-moxifloxacin regimen for the treatment of drug-susceptible pulmonary tuberculosis, United States, 2022",
+   "year": 2022,
+   "url": "https://www.cdc.gov/mmwr/volumes/71/wr/pdfs/mm7108a1-H.pdf"
+  },
+  {
+   "org": "ATS / CDC / IDSA (ERS endorsed)",
+   "title": "Official clinical practice guidelines: treatment of drug-susceptible tuberculosis",
+   "year": 2016,
+   "url": "https://www.idsociety.org/practice-guideline/treatment-of-drug-susceptible-tb/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "pulmonary-tuberculosis-international-pathway",
+   "title": "Pulmonary tuberculosis, drug-susceptible (WHO) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Suspect TB with persistent cough, fever, night sweats, weight loss, haemoptysis or an abnormal chest X-ray. Screen high-risk groups actively: people with HIV, household contacts, diabetes, silicosis, undernutrition and immunosuppressive",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Use a WHO-recommended rapid molecular test (for example Xpert MTB/RIF Ultra or Truenat) on sputum as the initial test, with simultaneous rifampicin resistance detection; add testing for isoniazid and fluoroquinolone resistance, and",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Baseline: HIV test, glucose or HbA1c, full blood count, liver function tests (hepatitis B and C serology if at risk), creatinine, weight and BMI, and visual acuity with colour vision before ethambutol (ATS/CDC/IDSA)."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "WHO 2025 option for people aged 12 years or more weighing over 40 kg with drug-susceptible pulmonary TB, whatever the severity, including people with HIV with CD4 100 cells/mm3 or more and people with diabetes."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Clinical review weekly in the first month, then monthly: symptoms, weight, adherence and adverse effects. Chest X-ray at baseline, end of month 2 and end of treatment (WHO)."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for pulmonary tuberculosis, drug-susceptible (who)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "pulmonary-tuberculosis-international-summary-matrix",
+   "title": "Pulmonary tuberculosis, drug-susceptible (WHO) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Suspect TB with persistent cough, fever, night sweats, weight loss, haemoptysis or an abnormal chest X-ray. Screen high-risk groups",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "WHO 2025 option for people aged 12 years or more weighing over 40 kg with drug-susceptible pulmonary TB, whatever the severity, including",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "HRZE FDC (isoniazid 75 mg, rifampicin 150 mg, pyrazinamide 400 mg, ethambutol 275 mg): Orally once daily for 2 months (WHO 2025 bands): 25",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Starting HRZE without rifampicin resistance testing, or treating presumed pneumonia with fluoroquinolones before sputum TB testing (masks",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for pulmonary tuberculosis, drug-susceptible (who)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "pulmonary-tuberculosis-international-real-image",
+   "title": "Pulmonary tuberculosis, drug-susceptible (WHO): Diagnostic Chest Radiograph",
+   "type": "xray",
+   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
+   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
+   "annotations": [
+    {
+     "label": "Parenchyma & Airspaces",
+     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
+    },
+    {
+     "label": "Bronchovascular Tree",
+     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
+    },
+    {
+     "label": "Pleural Margins",
+     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+    }
+   ]
+  }
+ ]
 }

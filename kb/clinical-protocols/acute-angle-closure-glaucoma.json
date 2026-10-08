@@ -5,7 +5,18 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, eye casualty, wards",
- "aliases": ["AACG", "AACC", "acute angle closure", "acute primary angle closure", "APAC", "acute glaucoma", "angle-closure attack", "red painful eye with haloes", "laser peripheral iridotomy", "LPI"],
+ "aliases": [
+  "AACG",
+  "AACC",
+  "acute angle closure",
+  "acute primary angle closure",
+  "APAC",
+  "acute glaucoma",
+  "angle-closure attack",
+  "red painful eye with haloes",
+  "laser peripheral iridotomy",
+  "LPI"
+ ],
  "summary": "A painful red eye with blurred vision, haloes, a mid-dilated pupil and a stony-hard eye is acute angle closure until proven otherwise. Lower IOP immediately with acetazolamide 500 mg (IV if vomiting), topical aqueous suppressants and steroid, pilocarpine once IOP starts to fall, mannitol if needed, and arrange laser iridotomy in both eyes.",
  "sections": [
   {
@@ -72,17 +83,153 @@
   }
  ],
  "drugs": [
-  { "name": "Acetazolamide", "dose": "500 mg IV (EGS 10 mg/kg IV) or 500 mg orally stat; then 250 mg orally every 6 hours as directed by ophthalmology", "notes": "Avoid in sulfonamide allergy and severe renal disease; monitor potassium." },
-  { "name": "Timolol 0.5% eye drops", "dose": "1 drop to the affected eye stat, then twice daily", "notes": "Avoid in asthma, COPD, bradycardia, heart block." },
-  { "name": "Apraclonidine 1% or brimonidine 0.2% eye drops", "dose": "1 drop to the affected eye stat; further doses as directed by ophthalmology", "notes": "Avoid with MAO inhibitors." },
-  { "name": "Pilocarpine 1% or 2% eye drops", "dose": "1 drop once IOP begins to fall; avoid intensive dosing", "notes": "Not for lens-induced or retro-lenticular angle closure." },
-  { "name": "Prednisolone acetate 1% eye drops", "dose": "1 drop up to 6 times a day", "notes": "Reduces inflammation; taper after the attack." },
-  { "name": "Mannitol 20%", "dose": "1 to 2 g/kg IV over about 30 minutes (EGS; 350 to 700 mL of 20% for 70 kg); lower end in the elderly and in cardiac or renal disease", "notes": "If inadequate response to acetazolamide; check heart and renal function; do not repeat routinely." },
-  { "name": "Glycerol (oral)", "dose": "1 g/kg of a 50% solution orally", "notes": "Alternative to mannitol if not vomiting; avoid in diabetes." }
+  {
+   "name": "Acetazolamide",
+   "dose": "500 mg IV (EGS 10 mg/kg IV) or 500 mg orally stat; then 250 mg orally every 6 hours as directed by ophthalmology",
+   "notes": "Avoid in sulfonamide allergy and severe renal disease; monitor potassium."
+  },
+  {
+   "name": "Timolol 0.5% eye drops",
+   "dose": "1 drop to the affected eye stat, then twice daily",
+   "notes": "Avoid in asthma, COPD, bradycardia, heart block."
+  },
+  {
+   "name": "Apraclonidine 1% or brimonidine 0.2% eye drops",
+   "dose": "1 drop to the affected eye stat; further doses as directed by ophthalmology",
+   "notes": "Avoid with MAO inhibitors."
+  },
+  {
+   "name": "Pilocarpine 1% or 2% eye drops",
+   "dose": "1 drop once IOP begins to fall; avoid intensive dosing",
+   "notes": "Not for lens-induced or retro-lenticular angle closure."
+  },
+  {
+   "name": "Prednisolone acetate 1% eye drops",
+   "dose": "1 drop up to 6 times a day",
+   "notes": "Reduces inflammation; taper after the attack."
+  },
+  {
+   "name": "Mannitol 20%",
+   "dose": "1 to 2 g/kg IV over about 30 minutes (EGS; 350 to 700 mL of 20% for 70 kg); lower end in the elderly and in cardiac or renal disease",
+   "notes": "If inadequate response to acetazolamide; check heart and renal function; do not repeat routinely."
+  },
+  {
+   "name": "Glycerol (oral)",
+   "dose": "1 g/kg of a 50% solution orally",
+   "notes": "Alternative to mannitol if not vomiting; avoid in diabetes."
+  }
  ],
  "sources": [
-  { "org": "American Academy of Ophthalmology", "title": "Primary Angle-Closure Disease Preferred Practice Pattern 2025 (Ophthalmology 2026;133:P153-P201)", "year": 2025, "url": "https://www.aao.org/education/preferred-practice-pattern/primary-angle-closure-disease-ppp" },
-  { "org": "European Glaucoma Society", "title": "EGS Terminology and Guidelines for Glaucoma, 6th edition", "year": 2025, "url": "https://www.eugs.org/pages/guidelines" }
+  {
+   "org": "American Academy of Ophthalmology",
+   "title": "Primary Angle-Closure Disease Preferred Practice Pattern 2025 (Ophthalmology 2026;133:P153-P201)",
+   "year": 2025,
+   "url": "https://www.aao.org/education/preferred-practice-pattern/primary-angle-closure-disease-ppp"
+  },
+  {
+   "org": "European Glaucoma Society",
+   "title": "EGS Terminology and Guidelines for Glaucoma, 6th edition",
+   "year": 2025,
+   "url": "https://www.eugs.org/pages/guidelines"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "acute-angle-closure-glaucoma-pathway",
+   "title": "Acute angle-closure crisis (acute angle-closure glaucoma) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Symptoms: sudden eye pain, frontal headache, blurred vision, haloes around lights, nausea and vomiting (may mimic migraine, gastroenteritis or stroke).",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Refer immediately to ophthalmology (same-day emergency). Give analgesia and an antiemetic.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Risk factors: hypermetropia, older age, female sex, Asian (including Indian) ancestry, and a narrow angle in the fellow eye."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Laser peripheral iridotomy (LPI) as soon as it is safely feasible, once the cornea is clear enough; topical glycerin can clear an oedematous cornea for the procedure."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Recheck IOP, pain and corneal clarity within an hour of starting treatment and regularly until the attack breaks."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for acute angle-closure crisis (acute angle-closure glaucoma)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "acute-angle-closure-glaucoma-summary-matrix",
+   "title": "Acute angle-closure crisis (acute angle-closure glaucoma) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Symptoms: sudden eye pain, frontal headache, blurred vision, haloes around lights, nausea and vomiting (may mimic migraine, gastroenteritis",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Refer immediately to ophthalmology (same-day emergency). Give analgesia and an antiemetic.",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Acetazolamide: 500 mg IV (EGS 10 mg/kg IV) or 500 mg orally stat; then 250 mg orally every 6 hours as directed by ophthalmology",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Missing the diagnosis in a vomiting patient with headache treated as migraine, gastroenteritis or a neurological event.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for acute angle-closure crisis (acute angle-closure glaucoma)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "acute-angle-closure-glaucoma-real-image",
+   "title": "Acute angle-closure crisis (acute angle-closure glaucoma): Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

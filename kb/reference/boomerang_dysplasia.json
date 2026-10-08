@@ -1,80 +1,175 @@
 {
-  "id": "boomerang_dysplasia",
-  "name": "Boomerang dysplasia",
-  "aliases": [
-    "FLNB",
-    "Filamin B-related boomerang dysplasia"
+ "id": "boomerang_dysplasia",
+ "name": "Boomerang dysplasia",
+ "aliases": [
+  "FLNB",
+  "Filamin B-related boomerang dysplasia"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal / Skeletal dysplasia",
+ "specialty": "Clinical genetics / Perinatal medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Skeletal dysplasia references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Boomerang dysplasia is a perinatally lethal skeletal dysplasia caused by dominant, usually de novo, variants in FLNB (filamin B).",
+   "It is allelic with atelosteogenesis type I but sits at the more severe end of the spectrum, with more extensive failure of ossification.",
+   "The name derives from the boomerang-like radiographic shape of certain long bones, which appear bowed with a proximal or mid-shaft spike.",
+   "There is absent or severely deficient ossification of limb bones and some vertebrae, often with absent fibulae and other missing or profoundly hypoplastic bones.",
+   "A distinctive face with hypertelorism and a depressed nasal bridge is common, and omphalocele or encephalocele may occur.",
+   "Severe pulmonary hypoplasia due to a small thorax causes neonatal respiratory failure.",
+   "It is distinguished from atelosteogenesis type I chiefly by the degree of underossification and the pattern of absent bones.",
+   "Molecular confirmation of FLNB and genetic counselling are key; as disease is usually de novo, recurrence risk is generally low."
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal / Skeletal dysplasia",
-  "specialty": "Clinical genetics / Perinatal medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Skeletal dysplasia references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Boomerang dysplasia is a perinatally lethal skeletal dysplasia caused by dominant, usually de novo, variants in FLNB (filamin B).",
-      "It is allelic with atelosteogenesis type I but sits at the more severe end of the spectrum, with more extensive failure of ossification.",
-      "The name derives from the boomerang-like radiographic shape of certain long bones, which appear bowed with a proximal or mid-shaft spike.",
-      "There is absent or severely deficient ossification of limb bones and some vertebrae, often with absent fibulae and other missing or profoundly hypoplastic bones.",
-      "A distinctive face with hypertelorism and a depressed nasal bridge is common, and omphalocele or encephalocele may occur.",
-      "Severe pulmonary hypoplasia due to a small thorax causes neonatal respiratory failure.",
-      "It is distinguished from atelosteogenesis type I chiefly by the degree of underossification and the pattern of absent bones.",
-      "Molecular confirmation of FLNB and genetic counselling are key; as disease is usually de novo, recurrence risk is generally low."
+  "pathophysiology": "Boomerang dysplasia is caused by dominant, typically de novo, variants in FLNB, which encodes filamin B, a cytoskeletal actin-crosslinking protein essential for chondrocyte differentiation, vertebral segmentation and joint formation. It lies within the FLNB filaminopathy spectrum that also encompasses Larsen syndrome, atelosteogenesis types I and III, and spondylocarpotarsal synostosis. In boomerang dysplasia the mutant filamin B disrupts endochondral ossification so severely that many long bones and vertebrae fail to ossify, and some skeletal elements are absent altogether, giving the characteristic boomerang-shaped and non-ossified bones. The accompanying small thorax leads to lethal pulmonary hypoplasia.",
+  "additionalDifferentials": [
+   "Atelosteogenesis type I (allelic, less severe)",
+   "Atelosteogenesis type III",
+   "Larsen syndrome, including lethal variants",
+   "Piepkorn dysplasia (boomerang-like lethal dysplasia)",
+   "Thanatophoric dysplasia",
+   "Achondrogenesis",
+   "Osteogenesis imperfecta type II (perinatal lethal)"
+  ],
+  "additionalInvestigations": [
+   "Antenatal ultrasound showing micromelia and absent ossification",
+   "Postnatal skeletal survey (radiographs)",
+   "FLNB molecular genetic testing",
+   "Chondro-osseous histology, including giant chondrocytes",
+   "Fetal MRI where antenatal characterisation is needed",
+   "Autopsy and perinatal pathology correlated with radiographs",
+   "Parental testing to inform recurrence counselling"
+  ],
+  "redFlags": [
+   "Profound micromelia with absent bone ossification on antenatal scanning",
+   "Severe thoracic hypoplasia with neonatal respiratory failure",
+   "Associated encephalocele or omphalocele",
+   "A confirmed lethal diagnosis requiring perinatal palliative planning"
+  ],
+  "prognosis": "Boomerang dysplasia is uniformly lethal in the perinatal period, typically from respiratory failure secondary to pulmonary hypoplasia.",
+  "pitfalls": [
+   "Misclassifying it as atelosteogenesis type I given the spectrum overlap",
+   "Attributing it to recessive inheritance when it is dominant and usually de novo",
+   "Failing to send FLNB testing to confirm the diagnosis and guide counselling",
+   "Confusing it with Piepkorn dysplasia on radiographs alone"
+  ],
+  "references": [
+   "Skeletal dysplasia nosology and classification",
+   "Medical genetics reference texts",
+   "Perinatal pathology references"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Boomerang dysplasia is uniformly perinatally lethal, so management centres on accurate diagnosis and compassionate, non-curative care rather than active treatment",
+   "Antenatal recognition through ultrasound showing micromelia and absent ossification, supplemented by foetal MRI, to guide informed parental counselling and delivery planning",
+   "Confirmation by postnatal skeletal survey, chondro-osseous histology and FLNB molecular testing",
+   "Perinatal palliative and comfort care for the neonate, with respiratory failure from pulmonary hypoplasia the anticipated terminal event",
+   "Genetic counselling for the dominant, usually de novo FLNB variant, with prenatal or preimplantation testing offered in future pregnancies given the small recurrence risk from gonadal mosaicism",
+   "Bereavement support with multidisciplinary involvement of clinical genetics, perinatal medicine and palliative care"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "boomerang_dysplasia-pathway",
+   "title": "Boomerang dysplasia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Boomerang dysplasia is a perinatally lethal skeletal dysplasia caused by dominant, usually de novo, variants in FLNB (filamin B).",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Profound micromelia with absent bone ossification on antenatal scanning",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Antenatal ultrasound showing micromelia and absent ossification, Postnatal skeletal survey (radiographs), FLNB molecular genetic testing"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Boomerang dysplasia is uniformly perinatally lethal, so management centres on accurate diagnosis and compassionate, non-curative care rather than active treatment"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Misclassifying it as atelosteogenesis type I given the spectrum overlap"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of boomerang dysplasia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "boomerang_dysplasia-matrix",
+   "title": "Boomerang dysplasia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Boomerang dysplasia is a perinatally lethal skeletal dysplasia caused by dominant, usually de novo, variants in FLNB (filamin B).",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Boomerang dysplasia is caused by dominant, typically de novo, variants in FLNB, which encodes filamin B, a cytoskeletal actin-crosslinking protein essential for chondrocyte differentiation, vertebral segmentation and joint formation. It lies within the FLNB filaminopathy spectrum that also encompasses Larsen syndrome, atelosteogenesis types I and III, and spondylocarpotarsal synostosis. In boomerang dysplasia the mutant filamin B disrupts endochondral ossification so severely that many long bones and vertebrae fail to ossify, and some skeletal elements are absent altogether, giving the characteristic boomerang-shaped and non-ossified bones. The accompanying small thorax leads to lethal pulmonary hypoplasia.",
-    "additionalDifferentials": [
-      "Atelosteogenesis type I (allelic, less severe)",
-      "Atelosteogenesis type III",
-      "Larsen syndrome, including lethal variants",
-      "Piepkorn dysplasia (boomerang-like lethal dysplasia)",
-      "Thanatophoric dysplasia",
-      "Achondrogenesis",
-      "Osteogenesis imperfecta type II (perinatal lethal)"
+    [
+     "Key Investigations",
+     "Antenatal ultrasound showing micromelia and absent ossification, Postnatal skeletal survey (radiographs), FLNB molecular genetic",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Antenatal ultrasound showing micromelia and absent ossification",
-      "Postnatal skeletal survey (radiographs)",
-      "FLNB molecular genetic testing",
-      "Chondro-osseous histology, including giant chondrocytes",
-      "Fetal MRI where antenatal characterisation is needed",
-      "Autopsy and perinatal pathology correlated with radiographs",
-      "Parental testing to inform recurrence counselling"
+    [
+     "Primary Differentials",
+     "Atelosteogenesis type I (allelic, less severe), Atelosteogenesis type III, Larsen syndrome, including lethal variants",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Profound micromelia with absent bone ossification on antenatal scanning",
-      "Severe thoracic hypoplasia with neonatal respiratory failure",
-      "Associated encephalocele or omphalocele",
-      "A confirmed lethal diagnosis requiring perinatal palliative planning"
+    [
+     "Management Strategy",
+     "Boomerang dysplasia is uniformly perinatally lethal, so management centres on accurate diagnosis and compassionate, non-curative",
+     "Core treatment modality"
     ],
-    "prognosis": "Boomerang dysplasia is uniformly lethal in the perinatal period, typically from respiratory failure secondary to pulmonary hypoplasia.",
-    "pitfalls": [
-      "Misclassifying it as atelosteogenesis type I given the spectrum overlap",
-      "Attributing it to recessive inheritance when it is dominant and usually de novo",
-      "Failing to send FLNB testing to confirm the diagnosis and guide counselling",
-      "Confusing it with Piepkorn dysplasia on radiographs alone"
-    ],
-    "references": [
-      "Skeletal dysplasia nosology and classification",
-      "Medical genetics reference texts",
-      "Perinatal pathology references"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Boomerang dysplasia is uniformly perinatally lethal, so management centres on accurate diagnosis and compassionate, non-curative care rather than active treatment",
-      "Antenatal recognition through ultrasound showing micromelia and absent ossification, supplemented by foetal MRI, to guide informed parental counselling and delivery planning",
-      "Confirmation by postnatal skeletal survey, chondro-osseous histology and FLNB molecular testing",
-      "Perinatal palliative and comfort care for the neonate, with respiratory failure from pulmonary hypoplasia the anticipated terminal event",
-      "Genetic counselling for the dominant, usually de novo FLNB variant, with prenatal or preimplantation testing offered in future pregnancies given the small recurrence risk from gonadal mosaicism",
-      "Bereavement support with multidisciplinary involvement of clinical genetics, perinatal medicine and palliative care"
+    [
+     "Clinical Pitfall",
+     "Misclassifying it as atelosteogenesis type I given the spectrum overlap",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for boomerang dysplasia."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "boomerang-dysplasia-real-image",
+   "title": "Boomerang dysplasia: Diagnostic Musculoskeletal Radiograph",
+   "type": "xray",
+   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
+   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
+   "annotations": [
+    {
+     "label": "Cortical Margins",
+     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
+    },
+    {
+     "label": "Trabecular Architecture",
+     "description": "Medullary bone density, lucencies, and subchondral mineralization."
+    },
+    {
+     "label": "Joint Articulation",
+     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+    }
+   ]
+  }
+ ]
 }

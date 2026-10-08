@@ -55,11 +55,10 @@
         '<p class="pn-mut pn-small">Cards you did not know come back tomorrow; the ones you knew come back just before you would forget them. ' + esc(nextDueText(host.store(), ss.cards, host.today())) + "</p>" +
         '<div class="pn-navrow"><button type="button" class="pn-btn" data-act="c-kagain">Study again</button><button type="button" class="pn-btn pri" data-act="c-kdone">Done</button></div></div>', "#pcCardsEnd");
     }
-    var c = ss.list[ss.i], line = srcLine(c);
+    var c = ss.list[ss.i];
     host.paint(host.bar("Flashcards", "Card " + (ss.i + 1) + " of " + ss.list.length, "back") + '<div class="pn-body" id="pcCardsView">' +
       '<section class="pn-panel pc-card" aria-label="Card ' + (ss.i + 1) + '"><p class="pc-front">' + esc(c.front) + "</p>" +
-      (ss.shown ? '<div class="pc-back" id="pcBack" tabindex="-1"><p>' + esc(c.back) + "</p>" + (line ? '<p class="pn-prov">' + esc(line) + "</p>" : "") +
-        '<p class="pn-prov">AI-generated from your source. Check your source when in doubt.</p></div>' : "") + "</section>" +
+      (ss.shown ? '<div class="pc-back" id="pcBack" tabindex="-1"><p>' + esc(c.back) + "</p></div>" : "") + "</section>" +
       (ss.shown ? '<div class="pn-navrow"><button type="button" class="pn-btn" data-act="c-kno">I did not</button><button type="button" class="pn-btn pri" data-act="c-kyes">I knew it</button></div>' :
         '<button type="button" class="pn-btn pri" data-act="c-kflip" id="pcFlip">Show answer</button>') +
       '<p class="pn-mut pn-small">' + esc(title) + "</p></div>", ss.shown ? "#pcBack" : "#pcFlip");

@@ -193,5 +193,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "h97530f81"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "cholecystitis-dx-algo",
+      "title": "Acute Cholecystitis: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Acute cholecystitis usually opens as an attack of biliary pain that progressively worsens and becomes more generalized in the right upper abdomen; pain may radiate to the interscapular area, right scapula, or shoulder (Harrison 22e p.2732).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Generalized peritoneal signs / abdominal rigidity (suggests perforation) (Harrison 22e p.2732)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Ultrasound demonstrates calculi in about 90-95% of cases and shows signs of inflammation: gallbladder wall thickening, pericholecystic fluid, and bile-duct dilatation (Harrison 22e p.2732)., Radionuclide (HIDA/DISIDA)"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Differentiate from top mimics: Choledocholithiasis / common bile duct stone (suggested by elevated bilirubin and/or alkaline phosphatase with biliary pain) (Harrison 22e p.2731), Peptic ulcer disease, especially perforated peptic ulcer"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Vague post-fatty-meal symptoms (epigastric fullness, dyspepsia, eructation, flatulence) are nonspecific and should not be misread as biliary pain (Harrison 22e p.2731)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for acute cholecystitis."
+    }
+  ],
+  "tables": [
+    {
+      "id": "cholecystitis-matrix",
+      "title": "Acute Cholecystitis: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Acute cholecystitis usually opens as an attack of biliary pain that progressively worsens and becomes more generalized in the",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Ultrasound demonstrates calculi in about 90-95% of cases and shows signs of inflammation: gallbladder wall thickening,",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Choledocholithiasis / common bile duct stone (suggested by elevated bilirubin and/or alkaline phosphatase with biliary pain)",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Generalized peritoneal signs / abdominal rigidity (suggests perforation) (Harrison 22e p.2732)",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Vague post-fatty-meal symptoms (epigastric fullness, dyspepsia, eructation, flatulence) are nonspecific and should not be misread",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for acute cholecystitis."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "cholecystitis-real-image",
+      "title": "Acute Cholecystitis: Right Upper Quadrant Ultrasound (Acute Cholecystitis)",
+      "type": "ultrasound",
+      "src": "/assets/kb-real-images/cholecystitis-ultrasound.jpg?v=kbri3",
+      "caption": "Real abdominal ultrasound demonstrating gallbladder hydrops, mural thickening >3 mm, impacted gallstones, and pericholecystic fluid.",
+      "annotations": [
+        {
+          "label": "Gallbladder Wall Edema",
+          "description": "Mural thickening exceeding 3 mm with stratified double-rim sign."
+        },
+        {
+          "label": "Cholelithiasis",
+          "description": "Echogenic intraluminal calculi casting strong posterior acoustic shadowing."
+        },
+        {
+          "label": "Sonographic Murphy Sign",
+          "description": "Focal tenderness elicited when the transducer compresses the gallbladder fundus."
+        }
+      ]
+    }
+  ]
 }

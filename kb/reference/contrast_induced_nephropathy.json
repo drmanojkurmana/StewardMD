@@ -1,78 +1,173 @@
 {
-  "id": "contrast_induced_nephropathy",
-  "name": "Contrast-induced nephropathy",
-  "aliases": [
-    "CIN",
-    "contrast-associated acute kidney injury",
-    "CA-AKI",
-    "contrast nephropathy"
+ "id": "contrast_induced_nephropathy",
+ "name": "Contrast-induced nephropathy",
+ "aliases": [
+  "CIN",
+  "contrast-associated acute kidney injury",
+  "CA-AKI",
+  "contrast nephropathy"
+ ],
+ "class": "non_infective",
+ "system": "Renal",
+ "specialty": "Nephrology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Harrison's Principles of Internal Medicine / KDIGO",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Contrast-induced nephropathy is an acute, usually reversible decline in renal function occurring within a few days of intravascular iodinated contrast, once other causes have been excluded",
+   "The rise in creatinine typically begins within one to three days and peaks around three to five days, with recovery over one to two weeks in most cases",
+   "Pre-existing chronic kidney disease is the strongest risk factor, and the risk rises steeply when diabetic nephropathy is also present",
+   "Volume depletion, heart failure, higher contrast volumes, and concurrent nephrotoxins compound the risk",
+   "The most effective preventive measure is adequate intravenous volume expansion with isotonic fluid before and after contrast exposure",
+   "Non-essential nephrotoxic drugs should be withheld around the time of the study and the smallest necessary volume of contrast used",
+   "The true incidence of contrast-related injury after intravenous contrast in modern practice is lower than once believed, and the need for imaging should be weighed against a frequently modest risk"
   ],
-  "class": "non_infective",
-  "system": "Renal",
-  "specialty": "Nephrology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Harrison's Principles of Internal Medicine / KDIGO",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Contrast-induced nephropathy is an acute, usually reversible decline in renal function occurring within a few days of intravascular iodinated contrast, once other causes have been excluded",
-      "The rise in creatinine typically begins within one to three days and peaks around three to five days, with recovery over one to two weeks in most cases",
-      "Pre-existing chronic kidney disease is the strongest risk factor, and the risk rises steeply when diabetic nephropathy is also present",
-      "Volume depletion, heart failure, higher contrast volumes, and concurrent nephrotoxins compound the risk",
-      "The most effective preventive measure is adequate intravenous volume expansion with isotonic fluid before and after contrast exposure",
-      "Non-essential nephrotoxic drugs should be withheld around the time of the study and the smallest necessary volume of contrast used",
-      "The true incidence of contrast-related injury after intravenous contrast in modern practice is lower than once believed, and the need for imaging should be weighed against a frequently modest risk"
+  "pathophysiology": "Contrast-induced nephropathy is thought to arise from a combination of renal medullary ischaemia and direct tubular toxicity. Iodinated contrast alters intrarenal haemodynamics, causing vasoconstriction and reduced medullary blood flow, which is particularly damaging to the metabolically active outer medulla. Contrast media also generate reactive oxygen species and exert direct toxic effects on tubular epithelial cells, and their osmotic and viscosity properties can impair tubular flow. The result is a predominantly acute tubular injury pattern. Patients with reduced baseline renal reserve, impaired autoregulation, or reduced effective circulating volume are least able to compensate for these insults, which explains the clustering of risk in chronic kidney disease, diabetes, and volume depletion.",
+  "additionalDifferentials": [
+   "Ischaemic acute tubular necrosis from hypotension or the underlying illness",
+   "Atheroembolic (cholesterol embolisation) renal disease after arterial procedures",
+   "Prerenal azotaemia from volume depletion",
+   "Other nephrotoxic drug injury",
+   "Obstructive uropathy",
+   "Progression of underlying chronic kidney disease"
+  ],
+  "additionalInvestigations": [
+   "Baseline and serial serum creatinine with estimated GFR before and after contrast exposure",
+   "Urinalysis and urine microscopy to help distinguish tubular injury from other causes",
+   "Assessment of volume status and review of the medication list for other nephrotoxins",
+   "Consideration of atheroembolic disease (eosinophilia, skin changes) after arterial catheterisation",
+   "Renal ultrasound if obstruction or another structural cause is suspected"
+  ],
+  "redFlags": [
+   "Progressive or non-recovering renal function suggesting an alternative or additional cause",
+   "Oliguria or features of established acute kidney injury requiring supportive care",
+   "Signs of atheroembolism such as livedo, digital ischaemia, and eosinophilia after arterial procedures",
+   "Hyperkalaemia, acidosis, or fluid overload indicating a need for closer monitoring or dialysis"
+  ],
+  "prognosis": "Most episodes are mild and self-limiting, with renal function returning toward baseline within one to two weeks. However, an episode is associated with longer hospital stay, higher risk of needing dialysis in susceptible patients, and worse long-term cardiovascular and renal outcomes, so prevention in high-risk individuals remains important.",
+  "pitfalls": [
+   "Withholding a clinically necessary contrast study out of exaggerated fear of nephropathy in a low-risk patient",
+   "Failing to provide adequate periprocedural volume expansion in high-risk patients",
+   "Attributing all post-contrast creatinine rises to contrast without considering atheroembolism or ischaemic injury",
+   "Overlooking continued exposure to other nephrotoxic drugs during the vulnerable period"
+  ],
+  "references": [
+   "Harrison's Principles of Internal Medicine, 22e",
+   "KDIGO guidelines"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Prevention is the cornerstone: peri-procedural intravenous volume expansion with isotonic crystalloid before and after iodinated contrast in at-risk patients",
+   "Use the smallest feasible volume of iso- or low-osmolar contrast and avoid closely spaced repeat contrast studies",
+   "Withhold non-essential nephrotoxins around exposure (NSAIDs, aminoglycosides, diuretics) and hold metformin per local protocol",
+   "Once established, provide supportive care: maintain euvolaemia, avoid further nephrotoxic agents, and correct electrolyte and acid-base disturbances",
+   "Monitor serial serum creatinine, estimated GFR and urine output to track the expected early rise and recovery",
+   "Escalate to renal replacement therapy for refractory hyperkalaemia, fluid overload or uraemic complications in severe acute kidney injury",
+   "Refer to nephrology for non-recovering or dialysis-requiring cases and risk-stratify high-risk patients (chronic kidney disease, diabetic nephropathy) for contrast-free alternative imaging"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "contrast_induced_nephropathy-pathway",
+   "title": "Contrast-induced nephropathy: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Contrast-induced nephropathy is an acute, usually reversible decline in renal function occurring within a few days of intravascular iodinated contrast, once other causes have been excluded",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Progressive or non-recovering renal function suggesting an alternative or additional cause",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Baseline and serial serum creatinine with estimated GFR before and after contrast exposure, Urinalysis and urine microscopy to help distinguish tubular injury from other causes, Assessment of volume status and review of"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Prevention is the cornerstone: peri-procedural intravenous volume expansion with isotonic crystalloid before and after iodinated contrast in at-risk patients"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Withholding a clinically necessary contrast study out of exaggerated fear of nephropathy in a low-risk patient"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of contrast-induced nephropathy."
+  }
+ ],
+ "tables": [
+  {
+   "id": "contrast_induced_nephropathy-matrix",
+   "title": "Contrast-induced nephropathy: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Contrast-induced nephropathy is an acute, usually reversible decline in renal function occurring within a few days of",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Contrast-induced nephropathy is thought to arise from a combination of renal medullary ischaemia and direct tubular toxicity. Iodinated contrast alters intrarenal haemodynamics, causing vasoconstriction and reduced medullary blood flow, which is particularly damaging to the metabolically active outer medulla. Contrast media also generate reactive oxygen species and exert direct toxic effects on tubular epithelial cells, and their osmotic and viscosity properties can impair tubular flow. The result is a predominantly acute tubular injury pattern. Patients with reduced baseline renal reserve, impaired autoregulation, or reduced effective circulating volume are least able to compensate for these insults, which explains the clustering of risk in chronic kidney disease, diabetes, and volume depletion.",
-    "additionalDifferentials": [
-      "Ischaemic acute tubular necrosis from hypotension or the underlying illness",
-      "Atheroembolic (cholesterol embolisation) renal disease after arterial procedures",
-      "Prerenal azotaemia from volume depletion",
-      "Other nephrotoxic drug injury",
-      "Obstructive uropathy",
-      "Progression of underlying chronic kidney disease"
+    [
+     "Key Investigations",
+     "Baseline and serial serum creatinine with estimated GFR before and after contrast exposure, Urinalysis and urine microscopy to",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Baseline and serial serum creatinine with estimated GFR before and after contrast exposure",
-      "Urinalysis and urine microscopy to help distinguish tubular injury from other causes",
-      "Assessment of volume status and review of the medication list for other nephrotoxins",
-      "Consideration of atheroembolic disease (eosinophilia, skin changes) after arterial catheterisation",
-      "Renal ultrasound if obstruction or another structural cause is suspected"
+    [
+     "Primary Differentials",
+     "Ischaemic acute tubular necrosis from hypotension or the underlying illness, Atheroembolic (cholesterol embolisation) renal",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Progressive or non-recovering renal function suggesting an alternative or additional cause",
-      "Oliguria or features of established acute kidney injury requiring supportive care",
-      "Signs of atheroembolism such as livedo, digital ischaemia, and eosinophilia after arterial procedures",
-      "Hyperkalaemia, acidosis, or fluid overload indicating a need for closer monitoring or dialysis"
+    [
+     "Management Strategy",
+     "Prevention is the cornerstone: peri-procedural intravenous volume expansion with isotonic crystalloid before and after iodinated",
+     "Core treatment modality"
     ],
-    "prognosis": "Most episodes are mild and self-limiting, with renal function returning toward baseline within one to two weeks. However, an episode is associated with longer hospital stay, higher risk of needing dialysis in susceptible patients, and worse long-term cardiovascular and renal outcomes, so prevention in high-risk individuals remains important.",
-    "pitfalls": [
-      "Withholding a clinically necessary contrast study out of exaggerated fear of nephropathy in a low-risk patient",
-      "Failing to provide adequate periprocedural volume expansion in high-risk patients",
-      "Attributing all post-contrast creatinine rises to contrast without considering atheroembolism or ischaemic injury",
-      "Overlooking continued exposure to other nephrotoxic drugs during the vulnerable period"
-    ],
-    "references": [
-      "Harrison's Principles of Internal Medicine, 22e",
-      "KDIGO guidelines"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Prevention is the cornerstone: peri-procedural intravenous volume expansion with isotonic crystalloid before and after iodinated contrast in at-risk patients",
-      "Use the smallest feasible volume of iso- or low-osmolar contrast and avoid closely spaced repeat contrast studies",
-      "Withhold non-essential nephrotoxins around exposure (NSAIDs, aminoglycosides, diuretics) and hold metformin per local protocol",
-      "Once established, provide supportive care: maintain euvolaemia, avoid further nephrotoxic agents, and correct electrolyte and acid-base disturbances",
-      "Monitor serial serum creatinine, estimated GFR and urine output to track the expected early rise and recovery",
-      "Escalate to renal replacement therapy for refractory hyperkalaemia, fluid overload or uraemic complications in severe acute kidney injury",
-      "Refer to nephrology for non-recovering or dialysis-requiring cases and risk-stratify high-risk patients (chronic kidney disease, diabetic nephropathy) for contrast-free alternative imaging"
+    [
+     "Clinical Pitfall",
+     "Withholding a clinically necessary contrast study out of exaggerated fear of nephropathy in a low-risk patient",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for contrast-induced nephropathy."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "contrast-induced-nephropathy-real-image",
+   "title": "Contrast-induced nephropathy: Diagnostic Renal Ultrasonography",
+   "type": "ultrasound",
+   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
+   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
+   "annotations": [
+    {
+     "label": "Renal Cortex",
+     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
+    },
+    {
+     "label": "Corticomedullary Junction",
+     "description": "Medullary pyramid definition and structural architecture."
+    },
+    {
+     "label": "Collecting System",
+     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+    }
+   ]
+  }
+ ]
 }

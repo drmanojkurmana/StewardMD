@@ -225,5 +225,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "hdacc2742"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "pharyngitis-dx-algo",
+      "title": "Acute Pharyngitis: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Sore throat is not synonymous with pharyngitis: it may also arise from submandibular/retropharyngeal/peritonsillar space infections, thyroiditis, gastroesophageal reflux, tumors, or postnasal drainage (Harrison 22e p.300).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Shaking chills/rigors, neck swelling beyond lymphadenopathy, trouble swallowing, drooling, or symptoms persisting >5 days without improvement should prompt urgent re-evaluation (Harrison 22e p.301)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Rapid GAS antigen test: sensitivity ~80%, specificity ~95%; proper technique (swabbing tonsils/pharynx and any exudate or ulceration) is essential to sensitivity (Harrison 22e p.301), Throat culture: single-swab"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Centor criteria (4 findings, 1 point each): history of fever, absence of cough, tender anterior cervical lymphadenopathy, and tonsillar exudate or swelling. For an adult pretest probability of ~10%, post-evaluation"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Prescribing antibiotics to the majority of adults with sore throat despite only ~10% having GAS - most cases are viral (Harrison 22e p.300)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for acute pharyngitis."
+    }
+  ],
+  "tables": [
+    {
+      "id": "pharyngitis-matrix",
+      "title": "Acute Pharyngitis: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Sore throat is not synonymous with pharyngitis: it may also arise from submandibular/retropharyngeal/peritonsillar space",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Rapid GAS antigen test: sensitivity ~80%, specificity ~95%; proper technique (swabbing tonsils/pharynx and any exudate or",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Acute infectious mononucleosis (EBV) - marked cervical adenopathy, exudative pharyngitis, palatine petechiae, gelatinous uvula,",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Shaking chills/rigors, neck swelling beyond lymphadenopathy, trouble swallowing, drooling, or symptoms persisting >5 days without",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Prescribing antibiotics to the majority of adults with sore throat despite only ~10% having GAS - most cases are viral (Harrison",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for acute pharyngitis."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "pharyngitis-real-image",
+      "title": "Acute Pharyngitis: Diagnostic Chest Radiograph",
+      "type": "xray",
+      "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
+      "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
+      "annotations": [
+        {
+          "label": "Parenchyma & Airspaces",
+          "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
+        },
+        {
+          "label": "Bronchovascular Tree",
+          "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
+        },
+        {
+          "label": "Pleural Margins",
+          "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+        }
+      ]
+    }
+  ]
 }

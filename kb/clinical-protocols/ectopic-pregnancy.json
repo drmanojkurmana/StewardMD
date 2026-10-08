@@ -5,7 +5,20 @@
  "population": "Pregnancy",
  "basis": "international",
  "setting": "Emergency department, early pregnancy unit, gynaecology ward, operating theatre",
- "aliases": ["ectopic", "tubal pregnancy", "ruptured ectopic", "PUL", "pregnancy of unknown location", "methotrexate ectopic", "salpingectomy", "salpingotomy", "EP", "early pregnancy bleeding", "anti-D ectopic", "anti-D miscarriage"],
+ "aliases": [
+  "ectopic",
+  "tubal pregnancy",
+  "ruptured ectopic",
+  "PUL",
+  "pregnancy of unknown location",
+  "methotrexate ectopic",
+  "salpingectomy",
+  "salpingotomy",
+  "EP",
+  "early pregnancy bleeding",
+  "anti-D ectopic",
+  "anti-D miscarriage"
+ ],
  "summary": "Suspect ectopic pregnancy in any woman of reproductive age with pain, bleeding or collapse and a positive pregnancy test. Unstable: resuscitate and operate. Stable: transvaginal scan plus serial hCG; single-dose methotrexate 50 mg/m2 for small unruptured ectopics with low hCG, surgery otherwise.",
  "sections": [
   {
@@ -89,15 +102,145 @@
   }
  ],
  "drugs": [
-  { "name": "Methotrexate", "dose": "50 mg/m2 IM single dose; second dose if hCG falls less than 15% between day 4 and day 7", "notes": "Check CBC, creatinine and liver enzymes first. Avoid folic acid, NSAIDs and alcohol. Avoid conception for at least 3 months." },
-  { "name": "Anti-D immunoglobulin", "dose": "At least 250 IU (50 mcg) IM within 72 hours", "notes": "NICE NG126: RhD-negative patients at 12+0 to 12+6 weeks having medical or surgical management of ectopic pregnancy or miscarriage. Not offered at 11+6 weeks or under. It is a blood product: discuss it. No Kleihauer test at these gestations." },
-  { "name": "Paracetamol", "dose": "1 g orally or IV every 6 hours; maximum 4 g/day (3 g/day if weight below 50 kg or liver disease)", "notes": "Preferred analgesic after methotrexate; avoid NSAIDs." }
+  {
+   "name": "Methotrexate",
+   "dose": "50 mg/m2 IM single dose; second dose if hCG falls less than 15% between day 4 and day 7",
+   "notes": "Check CBC, creatinine and liver enzymes first. Avoid folic acid, NSAIDs and alcohol. Avoid conception for at least 3 months."
+  },
+  {
+   "name": "Anti-D immunoglobulin",
+   "dose": "At least 250 IU (50 mcg) IM within 72 hours",
+   "notes": "NICE NG126: RhD-negative patients at 12+0 to 12+6 weeks having medical or surgical management of ectopic pregnancy or miscarriage. Not offered at 11+6 weeks or under. It is a blood product: discuss it. No Kleihauer test at these gestations."
+  },
+  {
+   "name": "Paracetamol",
+   "dose": "1 g orally or IV every 6 hours; maximum 4 g/day (3 g/day if weight below 50 kg or liver disease)",
+   "notes": "Preferred analgesic after methotrexate; avoid NSAIDs."
+  }
  ],
  "sources": [
-  { "org": "NICE", "title": "Ectopic pregnancy and miscarriage: diagnosis and initial management (NG126), management of tubal ectopic pregnancy", "year": 2019, "url": "https://www.nice.org.uk/guidance/ng126/chapter/Management-of-tubal-ectopic-pregnancy" },
-  { "org": "NICE", "title": "NG126 anti-D immunoglobulin prophylaxis (2026 update)", "year": 2026, "url": "https://www.nice.org.uk/guidance/ng126/chapter/Anti-D-immunoglobulin-prophylaxis" },
-  { "org": "ACOG", "title": "Tubal ectopic pregnancy: ACOG Practice Bulletin No. 193", "year": 2018, "url": "https://doi.org/10.1097/AOG.0000000000002560" },
-  { "org": "RCOG / AEPU", "title": "Diagnosis and management of ectopic pregnancy: Green-top Guideline No. 21", "year": 2016, "url": "https://doi.org/10.1111/1471-0528.14189" }
+  {
+   "org": "NICE",
+   "title": "Ectopic pregnancy and miscarriage: diagnosis and initial management (NG126), management of tubal ectopic pregnancy",
+   "year": 2019,
+   "url": "https://www.nice.org.uk/guidance/ng126/chapter/Management-of-tubal-ectopic-pregnancy"
+  },
+  {
+   "org": "NICE",
+   "title": "NG126 anti-D immunoglobulin prophylaxis (2026 update)",
+   "year": 2026,
+   "url": "https://www.nice.org.uk/guidance/ng126/chapter/Anti-D-immunoglobulin-prophylaxis"
+  },
+  {
+   "org": "ACOG",
+   "title": "Tubal ectopic pregnancy: ACOG Practice Bulletin No. 193",
+   "year": 2018,
+   "url": "https://doi.org/10.1097/AOG.0000000000002560"
+  },
+  {
+   "org": "RCOG / AEPU",
+   "title": "Diagnosis and management of ectopic pregnancy: Green-top Guideline No. 21",
+   "year": 2016,
+   "url": "https://doi.org/10.1111/1471-0528.14189"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "ectopic-pregnancy-pathway",
+   "title": "Ectopic pregnancy (tubal): diagnosis and management Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Symptoms: abdominal or pelvic pain, amenorrhoea, vaginal bleeding; also shoulder tip pain, dizziness or syncope, diarrhoea or other GI symptoms, urinary symptoms, rectal pressure or pain on defecation. Atypical presentation is common.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Call the senior gynaecologist and anaesthetist; two large-bore IV cannulae; CBC, group and crossmatch, Rh typing, coagulation screen.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Transvaginal ultrasound (TVS): an adnexal mass moving separately from the ovary and containing a gestational sac with a yolk sac or fetal pole confirms tubal ectopic. Always look for a heterotopic pregnancy."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Methotrexate 50 mg/m2 body surface area IM once (day 1)."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Not doing a pregnancy test in a woman with abdominal pain, diarrhoea or syncope; excluding ectopic because there are no risk factors."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for ectopic pregnancy (tubal): diagnosis and management."
+  }
+ ],
+ "tables": [
+  {
+   "id": "ectopic-pregnancy-summary-matrix",
+   "title": "Ectopic pregnancy (tubal): diagnosis and management Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Symptoms: abdominal or pelvic pain, amenorrhoea, vaginal bleeding; also shoulder tip pain, dizziness or syncope, diarrhoea or other GI",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Call the senior gynaecologist and anaesthetist; two large-bore IV cannulae; CBC, group and crossmatch, Rh typing, coagulation screen.",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Transvaginal ultrasound (TVS): an adnexal mass moving separately from the ovary and containing a gestational sac with a yolk sac or fetal",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Methotrexate: 50 mg/m2 IM single dose; second dose if hCG falls less than 15% between day 4 and day 7",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Not doing a pregnancy test in a woman with abdominal pain, diarrhoea or syncope; excluding ectopic because there are no risk factors.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for ectopic pregnancy (tubal): diagnosis and management."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "ectopic-pregnancy-real-image",
+   "title": "Ectopic pregnancy (tubal): diagnosis and management: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

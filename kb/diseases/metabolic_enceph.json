@@ -160,5 +160,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "hdd9e1f49"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "metabolic_enceph-dx-algo",
+      "title": "Metabolic encephalopathy: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Delirium is an acute, relatively rapid decline in cognition (hours to days) that characteristically fluctuates; the cardinal neuropsychological deficit is inattention, though memory, executive function, visuospatial skills and language are",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: New focal neurologic deficit, meningismus, fever or papilloedema - point away from a simple metabolic cause toward a structural, infectious or raised-ICP process needing urgent imaging/LP (p.184, p.189-190).",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Complete blood count and full electrolyte panel including magnesium and phosphorus (p.185)., Serum/urine toxicology screen - performed earlier in younger patients (p.185)., TSH and free T4, and serum cortisol for suspected"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: No formal grading scale is described; severity is gauged clinically by the level of consciousness (a continuum from hyperarousal through lethargy to coma) and by the depth of the attentional deficit (e.g., forward digit"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Treating the symptoms of delirium pharmacologically while neglecting the underlying cause merely prolongs the confused state and can mask important diagnostic clues (p.185)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for metabolic encephalopathy."
+    }
+  ],
+  "tables": [
+    {
+      "id": "metabolic_enceph-matrix",
+      "title": "Metabolic encephalopathy: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Delirium is an acute, relatively rapid decline in cognition (hours to days) that characteristically fluctuates; the cardinal",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Complete blood count and full electrolyte panel including magnesium and phosphorus (p.185)., Serum/urine toxicology screen -",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Dementia and pre-existing cognitive impairment - the major predisposing condition; at least two-thirds of delirium occurs in",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "New focal neurologic deficit, meningismus, fever or papilloedema - point away from a simple metabolic cause toward a structural,",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating the symptoms of delirium pharmacologically while neglecting the underlying cause merely prolongs the confused state and",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for metabolic encephalopathy."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "metabolic-enceph-real-image",
+      "title": "Metabolic encephalopathy: Diagnostic Head Computed Tomography",
+      "type": "ct",
+      "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
+      "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
+      "annotations": [
+        {
+          "label": "Cerebral Parenchyma",
+          "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+        },
+        {
+          "label": "Ventricular System",
+          "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+        },
+        {
+          "label": "Extra-Axial Spaces",
+          "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+        }
+      ]
+    }
+  ]
 }

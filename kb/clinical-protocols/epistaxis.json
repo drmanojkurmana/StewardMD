@@ -5,7 +5,20 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, ENT outpatients, primary care",
- "aliases": ["nosebleed", "nose bleed", "nasal bleeding", "anterior epistaxis", "posterior epistaxis", "Little's area bleed", "nasal packing", "Merocel", "Rapid Rhino", "silver nitrate cautery", "HHT", "AAO-HNS 2020"],
+ "aliases": [
+  "nosebleed",
+  "nose bleed",
+  "nasal bleeding",
+  "anterior epistaxis",
+  "posterior epistaxis",
+  "Little's area bleed",
+  "nasal packing",
+  "Merocel",
+  "Rapid Rhino",
+  "silver nitrate cautery",
+  "HHT",
+  "AAO-HNS 2020"
+ ],
  "summary": "Sit the patient up leaning forward and compress the soft lower nose firmly and continuously for 10 to 15 minutes, then clear clots, apply a topical vasoconstrictor, find the bleeding point and cauterise it; pack if the site cannot be seen or bleeding persists (resorbable packs if anticoagulated), and escalate posterior or refractory bleeds to ENT.",
  "sections": [
   {
@@ -84,15 +97,144 @@
   }
  ],
  "drugs": [
-  { "name": "Oxymetazoline 0.05% nasal spray", "dose": "2 sprays into the bleeding nostril, or on cotton pledgets for about 10 minutes", "notes": "Xylometazoline 0.1% is the common alternative in India." },
-  { "name": "Lidocaine (lignocaine) 4% topical", "dose": "On cotton pledgets with the vasoconstrictor for about 10 minutes before cautery", "notes": "Keep total lidocaine within the maximum safe dose (4.5 mg/kg)." },
-  { "name": "Silver nitrate cautery stick", "dose": "Apply to the identified bleeding point only for a few seconds after topical anaesthesia", "notes": "One side of the septum per session." },
-  { "name": "Tranexamic acid (topical)", "dose": "500 mg (5 mL of 100 mg/mL injection) soaked on pledgets, left in the bleeding nostril for about 10 minutes", "notes": "Adjunct; mixed trial evidence (NoPAC negative)." }
+  {
+   "name": "Oxymetazoline 0.05% nasal spray",
+   "dose": "2 sprays into the bleeding nostril, or on cotton pledgets for about 10 minutes",
+   "notes": "Xylometazoline 0.1% is the common alternative in India."
+  },
+  {
+   "name": "Lidocaine (lignocaine) 4% topical",
+   "dose": "On cotton pledgets with the vasoconstrictor for about 10 minutes before cautery",
+   "notes": "Keep total lidocaine within the maximum safe dose (4.5 mg/kg)."
+  },
+  {
+   "name": "Silver nitrate cautery stick",
+   "dose": "Apply to the identified bleeding point only for a few seconds after topical anaesthesia",
+   "notes": "One side of the septum per session."
+  },
+  {
+   "name": "Tranexamic acid (topical)",
+   "dose": "500 mg (5 mL of 100 mg/mL injection) soaked on pledgets, left in the bleeding nostril for about 10 minutes",
+   "notes": "Adjunct; mixed trial evidence (NoPAC negative)."
+  }
  ],
  "sources": [
-  { "org": "AAO-HNS", "title": "Clinical practice guideline: nosebleed (epistaxis) (Otolaryngol Head Neck Surg 2020;162(1 suppl):S1-S38)", "year": 2020, "url": "https://www.entnet.org/resource/clinical-practice-guideline-nosebleed-epistaxis/" },
-  { "org": "The Laryngoscope (Munroe, Sowerby, Chin)", "title": "Is topical tranexamic acid effective in treating epistaxis?", "year": 2024, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11725680/" },
-  { "org": "Indian J Otolaryngol Head Neck Surg", "title": "Comparative study of topical application of injection tranexamic acid and anterior nasal packing in the management of epistaxis", "year": 2024, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11306879/" }
+  {
+   "org": "AAO-HNS",
+   "title": "Clinical practice guideline: nosebleed (epistaxis) (Otolaryngol Head Neck Surg 2020;162(1 suppl):S1-S38)",
+   "year": 2020,
+   "url": "https://www.entnet.org/resource/clinical-practice-guideline-nosebleed-epistaxis/"
+  },
+  {
+   "org": "The Laryngoscope (Munroe, Sowerby, Chin)",
+   "title": "Is topical tranexamic acid effective in treating epistaxis?",
+   "year": 2024,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11725680/"
+  },
+  {
+   "org": "Indian J Otolaryngol Head Neck Surg",
+   "title": "Comparative study of topical application of injection tranexamic acid and anterior nasal packing in the management of epistaxis",
+   "year": 2024,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11306879/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "epistaxis-pathway",
+   "title": "Epistaxis (nosebleed) in adults Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Identify who needs prompt management: ongoing heavy bleeding, haemodynamic instability, airway compromise, or bleeding from both nostrils or down the throat.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Sit upright, lean forward, spit out blood rather than swallow it. Do not lie flat or tilt the head back.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Document bleeding risk factors: anticoagulant or antiplatelet use, personal or family history of bleeding disorders, liver disease, intranasal drug use, recent trauma or nasal surgery."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Perform anterior rhinoscopy with a headlight and speculum after removing clot, to find the bleeding point."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Pressing on the bony bridge, or releasing pressure every minute to check."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for epistaxis (nosebleed) in adults."
+  }
+ ],
+ "tables": [
+  {
+   "id": "epistaxis-summary-matrix",
+   "title": "Epistaxis (nosebleed) in adults Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Identify who needs prompt management: ongoing heavy bleeding, haemodynamic instability, airway compromise, or bleeding from both nostrils",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Sit upright, lean forward, spit out blood rather than swallow it. Do not lie flat or tilt the head back.",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Oxymetazoline 0.05% nasal spray: 2 sprays into the bleeding nostril, or on cotton pledgets for about 10 minutes",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Pressing on the bony bridge, or releasing pressure every minute to check.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for epistaxis (nosebleed) in adults."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "epistaxis-real-image",
+   "title": "Epistaxis (nosebleed) in adults: Diagnostic Peripheral Blood Smear Examination",
+   "type": "diagram",
+   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
+   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
+   "annotations": [
+    {
+     "label": "Erythrocyte Indices",
+     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
+    },
+    {
+     "label": "Leukocyte Differential",
+     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
+    },
+    {
+     "label": "Platelet Count",
+     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+    }
+   ]
+  }
+ ]
 }

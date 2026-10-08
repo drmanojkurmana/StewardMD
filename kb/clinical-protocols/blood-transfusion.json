@@ -5,7 +5,21 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Ward, emergency department, ICU, operating theatre",
- "aliases": ["transfusion", "PRBC", "packed red cells", "platelet transfusion", "FFP", "fresh frozen plasma", "cryoprecipitate", "transfusion reaction", "TACO", "TRALI", "FNHTR", "haemolytic transfusion reaction", "AABB 2023"],
+ "aliases": [
+  "transfusion",
+  "PRBC",
+  "packed red cells",
+  "platelet transfusion",
+  "FFP",
+  "fresh frozen plasma",
+  "cryoprecipitate",
+  "transfusion reaction",
+  "TACO",
+  "TRALI",
+  "FNHTR",
+  "haemolytic transfusion reaction",
+  "AABB 2023"
+ ],
  "summary": "Use restrictive red cell thresholds (Hb below 7 g/dL for most stable inpatients, 7.5 for cardiac surgery, 8 for orthopaedic surgery or cardiovascular disease), single units with reassessment, evidence-based platelet, plasma and cryoprecipitate triggers, and stop the transfusion at once if an acute reaction is suspected.",
  "sections": [
   {
@@ -95,20 +109,170 @@
   }
  ],
  "drugs": [
-  { "name": "Red cells", "dose": "1 unit IV over 90 to 120 minutes (complete within 4 hours), then reassess", "notes": "Slower rate and single units if TACO risk." },
-  { "name": "Platelets", "dose": "1 adult therapeutic dose (1 apheresis unit or 4 to 6 pooled random donor units)", "notes": "Recheck count after each dose; more than one dose only for critical-site bleeding." },
-  { "name": "Fresh frozen plasma", "dose": "15 mL/kg IV", "notes": "Recheck PT and APTT after transfusion. Not for warfarin reversal when PCC is available." },
-  { "name": "Cryoprecipitate", "dose": "Adult dose 2 pools (about 10 single-donor units) IV", "notes": "Recheck fibrinogen after each dose." },
-  { "name": "Adrenaline (epinephrine)", "dose": "0.5 mg IM (0.5 mL of 1 mg/mL), repeat after 5 minutes if needed", "notes": "Anaphylaxis." },
-  { "name": "Chlorphenamine", "dose": "10 mg IV slowly", "notes": "Allergic reactions only. Avoid IM injection if thrombocytopenic." },
-  { "name": "Paracetamol", "dose": "1 g orally or IV, maximum 4 g/day", "notes": "Febrile non-haemolytic reactions." },
-  { "name": "Furosemide", "dose": "20 to 40 mg IV", "notes": "TACO treatment or prevention. Avoid in TRALI." }
+  {
+   "name": "Red cells",
+   "dose": "1 unit IV over 90 to 120 minutes (complete within 4 hours), then reassess",
+   "notes": "Slower rate and single units if TACO risk."
+  },
+  {
+   "name": "Platelets",
+   "dose": "1 adult therapeutic dose (1 apheresis unit or 4 to 6 pooled random donor units)",
+   "notes": "Recheck count after each dose; more than one dose only for critical-site bleeding."
+  },
+  {
+   "name": "Fresh frozen plasma",
+   "dose": "15 mL/kg IV",
+   "notes": "Recheck PT and APTT after transfusion. Not for warfarin reversal when PCC is available."
+  },
+  {
+   "name": "Cryoprecipitate",
+   "dose": "Adult dose 2 pools (about 10 single-donor units) IV",
+   "notes": "Recheck fibrinogen after each dose."
+  },
+  {
+   "name": "Adrenaline (epinephrine)",
+   "dose": "0.5 mg IM (0.5 mL of 1 mg/mL), repeat after 5 minutes if needed",
+   "notes": "Anaphylaxis."
+  },
+  {
+   "name": "Chlorphenamine",
+   "dose": "10 mg IV slowly",
+   "notes": "Allergic reactions only. Avoid IM injection if thrombocytopenic."
+  },
+  {
+   "name": "Paracetamol",
+   "dose": "1 g orally or IV, maximum 4 g/day",
+   "notes": "Febrile non-haemolytic reactions."
+  },
+  {
+   "name": "Furosemide",
+   "dose": "20 to 40 mg IV",
+   "notes": "TACO treatment or prevention. Avoid in TRALI."
+  }
  ],
  "sources": [
-  { "org": "AABB", "title": "Red blood cell transfusion: 2023 AABB international guidelines (JAMA)", "year": 2023, "url": "https://pubmed.ncbi.nlm.nih.gov/37824153/" },
-  { "org": "AABB / ICTMG", "title": "Platelet transfusion: 2025 AABB and ICTMG international clinical practice guidelines (JAMA)", "year": 2025, "url": "https://pubmed.ncbi.nlm.nih.gov/40440268/" },
-  { "org": "NICE", "title": "Blood transfusion (NG24): recommendations", "year": 2015, "url": "https://www.nice.org.uk/guidance/ng24/chapter/recommendations" },
-  { "org": "British Society for Haematology", "title": "Guideline on the investigation and management of acute transfusion reactions", "year": 2023, "url": "https://onlinelibrary.wiley.com/doi/full/10.1111/bjh.18789" }
+  {
+   "org": "AABB",
+   "title": "Red blood cell transfusion: 2023 AABB international guidelines (JAMA)",
+   "year": 2023,
+   "url": "https://pubmed.ncbi.nlm.nih.gov/37824153/"
+  },
+  {
+   "org": "AABB / ICTMG",
+   "title": "Platelet transfusion: 2025 AABB and ICTMG international clinical practice guidelines (JAMA)",
+   "year": 2025,
+   "url": "https://pubmed.ncbi.nlm.nih.gov/40440268/"
+  },
+  {
+   "org": "NICE",
+   "title": "Blood transfusion (NG24): recommendations",
+   "year": 2015,
+   "url": "https://www.nice.org.uk/guidance/ng24/chapter/recommendations"
+  },
+  {
+   "org": "British Society for Haematology",
+   "title": "Guideline on the investigation and management of acute transfusion reactions",
+   "year": 2023,
+   "url": "https://onlinelibrary.wiley.com/doi/full/10.1111/bjh.18789"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "blood-transfusion-pathway",
+   "title": "Blood transfusion: thresholds, components and acute reactions Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Suspect Blood transfusion: thresholds, components and acute reactions based on characteristic presentation and clinical risk factors.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "STOP the transfusion immediately. Keep the IV line open with 0.9% saline through a new giving set and record temperature, pulse, BP, respiratory rate and SpO2.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Repeat group and antibody screen on a post-reaction sample, DAT, FBC, LDH, bilirubin, haptoglobin, renal profile, coagulation screen with fibrinogen, and urinalysis for haemoglobin."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Mild febrile reaction (temperature above 38 C with a rise of 1 to 2 C, no other features): pause, give paracetamol 1 g orally, and restart slowly with closer observation. Antihistamines and steroids have no role in febrile reactions."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Record vital signs before each unit, 15 minutes after starting it and at the end, and observe in an area where staff can recognise and manage reactions."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for blood transfusion: thresholds, components and acute reactions."
+  }
+ ],
+ "tables": [
+  {
+   "id": "blood-transfusion-summary-matrix",
+   "title": "Blood transfusion: thresholds, components and acute reactions Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Key signs and symptoms of Blood transfusion: thresholds, components and acute reactions",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "STOP the transfusion immediately. Keep the IV line open with 0.9% saline through a new giving set and record temperature, pulse, BP,",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Repeat group and antibody screen on a post-reaction sample, DAT, FBC, LDH, bilirubin, haptoglobin, renal profile, coagulation screen with",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Red cells: 1 unit IV over 90 to 120 minutes (complete within 4 hours), then reassess",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Transfusing two units by reflex, or to a number without assessing symptoms.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for blood transfusion: thresholds, components and acute reactions."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "blood-transfusion-real-image",
+   "title": "Blood transfusion: thresholds, components and acute reactions: Diagnostic Peripheral Blood Smear Examination",
+   "type": "diagram",
+   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
+   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
+   "annotations": [
+    {
+     "label": "Erythrocyte Indices",
+     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
+    },
+    {
+     "label": "Leukocyte Differential",
+     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
+    },
+    {
+     "label": "Platelet Count",
+     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+    }
+   ]
+  }
+ ]
 }

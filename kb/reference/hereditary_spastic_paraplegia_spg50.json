@@ -1,81 +1,176 @@
 {
-  "id": "hereditary_spastic_paraplegia_spg50",
-  "name": "Hereditary spastic paraplegia type 50 (SPG50)",
-  "aliases": [
-    "SPG50",
-    "AP4M1",
-    "AP-4 deficiency syndrome"
+ "id": "hereditary_spastic_paraplegia_spg50",
+ "name": "Hereditary spastic paraplegia type 50 (SPG50)",
+ "aliases": [
+  "SPG50",
+  "AP4M1",
+  "AP-4 deficiency syndrome"
+ ],
+ "class": "non_infective",
+ "system": "Neurology / Hereditary spastic paraplegia",
+ "specialty": "Paediatric neurology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Neurogenetics references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Autosomal recessive complicated hereditary spastic paraplegia due to biallelic AP4M1 mutations, forming part of the AP-4-associated HSP spectrum (AP-4 deficiency syndrome).",
+   "AP4M1 encodes the mu subunit of adaptor protein complex 4; the sibling AP-4 subtypes SPG47 (AP4B1), SPG51 (AP4E1) and SPG52 (AP4S1) are clinically almost indistinguishable.",
+   "The typical trajectory is neonatal or infantile hypotonia that evolves into progressive spastic tetraplegia or paraplegia - a hallmark hypotonia-to-spasticity evolution.",
+   "Global developmental delay with severe intellectual disability and absent or very limited speech is characteristic.",
+   "Acquired postnatal microcephaly, seizures (often triggered by fever) and a sociable, happy demeanour with stereotypic laughter are frequent features.",
+   "Where any ambulation is achieved it is usually a shuffling, spastic gait; foot deformities, contractures, drooling and short stature are common.",
+   "MRI commonly shows a thin corpus callosum, ventricular enlargement and reduced periventricular white matter.",
+   "AP4M1-directed gene-replacement therapy is in clinical development, so early molecular diagnosis is increasingly important."
   ],
-  "class": "non_infective",
-  "system": "Neurology / Hereditary spastic paraplegia",
-  "specialty": "Paediatric neurology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Neurogenetics references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Autosomal recessive complicated hereditary spastic paraplegia due to biallelic AP4M1 mutations, forming part of the AP-4-associated HSP spectrum (AP-4 deficiency syndrome).",
-      "AP4M1 encodes the mu subunit of adaptor protein complex 4; the sibling AP-4 subtypes SPG47 (AP4B1), SPG51 (AP4E1) and SPG52 (AP4S1) are clinically almost indistinguishable.",
-      "The typical trajectory is neonatal or infantile hypotonia that evolves into progressive spastic tetraplegia or paraplegia - a hallmark hypotonia-to-spasticity evolution.",
-      "Global developmental delay with severe intellectual disability and absent or very limited speech is characteristic.",
-      "Acquired postnatal microcephaly, seizures (often triggered by fever) and a sociable, happy demeanour with stereotypic laughter are frequent features.",
-      "Where any ambulation is achieved it is usually a shuffling, spastic gait; foot deformities, contractures, drooling and short stature are common.",
-      "MRI commonly shows a thin corpus callosum, ventricular enlargement and reduced periventricular white matter.",
-      "AP4M1-directed gene-replacement therapy is in clinical development, so early molecular diagnosis is increasingly important."
+  "pathophysiology": "SPG50 is caused by biallelic mutation of AP4M1, which encodes the mu-4 medium subunit of the heterotetrameric adaptor protein complex 4 (AP-4). AP-4 assembles at the trans-Golgi network and selects transmembrane cargo into transport vesicles; loss of AP-4 function impairs export of the autophagy protein ATG9A and mislocalises other cargo, including AMPA-type glutamate receptors, away from the distal axon. The resulting disruption of autophagosome biogenesis and axonal homeostasis preferentially affects the long corticospinal and callosal projections, generating the early spastic tetraparesis, thin corpus callosum and neurodevelopmental phenotype shared across the AP-4 deficiency subtypes.",
+  "additionalDifferentials": [
+   "The sibling AP-4 deficiency HSPs SPG47 (AP4B1), SPG51 (AP4E1) and SPG52 (AP4S1), which overlap clinically",
+   "Spastic diplegic or quadriplegic cerebral palsy - a frequent early misdiagnosis",
+   "Angelman syndrome, given the happy demeanour, seizures, absent speech and microcephaly",
+   "Rett syndrome and other genetic neurodevelopmental encephalopathies",
+   "Other complicated recessive HSPs: SPG11 (spatacsin), SPG15 (ZFYVE26), SPG54 (DDHD2)",
+   "Mitochondrial and metabolic leukoencephalopathies"
+  ],
+  "additionalInvestigations": [
+   "AP4M1 sequencing within a hereditary spastic paraplegia or neurodevelopmental gene panel, or trio exome/genome sequencing",
+   "MRI of the brain to assess the corpus callosum, white-matter volume and ventricular size, with spine imaging as indicated",
+   "EEG when seizures or paroxysmal events occur",
+   "Structured developmental, cognitive and speech-and-language assessment",
+   "Ophthalmology review including screening for strabismus and visual impairment",
+   "Nerve conduction studies if a peripheral component is suspected, to distinguish from neuropathic HSPs",
+   "Metabolic screen to exclude treatable mimics alongside genetic testing"
+  ],
+  "redFlags": [
+   "Developmental regression, refractory seizures or deterioration exceeding the expected slow course",
+   "Feeding difficulty, recurrent aspiration or failure to thrive requiring nutritional support",
+   "Progressive contractures and hip subluxation or dislocation compromising positioning and care",
+   "A new focal neurological deficit suggesting an additional or alternative pathology"
+  ],
+  "prognosis": "SPG50 causes severe lifelong disability, with most affected children having limited or no independent ambulation and minimal speech; spasticity progresses slowly, and survival into adulthood is common with comprehensive supportive care.",
+  "pitfalls": [
+   "Diagnosing cerebral palsy and halting the workup, thereby missing the progressive genetic disorder",
+   "Mistaking it for Angelman syndrome because of the overlapping happy affect, seizures and microcephaly",
+   "Expecting congenital microcephaly, when the microcephaly is typically postnatal, so a normal early head circumference does not exclude SPG50",
+   "Testing a single gene rather than recognising the shared AP-4 deficiency phenotype across four subtypes"
+  ],
+  "references": [
+   "Clinical neurogenetics literature",
+   "AP-4-associated hereditary spastic paraplegia reviews",
+   "Standard paediatric neurology reference texts"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Symptomatic antispasticity therapy with baclofen or tizanidine, escalating to intrathecal baclofen for severe cases, plus botulinum toxin for focal spasticity and contracture prevention",
+   "Anti-seizure medication for epilepsy, with prompt antipyretic treatment given fever-triggered seizures",
+   "Physiotherapy, stretching, supportive seating and orthoses, with orthopaedic management of contractures and foot deformity and hip surveillance",
+   "Management of drooling with anticholinergic measures or salivary-gland botulinum toxin, alongside swallowing and feeding support",
+   "Developmental, educational and communication support including augmentative and alternative communication for severe intellectual disability and absent speech",
+   "Genetic counselling for autosomal recessive inheritance and carrier testing of relatives",
+   "Multidisciplinary paediatric neurology, rehabilitation and complex-care input"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "hereditary_spastic_paraplegia_spg50-pathway",
+   "title": "Hereditary spastic paraplegia type 50 (SPG50): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Autosomal recessive complicated hereditary spastic paraplegia due to biallelic AP4M1 mutations, forming part of the AP-4-associated HSP spectrum (AP-4 deficiency syndrome).",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Developmental regression, refractory seizures or deterioration exceeding the expected slow course",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: AP4M1 sequencing within a hereditary spastic paraplegia or neurodevelopmental gene panel, or trio exome/genome sequencing, MRI of the brain to assess the corpus callosum, white-matter volume and ventricular size, with"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Symptomatic antispasticity therapy with baclofen or tizanidine, escalating to intrathecal baclofen for severe cases, plus botulinum toxin for focal spasticity and contracture prevention"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Diagnosing cerebral palsy and halting the workup, thereby missing the progressive genetic disorder"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of hereditary spastic paraplegia type 50 (spg50)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "hereditary_spastic_paraplegia_spg50-matrix",
+   "title": "Hereditary spastic paraplegia type 50 (SPG50): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Autosomal recessive complicated hereditary spastic paraplegia due to biallelic AP4M1 mutations, forming part of the",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "SPG50 is caused by biallelic mutation of AP4M1, which encodes the mu-4 medium subunit of the heterotetrameric adaptor protein complex 4 (AP-4). AP-4 assembles at the trans-Golgi network and selects transmembrane cargo into transport vesicles; loss of AP-4 function impairs export of the autophagy protein ATG9A and mislocalises other cargo, including AMPA-type glutamate receptors, away from the distal axon. The resulting disruption of autophagosome biogenesis and axonal homeostasis preferentially affects the long corticospinal and callosal projections, generating the early spastic tetraparesis, thin corpus callosum and neurodevelopmental phenotype shared across the AP-4 deficiency subtypes.",
-    "additionalDifferentials": [
-      "The sibling AP-4 deficiency HSPs SPG47 (AP4B1), SPG51 (AP4E1) and SPG52 (AP4S1), which overlap clinically",
-      "Spastic diplegic or quadriplegic cerebral palsy - a frequent early misdiagnosis",
-      "Angelman syndrome, given the happy demeanour, seizures, absent speech and microcephaly",
-      "Rett syndrome and other genetic neurodevelopmental encephalopathies",
-      "Other complicated recessive HSPs: SPG11 (spatacsin), SPG15 (ZFYVE26), SPG54 (DDHD2)",
-      "Mitochondrial and metabolic leukoencephalopathies"
+    [
+     "Key Investigations",
+     "AP4M1 sequencing within a hereditary spastic paraplegia or neurodevelopmental gene panel, or trio exome/genome sequencing, MRI of",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "AP4M1 sequencing within a hereditary spastic paraplegia or neurodevelopmental gene panel, or trio exome/genome sequencing",
-      "MRI of the brain to assess the corpus callosum, white-matter volume and ventricular size, with spine imaging as indicated",
-      "EEG when seizures or paroxysmal events occur",
-      "Structured developmental, cognitive and speech-and-language assessment",
-      "Ophthalmology review including screening for strabismus and visual impairment",
-      "Nerve conduction studies if a peripheral component is suspected, to distinguish from neuropathic HSPs",
-      "Metabolic screen to exclude treatable mimics alongside genetic testing"
+    [
+     "Primary Differentials",
+     "The sibling AP-4 deficiency HSPs SPG47 (AP4B1), SPG51 (AP4E1) and SPG52 (AP4S1), which overlap clinically, Spastic diplegic or",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Developmental regression, refractory seizures or deterioration exceeding the expected slow course",
-      "Feeding difficulty, recurrent aspiration or failure to thrive requiring nutritional support",
-      "Progressive contractures and hip subluxation or dislocation compromising positioning and care",
-      "A new focal neurological deficit suggesting an additional or alternative pathology"
+    [
+     "Management Strategy",
+     "Symptomatic antispasticity therapy with baclofen or tizanidine, escalating to intrathecal baclofen for severe cases, plus",
+     "Core treatment modality"
     ],
-    "prognosis": "SPG50 causes severe lifelong disability, with most affected children having limited or no independent ambulation and minimal speech; spasticity progresses slowly, and survival into adulthood is common with comprehensive supportive care.",
-    "pitfalls": [
-      "Diagnosing cerebral palsy and halting the workup, thereby missing the progressive genetic disorder",
-      "Mistaking it for Angelman syndrome because of the overlapping happy affect, seizures and microcephaly",
-      "Expecting congenital microcephaly, when the microcephaly is typically postnatal, so a normal early head circumference does not exclude SPG50",
-      "Testing a single gene rather than recognising the shared AP-4 deficiency phenotype across four subtypes"
-    ],
-    "references": [
-      "Clinical neurogenetics literature",
-      "AP-4-associated hereditary spastic paraplegia reviews",
-      "Standard paediatric neurology reference texts"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Symptomatic antispasticity therapy with baclofen or tizanidine, escalating to intrathecal baclofen for severe cases, plus botulinum toxin for focal spasticity and contracture prevention",
-      "Anti-seizure medication for epilepsy, with prompt antipyretic treatment given fever-triggered seizures",
-      "Physiotherapy, stretching, supportive seating and orthoses, with orthopaedic management of contractures and foot deformity and hip surveillance",
-      "Management of drooling with anticholinergic measures or salivary-gland botulinum toxin, alongside swallowing and feeding support",
-      "Developmental, educational and communication support including augmentative and alternative communication for severe intellectual disability and absent speech",
-      "Genetic counselling for autosomal recessive inheritance and carrier testing of relatives",
-      "Multidisciplinary paediatric neurology, rehabilitation and complex-care input"
+    [
+     "Clinical Pitfall",
+     "Diagnosing cerebral palsy and halting the workup, thereby missing the progressive genetic disorder",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for hereditary spastic paraplegia type 50 (spg50)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "hereditary-spastic-paraplegia-spg50-real-image",
+   "title": "Hereditary spastic paraplegia type 50 (SPG50): Diagnostic Head Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
+   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
+   "annotations": [
+    {
+     "label": "Cerebral Parenchyma",
+     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+    },
+    {
+     "label": "Extra-Axial Spaces",
+     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+    }
+   ]
+  }
+ ]
 }

@@ -223,5 +223,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "h3f3257fd"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "dysentery-dx-algo",
+      "title": "Dysentery (Invasive Bacterial Diarrhea): Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Dysentery is bloody diarrhoea arising from mucosal invasion or cytotoxin injury to the colon, not from secretory/enterotoxin mechanisms; the triad of high fever, abdominal pain and grossly bloody stool points to invasive disease rather",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Grossly bloody diarrhoea with low-grade or absent fever - suspect STEC/EHEC and the risk of haemolytic-uraemic syndrome (p.1081, p.1288)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Fecal leukocyte smear (methylene blue wet mount) - suggests inflammatory disease, though predictive value is debated (p.1078-1079), Fecal lactoferrin (latex agglutination or ELISA) - more sensitive surrogate marker of"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Harrison frames severity primarily by the inflammatory vs noninflammatory distinction and by host/feature risk rather than a single formal dysentery score. Inflammatory (dysenteric) disease is defined by grossly"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Do NOT give antibiotics for suspected enterohaemorrhagic/Shiga toxin-producing E. coli (grossly bloody diarrhoea, often afebrile) - antibiotics induce Shiga toxin-producing phage replication, can increase toxin"
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for dysentery (invasive bacterial diarrhea)."
+    }
+  ],
+  "tables": [
+    {
+      "id": "dysentery-matrix",
+      "title": "Dysentery (Invasive Bacterial Diarrhea): Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Dysentery is bloody diarrhoea arising from mucosal invasion or cytotoxin injury to the colon, not from secretory/enterotoxin",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Fecal leukocyte smear (methylene blue wet mount) - suggests inflammatory disease, though predictive value is debated",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Shigella species (bacillary dysentery; prototypic invasive cause), Shiga toxin-producing / enterohaemorrhagic E. coli (STEC/EHEC,",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Grossly bloody diarrhoea with low-grade or absent fever - suspect STEC/EHEC and the risk of haemolytic-uraemic syndrome (p.1081,",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Do NOT give antibiotics for suspected enterohaemorrhagic/Shiga toxin-producing E. coli (grossly bloody diarrhoea, often afebrile)",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for dysentery (invasive bacterial diarrhea)."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "dysentery-real-image",
+      "title": "Dysentery (Invasive Bacterial Diarrhea): Diagnostic Abdominal Computed Tomography",
+      "type": "ct",
+      "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
+      "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
+      "annotations": [
+        {
+          "label": "Solid Viscera",
+          "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
+        },
+        {
+          "label": "Gastrointestinal Tract",
+          "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
+        },
+        {
+          "label": "Mesentery & Peritoneum",
+          "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+        }
+      ]
+    }
+  ]
 }

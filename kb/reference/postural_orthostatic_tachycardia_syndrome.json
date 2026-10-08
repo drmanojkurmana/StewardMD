@@ -1,80 +1,175 @@
 {
-  "id": "postural_orthostatic_tachycardia_syndrome",
-  "name": "Postural orthostatic tachycardia syndrome (POTS)",
-  "aliases": [
-    "POTS",
-    "postural tachycardia syndrome",
-    "chronic orthostatic intolerance"
+ "id": "postural_orthostatic_tachycardia_syndrome",
+ "name": "Postural orthostatic tachycardia syndrome (POTS)",
+ "aliases": [
+  "POTS",
+  "postural tachycardia syndrome",
+  "chronic orthostatic intolerance"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system / Autonomic",
+ "specialty": "Neurology / Autonomic",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Bradley and Daroff Neurology in Clinical Practice / Low's Clinical Autonomic Disorders",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Defined by a sustained rise in heart rate of at least 30 beats per minute (40 in adolescents) within ten minutes of standing or head-up tilt, without a significant fall in blood pressure",
+   "Symptoms of orthostatic intolerance include palpitations, light-headedness, tremulousness, blurred vision, fatigue, and cognitive 'brain fog', all relieved by lying down",
+   "Predominantly affects young women and frequently follows a viral illness, pregnancy, surgery, or trauma",
+   "Commonly overlaps with chronic fatigue, fibromyalgia, migraine, joint hypermobility (Ehlers-Danlos type), and gastrointestinal dysmotility",
+   "Recognised subtypes include hypovolaemic, neuropathic (partial dysautonomic), and hyperadrenergic forms that may coexist",
+   "An active-stand (lying-to-standing) test and head-up tilt confirm the heart-rate criterion; a symptomatic orthostatic tachycardia sustained over the recording period is required",
+   "Deconditioning perpetuates the syndrome, so prolonged bed rest should be avoided",
+   "Management is primarily non-pharmacological: volume and salt expansion, compression garments, physical counter-manoeuvres, graded exercise reconditioning, and avoidance of triggers"
   ],
-  "class": "non_infective",
-  "system": "Nervous system / Autonomic",
-  "specialty": "Neurology / Autonomic",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Bradley and Daroff Neurology in Clinical Practice / Low's Clinical Autonomic Disorders",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Defined by a sustained rise in heart rate of at least 30 beats per minute (40 in adolescents) within ten minutes of standing or head-up tilt, without a significant fall in blood pressure",
-      "Symptoms of orthostatic intolerance include palpitations, light-headedness, tremulousness, blurred vision, fatigue, and cognitive 'brain fog', all relieved by lying down",
-      "Predominantly affects young women and frequently follows a viral illness, pregnancy, surgery, or trauma",
-      "Commonly overlaps with chronic fatigue, fibromyalgia, migraine, joint hypermobility (Ehlers-Danlos type), and gastrointestinal dysmotility",
-      "Recognised subtypes include hypovolaemic, neuropathic (partial dysautonomic), and hyperadrenergic forms that may coexist",
-      "An active-stand (lying-to-standing) test and head-up tilt confirm the heart-rate criterion; a symptomatic orthostatic tachycardia sustained over the recording period is required",
-      "Deconditioning perpetuates the syndrome, so prolonged bed rest should be avoided",
-      "Management is primarily non-pharmacological: volume and salt expansion, compression garments, physical counter-manoeuvres, graded exercise reconditioning, and avoidance of triggers"
+  "pathophysiology": "Postural orthostatic tachycardia syndrome is a heterogeneous disorder of orthostatic intolerance in which assuming an upright posture provokes an exaggerated compensatory rise in heart rate without orthostatic hypotension. Several mechanisms may act, often in combination: reduced circulating blood volume, excessive venous pooling in the lower limbs and splanchnic bed, a partial peripheral autonomic (small-fibre) neuropathy that limits lower-body vasoconstriction, and a hyperadrenergic state with heightened central sympathetic outflow. Inadequate venous return lowers stroke volume, so heart rate rises steeply to preserve cerebral perfusion, generating the characteristic symptoms. Physical deconditioning and abnormal fluid regulation frequently perpetuate the cycle.",
+  "additionalDifferentials": [
+   "Orthostatic hypotension due to autonomic failure",
+   "Inappropriate sinus tachycardia",
+   "Anxiety or panic disorder",
+   "Thyrotoxicosis",
+   "Phaeochromocytoma",
+   "Dehydration or anaemia",
+   "Paroxysmal supraventricular tachycardia"
+  ],
+  "additionalInvestigations": [
+   "Active-stand (lying-to-standing) test with serial heart rate and blood pressure over ten minutes",
+   "Head-up tilt-table testing where the active-stand test is equivocal",
+   "Full blood count and thyroid function to exclude anaemia and thyrotoxicosis",
+   "Supine and standing plasma catecholamines when a hyperadrenergic subtype is suspected",
+   "Ambulatory ECG monitoring to exclude a primary arrhythmia",
+   "Autonomic function testing including QSART where available"
+  ],
+  "redFlags": [
+   "Syncope on exertion or causing injury, suggesting a cardiac cause",
+   "A significant orthostatic fall in blood pressure indicating autonomic failure rather than POTS",
+   "Features of phaeochromocytoma such as paroxysmal hypertension, headache, and sweating",
+   "Progressive neurological signs suggesting a wider autonomic neuropathy"
+  ],
+  "prognosis": "Many patients, particularly those with a post-viral onset, improve substantially over months to years with reconditioning and non-pharmacological measures, although a proportion have persistent, disabling symptoms that require long-term multidisciplinary support.",
+  "pitfalls": [
+   "Mislabelling the orthostatic tachycardia as anxiety and overlooking the reproducible heart-rate criterion",
+   "Diagnosing POTS when an orthostatic fall in blood pressure actually indicates orthostatic hypotension",
+   "Failing to exclude dehydration, anaemia, thyrotoxicosis, or medication effects before making the diagnosis",
+   "Recommending prolonged rest, which worsens deconditioning and perpetuates symptoms"
+  ],
+  "references": [
+   "Bradley and Daroff's Neurology in Clinical Practice",
+   "Low's Clinical Autonomic Disorders"
+  ],
+  "crossLinks": [],
+  "management": [
+   "First-line non-pharmacological volume support with increased salt and fluid intake plus lower-limb and abdominal compression garments to counter venous pooling",
+   "Structured graded reconditioning programme beginning with recumbent or semi-recumbent exercise to reverse deconditioning",
+   "Heart-rate control with a beta-blocker or ivabradine for symptomatic orthostatic tachycardia",
+   "Fludrocortisone for volume expansion and midodrine for vasoconstriction in hypovolaemic and neuropathic subtypes, with pyridostigmine where autonomic neuropathy predominates",
+   "Withdraw aggravating agents and treat coexisting conditions such as anaemia, migraine and gastrointestinal dysmotility",
+   "Educate on trigger avoidance (prolonged standing, heat, large carbohydrate meals) and physical counter-manoeuvres",
+   "Multidisciplinary support involving autonomic specialists, cardiology and physiotherapy for persistent, disabling symptoms"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "postural_orthostatic_tachycardia_syndrome-pathway",
+   "title": "Postural orthostatic tachycardia syndrome (POTS): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Defined by a sustained rise in heart rate of at least 30 beats per minute (40 in adolescents) within ten minutes of standing or head-up tilt, without a significant fall in blood pressure",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Syncope on exertion or causing injury, suggesting a cardiac cause",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Active-stand (lying-to-standing) test with serial heart rate and blood pressure over ten minutes, Head-up tilt-table testing where the active-stand test is equivocal, Full blood count and thyroid function to exclude"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: First-line non-pharmacological volume support with increased salt and fluid intake plus lower-limb and abdominal compression garments to counter venous pooling"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mislabelling the orthostatic tachycardia as anxiety and overlooking the reproducible heart-rate criterion"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of postural orthostatic tachycardia syndrome (pots)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "postural_orthostatic_tachycardia_syndrome-matrix",
+   "title": "Postural orthostatic tachycardia syndrome (POTS): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Defined by a sustained rise in heart rate of at least 30 beats per minute (40 in adolescents) within ten minutes of standing or",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Postural orthostatic tachycardia syndrome is a heterogeneous disorder of orthostatic intolerance in which assuming an upright posture provokes an exaggerated compensatory rise in heart rate without orthostatic hypotension. Several mechanisms may act, often in combination: reduced circulating blood volume, excessive venous pooling in the lower limbs and splanchnic bed, a partial peripheral autonomic (small-fibre) neuropathy that limits lower-body vasoconstriction, and a hyperadrenergic state with heightened central sympathetic outflow. Inadequate venous return lowers stroke volume, so heart rate rises steeply to preserve cerebral perfusion, generating the characteristic symptoms. Physical deconditioning and abnormal fluid regulation frequently perpetuate the cycle.",
-    "additionalDifferentials": [
-      "Orthostatic hypotension due to autonomic failure",
-      "Inappropriate sinus tachycardia",
-      "Anxiety or panic disorder",
-      "Thyrotoxicosis",
-      "Phaeochromocytoma",
-      "Dehydration or anaemia",
-      "Paroxysmal supraventricular tachycardia"
+    [
+     "Key Investigations",
+     "Active-stand (lying-to-standing) test with serial heart rate and blood pressure over ten minutes, Head-up tilt-table testing",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Active-stand (lying-to-standing) test with serial heart rate and blood pressure over ten minutes",
-      "Head-up tilt-table testing where the active-stand test is equivocal",
-      "Full blood count and thyroid function to exclude anaemia and thyrotoxicosis",
-      "Supine and standing plasma catecholamines when a hyperadrenergic subtype is suspected",
-      "Ambulatory ECG monitoring to exclude a primary arrhythmia",
-      "Autonomic function testing including QSART where available"
+    [
+     "Primary Differentials",
+     "Orthostatic hypotension due to autonomic failure, Inappropriate sinus tachycardia, Anxiety or panic disorder",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Syncope on exertion or causing injury, suggesting a cardiac cause",
-      "A significant orthostatic fall in blood pressure indicating autonomic failure rather than POTS",
-      "Features of phaeochromocytoma such as paroxysmal hypertension, headache, and sweating",
-      "Progressive neurological signs suggesting a wider autonomic neuropathy"
+    [
+     "Management Strategy",
+     "First-line non-pharmacological volume support with increased salt and fluid intake plus lower-limb and abdominal compression",
+     "Core treatment modality"
     ],
-    "prognosis": "Many patients, particularly those with a post-viral onset, improve substantially over months to years with reconditioning and non-pharmacological measures, although a proportion have persistent, disabling symptoms that require long-term multidisciplinary support.",
-    "pitfalls": [
-      "Mislabelling the orthostatic tachycardia as anxiety and overlooking the reproducible heart-rate criterion",
-      "Diagnosing POTS when an orthostatic fall in blood pressure actually indicates orthostatic hypotension",
-      "Failing to exclude dehydration, anaemia, thyrotoxicosis, or medication effects before making the diagnosis",
-      "Recommending prolonged rest, which worsens deconditioning and perpetuates symptoms"
-    ],
-    "references": [
-      "Bradley and Daroff's Neurology in Clinical Practice",
-      "Low's Clinical Autonomic Disorders"
-    ],
-    "crossLinks": [],
-    "management": [
-      "First-line non-pharmacological volume support with increased salt and fluid intake plus lower-limb and abdominal compression garments to counter venous pooling",
-      "Structured graded reconditioning programme beginning with recumbent or semi-recumbent exercise to reverse deconditioning",
-      "Heart-rate control with a beta-blocker or ivabradine for symptomatic orthostatic tachycardia",
-      "Fludrocortisone for volume expansion and midodrine for vasoconstriction in hypovolaemic and neuropathic subtypes, with pyridostigmine where autonomic neuropathy predominates",
-      "Withdraw aggravating agents and treat coexisting conditions such as anaemia, migraine and gastrointestinal dysmotility",
-      "Educate on trigger avoidance (prolonged standing, heat, large carbohydrate meals) and physical counter-manoeuvres",
-      "Multidisciplinary support involving autonomic specialists, cardiology and physiotherapy for persistent, disabling symptoms"
+    [
+     "Clinical Pitfall",
+     "Mislabelling the orthostatic tachycardia as anxiety and overlooking the reproducible heart-rate criterion",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for postural orthostatic tachycardia syndrome (pots)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "postural-orthostatic-tachycardia-syndrome-real-image",
+   "title": "Postural orthostatic tachycardia syndrome (POTS): Diagnostic Musculoskeletal Radiograph",
+   "type": "xray",
+   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
+   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
+   "annotations": [
+    {
+     "label": "Cortical Margins",
+     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
+    },
+    {
+     "label": "Trabecular Architecture",
+     "description": "Medullary bone density, lucencies, and subchondral mineralization."
+    },
+    {
+     "label": "Joint Articulation",
+     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+    }
+   ]
+  }
+ ]
 }

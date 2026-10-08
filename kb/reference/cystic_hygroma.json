@@ -1,77 +1,172 @@
 {
-  "id": "cystic_hygroma",
-  "name": "Cystic hygroma",
-  "aliases": [
-    "lymphatic malformation",
-    "lymphangioma",
-    "macrocystic lymphatic malformation"
+ "id": "cystic_hygroma",
+ "name": "Cystic hygroma",
+ "aliases": [
+  "lymphatic malformation",
+  "lymphangioma",
+  "macrocystic lymphatic malformation"
+ ],
+ "class": "non_infective",
+ "system": "Paediatric surgery / Thoracic",
+ "specialty": "Paediatric Surgery",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Nelson Textbook of Pediatrics / Bailey & Love (paediatric surgery)",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A congenital lymphatic malformation that most often presents as a soft, compressible, painless swelling in the posterior triangle of the neck or the axilla",
+   "The lesion characteristically transilluminates brightly because it is filled with clear lymphatic fluid",
+   "Many are detected antenatally or in early infancy; fetal nuchal cystic hygroma is associated with chromosomal abnormalities such as Turner and Down syndromes",
+   "The swelling may enlarge suddenly following intracystic bleeding or with an upper respiratory infection",
+   "Large cervical lesions can extend toward the floor of the mouth or mediastinum and threaten the airway or swallowing",
+   "Ultrasound and MRI define the extent and whether the lesion is macrocystic or microcystic, guiding treatment choice",
+   "Management options include sclerotherapy (often effective for macrocystic lesions) and surgical excision, though complete removal can be difficult when the malformation infiltrates vital structures",
+   "Because the malformation crosses tissue planes and encases nerves and vessels, incomplete excision and recurrence are common"
   ],
-  "class": "non_infective",
-  "system": "Paediatric surgery / Thoracic",
-  "specialty": "Paediatric Surgery",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Nelson Textbook of Pediatrics / Bailey & Love (paediatric surgery)",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A congenital lymphatic malformation that most often presents as a soft, compressible, painless swelling in the posterior triangle of the neck or the axilla",
-      "The lesion characteristically transilluminates brightly because it is filled with clear lymphatic fluid",
-      "Many are detected antenatally or in early infancy; fetal nuchal cystic hygroma is associated with chromosomal abnormalities such as Turner and Down syndromes",
-      "The swelling may enlarge suddenly following intracystic bleeding or with an upper respiratory infection",
-      "Large cervical lesions can extend toward the floor of the mouth or mediastinum and threaten the airway or swallowing",
-      "Ultrasound and MRI define the extent and whether the lesion is macrocystic or microcystic, guiding treatment choice",
-      "Management options include sclerotherapy (often effective for macrocystic lesions) and surgical excision, though complete removal can be difficult when the malformation infiltrates vital structures",
-      "Because the malformation crosses tissue planes and encases nerves and vessels, incomplete excision and recurrence are common"
+  "pathophysiology": "Cystic hygroma is a malformation of the lymphatic system in which sequestered lymphatic channels fail to connect normally with the venous drainage, producing dilated, fluid-filled cystic spaces. These may be macrocystic (large cysts) or microcystic and tend to infiltrate along tissue planes rather than respect anatomical boundaries. Accumulated lymph distends the cysts, and intralesional haemorrhage or infection can cause rapid, sometimes dangerous, enlargement. The malformation grows with the child and does not spontaneously regress in most cases.",
+  "additionalDifferentials": [
+   "Branchial cleft cyst",
+   "Haemangioma or other vascular malformation",
+   "Thyroglossal cyst (if midline)",
+   "Lipoma or other soft-tissue mass",
+   "Cervical abscess or lymphadenitis"
+  ],
+  "additionalInvestigations": [
+   "Neck and soft-tissue ultrasound to confirm the cystic nature and transillumination correlate",
+   "MRI to map the full extent and involvement of adjacent structures",
+   "Antenatal ultrasound and karyotyping when detected in the fetus",
+   "Airway assessment (including nasendoscopy or cross-sectional imaging) for large cervical lesions",
+   "Assessment for associated syndromes when clinically indicated"
+  ],
+  "redFlags": [
+   "Airway compromise from a large or rapidly enlarging cervical or oral lesion, which may be life-threatening",
+   "Sudden painful swelling due to intracystic haemorrhage",
+   "Signs of infection within the malformation causing rapid expansion",
+   "Feeding or swallowing difficulty from mass effect on the pharynx"
+  ],
+  "prognosis": "Small, well-localised macrocystic lesions often respond well to sclerotherapy or excision. Extensive, infiltrative, or microcystic malformations are harder to eradicate, recur frequently, and may require repeated interventions. Fetal cystic hygromas associated with chromosomal or cardiac anomalies carry a guarded prognosis.",
+  "pitfalls": [
+   "Attempting aggressive complete excision at the cost of damaging encased nerves and vessels",
+   "Underestimating airway risk in large cervical lesions before intervention",
+   "Assuming the lesion will spontaneously resolve, unlike infantile haemangiomas",
+   "Overlooking associated chromosomal or cardiac anomalies in antenatally detected cases"
+  ],
+  "references": [
+   "Nelson Textbook of Pediatrics, 22e",
+   "Bailey & Love's Short Practice of Surgery"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Treat macrocystic lesions with intralesional sclerotherapy using agents such as picibanil (OK-432), bleomycin or doxycycline to collapse the cysts",
+   "Undertake surgical excision for accessible or well-localised lesions, accepting that infiltrative disease is difficult to eradicate completely",
+   "Consider the mTOR inhibitor sirolimus for extensive, microcystic or complex lymphatic malformations not amenable to sclerotherapy or surgery",
+   "Secure and protect the airway for large cervical lesions threatening breathing or swallowing, planning an ex-utero intrapartum treatment approach for antenatally diagnosed airway-threatening lesions",
+   "Manage acute enlargement from intracystic haemorrhage or superimposed infection, treating infection with antibiotics",
+   "Maintain ultrasound and MRI surveillance for recurrence given the tendency of infiltrative lesions to recur",
+   "Coordinate paediatric surgery, ENT and interventional radiology, and arrange antenatal karyotyping and counselling given the association with chromosomal anomalies such as Turner and Down syndromes"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "cystic_hygroma-pathway",
+   "title": "Cystic hygroma: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A congenital lymphatic malformation that most often presents as a soft, compressible, painless swelling in the posterior triangle of the neck or the axilla",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Airway compromise from a large or rapidly enlarging cervical or oral lesion, which may be life-threatening",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Neck and soft-tissue ultrasound to confirm the cystic nature and transillumination correlate, MRI to map the full extent and involvement of adjacent structures, Antenatal ultrasound and karyotyping when detected in the"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Treat macrocystic lesions with intralesional sclerotherapy using agents such as picibanil (OK-432), bleomycin or doxycycline to collapse the cysts"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attempting aggressive complete excision at the cost of damaging encased nerves and vessels"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of cystic hygroma."
+  }
+ ],
+ "tables": [
+  {
+   "id": "cystic_hygroma-matrix",
+   "title": "Cystic hygroma: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A congenital lymphatic malformation that most often presents as a soft, compressible, painless swelling in the posterior triangle",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Cystic hygroma is a malformation of the lymphatic system in which sequestered lymphatic channels fail to connect normally with the venous drainage, producing dilated, fluid-filled cystic spaces. These may be macrocystic (large cysts) or microcystic and tend to infiltrate along tissue planes rather than respect anatomical boundaries. Accumulated lymph distends the cysts, and intralesional haemorrhage or infection can cause rapid, sometimes dangerous, enlargement. The malformation grows with the child and does not spontaneously regress in most cases.",
-    "additionalDifferentials": [
-      "Branchial cleft cyst",
-      "Haemangioma or other vascular malformation",
-      "Thyroglossal cyst (if midline)",
-      "Lipoma or other soft-tissue mass",
-      "Cervical abscess or lymphadenitis"
+    [
+     "Key Investigations",
+     "Neck and soft-tissue ultrasound to confirm the cystic nature and transillumination correlate, MRI to map the full extent and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Neck and soft-tissue ultrasound to confirm the cystic nature and transillumination correlate",
-      "MRI to map the full extent and involvement of adjacent structures",
-      "Antenatal ultrasound and karyotyping when detected in the fetus",
-      "Airway assessment (including nasendoscopy or cross-sectional imaging) for large cervical lesions",
-      "Assessment for associated syndromes when clinically indicated"
+    [
+     "Primary Differentials",
+     "Branchial cleft cyst, Haemangioma or other vascular malformation, Thyroglossal cyst (if midline)",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Airway compromise from a large or rapidly enlarging cervical or oral lesion, which may be life-threatening",
-      "Sudden painful swelling due to intracystic haemorrhage",
-      "Signs of infection within the malformation causing rapid expansion",
-      "Feeding or swallowing difficulty from mass effect on the pharynx"
+    [
+     "Management Strategy",
+     "Treat macrocystic lesions with intralesional sclerotherapy using agents such as picibanil (OK-432), bleomycin or doxycycline to",
+     "Core treatment modality"
     ],
-    "prognosis": "Small, well-localised macrocystic lesions often respond well to sclerotherapy or excision. Extensive, infiltrative, or microcystic malformations are harder to eradicate, recur frequently, and may require repeated interventions. Fetal cystic hygromas associated with chromosomal or cardiac anomalies carry a guarded prognosis.",
-    "pitfalls": [
-      "Attempting aggressive complete excision at the cost of damaging encased nerves and vessels",
-      "Underestimating airway risk in large cervical lesions before intervention",
-      "Assuming the lesion will spontaneously resolve, unlike infantile haemangiomas",
-      "Overlooking associated chromosomal or cardiac anomalies in antenatally detected cases"
-    ],
-    "references": [
-      "Nelson Textbook of Pediatrics, 22e",
-      "Bailey & Love's Short Practice of Surgery"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Treat macrocystic lesions with intralesional sclerotherapy using agents such as picibanil (OK-432), bleomycin or doxycycline to collapse the cysts",
-      "Undertake surgical excision for accessible or well-localised lesions, accepting that infiltrative disease is difficult to eradicate completely",
-      "Consider the mTOR inhibitor sirolimus for extensive, microcystic or complex lymphatic malformations not amenable to sclerotherapy or surgery",
-      "Secure and protect the airway for large cervical lesions threatening breathing or swallowing, planning an ex-utero intrapartum treatment approach for antenatally diagnosed airway-threatening lesions",
-      "Manage acute enlargement from intracystic haemorrhage or superimposed infection, treating infection with antibiotics",
-      "Maintain ultrasound and MRI surveillance for recurrence given the tendency of infiltrative lesions to recur",
-      "Coordinate paediatric surgery, ENT and interventional radiology, and arrange antenatal karyotyping and counselling given the association with chromosomal anomalies such as Turner and Down syndromes"
+    [
+     "Clinical Pitfall",
+     "Attempting aggressive complete excision at the cost of damaging encased nerves and vessels",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for cystic hygroma."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "cystic-hygroma-real-image",
+   "title": "Cystic hygroma: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

@@ -1,79 +1,174 @@
 {
-  "id": "ohtahara_syndrome",
-  "name": "Ohtahara syndrome",
-  "aliases": [
-    "early infantile epileptic encephalopathy",
-    "EIEE",
-    "early infantile developmental and epileptic encephalopathy with burst-suppression",
-    "STXBP1"
+ "id": "ohtahara_syndrome",
+ "name": "Ohtahara syndrome",
+ "aliases": [
+  "early infantile epileptic encephalopathy",
+  "EIEE",
+  "early infantile developmental and epileptic encephalopathy with burst-suppression",
+  "STXBP1"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system / Neurology",
+ "specialty": "Neurology / Epileptology / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "ILAE classification / Nelson Textbook of Paediatrics",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Onset is very early, usually within the first weeks to three months of life, with frequent tonic spasms occurring both awake and asleep",
+   "The defining EEG hallmark is a burst-suppression pattern present in both wakefulness and sleep",
+   "Causes are heterogeneous, including structural brain malformations and pathogenic variants in genes such as STXBP1, KCNQ2, SCN2A and ARX",
+   "Development is severely impaired from onset, and seizures are typically drug-resistant",
+   "It may evolve into West syndrome and later into Lennox-Gastaut syndrome as the child grows",
+   "Structural imaging is essential because malformations of cortical development are a frequent underlying cause",
+   "Distinguishing it from early myoclonic encephalopathy rests on the predominant seizure type and the state-dependence of the EEG pattern"
   ],
-  "class": "non_infective",
-  "system": "Nervous system / Neurology",
-  "specialty": "Neurology / Epileptology / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "ILAE classification / Nelson Textbook of Paediatrics",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Onset is very early, usually within the first weeks to three months of life, with frequent tonic spasms occurring both awake and asleep",
-      "The defining EEG hallmark is a burst-suppression pattern present in both wakefulness and sleep",
-      "Causes are heterogeneous, including structural brain malformations and pathogenic variants in genes such as STXBP1, KCNQ2, SCN2A and ARX",
-      "Development is severely impaired from onset, and seizures are typically drug-resistant",
-      "It may evolve into West syndrome and later into Lennox-Gastaut syndrome as the child grows",
-      "Structural imaging is essential because malformations of cortical development are a frequent underlying cause",
-      "Distinguishing it from early myoclonic encephalopathy rests on the predominant seizure type and the state-dependence of the EEG pattern"
+  "pathophysiology": "Ohtahara syndrome is an early infantile developmental and epileptic encephalopathy in which severe disruption of neuronal networks in the immature brain produces continuous epileptic activity. The underlying causes, whether structural malformations of cortical development or pathogenic variants affecting synaptic transmission and ion channels, converge on profound cortical hyperexcitability and impaired inhibition. This generates the persistent burst-suppression pattern and frequent tonic spasms, while the same widespread dysfunction arrests brain development from the outset.",
+  "additionalDifferentials": [
+   "Early myoclonic encephalopathy",
+   "West syndrome (infantile spasms)",
+   "Neonatal seizures from hypoxic-ischaemic encephalopathy",
+   "Pyridoxine-dependent and other vitamin-responsive epilepsies",
+   "Inborn errors of metabolism presenting with neonatal seizures",
+   "Malformations of cortical development"
+  ],
+  "additionalInvestigations": [
+   "EEG demonstrating burst-suppression in both wakefulness and sleep",
+   "Brain MRI to detect malformations of cortical development and structural lesions",
+   "Epilepsy gene panel or exome sequencing (e.g. STXBP1, KCNQ2, SCN2A, ARX)",
+   "Metabolic workup including trials of vitamin-responsive causes such as pyridoxine",
+   "CSF studies where a metabolic or neurotransmitter disorder is suspected"
+  ],
+  "redFlags": [
+   "Refractory tonic spasms with persistent burst-suppression in early infancy",
+   "Failure to respond to pyridoxine trial when a vitamin-responsive cause is possible",
+   "Evidence of a progressive metabolic disorder",
+   "Rapid developmental arrest from birth"
+  ],
+  "prognosis": "The prognosis is generally very poor, with high early mortality, severe intellectual and motor disability in survivors, and frequent evolution to West and then Lennox-Gastaut syndrome. Outcome is strongly influenced by the underlying cause.",
+  "pitfalls": [
+   "Failing to trial vitamin-responsive treatments before concluding refractoriness",
+   "Overlooking a subtle malformation of cortical development on early imaging",
+   "Confusing it with early myoclonic encephalopathy by not characterising the predominant seizure type",
+   "Not pursuing genetic testing, which increasingly identifies a specific cause"
+  ],
+  "references": [
+   "ILAE classification of the epilepsies",
+   "Nelson Textbook of Paediatrics"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Treat any identifiable underlying cause, including a trial of pyridoxine, pyridoxal phosphate and folinic acid for vitamin-responsive seizures and targeted therapy where a metabolic cause is found",
+   "Antiseizure medication to reduce seizure burden, such as phenobarbital, vigabatrin, sodium valproate or zonisamide, acknowledging frequent drug resistance",
+   "Tailor treatment to the genetic cause, for example sodium-channel blockers such as carbamazepine or oxcarbazepine in KCNQ2-related disease",
+   "Consider the ketogenic diet, and resective epilepsy surgery where a focal structural lesion is identified",
+   "Adrenocorticotropic hormone or corticosteroids if the disorder evolves into West syndrome with epileptic spasms",
+   "Supportive and developmental care: feeding and respiratory support, physiotherapy and management of severe neurodevelopmental impairment",
+   "Multidisciplinary paediatric neurology, metabolic and genetics input with early palliative care and family support given the poor prognosis",
+   "Genetic counselling and gene testing (STXBP1, KCNQ2, SCN2A, ARX) to define recurrence risk"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "ohtahara_syndrome-pathway",
+   "title": "Ohtahara syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Onset is very early, usually within the first weeks to three months of life, with frequent tonic spasms occurring both awake and asleep",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Refractory tonic spasms with persistent burst-suppression in early infancy",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: EEG demonstrating burst-suppression in both wakefulness and sleep, Brain MRI to detect malformations of cortical development and structural lesions, Epilepsy gene panel or exome sequencing (e.g. STXBP1, KCNQ2, SCN2A, ARX)"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Treat any identifiable underlying cause, including a trial of pyridoxine, pyridoxal phosphate and folinic acid for vitamin-responsive seizures and targeted therapy where a metabolic cause is found"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Failing to trial vitamin-responsive treatments before concluding refractoriness"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of ohtahara syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "ohtahara_syndrome-matrix",
+   "title": "Ohtahara syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Onset is very early, usually within the first weeks to three months of life, with frequent tonic spasms occurring both awake and",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Ohtahara syndrome is an early infantile developmental and epileptic encephalopathy in which severe disruption of neuronal networks in the immature brain produces continuous epileptic activity. The underlying causes, whether structural malformations of cortical development or pathogenic variants affecting synaptic transmission and ion channels, converge on profound cortical hyperexcitability and impaired inhibition. This generates the persistent burst-suppression pattern and frequent tonic spasms, while the same widespread dysfunction arrests brain development from the outset.",
-    "additionalDifferentials": [
-      "Early myoclonic encephalopathy",
-      "West syndrome (infantile spasms)",
-      "Neonatal seizures from hypoxic-ischaemic encephalopathy",
-      "Pyridoxine-dependent and other vitamin-responsive epilepsies",
-      "Inborn errors of metabolism presenting with neonatal seizures",
-      "Malformations of cortical development"
+    [
+     "Key Investigations",
+     "EEG demonstrating burst-suppression in both wakefulness and sleep, Brain MRI to detect malformations of cortical development and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "EEG demonstrating burst-suppression in both wakefulness and sleep",
-      "Brain MRI to detect malformations of cortical development and structural lesions",
-      "Epilepsy gene panel or exome sequencing (e.g. STXBP1, KCNQ2, SCN2A, ARX)",
-      "Metabolic workup including trials of vitamin-responsive causes such as pyridoxine",
-      "CSF studies where a metabolic or neurotransmitter disorder is suspected"
+    [
+     "Primary Differentials",
+     "Early myoclonic encephalopathy, West syndrome (infantile spasms), Neonatal seizures from hypoxic-ischaemic encephalopathy",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Refractory tonic spasms with persistent burst-suppression in early infancy",
-      "Failure to respond to pyridoxine trial when a vitamin-responsive cause is possible",
-      "Evidence of a progressive metabolic disorder",
-      "Rapid developmental arrest from birth"
+    [
+     "Management Strategy",
+     "Treat any identifiable underlying cause, including a trial of pyridoxine, pyridoxal phosphate and folinic acid for",
+     "Core treatment modality"
     ],
-    "prognosis": "The prognosis is generally very poor, with high early mortality, severe intellectual and motor disability in survivors, and frequent evolution to West and then Lennox-Gastaut syndrome. Outcome is strongly influenced by the underlying cause.",
-    "pitfalls": [
-      "Failing to trial vitamin-responsive treatments before concluding refractoriness",
-      "Overlooking a subtle malformation of cortical development on early imaging",
-      "Confusing it with early myoclonic encephalopathy by not characterising the predominant seizure type",
-      "Not pursuing genetic testing, which increasingly identifies a specific cause"
-    ],
-    "references": [
-      "ILAE classification of the epilepsies",
-      "Nelson Textbook of Paediatrics"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Treat any identifiable underlying cause, including a trial of pyridoxine, pyridoxal phosphate and folinic acid for vitamin-responsive seizures and targeted therapy where a metabolic cause is found",
-      "Antiseizure medication to reduce seizure burden, such as phenobarbital, vigabatrin, sodium valproate or zonisamide, acknowledging frequent drug resistance",
-      "Tailor treatment to the genetic cause, for example sodium-channel blockers such as carbamazepine or oxcarbazepine in KCNQ2-related disease",
-      "Consider the ketogenic diet, and resective epilepsy surgery where a focal structural lesion is identified",
-      "Adrenocorticotropic hormone or corticosteroids if the disorder evolves into West syndrome with epileptic spasms",
-      "Supportive and developmental care: feeding and respiratory support, physiotherapy and management of severe neurodevelopmental impairment",
-      "Multidisciplinary paediatric neurology, metabolic and genetics input with early palliative care and family support given the poor prognosis",
-      "Genetic counselling and gene testing (STXBP1, KCNQ2, SCN2A, ARX) to define recurrence risk"
+    [
+     "Clinical Pitfall",
+     "Failing to trial vitamin-responsive treatments before concluding refractoriness",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for ohtahara syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "ohtahara-syndrome-real-image",
+   "title": "Ohtahara syndrome: Diagnostic Head Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
+   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
+   "annotations": [
+    {
+     "label": "Cerebral Parenchyma",
+     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+    },
+    {
+     "label": "Extra-Axial Spaces",
+     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+    }
+   ]
+  }
+ ]
 }

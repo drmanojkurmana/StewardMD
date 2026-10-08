@@ -1,84 +1,179 @@
 {
-  "id": "dock8_deficiency",
-  "name": "DOCK8 deficiency (autosomal recessive hyper-IgE)",
-  "aliases": [
-    "DOCK8",
-    "autosomal recessive hyper-IgE syndrome",
-    "AR-HIES",
-    "combined immunodeficiency with atopy"
+ "id": "dock8_deficiency",
+ "name": "DOCK8 deficiency (autosomal recessive hyper-IgE)",
+ "aliases": [
+  "DOCK8",
+  "autosomal recessive hyper-IgE syndrome",
+  "AR-HIES",
+  "combined immunodeficiency with atopy"
+ ],
+ "class": "non_infective",
+ "system": "Immunology / Genetics",
+ "specialty": "Clinical Immunology / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Stiehm's Immunologic Disorders / IUIS classification of inborn errors of immunity",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Presents as a combined immunodeficiency with severe eczema, markedly raised serum IgE and profound eosinophilia, distinguishing it from the autosomal dominant STAT3 (Job) syndrome",
+   "Hallmark is susceptibility to widespread and treatment-resistant cutaneous viral infection, particularly recurrent herpes simplex, molluscum contagiosum, human papillomavirus warts and varicella zoster",
+   "Recurrent sinopulmonary bacterial infection occurs but, unlike STAT3-HIES, pneumatoceles and connective-tissue or skeletal features are typically absent",
+   "There is a high lifetime risk of malignancy, especially virally driven squamous cell carcinoma and lymphoma, which is a leading cause of death",
+   "Severe food and environmental allergy, asthma and anaphylaxis are common because of the profound T-helper-2 skewing",
+   "Neurological complications including CNS vasculitis and infective encephalitis may occur and carry a poor outcome",
+   "Haematopoietic stem cell transplantation is the definitive treatment and can reverse the immunodeficiency and atopic phenotype",
+   "Diagnosis rests on demonstrating absent DOCK8 protein by flow cytometry or biallelic loss-of-function variants on genetic testing"
   ],
-  "class": "non_infective",
-  "system": "Immunology / Genetics",
-  "specialty": "Clinical Immunology / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Stiehm's Immunologic Disorders / IUIS classification of inborn errors of immunity",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Presents as a combined immunodeficiency with severe eczema, markedly raised serum IgE and profound eosinophilia, distinguishing it from the autosomal dominant STAT3 (Job) syndrome",
-      "Hallmark is susceptibility to widespread and treatment-resistant cutaneous viral infection, particularly recurrent herpes simplex, molluscum contagiosum, human papillomavirus warts and varicella zoster",
-      "Recurrent sinopulmonary bacterial infection occurs but, unlike STAT3-HIES, pneumatoceles and connective-tissue or skeletal features are typically absent",
-      "There is a high lifetime risk of malignancy, especially virally driven squamous cell carcinoma and lymphoma, which is a leading cause of death",
-      "Severe food and environmental allergy, asthma and anaphylaxis are common because of the profound T-helper-2 skewing",
-      "Neurological complications including CNS vasculitis and infective encephalitis may occur and carry a poor outcome",
-      "Haematopoietic stem cell transplantation is the definitive treatment and can reverse the immunodeficiency and atopic phenotype",
-      "Diagnosis rests on demonstrating absent DOCK8 protein by flow cytometry or biallelic loss-of-function variants on genetic testing"
+  "pathophysiology": "DOCK8 encodes a guanine-nucleotide exchange factor that regulates the actin cytoskeleton, and its loss impairs the shape integrity and migration of lymphocytes through dense tissue such as skin. Affected T and NK cells undergo cytoskeleton-dependent cell death (cytothripsis) as they move, causing progressive loss of memory T cells and defective cytotoxicity against virally infected keratinocytes. Impaired dendritic-cell and lymphocyte function produces a combined immunodeficiency with poor antibody memory, while unopposed T-helper-2 responses drive the very high IgE, eosinophilia and severe atopic disease. The result is the characteristic triad of recalcitrant cutaneous viral infection, allergic disease and heightened cancer risk.",
+  "additionalDifferentials": [
+   "Autosomal dominant hyper-IgE (STAT3/Job) syndrome",
+   "Severe atopic dermatitis with recurrent infection",
+   "Wiskott-Aldrich syndrome",
+   "Netherton syndrome",
+   "Omenn syndrome and other combined immunodeficiencies",
+   "IPEX and other severe immune dysregulation syndromes",
+   "PGM3 deficiency"
+  ],
+  "additionalInvestigations": [
+   "Flow cytometry for DOCK8 protein expression in lymphocytes",
+   "Serum immunoglobulins showing very high IgE with variable IgM and specific antibody deficiency",
+   "Full blood count and differential documenting marked eosinophilia and lymphopenia",
+   "Lymphocyte subset enumeration with reduced memory T and B cells and impaired NK function",
+   "Lymphocyte proliferation and vaccine antibody response assays",
+   "Next-generation sequencing or targeted DOCK8 gene analysis including copy-number assessment for large deletions"
+  ],
+  "redFlags": [
+   "New or enlarging cutaneous lesion suggesting virally driven squamous cell carcinoma",
+   "Lymphadenopathy, weight loss or cytopenias raising concern for lymphoma",
+   "Neurological deficit indicating CNS vasculitis or infective encephalitis",
+   "Disseminated or life-threatening viral infection",
+   "Severe anaphylaxis from food allergy"
+  ],
+  "prognosis": "Untreated DOCK8 deficiency carries a poor prognosis with early mortality from infection, malignancy or vascular complications. Haematopoietic stem cell transplantation, particularly when performed before serious complications develop, can be curative and markedly improves survival.",
+  "pitfalls": [
+   "Misclassifying it as ordinary severe atopic dermatitis and delaying immunological evaluation",
+   "Confusing it with autosomal dominant STAT3 hyper-IgE, which has a very different management and prognosis",
+   "Underestimating the malignancy risk and failing to survey the skin and lymphoid tissue",
+   "Attributing recurrent skin viral infection to poor hygiene rather than an underlying immunodeficiency",
+   "Delaying referral for transplantation until irreversible organ or CNS damage has occurred"
+  ],
+  "references": [
+   "Stiehm's Immunologic Disorders in Infants and Children",
+   "IUIS Expert Committee classification of inborn errors of immunity"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Haematopoietic stem cell transplantation is the definitive curative treatment, best performed before serious infective, malignant or vascular complications develop",
+   "Antimicrobial prophylaxis against bacterial and Pneumocystis infection, with antiviral therapy for recurrent cutaneous herpes simplex, molluscum, warts and varicella zoster",
+   "Immunoglobulin replacement to support defective antibody memory",
+   "Intensive management of severe eczema and atopy with skin care and topical therapy, plus allergen avoidance and anaphylaxis management including adrenaline auto-injector provision",
+   "Surveillance for virally driven malignancy, particularly squamous cell carcinoma and lymphoma",
+   "Monitor for neurological complications such as CNS vasculitis and infective encephalitis, which carry a poor outcome",
+   "Use irradiated, cytomegalovirus-safe blood products and avoid live vaccines",
+   "Genetic counselling and family screening given autosomal recessive DOCK8 inheritance"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "dock8_deficiency-pathway",
+   "title": "DOCK8 deficiency (autosomal recessive hyper-IgE): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Presents as a combined immunodeficiency with severe eczema, markedly raised serum IgE and profound eosinophilia, distinguishing it from the autosomal dominant STAT3 (Job) syndrome",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: New or enlarging cutaneous lesion suggesting virally driven squamous cell carcinoma",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Flow cytometry for DOCK8 protein expression in lymphocytes, Serum immunoglobulins showing very high IgE with variable IgM and specific antibody deficiency, Full blood count and differential documenting marked eosinophilia"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Haematopoietic stem cell transplantation is the definitive curative treatment, best performed before serious infective, malignant or vascular complications develop"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Misclassifying it as ordinary severe atopic dermatitis and delaying immunological evaluation"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of dock8 deficiency (autosomal recessive hyper-ige)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "dock8_deficiency-matrix",
+   "title": "DOCK8 deficiency (autosomal recessive hyper-IgE): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Presents as a combined immunodeficiency with severe eczema, markedly raised serum IgE and profound eosinophilia, distinguishing",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "DOCK8 encodes a guanine-nucleotide exchange factor that regulates the actin cytoskeleton, and its loss impairs the shape integrity and migration of lymphocytes through dense tissue such as skin. Affected T and NK cells undergo cytoskeleton-dependent cell death (cytothripsis) as they move, causing progressive loss of memory T cells and defective cytotoxicity against virally infected keratinocytes. Impaired dendritic-cell and lymphocyte function produces a combined immunodeficiency with poor antibody memory, while unopposed T-helper-2 responses drive the very high IgE, eosinophilia and severe atopic disease. The result is the characteristic triad of recalcitrant cutaneous viral infection, allergic disease and heightened cancer risk.",
-    "additionalDifferentials": [
-      "Autosomal dominant hyper-IgE (STAT3/Job) syndrome",
-      "Severe atopic dermatitis with recurrent infection",
-      "Wiskott-Aldrich syndrome",
-      "Netherton syndrome",
-      "Omenn syndrome and other combined immunodeficiencies",
-      "IPEX and other severe immune dysregulation syndromes",
-      "PGM3 deficiency"
+    [
+     "Key Investigations",
+     "Flow cytometry for DOCK8 protein expression in lymphocytes, Serum immunoglobulins showing very high IgE with variable IgM and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Flow cytometry for DOCK8 protein expression in lymphocytes",
-      "Serum immunoglobulins showing very high IgE with variable IgM and specific antibody deficiency",
-      "Full blood count and differential documenting marked eosinophilia and lymphopenia",
-      "Lymphocyte subset enumeration with reduced memory T and B cells and impaired NK function",
-      "Lymphocyte proliferation and vaccine antibody response assays",
-      "Next-generation sequencing or targeted DOCK8 gene analysis including copy-number assessment for large deletions"
+    [
+     "Primary Differentials",
+     "Autosomal dominant hyper-IgE (STAT3/Job) syndrome, Severe atopic dermatitis with recurrent infection, Wiskott-Aldrich syndrome",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "New or enlarging cutaneous lesion suggesting virally driven squamous cell carcinoma",
-      "Lymphadenopathy, weight loss or cytopenias raising concern for lymphoma",
-      "Neurological deficit indicating CNS vasculitis or infective encephalitis",
-      "Disseminated or life-threatening viral infection",
-      "Severe anaphylaxis from food allergy"
+    [
+     "Management Strategy",
+     "Haematopoietic stem cell transplantation is the definitive curative treatment, best performed before serious infective, malignant",
+     "Core treatment modality"
     ],
-    "prognosis": "Untreated DOCK8 deficiency carries a poor prognosis with early mortality from infection, malignancy or vascular complications. Haematopoietic stem cell transplantation, particularly when performed before serious complications develop, can be curative and markedly improves survival.",
-    "pitfalls": [
-      "Misclassifying it as ordinary severe atopic dermatitis and delaying immunological evaluation",
-      "Confusing it with autosomal dominant STAT3 hyper-IgE, which has a very different management and prognosis",
-      "Underestimating the malignancy risk and failing to survey the skin and lymphoid tissue",
-      "Attributing recurrent skin viral infection to poor hygiene rather than an underlying immunodeficiency",
-      "Delaying referral for transplantation until irreversible organ or CNS damage has occurred"
-    ],
-    "references": [
-      "Stiehm's Immunologic Disorders in Infants and Children",
-      "IUIS Expert Committee classification of inborn errors of immunity"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Haematopoietic stem cell transplantation is the definitive curative treatment, best performed before serious infective, malignant or vascular complications develop",
-      "Antimicrobial prophylaxis against bacterial and Pneumocystis infection, with antiviral therapy for recurrent cutaneous herpes simplex, molluscum, warts and varicella zoster",
-      "Immunoglobulin replacement to support defective antibody memory",
-      "Intensive management of severe eczema and atopy with skin care and topical therapy, plus allergen avoidance and anaphylaxis management including adrenaline auto-injector provision",
-      "Surveillance for virally driven malignancy, particularly squamous cell carcinoma and lymphoma",
-      "Monitor for neurological complications such as CNS vasculitis and infective encephalitis, which carry a poor outcome",
-      "Use irradiated, cytomegalovirus-safe blood products and avoid live vaccines",
-      "Genetic counselling and family screening given autosomal recessive DOCK8 inheritance"
+    [
+     "Clinical Pitfall",
+     "Misclassifying it as ordinary severe atopic dermatitis and delaying immunological evaluation",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for dock8 deficiency (autosomal recessive hyper-ige)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "dock8-deficiency-real-image",
+   "title": "DOCK8 deficiency (autosomal recessive hyper-IgE): Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

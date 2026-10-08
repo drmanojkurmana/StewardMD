@@ -6,7 +6,21 @@
  "basis": "international",
  "counterpart": "poisoning-general-approach",
  "setting": "Emergency department, ICU",
- "aliases": ["overdose", "poisoning", "self-poisoning", "toxidrome", "activated charcoal", "gastric lavage", "whole bowel irrigation", "decontamination", "antidote", "EXTRIP", "haemodialysis in poisoning", "toxic cardiac arrest", "ECMO in poisoning"],
+ "aliases": [
+  "overdose",
+  "poisoning",
+  "self-poisoning",
+  "toxidrome",
+  "activated charcoal",
+  "gastric lavage",
+  "whole bowel irrigation",
+  "decontamination",
+  "antidote",
+  "EXTRIP",
+  "haemodialysis in poisoning",
+  "toxic cardiac arrest",
+  "ECMO in poisoning"
+ ],
  "summary": "Resuscitate first (ABCDE, glucose, ECG), identify the toxidrome and give specific antidotes early. Give activated charcoal only with a safe airway and an adsorbable poison, usually within 1 hour and up to 6 hours for selected poisons; avoid routine lavage and ipecac; use extracorporeal removal per EXTRIP and seek poison centre advice.",
  "sections": [
   {
@@ -99,22 +113,180 @@
   }
  ],
  "drugs": [
-  { "name": "Activated charcoal (single dose)", "dose": "Adults 50 g (range 25 to 100 g) orally or via nasogastric tube, once", "notes": "Only with a protected airway or an alert, cooperative patient; not for metals, alcohols, corrosives or hydrocarbons." },
-  { "name": "Activated charcoal (multiple dose)", "dose": "50 to 100 g initially, then at least 12.5 g/h or equivalent (for example 25 g every 2 hours or 50 g every 4 hours) until clinical and laboratory improvement", "notes": "Stop if bowel sounds are absent; watch for aspiration and obstruction." },
-  { "name": "Naloxone", "dose": "0.04 to 0.4 mg IV, repeated or increased every 2 to 3 minutes to adequate breathing (total 2 mg or more may be needed); 0.4 to 2 mg IM or intranasal if no IV access", "notes": "Short-acting: observe for renarcotisation and use an infusion if needed." },
-  { "name": "Sodium bicarbonate 8.4%", "dose": "1 to 2 mEq/kg (1 to 2 mL/kg) IV bolus, repeated to narrow the QRS; commonly target serum pH 7.45 to 7.55", "notes": "Sodium channel blocker cardiotoxicity; also urine alkalinisation for salicylates. Monitor potassium." },
-  { "name": "High-dose insulin (euglycaemic)", "dose": "Regular insulin 1 unit/kg IV bolus, then 1 unit/kg/h, titrated up to 10 units/kg/h", "notes": "Give with dextrose and check glucose every 15 to 30 minutes and potassium hourly at first. Beta blocker or calcium channel blocker shock." },
-  { "name": "Calcium", "dose": "Calcium chloride 10% 10 to 20 mL (1 to 2 g) IV via a large or central vein, or calcium gluconate 10% 30 to 60 mL (3 to 6 g) IV; repeat as needed", "notes": "Calcium channel blocker toxicity, hyperkalaemia, hydrofluoric acid; monitor ionised calcium." },
-  { "name": "Lipid emulsion 20%", "dose": "1.5 mL/kg IV over 1 minute, then 0.25 mL/kg/min; repeat the bolus up to twice and double the rate if unstable; maximum about 12 mL/kg", "notes": "Local anaesthetic systemic toxicity; rescue only for other lipophilic drugs." },
-  { "name": "Hydroxocobalamin", "dose": "5 g IV over 15 minutes (70 mg/kg); a second 5 g may be given", "notes": "Cyanide, including smoke inhalation with shock or high lactate. Red skin and urine; interferes with colorimetric tests." },
-  { "name": "Methylene blue", "dose": "1 to 2 mg/kg IV over 5 minutes; repeat after 30 to 60 minutes if needed", "notes": "Symptomatic methaemoglobinaemia. Avoid in G6PD deficiency; serotonin toxicity risk with serotonergic drugs." },
-  { "name": "Digoxin-specific antibody fragments (Fab)", "dose": "Acute ingestion of unknown amount: 10 vials IV; chronic toxicity in adults: 6 vials; or calculate from dose ingested or serum digoxin", "notes": "Life-threatening arrhythmia, shock or severe hyperkalaemia." }
+  {
+   "name": "Activated charcoal (single dose)",
+   "dose": "Adults 50 g (range 25 to 100 g) orally or via nasogastric tube, once",
+   "notes": "Only with a protected airway or an alert, cooperative patient; not for metals, alcohols, corrosives or hydrocarbons."
+  },
+  {
+   "name": "Activated charcoal (multiple dose)",
+   "dose": "50 to 100 g initially, then at least 12.5 g/h or equivalent (for example 25 g every 2 hours or 50 g every 4 hours) until clinical and laboratory improvement",
+   "notes": "Stop if bowel sounds are absent; watch for aspiration and obstruction."
+  },
+  {
+   "name": "Naloxone",
+   "dose": "0.04 to 0.4 mg IV, repeated or increased every 2 to 3 minutes to adequate breathing (total 2 mg or more may be needed); 0.4 to 2 mg IM or intranasal if no IV access",
+   "notes": "Short-acting: observe for renarcotisation and use an infusion if needed."
+  },
+  {
+   "name": "Sodium bicarbonate 8.4%",
+   "dose": "1 to 2 mEq/kg (1 to 2 mL/kg) IV bolus, repeated to narrow the QRS; commonly target serum pH 7.45 to 7.55",
+   "notes": "Sodium channel blocker cardiotoxicity; also urine alkalinisation for salicylates. Monitor potassium."
+  },
+  {
+   "name": "High-dose insulin (euglycaemic)",
+   "dose": "Regular insulin 1 unit/kg IV bolus, then 1 unit/kg/h, titrated up to 10 units/kg/h",
+   "notes": "Give with dextrose and check glucose every 15 to 30 minutes and potassium hourly at first. Beta blocker or calcium channel blocker shock."
+  },
+  {
+   "name": "Calcium",
+   "dose": "Calcium chloride 10% 10 to 20 mL (1 to 2 g) IV via a large or central vein, or calcium gluconate 10% 30 to 60 mL (3 to 6 g) IV; repeat as needed",
+   "notes": "Calcium channel blocker toxicity, hyperkalaemia, hydrofluoric acid; monitor ionised calcium."
+  },
+  {
+   "name": "Lipid emulsion 20%",
+   "dose": "1.5 mL/kg IV over 1 minute, then 0.25 mL/kg/min; repeat the bolus up to twice and double the rate if unstable; maximum about 12 mL/kg",
+   "notes": "Local anaesthetic systemic toxicity; rescue only for other lipophilic drugs."
+  },
+  {
+   "name": "Hydroxocobalamin",
+   "dose": "5 g IV over 15 minutes (70 mg/kg); a second 5 g may be given",
+   "notes": "Cyanide, including smoke inhalation with shock or high lactate. Red skin and urine; interferes with colorimetric tests."
+  },
+  {
+   "name": "Methylene blue",
+   "dose": "1 to 2 mg/kg IV over 5 minutes; repeat after 30 to 60 minutes if needed",
+   "notes": "Symptomatic methaemoglobinaemia. Avoid in G6PD deficiency; serotonin toxicity risk with serotonergic drugs."
+  },
+  {
+   "name": "Digoxin-specific antibody fragments (Fab)",
+   "dose": "Acute ingestion of unknown amount: 10 vials IV; chronic toxicity in adults: 6 vials; or calculate from dose ingested or serum digoxin",
+   "notes": "Life-threatening arrhythmia, shock or severe hyperkalaemia."
+  }
  ],
  "sources": [
-  { "org": "AACT / EAPCCT", "title": "Position papers on gastrointestinal decontamination and enhanced elimination (single-dose and multiple-dose activated charcoal, gastric lavage 2013, ipecac, whole bowel irrigation 2015, urine alkalinisation)", "year": 2015, "url": "https://www.clintox.org/resources/position-statements" },
-  { "org": "Clinical Toxicology Recommendations Collaborative (AACT, EAPCCT, APAMT)", "title": "Recommendations on the administration of activated charcoal in acute oral overdose", "year": 2026, "url": "https://doi.org/10.1080/15563650.2025.2609807" },
-  { "org": "AHA", "title": "2023 American Heart Association focused update on the management of patients with cardiac arrest or life-threatening toxicity due to poisoning", "year": 2023, "url": "https://doi.org/10.1161/CIR.0000000000001161" },
-  { "org": "EXTRIP Workgroup", "title": "Extracorporeal Treatments in Poisoning: recommendations by toxin (salicylates and lithium 2015, and others)", "year": 2015, "url": "https://www.extrip-workgroup.org/recommendations" }
+  {
+   "org": "AACT / EAPCCT",
+   "title": "Position papers on gastrointestinal decontamination and enhanced elimination (single-dose and multiple-dose activated charcoal, gastric lavage 2013, ipecac, whole bowel irrigation 2015, urine alkalinisation)",
+   "year": 2015,
+   "url": "https://www.clintox.org/resources/position-statements"
+  },
+  {
+   "org": "Clinical Toxicology Recommendations Collaborative (AACT, EAPCCT, APAMT)",
+   "title": "Recommendations on the administration of activated charcoal in acute oral overdose",
+   "year": 2026,
+   "url": "https://doi.org/10.1080/15563650.2025.2609807"
+  },
+  {
+   "org": "AHA",
+   "title": "2023 American Heart Association focused update on the management of patients with cardiac arrest or life-threatening toxicity due to poisoning",
+   "year": 2023,
+   "url": "https://doi.org/10.1161/CIR.0000000000001161"
+  },
+  {
+   "org": "EXTRIP Workgroup",
+   "title": "Extracorporeal Treatments in Poisoning: recommendations by toxin (salicylates and lithium 2015, and others)",
+   "year": 2015,
+   "url": "https://www.extrip-workgroup.org/recommendations"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "poisoning-general-approach-international-pathway",
+   "title": "Acute poisoning: general approach (international) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Establish the agent, dose, time, formulation (immediate or modified release), route, intent and co-ingestants from the patient, witnesses and containers; assume the worst credible exposure.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "ABCDE approach with continuous ECG and SpO2 monitoring; capillary glucose in every patient with altered consciousness; early 12-lead ECG and blood gas.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "12-lead ECG: QRS above 100 ms (sodium channel blockade), QTc prolongation, AV block, bradycardia or tachyarrhythmia; repeat serially."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Multiple-dose activated charcoal is appropriate for carbamazepine, cardiac glycosides, colchicine, dapsone, phenobarbital, phenytoin, thallium and theophylline (CTRC 2026), if the airway is protected and bowel sounds are present."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Decontamination before resuscitation and airway protection, or charcoal to a drowsy patient with an unprotected airway."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for acute poisoning: general approach (international)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "poisoning-general-approach-international-summary-matrix",
+   "title": "Acute poisoning: general approach (international) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Establish the agent, dose, time, formulation (immediate or modified release), route, intent and co-ingestants from the patient, witnesses",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "ABCDE approach with continuous ECG and SpO2 monitoring; capillary glucose in every patient with altered consciousness; early 12-lead ECG",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "12-lead ECG: QRS above 100 ms (sodium channel blockade), QTc prolongation, AV block, bradycardia or tachyarrhythmia; repeat serially.",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Activated charcoal (single dose): Adults 50 g (range 25 to 100 g) orally or via nasogastric tube, once",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Decontamination before resuscitation and airway protection, or charcoal to a drowsy patient with an unprotected airway.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for acute poisoning: general approach (international)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "poisoning-general-approach-international-real-image",
+   "title": "Acute poisoning: general approach (international): Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

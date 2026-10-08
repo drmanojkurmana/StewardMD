@@ -1,78 +1,173 @@
 {
-  "id": "lupus_panniculitis",
-  "name": "Lupus panniculitis (lupus profundus)",
-  "aliases": [
-    "lupus profundus",
-    "lupus erythematosus panniculitis",
-    "LEP"
+ "id": "lupus_panniculitis",
+ "name": "Lupus panniculitis (lupus profundus)",
+ "aliases": [
+  "lupus profundus",
+  "lupus erythematosus panniculitis",
+  "LEP"
+ ],
+ "class": "non_infective",
+ "system": "Dermatology",
+ "specialty": "Dermatology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Rook's Textbook of Dermatology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Presents as firm, tender, deep subcutaneous nodules or plaques favouring the face, upper arms, shoulders, buttocks and thighs, often overlying areas of relative fat abundance",
+   "Lesions frequently heal with disfiguring, saucer-like lipoatrophy and depressed scars, a clue to the diagnosis",
+   "Overlying skin may be normal or show features of discoid lupus (erythema, follicular plugging, atrophy) when the process is termed lupus profundus",
+   "Occurs most often in middle-aged women and may exist in isolation or alongside systemic or discoid lupus erythematosus",
+   "Biopsy shows a predominantly lobular lymphocytic panniculitis with lymphoid follicles, hyaline fat necrosis and mucin, often with an overlying interface dermatitis",
+   "The main differential of concern is subcutaneous panniculitis-like T-cell lymphoma, which can mimic it clinically and histologically",
+   "Management centres on antimalarials (hydroxychloroquine) with systemic immunosuppression for resistant disease, plus photoprotection and avoidance of trauma"
   ],
-  "class": "non_infective",
-  "system": "Dermatology",
-  "specialty": "Dermatology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Rook's Textbook of Dermatology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Presents as firm, tender, deep subcutaneous nodules or plaques favouring the face, upper arms, shoulders, buttocks and thighs, often overlying areas of relative fat abundance",
-      "Lesions frequently heal with disfiguring, saucer-like lipoatrophy and depressed scars, a clue to the diagnosis",
-      "Overlying skin may be normal or show features of discoid lupus (erythema, follicular plugging, atrophy) when the process is termed lupus profundus",
-      "Occurs most often in middle-aged women and may exist in isolation or alongside systemic or discoid lupus erythematosus",
-      "Biopsy shows a predominantly lobular lymphocytic panniculitis with lymphoid follicles, hyaline fat necrosis and mucin, often with an overlying interface dermatitis",
-      "The main differential of concern is subcutaneous panniculitis-like T-cell lymphoma, which can mimic it clinically and histologically",
-      "Management centres on antimalarials (hydroxychloroquine) with systemic immunosuppression for resistant disease, plus photoprotection and avoidance of trauma"
+  "pathophysiology": "Lupus panniculitis is an autoimmune, predominantly lobular inflammation of subcutaneous fat that forms part of the spectrum of cutaneous lupus erythematosus. A T-lymphocyte-driven immune response targets the deep dermis and fat lobules, producing hyaline necrosis of adipocytes, lymphoid aggregates, mucin deposition and lymphocytic vascular injury. Repeated bouts of fat inflammation and necrosis are followed by fibrosis and loss of fat volume, accounting for the characteristic depressed atrophic scars. It may occur alone or in association with discoid or systemic lupus, reflecting a shared loss of immune tolerance.",
+  "additionalDifferentials": [
+   "Subcutaneous panniculitis-like T-cell lymphoma",
+   "Erythema nodosum",
+   "Morphoea profunda / deep morphoea",
+   "Traumatic or factitial panniculitis",
+   "Cytophagic histiocytic panniculitis",
+   "Sarcoidosis of subcutaneous fat (Darier-Roussy)"
+  ],
+  "additionalInvestigations": [
+   "Deep incisional or excisional biopsy including ample subcutaneous fat for histology",
+   "Immunohistochemistry and clonality studies to distinguish from subcutaneous T-cell lymphoma",
+   "Antinuclear antibody and extractable nuclear antigen panel",
+   "Complement levels, full blood count and inflammatory markers",
+   "Assessment for systemic lupus (urinalysis, renal function) where indicated",
+   "Direct immunofluorescence of lesional skin"
+  ],
+  "redFlags": [
+   "Rapidly enlarging nodules with systemic B-symptoms, cytopenias or haemophagocytosis suggesting lymphoma",
+   "Ulceration, extensive necrosis or secondary infection of lesions",
+   "Features of active systemic lupus with organ involvement",
+   "Progressive facial disfigurement or lipoatrophy"
+  ],
+  "prognosis": "The condition tends to run a chronic, relapsing course; inflammation usually responds to antimalarials but residual lipoatrophy and scarring are frequently permanent and cosmetically distressing. Prognosis worsens if there is coexisting active systemic lupus or if an underlying lymphoma has been mistaken for it.",
+  "pitfalls": [
+   "Misdiagnosing subcutaneous panniculitis-like T-cell lymphoma as benign lupus panniculitis",
+   "Taking a biopsy that is too shallow to sample the fat lobules adequately",
+   "Attributing new depressed scars to injections or trauma rather than recognising the panniculitis",
+   "Overlooking coexisting systemic lupus and its organ complications"
+  ],
+  "references": [
+   "Rook's Textbook of Dermatology",
+   "Bolognia Dermatology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Antimalarials such as hydroxychloroquine as first-line disease-modifying therapy for the panniculitis",
+   "Systemic or intralesional corticosteroids to control active inflammatory nodules",
+   "Escalate refractory disease to methotrexate, mycophenolate, thalidomide, dapsone or rituximab",
+   "Strict photoprotection and avoidance of trauma to lesional sites",
+   "Exclude subcutaneous panniculitis-like T-cell lymphoma histologically before committing to immunosuppression",
+   "Monitor for coexisting systemic or discoid lupus with periodic clinical and laboratory review",
+   "Defer soft-tissue augmentation for residual lipoatrophy until the disease is quiescent"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "lupus_panniculitis-pathway",
+   "title": "Lupus panniculitis (lupus profundus): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Presents as firm, tender, deep subcutaneous nodules or plaques favouring the face, upper arms, shoulders, buttocks and thighs, often overlying areas of relative fat abundance",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapidly enlarging nodules with systemic B-symptoms, cytopenias or haemophagocytosis suggesting lymphoma",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Deep incisional or excisional biopsy including ample subcutaneous fat for histology, Immunohistochemistry and clonality studies to distinguish from subcutaneous T-cell lymphoma, Antinuclear antibody and extractable nuclear"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Antimalarials such as hydroxychloroquine as first-line disease-modifying therapy for the panniculitis"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Misdiagnosing subcutaneous panniculitis-like T-cell lymphoma as benign lupus panniculitis"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of lupus panniculitis (lupus profundus)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "lupus_panniculitis-matrix",
+   "title": "Lupus panniculitis (lupus profundus): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Presents as firm, tender, deep subcutaneous nodules or plaques favouring the face, upper arms, shoulders, buttocks and thighs,",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Lupus panniculitis is an autoimmune, predominantly lobular inflammation of subcutaneous fat that forms part of the spectrum of cutaneous lupus erythematosus. A T-lymphocyte-driven immune response targets the deep dermis and fat lobules, producing hyaline necrosis of adipocytes, lymphoid aggregates, mucin deposition and lymphocytic vascular injury. Repeated bouts of fat inflammation and necrosis are followed by fibrosis and loss of fat volume, accounting for the characteristic depressed atrophic scars. It may occur alone or in association with discoid or systemic lupus, reflecting a shared loss of immune tolerance.",
-    "additionalDifferentials": [
-      "Subcutaneous panniculitis-like T-cell lymphoma",
-      "Erythema nodosum",
-      "Morphoea profunda / deep morphoea",
-      "Traumatic or factitial panniculitis",
-      "Cytophagic histiocytic panniculitis",
-      "Sarcoidosis of subcutaneous fat (Darier-Roussy)"
+    [
+     "Key Investigations",
+     "Deep incisional or excisional biopsy including ample subcutaneous fat for histology, Immunohistochemistry and clonality studies",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Deep incisional or excisional biopsy including ample subcutaneous fat for histology",
-      "Immunohistochemistry and clonality studies to distinguish from subcutaneous T-cell lymphoma",
-      "Antinuclear antibody and extractable nuclear antigen panel",
-      "Complement levels, full blood count and inflammatory markers",
-      "Assessment for systemic lupus (urinalysis, renal function) where indicated",
-      "Direct immunofluorescence of lesional skin"
+    [
+     "Primary Differentials",
+     "Subcutaneous panniculitis-like T-cell lymphoma, Erythema nodosum, Morphoea profunda / deep morphoea",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rapidly enlarging nodules with systemic B-symptoms, cytopenias or haemophagocytosis suggesting lymphoma",
-      "Ulceration, extensive necrosis or secondary infection of lesions",
-      "Features of active systemic lupus with organ involvement",
-      "Progressive facial disfigurement or lipoatrophy"
+    [
+     "Management Strategy",
+     "Antimalarials such as hydroxychloroquine as first-line disease-modifying therapy for the panniculitis",
+     "Core treatment modality"
     ],
-    "prognosis": "The condition tends to run a chronic, relapsing course; inflammation usually responds to antimalarials but residual lipoatrophy and scarring are frequently permanent and cosmetically distressing. Prognosis worsens if there is coexisting active systemic lupus or if an underlying lymphoma has been mistaken for it.",
-    "pitfalls": [
-      "Misdiagnosing subcutaneous panniculitis-like T-cell lymphoma as benign lupus panniculitis",
-      "Taking a biopsy that is too shallow to sample the fat lobules adequately",
-      "Attributing new depressed scars to injections or trauma rather than recognising the panniculitis",
-      "Overlooking coexisting systemic lupus and its organ complications"
-    ],
-    "references": [
-      "Rook's Textbook of Dermatology",
-      "Bolognia Dermatology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Antimalarials such as hydroxychloroquine as first-line disease-modifying therapy for the panniculitis",
-      "Systemic or intralesional corticosteroids to control active inflammatory nodules",
-      "Escalate refractory disease to methotrexate, mycophenolate, thalidomide, dapsone or rituximab",
-      "Strict photoprotection and avoidance of trauma to lesional sites",
-      "Exclude subcutaneous panniculitis-like T-cell lymphoma histologically before committing to immunosuppression",
-      "Monitor for coexisting systemic or discoid lupus with periodic clinical and laboratory review",
-      "Defer soft-tissue augmentation for residual lipoatrophy until the disease is quiescent"
+    [
+     "Clinical Pitfall",
+     "Misdiagnosing subcutaneous panniculitis-like T-cell lymphoma as benign lupus panniculitis",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for lupus panniculitis (lupus profundus)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "lupus-panniculitis-real-image",
+   "title": "Lupus panniculitis (lupus profundus): Clinical Cutaneous Dermatology Photograph",
+   "type": "diagram",
+   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
+   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
+   "annotations": [
+    {
+     "label": "Primary Lesions",
+     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
+    },
+    {
+     "label": "Demarcation & Margins",
+     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
+    },
+    {
+     "label": "Anatomical Distribution",
+     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+    }
+   ]
+  }
+ ]
 }

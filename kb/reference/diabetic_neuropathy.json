@@ -1,78 +1,173 @@
 {
-  "id": "diabetic_neuropathy",
-  "name": "Diabetic neuropathy",
-  "aliases": [
-    "diabetic peripheral neuropathy",
-    "distal symmetric polyneuropathy",
-    "diabetic autonomic neuropathy",
-    "diabetic polyneuropathy"
+ "id": "diabetic_neuropathy",
+ "name": "Diabetic neuropathy",
+ "aliases": [
+  "diabetic peripheral neuropathy",
+  "distal symmetric polyneuropathy",
+  "diabetic autonomic neuropathy",
+  "diabetic polyneuropathy"
+ ],
+ "class": "non_infective",
+ "system": "Endocrine / Metabolic",
+ "specialty": "Endocrinology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Harrison's Principles of Internal Medicine",
+  "sourceEdition": "22e",
+  "pages": null,
+  "clinicalPearls": [
+   "The most common form is a distal symmetric sensorimotor polyneuropathy that begins in the feet and progresses proximally in a stocking-and-glove distribution",
+   "Sensory loss predisposes to unnoticed foot injury, ulceration, and Charcot arthropathy, making regular foot examination essential",
+   "Painful neuropathy can coexist with sensory loss, causing burning, tingling, and allodynia that are often worse at night",
+   "Autonomic involvement can produce postural hypotension, resting tachycardia, gastroparesis, bladder dysfunction, and erectile dysfunction",
+   "It is a diagnosis of exclusion, so other causes of neuropathy such as vitamin B12 deficiency, alcohol, uraemia, and hypothyroidism should be considered",
+   "Optimised glycaemic control is central to prevention and slowing progression, particularly in type 1 diabetes",
+   "Management of painful neuropathy relies on agents active in neuropathic pain rather than simple analgesics, alongside foot protection strategies"
   ],
-  "class": "non_infective",
-  "system": "Endocrine / Metabolic",
-  "specialty": "Endocrinology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Harrison's Principles of Internal Medicine",
-    "sourceEdition": "22e",
-    "pages": null,
-    "clinicalPearls": [
-      "The most common form is a distal symmetric sensorimotor polyneuropathy that begins in the feet and progresses proximally in a stocking-and-glove distribution",
-      "Sensory loss predisposes to unnoticed foot injury, ulceration, and Charcot arthropathy, making regular foot examination essential",
-      "Painful neuropathy can coexist with sensory loss, causing burning, tingling, and allodynia that are often worse at night",
-      "Autonomic involvement can produce postural hypotension, resting tachycardia, gastroparesis, bladder dysfunction, and erectile dysfunction",
-      "It is a diagnosis of exclusion, so other causes of neuropathy such as vitamin B12 deficiency, alcohol, uraemia, and hypothyroidism should be considered",
-      "Optimised glycaemic control is central to prevention and slowing progression, particularly in type 1 diabetes",
-      "Management of painful neuropathy relies on agents active in neuropathic pain rather than simple analgesics, alongside foot protection strategies"
+  "pathophysiology": "Chronic hyperglycaemia damages peripheral nerves through several linked mechanisms, including accumulation of advanced glycation end-products, activation of the polyol and protein kinase C pathways, oxidative stress, and microvascular ischaemia of the vasa nervorum. These processes injure axons and Schwann cells, producing a length-dependent loss of both small and large fibres. Involvement of autonomic fibres disrupts cardiovascular, gastrointestinal, and genitourinary regulation, while focal ischaemia or entrapment can cause mononeuropathies and radiculopathies.",
+  "additionalDifferentials": [
+   "Vitamin B12 or other nutritional deficiency neuropathy",
+   "Alcoholic neuropathy",
+   "Chronic inflammatory demyelinating polyneuropathy",
+   "Uraemic neuropathy",
+   "Hypothyroid neuropathy",
+   "Toxic or drug-induced neuropathy",
+   "Lumbosacral radiculopathy or spinal stenosis"
+  ],
+  "additionalInvestigations": [
+   "Clinical foot examination with monofilament and vibration testing",
+   "HbA1c and glucose assessment to gauge control",
+   "Serum vitamin B12, thyroid function, and renal function to exclude alternative causes",
+   "Nerve conduction studies in atypical or asymmetric presentations",
+   "Autonomic function testing including orthostatic blood pressure measurement when indicated"
+  ],
+  "redFlags": [
+   "Foot ulceration, deformity, or signs of Charcot arthropathy",
+   "Rapidly progressive, asymmetric, or predominantly motor deficits suggesting an alternative diagnosis",
+   "Severe autonomic features such as symptomatic postural hypotension or gastroparesis",
+   "Signs of limb ischaemia or infection complicating a neuropathic foot"
+  ],
+  "prognosis": "Neuropathy tends to progress with duration and poor control of diabetes, and established nerve damage is largely irreversible, so the emphasis is on prevention of ulceration and amputation and on symptom control; autonomic neuropathy carries an adverse cardiovascular prognosis.",
+  "pitfalls": [
+   "Attributing all neuropathy to diabetes without excluding treatable alternative causes",
+   "Neglecting routine foot inspection and patient education, allowing preventable ulcers",
+   "Undertreating painful neuropathy or relying on ineffective simple analgesics",
+   "Missing autonomic neuropathy as the cause of unexplained postural symptoms or gastrointestinal complaints"
+  ],
+  "references": [
+   "Harrison's Principles of Internal Medicine, 22e"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Optimise glycaemic control, which is central to preventing and slowing progression, particularly in type 1 diabetes",
+   "Treat painful neuropathy with neuropathic pain agents such as a gabapentinoid, the serotonin-noradrenaline reuptake inhibitor duloxetine, or a tricyclic antidepressant",
+   "Institute protective foot care with regular examination, appropriate footwear and podiatry to prevent ulceration and Charcot arthropathy",
+   "Manage autonomic features symptomatically, treating postural hypotension with lifestyle and pressor measures, gastroparesis with prokinetics and dietary change, and bladder or erectile dysfunction accordingly",
+   "Exclude and correct other contributing causes such as vitamin B12 deficiency, alcohol excess, uraemia and hypothyroidism",
+   "Address cardiovascular risk factors, since autonomic neuropathy carries an adverse cardiovascular prognosis",
+   "Refer to specialist pain, podiatry or neurology services for refractory symptoms or diagnostic uncertainty"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "diabetic_neuropathy-pathway",
+   "title": "Diabetic neuropathy: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "The most common form is a distal symmetric sensorimotor polyneuropathy that begins in the feet and progresses proximally in a stocking-and-glove distribution",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Foot ulceration, deformity, or signs of Charcot arthropathy",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Clinical foot examination with monofilament and vibration testing, HbA1c and glucose assessment to gauge control, Serum vitamin B12, thyroid function, and renal function to exclude alternative causes"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Optimise glycaemic control, which is central to preventing and slowing progression, particularly in type 1 diabetes"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing all neuropathy to diabetes without excluding treatable alternative causes"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of diabetic neuropathy."
+  }
+ ],
+ "tables": [
+  {
+   "id": "diabetic_neuropathy-matrix",
+   "title": "Diabetic neuropathy: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The most common form is a distal symmetric sensorimotor polyneuropathy that begins in the feet and progresses proximally in a",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Chronic hyperglycaemia damages peripheral nerves through several linked mechanisms, including accumulation of advanced glycation end-products, activation of the polyol and protein kinase C pathways, oxidative stress, and microvascular ischaemia of the vasa nervorum. These processes injure axons and Schwann cells, producing a length-dependent loss of both small and large fibres. Involvement of autonomic fibres disrupts cardiovascular, gastrointestinal, and genitourinary regulation, while focal ischaemia or entrapment can cause mononeuropathies and radiculopathies.",
-    "additionalDifferentials": [
-      "Vitamin B12 or other nutritional deficiency neuropathy",
-      "Alcoholic neuropathy",
-      "Chronic inflammatory demyelinating polyneuropathy",
-      "Uraemic neuropathy",
-      "Hypothyroid neuropathy",
-      "Toxic or drug-induced neuropathy",
-      "Lumbosacral radiculopathy or spinal stenosis"
+    [
+     "Key Investigations",
+     "Clinical foot examination with monofilament and vibration testing, HbA1c and glucose assessment to gauge control, Serum vitamin",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Clinical foot examination with monofilament and vibration testing",
-      "HbA1c and glucose assessment to gauge control",
-      "Serum vitamin B12, thyroid function, and renal function to exclude alternative causes",
-      "Nerve conduction studies in atypical or asymmetric presentations",
-      "Autonomic function testing including orthostatic blood pressure measurement when indicated"
+    [
+     "Primary Differentials",
+     "Vitamin B12 or other nutritional deficiency neuropathy, Alcoholic neuropathy, Chronic inflammatory demyelinating polyneuropathy",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Foot ulceration, deformity, or signs of Charcot arthropathy",
-      "Rapidly progressive, asymmetric, or predominantly motor deficits suggesting an alternative diagnosis",
-      "Severe autonomic features such as symptomatic postural hypotension or gastroparesis",
-      "Signs of limb ischaemia or infection complicating a neuropathic foot"
+    [
+     "Management Strategy",
+     "Optimise glycaemic control, which is central to preventing and slowing progression, particularly in type 1 diabetes",
+     "Core treatment modality"
     ],
-    "prognosis": "Neuropathy tends to progress with duration and poor control of diabetes, and established nerve damage is largely irreversible, so the emphasis is on prevention of ulceration and amputation and on symptom control; autonomic neuropathy carries an adverse cardiovascular prognosis.",
-    "pitfalls": [
-      "Attributing all neuropathy to diabetes without excluding treatable alternative causes",
-      "Neglecting routine foot inspection and patient education, allowing preventable ulcers",
-      "Undertreating painful neuropathy or relying on ineffective simple analgesics",
-      "Missing autonomic neuropathy as the cause of unexplained postural symptoms or gastrointestinal complaints"
-    ],
-    "references": [
-      "Harrison's Principles of Internal Medicine, 22e"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Optimise glycaemic control, which is central to preventing and slowing progression, particularly in type 1 diabetes",
-      "Treat painful neuropathy with neuropathic pain agents such as a gabapentinoid, the serotonin-noradrenaline reuptake inhibitor duloxetine, or a tricyclic antidepressant",
-      "Institute protective foot care with regular examination, appropriate footwear and podiatry to prevent ulceration and Charcot arthropathy",
-      "Manage autonomic features symptomatically, treating postural hypotension with lifestyle and pressor measures, gastroparesis with prokinetics and dietary change, and bladder or erectile dysfunction accordingly",
-      "Exclude and correct other contributing causes such as vitamin B12 deficiency, alcohol excess, uraemia and hypothyroidism",
-      "Address cardiovascular risk factors, since autonomic neuropathy carries an adverse cardiovascular prognosis",
-      "Refer to specialist pain, podiatry or neurology services for refractory symptoms or diagnostic uncertainty"
+    [
+     "Clinical Pitfall",
+     "Attributing all neuropathy to diabetes without excluding treatable alternative causes",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for diabetic neuropathy."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "diabetic-neuropathy-real-image",
+   "title": "Diabetic neuropathy: Diagnostic Head Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
+   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
+   "annotations": [
+    {
+     "label": "Cerebral Parenchyma",
+     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+    },
+    {
+     "label": "Extra-Axial Spaces",
+     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+    }
+   ]
+  }
+ ]
 }

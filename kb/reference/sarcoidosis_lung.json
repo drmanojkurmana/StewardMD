@@ -1,80 +1,175 @@
 {
-  "id": "sarcoidosis_lung",
-  "name": "Pulmonary sarcoidosis",
-  "aliases": [
-    "sarcoidosis",
-    "pulmonary sarcoidosis",
-    "sarcoid",
-    "Boeck's sarcoid"
+ "id": "sarcoidosis_lung",
+ "name": "Pulmonary sarcoidosis",
+ "aliases": [
+  "sarcoidosis",
+  "pulmonary sarcoidosis",
+  "sarcoid",
+  "Boeck's sarcoid"
+ ],
+ "class": "non_infective",
+ "system": "Respiratory",
+ "specialty": "Pulmonology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Harrison's Principles of Internal Medicine / GOLD & ATS guidelines",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A multisystem granulomatous disorder of unknown cause in which the lungs and intrathoracic lymph nodes are most often involved",
+   "Presentations range from asymptomatic bilateral hilar lymphadenopathy found incidentally to cough, dyspnoea, and chest discomfort",
+   "Loefgren syndrome (bilateral hilar lymphadenopathy, erythema nodosum, arthralgia, and fever) is an acute presentation with a favourable prognosis",
+   "Chest imaging is often staged by the presence of hilar adenopathy and parenchymal infiltration, with fibrosis in advanced disease",
+   "Diagnosis rests on compatible clinical and radiological features plus biopsy showing non-caseating granulomas, after exclusion of infection and other granulomatous disease",
+   "Serum ACE may be raised but is neither sensitive nor specific and should not be relied upon for diagnosis or monitoring",
+   "Hypercalcaemia and hypercalciuria can occur due to dysregulated vitamin D activation within granulomas",
+   "Many patients remit spontaneously; corticosteroids are reserved for significant or progressive organ involvement, with immunosuppressants as steroid-sparing options"
   ],
-  "class": "non_infective",
-  "system": "Respiratory",
-  "specialty": "Pulmonology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Harrison's Principles of Internal Medicine / GOLD & ATS guidelines",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A multisystem granulomatous disorder of unknown cause in which the lungs and intrathoracic lymph nodes are most often involved",
-      "Presentations range from asymptomatic bilateral hilar lymphadenopathy found incidentally to cough, dyspnoea, and chest discomfort",
-      "Loefgren syndrome (bilateral hilar lymphadenopathy, erythema nodosum, arthralgia, and fever) is an acute presentation with a favourable prognosis",
-      "Chest imaging is often staged by the presence of hilar adenopathy and parenchymal infiltration, with fibrosis in advanced disease",
-      "Diagnosis rests on compatible clinical and radiological features plus biopsy showing non-caseating granulomas, after exclusion of infection and other granulomatous disease",
-      "Serum ACE may be raised but is neither sensitive nor specific and should not be relied upon for diagnosis or monitoring",
-      "Hypercalcaemia and hypercalciuria can occur due to dysregulated vitamin D activation within granulomas",
-      "Many patients remit spontaneously; corticosteroids are reserved for significant or progressive organ involvement, with immunosuppressants as steroid-sparing options"
+  "pathophysiology": "Sarcoidosis is thought to arise when an unknown antigen triggers an exaggerated cell-mediated immune response in a genetically susceptible host. Antigen-presenting cells activate CD4 T-helper lymphocytes that secrete Th1 cytokines, driving accumulation of macrophages and their organisation into compact non-caseating epithelioid granulomas. In the lung these granulomas cluster along lymphatics and around bronchovascular structures. Granulomas may resolve or, with persistent inflammation, be replaced by fibrosis, causing irreversible architectural distortion and functional impairment.",
+  "additionalDifferentials": [
+   "Tuberculosis and other mycobacterial disease",
+   "Lymphoma and metastatic malignancy",
+   "Fungal infections such as histoplasmosis",
+   "Berylliosis, which is clinically and histologically similar",
+   "Hypersensitivity pneumonitis",
+   "Other interstitial lung diseases"
+  ],
+  "additionalInvestigations": [
+   "Chest radiography and CT to assess lymphadenopathy, parenchymal involvement, and fibrosis",
+   "Biopsy (often via endobronchial ultrasound-guided nodal sampling) to demonstrate non-caseating granulomas",
+   "Pulmonary function testing including diffusing capacity to gauge functional impairment",
+   "Serum and urinary calcium to detect dysregulated calcium metabolism",
+   "Assessment for extrapulmonary involvement including cardiac, ocular, hepatic, and neurological evaluation"
+  ],
+  "redFlags": [
+   "Symptoms or findings suggesting cardiac sarcoidosis such as arrhythmia, heart block, or heart failure",
+   "Neurosarcoidosis with cranial nerve or central nervous system involvement",
+   "Significant hypercalcaemia with renal impairment",
+   "Progressive pulmonary fibrosis or pulmonary hypertension"
+  ],
+  "prognosis": "Prognosis is generally favourable, with a substantial proportion of patients undergoing spontaneous remission, especially in acute presentations such as Loefgren syndrome; however, chronic progressive disease with pulmonary fibrosis, cardiac involvement, or neurosarcoidosis carries greater morbidity and mortality.",
+  "pitfalls": [
+   "Diagnosing sarcoidosis without excluding tuberculosis and other infective granulomatous disease",
+   "Relying on serum ACE levels for diagnosis or disease monitoring",
+   "Missing clinically silent but dangerous cardiac or neurological involvement",
+   "Treating asymptomatic or mildly affected patients who may remit without therapy"
+  ],
+  "references": [
+   "Harrison's Principles of Internal Medicine, 22e",
+   "GOLD/ATS guidelines"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Observe asymptomatic or minimally symptomatic disease with serial monitoring, since spontaneous remission is common, particularly in Loefgren syndrome",
+   "Treat symptomatic or progressive pulmonary disease with oral corticosteroids as first-line therapy to suppress granulomatous inflammation",
+   "Add steroid-sparing immunosuppressants such as methotrexate or azathioprine for chronic disease or to limit corticosteroid toxicity",
+   "Reserve anti-TNF biologics such as infliximab for refractory or multi-organ disease",
+   "Manage acute Loefgren syndrome symptomatically with non-steroidal anti-inflammatory drugs for arthralgia and erythema nodosum",
+   "Monitor lung function including diffusing capacity, and treat dysregulated calcium metabolism by avoiding excess vitamin D and sunlight",
+   "Screen actively for cardiac, ocular, hepatic, and neurological involvement and refer for specialist assessment when present",
+   "Consider pulmonary rehabilitation and referral for lung transplantation in end-stage pulmonary fibrosis"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "sarcoidosis_lung-pathway",
+   "title": "Pulmonary sarcoidosis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A multisystem granulomatous disorder of unknown cause in which the lungs and intrathoracic lymph nodes are most often involved",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Symptoms or findings suggesting cardiac sarcoidosis such as arrhythmia, heart block, or heart failure",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Chest radiography and CT to assess lymphadenopathy, parenchymal involvement, and fibrosis, Biopsy (often via endobronchial ultrasound-guided nodal sampling) to demonstrate non-caseating granulomas, Pulmonary function"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Observe asymptomatic or minimally symptomatic disease with serial monitoring, since spontaneous remission is common, particularly in Loefgren syndrome"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Diagnosing sarcoidosis without excluding tuberculosis and other infective granulomatous disease"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of pulmonary sarcoidosis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "sarcoidosis_lung-matrix",
+   "title": "Pulmonary sarcoidosis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A multisystem granulomatous disorder of unknown cause in which the lungs and intrathoracic lymph nodes are most often involved",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Sarcoidosis is thought to arise when an unknown antigen triggers an exaggerated cell-mediated immune response in a genetically susceptible host. Antigen-presenting cells activate CD4 T-helper lymphocytes that secrete Th1 cytokines, driving accumulation of macrophages and their organisation into compact non-caseating epithelioid granulomas. In the lung these granulomas cluster along lymphatics and around bronchovascular structures. Granulomas may resolve or, with persistent inflammation, be replaced by fibrosis, causing irreversible architectural distortion and functional impairment.",
-    "additionalDifferentials": [
-      "Tuberculosis and other mycobacterial disease",
-      "Lymphoma and metastatic malignancy",
-      "Fungal infections such as histoplasmosis",
-      "Berylliosis, which is clinically and histologically similar",
-      "Hypersensitivity pneumonitis",
-      "Other interstitial lung diseases"
+    [
+     "Key Investigations",
+     "Chest radiography and CT to assess lymphadenopathy, parenchymal involvement, and fibrosis, Biopsy (often via endobronchial",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Chest radiography and CT to assess lymphadenopathy, parenchymal involvement, and fibrosis",
-      "Biopsy (often via endobronchial ultrasound-guided nodal sampling) to demonstrate non-caseating granulomas",
-      "Pulmonary function testing including diffusing capacity to gauge functional impairment",
-      "Serum and urinary calcium to detect dysregulated calcium metabolism",
-      "Assessment for extrapulmonary involvement including cardiac, ocular, hepatic, and neurological evaluation"
+    [
+     "Primary Differentials",
+     "Tuberculosis and other mycobacterial disease, Lymphoma and metastatic malignancy, Fungal infections such as histoplasmosis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Symptoms or findings suggesting cardiac sarcoidosis such as arrhythmia, heart block, or heart failure",
-      "Neurosarcoidosis with cranial nerve or central nervous system involvement",
-      "Significant hypercalcaemia with renal impairment",
-      "Progressive pulmonary fibrosis or pulmonary hypertension"
+    [
+     "Management Strategy",
+     "Observe asymptomatic or minimally symptomatic disease with serial monitoring, since spontaneous remission is common, particularly",
+     "Core treatment modality"
     ],
-    "prognosis": "Prognosis is generally favourable, with a substantial proportion of patients undergoing spontaneous remission, especially in acute presentations such as Loefgren syndrome; however, chronic progressive disease with pulmonary fibrosis, cardiac involvement, or neurosarcoidosis carries greater morbidity and mortality.",
-    "pitfalls": [
-      "Diagnosing sarcoidosis without excluding tuberculosis and other infective granulomatous disease",
-      "Relying on serum ACE levels for diagnosis or disease monitoring",
-      "Missing clinically silent but dangerous cardiac or neurological involvement",
-      "Treating asymptomatic or mildly affected patients who may remit without therapy"
-    ],
-    "references": [
-      "Harrison's Principles of Internal Medicine, 22e",
-      "GOLD/ATS guidelines"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Observe asymptomatic or minimally symptomatic disease with serial monitoring, since spontaneous remission is common, particularly in Loefgren syndrome",
-      "Treat symptomatic or progressive pulmonary disease with oral corticosteroids as first-line therapy to suppress granulomatous inflammation",
-      "Add steroid-sparing immunosuppressants such as methotrexate or azathioprine for chronic disease or to limit corticosteroid toxicity",
-      "Reserve anti-TNF biologics such as infliximab for refractory or multi-organ disease",
-      "Manage acute Loefgren syndrome symptomatically with non-steroidal anti-inflammatory drugs for arthralgia and erythema nodosum",
-      "Monitor lung function including diffusing capacity, and treat dysregulated calcium metabolism by avoiding excess vitamin D and sunlight",
-      "Screen actively for cardiac, ocular, hepatic, and neurological involvement and refer for specialist assessment when present",
-      "Consider pulmonary rehabilitation and referral for lung transplantation in end-stage pulmonary fibrosis"
+    [
+     "Clinical Pitfall",
+     "Diagnosing sarcoidosis without excluding tuberculosis and other infective granulomatous disease",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for pulmonary sarcoidosis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "sarcoidosis-lung-real-image",
+   "title": "Pulmonary sarcoidosis: Diagnostic Chest Radiograph",
+   "type": "xray",
+   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
+   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
+   "annotations": [
+    {
+     "label": "Parenchyma & Airspaces",
+     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
+    },
+    {
+     "label": "Bronchovascular Tree",
+     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
+    },
+    {
+     "label": "Pleural Margins",
+     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+    }
+   ]
+  }
+ ]
 }

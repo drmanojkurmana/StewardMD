@@ -1,79 +1,174 @@
 {
-  "id": "carvajal_syndrome",
-  "name": "Carvajal syndrome",
-  "aliases": [
-    "DSP",
-    "desmoplakin",
-    "woolly hair, keratoderma and cardiomyopathy syndrome",
-    "Naxos-like syndrome"
+ "id": "carvajal_syndrome",
+ "name": "Carvajal syndrome",
+ "aliases": [
+  "DSP",
+  "desmoplakin",
+  "woolly hair, keratoderma and cardiomyopathy syndrome",
+  "Naxos-like syndrome"
+ ],
+ "class": "non_infective",
+ "system": "Dermatology / Genetics",
+ "specialty": "Dermatology / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Rook's Textbook of Dermatology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A triad of woolly hair, striate (often epidermolytic) palmoplantar keratoderma, and a cardiomyopathy",
+   "The cardiomyopathy is classically a dilated / left-dominant arrhythmogenic cardiomyopathy, contrasting with the right-dominant pattern of Naxos disease",
+   "Woolly hair and keratoderma are typically evident from infancy, preceding recognition of cardiac disease",
+   "Caused by recessive mutations in DSP encoding desmoplakin, a key desmosomal plaque protein",
+   "Life-threatening ventricular arrhythmia, heart failure and sudden cardiac death are the principal dangers",
+   "Any child with woolly hair and palmoplantar keratoderma warrants cardiac evaluation",
+   "Management centres on cardiological surveillance and heart-failure/arrhythmia care, with emollients/keratolytics for the skin"
   ],
-  "class": "non_infective",
-  "system": "Dermatology / Genetics",
-  "specialty": "Dermatology / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Rook's Textbook of Dermatology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A triad of woolly hair, striate (often epidermolytic) palmoplantar keratoderma, and a cardiomyopathy",
-      "The cardiomyopathy is classically a dilated / left-dominant arrhythmogenic cardiomyopathy, contrasting with the right-dominant pattern of Naxos disease",
-      "Woolly hair and keratoderma are typically evident from infancy, preceding recognition of cardiac disease",
-      "Caused by recessive mutations in DSP encoding desmoplakin, a key desmosomal plaque protein",
-      "Life-threatening ventricular arrhythmia, heart failure and sudden cardiac death are the principal dangers",
-      "Any child with woolly hair and palmoplantar keratoderma warrants cardiac evaluation",
-      "Management centres on cardiological surveillance and heart-failure/arrhythmia care, with emollients/keratolytics for the skin"
+  "pathophysiology": "Carvajal syndrome is usually an autosomal recessive disorder caused by mutations in DSP, which encodes desmoplakin, an obligate component of the desmosomal plaque that anchors intermediate filaments to the cell membrane. Desmosomes provide mechanical coupling between cells, and desmoplakin dysfunction weakens cell-cell adhesion in tissues subject to mechanical stress. In the epidermis this produces the keratoderma and, with hair-shaft involvement, woolly hair; in the myocardium impaired desmosomal integrity leads to myocyte detachment, fibrofatty replacement and an arrhythmogenic, dilated (frequently left-ventricular predominant) cardiomyopathy that predisposes to arrhythmia and sudden death.",
+  "additionalDifferentials": [
+   "Naxos disease (JUP/plakoglobin mutation, right-dominant arrhythmogenic cardiomyopathy)",
+   "Other arrhythmogenic cardiomyopathies without cutaneous features",
+   "Woolly hair naevus or isolated woolly hair",
+   "Striate palmoplantar keratoderma of other cause",
+   "Ectodermal dysplasia-skin fragility syndrome (PKP1)",
+   "Dilated cardiomyopathy of unrelated aetiology"
+  ],
+  "additionalInvestigations": [
+   "Electrocardiography and Holter monitoring for arrhythmia",
+   "Echocardiography and cardiac magnetic resonance imaging to characterise the cardiomyopathy and fibrofatty change",
+   "Molecular genetic testing of DSP",
+   "Hair microscopy demonstrating woolly hair-shaft abnormalities",
+   "Skin biopsy of keratoderma (may show epidermolytic change)",
+   "Family cardiac screening and genetic counselling"
+  ],
+  "redFlags": [
+   "Palpitations, syncope or documented ventricular arrhythmia",
+   "Symptoms or signs of heart failure",
+   "Family history of premature sudden cardiac death",
+   "Progressive left-ventricular dysfunction on imaging"
+  ],
+  "prognosis": "The cutaneous and hair features are benign, but prognosis is dictated by the cardiomyopathy, which can cause heart failure, life-threatening arrhythmia and sudden cardiac death, sometimes in childhood or adolescence. Early cardiac surveillance and intervention substantially influence outcome.",
+  "pitfalls": [
+   "Regarding woolly hair and keratoderma as a purely cosmetic dermatological problem and omitting cardiac assessment",
+   "Assuming the right-dominant Naxos pattern when Carvajal is typically left-dominant/dilated",
+   "Delaying cardiological referral until cardiac symptoms appear",
+   "Not screening at-risk family members for arrhythmogenic cardiomyopathy"
+  ],
+  "references": [
+   "Rook's Textbook of Dermatology",
+   "Fitzpatrick's Dermatology in General Medicine"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Heart-failure therapy for the dilated cardiomyopathy with ACE inhibitors or angiotensin receptor blockers, beta-blockers, mineralocorticoid antagonists and diuretics",
+   "Arrhythmia management with an implantable cardioverter-defibrillator for those at high risk of life-threatening ventricular arrhythmia and sudden cardiac death",
+   "Restriction from competitive and high-intensity exercise to reduce arrhythmic risk",
+   "Topical treatment of the palmoplantar keratoderma with emollients and keratolytic agents",
+   "Regular cardiac surveillance with electrocardiography, Holter monitoring and imaging, given progression of the cardiomyopathy",
+   "Consideration of cardiac transplantation for end-stage heart failure",
+   "Genetic counselling for autosomal recessive DSP disease, with cardiac screening of relatives"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "carvajal_syndrome-pathway",
+   "title": "Carvajal syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A triad of woolly hair, striate (often epidermolytic) palmoplantar keratoderma, and a cardiomyopathy",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Palpitations, syncope or documented ventricular arrhythmia",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Electrocardiography and Holter monitoring for arrhythmia, Echocardiography and cardiac magnetic resonance imaging to characterise the cardiomyopathy and fibrofatty change, Molecular genetic testing of DSP"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Heart-failure therapy for the dilated cardiomyopathy with ACE inhibitors or angiotensin receptor blockers, beta-blockers, mineralocorticoid antagonists and diuretics"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Regarding woolly hair and keratoderma as a purely cosmetic dermatological problem and omitting cardiac assessment"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of carvajal syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "carvajal_syndrome-matrix",
+   "title": "Carvajal syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A triad of woolly hair, striate (often epidermolytic) palmoplantar keratoderma, and a cardiomyopathy",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Carvajal syndrome is usually an autosomal recessive disorder caused by mutations in DSP, which encodes desmoplakin, an obligate component of the desmosomal plaque that anchors intermediate filaments to the cell membrane. Desmosomes provide mechanical coupling between cells, and desmoplakin dysfunction weakens cell-cell adhesion in tissues subject to mechanical stress. In the epidermis this produces the keratoderma and, with hair-shaft involvement, woolly hair; in the myocardium impaired desmosomal integrity leads to myocyte detachment, fibrofatty replacement and an arrhythmogenic, dilated (frequently left-ventricular predominant) cardiomyopathy that predisposes to arrhythmia and sudden death.",
-    "additionalDifferentials": [
-      "Naxos disease (JUP/plakoglobin mutation, right-dominant arrhythmogenic cardiomyopathy)",
-      "Other arrhythmogenic cardiomyopathies without cutaneous features",
-      "Woolly hair naevus or isolated woolly hair",
-      "Striate palmoplantar keratoderma of other cause",
-      "Ectodermal dysplasia-skin fragility syndrome (PKP1)",
-      "Dilated cardiomyopathy of unrelated aetiology"
+    [
+     "Key Investigations",
+     "Electrocardiography and Holter monitoring for arrhythmia, Echocardiography and cardiac magnetic resonance imaging to characterise",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Electrocardiography and Holter monitoring for arrhythmia",
-      "Echocardiography and cardiac magnetic resonance imaging to characterise the cardiomyopathy and fibrofatty change",
-      "Molecular genetic testing of DSP",
-      "Hair microscopy demonstrating woolly hair-shaft abnormalities",
-      "Skin biopsy of keratoderma (may show epidermolytic change)",
-      "Family cardiac screening and genetic counselling"
+    [
+     "Primary Differentials",
+     "Naxos disease (JUP/plakoglobin mutation, right-dominant arrhythmogenic cardiomyopathy), Other arrhythmogenic cardiomyopathies",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Palpitations, syncope or documented ventricular arrhythmia",
-      "Symptoms or signs of heart failure",
-      "Family history of premature sudden cardiac death",
-      "Progressive left-ventricular dysfunction on imaging"
+    [
+     "Management Strategy",
+     "Heart-failure therapy for the dilated cardiomyopathy with ACE inhibitors or angiotensin receptor blockers, beta-blockers,",
+     "Core treatment modality"
     ],
-    "prognosis": "The cutaneous and hair features are benign, but prognosis is dictated by the cardiomyopathy, which can cause heart failure, life-threatening arrhythmia and sudden cardiac death, sometimes in childhood or adolescence. Early cardiac surveillance and intervention substantially influence outcome.",
-    "pitfalls": [
-      "Regarding woolly hair and keratoderma as a purely cosmetic dermatological problem and omitting cardiac assessment",
-      "Assuming the right-dominant Naxos pattern when Carvajal is typically left-dominant/dilated",
-      "Delaying cardiological referral until cardiac symptoms appear",
-      "Not screening at-risk family members for arrhythmogenic cardiomyopathy"
-    ],
-    "references": [
-      "Rook's Textbook of Dermatology",
-      "Fitzpatrick's Dermatology in General Medicine"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Heart-failure therapy for the dilated cardiomyopathy with ACE inhibitors or angiotensin receptor blockers, beta-blockers, mineralocorticoid antagonists and diuretics",
-      "Arrhythmia management with an implantable cardioverter-defibrillator for those at high risk of life-threatening ventricular arrhythmia and sudden cardiac death",
-      "Restriction from competitive and high-intensity exercise to reduce arrhythmic risk",
-      "Topical treatment of the palmoplantar keratoderma with emollients and keratolytic agents",
-      "Regular cardiac surveillance with electrocardiography, Holter monitoring and imaging, given progression of the cardiomyopathy",
-      "Consideration of cardiac transplantation for end-stage heart failure",
-      "Genetic counselling for autosomal recessive DSP disease, with cardiac screening of relatives"
+    [
+     "Clinical Pitfall",
+     "Regarding woolly hair and keratoderma as a purely cosmetic dermatological problem and omitting cardiac assessment",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for carvajal syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "carvajal-syndrome-real-image",
+   "title": "Carvajal syndrome: Clinical Cutaneous Dermatology Photograph",
+   "type": "diagram",
+   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
+   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
+   "annotations": [
+    {
+     "label": "Primary Lesions",
+     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
+    },
+    {
+     "label": "Demarcation & Margins",
+     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
+    },
+    {
+     "label": "Anatomical Distribution",
+     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+    }
+   ]
+  }
+ ]
 }

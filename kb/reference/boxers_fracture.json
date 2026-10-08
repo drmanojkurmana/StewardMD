@@ -1,77 +1,172 @@
 {
-  "id": "boxers_fracture",
-  "name": "Boxer fracture (fifth metacarpal neck)",
-  "aliases": [
-    "fifth metacarpal neck fracture",
-    "brawler fracture",
-    "puncher fracture"
+ "id": "boxers_fracture",
+ "name": "Boxer fracture (fifth metacarpal neck)",
+ "aliases": [
+  "fifth metacarpal neck fracture",
+  "brawler fracture",
+  "puncher fracture"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal / Trauma",
+ "specialty": "Orthopaedic Trauma",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Rockwood and Green's Fractures in Adults",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A fracture of the neck of the fifth metacarpal, usually caused by striking a hard object with a clenched fist",
+   "There is characteristic apex-dorsal angulation with volar tilt of the metacarpal head; considerable angulation is tolerated here because of the mobility of the fifth carpometacarpal joint",
+   "Rotational malalignment, detected as scissoring or overlap of the fingers on flexion, is not tolerated and must be assessed and corrected",
+   "Always inspect for an overlying wound suggesting a fight bite (tooth injury), which carries a serious risk of joint infection",
+   "Most fractures are managed conservatively with buddy strapping or an ulnar gutter splint and early mobilisation",
+   "Markedly angulated, rotated or multiple fractures may require closed reduction and immobilisation or fixation",
+   "Pseudoclawing on attempted extension indicates significant angulation requiring correction"
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal / Trauma",
-  "specialty": "Orthopaedic Trauma",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Rockwood and Green's Fractures in Adults",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A fracture of the neck of the fifth metacarpal, usually caused by striking a hard object with a clenched fist",
-      "There is characteristic apex-dorsal angulation with volar tilt of the metacarpal head; considerable angulation is tolerated here because of the mobility of the fifth carpometacarpal joint",
-      "Rotational malalignment, detected as scissoring or overlap of the fingers on flexion, is not tolerated and must be assessed and corrected",
-      "Always inspect for an overlying wound suggesting a fight bite (tooth injury), which carries a serious risk of joint infection",
-      "Most fractures are managed conservatively with buddy strapping or an ulnar gutter splint and early mobilisation",
-      "Markedly angulated, rotated or multiple fractures may require closed reduction and immobilisation or fixation",
-      "Pseudoclawing on attempted extension indicates significant angulation requiring correction"
+  "pathophysiology": "An axial force transmitted along the fifth metacarpal during a punch concentrates stress at the metaphyseal neck. The thin dorsal cortex fails in tension while the volar cortex is compressed, producing apex-dorsal angulation, and the pull of the intrinsic muscles further flexes the distal fragment volarly. The generous mobility of the fifth carpometacarpal joint compensates for residual angulation in the sagittal plane, so functional loss is usually minor unless there is malrotation, which foreshortens and crosses the affected finger over its neighbours during flexion.",
+  "additionalDifferentials": [
+   "Fifth metacarpal shaft fracture",
+   "Metacarpal head fracture",
+   "Carpometacarpal fracture-dislocation of the little finger",
+   "Base of metacarpal fracture",
+   "Fight-bite injury with metacarpophalangeal joint involvement",
+   "Hamate fracture"
+  ],
+  "additionalInvestigations": [
+   "Anteroposterior, lateral and oblique hand radiographs",
+   "Measurement of the degree of neck angulation on the lateral view",
+   "Clinical assessment of rotational alignment via the finger cascade during flexion",
+   "Careful wound inspection for a fight-bite breach of the metacarpophalangeal joint",
+   "CT reserved for suspected intra-articular extension"
+  ],
+  "redFlags": [
+   "Rotational deformity with scissoring of the fingers",
+   "An open wound over the metacarpophalangeal joint (fight bite) with infection risk",
+   "Excessive angulation causing pseudoclawing or functional deficit",
+   "Signs of established joint or hand infection"
+  ],
+  "prognosis": "Most fractures heal well with good function even with moderate residual angulation because of the mobility of the fifth carpometacarpal joint; rotational malunion and an untreated fight-bite infection are the principal causes of a poor outcome.",
+  "pitfalls": [
+   "Missing malrotation because the sagittal angulation appears acceptable",
+   "Overlooking a fight-bite wound and subsequent joint sepsis",
+   "Over-treating minor angulation that would remodel or be well tolerated",
+   "Failing to check active flexion for finger scissoring"
+  ],
+  "references": [
+   "Rockwood and Green's Fractures in Adults",
+   "Green's Operative Hand Surgery"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Conservative management with buddy strapping or an ulnar gutter splint and early mobilisation for the majority of fractures",
+   "Assessment and correction of rotational malalignment, detected as finger scissoring on flexion, which is not tolerated",
+   "Closed reduction for markedly angulated fractures, while accepting moderate apex-dorsal angulation because of fifth carpometacarpal joint mobility",
+   "Operative fixation for unstable, malrotated or multiple fractures",
+   "Urgent wound exploration, irrigation and antibiotics for an associated fight-bite injury given the high risk of septic arthritis",
+   "Hand therapy to restore grip strength and range of movement",
+   "Analgesia and elevation for oedema control"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "boxers_fracture-pathway",
+   "title": "Boxer fracture (fifth metacarpal neck): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A fracture of the neck of the fifth metacarpal, usually caused by striking a hard object with a clenched fist",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rotational deformity with scissoring of the fingers",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Anteroposterior, lateral and oblique hand radiographs, Measurement of the degree of neck angulation on the lateral view, Clinical assessment of rotational alignment via the finger cascade during flexion"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Conservative management with buddy strapping or an ulnar gutter splint and early mobilisation for the majority of fractures"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Missing malrotation because the sagittal angulation appears acceptable"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of boxer fracture (fifth metacarpal neck)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "boxers_fracture-matrix",
+   "title": "Boxer fracture (fifth metacarpal neck): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A fracture of the neck of the fifth metacarpal, usually caused by striking a hard object with a clenched fist",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "An axial force transmitted along the fifth metacarpal during a punch concentrates stress at the metaphyseal neck. The thin dorsal cortex fails in tension while the volar cortex is compressed, producing apex-dorsal angulation, and the pull of the intrinsic muscles further flexes the distal fragment volarly. The generous mobility of the fifth carpometacarpal joint compensates for residual angulation in the sagittal plane, so functional loss is usually minor unless there is malrotation, which foreshortens and crosses the affected finger over its neighbours during flexion.",
-    "additionalDifferentials": [
-      "Fifth metacarpal shaft fracture",
-      "Metacarpal head fracture",
-      "Carpometacarpal fracture-dislocation of the little finger",
-      "Base of metacarpal fracture",
-      "Fight-bite injury with metacarpophalangeal joint involvement",
-      "Hamate fracture"
+    [
+     "Key Investigations",
+     "Anteroposterior, lateral and oblique hand radiographs, Measurement of the degree of neck angulation on the lateral view, Clinical",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Anteroposterior, lateral and oblique hand radiographs",
-      "Measurement of the degree of neck angulation on the lateral view",
-      "Clinical assessment of rotational alignment via the finger cascade during flexion",
-      "Careful wound inspection for a fight-bite breach of the metacarpophalangeal joint",
-      "CT reserved for suspected intra-articular extension"
+    [
+     "Primary Differentials",
+     "Fifth metacarpal shaft fracture, Metacarpal head fracture, Carpometacarpal fracture-dislocation of the little finger",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rotational deformity with scissoring of the fingers",
-      "An open wound over the metacarpophalangeal joint (fight bite) with infection risk",
-      "Excessive angulation causing pseudoclawing or functional deficit",
-      "Signs of established joint or hand infection"
+    [
+     "Management Strategy",
+     "Conservative management with buddy strapping or an ulnar gutter splint and early mobilisation for the majority of fractures",
+     "Core treatment modality"
     ],
-    "prognosis": "Most fractures heal well with good function even with moderate residual angulation because of the mobility of the fifth carpometacarpal joint; rotational malunion and an untreated fight-bite infection are the principal causes of a poor outcome.",
-    "pitfalls": [
-      "Missing malrotation because the sagittal angulation appears acceptable",
-      "Overlooking a fight-bite wound and subsequent joint sepsis",
-      "Over-treating minor angulation that would remodel or be well tolerated",
-      "Failing to check active flexion for finger scissoring"
-    ],
-    "references": [
-      "Rockwood and Green's Fractures in Adults",
-      "Green's Operative Hand Surgery"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Conservative management with buddy strapping or an ulnar gutter splint and early mobilisation for the majority of fractures",
-      "Assessment and correction of rotational malalignment, detected as finger scissoring on flexion, which is not tolerated",
-      "Closed reduction for markedly angulated fractures, while accepting moderate apex-dorsal angulation because of fifth carpometacarpal joint mobility",
-      "Operative fixation for unstable, malrotated or multiple fractures",
-      "Urgent wound exploration, irrigation and antibiotics for an associated fight-bite injury given the high risk of septic arthritis",
-      "Hand therapy to restore grip strength and range of movement",
-      "Analgesia and elevation for oedema control"
+    [
+     "Clinical Pitfall",
+     "Missing malrotation because the sagittal angulation appears acceptable",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for boxer fracture (fifth metacarpal neck)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "boxers-fracture-real-image",
+   "title": "Boxer fracture (fifth metacarpal neck): Diagnostic Musculoskeletal Radiograph",
+   "type": "xray",
+   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
+   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
+   "annotations": [
+    {
+     "label": "Cortical Margins",
+     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
+    },
+    {
+     "label": "Trabecular Architecture",
+     "description": "Medullary bone density, lucencies, and subchondral mineralization."
+    },
+    {
+     "label": "Joint Articulation",
+     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+    }
+   ]
+  }
+ ]
 }

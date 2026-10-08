@@ -1,73 +1,168 @@
 {
-  "id": "shuddering_attacks",
-  "name": "Shuddering attacks of infancy",
-  "aliases": [
-    "shuddering spells",
-    "shivering attacks"
+ "id": "shuddering_attacks",
+ "name": "Shuddering attacks of infancy",
+ "aliases": [
+  "shuddering spells",
+  "shivering attacks"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system",
+ "specialty": "Paediatrics / Neurology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Bradley and Daroff Neurology in Clinical Practice / paediatric neurology literature",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Brief episodes of rapid shivering or shuddering of the head, shoulders and trunk, as if experiencing a cold chill",
+   "Consciousness is fully preserved and there is no postictal drowsiness, distinguishing episodes from seizures",
+   "Attacks are very short, may occur many times a day and often happen during excitement, feeding or frustration",
+   "Onset is usually in infancy or early childhood and the episodes are benign and self-limiting",
+   "The electroencephalogram is normal, both during and between episodes",
+   "A possible association with later essential tremor has been suggested, and a family history of tremor may be present"
   ],
-  "class": "non_infective",
-  "system": "Nervous system",
-  "specialty": "Paediatrics / Neurology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Bradley and Daroff Neurology in Clinical Practice / paediatric neurology literature",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Brief episodes of rapid shivering or shuddering of the head, shoulders and trunk, as if experiencing a cold chill",
-      "Consciousness is fully preserved and there is no postictal drowsiness, distinguishing episodes from seizures",
-      "Attacks are very short, may occur many times a day and often happen during excitement, feeding or frustration",
-      "Onset is usually in infancy or early childhood and the episodes are benign and self-limiting",
-      "The electroencephalogram is normal, both during and between episodes",
-      "A possible association with later essential tremor has been suggested, and a family history of tremor may be present"
+  "pathophysiology": "Shuddering attacks are a benign non-epileptic paroxysmal event of early childhood, characterised by brief tremulous shivering movements with retained awareness. The mechanism is not fully understood but the movements resemble an exaggerated shiver, and the reported association with a family history of essential tremor has led to the hypothesis that they may be an early manifestation of a tremor tendency. There is no underlying structural or epileptic disorder.",
+  "additionalDifferentials": [
+   "Epileptic seizures (especially myoclonic or spasms)",
+   "Benign myoclonus of early infancy",
+   "Tics",
+   "Chills from fever or infection",
+   "Gratification behaviour or other benign paroxysmal events"
+  ],
+  "additionalInvestigations": [
+   "Clinical diagnosis from the characteristic brief shivering with preserved awareness",
+   "Home video of episodes to support the diagnosis",
+   "Electroencephalogram only if seizures cannot be excluded clinically",
+   "Developmental and neurological assessment confirming normal findings",
+   "Family history of tremor"
+  ],
+  "redFlags": [
+   "Loss of awareness or postictal features suggesting seizures",
+   "Developmental delay or regression",
+   "Abnormal neurological examination",
+   "Change in the pattern or emergence of new event types"
+  ],
+  "prognosis": "The attacks are entirely benign and typically resolve during early childhood without treatment; development and later neurological health are normal.",
+  "pitfalls": [
+   "Misdiagnosing shuddering as epileptic seizures and starting unnecessary treatment",
+   "Ordering extensive investigation for a clearly benign event",
+   "Overlooking a family history of tremor",
+   "Failing to reassess if awareness is lost or the pattern changes"
+  ],
+  "references": [
+   "Bradley and Daroff Neurology in Clinical Practice",
+   "Paediatric neurology reference texts (standard reference)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Parental reassurance and education that the episodes are benign, self-limiting and require no drug treatment",
+   "Confirmation of the benign diagnosis clinically and with a home video of typical episodes, avoiding unnecessary investigation or antiepileptic medication",
+   "Electroencephalography reserved only for cases where seizures cannot be excluded clinically",
+   "Watchful monitoring of neurodevelopmental progress, with re-review if the episodes change in character",
+   "Advice on the recognised possible association with later essential tremor and note of any family history of tremor",
+   "Re-referral to paediatric neurology if awareness is lost during episodes, the events evolve, or development regresses"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "shuddering_attacks-pathway",
+   "title": "Shuddering attacks of infancy: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Brief episodes of rapid shivering or shuddering of the head, shoulders and trunk, as if experiencing a cold chill",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Loss of awareness or postictal features suggesting seizures",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Clinical diagnosis from the characteristic brief shivering with preserved awareness, Home video of episodes to support the diagnosis, Electroencephalogram only if seizures cannot be excluded clinically"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Parental reassurance and education that the episodes are benign, self-limiting and require no drug treatment"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Misdiagnosing shuddering as epileptic seizures and starting unnecessary treatment"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of shuddering attacks of infancy."
+  }
+ ],
+ "tables": [
+  {
+   "id": "shuddering_attacks-matrix",
+   "title": "Shuddering attacks of infancy: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Brief episodes of rapid shivering or shuddering of the head, shoulders and trunk, as if experiencing a cold chill",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Shuddering attacks are a benign non-epileptic paroxysmal event of early childhood, characterised by brief tremulous shivering movements with retained awareness. The mechanism is not fully understood but the movements resemble an exaggerated shiver, and the reported association with a family history of essential tremor has led to the hypothesis that they may be an early manifestation of a tremor tendency. There is no underlying structural or epileptic disorder.",
-    "additionalDifferentials": [
-      "Epileptic seizures (especially myoclonic or spasms)",
-      "Benign myoclonus of early infancy",
-      "Tics",
-      "Chills from fever or infection",
-      "Gratification behaviour or other benign paroxysmal events"
+    [
+     "Key Investigations",
+     "Clinical diagnosis from the characteristic brief shivering with preserved awareness, Home video of episodes to support the",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Clinical diagnosis from the characteristic brief shivering with preserved awareness",
-      "Home video of episodes to support the diagnosis",
-      "Electroencephalogram only if seizures cannot be excluded clinically",
-      "Developmental and neurological assessment confirming normal findings",
-      "Family history of tremor"
+    [
+     "Primary Differentials",
+     "Epileptic seizures (especially myoclonic or spasms), Benign myoclonus of early infancy, Tics",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Loss of awareness or postictal features suggesting seizures",
-      "Developmental delay or regression",
-      "Abnormal neurological examination",
-      "Change in the pattern or emergence of new event types"
+    [
+     "Management Strategy",
+     "Parental reassurance and education that the episodes are benign, self-limiting and require no drug treatment",
+     "Core treatment modality"
     ],
-    "prognosis": "The attacks are entirely benign and typically resolve during early childhood without treatment; development and later neurological health are normal.",
-    "pitfalls": [
-      "Misdiagnosing shuddering as epileptic seizures and starting unnecessary treatment",
-      "Ordering extensive investigation for a clearly benign event",
-      "Overlooking a family history of tremor",
-      "Failing to reassess if awareness is lost or the pattern changes"
-    ],
-    "references": [
-      "Bradley and Daroff Neurology in Clinical Practice",
-      "Paediatric neurology reference texts (standard reference)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Parental reassurance and education that the episodes are benign, self-limiting and require no drug treatment",
-      "Confirmation of the benign diagnosis clinically and with a home video of typical episodes, avoiding unnecessary investigation or antiepileptic medication",
-      "Electroencephalography reserved only for cases where seizures cannot be excluded clinically",
-      "Watchful monitoring of neurodevelopmental progress, with re-review if the episodes change in character",
-      "Advice on the recognised possible association with later essential tremor and note of any family history of tremor",
-      "Re-referral to paediatric neurology if awareness is lost during episodes, the events evolve, or development regresses"
+    [
+     "Clinical Pitfall",
+     "Misdiagnosing shuddering as epileptic seizures and starting unnecessary treatment",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for shuddering attacks of infancy."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "shuddering-attacks-real-image",
+   "title": "Shuddering attacks of infancy: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

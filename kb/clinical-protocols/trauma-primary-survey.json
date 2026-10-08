@@ -5,7 +5,19 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, trauma bay, pre-hospital",
- "aliases": ["ATLS", "ATLS 11", "xABCDE", "cABCDE", "primary survey", "secondary survey", "major trauma", "polytrauma", "trauma call", "eFAST", "tension pneumothorax"],
+ "aliases": [
+  "ATLS",
+  "ATLS 11",
+  "xABCDE",
+  "cABCDE",
+  "primary survey",
+  "secondary survey",
+  "major trauma",
+  "polytrauma",
+  "trauma call",
+  "eFAST",
+  "tension pneumothorax"
+ ],
  "summary": "Team-based xABCDE primary survey (ATLS 11th edition): control exsanguinating external bleeding first, then airway with spinal protection, breathing, circulation with blood-based resuscitation and haemorrhage control, disability and exposure, treating each life threat as it is found before the secondary survey.",
  "sections": [
   {
@@ -98,14 +110,139 @@
   }
  ],
  "drugs": [
-  { "name": "Tranexamic acid", "dose": "1 g IV over 10 minutes, then 1 g IV infusion over 8 hours", "notes": "Only within 3 hours of injury, as early as possible; do not start later unless hyperfibrinolysis is proven." },
-  { "name": "Red cells and fresh frozen plasma", "dose": "1 unit plasma to 1 unit red cells, given via a warmer", "notes": "Replaces crystalloid in the actively bleeding patient; switch to lab or viscoelastic guided therapy as soon as possible." },
-  { "name": "Calcium chloride 10%", "dose": "10 mL IV (6.8 mmol) slowly via a large or central vein, repeat guided by ionised calcium", "notes": "Keep ionised calcium in the normal range (1.1 to 1.3 mmol/L) during transfusion." }
+  {
+   "name": "Tranexamic acid",
+   "dose": "1 g IV over 10 minutes, then 1 g IV infusion over 8 hours",
+   "notes": "Only within 3 hours of injury, as early as possible; do not start later unless hyperfibrinolysis is proven."
+  },
+  {
+   "name": "Red cells and fresh frozen plasma",
+   "dose": "1 unit plasma to 1 unit red cells, given via a warmer",
+   "notes": "Replaces crystalloid in the actively bleeding patient; switch to lab or viscoelastic guided therapy as soon as possible."
+  },
+  {
+   "name": "Calcium chloride 10%",
+   "dose": "10 mL IV (6.8 mmol) slowly via a large or central vein, repeat guided by ionised calcium",
+   "notes": "Keep ionised calcium in the normal range (1.1 to 1.3 mmol/L) during transfusion."
+  }
  ],
  "sources": [
-  { "org": "American College of Surgeons", "title": "Advanced Trauma Life Support (ATLS) 11th edition", "year": 2025, "url": "https://www.facs.org/quality-programs/trauma/education/advanced-trauma-life-support/atls-11/" },
-  { "org": "NICE", "title": "Major trauma: assessment and initial management (NG39)", "year": 2016, "url": "https://www.nice.org.uk/guidance/ng39/chapter/recommendations" },
-  { "org": "European Task Force for Advanced Bleeding Care in Trauma", "title": "The European guideline on management of major bleeding and coagulopathy following trauma: sixth edition", "year": 2023, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9977110/" }
+  {
+   "org": "American College of Surgeons",
+   "title": "Advanced Trauma Life Support (ATLS) 11th edition",
+   "year": 2025,
+   "url": "https://www.facs.org/quality-programs/trauma/education/advanced-trauma-life-support/atls-11/"
+  },
+  {
+   "org": "NICE",
+   "title": "Major trauma: assessment and initial management (NG39)",
+   "year": 2016,
+   "url": "https://www.nice.org.uk/guidance/ng39/chapter/recommendations"
+  },
+  {
+   "org": "European Task Force for Advanced Bleeding Care in Trauma",
+   "title": "The European guideline on management of major bleeding and coagulopathy following trauma: sixth edition",
+   "year": 2023,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9977110/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "trauma-primary-survey-pathway",
+   "title": "Trauma primary survey (xABCDE) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Activate the trauma team for a high-energy mechanism (fall from height, ejection, pedestrian or rider struck, entrapment), penetrating injury to the head, neck, torso or proximal limb, or abnormal physiology.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "B: expose the chest, count the respiratory rate, look, feel and listen; give oxygen to avoid hypoxaemia, then titrate to avoid hyperoxaemia.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Continuous ECG, SpO2, non-invasive blood pressure, respiratory rate and temperature; end-tidal CO2 after intubation."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "D: record GCS as separate eye, verbal and motor scores, pupil size and reactivity, lateralising signs and any spinal cord level. Check capillary glucose and treat if below 70 mg/dL (3.9 mmol/L)."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Start the secondary survey only when the primary survey is complete and resuscitation is under way. Return to x and A whenever the patient deteriorates."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for trauma primary survey (xabcde)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "trauma-primary-survey-summary-matrix",
+   "title": "Trauma primary survey (xABCDE) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Activate the trauma team for a high-energy mechanism (fall from height, ejection, pedestrian or rider struck, entrapment), penetrating",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "B: expose the chest, count the respiratory rate, look, feel and listen; give oxygen to avoid hypoxaemia, then titrate to avoid hyperoxaemia.",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Continuous ECG, SpO2, non-invasive blood pressure, respiratory rate and temperature; end-tidal CO2 after intubation.",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Tranexamic acid: 1 g IV over 10 minutes, then 1 g IV infusion over 8 hours",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Managing the airway first while the patient exsanguinates from a limb wound.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for trauma primary survey (xabcde)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "trauma-primary-survey-real-image",
+   "title": "Trauma primary survey (xABCDE): Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

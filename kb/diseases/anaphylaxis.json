@@ -130,5 +130,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "hb164fa36"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "anaphylaxis-dx-algo",
+      "title": "Anaphylaxis: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Onset is typically within seconds to minutes of exposure to the trigger; an exception is the delayed (about 3-6 h) reaction to mammalian meat seen in alpha-gal syndrome (p. 2812-2813).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Hypotension or hypoxia - the most dangerous features, risking cardiovascular collapse or respiratory failure (p. 2812)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Serum tryptase peaks 60-90 min after onset and remains measurable for up to about 5 h; apply the '20% + 2' rule (an acute level >20% above the patient's baseline plus 2 ng/mL is diagnostic of clinically significant"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Differentiate from top mimics: Systemic mastocytosis (elevated baseline tryptase; spindle-shaped mast cells on bone marrow) (p. 2813), Pheochromocytoma (elevated urine metanephrines) (p. 2813), Carcinoid syndrome (elevated urine 5-HIAA)"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Treat with epinephrine first - antihistamines, glucocorticoids, and bronchodilators are ancillary agents for residual urticaria/angioedema and bronchospasm once the patient is hemodynamically stable, not initial therapy"
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for anaphylaxis."
+    }
+  ],
+  "tables": [
+    {
+      "id": "anaphylaxis-matrix",
+      "title": "Anaphylaxis: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Onset is typically within seconds to minutes of exposure to the trigger; an exception is the delayed (about 3-6 h) reaction to",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Serum tryptase peaks 60-90 min after onset and remains measurable for up to about 5 h; apply the '20% + 2' rule (an acute level",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Systemic mastocytosis (elevated baseline tryptase; spindle-shaped mast cells on bone marrow) (p. 2813), Pheochromocytoma",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Hypotension or hypoxia - the most dangerous features, risking cardiovascular collapse or respiratory failure (p. 2812)",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treat with epinephrine first - antihistamines, glucocorticoids, and bronchodilators are ancillary agents for residual",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for anaphylaxis."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "anaphylaxis-real-image",
+      "title": "Anaphylaxis: Diagnostic Imaging Evaluation",
+      "type": "xray",
+      "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+      "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+      "annotations": [
+        {
+          "label": "Cardiothoracic Ratio",
+          "description": "Heart size, mediastinal width, and great vessel contours."
+        },
+        {
+          "label": "Visceral Fields",
+          "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+        },
+        {
+          "label": "Bony Thorax & Soft Tissues",
+          "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+        }
+      ]
+    }
+  ]
 }

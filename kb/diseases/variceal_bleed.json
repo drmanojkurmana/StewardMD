@@ -135,5 +135,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "hd65389db"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "variceal_bleed-dx-algo",
+      "title": "Variceal bleeding: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Portal hypertension is defined as a hepatic venous pressure gradient (HVPG) >5 mmHg; compensated cirrhosis typically has an HVPG of 5-10 mmHg, while clinically significant portal hypertension (CSPH), defined as HVPG ≥10 mmHg, carries",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Variceal haemorrhage is immediately life-threatening with 20-30% mortality per bleeding episode - treat as a major haemorrhage with airway/haemodynamic priority (p.2713)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Upper endoscopy within 24 h is first-line both to diagnose the bleeding source and to treat acutely; more urgent endoscopy (6-12 h) does not improve outcomes and may worsen them in high-risk patients (p.362, p.2714),"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Bleeding/decompensation risk is stratified by Child-Pugh class and MELD score, by HVPG/wedged-hepatic-vein pressure (CSPH ≥10 mmHg; variceal bleeding risk at >12 mmHg), by varix size and location, and by endoscopic"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Assuming a normal initial haemoglobin excludes severe bleeding - haemoglobin may be normal or only minimally reduced at presentation and can take up to 72 h to fall as extravascular fluid re-equilibrates (p.362)"
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for variceal bleeding."
+    }
+  ],
+  "tables": [
+    {
+      "id": "variceal_bleed-matrix",
+      "title": "Variceal bleeding: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Portal hypertension is defined as a hepatic venous pressure gradient (HVPG) >5 mmHg; compensated cirrhosis typically has an HVPG",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Upper endoscopy within 24 h is first-line both to diagnose the bleeding source and to treat acutely; more urgent endoscopy (6-12",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Peptic ulcer disease - the most common cause of upper GI bleeding (~50% of UGIB hospitalisations) (p.360), Mallory-Weiss tear -",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Variceal haemorrhage is immediately life-threatening with 20-30% mortality per bleeding episode - treat as a major haemorrhage",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a normal initial haemoglobin excludes severe bleeding - haemoglobin may be normal or only minimally reduced at",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for variceal bleeding."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "variceal-bleed-real-image",
+      "title": "Variceal bleeding: Diagnostic Abdominal Computed Tomography",
+      "type": "ct",
+      "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
+      "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
+      "annotations": [
+        {
+          "label": "Solid Viscera",
+          "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
+        },
+        {
+          "label": "Gastrointestinal Tract",
+          "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
+        },
+        {
+          "label": "Mesentery & Peritoneum",
+          "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+        }
+      ]
+    }
+  ]
 }

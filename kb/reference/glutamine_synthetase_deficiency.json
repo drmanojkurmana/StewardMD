@@ -1,76 +1,171 @@
 {
-  "id": "glutamine_synthetase_deficiency",
-  "name": "Glutamine synthetase deficiency",
-  "aliases": [
-    "congenital glutamine deficiency",
-    "GLUL deficiency"
+ "id": "glutamine_synthetase_deficiency",
+ "name": "Glutamine synthetase deficiency",
+ "aliases": [
+  "congenital glutamine deficiency",
+  "GLUL deficiency"
+ ],
+ "class": "non_infective",
+ "system": "Metabolic / Amino acid metabolism",
+ "specialty": "Metabolic medicine / Neonatology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Metabolic medicine references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "An extremely rare autosomal recessive disorder caused by deficiency of glutamine synthetase",
+   "Presents in the neonatal period with severe encephalopathy, hypotonia and intractable seizures",
+   "Frequently accompanied by a distinctive necrolytic erythematous skin rash and multi-organ dysfunction",
+   "Characteristically shows LOW glutamine in blood, urine and cerebrospinal fluid, an unusual finding",
+   "Moderately raised ammonia may occur despite low glutamine, reflecting impaired ammonia detoxification",
+   "The condition is usually fatal in the neonatal period, although rare milder survivors are described",
+   "Glutamine is normally the most abundant amino acid, so its deficiency has widespread consequences"
   ],
-  "class": "non_infective",
-  "system": "Metabolic / Amino acid metabolism",
-  "specialty": "Metabolic medicine / Neonatology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Metabolic medicine references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "An extremely rare autosomal recessive disorder caused by deficiency of glutamine synthetase",
-      "Presents in the neonatal period with severe encephalopathy, hypotonia and intractable seizures",
-      "Frequently accompanied by a distinctive necrolytic erythematous skin rash and multi-organ dysfunction",
-      "Characteristically shows LOW glutamine in blood, urine and cerebrospinal fluid, an unusual finding",
-      "Moderately raised ammonia may occur despite low glutamine, reflecting impaired ammonia detoxification",
-      "The condition is usually fatal in the neonatal period, although rare milder survivors are described",
-      "Glutamine is normally the most abundant amino acid, so its deficiency has widespread consequences"
+  "pathophysiology": "Glutamine synthetase converts glutamate and ammonia into glutamine, a reaction central to nitrogen homeostasis, ammonia detoxification and the supply of glutamine as a nitrogen donor and neurotransmitter precursor. Biallelic loss-of-function GLUL mutations reduce glutamine synthesis, producing systemic and cerebrospinal glutamine deficiency, impaired cerebral ammonia handling and disturbed glutamate-glutamine cycling in the brain. The resulting neuronal dysfunction causes severe neonatal encephalopathy, while deficiency of glutamine as a substrate contributes to the skin and organ involvement.",
+  "additionalDifferentials": [
+   "Urea cycle disorders with hyperammonaemia",
+   "Other neonatal epileptic encephalopathies",
+   "Neonatal sepsis with encephalopathy",
+   "Maple syrup urine disease and other neonatal metabolic crises",
+   "Congenital disorders causing a necrolytic rash",
+   "Organic acidaemias"
+  ],
+  "additionalInvestigations": [
+   "Plasma, urine and cerebrospinal fluid amino acids showing low glutamine",
+   "Ammonia measurement",
+   "Genetic testing of GLUL",
+   "Brain imaging and EEG",
+   "Skin assessment and exclusion of other causes of neonatal rash"
+  ],
+  "redFlags": [
+   "Severe neonatal encephalopathy with intractable seizures",
+   "Necrolytic skin rash in a critically ill neonate",
+   "Multi-organ failure",
+   "Rapid clinical deterioration"
+  ],
+  "prognosis": "The prognosis is generally very poor, with most affected neonates dying early; a small number of patients with residual enzyme activity have survived with severe neurological impairment.",
+  "pitfalls": [
+   "Assuming amino acid disorders always cause elevated, not reduced, amino acids",
+   "Attributing the presentation solely to sepsis",
+   "Overlooking glutamine deficiency because routine panels focus on elevations",
+   "Missing the diagnostic clue of a necrolytic rash with encephalopathy"
+  ],
+  "references": [
+   "Textbook of Inborn Metabolic Diseases (standard reference)",
+   "Paediatric neurology and metabolic references"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Provide intensive neonatal supportive care, as there is no established curative therapy for this usually fatal disorder",
+   "Trial enteral and parenteral glutamine supplementation to correct the systemic and cerebrospinal glutamine deficiency, as attempted in the rare survivors",
+   "Control the intractable neonatal seizures with antiseizure medication and manage the encephalopathy",
+   "Reduce ammonia with measures that limit nitrogen load and support detoxification when hyperammonaemia occurs",
+   "Give attentive skin care for the necrolytic erythematous rash and manage associated multi-organ dysfunction",
+   "Involve the family in early palliative care discussions given the poor prognosis, alongside multidisciplinary metabolic and neonatal input",
+   "Offer genetic counselling for autosomal recessive inheritance, including recurrence risk and prenatal testing"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "glutamine_synthetase_deficiency-pathway",
+   "title": "Glutamine synthetase deficiency: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "An extremely rare autosomal recessive disorder caused by deficiency of glutamine synthetase",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Severe neonatal encephalopathy with intractable seizures",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Plasma, urine and cerebrospinal fluid amino acids showing low glutamine, Ammonia measurement, Genetic testing of GLUL"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Provide intensive neonatal supportive care, as there is no established curative therapy for this usually fatal disorder"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Assuming amino acid disorders always cause elevated, not reduced, amino acids"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of glutamine synthetase deficiency."
+  }
+ ],
+ "tables": [
+  {
+   "id": "glutamine_synthetase_deficiency-matrix",
+   "title": "Glutamine synthetase deficiency: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "An extremely rare autosomal recessive disorder caused by deficiency of glutamine synthetase",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Glutamine synthetase converts glutamate and ammonia into glutamine, a reaction central to nitrogen homeostasis, ammonia detoxification and the supply of glutamine as a nitrogen donor and neurotransmitter precursor. Biallelic loss-of-function GLUL mutations reduce glutamine synthesis, producing systemic and cerebrospinal glutamine deficiency, impaired cerebral ammonia handling and disturbed glutamate-glutamine cycling in the brain. The resulting neuronal dysfunction causes severe neonatal encephalopathy, while deficiency of glutamine as a substrate contributes to the skin and organ involvement.",
-    "additionalDifferentials": [
-      "Urea cycle disorders with hyperammonaemia",
-      "Other neonatal epileptic encephalopathies",
-      "Neonatal sepsis with encephalopathy",
-      "Maple syrup urine disease and other neonatal metabolic crises",
-      "Congenital disorders causing a necrolytic rash",
-      "Organic acidaemias"
+    [
+     "Key Investigations",
+     "Plasma, urine and cerebrospinal fluid amino acids showing low glutamine, Ammonia measurement, Genetic testing of GLUL",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Plasma, urine and cerebrospinal fluid amino acids showing low glutamine",
-      "Ammonia measurement",
-      "Genetic testing of GLUL",
-      "Brain imaging and EEG",
-      "Skin assessment and exclusion of other causes of neonatal rash"
+    [
+     "Primary Differentials",
+     "Urea cycle disorders with hyperammonaemia, Other neonatal epileptic encephalopathies, Neonatal sepsis with encephalopathy",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Severe neonatal encephalopathy with intractable seizures",
-      "Necrolytic skin rash in a critically ill neonate",
-      "Multi-organ failure",
-      "Rapid clinical deterioration"
+    [
+     "Management Strategy",
+     "Provide intensive neonatal supportive care, as there is no established curative therapy for this usually fatal disorder",
+     "Core treatment modality"
     ],
-    "prognosis": "The prognosis is generally very poor, with most affected neonates dying early; a small number of patients with residual enzyme activity have survived with severe neurological impairment.",
-    "pitfalls": [
-      "Assuming amino acid disorders always cause elevated, not reduced, amino acids",
-      "Attributing the presentation solely to sepsis",
-      "Overlooking glutamine deficiency because routine panels focus on elevations",
-      "Missing the diagnostic clue of a necrolytic rash with encephalopathy"
-    ],
-    "references": [
-      "Textbook of Inborn Metabolic Diseases (standard reference)",
-      "Paediatric neurology and metabolic references"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Provide intensive neonatal supportive care, as there is no established curative therapy for this usually fatal disorder",
-      "Trial enteral and parenteral glutamine supplementation to correct the systemic and cerebrospinal glutamine deficiency, as attempted in the rare survivors",
-      "Control the intractable neonatal seizures with antiseizure medication and manage the encephalopathy",
-      "Reduce ammonia with measures that limit nitrogen load and support detoxification when hyperammonaemia occurs",
-      "Give attentive skin care for the necrolytic erythematous rash and manage associated multi-organ dysfunction",
-      "Involve the family in early palliative care discussions given the poor prognosis, alongside multidisciplinary metabolic and neonatal input",
-      "Offer genetic counselling for autosomal recessive inheritance, including recurrence risk and prenatal testing"
+    [
+     "Clinical Pitfall",
+     "Assuming amino acid disorders always cause elevated, not reduced, amino acids",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for glutamine synthetase deficiency."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "glutamine-synthetase-deficiency-real-image",
+   "title": "Glutamine synthetase deficiency: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

@@ -1,79 +1,174 @@
 {
-  "id": "hawkinsinuria",
-  "name": "Hawkinsinuria",
-  "aliases": [
-    "hawkinsinuria",
-    "4-hydroxyphenylpyruvate dioxygenase defect",
-    "HPD variant",
-    "4-HPPD deficiency variant",
-    "tyrosinaemia variant"
+ "id": "hawkinsinuria",
+ "name": "Hawkinsinuria",
+ "aliases": [
+  "hawkinsinuria",
+  "4-hydroxyphenylpyruvate dioxygenase defect",
+  "HPD variant",
+  "4-HPPD deficiency variant",
+  "tyrosinaemia variant"
+ ],
+ "class": "non_infective",
+ "system": "Metabolic / Genetics",
+ "specialty": "Metabolic Medicine / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Arises from a variant of 4-hydroxyphenylpyruvate dioxygenase (HPD) in the tyrosine degradation pathway, producing an abnormal reactive intermediate rather than complete enzyme loss",
+   "Named for the excretion of hawkinsin, a cyclic sulphur-containing amino acid formed from a reactive epoxide intermediate that conjugates with glutathione",
+   "Uniquely among these disorders it is inherited in an autosomal dominant manner, unlike most tyrosine pathway defects",
+   "Symptomatic infants may present around weaning with failure to thrive, metabolic acidosis, and fine hair, often improving with age",
+   "Urine may also contain 4-hydroxycyclohexylacetic acid, and there can be evidence of glutathione depletion from ongoing conjugation of the reactive intermediate",
+   "Many individuals become asymptomatic after infancy, and management in symptomatic infants centres on tyrosine/phenylalanine dietary moderation and ascorbic acid support",
+   "It should be distinguished from the hepatorenal and oculocutaneous tyrosinaemias",
+   "British spelling applies (tyrosinaemia)"
   ],
-  "class": "non_infective",
-  "system": "Metabolic / Genetics",
-  "specialty": "Metabolic Medicine / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Arises from a variant of 4-hydroxyphenylpyruvate dioxygenase (HPD) in the tyrosine degradation pathway, producing an abnormal reactive intermediate rather than complete enzyme loss",
-      "Named for the excretion of hawkinsin, a cyclic sulphur-containing amino acid formed from a reactive epoxide intermediate that conjugates with glutathione",
-      "Uniquely among these disorders it is inherited in an autosomal dominant manner, unlike most tyrosine pathway defects",
-      "Symptomatic infants may present around weaning with failure to thrive, metabolic acidosis, and fine hair, often improving with age",
-      "Urine may also contain 4-hydroxycyclohexylacetic acid, and there can be evidence of glutathione depletion from ongoing conjugation of the reactive intermediate",
-      "Many individuals become asymptomatic after infancy, and management in symptomatic infants centres on tyrosine/phenylalanine dietary moderation and ascorbic acid support",
-      "It should be distinguished from the hepatorenal and oculocutaneous tyrosinaemias",
-      "British spelling applies (tyrosinaemia)"
+  "pathophysiology": "In the tyrosine degradation pathway, 4-hydroxyphenylpyruvate dioxygenase normally converts 4-hydroxyphenylpyruvate to homogentisate. In hawkinsinuria, a variant enzyme carries out an incomplete reaction that releases a reactive epoxide-like intermediate. This intermediate is conjugated with glutathione to form the characteristic metabolite hawkinsin, and its ongoing production can deplete glutathione and generate related metabolites such as 4-hydroxycyclohexylacetic acid. The reactive intermediate and glutathione consumption are thought to underlie the transient infantile symptoms, which typically remit as the child grows.",
+  "additionalDifferentials": [
+   "Tyrosinaemia type I (hepatorenal, fumarylacetoacetate hydrolase deficiency)",
+   "Tyrosinaemia type II (oculocutaneous, tyrosine aminotransferase deficiency)",
+   "Transient tyrosinaemia of the newborn",
+   "Other causes of infantile failure to thrive with metabolic acidosis",
+   "Alkaptonuria (a distal defect in the same pathway)",
+   "Dietary or hepatic causes of tyrosine elevation"
+  ],
+  "additionalInvestigations": [
+   "Urine organic acids identifying hawkinsin and 4-hydroxycyclohexylacetic acid",
+   "Quantitative plasma amino acids including tyrosine",
+   "Assessment of acid-base status in symptomatic infants",
+   "Molecular analysis of the HPD gene",
+   "Family studies consistent with dominant inheritance",
+   "Markers of glutathione status where available"
+  ],
+  "redFlags": [
+   "Failure to thrive with metabolic acidosis in an infant requiring nutritional intervention",
+   "Features suggesting hepatorenal tyrosinaemia type I, which is far more serious",
+   "Persistent symptoms beyond infancy, prompting reassessment"
+  ],
+  "prognosis": "The prognosis is generally good; symptomatic infants usually improve after weaning and many become asymptomatic in later childhood and adulthood. Serious sequelae are uncommon.",
+  "pitfalls": [
+   "Confusing it with the far more dangerous tyrosinaemia type I",
+   "Overlooking the unusual autosomal dominant inheritance",
+   "Missing the diagnosis because hawkinsin is not a routinely named metabolite",
+   "Failing to support nutrition and ascorbate status during symptomatic infancy"
+  ],
+  "references": [
+   "Scriver's OMMBID: disorders of tyrosine metabolism",
+   "Nyhan, Atlas of Inherited Metabolic Diseases"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Moderate dietary tyrosine and phenylalanine intake in symptomatic infants to reduce flux through the defective pathway",
+   "Supplement with ascorbic acid to support residual enzyme function and limit the reactive intermediate",
+   "Maintain adequate nutrition and provide additional support around weaning, when symptoms typically appear",
+   "Correct metabolic acidosis and manage failure to thrive with supportive care",
+   "Monitor growth, acid-base status, and urinary metabolites, reassuring that symptoms usually remit with age",
+   "Offer genetic counselling and family studies given autosomal dominant HPD inheritance"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "hawkinsinuria-pathway",
+   "title": "Hawkinsinuria: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Arises from a variant of 4-hydroxyphenylpyruvate dioxygenase (HPD) in the tyrosine degradation pathway, producing an abnormal reactive intermediate rather than complete enzyme loss",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Failure to thrive with metabolic acidosis in an infant requiring nutritional intervention",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Urine organic acids identifying hawkinsin and 4-hydroxycyclohexylacetic acid, Quantitative plasma amino acids including tyrosine, Assessment of acid-base status in symptomatic infants"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Moderate dietary tyrosine and phenylalanine intake in symptomatic infants to reduce flux through the defective pathway"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Confusing it with the far more dangerous tyrosinaemia type I"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of hawkinsinuria."
+  }
+ ],
+ "tables": [
+  {
+   "id": "hawkinsinuria-matrix",
+   "title": "Hawkinsinuria: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Arises from a variant of 4-hydroxyphenylpyruvate dioxygenase (HPD) in the tyrosine degradation pathway, producing an abnormal",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "In the tyrosine degradation pathway, 4-hydroxyphenylpyruvate dioxygenase normally converts 4-hydroxyphenylpyruvate to homogentisate. In hawkinsinuria, a variant enzyme carries out an incomplete reaction that releases a reactive epoxide-like intermediate. This intermediate is conjugated with glutathione to form the characteristic metabolite hawkinsin, and its ongoing production can deplete glutathione and generate related metabolites such as 4-hydroxycyclohexylacetic acid. The reactive intermediate and glutathione consumption are thought to underlie the transient infantile symptoms, which typically remit as the child grows.",
-    "additionalDifferentials": [
-      "Tyrosinaemia type I (hepatorenal, fumarylacetoacetate hydrolase deficiency)",
-      "Tyrosinaemia type II (oculocutaneous, tyrosine aminotransferase deficiency)",
-      "Transient tyrosinaemia of the newborn",
-      "Other causes of infantile failure to thrive with metabolic acidosis",
-      "Alkaptonuria (a distal defect in the same pathway)",
-      "Dietary or hepatic causes of tyrosine elevation"
+    [
+     "Key Investigations",
+     "Urine organic acids identifying hawkinsin and 4-hydroxycyclohexylacetic acid, Quantitative plasma amino acids including tyrosine,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Urine organic acids identifying hawkinsin and 4-hydroxycyclohexylacetic acid",
-      "Quantitative plasma amino acids including tyrosine",
-      "Assessment of acid-base status in symptomatic infants",
-      "Molecular analysis of the HPD gene",
-      "Family studies consistent with dominant inheritance",
-      "Markers of glutathione status where available"
+    [
+     "Primary Differentials",
+     "Tyrosinaemia type I (hepatorenal, fumarylacetoacetate hydrolase deficiency), Tyrosinaemia type II (oculocutaneous, tyrosine",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Failure to thrive with metabolic acidosis in an infant requiring nutritional intervention",
-      "Features suggesting hepatorenal tyrosinaemia type I, which is far more serious",
-      "Persistent symptoms beyond infancy, prompting reassessment"
+    [
+     "Management Strategy",
+     "Moderate dietary tyrosine and phenylalanine intake in symptomatic infants to reduce flux through the defective pathway",
+     "Core treatment modality"
     ],
-    "prognosis": "The prognosis is generally good; symptomatic infants usually improve after weaning and many become asymptomatic in later childhood and adulthood. Serious sequelae are uncommon.",
-    "pitfalls": [
-      "Confusing it with the far more dangerous tyrosinaemia type I",
-      "Overlooking the unusual autosomal dominant inheritance",
-      "Missing the diagnosis because hawkinsin is not a routinely named metabolite",
-      "Failing to support nutrition and ascorbate status during symptomatic infancy"
-    ],
-    "references": [
-      "Scriver's OMMBID: disorders of tyrosine metabolism",
-      "Nyhan, Atlas of Inherited Metabolic Diseases"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Moderate dietary tyrosine and phenylalanine intake in symptomatic infants to reduce flux through the defective pathway",
-      "Supplement with ascorbic acid to support residual enzyme function and limit the reactive intermediate",
-      "Maintain adequate nutrition and provide additional support around weaning, when symptoms typically appear",
-      "Correct metabolic acidosis and manage failure to thrive with supportive care",
-      "Monitor growth, acid-base status, and urinary metabolites, reassuring that symptoms usually remit with age",
-      "Offer genetic counselling and family studies given autosomal dominant HPD inheritance"
+    [
+     "Clinical Pitfall",
+     "Confusing it with the far more dangerous tyrosinaemia type I",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for hawkinsinuria."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "hawkinsinuria-real-image",
+   "title": "Hawkinsinuria: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

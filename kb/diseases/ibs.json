@@ -158,5 +158,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "hecb66720"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "ibs-dx-algo",
+      "title": "Irritable bowel syndrome: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Rome IV makes IBS a positive symptom-based diagnosis, not purely one of exclusion: recurrent abdominal pain on average at least 1 day/week over the prior 3 months plus at least two of being related to defecation, a change in stool",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: First appearance of symptoms in old age",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Complete blood count for most patients, Fecal calprotectin or fecal lactoferrin, and/or C-reactive protein, in IBS-D even without alarm features to help exclude IBD, Serologic testing for coeliac disease in IBS-D where"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Harrison classifies IBS by predominant bowel pattern under Rome IV into IBS-C (predominant constipation), IBS-D (predominant diarrhoea), and IBS-M (mixed constipation and diarrhoea); these subtypes are noted to be"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Treating IBS as a diagnosis of exclusion only and over-investigating: few tests are needed when symptoms are typical and alarm features are absent, and unnecessary investigations may be costly and even harmful."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for irritable bowel syndrome."
+    }
+  ],
+  "tables": [
+    {
+      "id": "ibs-matrix",
+      "title": "Irritable bowel syndrome: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Rome IV makes IBS a positive symptom-based diagnosis, not purely one of exclusion: recurrent abdominal pain on average at least 1",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Complete blood count for most patients, Fecal calprotectin or fecal lactoferrin, and/or C-reactive protein, in IBS-D even without",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Inflammatory bowel disease (ulcerative colitis and Crohn's disease), Coeliac sprue, Colorectal carcinoma",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "First appearance of symptoms in old age",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating IBS as a diagnosis of exclusion only and over-investigating: few tests are needed when symptoms are typical and alarm",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for irritable bowel syndrome."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "ibs-real-image",
+      "title": "Irritable bowel syndrome: Diagnostic Abdominal Computed Tomography",
+      "type": "ct",
+      "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
+      "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
+      "annotations": [
+        {
+          "label": "Solid Viscera",
+          "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
+        },
+        {
+          "label": "Gastrointestinal Tract",
+          "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
+        },
+        {
+          "label": "Mesentery & Peritoneum",
+          "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+        }
+      ]
+    }
+  ]
 }

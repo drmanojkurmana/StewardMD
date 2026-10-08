@@ -1,77 +1,172 @@
 {
-  "id": "hypersomnia",
-  "name": "Hypersomnia",
-  "aliases": [
-    "hypersomnolence",
-    "excessive daytime sleepiness",
-    "idiopathic hypersomnia",
-    "central disorders of hypersomnolence"
+ "id": "hypersomnia",
+ "name": "Hypersomnia",
+ "aliases": [
+  "hypersomnolence",
+  "excessive daytime sleepiness",
+  "idiopathic hypersomnia",
+  "central disorders of hypersomnolence"
+ ],
+ "class": "non_infective",
+ "system": "Sleep medicine",
+ "specialty": "Sleep Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Harrison's Principles of Internal Medicine / standard sleep & reproductive medicine references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Hypersomnia denotes excessive daytime sleepiness or an excessive need for sleep that is not explained by insufficient sleep opportunity, and it should be distinguished from fatigue and low motivation",
+   "The most common cause overall is chronic insufficient sleep, and this behavioural cause must be excluded before pursuing primary hypersomnia disorders",
+   "Secondary hypersomnia from obstructive sleep apnoea, medication or substance effects, depression, and other medical conditions is far more common than the central disorders of hypersomnolence",
+   "Narcolepsy, especially type 1 with cataplexy, is the prototypical central hypersomnia and is linked to loss of hypothalamic orexin (hypocretin) signalling",
+   "Idiopathic hypersomnia produces prolonged, non-refreshing sleep with severe sleep inertia and is a diagnosis of exclusion",
+   "The Epworth Sleepiness Scale quantifies subjective sleepiness, while objective assessment relies on polysomnography followed by a multiple sleep latency test",
+   "Documenting short sleep latency and early transitions into REM sleep on testing supports a diagnosis of narcolepsy",
+   "Management combines good sleep hygiene, treatment of any underlying cause, scheduled naps, and, on principle, wake-promoting pharmacotherapy where required"
   ],
-  "class": "non_infective",
-  "system": "Sleep medicine",
-  "specialty": "Sleep Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Harrison's Principles of Internal Medicine / standard sleep & reproductive medicine references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Hypersomnia denotes excessive daytime sleepiness or an excessive need for sleep that is not explained by insufficient sleep opportunity, and it should be distinguished from fatigue and low motivation",
-      "The most common cause overall is chronic insufficient sleep, and this behavioural cause must be excluded before pursuing primary hypersomnia disorders",
-      "Secondary hypersomnia from obstructive sleep apnoea, medication or substance effects, depression, and other medical conditions is far more common than the central disorders of hypersomnolence",
-      "Narcolepsy, especially type 1 with cataplexy, is the prototypical central hypersomnia and is linked to loss of hypothalamic orexin (hypocretin) signalling",
-      "Idiopathic hypersomnia produces prolonged, non-refreshing sleep with severe sleep inertia and is a diagnosis of exclusion",
-      "The Epworth Sleepiness Scale quantifies subjective sleepiness, while objective assessment relies on polysomnography followed by a multiple sleep latency test",
-      "Documenting short sleep latency and early transitions into REM sleep on testing supports a diagnosis of narcolepsy",
-      "Management combines good sleep hygiene, treatment of any underlying cause, scheduled naps, and, on principle, wake-promoting pharmacotherapy where required"
+  "pathophysiology": "Normal daytime alertness depends on adequate prior sleep and on wake-promoting neuronal systems, prominently the hypothalamic orexin (hypocretin) network. In narcolepsy type 1, selective loss of orexin-producing neurons, thought to be autoimmune and associated with specific HLA types, destabilises the boundaries between wake, non-REM, and REM sleep, producing sleepiness, cataplexy, sleep paralysis, and hypnagogic hallucinations as REM phenomena intrude into wakefulness. Idiopathic hypersomnia has a less well-defined mechanism, possibly involving enhanced GABAergic sedation or altered sleep homeostasis. Secondary hypersomnias arise when sleep is fragmented (as in sleep apnoea or periodic limb movements), curtailed (insufficient sleep), or suppressed in quality by drugs, depression, or systemic illness, reducing restorative sleep and driving daytime sleepiness.",
+  "additionalDifferentials": [
+   "Chronic insufficient sleep syndrome",
+   "Obstructive sleep apnoea",
+   "Narcolepsy type 1 and type 2",
+   "Idiopathic hypersomnia",
+   "Medication or substance-related sleepiness",
+   "Depression and other psychiatric or medical illness"
+  ],
+  "additionalInvestigations": [
+   "Detailed sleep history and sleep diary, sometimes with actigraphy, to exclude insufficient sleep",
+   "Epworth Sleepiness Scale to quantify subjective daytime sleepiness",
+   "Overnight polysomnography to exclude sleep apnoea and other fragmenting disorders",
+   "Multiple sleep latency test to measure objective sleepiness and detect early REM onsets",
+   "Selected testing such as CSF orexin or HLA typing when narcolepsy is suspected"
+  ],
+  "redFlags": [
+   "Cataplexy, indicating narcolepsy type 1 and warranting confirmatory evaluation",
+   "Sudden severe sleepiness following a central nervous system insult or with new neurological signs",
+   "Sleepiness causing motor vehicle or occupational accidents, a safety priority",
+   "Hypersomnia masking underlying depression with suicide risk"
+  ],
+  "prognosis": "Secondary hypersomnia often improves substantially when the underlying cause is treated; narcolepsy and idiopathic hypersomnia are typically lifelong but manageable, with most patients achieving meaningful symptom control through combined behavioural and pharmacological measures.",
+  "pitfalls": [
+   "Failing to exclude chronic insufficient sleep before diagnosing a primary hypersomnia",
+   "Overlooking obstructive sleep apnoea as a treatable cause of daytime sleepiness",
+   "Missing cataplexy in the history and thereby delaying a narcolepsy diagnosis",
+   "Neglecting the road-safety and occupational implications of severe daytime sleepiness"
+  ],
+  "references": [
+   "Harrison's Principles of Internal Medicine, 22e"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Treat the underlying cause of secondary hypersomnia, using CPAP for obstructive sleep apnoea, reviewing sedating medication and addressing depression",
+   "Ensure adequate sleep opportunity and sleep hygiene, with scheduled short naps in central disorders",
+   "Wake-promoting agents such as modafinil or armodafinil, or amphetamine-type stimulants, for narcolepsy and idiopathic hypersomnia",
+   "Treat cataplexy with sodium oxybate, pitolisant or noradrenergic-serotonergic antidepressants in narcolepsy type 1",
+   "Safety counselling on driving and occupational hazards while sleepiness remains uncontrolled",
+   "Monitor treatment response with symptom scales and specialist sleep-medicine follow-up"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "hypersomnia-pathway",
+   "title": "Hypersomnia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Hypersomnia denotes excessive daytime sleepiness or an excessive need for sleep that is not explained by insufficient sleep opportunity, and it should be distinguished from fatigue and low motivation",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Cataplexy, indicating narcolepsy type 1 and warranting confirmatory evaluation",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Detailed sleep history and sleep diary, sometimes with actigraphy, to exclude insufficient sleep, Epworth Sleepiness Scale to quantify subjective daytime sleepiness, Overnight polysomnography to exclude sleep apnoea and"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Treat the underlying cause of secondary hypersomnia, using CPAP for obstructive sleep apnoea, reviewing sedating medication and addressing depression"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Failing to exclude chronic insufficient sleep before diagnosing a primary hypersomnia"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of hypersomnia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "hypersomnia-matrix",
+   "title": "Hypersomnia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Hypersomnia denotes excessive daytime sleepiness or an excessive need for sleep that is not explained by insufficient sleep",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Normal daytime alertness depends on adequate prior sleep and on wake-promoting neuronal systems, prominently the hypothalamic orexin (hypocretin) network. In narcolepsy type 1, selective loss of orexin-producing neurons, thought to be autoimmune and associated with specific HLA types, destabilises the boundaries between wake, non-REM, and REM sleep, producing sleepiness, cataplexy, sleep paralysis, and hypnagogic hallucinations as REM phenomena intrude into wakefulness. Idiopathic hypersomnia has a less well-defined mechanism, possibly involving enhanced GABAergic sedation or altered sleep homeostasis. Secondary hypersomnias arise when sleep is fragmented (as in sleep apnoea or periodic limb movements), curtailed (insufficient sleep), or suppressed in quality by drugs, depression, or systemic illness, reducing restorative sleep and driving daytime sleepiness.",
-    "additionalDifferentials": [
-      "Chronic insufficient sleep syndrome",
-      "Obstructive sleep apnoea",
-      "Narcolepsy type 1 and type 2",
-      "Idiopathic hypersomnia",
-      "Medication or substance-related sleepiness",
-      "Depression and other psychiatric or medical illness"
+    [
+     "Key Investigations",
+     "Detailed sleep history and sleep diary, sometimes with actigraphy, to exclude insufficient sleep, Epworth Sleepiness Scale to",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Detailed sleep history and sleep diary, sometimes with actigraphy, to exclude insufficient sleep",
-      "Epworth Sleepiness Scale to quantify subjective daytime sleepiness",
-      "Overnight polysomnography to exclude sleep apnoea and other fragmenting disorders",
-      "Multiple sleep latency test to measure objective sleepiness and detect early REM onsets",
-      "Selected testing such as CSF orexin or HLA typing when narcolepsy is suspected"
+    [
+     "Primary Differentials",
+     "Chronic insufficient sleep syndrome, Obstructive sleep apnoea, Narcolepsy type 1 and type 2",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Cataplexy, indicating narcolepsy type 1 and warranting confirmatory evaluation",
-      "Sudden severe sleepiness following a central nervous system insult or with new neurological signs",
-      "Sleepiness causing motor vehicle or occupational accidents, a safety priority",
-      "Hypersomnia masking underlying depression with suicide risk"
+    [
+     "Management Strategy",
+     "Treat the underlying cause of secondary hypersomnia, using CPAP for obstructive sleep apnoea, reviewing sedating medication and",
+     "Core treatment modality"
     ],
-    "prognosis": "Secondary hypersomnia often improves substantially when the underlying cause is treated; narcolepsy and idiopathic hypersomnia are typically lifelong but manageable, with most patients achieving meaningful symptom control through combined behavioural and pharmacological measures.",
-    "pitfalls": [
-      "Failing to exclude chronic insufficient sleep before diagnosing a primary hypersomnia",
-      "Overlooking obstructive sleep apnoea as a treatable cause of daytime sleepiness",
-      "Missing cataplexy in the history and thereby delaying a narcolepsy diagnosis",
-      "Neglecting the road-safety and occupational implications of severe daytime sleepiness"
-    ],
-    "references": [
-      "Harrison's Principles of Internal Medicine, 22e"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Treat the underlying cause of secondary hypersomnia, using CPAP for obstructive sleep apnoea, reviewing sedating medication and addressing depression",
-      "Ensure adequate sleep opportunity and sleep hygiene, with scheduled short naps in central disorders",
-      "Wake-promoting agents such as modafinil or armodafinil, or amphetamine-type stimulants, for narcolepsy and idiopathic hypersomnia",
-      "Treat cataplexy with sodium oxybate, pitolisant or noradrenergic-serotonergic antidepressants in narcolepsy type 1",
-      "Safety counselling on driving and occupational hazards while sleepiness remains uncontrolled",
-      "Monitor treatment response with symptom scales and specialist sleep-medicine follow-up"
+    [
+     "Clinical Pitfall",
+     "Failing to exclude chronic insufficient sleep before diagnosing a primary hypersomnia",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for hypersomnia."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "hypersomnia-real-image",
+   "title": "Hypersomnia: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

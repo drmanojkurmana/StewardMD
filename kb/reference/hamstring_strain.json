@@ -1,73 +1,168 @@
 {
-  "id": "hamstring_strain",
-  "name": "Hamstring strain",
-  "aliases": [
-    "hamstring muscle injury",
-    "pulled hamstring"
+ "id": "hamstring_strain",
+ "name": "Hamstring strain",
+ "aliases": [
+  "hamstring muscle injury",
+  "pulled hamstring"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal",
+ "specialty": "Sports medicine / Orthopaedics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Sports medicine references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "One of the commonest sports injuries, typically occurring during high-speed running or sudden stretching of the posterior thigh",
+   "Patients describe a sudden sharp posterior thigh pain, sometimes with a pop, and difficulty continuing activity",
+   "The biceps femoris is the most frequently injured of the hamstring muscles in sprinting-type injuries",
+   "Injuries are graded by severity, and proximal free tendon or bony avulsion injuries behave differently and may need surgery",
+   "A large proximal avulsion, especially with retraction, warrants prompt orthopaedic assessment",
+   "Recurrence is common, so structured rehabilitation and graded return to sport are important"
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal",
-  "specialty": "Sports medicine / Orthopaedics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Sports medicine references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "One of the commonest sports injuries, typically occurring during high-speed running or sudden stretching of the posterior thigh",
-      "Patients describe a sudden sharp posterior thigh pain, sometimes with a pop, and difficulty continuing activity",
-      "The biceps femoris is the most frequently injured of the hamstring muscles in sprinting-type injuries",
-      "Injuries are graded by severity, and proximal free tendon or bony avulsion injuries behave differently and may need surgery",
-      "A large proximal avulsion, especially with retraction, warrants prompt orthopaedic assessment",
-      "Recurrence is common, so structured rehabilitation and graded return to sport are important"
+  "pathophysiology": "Hamstring strain occurs when tensile load on the muscle-tendon unit exceeds its capacity, usually during the late swing phase of sprinting when the hamstrings contract eccentrically while lengthening. This generates high forces that tear muscle fibres, most often at the musculotendinous junction of the biceps femoris. Stretch-type injuries from combined hip flexion and knee extension tend to involve the proximal free tendon. Incomplete rehabilitation, reduced eccentric strength and scar tissue predispose to the high recurrence rate.",
+  "additionalDifferentials": [
+   "Proximal hamstring tendon avulsion",
+   "Ischial apophyseal avulsion in adolescents",
+   "Referred pain from the lumbar spine or sciatic nerve",
+   "Adductor or other thigh muscle strain",
+   "Deep vein thrombosis (for posterior leg pain and swelling)"
+  ],
+  "additionalInvestigations": [
+   "Clinical assessment of site, strength and the mechanism of injury",
+   "Ultrasound or MRI to grade injury and identify tendon or avulsion involvement",
+   "Assessment for proximal avulsion requiring surgical referral",
+   "Evaluation of the lumbar spine if referral is suspected",
+   "Functional testing to guide return to sport"
+  ],
+  "redFlags": [
+   "Proximal avulsion with tendon retraction",
+   "Large haematoma or neurovascular compromise",
+   "Adolescent with suspected ischial apophyseal avulsion",
+   "Posterior leg swelling raising concern for venous thrombosis"
+  ],
+  "prognosis": "Most muscular strains recover with graded rehabilitation, but recovery time varies with grade and site, and recurrence is frequent; proximal avulsions may require surgery for best outcomes.",
+  "pitfalls": [
+   "Missing a proximal tendon avulsion that benefits from early surgery",
+   "Returning to sport before adequate eccentric strength is restored",
+   "Overlooking an adolescent ischial apophyseal avulsion",
+   "Attributing posterior thigh pain to a strain when it is referred from the spine"
+  ],
+  "references": [
+   "Sports medicine references (standard reference)",
+   "Orthopaedic reference texts (standard reference)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Acute care with protection, relative rest, ice, compression and elevation plus simple analgesia",
+   "Progressive rehabilitation emphasising eccentric hamstring strengthening and graded loading",
+   "Structured, criteria-based graded return to sport guided by functional testing to reduce the high recurrence rate",
+   "Ongoing eccentric strength and conditioning programme for secondary prevention",
+   "Prompt orthopaedic referral for a large proximal free-tendon avulsion, especially with retraction, which may require surgical repair",
+   "Assess and address the lumbar spine when referred symptoms are suspected"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "hamstring_strain-pathway",
+   "title": "Hamstring strain: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "One of the commonest sports injuries, typically occurring during high-speed running or sudden stretching of the posterior thigh",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Proximal avulsion with tendon retraction",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Clinical assessment of site, strength and the mechanism of injury, Ultrasound or MRI to grade injury and identify tendon or avulsion involvement, Assessment for proximal avulsion requiring surgical referral"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Acute care with protection, relative rest, ice, compression and elevation plus simple analgesia"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Missing a proximal tendon avulsion that benefits from early surgery"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of hamstring strain."
+  }
+ ],
+ "tables": [
+  {
+   "id": "hamstring_strain-matrix",
+   "title": "Hamstring strain: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "One of the commonest sports injuries, typically occurring during high-speed running or sudden stretching of the posterior thigh",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Hamstring strain occurs when tensile load on the muscle-tendon unit exceeds its capacity, usually during the late swing phase of sprinting when the hamstrings contract eccentrically while lengthening. This generates high forces that tear muscle fibres, most often at the musculotendinous junction of the biceps femoris. Stretch-type injuries from combined hip flexion and knee extension tend to involve the proximal free tendon. Incomplete rehabilitation, reduced eccentric strength and scar tissue predispose to the high recurrence rate.",
-    "additionalDifferentials": [
-      "Proximal hamstring tendon avulsion",
-      "Ischial apophyseal avulsion in adolescents",
-      "Referred pain from the lumbar spine or sciatic nerve",
-      "Adductor or other thigh muscle strain",
-      "Deep vein thrombosis (for posterior leg pain and swelling)"
+    [
+     "Key Investigations",
+     "Clinical assessment of site, strength and the mechanism of injury, Ultrasound or MRI to grade injury and identify tendon or",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Clinical assessment of site, strength and the mechanism of injury",
-      "Ultrasound or MRI to grade injury and identify tendon or avulsion involvement",
-      "Assessment for proximal avulsion requiring surgical referral",
-      "Evaluation of the lumbar spine if referral is suspected",
-      "Functional testing to guide return to sport"
+    [
+     "Primary Differentials",
+     "Proximal hamstring tendon avulsion, Ischial apophyseal avulsion in adolescents, Referred pain from the lumbar spine or sciatic",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Proximal avulsion with tendon retraction",
-      "Large haematoma or neurovascular compromise",
-      "Adolescent with suspected ischial apophyseal avulsion",
-      "Posterior leg swelling raising concern for venous thrombosis"
+    [
+     "Management Strategy",
+     "Acute care with protection, relative rest, ice, compression and elevation plus simple analgesia",
+     "Core treatment modality"
     ],
-    "prognosis": "Most muscular strains recover with graded rehabilitation, but recovery time varies with grade and site, and recurrence is frequent; proximal avulsions may require surgery for best outcomes.",
-    "pitfalls": [
-      "Missing a proximal tendon avulsion that benefits from early surgery",
-      "Returning to sport before adequate eccentric strength is restored",
-      "Overlooking an adolescent ischial apophyseal avulsion",
-      "Attributing posterior thigh pain to a strain when it is referred from the spine"
-    ],
-    "references": [
-      "Sports medicine references (standard reference)",
-      "Orthopaedic reference texts (standard reference)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Acute care with protection, relative rest, ice, compression and elevation plus simple analgesia",
-      "Progressive rehabilitation emphasising eccentric hamstring strengthening and graded loading",
-      "Structured, criteria-based graded return to sport guided by functional testing to reduce the high recurrence rate",
-      "Ongoing eccentric strength and conditioning programme for secondary prevention",
-      "Prompt orthopaedic referral for a large proximal free-tendon avulsion, especially with retraction, which may require surgical repair",
-      "Assess and address the lumbar spine when referred symptoms are suspected"
+    [
+     "Clinical Pitfall",
+     "Missing a proximal tendon avulsion that benefits from early surgery",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for hamstring strain."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "hamstring-strain-real-image",
+   "title": "Hamstring strain: Diagnostic Musculoskeletal Radiograph",
+   "type": "xray",
+   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
+   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
+   "annotations": [
+    {
+     "label": "Cortical Margins",
+     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
+    },
+    {
+     "label": "Trabecular Architecture",
+     "description": "Medullary bone density, lucencies, and subchondral mineralization."
+    },
+    {
+     "label": "Joint Articulation",
+     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+    }
+   ]
+  }
+ ]
 }

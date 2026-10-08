@@ -6,7 +6,23 @@
  "basis": "india",
  "counterpart": "masld-fatty-liver",
  "setting": "Primary care, diabetes clinic, gastroenterology and hepatology outpatients",
- "aliases": ["MASLD", "NAFLD", "fatty liver", "MASH", "NASH", "MetALD", "lean NAFLD", "hepatic steatosis", "FIB-4", "APRI", "FibroScan", "VCTE", "liver stiffness", "saroglitazar", "INASL guidance"],
+ "aliases": [
+  "MASLD",
+  "NAFLD",
+  "fatty liver",
+  "MASH",
+  "NASH",
+  "MetALD",
+  "lean NAFLD",
+  "hepatic steatosis",
+  "FIB-4",
+  "APRI",
+  "FibroScan",
+  "VCTE",
+  "liver stiffness",
+  "saroglitazar",
+  "INASL guidance"
+ ],
  "summary": "MASLD is steatosis with at least one cardiometabolic risk factor (Asian Indian cut-offs) and limited alcohol. Stage fibrosis with FIB-4 or APRI and refer indeterminate or high results for VCTE. Treat with 7 to 10% weight loss and at least 200 minutes a week of exercise; consider vitamin E, pioglitazone or saroglitazar for steatohepatitis with F1 to F3 fibrosis.",
  "sections": [
   {
@@ -76,13 +92,133 @@
   }
  ],
  "drugs": [
-  { "name": "Vitamin E", "dose": "800 IU/day orally in 2 divided doses", "notes": "Non-diabetic adults with steatohepatitis and F1 to F3 fibrosis; course of 2 years." },
-  { "name": "Pioglitazone", "dose": "30 mg orally once daily", "notes": "Steatohepatitis with F1 to F3, with or without diabetes; weight gain, bone loss." },
-  { "name": "Saroglitazar", "dose": "4 mg orally once daily", "notes": "Steatohepatitis with F1 to F3, with or without diabetes; course of 1 year (weak recommendation)." }
+  {
+   "name": "Vitamin E",
+   "dose": "800 IU/day orally in 2 divided doses",
+   "notes": "Non-diabetic adults with steatohepatitis and F1 to F3 fibrosis; course of 2 years."
+  },
+  {
+   "name": "Pioglitazone",
+   "dose": "30 mg orally once daily",
+   "notes": "Steatohepatitis with F1 to F3, with or without diabetes; weight gain, bone loss."
+  },
+  {
+   "name": "Saroglitazar",
+   "dose": "4 mg orally once daily",
+   "notes": "Steatohepatitis with F1 to F3, with or without diabetes; course of 1 year (weak recommendation)."
+  }
  ],
  "sources": [
-  { "org": "Indian National Association for Study of the Liver (INASL)", "title": "INASL guidance paper on nomenclature, diagnosis and treatment of nonalcoholic fatty liver disease (NAFLD). J Clin Exp Hepatol 2023;13(2):273-302", "year": 2023, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10025685/" },
-  { "org": "Indian National Association for Study of the Liver (INASL)", "title": "Adoption of the new nomenclature of MASLD by INASL: implications for the INASL guidance paper on NAFLD. J Clin Exp Hepatol 2025", "year": 2025, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12173646/" }
+  {
+   "org": "Indian National Association for Study of the Liver (INASL)",
+   "title": "INASL guidance paper on nomenclature, diagnosis and treatment of nonalcoholic fatty liver disease (NAFLD). J Clin Exp Hepatol 2023;13(2):273-302",
+   "year": 2023,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10025685/"
+  },
+  {
+   "org": "Indian National Association for Study of the Liver (INASL)",
+   "title": "Adoption of the new nomenclature of MASLD by INASL: implications for the INASL guidance paper on NAFLD. J Clin Exp Hepatol 2025",
+   "year": 2025,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12173646/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "masld-fatty-liver-india-pathway",
+   "title": "Metabolic dysfunction-associated steatotic liver disease (India, INASL) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "MASLD: steatosis (5% or more of hepatocytes, usually seen on ultrasound) plus at least one cardiometabolic risk factor, with alcohol below 30 g/day in men and below 20 g/day in women.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Asian Indian cardiometabolic criteria: BMI 23 kg/m2 or more (25 or more is obesity) or waist above 90 cm (men) or 80 cm (women); fasting glucose 100 mg/dL or more or HbA1c 5.7% or more; BP 130/85 mmHg or more; triglycerides 150 mg/dL or",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Primary and secondary care: calculate FIB-4 and APRI. FIB-4 below 1.3 (APRI below 0.5) makes advanced fibrosis unlikely; FIB-4 1.3 to 2.67 (APRI 0.5 to 2.0) is indeterminate; FIB-4 above 2.67 (APRI above 2.0) suggests advanced fibrosis."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Vitamin E 800 IU/day in 2 divided doses (course of 2 years) for non-diabetic adults with steatohepatitis. Long-term risks include prostate cancer and haemorrhagic stroke."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Repeat non-invasive fibrosis tests periodically to track progression, and review weight, glucose, lipids and BP at each visit."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for metabolic dysfunction-associated steatotic liver disease (india, inasl)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "masld-fatty-liver-india-summary-matrix",
+   "title": "Metabolic dysfunction-associated steatotic liver disease (India, INASL) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "MASLD: steatosis (5% or more of hepatocytes, usually seen on ultrasound) plus at least one cardiometabolic risk factor, with alcohol below",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Vitamin E 800 IU/day in 2 divided doses (course of 2 years) for non-diabetic adults with steatohepatitis. Long-term risks include prostate",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Primary and secondary care: calculate FIB-4 and APRI. FIB-4 below 1.3 (APRI below 0.5) makes advanced fibrosis unlikely; FIB-4 1.3 to 2.67",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Vitamin E: 800 IU/day orally in 2 divided doses",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Using Western BMI cut-offs: Indians develop MASLD at BMI 23 kg/m2 and even below (lean MASLD).",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for metabolic dysfunction-associated steatotic liver disease (india, inasl)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "masld-fatty-liver-india-real-image",
+   "title": "Metabolic dysfunction-associated steatotic liver disease (India, INASL): Diagnostic Abdominal Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
+   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
+   "annotations": [
+    {
+     "label": "Solid Viscera",
+     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
+    },
+    {
+     "label": "Gastrointestinal Tract",
+     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
+    },
+    {
+     "label": "Mesentery & Peritoneum",
+     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+    }
+   ]
+  }
+ ]
 }

@@ -172,5 +172,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "ha3de1d1"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "ild-dx-algo",
+      "title": "Interstitial lung disease: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Diffuse parenchymal lung disease covers >200 heterogeneous conditions; the interstitial space between epithelium and endothelium is the dominant site, but alveolar epithelium and endothelial (airway and vessel) cells also drive",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Acute exacerbation of IPF - acute (85% (p.2265)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Multidisciplinary (MDT) ILD review jointly integrating clinical, radiologic, serologic and pathologic data (pp.2259-2260), Full PFTs with lung volumes plus DLCO; restriction = reduced TLC with symmetric FEV1/FVC reduction,"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Harrison frames ILD pattern recognition rather than a single numeric severity score. ILDs are first split into known cause (occupational e.g. asbestosis/silicosis; drug-induced e.g. amiodarone, nitrofurantoin,"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Attributing all wheezing to asthma - wheeze can reflect heart failure or other airway narrowing; conversely wheeze is uncommon in ILD but does occur in sarcoidosis, HP and eosinophilic GPA (pp.2200, 2262)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for interstitial lung disease."
+    }
+  ],
+  "tables": [
+    {
+      "id": "ild-matrix",
+      "title": "Interstitial lung disease: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Diffuse parenchymal lung disease covers >200 heterogeneous conditions; the interstitial space between epithelium and endothelium",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Multidisciplinary (MDT) ILD review jointly integrating clinical, radiologic, serologic and pathologic data (pp.2259-2260), Full",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Idiopathic pulmonary fibrosis (UIP pattern; basal/subpleural reticulation, honeycombing, traction bronchiectasis) (p.2262),",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Acute exacerbation of IPF - acute (85% (p.2265)",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing all wheezing to asthma - wheeze can reflect heart failure or other airway narrowing; conversely wheeze is uncommon in",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for interstitial lung disease."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "ild-real-image",
+      "title": "Interstitial lung disease: Diagnostic Chest Radiograph",
+      "type": "xray",
+      "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
+      "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
+      "annotations": [
+        {
+          "label": "Parenchyma & Airspaces",
+          "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
+        },
+        {
+          "label": "Bronchovascular Tree",
+          "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
+        },
+        {
+          "label": "Pleural Margins",
+          "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+        }
+      ]
+    }
+  ]
 }

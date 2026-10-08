@@ -1,81 +1,176 @@
 {
-  "id": "pure_motor_lacunar_syndrome",
-  "name": "Pure motor lacunar syndrome",
-  "aliases": [
-    "pure motor hemiparesis",
-    "pure motor stroke",
-    "lacunar pure motor syndrome"
+ "id": "pure_motor_lacunar_syndrome",
+ "name": "Pure motor lacunar syndrome",
+ "aliases": [
+  "pure motor hemiparesis",
+  "pure motor stroke",
+  "lacunar pure motor syndrome"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system / Cerebrovascular",
+ "specialty": "Neurology / Stroke",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Bradley and Daroff Neurology in Clinical Practice",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "The commonest lacunar syndrome, caused by a small deep infarct from occlusion of a single penetrating arteriole",
+   "Classic localisations are the posterior limb of the internal capsule, the corona radiata, and the basis pontis",
+   "Produces contralateral weakness of the face, arm, and leg in roughly equal proportion without sensory, visual, or cortical signs",
+   "The absence of aphasia, neglect, or hemianopia helps distinguish it from a large cortical stroke",
+   "Underlying small-vessel disease is strongly linked to chronic hypertension and diabetes",
+   "A capsular warning syndrome of stuttering, fluctuating hemiparesis may herald a completed pure motor stroke",
+   "Sensation is preserved because the lesion spares the thalamic and lemniscal sensory pathways"
   ],
-  "class": "non_infective",
-  "system": "Nervous system / Cerebrovascular",
-  "specialty": "Neurology / Stroke",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Bradley and Daroff Neurology in Clinical Practice",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "The commonest lacunar syndrome, caused by a small deep infarct from occlusion of a single penetrating arteriole",
-      "Classic localisations are the posterior limb of the internal capsule, the corona radiata, and the basis pontis",
-      "Produces contralateral weakness of the face, arm, and leg in roughly equal proportion without sensory, visual, or cortical signs",
-      "The absence of aphasia, neglect, or hemianopia helps distinguish it from a large cortical stroke",
-      "Underlying small-vessel disease is strongly linked to chronic hypertension and diabetes",
-      "A capsular warning syndrome of stuttering, fluctuating hemiparesis may herald a completed pure motor stroke",
-      "Sensation is preserved because the lesion spares the thalamic and lemniscal sensory pathways"
+  "pathophysiology": "Pure motor lacunar syndrome results from occlusion of a single small penetrating artery, typically due to lipohyalinosis or microatheroma from chronic hypertension and diabetes, producing a small deep infarct (lacune). The lesion interrupts the densely packed corticospinal fibres where they are concentrated in a small volume, most often the posterior limb of the internal capsule, the corona radiata, or the basis pontis. Because these sites carry motor fibres without accompanying sensory, visual, or higher cortical pathways, the deficit is a proportionate contralateral weakness of face, arm, and leg with no sensory loss, hemianopia, or cortical dysfunction, defining the pure motor pattern.",
+  "additionalDifferentials": [
+   "Ataxic hemiparesis (lacunar)",
+   "Sensorimotor lacunar syndrome",
+   "Small cortical infarct or early large-vessel stroke",
+   "Intracerebral haemorrhage in a deep location",
+   "Demyelinating or space-occupying lesion of the internal capsule",
+   "Todd paresis following a focal seizure"
+  ],
+  "additionalInvestigations": [
+   "Diffusion-weighted MRI to detect a small deep infarct not seen on CT",
+   "Assessment of vascular risk factors including blood pressure, glucose, and lipids",
+   "MR or CT angiography and carotid imaging to exclude a large-vessel or embolic source",
+   "ECG and cardiac evaluation to screen for an alternative embolic mechanism",
+   "Blood glucose and metabolic screen to exclude mimics such as hypoglycaemia",
+   "Repeat imaging where the initial scan is normal but symptoms fluctuate"
+  ],
+  "redFlags": [
+   "Stuttering or progressive weakness suggesting a capsular warning syndrome",
+   "Any cortical sign such as aphasia or neglect indicating a non-lacunar mechanism",
+   "Reduced consciousness or headache raising the possibility of haemorrhage",
+   "Rapid deterioration implying a large-vessel occlusion rather than a lacune"
+  ],
+  "prognosis": "Individual lacunar strokes often recover well with rehabilitation, but recurrent lacunes and progressive small-vessel disease can lead to cumulative disability, gait disorder, and vascular cognitive impairment.",
+  "pitfalls": [
+   "Assuming a lacunar mechanism without excluding a proximal large-vessel or cardioembolic source",
+   "Missing subtle cortical signs that would reclassify the stroke",
+   "Overlooking a capsular warning syndrome that may progress to fixed deficit",
+   "Relying on early CT, which frequently fails to show a small acute lacune"
+  ],
+  "references": [
+   "Bradley and Daroff Neurology in Clinical Practice",
+   "Adams and Victor's Principles of Neurology"
+  ],
+  "crossLinks": [
+   "ataxic_hemiparesis",
+   "dysarthria_clumsy_hand_syndrome"
+  ],
+  "management": [
+   "Provide acute stroke unit care with intravenous thrombolysis where the patient is within the treatment window and haemorrhage has been excluded on imaging",
+   "Institute antiplatelet therapy for long-term secondary prevention",
+   "Aggressively manage the underlying small-vessel risk factors, especially hypertension, diabetes and dyslipidaemia",
+   "Treat a capsular warning syndrome of fluctuating hemiparesis as an emergency with intensified antiplatelet therapy and monitoring",
+   "Begin early multidisciplinary rehabilitation to maximise motor recovery",
+   "Exclude a large-vessel or cardioembolic source with vascular imaging, carotid assessment and cardiac rhythm monitoring",
+   "Support smoking cessation and lifestyle change to limit progression of small-vessel disease and vascular cognitive impairment"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "pure_motor_lacunar_syndrome-pathway",
+   "title": "Pure motor lacunar syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "The commonest lacunar syndrome, caused by a small deep infarct from occlusion of a single penetrating arteriole",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Stuttering or progressive weakness suggesting a capsular warning syndrome",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Diffusion-weighted MRI to detect a small deep infarct not seen on CT, Assessment of vascular risk factors including blood pressure, glucose, and lipids, MR or CT angiography and carotid imaging to exclude a large-vessel or"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Provide acute stroke unit care with intravenous thrombolysis where the patient is within the treatment window and haemorrhage has been excluded on imaging"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Assuming a lacunar mechanism without excluding a proximal large-vessel or cardioembolic source"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of pure motor lacunar syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "pure_motor_lacunar_syndrome-matrix",
+   "title": "Pure motor lacunar syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The commonest lacunar syndrome, caused by a small deep infarct from occlusion of a single penetrating arteriole",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Pure motor lacunar syndrome results from occlusion of a single small penetrating artery, typically due to lipohyalinosis or microatheroma from chronic hypertension and diabetes, producing a small deep infarct (lacune). The lesion interrupts the densely packed corticospinal fibres where they are concentrated in a small volume, most often the posterior limb of the internal capsule, the corona radiata, or the basis pontis. Because these sites carry motor fibres without accompanying sensory, visual, or higher cortical pathways, the deficit is a proportionate contralateral weakness of face, arm, and leg with no sensory loss, hemianopia, or cortical dysfunction, defining the pure motor pattern.",
-    "additionalDifferentials": [
-      "Ataxic hemiparesis (lacunar)",
-      "Sensorimotor lacunar syndrome",
-      "Small cortical infarct or early large-vessel stroke",
-      "Intracerebral haemorrhage in a deep location",
-      "Demyelinating or space-occupying lesion of the internal capsule",
-      "Todd paresis following a focal seizure"
+    [
+     "Key Investigations",
+     "Diffusion-weighted MRI to detect a small deep infarct not seen on CT, Assessment of vascular risk factors including blood",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Diffusion-weighted MRI to detect a small deep infarct not seen on CT",
-      "Assessment of vascular risk factors including blood pressure, glucose, and lipids",
-      "MR or CT angiography and carotid imaging to exclude a large-vessel or embolic source",
-      "ECG and cardiac evaluation to screen for an alternative embolic mechanism",
-      "Blood glucose and metabolic screen to exclude mimics such as hypoglycaemia",
-      "Repeat imaging where the initial scan is normal but symptoms fluctuate"
+    [
+     "Primary Differentials",
+     "Ataxic hemiparesis (lacunar), Sensorimotor lacunar syndrome, Small cortical infarct or early large-vessel stroke",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Stuttering or progressive weakness suggesting a capsular warning syndrome",
-      "Any cortical sign such as aphasia or neglect indicating a non-lacunar mechanism",
-      "Reduced consciousness or headache raising the possibility of haemorrhage",
-      "Rapid deterioration implying a large-vessel occlusion rather than a lacune"
+    [
+     "Management Strategy",
+     "Provide acute stroke unit care with intravenous thrombolysis where the patient is within the treatment window and haemorrhage has",
+     "Core treatment modality"
     ],
-    "prognosis": "Individual lacunar strokes often recover well with rehabilitation, but recurrent lacunes and progressive small-vessel disease can lead to cumulative disability, gait disorder, and vascular cognitive impairment.",
-    "pitfalls": [
-      "Assuming a lacunar mechanism without excluding a proximal large-vessel or cardioembolic source",
-      "Missing subtle cortical signs that would reclassify the stroke",
-      "Overlooking a capsular warning syndrome that may progress to fixed deficit",
-      "Relying on early CT, which frequently fails to show a small acute lacune"
-    ],
-    "references": [
-      "Bradley and Daroff Neurology in Clinical Practice",
-      "Adams and Victor's Principles of Neurology"
-    ],
-    "crossLinks": [
-      "ataxic_hemiparesis",
-      "dysarthria_clumsy_hand_syndrome"
-    ],
-    "management": [
-      "Provide acute stroke unit care with intravenous thrombolysis where the patient is within the treatment window and haemorrhage has been excluded on imaging",
-      "Institute antiplatelet therapy for long-term secondary prevention",
-      "Aggressively manage the underlying small-vessel risk factors, especially hypertension, diabetes and dyslipidaemia",
-      "Treat a capsular warning syndrome of fluctuating hemiparesis as an emergency with intensified antiplatelet therapy and monitoring",
-      "Begin early multidisciplinary rehabilitation to maximise motor recovery",
-      "Exclude a large-vessel or cardioembolic source with vascular imaging, carotid assessment and cardiac rhythm monitoring",
-      "Support smoking cessation and lifestyle change to limit progression of small-vessel disease and vascular cognitive impairment"
+    [
+     "Clinical Pitfall",
+     "Assuming a lacunar mechanism without excluding a proximal large-vessel or cardioembolic source",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for pure motor lacunar syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "pure-motor-lacunar-syndrome-real-image",
+   "title": "Pure motor lacunar syndrome: Diagnostic Head Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
+   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
+   "annotations": [
+    {
+     "label": "Cerebral Parenchyma",
+     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+    },
+    {
+     "label": "Extra-Axial Spaces",
+     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+    }
+   ]
+  }
+ ]
 }

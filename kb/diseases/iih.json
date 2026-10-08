@@ -126,5 +126,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "h9dd84612"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "iih-dx-algo",
+      "title": "Idiopathic intracranial hypertension: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Headache is typically generalized, present on awakening, eases through the day, and worsens on lying down (p.117).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Prolonged or spontaneous transient visual obscurations signal more threatening papilloedema (p.229).",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: MRI as the initial study, including MR venography, to look for a mass and to search for dural venous sinus thrombosis or an AV shunt (p.117, p.229)., Lumbar puncture performed while the patient is symptomatic, measuring"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Differentiate from top mimics: Optic disc drusen, which produce pseudopapilloedema and can be mistaken for true papilloedema (p.229)., Obstructive sleep apnoea and poorly controlled hypertension, which also cause morning or nocturnal"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Inaccurate CSF opening-pressure readings at lumbar puncture are a common pitfall (p.229)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for idiopathic intracranial hypertension."
+    }
+  ],
+  "tables": [
+    {
+      "id": "iih-matrix",
+      "title": "Idiopathic intracranial hypertension: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Headache is typically generalized, present on awakening, eases through the day, and worsens on lying down (p.117).",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "MRI as the initial study, including MR venography, to look for a mass and to search for dural venous sinus thrombosis or an AV",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Optic disc drusen, which produce pseudopapilloedema and can be mistaken for true papilloedema (p.229)., Obstructive sleep apnoea",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Prolonged or spontaneous transient visual obscurations signal more threatening papilloedema (p.229).",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Inaccurate CSF opening-pressure readings at lumbar puncture are a common pitfall (p.229).",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for idiopathic intracranial hypertension."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "iih-real-image",
+      "title": "Idiopathic intracranial hypertension: 12-Lead Diagnostic Electrocardiogram",
+      "type": "ecg",
+      "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
+      "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
+      "annotations": [
+        {
+          "label": "Conduction & Axis",
+          "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
+        },
+        {
+          "label": "Repolarization",
+          "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
+        },
+        {
+          "label": "Rhythm & Intervals",
+          "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+        }
+      ]
+    }
+  ]
 }

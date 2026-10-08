@@ -1,79 +1,174 @@
 {
-  "id": "olecranon_bursitis",
-  "name": "Olecranon bursitis",
-  "aliases": [
-    "student's elbow",
-    "miner's elbow",
-    "elbow bursitis",
-    "olecranon bursopathy"
+ "id": "olecranon_bursitis",
+ "name": "Olecranon bursitis",
+ "aliases": [
+  "student's elbow",
+  "miner's elbow",
+  "elbow bursitis",
+  "olecranon bursopathy"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal / Sports & Soft tissue",
+ "specialty": "Sports Medicine / Rheumatology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Brukner and Khan's Clinical Sports Medicine",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Swelling over the point of the elbow from inflammation of the superficial olecranon bursa",
+   "Causes include repetitive pressure and friction, direct trauma, crystal arthropathy such as gout, and infection",
+   "The key clinical task is distinguishing septic from aseptic bursitis",
+   "Warmth, marked erythema, fever, disproportionate pain and an overlying skin breach favour a septic bursa",
+   "Aspiration with fluid sent for cell count, Gram stain, culture and crystal microscopy is central when infection is suspected",
+   "Aseptic bursitis is generally managed conservatively with avoidance of pressure, and aspiration if symptomatic",
+   "Corticosteroid injection is reserved for stubborn aseptic cases and avoided when infection is possible because of complication risk",
+   "Septic bursitis requires antibiotics and sometimes drainage"
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal / Sports & Soft tissue",
-  "specialty": "Sports Medicine / Rheumatology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Brukner and Khan's Clinical Sports Medicine",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Swelling over the point of the elbow from inflammation of the superficial olecranon bursa",
-      "Causes include repetitive pressure and friction, direct trauma, crystal arthropathy such as gout, and infection",
-      "The key clinical task is distinguishing septic from aseptic bursitis",
-      "Warmth, marked erythema, fever, disproportionate pain and an overlying skin breach favour a septic bursa",
-      "Aspiration with fluid sent for cell count, Gram stain, culture and crystal microscopy is central when infection is suspected",
-      "Aseptic bursitis is generally managed conservatively with avoidance of pressure, and aspiration if symptomatic",
-      "Corticosteroid injection is reserved for stubborn aseptic cases and avoided when infection is possible because of complication risk",
-      "Septic bursitis requires antibiotics and sometimes drainage"
+  "pathophysiology": "The olecranon bursa is a superficial sac over the extensor aspect of the elbow that reduces friction between the skin and the olecranon. Repetitive pressure or leaning on the elbow, a direct blow, or systemic conditions such as gout and rheumatoid arthritis can provoke bursal inflammation and effusion. Because it is superficial, the bursa is prone to becoming infected, commonly through a breach in the overlying skin and most often with skin flora such as staphylococci. Distinguishing this septic process from aseptic inflammation is the central diagnostic challenge.",
+  "additionalDifferentials": [
+   "Septic olecranon bursitis",
+   "Gout or pseudogout",
+   "Rheumatoid nodule or rheumatoid arthritis",
+   "Olecranon fracture or other elbow trauma",
+   "Cellulitis of the elbow",
+   "Triceps insertional tendinopathy"
+  ],
+  "additionalInvestigations": [
+   "Bursal aspiration with fluid cell count, Gram stain and culture",
+   "Polarised light microscopy of the aspirate for crystals",
+   "Inflammatory markers, with blood cultures if systemically unwell",
+   "Serum urate where gout is suspected, recognising its limits in the acute phase",
+   "Plain radiographs if fracture, foreign body or bony spur is suspected",
+   "Ultrasound to characterise the fluid collection"
+  ],
+  "redFlags": [
+   "Fever, spreading erythema and disproportionate pain suggesting septic bursitis or cellulitis",
+   "An overlying skin breach or immunosuppression increasing infection risk",
+   "Features of systemic sepsis",
+   "Failure to settle, raising suspicion of infection or underlying disease"
+  ],
+  "prognosis": "Aseptic bursitis usually settles with conservative care, although it can recur with continued pressure; septic bursitis generally resolves with prompt antibiotics and drainage but may need repeated aspiration.",
+  "pitfalls": [
+   "Injecting corticosteroid into a bursa that may be infected",
+   "Failing to aspirate and analyse fluid when infection is possible",
+   "Missing gout as an underlying cause",
+   "Attributing a fracture-related swelling to simple bursitis"
+  ],
+  "references": [
+   "Brukner and Khan's Clinical Sports Medicine",
+   "British Journal of Sports Medicine"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Distinguish septic from aseptic bursitis by bursal aspiration for cell count, Gram stain, culture and crystal microscopy to direct treatment",
+   "Septic bursitis treated with antistaphylococcal antibiotics such as flucloxacillin covering skin flora, together with drainage or aspiration, and incision and drainage or bursectomy for refractory cases",
+   "Aseptic bursitis managed conservatively with avoidance of pressure and leaning, elbow padding, rest, ice and non-steroidal anti-inflammatory drugs",
+   "Aspiration of symptomatic aseptic effusions, generally avoiding corticosteroid injection especially where infection cannot be excluded",
+   "Treat the underlying cause, with urate-lowering and anti-inflammatory therapy for gout and disease control for rheumatoid arthritis",
+   "Follow-up for recurrence with continued pressure, reserving bursectomy for recurrent or chronic disease"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "olecranon_bursitis-pathway",
+   "title": "Olecranon bursitis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Swelling over the point of the elbow from inflammation of the superficial olecranon bursa",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Fever, spreading erythema and disproportionate pain suggesting septic bursitis or cellulitis",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Bursal aspiration with fluid cell count, Gram stain and culture, Polarised light microscopy of the aspirate for crystals, Inflammatory markers, with blood cultures if systemically unwell"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Distinguish septic from aseptic bursitis by bursal aspiration for cell count, Gram stain, culture and crystal microscopy to direct treatment"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Injecting corticosteroid into a bursa that may be infected"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of olecranon bursitis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "olecranon_bursitis-matrix",
+   "title": "Olecranon bursitis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Swelling over the point of the elbow from inflammation of the superficial olecranon bursa",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "The olecranon bursa is a superficial sac over the extensor aspect of the elbow that reduces friction between the skin and the olecranon. Repetitive pressure or leaning on the elbow, a direct blow, or systemic conditions such as gout and rheumatoid arthritis can provoke bursal inflammation and effusion. Because it is superficial, the bursa is prone to becoming infected, commonly through a breach in the overlying skin and most often with skin flora such as staphylococci. Distinguishing this septic process from aseptic inflammation is the central diagnostic challenge.",
-    "additionalDifferentials": [
-      "Septic olecranon bursitis",
-      "Gout or pseudogout",
-      "Rheumatoid nodule or rheumatoid arthritis",
-      "Olecranon fracture or other elbow trauma",
-      "Cellulitis of the elbow",
-      "Triceps insertional tendinopathy"
+    [
+     "Key Investigations",
+     "Bursal aspiration with fluid cell count, Gram stain and culture, Polarised light microscopy of the aspirate for crystals,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Bursal aspiration with fluid cell count, Gram stain and culture",
-      "Polarised light microscopy of the aspirate for crystals",
-      "Inflammatory markers, with blood cultures if systemically unwell",
-      "Serum urate where gout is suspected, recognising its limits in the acute phase",
-      "Plain radiographs if fracture, foreign body or bony spur is suspected",
-      "Ultrasound to characterise the fluid collection"
+    [
+     "Primary Differentials",
+     "Septic olecranon bursitis, Gout or pseudogout, Rheumatoid nodule or rheumatoid arthritis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Fever, spreading erythema and disproportionate pain suggesting septic bursitis or cellulitis",
-      "An overlying skin breach or immunosuppression increasing infection risk",
-      "Features of systemic sepsis",
-      "Failure to settle, raising suspicion of infection or underlying disease"
+    [
+     "Management Strategy",
+     "Distinguish septic from aseptic bursitis by bursal aspiration for cell count, Gram stain, culture and crystal microscopy to",
+     "Core treatment modality"
     ],
-    "prognosis": "Aseptic bursitis usually settles with conservative care, although it can recur with continued pressure; septic bursitis generally resolves with prompt antibiotics and drainage but may need repeated aspiration.",
-    "pitfalls": [
-      "Injecting corticosteroid into a bursa that may be infected",
-      "Failing to aspirate and analyse fluid when infection is possible",
-      "Missing gout as an underlying cause",
-      "Attributing a fracture-related swelling to simple bursitis"
-    ],
-    "references": [
-      "Brukner and Khan's Clinical Sports Medicine",
-      "British Journal of Sports Medicine"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Distinguish septic from aseptic bursitis by bursal aspiration for cell count, Gram stain, culture and crystal microscopy to direct treatment",
-      "Septic bursitis treated with antistaphylococcal antibiotics such as flucloxacillin covering skin flora, together with drainage or aspiration, and incision and drainage or bursectomy for refractory cases",
-      "Aseptic bursitis managed conservatively with avoidance of pressure and leaning, elbow padding, rest, ice and non-steroidal anti-inflammatory drugs",
-      "Aspiration of symptomatic aseptic effusions, generally avoiding corticosteroid injection especially where infection cannot be excluded",
-      "Treat the underlying cause, with urate-lowering and anti-inflammatory therapy for gout and disease control for rheumatoid arthritis",
-      "Follow-up for recurrence with continued pressure, reserving bursectomy for recurrent or chronic disease"
+    [
+     "Clinical Pitfall",
+     "Injecting corticosteroid into a bursa that may be infected",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for olecranon bursitis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "olecranon-bursitis-real-image",
+   "title": "Olecranon bursitis: Diagnostic Musculoskeletal Radiograph",
+   "type": "xray",
+   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
+   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
+   "annotations": [
+    {
+     "label": "Cortical Margins",
+     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
+    },
+    {
+     "label": "Trabecular Architecture",
+     "description": "Medullary bone density, lucencies, and subchondral mineralization."
+    },
+    {
+     "label": "Joint Articulation",
+     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+    }
+   ]
+  }
+ ]
 }

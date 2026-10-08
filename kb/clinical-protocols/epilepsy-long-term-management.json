@@ -151,5 +151,100 @@
  "review": {
   "status": "ai_drafted",
   "compiled": "2026-09-25"
- }
+ },
+ "algorithms": [
+  {
+   "id": "epilepsy-long-term-management-pathway",
+   "title": "Epilepsy: long-term management (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Classify the seizure type (focal, generalised tonic-clonic, absence, myoclonic, tonic or atonic) and the epilepsy syndrome where possible (ILAE); drug choice depends on it, and some drugs worsen generalised epilepsies.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Epilepsy: 2 unprovoked seizures more than 24 hours apart, 1 unprovoked seizure with a recurrence risk of 60% or more, or an epilepsy syndrome (ILAE). For a single seizure see First unprovoked seizure (adult).",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Start antiseizure medication once the diagnosis is confirmed (NICE NG217). If seizures continue despite an optimal dose of a first-line drug, review the diagnosis: syncope, arrhythmia, functional seizures and non-adherence."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Use a single drug whenever possible. Start low and titrate; in older adults use lower doses and slower titration and check interactions."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Review at least yearly, and more often with drug-resistant epilepsy, learning disability, high SUDEP risk, serious comorbidity, or valproate or topiramate in a woman who could become pregnant."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for epilepsy: long-term management (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "epilepsy-long-term-management-summary-matrix",
+   "title": "Epilepsy: long-term management (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Classify the seizure type (focal, generalised tonic-clonic, absence, myoclonic, tonic or atonic) and the epilepsy syndrome where possible",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Use a single drug whenever possible. Start low and titrate; in older adults use lower doses and slower titration and check interactions.",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Lamotrigine: Monotherapy: 25 mg once daily for 2 weeks, then 50 mg once daily for 2 weeks, then increase by up to 50 to 100 mg every 1 to 2",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Giving carbamazepine, oxcarbazepine or phenytoin for absence or myoclonic seizures (for example unrecognised JME) and worsening them.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for epilepsy: long-term management (adult)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "epilepsy-long-term-management-real-image",
+   "title": "Epilepsy: long-term management (adult): Diagnostic Head Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
+   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
+   "annotations": [
+    {
+     "label": "Cerebral Parenchyma",
+     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+    },
+    {
+     "label": "Extra-Axial Spaces",
+     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+    }
+   ]
+  }
+ ]
 }

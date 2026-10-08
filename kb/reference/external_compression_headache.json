@@ -1,72 +1,167 @@
 {
-  "id": "external_compression_headache",
-  "name": "External-pressure headache",
-  "aliases": [
-    "external compression headache",
-    "swim-goggle headache",
-    "helmet headache"
+ "id": "external_compression_headache",
+ "name": "External-pressure headache",
+ "aliases": [
+  "external compression headache",
+  "swim-goggle headache",
+  "helmet headache"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system",
+ "specialty": "Neurology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "International Classification of Headache Disorders (ICHD-3)",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Headache caused by sustained external pressure or traction on the scalp or forehead without skin damage",
+   "The compression form follows a tight band, hat, helmet or swimming goggles pressing on the head",
+   "The traction form follows sustained pulling, as from tightly tied-back hair",
+   "Pain is maximal at the site of pressure or traction and generally resolves after the stimulus is removed",
+   "It can trigger a migraine attack in susceptible individuals",
+   "Management is simply avoiding or relieving the offending external force"
   ],
-  "class": "non_infective",
-  "system": "Nervous system",
-  "specialty": "Neurology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "International Classification of Headache Disorders (ICHD-3)",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Headache caused by sustained external pressure or traction on the scalp or forehead without skin damage",
-      "The compression form follows a tight band, hat, helmet or swimming goggles pressing on the head",
-      "The traction form follows sustained pulling, as from tightly tied-back hair",
-      "Pain is maximal at the site of pressure or traction and generally resolves after the stimulus is removed",
-      "It can trigger a migraine attack in susceptible individuals",
-      "Management is simply avoiding or relieving the offending external force"
+  "pathophysiology": "External-pressure headache results from continuous mechanical stimulation of cutaneous nerves and pericranial structures by pressure or traction on the scalp, activating trigeminal and cervical sensory afferents to produce localised pain. It is a benign response to an external physical stimulus rather than intrinsic intracranial pathology, although in migraine-prone individuals the peripheral input can act as a trigger for a full migraine attack.",
+  "additionalDifferentials": [
+   "Tension-type headache",
+   "Migraine triggered by external pressure",
+   "Occipital neuralgia",
+   "Cervicogenic headache",
+   "Contact dermatitis or local skin pathology causing pain"
+  ],
+  "additionalInvestigations": [
+   "Clinical diagnosis from the clear relationship to external pressure or traction",
+   "Examination confirming pain localised to the compressed or tractioned site",
+   "Investigation only if features are atypical or persist after removing the stimulus"
+  ],
+  "redFlags": [
+   "Headache persisting well beyond removal of the pressure or traction",
+   "Focal neurological signs",
+   "Associated skin breakdown or infection at the site",
+   "A new or progressive headache pattern unrelated to external force"
+  ],
+  "prognosis": "The condition is benign and resolves once the external pressure or traction is removed; recurrence is easily prevented by avoiding the trigger.",
+  "pitfalls": [
+   "Overlooking a simple mechanical cause and pursuing unnecessary investigation",
+   "Confusing it with tension-type or cervicogenic headache",
+   "Missing that it has triggered a migraine in a susceptible person",
+   "Ignoring recurrent occupational causes such as protective headgear"
+  ],
+  "references": [
+   "International Classification of Headache Disorders (ICHD-3)",
+   "Bradley and Daroff Neurology in Clinical Practice"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Remove or loosen the offending external force, such as a tight hat, helmet, headband or swimming goggles, which relieves the pain",
+   "Relieve traction headache by undoing tightly tied-back hair",
+   "Prevent recurrence by adjusting headwear and hairstyle to avoid sustained scalp pressure or traction",
+   "Reassure the patient about the benign, self-limiting nature of the headache",
+   "In migraine-prone individuals, avoid the external trigger to prevent it precipitating a full migraine attack",
+   "Investigate further only if features are atypical or the headache persists after the stimulus is removed"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "external_compression_headache-pathway",
+   "title": "External-pressure headache: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Headache caused by sustained external pressure or traction on the scalp or forehead without skin damage",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Headache persisting well beyond removal of the pressure or traction",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Clinical diagnosis from the clear relationship to external pressure or traction, Examination confirming pain localised to the compressed or tractioned site, Investigation only if features are atypical or persist after"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Remove or loosen the offending external force, such as a tight hat, helmet, headband or swimming goggles, which relieves the pain"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Overlooking a simple mechanical cause and pursuing unnecessary investigation"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of external-pressure headache."
+  }
+ ],
+ "tables": [
+  {
+   "id": "external_compression_headache-matrix",
+   "title": "External-pressure headache: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Headache caused by sustained external pressure or traction on the scalp or forehead without skin damage",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "External-pressure headache results from continuous mechanical stimulation of cutaneous nerves and pericranial structures by pressure or traction on the scalp, activating trigeminal and cervical sensory afferents to produce localised pain. It is a benign response to an external physical stimulus rather than intrinsic intracranial pathology, although in migraine-prone individuals the peripheral input can act as a trigger for a full migraine attack.",
-    "additionalDifferentials": [
-      "Tension-type headache",
-      "Migraine triggered by external pressure",
-      "Occipital neuralgia",
-      "Cervicogenic headache",
-      "Contact dermatitis or local skin pathology causing pain"
+    [
+     "Key Investigations",
+     "Clinical diagnosis from the clear relationship to external pressure or traction, Examination confirming pain localised to the",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Clinical diagnosis from the clear relationship to external pressure or traction",
-      "Examination confirming pain localised to the compressed or tractioned site",
-      "Investigation only if features are atypical or persist after removing the stimulus"
+    [
+     "Primary Differentials",
+     "Tension-type headache, Migraine triggered by external pressure, Occipital neuralgia",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Headache persisting well beyond removal of the pressure or traction",
-      "Focal neurological signs",
-      "Associated skin breakdown or infection at the site",
-      "A new or progressive headache pattern unrelated to external force"
+    [
+     "Management Strategy",
+     "Remove or loosen the offending external force, such as a tight hat, helmet, headband or swimming goggles, which relieves the pain",
+     "Core treatment modality"
     ],
-    "prognosis": "The condition is benign and resolves once the external pressure or traction is removed; recurrence is easily prevented by avoiding the trigger.",
-    "pitfalls": [
-      "Overlooking a simple mechanical cause and pursuing unnecessary investigation",
-      "Confusing it with tension-type or cervicogenic headache",
-      "Missing that it has triggered a migraine in a susceptible person",
-      "Ignoring recurrent occupational causes such as protective headgear"
-    ],
-    "references": [
-      "International Classification of Headache Disorders (ICHD-3)",
-      "Bradley and Daroff Neurology in Clinical Practice"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Remove or loosen the offending external force, such as a tight hat, helmet, headband or swimming goggles, which relieves the pain",
-      "Relieve traction headache by undoing tightly tied-back hair",
-      "Prevent recurrence by adjusting headwear and hairstyle to avoid sustained scalp pressure or traction",
-      "Reassure the patient about the benign, self-limiting nature of the headache",
-      "In migraine-prone individuals, avoid the external trigger to prevent it precipitating a full migraine attack",
-      "Investigate further only if features are atypical or the headache persists after the stimulus is removed"
+    [
+     "Clinical Pitfall",
+     "Overlooking a simple mechanical cause and pursuing unnecessary investigation",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for external-pressure headache."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "external-compression-headache-real-image",
+   "title": "External-pressure headache: Diagnostic Head Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
+   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
+   "annotations": [
+    {
+     "label": "Cerebral Parenchyma",
+     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+    },
+    {
+     "label": "Extra-Axial Spaces",
+     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+    }
+   ]
+  }
+ ]
 }

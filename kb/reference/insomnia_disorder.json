@@ -1,77 +1,172 @@
 {
-  "id": "insomnia_disorder",
-  "name": "Insomnia disorder",
-  "aliases": [
-    "chronic insomnia",
-    "primary insomnia"
+ "id": "insomnia_disorder",
+ "name": "Insomnia disorder",
+ "aliases": [
+  "chronic insomnia",
+  "primary insomnia"
+ ],
+ "class": "non_infective",
+ "system": "Psychiatry / Mental health",
+ "specialty": "Psychiatry",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "The disorder is dissatisfaction with sleep quantity or quality, with difficulty initiating sleep, maintaining sleep, or early morning waking, causing significant daytime distress or impairment",
+   "For a chronic diagnosis the difficulty is present several nights per week over an extended period, typically at least three months, despite adequate opportunity to sleep",
+   "Daytime consequences such as fatigue, poor concentration, irritability, and impaired performance are integral to the diagnosis, not merely the nocturnal complaint",
+   "A thorough evaluation should exclude other sleep disorders such as obstructive sleep apnoea and restless legs, and identify medical, psychiatric, and substance-related contributors",
+   "Cognitive behavioural therapy for insomnia is the recommended first-line treatment and is more durable than hypnotic medication",
+   "Sleep hygiene alone is usually insufficient, but stimulus control, sleep restriction, and cognitive techniques are the effective components of behavioural treatment",
+   "Hypnotic medications may help in the short term but carry risks of tolerance, dependence, daytime sedation, and rebound insomnia, so long-term use is discouraged",
+   "Insomnia is bidirectionally linked with depression and anxiety, and treating it can improve mood and reduce relapse risk"
   ],
-  "class": "non_infective",
-  "system": "Psychiatry / Mental health",
-  "specialty": "Psychiatry",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "The disorder is dissatisfaction with sleep quantity or quality, with difficulty initiating sleep, maintaining sleep, or early morning waking, causing significant daytime distress or impairment",
-      "For a chronic diagnosis the difficulty is present several nights per week over an extended period, typically at least three months, despite adequate opportunity to sleep",
-      "Daytime consequences such as fatigue, poor concentration, irritability, and impaired performance are integral to the diagnosis, not merely the nocturnal complaint",
-      "A thorough evaluation should exclude other sleep disorders such as obstructive sleep apnoea and restless legs, and identify medical, psychiatric, and substance-related contributors",
-      "Cognitive behavioural therapy for insomnia is the recommended first-line treatment and is more durable than hypnotic medication",
-      "Sleep hygiene alone is usually insufficient, but stimulus control, sleep restriction, and cognitive techniques are the effective components of behavioural treatment",
-      "Hypnotic medications may help in the short term but carry risks of tolerance, dependence, daytime sedation, and rebound insomnia, so long-term use is discouraged",
-      "Insomnia is bidirectionally linked with depression and anxiety, and treating it can improve mood and reduce relapse risk"
+  "pathophysiology": "Insomnia disorder is conceptualised through a model of hyperarousal, in which heightened cognitive, emotional, and physiological arousal impairs the normal sleep process. Predisposing traits, precipitating stressors, and perpetuating behaviours and beliefs (such as excessive time in bed and worry about sleep) interact, with dysregulation of arousal and sleep-wake regulatory systems maintaining the condition over time.",
+  "additionalDifferentials": [
+   "Obstructive sleep apnoea",
+   "Restless legs syndrome and periodic limb movement disorder",
+   "Circadian rhythm sleep-wake disorders",
+   "Depressive and anxiety disorders with sleep disturbance",
+   "Substance or medication effects, including caffeine, alcohol, and stimulants",
+   "Medical conditions causing nocturnal symptoms such as pain or nocturia"
+  ],
+  "additionalInvestigations": [
+   "Detailed sleep history and sleep diary over one to two weeks",
+   "Screening questionnaires for sleep apnoea and other sleep disorders",
+   "Assessment for comorbid depression, anxiety, and substance use",
+   "Review of medications and stimulant intake",
+   "Polysomnography reserved for suspected apnoea, periodic limb movements, or atypical features"
+  ],
+  "redFlags": [
+   "Excessive daytime sleepiness with witnessed apnoeas suggesting untreated sleep apnoea",
+   "Suicidal ideation associated with comorbid depression",
+   "Escalating hypnotic or alcohol use to induce sleep",
+   "Severe sleep deprivation impairing safety, such as while driving"
+  ],
+  "prognosis": "Insomnia disorder often becomes chronic and relapsing, particularly when perpetuating behaviours and beliefs are established, but cognitive behavioural therapy produces durable improvement in most patients. Prognosis is better with early behavioural treatment and management of comorbidities, and worse with long-term hypnotic reliance and untreated psychiatric or medical contributors.",
+  "pitfalls": [
+   "Reaching for hypnotics as first-line rather than offering cognitive behavioural therapy",
+   "Relying on sleep hygiene advice alone, which is rarely sufficient",
+   "Missing obstructive sleep apnoea or restless legs as the true cause",
+   "Overlooking caffeine, alcohol, and stimulant contributions",
+   "Failing to recognise and treat comorbid depression or anxiety"
+  ],
+  "references": [
+   "Kaplan & Sadock's Synopsis of Psychiatry",
+   "DSM-5-TR"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Offer cognitive behavioural therapy for insomnia as first-line treatment, incorporating stimulus control, sleep restriction and cognitive restructuring",
+   "Reserve pharmacotherapy for short-term or adjunctive use: non-benzodiazepine hypnotics (Z-drugs), melatonin or melatonin-receptor agonists, dual orexin-receptor antagonists, or sedating antidepressants",
+   "Identify and treat comorbid contributors such as depression, anxiety, chronic pain and substance use, and address coexisting sleep disorders like obstructive sleep apnoea and restless legs",
+   "Review and rationalise medications and stimulant intake that disturb sleep",
+   "Reinforce behavioural strategies and sleep hygiene while avoiding reliance on hygiene advice alone",
+   "Refer to sleep medicine for diagnostic uncertainty, treatment-resistant insomnia or suspected primary sleep disorders requiring polysomnography"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "insomnia_disorder-pathway",
+   "title": "Insomnia disorder: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "The disorder is dissatisfaction with sleep quantity or quality, with difficulty initiating sleep, maintaining sleep, or early morning waking, causing significant daytime distress or impairment",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Excessive daytime sleepiness with witnessed apnoeas suggesting untreated sleep apnoea",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Detailed sleep history and sleep diary over one to two weeks, Screening questionnaires for sleep apnoea and other sleep disorders, Assessment for comorbid depression, anxiety, and substance use"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Offer cognitive behavioural therapy for insomnia as first-line treatment, incorporating stimulus control, sleep restriction and cognitive restructuring"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Reaching for hypnotics as first-line rather than offering cognitive behavioural therapy"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of insomnia disorder."
+  }
+ ],
+ "tables": [
+  {
+   "id": "insomnia_disorder-matrix",
+   "title": "Insomnia disorder: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The disorder is dissatisfaction with sleep quantity or quality, with difficulty initiating sleep, maintaining sleep, or early",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Insomnia disorder is conceptualised through a model of hyperarousal, in which heightened cognitive, emotional, and physiological arousal impairs the normal sleep process. Predisposing traits, precipitating stressors, and perpetuating behaviours and beliefs (such as excessive time in bed and worry about sleep) interact, with dysregulation of arousal and sleep-wake regulatory systems maintaining the condition over time.",
-    "additionalDifferentials": [
-      "Obstructive sleep apnoea",
-      "Restless legs syndrome and periodic limb movement disorder",
-      "Circadian rhythm sleep-wake disorders",
-      "Depressive and anxiety disorders with sleep disturbance",
-      "Substance or medication effects, including caffeine, alcohol, and stimulants",
-      "Medical conditions causing nocturnal symptoms such as pain or nocturia"
+    [
+     "Key Investigations",
+     "Detailed sleep history and sleep diary over one to two weeks, Screening questionnaires for sleep apnoea and other sleep",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Detailed sleep history and sleep diary over one to two weeks",
-      "Screening questionnaires for sleep apnoea and other sleep disorders",
-      "Assessment for comorbid depression, anxiety, and substance use",
-      "Review of medications and stimulant intake",
-      "Polysomnography reserved for suspected apnoea, periodic limb movements, or atypical features"
+    [
+     "Primary Differentials",
+     "Obstructive sleep apnoea, Restless legs syndrome and periodic limb movement disorder, Circadian rhythm sleep-wake disorders",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Excessive daytime sleepiness with witnessed apnoeas suggesting untreated sleep apnoea",
-      "Suicidal ideation associated with comorbid depression",
-      "Escalating hypnotic or alcohol use to induce sleep",
-      "Severe sleep deprivation impairing safety, such as while driving"
+    [
+     "Management Strategy",
+     "Offer cognitive behavioural therapy for insomnia as first-line treatment, incorporating stimulus control, sleep restriction and",
+     "Core treatment modality"
     ],
-    "prognosis": "Insomnia disorder often becomes chronic and relapsing, particularly when perpetuating behaviours and beliefs are established, but cognitive behavioural therapy produces durable improvement in most patients. Prognosis is better with early behavioural treatment and management of comorbidities, and worse with long-term hypnotic reliance and untreated psychiatric or medical contributors.",
-    "pitfalls": [
-      "Reaching for hypnotics as first-line rather than offering cognitive behavioural therapy",
-      "Relying on sleep hygiene advice alone, which is rarely sufficient",
-      "Missing obstructive sleep apnoea or restless legs as the true cause",
-      "Overlooking caffeine, alcohol, and stimulant contributions",
-      "Failing to recognise and treat comorbid depression or anxiety"
-    ],
-    "references": [
-      "Kaplan & Sadock's Synopsis of Psychiatry",
-      "DSM-5-TR"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Offer cognitive behavioural therapy for insomnia as first-line treatment, incorporating stimulus control, sleep restriction and cognitive restructuring",
-      "Reserve pharmacotherapy for short-term or adjunctive use: non-benzodiazepine hypnotics (Z-drugs), melatonin or melatonin-receptor agonists, dual orexin-receptor antagonists, or sedating antidepressants",
-      "Identify and treat comorbid contributors such as depression, anxiety, chronic pain and substance use, and address coexisting sleep disorders like obstructive sleep apnoea and restless legs",
-      "Review and rationalise medications and stimulant intake that disturb sleep",
-      "Reinforce behavioural strategies and sleep hygiene while avoiding reliance on hygiene advice alone",
-      "Refer to sleep medicine for diagnostic uncertainty, treatment-resistant insomnia or suspected primary sleep disorders requiring polysomnography"
+    [
+     "Clinical Pitfall",
+     "Reaching for hypnotics as first-line rather than offering cognitive behavioural therapy",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for insomnia disorder."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "insomnia-disorder-real-image",
+   "title": "Insomnia disorder: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

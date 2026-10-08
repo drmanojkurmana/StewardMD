@@ -1,78 +1,173 @@
 {
-  "id": "transverse_myelitis",
-  "name": "Transverse myelitis",
-  "aliases": [
-    "acute transverse myelitis",
-    "ATM",
-    "transverse myelopathy"
+ "id": "transverse_myelitis",
+ "name": "Transverse myelitis",
+ "aliases": [
+  "acute transverse myelitis",
+  "ATM",
+  "transverse myelopathy"
+ ],
+ "class": "non_infective",
+ "system": "Neurology",
+ "specialty": "Neurology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Harrison's Principles of Internal Medicine / Bradley's Neurology in Clinical Practice",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "An acute or subacute inflammatory myelopathy producing bilateral motor, sensory, and autonomic dysfunction below the level of the lesion",
+   "A clearly demarcated sensory level, with bladder and bowel involvement, is a key clue to a spinal cord process rather than a peripheral one",
+   "Rapidly evolving cord compression must be excluded urgently with imaging, because it may be surgically treatable and demands emergency intervention",
+   "Longitudinally extensive lesions spanning three or more vertebral segments should raise suspicion of neuromyelitis optica spectrum disorder and prompt aquaporin-4 antibody testing",
+   "It may be idiopathic/post-infectious or the presenting event of multiple sclerosis, NMOSD, MOG-associated disease, or a systemic autoimmune disorder",
+   "MRI of the cord with contrast and cerebrospinal fluid analysis are central to diagnosis and to identifying the underlying cause",
+   "High-dose corticosteroids are the usual first-line treatment, with plasma exchange considered for severe or steroid-refractory cases",
+   "Identifying whether the episode is monophasic or part of a relapsing disorder guides long-term immunotherapy"
   ],
-  "class": "non_infective",
-  "system": "Neurology",
-  "specialty": "Neurology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Harrison's Principles of Internal Medicine / Bradley's Neurology in Clinical Practice",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "An acute or subacute inflammatory myelopathy producing bilateral motor, sensory, and autonomic dysfunction below the level of the lesion",
-      "A clearly demarcated sensory level, with bladder and bowel involvement, is a key clue to a spinal cord process rather than a peripheral one",
-      "Rapidly evolving cord compression must be excluded urgently with imaging, because it may be surgically treatable and demands emergency intervention",
-      "Longitudinally extensive lesions spanning three or more vertebral segments should raise suspicion of neuromyelitis optica spectrum disorder and prompt aquaporin-4 antibody testing",
-      "It may be idiopathic/post-infectious or the presenting event of multiple sclerosis, NMOSD, MOG-associated disease, or a systemic autoimmune disorder",
-      "MRI of the cord with contrast and cerebrospinal fluid analysis are central to diagnosis and to identifying the underlying cause",
-      "High-dose corticosteroids are the usual first-line treatment, with plasma exchange considered for severe or steroid-refractory cases",
-      "Identifying whether the episode is monophasic or part of a relapsing disorder guides long-term immunotherapy"
+  "pathophysiology": "Transverse myelitis is focal inflammation of the spinal cord causing demyelination and axonal injury across one or more segments, disrupting ascending sensory and descending motor tracts as well as autonomic pathways. It may follow infection or vaccination as a para- or post-infectious immune response, arise from autoimmune demyelinating disease such as multiple sclerosis, NMOSD, or MOG antibody disease, or occur with systemic autoimmune conditions. Breakdown of the blood-cord barrier and inflammatory cell infiltration produce cord swelling and dysfunction.",
+  "additionalDifferentials": [
+   "Compressive myelopathy from disc, tumour, abscess, or haematoma",
+   "Spinal cord infarction (anterior spinal artery syndrome)",
+   "Multiple sclerosis and NMOSD",
+   "Infective myelitis (e.g. viral)",
+   "Nutritional or metabolic myelopathy such as B12 deficiency",
+   "Guillain-Barre syndrome when presenting with ascending weakness"
+  ],
+  "additionalInvestigations": [
+   "Urgent MRI of the spine with and without contrast to exclude compression and define the inflammatory lesion",
+   "MRI of the brain to assess for demyelinating lesions suggesting multiple sclerosis",
+   "Cerebrospinal fluid analysis including cell count, protein, oligoclonal bands, and infective studies",
+   "Serum aquaporin-4 and MOG antibodies",
+   "Autoimmune and infective serology, and vitamin B12, as guided by the clinical picture"
+  ],
+  "redFlags": [
+   "Rapidly progressive weakness with a sensory level and sphincter disturbance requiring emergency MRI to exclude compressive cord lesions amenable to surgery",
+   "Ascending deficit approaching the cervical cord threatening respiratory function",
+   "New bladder or bowel dysfunction and saddle sensory loss indicating significant cord involvement",
+   "Fever and back pain with neurological deficit suggesting epidural abscess as a surgical emergency"
+  ],
+  "prognosis": "Outcome is variable and depends on cause, severity, and rapidity of onset. Some patients recover substantially, while others are left with significant residual deficits. Recurrent disease and poorer recovery are more typical of NMOSD and longitudinally extensive lesions, underscoring the importance of accurate aetiological diagnosis and timely immunotherapy.",
+  "pitfalls": [
+   "Delaying MRI and missing a compressive lesion that requires emergency decompression",
+   "Failing to test for aquaporin-4 and MOG antibodies and misclassifying the disorder",
+   "Attributing the presentation to a peripheral cause and overlooking the sensory level and cord signs",
+   "Not investigating for an infective cause before or alongside immunosuppression when indicated"
+  ],
+  "references": [
+   "Harrison's Principles of Internal Medicine, 22e",
+   "Bradley's Neurology in Clinical Practice"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Exclude compressive myelopathy urgently with spinal MRI, as it may be a surgically treatable emergency",
+   "Treat the acute inflammatory attack with high-dose intravenous corticosteroids (methylprednisolone)",
+   "Escalate to plasma exchange in steroid-refractory or severe cases",
+   "Direct treatment at the underlying cause: maintenance immunosuppression for aquaporin-4-positive NMOSD and MOG-antibody disease, disease-modifying therapy for multiple sclerosis, and specific treatment of any infective or systemic autoimmune trigger",
+   "Supportive care for the neurogenic bladder and bowel, pressure-area protection, venous thromboembolism prophylaxis, and management of neuropathic pain and spasticity",
+   "Early multidisciplinary neurorehabilitation with physiotherapy and occupational therapy",
+   "Long-term relapse-prevention immunotherapy and neurology follow-up for relapsing disorders such as NMOSD"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "transverse_myelitis-pathway",
+   "title": "Transverse myelitis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "An acute or subacute inflammatory myelopathy producing bilateral motor, sensory, and autonomic dysfunction below the level of the lesion",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapidly progressive weakness with a sensory level and sphincter disturbance requiring emergency MRI to exclude compressive cord lesions amenable to surgery",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Urgent MRI of the spine with and without contrast to exclude compression and define the inflammatory lesion, MRI of the brain to assess for demyelinating lesions suggesting multiple sclerosis, Cerebrospinal fluid analysis"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Exclude compressive myelopathy urgently with spinal MRI, as it may be a surgically treatable emergency"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Delaying MRI and missing a compressive lesion that requires emergency decompression"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of transverse myelitis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "transverse_myelitis-matrix",
+   "title": "Transverse myelitis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "An acute or subacute inflammatory myelopathy producing bilateral motor, sensory, and autonomic dysfunction below the level of the",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Transverse myelitis is focal inflammation of the spinal cord causing demyelination and axonal injury across one or more segments, disrupting ascending sensory and descending motor tracts as well as autonomic pathways. It may follow infection or vaccination as a para- or post-infectious immune response, arise from autoimmune demyelinating disease such as multiple sclerosis, NMOSD, or MOG antibody disease, or occur with systemic autoimmune conditions. Breakdown of the blood-cord barrier and inflammatory cell infiltration produce cord swelling and dysfunction.",
-    "additionalDifferentials": [
-      "Compressive myelopathy from disc, tumour, abscess, or haematoma",
-      "Spinal cord infarction (anterior spinal artery syndrome)",
-      "Multiple sclerosis and NMOSD",
-      "Infective myelitis (e.g. viral)",
-      "Nutritional or metabolic myelopathy such as B12 deficiency",
-      "Guillain-Barre syndrome when presenting with ascending weakness"
+    [
+     "Key Investigations",
+     "Urgent MRI of the spine with and without contrast to exclude compression and define the inflammatory lesion, MRI of the brain to",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Urgent MRI of the spine with and without contrast to exclude compression and define the inflammatory lesion",
-      "MRI of the brain to assess for demyelinating lesions suggesting multiple sclerosis",
-      "Cerebrospinal fluid analysis including cell count, protein, oligoclonal bands, and infective studies",
-      "Serum aquaporin-4 and MOG antibodies",
-      "Autoimmune and infective serology, and vitamin B12, as guided by the clinical picture"
+    [
+     "Primary Differentials",
+     "Compressive myelopathy from disc, tumour, abscess, or haematoma, Spinal cord infarction (anterior spinal artery syndrome),",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rapidly progressive weakness with a sensory level and sphincter disturbance requiring emergency MRI to exclude compressive cord lesions amenable to surgery",
-      "Ascending deficit approaching the cervical cord threatening respiratory function",
-      "New bladder or bowel dysfunction and saddle sensory loss indicating significant cord involvement",
-      "Fever and back pain with neurological deficit suggesting epidural abscess as a surgical emergency"
+    [
+     "Management Strategy",
+     "Exclude compressive myelopathy urgently with spinal MRI, as it may be a surgically treatable emergency",
+     "Core treatment modality"
     ],
-    "prognosis": "Outcome is variable and depends on cause, severity, and rapidity of onset. Some patients recover substantially, while others are left with significant residual deficits. Recurrent disease and poorer recovery are more typical of NMOSD and longitudinally extensive lesions, underscoring the importance of accurate aetiological diagnosis and timely immunotherapy.",
-    "pitfalls": [
-      "Delaying MRI and missing a compressive lesion that requires emergency decompression",
-      "Failing to test for aquaporin-4 and MOG antibodies and misclassifying the disorder",
-      "Attributing the presentation to a peripheral cause and overlooking the sensory level and cord signs",
-      "Not investigating for an infective cause before or alongside immunosuppression when indicated"
-    ],
-    "references": [
-      "Harrison's Principles of Internal Medicine, 22e",
-      "Bradley's Neurology in Clinical Practice"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Exclude compressive myelopathy urgently with spinal MRI, as it may be a surgically treatable emergency",
-      "Treat the acute inflammatory attack with high-dose intravenous corticosteroids (methylprednisolone)",
-      "Escalate to plasma exchange in steroid-refractory or severe cases",
-      "Direct treatment at the underlying cause: maintenance immunosuppression for aquaporin-4-positive NMOSD and MOG-antibody disease, disease-modifying therapy for multiple sclerosis, and specific treatment of any infective or systemic autoimmune trigger",
-      "Supportive care for the neurogenic bladder and bowel, pressure-area protection, venous thromboembolism prophylaxis, and management of neuropathic pain and spasticity",
-      "Early multidisciplinary neurorehabilitation with physiotherapy and occupational therapy",
-      "Long-term relapse-prevention immunotherapy and neurology follow-up for relapsing disorders such as NMOSD"
+    [
+     "Clinical Pitfall",
+     "Delaying MRI and missing a compressive lesion that requires emergency decompression",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for transverse myelitis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "transverse-myelitis-real-image",
+   "title": "Transverse myelitis: Diagnostic Head Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
+   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
+   "annotations": [
+    {
+     "label": "Cerebral Parenchyma",
+     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+    },
+    {
+     "label": "Extra-Axial Spaces",
+     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+    }
+   ]
+  }
+ ]
 }

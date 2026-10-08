@@ -1,84 +1,179 @@
 {
-  "id": "adult_failure_to_thrive",
-  "name": "adult failure to thrive",
-  "aliases": [
-    "geriatric failure to thrive",
-    "adult FTT"
+ "id": "adult_failure_to_thrive",
+ "name": "adult failure to thrive",
+ "aliases": [
+  "geriatric failure to thrive",
+  "adult FTT"
+ ],
+ "class": "non_infective",
+ "system": "Multisystem",
+ "specialty": "Geriatric Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Hazzard's Geriatric Medicine and Gerontology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "It is a descriptive syndrome, not a diagnosis, so always search for reversible contributors before accepting it as end-stage decline.",
+   "Four interacting domains dominate: impaired physical function, malnutrition, depression and cognitive impairment.",
+   "Depression is among the most common and most treatable drivers, so screen every patient formally.",
+   "Polypharmacy and drug side effects such as anorexia, nausea, sedation and postural hypotension are frequently reversible causes.",
+   "Exclude occult malignancy, chronic infection such as tuberculosis or endocarditis, thyroid disease and adrenal insufficiency.",
+   "Low serum albumin, low cholesterol and lymphopenia are recognised markers of poor prognosis.",
+   "Dysphagia, poor dentition, social isolation and financial hardship limiting food access are commonly missed contributors.",
+   "Distinguish the syndrome from normal ageing and from an established terminal illness trajectory where the goal shifts to comfort."
   ],
-  "class": "non_infective",
-  "system": "Multisystem",
-  "specialty": "Geriatric Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Hazzard's Geriatric Medicine and Gerontology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "It is a descriptive syndrome, not a diagnosis, so always search for reversible contributors before accepting it as end-stage decline.",
-      "Four interacting domains dominate: impaired physical function, malnutrition, depression and cognitive impairment.",
-      "Depression is among the most common and most treatable drivers, so screen every patient formally.",
-      "Polypharmacy and drug side effects such as anorexia, nausea, sedation and postural hypotension are frequently reversible causes.",
-      "Exclude occult malignancy, chronic infection such as tuberculosis or endocarditis, thyroid disease and adrenal insufficiency.",
-      "Low serum albumin, low cholesterol and lymphopenia are recognised markers of poor prognosis.",
-      "Dysphagia, poor dentition, social isolation and financial hardship limiting food access are commonly missed contributors.",
-      "Distinguish the syndrome from normal ageing and from an established terminal illness trajectory where the goal shifts to comfort."
+  "pathophysiology": "Adult failure to thrive is a multifactorial state of decline in older people characterised by weight loss, reduced appetite, poor nutrition and physical inactivity, often accompanied by dehydration, depressive symptoms and impaired immunity. It represents a final common pathway of accumulated chronic disease, frailty and sarcopenia, driven in part by a pro-inflammatory cytokine milieu with raised interleukin-6 and tumour necrosis factor that promotes catabolism and anorexia. Age-related dysregulation of appetite signalling through leptin and ghrelin, neuroendocrine changes and reduced physiological reserve interact with depression, cognitive impairment and social adversity to accelerate functional and nutritional loss, creating a self-reinforcing cycle of deconditioning.",
+  "additionalDifferentials": [
+   "major depressive disorder",
+   "occult malignancy",
+   "thyroid dysfunction (hyper- or hypothyroidism)",
+   "adrenal insufficiency",
+   "chronic infection such as tuberculosis or infective endocarditis",
+   "advanced cardiac, renal or hepatic failure",
+   "dementia or delirium"
+  ],
+  "additionalInvestigations": [
+   "comprehensive geriatric assessment",
+   "cognitive screening and validated depression screening",
+   "structured nutritional assessment with albumin and prealbumin",
+   "full blood count, urea and electrolytes, calcium and glucose",
+   "thyroid function and a morning cortisol",
+   "inflammatory markers and targeted malignancy screening or imaging as indicated",
+   "medication review and swallowing assessment"
+  ],
+  "redFlags": [
+   "rapid progressive weight loss",
+   "new focal neurology or lymphadenopathy suggesting malignancy",
+   "severe dehydration or electrolyte disturbance",
+   "suicidal ideation accompanying depression",
+   "recurrent aspiration or unsafe swallow"
+  ],
+  "prognosis": "The syndrome carries high morbidity, risk of institutionalisation and mortality, especially when albumin and functional status are low, yet identification and treatment of a reversible cause, particularly depression or a medication effect, can produce meaningful recovery.",
+  "pitfalls": [
+   "accepting decline as inevitable ageing and abandoning the diagnostic workup",
+   "missing treatable depression",
+   "overlooking polypharmacy as a driver",
+   "failing to assess swallowing, dentition and social or financial barriers to eating",
+   "not engaging a multidisciplinary team including dietitian, therapists and social work"
+  ],
+  "references": [
+   "Hazzard's Geriatric Medicine and Gerontology",
+   "Brocklehurst's Textbook of Geriatric Medicine and Gerontology",
+   "British Geriatrics Society guidance on comprehensive geriatric assessment"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Identify and treat reversible contributors, particularly depression, trialling an antidepressant where indicated as it is among the most treatable drivers",
+   "Review and rationalise medication, stopping agents causing anorexia, nausea, sedation or postural hypotension",
+   "Optimise nutrition with dietitian-led assessment, oral nutritional supplementation and treatment of dysphagia or dental problems",
+   "Prescribe a structured, progressive exercise and physiotherapy programme to counter sarcopenia and deconditioning",
+   "Exclude and treat occult malignancy, chronic infection, thyroid disease and adrenal insufficiency",
+   "Undertake comprehensive geriatric assessment coordinating multidisciplinary medical, nursing, occupational therapy and social care input",
+   "Address social adversity, cognitive impairment and home safety, arranging appropriate support and placement",
+   "Where decline proves irreversible and end-stage, discuss goals of care and consider a palliative approach"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "adult_failure_to_thrive-pathway",
+   "title": "adult failure to thrive: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "It is a descriptive syndrome, not a diagnosis, so always search for reversible contributors before accepting it as end-stage decline.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: rapid progressive weight loss",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: comprehensive geriatric assessment, cognitive screening and validated depression screening, structured nutritional assessment with albumin and prealbumin"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Identify and treat reversible contributors, particularly depression, trialling an antidepressant where indicated as it is among the most treatable drivers"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: accepting decline as inevitable ageing and abandoning the diagnostic workup"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of adult failure to thrive."
+  }
+ ],
+ "tables": [
+  {
+   "id": "adult_failure_to_thrive-matrix",
+   "title": "adult failure to thrive: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "It is a descriptive syndrome, not a diagnosis, so always search for reversible contributors before accepting it as end-stage",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Adult failure to thrive is a multifactorial state of decline in older people characterised by weight loss, reduced appetite, poor nutrition and physical inactivity, often accompanied by dehydration, depressive symptoms and impaired immunity. It represents a final common pathway of accumulated chronic disease, frailty and sarcopenia, driven in part by a pro-inflammatory cytokine milieu with raised interleukin-6 and tumour necrosis factor that promotes catabolism and anorexia. Age-related dysregulation of appetite signalling through leptin and ghrelin, neuroendocrine changes and reduced physiological reserve interact with depression, cognitive impairment and social adversity to accelerate functional and nutritional loss, creating a self-reinforcing cycle of deconditioning.",
-    "additionalDifferentials": [
-      "major depressive disorder",
-      "occult malignancy",
-      "thyroid dysfunction (hyper- or hypothyroidism)",
-      "adrenal insufficiency",
-      "chronic infection such as tuberculosis or infective endocarditis",
-      "advanced cardiac, renal or hepatic failure",
-      "dementia or delirium"
+    [
+     "Key Investigations",
+     "comprehensive geriatric assessment, cognitive screening and validated depression screening, structured nutritional assessment",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "comprehensive geriatric assessment",
-      "cognitive screening and validated depression screening",
-      "structured nutritional assessment with albumin and prealbumin",
-      "full blood count, urea and electrolytes, calcium and glucose",
-      "thyroid function and a morning cortisol",
-      "inflammatory markers and targeted malignancy screening or imaging as indicated",
-      "medication review and swallowing assessment"
+    [
+     "Primary Differentials",
+     "major depressive disorder, occult malignancy, thyroid dysfunction (hyper- or hypothyroidism)",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "rapid progressive weight loss",
-      "new focal neurology or lymphadenopathy suggesting malignancy",
-      "severe dehydration or electrolyte disturbance",
-      "suicidal ideation accompanying depression",
-      "recurrent aspiration or unsafe swallow"
+    [
+     "Management Strategy",
+     "Identify and treat reversible contributors, particularly depression, trialling an antidepressant where indicated as it is among",
+     "Core treatment modality"
     ],
-    "prognosis": "The syndrome carries high morbidity, risk of institutionalisation and mortality, especially when albumin and functional status are low, yet identification and treatment of a reversible cause, particularly depression or a medication effect, can produce meaningful recovery.",
-    "pitfalls": [
-      "accepting decline as inevitable ageing and abandoning the diagnostic workup",
-      "missing treatable depression",
-      "overlooking polypharmacy as a driver",
-      "failing to assess swallowing, dentition and social or financial barriers to eating",
-      "not engaging a multidisciplinary team including dietitian, therapists and social work"
-    ],
-    "references": [
-      "Hazzard's Geriatric Medicine and Gerontology",
-      "Brocklehurst's Textbook of Geriatric Medicine and Gerontology",
-      "British Geriatrics Society guidance on comprehensive geriatric assessment"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Identify and treat reversible contributors, particularly depression, trialling an antidepressant where indicated as it is among the most treatable drivers",
-      "Review and rationalise medication, stopping agents causing anorexia, nausea, sedation or postural hypotension",
-      "Optimise nutrition with dietitian-led assessment, oral nutritional supplementation and treatment of dysphagia or dental problems",
-      "Prescribe a structured, progressive exercise and physiotherapy programme to counter sarcopenia and deconditioning",
-      "Exclude and treat occult malignancy, chronic infection, thyroid disease and adrenal insufficiency",
-      "Undertake comprehensive geriatric assessment coordinating multidisciplinary medical, nursing, occupational therapy and social care input",
-      "Address social adversity, cognitive impairment and home safety, arranging appropriate support and placement",
-      "Where decline proves irreversible and end-stage, discuss goals of care and consider a palliative approach"
+    [
+     "Clinical Pitfall",
+     "accepting decline as inevitable ageing and abandoning the diagnostic workup",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for adult failure to thrive."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "adult-failure-to-thrive-real-image",
+   "title": "adult failure to thrive: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

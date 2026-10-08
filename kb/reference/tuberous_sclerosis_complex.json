@@ -1,84 +1,179 @@
 {
-  "id": "tuberous_sclerosis_complex",
-  "name": "Tuberous sclerosis complex",
-  "aliases": [
-    "Bourneville disease",
-    "TSC",
-    "TSC1",
-    "TSC2",
-    "epiloia",
-    "hamartin",
-    "tuberin",
-    "tuberous sclerosis"
+ "id": "tuberous_sclerosis_complex",
+ "name": "Tuberous sclerosis complex",
+ "aliases": [
+  "Bourneville disease",
+  "TSC",
+  "TSC1",
+  "TSC2",
+  "epiloia",
+  "hamartin",
+  "tuberin",
+  "tuberous sclerosis"
+ ],
+ "class": "non_infective",
+ "system": "Genetics / Dysmorphology",
+ "specialty": "Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A multisystem disorder characterised by benign hamartomas in the brain, skin, heart, kidneys, lungs and eyes, following autosomal dominant inheritance with a high de novo rate",
+   "Skin findings are key diagnostic clues: hypomelanotic macules (best seen under Wood's lamp), facial angiofibromas, shagreen patches and periungual fibromas",
+   "Neurological features include cortical tubers, subependymal nodules and subependymal giant cell astrocytomas, with epilepsy (often infantile spasms) and TSC-associated neuropsychiatric disorders",
+   "Cardiac rhabdomyomas may be detected antenatally or in infancy and usually regress spontaneously",
+   "Renal angiomyolipomas and cysts require surveillance because of the risk of haemorrhage and, rarely, malignancy, and are a leading cause of adult morbidity",
+   "Lymphangioleiomyomatosis, causing progressive cystic lung disease, predominantly affects women and warrants respiratory monitoring",
+   "The mTOR pathway is constitutively activated, and mTOR inhibitors are an established targeted therapy for several manifestations"
   ],
-  "class": "non_infective",
-  "system": "Genetics / Dysmorphology",
-  "specialty": "Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A multisystem disorder characterised by benign hamartomas in the brain, skin, heart, kidneys, lungs and eyes, following autosomal dominant inheritance with a high de novo rate",
-      "Skin findings are key diagnostic clues: hypomelanotic macules (best seen under Wood's lamp), facial angiofibromas, shagreen patches and periungual fibromas",
-      "Neurological features include cortical tubers, subependymal nodules and subependymal giant cell astrocytomas, with epilepsy (often infantile spasms) and TSC-associated neuropsychiatric disorders",
-      "Cardiac rhabdomyomas may be detected antenatally or in infancy and usually regress spontaneously",
-      "Renal angiomyolipomas and cysts require surveillance because of the risk of haemorrhage and, rarely, malignancy, and are a leading cause of adult morbidity",
-      "Lymphangioleiomyomatosis, causing progressive cystic lung disease, predominantly affects women and warrants respiratory monitoring",
-      "The mTOR pathway is constitutively activated, and mTOR inhibitors are an established targeted therapy for several manifestations"
+  "pathophysiology": "Tuberous sclerosis complex is caused by loss-of-function variants in TSC1 (encoding hamartin) or TSC2 (encoding tuberin), whose protein product forms a complex that inhibits the mechanistic target of rapamycin (mTOR) signalling pathway. Loss of this inhibitory brake leads to constitutive mTOR activation, driving unregulated cell growth and proliferation and the formation of hamartomas in multiple organs. A second-hit somatic inactivation of the remaining allele in individual cells underlies lesion development, and TSC2 variants generally produce a more severe phenotype than TSC1.",
+  "additionalDifferentials": [
+   "Neurofibromatosis type 1",
+   "Sturge-Weber syndrome",
+   "Birt-Hogg-Dube syndrome",
+   "Multiple endocrine neoplasia and other hamartoma syndromes",
+   "Isolated infantile spasms of other cause",
+   "Sporadic renal angiomyolipoma or lymphangioleiomyomatosis"
+  ],
+  "additionalInvestigations": [
+   "Sequencing and deletion/duplication analysis of TSC1 and TSC2",
+   "Brain MRI for tubers, subependymal nodules and giant cell astrocytoma, with electroencephalography for seizures",
+   "Renal imaging (ultrasound or MRI) for angiomyolipomas and cysts with periodic surveillance",
+   "Echocardiography and electrocardiography for rhabdomyomas and arrhythmia",
+   "Dermatological and ophthalmological (retinal hamartoma) examination",
+   "Pulmonary function testing and chest imaging for lymphangioleiomyomatosis in at-risk individuals"
+  ],
+  "redFlags": [
+   "New or worsening headache, vomiting or focal deficit suggesting an enlarging subependymal giant cell astrocytoma with hydrocephalus",
+   "Flank pain, haematuria or shock from angiomyolipoma haemorrhage",
+   "Progressive breathlessness or pneumothorax from lymphangioleiomyomatosis",
+   "Infantile spasms requiring prompt recognition and treatment"
+  ],
+  "prognosis": "Prognosis is highly variable and depends on the burden of neurological, renal and pulmonary disease; epilepsy and neuropsychiatric disorders drive childhood morbidity, while renal and pulmonary complications dominate in adults. Targeted mTOR-inhibitor therapy and structured surveillance have improved outcomes, and many individuals live into adulthood.",
+  "pitfalls": [
+   "Overlooking subtle hypomelanotic macules without Wood's-lamp examination",
+   "Failing to establish lifelong renal surveillance for angiomyolipoma growth and bleeding risk",
+   "Missing an enlarging subependymal giant cell astrocytoma causing obstructive hydrocephalus",
+   "Not recognising TSC-associated neuropsychiatric disorders, which are frequently under-assessed and undertreated"
+  ],
+  "references": [
+   "Smith's Recognizable Patterns of Human Malformation",
+   "Nelson Textbook of Pediatrics",
+   "International Tuberous Sclerosis Complex Consensus Group recommendations"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Everolimus or another mTOR inhibitor as disease-modifying therapy for subependymal giant cell astrocytomas, enlarging renal angiomyolipomas and lymphangioleiomyomatosis",
+   "Epilepsy control with antiseizure medication, using vigabatrin as first-line for infantile spasms and considering epilepsy surgery or vagus nerve stimulation in drug-resistant seizures",
+   "Topical mTOR inhibitor (sirolimus) or laser therapy for facial angiofibromas, with screening and support for TSC-associated neuropsychiatric disorders",
+   "Structured surveillance with serial brain MRI, renal imaging, echocardiography and pulmonary function testing for the multisystem complications",
+   "Manage acute angiomyolipoma haemorrhage with selective arterial embolisation and nephron-sparing measures rather than nephrectomy where possible",
+   "Multidisciplinary care across neurology, nephrology, dermatology, respiratory and ophthalmology",
+   "Genetic counselling and family screening given autosomal dominant inheritance and the high de novo rate"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "tuberous_sclerosis_complex-pathway",
+   "title": "Tuberous sclerosis complex: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A multisystem disorder characterised by benign hamartomas in the brain, skin, heart, kidneys, lungs and eyes, following autosomal dominant inheritance with a high de novo rate",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: New or worsening headache, vomiting or focal deficit suggesting an enlarging subependymal giant cell astrocytoma with hydrocephalus",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Sequencing and deletion/duplication analysis of TSC1 and TSC2, Brain MRI for tubers, subependymal nodules and giant cell astrocytoma, with electroencephalography for seizures, Renal imaging (ultrasound or MRI) for"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Everolimus or another mTOR inhibitor as disease-modifying therapy for subependymal giant cell astrocytomas, enlarging renal angiomyolipomas and lymphangioleiomyomatosis"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Overlooking subtle hypomelanotic macules without Wood's-lamp examination"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of tuberous sclerosis complex."
+  }
+ ],
+ "tables": [
+  {
+   "id": "tuberous_sclerosis_complex-matrix",
+   "title": "Tuberous sclerosis complex: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A multisystem disorder characterised by benign hamartomas in the brain, skin, heart, kidneys, lungs and eyes, following autosomal",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Tuberous sclerosis complex is caused by loss-of-function variants in TSC1 (encoding hamartin) or TSC2 (encoding tuberin), whose protein product forms a complex that inhibits the mechanistic target of rapamycin (mTOR) signalling pathway. Loss of this inhibitory brake leads to constitutive mTOR activation, driving unregulated cell growth and proliferation and the formation of hamartomas in multiple organs. A second-hit somatic inactivation of the remaining allele in individual cells underlies lesion development, and TSC2 variants generally produce a more severe phenotype than TSC1.",
-    "additionalDifferentials": [
-      "Neurofibromatosis type 1",
-      "Sturge-Weber syndrome",
-      "Birt-Hogg-Dube syndrome",
-      "Multiple endocrine neoplasia and other hamartoma syndromes",
-      "Isolated infantile spasms of other cause",
-      "Sporadic renal angiomyolipoma or lymphangioleiomyomatosis"
+    [
+     "Key Investigations",
+     "Sequencing and deletion/duplication analysis of TSC1 and TSC2, Brain MRI for tubers, subependymal nodules and giant cell",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Sequencing and deletion/duplication analysis of TSC1 and TSC2",
-      "Brain MRI for tubers, subependymal nodules and giant cell astrocytoma, with electroencephalography for seizures",
-      "Renal imaging (ultrasound or MRI) for angiomyolipomas and cysts with periodic surveillance",
-      "Echocardiography and electrocardiography for rhabdomyomas and arrhythmia",
-      "Dermatological and ophthalmological (retinal hamartoma) examination",
-      "Pulmonary function testing and chest imaging for lymphangioleiomyomatosis in at-risk individuals"
+    [
+     "Primary Differentials",
+     "Neurofibromatosis type 1, Sturge-Weber syndrome, Birt-Hogg-Dube syndrome",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "New or worsening headache, vomiting or focal deficit suggesting an enlarging subependymal giant cell astrocytoma with hydrocephalus",
-      "Flank pain, haematuria or shock from angiomyolipoma haemorrhage",
-      "Progressive breathlessness or pneumothorax from lymphangioleiomyomatosis",
-      "Infantile spasms requiring prompt recognition and treatment"
+    [
+     "Management Strategy",
+     "Everolimus or another mTOR inhibitor as disease-modifying therapy for subependymal giant cell astrocytomas, enlarging renal",
+     "Core treatment modality"
     ],
-    "prognosis": "Prognosis is highly variable and depends on the burden of neurological, renal and pulmonary disease; epilepsy and neuropsychiatric disorders drive childhood morbidity, while renal and pulmonary complications dominate in adults. Targeted mTOR-inhibitor therapy and structured surveillance have improved outcomes, and many individuals live into adulthood.",
-    "pitfalls": [
-      "Overlooking subtle hypomelanotic macules without Wood's-lamp examination",
-      "Failing to establish lifelong renal surveillance for angiomyolipoma growth and bleeding risk",
-      "Missing an enlarging subependymal giant cell astrocytoma causing obstructive hydrocephalus",
-      "Not recognising TSC-associated neuropsychiatric disorders, which are frequently under-assessed and undertreated"
-    ],
-    "references": [
-      "Smith's Recognizable Patterns of Human Malformation",
-      "Nelson Textbook of Pediatrics",
-      "International Tuberous Sclerosis Complex Consensus Group recommendations"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Everolimus or another mTOR inhibitor as disease-modifying therapy for subependymal giant cell astrocytomas, enlarging renal angiomyolipomas and lymphangioleiomyomatosis",
-      "Epilepsy control with antiseizure medication, using vigabatrin as first-line for infantile spasms and considering epilepsy surgery or vagus nerve stimulation in drug-resistant seizures",
-      "Topical mTOR inhibitor (sirolimus) or laser therapy for facial angiofibromas, with screening and support for TSC-associated neuropsychiatric disorders",
-      "Structured surveillance with serial brain MRI, renal imaging, echocardiography and pulmonary function testing for the multisystem complications",
-      "Manage acute angiomyolipoma haemorrhage with selective arterial embolisation and nephron-sparing measures rather than nephrectomy where possible",
-      "Multidisciplinary care across neurology, nephrology, dermatology, respiratory and ophthalmology",
-      "Genetic counselling and family screening given autosomal dominant inheritance and the high de novo rate"
+    [
+     "Clinical Pitfall",
+     "Overlooking subtle hypomelanotic macules without Wood's-lamp examination",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for tuberous sclerosis complex."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "tuberous-sclerosis-complex-real-image",
+   "title": "Tuberous sclerosis complex: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

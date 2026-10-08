@@ -1,84 +1,179 @@
 {
-  "id": "creatine_deficiency_syndromes",
-  "name": "Cerebral creatine deficiency syndromes",
-  "aliases": [
-    "CCDS",
-    "GAMT deficiency",
-    "AGAT deficiency",
-    "GATM deficiency",
-    "creatine transporter deficiency",
-    "SLC6A8 deficiency",
-    "X-linked creatine deficiency"
+ "id": "creatine_deficiency_syndromes",
+ "name": "Cerebral creatine deficiency syndromes",
+ "aliases": [
+  "CCDS",
+  "GAMT deficiency",
+  "AGAT deficiency",
+  "GATM deficiency",
+  "creatine transporter deficiency",
+  "SLC6A8 deficiency",
+  "X-linked creatine deficiency"
+ ],
+ "class": "non_infective",
+ "system": "Metabolic / Genetics",
+ "specialty": "Metabolic Medicine / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A group of three disorders affecting creatine synthesis or transport: AGAT (GATM) deficiency, GAMT deficiency, and the X-linked creatine transporter (SLC6A8) defect",
+   "The two synthesis defects are autosomal recessive, whereas the creatine transporter defect is X-linked and chiefly affects males",
+   "All three share a marked reduction of the cerebral creatine peak on brain magnetic resonance spectroscopy, a key diagnostic clue",
+   "Common clinical features are intellectual disability, speech delay, epilepsy and behavioural or autistic features",
+   "GAMT deficiency is distinguished by accumulation of the neurotoxic intermediate guanidinoacetate and can cause a movement disorder and refractory seizures",
+   "The synthesis defects (AGAT and GAMT) are treatable with oral creatine supplementation, with additional dietary and pharmacological measures in GAMT to lower guanidinoacetate",
+   "The creatine transporter defect responds poorly to supplementation because the transporter needed for brain uptake is defective",
+   "Urine and plasma creatine, guanidinoacetate and the creatinine metabolite ratio help distinguish the three subtypes"
   ],
-  "class": "non_infective",
-  "system": "Metabolic / Genetics",
-  "specialty": "Metabolic Medicine / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A group of three disorders affecting creatine synthesis or transport: AGAT (GATM) deficiency, GAMT deficiency, and the X-linked creatine transporter (SLC6A8) defect",
-      "The two synthesis defects are autosomal recessive, whereas the creatine transporter defect is X-linked and chiefly affects males",
-      "All three share a marked reduction of the cerebral creatine peak on brain magnetic resonance spectroscopy, a key diagnostic clue",
-      "Common clinical features are intellectual disability, speech delay, epilepsy and behavioural or autistic features",
-      "GAMT deficiency is distinguished by accumulation of the neurotoxic intermediate guanidinoacetate and can cause a movement disorder and refractory seizures",
-      "The synthesis defects (AGAT and GAMT) are treatable with oral creatine supplementation, with additional dietary and pharmacological measures in GAMT to lower guanidinoacetate",
-      "The creatine transporter defect responds poorly to supplementation because the transporter needed for brain uptake is defective",
-      "Urine and plasma creatine, guanidinoacetate and the creatinine metabolite ratio help distinguish the three subtypes"
+  "pathophysiology": "Creatine and its phosphorylated form provide a rapid energy buffer for tissues with high and fluctuating energy demands, notably brain and muscle. Creatine is synthesised in two steps: AGAT (encoded by GATM) forms guanidinoacetate, which GAMT then methylates to creatine; creatine is delivered to the brain and taken up by cells via the SLC6A8 transporter. Loss of any step causes cerebral creatine depletion and impaired energy homeostasis, producing neurodevelopmental impairment. In GAMT deficiency, guanidinoacetate additionally accumulates and is neurotoxic, contributing to seizures and movement disturbance. In the transporter defect, creatine is made normally but cannot enter the brain.",
+  "additionalDifferentials": [
+   "Non-specific intellectual disability of other genetic causes",
+   "Autism spectrum disorder without an identified metabolic cause",
+   "Other inherited epileptic encephalopathies",
+   "Fragile X syndrome and other X-linked intellectual disability syndromes",
+   "Mitochondrial disorders affecting energy metabolism",
+   "Primary movement disorders (particularly in GAMT deficiency)"
+  ],
+  "additionalInvestigations": [
+   "Brain magnetic resonance spectroscopy demonstrating a reduced or absent creatine peak",
+   "Plasma and urine guanidinoacetate (raised in GAMT, low in AGAT deficiency)",
+   "Urine creatine-to-creatinine ratio (raised in the transporter defect)",
+   "Molecular genetic testing of GATM, GAMT and SLC6A8",
+   "A monitored trial of creatine supplementation with repeat spectroscopy in synthesis defects",
+   "Electroencephalography where seizures are present"
+  ],
+  "redFlags": [
+   "Global developmental delay with epilepsy and prominent speech impairment",
+   "Refractory seizures and a movement disorder suggesting GAMT deficiency",
+   "Regression or deterioration during intercurrent illness",
+   "Family history consistent with X-linked inheritance in males"
+  ],
+  "prognosis": "Outcomes in the treatable synthesis defects (AGAT and GAMT) are substantially improved by early creatine supplementation, and pre-symptomatic treatment can prevent much of the neurological damage. The X-linked creatine transporter defect has a less favourable prognosis because supplementation does not restore brain creatine.",
+  "pitfalls": [
+   "Overlooking a treatable cause of intellectual disability by not requesting spectroscopy or guanidinoacetate testing",
+   "Assuming all creatine deficiency syndromes respond to supplementation, when the transporter defect does not",
+   "Missing raised guanidinoacetate as a marker of the treatable GAMT form",
+   "Delaying treatment in synthesis defects, when early therapy is most effective"
+  ],
+  "references": [
+   "Scriver's Online Metabolic and Molecular Bases of Inherited Disease",
+   "Nelson Textbook of Paediatrics"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Oral creatine monohydrate supplementation is the mainstay for the synthesis defects (AGAT and GAMT), replenishing depleted cerebral creatine",
+   "In GAMT deficiency, additionally lower neurotoxic guanidinoacetate through dietary arginine restriction and ornithine supplementation",
+   "Institute treatment early, ideally pre-symptomatically, to prevent neurological damage",
+   "Antiepileptic therapy for seizures, particularly the refractory epilepsy of GAMT deficiency",
+   "Developmental support with speech and language therapy and behavioural and educational interventions",
+   "For the X-linked creatine transporter (SLC6A8) defect, provide supportive care, as creatine supplementation is largely ineffective and precursor trials show limited benefit",
+   "Monitor response with repeat brain magnetic resonance spectroscopy and biochemical markers",
+   "Genetic counselling and family screening, autosomal recessive for the synthesis defects and X-linked for the transporter defect, including carrier and newborn testing"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "creatine_deficiency_syndromes-pathway",
+   "title": "Cerebral creatine deficiency syndromes: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A group of three disorders affecting creatine synthesis or transport: AGAT (GATM) deficiency, GAMT deficiency, and the X-linked creatine transporter (SLC6A8) defect",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Global developmental delay with epilepsy and prominent speech impairment",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Brain magnetic resonance spectroscopy demonstrating a reduced or absent creatine peak, Plasma and urine guanidinoacetate (raised in GAMT, low in AGAT deficiency), Urine creatine-to-creatinine ratio (raised in the"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Oral creatine monohydrate supplementation is the mainstay for the synthesis defects (AGAT and GAMT), replenishing depleted cerebral creatine"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Overlooking a treatable cause of intellectual disability by not requesting spectroscopy or guanidinoacetate testing"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of cerebral creatine deficiency syndromes."
+  }
+ ],
+ "tables": [
+  {
+   "id": "creatine_deficiency_syndromes-matrix",
+   "title": "Cerebral creatine deficiency syndromes: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A group of three disorders affecting creatine synthesis or transport: AGAT (GATM) deficiency, GAMT deficiency, and the X-linked",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Creatine and its phosphorylated form provide a rapid energy buffer for tissues with high and fluctuating energy demands, notably brain and muscle. Creatine is synthesised in two steps: AGAT (encoded by GATM) forms guanidinoacetate, which GAMT then methylates to creatine; creatine is delivered to the brain and taken up by cells via the SLC6A8 transporter. Loss of any step causes cerebral creatine depletion and impaired energy homeostasis, producing neurodevelopmental impairment. In GAMT deficiency, guanidinoacetate additionally accumulates and is neurotoxic, contributing to seizures and movement disturbance. In the transporter defect, creatine is made normally but cannot enter the brain.",
-    "additionalDifferentials": [
-      "Non-specific intellectual disability of other genetic causes",
-      "Autism spectrum disorder without an identified metabolic cause",
-      "Other inherited epileptic encephalopathies",
-      "Fragile X syndrome and other X-linked intellectual disability syndromes",
-      "Mitochondrial disorders affecting energy metabolism",
-      "Primary movement disorders (particularly in GAMT deficiency)"
+    [
+     "Key Investigations",
+     "Brain magnetic resonance spectroscopy demonstrating a reduced or absent creatine peak, Plasma and urine guanidinoacetate (raised",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Brain magnetic resonance spectroscopy demonstrating a reduced or absent creatine peak",
-      "Plasma and urine guanidinoacetate (raised in GAMT, low in AGAT deficiency)",
-      "Urine creatine-to-creatinine ratio (raised in the transporter defect)",
-      "Molecular genetic testing of GATM, GAMT and SLC6A8",
-      "A monitored trial of creatine supplementation with repeat spectroscopy in synthesis defects",
-      "Electroencephalography where seizures are present"
+    [
+     "Primary Differentials",
+     "Non-specific intellectual disability of other genetic causes, Autism spectrum disorder without an identified metabolic cause,",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Global developmental delay with epilepsy and prominent speech impairment",
-      "Refractory seizures and a movement disorder suggesting GAMT deficiency",
-      "Regression or deterioration during intercurrent illness",
-      "Family history consistent with X-linked inheritance in males"
+    [
+     "Management Strategy",
+     "Oral creatine monohydrate supplementation is the mainstay for the synthesis defects (AGAT and GAMT), replenishing depleted",
+     "Core treatment modality"
     ],
-    "prognosis": "Outcomes in the treatable synthesis defects (AGAT and GAMT) are substantially improved by early creatine supplementation, and pre-symptomatic treatment can prevent much of the neurological damage. The X-linked creatine transporter defect has a less favourable prognosis because supplementation does not restore brain creatine.",
-    "pitfalls": [
-      "Overlooking a treatable cause of intellectual disability by not requesting spectroscopy or guanidinoacetate testing",
-      "Assuming all creatine deficiency syndromes respond to supplementation, when the transporter defect does not",
-      "Missing raised guanidinoacetate as a marker of the treatable GAMT form",
-      "Delaying treatment in synthesis defects, when early therapy is most effective"
-    ],
-    "references": [
-      "Scriver's Online Metabolic and Molecular Bases of Inherited Disease",
-      "Nelson Textbook of Paediatrics"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Oral creatine monohydrate supplementation is the mainstay for the synthesis defects (AGAT and GAMT), replenishing depleted cerebral creatine",
-      "In GAMT deficiency, additionally lower neurotoxic guanidinoacetate through dietary arginine restriction and ornithine supplementation",
-      "Institute treatment early, ideally pre-symptomatically, to prevent neurological damage",
-      "Antiepileptic therapy for seizures, particularly the refractory epilepsy of GAMT deficiency",
-      "Developmental support with speech and language therapy and behavioural and educational interventions",
-      "For the X-linked creatine transporter (SLC6A8) defect, provide supportive care, as creatine supplementation is largely ineffective and precursor trials show limited benefit",
-      "Monitor response with repeat brain magnetic resonance spectroscopy and biochemical markers",
-      "Genetic counselling and family screening, autosomal recessive for the synthesis defects and X-linked for the transporter defect, including carrier and newborn testing"
+    [
+     "Clinical Pitfall",
+     "Overlooking a treatable cause of intellectual disability by not requesting spectroscopy or guanidinoacetate testing",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for cerebral creatine deficiency syndromes."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "creatine-deficiency-syndromes-real-image",
+   "title": "Cerebral creatine deficiency syndromes: Diagnostic Head Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
+   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
+   "annotations": [
+    {
+     "label": "Cerebral Parenchyma",
+     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+    },
+    {
+     "label": "Extra-Axial Spaces",
+     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+    }
+   ]
+  }
+ ]
 }

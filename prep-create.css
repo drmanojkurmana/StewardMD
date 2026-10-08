@@ -19,7 +19,7 @@ body.dark .pn-root { --pc-warn-bg: #33270f; --pc-warn-line: #6b5420; }
 .pn-root .pc-in:focus { outline: none; border-color: var(--pn-pri); }
 .pn-root .pc-ta { min-height: 180px; resize: vertical; line-height: 1.5; }
 .pn-root .pc-file { padding: 10px 14px; border-radius: 12px; background: var(--pn-s1); overflow-wrap: anywhere; }
-.pn-root .pc-check { display: flex; align-items: flex-start; gap: 12px; min-height: 44px; padding: 10px 12px; border: 1px solid var(--pn-line); border-radius: 14px; background: var(--pn-card); text-align: left; font-size: 15px; }
+.pn-root .pc-check { display: flex; align-items: flex-start; gap: 12px; min-height: 44px; padding: 10px 12px; border: 1px solid var(--pn-edge); box-shadow: var(--pn-elev); border-radius: 18px; background: var(--pn-card); text-align: left; font-size: 15px; }
 .pn-root .pc-box { width: 24px; height: 24px; flex: 0 0 auto; border: 2px solid var(--pn-line); border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; color: var(--pn-on-pri); }
 .pn-root .pc-box svg { width: 16px; height: 16px; }
 .pn-root .pc-check[aria-pressed="true"] .pc-box { background: var(--pn-pri); border-color: var(--pn-pri); }
@@ -29,7 +29,7 @@ body.dark .pn-root { --pc-warn-bg: #33270f; --pc-warn-line: #6b5420; }
 /* ---- progress ---- */
 .pn-root .pc-progp { align-items: center; text-align: center; }
 .pn-root .pc-bar { height: 8px; border-radius: 4px; }
-.pn-root .pc-bar i { transition: width 300ms var(--pn-ease); }
+.pn-root .pc-bar i { width: 100%; transform-origin: 0 50%; transition: transform 300ms var(--pn-ease); }
 
 /* ---- flashcards ---- */
 .pn-root .pc-card { min-height: 220px; justify-content: center; gap: 14px; }

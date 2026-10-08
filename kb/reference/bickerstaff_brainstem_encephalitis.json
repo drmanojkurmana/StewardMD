@@ -1,78 +1,173 @@
 {
-  "id": "bickerstaff_brainstem_encephalitis",
-  "name": "Bickerstaff brainstem encephalitis",
-  "aliases": [
-    "Bickerstaff's brainstem encephalitis",
-    "BBE",
-    "anti-GQ1b antibody syndrome (brainstem variant)"
+ "id": "bickerstaff_brainstem_encephalitis",
+ "name": "Bickerstaff brainstem encephalitis",
+ "aliases": [
+  "Bickerstaff's brainstem encephalitis",
+  "BBE",
+  "anti-GQ1b antibody syndrome (brainstem variant)"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system / Neuroimmunology",
+ "specialty": "Neurology / Neuroimmunology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Bradley and Daroff's Neurology in Clinical Practice",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Defined by the triad of ophthalmoplegia, ataxia, and altered consciousness or drowsiness, often following an infective illness",
+   "Regarded as part of the anti-GQ1b antibody spectrum, overlapping with Miller Fisher syndrome and Guillain-Barre syndrome",
+   "Hyperreflexia or extensor plantar responses may coexist, reflecting central involvement, in contrast to the areflexia of Miller Fisher syndrome",
+   "Serum anti-GQ1b (and related ganglioside) antibodies support the diagnosis when positive",
+   "MRI is often normal, so a normal scan does not exclude the diagnosis",
+   "The disorder is usually monophasic with a tendency to spontaneous recovery",
+   "Immunotherapy with intravenous immunoglobulin or plasma exchange is used, mirroring treatment of Guillain-Barre spectrum disorders"
   ],
-  "class": "non_infective",
-  "system": "Nervous system / Neuroimmunology",
-  "specialty": "Neurology / Neuroimmunology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Bradley and Daroff's Neurology in Clinical Practice",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Defined by the triad of ophthalmoplegia, ataxia, and altered consciousness or drowsiness, often following an infective illness",
-      "Regarded as part of the anti-GQ1b antibody spectrum, overlapping with Miller Fisher syndrome and Guillain-Barre syndrome",
-      "Hyperreflexia or extensor plantar responses may coexist, reflecting central involvement, in contrast to the areflexia of Miller Fisher syndrome",
-      "Serum anti-GQ1b (and related ganglioside) antibodies support the diagnosis when positive",
-      "MRI is often normal, so a normal scan does not exclude the diagnosis",
-      "The disorder is usually monophasic with a tendency to spontaneous recovery",
-      "Immunotherapy with intravenous immunoglobulin or plasma exchange is used, mirroring treatment of Guillain-Barre spectrum disorders"
+  "pathophysiology": "Bickerstaff brainstem encephalitis is an immune-mediated disorder in which antibodies, characteristically against the GQ1b ganglioside, arise after an infection through molecular mimicry between microbial antigens and neural ganglioside. GQ1b is enriched in the extraocular motor nerves and reticular formation, and antibody-mediated dysfunction there produces ophthalmoplegia and depressed consciousness, while cerebellar and brainstem involvement causes ataxia. The overlap with Miller Fisher syndrome and Guillain-Barre syndrome reflects a shared ganglioside-directed autoimmune mechanism affecting both central and peripheral structures.",
+  "additionalDifferentials": [
+   "Miller Fisher syndrome",
+   "Guillain-Barre syndrome with brainstem features",
+   "Brainstem stroke or basilar artery ischaemia",
+   "Wernicke encephalopathy",
+   "Infective rhombencephalitis (e.g. Listeria)",
+   "Central nervous system demyelination affecting the brainstem"
+  ],
+  "additionalInvestigations": [
+   "Serum anti-GQ1b and related ganglioside antibody testing",
+   "MRI of the brain and brainstem to exclude structural and inflammatory causes",
+   "Cerebrospinal fluid analysis, which may show albuminocytological dissociation",
+   "Nerve conduction studies to detect overlapping peripheral involvement",
+   "Screening for preceding infection where relevant",
+   "Thiamine assessment when Wernicke encephalopathy is a consideration"
+  ],
+  "redFlags": [
+   "Progressive depression of consciousness requiring airway assessment",
+   "Respiratory compromise from overlapping Guillain-Barre features",
+   "Rapidly worsening ophthalmoplegia or bulbar dysfunction",
+   "Features suggesting basilar ischaemia needing urgent vascular imaging"
+  ],
+  "prognosis": "The disorder is generally monophasic with a good prognosis and substantial recovery over weeks to months, particularly with immunotherapy, though severe cases can require intensive support.",
+  "pitfalls": [
+   "Excluding the diagnosis because MRI is normal",
+   "Missing overlapping peripheral involvement that threatens respiration",
+   "Confusing it with brainstem stroke and delaying appropriate treatment",
+   "Overlooking Wernicke encephalopathy in a susceptible patient"
+  ],
+  "references": [
+   "Bradley and Daroff's Neurology in Clinical Practice",
+   "Adams and Victor's Principles of Neurology",
+   "Continuum: Autoimmune Neurology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Immunotherapy with intravenous immunoglobulin or plasma exchange, as for the wider anti-GQ1b/Guillain-Barre spectrum",
+   "Supportive care with airway protection and intensive-care monitoring for depressed consciousness and respiratory compromise",
+   "Close monitoring for overlapping Guillain-Barre features, including respiratory and bulbar function and autonomic instability",
+   "Venous thromboembolism prophylaxis and general supportive nursing during immobility and reduced consciousness",
+   "Neurology and neuroimmunology-led multidisciplinary care with rehabilitation during the recovery phase",
+   "Recognise the usually monophasic course with good spontaneous recovery, escalating to intensive care if consciousness or breathing deteriorate"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "bickerstaff_brainstem_encephalitis-pathway",
+   "title": "Bickerstaff brainstem encephalitis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Defined by the triad of ophthalmoplegia, ataxia, and altered consciousness or drowsiness, often following an infective illness",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Progressive depression of consciousness requiring airway assessment",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Serum anti-GQ1b and related ganglioside antibody testing, MRI of the brain and brainstem to exclude structural and inflammatory causes, Cerebrospinal fluid analysis, which may show albuminocytological dissociation"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Immunotherapy with intravenous immunoglobulin or plasma exchange, as for the wider anti-GQ1b/Guillain-Barre spectrum"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Excluding the diagnosis because MRI is normal"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of bickerstaff brainstem encephalitis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "bickerstaff_brainstem_encephalitis-matrix",
+   "title": "Bickerstaff brainstem encephalitis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Defined by the triad of ophthalmoplegia, ataxia, and altered consciousness or drowsiness, often following an infective illness",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Bickerstaff brainstem encephalitis is an immune-mediated disorder in which antibodies, characteristically against the GQ1b ganglioside, arise after an infection through molecular mimicry between microbial antigens and neural ganglioside. GQ1b is enriched in the extraocular motor nerves and reticular formation, and antibody-mediated dysfunction there produces ophthalmoplegia and depressed consciousness, while cerebellar and brainstem involvement causes ataxia. The overlap with Miller Fisher syndrome and Guillain-Barre syndrome reflects a shared ganglioside-directed autoimmune mechanism affecting both central and peripheral structures.",
-    "additionalDifferentials": [
-      "Miller Fisher syndrome",
-      "Guillain-Barre syndrome with brainstem features",
-      "Brainstem stroke or basilar artery ischaemia",
-      "Wernicke encephalopathy",
-      "Infective rhombencephalitis (e.g. Listeria)",
-      "Central nervous system demyelination affecting the brainstem"
+    [
+     "Key Investigations",
+     "Serum anti-GQ1b and related ganglioside antibody testing, MRI of the brain and brainstem to exclude structural and inflammatory",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Serum anti-GQ1b and related ganglioside antibody testing",
-      "MRI of the brain and brainstem to exclude structural and inflammatory causes",
-      "Cerebrospinal fluid analysis, which may show albuminocytological dissociation",
-      "Nerve conduction studies to detect overlapping peripheral involvement",
-      "Screening for preceding infection where relevant",
-      "Thiamine assessment when Wernicke encephalopathy is a consideration"
+    [
+     "Primary Differentials",
+     "Miller Fisher syndrome, Guillain-Barre syndrome with brainstem features, Brainstem stroke or basilar artery ischaemia",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Progressive depression of consciousness requiring airway assessment",
-      "Respiratory compromise from overlapping Guillain-Barre features",
-      "Rapidly worsening ophthalmoplegia or bulbar dysfunction",
-      "Features suggesting basilar ischaemia needing urgent vascular imaging"
+    [
+     "Management Strategy",
+     "Immunotherapy with intravenous immunoglobulin or plasma exchange, as for the wider anti-GQ1b/Guillain-Barre spectrum",
+     "Core treatment modality"
     ],
-    "prognosis": "The disorder is generally monophasic with a good prognosis and substantial recovery over weeks to months, particularly with immunotherapy, though severe cases can require intensive support.",
-    "pitfalls": [
-      "Excluding the diagnosis because MRI is normal",
-      "Missing overlapping peripheral involvement that threatens respiration",
-      "Confusing it with brainstem stroke and delaying appropriate treatment",
-      "Overlooking Wernicke encephalopathy in a susceptible patient"
-    ],
-    "references": [
-      "Bradley and Daroff's Neurology in Clinical Practice",
-      "Adams and Victor's Principles of Neurology",
-      "Continuum: Autoimmune Neurology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Immunotherapy with intravenous immunoglobulin or plasma exchange, as for the wider anti-GQ1b/Guillain-Barre spectrum",
-      "Supportive care with airway protection and intensive-care monitoring for depressed consciousness and respiratory compromise",
-      "Close monitoring for overlapping Guillain-Barre features, including respiratory and bulbar function and autonomic instability",
-      "Venous thromboembolism prophylaxis and general supportive nursing during immobility and reduced consciousness",
-      "Neurology and neuroimmunology-led multidisciplinary care with rehabilitation during the recovery phase",
-      "Recognise the usually monophasic course with good spontaneous recovery, escalating to intensive care if consciousness or breathing deteriorate"
+    [
+     "Clinical Pitfall",
+     "Excluding the diagnosis because MRI is normal",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for bickerstaff brainstem encephalitis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "bickerstaff-brainstem-encephalitis-real-image",
+   "title": "Bickerstaff brainstem encephalitis: Diagnostic Head Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
+   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
+   "annotations": [
+    {
+     "label": "Cerebral Parenchyma",
+     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+    },
+    {
+     "label": "Extra-Axial Spaces",
+     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+    }
+   ]
+  }
+ ]
 }

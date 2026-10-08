@@ -1,83 +1,190 @@
 {
-  "id": "CARCINOID_SYNDROME",
-  "name": "Carcinoid syndrome",
-  "system": "Endocrinology",
-  "class": "non_infective",
-  "chapter": null,
-  "page": null,
-  "aliases": [
-    "carcinoid",
-    "carcinoid tumor syndrome",
-    "neuroendocrine tumor with carcinoid syndrome",
-    "NET carcinoid syndrome",
-    "serotonin-secreting tumor syndrome",
-    "flushing-diarrhea syndrome"
+ "id": "CARCINOID_SYNDROME",
+ "name": "Carcinoid syndrome",
+ "system": "Endocrinology",
+ "class": "non_infective",
+ "chapter": null,
+ "page": null,
+ "aliases": [
+  "carcinoid",
+  "carcinoid tumor syndrome",
+  "neuroendocrine tumor with carcinoid syndrome",
+  "NET carcinoid syndrome",
+  "serotonin-secreting tumor syndrome",
+  "flushing-diarrhea syndrome"
+ ],
+ "referenceOnly": true,
+ "review": {
+  "status": "ai_drafted"
+ },
+ "reference": {
+  "clinicalPearls": [
+   "Classic triad is episodic flushing, secretory diarrhea, and bronchospasm/wheezing, but full triad is present in only a minority of patients",
+   "Syndrome typically only manifests once hepatic metastases are present, since liver normally clears vasoactive mediators from portal circulation before they reach systemic circulation",
+   "Midgut (small bowel/appendiceal) tumors are the classic cause; bronchial and other extra-intestinal primaries can bypass hepatic first-pass metabolism and cause symptoms without liver metastases",
+   "Right-sided (and occasionally left-sided) valvular heart disease from fibrotic plaque deposition is a hallmark late complication and a major driver of morbidity/mortality",
+   "Flushing is usually dry, reddish-violet, and involves face/neck/upper trunk, lasting minutes; triggers include alcohol, certain foods, emotional stress, and palpation of the tumor",
+   "Niacin deficiency (pellagra-like features) can occur because tryptophan is diverted toward serotonin synthesis rather than niacin production",
+   "Carcinoid crisis — profound flushing, bronchospasm, and hemodynamic instability — can be precipitated by anesthesia, tumor manipulation, or invasive procedures and requires pre-procedural prophylaxis"
   ],
-  "referenceOnly": true,
-  "review": {
-    "status": "ai_drafted"
-  },
-  "harrison": {
-    "clinicalPearls": [
-      "Classic triad is episodic flushing, secretory diarrhea, and bronchospasm/wheezing, but full triad is present in only a minority of patients",
-      "Syndrome typically only manifests once hepatic metastases are present, since liver normally clears vasoactive mediators from portal circulation before they reach systemic circulation",
-      "Midgut (small bowel/appendiceal) tumors are the classic cause; bronchial and other extra-intestinal primaries can bypass hepatic first-pass metabolism and cause symptoms without liver metastases",
-      "Right-sided (and occasionally left-sided) valvular heart disease from fibrotic plaque deposition is a hallmark late complication and a major driver of morbidity/mortality",
-      "Flushing is usually dry, reddish-violet, and involves face/neck/upper trunk, lasting minutes; triggers include alcohol, certain foods, emotional stress, and palpation of the tumor",
-      "Niacin deficiency (pellagra-like features) can occur because tryptophan is diverted toward serotonin synthesis rather than niacin production",
-      "Carcinoid crisis — profound flushing, bronchospasm, and hemodynamic instability — can be precipitated by anesthesia, tumor manipulation, or invasive procedures and requires pre-procedural prophylaxis"
-    ],
-    "pathophysiology": "Carcinoid syndrome arises from a neuroendocrine tumor (most often midgut origin) that secretes serotonin and other vasoactive substances (histamine, tachykinins, prostaglandins, kallikrein) directly into the systemic circulation, bypassing hepatic inactivation once liver metastases develop or when the primary tumor drains outside the portal system. These circulating mediators produce the characteristic flushing, diarrhea, and bronchoconstriction, while chronic exposure to serotonin and related factors promotes fibrous plaque deposition on cardiac valves, producing carcinoid heart disease.",
-    "additionalDifferentials": [
-      "Systemic mastocytosis / mast cell activation syndrome",
-      "Pheochromocytoma",
-      "Menopausal flushing",
-      "VIPoma or other functional pancreatic neuroendocrine tumors",
-      "Medullary thyroid carcinoma with calcitonin/other peptide secretion",
-      "Anaphylaxis or food/alcohol-induced flushing reactions"
-    ],
-    "infectionMimics": [],
-    "nonInfectiousMimics": [
-      "Rosacea",
-      "Idiopathic flushing syndrome",
-      "Irritable bowel syndrome (for the diarrhea component)",
-      "Alcohol-induced flushing (especially in those with aldehyde dehydrogenase variants)"
-    ],
-    "additionalInvestigations": [
-      "24-hour urinary 5-hydroxyindoleacetic acid (5-HIAA) — main biochemical marker of serotonin turnover, though affected by diet and certain drugs",
-      "Plasma chromogranin A — general neuroendocrine tumor marker, useful for diagnosis and monitoring tumor burden",
-      "Serum serotonin level — supportive but less specific/standardized than urinary 5-HIAA",
-      "Somatostatin receptor imaging (e.g., 68Ga-DOTATATE PET/CT) — localizes primary tumor and metastases with high sensitivity",
-      "Cross-sectional imaging (contrast CT or MRI abdomen) — assesses primary tumor site, liver metastases, and mesenteric fibrosis",
-      "Echocardiography — screens for carcinoid heart disease (tricuspid/pulmonic valve involvement)",
-      "Endoscopy/enteroscopy or capsule endoscopy — identifies small bowel primary when suspected"
-    ],
-    "redFlags": [
-      "Signs of carcinoid heart disease (new murmur, right heart failure symptoms) warrant urgent echocardiography and cardiology referral",
-      "Pre-procedural or pre-anesthetic patients with known/suspected carcinoid require prophylaxis to prevent carcinoid crisis",
-      "Acute severe flushing with hypotension or bronchospasm suggests evolving carcinoid crisis and needs emergent management",
-      "Bowel obstruction or ischemia from mesenteric fibrosis/desmoplastic reaction is a surgical emergency",
-      "Refractory diarrhea causing dehydration or electrolyte derangement needs prompt correction"
-    ],
-    "pitfalls": [
-      "Attributing episodic flushing/diarrhea to anxiety, menopause, or irritable bowel syndrome, delaying diagnosis for years",
-      "Obtaining urinary 5-HIAA without dietary restriction (serotonin-rich foods) or accounting for interfering medications, leading to false results",
-      "Overlooking carcinoid heart disease until advanced right heart failure develops",
-      "Failing to anticipate and prevent carcinoid crisis before surgery, biopsy, or anesthesia in a patient with known tumor"
-    ],
-    "prognosis": "Prognosis depends primarily on tumor grade, extent of metastatic disease, and presence of carcinoid heart disease; with modern somatostatin analog therapy and multidisciplinary management, many patients experience prolonged survival and symptom control, though cardiac involvement significantly worsens outcomes if untreated.",
-    "references": [
-      "Harrison's Principles of Internal Medicine, 22e — Neuroendocrine Tumors and Carcinoid Syndrome"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Somatostatin analogues such as octreotide or lanreotide as the mainstay to suppress secretion of serotonin and other vasoactive mediators and control flushing and diarrhoea.",
-      "Tumour-directed treatment including surgical resection or debulking, liver-directed embolisation for hepatic metastases, and peptide receptor radionuclide therapy or interferon for progressive disease.",
-      "Telotristat, a tryptophan hydroxylase inhibitor, for diarrhoea refractory to somatostatin analogues.",
-      "Prevention of carcinoid crisis with peri-procedural somatostatin analogue cover before surgery, anaesthesia or embolisation.",
-      "Niacin supplementation to prevent or treat pellagra from tryptophan diversion, and avoidance of flushing triggers such as alcohol.",
-      "Echocardiographic surveillance for carcinoid heart disease, with valve replacement for significant right-sided valvular involvement.",
-      "Multidisciplinary neuroendocrine tumour team care, with escalation for carcinoid crisis or cardiac decompensation."
-    ]
+  "pathophysiology": "Carcinoid syndrome arises from a neuroendocrine tumor (most often midgut origin) that secretes serotonin and other vasoactive substances (histamine, tachykinins, prostaglandins, kallikrein) directly into the systemic circulation, bypassing hepatic inactivation once liver metastases develop or when the primary tumor drains outside the portal system. These circulating mediators produce the characteristic flushing, diarrhea, and bronchoconstriction, while chronic exposure to serotonin and related factors promotes fibrous plaque deposition on cardiac valves, producing carcinoid heart disease.",
+  "additionalDifferentials": [
+   "Systemic mastocytosis / mast cell activation syndrome",
+   "Pheochromocytoma",
+   "Menopausal flushing",
+   "VIPoma or other functional pancreatic neuroendocrine tumors",
+   "Medullary thyroid carcinoma with calcitonin/other peptide secretion",
+   "Anaphylaxis or food/alcohol-induced flushing reactions"
+  ],
+  "infectionMimics": [],
+  "nonInfectiousMimics": [
+   "Rosacea",
+   "Idiopathic flushing syndrome",
+   "Irritable bowel syndrome (for the diarrhea component)",
+   "Alcohol-induced flushing (especially in those with aldehyde dehydrogenase variants)"
+  ],
+  "additionalInvestigations": [
+   "24-hour urinary 5-hydroxyindoleacetic acid (5-HIAA) — main biochemical marker of serotonin turnover, though affected by diet and certain drugs",
+   "Plasma chromogranin A — general neuroendocrine tumor marker, useful for diagnosis and monitoring tumor burden",
+   "Serum serotonin level — supportive but less specific/standardized than urinary 5-HIAA",
+   "Somatostatin receptor imaging (e.g., 68Ga-DOTATATE PET/CT) — localizes primary tumor and metastases with high sensitivity",
+   "Cross-sectional imaging (contrast CT or MRI abdomen) — assesses primary tumor site, liver metastases, and mesenteric fibrosis",
+   "Echocardiography — screens for carcinoid heart disease (tricuspid/pulmonic valve involvement)",
+   "Endoscopy/enteroscopy or capsule endoscopy — identifies small bowel primary when suspected"
+  ],
+  "redFlags": [
+   "Signs of carcinoid heart disease (new murmur, right heart failure symptoms) warrant urgent echocardiography and cardiology referral",
+   "Pre-procedural or pre-anesthetic patients with known/suspected carcinoid require prophylaxis to prevent carcinoid crisis",
+   "Acute severe flushing with hypotension or bronchospasm suggests evolving carcinoid crisis and needs emergent management",
+   "Bowel obstruction or ischemia from mesenteric fibrosis/desmoplastic reaction is a surgical emergency",
+   "Refractory diarrhea causing dehydration or electrolyte derangement needs prompt correction"
+  ],
+  "pitfalls": [
+   "Attributing episodic flushing/diarrhea to anxiety, menopause, or irritable bowel syndrome, delaying diagnosis for years",
+   "Obtaining urinary 5-HIAA without dietary restriction (serotonin-rich foods) or accounting for interfering medications, leading to false results",
+   "Overlooking carcinoid heart disease until advanced right heart failure develops",
+   "Failing to anticipate and prevent carcinoid crisis before surgery, biopsy, or anesthesia in a patient with known tumor"
+  ],
+  "prognosis": "Prognosis depends primarily on tumor grade, extent of metastatic disease, and presence of carcinoid heart disease; with modern somatostatin analog therapy and multidisciplinary management, many patients experience prolonged survival and symptom control, though cardiac involvement significantly worsens outcomes if untreated.",
+  "references": [
+   "Harrison's Principles of Internal Medicine, 22e — Neuroendocrine Tumors and Carcinoid Syndrome"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Somatostatin analogues such as octreotide or lanreotide as the mainstay to suppress secretion of serotonin and other vasoactive mediators and control flushing and diarrhoea.",
+   "Tumour-directed treatment including surgical resection or debulking, liver-directed embolisation for hepatic metastases, and peptide receptor radionuclide therapy or interferon for progressive disease.",
+   "Telotristat, a tryptophan hydroxylase inhibitor, for diarrhoea refractory to somatostatin analogues.",
+   "Prevention of carcinoid crisis with peri-procedural somatostatin analogue cover before surgery, anaesthesia or embolisation.",
+   "Niacin supplementation to prevent or treat pellagra from tryptophan diversion, and avoidance of flushing triggers such as alcohol.",
+   "Echocardiographic surveillance for carcinoid heart disease, with valve replacement for significant right-sided valvular involvement.",
+   "Multidisciplinary neuroendocrine tumour team care, with escalation for carcinoid crisis or cardiac decompensation."
+  ]
+ },
+ "specialty": "Endocrinology",
+ "algorithms": [
+  {
+   "id": "carcinoid-diagnostic-algo",
+   "title": "Carcinoid Syndrome Diagnostic Triage and Somatostatin Analog Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation",
+     "action": "Patient presenting with episodic cutaneous flushing (face/neck/upper chest), secretory watery diarrhea, abdominal cramping, wheezing/bronchospasm, and/or telangiectasias.",
+     "critical": true
+    },
+    {
+     "step": "Biochemical Screening",
+     "action": "24-hour urinary 5-HIAA (5-hydroxyindoleacetic acid) collection; high sensitivity and specificity. Instruct patient to avoid serotonin-rich foods (bananas, pineapples, walnuts, avocados) for 3 days prior. Check plasma 5-HIAA if available.",
+     "critical": true
+    },
+    {
+     "step": "Somatostatin Receptor Neuroimaging",
+     "action": "68Ga-DOTATATE (or DOTATOC) PET-CT scan; gold standard imaging to identify primary midgut NET and delineate hepatic or distant metastases."
+    },
+    {
+     "step": "Carcinoid Heart Disease (Hedinger Syndrome) Screen",
+     "action": "Transthoracic echocardiogram and serum NT-proBNP in all confirmed carcinoid patients. Assess for right-sided tricuspid and pulmonary valve thickening, retraction, and regurgitation.",
+     "critical": true
+    },
+    {
+     "step": "First-Line Medical Therapy",
+     "action": "Initiate long-acting somatostatin analog (Octreotide LAR 20 to 30 mg IM monthly or Lanreotide Autogel 120 mg SC monthly). Use short-acting subcutaneous octreotide (100 to 500 mcg) for breakthrough symptoms."
+    },
+    {
+     "step": "Carcinoid Crisis Emergency Prevention",
+     "branch": "Surgery, anesthesia, or interventional procedures",
+     "action": "Continuous IV octreotide infusion (50 to 100 mcg/hour) starting 2 hours prior to and during any invasive procedure to prevent catastrophic intraoperative hypotensive carcinoid crisis.",
+     "critical": true
+    }
+   ],
+   "caption": "Algorithm aligned with ENETS (European Neuroendocrine Tumor Society) and NANETS clinical guidelines."
   }
+ ],
+ "tables": [
+  {
+   "id": "carcinoid-vasoactive-matrix",
+   "title": "Vasoactive Mediators and Clinical Manifestations in Carcinoid Syndrome",
+   "headers": [
+    "Vasoactive Mediator",
+    "Primary Clinical Manifestation",
+    "Diagnostic Biomarker / Test",
+    "Targeted Pharmacotherapy"
+   ],
+   "rows": [
+    [
+     "Serotonin (5-HT)",
+     "Watery secretory diarrhea, intestinal hypermotility, peritoneal and retroperitoneal fibrosis",
+     "24-hour urinary 5-HIAA, plasma 5-HIAA",
+     "Somatostatin analogs (octreotide/lanreotide), Telotristat ethyl (tryptophan hydroxylase inhibitor)"
+    ],
+    [
+     "Histamine",
+     "Atypical purplish cutaneous flushing, pruritus, wheezing (common in foregut NETs)",
+     "Urinary histamine metabolites, 5-HTP levels",
+     "H1 and H2 receptor antagonists (diphenhydramine, famotidine) + somatostatin analogs"
+    ],
+    [
+     "Bradykinin & Tachykinins",
+     "Episodic sudden bright-red cutaneous flushing, transient hypotension",
+     "Neurokinin A (NKA), Substance P",
+     "Somatostatin analogs; avoid adrenergic agonists which paradoxically trigger mediator release"
+    ],
+    [
+     "Prostaglandins",
+     "Abdominal cramping, borborygmi, vasodilatory episodes",
+     "Serum prostaglandin levels",
+     "Somatostatin analogs"
+    ],
+    [
+     "Transforming Growth Factor Beta (TGF-beta) & Serotonin",
+     "Carcinoid heart disease: fibrotic plaque deposition on tricuspid and pulmonary valves",
+     "Transthoracic echocardiogram, serum NT-proBNP",
+     "Valve replacement surgery (bioprosthetic or mechanical); control serotonin hypersecretion"
+    ]
+   ],
+   "caption": "Symptoms typically appear only after hepatic metastasis bypasses hepatic first-pass metabolism, or from primary bronchial/ovarian NETs."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "carcinoid-syndrome-real-image",
+   "title": "Carcinoid syndrome: Diagnostic Endocrine Cross-Sectional Imaging",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
+   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
+   "annotations": [
+    {
+     "label": "Gland Morphology",
+     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
+    },
+    {
+     "label": "Focal Lesions",
+     "description": "Nodularity, adenoma attenuation, and washout dynamics."
+    },
+    {
+     "label": "Surrounding Structures",
+     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+    }
+   ]
+  }
+ ]
 }

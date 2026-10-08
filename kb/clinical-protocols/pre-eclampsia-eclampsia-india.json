@@ -6,7 +6,24 @@
  "basis": "india",
  "counterpart": "pre-eclampsia-eclampsia",
  "setting": "Antenatal clinic, labour room, obstetric HDU, referral transport",
- "aliases": ["HDP", "hypertensive disorders of pregnancy", "PIH", "pre-eclampsia", "preeclampsia", "severe pre-eclampsia", "eclampsia", "gestational hypertension", "HDP Gestosis score", "MgSO4", "magnesium sulphate", "Pritchard regimen", "Zuspan regimen", "FOGSI GCPR HDP", "labetalol pregnancy", "nifedipine pregnancy"],
+ "aliases": [
+  "HDP",
+  "hypertensive disorders of pregnancy",
+  "PIH",
+  "pre-eclampsia",
+  "preeclampsia",
+  "severe pre-eclampsia",
+  "eclampsia",
+  "gestational hypertension",
+  "HDP Gestosis score",
+  "MgSO4",
+  "magnesium sulphate",
+  "Pritchard regimen",
+  "Zuspan regimen",
+  "FOGSI GCPR HDP",
+  "labetalol pregnancy",
+  "nifedipine pregnancy"
+ ],
  "summary": "Screen every pregnancy with the HDP-Gestosis score and give aspirin 75 to 150 mg plus calcium to women at risk. Treat BP of 140/90 or more to a target of 140/90 or below, control severe hypertension with oral nifedipine or IV labetalol, give magnesium sulphate (Pritchard or Zuspan) for severe pre-eclampsia and eclampsia, and deliver at 37 weeks (non-severe) or after 34 weeks (severe).",
  "sections": [
   {
@@ -109,19 +126,162 @@
   }
  ],
  "drugs": [
-  { "name": "Magnesium sulphate (Pritchard)", "dose": "Loading 4 g IV (20% solution, 1 g/min) plus 5 g deep IM (50%) into each buttock; maintenance 5 g IM into alternate buttocks 4-hourly", "notes": "Maintenance only if knee jerks present, RR 16/min or more, urine 30 mL/h or more (above 100 mL in 4 hours). Continue 24 hours after delivery or last fit." },
-  { "name": "Magnesium sulphate (Zuspan)", "dose": "4 g IV loading, then 1 g/h IV infusion", "notes": "5 g in 500 mL RL at 100 mL/h by pump." },
-  { "name": "Calcium gluconate 10%", "dose": "10 mL slow IV over 10 minutes", "notes": "Magnesium toxicity; keep at the bedside during magnesium therapy; ECG monitoring." },
-  { "name": "Nifedipine", "dose": "Severe: 10 to 30 mg orally, repeat in 30 to 45 minutes, maximum 120 mg. Maintenance: slow-release 20 to 120 mg/day in 2 to 3 doses", "notes": "Swallow whole; never sublingual, bitten or crushed." },
-  { "name": "Labetalol", "dose": "Severe: 10 to 20 mg IV, then 20 to 80 mg every 20 to 30 minutes, maximum 300 mg (or 1 to 2 mg/min infusion). Maintenance: 200 to 1200 mg/day orally in 2 doses", "notes": "Avoid in asthma, heart failure, bradycardia. Diabetes: caution (FOGSI lists it as a contraindication; NICE and AHA/ACC do not)." },
-  { "name": "Hydralazine", "dose": "5 mg IV or IM, then 5 to 10 mg every 20 to 40 minutes; infusion 0.5 to 10 mg/h", "notes": "Switch drug if no response after 20 mg IV or 30 mg IM." },
-  { "name": "Methyldopa", "dose": "500 to 2000 mg/day orally in 2 to 3 divided doses", "notes": "Stop postpartum." },
-  { "name": "Aspirin (prophylaxis)", "dose": "75 to 150 mg orally daily", "notes": "HDP-Gestosis score 3 or more; start early, stop 2 days before delivery." },
-  { "name": "Calcium (prophylaxis)", "dose": "1 to 1.5 g elemental calcium daily", "notes": "Low dietary calcium intake." },
-  { "name": "Dexamethasone or betamethasone", "dose": "Dexamethasone 6 mg IM 12-hourly for 4 doses, or betamethasone 12 mg IM 24-hourly for 2 doses", "notes": "Delivery expected before 34 weeks." }
+  {
+   "name": "Magnesium sulphate (Pritchard)",
+   "dose": "Loading 4 g IV (20% solution, 1 g/min) plus 5 g deep IM (50%) into each buttock; maintenance 5 g IM into alternate buttocks 4-hourly",
+   "notes": "Maintenance only if knee jerks present, RR 16/min or more, urine 30 mL/h or more (above 100 mL in 4 hours). Continue 24 hours after delivery or last fit."
+  },
+  {
+   "name": "Magnesium sulphate (Zuspan)",
+   "dose": "4 g IV loading, then 1 g/h IV infusion",
+   "notes": "5 g in 500 mL RL at 100 mL/h by pump."
+  },
+  {
+   "name": "Calcium gluconate 10%",
+   "dose": "10 mL slow IV over 10 minutes",
+   "notes": "Magnesium toxicity; keep at the bedside during magnesium therapy; ECG monitoring."
+  },
+  {
+   "name": "Nifedipine",
+   "dose": "Severe: 10 to 30 mg orally, repeat in 30 to 45 minutes, maximum 120 mg. Maintenance: slow-release 20 to 120 mg/day in 2 to 3 doses",
+   "notes": "Swallow whole; never sublingual, bitten or crushed."
+  },
+  {
+   "name": "Labetalol",
+   "dose": "Severe: 10 to 20 mg IV, then 20 to 80 mg every 20 to 30 minutes, maximum 300 mg (or 1 to 2 mg/min infusion). Maintenance: 200 to 1200 mg/day orally in 2 doses",
+   "notes": "Avoid in asthma, heart failure, bradycardia. Diabetes: caution (FOGSI lists it as a contraindication; NICE and AHA/ACC do not)."
+  },
+  {
+   "name": "Hydralazine",
+   "dose": "5 mg IV or IM, then 5 to 10 mg every 20 to 40 minutes; infusion 0.5 to 10 mg/h",
+   "notes": "Switch drug if no response after 20 mg IV or 30 mg IM."
+  },
+  {
+   "name": "Methyldopa",
+   "dose": "500 to 2000 mg/day orally in 2 to 3 divided doses",
+   "notes": "Stop postpartum."
+  },
+  {
+   "name": "Aspirin (prophylaxis)",
+   "dose": "75 to 150 mg orally daily",
+   "notes": "HDP-Gestosis score 3 or more; start early, stop 2 days before delivery."
+  },
+  {
+   "name": "Calcium (prophylaxis)",
+   "dose": "1 to 1.5 g elemental calcium daily",
+   "notes": "Low dietary calcium intake."
+  },
+  {
+   "name": "Dexamethasone or betamethasone",
+   "dose": "Dexamethasone 6 mg IM 12-hourly for 4 doses, or betamethasone 12 mg IM 24-hourly for 2 doses",
+   "notes": "Delivery expected before 34 weeks."
+  }
  ],
  "sources": [
-  { "org": "FOGSI, Gestosis (India) and ICOG", "title": "FOGSI-Gestosis-ICOG Hypertensive Disorders in Pregnancy (HDP): Good Clinical Practice Recommendations 2019", "year": 2019, "url": "https://icogonline.org/wp-content/uploads/pdf/gcpr/hdp_fogsi_gestosis_icog_gcpr_2019.pdf" }
+  {
+   "org": "FOGSI, Gestosis (India) and ICOG",
+   "title": "FOGSI-Gestosis-ICOG Hypertensive Disorders in Pregnancy (HDP): Good Clinical Practice Recommendations 2019",
+   "year": 2019,
+   "url": "https://icogonline.org/wp-content/uploads/pdf/gcpr/hdp_fogsi_gestosis_icog_gcpr_2019.pdf"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "pre-eclampsia-eclampsia-india-pathway",
+   "title": "Pre-eclampsia, severe hypertension in pregnancy and eclampsia (India, FOGSI) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Gestational hypertension: BP 140/90 mmHg or more after 20 weeks, normal by day 42 postpartum, without features of pre-eclampsia. Chronic hypertension: known, or detected before 20 weeks.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Call for help. Airway: left lateral position, mouth gag, suction, prevent injury. Breathing: oxygen, keep SpO2 above 96%.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Measure BP seated (or left lateral) with the cuff at heart level, after 2 to 3 minutes of rest; use Korotkoff V for diastolic (IV if V is absent) and a large cuff if arm circumference is above 33 cm."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Treat BP of 140 systolic and/or 90 diastolic or more; target 140/90 or below and avoid hypotension. In severe hypertension lower BP promptly but gradually."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Monitor BP closely for the first 48 hours; eclampsia and HELLP can first appear after delivery. Avoid NSAIDs."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for pre-eclampsia, severe hypertension in pregnancy and eclampsia (india, fogsi)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "pre-eclampsia-eclampsia-india-summary-matrix",
+   "title": "Pre-eclampsia, severe hypertension in pregnancy and eclampsia (India, FOGSI) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Gestational hypertension: BP 140/90 mmHg or more after 20 weeks, normal by day 42 postpartum, without features of pre-eclampsia. Chronic",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Call for help. Airway: left lateral position, mouth gag, suction, prevent injury. Breathing: oxygen, keep SpO2 above 96%.",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Measure BP seated (or left lateral) with the cuff at heart level, after 2 to 3 minutes of rest; use Korotkoff V for diastolic (IV if V is",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Magnesium sulphate (Pritchard): Loading 4 g IV (20% solution, 1 g/min) plus 5 g deep IM (50%) into each buttock; maintenance 5 g IM into",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Sublingual, bitten or crushed nifedipine, or rapid BP falls that compromise placental flow.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for pre-eclampsia, severe hypertension in pregnancy and eclampsia (india, fogsi)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "pre-eclampsia-eclampsia-india-real-image",
+   "title": "Pre-eclampsia, severe hypertension in pregnancy and eclampsia (India, FOGSI): 12-Lead Diagnostic Electrocardiogram",
+   "type": "ecg",
+   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
+   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
+   "annotations": [
+    {
+     "label": "Conduction & Axis",
+     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
+    },
+    {
+     "label": "Repolarization",
+     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
+    },
+    {
+     "label": "Rhythm & Intervals",
+     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+    }
+   ]
+  }
+ ]
 }

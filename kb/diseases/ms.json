@@ -174,5 +174,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "he7a6ef35"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "ms-dx-algo",
+      "title": "Multiple sclerosis (relapse): Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "MS is defined by lesions disseminated in both time and space: plaques arise at different times and in anatomically separate CNS sites (p.3577).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Distinguish a true relapse from a pseudoexacerbation driven by raised ambient temperature, fever, or infection - glucocorticoids are inappropriate for a pseudoexacerbation (p.3585).",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: CSF analysis for intrathecal IgG synthesis: CSF IgG index and IgG synthesis rate, plus oligoclonal bands by agarose-gel electrophoresis (>90% positive in MS) (p.3583), CSF cell count/profile: a mild mononuclear pleocytosis"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Course-based subtypes: relapsing-remitting MS (RRMS, ~90%), secondary progressive MS (SPMS, always evolves from RRMS), and primary progressive MS (PPMS, ~10%); 'relapsing MS (RMS)' covers all relapsing patients and"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Do not over-diagnose MS from a single isolated event or from MRI white-matter lesions alone - the diagnosis requires dissemination in space and time (clinical, MRI, or CSF evidence) per the McDonald criteria, and there"
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for multiple sclerosis (relapse)."
+    }
+  ],
+  "tables": [
+    {
+      "id": "ms-matrix",
+      "title": "Multiple sclerosis (relapse): Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "MS is defined by lesions disseminated in both time and space: plaques arise at different times and in anatomically separate CNS",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "CSF analysis for intrathecal IgG synthesis: CSF IgG index and IgG synthesis rate, plus oligoclonal bands by agarose-gel",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Neuromyelitis optica spectrum disorder (NMOSD, anti-AQP4) (p.3584, 3590), Myelin oligodendrocyte glycoprotein-associated disease",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Distinguish a true relapse from a pseudoexacerbation driven by raised ambient temperature, fever, or infection - glucocorticoids",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Do not over-diagnose MS from a single isolated event or from MRI white-matter lesions alone - the diagnosis requires",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for multiple sclerosis (relapse)."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "ms-real-image",
+      "title": "Multiple sclerosis (relapse): Diagnostic Head Computed Tomography",
+      "type": "ct",
+      "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
+      "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
+      "annotations": [
+        {
+          "label": "Cerebral Parenchyma",
+          "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+        },
+        {
+          "label": "Ventricular System",
+          "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+        },
+        {
+          "label": "Extra-Axial Spaces",
+          "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+        }
+      ]
+    }
+  ]
 }

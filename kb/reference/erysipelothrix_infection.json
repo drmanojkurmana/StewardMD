@@ -1,84 +1,179 @@
 {
-  "id": "erysipelothrix_infection",
-  "name": "Erysipelothrix infection",
-  "aliases": [
-    "Erysipeloid",
-    "Erysipelothrix rhusiopathiae infection",
-    "Fish handler's disease",
-    "Rosenbach erysipeloid"
+ "id": "erysipelothrix_infection",
+ "name": "Erysipelothrix infection",
+ "aliases": [
+  "Erysipeloid",
+  "Erysipelothrix rhusiopathiae infection",
+  "Fish handler's disease",
+  "Rosenbach erysipeloid"
+ ],
+ "class": "infective",
+ "system": "Infectious disease",
+ "specialty": "Infectious disease",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Infectious diseases references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Erysipelothrix rhusiopathiae is a slender gram-positive bacillus and the cause of a zoonosis, with pigs, fish, shellfish and poultry as principal reservoirs.",
+   "Occupational exposure is characteristic, affecting butchers, abattoir workers, fishermen, fishmongers and veterinarians.",
+   "The commonest presentation is erysipeloid: a painful, well-demarcated violaceous cellulitis of the hand or finger following a penetrating injury.",
+   "The erysipeloid lesion tends to spread slowly with central clearing and rarely suppurates or causes systemic upset.",
+   "The feared complication is infective endocarditis, which characteristically affects the aortic valve and may occur even on structurally normal native valves.",
+   "The organism is intrinsically resistant to vancomycin, an important trap when treating presumed gram-positive bacteraemia empirically.",
+   "Penicillin is the agent of choice, and the organism is also susceptible to several other beta-lactams.",
+   "Diagnosis rests on culture from a deep biopsy at the advancing edge of the skin lesion or from blood cultures in systemic disease."
   ],
-  "class": "infective",
-  "system": "Infectious disease",
-  "specialty": "Infectious disease",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Infectious diseases references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Erysipelothrix rhusiopathiae is a slender gram-positive bacillus and the cause of a zoonosis, with pigs, fish, shellfish and poultry as principal reservoirs.",
-      "Occupational exposure is characteristic, affecting butchers, abattoir workers, fishermen, fishmongers and veterinarians.",
-      "The commonest presentation is erysipeloid: a painful, well-demarcated violaceous cellulitis of the hand or finger following a penetrating injury.",
-      "The erysipeloid lesion tends to spread slowly with central clearing and rarely suppurates or causes systemic upset.",
-      "The feared complication is infective endocarditis, which characteristically affects the aortic valve and may occur even on structurally normal native valves.",
-      "The organism is intrinsically resistant to vancomycin, an important trap when treating presumed gram-positive bacteraemia empirically.",
-      "Penicillin is the agent of choice, and the organism is also susceptible to several other beta-lactams.",
-      "Diagnosis rests on culture from a deep biopsy at the advancing edge of the skin lesion or from blood cultures in systemic disease."
+  "pathophysiology": "Erysipelothrix rhusiopathiae is a slender, non-spore-forming gram-positive bacillus that is widely distributed in animals, especially pigs, and in the surface slime of fish and shellfish. Human infection is a zoonosis acquired by percutaneous inoculation of contaminated animal or fish material, typically through a minor puncture or abrasion of the hand during occupational handling. The organism elaborates neuraminidase and hyaluronidase and possesses a capsule that resists phagocytosis, which together facilitate spread through the dermis and produce the characteristic well-demarcated erysipeloid lesion. Most infection remains localised, but in some hosts the bacillus invades the bloodstream to cause bacteraemia with a striking predilection for the cardiac valves, particularly the aortic valve, where it can establish endocarditis even on previously normal valves. Its intrinsic resistance to vancomycin, aminoglycosides and sulphonamides is clinically important when selecting therapy.",
+  "additionalDifferentials": [
+   "Streptococcal or staphylococcal cellulitis and classical erysipelas",
+   "Herpetic whitlow",
+   "Orf or milker's nodule (parapoxvirus)",
+   "Acute gout or another inflammatory arthritis of the hand",
+   "Tularaemia or another zoonotic inoculation infection",
+   "Cutaneous anthrax",
+   "Seal finger"
+  ],
+  "additionalInvestigations": [
+   "Culture of a deep skin biopsy or aspirate taken from the advancing edge of the lesion",
+   "Blood cultures where systemic infection or endocarditis is suspected",
+   "Transthoracic and, if needed, transoesophageal echocardiography for suspected endocarditis",
+   "Gram stain and species identification, bearing in mind possible misidentification as other gram-positive bacilli",
+   "Inflammatory markers",
+   "Antimicrobial susceptibility testing, noting intrinsic vancomycin resistance",
+   "Documentation of occupational and animal or fish exposure history"
+  ],
+  "redFlags": [
+   "A new or changing heart murmur, or embolic phenomena, suggesting endocarditis",
+   "Systemic upset such as fever and rigors accompanying the skin lesion",
+   "Diffuse or rapidly spreading cutaneous involvement beyond the site of inoculation",
+   "Failure to respond to empirical vancomycin given for presumed gram-positive infection",
+   "Features of septic arthritis in an inoculated digit"
+  ],
+  "prognosis": "Localised erysipeloid is usually self-limiting and resolves promptly with appropriate antibiotics. Erysipelothrix endocarditis, though uncommon, tends to be aggressive, carries a higher mortality than many other causes of endocarditis, and frequently requires valve surgery.",
+  "pitfalls": [
+   "Treating gram-positive bacteraemia empirically with vancomycin, to which Erysipelothrix is intrinsically resistant.",
+   "Relying on superficial swabs, which often fail to grow the organism, rather than a deep biopsy of the leading edge.",
+   "Dismissing the bacillus as a contaminant diphtheroid or lactobacillus and discarding a true isolate.",
+   "Overlooking endocarditis in a patient who has erysipeloid together with systemic features.",
+   "Missing the occupational exposure history that points to the diagnosis."
+  ],
+  "references": [
+   "Infectious diseases reference texts",
+   "Zoonotic infection clinical reviews",
+   "Infective endocarditis guidelines"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Penicillin as first-line antimicrobial therapy, with a cephalosporin, fluoroquinolone or clindamycin as alternatives in penicillin allergy",
+   "Deliberate avoidance of vancomycin and other empirical agents to which the organism is intrinsically resistant, an important trap in presumed gram-positive bacteraemia",
+   "Wound care and analgesia for the localised erysipeloid lesion, which is generally self-limiting",
+   "Blood cultures with transthoracic and, if needed, transoesophageal echocardiography where systemic infection or endocarditis is suspected",
+   "Prolonged intravenous penicillin for the aggressive aortic-valve endocarditis, with early valve surgery where indicated by valve destruction or embolic risk",
+   "Occupational prevention through protective gloves and hand hygiene for butchers, fish handlers, abattoir workers and veterinarians"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "erysipelothrix_infection-pathway",
+   "title": "Erysipelothrix infection: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Erysipelothrix rhusiopathiae is a slender gram-positive bacillus and the cause of a zoonosis, with pigs, fish, shellfish and poultry as principal reservoirs.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: A new or changing heart murmur, or embolic phenomena, suggesting endocarditis",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Culture of a deep skin biopsy or aspirate taken from the advancing edge of the lesion, Blood cultures where systemic infection or endocarditis is suspected, Transthoracic and, if needed, transoesophageal echocardiography"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Penicillin as first-line antimicrobial therapy, with a cephalosporin, fluoroquinolone or clindamycin as alternatives in penicillin allergy"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Treating gram-positive bacteraemia empirically with vancomycin, to which Erysipelothrix is intrinsically resistant."
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of erysipelothrix infection."
+  }
+ ],
+ "tables": [
+  {
+   "id": "erysipelothrix_infection-matrix",
+   "title": "Erysipelothrix infection: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Erysipelothrix rhusiopathiae is a slender gram-positive bacillus and the cause of a zoonosis, with pigs, fish, shellfish and",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Erysipelothrix rhusiopathiae is a slender, non-spore-forming gram-positive bacillus that is widely distributed in animals, especially pigs, and in the surface slime of fish and shellfish. Human infection is a zoonosis acquired by percutaneous inoculation of contaminated animal or fish material, typically through a minor puncture or abrasion of the hand during occupational handling. The organism elaborates neuraminidase and hyaluronidase and possesses a capsule that resists phagocytosis, which together facilitate spread through the dermis and produce the characteristic well-demarcated erysipeloid lesion. Most infection remains localised, but in some hosts the bacillus invades the bloodstream to cause bacteraemia with a striking predilection for the cardiac valves, particularly the aortic valve, where it can establish endocarditis even on previously normal valves. Its intrinsic resistance to vancomycin, aminoglycosides and sulphonamides is clinically important when selecting therapy.",
-    "additionalDifferentials": [
-      "Streptococcal or staphylococcal cellulitis and classical erysipelas",
-      "Herpetic whitlow",
-      "Orf or milker's nodule (parapoxvirus)",
-      "Acute gout or another inflammatory arthritis of the hand",
-      "Tularaemia or another zoonotic inoculation infection",
-      "Cutaneous anthrax",
-      "Seal finger"
+    [
+     "Key Investigations",
+     "Culture of a deep skin biopsy or aspirate taken from the advancing edge of the lesion, Blood cultures where systemic infection or",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Culture of a deep skin biopsy or aspirate taken from the advancing edge of the lesion",
-      "Blood cultures where systemic infection or endocarditis is suspected",
-      "Transthoracic and, if needed, transoesophageal echocardiography for suspected endocarditis",
-      "Gram stain and species identification, bearing in mind possible misidentification as other gram-positive bacilli",
-      "Inflammatory markers",
-      "Antimicrobial susceptibility testing, noting intrinsic vancomycin resistance",
-      "Documentation of occupational and animal or fish exposure history"
+    [
+     "Primary Differentials",
+     "Streptococcal or staphylococcal cellulitis and classical erysipelas, Herpetic whitlow, Orf or milker's nodule (parapoxvirus)",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "A new or changing heart murmur, or embolic phenomena, suggesting endocarditis",
-      "Systemic upset such as fever and rigors accompanying the skin lesion",
-      "Diffuse or rapidly spreading cutaneous involvement beyond the site of inoculation",
-      "Failure to respond to empirical vancomycin given for presumed gram-positive infection",
-      "Features of septic arthritis in an inoculated digit"
+    [
+     "Management Strategy",
+     "Penicillin as first-line antimicrobial therapy, with a cephalosporin, fluoroquinolone or clindamycin as alternatives in",
+     "Core treatment modality"
     ],
-    "prognosis": "Localised erysipeloid is usually self-limiting and resolves promptly with appropriate antibiotics. Erysipelothrix endocarditis, though uncommon, tends to be aggressive, carries a higher mortality than many other causes of endocarditis, and frequently requires valve surgery.",
-    "pitfalls": [
-      "Treating gram-positive bacteraemia empirically with vancomycin, to which Erysipelothrix is intrinsically resistant.",
-      "Relying on superficial swabs, which often fail to grow the organism, rather than a deep biopsy of the leading edge.",
-      "Dismissing the bacillus as a contaminant diphtheroid or lactobacillus and discarding a true isolate.",
-      "Overlooking endocarditis in a patient who has erysipeloid together with systemic features.",
-      "Missing the occupational exposure history that points to the diagnosis."
-    ],
-    "references": [
-      "Infectious diseases reference texts",
-      "Zoonotic infection clinical reviews",
-      "Infective endocarditis guidelines"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Penicillin as first-line antimicrobial therapy, with a cephalosporin, fluoroquinolone or clindamycin as alternatives in penicillin allergy",
-      "Deliberate avoidance of vancomycin and other empirical agents to which the organism is intrinsically resistant, an important trap in presumed gram-positive bacteraemia",
-      "Wound care and analgesia for the localised erysipeloid lesion, which is generally self-limiting",
-      "Blood cultures with transthoracic and, if needed, transoesophageal echocardiography where systemic infection or endocarditis is suspected",
-      "Prolonged intravenous penicillin for the aggressive aortic-valve endocarditis, with early valve surgery where indicated by valve destruction or embolic risk",
-      "Occupational prevention through protective gloves and hand hygiene for butchers, fish handlers, abattoir workers and veterinarians"
+    [
+     "Clinical Pitfall",
+     "Treating gram-positive bacteraemia empirically with vancomycin, to which Erysipelothrix is intrinsically resistant.",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for erysipelothrix infection."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "erysipelothrix-infection-real-image",
+   "title": "Erysipelothrix infection: Diagnostic Microbiological / Smear Examination",
+   "type": "diagram",
+   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
+   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
+   "annotations": [
+    {
+     "label": "Pathogen Detection",
+     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
+    },
+    {
+     "label": "Inflammatory Response",
+     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
+    },
+    {
+     "label": "Diagnostic Confirmation",
+     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+    }
+   ]
+  }
+ ]
 }

@@ -1,78 +1,173 @@
 {
-  "id": "harlequin_syndrome",
-  "name": "Harlequin syndrome",
-  "aliases": [
-    "harlequin sign",
-    "asymmetric facial flushing and sweating"
+ "id": "harlequin_syndrome",
+ "name": "Harlequin syndrome",
+ "aliases": [
+  "harlequin sign",
+  "asymmetric facial flushing and sweating"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system / Autonomic",
+ "specialty": "Neurology / Autonomic",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Bradley and Daroff Neurology in Clinical Practice / Low's Clinical Autonomic Disorders",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Characterised by sudden, sharply demarcated unilateral facial (and sometimes upper thoracic) flushing and sweating, typically provoked by heat, exercise, or emotion",
+   "The flushing side is the normal side; the contralateral side fails to flush and sweat because of sympathetic dysfunction",
+   "Reflects a lesion of the sympathetic vasomotor and sudomotor fibres, often at the preganglionic T2-T3 level",
+   "The demarcation line down the midline of the face is the striking diagnostic clue",
+   "Frequently idiopathic and benign, but may be associated with Horner syndrome or Adie tonic pupils, overlapping with Ross syndrome",
+   "Secondary causes include structural lesions of the brainstem, spinal cord, or paravertebral sympathetic chain from tumour, surgery, or trauma",
+   "Investigation is directed at excluding a structural sympathetic lesion when features are atypical or progressive",
+   "Management is largely reassurance for idiopathic cases, with treatment of any identified underlying cause"
   ],
-  "class": "non_infective",
-  "system": "Nervous system / Autonomic",
-  "specialty": "Neurology / Autonomic",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Bradley and Daroff Neurology in Clinical Practice / Low's Clinical Autonomic Disorders",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Characterised by sudden, sharply demarcated unilateral facial (and sometimes upper thoracic) flushing and sweating, typically provoked by heat, exercise, or emotion",
-      "The flushing side is the normal side; the contralateral side fails to flush and sweat because of sympathetic dysfunction",
-      "Reflects a lesion of the sympathetic vasomotor and sudomotor fibres, often at the preganglionic T2-T3 level",
-      "The demarcation line down the midline of the face is the striking diagnostic clue",
-      "Frequently idiopathic and benign, but may be associated with Horner syndrome or Adie tonic pupils, overlapping with Ross syndrome",
-      "Secondary causes include structural lesions of the brainstem, spinal cord, or paravertebral sympathetic chain from tumour, surgery, or trauma",
-      "Investigation is directed at excluding a structural sympathetic lesion when features are atypical or progressive",
-      "Management is largely reassurance for idiopathic cases, with treatment of any identified underlying cause"
+  "pathophysiology": "Harlequin syndrome results from a unilateral lesion of the sympathetic vasomotor and sudomotor pathways supplying the face, most often affecting the preganglionic fibres arising around the second and third thoracic segments. Loss of sympathetic outflow on the affected side prevents the normal flushing and sweating response to thermal, exertional, or emotional stimuli, so only the intact contralateral side reddens and perspires, producing the sharply demarcated 'harlequin' appearance. The lesion may be idiopathic, presumed to reflect a focal autonomic neuropathy, or secondary to structural compression or injury of the sympathetic pathway; associated pupillary or Horner findings indicate more extensive autonomic involvement.",
+  "additionalDifferentials": [
+   "Horner syndrome",
+   "Frey syndrome (gustatory sweating)",
+   "Ross syndrome",
+   "Physiological or menopausal flushing",
+   "Rosacea or other dermatological flushing",
+   "Structural brainstem or cervical sympathetic lesion"
+  ],
+  "additionalInvestigations": [
+   "Detailed autonomic and pupillary examination for Horner syndrome or a tonic pupil",
+   "Pharmacological pupil testing where anisocoria is present",
+   "MRI of the brain, cervical spine, and thorax to exclude a structural sympathetic lesion",
+   "Thermoregulatory sweat test to map the sudomotor deficit",
+   "QSART for postganglionic sudomotor assessment",
+   "Chest imaging to exclude an apical or mediastinal lesion"
+  ],
+  "redFlags": [
+   "Accompanying Horner syndrome with pain suggesting carotid dissection or an apical lung lesion",
+   "Progressive or additional neurological deficits",
+   "Onset after trauma or surgery with structural implications",
+   "Systemic features suggesting an underlying malignancy"
+  ],
+  "prognosis": "Idiopathic Harlequin syndrome is benign and usually cosmetically rather than functionally troublesome, often remaining stable or fluctuating over time; the prognosis in secondary cases depends on the underlying structural cause.",
+  "pitfalls": [
+   "Mistaking the flushing (normal) side for the abnormal side",
+   "Assuming the syndrome is always idiopathic and missing an underlying structural lesion",
+   "Overlooking associated Horner syndrome or tonic pupils that broaden the differential",
+   "Failing to image when the presentation is atypical or progressive"
+  ],
+  "references": [
+   "Bradley and Daroff's Neurology in Clinical Practice",
+   "Low's Clinical Autonomic Disorders"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Reassure and observe in idiopathic cases, which are benign and usually only cosmetically troublesome so require no specific treatment",
+   "Investigate for and treat any underlying structural cause such as a tumour or compressive lesion of the sympathetic pathway",
+   "Recognise and manage associated autonomic features including Horner syndrome, Adie tonic pupils, and Ross syndrome overlap",
+   "Reserve interventional sympathetic procedures such as contralateral sympathetic block or sympathectomy for genuinely distressing cases",
+   "Monitor for progression or new neurological and autonomic signs that may indicate an evolving structural lesion",
+   "Refer to neurology or an autonomic specialist for characterisation and follow-up",
+   "Escalate to further imaging if new deficits emerge suggesting a secondary cause"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "harlequin_syndrome-pathway",
+   "title": "Harlequin syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Characterised by sudden, sharply demarcated unilateral facial (and sometimes upper thoracic) flushing and sweating, typically provoked by heat, exercise, or emotion",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Accompanying Horner syndrome with pain suggesting carotid dissection or an apical lung lesion",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Detailed autonomic and pupillary examination for Horner syndrome or a tonic pupil, Pharmacological pupil testing where anisocoria is present, MRI of the brain, cervical spine, and thorax to exclude a structural sympathetic"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Reassure and observe in idiopathic cases, which are benign and usually only cosmetically troublesome so require no specific treatment"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking the flushing (normal) side for the abnormal side"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of harlequin syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "harlequin_syndrome-matrix",
+   "title": "Harlequin syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Characterised by sudden, sharply demarcated unilateral facial (and sometimes upper thoracic) flushing and sweating, typically",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Harlequin syndrome results from a unilateral lesion of the sympathetic vasomotor and sudomotor pathways supplying the face, most often affecting the preganglionic fibres arising around the second and third thoracic segments. Loss of sympathetic outflow on the affected side prevents the normal flushing and sweating response to thermal, exertional, or emotional stimuli, so only the intact contralateral side reddens and perspires, producing the sharply demarcated 'harlequin' appearance. The lesion may be idiopathic, presumed to reflect a focal autonomic neuropathy, or secondary to structural compression or injury of the sympathetic pathway; associated pupillary or Horner findings indicate more extensive autonomic involvement.",
-    "additionalDifferentials": [
-      "Horner syndrome",
-      "Frey syndrome (gustatory sweating)",
-      "Ross syndrome",
-      "Physiological or menopausal flushing",
-      "Rosacea or other dermatological flushing",
-      "Structural brainstem or cervical sympathetic lesion"
+    [
+     "Key Investigations",
+     "Detailed autonomic and pupillary examination for Horner syndrome or a tonic pupil, Pharmacological pupil testing where anisocoria",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Detailed autonomic and pupillary examination for Horner syndrome or a tonic pupil",
-      "Pharmacological pupil testing where anisocoria is present",
-      "MRI of the brain, cervical spine, and thorax to exclude a structural sympathetic lesion",
-      "Thermoregulatory sweat test to map the sudomotor deficit",
-      "QSART for postganglionic sudomotor assessment",
-      "Chest imaging to exclude an apical or mediastinal lesion"
+    [
+     "Primary Differentials",
+     "Horner syndrome, Frey syndrome (gustatory sweating), Ross syndrome",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Accompanying Horner syndrome with pain suggesting carotid dissection or an apical lung lesion",
-      "Progressive or additional neurological deficits",
-      "Onset after trauma or surgery with structural implications",
-      "Systemic features suggesting an underlying malignancy"
+    [
+     "Management Strategy",
+     "Reassure and observe in idiopathic cases, which are benign and usually only cosmetically troublesome so require no specific",
+     "Core treatment modality"
     ],
-    "prognosis": "Idiopathic Harlequin syndrome is benign and usually cosmetically rather than functionally troublesome, often remaining stable or fluctuating over time; the prognosis in secondary cases depends on the underlying structural cause.",
-    "pitfalls": [
-      "Mistaking the flushing (normal) side for the abnormal side",
-      "Assuming the syndrome is always idiopathic and missing an underlying structural lesion",
-      "Overlooking associated Horner syndrome or tonic pupils that broaden the differential",
-      "Failing to image when the presentation is atypical or progressive"
-    ],
-    "references": [
-      "Bradley and Daroff's Neurology in Clinical Practice",
-      "Low's Clinical Autonomic Disorders"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Reassure and observe in idiopathic cases, which are benign and usually only cosmetically troublesome so require no specific treatment",
-      "Investigate for and treat any underlying structural cause such as a tumour or compressive lesion of the sympathetic pathway",
-      "Recognise and manage associated autonomic features including Horner syndrome, Adie tonic pupils, and Ross syndrome overlap",
-      "Reserve interventional sympathetic procedures such as contralateral sympathetic block or sympathectomy for genuinely distressing cases",
-      "Monitor for progression or new neurological and autonomic signs that may indicate an evolving structural lesion",
-      "Refer to neurology or an autonomic specialist for characterisation and follow-up",
-      "Escalate to further imaging if new deficits emerge suggesting a secondary cause"
+    [
+     "Clinical Pitfall",
+     "Mistaking the flushing (normal) side for the abnormal side",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for harlequin syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "harlequin-syndrome-real-image",
+   "title": "Harlequin syndrome: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

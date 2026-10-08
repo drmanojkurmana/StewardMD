@@ -1,79 +1,174 @@
 {
-  "id": "ammonium_acid_urate_stone",
-  "name": "Ammonium acid urate stones",
-  "aliases": [
-    "ammonium urate stones",
-    "ammonium acid urate calculi",
-    "acid urate stones",
-    "ammonium urate nephrolithiasis"
+ "id": "ammonium_acid_urate_stone",
+ "name": "Ammonium acid urate stones",
+ "aliases": [
+  "ammonium urate stones",
+  "ammonium acid urate calculi",
+  "acid urate stones",
+  "ammonium urate nephrolithiasis"
+ ],
+ "class": "non_infective",
+ "system": "Renal / Nephrology",
+ "specialty": "Nephrology / Urology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Comprehensive Clinical Nephrology / Campbell-Walsh-Wein Urology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Uncommon stones composed of ammonium acid urate, whose formation requires both a high urinary ammonium and a high urate",
+   "There are two classic settings: chronic laxative abuse and eating disorders in the developed world, and endemic bladder stones from childhood malnutrition and low-phosphate diets in the developing world",
+   "Chronic diarrhoea or laxative misuse causes volume depletion, a low urine volume, acidic urine and potassium depletion that increases renal ammonium production",
+   "Recurrent urinary infection and dehydration are contributing factors",
+   "Stones are radiolucent to only faintly opaque, so non-contrast CT is the best imaging modality",
+   "Their presence should prompt sensitive enquiry into laxative misuse or an eating disorder, which is often concealed",
+   "Management targets the cause, namely stopping laxative abuse, rehydration, correcting hypokalaemia and treating any infection, alongside stone removal",
+   "Because they are hard, ammonium acid urate stones respond poorly to shock-wave lithotripsy and often need endoscopic or percutaneous removal"
   ],
-  "class": "non_infective",
-  "system": "Renal / Nephrology",
-  "specialty": "Nephrology / Urology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Comprehensive Clinical Nephrology / Campbell-Walsh-Wein Urology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Uncommon stones composed of ammonium acid urate, whose formation requires both a high urinary ammonium and a high urate",
-      "There are two classic settings: chronic laxative abuse and eating disorders in the developed world, and endemic bladder stones from childhood malnutrition and low-phosphate diets in the developing world",
-      "Chronic diarrhoea or laxative misuse causes volume depletion, a low urine volume, acidic urine and potassium depletion that increases renal ammonium production",
-      "Recurrent urinary infection and dehydration are contributing factors",
-      "Stones are radiolucent to only faintly opaque, so non-contrast CT is the best imaging modality",
-      "Their presence should prompt sensitive enquiry into laxative misuse or an eating disorder, which is often concealed",
-      "Management targets the cause, namely stopping laxative abuse, rehydration, correcting hypokalaemia and treating any infection, alongside stone removal",
-      "Because they are hard, ammonium acid urate stones respond poorly to shock-wave lithotripsy and often need endoscopic or percutaneous removal"
+  "pathophysiology": "Ammonium acid urate precipitates when the urine contains both abundant urate and a high concentration of ammonium. This occurs when chronic diarrhoea or laxative misuse produces volume depletion and a metabolic acidosis with potassium depletion: the low urine volume concentrates solutes, the acidic pH favours the urate species, and hypokalaemia together with intestinal alkali loss stimulates renal ammoniagenesis, supplying the ammonium. Recurrent infection and dehydration reinforce the process. In malnourished children on low-phosphate, low-protein diets, high urinary urate and ammonium similarly drive endemic bladder stone formation.",
+  "additionalDifferentials": [
+   "Uric acid stones",
+   "Struvite (infection) stones",
+   "Calcium oxalate stones",
+   "Other radiolucent stones",
+   "Xanthine stones"
+  ],
+  "additionalInvestigations": [
+   "Non-contrast CT, since these stones are poorly seen on plain films",
+   "Stone analysis identifying ammonium acid urate",
+   "24-hour urine for volume, urate, pH and ammonium",
+   "Serum electrolytes for hypokalaemia and metabolic acidosis",
+   "Sensitive assessment for laxative misuse or an eating disorder",
+   "Urine culture for coexisting infection"
+  ],
+  "redFlags": [
+   "Severe electrolyte disturbance from laxative abuse, such as hypokalaemia and acidosis",
+   "Obstruction with infection",
+   "Features of a serious underlying eating disorder",
+   "Recurrent stones despite apparent treatment, suggesting ongoing concealed misuse"
+  ],
+  "prognosis": "Correcting the underlying cause by stopping laxative misuse, rehydrating and restoring electrolytes prevents recurrence; persistent concealed misuse leads to recurrent stones and ongoing metabolic disturbance.",
+  "pitfalls": [
+   "Failing to ask sensitively about laxative misuse or an eating disorder",
+   "Relying on plain radiographs, which miss these radiolucent stones",
+   "Expecting shock-wave lithotripsy to work on these hard stones",
+   "Overlooking hypokalaemia and metabolic acidosis that need correction"
+  ],
+  "references": [
+   "Comprehensive Clinical Nephrology (Feehally et al.)",
+   "Campbell-Walsh-Wein Urology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Correct the underlying cause by stopping laxative misuse, treating any eating disorder and addressing childhood malnutrition and low-phosphate diet",
+   "Maintain high fluid intake and rehydration to raise urine volume and reduce solute concentration",
+   "Restore potassium and correct the metabolic acidosis, which reduces renal ammonium production",
+   "Remove existing stones by endourological means such as ureteroscopy or percutaneous nephrolithotomy, since these poorly opaque stones respond poorly to shock-wave lithotripsy",
+   "Reduce urinary urate with dietary purine moderation and, where appropriate, urate-lowering therapy such as allopurinol",
+   "Provide sensitive psychiatric and dietetic support for concealed laxative misuse or an eating disorder",
+   "Monitor with periodic imaging and metabolic urine studies to prevent recurrence"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "ammonium_acid_urate_stone-pathway",
+   "title": "Ammonium acid urate stones: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Uncommon stones composed of ammonium acid urate, whose formation requires both a high urinary ammonium and a high urate",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Severe electrolyte disturbance from laxative abuse, such as hypokalaemia and acidosis",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Non-contrast CT, since these stones are poorly seen on plain films, Stone analysis identifying ammonium acid urate, 24-hour urine for volume, urate, pH and ammonium"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Correct the underlying cause by stopping laxative misuse, treating any eating disorder and addressing childhood malnutrition and low-phosphate diet"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Failing to ask sensitively about laxative misuse or an eating disorder"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of ammonium acid urate stones."
+  }
+ ],
+ "tables": [
+  {
+   "id": "ammonium_acid_urate_stone-matrix",
+   "title": "Ammonium acid urate stones: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Uncommon stones composed of ammonium acid urate, whose formation requires both a high urinary ammonium and a high urate",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Ammonium acid urate precipitates when the urine contains both abundant urate and a high concentration of ammonium. This occurs when chronic diarrhoea or laxative misuse produces volume depletion and a metabolic acidosis with potassium depletion: the low urine volume concentrates solutes, the acidic pH favours the urate species, and hypokalaemia together with intestinal alkali loss stimulates renal ammoniagenesis, supplying the ammonium. Recurrent infection and dehydration reinforce the process. In malnourished children on low-phosphate, low-protein diets, high urinary urate and ammonium similarly drive endemic bladder stone formation.",
-    "additionalDifferentials": [
-      "Uric acid stones",
-      "Struvite (infection) stones",
-      "Calcium oxalate stones",
-      "Other radiolucent stones",
-      "Xanthine stones"
+    [
+     "Key Investigations",
+     "Non-contrast CT, since these stones are poorly seen on plain films, Stone analysis identifying ammonium acid urate, 24-hour urine",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Non-contrast CT, since these stones are poorly seen on plain films",
-      "Stone analysis identifying ammonium acid urate",
-      "24-hour urine for volume, urate, pH and ammonium",
-      "Serum electrolytes for hypokalaemia and metabolic acidosis",
-      "Sensitive assessment for laxative misuse or an eating disorder",
-      "Urine culture for coexisting infection"
+    [
+     "Primary Differentials",
+     "Uric acid stones, Struvite (infection) stones, Calcium oxalate stones",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Severe electrolyte disturbance from laxative abuse, such as hypokalaemia and acidosis",
-      "Obstruction with infection",
-      "Features of a serious underlying eating disorder",
-      "Recurrent stones despite apparent treatment, suggesting ongoing concealed misuse"
+    [
+     "Management Strategy",
+     "Correct the underlying cause by stopping laxative misuse, treating any eating disorder and addressing childhood malnutrition and",
+     "Core treatment modality"
     ],
-    "prognosis": "Correcting the underlying cause by stopping laxative misuse, rehydrating and restoring electrolytes prevents recurrence; persistent concealed misuse leads to recurrent stones and ongoing metabolic disturbance.",
-    "pitfalls": [
-      "Failing to ask sensitively about laxative misuse or an eating disorder",
-      "Relying on plain radiographs, which miss these radiolucent stones",
-      "Expecting shock-wave lithotripsy to work on these hard stones",
-      "Overlooking hypokalaemia and metabolic acidosis that need correction"
-    ],
-    "references": [
-      "Comprehensive Clinical Nephrology (Feehally et al.)",
-      "Campbell-Walsh-Wein Urology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Correct the underlying cause by stopping laxative misuse, treating any eating disorder and addressing childhood malnutrition and low-phosphate diet",
-      "Maintain high fluid intake and rehydration to raise urine volume and reduce solute concentration",
-      "Restore potassium and correct the metabolic acidosis, which reduces renal ammonium production",
-      "Remove existing stones by endourological means such as ureteroscopy or percutaneous nephrolithotomy, since these poorly opaque stones respond poorly to shock-wave lithotripsy",
-      "Reduce urinary urate with dietary purine moderation and, where appropriate, urate-lowering therapy such as allopurinol",
-      "Provide sensitive psychiatric and dietetic support for concealed laxative misuse or an eating disorder",
-      "Monitor with periodic imaging and metabolic urine studies to prevent recurrence"
+    [
+     "Clinical Pitfall",
+     "Failing to ask sensitively about laxative misuse or an eating disorder",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for ammonium acid urate stones."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "ammonium-acid-urate-stone-real-image",
+   "title": "Ammonium acid urate stones: Diagnostic Renal Ultrasonography",
+   "type": "ultrasound",
+   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
+   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
+   "annotations": [
+    {
+     "label": "Renal Cortex",
+     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
+    },
+    {
+     "label": "Corticomedullary Junction",
+     "description": "Medullary pyramid definition and structural architecture."
+    },
+    {
+     "label": "Collecting System",
+     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+    }
+   ]
+  }
+ ]
 }

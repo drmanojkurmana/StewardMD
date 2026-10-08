@@ -1,82 +1,177 @@
 {
-  "id": "richner_hanhart_syndrome",
-  "name": "Richner-Hanhart syndrome",
-  "aliases": [
-    "tyrosinaemia type II",
-    "oculocutaneous tyrosinaemia",
-    "TAT deficiency",
-    "tyrosine aminotransferase deficiency"
+ "id": "richner_hanhart_syndrome",
+ "name": "Richner-Hanhart syndrome",
+ "aliases": [
+  "tyrosinaemia type II",
+  "oculocutaneous tyrosinaemia",
+  "TAT deficiency",
+  "tyrosine aminotransferase deficiency"
+ ],
+ "class": "non_infective",
+ "system": "Metabolic / Genetics",
+ "specialty": "Metabolic Medicine / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "OMIM / GeneReviews / Scriver's Metabolic and Molecular Bases of Inherited Disease",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "The classic combination is painful pseudodendritic keratitis with palmoplantar keratoderma, often with variable intellectual disability",
+   "Autosomal recessive disorder caused by biallelic pathogenic variants in TAT, encoding hepatic tyrosine aminotransferase (tyrosinaemia type II)",
+   "Ocular symptoms such as photophobia, tearing and redness can precede skin lesions and may be misdiagnosed as herpetic keratitis",
+   "Painful hyperkeratotic lesions affect the palms and soles and can be a prominent complaint",
+   "Marked hypertyrosinaemia is the biochemical signature, with raised plasma tyrosine and increased urinary tyrosine metabolites",
+   "Unlike tyrosinaemia type I, there is no hepatorenal disease; the toxicity is due to tyrosine crystal deposition",
+   "Dietary restriction of tyrosine and phenylalanine improves the ocular and cutaneous features and may protect neurodevelopment",
+   "Corneal lesions are typically bilateral, which helps distinguish them from infective dendritic ulcers"
   ],
-  "class": "non_infective",
-  "system": "Metabolic / Genetics",
-  "specialty": "Metabolic Medicine / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "OMIM / GeneReviews / Scriver's Metabolic and Molecular Bases of Inherited Disease",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "The classic combination is painful pseudodendritic keratitis with palmoplantar keratoderma, often with variable intellectual disability",
-      "Autosomal recessive disorder caused by biallelic pathogenic variants in TAT, encoding hepatic tyrosine aminotransferase (tyrosinaemia type II)",
-      "Ocular symptoms such as photophobia, tearing and redness can precede skin lesions and may be misdiagnosed as herpetic keratitis",
-      "Painful hyperkeratotic lesions affect the palms and soles and can be a prominent complaint",
-      "Marked hypertyrosinaemia is the biochemical signature, with raised plasma tyrosine and increased urinary tyrosine metabolites",
-      "Unlike tyrosinaemia type I, there is no hepatorenal disease; the toxicity is due to tyrosine crystal deposition",
-      "Dietary restriction of tyrosine and phenylalanine improves the ocular and cutaneous features and may protect neurodevelopment",
-      "Corneal lesions are typically bilateral, which helps distinguish them from infective dendritic ulcers"
+  "pathophysiology": "Richner-Hanhart syndrome is caused by deficiency of hepatic cytosolic tyrosine aminotransferase, the first enzyme of tyrosine catabolism, due to biallelic TAT variants. The block causes tyrosine to accumulate in blood and tissues. Supersaturated tyrosine crystallises within cells, and the resulting crystalline deposition triggers an inflammatory response in the cornea and skin, producing the characteristic pseudodendritic keratitis and painful palmoplantar keratoderma. Elevated tyrosine may also affect the developing brain, accounting for the variable intellectual disability. Because the disorder does not involve the downstream toxic metabolites of tyrosinaemia type I, the liver and kidneys are spared; lowering tyrosine through dietary restriction of tyrosine and phenylalanine reverses the crystal-driven ocular and skin disease.",
+  "additionalDifferentials": [
+   "Herpes simplex dendritic keratitis",
+   "Tyrosinaemia type I and type III",
+   "Transient neonatal tyrosinaemia",
+   "Inherited palmoplantar keratodermas",
+   "Other causes of infantile keratitis or photophobia",
+   "Vitamin A-related or nutritional keratopathy"
+  ],
+  "additionalInvestigations": [
+   "Plasma amino acids showing marked hypertyrosinaemia",
+   "Urine organic acids for tyrosine metabolites",
+   "TAT molecular genetic testing",
+   "Slit-lamp examination for bilateral pseudodendritic keratitis",
+   "Dermatological assessment of palmoplantar keratoderma",
+   "Developmental assessment"
+  ],
+  "redFlags": [
+   "Severe or ulcerating keratitis threatening vision",
+   "Marked, persistent hypertyrosinaemia despite treatment",
+   "Progressive developmental or behavioural concerns",
+   "Diagnostic confusion with recurrent herpetic keratitis leading to inappropriate antiviral or steroid use"
+  ],
+  "prognosis": "With early dietary restriction of tyrosine and phenylalanine the ocular and skin lesions resolve and neurodevelopmental outcome can be favourable; untreated disease risks corneal scarring and cognitive impairment.",
+  "pitfalls": [
+   "Misdiagnosing the bilateral pseudodendritic keratitis as herpes simplex and treating accordingly",
+   "Overlooking hypertyrosinaemia as the unifying cause of eye and skin findings",
+   "Assuming hepatorenal involvement as in tyrosinaemia type I",
+   "Delaying dietary treatment and allowing corneal or neurological damage"
+  ],
+  "references": [
+   "OMIM entry for Tyrosinemia Type II (TAT)",
+   "Scriver's The Metabolic and Molecular Bases of Inherited Disease",
+   "Nelson Textbook of Paediatrics"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Dietary restriction of tyrosine and phenylalanine, the definitive treatment that resolves the keratitis and keratoderma",
+   "Supplement with a tyrosine- and phenylalanine-free medical protein substitute to meet nutritional needs",
+   "Regular monitoring of plasma tyrosine to guide dietary control",
+   "Ophthalmological management of the pseudodendritic keratitis, avoiding antivirals mistakenly given for presumed herpetic keratitis",
+   "Dermatological care of the painful palmoplantar keratoderma with emollients and keratolytics",
+   "Developmental assessment and educational support",
+   "Dietitian-led multidisciplinary metabolic care",
+   "Genetic counselling and family screening for this autosomal recessive TAT disorder"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "richner_hanhart_syndrome-pathway",
+   "title": "Richner-Hanhart syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "The classic combination is painful pseudodendritic keratitis with palmoplantar keratoderma, often with variable intellectual disability",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Severe or ulcerating keratitis threatening vision",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Plasma amino acids showing marked hypertyrosinaemia, Urine organic acids for tyrosine metabolites, TAT molecular genetic testing"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Dietary restriction of tyrosine and phenylalanine, the definitive treatment that resolves the keratitis and keratoderma"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Misdiagnosing the bilateral pseudodendritic keratitis as herpes simplex and treating accordingly"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of richner-hanhart syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "richner_hanhart_syndrome-matrix",
+   "title": "Richner-Hanhart syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The classic combination is painful pseudodendritic keratitis with palmoplantar keratoderma, often with variable intellectual",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Richner-Hanhart syndrome is caused by deficiency of hepatic cytosolic tyrosine aminotransferase, the first enzyme of tyrosine catabolism, due to biallelic TAT variants. The block causes tyrosine to accumulate in blood and tissues. Supersaturated tyrosine crystallises within cells, and the resulting crystalline deposition triggers an inflammatory response in the cornea and skin, producing the characteristic pseudodendritic keratitis and painful palmoplantar keratoderma. Elevated tyrosine may also affect the developing brain, accounting for the variable intellectual disability. Because the disorder does not involve the downstream toxic metabolites of tyrosinaemia type I, the liver and kidneys are spared; lowering tyrosine through dietary restriction of tyrosine and phenylalanine reverses the crystal-driven ocular and skin disease.",
-    "additionalDifferentials": [
-      "Herpes simplex dendritic keratitis",
-      "Tyrosinaemia type I and type III",
-      "Transient neonatal tyrosinaemia",
-      "Inherited palmoplantar keratodermas",
-      "Other causes of infantile keratitis or photophobia",
-      "Vitamin A-related or nutritional keratopathy"
+    [
+     "Key Investigations",
+     "Plasma amino acids showing marked hypertyrosinaemia, Urine organic acids for tyrosine metabolites, TAT molecular genetic testing",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Plasma amino acids showing marked hypertyrosinaemia",
-      "Urine organic acids for tyrosine metabolites",
-      "TAT molecular genetic testing",
-      "Slit-lamp examination for bilateral pseudodendritic keratitis",
-      "Dermatological assessment of palmoplantar keratoderma",
-      "Developmental assessment"
+    [
+     "Primary Differentials",
+     "Herpes simplex dendritic keratitis, Tyrosinaemia type I and type III, Transient neonatal tyrosinaemia",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Severe or ulcerating keratitis threatening vision",
-      "Marked, persistent hypertyrosinaemia despite treatment",
-      "Progressive developmental or behavioural concerns",
-      "Diagnostic confusion with recurrent herpetic keratitis leading to inappropriate antiviral or steroid use"
+    [
+     "Management Strategy",
+     "Dietary restriction of tyrosine and phenylalanine, the definitive treatment that resolves the keratitis and keratoderma",
+     "Core treatment modality"
     ],
-    "prognosis": "With early dietary restriction of tyrosine and phenylalanine the ocular and skin lesions resolve and neurodevelopmental outcome can be favourable; untreated disease risks corneal scarring and cognitive impairment.",
-    "pitfalls": [
-      "Misdiagnosing the bilateral pseudodendritic keratitis as herpes simplex and treating accordingly",
-      "Overlooking hypertyrosinaemia as the unifying cause of eye and skin findings",
-      "Assuming hepatorenal involvement as in tyrosinaemia type I",
-      "Delaying dietary treatment and allowing corneal or neurological damage"
-    ],
-    "references": [
-      "OMIM entry for Tyrosinemia Type II (TAT)",
-      "Scriver's The Metabolic and Molecular Bases of Inherited Disease",
-      "Nelson Textbook of Paediatrics"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Dietary restriction of tyrosine and phenylalanine, the definitive treatment that resolves the keratitis and keratoderma",
-      "Supplement with a tyrosine- and phenylalanine-free medical protein substitute to meet nutritional needs",
-      "Regular monitoring of plasma tyrosine to guide dietary control",
-      "Ophthalmological management of the pseudodendritic keratitis, avoiding antivirals mistakenly given for presumed herpetic keratitis",
-      "Dermatological care of the painful palmoplantar keratoderma with emollients and keratolytics",
-      "Developmental assessment and educational support",
-      "Dietitian-led multidisciplinary metabolic care",
-      "Genetic counselling and family screening for this autosomal recessive TAT disorder"
+    [
+     "Clinical Pitfall",
+     "Misdiagnosing the bilateral pseudodendritic keratitis as herpes simplex and treating accordingly",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for richner-hanhart syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "richner-hanhart-syndrome-real-image",
+   "title": "Richner-Hanhart syndrome: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

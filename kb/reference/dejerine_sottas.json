@@ -1,78 +1,173 @@
 {
-  "id": "dejerine_sottas",
-  "name": "Dejerine-Sottas disease",
-  "aliases": [
-    "Dejerine-Sottas syndrome",
-    "hereditary motor and sensory neuropathy type III",
-    "HMSN III",
-    "CMT3"
+ "id": "dejerine_sottas",
+ "name": "Dejerine-Sottas disease",
+ "aliases": [
+  "Dejerine-Sottas syndrome",
+  "hereditary motor and sensory neuropathy type III",
+  "HMSN III",
+  "CMT3"
+ ],
+ "class": "non_infective",
+ "system": "Neurology",
+ "specialty": "Neurology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Bradley's Neurology in Clinical Practice / Harrison's Principles of Internal Medicine",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A severe, early-onset hereditary demyelinating neuropathy historically classified as hereditary motor and sensory neuropathy type III, at the severe end of the Charcot-Marie-Tooth spectrum",
+   "Presents in infancy or early childhood with marked hypotonia, delayed motor milestones, and progressive distal then generalised weakness",
+   "Nerve conduction velocities are profoundly slowed, reflecting severe demyelination, and cerebrospinal fluid protein may be elevated",
+   "Peripheral nerves may be palpably enlarged due to hypertrophic onion-bulb formation from repeated demyelination and remyelination",
+   "It is caused by mutations in the same myelin-related genes implicated in other CMT forms, such as PMP22, MPZ, and EGR2, often as severe de novo or biallelic mutations",
+   "Sensory loss, areflexia, skeletal deformity, and sometimes ataxia accompany the weakness",
+   "Diagnosis combines the early severe phenotype, very slow conduction, and genetic testing across the relevant myelin genes",
+   "Care is supportive with rehabilitation, orthotics, and management of deformity, as there is no specific cure"
   ],
-  "class": "non_infective",
-  "system": "Neurology",
-  "specialty": "Neurology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Bradley's Neurology in Clinical Practice / Harrison's Principles of Internal Medicine",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A severe, early-onset hereditary demyelinating neuropathy historically classified as hereditary motor and sensory neuropathy type III, at the severe end of the Charcot-Marie-Tooth spectrum",
-      "Presents in infancy or early childhood with marked hypotonia, delayed motor milestones, and progressive distal then generalised weakness",
-      "Nerve conduction velocities are profoundly slowed, reflecting severe demyelination, and cerebrospinal fluid protein may be elevated",
-      "Peripheral nerves may be palpably enlarged due to hypertrophic onion-bulb formation from repeated demyelination and remyelination",
-      "It is caused by mutations in the same myelin-related genes implicated in other CMT forms, such as PMP22, MPZ, and EGR2, often as severe de novo or biallelic mutations",
-      "Sensory loss, areflexia, skeletal deformity, and sometimes ataxia accompany the weakness",
-      "Diagnosis combines the early severe phenotype, very slow conduction, and genetic testing across the relevant myelin genes",
-      "Care is supportive with rehabilitation, orthotics, and management of deformity, as there is no specific cure"
+  "pathophysiology": "Dejerine-Sottas disease is a hypertrophic demyelinating neuropathy caused by mutations affecting proteins critical for peripheral myelin formation and maintenance. Severe or biallelic mutations in genes such as PMP22, MPZ, and EGR2 produce profound failure of Schwann cell myelination beginning early in life, with repeated cycles of demyelination and attempted remyelination generating the onion-bulb hypertrophy that can enlarge nerves. The severe, diffuse demyelination markedly slows conduction and causes early, disabling motor and sensory deficits.",
+  "additionalDifferentials": [
+   "Other Charcot-Marie-Tooth subtypes, including congenital hypomyelinating neuropathy",
+   "Chronic inflammatory demyelinating polyneuropathy of childhood",
+   "Spinal muscular atrophy and congenital myopathies",
+   "Metabolic and leukodystrophy-associated neuropathies",
+   "Other causes of the floppy infant"
+  ],
+  "additionalInvestigations": [
+   "Nerve conduction studies showing markedly slowed velocities",
+   "Genetic testing across PMP22, MPZ, EGR2 and related myelin genes",
+   "Cerebrospinal fluid analysis when the presentation overlaps with inflammatory neuropathy",
+   "Nerve imaging or examination for hypertrophy",
+   "Developmental and rehabilitation assessment"
+  ],
+  "redFlags": [
+   "Marked hypotonia and respiratory difficulty in infancy",
+   "Rapid loss of motor function or bulbar involvement",
+   "Features suggesting a treatable inflammatory neuropathy",
+   "Severe skeletal deformity compromising function or respiration"
+  ],
+  "prognosis": "The disorder is generally more severe and disabling than typical Charcot-Marie-Tooth disease, often with early and significant motor impairment, though the course varies with the underlying mutation; management remains supportive.",
+  "pitfalls": [
+   "Overlooking a steroid-responsive inflammatory neuropathy that can mimic the severe demyelinating picture",
+   "Assuming a single gene and not testing the range of relevant myelin genes",
+   "Underestimating the value of early rehabilitation and orthopaedic care",
+   "Failing to provide genetic counselling given de novo and recessive inheritance patterns"
+  ],
+  "references": [
+   "Bradley's Neurology in Clinical Practice",
+   "Harrison's Principles of Internal Medicine, 22e"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Supportive management as no disease-modifying therapy exists, anchored in physiotherapy to preserve strength, maintain range of movement and delay contractures",
+   "Occupational therapy, ankle-foot orthoses and mobility aids to support delayed motor milestones and progressive distal weakness",
+   "Orthopaedic assessment and management of skeletal deformity and joint contractures, including surgery where indicated",
+   "Neuropathic pain control with appropriate neuropathic agents",
+   "Avoidance of neurotoxic drugs such as vincristine that aggravate the demyelinating neuropathy",
+   "Early developmental and rehabilitation input given infantile onset and disability",
+   "Genetic counselling with confirmatory testing of PMP22, MPZ and EGR2 and family screening, noting many cases are severe de novo or biallelic mutations"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "dejerine_sottas-pathway",
+   "title": "Dejerine-Sottas disease: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A severe, early-onset hereditary demyelinating neuropathy historically classified as hereditary motor and sensory neuropathy type III, at the severe end of the Charcot-Marie-Tooth spectrum",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Marked hypotonia and respiratory difficulty in infancy",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Nerve conduction studies showing markedly slowed velocities, Genetic testing across PMP22, MPZ, EGR2 and related myelin genes, Cerebrospinal fluid analysis when the presentation overlaps with inflammatory neuropathy"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Supportive management as no disease-modifying therapy exists, anchored in physiotherapy to preserve strength, maintain range of movement and delay contractures"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Overlooking a steroid-responsive inflammatory neuropathy that can mimic the severe demyelinating picture"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of dejerine-sottas disease."
+  }
+ ],
+ "tables": [
+  {
+   "id": "dejerine_sottas-matrix",
+   "title": "Dejerine-Sottas disease: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A severe, early-onset hereditary demyelinating neuropathy historically classified as hereditary motor and sensory neuropathy type",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Dejerine-Sottas disease is a hypertrophic demyelinating neuropathy caused by mutations affecting proteins critical for peripheral myelin formation and maintenance. Severe or biallelic mutations in genes such as PMP22, MPZ, and EGR2 produce profound failure of Schwann cell myelination beginning early in life, with repeated cycles of demyelination and attempted remyelination generating the onion-bulb hypertrophy that can enlarge nerves. The severe, diffuse demyelination markedly slows conduction and causes early, disabling motor and sensory deficits.",
-    "additionalDifferentials": [
-      "Other Charcot-Marie-Tooth subtypes, including congenital hypomyelinating neuropathy",
-      "Chronic inflammatory demyelinating polyneuropathy of childhood",
-      "Spinal muscular atrophy and congenital myopathies",
-      "Metabolic and leukodystrophy-associated neuropathies",
-      "Other causes of the floppy infant"
+    [
+     "Key Investigations",
+     "Nerve conduction studies showing markedly slowed velocities, Genetic testing across PMP22, MPZ, EGR2 and related myelin genes,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Nerve conduction studies showing markedly slowed velocities",
-      "Genetic testing across PMP22, MPZ, EGR2 and related myelin genes",
-      "Cerebrospinal fluid analysis when the presentation overlaps with inflammatory neuropathy",
-      "Nerve imaging or examination for hypertrophy",
-      "Developmental and rehabilitation assessment"
+    [
+     "Primary Differentials",
+     "Other Charcot-Marie-Tooth subtypes, including congenital hypomyelinating neuropathy, Chronic inflammatory demyelinating",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Marked hypotonia and respiratory difficulty in infancy",
-      "Rapid loss of motor function or bulbar involvement",
-      "Features suggesting a treatable inflammatory neuropathy",
-      "Severe skeletal deformity compromising function or respiration"
+    [
+     "Management Strategy",
+     "Supportive management as no disease-modifying therapy exists, anchored in physiotherapy to preserve strength, maintain range of",
+     "Core treatment modality"
     ],
-    "prognosis": "The disorder is generally more severe and disabling than typical Charcot-Marie-Tooth disease, often with early and significant motor impairment, though the course varies with the underlying mutation; management remains supportive.",
-    "pitfalls": [
-      "Overlooking a steroid-responsive inflammatory neuropathy that can mimic the severe demyelinating picture",
-      "Assuming a single gene and not testing the range of relevant myelin genes",
-      "Underestimating the value of early rehabilitation and orthopaedic care",
-      "Failing to provide genetic counselling given de novo and recessive inheritance patterns"
-    ],
-    "references": [
-      "Bradley's Neurology in Clinical Practice",
-      "Harrison's Principles of Internal Medicine, 22e"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Supportive management as no disease-modifying therapy exists, anchored in physiotherapy to preserve strength, maintain range of movement and delay contractures",
-      "Occupational therapy, ankle-foot orthoses and mobility aids to support delayed motor milestones and progressive distal weakness",
-      "Orthopaedic assessment and management of skeletal deformity and joint contractures, including surgery where indicated",
-      "Neuropathic pain control with appropriate neuropathic agents",
-      "Avoidance of neurotoxic drugs such as vincristine that aggravate the demyelinating neuropathy",
-      "Early developmental and rehabilitation input given infantile onset and disability",
-      "Genetic counselling with confirmatory testing of PMP22, MPZ and EGR2 and family screening, noting many cases are severe de novo or biallelic mutations"
+    [
+     "Clinical Pitfall",
+     "Overlooking a steroid-responsive inflammatory neuropathy that can mimic the severe demyelinating picture",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for dejerine-sottas disease."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "dejerine-sottas-real-image",
+   "title": "Dejerine-Sottas disease: Diagnostic Head Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
+   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
+   "annotations": [
+    {
+     "label": "Cerebral Parenchyma",
+     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+    },
+    {
+     "label": "Extra-Axial Spaces",
+     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+    }
+   ]
+  }
+ ]
 }

@@ -101,5 +101,100 @@
  "review": {
   "status": "ai_drafted",
   "compiled": "2026-09-30"
- }
+ },
+ "algorithms": [
+  {
+   "id": "neonatal-chest-drain-pathway",
+   "title": "Chest drain and needle aspiration in neonates Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Drain a pneumothorax causing respiratory distress, low oxygen saturation or haemodynamic instability. With mild distress and no severe instability, one surgical unit tried needle aspiration first and placed a tube only if air kept",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Attach a needle or angiocatheter to a 10 to 20 mL syringe and enter the 2nd or 3rd intercostal space in the midclavicular line. Stop advancing as soon as air flows into the syringe, to avoid lung injury.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Obtain baseline laboratory investigations, biomarkers, and targeted imaging."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Site (Buelau position): between the anterior and midaxillary lines in the 4th or 5th intercostal space, just above the rib margin; safe on both sides in preterm and term babies."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Get AP and lateral chest X-rays immediately. The tip and all side holes must lie in the pleural space."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for chest drain and needle aspiration in neonates."
+  }
+ ],
+ "tables": [
+  {
+   "id": "neonatal-chest-drain-summary-matrix",
+   "title": "Chest drain and needle aspiration in neonates Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Drain a pneumothorax causing respiratory distress, low oxygen saturation or haemodynamic instability. With mild distress and no severe",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Attach a needle or angiocatheter to a 10 to 20 mL syringe and enter the 2nd or 3rd intercostal space in the midclavicular line. Stop",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Targeted Treatment",
+     "Site (Buelau position): between the anterior and midaxillary lines in the 4th or 5th intercostal space, just above the rib margin; safe on",
+     "Definitive management protocol"
+    ],
+    [
+     "Critical Pitfall",
+     "Minor: dislodgement and blockage. Major: infection, lung laceration or perforation, effusion, pericardial perforation, phrenic nerve injury",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for chest drain and needle aspiration in neonates."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "neonatal-chest-drain-real-image",
+   "title": "Chest drain and needle aspiration in neonates: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

@@ -1,73 +1,168 @@
 {
-  "id": "subaortic_stenosis",
-  "name": "Subaortic stenosis",
-  "aliases": [
-    "subvalvular aortic stenosis",
-    "discrete subaortic stenosis"
+ "id": "subaortic_stenosis",
+ "name": "Subaortic stenosis",
+ "aliases": [
+  "subvalvular aortic stenosis",
+  "discrete subaortic stenosis"
+ ],
+ "class": "non_infective",
+ "system": "Cardiovascular",
+ "specialty": "Cardiology / Congenital heart disease",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Congenital heart disease references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Fixed obstruction below the aortic valve, most often from a discrete fibrous or fibromuscular ridge in the left ventricular outflow tract",
+   "It is usually acquired and progressive during childhood, and may recur after resection",
+   "The turbulent subvalvular jet can damage the aortic valve, causing progressive aortic regurgitation",
+   "It must be distinguished from valvular aortic stenosis and from hypertrophic obstructive cardiomyopathy (a dynamic obstruction)",
+   "An ejection systolic murmur is heard, and unlike valvular stenosis there is no ejection click",
+   "Surgical resection is considered for significant gradients or progressive aortic regurgitation, but recurrence is common"
   ],
-  "class": "non_infective",
-  "system": "Cardiovascular",
-  "specialty": "Cardiology / Congenital heart disease",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Congenital heart disease references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Fixed obstruction below the aortic valve, most often from a discrete fibrous or fibromuscular ridge in the left ventricular outflow tract",
-      "It is usually acquired and progressive during childhood, and may recur after resection",
-      "The turbulent subvalvular jet can damage the aortic valve, causing progressive aortic regurgitation",
-      "It must be distinguished from valvular aortic stenosis and from hypertrophic obstructive cardiomyopathy (a dynamic obstruction)",
-      "An ejection systolic murmur is heard, and unlike valvular stenosis there is no ejection click",
-      "Surgical resection is considered for significant gradients or progressive aortic regurgitation, but recurrence is common"
+  "pathophysiology": "Discrete subaortic stenosis is characterised by a fibrous or fibromuscular membrane or ridge in the left ventricular outflow tract beneath the aortic valve, producing a fixed obstruction to ejection. Abnormal outflow tract geometry and shear stress are thought to stimulate proliferation of the obstructing tissue, which explains its progressive nature and tendency to recur after removal. The high-velocity subvalvular jet strikes the aortic valve leaflets, causing thickening and regurgitation over time, while the pressure-loaded left ventricle hypertrophies.",
+  "additionalDifferentials": [
+   "Valvular aortic stenosis",
+   "Supravalvular aortic stenosis",
+   "Hypertrophic obstructive cardiomyopathy (dynamic)",
+   "Coarctation (as another left-heart obstruction)",
+   "Tunnel-type left ventricular outflow obstruction"
+  ],
+  "additionalInvestigations": [
+   "Echocardiography localising the obstruction and measuring the gradient",
+   "Assessment of aortic valve for secondary regurgitation",
+   "Evaluation of left ventricular hypertrophy and function",
+   "Exclusion of hypertrophic cardiomyopathy and valvular stenosis",
+   "Serial follow-up given progression and recurrence"
+  ],
+  "redFlags": [
+   "Rapidly progressive gradient",
+   "Developing or worsening aortic regurgitation",
+   "Symptoms of outflow obstruction (syncope, angina, breathlessness)",
+   "Recurrence after surgical resection"
+  ],
+  "prognosis": "Resection relieves the obstruction and can protect the aortic valve, but the lesion may recur and aortic regurgitation can persist, so long-term surveillance is required.",
+  "pitfalls": [
+   "Confusing fixed subaortic stenosis with dynamic hypertrophic obstruction",
+   "Overlooking progressive aortic regurgitation from the subvalvular jet",
+   "Assuming cure after resection without follow-up for recurrence",
+   "Mislocalising the level of obstruction"
+  ],
+  "references": [
+   "Congenital heart disease references (standard reference)",
+   "Braunwald's Heart Disease"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Surgical resection of the obstructing fibrous or fibromuscular membrane, with septal myectomy where fibromuscular, for a significant gradient or progressive aortic regurgitation",
+   "Serial echocardiographic surveillance of the outflow gradient, aortic valve and left ventricular hypertrophy given the tendency to progress and to recur after resection",
+   "Monitor for and manage progressive aortic regurgitation caused by the high-velocity subvalvular jet damaging the valve leaflets",
+   "Endocarditis prevention through good dental and oral hygiene, with antibiotic prophylaxis where indicated",
+   "Reoperation for recurrent obstruction, which is common after initial resection",
+   "Referral to congenital or structural cardiology and cardiac surgery for timing of intervention"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "subaortic_stenosis-pathway",
+   "title": "Subaortic stenosis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Fixed obstruction below the aortic valve, most often from a discrete fibrous or fibromuscular ridge in the left ventricular outflow tract",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapidly progressive gradient",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Echocardiography localising the obstruction and measuring the gradient, Assessment of aortic valve for secondary regurgitation, Evaluation of left ventricular hypertrophy and function"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Surgical resection of the obstructing fibrous or fibromuscular membrane, with septal myectomy where fibromuscular, for a significant gradient or progressive aortic regurgitation"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Confusing fixed subaortic stenosis with dynamic hypertrophic obstruction"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of subaortic stenosis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "subaortic_stenosis-matrix",
+   "title": "Subaortic stenosis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Fixed obstruction below the aortic valve, most often from a discrete fibrous or fibromuscular ridge in the left ventricular",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Discrete subaortic stenosis is characterised by a fibrous or fibromuscular membrane or ridge in the left ventricular outflow tract beneath the aortic valve, producing a fixed obstruction to ejection. Abnormal outflow tract geometry and shear stress are thought to stimulate proliferation of the obstructing tissue, which explains its progressive nature and tendency to recur after removal. The high-velocity subvalvular jet strikes the aortic valve leaflets, causing thickening and regurgitation over time, while the pressure-loaded left ventricle hypertrophies.",
-    "additionalDifferentials": [
-      "Valvular aortic stenosis",
-      "Supravalvular aortic stenosis",
-      "Hypertrophic obstructive cardiomyopathy (dynamic)",
-      "Coarctation (as another left-heart obstruction)",
-      "Tunnel-type left ventricular outflow obstruction"
+    [
+     "Key Investigations",
+     "Echocardiography localising the obstruction and measuring the gradient, Assessment of aortic valve for secondary regurgitation,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Echocardiography localising the obstruction and measuring the gradient",
-      "Assessment of aortic valve for secondary regurgitation",
-      "Evaluation of left ventricular hypertrophy and function",
-      "Exclusion of hypertrophic cardiomyopathy and valvular stenosis",
-      "Serial follow-up given progression and recurrence"
+    [
+     "Primary Differentials",
+     "Valvular aortic stenosis, Supravalvular aortic stenosis, Hypertrophic obstructive cardiomyopathy (dynamic)",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rapidly progressive gradient",
-      "Developing or worsening aortic regurgitation",
-      "Symptoms of outflow obstruction (syncope, angina, breathlessness)",
-      "Recurrence after surgical resection"
+    [
+     "Management Strategy",
+     "Surgical resection of the obstructing fibrous or fibromuscular membrane, with septal myectomy where fibromuscular, for a",
+     "Core treatment modality"
     ],
-    "prognosis": "Resection relieves the obstruction and can protect the aortic valve, but the lesion may recur and aortic regurgitation can persist, so long-term surveillance is required.",
-    "pitfalls": [
-      "Confusing fixed subaortic stenosis with dynamic hypertrophic obstruction",
-      "Overlooking progressive aortic regurgitation from the subvalvular jet",
-      "Assuming cure after resection without follow-up for recurrence",
-      "Mislocalising the level of obstruction"
-    ],
-    "references": [
-      "Congenital heart disease references (standard reference)",
-      "Braunwald's Heart Disease"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Surgical resection of the obstructing fibrous or fibromuscular membrane, with septal myectomy where fibromuscular, for a significant gradient or progressive aortic regurgitation",
-      "Serial echocardiographic surveillance of the outflow gradient, aortic valve and left ventricular hypertrophy given the tendency to progress and to recur after resection",
-      "Monitor for and manage progressive aortic regurgitation caused by the high-velocity subvalvular jet damaging the valve leaflets",
-      "Endocarditis prevention through good dental and oral hygiene, with antibiotic prophylaxis where indicated",
-      "Reoperation for recurrent obstruction, which is common after initial resection",
-      "Referral to congenital or structural cardiology and cardiac surgery for timing of intervention"
+    [
+     "Clinical Pitfall",
+     "Confusing fixed subaortic stenosis with dynamic hypertrophic obstruction",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for subaortic stenosis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "subaortic-stenosis-real-image",
+   "title": "Subaortic stenosis: 12-Lead Diagnostic Electrocardiogram",
+   "type": "ecg",
+   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
+   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
+   "annotations": [
+    {
+     "label": "Conduction & Axis",
+     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
+    },
+    {
+     "label": "Repolarization",
+     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
+    },
+    {
+     "label": "Rhythm & Intervals",
+     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+    }
+   ]
+  }
+ ]
 }

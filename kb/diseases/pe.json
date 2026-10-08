@@ -159,5 +159,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "h3f723787"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "pe-dx-algo",
+      "title": "Pulmonary embolism: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "PE is the 'great masquerader' because its symptoms and signs are nonspecific; unexplained breathlessness is the most common symptom (p.2159).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Systemic arterial hypotension / cardiogenic shock indicating massive (high-risk) PE (p.2158)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Age-adjusted D-dimer (age x 10 ng/mL upper limit) for patients >50 years with low/intermediate clinical probability of PE; does not apply to suspected acute DVT (p.2159-2160), Wells point-score clinical decision rule to"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: PE is stratified by hemodynamics and RV status: massive (high-risk, 5-10%) with systemic hypotension and extensive thrombosis (>=half of the pulmonary vasculature), hallmarks dyspnea/syncope/hypotension/cyanosis and"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: D-dimer is sensitive (>95%) but not specific; it rises with MI, pneumonia, sepsis, cancer, postoperative state, and the 2nd/3rd trimester of pregnancy, so it rarely helps in hospitalized patients (p.2159-2160)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for pulmonary embolism."
+    }
+  ],
+  "tables": [
+    {
+      "id": "pe-matrix",
+      "title": "Pulmonary embolism: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "PE is the 'great masquerader' because its symptoms and signs are nonspecific; unexplained breathlessness is the most common",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Age-adjusted D-dimer (age x 10 ng/mL upper limit) for patients >50 years with low/intermediate clinical probability of PE; does",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Congestive heart failure, Pericarditis, Pleurisy / costochondritis / musculoskeletal chest discomfort",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Systemic arterial hypotension / cardiogenic shock indicating massive (high-risk) PE (p.2158)",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "D-dimer is sensitive (>95%) but not specific; it rises with MI, pneumonia, sepsis, cancer, postoperative state, and the 2nd/3rd",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for pulmonary embolism."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "pe-real-image",
+      "title": "Pulmonary embolism: Diagnostic Chest Radiograph",
+      "type": "xray",
+      "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
+      "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
+      "annotations": [
+        {
+          "label": "Parenchyma & Airspaces",
+          "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
+        },
+        {
+          "label": "Bronchovascular Tree",
+          "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
+        },
+        {
+          "label": "Pleural Margins",
+          "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+        }
+      ]
+    }
+  ]
 }

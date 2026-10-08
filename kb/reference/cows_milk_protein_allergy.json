@@ -1,78 +1,173 @@
 {
-  "id": "cows_milk_protein_allergy",
-  "name": "Cow's Milk Protein Allergy",
-  "aliases": [
-    "CMPA",
-    "cow's milk protein intolerance",
-    "milk allergy in infants"
+ "id": "cows_milk_protein_allergy",
+ "name": "Cow's Milk Protein Allergy",
+ "aliases": [
+  "CMPA",
+  "cow's milk protein intolerance",
+  "milk allergy in infants"
+ ],
+ "class": "non_infective",
+ "system": "Gastrointestinal",
+ "specialty": "Paediatrics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Nelson Textbook of Pediatrics",
+  "sourceEdition": "22e",
+  "pages": null,
+  "clinicalPearls": [
+   "This is an immune-mediated reaction to cow's milk proteins, distinct from lactose intolerance, which is a non-immune enzyme deficiency.",
+   "Reactions are broadly divided into IgE-mediated (rapid onset urticaria, angioedema, vomiting, wheeze, and rarely anaphylaxis) and non-IgE-mediated (delayed gastrointestinal symptoms such as vomiting, diarrhoea, blood or mucus in stool, and colic-like distress).",
+   "It is one of the most common food allergies in infancy and can occur in both formula-fed and exclusively breastfed infants exposed to milk protein through maternal diet.",
+   "Diagnosis is largely clinical, supported by a compatible history, a trial of milk protein elimination, and improvement followed by recurrence on reintroduction.",
+   "For IgE-mediated disease, specific IgE testing or skin prick testing can support the diagnosis, whereas these tests are unhelpful in non-IgE-mediated presentations.",
+   "Management centres on strict avoidance of cow's milk protein, using an appropriate hypoallergenic formula in formula-fed infants and maternal dietary exclusion in breastfed infants.",
+   "A supervised oral food challenge is the most reliable way to confirm or refute the diagnosis and to assess whether tolerance has developed.",
+   "Most children outgrow cow's milk protein allergy during early childhood, so periodic reassessment for acquired tolerance is important to avoid unnecessary long-term restriction."
   ],
-  "class": "non_infective",
-  "system": "Gastrointestinal",
-  "specialty": "Paediatrics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Nelson Textbook of Pediatrics",
-    "sourceEdition": "22e",
-    "pages": null,
-    "clinicalPearls": [
-      "This is an immune-mediated reaction to cow's milk proteins, distinct from lactose intolerance, which is a non-immune enzyme deficiency.",
-      "Reactions are broadly divided into IgE-mediated (rapid onset urticaria, angioedema, vomiting, wheeze, and rarely anaphylaxis) and non-IgE-mediated (delayed gastrointestinal symptoms such as vomiting, diarrhoea, blood or mucus in stool, and colic-like distress).",
-      "It is one of the most common food allergies in infancy and can occur in both formula-fed and exclusively breastfed infants exposed to milk protein through maternal diet.",
-      "Diagnosis is largely clinical, supported by a compatible history, a trial of milk protein elimination, and improvement followed by recurrence on reintroduction.",
-      "For IgE-mediated disease, specific IgE testing or skin prick testing can support the diagnosis, whereas these tests are unhelpful in non-IgE-mediated presentations.",
-      "Management centres on strict avoidance of cow's milk protein, using an appropriate hypoallergenic formula in formula-fed infants and maternal dietary exclusion in breastfed infants.",
-      "A supervised oral food challenge is the most reliable way to confirm or refute the diagnosis and to assess whether tolerance has developed.",
-      "Most children outgrow cow's milk protein allergy during early childhood, so periodic reassessment for acquired tolerance is important to avoid unnecessary long-term restriction."
+  "pathophysiology": "The disorder results from an abnormal immune response to proteins in cow's milk, principally caseins and whey proteins. In IgE-mediated allergy, sensitisation leads to specific IgE that, on re-exposure, triggers mast cell and basophil degranulation with rapid release of histamine and other mediators, producing immediate symptoms. In non-IgE-mediated allergy, cell-mediated and mixed immune mechanisms cause a more delayed inflammatory response in the gastrointestinal tract, resulting in mucosal inflammation, altered motility, and enteropathy. Because the offending proteins can pass into breast milk, exclusively breastfed infants can react to maternal dietary intake.",
+  "additionalDifferentials": [
+   "Lactose intolerance",
+   "Infantile colic",
+   "Gastro-oesophageal reflux disease",
+   "Infectious gastroenteritis",
+   "Other food protein-induced enteropathies or proctocolitis",
+   "Eosinophilic gastrointestinal disorders"
+  ],
+  "additionalInvestigations": [
+   "Trial of dietary elimination and planned reintroduction",
+   "Specific IgE or skin prick testing (for IgE-mediated disease)",
+   "Supervised oral food challenge",
+   "Stool examination for blood if allergic proctocolitis suspected",
+   "Growth monitoring and, if needed, nutritional assessment"
+  ],
+  "redFlags": [
+   "Anaphylaxis or significant respiratory compromise after milk exposure",
+   "Significant gastrointestinal bleeding or severe enteropathy",
+   "Faltering growth or failure to thrive",
+   "Severe dehydration or shock (as in food protein-induced enterocolitis reactions)",
+   "Signs suggesting an alternative serious diagnosis"
+  ],
+  "prognosis": "The prognosis is generally favourable, with the majority of children achieving tolerance during the preschool years; IgE-mediated allergy, particularly with high specific IgE levels, may persist longer than non-IgE-mediated disease.",
+  "pitfalls": [
+   "Confusing cow's milk protein allergy with lactose intolerance and giving inappropriate dietary advice",
+   "Relying on IgE tests to diagnose non-IgE-mediated disease",
+   "Maintaining prolonged, unnecessary dietary restriction without reassessing for tolerance",
+   "Using inadequately hypoallergenic substitutes or overlooking nutritional adequacy of exclusion diets"
+  ],
+  "references": [
+   "Nelson Textbook of Pediatrics, 22e"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Strict elimination of cow's milk protein, using an extensively hydrolysed formula, or an amino-acid formula for severe or non-responsive cases, in formula-fed infants",
+   "Maternal dietary exclusion of cow's milk protein in exclusively breastfed infants, with maternal calcium and vitamin D supplementation",
+   "For IgE-mediated disease with anaphylaxis risk, provide an adrenaline auto-injector and a written emergency management plan",
+   "Antihistamine for mild acute IgE-mediated reactions",
+   "Growth and nutritional monitoring with paediatric dietitian involvement to ensure adequate nutrition",
+   "Planned reintroduction using a milk ladder or supervised oral food challenge to assess for acquired tolerance",
+   "Refer to paediatric allergy for diagnostic uncertainty, severe reactions or multiple food allergies"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "cows_milk_protein_allergy-pathway",
+   "title": "Cow's Milk Protein Allergy: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "This is an immune-mediated reaction to cow's milk proteins, distinct from lactose intolerance, which is a non-immune enzyme deficiency.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Anaphylaxis or significant respiratory compromise after milk exposure",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Trial of dietary elimination and planned reintroduction, Specific IgE or skin prick testing (for IgE-mediated disease), Supervised oral food challenge"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Strict elimination of cow's milk protein, using an extensively hydrolysed formula, or an amino-acid formula for severe or non-responsive cases, in formula-fed infants"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Confusing cow's milk protein allergy with lactose intolerance and giving inappropriate dietary advice"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of cow's milk protein allergy."
+  }
+ ],
+ "tables": [
+  {
+   "id": "cows_milk_protein_allergy-matrix",
+   "title": "Cow's Milk Protein Allergy: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "This is an immune-mediated reaction to cow's milk proteins, distinct from lactose intolerance, which is a non-immune enzyme",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "The disorder results from an abnormal immune response to proteins in cow's milk, principally caseins and whey proteins. In IgE-mediated allergy, sensitisation leads to specific IgE that, on re-exposure, triggers mast cell and basophil degranulation with rapid release of histamine and other mediators, producing immediate symptoms. In non-IgE-mediated allergy, cell-mediated and mixed immune mechanisms cause a more delayed inflammatory response in the gastrointestinal tract, resulting in mucosal inflammation, altered motility, and enteropathy. Because the offending proteins can pass into breast milk, exclusively breastfed infants can react to maternal dietary intake.",
-    "additionalDifferentials": [
-      "Lactose intolerance",
-      "Infantile colic",
-      "Gastro-oesophageal reflux disease",
-      "Infectious gastroenteritis",
-      "Other food protein-induced enteropathies or proctocolitis",
-      "Eosinophilic gastrointestinal disorders"
+    [
+     "Key Investigations",
+     "Trial of dietary elimination and planned reintroduction, Specific IgE or skin prick testing (for IgE-mediated disease),",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Trial of dietary elimination and planned reintroduction",
-      "Specific IgE or skin prick testing (for IgE-mediated disease)",
-      "Supervised oral food challenge",
-      "Stool examination for blood if allergic proctocolitis suspected",
-      "Growth monitoring and, if needed, nutritional assessment"
+    [
+     "Primary Differentials",
+     "Lactose intolerance, Infantile colic, Gastro-oesophageal reflux disease",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Anaphylaxis or significant respiratory compromise after milk exposure",
-      "Significant gastrointestinal bleeding or severe enteropathy",
-      "Faltering growth or failure to thrive",
-      "Severe dehydration or shock (as in food protein-induced enterocolitis reactions)",
-      "Signs suggesting an alternative serious diagnosis"
+    [
+     "Management Strategy",
+     "Strict elimination of cow's milk protein, using an extensively hydrolysed formula, or an amino-acid formula for severe or",
+     "Core treatment modality"
     ],
-    "prognosis": "The prognosis is generally favourable, with the majority of children achieving tolerance during the preschool years; IgE-mediated allergy, particularly with high specific IgE levels, may persist longer than non-IgE-mediated disease.",
-    "pitfalls": [
-      "Confusing cow's milk protein allergy with lactose intolerance and giving inappropriate dietary advice",
-      "Relying on IgE tests to diagnose non-IgE-mediated disease",
-      "Maintaining prolonged, unnecessary dietary restriction without reassessing for tolerance",
-      "Using inadequately hypoallergenic substitutes or overlooking nutritional adequacy of exclusion diets"
-    ],
-    "references": [
-      "Nelson Textbook of Pediatrics, 22e"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Strict elimination of cow's milk protein, using an extensively hydrolysed formula, or an amino-acid formula for severe or non-responsive cases, in formula-fed infants",
-      "Maternal dietary exclusion of cow's milk protein in exclusively breastfed infants, with maternal calcium and vitamin D supplementation",
-      "For IgE-mediated disease with anaphylaxis risk, provide an adrenaline auto-injector and a written emergency management plan",
-      "Antihistamine for mild acute IgE-mediated reactions",
-      "Growth and nutritional monitoring with paediatric dietitian involvement to ensure adequate nutrition",
-      "Planned reintroduction using a milk ladder or supervised oral food challenge to assess for acquired tolerance",
-      "Refer to paediatric allergy for diagnostic uncertainty, severe reactions or multiple food allergies"
+    [
+     "Clinical Pitfall",
+     "Confusing cow's milk protein allergy with lactose intolerance and giving inappropriate dietary advice",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for cow's milk protein allergy."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "cows-milk-protein-allergy-real-image",
+   "title": "Cow's Milk Protein Allergy: Diagnostic Abdominal Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
+   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
+   "annotations": [
+    {
+     "label": "Solid Viscera",
+     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
+    },
+    {
+     "label": "Gastrointestinal Tract",
+     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
+    },
+    {
+     "label": "Mesentery & Peritoneum",
+     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+    }
+   ]
+  }
+ ]
 }

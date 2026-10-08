@@ -222,5 +222,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "h4630f7b9"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "sbp-dx-algo",
+      "title": "Spontaneous Bacterial Peritonitis: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "An ascitic-fluid PMN (neutrophil) count of at least 250/microL is diagnostic of SBP, irrespective of whether cultures grow an organism (Harrison 22e p.329, 372, 1070).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: New or worsening hepatic encephalopathy or altered mental status in a cirrhotic with ascites (Harrison 22e p.329, 1070, 2715)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Ascitic fluid PMN/neutrophil count (>=250/microL is diagnostic) (Harrison 22e p.329, 1070), Ascitic fluid inoculated into blood-culture bottles at the bedside (Harrison 22e p.329, 1070), Gram stain of ascitic fluid (often"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Harrison does not provide a formal severity grading system specific to SBP. Risk stratification is framed around predictors of poor outcome and renal injury: higher SBP risk in patients with low ascitic-fluid total"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Diagnosis rests on the ascitic PMN count >=250/microL, not on a positive culture; ascitic cultures are often negative because the organism burden is low (Harrison 22e p.329, 1070)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for spontaneous bacterial peritonitis."
+    }
+  ],
+  "tables": [
+    {
+      "id": "sbp-matrix",
+      "title": "Spontaneous Bacterial Peritonitis: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An ascitic-fluid PMN (neutrophil) count of at least 250/microL is diagnostic of SBP, irrespective of whether cultures grow an",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Ascitic fluid PMN/neutrophil count (>=250/microL is diagnostic) (Harrison 22e p.329, 1070), Ascitic fluid inoculated into",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Secondary bacterial peritonitis from a perforated or inflamed viscus or intraabdominal abscess (Harrison 22e p.329, 1071),",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "New or worsening hepatic encephalopathy or altered mental status in a cirrhotic with ascites (Harrison 22e p.329, 1070, 2715)",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Diagnosis rests on the ascitic PMN count >=250/microL, not on a positive culture; ascitic cultures are often negative because the",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for spontaneous bacterial peritonitis."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "sbp-real-image",
+      "title": "Spontaneous Bacterial Peritonitis: Diagnostic Abdominal Computed Tomography",
+      "type": "ct",
+      "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
+      "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
+      "annotations": [
+        {
+          "label": "Solid Viscera",
+          "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
+        },
+        {
+          "label": "Gastrointestinal Tract",
+          "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
+        },
+        {
+          "label": "Mesentery & Peritoneum",
+          "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+        }
+      ]
+    }
+  ]
 }

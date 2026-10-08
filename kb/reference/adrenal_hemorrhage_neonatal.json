@@ -1,80 +1,175 @@
 {
-  "id": "adrenal_hemorrhage_neonatal",
-  "name": "Neonatal adrenal haemorrhage",
-  "aliases": [
-    "neonatal adrenal haemorrhage",
-    "newborn adrenal haemorrhage",
-    "perinatal adrenal haemorrhage"
+ "id": "adrenal_hemorrhage_neonatal",
+ "name": "Neonatal adrenal haemorrhage",
+ "aliases": [
+  "neonatal adrenal haemorrhage",
+  "newborn adrenal haemorrhage",
+  "perinatal adrenal haemorrhage"
+ ],
+ "class": "non_infective",
+ "system": "Endocrine / Adrenal",
+ "specialty": "Endocrinology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Sperling Pediatric Endocrinology / Williams Textbook of Endocrinology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "The adrenal gland is the commonest site of neonatal haemorrhage, favoured by its relatively large size and rich vascularity at birth",
+   "Recognised risk factors include birth trauma, difficult or breech delivery, macrosomia, perinatal hypoxia or asphyxia, sepsis, and coagulopathy or haemorrhagic disease of the newborn",
+   "Presentation ranges from an asymptomatic incidental finding to a flank mass, anaemia, prolonged jaundice, or, if bilateral and extensive, adrenal insufficiency",
+   "It is more common on the right side and may be bilateral",
+   "Ultrasound is the first-line investigation and typically shows an evolving suprarenal mass that changes and shrinks over serial scans",
+   "The main differential of a neonatal suprarenal mass is neuroblastoma, which serial imaging and urinary catecholamine metabolites help to distinguish",
+   "Most cases resolve spontaneously with supportive care, and surgery is reserved for ongoing bleeding or diagnostic uncertainty"
   ],
-  "class": "non_infective",
-  "system": "Endocrine / Adrenal",
-  "specialty": "Endocrinology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Sperling Pediatric Endocrinology / Williams Textbook of Endocrinology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "The adrenal gland is the commonest site of neonatal haemorrhage, favoured by its relatively large size and rich vascularity at birth",
-      "Recognised risk factors include birth trauma, difficult or breech delivery, macrosomia, perinatal hypoxia or asphyxia, sepsis, and coagulopathy or haemorrhagic disease of the newborn",
-      "Presentation ranges from an asymptomatic incidental finding to a flank mass, anaemia, prolonged jaundice, or, if bilateral and extensive, adrenal insufficiency",
-      "It is more common on the right side and may be bilateral",
-      "Ultrasound is the first-line investigation and typically shows an evolving suprarenal mass that changes and shrinks over serial scans",
-      "The main differential of a neonatal suprarenal mass is neuroblastoma, which serial imaging and urinary catecholamine metabolites help to distinguish",
-      "Most cases resolve spontaneously with supportive care, and surgery is reserved for ongoing bleeding or diagnostic uncertainty"
+  "pathophysiology": "The neonatal adrenal cortex is proportionally large and highly vascular, making it vulnerable to haemorrhage when subjected to the mechanical stress of delivery, hypoxic-ischaemic injury, venous congestion, or the endothelial effects of sepsis. Impaired haemostasis, whether from coagulopathy or vitamin K-dependent haemorrhagic disease, compounds the risk. Extensive bilateral bleeding can destroy enough cortex to cause adrenal insufficiency, whereas unilateral bleeds usually resolve, often leaving residual calcification.",
+  "additionalDifferentials": [
+   "Neuroblastoma, the key differential of a suprarenal mass",
+   "Congenital adrenal neoplasm",
+   "Renal masses such as mesoblastic nephroma or renal vein thrombosis with haemorrhage",
+   "Adrenal abscess",
+   "Subdiaphragmatic extralobar pulmonary sequestration",
+   "Adrenal cyst"
+  ],
+  "additionalInvestigations": [
+   "Serial abdominal ultrasound showing an evolving, involuting suprarenal lesion",
+   "Haematocrit and haemoglobin monitoring alongside bilirubin",
+   "Coagulation screen and sepsis evaluation where indicated",
+   "Urinary catecholamine metabolites to help exclude neuroblastoma",
+   "MRI if diagnostic uncertainty persists or to characterise a persistent mass",
+   "Assessment of adrenal function including cortisol and electrolytes if the haemorrhage is bilateral or extensive"
+  ],
+  "redFlags": [
+   "Signs of adrenal insufficiency such as hypotension, hypoglycaemia and hyponatraemia with bilateral haemorrhage",
+   "Ongoing haemorrhage with haemodynamic instability or a falling haematocrit",
+   "A suprarenal mass that fails to involute, raising concern for neuroblastoma",
+   "Sepsis or coagulopathy requiring urgent treatment"
+  ],
+  "prognosis": "Generally excellent for unilateral haemorrhage, which resolves spontaneously and often leaves residual calcification; the outcome is worse with extensive bilateral disease causing adrenal insufficiency or when an underlying illness is severe.",
+  "pitfalls": [
+   "Mistaking neuroblastoma for adrenal haemorrhage, or vice versa, without serial imaging and catecholamine testing",
+   "Missing adrenal insufficiency in bilateral haemorrhage",
+   "Overlooking an underlying coagulopathy or sepsis",
+   "Proceeding to surgery for a lesion that would resolve with observation"
+  ],
+  "references": [
+   "Sperling Pediatric Endocrinology",
+   "Williams Textbook of Endocrinology"
+  ],
+  "crossLinks": [
+   "adrenal_cyst",
+   "congenital_adrenal_hypoplasia"
+  ],
+  "management": [
+   "Manage most unilateral haemorrhages conservatively, as they resolve spontaneously",
+   "Provide supportive care with transfusion for significant anaemia and phototherapy for prolonged jaundice",
+   "Correct coagulopathy, including vitamin K for haemorrhagic disease of the newborn, and treat any underlying sepsis",
+   "Replace glucocorticoid and mineralocorticoid if extensive bilateral haemorrhage causes adrenal insufficiency",
+   "Monitor with serial abdominal ultrasound to confirm involution and with urinary catecholamine metabolites to help exclude neuroblastoma",
+   "Refer for paediatric surgical or oncological assessment and MRI if a suprarenal mass fails to involute"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "adrenal_hemorrhage_neonatal-pathway",
+   "title": "Neonatal adrenal haemorrhage: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "The adrenal gland is the commonest site of neonatal haemorrhage, favoured by its relatively large size and rich vascularity at birth",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Signs of adrenal insufficiency such as hypotension, hypoglycaemia and hyponatraemia with bilateral haemorrhage",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Serial abdominal ultrasound showing an evolving, involuting suprarenal lesion, Haematocrit and haemoglobin monitoring alongside bilirubin, Coagulation screen and sepsis evaluation where indicated"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Manage most unilateral haemorrhages conservatively, as they resolve spontaneously"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking neuroblastoma for adrenal haemorrhage, or vice versa, without serial imaging and catecholamine testing"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of neonatal adrenal haemorrhage."
+  }
+ ],
+ "tables": [
+  {
+   "id": "adrenal_hemorrhage_neonatal-matrix",
+   "title": "Neonatal adrenal haemorrhage: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The adrenal gland is the commonest site of neonatal haemorrhage, favoured by its relatively large size and rich vascularity at",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "The neonatal adrenal cortex is proportionally large and highly vascular, making it vulnerable to haemorrhage when subjected to the mechanical stress of delivery, hypoxic-ischaemic injury, venous congestion, or the endothelial effects of sepsis. Impaired haemostasis, whether from coagulopathy or vitamin K-dependent haemorrhagic disease, compounds the risk. Extensive bilateral bleeding can destroy enough cortex to cause adrenal insufficiency, whereas unilateral bleeds usually resolve, often leaving residual calcification.",
-    "additionalDifferentials": [
-      "Neuroblastoma, the key differential of a suprarenal mass",
-      "Congenital adrenal neoplasm",
-      "Renal masses such as mesoblastic nephroma or renal vein thrombosis with haemorrhage",
-      "Adrenal abscess",
-      "Subdiaphragmatic extralobar pulmonary sequestration",
-      "Adrenal cyst"
+    [
+     "Key Investigations",
+     "Serial abdominal ultrasound showing an evolving, involuting suprarenal lesion, Haematocrit and haemoglobin monitoring alongside",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Serial abdominal ultrasound showing an evolving, involuting suprarenal lesion",
-      "Haematocrit and haemoglobin monitoring alongside bilirubin",
-      "Coagulation screen and sepsis evaluation where indicated",
-      "Urinary catecholamine metabolites to help exclude neuroblastoma",
-      "MRI if diagnostic uncertainty persists or to characterise a persistent mass",
-      "Assessment of adrenal function including cortisol and electrolytes if the haemorrhage is bilateral or extensive"
+    [
+     "Primary Differentials",
+     "Neuroblastoma, the key differential of a suprarenal mass, Congenital adrenal neoplasm, Renal masses such as mesoblastic nephroma",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Signs of adrenal insufficiency such as hypotension, hypoglycaemia and hyponatraemia with bilateral haemorrhage",
-      "Ongoing haemorrhage with haemodynamic instability or a falling haematocrit",
-      "A suprarenal mass that fails to involute, raising concern for neuroblastoma",
-      "Sepsis or coagulopathy requiring urgent treatment"
+    [
+     "Management Strategy",
+     "Manage most unilateral haemorrhages conservatively, as they resolve spontaneously",
+     "Core treatment modality"
     ],
-    "prognosis": "Generally excellent for unilateral haemorrhage, which resolves spontaneously and often leaves residual calcification; the outcome is worse with extensive bilateral disease causing adrenal insufficiency or when an underlying illness is severe.",
-    "pitfalls": [
-      "Mistaking neuroblastoma for adrenal haemorrhage, or vice versa, without serial imaging and catecholamine testing",
-      "Missing adrenal insufficiency in bilateral haemorrhage",
-      "Overlooking an underlying coagulopathy or sepsis",
-      "Proceeding to surgery for a lesion that would resolve with observation"
-    ],
-    "references": [
-      "Sperling Pediatric Endocrinology",
-      "Williams Textbook of Endocrinology"
-    ],
-    "crossLinks": [
-      "adrenal_cyst",
-      "congenital_adrenal_hypoplasia"
-    ],
-    "management": [
-      "Manage most unilateral haemorrhages conservatively, as they resolve spontaneously",
-      "Provide supportive care with transfusion for significant anaemia and phototherapy for prolonged jaundice",
-      "Correct coagulopathy, including vitamin K for haemorrhagic disease of the newborn, and treat any underlying sepsis",
-      "Replace glucocorticoid and mineralocorticoid if extensive bilateral haemorrhage causes adrenal insufficiency",
-      "Monitor with serial abdominal ultrasound to confirm involution and with urinary catecholamine metabolites to help exclude neuroblastoma",
-      "Refer for paediatric surgical or oncological assessment and MRI if a suprarenal mass fails to involute"
+    [
+     "Clinical Pitfall",
+     "Mistaking neuroblastoma for adrenal haemorrhage, or vice versa, without serial imaging and catecholamine testing",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for neonatal adrenal haemorrhage."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "adrenal-hemorrhage-neonatal-real-image",
+   "title": "Neonatal adrenal haemorrhage: Diagnostic Renal Ultrasonography",
+   "type": "ultrasound",
+   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
+   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
+   "annotations": [
+    {
+     "label": "Renal Cortex",
+     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
+    },
+    {
+     "label": "Corticomedullary Junction",
+     "description": "Medullary pyramid definition and structural architecture."
+    },
+    {
+     "label": "Collecting System",
+     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+    }
+   ]
+  }
+ ]
 }

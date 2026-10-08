@@ -6,7 +6,23 @@
  "basis": "international",
  "counterpart": "rabies-post-exposure-prophylaxis",
  "setting": "Emergency department, anti-rabies clinic, outpatient",
- "aliases": ["rabies PEP", "dog bite", "cat bite", "bat exposure", "animal bite", "WHO rabies position paper 2018", "IPC regimen", "1-week intradermal", "Essen", "Zagreb", "RIG", "HRIG", "ERIG", "rabies monoclonal antibody", "PrEP rabies"],
+ "aliases": [
+  "rabies PEP",
+  "dog bite",
+  "cat bite",
+  "bat exposure",
+  "animal bite",
+  "WHO rabies position paper 2018",
+  "IPC regimen",
+  "1-week intradermal",
+  "Essen",
+  "Zagreb",
+  "RIG",
+  "HRIG",
+  "ERIG",
+  "rabies monoclonal antibody",
+  "PrEP rabies"
+ ],
  "summary": "Classify the exposure, wash every wound with soap and water for 15 minutes, and vaccinate Category II and III exposures at once (WHO 1-week ID: 0.1 mL at 2 sites on days 0, 3 and 7). Add RIG (HRIG 20 IU/kg, ERIG 40 IU/kg) or a monoclonal antibody infiltrated into all Category III wounds in unvaccinated patients.",
  "sections": [
   {
@@ -88,20 +104,170 @@
   }
  ],
  "drugs": [
-  { "name": "Rabies vaccine, intradermal (1-week IPC)", "dose": "0.1 mL ID at each of 2 sites on days 0, 3 and 7", "notes": "WHO preferred PEP regimen. Same dose at all ages." },
-  { "name": "Rabies vaccine, intramuscular (2-week, 4-dose Essen)", "dose": "1 full vial IM on days 0, 3, 7 and once between days 14 and 28", "notes": "Deltoid; anterolateral thigh under 2 years. Never gluteal." },
-  { "name": "Rabies vaccine, intramuscular (3-week Zagreb)", "dose": "2 vials IM on day 0 (both deltoids), then 1 vial on days 7 and 21", "notes": "Alternative IM regimen." },
-  { "name": "Rabies vaccine, previously vaccinated", "dose": "0.1 mL ID at 1 site on days 0 and 3, or ID at 4 sites on day 0, or 1 vial IM on days 0 and 3", "notes": "No RIG needed unless immunocompromised." },
-  { "name": "Human rabies immunoglobulin (HRIG)", "dose": "Up to 20 IU/kg, once, infiltrated into and around all wounds", "notes": "Category III in the unvaccinated. Not after day 7 of vaccination." },
-  { "name": "Equine rabies immunoglobulin (ERIG)", "dose": "Up to 40 IU/kg, once, infiltrated into and around all wounds", "notes": "No skin test; observe 15 to 20 minutes with anaphylaxis treatment ready." },
-  { "name": "Rabies monoclonal antibody", "dose": "Single monoclonal up to 3.33 IU/kg; monoclonal cocktail up to 40 IU/kg; infiltrated as for RIG", "notes": "WHO-encouraged alternative to RIG; follow the product label." },
-  { "name": "Rabies vaccine, PrEP", "dose": "0.1 mL ID at 2 sites, or 1 vial IM, on days 0 and 7", "notes": "Serology-guided boosters only for continual or frequent occupational risk." }
+  {
+   "name": "Rabies vaccine, intradermal (1-week IPC)",
+   "dose": "0.1 mL ID at each of 2 sites on days 0, 3 and 7",
+   "notes": "WHO preferred PEP regimen. Same dose at all ages."
+  },
+  {
+   "name": "Rabies vaccine, intramuscular (2-week, 4-dose Essen)",
+   "dose": "1 full vial IM on days 0, 3, 7 and once between days 14 and 28",
+   "notes": "Deltoid; anterolateral thigh under 2 years. Never gluteal."
+  },
+  {
+   "name": "Rabies vaccine, intramuscular (3-week Zagreb)",
+   "dose": "2 vials IM on day 0 (both deltoids), then 1 vial on days 7 and 21",
+   "notes": "Alternative IM regimen."
+  },
+  {
+   "name": "Rabies vaccine, previously vaccinated",
+   "dose": "0.1 mL ID at 1 site on days 0 and 3, or ID at 4 sites on day 0, or 1 vial IM on days 0 and 3",
+   "notes": "No RIG needed unless immunocompromised."
+  },
+  {
+   "name": "Human rabies immunoglobulin (HRIG)",
+   "dose": "Up to 20 IU/kg, once, infiltrated into and around all wounds",
+   "notes": "Category III in the unvaccinated. Not after day 7 of vaccination."
+  },
+  {
+   "name": "Equine rabies immunoglobulin (ERIG)",
+   "dose": "Up to 40 IU/kg, once, infiltrated into and around all wounds",
+   "notes": "No skin test; observe 15 to 20 minutes with anaphylaxis treatment ready."
+  },
+  {
+   "name": "Rabies monoclonal antibody",
+   "dose": "Single monoclonal up to 3.33 IU/kg; monoclonal cocktail up to 40 IU/kg; infiltrated as for RIG",
+   "notes": "WHO-encouraged alternative to RIG; follow the product label."
+  },
+  {
+   "name": "Rabies vaccine, PrEP",
+   "dose": "0.1 mL ID at 2 sites, or 1 vial IM, on days 0 and 7",
+   "notes": "Serology-guided boosters only for continual or frequent occupational risk."
+  }
  ],
  "sources": [
-  { "org": "WHO", "title": "Rabies vaccines: WHO position paper, April 2018 (Weekly Epidemiological Record 93:201-220)", "year": 2018, "url": "https://www.who.int/publications/i/item/who-wer9316" },
-  { "org": "WHO", "title": "WHO Expert Consultation on Rabies: third report (TRS 1012)", "year": 2018, "url": "https://www.who.int/publications/i/item/WHO-TRS-1012" },
-  { "org": "WHO", "title": "Protocol for a well-performed rabies post-exposure prophylaxis delivery", "year": 2024, "url": "https://www.who.int/publications/i/item/B09018" },
-  { "org": "WHO", "title": "Rabies fact sheet", "year": 2026, "url": "https://www.who.int/news-room/fact-sheets/detail/rabies" }
+  {
+   "org": "WHO",
+   "title": "Rabies vaccines: WHO position paper, April 2018 (Weekly Epidemiological Record 93:201-220)",
+   "year": 2018,
+   "url": "https://www.who.int/publications/i/item/who-wer9316"
+  },
+  {
+   "org": "WHO",
+   "title": "WHO Expert Consultation on Rabies: third report (TRS 1012)",
+   "year": 2018,
+   "url": "https://www.who.int/publications/i/item/WHO-TRS-1012"
+  },
+  {
+   "org": "WHO",
+   "title": "Protocol for a well-performed rabies post-exposure prophylaxis delivery",
+   "year": 2024,
+   "url": "https://www.who.int/publications/i/item/B09018"
+  },
+  {
+   "org": "WHO",
+   "title": "Rabies fact sheet",
+   "year": 2026,
+   "url": "https://www.who.int/news-room/fact-sheets/detail/rabies"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "rabies-post-exposure-prophylaxis-international-pathway",
+   "title": "Rabies post-exposure prophylaxis (WHO) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Category I: touching or feeding animals, licks on intact skin. No exposure: wash the skin, no PEP.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Wash and flush every wound with copious running water and soap or detergent for 15 minutes as soon as possible; rinse exposed eyes and mucosa thoroughly with water.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Category III: single or multiple transdermal bites or scratches, saliva on mucous membranes or broken skin, or direct contact with bats. Wound washing, immediate vaccination and RIG or rabies monoclonal antibody."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Indicated for Category III exposures in people never vaccinated, and for Category II and III exposures in immunocompromised people even if previously vaccinated."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Waiting to see whether the animal dies before starting PEP."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for rabies post-exposure prophylaxis (who)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "rabies-post-exposure-prophylaxis-international-summary-matrix",
+   "title": "Rabies post-exposure prophylaxis (WHO) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Category I: touching or feeding animals, licks on intact skin. No exposure: wash the skin, no PEP.",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Wash and flush every wound with copious running water and soap or detergent for 15 minutes as soon as possible; rinse exposed eyes and",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Rabies vaccine, intradermal (1-week IPC): 0.1 mL ID at each of 2 sites on days 0, 3 and 7",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Waiting to see whether the animal dies before starting PEP.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for rabies post-exposure prophylaxis (who)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "rabies-post-exposure-prophylaxis-international-real-image",
+   "title": "Rabies post-exposure prophylaxis (WHO): Diagnostic Microbiological / Smear Examination",
+   "type": "diagram",
+   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
+   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
+   "annotations": [
+    {
+     "label": "Pathogen Detection",
+     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
+    },
+    {
+     "label": "Inflammatory Response",
+     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
+    },
+    {
+     "label": "Diagnostic Confirmation",
+     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+    }
+   ]
+  }
+ ]
 }

@@ -1,86 +1,181 @@
 {
-  "id": "facioscapulohumeral_muscular_dystrophy",
-  "name": "Facioscapulohumeral Muscular Dystrophy",
-  "aliases": [
-    "DUX4-related dystrophy",
-    "FSHD",
-    "FSHMD",
-    "Facioscapulohumeral muscular dystrophy",
-    "Landouzy-Dejerine disease",
-    "facioscapulohumeral dystrophy"
+ "id": "facioscapulohumeral_muscular_dystrophy",
+ "name": "Facioscapulohumeral Muscular Dystrophy",
+ "aliases": [
+  "DUX4-related dystrophy",
+  "FSHD",
+  "FSHMD",
+  "Facioscapulohumeral muscular dystrophy",
+  "Landouzy-Dejerine disease",
+  "facioscapulohumeral dystrophy"
+ ],
+ "class": "non_infective",
+ "system": "Neuromuscular",
+ "specialty": "Neurology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Neurogenetics references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Descending pattern of weakness: facial muscles first (difficulty whistling, burying eyelashes on eye closure, drinking through a straw), then scapular fixators, then humeral muscles.",
+   "Striking left-right asymmetry of weakness is characteristic and helps distinguish it from most other dystrophies.",
+   "Scapular winging with a horizontal clavicle, upward-riding scapulae ('poly-hill' sign) and prominent axillary folds; biceps and triceps wasting with relative deltoid sparing gives a 'Popeye' arm.",
+   "Beevor's sign (upward movement of the umbilicus on neck flexion) reflects selective lower abdominal weakness and is a useful bedside clue.",
+   "Foot drop from early tibialis anterior involvement is common and a frequent cause of falls.",
+   "Extramuscular features include high-frequency sensorineural hearing loss and a retinal vasculopathy; severe infantile-onset disease may produce Coats disease.",
+   "Creatine kinase is usually normal or only mildly raised, and clinically significant cardiac involvement is uncommon compared with other muscular dystrophies.",
+   "Autosomal dominant inheritance, but de novo mutations and somatic mosaicism mean a negative family history does not exclude the diagnosis."
   ],
-  "class": "non_infective",
-  "system": "Neuromuscular",
-  "specialty": "Neurology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Neurogenetics references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Descending pattern of weakness: facial muscles first (difficulty whistling, burying eyelashes on eye closure, drinking through a straw), then scapular fixators, then humeral muscles.",
-      "Striking left-right asymmetry of weakness is characteristic and helps distinguish it from most other dystrophies.",
-      "Scapular winging with a horizontal clavicle, upward-riding scapulae ('poly-hill' sign) and prominent axillary folds; biceps and triceps wasting with relative deltoid sparing gives a 'Popeye' arm.",
-      "Beevor's sign (upward movement of the umbilicus on neck flexion) reflects selective lower abdominal weakness and is a useful bedside clue.",
-      "Foot drop from early tibialis anterior involvement is common and a frequent cause of falls.",
-      "Extramuscular features include high-frequency sensorineural hearing loss and a retinal vasculopathy; severe infantile-onset disease may produce Coats disease.",
-      "Creatine kinase is usually normal or only mildly raised, and clinically significant cardiac involvement is uncommon compared with other muscular dystrophies.",
-      "Autosomal dominant inheritance, but de novo mutations and somatic mosaicism mean a negative family history does not exclude the diagnosis."
+  "pathophysiology": "Facioscapulohumeral muscular dystrophy arises from aberrant, stable expression of the normally silenced DUX4 retrogene in skeletal muscle. In FSHD1 (the great majority of cases) a contraction of the D4Z4 macrosatellite repeat array on chromosome 4q35 reduces repeat number below a critical threshold, causing chromatin relaxation and hypomethylation that permit DUX4 transcription; disease only occurs when the contraction lies on a permissive 4qA haplotype that provides a polyadenylation signal stabilising the DUX4 transcript. In FSHD2 the array is of normal length but is hypomethylated because of loss-of-function variants in a chromatin modifier, most often SMCHD1 (occasionally DNMT3B), again on a permissive 4qA background, making it a digenic disorder. Misexpressed DUX4 is an early-embryonic transcription factor toxic to mature muscle, activating germline and apoptotic programmes and driving progressive, selective muscle degeneration.",
+  "additionalDifferentials": [
+   "Limb-girdle muscular dystrophies",
+   "Myotonic dystrophy",
+   "Scapuloperoneal syndromes and other scapuloperoneal myopathies",
+   "Inflammatory myopathy (polymyositis)",
+   "Mitochondrial myopathy",
+   "Late-onset Pompe disease",
+   "Congenital myasthenic syndromes"
+  ],
+  "additionalInvestigations": [
+   "Targeted molecular testing to size the D4Z4 repeat on 4q35 and determine the 4qA/4qB haplotype (molecular combing, optical genome mapping or Southern blot).",
+   "D4Z4 methylation analysis, particularly when FSHD2 is suspected.",
+   "SMCHD1 sequencing where FSHD2 or a hypomethylation pattern is identified.",
+   "Creatine kinase (typically normal or mildly elevated).",
+   "Muscle MRI demonstrating asymmetric, selective muscle involvement and guiding biopsy if needed.",
+   "Audiometry and dilated retinal examination, especially in early-onset or paediatric disease.",
+   "Electromyography to confirm a myopathic process and exclude neurogenic mimics."
+  ],
+  "redFlags": [
+   "Infantile-onset disease with exudative retinal vasculopathy (Coats disease) and hearing loss, threatening irreversible visual loss.",
+   "Symptoms of nocturnal hypoventilation or respiratory insufficiency in advanced, wheelchair-dependent patients.",
+   "New or worsening foot drop causing recurrent falls.",
+   "Rapidly progressive or strikingly symmetrical weakness, which should prompt reconsideration of the diagnosis."
+  ],
+  "prognosis": "Progression is usually slow with wide variability; most patients remain ambulant and life expectancy is generally normal, although a minority become wheelchair dependent. Earlier onset and larger repeat contractions (fewer residual D4Z4 units) tend to predict more severe disease.",
+  "pitfalls": [
+   "Marked asymmetry may be mistaken for a focal or acquired disorder rather than a genetic dystrophy.",
+   "A normal creatine kinase does not exclude the diagnosis.",
+   "Standard next-generation sequencing gene panels miss FSHD because the defect is a repeat contraction with an epigenetic mechanism; dedicated D4Z4 sizing and methylation testing are required.",
+   "Treatable extramuscular complications such as retinopathy and hearing loss are easily overlooked, particularly in children.",
+   "An absent family history is common because of de novo mutations and mosaicism and should not deter genetic testing."
+  ],
+  "references": [
+   "Consensus diagnostic and care guidelines for facioscapulohumeral muscular dystrophy",
+   "Standard neuromuscular disorders textbook",
+   "Medical genetics reference texts"
+  ],
+  "crossLinks": [],
+  "management": [
+   "No targeted therapy is currently available, so management centres on supportive and rehabilitative care",
+   "Individualised physiotherapy and moderate aerobic and resistance exercise to preserve function and limit contractures",
+   "Ankle-foot orthoses for tibialis anterior weakness and foot drop, with mobility aids to prevent falls",
+   "Scapulothoracic fixation surgery to improve arm elevation in selected disabling scapular winging",
+   "Symptomatic pain management and treatment of musculoskeletal complications",
+   "Monitoring for extramuscular disease with audiometry and dilated retinal examination, particularly in early-onset disease at risk of Coats retinopathy, plus respiratory assessment as weakness advances",
+   "Genetic counselling and cascade family testing, accounting for the digenic FSHD2 mechanism involving SMCHD1"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "facioscapulohumeral_muscular_dystrophy-pathway",
+   "title": "Facioscapulohumeral Muscular Dystrophy: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Descending pattern of weakness: facial muscles first (difficulty whistling, burying eyelashes on eye closure, drinking through a straw), then scapular fixators, then humeral muscles.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Infantile-onset disease with exudative retinal vasculopathy (Coats disease) and hearing loss, threatening irreversible visual loss.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Targeted molecular testing to size the D4Z4 repeat on 4q35 and determine the 4qA/4qB haplotype (molecular combing, optical genome mapping or Southern blot)., D4Z4 methylation analysis, particularly when FSHD2 is"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: No targeted therapy is currently available, so management centres on supportive and rehabilitative care"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Marked asymmetry may be mistaken for a focal or acquired disorder rather than a genetic dystrophy."
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of facioscapulohumeral muscular dystrophy."
+  }
+ ],
+ "tables": [
+  {
+   "id": "facioscapulohumeral_muscular_dystrophy-matrix",
+   "title": "Facioscapulohumeral Muscular Dystrophy: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Descending pattern of weakness: facial muscles first (difficulty whistling, burying eyelashes on eye closure, drinking through a",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Facioscapulohumeral muscular dystrophy arises from aberrant, stable expression of the normally silenced DUX4 retrogene in skeletal muscle. In FSHD1 (the great majority of cases) a contraction of the D4Z4 macrosatellite repeat array on chromosome 4q35 reduces repeat number below a critical threshold, causing chromatin relaxation and hypomethylation that permit DUX4 transcription; disease only occurs when the contraction lies on a permissive 4qA haplotype that provides a polyadenylation signal stabilising the DUX4 transcript. In FSHD2 the array is of normal length but is hypomethylated because of loss-of-function variants in a chromatin modifier, most often SMCHD1 (occasionally DNMT3B), again on a permissive 4qA background, making it a digenic disorder. Misexpressed DUX4 is an early-embryonic transcription factor toxic to mature muscle, activating germline and apoptotic programmes and driving progressive, selective muscle degeneration.",
-    "additionalDifferentials": [
-      "Limb-girdle muscular dystrophies",
-      "Myotonic dystrophy",
-      "Scapuloperoneal syndromes and other scapuloperoneal myopathies",
-      "Inflammatory myopathy (polymyositis)",
-      "Mitochondrial myopathy",
-      "Late-onset Pompe disease",
-      "Congenital myasthenic syndromes"
+    [
+     "Key Investigations",
+     "Targeted molecular testing to size the D4Z4 repeat on 4q35 and determine the 4qA/4qB haplotype (molecular combing, optical genome",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Targeted molecular testing to size the D4Z4 repeat on 4q35 and determine the 4qA/4qB haplotype (molecular combing, optical genome mapping or Southern blot).",
-      "D4Z4 methylation analysis, particularly when FSHD2 is suspected.",
-      "SMCHD1 sequencing where FSHD2 or a hypomethylation pattern is identified.",
-      "Creatine kinase (typically normal or mildly elevated).",
-      "Muscle MRI demonstrating asymmetric, selective muscle involvement and guiding biopsy if needed.",
-      "Audiometry and dilated retinal examination, especially in early-onset or paediatric disease.",
-      "Electromyography to confirm a myopathic process and exclude neurogenic mimics."
+    [
+     "Primary Differentials",
+     "Limb-girdle muscular dystrophies, Myotonic dystrophy, Scapuloperoneal syndromes and other scapuloperoneal myopathies",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Infantile-onset disease with exudative retinal vasculopathy (Coats disease) and hearing loss, threatening irreversible visual loss.",
-      "Symptoms of nocturnal hypoventilation or respiratory insufficiency in advanced, wheelchair-dependent patients.",
-      "New or worsening foot drop causing recurrent falls.",
-      "Rapidly progressive or strikingly symmetrical weakness, which should prompt reconsideration of the diagnosis."
+    [
+     "Management Strategy",
+     "No targeted therapy is currently available, so management centres on supportive and rehabilitative care",
+     "Core treatment modality"
     ],
-    "prognosis": "Progression is usually slow with wide variability; most patients remain ambulant and life expectancy is generally normal, although a minority become wheelchair dependent. Earlier onset and larger repeat contractions (fewer residual D4Z4 units) tend to predict more severe disease.",
-    "pitfalls": [
-      "Marked asymmetry may be mistaken for a focal or acquired disorder rather than a genetic dystrophy.",
-      "A normal creatine kinase does not exclude the diagnosis.",
-      "Standard next-generation sequencing gene panels miss FSHD because the defect is a repeat contraction with an epigenetic mechanism; dedicated D4Z4 sizing and methylation testing are required.",
-      "Treatable extramuscular complications such as retinopathy and hearing loss are easily overlooked, particularly in children.",
-      "An absent family history is common because of de novo mutations and mosaicism and should not deter genetic testing."
-    ],
-    "references": [
-      "Consensus diagnostic and care guidelines for facioscapulohumeral muscular dystrophy",
-      "Standard neuromuscular disorders textbook",
-      "Medical genetics reference texts"
-    ],
-    "crossLinks": [],
-    "management": [
-      "No targeted therapy is currently available, so management centres on supportive and rehabilitative care",
-      "Individualised physiotherapy and moderate aerobic and resistance exercise to preserve function and limit contractures",
-      "Ankle-foot orthoses for tibialis anterior weakness and foot drop, with mobility aids to prevent falls",
-      "Scapulothoracic fixation surgery to improve arm elevation in selected disabling scapular winging",
-      "Symptomatic pain management and treatment of musculoskeletal complications",
-      "Monitoring for extramuscular disease with audiometry and dilated retinal examination, particularly in early-onset disease at risk of Coats retinopathy, plus respiratory assessment as weakness advances",
-      "Genetic counselling and cascade family testing, accounting for the digenic FSHD2 mechanism involving SMCHD1"
+    [
+     "Clinical Pitfall",
+     "Marked asymmetry may be mistaken for a focal or acquired disorder rather than a genetic dystrophy.",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for facioscapulohumeral muscular dystrophy."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "facioscapulohumeral-muscular-dystrophy-real-image",
+   "title": "Facioscapulohumeral Muscular Dystrophy: Diagnostic Head Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
+   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
+   "annotations": [
+    {
+     "label": "Cerebral Parenchyma",
+     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+    },
+    {
+     "label": "Extra-Axial Spaces",
+     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+    }
+   ]
+  }
+ ]
 }

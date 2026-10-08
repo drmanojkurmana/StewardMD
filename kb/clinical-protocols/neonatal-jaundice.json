@@ -115,5 +115,100 @@
  "review": {
   "status": "ai_drafted",
   "compiled": "2026-09-25"
- }
+ },
+ "algorithms": [
+  {
+   "id": "neonatal-jaundice-pathway",
+   "title": "Neonatal jaundice (hyperbilirubinaemia) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Visual assessment is unreliable, especially in darker skin: look for jaundice at every check (at least every 12 hours before discharge) but decide with a bilirubin measurement.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Jaundice in the first 24 hours is pathological until proven otherwise: measure bilirubin urgently (NICE: within 2 hours) and look for haemolysis.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Measure TcB or TSB in all newborns between 24 and 48 hours of age, or before discharge if earlier. Interpret by exact age in hours, not day of life."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Babies 35 weeks or more: start phototherapy at or above the AAP 2022 hour-specific threshold for gestation, using the lower curve if any neurotoxicity risk factor is present. Babies below 35 weeks need lower, gestation-specific thresholds"
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Relying on visual estimation or day of life instead of hour-specific values."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for neonatal jaundice (hyperbilirubinaemia)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "neonatal-jaundice-summary-matrix",
+   "title": "Neonatal jaundice (hyperbilirubinaemia) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Visual assessment is unreliable, especially in darker skin: look for jaundice at every check (at least every 12 hours before discharge) but",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Babies 35 weeks or more: start phototherapy at or above the AAP 2022 hour-specific threshold for gestation, using the lower curve if any",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Measure TcB or TSB in all newborns between 24 and 48 hours of age, or before discharge if earlier. Interpret by exact age in hours, not day",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Intravenous immunoglobulin (IVIG): 0.5 to 1 g/kg IV over 2 hours; may repeat after 12 hours (AAP 2022)",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Relying on visual estimation or day of life instead of hour-specific values.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for neonatal jaundice (hyperbilirubinaemia)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "neonatal-jaundice-real-image",
+   "title": "Neonatal jaundice (hyperbilirubinaemia): Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

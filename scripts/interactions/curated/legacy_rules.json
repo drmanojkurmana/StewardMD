@@ -1,5 +1,6 @@
 {
   "_comment": "EXACT extract of the pre-pipeline curated rules. These are preserved verbatim by build_rules.py so existing test/run-interactions.mjs assertions keep passing. New rules live in mechanism_rules.json.",
+  "_retired_2026_10_02": "Superseded by broader class rules in the August 2026 R1-reviewed DDI fixes (qa-report/clinical_safety.md H1, H2, H5), which shipped in interaction-rules.js only; owner retired them here 2026-10-02 so a rebuild matches the app: pair-allopurinol-azathioprine -> pair-xanthineoxidase-azathioprine (H1: febuxostat too); pair-digoxin-amiodarone -> pair-digoxin-pgp (H2: one P-gp class rule); pair-digoxin-verapamil -> pair-digoxin-pgp (H2: one P-gp class rule); pair-warfarin-aspirin -> pair-anticoagulant-antiplatelet (H5: class x class)",
   "rules": [
     {
       "id": "pair-warfarin-nsaid",
@@ -24,30 +25,6 @@
       "reviewDate": "2026-07-04",
       "doseTimingSeparation": false,
       "specialistReview": false
-    },
-    {
-      "id": "pair-warfarin-aspirin",
-      "type": "pair",
-      "subjects": [
-        {
-          "kind": "generic",
-          "value": "warfarin"
-        },
-        {
-          "kind": "generic",
-          "value": "aspirin"
-        }
-      ],
-      "severity": "major",
-      "mechanism": "Additive haemostatic impairment: warfarin inhibits vitamin-K–dependent clotting factors while aspirin irreversibly inhibits platelet aggregation and injures gastric mucosa.",
-      "effect": "Substantially increased risk of major and gastrointestinal bleeding.",
-      "action": "Use together only for a clear evidence-based indication (e.g. certain mechanical valves or recent ACS on specialist advice). Otherwise avoid; add gastroprotection when combined.",
-      "monitoring": "Monitor INR and for signs of bleeding; confirm the combination remains indicated at each review.",
-      "sourceId": "onc-nlm-hpddi",
-      "evidence": "established",
-      "reviewDate": "2026-07-04",
-      "doseTimingSeparation": false,
-      "specialistReview": true
     },
     {
       "id": "pair-warfarin-macrolide-azole",
@@ -120,30 +97,6 @@
       "reviewDate": "2026-07-04",
       "doseTimingSeparation": false,
       "specialistReview": true
-    },
-    {
-      "id": "pair-digoxin-amiodarone",
-      "type": "pair",
-      "subjects": [
-        {
-          "kind": "generic",
-          "value": "digoxin"
-        },
-        {
-          "kind": "generic",
-          "value": "amiodarone"
-        }
-      ],
-      "severity": "major",
-      "mechanism": "Amiodarone inhibits P-glycoprotein–mediated renal and biliary elimination of digoxin, raising serum digoxin concentrations.",
-      "effect": "Digoxin toxicity (nausea, visual disturbance, bradyarrhythmias, heart block) as levels roughly double.",
-      "action": "Reduce the digoxin dose (commonly by about half) when starting amiodarone and re-titrate to level and clinical response.",
-      "monitoring": "Check serum digoxin level and ECG/heart rate after starting amiodarone; monitor for toxicity.",
-      "sourceId": "openfda-labeling",
-      "evidence": "established",
-      "reviewDate": "2026-07-04",
-      "doseTimingSeparation": false,
-      "specialistReview": false
     },
     {
       "id": "pair-statin-macrolide-azole",
@@ -264,30 +217,6 @@
       "reviewDate": "2026-07-07",
       "doseTimingSeparation": false,
       "specialistReview": true
-    },
-    {
-      "id": "pair-digoxin-verapamil",
-      "type": "pair",
-      "subjects": [
-        {
-          "kind": "generic",
-          "value": "digoxin"
-        },
-        {
-          "kind": "generic",
-          "value": "verapamil"
-        }
-      ],
-      "severity": "major",
-      "mechanism": "Verapamil inhibits P-glycoprotein–mediated renal and biliary clearance of digoxin, raising serum digoxin concentrations; both drugs also independently slow AV-nodal conduction.",
-      "effect": "Digoxin toxicity (nausea, visual disturbance, bradyarrhythmias, AV block); digoxin levels may rise by roughly 50–75%.",
-      "action": "Anticipate a rise in digoxin level when starting verapamil; reduce the digoxin dose (commonly by about half) and re-titrate to level and clinical response.",
-      "monitoring": "Check serum digoxin level and ECG/heart rate after starting or changing verapamil; monitor for toxicity.",
-      "sourceId": "openfda-labeling",
-      "evidence": "established",
-      "reviewDate": "2026-07-07",
-      "doseTimingSeparation": false,
-      "specialistReview": false
     },
     {
       "id": "pair-ssri-anticoagulant",
@@ -427,30 +356,6 @@
       "effect": "Additive antifolate toxicity: severe bone-marrow suppression (megaloblastic anaemia, pancytopenia) — fatal cases have been reported.",
       "action": "Avoid co-trimoxazole/trimethoprim with methotrexate; choose an alternative antibiotic. If unavoidable and short-term, seek specialist advice and consider folinic acid rescue.",
       "monitoring": "Monitor full blood count closely; watch for mucositis, infection and other signs of marrow suppression.",
-      "sourceId": "onc-nlm-hpddi",
-      "evidence": "established",
-      "reviewDate": "2026-07-07",
-      "doseTimingSeparation": false,
-      "specialistReview": true
-    },
-    {
-      "id": "pair-allopurinol-azathioprine",
-      "type": "pair",
-      "subjects": [
-        {
-          "kind": "generic",
-          "value": "allopurinol"
-        },
-        {
-          "kind": "generic",
-          "value": "azathioprine"
-        }
-      ],
-      "severity": "major",
-      "mechanism": "Azathioprine is metabolised to 6-mercaptopurine, which is inactivated by xanthine oxidase. Allopurinol inhibits xanthine oxidase, diverting metabolism toward toxic thioguanine nucleotides and markedly raising active-drug levels.",
-      "effect": "Severe, potentially life-threatening myelosuppression (pancytopenia).",
-      "action": "Avoid the combination if possible. If allopurinol is essential, the azathioprine dose must be reduced to about 25% of the usual dose under specialist supervision (the same caution applies to febuxostat).",
-      "monitoring": "Monitor full blood count frequently, especially in the first weeks and after any dose change.",
       "sourceId": "onc-nlm-hpddi",
       "evidence": "established",
       "reviewDate": "2026-07-07",

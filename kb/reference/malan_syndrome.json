@@ -1,77 +1,172 @@
 {
-  "id": "malan_syndrome",
-  "name": "Malan syndrome",
-  "aliases": [
-    "Sotos syndrome 2",
-    "NFIX-related overgrowth syndrome",
-    "Malan overgrowth syndrome"
+ "id": "malan_syndrome",
+ "name": "Malan syndrome",
+ "aliases": [
+  "Sotos syndrome 2",
+  "NFIX-related overgrowth syndrome",
+  "Malan overgrowth syndrome"
+ ],
+ "class": "non_infective",
+ "system": "Genetics",
+ "specialty": "Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "GeneReviews / Emery and Rimoin's Principles and Practice of Medical Genetics",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "This is an overgrowth-with-intellectual-disability syndrome characterised by tall stature, macrocephaly, and a recognisable facial appearance including a long, narrow face and prominent forehead",
+   "It is caused by variants in NFIX, a transcription factor gene; the overgrowth phenotype arises from a distinct molecular mechanism to that producing the separate, unrelated Marshall-Smith syndrome caused by other NFIX variants",
+   "Developmental delay and intellectual disability are typical, and behavioural features such as anxiety and autistic traits are common",
+   "A slender, marfanoid habitus with long limbs may prompt consideration of connective tissue disorders",
+   "Ophthalmological anomalies including strabismus and optic atrophy are recognised associations",
+   "Diagnosis is confirmed by molecular genetic testing, often through genome or exome sequencing or a targeted overgrowth panel, having considered Sotos syndrome in the differential",
+   "There is no specific treatment; care is anticipatory and multidisciplinary, addressing development, behaviour, vision, and skeletal and cardiovascular surveillance as clinically indicated"
   ],
-  "class": "non_infective",
-  "system": "Genetics",
-  "specialty": "Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "GeneReviews / Emery and Rimoin's Principles and Practice of Medical Genetics",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "This is an overgrowth-with-intellectual-disability syndrome characterised by tall stature, macrocephaly, and a recognisable facial appearance including a long, narrow face and prominent forehead",
-      "It is caused by variants in NFIX, a transcription factor gene; the overgrowth phenotype arises from a distinct molecular mechanism to that producing the separate, unrelated Marshall-Smith syndrome caused by other NFIX variants",
-      "Developmental delay and intellectual disability are typical, and behavioural features such as anxiety and autistic traits are common",
-      "A slender, marfanoid habitus with long limbs may prompt consideration of connective tissue disorders",
-      "Ophthalmological anomalies including strabismus and optic atrophy are recognised associations",
-      "Diagnosis is confirmed by molecular genetic testing, often through genome or exome sequencing or a targeted overgrowth panel, having considered Sotos syndrome in the differential",
-      "There is no specific treatment; care is anticipatory and multidisciplinary, addressing development, behaviour, vision, and skeletal and cardiovascular surveillance as clinically indicated"
+  "pathophysiology": "Malan syndrome is a chromatin- and transcription-related overgrowth disorder caused by heterozygous variants in NFIX, which encodes a nuclear factor I transcription factor involved in regulating cell proliferation and differentiation during development, including in brain and skeletal tissue. Loss-of-function variants that reduce functional NFIX dosage disturb the tightly controlled transcriptional programmes governing growth, producing the characteristic tall stature, macrocephaly, and neurodevelopmental features. Notably, a separate class of NFIX variants causes the clinically distinct Marshall-Smith syndrome, illustrating how different molecular consequences at one locus generate divergent phenotypes. Most cases arise de novo and inheritance, when relevant, is autosomal dominant.",
+  "additionalDifferentials": [
+   "Sotos syndrome (NSD1-related)",
+   "Weaver syndrome (EZH2-related)",
+   "Tatton-Brown-Rahman syndrome (DNMT3A-related)",
+   "Marfan syndrome and related connective tissue disorders",
+   "Fragile X syndrome",
+   "Other transcription- or chromatin-related overgrowth syndromes"
+  ],
+  "additionalInvestigations": [
+   "Exome or genome sequencing, or a targeted overgrowth/intellectual disability gene panel",
+   "Chromosomal microarray to exclude copy number causes of overgrowth and developmental delay",
+   "MRI of the brain where neurological signs or macrocephaly warrant imaging",
+   "Ophthalmological assessment for strabismus and optic atrophy",
+   "Developmental and behavioural evaluation",
+   "Skeletal and cardiovascular assessment given the marfanoid habitus"
+  ],
+  "redFlags": [
+   "Rapidly increasing head circumference or neurological signs suggesting intracranial pathology",
+   "Features suggesting aortic root dilatation or other cardiovascular involvement in a marfanoid child",
+   "Significant regression of skills prompting re-evaluation",
+   "Progressive visual loss from optic atrophy"
+  ],
+  "prognosis": "Prognosis relates chiefly to the degree of intellectual disability and any associated medical complications; lifespan is not clearly reduced in most individuals. Ongoing developmental, educational, and behavioural support improves function, and surveillance addresses ophthalmological and skeletal issues as they arise.",
+  "pitfalls": [
+   "Confusing the disorder with Sotos syndrome and stopping testing at NSD1",
+   "Attributing the marfanoid habitus to a primary connective tissue disorder and missing the overgrowth syndrome",
+   "Overlooking anxiety and autistic features that benefit from targeted support",
+   "Assuming NFIX variants always cause the same phenotype, when they may instead cause Marshall-Smith syndrome"
+  ],
+  "references": [
+   "GeneReviews (University of Washington)",
+   "Emery and Rimoin's Principles and Practice of Medical Genetics"
+  ],
+  "crossLinks": [],
+  "management": [
+   "No disease-specific drug therapy exists; management is supportive with early developmental intervention including speech and language, occupational and physiotherapy and tailored educational support",
+   "Behavioural and psychological support for anxiety and autistic traits, with input from developmental paediatrics or psychiatry",
+   "Ophthalmological review and treatment of strabismus with surveillance for optic atrophy",
+   "Skeletal and cardiovascular assessment given the marfanoid habitus, with monitoring for related complications",
+   "Growth and head circumference monitoring coordinated by a multidisciplinary team including clinical genetics",
+   "Genetic counselling recognising autosomal dominant inheritance with most cases arising de novo, and confirmatory NFIX molecular testing"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "malan_syndrome-pathway",
+   "title": "Malan syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "This is an overgrowth-with-intellectual-disability syndrome characterised by tall stature, macrocephaly, and a recognisable facial appearance including a long, narrow face and prominent forehead",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapidly increasing head circumference or neurological signs suggesting intracranial pathology",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Exome or genome sequencing, or a targeted overgrowth/intellectual disability gene panel, Chromosomal microarray to exclude copy number causes of overgrowth and developmental delay, MRI of the brain where neurological signs"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: No disease-specific drug therapy exists; management is supportive with early developmental intervention including speech and language, occupational and physiotherapy and tailored educational support"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Confusing the disorder with Sotos syndrome and stopping testing at NSD1"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of malan syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "malan_syndrome-matrix",
+   "title": "Malan syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "This is an overgrowth-with-intellectual-disability syndrome characterised by tall stature, macrocephaly, and a recognisable",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Malan syndrome is a chromatin- and transcription-related overgrowth disorder caused by heterozygous variants in NFIX, which encodes a nuclear factor I transcription factor involved in regulating cell proliferation and differentiation during development, including in brain and skeletal tissue. Loss-of-function variants that reduce functional NFIX dosage disturb the tightly controlled transcriptional programmes governing growth, producing the characteristic tall stature, macrocephaly, and neurodevelopmental features. Notably, a separate class of NFIX variants causes the clinically distinct Marshall-Smith syndrome, illustrating how different molecular consequences at one locus generate divergent phenotypes. Most cases arise de novo and inheritance, when relevant, is autosomal dominant.",
-    "additionalDifferentials": [
-      "Sotos syndrome (NSD1-related)",
-      "Weaver syndrome (EZH2-related)",
-      "Tatton-Brown-Rahman syndrome (DNMT3A-related)",
-      "Marfan syndrome and related connective tissue disorders",
-      "Fragile X syndrome",
-      "Other transcription- or chromatin-related overgrowth syndromes"
+    [
+     "Key Investigations",
+     "Exome or genome sequencing, or a targeted overgrowth/intellectual disability gene panel, Chromosomal microarray to exclude copy",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Exome or genome sequencing, or a targeted overgrowth/intellectual disability gene panel",
-      "Chromosomal microarray to exclude copy number causes of overgrowth and developmental delay",
-      "MRI of the brain where neurological signs or macrocephaly warrant imaging",
-      "Ophthalmological assessment for strabismus and optic atrophy",
-      "Developmental and behavioural evaluation",
-      "Skeletal and cardiovascular assessment given the marfanoid habitus"
+    [
+     "Primary Differentials",
+     "Sotos syndrome (NSD1-related), Weaver syndrome (EZH2-related), Tatton-Brown-Rahman syndrome (DNMT3A-related)",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rapidly increasing head circumference or neurological signs suggesting intracranial pathology",
-      "Features suggesting aortic root dilatation or other cardiovascular involvement in a marfanoid child",
-      "Significant regression of skills prompting re-evaluation",
-      "Progressive visual loss from optic atrophy"
+    [
+     "Management Strategy",
+     "No disease-specific drug therapy exists; management is supportive with early developmental intervention including speech and",
+     "Core treatment modality"
     ],
-    "prognosis": "Prognosis relates chiefly to the degree of intellectual disability and any associated medical complications; lifespan is not clearly reduced in most individuals. Ongoing developmental, educational, and behavioural support improves function, and surveillance addresses ophthalmological and skeletal issues as they arise.",
-    "pitfalls": [
-      "Confusing the disorder with Sotos syndrome and stopping testing at NSD1",
-      "Attributing the marfanoid habitus to a primary connective tissue disorder and missing the overgrowth syndrome",
-      "Overlooking anxiety and autistic features that benefit from targeted support",
-      "Assuming NFIX variants always cause the same phenotype, when they may instead cause Marshall-Smith syndrome"
-    ],
-    "references": [
-      "GeneReviews (University of Washington)",
-      "Emery and Rimoin's Principles and Practice of Medical Genetics"
-    ],
-    "crossLinks": [],
-    "management": [
-      "No disease-specific drug therapy exists; management is supportive with early developmental intervention including speech and language, occupational and physiotherapy and tailored educational support",
-      "Behavioural and psychological support for anxiety and autistic traits, with input from developmental paediatrics or psychiatry",
-      "Ophthalmological review and treatment of strabismus with surveillance for optic atrophy",
-      "Skeletal and cardiovascular assessment given the marfanoid habitus, with monitoring for related complications",
-      "Growth and head circumference monitoring coordinated by a multidisciplinary team including clinical genetics",
-      "Genetic counselling recognising autosomal dominant inheritance with most cases arising de novo, and confirmatory NFIX molecular testing"
+    [
+     "Clinical Pitfall",
+     "Confusing the disorder with Sotos syndrome and stopping testing at NSD1",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for malan syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "malan-syndrome-real-image",
+   "title": "Malan syndrome: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

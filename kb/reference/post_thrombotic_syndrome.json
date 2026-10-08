@@ -1,77 +1,172 @@
 {
-  "id": "post_thrombotic_syndrome",
-  "name": "Post-thrombotic syndrome",
-  "aliases": [
-    "PTS",
-    "postphlebitic syndrome",
-    "post-thrombotic venous insufficiency"
+ "id": "post_thrombotic_syndrome",
+ "name": "Post-thrombotic syndrome",
+ "aliases": [
+  "PTS",
+  "postphlebitic syndrome",
+  "post-thrombotic venous insufficiency"
+ ],
+ "class": "non_infective",
+ "system": "Cardiovascular / Vascular",
+ "specialty": "Vascular Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Rutherford's Vascular Surgery and Endovascular Therapy",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A chronic sequela of deep vein thrombosis resulting from persistent venous obstruction and valvular damage that cause venous hypertension",
+   "Develops in a substantial proportion of patients after DVT, more commonly after proximal (iliofemoral) thrombosis and after recurrent ipsilateral DVT",
+   "Manifests as chronic limb pain, heaviness, swelling, cramps, itching, skin pigmentation and lipodermatosclerosis, and in severe cases venous ulceration",
+   "Symptoms are typically worse with standing and walking and relieved by rest and elevation; venous claudication may occur with iliac obstruction",
+   "Diagnosis is clinical and can be graded with the Villalta score, while venous duplex confirms reflux and residual obstruction",
+   "Risk is reduced by adequate initial anticoagulation, and in extensive iliofemoral DVT by early thrombus removal in selected patients",
+   "Management is largely conservative, with compression therapy, exercise, skin care, and leg elevation; iliac vein stenting may help selected patients with proximal obstruction"
   ],
-  "class": "non_infective",
-  "system": "Cardiovascular / Vascular",
-  "specialty": "Vascular Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Rutherford's Vascular Surgery and Endovascular Therapy",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A chronic sequela of deep vein thrombosis resulting from persistent venous obstruction and valvular damage that cause venous hypertension",
-      "Develops in a substantial proportion of patients after DVT, more commonly after proximal (iliofemoral) thrombosis and after recurrent ipsilateral DVT",
-      "Manifests as chronic limb pain, heaviness, swelling, cramps, itching, skin pigmentation and lipodermatosclerosis, and in severe cases venous ulceration",
-      "Symptoms are typically worse with standing and walking and relieved by rest and elevation; venous claudication may occur with iliac obstruction",
-      "Diagnosis is clinical and can be graded with the Villalta score, while venous duplex confirms reflux and residual obstruction",
-      "Risk is reduced by adequate initial anticoagulation, and in extensive iliofemoral DVT by early thrombus removal in selected patients",
-      "Management is largely conservative, with compression therapy, exercise, skin care, and leg elevation; iliac vein stenting may help selected patients with proximal obstruction"
+  "pathophysiology": "Post-thrombotic syndrome develops when a deep vein thrombus fails to resolve fully, leaving residual venous obstruction and destroying venous valves through inflammation and recanalisation. The combination of outflow obstruction and valvular reflux produces sustained ambulatory venous hypertension, transmitted to the microcirculation with the same downstream consequences as other chronic venous insufficiency, namely oedema, skin changes, and ulceration. Proximal (iliofemoral) thrombosis, recurrent thrombosis, and inadequate anticoagulation increase both the risk and the severity.",
+  "additionalDifferentials": [
+   "Recurrent acute deep vein thrombosis",
+   "Chronic venous insufficiency from primary valvular reflux",
+   "Lymphoedema",
+   "Cellulitis",
+   "Cardiac, renal, or hepatic oedema",
+   "Iliac vein compression (May-Thurner) with residual obstruction"
+  ],
+  "additionalInvestigations": [
+   "Venous duplex ultrasound to assess reflux and residual obstruction",
+   "Clinical grading with the Villalta score",
+   "CT or MR venography for suspected iliac or caval obstruction amenable to stenting",
+   "Ankle-brachial pressure index before compression to exclude arterial disease",
+   "D-dimer and duplex to distinguish recurrent acute DVT from chronic changes",
+   "Ulcer assessment (swab, and biopsy if atypical) where ulceration is present"
+  ],
+  "redFlags": [
+   "Features suggesting recurrent acute DVT rather than chronic sequelae",
+   "A non-healing or atypical ulcer requiring biopsy",
+   "Coexisting significant arterial disease making compression hazardous",
+   "Rapidly progressive swelling suggesting new proximal obstruction or a mass"
+  ],
+  "prognosis": "A chronic condition that can significantly impair quality of life; symptoms are often controllable with compression and lifestyle measures, but severe post-thrombotic syndrome with ulceration is difficult to treat, underscoring the importance of prevention.",
+  "pitfalls": [
+   "Mistaking post-thrombotic changes for recurrent acute DVT, or the reverse",
+   "Under-using compression therapy, the mainstay of control",
+   "Overlooking a treatable proximal (iliac) obstruction",
+   "Applying compression without excluding arterial disease"
+  ],
+  "references": [
+   "Rutherford's Vascular Surgery and Endovascular Therapy",
+   "ESVS Clinical Practice Guidelines on Venous Disease"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Graduated compression therapy with stockings or bandaging as the mainstay to counter ambulatory venous hypertension and control oedema",
+   "Adequate anticoagulation of the index deep vein thrombosis and prevention of recurrent ipsilateral thrombosis, the key to limiting severity",
+   "Exercise, leg elevation, weight management and meticulous skin care to reduce symptoms and protect vulnerable skin",
+   "Venous ulcer care with compression and appropriate dressings where ulceration has developed",
+   "Endovenous recanalisation and stenting for symptomatic iliac or caval obstruction, with early thrombus removal considered in extensive iliofemoral thrombosis",
+   "Analgesia and venoactive agents for chronic limb pain and heaviness, with referral to vascular services for refractory disease"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "post_thrombotic_syndrome-pathway",
+   "title": "Post-thrombotic syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A chronic sequela of deep vein thrombosis resulting from persistent venous obstruction and valvular damage that cause venous hypertension",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Features suggesting recurrent acute DVT rather than chronic sequelae",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Venous duplex ultrasound to assess reflux and residual obstruction, Clinical grading with the Villalta score, CT or MR venography for suspected iliac or caval obstruction amenable to stenting"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Graduated compression therapy with stockings or bandaging as the mainstay to counter ambulatory venous hypertension and control oedema"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking post-thrombotic changes for recurrent acute DVT, or the reverse"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of post-thrombotic syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "post_thrombotic_syndrome-matrix",
+   "title": "Post-thrombotic syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A chronic sequela of deep vein thrombosis resulting from persistent venous obstruction and valvular damage that cause venous",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Post-thrombotic syndrome develops when a deep vein thrombus fails to resolve fully, leaving residual venous obstruction and destroying venous valves through inflammation and recanalisation. The combination of outflow obstruction and valvular reflux produces sustained ambulatory venous hypertension, transmitted to the microcirculation with the same downstream consequences as other chronic venous insufficiency, namely oedema, skin changes, and ulceration. Proximal (iliofemoral) thrombosis, recurrent thrombosis, and inadequate anticoagulation increase both the risk and the severity.",
-    "additionalDifferentials": [
-      "Recurrent acute deep vein thrombosis",
-      "Chronic venous insufficiency from primary valvular reflux",
-      "Lymphoedema",
-      "Cellulitis",
-      "Cardiac, renal, or hepatic oedema",
-      "Iliac vein compression (May-Thurner) with residual obstruction"
+    [
+     "Key Investigations",
+     "Venous duplex ultrasound to assess reflux and residual obstruction, Clinical grading with the Villalta score, CT or MR venography",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Venous duplex ultrasound to assess reflux and residual obstruction",
-      "Clinical grading with the Villalta score",
-      "CT or MR venography for suspected iliac or caval obstruction amenable to stenting",
-      "Ankle-brachial pressure index before compression to exclude arterial disease",
-      "D-dimer and duplex to distinguish recurrent acute DVT from chronic changes",
-      "Ulcer assessment (swab, and biopsy if atypical) where ulceration is present"
+    [
+     "Primary Differentials",
+     "Recurrent acute deep vein thrombosis, Chronic venous insufficiency from primary valvular reflux, Lymphoedema",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Features suggesting recurrent acute DVT rather than chronic sequelae",
-      "A non-healing or atypical ulcer requiring biopsy",
-      "Coexisting significant arterial disease making compression hazardous",
-      "Rapidly progressive swelling suggesting new proximal obstruction or a mass"
+    [
+     "Management Strategy",
+     "Graduated compression therapy with stockings or bandaging as the mainstay to counter ambulatory venous hypertension and control",
+     "Core treatment modality"
     ],
-    "prognosis": "A chronic condition that can significantly impair quality of life; symptoms are often controllable with compression and lifestyle measures, but severe post-thrombotic syndrome with ulceration is difficult to treat, underscoring the importance of prevention.",
-    "pitfalls": [
-      "Mistaking post-thrombotic changes for recurrent acute DVT, or the reverse",
-      "Under-using compression therapy, the mainstay of control",
-      "Overlooking a treatable proximal (iliac) obstruction",
-      "Applying compression without excluding arterial disease"
-    ],
-    "references": [
-      "Rutherford's Vascular Surgery and Endovascular Therapy",
-      "ESVS Clinical Practice Guidelines on Venous Disease"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Graduated compression therapy with stockings or bandaging as the mainstay to counter ambulatory venous hypertension and control oedema",
-      "Adequate anticoagulation of the index deep vein thrombosis and prevention of recurrent ipsilateral thrombosis, the key to limiting severity",
-      "Exercise, leg elevation, weight management and meticulous skin care to reduce symptoms and protect vulnerable skin",
-      "Venous ulcer care with compression and appropriate dressings where ulceration has developed",
-      "Endovenous recanalisation and stenting for symptomatic iliac or caval obstruction, with early thrombus removal considered in extensive iliofemoral thrombosis",
-      "Analgesia and venoactive agents for chronic limb pain and heaviness, with referral to vascular services for refractory disease"
+    [
+     "Clinical Pitfall",
+     "Mistaking post-thrombotic changes for recurrent acute DVT, or the reverse",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for post-thrombotic syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "post-thrombotic-syndrome-real-image",
+   "title": "Post-thrombotic syndrome: 12-Lead Diagnostic Electrocardiogram",
+   "type": "ecg",
+   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
+   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
+   "annotations": [
+    {
+     "label": "Conduction & Axis",
+     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
+    },
+    {
+     "label": "Repolarization",
+     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
+    },
+    {
+     "label": "Rhythm & Intervals",
+     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+    }
+   ]
+  }
+ ]
 }

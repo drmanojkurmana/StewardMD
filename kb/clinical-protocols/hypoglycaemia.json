@@ -5,7 +5,17 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, ward, outpatient",
- "aliases": ["hypo", "low blood sugar", "low glucose", "insulin reaction", "sulfonylurea hypoglycaemia", "sulphonylurea overdose", "glucagon", "D25", "neuroglycopenia"],
+ "aliases": [
+  "hypo",
+  "low blood sugar",
+  "low glucose",
+  "insulin reaction",
+  "sulfonylurea hypoglycaemia",
+  "sulphonylurea overdose",
+  "glucagon",
+  "D25",
+  "neuroglycopenia"
+ ],
  "summary": "Treat any glucose below 70 mg/dL (3.9 mmol/L): 15 to 20 g fast-acting glucose by mouth if alert, otherwise IV 10% or 20% glucose (or IM glucagon), recheck in 10 to 15 minutes, follow with longer-acting carbohydrate, and watch for recurrence with sulfonylureas.",
  "sections": [
   {
@@ -82,17 +92,154 @@
   }
  ],
  "drugs": [
-  { "name": "Oral glucose", "dose": "15 to 20 g by mouth; repeat after 10 to 15 minutes if glucose still below 70 mg/dL (3.9 mmol/L), up to 3 times", "notes": "Then 20 g longer-acting carbohydrate. Pure glucose only if on acarbose." },
-  { "name": "Glucose 10% IV", "dose": "200 mL (20 g) IV over 15 minutes; then 100 mL/h infusion if nil by mouth or recurrence risk", "notes": "Smallest effective volume in heart or renal failure." },
-  { "name": "Glucose 20% IV", "dose": "100 mL (20 g) IV over 15 minutes", "notes": "Large vein, check the cannula is patent." },
-  { "name": "Dextrose 25% IV", "dose": "80 mL (20 g) IV slowly via a large vein, then flush", "notes": "Common in Indian emergency departments; hypertonic, risk of thrombophlebitis and extravasation injury." },
-  { "name": "Glucagon", "dose": "1 mg IM or SC once; intranasal 3 mg; dasiglucagon 0.6 mg SC", "notes": "Takes up to 15 minutes. Less effective with sulfonylureas, alcohol, liver disease, starvation. Follow with 40 g carbohydrate." },
-  { "name": "Octreotide", "dose": "50 to 100 mcg SC every 6 to 8 hours", "notes": "Sulfonylurea hypoglycaemia recurring despite IV glucose; typical course 12 to 24 hours." }
+  {
+   "name": "Oral glucose",
+   "dose": "15 to 20 g by mouth; repeat after 10 to 15 minutes if glucose still below 70 mg/dL (3.9 mmol/L), up to 3 times",
+   "notes": "Then 20 g longer-acting carbohydrate. Pure glucose only if on acarbose."
+  },
+  {
+   "name": "Glucose 10% IV",
+   "dose": "200 mL (20 g) IV over 15 minutes; then 100 mL/h infusion if nil by mouth or recurrence risk",
+   "notes": "Smallest effective volume in heart or renal failure."
+  },
+  {
+   "name": "Glucose 20% IV",
+   "dose": "100 mL (20 g) IV over 15 minutes",
+   "notes": "Large vein, check the cannula is patent."
+  },
+  {
+   "name": "Dextrose 25% IV",
+   "dose": "80 mL (20 g) IV slowly via a large vein, then flush",
+   "notes": "Common in Indian emergency departments; hypertonic, risk of thrombophlebitis and extravasation injury."
+  },
+  {
+   "name": "Glucagon",
+   "dose": "1 mg IM or SC once; intranasal 3 mg; dasiglucagon 0.6 mg SC",
+   "notes": "Takes up to 15 minutes. Less effective with sulfonylureas, alcohol, liver disease, starvation. Follow with 40 g carbohydrate."
+  },
+  {
+   "name": "Octreotide",
+   "dose": "50 to 100 mcg SC every 6 to 8 hours",
+   "notes": "Sulfonylurea hypoglycaemia recurring despite IV glucose; typical course 12 to 24 hours."
+  }
  ],
  "sources": [
-  { "org": "ADA", "title": "6. Glycemic goals, hypoglycemia, and hyperglycemic crises: Standards of Care in Diabetes 2026", "year": 2026, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12690178/" },
-  { "org": "JBDS-IP", "title": "The hospital management of hypoglycaemia in adults with diabetes mellitus (revised January 2023)", "year": 2023, "url": "https://abcd.care/sites/default/files/site_uploads/JBDS_Guidelines_Current/JBDS_01_Hypo_Guideline_with_QR_code_January_2023.pdf" },
-  { "org": "Journal of Medical Toxicology", "title": "Variations in octreotide dosing in published reports of sulfonylurea toxicity: a systematic review", "year": 2025, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11933575/" }
+  {
+   "org": "ADA",
+   "title": "6. Glycemic goals, hypoglycemia, and hyperglycemic crises: Standards of Care in Diabetes 2026",
+   "year": 2026,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12690178/"
+  },
+  {
+   "org": "JBDS-IP",
+   "title": "The hospital management of hypoglycaemia in adults with diabetes mellitus (revised January 2023)",
+   "year": 2023,
+   "url": "https://abcd.care/sites/default/files/site_uploads/JBDS_Guidelines_Current/JBDS_01_Hypo_Guideline_with_QR_code_January_2023.pdf"
+  },
+  {
+   "org": "Journal of Medical Toxicology",
+   "title": "Variations in octreotide dosing in published reports of sulfonylurea toxicity: a systematic review",
+   "year": 2025,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11933575/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "hypoglycaemia-pathway",
+   "title": "Hypoglycaemia in diabetes (adult) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Level 1: glucose below 70 mg/dL (3.9 mmol/L) and 54 mg/dL (3.0 mmol/L) or above. Level 2: below 54 mg/dL (3.0 mmol/L), when neuroglycopenic symptoms begin. Level 3: a severe event with altered mental or physical state needing another",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "ABC, place in recovery position, nothing by mouth. Stop any IV insulin infusion.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "If the patient is not on insulin or a secretagogue, consider sepsis, liver failure, renal failure, alcohol, adrenal insufficiency, drugs (quinine, co-trimoxazole, pentamidine), starvation, insulinoma or surreptitious insulin or"
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Sulfonylurea or long-acting insulin hypoglycaemia can recur for 24 to 36 hours after the last dose, longer in CKD and older adults: admit and monitor glucose at least hourly initially and for at least 24 to 48 hours overall."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Discharging sulfonylurea hypoglycaemia after a single correction: recurrence is common for 24 to 36 hours."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for hypoglycaemia in diabetes (adult)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "hypoglycaemia-summary-matrix",
+   "title": "Hypoglycaemia in diabetes (adult) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Level 1: glucose below 70 mg/dL (3.9 mmol/L) and 54 mg/dL (3.0 mmol/L) or above. Level 2: below 54 mg/dL (3.0 mmol/L), when neuroglycopenic",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "ABC, place in recovery position, nothing by mouth. Stop any IV insulin infusion.",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "If the patient is not on insulin or a secretagogue, consider sepsis, liver failure, renal failure, alcohol, adrenal insufficiency, drugs",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Oral glucose: 15 to 20 g by mouth; repeat after 10 to 15 minutes if glucose still below 70 mg/dL (3.9 mmol/L), up to 3 times",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Discharging sulfonylurea hypoglycaemia after a single correction: recurrence is common for 24 to 36 hours.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for hypoglycaemia in diabetes (adult)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "hypoglycaemia-real-image",
+   "title": "Hypoglycaemia in diabetes (adult): Diagnostic Endocrine Cross-Sectional Imaging",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
+   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
+   "annotations": [
+    {
+     "label": "Gland Morphology",
+     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
+    },
+    {
+     "label": "Focal Lesions",
+     "description": "Nodularity, adenoma attenuation, and washout dynamics."
+    },
+    {
+     "label": "Surrounding Structures",
+     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+    }
+   ]
+  }
+ ]
 }

@@ -1,79 +1,174 @@
 {
-  "id": "axenfeld_rieger_syndrome",
-  "name": "Axenfeld-Rieger syndrome",
-  "aliases": [
-    "anterior segment dysgenesis",
-    "PITX2",
-    "FOXC1",
-    "Rieger syndrome",
-    "Axenfeld anomaly"
+ "id": "axenfeld_rieger_syndrome",
+ "name": "Axenfeld-Rieger syndrome",
+ "aliases": [
+  "anterior segment dysgenesis",
+  "PITX2",
+  "FOXC1",
+  "Rieger syndrome",
+  "Axenfeld anomaly"
+ ],
+ "class": "non_infective",
+ "system": "Eye / Ophthalmology",
+ "specialty": "Ophthalmology / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Kanski's Clinical Ophthalmology / Taylor and Hoyt's Pediatric Ophthalmology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A bilateral anterior segment dysgenesis characterised by iris and drainage-angle anomalies with a high risk of glaucoma",
+   "Ocular signs include a prominent, anteriorly displaced Schwalbe line (posterior embryotoxon), iris strands bridging the angle, iris hypoplasia, corectopia and polycoria",
+   "Roughly half of affected individuals develop glaucoma, often in childhood or early adulthood, so lifelong pressure monitoring is essential",
+   "Usually autosomal dominant, most commonly from mutations in the transcription factors PITX2 and FOXC1",
+   "Systemic features (the Rieger phenotype) include dental anomalies such as small or missing teeth, and redundant periumbilical skin and midface changes",
+   "PITX2 mutations are particularly associated with the dental and umbilical systemic features",
+   "The condition is one end of the anterior segment dysgenesis spectrum that overlaps with Peters anomaly"
   ],
-  "class": "non_infective",
-  "system": "Eye / Ophthalmology",
-  "specialty": "Ophthalmology / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Kanski's Clinical Ophthalmology / Taylor and Hoyt's Pediatric Ophthalmology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A bilateral anterior segment dysgenesis characterised by iris and drainage-angle anomalies with a high risk of glaucoma",
-      "Ocular signs include a prominent, anteriorly displaced Schwalbe line (posterior embryotoxon), iris strands bridging the angle, iris hypoplasia, corectopia and polycoria",
-      "Roughly half of affected individuals develop glaucoma, often in childhood or early adulthood, so lifelong pressure monitoring is essential",
-      "Usually autosomal dominant, most commonly from mutations in the transcription factors PITX2 and FOXC1",
-      "Systemic features (the Rieger phenotype) include dental anomalies such as small or missing teeth, and redundant periumbilical skin and midface changes",
-      "PITX2 mutations are particularly associated with the dental and umbilical systemic features",
-      "The condition is one end of the anterior segment dysgenesis spectrum that overlaps with Peters anomaly"
+  "pathophysiology": "Axenfeld-Rieger syndrome results from abnormal development of neural-crest-derived tissues forming the anterior segment of the eye, driven by mutations in developmental transcription-factor genes such as PITX2 and FOXC1. Faulty migration and differentiation of these cells produces incomplete regression and anomalous development of structures at the iridocorneal angle and iris, giving the characteristic angle strands, prominent Schwalbe line and iris defects. Maldevelopment of the trabecular meshwork and drainage angle impairs aqueous outflow, leading to raised intraocular pressure and glaucoma. The same transcription factors act in the development of teeth, the umbilicus and midface, explaining the associated systemic features.",
+  "additionalDifferentials": [
+   "Peters anomaly within the anterior segment dysgenesis spectrum",
+   "Primary congenital or juvenile glaucoma",
+   "Iridocorneal endothelial syndrome in adults",
+   "Aniridia with angle and iris abnormalities",
+   "Posterior embryotoxon as an isolated benign finding",
+   "Congenital iris hypoplasia from other causes"
+  ],
+  "additionalInvestigations": [
+   "Slit-lamp examination and gonioscopy to define iris and angle anomalies",
+   "Intraocular pressure measurement with regular monitoring for glaucoma",
+   "Optic disc assessment and visual field testing where glaucoma is suspected",
+   "Dental and systemic examination for the Rieger phenotype",
+   "Molecular genetic testing of PITX2 and FOXC1 with family assessment"
+  ],
+  "redFlags": [
+   "Raised intraocular pressure or optic disc cupping indicating glaucoma",
+   "Progressive visual field loss from uncontrolled glaucoma",
+   "Corneal enlargement or clouding in an infant suggesting early glaucoma",
+   "Family history of anterior segment anomalies and glaucoma indicating dominant inheritance"
+  ],
+  "prognosis": "The ocular anomalies themselves are static, but glaucoma is common, may be difficult to control, and is the principal threat to vision; with early detection and effective pressure control the visual prognosis is good, whereas late or refractory glaucoma can cause irreversible optic nerve damage.",
+  "pitfalls": [
+   "Regarding posterior embryotoxon or iris changes as benign and not screening for glaucoma",
+   "Assuming the glaucoma is a one-off, when lifelong surveillance is required",
+   "Overlooking the systemic dental and umbilical features that support the diagnosis",
+   "Failing to examine and counsel relatives given autosomal dominant inheritance"
+  ],
+  "references": [
+   "Kanski's Clinical Ophthalmology",
+   "Taylor and Hoyt's Pediatric Ophthalmology and Strabismus"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Lifelong monitoring of intraocular pressure is essential, since glaucoma is the principal threat to sight and may develop in childhood or early adulthood",
+   "Lower intraocular pressure medically with topical agents such as prostaglandin analogues, beta-blockers and carbonic anhydrase inhibitors",
+   "Proceed to glaucoma surgery when medical control fails, using angle surgery (goniotomy or trabeculotomy), trabeculectomy or a glaucoma drainage device",
+   "Protect visual development in children through refractive correction and amblyopia therapy",
+   "Manage the systemic Rieger features, including dental care for missing or small teeth and attention to periumbilical and midface anomalies",
+   "Offer genetic counselling and family screening for autosomal dominant inheritance, with PITX2 and FOXC1 testing",
+   "Coordinate care across ophthalmology, clinical genetics and dentistry"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "axenfeld_rieger_syndrome-pathway",
+   "title": "Axenfeld-Rieger syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A bilateral anterior segment dysgenesis characterised by iris and drainage-angle anomalies with a high risk of glaucoma",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Raised intraocular pressure or optic disc cupping indicating glaucoma",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Slit-lamp examination and gonioscopy to define iris and angle anomalies, Intraocular pressure measurement with regular monitoring for glaucoma, Optic disc assessment and visual field testing where glaucoma is suspected"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Lifelong monitoring of intraocular pressure is essential, since glaucoma is the principal threat to sight and may develop in childhood or early adulthood"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Regarding posterior embryotoxon or iris changes as benign and not screening for glaucoma"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of axenfeld-rieger syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "axenfeld_rieger_syndrome-matrix",
+   "title": "Axenfeld-Rieger syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A bilateral anterior segment dysgenesis characterised by iris and drainage-angle anomalies with a high risk of glaucoma",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Axenfeld-Rieger syndrome results from abnormal development of neural-crest-derived tissues forming the anterior segment of the eye, driven by mutations in developmental transcription-factor genes such as PITX2 and FOXC1. Faulty migration and differentiation of these cells produces incomplete regression and anomalous development of structures at the iridocorneal angle and iris, giving the characteristic angle strands, prominent Schwalbe line and iris defects. Maldevelopment of the trabecular meshwork and drainage angle impairs aqueous outflow, leading to raised intraocular pressure and glaucoma. The same transcription factors act in the development of teeth, the umbilicus and midface, explaining the associated systemic features.",
-    "additionalDifferentials": [
-      "Peters anomaly within the anterior segment dysgenesis spectrum",
-      "Primary congenital or juvenile glaucoma",
-      "Iridocorneal endothelial syndrome in adults",
-      "Aniridia with angle and iris abnormalities",
-      "Posterior embryotoxon as an isolated benign finding",
-      "Congenital iris hypoplasia from other causes"
+    [
+     "Key Investigations",
+     "Slit-lamp examination and gonioscopy to define iris and angle anomalies, Intraocular pressure measurement with regular monitoring",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Slit-lamp examination and gonioscopy to define iris and angle anomalies",
-      "Intraocular pressure measurement with regular monitoring for glaucoma",
-      "Optic disc assessment and visual field testing where glaucoma is suspected",
-      "Dental and systemic examination for the Rieger phenotype",
-      "Molecular genetic testing of PITX2 and FOXC1 with family assessment"
+    [
+     "Primary Differentials",
+     "Peters anomaly within the anterior segment dysgenesis spectrum, Primary congenital or juvenile glaucoma, Iridocorneal endothelial",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Raised intraocular pressure or optic disc cupping indicating glaucoma",
-      "Progressive visual field loss from uncontrolled glaucoma",
-      "Corneal enlargement or clouding in an infant suggesting early glaucoma",
-      "Family history of anterior segment anomalies and glaucoma indicating dominant inheritance"
+    [
+     "Management Strategy",
+     "Lifelong monitoring of intraocular pressure is essential, since glaucoma is the principal threat to sight and may develop in",
+     "Core treatment modality"
     ],
-    "prognosis": "The ocular anomalies themselves are static, but glaucoma is common, may be difficult to control, and is the principal threat to vision; with early detection and effective pressure control the visual prognosis is good, whereas late or refractory glaucoma can cause irreversible optic nerve damage.",
-    "pitfalls": [
-      "Regarding posterior embryotoxon or iris changes as benign and not screening for glaucoma",
-      "Assuming the glaucoma is a one-off, when lifelong surveillance is required",
-      "Overlooking the systemic dental and umbilical features that support the diagnosis",
-      "Failing to examine and counsel relatives given autosomal dominant inheritance"
-    ],
-    "references": [
-      "Kanski's Clinical Ophthalmology",
-      "Taylor and Hoyt's Pediatric Ophthalmology and Strabismus"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Lifelong monitoring of intraocular pressure is essential, since glaucoma is the principal threat to sight and may develop in childhood or early adulthood",
-      "Lower intraocular pressure medically with topical agents such as prostaglandin analogues, beta-blockers and carbonic anhydrase inhibitors",
-      "Proceed to glaucoma surgery when medical control fails, using angle surgery (goniotomy or trabeculotomy), trabeculectomy or a glaucoma drainage device",
-      "Protect visual development in children through refractive correction and amblyopia therapy",
-      "Manage the systemic Rieger features, including dental care for missing or small teeth and attention to periumbilical and midface anomalies",
-      "Offer genetic counselling and family screening for autosomal dominant inheritance, with PITX2 and FOXC1 testing",
-      "Coordinate care across ophthalmology, clinical genetics and dentistry"
+    [
+     "Clinical Pitfall",
+     "Regarding posterior embryotoxon or iris changes as benign and not screening for glaucoma",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for axenfeld-rieger syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "axenfeld-rieger-syndrome-real-image",
+   "title": "Axenfeld-Rieger syndrome: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

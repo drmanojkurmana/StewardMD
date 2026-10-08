@@ -99,7 +99,7 @@ regimens count as International in the OPD filter (NCCN-based).
   `swipe-back.js` matches those substrings. `.kbp-back` is the reader's Back on purpose.
 
 ## Content status
-- **248 protocols across 19 subjects** (2026-09-25): 215 international, 33 India (18 national programme,
+- **253 protocols across 19 subjects** (2026-09-25): 215 international, 38 India (18 national programme,
   15 Indian society: IAP, ICMR STW, FOGSI-ICOG, CSI, HFAI, InSH, RSSDI, INASL, ISPN, ISG, API-ICP), 28
   topics paired. The 15 society protocols pair 13 existing international ones (dehydration, SAM, PPH,
   pre-eclampsia, dyslipidaemia, HFrEF, hypertension, T2DM, MASLD, paediatric UTI, neonatal jaundice,

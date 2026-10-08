@@ -1,83 +1,178 @@
 {
-  "id": "autoimmune_lymphoproliferative",
-  "name": "Autoimmune lymphoproliferative syndrome",
-  "aliases": [
-    "ALPS",
-    "CASP10",
-    "Canale-Smith syndrome",
-    "FAS",
-    "FAS pathway defect",
-    "FASLG",
-    "TNFRSF6",
-    "autoimmune lymphoproliferative syndrome"
+ "id": "autoimmune_lymphoproliferative",
+ "name": "Autoimmune lymphoproliferative syndrome",
+ "aliases": [
+  "ALPS",
+  "CASP10",
+  "Canale-Smith syndrome",
+  "FAS",
+  "FAS pathway defect",
+  "FASLG",
+  "TNFRSF6",
+  "autoimmune lymphoproliferative syndrome"
+ ],
+ "class": "non_infective",
+ "system": "Immunology",
+ "specialty": "Clinical Immunology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Harrison's Principles of Internal Medicine / standard immunology references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Autoimmune lymphoproliferative syndrome is a disorder of defective lymphocyte apoptosis, most often caused by mutations in the FAS (TNFRSF6) pathway",
+   "Impaired programmed cell death allows autoreactive lymphocytes to accumulate, producing chronic non-malignant lymphadenopathy and splenomegaly",
+   "A hallmark laboratory finding is an expanded population of 'double-negative' T cells (CD3-positive, TCR alpha-beta-positive, but CD4- and CD8-negative)",
+   "Autoimmune cytopenias are characteristic, particularly autoimmune haemolytic anaemia, immune thrombocytopenia, and neutropenia",
+   "Unlike most primary immunodeficiencies, the dominant clinical problem is immune dysregulation and autoimmunity rather than recurrent infection, though hyposplenism after splenectomy raises infection risk",
+   "Supportive biomarkers include raised serum vitamin B12, elevated IL-10 and soluble FAS ligand, and increased IgG",
+   "There is a substantially increased lifetime risk of lymphoma, warranting long-term surveillance",
+   "Treatment targets the autoimmune manifestations with immunosuppression and, in refractory cases, agents such as sirolimus or mycophenolate; splenectomy is generally avoided because of infection risk and often incomplete benefit"
   ],
-  "class": "non_infective",
-  "system": "Immunology",
-  "specialty": "Clinical Immunology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Harrison's Principles of Internal Medicine / standard immunology references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Autoimmune lymphoproliferative syndrome is a disorder of defective lymphocyte apoptosis, most often caused by mutations in the FAS (TNFRSF6) pathway",
-      "Impaired programmed cell death allows autoreactive lymphocytes to accumulate, producing chronic non-malignant lymphadenopathy and splenomegaly",
-      "A hallmark laboratory finding is an expanded population of 'double-negative' T cells (CD3-positive, TCR alpha-beta-positive, but CD4- and CD8-negative)",
-      "Autoimmune cytopenias are characteristic, particularly autoimmune haemolytic anaemia, immune thrombocytopenia, and neutropenia",
-      "Unlike most primary immunodeficiencies, the dominant clinical problem is immune dysregulation and autoimmunity rather than recurrent infection, though hyposplenism after splenectomy raises infection risk",
-      "Supportive biomarkers include raised serum vitamin B12, elevated IL-10 and soluble FAS ligand, and increased IgG",
-      "There is a substantially increased lifetime risk of lymphoma, warranting long-term surveillance",
-      "Treatment targets the autoimmune manifestations with immunosuppression and, in refractory cases, agents such as sirolimus or mycophenolate; splenectomy is generally avoided because of infection risk and often incomplete benefit"
+  "pathophysiology": "Autoimmune lymphoproliferative syndrome results from defects in the FAS-mediated (extrinsic) apoptotic pathway that normally deletes activated and autoreactive lymphocytes at the end of an immune response. Germline or somatic mutations in FAS, or in FAS ligand or caspase-10, impair this death signal, so lymphocytes fail to undergo apoptosis and accumulate. This produces the chronic lymphoproliferation (lymphadenopathy and splenomegaly) and the expansion of the unusual alpha-beta double-negative T-cell population. The persistence of autoreactive clones and disturbed immune homeostasis drives autoimmune cytopenias and other autoimmune features, and the impaired deletion of proliferating lymphocytes underlies the elevated risk of lymphoma.",
+  "additionalDifferentials": [
+   "Lymphoma and other lymphoproliferative malignancies",
+   "Common variable immunodeficiency with autoimmune features",
+   "Evans syndrome from other causes",
+   "Chronic viral infection causing lymphadenopathy (for example EBV)",
+   "Other immune dysregulation syndromes such as activated PI3K-delta syndrome"
+  ],
+  "additionalInvestigations": [
+   "Flow cytometry to quantify alpha-beta double-negative T cells",
+   "Full blood count and direct antiglobulin test for autoimmune cytopenias",
+   "Serum vitamin B12, IL-10, and soluble FAS ligand as supportive biomarkers",
+   "In vitro lymphocyte apoptosis assays",
+   "Genetic testing (FAS, FASLG, CASP10 and related genes)",
+   "Imaging and, where indicated, lymph node biopsy to exclude lymphoma"
+  ],
+  "redFlags": [
+   "Rapidly enlarging, asymmetric, or hard lymph nodes or systemic B symptoms suggesting lymphoma and needing urgent evaluation",
+   "Severe autoimmune cytopenia (profound anaemia or thrombocytopenia) causing symptomatic disease",
+   "Overwhelming infection risk if the patient is asplenic, requiring vaccination and antibiotic prophylaxis",
+   "Massive splenomegaly at risk of rupture"
+  ],
+  "prognosis": "Many patients do well with control of autoimmune complications, and lymphoproliferation may lessen with age, but the markedly increased risk of Hodgkin and non-Hodgkin lymphoma means lifelong surveillance is essential and largely determines long-term outcome.",
+  "pitfalls": [
+   "Mistaking the chronic lymphadenopathy for lymphoma and vice versa, delaying correct management",
+   "Performing splenectomy for cytopenias without recognising the resulting infection risk and often limited durable benefit",
+   "Overlooking the diagnostic value of double-negative T cells and supportive biomarkers",
+   "Attributing recurrent cytopenias to isolated Evans syndrome without investigating for ALPS",
+   "Neglecting long-term lymphoma surveillance"
+  ],
+  "references": [
+   "Harrison's Principles of Internal Medicine, 22e"
+  ],
+  "crossLinks": [],
+  "management": [
+   "First-line immunosuppression for autoimmune cytopenias with corticosteroids and intravenous immunoglobulin during acute episodes",
+   "For chronic or refractory disease, steroid-sparing agents sirolimus (mTOR inhibitor) or mycophenolate mofetil, which also reduce lymphoproliferation",
+   "Avoid splenectomy where possible owing to high relapse rates and overwhelming post-splenectomy sepsis risk; if unavoidable, give pneumococcal, meningococcal and Haemophilus vaccination with antibiotic prophylaxis",
+   "Lifelong surveillance for Hodgkin and non-Hodgkin lymphoma with clinical review and imaging of enlarging or asymmetrical nodes",
+   "Monitoring of the full blood count and autoimmune complications",
+   "Genetic testing of FAS, FASLG and CASP10 with genetic counselling for the family",
+   "Multidisciplinary immunology and haematology care, with haematopoietic stem cell transplantation considered in severe disease"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "autoimmune_lymphoproliferative-pathway",
+   "title": "Autoimmune lymphoproliferative syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Autoimmune lymphoproliferative syndrome is a disorder of defective lymphocyte apoptosis, most often caused by mutations in the FAS (TNFRSF6) pathway",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapidly enlarging, asymmetric, or hard lymph nodes or systemic B symptoms suggesting lymphoma and needing urgent evaluation",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Flow cytometry to quantify alpha-beta double-negative T cells, Full blood count and direct antiglobulin test for autoimmune cytopenias, Serum vitamin B12, IL-10, and soluble FAS ligand as supportive biomarkers"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: First-line immunosuppression for autoimmune cytopenias with corticosteroids and intravenous immunoglobulin during acute episodes"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking the chronic lymphadenopathy for lymphoma and vice versa, delaying correct management"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of autoimmune lymphoproliferative syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "autoimmune_lymphoproliferative-matrix",
+   "title": "Autoimmune lymphoproliferative syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Autoimmune lymphoproliferative syndrome is a disorder of defective lymphocyte apoptosis, most often caused by mutations in the",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Autoimmune lymphoproliferative syndrome results from defects in the FAS-mediated (extrinsic) apoptotic pathway that normally deletes activated and autoreactive lymphocytes at the end of an immune response. Germline or somatic mutations in FAS, or in FAS ligand or caspase-10, impair this death signal, so lymphocytes fail to undergo apoptosis and accumulate. This produces the chronic lymphoproliferation (lymphadenopathy and splenomegaly) and the expansion of the unusual alpha-beta double-negative T-cell population. The persistence of autoreactive clones and disturbed immune homeostasis drives autoimmune cytopenias and other autoimmune features, and the impaired deletion of proliferating lymphocytes underlies the elevated risk of lymphoma.",
-    "additionalDifferentials": [
-      "Lymphoma and other lymphoproliferative malignancies",
-      "Common variable immunodeficiency with autoimmune features",
-      "Evans syndrome from other causes",
-      "Chronic viral infection causing lymphadenopathy (for example EBV)",
-      "Other immune dysregulation syndromes such as activated PI3K-delta syndrome"
+    [
+     "Key Investigations",
+     "Flow cytometry to quantify alpha-beta double-negative T cells, Full blood count and direct antiglobulin test for autoimmune",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Flow cytometry to quantify alpha-beta double-negative T cells",
-      "Full blood count and direct antiglobulin test for autoimmune cytopenias",
-      "Serum vitamin B12, IL-10, and soluble FAS ligand as supportive biomarkers",
-      "In vitro lymphocyte apoptosis assays",
-      "Genetic testing (FAS, FASLG, CASP10 and related genes)",
-      "Imaging and, where indicated, lymph node biopsy to exclude lymphoma"
+    [
+     "Primary Differentials",
+     "Lymphoma and other lymphoproliferative malignancies, Common variable immunodeficiency with autoimmune features, Evans syndrome",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rapidly enlarging, asymmetric, or hard lymph nodes or systemic B symptoms suggesting lymphoma and needing urgent evaluation",
-      "Severe autoimmune cytopenia (profound anaemia or thrombocytopenia) causing symptomatic disease",
-      "Overwhelming infection risk if the patient is asplenic, requiring vaccination and antibiotic prophylaxis",
-      "Massive splenomegaly at risk of rupture"
+    [
+     "Management Strategy",
+     "First-line immunosuppression for autoimmune cytopenias with corticosteroids and intravenous immunoglobulin during acute episodes",
+     "Core treatment modality"
     ],
-    "prognosis": "Many patients do well with control of autoimmune complications, and lymphoproliferation may lessen with age, but the markedly increased risk of Hodgkin and non-Hodgkin lymphoma means lifelong surveillance is essential and largely determines long-term outcome.",
-    "pitfalls": [
-      "Mistaking the chronic lymphadenopathy for lymphoma and vice versa, delaying correct management",
-      "Performing splenectomy for cytopenias without recognising the resulting infection risk and often limited durable benefit",
-      "Overlooking the diagnostic value of double-negative T cells and supportive biomarkers",
-      "Attributing recurrent cytopenias to isolated Evans syndrome without investigating for ALPS",
-      "Neglecting long-term lymphoma surveillance"
-    ],
-    "references": [
-      "Harrison's Principles of Internal Medicine, 22e"
-    ],
-    "crossLinks": [],
-    "management": [
-      "First-line immunosuppression for autoimmune cytopenias with corticosteroids and intravenous immunoglobulin during acute episodes",
-      "For chronic or refractory disease, steroid-sparing agents sirolimus (mTOR inhibitor) or mycophenolate mofetil, which also reduce lymphoproliferation",
-      "Avoid splenectomy where possible owing to high relapse rates and overwhelming post-splenectomy sepsis risk; if unavoidable, give pneumococcal, meningococcal and Haemophilus vaccination with antibiotic prophylaxis",
-      "Lifelong surveillance for Hodgkin and non-Hodgkin lymphoma with clinical review and imaging of enlarging or asymmetrical nodes",
-      "Monitoring of the full blood count and autoimmune complications",
-      "Genetic testing of FAS, FASLG and CASP10 with genetic counselling for the family",
-      "Multidisciplinary immunology and haematology care, with haematopoietic stem cell transplantation considered in severe disease"
+    [
+     "Clinical Pitfall",
+     "Mistaking the chronic lymphadenopathy for lymphoma and vice versa, delaying correct management",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for autoimmune lymphoproliferative syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "autoimmune-lymphoproliferative-real-image",
+   "title": "Autoimmune lymphoproliferative syndrome: Diagnostic Peripheral Blood Smear Examination",
+   "type": "diagram",
+   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
+   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
+   "annotations": [
+    {
+     "label": "Erythrocyte Indices",
+     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
+    },
+    {
+     "label": "Leukocyte Differential",
+     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
+    },
+    {
+     "label": "Platelet Count",
+     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+    }
+   ]
+  }
+ ]
 }

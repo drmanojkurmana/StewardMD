@@ -1,76 +1,171 @@
 {
-  "id": "gerstmann_syndrome",
-  "name": "Gerstmann syndrome",
-  "aliases": [
-    "angular gyrus syndrome",
-    "Gerstmann tetrad"
+ "id": "gerstmann_syndrome",
+ "name": "Gerstmann syndrome",
+ "aliases": [
+  "angular gyrus syndrome",
+  "Gerstmann tetrad"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system / Neuro-ophthalmology",
+ "specialty": "Neurology / Ophthalmology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Walsh and Hoyt Clinical Neuro-Ophthalmology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "The classic tetrad comprises finger agnosia, right-left disorientation, agraphia, and acalculia",
+   "It localises to the dominant (usually left) inferior parietal lobule, particularly the angular gyrus",
+   "Finger agnosia is the inability to name or identify individual fingers on command despite intact sensation",
+   "Acalculia refers to acquired difficulty with calculation, and agraphia to impaired writing not explained by motor weakness",
+   "The full tetrad in isolation is uncommon; incomplete forms and associated aphasia or alexia are more typical",
+   "Common causes include dominant parietal infarction, tumour, and neurodegenerative disease",
+   "A developmental form is described in children with learning difficulties affecting the same domains"
   ],
-  "class": "non_infective",
-  "system": "Nervous system / Neuro-ophthalmology",
-  "specialty": "Neurology / Ophthalmology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Walsh and Hoyt Clinical Neuro-Ophthalmology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "The classic tetrad comprises finger agnosia, right-left disorientation, agraphia, and acalculia",
-      "It localises to the dominant (usually left) inferior parietal lobule, particularly the angular gyrus",
-      "Finger agnosia is the inability to name or identify individual fingers on command despite intact sensation",
-      "Acalculia refers to acquired difficulty with calculation, and agraphia to impaired writing not explained by motor weakness",
-      "The full tetrad in isolation is uncommon; incomplete forms and associated aphasia or alexia are more typical",
-      "Common causes include dominant parietal infarction, tumour, and neurodegenerative disease",
-      "A developmental form is described in children with learning difficulties affecting the same domains"
+  "pathophysiology": "Gerstmann syndrome arises from damage to the dominant inferior parietal lobule, especially the angular gyrus and adjacent white matter, a region that integrates the body schema, spatial relationships, language, and numerical processing. Disruption here produces the characteristic combination of finger agnosia, right-left disorientation, agraphia, and acalculia. In adults the usual causes are ischaemic infarction in the middle cerebral artery territory, tumour, or a degenerative process, whereas a developmental variant reflects atypical maturation of the same cortical network.",
+  "additionalDifferentials": [
+   "Broader aphasic syndromes from dominant parietal or temporal lesions",
+   "Alexia with or without agraphia",
+   "Apraxia from parietal disease",
+   "Confusional state or delirium impairing performance",
+   "Posterior cortical atrophy",
+   "Developmental learning disorder in children"
+  ],
+  "additionalInvestigations": [
+   "MRI of the brain focused on the dominant parietal lobe",
+   "Formal neuropsychological assessment of the four component deficits",
+   "Vascular imaging and stroke workup where infarction is suspected",
+   "Cognitive screening for coexisting language and praxis deficits",
+   "Evaluation for neurodegenerative disease when onset is insidious",
+   "Assessment for coexisting alexia and aphasia"
+  ],
+  "redFlags": [
+   "Acute onset suggesting a dominant parietal stroke requiring urgent assessment",
+   "Progressive cognitive decline suggesting a neurodegenerative or neoplastic cause",
+   "Associated headache or focal signs suggesting a mass lesion",
+   "Rapid deterioration warranting prompt imaging"
+  ],
+  "prognosis": "Prognosis depends on the underlying cause; deficits from stroke may partially recover with rehabilitation, whereas those from progressive disease tend to worsen, and the developmental form persists but can be supported educationally.",
+  "pitfalls": [
+   "Expecting the complete tetrad, when partial and mixed presentations are far more common",
+   "Attributing the deficits to global confusion rather than a focal parietal lesion",
+   "Missing coexisting aphasia or alexia that alters interpretation",
+   "Failing to image the dominant hemisphere when the tetrad is recognised"
+  ],
+  "references": [
+   "Walsh and Hoyt Clinical Neuro-Ophthalmology",
+   "Adams and Victor's Principles of Neurology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Direct treatment at the underlying cause, whether acute stroke management and secondary prevention, tumour resection and oncological therapy, or care of neurodegenerative disease",
+   "Provide neurorehabilitation with occupational therapy and cognitive rehabilitation targeting finger agnosia, agraphia, acalculia, and right-left disorientation",
+   "Introduce compensatory strategies and assistive aids for writing and calculation difficulties",
+   "Offer educational support and accommodations for the developmental form in children",
+   "Use serial neuropsychological assessment to guide rehabilitation and track recovery or progression",
+   "Coordinate care across neurology, neuropsychology, and rehabilitation services"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "gerstmann_syndrome-pathway",
+   "title": "Gerstmann syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "The classic tetrad comprises finger agnosia, right-left disorientation, agraphia, and acalculia",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Acute onset suggesting a dominant parietal stroke requiring urgent assessment",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: MRI of the brain focused on the dominant parietal lobe, Formal neuropsychological assessment of the four component deficits, Vascular imaging and stroke workup where infarction is suspected"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Direct treatment at the underlying cause, whether acute stroke management and secondary prevention, tumour resection and oncological therapy, or care of neurodegenerative disease"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Expecting the complete tetrad, when partial and mixed presentations are far more common"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of gerstmann syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "gerstmann_syndrome-matrix",
+   "title": "Gerstmann syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The classic tetrad comprises finger agnosia, right-left disorientation, agraphia, and acalculia",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Gerstmann syndrome arises from damage to the dominant inferior parietal lobule, especially the angular gyrus and adjacent white matter, a region that integrates the body schema, spatial relationships, language, and numerical processing. Disruption here produces the characteristic combination of finger agnosia, right-left disorientation, agraphia, and acalculia. In adults the usual causes are ischaemic infarction in the middle cerebral artery territory, tumour, or a degenerative process, whereas a developmental variant reflects atypical maturation of the same cortical network.",
-    "additionalDifferentials": [
-      "Broader aphasic syndromes from dominant parietal or temporal lesions",
-      "Alexia with or without agraphia",
-      "Apraxia from parietal disease",
-      "Confusional state or delirium impairing performance",
-      "Posterior cortical atrophy",
-      "Developmental learning disorder in children"
+    [
+     "Key Investigations",
+     "MRI of the brain focused on the dominant parietal lobe, Formal neuropsychological assessment of the four component deficits,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "MRI of the brain focused on the dominant parietal lobe",
-      "Formal neuropsychological assessment of the four component deficits",
-      "Vascular imaging and stroke workup where infarction is suspected",
-      "Cognitive screening for coexisting language and praxis deficits",
-      "Evaluation for neurodegenerative disease when onset is insidious",
-      "Assessment for coexisting alexia and aphasia"
+    [
+     "Primary Differentials",
+     "Broader aphasic syndromes from dominant parietal or temporal lesions, Alexia with or without agraphia, Apraxia from parietal",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Acute onset suggesting a dominant parietal stroke requiring urgent assessment",
-      "Progressive cognitive decline suggesting a neurodegenerative or neoplastic cause",
-      "Associated headache or focal signs suggesting a mass lesion",
-      "Rapid deterioration warranting prompt imaging"
+    [
+     "Management Strategy",
+     "Direct treatment at the underlying cause, whether acute stroke management and secondary prevention, tumour resection and",
+     "Core treatment modality"
     ],
-    "prognosis": "Prognosis depends on the underlying cause; deficits from stroke may partially recover with rehabilitation, whereas those from progressive disease tend to worsen, and the developmental form persists but can be supported educationally.",
-    "pitfalls": [
-      "Expecting the complete tetrad, when partial and mixed presentations are far more common",
-      "Attributing the deficits to global confusion rather than a focal parietal lesion",
-      "Missing coexisting aphasia or alexia that alters interpretation",
-      "Failing to image the dominant hemisphere when the tetrad is recognised"
-    ],
-    "references": [
-      "Walsh and Hoyt Clinical Neuro-Ophthalmology",
-      "Adams and Victor's Principles of Neurology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Direct treatment at the underlying cause, whether acute stroke management and secondary prevention, tumour resection and oncological therapy, or care of neurodegenerative disease",
-      "Provide neurorehabilitation with occupational therapy and cognitive rehabilitation targeting finger agnosia, agraphia, acalculia, and right-left disorientation",
-      "Introduce compensatory strategies and assistive aids for writing and calculation difficulties",
-      "Offer educational support and accommodations for the developmental form in children",
-      "Use serial neuropsychological assessment to guide rehabilitation and track recovery or progression",
-      "Coordinate care across neurology, neuropsychology, and rehabilitation services"
+    [
+     "Clinical Pitfall",
+     "Expecting the complete tetrad, when partial and mixed presentations are far more common",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for gerstmann syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "gerstmann-syndrome-real-image",
+   "title": "Gerstmann syndrome: Diagnostic Head Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
+   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
+   "annotations": [
+    {
+     "label": "Cerebral Parenchyma",
+     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+    },
+    {
+     "label": "Extra-Axial Spaces",
+     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+    }
+   ]
+  }
+ ]
 }

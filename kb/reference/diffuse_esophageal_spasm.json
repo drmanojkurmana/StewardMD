@@ -1,78 +1,173 @@
 {
-  "id": "diffuse_esophageal_spasm",
-  "name": "Distal (diffuse) oesophageal spasm",
-  "aliases": [
-    "diffuse oesophageal spasm",
-    "DES",
-    "distal esophageal spasm",
-    "corkscrew oesophagus",
-    "rosary bead oesophagus"
+ "id": "diffuse_esophageal_spasm",
+ "name": "Distal (diffuse) oesophageal spasm",
+ "aliases": [
+  "diffuse oesophageal spasm",
+  "DES",
+  "distal esophageal spasm",
+  "corkscrew oesophagus",
+  "rosary bead oesophagus"
+ ],
+ "class": "non_infective",
+ "system": "Gastroenterology",
+ "specialty": "Gastroenterology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Presents with intermittent dysphagia to both solids and liquids and non-cardiac chest pain that can mimic angina",
+   "Symptoms are episodic and may be provoked by stress, hot or cold liquids, or reflux",
+   "High-resolution manometry defines the disorder by premature (spastic) distal contractions with a shortened distal latency and preserved oesophagogastric junction relaxation",
+   "Barium swallow may show a corkscrew or rosary-bead appearance during a spastic episode, but is often normal between attacks",
+   "Cardiac causes of chest pain must be excluded before attributing symptoms to the oesophagus",
+   "Treatment targets the spasm and pain with smooth-muscle relaxants and neuromodulators, with peroral endoscopic myotomy reserved for refractory disease",
+   "Coexisting gastro-oesophageal reflux can trigger or worsen spastic contractions and should be sought and treated"
   ],
-  "class": "non_infective",
-  "system": "Gastroenterology",
-  "specialty": "Gastroenterology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Presents with intermittent dysphagia to both solids and liquids and non-cardiac chest pain that can mimic angina",
-      "Symptoms are episodic and may be provoked by stress, hot or cold liquids, or reflux",
-      "High-resolution manometry defines the disorder by premature (spastic) distal contractions with a shortened distal latency and preserved oesophagogastric junction relaxation",
-      "Barium swallow may show a corkscrew or rosary-bead appearance during a spastic episode, but is often normal between attacks",
-      "Cardiac causes of chest pain must be excluded before attributing symptoms to the oesophagus",
-      "Treatment targets the spasm and pain with smooth-muscle relaxants and neuromodulators, with peroral endoscopic myotomy reserved for refractory disease",
-      "Coexisting gastro-oesophageal reflux can trigger or worsen spastic contractions and should be sought and treated"
+  "pathophysiology": "Distal oesophageal spasm is a motility disorder characterised by uncoordinated, simultaneous or premature contractions of the distal oesophageal smooth muscle. Impaired inhibitory neuronal signalling, particularly a deficiency of nitric-oxide-mediated inhibition, shortens the normal latency between swallowing and contraction, so that contractions occur prematurely and out of sequence. This disordered propagation disrupts orderly bolus transit, producing intermittent dysphagia, while the vigorous, poorly coordinated contractions generate episodic chest pain.",
+  "additionalDifferentials": [
+   "Cardiac ischaemia and angina",
+   "Achalasia (particularly spastic type III)",
+   "Jackhammer (hypercontractile) oesophagus",
+   "Gastro-oesophageal reflux disease",
+   "Eosinophilic oesophagitis",
+   "Functional chest pain of oesophageal origin"
+  ],
+  "additionalInvestigations": [
+   "High-resolution oesophageal manometry to characterise contraction latency and vigour",
+   "Barium oesophagram to look for corkscrew/rosary-bead morphology",
+   "Upper endoscopy to exclude mucosal disease, eosinophilic oesophagitis, and obstruction",
+   "Cardiac evaluation to exclude ischaemic chest pain",
+   "Ambulatory reflux monitoring where reflux may be a trigger"
+  ],
+  "redFlags": [
+   "Chest pain with features suggesting cardiac ischaemia",
+   "Progressive dysphagia, weight loss, or regurgitation suggesting achalasia or malignancy",
+   "Food impaction requiring urgent endoscopy",
+   "Odynophagia or alarm features warranting mucosal assessment"
+  ],
+  "prognosis": "The course is variable and often benign, with many patients managed symptomatically; a minority have refractory pain or dysphagia, and some overlap with or progress towards spastic achalasia.",
+  "pitfalls": [
+   "Attributing chest pain to the oesophagus before excluding cardiac disease",
+   "Diagnosing spasm on a single abnormal swallow rather than a consistent manometric pattern",
+   "Missing spastic achalasia, which is managed differently",
+   "Overlooking reflux as a treatable trigger of spastic contractions"
+  ],
+  "references": [
+   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+   "Chicago Classification of oesophageal motility disorders"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Relax the spastic distal smooth muscle with agents such as a calcium-channel blocker, a nitrate or a phosphodiesterase-5 inhibitor",
+   "Use neuromodulators such as a tricyclic antidepressant to reduce oesophageal chest pain and visceral hypersensitivity",
+   "Exclude cardiac causes of chest pain before attributing symptoms to the oesophagus",
+   "Treat contributing reflux with acid suppression and address recognised triggers such as stress and hot or cold liquids",
+   "Confirm the diagnosis with high-resolution manometry and exclude mucosal or obstructing disease at endoscopy",
+   "Reserve peroral endoscopic myotomy, or botulinum toxin injection, for refractory dysphagia or pain"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "diffuse_esophageal_spasm-pathway",
+   "title": "Distal (diffuse) oesophageal spasm: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Presents with intermittent dysphagia to both solids and liquids and non-cardiac chest pain that can mimic angina",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Chest pain with features suggesting cardiac ischaemia",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: High-resolution oesophageal manometry to characterise contraction latency and vigour, Barium oesophagram to look for corkscrew/rosary-bead morphology, Upper endoscopy to exclude mucosal disease, eosinophilic oesophagitis,"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Relax the spastic distal smooth muscle with agents such as a calcium-channel blocker, a nitrate or a phosphodiesterase-5 inhibitor"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing chest pain to the oesophagus before excluding cardiac disease"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of distal (diffuse) oesophageal spasm."
+  }
+ ],
+ "tables": [
+  {
+   "id": "diffuse_esophageal_spasm-matrix",
+   "title": "Distal (diffuse) oesophageal spasm: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Presents with intermittent dysphagia to both solids and liquids and non-cardiac chest pain that can mimic angina",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Distal oesophageal spasm is a motility disorder characterised by uncoordinated, simultaneous or premature contractions of the distal oesophageal smooth muscle. Impaired inhibitory neuronal signalling, particularly a deficiency of nitric-oxide-mediated inhibition, shortens the normal latency between swallowing and contraction, so that contractions occur prematurely and out of sequence. This disordered propagation disrupts orderly bolus transit, producing intermittent dysphagia, while the vigorous, poorly coordinated contractions generate episodic chest pain.",
-    "additionalDifferentials": [
-      "Cardiac ischaemia and angina",
-      "Achalasia (particularly spastic type III)",
-      "Jackhammer (hypercontractile) oesophagus",
-      "Gastro-oesophageal reflux disease",
-      "Eosinophilic oesophagitis",
-      "Functional chest pain of oesophageal origin"
+    [
+     "Key Investigations",
+     "High-resolution oesophageal manometry to characterise contraction latency and vigour, Barium oesophagram to look for",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "High-resolution oesophageal manometry to characterise contraction latency and vigour",
-      "Barium oesophagram to look for corkscrew/rosary-bead morphology",
-      "Upper endoscopy to exclude mucosal disease, eosinophilic oesophagitis, and obstruction",
-      "Cardiac evaluation to exclude ischaemic chest pain",
-      "Ambulatory reflux monitoring where reflux may be a trigger"
+    [
+     "Primary Differentials",
+     "Cardiac ischaemia and angina, Achalasia (particularly spastic type III), Jackhammer (hypercontractile) oesophagus",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Chest pain with features suggesting cardiac ischaemia",
-      "Progressive dysphagia, weight loss, or regurgitation suggesting achalasia or malignancy",
-      "Food impaction requiring urgent endoscopy",
-      "Odynophagia or alarm features warranting mucosal assessment"
+    [
+     "Management Strategy",
+     "Relax the spastic distal smooth muscle with agents such as a calcium-channel blocker, a nitrate or a phosphodiesterase-5 inhibitor",
+     "Core treatment modality"
     ],
-    "prognosis": "The course is variable and often benign, with many patients managed symptomatically; a minority have refractory pain or dysphagia, and some overlap with or progress towards spastic achalasia.",
-    "pitfalls": [
-      "Attributing chest pain to the oesophagus before excluding cardiac disease",
-      "Diagnosing spasm on a single abnormal swallow rather than a consistent manometric pattern",
-      "Missing spastic achalasia, which is managed differently",
-      "Overlooking reflux as a treatable trigger of spastic contractions"
-    ],
-    "references": [
-      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-      "Chicago Classification of oesophageal motility disorders"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Relax the spastic distal smooth muscle with agents such as a calcium-channel blocker, a nitrate or a phosphodiesterase-5 inhibitor",
-      "Use neuromodulators such as a tricyclic antidepressant to reduce oesophageal chest pain and visceral hypersensitivity",
-      "Exclude cardiac causes of chest pain before attributing symptoms to the oesophagus",
-      "Treat contributing reflux with acid suppression and address recognised triggers such as stress and hot or cold liquids",
-      "Confirm the diagnosis with high-resolution manometry and exclude mucosal or obstructing disease at endoscopy",
-      "Reserve peroral endoscopic myotomy, or botulinum toxin injection, for refractory dysphagia or pain"
+    [
+     "Clinical Pitfall",
+     "Attributing chest pain to the oesophagus before excluding cardiac disease",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for distal (diffuse) oesophageal spasm."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "diffuse-esophageal-spasm-real-image",
+   "title": "Distal (diffuse) oesophageal spasm: Diagnostic Abdominal Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
+   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
+   "annotations": [
+    {
+     "label": "Solid Viscera",
+     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
+    },
+    {
+     "label": "Gastrointestinal Tract",
+     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
+    },
+    {
+     "label": "Mesentery & Peritoneum",
+     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+    }
+   ]
+  }
+ ]
 }

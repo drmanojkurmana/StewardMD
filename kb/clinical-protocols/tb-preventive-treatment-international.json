@@ -6,7 +6,23 @@
  "basis": "international",
  "counterpart": "tb-preventive-treatment",
  "setting": "Outpatient, HIV clinic, TB contact tracing",
- "aliases": ["TPT", "LTBI", "latent TB", "latent tuberculosis infection", "TB infection", "IPT", "3HP", "1HP", "3HR", "4R", "6H", "6Lfx", "isoniazid preventive therapy", "IGRA", "TST"],
+ "aliases": [
+  "TPT",
+  "LTBI",
+  "latent TB",
+  "latent tuberculosis infection",
+  "TB infection",
+  "IPT",
+  "3HP",
+  "1HP",
+  "3HR",
+  "4R",
+  "6H",
+  "6Lfx",
+  "isoniazid preventive therapy",
+  "IGRA",
+  "TST"
+ ],
  "summary": "Rule out active TB, then offer preventive treatment to people with HIV, household contacts of pulmonary TB and other high-risk groups, using 3HP, 6H, 3HR, 1HP or 4R (CDC prefers the short rifamycin regimens), and 6 months of daily levofloxacin for contacts of MDR/RR-TB.",
  "sections": [
   {
@@ -88,18 +104,159 @@
   }
  ],
  "drugs": [
-  { "name": "3HP: isoniazid plus rifapentine weekly", "dose": "Once weekly for 12 doses. 50 kg or more: isoniazid 900 mg plus rifapentine 900 mg (3 FDC 300/300 mg tablets). WHO 2024 bands: 10 to 14.9 kg H 250 mg + P 300 mg; 15 to 19.9 kg H 300 mg + P 450 mg; 20 to 29.9 kg H 450 mg + P 600 mg; 30 to 34.9 kg H 600 mg + P 750 mg; 35 to 39.9 kg H 600 mg + P 900 mg; 40 to 49.9 kg H 750 mg + P 900 mg", "notes": "Under 10 kg: WHO dispersible table. Flu-like and hypersensitivity reactions; supported or observed doses." },
-  { "name": "1HP: isoniazid plus rifapentine daily", "dose": "Age 13 years or more: isoniazid 300 mg plus rifapentine 600 mg orally once daily for 28 days", "notes": "Same interaction profile as 3HP." },
-  { "name": "Isoniazid (6H)", "dose": "Adults 5 mg/kg once daily, usually 300 mg (WHO 2024 bands: 30 to 64.9 kg 300 mg; 65 kg or more 375 mg). Children 10 mg/kg (7 to 15 mg/kg), maximum 300 mg. For 6 months (182 doses)", "notes": "Safe in pregnancy; add pyridoxine if at risk of neuropathy." },
-  { "name": "3HR: rifampicin plus isoniazid daily", "dose": "Children: RH 75/50 mg dispersible, 4 to 7.9 kg 1 tablet, 8 to 11.9 kg 2, 12 to 15.9 kg 3, 16 to 24.9 kg 4. 25 kg or more: RH 150/75 mg, 25 to 29.9 kg 2 tablets, 30 to 34.9 kg 3, 35 to 64.9 kg 4, 65 kg or more 5. Daily for 3 months (84 doses)", "notes": "In adults hepatotoxicity is similar to 6H; 3HP may be preferred." },
-  { "name": "Rifampicin (4R)", "dose": "Adults 10 mg/kg once daily (WHO 2024 bands: 35 to 64.9 kg 600 mg; 65 kg or more 750 mg); children 15 mg/kg (10 to 20 mg/kg). For 4 months (120 doses)", "notes": "Also for contacts of isoniazid-resistant, rifampicin-susceptible TB. Not practical under 25 kg (no child formulation)." },
-  { "name": "Levofloxacin (6Lfx)", "dose": "25 to 49.9 kg 500 mg; 50 kg or more 750 mg orally once daily for 6 months (WHO 2024). Smaller children: WHO weight-band table (dispersible 100 mg tablets)", "notes": "Contacts of MDR/RR-TB. Tendinopathy, QT prolongation, dysglycaemia." },
-  { "name": "Pyridoxine (vitamin B6)", "dose": "10 to 25 mg orally daily with isoniazid; infants 5 to 10 mg daily; established neuropathy 50 to 75 mg daily (up to 100 to 200 mg)", "notes": "Routinely in pregnancy and breastfeeding, and for undernutrition, HIV, alcohol use, diabetes and CKD." }
+  {
+   "name": "3HP: isoniazid plus rifapentine weekly",
+   "dose": "Once weekly for 12 doses. 50 kg or more: isoniazid 900 mg plus rifapentine 900 mg (3 FDC 300/300 mg tablets). WHO 2024 bands: 10 to 14.9 kg H 250 mg + P 300 mg; 15 to 19.9 kg H 300 mg + P 450 mg; 20 to 29.9 kg H 450 mg + P 600 mg; 30 to 34.9 kg H 600 mg + P 750 mg; 35 to 39.9 kg H 600 mg + P 900 mg; 40 to 49.9 kg H 750 mg + P 900 mg",
+   "notes": "Under 10 kg: WHO dispersible table. Flu-like and hypersensitivity reactions; supported or observed doses."
+  },
+  {
+   "name": "1HP: isoniazid plus rifapentine daily",
+   "dose": "Age 13 years or more: isoniazid 300 mg plus rifapentine 600 mg orally once daily for 28 days",
+   "notes": "Same interaction profile as 3HP."
+  },
+  {
+   "name": "Isoniazid (6H)",
+   "dose": "Adults 5 mg/kg once daily, usually 300 mg (WHO 2024 bands: 30 to 64.9 kg 300 mg; 65 kg or more 375 mg). Children 10 mg/kg (7 to 15 mg/kg), maximum 300 mg. For 6 months (182 doses)",
+   "notes": "Safe in pregnancy; add pyridoxine if at risk of neuropathy."
+  },
+  {
+   "name": "3HR: rifampicin plus isoniazid daily",
+   "dose": "Children: RH 75/50 mg dispersible, 4 to 7.9 kg 1 tablet, 8 to 11.9 kg 2, 12 to 15.9 kg 3, 16 to 24.9 kg 4. 25 kg or more: RH 150/75 mg, 25 to 29.9 kg 2 tablets, 30 to 34.9 kg 3, 35 to 64.9 kg 4, 65 kg or more 5. Daily for 3 months (84 doses)",
+   "notes": "In adults hepatotoxicity is similar to 6H; 3HP may be preferred."
+  },
+  {
+   "name": "Rifampicin (4R)",
+   "dose": "Adults 10 mg/kg once daily (WHO 2024 bands: 35 to 64.9 kg 600 mg; 65 kg or more 750 mg); children 15 mg/kg (10 to 20 mg/kg). For 4 months (120 doses)",
+   "notes": "Also for contacts of isoniazid-resistant, rifampicin-susceptible TB. Not practical under 25 kg (no child formulation)."
+  },
+  {
+   "name": "Levofloxacin (6Lfx)",
+   "dose": "25 to 49.9 kg 500 mg; 50 kg or more 750 mg orally once daily for 6 months (WHO 2024). Smaller children: WHO weight-band table (dispersible 100 mg tablets)",
+   "notes": "Contacts of MDR/RR-TB. Tendinopathy, QT prolongation, dysglycaemia."
+  },
+  {
+   "name": "Pyridoxine (vitamin B6)",
+   "dose": "10 to 25 mg orally daily with isoniazid; infants 5 to 10 mg daily; established neuropathy 50 to 75 mg daily (up to 100 to 200 mg)",
+   "notes": "Routinely in pregnancy and breastfeeding, and for undernutrition, HIV, alcohol use, diabetes and CKD."
+  }
  ],
  "sources": [
-  { "org": "WHO", "title": "WHO consolidated guidelines on tuberculosis. Module 1: prevention. Tuberculosis preventive treatment, second edition", "year": 2024, "url": "https://www.who.int/publications/i/item/9789240096196" },
-  { "org": "WHO", "title": "WHO operational handbook on tuberculosis. Module 1: prevention. Tuberculosis preventive treatment, second edition (dosing and interruption tables)", "year": 2024, "url": "https://www.who.int/publications/i/item/9789240097773" },
-  { "org": "NTCA / CDC", "title": "Guidelines for the treatment of latent tuberculosis infection: recommendations from the National Tuberculosis Controllers Association and CDC, 2020", "year": 2020, "url": "https://www.cdc.gov/mmwr/volumes/69/rr/rr6901a1.htm" }
+  {
+   "org": "WHO",
+   "title": "WHO consolidated guidelines on tuberculosis. Module 1: prevention. Tuberculosis preventive treatment, second edition",
+   "year": 2024,
+   "url": "https://www.who.int/publications/i/item/9789240096196"
+  },
+  {
+   "org": "WHO",
+   "title": "WHO operational handbook on tuberculosis. Module 1: prevention. Tuberculosis preventive treatment, second edition (dosing and interruption tables)",
+   "year": 2024,
+   "url": "https://www.who.int/publications/i/item/9789240097773"
+  },
+  {
+   "org": "NTCA / CDC",
+   "title": "Guidelines for the treatment of latent tuberculosis infection: recommendations from the National Tuberculosis Controllers Association and CDC, 2020",
+   "year": 2020,
+   "url": "https://www.cdc.gov/mmwr/volumes/69/rr/rr6901a1.htm"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "tb-preventive-treatment-international-pathway",
+   "title": "TB preventive treatment (WHO) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "People with HIV (adults, adolescents, and children 12 months or older in high-transmission settings): give TPT once TB disease is unlikely, regardless of CD4 count, ART, pregnancy or previous TB treatment, even if infection testing is",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Adults and adolescents with HIV: screen for current cough, fever, weight loss or night sweats; any symptom needs evaluation for TB. Chest X-ray, CRP above 5 mg/L or a molecular test may also be used to screen.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Systematically test and treat people starting anti-TNF therapy, on dialysis, preparing for organ or haematological transplant, or with silicosis. Consider testing prisoners, health workers, immigrants from high-burden countries, homeless"
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Contacts of MDR/RR-TB: 6 months of daily levofloxacin (6Lfx) after TB disease is carefully excluded; infection testing is not required for children and people with HIV."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Review at each dispensing or monthly: adherence, TB symptoms and adverse effects (hepatitis, rash, neuropathy, flu-like or hypersensitivity reactions with 3HP). Stop and review for jaundice, dark urine, vomiting or abdominal pain."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for tb preventive treatment (who)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "tb-preventive-treatment-international-summary-matrix",
+   "title": "TB preventive treatment (WHO) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "People with HIV (adults, adolescents, and children 12 months or older in high-transmission settings): give TPT once TB disease is unlikely,",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Adults and adolescents with HIV: screen for current cough, fever, weight loss or night sweats; any symptom needs evaluation for TB. Chest",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "3HP: isoniazid plus rifapentine weekly: Once weekly for 12 doses. 50 kg or more: isoniazid 900 mg plus rifapentine 900 mg (3 FDC 300/300 mg",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Giving single-drug TPT to someone with undiagnosed active TB, which selects resistance.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for tb preventive treatment (who)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "tb-preventive-treatment-international-real-image",
+   "title": "TB preventive treatment (WHO): Diagnostic Microbiological / Smear Examination",
+   "type": "diagram",
+   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
+   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
+   "annotations": [
+    {
+     "label": "Pathogen Detection",
+     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
+    },
+    {
+     "label": "Inflammatory Response",
+     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
+    },
+    {
+     "label": "Diagnostic Confirmation",
+     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+    }
+   ]
+  }
+ ]
 }

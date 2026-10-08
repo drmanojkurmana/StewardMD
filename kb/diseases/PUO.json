@@ -203,5 +203,100 @@
       "importedAt": "2026-06-29T13:56:25Z",
       "contentHash": "h538fada7"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "puo-dx-algo",
+      "title": "Pyrexia of Unknown Origin: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Current (post-Petersdorf) FUO definition requires all of: fever >=38.3C (101F) on at least two occasions, illness lasting at least 3 weeks, no known immunocompromised state, and a diagnosis still uncertain after thorough history,",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Clinical deterioration without new PDCs - the trigger to escalate workup (rather than wait) and the situation where empirical therapy may be justified (pp.152-153)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Obligatory baseline panel: ESR and CRP, platelet count, leukocyte count with differential, hemoglobin, electrolytes, creatinine, total protein, alkaline phosphatase, ALT, AST, LDH, creatine kinase, ferritin, antinuclear"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: FUO categories (by host/setting), each requiring a distinct approach: (1) classic FUO - the immunocompetent adult per the formal definition; (2) nosocomial FUO; (3) neutropenic FUO; and (4) HIV-associated FUO. The"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Starting empirical therapeutic trials before a diagnosis - should be AVOIDED except when the patient is rapidly deteriorating, because most undiagnosed patients resolve spontaneously (p.154)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for pyrexia of unknown origin."
+    }
+  ],
+  "tables": [
+    {
+      "id": "puo-matrix",
+      "title": "Pyrexia of Unknown Origin: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Current (post-Petersdorf) FUO definition requires all of: fever >=38.3C (101F) on at least two occasions, illness lasting at",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Obligatory baseline panel: ESR and CRP, platelet count, leukocyte count with differential, hemoglobin, electrolytes, creatinine,",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Infective endocarditis (including culture-negative endocarditis from fastidious organisms - nutritionally variant streptococci,",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Clinical deterioration without new PDCs - the trigger to escalate workup (rather than wait) and the situation where empirical",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Starting empirical therapeutic trials before a diagnosis - should be AVOIDED except when the patient is rapidly deteriorating,",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for pyrexia of unknown origin."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "puo-real-image",
+      "title": "Pyrexia of Unknown Origin: 12-Lead Diagnostic Electrocardiogram",
+      "type": "ecg",
+      "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
+      "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
+      "annotations": [
+        {
+          "label": "Conduction & Axis",
+          "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
+        },
+        {
+          "label": "Repolarization",
+          "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
+        },
+        {
+          "label": "Rhythm & Intervals",
+          "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+        }
+      ]
+    }
+  ]
 }

@@ -5,7 +5,18 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Outpatient, emergency department, ward",
- "aliases": ["UTI", "cUTI", "complicated UTI", "acute pyelonephritis", "cystitis", "CAUTI", "catheter-associated UTI", "asymptomatic bacteriuria", "ASB", "urosepsis"],
+ "aliases": [
+  "UTI",
+  "cUTI",
+  "complicated UTI",
+  "acute pyelonephritis",
+  "cystitis",
+  "CAUTI",
+  "catheter-associated UTI",
+  "asymptomatic bacteriuria",
+  "ASB",
+  "urosepsis"
+ ],
  "summary": "Treat afebrile cystitis with nitrofurantoin or fosfomycin. For complicated UTI (fever, flank pain, systemic signs) culture first, choose empirical therapy by sepsis status, prior cultures and local resistance, switch to oral when improving and stop at 7 days in most. Do not treat asymptomatic bacteriuria.",
  "sections": [
   {
@@ -94,21 +105,175 @@
   }
  ],
  "drugs": [
-  { "name": "Nitrofurantoin", "dose": "100 mg orally twice daily for 5 days (macrocrystal or modified-release)", "notes": "Cystitis only. Avoid at low eGFR and near term in pregnancy." },
-  { "name": "Fosfomycin trometamol", "dose": "3 g orally as a single dose", "notes": "Cystitis only." },
-  { "name": "Co-trimoxazole (trimethoprim-sulfamethoxazole)", "dose": "160/800 mg orally twice daily: 3 days for cystitis, 7 days for complicated UTI", "notes": "Only if susceptible. Monitor potassium and creatinine." },
-  { "name": "Ceftriaxone", "dose": "1 to 2 g IV once daily", "notes": "Complicated UTI without ESBL risk." },
-  { "name": "Piperacillin-tazobactam", "dose": "4.5 g IV every 6 to 8 hours", "notes": "ICMR first line for pyelonephritis; reduce in renal impairment." },
-  { "name": "Ertapenem", "dose": "1 g IV once daily", "notes": "ESBL risk without septic shock; no Pseudomonas or Acinetobacter cover." },
-  { "name": "Meropenem", "dose": "1 g IV every 8 hours", "notes": "Septic shock or known ESBL; renal adjustment." },
-  { "name": "Amikacin", "dose": "15 mg/kg IV once daily", "notes": "ICMR alternative; monitor levels, renal function and hearing; keep courses short." },
-  { "name": "Ciprofloxacin", "dose": "500 to 750 mg orally twice daily, or 400 mg IV every 12 hours", "notes": "Only when susceptible; 5 to 7 day course for complicated UTI." }
+  {
+   "name": "Nitrofurantoin",
+   "dose": "100 mg orally twice daily for 5 days (macrocrystal or modified-release)",
+   "notes": "Cystitis only. Avoid at low eGFR and near term in pregnancy."
+  },
+  {
+   "name": "Fosfomycin trometamol",
+   "dose": "3 g orally as a single dose",
+   "notes": "Cystitis only."
+  },
+  {
+   "name": "Co-trimoxazole (trimethoprim-sulfamethoxazole)",
+   "dose": "160/800 mg orally twice daily: 3 days for cystitis, 7 days for complicated UTI",
+   "notes": "Only if susceptible. Monitor potassium and creatinine."
+  },
+  {
+   "name": "Ceftriaxone",
+   "dose": "1 to 2 g IV once daily",
+   "notes": "Complicated UTI without ESBL risk."
+  },
+  {
+   "name": "Piperacillin-tazobactam",
+   "dose": "4.5 g IV every 6 to 8 hours",
+   "notes": "ICMR first line for pyelonephritis; reduce in renal impairment."
+  },
+  {
+   "name": "Ertapenem",
+   "dose": "1 g IV once daily",
+   "notes": "ESBL risk without septic shock; no Pseudomonas or Acinetobacter cover."
+  },
+  {
+   "name": "Meropenem",
+   "dose": "1 g IV every 8 hours",
+   "notes": "Septic shock or known ESBL; renal adjustment."
+  },
+  {
+   "name": "Amikacin",
+   "dose": "15 mg/kg IV once daily",
+   "notes": "ICMR alternative; monitor levels, renal function and hearing; keep courses short."
+  },
+  {
+   "name": "Ciprofloxacin",
+   "dose": "500 to 750 mg orally twice daily, or 400 mg IV every 12 hours",
+   "notes": "Only when susceptible; 5 to 7 day course for complicated UTI."
+  }
  ],
  "sources": [
-  { "org": "IDSA", "title": "2025 Guideline on management and treatment of complicated urinary tract infections", "year": 2025, "url": "https://www.idsociety.org/practice-guideline/complicated-urinary-tract-infections/" },
-  { "org": "ICMR", "title": "Treatment Guidelines for Antimicrobial Use in Common Syndromes 2022: empiric treatment of urinary tract infections", "year": 2022, "url": "https://amrtg.icmr.org.in/chapter9-syndromes-management-table2.html" },
-  { "org": "IDSA", "title": "Clinical practice guideline for the management of asymptomatic bacteriuria: 2019 update", "year": 2019, "url": "https://academic.oup.com/cid/article-abstract/68/10/e83/5407612" },
-  { "org": "IDSA / ESCMID", "title": "International clinical practice guidelines for the treatment of acute uncomplicated cystitis and pyelonephritis in women: 2010 update", "year": 2011, "url": "https://academic.oup.com/cid/article/52/5/e103/388285" }
+  {
+   "org": "IDSA",
+   "title": "2025 Guideline on management and treatment of complicated urinary tract infections",
+   "year": 2025,
+   "url": "https://www.idsociety.org/practice-guideline/complicated-urinary-tract-infections/"
+  },
+  {
+   "org": "ICMR",
+   "title": "Treatment Guidelines for Antimicrobial Use in Common Syndromes 2022: empiric treatment of urinary tract infections",
+   "year": 2022,
+   "url": "https://amrtg.icmr.org.in/chapter9-syndromes-management-table2.html"
+  },
+  {
+   "org": "IDSA",
+   "title": "Clinical practice guideline for the management of asymptomatic bacteriuria: 2019 update",
+   "year": 2019,
+   "url": "https://academic.oup.com/cid/article-abstract/68/10/e83/5407612"
+  },
+  {
+   "org": "IDSA / ESCMID",
+   "title": "International clinical practice guidelines for the treatment of acute uncomplicated cystitis and pyelonephritis in women: 2010 update",
+   "year": 2011,
+   "url": "https://academic.oup.com/cid/article/52/5/e103/388285"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "urinary-tract-infection-pathway",
+   "title": "Urinary tract infection (adult): cystitis, pyelonephritis, complicated and catheter UTI Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Uncomplicated UTI (cystitis): dysuria, urgency, frequency or suprapubic pain with no fever, rigors, flank pain, costovertebral angle tenderness or haemodynamic instability. It can occur in men, diabetics and immunocompromised patients.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Complicated UTI: infection beyond the bladder, suggested by fever, chills, rigors, haemodynamic instability, flank pain or costovertebral angle tenderness. Pyelonephritis and symptomatic catheter-associated UTI are complicated UTI.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Typical cystitis in a non-pregnant woman: culture is not needed. Send urine culture for men, pregnancy, recurrence, treatment failure and every complicated UTI."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Switch to oral when improving, afebrile, able to swallow and an active agent exists: ciprofloxacin 500 to 750 mg twice daily, levofloxacin 750 mg daily, co-trimoxazole 160/800 mg twice daily, or by susceptibility amoxicillin-clavulanate"
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Treating asymptomatic bacteriuria or pyuria in catheterised, elderly or diabetic patients."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for urinary tract infection (adult): cystitis, pyelonephritis, complicated and catheter uti."
+  }
+ ],
+ "tables": [
+  {
+   "id": "urinary-tract-infection-summary-matrix",
+   "title": "Urinary tract infection (adult): cystitis, pyelonephritis, complicated and catheter UTI Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Uncomplicated UTI (cystitis): dysuria, urgency, frequency or suprapubic pain with no fever, rigors, flank pain, costovertebral angle",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Switch to oral when improving, afebrile, able to swallow and an active agent exists: ciprofloxacin 500 to 750 mg twice daily, levofloxacin",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Typical cystitis in a non-pregnant woman: culture is not needed. Send urine culture for men, pregnancy, recurrence, treatment failure and",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Nitrofurantoin: 100 mg orally twice daily for 5 days (macrocrystal or modified-release)",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Treating asymptomatic bacteriuria or pyuria in catheterised, elderly or diabetic patients.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for urinary tract infection (adult): cystitis, pyelonephritis, complicated and catheter uti."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "urinary-tract-infection-real-image",
+   "title": "Urinary tract infection (adult): cystitis, pyelonephritis, complicated and catheter UTI: Diagnostic Renal Ultrasonography",
+   "type": "ultrasound",
+   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
+   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
+   "annotations": [
+    {
+     "label": "Renal Cortex",
+     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
+    },
+    {
+     "label": "Corticomedullary Junction",
+     "description": "Medullary pyramid definition and structural architecture."
+    },
+    {
+     "label": "Collecting System",
+     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+    }
+   ]
+  }
+ ]
 }

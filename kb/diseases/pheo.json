@@ -120,5 +120,100 @@
       "importedAt": "2026-06-29T13:39:19Z",
       "contentHash": "hc608e609"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "pheo-dx-algo",
+      "title": "Phaeochromocytoma crisis: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "The classic triad is episodic headache, palpitations and sweating (diaphoresis) occurring with paroxysmal hypertension (p.2140).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Pheochromocytoma in crisis is named alongside aortic dissection and eclampsia as a hypertensive emergency demanding particularly rapid management; control blood pressure with a titratable IV agent (p.2141).",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Blood and 24-hour urinary catecholamine measurement (in addition to plasma/urine metanephrines) (p.2140)., Functional/positron emission tomography (PET) imaging in addition to CT/MRI of the abdomen for localisation"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Differentiate from top mimics: Cushing's syndrome and other secondary causes of hypertension (more common than pheochromocytoma, so the classic triad is frequently misleading) (p.2140)., Thyrotoxicosis / hyperthyroidism (overlapping"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Representativeness-heuristic trap: clinicians overestimate the probability of pheochromocytoma when the classic headache-palpitations-sweating triad is present, because they neglect its low prevalence relative to common"
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for phaeochromocytoma crisis."
+    }
+  ],
+  "tables": [
+    {
+      "id": "pheo-matrix",
+      "title": "Phaeochromocytoma crisis: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The classic triad is episodic headache, palpitations and sweating (diaphoresis) occurring with paroxysmal hypertension (p.2140).",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Blood and 24-hour urinary catecholamine measurement (in addition to plasma/urine metanephrines) (p.2140)., Functional/positron",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Cushing's syndrome and other secondary causes of hypertension (more common than pheochromocytoma, so the classic triad is",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Pheochromocytoma in crisis is named alongside aortic dissection and eclampsia as a hypertensive emergency demanding particularly",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Representativeness-heuristic trap: clinicians overestimate the probability of pheochromocytoma when the classic",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for phaeochromocytoma crisis."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "pheo-real-image",
+      "title": "Phaeochromocytoma crisis: Diagnostic Endocrine Cross-Sectional Imaging",
+      "type": "ct",
+      "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
+      "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
+      "annotations": [
+        {
+          "label": "Gland Morphology",
+          "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
+        },
+        {
+          "label": "Focal Lesions",
+          "description": "Nodularity, adenoma attenuation, and washout dynamics."
+        },
+        {
+          "label": "Surrounding Structures",
+          "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+        }
+      ]
+    }
+  ]
 }

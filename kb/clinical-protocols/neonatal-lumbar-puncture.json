@@ -89,5 +89,100 @@
  "review": {
   "status": "ai_drafted",
   "compiled": "2026-09-30"
- }
+ },
+ "algorithms": [
+  {
+   "id": "neonatal-lumbar-puncture-pathway",
+   "title": "Lumbar puncture in neonates Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Indications: suspected CNS infection (meningitis, encephalitis, congenital infection) and neonatal fever; also checking response to antimicrobial treatment, metabolic disease, intracranial haemorrhage, intrathecal therapy and CSF drainage",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Needle: 22 G, 3.5 cm is standard; a 25 G needle gives comparable success with fewer traumatic taps.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Send cell count with differential (use the least bloody tube), protein and glucose, and Gram stain and culture. Label every tube."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "The cord ends at L3 in neonates: puncture below L2 to L3, at L3 to L4 or L4 to L5. The line joining the iliac crests crosses the midline just above L4. Some protocols use L4 to L5 or L5 to S1."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Traumatic or failed taps occur in 30 to 50%; overall success is about 60%, and first attempt success varies from 50 to 80%."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for lumbar puncture in neonates."
+  }
+ ],
+ "tables": [
+  {
+   "id": "neonatal-lumbar-puncture-summary-matrix",
+   "title": "Lumbar puncture in neonates Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Indications: suspected CNS infection (meningitis, encephalitis, congenital infection) and neonatal fever; also checking response to",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Needle: 22 G, 3.5 cm is standard; a 25 G needle gives comparable success with fewer traumatic taps.",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Send cell count with differential (use the least bloody tube), protein and glucose, and Gram stain and culture. Label every tube.",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Targeted Treatment",
+     "The cord ends at L3 in neonates: puncture below L2 to L3, at L3 to L4 or L4 to L5. The line joining the iliac crests crosses the midline",
+     "Definitive management protocol"
+    ],
+    [
+     "Critical Pitfall",
+     "Traumatic or failed taps occur in 30 to 50%; overall success is about 60%, and first attempt success varies from 50 to 80%.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for lumbar puncture in neonates."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "neonatal-lumbar-puncture-real-image",
+   "title": "Lumbar puncture in neonates: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

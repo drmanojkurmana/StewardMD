@@ -1,79 +1,174 @@
 {
-  "id": "machado_joseph_disease",
-  "name": "Machado-Joseph disease (SCA3)",
-  "aliases": [
-    "SCA3",
-    "spinocerebellar ataxia type 3",
-    "Machado-Joseph disease",
-    "ATXN3-related ataxia",
-    "ataxin-3 CAG repeat expansion"
+ "id": "machado_joseph_disease",
+ "name": "Machado-Joseph disease (SCA3)",
+ "aliases": [
+  "SCA3",
+  "spinocerebellar ataxia type 3",
+  "Machado-Joseph disease",
+  "ATXN3-related ataxia",
+  "ataxin-3 CAG repeat expansion"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system / Neurology",
+ "specialty": "Neurology / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Adams and Victor's Principles of Neurology / Bradley's Neurology in Clinical Practice",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "The most common autosomal dominant spinocerebellar ataxia worldwide, caused by a CAG repeat expansion in the ATXN3 gene encoding a polyglutamine tract in ataxin-3",
+   "Presents with progressive cerebellar ataxia combined with variable pyramidal, extrapyramidal, and peripheral features, giving a broad clinical spectrum",
+   "Characteristic signs include prominent, bulging eyes with lid retraction, gaze-evoked nystagmus, and progressive external ophthalmoplegia",
+   "Faciolingual fasciculations and myokymia, dystonia, spasticity, and a peripheral neuropathy with amyotrophy are recognised features",
+   "Recognised clinical subtypes range from early-onset spastic-dystonic forms to later-onset predominantly ataxic or peripheral-neuropathy phenotypes depending on repeat length and age",
+   "Demonstrates anticipation, with earlier onset and greater severity as the repeat expands across generations",
+   "Confirmed by molecular testing for the ATXN3 CAG expansion; treatment is symptomatic and multidisciplinary"
   ],
-  "class": "non_infective",
-  "system": "Nervous system / Neurology",
-  "specialty": "Neurology / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Adams and Victor's Principles of Neurology / Bradley's Neurology in Clinical Practice",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "The most common autosomal dominant spinocerebellar ataxia worldwide, caused by a CAG repeat expansion in the ATXN3 gene encoding a polyglutamine tract in ataxin-3",
-      "Presents with progressive cerebellar ataxia combined with variable pyramidal, extrapyramidal, and peripheral features, giving a broad clinical spectrum",
-      "Characteristic signs include prominent, bulging eyes with lid retraction, gaze-evoked nystagmus, and progressive external ophthalmoplegia",
-      "Faciolingual fasciculations and myokymia, dystonia, spasticity, and a peripheral neuropathy with amyotrophy are recognised features",
-      "Recognised clinical subtypes range from early-onset spastic-dystonic forms to later-onset predominantly ataxic or peripheral-neuropathy phenotypes depending on repeat length and age",
-      "Demonstrates anticipation, with earlier onset and greater severity as the repeat expands across generations",
-      "Confirmed by molecular testing for the ATXN3 CAG expansion; treatment is symptomatic and multidisciplinary"
+  "pathophysiology": "Machado-Joseph disease (SCA3) is a polyglutamine disorder caused by expansion of the CAG repeat in the ATXN3 gene. Ataxin-3 normally functions as a deubiquitinating enzyme involved in protein quality control; the expanded polyglutamine tract confers a toxic gain of function, promoting misfolding, aggregation, and formation of neuronal intranuclear inclusions that impair the ubiquitin-proteasome system and cellular homeostasis. Neurodegeneration affects the cerebellum and its connections, brainstem and cranial nerve nuclei, basal ganglia, spinal motor and sensory pathways, and peripheral nerves, accounting for the wide phenotypic range. Repeat length correlates inversely with age at onset, underlying anticipation.",
+  "additionalDifferentials": [
+   "Other dominant spinocerebellar ataxias (SCA1, SCA2, SCA6, SCA7)",
+   "Multiple system atrophy",
+   "Parkinson disease or dystonia syndromes when extrapyramidal features dominate",
+   "Amyotrophic lateral sclerosis when amyotrophy is prominent",
+   "Friedreich ataxia",
+   "Acquired cerebellar degenerations"
+  ],
+  "additionalInvestigations": [
+   "Targeted molecular genetic testing for ATXN3 CAG repeat expansion",
+   "Brain MRI showing cerebellar, brainstem, and sometimes basal ganglia atrophy",
+   "Nerve conduction studies for associated peripheral neuropathy",
+   "Detailed oculomotor examination for ophthalmoplegia and nystagmus",
+   "Assessment for dystonia, spasticity, and parkinsonism",
+   "Swallowing and speech assessment as bulbar involvement progresses"
+  ],
+  "redFlags": [
+   "Progressive dysphagia with aspiration risk",
+   "Severe spasticity or dystonia impairing mobility and safety",
+   "Respiratory or bulbar decline in advanced disease"
+  ],
+  "prognosis": "The disease is progressive over one to several decades with steadily accumulating disability; life expectancy is reduced, usually as a consequence of bulbar dysfunction and respiratory complications, although progression rate varies with subtype.",
+  "pitfalls": [
+   "Attributing the diverse features to separate diagnoses rather than recognising the SCA3 spectrum",
+   "Assuming a subtype without gene-specific confirmation",
+   "Missing the characteristic bulging eyes and faciolingual fasciculations as diagnostic clues",
+   "Neglecting anticipation and genetic counselling for at-risk relatives"
+  ],
+  "references": [
+   "Adams and Victor's Principles of Neurology",
+   "Bradley's Neurology in Clinical Practice"
+  ],
+  "crossLinks": [],
+  "management": [
+   "No disease-modifying therapy exists, so care centres on symptomatic treatment and maintaining function",
+   "Physiotherapy, occupational therapy and balance and gait training with walking aids for progressive cerebellar ataxia",
+   "Targeted pharmacotherapy for specific features: dopaminergic agents such as levodopa for parkinsonism, baclofen for spasticity, and botulinum toxin for dystonia",
+   "Speech and language therapy with swallowing assessment for dysarthria and dysphagia, with attention to aspiration risk",
+   "Monitoring and management of complications including falls, contractures, sleep disturbance, depression, and respiratory compromise from bulbar dysfunction",
+   "Multidisciplinary neurology-led care with rehabilitation, dietetics and palliative planning as disease advances",
+   "Genetic counselling for this autosomal dominant CAG-repeat disorder, with predictive and reproductive testing options and awareness of anticipation"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "machado_joseph_disease-pathway",
+   "title": "Machado-Joseph disease (SCA3): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "The most common autosomal dominant spinocerebellar ataxia worldwide, caused by a CAG repeat expansion in the ATXN3 gene encoding a polyglutamine tract in ataxin-3",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Progressive dysphagia with aspiration risk",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Targeted molecular genetic testing for ATXN3 CAG repeat expansion, Brain MRI showing cerebellar, brainstem, and sometimes basal ganglia atrophy, Nerve conduction studies for associated peripheral neuropathy"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: No disease-modifying therapy exists, so care centres on symptomatic treatment and maintaining function"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing the diverse features to separate diagnoses rather than recognising the SCA3 spectrum"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of machado-joseph disease (sca3)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "machado_joseph_disease-matrix",
+   "title": "Machado-Joseph disease (SCA3): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The most common autosomal dominant spinocerebellar ataxia worldwide, caused by a CAG repeat expansion in the ATXN3 gene encoding",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Machado-Joseph disease (SCA3) is a polyglutamine disorder caused by expansion of the CAG repeat in the ATXN3 gene. Ataxin-3 normally functions as a deubiquitinating enzyme involved in protein quality control; the expanded polyglutamine tract confers a toxic gain of function, promoting misfolding, aggregation, and formation of neuronal intranuclear inclusions that impair the ubiquitin-proteasome system and cellular homeostasis. Neurodegeneration affects the cerebellum and its connections, brainstem and cranial nerve nuclei, basal ganglia, spinal motor and sensory pathways, and peripheral nerves, accounting for the wide phenotypic range. Repeat length correlates inversely with age at onset, underlying anticipation.",
-    "additionalDifferentials": [
-      "Other dominant spinocerebellar ataxias (SCA1, SCA2, SCA6, SCA7)",
-      "Multiple system atrophy",
-      "Parkinson disease or dystonia syndromes when extrapyramidal features dominate",
-      "Amyotrophic lateral sclerosis when amyotrophy is prominent",
-      "Friedreich ataxia",
-      "Acquired cerebellar degenerations"
+    [
+     "Key Investigations",
+     "Targeted molecular genetic testing for ATXN3 CAG repeat expansion, Brain MRI showing cerebellar, brainstem, and sometimes basal",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Targeted molecular genetic testing for ATXN3 CAG repeat expansion",
-      "Brain MRI showing cerebellar, brainstem, and sometimes basal ganglia atrophy",
-      "Nerve conduction studies for associated peripheral neuropathy",
-      "Detailed oculomotor examination for ophthalmoplegia and nystagmus",
-      "Assessment for dystonia, spasticity, and parkinsonism",
-      "Swallowing and speech assessment as bulbar involvement progresses"
+    [
+     "Primary Differentials",
+     "Other dominant spinocerebellar ataxias (SCA1, SCA2, SCA6, SCA7), Multiple system atrophy, Parkinson disease or dystonia syndromes",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Progressive dysphagia with aspiration risk",
-      "Severe spasticity or dystonia impairing mobility and safety",
-      "Respiratory or bulbar decline in advanced disease"
+    [
+     "Management Strategy",
+     "No disease-modifying therapy exists, so care centres on symptomatic treatment and maintaining function",
+     "Core treatment modality"
     ],
-    "prognosis": "The disease is progressive over one to several decades with steadily accumulating disability; life expectancy is reduced, usually as a consequence of bulbar dysfunction and respiratory complications, although progression rate varies with subtype.",
-    "pitfalls": [
-      "Attributing the diverse features to separate diagnoses rather than recognising the SCA3 spectrum",
-      "Assuming a subtype without gene-specific confirmation",
-      "Missing the characteristic bulging eyes and faciolingual fasciculations as diagnostic clues",
-      "Neglecting anticipation and genetic counselling for at-risk relatives"
-    ],
-    "references": [
-      "Adams and Victor's Principles of Neurology",
-      "Bradley's Neurology in Clinical Practice"
-    ],
-    "crossLinks": [],
-    "management": [
-      "No disease-modifying therapy exists, so care centres on symptomatic treatment and maintaining function",
-      "Physiotherapy, occupational therapy and balance and gait training with walking aids for progressive cerebellar ataxia",
-      "Targeted pharmacotherapy for specific features: dopaminergic agents such as levodopa for parkinsonism, baclofen for spasticity, and botulinum toxin for dystonia",
-      "Speech and language therapy with swallowing assessment for dysarthria and dysphagia, with attention to aspiration risk",
-      "Monitoring and management of complications including falls, contractures, sleep disturbance, depression, and respiratory compromise from bulbar dysfunction",
-      "Multidisciplinary neurology-led care with rehabilitation, dietetics and palliative planning as disease advances",
-      "Genetic counselling for this autosomal dominant CAG-repeat disorder, with predictive and reproductive testing options and awareness of anticipation"
+    [
+     "Clinical Pitfall",
+     "Attributing the diverse features to separate diagnoses rather than recognising the SCA3 spectrum",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for machado-joseph disease (sca3)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "machado-joseph-disease-real-image",
+   "title": "Machado-Joseph disease (SCA3): Diagnostic Head Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
+   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
+   "annotations": [
+    {
+     "label": "Cerebral Parenchyma",
+     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+    },
+    {
+     "label": "Extra-Axial Spaces",
+     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+    }
+   ]
+  }
+ ]
 }

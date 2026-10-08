@@ -1,77 +1,172 @@
 {
-  "id": "intestinal_lymphangiectasia",
-  "name": "Intestinal lymphangiectasia",
-  "aliases": [
-    "Waldmann disease",
-    "primary intestinal lymphangiectasia",
-    "protein-losing enteropathy from lymphangiectasia"
+ "id": "intestinal_lymphangiectasia",
+ "name": "Intestinal lymphangiectasia",
+ "aliases": [
+  "Waldmann disease",
+  "primary intestinal lymphangiectasia",
+  "protein-losing enteropathy from lymphangiectasia"
+ ],
+ "class": "non_infective",
+ "system": "Gastroenterology",
+ "specialty": "Gastroenterology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Presents with peripheral oedema, sometimes effusions or chylous ascites, together with diarrhoea and features of malabsorption",
+   "Characteristic laboratory findings are hypoalbuminaemia, low immunoglobulins and lymphopenia caused by enteric loss of protein and lymph",
+   "Fat-soluble vitamin deficiencies and hypocalcaemia may occur because of impaired fat and lymphatic absorption",
+   "Primary disease is a congenital malformation of intestinal lymphatics, while secondary disease results from any process obstructing lymphatic drainage",
+   "Endoscopy may show scattered white villous tips or a snow-flake mucosal appearance, and biopsy shows dilated mucosal and submucosal lymphatics",
+   "Diagnosis is supported by demonstrating enteric protein loss, for example with faecal alpha-1-antitrypsin clearance",
+   "Management is a low-fat diet enriched with medium-chain triglycerides that bypass the lymphatics, with treatment of any underlying secondary cause"
   ],
-  "class": "non_infective",
-  "system": "Gastroenterology",
-  "specialty": "Gastroenterology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Presents with peripheral oedema, sometimes effusions or chylous ascites, together with diarrhoea and features of malabsorption",
-      "Characteristic laboratory findings are hypoalbuminaemia, low immunoglobulins and lymphopenia caused by enteric loss of protein and lymph",
-      "Fat-soluble vitamin deficiencies and hypocalcaemia may occur because of impaired fat and lymphatic absorption",
-      "Primary disease is a congenital malformation of intestinal lymphatics, while secondary disease results from any process obstructing lymphatic drainage",
-      "Endoscopy may show scattered white villous tips or a snow-flake mucosal appearance, and biopsy shows dilated mucosal and submucosal lymphatics",
-      "Diagnosis is supported by demonstrating enteric protein loss, for example with faecal alpha-1-antitrypsin clearance",
-      "Management is a low-fat diet enriched with medium-chain triglycerides that bypass the lymphatics, with treatment of any underlying secondary cause"
+  "pathophysiology": "Intestinal lymphangiectasia is characterised by dilatation of the lymphatic channels of the small-bowel mucosa and submucosa, which may be a primary congenital anomaly or secondary to obstruction of lymphatic flow by cardiac disease, malignancy, infection or fibrosis. The dilated, incompetent lymphatics leak or rupture into the bowel lumen, causing loss of protein-rich lymph containing albumin, immunoglobulins and lymphocytes. This produces a protein-losing enteropathy with hypoalbuminaemia and consequent oedema, hypogammaglobulinaemia with susceptibility to infection, and lymphopenia, while impaired lymphatic transport of long-chain fats causes fat malabsorption.",
+  "additionalDifferentials": [
+   "Other causes of protein-losing enteropathy such as Menetrier disease",
+   "Nephrotic syndrome",
+   "Congestive cardiac failure and constrictive pericarditis",
+   "Cirrhosis with hypoalbuminaemia",
+   "Coeliac disease and other malabsorptive enteropathies",
+   "Inflammatory bowel disease"
+  ],
+  "additionalInvestigations": [
+   "Serum albumin, immunoglobulins and lymphocyte count",
+   "Faecal alpha-1-antitrypsin clearance to confirm enteric protein loss",
+   "Endoscopy with small-bowel biopsy showing dilated lymphatics",
+   "Cross-sectional imaging and capsule endoscopy to define extent and secondary causes",
+   "Assessment of fat-soluble vitamins and calcium"
+  ],
+  "redFlags": [
+   "Severe hypoalbuminaemia with anasarca and serous effusions",
+   "Recurrent or serious infection from immunoglobulin and lymphocyte depletion",
+   "Chylous ascites or chylothorax",
+   "Features suggesting an underlying malignancy or cardiac cause of secondary disease"
+  ],
+  "prognosis": "Primary disease is usually controlled but not cured by lifelong dietary modification; secondary disease may resolve if the underlying cause is treated, and prognosis then depends largely on that condition.",
+  "pitfalls": [
+   "Attributing hypoalbuminaemia to renal or hepatic causes without considering enteric protein loss",
+   "Missing patchy lymphangiectasia when only a single biopsy site is sampled",
+   "Overlooking a secondary cause such as cardiac disease or malignancy",
+   "Failing to substitute medium-chain triglycerides and monitor fat-soluble vitamins"
+  ],
+  "references": [
+   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+   "Yamada's Textbook of Gastroenterology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Institute a lifelong low-fat, high-protein diet with medium-chain triglyceride supplementation to bypass the obstructed lymphatics",
+   "Supplement fat-soluble vitamins and calcium to correct malabsorption",
+   "Treat the underlying cause in secondary disease, such as cardiac, malignant or infiltrative lymphatic obstruction",
+   "Support the protein-losing enteropathy with albumin for symptomatic hypoalbuminaemia and management of oedema and effusions",
+   "Consider a somatostatin analogue or antiplasmin agent in refractory disease and surgical resection of localised segmental involvement",
+   "Monitor albumin, immunoglobulins and lymphocyte count, with vigilance for infection given hypogammaglobulinaemia and lymphopenia",
+   "Provide dietetic and gastroenterology multidisciplinary follow-up"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "intestinal_lymphangiectasia-pathway",
+   "title": "Intestinal lymphangiectasia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Presents with peripheral oedema, sometimes effusions or chylous ascites, together with diarrhoea and features of malabsorption",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Severe hypoalbuminaemia with anasarca and serous effusions",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Serum albumin, immunoglobulins and lymphocyte count, Faecal alpha-1-antitrypsin clearance to confirm enteric protein loss, Endoscopy with small-bowel biopsy showing dilated lymphatics"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Institute a lifelong low-fat, high-protein diet with medium-chain triglyceride supplementation to bypass the obstructed lymphatics"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing hypoalbuminaemia to renal or hepatic causes without considering enteric protein loss"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of intestinal lymphangiectasia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "intestinal_lymphangiectasia-matrix",
+   "title": "Intestinal lymphangiectasia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Presents with peripheral oedema, sometimes effusions or chylous ascites, together with diarrhoea and features of malabsorption",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Intestinal lymphangiectasia is characterised by dilatation of the lymphatic channels of the small-bowel mucosa and submucosa, which may be a primary congenital anomaly or secondary to obstruction of lymphatic flow by cardiac disease, malignancy, infection or fibrosis. The dilated, incompetent lymphatics leak or rupture into the bowel lumen, causing loss of protein-rich lymph containing albumin, immunoglobulins and lymphocytes. This produces a protein-losing enteropathy with hypoalbuminaemia and consequent oedema, hypogammaglobulinaemia with susceptibility to infection, and lymphopenia, while impaired lymphatic transport of long-chain fats causes fat malabsorption.",
-    "additionalDifferentials": [
-      "Other causes of protein-losing enteropathy such as Menetrier disease",
-      "Nephrotic syndrome",
-      "Congestive cardiac failure and constrictive pericarditis",
-      "Cirrhosis with hypoalbuminaemia",
-      "Coeliac disease and other malabsorptive enteropathies",
-      "Inflammatory bowel disease"
+    [
+     "Key Investigations",
+     "Serum albumin, immunoglobulins and lymphocyte count, Faecal alpha-1-antitrypsin clearance to confirm enteric protein loss,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Serum albumin, immunoglobulins and lymphocyte count",
-      "Faecal alpha-1-antitrypsin clearance to confirm enteric protein loss",
-      "Endoscopy with small-bowel biopsy showing dilated lymphatics",
-      "Cross-sectional imaging and capsule endoscopy to define extent and secondary causes",
-      "Assessment of fat-soluble vitamins and calcium"
+    [
+     "Primary Differentials",
+     "Other causes of protein-losing enteropathy such as Menetrier disease, Nephrotic syndrome, Congestive cardiac failure and",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Severe hypoalbuminaemia with anasarca and serous effusions",
-      "Recurrent or serious infection from immunoglobulin and lymphocyte depletion",
-      "Chylous ascites or chylothorax",
-      "Features suggesting an underlying malignancy or cardiac cause of secondary disease"
+    [
+     "Management Strategy",
+     "Institute a lifelong low-fat, high-protein diet with medium-chain triglyceride supplementation to bypass the obstructed lymphatics",
+     "Core treatment modality"
     ],
-    "prognosis": "Primary disease is usually controlled but not cured by lifelong dietary modification; secondary disease may resolve if the underlying cause is treated, and prognosis then depends largely on that condition.",
-    "pitfalls": [
-      "Attributing hypoalbuminaemia to renal or hepatic causes without considering enteric protein loss",
-      "Missing patchy lymphangiectasia when only a single biopsy site is sampled",
-      "Overlooking a secondary cause such as cardiac disease or malignancy",
-      "Failing to substitute medium-chain triglycerides and monitor fat-soluble vitamins"
-    ],
-    "references": [
-      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-      "Yamada's Textbook of Gastroenterology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Institute a lifelong low-fat, high-protein diet with medium-chain triglyceride supplementation to bypass the obstructed lymphatics",
-      "Supplement fat-soluble vitamins and calcium to correct malabsorption",
-      "Treat the underlying cause in secondary disease, such as cardiac, malignant or infiltrative lymphatic obstruction",
-      "Support the protein-losing enteropathy with albumin for symptomatic hypoalbuminaemia and management of oedema and effusions",
-      "Consider a somatostatin analogue or antiplasmin agent in refractory disease and surgical resection of localised segmental involvement",
-      "Monitor albumin, immunoglobulins and lymphocyte count, with vigilance for infection given hypogammaglobulinaemia and lymphopenia",
-      "Provide dietetic and gastroenterology multidisciplinary follow-up"
+    [
+     "Clinical Pitfall",
+     "Attributing hypoalbuminaemia to renal or hepatic causes without considering enteric protein loss",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for intestinal lymphangiectasia."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "intestinal-lymphangiectasia-real-image",
+   "title": "Intestinal lymphangiectasia: Diagnostic Abdominal Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
+   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
+   "annotations": [
+    {
+     "label": "Solid Viscera",
+     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
+    },
+    {
+     "label": "Gastrointestinal Tract",
+     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
+    },
+    {
+     "label": "Mesentery & Peritoneum",
+     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+    }
+   ]
+  }
+ ]
 }

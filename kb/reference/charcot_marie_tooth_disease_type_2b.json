@@ -1,81 +1,176 @@
 {
-  "id": "charcot_marie_tooth_disease_type_2b",
-  "name": "Charcot-Marie-Tooth disease type 2B",
-  "aliases": [
-    "CMT2B",
-    "RAB7A",
-    "RAB7"
+ "id": "charcot_marie_tooth_disease_type_2b",
+ "name": "Charcot-Marie-Tooth disease type 2B",
+ "aliases": [
+  "CMT2B",
+  "RAB7A",
+  "RAB7"
+ ],
+ "class": "non_infective",
+ "system": "Neurology / Hereditary neuropathy",
+ "specialty": "Neurology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Neurogenetics references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Autosomal dominant axonal CMT distinguished by disproportionately severe sensory loss with acral complications.",
+   "Ulceromutilating features dominate: painless foot ulcers, recurrent soft-tissue infection, osteomyelitis, Charcot joints and sometimes autoamputation of toes.",
+   "Marked phenotypic overlap with hereditary sensory and autonomic neuropathy, so some pedigrees are difficult to classify.",
+   "Nerve conduction shows an axonal pattern with reduced sensory and motor amplitudes and relatively preserved velocities.",
+   "Caused by RAB7A missense mutations affecting a small GTPase that controls late endosomal and lysosomal trafficking.",
+   "Distal weakness and pes cavus occur, but the sensory and trophic features usually overshadow the motor deficit.",
+   "Meticulous foot care and injury prevention are the cornerstone of management to avoid mutilating complications."
   ],
-  "class": "non_infective",
-  "system": "Neurology / Hereditary neuropathy",
-  "specialty": "Neurology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Neurogenetics references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Autosomal dominant axonal CMT distinguished by disproportionately severe sensory loss with acral complications.",
-      "Ulceromutilating features dominate: painless foot ulcers, recurrent soft-tissue infection, osteomyelitis, Charcot joints and sometimes autoamputation of toes.",
-      "Marked phenotypic overlap with hereditary sensory and autonomic neuropathy, so some pedigrees are difficult to classify.",
-      "Nerve conduction shows an axonal pattern with reduced sensory and motor amplitudes and relatively preserved velocities.",
-      "Caused by RAB7A missense mutations affecting a small GTPase that controls late endosomal and lysosomal trafficking.",
-      "Distal weakness and pes cavus occur, but the sensory and trophic features usually overshadow the motor deficit.",
-      "Meticulous foot care and injury prevention are the cornerstone of management to avoid mutilating complications."
+  "pathophysiology": "Charcot-Marie-Tooth disease type 2B is caused by heterozygous missense mutations in RAB7A, which encodes a ubiquitously expressed small GTPase that regulates transport between late endosomes and lysosomes and the trafficking and signalling of neurotrophin receptors such as the nerve growth factor receptor. Disease-causing substitutions cluster around the guanine nucleotide-binding region and behave as gain-of-function or dysregulated variants that perturb the cycling between GTP-bound and GDP-bound states. The resulting aberrant endosomal signalling is thought to particularly affect the longest, most metabolically demanding sensory axons, producing a length-dependent axonal degeneration with striking sensory predominance and the trophic, ulceromutilating complications that characterise the subtype.",
+  "additionalDifferentials": [
+   "Hereditary sensory and autonomic neuropathy types I and II",
+   "CMT2A (MFN2 mutation)",
+   "Other CMT2 subtypes",
+   "Diabetic distal sensory neuropathy",
+   "Familial amyloid polyneuropathy",
+   "Leprous neuropathy",
+   "Alcohol-related or toxic sensory neuropathy"
+  ],
+  "additionalInvestigations": [
+   "Nerve conduction studies and electromyography confirming an axonal sensorimotor pattern",
+   "Hereditary neuropathy gene panel including RAB7A",
+   "Radiographs of feet for osteomyelitis and neuropathic (Charcot) joint changes",
+   "Structured skin and wound assessment of the feet",
+   "Screening to exclude acquired causes of a painless sensory neuropathy",
+   "Quantitative sensory testing to characterise the sensory deficit"
+  ],
+  "redFlags": [
+   "Painless deep ulcer with surrounding cellulitis or discharge suggesting osteomyelitis",
+   "Systemic features of sepsis arising from a foot infection",
+   "Rapidly progressive sensory loss pointing to an acquired cause",
+   "New autonomic instability"
+  ],
+  "prognosis": "Charcot-Marie-Tooth disease type 2B is slowly progressive with generally normal life expectancy, but morbidity is driven by recurrent foot ulceration, infection and the risk of amputation from the mutilating acropathy.",
+  "pitfalls": [
+   "Attributing foot ulcers purely to trauma or diabetes and missing the hereditary sensory neuropathy.",
+   "Providing inadequate protective footwear and foot surveillance, allowing preventable ulceration.",
+   "Classifying the disorder as a pure hereditary sensory neuropathy and overlooking coexisting motor involvement.",
+   "Delaying imaging for osteomyelitis because the ulcer is painless."
+  ],
+  "references": [
+   "Charcot-Marie-Tooth hereditary neuropathy overview (clinical genetics reference)",
+   "Peripheral neuropathy (Dyck and Thomas)",
+   "Adams and Victor's principles of neurology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "No disease-modifying drug therapy exists; care is supportive and rehabilitative through a neuromuscular multidisciplinary team",
+   "Meticulous protective foot care with regular podiatry, cushioned footwear and daily skin surveillance to pre-empt painless neuropathic ulceration",
+   "Prompt wound management with offloading, debridement and anti-staphylococcal antibiotics for infected ulcers and osteomyelitis",
+   "Orthopaedic management of neuropathic (Charcot) joints and acral deformity, with reconstructive surgery considered to avert autoamputation",
+   "Physiotherapy, stretching and ankle-foot orthoses for distal weakness and pes cavus",
+   "Neuropathic pain control with gabapentinoids or tricyclic agents",
+   "Avoidance of neurotoxic drugs such as vincristine that can accelerate axonal loss",
+   "Autosomal dominant genetic counselling and screening of at-risk relatives"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "charcot_marie_tooth_disease_type_2b-pathway",
+   "title": "Charcot-Marie-Tooth disease type 2B: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Autosomal dominant axonal CMT distinguished by disproportionately severe sensory loss with acral complications.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Painless deep ulcer with surrounding cellulitis or discharge suggesting osteomyelitis",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Nerve conduction studies and electromyography confirming an axonal sensorimotor pattern, Hereditary neuropathy gene panel including RAB7A, Radiographs of feet for osteomyelitis and neuropathic (Charcot) joint changes"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: No disease-modifying drug therapy exists; care is supportive and rehabilitative through a neuromuscular multidisciplinary team"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing foot ulcers purely to trauma or diabetes and missing the hereditary sensory neuropathy."
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of charcot-marie-tooth disease type 2b."
+  }
+ ],
+ "tables": [
+  {
+   "id": "charcot_marie_tooth_disease_type_2b-matrix",
+   "title": "Charcot-Marie-Tooth disease type 2B: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Autosomal dominant axonal CMT distinguished by disproportionately severe sensory loss with acral complications.",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Charcot-Marie-Tooth disease type 2B is caused by heterozygous missense mutations in RAB7A, which encodes a ubiquitously expressed small GTPase that regulates transport between late endosomes and lysosomes and the trafficking and signalling of neurotrophin receptors such as the nerve growth factor receptor. Disease-causing substitutions cluster around the guanine nucleotide-binding region and behave as gain-of-function or dysregulated variants that perturb the cycling between GTP-bound and GDP-bound states. The resulting aberrant endosomal signalling is thought to particularly affect the longest, most metabolically demanding sensory axons, producing a length-dependent axonal degeneration with striking sensory predominance and the trophic, ulceromutilating complications that characterise the subtype.",
-    "additionalDifferentials": [
-      "Hereditary sensory and autonomic neuropathy types I and II",
-      "CMT2A (MFN2 mutation)",
-      "Other CMT2 subtypes",
-      "Diabetic distal sensory neuropathy",
-      "Familial amyloid polyneuropathy",
-      "Leprous neuropathy",
-      "Alcohol-related or toxic sensory neuropathy"
+    [
+     "Key Investigations",
+     "Nerve conduction studies and electromyography confirming an axonal sensorimotor pattern, Hereditary neuropathy gene panel",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Nerve conduction studies and electromyography confirming an axonal sensorimotor pattern",
-      "Hereditary neuropathy gene panel including RAB7A",
-      "Radiographs of feet for osteomyelitis and neuropathic (Charcot) joint changes",
-      "Structured skin and wound assessment of the feet",
-      "Screening to exclude acquired causes of a painless sensory neuropathy",
-      "Quantitative sensory testing to characterise the sensory deficit"
+    [
+     "Primary Differentials",
+     "Hereditary sensory and autonomic neuropathy types I and II, CMT2A (MFN2 mutation), Other CMT2 subtypes",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Painless deep ulcer with surrounding cellulitis or discharge suggesting osteomyelitis",
-      "Systemic features of sepsis arising from a foot infection",
-      "Rapidly progressive sensory loss pointing to an acquired cause",
-      "New autonomic instability"
+    [
+     "Management Strategy",
+     "No disease-modifying drug therapy exists; care is supportive and rehabilitative through a neuromuscular multidisciplinary team",
+     "Core treatment modality"
     ],
-    "prognosis": "Charcot-Marie-Tooth disease type 2B is slowly progressive with generally normal life expectancy, but morbidity is driven by recurrent foot ulceration, infection and the risk of amputation from the mutilating acropathy.",
-    "pitfalls": [
-      "Attributing foot ulcers purely to trauma or diabetes and missing the hereditary sensory neuropathy.",
-      "Providing inadequate protective footwear and foot surveillance, allowing preventable ulceration.",
-      "Classifying the disorder as a pure hereditary sensory neuropathy and overlooking coexisting motor involvement.",
-      "Delaying imaging for osteomyelitis because the ulcer is painless."
-    ],
-    "references": [
-      "Charcot-Marie-Tooth hereditary neuropathy overview (clinical genetics reference)",
-      "Peripheral neuropathy (Dyck and Thomas)",
-      "Adams and Victor's principles of neurology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "No disease-modifying drug therapy exists; care is supportive and rehabilitative through a neuromuscular multidisciplinary team",
-      "Meticulous protective foot care with regular podiatry, cushioned footwear and daily skin surveillance to pre-empt painless neuropathic ulceration",
-      "Prompt wound management with offloading, debridement and anti-staphylococcal antibiotics for infected ulcers and osteomyelitis",
-      "Orthopaedic management of neuropathic (Charcot) joints and acral deformity, with reconstructive surgery considered to avert autoamputation",
-      "Physiotherapy, stretching and ankle-foot orthoses for distal weakness and pes cavus",
-      "Neuropathic pain control with gabapentinoids or tricyclic agents",
-      "Avoidance of neurotoxic drugs such as vincristine that can accelerate axonal loss",
-      "Autosomal dominant genetic counselling and screening of at-risk relatives"
+    [
+     "Clinical Pitfall",
+     "Attributing foot ulcers purely to trauma or diabetes and missing the hereditary sensory neuropathy.",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for charcot-marie-tooth disease type 2b."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "charcot-marie-tooth-disease-type-2b-real-image",
+   "title": "Charcot-Marie-Tooth disease type 2B: Diagnostic Head Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
+   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
+   "annotations": [
+    {
+     "label": "Cerebral Parenchyma",
+     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+    },
+    {
+     "label": "Extra-Axial Spaces",
+     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+    }
+   ]
+  }
+ ]
 }

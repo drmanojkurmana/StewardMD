@@ -78,6 +78,12 @@ done
 # in the bundle, else the native WebView can't reach the CDN and every ligature icon
 # renders as its text name ("monitor_heart"…). @font-face lives in redesign-system.css. ─
 if [ -d assets/fonts ]; then mkdir -p "$WWW/assets/fonts"; cp assets/fonts/* "$WWW/assets/fonts/" 2>/dev/null || true; fi
+# Knowledge Base clinical diagrams (kb-protocols.js "diagrams": annotated ECG/X-ray/CT SVGs under
+# assets/kb-diagrams/, referenced as /assets/kb-diagrams/<name>.svg). Small vector files, so they
+# ship in the bundle and render offline; without this the reader's <img> 404s on-device.
+if [ -d assets/kb-diagrams ]; then mkdir -p "$WWW/assets/kb-diagrams"; cp assets/kb-diagrams/*.svg "$WWW/assets/kb-diagrams/" 2>/dev/null || true; fi
+# Knowledge Base real clinical images (authentic X-rays, CTs, ECGs, photographs under assets/kb-real-images/)
+if [ -d assets/kb-real-images ]; then mkdir -p "$WWW/assets/kb-real-images"; cp assets/kb-real-images/* "$WWW/assets/kb-real-images/" 2>/dev/null || true; fi
 # Learn-ECG atlas images (bundled ECGs for kardiox-content-pack.js lessons)
 # Learn-ECG atlas images (~182 MB, 1,007 lessons) are intentionally NOT bundled — that would
 # bloat the native download. They are served on-demand from Pages (stewardmd.in/assets/kardiox-learn);
@@ -246,7 +252,9 @@ if [ -f prep/taxonomy.json ]; then
   # Public accuracy numbers (tools/prep-accuracy.mjs; PrepSocial.openAccuracy() reads it), a few KB.
   [ -f prep/accuracy.json ] && cp prep/accuracy.json "$WWW/prep/"
   [ -d prep/profiles ] && mkdir -p "$WWW/prep/profiles" && cp prep/profiles/*.json "$WWW/prep/profiles/"
-  for ix in prep/bank/v1/*/index.json; do [ -f "$ix" ] && mkdir -p "$WWW/$(dirname "$ix")" && cp "$ix" "$WWW/$ix"; done
+  # Illustrations (home sky, brand banner, logo icon, onboarding, finish screens, Arena lobby, empty states).
+  [ -d prep/art ] && mkdir -p "$WWW/prep/art" && for a in prep/art/*.webp; do case "$a" in *-4k.webp) ;; *) cp "$a" "$WWW/prep/art/";; esac; done  # 4K masters and PNGs stay out of the app bundle
+  BV=$(sed -n 's/.*VER = G.SMD_PREP_BANK_VER || "\(v[0-9]*\)".*/\1/p' prep.js); for ix in prep/bank/${BV:-v1}/*/index.json; do [ -f "$ix" ] && mkdir -p "$WWW/$(dirname "$ix")" && cp "$ix" "$WWW/$ix"; done
   # Lessons (prep-lessons.js): the committed pilot lessons, their index and their original diagrams, a few KB each.
   # tools/prep-lessons.mjs work files (prep/lessons/work) never ship.
   if [ -f prep/lessons/v1/index.json ]; then

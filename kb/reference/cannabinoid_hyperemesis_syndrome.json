@@ -1,73 +1,168 @@
 {
-  "id": "cannabinoid_hyperemesis_syndrome",
-  "name": "Cannabinoid hyperemesis syndrome",
-  "aliases": [
-    "CHS"
+ "id": "cannabinoid_hyperemesis_syndrome",
+ "name": "Cannabinoid hyperemesis syndrome",
+ "aliases": [
+  "CHS"
+ ],
+ "class": "non_infective",
+ "system": "Gastrointestinal",
+ "specialty": "Gastroenterology / Emergency medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Gastroenterology and toxicology references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Recurrent episodes of severe nausea and vomiting in the context of long-term, regular cannabis use",
+   "A highly characteristic feature is temporary symptom relief from hot showers or baths",
+   "The clinical pattern resembles cyclic vomiting syndrome, with well periods between attacks",
+   "It is frequently misdiagnosed, and patients often undergo repeated investigations before it is recognised",
+   "Definitive resolution follows sustained cessation of cannabis, which is both diagnostic and therapeutic",
+   "Acute episodes are managed supportively, and topical capsaicin and certain antiemetic or sedative agents are used adjunctively"
   ],
-  "class": "non_infective",
-  "system": "Gastrointestinal",
-  "specialty": "Gastroenterology / Emergency medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Gastroenterology and toxicology references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Recurrent episodes of severe nausea and vomiting in the context of long-term, regular cannabis use",
-      "A highly characteristic feature is temporary symptom relief from hot showers or baths",
-      "The clinical pattern resembles cyclic vomiting syndrome, with well periods between attacks",
-      "It is frequently misdiagnosed, and patients often undergo repeated investigations before it is recognised",
-      "Definitive resolution follows sustained cessation of cannabis, which is both diagnostic and therapeutic",
-      "Acute episodes are managed supportively, and topical capsaicin and certain antiemetic or sedative agents are used adjunctively"
+  "pathophysiology": "Cannabinoid hyperemesis syndrome is a paradoxical effect of chronic cannabis use, in which prolonged stimulation of the endocannabinoid system disrupts its normal regulation of gastrointestinal motility, the emetic reflex and thermoregulation. Proposed mechanisms include downregulation or dysregulation of cannabinoid receptors and effects on hypothalamic thermoregulatory centres, which may explain the relief obtained from hot water. The syndrome resolves when the causative cannabinoid exposure is removed, confirming its central role.",
+  "additionalDifferentials": [
+   "Cyclic vomiting syndrome",
+   "Gastroparesis",
+   "Bowel obstruction",
+   "Raised intracranial pressure or other central cause of vomiting",
+   "Metabolic or endocrine causes of recurrent vomiting"
+  ],
+  "additionalInvestigations": [
+   "History of chronic cannabis use and the hot-water bathing behaviour",
+   "Targeted tests to exclude obstruction and metabolic causes rather than repeated broad workup",
+   "Assessment of hydration and electrolytes during acute episodes",
+   "Consideration of cyclic vomiting syndrome in the differential",
+   "Confirmation by resolution with cannabis cessation"
+  ],
+  "redFlags": [
+   "Severe dehydration or electrolyte disturbance",
+   "Features suggesting bowel obstruction",
+   "Neurological signs suggesting a central cause",
+   "Haematemesis or severe abdominal pain"
+  ],
+  "prognosis": "The syndrome resolves fully with sustained cannabis cessation, but recurs if use resumes; complications relate mainly to dehydration and electrolyte disturbance during severe attacks.",
+  "pitfalls": [
+   "Not asking about cannabis use and the hot-water pattern",
+   "Repeated extensive investigation before recognising the syndrome",
+   "Attributing episodes to cyclic vomiting syndrome without exploring cannabis use",
+   "Overlooking dehydration and electrolyte disturbance in acute attacks"
+  ],
+  "references": [
+   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+   "Toxicology references (standard reference)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Achieve definitive resolution through sustained cessation of cannabis, which is both diagnostic and therapeutic",
+   "Rehydrate with intravenous fluids and correct electrolyte disturbance during acute episodes",
+   "Apply topical capsaicin cream to the abdomen for symptom relief in acute attacks",
+   "Use adjunctive antiemetic or sedative agents such as a dopamine antagonist or a benzodiazepine, as conventional antiemetics are often ineffective",
+   "Support the temporary relief patients obtain from hot showers while cautioning against scald injury",
+   "Refer for cessation support and addiction services to prevent recurrence",
+   "Avoid repeated broad investigations once the pattern is recognised, testing only to exclude obstruction or metabolic causes"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "cannabinoid_hyperemesis_syndrome-pathway",
+   "title": "Cannabinoid hyperemesis syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Recurrent episodes of severe nausea and vomiting in the context of long-term, regular cannabis use",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Severe dehydration or electrolyte disturbance",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: History of chronic cannabis use and the hot-water bathing behaviour, Targeted tests to exclude obstruction and metabolic causes rather than repeated broad workup, Assessment of hydration and electrolytes during acute"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Achieve definitive resolution through sustained cessation of cannabis, which is both diagnostic and therapeutic"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Not asking about cannabis use and the hot-water pattern"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of cannabinoid hyperemesis syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "cannabinoid_hyperemesis_syndrome-matrix",
+   "title": "Cannabinoid hyperemesis syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Recurrent episodes of severe nausea and vomiting in the context of long-term, regular cannabis use",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Cannabinoid hyperemesis syndrome is a paradoxical effect of chronic cannabis use, in which prolonged stimulation of the endocannabinoid system disrupts its normal regulation of gastrointestinal motility, the emetic reflex and thermoregulation. Proposed mechanisms include downregulation or dysregulation of cannabinoid receptors and effects on hypothalamic thermoregulatory centres, which may explain the relief obtained from hot water. The syndrome resolves when the causative cannabinoid exposure is removed, confirming its central role.",
-    "additionalDifferentials": [
-      "Cyclic vomiting syndrome",
-      "Gastroparesis",
-      "Bowel obstruction",
-      "Raised intracranial pressure or other central cause of vomiting",
-      "Metabolic or endocrine causes of recurrent vomiting"
+    [
+     "Key Investigations",
+     "History of chronic cannabis use and the hot-water bathing behaviour, Targeted tests to exclude obstruction and metabolic causes",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "History of chronic cannabis use and the hot-water bathing behaviour",
-      "Targeted tests to exclude obstruction and metabolic causes rather than repeated broad workup",
-      "Assessment of hydration and electrolytes during acute episodes",
-      "Consideration of cyclic vomiting syndrome in the differential",
-      "Confirmation by resolution with cannabis cessation"
+    [
+     "Primary Differentials",
+     "Cyclic vomiting syndrome, Gastroparesis, Bowel obstruction",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Severe dehydration or electrolyte disturbance",
-      "Features suggesting bowel obstruction",
-      "Neurological signs suggesting a central cause",
-      "Haematemesis or severe abdominal pain"
+    [
+     "Management Strategy",
+     "Achieve definitive resolution through sustained cessation of cannabis, which is both diagnostic and therapeutic",
+     "Core treatment modality"
     ],
-    "prognosis": "The syndrome resolves fully with sustained cannabis cessation, but recurs if use resumes; complications relate mainly to dehydration and electrolyte disturbance during severe attacks.",
-    "pitfalls": [
-      "Not asking about cannabis use and the hot-water pattern",
-      "Repeated extensive investigation before recognising the syndrome",
-      "Attributing episodes to cyclic vomiting syndrome without exploring cannabis use",
-      "Overlooking dehydration and electrolyte disturbance in acute attacks"
-    ],
-    "references": [
-      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-      "Toxicology references (standard reference)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Achieve definitive resolution through sustained cessation of cannabis, which is both diagnostic and therapeutic",
-      "Rehydrate with intravenous fluids and correct electrolyte disturbance during acute episodes",
-      "Apply topical capsaicin cream to the abdomen for symptom relief in acute attacks",
-      "Use adjunctive antiemetic or sedative agents such as a dopamine antagonist or a benzodiazepine, as conventional antiemetics are often ineffective",
-      "Support the temporary relief patients obtain from hot showers while cautioning against scald injury",
-      "Refer for cessation support and addiction services to prevent recurrence",
-      "Avoid repeated broad investigations once the pattern is recognised, testing only to exclude obstruction or metabolic causes"
+    [
+     "Clinical Pitfall",
+     "Not asking about cannabis use and the hot-water pattern",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for cannabinoid hyperemesis syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "cannabinoid-hyperemesis-syndrome-real-image",
+   "title": "Cannabinoid hyperemesis syndrome: Diagnostic Abdominal Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
+   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
+   "annotations": [
+    {
+     "label": "Solid Viscera",
+     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
+    },
+    {
+     "label": "Gastrointestinal Tract",
+     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
+    },
+    {
+     "label": "Mesentery & Peritoneum",
+     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+    }
+   ]
+  }
+ ]
 }

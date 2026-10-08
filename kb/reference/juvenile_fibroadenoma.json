@@ -1,82 +1,177 @@
 {
-  "id": "juvenile_fibroadenoma",
-  "name": "Juvenile fibroadenoma",
-  "aliases": [
-    "Cellular fibroadenoma",
-    "Giant juvenile fibroadenoma"
+ "id": "juvenile_fibroadenoma",
+ "name": "Juvenile fibroadenoma",
+ "aliases": [
+  "Cellular fibroadenoma",
+  "Giant juvenile fibroadenoma"
+ ],
+ "class": "non_infective",
+ "system": "Breast",
+ "specialty": "Breast surgery / Pathology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "WHO Classification of Tumours: Breast Tumours",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A variant of fibroadenoma occurring predominantly in adolescents and young women, characterised by increased stromal cellularity and epithelial hyperplasia.",
+   "Tends to grow more rapidly and reach a larger size than the common adult fibroadenoma; large lesions are termed giant juvenile fibroadenoma.",
+   "Presents as a firm, mobile, painless mass that may cause obvious breast asymmetry, skin stretching and dilated overlying veins.",
+   "Rapid growth can compress and displace surrounding normal breast tissue rather than invading it.",
+   "Ultrasound is the imaging modality of choice in this young age group, showing a well-defined solid mass.",
+   "The principal differential on core biopsy is a benign phyllodes tumour, which juvenile fibroadenoma can closely resemble.",
+   "Treatment is enucleation or excision, preserving the developing breast and nipple where possible; the outlook is excellent.",
+   "Despite alarming size and rapid growth, it is entirely benign with negligible malignant potential."
   ],
-  "class": "non_infective",
-  "system": "Breast",
-  "specialty": "Breast surgery / Pathology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "WHO Classification of Tumours: Breast Tumours",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A variant of fibroadenoma occurring predominantly in adolescents and young women, characterised by increased stromal cellularity and epithelial hyperplasia.",
-      "Tends to grow more rapidly and reach a larger size than the common adult fibroadenoma; large lesions are termed giant juvenile fibroadenoma.",
-      "Presents as a firm, mobile, painless mass that may cause obvious breast asymmetry, skin stretching and dilated overlying veins.",
-      "Rapid growth can compress and displace surrounding normal breast tissue rather than invading it.",
-      "Ultrasound is the imaging modality of choice in this young age group, showing a well-defined solid mass.",
-      "The principal differential on core biopsy is a benign phyllodes tumour, which juvenile fibroadenoma can closely resemble.",
-      "Treatment is enucleation or excision, preserving the developing breast and nipple where possible; the outlook is excellent.",
-      "Despite alarming size and rapid growth, it is entirely benign with negligible malignant potential."
+  "pathophysiology": "Juvenile fibroadenoma is a benign biphasic fibroepithelial tumour arising from the hormone-responsive stroma of the terminal duct lobular unit, most likely reflecting an exaggerated proliferative response to the hormonal milieu of adolescence. It differs from the ordinary adult fibroadenoma in its greater stromal cellularity and its pericanalicular growth pattern with florid, sometimes gynaecomastoid, epithelial hyperplasia. This heightened cellular activity drives the characteristic rapid enlargement and large size, yet the stroma lacks the atypia, mitotic activity, leaf-like architecture and overgrowth that define a phyllodes tumour, so the lesion remains benign.",
+  "additionalDifferentials": [
+   "Benign phyllodes tumour",
+   "Ordinary adult fibroadenoma",
+   "Pseudoangiomatous stromal hyperplasia forming a mass",
+   "Virginal (juvenile) breast hypertrophy",
+   "Breast hamartoma",
+   "Tubular or lactating adenoma",
+   "Secretory carcinoma (rare in adolescents)"
+  ],
+  "additionalInvestigations": [
+   "Clinical breast examination with documentation of size and asymmetry",
+   "Breast ultrasound as first-line imaging in adolescents",
+   "Core needle biopsy to characterise the fibroepithelial lesion",
+   "Histology assessing stromal cellularity, atypia and architecture",
+   "MRI in very large lesions to plan excision",
+   "Follow-up imaging to confirm stability or excision completeness",
+   "Multidisciplinary review if phyllodes tumour cannot be excluded"
+  ],
+  "redFlags": [
+   "Very rapid enlargement with skin compromise or ulceration",
+   "Histological features raising the possibility of a phyllodes tumour",
+   "Stromal overgrowth or mitotic activity on biopsy",
+   "Recurrence after excision",
+   "Skin changes or fixity atypical for a benign lesion"
+  ],
+  "prognosis": "Juvenile fibroadenoma is benign with an excellent prognosis after complete excision, and malignant transformation is not a feature. Recurrence is uncommon, though further fibroadenomas may develop elsewhere in the breast over time.",
+  "pitfalls": [
+   "Misclassifying a benign phyllodes tumour as juvenile fibroadenoma on limited biopsy",
+   "Delaying excision of a large lesion and allowing further distortion of the developing breast",
+   "Performing overly aggressive surgery that damages the breast bud or nipple in an adolescent",
+   "Confusing the lesion with virginal breast hypertrophy",
+   "Assuming rapid growth implies malignancy and causing unnecessary alarm"
+  ],
+  "references": [
+   "WHO Classification of Tumours: Breast Tumours (current edition)",
+   "Standard textbook of paediatric and adolescent breast disorders",
+   "National guidance on management of fibroepithelial breast lesions"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Confirm the benign fibroepithelial nature with ultrasound-guided core biopsy to distinguish it from a phyllodes tumour before deciding treatment",
+   "Excise (enucleate) large or giant lesions and those causing asymmetry or overlying skin compromise",
+   "Preserve the developing breast bud and normal breast tissue during surgery in adolescents and use oncoplastic techniques for large defects",
+   "Observe small, asymptomatic, radiologically typical lesions with interval ultrasound follow-up",
+   "Provide reassurance about the benign course and negligible malignant potential",
+   "Arrange follow-up imaging to confirm stability or completeness of excision and to detect further fibroadenomas"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "juvenile_fibroadenoma-pathway",
+   "title": "Juvenile fibroadenoma: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A variant of fibroadenoma occurring predominantly in adolescents and young women, characterised by increased stromal cellularity and epithelial hyperplasia.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Very rapid enlargement with skin compromise or ulceration",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Clinical breast examination with documentation of size and asymmetry, Breast ultrasound as first-line imaging in adolescents, Core needle biopsy to characterise the fibroepithelial lesion"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Confirm the benign fibroepithelial nature with ultrasound-guided core biopsy to distinguish it from a phyllodes tumour before deciding treatment"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Misclassifying a benign phyllodes tumour as juvenile fibroadenoma on limited biopsy"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of juvenile fibroadenoma."
+  }
+ ],
+ "tables": [
+  {
+   "id": "juvenile_fibroadenoma-matrix",
+   "title": "Juvenile fibroadenoma: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A variant of fibroadenoma occurring predominantly in adolescents and young women, characterised by increased stromal cellularity",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Juvenile fibroadenoma is a benign biphasic fibroepithelial tumour arising from the hormone-responsive stroma of the terminal duct lobular unit, most likely reflecting an exaggerated proliferative response to the hormonal milieu of adolescence. It differs from the ordinary adult fibroadenoma in its greater stromal cellularity and its pericanalicular growth pattern with florid, sometimes gynaecomastoid, epithelial hyperplasia. This heightened cellular activity drives the characteristic rapid enlargement and large size, yet the stroma lacks the atypia, mitotic activity, leaf-like architecture and overgrowth that define a phyllodes tumour, so the lesion remains benign.",
-    "additionalDifferentials": [
-      "Benign phyllodes tumour",
-      "Ordinary adult fibroadenoma",
-      "Pseudoangiomatous stromal hyperplasia forming a mass",
-      "Virginal (juvenile) breast hypertrophy",
-      "Breast hamartoma",
-      "Tubular or lactating adenoma",
-      "Secretory carcinoma (rare in adolescents)"
+    [
+     "Key Investigations",
+     "Clinical breast examination with documentation of size and asymmetry, Breast ultrasound as first-line imaging in adolescents,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Clinical breast examination with documentation of size and asymmetry",
-      "Breast ultrasound as first-line imaging in adolescents",
-      "Core needle biopsy to characterise the fibroepithelial lesion",
-      "Histology assessing stromal cellularity, atypia and architecture",
-      "MRI in very large lesions to plan excision",
-      "Follow-up imaging to confirm stability or excision completeness",
-      "Multidisciplinary review if phyllodes tumour cannot be excluded"
+    [
+     "Primary Differentials",
+     "Benign phyllodes tumour, Ordinary adult fibroadenoma, Pseudoangiomatous stromal hyperplasia forming a mass",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Very rapid enlargement with skin compromise or ulceration",
-      "Histological features raising the possibility of a phyllodes tumour",
-      "Stromal overgrowth or mitotic activity on biopsy",
-      "Recurrence after excision",
-      "Skin changes or fixity atypical for a benign lesion"
+    [
+     "Management Strategy",
+     "Confirm the benign fibroepithelial nature with ultrasound-guided core biopsy to distinguish it from a phyllodes tumour before",
+     "Core treatment modality"
     ],
-    "prognosis": "Juvenile fibroadenoma is benign with an excellent prognosis after complete excision, and malignant transformation is not a feature. Recurrence is uncommon, though further fibroadenomas may develop elsewhere in the breast over time.",
-    "pitfalls": [
-      "Misclassifying a benign phyllodes tumour as juvenile fibroadenoma on limited biopsy",
-      "Delaying excision of a large lesion and allowing further distortion of the developing breast",
-      "Performing overly aggressive surgery that damages the breast bud or nipple in an adolescent",
-      "Confusing the lesion with virginal breast hypertrophy",
-      "Assuming rapid growth implies malignancy and causing unnecessary alarm"
-    ],
-    "references": [
-      "WHO Classification of Tumours: Breast Tumours (current edition)",
-      "Standard textbook of paediatric and adolescent breast disorders",
-      "National guidance on management of fibroepithelial breast lesions"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Confirm the benign fibroepithelial nature with ultrasound-guided core biopsy to distinguish it from a phyllodes tumour before deciding treatment",
-      "Excise (enucleate) large or giant lesions and those causing asymmetry or overlying skin compromise",
-      "Preserve the developing breast bud and normal breast tissue during surgery in adolescents and use oncoplastic techniques for large defects",
-      "Observe small, asymptomatic, radiologically typical lesions with interval ultrasound follow-up",
-      "Provide reassurance about the benign course and negligible malignant potential",
-      "Arrange follow-up imaging to confirm stability or completeness of excision and to detect further fibroadenomas"
+    [
+     "Clinical Pitfall",
+     "Misclassifying a benign phyllodes tumour as juvenile fibroadenoma on limited biopsy",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for juvenile fibroadenoma."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "juvenile-fibroadenoma-real-image",
+   "title": "Juvenile fibroadenoma: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

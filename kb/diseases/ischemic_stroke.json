@@ -166,5 +166,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "hc817e151"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "ischemic_stroke-dx-algo",
+      "title": "Acute ischemic stroke: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Stroke is a clinical diagnosis: abrupt-onset focal neurologic deficit from a vascular cause; imaging is used to support it and to separate ischemia from hemorrhage (p.3427).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Disabling deficit (NIHSS >5) - candidate for thrombolysis and/or thrombectomy; act fast",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Finger-stick blood glucose - one of only two tests (with brain imaging) truly required before IV thrombolysis, ECG and continuous cardiac telemetry to detect atrial fibrillation or recent MI; ambulatory monitoring if AF"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Severity is graded clinically by the National Institutes of Health Stroke Scale (NIHSS). A disabling deficit (NIHSS >5) flags potential eligibility for thrombolysis/endovascular therapy, whereas minor non-disabling"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Treating a stroke mimic as stroke: a postictal (Todd's) paralysis, acephalgic migraine, or hypoglycaemia can convincingly imitate acute stroke - always confirm glucose and seek an observer history of convulsive onset."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for acute ischemic stroke."
+    }
+  ],
+  "tables": [
+    {
+      "id": "ischemic_stroke-matrix",
+      "title": "Acute ischemic stroke: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Stroke is a clinical diagnosis: abrupt-onset focal neurologic deficit from a vascular cause; imaging is used to support it and to",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Finger-stick blood glucose - one of only two tests (with brain imaging) truly required before IV thrombolysis, ECG and continuous",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Intracerebral hemorrhage (must be excluded by CT before reperfusion), Transient ischemic attack (deficit fully resolving within",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Disabling deficit (NIHSS >5) - candidate for thrombolysis and/or thrombectomy; act fast",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating a stroke mimic as stroke: a postictal (Todd's) paralysis, acephalgic migraine, or hypoglycaemia can convincingly imitate",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for acute ischemic stroke."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "ischemic-stroke-real-image",
+      "title": "Acute ischemic stroke: Non-Contrast Head CT (Acute Ischemic Infarct)",
+      "type": "ct",
+      "src": "/assets/kb-real-images/ischemic-stroke-ct.jpg?v=kbri3",
+      "caption": "Real non-contrast head computed tomography scan demonstrating acute parenchymal hypodensity, loss of gray-white matter differentiation, and sulcal effacement.",
+      "annotations": [
+        {
+          "label": "Parenchymal Hypodensity",
+          "description": "Wedge-shaped territorial low-attenuation edema conforming to vascular territory."
+        },
+        {
+          "label": "Sulcal Effacement",
+          "description": "Loss of cortical sulcal definition due to local cytotoxic tissue swelling."
+        },
+        {
+          "label": "Insular Ribbon Sign",
+          "description": "Loss of definition of the gray-white interface in the insular cortex."
+        }
+      ]
+    }
+  ]
 }

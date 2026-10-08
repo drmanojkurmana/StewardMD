@@ -5,7 +5,19 @@
  "population": "Adults",
  "basis": "international",
  "setting": "Emergency department, ICU",
- "aliases": ["TCA overdose", "TCA poisoning", "tricyclic poisoning", "amitriptyline overdose", "imipramine", "dothiepin", "dosulepin", "nortriptyline", "sodium channel blocker poisoning", "QRS widening", "sodium bicarbonate"],
+ "aliases": [
+  "TCA overdose",
+  "TCA poisoning",
+  "tricyclic poisoning",
+  "amitriptyline overdose",
+  "imipramine",
+  "dothiepin",
+  "dosulepin",
+  "nortriptyline",
+  "sodium channel blocker poisoning",
+  "QRS widening",
+  "sodium bicarbonate"
+ ],
  "summary": "TCA overdose causes coma, seizures, hypotension and sodium channel blockade with QRS widening. Give sodium bicarbonate 1 to 2 mEq/kg IV boluses for QRS above 100 ms, arrhythmia or hypotension, targeting pH 7.45 to 7.55; treat seizures with benzodiazepines; avoid physostigmine, flumazenil, phenytoin and class IA or IC antiarrhythmics.",
  "sections": [
   {
@@ -72,17 +84,154 @@
   }
  ],
  "drugs": [
-  { "name": "Sodium bicarbonate 8.4%", "dose": "1 to 2 mEq/kg (1 to 2 mL/kg) IV bolus, repeated until QRS narrows", "notes": "Target pH 7.45 to 7.55; monitor sodium and potassium." },
-  { "name": "Lidocaine", "dose": "1 to 1.5 mg/kg IV bolus", "notes": "Ventricular arrhythmia refractory to bicarbonate." },
-  { "name": "Lorazepam", "dose": "2 to 4 mg IV (0.1 mg/kg, max 4 mg), repeat once", "notes": "Seizures; alternative diazepam 10 mg IV." },
-  { "name": "Noradrenaline (norepinephrine)", "dose": "Start 0.05 to 0.1 mcg/kg/min IV, titrate to MAP 65 mmHg", "notes": "Hypotension after fluids and bicarbonate." },
-  { "name": "Activated charcoal", "dose": "50 g orally once, within 1 hour", "notes": "Only with a protected airway." },
-  { "name": "Lipid emulsion 20%", "dose": "1.5 mL/kg IV bolus, then 0.25 mL/kg/min", "notes": "Rescue only; weak evidence." }
+  {
+   "name": "Sodium bicarbonate 8.4%",
+   "dose": "1 to 2 mEq/kg (1 to 2 mL/kg) IV bolus, repeated until QRS narrows",
+   "notes": "Target pH 7.45 to 7.55; monitor sodium and potassium."
+  },
+  {
+   "name": "Lidocaine",
+   "dose": "1 to 1.5 mg/kg IV bolus",
+   "notes": "Ventricular arrhythmia refractory to bicarbonate."
+  },
+  {
+   "name": "Lorazepam",
+   "dose": "2 to 4 mg IV (0.1 mg/kg, max 4 mg), repeat once",
+   "notes": "Seizures; alternative diazepam 10 mg IV."
+  },
+  {
+   "name": "Noradrenaline (norepinephrine)",
+   "dose": "Start 0.05 to 0.1 mcg/kg/min IV, titrate to MAP 65 mmHg",
+   "notes": "Hypotension after fluids and bicarbonate."
+  },
+  {
+   "name": "Activated charcoal",
+   "dose": "50 g orally once, within 1 hour",
+   "notes": "Only with a protected airway."
+  },
+  {
+   "name": "Lipid emulsion 20%",
+   "dose": "1.5 mL/kg IV bolus, then 0.25 mL/kg/min",
+   "notes": "Rescue only; weak evidence."
+  }
  ],
  "sources": [
-  { "org": "AHA", "title": "2023 American Heart Association Focused Update on the Management of Patients With Cardiac Arrest or Life-Threatening Toxicity Due to Poisoning", "year": 2023, "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001161" },
-  { "org": "EXTRIP Workgroup (Seminars in Dialysis)", "title": "Extracorporeal Treatment for Tricyclic Antidepressant Poisoning: Recommendations from the EXTRIP Workgroup", "year": 2014, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4282541/" },
-  { "org": "ISCCM", "title": "Indian Society of Critical Care Medicine Position Statement: Approach to a Patient with Poisoning in the Emergency Room and Intensive Care Unit", "year": 2024, "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11369925/" }
+  {
+   "org": "AHA",
+   "title": "2023 American Heart Association Focused Update on the Management of Patients With Cardiac Arrest or Life-Threatening Toxicity Due to Poisoning",
+   "year": 2023,
+   "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001161"
+  },
+  {
+   "org": "EXTRIP Workgroup (Seminars in Dialysis)",
+   "title": "Extracorporeal Treatment for Tricyclic Antidepressant Poisoning: Recommendations from the EXTRIP Workgroup",
+   "year": 2014,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4282541/"
+  },
+  {
+   "org": "ISCCM",
+   "title": "Indian Society of Critical Care Medicine Position Statement: Approach to a Patient with Poisoning in the Emergency Room and Intensive Care Unit",
+   "year": 2024,
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11369925/"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "tricyclic-antidepressant-overdose-pathway",
+   "title": "Tricyclic antidepressant (TCA) overdose Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Severe toxicity develops within the first few hours: anticholinergic features (tachycardia, mydriasis, dry skin, urinary retention, delirium), then coma, seizures, hypotension and arrhythmias.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "ABC; continuous ECG monitoring and a 12-lead ECG on arrival, repeated serially. Check glucose and a blood gas.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "ECG danger signs: QRS above 100 ms (seizure risk) and above 160 ms (ventricular arrhythmia risk), terminal R wave in aVR above 3 mm, right axis deviation of the terminal QRS, Brugada-like pattern."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Ventricular tachycardia: sodium bicarbonate first; lidocaine 1 to 1.5 mg/kg IV if refractory. Avoid class IA (procainamide) and IC (flecainide) antiarrhythmics and amiodarone."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Continuous ECG and BP; repeat 12-lead ECGs and blood gases while on bicarbonate."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for tricyclic antidepressant (tca) overdose."
+  }
+ ],
+ "tables": [
+  {
+   "id": "tricyclic-antidepressant-overdose-summary-matrix",
+   "title": "Tricyclic antidepressant (TCA) overdose Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Severe toxicity develops within the first few hours: anticholinergic features (tachycardia, mydriasis, dry skin, urinary retention,",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "ABC; continuous ECG monitoring and a 12-lead ECG on arrival, repeated serially. Check glucose and a blood gas.",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Sodium bicarbonate 8.4%: 1 to 2 mEq/kg (1 to 2 mL/kg) IV bolus, repeated until QRS narrows",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Physostigmine for anticholinergic delirium in TCA overdose: risk of bradycardia and asystole.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for tricyclic antidepressant (tca) overdose."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "tricyclic-antidepressant-overdose-real-image",
+   "title": "Tricyclic antidepressant (TCA) overdose: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

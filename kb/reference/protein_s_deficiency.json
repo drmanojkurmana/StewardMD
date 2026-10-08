@@ -1,74 +1,169 @@
 {
-  "id": "protein_s_deficiency",
-  "name": "Protein S deficiency",
-  "aliases": [
-    "PROS1 deficiency",
-    "hereditary protein S deficiency"
+ "id": "protein_s_deficiency",
+ "name": "Protein S deficiency",
+ "aliases": [
+  "PROS1 deficiency",
+  "hereditary protein S deficiency"
+ ],
+ "class": "non_infective",
+ "system": "Haematology / Transfusion",
+ "specialty": "Transfusion & Haemostasis Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Harrison's Principles of Internal Medicine / AABB Technical Manual",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Protein S is a vitamin K-dependent cofactor that enhances the anticoagulant action of activated protein C; its deficiency predisposes to venous thromboembolism",
+   "Only free protein S is functionally active, because much of it circulates bound to C4b-binding protein",
+   "Deficiency is classified by total antigen, free antigen, and functional activity, which distinguish the different subtypes",
+   "Levels are physiologically lowered by pregnancy, oestrogen therapy, and the acute-phase response, and by vitamin K antagonists, so testing timing strongly affects interpretation",
+   "As with protein C, severe homozygous deficiency can cause neonatal purpura fulminans, and vitamin K antagonist initiation without cover risks skin necrosis",
+   "Free protein S measurement is generally preferred, and confirmation requires repeat testing under stable conditions off interfering drugs",
+   "A result should be interpreted alongside clinical risk, since isolated low values do not by themselves dictate anticoagulation duration"
   ],
-  "class": "non_infective",
-  "system": "Haematology / Transfusion",
-  "specialty": "Transfusion & Haemostasis Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Harrison's Principles of Internal Medicine / AABB Technical Manual",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Protein S is a vitamin K-dependent cofactor that enhances the anticoagulant action of activated protein C; its deficiency predisposes to venous thromboembolism",
-      "Only free protein S is functionally active, because much of it circulates bound to C4b-binding protein",
-      "Deficiency is classified by total antigen, free antigen, and functional activity, which distinguish the different subtypes",
-      "Levels are physiologically lowered by pregnancy, oestrogen therapy, and the acute-phase response, and by vitamin K antagonists, so testing timing strongly affects interpretation",
-      "As with protein C, severe homozygous deficiency can cause neonatal purpura fulminans, and vitamin K antagonist initiation without cover risks skin necrosis",
-      "Free protein S measurement is generally preferred, and confirmation requires repeat testing under stable conditions off interfering drugs",
-      "A result should be interpreted alongside clinical risk, since isolated low values do not by themselves dictate anticoagulation duration"
+  "pathophysiology": "Protein S acts as a non-enzymatic cofactor that accelerates the inactivation of factors Va and VIIIa by activated protein C, and it also has some direct anticoagulant activity. In plasma it exists in a free active form and a fraction bound to C4b-binding protein, which is inactive as a cofactor. Inherited deficiency reduces free active protein S and weakens the activated protein C pathway, promoting thrombin generation and thrombosis. Because C4b-binding protein is an acute-phase reactant and oestrogen and pregnancy lower free protein S, acquired reductions are common and can be mistaken for inherited deficiency.",
+  "additionalDifferentials": [
+   "Protein C deficiency",
+   "Antithrombin deficiency",
+   "Factor V Leiden and prothrombin variant",
+   "Antiphospholipid syndrome",
+   "Acquired protein S reduction from pregnancy, oestrogen, or acute illness"
+  ],
+  "additionalInvestigations": [
+   "Free protein S antigen measurement as the preferred screen",
+   "Total protein S antigen and functional activity to classify subtype",
+   "Repeat testing under stable conditions, off vitamin K antagonists and away from pregnancy or acute illness",
+   "Assessment for coexisting thrombophilic defects",
+   "Family studies and genetic testing where they will influence care"
+  ],
+  "redFlags": [
+   "Neonatal purpura fulminans indicating severe homozygous deficiency",
+   "Skin necrosis after starting a vitamin K antagonist",
+   "Extensive or recurrent venous thromboembolism at a young age",
+   "Widespread microvascular thrombosis requiring urgent intervention"
+  ],
+  "prognosis": "Heterozygous deficiency generally carries a good prognosis with appropriate treatment of events and prophylaxis during high-risk periods, while severe homozygous deficiency presenting with purpura fulminans is a life-threatening neonatal emergency.",
+  "pitfalls": [
+   "Interpreting low levels during pregnancy, oestrogen use, or acute illness as inherited deficiency",
+   "Measuring total rather than free protein S and missing or misclassifying the defect",
+   "Starting a vitamin K antagonist without overlapping parenteral anticoagulation",
+   "Testing during acute thrombosis or on anticoagulation without confirmatory repeat testing"
+  ],
+  "references": [
+   "Harrison's Principles of Internal Medicine, 22e",
+   "AABB Technical Manual"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Treat acute venous thromboembolism with anticoagulation, beginning heparin such as low-molecular-weight heparin and overlapping before any vitamin K antagonist",
+   "Avoid initiating a vitamin K antagonist without heparin cover, given the risk of skin necrosis analogous to protein C deficiency",
+   "Individualise the duration of anticoagulation, using a DOAC or vitamin K antagonist, with extended therapy after unprovoked or recurrent events",
+   "Manage severe homozygous deficiency presenting as neonatal purpura fulminans as an emergency with fresh frozen plasma replacement and anticoagulation",
+   "Give thromboprophylaxis during surgery, immobility and pregnancy, and counsel against oestrogen-containing contraception",
+   "Confirm the diagnosis by free protein S measurement repeated under stable conditions off vitamin K antagonists and away from pregnancy or acute illness, and offer family testing and counselling"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "protein_s_deficiency-pathway",
+   "title": "Protein S deficiency: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Protein S is a vitamin K-dependent cofactor that enhances the anticoagulant action of activated protein C; its deficiency predisposes to venous thromboembolism",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Neonatal purpura fulminans indicating severe homozygous deficiency",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Free protein S antigen measurement as the preferred screen, Total protein S antigen and functional activity to classify subtype, Repeat testing under stable conditions, off vitamin K antagonists and away from pregnancy or"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Treat acute venous thromboembolism with anticoagulation, beginning heparin such as low-molecular-weight heparin and overlapping before any vitamin K antagonist"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Interpreting low levels during pregnancy, oestrogen use, or acute illness as inherited deficiency"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of protein s deficiency."
+  }
+ ],
+ "tables": [
+  {
+   "id": "protein_s_deficiency-matrix",
+   "title": "Protein S deficiency: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Protein S is a vitamin K-dependent cofactor that enhances the anticoagulant action of activated protein C; its deficiency",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Protein S acts as a non-enzymatic cofactor that accelerates the inactivation of factors Va and VIIIa by activated protein C, and it also has some direct anticoagulant activity. In plasma it exists in a free active form and a fraction bound to C4b-binding protein, which is inactive as a cofactor. Inherited deficiency reduces free active protein S and weakens the activated protein C pathway, promoting thrombin generation and thrombosis. Because C4b-binding protein is an acute-phase reactant and oestrogen and pregnancy lower free protein S, acquired reductions are common and can be mistaken for inherited deficiency.",
-    "additionalDifferentials": [
-      "Protein C deficiency",
-      "Antithrombin deficiency",
-      "Factor V Leiden and prothrombin variant",
-      "Antiphospholipid syndrome",
-      "Acquired protein S reduction from pregnancy, oestrogen, or acute illness"
+    [
+     "Key Investigations",
+     "Free protein S antigen measurement as the preferred screen, Total protein S antigen and functional activity to classify subtype,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Free protein S antigen measurement as the preferred screen",
-      "Total protein S antigen and functional activity to classify subtype",
-      "Repeat testing under stable conditions, off vitamin K antagonists and away from pregnancy or acute illness",
-      "Assessment for coexisting thrombophilic defects",
-      "Family studies and genetic testing where they will influence care"
+    [
+     "Primary Differentials",
+     "Protein C deficiency, Antithrombin deficiency, Factor V Leiden and prothrombin variant",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Neonatal purpura fulminans indicating severe homozygous deficiency",
-      "Skin necrosis after starting a vitamin K antagonist",
-      "Extensive or recurrent venous thromboembolism at a young age",
-      "Widespread microvascular thrombosis requiring urgent intervention"
+    [
+     "Management Strategy",
+     "Treat acute venous thromboembolism with anticoagulation, beginning heparin such as low-molecular-weight heparin and overlapping",
+     "Core treatment modality"
     ],
-    "prognosis": "Heterozygous deficiency generally carries a good prognosis with appropriate treatment of events and prophylaxis during high-risk periods, while severe homozygous deficiency presenting with purpura fulminans is a life-threatening neonatal emergency.",
-    "pitfalls": [
-      "Interpreting low levels during pregnancy, oestrogen use, or acute illness as inherited deficiency",
-      "Measuring total rather than free protein S and missing or misclassifying the defect",
-      "Starting a vitamin K antagonist without overlapping parenteral anticoagulation",
-      "Testing during acute thrombosis or on anticoagulation without confirmatory repeat testing"
-    ],
-    "references": [
-      "Harrison's Principles of Internal Medicine, 22e",
-      "AABB Technical Manual"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Treat acute venous thromboembolism with anticoagulation, beginning heparin such as low-molecular-weight heparin and overlapping before any vitamin K antagonist",
-      "Avoid initiating a vitamin K antagonist without heparin cover, given the risk of skin necrosis analogous to protein C deficiency",
-      "Individualise the duration of anticoagulation, using a DOAC or vitamin K antagonist, with extended therapy after unprovoked or recurrent events",
-      "Manage severe homozygous deficiency presenting as neonatal purpura fulminans as an emergency with fresh frozen plasma replacement and anticoagulation",
-      "Give thromboprophylaxis during surgery, immobility and pregnancy, and counsel against oestrogen-containing contraception",
-      "Confirm the diagnosis by free protein S measurement repeated under stable conditions off vitamin K antagonists and away from pregnancy or acute illness, and offer family testing and counselling"
+    [
+     "Clinical Pitfall",
+     "Interpreting low levels during pregnancy, oestrogen use, or acute illness as inherited deficiency",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for protein s deficiency."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "protein-s-deficiency-real-image",
+   "title": "Protein S deficiency: Diagnostic Peripheral Blood Smear Examination",
+   "type": "diagram",
+   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
+   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
+   "annotations": [
+    {
+     "label": "Erythrocyte Indices",
+     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
+    },
+    {
+     "label": "Leukocyte Differential",
+     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
+    },
+    {
+     "label": "Platelet Count",
+     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+    }
+   ]
+  }
+ ]
 }

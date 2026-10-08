@@ -1,78 +1,173 @@
 {
-  "id": "endophthalmitis",
-  "name": "Endophthalmitis",
-  "aliases": [
-    "intraocular infection",
-    "postoperative endophthalmitis",
-    "endogenous endophthalmitis",
-    "bacterial endophthalmitis"
+ "id": "endophthalmitis",
+ "name": "Endophthalmitis",
+ "aliases": [
+  "intraocular infection",
+  "postoperative endophthalmitis",
+  "endogenous endophthalmitis",
+  "bacterial endophthalmitis"
+ ],
+ "class": "infective",
+ "system": "Eye / Ophthalmology",
+ "specialty": "Ophthalmology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A sight-threatening ophthalmic emergency involving suppurative inflammation of the intraocular cavities that requires immediate specialist referral and intervention",
+   "Presents with rapidly worsening vision, increasing pain, redness, lid swelling, and often a hypopyon in the anterior chamber",
+   "Most commonly occurs after intraocular surgery (especially cataract surgery), intravitreal injection, or penetrating trauma; endogenous cases arise from bloodborne spread of infection",
+   "Acute postoperative cases are frequently caused by coagulase-negative staphylococci; more virulent organisms and trauma-related cases (including Bacillus) cause fulminant disease",
+   "Loss of the red reflex and vitritis on examination, with a fibrinous anterior chamber reaction, point to intraocular infection",
+   "Fungal and endogenous causes should be considered in immunocompromised patients, intravenous drug users, and those with indwelling lines or systemic sepsis",
+   "Management centres on urgent vitreous and aqueous sampling with intravitreal antibiotics; vitrectomy is considered in severe cases with very poor vision",
+   "A low threshold for suspicion after any intraocular procedure is essential because delay markedly worsens outcome"
   ],
-  "class": "infective",
-  "system": "Eye / Ophthalmology",
-  "specialty": "Ophthalmology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A sight-threatening ophthalmic emergency involving suppurative inflammation of the intraocular cavities that requires immediate specialist referral and intervention",
-      "Presents with rapidly worsening vision, increasing pain, redness, lid swelling, and often a hypopyon in the anterior chamber",
-      "Most commonly occurs after intraocular surgery (especially cataract surgery), intravitreal injection, or penetrating trauma; endogenous cases arise from bloodborne spread of infection",
-      "Acute postoperative cases are frequently caused by coagulase-negative staphylococci; more virulent organisms and trauma-related cases (including Bacillus) cause fulminant disease",
-      "Loss of the red reflex and vitritis on examination, with a fibrinous anterior chamber reaction, point to intraocular infection",
-      "Fungal and endogenous causes should be considered in immunocompromised patients, intravenous drug users, and those with indwelling lines or systemic sepsis",
-      "Management centres on urgent vitreous and aqueous sampling with intravitreal antibiotics; vitrectomy is considered in severe cases with very poor vision",
-      "A low threshold for suspicion after any intraocular procedure is essential because delay markedly worsens outcome"
+  "pathophysiology": "Endophthalmitis is infection and severe inflammation of the intraocular contents, involving the aqueous and vitreous. Organisms gain access exogenously through a surgical wound, injection, or penetrating injury, or endogenously by haematogenous seeding from a distant source. Microbial proliferation within the relatively immune-privileged vitreous triggers an intense inflammatory response; bacterial toxins and inflammatory mediators cause rapid retinal necrosis and irreversible photoreceptor damage, which accounts for the poor prognosis when treatment is delayed.",
+  "additionalDifferentials": [
+   "Severe anterior uveitis with hypopyon (e.g. HLA-B27 associated)",
+   "Toxic anterior segment syndrome after surgery",
+   "Retained lens fragments or postoperative inflammation",
+   "Panuveitis from non-infective causes",
+   "Orbital cellulitis",
+   "Intraocular tumour with pseudohypopyon"
+  ],
+  "additionalInvestigations": [
+   "Urgent aqueous and vitreous sampling for Gram stain, culture, and PCR before or at the time of intravitreal treatment",
+   "B-scan ultrasonography to assess vitreous involvement when the fundus view is obscured",
+   "Blood cultures and a search for a systemic source in suspected endogenous disease",
+   "Consideration of fungal cultures and specific stains in at-risk patients"
+  ],
+  "redFlags": [
+   "Rapidly declining vision with pain and hypopyon after intraocular surgery, injection, or trauma demands immediate referral and treatment",
+   "Loss of the red reflex and dense vitritis indicating established intraocular infection",
+   "Signs of endogenous spread with systemic sepsis or fever",
+   "Fulminant progression suggesting a virulent organism such as Bacillus or a fungus"
+  ],
+  "prognosis": "Visual outcome depends heavily on the causative organism and the speed of treatment; low-virulence coagulase-negative staphylococcal cases treated promptly can recover useful vision, whereas virulent bacterial, fungal, or trauma-related infection often results in severe, permanent visual loss despite aggressive therapy.",
+  "pitfalls": [
+   "Attributing early postoperative pain and inflammation to routine recovery and delaying referral",
+   "Failing to obtain intraocular samples before starting treatment, losing microbiological diagnosis",
+   "Overlooking an endogenous source in a febrile, immunocompromised, or drug-using patient",
+   "Not considering fungal infection in indolent or treatment-resistant cases"
+  ],
+  "references": [
+   "Parsons' Diseases of the Eye",
+   "Kanski's Clinical Ophthalmology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Treat as a sight-threatening emergency with urgent intravitreal broad-spectrum antibiotics, typically a glycopeptide combined with a cephalosporin or aminoglycoside, after aqueous and vitreous sampling",
+   "Perform pars plana vitrectomy in severe or rapidly progressing disease or where vision is severely reduced",
+   "Add intravitreal antifungal therapy for suspected or confirmed fungal and endogenous infection",
+   "Treat endogenous disease with systemic antimicrobials directed at the underlying bloodstream source and remove infected indwelling lines",
+   "Consider adjunctive intravitreal or systemic corticosteroids to limit the destructive inflammatory response",
+   "Provide topical cycloplegics, antibiotics and analgesia for symptom control, and monitor closely for response, refining therapy on culture and sensitivity results",
+   "Prevent recurrence through strict aseptic technique and perioperative antisepsis for intraocular surgery and injections"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "endophthalmitis-pathway",
+   "title": "Endophthalmitis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A sight-threatening ophthalmic emergency involving suppurative inflammation of the intraocular cavities that requires immediate specialist referral and intervention",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rapidly declining vision with pain and hypopyon after intraocular surgery, injection, or trauma demands immediate referral and treatment",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Urgent aqueous and vitreous sampling for Gram stain, culture, and PCR before or at the time of intravitreal treatment, B-scan ultrasonography to assess vitreous involvement when the fundus view is obscured, Blood cultures"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Treat as a sight-threatening emergency with urgent intravitreal broad-spectrum antibiotics, typically a glycopeptide combined with a cephalosporin or aminoglycoside, after aqueous and vitreous sampling"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing early postoperative pain and inflammation to routine recovery and delaying referral"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of endophthalmitis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "endophthalmitis-matrix",
+   "title": "Endophthalmitis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A sight-threatening ophthalmic emergency involving suppurative inflammation of the intraocular cavities that requires immediate",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Endophthalmitis is infection and severe inflammation of the intraocular contents, involving the aqueous and vitreous. Organisms gain access exogenously through a surgical wound, injection, or penetrating injury, or endogenously by haematogenous seeding from a distant source. Microbial proliferation within the relatively immune-privileged vitreous triggers an intense inflammatory response; bacterial toxins and inflammatory mediators cause rapid retinal necrosis and irreversible photoreceptor damage, which accounts for the poor prognosis when treatment is delayed.",
-    "additionalDifferentials": [
-      "Severe anterior uveitis with hypopyon (e.g. HLA-B27 associated)",
-      "Toxic anterior segment syndrome after surgery",
-      "Retained lens fragments or postoperative inflammation",
-      "Panuveitis from non-infective causes",
-      "Orbital cellulitis",
-      "Intraocular tumour with pseudohypopyon"
+    [
+     "Key Investigations",
+     "Urgent aqueous and vitreous sampling for Gram stain, culture, and PCR before or at the time of intravitreal treatment, B-scan",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Urgent aqueous and vitreous sampling for Gram stain, culture, and PCR before or at the time of intravitreal treatment",
-      "B-scan ultrasonography to assess vitreous involvement when the fundus view is obscured",
-      "Blood cultures and a search for a systemic source in suspected endogenous disease",
-      "Consideration of fungal cultures and specific stains in at-risk patients"
+    [
+     "Primary Differentials",
+     "Severe anterior uveitis with hypopyon (e.g. HLA-B27 associated), Toxic anterior segment syndrome after surgery, Retained lens",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rapidly declining vision with pain and hypopyon after intraocular surgery, injection, or trauma demands immediate referral and treatment",
-      "Loss of the red reflex and dense vitritis indicating established intraocular infection",
-      "Signs of endogenous spread with systemic sepsis or fever",
-      "Fulminant progression suggesting a virulent organism such as Bacillus or a fungus"
+    [
+     "Management Strategy",
+     "Treat as a sight-threatening emergency with urgent intravitreal broad-spectrum antibiotics, typically a glycopeptide combined",
+     "Core treatment modality"
     ],
-    "prognosis": "Visual outcome depends heavily on the causative organism and the speed of treatment; low-virulence coagulase-negative staphylococcal cases treated promptly can recover useful vision, whereas virulent bacterial, fungal, or trauma-related infection often results in severe, permanent visual loss despite aggressive therapy.",
-    "pitfalls": [
-      "Attributing early postoperative pain and inflammation to routine recovery and delaying referral",
-      "Failing to obtain intraocular samples before starting treatment, losing microbiological diagnosis",
-      "Overlooking an endogenous source in a febrile, immunocompromised, or drug-using patient",
-      "Not considering fungal infection in indolent or treatment-resistant cases"
-    ],
-    "references": [
-      "Parsons' Diseases of the Eye",
-      "Kanski's Clinical Ophthalmology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Treat as a sight-threatening emergency with urgent intravitreal broad-spectrum antibiotics, typically a glycopeptide combined with a cephalosporin or aminoglycoside, after aqueous and vitreous sampling",
-      "Perform pars plana vitrectomy in severe or rapidly progressing disease or where vision is severely reduced",
-      "Add intravitreal antifungal therapy for suspected or confirmed fungal and endogenous infection",
-      "Treat endogenous disease with systemic antimicrobials directed at the underlying bloodstream source and remove infected indwelling lines",
-      "Consider adjunctive intravitreal or systemic corticosteroids to limit the destructive inflammatory response",
-      "Provide topical cycloplegics, antibiotics and analgesia for symptom control, and monitor closely for response, refining therapy on culture and sensitivity results",
-      "Prevent recurrence through strict aseptic technique and perioperative antisepsis for intraocular surgery and injections"
+    [
+     "Clinical Pitfall",
+     "Attributing early postoperative pain and inflammation to routine recovery and delaying referral",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for endophthalmitis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "endophthalmitis-real-image",
+   "title": "Endophthalmitis: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

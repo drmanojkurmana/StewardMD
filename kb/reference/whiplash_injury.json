@@ -1,80 +1,175 @@
 {
-  "id": "whiplash_injury",
-  "name": "Whiplash injury",
-  "aliases": [
-    "whiplash-associated disorder",
-    "WAD",
-    "cervical acceleration-deceleration injury",
-    "neck sprain/strain"
+ "id": "whiplash_injury",
+ "name": "Whiplash injury",
+ "aliases": [
+  "whiplash-associated disorder",
+  "WAD",
+  "cervical acceleration-deceleration injury",
+  "neck sprain/strain"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal",
+ "specialty": "Sports & Musculoskeletal Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Apley & Solomon / standard sports medicine references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Typically follows a rapid acceleration-deceleration of the neck, most often a rear-end vehicle collision, straining the cervical soft tissues",
+   "Neck pain and stiffness often develop several hours to a day after the injury, along with headache and restricted movement",
+   "Whiplash-associated disorders are graded from no physical signs (grade 0) through musculoskeletal signs (grades I-II) to neurological signs (grade III) and fracture or dislocation (grade IV)",
+   "Apply a validated decision rule such as the Canadian C-spine rule to determine the need for imaging and to identify patients needing bony assessment",
+   "The priority in acute assessment is to exclude cervical fracture, dislocation, and spinal cord or nerve root injury",
+   "For uncomplicated injuries, early return to normal activity, reassurance, and active mobilisation give better outcomes than a collar and prolonged rest",
+   "Simple analgesia and exercise-based physiotherapy are the mainstays of management",
+   "Persistent pain, higher initial pain intensity, and psychological distress are associated with a slower recovery and chronic symptoms",
+   "Be alert to associated concussion, temporomandibular, or shoulder-girdle symptoms after the same injury"
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal",
-  "specialty": "Sports & Musculoskeletal Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Apley & Solomon / standard sports medicine references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Typically follows a rapid acceleration-deceleration of the neck, most often a rear-end vehicle collision, straining the cervical soft tissues",
-      "Neck pain and stiffness often develop several hours to a day after the injury, along with headache and restricted movement",
-      "Whiplash-associated disorders are graded from no physical signs (grade 0) through musculoskeletal signs (grades I-II) to neurological signs (grade III) and fracture or dislocation (grade IV)",
-      "Apply a validated decision rule such as the Canadian C-spine rule to determine the need for imaging and to identify patients needing bony assessment",
-      "The priority in acute assessment is to exclude cervical fracture, dislocation, and spinal cord or nerve root injury",
-      "For uncomplicated injuries, early return to normal activity, reassurance, and active mobilisation give better outcomes than a collar and prolonged rest",
-      "Simple analgesia and exercise-based physiotherapy are the mainstays of management",
-      "Persistent pain, higher initial pain intensity, and psychological distress are associated with a slower recovery and chronic symptoms",
-      "Be alert to associated concussion, temporomandibular, or shoulder-girdle symptoms after the same injury"
+  "pathophysiology": "Whiplash results from sudden hyperextension followed by flexion (or the reverse) of the cervical spine during rapid acceleration-deceleration. This strains and may partially tear the cervical muscles, ligaments, facet joint capsules, and intervertebral discs, and can injure nerve roots or, in severe cases, cause fracture or cord injury. Peripheral tissue injury combined with central pain sensitisation and psychosocial factors contributes to chronic symptoms in some patients.",
+  "additionalDifferentials": [
+   "Cervical fracture or dislocation",
+   "Cervical spinal cord or nerve root injury",
+   "Cervical disc prolapse or radiculopathy",
+   "Traumatic brain injury or concussion",
+   "Vertebral or carotid artery dissection",
+   "Pre-existing cervical spondylosis",
+   "Shoulder girdle or temporomandibular joint injury"
+  ],
+  "additionalInvestigations": [
+   "Clinical clearance using the Canadian C-spine rule or NEXUS criteria before imaging",
+   "CT of the cervical spine for suspected fracture or in high-risk patients",
+   "MRI if there is neurological deficit, suspected cord or disc injury, or ligamentous instability",
+   "Plain radiographs where appropriate for lower-risk patients",
+   "CT or MR angiography if arterial dissection is suspected"
+  ],
+  "redFlags": [
+   "Neurological deficit, saddle or limb weakness, or signs of spinal cord injury",
+   "Midline cervical tenderness or high-risk mechanism suggesting fracture or dislocation",
+   "Severe or thunderclap headache or focal signs suggesting arterial dissection",
+   "Reduced consciousness or features of significant head injury"
+  ],
+  "prognosis": "Most people recover within weeks to a few months, but a substantial minority develop chronic neck pain and disability, more likely with high initial pain, neurological signs, and psychological distress.",
+  "pitfalls": [
+   "Failing to clear the cervical spine and missing a fracture, dislocation, or cord injury",
+   "Prescribing a soft collar and prolonged rest, which worsens outcomes",
+   "Overlooking associated concussion or arterial dissection",
+   "Not addressing psychosocial factors that predict chronicity"
+  ],
+  "references": [
+   "Apley & Solomon's System of Orthopaedics and Fractures"
+  ],
+  "crossLinks": [],
+  "management": [
+   "First exclude cervical fracture, dislocation or cord and nerve-root injury using a validated rule such as the Canadian C-spine rule, imaging with CT or MRI where indicated",
+   "Reassure and educate the patient, emphasising the generally favourable natural history",
+   "Encourage early return to normal activity and active mobilisation rather than a soft collar or prolonged rest",
+   "Provide simple analgesia such as paracetamol and non-steroidal anti-inflammatory drugs for pain relief",
+   "Refer for physiotherapy with an active, graded exercise programme",
+   "Identify psychosocial risk factors such as high initial pain and distress that predict chronicity, and address them early",
+   "Refer persistent whiplash-associated disorder to a multidisciplinary pain service, and escalate urgently for evolving neurological deficit or suspected arterial dissection"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "whiplash_injury-pathway",
+   "title": "Whiplash injury: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Typically follows a rapid acceleration-deceleration of the neck, most often a rear-end vehicle collision, straining the cervical soft tissues",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Neurological deficit, saddle or limb weakness, or signs of spinal cord injury",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Clinical clearance using the Canadian C-spine rule or NEXUS criteria before imaging, CT of the cervical spine for suspected fracture or in high-risk patients, MRI if there is neurological deficit, suspected cord or disc"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: First exclude cervical fracture, dislocation or cord and nerve-root injury using a validated rule such as the Canadian C-spine rule, imaging with CT or MRI where indicated"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Failing to clear the cervical spine and missing a fracture, dislocation, or cord injury"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of whiplash injury."
+  }
+ ],
+ "tables": [
+  {
+   "id": "whiplash_injury-matrix",
+   "title": "Whiplash injury: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Typically follows a rapid acceleration-deceleration of the neck, most often a rear-end vehicle collision, straining the cervical",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Whiplash results from sudden hyperextension followed by flexion (or the reverse) of the cervical spine during rapid acceleration-deceleration. This strains and may partially tear the cervical muscles, ligaments, facet joint capsules, and intervertebral discs, and can injure nerve roots or, in severe cases, cause fracture or cord injury. Peripheral tissue injury combined with central pain sensitisation and psychosocial factors contributes to chronic symptoms in some patients.",
-    "additionalDifferentials": [
-      "Cervical fracture or dislocation",
-      "Cervical spinal cord or nerve root injury",
-      "Cervical disc prolapse or radiculopathy",
-      "Traumatic brain injury or concussion",
-      "Vertebral or carotid artery dissection",
-      "Pre-existing cervical spondylosis",
-      "Shoulder girdle or temporomandibular joint injury"
+    [
+     "Key Investigations",
+     "Clinical clearance using the Canadian C-spine rule or NEXUS criteria before imaging, CT of the cervical spine for suspected",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Clinical clearance using the Canadian C-spine rule or NEXUS criteria before imaging",
-      "CT of the cervical spine for suspected fracture or in high-risk patients",
-      "MRI if there is neurological deficit, suspected cord or disc injury, or ligamentous instability",
-      "Plain radiographs where appropriate for lower-risk patients",
-      "CT or MR angiography if arterial dissection is suspected"
+    [
+     "Primary Differentials",
+     "Cervical fracture or dislocation, Cervical spinal cord or nerve root injury, Cervical disc prolapse or radiculopathy",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Neurological deficit, saddle or limb weakness, or signs of spinal cord injury",
-      "Midline cervical tenderness or high-risk mechanism suggesting fracture or dislocation",
-      "Severe or thunderclap headache or focal signs suggesting arterial dissection",
-      "Reduced consciousness or features of significant head injury"
+    [
+     "Management Strategy",
+     "First exclude cervical fracture, dislocation or cord and nerve-root injury using a validated rule such as the Canadian C-spine",
+     "Core treatment modality"
     ],
-    "prognosis": "Most people recover within weeks to a few months, but a substantial minority develop chronic neck pain and disability, more likely with high initial pain, neurological signs, and psychological distress.",
-    "pitfalls": [
-      "Failing to clear the cervical spine and missing a fracture, dislocation, or cord injury",
-      "Prescribing a soft collar and prolonged rest, which worsens outcomes",
-      "Overlooking associated concussion or arterial dissection",
-      "Not addressing psychosocial factors that predict chronicity"
-    ],
-    "references": [
-      "Apley & Solomon's System of Orthopaedics and Fractures"
-    ],
-    "crossLinks": [],
-    "management": [
-      "First exclude cervical fracture, dislocation or cord and nerve-root injury using a validated rule such as the Canadian C-spine rule, imaging with CT or MRI where indicated",
-      "Reassure and educate the patient, emphasising the generally favourable natural history",
-      "Encourage early return to normal activity and active mobilisation rather than a soft collar or prolonged rest",
-      "Provide simple analgesia such as paracetamol and non-steroidal anti-inflammatory drugs for pain relief",
-      "Refer for physiotherapy with an active, graded exercise programme",
-      "Identify psychosocial risk factors such as high initial pain and distress that predict chronicity, and address them early",
-      "Refer persistent whiplash-associated disorder to a multidisciplinary pain service, and escalate urgently for evolving neurological deficit or suspected arterial dissection"
+    [
+     "Clinical Pitfall",
+     "Failing to clear the cervical spine and missing a fracture, dislocation, or cord injury",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for whiplash injury."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "whiplash-injury-real-image",
+   "title": "Whiplash injury: Diagnostic Musculoskeletal Radiograph",
+   "type": "xray",
+   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
+   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
+   "annotations": [
+    {
+     "label": "Cortical Margins",
+     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
+    },
+    {
+     "label": "Trabecular Architecture",
+     "description": "Medullary bone density, lucencies, and subchondral mineralization."
+    },
+    {
+     "label": "Joint Articulation",
+     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+    }
+   ]
+  }
+ ]
 }

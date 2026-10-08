@@ -168,5 +168,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "h232dd64d"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "urti-dx-algo",
+      "title": "Upper Respiratory Tract Infection (common cold): Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "The nonspecific URI ('common cold') is defined as a respiratory tract infection in which no single symptom predominates, distinguishing it clinically from more localized syndromes such as pharyngitis, sinusitis, or otitis media (Harrison",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Fever above 102 degrees F (38.9 C)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: No specific viral testing is needed for diagnosis; multiplex RT-PCR panels exist but are often unnecessary and may be falsely positive due to recent prior infection (Harrison 22e p.296)"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Differentiate from top mimics: Influenza (more prominent myalgias and systemic symptoms), COVID-19 (SARS-CoV-2 can cause virtually any upper respiratory symptom; new loss of taste or smell appears specific for COVID-19), Measles (cough,"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Prescribing antibiotics for a viral URI: they do not shorten illness or prevent complications and risk adverse drug effects, microbiome disruption, C. difficile infection, increased cost, and antibiotic resistance"
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for upper respiratory tract infection (common cold)."
+    }
+  ],
+  "tables": [
+    {
+      "id": "urti-matrix",
+      "title": "Upper Respiratory Tract Infection (common cold): Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The nonspecific URI ('common cold') is defined as a respiratory tract infection in which no single symptom predominates,",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "No specific viral testing is needed for diagnosis; multiplex RT-PCR panels exist but are often unnecessary and may be falsely",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Influenza (more prominent myalgias and systemic symptoms), COVID-19 (SARS-CoV-2 can cause virtually any upper respiratory",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Fever above 102 degrees F (38.9 C)",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Prescribing antibiotics for a viral URI: they do not shorten illness or prevent complications and risk adverse drug effects,",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for upper respiratory tract infection (common cold)."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "urti-real-image",
+      "title": "Upper Respiratory Tract Infection (common cold): Diagnostic Chest Radiograph",
+      "type": "xray",
+      "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
+      "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
+      "annotations": [
+        {
+          "label": "Parenchyma & Airspaces",
+          "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
+        },
+        {
+          "label": "Bronchovascular Tree",
+          "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
+        },
+        {
+          "label": "Pleural Margins",
+          "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+        }
+      ]
+    }
+  ]
 }

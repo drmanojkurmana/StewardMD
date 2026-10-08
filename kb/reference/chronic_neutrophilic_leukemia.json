@@ -1,78 +1,173 @@
 {
-  "id": "chronic_neutrophilic_leukemia",
-  "name": "Chronic neutrophilic leukaemia",
-  "aliases": [
-    "CNL",
-    "CSF3R-mutated myeloproliferative neoplasm",
-    "chronic neutrophilic leukaemia"
+ "id": "chronic_neutrophilic_leukemia",
+ "name": "Chronic neutrophilic leukaemia",
+ "aliases": [
+  "CNL",
+  "CSF3R-mutated myeloproliferative neoplasm",
+  "chronic neutrophilic leukaemia"
+ ],
+ "class": "non_infective",
+ "system": "Haematology",
+ "specialty": "Haematology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Williams Hematology / WHO classification of haematolymphoid tumours",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A rare myeloproliferative neoplasm defined by sustained peripheral neutrophilia composed of mature segmented neutrophils and band forms",
+   "Splenomegaly and sometimes hepatomegaly are common, and the neutrophils lack significant dysplasia or a left shift to immature precursors",
+   "Activating mutations in the colony-stimulating factor 3 receptor gene (CSF3R), most often the T618I variant, are the characteristic molecular driver",
+   "Diagnosis requires exclusion of a reactive leukaemoid reaction and of other myeloproliferative neoplasms, particularly BCR-ABL1 positive chronic myeloid leukaemia",
+   "Unlike a reactive process, the leukocyte alkaline phosphatase score tends to be normal or raised and there is no infective or inflammatory driver",
+   "Coexisting plasma cell disorders can drive a reactive neutrophilia that mimics the condition, so a monoclonal protein should be sought",
+   "CSF3R mutation status guides prognosis and targeted approaches such as JAK pathway inhibition"
   ],
-  "class": "non_infective",
-  "system": "Haematology",
-  "specialty": "Haematology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Williams Hematology / WHO classification of haematolymphoid tumours",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A rare myeloproliferative neoplasm defined by sustained peripheral neutrophilia composed of mature segmented neutrophils and band forms",
-      "Splenomegaly and sometimes hepatomegaly are common, and the neutrophils lack significant dysplasia or a left shift to immature precursors",
-      "Activating mutations in the colony-stimulating factor 3 receptor gene (CSF3R), most often the T618I variant, are the characteristic molecular driver",
-      "Diagnosis requires exclusion of a reactive leukaemoid reaction and of other myeloproliferative neoplasms, particularly BCR-ABL1 positive chronic myeloid leukaemia",
-      "Unlike a reactive process, the leukocyte alkaline phosphatase score tends to be normal or raised and there is no infective or inflammatory driver",
-      "Coexisting plasma cell disorders can drive a reactive neutrophilia that mimics the condition, so a monoclonal protein should be sought",
-      "CSF3R mutation status guides prognosis and targeted approaches such as JAK pathway inhibition"
+  "pathophysiology": "Chronic neutrophilic leukaemia is a clonal myeloproliferative neoplasm in which activating mutations of the granulocyte colony-stimulating factor receptor gene (CSF3R) drive unchecked signalling through the JAK/STAT and SRC-family kinase pathways. This produces sustained expansion of the mature neutrophil compartment without the dysplasia or maturation arrest seen in other myeloid disorders. The proliferating granulocytes accumulate in blood, marrow and spleen. Over time additional mutations may accrue and the disease can transform to acute leukaemia. A morphologically similar picture can be produced reactively by cytokines from an occult plasma cell neoplasm, which must be distinguished.",
+  "additionalDifferentials": [
+   "Reactive leukaemoid reaction (infection, inflammation, malignancy)",
+   "Chronic myeloid leukaemia (BCR-ABL1 positive)",
+   "Atypical chronic myeloid leukaemia (BCR-ABL1 negative)",
+   "Chronic myelomonocytic leukaemia",
+   "Neutrophilia secondary to a plasma cell neoplasm",
+   "Corticosteroid-induced neutrophilia"
+  ],
+  "additionalInvestigations": [
+   "Full blood count and film to characterise mature neutrophilia",
+   "Molecular testing for CSF3R mutations",
+   "BCR-ABL1 testing to exclude chronic myeloid leukaemia",
+   "Bone marrow aspirate and trephine with cytogenetics",
+   "Serum and urine protein electrophoresis to exclude a plasma cell driver",
+   "Inflammatory and infective screen to exclude a reactive cause"
+  ],
+  "redFlags": [
+   "Rising blast count indicating transformation to acute leukaemia",
+   "Progressive anaemia or thrombocytopenia signalling marrow failure",
+   "Massive or painful splenomegaly",
+   "Hyperleukocytosis with hyperviscosity symptoms"
+  ],
+  "prognosis": "The clinical course is variable; some patients remain stable for years while others progress to marrow failure or transform to acute myeloid leukaemia, and outcome is influenced by mutation burden and additional cytogenetic changes.",
+  "pitfalls": [
+   "Accepting a reactive leukaemoid reaction as the diagnosis without molecular confirmation",
+   "Failing to exclude BCR-ABL1 positive chronic myeloid leukaemia",
+   "Missing an occult plasma cell neoplasm driving the neutrophilia",
+   "Overlooking CSF3R testing that establishes the diagnosis and informs therapy"
+  ],
+  "references": [
+   "Williams Hematology",
+   "WHO Classification of Haematolymphoid Tumours"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Cytoreduction with hydroxycarbamide to control mature neutrophilia and splenomegaly",
+   "JAK inhibition (ruxolitinib) guided by the activating CSF3R mutation, commonly the T618I variant",
+   "Exclusion and treatment of an underlying plasma cell neoplasm that can drive a mimicking reactive neutrophilia",
+   "Allogeneic haematopoietic stem cell transplantation as the sole curative option in suitable candidates",
+   "Supportive care addressing thrombotic risk and symptom control",
+   "Serial monitoring of blood counts, spleen size and blast burden with cytogenetic reassessment",
+   "Surveillance for transformation to acute myeloid leukaemia within haematology multidisciplinary care"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "chronic_neutrophilic_leukemia-pathway",
+   "title": "Chronic neutrophilic leukaemia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A rare myeloproliferative neoplasm defined by sustained peripheral neutrophilia composed of mature segmented neutrophils and band forms",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Rising blast count indicating transformation to acute leukaemia",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Full blood count and film to characterise mature neutrophilia, Molecular testing for CSF3R mutations, BCR-ABL1 testing to exclude chronic myeloid leukaemia"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Cytoreduction with hydroxycarbamide to control mature neutrophilia and splenomegaly"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Accepting a reactive leukaemoid reaction as the diagnosis without molecular confirmation"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of chronic neutrophilic leukaemia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "chronic_neutrophilic_leukemia-matrix",
+   "title": "Chronic neutrophilic leukaemia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A rare myeloproliferative neoplasm defined by sustained peripheral neutrophilia composed of mature segmented neutrophils and band",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Chronic neutrophilic leukaemia is a clonal myeloproliferative neoplasm in which activating mutations of the granulocyte colony-stimulating factor receptor gene (CSF3R) drive unchecked signalling through the JAK/STAT and SRC-family kinase pathways. This produces sustained expansion of the mature neutrophil compartment without the dysplasia or maturation arrest seen in other myeloid disorders. The proliferating granulocytes accumulate in blood, marrow and spleen. Over time additional mutations may accrue and the disease can transform to acute leukaemia. A morphologically similar picture can be produced reactively by cytokines from an occult plasma cell neoplasm, which must be distinguished.",
-    "additionalDifferentials": [
-      "Reactive leukaemoid reaction (infection, inflammation, malignancy)",
-      "Chronic myeloid leukaemia (BCR-ABL1 positive)",
-      "Atypical chronic myeloid leukaemia (BCR-ABL1 negative)",
-      "Chronic myelomonocytic leukaemia",
-      "Neutrophilia secondary to a plasma cell neoplasm",
-      "Corticosteroid-induced neutrophilia"
+    [
+     "Key Investigations",
+     "Full blood count and film to characterise mature neutrophilia, Molecular testing for CSF3R mutations, BCR-ABL1 testing to exclude",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Full blood count and film to characterise mature neutrophilia",
-      "Molecular testing for CSF3R mutations",
-      "BCR-ABL1 testing to exclude chronic myeloid leukaemia",
-      "Bone marrow aspirate and trephine with cytogenetics",
-      "Serum and urine protein electrophoresis to exclude a plasma cell driver",
-      "Inflammatory and infective screen to exclude a reactive cause"
+    [
+     "Primary Differentials",
+     "Reactive leukaemoid reaction (infection, inflammation, malignancy), Chronic myeloid leukaemia (BCR-ABL1 positive), Atypical",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Rising blast count indicating transformation to acute leukaemia",
-      "Progressive anaemia or thrombocytopenia signalling marrow failure",
-      "Massive or painful splenomegaly",
-      "Hyperleukocytosis with hyperviscosity symptoms"
+    [
+     "Management Strategy",
+     "Cytoreduction with hydroxycarbamide to control mature neutrophilia and splenomegaly",
+     "Core treatment modality"
     ],
-    "prognosis": "The clinical course is variable; some patients remain stable for years while others progress to marrow failure or transform to acute myeloid leukaemia, and outcome is influenced by mutation burden and additional cytogenetic changes.",
-    "pitfalls": [
-      "Accepting a reactive leukaemoid reaction as the diagnosis without molecular confirmation",
-      "Failing to exclude BCR-ABL1 positive chronic myeloid leukaemia",
-      "Missing an occult plasma cell neoplasm driving the neutrophilia",
-      "Overlooking CSF3R testing that establishes the diagnosis and informs therapy"
-    ],
-    "references": [
-      "Williams Hematology",
-      "WHO Classification of Haematolymphoid Tumours"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Cytoreduction with hydroxycarbamide to control mature neutrophilia and splenomegaly",
-      "JAK inhibition (ruxolitinib) guided by the activating CSF3R mutation, commonly the T618I variant",
-      "Exclusion and treatment of an underlying plasma cell neoplasm that can drive a mimicking reactive neutrophilia",
-      "Allogeneic haematopoietic stem cell transplantation as the sole curative option in suitable candidates",
-      "Supportive care addressing thrombotic risk and symptom control",
-      "Serial monitoring of blood counts, spleen size and blast burden with cytogenetic reassessment",
-      "Surveillance for transformation to acute myeloid leukaemia within haematology multidisciplinary care"
+    [
+     "Clinical Pitfall",
+     "Accepting a reactive leukaemoid reaction as the diagnosis without molecular confirmation",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for chronic neutrophilic leukaemia."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "chronic-neutrophilic-leukemia-real-image",
+   "title": "Chronic neutrophilic leukaemia: Diagnostic Peripheral Blood Smear Examination",
+   "type": "diagram",
+   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
+   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
+   "annotations": [
+    {
+     "label": "Erythrocyte Indices",
+     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
+    },
+    {
+     "label": "Leukocyte Differential",
+     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
+    },
+    {
+     "label": "Platelet Count",
+     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+    }
+   ]
+  }
+ ]
 }

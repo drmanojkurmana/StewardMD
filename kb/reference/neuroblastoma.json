@@ -1,79 +1,174 @@
 {
-  "id": "neuroblastoma",
-  "name": "Neuroblastoma",
-  "aliases": [
-    "neuroblastic tumour"
+ "id": "neuroblastoma",
+ "name": "Neuroblastoma",
+ "aliases": [
+  "neuroblastic tumour"
+ ],
+ "class": "non_infective",
+ "system": "Oncology",
+ "specialty": "Paediatrics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Nelson Textbook of Pediatrics",
+  "sourceEdition": "22e",
+  "pages": null,
+  "clinicalPearls": [
+   "The most common extracranial solid tumour of childhood and the most common malignancy of infancy, arising from primitive sympathetic neural crest cells.",
+   "It can occur anywhere along the sympathetic chain; the adrenal medulla and paraspinal abdomen are the most frequent primary sites.",
+   "An abdominal primary often presents as a firm, irregular mass that crosses the midline, distinguishing it from Wilms tumour.",
+   "Presentation is highly variable and may include systemic upset, bone pain, proptosis with periorbital bruising ('raccoon eyes') from orbital metastases, or a paraspinal mass causing cord compression.",
+   "Distinctive paraneoplastic features include opsoclonus-myoclonus (dancing eyes, dancing feet) and secretory diarrhoea from vasoactive intestinal peptide.",
+   "Most tumours secrete catecholamines, so urinary homovanillic acid (HVA) and vanillylmandelic acid (VMA) are useful markers.",
+   "Behaviour spans a remarkable spectrum, from spontaneous regression in infants (including stage MS/4S disease) to aggressive, widely metastatic disease.",
+   "MYCN amplification is a key adverse biological marker that upstages risk and intensifies therapy.",
+   "Risk stratification integrating age, stage, histology, and genetics guides treatment ranging from observation or surgery to intensive multimodal therapy."
   ],
-  "class": "non_infective",
-  "system": "Oncology",
-  "specialty": "Paediatrics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Nelson Textbook of Pediatrics",
-    "sourceEdition": "22e",
-    "pages": null,
-    "clinicalPearls": [
-      "The most common extracranial solid tumour of childhood and the most common malignancy of infancy, arising from primitive sympathetic neural crest cells.",
-      "It can occur anywhere along the sympathetic chain; the adrenal medulla and paraspinal abdomen are the most frequent primary sites.",
-      "An abdominal primary often presents as a firm, irregular mass that crosses the midline, distinguishing it from Wilms tumour.",
-      "Presentation is highly variable and may include systemic upset, bone pain, proptosis with periorbital bruising ('raccoon eyes') from orbital metastases, or a paraspinal mass causing cord compression.",
-      "Distinctive paraneoplastic features include opsoclonus-myoclonus (dancing eyes, dancing feet) and secretory diarrhoea from vasoactive intestinal peptide.",
-      "Most tumours secrete catecholamines, so urinary homovanillic acid (HVA) and vanillylmandelic acid (VMA) are useful markers.",
-      "Behaviour spans a remarkable spectrum, from spontaneous regression in infants (including stage MS/4S disease) to aggressive, widely metastatic disease.",
-      "MYCN amplification is a key adverse biological marker that upstages risk and intensifies therapy.",
-      "Risk stratification integrating age, stage, histology, and genetics guides treatment ranging from observation or surgery to intensive multimodal therapy."
+  "pathophysiology": "Neuroblastoma develops from neural crest-derived precursors of the sympathetic nervous system, giving rise to a spectrum from undifferentiated neuroblastoma to more mature ganglioneuroblastoma and benign ganglioneuroma. Tumour behaviour is strongly governed by biology: MYCN amplification, segmental chromosomal changes, and DNA ploidy correlate with aggressiveness, while some infant tumours undergo differentiation or apoptosis and regress spontaneously.",
+  "additionalDifferentials": [
+   "Wilms tumour",
+   "Rhabdomyosarcoma",
+   "Lymphoma or leukaemic infiltration",
+   "Phaeochromocytoma",
+   "Ewing sarcoma / other small round blue cell tumours",
+   "Hepatoblastoma or other abdominal masses"
+  ],
+  "additionalInvestigations": [
+   "Urinary catecholamine metabolites (HVA and VMA)",
+   "Cross-sectional imaging (CT or MRI) of the primary site",
+   "MIBG scintigraphy for functional imaging and metastasis detection",
+   "Bone marrow aspirate and trephine biopsy for marrow involvement",
+   "Tumour biopsy for histology and biology including MYCN status",
+   "Full blood count, renal and liver function, lactate dehydrogenase and ferritin"
+  ],
+  "redFlags": [
+   "Signs of spinal cord compression from a paraspinal (dumbbell) tumour",
+   "Rapidly progressive or widely metastatic disease",
+   "Periorbital bruising and proptosis suggesting orbital metastases",
+   "Severe secretory diarrhoea from a VIP-secreting tumour",
+   "Systemic deterioration with bone pain and marrow failure"
+  ],
+  "prognosis": "Outcome is extremely variable: low-risk and infant disease (including 4S/MS) often has excellent survival and may regress, whereas high-risk disease with MYCN amplification or widespread metastases has a much poorer prognosis despite intensive therapy.",
+  "pitfalls": [
+   "Confusing it with Wilms tumour when it presents as an abdominal mass",
+   "Missing spinal cord compression from a paraspinal component",
+   "Overlooking opsoclonus-myoclonus as a paraneoplastic clue to occult tumour",
+   "Failing to obtain MYCN status, which changes management",
+   "Assuming all disease is aggressive and over-treating low-risk or regressing tumours"
+  ],
+  "references": [
+   "Nelson Textbook of Pediatrics, 22e"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Stratify treatment by risk group using stage, age, MYCN status and tumour biology, as intensity ranges from observation to intensive multimodal therapy",
+   "For low-risk and infant (stage 4S/MS) disease, offer surgical resection or observation, as many such tumours regress spontaneously",
+   "Treat intermediate-risk disease with moderate-intensity chemotherapy (carboplatin, etoposide, cyclophosphamide and doxorubicin) combined with surgical resection",
+   "Manage high-risk disease with intensive induction chemotherapy, surgery, high-dose chemotherapy with autologous stem-cell rescue, radiotherapy, and maintenance anti-GD2 immunotherapy (dinutuximab) with retinoic acid differentiation therapy",
+   "Provide supportive oncology care, treat cord compression from a paraspinal mass urgently, and manage paraneoplastic opsoclonus-myoclonus with immunotherapy",
+   "Refer to a paediatric oncology multidisciplinary team and consider MIBG-directed radionuclide therapy for refractory or relapsed disease",
+   "Undertake long-term surveillance for relapse and monitoring for late effects of therapy"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "neuroblastoma-pathway",
+   "title": "Neuroblastoma: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "The most common extracranial solid tumour of childhood and the most common malignancy of infancy, arising from primitive sympathetic neural crest cells.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Signs of spinal cord compression from a paraspinal (dumbbell) tumour",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Urinary catecholamine metabolites (HVA and VMA), Cross-sectional imaging (CT or MRI) of the primary site, MIBG scintigraphy for functional imaging and metastasis detection"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Stratify treatment by risk group using stage, age, MYCN status and tumour biology, as intensity ranges from observation to intensive multimodal therapy"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Confusing it with Wilms tumour when it presents as an abdominal mass"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of neuroblastoma."
+  }
+ ],
+ "tables": [
+  {
+   "id": "neuroblastoma-matrix",
+   "title": "Neuroblastoma: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The most common extracranial solid tumour of childhood and the most common malignancy of infancy, arising from primitive",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Neuroblastoma develops from neural crest-derived precursors of the sympathetic nervous system, giving rise to a spectrum from undifferentiated neuroblastoma to more mature ganglioneuroblastoma and benign ganglioneuroma. Tumour behaviour is strongly governed by biology: MYCN amplification, segmental chromosomal changes, and DNA ploidy correlate with aggressiveness, while some infant tumours undergo differentiation or apoptosis and regress spontaneously.",
-    "additionalDifferentials": [
-      "Wilms tumour",
-      "Rhabdomyosarcoma",
-      "Lymphoma or leukaemic infiltration",
-      "Phaeochromocytoma",
-      "Ewing sarcoma / other small round blue cell tumours",
-      "Hepatoblastoma or other abdominal masses"
+    [
+     "Key Investigations",
+     "Urinary catecholamine metabolites (HVA and VMA), Cross-sectional imaging (CT or MRI) of the primary site, MIBG scintigraphy for",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Urinary catecholamine metabolites (HVA and VMA)",
-      "Cross-sectional imaging (CT or MRI) of the primary site",
-      "MIBG scintigraphy for functional imaging and metastasis detection",
-      "Bone marrow aspirate and trephine biopsy for marrow involvement",
-      "Tumour biopsy for histology and biology including MYCN status",
-      "Full blood count, renal and liver function, lactate dehydrogenase and ferritin"
+    [
+     "Primary Differentials",
+     "Wilms tumour, Rhabdomyosarcoma, Lymphoma or leukaemic infiltration",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Signs of spinal cord compression from a paraspinal (dumbbell) tumour",
-      "Rapidly progressive or widely metastatic disease",
-      "Periorbital bruising and proptosis suggesting orbital metastases",
-      "Severe secretory diarrhoea from a VIP-secreting tumour",
-      "Systemic deterioration with bone pain and marrow failure"
+    [
+     "Management Strategy",
+     "Stratify treatment by risk group using stage, age, MYCN status and tumour biology, as intensity ranges from observation to",
+     "Core treatment modality"
     ],
-    "prognosis": "Outcome is extremely variable: low-risk and infant disease (including 4S/MS) often has excellent survival and may regress, whereas high-risk disease with MYCN amplification or widespread metastases has a much poorer prognosis despite intensive therapy.",
-    "pitfalls": [
-      "Confusing it with Wilms tumour when it presents as an abdominal mass",
-      "Missing spinal cord compression from a paraspinal component",
-      "Overlooking opsoclonus-myoclonus as a paraneoplastic clue to occult tumour",
-      "Failing to obtain MYCN status, which changes management",
-      "Assuming all disease is aggressive and over-treating low-risk or regressing tumours"
-    ],
-    "references": [
-      "Nelson Textbook of Pediatrics, 22e"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Stratify treatment by risk group using stage, age, MYCN status and tumour biology, as intensity ranges from observation to intensive multimodal therapy",
-      "For low-risk and infant (stage 4S/MS) disease, offer surgical resection or observation, as many such tumours regress spontaneously",
-      "Treat intermediate-risk disease with moderate-intensity chemotherapy (carboplatin, etoposide, cyclophosphamide and doxorubicin) combined with surgical resection",
-      "Manage high-risk disease with intensive induction chemotherapy, surgery, high-dose chemotherapy with autologous stem-cell rescue, radiotherapy, and maintenance anti-GD2 immunotherapy (dinutuximab) with retinoic acid differentiation therapy",
-      "Provide supportive oncology care, treat cord compression from a paraspinal mass urgently, and manage paraneoplastic opsoclonus-myoclonus with immunotherapy",
-      "Refer to a paediatric oncology multidisciplinary team and consider MIBG-directed radionuclide therapy for refractory or relapsed disease",
-      "Undertake long-term surveillance for relapse and monitoring for late effects of therapy"
+    [
+     "Clinical Pitfall",
+     "Confusing it with Wilms tumour when it presents as an abdominal mass",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for neuroblastoma."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "neuroblastoma-real-image",
+   "title": "Neuroblastoma: Diagnostic Head Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
+   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
+   "annotations": [
+    {
+     "label": "Cerebral Parenchyma",
+     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+    },
+    {
+     "label": "Extra-Axial Spaces",
+     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+    }
+   ]
+  }
+ ]
 }

@@ -6,7 +6,15 @@
  "basis": "india",
  "counterpart": "chikungunya-international",
  "setting": "Outpatient, ward",
- "aliases": ["CHIKV", "chikungunya fever", "post-chikungunya arthritis", "pCHIK-CIR", "chronic chikungunya arthritis", "arboviral arthritis", "NCVBDC chikungunya 2023"],
+ "aliases": [
+  "CHIKV",
+  "chikungunya fever",
+  "post-chikungunya arthritis",
+  "pCHIK-CIR",
+  "chronic chikungunya arthritis",
+  "arboviral arthritis",
+  "NCVBDC chikungunya 2023"
+ ],
  "summary": "Fever with severe symmetrical polyarthralgia. Acute phase: rest, fluids and paracetamol, no NSAIDs until dengue is excluded and no steroids. Subacute phase: NSAIDs, short prednisolone course for severe synovitis. Chronic phase beyond 3 months: hydroxychloroquine and other DMARDs with rheumatology input.",
  "sections": [
   {
@@ -93,16 +101,148 @@
   }
  ],
  "drugs": [
-  { "name": "Paracetamol", "dose": "Adults 500 mg orally 3 to 4 times daily (maximum 3 g/day per NCVBDC); children 10 to 15 mg/kg per dose 6-hourly", "notes": "First line in the acute phase and in pregnancy." },
-  { "name": "Tramadol", "dose": "Adults 50 to 100 mg orally every 4 to 6 hours, maximum 400 mg/day (300 mg/day over 75 years)", "notes": "Step 2 when paracetamol fails. Not in children." },
-  { "name": "Ibuprofen (children)", "dose": "30 mg/kg/day orally in 3 divided doses", "notes": "Only after the first 14 days of illness and once dengue is excluded." },
-  { "name": "Naproxen (children)", "dose": "10 to 15 mg/kg/day orally in 2 divided doses", "notes": "Only after the first 14 days of illness." },
-  { "name": "Prednisolone", "dose": "10 mg/day for 5 days then taper over 10 days; severe disease 0.5 mg/kg/day, then reduce by 5 mg/day every 7 days after resolution", "notes": "Subacute or chronic inflammatory disease only; maximum 4 weeks. Never in the acute phase." },
-  { "name": "Hydroxychloroquine", "dose": "Up to 6.5 mg/kg/day orally (usually 400 mg/day) for 8 to 12 weeks", "notes": "Chronic inflammatory arthritis, with an NSAID. Baseline eye assessment for long-term use." }
+  {
+   "name": "Paracetamol",
+   "dose": "Adults 500 mg orally 3 to 4 times daily (maximum 3 g/day per NCVBDC); children 10 to 15 mg/kg per dose 6-hourly",
+   "notes": "First line in the acute phase and in pregnancy."
+  },
+  {
+   "name": "Tramadol",
+   "dose": "Adults 50 to 100 mg orally every 4 to 6 hours, maximum 400 mg/day (300 mg/day over 75 years)",
+   "notes": "Step 2 when paracetamol fails. Not in children."
+  },
+  {
+   "name": "Ibuprofen (children)",
+   "dose": "30 mg/kg/day orally in 3 divided doses",
+   "notes": "Only after the first 14 days of illness and once dengue is excluded."
+  },
+  {
+   "name": "Naproxen (children)",
+   "dose": "10 to 15 mg/kg/day orally in 2 divided doses",
+   "notes": "Only after the first 14 days of illness."
+  },
+  {
+   "name": "Prednisolone",
+   "dose": "10 mg/day for 5 days then taper over 10 days; severe disease 0.5 mg/kg/day, then reduce by 5 mg/day every 7 days after resolution",
+   "notes": "Subacute or chronic inflammatory disease only; maximum 4 weeks. Never in the acute phase."
+  },
+  {
+   "name": "Hydroxychloroquine",
+   "dose": "Up to 6.5 mg/kg/day orally (usually 400 mg/day) for 8 to 12 weeks",
+   "notes": "Chronic inflammatory arthritis, with an NSAID. Baseline eye assessment for long-term use."
+  }
  ],
  "sources": [
-  { "org": "NCVBDC, MoHFW", "title": "National Guidelines for Clinical Management of Chikungunya Fever 2023", "year": 2023, "url": "https://ncvbdc.mohfw.gov.in/Doc/National-Guidelines-for-Clinical-Management-of-Chikungunya-Fever-2023.pdf" },
-  { "org": "WHO", "title": "WHO guidelines for clinical management of arboviral diseases: dengue, chikungunya, Zika and yellow fever", "year": 2025, "url": "https://iris.who.int/handle/10665/381804" }
+  {
+   "org": "NCVBDC, MoHFW",
+   "title": "National Guidelines for Clinical Management of Chikungunya Fever 2023",
+   "year": 2023,
+   "url": "https://ncvbdc.mohfw.gov.in/Doc/National-Guidelines-for-Clinical-Management-of-Chikungunya-Fever-2023.pdf"
+  },
+  {
+   "org": "WHO",
+   "title": "WHO guidelines for clinical management of arboviral diseases: dengue, chikungunya, Zika and yellow fever",
+   "year": 2025,
+   "url": "https://iris.who.int/handle/10665/381804"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "chikungunya-pathway",
+   "title": "Chikungunya: acute, subacute and chronic (India, NCVBDC) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Abrupt high fever lasting 3 to 5 days with severe, often disabling, symmetrical polyarthralgia of the small peripheral joints (hands, wrists, ankles), sometimes knees and shoulders; rash on day 2 to 5 in some; myalgia, headache.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Phases: acute (under 3 weeks), subacute (3 weeks to 3 months), chronic (beyond 3 months).",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "RT-PCR for CHIKV RNA in the first week (day 0 to 7); IgM ELISA (MAC-ELISA) after day 7. IgM may persist for months, so interpret with the clinical picture."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Distinguish post-chikungunya chronic inflammatory rheumatism (new inflammatory arthritis with confirmed CHIKV serology and other causes excluded) from non-inflammatory musculoskeletal disorders."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Giving NSAIDs for joint pain before dengue is excluded."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for chikungunya: acute, subacute and chronic (india, ncvbdc)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "chikungunya-summary-matrix",
+   "title": "Chikungunya: acute, subacute and chronic (India, NCVBDC) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Abrupt high fever lasting 3 to 5 days with severe, often disabling, symmetrical polyarthralgia of the small peripheral joints (hands,",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Distinguish post-chikungunya chronic inflammatory rheumatism (new inflammatory arthritis with confirmed CHIKV serology and other causes",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "RT-PCR for CHIKV RNA in the first week (day 0 to 7); IgM ELISA (MAC-ELISA) after day 7. IgM may persist for months, so interpret with the",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Paracetamol: Adults 500 mg orally 3 to 4 times daily (maximum 3 g/day per NCVBDC); children 10 to 15 mg/kg per dose 6-hourly",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Giving NSAIDs for joint pain before dengue is excluded.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for chikungunya: acute, subacute and chronic (india, ncvbdc)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "chikungunya-real-image",
+   "title": "Chikungunya: acute, subacute and chronic (India, NCVBDC): Diagnostic Microbiological / Smear Examination",
+   "type": "diagram",
+   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
+   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
+   "annotations": [
+    {
+     "label": "Pathogen Detection",
+     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
+    },
+    {
+     "label": "Inflammatory Response",
+     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
+    },
+    {
+     "label": "Diagnostic Confirmation",
+     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+    }
+   ]
+  }
+ ]
 }

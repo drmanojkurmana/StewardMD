@@ -1,79 +1,174 @@
 {
-  "id": "acute_stress_disorder",
-  "name": "Acute stress disorder",
-  "aliases": [
-    "ASD",
-    "acute stress reaction"
+ "id": "acute_stress_disorder",
+ "name": "Acute stress disorder",
+ "aliases": [
+  "ASD",
+  "acute stress reaction"
+ ],
+ "class": "non_infective",
+ "system": "Psychiatry / Mental health",
+ "specialty": "Psychiatry",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "The disorder develops after exposure to actual or threatened death, serious injury, or sexual violation, with symptoms arising and lasting from three days up to one month after the trauma",
+   "Symptoms span intrusion, negative mood, dissociation, avoidance, and arousal, including intrusive memories, distressing dreams, flashbacks, and a sense of unreality or detachment",
+   "If characteristic symptoms persist beyond one month, the diagnosis is reconsidered as post-traumatic stress disorder rather than acute stress disorder",
+   "Dissociative features such as depersonalisation, derealisation, or amnesia for part of the event can be prominent in the acute aftermath",
+   "Many people exposed to trauma recover without progressing to a chronic disorder, so the diagnosis helps identify those at higher risk who may benefit from early support",
+   "Trauma-focused cognitive behavioural therapy is the recommended intervention, whereas single-session psychological debriefing is not beneficial and may be harmful",
+   "Medication has a limited role, mainly for specific symptoms such as severe sleep disturbance, and benzodiazepines are generally avoided",
+   "Assess suicide risk and provide practical support, safety, and psychoeducation as part of early management"
   ],
-  "class": "non_infective",
-  "system": "Psychiatry / Mental health",
-  "specialty": "Psychiatry",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "The disorder develops after exposure to actual or threatened death, serious injury, or sexual violation, with symptoms arising and lasting from three days up to one month after the trauma",
-      "Symptoms span intrusion, negative mood, dissociation, avoidance, and arousal, including intrusive memories, distressing dreams, flashbacks, and a sense of unreality or detachment",
-      "If characteristic symptoms persist beyond one month, the diagnosis is reconsidered as post-traumatic stress disorder rather than acute stress disorder",
-      "Dissociative features such as depersonalisation, derealisation, or amnesia for part of the event can be prominent in the acute aftermath",
-      "Many people exposed to trauma recover without progressing to a chronic disorder, so the diagnosis helps identify those at higher risk who may benefit from early support",
-      "Trauma-focused cognitive behavioural therapy is the recommended intervention, whereas single-session psychological debriefing is not beneficial and may be harmful",
-      "Medication has a limited role, mainly for specific symptoms such as severe sleep disturbance, and benzodiazepines are generally avoided",
-      "Assess suicide risk and provide practical support, safety, and psychoeducation as part of early management"
+  "pathophysiology": "Acute stress disorder reflects the immediate dysregulation of fear and stress-response systems following trauma, with heightened amygdala-driven threat processing, altered prefrontal regulation, and disturbed hypothalamic-pituitary-adrenal axis and noradrenergic activity. Impaired encoding and contextualisation of the traumatic memory, together with dissociative responses, are thought to underlie the intrusive and dissociative symptoms, modulated by prior vulnerability and severity of exposure.",
+  "additionalDifferentials": [
+   "Post-traumatic stress disorder once symptoms exceed one month",
+   "Adjustment disorder in response to a stressor",
+   "Panic disorder or other anxiety disorders",
+   "Major depressive episode following trauma",
+   "Traumatic brain injury or medical sequelae of the event",
+   "Substance intoxication or withdrawal",
+   "Brief psychotic disorder with marked stressor"
+  ],
+  "additionalInvestigations": [
+   "Clinical interview characterising the traumatic exposure and symptom onset",
+   "Structured suicide risk assessment",
+   "Assessment of dissociative symptoms",
+   "Medical evaluation for injuries or head trauma related to the event",
+   "Screening for comorbid depression and substance use"
+  ],
+  "redFlags": [
+   "Suicidal or self-harm ideation following the trauma",
+   "Ongoing exposure to danger, such as continuing abuse or violence",
+   "Severe dissociation impairing safety or the ability to seek help",
+   "Concurrent physical injury or head trauma requiring medical attention"
+  ],
+  "prognosis": "Many individuals with acute stress disorder recover within weeks, but a significant proportion progress to post-traumatic stress disorder, and the acute diagnosis identifies people who may benefit from early, evidence-based support. Prognosis is better with early trauma-focused intervention, safety, and social support, and worse with severe or ongoing trauma, prominent dissociation, and prior psychiatric illness.",
+  "pitfalls": [
+   "Providing single-session psychological debriefing, which is ineffective and potentially harmful",
+   "Prescribing benzodiazepines, which may impair recovery",
+   "Assuming all acutely distressed trauma survivors will develop a chronic disorder",
+   "Overlooking suicide risk or ongoing danger to the patient",
+   "Missing concurrent physical or head injury from the traumatic event"
+  ],
+  "references": [
+   "Kaplan & Sadock's Synopsis of Psychiatry",
+   "DSM-5-TR"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Offer trauma-focused cognitive behavioural therapy as the first-line intervention for those with significant or persistent symptoms",
+   "Provide practical psychological first aid, safety and psychoeducation, avoiding single-session psychological debriefing, which is unhelpful and potentially harmful",
+   "Address acute sleep disturbance and hyperarousal with sleep-focused measures, avoiding routine benzodiazepine use given dependence risk and poorer trauma outcomes",
+   "Undertake structured suicide risk assessment and safety planning, and evaluate for head injury or physical trauma sustained during the event",
+   "Monitor the symptom course and reclassify as post-traumatic stress disorder if characteristic symptoms persist beyond one month",
+   "Identify and treat comorbid depression and substance misuse",
+   "Refer to specialist mental health services when symptoms are severe, escalating or associated with risk"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "acute_stress_disorder-pathway",
+   "title": "Acute stress disorder: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "The disorder develops after exposure to actual or threatened death, serious injury, or sexual violation, with symptoms arising and lasting from three days up to one month after the trauma",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Suicidal or self-harm ideation following the trauma",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Clinical interview characterising the traumatic exposure and symptom onset, Structured suicide risk assessment, Assessment of dissociative symptoms"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Offer trauma-focused cognitive behavioural therapy as the first-line intervention for those with significant or persistent symptoms"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Providing single-session psychological debriefing, which is ineffective and potentially harmful"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of acute stress disorder."
+  }
+ ],
+ "tables": [
+  {
+   "id": "acute_stress_disorder-matrix",
+   "title": "Acute stress disorder: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The disorder develops after exposure to actual or threatened death, serious injury, or sexual violation, with symptoms arising",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Acute stress disorder reflects the immediate dysregulation of fear and stress-response systems following trauma, with heightened amygdala-driven threat processing, altered prefrontal regulation, and disturbed hypothalamic-pituitary-adrenal axis and noradrenergic activity. Impaired encoding and contextualisation of the traumatic memory, together with dissociative responses, are thought to underlie the intrusive and dissociative symptoms, modulated by prior vulnerability and severity of exposure.",
-    "additionalDifferentials": [
-      "Post-traumatic stress disorder once symptoms exceed one month",
-      "Adjustment disorder in response to a stressor",
-      "Panic disorder or other anxiety disorders",
-      "Major depressive episode following trauma",
-      "Traumatic brain injury or medical sequelae of the event",
-      "Substance intoxication or withdrawal",
-      "Brief psychotic disorder with marked stressor"
+    [
+     "Key Investigations",
+     "Clinical interview characterising the traumatic exposure and symptom onset, Structured suicide risk assessment, Assessment of",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Clinical interview characterising the traumatic exposure and symptom onset",
-      "Structured suicide risk assessment",
-      "Assessment of dissociative symptoms",
-      "Medical evaluation for injuries or head trauma related to the event",
-      "Screening for comorbid depression and substance use"
+    [
+     "Primary Differentials",
+     "Post-traumatic stress disorder once symptoms exceed one month, Adjustment disorder in response to a stressor, Panic disorder or",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Suicidal or self-harm ideation following the trauma",
-      "Ongoing exposure to danger, such as continuing abuse or violence",
-      "Severe dissociation impairing safety or the ability to seek help",
-      "Concurrent physical injury or head trauma requiring medical attention"
+    [
+     "Management Strategy",
+     "Offer trauma-focused cognitive behavioural therapy as the first-line intervention for those with significant or persistent",
+     "Core treatment modality"
     ],
-    "prognosis": "Many individuals with acute stress disorder recover within weeks, but a significant proportion progress to post-traumatic stress disorder, and the acute diagnosis identifies people who may benefit from early, evidence-based support. Prognosis is better with early trauma-focused intervention, safety, and social support, and worse with severe or ongoing trauma, prominent dissociation, and prior psychiatric illness.",
-    "pitfalls": [
-      "Providing single-session psychological debriefing, which is ineffective and potentially harmful",
-      "Prescribing benzodiazepines, which may impair recovery",
-      "Assuming all acutely distressed trauma survivors will develop a chronic disorder",
-      "Overlooking suicide risk or ongoing danger to the patient",
-      "Missing concurrent physical or head injury from the traumatic event"
-    ],
-    "references": [
-      "Kaplan & Sadock's Synopsis of Psychiatry",
-      "DSM-5-TR"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Offer trauma-focused cognitive behavioural therapy as the first-line intervention for those with significant or persistent symptoms",
-      "Provide practical psychological first aid, safety and psychoeducation, avoiding single-session psychological debriefing, which is unhelpful and potentially harmful",
-      "Address acute sleep disturbance and hyperarousal with sleep-focused measures, avoiding routine benzodiazepine use given dependence risk and poorer trauma outcomes",
-      "Undertake structured suicide risk assessment and safety planning, and evaluate for head injury or physical trauma sustained during the event",
-      "Monitor the symptom course and reclassify as post-traumatic stress disorder if characteristic symptoms persist beyond one month",
-      "Identify and treat comorbid depression and substance misuse",
-      "Refer to specialist mental health services when symptoms are severe, escalating or associated with risk"
+    [
+     "Clinical Pitfall",
+     "Providing single-session psychological debriefing, which is ineffective and potentially harmful",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for acute stress disorder."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "acute-stress-disorder-real-image",
+   "title": "Acute stress disorder: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

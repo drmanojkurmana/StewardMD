@@ -6,7 +6,21 @@
  "basis": "india",
  "counterpart": "febrile-seizure",
  "setting": "Home, emergency department, paediatric ward and outpatients",
- "aliases": ["febrile convulsion", "fever fit", "simple febrile seizure", "complex febrile seizure", "febrile status epilepticus", "FS", "FSE", "GEFS+", "febrile seizure plus", "intranasal midazolam", "clobazam prophylaxis", "IAP STG febrile seizure", "AOCN febrile seizure"],
+ "aliases": [
+  "febrile convulsion",
+  "fever fit",
+  "simple febrile seizure",
+  "complex febrile seizure",
+  "febrile status epilepticus",
+  "FS",
+  "FSE",
+  "GEFS+",
+  "febrile seizure plus",
+  "intranasal midazolam",
+  "clobazam prophylaxis",
+  "IAP STG febrile seizure",
+  "AOCN febrile seizure"
+ ],
  "summary": "Febrile seizures occur with fever in children aged 6 months to 6 years without CNS infection. Stop an ongoing seizure with intranasal midazolam, look for the fever source and red flags, investigate simple seizures minimally, and reserve intermittent clobazam or continuous prophylaxis for selected children; antipyretics do not prevent recurrence.",
  "sections": [
   {
@@ -77,14 +91,137 @@
   }
  ],
  "drugs": [
-  { "name": "Midazolam (intranasal)", "dose": "0.2 mg/kg, maximum 5 mg; may repeat once after 5 minutes (maximum 2 doses)", "notes": "First choice rescue at home; IM or buccal routes also effective." },
-  { "name": "Clobazam (intermittent prophylaxis)", "dose": "0.5 to 1 mg/kg/day orally in 2 divided doses for 3 days of fever, maximum 20 mg/day", "notes": "No taper needed. Selected children only." },
-  { "name": "Sodium valproate (continuous prophylaxis)", "dose": "20 to 40 mg/kg/day orally", "notes": "Rare fatal hepatotoxicity, highest under 2 years; thrombocytopenia, pancreatitis." },
-  { "name": "Phenobarbital (continuous prophylaxis)", "dose": "3 to 5 mg/kg/day orally", "notes": "Behavioural and sleep adverse effects." },
-  { "name": "Paracetamol", "dose": "15 mg/kg per dose as needed, up to 6-hourly", "notes": "Comfort only; does not prevent seizures." }
+  {
+   "name": "Midazolam (intranasal)",
+   "dose": "0.2 mg/kg, maximum 5 mg; may repeat once after 5 minutes (maximum 2 doses)",
+   "notes": "First choice rescue at home; IM or buccal routes also effective."
+  },
+  {
+   "name": "Clobazam (intermittent prophylaxis)",
+   "dose": "0.5 to 1 mg/kg/day orally in 2 divided doses for 3 days of fever, maximum 20 mg/day",
+   "notes": "No taper needed. Selected children only."
+  },
+  {
+   "name": "Sodium valproate (continuous prophylaxis)",
+   "dose": "20 to 40 mg/kg/day orally",
+   "notes": "Rare fatal hepatotoxicity, highest under 2 years; thrombocytopenia, pancreatitis."
+  },
+  {
+   "name": "Phenobarbital (continuous prophylaxis)",
+   "dose": "3 to 5 mg/kg/day orally",
+   "notes": "Behavioural and sleep adverse effects."
+  },
+  {
+   "name": "Paracetamol",
+   "dose": "15 mg/kg per dose as needed, up to 6-hourly",
+   "notes": "Comfort only; does not prevent seizures."
+  }
  ],
  "sources": [
-  { "org": "Indian Academy of Pediatrics", "title": "IAP Standard Treatment Guidelines 2022: Febrile seizures", "year": 2022, "url": "https://iapindia.org/pdf/Ch-048-febrile-seizures.pdf" }
+  {
+   "org": "Indian Academy of Pediatrics",
+   "title": "IAP Standard Treatment Guidelines 2022: Febrile seizures",
+   "year": 2022,
+   "url": "https://iapindia.org/pdf/Ch-048-febrile-seizures.pdf"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "febrile-seizure-india-pathway",
+   "title": "Febrile seizures (India, IAP) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Febrile seizure: seizure with fever in a child aged 6 months to 6 years, without CNS infection, metabolic or electrolyte disturbance, previous afebrile seizure, or acute neurological insult. Most occur within 24 hours of fever onset.",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Stabilise with an ABCDE approach (airway, breathing, circulation, disability, exposure).",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "History: seizure type and duration, postictal phase, fever source (ear discharge, dysuria), antibiotics or antipyretics already given, immunisation (Hib, pneumococcal), previous seizures, development, and family history of febrile seizures"
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Treat the cause of fever. Paracetamol 15 mg/kg per dose as needed, up to 6-hourly, and tepid sponging improve comfort but do not prevent febrile seizures."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Missing meningitis in an infant who is unimmunised, pretreated with antibiotics or not recovering within 1 hour."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for febrile seizures (india, iap)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "febrile-seizure-india-summary-matrix",
+   "title": "Febrile seizures (India, IAP) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Febrile seizure: seizure with fever in a child aged 6 months to 6 years, without CNS infection, metabolic or electrolyte disturbance,",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Stabilise with an ABCDE approach (airway, breathing, circulation, disability, exposure).",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "History: seizure type and duration, postictal phase, fever source (ear discharge, dysuria), antibiotics or antipyretics already given,",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Midazolam (intranasal): 0.2 mg/kg, maximum 5 mg; may repeat once after 5 minutes (maximum 2 doses)",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Missing meningitis in an infant who is unimmunised, pretreated with antibiotics or not recovering within 1 hour.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for febrile seizures (india, iap)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "febrile-seizure-india-real-image",
+   "title": "Febrile seizures (India, IAP): Diagnostic Head Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
+   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
+   "annotations": [
+    {
+     "label": "Cerebral Parenchyma",
+     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+    },
+    {
+     "label": "Extra-Axial Spaces",
+     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+    }
+   ]
+  }
+ ]
 }

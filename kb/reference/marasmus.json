@@ -1,76 +1,171 @@
 {
-  "id": "marasmus",
-  "name": "Marasmus",
-  "aliases": [
-    "severe wasting",
-    "protein-energy malnutrition (non-oedematous)",
-    "energy malnutrition"
+ "id": "marasmus",
+ "name": "Marasmus",
+ "aliases": [
+  "severe wasting",
+  "protein-energy malnutrition (non-oedematous)",
+  "energy malnutrition"
+ ],
+ "class": "non_infective",
+ "system": "Nutrition / Metabolic",
+ "specialty": "Nutrition & Metabolic Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Harrison's Principles of Internal Medicine / WHO nutrition guidance",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Marked wasting of muscle and subcutaneous fat gives an emaciated, wizened appearance with an apparently large head and loose skin folds",
+   "Unlike kwashiorkor there is no oedema, and the child is often alert but irritable and ravenously hungry",
+   "It results from severe, prolonged deficiency of total energy intake, frequently compounded by chronic infection or feeding difficulties",
+   "It remains a significant problem among food-insecure young children in India and other low-resource settings",
+   "Hypoglycaemia, hypothermia, dehydration, and infection are common and dangerous accompaniments",
+   "Assessment relies on anthropometry, especially low weight-for-height and reduced mid-upper-arm circumference",
+   "Nutritional rehabilitation must be gradual to avoid refeeding complications"
   ],
-  "class": "non_infective",
-  "system": "Nutrition / Metabolic",
-  "specialty": "Nutrition & Metabolic Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Harrison's Principles of Internal Medicine / WHO nutrition guidance",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Marked wasting of muscle and subcutaneous fat gives an emaciated, wizened appearance with an apparently large head and loose skin folds",
-      "Unlike kwashiorkor there is no oedema, and the child is often alert but irritable and ravenously hungry",
-      "It results from severe, prolonged deficiency of total energy intake, frequently compounded by chronic infection or feeding difficulties",
-      "It remains a significant problem among food-insecure young children in India and other low-resource settings",
-      "Hypoglycaemia, hypothermia, dehydration, and infection are common and dangerous accompaniments",
-      "Assessment relies on anthropometry, especially low weight-for-height and reduced mid-upper-arm circumference",
-      "Nutritional rehabilitation must be gradual to avoid refeeding complications"
+  "pathophysiology": "Marasmus is a form of severe acute malnutrition dominated by deficiency of overall energy intake. The body adapts to prolonged starvation by mobilising fat and muscle for fuel, lowering metabolic rate, and preserving visceral protein and albumin, which is why oedema is characteristically absent. Depletion of energy stores leads to profound wasting, immune suppression, gut mucosal atrophy, and impaired thermoregulation and glucose homeostasis. As with other forms of severe malnutrition, the depleted state creates vulnerability to hypoglycaemia, hypothermia, infection, and to metabolic disturbance during refeeding.",
+  "additionalDifferentials": [
+   "Kwashiorkor and marasmic-kwashiorkor",
+   "Wasting from chronic infection such as tuberculosis or HIV",
+   "Malabsorptive disorders",
+   "Malignancy and other chronic wasting illnesses",
+   "Congenital or metabolic disease causing failure to thrive"
+  ],
+  "additionalInvestigations": [
+   "Anthropometry with weight-for-height and mid-upper-arm circumference",
+   "Blood glucose and body temperature to detect hypoglycaemia and hypothermia",
+   "Electrolytes including potassium, magnesium, and phosphate",
+   "Screening for underlying and intercurrent infection",
+   "Assessment for micronutrient deficiencies and anaemia"
+  ],
+  "redFlags": [
+   "Hypoglycaemia and hypothermia in a severely wasted child",
+   "Signs of sepsis, which may be subtle",
+   "Circulatory compromise from severe dehydration",
+   "Refeeding-related electrolyte shifts during nutritional rehabilitation"
+  ],
+  "prognosis": "Gradual nutritional rehabilitation with treatment of infection allows recovery, but delayed presentation, sepsis, or mismanaged refeeding carry a high mortality, and prolonged early malnutrition can impair growth and development.",
+  "pitfalls": [
+   "Refeeding too rapidly and precipitating refeeding syndrome or cardiac failure",
+   "Failing to detect and correct hypoglycaemia and hypothermia early",
+   "Overlooking an underlying chronic infection such as tuberculosis",
+   "Rehydrating aggressively and causing fluid and electrolyte imbalance"
+  ],
+  "references": [
+   "Harrison's Principles of Internal Medicine, 22e",
+   "WHO nutrition guidance"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Undertake cautious phased nutritional rehabilitation, beginning with low-energy stabilisation feeds before catch-up feeding using ready-to-use therapeutic food",
+   "Prevent and treat hypoglycaemia and hypothermia with frequent feeds and active warming",
+   "Rehydrate cautiously using an oral rehydration solution formulated for malnutrition, avoiding fluid overload and cardiac failure",
+   "Correct electrolyte deficits including potassium and magnesium, and provide micronutrients, vitamins and treatment of anaemia",
+   "Escalate feeds gradually and monitor for refeeding syndrome with attention to falling phosphate",
+   "Give empirical broad-spectrum antibiotics and screen for and treat intercurrent infection",
+   "Arrange multidisciplinary follow-up addressing the underlying cause, feeding practices and family food security"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "marasmus-pathway",
+   "title": "Marasmus: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Marked wasting of muscle and subcutaneous fat gives an emaciated, wizened appearance with an apparently large head and loose skin folds",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Hypoglycaemia and hypothermia in a severely wasted child",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Anthropometry with weight-for-height and mid-upper-arm circumference, Blood glucose and body temperature to detect hypoglycaemia and hypothermia, Electrolytes including potassium, magnesium, and phosphate"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Undertake cautious phased nutritional rehabilitation, beginning with low-energy stabilisation feeds before catch-up feeding using ready-to-use therapeutic food"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Refeeding too rapidly and precipitating refeeding syndrome or cardiac failure"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of marasmus."
+  }
+ ],
+ "tables": [
+  {
+   "id": "marasmus-matrix",
+   "title": "Marasmus: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Marked wasting of muscle and subcutaneous fat gives an emaciated, wizened appearance with an apparently large head and loose skin",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Marasmus is a form of severe acute malnutrition dominated by deficiency of overall energy intake. The body adapts to prolonged starvation by mobilising fat and muscle for fuel, lowering metabolic rate, and preserving visceral protein and albumin, which is why oedema is characteristically absent. Depletion of energy stores leads to profound wasting, immune suppression, gut mucosal atrophy, and impaired thermoregulation and glucose homeostasis. As with other forms of severe malnutrition, the depleted state creates vulnerability to hypoglycaemia, hypothermia, infection, and to metabolic disturbance during refeeding.",
-    "additionalDifferentials": [
-      "Kwashiorkor and marasmic-kwashiorkor",
-      "Wasting from chronic infection such as tuberculosis or HIV",
-      "Malabsorptive disorders",
-      "Malignancy and other chronic wasting illnesses",
-      "Congenital or metabolic disease causing failure to thrive"
+    [
+     "Key Investigations",
+     "Anthropometry with weight-for-height and mid-upper-arm circumference, Blood glucose and body temperature to detect hypoglycaemia",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Anthropometry with weight-for-height and mid-upper-arm circumference",
-      "Blood glucose and body temperature to detect hypoglycaemia and hypothermia",
-      "Electrolytes including potassium, magnesium, and phosphate",
-      "Screening for underlying and intercurrent infection",
-      "Assessment for micronutrient deficiencies and anaemia"
+    [
+     "Primary Differentials",
+     "Kwashiorkor and marasmic-kwashiorkor, Wasting from chronic infection such as tuberculosis or HIV, Malabsorptive disorders",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Hypoglycaemia and hypothermia in a severely wasted child",
-      "Signs of sepsis, which may be subtle",
-      "Circulatory compromise from severe dehydration",
-      "Refeeding-related electrolyte shifts during nutritional rehabilitation"
+    [
+     "Management Strategy",
+     "Undertake cautious phased nutritional rehabilitation, beginning with low-energy stabilisation feeds before catch-up feeding using",
+     "Core treatment modality"
     ],
-    "prognosis": "Gradual nutritional rehabilitation with treatment of infection allows recovery, but delayed presentation, sepsis, or mismanaged refeeding carry a high mortality, and prolonged early malnutrition can impair growth and development.",
-    "pitfalls": [
-      "Refeeding too rapidly and precipitating refeeding syndrome or cardiac failure",
-      "Failing to detect and correct hypoglycaemia and hypothermia early",
-      "Overlooking an underlying chronic infection such as tuberculosis",
-      "Rehydrating aggressively and causing fluid and electrolyte imbalance"
-    ],
-    "references": [
-      "Harrison's Principles of Internal Medicine, 22e",
-      "WHO nutrition guidance"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Undertake cautious phased nutritional rehabilitation, beginning with low-energy stabilisation feeds before catch-up feeding using ready-to-use therapeutic food",
-      "Prevent and treat hypoglycaemia and hypothermia with frequent feeds and active warming",
-      "Rehydrate cautiously using an oral rehydration solution formulated for malnutrition, avoiding fluid overload and cardiac failure",
-      "Correct electrolyte deficits including potassium and magnesium, and provide micronutrients, vitamins and treatment of anaemia",
-      "Escalate feeds gradually and monitor for refeeding syndrome with attention to falling phosphate",
-      "Give empirical broad-spectrum antibiotics and screen for and treat intercurrent infection",
-      "Arrange multidisciplinary follow-up addressing the underlying cause, feeding practices and family food security"
+    [
+     "Clinical Pitfall",
+     "Refeeding too rapidly and precipitating refeeding syndrome or cardiac failure",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for marasmus."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "marasmus-real-image",
+   "title": "Marasmus: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

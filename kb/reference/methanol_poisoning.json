@@ -1,78 +1,173 @@
 {
-  "id": "methanol_poisoning",
-  "name": "Methanol poisoning",
-  "aliases": [
-    "methyl alcohol poisoning",
-    "wood alcohol poisoning",
-    "methanol toxicity"
+ "id": "methanol_poisoning",
+ "name": "Methanol poisoning",
+ "aliases": [
+  "methyl alcohol poisoning",
+  "wood alcohol poisoning",
+  "methanol toxicity"
+ ],
+ "class": "non_infective",
+ "system": "Toxicology / Environmental",
+ "specialty": "Toxicology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Harrison's Principles of Internal Medicine / WHO & national toxicology guidance",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Methanol itself is relatively inert; toxicity comes from hepatic metabolism to formaldehyde and then formic acid, which produces severe high anion-gap metabolic acidosis and target-organ injury",
+   "There is a characteristic latent period of hours (longer if ethanol is co-ingested) before symptoms appear, so early presentation can look deceptively mild",
+   "Visual symptoms are a hallmark - blurred vision, photophobia, a snowfield or blizzard-like whiteout, and potentially permanent blindness from optic nerve injury",
+   "Look for a wide anion-gap metabolic acidosis together with a raised osmolal gap; the osmolal gap falls as methanol is metabolised while the anion gap rises",
+   "Fomepizole is the preferred antidote as it inhibits alcohol dehydrogenase and blocks formation of toxic metabolites; ethanol is an alternative competitive substrate where fomepizole is unavailable",
+   "Folinic acid (or folic acid) is given to accelerate metabolism of formic acid to carbon dioxide and water",
+   "Haemodialysis removes methanol and formate and corrects acidosis, and is indicated in severe acidosis, visual impairment, renal failure, or high methanol levels",
+   "Consider methanol in any unexplained high anion-gap acidosis with visual complaints, particularly after consumption of illicit or adulterated spirits"
   ],
-  "class": "non_infective",
-  "system": "Toxicology / Environmental",
-  "specialty": "Toxicology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Harrison's Principles of Internal Medicine / WHO & national toxicology guidance",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Methanol itself is relatively inert; toxicity comes from hepatic metabolism to formaldehyde and then formic acid, which produces severe high anion-gap metabolic acidosis and target-organ injury",
-      "There is a characteristic latent period of hours (longer if ethanol is co-ingested) before symptoms appear, so early presentation can look deceptively mild",
-      "Visual symptoms are a hallmark - blurred vision, photophobia, a snowfield or blizzard-like whiteout, and potentially permanent blindness from optic nerve injury",
-      "Look for a wide anion-gap metabolic acidosis together with a raised osmolal gap; the osmolal gap falls as methanol is metabolised while the anion gap rises",
-      "Fomepizole is the preferred antidote as it inhibits alcohol dehydrogenase and blocks formation of toxic metabolites; ethanol is an alternative competitive substrate where fomepizole is unavailable",
-      "Folinic acid (or folic acid) is given to accelerate metabolism of formic acid to carbon dioxide and water",
-      "Haemodialysis removes methanol and formate and corrects acidosis, and is indicated in severe acidosis, visual impairment, renal failure, or high methanol levels",
-      "Consider methanol in any unexplained high anion-gap acidosis with visual complaints, particularly after consumption of illicit or adulterated spirits"
+  "pathophysiology": "Methanol is oxidised by alcohol dehydrogenase to formaldehyde, which is rapidly converted by aldehyde dehydrogenase to formic acid. Formic acid is the principal toxin: it inhibits mitochondrial cytochrome oxidase, causing cellular hypoxia and lactate accumulation, and produces a profound high anion-gap metabolic acidosis. Formate is directly toxic to the retina and optic nerve, causing oedema and demyelination that can lead to irreversible blindness, and can injure the basal ganglia (putaminal necrosis). Because the parent alcohol elevates serum osmolality, an early osmolal gap precedes the later anion-gap acidosis.",
+  "additionalDifferentials": [
+   "Ethylene glycol poisoning",
+   "Diabetic ketoacidosis",
+   "Lactic acidosis from other causes",
+   "Salicylate poisoning",
+   "Uraemia and other high anion-gap acidoses"
+  ],
+  "additionalInvestigations": [
+   "Serum methanol and formate levels where available",
+   "Arterial blood gas and calculated anion gap",
+   "Serum osmolality with calculated osmolal gap",
+   "Serum electrolytes, urea, creatinine, and glucose",
+   "Fundoscopy and formal visual assessment for optic involvement"
+  ],
+  "redFlags": [
+   "Visual disturbance or reduced acuity signalling optic nerve toxicity and impending blindness",
+   "Severe high anion-gap metabolic acidosis",
+   "Reduced consciousness, seizures, or coma",
+   "Rising anion gap with a narrowing osmolal gap indicating ongoing conversion to toxic metabolites",
+   "Consumption of illicit or home-distilled alcohol in a cluster of patients"
+  ],
+  "prognosis": "Outcome depends on the interval to treatment and the depth of acidosis at presentation; early antidote and dialysis can be curative, but delayed treatment risks permanent blindness, neurological deficits, and death.",
+  "pitfalls": [
+   "Being falsely reassured by the asymptomatic latent period, especially with co-ingested ethanol",
+   "Waiting for a confirmatory methanol level before starting antidote in a strongly suggestive case",
+   "Overlooking the diagnosis when the osmolal gap has already normalised late in the course",
+   "Failing to arrange haemodialysis for severe acidosis or visual symptoms"
+  ],
+  "references": [
+   "Harrison's Principles of Internal Medicine, 22e",
+   "WHO/national toxicology guidance"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Give the antidote fomepizole to inhibit alcohol dehydrogenase and block formation of toxic formic acid, using ethanol as a competitive alternative where fomepizole is unavailable",
+   "Administer folinic or folic acid to accelerate metabolism of formate to carbon dioxide and water",
+   "Correct the high anion-gap metabolic acidosis with intravenous sodium bicarbonate",
+   "Institute haemodialysis to clear methanol and formate and correct acidosis in severe poisoning, visual toxicity, or renal impairment",
+   "Provide supportive airway protection, ventilation, and fluid resuscitation",
+   "Obtain ophthalmology assessment and monitor for optic nerve and retinal toxicity",
+   "Involve toxicology or the poisons centre early and screen for co-ingested toxic alcohols"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "methanol_poisoning-pathway",
+   "title": "Methanol poisoning: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Methanol itself is relatively inert; toxicity comes from hepatic metabolism to formaldehyde and then formic acid, which produces severe high anion-gap metabolic acidosis and target-organ injury",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Visual disturbance or reduced acuity signalling optic nerve toxicity and impending blindness",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Serum methanol and formate levels where available, Arterial blood gas and calculated anion gap, Serum osmolality with calculated osmolal gap"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Give the antidote fomepizole to inhibit alcohol dehydrogenase and block formation of toxic formic acid, using ethanol as a competitive alternative where fomepizole is unavailable"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Being falsely reassured by the asymptomatic latent period, especially with co-ingested ethanol"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of methanol poisoning."
+  }
+ ],
+ "tables": [
+  {
+   "id": "methanol_poisoning-matrix",
+   "title": "Methanol poisoning: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Methanol itself is relatively inert; toxicity comes from hepatic metabolism to formaldehyde and then formic acid, which produces",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Methanol is oxidised by alcohol dehydrogenase to formaldehyde, which is rapidly converted by aldehyde dehydrogenase to formic acid. Formic acid is the principal toxin: it inhibits mitochondrial cytochrome oxidase, causing cellular hypoxia and lactate accumulation, and produces a profound high anion-gap metabolic acidosis. Formate is directly toxic to the retina and optic nerve, causing oedema and demyelination that can lead to irreversible blindness, and can injure the basal ganglia (putaminal necrosis). Because the parent alcohol elevates serum osmolality, an early osmolal gap precedes the later anion-gap acidosis.",
-    "additionalDifferentials": [
-      "Ethylene glycol poisoning",
-      "Diabetic ketoacidosis",
-      "Lactic acidosis from other causes",
-      "Salicylate poisoning",
-      "Uraemia and other high anion-gap acidoses"
+    [
+     "Key Investigations",
+     "Serum methanol and formate levels where available, Arterial blood gas and calculated anion gap, Serum osmolality with calculated",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Serum methanol and formate levels where available",
-      "Arterial blood gas and calculated anion gap",
-      "Serum osmolality with calculated osmolal gap",
-      "Serum electrolytes, urea, creatinine, and glucose",
-      "Fundoscopy and formal visual assessment for optic involvement"
+    [
+     "Primary Differentials",
+     "Ethylene glycol poisoning, Diabetic ketoacidosis, Lactic acidosis from other causes",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Visual disturbance or reduced acuity signalling optic nerve toxicity and impending blindness",
-      "Severe high anion-gap metabolic acidosis",
-      "Reduced consciousness, seizures, or coma",
-      "Rising anion gap with a narrowing osmolal gap indicating ongoing conversion to toxic metabolites",
-      "Consumption of illicit or home-distilled alcohol in a cluster of patients"
+    [
+     "Management Strategy",
+     "Give the antidote fomepizole to inhibit alcohol dehydrogenase and block formation of toxic formic acid, using ethanol as a",
+     "Core treatment modality"
     ],
-    "prognosis": "Outcome depends on the interval to treatment and the depth of acidosis at presentation; early antidote and dialysis can be curative, but delayed treatment risks permanent blindness, neurological deficits, and death.",
-    "pitfalls": [
-      "Being falsely reassured by the asymptomatic latent period, especially with co-ingested ethanol",
-      "Waiting for a confirmatory methanol level before starting antidote in a strongly suggestive case",
-      "Overlooking the diagnosis when the osmolal gap has already normalised late in the course",
-      "Failing to arrange haemodialysis for severe acidosis or visual symptoms"
-    ],
-    "references": [
-      "Harrison's Principles of Internal Medicine, 22e",
-      "WHO/national toxicology guidance"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Give the antidote fomepizole to inhibit alcohol dehydrogenase and block formation of toxic formic acid, using ethanol as a competitive alternative where fomepizole is unavailable",
-      "Administer folinic or folic acid to accelerate metabolism of formate to carbon dioxide and water",
-      "Correct the high anion-gap metabolic acidosis with intravenous sodium bicarbonate",
-      "Institute haemodialysis to clear methanol and formate and correct acidosis in severe poisoning, visual toxicity, or renal impairment",
-      "Provide supportive airway protection, ventilation, and fluid resuscitation",
-      "Obtain ophthalmology assessment and monitor for optic nerve and retinal toxicity",
-      "Involve toxicology or the poisons centre early and screen for co-ingested toxic alcohols"
+    [
+     "Clinical Pitfall",
+     "Being falsely reassured by the asymptomatic latent period, especially with co-ingested ethanol",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for methanol poisoning."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "methanol-poisoning-real-image",
+   "title": "Methanol poisoning: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

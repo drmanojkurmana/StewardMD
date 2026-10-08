@@ -201,5 +201,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "headeeac0"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "liver_abscess-dx-algo",
+      "title": "Liver Abscess: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "The liver is the visceral organ most prone to abscess formation; in one series of intraabdominal abscesses, hepatic abscesses accounted for roughly half of all visceral abscesses (p.1117).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Features suggesting hypervirulent K. pneumoniae with metastatic spread - concurrent endophthalmitis (threatening vision loss), meningitis/brain abscess, or septic pulmonary nodules - mandate urgent evaluation of",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Imaging is the most reliable diagnostic modality: ultrasonography, CT, MRI, and indium-labelled-WBC or gallium scintigraphy; more than one study may be needed (p.1117)., Chest radiography may give a clue - a newly elevated"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Differentiate from top mimics: Splenic abscess (different clinical setting and organism profile, most often associated with bacterial endocarditis; high index of suspicion needed as it is frequently fatal if untreated) (p.1118), Hepatic"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Failing to distinguish pyogenic from amebic liver abscess: amebic serology is positive in >95% of amebic cases, amebic abscesses are classically a single right-lobe lesion, and most travellers with amebic abscess present"
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for liver abscess."
+    }
+  ],
+  "tables": [
+    {
+      "id": "liver_abscess-matrix",
+      "title": "Liver Abscess: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The liver is the visceral organ most prone to abscess formation; in one series of intraabdominal abscesses, hepatic abscesses",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Imaging is the most reliable diagnostic modality: ultrasonography, CT, MRI, and indium-labelled-WBC or gallium scintigraphy; more",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Splenic abscess (different clinical setting and organism profile, most often associated with bacterial endocarditis; high index",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Features suggesting hypervirulent K. pneumoniae with metastatic spread - concurrent endophthalmitis (threatening vision loss),",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to distinguish pyogenic from amebic liver abscess: amebic serology is positive in >95% of amebic cases, amebic abscesses",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for liver abscess."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "liver-abscess-real-image",
+      "title": "Liver Abscess: Diagnostic Abdominal Computed Tomography",
+      "type": "ct",
+      "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
+      "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
+      "annotations": [
+        {
+          "label": "Solid Viscera",
+          "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
+        },
+        {
+          "label": "Gastrointestinal Tract",
+          "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
+        },
+        {
+          "label": "Mesentery & Peritoneum",
+          "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+        }
+      ]
+    }
+  ]
 }

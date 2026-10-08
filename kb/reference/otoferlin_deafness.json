@@ -1,78 +1,173 @@
 {
-  "id": "otoferlin_deafness",
-  "name": "Otoferlin-related deafness (DFNB9)",
-  "aliases": [
-    "DFNB9",
-    "OTOF-related hearing loss",
-    "otoferlin synaptopathy",
-    "temperature-sensitive auditory neuropathy"
+ "id": "otoferlin_deafness",
+ "name": "Otoferlin-related deafness (DFNB9)",
+ "aliases": [
+  "DFNB9",
+  "OTOF-related hearing loss",
+  "otoferlin synaptopathy",
+  "temperature-sensitive auditory neuropathy"
+ ],
+ "class": "non_infective",
+ "system": "Ear / Audiology",
+ "specialty": "Otology / Audiovestibular Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Cummings Otolaryngology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A leading monogenic cause of auditory neuropathy spectrum disorder, inherited in an autosomal recessive manner through biallelic OTOF variants",
+   "Typically presents as congenital severe-to-profound hearing loss with preserved otoacoustic emissions and absent auditory brainstem responses",
+   "The defect is presynaptic (a cochlear synaptopathy), so the auditory nerve is intact and can be stimulated directly",
+   "Cochlear implantation generally produces excellent auditory and speech outcomes",
+   "A rare temperature-sensitive variant causes marked hearing deterioration during fever with recovery afterwards",
+   "Outer hair cell function may be preserved early, so emissions can be present in infancy and disappear over time",
+   "OTOF is a prominent target for emerging inner-ear gene-replacement approaches, making molecular confirmation increasingly relevant"
   ],
-  "class": "non_infective",
-  "system": "Ear / Audiology",
-  "specialty": "Otology / Audiovestibular Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Cummings Otolaryngology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A leading monogenic cause of auditory neuropathy spectrum disorder, inherited in an autosomal recessive manner through biallelic OTOF variants",
-      "Typically presents as congenital severe-to-profound hearing loss with preserved otoacoustic emissions and absent auditory brainstem responses",
-      "The defect is presynaptic (a cochlear synaptopathy), so the auditory nerve is intact and can be stimulated directly",
-      "Cochlear implantation generally produces excellent auditory and speech outcomes",
-      "A rare temperature-sensitive variant causes marked hearing deterioration during fever with recovery afterwards",
-      "Outer hair cell function may be preserved early, so emissions can be present in infancy and disappear over time",
-      "OTOF is a prominent target for emerging inner-ear gene-replacement approaches, making molecular confirmation increasingly relevant"
+  "pathophysiology": "Otoferlin is a calcium-sensing protein essential for synaptic vesicle exocytosis at the inner hair cell ribbon synapse. When OTOF variants impair its function, the influx of calcium fails to trigger reliable neurotransmitter release onto the auditory nerve terminals, so sound is transduced by hair cells but not faithfully relayed to the nerve. This presynaptic synaptopathy underlies the characteristic pattern of preserved outer hair cell responses with an absent or grossly dyssynchronous brainstem response. Because the spiral ganglion neurones and auditory nerve remain structurally intact, direct electrical stimulation by a cochlear implant bypasses the defective synapse effectively.",
+  "additionalDifferentials": [
+   "Other genetic and acquired causes of auditory neuropathy spectrum disorder",
+   "Neural auditory neuropathy from spiral ganglion or nerve pathology",
+   "GJB2/DFNB1 cochlear sensorineural hearing loss",
+   "Cochlear nerve deficiency on imaging",
+   "Congenital cytomegalovirus-associated hearing loss",
+   "Syndromic sensorineural hearing loss"
+  ],
+  "additionalInvestigations": [
+   "Otoacoustic emissions and cochlear microphonic recording showing preserved outer hair cell activity",
+   "Auditory brainstem response demonstrating absence or gross dyssynchrony",
+   "Behavioural and speech perception audiometry as age allows",
+   "Targeted OTOF sequencing and deletion/duplication analysis within a deafness panel",
+   "Cross-sectional imaging to confirm an intact cochlear nerve before implantation",
+   "Temperature-dependent threshold assessment when febrile fluctuation is reported"
+  ],
+  "redFlags": [
+   "Profound functional deficit and language delay despite a deceptively preserved emission profile",
+   "Marked hearing deterioration during febrile illness in the temperature-sensitive form",
+   "Loss of previously present emissions over time",
+   "Missed diagnosis when newborn screening relies on emissions alone"
+  ],
+  "prognosis": "Because the lesion is presynaptic with an intact nerve, cochlear implantation typically restores excellent speech perception, and molecular confirmation may open access to gene-based therapies as they mature.",
+  "pitfalls": [
+   "Interpreting present otoacoustic emissions as normal hearing and delaying intervention",
+   "Attributing febrile hearing fluctuation to middle-ear disease rather than the temperature-sensitive phenotype",
+   "Trialling prolonged amplification when implantation is more appropriate",
+   "Not confirming an intact cochlear nerve on imaging before planning an implant"
+  ],
+  "references": [
+   "Cummings Otolaryngology",
+   "GeneReviews: OTOF-Related Deafness"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Cochlear implantation as the mainstay, since the presynaptic lesion with an intact auditory nerve responds excellently to direct electrical stimulation",
+   "Confirm an intact cochlear nerve on cross-sectional imaging before implantation",
+   "Recognise that conventional hearing aids give limited benefit because the defect is neural synaptic rather than of cochlear amplification",
+   "Early speech-perception and language support, with consideration of emerging OTOF gene-directed therapies",
+   "Genetic counselling for autosomal recessive inheritance from biallelic OTOF variants, with family testing",
+   "Manage the temperature-sensitive variant by protecting hearing during febrile illness with antipyresis"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "otoferlin_deafness-pathway",
+   "title": "Otoferlin-related deafness (DFNB9): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A leading monogenic cause of auditory neuropathy spectrum disorder, inherited in an autosomal recessive manner through biallelic OTOF variants",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Profound functional deficit and language delay despite a deceptively preserved emission profile",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Otoacoustic emissions and cochlear microphonic recording showing preserved outer hair cell activity, Auditory brainstem response demonstrating absence or gross dyssynchrony, Behavioural and speech perception audiometry as"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Cochlear implantation as the mainstay, since the presynaptic lesion with an intact auditory nerve responds excellently to direct electrical stimulation"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Interpreting present otoacoustic emissions as normal hearing and delaying intervention"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of otoferlin-related deafness (dfnb9)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "otoferlin_deafness-matrix",
+   "title": "Otoferlin-related deafness (DFNB9): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A leading monogenic cause of auditory neuropathy spectrum disorder, inherited in an autosomal recessive manner through biallelic",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Otoferlin is a calcium-sensing protein essential for synaptic vesicle exocytosis at the inner hair cell ribbon synapse. When OTOF variants impair its function, the influx of calcium fails to trigger reliable neurotransmitter release onto the auditory nerve terminals, so sound is transduced by hair cells but not faithfully relayed to the nerve. This presynaptic synaptopathy underlies the characteristic pattern of preserved outer hair cell responses with an absent or grossly dyssynchronous brainstem response. Because the spiral ganglion neurones and auditory nerve remain structurally intact, direct electrical stimulation by a cochlear implant bypasses the defective synapse effectively.",
-    "additionalDifferentials": [
-      "Other genetic and acquired causes of auditory neuropathy spectrum disorder",
-      "Neural auditory neuropathy from spiral ganglion or nerve pathology",
-      "GJB2/DFNB1 cochlear sensorineural hearing loss",
-      "Cochlear nerve deficiency on imaging",
-      "Congenital cytomegalovirus-associated hearing loss",
-      "Syndromic sensorineural hearing loss"
+    [
+     "Key Investigations",
+     "Otoacoustic emissions and cochlear microphonic recording showing preserved outer hair cell activity, Auditory brainstem response",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Otoacoustic emissions and cochlear microphonic recording showing preserved outer hair cell activity",
-      "Auditory brainstem response demonstrating absence or gross dyssynchrony",
-      "Behavioural and speech perception audiometry as age allows",
-      "Targeted OTOF sequencing and deletion/duplication analysis within a deafness panel",
-      "Cross-sectional imaging to confirm an intact cochlear nerve before implantation",
-      "Temperature-dependent threshold assessment when febrile fluctuation is reported"
+    [
+     "Primary Differentials",
+     "Other genetic and acquired causes of auditory neuropathy spectrum disorder, Neural auditory neuropathy from spiral ganglion or",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Profound functional deficit and language delay despite a deceptively preserved emission profile",
-      "Marked hearing deterioration during febrile illness in the temperature-sensitive form",
-      "Loss of previously present emissions over time",
-      "Missed diagnosis when newborn screening relies on emissions alone"
+    [
+     "Management Strategy",
+     "Cochlear implantation as the mainstay, since the presynaptic lesion with an intact auditory nerve responds excellently to direct",
+     "Core treatment modality"
     ],
-    "prognosis": "Because the lesion is presynaptic with an intact nerve, cochlear implantation typically restores excellent speech perception, and molecular confirmation may open access to gene-based therapies as they mature.",
-    "pitfalls": [
-      "Interpreting present otoacoustic emissions as normal hearing and delaying intervention",
-      "Attributing febrile hearing fluctuation to middle-ear disease rather than the temperature-sensitive phenotype",
-      "Trialling prolonged amplification when implantation is more appropriate",
-      "Not confirming an intact cochlear nerve on imaging before planning an implant"
-    ],
-    "references": [
-      "Cummings Otolaryngology",
-      "GeneReviews: OTOF-Related Deafness"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Cochlear implantation as the mainstay, since the presynaptic lesion with an intact auditory nerve responds excellently to direct electrical stimulation",
-      "Confirm an intact cochlear nerve on cross-sectional imaging before implantation",
-      "Recognise that conventional hearing aids give limited benefit because the defect is neural synaptic rather than of cochlear amplification",
-      "Early speech-perception and language support, with consideration of emerging OTOF gene-directed therapies",
-      "Genetic counselling for autosomal recessive inheritance from biallelic OTOF variants, with family testing",
-      "Manage the temperature-sensitive variant by protecting hearing during febrile illness with antipyresis"
+    [
+     "Clinical Pitfall",
+     "Interpreting present otoacoustic emissions as normal hearing and delaying intervention",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for otoferlin-related deafness (dfnb9)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "otoferlin-deafness-real-image",
+   "title": "Otoferlin-related deafness (DFNB9): Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

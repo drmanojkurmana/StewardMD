@@ -6,7 +6,19 @@
  "basis": "international",
  "counterpart": "urinary-tract-infection-children-india",
  "setting": "Primary care, emergency department, paediatric ward",
- "aliases": ["UTI child", "paediatric UTI", "pediatric UTI", "febrile UTI", "pyelonephritis child", "cystitis child", "VUR", "vesicoureteric reflux", "MCUG", "DMSA scan", "NICE NG224"],
+ "aliases": [
+  "UTI child",
+  "paediatric UTI",
+  "pediatric UTI",
+  "febrile UTI",
+  "pyelonephritis child",
+  "cystitis child",
+  "VUR",
+  "vesicoureteric reflux",
+  "MCUG",
+  "DMSA scan",
+  "NICE NG224"
+ ],
  "summary": "Test urine when symptoms suggest UTI or fever has no source, collecting clean catch urine before antibiotics. Under 3 months: refer and give IV antibiotics. Upper UTI: oral cefalexin for 7 to 10 days (IV if vomiting or very unwell); lower UTI: trimethoprim or nitrofurantoin for 3 days. Image by age and atypical or recurrent features.",
  "sections": [
   {
@@ -97,21 +109,175 @@
   }
  ],
  "drugs": [
-  { "name": "Cefalexin", "dose": "12.5 mg/kg orally twice daily for 7 to 10 days (upper UTI) or 3 days (lower UTI); severe: 25 mg/kg two to four times daily (max 1 g per dose)", "notes": "NICE first-choice oral agent for pyelonephritis from 3 months." },
-  { "name": "Co-amoxiclav (oral)", "dose": "Amoxicillin component 20 to 40 mg/kg/day in 3 divided doses (max 500 mg amoxicillin per dose) for 7 to 10 days", "notes": "NICE: only if culture shows susceptibility. AAP dose range." },
-  { "name": "Trimethoprim", "dose": "4 mg/kg orally twice daily (max 200 mg per dose) for 3 days", "notes": "Lower UTI when resistance risk is low." },
-  { "name": "Nitrofurantoin", "dose": "3 months to 11 years: 750 micrograms/kg orally four times daily for 3 days; 12 to 15 years: 50 mg four times daily", "notes": "Lower UTI only. Avoid if eGFR below 45 mL/min." },
-  { "name": "Cefixime", "dose": "8 mg/kg orally once daily (max 400 mg)", "notes": "AAP oral option; common in India. Use culture results." },
-  { "name": "Ceftriaxone", "dose": "50 to 80 mg/kg IV once daily (max 4 g/day)", "notes": "IV first choice from 3 months if vomiting or very unwell; step down to oral by 48 hours if possible." },
-  { "name": "Co-amoxiclav (IV)", "dose": "30 mg/kg IV three times daily (max 1.2 g per dose)", "notes": "Only in combination or if culture shows susceptibility (NICE)." },
-  { "name": "Gentamicin", "dose": "7 mg/kg IV once daily initially, then adjust to serum levels", "notes": "Check renal function and levels; limit the course (usually no more than 7 days)." },
-  { "name": "Amikacin", "dose": "15 mg/kg IV once daily initially, then adjust to serum levels", "notes": "Useful where ESBL organisms are common; monitor renal function and levels." }
+  {
+   "name": "Cefalexin",
+   "dose": "12.5 mg/kg orally twice daily for 7 to 10 days (upper UTI) or 3 days (lower UTI); severe: 25 mg/kg two to four times daily (max 1 g per dose)",
+   "notes": "NICE first-choice oral agent for pyelonephritis from 3 months."
+  },
+  {
+   "name": "Co-amoxiclav (oral)",
+   "dose": "Amoxicillin component 20 to 40 mg/kg/day in 3 divided doses (max 500 mg amoxicillin per dose) for 7 to 10 days",
+   "notes": "NICE: only if culture shows susceptibility. AAP dose range."
+  },
+  {
+   "name": "Trimethoprim",
+   "dose": "4 mg/kg orally twice daily (max 200 mg per dose) for 3 days",
+   "notes": "Lower UTI when resistance risk is low."
+  },
+  {
+   "name": "Nitrofurantoin",
+   "dose": "3 months to 11 years: 750 micrograms/kg orally four times daily for 3 days; 12 to 15 years: 50 mg four times daily",
+   "notes": "Lower UTI only. Avoid if eGFR below 45 mL/min."
+  },
+  {
+   "name": "Cefixime",
+   "dose": "8 mg/kg orally once daily (max 400 mg)",
+   "notes": "AAP oral option; common in India. Use culture results."
+  },
+  {
+   "name": "Ceftriaxone",
+   "dose": "50 to 80 mg/kg IV once daily (max 4 g/day)",
+   "notes": "IV first choice from 3 months if vomiting or very unwell; step down to oral by 48 hours if possible."
+  },
+  {
+   "name": "Co-amoxiclav (IV)",
+   "dose": "30 mg/kg IV three times daily (max 1.2 g per dose)",
+   "notes": "Only in combination or if culture shows susceptibility (NICE)."
+  },
+  {
+   "name": "Gentamicin",
+   "dose": "7 mg/kg IV once daily initially, then adjust to serum levels",
+   "notes": "Check renal function and levels; limit the course (usually no more than 7 days)."
+  },
+  {
+   "name": "Amikacin",
+   "dose": "15 mg/kg IV once daily initially, then adjust to serum levels",
+   "notes": "Useful where ESBL organisms are common; monitor renal function and levels."
+  }
  ],
  "sources": [
-  { "org": "NICE", "title": "Urinary tract infection in under 16s: diagnosis and management (NG224)", "year": 2022, "url": "https://www.nice.org.uk/guidance/ng224" },
-  { "org": "NICE", "title": "Pyelonephritis (acute): antimicrobial prescribing (NG111)", "year": 2018, "url": "https://www.nice.org.uk/guidance/ng111/chapter/recommendations" },
-  { "org": "NICE", "title": "Urinary tract infection (lower): antimicrobial prescribing (NG109)", "year": 2018, "url": "https://www.nice.org.uk/guidance/ng109/chapter/Recommendations" },
-  { "org": "AAP", "title": "Urinary tract infection: clinical practice guideline for the diagnosis and management of the initial UTI in febrile infants and children 2 to 24 months (reaffirmed 2016)", "year": 2011, "url": "https://publications.aap.org/pediatrics/article/128/3/595/30724/Urinary-Tract-Infection-Clinical-Practice" }
+  {
+   "org": "NICE",
+   "title": "Urinary tract infection in under 16s: diagnosis and management (NG224)",
+   "year": 2022,
+   "url": "https://www.nice.org.uk/guidance/ng224"
+  },
+  {
+   "org": "NICE",
+   "title": "Pyelonephritis (acute): antimicrobial prescribing (NG111)",
+   "year": 2018,
+   "url": "https://www.nice.org.uk/guidance/ng111/chapter/recommendations"
+  },
+  {
+   "org": "NICE",
+   "title": "Urinary tract infection (lower): antimicrobial prescribing (NG109)",
+   "year": 2018,
+   "url": "https://www.nice.org.uk/guidance/ng109/chapter/Recommendations"
+  },
+  {
+   "org": "AAP",
+   "title": "Urinary tract infection: clinical practice guideline for the diagnosis and management of the initial UTI in febrile infants and children 2 to 24 months (reaffirmed 2016)",
+   "year": 2011,
+   "url": "https://publications.aap.org/pediatrics/article/128/3/595/30724/Urinary-Tract-Infection-Clinical-Practice"
+  }
  ],
- "review": { "status": "ai_drafted", "compiled": "2026-09-25" }
+ "review": {
+  "status": "ai_drafted",
+  "compiled": "2026-09-25"
+ },
+ "algorithms": [
+  {
+   "id": "urinary-tract-infection-children-pathway",
+   "title": "Urinary tract infection (child) Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Features that make UTI more likely (NICE): dysuria, frequency, new bedwetting, foul-smelling, dark or cloudy urine, visible haematuria, reduced fluid intake, fever, shivering, abdominal, loin or suprapubic pain or tenderness, capillary",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Clinical Assessment",
+     "action": "Features that make it less likely: no dysuria, nappy rash, breathing difficulty, abnormal chest sounds or ear examination, fever with a known alternative cause.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Atypical UTI: seriously ill, poor urine flow, abdominal or bladder mass, raised creatinine, septicaemia, no response to suitable antibiotics within 48 hours, or non-E. coli organism. Recurrent: 2 or more upper UTIs, 1 upper plus 1 or more"
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "Upper UTI: cefalexin 12.5 mg/kg twice daily (25 mg/kg two to four times daily, max 1 g per dose, if severe) for 7 to 10 days; co-amoxiclav only if culture shows susceptibility (NICE). AAP gives 7 to 14 days in total."
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Avoid common pitfall: Culturing bag urine or delaying transport: contamination leads to overdiagnosis and unnecessary imaging."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for urinary tract infection (child)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "urinary-tract-infection-children-summary-matrix",
+   "title": "Urinary tract infection (child) Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Features that make UTI more likely (NICE): dysuria, frequency, new bedwetting, foul-smelling, dark or cloudy urine, visible haematuria,",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Upper UTI: cefalexin 12.5 mg/kg twice daily (25 mg/kg two to four times daily, max 1 g per dose, if severe) for 7 to 10 days; co-amoxiclav",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Atypical UTI: seriously ill, poor urine flow, abdominal or bladder mass, raised creatinine, septicaemia, no response to suitable",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Cefalexin: 12.5 mg/kg orally twice daily for 7 to 10 days (upper UTI) or 3 days (lower UTI); severe: 25 mg/kg two to four times daily (max",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Culturing bag urine or delaying transport: contamination leads to overdiagnosis and unnecessary imaging.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for urinary tract infection (child)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "urinary-tract-infection-children-real-image",
+   "title": "Urinary tract infection (child): Diagnostic Renal Ultrasonography",
+   "type": "ultrasound",
+   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
+   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
+   "annotations": [
+    {
+     "label": "Renal Cortex",
+     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
+    },
+    {
+     "label": "Corticomedullary Junction",
+     "description": "Medullary pyramid definition and structural architecture."
+    },
+    {
+     "label": "Collecting System",
+     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+    }
+   ]
+  }
+ ]
 }

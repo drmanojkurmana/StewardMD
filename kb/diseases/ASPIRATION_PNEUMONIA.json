@@ -228,5 +228,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "h83602c4f"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "aspiration_pneumonia-dx-algo",
+      "title": "Aspiration Pneumonia: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Aspiration pneumonia is best viewed as a point on a continuum that also includes community-acquired and hospital-acquired pneumonia, defined by a phenotype with macroaspiration risk factors and involvement of characteristic",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Gross hemoptysis suggesting necrotizing pneumonia (p.1067)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Chest radiography looking for consolidation in dependent lung segments (basilar lower-lobe segments if aspiration occurred upright; posterior segment of the upper lobe or superior segment of the lower lobe if supine)"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Differentiate from top mimics: Foreign-body/food aspiration causing major-airway obstruction with atelectasis and nonspecific inflammation, managed by removal rather than antibiotics (p.1418), Chemical (acid) pneumonitis, e.g., Mendelson"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Failing to distinguish chemical pneumonitis (Mendelson syndrome) from bacterial aspiration pneumonia: chemical pneumonitis is a non-infectious acid injury that usually resolves with supportive care and does NOT warrant"
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for aspiration pneumonia."
+    }
+  ],
+  "tables": [
+    {
+      "id": "aspiration_pneumonia-matrix",
+      "title": "Aspiration Pneumonia: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Aspiration pneumonia is best viewed as a point on a continuum that also includes community-acquired and hospital-acquired",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Chest radiography looking for consolidation in dependent lung segments (basilar lower-lobe segments if aspiration occurred",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Foreign-body/food aspiration causing major-airway obstruction with atelectasis and nonspecific inflammation, managed by removal",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Gross hemoptysis suggesting necrotizing pneumonia (p.1067)",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to distinguish chemical pneumonitis (Mendelson syndrome) from bacterial aspiration pneumonia: chemical pneumonitis is a",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for aspiration pneumonia."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "aspiration-pneumonia-real-image",
+      "title": "Aspiration Pneumonia: Diagnostic Chest Radiograph",
+      "type": "xray",
+      "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
+      "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
+      "annotations": [
+        {
+          "label": "Parenchyma & Airspaces",
+          "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
+        },
+        {
+          "label": "Bronchovascular Tree",
+          "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
+        },
+        {
+          "label": "Pleural Margins",
+          "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+        }
+      ]
+    }
+  ]
 }

@@ -1,83 +1,178 @@
 {
-  "id": "primary_ovarian_insufficiency",
-  "name": "Primary ovarian insufficiency",
-  "aliases": [
-    "premature ovarian failure",
-    "premature ovarian insufficiency",
-    "hypergonadotropic hypogonadism (female)",
-    "POI"
+ "id": "primary_ovarian_insufficiency",
+ "name": "Primary ovarian insufficiency",
+ "aliases": [
+  "premature ovarian failure",
+  "premature ovarian insufficiency",
+  "hypergonadotropic hypogonadism (female)",
+  "POI"
+ ],
+ "class": "non_infective",
+ "system": "Endocrine / Reproductive",
+ "specialty": "Paediatric & Reproductive Endocrinology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Williams Textbook of Endocrinology / Nelson",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Defined by loss of normal ovarian function before the age of 40, presenting with primary or secondary amenorrhoea, oestrogen deficiency, and impaired fertility",
+   "The biochemical signature is hypergonadotropic hypogonadism: a persistently raised follicle-stimulating hormone with a low oestradiol, reflecting failure of ovarian negative feedback",
+   "Turner syndrome (45,X and variants) is a leading cause in the paediatric age group and should be considered in any girl with delayed puberty and short stature",
+   "An FMR1 (fragile X) premutation is an important heritable cause and warrants testing, particularly where there is a family history of ovarian insufficiency, intellectual disability, or ataxia/tremor",
+   "Autoimmune oophoritis may occur in isolation or as part of an autoimmune polyglandular syndrome, so adrenal and thyroid autoimmunity should be screened for",
+   "Iatrogenic insufficiency from chemotherapy, pelvic irradiation, or ovarian surgery is increasingly common among survivors of childhood cancer",
+   "Management centres on oestrogen and progestogen replacement to induce or maintain secondary sexual characteristics, protect bone and cardiovascular health, and address fertility and psychological needs",
+   "Residual, intermittent ovarian activity can occur, so the condition is not always absolute and spontaneous conception is occasionally possible"
   ],
-  "class": "non_infective",
-  "system": "Endocrine / Reproductive",
-  "specialty": "Paediatric & Reproductive Endocrinology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Williams Textbook of Endocrinology / Nelson",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Defined by loss of normal ovarian function before the age of 40, presenting with primary or secondary amenorrhoea, oestrogen deficiency, and impaired fertility",
-      "The biochemical signature is hypergonadotropic hypogonadism: a persistently raised follicle-stimulating hormone with a low oestradiol, reflecting failure of ovarian negative feedback",
-      "Turner syndrome (45,X and variants) is a leading cause in the paediatric age group and should be considered in any girl with delayed puberty and short stature",
-      "An FMR1 (fragile X) premutation is an important heritable cause and warrants testing, particularly where there is a family history of ovarian insufficiency, intellectual disability, or ataxia/tremor",
-      "Autoimmune oophoritis may occur in isolation or as part of an autoimmune polyglandular syndrome, so adrenal and thyroid autoimmunity should be screened for",
-      "Iatrogenic insufficiency from chemotherapy, pelvic irradiation, or ovarian surgery is increasingly common among survivors of childhood cancer",
-      "Management centres on oestrogen and progestogen replacement to induce or maintain secondary sexual characteristics, protect bone and cardiovascular health, and address fertility and psychological needs",
-      "Residual, intermittent ovarian activity can occur, so the condition is not always absolute and spontaneous conception is occasionally possible"
+  "pathophysiology": "Primary ovarian insufficiency reflects depletion or dysfunction of the ovarian follicular pool, so the ovary fails to produce adequate oestrogen and to complete folliculogenesis. Loss of ovarian feedback removes inhibition of the hypothalamic-pituitary axis, driving compensatory elevation of gonadotropins, especially FSH. Mechanisms include chromosomal abnormalities causing accelerated follicular atresia (as in Turner syndrome), the FMR1 premutation, other genetic and metabolic disorders (such as galactosaemia), autoimmune destruction of ovarian tissue, and iatrogenic gonadotoxic insults from chemotherapy, radiation, or surgery. The resulting oestrogen deficiency impairs pubertal development or causes menstrual cessation and predisposes to reduced bone mineral density.",
+  "additionalDifferentials": [
+   "Constitutional delay of growth and puberty",
+   "Hypogonadotropic hypogonadism (central causes, including isolated GnRH deficiency)",
+   "Polycystic ovary syndrome with oligomenorrhoea",
+   "Pregnancy as a cause of secondary amenorrhoea",
+   "Hyperprolactinaemia",
+   "Anatomical causes such as Müllerian agenesis or outflow obstruction",
+   "Functional hypothalamic amenorrhoea from weight loss, exercise, or illness"
+  ],
+  "additionalInvestigations": [
+   "Serum FSH and LH (elevated) with oestradiol (low), repeated to confirm",
+   "Karyotype to detect Turner syndrome or Y-chromosome material",
+   "FMR1 premutation testing for fragile X-associated ovarian insufficiency",
+   "Adrenal and thyroid autoantibodies and screening for associated autoimmune endocrinopathy",
+   "Pelvic ultrasound to assess uterine size and ovarian morphology",
+   "Bone mineral density assessment given the risk of oestrogen-deficiency bone loss"
+  ],
+  "redFlags": [
+   "Presence of Y-chromosome material on karyotype, which mandates gonadectomy because of malignant germ cell tumour risk in dysgenetic gonads",
+   "Features of adrenal insufficiency in association with autoimmune ovarian failure",
+   "Turner syndrome features requiring cardiac and aortic surveillance",
+   "Severe oestrogen deficiency with low bone density and fracture risk"
+  ],
+  "prognosis": "Fertility is substantially reduced and often permanently lost, though intermittent ovarian function means occasional spontaneous ovulation; with appropriate hormone replacement, secondary sexual characteristics, bone health, and cardiovascular risk can be well managed, and assisted reproduction with donor oocytes offers a route to pregnancy.",
+  "pitfalls": [
+   "Attributing amenorrhoea to stress or weight without measuring gonadotropins, thereby missing hypergonadotropic hypogonadism",
+   "Failing to karyotype and so overlooking Turner syndrome or occult Y-chromosome material requiring gonadectomy",
+   "Neglecting to test for the FMR1 premutation and its familial implications",
+   "Underestimating the long-term bone and cardiovascular consequences of untreated oestrogen deficiency",
+   "Telling patients that pregnancy is impossible, ignoring the small chance of spontaneous ovulation"
+  ],
+  "references": [
+   "Williams Textbook of Endocrinology",
+   "Nelson Textbook of Pediatrics"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Systemic oestrogen replacement with a progestogen in women with an intact uterus, continued until the average age of natural menopause, to relieve deficiency symptoms and protect bone and cardiovascular health",
+   "Gradual pubertal induction with incremental oestrogen followed by added progestogen in adolescents presenting before puberty is complete",
+   "Bone protection through adequate calcium and vitamin D intake, weight-bearing exercise and periodic bone mineral density monitoring",
+   "Fertility counselling with assisted reproduction using donor oocytes or embryos, and fertility preservation before any planned gonadotoxic treatment",
+   "Identification and treatment of the underlying cause, including screening for associated thyroid and adrenal autoimmunity and management of Turner-related comorbidities",
+   "Contraceptive advice where pregnancy is not desired, since intermittent spontaneous ovulation can occur",
+   "Psychological support addressing the impact on fertility and identity",
+   "Genetic counselling and family screening, including FMR1 premutation and karyotype testing, with gonadectomy where Y-chromosome material is present"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "primary_ovarian_insufficiency-pathway",
+   "title": "Primary ovarian insufficiency: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Defined by loss of normal ovarian function before the age of 40, presenting with primary or secondary amenorrhoea, oestrogen deficiency, and impaired fertility",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Presence of Y-chromosome material on karyotype, which mandates gonadectomy because of malignant germ cell tumour risk in dysgenetic gonads",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Serum FSH and LH (elevated) with oestradiol (low), repeated to confirm, Karyotype to detect Turner syndrome or Y-chromosome material, FMR1 premutation testing for fragile X-associated ovarian insufficiency"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Systemic oestrogen replacement with a progestogen in women with an intact uterus, continued until the average age of natural menopause, to relieve deficiency symptoms and protect bone and cardiovascular health"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing amenorrhoea to stress or weight without measuring gonadotropins, thereby missing hypergonadotropic hypogonadism"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of primary ovarian insufficiency."
+  }
+ ],
+ "tables": [
+  {
+   "id": "primary_ovarian_insufficiency-matrix",
+   "title": "Primary ovarian insufficiency: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Defined by loss of normal ovarian function before the age of 40, presenting with primary or secondary amenorrhoea, oestrogen",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Primary ovarian insufficiency reflects depletion or dysfunction of the ovarian follicular pool, so the ovary fails to produce adequate oestrogen and to complete folliculogenesis. Loss of ovarian feedback removes inhibition of the hypothalamic-pituitary axis, driving compensatory elevation of gonadotropins, especially FSH. Mechanisms include chromosomal abnormalities causing accelerated follicular atresia (as in Turner syndrome), the FMR1 premutation, other genetic and metabolic disorders (such as galactosaemia), autoimmune destruction of ovarian tissue, and iatrogenic gonadotoxic insults from chemotherapy, radiation, or surgery. The resulting oestrogen deficiency impairs pubertal development or causes menstrual cessation and predisposes to reduced bone mineral density.",
-    "additionalDifferentials": [
-      "Constitutional delay of growth and puberty",
-      "Hypogonadotropic hypogonadism (central causes, including isolated GnRH deficiency)",
-      "Polycystic ovary syndrome with oligomenorrhoea",
-      "Pregnancy as a cause of secondary amenorrhoea",
-      "Hyperprolactinaemia",
-      "Anatomical causes such as Müllerian agenesis or outflow obstruction",
-      "Functional hypothalamic amenorrhoea from weight loss, exercise, or illness"
+    [
+     "Key Investigations",
+     "Serum FSH and LH (elevated) with oestradiol (low), repeated to confirm, Karyotype to detect Turner syndrome or Y-chromosome",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Serum FSH and LH (elevated) with oestradiol (low), repeated to confirm",
-      "Karyotype to detect Turner syndrome or Y-chromosome material",
-      "FMR1 premutation testing for fragile X-associated ovarian insufficiency",
-      "Adrenal and thyroid autoantibodies and screening for associated autoimmune endocrinopathy",
-      "Pelvic ultrasound to assess uterine size and ovarian morphology",
-      "Bone mineral density assessment given the risk of oestrogen-deficiency bone loss"
+    [
+     "Primary Differentials",
+     "Constitutional delay of growth and puberty, Hypogonadotropic hypogonadism (central causes, including isolated GnRH deficiency),",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Presence of Y-chromosome material on karyotype, which mandates gonadectomy because of malignant germ cell tumour risk in dysgenetic gonads",
-      "Features of adrenal insufficiency in association with autoimmune ovarian failure",
-      "Turner syndrome features requiring cardiac and aortic surveillance",
-      "Severe oestrogen deficiency with low bone density and fracture risk"
+    [
+     "Management Strategy",
+     "Systemic oestrogen replacement with a progestogen in women with an intact uterus, continued until the average age of natural",
+     "Core treatment modality"
     ],
-    "prognosis": "Fertility is substantially reduced and often permanently lost, though intermittent ovarian function means occasional spontaneous ovulation; with appropriate hormone replacement, secondary sexual characteristics, bone health, and cardiovascular risk can be well managed, and assisted reproduction with donor oocytes offers a route to pregnancy.",
-    "pitfalls": [
-      "Attributing amenorrhoea to stress or weight without measuring gonadotropins, thereby missing hypergonadotropic hypogonadism",
-      "Failing to karyotype and so overlooking Turner syndrome or occult Y-chromosome material requiring gonadectomy",
-      "Neglecting to test for the FMR1 premutation and its familial implications",
-      "Underestimating the long-term bone and cardiovascular consequences of untreated oestrogen deficiency",
-      "Telling patients that pregnancy is impossible, ignoring the small chance of spontaneous ovulation"
-    ],
-    "references": [
-      "Williams Textbook of Endocrinology",
-      "Nelson Textbook of Pediatrics"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Systemic oestrogen replacement with a progestogen in women with an intact uterus, continued until the average age of natural menopause, to relieve deficiency symptoms and protect bone and cardiovascular health",
-      "Gradual pubertal induction with incremental oestrogen followed by added progestogen in adolescents presenting before puberty is complete",
-      "Bone protection through adequate calcium and vitamin D intake, weight-bearing exercise and periodic bone mineral density monitoring",
-      "Fertility counselling with assisted reproduction using donor oocytes or embryos, and fertility preservation before any planned gonadotoxic treatment",
-      "Identification and treatment of the underlying cause, including screening for associated thyroid and adrenal autoimmunity and management of Turner-related comorbidities",
-      "Contraceptive advice where pregnancy is not desired, since intermittent spontaneous ovulation can occur",
-      "Psychological support addressing the impact on fertility and identity",
-      "Genetic counselling and family screening, including FMR1 premutation and karyotype testing, with gonadectomy where Y-chromosome material is present"
+    [
+     "Clinical Pitfall",
+     "Attributing amenorrhoea to stress or weight without measuring gonadotropins, thereby missing hypergonadotropic hypogonadism",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for primary ovarian insufficiency."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "primary-ovarian-insufficiency-real-image",
+   "title": "Primary ovarian insufficiency: Diagnostic Endocrine Cross-Sectional Imaging",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
+   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
+   "annotations": [
+    {
+     "label": "Gland Morphology",
+     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
+    },
+    {
+     "label": "Focal Lesions",
+     "description": "Nodularity, adenoma attenuation, and washout dynamics."
+    },
+    {
+     "label": "Surrounding Structures",
+     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+    }
+   ]
+  }
+ ]
 }

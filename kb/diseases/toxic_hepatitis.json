@@ -156,5 +156,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "hbd6c4250"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "toxic_hepatitis-dx-algo",
+      "title": "Drug-induced / toxic hepatitis: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "DILI is the most common cause of acute liver failure, and signals of hepatotoxicity in clinical trials are the leading reason candidate drugs fail to reach approval (p.2665).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Jaundice arising during drug therapy (Hy's Law) - predicts severe injury and a substantial risk of progression to liver failure (p.2667)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Calculate the R value (ALT/ALP, each as multiples of ULN) to classify hepatocellular vs cholestatic vs mixed injury (p.2667), Detailed exposure history including occupational/home chemicals, prescription and OTC drugs, and"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Injury pattern is classified by the R value (ALT/ALP as multiples of ULN): R >5.0 hepatocellular, R 5x ULN (or >3x ULN with symptoms) marks the point at which the offending agent should be withdrawn (p.2668). Causality"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Treating mild, transient aminotransferase rises ('adaptation', e.g., with isoniazid, valproate, phenytoin, statins) as significant injury - these often resolve despite continued use; conversely, ignoring"
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for drug-induced / toxic hepatitis."
+    }
+  ],
+  "tables": [
+    {
+      "id": "toxic_hepatitis-matrix",
+      "title": "Drug-induced / toxic hepatitis: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "DILI is the most common cause of acute liver failure, and signals of hepatotoxicity in clinical trials are the leading reason",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Calculate the R value (ALT/ALP, each as multiples of ULN) to classify hepatocellular vs cholestatic vs mixed injury (p.2667),",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Viral hepatitis (idiosyncratic DILI from isoniazid or ciprofloxacin can be clinically and histologically indistinguishable from",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Jaundice arising during drug therapy (Hy's Law) - predicts severe injury and a substantial risk of progression to liver failure",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating mild, transient aminotransferase rises ('adaptation', e.g., with isoniazid, valproate, phenytoin, statins) as",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for drug-induced / toxic hepatitis."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "toxic-hepatitis-real-image",
+      "title": "Drug-induced / toxic hepatitis: Diagnostic Abdominal Computed Tomography",
+      "type": "ct",
+      "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
+      "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
+      "annotations": [
+        {
+          "label": "Solid Viscera",
+          "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
+        },
+        {
+          "label": "Gastrointestinal Tract",
+          "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
+        },
+        {
+          "label": "Mesentery & Peritoneum",
+          "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+        }
+      ]
+    }
+  ]
 }

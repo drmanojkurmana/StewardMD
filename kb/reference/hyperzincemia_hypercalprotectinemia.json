@@ -1,80 +1,175 @@
 {
-  "id": "hyperzincemia_hypercalprotectinemia",
-  "name": "Hyperzincaemia with hypercalprotectinaemia",
-  "aliases": [
-    "Hz/Hc",
-    "hyperzincaemia and hypercalprotectinaemia",
-    "chronic inflammation with hyperzincaemia",
-    "calprotectin (S100A8/S100A9)"
+ "id": "hyperzincemia_hypercalprotectinemia",
+ "name": "Hyperzincaemia with hypercalprotectinaemia",
+ "aliases": [
+  "Hz/Hc",
+  "hyperzincaemia and hypercalprotectinaemia",
+  "chronic inflammation with hyperzincaemia",
+  "calprotectin (S100A8/S100A9)"
+ ],
+ "class": "non_infective",
+ "system": "Metabolic / Genetics",
+ "specialty": "Metabolic Medicine / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Journal of Inherited Metabolic Disease / textbooks of clinical immunology and metabolism",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A rare disorder defined by persistent, marked elevation of serum zinc together with grossly raised circulating calprotectin (the S100A8/S100A9 complex)",
+   "Patients typically have chronic systemic inflammation with recurrent fever, anaemia of chronic disease, hepatosplenomegaly, and failure to thrive",
+   "It sits on a spectrum with the autoinflammatory condition often described alongside recurrent infections and arthritis",
+   "The extreme hyperzincaemia is artefactual in the sense that most zinc is bound to the vast excess of circulating calprotectin, so tissues may paradoxically be functionally zinc-deficient",
+   "Very high serum zinc with disproportionate inflammation should prompt measurement of calprotectin",
+   "Anaemia is common and may be refractory, reflecting chronic inflammation and disturbed metal handling",
+   "Distinguishing it from primary immunodeficiency and other autoinflammatory syndromes requires careful phenotyping",
+   "Management is supportive and anti-inflammatory, treating flares and complications rather than the zinc level itself"
   ],
-  "class": "non_infective",
-  "system": "Metabolic / Genetics",
-  "specialty": "Metabolic Medicine / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Journal of Inherited Metabolic Disease / textbooks of clinical immunology and metabolism",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A rare disorder defined by persistent, marked elevation of serum zinc together with grossly raised circulating calprotectin (the S100A8/S100A9 complex)",
-      "Patients typically have chronic systemic inflammation with recurrent fever, anaemia of chronic disease, hepatosplenomegaly, and failure to thrive",
-      "It sits on a spectrum with the autoinflammatory condition often described alongside recurrent infections and arthritis",
-      "The extreme hyperzincaemia is artefactual in the sense that most zinc is bound to the vast excess of circulating calprotectin, so tissues may paradoxically be functionally zinc-deficient",
-      "Very high serum zinc with disproportionate inflammation should prompt measurement of calprotectin",
-      "Anaemia is common and may be refractory, reflecting chronic inflammation and disturbed metal handling",
-      "Distinguishing it from primary immunodeficiency and other autoinflammatory syndromes requires careful phenotyping",
-      "Management is supportive and anti-inflammatory, treating flares and complications rather than the zinc level itself"
+  "pathophysiology": "Hyperzincaemia with hypercalprotectinaemia is characterised by massive overproduction or release of calprotectin, a zinc- and calcium-binding heterocomplex of the S100A8 and S100A9 proteins that is abundant in neutrophils and monocytes and is a key mediator of innate immune inflammation. The enormous circulating pool of calprotectin sequesters zinc, elevating measured serum zinc to striking levels while reducing zinc availability to tissues. Sustained calprotectin-driven inflammation produces the systemic features: fever, anaemia of chronic disease, organomegaly, and growth failure. The disorder illustrates how an inflammatory metal-binding protein can distort trace-element measurements and drive a chronic inflammatory phenotype.",
+  "additionalDifferentials": [
+   "Systemic-onset juvenile idiopathic arthritis and other autoinflammatory syndromes",
+   "Primary immunodeficiency with recurrent infection",
+   "Chronic infection or occult sepsis",
+   "Malignancy causing chronic inflammation and anaemia",
+   "Macrophage activation syndrome",
+   "Other causes of anaemia of chronic disease with organomegaly"
+  ],
+  "additionalInvestigations": [
+   "Serum zinc concentration (characteristically very high)",
+   "Serum or plasma calprotectin (S100A8/S100A9) measurement",
+   "Inflammatory markers including C-reactive protein and ferritin",
+   "Full blood count and iron studies for anaemia of chronic disease",
+   "Imaging for hepatosplenomegaly and lymphadenopathy",
+   "Immunological and autoinflammatory workup to exclude alternatives"
+  ],
+  "redFlags": [
+   "Persistent high fever with organomegaly suggesting a severe inflammatory flare",
+   "Progressive refractory anaemia",
+   "Features of macrophage activation or systemic decompensation",
+   "Failure to thrive with growth arrest in a child"
+  ],
+  "prognosis": "A chronic relapsing inflammatory disorder; severity varies, with anaemia, growth failure, and recurrent inflammation causing morbidity, while the biochemical hyperzincaemia itself does not require correction.",
+  "pitfalls": [
+   "Misinterpreting the very high serum zinc as clinically meaningful zinc excess or attempting to lower it",
+   "Overlooking functional tissue zinc deficiency despite high serum levels",
+   "Failing to measure calprotectin when confronted with unexplained hyperzincaemia and inflammation",
+   "Confusing the picture with a primary immunodeficiency or malignancy without full phenotyping"
+  ],
+  "references": [
+   "Journal of Inherited Metabolic Disease",
+   "Textbooks of clinical immunology and metabolic medicine"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Direct treatment at suppressing the calprotectin-driven inflammation with anti-inflammatory agents such as corticosteroids, trialling biologic therapy (for example interleukin-1 or interleukin-6 blockade) in refractory autoinflammation",
+   "Do not attempt to lower the serum zinc, since the hyperzincaemia is an artefact of calprotectin binding and needs no correction",
+   "Manage anaemia of chronic disease supportively, treating coexisting iron deficiency and reserving transfusion for symptomatic anaemia",
+   "Monitor inflammatory markers such as C-reactive protein and ferritin, alongside circulating calprotectin, to gauge disease activity and treatment response",
+   "Surveil growth, nutrition and organomegaly, with paediatric input for failure to thrive",
+   "Refer to metabolic medicine and clinical immunology or rheumatology for co-ordinated autoinflammatory care",
+   "Escalate immunomodulation during severe inflammatory flares with fever and worsening anaemia"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "hyperzincemia_hypercalprotectinemia-pathway",
+   "title": "Hyperzincaemia with hypercalprotectinaemia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A rare disorder defined by persistent, marked elevation of serum zinc together with grossly raised circulating calprotectin (the S100A8/S100A9 complex)",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Persistent high fever with organomegaly suggesting a severe inflammatory flare",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Serum zinc concentration (characteristically very high), Serum or plasma calprotectin (S100A8/S100A9) measurement, Inflammatory markers including C-reactive protein and ferritin"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Direct treatment at suppressing the calprotectin-driven inflammation with anti-inflammatory agents such as corticosteroids, trialling biologic therapy (for example interleukin-1 or interleukin-6 blockade) in refractory"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Misinterpreting the very high serum zinc as clinically meaningful zinc excess or attempting to lower it"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of hyperzincaemia with hypercalprotectinaemia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "hyperzincemia_hypercalprotectinemia-matrix",
+   "title": "Hyperzincaemia with hypercalprotectinaemia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A rare disorder defined by persistent, marked elevation of serum zinc together with grossly raised circulating calprotectin (the",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Hyperzincaemia with hypercalprotectinaemia is characterised by massive overproduction or release of calprotectin, a zinc- and calcium-binding heterocomplex of the S100A8 and S100A9 proteins that is abundant in neutrophils and monocytes and is a key mediator of innate immune inflammation. The enormous circulating pool of calprotectin sequesters zinc, elevating measured serum zinc to striking levels while reducing zinc availability to tissues. Sustained calprotectin-driven inflammation produces the systemic features: fever, anaemia of chronic disease, organomegaly, and growth failure. The disorder illustrates how an inflammatory metal-binding protein can distort trace-element measurements and drive a chronic inflammatory phenotype.",
-    "additionalDifferentials": [
-      "Systemic-onset juvenile idiopathic arthritis and other autoinflammatory syndromes",
-      "Primary immunodeficiency with recurrent infection",
-      "Chronic infection or occult sepsis",
-      "Malignancy causing chronic inflammation and anaemia",
-      "Macrophage activation syndrome",
-      "Other causes of anaemia of chronic disease with organomegaly"
+    [
+     "Key Investigations",
+     "Serum zinc concentration (characteristically very high), Serum or plasma calprotectin (S100A8/S100A9) measurement, Inflammatory",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Serum zinc concentration (characteristically very high)",
-      "Serum or plasma calprotectin (S100A8/S100A9) measurement",
-      "Inflammatory markers including C-reactive protein and ferritin",
-      "Full blood count and iron studies for anaemia of chronic disease",
-      "Imaging for hepatosplenomegaly and lymphadenopathy",
-      "Immunological and autoinflammatory workup to exclude alternatives"
+    [
+     "Primary Differentials",
+     "Systemic-onset juvenile idiopathic arthritis and other autoinflammatory syndromes, Primary immunodeficiency with recurrent",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Persistent high fever with organomegaly suggesting a severe inflammatory flare",
-      "Progressive refractory anaemia",
-      "Features of macrophage activation or systemic decompensation",
-      "Failure to thrive with growth arrest in a child"
+    [
+     "Management Strategy",
+     "Direct treatment at suppressing the calprotectin-driven inflammation with anti-inflammatory agents such as corticosteroids,",
+     "Core treatment modality"
     ],
-    "prognosis": "A chronic relapsing inflammatory disorder; severity varies, with anaemia, growth failure, and recurrent inflammation causing morbidity, while the biochemical hyperzincaemia itself does not require correction.",
-    "pitfalls": [
-      "Misinterpreting the very high serum zinc as clinically meaningful zinc excess or attempting to lower it",
-      "Overlooking functional tissue zinc deficiency despite high serum levels",
-      "Failing to measure calprotectin when confronted with unexplained hyperzincaemia and inflammation",
-      "Confusing the picture with a primary immunodeficiency or malignancy without full phenotyping"
-    ],
-    "references": [
-      "Journal of Inherited Metabolic Disease",
-      "Textbooks of clinical immunology and metabolic medicine"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Direct treatment at suppressing the calprotectin-driven inflammation with anti-inflammatory agents such as corticosteroids, trialling biologic therapy (for example interleukin-1 or interleukin-6 blockade) in refractory autoinflammation",
-      "Do not attempt to lower the serum zinc, since the hyperzincaemia is an artefact of calprotectin binding and needs no correction",
-      "Manage anaemia of chronic disease supportively, treating coexisting iron deficiency and reserving transfusion for symptomatic anaemia",
-      "Monitor inflammatory markers such as C-reactive protein and ferritin, alongside circulating calprotectin, to gauge disease activity and treatment response",
-      "Surveil growth, nutrition and organomegaly, with paediatric input for failure to thrive",
-      "Refer to metabolic medicine and clinical immunology or rheumatology for co-ordinated autoinflammatory care",
-      "Escalate immunomodulation during severe inflammatory flares with fever and worsening anaemia"
+    [
+     "Clinical Pitfall",
+     "Misinterpreting the very high serum zinc as clinically meaningful zinc excess or attempting to lower it",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for hyperzincaemia with hypercalprotectinaemia."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "hyperzincemia-hypercalprotectinemia-real-image",
+   "title": "Hyperzincaemia with hypercalprotectinaemia: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

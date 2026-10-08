@@ -1,80 +1,175 @@
 {
-  "id": "patellofemoral_pain",
-  "name": "Patellofemoral pain syndrome",
-  "aliases": [
-    "PFPS",
-    "anterior knee pain",
-    "patellofemoral pain",
-    "patellofemoral pain syndrome",
-    "runner's knee"
+ "id": "patellofemoral_pain",
+ "name": "Patellofemoral pain syndrome",
+ "aliases": [
+  "PFPS",
+  "anterior knee pain",
+  "patellofemoral pain",
+  "patellofemoral pain syndrome",
+  "runner's knee"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal",
+ "specialty": "Sports & Musculoskeletal Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Apley & Solomon / standard sports medicine references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Presents with diffuse or peri-patellar anterior knee pain aggravated by loaded knee flexion such as squatting, stairs, kneeling, and prolonged sitting (the theatre sign)",
+   "It is a diagnosis based on the pattern of anterior knee pain after excluding other structural causes, and imaging is usually normal",
+   "It is most common in adolescents and young adults, particularly active females",
+   "Contributing factors include quadriceps and gluteal weakness, dynamic knee valgus, hip control deficits, and training overload rather than a single structural lesion",
+   "The old label chondromalacia patellae describes cartilage softening but correlates poorly with symptoms and is not synonymous with the syndrome",
+   "Examination may reveal pain on patellar compression, poor lower-limb alignment on a single-leg squat, and quadriceps or hip abductor weakness",
+   "First-line management is exercise therapy targeting the quadriceps and hip musculature, combined with load management and activity modification",
+   "Adjuncts include patellar taping, appropriate footwear or orthoses, and attention to biomechanics and training errors",
+   "Distinguish it from patellar instability, patellar tendinopathy, and referred pain, which need different treatment"
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal",
-  "specialty": "Sports & Musculoskeletal Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Apley & Solomon / standard sports medicine references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Presents with diffuse or peri-patellar anterior knee pain aggravated by loaded knee flexion such as squatting, stairs, kneeling, and prolonged sitting (the theatre sign)",
-      "It is a diagnosis based on the pattern of anterior knee pain after excluding other structural causes, and imaging is usually normal",
-      "It is most common in adolescents and young adults, particularly active females",
-      "Contributing factors include quadriceps and gluteal weakness, dynamic knee valgus, hip control deficits, and training overload rather than a single structural lesion",
-      "The old label chondromalacia patellae describes cartilage softening but correlates poorly with symptoms and is not synonymous with the syndrome",
-      "Examination may reveal pain on patellar compression, poor lower-limb alignment on a single-leg squat, and quadriceps or hip abductor weakness",
-      "First-line management is exercise therapy targeting the quadriceps and hip musculature, combined with load management and activity modification",
-      "Adjuncts include patellar taping, appropriate footwear or orthoses, and attention to biomechanics and training errors",
-      "Distinguish it from patellar instability, patellar tendinopathy, and referred pain, which need different treatment"
+  "pathophysiology": "Patellofemoral pain arises from excessive or maldistributed stress across the patellofemoral joint. Imbalance in the forces controlling patellar tracking, weakness of the quadriceps and hip abductors, dynamic valgus, and altered lower-limb alignment concentrate load on the retropatellar and peripatellar tissues. Repetitive overload of richly innervated subchondral bone and soft tissue, rather than cartilage damage alone, generates pain.",
+  "additionalDifferentials": [
+   "Patellar tendinopathy (jumper's knee)",
+   "Patellar subluxation or instability",
+   "Chondral or osteochondral lesions and early osteoarthritis",
+   "Osgood-Schlatter or Sinding-Larsen-Johansson disease in adolescents",
+   "Plica syndrome",
+   "Referred pain from the hip (including slipped capital femoral epiphysis in adolescents) or lumbar spine",
+   "Prepatellar or pes anserine bursitis"
+  ],
+  "additionalInvestigations": [
+   "Primarily a clinical diagnosis based on history and examination",
+   "Plain radiographs including skyline/axial views if instability, arthritis, or bony pathology is suspected",
+   "MRI reserved for atypical, refractory, or locking symptoms to assess cartilage and other structures",
+   "Assessment of hip and lower-limb biomechanics and muscle strength",
+   "Consider hip imaging in adolescents to exclude referred hip pathology"
+  ],
+  "redFlags": [
+   "True locking, giving way, or significant effusion suggesting internal derangement",
+   "Fever, systemic symptoms, or a hot swollen joint suggesting infection or inflammatory arthritis",
+   "Night pain, rest pain, or a mass raising concern for tumour",
+   "Adolescent knee pain that may be referred from serious hip pathology"
+  ],
+  "prognosis": "Many improve with structured rehabilitation, but symptoms can be persistent or recurrent in a substantial minority, particularly if strength and biomechanical deficits are not corrected; long-term association with patellofemoral osteoarthritis is debated.",
+  "pitfalls": [
+   "Labelling all anterior knee pain as chondromalacia and relying on rest alone",
+   "Neglecting hip and gluteal strengthening and focusing only on the knee",
+   "Missing patellar instability, referred hip pathology, or tumour",
+   "Rushing return to sport without addressing training load and biomechanics"
+  ],
+  "references": [
+   "Apley & Solomon's System of Orthopaedics and Fractures"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Make structured physiotherapy the mainstay, combining quadriceps strengthening with hip abductor and external-rotator strengthening and movement retraining",
+   "Modify aggravating loads such as stairs, squatting, and prolonged sitting with graded activity and relative rest",
+   "Use patellar taping or bracing and, in those with excessive foot pronation, foot orthoses as adjuncts to reduce pain",
+   "Offer only short-term simple analgesia, recognising its limited role",
+   "Address footwear, training errors, and lower-limb biomechanics identified on single-leg squat testing",
+   "Educate patients on self-management and reassure them, reserving specialist referral for refractory or atypical cases as surgery is rarely indicated"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "patellofemoral_pain-pathway",
+   "title": "Patellofemoral pain syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Presents with diffuse or peri-patellar anterior knee pain aggravated by loaded knee flexion such as squatting, stairs, kneeling, and prolonged sitting (the theatre sign)",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: True locking, giving way, or significant effusion suggesting internal derangement",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Primarily a clinical diagnosis based on history and examination, Plain radiographs including skyline/axial views if instability, arthritis, or bony pathology is suspected, MRI reserved for atypical, refractory, or locking"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Make structured physiotherapy the mainstay, combining quadriceps strengthening with hip abductor and external-rotator strengthening and movement retraining"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Labelling all anterior knee pain as chondromalacia and relying on rest alone"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of patellofemoral pain syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "patellofemoral_pain-matrix",
+   "title": "Patellofemoral pain syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Presents with diffuse or peri-patellar anterior knee pain aggravated by loaded knee flexion such as squatting, stairs, kneeling,",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Patellofemoral pain arises from excessive or maldistributed stress across the patellofemoral joint. Imbalance in the forces controlling patellar tracking, weakness of the quadriceps and hip abductors, dynamic valgus, and altered lower-limb alignment concentrate load on the retropatellar and peripatellar tissues. Repetitive overload of richly innervated subchondral bone and soft tissue, rather than cartilage damage alone, generates pain.",
-    "additionalDifferentials": [
-      "Patellar tendinopathy (jumper's knee)",
-      "Patellar subluxation or instability",
-      "Chondral or osteochondral lesions and early osteoarthritis",
-      "Osgood-Schlatter or Sinding-Larsen-Johansson disease in adolescents",
-      "Plica syndrome",
-      "Referred pain from the hip (including slipped capital femoral epiphysis in adolescents) or lumbar spine",
-      "Prepatellar or pes anserine bursitis"
+    [
+     "Key Investigations",
+     "Primarily a clinical diagnosis based on history and examination, Plain radiographs including skyline/axial views if instability,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Primarily a clinical diagnosis based on history and examination",
-      "Plain radiographs including skyline/axial views if instability, arthritis, or bony pathology is suspected",
-      "MRI reserved for atypical, refractory, or locking symptoms to assess cartilage and other structures",
-      "Assessment of hip and lower-limb biomechanics and muscle strength",
-      "Consider hip imaging in adolescents to exclude referred hip pathology"
+    [
+     "Primary Differentials",
+     "Patellar tendinopathy (jumper's knee), Patellar subluxation or instability, Chondral or osteochondral lesions and early",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "True locking, giving way, or significant effusion suggesting internal derangement",
-      "Fever, systemic symptoms, or a hot swollen joint suggesting infection or inflammatory arthritis",
-      "Night pain, rest pain, or a mass raising concern for tumour",
-      "Adolescent knee pain that may be referred from serious hip pathology"
+    [
+     "Management Strategy",
+     "Make structured physiotherapy the mainstay, combining quadriceps strengthening with hip abductor and external-rotator",
+     "Core treatment modality"
     ],
-    "prognosis": "Many improve with structured rehabilitation, but symptoms can be persistent or recurrent in a substantial minority, particularly if strength and biomechanical deficits are not corrected; long-term association with patellofemoral osteoarthritis is debated.",
-    "pitfalls": [
-      "Labelling all anterior knee pain as chondromalacia and relying on rest alone",
-      "Neglecting hip and gluteal strengthening and focusing only on the knee",
-      "Missing patellar instability, referred hip pathology, or tumour",
-      "Rushing return to sport without addressing training load and biomechanics"
-    ],
-    "references": [
-      "Apley & Solomon's System of Orthopaedics and Fractures"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Make structured physiotherapy the mainstay, combining quadriceps strengthening with hip abductor and external-rotator strengthening and movement retraining",
-      "Modify aggravating loads such as stairs, squatting, and prolonged sitting with graded activity and relative rest",
-      "Use patellar taping or bracing and, in those with excessive foot pronation, foot orthoses as adjuncts to reduce pain",
-      "Offer only short-term simple analgesia, recognising its limited role",
-      "Address footwear, training errors, and lower-limb biomechanics identified on single-leg squat testing",
-      "Educate patients on self-management and reassure them, reserving specialist referral for refractory or atypical cases as surgery is rarely indicated"
+    [
+     "Clinical Pitfall",
+     "Labelling all anterior knee pain as chondromalacia and relying on rest alone",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for patellofemoral pain syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "patellofemoral-pain-real-image",
+   "title": "Patellofemoral pain syndrome: Diagnostic Musculoskeletal Radiograph",
+   "type": "xray",
+   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
+   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
+   "annotations": [
+    {
+     "label": "Cortical Margins",
+     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
+    },
+    {
+     "label": "Trabecular Architecture",
+     "description": "Medullary bone density, lucencies, and subchondral mineralization."
+    },
+    {
+     "label": "Joint Articulation",
+     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+    }
+   ]
+  }
+ ]
 }

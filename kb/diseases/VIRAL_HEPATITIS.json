@@ -254,5 +254,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "haf634da"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "viral_hepatitis-dx-algo",
+      "title": "Acute Viral Hepatitis: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Five hepatotropic viruses cause almost all acute viral hepatitis: HAV, HBV, HCV, HDV (delta), and HEV. All are RNA viruses except HBV, which is a DNA virus that replicates via reverse transcription like a retrovirus (p.2643).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Hepatic encephalopathy (confusion, disorientation, somnolence, progression to coma) - hallmark of fulminant hepatitis with very high mortality (>80% in deep coma without transplant) (p.2659)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Anti-HCV antibody plus HCV RNA (HCV RNA is the gold standard; needed when anti-HCV is undetectable or in immunosuppressed patients where antibody may be absent) (p.2657-2658), Anti-HDV (IgM/IgG) and/or HDV RNA in"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: No formal grading system for acute viral hepatitis is given; severity is judged clinically. Features indicating severe hepatocellular disease warranting prompt hospital admission include prolonged prothrombin time, low"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Relying on HBsAg alone can miss acute hepatitis B: in ~1-5% of cases HBsAg is below detection and only IgM anti-HBc reveals the diagnosis (p.2656, p.2657-2658)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for acute viral hepatitis."
+    }
+  ],
+  "tables": [
+    {
+      "id": "viral_hepatitis-matrix",
+      "title": "Acute Viral Hepatitis: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Five hepatotropic viruses cause almost all acute viral hepatitis: HAV, HBV, HCV, HDV (delta), and HEV. All are RNA viruses except",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Anti-HCV antibody plus HCV RNA (HCV RNA is the gold standard; needed when anti-HCV is undetectable or in immunosuppressed",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Autoimmune hepatitis (suggested by repeated unexplained episodes of acute hepatitis; can also be triggered after self-limited",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Hepatic encephalopathy (confusion, disorientation, somnolence, progression to coma) - hallmark of fulminant hepatitis with very",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Relying on HBsAg alone can miss acute hepatitis B: in ~1-5% of cases HBsAg is below detection and only IgM anti-HBc reveals the",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for acute viral hepatitis."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "viral-hepatitis-real-image",
+      "title": "Acute Viral Hepatitis: Diagnostic Abdominal Computed Tomography",
+      "type": "ct",
+      "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
+      "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
+      "annotations": [
+        {
+          "label": "Solid Viscera",
+          "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
+        },
+        {
+          "label": "Gastrointestinal Tract",
+          "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
+        },
+        {
+          "label": "Mesentery & Peritoneum",
+          "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+        }
+      ]
+    }
+  ]
 }

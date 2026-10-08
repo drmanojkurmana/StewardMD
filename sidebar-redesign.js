@@ -25,6 +25,7 @@
   try { window.SMD_SBR = true; } catch (e) {}
 
   var ICON = {
+    user: '<circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/>',
     atlas: '<circle cx="12" cy="4.6" r="2.4"/><path d="M12 7v9M8.2 10h7.6M9.6 16 8 21M14.4 16 16 21"/>',
     pills: '<path d="M10.5 13.5 3 21M2 18a4 4 0 0 0 6 3l9-9a4 4 0 0 0-6-6L2 14a4 4 0 0 0 0 4Z"/>',
     interact: '<circle cx="9" cy="12" r="6"/><circle cx="15" cy="12" r="6"/>',
@@ -89,7 +90,7 @@
     },
     appearance: function () {
       // Opens the full Display & Accessibility sheet (font size, font family, theme, density…).
-      if (window.SMD_openDisplay) return SMD_openDisplay();
+      if (window.SMD_openDisplay) return SMD_openDisplay({ onClose: openSettingsPage });
       if (window.SMD_openAppearance) return SMD_openAppearance();
       if (window.SB && SB.toggleTheme) return SB.toggleTheme();
       document.body.classList.toggle("dark");
@@ -127,8 +128,8 @@
     // made this switch DISPLAY off while the module was actually on.
     { id: "clinix", title: "CliniX · Clinical learning", sub: "Bedside skills for students · reload to apply", def: true, key: "smd_clinix" },
     { id: "clinixtutor", title: "MaiK Examiner", sub: "AI review inside CliniX Viva, only when the free keyword grade can't judge it", def: true, key: "smd_clinix_tutor" },
-    { id: "surgx", title: "SURGX · Surgical Intelligence", sub: "Notes, protocols, procedures, evidence, cases · reload to apply", def: true, key: "smd_surgx" },
-    { id: "surgxdraft", title: "SURGX draft content", sub: "Show surgical content that is not yet clinician-approved. Turn OFF before any non-tester release", def: true, key: "smd_surgx_draft" },
+    { id: "surgx", title: "SURGˣ · Surgical Intelligence", sub: "Notes, protocols, procedures, evidence, cases · reload to apply", def: true, key: "smd_surgx" },
+    { id: "surgxdraft", title: "SURGˣ draft content", sub: "Show surgical content that is not yet clinician-approved. Turn OFF before any non-tester release", def: true, key: "smd_surgx_draft" },
     { id: "whisper", title: "Clinical Dictation (Beta)", sub: "On-device Whisper voice→text · native app only", def: false, key: "smd_whisper_clinical_dictation" },
     { id: "oncoprotolib", title: "Oncology Protocol Library (Beta)", sub: "Draft standard protocol library in oncology workbench", def: true, key: "smd_onco_protolib" },
     { id: "maikperf", title: "Show AI response time", sub: "Diagnostics under each MaiK answer", def: false, key: "smd_maik_perf" },
@@ -236,19 +237,20 @@
       "@keyframes sbrSetIn{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:none}}",
       "body.dark .sbr-set-ov,body.v3-dark .sbr-set-ov{background:#0d1b26;color:#e8edf2}",
       ".sbr-set-head{position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:8px;padding:calc(12px + env(safe-area-inset-top)) 14px 12px;background:inherit;border-bottom:1px solid var(--line,#d7dee3)}",
-      ".sbr-set-head h2{margin:0;font:800 19px/1.2 var(--sans,system-ui)}",
-      ".sbr-set-back{display:inline-flex;align-items:center;gap:2px;border:none;background:none;color:var(--teal,#0e6e63);font:700 15px/1 var(--sans,system-ui);cursor:pointer;padding:6px 8px 6px 0}",
+      ".sbr-set-head h2{margin:0;font:800 19px/1.2 var(--sans,system-ui);letter-spacing:-.01em}",
+      ".sbr-set-back{display:inline-flex;align-items:center;gap:2px;border:none;background:none;color:var(--teal,#0e6e63);font:700 15px/1 var(--sans,system-ui);cursor:pointer;padding:6px 8px 6px 0;touch-action:manipulation;transition:transform var(--smd-dur-press,120ms) ease-out}",
+      ".sbr-set-back:active{transform:scale(.95)}",
       ".sbr-set-chev{font-size:24px;line-height:1}",
       ".sbr-set-body{padding:6px 12px calc(28px + env(safe-area-inset-bottom))}",
       ".sbr-set-ov .sbr-sec{padding:16px 4px 6px;font:700 11px/1.2 var(--sans,system-ui);letter-spacing:.075em;text-transform:uppercase;color:var(--slate-soft,#5a7184)}",
-      ".sbr-set-ov .sbr-row{position:relative;display:flex;align-items:center;gap:12px;width:100%;padding:13px 12px;margin-top:2px;border:none;border-radius:12px;background:var(--panel,#fff);cursor:pointer;text-align:left;color:var(--ink,#14202b);font:600 15px/1.3 var(--sans,system-ui)}",
+      ".sbr-set-ov .sbr-row{position:relative;display:flex;align-items:center;gap:12px;width:100%;padding:13px 12px;margin-top:2px;border:none;border-radius:12px;background:var(--panel,#fff);cursor:pointer;text-align:left;color:var(--ink,#14202b);font:600 15px/1.3 var(--sans,system-ui);touch-action:manipulation;transition:transform var(--smd-dur-press,120ms) ease-out,background var(--smd-dur-routine,160ms) ease-out}",
       "body.dark .sbr-set-ov .sbr-row{background:#132030}",
-      ".sbr-set-ov .sbr-row:active{opacity:.7}",
+      ".sbr-set-ov .sbr-row:active{transform:scale(.98);opacity:.85}",
       ".sbr-set-ov .sbr-ic{width:20px;height:20px;flex:0 0 auto;color:var(--teal,#0e6e63)}",
       ".sbr-set-ov .sbr-lbl{flex:1;min-width:0}",
       ".sbr-set-ov .sbr-chev{flex:0 0 auto;font-size:12px;color:var(--slate-soft,#5a7184)}",
       ".sbr-set-ov .sbr-badge{flex:0 0 auto;font:700 9px/1 var(--sans,system-ui);text-transform:uppercase;letter-spacing:.04em;background:var(--teal-soft,#e3f1ee);color:var(--teal,#0e6e63);border-radius:5px;padding:3px 6px}",
-      ".sbr-set-ov .sbr-card{border:1px solid var(--line,#d7dee3);border-radius:14px;overflow:hidden;background:var(--panel,#fff);margin:2px 0 8px}",
+      ".sbr-set-ov .sbr-card{border:1px solid var(--line,#d7dee3);border-radius:14px;overflow:hidden;background:var(--panel,#fff);margin:2px 0 8px;box-shadow:0 1px 2px rgba(13,27,36,.03)}",
       ".sbr-set-ov .sbr-tg,.sbr-set-ov .smd-nav-row{display:flex;align-items:center;gap:10px;padding:12px;background:var(--panel,#fff);border-radius:12px;margin-top:2px}",
       "body.dark .sbr-set-ov .sbr-tg,body.dark .sbr-set-ov .smd-nav-row,body.dark .sbr-set-ov .sbr-card{background:#132030;border-color:#233242}",
       ".sbr-set-ov .sbr-card .sbr-tg{border-top:1px solid var(--line,#d7dee3);border-radius:0;margin:0}",
@@ -256,9 +258,9 @@
       ".sbr-set-ov .sbr-tg-l{flex:1;min-width:0}",
       ".sbr-set-ov .sbr-tg-t{display:block;font:600 14px/1.3 var(--sans,system-ui);color:var(--ink,#14202b)}",
       ".sbr-set-ov .sbr-tg-s{display:block;font:500 11.5px/1.35 var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin-top:1px}",
-      ".sbr-set-ov .sbr-sw{position:relative;flex:0 0 auto;width:40px;height:24px;border:none;border-radius:999px;background:#c4cec9;cursor:pointer;transition:background .15s}",
+      ".sbr-set-ov .sbr-sw{position:relative;flex:0 0 auto;width:40px;height:24px;border:none;border-radius:999px;background:#c4cec9;cursor:pointer;transition:background var(--smd-dur-routine,.16s) ease-out}",
       ".sbr-set-ov .sbr-sw.on{background:var(--teal,#0e6e63)}",
-      ".sbr-set-ov .sbr-sw>span{position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:left .15s}",
+      ".sbr-set-ov .sbr-sw>span{position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.18);transition:left var(--smd-dur-routine,.16s) ease-out}",
       ".sbr-set-ov .sbr-sw.on>span{left:19px}",
       ".sbr-set-ov .sbr-note{font:500 11.5px/1.4 var(--sans,system-ui);color:var(--slate-soft,#5a7184);padding:6px 4px}",
       /* ── Experimental section & subpage styling ── */
@@ -352,7 +354,7 @@
     try {
       if (window.SMD_OFFLINEDB && SMD_OFFLINEDB.open) {
         html += '<button data-sbr-act="offlinedb" style="display:flex;align-items:center;gap:10px;width:100%;padding:9px 0;border:none;background:none;cursor:pointer;text-align:left;color:var(--ink,#14202b);font:600 13px/1.3 var(--sans,system-ui)">' + svg("pills") +
-          '<span style="flex:1">Offline Drug Database</span><span class="sbr-badge">PRO</span></button>';
+          '<span class="sbr-lbl" style="flex:1">Offline Drug Database</span><span class="sbr-badge">PRO</span></button>';
       }
     } catch (e) {}
     // Owner-only: the hello@maiknowledge.com mailbox (mail.js). Gated by SMD_MAIL.enabled(), which
@@ -360,7 +362,7 @@
     try {
       if (window.SMD_MAIL && SMD_MAIL.enabled()) {
         html += '<button class="sbr-row" data-sbr-act="mail">' + svg("mail") +
-          '<span style="flex:1">Mail</span><span class="sbr-badge">OWNER</span></button>';
+          '<span class="sbr-lbl" style="flex:1">Mail</span><span class="sbr-badge">OWNER</span></button>';
       }
     } catch (e) {}
     // Owner-only: review + approve/decline hospital-add requests.
@@ -368,7 +370,7 @@
       var _oe = ((window.SMD_AUTH && SMD_AUTH.currentUser && SMD_AUTH.currentUser.email) || "").toLowerCase();
       if (["drmanojkurmana@gmail.com", "mkkmanojkumar0@gmail.com", "kdiwakar45@gmail.com", "stewardmd.in@gmail.com"].indexOf(_oe) >= 0) {
         html += '<button class="sbr-row" data-sbr-act="hospadmin">' + svg("shield") +
-          '<span style="flex:1">Hospital requests</span><span class="sbr-badge">OWNER</span></button>';
+          '<span class="sbr-lbl" style="flex:1">Hospital requests</span><span class="sbr-badge">OWNER</span></button>';
       }
     } catch (e) {}
     html += '<div class="sbr-note">Clinical engine settings for this device.</div>';
@@ -620,8 +622,8 @@
       '<div class="sbr-card">' +
         toggle({ id: "clinix", title: "CliniX · Clinical learning", sub: "Bedside skills for students · reload to apply", def: true, key: "smd_clinix" }) +
         toggle({ id: "clinixtutor", title: "MaiK Examiner", sub: "AI review inside CliniX Viva, only when free keyword grade cannot judge", def: true, key: "smd_clinix_tutor" }) +
-        toggle({ id: "surgx", title: "SURGX · Surgical Intelligence", sub: "Notes, protocols, procedures, evidence, cases · reload to apply", def: true, key: "smd_surgx" }) +
-        toggle({ id: "surgxdraft", title: "SURGX draft content", sub: "Show surgical content that is not yet clinician-approved", def: true, key: "smd_surgx_draft" }) +
+        toggle({ id: "surgx", title: "SURGˣ · Surgical Intelligence", sub: "Notes, protocols, procedures, evidence, cases · reload to apply", def: true, key: "smd_surgx" }) +
+        toggle({ id: "surgxdraft", title: "SURGˣ draft content", sub: "Show surgical content that is not yet clinician-approved", def: true, key: "smd_surgx_draft" }) +
       '</div>' +
 
       '<div class="sbr-sec">Neonatal (Beta)</div>' +
@@ -643,9 +645,11 @@
       '<div class="sbr-note">Reload the app after changing feature flags to update navigation and home tiles.</div>';
   }
 
+  var settingsOpener = null, experimentalOpener = null;
   function closeExperimentalPage() {
     var ov = document.getElementById("sbrExperimental");
     if (ov && ov.parentNode) ov.parentNode.removeChild(ov);
+    if (ov && experimentalOpener && experimentalOpener.isConnected) experimentalOpener.focus({ preventScroll: true });
     if (!document.getElementById("sbrSettings")) {
       document.body.classList.remove("sbr-set-open");
     }
@@ -654,6 +658,7 @@
   function openExperimentalPage() {
     injectCSS();
     closeExperimentalPage();
+    experimentalOpener = document.activeElement;
     var ov = document.createElement("div");
     ov.id = "sbrExperimental";
     ov.className = "sbr-set-ov sbr-exp-ov";
@@ -664,6 +669,7 @@
         expBodyHTML() +
       '</div>';
     document.body.classList.add("sbr-set-open");
+    if (window.SMD_SETTINGS_UI) SMD_SETTINGS_UI.enhance(ov);
 
     try {
       if (window.SMD_XACCESS && SMD_XACCESS.onChange) {
@@ -721,7 +727,7 @@
       '<span class="sbr-chev">▸</span></button>' +
       '<div class="sbr-card">' +
         toggle({ id: "clinix", title: "CliniX · Clinical learning", sub: "Bedside skills for students · reload to apply", def: true, key: "smd_clinix" }) +
-        toggle({ id: "surgx", title: "SURGX · Surgical Intelligence", sub: "Notes, protocols, procedures, evidence · reload to apply", def: true, key: "smd_surgx" }) +
+        toggle({ id: "surgx", title: "SURGˣ · Surgical Intelligence", sub: "Notes, protocols, procedures, evidence · reload to apply", def: true, key: "smd_surgx" }) +
         toggle({ id: "fundx", title: "FundX AI · Retinal (Beta)", sub: "AI-guided fundus imaging · reload to apply", def: false, key: "smd_fundx" }) +
         toggle({ id: "kardiox", title: "KardiQ X AI · ECG (Beta)", sub: "On-device 12-lead ECG interpretation · reload to apply", def: false, key: "smd_kardiox" }) +
       '</div>' +
@@ -737,11 +743,17 @@
     var ov = document.getElementById("sbrSettings");
     if (ov && ov.parentNode) ov.parentNode.removeChild(ov);
     document.body.classList.remove("sbr-set-open");
+    if (ov) {
+      var target = settingsOpener;
+      if (!target || !target.isConnected || target.closest('#hvSheet,#sbDrawer')) target = document.querySelector('#homeV2 [data-act="menu"]');
+      if (target) target.focus({ preventScroll: true });
+    }
   }
 
   function openSettingsPage() {
     injectCSS();
     closeSettingsPage();
+    settingsOpener = document.activeElement;
     var ov = document.createElement("div"); ov.id = "sbrSettings"; ov.className = "sbr-set-ov"; document.body.appendChild(ov);
     ov.innerHTML =
       '<header class="sbr-set-head"><button class="sbr-set-back" data-sset="close" aria-label="Back"><span class="sbr-set-chev">‹</span><span>Back</span></button><h2>Settings</h2></header>' +
@@ -764,6 +776,7 @@
         expSectionHTML() +
       "</div>";
     document.body.classList.add("sbr-set-open");
+    if (window.SMD_SETTINGS_UI) SMD_SETTINGS_UI.enhance(ov);
     // let the Image Engine + Voice wire their controls inside the page (same seams as the old block)
     try { if (window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.wireSettings) SMD_IMAGE_ENGINE.wireSettings(ov.querySelector(".sbr-set-body")); } catch (e) {}
     try { if (window.SMD_VOICE && SMD_VOICE.wireModelSettings) SMD_VOICE.wireModelSettings(ov.querySelector(".sbr-set-body")); } catch (e) {}

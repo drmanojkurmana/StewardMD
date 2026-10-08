@@ -1,75 +1,170 @@
 {
-  "id": "specific_phobia",
-  "name": "Specific phobia",
-  "aliases": [
-    "simple phobia",
-    "isolated phobia"
+ "id": "specific_phobia",
+ "name": "Specific phobia",
+ "aliases": [
+  "simple phobia",
+  "isolated phobia"
+ ],
+ "class": "non_infective",
+ "system": "Psychiatry / Mental health",
+ "specialty": "Psychiatry",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "The hallmark is marked, disproportionate fear or anxiety about a specific object or situation that almost always provokes an immediate response and is actively avoided or endured with intense distress",
+   "Common types include animals, the natural environment such as heights or storms, blood-injection-injury, situational triggers such as flying or enclosed spaces, and other stimuli",
+   "The blood-injection-injury type is distinctive because it can provoke a vasovagal response with fainting, unlike most phobias where arousal is heightened",
+   "Diagnosis generally requires that the fear is persistent, typically lasting six months or more, and causes clinically significant distress or impairment",
+   "Exposure-based cognitive behavioural therapy, especially graded in vivo exposure, is the treatment of choice and is often highly effective, sometimes in a single prolonged session",
+   "Pharmacotherapy plays only a limited, adjunctive role, and long-term medication is usually unnecessary for isolated phobias",
+   "For blood-injection-injury phobia, applied tension techniques help counter the drop in blood pressure and prevent fainting during exposure",
+   "Assess how much the phobia genuinely restricts the person's life, since avoidance of rare triggers may need no treatment while others cause major impairment"
   ],
-  "class": "non_infective",
-  "system": "Psychiatry / Mental health",
-  "specialty": "Psychiatry",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "The hallmark is marked, disproportionate fear or anxiety about a specific object or situation that almost always provokes an immediate response and is actively avoided or endured with intense distress",
-      "Common types include animals, the natural environment such as heights or storms, blood-injection-injury, situational triggers such as flying or enclosed spaces, and other stimuli",
-      "The blood-injection-injury type is distinctive because it can provoke a vasovagal response with fainting, unlike most phobias where arousal is heightened",
-      "Diagnosis generally requires that the fear is persistent, typically lasting six months or more, and causes clinically significant distress or impairment",
-      "Exposure-based cognitive behavioural therapy, especially graded in vivo exposure, is the treatment of choice and is often highly effective, sometimes in a single prolonged session",
-      "Pharmacotherapy plays only a limited, adjunctive role, and long-term medication is usually unnecessary for isolated phobias",
-      "For blood-injection-injury phobia, applied tension techniques help counter the drop in blood pressure and prevent fainting during exposure",
-      "Assess how much the phobia genuinely restricts the person's life, since avoidance of rare triggers may need no treatment while others cause major impairment"
+  "pathophysiology": "Specific phobia is understood through models of classical fear conditioning and its persistence, in which a stimulus becomes associated with danger and avoidance prevents extinction of the learned fear. Heritable predisposition, heightened amygdala-driven threat responses, evolutionary preparedness for certain stimuli, and vicarious or informational learning all contribute, while the blood-injection-injury type involves a biphasic autonomic response predisposing to vasovagal syncope.",
+  "additionalDifferentials": [
+   "Panic disorder with situational attacks",
+   "Agoraphobia",
+   "Social anxiety disorder when avoidance centres on scrutiny",
+   "Post-traumatic stress disorder with trauma-related avoidance",
+   "Obsessive-compulsive disorder with contamination-related avoidance",
+   "Separation anxiety disorder in younger patients"
+  ],
+  "additionalInvestigations": [
+   "Focused clinical interview to characterise the feared stimulus and avoidance",
+   "Assessment of functional impairment attributable to the phobia",
+   "Screening for comorbid anxiety, mood, and substance use disorders",
+   "In blood-injection-injury type, evaluation of any history of syncope"
+  ],
+  "redFlags": [
+   "Phobic avoidance that prevents essential medical care, such as avoidance of injections or blood tests in a patient needing treatment",
+   "Syncope with injury risk in blood-injection-injury phobia",
+   "Comorbid depression with emerging suicidal ideation"
+  ],
+  "prognosis": "Specific phobias arising in childhood may remit spontaneously, whereas those persisting into adulthood tend to be chronic if untreated. The prognosis with exposure-based therapy is generally excellent, with many patients achieving lasting improvement, though untreated phobias affecting essential activities can cause enduring impairment.",
+  "pitfalls": [
+   "Avoiding exposure work in favour of reassurance, which maintains the fear",
+   "Overlooking a phobia that blocks necessary medical procedures",
+   "Relying on as-needed sedatives that undermine exposure learning",
+   "Mislabelling situational panic or agoraphobia as an isolated phobia",
+   "Failing to teach applied tension in blood-injection-injury phobia"
+  ],
+  "references": [
+   "Kaplan & Sadock's Synopsis of Psychiatry",
+   "DSM-5-TR"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Graded in vivo exposure-based cognitive behavioural therapy is the first-line and highly effective treatment",
+   "Applied tension technique for the blood-injection-injury type to counter the vasovagal response and prevent fainting",
+   "Reserve pharmacotherapy for a limited adjunctive role, as long-term medication is usually unnecessary for isolated phobias",
+   "Occasional short-term use of a benzodiazepine or beta-blocker for an unavoidable single exposure such as a necessary flight",
+   "Screen for and treat comorbid anxiety, mood and substance use disorders",
+   "Provide psychoeducation and relapse-prevention strategies to maintain gains"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "specific_phobia-pathway",
+   "title": "Specific phobia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "The hallmark is marked, disproportionate fear or anxiety about a specific object or situation that almost always provokes an immediate response and is actively avoided or endured with intense distress",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Phobic avoidance that prevents essential medical care, such as avoidance of injections or blood tests in a patient needing treatment",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Focused clinical interview to characterise the feared stimulus and avoidance, Assessment of functional impairment attributable to the phobia, Screening for comorbid anxiety, mood, and substance use disorders"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Graded in vivo exposure-based cognitive behavioural therapy is the first-line and highly effective treatment"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Avoiding exposure work in favour of reassurance, which maintains the fear"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of specific phobia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "specific_phobia-matrix",
+   "title": "Specific phobia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The hallmark is marked, disproportionate fear or anxiety about a specific object or situation that almost always provokes an",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Specific phobia is understood through models of classical fear conditioning and its persistence, in which a stimulus becomes associated with danger and avoidance prevents extinction of the learned fear. Heritable predisposition, heightened amygdala-driven threat responses, evolutionary preparedness for certain stimuli, and vicarious or informational learning all contribute, while the blood-injection-injury type involves a biphasic autonomic response predisposing to vasovagal syncope.",
-    "additionalDifferentials": [
-      "Panic disorder with situational attacks",
-      "Agoraphobia",
-      "Social anxiety disorder when avoidance centres on scrutiny",
-      "Post-traumatic stress disorder with trauma-related avoidance",
-      "Obsessive-compulsive disorder with contamination-related avoidance",
-      "Separation anxiety disorder in younger patients"
+    [
+     "Key Investigations",
+     "Focused clinical interview to characterise the feared stimulus and avoidance, Assessment of functional impairment attributable to",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Focused clinical interview to characterise the feared stimulus and avoidance",
-      "Assessment of functional impairment attributable to the phobia",
-      "Screening for comorbid anxiety, mood, and substance use disorders",
-      "In blood-injection-injury type, evaluation of any history of syncope"
+    [
+     "Primary Differentials",
+     "Panic disorder with situational attacks, Agoraphobia, Social anxiety disorder when avoidance centres on scrutiny",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Phobic avoidance that prevents essential medical care, such as avoidance of injections or blood tests in a patient needing treatment",
-      "Syncope with injury risk in blood-injection-injury phobia",
-      "Comorbid depression with emerging suicidal ideation"
+    [
+     "Management Strategy",
+     "Graded in vivo exposure-based cognitive behavioural therapy is the first-line and highly effective treatment",
+     "Core treatment modality"
     ],
-    "prognosis": "Specific phobias arising in childhood may remit spontaneously, whereas those persisting into adulthood tend to be chronic if untreated. The prognosis with exposure-based therapy is generally excellent, with many patients achieving lasting improvement, though untreated phobias affecting essential activities can cause enduring impairment.",
-    "pitfalls": [
-      "Avoiding exposure work in favour of reassurance, which maintains the fear",
-      "Overlooking a phobia that blocks necessary medical procedures",
-      "Relying on as-needed sedatives that undermine exposure learning",
-      "Mislabelling situational panic or agoraphobia as an isolated phobia",
-      "Failing to teach applied tension in blood-injection-injury phobia"
-    ],
-    "references": [
-      "Kaplan & Sadock's Synopsis of Psychiatry",
-      "DSM-5-TR"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Graded in vivo exposure-based cognitive behavioural therapy is the first-line and highly effective treatment",
-      "Applied tension technique for the blood-injection-injury type to counter the vasovagal response and prevent fainting",
-      "Reserve pharmacotherapy for a limited adjunctive role, as long-term medication is usually unnecessary for isolated phobias",
-      "Occasional short-term use of a benzodiazepine or beta-blocker for an unavoidable single exposure such as a necessary flight",
-      "Screen for and treat comorbid anxiety, mood and substance use disorders",
-      "Provide psychoeducation and relapse-prevention strategies to maintain gains"
+    [
+     "Clinical Pitfall",
+     "Avoiding exposure work in favour of reassurance, which maintains the fear",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for specific phobia."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "specific-phobia-real-image",
+   "title": "Specific phobia: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

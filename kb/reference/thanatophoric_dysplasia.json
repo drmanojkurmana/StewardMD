@@ -1,79 +1,174 @@
 {
-  "id": "thanatophoric_dysplasia",
-  "name": "Thanatophoric dysplasia",
-  "aliases": [
-    "FGFR3",
-    "TD",
-    "TD type I",
-    "TD type II"
+ "id": "thanatophoric_dysplasia",
+ "name": "Thanatophoric dysplasia",
+ "aliases": [
+  "FGFR3",
+  "TD",
+  "TD type I",
+  "TD type II"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal / Genetics",
+ "specialty": "Clinical Genetics / Skeletal Dysplasia",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "The most common lethal skeletal dysplasia, typically incompatible with survival beyond the neonatal period because of a severely small thorax and pulmonary hypoplasia",
+   "Caused by activating variants in FGFR3 that produce far stronger receptor signalling than achondroplasia, arising almost always de novo in an autosomal dominant manner",
+   "Features include extreme micromelia, a narrow bell-shaped thorax, a large head with frontal bossing and depressed nasal bridge, and redundant skin folds on the limbs",
+   "Type I is characterised by curved, short femora resembling telephone receivers with a normally shaped skull, whereas type II features straight femora with a cloverleaf skull deformity",
+   "Radiographs show platyspondyly with markedly flattened vertebrae, short ribs, small squared iliac bones, and short curved or straight long bones",
+   "Prenatal ultrasound often detects severe limb shortening, a small chest, and polyhydramnios, prompting molecular confirmation and genetic counselling",
+   "Management is directed toward confirming the diagnosis, counselling, and compassionate perinatal care given the lethal prognosis"
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal / Genetics",
-  "specialty": "Clinical Genetics / Skeletal Dysplasia",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "The most common lethal skeletal dysplasia, typically incompatible with survival beyond the neonatal period because of a severely small thorax and pulmonary hypoplasia",
-      "Caused by activating variants in FGFR3 that produce far stronger receptor signalling than achondroplasia, arising almost always de novo in an autosomal dominant manner",
-      "Features include extreme micromelia, a narrow bell-shaped thorax, a large head with frontal bossing and depressed nasal bridge, and redundant skin folds on the limbs",
-      "Type I is characterised by curved, short femora resembling telephone receivers with a normally shaped skull, whereas type II features straight femora with a cloverleaf skull deformity",
-      "Radiographs show platyspondyly with markedly flattened vertebrae, short ribs, small squared iliac bones, and short curved or straight long bones",
-      "Prenatal ultrasound often detects severe limb shortening, a small chest, and polyhydramnios, prompting molecular confirmation and genetic counselling",
-      "Management is directed toward confirming the diagnosis, counselling, and compassionate perinatal care given the lethal prognosis"
+  "pathophysiology": "Thanatophoric dysplasia is caused by strongly activating variants in FGFR3. The resulting profound constitutive receptor signalling severely disrupts growth-plate chondrocyte proliferation and endochondral ossification, producing extreme limb shortening and a markedly hypoplastic thoracic cage. The small thorax restricts lung development, and the consequent pulmonary hypoplasia is the usual cause of neonatal death. The same signalling excess also affects cortical brain development in some cases, contributing to the cloverleaf skull and neurological abnormalities seen particularly in type II.",
+  "additionalDifferentials": [
+   "Homozygous achondroplasia",
+   "Achondrogenesis",
+   "Osteogenesis imperfecta type II",
+   "Short-rib polydactyly syndromes",
+   "Campomelic dysplasia",
+   "Hypophosphatasia (severe perinatal form)"
+  ],
+  "additionalInvestigations": [
+   "Prenatal ultrasound and, where available, fetal MRI to characterise limb, thorax, and skull findings",
+   "Postnatal skeletal survey demonstrating platyspondyly, short ribs, and characteristic femoral shape",
+   "FGFR3 molecular testing to confirm the diagnosis and subtype",
+   "Fetal or neonatal autopsy with placental examination when consent is given",
+   "Genetic counselling with discussion of recurrence risk and prenatal options",
+   "Neuroimaging where cloverleaf skull or neurological abnormality is present"
+  ],
+  "redFlags": [
+   "Severe respiratory failure at birth from pulmonary hypoplasia",
+   "Prenatal detection of a severely constricted thorax and extreme micromelia indicating a likely lethal dysplasia",
+   "Cloverleaf skull with signs of raised intracranial pressure",
+   "Feeding and airway compromise requiring urgent palliative planning"
+  ],
+  "prognosis": "Thanatophoric dysplasia is almost universally lethal in the perinatal period, with most affected infants dying shortly after birth from respiratory failure. Rare survivors with intensive respiratory support have severe disability and profound growth restriction.",
+  "pitfalls": [
+   "Confusing it with severe achondroplasia or homozygous achondroplasia without molecular confirmation",
+   "Underestimating the lethality and delaying appropriate counselling and palliative planning",
+   "Missing the distinction between type I and type II femoral and skull morphology",
+   "Failing to offer autopsy and genetic counselling to inform recurrence risk"
+  ],
+  "references": [
+   "Smith's Recognizable Patterns of Human Malformation",
+   "Nelson Textbook of Pediatrics"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Confirm the diagnosis with FGFR3 molecular testing and characteristic prenatal and postnatal imaging to inform prognosis and counselling",
+   "Given near-universal perinatal lethality from pulmonary hypoplasia, the mainstay is compassionate perinatal palliative and comfort care with clear goals-of-care discussions",
+   "Offer non-directive genetic counselling with discussion of prognosis and, antenatally, the option of termination",
+   "Plan the delivery and birth setting with the family, agreeing ceilings of care and avoiding futile intervention",
+   "For the rare survivor pursuing active support, manage respiratory failure with ventilatory support and coordinate complex disability care",
+   "Provide bereavement support and offer autopsy with placental examination where consent is given",
+   "Genetic counselling on recurrence: variants are almost always de novo, but rare parental germline mosaicism means prenatal testing can be offered in future pregnancies"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "thanatophoric_dysplasia-pathway",
+   "title": "Thanatophoric dysplasia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "The most common lethal skeletal dysplasia, typically incompatible with survival beyond the neonatal period because of a severely small thorax and pulmonary hypoplasia",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Severe respiratory failure at birth from pulmonary hypoplasia",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Prenatal ultrasound and, where available, fetal MRI to characterise limb, thorax, and skull findings, Postnatal skeletal survey demonstrating platyspondyly, short ribs, and characteristic femoral shape, FGFR3 molecular"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Confirm the diagnosis with FGFR3 molecular testing and characteristic prenatal and postnatal imaging to inform prognosis and counselling"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Confusing it with severe achondroplasia or homozygous achondroplasia without molecular confirmation"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of thanatophoric dysplasia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "thanatophoric_dysplasia-matrix",
+   "title": "Thanatophoric dysplasia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The most common lethal skeletal dysplasia, typically incompatible with survival beyond the neonatal period because of a severely",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Thanatophoric dysplasia is caused by strongly activating variants in FGFR3. The resulting profound constitutive receptor signalling severely disrupts growth-plate chondrocyte proliferation and endochondral ossification, producing extreme limb shortening and a markedly hypoplastic thoracic cage. The small thorax restricts lung development, and the consequent pulmonary hypoplasia is the usual cause of neonatal death. The same signalling excess also affects cortical brain development in some cases, contributing to the cloverleaf skull and neurological abnormalities seen particularly in type II.",
-    "additionalDifferentials": [
-      "Homozygous achondroplasia",
-      "Achondrogenesis",
-      "Osteogenesis imperfecta type II",
-      "Short-rib polydactyly syndromes",
-      "Campomelic dysplasia",
-      "Hypophosphatasia (severe perinatal form)"
+    [
+     "Key Investigations",
+     "Prenatal ultrasound and, where available, fetal MRI to characterise limb, thorax, and skull findings, Postnatal skeletal survey",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Prenatal ultrasound and, where available, fetal MRI to characterise limb, thorax, and skull findings",
-      "Postnatal skeletal survey demonstrating platyspondyly, short ribs, and characteristic femoral shape",
-      "FGFR3 molecular testing to confirm the diagnosis and subtype",
-      "Fetal or neonatal autopsy with placental examination when consent is given",
-      "Genetic counselling with discussion of recurrence risk and prenatal options",
-      "Neuroimaging where cloverleaf skull or neurological abnormality is present"
+    [
+     "Primary Differentials",
+     "Homozygous achondroplasia, Achondrogenesis, Osteogenesis imperfecta type II",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Severe respiratory failure at birth from pulmonary hypoplasia",
-      "Prenatal detection of a severely constricted thorax and extreme micromelia indicating a likely lethal dysplasia",
-      "Cloverleaf skull with signs of raised intracranial pressure",
-      "Feeding and airway compromise requiring urgent palliative planning"
+    [
+     "Management Strategy",
+     "Confirm the diagnosis with FGFR3 molecular testing and characteristic prenatal and postnatal imaging to inform prognosis and",
+     "Core treatment modality"
     ],
-    "prognosis": "Thanatophoric dysplasia is almost universally lethal in the perinatal period, with most affected infants dying shortly after birth from respiratory failure. Rare survivors with intensive respiratory support have severe disability and profound growth restriction.",
-    "pitfalls": [
-      "Confusing it with severe achondroplasia or homozygous achondroplasia without molecular confirmation",
-      "Underestimating the lethality and delaying appropriate counselling and palliative planning",
-      "Missing the distinction between type I and type II femoral and skull morphology",
-      "Failing to offer autopsy and genetic counselling to inform recurrence risk"
-    ],
-    "references": [
-      "Smith's Recognizable Patterns of Human Malformation",
-      "Nelson Textbook of Pediatrics"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Confirm the diagnosis with FGFR3 molecular testing and characteristic prenatal and postnatal imaging to inform prognosis and counselling",
-      "Given near-universal perinatal lethality from pulmonary hypoplasia, the mainstay is compassionate perinatal palliative and comfort care with clear goals-of-care discussions",
-      "Offer non-directive genetic counselling with discussion of prognosis and, antenatally, the option of termination",
-      "Plan the delivery and birth setting with the family, agreeing ceilings of care and avoiding futile intervention",
-      "For the rare survivor pursuing active support, manage respiratory failure with ventilatory support and coordinate complex disability care",
-      "Provide bereavement support and offer autopsy with placental examination where consent is given",
-      "Genetic counselling on recurrence: variants are almost always de novo, but rare parental germline mosaicism means prenatal testing can be offered in future pregnancies"
+    [
+     "Clinical Pitfall",
+     "Confusing it with severe achondroplasia or homozygous achondroplasia without molecular confirmation",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for thanatophoric dysplasia."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "thanatophoric-dysplasia-real-image",
+   "title": "Thanatophoric dysplasia: Diagnostic Musculoskeletal Radiograph",
+   "type": "xray",
+   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
+   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
+   "annotations": [
+    {
+     "label": "Cortical Margins",
+     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
+    },
+    {
+     "label": "Trabecular Architecture",
+     "description": "Medullary bone density, lucencies, and subchondral mineralization."
+    },
+    {
+     "label": "Joint Articulation",
+     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+    }
+   ]
+  }
+ ]
 }

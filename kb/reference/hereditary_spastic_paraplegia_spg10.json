@@ -1,78 +1,173 @@
 {
-  "id": "hereditary_spastic_paraplegia_spg10",
-  "name": "HSP SPG10 (KIF5A)",
-  "aliases": [
-    "SPG10",
-    "KIF5A-related hereditary spastic paraplegia",
-    "kinesin heavy chain spastic paraplegia",
-    "locus 12q13.3"
+ "id": "hereditary_spastic_paraplegia_spg10",
+ "name": "HSP SPG10 (KIF5A)",
+ "aliases": [
+  "SPG10",
+  "KIF5A-related hereditary spastic paraplegia",
+  "kinesin heavy chain spastic paraplegia",
+  "locus 12q13.3"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system / Neurogenetics",
+ "specialty": "Neurology / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "GeneReviews / Bradley Neurology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Autosomal dominant spastic paraplegia caused by heterozygous variants in KIF5A, which encodes a neuronal kinesin motor driving anterograde axonal transport",
+   "Presents as either a pure spastic paraparesis or a complicated form with distal amyotrophy, peripheral neuropathy or mild cognitive change",
+   "Onset is usually in childhood or early adulthood, with slowly progressive gait spasticity and brisk lower-limb reflexes",
+   "KIF5A is allelic with axonal Charcot-Marie-Tooth disease type 2 and with amyotrophic lateral sclerosis, so family histories can appear phenotypically mixed",
+   "Wasting of intrinsic hand and foot muscles, when present, reflects the length-dependent motor axonopathy",
+   "Nerve conduction studies help separate pure from complicated disease and identify an associated axonal neuropathy",
+   "Care is symptomatic, centring on physiotherapy, spasticity management and orthoses to maintain mobility"
   ],
-  "class": "non_infective",
-  "system": "Nervous system / Neurogenetics",
-  "specialty": "Neurology / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "GeneReviews / Bradley Neurology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Autosomal dominant spastic paraplegia caused by heterozygous variants in KIF5A, which encodes a neuronal kinesin motor driving anterograde axonal transport",
-      "Presents as either a pure spastic paraparesis or a complicated form with distal amyotrophy, peripheral neuropathy or mild cognitive change",
-      "Onset is usually in childhood or early adulthood, with slowly progressive gait spasticity and brisk lower-limb reflexes",
-      "KIF5A is allelic with axonal Charcot-Marie-Tooth disease type 2 and with amyotrophic lateral sclerosis, so family histories can appear phenotypically mixed",
-      "Wasting of intrinsic hand and foot muscles, when present, reflects the length-dependent motor axonopathy",
-      "Nerve conduction studies help separate pure from complicated disease and identify an associated axonal neuropathy",
-      "Care is symptomatic, centring on physiotherapy, spasticity management and orthoses to maintain mobility"
+  "pathophysiology": "SPG10 results from dominant variants in KIF5A, the gene for a heavy chain of kinesin-1, the principal motor that carries cargo (mitochondria, vesicles and cytoskeletal components) along microtubules towards the axon terminal. Pathogenic changes, often clustered in the motor domain, impair this anterograde transport and disturb cargo delivery to the distal axon. The longest corticospinal and peripheral motor axons are most vulnerable, producing a length-dependent degeneration that manifests as spasticity and, in complicated cases, distal wasting and neuropathy. Distinct variants elsewhere in the gene underlie related Charcot-Marie-Tooth and motor neurone phenotypes.",
+  "additionalDifferentials": [
+   "Other autosomal dominant hereditary spastic paraplegias (SPG4, SPG3A, SPG31)",
+   "Axonal Charcot-Marie-Tooth disease type 2",
+   "Amyotrophic lateral sclerosis and juvenile primary lateral sclerosis",
+   "Dopa-responsive dystonia",
+   "Structural cervical or thoracic myelopathy",
+   "Adrenomyeloneuropathy"
+  ],
+  "additionalInvestigations": [
+   "Targeted KIF5A sequencing within a hereditary spastic paraplegia or motor neuropathy gene panel",
+   "Nerve conduction studies and electromyography to define associated neuropathy or amyotrophy",
+   "MRI of brain and spine to exclude structural and demyelinating causes",
+   "Detailed three-generation family history given variable allelic phenotypes",
+   "Cognitive screening where a complicated presentation is suspected",
+   "Very-long-chain fatty acids to exclude adrenomyeloneuropathy"
+  ],
+  "redFlags": [
+   "Prominent lower motor neurone signs or bulbar features suggesting evolution towards a motor neurone disease phenotype",
+   "Rapidly progressive weakness that is atypical for slowly progressive hereditary spastic paraplegia",
+   "A clear sensory level or sphincter crisis pointing to compressive myelopathy",
+   "Early severe cognitive decline warranting broader neurogenetic evaluation"
+  ],
+  "prognosis": "Pure SPG10 tends to progress slowly with preserved ambulation for many years, whereas complicated forms with neuropathy or amyotrophy, and families overlapping with motor neurone disease, may follow a more disabling course.",
+  "pitfalls": [
+   "Labelling a case as pure HSP without nerve conduction studies that would reveal an axonal neuropathy",
+   "Overlooking the link to Charcot-Marie-Tooth and motor neurone disease when counselling families",
+   "Assuming a negative SPG4 test excludes a genetic cause and stopping the panel prematurely",
+   "Misreading distal wasting as an unrelated entrapment neuropathy"
+  ],
+  "references": [
+   "GeneReviews: Hereditary Spastic Paraplegia Overview",
+   "Bradley and Daroff's Neurology in Clinical Practice"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Control spasticity symptomatically with antispasticity agents such as baclofen or tizanidine, focal botulinum toxin injections and intrathecal baclofen in severe cases",
+   "Preserve mobility and prevent contractures with physiotherapy, stretching, gait aids and occupational therapy",
+   "Provide orthoses and orthopaedic input for foot deformity, and manage any associated distal amyotrophy or peripheral neuropathy",
+   "Manage bladder symptoms where present",
+   "Monitor for complicated features such as neuropathy or cognitive change, and remain alert to evolving phenotypes in the family given allelism with axonal Charcot-Marie-Tooth disease and amyotrophic lateral sclerosis",
+   "Offer genetic counselling for autosomal dominant KIF5A inheritance with family testing"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "hereditary_spastic_paraplegia_spg10-pathway",
+   "title": "HSP SPG10 (KIF5A): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Autosomal dominant spastic paraplegia caused by heterozygous variants in KIF5A, which encodes a neuronal kinesin motor driving anterograde axonal transport",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Prominent lower motor neurone signs or bulbar features suggesting evolution towards a motor neurone disease phenotype",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Targeted KIF5A sequencing within a hereditary spastic paraplegia or motor neuropathy gene panel, Nerve conduction studies and electromyography to define associated neuropathy or amyotrophy, MRI of brain and spine to"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Control spasticity symptomatically with antispasticity agents such as baclofen or tizanidine, focal botulinum toxin injections and intrathecal baclofen in severe cases"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Labelling a case as pure HSP without nerve conduction studies that would reveal an axonal neuropathy"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of hsp spg10 (kif5a)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "hereditary_spastic_paraplegia_spg10-matrix",
+   "title": "HSP SPG10 (KIF5A): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Autosomal dominant spastic paraplegia caused by heterozygous variants in KIF5A, which encodes a neuronal kinesin motor driving",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "SPG10 results from dominant variants in KIF5A, the gene for a heavy chain of kinesin-1, the principal motor that carries cargo (mitochondria, vesicles and cytoskeletal components) along microtubules towards the axon terminal. Pathogenic changes, often clustered in the motor domain, impair this anterograde transport and disturb cargo delivery to the distal axon. The longest corticospinal and peripheral motor axons are most vulnerable, producing a length-dependent degeneration that manifests as spasticity and, in complicated cases, distal wasting and neuropathy. Distinct variants elsewhere in the gene underlie related Charcot-Marie-Tooth and motor neurone phenotypes.",
-    "additionalDifferentials": [
-      "Other autosomal dominant hereditary spastic paraplegias (SPG4, SPG3A, SPG31)",
-      "Axonal Charcot-Marie-Tooth disease type 2",
-      "Amyotrophic lateral sclerosis and juvenile primary lateral sclerosis",
-      "Dopa-responsive dystonia",
-      "Structural cervical or thoracic myelopathy",
-      "Adrenomyeloneuropathy"
+    [
+     "Key Investigations",
+     "Targeted KIF5A sequencing within a hereditary spastic paraplegia or motor neuropathy gene panel, Nerve conduction studies and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Targeted KIF5A sequencing within a hereditary spastic paraplegia or motor neuropathy gene panel",
-      "Nerve conduction studies and electromyography to define associated neuropathy or amyotrophy",
-      "MRI of brain and spine to exclude structural and demyelinating causes",
-      "Detailed three-generation family history given variable allelic phenotypes",
-      "Cognitive screening where a complicated presentation is suspected",
-      "Very-long-chain fatty acids to exclude adrenomyeloneuropathy"
+    [
+     "Primary Differentials",
+     "Other autosomal dominant hereditary spastic paraplegias (SPG4, SPG3A, SPG31), Axonal Charcot-Marie-Tooth disease type 2,",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Prominent lower motor neurone signs or bulbar features suggesting evolution towards a motor neurone disease phenotype",
-      "Rapidly progressive weakness that is atypical for slowly progressive hereditary spastic paraplegia",
-      "A clear sensory level or sphincter crisis pointing to compressive myelopathy",
-      "Early severe cognitive decline warranting broader neurogenetic evaluation"
+    [
+     "Management Strategy",
+     "Control spasticity symptomatically with antispasticity agents such as baclofen or tizanidine, focal botulinum toxin injections",
+     "Core treatment modality"
     ],
-    "prognosis": "Pure SPG10 tends to progress slowly with preserved ambulation for many years, whereas complicated forms with neuropathy or amyotrophy, and families overlapping with motor neurone disease, may follow a more disabling course.",
-    "pitfalls": [
-      "Labelling a case as pure HSP without nerve conduction studies that would reveal an axonal neuropathy",
-      "Overlooking the link to Charcot-Marie-Tooth and motor neurone disease when counselling families",
-      "Assuming a negative SPG4 test excludes a genetic cause and stopping the panel prematurely",
-      "Misreading distal wasting as an unrelated entrapment neuropathy"
-    ],
-    "references": [
-      "GeneReviews: Hereditary Spastic Paraplegia Overview",
-      "Bradley and Daroff's Neurology in Clinical Practice"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Control spasticity symptomatically with antispasticity agents such as baclofen or tizanidine, focal botulinum toxin injections and intrathecal baclofen in severe cases",
-      "Preserve mobility and prevent contractures with physiotherapy, stretching, gait aids and occupational therapy",
-      "Provide orthoses and orthopaedic input for foot deformity, and manage any associated distal amyotrophy or peripheral neuropathy",
-      "Manage bladder symptoms where present",
-      "Monitor for complicated features such as neuropathy or cognitive change, and remain alert to evolving phenotypes in the family given allelism with axonal Charcot-Marie-Tooth disease and amyotrophic lateral sclerosis",
-      "Offer genetic counselling for autosomal dominant KIF5A inheritance with family testing"
+    [
+     "Clinical Pitfall",
+     "Labelling a case as pure HSP without nerve conduction studies that would reveal an axonal neuropathy",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for hsp spg10 (kif5a)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "hereditary-spastic-paraplegia-spg10-real-image",
+   "title": "HSP SPG10 (KIF5A): Diagnostic Head Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
+   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
+   "annotations": [
+    {
+     "label": "Cerebral Parenchyma",
+     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+    },
+    {
+     "label": "Extra-Axial Spaces",
+     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+    }
+   ]
+  }
+ ]
 }

@@ -1,78 +1,173 @@
 {
-  "id": "kcnq2_encephalopathy",
-  "name": "KCNQ2 developmental and epileptic encephalopathy",
-  "aliases": [
-    "KCNQ2",
-    "KCNQ2 encephalopathy",
-    "Kv7.2 encephalopathy",
-    "neonatal epileptic encephalopathy KCNQ2"
+ "id": "kcnq2_encephalopathy",
+ "name": "KCNQ2 developmental and epileptic encephalopathy",
+ "aliases": [
+  "KCNQ2",
+  "KCNQ2 encephalopathy",
+  "Kv7.2 encephalopathy",
+  "neonatal epileptic encephalopathy KCNQ2"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system / Neurology",
+ "specialty": "Neurology / Epileptology / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "ILAE classification / Nelson Textbook of Paediatrics",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Caused by variants in KCNQ2 encoding the Kv7.2 voltage-gated potassium channel subunit that carries the neuronal M-current",
+   "The encephalopathy form usually presents in the first days of life with frequent tonic seizures, often with focal or asymmetric features",
+   "The interictal EEG is typically markedly abnormal, and a burst-suppression or multifocal pattern may be seen",
+   "It sits at the severe end of a spectrum whose benign end is self-limited familial neonatal epilepsy, also caused by KCNQ2 variants",
+   "Sodium-channel-blocking antiseizure medications are often particularly effective in this potassium channelopathy, unlike in sodium-channel loss-of-function disorders",
+   "Brain MRI may show reversible signal changes in the basal ganglia and thalamus in the neonatal period",
+   "Development is impaired, though outcome varies with the specific variant and its functional effect"
   ],
-  "class": "non_infective",
-  "system": "Nervous system / Neurology",
-  "specialty": "Neurology / Epileptology / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "ILAE classification / Nelson Textbook of Paediatrics",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Caused by variants in KCNQ2 encoding the Kv7.2 voltage-gated potassium channel subunit that carries the neuronal M-current",
-      "The encephalopathy form usually presents in the first days of life with frequent tonic seizures, often with focal or asymmetric features",
-      "The interictal EEG is typically markedly abnormal, and a burst-suppression or multifocal pattern may be seen",
-      "It sits at the severe end of a spectrum whose benign end is self-limited familial neonatal epilepsy, also caused by KCNQ2 variants",
-      "Sodium-channel-blocking antiseizure medications are often particularly effective in this potassium channelopathy, unlike in sodium-channel loss-of-function disorders",
-      "Brain MRI may show reversible signal changes in the basal ganglia and thalamus in the neonatal period",
-      "Development is impaired, though outcome varies with the specific variant and its functional effect"
+  "pathophysiology": "KCNQ2 encephalopathy is caused by pathogenic variants, frequently dominant-negative or gain- and loss-of-function missense changes, in KCNQ2 encoding the Kv7.2 potassium channel subunit. Kv7.2 combines with Kv7.3 to generate the M-current, a slow potassium current that stabilises the resting membrane potential and limits repetitive firing. Disruption of this current increases neuronal excitability in the neonatal brain, producing early tonic seizures and a severe epileptic encephalopathy, in contrast to the milder self-limited phenotype seen with less disruptive variants.",
+  "additionalDifferentials": [
+   "Benign familial neonatal epilepsy (KCNQ2/KCNQ3)",
+   "Ohtahara syndrome of other cause",
+   "SCN2A developmental and epileptic encephalopathy",
+   "Hypoxic-ischaemic encephalopathy with neonatal seizures",
+   "Inborn errors of metabolism presenting in the neonate",
+   "Structural neonatal seizures from malformation or stroke"
+  ],
+  "additionalInvestigations": [
+   "KCNQ2 testing or a neonatal epilepsy gene panel or exome sequencing",
+   "EEG documenting the interictal pattern and seizure semiology",
+   "Brain MRI, which may show transient basal ganglia and thalamic signal change",
+   "Metabolic screening to exclude treatable causes of neonatal seizures",
+   "Developmental follow-up to track the encephalopathic course"
+  ],
+  "redFlags": [
+   "Frequent neonatal tonic seizures with a severely abnormal interictal EEG",
+   "Refractoriness to standard first-line neonatal seizure treatment",
+   "Evidence of developmental arrest in early infancy",
+   "Diagnostic uncertainty between the benign and encephalopathic ends of the spectrum"
+  ],
+  "prognosis": "Outcome varies with the underlying variant: many children with the encephalopathy form have intellectual disability and persistent epilepsy, though seizures may improve over the first years. Early recognition and use of sodium-channel-blocking therapy can improve seizure control in responsive cases.",
+  "pitfalls": [
+   "Assuming all KCNQ2 neonatal seizures are benign and self-limited",
+   "Avoiding sodium-channel blockers, which are often the most effective agents here",
+   "Misreading transient neonatal MRI signal change as an alternative diagnosis",
+   "Delaying genetic testing in an unexplained neonatal epileptic encephalopathy"
+  ],
+  "references": [
+   "ILAE classification of the epilepsies",
+   "Nelson Textbook of Paediatrics"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Sodium-channel-blocking antiseizure medications such as carbamazepine, oxcarbazepine or phenytoin, which are often particularly effective in this potassium channelopathy",
+   "Prompt initiation in the neonatal period once KCNQ2 is confirmed or strongly suspected, given the early tonic seizures",
+   "Exclusion and treatment of other reversible neonatal seizure causes while awaiting genetic confirmation",
+   "Multidisciplinary neurodevelopmental support with early intervention therapies for the encephalopathic course",
+   "EEG-guided medication adjustment as the burst-suppression or multifocal interictal pattern and seizures evolve",
+   "Neonatal intensive care support with a rescue and status epilepticus plan for seizure clusters",
+   "Clinical genetics counselling; distinguishing de novo encephalopathy variants from familial self-limited neonatal epilepsy informs recurrence risk"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "kcnq2_encephalopathy-pathway",
+   "title": "KCNQ2 developmental and epileptic encephalopathy: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Caused by variants in KCNQ2 encoding the Kv7.2 voltage-gated potassium channel subunit that carries the neuronal M-current",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Frequent neonatal tonic seizures with a severely abnormal interictal EEG",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: KCNQ2 testing or a neonatal epilepsy gene panel or exome sequencing, EEG documenting the interictal pattern and seizure semiology, Brain MRI, which may show transient basal ganglia and thalamic signal change"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Sodium-channel-blocking antiseizure medications such as carbamazepine, oxcarbazepine or phenytoin, which are often particularly effective in this potassium channelopathy"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Assuming all KCNQ2 neonatal seizures are benign and self-limited"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of kcnq2 developmental and epileptic encephalopathy."
+  }
+ ],
+ "tables": [
+  {
+   "id": "kcnq2_encephalopathy-matrix",
+   "title": "KCNQ2 developmental and epileptic encephalopathy: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Caused by variants in KCNQ2 encoding the Kv7.2 voltage-gated potassium channel subunit that carries the neuronal M-current",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "KCNQ2 encephalopathy is caused by pathogenic variants, frequently dominant-negative or gain- and loss-of-function missense changes, in KCNQ2 encoding the Kv7.2 potassium channel subunit. Kv7.2 combines with Kv7.3 to generate the M-current, a slow potassium current that stabilises the resting membrane potential and limits repetitive firing. Disruption of this current increases neuronal excitability in the neonatal brain, producing early tonic seizures and a severe epileptic encephalopathy, in contrast to the milder self-limited phenotype seen with less disruptive variants.",
-    "additionalDifferentials": [
-      "Benign familial neonatal epilepsy (KCNQ2/KCNQ3)",
-      "Ohtahara syndrome of other cause",
-      "SCN2A developmental and epileptic encephalopathy",
-      "Hypoxic-ischaemic encephalopathy with neonatal seizures",
-      "Inborn errors of metabolism presenting in the neonate",
-      "Structural neonatal seizures from malformation or stroke"
+    [
+     "Key Investigations",
+     "KCNQ2 testing or a neonatal epilepsy gene panel or exome sequencing, EEG documenting the interictal pattern and seizure",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "KCNQ2 testing or a neonatal epilepsy gene panel or exome sequencing",
-      "EEG documenting the interictal pattern and seizure semiology",
-      "Brain MRI, which may show transient basal ganglia and thalamic signal change",
-      "Metabolic screening to exclude treatable causes of neonatal seizures",
-      "Developmental follow-up to track the encephalopathic course"
+    [
+     "Primary Differentials",
+     "Benign familial neonatal epilepsy (KCNQ2/KCNQ3), Ohtahara syndrome of other cause, SCN2A developmental and epileptic",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Frequent neonatal tonic seizures with a severely abnormal interictal EEG",
-      "Refractoriness to standard first-line neonatal seizure treatment",
-      "Evidence of developmental arrest in early infancy",
-      "Diagnostic uncertainty between the benign and encephalopathic ends of the spectrum"
+    [
+     "Management Strategy",
+     "Sodium-channel-blocking antiseizure medications such as carbamazepine, oxcarbazepine or phenytoin, which are often particularly",
+     "Core treatment modality"
     ],
-    "prognosis": "Outcome varies with the underlying variant: many children with the encephalopathy form have intellectual disability and persistent epilepsy, though seizures may improve over the first years. Early recognition and use of sodium-channel-blocking therapy can improve seizure control in responsive cases.",
-    "pitfalls": [
-      "Assuming all KCNQ2 neonatal seizures are benign and self-limited",
-      "Avoiding sodium-channel blockers, which are often the most effective agents here",
-      "Misreading transient neonatal MRI signal change as an alternative diagnosis",
-      "Delaying genetic testing in an unexplained neonatal epileptic encephalopathy"
-    ],
-    "references": [
-      "ILAE classification of the epilepsies",
-      "Nelson Textbook of Paediatrics"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Sodium-channel-blocking antiseizure medications such as carbamazepine, oxcarbazepine or phenytoin, which are often particularly effective in this potassium channelopathy",
-      "Prompt initiation in the neonatal period once KCNQ2 is confirmed or strongly suspected, given the early tonic seizures",
-      "Exclusion and treatment of other reversible neonatal seizure causes while awaiting genetic confirmation",
-      "Multidisciplinary neurodevelopmental support with early intervention therapies for the encephalopathic course",
-      "EEG-guided medication adjustment as the burst-suppression or multifocal interictal pattern and seizures evolve",
-      "Neonatal intensive care support with a rescue and status epilepticus plan for seizure clusters",
-      "Clinical genetics counselling; distinguishing de novo encephalopathy variants from familial self-limited neonatal epilepsy informs recurrence risk"
+    [
+     "Clinical Pitfall",
+     "Assuming all KCNQ2 neonatal seizures are benign and self-limited",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for kcnq2 developmental and epileptic encephalopathy."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "kcnq2-encephalopathy-real-image",
+   "title": "KCNQ2 developmental and epileptic encephalopathy: Diagnostic Head Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
+   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
+   "annotations": [
+    {
+     "label": "Cerebral Parenchyma",
+     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+    },
+    {
+     "label": "Extra-Axial Spaces",
+     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+    }
+   ]
+  }
+ ]
 }

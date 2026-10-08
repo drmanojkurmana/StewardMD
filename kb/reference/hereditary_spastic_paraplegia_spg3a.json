@@ -1,78 +1,173 @@
 {
-  "id": "hereditary_spastic_paraplegia_spg3a",
-  "name": "Hereditary spastic paraplegia SPG3A (atlastin)",
-  "aliases": [
-    "SPG3A",
-    "ATL1-related HSP",
-    "atlastin-1 deficiency",
-    "early-onset autosomal dominant pure HSP"
+ "id": "hereditary_spastic_paraplegia_spg3a",
+ "name": "Hereditary spastic paraplegia SPG3A (atlastin)",
+ "aliases": [
+  "SPG3A",
+  "ATL1-related HSP",
+  "atlastin-1 deficiency",
+  "early-onset autosomal dominant pure HSP"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system / Neurogenetics",
+ "specialty": "Neurology / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "GeneReviews / Bradley's Neurology in Clinical Practice",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "SPG3A, caused by heterozygous ATL1 variants encoding atlastin-1, is the second commonest autosomal dominant HSP after SPG4 and the most frequent early childhood-onset dominant form",
+   "It usually presents as a pure HSP with symptom onset in the first years of life, sometimes mistaken for spastic diplegic cerebral palsy",
+   "The course is often relatively non-progressive or only slowly progressive, which is a helpful distinguishing feature from SPG4",
+   "Lower-limb spasticity, hyperreflexia, and extensor plantars predominate, with weakness usually mild",
+   "Occasional families show complicating features such as peripheral neuropathy or distal wasting",
+   "A dominant family history is common, but de novo variants occur and penetrance can vary",
+   "Treatment is symptomatic, focusing on antispasticity measures, gait, and physiotherapy"
   ],
-  "class": "non_infective",
-  "system": "Nervous system / Neurogenetics",
-  "specialty": "Neurology / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "GeneReviews / Bradley's Neurology in Clinical Practice",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "SPG3A, caused by heterozygous ATL1 variants encoding atlastin-1, is the second commonest autosomal dominant HSP after SPG4 and the most frequent early childhood-onset dominant form",
-      "It usually presents as a pure HSP with symptom onset in the first years of life, sometimes mistaken for spastic diplegic cerebral palsy",
-      "The course is often relatively non-progressive or only slowly progressive, which is a helpful distinguishing feature from SPG4",
-      "Lower-limb spasticity, hyperreflexia, and extensor plantars predominate, with weakness usually mild",
-      "Occasional families show complicating features such as peripheral neuropathy or distal wasting",
-      "A dominant family history is common, but de novo variants occur and penetrance can vary",
-      "Treatment is symptomatic, focusing on antispasticity measures, gait, and physiotherapy"
+  "pathophysiology": "Hereditary spastic paraplegias result from length-dependent, distal-predominant degeneration of the longest corticospinal axons. ATL1 encodes atlastin-1, a GTPase that mediates homotypic fusion of endoplasmic reticulum tubules and helps shape the tubular ER network, working in concert with other HSP proteins such as spastin and the REEP proteins. Variants impair ER morphogenesis and axonal transport within long motor neurones, and because the distal segments of these very long axons are most dependent on efficient membrane trafficking, they degenerate preferentially, producing the lower-limb-predominant spasticity.",
+  "additionalDifferentials": [
+   "Spastic diplegic cerebral palsy",
+   "Other hereditary spastic paraplegias (e.g. SPG4, SPG31)",
+   "Dopa-responsive dystonia",
+   "Metabolic disorders presenting with childhood spasticity",
+   "Structural spinal cord lesion or tethered cord",
+   "Leukodystrophy in early-onset cases"
+  ],
+  "additionalInvestigations": [
+   "Brain and spine MRI to exclude structural, perinatal, or white-matter causes",
+   "Genetic testing for ATL1 within an HSP panel, including dosage analysis",
+   "Trial of levodopa where dopa-responsive dystonia is a consideration",
+   "Nerve conduction studies if distal wasting or neuropathy is suspected",
+   "Metabolic screen to exclude treatable mimics in young children"
+  ],
+  "redFlags": [
+   "Clear clinical progression or regression suggesting an alternative progressive disorder",
+   "Asymmetry, focal deficit, or a sensory level indicating a structural spinal lesion",
+   "Prominent bulbar or upper-limb involvement inconsistent with pure HSP",
+   "Diurnal fluctuation of symptoms suggesting a treatable dopa-responsive condition"
+  ],
+  "prognosis": "SPG3A often runs a comparatively benign, slowly progressive or near-static course, and most affected individuals remain ambulant, frequently with better long-term mobility than later-onset dominant forms.",
+  "pitfalls": [
+   "Labelling an early-onset case as cerebral palsy and missing a genetic, inheritable diagnosis",
+   "Assuming absence of family history excludes SPG3A given de novo variants",
+   "Failing to trial levodopa when the differential includes dopa-responsive dystonia",
+   "Overtreating spasticity to the detriment of functional support and gait"
+  ],
+  "references": [
+   "GeneReviews: Spastic Paraplegia 3A (ATL1)",
+   "Bradley's Neurology in Clinical Practice"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Symptomatic antispasticity therapy with baclofen or tizanidine titrated to lower-limb tone, with botulinum toxin for focal muscle overactivity",
+   "Regular physiotherapy and stretching to prevent contractures, with ankle-foot orthoses to optimise the spastic gait from early childhood",
+   "Occupational therapy and educational support given the early-childhood onset that can mimic spastic diplegic cerebral palsy",
+   "Surveillance for contractures, gait change and foot deformity with orthopaedic review",
+   "Bladder assessment and antimuscarinic therapy if urinary symptoms develop",
+   "Genetic counselling for autosomal dominant inheritance, noting de novo variants and variable penetrance",
+   "Multidisciplinary paediatric neurology, physiotherapy and rehabilitation input"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "hereditary_spastic_paraplegia_spg3a-pathway",
+   "title": "Hereditary spastic paraplegia SPG3A (atlastin): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "SPG3A, caused by heterozygous ATL1 variants encoding atlastin-1, is the second commonest autosomal dominant HSP after SPG4 and the most frequent early childhood-onset dominant form",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Clear clinical progression or regression suggesting an alternative progressive disorder",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Brain and spine MRI to exclude structural, perinatal, or white-matter causes, Genetic testing for ATL1 within an HSP panel, including dosage analysis, Trial of levodopa where dopa-responsive dystonia is a consideration"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Symptomatic antispasticity therapy with baclofen or tizanidine titrated to lower-limb tone, with botulinum toxin for focal muscle overactivity"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Labelling an early-onset case as cerebral palsy and missing a genetic, inheritable diagnosis"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of hereditary spastic paraplegia spg3a (atlastin)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "hereditary_spastic_paraplegia_spg3a-matrix",
+   "title": "Hereditary spastic paraplegia SPG3A (atlastin): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "SPG3A, caused by heterozygous ATL1 variants encoding atlastin-1, is the second commonest autosomal dominant HSP after SPG4 and",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Hereditary spastic paraplegias result from length-dependent, distal-predominant degeneration of the longest corticospinal axons. ATL1 encodes atlastin-1, a GTPase that mediates homotypic fusion of endoplasmic reticulum tubules and helps shape the tubular ER network, working in concert with other HSP proteins such as spastin and the REEP proteins. Variants impair ER morphogenesis and axonal transport within long motor neurones, and because the distal segments of these very long axons are most dependent on efficient membrane trafficking, they degenerate preferentially, producing the lower-limb-predominant spasticity.",
-    "additionalDifferentials": [
-      "Spastic diplegic cerebral palsy",
-      "Other hereditary spastic paraplegias (e.g. SPG4, SPG31)",
-      "Dopa-responsive dystonia",
-      "Metabolic disorders presenting with childhood spasticity",
-      "Structural spinal cord lesion or tethered cord",
-      "Leukodystrophy in early-onset cases"
+    [
+     "Key Investigations",
+     "Brain and spine MRI to exclude structural, perinatal, or white-matter causes, Genetic testing for ATL1 within an HSP panel,",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Brain and spine MRI to exclude structural, perinatal, or white-matter causes",
-      "Genetic testing for ATL1 within an HSP panel, including dosage analysis",
-      "Trial of levodopa where dopa-responsive dystonia is a consideration",
-      "Nerve conduction studies if distal wasting or neuropathy is suspected",
-      "Metabolic screen to exclude treatable mimics in young children"
+    [
+     "Primary Differentials",
+     "Spastic diplegic cerebral palsy, Other hereditary spastic paraplegias (e.g. SPG4, SPG31), Dopa-responsive dystonia",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Clear clinical progression or regression suggesting an alternative progressive disorder",
-      "Asymmetry, focal deficit, or a sensory level indicating a structural spinal lesion",
-      "Prominent bulbar or upper-limb involvement inconsistent with pure HSP",
-      "Diurnal fluctuation of symptoms suggesting a treatable dopa-responsive condition"
+    [
+     "Management Strategy",
+     "Symptomatic antispasticity therapy with baclofen or tizanidine titrated to lower-limb tone, with botulinum toxin for focal muscle",
+     "Core treatment modality"
     ],
-    "prognosis": "SPG3A often runs a comparatively benign, slowly progressive or near-static course, and most affected individuals remain ambulant, frequently with better long-term mobility than later-onset dominant forms.",
-    "pitfalls": [
-      "Labelling an early-onset case as cerebral palsy and missing a genetic, inheritable diagnosis",
-      "Assuming absence of family history excludes SPG3A given de novo variants",
-      "Failing to trial levodopa when the differential includes dopa-responsive dystonia",
-      "Overtreating spasticity to the detriment of functional support and gait"
-    ],
-    "references": [
-      "GeneReviews: Spastic Paraplegia 3A (ATL1)",
-      "Bradley's Neurology in Clinical Practice"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Symptomatic antispasticity therapy with baclofen or tizanidine titrated to lower-limb tone, with botulinum toxin for focal muscle overactivity",
-      "Regular physiotherapy and stretching to prevent contractures, with ankle-foot orthoses to optimise the spastic gait from early childhood",
-      "Occupational therapy and educational support given the early-childhood onset that can mimic spastic diplegic cerebral palsy",
-      "Surveillance for contractures, gait change and foot deformity with orthopaedic review",
-      "Bladder assessment and antimuscarinic therapy if urinary symptoms develop",
-      "Genetic counselling for autosomal dominant inheritance, noting de novo variants and variable penetrance",
-      "Multidisciplinary paediatric neurology, physiotherapy and rehabilitation input"
+    [
+     "Clinical Pitfall",
+     "Labelling an early-onset case as cerebral palsy and missing a genetic, inheritable diagnosis",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for hereditary spastic paraplegia spg3a (atlastin)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "hereditary-spastic-paraplegia-spg3a-real-image",
+   "title": "Hereditary spastic paraplegia SPG3A (atlastin): Diagnostic Head Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
+   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
+   "annotations": [
+    {
+     "label": "Cerebral Parenchyma",
+     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+    },
+    {
+     "label": "Extra-Axial Spaces",
+     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+    }
+   ]
+  }
+ ]
 }

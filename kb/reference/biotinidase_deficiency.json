@@ -1,79 +1,174 @@
 {
-  "id": "biotinidase_deficiency",
-  "name": "Biotinidase deficiency",
-  "aliases": [
-    "BTD deficiency",
-    "late-onset multiple carboxylase deficiency",
-    "juvenile multiple carboxylase deficiency",
-    "biotin recycling defect"
+ "id": "biotinidase_deficiency",
+ "name": "Biotinidase deficiency",
+ "aliases": [
+  "BTD deficiency",
+  "late-onset multiple carboxylase deficiency",
+  "juvenile multiple carboxylase deficiency",
+  "biotin recycling defect"
+ ],
+ "class": "non_infective",
+ "system": "Genetic / Metabolic",
+ "specialty": "Metabolic Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Nelson Textbook of Pediatrics / Harrison's Principles of Internal Medicine",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Caused by deficiency of biotinidase, the enzyme that recycles biotin from biocytin and liberates dietary protein-bound biotin, leading to functional biotin deficiency",
+   "Typical untreated features include seizures, hypotonia, developmental delay, ataxia, alopecia and a scaly periorificial skin rash",
+   "Sensorineural hearing loss and optic atrophy are important complications that may not fully reverse once established",
+   "Recurrent or persistent Candida infection and conjunctivitis can occur due to associated immune dysfunction",
+   "Metabolic testing may show lactic acidosis, ketosis, mild hyperammonaemia and a characteristic organic aciduria reflecting impaired carboxylase activity",
+   "This is one of the most rewarding inborn errors to treat because oral biotin supplementation reverses or prevents most manifestations",
+   "Profound deficiency (very low enzyme activity) causes more severe disease than partial deficiency, but both are treated with biotin",
+   "Included in newborn screening (enzyme activity assay), allowing pre-symptomatic treatment and excellent outcomes"
   ],
-  "class": "non_infective",
-  "system": "Genetic / Metabolic",
-  "specialty": "Metabolic Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Nelson Textbook of Pediatrics / Harrison's Principles of Internal Medicine",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Caused by deficiency of biotinidase, the enzyme that recycles biotin from biocytin and liberates dietary protein-bound biotin, leading to functional biotin deficiency",
-      "Typical untreated features include seizures, hypotonia, developmental delay, ataxia, alopecia and a scaly periorificial skin rash",
-      "Sensorineural hearing loss and optic atrophy are important complications that may not fully reverse once established",
-      "Recurrent or persistent Candida infection and conjunctivitis can occur due to associated immune dysfunction",
-      "Metabolic testing may show lactic acidosis, ketosis, mild hyperammonaemia and a characteristic organic aciduria reflecting impaired carboxylase activity",
-      "This is one of the most rewarding inborn errors to treat because oral biotin supplementation reverses or prevents most manifestations",
-      "Profound deficiency (very low enzyme activity) causes more severe disease than partial deficiency, but both are treated with biotin",
-      "Included in newborn screening (enzyme activity assay), allowing pre-symptomatic treatment and excellent outcomes"
+  "pathophysiology": "Biotin is the cofactor for several carboxylase enzymes involved in gluconeogenesis, fatty acid synthesis and amino acid catabolism. Biotinidase cleaves biocytin to release free biotin, recycling it, and also frees biotin bound to dietary protein. When biotinidase is deficient, biotin is progressively lost and cannot be adequately reused, producing a functional deficiency that impairs the biotin-dependent carboxylases (pyruvate carboxylase, propionyl-CoA carboxylase, 3-methylcrotonyl-CoA carboxylase and acetyl-CoA carboxylase). The resulting metabolic block causes lactic acidosis and abnormal organic acid accumulation, while the neurological, cutaneous, ophthalmological and auditory features reflect tissue biotin deficiency. Supplemental free biotin bypasses the recycling defect.",
+  "additionalDifferentials": [
+   "Holocarboxylase synthetase deficiency (neonatal multiple carboxylase deficiency)",
+   "Other organic acidaemias",
+   "Mitochondrial and other causes of lactic acidosis",
+   "Acrodermatitis enteropathica (zinc deficiency) for the skin and hair findings",
+   "Epileptic encephalopathies of other cause",
+   "Nutritional biotin deficiency"
+  ],
+  "additionalInvestigations": [
+   "Serum biotinidase enzyme activity assay (diagnostic)",
+   "Newborn screening biotinidase activity measurement",
+   "Blood gas, lactate and ammonia during symptomatic episodes",
+   "Urine organic acids for the characteristic carboxylase-deficiency pattern",
+   "Audiological and ophthalmological assessment",
+   "Molecular testing of the BTD gene to define profound versus partial deficiency"
+  ],
+  "redFlags": [
+   "Metabolic decompensation with lactic acidosis, ketosis and encephalopathy in an untreated infant",
+   "Intractable or unexplained seizures responsive to biotin",
+   "Progressive sensorineural hearing loss or optic atrophy, which may be irreversible if treatment is delayed",
+   "Stridor, apnoea or respiratory compromise during acute decompensation"
+  ],
+  "prognosis": "Prognosis is excellent when biotin supplementation is started early, and screen-detected infants treated before symptoms usually develop normally; however, hearing loss, optic atrophy and neurological damage that occur before diagnosis may not fully reverse, underscoring the value of early detection.",
+  "pitfalls": [
+   "Failing to consider a treatable cause in an infant with seizures, hypotonia and skin or hair changes",
+   "Stopping biotin therapy, since it must be continued lifelong",
+   "Confusing biotinidase deficiency with the neonatal-onset holocarboxylase synthetase deficiency",
+   "Assuming hearing and visual deficits will resolve, when late-treated damage may be permanent"
+  ],
+  "references": [
+   "Nelson Textbook of Pediatrics, 22e",
+   "Harrison's Principles of Internal Medicine, 22e"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Lifelong oral free biotin supplementation, which bypasses the recycling defect and reverses or prevents most manifestations",
+   "Start treatment as early as possible, ideally on newborn-screening detection before symptoms develop",
+   "Supportive management of established deficits, including hearing aids for sensorineural hearing loss and support for optic atrophy and neurological impairment",
+   "Correct lactic acidosis and metabolic decompensation during intercurrent illness",
+   "Surveillance with periodic audiological, ophthalmological and developmental assessment",
+   "Refer to metabolic medicine and provide genetic counselling with BTD testing and family screening"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "biotinidase_deficiency-pathway",
+   "title": "Biotinidase deficiency: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Caused by deficiency of biotinidase, the enzyme that recycles biotin from biocytin and liberates dietary protein-bound biotin, leading to functional biotin deficiency",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Metabolic decompensation with lactic acidosis, ketosis and encephalopathy in an untreated infant",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Serum biotinidase enzyme activity assay (diagnostic), Newborn screening biotinidase activity measurement, Blood gas, lactate and ammonia during symptomatic episodes"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Lifelong oral free biotin supplementation, which bypasses the recycling defect and reverses or prevents most manifestations"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Failing to consider a treatable cause in an infant with seizures, hypotonia and skin or hair changes"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of biotinidase deficiency."
+  }
+ ],
+ "tables": [
+  {
+   "id": "biotinidase_deficiency-matrix",
+   "title": "Biotinidase deficiency: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Caused by deficiency of biotinidase, the enzyme that recycles biotin from biocytin and liberates dietary protein-bound biotin,",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Biotin is the cofactor for several carboxylase enzymes involved in gluconeogenesis, fatty acid synthesis and amino acid catabolism. Biotinidase cleaves biocytin to release free biotin, recycling it, and also frees biotin bound to dietary protein. When biotinidase is deficient, biotin is progressively lost and cannot be adequately reused, producing a functional deficiency that impairs the biotin-dependent carboxylases (pyruvate carboxylase, propionyl-CoA carboxylase, 3-methylcrotonyl-CoA carboxylase and acetyl-CoA carboxylase). The resulting metabolic block causes lactic acidosis and abnormal organic acid accumulation, while the neurological, cutaneous, ophthalmological and auditory features reflect tissue biotin deficiency. Supplemental free biotin bypasses the recycling defect.",
-    "additionalDifferentials": [
-      "Holocarboxylase synthetase deficiency (neonatal multiple carboxylase deficiency)",
-      "Other organic acidaemias",
-      "Mitochondrial and other causes of lactic acidosis",
-      "Acrodermatitis enteropathica (zinc deficiency) for the skin and hair findings",
-      "Epileptic encephalopathies of other cause",
-      "Nutritional biotin deficiency"
+    [
+     "Key Investigations",
+     "Serum biotinidase enzyme activity assay (diagnostic), Newborn screening biotinidase activity measurement, Blood gas, lactate and",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Serum biotinidase enzyme activity assay (diagnostic)",
-      "Newborn screening biotinidase activity measurement",
-      "Blood gas, lactate and ammonia during symptomatic episodes",
-      "Urine organic acids for the characteristic carboxylase-deficiency pattern",
-      "Audiological and ophthalmological assessment",
-      "Molecular testing of the BTD gene to define profound versus partial deficiency"
+    [
+     "Primary Differentials",
+     "Holocarboxylase synthetase deficiency (neonatal multiple carboxylase deficiency), Other organic acidaemias, Mitochondrial and",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Metabolic decompensation with lactic acidosis, ketosis and encephalopathy in an untreated infant",
-      "Intractable or unexplained seizures responsive to biotin",
-      "Progressive sensorineural hearing loss or optic atrophy, which may be irreversible if treatment is delayed",
-      "Stridor, apnoea or respiratory compromise during acute decompensation"
+    [
+     "Management Strategy",
+     "Lifelong oral free biotin supplementation, which bypasses the recycling defect and reverses or prevents most manifestations",
+     "Core treatment modality"
     ],
-    "prognosis": "Prognosis is excellent when biotin supplementation is started early, and screen-detected infants treated before symptoms usually develop normally; however, hearing loss, optic atrophy and neurological damage that occur before diagnosis may not fully reverse, underscoring the value of early detection.",
-    "pitfalls": [
-      "Failing to consider a treatable cause in an infant with seizures, hypotonia and skin or hair changes",
-      "Stopping biotin therapy, since it must be continued lifelong",
-      "Confusing biotinidase deficiency with the neonatal-onset holocarboxylase synthetase deficiency",
-      "Assuming hearing and visual deficits will resolve, when late-treated damage may be permanent"
-    ],
-    "references": [
-      "Nelson Textbook of Pediatrics, 22e",
-      "Harrison's Principles of Internal Medicine, 22e"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Lifelong oral free biotin supplementation, which bypasses the recycling defect and reverses or prevents most manifestations",
-      "Start treatment as early as possible, ideally on newborn-screening detection before symptoms develop",
-      "Supportive management of established deficits, including hearing aids for sensorineural hearing loss and support for optic atrophy and neurological impairment",
-      "Correct lactic acidosis and metabolic decompensation during intercurrent illness",
-      "Surveillance with periodic audiological, ophthalmological and developmental assessment",
-      "Refer to metabolic medicine and provide genetic counselling with BTD testing and family screening"
+    [
+     "Clinical Pitfall",
+     "Failing to consider a treatable cause in an infant with seizures, hypotonia and skin or hair changes",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for biotinidase deficiency."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "biotinidase-deficiency-real-image",
+   "title": "Biotinidase deficiency: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

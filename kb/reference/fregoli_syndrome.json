@@ -1,80 +1,175 @@
 {
-  "id": "fregoli_syndrome",
-  "name": "Fregoli Syndrome",
-  "aliases": [
-    "Fregoli delusion",
-    "Fregoli phenomenon"
+ "id": "fregoli_syndrome",
+ "name": "Fregoli Syndrome",
+ "aliases": [
+  "Fregoli delusion",
+  "Fregoli phenomenon"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system / Psychiatry",
+ "specialty": "Psychiatry / Neurology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Lishman's Organic Psychiatry",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A delusional misidentification syndrome in which the patient believes that a familiar persecutor is disguising themselves as various strangers encountered in daily life.",
+   "Characterised by hyperidentification: unfamiliar people are misidentified as one known individual despite no physical resemblance, sometimes described as psychological identity without physical identity.",
+   "Named after Leopoldo Fregoli, an Italian quick-change stage performer famed for rapid transformations of appearance.",
+   "Contrasts with the Capgras delusion, in which a familiar person is believed to have been replaced by an impostor.",
+   "Associated with paranoid schizophrenia but also with right frontal and temporal lobe pathology, dementia, and traumatic brain injury.",
+   "Usually embedded within persecutory delusions, with the disguised figure experienced as a stalker or persecutor.",
+   "Neuropsychological accounts implicate dysfunction of face-recognition and familiarity-monitoring networks involving the fusiform and right frontal regions.",
+   "Late onset, cognitive impairment, or absence of other psychotic features should prompt thorough organic screening."
   ],
-  "class": "non_infective",
-  "system": "Nervous system / Psychiatry",
-  "specialty": "Psychiatry / Neurology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Lishman's Organic Psychiatry",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A delusional misidentification syndrome in which the patient believes that a familiar persecutor is disguising themselves as various strangers encountered in daily life.",
-      "Characterised by hyperidentification: unfamiliar people are misidentified as one known individual despite no physical resemblance, sometimes described as psychological identity without physical identity.",
-      "Named after Leopoldo Fregoli, an Italian quick-change stage performer famed for rapid transformations of appearance.",
-      "Contrasts with the Capgras delusion, in which a familiar person is believed to have been replaced by an impostor.",
-      "Associated with paranoid schizophrenia but also with right frontal and temporal lobe pathology, dementia, and traumatic brain injury.",
-      "Usually embedded within persecutory delusions, with the disguised figure experienced as a stalker or persecutor.",
-      "Neuropsychological accounts implicate dysfunction of face-recognition and familiarity-monitoring networks involving the fusiform and right frontal regions.",
-      "Late onset, cognitive impairment, or absence of other psychotic features should prompt thorough organic screening."
+  "pathophysiology": "Fregoli syndrome is conceptualised as a disorder of person identification arising from disrupted integration between face-recognition pathways and the affective and mnemonic systems that assign familiarity. Whereas Capgras is linked to loss of the normal autonomic familiarity response, Fregoli is thought to reflect excessive or misattributed familiarity, so that strangers evoke recognition of a known person. Right frontal and temporal dysfunction impairs the monitoring and belief-evaluation processes that would normally reject such misidentifications, allowing the delusion to persist. It occurs both in primary psychotic illness, notably schizophrenia with dopaminergic dysregulation, and in structural or neurodegenerative brain disease.",
+  "additionalDifferentials": [
+   "Capgras delusion",
+   "Intermetamorphosis",
+   "Syndrome of subjective doubles",
+   "Paranoid schizophrenia with persecutory delusions",
+   "Delirium",
+   "Dementia (Alzheimer's or Lewy body type)",
+   "Temporal lobe epilepsy"
+  ],
+  "additionalInvestigations": [
+   "Structural neuroimaging (MRI brain) to identify right frontotemporal pathology",
+   "Cognitive and neuropsychological testing including face recognition",
+   "EEG where seizure activity or delirium is suspected",
+   "Organic screen bloods (full blood count, metabolic panel, thyroid function, calcium, vitamin B12)",
+   "Toxicology and substance screen",
+   "Collateral history to establish onset, content, and progression",
+   "CSF analysis and autoimmune encephalitis antibodies if atypical or rapidly progressive"
+  ],
+  "redFlags": [
+   "Late-onset misidentification with cognitive decline suggesting neurodegeneration",
+   "Focal neurological signs pointing to a structural lesion",
+   "Persecutory content directed at a specific person, raising risk of violence",
+   "Rapid progression with fluctuating consciousness suggesting encephalitis or delirium"
+  ],
+  "prognosis": "Outcome largely follows the underlying disorder; misidentification in schizophrenia often improves with antipsychotic treatment, whereas that due to neurodegenerative disease tends to persist or progress.",
+  "pitfalls": [
+   "Assuming a primary psychiatric cause without excluding organic or neurodegenerative disease",
+   "Overlooking the risk of violence toward the misidentified persecutor",
+   "Confusing Fregoli (hyperidentification of strangers as one known person) with Capgras",
+   "Failing to obtain collateral history that reveals the delusional structure"
+  ],
+  "references": [
+   "Lishman's Organic Psychiatry",
+   "New Oxford Textbook of Psychiatry",
+   "Kaplan and Sadock's Synopsis of Psychiatry"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Treatment of the underlying disorder, with antipsychotic medication when the misidentification arises from schizophrenia or another primary psychosis",
+   "Identification and management of any underlying organic or neurodegenerative cause such as right frontotemporal pathology, dementia or traumatic brain injury, directing treatment accordingly",
+   "Risk assessment and safety planning given the persecutory content, as the misidentified figure may be experienced as a threatening stalker",
+   "Cognitive support with dementia-directed therapy such as cholinesterase inhibitors where a neurodegenerative process is responsible",
+   "Multidisciplinary care coordinating psychiatry and neurology, with carer support and psychoeducation",
+   "Longitudinal follow-up to monitor treatment response and progression of the underlying disease"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "fregoli_syndrome-pathway",
+   "title": "Fregoli Syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A delusional misidentification syndrome in which the patient believes that a familiar persecutor is disguising themselves as various strangers encountered in daily life.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Late-onset misidentification with cognitive decline suggesting neurodegeneration",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Structural neuroimaging (MRI brain) to identify right frontotemporal pathology, Cognitive and neuropsychological testing including face recognition, EEG where seizure activity or delirium is suspected"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Treatment of the underlying disorder, with antipsychotic medication when the misidentification arises from schizophrenia or another primary psychosis"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Assuming a primary psychiatric cause without excluding organic or neurodegenerative disease"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of fregoli syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "fregoli_syndrome-matrix",
+   "title": "Fregoli Syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A delusional misidentification syndrome in which the patient believes that a familiar persecutor is disguising themselves as",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Fregoli syndrome is conceptualised as a disorder of person identification arising from disrupted integration between face-recognition pathways and the affective and mnemonic systems that assign familiarity. Whereas Capgras is linked to loss of the normal autonomic familiarity response, Fregoli is thought to reflect excessive or misattributed familiarity, so that strangers evoke recognition of a known person. Right frontal and temporal dysfunction impairs the monitoring and belief-evaluation processes that would normally reject such misidentifications, allowing the delusion to persist. It occurs both in primary psychotic illness, notably schizophrenia with dopaminergic dysregulation, and in structural or neurodegenerative brain disease.",
-    "additionalDifferentials": [
-      "Capgras delusion",
-      "Intermetamorphosis",
-      "Syndrome of subjective doubles",
-      "Paranoid schizophrenia with persecutory delusions",
-      "Delirium",
-      "Dementia (Alzheimer's or Lewy body type)",
-      "Temporal lobe epilepsy"
+    [
+     "Key Investigations",
+     "Structural neuroimaging (MRI brain) to identify right frontotemporal pathology, Cognitive and neuropsychological testing",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Structural neuroimaging (MRI brain) to identify right frontotemporal pathology",
-      "Cognitive and neuropsychological testing including face recognition",
-      "EEG where seizure activity or delirium is suspected",
-      "Organic screen bloods (full blood count, metabolic panel, thyroid function, calcium, vitamin B12)",
-      "Toxicology and substance screen",
-      "Collateral history to establish onset, content, and progression",
-      "CSF analysis and autoimmune encephalitis antibodies if atypical or rapidly progressive"
+    [
+     "Primary Differentials",
+     "Capgras delusion, Intermetamorphosis, Syndrome of subjective doubles",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Late-onset misidentification with cognitive decline suggesting neurodegeneration",
-      "Focal neurological signs pointing to a structural lesion",
-      "Persecutory content directed at a specific person, raising risk of violence",
-      "Rapid progression with fluctuating consciousness suggesting encephalitis or delirium"
+    [
+     "Management Strategy",
+     "Treatment of the underlying disorder, with antipsychotic medication when the misidentification arises from schizophrenia or",
+     "Core treatment modality"
     ],
-    "prognosis": "Outcome largely follows the underlying disorder; misidentification in schizophrenia often improves with antipsychotic treatment, whereas that due to neurodegenerative disease tends to persist or progress.",
-    "pitfalls": [
-      "Assuming a primary psychiatric cause without excluding organic or neurodegenerative disease",
-      "Overlooking the risk of violence toward the misidentified persecutor",
-      "Confusing Fregoli (hyperidentification of strangers as one known person) with Capgras",
-      "Failing to obtain collateral history that reveals the delusional structure"
-    ],
-    "references": [
-      "Lishman's Organic Psychiatry",
-      "New Oxford Textbook of Psychiatry",
-      "Kaplan and Sadock's Synopsis of Psychiatry"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Treatment of the underlying disorder, with antipsychotic medication when the misidentification arises from schizophrenia or another primary psychosis",
-      "Identification and management of any underlying organic or neurodegenerative cause such as right frontotemporal pathology, dementia or traumatic brain injury, directing treatment accordingly",
-      "Risk assessment and safety planning given the persecutory content, as the misidentified figure may be experienced as a threatening stalker",
-      "Cognitive support with dementia-directed therapy such as cholinesterase inhibitors where a neurodegenerative process is responsible",
-      "Multidisciplinary care coordinating psychiatry and neurology, with carer support and psychoeducation",
-      "Longitudinal follow-up to monitor treatment response and progression of the underlying disease"
+    [
+     "Clinical Pitfall",
+     "Assuming a primary psychiatric cause without excluding organic or neurodegenerative disease",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for fregoli syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "fregoli-syndrome-real-image",
+   "title": "Fregoli Syndrome: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

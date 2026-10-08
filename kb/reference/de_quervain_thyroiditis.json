@@ -1,73 +1,168 @@
 {
-  "id": "de_quervain_thyroiditis",
-  "name": "De Quervain thyroiditis",
-  "aliases": [
-    "subacute granulomatous thyroiditis",
-    "subacute painful thyroiditis"
+ "id": "de_quervain_thyroiditis",
+ "name": "De Quervain thyroiditis",
+ "aliases": [
+  "subacute granulomatous thyroiditis",
+  "subacute painful thyroiditis"
+ ],
+ "class": "non_infective",
+ "system": "Endocrine",
+ "specialty": "Endocrinology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Endocrinology references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A painful subacute thyroiditis, typically following a viral upper respiratory infection",
+   "Presents with a tender, firm goitre, neck pain often radiating to the jaw or ears, and systemic upset",
+   "It follows a triphasic course of thyrotoxicosis, then hypothyroidism, then recovery",
+   "Inflammatory markers (ESR/CRP) are characteristically markedly raised, unlike in other thyroiditides",
+   "Radioactive iodine uptake is low during the thyrotoxic phase because the process is destructive",
+   "It is managed with analgesia or anti-inflammatory drugs, or corticosteroids for severe pain; beta-blockade eases thyrotoxic symptoms"
   ],
-  "class": "non_infective",
-  "system": "Endocrine",
-  "specialty": "Endocrinology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Endocrinology references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A painful subacute thyroiditis, typically following a viral upper respiratory infection",
-      "Presents with a tender, firm goitre, neck pain often radiating to the jaw or ears, and systemic upset",
-      "It follows a triphasic course of thyrotoxicosis, then hypothyroidism, then recovery",
-      "Inflammatory markers (ESR/CRP) are characteristically markedly raised, unlike in other thyroiditides",
-      "Radioactive iodine uptake is low during the thyrotoxic phase because the process is destructive",
-      "It is managed with analgesia or anti-inflammatory drugs, or corticosteroids for severe pain; beta-blockade eases thyrotoxic symptoms"
+  "pathophysiology": "De Quervain thyroiditis is a self-limiting inflammatory thyroiditis widely attributed to a viral or post-viral immune response, with a granulomatous infiltrate damaging thyroid follicles. Follicular destruction releases stored hormone, producing a transient thyrotoxic phase, after which hormone depletion causes a hypothyroid phase before the gland recovers. The intense inflammation accounts for the pain, tenderness and markedly elevated inflammatory markers, and the destructive (rather than hyperfunctioning) mechanism explains the low radioiodine uptake. Although virally triggered, it is not a suppurative infection of the gland.",
+  "additionalDifferentials": [
+   "Suppurative (infective) thyroiditis",
+   "Graves disease",
+   "Silent and postpartum thyroiditis (painless)",
+   "Haemorrhage into a thyroid nodule",
+   "Riedel thyroiditis"
+  ],
+  "additionalInvestigations": [
+   "Thyroid function tests through the phases",
+   "Inflammatory markers (ESR/CRP), typically very high",
+   "Radioactive iodine uptake (low in the thyrotoxic phase)",
+   "Thyroid ultrasound",
+   "Follow-up thyroid function to detect persistent hypothyroidism"
+  ],
+  "redFlags": [
+   "Features suggesting suppurative thyroiditis (high fever, fluctuant tender mass)",
+   "Severe compressive symptoms",
+   "Persistent hypothyroidism",
+   "Diagnostic uncertainty with Graves disease"
+  ],
+  "prognosis": "Most patients recover normal thyroid function within months, though a minority develop permanent hypothyroidism, and recurrence is uncommon.",
+  "pitfalls": [
+   "Treating the thyrotoxic phase with antithyroid drugs, which are ineffective in destructive thyroiditis",
+   "Confusing it with suppurative thyroiditis or Graves disease",
+   "Overlooking the markedly raised inflammatory markers as a diagnostic clue",
+   "Not following up for permanent hypothyroidism"
+  ],
+  "references": [
+   "Endocrinology reference texts (standard reference)",
+   "Thyroid disease guidelines (standard reference)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Relieve pain with non-steroidal anti-inflammatory drugs, escalating to systemic corticosteroids for severe or unremitting pain",
+   "Control thyrotoxic symptoms during the initial phase with beta-blockade",
+   "Avoid antithyroid drugs and radioiodine, as the thyrotoxicosis is destructive rather than from hormone overproduction",
+   "Support the patient through the hypothyroid phase with levothyroxine if symptomatic, usually only temporarily",
+   "Monitor thyroid function through the triphasic course and at follow-up to detect persistent hypothyroidism",
+   "Reassure that most patients recover normal thyroid function and that recurrence is uncommon"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "de_quervain_thyroiditis-pathway",
+   "title": "De Quervain thyroiditis: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A painful subacute thyroiditis, typically following a viral upper respiratory infection",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Features suggesting suppurative thyroiditis (high fever, fluctuant tender mass)",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Thyroid function tests through the phases, Inflammatory markers (ESR/CRP), typically very high, Radioactive iodine uptake (low in the thyrotoxic phase)"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Relieve pain with non-steroidal anti-inflammatory drugs, escalating to systemic corticosteroids for severe or unremitting pain"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Treating the thyrotoxic phase with antithyroid drugs, which are ineffective in destructive thyroiditis"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of de quervain thyroiditis."
+  }
+ ],
+ "tables": [
+  {
+   "id": "de_quervain_thyroiditis-matrix",
+   "title": "De Quervain thyroiditis: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A painful subacute thyroiditis, typically following a viral upper respiratory infection",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "De Quervain thyroiditis is a self-limiting inflammatory thyroiditis widely attributed to a viral or post-viral immune response, with a granulomatous infiltrate damaging thyroid follicles. Follicular destruction releases stored hormone, producing a transient thyrotoxic phase, after which hormone depletion causes a hypothyroid phase before the gland recovers. The intense inflammation accounts for the pain, tenderness and markedly elevated inflammatory markers, and the destructive (rather than hyperfunctioning) mechanism explains the low radioiodine uptake. Although virally triggered, it is not a suppurative infection of the gland.",
-    "additionalDifferentials": [
-      "Suppurative (infective) thyroiditis",
-      "Graves disease",
-      "Silent and postpartum thyroiditis (painless)",
-      "Haemorrhage into a thyroid nodule",
-      "Riedel thyroiditis"
+    [
+     "Key Investigations",
+     "Thyroid function tests through the phases, Inflammatory markers (ESR/CRP), typically very high, Radioactive iodine uptake (low in",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Thyroid function tests through the phases",
-      "Inflammatory markers (ESR/CRP), typically very high",
-      "Radioactive iodine uptake (low in the thyrotoxic phase)",
-      "Thyroid ultrasound",
-      "Follow-up thyroid function to detect persistent hypothyroidism"
+    [
+     "Primary Differentials",
+     "Suppurative (infective) thyroiditis, Graves disease, Silent and postpartum thyroiditis (painless)",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Features suggesting suppurative thyroiditis (high fever, fluctuant tender mass)",
-      "Severe compressive symptoms",
-      "Persistent hypothyroidism",
-      "Diagnostic uncertainty with Graves disease"
+    [
+     "Management Strategy",
+     "Relieve pain with non-steroidal anti-inflammatory drugs, escalating to systemic corticosteroids for severe or unremitting pain",
+     "Core treatment modality"
     ],
-    "prognosis": "Most patients recover normal thyroid function within months, though a minority develop permanent hypothyroidism, and recurrence is uncommon.",
-    "pitfalls": [
-      "Treating the thyrotoxic phase with antithyroid drugs, which are ineffective in destructive thyroiditis",
-      "Confusing it with suppurative thyroiditis or Graves disease",
-      "Overlooking the markedly raised inflammatory markers as a diagnostic clue",
-      "Not following up for permanent hypothyroidism"
-    ],
-    "references": [
-      "Endocrinology reference texts (standard reference)",
-      "Thyroid disease guidelines (standard reference)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Relieve pain with non-steroidal anti-inflammatory drugs, escalating to systemic corticosteroids for severe or unremitting pain",
-      "Control thyrotoxic symptoms during the initial phase with beta-blockade",
-      "Avoid antithyroid drugs and radioiodine, as the thyrotoxicosis is destructive rather than from hormone overproduction",
-      "Support the patient through the hypothyroid phase with levothyroxine if symptomatic, usually only temporarily",
-      "Monitor thyroid function through the triphasic course and at follow-up to detect persistent hypothyroidism",
-      "Reassure that most patients recover normal thyroid function and that recurrence is uncommon"
+    [
+     "Clinical Pitfall",
+     "Treating the thyrotoxic phase with antithyroid drugs, which are ineffective in destructive thyroiditis",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for de quervain thyroiditis."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "de-quervain-thyroiditis-real-image",
+   "title": "De Quervain thyroiditis: Diagnostic Endocrine Cross-Sectional Imaging",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
+   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
+   "annotations": [
+    {
+     "label": "Gland Morphology",
+     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
+    },
+    {
+     "label": "Focal Lesions",
+     "description": "Nodularity, adenoma attenuation, and washout dynamics."
+    },
+    {
+     "label": "Surrounding Structures",
+     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+    }
+   ]
+  }
+ ]
 }

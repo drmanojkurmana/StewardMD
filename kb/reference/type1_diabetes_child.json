@@ -1,82 +1,177 @@
 {
-  "id": "type1_diabetes_child",
-  "name": "Type 1 Diabetes Mellitus (Child)",
-  "aliases": [
-    "T1DM",
-    "type 1 diabetes",
-    "insulin-dependent diabetes",
-    "juvenile diabetes",
-    "paediatric type 1 diabetes"
+ "id": "type1_diabetes_child",
+ "name": "Type 1 Diabetes Mellitus (Child)",
+ "aliases": [
+  "T1DM",
+  "type 1 diabetes",
+  "insulin-dependent diabetes",
+  "juvenile diabetes",
+  "paediatric type 1 diabetes"
+ ],
+ "class": "non_infective",
+ "system": "Endocrine",
+ "specialty": "Paediatrics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Nelson Textbook of Pediatrics",
+  "sourceEdition": "22e",
+  "pages": null,
+  "clinicalPearls": [
+   "The most common form of diabetes in children, caused by autoimmune destruction of pancreatic beta cells leading to absolute insulin deficiency.",
+   "Classic presenting features are polyuria, polydipsia, weight loss, and fatigue, often over a few weeks; new secondary enuresis in a previously dry child is a useful clue.",
+   "A substantial proportion of children present in diabetic ketoacidosis, which can be the first manifestation of the disease.",
+   "Lifelong insulin replacement is essential; unlike type 2 diabetes, it cannot be managed by lifestyle measures or oral agents alone.",
+   "A 'honeymoon' period of partial remission with reduced insulin needs may follow initial stabilisation but is temporary.",
+   "Management is multidisciplinary, combining insulin, carbohydrate awareness, glucose monitoring, and structured education for the child and family.",
+   "Careful attention to preventing and recognising hypoglycaemia is central to safe day-to-day care.",
+   "Long-term care includes screening for associated autoimmune conditions (such as thyroid disease and coeliac disease) and for microvascular complications over time."
   ],
-  "class": "non_infective",
-  "system": "Endocrine",
-  "specialty": "Paediatrics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Nelson Textbook of Pediatrics",
-    "sourceEdition": "22e",
-    "pages": null,
-    "clinicalPearls": [
-      "The most common form of diabetes in children, caused by autoimmune destruction of pancreatic beta cells leading to absolute insulin deficiency.",
-      "Classic presenting features are polyuria, polydipsia, weight loss, and fatigue, often over a few weeks; new secondary enuresis in a previously dry child is a useful clue.",
-      "A substantial proportion of children present in diabetic ketoacidosis, which can be the first manifestation of the disease.",
-      "Lifelong insulin replacement is essential; unlike type 2 diabetes, it cannot be managed by lifestyle measures or oral agents alone.",
-      "A 'honeymoon' period of partial remission with reduced insulin needs may follow initial stabilisation but is temporary.",
-      "Management is multidisciplinary, combining insulin, carbohydrate awareness, glucose monitoring, and structured education for the child and family.",
-      "Careful attention to preventing and recognising hypoglycaemia is central to safe day-to-day care.",
-      "Long-term care includes screening for associated autoimmune conditions (such as thyroid disease and coeliac disease) and for microvascular complications over time."
+  "pathophysiology": "Type 1 diabetes results from T-cell mediated autoimmune destruction of insulin-producing pancreatic beta cells in genetically predisposed children, often triggered by environmental factors. Progressive beta-cell loss produces absolute insulin deficiency, so glucose cannot enter cells and hyperglycaemia develops. Without insulin the body shifts to lipolysis and ketogenesis; unrestrained ketone production causes metabolic acidosis, while osmotic diuresis from glycosuria leads to dehydration and electrolyte loss, culminating in diabetic ketoacidosis if untreated.",
+  "additionalDifferentials": [
+   "Type 2 diabetes mellitus",
+   "Monogenic diabetes (MODY) and neonatal diabetes",
+   "Secondary diabetes (e.g. cystic fibrosis-related, steroid-induced)",
+   "Diabetes insipidus (for polyuria and polydipsia)",
+   "Transient stress hyperglycaemia during acute illness",
+   "Urinary tract infection (for enuresis or dysuria)"
+  ],
+  "additionalInvestigations": [
+   "Blood glucose and HbA1c",
+   "Blood and/or urine ketones",
+   "Venous blood gas and electrolytes to assess for ketoacidosis",
+   "Pancreatic autoantibodies (e.g. GAD, IA-2, ZnT8, islet cell)",
+   "Thyroid function and coeliac screening at diagnosis and during follow-up",
+   "C-peptide where the diabetes type is uncertain"
+  ],
+  "redFlags": [
+   "New-onset type 1 diabetes presenting in diabetic ketoacidosis (vomiting, abdominal pain, deep sighing breathing, dehydration, drowsiness) is a medical emergency",
+   "Reduced consciousness or focal neurological signs suggesting cerebral oedema during DKA management",
+   "Severe hypoglycaemia with seizures or loss of consciousness",
+   "Signs of significant dehydration or shock",
+   "Persistent vomiting in a known diabetic child, which may signal evolving ketoacidosis"
+  ],
+  "prognosis": "With modern insulin regimens, glucose monitoring, and multidisciplinary support most children live full lives; long-term outcome depends heavily on sustained glycaemic control, which reduces the risk of microvascular and macrovascular complications. Acute risks include ketoacidosis and severe hypoglycaemia.",
+  "pitfalls": [
+   "Mistaking early symptoms for a urinary tract infection or behavioural enuresis and delaying diagnosis",
+   "Failing to check ketones and acid-base status in a hyperglycaemic, unwell child",
+   "Correcting fluids and glucose too aggressively in DKA and precipitating cerebral oedema",
+   "Assuming the honeymoon phase means resolution and reducing vigilance",
+   "Overlooking associated autoimmune conditions during follow-up"
+  ],
+  "references": [
+   "Nelson Textbook of Pediatrics, 22e"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Lifelong subcutaneous insulin replacement using a basal-bolus multiple daily injection regimen or continuous subcutaneous insulin infusion pump, as absolute insulin deficiency cannot be managed by lifestyle or oral agents",
+   "Structured carbohydrate awareness and dietary education, matching prandial insulin to carbohydrate intake and adjusting for exercise",
+   "Glucose monitoring with capillary testing or continuous glucose monitoring, with periodic HbA1c to guide dose titration and target glycaemic control",
+   "Prompt treatment of hypoglycaemia with fast-acting oral carbohydrate, and parenteral glucagon for severe episodes, with sick-day rules taught to the family",
+   "Emergency management of diabetic ketoacidosis with careful rehydration, insulin infusion and potassium replacement, avoiding overly rapid correction to reduce cerebral oedema risk",
+   "Surveillance for associated autoimmune conditions with thyroid and coeliac screening, and later screening for retinopathy, nephropathy and neuropathy",
+   "Multidisciplinary care through a paediatric diabetes team including diabetes specialist nurse, dietitian and psychological support for the child and family"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "type1_diabetes_child-pathway",
+   "title": "Type 1 Diabetes Mellitus (Child): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "The most common form of diabetes in children, caused by autoimmune destruction of pancreatic beta cells leading to absolute insulin deficiency.",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: New-onset type 1 diabetes presenting in diabetic ketoacidosis (vomiting, abdominal pain, deep sighing breathing, dehydration, drowsiness) is a medical emergency",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Blood glucose and HbA1c, Blood and/or urine ketones, Venous blood gas and electrolytes to assess for ketoacidosis"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Lifelong subcutaneous insulin replacement using a basal-bolus multiple daily injection regimen or continuous subcutaneous insulin infusion pump, as absolute insulin deficiency cannot be managed by lifestyle or oral"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Mistaking early symptoms for a urinary tract infection or behavioural enuresis and delaying diagnosis"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of type 1 diabetes mellitus (child)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "type1_diabetes_child-matrix",
+   "title": "Type 1 Diabetes Mellitus (Child): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The most common form of diabetes in children, caused by autoimmune destruction of pancreatic beta cells leading to absolute",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Type 1 diabetes results from T-cell mediated autoimmune destruction of insulin-producing pancreatic beta cells in genetically predisposed children, often triggered by environmental factors. Progressive beta-cell loss produces absolute insulin deficiency, so glucose cannot enter cells and hyperglycaemia develops. Without insulin the body shifts to lipolysis and ketogenesis; unrestrained ketone production causes metabolic acidosis, while osmotic diuresis from glycosuria leads to dehydration and electrolyte loss, culminating in diabetic ketoacidosis if untreated.",
-    "additionalDifferentials": [
-      "Type 2 diabetes mellitus",
-      "Monogenic diabetes (MODY) and neonatal diabetes",
-      "Secondary diabetes (e.g. cystic fibrosis-related, steroid-induced)",
-      "Diabetes insipidus (for polyuria and polydipsia)",
-      "Transient stress hyperglycaemia during acute illness",
-      "Urinary tract infection (for enuresis or dysuria)"
+    [
+     "Key Investigations",
+     "Blood glucose and HbA1c, Blood and/or urine ketones, Venous blood gas and electrolytes to assess for ketoacidosis",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Blood glucose and HbA1c",
-      "Blood and/or urine ketones",
-      "Venous blood gas and electrolytes to assess for ketoacidosis",
-      "Pancreatic autoantibodies (e.g. GAD, IA-2, ZnT8, islet cell)",
-      "Thyroid function and coeliac screening at diagnosis and during follow-up",
-      "C-peptide where the diabetes type is uncertain"
+    [
+     "Primary Differentials",
+     "Type 2 diabetes mellitus, Monogenic diabetes (MODY) and neonatal diabetes, Secondary diabetes (e.g. cystic fibrosis-related,",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "New-onset type 1 diabetes presenting in diabetic ketoacidosis (vomiting, abdominal pain, deep sighing breathing, dehydration, drowsiness) is a medical emergency",
-      "Reduced consciousness or focal neurological signs suggesting cerebral oedema during DKA management",
-      "Severe hypoglycaemia with seizures or loss of consciousness",
-      "Signs of significant dehydration or shock",
-      "Persistent vomiting in a known diabetic child, which may signal evolving ketoacidosis"
+    [
+     "Management Strategy",
+     "Lifelong subcutaneous insulin replacement using a basal-bolus multiple daily injection regimen or continuous subcutaneous insulin",
+     "Core treatment modality"
     ],
-    "prognosis": "With modern insulin regimens, glucose monitoring, and multidisciplinary support most children live full lives; long-term outcome depends heavily on sustained glycaemic control, which reduces the risk of microvascular and macrovascular complications. Acute risks include ketoacidosis and severe hypoglycaemia.",
-    "pitfalls": [
-      "Mistaking early symptoms for a urinary tract infection or behavioural enuresis and delaying diagnosis",
-      "Failing to check ketones and acid-base status in a hyperglycaemic, unwell child",
-      "Correcting fluids and glucose too aggressively in DKA and precipitating cerebral oedema",
-      "Assuming the honeymoon phase means resolution and reducing vigilance",
-      "Overlooking associated autoimmune conditions during follow-up"
-    ],
-    "references": [
-      "Nelson Textbook of Pediatrics, 22e"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Lifelong subcutaneous insulin replacement using a basal-bolus multiple daily injection regimen or continuous subcutaneous insulin infusion pump, as absolute insulin deficiency cannot be managed by lifestyle or oral agents",
-      "Structured carbohydrate awareness and dietary education, matching prandial insulin to carbohydrate intake and adjusting for exercise",
-      "Glucose monitoring with capillary testing or continuous glucose monitoring, with periodic HbA1c to guide dose titration and target glycaemic control",
-      "Prompt treatment of hypoglycaemia with fast-acting oral carbohydrate, and parenteral glucagon for severe episodes, with sick-day rules taught to the family",
-      "Emergency management of diabetic ketoacidosis with careful rehydration, insulin infusion and potassium replacement, avoiding overly rapid correction to reduce cerebral oedema risk",
-      "Surveillance for associated autoimmune conditions with thyroid and coeliac screening, and later screening for retinopathy, nephropathy and neuropathy",
-      "Multidisciplinary care through a paediatric diabetes team including diabetes specialist nurse, dietitian and psychological support for the child and family"
+    [
+     "Clinical Pitfall",
+     "Mistaking early symptoms for a urinary tract infection or behavioural enuresis and delaying diagnosis",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for type 1 diabetes mellitus (child)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "type1-diabetes-child-real-image",
+   "title": "Type 1 Diabetes Mellitus (Child): Diagnostic Endocrine Cross-Sectional Imaging",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
+   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
+   "annotations": [
+    {
+     "label": "Gland Morphology",
+     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
+    },
+    {
+     "label": "Focal Lesions",
+     "description": "Nodularity, adenoma attenuation, and washout dynamics."
+    },
+    {
+     "label": "Surrounding Structures",
+     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+    }
+   ]
+  }
+ ]
 }

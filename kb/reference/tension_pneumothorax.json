@@ -1,76 +1,171 @@
 {
-  "id": "tension_pneumothorax",
-  "name": "Tension pneumothorax",
-  "aliases": [
-    "tension PTX"
+ "id": "tension_pneumothorax",
+ "name": "Tension pneumothorax",
+ "aliases": [
+  "tension PTX"
+ ],
+ "class": "non_infective",
+ "system": "Emergency / Trauma / Critical care",
+ "specialty": "Emergency Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "ATLS / Harrison's Principles of Internal Medicine (critical care)",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "This is a clinical diagnosis to be treated immediately, without waiting for imaging, because delay is fatal",
+   "Suspect it in a shocked, breathless patient with reduced breath sounds and hyperresonance on one side, especially after trauma or positive-pressure ventilation",
+   "Distended neck veins, tracheal deviation away from the affected side, and hypotension are supportive but often late or absent signs",
+   "Immediate treatment is emergency decompression of the affected side, followed by definitive chest drain insertion",
+   "In a mechanically ventilated patient, sudden hypotension with high airway pressures should prompt consideration of tension pneumothorax",
+   "It arises during the breathing step of the primary survey and takes priority over other breathing problems",
+   "Reassess after decompression to confirm improvement and to guard against recurrence or a drain that has stopped working"
   ],
-  "class": "non_infective",
-  "system": "Emergency / Trauma / Critical care",
-  "specialty": "Emergency Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "ATLS / Harrison's Principles of Internal Medicine (critical care)",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "This is a clinical diagnosis to be treated immediately, without waiting for imaging, because delay is fatal",
-      "Suspect it in a shocked, breathless patient with reduced breath sounds and hyperresonance on one side, especially after trauma or positive-pressure ventilation",
-      "Distended neck veins, tracheal deviation away from the affected side, and hypotension are supportive but often late or absent signs",
-      "Immediate treatment is emergency decompression of the affected side, followed by definitive chest drain insertion",
-      "In a mechanically ventilated patient, sudden hypotension with high airway pressures should prompt consideration of tension pneumothorax",
-      "It arises during the breathing step of the primary survey and takes priority over other breathing problems",
-      "Reassess after decompression to confirm improvement and to guard against recurrence or a drain that has stopped working"
+  "pathophysiology": "A one-way valve mechanism allows air to enter the pleural space during inspiration but prevents its escape, so intrapleural pressure rises progressively. The affected lung collapses, and mounting pressure pushes the mediastinum towards the opposite side, compressing the other lung and, critically, kinking the great veins to impair venous return to the heart. The combination of impaired gas exchange and obstructed venous return produces profound hypoxia and obstructive shock. Positive-pressure ventilation can accelerate air accumulation and the development of tension physiology.",
+  "additionalDifferentials": [
+   "Simple or open pneumothorax without tension physiology",
+   "Massive haemothorax",
+   "Cardiac tamponade",
+   "Massive pulmonary embolism causing obstructive shock",
+   "Right main bronchus intubation causing unilateral reduced breath sounds"
+  ],
+  "additionalInvestigations": [
+   "Clinical examination is the basis for immediate treatment; do not delay for imaging",
+   "Bedside thoracic ultrasound can rapidly confirm absent lung sliding when immediately available",
+   "Chest radiograph only after decompression or when the diagnosis is genuinely uncertain and the patient is stable",
+   "Continuous monitoring of oxygenation and haemodynamics",
+   "Post-procedure imaging to confirm lung re-expansion and drain position"
+  ],
+  "redFlags": [
+   "Shock with unilateral absent breath sounds requiring immediate needle or finger decompression before any imaging",
+   "Sudden hypotension and rising airway pressures in a ventilated patient",
+   "Distended neck veins with tracheal deviation and respiratory distress",
+   "Rapid clinical deterioration in a patient with known chest injury or pneumothorax",
+   "Recurrence of tension physiology after apparent treatment, indicating a blocked or displaced drain"
+  ],
+  "prognosis": "With immediate recognition and decompression the outlook is excellent, but even a short delay can be rapidly fatal because of progressive obstructive shock and hypoxia.",
+  "pitfalls": [
+   "Waiting for a chest radiograph to confirm the diagnosis before treating",
+   "Relying on late signs such as tracheal deviation, which may never appear",
+   "Failing to consider it in a deteriorating ventilated patient",
+   "Assuming decompression is definitive and not proceeding to a chest drain",
+   "Not reassessing for recurrence after initial treatment"
+  ],
+  "references": [
+   "ATLS (Advanced Trauma Life Support)",
+   "Harrison's Principles of Internal Medicine, 22e"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Perform immediate emergency decompression of the affected haemithorax by needle or finger thoracostomy on clinical suspicion without waiting for imaging, as delay is rapidly fatal",
+   "Give high-flow supplemental oxygen and resuscitate for the accompanying obstructive shock",
+   "Insert a definitive intercostal chest drain after decompression to re-expand the lung",
+   "In a mechanically ventilated patient with sudden hypotension and high airway pressures, decompress promptly and adjust ventilator settings to limit further air accumulation",
+   "Treat the underlying cause such as chest trauma and address any ongoing air leak",
+   "Confirm lung re-expansion and drain position with post-procedure imaging and continue haemodynamic and oxygenation monitoring",
+   "Escalate to thoracic surgery and critical care for a persistent air leak or failure to re-expand"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "tension_pneumothorax-pathway",
+   "title": "Tension pneumothorax: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "This is a clinical diagnosis to be treated immediately, without waiting for imaging, because delay is fatal",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Shock with unilateral absent breath sounds requiring immediate needle or finger decompression before any imaging",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Clinical examination is the basis for immediate treatment; do not delay for imaging, Bedside thoracic ultrasound can rapidly confirm absent lung sliding when immediately available, Chest radiograph only after decompression"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Perform immediate emergency decompression of the affected haemithorax by needle or finger thoracostomy on clinical suspicion without waiting for imaging, as delay is rapidly fatal"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Waiting for a chest radiograph to confirm the diagnosis before treating"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of tension pneumothorax."
+  }
+ ],
+ "tables": [
+  {
+   "id": "tension_pneumothorax-matrix",
+   "title": "Tension pneumothorax: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "This is a clinical diagnosis to be treated immediately, without waiting for imaging, because delay is fatal",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "A one-way valve mechanism allows air to enter the pleural space during inspiration but prevents its escape, so intrapleural pressure rises progressively. The affected lung collapses, and mounting pressure pushes the mediastinum towards the opposite side, compressing the other lung and, critically, kinking the great veins to impair venous return to the heart. The combination of impaired gas exchange and obstructed venous return produces profound hypoxia and obstructive shock. Positive-pressure ventilation can accelerate air accumulation and the development of tension physiology.",
-    "additionalDifferentials": [
-      "Simple or open pneumothorax without tension physiology",
-      "Massive haemothorax",
-      "Cardiac tamponade",
-      "Massive pulmonary embolism causing obstructive shock",
-      "Right main bronchus intubation causing unilateral reduced breath sounds"
+    [
+     "Key Investigations",
+     "Clinical examination is the basis for immediate treatment; do not delay for imaging, Bedside thoracic ultrasound can rapidly",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Clinical examination is the basis for immediate treatment; do not delay for imaging",
-      "Bedside thoracic ultrasound can rapidly confirm absent lung sliding when immediately available",
-      "Chest radiograph only after decompression or when the diagnosis is genuinely uncertain and the patient is stable",
-      "Continuous monitoring of oxygenation and haemodynamics",
-      "Post-procedure imaging to confirm lung re-expansion and drain position"
+    [
+     "Primary Differentials",
+     "Simple or open pneumothorax without tension physiology, Massive haemothorax, Cardiac tamponade",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Shock with unilateral absent breath sounds requiring immediate needle or finger decompression before any imaging",
-      "Sudden hypotension and rising airway pressures in a ventilated patient",
-      "Distended neck veins with tracheal deviation and respiratory distress",
-      "Rapid clinical deterioration in a patient with known chest injury or pneumothorax",
-      "Recurrence of tension physiology after apparent treatment, indicating a blocked or displaced drain"
+    [
+     "Management Strategy",
+     "Perform immediate emergency decompression of the affected haemithorax by needle or finger thoracostomy on clinical suspicion",
+     "Core treatment modality"
     ],
-    "prognosis": "With immediate recognition and decompression the outlook is excellent, but even a short delay can be rapidly fatal because of progressive obstructive shock and hypoxia.",
-    "pitfalls": [
-      "Waiting for a chest radiograph to confirm the diagnosis before treating",
-      "Relying on late signs such as tracheal deviation, which may never appear",
-      "Failing to consider it in a deteriorating ventilated patient",
-      "Assuming decompression is definitive and not proceeding to a chest drain",
-      "Not reassessing for recurrence after initial treatment"
-    ],
-    "references": [
-      "ATLS (Advanced Trauma Life Support)",
-      "Harrison's Principles of Internal Medicine, 22e"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Perform immediate emergency decompression of the affected haemithorax by needle or finger thoracostomy on clinical suspicion without waiting for imaging, as delay is rapidly fatal",
-      "Give high-flow supplemental oxygen and resuscitate for the accompanying obstructive shock",
-      "Insert a definitive intercostal chest drain after decompression to re-expand the lung",
-      "In a mechanically ventilated patient with sudden hypotension and high airway pressures, decompress promptly and adjust ventilator settings to limit further air accumulation",
-      "Treat the underlying cause such as chest trauma and address any ongoing air leak",
-      "Confirm lung re-expansion and drain position with post-procedure imaging and continue haemodynamic and oxygenation monitoring",
-      "Escalate to thoracic surgery and critical care for a persistent air leak or failure to re-expand"
+    [
+     "Clinical Pitfall",
+     "Waiting for a chest radiograph to confirm the diagnosis before treating",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for tension pneumothorax."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "tension-pneumothorax-real-image",
+   "title": "Tension pneumothorax: Diagnostic Chest Radiograph",
+   "type": "xray",
+   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
+   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
+   "annotations": [
+    {
+     "label": "Parenchyma & Airspaces",
+     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
+    },
+    {
+     "label": "Bronchovascular Tree",
+     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
+    },
+    {
+     "label": "Pleural Margins",
+     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+    }
+   ]
+  }
+ ]
 }

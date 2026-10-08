@@ -1,74 +1,169 @@
 {
-  "id": "calve_vertebra_plana",
-  "name": "Calve disease (vertebra plana)",
-  "aliases": [
-    "Calve vertebral osteochondrosis",
-    "vertebra plana of childhood"
+ "id": "calve_vertebra_plana",
+ "name": "Calve disease (vertebra plana)",
+ "aliases": [
+  "Calve vertebral osteochondrosis",
+  "vertebra plana of childhood"
+ ],
+ "class": "non_infective",
+ "system": "Musculoskeletal",
+ "specialty": "Orthopaedics / Paediatrics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Paediatric orthopaedic references",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Historically described as an osteochondrosis of a vertebral body producing marked flattening (vertebra plana)",
+   "Most cases originally labelled Calve disease are now recognised to be Langerhans cell histiocytosis of the vertebra",
+   "Presents in children with back pain and, sometimes, a mild kyphosis, usually without neurological deficit",
+   "Radiographs show a uniformly flattened vertebral body with preserved adjacent discs",
+   "The key task is to exclude serious causes of vertebra plana such as histiocytosis, infection and tumour",
+   "When due to histiocytosis it often reconstitutes with growth, and management is usually conservative"
   ],
-  "class": "non_infective",
-  "system": "Musculoskeletal",
-  "specialty": "Orthopaedics / Paediatrics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Paediatric orthopaedic references",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Historically described as an osteochondrosis of a vertebral body producing marked flattening (vertebra plana)",
-      "Most cases originally labelled Calve disease are now recognised to be Langerhans cell histiocytosis of the vertebra",
-      "Presents in children with back pain and, sometimes, a mild kyphosis, usually without neurological deficit",
-      "Radiographs show a uniformly flattened vertebral body with preserved adjacent discs",
-      "The key task is to exclude serious causes of vertebra plana such as histiocytosis, infection and tumour",
-      "When due to histiocytosis it often reconstitutes with growth, and management is usually conservative"
+  "pathophysiology": "Calve disease refers to collapse of a vertebral body to a flattened (vertebra plana) configuration in a child. Although classically attributed to an avascular osteochondrosis, most cases represent an eosinophilic granuloma (Langerhans cell histiocytosis) that weakens and collapses the vertebral body while sparing the intervertebral discs. Other causes of vertebra plana, including infection and neoplasm, share the appearance, so the term describes a radiographic pattern with several possible underlying processes. When due to histiocytosis, remodelling and partial height restoration often occur with growth.",
+  "additionalDifferentials": [
+   "Langerhans cell histiocytosis (eosinophilic granuloma)",
+   "Vertebral osteomyelitis (including tuberculosis)",
+   "Leukaemia or lymphoma involving the spine",
+   "Ewing sarcoma or metastasis",
+   "Traumatic compression fracture"
+  ],
+  "additionalInvestigations": [
+   "Spinal radiographs showing vertebra plana with preserved discs",
+   "MRI to characterise the lesion and adjacent structures",
+   "Biopsy where histiocytosis, infection or tumour must be confirmed",
+   "Assessment for multifocal histiocytosis",
+   "Inflammatory and infective screen as indicated"
+  ],
+  "redFlags": [
+   "Neurological deficit or spinal instability",
+   "Features suggesting infection or malignancy",
+   "Multifocal disease suggesting systemic histiocytosis",
+   "Progressive collapse or deformity"
+  ],
+  "prognosis": "When due to Langerhans cell histiocytosis, single-level vertebra plana in a child often reconstitutes with growth and has a good prognosis, though outcome depends on the underlying cause.",
+  "pitfalls": [
+   "Assuming a benign osteochondrosis without excluding histiocytosis, infection or tumour",
+   "Missing multifocal or systemic histiocytosis",
+   "Overlooking spinal instability or cord compromise",
+   "Attributing vertebra plana to trauma without a clear injury"
+  ],
+  "references": [
+   "Paediatric orthopaedic references (standard reference)",
+   "Spinal disorders references (standard reference)"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Confirm the diagnosis and exclude infection or malignancy by biopsy before committing to conservative care",
+   "Manage a solitary histiocytosis-related vertebra plana conservatively with observation, activity modification and analgesia",
+   "Support the spine with an orthosis or brace during the phase of vertebral collapse and remodelling",
+   "Treat a symptomatic or unstable lesion with intralesional corticosteroid injection or low-dose radiotherapy",
+   "Assess for multifocal or multisystem Langerhans cell histiocytosis and refer for systemic chemotherapy such as vinblastine with a corticosteroid when disease is disseminated",
+   "Monitor neurological status and reserve surgical stabilisation for instability or cord compression",
+   "Coordinate care through paediatric orthopaedics and paediatric oncology, reassuring families that vertebral height often reconstitutes with growth"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "calve_vertebra_plana-pathway",
+   "title": "Calve disease (vertebra plana): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Historically described as an osteochondrosis of a vertebral body producing marked flattening (vertebra plana)",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Neurological deficit or spinal instability",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Spinal radiographs showing vertebra plana with preserved discs, MRI to characterise the lesion and adjacent structures, Biopsy where histiocytosis, infection or tumour must be confirmed"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Confirm the diagnosis and exclude infection or malignancy by biopsy before committing to conservative care"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Assuming a benign osteochondrosis without excluding histiocytosis, infection or tumour"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of calve disease (vertebra plana)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "calve_vertebra_plana-matrix",
+   "title": "Calve disease (vertebra plana): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Historically described as an osteochondrosis of a vertebral body producing marked flattening (vertebra plana)",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Calve disease refers to collapse of a vertebral body to a flattened (vertebra plana) configuration in a child. Although classically attributed to an avascular osteochondrosis, most cases represent an eosinophilic granuloma (Langerhans cell histiocytosis) that weakens and collapses the vertebral body while sparing the intervertebral discs. Other causes of vertebra plana, including infection and neoplasm, share the appearance, so the term describes a radiographic pattern with several possible underlying processes. When due to histiocytosis, remodelling and partial height restoration often occur with growth.",
-    "additionalDifferentials": [
-      "Langerhans cell histiocytosis (eosinophilic granuloma)",
-      "Vertebral osteomyelitis (including tuberculosis)",
-      "Leukaemia or lymphoma involving the spine",
-      "Ewing sarcoma or metastasis",
-      "Traumatic compression fracture"
+    [
+     "Key Investigations",
+     "Spinal radiographs showing vertebra plana with preserved discs, MRI to characterise the lesion and adjacent structures, Biopsy",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Spinal radiographs showing vertebra plana with preserved discs",
-      "MRI to characterise the lesion and adjacent structures",
-      "Biopsy where histiocytosis, infection or tumour must be confirmed",
-      "Assessment for multifocal histiocytosis",
-      "Inflammatory and infective screen as indicated"
+    [
+     "Primary Differentials",
+     "Langerhans cell histiocytosis (eosinophilic granuloma), Vertebral osteomyelitis (including tuberculosis), Leukaemia or lymphoma",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Neurological deficit or spinal instability",
-      "Features suggesting infection or malignancy",
-      "Multifocal disease suggesting systemic histiocytosis",
-      "Progressive collapse or deformity"
+    [
+     "Management Strategy",
+     "Confirm the diagnosis and exclude infection or malignancy by biopsy before committing to conservative care",
+     "Core treatment modality"
     ],
-    "prognosis": "When due to Langerhans cell histiocytosis, single-level vertebra plana in a child often reconstitutes with growth and has a good prognosis, though outcome depends on the underlying cause.",
-    "pitfalls": [
-      "Assuming a benign osteochondrosis without excluding histiocytosis, infection or tumour",
-      "Missing multifocal or systemic histiocytosis",
-      "Overlooking spinal instability or cord compromise",
-      "Attributing vertebra plana to trauma without a clear injury"
-    ],
-    "references": [
-      "Paediatric orthopaedic references (standard reference)",
-      "Spinal disorders references (standard reference)"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Confirm the diagnosis and exclude infection or malignancy by biopsy before committing to conservative care",
-      "Manage a solitary histiocytosis-related vertebra plana conservatively with observation, activity modification and analgesia",
-      "Support the spine with an orthosis or brace during the phase of vertebral collapse and remodelling",
-      "Treat a symptomatic or unstable lesion with intralesional corticosteroid injection or low-dose radiotherapy",
-      "Assess for multifocal or multisystem Langerhans cell histiocytosis and refer for systemic chemotherapy such as vinblastine with a corticosteroid when disease is disseminated",
-      "Monitor neurological status and reserve surgical stabilisation for instability or cord compression",
-      "Coordinate care through paediatric orthopaedics and paediatric oncology, reassuring families that vertebral height often reconstitutes with growth"
+    [
+     "Clinical Pitfall",
+     "Assuming a benign osteochondrosis without excluding histiocytosis, infection or tumour",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for calve disease (vertebra plana)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "calve-vertebra-plana-real-image",
+   "title": "Calve disease (vertebra plana): Diagnostic Musculoskeletal Radiograph",
+   "type": "xray",
+   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
+   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
+   "annotations": [
+    {
+     "label": "Cortical Margins",
+     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
+    },
+    {
+     "label": "Trabecular Architecture",
+     "description": "Medullary bone density, lucencies, and subchondral mineralization."
+    },
+    {
+     "label": "Joint Articulation",
+     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+    }
+   ]
+  }
+ ]
 }

@@ -1,80 +1,175 @@
 {
-  "id": "hartnup_disease",
-  "name": "Hartnup disease",
-  "aliases": [
-    "Hartnup disorder",
-    "neutral aminoaciduria",
-    "SLC6A19",
-    "B0AT1 deficiency"
+ "id": "hartnup_disease",
+ "name": "Hartnup disease",
+ "aliases": [
+  "Hartnup disorder",
+  "neutral aminoaciduria",
+  "SLC6A19",
+  "B0AT1 deficiency"
+ ],
+ "class": "non_infective",
+ "system": "Metabolic / Genetics",
+ "specialty": "Metabolic Medicine / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "OMIM / GeneReviews / Nelson Textbook of Paediatrics",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Most individuals identified by newborn screening or urinary aminoacid patterns remain entirely asymptomatic",
+   "Autosomal recessive disorder caused by biallelic pathogenic variants in SLC6A19, encoding the neutral amino acid transporter B0AT1 in the small intestine and renal proximal tubule",
+   "The biochemical hallmark is a neutral (monoaminomonocarboxylic) aminoaciduria with normal excretion of acidic and basic amino acids",
+   "Symptomatic disease resembles pellagra, with a photosensitive skin rash, intermittent cerebellar ataxia and neuropsychiatric features, reflecting tryptophan loss and reduced niacin synthesis",
+   "Attacks are often provoked by intercurrent illness, poor nutrition, sunlight exposure or stress",
+   "Management centres on a good protein intake and niacin (nicotinamide) supplementation, with attention to precipitating factors",
+   "Symptoms are typically episodic and tend to improve with age",
+   "Tryptophan malabsorption underlies the niacin deficiency because tryptophan is a niacin precursor"
   ],
-  "class": "non_infective",
-  "system": "Metabolic / Genetics",
-  "specialty": "Metabolic Medicine / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "OMIM / GeneReviews / Nelson Textbook of Paediatrics",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Most individuals identified by newborn screening or urinary aminoacid patterns remain entirely asymptomatic",
-      "Autosomal recessive disorder caused by biallelic pathogenic variants in SLC6A19, encoding the neutral amino acid transporter B0AT1 in the small intestine and renal proximal tubule",
-      "The biochemical hallmark is a neutral (monoaminomonocarboxylic) aminoaciduria with normal excretion of acidic and basic amino acids",
-      "Symptomatic disease resembles pellagra, with a photosensitive skin rash, intermittent cerebellar ataxia and neuropsychiatric features, reflecting tryptophan loss and reduced niacin synthesis",
-      "Attacks are often provoked by intercurrent illness, poor nutrition, sunlight exposure or stress",
-      "Management centres on a good protein intake and niacin (nicotinamide) supplementation, with attention to precipitating factors",
-      "Symptoms are typically episodic and tend to improve with age",
-      "Tryptophan malabsorption underlies the niacin deficiency because tryptophan is a niacin precursor"
+  "pathophysiology": "Hartnup disease results from defective transport of neutral amino acids due to loss-of-function variants in SLC6A19, which encodes the apical neutral amino acid transporter B0AT1 expressed in the intestinal brush border and renal proximal tubule. Impaired transport causes intestinal malabsorption and renal wasting of neutral amino acids, notably tryptophan. Because tryptophan is a precursor for the synthesis of nicotinamide (niacin), its loss can produce a functional niacin deficiency, giving pellagra-like photosensitive dermatitis and neurological features. The unabsorbed amino acids also undergo bacterial degradation in the gut. Adequate dietary protein and niacin supplementation compensate for the losses, and most patients remain asymptomatic because of compensatory absorption of amino acids as small peptides.",
+  "additionalDifferentials": [
+   "Nutritional pellagra (niacin deficiency)",
+   "Other photosensitive dermatoses (e.g. porphyrias)",
+   "Episodic ataxias of other cause",
+   "Generalised aminoacidurias such as Fanconi syndrome",
+   "Other inborn errors presenting with intermittent neurological symptoms",
+   "Carcinoid or tryptophan-consuming states"
+  ],
+  "additionalInvestigations": [
+   "Urine amino acid chromatography showing neutral aminoaciduria",
+   "SLC6A19 molecular genetic testing",
+   "Plasma amino acid profile (often normal or low neutral amino acids)",
+   "Assessment of niacin/nicotinamide status where feasible",
+   "Review of newborn screening results",
+   "Exclusion of nutritional or malabsorptive causes of pellagra"
+  ],
+  "redFlags": [
+   "Severe or recurrent ataxia impairing function",
+   "Progressive neuropsychiatric deterioration during an attack",
+   "Extensive photosensitive dermatitis with secondary infection",
+   "Failure to thrive with poor nutritional intake"
+  ],
+  "prognosis": "The great majority of individuals are asymptomatic with a normal life expectancy; symptomatic cases usually respond well to niacin and adequate protein intake and tend to have fewer episodes with increasing age.",
+  "pitfalls": [
+   "Treating a pellagra-like presentation without recognising the underlying transporter defect",
+   "Assuming all cases are symptomatic, when most are benign screening findings",
+   "Overlooking precipitating factors such as poor nutrition or intercurrent illness",
+   "Misinterpreting an isolated aminoaciduria as a generalised tubulopathy"
+  ],
+  "references": [
+   "OMIM entry for Hartnup Disorder (SLC6A19)",
+   "Nelson Textbook of Paediatrics",
+   "Scriver's The Metabolic and Molecular Bases of Inherited Disease"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Ensure a generous intake of good-quality protein to offset intestinal and renal loss of neutral amino acids",
+   "Supplement with niacin (nicotinamide) to correct the functional deficiency caused by tryptophan loss",
+   "Avoid known precipitants by using photoprotection, treating intercurrent illness promptly, and preventing poor nutrition and stress",
+   "Treat the pellagra-like photosensitive rash and intermittent cerebellar ataxia symptomatically during attacks",
+   "Monitor growth, nutritional status, and frequency of symptomatic episodes, reassuring that most individuals stay asymptomatic",
+   "Offer genetic counselling given autosomal recessive SLC6A19 inheritance"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "hartnup_disease-pathway",
+   "title": "Hartnup disease: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Most individuals identified by newborn screening or urinary aminoacid patterns remain entirely asymptomatic",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Severe or recurrent ataxia impairing function",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Urine amino acid chromatography showing neutral aminoaciduria, SLC6A19 molecular genetic testing, Plasma amino acid profile (often normal or low neutral amino acids)"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Ensure a generous intake of good-quality protein to offset intestinal and renal loss of neutral amino acids"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Treating a pellagra-like presentation without recognising the underlying transporter defect"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of hartnup disease."
+  }
+ ],
+ "tables": [
+  {
+   "id": "hartnup_disease-matrix",
+   "title": "Hartnup disease: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Most individuals identified by newborn screening or urinary aminoacid patterns remain entirely asymptomatic",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Hartnup disease results from defective transport of neutral amino acids due to loss-of-function variants in SLC6A19, which encodes the apical neutral amino acid transporter B0AT1 expressed in the intestinal brush border and renal proximal tubule. Impaired transport causes intestinal malabsorption and renal wasting of neutral amino acids, notably tryptophan. Because tryptophan is a precursor for the synthesis of nicotinamide (niacin), its loss can produce a functional niacin deficiency, giving pellagra-like photosensitive dermatitis and neurological features. The unabsorbed amino acids also undergo bacterial degradation in the gut. Adequate dietary protein and niacin supplementation compensate for the losses, and most patients remain asymptomatic because of compensatory absorption of amino acids as small peptides.",
-    "additionalDifferentials": [
-      "Nutritional pellagra (niacin deficiency)",
-      "Other photosensitive dermatoses (e.g. porphyrias)",
-      "Episodic ataxias of other cause",
-      "Generalised aminoacidurias such as Fanconi syndrome",
-      "Other inborn errors presenting with intermittent neurological symptoms",
-      "Carcinoid or tryptophan-consuming states"
+    [
+     "Key Investigations",
+     "Urine amino acid chromatography showing neutral aminoaciduria, SLC6A19 molecular genetic testing, Plasma amino acid profile",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Urine amino acid chromatography showing neutral aminoaciduria",
-      "SLC6A19 molecular genetic testing",
-      "Plasma amino acid profile (often normal or low neutral amino acids)",
-      "Assessment of niacin/nicotinamide status where feasible",
-      "Review of newborn screening results",
-      "Exclusion of nutritional or malabsorptive causes of pellagra"
+    [
+     "Primary Differentials",
+     "Nutritional pellagra (niacin deficiency), Other photosensitive dermatoses (e.g. porphyrias), Episodic ataxias of other cause",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Severe or recurrent ataxia impairing function",
-      "Progressive neuropsychiatric deterioration during an attack",
-      "Extensive photosensitive dermatitis with secondary infection",
-      "Failure to thrive with poor nutritional intake"
+    [
+     "Management Strategy",
+     "Ensure a generous intake of good-quality protein to offset intestinal and renal loss of neutral amino acids",
+     "Core treatment modality"
     ],
-    "prognosis": "The great majority of individuals are asymptomatic with a normal life expectancy; symptomatic cases usually respond well to niacin and adequate protein intake and tend to have fewer episodes with increasing age.",
-    "pitfalls": [
-      "Treating a pellagra-like presentation without recognising the underlying transporter defect",
-      "Assuming all cases are symptomatic, when most are benign screening findings",
-      "Overlooking precipitating factors such as poor nutrition or intercurrent illness",
-      "Misinterpreting an isolated aminoaciduria as a generalised tubulopathy"
-    ],
-    "references": [
-      "OMIM entry for Hartnup Disorder (SLC6A19)",
-      "Nelson Textbook of Paediatrics",
-      "Scriver's The Metabolic and Molecular Bases of Inherited Disease"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Ensure a generous intake of good-quality protein to offset intestinal and renal loss of neutral amino acids",
-      "Supplement with niacin (nicotinamide) to correct the functional deficiency caused by tryptophan loss",
-      "Avoid known precipitants by using photoprotection, treating intercurrent illness promptly, and preventing poor nutrition and stress",
-      "Treat the pellagra-like photosensitive rash and intermittent cerebellar ataxia symptomatically during attacks",
-      "Monitor growth, nutritional status, and frequency of symptomatic episodes, reassuring that most individuals stay asymptomatic",
-      "Offer genetic counselling given autosomal recessive SLC6A19 inheritance"
+    [
+     "Clinical Pitfall",
+     "Treating a pellagra-like presentation without recognising the underlying transporter defect",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for hartnup disease."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "hartnup-disease-real-image",
+   "title": "Hartnup disease: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

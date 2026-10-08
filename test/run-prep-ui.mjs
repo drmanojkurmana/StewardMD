@@ -38,10 +38,25 @@ let chromeErr = ""; chrome.stderr.on("data", (d) => { chromeErr += d; });
 let msgId = 1; const pending = new Map(); let ws, sessionId; const errors = []; const flagCalls = [];
 const call = (m, p) => { const i = msgId++; return new Promise((r) => { pending.set(i, r); ws.send(JSON.stringify({ id: i, method: m, params: p || {}, sessionId })); }); };
 const ev = async (e) => { const r = await call("Runtime.evaluate", { expression: `(function(){try{${e}}catch(x){return "ERR:"+String(x&&x.message||x)}})()`, returnByValue: true }); return r.result && r.result.result ? r.result.result.value : undefined; };
+// Screenshots land on the final frame: after 150 ms (Motion starts its animations on the next frame), finite animations
+// (entrances, ring draw) are finished; loops keep running.
+const shotCall = async (p) => { await sleep(150); await ev(`document.getAnimations().forEach(function (a) { try { var t = a.effect && a.effect.getTiming(); if (t && t.iterations !== Infinity) a.finish(); } catch (e) {} }); return 1;`); return call("Page.captureScreenshot", p); };
 const until = async (e, ms = 10000) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { if (await ev(e) === true) return true; await sleep(150); } return false; };
 const reqs = []; let fails = 0; const ok = (c, m) => { console.log((c ? "PASS " : "FAIL ") + m); if (!c) fails++; };
 const click = (sel) => ev(`var b=document.querySelector(${JSON.stringify(sel)}); if(!b) return "missing"; b.click(); return 1;`);
-const shot = async (name) => { if (!process.env.SHOTS) return; if (process.env.PN_LIGHT) await ev(`document.body.classList.remove("dark"); return 1;`); const r = await call("Page.captureScreenshot", { format: "png" }); if (r.result) (await import("node:fs")).writeFileSync(join(process.env.SHOTS, "prep-" + (process.env.PN_LIGHT ? "light-" : "") + name + ".png"), Buffer.from(r.result.data, "base64")); };
+// Motion strips (STRIP=<dir>): every running animation is paused and stepped to each time in ms, one frame a step.
+const strip = async (name, ts) => {
+  if (!process.env.STRIP) return;
+  const fsx = await import("node:fs");
+  if (process.env.PN_LIGHT) await ev(`document.body.classList.remove("dark"); return 1;`);
+  for (const t of ts) {
+    await ev(`document.getAnimations().forEach(function (a) { try { a.pause(); a.currentTime = ${t}; } catch (e) {} }); return 1;`);
+    const r = await call("Page.captureScreenshot", { format: "png" });
+    if (r.result) fsx.writeFileSync(join(process.env.STRIP, name + "-" + (process.env.PN_LIGHT ? "light" : "dark") + "-" + String(t).padStart(4, "0") + ".png"), Buffer.from(r.result.data, "base64"));
+  }
+  await ev(`document.getAnimations().forEach(function (a) { try { a.play(); } catch (e) {} }); return 1;`);
+};
+const shot = async (name) => { if (!process.env.SHOTS) return; if (process.env.PN_LIGHT) await ev(`if (!document.getElementById("pnNoTr")) { var t = document.createElement("style"); t.id = "pnNoTr"; t.textContent = "*{transition:none!important}"; document.head.appendChild(t); } document.body.classList.remove("dark"); return 1;`); const r = await shotCall({ format: "png" }); if (r.result) (await import("node:fs")).writeFileSync(join(process.env.SHOTS, "prep-" + (process.env.PN_LIGHT ? "light-" : "") + name + ".png"), Buffer.from(r.result.data, "base64")); };
 
 try {
   let ver, t = 0; while (t++ < 300) { try { ver = await (await fetch(`http://localhost:${PORT}/json/version`)).json(); break; } catch { await sleep(200); } }
@@ -63,7 +78,7 @@ try {
   await call("Runtime.enable", {}); await call("Network.enable", {}); await call("Page.enable", {});
   await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
   // Fixture bank instead of the real one; confirm() answers yes. Runs before any page script.
-  await call("Page.addScriptToEvaluateOnNewDocument", { source: `window.SMD_PREP_BASE=${JSON.stringify(FIX)}; window.SMD_PREP_BANK_API=${JSON.stringify(FIX + "api/")}; window.SMD_PREP_FLAG_API=${JSON.stringify(FIX + "hidden.json")}; window.confirm=function(){return true;}; window.SMD_PREP_ONBOARD=false;` });
+  await call("Page.addScriptToEvaluateOnNewDocument", { source: `window.SMD_PREP_BANK_VER="v1"; window.SMD_PREP_BASE=${JSON.stringify(FIX)}; window.SMD_PREP_BANK_API=${JSON.stringify(FIX + "api/")}; window.SMD_PREP_FLAG_API=${JSON.stringify(FIX + "hidden.json")}; window.confirm=function(){return true;}; window.SMD_PREP_ONBOARD=false;` });
   const clean = `["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); return 1;`;
   const load = async (url) => { reqs.length = 0; await call("Page.navigate", { url }); await until(`return !!(window.PREP && window.SMD_showHome);`, 30000); await ev(clean); await ev(`SMD_showHome(); return 1;`); await sleep(500); };
   const tile = `return !!document.querySelector('.rnav-tile[data-act=prep]');`;
@@ -87,8 +102,12 @@ try {
   ok(await until(`var n=document.getElementById("pnNext"); return !!n && !n.hidden && /Gametogenesis/.test(n.textContent);`, 5000), "Solve next points at the first module with questions");
   await shot("home");
 
-  // ---- subject
-  await click("#smdPrep .pn-tile[data-s=anatomy]");
+  // ---- subject (round 4: a push slides the new body in from the right on a shared axis; the first 450 ms after the
+  // overlay opens are not animated, as the overlay itself just arrived, so wait past them)
+  await sleep(500);
+  const navIn = JSON.parse(await ev(`document.querySelector("#smdPrep .pn-tile[data-s=anatomy]").click(); var an=document.getAnimations().filter(function(a){var t=a.effect&&a.effect.target; return t&&t.matches&&t.matches("#smdPrep > .pn-body");}); var k=an.length?an[0].effect.getKeyframes():[]; return JSON.stringify({n:an.length, from:(k[0]&&k[0].transform)||"", op:k[0]?k[0].opacity:null});`));
+  ok(navIn.n === 1 && /translateX\(28px\)/.test(navIn.from) && String(navIn.op) === "0", "a push slides the new screen in from the right: " + JSON.stringify(navIn));
+  ok(await ev(`var p=document.createElement("p"); p.className="pn-load"; p.textContent="Loading"; document.querySelector("#smdPrep .pn-body").appendChild(p); var b=getComputedStyle(p,"::before"), a=getComputedStyle(p,"::after"), r=b.content!=="none" && parseFloat(getComputedStyle(p).minHeight)>=300 && /pn-shim/.test(a.animationName) && b.boxShadow!=="none"; p.remove(); return r;`) === true, "loading states draw a skeleton with a moving shimmer");
   ok(await until(`return document.querySelectorAll("#smdPrep .pn-mod[data-act=module]").length === 3;`, 10000), "subject lists its 3 modules");
   ok(await ev(`return Array.from(document.querySelectorAll("#smdPrep .pn-sec")).map(function(h){return h.textContent;}).join("|");`) === "Embryology|Upper limb", "sections in taxonomy order");
   ok(await ev(`var b=document.querySelector('#smdPrep .pn-mod[data-m=ana-placenta]'); return b.getAttribute("aria-disabled")==="true" && /Questions coming soon/.test(b.textContent);`) === true, "an empty module says Questions coming soon and is disabled");
@@ -101,14 +120,37 @@ try {
   await shot("module");
   await click('#smdPrep [data-act=start][data-k=study]');
   ok(await until(`return !!document.querySelector("#smdPrep .pn-q");`, 10000), "practice starts");
+  ok(await ev(`var i=document.querySelectorAll("#smdPrep .pn-qprog .pn-qseg i"); return i.length===5 && i[0].classList.contains("cur") && document.querySelector("#smdPrep .pn-qseg").getAttribute("aria-valuenow")==="0";`) === true, "focus mode: a segmented progress strip, one segment a question, the first lit");
   let seen = [];
+  const keyRun = (k) => ev(`var t=document.activeElement||document.body; if(!document.getElementById("smdPrep").contains(t)) t=document.getElementById("smdPrep"); var e=new KeyboardEvent("keydown",{key:${JSON.stringify("K")},bubbles:true,cancelable:true}); t.dispatchEvent(e); return e.defaultPrevented;`.replace('"K"', JSON.stringify(k)));
+  const swipeRun = (dx) => ev(`var b=document.querySelector("#smdPrep .pn-run"), r=b.getBoundingClientRect(), x=r.left+r.width*0.7, y=r.top+120, o={bubbles:true,pointerType:"touch",isPrimary:true,pointerId:5};
+    b.dispatchEvent(new PointerEvent("pointerdown",Object.assign({clientX:x,clientY:y},o)));
+    b.dispatchEvent(new PointerEvent("pointermove",Object.assign({clientX:x+${dx}/3,clientY:y+2},o)));
+    b.dispatchEvent(new PointerEvent("pointermove",Object.assign({clientX:x+${dx},clientY:y+3},o)));
+    var tr=document.getElementById("pnQw").style.transform;
+    b.dispatchEvent(new PointerEvent("pointerup",Object.assign({clientX:x+${dx},clientY:y+3},o))); return tr;`);
   for (let i = 0; i < 5; i++) {
     seen.push(await ev(`return document.querySelector("#smdPrep .pn-q").textContent;`));
     if (i === 0) { await click("#smdPrep [data-act=bookmark]"); ok(await ev(`return document.querySelector("#smdPrep [data-act=bookmark]").getAttribute("aria-pressed");`) === "true", "bookmark toggles on"); }
+    if (i === 1) {
+      // Round 3: a swipe before answering resists and stays; key B answers without the reveal motion; a swipe left goes on.
+      const tr = await swipeRun(-160);
+      ok(/translateX\(-\d/.test(tr) && Math.abs(parseFloat(tr.slice(11))) < 80 && /question 2 of|Question 2 of/.test(await ev(`return document.querySelector("#smdPrep .pn-t p").textContent;`)), "an unanswered question resists a swipe (rubber band) and stays: " + tr);
+      ok(await keyRun("b") === true && await until(`return !!document.querySelector("#smdPrep .pn-fb") && document.querySelector("#smdPrep .pn-opt[data-k='1']").getAttribute("aria-pressed")==="true";`, 2000), "key B answers option B");
+      ok(await ev(`return !document.querySelector("#smdPrep .pn-fb.pn-new");`) === true, "a key answer skips the reveal motion");
+      ok(await ev(`var b=document.querySelector("#smdPrep .pn-bar [data-act=report]"); return !!b && b.getAttribute("aria-label")==="Report this question" && !!document.querySelector("#smdPrep .pn-bar [data-act=bookmark][aria-label]");`) === true, "bookmark and report are labelled icon buttons in the bar");
+      ok(await ev(`var i=document.querySelectorAll("#smdPrep .pn-qseg i"); return (i[0].classList.contains("ok")||i[0].classList.contains("no")) && i[1].classList.contains("cur");`) === true, "the strip marks question 1 right or wrong and lights question 2");
+      await swipeRun(-160);
+      ok(await until(`return /Question 3 of/.test(document.querySelector("#smdPrep .pn-t p").textContent) && !!document.querySelector("#smdPrep .pn-qw.in-r");`, 2000), "a swipe left past the line moves to the next question, arriving from the right");
+      seen.push(await ev(`return document.querySelector("#smdPrep .pn-q").textContent;`));
+      i++;
+    }
     await click('#smdPrep .pn-opt[data-k="1"]');
+    if (i === 0 && process.env.STRIP) { await sleep(40); await strip("runner-reveal", [0, 60, 120, 180, 260, 360, 520, 900]); }
     if (i === 0) {
+      ok(await ev(`return !!document.querySelector("#smdPrep .pn-fb.pn-new");`) === true, "a tapped answer plays the reveal once (.pn-new)");
       ok(await until(`return !!document.querySelector("#smdPrep .pn-fb .pn-exp");`, 3000), "an answer shows the verdict and explanation at once");
-      ok(await ev(`return document.querySelector("#smdPrep .pn-prov").textContent;`) === "Source: MedMCQA (MIT licence)", "source line under the explanation");
+      ok(await ev(`return !document.querySelector("#smdPrep .pn-prov") && !/MedMCQA|AI-generated|Source:/.test(document.querySelector("#smdPrep .pn-fb").textContent);`) === true, "no source or authorship line under the explanation (owner rule: credits live in Terms)");
       ok(await ev(`return document.querySelectorAll("#smdPrep .pn-opt.right").length === 1;`) === true, "the right option is marked");
       await shot("feedback");
       const wrong = await ev(`return !!document.querySelector("#smdPrep .pn-fb.no");`);
@@ -137,6 +179,7 @@ try {
   await click('#smdPrep [data-act=start][data-k=exam]');
   ok(await until(`return !!document.getElementById("pnClock");`, 5000), "timed test shows a clock");
   ok(await ev(`return /^\\d+:\\d\\d$/.test(document.getElementById("pnClock").textContent);`) === true, "clock reads m:ss");
+  ok(await ev(`return !!document.querySelector("#smdPrep .pn-clockw .pn-pace .rv") && document.getElementById("pnClock").parentNode.classList.contains("pn-clockw");`) === true, "the clock sits in a pace ring");
   await click('#smdPrep .pn-opt[data-k="0"]');
   ok(await ev(`return !document.querySelector("#smdPrep .pn-fb");`) === true, "no feedback during a test");
   await shot("exam");
@@ -149,11 +192,13 @@ try {
   ok(await until(`return /Test marked/.test(document.querySelector("#smdPrep .pn-t h1").textContent);`, 5000), "submit marks the test");
   await click("#smdPrep [data-act=donerun]");
 
-  // ---- search within the subject
-  await ev(`PREP.back(); return 1;`);
+  // ---- search within the subject (round 4: a pop slides the previous screen in from the left)
+  const navOut = JSON.parse(await ev(`PREP.back(); var an=document.getAnimations().filter(function(a){var t=a.effect&&a.effect.target; return t&&t.matches&&t.matches("#smdPrep > .pn-body");}); var k=an.length?an[0].effect.getKeyframes():[]; return JSON.stringify({n:an.length, from:(k[0]&&k[0].transform)||"", op:k[0]?k[0].opacity:null});`));
+  ok(navOut.n === 1 && /translateX\(-28px\)/.test(navOut.from), "back slides the previous screen in from the left: " + JSON.stringify(navOut));
   ok(await until(`return !!document.querySelector("#smdPrep [data-act=search]");`, 3000), "the subject screen has a search button");
   await click("#smdPrep [data-act=search]");
   ok(await until(`return document.activeElement && document.activeElement.id === "pnSearch";`, 3000), "search opens with the field focused");
+  ok(await ev(`return !!document.querySelector("#pnHits .pn-empty.pn-art-sc") && !!document.querySelector("#smdPrep .pn-srch > svg");`) === true, "search starts from a prompt with art, the field carries its glyph");
   await ev(`var i=document.getElementById("pnSearch"); i.value="brachial fixture"; i.dispatchEvent(new Event("input",{bubbles:true})); return 1;`);
   ok(await until(`return document.querySelectorAll("#smdPrep [data-act=hit]").length === 3;`, 5000), "search finds the 3 matching questions: " + await ev(`return (document.getElementById("pnHits")||{}).textContent;`));
   await shot("search");
@@ -164,6 +209,17 @@ try {
   // ---- back to home: bookmark count, exam tab
   await ev(`PREP.back(); return 1;`);
   ok(await until(`return !!document.querySelector("#smdPrep .pn-tabs");`, 5000), "back() unwinds to home");
+  // Round 4: a tab cross-fades (opacity, no travel); Escape goes back with no animation; reduced motion is a fade.
+  const navTab = JSON.parse(await ev(`document.querySelector("#smdPrep .pn-tab.on").click(); var an=document.getAnimations().filter(function(a){var t=a.effect&&a.effect.target; return t&&t.matches&&t.matches("#smdPrep > .pn-body");}); var k=an.length?an[0].effect.getKeyframes():[]; return JSON.stringify({n:an.length, from:(k[0]&&k[0].transform)||"", op:k[0]?k[0].opacity:null});`));
+  ok(navTab.n === 1 && !navTab.from && String(navTab.op) === "0", "an exam tab cross-fades the body: " + JSON.stringify(navTab));
+  await sleep(300); await click("#smdPrep [data-act=bookmarks]"); await until(`return /Bookmarks/.test(document.querySelector("#smdPrep .pn-t h1").textContent);`, 3000); await sleep(300);
+  const navKey = JSON.parse(await ev(`document.getElementById("smdPrep").dispatchEvent(new KeyboardEvent("keydown",{key:"Escape",bubbles:true})); var an=document.getAnimations().filter(function(a){var t=a.effect&&a.effect.target; return t&&t.matches&&t.matches("#smdPrep > .pn-body");}); var k=an.length?an[0].effect.getKeyframes():[]; return JSON.stringify({n:an.length, from:(k[0]&&k[0].transform)||"", op:k[0]?k[0].opacity:null});`));
+  ok(navKey.n === 0 && await ev(`return !!document.querySelector("#smdPrep .pn-tabs");`) === true, "Escape goes back with no animation: " + JSON.stringify(navKey));
+  await call("Emulation.setEmulatedMedia", { features: [{ name: "prefers-reduced-motion", value: "reduce" }] });
+  const navRm = JSON.parse(await ev(`document.querySelector("#smdPrep [data-act=bookmarks]").click(); var an=document.getAnimations().filter(function(a){var t=a.effect&&a.effect.target; return t&&t.matches&&t.matches("#smdPrep > .pn-body");}); var k=an.length?an[0].effect.getKeyframes():[]; return JSON.stringify({n:an.length, from:(k[0]&&k[0].transform)||"", op:k[0]?k[0].opacity:null});`));
+  ok(navRm.n === 1 && !navRm.from && String(navRm.op) === "0", "reduced motion: a push is a cross-fade with no travel: " + JSON.stringify(navRm));
+  await call("Emulation.setEmulatedMedia", { features: [] });
+  await ev(`PREP.back(); return 1;`); await until(`return !!document.querySelector("#smdPrep .pn-tabs");`, 3000);
   ok(await ev(`return /1 saved/.test(document.querySelector("#smdPrep [data-act=bookmarks]").textContent);`) === true, "home counts the bookmark");
   const nmt = await ev(`return Object.keys(JSON.parse(localStorage.getItem("smd_prep_v1")).mt).length;`);
   ok(nmt > 0 && await ev(`return /${nmt} to fix/.test(document.querySelector("#smdPrep [data-act=mistakes]").textContent);`) === true, "home counts the mistakes: " + nmt);
@@ -224,6 +280,32 @@ try {
     }
     await ev(`PREP.close(); return 1;`);
   }
+
+  // ---- Round 5: the offline teacher is a chat. The runtime is stubbed (native app, MaiK Lite downloaded); the model's
+  // answer is held until the test releases it, so the typing state can be checked first.
+  await ev(`PREP.close(); window.__capWas = window.Capacitor; window.Capacitor = { isNativePlatform: function () { return true; } };
+    window.SMD_MAIK_MODELS = { PACKS: { "maik-lite": { label: "MaiK Lite" } }, installed: function () { return Promise.resolve(true); }, installedCached: function () { return true; } };
+    window.SMD_MAIK_LOCAL = { available: function () { return true; }, currentPack: function () { return "maik-lite"; }, answer: function () { return new Promise(function (r) { window.__ptGo = r; }); } };
+    PREP.open(); return 1;`);
+  await until(`return !!document.querySelector("#smdPrep .pn-home");`, 8000);
+  await ev(`window.__ptItem = { id: "pt-1", q: "Primary oocytes stay arrested in which phase of meiosis until just before ovulation?", o: ["Prophase I, diplotene stage", "Metaphase II", "Anaphase I", "Telophase II"], a: 0,
+    exp: "Primary oocytes enter meiosis I in fetal life and arrest in the diplotene stage of prophase I. The arrest lasts until the LH surge before ovulation, when meiosis I completes.\\n\\nThe secondary oocyte then arrests in metaphase II until fertilisation.", kp: "Two arrests: prophase I until ovulation, metaphase II until fertilisation." };
+    PREP_TEACHER.explain(window.__ptItem, 1, PREP._host); return 1;`);
+  ok(await until(`return !!document.querySelector("#smdPrep .pt-chat .pt-dots") && !!window.__ptGo;`, 5000), "teacher chat: MaiK types while the phone works");
+  const ptRun = JSON.parse(await ev(`var c=document.querySelector("#smdPrep .pt-ctx"); return JSON.stringify({ sticky: getComputedStyle(c).position, q: /Primary oocytes/.test(c.textContent), pills: Array.from(c.querySelectorAll(".pt-pill")).map(function(p){return p.className+":"+p.textContent;}).join("|"), me: document.querySelector("#smdPrep .pt-msg.me").textContent, secs: !!document.querySelector("#smdPrep #ptSecs"), ai: document.querySelectorAll("#smdPrep .pt-msg.ai").length });`));
+  ok(ptRun.sticky === "sticky" && ptRun.q && ptRun.pills === "pt-pill bad:You chose B|pt-pill ok:Answer A" && ptRun.me === "Why is B wrong?" && ptRun.secs && ptRun.ai === 1, "teacher chat: the question is pinned on top with both answers, the ask is the student's bubble, a seconds counter: " + JSON.stringify(ptRun));
+  await shot("teacher-typing");
+  await ev(`window.__ptGo({ text: "B is wrong because metaphase II is the second arrest, after ovulation. Primary oocytes arrest in the diplotene stage of prophase I from fetal life, and the arrest lasts until the LH surge before ovulation.\\n\\nThe secondary oocyte then arrests in metaphase II until fertilisation." }); return 1;`);
+  ok(await until(`return !!document.querySelector("#smdPrep .pt-ans-b") && !document.querySelector("#smdPrep .pt-dots");`, 5000), "teacher chat: the checked reply replaces the typing bubble");
+  const ptDone = JSON.parse(await ev(`return JSON.stringify({ reply: /second arrest/.test(document.querySelector("#smdPrep .pt-ans-b").textContent), focus: document.activeElement === document.querySelector("#smdPrep .pt-ans-b"), note: /Checked: every drug and number/.test((document.querySelector("#smdPrep .pt-note")||{}).textContent||""), chips: Array.from(document.querySelectorAll("#smdPrep .pt-chips .pt-chip, #smdPrep .pt-more summary")).map(function(c){return c.textContent;}).join("|"), chipH: Math.min.apply(null, Array.from(document.querySelectorAll("#smdPrep .pt-chip")).map(function(c){return c.offsetHeight;})) });`));
+  ok(ptDone.reply && ptDone.focus && ptDone.note && ptDone.chips === "Back to the question|Show the stored explanation" && ptDone.chipH >= 44, "teacher chat: reply bubble focused, the check note under it, suggestion chips at 44 px: " + JSON.stringify(ptDone));
+  await ev(`document.querySelector("#smdPrep .pt-more summary").click(); return 1;`);
+  ok(await ev(`var d=document.querySelector("#smdPrep .pt-more"); return d.open && /Exam pearl/.test(d.textContent) && /Why B is wrong|Answer A/.test(d.textContent);`) === true, "teacher chat: the stored explanation opens under its chip");
+  await ev(`document.querySelector("#smdPrep .pt-more").open = false; return 1;`);
+  await shot("teacher");
+  await click("#smdPrep .pt-chips [data-act=back]");
+  ok(await until(`return !document.querySelector("#smdPrep .pt-chat") && !!document.querySelector("#smdPrep .pn-home");`, 3000), "teacher chat: Back to the question leaves the chat");
+  await ev(`PREP.close(); delete window.SMD_MAIK_LOCAL; delete window.SMD_MAIK_MODELS; window.Capacitor = window.__capWas; return 1;`);
 
   // ---- offline: reload, block the bank route, the module still opens from IndexedDB
   await load(BASE + "?prep=1");

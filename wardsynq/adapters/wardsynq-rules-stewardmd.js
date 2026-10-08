@@ -124,8 +124,13 @@ async function loadStewardMDRulePack(opts) {
   if (!brands) {
     try { brands = (await import("../../brand-generics.js")).default.BRANDS; } catch { brands = null; }
   }
+  // Owner-confirmed combination brands (generated into drug-lexicon.js; drug-link.js reads the same list).
+  let combos = opts.combos;
+  if (!combos) {
+    try { combos = (await import("../../drug-lexicon.js")).default.combos; } catch { combos = null; }
+  }
 
-  return buildRulePack(raw, allergySeed, { ...opts, brands });
+  return buildRulePack(raw, allergySeed, { ...opts, brands, combos });
 }
 
 /**
@@ -145,7 +150,11 @@ function buildRulePack(raw, allergySeed, opts) {
   // raw.brands travels with the interaction data and is always used. The curated antibiotic map
   // (brand-generics.js) is passed in by the caller so this file stays isomorphic; the browser build
   // falls back to the global that file's IIFE already publishes.
-  const brandMap = opts.brands || (typeof globalThis !== "undefined" && globalThis.SMD_BRANDS && globalThis.SMD_BRANDS.BRANDS) || null;
+  const G = typeof globalThis !== "undefined" ? globalThis : {};
+  /* brand -> molecules. Combination brands from the lexicon (Combiflam, Ultracet, Zituvimet...) sit on
+   * top of the curated antibiotic map: raw.brands collapses each of them to ONE ingredient. */
+  const brandMap = { ...(opts.brands || (G.SMD_BRANDS && G.SMD_BRANDS.BRANDS) || {}),
+    ...(opts.combos || (G.SMD_DRUG_LEXICON && G.SMD_DRUG_LEXICON.combos) || {}) };
   const brandAliases = buildBrandAliases(raw, brandMap, firstWord);
 
   return compileRulePack({
@@ -269,6 +278,10 @@ function buildBrandAliases(raw, brandMap, firstWordAliases) {
   for (const brand of Object.keys(raw.brands || {})) {
     const key = String(brand).toLowerCase().trim();
     if (!key || rejected(key)) continue;
+    // A combination brand ("combiflam" -> "ibuprofen", really ibuprofen + paracetamol) is Source 2's
+    // call: aliased only if ONE of its molecules is checkable, otherwise it goes to combinations.
+    const molecules = brandMap && brandMap[key];
+    if (Array.isArray(molecules) && new Set(molecules.map(resolve).filter(Boolean)).size > 1) continue;
     const target = resolve(raw.brands[brand]);
     if (target) out[key] = target;
   }
@@ -406,12 +419,29 @@ function withoutGroupingDuplicates(rules, drugClasses) {
 /** The rule's own words, less the em dash the generator writes into them (no em dash in app text). */
 const noDash = (s) => (typeof s === "string" ? s.replace(/\s*—\s*/g, ": ") : s);
 
+/* WardSynq order-entry policy on top of the shared interaction data (owner, 2026-10-02, R1). The data
+ * and the app's alert text stay as they are; only how WardSynq gates an order differs.
+ *  - Colchicine + P-gp / strong CYP3A4 inhibitor stays CONTRAINDICATED but is overridable with a
+ *    recorded reason, not a hard stop: the auto-derived P-gp class includes weak inhibitors such as
+ *    ticagrelor, and low-dose colchicine with ticagrelor after MI is accepted practice.
+ *  - Aspirin never fills the NSAID slot of the anticoagulant + antiplatelet + NSAID triad: heparin or
+ *    enoxaparin + aspirin + clopidogrel is standard ACS treatment, and was a hard stop. The pairwise
+ *    anticoagulant + antiplatelet alert (major) still fires for it. */
+const WARDSYNQ_RULE_POLICY = {
+  "pair-colchicine-cyp3a4strong": { disposition: "overridable" },
+  "pair-colchicine-pgp": { disposition: "overridable" },
+  "combo-bleeding-triad": { except: { nsaid: ["aspirin"] } },
+};
+
 function mapInteractionRule(rule) {
+  const policy = WARDSYNQ_RULE_POLICY[rule.id] || {};
+  const except = policy.except || {};
   return {
     id: rule.id,
     type: rule.type,
     severity: SEVERITY_MAP[rule.severity] || "monitor",
-    subjects: rule.subjects || [],
+    ...(policy.disposition ? { disposition: policy.disposition } : {}),
+    subjects: (rule.subjects || []).map((sub) => (except[sub.value] ? { ...sub, except: except[sub.value] } : sub)),
     mechanism: noDash(rule.mechanism),
     effect: noDash(rule.effect),
     action: noDash(rule.action),

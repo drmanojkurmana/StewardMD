@@ -133,5 +133,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "h9a8d63bd"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "copd_exac_ni-dx-algo",
+      "title": "COPD exacerbation (non-infective): Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "An exacerbation is an episodic acute worsening of respiratory symptoms (increased dyspnea, cough, and/or change in sputum amount or character), typically evolving over less than 14 days; it may or may not be accompanied by fever, myalgias,",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Respiratory acidosis with hypercarbia (Paco2 >45 mmHg and pH <=7.35) indicating acute respiratory failure and a need for ventilatory support (p.2255, p.2259)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Arterial blood gas in patients with advanced COPD, a history of hypercarbia, mental status change (confusion, sleepiness), or significant distress; hypercarbia is defined as Pco2 >45 mmHg and carries treatment implications"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Underlying COPD severity is graded by post-bronchodilator FEV1/FVC =80%, GOLD 2 (moderate) 50-79%, GOLD 3 (severe) 30-49%, GOLD 4 (very severe) =2/CAT >=10), and group E for those with >=2 moderate exacerbations or >=1"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Withholding needed supplemental oxygen for fear of CO2 retention: oxygen targeted to SpO2 88-92% is appropriate, and although it may modestly raise arterial Pco2 in some hypercarbic patients by altering"
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for copd exacerbation (non-infective)."
+    }
+  ],
+  "tables": [
+    {
+      "id": "copd_exac_ni-matrix",
+      "title": "COPD exacerbation (non-infective): Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An exacerbation is an episodic acute worsening of respiratory symptoms (increased dyspnea, cough, and/or change in sputum amount",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Arterial blood gas in patients with advanced COPD, a history of hypercarbia, mental status change (confusion, sleepiness), or",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Pneumonia (a common abnormal finding on chest imaging during a presumed exacerbation) (p.2258), Congestive heart failure /",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Respiratory acidosis with hypercarbia (Paco2 >45 mmHg and pH <=7.35) indicating acute respiratory failure and a need for",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Withholding needed supplemental oxygen for fear of CO2 retention: oxygen targeted to SpO2 88-92% is appropriate, and although it",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for copd exacerbation (non-infective)."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "copd-exac-ni-real-image",
+      "title": "COPD exacerbation (non-infective): Diagnostic Chest Radiograph",
+      "type": "xray",
+      "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
+      "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
+      "annotations": [
+        {
+          "label": "Parenchyma & Airspaces",
+          "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
+        },
+        {
+          "label": "Bronchovascular Tree",
+          "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
+        },
+        {
+          "label": "Pleural Margins",
+          "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+        }
+      ]
+    }
+  ]
 }

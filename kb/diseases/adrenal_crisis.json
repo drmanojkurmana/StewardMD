@@ -132,5 +132,100 @@
       "importedAt": "2026-06-29T13:39:19Z",
       "contentHash": "h8abae530"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "adrenal_crisis-dx-algo",
+      "title": "Adrenal crisis: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Adrenal crisis typically emerges after a prolonged prodrome of nonspecific complaints rather than appearing out of the blue (p.3111).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Refractory or postural hypotension progressing to hypovolaemic shock (p.3111)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: Baseline serum cortisol AND plasma ACTH drawn before starting steroids, with formal testing deferred (p.3111), Short cosyntropin (ACTH stimulation) test once stabilised - failure cutoff roughly cortisol <450-500 nmol/L"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Differentiate from top mimics: Other causes of distributive/endocrine shock (septic, anaphylactic, neurogenic) (p.2353), Hypovolaemic and cardiogenic shock (p.2353)"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Do NOT let diagnostic testing delay treatment in suspected crisis (p.3111)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for adrenal crisis."
+    }
+  ],
+  "tables": [
+    {
+      "id": "adrenal_crisis-matrix",
+      "title": "Adrenal crisis: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Adrenal crisis typically emerges after a prolonged prodrome of nonspecific complaints rather than appearing out of the blue",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "Baseline serum cortisol AND plasma ACTH drawn before starting steroids, with formal testing deferred (p.3111), Short cosyntropin",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Other causes of distributive/endocrine shock (septic, anaphylactic, neurogenic) (p.2353), Hypovolaemic and cardiogenic shock",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Refractory or postural hypotension progressing to hypovolaemic shock (p.3111)",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Do NOT let diagnostic testing delay treatment in suspected crisis (p.3111).",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for adrenal crisis."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "adrenal-crisis-real-image",
+      "title": "Adrenal crisis: Diagnostic Renal Ultrasonography",
+      "type": "ultrasound",
+      "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
+      "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
+      "annotations": [
+        {
+          "label": "Renal Cortex",
+          "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
+        },
+        {
+          "label": "Corticomedullary Junction",
+          "description": "Medullary pyramid definition and structural architecture."
+        },
+        {
+          "label": "Collecting System",
+          "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+        }
+      ]
+    }
+  ]
 }

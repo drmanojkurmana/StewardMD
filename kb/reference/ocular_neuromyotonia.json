@@ -1,70 +1,165 @@
 {
-  "id": "ocular_neuromyotonia",
-  "name": "Ocular neuromyotonia",
-  "aliases": [
-    "ONM"
+ "id": "ocular_neuromyotonia",
+ "name": "Ocular neuromyotonia",
+ "aliases": [
+  "ONM"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system / Neuro-ophthalmology",
+ "specialty": "Neurology / Ophthalmology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Paroxysmal involuntary sustained contraction of one or more extraocular muscles causing episodic diplopia",
+   "Classically follows sellar or parasellar radiotherapy, often months to years later",
+   "Any of the ocular motor nerves may be affected, producing a transient strabismus in the field of the involved muscle",
+   "Attacks are often triggered by sustained eccentric gaze and last seconds to minutes",
+   "Between attacks ocular alignment may be normal, which can lead to misdiagnosis",
+   "Membrane-stabilising agents that reduce neuronal excitability are the usual treatment"
   ],
-  "class": "non_infective",
-  "system": "Nervous system / Neuro-ophthalmology",
-  "specialty": "Neurology / Ophthalmology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Paroxysmal involuntary sustained contraction of one or more extraocular muscles causing episodic diplopia",
-      "Classically follows sellar or parasellar radiotherapy, often months to years later",
-      "Any of the ocular motor nerves may be affected, producing a transient strabismus in the field of the involved muscle",
-      "Attacks are often triggered by sustained eccentric gaze and last seconds to minutes",
-      "Between attacks ocular alignment may be normal, which can lead to misdiagnosis",
-      "Membrane-stabilising agents that reduce neuronal excitability are the usual treatment"
+  "pathophysiology": "Ocular neuromyotonia is attributed to impaired membrane stability and spontaneous or triggered discharges within an ocular motor nerve, frequently after radiation-induced or compressive injury that alters axonal excitability. The abnormal firing produces sustained contraction (tonic spasm) of the muscles supplied by the affected nerve, generating an intermittent deviation and diplopia, particularly after maintained eccentric gaze.",
+  "additionalDifferentials": [
+   "Superior oblique myokymia",
+   "Cyclic oculomotor palsy",
+   "Thyroid eye disease with restriction",
+   "Myasthenia gravis (fatigable diplopia)",
+   "Decompensating phoria"
+  ],
+  "additionalInvestigations": [
+   "Detailed history of prior cranial radiotherapy or sellar disease",
+   "MRI of the brain, orbits and cavernous sinus to exclude compression or recurrence",
+   "Orthoptic assessment during and between attacks",
+   "Acetylcholine-receptor antibody testing to exclude myasthenia when relevant"
+  ],
+  "redFlags": [
+   "New or progressive structural lesion on imaging",
+   "Additional cranial nerve involvement",
+   "Signs of tumour recurrence in a previously irradiated field",
+   "Features suggesting myasthenia (fatigability, ptosis, bulbar signs)"
+  ],
+  "prognosis": "The condition is benign for vision and often responds well to membrane-stabilising therapy, though symptoms can persist for years and may recur if treatment is stopped.",
+  "pitfalls": [
+   "Missing the diagnosis because alignment is normal between attacks",
+   "Attributing episodic diplopia to myasthenia without antibody or imaging workup",
+   "Overlooking a history of prior radiotherapy",
+   "Confusing sustained deviation with the shimmering oscillopsia of superior oblique myokymia"
+  ],
+  "references": [
+   "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
+   "Bradley and Daroff Neurology in Clinical Practice"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Membrane-stabilising anticonvulsant therapy, typically carbamazepine, to suppress the paroxysmal extraocular muscle spasms",
+   "Symptomatic relief of diplopia between attacks with prisms or temporary occlusion where needed",
+   "Neuroimaging to exclude compression or recurrence of an underlying sellar or parasellar lesion, particularly after prior radiotherapy",
+   "Ongoing neuro-ophthalmology and orthoptic follow-up, with cautious continuation of therapy since symptoms may recur if treatment is stopped",
+   "Multidisciplinary input from neurology, ophthalmology and, where relevant, oncology"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "ocular_neuromyotonia-pathway",
+   "title": "Ocular neuromyotonia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Paroxysmal involuntary sustained contraction of one or more extraocular muscles causing episodic diplopia",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: New or progressive structural lesion on imaging",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Detailed history of prior cranial radiotherapy or sellar disease, MRI of the brain, orbits and cavernous sinus to exclude compression or recurrence, Orthoptic assessment during and between attacks"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Membrane-stabilising anticonvulsant therapy, typically carbamazepine, to suppress the paroxysmal extraocular muscle spasms"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Missing the diagnosis because alignment is normal between attacks"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of ocular neuromyotonia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "ocular_neuromyotonia-matrix",
+   "title": "Ocular neuromyotonia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Paroxysmal involuntary sustained contraction of one or more extraocular muscles causing episodic diplopia",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Ocular neuromyotonia is attributed to impaired membrane stability and spontaneous or triggered discharges within an ocular motor nerve, frequently after radiation-induced or compressive injury that alters axonal excitability. The abnormal firing produces sustained contraction (tonic spasm) of the muscles supplied by the affected nerve, generating an intermittent deviation and diplopia, particularly after maintained eccentric gaze.",
-    "additionalDifferentials": [
-      "Superior oblique myokymia",
-      "Cyclic oculomotor palsy",
-      "Thyroid eye disease with restriction",
-      "Myasthenia gravis (fatigable diplopia)",
-      "Decompensating phoria"
+    [
+     "Key Investigations",
+     "Detailed history of prior cranial radiotherapy or sellar disease, MRI of the brain, orbits and cavernous sinus to exclude",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Detailed history of prior cranial radiotherapy or sellar disease",
-      "MRI of the brain, orbits and cavernous sinus to exclude compression or recurrence",
-      "Orthoptic assessment during and between attacks",
-      "Acetylcholine-receptor antibody testing to exclude myasthenia when relevant"
+    [
+     "Primary Differentials",
+     "Superior oblique myokymia, Cyclic oculomotor palsy, Thyroid eye disease with restriction",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "New or progressive structural lesion on imaging",
-      "Additional cranial nerve involvement",
-      "Signs of tumour recurrence in a previously irradiated field",
-      "Features suggesting myasthenia (fatigability, ptosis, bulbar signs)"
+    [
+     "Management Strategy",
+     "Membrane-stabilising anticonvulsant therapy, typically carbamazepine, to suppress the paroxysmal extraocular muscle spasms",
+     "Core treatment modality"
     ],
-    "prognosis": "The condition is benign for vision and often responds well to membrane-stabilising therapy, though symptoms can persist for years and may recur if treatment is stopped.",
-    "pitfalls": [
-      "Missing the diagnosis because alignment is normal between attacks",
-      "Attributing episodic diplopia to myasthenia without antibody or imaging workup",
-      "Overlooking a history of prior radiotherapy",
-      "Confusing sustained deviation with the shimmering oscillopsia of superior oblique myokymia"
-    ],
-    "references": [
-      "Walsh and Hoyt's Clinical Neuro-Ophthalmology",
-      "Bradley and Daroff Neurology in Clinical Practice"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Membrane-stabilising anticonvulsant therapy, typically carbamazepine, to suppress the paroxysmal extraocular muscle spasms",
-      "Symptomatic relief of diplopia between attacks with prisms or temporary occlusion where needed",
-      "Neuroimaging to exclude compression or recurrence of an underlying sellar or parasellar lesion, particularly after prior radiotherapy",
-      "Ongoing neuro-ophthalmology and orthoptic follow-up, with cautious continuation of therapy since symptoms may recur if treatment is stopped",
-      "Multidisciplinary input from neurology, ophthalmology and, where relevant, oncology"
+    [
+     "Clinical Pitfall",
+     "Missing the diagnosis because alignment is normal between attacks",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for ocular neuromyotonia."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "ocular-neuromyotonia-real-image",
+   "title": "Ocular neuromyotonia: Diagnostic Head Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
+   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
+   "annotations": [
+    {
+     "label": "Cerebral Parenchyma",
+     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+    },
+    {
+     "label": "Extra-Axial Spaces",
+     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+    }
+   ]
+  }
+ ]
 }

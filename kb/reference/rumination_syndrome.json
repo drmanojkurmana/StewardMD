@@ -1,76 +1,171 @@
 {
-  "id": "rumination_syndrome",
-  "name": "Rumination syndrome",
-  "aliases": [
-    "rumination disorder",
-    "merycism",
-    "regurgitation syndrome"
+ "id": "rumination_syndrome",
+ "name": "Rumination syndrome",
+ "aliases": [
+  "rumination disorder",
+  "merycism",
+  "regurgitation syndrome"
+ ],
+ "class": "non_infective",
+ "system": "Gastroenterology",
+ "specialty": "Gastroenterology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Characterised by effortless, repetitive regurgitation of recently ingested food into the mouth, where it is re-chewed, re-swallowed, or spat out",
+   "Regurgitation typically begins within minutes of eating, is not preceded by nausea or retching, and involves undigested, pleasant-tasting food",
+   "Symptoms usually cease once the regurgitated material becomes acidic, distinguishing it from vomiting and gastro-oesophageal reflux",
+   "High-resolution manometry with impedance may capture the diagnostic postprandial rise in intragastric pressure (abdominal straining) coinciding with retrograde flow",
+   "It is a behaviourally learned, often unconscious contraction of the abdominal wall, not a structural or acid-driven disease",
+   "First-line treatment is diaphragmatic-breathing behavioural therapy, which competes with and suppresses the abdominal straining",
+   "Frequently misdiagnosed as refractory reflux or gastroparesis, leading to unnecessary acid suppression and procedures"
   ],
-  "class": "non_infective",
-  "system": "Gastroenterology",
-  "specialty": "Gastroenterology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Characterised by effortless, repetitive regurgitation of recently ingested food into the mouth, where it is re-chewed, re-swallowed, or spat out",
-      "Regurgitation typically begins within minutes of eating, is not preceded by nausea or retching, and involves undigested, pleasant-tasting food",
-      "Symptoms usually cease once the regurgitated material becomes acidic, distinguishing it from vomiting and gastro-oesophageal reflux",
-      "High-resolution manometry with impedance may capture the diagnostic postprandial rise in intragastric pressure (abdominal straining) coinciding with retrograde flow",
-      "It is a behaviourally learned, often unconscious contraction of the abdominal wall, not a structural or acid-driven disease",
-      "First-line treatment is diaphragmatic-breathing behavioural therapy, which competes with and suppresses the abdominal straining",
-      "Frequently misdiagnosed as refractory reflux or gastroparesis, leading to unnecessary acid suppression and procedures"
+  "pathophysiology": "Rumination syndrome results from a subconsciously acquired increase in intra-abdominal pressure, produced by contraction of the abdominal wall musculature after eating. This straining, combined with transient relaxation of the lower oesophageal sphincter, propels gastric contents retrograde into the oesophagus and mouth without the coordinated antiperistalsis and autonomic prodrome of true vomiting. Because the behaviour is a learned somatic response rather than a mucosal or motility disease, the regurgitated material is undigested and non-acidic, and the pattern can be interrupted by teaching competing diaphragmatic breathing.",
+  "additionalDifferentials": [
+   "Gastro-oesophageal reflux disease",
+   "Gastroparesis and other gastric motility disorders",
+   "Achalasia or other oesophageal outflow obstruction",
+   "Eating disorders such as bulimia nervosa",
+   "Cyclic vomiting syndrome",
+   "Mechanical gastric outlet obstruction"
+  ],
+  "additionalInvestigations": [
+   "High-resolution oesophageal manometry with impedance, ideally postprandial, to demonstrate the characteristic pattern",
+   "Upper endoscopy to exclude mucosal disease and mechanical obstruction",
+   "Gastric emptying study to differentiate from gastroparesis",
+   "Ambulatory pH-impedance monitoring to distinguish from acid reflux",
+   "Nutritional and psychological assessment where weight loss or comorbidity is present"
+  ],
+  "redFlags": [
+   "Significant weight loss, dehydration, or nutritional compromise",
+   "Nocturnal or truly acidic regurgitation suggesting reflux or another organic cause",
+   "Dysphagia, odynophagia, or evidence of mechanical obstruction",
+   "Features suggesting a primary eating disorder requiring specialist care"
+  ],
+  "prognosis": "The disorder is benign and highly responsive to behavioural therapy, with many patients achieving marked or complete symptom control; delayed recognition, however, exposes patients to needless investigations and treatments.",
+  "pitfalls": [
+   "Labelling the regurgitation as refractory reflux and escalating acid suppression",
+   "Ordering repeated procedures instead of recognising the postprandial effortless pattern",
+   "Confusing the condition with an eating disorder or with true vomiting",
+   "Overlooking coexisting anxiety or psychological factors that reinforce the behaviour"
+  ],
+  "references": [
+   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+   "Rome Foundation diagnostic criteria for functional gastrointestinal disorders"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Diaphragmatic (abdominal) breathing behavioural therapy as first-line treatment to compete with and suppress the post-prandial abdominal straining",
+   "Patient education and reassurance that the disorder is a learned behaviour rather than a structural or acid-driven disease",
+   "Biofeedback, using postprandial manometry where available, to reinforce and consolidate the breathing technique",
+   "Habit-reversal therapy and management of any psychological comorbidity, with clinical psychology input",
+   "Baclofen as an adjunct in refractory cases to reduce transient lower oesophageal sphincter relaxations",
+   "Nutritional assessment and support where weight loss or nutritional compromise has occurred"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "rumination_syndrome-pathway",
+   "title": "Rumination syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Characterised by effortless, repetitive regurgitation of recently ingested food into the mouth, where it is re-chewed, re-swallowed, or spat out",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Significant weight loss, dehydration, or nutritional compromise",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: High-resolution oesophageal manometry with impedance, ideally postprandial, to demonstrate the characteristic pattern, Upper endoscopy to exclude mucosal disease and mechanical obstruction, Gastric emptying study to"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Diaphragmatic (abdominal) breathing behavioural therapy as first-line treatment to compete with and suppress the post-prandial abdominal straining"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Labelling the regurgitation as refractory reflux and escalating acid suppression"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of rumination syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "rumination_syndrome-matrix",
+   "title": "Rumination syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Characterised by effortless, repetitive regurgitation of recently ingested food into the mouth, where it is re-chewed,",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Rumination syndrome results from a subconsciously acquired increase in intra-abdominal pressure, produced by contraction of the abdominal wall musculature after eating. This straining, combined with transient relaxation of the lower oesophageal sphincter, propels gastric contents retrograde into the oesophagus and mouth without the coordinated antiperistalsis and autonomic prodrome of true vomiting. Because the behaviour is a learned somatic response rather than a mucosal or motility disease, the regurgitated material is undigested and non-acidic, and the pattern can be interrupted by teaching competing diaphragmatic breathing.",
-    "additionalDifferentials": [
-      "Gastro-oesophageal reflux disease",
-      "Gastroparesis and other gastric motility disorders",
-      "Achalasia or other oesophageal outflow obstruction",
-      "Eating disorders such as bulimia nervosa",
-      "Cyclic vomiting syndrome",
-      "Mechanical gastric outlet obstruction"
+    [
+     "Key Investigations",
+     "High-resolution oesophageal manometry with impedance, ideally postprandial, to demonstrate the characteristic pattern, Upper",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "High-resolution oesophageal manometry with impedance, ideally postprandial, to demonstrate the characteristic pattern",
-      "Upper endoscopy to exclude mucosal disease and mechanical obstruction",
-      "Gastric emptying study to differentiate from gastroparesis",
-      "Ambulatory pH-impedance monitoring to distinguish from acid reflux",
-      "Nutritional and psychological assessment where weight loss or comorbidity is present"
+    [
+     "Primary Differentials",
+     "Gastro-oesophageal reflux disease, Gastroparesis and other gastric motility disorders, Achalasia or other oesophageal outflow",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Significant weight loss, dehydration, or nutritional compromise",
-      "Nocturnal or truly acidic regurgitation suggesting reflux or another organic cause",
-      "Dysphagia, odynophagia, or evidence of mechanical obstruction",
-      "Features suggesting a primary eating disorder requiring specialist care"
+    [
+     "Management Strategy",
+     "Diaphragmatic (abdominal) breathing behavioural therapy as first-line treatment to compete with and suppress the post-prandial",
+     "Core treatment modality"
     ],
-    "prognosis": "The disorder is benign and highly responsive to behavioural therapy, with many patients achieving marked or complete symptom control; delayed recognition, however, exposes patients to needless investigations and treatments.",
-    "pitfalls": [
-      "Labelling the regurgitation as refractory reflux and escalating acid suppression",
-      "Ordering repeated procedures instead of recognising the postprandial effortless pattern",
-      "Confusing the condition with an eating disorder or with true vomiting",
-      "Overlooking coexisting anxiety or psychological factors that reinforce the behaviour"
-    ],
-    "references": [
-      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-      "Rome Foundation diagnostic criteria for functional gastrointestinal disorders"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Diaphragmatic (abdominal) breathing behavioural therapy as first-line treatment to compete with and suppress the post-prandial abdominal straining",
-      "Patient education and reassurance that the disorder is a learned behaviour rather than a structural or acid-driven disease",
-      "Biofeedback, using postprandial manometry where available, to reinforce and consolidate the breathing technique",
-      "Habit-reversal therapy and management of any psychological comorbidity, with clinical psychology input",
-      "Baclofen as an adjunct in refractory cases to reduce transient lower oesophageal sphincter relaxations",
-      "Nutritional assessment and support where weight loss or nutritional compromise has occurred"
+    [
+     "Clinical Pitfall",
+     "Labelling the regurgitation as refractory reflux and escalating acid suppression",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for rumination syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "rumination-syndrome-real-image",
+   "title": "Rumination syndrome: Diagnostic Abdominal Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
+   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
+   "annotations": [
+    {
+     "label": "Solid Viscera",
+     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
+    },
+    {
+     "label": "Gastrointestinal Tract",
+     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
+    },
+    {
+     "label": "Mesentery & Peritoneum",
+     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+    }
+   ]
+  }
+ ]
 }

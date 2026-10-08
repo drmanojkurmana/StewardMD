@@ -1,79 +1,174 @@
 {
-  "id": "cold_urticaria",
-  "name": "Cold urticaria",
-  "aliases": [
-    "cold contact urticaria",
-    "acquired cold urticaria",
-    "cold-induced urticaria"
+ "id": "cold_urticaria",
+ "name": "Cold urticaria",
+ "aliases": [
+  "cold contact urticaria",
+  "acquired cold urticaria",
+  "cold-induced urticaria"
+ ],
+ "class": "non_infective",
+ "system": "Dermatology",
+ "specialty": "Dermatology / Photodermatology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Rook's Textbook of Dermatology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "An inducible urticaria in which itchy weals develop on skin exposed to cold, most typically as it rewarms after contact with cold air, water or objects",
+   "The ice-cube test is the key bedside investigation: an ice cube (usually in a thin bag to avoid wetting) is applied to the forearm and a weal appears on rewarming in a positive result",
+   "Most cases are acquired and idiopathic, arising in adolescents and young adults, and are usually self-limiting over a few years",
+   "The greatest danger is a systemic reaction from extensive cold exposure, particularly swimming in cold water, which can cause hypotension, collapse and even drowning",
+   "Angioedema of the lips can follow cold food or drink, and oropharyngeal swelling is a recognised hazard",
+   "Rare familial and secondary forms exist, the latter occasionally linked to cryoglobulins or infection, so atypical cases merit further evaluation",
+   "Management combines strict avoidance of sudden cold exposure with non-sedating antihistamines, with omalizumab reserved for resistant disease and adrenaline provision for those at risk of systemic reactions"
   ],
-  "class": "non_infective",
-  "system": "Dermatology",
-  "specialty": "Dermatology / Photodermatology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Rook's Textbook of Dermatology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "An inducible urticaria in which itchy weals develop on skin exposed to cold, most typically as it rewarms after contact with cold air, water or objects",
-      "The ice-cube test is the key bedside investigation: an ice cube (usually in a thin bag to avoid wetting) is applied to the forearm and a weal appears on rewarming in a positive result",
-      "Most cases are acquired and idiopathic, arising in adolescents and young adults, and are usually self-limiting over a few years",
-      "The greatest danger is a systemic reaction from extensive cold exposure, particularly swimming in cold water, which can cause hypotension, collapse and even drowning",
-      "Angioedema of the lips can follow cold food or drink, and oropharyngeal swelling is a recognised hazard",
-      "Rare familial and secondary forms exist, the latter occasionally linked to cryoglobulins or infection, so atypical cases merit further evaluation",
-      "Management combines strict avoidance of sudden cold exposure with non-sedating antihistamines, with omalizumab reserved for resistant disease and adrenaline provision for those at risk of systemic reactions"
+  "pathophysiology": "Cold urticaria results from cold-triggered activation and degranulation of cutaneous mast cells, releasing histamine and other mediators that produce weals and, when exposure is extensive, systemic effects. In many patients the reaction is thought to involve cold-dependent autoantigens or IgE-mediated mechanisms, while secondary forms may relate to cryoglobulins or other cold-precipitable proteins associated with infection or systemic disease. Because the response scales with the area and duration of cold exposure, large surface-area cooling such as swimming can precipitate life-threatening mediator release.",
+  "additionalDifferentials": [
+   "Cholinergic urticaria triggered in cold environments",
+   "Cryoglobulinaemia and cold-associated systemic disease",
+   "Chronic spontaneous urticaria",
+   "Cold-induced anaphylaxis from another cause",
+   "Perniosis (chilblains)",
+   "Familial cold autoinflammatory syndrome"
+  ],
+  "additionalInvestigations": [
+   "Ice-cube (cold-contact) provocation test to confirm the diagnosis and gauge threshold",
+   "History clarifying the rewarming pattern and any systemic symptoms with extensive exposure",
+   "Cryoglobulins and cold agglutinins in atypical or secondary cases",
+   "Full blood count and inflammatory markers where an underlying disorder is suspected",
+   "Screening for associated infection where clinically indicated",
+   "Assessment of systemic reaction risk to guide adrenaline provision"
+  ],
+  "redFlags": [
+   "History of faintness, wheeze or collapse with widespread cold exposure such as swimming",
+   "Oropharyngeal angioedema after cold food or drink",
+   "Atypical features suggesting cryoglobulinaemia or another systemic disorder",
+   "Onset in infancy or a family history suggesting a hereditary autoinflammatory syndrome"
+  ],
+  "prognosis": "Acquired idiopathic cold urticaria commonly remits spontaneously within a few years and is well controlled with avoidance and antihistamines, but it carries a real risk of serious systemic reactions during large-area cold exposure, which patients must be counselled about; secondary forms follow the course of the underlying disorder.",
+  "pitfalls": [
+   "Failing to warn patients against swimming in cold water because of the risk of systemic collapse and drowning",
+   "Omitting the simple ice-cube test that readily confirms the diagnosis",
+   "Not screening for cryoglobulins or infection in atypical or secondary presentations",
+   "Overlooking the need for an adrenaline auto-injector in those at risk of anaphylaxis"
+  ],
+  "references": [
+   "Rook's Textbook of Dermatology",
+   "British Association of Dermatologists guidance on chronic urticaria"
+  ],
+  "crossLinks": [],
+  "management": [
+   "First-line control with regular non-sedating second-generation H1-antihistamines, up-titrated as needed to suppress weals",
+   "Add omalizumab for antihistamine-refractory disease under specialist supervision",
+   "Strict avoidance of cold triggers - cold air, water and objects, iced food and drink - and avoidance of swimming in cold water",
+   "Provide an adrenaline auto-injector and an anaphylaxis action plan for patients at risk of systemic mediator release",
+   "Counsel on oropharyngeal angioedema from cold food or drink and prompt treatment of airway symptoms",
+   "Investigate and treat secondary causes such as cryoglobulinaemia or underlying infection in atypical or persistent cases",
+   "Consider supervised cold desensitisation in a specialist centre for selected refractory patients",
+   "Refer to allergy or dermatology for confirmation by cold-provocation testing and ongoing review"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "cold_urticaria-pathway",
+   "title": "Cold urticaria: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "An inducible urticaria in which itchy weals develop on skin exposed to cold, most typically as it rewarms after contact with cold air, water or objects",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: History of faintness, wheeze or collapse with widespread cold exposure such as swimming",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Ice-cube (cold-contact) provocation test to confirm the diagnosis and gauge threshold, History clarifying the rewarming pattern and any systemic symptoms with extensive exposure, Cryoglobulins and cold agglutinins in"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: First-line control with regular non-sedating second-generation H1-antihistamines, up-titrated as needed to suppress weals"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Failing to warn patients against swimming in cold water because of the risk of systemic collapse and drowning"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of cold urticaria."
+  }
+ ],
+ "tables": [
+  {
+   "id": "cold_urticaria-matrix",
+   "title": "Cold urticaria: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "An inducible urticaria in which itchy weals develop on skin exposed to cold, most typically as it rewarms after contact with cold",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Cold urticaria results from cold-triggered activation and degranulation of cutaneous mast cells, releasing histamine and other mediators that produce weals and, when exposure is extensive, systemic effects. In many patients the reaction is thought to involve cold-dependent autoantigens or IgE-mediated mechanisms, while secondary forms may relate to cryoglobulins or other cold-precipitable proteins associated with infection or systemic disease. Because the response scales with the area and duration of cold exposure, large surface-area cooling such as swimming can precipitate life-threatening mediator release.",
-    "additionalDifferentials": [
-      "Cholinergic urticaria triggered in cold environments",
-      "Cryoglobulinaemia and cold-associated systemic disease",
-      "Chronic spontaneous urticaria",
-      "Cold-induced anaphylaxis from another cause",
-      "Perniosis (chilblains)",
-      "Familial cold autoinflammatory syndrome"
+    [
+     "Key Investigations",
+     "Ice-cube (cold-contact) provocation test to confirm the diagnosis and gauge threshold, History clarifying the rewarming pattern",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Ice-cube (cold-contact) provocation test to confirm the diagnosis and gauge threshold",
-      "History clarifying the rewarming pattern and any systemic symptoms with extensive exposure",
-      "Cryoglobulins and cold agglutinins in atypical or secondary cases",
-      "Full blood count and inflammatory markers where an underlying disorder is suspected",
-      "Screening for associated infection where clinically indicated",
-      "Assessment of systemic reaction risk to guide adrenaline provision"
+    [
+     "Primary Differentials",
+     "Cholinergic urticaria triggered in cold environments, Cryoglobulinaemia and cold-associated systemic disease, Chronic spontaneous",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "History of faintness, wheeze or collapse with widespread cold exposure such as swimming",
-      "Oropharyngeal angioedema after cold food or drink",
-      "Atypical features suggesting cryoglobulinaemia or another systemic disorder",
-      "Onset in infancy or a family history suggesting a hereditary autoinflammatory syndrome"
+    [
+     "Management Strategy",
+     "First-line control with regular non-sedating second-generation H1-antihistamines, up-titrated as needed to suppress weals",
+     "Core treatment modality"
     ],
-    "prognosis": "Acquired idiopathic cold urticaria commonly remits spontaneously within a few years and is well controlled with avoidance and antihistamines, but it carries a real risk of serious systemic reactions during large-area cold exposure, which patients must be counselled about; secondary forms follow the course of the underlying disorder.",
-    "pitfalls": [
-      "Failing to warn patients against swimming in cold water because of the risk of systemic collapse and drowning",
-      "Omitting the simple ice-cube test that readily confirms the diagnosis",
-      "Not screening for cryoglobulins or infection in atypical or secondary presentations",
-      "Overlooking the need for an adrenaline auto-injector in those at risk of anaphylaxis"
-    ],
-    "references": [
-      "Rook's Textbook of Dermatology",
-      "British Association of Dermatologists guidance on chronic urticaria"
-    ],
-    "crossLinks": [],
-    "management": [
-      "First-line control with regular non-sedating second-generation H1-antihistamines, up-titrated as needed to suppress weals",
-      "Add omalizumab for antihistamine-refractory disease under specialist supervision",
-      "Strict avoidance of cold triggers - cold air, water and objects, iced food and drink - and avoidance of swimming in cold water",
-      "Provide an adrenaline auto-injector and an anaphylaxis action plan for patients at risk of systemic mediator release",
-      "Counsel on oropharyngeal angioedema from cold food or drink and prompt treatment of airway symptoms",
-      "Investigate and treat secondary causes such as cryoglobulinaemia or underlying infection in atypical or persistent cases",
-      "Consider supervised cold desensitisation in a specialist centre for selected refractory patients",
-      "Refer to allergy or dermatology for confirmation by cold-provocation testing and ongoing review"
+    [
+     "Clinical Pitfall",
+     "Failing to warn patients against swimming in cold water because of the risk of systemic collapse and drowning",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for cold urticaria."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "cold-urticaria-real-image",
+   "title": "Cold urticaria: Clinical Cutaneous Dermatology Photograph",
+   "type": "diagram",
+   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
+   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
+   "annotations": [
+    {
+     "label": "Primary Lesions",
+     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
+    },
+    {
+     "label": "Demarcation & Margins",
+     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
+    },
+    {
+     "label": "Anatomical Distribution",
+     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+    }
+   ]
+  }
+ ]
 }

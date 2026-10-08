@@ -1,86 +1,181 @@
 {
-  "id": "cobalamin_c_deficiency",
-  "name": "Cobalamin C deficiency (cblC)",
-  "aliases": [
-    "cblC disease",
-    "MMACHC deficiency",
-    "combined methylmalonic aciduria and homocystinuria type cblC",
-    "methylmalonic aciduria and homocystinuria cblC type"
+ "id": "cobalamin_c_deficiency",
+ "name": "Cobalamin C deficiency (cblC)",
+ "aliases": [
+  "cblC disease",
+  "MMACHC deficiency",
+  "combined methylmalonic aciduria and homocystinuria type cblC",
+  "methylmalonic aciduria and homocystinuria cblC type"
+ ],
+ "class": "non_infective",
+ "system": "Metabolic / Genetics",
+ "specialty": "Metabolic Medicine / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Most common inborn error of intracellular cobalamin (vitamin B12) metabolism, caused by biallelic MMACHC variants",
+   "Impaired processing of cobalamin blocks synthesis of both adenosylcobalamin and methylcobalamin, so both dependent pathways fail",
+   "Biochemical signature is combined methylmalonic aciduria and homocystinuria with low-to-normal methionine",
+   "Early-onset (infantile) disease brings failure to thrive, feeding problems, hypotonia, encephalopathy, seizures and a pigmentary retinopathy",
+   "Haematological clue is megaloblastic anaemia, sometimes with a thrombotic microangiopathy (haemolytic-uraemic-like picture)",
+   "Late-onset disease can present with cognitive decline, psychiatric symptoms, myelopathy or thromboembolism",
+   "Confirmed by plasma/urine metabolites (raised methylmalonic acid and total homocysteine) plus MMACHC sequencing",
+   "Treatment centres on parenteral hydroxocobalamin, with betaine, folinic acid and sometimes carnitine; oral B12 is inadequate"
   ],
-  "class": "non_infective",
-  "system": "Metabolic / Genetics",
-  "specialty": "Metabolic Medicine / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Most common inborn error of intracellular cobalamin (vitamin B12) metabolism, caused by biallelic MMACHC variants",
-      "Impaired processing of cobalamin blocks synthesis of both adenosylcobalamin and methylcobalamin, so both dependent pathways fail",
-      "Biochemical signature is combined methylmalonic aciduria and homocystinuria with low-to-normal methionine",
-      "Early-onset (infantile) disease brings failure to thrive, feeding problems, hypotonia, encephalopathy, seizures and a pigmentary retinopathy",
-      "Haematological clue is megaloblastic anaemia, sometimes with a thrombotic microangiopathy (haemolytic-uraemic-like picture)",
-      "Late-onset disease can present with cognitive decline, psychiatric symptoms, myelopathy or thromboembolism",
-      "Confirmed by plasma/urine metabolites (raised methylmalonic acid and total homocysteine) plus MMACHC sequencing",
-      "Treatment centres on parenteral hydroxocobalamin, with betaine, folinic acid and sometimes carnitine; oral B12 is inadequate"
+  "pathophysiology": "Cobalamin C disease results from deficiency of the MMACHC protein, which performs an early cytosolic step in intracellular processing of dietary cobalamin, dealkylating/decyanating incoming cobalamin so it can be converted into its two active cofactor forms. Loss of function prevents generation of both adenosylcobalamin, the cofactor for methylmalonyl-CoA mutase, and methylcobalamin, the cofactor for methionine synthase. Consequently methylmalonyl-CoA cannot be isomerised, causing methylmalonic acid accumulation, and homocysteine cannot be remethylated to methionine, causing hyperhomocysteinaemia with low methionine. The combined metabolic block produces neurological injury, endothelial damage with thrombotic microangiopathy, megaloblastic haematopoiesis and retinopathy. Inheritance is autosomal recessive.",
+  "additionalDifferentials": [
+   "Isolated methylmalonic acidaemia (mutase or other cobalamin defects)",
+   "Classic homocystinuria (cystathionine beta-synthase deficiency)",
+   "Other remethylation defects (MTHFR deficiency, cblE/cblG)",
+   "Nutritional vitamin B12 deficiency",
+   "Atypical haemolytic uraemic syndrome / thrombotic microangiopathy",
+   "Other causes of infantile encephalopathy with retinopathy",
+   "Transcobalamin deficiency"
+  ],
+  "additionalInvestigations": [
+   "Plasma and urine methylmalonic acid",
+   "Plasma total homocysteine and methionine",
+   "Plasma acylcarnitine profile (raised C3 propionylcarnitine)",
+   "Full blood count and film for megaloblastic/haemolytic changes",
+   "MMACHC gene sequencing and complementation studies where needed",
+   "Ophthalmological assessment for maculopathy/pigmentary retinopathy",
+   "Renal function and markers of thrombotic microangiopathy"
+  ],
+  "redFlags": [
+   "Encephalopathy with seizures and rapid neurological deterioration in infancy",
+   "Thrombotic microangiopathy with renal impairment (HUS-like presentation)",
+   "Severe metabolic acidosis with feeding failure",
+   "Thromboembolic events in older patients",
+   "Progressive visual loss from maculopathy"
+  ],
+  "prognosis": "Early-onset disease often has a guarded prognosis with persistent neurological and visual impairment even when treated, whereas late-onset disease responds better to early hydroxocobalamin-based therapy; outcome depends strongly on age at diagnosis and treatment.",
+  "pitfalls": [
+   "Treating with oral cyanocobalamin instead of parenteral hydroxocobalamin, which is far less effective",
+   "Diagnosing isolated methylmalonic acidaemia without measuring homocysteine and missing the combined defect",
+   "Overlooking the retinopathy, which can progress despite metabolic control",
+   "Mistaking the thrombotic microangiopathy for primary atypical HUS",
+   "Failing to recognise late-onset presentations with psychiatric or myelopathic features"
+  ],
+  "references": [
+   "Scriver's Online Metabolic and Molecular Bases of Inherited Disease (OMMBID)",
+   "Nelson Textbook of Paediatrics",
+   "Saudubray, Inborn Metabolic Diseases: Diagnosis and Treatment"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Definitive therapy is regular parenteral (intramuscular) hydroxocobalamin to drive residual cofactor synthesis; oral or cyanocobalamin preparations are inadequate",
+   "Adjunctive betaine to promote remethylation of homocysteine to methionine, with oral folinic acid and methionine supplementation where methionine is low",
+   "Consider L-carnitine to replenish carnitine stores and buffer propionyl-CoA accumulation",
+   "Supportive care for neurological and feeding difficulties: seizure control, nasogastric or gastrostomy feeding for failure to thrive, and developmental therapies",
+   "Biochemical monitoring of plasma total homocysteine, methylmalonic acid and methionine to titrate treatment",
+   "Regular ophthalmological surveillance for pigmentary maculopathy and retinopathy, with vigilance for thrombotic microangiopathy (a haemolytic-uraemic-like picture)",
+   "Genetic counselling for this autosomal recessive MMACHC disorder, with carrier testing and prenatal or newborn-screening options offered to the family",
+   "Escalate acute metabolic decompensation during intercurrent illness with intensified hydroxocobalamin, emergency metabolic measures and specialist metabolic-team input"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "cobalamin_c_deficiency-pathway",
+   "title": "Cobalamin C deficiency (cblC): Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Most common inborn error of intracellular cobalamin (vitamin B12) metabolism, caused by biallelic MMACHC variants",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Encephalopathy with seizures and rapid neurological deterioration in infancy",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Plasma and urine methylmalonic acid, Plasma total homocysteine and methionine, Plasma acylcarnitine profile (raised C3 propionylcarnitine)"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Definitive therapy is regular parenteral (intramuscular) hydroxocobalamin to drive residual cofactor synthesis; oral or cyanocobalamin preparations are inadequate"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Treating with oral cyanocobalamin instead of parenteral hydroxocobalamin, which is far less effective"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of cobalamin c deficiency (cblc)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "cobalamin_c_deficiency-matrix",
+   "title": "Cobalamin C deficiency (cblC): Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Most common inborn error of intracellular cobalamin (vitamin B12) metabolism, caused by biallelic MMACHC variants",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Cobalamin C disease results from deficiency of the MMACHC protein, which performs an early cytosolic step in intracellular processing of dietary cobalamin, dealkylating/decyanating incoming cobalamin so it can be converted into its two active cofactor forms. Loss of function prevents generation of both adenosylcobalamin, the cofactor for methylmalonyl-CoA mutase, and methylcobalamin, the cofactor for methionine synthase. Consequently methylmalonyl-CoA cannot be isomerised, causing methylmalonic acid accumulation, and homocysteine cannot be remethylated to methionine, causing hyperhomocysteinaemia with low methionine. The combined metabolic block produces neurological injury, endothelial damage with thrombotic microangiopathy, megaloblastic haematopoiesis and retinopathy. Inheritance is autosomal recessive.",
-    "additionalDifferentials": [
-      "Isolated methylmalonic acidaemia (mutase or other cobalamin defects)",
-      "Classic homocystinuria (cystathionine beta-synthase deficiency)",
-      "Other remethylation defects (MTHFR deficiency, cblE/cblG)",
-      "Nutritional vitamin B12 deficiency",
-      "Atypical haemolytic uraemic syndrome / thrombotic microangiopathy",
-      "Other causes of infantile encephalopathy with retinopathy",
-      "Transcobalamin deficiency"
+    [
+     "Key Investigations",
+     "Plasma and urine methylmalonic acid, Plasma total homocysteine and methionine, Plasma acylcarnitine profile (raised C3",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Plasma and urine methylmalonic acid",
-      "Plasma total homocysteine and methionine",
-      "Plasma acylcarnitine profile (raised C3 propionylcarnitine)",
-      "Full blood count and film for megaloblastic/haemolytic changes",
-      "MMACHC gene sequencing and complementation studies where needed",
-      "Ophthalmological assessment for maculopathy/pigmentary retinopathy",
-      "Renal function and markers of thrombotic microangiopathy"
+    [
+     "Primary Differentials",
+     "Isolated methylmalonic acidaemia (mutase or other cobalamin defects), Classic homocystinuria (cystathionine beta-synthase",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Encephalopathy with seizures and rapid neurological deterioration in infancy",
-      "Thrombotic microangiopathy with renal impairment (HUS-like presentation)",
-      "Severe metabolic acidosis with feeding failure",
-      "Thromboembolic events in older patients",
-      "Progressive visual loss from maculopathy"
+    [
+     "Management Strategy",
+     "Definitive therapy is regular parenteral (intramuscular) hydroxocobalamin to drive residual cofactor synthesis; oral or",
+     "Core treatment modality"
     ],
-    "prognosis": "Early-onset disease often has a guarded prognosis with persistent neurological and visual impairment even when treated, whereas late-onset disease responds better to early hydroxocobalamin-based therapy; outcome depends strongly on age at diagnosis and treatment.",
-    "pitfalls": [
-      "Treating with oral cyanocobalamin instead of parenteral hydroxocobalamin, which is far less effective",
-      "Diagnosing isolated methylmalonic acidaemia without measuring homocysteine and missing the combined defect",
-      "Overlooking the retinopathy, which can progress despite metabolic control",
-      "Mistaking the thrombotic microangiopathy for primary atypical HUS",
-      "Failing to recognise late-onset presentations with psychiatric or myelopathic features"
-    ],
-    "references": [
-      "Scriver's Online Metabolic and Molecular Bases of Inherited Disease (OMMBID)",
-      "Nelson Textbook of Paediatrics",
-      "Saudubray, Inborn Metabolic Diseases: Diagnosis and Treatment"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Definitive therapy is regular parenteral (intramuscular) hydroxocobalamin to drive residual cofactor synthesis; oral or cyanocobalamin preparations are inadequate",
-      "Adjunctive betaine to promote remethylation of homocysteine to methionine, with oral folinic acid and methionine supplementation where methionine is low",
-      "Consider L-carnitine to replenish carnitine stores and buffer propionyl-CoA accumulation",
-      "Supportive care for neurological and feeding difficulties: seizure control, nasogastric or gastrostomy feeding for failure to thrive, and developmental therapies",
-      "Biochemical monitoring of plasma total homocysteine, methylmalonic acid and methionine to titrate treatment",
-      "Regular ophthalmological surveillance for pigmentary maculopathy and retinopathy, with vigilance for thrombotic microangiopathy (a haemolytic-uraemic-like picture)",
-      "Genetic counselling for this autosomal recessive MMACHC disorder, with carrier testing and prenatal or newborn-screening options offered to the family",
-      "Escalate acute metabolic decompensation during intercurrent illness with intensified hydroxocobalamin, emergency metabolic measures and specialist metabolic-team input"
+    [
+     "Clinical Pitfall",
+     "Treating with oral cyanocobalamin instead of parenteral hydroxocobalamin, which is far less effective",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for cobalamin c deficiency (cblc)."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "cobalamin-c-deficiency-real-image",
+   "title": "Cobalamin C deficiency (cblC): Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }

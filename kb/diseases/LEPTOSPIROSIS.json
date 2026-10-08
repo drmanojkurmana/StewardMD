@@ -258,5 +258,100 @@
       "importedAt": "2026-06-29T13:56:25Z",
       "contentHash": "h489a7c75"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "leptospirosis-dx-algo",
+      "title": "Leptospirosis: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "Classically biphasic: an acute leptospiremic phase (fever lasting ~3-10 days, organism culturable/PCR-detectable in blood) followed by an immune phase in which symptoms may resolve as antibodies appear and leptospires can be recovered from",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Age >40 years",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: PCR (notably real-time PCR) of blood/CSF/urine - confirms diagnosis with high accuracy during the first 5 days of illness, before serology becomes positive (p.1443), Microscopic agglutination test (MAT) using live"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Harrison distinguishes mild leptospirosis (sudden-onset flu-like febrile illness with headache, myalgia, conjunctival suffusion; usually self-limiting over 7-10 days, low mortality) from severe leptospirosis, which is"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Absence of a travel or freshwater-exposure history does not exclude the diagnosis (p.1443)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for leptospirosis."
+    }
+  ],
+  "tables": [
+    {
+      "id": "leptospirosis-matrix",
+      "title": "Leptospirosis: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Classically biphasic: an acute leptospiremic phase (fever lasting ~3-10 days, organism culturable/PCR-detectable in blood)",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "PCR (notably real-time PCR) of blood/CSF/urine - confirms diagnosis with high accuracy during the first 5 days of illness, before",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Influenza and SARS-CoV-2 / other respiratory viral infections (when fever, headache, myalgia predominate), Chikungunya,",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Age >40 years",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Absence of a travel or freshwater-exposure history does not exclude the diagnosis (p.1443).",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for leptospirosis."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "leptospirosis-real-image",
+      "title": "Leptospirosis: Diagnostic Microbiological / Smear Examination",
+      "type": "diagram",
+      "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
+      "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
+      "annotations": [
+        {
+          "label": "Pathogen Detection",
+          "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
+        },
+        {
+          "label": "Inflammatory Response",
+          "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
+        },
+        {
+          "label": "Diagnostic Confirmation",
+          "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+        }
+      ]
+    }
+  ]
 }

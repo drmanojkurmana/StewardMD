@@ -138,5 +138,100 @@
       "importedAt": "2026-06-29T00:00:00Z",
       "contentHash": "ha25ee33a"
     }
-  }
+  },
+  "algorithms": [
+    {
+      "id": "gbs-dx-algo",
+      "title": "Guillain-Barré syndrome: Diagnostic & Clinical Decision Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & Triage",
+          "action": "About 70% of cases follow an acute infection (usually respiratory or GI) by 1-3 weeks; roughly 20-30% are preceded by Campylobacter jejuni, with a similar share after herpesvirus infection (often CMV or EBV) (p.3617).",
+          "critical": true
+        },
+        {
+          "step": "Red Flag & Instability Screen",
+          "branch": "Emergency Warning",
+          "action": "Screen for high-risk signs: Rapid tempo of progression and severe weakness on admission, plus facial and/or bulbar weakness in the first week, predict the need for mechanical ventilation (up to ~30% of patients require ventilatory support)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic & Biomarker Workup",
+          "action": "Targeted workup: CSF protein may be normal when symptoms have been present <=48 h and usually rises only by the end of the first week, so a normal early CSF does not exclude GBS (p.3619)., A sustained CSF pleocytosis (or counts above the"
+        },
+        {
+          "step": "Severity Staging & Differentiation",
+          "branch": "Classification",
+          "action": "Stratify severity: Brighton Collaboration case definitions (2011) grade diagnostic certainty in three levels. Level 1 (highest certainty) requires bilateral flaccid limb weakness, decreased/absent reflexes in weak limbs, a monophasic"
+        },
+        {
+          "step": "Targeted Management & Monitoring",
+          "action": "Pitfall avoidance: Corticosteroids have NOT been found effective in GBS and should not be relied on as treatment (p.3621)."
+        }
+      ],
+      "caption": "Clinical decision and evaluation pathway for guillain-barré syndrome."
+    }
+  ],
+  "tables": [
+    {
+      "id": "gbs-matrix",
+      "title": "Guillain-Barré syndrome: Clinical Features & Differential Matrix",
+      "headers": [
+        "Clinical Dimension",
+        "Finding / Recommendation",
+        "Significance"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "About 70% of cases follow an acute infection (usually respiratory or GI) by 1-3 weeks; roughly 20-30% are preceded by",
+          "Primary clinical presentation"
+        ],
+        [
+          "Key Investigations",
+          "CSF protein may be normal when symptoms have been present <=48 h and usually rises only by the end of the first week, so a normal",
+          "Confirmatory diagnostic testing"
+        ],
+        [
+          "Key Differentials",
+          "Acute myelopathies, especially with prolonged back pain and sphincter disturbance (p.3620), Diphtheria with early oropharyngeal",
+          "Primary clinical mimics to rule out"
+        ],
+        [
+          "Red Flag Alert",
+          "Rapid tempo of progression and severe weakness on admission, plus facial and/or bulbar weakness in the first week, predict the",
+          "Requires urgent stabilization"
+        ],
+        [
+          "Clinical Pitfall",
+          "Corticosteroids have NOT been found effective in GBS and should not be relied on as treatment (p.3621).",
+          "Avoid diagnostic or therapeutic delay"
+        ]
+      ],
+      "caption": "Diagnostic and clinical overview matrix for guillain-barré syndrome."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "gbs-real-image",
+      "title": "Guillain-Barré syndrome: Diagnostic Neuroimaging (Spinal / Cranial MRI)",
+      "type": "ct",
+      "src": "/assets/kb-real-images/gbs-nerve-mri.jpg?v=kbri3",
+      "caption": "Real clinical neuroimaging scan displaying spinal nerve root and cauda equina architecture, demonstrating post-contrast inflammatory changes in Guillain-Barré syndrome.",
+      "annotations": [
+        {
+          "label": "Nerve Root Architecture",
+          "description": "Conus medullaris and anterior motor nerve roots across lumbar thecal sac."
+        },
+        {
+          "label": "Blood-Nerve Barrier",
+          "description": "Contrast extravasation reflecting autoimmune radiculoneuropathy inflammation."
+        },
+        {
+          "label": "Cord Integrity",
+          "description": "Preserved intrinsic spinal cord signal excluding compressive myelopathy."
+        }
+      ]
+    }
+  ]
 }

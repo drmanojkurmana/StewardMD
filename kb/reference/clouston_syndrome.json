@@ -1,78 +1,173 @@
 {
-  "id": "clouston_syndrome",
-  "name": "Clouston syndrome",
-  "aliases": [
-    "hidrotic ectodermal dysplasia",
-    "hidrotic ectodermal dysplasia type 2",
-    "GJB6",
-    "connexin 30"
+ "id": "clouston_syndrome",
+ "name": "Clouston syndrome",
+ "aliases": [
+  "hidrotic ectodermal dysplasia",
+  "hidrotic ectodermal dysplasia type 2",
+  "GJB6",
+  "connexin 30"
+ ],
+ "class": "non_infective",
+ "system": "Dermatology / Genetics",
+ "specialty": "Dermatology / Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Rook's Textbook of Dermatology",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "An autosomal dominant hidrotic ectodermal dysplasia defined by the triad of nail dystrophy, palmoplantar keratoderma and hair defects",
+   "Caused by variants in GJB6, which encodes the gap-junction protein connexin 30",
+   "Crucially, sweating is normal (hidrotic), distinguishing it from the anhidrotic ectodermal dysplasias where heat intolerance is a major concern",
+   "Nail changes are prominent, with thickened, slow-growing, discoloured and dystrophic nails that are prone to infection",
+   "Hair is sparse, fine and brittle, with partial or total alopecia of the scalp, eyebrows and body hair",
+   "A diffuse palmoplantar keratoderma and hyperpigmentation over the knuckles and other bony prominences are common",
+   "Diagnosis is clinical, supported by family history and GJB6 molecular testing; management is supportive with nail, hair and keratoderma care"
   ],
-  "class": "non_infective",
-  "system": "Dermatology / Genetics",
-  "specialty": "Dermatology / Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Rook's Textbook of Dermatology",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "An autosomal dominant hidrotic ectodermal dysplasia defined by the triad of nail dystrophy, palmoplantar keratoderma and hair defects",
-      "Caused by variants in GJB6, which encodes the gap-junction protein connexin 30",
-      "Crucially, sweating is normal (hidrotic), distinguishing it from the anhidrotic ectodermal dysplasias where heat intolerance is a major concern",
-      "Nail changes are prominent, with thickened, slow-growing, discoloured and dystrophic nails that are prone to infection",
-      "Hair is sparse, fine and brittle, with partial or total alopecia of the scalp, eyebrows and body hair",
-      "A diffuse palmoplantar keratoderma and hyperpigmentation over the knuckles and other bony prominences are common",
-      "Diagnosis is clinical, supported by family history and GJB6 molecular testing; management is supportive with nail, hair and keratoderma care"
+  "pathophysiology": "Clouston syndrome is caused by dominant variants in GJB6, encoding connexin 30, a gap-junction protein that forms intercellular channels in the epidermis and its appendages. Defective connexin 30 impairs communication between keratinocytes and disturbs the development and maintenance of ectodermal structures derived from surface ectoderm, namely nails, hair and the palmoplantar epidermis. Because eccrine sweat glands are relatively spared, sweating remains normal, which clinically separates this hidrotic dysplasia from the anhidrotic forms caused by defects in the ectodysplasin pathway.",
+  "additionalDifferentials": [
+   "Anhidrotic (hypohidrotic) ectodermal dysplasia (EDA/EDAR pathway)",
+   "Pachyonychia congenita",
+   "Other hereditary palmoplantar keratodermas",
+   "Keratitis-ichthyosis-deafness (KID) syndrome (also connexin-related)",
+   "Nail-patella syndrome",
+   "Dyskeratosis congenita"
+  ],
+  "additionalInvestigations": [
+   "Molecular genetic testing of GJB6",
+   "Nail assessment and mycological sampling for secondary onychomycosis",
+   "Trichoscopy and hair examination",
+   "Assessment of palmoplantar keratoderma and function",
+   "Family history and pedigree analysis",
+   "Dental and audiological review to help distinguish from other ectodermal dysplasias"
+  ],
+  "redFlags": [
+   "Recurrent or severe nail-bed infection",
+   "Painful fissuring of palmoplantar keratoderma impairing function",
+   "Features atypical for a hidrotic dysplasia suggesting an alternative syndrome",
+   "Significant psychosocial impact from alopecia and nail changes"
+  ],
+  "prognosis": "The condition is compatible with a normal lifespan and, because sweating is preserved, lacks the heat-intolerance risks of anhidrotic dysplasias; the main burden is cosmetic and from nail and keratoderma complications.",
+  "pitfalls": [
+   "Confusing it with anhidrotic ectodermal dysplasia and warning unnecessarily about heat intolerance",
+   "Overlooking secondary onychomycosis superimposed on dystrophic nails",
+   "Attributing hair loss to a primary alopecia rather than the ectodermal dysplasia",
+   "Neglecting genetic counselling for this autosomal dominant condition"
+  ],
+  "references": [
+   "Rook's Textbook of Dermatology",
+   "Harper's Textbook of Paediatric Dermatology"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Topical management of the palmoplantar keratoderma with emollients and keratolytics such as urea or salicylic acid, with topical or oral retinoids for severe hyperkeratosis.",
+   "Nail care with regular chiropody and treatment of secondary fungal infection with antifungal agents.",
+   "Cosmetic support for alopecia, including wigs or hairpieces, alongside gentle scalp care.",
+   "Periodic dermatological review of skin, hair and nails to detect and treat complications.",
+   "Genetic counselling for this autosomal dominant connexin-30 (GJB6) disorder, with assessment of at-risk relatives.",
+   "Reassurance that sweating is preserved, so the heat-intolerance precautions of anhidrotic ectodermal dysplasia are unnecessary, with psychological support for the cosmetic burden."
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "clouston_syndrome-pathway",
+   "title": "Clouston syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "An autosomal dominant hidrotic ectodermal dysplasia defined by the triad of nail dystrophy, palmoplantar keratoderma and hair defects",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Recurrent or severe nail-bed infection",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Molecular genetic testing of GJB6, Nail assessment and mycological sampling for secondary onychomycosis, Trichoscopy and hair examination"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Topical management of the palmoplantar keratoderma with emollients and keratolytics such as urea or salicylic acid, with topical or oral retinoids for severe hyperkeratosis."
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Confusing it with anhidrotic ectodermal dysplasia and warning unnecessarily about heat intolerance"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of clouston syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "clouston_syndrome-matrix",
+   "title": "Clouston syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "An autosomal dominant hidrotic ectodermal dysplasia defined by the triad of nail dystrophy, palmoplantar keratoderma and hair",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Clouston syndrome is caused by dominant variants in GJB6, encoding connexin 30, a gap-junction protein that forms intercellular channels in the epidermis and its appendages. Defective connexin 30 impairs communication between keratinocytes and disturbs the development and maintenance of ectodermal structures derived from surface ectoderm, namely nails, hair and the palmoplantar epidermis. Because eccrine sweat glands are relatively spared, sweating remains normal, which clinically separates this hidrotic dysplasia from the anhidrotic forms caused by defects in the ectodysplasin pathway.",
-    "additionalDifferentials": [
-      "Anhidrotic (hypohidrotic) ectodermal dysplasia (EDA/EDAR pathway)",
-      "Pachyonychia congenita",
-      "Other hereditary palmoplantar keratodermas",
-      "Keratitis-ichthyosis-deafness (KID) syndrome (also connexin-related)",
-      "Nail-patella syndrome",
-      "Dyskeratosis congenita"
+    [
+     "Key Investigations",
+     "Molecular genetic testing of GJB6, Nail assessment and mycological sampling for secondary onychomycosis, Trichoscopy and hair",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Molecular genetic testing of GJB6",
-      "Nail assessment and mycological sampling for secondary onychomycosis",
-      "Trichoscopy and hair examination",
-      "Assessment of palmoplantar keratoderma and function",
-      "Family history and pedigree analysis",
-      "Dental and audiological review to help distinguish from other ectodermal dysplasias"
+    [
+     "Primary Differentials",
+     "Anhidrotic (hypohidrotic) ectodermal dysplasia (EDA/EDAR pathway), Pachyonychia congenita, Other hereditary palmoplantar",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Recurrent or severe nail-bed infection",
-      "Painful fissuring of palmoplantar keratoderma impairing function",
-      "Features atypical for a hidrotic dysplasia suggesting an alternative syndrome",
-      "Significant psychosocial impact from alopecia and nail changes"
+    [
+     "Management Strategy",
+     "Topical management of the palmoplantar keratoderma with emollients and keratolytics such as urea or salicylic acid, with topical",
+     "Core treatment modality"
     ],
-    "prognosis": "The condition is compatible with a normal lifespan and, because sweating is preserved, lacks the heat-intolerance risks of anhidrotic dysplasias; the main burden is cosmetic and from nail and keratoderma complications.",
-    "pitfalls": [
-      "Confusing it with anhidrotic ectodermal dysplasia and warning unnecessarily about heat intolerance",
-      "Overlooking secondary onychomycosis superimposed on dystrophic nails",
-      "Attributing hair loss to a primary alopecia rather than the ectodermal dysplasia",
-      "Neglecting genetic counselling for this autosomal dominant condition"
-    ],
-    "references": [
-      "Rook's Textbook of Dermatology",
-      "Harper's Textbook of Paediatric Dermatology"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Topical management of the palmoplantar keratoderma with emollients and keratolytics such as urea or salicylic acid, with topical or oral retinoids for severe hyperkeratosis.",
-      "Nail care with regular chiropody and treatment of secondary fungal infection with antifungal agents.",
-      "Cosmetic support for alopecia, including wigs or hairpieces, alongside gentle scalp care.",
-      "Periodic dermatological review of skin, hair and nails to detect and treat complications.",
-      "Genetic counselling for this autosomal dominant connexin-30 (GJB6) disorder, with assessment of at-risk relatives.",
-      "Reassurance that sweating is preserved, so the heat-intolerance precautions of anhidrotic ectodermal dysplasia are unnecessary, with psychological support for the cosmetic burden."
+    [
+     "Clinical Pitfall",
+     "Confusing it with anhidrotic ectodermal dysplasia and warning unnecessarily about heat intolerance",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for clouston syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "clouston-syndrome-real-image",
+   "title": "Clouston syndrome: Clinical Cutaneous Dermatology Photograph",
+   "type": "diagram",
+   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
+   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
+   "annotations": [
+    {
+     "label": "Primary Lesions",
+     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
+    },
+    {
+     "label": "Demarcation & Margins",
+     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
+    },
+    {
+     "label": "Anatomical Distribution",
+     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+    }
+   ]
+  }
+ ]
 }

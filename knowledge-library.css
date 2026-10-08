@@ -272,3 +272,11 @@ html[data-appearance] #sbrefOverlay #sbrefBody .kblib-searchbox { --kl-sticky: v
 #sbrefOverlay:has(.kblib-discover) .sbref-top, #sbrefOverlay:has(.kblib-tool-page) .sbref-top { padding-inline: max(18px, calc((100% - 800px) / 2)); }
 #sbrefOverlay #sbrefBody:has(.kblib-discover), #sbrefOverlay #sbrefBody.kblib-tool-page { max-width: 840px; min-width: 0; }
 .kbp-searching .kbp-status-note { display: none; }
+
+/* Visual Decision Support sections in Knowledge Library Reader (.dx-reader) */
+#dxOverlay #dxMgmt.dx-reader .dx-reader-sec { margin: 18px 0; padding-top: 14px; border-top: 1px solid var(--rd-line); }
+#dxOverlay #dxMgmt.dx-reader .dx-reader-sec h3 { margin: 0 0 10px; font: 600 20px/1.25 var(--rd-serif); letter-spacing: -.01em; color: var(--rd-ink); }
+#dxOverlay #dxMgmt.dx-reader .dx-reader-sec .kbp-flow-node { box-shadow: 0 1px 3px rgba(0,0,0,0.03); }
+#dxOverlay #dxMgmt.dx-reader .dx-reader-sec figure { margin: 0 0 14px; }
+#dxOverlay #dxMgmt.dx-reader .dx-reader-sec table { width: 100%; border-collapse: collapse; }
+#dxOverlay #dxMgmt.dx-reader .dx-reader-sec img, #dxOverlay #dxMgmt.dx-reader .dx-reader-sec svg { max-width: 100%; }

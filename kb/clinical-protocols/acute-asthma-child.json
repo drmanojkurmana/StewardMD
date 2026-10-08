@@ -160,5 +160,100 @@
  "review": {
   "status": "ai_drafted",
   "compiled": "2026-09-25"
- }
+ },
+ "algorithms": [
+  {
+   "id": "acute-asthma-child-pathway",
+   "title": "Acute asthma in children Clinical Decision & Management Pathway",
+   "steps": [
+    {
+     "step": "Triage & Clinical Presentation",
+     "action": "Moderate: talks in sentences, SpO2 92% or more, heart rate 140/min or less (1 to 5 years) or 125/min or less (over 5 years), respiratory rate 40/min or less (1 to 5 years) or 30/min or less (over 5 years).",
+     "critical": true
+    },
+    {
+     "step": "Immediate Stabilization",
+     "branch": "Emergency Stabilization",
+     "action": "Oxygen only if SpO2 is below 92%. GINA 2026 target on oxygen: 92 to 95% (6 to 11 years) and 92% or more (5 years and under). BTS/SIGN uses 94 to 98% in severe attacks; this protocol follows GINA.",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Risk Stratification",
+     "action": "Life-threatening: SpO2 below 92% plus any of exhaustion, hypotension, cyanosis, silent chest, poor respiratory effort, confusion, or PEF below 33%."
+    },
+    {
+     "step": "Definitive Medical Management",
+     "branch": "Targeted Therapy",
+     "action": "IV magnesium sulphate 40 to 50 mg/kg (max 2 g) as a single infusion over 20 minutes for children aged 2 years or more with severe asthma or SpO2 below 92% after first-line treatment (GINA 2026; BTS/SIGN 40 mg/kg). 50% solution is 500"
+    },
+    {
+     "step": "Monitoring & Escalation Thresholds",
+     "action": "Reassess work of breathing, SpO2, heart rate and respiratory rate after each treatment and at 1 hour; measure PEF or FEV1 in children over 5 years who can perform it."
+    }
+   ],
+   "caption": "Evidence-based clinical decision pathway for acute asthma in children."
+  }
+ ],
+ "tables": [
+  {
+   "id": "acute-asthma-child-summary-matrix",
+   "title": "Acute asthma in children Clinical Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Moderate: talks in sentences, SpO2 92% or more, heart rate 140/min or less (1 to 5 years) or 125/min or less (over 5 years), respiratory",
+     "Mandatory clinical criteria"
+    ],
+    [
+     "Immediate Priority",
+     "Oxygen only if SpO2 is below 92%. GINA 2026 target on oxygen: 92 to 95% (6 to 11 years) and 92% or more (5 years and under). BTS/SIGN uses",
+     "Time-critical initial resuscitation"
+    ],
+    [
+     "Key Investigations",
+     "Standard laboratory and imaging workup",
+     "Differentiates etiology and severity"
+    ],
+    [
+     "Pharmacotherapy",
+     "Salbutamol pMDI 100 mcg/puff with spacer: 4 to 6 puffs (up to 10 in severe attacks) every 20 to 30 minutes, up to 3 times in the first",
+     "First-line disease modifying agent"
+    ],
+    [
+     "Critical Pitfall",
+     "Giving steroids late or in low doses; they take about 4 hours to work.",
+     "Avoid preventable clinical error"
+    ]
+   ],
+   "caption": "Core clinical management matrix for acute asthma in children."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "acute-asthma-child-real-image",
+   "title": "Acute asthma in children: Diagnostic Chest Radiograph",
+   "type": "xray",
+   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
+   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
+   "annotations": [
+    {
+     "label": "Parenchyma & Airspaces",
+     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
+    },
+    {
+     "label": "Bronchovascular Tree",
+     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
+    },
+    {
+     "label": "Pleural Margins",
+     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+    }
+   ]
+  }
+ ]
 }

@@ -1,80 +1,175 @@
 {
-  "id": "tardive_dyskinesia",
-  "name": "Tardive dyskinesia",
-  "aliases": [
-    "tardive dyskinesia",
-    "neuroleptic-induced tardive dyskinesia",
-    "TD",
-    "orofacial dyskinesia (drug-induced)"
+ "id": "tardive_dyskinesia",
+ "name": "Tardive dyskinesia",
+ "aliases": [
+  "tardive dyskinesia",
+  "neuroleptic-induced tardive dyskinesia",
+  "TD",
+  "orofacial dyskinesia (drug-induced)"
+ ],
+ "class": "non_infective",
+ "system": "Nervous system / Neurology",
+ "specialty": "Neurology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Bradley and Daroff Neurology in Clinical Practice",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "A delayed, drug-induced movement disorder that emerges after prolonged exposure to dopamine-receptor blocking agents",
+   "The classic picture is orofacial (bucco-linguo-masticatory) choreoathetosis with chewing, lip-smacking, tongue protrusion and grimacing",
+   "Antipsychotics are the commonest culprits, but antiemetics such as metoclopramide and prochlorperazine are also important causes",
+   "Onset is typically after months to years of exposure, and movements may first appear or worsen when the offending drug is reduced or withdrawn",
+   "Older age, female sex, longer exposure and use of first-generation agents increase the risk",
+   "Movements may persist, or be irreversible, even after the causative drug is stopped",
+   "It should be distinguished from acute dystonia, akathisia and drug-induced parkinsonism, which have different time courses"
   ],
-  "class": "non_infective",
-  "system": "Nervous system / Neurology",
-  "specialty": "Neurology",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Bradley and Daroff Neurology in Clinical Practice",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "A delayed, drug-induced movement disorder that emerges after prolonged exposure to dopamine-receptor blocking agents",
-      "The classic picture is orofacial (bucco-linguo-masticatory) choreoathetosis with chewing, lip-smacking, tongue protrusion and grimacing",
-      "Antipsychotics are the commonest culprits, but antiemetics such as metoclopramide and prochlorperazine are also important causes",
-      "Onset is typically after months to years of exposure, and movements may first appear or worsen when the offending drug is reduced or withdrawn",
-      "Older age, female sex, longer exposure and use of first-generation agents increase the risk",
-      "Movements may persist, or be irreversible, even after the causative drug is stopped",
-      "It should be distinguished from acute dystonia, akathisia and drug-induced parkinsonism, which have different time courses"
+  "pathophysiology": "Tardive dyskinesia is thought to develop from chronic blockade of dopamine D2 receptors, leading to postsynaptic dopamine-receptor supersensitivity and up-regulation, altered signalling within striatal output pathways, and possible oxidative injury to vulnerable neurones. This maladaptive plasticity disturbs basal ganglia control of movement and produces the characteristic involuntary, often orofacial, hyperkinesias. Because the underlying changes can become fixed, the movements may persist long after the offending drug has been withdrawn.",
+  "additionalDifferentials": [
+   "Huntington's disease and other genetic choreas",
+   "Spontaneous orofacial dyskinesia of the elderly and edentulous (denture-related) dyskinesia",
+   "Wilson's disease",
+   "Levodopa-induced dyskinesia in Parkinson's disease",
+   "Focal or segmental dystonia of other cause",
+   "Functional (psychogenic) movement disorder"
+  ],
+  "additionalInvestigations": [
+   "Careful drug history documenting cumulative exposure to dopamine-blocking agents",
+   "Structured rating of abnormal involuntary movements to monitor severity over time",
+   "Bloods to exclude metabolic and other secondary causes of chorea",
+   "Copper studies where Wilson's disease is plausible in a younger patient",
+   "Genetic testing for Huntington's disease when history or examination suggest it",
+   "Neuroimaging where the presentation is atypical or focal signs are present"
+  ],
+  "redFlags": [
+   "Severe orofacial, pharyngeal or truncal movements interfering with speech, swallowing or breathing",
+   "Rapid progression or prominent cognitive or psychiatric change suggesting Huntington's disease",
+   "Young patient with chorea and hepatic or psychiatric features suggesting Wilson's disease",
+   "Coexisting fever, rigidity and autonomic instability suggesting a neuroleptic emergency"
+  ],
+  "prognosis": "The course is variable; some patients improve or remit after the offending agent is reduced or stopped, but a substantial proportion have persistent or irreversible movements. Early recognition and review of the causative drug improve outcome, and VMAT2-inhibiting therapy can meaningfully reduce symptoms. Prevention through judicious prescribing and regular monitoring remains the most effective strategy.",
+  "pitfalls": [
+   "Abruptly stopping the causative drug, which can transiently worsen the dyskinesia",
+   "Increasing the antipsychotic dose to mask movements, which perpetuates the underlying problem",
+   "Misdiagnosing spontaneous orofacial dyskinesia or Huntington's disease as tardive dyskinesia",
+   "Failing to review the ongoing need for, and dose of, dopamine-blocking medication"
+  ],
+  "references": [
+   "Bradley and Daroff's Neurology in Clinical Practice, current edition",
+   "Fahn and Jankovic, Principles and Practice of Movement Disorders"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Treat with a VMAT2 inhibitor such as valbenazine or deutetrabenazine as the evidence-based mainstay of symptomatic therapy",
+   "Review the need for the causative agent and, where possible, reduce the dose or switch to a lower-risk agent such as clozapine, avoiding abrupt withdrawal that can transiently worsen movements",
+   "Discontinue causative antiemetics such as metoclopramide and prochlorperazine where they can be stopped",
+   "Withdraw anticholinergic drugs, which tend to worsen orofacial dyskinesia",
+   "Consider botulinum toxin injection for focal or troublesome regional movements",
+   "Monitor severity with structured rating of abnormal involuntary movements over time",
+   "Prevent progression by prescribing dopamine-blocking agents at the lowest effective dose with regular review",
+   "Refer to neurology for specialist movement-disorder management"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "tardive_dyskinesia-pathway",
+   "title": "Tardive dyskinesia: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "A delayed, drug-induced movement disorder that emerges after prolonged exposure to dopamine-receptor blocking agents",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Severe orofacial, pharyngeal or truncal movements interfering with speech, swallowing or breathing",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Careful drug history documenting cumulative exposure to dopamine-blocking agents, Structured rating of abnormal involuntary movements to monitor severity over time, Bloods to exclude metabolic and other secondary causes of"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Treat with a VMAT2 inhibitor such as valbenazine or deutetrabenazine as the evidence-based mainstay of symptomatic therapy"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Abruptly stopping the causative drug, which can transiently worsen the dyskinesia"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of tardive dyskinesia."
+  }
+ ],
+ "tables": [
+  {
+   "id": "tardive_dyskinesia-matrix",
+   "title": "Tardive dyskinesia: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "A delayed, drug-induced movement disorder that emerges after prolonged exposure to dopamine-receptor blocking agents",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Tardive dyskinesia is thought to develop from chronic blockade of dopamine D2 receptors, leading to postsynaptic dopamine-receptor supersensitivity and up-regulation, altered signalling within striatal output pathways, and possible oxidative injury to vulnerable neurones. This maladaptive plasticity disturbs basal ganglia control of movement and produces the characteristic involuntary, often orofacial, hyperkinesias. Because the underlying changes can become fixed, the movements may persist long after the offending drug has been withdrawn.",
-    "additionalDifferentials": [
-      "Huntington's disease and other genetic choreas",
-      "Spontaneous orofacial dyskinesia of the elderly and edentulous (denture-related) dyskinesia",
-      "Wilson's disease",
-      "Levodopa-induced dyskinesia in Parkinson's disease",
-      "Focal or segmental dystonia of other cause",
-      "Functional (psychogenic) movement disorder"
+    [
+     "Key Investigations",
+     "Careful drug history documenting cumulative exposure to dopamine-blocking agents, Structured rating of abnormal involuntary",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Careful drug history documenting cumulative exposure to dopamine-blocking agents",
-      "Structured rating of abnormal involuntary movements to monitor severity over time",
-      "Bloods to exclude metabolic and other secondary causes of chorea",
-      "Copper studies where Wilson's disease is plausible in a younger patient",
-      "Genetic testing for Huntington's disease when history or examination suggest it",
-      "Neuroimaging where the presentation is atypical or focal signs are present"
+    [
+     "Primary Differentials",
+     "Huntington's disease and other genetic choreas, Spontaneous orofacial dyskinesia of the elderly and edentulous (denture-related)",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Severe orofacial, pharyngeal or truncal movements interfering with speech, swallowing or breathing",
-      "Rapid progression or prominent cognitive or psychiatric change suggesting Huntington's disease",
-      "Young patient with chorea and hepatic or psychiatric features suggesting Wilson's disease",
-      "Coexisting fever, rigidity and autonomic instability suggesting a neuroleptic emergency"
+    [
+     "Management Strategy",
+     "Treat with a VMAT2 inhibitor such as valbenazine or deutetrabenazine as the evidence-based mainstay of symptomatic therapy",
+     "Core treatment modality"
     ],
-    "prognosis": "The course is variable; some patients improve or remit after the offending agent is reduced or stopped, but a substantial proportion have persistent or irreversible movements. Early recognition and review of the causative drug improve outcome, and VMAT2-inhibiting therapy can meaningfully reduce symptoms. Prevention through judicious prescribing and regular monitoring remains the most effective strategy.",
-    "pitfalls": [
-      "Abruptly stopping the causative drug, which can transiently worsen the dyskinesia",
-      "Increasing the antipsychotic dose to mask movements, which perpetuates the underlying problem",
-      "Misdiagnosing spontaneous orofacial dyskinesia or Huntington's disease as tardive dyskinesia",
-      "Failing to review the ongoing need for, and dose of, dopamine-blocking medication"
-    ],
-    "references": [
-      "Bradley and Daroff's Neurology in Clinical Practice, current edition",
-      "Fahn and Jankovic, Principles and Practice of Movement Disorders"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Treat with a VMAT2 inhibitor such as valbenazine or deutetrabenazine as the evidence-based mainstay of symptomatic therapy",
-      "Review the need for the causative agent and, where possible, reduce the dose or switch to a lower-risk agent such as clozapine, avoiding abrupt withdrawal that can transiently worsen movements",
-      "Discontinue causative antiemetics such as metoclopramide and prochlorperazine where they can be stopped",
-      "Withdraw anticholinergic drugs, which tend to worsen orofacial dyskinesia",
-      "Consider botulinum toxin injection for focal or troublesome regional movements",
-      "Monitor severity with structured rating of abnormal involuntary movements over time",
-      "Prevent progression by prescribing dopamine-blocking agents at the lowest effective dose with regular review",
-      "Refer to neurology for specialist movement-disorder management"
+    [
+     "Clinical Pitfall",
+     "Abruptly stopping the causative drug, which can transiently worsen the dyskinesia",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for tardive dyskinesia."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "tardive-dyskinesia-real-image",
+   "title": "Tardive dyskinesia: Diagnostic Head Computed Tomography",
+   "type": "ct",
+   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
+   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
+   "annotations": [
+    {
+     "label": "Cerebral Parenchyma",
+     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
+    },
+    {
+     "label": "Ventricular System",
+     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
+    },
+    {
+     "label": "Extra-Axial Spaces",
+     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+    }
+   ]
+  }
+ ]
 }

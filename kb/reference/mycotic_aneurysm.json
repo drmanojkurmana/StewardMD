@@ -1,80 +1,175 @@
 {
-  "id": "mycotic_aneurysm",
-  "name": "Mycotic (infective) aneurysm",
-  "aliases": [
-    "infective aneurysm",
-    "infected aneurysm",
-    "microbial arteritis with aneurysm",
-    "Salmonella aortitis",
-    "Staphylococcus aureus aortitis"
+ "id": "mycotic_aneurysm",
+ "name": "Mycotic (infective) aneurysm",
+ "aliases": [
+  "infective aneurysm",
+  "infected aneurysm",
+  "microbial arteritis with aneurysm",
+  "Salmonella aortitis",
+  "Staphylococcus aureus aortitis"
+ ],
+ "class": "infective",
+ "system": "Rheumatology / Vascular",
+ "specialty": "Rheumatology / Vascular Medicine",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases / vascular surgery guidance",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "Refers to an infected arterial aneurysm, not a fungal one; most cases are bacterial",
+   "Salmonella species and Staphylococcus aureus are the most common causative organisms",
+   "Presents with fever, localised pain, and a tender, often rapidly enlarging pulsatile mass",
+   "Imaging may show a saccular, lobulated, or rapidly growing aneurysm with periaortic gas, fluid, or soft tissue",
+   "Positive blood cultures with a new or expanding aneurysm strongly support the diagnosis",
+   "Rupture risk is high and the process can progress quickly, so it is a surgical emergency",
+   "Treatment combines urgent surgical or endovascular repair with prolonged targeted antimicrobial therapy"
   ],
-  "class": "infective",
-  "system": "Rheumatology / Vascular",
-  "specialty": "Rheumatology / Vascular Medicine",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases / vascular surgery guidance",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "Refers to an infected arterial aneurysm, not a fungal one; most cases are bacterial",
-      "Salmonella species and Staphylococcus aureus are the most common causative organisms",
-      "Presents with fever, localised pain, and a tender, often rapidly enlarging pulsatile mass",
-      "Imaging may show a saccular, lobulated, or rapidly growing aneurysm with periaortic gas, fluid, or soft tissue",
-      "Positive blood cultures with a new or expanding aneurysm strongly support the diagnosis",
-      "Rupture risk is high and the process can progress quickly, so it is a surgical emergency",
-      "Treatment combines urgent surgical or endovascular repair with prolonged targeted antimicrobial therapy"
+  "pathophysiology": "A mycotic (infective) aneurysm forms when microorganisms infect and destroy the arterial wall. Bacteria reach the vessel through haematogenous seeding of the vasa vasorum, septic embolism (as in endocarditis), contiguous spread from adjacent infection, or direct inoculation. Organisms such as Salmonella, with its affinity for atherosclerotic and diseased intima, and Staphylococcus aureus incite suppurative inflammation that weakens and digests the wall, producing a rapidly expanding, often saccular aneurysm. The infected, structurally compromised wall is prone to early rupture and life-threatening haemorrhage.",
+  "additionalDifferentials": [
+   "Degenerative (atherosclerotic) aneurysm",
+   "Inflammatory aortic aneurysm",
+   "Non-infectious aortitis",
+   "Contained aneurysm rupture",
+   "Perivascular abscess or retroperitoneal infection",
+   "Penetrating aortic ulcer"
+  ],
+  "additionalInvestigations": [
+   "Multiple blood cultures before starting antimicrobials",
+   "CT angiography for aneurysm morphology and periaortic gas or fluid",
+   "PET or labelled white-cell imaging in diagnostically uncertain cases",
+   "Echocardiography to assess for infective endocarditis as a source",
+   "Inflammatory markers and full blood count",
+   "Intraoperative tissue and pus samples for microbiological culture"
+  ],
+  "redFlags": [
+   "Sudden severe pain or haemodynamic collapse indicating rupture",
+   "Rapidly enlarging aneurysm on serial imaging",
+   "Sepsis with a pulsatile, tender mass",
+   "Periaortic gas suggesting aggressive infection"
+  ],
+  "prognosis": "Mycotic aneurysm carries high mortality, particularly if rupture occurs, but prompt combined surgical or endovascular repair and prolonged targeted antimicrobial therapy substantially improve survival. Relapse of infection and graft complications require long-term follow-up.",
+  "pitfalls": [
+   "Attributing a rapidly enlarging aneurysm to degeneration and missing infection",
+   "Starting antimicrobials before obtaining blood cultures",
+   "Delaying surgical referral in a febrile patient with a tender pulsatile mass",
+   "Underestimating the duration of antimicrobial therapy needed after repair"
+  ],
+  "references": [
+   "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
+   "Society for Vascular Surgery guidance on infected aortic aneurysms"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Treat as a surgical emergency with urgent open surgical or endovascular repair, involving debridement of infected tissue, aneurysm resection, and revascularisation",
+   "Take multiple blood cultures before starting antimicrobials and give prolonged targeted intravenous therapy guided by results, using anti-staphylococcal agents for Staphylococcus aureus and a fluoroquinolone or ceftriaxone for Salmonella",
+   "Start empirical broad-spectrum intravenous antibiotics after cultures while awaiting microbiology, then narrow to targeted therapy",
+   "Identify and manage the source, including treating infective endocarditis where septic embolism is the origin",
+   "Resuscitate and provide haemodynamic support for rupture and haemorrhage, which is the dominant life-threatening risk",
+   "Maintain long-term follow-up with serial imaging and inflammatory markers for relapse and graft complications, using prolonged or suppressive antibiotics in selected patients",
+   "Manage through a multidisciplinary team of vascular surgery and infectious diseases"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "mycotic_aneurysm-pathway",
+   "title": "Mycotic (infective) aneurysm: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "Refers to an infected arterial aneurysm, not a fungal one; most cases are bacterial",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Sudden severe pain or haemodynamic collapse indicating rupture",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Multiple blood cultures before starting antimicrobials, CT angiography for aneurysm morphology and periaortic gas or fluid, PET or labelled white-cell imaging in diagnostically uncertain cases"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Treat as a surgical emergency with urgent open surgical or endovascular repair, involving debridement of infected tissue, aneurysm resection, and revascularisation"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Attributing a rapidly enlarging aneurysm to degeneration and missing infection"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of mycotic (infective) aneurysm."
+  }
+ ],
+ "tables": [
+  {
+   "id": "mycotic_aneurysm-matrix",
+   "title": "Mycotic (infective) aneurysm: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "Refers to an infected arterial aneurysm, not a fungal one; most cases are bacterial",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "A mycotic (infective) aneurysm forms when microorganisms infect and destroy the arterial wall. Bacteria reach the vessel through haematogenous seeding of the vasa vasorum, septic embolism (as in endocarditis), contiguous spread from adjacent infection, or direct inoculation. Organisms such as Salmonella, with its affinity for atherosclerotic and diseased intima, and Staphylococcus aureus incite suppurative inflammation that weakens and digests the wall, producing a rapidly expanding, often saccular aneurysm. The infected, structurally compromised wall is prone to early rupture and life-threatening haemorrhage.",
-    "additionalDifferentials": [
-      "Degenerative (atherosclerotic) aneurysm",
-      "Inflammatory aortic aneurysm",
-      "Non-infectious aortitis",
-      "Contained aneurysm rupture",
-      "Perivascular abscess or retroperitoneal infection",
-      "Penetrating aortic ulcer"
+    [
+     "Key Investigations",
+     "Multiple blood cultures before starting antimicrobials, CT angiography for aneurysm morphology and periaortic gas or fluid, PET",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Multiple blood cultures before starting antimicrobials",
-      "CT angiography for aneurysm morphology and periaortic gas or fluid",
-      "PET or labelled white-cell imaging in diagnostically uncertain cases",
-      "Echocardiography to assess for infective endocarditis as a source",
-      "Inflammatory markers and full blood count",
-      "Intraoperative tissue and pus samples for microbiological culture"
+    [
+     "Primary Differentials",
+     "Degenerative (atherosclerotic) aneurysm, Inflammatory aortic aneurysm, Non-infectious aortitis",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Sudden severe pain or haemodynamic collapse indicating rupture",
-      "Rapidly enlarging aneurysm on serial imaging",
-      "Sepsis with a pulsatile, tender mass",
-      "Periaortic gas suggesting aggressive infection"
+    [
+     "Management Strategy",
+     "Treat as a surgical emergency with urgent open surgical or endovascular repair, involving debridement of infected tissue,",
+     "Core treatment modality"
     ],
-    "prognosis": "Mycotic aneurysm carries high mortality, particularly if rupture occurs, but prompt combined surgical or endovascular repair and prolonged targeted antimicrobial therapy substantially improve survival. Relapse of infection and graft complications require long-term follow-up.",
-    "pitfalls": [
-      "Attributing a rapidly enlarging aneurysm to degeneration and missing infection",
-      "Starting antimicrobials before obtaining blood cultures",
-      "Delaying surgical referral in a febrile patient with a tender pulsatile mass",
-      "Underestimating the duration of antimicrobial therapy needed after repair"
-    ],
-    "references": [
-      "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
-      "Society for Vascular Surgery guidance on infected aortic aneurysms"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Treat as a surgical emergency with urgent open surgical or endovascular repair, involving debridement of infected tissue, aneurysm resection, and revascularisation",
-      "Take multiple blood cultures before starting antimicrobials and give prolonged targeted intravenous therapy guided by results, using anti-staphylococcal agents for Staphylococcus aureus and a fluoroquinolone or ceftriaxone for Salmonella",
-      "Start empirical broad-spectrum intravenous antibiotics after cultures while awaiting microbiology, then narrow to targeted therapy",
-      "Identify and manage the source, including treating infective endocarditis where septic embolism is the origin",
-      "Resuscitate and provide haemodynamic support for rupture and haemorrhage, which is the dominant life-threatening risk",
-      "Maintain long-term follow-up with serial imaging and inflammatory markers for relapse and graft complications, using prolonged or suppressive antibiotics in selected patients",
-      "Manage through a multidisciplinary team of vascular surgery and infectious diseases"
+    [
+     "Clinical Pitfall",
+     "Attributing a rapidly enlarging aneurysm to degeneration and missing infection",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for mycotic (infective) aneurysm."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "mycotic-aneurysm-real-image",
+   "title": "Mycotic (infective) aneurysm: Diagnostic Microbiological / Smear Examination",
+   "type": "diagram",
+   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
+   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
+   "annotations": [
+    {
+     "label": "Pathogen Detection",
+     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
+    },
+    {
+     "label": "Inflammatory Response",
+     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
+    },
+    {
+     "label": "Diagnostic Confirmation",
+     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+    }
+   ]
+  }
+ ]
 }

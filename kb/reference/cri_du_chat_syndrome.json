@@ -1,81 +1,176 @@
 {
-  "id": "cri_du_chat_syndrome",
-  "name": "Cri-du-chat syndrome",
-  "aliases": [
-    "cat cry syndrome",
-    "5p deletion syndrome",
-    "5p minus syndrome",
-    "Lejeune syndrome",
-    "monosomy 5p"
+ "id": "cri_du_chat_syndrome",
+ "name": "Cri-du-chat syndrome",
+ "aliases": [
+  "cat cry syndrome",
+  "5p deletion syndrome",
+  "5p minus syndrome",
+  "Lejeune syndrome",
+  "monosomy 5p"
+ ],
+ "class": "non_infective",
+ "system": "Genetics / Dysmorphology",
+ "specialty": "Clinical Genetics",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
+  "sourceEdition": "current",
+  "pages": null,
+  "clinicalPearls": [
+   "The high-pitched, monotone, cat-like cry in infancy gives the syndrome its name and reflects abnormal laryngeal and neurological development; it often diminishes with age",
+   "Caused by a partial deletion of the short arm of chromosome 5, with phenotype severity broadly correlating with deletion size and specific critical regions",
+   "Facial features include microcephaly, a rounded face, hypertelorism, epicanthic folds, down-slanting palpebral fissures and low-set ears, with the face lengthening over time",
+   "Prenatal-onset growth restriction, marked feeding difficulty and hypotonia are common in infancy",
+   "Most deletions are de novo, but a minority arise from an unbalanced parental translocation, so parental karyotyping is essential for recurrence-risk counselling",
+   "Severe intellectual disability with markedly limited expressive language is typical, though receptive skills are relatively better",
+   "Behavioural features can include hyperactivity, self-injury and stereotypies"
   ],
-  "class": "non_infective",
-  "system": "Genetics / Dysmorphology",
-  "specialty": "Clinical Genetics",
-  "referenceOnly": true,
-  "reference": {
-    "source": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
-    "sourceEdition": "current",
-    "pages": null,
-    "clinicalPearls": [
-      "The high-pitched, monotone, cat-like cry in infancy gives the syndrome its name and reflects abnormal laryngeal and neurological development; it often diminishes with age",
-      "Caused by a partial deletion of the short arm of chromosome 5, with phenotype severity broadly correlating with deletion size and specific critical regions",
-      "Facial features include microcephaly, a rounded face, hypertelorism, epicanthic folds, down-slanting palpebral fissures and low-set ears, with the face lengthening over time",
-      "Prenatal-onset growth restriction, marked feeding difficulty and hypotonia are common in infancy",
-      "Most deletions are de novo, but a minority arise from an unbalanced parental translocation, so parental karyotyping is essential for recurrence-risk counselling",
-      "Severe intellectual disability with markedly limited expressive language is typical, though receptive skills are relatively better",
-      "Behavioural features can include hyperactivity, self-injury and stereotypies"
+  "pathophysiology": "Cri-du-chat syndrome arises from a terminal or interstitial deletion of the short arm of chromosome 5 (5p), producing haploinsufficiency for genes in this region. Loss of specific critical intervals correlates with the characteristic cry and with the degree of intellectual disability, and candidate genes such as those influencing telomerase regulation and neuronal cytoskeletal proteins have been implicated. The reduced dosage of these developmentally important genes disrupts laryngeal, craniofacial and central nervous system formation. Deletions are commonly de novo and paternal in origin, but can result from malsegregation of a balanced parental rearrangement.",
+  "additionalDifferentials": [
+   "Wolf-Hirschhorn syndrome",
+   "Other subtelomeric deletion syndromes",
+   "Trisomy 21",
+   "Cornelia de Lange syndrome",
+   "Prader-Willi syndrome in the hypotonic neonate",
+   "Non-specific syndromic intellectual disability"
+  ],
+  "additionalInvestigations": [
+   "Chromosomal microarray to define the deletion and its size",
+   "Karyotype to detect an underlying translocation, with parental karyotypes for recurrence risk",
+   "FISH targeting the 5p critical region where confirmation is needed",
+   "Echocardiography for congenital heart disease",
+   "Feeding and swallowing assessment in infancy",
+   "Hearing and vision testing to support developmental progress"
+  ],
+  "redFlags": [
+   "Failure to thrive from severe feeding difficulty and recurrent aspiration",
+   "Unrecognised congenital heart disease causing cardiorespiratory compromise",
+   "Stridor or airway obstruction related to laryngeal abnormality",
+   "Self-injurious behaviour requiring safeguarding and specialist input"
+  ],
+  "prognosis": "Most individuals have severe intellectual disability but can achieve some self-care and communication skills with early intervention; survival into adulthood is usual. Outcome depends largely on associated malformations, especially cardiac and respiratory, and on deletion size.",
+  "pitfalls": [
+   "Assuming a normal standard karyotype excludes the diagnosis when small deletions require microarray or FISH",
+   "Omitting parental karyotyping and mis-stating recurrence risk when a translocation is present",
+   "Attributing feeding failure to behaviour rather than oromotor dysfunction",
+   "Underestimating relatively preserved receptive language and social ability"
+  ],
+  "references": [
+   "Smith's Recognizable Patterns of Human Malformation",
+   "Nelson Textbook of Pediatrics",
+   "GeneReviews / OMIM: Cri-du-chat syndrome"
+  ],
+  "crossLinks": [],
+  "management": [
+   "Institute early developmental intervention with physiotherapy, occupational therapy and speech and language therapy, including augmentative and alternative communication for limited expressive language",
+   "Manage infantile feeding difficulty and hypotonia with dietitian-led feeding support, reflux measures and supplemental tube feeding where growth is inadequate",
+   "Screen for and manage congenital heart disease with echocardiography and cardiology follow-up",
+   "Arrange regular hearing and vision assessment to optimise developmental progress",
+   "Provide orthopaedic surveillance for scoliosis and other musculoskeletal problems as the child grows",
+   "Undertake parental karyotyping to detect an underlying balanced translocation and give recurrence-risk genetic counselling",
+   "Coordinate long-term care through a multidisciplinary team with behavioural and educational support"
+  ]
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [
+  {
+   "id": "cri_du_chat_syndrome-pathway",
+   "title": "Cri-du-chat syndrome: Clinical Decision & Diagnostic Pathway",
+   "steps": [
+    {
+     "step": "Clinical Presentation & High Suspicion",
+     "action": "The high-pitched, monotone, cat-like cry in infancy gives the syndrome its name and reflects abnormal laryngeal and neurological development; it often diminishes with age",
+     "critical": true
+    },
+    {
+     "step": "Triage & Emergency Warning Signs",
+     "branch": "Critical Findings",
+     "action": "Emergency red flag evaluation: Failure to thrive from severe feeding difficulty and recurrent aspiration",
+     "critical": true
+    },
+    {
+     "step": "Diagnostic Workup & Biomarkers",
+     "action": "Targeted workup: Chromosomal microarray to define the deletion and its size, Karyotype to detect an underlying translocation, with parental karyotypes for recurrence risk, FISH targeting the 5p critical region where confirmation is needed"
+    },
+    {
+     "step": "Targeted Clinical Management",
+     "branch": "Treatment Pathway",
+     "action": "Targeted management: Institute early developmental intervention with physiotherapy, occupational therapy and speech and language therapy, including augmentative and alternative communication for limited expressive language"
+    },
+    {
+     "step": "Monitoring & Critical Pitfalls",
+     "action": "Clinical pitfall alert: Assuming a normal standard karyotype excludes the diagnosis when small deletions require microarray or FISH"
+    }
+   ],
+   "caption": "Clinical pathway for the evaluation and management of cri-du-chat syndrome."
+  }
+ ],
+ "tables": [
+  {
+   "id": "cri_du_chat_syndrome-matrix",
+   "title": "Cri-du-chat syndrome: Clinical Features & Management Matrix",
+   "headers": [
+    "Clinical Domain",
+    "Protocol Recommendation",
+    "Operational Goal"
+   ],
+   "rows": [
+    [
+     "Diagnostic Hallmark",
+     "The high-pitched, monotone, cat-like cry in infancy gives the syndrome its name and reflects abnormal laryngeal and neurological",
+     "Cardinal clinical findings"
     ],
-    "pathophysiology": "Cri-du-chat syndrome arises from a terminal or interstitial deletion of the short arm of chromosome 5 (5p), producing haploinsufficiency for genes in this region. Loss of specific critical intervals correlates with the characteristic cry and with the degree of intellectual disability, and candidate genes such as those influencing telomerase regulation and neuronal cytoskeletal proteins have been implicated. The reduced dosage of these developmentally important genes disrupts laryngeal, craniofacial and central nervous system formation. Deletions are commonly de novo and paternal in origin, but can result from malsegregation of a balanced parental rearrangement.",
-    "additionalDifferentials": [
-      "Wolf-Hirschhorn syndrome",
-      "Other subtelomeric deletion syndromes",
-      "Trisomy 21",
-      "Cornelia de Lange syndrome",
-      "Prader-Willi syndrome in the hypotonic neonate",
-      "Non-specific syndromic intellectual disability"
+    [
+     "Key Investigations",
+     "Chromosomal microarray to define the deletion and its size, Karyotype to detect an underlying translocation, with parental",
+     "Confirmatory diagnostic workup"
     ],
-    "additionalInvestigations": [
-      "Chromosomal microarray to define the deletion and its size",
-      "Karyotype to detect an underlying translocation, with parental karyotypes for recurrence risk",
-      "FISH targeting the 5p critical region where confirmation is needed",
-      "Echocardiography for congenital heart disease",
-      "Feeding and swallowing assessment in infancy",
-      "Hearing and vision testing to support developmental progress"
+    [
+     "Primary Differentials",
+     "Wolf-Hirschhorn syndrome, Other subtelomeric deletion syndromes, Trisomy 21",
+     "Rule out key mimics"
     ],
-    "redFlags": [
-      "Failure to thrive from severe feeding difficulty and recurrent aspiration",
-      "Unrecognised congenital heart disease causing cardiorespiratory compromise",
-      "Stridor or airway obstruction related to laryngeal abnormality",
-      "Self-injurious behaviour requiring safeguarding and specialist input"
+    [
+     "Management Strategy",
+     "Institute early developmental intervention with physiotherapy, occupational therapy and speech and language therapy, including",
+     "Core treatment modality"
     ],
-    "prognosis": "Most individuals have severe intellectual disability but can achieve some self-care and communication skills with early intervention; survival into adulthood is usual. Outcome depends largely on associated malformations, especially cardiac and respiratory, and on deletion size.",
-    "pitfalls": [
-      "Assuming a normal standard karyotype excludes the diagnosis when small deletions require microarray or FISH",
-      "Omitting parental karyotyping and mis-stating recurrence risk when a translocation is present",
-      "Attributing feeding failure to behaviour rather than oromotor dysfunction",
-      "Underestimating relatively preserved receptive language and social ability"
-    ],
-    "references": [
-      "Smith's Recognizable Patterns of Human Malformation",
-      "Nelson Textbook of Pediatrics",
-      "GeneReviews / OMIM: Cri-du-chat syndrome"
-    ],
-    "crossLinks": [],
-    "management": [
-      "Institute early developmental intervention with physiotherapy, occupational therapy and speech and language therapy, including augmentative and alternative communication for limited expressive language",
-      "Manage infantile feeding difficulty and hypotonia with dietitian-led feeding support, reflux measures and supplemental tube feeding where growth is inadequate",
-      "Screen for and manage congenital heart disease with echocardiography and cardiology follow-up",
-      "Arrange regular hearing and vision assessment to optimise developmental progress",
-      "Provide orthopaedic surveillance for scoliosis and other musculoskeletal problems as the child grows",
-      "Undertake parental karyotyping to detect an underlying balanced translocation and give recurrence-risk genetic counselling",
-      "Coordinate long-term care through a multidisciplinary team with behavioural and educational support"
+    [
+     "Clinical Pitfall",
+     "Assuming a normal standard karyotype excludes the diagnosis when small deletions require microarray or FISH",
+     "Prevent diagnostic or management error"
     ]
-  },
-  "review": {
-    "status": "ai_drafted",
-    "reviewedBy": null,
-    "reviewedAt": null,
-    "clinicianApproved": false
-  },
-  "version": 1
+   ],
+   "caption": "Overview comparison matrix for cri-du-chat syndrome."
+  }
+ ],
+ "diagrams": [
+  {
+   "id": "cri-du-chat-syndrome-real-image",
+   "title": "Cri-du-chat syndrome: Diagnostic Imaging Evaluation",
+   "type": "xray",
+   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
+   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
+   "annotations": [
+    {
+     "label": "Cardiothoracic Ratio",
+     "description": "Heart size, mediastinal width, and great vessel contours."
+    },
+    {
+     "label": "Visceral Fields",
+     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+    },
+    {
+     "label": "Bony Thorax & Soft Tissues",
+     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+    }
+   ]
+  }
+ ]
 }
