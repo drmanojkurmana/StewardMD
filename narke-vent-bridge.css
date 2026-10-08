@@ -292,7 +292,7 @@
 .nrk-root .vb-got:empty, .nrk-root #vbGot:empty { display: none; }
 .nrk-root .vb-gotb, .nrk-root .vb-next { width: 100%; min-height: 48px; }
 .nrk-root .vb-gotb .smd-ico { width: 18px; height: 18px; }
-.nrk-root .vb-gotd { margin: 0; display: flex; align-items: center; gap: 8px; font-size: 14.5px; font-weight: 650; color: var(--nk-ok); }
+.nrk-root .vb-gotd { margin: 0; min-height: 48px; display: flex; align-items: center; gap: 8px; font-size: 14.5px; font-weight: 650; color: var(--nk-ok); }
 .nrk-root .vb-gotd .smd-ico { width: 18px; height: 18px; }
 /* quiz end: review list, right answer, teach-back */
 .nrk-root .vb-qbtns { display: flex; flex-wrap: wrap; gap: 8px; width: 100%; }
@@ -486,7 +486,7 @@ body:not(.dark):not(.v3-dark) .nrk-root .vb-info.vb-sheet { box-shadow: 0 -12px 
 .nrk-root .vb-needi { flex: 0 0 18px; height: 18px; margin-top: 2px; color: var(--vl-acc); }
 .nrk-root .vb-need > li.ok .vb-needi { color: var(--nk-ok); }
 .nrk-root .vb-needi .smd-ico { width: 18px; height: 18px; }
-.nrk-root .vb-needb { width: 100%; min-height: 44px; display: flex; gap: 8px; align-items: center; padding: 8px 10px; border-radius: 12px; border: 1px solid var(--vl-cline);
+.nrk-root .vb-needb { flex: 1 1 auto; width: 100%; min-height: 44px; display: flex; gap: 8px; align-items: center; padding: 8px 10px; border-radius: 12px; border: 1px solid var(--vl-cline);
   background: var(--vl-card); color: var(--sp-text); font: inherit; font-size: 14.5px; line-height: 1.4; text-align: left; cursor: pointer; touch-action: manipulation; }
 .nrk-root .vb-needb > span:nth-child(2) { flex: 1 1 auto; min-width: 0; }
 .nrk-root .vb-needb .vb-needi { margin-top: 0; }

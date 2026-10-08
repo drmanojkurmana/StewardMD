@@ -7,6 +7,9 @@
  * before, scores an optional step left out in a neutral colour, flags silence-and-walk-away; daily care checks;
  * handover to the next doctor; the never-alone card; back returns to the lab home on its row; Hindi (drill count
  * grammar), both themes, reduced motion, no horizontal scroll at 390 px, 44 px targets, no dashes, no uncaught errors.
+ * Round 6: progress().ready / missing and the badge rule on the check and drill pages, reading pages done on scroll to
+ * the end, the screen-map explanation docked in view, Next on the alarm map, drill Next wraps to the next unsafe drill,
+ * "1 needed step missed", the pocket card's per-patient VT rule, indigo primary buttons in both themes.
  * Content: narke/vent/bridge.json (read here, so no clinical text is hard-coded in the test).
  * USAGE: PORT=<free port> CHROME_PORT=<free port> node test/run-narke-vent-bridge-ui.mjs   (SHOTS=<dir> saves screenshots)
  */
@@ -55,8 +58,8 @@ const tap = async (sel) => {
   // Round 5 flake fix: a tap on a panel tile starts a smooth scroll that brings its explanation into view. Tapping again
   // while that scroll still runs moved the target under the pointer ("page switch returns to the main screen" missed).
   // Wait until the scroller holds still before and after placing the target.
-  await settle(); await ev(`var b=document.querySelector('#smdNarke ${sel.replace(/'/g, "\\'")}'); if(!b) return 0; var sc=b.closest('.sp-scroll'); if (sc) { var r0=b.getBoundingClientRect(), s0=sc.getBoundingClientRect(); if (r0.top < s0.top + 70 || r0.bottom > s0.bottom - 8) sc.scrollTo({ top: sc.scrollTop + r0.top - s0.top - s0.height/3, behavior: "instant" }); } return 1;`); await settle();
-  const pos = await ev(`var b=document.querySelector('#smdNarke ${sel.replace(/'/g, "\\'")}'); if(!b) return "missing"; var sc=b.closest('.sp-scroll'); if (sc) { var r0=b.getBoundingClientRect(), s0=sc.getBoundingClientRect(); if (r0.top < s0.top + 70 || r0.bottom > s0.bottom - 8) sc.scrollTop += r0.top - s0.top - s0.height/3; } var r=b.getBoundingClientRect(), x=r.left+r.width/2, y=r.top+r.height/2, h=document.elementFromPoint(x,y); return (h && (h===b || b.contains(h))) ? [x,y] : "covered by " + (h ? (h.className||h.tagName) : "nothing") + " at " + Math.round(x) + "," + Math.round(y);`);
+  await settle(); await ev(`var b=document.querySelector('#smdNarke ${sel.replace(/'/g, "\\'")}'); if(!b) return 0; var sc=b.closest('.sp-scroll'); if (sc) { var r0=b.getBoundingClientRect(), s0=sc.getBoundingClientRect(); var LIM=s0.bottom, sh=document.querySelector('#smdNarke .vb-info.vb-sheet'); if (sh && !sh.contains(b)) { var hr=sh.getBoundingClientRect(); if (hr.top > s0.top && hr.top < LIM) LIM=hr.top; } if (r0.top < s0.top + 70 || r0.bottom > LIM - 8) sc.scrollTo({ top: sc.scrollTop + r0.top - s0.top - s0.height/3, behavior: "instant" }); } return 1;`); await settle();
+  const pos = await ev(`var b=document.querySelector('#smdNarke ${sel.replace(/'/g, "\\'")}'); if(!b) return "missing"; var sc=b.closest('.sp-scroll'); if (sc) { var r0=b.getBoundingClientRect(), s0=sc.getBoundingClientRect(); var LIM=s0.bottom, sh=document.querySelector('#smdNarke .vb-info.vb-sheet'); if (sh && !sh.contains(b)) { var hr=sh.getBoundingClientRect(); if (hr.top > s0.top && hr.top < LIM) LIM=hr.top; } if (r0.top < s0.top + 70 || r0.bottom > LIM - 8) sc.scrollTop += r0.top - s0.top - s0.height/3; } var r=b.getBoundingClientRect(), x=r.left+r.width/2, y=r.top+r.height/2, h=document.elementFromPoint(x,y); return (h && (h===b || b.contains(h))) ? [x,y] : "covered by " + (h ? (h.className||h.tagName) : "nothing") + " at " + Math.round(x) + "," + Math.round(y);`);
   if (!Array.isArray(pos)) return pos;
   for (const type of ["mousePressed", "mouseReleased"]) await call("Input.dispatchMouseEvent", { type, x: pos[0], y: pos[1], button: "left", clickCount: 1 });
   await sleep(60); return 1;
@@ -87,9 +90,9 @@ try {
   await ev(`NARKE._ventLab.open(); return 1;`);
   ok(await until(`return document.querySelectorAll('#smdNarke .vl-home [data-act=vbopen]').length === 13;`, 15000), "the lab home lists the twelve path rows and the glossary");
   ok(await until(`return !!document.querySelector('#smdNarke .vl-home .vb-review');`, 8000) && await ev(`${R} return R.querySelectorAll('.vb-review').length===1 && /clinical review/.test(R.querySelector('.vb-review').textContent) && /0 of 12 done/.test(R.querySelector('#vbHomeProg').textContent);`) === true, "R5: the draft note shows once, on the bridge block, with a 0 of 12 progress line");
-  { const p = await ev(`var p=NARKE_VENT_BRIDGE.progress(); return JSON.stringify({k:Object.keys(p).sort(), ik:Object.keys(p.items[0]).sort(), ids:p.items.map(function(x){return x.id;}), f:typeof p.items[0].open, d:p.doneCount, t:p.total, fn:p.firstNightPassed, l:p.items[0].label});`);
+  { const p = await ev(`var p=NARKE_VENT_BRIDGE.progress(); return JSON.stringify({k:Object.keys(p).sort(), ik:Object.keys(p.items[0]).sort(), ids:p.items.map(function(x){return x.id;}), f:typeof p.items[0].open, d:p.doneCount, t:p.total, fn:p.firstNightPassed, l:p.items[0].label, r:p.ready, m:p.missing});`);
     const o = JSON.parse(p);
-    ok(JSON.stringify(o.k) === '["doneCount","firstNightPassed","items","total"]' && JSON.stringify(o.ik) === '["done","id","label","open"]' && o.f === "function" && o.d === 0 && o.t === 12 && o.fn === false && o.ids.join() === "never,bed,screen,modes,alarms,drills,read,skills,care,hand,card,check" && o.l.en && o.l.hi, "R5 B1: progress() has the documented shape in the browser: " + p); }
+    ok(JSON.stringify(o.k) === '["doneCount","firstNightPassed","items","missing","ready","total"]' && o.r === false && o.m.join() === "screen,modes,alarms,drills,read,skills,check" && JSON.stringify(o.ik) === '["done","id","label","open"]' && o.f === "function" && o.d === 0 && o.t === 12 && o.fn === false && o.ids.join() === "never,bed,screen,modes,alarms,drills,read,skills,care,hand,card,check" && o.l.en && o.l.hi, "R5 B1: progress() has the documented shape in the browser: " + p); }
   const rowsTop = await ev(`${R} var h=R.querySelector('#vbHomeH'), p=[].filter.call(R.querySelectorAll('.vl-home .sp-h2'), function(x){return x.id!=='vbHomeH';}); var pt=p.filter(function(x){return /Patients/.test(x.textContent);})[0]; return !!h && !!pt && h.getBoundingClientRect().top < pt.getBoundingClientRect().top;`);
   ok(rowsTop === true, "at Level 1 the bridge sits above the patients");
   ok(await noOverflow() === true, "home: no horizontal scroll at 390 px");
@@ -106,6 +109,12 @@ try {
   await ev(`[].forEach.call(document.querySelectorAll('#smdNarke .vb-chk[aria-pressed=false]'), function(b){ b.click(); }); return 1;`);
   ok(await until(`var d=document.getElementById('vbBedDone'); return !d.hidden && d.classList.contains('on') && /All checked/.test(document.getElementById('vbProgT').textContent);`), "all ticked: the done card says what to write down");
   ok(await noOverflow() === true, "bed: no horizontal scroll"); { const sm = await small(); ok(sm === true, "bed: 44 px targets" + (sm === true ? "" : ": " + sm)); }
+  { const bg = await ev(`var b=document.querySelector('#smdNarke #vbGot .sp-btn.pri'); return b ? getComputedStyle(b).backgroundColor + "|" + getComputedStyle(b).color : "none";`);
+    ok(/^rgb\(165, 180, 252\)/.test(bg), "R6 B6: a bridge primary button is the lab indigo in the dark theme, not brown: " + bg);
+    await theme(false);
+    const bl = await ev(`var b=document.querySelector('#smdNarke #vbGot .sp-btn.pri'); return b ? getComputedStyle(b).backgroundColor + "|" + getComputedStyle(b).color : "none";`);
+    ok(/^rgb\(67, 56, 202\)/.test(bl), "R6 B6: and the deep indigo in the light theme: " + bl);
+    await theme(true); }
   await ev(`NARKE.back(); return 1;`);
   ok(await until(`return !!document.querySelector('#smdNarke .vl-home') && document.activeElement && document.activeElement.getAttribute('data-k')==='bed';`), "back returns to the lab home, focus on the row");
   ok(await ev(`return /Done/.test(document.querySelector('#smdNarke [data-act=vbopen][data-k=bed]').textContent) && NARKE_VENT_BRIDGE.progress().items[1].done === true && /1 of 12 done/.test(document.getElementById('vbHomeProg').textContent);`) === true, "R5 B1: the bed row is done, progress() and the home line agree");
@@ -137,13 +146,22 @@ try {
     ok(r === 1 && await until(`var i=document.getElementById('vbInfo'); return /SET/.test(i.querySelector('.vb-kind').textContent) && /policy/.test(i.textContent);`), "FiO2 is marked SET and carries the local-policy caveat" + (r === 1 ? "" : ": " + r)); }
   ok(await until(`return /^2 of/.test(document.getElementById('vbOpened').textContent) && document.querySelectorAll('#smdNarke .vb-t.seen').length===2;`, 3000), "learned numbers are counted and marked [" + await ev(`return document.getElementById('vbOpened').textContent + ' seen=' + [].map.call(document.querySelectorAll('#smdNarke .vb-t.seen'), function(b){return b.getAttribute('data-k');}).join(',');`) + "]");
   ok(await ev(`return document.getElementById('vbInfo').getAttribute('aria-live')==='polite';`) === true, "the explanation is announced");
+  // R6 B3: a tap on the alarm bar at the top: the explanation is in view at once, docked at the bottom, not far below
+  await ev(`var sc=document.querySelector('#smdNarke .sp-scroll'), el=document.querySelector('#smdNarke .vb-panel'); sc.scrollTop += el.getBoundingClientRect().top - sc.getBoundingClientRect().top - 8; return 1;`); await settle();
+  { const r = await tap(`[data-act=vbtile][data-k=abar]`);
+    const v = await ev(`var i=document.getElementById('vbInfo'), sc=document.querySelector('#smdNarke .sp-scroll'), a=i.getBoundingClientRect(), b=sc.getBoundingClientRect(); return JSON.stringify({sheet:i.classList.contains('vb-sheet'), top:Math.round(a.top), bot:Math.round(a.bottom), sb:Math.round(b.bottom), st:Math.round(b.top), pos:getComputedStyle(i).position, h:Math.round(a.height), x:!!i.querySelector('[data-act=vbinfox]')});`);
+    const o = JSON.parse(v);
+    ok(r === 1 && o.sheet && o.pos === "sticky" && o.x && o.bot <= o.sb + 1 && o.top >= o.st && o.top < o.sb - 80 && o.h <= 844 * 0.46, "R6 B3: the alarm bar's explanation shows in view at once (docked sheet): " + v);
+    await shot("02-390-dark-screen-map-sheet");
+    const c = await tap(`[data-act=vbinfox]`);
+    ok(c === 1 && await until(`var i=document.getElementById('vbInfo'); return !i.classList.contains('vb-sheet') && !!i.querySelector('.vb-hint') && document.activeElement && document.activeElement.getAttribute('data-k')==='abar';`), "R6 B3: Close puts the hint back and focus on the tile" + (c === 1 ? "" : ": " + c)); }
   // B5: the silence key, then the alarm limits key opens the limits page
   await sleep(500);
   { const r = await tap(`[data-act=vbtile][data-k=silence]`);
     ok(r === 1 && await until(`var i=document.getElementById('vbInfo'); return /KEY/.test(i.querySelector('.vb-kind').textContent) && /2 minutes/.test(i.textContent) && /walk away/.test(i.textContent);`), "B5: the silence key: about 2 minutes, never silence and walk away" + (r === 1 ? "" : ": " + r)); }
   { const sm = await small(); ok(sm === true, "screen map: every target is at least 44 px" + (sm === true ? "" : ": " + sm)); }
   await ev(`var sc=document.querySelector('#smdNarke .sp-scroll'), el=document.querySelector('#smdNarke .vb-legend'); sc.scrollTop += el.getBoundingClientRect().top - sc.getBoundingClientRect().top - 8; return 1;`);
-  await shot("02-390-dark-screen-map-set-tag");
+
   await sleep(500);
   { const r = await tap(`[data-act=vbtile][data-k=limits]`); ok(r === 1, "the alarm limits key takes a real tap" + (r === 1 ? "" : ": " + r)); }
   ok(await until(`${R} return !!R.querySelector('.vb-panel.vb-P-limits') && R.querySelectorAll('.vb-lim .vb-t.vb-lim').length === ${J.screen.tiles.filter((t) => t.kind === "limit").length} && R.querySelector('[data-act=vbpage][data-v=limits]').getAttribute('aria-pressed')==='true';`), "B5: the limits key opens the alarm limits page with every limit");
@@ -247,6 +265,14 @@ try {
   for (const id of ["look", "trap"]) await tap(`.vb-step[data-k=${id}]`);
   await tap(`[data-act=vbcheck]`);
   ok(await until(`${R} var t=R.querySelector('.vb-r.trap'); return !!t && /walk away/.test(t.textContent) && !!R.querySelector('.vb-r.missed');`), "B6: silence and walk away is flagged; documenting is missed");
+  ok(await ev(`var n=document.querySelector('#smdNarke [data-act=vbdnext]'); return !!n && n.getAttribute('data-k')==='disc' && n.textContent.indexOf(${JSON.stringify(J.drills.items.find((d) => d.id === "disc").title.en)})>=0;`) === true, "R6 B4: Next drill after the last one wraps to the first drill not yet safe, and names it");
+  ok(await noOverflow() === true, "R6 B4: the named Next drill button fits at 390"); { const sm = await small(); ok(sm === true, "R6 B4: drill footer 44 px" + (sm === true ? "" : ": " + sm)); }
+  await tap(`[data-act=vbdagain]`);
+  { const sil = J.drills.items.find((d) => d.id === "silence"), req = sil.steps.filter((x) => x.rank != null && !x.opt && x.id !== "doc").sort((a, b) => (a.flex ? 99 : a.rank) - (b.flex ? 99 : b.rank));
+    for (const x of req) await tap(`.vb-step[data-k=${x.id}]`);
+    await tap(`[data-act=vbcheck]`);
+    ok(await until(`var v=document.querySelector('#smdNarke .vb-dv'); return !!v && /1 needed step missed\./.test(v.textContent) && !/1 needed steps/.test(v.textContent);`), "R6 B4: leaving out only the note: '1 needed step missed.' and the note step is needed");
+    ok(await ev(`var r=document.querySelector('#smdNarke .vb-r.missed'); return !!r && /Needed every time/.test(r.textContent);`) === true, "R6 B4: the note step says it is needed every time"); }
   await ev(`NARKE.back(); return 1;`); await until(`return !!document.querySelector('#smdNarke [data-act=vbdrill]');`);
 
   // Never alone
@@ -281,7 +307,7 @@ try {
   // B1: never alone gets a Got it; it returns to the lab on the next row that is not done
   await tap(`[data-act=vbopen][data-k=never]`);
   ok(await until(`return !!document.querySelector('#smdNarke [data-act=vbgot][data-k=never]');`), "R5 B1: the never-alone card ends with Got it");
-  { const r = await tap(`[data-act=vbgot][data-k=never]`);
+  { const r = await click(`[data-act=vbgot][data-k=never]`); // no scroll first: reading to the end marks the page done by itself (R6 B1)
     ok(r === 1 && await until(`return !!document.querySelector('#smdNarke .vl-home') && document.activeElement && document.activeElement.getAttribute('data-k')==='modes';`), "R5 B1: Got it marks it done and lands on the next row not done (mode names)" + (r === 1 ? "" : ": " + r)); }
   ok(/"never"/.test(await prog()) && /"screen"/.test(await prog()), "R5 B1: never and the screen map (both quizzes finished) are done: " + await prog());
 
@@ -294,7 +320,7 @@ try {
     if (r !== 1) { ok(false, "mode quiz " + i + ": " + r); break; }
     await tap(`#vbQuizM [data-act=vbqnext]`);
   }
-  ok(await until(`return /${J.modes.quiz.length} of ${J.modes.quiz.length}/.test(document.querySelector('#vbQuizM .vb-qscore').textContent) && !!document.querySelector('#vbQuizM .vb-next');`), "R5 B5: the mode quiz scores and offers the next step");
+  ok(await until(`return /${J.modes.quiz.length} of ${J.modes.quiz.length}/.test(document.querySelector('#vbQuizM .vb-qscore').textContent) && !!document.querySelector('#smdNarke #vbGot .vb-next.pri');`), "R5 B5: the mode quiz scores and the page end offers the next step");
   ok(/"modes"/.test(await prog()), "R5 B1: finishing the mode quiz marks the page done");
   ok(await noOverflow() === true, "modes: no horizontal scroll"); { const sm = await small(); ok(sm === true, "modes: 44 px targets" + (sm === true ? "" : ": " + sm)); }
   await ev(`NARKE.back(); return 1;`); await until(`return !!document.querySelector('#smdNarke .vl-home');`);
@@ -308,7 +334,8 @@ try {
   ok(await noOverflow() === true, "alarms: no horizontal scroll"); { const sm = await small(); ok(sm === true, "alarms: 44 px targets" + (sm === true ? "" : ": " + sm)); }
   await theme(false); await ev(`var sc=document.querySelector('#smdNarke .sp-scroll'), el=document.querySelector('#smdNarke .vb-prio'); sc.scrollTop += el.getBoundingClientRect().top - sc.getBoundingClientRect().top - 8; return 1;`);
   await shot("03-390-light-alarm-map"); await theme(true);
-  await tap(`[data-act=vbgot][data-k=alarms]`);
+  ok(await ev(`var n=document.querySelector('#smdNarke #vbGot .vb-next'); return !!n && n.getAttribute('data-k')==='drills' && /Next: 3 am drill/.test(n.textContent) && !!document.querySelector('#smdNarke #vbGot [data-act=vbgot]');`) === true, "R6 B4: the alarm map ends with Got it and an onward Next: 3 am drill");
+  await click(`[data-act=vbgot][data-k=alarms]`);
   ok(await until(`return !!document.querySelector('#smdNarke .vl-home');`) && /"alarms"/.test(await prog()), "R5 B4: Got it marks the alarm map done");
 
   // B8: the 60 s timed drill; time running out checks the order by itself
@@ -320,12 +347,13 @@ try {
   ok(await until(`return /60 s left|59 s left/.test((document.getElementById('vbTimer')||{}).textContent||"");`), "R5 B8: the timed drill shows the time left");
   await tap(`.vb-step[data-k=look]`);
   await ev(`window.__now=Date.now; var d=Date.now()+61000; Date.now=function(){ return window.__now()+61000; }; return 1;`);
-  ok(await until(`var v=document.querySelector('#smdNarke .vb-dv'); return !!v && /Time is up/.test(v.textContent) && /Your 1 steps|Your 1 step/.test(v.textContent) && /missed/.test(v.textContent);`, 5000), "R5 B8: at 0 the order is checked, and the count reads in the learner's terms");
+  ok(await until(`var v=document.querySelector('#smdNarke .vb-dv'); return !!v && /Time is up/.test(v.textContent) && /Your 1 step:/.test(v.textContent) && !/1 steps/.test(v.textContent) && /needed steps missed/.test(v.textContent);`, 5000), "R5 B8 + R6 B4: at 0 the order is checked; Your 1 step (singular), 3 needed steps missed");
   await ev(`Date.now=window.__now; return 1;`);
   ok(await ev(`return !document.getElementById('vbTimer');`) === true, "the timer is gone once checked");
   await ev(`NARKE.back(); return 1;`); await until(`return !!document.querySelector('#smdNarke [data-act=vbtimed]');`);
   await tap(`[data-act=vbtimed][data-v="0"]`);
   ok(await until(`return !!document.querySelector('#smdNarke .vb-drows [data-act=vbopen][data-k=read]');`), "R5 B6: the drill list leads on to Read this screen");
+  ok(await ev(`var r=document.getElementById('vbDrRule'); return !!r && /all 5 are in a safe order\. 2 of 5 so far/.test(r.textContent);`) === true, "R6 B1: the drill page states its rule: all 5 in a safe order, 2 of 5 so far");
 
   // B6: read this screen: a panel with a live alarm, no hints
   await tap(`.vb-drows [data-act=vbopen][data-k=read]`);
@@ -366,13 +394,14 @@ try {
   ok(await ev(`return document.querySelectorAll('#smdNarke .vb-ntpl > div').length === ${J.handover.note.fields.length} && !document.querySelector('#smdNarke .vb-note input, #smdNarke .vb-note textarea');`) === true, "R5 B8: the alarm note template has its fields and no place to type patient data");
   await tap(`[data-act=vbcopy]`);
   ok(await until(`return document.getElementById('vbCopied').textContent.length > 0;`), "R5 B8: copy says what happened");
-  await tap(`[data-act=vbgot][data-k=hand]`); await until(`return !!document.querySelector('#smdNarke .vl-home');`);
+  if (await click(`[data-act=vbgot][data-k=hand]`) !== 1) { ok(/"hand"/.test(await prog()), "R6 B1: the handover page was already done by reading to its end"); await ev(`NARKE.back(); return 1;`); } await until(`return !!document.querySelector('#smdNarke .vl-home');`);
 
   // B3: the pocket card
   await tap(`[data-act=vbopen][data-k=card]`);
   ok(await until(`return !!document.querySelector('#smdNarke #vbPcard') && document.querySelectorAll('#smdNarke .vb-who input').length === 4;`), "R5 B3: the pocket card with four who-to-call fields");
   ok(await ev(`${R} return [].every.call(R.querySelectorAll('.vb-who input'), function(i){ return parseFloat(getComputedStyle(i).fontSize) >= 16 && !!R.querySelector('label[for='+i.id+']'); }) && /this phone only/.test(R.querySelector('.vb-priv').textContent);`) === true, "R5 B3: labelled 16 px inputs (no zoom) and the on-this-phone-only note");
   ok(await ev(`${R} return R.querySelectorAll('#vbPcard .vb-pco').length === 4 && /walk away/.test(R.querySelector('#vbPcard').textContent) && R.querySelectorAll('#vbPcard .vb-pclim tbody tr').length === ${J.screen.limitRows.length};`) === true, "R5 B3: the card has the 4 alarm orders, silence and the limits");
+  ok(await ev(`${R} var row=[].filter.call(R.querySelectorAll('#vbPcard .vb-pclim tbody tr'), function(r){ return /VTe/.test(r.querySelector('th').textContent); })[0]; return !!row && !!row.querySelector('td[colspan="2"]') && /6 to 8 mL.kg/.test(row.textContent) && /PBW/.test(row.textContent) && !/350|600/.test(row.textContent) && /Ask your senior for this patient.s limits/.test(R.querySelector('#vbPcard .vb-pcnote').textContent);`) === true, "R6 B5: the card's VTe row is the per-patient rule (6 to 8 mL/kg x PBW), and the senior sets this patient's limits");
   await ev(`document.getElementById('vbC_n1').focus(); return 1;`); await call("Input.insertText", { text: "Dr Test" });
   await ev(`document.getElementById('vbC_p1').focus(); return 1;`); await call("Input.insertText", { text: "98765 43210" });
   ok(await until(`try { var o=JSON.parse(localStorage.getItem('smd_narke_vcard')); return o.n1==='Dr Test' && o.p1==='98765 43210' && /Dr Test/.test(document.getElementById('vbPcWho').textContent); } catch(e) { return false; }`), "R5 B3: name and number saved on this device and shown on the card");
@@ -401,11 +430,26 @@ try {
     await tap(`#vbCheck [data-act=vbqnext]`);
   }
   const nC = J.check.items.length;
-  ok(await until(`${R} return !!R.querySelector('#vbCheck .vb-pass') && /${nC - 1} of ${nC}/.test(R.querySelector('#vbCheck .vb-qscore').textContent) && /under supervision/.test(R.querySelector('#vbCheck .vb-pass').textContent) && R.querySelectorAll('#vbCheck .vb-rev li').length===1;`), `R5 B2: ${nC - 1} of ${nC} passes: the badge, the supervision line and the miss to go over`);
-  ok(await ev(`return NARKE_VENT_BRIDGE.progress().firstNightPassed === true;`) === true, "R5 B1: progress().firstNightPassed is true");
+  ok(await until(`${R} return /${nC - 1} of ${nC}/.test(R.querySelector('#vbCheck .vb-qscore').textContent) && /badge also needs/.test(R.querySelector('#vbCheck .vb-qscore').textContent) && !R.querySelector('#vbCheck .vb-pass') && R.querySelectorAll('#vbCheck .vb-rev li').length===1;`), `R6 B1: ${nC - 1} of ${nC} passes the check, but with 2 of 5 drills safe the badge is not given`);
+  ok(await ev(`var p=NARKE_VENT_BRIDGE.progress(); return p.firstNightPassed === true && p.ready === false && p.missing.join() === "drills";`) === true, "R6 B1: progress(): passed, not ready, missing [drills]: " + await ev(`return JSON.stringify(NARKE_VENT_BRIDGE.progress().missing);`));
+  ok(await ev(`${R} var b=R.querySelector('#vbCheck .vb-need [data-act=vbopen][data-k=drills]'), n=R.querySelectorAll('#vbNeed .vb-need li'); return !!b && /all 5 in a safe order/.test(b.textContent) && n.length===7 && R.querySelectorAll('#vbNeed .vb-need li.ok').length===6;`) === true, "R6 B1: the check page lists the badge rule (7 items, 6 done) and the missing one opens its page");
+  await ev(`var sc=document.querySelector('#smdNarke .sp-scroll'), el=document.querySelector('#smdNarke #vbCheck .vb-qscore'); sc.scrollTop += el.getBoundingClientRect().top - sc.getBoundingClientRect().top - 8; return 1;`);
+  await shot("09-390-dark-check-passed-not-ready");
+  // finish the three drills that are not yet safe, in a safe order, from the missing link
+  { const r = await tap(`#vbCheck .vb-need [data-act=vbopen][data-k=drills]`); ok(r === 1 && await until(`return !!document.querySelector('#smdNarke [data-act=vbdrill]');`), "R6 B1: the missing item opens the drills" + (r === 1 ? "" : ": " + r)); }
+  for (const d of J.drills.items.filter((x) => !["highp", "lowspo2"].includes(x.id))) {
+    await tap(`[data-act=vbdrill][data-k=${d.id}]`); await until(`return !!document.querySelector('#smdNarke .vb-step');`);
+    for (const x of d.steps.filter((y) => y.rank != null && !y.opt).sort((a, b) => (a.flex ? 99 : a.rank) - (b.flex ? 99 : b.rank))) await tap(`.vb-step[data-k=${x.id}]`);
+    await tap(`[data-act=vbcheck]`);
+    ok(await until(`var v=document.querySelector('#smdNarke .vb-dv'); return !!v && (v.classList.contains('ok') || v.classList.contains('vb-neutral')) && !v.classList.contains('bad');`), "R6 B1: drill " + d.id + " in a safe order");
+    await ev(`NARKE.back(); return 1;`); await until(`return !!document.querySelector('#smdNarke [data-act=vbdrill]');`);
+  }
+  ok(await ev(`var r=document.getElementById('vbDrRule'); return !!r && /5 of 5 so far/.test(r.textContent);`) === true, "R6 B1: the drill page counts 5 of 5");
+  ok(await ev(`var p=NARKE_VENT_BRIDGE.progress(); return p.ready === true && p.missing.length === 0;`) === true, "R6 B1: progress().ready is true once the drills are safe");
+  await ev(`NARKE.back(); return 1;`); await until(`return !!document.querySelector('#smdNarke .vl-home');`);
+  await tap(`[data-act=vbopen][data-k=check]`); await until(`return !!document.querySelector('#smdNarke #vbNeed');`);
+  ok(await ev(`${R} return R.querySelectorAll('#vbNeed .vb-need li.ok').length===7 && !!R.querySelector('.vb-wrap > .vb-badge') && /under supervision/.test(R.querySelector('.vb-wrap > .vb-badge').textContent);`) === true, "R6 B1: the check page now shows the badge and all 7 ticked");
   ok(await noOverflow() === true, "check: no horizontal scroll"); { const sm = await small(); ok(sm === true, "check: 44 px targets" + (sm === true ? "" : ": " + sm)); }
-  await ev(`var sc=document.querySelector('#smdNarke .sp-scroll'), el=document.querySelector('#smdNarke .vb-pass'); sc.scrollTop += el.getBoundingClientRect().top - sc.getBoundingClientRect().top - 8; return 1;`);
-  await shot("09-390-dark-first-night-pass");
   await ev(`NARKE.back(); return 1;`);
   ok(await until(`${R} return !!R.querySelector('.vl-home .vb-badge') && /Passed/.test(R.querySelector('[data-act=vbopen][data-k=check]').textContent);`), "R5 B2: the lab home shows the badge and the check row says Passed");
 
@@ -416,14 +460,19 @@ try {
   ok(await until(`${R} var v=[].filter.call(R.querySelectorAll('.vb-gi'), function(x){ return !x.hidden; }); return v.length >= 1 && v.length < ${J.gloss.items.length} && /Minute volume/.test(v[0].textContent);`), "R5 B9: a brand name finds the word");
   await ev(`var i=document.getElementById('vbGq'); i.value='zzqq'; i.dispatchEvent(new Event('input')); return 1;`);
   ok(await until(`return !document.getElementById('vbGnone').hidden;`), "R5 B9: no match shows an empty state");
+  await ev(`var i=document.getElementById('vbGq'); i.value=''; i.dispatchEvent(new Event('input')); return 1;`);
+  ok(await ev(`try { return !JSON.parse(localStorage.getItem('smd_narke_vbridge')).done.gloss; } catch(e) { return false; }`) === true, "R6 B1: the glossary is not done just by opening it");
+  await ev(`var sc=document.querySelector('#smdNarke .sp-scroll'); sc.scrollTop = sc.scrollHeight; return 1;`);
+  ok(await until(`try { return !!JSON.parse(localStorage.getItem('smd_narke_vbridge')).done.gloss && /Read to the end/.test(document.querySelector('#smdNarke #vbGot').textContent) && !!document.querySelector('#smdNarke #vbGot .vb-next'); } catch(e) { return false; }`, 4000), "R6 B1: scrolled to the end, the glossary registers done and offers the next step");
   ok(await noOverflow() === true, "glossary: no horizontal scroll");
   await ev(`NARKE.back(); return 1;`); await until(`return !!document.querySelector('#smdNarke .vl-home');`);
+  ok(await ev(`${R} return /Done/.test(R.querySelector('[data-act=vbopen][data-k=gloss]').textContent);`) === true, "R6 B1: the glossary row says Done");
   await shot("01-390-dark-home-progress");
 
   // Hindi (B7)
   await tap(`[data-act=lang]`);
   ok(await until(`${R} return R.getAttribute('lang')==='hi' && /[\\u0900-\\u097F]/.test(R.querySelector('#vbHomeH').textContent);`), "Hindi switches the bridge rows");
-  ok(await ev(`${R} var t=R.querySelector('[data-act=vbopen][data-k=drills]').textContent; return /drill सुरक्षित/.test(t) && !/drills सुरक्षित/.test(t);`) === true, "B7: Hindi drill count reads '{m} में से {n} drill सुरक्षित'");
+  ok(await ev(`${R} var t=R.querySelector('[data-act=vbopen][data-k=drills]').textContent; return /पूरा/.test(t) && NARKE_VENT_BRIDGE.STR.drillsDone.hi === '{m} में से {n} drill सुरक्षित' && !/drills/.test(NARKE_VENT_BRIDGE.STR.drillsRule.hi);`) === true, "B7: Hindi drill row (all 5 safe: पूरा) and the count keeps drill singular");
   await tap(`[data-act=vbopen][data-k=never]`);
   ok(await until(`${R} return /[\\u0900-\\u097F]/.test(R.querySelector('.vb-nv').textContent);`), "Hindi: the never-alone card");
   ok(await ev(`return !document.querySelector('#smdNarke .vb-wrap [lang=en]') && !/[\\u0966-\\u096F]/.test(document.getElementById('smdNarke').innerText);`) === true, "Hindi: no English fallback, ASCII digits");
@@ -439,6 +488,10 @@ try {
   ok(await until(`${R} return document.querySelectorAll('#smdNarke .vb-gi').length > 0 && /[\\u0900-\\u097F]/.test(R.querySelector('.vb-gi dd').textContent) && !R.querySelector('.vb-wrap [lang=en]');`), "Hindi: the glossary");
   ok(await noOverflow() === true, "Hindi glossary: no horizontal scroll");
   await theme(false); await shot("11-390-light-glossary-hindi"); await theme(true);
+  await ev(`NARKE.back(); return 1;`); await until(`return !!document.querySelector('#smdNarke .vl-home');`);
+  await tap(`[data-act=vbopen][data-k=check]`);
+  ok(await until(`var n=document.getElementById('vbNeed'); return !!n && /Badge के लिए ये सब चाहिए/.test(n.textContent) && /रात की सभी 5 drill/.test(n.textContent);`), "R6 B1: Hindi: the badge rule on the check page");
+  await theme(false); await ev(`var sc=document.querySelector('#smdNarke .sp-scroll'); sc.scrollTop=0; return 1;`); await shot("13-390-light-check-rule-hindi"); await theme(true);
   await ev(`NARKE.back(); return 1;`); await until(`return !!document.querySelector('#smdNarke .vl-home');`);
   for (const k of ["check", "alarms", "card", "skills", "read"]) {
     await tap(`[data-act=vbopen][data-k=${k}]`);

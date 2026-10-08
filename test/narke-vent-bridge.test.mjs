@@ -503,3 +503,11 @@ test("R6 B6 + B3: one accent (lab indigo primary buttons); the screen-map explan
   assert.ok(/\.nrk-root:has\(\.vb-wrap\) \{ --sp-acc: var\(--vl-acc\)/.test(css));
   assert.ok(/\.vb-info\.vb-sheet \{ position: sticky; bottom: 0/.test(css));
 });
+
+test("R6: the First-night check keeps its own name (the drill's Check my order button no longer overwrites STR.check)", () => {
+  assert.equal(UI.STR.check.en, "First-night check"); assert.equal(UI.STR.checkOrd.en, "Check my order");
+  assert.equal(UI.progressOf({}).items.find((x) => x.id === "check").label.en, "First-night check");
+  const src = readFileSync("narke-vent-bridge.js", "utf8"), at = src.indexOf("var STR = {"), body = src.slice(at, src.indexOf("\n  };", at));
+  const keys = [...body.matchAll(/(?:^|[\s,{])(\w+): T\(/g)].map((m) => m[1]), dup = keys.filter((k, i) => keys.indexOf(k) !== i);
+  assert.ok(keys.length > 100, "found the STR keys"); assert.deepEqual(dup, [], "duplicate STR keys: " + dup);
+});

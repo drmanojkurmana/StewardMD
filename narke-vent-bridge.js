@@ -191,7 +191,7 @@
     closest: T("Closest in the lab", "Lab में सबसे नज़दीक"),
     yourOrder: T("Your order", "आपका क्रम"), pool: T("Steps", "Steps"), pickHint: T("Tap the steps in the order you would do them. Leave out anything you should not do.", "Steps को उसी क्रम में tap करें जिसमें आप करेंगे। जो नहीं करना चाहिए उसे छोड़ दें।"),
     empty: T("Nothing yet. Tap the first thing you would do.", "अभी कुछ नहीं। जो पहले करेंगे उसे tap करें।"),
-    undo: T("Undo last", "पिछला हटाएँ"), check: T("Check my order", "मेरा क्रम जाँचें"),
+    undo: T("Undo last", "पिछला हटाएँ"), checkOrd: T("Check my order", "मेरा क्रम जाँचें"),
     addAria: T("Add: {x}", "जोड़ें: {x}"), yourStep: T("your step {n}", "आपका step {n}"),
     st_ok: T("In a safe place", "सही जगह पर"), st_okAny: T("Right at any point", "किसी भी समय सही"), st_okOpt: T("Optional, and fine where you put it", "वैकल्पिक, और जहाँ रखा वहाँ ठीक"),
     st_late: T("Do this sooner: before “{x}”", "इसे पहले करें: “{x}” से पहले"), st_trap: T("Leave this out", "इसे छोड़ दें"),
@@ -225,8 +225,8 @@
     // readiness (round 6, B1): what the "Ready to start under supervision" badge needs
     needH: T("The badge needs all of these", "Badge के लिए ये सब चाहिए"), needLeft: T("Still to do: {n}", "अभी बाकी: {n}"),
     passedNot: T("Passed. The badge also needs:", "Pass। Badge के लिए यह भी चाहिए:"),
-    need_screen: T("Screen map: both quizzes finished", "Screen map: दोनों quiz पूरी"), need_modes: T("Mode names", "Mode के नाम"),
-    need_alarms: T("Alarm messages", "Alarm messages"), need_drills: T("Night drills: all 5 in a safe order", "रात की सभी 5 drill सुरक्षित क्रम में"),
+    need_screen: T("Screen map: both quizzes finished", "असली screen: दोनों quiz पूरी"), need_modes: T("Mode names", "Mode के नाम"),
+    need_alarms: T("Alarm messages", "Alarm messages का मतलब"), need_drills: T("Night drills: all 5 in a safe order", "रात की सभी 5 drill सुरक्षित क्रम में"),
     need_read: T("Read this screen: every panel", "यह screen पढ़ें: हर panel"), need_skills: T("Hands-on skills", "हाथ से करने वाले skills"),
     need_check: T("First-night check: {p} of {m} or better", "पहली रात की जाँच: {m} में से {p} या ज़्यादा"),
     infoX: T("Close the explanation", "समझाना बंद करें"),
@@ -874,7 +874,7 @@
         }).join("") + "</dl></div>";
     }
     var nd = res ? nextDrill(dr) : null, footer;
-    if (!res) footer = '<button type="button" class="sp-btn sec" data-act="vbundo"' + (DR.picked.length ? "" : ' disabled aria-disabled="true"') + ">" + s("undo") + '</button><button type="button" class="sp-btn pri" data-act="vbcheck"' + (DR.picked.length ? "" : ' disabled aria-disabled="true"') + ">" + s("check") + "</button>";
+    if (!res) footer = '<button type="button" class="sp-btn sec" data-act="vbundo"' + (DR.picked.length ? "" : ' disabled aria-disabled="true"') + ">" + s("undo") + '</button><button type="button" class="sp-btn pri" data-act="vbcheck"' + (DR.picked.length ? "" : ' disabled aria-disabled="true"') + ">" + s("checkOrd") + "</button>";
     else footer = '<button type="button" class="sp-btn sec" data-act="vbdagain">' + s("again") + "</button>" + (nd ? '<button type="button" class="sp-btn pri vb-dnext" data-act="vbdnext" data-k="' + esc(nd.id) + '"><span>' + s("nextDrill") + '</span><small>' + tx(nd.title) + "</small></button>"
       : nextBtn("drills").replace("sp-btn pri vb-next", "sp-btn pri"));
     I.leave();
