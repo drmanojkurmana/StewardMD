@@ -290,11 +290,20 @@
     return '<li><button type="button" class="pn-row pl-item' + (pr.done ? " done" : "") + '" data-act="' + act + '" data-k="' + it.k + '"' + attrs + '>' +
       '<span class="pl-tick" aria-hidden="true">' + (pr.done ? ic("check") : "") + '</span><span class="pn-rb"><b>' + (pr.done ? '<span class="pl-sr">Done: </span>' : "") + esc(t) + "</b><small>" + esc(sub) + "</small></span>" + H.ico("chev") + "</button></li>";
   }
-  function planHtml(pt) {
+  // Balloons the first time a day's plan is ever finished (plan section 2.2), within the one-a-day budget shared with
+  // prep.js (store.cel). Recorded once; later finishes keep the plain "Today's plan is done" line.
+  function celePlan() {
+    var s = store(), td = H.today(), c = s.cel && typeof s.cel === "object" ? s.cel : { day: null, keys: [] }, keys = c.keys || [];
+    if (keys.indexOf("plan1") >= 0 || c.day === td) return false;
+    s.cel = { day: td, keys: keys.concat(["plan1"]).slice(-200) }; H.save();
+    return true;
+  }
+  function planHtml(pt, live) {
     if (!pt) return '<div class="pl-plan pl-wait" role="status"><p class="pn-mut pn-small">Working out today\'s plan</p></div>';
     var s = store(), td = H.today(), prs = pt.items.map(function (it) { return itemProgress(it, s, td, dayOf); }), done = prs.filter(function (p) { return p.done; }).length;
     var foot = !pt.items.length ? "Nothing to plan yet for this exam." : done === pt.items.length ? "Today's plan is done. Anything more still counts." : "About " + pt.total + " of your " + pt.min + " minutes";
-    return '<div class="pl-plan">' + (pt.items.length ? '<ul class="pn-group pl-list">' + pt.items.map(function (it, i) { return itemHtml(it, prs[i]); }).join("") + "</ul>" : "") +
+    var cele = !!(live && pt.items.length && done === pt.items.length && celePlan());
+    return '<div class="pl-plan"' + (cele ? ' data-cele="balloons"' : "") + ">" + (pt.items.length ? '<ul class="pn-group pl-list">' + pt.items.map(function (it, i) { return itemHtml(it, prs[i]); }).join("") + "</ul>" : "") +
       '<div class="pl-foot"><span class="pn-mut pn-small">' + esc(foot) + '</span><button type="button" class="pn-link pl-set" data-act="p-settings">Change plan</button></div></div>';
   }
   // Home's top: the readiness line, then Today's plan. Drawn at once from what is known; homeMounted() redraws it
@@ -310,7 +319,7 @@
       var box = root() && root().querySelector("#pnPlanTop");
       if (!box) return;
       var s = store(), pt = planValid(s) ? s.pt : makePlan(lessons);
-      box.innerHTML = heroHtml(computeReadiness()) + planHead() + planHtml(pt);
+      box.innerHTML = heroHtml(computeReadiness()) + planHead() + planHtml(pt, true);
       if (G.PREP_NATIVE) G.PREP_NATIVE.changed();
     });
   }
@@ -511,7 +520,7 @@
     var ch = choiceOf(SET.exam), mins = SET.min < 60 ? SET.min + " min" : SET.min === 60 ? "1 hour" : SET.min === 90 ? "1 h 30 min" : "2 hours";
     var sec = function (k, icon, title, body) { return '<section class="pl-grp pl-g-' + k + '"><h3 class="pl-sh"><span class="pl-sic" aria-hidden="true">' + ic(icon) + "</span>" + title + "</h3>" + body + "</section>"; };
     var html = '<span class="pn-grab" aria-hidden="true"></span><div class="pl-shead"><span class="pl-shart" aria-hidden="true"></span><div><h2 id="pnSetT">Your plan</h2><p class="pn-mut pn-small">' + esc((ch ? ch.label : "Your exam") + " · " + mins + " a day" + (SET.rem ? " · reminder " + SET.rem : "")) + '</p></div></div><div class="pl-setbody">' +
-      sec("exam", "cap", "Exam", f.exam) + sec("date", "cal", "Exam date", f.date) + sec("min", "clock", "Time a day", f.min) + sec("rem", "bell", "Reminder", f.rem) + (G.PREP_NATIVE ? G.PREP_NATIVE.syncHtml() : "") + "</div>" +
+      sec("exam", "cap", "Exam", f.exam) + sec("date", "cal", "Exam date", f.date) + sec("min", "clock", "Time a day", f.min) + sec("rem", "bell", "Reminder", f.rem) + (G.PREP_ASK ? G.PREP_ASK.settingsHtml(H) : "") + (G.PREP_NATIVE ? G.PREP_NATIVE.syncHtml() : "") + "</div>" +
       '<div class="pn-sheet-act"><button type="button" class="pn-btn pri" data-act="p-save">Save</button><button type="button" class="pn-btn" data-act="p-close">Cancel</button></div>';
     if (first) openSheet("set", html, "pnSetT");
     else { var sh = root().querySelector("#pnPlanSheet .pn-sheet"), body = sh && sh.querySelector(".pl-setbody"), y = body ? body.scrollTop : 0; if (sh) sh.innerHTML = html; body = sh && sh.querySelector(".pl-setbody"); if (body) body.scrollTop = y; }

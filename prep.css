@@ -216,7 +216,7 @@ body.dark .pn-root .pn-next .pn-ri { background: rgba(2, 35, 31, .14); box-shado
 .pn-root :is(.pn-score, .pn-lsn-fin, .pk-end, .pn-lobby) .pn-btn.pri, .pn-root :is(.pn-score, .pk-end) .pn-chip.on { background: linear-gradient(180deg, #6ff3df, #34c9b7); color: #02231f; }
 .pn-root :is(.pn-score, .pn-lsn-fin, .pk-end, .pn-lobby) .pn-link { color: var(--pn-ring); }
 .pn-root :is(.pn-score, .pn-lsn-fin, .pk-end) .pn-meter i, .pn-root :is(.pn-score, .pn-lsn-fin, .pk-end) .pn-prog i { background: var(--pn-ring); }
-.pn-root :is(.pn-score, .pn-lsn-fin, .pk-end, .pn-lobby) > *:not(.pn-fx):not(.pn-confetti) { position: relative; z-index: 1; }
+.pn-root :is(.pn-score, .pn-lsn-fin, .pk-end, .pn-lobby) > *:not(.pn-fx):not(.pn-confetti):not(.pn-balloons) { position: relative; z-index: 1; }
 .pn-root .pn-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 52px; padding: 0 18px; border-radius: var(--pn-r-lg); border: 1px solid var(--pn-edge); background: var(--pn-card); box-shadow: var(--pn-elev); font-weight: 650; font-size: 15px; letter-spacing: -.005em; transition: transform var(--pn-d-press) var(--pn-ease), box-shadow var(--pn-d-press) ease; }
 .pn-root .pn-panel .pn-btn:not(.pri), .pn-root .pn-sheet .pn-btn:not(.pri) { background: var(--pn-s1); border-color: transparent; box-shadow: none; }
 .pn-root .pn-btn:active { transform: scale(.97); }
@@ -437,7 +437,9 @@ body.dark .pn-root .pn-vimg img, body.dark .pn-root .pn-zoom-b img { filter: bri
 .pn-root .pn-vzi svg { width: 16px; height: 16px; }
 /* bottom bar: a frosted shelf the text scrolls under */
 .pn-root .pn-lsn-bar { position: relative; z-index: 1; flex: 0 0 auto; display: flex; align-items: center; gap: 8px; padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--pn-line); background: color-mix(in srgb, var(--pn-bg) 84%, transparent); -webkit-backdrop-filter: blur(18px) saturate(160%); backdrop-filter: blur(18px) saturate(160%); }
-.pn-root .pn-lsn-bar > * { flex: 0 0 auto; }
+.pn-root .pn-lsn-bar > *, .pn-root .pn-lsn-bin > * { flex: 0 0 auto; }
+/* The controls sit in the 720 px reading column; the frosted shelf behind them stays the full width. */
+.pn-root .pn-lsn-bin { display: flex; align-items: center; gap: 8px; width: 100%; max-width: 720px; margin: 0 auto; }
 .pn-root .pn-lsn-bar .pn-ib[disabled] { opacity: .4; }
 .pn-root .pn-lsn-play { height: 52px; border: 0; background: var(--pn-pri-soft); color: var(--pn-pri-ink); display: inline-flex; align-items: center; justify-content: center; transition: transform var(--pn-d-press) var(--pn-ease), background-color var(--pn-d-press) ease; }
 .pn-root .pn-lsn-play:active, .pn-root .pn-lsn-spd:active { transform: scale(.92); }
@@ -1223,7 +1225,7 @@ body.dark .pn-root .pn-fb .pn-mtag { border-top-color: var(--pn-edge); }
 .pn-root .pn-stack-ct { display: none; }
 .pn-root .pn-stack-b:focus-visible, .pn-root .pn-stack-wb:focus-visible { outline: 3px solid var(--pn-pri); outline-offset: 2px; }
 .pn-root .pn-stack-rg:focus-visible { outline: 3px solid var(--pn-pri); outline-offset: 2px; border-radius: var(--pn-r-pill); }
-@media (hover: hover) { .pn-root .pn-stack-b:hover { background: var(--pn-seg); } .pn-root .pn-stack-wb:not(.on):hover { color: var(--pn-text); } }
+@media (hover: hover) and (pointer: fine) { .pn-root .pn-stack-b:hover { background: var(--pn-seg); } .pn-root .pn-stack-wb:not(.on):hover { color: var(--pn-text); } }
 .pn-root .pn-stack-b, .pn-root .pn-stack-wb, .pn-root .pn-stack-rg { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
 .pn-root .pn-stack-ov { overscroll-behavior: contain; }
 /* ==== Explanations (prep21) ==== the key line, then short topic notes (headings, bullets, steps, a comparison table),
@@ -1257,4 +1259,94 @@ body.dark .pn-root .pn-fb .pn-mtag { border-top-color: var(--pn-edge); }
   .pn-root .pn-xkey { font-size: 18px; }
   .pn-root .pn-exp, .pn-root .pn-xnotes { font-size: 16.5px; }
   .pn-root .pn-xt table { font-size: 15px; }
+}
+
+/* ==== Round 8 (2026-10-09): iPad ====
+   The app zooms the whole page (home.js autoFitD), so widths below are CSS px after that zoom: a 1180 px iPad in
+   landscape lays out about 1026 px. Reading screens (runner, explanations, lessons) keep the 720 px column; browse
+   screens (home, subject, stats) widen to 1040 px from a 900 px window with 220 px tiles, 3 to 4 a row. Sheets become
+   a centred 560 px panel from 700 px; split view under 700 px keeps the bottom sheet. Landscape iPad (900 px and
+   wider) puts the question beside its options and a lesson's figure beside its text. No new tokens or colours. */
+
+/* Tabs and filters in the content column, not across the window. */
+.pn-root .pn-tabs { width: calc(100% - 32px); max-width: 720px; margin: 2px auto 12px; }
+.pn-root .pn-filters { width: 100%; max-width: 752px; margin-left: auto; margin-right: auto; }
+
+/* Keyboard focus: one 2 px accent ring, outside the control (rows inside a clipped group draw it inset). */
+.pn-root :is(.pn-opt, .pn-btn, .pn-chip, .pn-tab, .pn-tile, .pn-mod, .pn-next):focus-visible { outline: 2px solid var(--pn-pri); outline-offset: 2px; }
+.pn-root .pn-row:focus-visible { outline: 2px solid var(--pn-pri); }
+.pn-root :is(.pn-score, .pn-lsn-fin, .pk-end, .pn-lobby, .pl-hero, .pn-hband, .pn-subhead) :focus-visible { outline-color: var(--pn-ring); }
+
+/* Touch screens: chips and tabs never under 44 px (prep.css round 4 sets it for all; this keeps it if that moves). */
+@media (pointer: coarse) { .pn-root .pn-tab, .pn-root .pn-chip { min-height: 44px; } }
+
+/* Wide windows: the brand banner is a strip, not a poster, so readiness stays above the fold. */
+@media (min-width: 700px) {
+  .pn-root .pn-body > .pn-banner.pn-brand-banner { max-width: 720px; aspect-ratio: 16 / 4; }
+  .pn-root .pn-banner:not(.pn-brand-banner), .pn-root #pnYq::before { aspect-ratio: 16 / 5; }
+  .pn-root .pn-subs, .pn-root .pn-home > .pn-next + .pn-group { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+  .pn-root #pnCompete > .pn-group:has(> .pn-row + .pn-row) { grid-auto-columns: minmax(220px, calc((100% - 20px) / 3)); }
+  .pn-root .pn-banner.pn-brand-banner + .pl-top > .pl-hero, .pn-root .pn-banner.pn-brand-banner + .pl-hero { margin-top: 20px; }
+}
+@media (min-width: 700px) and (orientation: landscape) and (max-height: 900px) {
+  .pn-root .pn-body > .pn-banner.pn-brand-banner { aspect-ratio: 16 / 3.4; margin-bottom: 8px; }
+}
+
+/* Browse screens widen to 1040 px; the module list goes two a row. */
+@media (min-width: 900px) {
+  .pn-root .pn-body.pn-home > :not(.pn-brand-banner), .pn-root #pnSub > *, .pn-root .pn-body:has(> .pn-lvb) > * { max-width: 1040px; }
+  .pn-root:has(> .pn-body.pn-home) > .pn-tabs { max-width: 1040px; }
+  .pn-root:has(> #pnSub) > .pn-filters { max-width: 1072px; }
+  .pn-root #pnSub .pn-mods { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pn-root #pnSub .pn-mods > li { min-width: 0; display: flex; }
+  .pn-root #pnSub .pn-mods .pn-mod { flex: 1 1 auto; }
+  /* Stats: the 12-week calendar keeps phone-sized cells (44 px at most), centred, with its key under it. */
+  .pn-root .pn-heat { justify-content: center; }
+  .pn-root .pn-heat-g { max-width: calc(12 * 44px + 11 * 4px); }
+  .pn-root .pn-heat-k { width: 100%; max-width: calc(12 * 44px + 11 * 4px + 24px); margin: 0 auto; }
+}
+
+/* Sheets: a centred panel that scrolls inside itself (setup, plan, consent, limit and the rest). */
+@media (min-width: 700px) {
+  .pn-root .pn-sheet-wrap { justify-content: center; align-items: center; padding: 32px 24px; }
+  .pn-root .pn-sheet { max-width: 560px; max-height: 100%; overflow-y: auto; border-radius: var(--pn-r-xl); padding-bottom: 20px;
+    box-shadow: 0 32px 80px -24px rgba(2, 12, 16, .5), 0 0 0 1px rgba(9, 38, 44, .04); animation: pn-pop var(--pn-d-enter) var(--pn-ease); }
+  body.dark .pn-root .pn-sheet { box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06), 0 0 0 1px rgba(190, 235, 240, .08), 0 32px 80px -20px rgba(0, 0, 0, .7); }
+}
+@keyframes pn-pop { from { opacity: 0; transform: scale(.96); } }
+@media (min-width: 700px) and (prefers-reduced-motion: reduce) { .pn-root .pn-sheet { animation: pn-fade var(--pn-d-quick) ease-out; } }
+
+/* Landscape iPad runner: the question (and its image) on the left, options and feedback on the right. The stem stays
+   in view while the answer side scrolls. Floats keep today's markup and reading order. */
+@media (orientation: landscape) and (min-width: 900px) {
+  .pn-root .pn-run:not(.pn-battle) > * { max-width: 1040px; }
+  .pn-root > .pn-qprog { max-width: 1072px; }
+  .pn-root .pn-run:not(.pn-battle) .pn-qw { --pn-ql: 50%; display: flow-root; }
+  .pn-root .pn-run:not(.pn-battle) .pn-qw:has(> .pn-yq-fig, > .pn-stack) { --pn-ql: 56%; }
+  .pn-root .pn-run:not(.pn-battle) .pn-qw > * { margin-bottom: 14px; }
+  .pn-root .pn-run:not(.pn-battle) .pn-qw > :is(.pn-yq-tags, .pn-q, .pn-yq-fig, .pn-stack) { float: left; clear: left; width: calc(var(--pn-ql) - 14px); }
+  .pn-root .pn-run:not(.pn-battle) .pn-qw > :not(.pn-yq-tags, .pn-q, .pn-yq-fig, .pn-stack) { margin-left: calc(var(--pn-ql) + 14px); }
+  .pn-root .pn-run:not(.pn-battle) .pn-qw:not(:has(> .pn-yq-fig, > .pn-stack)) > .pn-q { position: sticky; top: 0; }
+  .pn-root .pn-run:not(.pn-battle) .pn-qw > :is(.pn-yq-fig:last-of-type, .pn-stack) { position: sticky; top: 0; }
+  .pn-root .pn-run:not(.pn-battle) .pn-qw > .pn-stack { margin-top: 2px; }
+  .pn-root .pn-run:not(.pn-battle) .pn-qw > .pn-fb + .pn-navrow::before { left: -12px; right: -12px; }
+}
+
+/* Landscape iPad lesson: an image step puts the figure beside the text, sized to stay above the bar. Tables, flows and
+   comparisons keep the full width under the text. */
+@media (orientation: landscape) and (min-width: 900px) {
+  .pn-root .pn-lsn { container-type: size; }
+  .pn-root .pn-lsn:has(.pn-vis-image) > * { max-width: 1040px; }
+  .pn-root .pn-lsn-step:has(> .pn-vis-image) { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 32px; align-items: start; }
+  .pn-root .pn-lsn-step > .pn-vis-image { position: sticky; top: 0; }
+  .pn-root .pn-lsn-step > .pn-vis-image .pn-vimg img { width: 100%; max-height: calc(100cqh - 96px); object-fit: contain; }
+}
+/* The narrowest windows (an iPad Slide Over pane at 320 px keeps zoom 1.0 now): the lesson bar fits without the
+   waveform, so Next keeps its label. */
+@media (max-width: 359px) {
+  .pn-root .pn-lsn-bin { gap: 6px; }
+  .pn-root .pn-lsn-play { min-width: 44px; padding: 0 11px; }
+  .pn-root .pn-lsn-play .pn-wave { display: none; }
+  .pn-root .pn-lsn-spd { min-width: 46px; padding: 0 8px; }
+  .pn-root .pn-lsn-next { padding: 0 12px; }
 }

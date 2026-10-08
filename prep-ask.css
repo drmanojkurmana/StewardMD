@@ -1,0 +1,89 @@
+/* PrepNucleus: Ask MaiK sheet (prep-ask.js), the MaiK line after a set, milestone balloons (prep-motion.js).
+   Same tokens and rhythm as prep.css; the sheet shell, scrim, grab and the chat (pt-*) come from prep.css. Motion on
+   transform and opacity only; all of it off under reduced motion. */
+
+/* ---------- Ask MaiK button (runner feedback, review) ---------- */
+.pn-root .pn-btn.pa-ask { justify-content: flex-start; gap: 12px; padding-left: 10px; text-align: left; }
+.pn-root .pa-ask .pt-av, .pn-root .pk-ask .pt-av, .pn-root .pn-maikline .pt-av { width: 32px; height: 32px; border-radius: 11px; }
+.pn-root .pn-link.pk-ask { display: inline-flex; align-items: center; gap: 10px; align-self: center; min-height: 44px; margin-bottom: 6px; font-weight: 700; }
+.pn-root .pk-ask .pt-av { width: 28px; height: 28px; border-radius: 9px; }
+
+/* ---------- the sheet ---------- */
+.pn-root .pa-sheet { max-height: min(88dvh, 820px); overflow-y: auto; }
+.pn-root .pa-sheet.pa-chat { height: min(78dvh, 760px); overflow: hidden; }
+.pn-root .pa-sheet > .pn-grab { margin-bottom: 0; }
+.pn-root .pa-head { display: flex; align-items: center; gap: 12px; }
+.pn-root .pa-head .pt-av { width: 44px; height: 44px; border-radius: 14px; }
+.pn-root .pa-head h2, .pn-root .pa-top h2 { font-size: 22px; font-weight: 750; letter-spacing: -.02em; }
+.pn-root .pa-note { padding: 12px 14px; border-radius: var(--pn-r-md); background: var(--pn-s1); color: var(--pn-text); font-size: 15px; font-weight: 600; line-height: 1.5; border-left: 3px solid var(--pn-warn); }
+.pn-root .pa-opts { display: flex; flex-direction: column; gap: 8px; }
+.pn-root .pa-opt { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 64px; padding: 12px 14px; border-radius: var(--pn-r-lg); border: 1.5px solid var(--pn-line); background: var(--pn-card); color: var(--pn-text); text-align: left; font: inherit; cursor: pointer;
+  transition: transform var(--pn-d-press) var(--pn-ease), border-color var(--pn-d-quick) ease, background-color var(--pn-d-quick) ease; }
+.pn-root .pa-opt:active { transform: scale(.98); }
+.pn-root .pa-opt.on { border-color: var(--pn-pri); background: var(--pn-pri-soft); }
+.pn-root .pa-opt[aria-disabled="true"] { opacity: .55; cursor: not-allowed; }
+.pn-root .pa-opt[aria-disabled="true"]:active { transform: none; }
+.pn-root .pa-oi { flex: 0 0 auto; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; background: var(--pn-s1); color: var(--pn-pri-ink); }
+.pn-root .pa-opt.on .pa-oi { background: var(--pn-card); }
+.pn-root .pa-ob { display: flex; flex-direction: column; gap: 3px; min-width: 0; flex: 1 1 auto; }
+.pn-root .pa-ob b { font-size: 16px; font-weight: 750; }
+.pn-root .pa-ob small { font-size: 13.5px; line-height: 1.45; color: var(--pn-mut); text-wrap: pretty; }
+.pn-root .pa-ob .pa-ov { color: var(--pn-pri-ink); font-weight: 650; }
+.pn-root .pa-dot { flex: 0 0 auto; display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; border: 2px solid var(--pn-s2); color: var(--pn-on-pri); }
+.pn-root .pa-opt.on .pa-dot { border-color: var(--pn-pri); background: var(--pn-pri); }
+.pn-root .pa-dont { display: flex; align-items: center; gap: 12px; min-height: 44px; font-size: 15px; font-weight: 650; cursor: pointer; }
+.pn-root .pa-dont input { width: 22px; height: 22px; margin: 0; accent-color: var(--pn-pri); }
+.pn-root .pa-later { margin-top: -8px; }
+
+/* chat view: header, the place switch, then the thread scrolls */
+.pn-root .pa-top { display: flex; align-items: center; gap: 12px; }
+.pn-root .pa-top h2 { flex: 1 1 auto; }
+.pn-root .pa-top .pt-av { width: 36px; height: 36px; }
+.pn-root .pa-seg { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 3px; padding: 4px; border-radius: var(--pn-r-md); background: var(--pn-s1); }
+.pn-root .pa-sb { min-height: 44px; padding: 4px 8px; border: 0; border-radius: var(--pn-r-sm); background: transparent; color: var(--pn-mut); font: inherit; font-size: 14px; font-weight: 700; cursor: pointer; transition: transform var(--pn-d-press) var(--pn-ease), background-color var(--pn-d-quick) ease, color var(--pn-d-quick) ease; }
+.pn-root .pa-sb:active { transform: scale(.96); }
+.pn-root .pa-sb.on { background: var(--pn-card); color: var(--pn-text); box-shadow: var(--pn-shadow); }
+body.dark .pn-root .pa-sb.on { background: var(--pn-seg); }
+.pn-root .pa-sb[aria-disabled="true"] { opacity: .5; cursor: not-allowed; }
+.pn-root .pa-body { flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; display: flex; flex-direction: column; gap: 14px; margin: 0 -20px; padding: 2px 20px 8px; -webkit-overflow-scrolling: touch; }
+.pn-root .pa-body .pt-ctx { top: 0; }
+.pn-root .pa-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.pn-root .pa-row .pn-btn { flex: 1 1 140px; min-height: 48px; }
+.pn-root .pa-more { list-style: none; }
+.pn-root .pa-set { margin-top: 2px; }
+.pn-root .pa-set .pa-sb { font-size: 13.5px; }
+.pn-root :is(.pa-opt, .pa-sb, .pa-ask, .pk-ask):focus-visible { outline: 2px solid var(--pn-pri); outline-offset: 2px; }
+.pn-root :is(.pa-opt, .pa-sb, .pa-dont) { touch-action: manipulation; -webkit-tap-highlight-color: transparent; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+@media (hover: hover) and (pointer: fine) {
+  .pn-root .pa-opt:not(.on):not([aria-disabled="true"]):hover { border-color: var(--pn-s2); background: var(--pn-s1); }
+  .pn-root .pa-sb:not(.on):not([aria-disabled="true"]):hover { color: var(--pn-text); }
+}
+.pn-root .pn-maikline span:last-child { min-width: 0; overflow-wrap: anywhere; }
+
+/* iPad landscape runner: a side panel on the right, the question stays in view */
+@media (orientation: landscape) and (min-width: 900px) {
+  .pn-root .pa-wrap.pa-side { flex-direction: row; justify-content: flex-end; align-items: stretch; padding: 0; }
+  .pn-root .pa-wrap.pa-side > .pa-sheet { width: 420px; max-width: 420px; max-height: none; height: 100%; margin: 0; border-radius: var(--pn-r-xl) 0 0 var(--pn-r-xl); padding-top: calc(16px + env(safe-area-inset-top, 0px)); }
+  .pn-root .pa-wrap.pa-side > .pa-sheet > .pn-grab { display: none; }
+  .pn-root .pa-wrap.pa-side > .pn-scrim { background: rgba(6, 16, 22, .18); -webkit-backdrop-filter: none; backdrop-filter: none; }
+}
+
+/* ---------- MaiK line under a finished set or lesson ---------- */
+.pn-root .pn-maikline { display: flex; align-items: center; gap: 12px; margin: 2px 0 4px; padding: 12px 14px; border-radius: var(--pn-r-lg); background: var(--pn-card); border: 1px solid var(--pn-edge); box-shadow: var(--pn-elev); font-size: 16px; font-weight: 600; line-height: 1.45; text-wrap: pretty; animation: pt-in var(--pn-d-enter) var(--pn-ease) .35s both; }
+
+/* ---------- milestone chip and balloons ---------- */
+.pn-root .pn-mile { order: -1; display: inline-flex; align-self: center; margin-bottom: 4px; }
+.pn-root .pn-mile span { display: inline-flex; align-items: center; min-height: 30px; padding: 0 14px; border-radius: var(--pn-r-pill); background: rgba(255, 255, 255, .14); color: var(--pn-hero-ink); font-size: 14px; font-weight: 750; letter-spacing: .01em; }
+.pn-root .pl-plan[data-cele] { position: relative; overflow: hidden; border-radius: var(--pn-r-lg); }
+.pn-root .pn-balloons { position: absolute; inset: 0; z-index: 3; overflow: hidden; pointer-events: none; border-radius: inherit; }
+.pn-root .pn-bl { position: absolute; top: 100%; width: 34px; height: 44px; margin-left: -17px; opacity: 0; will-change: transform, opacity; }
+.pn-root .pn-bl > i { position: absolute; inset: 0; border-radius: 50% 50% 47% 53% / 58% 58% 42% 42%; opacity: .92; transform-origin: 50% 100%;
+  background-image: radial-gradient(circle at 34% 30%, rgba(255, 255, 255, .7) 0, rgba(255, 255, 255, .7) 9%, rgba(255, 255, 255, 0) 30%); box-shadow: inset -4px -6px 10px rgba(0, 0, 0, .12); }
+.pn-root .pn-bl > i::after { content: ""; position: absolute; left: 50%; top: 100%; width: 1px; height: 30px; margin-left: -.5px; background: rgba(255, 255, 255, .55); transform-origin: top; }
+.pn-root .pn-bl > i::before { content: ""; position: absolute; left: 50%; top: 100%; width: 6px; height: 5px; margin: -1px 0 0 -3px; border-radius: 1px 1px 3px 3px; background: inherit; }
+
+@media (prefers-reduced-motion: reduce) {
+  .pn-root .pn-balloons { display: none; }
+  .pn-root .pn-maikline { animation: none; }
+  .pn-root .pa-opt, .pn-root .pa-sb { transition: none; }
+}

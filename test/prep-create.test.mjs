@@ -431,7 +431,7 @@ test("server item -> stored item for the runner; card; gates; paragraph; near du
 
 test("deck manifest (6.7) and topics", () => {
   const m = DK.newManifest({ id: "gen_a", title: "T", exam: "neet-pg", profileV: 1, pv: "p1", model: "gemini-3.1-flash-lite", source: { type: "paste", name: "", pages: null, sha: "s" }, now: 5 });
-  assert.equal(m.prov, "AI"); assert.equal(m.label, "AI-generated educational content"); assert.equal(m.v, 1);
+  assert.equal(m.prov, "AI"); assert.equal(m.label, undefined, "no AI label in the app (owner 2026-10-09)"); assert.equal(m.v, 1);
   assert.deepEqual(m.stats, { facts: 0, generated: 0, accepted: 0, rejected: 0, regenerated: 0, cards: 0 });
   assert.deepEqual(m.cost, { inTok: 0, outTok: 0, thinkTok: 0, inr: 0, stopped: null });
   const topics = DK.topicsFor("gen_a", [{ t: "sec-1" }, { t: "sec-1" }, { t: "sec-0" }], [{ id: "sec-0", title: "Iron" }, { id: "sec-1", title: "B12" }, { id: "sec-2", title: "Haem" }]);

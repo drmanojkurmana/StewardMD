@@ -6,7 +6,7 @@
  * the speed cycles and is kept, auto-advance moves on when a step's narration ends; the image enlarges and back()
  * closes it first; leaving the reader stops the voice; Finish shows the XP once (a second pass earns none); the 3 quick
  * questions run through the normal runner and write FSRS cards under the module deck; progress is kept in the store and
- * the lesson in IndexedDB; Ask MaiK is hidden on the web (no on-device model); no request reaches /api/ai and no
+ * the lesson in IndexedDB; Ask MaiK shows on the web too (its sheet offers Online); no request reaches /api/ai and no
  * uncaught PrepNucleus error.
  *
  * USAGE: node test/run-prep-lessons-ui.mjs   (CHROME=<path>; SHOTS=<dir> saves screenshots, PN_LIGHT=1 in light)
@@ -105,7 +105,11 @@ try {
   ok(await ev(`return document.querySelectorAll("#smdPrep .pn-lsn-tx b").length >= 3 && !/\\*\\*/.test(document.querySelector("#smdPrep .pn-lsn-tx").textContent);`) === true, "bold key terms drawn, no ** left");
   ok(await ev(`return document.querySelectorAll("#smdPrep .pn-vtbl tbody tr").length===5 && document.querySelectorAll("#smdPrep .pn-vtbl thead th").length===2;`) === true, "the table is real HTML: 2 columns, 5 rows");
   ok(await ev(`return !!document.querySelector("#smdPrep [data-act=l-prev]").disabled;`) === true, "Previous is disabled on the first step");
-  ok(await ev(`return !document.querySelector("#smdPrep [data-act=l-ask]");`) === true, "Ask MaiK is hidden without an on-device model");
+  ok(await ev(`return !!document.querySelector("#smdPrep [data-act=l-ask]");`) === true, "Ask MaiK shows on the web too (owner 2026-10-09: the sheet says where it works)");
+  await ev(`document.querySelector("#smdPrep [data-act=l-ask]").click(); return 1;`);
+  ok(await until(`var w=document.getElementById("pnAsk"); return !!w && !!w.querySelector(".pa-opts") && /works in the StewardMD app/.test(w.textContent);`, 5000), "Ask MaiK on a step opens the choice sheet, saying on-phone MaiK is in the app");
+  await ev(`document.querySelector("#pnAsk .pn-scrim").click(); return 1;`);
+  ok(await until(`return !document.getElementById("pnAsk") && !!document.querySelector("#smdPrep #pnLsn");`, 3000), "the sheet closes back to the step");
   ok(await ev(`var a=document.querySelector("#smdPrep .pn-lsn-bar").getBoundingClientRect(); return a.bottom <= innerHeight + 1 && a.height >= 60;`) === true, "the bottom bar sits on screen");
   const sw = await ev(`var o=[]; document.querySelectorAll("#smdPrep *").forEach(function(e){ var r=e.getBoundingClientRect(); if(r.right>innerWidth+1 && !e.closest(".pn-vtbl")) o.push(e.className||e.tagName); }); return o.slice(0,5).join("|");`);
   ok(sw === "", "nothing wider than the 390 px screen (tables scroll inside their card)" + (sw ? ": " + sw : ""));
