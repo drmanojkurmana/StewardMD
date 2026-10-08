@@ -201,6 +201,7 @@
       if (!l.test.clinic && !l.test.mcqTopic) e.push("test: needs clinic or mcqTopic");
     }
     if (l.deeper != null && (typeof l.deeper !== "object" || typeof l.deeper.note !== "string")) e.push("deeper: {note}");
+    e = e.concat(validateFields(l.fields, bi)); // "What the patient sees" (optional)
     list(l.glossary, "glossary").forEach(function (id) { if (glossary && !glossary[id]) e.push("glossary: unknown term " + id); });
     list(l.sources, "sources", 1);
     return e;
@@ -315,8 +316,125 @@
     return out.map(function (k2) { return k2.slice(6); });
   }
 
+  /* ---------- glossary abbreviations (content rule R3, owner 2026-10-08) ---------- */
+  // A term marked {abbr: true, full: {en, hi}} is an abbreviation. Its short form is the bracketed part of term.en
+  // ("retinal pigment epithelium (RPE)" -> "RPE"), else term.en itself ("LGN", "OCT scan").
+  function glossAbbr(g) {
+    if (!g || !g.abbr || !g.term) return null;
+    var m = /^(.*?)\s*\(([^()]+)\)$/.exec(g.term.en || "");
+    return m ? m[2] : g.term.en;
+  }
+  // The first-use form: "lateral geniculate nucleus (LGN)"; Hindi keeps the English full form and the short form in
+  // brackets (rule R4): "लैटरल जेनिकुलेट न्यूक्लियस (lateral geniculate nucleus, LGN)".
+  function glossFull(g, lang) {
+    var a = glossAbbr(g);
+    if (!a || !g.full || !g.full.en) return null;
+    return lang === "hi" && g.full.hi ? g.full.hi + " (" + g.full.en + ", " + a + ")" : g.full.en + " (" + a + ")";
+  }
+
+  /* ---------- visual field patterns ("What the patient sees", content rule R5) ---------- */
+  // Every pattern is drawn as the PATIENT sees it: u runs 0 (patient's left) to 1 (patient's right), v 0 (top) to 1
+  // (bottom), over one shared scene picture. "temporal" is the outer half of that eye's field: the left half for the
+  // left eye, the right half for the right eye; "nasal" is the inner half.
+  var FIELD_PATTERNS = ["full", "blind", "left-half", "right-half", "temporal", "nasal", "sup-left", "inf-left", "sup-right", "inf-right",
+    "tunnel", "central", "arcuate-sup", "arcuate-inf", "altitudinal-sup", "altitudinal-inf", "left-half-sparing", "right-half-sparing",
+    "blind-spot", "blur", "patchy"];
+  var FIELD_SITES = ["optic-nerve", "chiasm", "optic-tract", "lgn", "meyer-loop", "parietal-radiation", "occipital-cortex", "retina", "macula"];
+  // An eye-relative pattern named by the side of the field it takes, for this eye ("L" | "R").
+  function fieldResolve(p, eye) {
+    var left = eye === "L";
+    if (p === "temporal") return left ? "left-half" : "right-half";
+    if (p === "nasal") return left ? "right-half" : "left-half";
+    return p;
+  }
+  function sstep(a, b, x) { var k = (x - a) / (b - a); k = k < 0 ? 0 : k > 1 ? 1 : k; return k * k * (3 - 2 * k); }
+  // Fixed scattered patches (diabetic retinopathy, laser scars): [x, y, rx, ry] in picture-height units from the centre.
+  var PATCH = {
+    L: [[-0.42, -0.2, 0.07, 0.05], [0.18, -0.26, 0.06, 0.045], [-0.12, 0.2, 0.08, 0.05], [0.45, 0.12, 0.05, 0.07], [0.06, 0.03, 0.035, 0.03]],
+    R: [[0.38, -0.18, 0.07, 0.05], [-0.2, -0.28, 0.05, 0.04], [0.1, 0.22, 0.08, 0.05], [-0.48, 0.1, 0.05, 0.07], [-0.05, -0.06, 0.035, 0.03]]
+  };
+  // How much of the point (u, v) one eye loses: {d: 0..1 lost (drawn dark or blurred), b: 0..1 blurred (pattern "blur")}.
+  // aspect: picture width / height (the scene is 3:2). Edges are soft, like a real field defect.
+  function fieldAlpha(p, eye, u, v, aspect) {
+    var a = aspect || 1.5, x = (u - 0.5) * a, y = v - 0.5, r = Math.sqrt(x * x + y * y), e = 0.012;
+    // Each half's soft edge stays on its own side of the midline, so the left eye's left half and the right eye's
+    // right half never overlap: both eyes open shows no seam down the middle.
+    var L = 1 - sstep(-2 * e, 0, x), R = sstep(0, 2 * e, x), U = 1 - sstep(-2 * e, 0, y), D = sstep(0, 2 * e, y);
+    var tside = eye === "L" ? -1 : 1; // the temporal side of this eye's field
+    p = fieldResolve(p, eye);
+    switch (p) {
+      case "blind": return { d: 1, b: 0 };
+      case "left-half": return { d: L, b: 0 };
+      case "right-half": return { d: R, b: 0 };
+      case "sup-left": return { d: L * U, b: 0 };
+      case "inf-left": return { d: L * D, b: 0 };
+      case "sup-right": return { d: R * U, b: 0 };
+      case "inf-right": return { d: R * D, b: 0 };
+      case "altitudinal-sup": return { d: U, b: 0 };
+      case "altitudinal-inf": return { d: D, b: 0 };
+      case "tunnel": return { d: sstep(0.17, 0.27, r), b: 0 };
+      case "central": return { d: 1 - sstep(0.085, 0.13, r), b: 0 };
+      case "left-half-sparing": return { d: L * sstep(0.075, 0.1, r), b: 0 };
+      case "right-half-sparing": return { d: R * sstep(0.075, 0.1, r), b: 0 };
+      case "blind-spot": {
+        var bx = (x - tside * 0.25) / 0.085, by = (y - 0.02) / 0.115;
+        return { d: 1 - sstep(0.85, 1.12, Math.sqrt(bx * bx + by * by)), b: 0 };
+      }
+      case "arcuate-sup": case "arcuate-inf": {
+        // A Bjerrum arc around fixation from the blind spot, widening to the nasal edge (nasal step) and stopping
+        // at the horizontal line.
+        var half = p === "arcuate-sup" ? U : D, nas = Math.max(0, -tside * x) / (a / 2);
+        var out = 0.27 + 0.6 * nas * nas;
+        return { d: half * sstep(0.12, 0.155, r) * (1 - sstep(out - 0.035, out, r)), b: 0 };
+      }
+      case "blur": return { d: 0, b: 1 };
+      case "patchy": {
+        var m = 0;
+        (PATCH[eye === "L" ? "L" : "R"]).forEach(function (q) {
+          var dx = (x - q[0]) / q[2], dy = (y - q[1]) / q[3];
+          m = Math.max(m, 1 - sstep(0.7, 1.15, Math.sqrt(dx * dx + dy * dy)));
+        });
+        return { d: m, b: 0 };
+      }
+      default: return { d: 0, b: 0 }; // "full" (and anything unknown: drawn normal)
+    }
+  }
+  // Both eyes open: the centre is seen by both eyes, so a point is lost only where both eyes lose it; the outer
+  // crescent on each side (CRESCENT of the width) is seen by that side's eye alone.
+  var CRESCENT = 0.1;
+  function fieldBoth(pL, pR, u, v, aspect) {
+    var l = fieldAlpha(pL, "L", u, v, aspect), r = fieldAlpha(pR, "R", u, v, aspect);
+    var wl = 1 - sstep(CRESCENT - 0.03, CRESCENT + 0.03, u), wr = sstep(1 - CRESCENT - 0.03, 1 - CRESCENT + 0.03, u);
+    function mix(k) { var both = Math.min(l[k], r[k]); return wl * l[k] + wr * r[k] + (1 - wl - wr) * both; }
+    return { d: mix("d"), b: mix("b") };
+  }
+  // Schema check for a lesson's optional "fields" block. [] = valid.
+  function validateFields(f, bi) {
+    var e = [];
+    if (f == null) return e;
+    if (typeof f !== "object") return ["fields: an object"];
+    if (f.intro != null) bi(f.intro, "fields.intro");
+    if (!Array.isArray(f.items) || !f.items.length) { e.push("fields.items: needs a list of at least 1"); return e; }
+    var seen = {};
+    f.items.forEach(function (it, i) {
+      var w = "fields.items[" + i + "]";
+      if (!it || typeof it !== "object") { e.push(w + ": not an object"); return; }
+      if (typeof it.id !== "string" || !/^[a-z0-9-]+$/.test(it.id) || it.id === "normal") e.push(w + ".id: lowercase letters, digits and hyphens (not \"normal\")");
+      else if (seen[it.id]) e.push(w + ".id: duplicate " + it.id);
+      seen[it.id] = 1;
+      bi(it.label, w + ".label");
+      if (FIELD_PATTERNS.indexOf(it.le) < 0) e.push(w + ".le: one of " + FIELD_PATTERNS.join(", "));
+      if (FIELD_PATTERNS.indexOf(it.re) < 0) e.push(w + ".re: one of " + FIELD_PATTERNS.join(", "));
+      if (it.where != null) bi(it.where, w + ".where");
+      if (it.lesion != null && FIELD_SITES.indexOf(it.lesion) < 0) e.push(w + ".lesion: one of " + FIELD_SITES.join(", "));
+    });
+    return e;
+  }
+
   var API = {
     STORE_KEY: STORE_KEY, PREF_KEY: PREF_KEY, firstRun: firstRun,
+    glossAbbr: glossAbbr, glossFull: glossFull,
+    FIELD_PATTERNS: FIELD_PATTERNS, FIELD_SITES: FIELD_SITES, fieldResolve: fieldResolve, fieldAlpha: fieldAlpha, fieldBoth: fieldBoth,
     t: t, glossParts: glossParts, validateLesson: validateLesson, validateIndex: validateIndex, mediaCredit: mediaCredit, scopeSvg: scopeSvg,
     learnUnits: learnUnits, lessonDone: lessonDone, nextLesson: nextLesson, finishLesson: finishLesson, learnDue: learnDue,
     levelKey: levelKey, optionsFor: optionsFor, truthFor: truthFor, levelDeck: levelDeck,
