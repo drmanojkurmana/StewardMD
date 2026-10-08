@@ -202,3 +202,37 @@ both modes. Switching mode while Ophthalmos is open follows at once (pure CSS).
 - Explorer colours now match the neuro-pathway lesson: blue = left half of vision. StewardMD's own colours
   (light `ophthalmos-explore.css`, dark `oph-theme-dark.css`) were swapped too (`?v=ophdark2`).
 - Synced by a 3-way merge again; the StewardMD-only oph10/oph11 edits still need porting to the module.
+
+## Content rules (oph14, 2026-10-08)
+Owner, after the neuro-pathway lesson said "the right brain sees the left half of the world" and showed "LGN" with
+no full form: rules R1 to R9 for ALL Ophthalmós text (lessons, notes, glossary, explorers, simulators, tools,
+quizzes; English and Hindi). Full text with examples: `ophthalmos/CONTENT-RULES.md`.
+- **R1** medical term first, plain meaning in brackets at first use: "the left half of the visual field (the left
+  side of everything you see)". Never "world" for visual field, "picture" for retinal image, "relay knot" for LGN.
+- **R2** analogies only in the "Think of it like this" block (or a marked "like ..."), medical term kept beside them.
+- **R3** abbreviations written out at first use per lesson/screen. Glossary acronyms carry `"abbr": true` and
+  `"full": {en, hi}`; `D.glossFull()` renders the first `[[term]]` of a lesson as "lateral geniculate nucleus (LGN)"
+  (a full form that already holds its short form, e.g. "optical coherence tomography (OCT) scan", is used as written),
+  later links show the short form (`D.glossAbbr()`), and the glossary sheet title is always the full form.
+- **R4** Hindi: plain Hindi with the English term in brackets; full forms may stay in English letters:
+  "लैटरल जेनिकुलेट न्यूक्लियस (lateral geniculate nucleus, LGN)". No em or en dashes anywhere.
+- **R5** field defects are shown: a lesson's optional `fields` block (`{intro?, items: [{id, label, le, re, where?,
+  lesion?}]}`, patterns and sites in `D.FIELD_PATTERNS` / `D.FIELD_SITES`, validated by `validateLesson`) adds a
+  "What the patient sees" step after Why it happens: left eye, right eye and both eyes open drawn on one CC0 street
+  scene (`learn/media/fields/street-mysore.webp`, media id `fields-scene`, Christopher J. Fynn, Wikimedia Commons),
+  "Normal" first, dark or blurred loss (remembered in prefs as `fstyle`). Patterns come from `D.fieldAlpha()` (patient's
+  view: temporal = outer half of that eye) and `D.fieldBoth()` (centre lost only where both eyes lose it; the outer 10%
+  crescent belongs to that side's eye). A "See it" hotspot named after a pathway site offers "See what the patient sees"
+  when an item has that `lesion`.
+- **R6** short sentences, facts unchanged, everything stays `ai_drafted`.
+- **R7** anatomically complete ("each optic nerve carries both the nasal and the temporal fibres of its own eye").
+- **R8** precise names at first use (Meyer loop = inferior fibres of the optic radiation in the temporal lobe;
+  pretectal and Edinger-Westphal nuclei; short ciliary nerves).
+- **R9** no vague counts where a name exists (macular sparing: posterior cerebral artery and middle cerebral artery).
+- **Lint:** `test/ophthalmos-content-rules.test.mjs` checks R1, R3 (listed non-glossary abbreviations, first use per
+  lesson / note / track / glossary entry), R4, R5, R9 phrases, glossary full forms, `[[term]]` links and the field
+  model. **UI:** `test/run-ophthalmos-fields-ui.mjs` (fixture lesson: render, switch, both eyes, blur, Hindi, dark,
+  390 no overflow, 44 px targets, LGN first-use expansion). The image could not be generated (Codex CLI's image tool
+  is not available in `codex exec` on this account; `agy` needed a Google sign-in), so the scene is a CC0 photo.
+- Explorer, neuro simulator and tools strings were rewritten to R1 to R9 here; **port to the module repo**, along
+  with the renderer, glossary and test, before the next sync. Cache token `?v=oph14`.

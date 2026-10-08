@@ -13,7 +13,14 @@
 
    Items are stored in the engine format with _s "deck" and _m "deck-<deckId>", so the shared runner writes their
    FSRS cards under "p:deck-<deckId>". They keep prov "AI" (6.4) and carry gen "AI", so the runner labels them
-   "AI-generated, auto-checked". Pure helpers load under node for tests. */
+   "AI-generated, auto-checked". Pure helpers load under node for tests.
+
+   Image questions (PDF only): after the text is read, the pictures on the chosen pages are cut out on the phone
+   (PREP_SRC.extractImages: at least 200 x 200 px, no logos or running headers, at most 20, at most 1280 px) and shown as
+   a strip; the student keeps the ones to use. After the text round, each kept image is one `imcq` call with the page
+   text near it (PREP_SRC.nearSents); the server keeps a question only when the page text states its key, else the image
+   is skipped. An image that got a question is stored with the deck (prep-imgs, a data: URL) and shown with the stem
+   (imgPlace "stem") through the PYQ figure and zoom. The image is sent only for that call and kept nowhere else. */
 (function (G) {
   "use strict";
   var isNode = typeof module !== "undefined" && module.exports && !(G && G.document);
@@ -255,7 +262,7 @@
   function newJob(o) {
     var job = { m: o.m, deckId: o.m.id, sents: o.sents, sections: o.sections || [], byN: {}, chunks: SR.chunkSentences(o.sents), order: [], done: {},
       facts: {}, factOrder: [], stems: [], tlist: [], round: newRound(o.target || TARGET), saved: !!o.saved, stopReq: false, stopped: null,
-      steps: 0, phase: "", caps: null, profile: o.profile || PROFILE, ctx: o.ctx || {} };
+      steps: 0, phase: "", caps: null, profile: o.profile || PROFILE, ctx: o.ctx || {}, imgQ: (o.imgs || []).slice(0, SR.IMG_CAP || 20), imgDone: 0, imgKept: 0 };
     job.sents.forEach(function (s) { job.byN[s.n] = s; });
     job.order = SR.chunkOrder(job.chunks);
     ((o.m.prog && o.m.prog.done) || []).forEach(function (i) { job.done[i] = 1; });
@@ -272,7 +279,14 @@
   /* The next op, or null when the round is over. Batches move stage by stage (all mcq, then all solve, then all
      review), then the failed facts are regenerated once, then the round ends at the target or when its batches
      (ceil(target x 1.4 / 7): 2 for 10 questions) are spent, so a round's cost has a ceiling. */
+  /* After the text round: one imcq per chosen image (job.imgQ), once the deck is started on the server (a facts call
+     was accepted, so job.saved), unless the student stopped or a cap stopped the run. */
   function nextOp(job) {
+    var op = textOp(job);
+    if (op || job.stopped || job.stopReq) return op;
+    return job.imgQ && job.imgQ.length && job.saved ? { op: "imcq" } : null;
+  }
+  function textOp(job) {
     var r = job.round, st = ["mcq", "solve", "review"], i, k;
     if (job.stopped || job.stopReq) return null;
     for (k = 0; k < st.length; k++) for (i = 0; i < r.batches.length; i++) if (r.batches[i].stage === st[k]) return { op: st[k], b: i };
@@ -285,7 +299,7 @@
     if (unused) return { op: "batch" };
     return null;
   }
-  var PHASE = { facts: "Finding the key facts in your source", mcq: "Writing questions", solve: "Checking each answer blind", review: "Reviewing each question", regen: "Rewriting the questions that failed a check", batch: "Writing questions" };
+  var PHASE = { imcq: "Writing questions on your images", facts: "Finding the key facts in your source", mcq: "Writing questions", solve: "Checking each answer blind", review: "Reviewing each question", regen: "Rewriting the questions that failed a check", batch: "Writing questions" };
 
   // The server's code-gate names (mcq "rejected") as the reason handed back in avoid.
   var GATE_WHY = { g1: "it did not have exactly four options", g2: "the key was repeated as a distractor", g3: "two options were the same",
@@ -327,6 +341,7 @@
     }
     job.steps++;
     body = base(job, op.op);
+    if (op.op === "imcq") return stepImage(job, body, deps);
     if (op.op === "facts") {
       var chunk = job.chunks[op.chunk];
       body.chunk = SR.chunkPayload(chunk);
@@ -417,6 +432,46 @@
     }
     return Promise.reject(new Error("unknown op " + op.op));
   }
+  /* One image: its data (re-encoded smaller by deps.fitImage when needed) and the numbered page text near it. A kept
+     question is saved with its image; a skipped image (the page text does not support a question) is dropped. */
+  function imgB64(dataUrl) { var m = /^data:(image\/(?:jpeg|webp|png));base64,(.+)$/.exec(String(dataUrl || "")); return m ? { mime: m[1], data: m[2] } : null; }
+  function stepImage(job, body, deps) {
+    var img = job.imgQ[0], m = job.m, store = deps.store;
+    var near = SR.nearSents(job.sents, img.p);
+    var drop = function () { job.imgQ.shift(); job.imgDone++; return saveDeck(job, store); };
+    if (!near.length) return drop();
+    return Promise.resolve(deps.fitImage ? deps.fitImage(img) : img).then(function (fit) {
+      var b = imgB64(fit && fit.data);
+      if (!b) return drop();
+      body.img = b; body.near = near;
+      body.src = { doc: job.ctx.doc, name: job.ctx.name || "" };
+      var sec = near[0] && job.byN[near[0].n] && job.byN[near[0].n].s;
+      if (/^[a-z0-9-]{1,40}$/.test(String(sec || ""))) body.t = sec;
+      return deps.send(body).then(function (res) {
+        applyUsage(job, res, deps);
+        var it = res && res.items && res.items[0], s = null;
+        if (it) {
+          s = toStored(it, { id: it.fid, sec: sec || "sec-0", p: (it.src && it.src.p) || [img.p], h: (it.src && it.src.h) || "", sn: (it.src && it.src.sn) || [] }, job.deckId, job.ctx);
+          if (s && nearDup(s.q, job.stems)) s = null;
+        }
+        if (!s) { m.stats.imgSkipped = (m.stats.imgSkipped || 0) + 1; return drop(); }
+        var imgId = "i_" + DK.sha12(job.deckId + img.k);
+        s.imgId = imgId; s.imgPlace = "stem"; s.rv = { solved: false, pass: true, img: true };
+        job.stems.push(s.q); job.tlist.push({ t: s.t });
+        job.round.accepted++; m.stats.accepted++; m.stats.img = (m.stats.img || 0) + 1; job.imgKept++;
+        m.topics = DK.topicsFor(job.deckId, job.tlist, job.sections);
+        job.imgQ.shift(); job.imgDone++;
+        return store.putImgs([{ id: imgId, deckId: job.deckId, p: img.p, w: img.w, h: img.h, data: img.data }])
+          .then(function () { return store.putItems([s]); }).then(function () { return saveDeck(job, store); });
+      });
+    });
+  }
+  // Deck items with an image get it back from prep-imgs (img: [data URL]) before they are drawn.
+  function attachImages(items, imgs) {
+    var by = {}; (imgs || []).forEach(function (r) { if (r && r.id && r.data) by[r.id] = r.data; });
+    (items || []).forEach(function (it) { if (it.imgId && by[it.imgId]) { it.img = [by[it.imgId]]; it.imgPlace = "stem"; } });
+    return items;
+  }
   function applyUsage(job, res, deps) {
     addUsage(job.m.cost, res && res.usage);
     var caps = capsFrom(res && res.usage, deps.today || dayKey());
@@ -488,13 +543,13 @@
     idemKey: idemKey, deckIdFor: deckIdFor, mixFor: mixFor, addUsage: addUsage, dayKey: dayKey, capsFrom: capsFrom, capLine: capLine, capsAfterStop: capsAfterStop, costLine: costLine,
     factRecord: factRecord, factPayload: factPayload, paraFor: paraFor, gatesPass: gatesPass, toStored: toStored, toCard: toCard, jaccard: jaccard, nearDup: nearDup,
     deckKey: deckKey, cardDeckKey: cardDeckKey, deckProgress: deckProgress, purgeStore: purgeStore, defaultTitle: defaultTitle, readNote: readNote, unreadableMessage: unreadableMessage,
-    newRound: newRound, newJob: newJob, nextOp: nextOp, unusedFids: unusedFids, hasMore: hasMore, step: step, runRound: runRound, callOp: callOp
+    newRound: newRound, newJob: newJob, nextOp: nextOp, attachImages: attachImages, imgB64: imgB64, unusedFids: unusedFids, hasMore: hasMore, step: step, runRound: runRound, callOp: callOp
   };
   if (isNode) { module.exports = PURE; return; }
 
   /* ================= browser ================= */
   var CAPS_KEY = "smd_prep_c_caps";
-  var cs = { kind: "paste", text: "", title: "", own: false, pdf: null, pagesSpec: "", err: "", busy: "", pending: null };
+  var cs = { kind: "paste", text: "", title: "", own: false, pdf: null, pagesSpec: "", err: "", busy: "", pending: null, imgs: null, imgOn: {}, pendingImg: null };
   var job = null, jobResult = null, profiles = {}, note = "";   // note: what the reader could not read as text (readNote)
 
   function readCaps() { try { return JSON.parse(G.localStorage.getItem(CAPS_KEY) || "null"); } catch (e) { return null; } }
@@ -502,6 +557,30 @@
   function capsNow() { return capLine((job && job.caps) || readCaps(), dayKey()); }
   function newJobCaps(j) { j.caps = readCaps(); return j; }
   function user() { var a = G.SMD_AUTH; return a && a.currentUser ? a.currentUser : null; }
+  /* An image too large for one request (the server takes about 270 KB) is drawn again smaller as a JPEG, at most
+     three times. The stored copy stays as it was cut. */
+  var IMG_B64_MAX = 340000;
+  function fitImage(img) {
+    var b = imgB64(img.data);
+    if (b && b.data.length <= IMG_B64_MAX) return Promise.resolve(img);
+    return new Promise(function (res) {
+      var im = new G.Image();
+      im.onload = function () {
+        var sc = 0.8, out = null;
+        for (var t = 0; t < 3; t++) {
+          var cv = G.document.createElement("canvas");
+          cv.width = Math.max(1, Math.round(im.naturalWidth * sc)); cv.height = Math.max(1, Math.round(im.naturalHeight * sc));
+          var cx = cv.getContext("2d"); cx.fillStyle = "#fff"; cx.fillRect(0, 0, cv.width, cv.height); cx.drawImage(im, 0, 0, cv.width, cv.height);
+          out = cv.toDataURL("image/jpeg", 0.72); cv.width = 0; cv.height = 0;
+          if (out.length - 23 <= IMG_B64_MAX) break;
+          sc *= 0.75;
+        }
+        res({ p: img.p, k: img.k, w: img.w, h: img.h, data: out });
+      };
+      im.onerror = function () { res(null); };
+      im.src = img.data;
+    });
+  }
   function wait(ms) { return new Promise(function (res) { G.setTimeout(res, ms); }); }
   var cfg = { gap: 3200, retryMs: RETRY_MS }, lastStart = 0;
   // The server allows one call per user every 3 s; keep the calls at least that far apart.
@@ -632,10 +711,46 @@
       if (phase === "ocr") el.textContent = d < n ? "Reading scanned page " + (d + 1) + " of " + n + " on this phone" : "Scanned pages read";
       else if (d < n) el.textContent = "Reading page " + (d + 1) + " of " + n + "…";
     }).then(function (rd) {
-      cs.busy = "";
-      if (!rd.pages.length) return createError(host, unreadableMessage(rd, ocrOn));
-      review(host, { kind: "pdf", raw: rd.pages, title: cs.title, name: cs.pdf.name, pages: pp.pages, scanned: rd.scanned, ocr: rd.ocrPages.length, skipped: rd.skipped.length, note: readNote(rd, ocrOn) });
+      if (!rd.pages.length) { cs.busy = ""; return createError(host, unreadableMessage(rd, ocrOn)); }
+      var src = { kind: "pdf", raw: rd.pages, title: cs.title, name: cs.pdf.name, pages: pp.pages, scanned: rd.scanned, ocr: rd.ocrPages.length, skipped: rd.skipped.length, note: readNote(rd, ocrOn) };
+      findImages(host, cs.pdf.doc, pp.pages).then(function (imgs) {
+        cs.busy = "";
+        if (!imgs.length) return review(host, src);
+        cs.imgs = imgs; cs.imgOn = {}; imgs.forEach(function (x) { cs.imgOn[x.k] = 1; });
+        cs.pendingImg = src;
+        host.push(function () { renderImages(host); });
+      });
     }, function () { createError(host, "The pages could not be read. Try other pages or another PDF."); });
+  }
+  // Pictures on the chosen pages; none (or a failure) just means a text-only deck.
+  function findImages(host, doc, pages) {
+    if (!SR.extractImages || !G.pdfjsLib) return Promise.resolve([]);
+    var el = function () { return host.root() && host.root().querySelector("#pcCreateView .pn-load"); };
+    return SR.extractImages(doc, pages, function (d, n, phase) { var e = el(); if (e) e.textContent = phase === "cut" ? "Cutting out image " + Math.min(d + 1, n) + " of " + n + "…" : "Looking for images on page " + Math.min(d + 1, n) + " of " + n + "…"; })
+      .then(null, function () { return []; });
+  }
+  /* The strip of images found: each one a toggle, all on at first. Continue keeps the chosen ones for image questions. */
+  function renderImages(host) {
+    var esc = host.esc, list = cs.imgs || [], on = list.filter(function (x) { return cs.imgOn[x.k]; }).length;
+    host.paint(host.bar("Images in your PDF", esc((cs.pendingImg && cs.pendingImg.name) || ""), "back") + '<div class="pn-body" id="pcImgView">' +
+      '<h2 class="pn-sec pc-imgh">Use these images for image questions</h2>' +
+      '<p class="pn-mut pn-small">' + list.length + (list.length === 1 ? " image was" : " images were") + " found on the pages you chose. Each one you keep gets a question when the text near it says what it shows.</p>" +
+      '<div class="pc-strip" role="group" aria-label="Images found">' + list.map(function (x, i) {
+        var sel = !!cs.imgOn[x.k];
+        return '<button type="button" class="pc-thumb' + (sel ? " on" : "") + '" data-act="c-img" data-v="' + esc(x.k) + '" aria-pressed="' + sel + '" aria-label="Image ' + (i + 1) + " of " + list.length + (sel ? ", kept" : ", left out") + '">' +
+          // The page number sits by a page glyph: emoji-icons.js rewrites any "Page 3" text in the app as a book citation.
+          '<img src="' + esc(x.data) + '" alt="" width="' + x.w + '" height="' + x.h + '" decoding="async"><span class="pc-tp" aria-hidden="true"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg>' + x.p + '</span><span class="pc-tick" aria-hidden="true">' + host.ico("check") + "</span></button>";
+      }).join("") + "</div>" +
+      '<p class="pn-mut pn-small" id="pcImgN" role="status">' + on + " of " + list.length + " kept</p>" +
+      '<p class="pn-mut pn-small">Use images from study material, not patient images. A kept image is sent once, with the text around it, to write its question, and stays on this phone with the deck.</p>' +
+      '<div class="pn-navrow"><button type="button" class="pn-btn" data-act="c-imgskip">Skip images</button><button type="button" class="pn-btn pri" data-act="c-imgok"' + (on ? "" : " disabled") + ">" + (on ? "Use " + on + (on === 1 ? " image" : " images") : "Continue") + "</button></div></div>");
+  }
+  function imagesChosen(host, keep) {
+    var src = cs.pendingImg; if (!src) return;
+    src.imgs = keep ? (cs.imgs || []).filter(function (x) { return cs.imgOn[x.k]; }) : [];
+    cs.imgs = null; cs.imgOn = {}; cs.pendingImg = null;
+    host.back();
+    review(host, src);
   }
   function rawText(src) {
     if (src.kind === "paste") return src.text;
@@ -666,17 +781,17 @@
     loadProfile(ex.id).then(function (prof) {
       var id = deckIdFor({ uid: u && u.uid, sha: sha, exam: ex.id, profileV: prof.v || 1, pv: PV, model: MODEL });
       return DK.getDeck(id).then(function (old) {
-        if (old) { host.toast("You already have a deck from this source. Adding 10 more questions to it."); return startMore(host, old.id, true); }
+        if (old) { host.toast("You already have a deck from this source. Adding 10 more questions to it."); return startMore(host, old.id, true, src.imgs); }
         var m = DK.newManifest({ id: id, title: title, exam: ex.id, profileV: prof.v || 1, pv: PV, model: MODEL, source: { type: src.kind, name: src.name, pages: SR.pageSpan(src.pages), sha: sha } });
         if (src.ocr) m.source.ocr = src.ocr;
         if (src.skipped) m.source.skipped = src.skipped;
         note = src.note || "";
-        start(host, newJob({ m: m, sents: doc.sents, sections: doc.sections, facts: [], items: [], saved: false, target: TARGET, profile: prof, ctx: ctxOf(m) }), true);
+        start(host, newJob({ m: m, sents: doc.sents, sections: doc.sections, facts: [], items: [], saved: false, target: TARGET, profile: prof, ctx: ctxOf(m), imgs: src.imgs }), true);
       });
     }).then(null, function () { createError(host, MSG.storage); });
   }
   function ctxOf(m) { return { doc: m.source.sha.slice(0, 12), name: m.source.name || m.title, exam: m.exam, pv: m.pv, model: m.model }; }
-  function startMore(host, deckId, fromCreate) {
+  function startMore(host, deckId, fromCreate, imgs) {
     if (!fromCreate) note = "";
     if (job && !jobResult) { host.toast("A deck is being made. Wait for it to finish first."); return Promise.resolve(); }
     return Promise.all([DK.getDeck(deckId), DK.getSrc(deckId), DK.facts(deckId), DK.items(deckId)]).then(function (a) {
@@ -684,16 +799,16 @@
       if (!m || !src) { host.toast("This deck's source is missing on this phone, so no more questions can be made."); return; }
       return loadProfile(m.exam).then(function (prof) {
         m.cost.stopped = null;
-        start(host, newJob({ m: m, sents: src.sents, sections: src.sections, facts: a[2], items: a[3], saved: true, target: TARGET, profile: prof, ctx: ctxOf(m) }), fromCreate);
+        start(host, newJob({ m: m, sents: src.sents, sections: src.sections, facts: a[2], items: a[3], saved: true, target: TARGET, profile: prof, ctx: ctxOf(m), imgs: imgs }), fromCreate);
       });
     });
   }
   // Leave the Create (and warning) screens under the progress screen, so back from it lands on Your decks.
   function start(host, j, fromCreate) {
     job = newJobCaps(j); jobResult = null;
-    if (fromCreate) { while (onTop("#pcScrubView", host) || onTop("#pcCreateView", host)) host.back(); }
+    if (fromCreate) { while (onTop("#pcScrubView", host) || onTop("#pcCreateView", host) || onTop("#pcImgView", host)) host.back(); }
     host.push(function () { renderProgress(host); });
-    runRound(job, { send: send, store: DK, today: dayKey(), onCaps: writeCaps, onStep: function () { updateProgress(host); } }).then(function (res) {
+    runRound(job, { send: send, store: DK, today: dayKey(), onCaps: writeCaps, fitImage: fitImage, onStep: function () { updateProgress(host); } }).then(function (res) {
       jobResult = res;
       if (onTop("#pcProgView", host)) host.rerender();
       else if (res.ok) host.toast(res.accepted + " new questions are ready in " + j.m.title + ".");
@@ -704,7 +819,7 @@
   /* ---------- progress ---------- */
   function progressBits(host) {
     var r = job.round, pct = Math.min(100, Math.round(r.accepted * 100 / r.target));
-    var net = job.phase === "facts" || job.phase === "mcq" || job.phase === "solve" || job.phase === "review";
+    var net = job.phase === "facts" || job.phase === "mcq" || job.phase === "solve" || job.phase === "review" || job.phase === "imcq";
     return { pct: pct, count: r.accepted + " of " + r.target, phase: (PHASE[job.phase] || "Getting ready") + (net ? " (step " + (job.steps + 1) + ")" : ""), caps: capsNow() };
   }
   function renderProgress(host) {
@@ -722,8 +837,9 @@
         (res.retry ? '<button type="button" class="pn-btn pri" data-act="c-resume">Try again</button>' : "") +
         '<button type="button" class="pn-btn" data-act="c-done">Done</button>';
     } else {
-      var n = res.accepted, has = DK.questionCount(job.m);
+      var n = res.accepted, has = DK.questionCount(job.m), ni = job.imgKept || 0, ns = job.imgDone - ni;
       body = '<section class="pn-panel pn-score"><p class="pn-big">' + n + '</p><p class="pn-mut">' + (n === 1 ? "new question" : "new questions") + " · " + has + " in the deck</p>" +
+        (job.imgDone ? '<p class="pn-mut pn-small" id="pcImgLine">' + ni + (ni === 1 ? " question on your images" : " questions on your images") + (ns > 0 ? ", " + ns + (ns === 1 ? " image" : " images") + " left out: the text near " + (ns === 1 ? "it" : "them") + " did not say clearly what " + (ns === 1 ? "it shows" : "they show") : "") + ".</p>" : "") +
         (b.caps ? '<p class="pn-mut pn-small" id="pcCaps">' + esc(b.caps) + "</p>" : "") + "</section>" +
         (note ? '<p class="pn-mut pn-small" id="pcNote">' + esc(note) + "</p>" : "") +
         (res.ok ? '<p class="pn-mut">' + (res.stopped ? "Stopped. What was made is saved." : n ? "Saved on this phone." : res.more ? "No question passed the checks this time. Try 10 more." : "Every part of this source has been used. Make a new deck from more material.") + "</p>" :
@@ -748,7 +864,7 @@
     jobResult = null; job.stopped = null; job.stopReq = false;
     var j = job;
     host.rerender();
-    runRound(j, { send: send, store: DK, today: dayKey(), onCaps: writeCaps, onStep: function () { updateProgress(host); } }).then(function (res) {
+    runRound(j, { send: send, store: DK, today: dayKey(), onCaps: writeCaps, fitImage: fitImage, onStep: function () { updateProgress(host); } }).then(function (res) {
       jobResult = res;
       if (onTop("#pcProgView", host)) host.rerender(); else host.toast(res.ok ? res.accepted + " new questions are ready." : res.message);
     });
@@ -756,10 +872,16 @@
 
   /* ---------- practise, cards, delete ---------- */
   function practise(host, deckId, mode) {
-    Promise.all([DK.getDeck(deckId), DK.items(deckId)]).then(function (a) {
+    Promise.all([DK.getDeck(deckId), DK.items(deckId), DK.imgs ? DK.imgs(deckId).then(null, function () { return []; }) : []]).then(function (a) {
       var m = a[0], items = (a[1] || []).filter(function (it) { return it && it.o && it.o.length === 4; });
       if (!m || !items.length) return host.toast("This deck has no questions yet.");
       items.forEach(function (it) { it._s = "deck"; it._m = "deck-" + deckId; });
+      attachImages(items, a[2]);
+      // The practice setup sheet (prep-setup.js): type, count, new or repeat, difficulty, mode. Bookmarks do not apply.
+      if (G.PREP_SETUP && G.PREP_SETUP.enabled()) {
+        return G.PREP_SETUP.open({ kind: "deck", id: deckId, title: m.title, sub: "Your deck", mode: mode, load: function () { return [items]; },
+          start: function (list, md, ro) { host.run(list, md, m.title, ro); } }, host);
+      }
       var C = host.core(), list;
       if (mode === "exam") list = shuffle(items.slice()).slice(0, 20);
       else list = C.buildSession({ id: deckKey(deckId), items: items }, host.store(), host.today(), { size: 20, newCap: 20 });
@@ -807,6 +929,9 @@
       return startMore(host, d, false);
     }
     if (a === "c-del") return remove(host, deckIdOf(el));
+    if (a === "c-img") { var k = el.getAttribute("data-v"); if (cs.imgOn[k]) delete cs.imgOn[k]; else cs.imgOn[k] = 1; return host.rerender(); }
+    if (a === "c-imgok") return imagesChosen(host, true);
+    if (a === "c-imgskip") return imagesChosen(host, false);
   }
 
   G.PREP_C = { act: act, cfg: cfg, _pure: PURE, _cs: cs, _job: function () { return { job: job, result: jobResult }; } };

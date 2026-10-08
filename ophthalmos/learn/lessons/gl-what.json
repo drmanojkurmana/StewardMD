@@ -9,8 +9,8 @@
     "hi": "ग्लूकोमा क्या है"
   },
   "idea": {
-    "en": "[[glaucoma]] slowly kills the fibres of the [[optic-nerve]]. The [[cup]] of the disc grows and side vision fades first. Lost sight does not come back.",
-    "hi": "[[glaucoma]] में [[optic-nerve]] के तंतु धीरे-धीरे ख़त्म होते हैं। डिस्क का [[cup]] बड़ा होता जाता है और पहले किनारे की नज़र घटती है। गई हुई नज़र वापस नहीं आती।"
+    "en": "[[glaucoma]] slowly kills the retinal ganglion cell axons (nerve fibres) of the [[optic-nerve]]. The [[cup]] of the optic disc (where the nerve leaves the eye) grows and peripheral (side) vision fades first. Lost sight does not come back.",
+    "hi": "[[glaucoma]] में [[optic-nerve]] के रेटिनल गैंग्लियन सेल के एक्सॉन (retinal ganglion cell axons, तंतु) धीरे-धीरे ख़त्म होते हैं। ऑप्टिक डिस्क (जहाँ से नर्व आँख से निकलती है) का [[cup]] बड़ा होता जाता है और पहले परिधीय (peripheral) यानी किनारे की नज़र घटती है। गई हुई नज़र वापस नहीं आती।"
   },
   "see": {
     "img": "disc/Im613_g_ACRIMA.webp",
@@ -21,7 +21,7 @@
     "expect": "glaucoma",
     "alt": {
       "en": "Close colour photo of an optic disc on an orange background. A large pale yellow-white area fills most of the disc. Vessels bend over its right edge. Small pale patches lie below the disc.",
-      "hi": "नारंगी पृष्ठभूमि पर एक ऑप्टिक डिस्क की पास से ली गई रंगीन फ़ोटो। डिस्क का ज़्यादातर हिस्सा हल्के पीले-सफ़ेद रंग से भरा है। दाएँ किनारे पर नसें मुड़ती हैं। डिस्क के नीचे छोटे हल्के धब्बे हैं।"
+      "hi": "नारंगी पृष्ठभूमि पर एक ऑप्टिक डिस्क की पास से ली गई रंगीन फ़ोटो। डिस्क का ज़्यादातर हिस्सा हल्के पीले-सफ़ेद रंग से भरा है। दाएँ किनारे पर रक्त-नलियाँ मुड़ती हैं। डिस्क के नीचे छोटे हल्के धब्बे हैं।"
     },
     "caption": {
       "en": "A real photo of an optic disc labelled glaucoma. The pale cup fills most of the disc.",
@@ -37,8 +37,8 @@
           "hi": "बड़ा कप"
         },
         "note": {
-          "en": "The pale hollow is very wide. Nerve fibres that once filled it have died.",
-          "hi": "हल्के रंग का गड्ढा बहुत चौड़ा है। जो तंतु इसे भरते थे, वे ख़त्म हो चुके हैं।"
+          "en": "The pale hollow is very wide. The retinal ganglion cell axons that once formed the rim here have died.",
+          "hi": "हल्के रंग का गड्ढा बहुत चौड़ा है। जो रेटिनल गैंग्लियन सेल के एक्सॉन (retinal ganglion cell axons) यहाँ रिम बनाते थे, वे ख़त्म हो चुके हैं।"
         }
       },
       {
@@ -58,29 +58,65 @@
         "y": 0.46,
         "label": {
           "en": "Vessels bend",
-          "hi": "मुड़ती नसें"
+          "hi": "मुड़ती रक्त-नलियाँ"
         },
         "note": {
           "en": "Vessels dip over the edge of the deep cup.",
-          "hi": "गहरे कप के किनारे पर नसें नीचे की ओर मुड़ जाती हैं।"
+          "hi": "गहरे कप के किनारे पर रक्त-नलियाँ नीचे की ओर मुड़ जाती हैं।"
         }
       },
       {
         "x": 0.34,
         "y": 0.77,
         "label": {
-          "en": "Pale patches",
-          "hi": "हल्के धब्बे"
+          "en": "Pale patches (peripapillary atrophy)",
+          "hi": "हल्के धब्बे (peripapillary atrophy)"
         },
         "note": {
-          "en": "Thin tissue around the disc. It is often seen with glaucoma, but it does not prove it.",
-          "hi": "डिस्क के चारों ओर पतला ऊतक। यह ग्लूकोमा में अक्सर दिखता है, पर इससे ग्लूकोमा साबित नहीं होता।"
+          "en": "Thinned retina and choroid around the disc (peripapillary atrophy). It is often seen with glaucoma, but it does not prove it.",
+          "hi": "डिस्क के चारों ओर पतला रेटिना और कोरॉइड (peripapillary atrophy)। यह ग्लूकोमा में अक्सर दिखता है, पर इससे ग्लूकोमा साबित नहीं होता।"
         }
       }
     ],
     "more": [
       "glaucoma-cupping",
       "sim-glaucoma"
+    ]
+  },
+  "fields": {
+    "intro": {
+      "en": "Glaucoma field loss starts away from the centre, so each eye must be tested alone.",
+      "hi": "ग्लूकोमा (glaucoma) में दृष्टि क्षेत्र (visual field) की कमी बीच से दूर शुरू होती है, इसलिए हर आँख को अलग से जाँचें।"
+    },
+    "items": [
+      {
+        "id": "arcuate-superior",
+        "label": {
+          "en": "Superior arcuate scotoma (curved blind patch above the centre)",
+          "hi": "ऊपरी आर्कुएट स्कोटोमा (superior arcuate scotoma, बीच के ऊपर मुड़ा हुआ अंधा हिस्सा)"
+        },
+        "le": "full",
+        "re": "arcuate-sup",
+        "where": {
+          "en": "Right eye, early glaucoma: arcuate nerve fibres lost at the inferior (lower) rim of the optic disc. This causes a defect in the upper visual field of that eye.",
+          "hi": "दाईं आँख, शुरुआती ग्लूकोमा (glaucoma): ऑप्टिक डिस्क (optic disc) के निचले (inferior) किनारे (rim) के आर्क्युएट तंतु नष्ट। इससे उसी आँख के दृष्टि क्षेत्र (visual field) के ऊपरी हिस्से में दोष होता है।"
+        },
+        "lesion": "optic-nerve"
+      },
+      {
+        "id": "tunnel-late",
+        "label": {
+          "en": "Tunnel vision (only a small central island left)",
+          "hi": "टनल विज़न (tunnel vision, बीच में सिर्फ़ छोटा सा हिस्सा बचता है)"
+        },
+        "le": "tunnel",
+        "re": "tunnel",
+        "where": {
+          "en": "Advanced glaucoma in both eyes: the edges are lost, the centre goes last.",
+          "hi": "दोनों आँखों में बढ़ा हुआ ग्लूकोमा: किनारे पहले जाते हैं, बीच का हिस्सा सबसे आख़िर में।"
+        },
+        "lesion": "optic-nerve"
+      }
     ]
   },
   "why": {
@@ -90,16 +126,16 @@
         "hi": "रेटिना की हर [[ganglion-cell]] एक तंतु डिस्क तक भेजती है। यही तंतु मिलकर [[optic-nerve]] बनाते हैं।"
       },
       {
-        "en": "In glaucoma these fibres die, bit by bit. The pink rim thins and the pale [[cup]] grows.",
-        "hi": "ग्लूकोमा में ये तंतु थोड़ा-थोड़ा करके मरते हैं। गुलाबी रिम पतला होता है और हल्का [[cup]] बड़ा होता है।"
+        "en": "In glaucoma these fibres die, bit by bit. The pink rim (neuroretinal rim) thins and the pale [[cup]] grows.",
+        "hi": "ग्लूकोमा में ये तंतु थोड़ा-थोड़ा करके मरते हैं। गुलाबी रिम (neuroretinal rim) पतला होता है और हल्का [[cup]] बड़ा होता है।"
       },
       {
-        "en": "Side vision goes first. The centre stays sharp until late, so most people notice nothing.",
-        "hi": "पहले किनारे की नज़र जाती है। बीच की नज़र आख़िर तक साफ़ रहती है, इसलिए ज़्यादातर लोगों को कुछ पता नहीं चलता।"
+        "en": "Peripheral (side) vision goes first, as arcuate scotomas in the upper or lower field of that eye. The centre stays sharp until late, so most people notice nothing.",
+        "hi": "पहले परिधीय (peripheral) यानी किनारे की नज़र जाती है, उसी आँख के ऊपरी या निचले दृष्टि क्षेत्र में आर्क्युएट स्कोटोमा (arcuate scotoma) के रूप में। बीच की नज़र आख़िर तक साफ़ रहती है, इसलिए ज़्यादातर लोगों को कुछ पता नहीं चलता।"
       },
       {
-        "en": "High [[iop]] is the main risk we can treat. Some people get glaucoma with normal pressure.",
-        "hi": "ज़्यादा [[iop]] वह मुख्य ख़तरा है जिसका इलाज हो सकता है। कुछ लोगों को सामान्य प्रेशर में भी ग्लूकोमा होता है।"
+        "en": "High [[iop]] is the main risk we can treat. Some people get glaucoma with normal pressure (normal-tension glaucoma).",
+        "hi": "ज़्यादा [[iop]] वह मुख्य ख़तरा है जिसका इलाज हो सकता है। कुछ लोगों को सामान्य प्रेशर में भी ग्लूकोमा होता है (normal-tension glaucoma)।"
       },
       {
         "en": "Glaucoma is a leading cause of blindness that cannot be reversed. Early care saves the sight that is left.",
@@ -127,8 +163,8 @@
   ],
   "todo": [
     {
-      "en": "Look at the disc in every fundus check, not only the macula.",
-      "hi": "हर फ़ंडस जाँच में डिस्क को देखें, सिर्फ़ मैक्युला को नहीं।"
+      "en": "Look at the disc in every fundus (back of the eye) check, not only the macula.",
+      "hi": "हर फ़ंडस (आँख का पिछला हिस्सा) जाँच में डिस्क को देखें, सिर्फ़ मैक्युला को नहीं।"
     },
     {
       "en": "Ask about glaucoma in parents, brothers and sisters.",

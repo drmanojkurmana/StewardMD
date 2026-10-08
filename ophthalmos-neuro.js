@@ -215,7 +215,7 @@
       complaint: "Sudden drooping of one eyelid with a headache; double vision when the lid is lifted.",
       look: "Complete ptosis. Lift the lid: the eye rests down and out; adduction, elevation and depression are limited. On attempted downgaze the eye intorts, showing the fourth nerve is intact. The pupil is dilated and reacts neither to light nor to near.",
       site: "Third nerve between its midbrain nucleus and the orbit. With the pupil involved, compression of the nerve's outer pupillomotor fibres, classically a posterior communicating artery aneurysm, until proven otherwise.",
-      pearl: "A painful third nerve palsy with a dilated pupil is an emergency: CT or MR angiography the same day. Pilocarpine 1% still constricts it, because the sphincter itself is healthy.",
+      pearl: "A painful third nerve palsy with a dilated pupil is an emergency: computed tomography (CT) angiography or magnetic resonance (MR) angiography the same day, to find a posterior communicating artery aneurysm. Pilocarpine 1% still constricts it, because the sphincter itself is healthy.",
       coach: "No parasympathetic drive reaches the {s} sphincter, so that pupil stays dilated to light and near; pilocarpine 1% acts on the sphincter directly.",
       key: ["lift", "gaze", "light"] },
     { id: "cn4", level: "f", group: "nerve", name: "{S} fourth nerve palsy", lesion: { mus: { I: { SO: 0 } } },
@@ -241,14 +241,14 @@
       complaint: "Blurred vision in one eye over a few days; colours look washed out.",
       look: "The pupils are equal. Both constrict when the light is on the healthy eye and both dilate when it swings to the affected eye.",
       site: "Afferent pathway in front of the chiasm: usually the optic nerve (optic neuritis, ischaemic or compressive optic neuropathy), or extensive retinal disease.",
-      pearl: "An RAPD never causes anisocoria. Grade it by placing neutral density filters over the better eye until the swing is balanced: usually 0.3 to 1.2 log units, sometimes more.",
+      pearl: "A relative afferent pupillary defect never causes anisocoria. Grade it by placing neutral density filters over the better eye until the swing is balanced: usually 0.3 to 1.2 log units, sometimes more.",
       coach: "Less light signal reaches the midbrain through the {s} optic nerve, so both pupils relax when the light moves to that eye.",
       key: ["swing", "filter"] },
     { id: "ino", level: "f", group: "supra", name: "{S} internuclear ophthalmoplegia", lesion: { mlf: { I: 0 } },
       complaint: "Double or blurred vision on looking to one side.",
       look: "On gaze away from the lesion, the eye on the lesion side adducts slowly or not at all while the other eye abducts with nystagmus. Convergence is usually preserved.",
       site: "Medial longitudinal fasciculus on the side of the adduction deficit, in the pons or midbrain: demyelination in the young, stroke in older patients.",
-      pearl: "The INO is named for the eye that fails to adduct. Adduction on convergence proves the medial rectus and its nerve work.",
+      pearl: "Internuclear ophthalmoplegia is named for the eye that fails to adduct. Adduction on convergence proves the medial rectus and its nerve work.",
       key: ["gaze", "near"] },
     // Resident
     { id: "cn3ps", level: "r", group: "nerve", name: "{S} pupil-sparing third nerve palsy",
@@ -256,7 +256,7 @@
       complaint: "Painful drooping lid and double vision in a patient with diabetes and hypertension.",
       look: "Complete ptosis and a down-and-out eye, but the pupil is equal to its fellow and reacts normally to light and near.",
       site: "Microvascular infarction of the third nerve core, sparing the peripheral pupillomotor fibres.",
-      pearl: "Call it pupil sparing only when the palsy is otherwise complete and the pupil fully normal. Image it anyway (MRI with MRA or CTA): an aneurysm can spare the pupil at first, so recheck the pupil daily for a week. A microvascular palsy recovers within about 3 months; aberrant regeneration never follows it and means compression.",
+      pearl: "Call it pupil sparing only when the palsy is otherwise complete and the pupil fully normal. Image it anyway (magnetic resonance imaging with magnetic resonance angiography, or computed tomography angiography): a posterior communicating artery aneurysm can spare the pupil at first, so recheck the pupil daily for a week. A microvascular palsy recovers within about 3 months; aberrant regeneration never follows it and means compression.",
       key: ["lift", "gaze", "light"] },
     { id: "cn3p", level: "r", group: "nerve", name: "{S} partial third nerve palsy, pupil involved",
       lesion: { mus: { I: { MR: 0.45, SR: 0.35, IR: 0.55, IO: 0.4 } }, lev: { I: 0.55 }, pupil: { I: { para: 0.55 } } },
@@ -277,8 +277,8 @@
     { id: "oneHalf", level: "r", group: "supra", name: "{S} one-and-a-half syndrome", lesion: { gaze: { I: 0 }, mlf: { I: 0 }, drift: { C: { ab: 4 } } },
       complaint: "Sudden double vision and difficulty looking to one side.",
       look: "The eye on the lesion side makes no horizontal movement; the other eye can only abduct, with nystagmus. Vertical movements and convergence are spared; the other eye may drift out.",
-      site: "Dorsal pontine tegmentum: the abducens nucleus or PPRF together with the adjacent MLF on the same side.",
-      pearl: "A gaze palsy (the one) plus an INO (the half): the only horizontal movement left is abduction of the eye on the opposite side.",
+      site: "Dorsal pontine tegmentum: the abducens nucleus or the paramedian pontine reticular formation (PPRF), together with the adjacent medial longitudinal fasciculus (MLF) on the same side.",
+      pearl: "A horizontal gaze palsy (the one) plus an internuclear ophthalmoplegia (the half): the only horizontal movement left is abduction of the eye on the opposite side.",
       key: ["gaze", "near"] },
     { id: "dmb", level: "r", group: "supra", name: "Dorsal midbrain (Parinaud) syndrome", bilateral: true,
       lesion: { up: 0.1, retract: 2, crn: true, pupil: { B: { light: 0.12, mio: 0.8 } } },
@@ -310,9 +310,9 @@
       key: ["light", "near", "dark"] },
     { id: "ino2", level: "r", group: "supra", name: "Bilateral internuclear ophthalmoplegia", bilateral: true, lesion: { mlf: { B: 0 }, drift: { B: { ab: 5 } }, conv: 0.4 },
       complaint: "Double vision looking to either side; the eyes look turned out.",
-      look: "Neither eye adducts on horizontal gaze, and the abducting eye has nystagmus in each direction. Both eyes drift out in primary position (WEBINO) and convergence is weak.",
+      look: "Neither eye adducts on horizontal gaze, and the abducting eye has nystagmus in each direction. Both eyes drift out in primary position (wall-eyed bilateral internuclear ophthalmoplegia, WEBINO) and convergence is weak.",
       site: "Both medial longitudinal fasciculi near the midline: demyelination or stroke.",
-      pearl: "Wall-eyed bilateral INO (WEBINO) with weak convergence points to a more rostral, midbrain lesion.",
+      pearl: "Wall-eyed bilateral internuclear ophthalmoplegia (WEBINO) with weak convergence points to a more rostral, midbrain lesion.",
       key: ["gaze", "near", "cover"] },
     { id: "physAniso", level: "r", group: "pupil", name: "Physiological anisocoria, {s} pupil smaller", sideq: "Smaller pupil", lesion: { pupil: { I: { size: -0.6 } } },
       complaint: "Noticed in photographs that one pupil is slightly smaller.",
@@ -379,7 +379,7 @@
     var bits = [], h = Math.round(Math.abs(pdH)), v = Math.round(Math.abs(pdV));
     if (h >= 2) bits.push((pdH > 0 ? (short ? "ET " : "esotropia ") : (short ? "XT " : "exotropia ")) + h);
     if (v >= 2) bits.push((pdV > 0 ? (short ? "RHT " : "right hypertropia ") : (short ? "LHT " : "left hypertropia ")) + v);
-    return bits.length ? bits.join(short ? " " : ", ") + (short ? "" : " PD") : short ? "0" : "straight";
+    return bits.length ? bits.join(short ? " " : ", ") + (short ? "" : " prism dioptres") : short ? "0" : "straight";
   }
   var DIRS = [["abduction", 30, 0], ["adduction", -30, 0], ["elevation in abduction", 30, 25], ["elevation in adduction", -30, 25],
     ["depression in abduction", 30, -25], ["depression in adduction", -30, -25]];
@@ -456,7 +456,7 @@
       if (P.pupil[e].sym < 1 && P.pupil[e].para === 1 && !P.pupil[e].block) f.push(W[e] + " pupil redilates slowly in the dark (dilation lag)");
     });
     EYES.forEach(function (e) {
-      if (P.aff[e] > 0) f.push(W[e] + " RAPD: both pupils dilate when the light swings to the " + w[e] + " eye (balanced by a " + P.aff[e].toFixed(1) + " log unit filter over the other eye)");
+      if (P.aff[e] > 0) f.push(W[e] + " relative afferent pupillary defect (RAPD): both pupils dilate when the light swings to the " + w[e] + " eye (balanced by a " + P.aff[e].toFixed(1) + " log unit filter over the other eye)");
     });
     var drops = [["apra", "Apraclonidine 0.5%"], ["pilo01", "Pilocarpine 0.1%"], ["pilo1", "Pilocarpine 1%"]];
     drops.forEach(function (d) {   // report the eye whose response differs from its fellow's
@@ -502,7 +502,7 @@
   function Cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
   function $(id) { return G.document.getElementById(id); }
   var MNAME = { LR: "lateral rectus", MR: "medial rectus", SR: "superior rectus", IR: "inferior rectus", IO: "inferior oblique", SO: "superior oblique" };
-  var NERVE = { LR: "sixth nerve", SO: "fourth nerve", MR: "third nerve", SR: "third nerve", IR: "third nerve", IO: "third nerve" };
+  var NERVE = { LR: "abducens (sixth) nerve", SO: "trochlear (fourth) nerve", MR: "oculomotor (third) nerve", SR: "oculomotor (third) nerve", IR: "oculomotor (third) nerve", IO: "oculomotor (third) nerve" };
   // Key examination steps, named once for the sign-off and the teaching.
   var KEYT = {
     gaze: ["Pursuit in all directions", "Take the target into each of the eight gaze positions and hold it there."],
@@ -519,7 +519,7 @@
     pilo1: ["Pilocarpine 1%", "Pilocarpine 1% separates a third nerve pupil from a blocked one."]
   };
   var SIDETIP = {
-    ino: "An INO takes the side of the eye that fails to adduct.",
+    ino: "An internuclear ophthalmoplegia takes the side of the eye that fails to adduct.",
     oneHalf: "The side is the eye that makes no horizontal movement.",
     skew: "Name a skew deviation by the higher eye.",
     rapd: "The defect is in the eye whose illumination makes both pupils dilate.",
@@ -739,7 +739,7 @@
   function findingsList(P) { return '<ul class="oph-signs">' + N.findings(P).map(function (f) { return "<li>" + esc(f) + "</li>"; }).join("") + "</ul>"; }
   function nineHtml(P) {
     var g = N.nine(P), rows = ["Up", "Level", "Down"];
-    return '<table class="nr-nine"><caption>Deviation in the nine gaze positions, prism dioptres, as you face the patient</caption>' +
+    return '<table class="nr-nine"><caption>Deviation in the nine gaze positions, in prism dioptres, as you face the patient. Esotropia (ET), exotropia (XT), right and left hypertropia (RHT, LHT).</caption>' +
       '<thead><tr><td></td><th scope="col">Patient’s right</th><th scope="col">Centre</th><th scope="col">Patient’s left</th></tr></thead><tbody>' +
       rows.map(function (r, i) {
         return '<tr><th scope="row">' + r + "</th>" + g.slice(i * 3, i * 3 + 3).map(function (c) {
@@ -796,7 +796,7 @@
   function caseLocked() { return I.level() === "resident" && resLocked() && !(U.cse && U.cse.trial); }
   function lockedHtml() {
     var tr = I.trial("sim.neuro") === "trial";
-    return '<div class="nr-locked"><p>Resident cases add pupil-sparing and partial third nerve palsies, the cavernous sinus, one-and-a-half, dorsal midbrain, skew deviation, Adie and Argyll Robertson pupils and bilateral INO. They are part of StewardMD Pro.</p>' +
+    return '<div class="nr-locked"><p>Resident cases add pupil-sparing and partial third nerve palsies, the cavernous sinus, one-and-a-half, dorsal midbrain, skew deviation, Adie and Argyll Robertson pupils and bilateral internuclear ophthalmoplegia. They are part of StewardMD Pro.</p>' +
       (tr ? '<button type="button" class="oph-btn pri oph-wide" data-act="nrtrial">Start a Resident case ' + I.lockBadge("sim.neuro") + "</button>"
         : '<button type="button" class="oph-btn pri oph-wide" data-act="nrpro">' + ico("lock") + " Unlock Resident cases</button>" + '<p class="oph-small">' + I.lockBadge("sim.neuro") + "</p>") +
       '<button type="button" class="oph-btn sec oph-wide" data-act="nrfound">' + esc(levelName("foundation")) + " cases instead</button></div>";
@@ -907,8 +907,8 @@
   function cause(l) {
     var P = U.P, m = P.mus[l.e], side = U.ex.h > 0 ? "R" : "L";
     if (l.kind === "abduct" || l.kind === "adduct") {
-      if (P.gaze[side] < 1) return W[side] + " gaze centre (PPRF, abducens nucleus) damaged, so neither eye looks " + W[side];
-      if (l.kind === "adduct" && P.mlf[l.e] < 1) return W[l.e] + " MLF lesion, so the adduction command is lost while convergence still works";
+      if (P.gaze[side] < 1) return W[side] + " horizontal gaze centre (paramedian pontine reticular formation and abducens nucleus) damaged, so neither eye looks " + W[side];
+      if (l.kind === "adduct" && P.mlf[l.e] < 1) return W[l.e] + " medial longitudinal fasciculus (MLF) lesion, so the adduction command is lost while convergence still works";
       return musc(l.e, l.kind === "abduct" ? "LR" : "MR");
     }
     if (l.kind === "elevate" && P.up < 1) return "dorsal midbrain upgaze centre damaged, so neither eye elevates";
@@ -920,7 +920,7 @@
     var P = U.P, bits = [];
     if (Math.abs(r.pdH) >= 2) ["R", "L"].forEach(function (e) {
       var m = P.mus[e];
-      if (P.drift[e].ab) bits.push("without tonic MLF input the medial recti let the eyes drift out");
+      if (P.drift[e].ab) bits.push("without tonic medial longitudinal fasciculus input the medial recti let the eyes drift out");
       else if (m.LR < m.MR) bits.push("the unopposed " + W[e] + " medial rectus pulls the eye in");
       else if (m.MR < m.LR) bits.push("the unopposed " + W[e] + " lateral rectus pulls the eye out");
     });
@@ -948,7 +948,7 @@
       var H = Math.round(Math.abs(r.pdH)), V = Math.round(Math.abs(r.pdV)), dv = [];
       if (H >= 2) dv.push((r.pdH > 0 ? "esotropia " : "exotropia ") + H);
       if (V >= 2) dv.push((r.pdV > 0 ? "right" : "left") + " hypertropia " + V);
-      s.push(dv.length ? Cap(dv.join(", ")) + " PD." : "Eyes aligned.");
+      s.push(dv.length ? Cap(dv.join(", ")) + " prism dioptres." : "Eyes aligned.");
       ["R", "L"].forEach(function (e) { if (r.nys[e] && ex.cover !== e) s.push(Cap(W[e]) + " eye: abducting nystagmus."); });
       if (r.crn) s.push("Attempted upgaze: convergence-retraction jerks.");
       if (practice) {
@@ -958,7 +958,7 @@
             : "tilting away relaxes the " + W[e] + " superior rectus, so the eye drops");
           if (P.drift[e].y > 0) coach.push("skew is supranuclear, so head tilt changes it little");
         });
-        if (ex.near && (P.mlf.R < 1 || P.mlf.L < 1)) coach.push("convergence reaches the medial recti without the MLF");
+        if (ex.near && (P.mlf.R < 1 || P.mlf.L < 1)) coach.push("convergence reaches the medial recti without the medial longitudinal fasciculus");
         lg.forEach(function (l) { var c = cause(l); if (c) coach.push(c); });
         if (!lg.length) { var tw = tonicWhy(r); if (tw) coach.push(tw); }
       }

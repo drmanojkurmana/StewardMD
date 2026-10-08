@@ -220,3 +220,16 @@ test("level: XP is answers, right answers and lesson XP; level n starts at 50n(n
   assert.deepEqual([1, 3, 5, 8, 12].map((n) => L.levelOf(50 * n * (n - 1)).rank), ["Fresher", "Intern", "Resident", "Registrar", "Consultant"]);
   const lv = L.levelOf(150); assert.equal(lv.lo, 100); assert.equal(lv.hi, 300); assert.equal(lv.p, 0.25);
 });
+
+test("lessons keyed apart from their module (radnotes): pickLesson and itemProgress read progress by key; the plan item carries the key", () => {
+  const lessons = [{ m: "rad-gi", k: "radnotes-n1-a", s: "radiology", title: "A", minutes: 5 }, { m: "rad-gi", k: "radnotes-n1-b", s: "radiology", title: "B", minutes: 5 }];
+  const s = { ls: { "radnotes-n1-a": { done: Date.now() } } };
+  assert.equal(L.pickLesson(lessons, ["radiology"], s).k, "radnotes-n1-b");
+  const p = L.planDay({ minutes: 30, due: 0, perQ: 1, lesson: lessons[1], mock: null, weekend: false, daysLeft: null, weak: [] });
+  const it = p.items.find((x) => x.k === "lsn");
+  assert.equal(it.m, "rad-gi");
+  assert.equal(it.l, "radnotes-n1-b");
+  const day = (t) => Math.floor(t / 864e5), td = day(Date.now());
+  assert.equal(L.itemProgress(it, { ls: { "radnotes-n1-b": { done: Date.now() } } }, td, day).done, true);
+  assert.equal(L.itemProgress(it, { ls: { "rad-gi": { done: Date.now() } } }, td, day).done, false);
+});

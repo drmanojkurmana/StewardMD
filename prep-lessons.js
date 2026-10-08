@@ -2,8 +2,11 @@
    window.PREP_LESSONS. ES5. Loaded by prep-loader.js after prep.js and drawn through PREP._host (the same overlay,
    back stack, runner and store). prep.js forwards every data-act starting "l-" here and asks back() first on back.
 
-   Data: prep/lessons/v1/index.json { v, modules: { <module>: { title, minutes, steps } } } and
-   prep/lessons/v1/<module>.json { v, module, title, minutes, steps: [{ tx, say, vis }], quiz: [item ids], src, gen, checks }.
+   Data: prep/lessons/v1/index.json { v, modules: { <key>: { title, minutes, steps, module?, set? } } } and
+   prep/lessons/v1/<key>.json. A key is the module id for the module's own lesson; other lessons (the owner's radiology
+   notes, set "radnotes", key "radnotes-<section>") name their module inside the entry, and a module lists every
+   lesson whose key or module matches (lessonsFor). Progress (store.ls) is kept per key. Files:
+   prep/lessons/v1/<key>.json { v, module, title, minutes, steps: [{ tx, say, vis }], quiz: [item ids], src, gen, checks }.
    tx marks key terms with **bold**; say is the plain narration; vis is null or one of
    { kind: "table", cols, rows } | { kind: "flow", nodes: [{ id, label, sub? }], edges: [[from, to, label?]] } |
    { kind: "compare", left: { title, points }, right: { title, points } } | { kind: "image", src, alt, caption }.
@@ -130,6 +133,24 @@
   function xpFor(l) { return (l && l.steps ? l.steps.length : 0) * XP_STEP; }
   /* swipeDir(dx, dy) -> 1 (next), -1 (back) or 0: a clear horizontal swipe of 56 px or more. */
   function swipeDir(dx, dy) { return Math.abs(dx) >= 56 && Math.abs(dx) > 1.5 * Math.abs(dy) ? (dx < 0 ? 1 : -1) : 0; }
+  /* lessonsFor(ix, mid) -> [[key, meta]] for a module: its own lesson (key === mid) first, then every entry whose
+     "module" is mid, by key. */
+  function lessonsFor(ix, mid) {
+    var mods = (ix && ix.modules) || {}, own = [], rest = [], k;
+    for (k in mods) { if (k === mid) own.push([k, mods[k]]); else if (mods[k] && mods[k].module === mid) rest.push([k, mods[k]]); }
+    rest.sort(function (a, b) { return a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0; });
+    return own.concat(rest);
+  }
+  /* moduleOf(key, meta) -> the module a lesson belongs to. */
+  function moduleOf(key, meta) { return (meta && meta.module) || key; }
+  /* imgUrl(src, bankApi, apiBase) -> where an image step loads from. "api/prep/bank/..." goes through the bank API base
+     (tests point it at fixtures); a root path on native gets the API origin (the app runs at https://localhost and
+     only stewardmd.in/api is served). */
+  function imgUrl(src, bankApi, apiBase) {
+    var u = "/" + str(src).replace(/^\/+/, "");
+    if (u.indexOf("/api/prep/bank/") === 0 && bankApi) u = bankApi + u.slice("/api/prep/bank/".length);
+    return u.indexOf("/api/") === 0 && apiBase ? apiBase + u : u;
+  }
   function pickQuiz(items, ids) { var by = {}; (items || []).forEach(function (it) { by[it.id] = it; }); return (ids || []).map(function (id) { return by[id]; }).filter(Boolean); }
 
   /* Bundled index (pilot files in the app) + bank index (generated, from R2 through /api/prep/bank): the bank copy
@@ -143,13 +164,13 @@
   }
   var PURE = { mergeIx: mergeIx, SPEEDS: SPEEDS, XP_STEP: XP_STEP, LIM: LIM, IMG_RE: IMG_RE, plain: plain, words: words, boldHtml: boldHtml, boldTerms: boldTerms, visText: visText,
     flowLevels: flowLevels, checkVis: checkVis, checkStep: checkStep, checkLesson: checkLesson, nextSpeed: nextSpeed, speedLabel: speedLabel, xpFor: xpFor,
-    swipeDir: swipeDir, pickQuiz: pickQuiz };
+    swipeDir: swipeDir, pickQuiz: pickQuiz, lessonsFor: lessonsFor, moduleOf: moduleOf, imgUrl: imgUrl };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
   /* ================= app ================= */
   var BASE = G.SMD_PREP_LESSONS_BASE || (G.SMD_PREP_BASE || "/prep/") + "lessons/";
   var VER = "v1";
-  var L = { ix: null, ixP: null, mem: {}, les: null, sid: null, mid: null, i: 0, fin: false, playing: false, tok: 0, zoom: false, dir: 0, view: null, firstXp: 0 };
+  var L = { ix: null, ixP: null, mem: {}, les: null, sid: null, mid: null, key: null, more: {}, i: 0, fin: false, playing: false, tok: 0, zoom: false, dir: 0, view: null, firstXp: 0 };
   var host = null;
 
   function getJSON(url) { return G.fetch(url, { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }); }
@@ -265,7 +286,7 @@
     var side = function (c) { return '<div class="pn-cmp-c"><h3>' + boldHtml(c.title) + "</h3><ul>" + c.points.map(function (p) { return "<li>" + boldHtml(p) + "</li>"; }).join("") + "</ul></div>"; };
     return '<div class="pn-cmp">' + side(v.left) + side(v.right) + "</div>";
   }
-  function imgSrc(src) { return "/" + str(src).replace(/^\/+/, ""); }
+  function imgSrc(src) { return imgUrl(src, (host && host.bankApi) || G.SMD_PREP_BANK_API || "/api/prep/bank/", G.SMD_API_BASE || ""); }
   function imageHtml(v) {
     return '<figure class="pn-vfig"><button type="button" class="pn-vimg" data-act="l-zoom" aria-label="Enlarge image: ' + escH(v.alt) + '"><img src="' + escH(imgSrc(v.src)) + '" alt="' + escH(v.alt) + '" loading="lazy" decoding="async"></button>' +
       '<figcaption><span class="pn-vzi" aria-hidden="true">' + ic("zoom") + "</span><span>" + escH(v.caption) + " Tap to enlarge.</span></figcaption></figure>";
@@ -377,7 +398,7 @@
 
   /* ---------- navigation ---------- */
   function save() {
-    var s = store(), p = s.ls[L.mid] || (s.ls[L.mid] = { i: 0, n: L.les.steps.length, done: 0, xp: 0 });
+    var s = store(), p = s.ls[L.key] || (s.ls[L.key] = { i: 0, n: L.les.steps.length, done: 0, xp: 0 });
     p.i = L.i; p.n = L.les.steps.length; host.save();
   }
   function go(i, keepVoice) {
@@ -387,7 +408,7 @@
   }
   function next() {
     if (L.i < L.les.steps.length - 1) return go(L.i + 1);
-    var s = store(), p = s.ls[L.mid];
+    var s = store(), p = s.ls[L.key];
     L.playing = false; stopVoice();
     L.firstXp = 0;
     if (!p.done) { p.xp = xpFor(L.les); L.firstXp = p.xp; }
@@ -404,45 +425,66 @@
   }
 
   /* ---------- public ---------- */
-  function entryHtml(sid, mid, meta, s) {
-    var p = s.ls && s.ls[mid], sub = meta.minutes + " min · " + meta.steps + " steps, then 3 quick questions";
+  function entrySub(key, meta, s) {
+    // a lesson keyed apart from its module (radnotes) may carry fewer than 3 questions, and the index does not say how many
+    var p = s.ls && s.ls[key], sub = meta.minutes + " min · " + meta.steps + " steps" + (meta.module && meta.module !== key ? "" : ", then 3 quick questions");
     if (p && p.done) sub = "Finished · read again or take the questions";
     else if (p && p.i) sub = "Continue from step " + (p.i + 1) + " of " + meta.steps;
-    return '<div class="pn-group pn-lsn-entry"><button type="button" class="pn-row" data-act="l-open" data-s="' + escH(sid) + '" data-m="' + escH(mid) + '"><span class="pn-ri" aria-hidden="true">' + ic("book") +
-      '</span><span class="pn-rb"><b>Lesson</b><small>' + escH(sub) + "</small></span>" + ico("chev") + "</button></div>";
+    return sub;
+  }
+  function rowHtml(sid, mid, key, meta, s, label) {
+    return '<button type="button" class="pn-row" data-act="l-open" data-s="' + escH(sid) + '" data-m="' + escH(mid) + '" data-l="' + escH(key) + '"><span class="pn-ri" aria-hidden="true">' + ic("book") +
+      '</span><span class="pn-rb"><b>' + escH(label) + "</b><small>" + escH(entrySub(key, meta, s)) + "</small></span>" + ico("chev") + "</button>";
+  }
+  var SHOW = 3;
+  /* The module's lessons: one row reads "Lesson"; several are listed by title, the first 3 then "Show all". */
+  function entryHtml(sid, mid, list, s) {
+    if (list.length === 1) return '<div class="pn-group pn-lsn-entry">' + rowHtml(sid, mid, list[0][0], list[0][1], s, list[0][0] === mid ? "Lesson" : list[0][1].title || "Lesson") + "</div>";
+    var all = L.more[mid] || list.length <= SHOW + 1, shown = all ? list : list.slice(0, SHOW);
+    return '<h2 class="pn-sec">Lessons <span class="pn-mut">' + list.length + "</span></h2>" +
+      '<div class="pn-group pn-lsn-entry">' + shown.map(function (x) { return rowHtml(sid, mid, x[0], x[1], s, x[0] === mid ? "Lesson" : x[1].title || "Lesson"); }).join("") +
+      (all ? "" : '<button type="button" class="pn-row" data-act="l-more" data-s="' + escH(sid) + '" data-m="' + escH(mid) + '"><span class="pn-rb"><b>Show all ' + list.length + " lessons</b></span>" + ico("chev") + "</button>") + "</div>";
   }
   /* mount(slotEl, sid, mid, h): fills the module screen's lesson slot once the index is known (empty when none). */
   function mount(slot, sid, mid, h) {
     host = h;
     if (!slot) return;
     index().then(function (ix) {
-      var meta = ix.modules[mid];
-      if (!meta || !slot.isConnected) return;
-      slot.innerHTML = entryHtml(sid, mid, meta, store());
+      var list = lessonsFor(ix, mid);
+      if (!list.length || !slot.isConnected) return;
+      slot.innerHTML = entryHtml(sid, mid, list, store());
     });
   }
-  function open(sid, mid, h) {
+  /* open(sid, mid, h, key): key defaults to the module's own lesson. */
+  function open(sid, mid, h, key) {
     host = h;
-    L.sid = sid; L.mid = mid; L.fin = false; L.zoom = false; L.playing = false;
-    var view = function () { if (L.les && L.les.module === mid) draw(); };
+    key = key || mid;
+    L.sid = sid; L.mid = mid; L.key = key; L.fin = false; L.zoom = false; L.playing = false;
+    var view = function () { if (L.les && L.key === key) draw(); };
     var loading = function () { host.paint(host.bar("Lesson", "", "back") + '<div class="pn-body"><p class="pn-load" role="status">Loading the lesson…</p></div>'); };
     L.view = view; L.loading = loading;
     host.push(loading);
-    lessonFile(mid).then(function (les) {
+    lessonFile(key).then(function (les) {
       if (host.stackTop() !== loading) return;   // left while loading
-      var s = store(), p = s.ls[mid];
+      var s = store(), p = s.ls[key];
       L.les = les; L.i = p && !p.done && p.i < les.steps.length ? p.i : 0; L.dir = 0;
       save();
       var stk = host.stack(); stk[stk.length - 1] = view;
       draw();
     }, function () {
       if (host.stackTop() !== loading) return;
-      host.paint(host.bar("Lesson", "", "back") + '<div class="pn-body"><p class="pn-err" role="alert">The lesson did not load. Check the connection and try again. A lesson opened once works offline.</p><button type="button" class="pn-btn" data-act="l-open" data-s="' + escH(sid) + '" data-m="' + escH(mid) + '">Try again</button></div>');
+      host.paint(host.bar("Lesson", "", "back") + '<div class="pn-body"><p class="pn-err" role="alert">The lesson did not load. Check the connection and try again. A lesson opened once works offline.</p><button type="button" class="pn-btn" data-act="l-open" data-s="' + escH(sid) + '" data-m="' + escH(mid) + '" data-l="' + escH(key) + '">Try again</button></div>');
     });
   }
   function act(a, b, h) {
     host = h;
-    if (a === "l-open") { if (L.loading && host.stackTop() === L.loading) host.stack().pop(); return open(b.getAttribute("data-s"), b.getAttribute("data-m"), h); }
+    if (a === "l-open") { if (L.loading && host.stackTop() === L.loading) host.stack().pop(); return open(b.getAttribute("data-s"), b.getAttribute("data-m"), h, b.getAttribute("data-l") || ""); }
+    if (a === "l-more") {
+      var mm = b.getAttribute("data-m"), slot = b.closest && b.closest("#pnLsnSlot");
+      L.more[mm] = 1;
+      if (slot) return index().then(function (ix) { slot.innerHTML = entryHtml(b.getAttribute("data-s"), mm, lessonsFor(ix, mm), store()); var r = slot.querySelectorAll("[data-act=l-open]")[SHOW]; if (r && r.focus) r.focus(); });
+      return;
+    }
     if (!L.les) return;
     if (a === "l-next") return next();
     if (a === "l-prev") { if (L.i) go(L.i - 1); return; }

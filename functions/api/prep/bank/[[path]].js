@@ -26,13 +26,18 @@ const STUDY_RE = /^v\d{1,3}\/(?:(?:lessons|cards)\/(?:index|[a-z0-9-]{2,80})\.js
 // img/<name>.webp and scroll stacks stack/<id>/<window>/<NNN>.webp plus stack/<id>/stack.json. All immutable: a changed
 // image or stack gets a new name or id, never new bytes. Not under pyq/, lessons/ or cards/.
 const RAD_RE = /^v\d{1,3}\/(?!pyq\/|lessons\/|cards\/)[a-z0-9-]{2,60}\/(?:img\/[a-z0-9-]{2,100}\.webp|stack\/[a-z0-9-]{2,60}\/(?:stack\.json|[a-z]{2,12}\/\d{3}\.webp))$/;
+// Images a bank item carries (img + imgPlace, set by the bank build): v<n>/img/<name>.webp, immutable.
+const IMG_RE = /^v\d{1,3}\/img\/[a-z0-9-]{2,80}\.webp$/;
+// The owner's radiology notes (tools/prep-radnotes.mjs, set "radnotes"): figures img/radnotes/rn-<id>.webp and MCQ
+// overlays overlay/radnotes/<subject>/<module>.json (both immutable: a new run writes new names or a new version).
+const RADNOTES_RE = /^(?:img\/radnotes\/rn-[a-z0-9-]{2,80}\.webp|overlay\/radnotes\/[a-z0-9-]{2,60}\/[a-z0-9-]{2,80}\.json)$/;
 const PREFIX = "prep-bank/";
 
 function notFound() { return new Response(JSON.stringify({ error: "not-found" }), { status: 404, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" } }); }
 
 export function bankPath(params) {
   const p = [].concat((params && params.path) || []).map(String).join("/");
-  return PATH_RE.test(p) || PYQ_RE.test(p) || STUDY_RE.test(p) || RAD_RE.test(p) ? p : null;
+  return PATH_RE.test(p) || PYQ_RE.test(p) || STUDY_RE.test(p) || IMG_RE.test(p) || RADNOTES_RE.test(p) || RAD_RE.test(p) ? p : null;
 }
 
 export async function onRequestGet({ env, params }) {

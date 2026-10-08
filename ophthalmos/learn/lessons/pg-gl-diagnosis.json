@@ -5,12 +5,12 @@
   "minutes": 5,
   "review": "ai_drafted",
   "title": {
-    "en": "Diagnosing POAG: structure, function, pressure, angle",
-    "hi": "POAG की पहचान: बनावट, काम, प्रेशर, एंगल"
+    "en": "Diagnosing primary open-angle glaucoma (POAG): structure, function, pressure, angle",
+    "hi": "प्राइमरी ओपन-एंगल ग्लूकोमा (primary open-angle glaucoma, POAG) की पहचान: बनावट, काम, प्रेशर, एंगल"
   },
   "idea": {
-    "en": "Diagnose [[poag]] from matching disc and field damage, with an open angle on [[gonioscopy]]. Pressure is a risk factor, not the definition.",
-    "hi": "[[poag]] की पहचान आपस में मेल खाते डिस्क और दायरे के नुकसान से करें, और [[gonioscopy]] में एंगल खुला हो। प्रेशर ख़तरा है, परिभाषा नहीं।"
+    "en": "Diagnose [[poag]] from matching disc and visual field (the area you can see) damage, with an open angle on [[gonioscopy]]. Pressure is a risk factor, not the definition.",
+    "hi": "[[poag]] की पहचान आपस में मेल खाते डिस्क और दृष्टि क्षेत्र (visual field, यानी जितना आप देख पाते हैं) के नुकसान से करें, और [[gonioscopy]] में एंगल खुला हो। प्रेशर ख़तरा है, परिभाषा नहीं।"
   },
   "see": {
     "img": "disc/Im637_g_ACRIMA.webp",
@@ -57,8 +57,8 @@
         "x": 0.2,
         "y": 0.45,
         "label": {
-          "en": "Peripapillary atrophy",
-          "hi": "डिस्क के पास ऊतक की कमी"
+          "en": "Peripapillary atrophy (thinning around the disc)",
+          "hi": "पेरिपैपिलरी एट्रोफ़ी (peripapillary atrophy, डिस्क के पास ऊतक की कमी)"
         },
         "note": {
           "en": "Atrophy next to the disc is linked with glaucoma and its progression.",
@@ -73,9 +73,45 @@
           "hi": "बचा हुआ रिम"
         },
         "note": {
-          "en": "Trace the rim all round and compare with the field.",
-          "hi": "रिम को चारों ओर देखें और दायरे से मिलाएँ।"
+          "en": "Trace the neuroretinal rim (the nerve tissue between the cup and the disc edge) all round and compare with the visual field.",
+          "hi": "न्यूरोरेटिनल रिम (neuroretinal rim, कप और डिस्क के किनारे के बीच का नर्व ऊतक) को चारों ओर देखें और दृष्टि क्षेत्र से मिलाएँ।"
         }
+      }
+    ]
+  },
+  "fields": {
+    "intro": {
+      "en": "Glaucoma field loss starts away from the centre, so each eye must be tested alone.",
+      "hi": "ग्लूकोमा (glaucoma) में दृष्टि क्षेत्र (visual field) की कमी बीच से दूर शुरू होती है, इसलिए हर आँख को अलग से जाँचें।"
+    },
+    "items": [
+      {
+        "id": "arcuate-superior",
+        "label": {
+          "en": "Superior arcuate scotoma (curved blind patch above the centre)",
+          "hi": "ऊपरी आर्कुएट स्कोटोमा (superior arcuate scotoma, बीच के ऊपर मुड़ा हुआ अंधा हिस्सा)"
+        },
+        "le": "full",
+        "re": "arcuate-sup",
+        "where": {
+          "en": "Right eye, early glaucoma: retinal nerve fibres lost at the lower rim of the optic disc (the inferior arcuate bundle). This causes a defect in the upper field.",
+          "hi": "दाईं आँख, शुरुआती ग्लूकोमा (glaucoma): ऑप्टिक डिस्क (optic disc) के निचले किनारे (rim) के रेटिना नर्व तंतु नष्ट (inferior arcuate bundle)। इससे ऊपरी दृष्टि क्षेत्र में कमी आती है।"
+        },
+        "lesion": "optic-nerve"
+      },
+      {
+        "id": "arcuate-inferior",
+        "label": {
+          "en": "Inferior arcuate scotoma (curved blind patch below the centre)",
+          "hi": "निचला आर्कुएट स्कोटोमा (inferior arcuate scotoma, बीच के नीचे मुड़ा हुआ अंधा हिस्सा)"
+        },
+        "le": "arcuate-inf",
+        "re": "full",
+        "where": {
+          "en": "Left eye, early glaucoma: retinal nerve fibres lost at the upper rim of the optic disc (the superior arcuate bundle). This causes a defect in the lower field.",
+          "hi": "बाईं आँख, शुरुआती ग्लूकोमा (glaucoma): ऑप्टिक डिस्क (optic disc) के ऊपरी किनारे (rim) के रेटिना नर्व तंतु नष्ट (superior arcuate bundle)। इससे निचले दृष्टि क्षेत्र में कमी आती है।"
+        },
+        "lesion": "optic-nerve"
       }
     ]
   },
@@ -98,27 +134,27 @@
         "hi": "एंगल: हमेशा [[gonioscopy]] करें। POAG तभी है जब एंगल खुला हो।"
       },
       {
-        "en": "In [[ohtn]], OHTS found drops cut 5-year conversion to POAG from 9.5% to 4.4%. Weigh age, CCT, cup and pressure before treating.",
-        "hi": "[[ohtn]] में OHTS ने पाया कि ड्रॉप्स से 5 साल में POAG बनना 9.5% से घटकर 4.4% हुआ। इलाज से पहले उम्र, CCT, कप और प्रेशर को तौलें।"
+        "en": "The Ocular Hypertension Treatment Study (OHTS) looked at [[ohtn]]. Pressure-lowering eye drops cut 5-year conversion to POAG from 9.5% to 4.4%. Weigh age, CCT, cup and pressure before treating.",
+        "hi": "[[ohtn]] में Ocular Hypertension Treatment Study (OHTS) ने पाया कि प्रेशर घटाने वाली आई ड्रॉप्स (pressure-lowering eye drops) से 5 साल में POAG बनना 9.5% से घटकर 4.4% हुआ। इलाज से पहले उम्र, CCT, कप और प्रेशर को तौलें।"
       }
     ],
     "analogy": {
       "en": "Diagnosis is like a court case. The disc and field are the witnesses who must agree; pressure is the motive, not the proof.",
-      "hi": "पहचान एक अदालती मामले जैसी है। डिस्क और दायरा गवाह हैं जिन्हें एक बात कहनी चाहिए; प्रेशर इरादा है, सबूत नहीं।"
+      "hi": "पहचान एक अदालती मामले जैसी है। डिस्क और दृष्टि क्षेत्र (visual field) गवाह हैं जिन्हें एक बात कहनी चाहिए; प्रेशर इरादा है, सबूत नहीं।"
     }
   },
   "spot": [
     {
-      "en": "Disc, nerve fibre layer and field defects that match each other.",
-      "hi": "डिस्क, नर्व फ़ाइबर लेयर और दायरे के नुकसान जो आपस में मेल खाते हों।"
+      "en": "Disc, nerve fibre layer and visual field defects that match each other.",
+      "hi": "डिस्क, नर्व फ़ाइबर लेयर और दृष्टि क्षेत्र के नुकसान जो आपस में मेल खाते हों।"
     },
     {
       "en": "Open angle, with no secondary cause found.",
       "hi": "खुला एंगल, और कोई दूसरा कारण नहीं।"
     },
     {
-      "en": "OCT colour codes compare with a normal database. Check for scan artefacts.",
-      "hi": "OCT के रंग सामान्य आँकड़ों से तुलना करते हैं। स्कैन की ग़लतियाँ जाँचें।"
+      "en": "Optical coherence tomography (OCT) colour codes compare with a normal database. Check for scan artefacts.",
+      "hi": "optical coherence tomography (OCT) के रंग सामान्य आँकड़ों से तुलना करते हैं। स्कैन की ग़लतियाँ जाँचें।"
     }
   ],
   "todo": [
@@ -127,17 +163,17 @@
       "hi": "शुरुआत में डिस्क की फ़ोटो लें या चित्र बनाएँ।"
     },
     {
-      "en": "Get reliable baseline fields early, and repeat them often in the first two years.",
-      "hi": "शुरू में भरोसेमंद बेसलाइन फ़ील्ड लें, और पहले दो साल बार-बार दोहराएँ।"
+      "en": "Get reliable baseline visual fields early, and repeat them often in the first two years.",
+      "hi": "शुरू में भरोसेमंद बेसलाइन दृष्टि क्षेत्र जाँच लें, और पहले दो साल बार-बार दोहराएँ।"
     },
     {
-      "en": "Look for secondary causes: steroids, trauma, [[pxf]] and pigment dispersion.",
-      "hi": "दूसरे कारण ढूँढें: स्टेरॉयड, चोट, [[pxf]] और पिगमेंट डिस्पर्शन।"
+      "en": "Look for secondary causes: steroids, trauma, [[pxf]] and pigment dispersion (pigment rubbed off the back of the iris).",
+      "hi": "दूसरे कारण ढूँढें: स्टेरॉयड, चोट, [[pxf]] और पिगमेंट डिस्पर्शन (pigment dispersion, आइरिस के पीछे से रगड़कर निकला रंगद्रव्य)।"
     }
   ],
   "remember": {
     "en": "POAG means matching disc and field loss with an open angle. Pressure is a risk, not the rule.",
-    "hi": "POAG का मतलब है खुले एंगल के साथ मेल खाता डिस्क और दायरे का नुकसान। प्रेशर ख़तरा है, नियम नहीं।"
+    "hi": "POAG का मतलब है खुले एंगल के साथ मेल खाता डिस्क और दृष्टि क्षेत्र का नुकसान। प्रेशर ख़तरा है, नियम नहीं।"
   },
   "check": [
     {
@@ -147,8 +183,8 @@
       },
       "o": [
         {
-          "en": "IOP over 21 mmHg",
-          "hi": "IOP 21 mmHg से ज़्यादा"
+          "en": "Intraocular pressure (IOP) over 21 millimetres of mercury (mmHg)",
+          "hi": "आँख के अंदर का दबाव (intraocular pressure, IOP) 21 मिलीमीटर पारा (mmHg) से ज़्यादा"
         },
         {
           "en": "An open angle on gonioscopy",
@@ -167,8 +203,8 @@
     },
     {
       "q": {
-        "en": "CCT is 480 microns and IOP reads 20 mmHg. How should you read this?",
-        "hi": "CCT 480 माइक्रॉन है और IOP 20 mmHg है। इसे कैसे समझें?"
+        "en": "CCT is 480 micrometres (µm) and IOP reads 20 mmHg. How should you read this?",
+        "hi": "CCT 480 माइक्रोमीटर (µm) है और IOP 20 mmHg है। इसे कैसे समझें?"
       },
       "o": [
         {

@@ -21,11 +21,11 @@
     "expect": "ODC",
     "alt": {
       "en": "Colour photo of the back of a right eye. The disc at the right is bright white, and its cup fills most of it. Vessels cross its edge on the far right. The darker macula sits left of centre.",
-      "hi": "एक दाईं आँख के पिछले हिस्से की रंगीन फ़ोटो। दाईं ओर की डिस्क चमकीली सफ़ेद है और उसका कप लगभग पूरी डिस्क में है। नसें उसके बिल्कुल दाएँ किनारे को पार करती हैं। गहरे रंग का मैक्युला बीच से बाईं ओर है।"
+      "hi": "एक दाईं आँख के पिछले हिस्से की रंगीन फ़ोटो। दाईं ओर की डिस्क चमकीली सफ़ेद है और उसका कप लगभग पूरी डिस्क में है। रक्त-नलियाँ उसके बिल्कुल दाएँ किनारे को पार करती हैं। गहरे रंग का मैक्युला बीच से बाईं ओर है।"
     },
     "caption": {
-      "en": "A real fundus photo labelled optic disc cupping. The cup fills most of the disc.",
-      "hi": "एक असली फ़ंडस फ़ोटो, लेबल: ऑप्टिक डिस्क कपिंग (optic disc cupping)। कप लगभग पूरी डिस्क में है।"
+      "en": "A real fundus (back of the eye) photo labelled optic disc cupping. The cup fills most of the disc.",
+      "hi": "एक असली फ़ंडस (आँख का पिछला हिस्सा) फ़ोटो, लेबल: ऑप्टिक डिस्क कपिंग (optic disc cupping)। कप लगभग पूरी डिस्क में है।"
     },
     "credit": "RFMiD 2.0, CC BY 4.0. Panchal S, et al. Data 2023.",
     "hotspots": [
@@ -46,11 +46,11 @@
         "y": 0.52,
         "label": {
           "en": "Vessels at the edge",
-          "hi": "किनारे पर नसें"
+          "hi": "किनारे पर रक्त-नलियाँ"
         },
         "note": {
           "en": "The vessels are pushed to the edge of the disc and bend there.",
-          "hi": "नसें डिस्क के किनारे तक धकेली गई हैं और वहाँ मुड़ती हैं।"
+          "hi": "रक्त-नलियाँ डिस्क के किनारे तक धकेली गई हैं और वहाँ मुड़ती हैं।"
         }
       },
       {
@@ -69,17 +69,53 @@
         "x": 0.42,
         "y": 0.24,
         "label": {
-          "en": "Upper arcade",
-          "hi": "ऊपर की नसें"
+          "en": "Upper arcade (vessel arch)",
+          "hi": "ऊपरी आर्केड (upper arcade, रक्त-नलियों की मेहराब)"
         },
         "note": {
-          "en": "The fibres that run with these vessels are often lost early.",
-          "hi": "इन नसों के साथ चलने वाले तंतु अक्सर जल्दी खो जाते हैं।"
+          "en": "The arcuate nerve fibres that run beside these vessels are often lost early. Their loss gives a defect in the lower visual field of that eye.",
+          "hi": "इन रक्त-नलियों के साथ चलने वाले आर्क्युएट तंतु (arcuate nerve fibres) अक्सर जल्दी खो जाते हैं। इनके नुकसान से उसी आँख के दृष्टि क्षेत्र (visual field) के निचले हिस्से में दोष होता है।"
         }
       }
     ],
     "more": [
       "glaucoma-disc-cupped"
+    ]
+  },
+  "fields": {
+    "intro": {
+      "en": "Glaucoma field loss starts away from the centre, so each eye must be tested alone.",
+      "hi": "ग्लूकोमा (glaucoma) में दृष्टि क्षेत्र (visual field) की कमी बीच से दूर शुरू होती है, इसलिए हर आँख को अलग से जाँचें।"
+    },
+    "items": [
+      {
+        "id": "arcuate-superior",
+        "label": {
+          "en": "Superior arcuate scotoma (curved blind patch above the centre)",
+          "hi": "ऊपरी आर्कुएट स्कोटोमा (superior arcuate scotoma, बीच के ऊपर मुड़ा हुआ अंधा हिस्सा)"
+        },
+        "le": "full",
+        "re": "arcuate-sup",
+        "where": {
+          "en": "Right eye, early glaucoma: arcuate nerve fibres lost at the inferior (lower) rim of the optic disc. This causes a defect in the upper visual field of that eye.",
+          "hi": "दाईं आँख, शुरुआती ग्लूकोमा (glaucoma): ऑप्टिक डिस्क (optic disc) के निचले (inferior) किनारे (rim) के आर्क्युएट तंतु नष्ट। इससे उसी आँख के दृष्टि क्षेत्र (visual field) के ऊपरी हिस्से में दोष होता है।"
+        },
+        "lesion": "optic-nerve"
+      },
+      {
+        "id": "tunnel-late",
+        "label": {
+          "en": "Tunnel vision (only a small central island left)",
+          "hi": "टनल विज़न (tunnel vision, बीच में सिर्फ़ छोटा सा हिस्सा बचता है)"
+        },
+        "le": "tunnel",
+        "re": "tunnel",
+        "where": {
+          "en": "Advanced glaucoma in both eyes: the edges are lost, the centre goes last.",
+          "hi": "दोनों आँखों में बढ़ा हुआ ग्लूकोमा: किनारे पहले जाते हैं, बीच का हिस्सा सबसे आख़िर में।"
+        },
+        "lesion": "optic-nerve"
+      }
     ]
   },
   "why": {
@@ -93,16 +129,16 @@
         "hi": "माता-पिता या भाई-बहन को ग्लूकोमा हो तो ख़तरा बढ़ता है।"
       },
       {
-        "en": "Other risks: high [[iop]], African ancestry, [[myopia]], and a thin cornea.",
-        "hi": "दूसरे ख़तरे: ज़्यादा [[iop]], अफ़्रीकी मूल, [[myopia]], और पतला कॉर्निया।"
+        "en": "Other risks: high [[iop]], African ancestry, [[myopia]], and a thin central cornea.",
+        "hi": "दूसरे ख़तरे: ज़्यादा [[iop]], अफ़्रीकी मूल, [[myopia]], और पतला केंद्रीय कॉर्निया (central cornea)।"
       },
       {
         "en": "[[poag]] is painless. Vision stays normal until late, so people rarely come on their own.",
         "hi": "[[poag]] में दर्द नहीं होता। नज़र आख़िर तक ठीक रहती है, इसलिए लोग ख़ुद कम ही आते हैं।"
       },
       {
-        "en": "Find it by looking at the disc and measuring pressure. Pressure alone misses many cases.",
-        "hi": "डिस्क देखकर और प्रेशर नापकर इसे पकड़ें। सिर्फ़ प्रेशर से कई मरीज़ छूट जाते हैं।"
+        "en": "Find it by looking at the disc and measuring pressure with tonometry. Pressure alone misses many cases.",
+        "hi": "डिस्क देखकर और टोनोमेट्री (tonometry) से प्रेशर नापकर इसे पकड़ें। सिर्फ़ प्रेशर से कई मरीज़ छूट जाते हैं।"
       }
     ],
     "analogy": {
@@ -120,8 +156,8 @@
       "hi": "दोबारा जाँच में भी प्रेशर ज़्यादा आए तो रेफ़र करें।"
     },
     {
-      "en": "Refer a field defect that fits glaucoma.",
-      "hi": "ग्लूकोमा जैसा दायरे का नुकसान हो तो रेफ़र करें।"
+      "en": "Refer a visual field defect that fits glaucoma, such as an arcuate scotoma.",
+      "hi": "ग्लूकोमा जैसा दृष्टि क्षेत्र (visual field) का नुकसान, जैसे आर्क्युएट स्कोटोमा (arcuate scotoma), हो तो रेफ़र करें।"
     }
   ],
   "todo": [
@@ -130,12 +166,12 @@
       "hi": "40 से ज़्यादा उम्र के हर व्यक्ति से परिवार में ग्लूकोमा के बारे में पूछें।"
     },
     {
-      "en": "Advise relatives of a glaucoma patient to get their eyes checked.",
-      "hi": "ग्लूकोमा के मरीज़ के रिश्तेदारों को आँखें जँचवाने की सलाह दें।"
+      "en": "Advise first-degree relatives (parents, brothers, sisters, children) of a glaucoma patient to get their eyes checked.",
+      "hi": "ग्लूकोमा के मरीज़ के निकट रिश्तेदारों (माता-पिता, भाई-बहन, बच्चे) को आँखें जँचवाने की सलाह दें।"
     },
     {
-      "en": "Refer to an [[ophthalmologist]]. Glaucoma needs disc, field and pressure checks together.",
-      "hi": "[[ophthalmologist]] को रेफ़र करें। ग्लूकोमा में डिस्क, दायरा और प्रेशर तीनों की जाँच साथ चाहिए।"
+      "en": "Refer to an [[ophthalmologist]]. Glaucoma needs disc, visual field and pressure checks together.",
+      "hi": "[[ophthalmologist]] को रेफ़र करें। ग्लूकोमा में डिस्क, दृष्टि क्षेत्र (visual field) और प्रेशर तीनों की जाँच साथ चाहिए।"
     }
   ],
   "remember": {
@@ -170,8 +206,8 @@
     },
     {
       "q": {
-        "en": "Pressure is 18 mmHg, but the cup is large and notched. What now?",
-        "hi": "प्रेशर 18 mmHg है, पर कप बड़ा है और उसमें खाँचा है। अब क्या?"
+        "en": "Pressure is 18 millimetres of mercury (mmHg), but the cup is large and notched. What now?",
+        "hi": "प्रेशर 18 मिलीमीटर पारा (mmHg) है, पर कप बड़ा है और उसमें खाँचा है। अब क्या?"
       },
       "o": [
         {
@@ -195,8 +231,8 @@
     },
     {
       "q": {
-        "en": "Why is POAG often found late?",
-        "hi": "POAG अक्सर देर से क्यों पकड़ में आता है?"
+        "en": "Why is primary open-angle glaucoma (POAG) often found late?",
+        "hi": "primary open-angle glaucoma (POAG) अक्सर देर से क्यों पकड़ में आता है?"
       },
       "o": [
         {

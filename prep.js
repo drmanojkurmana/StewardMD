@@ -31,6 +31,14 @@
   function emptyStore() { return { v: 1, cards: {}, conf: {}, days: {}, mod: {}, bm: {}, rep: {}, exam: "neet-pg", last: null, dl: {}, hid: { ids: {}, ts: 0 }, mt: {}, goal: 30, mh: [], ls: {}, lsp: { r: 1, au: 0 }, pl: null, pt: null, ra: [] }; }
   function deckKey(moduleId) { return "p:" + moduleId; }
   // hidden: item ids withdrawn after repeated student reports (/api/prep/flag?hidden=1), as an id -> 1 map.
+  /* mergeOverlay(bank, extra) -> bank items, then overlay items whose id the bank (or an earlier overlay item) does not
+     have. Items are kept as they are (x, r, img, imgPlace, prov, set, sid and the key untouched). */
+  function mergeOverlay(bank, extra) {
+    var seen = {}, out = [];
+    (bank || []).forEach(function (it) { if (it && !seen[it.id]) { seen[it.id] = 1; out.push(it); } });
+    (extra || []).forEach(function (it) { if (it && it.id && !seen[it.id]) { seen[it.id] = 1; out.push(it); } });
+    return out;
+  }
   function usable(it, hidden) { return !!it && !(it.flags && it.flags.length) && !(hidden && hidden[it.id]); }
   // Questions the app shows for a module: flagged keys and hidden items out; for USMLE, vignettes when there are enough.
   function poolFor(items, exam, hidden) {
@@ -176,15 +184,75 @@
     return best;
   }
   function fmtTime(sec) { sec = Math.max(0, Math.round(sec)); var m = Math.floor(sec / 60), s = sec % 60; return m + ":" + (s < 10 ? "0" : "") + s; }
+
+  /* Explanations (2026-10-08, tools/prep-explain.mjs). An item may carry x = { key, notes, others: { letter: reason },
+     pearl }; notes use a tiny Markdown subset and nothing else is ever turned into HTML: every character is escaped
+     first, then "## " headings, **bold**, "- " / "* " bullets, "1. " steps and pipe tables (header row, "| --- |" row)
+     become tags. Old MedMCQA explanations use "*" as an inline bullet ("*Corkscrew ... *Represents ..."): legacyExp
+     turns two or more of those into list lines and drops a lone leading one. */
+  function escH(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  function inlineMd(s) { return escH(s).replace(/\*\*(?=\S)([^*]*?\S)\*\*/g, "<b>$1</b>").replace(/\*/g, ""); }
+  function cellsOf(l) { return l.trim().replace(/^\|/, "").replace(/\|\s*$/, "").split("|").map(function (c) { return c.trim(); }); }
+  var TBL_SEP = /^\|?\s*:?-{2,}:?\s*(\|\s*:?-{2,}:?\s*)*\|?\s*$/;
+  function mdLite(src) {
+    var lines = String(src == null ? "" : src).replace(/\r\n?/g, "\n").split("\n"), out = [], para = [], list = null, i = 0, m;
+    function flushP() { if (para.length) { out.push("<p>" + inlineMd(para.join(" ")) + "</p>"); para = []; } }
+    function flushL() {
+      if (!list) return;
+      out.push("<" + list.t + (list.start > 1 ? ' start="' + list.start + '"' : "") + ">" + list.items.map(function (x) { return "<li>" + inlineMd(x) + "</li>"; }).join("") + "</" + list.t + ">");
+      list = null;
+    }
+    while (i < lines.length) {
+      var t = lines[i].trim();
+      if (!t) { flushP(); flushL(); i++; continue; }
+      if ((m = /^#{1,6}\s+(.+?)\s*#*$/.exec(t))) { flushP(); flushL(); out.push('<h4 class="pn-xh">' + inlineMd(m[1]) + "</h4>"); i++; continue; }
+      if (t.charAt(0) === "|" && i + 1 < lines.length && TBL_SEP.test(lines[i + 1].trim())) {
+        flushP(); flushL();
+        var head = cellsOf(t), rows = [];
+        i += 2;
+        while (i < lines.length && lines[i].trim().charAt(0) === "|") rows.push(cellsOf(lines[i++]));
+        var w = head.length;
+        out.push('<div class="pn-xt" role="region" tabindex="0" aria-label="Table: ' + escH(head.join(", ").replace(/\*/g, "")) + '"><table><thead><tr>' + head.map(function (c) { return '<th scope="col">' + inlineMd(c) + "</th>"; }).join("") + "</tr></thead><tbody>" +
+          rows.map(function (r) { var cs = []; for (var k = 0; k < w; k++) cs.push(k ? "<td>" + inlineMd(r[k] || "") + "</td>" : '<th scope="row">' + inlineMd(r[k] || "") + "</th>"); return "<tr>" + cs.join("") + "</tr>"; }).join("") + "</tbody></table></div>");
+        continue;
+      }
+      var b = /^[-*\u2022]\s+(.*)$/.exec(t), n = /^(\d{1,2})[.)]\s+(.*)$/.exec(t);
+      if (b || n) {
+        flushP();
+        var ty = b ? "ul" : "ol";
+        if (!list || list.t !== ty) { flushL(); list = { t: ty, items: [], start: n ? +n[1] : 1 }; }
+        list.items.push(b ? b[1] : n[2]);
+        i++; continue;
+      }
+      flushL(); para.push(t); i++;
+    }
+    flushP(); flushL();
+    return out.join("");
+  }
+  function legacyExp(s) {
+    var t = String(s == null ? "" : s).replace(/\r\n?/g, "\n").trim(), re = /(^|\s)\*(?!\*)(?=[^\s*])/g;
+    var hits = t.match(re);
+    if (hits && hits.length >= 2) return t.replace(re, "\n- ").trim();
+    return t.replace(/^\*(?!\*)\s*/, "");
+  }
+  /* explainOf(item) -> { x, r } the parts the feedback draws: x when it is whole, r one reason per option (the item's own,
+     else built from x). */
+  function explainOf(it) {
+    var L4 = ["A", "B", "C", "D"], x = it && it.x && typeof it.x === "object" && typeof it.x.key === "string" && it.x.key.trim() ? it.x : null;
+    var r = it && it.r && it.r.length === it.o.length ? it.r : null;
+    if (!r && x && x.others) r = it.o.map(function (o, k) { return k === it.a ? x.key : String(x.others[L4[k]] || ""); });
+    return { x: x, r: r };
+  }
   var PURE = { EXAMS: EXAMS, examOf: examOf, emptyStore: emptyStore, deckKey: deckKey, usable: usable, poolFor: poolFor, progressByModule: progressByModule,
     statusOf: statusOf, stars: stars, countFor: countFor, solveNext: solveNext, filterModules: filterModules, customDraw: customDraw, shuffle: shuffle, fmtTime: fmtTime,
     targetDifficulty: targetDifficulty, adaptiveNew: adaptiveNew, weakModules: weakModules, planToday: planToday, MISTAKE_TAGS: MISTAKE_TAGS, mistakeCounts: mistakeCounts,
-    MOCKS: MOCKS, mockOf: mockOf, mockModules: mockModules, scoreMock: scoreMock, findModule: findModule };
+    MOCKS: MOCKS, mockOf: mockOf, mockModules: mockModules, scoreMock: scoreMock, findModule: findModule,
+    mdLite: mdLite, inlineMd: inlineMd, legacyExp: legacyExp, explainOf: explainOf, mergeOverlay: mergeOverlay };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
   /* ================= browser ================= */
   var D = G.document, C = G.SPECIALTY_CORE;
-  var STATIC = G.SMD_PREP_BASE || "/prep/", API = G.SMD_PREP_BANK_API || "/api/prep/bank/", FLAG_API = G.SMD_PREP_FLAG_API || "/api/prep/flag", VER = G.SMD_PREP_BANK_VER || "v4";
+  var STATIC = G.SMD_PREP_BASE || "/prep/", API = G.SMD_PREP_BANK_API || "/api/prep/bank/", FLAG_API = G.SMD_PREP_FLAG_API || "/api/prep/flag", VER = G.SMD_PREP_BANK_VER || "v5", PYQ_VER = G.SMD_PREP_PYQ_VER || "v5";
   var HID_TTL = 6 * 3600e3;
   var KEY = "smd_prep_v1", SESSION = 20;
   var st = { open: false, stack: [], tax: null, ix: {}, mem: {}, store: null, run: null, timer: 0, prevOverflow: "", prevFocus: null, sub: null, filter: "all" };
@@ -251,7 +319,7 @@
   function cacheKeys() { return idbDo("readonly", function (os) { return os.getAllKeys ? os.getAllKeys() : null; }); }
   function cacheDel(path) { return idbDo("readwrite", function (os) { return os.delete(path); }); }
   function modulePath(sid, mid) { return bvOf(sid) + "/" + sid + "/mcq/" + mid + ".json"; }
-  function loadModule(sid, mid) {
+  function loadBank(sid, mid) {
     var p = modulePath(sid, mid);
     if (st.mem[p]) return Promise.resolve(st.mem[p]);
     return cacheGet(p).then(function (hit) {
@@ -262,7 +330,41 @@
         cachePut(p, { items: items, ts: Date.now() });
         return items;
       });
-    }).then(function (items) { items.forEach(function (it) { it._s = sid; it._m = mid; }); return items; });
+    });
+  }
+  /* Overlay sets: extra MCQs for a module from outside the bank (the owner's radiology notes, set "radnotes"), at
+     overlay/<set>/<subject>/<module>.json { topic, set, v, items }, immutable once uploaded. Only subjects listed here
+     are asked for; a module without a file (404) or offline without a copy adds nothing. */
+  var OVERLAYS = G.SMD_PREP_OVERLAYS || { radiology: ["radnotes"] };
+  function loadOverlay(sid, mid, miss) {
+    var sets = OVERLAYS[sid] || [];
+    return Promise.all(sets.map(function (set) {
+      var p = "overlay/" + set + "/" + sid + "/" + mid + ".json";
+      if (st.mem[p]) return st.mem[p];
+      return cacheGet(p).then(function (hit) {
+        if (hit && hit.items) return (st.mem[p] = hit.items);
+        return getJSON(API + p).then(function (f) {
+          var items = (f && f.items) || [];
+          st.mem[p] = items;
+          cachePut(p, { items: items, ts: Date.now() });
+          return items;
+        }, function (e) { if (e && e.status === 404) return (st.mem[p] = []); if (miss) miss.n++; return []; });
+      }).then(function (items) { items.forEach(function (it) { it._ov = set; }); return items; });
+    })).then(function (r) { return [].concat.apply([], r); });
+  }
+  // A module's questions: the bank file plus its overlay items (mergeOverlay). A bank failure with overlay items still
+  // gives the overlay items; with none, the failure stands.
+  function loadModule(sid, mid) {
+    var k = "mod:" + sid + "/" + mid;
+    if (st.mem[k]) return Promise.resolve(st.mem[k]);
+    var bankErr = null, miss = { n: 0 };
+    return Promise.all([loadBank(sid, mid).then(null, function (e) { bankErr = e; return []; }), loadOverlay(sid, mid, miss)]).then(function (r) {
+      if (bankErr && !r[1].length) throw bankErr;
+      var items = mergeOverlay(r[0], r[1]);
+      items.forEach(function (it) { it._s = sid; it._m = mid; });
+      if (!bankErr && !miss.n) st.mem[k] = items;   // offline overlay miss: ask again next time
+      return items;
+    });
   }
 
   // Items withdrawn after repeated reports: refreshed on open at most every 6 hours; offline keeps the last list.
@@ -384,6 +486,7 @@
   function back() {
     if (!st.open) return false;
     if (G.PrepPro && G.PrepPro.back && G.PrepPro.back()) return true;   // PrepNucleus Pro: the limit sheet closes first
+    if (G.PREP_SETUP && G.PREP_SETUP.back()) return true;   // the practice setup sheet (prep-setup.js)
     // Arena: a sheet closes first; a live battle asks before it is left.
     if (G.PREP_ARENA && G.PREP_ARENA.back && G.PREP_ARENA.back()) return true;
     if (G.PREP_FLASH && G.PREP_FLASH.back()) return true;
@@ -457,6 +560,7 @@
     try { if (G.PREP_RAD) G.PREP_RAD.leave(); } catch (e) {}
     try { if (G.PREP_PLAN) G.PREP_PLAN.leave(); } catch (e) {}
     try { if (G.PREP_FLASH) G.PREP_FLASH.leave(); } catch (e) {}
+    try { if (G.PREP_SETUP) G.PREP_SETUP.leave(); } catch (e) {}
     try { if (G.PREP_MOTION) G.PREP_MOTION.detach(); } catch (e) {}
     st.open = false; st.run = null; st.stack = [];
     if (root && root.parentNode) root.parentNode.removeChild(root);
@@ -552,7 +656,7 @@
       var mixed = ix.topics.filter(function (t) { return t.group === "mixed"; })[0];
       if (mixed && mixed.count && st.filter === "all") html += '<h2 class="pn-sec">More</h2><ol class="pn-mods">' + modRow(sid, mixed, prog, s, null) + "</ol>";
       var box = root.querySelector("#pnSub");
-      if (box) box.innerHTML = head + (html || '<p class="pn-empty">Nothing in this filter yet.</p>');
+      if (box) box.innerHTML = head + (setupOn() && q ? '<button type="button" class="pn-btn pri pn-subgo" data-act="su-subject" data-s="' + esc(sid) + '">' + ico("play") + " Practise " + tx(sb.name) + "</button>" + lastBtn("subject", sid, ' data-s="' + esc(sid) + '"') : "") + (html || '<p class="pn-empty">Nothing in this filter yet.</p>');
     });
   }
   function modRow(sid, t, prog, s, num) {
@@ -575,8 +679,8 @@
     paint(bar(tx(t.title), tx(subjectById(sid).name), "back") + '<div class="pn-body"><div id="pnLsnSlot"></div><div id="pnCardSlot"></div><div id="pnPyqSlot"></div><section class="pn-panel pn-modp" id="pnModPanel" style="--h:' + subjHue(sid) + '">' +
       '<div class="pn-modh"><div class="pn-modt"><span class="pn-ic sm pn-modi" aria-hidden="true">' + subjIco(sid) + '</span><p class="pn-big">' + fmt(n) + ' MCQs</p><p class="pn-mut">' + fmt(Math.min(p.answered, n)) + " answered" + (sr != null ? " · mastery " + sr + "/5" : "") + (p.due ? " · " + fmt(p.due) + " due for review" : "") + "</p></div>" + mring(apct, apct + "%") + "</div>" +
       (p.due ? '<button type="button" class="pn-btn pri" data-act="start" data-k="due">' + ico("play") + " Review " + fmt(p.due) + " due</button>" : "") +
-      '<button type="button" class="pn-btn' + (p.due ? "" : " pri") + '" data-act="start" data-k="study">' + ico("play") + " Practice " + Math.min(SESSION, n) + " questions</button>" +
-      '<button type="button" class="pn-btn" data-act="start" data-k="exam">' + ico("clock") + " Timed test: " + Math.min(SESSION, n) + " questions, " + Math.round(Math.min(SESSION, n) * ex.sec / 60) + " min</button>" +
+      '<button type="button" class="pn-btn' + (p.due ? "" : " pri") + '" data-act="start" data-k="study">' + ico("play") + (setupOn() ? " Practice" : " Practice " + Math.min(SESSION, n) + " questions") + "</button>" + lastBtn("module", mid) +
+      '<button type="button" class="pn-btn" data-act="start" data-k="exam">' + ico("clock") + (setupOn() ? " Timed test" : " Timed test: " + Math.min(SESSION, n) + " questions, " + Math.round(Math.min(SESSION, n) * ex.sec / 60) + " min") + "</button>" +
       '<p class="pn-mut pn-small">Practice marks each answer at once with its explanation. A timed test marks everything at the end. Every answer schedules the question for spaced review.</p></section></div>');
     st.cur = { s: sid, m: mid };
     if (G.PREP_LESSONS) G.PREP_LESSONS.mount(root.querySelector("#pnLsnSlot"), sid, mid, HOST);
@@ -607,26 +711,37 @@
   }
 
   /* ---------- runner ---------- */
-  // opts (mock exams): { limit: seconds, scheme: {plus, minus, label} }. opts.custom (Arena events): { submit(run), render(run) }:
+  // opts (mock exams): { limit: seconds, scheme: {plus, minus, label} }. Practice setup (prep-setup.js): { limit } a clock for
+  // the whole set in either mode, { qsec } a clock per question (a timed test moves on when it runs out, leaving the
+  // question unanswered; practice only shows the ring), { untimed: true } a test with no clock. opts.custom (Arena events): { submit(run), render(run) }:
   // the runner neither marks nor records (the items carry no key); submit sends the answers and render draws the result.
   function runQuestions(items, mode, title, opts) {
     var ex = examOf(load().exam);
     opts = opts || {};
     // PrepNucleus Pro (prep-pro.js): the free tier is checked when a set starts, never mid-set. Arena runs (custom) are free.
     if (!opts.custom && G.PrepPro && !G.PrepPro.can("questions", { items: items })) { rerender(); return G.PrepPro.openLimit("questions"); }
-    st.run = { items: items, i: 0, mode: mode, title: title, ans: items.map(function () { return -1; }), mark: {}, done: false, t0: Date.now(), limit: mode === "exam" ? (opts.limit || items.length * ex.sec) : 0, scheme: opts.scheme || null, custom: opts.custom || null };
+    st.run = { items: items, i: 0, mode: mode, title: title, ans: items.map(function () { return -1; }), mark: {}, done: false, t0: Date.now(), limit: opts.untimed || opts.qsec ? 0 : opts.limit || (mode === "exam" ? items.length * ex.sec : 0), qsec: opts.qsec || 0, scheme: opts.scheme || null, custom: opts.custom || null };
     st.stack.push(renderRun);
     nav(1); renderRun();
-    if (mode === "exam") startTimer();
+    if (st.run.limit || st.run.qsec) startTimer();
   }
   function startTimer() {
     stopTimer();
     st.timer = G.setInterval(function () {
       var r = st.run; if (!r || r.done) return stopTimer();
+      if (r.qsec) return qtick(r);
       var left = r.limit - (Date.now() - r.t0) / 1000, el = root && root.querySelector("#pnClock");
       if (el) { el.textContent = fmtTime(left); if (el.parentNode) el.parentNode.classList.toggle("over", (Date.now() - (r.qt0 || r.t0)) / 1000 > r.limit / r.items.length); }
       if (left <= 0) finish();
     }, 1000);
+  }
+  // A clock per question: the ring and the figure count this question down; a timed test goes on to the next question
+  // (or submits after the last) when it runs out, only while the question itself is on screen.
+  function qtick(r) {
+    var ql = r.qsec - (Date.now() - (r.qt0 || r.t0)) / 1000, el = root && root.querySelector("#pnClock");
+    if (el) { el.textContent = fmtTime(ql); if (el.parentNode) el.parentNode.classList.toggle("over", ql <= 0); }
+    if (ql > 0 || r.mode !== "exam" || st.stack[st.stack.length - 1] !== renderRun) return;
+    if (r.i < r.items.length - 1) { r.i++; renderRun(); } else finish();
   }
   function stopTimer() { if (st.timer) { G.clearInterval(st.timer); st.timer = 0; } }
   // Owner rule (2026-10-07): no authorship or source line on questions; content credits live in the Terms and Privacy pages.
@@ -655,10 +770,24 @@
   }
   // Timed mode: the clock sits in a pace ring that empties over this question's share of the time (limit / questions).
   function clockHtml(r) {
-    var per = r.limit / r.items.length, spent = (Date.now() - (r.qt0 || r.t0)) / 1000;
+    var per = r.qsec || r.limit / r.items.length, spent = (Date.now() - (r.qt0 || r.t0)) / 1000;
     return '<span class="pn-clockw' + (spent > per ? " over" : "") + '"><svg class="pn-pace" viewBox="0 0 40 40" aria-hidden="true"><circle class="rt" cx="20" cy="20" r="17" pathLength="100"/>' +
       '<circle class="rv" cx="20" cy="20" r="17" pathLength="100" style="animation-duration:' + Math.max(1, per).toFixed(1) + "s;animation-delay:-" + Math.max(0, spent).toFixed(1) + 's"/></svg>' +
-      '<span class="pn-clock" id="pnClock" role="timer" aria-live="off">' + fmtTime(r.limit - (Date.now() - r.t0) / 1000) + "</span></span>";
+      '<span class="pn-clock" id="pnClock" role="timer" aria-live="off">' + fmtTime(r.qsec ? r.qsec - spent : r.limit - (Date.now() - r.t0) / 1000) + "</span></span>";
+  }
+  /* The explanation under the answer: the key line and topic notes when the item has x, else its stored text (old "*"
+     bullets made into a list), else a plain "not written yet" line. */
+  function whyHtml(it, xo, why, L) {
+    // images placed in the explanation (imgPlace "exp") follow the notes, with the same tap to enlarge
+    var fig = G.PREP_PYQ ? G.PREP_PYQ.figure(it, HOST, "exp") : "";
+    if (xo.x) return "<h3>Why " + L[it.a] + ' is right</h3><p class="pn-xkey">' + inlineMd(xo.x.key) + "</p>" + (xo.x.notes ? '<div class="pn-xnotes">' + mdLite(xo.x.notes) + "</div>" : "") + fig;
+    if (why) return "<h3>" + (xo.r ? "Why " + L[it.a] + " is right" : "Explanation") + '</h3><div class="pn-exp">' + mdLite(legacyExp(why)) + "</div>" + fig;
+    if (fig) return "<h3>Explanation</h3>" + fig;
+    return '<p class="pn-mut">' + (it._py ? "Explanation coming soon." : "No explanation is stored for this question yet.") + "</p>";
+  }
+  function pearlHtml(it, xo) {
+    var p = xo.x && xo.x.pearl ? xo.x.pearl : it.kp;
+    return p ? '<aside class="pn-kp" aria-label="Remember"><b>Remember</b><span>' + inlineMd(p) + "</span></aside>" : "";
   }
   function renderRun() {
     var r = st.run; if (!r) return;
@@ -681,24 +810,25 @@
     // Study: bookmark and, once answered, report, as labelled icon buttons in the bar.
     var acts = (own || it._py ? "" : '<button type="button" class="pn-ib' + (bm ? " on" : "") + '" data-act="bookmark" aria-pressed="' + bm + '" aria-label="' + (bm ? "Remove bookmark" : "Bookmark this question") + '">' + ico("bm", bm) + "</button>") +
       (shown && !own ? '<button type="button" class="pn-ib" data-act="report" aria-label="Report this question">' + ico("flag") + "</button>" : "");
-    var right = r.mode === "exam" ? clockHtml(r) : acts ? '<span class="pn-acts">' + acts + "</span>" : "";
+    var clk = r.limit || r.qsec ? clockHtml(r) : "";
+    var right = r.mode === "exam" ? clk : acts || clk ? '<span class="pn-acts">' + clk + acts + "</span>" : "";
     var fb = "";
     if (shown) {
       var ok = chosen === it.a, fresh = r.fresh === r.i;
       r.fresh = -1;   // the reveal plays once, on the paint right after the answer (a bookmark or tag repaint keeps still)
       // Round 7: verdict, then the answer on its own line, then why it is right and, when the item carries a reason
       // per option (r: PYQ and deck items), why each other option is wrong, the student's pick first.
-      var rs = it.r && it.r.length === it.o.length ? it.r : null, why = it.exp || (rs && rs[it.a]) || "";
+      var xo = explainOf(it), rs = xo.r, why = it.exp || (rs && rs[it.a]) || "";
       var others = rs ? it.o.map(function (o, k) { return k; }).filter(function (k) { return k !== it.a && rs[k] && String(rs[k]).trim(); }) : [];
       others.sort(function (x, y) { return (y === chosen) - (x === chosen) || x - y; });
       fb = '<section class="pn-fb ' + (ok ? "ok" : "no") + (fresh ? " pn-new" : "") + '" role="status" tabindex="-1">';
       fb += '<p class="pn-verdict"><span class="pn-vb" aria-hidden="true">' + ico(ok ? "check" : "x") + "</span><span><b>" + (ok ? "Correct" : "Incorrect") + "</b>" + (ok ? "" : "<small>You chose " + L[chosen] + "</small>") + "</span></p>" +
         '<p class="pn-ans"><span class="pn-l">' + L[it.a] + '</span><span><small>Right answer</small>' + esc(it.o[it.a]) + "</span></p>" +
-        (why ? "<h3>" + (rs ? "Why " + L[it.a] + " is right" : "Explanation") + '</h3><p class="pn-exp">' + esc(why) + "</p>" : '<p class="pn-mut">' + (it._py ? "Explanation coming soon." : "No explanation is stored for this question yet.") + "</p>") +
+        whyHtml(it, xo, why, L) +
         (others.length ? "<h3>Why the others are wrong</h3><ul class=\"pn-why\">" + others.map(function (k) {
-          return "<li" + (k === chosen ? ' class="mine"' : "") + '><span class="pn-l">' + L[k] + "</span><p><small>" + (k === chosen ? "Your pick: " : "") + esc(it.o[k]) + "</small>" + esc(rs[k]) + "</p></li>";
+          return "<li" + (k === chosen ? ' class="mine"' : "") + '><span class="pn-l">' + L[k] + "</span><p><small>" + (k === chosen ? "Your pick: " : "") + esc(it.o[k]) + "</small><span>" + inlineMd(rs[k]) + "</span></p></li>";
         }).join("") + "</ul>" : "") +
-        (it.kp ? '<p class="pn-kp"><b>Exam pearl:</b> ' + esc(it.kp) + "</p>" : "") +
+        pearlHtml(it, xo) +
         (it.rv && it.rv.old ? '<p class="pn-old">This may be outdated: check current guidance.</p>' : "") +
         // Offline teacher (prep-teacher.js, Phase 6): only when MaiK runs on this phone; never a server call.
         (!ok && G.PREP_TEACHER && G.PREP_TEACHER.ready && G.PREP_TEACHER.ready() ? '<button type="button" class="pn-btn" data-act="teach">Why is ' + L[chosen] + " wrong? Ask MaiK offline</button>" : "") +
@@ -916,7 +1046,12 @@
       var L = ["A", "B", "C", "D"];
       paint(bar("Review", esc(r.title), "back") + '<div class="pn-body pn-run">' + (G.PREP_PYQ ? G.PREP_PYQ.chips(it, HOST) : "") + '<p class="pn-q">' + esc(it.q) + "</p>" + (G.PREP_PYQ ? G.PREP_PYQ.figure(it, HOST) : "") + (G.PREP_RAD ? G.PREP_RAD.figure(it, HOST) : "") + '<ol class="pn-opts">' + it.o.map(function (o, k) {
         return '<li><div class="pn-opt' + (k === it.a ? " right" : k === r.ans[i] ? " wrong" : "") + '"><span class="pn-l">' + L[k] + "</span><span>" + esc(o) + "</span></div></li>";
-      }).join("") + '</ol><section class="pn-fb"><h3>Explanation</h3><p class="pn-exp">' + esc(it.exp || "No explanation is stored for this question yet.") + '</p>' + provHtml(it) + "</section></div>");
+      }).join("") + '</ol><section class="pn-fb">' + (function () {
+        var xo = explainOf(it), others = xo.r ? it.o.map(function (o, k) { return k; }).filter(function (k) { return k !== it.a && String(xo.r[k] || "").trim(); }) : [];
+        return whyHtml(it, xo, it.exp || (xo.r && xo.r[it.a]) || "", L) + (others.length ? '<h3>Why the others are wrong</h3><ul class="pn-why">' + others.map(function (k) {
+          return "<li" + (k === r.ans[i] ? ' class="mine"' : "") + '><span class="pn-l">' + L[k] + "</span><p><small>" + (k === r.ans[i] ? "Your pick: " : "") + esc(it.o[k]) + "</small><span>" + inlineMd(xo.r[k]) + "</span></p></li>";
+        }).join("") + "</ul>" : "") + pearlHtml(it, xo);
+      })() + provHtml(it) + "</section></div>");
       if (G.PREP_RAD) G.PREP_RAD.mount(root);
     });
     rerender();
@@ -983,7 +1118,7 @@
     var top = MISTAKE_TAGS.filter(function (t) { return c[t[0]]; }).sort(function (a, b) { return c[b[0]] - c[a[0]]; })[0];
     paint(bar("My mistakes", fmt(c.all) + " to fix", "back") + '<div class="pn-body">' + (c.all ?
       hband("mt", fmt(c.all), c.all === 1 ? "question to fix" : "questions to fix", top ? "Most often: " + esc(top[1].toLowerCase()) + " (" + c[top[0]] + ")." : "Tag each one in the runner to see a pattern.") +
-      '<div class="pn-wrap pn-scroll" role="group" aria-label="Filter by reason">' + chips + '</div><button type="button" class="pn-btn pri" data-act="mpractice"' + (ids.length ? "" : " disabled") + ">" + ico("play") + " Practise these " + Math.min(ids.length, 50) + "</button>" +
+      '<div class="pn-wrap pn-scroll" role="group" aria-label="Filter by reason">' + chips + '</div><button type="button" class="pn-btn pri" data-act="mpractice"' + (ids.length ? "" : " disabled") + ">" + ico("play") + (setupOn() ? " Practise these" : " Practise these " + Math.min(ids.length, 50)) + "</button>" + (ids.length ? lastBtn("mistakes", mf.tag) : "") +
       '<ul class="pn-mods">' + ids.slice(0, 100).map(function (id) { var b = s.mt[id], t = topicOf(b[0], b[1]); return '<li><div class="pn-mod static pn-mx"' + (b[2] ? ' data-tag="' + esc(b[2]) + '"' : "") + '><span class="pn-ri" aria-hidden="true">' + ico("x") + '</span><span class="pn-mb"><b>' + esc(b[4]) + "</b><small>" + (t ? tx(t.title) : esc(b[1])) + (b[2] ? " · " + esc(tagLabel(b[2])) : "") + "</small></span></div></li>"; }).join("") + "</ul>" +
       '<p class="pn-mut pn-small">A question leaves this list when you answer it right.</p>'
       : '<p class="pn-empty pn-art-mt">No mistakes to fix. Questions you get wrong collect here.</p>') + "</div>");
@@ -1098,7 +1233,7 @@
     var nbs = {}; ids.forEach(function (id) { nbs[s.bm[id][0]] = 1; }); nbs = Object.keys(nbs).length;
     paint(bar("Bookmarks", fmt(ids.length) + " saved", "back") + '<div class="pn-body">' + (ids.length ?
       hband("bm", fmt(ids.length), ids.length === 1 ? "question saved" : "questions saved", "From " + Object.keys(by).length + (Object.keys(by).length === 1 ? " module" : " modules") + " in " + nbs + (nbs === 1 ? " subject" : " subjects") + ". Practise them as one set.") +
-      '<button type="button" class="pn-btn pri" data-act="practicebm">' + ico("play") + " Practise all bookmarks</button>" +
+      '<button type="button" class="pn-btn pri" data-act="practicebm">' + ico("play") + (setupOn() ? " Practise bookmarks" : " Practise all bookmarks") + "</button>" + lastBtn("bookmarks", "") +
       '<ul class="pn-mods">' + Object.keys(by).map(function (k) { var p = k.split("|"), t = topicOf(p[0], p[1]), sb = subjectById(p[0]); var last = 0; by[k].forEach(function (id) { last = Math.max(last, +s.bm[id][2] || 0); }); return '<li><div class="pn-mod static"><span class="pn-ic sm" style="--h:' + subjHue(p[0]) + '" aria-hidden="true">' + subjIco(p[0]) + '</span><span class="pn-mb"><b>' + (t ? tx(t.title) : esc(p[1])) + "</b><small>" + (sb ? tx(sb.name) : "") + (last ? " · last saved " + dayMonth(last) : "") + '</small></span><span class="pn-st" aria-label="' + by[k].length + ' saved">' + by[k].length + "</span></div></li>"; }).join("") + "</ul>"
       : '<p class="pn-empty pn-art-bm">Bookmark a question with the ribbon at the top while practising, and it collects here.</p>') + "</div>");
     Object.keys(by).forEach(function (k) { var p = k.split("|"); loadIndex(p[0]); });
@@ -1137,14 +1272,14 @@
     var chip = function (act, v, on, label) { return '<button type="button" class="pn-chip' + (on ? " on" : "") + '" aria-pressed="' + on + '" data-act="' + act + '" data-v="' + v + '">' + label + "</button>"; };
     var nsub = Object.keys(cm.subs).length;
     paint(bar("Custom module", examOf(s.exam).label, "back") + '<div class="pn-body pn-cm">' +
-      hband("cm", String(cm.n), "questions", nsub ? (cm.mode === "exam" ? "A timed test" : "Practice") + (cm.d ? ", " + ["", "easy", "medium", "hard"][cm.d] + " questions" : "") + ", from " + nsub + (nsub === 1 ? " subject" : " subjects") + "." : "Pick the subjects, then how hard and how many.") +
+      hband("cm", setupOn() ? String(nsub) : String(cm.n), setupOn() ? (nsub === 1 ? "subject" : "subjects") : "questions", setupOn() ? "Pick the subjects, then the kind of questions and how many." : nsub ? (cm.mode === "exam" ? "A timed test" : "Practice") + (cm.d ? ", " + ["", "easy", "medium", "hard"][cm.d] + " questions" : "") + ", from " + nsub + (nsub === 1 ? " subject" : " subjects") + "." : "Pick the subjects, then how hard and how many.") +
       '<section class="pn-panel"><h2 class="pn-sec">Subjects</h2><div class="pn-wrap">' +
       subs.map(function (sb) { return chip("cmsub", sb.id, !!cm.subs[sb.id], tx(sb.name)); }).join("") + "</div></section>" +
-      '<section class="pn-panel"><h2 class="pn-sec">Difficulty</h2><div class="pn-wrap pn-seg4">' + [[0, "Any"], [1, "Easy"], [2, "Medium"], [3, "Hard"]].map(function (x) { return chip("cmd", x[0], cm.d === x[0], x[1]); }).join("") + "</div>" +
+      (setupOn() ? "" : '<section class="pn-panel"><h2 class="pn-sec">Difficulty</h2><div class="pn-wrap pn-seg4">' + [[0, "Any"], [1, "Easy"], [2, "Medium"], [3, "Hard"]].map(function (x) { return chip("cmd", x[0], cm.d === x[0], x[1]); }).join("") + "</div>" +
       '<h2 class="pn-sec">Questions</h2><div class="pn-wrap pn-seg4">' + [10, 25, 50, 100].map(function (x) { return chip("cmn", x, cm.n === x, String(x)); }).join("") + "</div>" +
-      '<h2 class="pn-sec">Mode</h2><div class="pn-wrap pn-seg4">' + chip("cmm", "study", cm.mode === "study", "Practice") + chip("cmm", "exam", cm.mode === "exam", "Timed test") + "</div></section>" +
-      '<p class="pn-cm-sum" aria-live="polite">' + (nsub ? cm.n + " questions from " + nsub + (nsub === 1 ? " subject" : " subjects") + ", " + (cm.mode === "exam" ? "timed" : "marked as you go") : "Pick at least one subject") + "</p>" +
-      '<button type="button" class="pn-btn pri" data-act="cmstart"' + (nsub ? "" : " disabled") + ">" + ico("play") + " Start</button></div>");
+      '<h2 class="pn-sec">Mode</h2><div class="pn-wrap pn-seg4">' + chip("cmm", "study", cm.mode === "study", "Practice") + chip("cmm", "exam", cm.mode === "exam", "Timed test") + "</div></section>") +
+      '<p class="pn-cm-sum" aria-live="polite">' + (nsub && setupOn() ? "Questions from " + nsub + (nsub === 1 ? " subject" : " subjects") + ". Choose the type, count and difficulty next." : nsub ? cm.n + " questions from " + nsub + (nsub === 1 ? " subject" : " subjects") + ", " + (cm.mode === "exam" ? "timed" : "marked as you go") : "Pick at least one subject") + "</p>" +
+      '<button type="button" class="pn-btn pri" data-act="cmstart"' + (nsub ? "" : " disabled") + ">" + ico("play") + (setupOn() ? " Choose questions" : " Start") + "</button></div>");
   }
   function startCustom() {
     var s = load(), sids = Object.keys(cm.subs);
@@ -1190,9 +1325,87 @@
   function removeDownload(sid) {
     var s = load();
     cacheKeys().then(function (keys) {
-      (keys || []).forEach(function (k) { if (String(k).indexOf(bvOf(sid) + "/" + sid + "/") === 0) { cacheDel(k); delete st.mem[k]; } });
+      (keys || []).forEach(function (k) { k = String(k); if (k.indexOf(bvOf(sid) + "/" + sid + "/") === 0 || (k.indexOf("overlay/") === 0 && k.split("/")[2] === sid)) { cacheDel(k); delete st.mem[k]; } });
+      Object.keys(st.mem).forEach(function (k) { if (k.indexOf("mod:" + sid + "/") === 0) delete st.mem[k]; });
       delete s.dl[sid]; save(); renderDownloads();
     });
+  }
+
+  /* ---------- practice setup (prep-setup.js): the sheet before a set from a module, a subject, custom, mistakes, bookmarks ----------
+     Each scope says how to load its pool (one list per module file, so the draw spreads across modules) and how to start.
+     "Last settings" (su-last) starts the same scope at once with the remembered choice. */
+  function setupOn() { return !!(G.PREP_SETUP && G.PREP_SETUP.enabled()); }
+  function scopeModule(sid, mid, kind) {
+    var s = load(), t = topicOf(sid, mid), title = t ? tx(t.title) : "Practice";
+    return { kind: "module", id: mid, title: title, sub: tx((subjectById(sid) || {}).name), hue: subjHue(sid), mode: kind === "exam" ? "exam" : kind === "study" ? "study" : null,
+      load: function () { return loadModule(sid, mid).then(function (items) { return [poolFor(items, s.exam, hidden())]; }); },
+      start: function (list, mode, ro) { runQuestions(list, mode, title, ro); } };
+  }
+  // A subject: every module when it is downloaded; otherwise the modules opened before plus others, 16 files at most.
+  var SUBJECT_FILES = 16;
+  function scopeSubject(sid) {
+    var s = load(), sb = subjectById(sid), title = sb ? tx(sb.name) : "Practice";
+    return { kind: "subject", id: sid, title: title, sub: "Whole subject", hue: subjHue(sid),
+      load: function () {
+        return loadIndex(sid).then(function (ix) {
+          var prog = progressByModule(s, today()), mods = ix.topics.filter(function (t) { return countFor(t, s.exam); });
+          if (!s.dl[sid] && mods.length > SUBJECT_FILES) {
+            var seen = shuffle(mods.filter(function (t) { return prog[t.id]; })), rest = shuffle(mods.filter(function (t) { return !prog[t.id]; }));
+            mods = seen.concat(rest).slice(0, SUBJECT_FILES);
+          }
+          return loadMany(mods.map(function (t) { return { s: sid, m: t.id }; }));
+        }).then(function (lists) { return lists.map(function (l) { return poolFor(l.items, s.exam, hidden()); }); });
+      },
+      start: function (list, mode, ro) { runQuestions(list, mode, title, ro); } };
+  }
+  // Custom module: the subjects picked on the screen, 10 module files at most (as startCustom).
+  function scopeCustom() {
+    var s = load(), sids = Object.keys(cm.subs).sort();
+    return { kind: "custom", id: sids.join(","), title: "Custom module", sub: sids.length + (sids.length === 1 ? " subject" : " subjects"),
+      load: function () {
+        return Promise.all(sids.map(loadIndex)).then(function () {
+          var mods = [];
+          sids.forEach(function (sid) { st.ix[sid].topics.forEach(function (t) { if (countFor(t, s.exam)) mods.push({ s: sid, m: t.id }); }); });
+          return loadMany(shuffle(mods).slice(0, 10));
+        }).then(function (lists) { return lists.map(function (l) { return poolFor(l.items, s.exam, hidden()); }); });
+      },
+      start: function (list, mode, ro) { runQuestions(list, mode, "Custom module", ro); } };
+  }
+  // My mistakes under the chosen reason: every one is "incorrect before", so that row is left out.
+  function scopeMistakes() {
+    var s = load(), ids = Object.keys(s.mt).filter(function (id) { return mf.tag === "all" || (mf.tag === "untagged" ? !s.mt[id][2] : s.mt[id][2] === mf.tag); }), pairs = [], seen = {}, want = {};
+    ids.forEach(function (id) { var b = s.mt[id]; want[id] = 1; if (!seen[b[1]]) { seen[b[1]] = 1; pairs.push({ s: b[0], m: b[1] }); } });
+    return { kind: "mistakes", id: mf.tag, title: "My mistakes", sub: mf.tag === "all" ? "All reasons" : tagLabel(mf.tag) || "Not tagged", hue: 16, rows: { seen: false },
+      load: function () { return loadMany(pairs.slice(0, 12)).then(function (lists) { var hid = hidden(); return lists.map(function (l) { return l.items.filter(function (it) { return want[it.id] && usable(it, hid); }); }); }); },
+      start: function (list, mode, ro) { runQuestions(list, mode, "My mistakes", ro); } };
+  }
+  // Bookmarks: every bookmarked question (all bookmarked, so that choice stays in the repeat row but is the whole pool).
+  function scopeBookmarks() {
+    var s = load(), by = {};
+    Object.keys(s.bm).forEach(function (id) { var b = s.bm[id], k = b[0] + "|" + b[1]; (by[k] = by[k] || {})[id] = 1; });
+    return { kind: "bookmarks", id: "", title: "Bookmarks", sub: Object.keys(s.bm).length + " saved", hue: 212,
+      load: function () {
+        return Promise.all(Object.keys(by).map(function (k) { var p = k.split("|"); return loadModule(p[0], p[1]).then(function (items) { var hid = hidden(); return items.filter(function (it) { return by[k][it.id] && usable(it, hid); }); }, function () { return []; }); }));
+      },
+      start: function (list, mode, ro) { runQuestions(list, mode, "Bookmarks", ro); } };
+  }
+  function scopeFor(kind, b) {
+    if (kind === "module") return st.cur ? scopeModule(st.cur.s, st.cur.m, null) : null;
+    if (kind === "subject") return scopeSubject(b.getAttribute("data-s"));
+    if (kind === "mistakes") return scopeMistakes();
+    if (kind === "bookmarks") return scopeBookmarks();
+    if (kind === "custom") return scopeCustom();
+    return null;
+  }
+  function setupModule(sid, mid, kind) { return G.PREP_SETUP.open(scopeModule(sid, mid, kind), HOST); }
+  function setupSubject(sid) { return G.PREP_SETUP.open(scopeSubject(sid), HOST); }
+  function setupCustom() { if (Object.keys(cm.subs).length) return G.PREP_SETUP.open(scopeCustom(), HOST); }
+  function setupMistakes() { return G.PREP_SETUP.open(scopeMistakes(), HOST); }
+  function setupBookmarks() { return G.PREP_SETUP.open(scopeBookmarks(), HOST); }
+  // The one-tap button beside a Practice button, when this scope has remembered settings.
+  function lastBtn(kind, id, attrs) {
+    var l = setupOn() && G.PREP_SETUP.last ? G.PREP_SETUP.last(kind, id) : "";
+    return l ? '<button type="button" class="pn-btn su-lastb" data-act="su-last" data-k="' + kind + '"' + (attrs || "") + ">" + ico("bolt") + '<span><b>Start with last settings</b><small>' + esc(l) + "</small></span></button>" : "";
   }
 
   /* ---------- events ---------- */
@@ -1213,7 +1426,7 @@
     if (a === "search") { srch.sid = b.getAttribute("data-s"); srch.q = ""; return loadIndex(srch.sid).then(function () { push(renderSearch); }); }
     if (a === "hit") return openHit(b.getAttribute("data-m"), b.getAttribute("data-i"));
     if (a === "module" || a === "solvenext") { var s1 = b.getAttribute("data-s"), m1 = b.getAttribute("data-m"); return loadIndex(s1).then(function () { push(function () { renderModule(s1, m1); }); }); }
-    if (a === "start") { var c = st.cur; return startModule(c.s, c.m, b.getAttribute("data-k")); }
+    if (a === "start") { var c = st.cur; if (setupOn() && b.getAttribute("data-k") !== "due") return setupModule(c.s, c.m, b.getAttribute("data-k")); return startModule(c.s, c.m, b.getAttribute("data-k")); }
     if (a === "answer") { if (Date.now() - (st.dragAt || 0) < 350) return; return answer(Number(b.getAttribute("data-k"))); }
     // Round 7: a tapped Next or Previous slides the question in like a swipe; a key press (click detail 0) stays still.
     if (a === "next") { var r = st.run; if (!r) return; if (r.i < r.items.length - 1) { r.i++; if (e.detail) st.swipeIn = 1; return renderRun(); } return finish(); }
@@ -1234,18 +1447,18 @@
     if (a === "goal") { var G2 = [20, 30, 50, 100], gi = G2.indexOf(s.goal); s.goal = G2[(gi + 1) % G2.length]; save(); return rerender(); }
     if (a === "mistakes") { mf.tag = "all"; return push(renderMistakes); }
     if (a === "mfilter") { mf.tag = v; nav(0); return rerender(); }
-    if (a === "mpractice") return practiceMistakes();
+    if (a === "mpractice") return setupOn() ? setupMistakes() : practiceMistakes();
     if (a === "mtag") { var rt = st.run, itm = rt && rt.items[rt.i]; if (itm && s.mt[itm.id]) { s.mt[itm.id][2] = s.mt[itm.id][2] === v ? null : v; save(); } return renderRun(); }
     if (a === "mocks") return push(renderMocks);
     if (a === "teach") { var rt3 = st.run, it3 = rt3 && rt3.items[rt3.i]; if (it3 && G.PREP_TEACHER) G.PREP_TEACHER.explain(it3, rt3.ans[rt3.i], HOST); return; }
     if (a === "mock") return startMock(v, b.getAttribute("data-k"));
-    if (a === "practicebm") return practiceBookmarks();
+    if (a === "practicebm") return setupOn() ? setupBookmarks() : practiceBookmarks();
     if (a === "custom") return push(renderCustom);
     if (a === "cmsub") { if (cm.subs[v]) delete cm.subs[v]; else cm.subs[v] = 1; return rerender(); }
     if (a === "cmd") { cm.d = Number(v); return rerender(); }
     if (a === "cmn") { cm.n = Number(v); return rerender(); }
     if (a === "cmm") { cm.mode = v; return rerender(); }
-    if (a === "cmstart") { st.stack.push(function () {}); return startCustom(); }
+    if (a === "cmstart") { if (setupOn()) return setupCustom(); st.stack.push(function () {}); return startCustom(); }
     if (a === "downloads") return push(renderDownloads);
     if (a === "dlget") return download(b.getAttribute("data-s"));
     if (a === "dlrm") return removeDownload(b.getAttribute("data-s"));
@@ -1255,6 +1468,10 @@
     // Friends, groups and the accuracy page (prep-social.js).
     if (a === "soc-open") return G.PrepSocial && G.PrepSocial.open && G.PrepSocial.open(HOST);
     if (a === "soc-acc") return G.PrepSocial && G.PrepSocial.openAccuracy && G.PrepSocial.openAccuracy(HOST);
+    // The practice setup sheet (prep-setup.js) owns every data-act starting "su-"; su-subject opens it for a subject.
+    if (a === "su-subject") return setupSubject(b.getAttribute("data-s"));
+    if (a === "su-last") { var sc0 = scopeFor(b.getAttribute("data-k"), b); return sc0 && G.PREP_SETUP.quick(sc0, HOST); }
+    if (a.indexOf("su-") === 0 && G.PREP_SETUP) return G.PREP_SETUP.act(a, b, HOST);
     // Layer C (prep-create.js and friends) owns every data-act starting "c-".
     if (a.indexOf("c-") === 0 && G.PREP_C && G.PREP_C.act) return G.PREP_C.act(a, b, HOST);
     // Arena and My stats (prep-arena.js) own every data-act starting "a-".
@@ -1285,7 +1502,7 @@
   /* The surface Layer C (window.PREP_C: prep-create.js, prep-cards.js) draws through, so its screens share this
      overlay, back stack, runner and store. Deck items carry _s "deck" and _m "deck-<id>": their FSRS cards live in
      the same store under deck key "p:deck-<id>". */
-  var HOST = { push: push, rerender: rerender, back: back, paint: paint, nav: nav, bar: bar, hband: hband, ico: ico, esc: esc, toast: toast, fmt: fmt,
+  var HOST = { bankVer: function () { return VER; }, pyqVer: function () { return PYQ_VER; }, push: push, rerender: rerender, back: back, paint: paint, nav: nav, bar: bar, hband: hband, ico: ico, esc: esc, toast: toast, fmt: fmt,
     run: runQuestions, today: today, store: load, save: save, core: function () { return C; }, root: function () { return root; },
     exam: function () { return examOf(load().exam); },
     // Arena and My stats (prep-arena.js)
