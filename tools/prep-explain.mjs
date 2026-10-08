@@ -30,6 +30,8 @@
 //   PREP_VERTEX_PROJECT=<p> PREP_GCS_BUCKET=<b> ... [--run <id>] [--poll-sec 60] [--max-wait-min 1440] [--no-wait]
 //       Batch stages, resumable in prep/explain/<run>/state.json; results in prep/explain/<run>/results.json
 //   node tools/prep-explain.mjs --apply --run <id> --bank <dir> --to <dir>       a bank copy with x and r for accepted items
+//   node tools/prep-explain.mjs --apply --runs <id> --bank <dir> --to <same dir> --in-place   x only on items without one,
+//       in the version itself; <dir>-changed.json lists the module files to upload again
 // Cost rows are appended to $CLAUDE_JOB_DIR/tmp/explain/log.tsv (else prep/explain/log.tsv).
 import fs from "node:fs";
 import crypto from "node:crypto";
@@ -302,6 +304,25 @@ const MARKUP_RE = /<\s*\/?\s*[a-z!]|\]\(|!\[|```|https?:|www\./i;
 // Names with digits in them (CD20, CD 20, IL-2, I-131, COX-2, T3, HbA1c, P450, 50S) are identifiers, not quantities: left out.
 const IDENT = /\b[A-Za-z]{1,6}-?\d+[A-Za-z]?\d*\b|\b(?:CD|IL|HLA|COX|TLR|MHC|HbA|Ig[AGMDE]|[CT])[ -]\d{1,3}\b|\b\d{2}S\b/g;
 const numbersText = (x) => [x.key, x.notes.replace(/^\s*\d+[.)]\s+/gm, "").replace(/^#+\s*/gm, ""), ...Object.values(x.others), x.pearl].join("\n").replace(IDENT, " ");
+/* Looser number rule (owner 2026-10-09, for the retry of the items scope (b) left pending):
+ *  - standard named facts are names, not quantities: "type 2", "grade 3", "stage IV", "class 1", "phase 2", "factor 8", "NYHA class 3", "Salter-Harris 2",
+ *    "trisomy 21", "chromosome 22", "t(9;22)", "22q11", "MEN 1", "HPV 16", "cranial nerve 7", "lead 2", "zone 3";
+ *  - a number that is in the item's own stored explanation passes: its whole exp (the grounding clips it at 1,800
+ *    characters), its stored reasons r and its kp, with "first" to "tenth" read as 1 to 10, so a named drug's dose taken
+ *    from the item's exp is grounded.
+ * Every other number (a dose, a percentage, a value, an age, a count) still has to be in the grounding, the question or
+ * the options. */
+const STD_FACT = /\b(?:types?|grades?|stages?|class(?:es)?|phases?|factors?|trisomy|chromosomes?|generations?|zones?|MEN|HPV|HHV|HSV|HIV|HTLV|cranial nerves?|CN|Le Fort|Mobitz|Gell and Coombs|Fitzpatrick|Bethesda|BI-?RADS|TI-?RADS|LI-?RADS|PI-?RADS|NYHA|ASA|FIGO|WHO grade|Dukes|Tanner|Salter-Harris|Garden|Gustilo|Neer|Schatzker|Frykman|Siewert|Bismuth|Bosniak|Hinchey|Killip|Forrest|Spetzler-Martin|Hunt and Hess|Fisher|Kellgren-Lawrence)\s*-?\s*(?:\d{1,2}[a-z]?|[IVX]{1,4})(?:\s*(?:,|and|or|to)\s*(?:\d{1,2}[a-z]?|[IVX]{1,4}))*\b|\bt\(\d{1,2};\s*\d{1,2}\)|\b\d{1,2}[pq]\d{0,2}(?:\.\d+)?\b/gi;
+const ORD_WORDS = { first: 1, second: 2, third: 3, fourth: 4, fifth: 5, sixth: 6, seventh: 7, eighth: 8, ninth: 9, tenth: 10 };
+/* ownNumbersText(item) -> the item's own stored explanation (whole exp, r, kp) with ordinal words spelled as digits. */
+export function ownNumbersText(it) {
+  const t = [it.exp || "", ...(Array.isArray(it.r) ? it.r : []), it.kp || ""].join("\n");
+  return t + "\n" + (normText(t).split(" ").filter((w) => ORD_WORDS[w]).map((w) => ORD_WORDS[w]).join(" "));
+}
+/* numberGap(item, x, ground) -> the numbers in x the looser rule cannot ground (empty = grounded). */
+export function numberGap(it, x, ground) {
+  return missingNumbers(numbersText(x).replace(STD_FACT, " "), ground.text + " " + ownNumbersText(it) + " " + it.q + " " + it.o.join(" "));
+}
 /* xGate(item, x, ground, avoid) -> null when every code check passes, else its name. */
 export function xGate(it, x, ground, avoid = []) {
   if (!x || !x.key || !x.notes || !x.pearl) return "g1";
@@ -312,7 +333,7 @@ export function xGate(it, x, ground, avoid = []) {
   if (x.ka && x.ka !== L[it.a]) return "key";
   if (misaligned(it, x)) return "align";
   const all = numbersText(x), plain = [x.key, x.notes, ...Object.values(x.others), x.pearl].join("\n");
-  if (missingNumbers(all, ground.text + " " + it.q + " " + it.o.join(" ")).length) return "g9b";
+  if (numberGap(it, x, ground).length) return "g9b";
   if (verbatim([x.key, ...x.notes.split("\n"), ...Object.values(x.others), x.pearl], ground.text)) return "verbatim";
   if (MARKUP_RE.test(plain) || !tableOk(x.notes) || (x.notes.match(/^#{1,3}\s/gm) || []).length > 4 || /^#{4,}/m.test(x.notes)) return "markup";
   if (BRAND.test(plain) || BOOK_RE.test(plain) || SOURCE_RE.test(plain) || avoid.some((a) => a && new RegExp("\\b" + a.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "\\b", "i").test(plain))) return "source";
@@ -328,7 +349,7 @@ export const GATE_WHY = {
   source: "it named a book, website or source, or wrote 'reference'", ai: "it mentioned AI", dash: "it used a long dash", long: "it was too long or the notes too short",
 };
 export function gateWhy(g, it, x, ground) {
-  if (g === "g9b") return "it used numbers that are not in the stored explanation, the notes or the question: " + [...new Set(missingNumbers(numbersText(x), ground.text + " " + it.q + " " + it.o.join(" ")))].join(", ");
+  if (g === "g9b") return "it used numbers that are not in the stored explanation, the notes or the question: " + [...new Set(numberGap(it, x, ground))].join(", ");
   return GATE_WHY[g] || g;
 }
 
@@ -593,11 +614,15 @@ export function pyqCopy(p, b) {
  * recomputed. pyqDir: the PYQ out folder; its items that match a bank item with x (same key, options one to one) and
  * carry a thinner explanation get the bank's x, written to <to>/pyq/ (index.json + a new items-<hash>.json + img/).
  * A published version is immutable: an existing <to> is refused unless replace. */
-export function buildVersion({ from, to, results, pyqDir, replace = false, move = false, log = console.log }) {
+export function buildVersion({ from, to, results, pyqDir, replace = false, move = false, inPlace = false, log = console.log }) {
   if (!fs.existsSync(from)) throw new Error("no source bank at " + from);
-  if (path.resolve(from) === path.resolve(to)) throw new Error("--to must differ from the source");
-  if (fs.existsSync(to)) { if (!replace) throw new Error(`${to} exists; a published version is immutable (pass --replace for an unpublished one)`); fs.rmSync(to, { recursive: true, force: true }); }
-  if (!move) fs.cpSync(from, to, { recursive: true, filter: (src) => !/[\\/]pyq([\\/]|$)/.test(path.relative(from, src)) });
+  /* inPlace (owner 2026-10-09: the scope (b) retry publishes into the live v5): from is to; only items WITHOUT x take
+     one, so an explanation already published is never replaced; the changed module files are listed (returned and
+     written to <to>/../<version>-changed.json) so only those modules are uploaded again. */
+  if (inPlace) { if (path.resolve(from) !== path.resolve(to)) throw new Error("--in-place needs --to equal to --bank"); if (pyqDir) throw new Error("--in-place does not rebuild PYQ copies"); }
+  else if (path.resolve(from) === path.resolve(to)) throw new Error("--to must differ from the source");
+  if (inPlace) {} else if (fs.existsSync(to)) { if (!replace) throw new Error(`${to} exists; a published version is immutable (pass --replace for an unpublished one)`); fs.rmSync(to, { recursive: true, force: true }); }
+  if (inPlace) {} else if (!move) fs.cpSync(from, to, { recursive: true, filter: (src) => !/[\\/]pyq([\\/]|$)/.test(path.relative(from, src)) });
   else {
     // --move (low disk): the source's gitignored heavy files (mcq/, search.json, already published to R2) are moved,
     // not copied, so one copy of the bank stays on disk; its small committed files (index.json, manifest) stay put.
@@ -614,7 +639,7 @@ export function buildVersion({ from, to, results, pyqDir, replace = false, move 
     }
   }
   const ver = Number((/v(\d+)$/.exec(path.basename(to)) || [])[1]) || 0;
-  const touched = new Set(), withX = new Map();
+  const touched = new Set(), withX = new Map(), changed = [];
   let n = 0;
   for (const s of fs.readdirSync(to)) {
     const md = path.join(to, s, "mcq");
@@ -623,15 +648,15 @@ export function buildVersion({ from, to, results, pyqDir, replace = false, move 
       const p = path.join(md, f), j = readJson(p, null);
       if (!j || !Array.isArray(j.items)) continue;
       let hit = false;
-      j.items = j.items.map((it) => { const r = results[it.id]; if (r && r.x) { hit = true; n++; const c = applyX(it, r); withX.set(it.id, c); return c; } return it; });
-      if (hit) { fs.writeFileSync(p, JSON.stringify(j)); touched.add(s); }
+      j.items = j.items.map((it) => { const r = results[it.id]; if (r && r.x && !(inPlace && it.x)) { hit = true; n++; const c = applyX(it, r); withX.set(it.id, c); return c; } return it; });
+      if (hit) { fs.writeFileSync(p, JSON.stringify(j)); touched.add(s); changed.push(path.relative(to, p).split(path.sep).join("/")); }
     }
   }
   const manifestP = path.join(to, "manifest.json"), manifest = readJson(manifestP, { v: 1, subjects: [] });
   const NOTE = " Structured explanations (topic notes, a reason per option, a pearl) added to items whose explanation was missing or short: StewardMD, auto-checked.";
   for (const s of touched) {
     const ixP = path.join(to, s, "index.json"), ix = readJson(ixP, null);
-    if (ix) { ix.v = ver || ix.v; if (!String(ix.modifications || "").includes("Structured explanations")) ix.modifications = String(ix.modifications || "") + NOTE; fs.writeFileSync(ixP, JSON.stringify(ix)); }
+    if (ix) { const before = JSON.stringify(ix); ix.v = ver || ix.v; if (!String(ix.modifications || "").includes("Structured explanations")) ix.modifications = String(ix.modifications || "") + NOTE; if (!inPlace || JSON.stringify(ix) !== before) fs.writeFileSync(ixP, JSON.stringify(ix)); }
     let bytes = 0;
     const walk = (d) => { for (const e of fs.readdirSync(d, { withFileTypes: true })) { const q = path.join(d, e.name); if (e.isDirectory()) walk(q); else bytes += fs.statSync(q).size; } };
     walk(path.join(to, s));
@@ -639,7 +664,8 @@ export function buildVersion({ from, to, results, pyqDir, replace = false, move 
     if (row) Object.assign(row, { bytes, index: sha256(fs.readFileSync(ixP)) });
   }
   manifest.v = ver || manifest.v;
-  manifest.explained = { from: path.basename(from), items: n };
+  if (inPlace) manifest.explained = { ...(manifest.explained || {}), items: Number((manifest.explained || {}).items || 0) + n, retried: Number((manifest.explained || {}).retried || 0) + n };
+  else manifest.explained = { from: path.basename(from), items: n };
   let pyqN = 0;
   if (pyqDir) {
     const pix = readJson(path.join(pyqDir, "index.json"), null);
@@ -667,8 +693,9 @@ export function buildVersion({ from, to, results, pyqDir, replace = false, move 
     manifest.pyq = { from: path.basename(path.dirname(pyqDir)) + "/" + path.basename(pyqDir), file, explained: pyqN };
   }
   fs.writeFileSync(manifestP, JSON.stringify(manifest));
-  log(`built ${to}: x on ${n} bank items in ${touched.size} subjects${pyqDir ? `, ${pyqN} PYQ items took a matching bank item's x` : ""}; ${move ? from + " heavy files moved (they are on R2)" : from + " untouched"}`);
-  return { items: n, subjects: [...touched], pyq: pyqN };
+  if (inPlace) fs.writeFileSync(path.join(path.dirname(to), path.basename(to) + "-changed.json"), JSON.stringify({ at: new Date().toISOString(), items: n, files: changed }, null, 1));
+  log(`built ${to}: x on ${n} bank items in ${touched.size} subjects${pyqDir ? `, ${pyqN} PYQ items took a matching bank item's x` : ""}; ${inPlace ? changed.length + " module files changed in place" : move ? from + " heavy files moved (they are on R2)" : from + " untouched"}`);
+  return { items: n, subjects: [...touched], pyq: pyqN, changed };
 }
 
 export async function main(argv = process.argv.slice(2), deps = {}) {
@@ -679,14 +706,14 @@ export async function main(argv = process.argv.slice(2), deps = {}) {
   if (args.flags.has("apply")) {
     if (!args.runs || !args.to) throw new Error("--apply needs --runs <id,prefix,...> and --to <new version dir>");
     const results = collectResults(outBase, String(args.runs).split(","));
-    return buildVersion({ from: bankDir, to: path.resolve(root, args.to), results, pyqDir: args.pyq ? path.resolve(root, args.pyq) : null, replace: args.flags.has("replace"), move: args.flags.has("move"), log });
+    return buildVersion({ from: bankDir, to: path.resolve(root, args.to), results, pyqDir: args.pyq ? path.resolve(root, args.pyq) : null, replace: args.flags.has("replace"), move: args.flags.has("move"), inPlace: args.flags.has("in-place"), log });
   }
   log(`loading bank ${bankDir}`);
   const bank = deps.bank || bankItems(bankDir);
   const pyq = deps.pyq || pyqItems(args.pyq ? path.resolve(root, args.pyq) : null);
   const ctx = deps.ctx || groundCtx({ root });
   const sample = args.sample != null ? Number(args.sample) : 3000;
-  if (args.flags.has("dry-run") && !args.pilot && !args.scope) {
+  if (args.flags.has("dry-run") && !args.pilot && !args.scope && !args.ids) {
     log(`DRY RUN (no calls). Explanations, model ${cfg.model}, Batch price; explain + review + one retry of ${EST.redoShare * 100}%:`);
     const scopes = [["a  empty exp", scopeItems("empty", bank)], ["b  empty + short (< 200)", scopeItems("short", bank)], ["c  all v1 (LIC)", scopeItems("all", bank)],
       ["d1 Layer B", scopeItems("layerb", bank)], ["d2 PYQ (not in the bank)", scopeItems("pyq", bank, pyq)]];
