@@ -413,7 +413,84 @@
     return out.join(", ");
   }
 
+  /* ---------- images in a PDF (image questions) ----------
+     The phone finds the pictures on the chosen pages from pdf.js's operator list: each image drawn on a page, where it
+     sits (the current transform maps the unit square onto the page) and its own pixel size. pickImages keeps the ones
+     worth a question; the browser part below renders each one's area of the page and encodes it. Nothing is sent here. */
+  var IMG_MIN = 200, IMG_CAP = 20, IMG_MAX_PX = 1280, IMG_MIN_PAGE = 0.12, IMG_MAX_ASPECT = 4;
+  function mul(m, n) { return [m[0] * n[0] + m[2] * n[1], m[1] * n[0] + m[3] * n[1], m[0] * n[2] + m[2] * n[3], m[1] * n[2] + m[3] * n[3], m[0] * n[4] + m[2] * n[5] + m[4], m[1] * n[4] + m[3] * n[5] + m[5]]; }
+  /* imageBoxes(fnArray, argsArray, OPS) -> [{ id, w, h, box: [x0, y0, x1, y1] }] in PDF user space. Follows save, restore,
+     transform and form XObjects; image masks (stencils, usually glyphs or icons) are not pictures. */
+  function imageBoxes(fns, args, OPS) {
+    var ctm = [1, 0, 0, 1, 0, 0], stack = [], out = [];
+    for (var i = 0; i < (fns || []).length; i++) {
+      var f = fns[i], a = (args && args[i]) || [];
+      if (f === OPS.save) stack.push(ctm.slice());
+      else if (f === OPS.restore) ctm = stack.length ? stack.pop() : ctm;
+      else if (f === OPS.transform) ctm = mul(ctm, a);
+      else if (f === OPS.paintFormXObjectBegin) { stack.push(ctm.slice()); if (a[0] && a[0].length === 6) ctm = mul(ctm, a[0]); }
+      else if (f === OPS.paintFormXObjectEnd) ctm = stack.length ? stack.pop() : ctm;
+      else if (f === OPS.paintImageXObject || f === OPS.paintInlineImageXObject || f === OPS.paintJpegXObject) {
+        var inl = f === OPS.paintInlineImageXObject, d = inl ? a[0] || {} : null;
+        var w = inl ? +d.width || 0 : +a[1] || 0, h = inl ? +d.height || 0 : +a[2] || 0;
+        var xs = [], ys = [];
+        [[0, 0], [1, 0], [0, 1], [1, 1]].forEach(function (c) { xs.push(ctm[0] * c[0] + ctm[2] * c[1] + ctm[4]); ys.push(ctm[1] * c[0] + ctm[3] * c[1] + ctm[5]); });
+        out.push({ id: inl ? "inline-" + i : String(a[0]), w: w, h: h, box: [Math.min.apply(null, xs), Math.min.apply(null, ys), Math.max.apply(null, xs), Math.max.apply(null, ys)] });
+      }
+    }
+    return out;
+  }
+  /* pickImages(pages) where pages = [{ p, view: [x0, y0, x1, y1], imgs: imageBoxes() }] -> [{ p, id, w, h, box, k }].
+     Kept: at least 200 x 200 pixels of its own; at least 12% of the page's width and of its height on the page (smaller
+     ones are icons and bullets); no more than 4:1 either way (rules and banners); not drawn on two or more pages (a logo
+     or a running header, by its object id, or by the same size at the same place). In page order, top to bottom, the
+     first 20. k is the image's key in this document. */
+  function pickImages(pages, cap) {
+    cap = cap || IMG_CAP;
+    var byId = {}, byPos = {}, pos = function (x) { return [x.w, x.h].concat(x.box.map(function (v) { return Math.round(v / 4); })).join(","); };
+    (pages || []).forEach(function (pg) {
+      var seenId = {}, seenPos = {};
+      pg.imgs.forEach(function (x) {
+        if (!seenId[x.id]) { seenId[x.id] = 1; byId[x.id] = (byId[x.id] || 0) + 1; }
+        var k = pos(x); if (!seenPos[k]) { seenPos[k] = 1; byPos[k] = (byPos[k] || 0) + 1; }
+      });
+    });
+    var out = [];
+    (pages || []).forEach(function (pg) {
+      var vw = Math.abs(pg.view[2] - pg.view[0]) || 1, vh = Math.abs(pg.view[3] - pg.view[1]) || 1, here = {};
+      pg.imgs.filter(function (x) {
+        var bw = x.box[2] - x.box[0], bh = x.box[3] - x.box[1];
+        if (x.w < IMG_MIN || x.h < IMG_MIN) return false;
+        if (bw < vw * IMG_MIN_PAGE || bh < vh * IMG_MIN_PAGE) return false;
+        if (bw / bh > IMG_MAX_ASPECT || bh / bw > IMG_MAX_ASPECT) return false;
+        if (byId[x.id] > 1 || byPos[pos(x)] > 1 || here[x.id]) return false;
+        here[x.id] = 1;
+        return true;
+      }).sort(function (a, b) { return b.box[3] - a.box[3] || a.box[0] - b.box[0]; }).forEach(function (x) {
+        out.push({ p: pg.p, id: x.id, w: x.w, h: x.h, box: x.box, k: pg.p + ":" + x.id });
+      });
+    });
+    return out.slice(0, cap);
+  }
+  /* nearSents(sents, p, maxChars) -> the numbered sentences sent with an image on page p: a caption first ("Figure 2",
+     "Fig.", "X-ray", "shows"), then the rest of the page in order, then the pages either side when the page has fewer
+     than 3 sentences; at most 12 sentences and about 1,500 characters. */
+  var CAPTION = /^(?:fig(?:ure)?\.?\s*\d|image|plate|photo|x-?ray|radiograph|ct|mri|ecg|slide)|\b(?:shown|shows|showing|arrow|arrows|labelled)\b/i;
+  function nearSents(sents, p, maxChars) {
+    maxChars = maxChars || 1500;
+    var on = (sents || []).filter(function (s) { return s.p === p; });
+    if (on.length < 3) on = on.concat((sents || []).filter(function (s) { return s.p === p - 1 || s.p === p + 1; }));
+    var cap = on.filter(function (s) { return CAPTION.test(s.tx); }), rest = on.filter(function (s) { return !CAPTION.test(s.tx); });
+    var out = [], used = 0;
+    cap.concat(rest).forEach(function (s) { if (out.length >= 12 || used + s.tx.length > maxChars) return; out.push(s); used += s.tx.length; });
+    return out.sort(function (a, b) { return a.n - b.n; }).map(function (s) { return { n: s.n, p: s.p, h: s.h, tx: s.tx }; });
+  }
+  /* The render scale for one image: its long side at its own resolution, at most 1280 px, from the box's size in PDF
+     units. Clamped to 0.5 to 6 so a tiny box never asks for a huge canvas. */
+  function cropScale(x) { var bl = Math.max(x.box[2] - x.box[0], x.box[3] - x.box[1]) || 1; return Math.max(0.5, Math.min(6, Math.min(IMG_MAX_PX, Math.max(x.w, x.h)) / bl)); }
+
   var PURE = {
+    IMG_MIN: IMG_MIN, IMG_CAP: IMG_CAP, IMG_MAX_PX: IMG_MAX_PX, imageBoxes: imageBoxes, pickImages: pickImages, nearSents: nearSents, cropScale: cropScale,
     PAGE_CAP: PAGE_CAP, CHARS_CAP: CHARS_CAP, MIN_CHARS: MIN_CHARS, CHUNK_TOK: CHUNK_TOK, SCANNED_CHARS: SCANNED_CHARS,
     fixText: fixText, fontSize: fontSize, itemsToLines: itemsToLines, bodySize: bodySize, isHeadingBySize: isHeadingBySize, markHeadings: markHeadings,
     isNoteHeading: isNoteHeading, notesToPages: notesToPages, stripRepeats: stripRepeats, splitSentences: splitSentences, buildDoc: buildDoc,
@@ -471,8 +548,49 @@
     return readPages(doc, pageList, onPage, ocr ? { ocr: ocr, render: renderPage } : {});
   }
 
+  /* extractImages(doc, pageList, onStep?) -> Promise([{ p, k, w, h, data (data: URL), mime }]). Reads each page's operator
+     list, picks the images (pickImages), renders each one's area of the page at its own size (at most 1280 px on the
+     long side, on white) and encodes it: WebP where the browser can, else JPEG. Rendering the area keeps arrows and
+     labels drawn over the picture. A page that fails is skipped. */
+  function encode(cv) {
+    var w = cv.toDataURL("image/webp", 0.82);
+    if (/^data:image\/webp/.test(w)) return { data: w, mime: "image/webp" };
+    return { data: cv.toDataURL("image/jpeg", 0.84), mime: "image/jpeg" };
+  }
+  function renderBox(page, x) {
+    var sc = cropScale(x), vp = page.getViewport({ scale: sc }), r = vp.convertToViewportRectangle(x.box);
+    var left = Math.floor(Math.min(r[0], r[2])), top = Math.floor(Math.min(r[1], r[3])), cw = Math.max(1, Math.ceil(Math.abs(r[2] - r[0]))), ch = Math.max(1, Math.ceil(Math.abs(r[3] - r[1])));
+    var cv = G.document.createElement("canvas"), cx = cv.getContext("2d");
+    cv.width = cw; cv.height = ch;
+    cx.fillStyle = "#fff"; cx.fillRect(0, 0, cw, ch);
+    return page.render({ canvasContext: cx, viewport: vp, transform: [1, 0, 0, 1, -left, -top] }).promise.then(function () { var e = encode(cv); e.w = cw; e.h = ch; cv.width = 0; cv.height = 0; return e; });
+  }
+  function extractImages(doc, pageList, onStep) {
+    var pages = [], got = {}, i = 0;
+    function scan() {
+      if (i >= pageList.length) return Promise.resolve();
+      var p = pageList[i++];
+      return doc.getPage(p).then(function (page) {
+        return page.getOperatorList().then(function (ol) {
+          got[p] = page;
+          pages.push({ p: p, view: page.view, imgs: imageBoxes(ol.fnArray, ol.argsArray, G.pdfjsLib.OPS) });
+        });
+      }).then(null, function () {}).then(function () { if (onStep) onStep(i, pageList.length, "scan"); return scan(); });
+    }
+    return scan().then(function () {
+      var picks = pickImages(pages), out = [], k = 0;
+      function next() {
+        if (k >= picks.length) return Promise.resolve(out);
+        var x = picks[k++];
+        return renderBox(got[x.p], x).then(function (e) { out.push({ p: x.p, k: x.k, w: e.w, h: e.h, data: e.data, mime: e.mime }); }, function () {})
+          .then(function () { if (onStep) onStep(k, picks.length, "cut"); return next(); });
+      }
+      return next();
+    });
+  }
+
   var API = {};
   for (var k in PURE) API[k] = PURE[k];
-  API.loadPdfJs = loadPdfJs; API.openPdf = openPdf; API.readPdfPages = readPdfPages; API.renderPage = renderPage; API.canOcr = canOcr; API._pure = PURE;
+  API.loadPdfJs = loadPdfJs; API.openPdf = openPdf; API.readPdfPages = readPdfPages; API.renderPage = renderPage; API.canOcr = canOcr; API.extractImages = extractImages; API._pure = PURE;
   G.PREP_SRC = API;
 })(typeof window !== "undefined" ? window : this);

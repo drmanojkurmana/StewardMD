@@ -8,12 +8,12 @@
   var O = G.OPHTHALMOS, I = O._internal, st = O._st, S = G.OPHTHALMOS_STAGE, D = G.OPHTHALMOS_DATA;
   var esc = I.esc, ico = I.ico, fmt = I.fmt;
   var GROUPS = [
-    ["retina", "Retina and vitreous"], ["glaucoma", "Glaucoma"], ["peds", "Children and ROP"],
+    ["retina", "Retina and vitreous"], ["glaucoma", "Glaucoma"], ["peds", "Children and retinopathy of prematurity (ROP)"],
     ["neuro", "Neuro-ophthalmology"], ["cornea", "Cornea and external eye"], ["lens", "Lens and cataract"],
     ["uveitis", "Uveitis"], ["orbit", "Orbit and trauma"], ["optics", "Optics and refraction"], ["fundamentals", "Imaging basics"]
   ];
   var TOPIC = {}; GROUPS.forEach(function (g) { TOPIC[g[0]] = g[1]; });
-  var CLINIC = { oct: "Retina clinic", disc: "Glaucoma clinic", dr: "Diabetic eye screening", rop: "ROP screening" };
+  var CLINIC = { oct: "Retina clinic", disc: "Glaucoma clinic", dr: "Diabetic eye screening", rop: "Retinopathy of prematurity (ROP) screening" };
   var N = null, cur = null, zoomEl = null, io = null;
 
   function load() {

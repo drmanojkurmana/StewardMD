@@ -34,7 +34,8 @@
  */
 
 export const PREP_PV = "p1";
-export const PREP_OPS = ["facts", "mcq", "solve", "review"];
+// imcq: one question about one image cut from the student's PDF, keyed to the page text near it (prep-create.js).
+export const PREP_OPS = ["facts", "mcq", "solve", "review", "imcq"];
 export const FACT_KINDS = ["recall", "mechanism", "dx", "mgmt", "next", "guideline", "calc", "adverse"];
 export const ERROR_TYPES = ["knowledge", "confused", "exception", "dx", "mgmt", "next", "guideline", "calc"];
 export const COG_LEVELS = ["recall", "application", "reasoning"];
@@ -45,10 +46,12 @@ export const PREP_LIMITS = {
   mcq: { maxOut: 3000, maxItems: 7 },
   solve: { maxOut: 400, maxItems: 7 },
   review: { maxOut: 800, maxItems: 7 },
+  imcq: { maxOut: 900, maxItems: 1, near: 12 },
 };
 // Set from Phase 0 (measure-202610060513, vault/plans/prep-phase0-2026-10-06.md): writing at 1.0 rejected 17.2% vs
 // 25.4% at 0.2 at lower cost; the checks stay at 0.2 (review judges, solve is fixed at 0.2 by LayerC 7).
-export const PREP_TEMPS = { facts: 1.0, mcq: 1.0, solve: 0.2, review: 0.2 };
+// imcq at 0.4: one question per image, grounded in the page text; a lower temperature keeps it on that text.
+export const PREP_TEMPS = { facts: 1.0, mcq: 1.0, solve: 0.2, review: 0.2, imcq: 0.4 };
 
 // Exam profiles (LayerC 6.9; PrepNucleus.md 6.4). Only style, cog and d are needed here; the exam
 // simulator numbers live in the client profile files.
@@ -89,6 +92,17 @@ export const SCHEMAS = {
   solve: OBJ({
     s: S("ARRAY", { maxItems: PREP_LIMITS.solve.maxItems, items: OBJ({ i: S("INTEGER"), ot: S("STRING") }, ["i", "ot"]) }),
   }, ["s"]),
+  // sure first: the model says whether it can read the image and the page text supports a question, before writing one.
+  imcq: OBJ({
+    sure: S("BOOLEAN"),
+    q: S("ARRAY", { maxItems: 1, items: OBJ({
+      st: S("STRING"),
+      key: OBJ({ ot: S("STRING"), wr: S("STRING") }, ["ot", "wr"]),
+      dis: S("ARRAY", { minItems: 3, maxItems: 3, items: OBJ({ ot: S("STRING"), wr: S("STRING"), et: S("STRING", { enum: ERROR_TYPES }) }, ["ot", "wr", "et"]) }),
+      kp: S("STRING"), sn: S("ARRAY", { minItems: 1, maxItems: 3, items: S("INTEGER") }), dl: S("INTEGER"),
+      cog: S("STRING", { enum: COG_LEVELS }),
+    }, ["st", "key", "dis", "kp", "sn", "dl", "cog"]) }),
+  }, ["sure", "q"]),
   review: OBJ({
     g: S("ARRAY", { maxItems: PREP_LIMITS.review.maxItems, items: OBJ({
       i: S("INTEGER"), g4: S("BOOLEAN"), g6: S("BOOLEAN"), g7: S("BOOLEAN"), g8: S("BOOLEAN"),
@@ -335,6 +349,24 @@ export function buildReviewPrompt(args) {
   return { op: "review", system, user: "<items>\n" + blocks.join("\n\n") + "\n</items>", schema: SCHEMAS.review, maxOut: PREP_LIMITS.review.maxOut, temperature: PREP_TEMPS.review };
 }
 
+/* buildImageMcqPrompt({ sents, profile }) where sents = [{ n, tx }] (the page text near one image, scrubbed). The image
+ * itself is a second part of the same request (the route adds it). One question about the image whose key the page
+ * text states; sure false when the image cannot be read or the text does not support a question about it. */
+export function buildImageMcqPrompt(args) {
+  const a = args || {}, sents = a.sents || [], profile = a.profile || EXAM_PROFILES["neet-pg"];
+  const system = [
+    "You write one image-based single-best-answer MCQ for " + profile.name + " preparation from a figure in a student's study text and the page text printed near it.",
+    "Look at the image. The question must need the image: the stem refers to it (for example 'The X-ray shown', 'The image shows', 'The ECG shown') and never names or describes the answer in words.",
+    "The key must be stated in the numbered page text; sn lists the numbers of the one to three sentences that state it. Every number in the key and its reason must appear in those sentences.",
+    "Set sure to false and return no question when you cannot tell what the image shows, when the page text does not clearly say what it shows, or when the image is a logo, a decoration, a table or a page of text.",
+    "Write the key first (wr: why it is right, at most 20 words), then exactly three plausible distractors, each wrong for a stated reason (wr, at most 20 words) with its error type et. Options parallel in form; no 'all of the above'; stem at most 60 words; exam pearl kp at most 25 words. dl is difficulty 1 to 3. cog is one of " + COG_LEVELS.join(", ") + ".",
+    "Write fresh text: never copy a sentence of the page text word for word.",
+    DATA_RULE,
+  ].join("\n");
+  const lines = sents.map((x) => "[" + x.n + "] " + untag(x.tx));
+  return { op: "imcq", system, user: "<source>\n" + lines.join("\n") + "\n</source>\nThe image is attached.", schema: SCHEMAS.imcq, maxOut: PREP_LIMITS.imcq.maxOut, temperature: PREP_TEMPS.imcq };
+}
+
 // ---- sanitizers: whitelist every field (pattern: sanitizeMaikNext) ----
 const enumOr = (v, list, d) => (list.indexOf(v) >= 0 ? v : d);
 const intOr = (v, d) => (Number.isInteger(v) ? v : (typeof v === "string" && /^\d+$/.test(v) ? Number(v) : d));
@@ -395,6 +427,32 @@ export function sanitizeReview(raw, n) {
   });
   return out;
 }
+/* sanitizeImageMcq(raw, sentNums) -> { sure, rq, sn } or null when raw is not the imcq shape. rq is one sanitized
+ * question (fi 0) or null; sn keeps only sentence numbers that were sent. */
+export function sanitizeImageMcq(raw, sentNums) {
+  if (!raw || typeof raw !== "object" || typeof raw.sure !== "boolean" || !Array.isArray(raw.q)) return null;
+  const x = raw.q[0], ok = new Set(sentNums || []);
+  if (raw.sure !== true || !x || typeof x !== "object") return { sure: raw.sure === true, rq: null, sn: [] };
+  const list = sanitizeMcq({ q: [Object.assign({}, x, { fi: 0 })] }, 1);
+  const sn = Array.from(new Set((Array.isArray(x.sn) ? x.sn : []).map((n) => intOr(n, -1)).filter((n) => ok.has(n)))).slice(0, 3);
+  return { sure: true, rq: list && list[0] ? list[0] : null, sn };
+}
+const STOP = new Set(["with", "from", "that", "this", "which", "their", "there", "these", "those", "into", "over", "under", "between", "about", "after", "before", "most", "more", "less", "than", "only", "very", "also", "both", "each", "other", "such", "some", "shown", "seen", "image", "picture"]);
+/* gateImgSupport(rq, sourceText) -> true when the cited page text supports the key: at least 60% of the key's
+ * content words (4 letters or more, a few common words aside) appear in it (a word matches on its first 5 letters,
+ * so "fractures" finds "fracture"), and every number in the key is there (gate 9b runs too). */
+export function gateImgSupport(rq, sourceText) {
+  if (!rq || !rq.key) return false;
+  const src = " " + normText(sourceText) + " ";
+  let words = normText(rq.key.ot).split(" ").filter((w) => w.length >= 4 && !STOP.has(w));
+  if (!words.length) words = normText(rq.key.ot).split(" ").filter((w) => w.length >= 2);
+  if (!words.length) return false;
+  const hits = words.filter((w) => src.indexOf(" " + w.slice(0, Math.min(w.length, 5))) >= 0).length;
+  return hits / words.length >= 0.6;
+}
+/* imageStemOk(st): the stem points at the image (the question needs it). */
+export function imageStemOk(st) { return /\b(image|images|picture|photo|photograph|x-?rays?|radiographs?|films?|scans?|ct|mri|ultrasound|sonograph\w*|figure|shown|slide|smear|specimen|ecg|tracing|micrograph|histolog\w*|fundus|lesion)\b/i.test(String(st || "")); }
+
 /* reviewPass(g) -> true when every review gate (g4, g6 to g11) is true. old never fails an item. */
 export function reviewPass(g) { return !!g && REVIEW_GATES.every((k) => g[k] === true); }
 

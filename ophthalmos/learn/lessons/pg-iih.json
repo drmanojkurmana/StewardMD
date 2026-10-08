@@ -14,8 +14,8 @@
     "hi": "इडियोपैथिक इंट्राक्रैनियल हाइपरटेंशन"
   },
   "idea": {
-    "en": "[[iih]] is raised pressure in the skull with no mass or other cause. Diagnose it with the Friedman 2013 criteria. Weight loss is the base of treatment, and acetazolamide adds a modest gain.",
-    "hi": "[[iih]] खोपड़ी में बढ़ा दबाव है, बिना किसी गाँठ या दूसरे कारण के। इसका निदान Friedman 2013 मानदंडों से करें। इलाज की नींव वज़न घटाना है, और एसिटाज़ोलामाइड थोड़ा और फ़ायदा देता है।"
+    "en": "[[iih]] is raised pressure in the skull with no mass or other cause. Diagnose it with the Friedman 2013 criteria. Weight loss is the base of treatment. Acetazolamide (a carbonic anhydrase inhibitor that reduces cerebrospinal fluid production) adds a modest gain.",
+    "hi": "[[iih]] खोपड़ी में बढ़ा दबाव है, बिना किसी गाँठ या दूसरे कारण के। इसका निदान Friedman 2013 मानदंडों से करें। इलाज की नींव वज़न घटाना है। एसिटाज़ोलामाइड (acetazolamide, carbonic anhydrase inhibitor, जो सेरेब्रोस्पाइनल द्रव बनना घटाता है) थोड़ा और फ़ायदा देता है।"
   },
   "see": {
     "w": 768,
@@ -25,8 +25,8 @@
       "hi": "दो पंक्तियाँ सामान्य और बढ़े हुए दिमाग़ी दबाव की तुलना करती हैं। ऊपर: एक सामान्य आँख, पतले आवरण में सीधी ऑप्टिक नस, और हड्डी के कप में सामान्य पिट्यूटरी ग्रंथि। नीचे: डिस्क सूजी हुई है, और नस का आवरण अतिरिक्त द्रव से चौड़ा है। नस लहरों में मुड़ती है। हड्डी का कप द्रव से भरा है, और ग्रंथि उसके तल पर चपटी पड़ी है।"
     },
     "caption": {
-      "en": "Top: normal. Bottom: MRI signs of raised pressure. The back of the globe is flat, the nerve sheath wide, the nerve kinked and the sella empty.",
-      "hi": "ऊपर: सामान्य। नीचे: बढ़े दबाव के MRI संकेत। आँख के गोले का पिछला हिस्सा सपाट है, नर्व की परत चौड़ी है, नर्व मुड़ी है और सेला ख़ाली (empty sella) है।"
+      "en": "Top: normal. Bottom: magnetic resonance imaging (MRI) signs of raised pressure. The back of the globe (eyeball) is flat, the nerve sheath wide, the nerve kinked and the sella (bony cup for the pituitary gland) empty.",
+      "hi": "ऊपर: सामान्य। नीचे: बढ़े दबाव के मैग्नेटिक रेजोनेंस इमेजिंग (magnetic resonance imaging, MRI) संकेत। आँख के गोले (globe) का पिछला हिस्सा सपाट है, नर्व की परत चौड़ी है, नर्व मुड़ी है और सेला (sella, पिट्यूटरी का हड्डी वाला कप) ख़ाली (empty sella) है।"
     },
     "credit": "Created with MaiK (StewardMD AI)",
     "hotspots": [
@@ -62,8 +62,8 @@
           "hi": "मुड़ी नर्व"
         },
         "note": {
-          "en": "The nerve may look tortuous on MRI.",
-          "hi": "MRI पर नर्व टेढ़ी-मेढ़ी दिख सकती है।"
+          "en": "The nerve may look tortuous (twisting) on MRI.",
+          "hi": "MRI पर नर्व टेढ़ी-मेढ़ी (tortuous) दिख सकती है।"
         }
       },
       {
@@ -96,6 +96,42 @@
       "neuro-iih"
     ]
   },
+  "fields": {
+    "intro": {
+      "en": "Field loss in idiopathic intracranial hypertension (IIH), from early to late.",
+      "hi": "इडियोपैथिक इंट्राक्रेनियल हाइपरटेंशन (idiopathic intracranial hypertension, IIH) में दृष्टि क्षेत्र (visual field) की कमी, शुरुआत से आख़िर तक।"
+    },
+    "items": [
+      {
+        "id": "enlarged-blind-spot",
+        "label": {
+          "en": "Enlarged blind spot in both eyes",
+          "hi": "दोनों आँखों में बड़ा अंधा बिंदु (enlarged blind spot)"
+        },
+        "le": "blind-spot",
+        "re": "blind-spot",
+        "where": {
+          "en": "Both optic discs: early papilloedema enlarges the blind spot, the part of the field that matches the optic disc.",
+          "hi": "दोनों ऑप्टिक डिस्क (optic disc): शुरुआती पैपिलीडीमा (papilloedema) अंधे बिंदु को बड़ा करता है, जो दृष्टि क्षेत्र का वह हिस्सा है जो ऑप्टिक डिस्क से मेल खाता है।"
+        },
+        "lesion": "optic-nerve"
+      },
+      {
+        "id": "constricted-late",
+        "label": {
+          "en": "Constricted field (tunnel vision, only the centre left)",
+          "hi": "सिकुड़ा हुआ दृष्टि क्षेत्र (constricted field, tunnel vision, सिर्फ़ बीच का हिस्सा बचता है)"
+        },
+        "le": "tunnel",
+        "re": "tunnel",
+        "where": {
+          "en": "Both optic nerves: long-standing papilloedema damages the nerve fibres that carry the outer (peripheral) field. This needs urgent treatment.",
+          "hi": "दोनों ऑप्टिक नर्व (optic nerve): लंबे समय का पैपिलीडीमा बाहरी (peripheral) दृष्टि क्षेत्र ले जाने वाले नर्व तंतुओं को नुकसान पहुँचाता है। इसका तुरंत इलाज ज़रूरी है।"
+        },
+        "lesion": "optic-nerve"
+      }
+    ]
+  },
   "why": {
     "steps": [
       {
@@ -103,8 +139,8 @@
         "hi": "Friedman 2013 में [[papilloedema]], क्रेनियल नर्व को छोड़कर सामान्य न्यूरो जाँच, और दिमाग की सामान्य इमेजिंग ज़रूरी है।"
       },
       {
-        "en": "The CSF must be normal. Measure the [[lumbar-puncture]] opening pressure lying on the side. It is 250 mm CSF or more in adults and 280 mm or more in children.",
-        "hi": "CSF सामान्य होना चाहिए। [[lumbar-puncture]] का ओपनिंग प्रेशर करवट लेटाकर नापें। यह वयस्कों में 250 mm CSF या ज़्यादा और बच्चों में 280 mm या ज़्यादा होता है।"
+        "en": "The cerebrospinal fluid (CSF) must be normal. Measure the [[lumbar-puncture]] opening pressure lying on the side. It is 250 millimetres (mm) of CSF or more in adults and 280 mm or more in children.",
+        "hi": "मस्तिष्क-मेरु द्रव (cerebrospinal fluid, CSF) सामान्य होना चाहिए। [[lumbar-puncture]] का ओपनिंग प्रेशर करवट लेटाकर नापें। यह वयस्कों में 250 मिलीमीटर (mm) CSF या ज़्यादा और बच्चों में 280 mm या ज़्यादा होता है।"
       },
       {
         "en": "Without papilloedema, a definite diagnosis needs a [[sixth-nerve]] palsy. Without either, three of four MRI signs only suggest it.",
@@ -115,16 +151,16 @@
         "hi": "चार संकेत: ख़ाली सेला, आँख के गोले का सपाट पिछला हिस्सा, चौड़ी नर्व परत और संकरा ट्रांसवर्स वीनस साइनस।"
       },
       {
-        "en": "The IIH Treatment Trial studied mild vision loss. Acetazolamide plus diet improved the field mean deviation more than diet alone.",
-        "hi": "IIH ट्रीटमेंट ट्रायल में हल्की नज़र की कमी वाले मरीज़ थे। एसिटाज़ोलामाइड और डाइट से फ़ील्ड का मीन डेविएशन सिर्फ़ डाइट से ज़्यादा सुधरा।"
+        "en": "The Idiopathic Intracranial Hypertension Treatment Trial (IIHTT) studied mild vision loss. Acetazolamide plus diet improved the visual field (the area you can see) mean deviation (the average field loss on perimetry) more than diet alone.",
+        "hi": "Idiopathic Intracranial Hypertension Treatment Trial (IIHTT) में हल्की नज़र की कमी वाले मरीज़ थे। एसिटाज़ोलामाइड और डाइट से दृष्टि क्षेत्र (visual field, यानी जितना आप देख पाते हैं) का मीन डेविएशन (mean deviation, पेरिमेट्री पर औसत कमी) सिर्फ़ डाइट से ज़्यादा सुधरा।"
       },
       {
-        "en": "The extra gain was modest, about 0.7 dB. Papilloedema and quality of life also improved.",
-        "hi": "अतिरिक्त फ़ायदा थोड़ा था, लगभग 0.7 dB। पैपिलीडीमा और जीवन की गुणवत्ता भी सुधरी।"
+        "en": "The extra gain was modest, about 0.7 decibels (dB). Papilloedema and quality of life also improved.",
+        "hi": "अतिरिक्त फ़ायदा थोड़ा था, लगभग 0.7 डेसिबल (dB)। पैपिलीडीमा और जीवन की गुणवत्ता भी सुधरी।"
       },
       {
-        "en": "The 2018 consensus guidelines put weight loss first. Worsening vision needs urgent surgery, such as a CSF shunt or optic nerve sheath fenestration.",
-        "hi": "2018 की सहमति गाइडलाइन वज़न घटाने को पहले रखती है। बिगड़ती नज़र में तुरंत सर्जरी चाहिए, जैसे CSF शंट या ऑप्टिक नर्व शीथ फ़ेनेस्ट्रेशन।"
+        "en": "The 2018 consensus guidelines put weight loss first. Worsening vision needs urgent surgery. Options are optic nerve sheath fenestration (cutting a window in the nerve sheath) or a CSF shunt (a tube that drains cerebrospinal fluid to another body cavity).",
+        "hi": "2018 की सहमति गाइडलाइन वज़न घटाने को पहले रखती है। बिगड़ती नज़र में तुरंत सर्जरी चाहिए। विकल्प हैं: ऑप्टिक नर्व शीथ फ़ेनेस्ट्रेशन (optic nerve sheath fenestration, नर्व की परत में खिड़की काटना) या CSF शंट (CSF shunt, नली जो सेरेब्रोस्पाइनल द्रव को शरीर की दूसरी गुहा में निकालती है)।"
       }
     ],
     "analogy": {
@@ -138,22 +174,22 @@
       "hi": "आम मरीज़ बच्चे पैदा करने की उम्र की महिला होती है, जिसे मोटापा हो या हाल में वज़न बढ़ा हो।"
     },
     {
-      "en": "Symptoms: headache, a whooshing noise in time with the pulse, brief grey-outs and double vision.",
-      "hi": "लक्षण: सिरदर्द, नब्ज़ के साथ सरसराहट की आवाज़, कुछ पल का धुंधलापन और दोहरा दिखना।"
+      "en": "Symptoms: headache, pulsatile tinnitus (a whooshing noise in time with the pulse), transient visual obscurations (brief grey-outs) and double vision.",
+      "hi": "लक्षण: सिरदर्द, नब्ज़ के साथ सरसराहट की आवाज़ (pulsatile tinnitus), कुछ पल का धुंधलापन (transient visual obscurations) और दोहरा दिखना।"
     }
   ],
   "todo": [
     {
-      "en": "Image with MRI and MR venography before the lumbar puncture. A venous sinus clot can look the same.",
-      "hi": "लम्बर पंक्चर से पहले MRI और MR वेनोग्राफ़ी करवाएँ। वीनस साइनस का थक्का भी ऐसा ही दिख सकता है।"
+      "en": "Image with MRI and magnetic resonance (MR) venography before the lumbar puncture. A clot in a venous sinus (cerebral venous sinus thrombosis) can look the same.",
+      "hi": "लम्बर पंक्चर से पहले MRI और मैग्नेटिक रेजोनेंस (magnetic resonance, MR) वेनोग्राफ़ी करवाएँ। वीनस साइनस का थक्का (cerebral venous sinus thrombosis) भी ऐसा ही दिख सकता है।"
     },
     {
       "en": "Track vision with acuity, [[perimetry]], and disc photos or [[oct]] at each visit.",
       "hi": "हर बार नज़र, [[perimetry]], और डिस्क की फ़ोटो या [[oct]] से निगरानी करें।"
     },
     {
-      "en": "Start a weight-loss plan and add acetazolamide for visual loss. Escalate fast if the fields worsen.",
-      "hi": "वज़न घटाने की योजना शुरू करें और नज़र घटी हो तो एसिटाज़ोलामाइड जोड़ें। फ़ील्ड बिगड़े तो जल्दी इलाज बढ़ाएँ।"
+      "en": "Start a weight-loss plan and add acetazolamide for visual loss. Escalate fast if the visual fields worsen.",
+      "hi": "वज़न घटाने की योजना शुरू करें और नज़र घटी हो तो एसिटाज़ोलामाइड जोड़ें। दृष्टि क्षेत्र बिगड़े तो जल्दी इलाज बढ़ाएँ।"
     }
   ],
   "remember": {
@@ -194,7 +230,7 @@
       "o": [
         {
           "en": "Modestly improved the visual field",
-          "hi": "फ़ील्ड थोड़ा बेहतर किया"
+          "hi": "दृष्टि क्षेत्र थोड़ा बेहतर किया"
         },
         {
           "en": "Made no difference",
@@ -207,8 +243,8 @@
       ],
       "a": 0,
       "why": {
-        "en": "The field gained about 0.7 dB more, a small but real effect.",
-        "hi": "फ़ील्ड में लगभग 0.7 dB ज़्यादा सुधार हुआ, छोटा पर असली असर।"
+        "en": "The visual field gained about 0.7 dB more, a small but real effect.",
+        "hi": "दृष्टि क्षेत्र में लगभग 0.7 dB ज़्यादा सुधार हुआ, छोटा पर असली असर।"
       }
     },
     {

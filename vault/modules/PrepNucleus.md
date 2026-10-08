@@ -606,6 +606,47 @@ Owner decisions: [[decisions/Decisions]] "PrepNucleus pricing, free tier and soc
 - Images in explanations: an item may carry `img` (webp names) and `imgPlace` "stem" | "exp"; bank item images are
   served at `/api/prep/bank/<VER>/img/<file>.webp` (route `IMG_RE`); `PREP_PYQ.figure(it, host, where)` draws both.
 
+## Practice setup and image questions (2026-10-08, branch `feat/prep-practice-setup`, `?v=prep23`)
+- `prep-setup.js` (`window.PREP_SETUP`, optional in the loader, after `prep-pyq.js`) + `prep-setup.css`. A sheet before a
+  set from a module (Practice and Timed test; "Review N due" stays direct), a subject (new "Practise <subject>" under the
+  hero), the custom module (its difficulty, count and mode panels moved into the sheet), My mistakes (no repeat row),
+  bookmarks, a PYQ paper ("Choose questions", and each "By subject" row), a module's PYQs, and a Layer C deck.
+  `prep.js` forwards `su-*` acts and asks `PREP_SETUP.back()` first. `window.SMD_PREP_SETUP = false` skips the sheet
+  (older headless suites set it).
+- Rows (each chip shows the pool it leaves, live): type All / Image-based / Clinical scenario / One-liner / Mix; count
+  10/20/30/50 or a stepper, capped by the pool; New / Incorrect before / Bookmarked / Due for review / All / Mix;
+  difficulty Easy/Moderate/Hard/Mix (`d` 1/2/3); mode Practice / Timed test; timer Off / Per question (30, 45, 60, 90 s,
+  stepper) / Whole set (exam pace 1 min a question, or minutes). A timed test has no Off. Per question: a timed test
+  moves on when time is up (unanswered), practice shows the ring only (`runQuestions` opts `qsec`, `limit`, `untimed`;
+  `qtick` in prep.js).
+- Image-based = `img` with `imgPlace` "stem", or a PYQ item with `img`. Clinical vs one-liner: `stemScore` (age +2, a
+  person +1, strong vignette cue +2/+3, weak cue +1, vitals +1, 35+ words +2 / 22+ +1; 3 or more = scenario; a USMLE
+  `ex` tag always a scenario), cached on the item as `_k`. Incorrect before = in `mt`, a lapse, or the card's
+  `due - last == 1` (a miss is rescheduled for the next day).
+- Draw: `customDraw` (prep.js) is the only picker; a Mix splits the count first (type thirds; repeat 50% new, 30% due,
+  20% incorrect, short groups refilled; difficulty in proportion to the pool). Empty pool: `relaxHint` names the row.
+- Remembered per scope in localStorage `smd_prep_setup` (`kind:id`, then `kind`, 40 kept). "Start with last settings"
+  (`su-last`, `PREP_SETUP.quick`) starts a module, subject, bookmarks or mistakes set in one tap; decks and PYQ open the
+  sheet already set to the last choice.
+- Subject pool: every module when the subject is downloaded, else modules with progress first, 16 files at most.
+- Layer C images: after a PDF's text is read, `PREP_SRC.extractImages` reads each page's operator list (`imageBoxes`:
+  CTM through save/restore/transform/form XObjects), `pickImages` keeps images of 200 x 200 px or more, at least 12% of
+  the page each way, no more than 4:1, not repeated on 2 pages (id or place), top to bottom, 20 at most; each is
+  rendered from its page area at its own size (1280 px at most), WebP else JPEG. The "Images in your PDF" screen
+  (`#pcImgView`) is a strip of toggles. After the text round, one `imcq` op per kept image with `nearSents` (caption
+  first, page text, neighbours when thin, 12 sentences, 1,500 chars). Server (`_prep-generate.js`, `_prep-core.js`
+  `buildImageMcqPrompt`): the image is an `inline_data` part of the same Vertex call; gates: `sure`, cited `sn` among
+  those sent, code gates on the cited text, `gateImgSupport` (60% of the key's words in it), `imageStemOk`; else
+  `skipped`. Same caps, metering and deck-not-started rule as the other ops; image base64 at most 360,000 chars (the
+  phone re-encodes smaller). Kept images live in IndexedDB `prep-gen` store `prep-imgs` (db version 2), only for
+  images that got a question; items carry `imgId`, `attachImages` puts the data URL in `img` at practice time and
+  `PREP_PYQ.figure` shows `data:` URLs as they are.
+- Gotcha: `emoji-icons.js` rewrites any on-screen "Page 3" text as a textbook citation line; the image strip shows the
+  page number by a glyph instead.
+- Tests: `test/prep-setup.test.mjs` (classifier, filters, draw, timer, synthetic 2-image PDF through vendored pdf.js,
+  deck image step), `test/prep-imcq.test.mjs` (request shape, gates), headless `test/run-prep-setup-ui.mjs`. Out of
+  scope: CT or MRI cine and video.
+
 ## Store
 localStorage `smd_prep_v1`: `{v, cards, conf, days, mod:{t,ok,last}, bm, rep, exam, last, dl, hid, mt, goal, mh, ls, lsp, pl, pt, ra, fc}` (`ls`/`lsp`: Lessons;
 `pl`/`pt`/`ra`: Plan; `fc`: Cards). FSRS deck key

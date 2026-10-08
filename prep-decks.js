@@ -7,6 +7,8 @@
      prep-items  key id       stored questions (6.4) plus deckId, _s "deck", _m "deck-<deckId>"
      prep-cards  key id       flashcards (6.5)
      prep-decks  key id       the deck manifest (6.7) plus prog { done: [chunk indexes] } for "10 more"
+     prep-imgs   key id       { id, deckId, p, w, h, data } an image cut from the PDF (data: URL, at most 1280 px) that an
+                              image question shows with its stem; only images that got a question are kept (version 2)
    facts, items and cards carry an index on deckId, so a deck is listed and deleted in one pass.
    Nothing here leaves the phone. No export in v1. When IndexedDB is unavailable (private mode) everything lives in
    memory for the session and the deck is lost on close.
@@ -92,14 +94,14 @@
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
   /* ================= browser: IndexedDB ================= */
-  var DB = "prep-gen", BY_DECK = ["prep-facts", "prep-items", "prep-cards"], ALL = ["prep-src", "prep-facts", "prep-items", "prep-cards", "prep-decks"];
-  var KEYS = { "prep-src": "deckId", "prep-facts": "id", "prep-items": "id", "prep-cards": "id", "prep-decks": "id" };
+  var DB = "prep-gen", BY_DECK = ["prep-facts", "prep-items", "prep-cards", "prep-imgs"], ALL = ["prep-src", "prep-facts", "prep-items", "prep-cards", "prep-decks", "prep-imgs"];
+  var KEYS = { "prep-src": "deckId", "prep-facts": "id", "prep-items": "id", "prep-cards": "id", "prep-decks": "id", "prep-imgs": "id" };
   var dbP = null, mem = null;
   function open() {
     if (dbP) return dbP;
     dbP = new Promise(function (res) {
       try {
-        var rq = G.indexedDB.open(DB, 1);
+        var rq = G.indexedDB.open(DB, 2);   // 2: prep-imgs (the upgrade only adds the missing store)
         rq.onupgradeneeded = function () {
           var db = rq.result;
           ALL.forEach(function (n) {
@@ -174,6 +176,8 @@
     putItems: function (recs) { return putMany("prep-items", recs); },
     cards: function (id) { return byDeck("prep-cards", id); },
     putCards: function (recs) { return putMany("prep-cards", recs); },
+    imgs: function (id) { return byDeck("prep-imgs", id); },
+    putImgs: function (recs) { return putMany("prep-imgs", recs); },
     deleteDeck: deleteDeck,
     persistent: function () { return open().then(function (db) { return !!db; }); }
   };
