@@ -324,3 +324,21 @@ test("mergeOverlay: bank items first, overlay items added once by id, kept whole
   assert.equal(m[2].a, 3, "answer key unchanged");
   assert.deepEqual(P.mergeOverlay(null, undefined), []);
 });
+
+test("bank stamps: a module cached before an in-place republish is fetched again; offline or unstamped keeps the copy", () => {
+  const m = JSON.parse(fs.readFileSync(path.join(path.dirname(fileURLToPath(import.meta.url)), "..", "prep/bank/v5/manifest.json"), "utf8"));
+  const s = P.bankStamps(m);
+  const ana = m.subjects.find((x) => x.id === "anatomy");
+  assert.equal(s.anatomy, ana.bytes + "." + ana.items);
+  assert.deepEqual(P.bankStamps(null), {});
+  assert.equal(P.cacheFresh({ items: [] }, s.anatomy), false, "an entry cached before stamps existed is stale");
+  assert.equal(P.cacheFresh({ items: [], s: "1.1" }, s.anatomy), false, "another stamp is stale");
+  assert.equal(P.cacheFresh({ items: [], s: s.anatomy }, s.anatomy), true);
+  assert.equal(P.cacheFresh({ items: [] }, ""), true, "no stamp (offline, subject outside the manifest): keep the copy");
+  assert.equal(P.cacheFresh(null, ""), false);
+  const src = fs.readFileSync(path.join(path.dirname(fileURLToPath(import.meta.url)), "..", "prep.js"), "utf8");
+  assert.match(src, /cachePut\(p, \{ items: items, ts: Date\.now\(\), s: stamp \}\)/, "loadBank stores the stamp");
+  assert.match(src, /function \(e\) \{ if \(hit\) return \(st\.mem\[p\] = hit\.items\); throw e; \}/, "a failed refetch falls back to the cached copy");
+  const sh = fs.readFileSync(path.join(path.dirname(fileURLToPath(import.meta.url)), "..", "scripts/build-www.sh"), "utf8");
+  assert.match(sh, /manifest\.json" "\$WWW\/prep\/bank/, "the native bundle ships the manifest");
+});

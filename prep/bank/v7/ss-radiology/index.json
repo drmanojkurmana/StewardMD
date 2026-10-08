@@ -1,0 +1,415 @@
+{
+ "id": "ss-radiology",
+ "v": 1,
+ "subject": null,
+ "branch": "ss-medicine",
+ "title": {
+  "en": "Radiology (Radiodiagnosis)"
+ },
+ "ex": [
+  "neet-ss"
+ ],
+ "counts": {
+  "total": 189,
+  "all": 189,
+  "d1": 41,
+  "d2": 112,
+  "d3": 36,
+  "flagged": 0
+ },
+ "usmle": 0,
+ "groups": [
+  {
+   "id": "srd-neuro",
+   "title": {
+    "en": "Neuroradiology"
+   }
+  },
+  {
+   "id": "srd-headneck",
+   "title": {
+    "en": "Head and neck"
+   }
+  },
+  {
+   "id": "srd-chest",
+   "title": {
+    "en": "Chest"
+   }
+  },
+  {
+   "id": "srd-cardiac",
+   "title": {
+    "en": "Cardiac and vascular"
+   }
+  },
+  {
+   "id": "srd-abdomen",
+   "title": {
+    "en": "Abdomen and gastrointestinal"
+   }
+  },
+  {
+   "id": "srd-gu",
+   "title": {
+    "en": "Genitourinary and adrenal"
+   }
+  },
+  {
+   "id": "srd-msk",
+   "title": {
+    "en": "Musculoskeletal"
+   }
+  },
+  {
+   "id": "srd-breast-sec",
+   "title": {
+    "en": "Breast"
+   }
+  },
+  {
+   "id": "srd-paeds-sec",
+   "title": {
+    "en": "Paediatric radiology"
+   }
+  },
+  {
+   "id": "srd-ir-sec",
+   "title": {
+    "en": "Interventional radiology"
+   }
+  },
+  {
+   "id": "srd-nm-physics",
+   "title": {
+    "en": "Nuclear medicine, physics and safety"
+   }
+  },
+  {
+   "id": "srd-emergency-sec",
+   "title": {
+    "en": "Emergency radiology"
+   }
+  },
+  {
+   "id": "srd-anatomy",
+   "title": {
+    "en": "Radiological anatomy"
+   }
+  }
+ ],
+ "topics": [
+  {
+   "id": "srd-neuro-vascular",
+   "title": {
+    "en": "Stroke, haemorrhage and cerebrovascular disease"
+   },
+   "group": "srd-neuro",
+   "count": 6,
+   "all": 6,
+   "usmle": 0,
+   "file": "mcq/srd-neuro-vascular.json",
+   "size": "l",
+   "target": 80
+  },
+  {
+   "id": "srd-neuro-tumour",
+   "title": {
+    "en": "Brain tumours and the posterior fossa"
+   },
+   "group": "srd-neuro",
+   "count": 3,
+   "all": 3,
+   "usmle": 0,
+   "file": "mcq/srd-neuro-tumour.json",
+   "size": "l",
+   "target": 80
+  },
+  {
+   "id": "srd-neuro-metabolic",
+   "title": {
+    "en": "Infection, demyelination, toxic and metabolic disease"
+   },
+   "group": "srd-neuro",
+   "count": 6,
+   "all": 6,
+   "usmle": 0,
+   "file": "mcq/srd-neuro-metabolic.json",
+   "size": "l",
+   "target": 80
+  },
+  {
+   "id": "srd-hn-skullbase",
+   "title": {
+    "en": "Skull base and temporal bone"
+   },
+   "group": "srd-headneck",
+   "count": 2,
+   "all": 2,
+   "usmle": 0,
+   "file": "mcq/srd-hn-skullbase.json",
+   "size": "m",
+   "target": 40
+  },
+  {
+   "id": "srd-hn-neck",
+   "title": {
+    "en": "Sinonasal, pharynx and neck spaces"
+   },
+   "group": "srd-headneck",
+   "count": 5,
+   "all": 5,
+   "usmle": 0,
+   "file": "mcq/srd-hn-neck.json",
+   "size": "m",
+   "target": 40
+  },
+  {
+   "id": "srd-chest-ild",
+   "title": {
+    "en": "Diffuse lung disease and HRCT"
+   },
+   "group": "srd-chest",
+   "count": 3,
+   "all": 3,
+   "usmle": 0,
+   "file": "mcq/srd-chest-ild.json",
+   "size": "l",
+   "target": 80
+  },
+  {
+   "id": "srd-chest-focal",
+   "title": {
+    "en": "Nodules, masses, infection and congenital lesions"
+   },
+   "group": "srd-chest",
+   "count": 4,
+   "all": 4,
+   "usmle": 0,
+   "file": "mcq/srd-chest-focal.json",
+   "size": "l",
+   "target": 80
+  },
+  {
+   "id": "srd-cardiac-vascular",
+   "title": {
+    "en": "Cardiac CT and MRI, aorta and great vessels"
+   },
+   "group": "srd-cardiac",
+   "count": 12,
+   "all": 12,
+   "usmle": 0,
+   "file": "mcq/srd-cardiac-vascular.json",
+   "size": "m",
+   "target": 40
+  },
+  {
+   "id": "srd-abd-liver",
+   "title": {
+    "en": "Liver, biliary tree and pancreas"
+   },
+   "group": "srd-abdomen",
+   "count": 10,
+   "all": 10,
+   "usmle": 0,
+   "file": "mcq/srd-abd-liver.json",
+   "size": "l",
+   "target": 80
+  },
+  {
+   "id": "srd-abd-bowel",
+   "title": {
+    "en": "Bowel, peritoneum and acute abdomen"
+   },
+   "group": "srd-abdomen",
+   "count": 10,
+   "all": 10,
+   "usmle": 0,
+   "file": "mcq/srd-abd-bowel.json",
+   "size": "m",
+   "target": 40
+  },
+  {
+   "id": "srd-abd-peritoneum",
+   "title": {
+    "en": "Peritoneum, mesentery, retroperitoneum and abdominal wall"
+   },
+   "group": "srd-abdomen",
+   "count": 6,
+   "all": 6,
+   "usmle": 0,
+   "file": "mcq/srd-abd-peritoneum.json",
+   "size": "m",
+   "target": 40
+  },
+  {
+   "id": "srd-gu-kidney",
+   "title": {
+    "en": "Kidney, adrenal and urinary tract"
+   },
+   "group": "srd-gu",
+   "count": 6,
+   "all": 6,
+   "usmle": 0,
+   "file": "mcq/srd-gu-kidney.json",
+   "size": "l",
+   "target": 80
+  },
+  {
+   "id": "srd-msk-tumour",
+   "title": {
+    "en": "Bone and soft-tissue tumours"
+   },
+   "group": "srd-msk",
+   "count": 13,
+   "all": 13,
+   "usmle": 0,
+   "file": "mcq/srd-msk-tumour.json",
+   "size": "m",
+   "target": 40
+  },
+  {
+   "id": "srd-msk-joint",
+   "title": {
+    "en": "Joints, spine, infection and trauma"
+   },
+   "group": "srd-msk",
+   "count": 4,
+   "all": 4,
+   "usmle": 0,
+   "file": "mcq/srd-msk-joint.json",
+   "size": "m",
+   "target": 40
+  },
+  {
+   "id": "srd-msk-metabolic",
+   "title": {
+    "en": "Metabolic, haematological and infective bone disease"
+   },
+   "group": "srd-msk",
+   "count": 5,
+   "all": 5,
+   "usmle": 0,
+   "file": "mcq/srd-msk-metabolic.json",
+   "size": "m",
+   "target": 40
+  },
+  {
+   "id": "srd-breast",
+   "title": {
+    "en": "Breast imaging"
+   },
+   "group": "srd-breast-sec",
+   "count": 2,
+   "all": 2,
+   "usmle": 0,
+   "file": "mcq/srd-breast.json",
+   "size": "m",
+   "target": 40
+  },
+  {
+   "id": "srd-paeds",
+   "title": {
+    "en": "Paediatric radiology"
+   },
+   "group": "srd-paeds-sec",
+   "count": 11,
+   "all": 11,
+   "usmle": 0,
+   "file": "mcq/srd-paeds.json",
+   "size": "m",
+   "target": 40
+  },
+  {
+   "id": "srd-ir",
+   "title": {
+    "en": "Vascular and non-vascular intervention"
+   },
+   "group": "srd-ir-sec",
+   "count": 5,
+   "all": 5,
+   "usmle": 0,
+   "file": "mcq/srd-ir.json",
+   "size": "m",
+   "target": 40
+  },
+  {
+   "id": "srd-nuclear",
+   "title": {
+    "en": "Nuclear medicine and PET"
+   },
+   "group": "srd-nm-physics",
+   "count": 3,
+   "all": 3,
+   "usmle": 0,
+   "file": "mcq/srd-nuclear.json",
+   "size": "m",
+   "target": 40
+  },
+  {
+   "id": "srd-physics",
+   "title": {
+    "en": "Physics, contrast and radiation safety"
+   },
+   "group": "srd-nm-physics",
+   "count": 4,
+   "all": 4,
+   "usmle": 0,
+   "file": "mcq/srd-physics.json",
+   "size": "m",
+   "target": 40
+  },
+  {
+   "id": "srd-emergency",
+   "title": {
+    "en": "Trauma and emergency imaging"
+   },
+   "group": "srd-emergency-sec",
+   "count": 6,
+   "all": 6,
+   "usmle": 0,
+   "file": "mcq/srd-emergency.json",
+   "size": "m",
+   "target": 40
+  },
+  {
+   "id": "srd-anat-neuro",
+   "title": {
+    "en": "Brain, head and neck and spine anatomy"
+   },
+   "group": "srd-anatomy",
+   "count": 30,
+   "all": 30,
+   "usmle": 0,
+   "file": "mcq/srd-anat-neuro.json",
+   "size": "m",
+   "target": 40
+  },
+  {
+   "id": "srd-anat-body",
+   "title": {
+    "en": "Chest, heart, abdomen and pelvis anatomy"
+   },
+   "group": "srd-anatomy",
+   "count": 25,
+   "all": 25,
+   "usmle": 0,
+   "file": "mcq/srd-anat-body.json",
+   "size": "m",
+   "target": 40
+  },
+  {
+   "id": "srd-anat-limbs",
+   "title": {
+    "en": "Musculoskeletal, breast, obstetric and paediatric anatomy"
+   },
+   "group": "srd-anatomy",
+   "count": 8,
+   "all": 8,
+   "usmle": 0,
+   "file": "mcq/srd-anat-limbs.json",
+   "size": "m",
+   "target": 40
+  }
+ ]
+}
