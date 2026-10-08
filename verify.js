@@ -214,27 +214,26 @@
   // register (cert, or reg-no + govt photo ID) and may prescribe. Interns (provisional registration
   // only) and students (none) upload an internship or college ID for MANUAL review; approval makes
   // them a reviewed trainee (full access, prescription generator locked). Order = career ladder.
-  var REG_SUB = "Verify instantly by uploading your <b>NMC / State Medical Council registration certificate</b>, or enter your <b>registration number</b> and upload a <b>government photo ID</b> (we read only your name to match the register; the ID is never stored).";
+  var REG_SUB = "Upload your <b>registration certificate</b>. We read it and check the national medical register, usually in under a minute.";
   var ROLES = {
     student: { icon: "book", label: "Medical student",
-      sub: "Upload your <b>medical college ID card</b>. Our team reviews it and unlocks StewardMD's learning tools. Prescription and clinical-action features stay locked for students.",
-      fileLabel: "Choose your College ID", dropSub: "JPG, PNG or PDF · medical college ID card", reg: false },
+      sub: "Upload your <b>medical college ID card</b>. Our team checks it, usually within a day, and you get the learning tools straight away.",
+      fileLabel: "Choose your college ID card", dropSub: "Photo, scan or PDF of your college ID", reg: false },
     intern:  { icon: "idcard", label: "Intern",
-      sub: "Upload your <b>internship or hospital ID card</b>. Our team reviews it and unlocks StewardMD. Interns hold provisional registration only, so the prescription generator stays locked until you verify your full registration.",
-      fileLabel: "Choose your internship / hospital ID", dropSub: "JPG, PNG or PDF · internship or hospital ID card", reg: false },
-    resident: { icon: "steth", label: "PG Resident",
-      sub: "PG residents hold full medical registration. " + REG_SUB,
-      fileLabel: "Choose your registration certificate", dropSub: "JPG, PNG or PDF · NMC / State Medical Council",
-      idFileLabel: "Choose a government photo ID", idDropSub: "Any government photo ID · we read only your name · never stored", reg: true },
-    doctor:  { icon: "shield", label: "Doctor (practising)",
-      sub: "StewardMD is for registered doctors. " + REG_SUB,
-      fileLabel: "Choose your registration certificate", dropSub: "JPG, PNG or PDF · NMC / State Medical Council",
-      idFileLabel: "Choose a government photo ID", idDropSub: "Any government photo ID · we read only your name · never stored", reg: true }
+      sub: "Upload your <b>internship or hospital ID card</b>. Our team checks it, usually within a day. Interns hold provisional registration, so the prescription generator stays locked until you hold full registration.",
+      fileLabel: "Choose your internship or hospital ID", dropSub: "Photo, scan or PDF of your ID card", reg: false },
+    resident: { icon: "steth", label: "PG Resident", sub: REG_SUB,
+      fileLabel: "Choose your registration certificate", dropSub: "Photo, scan or PDF · NMC or State Medical Council",
+      idFileLabel: "Choose a government photo ID", idDropSub: "Aadhaar, PAN, driving licence or voter ID · we read only your name", reg: true },
+    doctor:  { icon: "shield", label: "Doctor", sub: REG_SUB,
+      fileLabel: "Choose your registration certificate", dropSub: "Photo, scan or PDF · NMC or State Medical Council",
+      idFileLabel: "Choose a government photo ID", idDropSub: "Aadhaar, PAN, driving licence or voter ID · we read only your name", reg: true }
   };
   // A reviewed trainee may still upgrade (an intern who now holds full registration), so the
   // chooser stays, but only with the roles that can change anything for them.
   var _hideRoles = {};
   var _role = "doctor";
+  var _method = "cert";   // registered roles: "cert" (certificate) | "id" (registration number + photo ID)
   var _vstatus = null;   // last-rendered verification status (verify.js has no _state; that's email-auth.js)
   function curRoleCfg() { return ROLES[_role] || ROLES.doctor; }
   function ensureRoles() {
@@ -254,8 +253,16 @@
     _role = r;
     var host = $("verifyRoles");
     if (host) Array.prototype.forEach.call(host.querySelectorAll("[data-role]"), function (b) { var on = b.getAttribute("data-role") === r; b.classList.toggle("is-on", on); b.setAttribute("aria-selected", on); });
-    var rr = $("verifyRegRow"); if (rr) rr.style.display = curRoleCfg().reg ? "" : "none";   // reg-no is doctors-only
-    if (!curRoleCfg().reg) { var reg = $("verifyRegNo"); if (reg) reg.value = ""; }             // clear so ID-mode never fires for students/interns
+    if (!curRoleCfg().reg) _method = "cert";                                                   // students/interns: their ID card only
+    // The promise has to be true for the role: a person reviews students and interns, the register doctors.
+    var pk = $("verifyPerks");
+    if (pk) {
+      var P = curRoleCfg().reg
+        ? [["clock", "About a minute"], ["star", "Pro free for 7 days"], ["shield", "Checked on the NMC register"]]
+        : [["clock", "Reviewed within a day"], ["star", "Pro free for 7 days meanwhile"], ["book", "Learning tools right away"]];
+      pk.innerHTML = P.map(function (x) { return '<li><span class="vfx-perk-ic" data-ic="' + x[0] + '">' + vfIco(x[0]) + '</span>' + x[1] + '</li>'; }).join("");
+    }
+    setMethod(_method, true);
     // Only retitle the forced/unverified gate; leave the pending/trial/verified copy render() set.
     if (_vstatus === "unverified" || _vstatus == null) { var sub = $("verifySubtitle"); if (sub) sub.innerHTML = curRoleCfg().sub; }
     syncMode();
@@ -280,31 +287,33 @@
     if (trainee) _tCache = { val: true, at: Date.now(), role: (data && data.role) || "" };   // the server said so
 
     var acc = $("verifyAccount");
+    // A first visit (forced, unverified) does not need an account table of blanks; the menu panel does.
+    if (acc) acc.style.display = (st === "loading" || (mode === "forced" && st === "unverified")) ? "none" : "";
     if (acc && st !== "loading") {
-      acc.style.display = "";
       var u = fbUser();
-      $("verifyAccEmail").textContent = (u && (u.email || u.displayName)) || "Unknown";
+      $("verifyAccEmail").textContent = (u && (u.email || u.displayName)) || "This device";
       $("verifyAccProvider").textContent = providerLabel();
-      $("verifyAccReg").textContent = (data && data.regNo) || (verified ? "Not on file" : (trainee ? "None (prescription locked)" : "not linked yet"));
+      $("verifyAccReg").textContent = (data && data.regNo) || (verified ? "Not on file" : (trainee ? "None (prescription locked)" : "Not linked yet"));
       var badge = $("verifyBadge");
       badge.className = "verify-badge " + (st === "trial" ? "pending" : (trainee ? "verified" : st));   // reuse pending styling for trial
       badge.innerHTML = trainee ? (vfIco("check") + (tRole === "student" ? " Verified student" : " Verified intern"))
         : (({ verified: vfIco("check") + " Verified", pending: "Under review", trial: "Free plan", rejected: "Rejected", unverified: "Not verified" })[st] || st);
     }
 
-    $("verifyTitle").textContent = verified ? "Your account is verified"
-      : (trainee ? (tRole === "student" ? "Your student account is verified" : "Your intern account is verified")
-      : (trial ? "You're on the free plan" : (pending ? "Verification under review" : "Verify you're a registered doctor")));
+    $("verifyTitle").textContent = verified ? "You're verified"
+      : (trainee ? (tRole === "student" ? "Student account verified" : "Intern account verified")
+      : (trial ? "You're on the free plan" : (pending ? "We're checking your document" : "Verify your registration")));
+    var perks = $("verifyPerks"); if (perks) perks.style.display = (verified || trainee || pending) ? "none" : "";
     var sub = $("verifySubtitle");
-    if (sub) sub.textContent = verified
-      ? "Your medical registration is linked to this account. Pro is free for your first 7 days as a verified doctor."
+    if (sub) sub.innerHTML = verified
+      ? "Your registration is linked to this account. Pro is free for your first 7 days."
       : (trainee
-        ? "Our team has reviewed your ID and your account is active, with Pro free for your first 7 days. The prescription generator needs full medical registration, so it stays locked. Once you hold full registration, verify it below as a PG Resident or Doctor."
+        ? "Your account is active. The prescription generator stays locked until you hold full registration; then verify it below as a PG Resident or Doctor."
       : (trial
-        ? "You're using StewardMD's free tools. Verify your medical registration to unlock Pro free for 7 days and the prescription generator. Upload your certificate below, or enter your registration number with a photo ID. Accounts that are never verified are removed after 7 days."
+        ? "You're using the free tools. Verify your registration to unlock Pro free for 7 days and the prescription generator. Unverified accounts are removed after 7 days."
         : (pending
-          ? "We've received your certificate and our team is reviewing it. We'll email you once it's approved. In the meantime you can upload a clearer certificate below to try instant verification again."
-          : "StewardMD is for registered doctors. Verify instantly by uploading your NMC / State Medical Council registration certificate, or enter your registration number and upload Aadhaar / any government photo ID (we read only your name to match the register; the ID is never stored).")));
+          ? "A person is checking it, usually within a day, and we'll email you. Pro stays on meanwhile. A clearer copy below can still verify you instantly."
+          : curRoleCfg().sub)));
 
     // Upload box stays available unless FULLY verified, so a doctor under review can re-submit a
     // clearer certificate and a reviewed trainee can later verify full registration.
@@ -312,10 +321,11 @@
     if (up) up.style.display = verified ? "none" : "";
     var rw = $("verifyRoleWrap"); if (rw) rw.style.display = verified ? "none" : "";   // role chooser only while not fully verified
     if (!verified) {
-      var sub2 = $("verifySubmit"); if (sub2) sub2.disabled = false;
+      var sub2 = $("verifySubmit"); if (sub2) { sub2.disabled = false; sub2.style.display = ""; }
+      var dr0 = $("verifyDrop"); if (dr0) dr0.style.display = "";   // settle() hides these after a success
       ensureRoles(); applyRole(_role);   // build/refresh the role chooser + role-specific labels
       syncMode();   // sets labels/button for cert-vs-ID mode + file state
-      if (pending) { setStatusMsg("pending", "Under review. We'll email you. Uploading a clearer photo or scan (or reg number + a photo ID) often verifies instantly."); }
+      if (pending) { clearStatusMsg(); var sb2 = $("verifySubmit"); if (sb2) sb2.textContent = "Upload a clearer copy"; }
       else { clearStatusMsg(); }
     }
 
@@ -368,12 +378,19 @@
     // No file yet → the button acts as "Choose certificate": open the picker.
     if (!file) { if (input) input.click(); return; }
     var u = fbUser(); if (!u) { setStatusMsg("error", "Session expired. Please sign in again."); return; }
-    var regEl = $("verifyRegNo"); var typedReg = regEl ? regEl.value.trim() : "";
+    var regEl = $("verifyRegNo"); var typedReg = (_method === "id" && regEl) ? regEl.value.trim() : "";
+    if (_method === "id" && curRoleCfg().reg && !typedReg) {
+      setStatusMsg("error", "Enter your registration number first. We match it with the name on your photo ID.");
+      if (regEl) try { regEl.focus(); } catch (e) {}
+      return;
+    }
     submitting = true;
-    var btn = $("verifySubmit"); if (btn) { btn.disabled = true; btn.textContent = "Verifying…"; }
-    setStatusMsg("info", progressHtml(typedReg
-      ? "Reading your ID and checking the register for " + typedReg + "…"
-      : "Reading your certificate and checking the National Medical Register…"));
+    var btn = $("verifySubmit"); if (btn) { btn.disabled = true; btn.textContent = "Checking…"; }
+    runSteps(!curRoleCfg().reg
+      ? ["Uploading your ID card", "Sending it to our review team"]
+      : typedReg
+        ? ["Reading the name on your ID", "Looking up " + typedReg.replace(/[<>&"]/g, "") + " on the national register", "Matching the two"]
+        : ["Reading your certificate", "Looking you up on the national medical register", "Matching your name and number"]);
     try {
       var parts = await Promise.all([fileToB64(file), u.getIdToken(), hwHeaders()]);
       var payloadBody = { idToken: parts[1], image: parts[0].b64, mime: parts[0].mime, role: _role };
@@ -387,51 +404,71 @@
 
       // 1) Auto-verified against NMC → big tick + full access (confirmation email sent server-side).
       if (data.status === "verified") {
-        setStatusMsg("success", vfIco("check") + " Verified: Dr. " + (data.name || "") + " (" + (data.regNo || "") + "). A confirmation email is on its way. Opening StewardMD…");
+        stopSteps();
+        setStatusMsg("success", resultHtml(vfIco("check") + " You're verified", [
+          "Dr. " + String(data.name || "").replace(/[<>&"]/g, "") + (data.regNo ? ", " + String(data.regNo).replace(/[<>&"]/g, "") : ""),
+          "Pro is free for your first 7 days, including the prescription generator.",
+          "A confirmation email is on its way."]));
+        settle(true); showStatus();
         try { await u.getIdToken(true); } catch (e) {}
         _rememberVerified(true);
         _tCache = { val: false, at: Date.now(), role: "" };   // a trainee who verified full registration is a doctor now
         resyncPro();   // the cached entitlement verdict predates this verification
-        setTimeout(hideGate, 1200);
+        setTimeout(hideGate, 2600);
         return;
       }
       // 2) AI unsure / not matched → cert emailed to support; grant PROVISIONAL access.
       if (data.status === "pending_review" && data.trialUsed) {
         // Once per doctor: the free week was already used with this registration, number or device.
         if (mode === "panel") { render("panel", { status: "pending", provisionalUntil: "" }); submitting = false; return; }
-        setStatusMsg("pending",
-          vfIco("check") + " Certificate received and sent to our team for a manual check. " +
-          "The free Pro week has already been used with this registration, mobile number or device, so there is no free access while we review. " +
-          "We'll email you once you're approved.");
+        stopSteps();
+        setStatusMsg("pending", resultHtml("Sent for a quick manual check", [
+          "Our team will check it and email you, usually within a day.",
+          "The free Pro week was already used with this registration, mobile number or device, so the free plan stays on while we review."]));
+        settle(false); showStatus();
         setTimeout(hideGate, 3200);
         submitting = false; return;
       }
       if (data.status === "pending_review") {
         var d = data.provisionalDays || 7;
+        // The free week is a claim the server just wrote (provUntil). The verified path above refreshed the
+        // token and the cached Pro verdict; this one did not, so the app kept saying Free until the token
+        // renewed itself, up to an hour later (owner, 2026-10-08: "7 day pro not activated").
+        try { await u.getIdToken(true); } catch (e) {}
+        try { resyncPro(); } catch (e) {}
         if (mode === "panel") { render("panel", { status: "pending", provisionalUntil: data.provisionalUntil }); submitting = false; return; }
         var tr = (_role === "student" || _role === "intern");
-        setStatusMsg("pending",
-          vfIco("check") + (tr ? " ID received. It has gone to our team for a quick manual check. "
-                               : " Certificate received. We couldn't auto-verify it instantly, so it's gone to our team for a quick manual check. ") +
-          "You have <b>provisional access for " + d + " days</b> while we review it. " +
-          (tr ? "The <b>prescription generator stays locked</b> for " + (_role === "student" ? "students" : "interns") + ". "
-              : "The <b>prescription generator stays locked</b> until then. ") +
-          "We'll email you once you're approved.");
-        setTimeout(function () {
-          hideGate();
-          try { (window.toast || window.SMD_toast || function () {})("Provisional access. Prescription locked until verified"); } catch (e) {}
-        }, 2600);
-        submitting = false; return;
+        stopSteps();
+        setStatusMsg("pending", resultHtml(tr ? "ID received" : "Sent for a quick manual check", [
+          tr ? "Our team checks it, usually within a day, and emails you."
+             : "We couldn't confirm it on the national register automatically, so a person will check it, usually within a day. We'll email you.",
+          "<b>Pro is on for the next " + d + " days</b> while we review.",
+          tr ? "The prescription generator stays locked for " + (_role === "student" ? "students" : "interns") + "."
+             : "The prescription generator unlocks as soon as you're approved."]));
+        settle(false); showStatus();
+        // the next tap picks a NEW file (a clearer copy can still verify instantly), not the same one again
+        if (input) input.value = ""; paintPreview(null);
+        var dr = $("verifyDrop"); if (dr) dr.classList.remove("has-file");
+        if (btn) btn.disabled = false;
+        submitting = false; syncMode();
+        if (btn) btn.textContent = "Upload a clearer copy";
+        return;
       }
       if (data.status === "rejected" && data.reason === "registration_already_claimed") {
-        setStatusMsg("error", "This registration number is already linked to a different account. Contact support@stewardmd.in.");
-        submitting = false; if (btn) { btn.disabled = false; btn.textContent = "Verify & continue"; } return;
+        stopSteps();
+        setStatusMsg("error", "This registration number is already linked to another StewardMD account. If that's you, sign in with that account, or write to support@stewardmd.in.");
+        showStatus();
+        submitting = false; if (btn) { btn.disabled = false; btn.textContent = "Verify now"; } return;
       }
-      setStatusMsg("error", (data.detail || data.error || "Verification failed") + ". Try another image or contact support@stewardmd.in.");
-      submitting = false; if (btn) { btn.disabled = false; btn.textContent = "Verify & continue"; }
+      stopSteps();
+      setStatusMsg("error", "We couldn't read that file. Try a clearer photo or a PDF of the full certificate, or write to support@stewardmd.in.");
+      showStatus();
+      submitting = false; if (btn) { btn.disabled = false; btn.textContent = "Verify now"; }
     } catch (e) {
-      setStatusMsg("error", "Network error. Please try again.");
-      submitting = false; if (btn) { btn.disabled = false; btn.textContent = "Verify & continue"; }
+      stopSteps();
+      setStatusMsg("error", "No connection. Check your internet and tap Verify again.");
+      showStatus();
+      submitting = false; if (btn) { btn.disabled = false; btn.textContent = "Verify now"; }
     }
   }
 
@@ -481,17 +518,67 @@
   }
 
   // Reflect ID-mode (a reg number typed) vs certificate-mode in the labels.
+  // Certificate vs registration number + photo ID: one visible path at a time.
+  function setMethod(m, quiet) {
+    _method = (m === "id" && curRoleCfg().reg) ? "id" : "cert";
+    var ms = $("verifyMethod"); if (ms) {
+      ms.style.display = curRoleCfg().reg ? "" : "none";
+      Array.prototype.forEach.call(ms.querySelectorAll("[data-method]"), function (b) { var on = b.getAttribute("data-method") === _method; b.classList.toggle("is-on", on); b.setAttribute("aria-selected", on); });
+    }
+    var rr = $("verifyRegRow"); if (rr) rr.style.display = _method === "id" ? "" : "none";
+    var dr = $("verifyDrop"); if (dr) dr.style.display = "";            // settle() hid these after a success
+    var sb = $("verifySubmit"); if (sb) sb.style.display = "";
+    if (_method !== "id") { var reg = $("verifyRegNo"); if (reg) reg.value = ""; }             // never send a number in certificate mode
+    if (!quiet) {
+      // a certificate is not the photo ID the other method needs (and vice versa): start that path clean
+      var fi = $("verifyFile"); if (fi && fi.files && fi.files.length) { fi.value = ""; paintPreview(null); var d0 = $("verifyDrop"); if (d0) d0.classList.remove("has-file"); }
+      clearStatusMsg(); if (_method === "id") { var r2 = $("verifyRegNo"); if (r2) try { r2.focus(); } catch (e) {} } }
+    syncMode();
+  }
+  // What was chosen, at a glance: a thumbnail for a photo, a document mark for a PDF.
+  function paintPreview(f) {
+    var pv = $("verifyPreview"); if (!pv) return;
+    try { if (pv._url) URL.revokeObjectURL(pv._url); } catch (e) {}
+    pv._url = ""; pv.innerHTML = "";
+    if (!f) return;
+    if (/^image\//.test(f.type || "")) { try { pv._url = URL.createObjectURL(f); var im = document.createElement("img"); im.alt = ""; im.src = pv._url; pv.appendChild(im); return; } catch (e) {} }
+    pv.innerHTML = vfIco("note");
+  }
+  // Live steps while the upload is checked, so a minute of waiting never looks like nothing happening.
+  var _stepT = [];
+  function stepsHtml(labels, now) {
+    return '<ol class="vfx-steps">' + labels.map(function (l, i) {
+      return '<li class="' + (i < now ? "is-done" : i === now ? "is-now" : "") + '"><span class="vfx-dot" aria-hidden="true"></span>' + l + '</li>';
+    }).join("") + '</ol>';
+  }
+  function runSteps(labels) {
+    _stepT.forEach(clearTimeout); _stepT = [];
+    setStatusMsg("info", stepsHtml(labels, 0));
+    labels.forEach(function (l, i) { if (i) _stepT.push(setTimeout(function () { setStatusMsg("info", stepsHtml(labels, i)); }, i * 2600)); });
+    showStatus();
+  }
+  function stopSteps() { _stepT.forEach(clearTimeout); _stepT = []; }
+  function showStatus() { var s = $("verifyStatus"); if (s && s.scrollIntoView) try { s.scrollIntoView({ behavior: "smooth", block: "center" }); } catch (e) {} }
+  // Once there is an answer, the only next step is to continue: no "skip" beside a result.
+  function settle(ok) {
+    var sk = $("verifySkipBtn"); if (sk) sk.style.display = "none";
+    var dn = $("verifyDoneBtn"); if (dn) dn.style.display = "";
+    if (ok) { var b = $("verifySubmit"); if (b) b.style.display = "none"; var m = $("verifyMethod"); if (m) m.style.display = "none"; var dr = $("verifyDrop"); if (dr) dr.style.display = "none"; }
+  }
+  function resultHtml(title, points) {
+    return '<div class="vfx-res"><div class="vfx-res-t">' + title + '</div><ul>' + points.map(function (p) { return "<li>" + p + "</li>"; }).join("") + '</ul></div>';
+  }
   function syncMode() {
     var reg = $("verifyRegNo"), label = $("verifyFileLabel"), sub = $("verifyDropSub"),
         btn = $("verifySubmit"), input = $("verifyFile"), drop = $("verifyDrop");
     var R = curRoleCfg();
-    var idMode = R.reg && !!(reg && reg.value.trim());          // ID-mode (reg-no + photo ID) is doctors-only
+    var idMode = R.reg && _method === "id";                      // ID-mode (reg-no + photo ID) is doctors-only
     var hasFile = !!(input && input.files && input.files[0]);
-    if (label && !hasFile) label.innerHTML = idMode ? (vfIco("idcard") + " " + (R.idFileLabel || "Choose a photo ID")) : (vfIco("note") + " " + R.fileLabel);
-    if (sub) sub.textContent = idMode ? (R.idDropSub || "Any government photo ID · we read only your name · never stored") : R.dropSub;
+    if (label && !hasFile) label.textContent = idMode ? (R.idFileLabel || "Choose a photo ID") : R.fileLabel;
+    if (sub) sub.textContent = hasFile ? "Tap to choose a different file" : (idMode ? (R.idDropSub || "Any government photo ID · we read only your name") : R.dropSub);
     if (btn && !btn.disabled) btn.textContent = hasFile
-      ? (idMode ? "Verify with ID" : (R.reg ? "Verify & continue" : "Submit for review"))
-      : (idMode ? "Choose photo ID" : ("Choose " + (R.reg ? "certificate" : "ID")));
+      ? (idMode ? "Verify with photo ID" : (R.reg ? "Verify now" : "Send for review"))
+      : (idMode ? "Choose photo ID" : ("Choose " + (R.reg ? "certificate" : "ID card")));
     if (drop) drop.classList.toggle("has-file", hasFile);
   }
 
@@ -502,12 +589,18 @@
       input._smdWired = true;
       input.addEventListener("change", function () {
         var f = input.files && input.files[0];
-        if (f) { if (label) (label.innerHTML = vfIco("note"), label.appendChild(document.createTextNode(" " + f.name))); if (drop) drop.classList.add("has-file"); if (btn) btn.disabled = false; }
+        if (f) { if (label) label.textContent = f.name; if (drop) drop.classList.add("has-file"); if (btn) btn.disabled = false; clearStatusMsg(); }
         else { if (drop) drop.classList.remove("has-file"); if (btn) btn.disabled = false; }
+        paintPreview(f);
         syncMode();
       });
     }
     if (reg && !reg._smdWired) { reg._smdWired = true; reg.addEventListener("input", syncMode); }
+    var ms = $("verifyMethod");
+    if (ms && !ms._smdWired) { ms._smdWired = true; ms.addEventListener("click", function (e) { var b = e.target.closest && e.target.closest("[data-method]"); if (b) setMethod(b.getAttribute("data-method")); }); }
+    // the icon set (home.js) can arrive after the first render: fill any still-empty perk icon each time
+    var pk = $("verifyPerks");
+    if (pk) Array.prototype.forEach.call(pk.querySelectorAll("[data-ic]"), function (n) { if (!n.firstChild) n.innerHTML = vfIco(n.getAttribute("data-ic")); });
     if (btn && !btn._smdWired) { btn._smdWired = true; btn.addEventListener("click", submit); }
     if (x && !x._smdWired) {
       x._smdWired = true;

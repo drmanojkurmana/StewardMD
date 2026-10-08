@@ -127,7 +127,7 @@ export function councilAgrees(a, b) {
  * the one printed on the certificate wins; otherwise the first. */
 export function pickMatch(records, effReg, extractedName, extractedCouncil) {
   const rows = Array.isArray(records) ? records : [];
-  const hits = rows.filter((r) => r && regAgrees(r.registrationNo, effReg) && nameAgrees(extractedName, nmcNameOf(r)));
+  const hits = rows.filter((r) => r && !r.removed && regAgrees(r.registrationNo, effReg) && nameAgrees(extractedName, nmcNameOf(r)));
   if (!hits.length) return null;
   if (extractedCouncil) { const c = hits.find((r) => councilAgrees(extractedCouncil, r.smcName)); if (c) return c; }
   return hits[0];
@@ -140,11 +140,34 @@ export function pickMatch(records, effReg, extractedName, extractedCouncil) {
 export function uniqueNameMatch(records, extractedName, extractedCouncil) {
   if (normName(extractedName).split(" ").filter((t) => t.length >= 2).length < 2) return null;
   const rows = Array.isArray(records) ? records : [];
-  let hits = rows.filter((r) => r && nameAgrees(extractedName, nmcNameOf(r)));
+  let hits = rows.filter((r) => r && !r.removed && nameAgrees(extractedName, nmcNameOf(r)));
   if (extractedCouncil) {
     const byCouncil = hits.filter((r) => councilAgrees(extractedCouncil, r.smcName));
     if (byCouncil.length) hits = byCouncil;
   }
+  return hits.length === 1 ? hits[0] : null;
+}
+
+/* The SAME full name, word for word (any order, honorifics and degrees ignored). Stricter than
+ * nameAgrees(): no initials, no 60% overlap. Used where the number gave no answer. */
+export function nameSame(a, b) {
+  const ta = normName(a).split(" ").filter(Boolean), tb = normName(b).split(" ").filter(Boolean);
+  if (ta.length < 2 || tb.length < 2 || ta.length !== tb.length) return false;
+  if (ta.filter((t) => t.length >= 2).length < 2) return false;
+  return ta.slice().sort().join(" ") === tb.slice().sort().join(" ");
+}
+/* Owner, 2026-10-08 (Dr S N Sravani Yarrarapu: Delhi Medical Council certificate 100286, confidence
+ * 0.95, sent to manual review). The number on a state certificate is not always in the national
+ * register under that number: she is on the IMR as "SIVA NAGA SRAVANI YARRARAPU", APMC/FMR/110431.
+ * When the number found nobody with this name, the register is asked for the name, and the doctor is
+ * accepted only if EXACTLY ONE row carries the same full name (nameSame), with at least three name
+ * words or two words of 4+ letters, and is not struck off. The verified number recorded is the
+ * register's, so one-number-one-account still holds. Anything looser goes to a human. */
+export function strictNameMatch(records, extractedName) {
+  const words = normName(extractedName).split(" ").filter(Boolean);
+  if (!(words.length >= 3 || (words.length === 2 && words.every((w) => w.length >= 4)))) return null;
+  const rows = Array.isArray(records) ? records : [];
+  const hits = rows.filter((r) => r && !r.removed && nameSame(extractedName, nmcNameOf(r)));
   return hits.length === 1 ? hits[0] : null;
 }
 

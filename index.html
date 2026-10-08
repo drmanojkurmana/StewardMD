@@ -1400,58 +1400,121 @@ html.smd-splash-v2 #splash .splash-module-pill{
   #verifyGate #verifySubmit:hover{ filter:brightness(1.05); }
   @media (max-width:360px){ .verify-role{ padding:11px 5px; font-size:11px; } .verify-role .vr-ic svg{ width:21px; height:21px; } }
 </style>
+<style>
+  /* Verification, redesigned (owner, 2026-10-08: "make the UI/UX better ... more user friendly and easy
+     for doctors, students, interns"). One clear path per role, a short promise up top, a preview of what
+     was chosen, live steps while it checks, and a result that says what happens next. */
+  #verifyGate { padding: calc(env(safe-area-inset-top) + 28px) 16px calc(env(safe-area-inset-bottom) + 40px); }
+  #verifyGate .vfx { width: 100%; max-width: 440px; margin: 0 auto; display: flex; flex-direction: column; align-items: stretch; text-align: left; }
+  #verifyGate .vfx-brand { font: 800 17px/1 var(--sans, system-ui); letter-spacing: -.01em; color: rgba(246,247,245,.92); margin: 2px 0 18px; }
+  #verifyGate .vfx-brand .accent { color: var(--vg-accent); }
+  #verifyGate .vfx-title { font: 800 26px/1.15 var(--sans, system-ui); letter-spacing: -.02em; margin: 0 0 8px; text-align: left; color: #f6f7f5; }
+  #verifyGate .vfx-sub { font: 400 15px/1.5 var(--sans, system-ui); color: rgba(246,247,245,.72); margin: 0 0 14px; text-align: left; }
+  #verifyGate .vfx-sub b { color: #f6f7f5; font-weight: 600; }
+  #verifyGate .vfx-perks { list-style: none; margin: 0 0 22px; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 14px; }
+  #verifyGate .vfx-perks li { display: inline-flex; align-items: center; gap: 6px; font: 600 12.5px/1.2 var(--sans, system-ui); color: rgba(246,247,245,.78); }
+  #verifyGate .vfx-perk-ic { width: 16px; height: 16px; color: var(--vg-accent); display: inline-flex; }
+  #verifyGate .vfx-perk-ic svg { width: 16px; height: 16px; }
+  #verifyGate .verify-rolewrap { margin: 0 0 14px; }
+  #verifyGate .verify-roles { grid-template-columns: repeat(2, 1fr) !important; gap: 8px; }
+  #verifyGate .verify-role { flex-direction: row; justify-content: flex-start; gap: 10px; padding: 12px 12px; min-height: 52px; font-size: 13.5px; text-align: left; }
+  #verifyGate .verify-role .vr-ic { width: 22px; height: 22px; flex: 0 0 22px; }
+  #verifyGate .verify-role .vr-ic svg { width: 21px; height: 21px; }
+  #verifyGate .vfx-card { width: 100%; box-sizing: border-box; margin: 0; padding: 14px; border-radius: 18px; background: rgba(255,255,255,.045); border: 1px solid rgba(255,255,255,.1); }
+  #verifyGate .vfx-method { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; padding: 4px; border-radius: 12px; background: rgba(0,0,0,.22); margin-bottom: 12px; }
+  #verifyGate .vfx-m { min-height: 40px; border: 0; border-radius: 9px; background: transparent; color: rgba(246,247,245,.7); font: 700 13px/1.15 var(--sans, system-ui); cursor: pointer; padding: 6px 8px; }
+  #verifyGate .vfx-m.is-on { background: rgba(255,255,255,.12); color: #fff; box-shadow: 0 1px 2px rgba(0,0,0,.25); }
+  #verifyGate .vfx-lbl { display: block; font: 700 12px/1 var(--sans, system-ui); color: rgba(246,247,245,.7); margin: 0 0 7px 2px; }
+  #verifyGate .verify-regrow { margin: 0 0 12px; }
+  #verifyGate .verify-reginput { min-height: 48px; font-size: 16px; border-radius: 12px; }
+  #verifyGate .verify-reghint { font-size: 12.5px; color: rgba(246,247,245,.6); }
+  #verifyGate .verify-drop { min-height: 132px; gap: 6px; border-radius: 14px; font-size: 15px; }
+  #verifyGate .verify-drop .vfx-preview { display: none; }
+  #verifyGate .verify-drop.has-file { flex-direction: row; justify-content: flex-start; text-align: left; min-height: 88px; gap: 12px; flex-wrap: wrap; }
+  #verifyGate .verify-drop.has-file .vfx-preview { display: flex; width: 64px; height: 64px; flex: 0 0 64px; border-radius: 10px; overflow: hidden; background: rgba(255,255,255,.08); align-items: center; justify-content: center; color: var(--vg-accent); }
+  #verifyGate .vfx-preview img { width: 100%; height: 100%; object-fit: cover; }
+  #verifyGate .vfx-preview svg { width: 28px; height: 28px; }
+  #verifyGate .verify-drop.has-file #verifyFileLabel { flex: 1 1 140px; min-width: 0; overflow-wrap: anywhere; }
+  #verifyGate .verify-drop.has-file .verify-drop-sub { flex: 1 1 100%; margin-left: 76px; margin-top: -10px; }
+  #verifyGate #verifySubmit { width: 100%; min-height: 52px; margin-top: 12px; border-radius: 14px; font-size: 16px; justify-content: center; }
+  #verifyGate #verifySubmit:disabled { opacity: .6; }
+  #verifyGate .verify-status { font-size: 14px; border-radius: 14px; padding: 14px; scroll-margin: 24px; width: 100%; box-sizing: border-box; align-self: stretch; text-align: left; }
+  #verifyGate .vfx-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  #verifyGate .vfx-steps li { display: flex; align-items: center; gap: 10px; color: rgba(246,247,245,.5); font-weight: 600; }
+  #verifyGate .vfx-steps li .vfx-dot { width: 20px; height: 20px; flex: 0 0 20px; border-radius: 50%; border: 2px solid rgba(255,255,255,.22); box-sizing: border-box; }
+  #verifyGate .vfx-steps li.is-now { color: #eafaf7; }
+  #verifyGate .vfx-steps li.is-now .vfx-dot { border-color: var(--vg-accent); border-top-color: transparent; animation: verifySpin .8s linear infinite; }
+  #verifyGate .vfx-steps li.is-done { color: rgba(246,247,245,.8); }
+  #verifyGate .vfx-steps li.is-done .vfx-dot { border-color: var(--vg-accent); background: var(--vg-accent); }
+  #verifyGate .vfx-res-t { font: 800 16px/1.3 var(--sans, system-ui); margin: 0 0 8px; color: #fff; }
+  #verifyGate .vfx-res ul { margin: 0; padding: 0 0 0 18px; display: grid; gap: 5px; }
+  #verifyGate .vfx-res li { line-height: 1.45; }
+  #verifyGate .verify-account { margin: 14px 0 0; }
+  #verifyGate .vfx-done { width: 100%; min-height: 50px; margin-top: 14px; justify-content: center; }
+  #verifyGate .vfx-skip { margin-top: 10px; width: 100%; min-height: 48px; background: none; border: 1px solid rgba(246,247,245,.22); border-radius: 14px; padding: 12px 14px; color: rgba(246,247,245,.85); font: 600 14px var(--sans, system-ui); cursor: pointer; }
+  #verifyGate .vfx-fine { margin-top: 18px; text-align: center; font-size: 12.5px; line-height: 1.6; color: rgba(246,247,245,.55); }
+  #verifyGate .vfx-fine a { color: var(--vg-accent); }
+  #verifyGate .vfx-fine .splash-foot-link { margin-top: 8px; background: none; border: none; color: inherit; text-decoration: underline; cursor: pointer; min-height: 40px; font: inherit; }
+  @media (prefers-reduced-motion: reduce) { #verifyGate .vfx-steps li.is-now .vfx-dot { animation: none; border-top-color: var(--vg-accent); } }
+</style>
 <div id="verifyGate" class="hidden">
   <button id="verifyClose" aria-label="Close" title="Close"
     style="display:none;position:absolute;top:calc(10px + env(safe-area-inset-top));right:12px;z-index:5;width:44px;height:44px;text-align:center;background:none;border:none;color:#f6f7f5;font-size:28px;line-height:44px;cursor:pointer;opacity:.85;">×</button>
-  <div class="account-inner">
-    <div class="splash-name">Steward<span class="accent">MD</span></div>
-    <div class="account-title" id="verifyTitle">Verify you're a registered doctor</div>
-    <div class="account-subtitle" id="verifySubtitle">
-      StewardMD is for registered doctors. Verify instantly by uploading your
-      <b>NMC / State Medical Council registration certificate</b>, or enter your
-      <b>registration number</b> and upload <b>Aadhaar / any government photo ID</b>
-      (we read only your name to match the register; the ID is never stored).
-    </div>
+  <div class="account-inner vfx">
+    <div class="vfx-brand">Steward<span class="accent">MD</span></div>
+    <h1 class="account-title vfx-title" id="verifyTitle">Verify your registration</h1>
+    <p class="account-subtitle vfx-sub" id="verifySubtitle">Upload your registration certificate. We read it and check the national medical register, usually in under a minute.</p>
+    <ul class="vfx-perks" id="verifyPerks" aria-label="What you get">
+      <li><span class="vfx-perk-ic" data-ic="clock"></span>About a minute</li>
+      <li><span class="vfx-perk-ic" data-ic="star"></span>Pro free for 7 days</li>
+      <li><span class="vfx-perk-ic" data-ic="shield"></span>Checked on the NMC register</li>
+    </ul>
 
-    <!-- "I am a…" role chooser — populated + wired by verify.js (SVG icons, no emoji) -->
+    <!-- "I am a" role chooser, populated + wired by verify.js -->
     <div class="verify-rolewrap" id="verifyRoleWrap">
       <div class="verify-rolelbl">I am a</div>
       <div class="verify-roles" id="verifyRoles" role="tablist" aria-label="Choose your role"></div>
     </div>
 
-    <!-- Account + verification status summary (populated by verify.js) -->
-    <div class="verify-account" id="verifyAccount" style="display:none;">
-      <div class="verify-acc-row"><span class="verify-acc-k">Signed in</span><span class="verify-acc-v" id="verifyAccEmail">—</span></div>
-      <div class="verify-acc-row"><span class="verify-acc-k">Method</span><span class="verify-acc-v" id="verifyAccProvider">—</span></div>
-      <div class="verify-acc-row"><span class="verify-acc-k">Registration No</span><span class="verify-acc-v" id="verifyAccReg">—</span></div>
-      <div class="verify-acc-row"><span class="verify-acc-k">Status</span><span class="verify-acc-v"><span class="verify-badge" id="verifyBadge">—</span></span></div>
-    </div>
-
-    <div class="account-card" id="verifyUploadBlock">
+    <div class="account-card vfx-card" id="verifyUploadBlock">
+      <!-- Registered doctors: certificate, or registration number + photo ID (verify.js _method) -->
+      <div class="vfx-method" id="verifyMethod" role="tablist" aria-label="How do you want to verify?">
+        <button type="button" class="vfx-m is-on" data-method="cert" role="tab" aria-selected="true">Certificate</button>
+        <button type="button" class="vfx-m" data-method="id" role="tab" aria-selected="false">Reg. number + photo ID</button>
+      </div>
+      <div class="verify-regrow" id="verifyRegRow" style="display:none">
+        <label class="vfx-lbl" for="verifyRegNo">Registration number</label>
+        <input type="text" id="verifyRegNo" class="verify-reginput" placeholder="e.g. APMC/FMR/112487 or 100286" autocomplete="off" spellcheck="false" inputmode="text">
+        <div class="verify-reghint">Then upload any government photo ID. We read only your name to match the register; the ID is not kept.</div>
+      </div>
       <label class="verify-drop" id="verifyDrop">
         <input type="file" id="verifyFile" accept="image/png,image/jpeg,image/webp,application/pdf" hidden>
-        <span id="verifyFileLabel">📄 Choose your registration certificate</span>
-        <span class="verify-drop-sub" id="verifyDropSub">JPG, PNG or PDF · from NMC / State Medical Council</span>
+        <span class="vfx-preview" id="verifyPreview" aria-hidden="true"></span>
+        <span id="verifyFileLabel">Choose your registration certificate</span>
+        <span class="verify-drop-sub" id="verifyDropSub">Photo, scan or PDF · NMC or State Medical Council</span>
       </label>
-      <div class="verify-regrow" id="verifyRegRow">
-        <input type="text" id="verifyRegNo" class="verify-reginput" placeholder="Registration number (optional)" autocomplete="off" spellcheck="false">
-        <div class="verify-reghint">No clear certificate? Enter your NMC / State Medical Council <b>registration number</b> and upload your <b>Aadhaar or any government photo ID</b>. We only read your name to match the register. Your ID is never stored.</div>
-      </div>
-      <button class="account-google-btn" id="verifySubmit" style="margin-top:14px;justify-content:center;">Choose certificate</button>
+      <button class="account-google-btn" id="verifySubmit">Choose certificate</button>
       <div class="verify-status" id="verifyStatus" role="status" aria-live="polite"></div>
     </div>
 
-    <button class="account-google-btn" id="verifyDoneBtn" style="display:none;justify-content:center;">Done</button>
+    <!-- Account + verification status (verify.js shows it from the menu, not on a first visit) -->
+    <div class="verify-account" id="verifyAccount" style="display:none;">
+      <div class="verify-acc-row"><span class="verify-acc-k">Signed in</span><span class="verify-acc-v" id="verifyAccEmail"></span></div>
+      <div class="verify-acc-row"><span class="verify-acc-k">Method</span><span class="verify-acc-v" id="verifyAccProvider"></span></div>
+      <div class="verify-acc-row"><span class="verify-acc-k">Registration No</span><span class="verify-acc-v" id="verifyAccReg"></span></div>
+      <div class="verify-acc-row"><span class="verify-acc-k">Status</span><span class="verify-acc-v"><span class="verify-badge" id="verifyBadge"></span></span></div>
+    </div>
 
-    <!-- Escape hatch on the forced gate: start a one-time 7-day trial (prescription stays locked). -->
-    <button id="verifySkipBtn" style="display:none;margin-top:12px;width:100%;background:none;border:1px solid rgba(246,247,245,.28);border-radius:12px;padding:12px 14px;color:#f6f7f5;font:600 14px system-ui;cursor:pointer;">Skip for now, start your 7-day trial</button>
-    <div style="margin-top:6px;font:400 12px system-ui;color:#9fb0bd;text-align:center;">Full access for 7 days · the prescription generator unlocks once you verify.</div>
+    <button class="account-google-btn vfx-done" id="verifyDoneBtn" style="display:none;">Continue to StewardMD</button>
 
-    <div class="account-fineprint" style="margin-top:16px;">
-      Trouble verifying? We'll review it manually and email you, or write to
-      <a href="mailto:support@stewardmd.in" style="color:#34b7e8;">support@stewardmd.in</a>.
+    <!-- Escape hatch on the forced gate: the free plan (prescription stays locked). -->
+    <button id="verifySkipBtn" class="vfx-skip" style="display:none;">Not now, continue on the free plan</button>
+
+    <div class="account-fineprint vfx-fine">
+      Your document is used only to verify you and is deleted after review.
+      Stuck? <a href="mailto:support@stewardmd.in">support@stewardmd.in</a>
       <br>
-      <button class="splash-foot-link" id="verifySignOut" style="margin-top:10px;background:none;border:none;color:inherit;text-decoration:underline;cursor:pointer;">Use a different account</button>
+      <button class="splash-foot-link" id="verifySignOut">Use a different account</button>
     </div>
   </div>
 </div>
@@ -2216,7 +2279,7 @@ window.openExternal = function (u) {
 <script src="/pro-notice.js?v=gold1202-signin-used1-roles1" defer></script>
 <script src="/signout-fix.js?v=gold342-bkstatus-wsqfu3" defer></script>
 <script src="/welcome-email.js?v=gold342" defer></script>
-<script src="/verify.js?v=gold1026-roles-auth1-resync1-wsqfu3-energy1-once1-trainee1-hub1-pfdraw1" defer></script>
+<script src="/verify.js?v=gold1026-roles-auth1-resync1-wsqfu3-energy1-once1-trainee1-hub1-pfdraw1-vfx1" defer></script>
 <!-- Search the Indian Medical Register (window.SMD_NMC), opened from More. Backend: /api/nmc-search. -->
 <script src="/nmc-register.js?v=gold1" defer></script>
 <!-- Prescription PDF/JPEG export libraries (html2canvas → canvas, jsPDF → PDF). Loaded before
