@@ -910,7 +910,7 @@ try {
 
     // U2 + U11: the finish card names the next step; a tutorial that changes settings says "ask your senior"
     { const r = await fastTut("vt-rr"); ok(r === true, "r5 U2: vt-rr runs to its finish card" + (r === true ? "" : ": " + r)); }
-    ok(await ev(`var f=document.querySelector('#smdNarke .vl-sheet .vl-fin'); return !!f && /^Done!/.test(f.querySelector('.vl-fin-d').textContent.trim()) && /Next:/.test(f.textContent) && /ask your senior before changing settings/.test(f.textContent);`) === true, "r5 U2 + U11: 'Done! ... Next: <step>' and 'On a real patient, ask your senior before changing settings'");
+    ok(await ev(`var f=document.querySelector('#smdNarke .vl-sheet .vl-fin'); return !!f && /^You finished /.test(f.querySelector('.vl-fin-d').textContent.trim()) && !/Done!/.test(f.textContent) && /Next:/.test(f.textContent) && /ask your senior before changing settings/.test(f.textContent);`) === true, "r5 U2 + U11 + r6 U7: 'You finished ...' (no second 'done' under the title), 'Next: <step>' and 'On a real patient, ask your senior before changing settings'");
     ok(await ev(`var b=document.querySelector('#smdNarke .vl-sheet-f [data-act=vlfingo]'); return !!b && b.classList.contains('pri') && !!document.querySelector('#smdNarke .vl-sheet-f [data-act=vlfinlab]');`) === true, "r5 U2: the next step is the filled button, Back to the lab beside it");
     { const sm = await small(); ok(sm === true, "r5 U2: finish card targets are at least 44 px" + (sm === true ? "" : ": " + sm)); }
     await shot("r5-finish-card"); await theme(false); await shot("r5-finish-card-light"); await theme(true);

@@ -354,6 +354,12 @@ body:not(.dark):not(.v3-dark) .nrk-root .vl-al.danger, body:not(.dark):not(.v3-d
 .nrk-root .vl-co-nums i { font-style: normal; color: var(--sp-mut); }
 .nrk-root .vl-co-link { min-height: 44px; margin-top: 4px; padding: 0; border: 0; background: none; color: var(--sp-link); font: inherit; font-size: 14px; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--sp-link-line); }
 .nrk-root .vl-co-need { margin: 10px 0 0; font-size: 13.5px; line-height: 1.4; font-weight: 600; color: var(--vl-acc); text-wrap: pretty; }
+/* round 6 (U1, U2): wrong value named in the coach; the asked dial's live value; the rest of a long Level 1 line */
+.nrk-root .vl-co-wrong { margin: 6px 0 0; padding: 6px 10px; border-radius: 10px; background: color-mix(in srgb, var(--nk-warn) 14%, transparent); font-size: 14px; line-height: 1.4; font-weight: 600; text-wrap: pretty; }
+.nrk-root .vl-co-dial { color: var(--vl-acc); font-weight: 700; }
+.nrk-root .vl-co-more { margin: 2px 0 0; font-size: 14.5px; line-height: 1.45; }
+.nrk-root .vl-co-more summary { min-height: 44px; display: inline-flex; align-items: center; color: var(--sp-link); font-weight: 600; font-size: 14px; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--sp-link-line); }
+.nrk-root .vl-co-more p { margin: 0; text-wrap: pretty; }
 .nrk-root .vl-co-f { display: flex; gap: 8px; justify-content: flex-end; margin-top: 8px; }
 .nrk-root .vl-co-f .sp-btn { min-height: 46px; flex: 1 1 0; max-width: 220px; }
 .nrk-root .vl-co-f .sp-btn.is-wait { background: var(--nk-s2); color: var(--sp-mut); }
@@ -373,7 +379,7 @@ body:not(.dark):not(.v3-dark) .nrk-root .vl-al.danger, body:not(.dark):not(.v3-d
 /* ---- sheet ---- */
 .nrk-root .vl-sheet-wrap { position: absolute; inset: 0; z-index: 60; }
 .nrk-root .vl-scrim { position: absolute; inset: 0; background: rgba(0, 0, 0, .55); opacity: 0; transition: opacity 240ms ease; }
-.nrk-root .vl-sheet { position: absolute; left: 0; right: 0; bottom: 0; max-height: 88dvh; display: flex; flex-direction: column; background: var(--vl-card);
+.nrk-root .vl-sheet { position: absolute; z-index: 1; left: 0; right: 0; bottom: 0; max-height: 88dvh; display: flex; flex-direction: column; background: var(--vl-card);
   border-radius: 20px 20px 0 0; border-top: 1px solid var(--vl-cline); box-shadow: var(--vl-shadow); transform: translateY(100%); transition: transform 340ms var(--vl-drawer); }
 .nrk-root .vl-sheet-wrap.on .vl-scrim { opacity: 1; }
 .nrk-root .vl-sheet-wrap.on .vl-sheet { transform: none; }
@@ -901,6 +907,7 @@ body:not(.dark):not(.v3-dark) .nrk-root .vl-bedb-i { color: var(--nk-text); }
 .nrk-root .vl-path-fin .smd-ico { width: 18px; height: 18px; flex: 0 0 auto; margin-top: 1px; }
 .nrk-root .vl-path.ready .vl-path-fin { border-style: solid; border-color: color-mix(in srgb, var(--nk-ok) 55%, transparent); background: color-mix(in srgb, var(--nk-ok) 12%, transparent); color: var(--sp-text); }
 .nrk-root .vl-path.ready .vl-path-fin b { display: block; color: var(--nk-ok); font-size: 15px; }
+.nrk-root .vl-path-miss { display: block; margin-top: 4px; color: var(--sp-mut); text-wrap: pretty; }
 @media (hover: hover) and (pointer: fine) { .nrk-root .vl-pstep:hover { background: var(--nk-s2); } .nrk-root .vl-path-l > li.next .vl-pstep:hover { background: var(--vl-acc-soft); } }
 .nrk-root .vl-pstep:focus-visible { outline: 2px solid var(--vl-acc); outline-offset: 2px; }
 @media (prefers-reduced-motion: reduce) { .nrk-root .vl-pstep { transition: none; } .nrk-root .vl-pstep:active { transform: none; } }
@@ -920,7 +927,7 @@ body:not(.dark):not(.v3-dark) .nrk-root .vl-bedb-i { color: var(--nk-text); }
 .nrk-root .vl-fin-d { display: flex; gap: 10px; align-items: flex-start; margin: 0 0 10px; font-size: 16px; font-weight: 650; line-height: 1.4; }
 .nrk-root .vl-fin-i { flex: 0 0 28px; width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; background: color-mix(in srgb, var(--nk-ok) 18%, transparent); color: var(--nk-ok); }
 .nrk-root .vl-fin-i .smd-ico { width: 16px; height: 16px; }
-.nrk-root .vl-fin-n { margin: 0; font-size: 15px; line-height: 1.45; }
+.nrk-root .vl-fin-n { margin: 10px 0 0; font-size: 15px; line-height: 1.45; }
 .nrk-root .vl-fin-f { display: grid; gap: 8px; width: 100%; }
 .nrk-root .vl-fin-f .sp-btn { width: 100%; }
 .nrk-root .vl-fin-stay { justify-self: center; text-align: center; }
@@ -948,7 +955,7 @@ body:not(.dark):not(.v3-dark) .nrk-root .vl-bedb-i { color: var(--nk-text); }
 }
 .nrk-root .vl-co-hn { flex: 0 0 auto; min-height: 44px; min-width: 88px; padding: 0 16px; }
 /* U12: "above target" on a low FiO2 is information, not a warning */
-.nrk-root .vl-abn-t.neu { background: var(--nk-s2); color: var(--sp-text); box-shadow: inset 0 0 0 1px var(--vl-cline); }
+.nrk-root .vl-abn-t.neu { background: transparent; color: var(--sp-mut); box-shadow: inset 0 0 0 1px var(--vl-cline); } /* round 6: no beige-brown fill in light */
 /* U12 (S15): the IEC flash veil sits under the label, and the label turns white in the dark half of the flash, so the
    text keeps AA contrast at the trough in both themes (dark ink on the bright phase, white on the dark phase) */
 .nrk-root .vl-al:not(.sil)::after { z-index: -1; }
