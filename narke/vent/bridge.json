@@ -2553,8 +2553,8 @@
               "hi": "छोटा note लिखें: समय, alarm और numbers, आपने क्या पाया, क्या किया, नतीजा और किसे बताया।"
             },
             "why": {
-              "en": "The next doctor needs to see that it keeps happening. If it is not written, it did not happen.",
-              "hi": "अगले doctor को दिखना चाहिए कि यह बार बार हो रहा है। जो लिखा नहीं, वह हुआ ही नहीं।"
+              "en": "Needed every time, not optional. The next doctor needs to see that it keeps happening. If it is not written, it did not happen.",
+              "hi": "हर बार ज़रूरी, वैकल्पिक नहीं। अगले doctor को दिखना चाहिए कि यह बार बार हो रहा है। जो लिखा नहीं, वह हुआ ही नहीं।"
             }
           },
           {
@@ -2643,8 +2643,8 @@
         "hi": "Emergency में FiO2 को 100% करें, अगर unit की policy अनुमति दे, और senior को बताएँ।"
       },
       {
-        "en": "Write down what you saw, what you did and the time.",
-        "hi": "जो देखा, जो किया और समय लिखें।"
+        "en": "Always write down what you saw, what you did and the time: this is never optional.",
+        "hi": "हमेशा लिखें कि क्या देखा, क्या किया और समय: यह कभी वैकल्पिक नहीं।"
       }
     ],
     "mayNot": [
@@ -4379,6 +4379,14 @@
     "sbarH": {
       "en": "SBAR",
       "hi": "SBAR"
+    },
+    "vtRule": {
+      "en": "6 to 8 mL/kg × predicted body weight (PBW) for this patient",
+      "hi": "इस मरीज़ के लिए 6 से 8 mL/kg × predicted body weight (PBW)"
+    },
+    "limitsNote": {
+      "en": "Starting points only, never a fixed VTe range for every patient. Ask your senior for this patient's limits.",
+      "hi": "ये सिर्फ़ शुरुआती अंदाज़े हैं, हर मरीज़ के लिए एक तय VTe range नहीं। इस मरीज़ की limits अपने senior से पूछें।"
     }
   },
   "check": {
@@ -4387,14 +4395,14 @@
       "hi": "पहली रात की जाँच"
     },
     "sub": {
-      "en": "12 mixed questions, pass with 10",
-      "hi": "12 मिले जुले प्रश्न, 10 पर pass"
+      "en": "14 mixed questions, pass with 12",
+      "hi": "14 मिले जुले प्रश्न, 12 पर pass"
     },
     "intro": {
-      "en": "One question at a time from every part of this section. After each answer you see why, and one line to say back in your own words. Pass with 10 of 12. The badge means ready to start under supervision, never to work alone.",
-      "hi": "इस हिस्से के हर भाग से एक एक प्रश्न। हर जवाब के बाद आप कारण देखेंगे, और एक पंक्ति जो अपने शब्दों में दोहरानी है। 12 में से 10 पर pass। Badge का मतलब supervision में शुरू करने के लिए तैयार, अकेले काम करने के लिए कभी नहीं।"
+      "en": "One question at a time from every part of this section. After each answer you see why, and one line to say back in your own words. Two of them ask you to read a screen. Pass with 12 of 14. The badge means ready to start under supervision, never to work alone.",
+      "hi": "इस हिस्से के हर भाग से एक एक प्रश्न। हर जवाब के बाद आप कारण देखेंगे, और एक पंक्ति जो अपने शब्दों में दोहरानी है। दो प्रश्नों में screen पढ़नी है। 14 में से 12 पर pass। Badge का मतलब supervision में शुरू करने के लिए तैयार, अकेले काम करने के लिए कभी नहीं।"
     },
-    "pass": 10,
+    "pass": 12,
     "badge": {
       "en": "Ready to start under supervision",
       "hi": "Supervision में शुरू करने के लिए तैयार"
@@ -4421,12 +4429,12 @@
             "hi": "Waves के पास VTe 452"
           },
           {
-            "en": "Rate 16 on the key",
-            "hi": "Key पर Rate 16"
+            "en": "Rate 16 on the key along the bottom",
+            "hi": "नीचे की key पर Rate 16"
           },
           {
-            "en": "FiO2 40 on the key",
-            "hi": "Key पर FiO2 40"
+            "en": "MV 7.2 L/min beside the waves",
+            "hi": "Waves के पास MV 7.2 L/min"
           }
         ],
         "answer": 1,
@@ -4448,20 +4456,20 @@
         },
         "options": [
           {
-            "en": "The one on the key along the bottom",
-            "hi": "नीचे की key वाला"
+            "en": "The key along the bottom",
+            "hi": "नीचे वाली key"
           },
           {
-            "en": "The one beside the waves",
-            "hi": "Waves के पास वाला"
+            "en": "The number beside the waves",
+            "hi": "Waves के पास वाला number"
           },
           {
-            "en": "Both are set",
-            "hi": "दोनों set हैं"
+            "en": "Both of them are set",
+            "hi": "दोनों set किए गए हैं"
           },
           {
-            "en": "Neither: PEEP is never set",
-            "hi": "कोई नहीं: PEEP कभी set नहीं होता"
+            "en": "Neither: PEEP is only measured",
+            "hi": "कोई नहीं: PEEP सिर्फ़ मापा जाता है"
           }
         ],
         "answer": 0,
@@ -4483,20 +4491,20 @@
         },
         "options": [
           {
-            "en": "Raise the high pressure limit",
-            "hi": "High pressure limit बढ़ाएँ"
+            "en": "Raise the high pressure limit so it stops",
+            "hi": "High pressure limit बढ़ाएँ ताकि alarm रुके"
           },
           {
-            "en": "Look at the patient: chest, colour, coughing, biting",
+            "en": "Look at the patient: chest, colour, cough, biting",
             "hi": "मरीज़ को देखें: छाती, रंग, खाँसी, tube काटना"
           },
           {
-            "en": "Lower the set VT",
-            "hi": "Set VT घटाएँ"
+            "en": "Lower the set VT so the peak pressure comes down",
+            "hi": "Set VT घटाएँ ताकि peak pressure नीचे आए"
           },
           {
-            "en": "Silence the alarm",
-            "hi": "Alarm silence करें"
+            "en": "Silence it, then watch the next few breaths on the screen",
+            "hi": "Silence करें, फिर screen पर अगली कुछ साँसें देखें"
           }
         ],
         "answer": 1,
@@ -4522,16 +4530,16 @@
             "hi": "Ventilator हटाकर 100% oxygen से bag करें"
           },
           {
-            "en": "Raise PEEP to 15",
-            "hi": "PEEP 15 करें"
+            "en": "Raise PEEP to 15 to open up the lung",
+            "hi": "Lung खोलने के लिए PEEP 15 कर दें"
           },
           {
-            "en": "Recheck in 30 minutes",
-            "hi": "30 मिनट में फिर देखें"
+            "en": "Recheck the SpO2 again in 30 minutes",
+            "hi": "30 मिनट बाद SpO2 फिर से देखें"
           },
           {
-            "en": "Change the mode",
-            "hi": "Mode बदलें"
+            "en": "Change the mode to pressure control",
+            "hi": "Mode बदलकर उसे pressure control पर कर दें"
           }
         ],
         "answer": 0,
@@ -4553,20 +4561,20 @@
         },
         "options": [
           {
-            "en": "Follow the circuit and reconnect; not fixed at once: bag with 100% oxygen",
-            "hi": "Circuit देखें और जोड़ें; तुरंत ठीक न हो तो 100% oxygen से bag"
+            "en": "Reconnect; if not fixed at once, bag with 100% oxygen",
+            "hi": "जोड़ें; तुरंत ठीक न हो तो 100% oxygen से bag"
           },
           {
-            "en": "Silence the alarm while you search",
-            "hi": "ढूँढते समय alarm silence करें"
+            "en": "Silence the alarm while you search for the leak",
+            "hi": "Leak ढूँढते समय alarm को silence कर दें"
           },
           {
-            "en": "Lower the alarm limit",
-            "hi": "Alarm limit घटाएँ"
+            "en": "Lower the low pressure alarm limit until it stops",
+            "hi": "Alarm रुकने तक low pressure limit घटाएँ"
           },
           {
-            "en": "Wait for the nurse",
-            "hi": "Nurse का इंतज़ार करें"
+            "en": "Wait for the nurse to come and check the circuit first",
+            "hi": "पहले nurse के आकर circuit जाँचने का इंतज़ार करें"
           }
         ],
         "answer": 0,
@@ -4588,20 +4596,20 @@
         },
         "options": [
           {
-            "en": "Bag with 100% oxygen if he is not breathing enough, and call your senior",
-            "hi": "काफ़ी साँस न ले रहा हो तो 100% oxygen से bag करें, और senior को call करें"
+            "en": "Bag with 100% oxygen if needed, and call your senior",
+            "hi": "ज़रूरत हो तो 100% oxygen से bag, और senior को call"
           },
           {
-            "en": "Switch to a mode with a set rate yourself",
-            "hi": "खुद set rate वाले mode पर बदलें"
+            "en": "Switch to a mode with a set rate on your own",
+            "hi": "खुद ही set rate वाले mode पर बदल दें"
           },
           {
-            "en": "Silence and recheck in 30 minutes",
-            "hi": "Silence करें और 30 मिनट में देखें"
+            "en": "Silence it and recheck the patient in 30 minutes",
+            "hi": "Silence करें और 30 मिनट में मरीज़ को फिर देखें"
           },
           {
-            "en": "Turn the pressure support down",
-            "hi": "Pressure support घटाएँ"
+            "en": "Turn the pressure support down so he breathes more himself",
+            "hi": "Pressure support घटाएँ ताकि वह खुद ज़्यादा साँस ले"
           }
         ],
         "answer": 0,
@@ -4622,10 +4630,10 @@
           "hi": "DOPE का मतलब क्या है, जाँच के क्रम में?"
         },
         "options": [
-          "Displaced tube, Obstructed tube, Pneumothorax, Equipment",
-          "Drugs, Oxygen, PEEP, Electrolytes",
-          "Disconnect, Oxygen, Pressure, Exhale",
-          "Dose, Order, Plan, Escalate"
+          "Displaced tube, Obstruction, Pneumothorax, Equipment",
+          "Drugs, Oxygen supply, Pressure limits, Electrolytes",
+          "Disconnection, Oxygenation, Peak pressure, Exhalation",
+          "Dose check, Order check, Plan review, Escalation call"
         ],
         "answer": 0,
         "why": {
@@ -4658,8 +4666,8 @@
             "hi": "f set 16 के साथ f total 18"
           },
           {
-            "en": "Ppeak steady at 24",
-            "hi": "Ppeak 24 पर स्थिर"
+            "en": "Ppeak steady at 24 for an hour",
+            "hi": "एक घंटे से Ppeak 24 पर स्थिर"
           }
         ],
         "answer": 1,
@@ -4681,20 +4689,20 @@
         },
         "options": [
           {
-            "en": "Lower the VT",
-            "hi": "VT घटाना"
+            "en": "Lower the VT a little if Ppeak is high",
+            "hi": "Ppeak ज़्यादा हो तो VT थोड़ा घटाना"
           },
           {
-            "en": "Raise PEEP",
-            "hi": "PEEP बढ़ाना"
+            "en": "Raise PEEP by 2 if the SpO2 is falling",
+            "hi": "SpO2 गिर रहा हो तो PEEP 2 बढ़ाना"
           },
           {
             "en": "Disconnect and bag with 100% oxygen",
             "hi": "Ventilator हटाकर 100% oxygen से bag करना"
           },
           {
-            "en": "Raise the alarm limit",
-            "hi": "Alarm limit बढ़ाना"
+            "en": "Raise the alarm limit when it keeps ringing",
+            "hi": "बार बार बजे तो alarm की limit को ऊपर कर देना"
           }
         ],
         "answer": 2,
@@ -4716,20 +4724,20 @@
         },
         "options": [
           {
-            "en": "The sound pauses for about 2 minutes; stay at the bed and fix the cause",
-            "hi": "आवाज़ लगभग 2 मिनट रुकती है; bed पर रहें और कारण ठीक करें"
+            "en": "The sound pauses about 2 minutes; stay and fix the cause",
+            "hi": "आवाज़ लगभग 2 मिनट रुकती है; रुकें, कारण ठीक करें"
           },
           {
-            "en": "The alarm is fixed",
-            "hi": "Alarm ठीक हो गया"
+            "en": "The alarm is cleared and the problem is fixed",
+            "hi": "Alarm हट गया और समस्या ठीक हो गई"
           },
           {
-            "en": "You can go to the next bed",
-            "hi": "आप अगले bed पर जा सकते हैं"
+            "en": "You can go to the next bed for 2 minutes",
+            "hi": "आप 2 मिनट के लिए अगले bed पर जा सकते हैं"
           },
           {
-            "en": "The limits widen",
-            "hi": "Limits चौड़ी हो जाती हैं"
+            "en": "The alarm limits widen until you reset them on the screen",
+            "hi": "Screen पर reset करने तक alarm limits चौड़ी रहती हैं"
           }
         ],
         "answer": 0,
@@ -4751,20 +4759,20 @@
         },
         "options": [
           {
-            "en": "Three names for volume control with assisted breaths",
-            "hi": "Assisted साँसों वाले volume control के तीन नाम"
+            "en": "One mode: volume control, three brand names",
+            "hi": "एक ही mode: volume control, तीन brand नाम"
           },
           {
-            "en": "Three different pressure modes",
-            "hi": "तीन अलग pressure modes"
+            "en": "Three different pressure modes, one per brand",
+            "hi": "तीन अलग pressure modes, हर brand का एक"
           },
           {
-            "en": "Weaning modes",
-            "hi": "Weaning modes"
+            "en": "Three weaning modes that need no set rate",
+            "hi": "तीन weaning modes जिनमें set rate नहीं होता"
           },
           {
-            "en": "Non-invasive modes",
-            "hi": "Non-invasive modes"
+            "en": "Non-invasive modes used only with a face mask",
+            "hi": "सिर्फ़ face mask के साथ चलने वाले non-invasive modes"
           }
         ],
         "answer": 0,
@@ -4804,6 +4812,76 @@
         "key": {
           "en": "Pressure support: no set rate. I watch f total, VTe and the apnoea alarm.",
           "hi": "Pressure support: set rate नहीं। मैं f total, VTe और apnoea alarm देखता हूँ।"
+        }
+      },
+      {
+        "id": "rdhp",
+        "topic": "read",
+        "q": {
+          "en": "Read this screen: red bar Pressure high. Ppeak 41 (it was 24), Pplat 23, VTe 300 with VT set 450. What does it point to first?",
+          "hi": "यह screen पढ़ें: लाल bar Pressure high। Ppeak 41 (पहले 24), Pplat 23, VTe 300 जबकि set VT 450। यह पहले किस ओर इशारा करता है?"
+        },
+        "options": [
+          {
+            "en": "The tube or airway: a plug, biting or a kink",
+            "hi": "Tube या airway: plug, tube काटना या मुड़ना"
+          },
+          {
+            "en": "Stiff lungs: the whole lung is much harder to fill",
+            "hi": "सख़्त lungs: पूरा lung भरना बहुत मुश्किल हो गया"
+          },
+          {
+            "en": "A leak in the circuit, so air is escaping",
+            "hi": "Circuit में leak, इसलिए हवा निकल रही है"
+          },
+          {
+            "en": "He is breathing more, so nothing is wrong",
+            "hi": "वह ज़्यादा साँस ले रहा है, कुछ गलत नहीं"
+          }
+        ],
+        "answer": 0,
+        "why": {
+          "en": "Ppeak rose but Pplat stayed near normal: the extra pressure is spent pushing air through the tube or airway (secretions, biting, a kink, bronchospasm). Stiff lungs raise Pplat too. VTe is low because the breath stops at the pressure limit. Look at the patient, then suction.",
+          "hi": "Ppeak बढ़ा पर Pplat लगभग normal रहा: अतिरिक्त pressure tube या airway से हवा धकेलने में लग रहा है (secretions, tube काटना, मुड़ना, bronchospasm)। सख़्त lungs में Pplat भी बढ़ता है। VTe कम है क्योंकि साँस pressure limit पर रुक जाती है। मरीज़ को देखें, फिर suction करें।"
+        },
+        "key": {
+          "en": "Ppeak up with Pplat steady: I think tube or airway first.",
+          "hi": "Ppeak ऊपर और Pplat स्थिर: मैं पहले tube या airway सोचता हूँ।"
+        }
+      },
+      {
+        "id": "rdmv",
+        "topic": "read",
+        "q": {
+          "en": "Read this screen: pressure support, yellow bar MV low. MVe 2.4 L/min, f total 7, VTe 340, EtCO2 58. Which number tells you why MV is low?",
+          "hi": "यह screen पढ़ें: pressure support, पीला bar MV low। MVe 2.4 L/min, f total 7, VTe 340, EtCO2 58। कौन सा number बताता है कि MV कम क्यों है?"
+        },
+        "options": [
+          {
+            "en": "f total 7: he breathes too few times",
+            "hi": "f total 7: साँसें बहुत कम हैं"
+          },
+          {
+            "en": "VTe 340: each breath is far too small",
+            "hi": "VTe 340: हर साँस बहुत छोटी है"
+          },
+          {
+            "en": "EtCO2 58: the CO2 itself is the cause",
+            "hi": "EtCO2 58: CO2 खुद ही कारण है"
+          },
+          {
+            "en": "MVe 2.4: the low MV is its own cause",
+            "hi": "MVe 2.4: कम MV खुद अपना कारण है"
+          }
+        ],
+        "answer": 0,
+        "why": {
+          "en": "Minute volume is breaths times breath size. 340 mL is a fair breath; 7 breaths a minute is too few, so MV falls and CO2 rises. Pressure support has no set rate, so think sedation or an opioid and the apnoea risk. Look, bag if he is not breathing enough, call your senior.",
+          "hi": "Minute volume = साँसें गुणा साँस का आकार। 340 mL ठीक साँस है; मिनट में 7 साँसें बहुत कम हैं, इसलिए MV गिरता है और CO2 बढ़ता है। Pressure support में set rate नहीं होती, इसलिए sedation या opioid और apnoea का ख़तरा सोचें। देखें, काफ़ी साँस न ले रहा हो तो bag करें, senior को call करें।"
+        },
+        "key": {
+          "en": "Low MV on pressure support: I read f total first; few breaths means sedation or tiredness, and I call.",
+          "hi": "Pressure support पर कम MV: मैं पहले f total पढ़ता हूँ; कम साँसें यानी sedation या थकान, और मैं call करता हूँ।"
         }
       }
     ]

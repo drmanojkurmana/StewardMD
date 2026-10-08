@@ -208,6 +208,8 @@
     nx6: T("This gas came soon after your change and has not settled. Tap +30 min, then Draw ABG again.", "यह गैस बदलाव के तुरंत बाद ली गई, अभी स्थिर नहीं हुई। +30 मिनट दबाएँ, फिर दोबारा ABG लें।"),
     nx7: T("Read this gas against the goals. Then try another change, or Finish.", "इस गैस को लक्ष्यों से मिलाएँ। फिर कोई और बदलाव करें, या समाप्त करें।"),
     nx5: T("Compare Before and Now in the blood gas. Then try another change, or Finish.", "ब्लड गैस में पहले और अभी की तुलना करें। फिर कोई और बदलाव करें, या समाप्त करें।"),
+    nxFixR: T("Fix the red number first: {x}. Then Draw ABG again.", "पहले लाल संख्या ठीक करें: {x}। फिर दोबारा ABG लें।"),
+    nxFixA: T("Fix the amber number first: {x} is low for the oxygen given. Then Draw ABG again.", "पहले पीली संख्या ठीक करें: दी गई ऑक्सीजन के हिसाब से {x} कम है। फिर दोबारा ABG लें।"),
     tutMoved: T("The clock moved on {m} min so you can see it.", "आपको दिखाने के लिए घड़ी {m} मिनट आगे बढ़ी।"),
     tutFlat: T("{x} barely moves in this patient. Go on when ready.", "इस मरीज़ में {x} लगभग नहीं बदलता। तैयार हों तो आगे बढ़ें।"),
     tutLook: T("Watch {x}.", "{x} देखें।"),
@@ -222,6 +224,14 @@
     coMin: T("Hide the coach", "कोच छोटा करें"), coMax: T("Show the coach", "कोच दिखाएँ"),
     needDo: T("First: {x}", "पहले: {x}"), needWait: T("First: press +5 min, then watch {x}.", "पहले: +5 मिनट दबाएँ, फिर {x} देखें।"),
     sawVal: T("{x}: {a} to {b}", "{x}: {a} से {b}"), coNow: T("Now", "अभी"),
+    // round 6 (U1): the learner's value is not the one the step asks for; a grey Next says why; settled after a time step
+    wrongVal: T("You set {v}; this step wants {w}. Press {b} {n}, then Confirm.", "आपने {v} रखा; इस कदम में {w} चाहिए। {b} {n} दबाएँ, फिर पक्का करें।"),
+    bMinus: T("the minus button", "घटाने वाला बटन"), bPlus: T("+", "+"),
+    nOnce: T("once", "एक बार"), nTwice: T("twice", "दो बार"), nTimes: T("{n} times", "{n} बार"),
+    pendOk: T("Now press Confirm.", "अब पक्का करें दबाएँ।"),
+    firstTurn: T("First do your turn above.", "पहले ऊपर अपनी बारी का काम करें।"),
+    coMore: T("More", "और पढ़ें"),
+    tutSettled: T("{x} has settled. Go on when ready.", "{x} अब स्थिर है। तैयार हों तो आगे बढ़ें।"),
     tutLeft: T("Your changes stay. Out of target now: {x}.", "आपके बदलाव बने रहेंगे। अभी लक्ष्य से बाहर: {x}।"), restore: T("Restore the starting settings", "शुरुआती सेटिंग वापस लाएँ"),
     restored: T("Starting settings restored.", "शुरुआती सेटिंग वापस आ गईं।"),
     setToL: T("{x} to {v}, then confirm.", "{x} को {v} करें, फिर पक्का करें।"),
@@ -265,13 +275,13 @@
     littleGain: T("Little to gain here: this change barely moves this patient.", "यहाँ ज़्यादा फ़ायदा नहीं: यह बदलाव इस मरीज़ को लगभग नहीं बदलता।"),
     moreDetail: T("More detail", "और जानकारी"),
     pl_setting: T("You set {x} from {a} to {b}.", "आपने {x} को {a} से {b} किया।"), pl_mode: T("You switched the mode from {a} to {b}.", "आपने मोड {a} से {b} किया।"),
-    pl_ventUp: T("The machine now moves more air: {m} L a minute (was {w}).", "मशीन अब ज़्यादा हवा देती है: {m} L प्रति मिनट (पहले {w})।"),
-    pl_ventDn: T("The machine now moves less air: {m} L a minute (was {w}).", "मशीन अब कम हवा देती है: {m} L प्रति मिनट (पहले {w})।"),
+    pl_ventUp: T("The machine now moves more air: {m} L a minute, up from {w}.", "मशीन अब ज़्यादा हवा देती है: {w} से बढ़कर {m} L प्रति मिनट।"),
+    pl_ventDn: T("The machine now moves less air: {m} L a minute, down from {w}.", "मशीन अब कम हवा देती है: {w} से घटकर {m} L प्रति मिनट।"),
     pl_ventSame: T("The machine gives the same air each minute.", "मशीन हर मिनट उतनी ही हवा देती है।"),
     pl_mechUp: T("Each breath stretches the lung more.", "हर साँस फेफड़े को ज़्यादा खींचती है।"), pl_mechDn: T("Each breath stretches the lung less.", "हर साँस फेफड़े को कम खींचती है।"),
     pl_waveUp: T("The pressure trace peaks higher.", "प्रेशर ट्रेस ऊँचा जाता है।"), pl_waveDn: T("The pressure trace peaks lower.", "प्रेशर ट्रेस नीचा रहता है।"),
     pl_trap: T("Air is trapped: the flow trace no longer reaches zero.", "हवा फँस रही है: फ़्लो ट्रेस अब शून्य तक नहीं पहुँचता।"), pl_free: T("Trapped air is gone: flow reaches zero again.", "फँसी हवा निकल गई: फ़्लो फिर शून्य तक पहुँचता है।"),
-    pl_monUp: T("In 30 min (prediction): SpO2 rises to {b}.", "30 मिनट में (अनुमान): SpO2 बढ़कर {b}।"), pl_monDn: T("In 30 min (prediction): SpO2 falls to {b}.", "30 मिनट में (अनुमान): SpO2 घटकर {b}।"), pl_monSame: T("In 30 min (prediction): SpO2 stays about {b}.", "30 मिनट में (अनुमान): SpO2 लगभग {b} रहता है।"),
+    pl_monUp: T("The prediction for 30 min: SpO2 rises to {b}.", "30 मिनट का अनुमान: SpO2 बढ़कर {b}।"), pl_monDn: T("The prediction for 30 min: SpO2 falls to {b}.", "30 मिनट का अनुमान: SpO2 घटकर {b}।"), pl_monSame: T("The prediction for 30 min: SpO2 stays about {b}.", "30 मिनट का अनुमान: SpO2 लगभग {b} रहता है।"),
     pl_co2Up: T("In 30 min (prediction): CO2 in the blood rises to {b}.", "30 मिनट में (अनुमान): खून में CO2 बढ़कर {b}।"), pl_co2Dn: T("In 30 min (prediction): CO2 in the blood falls to {b}.", "30 मिनट में (अनुमान): खून में CO2 घटकर {b}।"), pl_co2Same: T("In 30 min (prediction): CO2 in the blood stays about {b}.", "30 मिनट में (अनुमान): खून में CO2 लगभग {b} रहता है।"),
     pl_bpUp: T("Blood pressure rises: MAP {b}.", "BP बढ़ता है: MAP {b}।"), pl_bpDn: T("Blood pressure falls: MAP {b}.", "BP गिरता है: MAP {b}।"), pl_bpSame: T("Blood pressure stays about the same.", "BP लगभग वैसा ही रहता है।"),
     pl_gasSame: T("Oxygen in and CO2 out barely change.", "ऑक्सीजन अंदर और CO2 बाहर लगभग नहीं बदलते।"),
@@ -321,7 +331,13 @@
     sawMove: T("You saw it: {x} went {d}, {a} to {b}.", "आपने देखा: {x} {d}, {a} से {b}।"),
     alreadyDid: T("You already did this at {t}. It counts.", "आपने यह {t} पर कर दिया था। यह गिना गया।"),
     showCtl: T("Show me the control", "कंट्रोल दिखाएँ"), openLim: T("Open alarm limits", "अलार्म सीमाएँ खोलें"), openBed: T("Open bedside actions", "बेडसाइड काम खोलें"),
+    rng: T("{a} to {b}", "{a} से {b}"), gPlat: T("Pplat", "प्लेटो प्रेशर"), gDrive: T("Driving P", "ड्राइविंग प्रेशर"), gVt: T("VT", "टाइडल वॉल्यूम"),
     doNow: T("Do now, in this order", "अभी करें, इसी क्रम में"),
+    moreSteps: T("More steps ({n})", "और कदम ({n})"),
+    keepOx: T("You raised {x} to {v}: keep it until SpO2 is back, then wean.", "आपने {x} {v} किया: SpO2 वापस आने तक इसे रखें, फिर धीरे घटाएँ।"),
+    bagOver: T("Bagging over: set the ventilator FiO2 to 100% now, or keep bagging.", "Bagging ख़त्म: अभी ventilator का FiO2 100% करें, या bagging जारी रखें।"),
+    ackSilWhy: T("Acknowledge: you have seen it; it stays on the alarm bar until it clears. Silence: no sound for 2 min while you fix the cause.", "स्वीकार करें: आपने देख लिया; ठीक होने तक यह alarm bar पर रहता है। चुप करें: कारण ठीक करते समय 2 मिनट आवाज़ नहीं।"),
+    ackWhy: T("Acknowledge: you have seen it; it stays on the alarm bar until it clears.", "स्वीकार करें: आपने देख लिया; ठीक होने तक यह alarm bar पर रहता है।"),
     ck_look: T("Look at the patient: is the chest moving, what colour is the skin, what does SpO2 show?", "मरीज़ को देखें: छाती हिल रही है, त्वचा का रंग कैसा है, SpO2 क्या दिखा रहा है?"),
     ck_bag: T("If SpO2 is falling or the patient is unstable: take them off the ventilator and bag with 100% oxygen.", "SpO2 गिर रहा हो या मरीज़ अस्थिर हो: ventilator हटाकर 100% oxygen से bag करें।"),
     ck_dope: T("Think DOPE: Displacement of the tube, Obstruction (suction it), Pneumothorax, Equipment and circuit.", "DOPE सोचें: tube का खिसकना (Displacement), रुकावट (Obstruction, suction करें), Pneumothorax, Equipment और circuit।"),
@@ -347,6 +363,7 @@
     bandT_emergency: T("SpO2 is below 88%. Hand bag with 100% oxygen, think DOPE and call your senior now.", "SpO2 88% से कम है। 100% oxygen से हाथ से bag करें, DOPE सोचें और अभी senior को बुलाएँ।"),
     o2Trend: T("Where SpO2 is heading", "SpO2 किधर जा रहा है"), unsafeBack: T("Why not set it back", "वापस क्यों नहीं"),
     interpH: T("Reading the gas", "गैस को पढ़ना"), stepByStep: T("Step by step", "क़दम दर क़दम"),
+    spellsH: T("Every time off a goal", "हर बार जब लक्ष्य से बाहर रहे"),
     worstH: T("Longest time off a goal", "किसी लक्ष्य से सबसे लंबा समय बाहर"), worstLine: T("{x}, from {a} to {b} min ({m} min).", "{x}, {a} से {b} मिनट तक ({m} मिनट)।"),
     wVe: T("Smaller breaths at this rate cut the air moved each minute by {p}% ({a} to {b} L/min). CO2 will rise.", "इस rate पर छोटी साँसें हर मिनट की हवा {p}% घटा देंगी ({a} से {b} L/min)। CO2 बढ़ेगा।"),
     rrPair: T("Also raise rate to {n} to keep minute air the same", "हर मिनट की हवा बराबर रखने के लिए rate भी {n} करें"),
@@ -368,6 +385,8 @@
     wp_PaCO2_up: T("Less air each minute leaves more CO2 in the blood.", "हर मिनट कम हवा से खून में ज़्यादा CO2 रहती है।"),
     wp_PaO2_up: T("More oxygen gets from the lungs into the blood.", "फेफड़ों से खून में ज़्यादा ऑक्सीजन पहुँचती है।"),
     wp_PaO2_down: T("Less oxygen gets from the lungs into the blood.", "फेफड़ों से खून में कम ऑक्सीजन पहुँचती है।"),
+    wpBohrDown: T("PaO2 rose, but saturation dipped a little: more acid blood hands its oxygen to the body more easily. Both numbers are right.", "PaO2 बढ़ा, पर saturation थोड़ा घटा: ज़्यादा अम्लीय ख़ून अपनी oxygen शरीर को आसानी से दे देता है। दोनों संख्याएँ सही हैं।"),
+    wpBohrUp: T("PaO2 fell, but saturation rose a little: less acid blood keeps its oxygen a little longer. Both numbers are right.", "PaO2 घटा, पर saturation थोड़ा बढ़ा: कम अम्लीय ख़ून अपनी oxygen थोड़ी देर ज़्यादा रखता है। दोनों संख्याएँ सही हैं।"),
     wp_SaO2_up: T("More of the blood's oxygen carriers are full.", "खून के ज़्यादा ऑक्सीजन वाहक भरे हैं।"), wp_SaO2_down: T("Fewer of the blood's oxygen carriers are full.", "खून के कम ऑक्सीजन वाहक भरे हैं।"),
     wp_pH_up: T("Less CO2 makes the blood less acid.", "कम CO2 से खून कम अम्लीय होता है।"), wp_pH_down: T("More CO2 makes the blood more acid.", "ज़्यादा CO2 से खून ज़्यादा अम्लीय होता है।"),
     wp_HCO3_up: T("The body's buffer rises slowly to balance the acid.", "अम्ल को संतुलित करने के लिए शरीर का बफ़र धीरे बढ़ता है।"), wp_HCO3_down: T("The body's buffer falls slowly to balance the change.", "बदलाव को संतुलित करने के लिए शरीर का बफ़र धीरे घटता है।"),
@@ -380,11 +399,13 @@
     p_check: T("First-night check", "पहली रात की जाँच"), p_checkS: T("A short final quiz", "एक छोटा अंतिम quiz"),
     pathFin: T("Finish line: ready to start under supervision", "मंज़िल: निगरानी में शुरू करने को तैयार"),
     pathReady: T("Ready to start under supervision", "निगरानी में शुरू करने को तैयार"),
+    p_drillsN: T("Night drills: {n} of {m} safe", "रात की drills: {m} में से {n} सुरक्षित"),
+    pathMiss: T("Still to do: {x}.", "अभी बाकी: {x}।"),
     pathReadyS: T("Never alone on day one: your senior still decides every change.", "पहले दिन कभी अकेले नहीं: हर बदलाव का फ़ैसला अब भी senior करता है।"),
     tagCore: T("Core", "ज़रूरी"), laterH: T("Later: {n} more tutorials", "बाद में: {n} और ट्यूटोरियल"),
     laterS: T("Open these after the core tutorials and one patient run.", "इन्हें ज़रूरी ट्यूटोरियल और एक मरीज़ रन के बाद खोलें।"),
     onTgt: T("Starts on target: little to fix", "शुरू से लक्ष्य पर: ठीक करने को कम"),
-    finH: T("Tutorial done", "ट्यूटोरियल पूरा"), finDone: T("Done! You finished {x}.", "पूरा! आपने {x} पूरा किया।"),
+    finH: T("Tutorial done", "ट्यूटोरियल पूरा"), finDone: T("You finished {x}.", "आपने {x} पूरा किया।"),
     finNext: T("Next: {x}", "अगला: {x}"), finAll: T("Every step on your path is done.", "आपके रास्ते का हर कदम पूरा है।"),
     finNextT: T("Next tutorial", "अगला ट्यूटोरियल"), finGo: T("Go to the next step", "अगले कदम पर जाएँ"),
     finStay: T("Stay with this patient (practice, not scored)", "इसी मरीज़ के साथ रहें (अभ्यास, अंक नहीं)"),
@@ -402,7 +423,7 @@
     snrB: T("{x}: a junior doctor does not give this alone. In the lab it is logged as an unsafe step if it was not needed.", "{x}: junior doctor यह अकेले नहीं देता। Lab में ज़रूरत न हो तो यह असुरक्षित कदम के रूप में दर्ज होता है।"),
     snrCall: T("Call my senior instead", "इसके बजाय senior को बुलाएँ"), snrGo: T("Give it anyway", "फिर भी दें"),
     snrCalled: T("Good call. Tell your senior: the patient, the alarm, the numbers and what you have done.", "सही फ़ैसला। Senior को बताएँ: मरीज़, alarm, संख्याएँ और आपने क्या किया।"),
-    caseCue: T("Read why, then answer Question 2 below.", "क्यों पढ़ें, फिर नीचे प्रश्न 2 का उत्तर दें।"),
+    caseCue: T("Read why, then answer Question 2 below.", "पहले कारण पढ़ें, फिर नीचे प्रश्न 2 का उत्तर दें।"),
     vdWrong: T("Does not fix it:", "इससे ठीक नहीं होता:"), vdOff: T("in 30 min {x} still off target.", "30 मिनट बाद भी {x} लक्ष्य से बाहर।"),
     predL: T("prediction", "अनुमान"), predIn: T("In {m} min (prediction):", "{m} मिनट में (अनुमान):"),
     driftMine: T("Your change is still working", "आपका बदलाव अभी असर कर रहा है"),
@@ -410,6 +431,8 @@
   };
   // Plain line for an engine reason: the engine's own `plain` when it gives one, else the table above, else its text.
   function plainWhy(x) {
+    // SaO2 moving against PaO2 (the curve shift): said plainly, without "holds oxygen less tightly" (round 6, U6)
+    if (x.param === "SaO2" && x.plain && /tightly/.test(x.plain.en || "")) return raw(x.direction === "down" ? "wpBohrDown" : "wpBohrUp");
     if (x.plain) return t(x.plain);
     var k = "wp_" + x.param + "_" + (x.direction === "down" ? "down" : "up");
     return STR[k] ? raw(k) : t(x.because);
@@ -431,7 +454,7 @@
   var DYS_KINDS = ["doubleTrigger", "ineffectiveTrigger", "autoTrigger", "flowStarvation", "prematureCycle", "delayedCycle", "reverseTrigger"];
   // What-if moves a setting by a teaching-sized amount in its own units; others move four steps.
   var WI_DELTA = { fio2: 20, peep: 4, vt: 100, rr: 6, pinsp: 5, ps: 5, ti: 0.4, ipap: 4, epap: 3, phigh: 4, plow: 3, thigh: 1, tlow: 0.2, trigFlow: 2, cycle: 15 };
-  var OX_KEYS = { fio2: 1, peep: 1, epap: 1, plow: 1, phigh: 1, ti: 1, thigh: 1 };
+  var OX_KEYS = { fio2: 1, peep: 1, epap: 1, plow: 1, phigh: 1, ti: 1, thigh: 1 }, O2_UP = { fio2: 1, peep: 1, epap: 1, plow: 1 };
 
   function L() { return I.lang(); }
   function t(o) { return o == null ? "" : typeof o === "string" ? o : (o[L()] || o.en || ""); }
@@ -750,9 +773,11 @@
     glossReset();
     SH.ret = trigger || prev || G.document.activeElement;
     w.className = "vl-sheet-wrap";
-    w.innerHTML = '<div class="vl-scrim" data-act="vlsheetx"></div><div class="vl-sheet" role="dialog" aria-modal="true" aria-labelledby="vlShH">' +
+    // the dialog comes first in the DOM; the scrim (a tap-away area, hidden from assistive tech) follows it (round 6, U7)
+    w.innerHTML = '<div class="vl-sheet" role="dialog" aria-modal="true" aria-labelledby="vlShH">' +
       '<div class="vl-grab" aria-hidden="true"></div><div class="vl-sheet-h"><h2 id="vlShH" tabindex="-1">' + title + '</h2><button type="button" class="sp-icon vl-x" data-act="vlsheetx" aria-label="' + s("close") + '">' + (ico("close") || "x") + "</button></div>" +
-      '<div class="vl-sheet-b">' + body + "</div>" + (foot ? '<div class="vl-sheet-f">' + foot + "</div>" : "") + "</div>";
+      '<div class="vl-sheet-b">' + body + "</div>" + (foot ? '<div class="vl-sheet-f">' + foot + "</div>" : "") + "</div>" +
+      '<div class="vl-scrim" data-act="vlscrim" aria-hidden="true"></div>';
     r.appendChild(w);
     SH.el = w;
     setInert(true);
@@ -809,6 +834,7 @@
     if (!quiet) try { if (SH.ret && SH.ret.focus && G.document.contains(SH.ret)) SH.ret.focus({ preventScroll: true }); } catch (e) {}
   }
   A.vlsheetx = function () { closeSheet(); };
+  A.vlscrim = A.vlsheetx;
 
   /* ---------- toast and status ---------- */
   var TO = { tm: 0 };
@@ -840,6 +866,9 @@
     if (kind === "hint" && TO.kind === "event" && el.classList.contains("on") && Date.now() - TO.at < 4000) return;
     // phone, inside a tutorial: the coach already shows what the learner did and saw; no card over the monitor (U6)
     if (R && R.tut && isPhone() && $("vlCoach")) return;
+    // the same line already on screen is not shown a second time (round 6, B7): it only stays a little longer
+    if (el.classList.contains("on") && TO.html === html) { toastArm(el, toastMs(el)); return; }
+    TO.html = html;
     TO.kind = kind; TO.at = Date.now(); TO.hold = false;
     toastBind(el); toastPlace(el);
     el.innerHTML = '<span class="vl-toast-k">' + (ico(kind === "hint" ? "spark" : "info")) + "<b>" + s(kind === "hint" ? "hint" : "event") + '</b></span><span class="vl-toast-m">' + html + "</span>" +
@@ -937,7 +966,9 @@
     function br(k) {
       var it = prog ? prog.items.filter(function (x) { return PATH_BR[k].indexOf(x.id) >= 0; })[0] : null;
       if (prog && !it && k === "check") return; // the bridge has no final check yet: the path does not wait for it
-      out.push({ k: "b:" + (it ? it.id : k), title: s("p_" + k), sub: s("p_" + k + "S"), done: !!(it && it.done), br: true, open: !!it });
+      var dc = k === "drills" && prog ? drillsSafe(prog, it) : null;
+      // round 6 (U8): the drills row counts the drills done in a safe order, "Night drills: 2 of 5 safe"
+      out.push({ k: "b:" + (it ? it.id : k), title: dc ? s("p_drillsN", { n: dc.n, m: dc.m }) : s("p_" + k), sub: s("p_" + k + "S"), done: !!(it && it.done), br: true, open: !!it });
     }
     br("bed");
     var fp = firstPatient(), bs = bk.reduce(function (m, id) { return Math.max(m, best[id] || 0); }, 0);
@@ -945,9 +976,27 @@
     br("drills"); br("check");
     return { steps: out, prog: !!prog };
   }
+  // Drills done in a safe order: the bridge's own count when progress() gives one ({safe, total} on the drills item or
+  // progress().drills), else the drills it saved as safe. ponytail: the fallback reads the bridge's saved prefs and
+  // assumes 5 drills; drop it once the bridge reports the count itself.
+  function drillsSafe(prog, it) {
+    var x = (it && it.safe != null ? it : null) || prog.drills || null;
+    if (x && x.safe != null) return { n: I.fmt(+x.safe), m: I.fmt(+(x.total || 5)) };
+    var p = null; try { p = JSON.parse(I.ls().getItem("smd_narke_vbridge")); } catch (e) {}
+    var dr = p && p.drills && typeof p.drills === "object" ? p.drills : {};
+    return { n: I.fmt(Object.keys(dr).filter(function (k) { return dr[k]; }).length), m: I.fmt(5) };
+  }
   function pathNext(P) { return P.steps.filter(function (x) { return !x.done; })[0] || null; }
+  // Ready (round 6, U8): the bridge's readiness rule (progress().ready) when it gives one, with what is still missing;
+  // older bridges: every path step done.
+  function pathReady(P) { var p = bridgeProg(); return p && typeof p.ready === "boolean" ? { ready: p.ready, missing: p.missing || [], items: p.items } : { ready: !pathNext(P) && P.prog, missing: [], items: [] }; }
+  function missingTx(R0) {
+    if (R0.ready || !R0.missing.length) return "";
+    var names = R0.missing.map(function (id) { var it = R0.items.filter(function (x) { return x.id === id; })[0]; return it && it.label ? t(it.label) : String(id); });
+    return '<span class="vl-path-miss">' + s("pathMiss", { x: names.join(", ") }) + "</span>";
+  }
   function pathHtml() {
-    var P = pathSteps(), st0 = P.steps, d = st0.filter(function (x) { return x.done; }).length, nx = pathNext(P), ready = !nx && P.prog;
+    var P = pathSteps(), st0 = P.steps, d = st0.filter(function (x) { return x.done; }).length, nx = pathNext(P), RD = pathReady(P), ready = RD.ready;
     var rows = st0.map(function (x, i) {
       var isN = x === nx;
       return '<li class="' + (x.done ? "done" : isN ? "next" : "") + '"><button type="button" class="vl-pstep" data-act="vlpath" data-k="' + esc(x.k) + '"' + (isN ? ' aria-current="step"' : "") + ">" +
@@ -959,7 +1008,7 @@
     return '<section class="vl-path' + (ready ? " ready" : "") + '" aria-labelledby="vlPathH"><div class="vl-path-h"><h2 class="sp-h2" id="vlPathH">' + s("pathH") + '</h2><span class="vl-path-n">' + s("pathOf", { d: d, n: st0.length }) + "</span></div>" +
       '<div class="vl-path-bar" aria-hidden="true"><i style="transform:scaleX(' + (d / (st0.length || 1)).toFixed(3) + ')"></i></div>' +
       '<ol class="vl-path-l">' + rows + "</ol>" +
-      '<p class="vl-path-fin" role="note">' + (ico("flag") ? '<span aria-hidden="true">' + ico(ready ? "check" : "flag") + "</span>" : "") + "<span>" + (ready ? "<b>" + s("pathReady") + "</b> " + s("pathReadyS") : s("pathFin")) + "</span></p></section>";
+      '<p class="vl-path-fin" role="note">' + (ico("flag") ? '<span aria-hidden="true">' + ico(ready ? "check" : "flag") + "</span>" : "") + "<span>" + (ready ? "<b>" + s("pathReady") + "</b> " + s("pathReadyS") : s("pathFin") + missingTx(RD)) + "</span></p></section>";
   }
   function goPath(k) {
     if (!k) return home();
@@ -1142,17 +1191,19 @@
     p.story[sc.id] = 1; savePrefs(); R.storyShown = sc.id;
     return true;
   }
+  function rng(a) { return s("rng", { a: a[0], b: a[1] }); }
   function ptHtml(r) {
     var sc = R.sc, p = sc.patient || {}, l = sc.lung || {}, g = sc.goals || {}, n = lv();
     var vs = p.volumeStatus === "low" ? "volLow" : p.volumeStatus === "high" ? "volHigh" : "volNormal";
     var goalsL = [];
     if (n <= 1 && g.spo2) goalsL.push(s("goalsPlain", { a: g.spo2[0], b: g.spo2[1] }));
     else {
-      if (g.spo2) goalsL.push("SpO2 " + g.spo2[0] + " to " + g.spo2[1] + " %");
-      if (g.paco2) goalsL.push("PaCO2 " + g.paco2[0] + " to " + g.paco2[1]);
-      if (g.ph) goalsL.push("pH " + g.ph[0] + " to " + g.ph[1]);
-      if (g.pplatMax) goalsL.push("Pplat " + "&le; " + g.pplatMax);
-      if (g.vtPerKg) goalsL.push("VT " + g.vtPerKg[0] + " to " + g.vtPerKg[1] + " mL/kg");
+      // goal ranges in the learner's language (round 6, U7: no "SpO2 92 to 96" or "Pplat" left in English in Hindi)
+      if (g.spo2) goalsL.push("SpO2 " + rng(g.spo2) + " %");
+      if (g.paco2) goalsL.push("PaCO2 " + rng(g.paco2));
+      if (g.ph) goalsL.push("pH " + rng(g.ph));
+      if (g.pplatMax) goalsL.push(s("gPlat") + " &le; " + g.pplatMax);
+      if (g.vtPerKg) goalsL.push(s("gVt") + " " + rng(g.vtPerKg) + " mL/kg");
     }
     return '<section class="vl-card vl-pt" data-vl-id="patient" data-g="mon" aria-labelledby="vlPtH">' +
       '<div class="vl-pt-h"><h2 class="vl-h" id="vlPtH">' + txg(p.diagnosis) + '</h2><span class="vl-lvb" title="' + s("lvMine", { n: sc.level || 1 }) + '">' + s("lvN", { n: sc.level || 1 }) + "</span></div>" +
@@ -1488,7 +1539,7 @@
         }).join("") + "</div>" + (was != null ? '<span class="vl-was">' + s("was", { v: was }) + "</span>" : "") + "</div>";
     }
     var frac = clamp(((+v) - d.min) / ((d.max - d.min) || 1), 0, 1), vt = setText(k, v) + (unit ? " " + unit : "");
-    return '<div class="vl-knob' + (was != null ? " is-pend" : "") + '" data-vl-id="' + esc(k) + '" data-knob="' + esc(k) + '">' + head +
+    return '<div class="vl-knob' + (was != null ? " is-pend" : "") + (R.tut && !R.tut.ok && tutKey(k) ? " vl-hl" : "") + '" data-vl-id="' + esc(k) + '" data-knob="' + esc(k) + '">' + head +
       '<div class="vl-dial" role="spinbutton" tabindex="0" data-spin="' + esc(k) + '" aria-labelledby="vlKL-' + esc(k) + '" aria-valuemin="' + d.min + '" aria-valuemax="' + d.max + '" aria-valuenow="' + v + '" aria-valuetext="' +
       esc(was != null ? raw("valWas", { v: vt, w: setText(k, was) }) : vt) + '">' +
       '<svg viewBox="0 0 80 72" aria-hidden="true" focusable="false"><path class="vl-arc-t" d="' + ARC + '" pathLength="100"/><path class="vl-arc-v" d="' + ARC + '" pathLength="100" stroke-dasharray="' + (frac * 100).toFixed(1) + ' 100"/></svg>' +
@@ -1517,6 +1568,7 @@
     var el = q('[data-knob="' + k + '"]');
     if (el) el.outerHTML = knob(k);
     var f = $("vlFoot"); if (f) f.innerHTML = footHtml();
+    if (R.tut && $("vlCoach")) paintCoach();
     if (focusSel) { var n = q(focusSel); if (n && !n.disabled) n.focus({ preventScroll: true }); else { n = q('[data-knob="' + k + '"] .vl-dial'); if (n) n.focus({ preventScroll: true }); } }
   }
   function stage(k, v) {
@@ -1581,7 +1633,13 @@
     else if (key === "PageDown") bump(k, -1, 5);
     else if (key === "Home") stage(k, d.min);
     else if (key === "End") stage(k, d.max);
-    else if (key === "Enter" && nPend()) { e.preventDefault(); return confirmChanges(); }
+    else if (key === "Enter" && nPend()) {
+      e.preventDefault();
+      // a warning is never skipped by a keyboard Enter (round 6, U4): focus moves to the warnings' safe button instead
+      var hw = warnings().filter(function (x) { return !x.info; });
+      if (hw.length) { var sb = q(".vl-pair") || q("[data-act=vlcancel]"); if (sb) sb.focus({ preventScroll: true }); say(hw.map(function (x) { return x.t; }).join(" ")); return; }
+      return confirmChanges();
+    }
     else if (/^[0-9]$/.test(key)) { e.preventDefault(); var b = q('[data-act=vltype][data-k="' + k + '"]'); if (b) { A.vltype(b); var inp = q(".vl-type"); if (inp) inp.value = key; } return; }
     else return;
     e.preventDefault();
@@ -1635,14 +1693,29 @@
     if (!ch) return n ? { k: "nx1", to: "settings" } : { k: "nx0", to: "abg" };
     // "again" only when a gas was drawn before (U6, round 4); no chain to read (a tutorial's last change), no "Read the chain"
     if (!after) return R.s.t - R.lastSet < 1500 ? (R.chain && !R.fromTut ? { k: "nx3", to: "chain" } : { k: "nx3b", to: "time" }) : { k: n ? "nx4" : "nx4b", to: "abg" };
-    // a gas drawn too soon after the change has not settled yet; Before and Now need two gases
-    if (last.t - R.lastSet < 900) return { k: "nx6", to: "abg" };
+    // a gas drawn too soon after the change has not settled yet; Before and Now need two gases. Judged against the clock
+    // NOW (round 6, U3): once 15 min have passed since the change, the strip asks for a fresh gas, never "tap +30" again
+    if (last.t - R.lastSet < 900) return R.s.t - R.lastSet >= 900 ? { k: "nx4", to: "abg" } : { k: "nx6", to: "abg" };
+    // a flagged number on the newest gas comes before "Compare, then Finish" (round 6, U3)
+    var fl = gasFlag(last);
+    if (fl) return { k: fl.red ? "nxFixR" : "nxFixA", to: "settings", x: fl.name };
     return R.abgs.some(function (a) { return a.t < R.lastSet; }) ? { k: "nx5", to: "abg" } : { k: "nx7", to: "abg" };
+  }
+  // The first flagged value on a gas, in the order a junior reads it: pH, PaCO2, then PaO2 (red out of range, or amber
+  // when it is in range but low for the oxygen given, P/F under 300), the same rules the gas table colours by.
+  function gasFlag(a) {
+    if (!a || !a.abg) return null;
+    var ks = ["pH", "PaCO2", "PaO2"], i, v;
+    for (i = 0; i < ks.length; i++) { v = abgVal(a.abg, ks[i]); if (v != null && outOf(v, gasRange(ks[i], a.fio2))) return { name: ks[i], red: true }; }
+    v = abgVal(a.abg, "PaO2");
+    return v != null && a.fio2 > 21 && v / (a.fio2 / 100) < 300 ? { name: "PaO2", red: false } : null;
   }
   function nextHtml() {
     var x = nextStep();
-    return x ? '<button type="button" class="vl-next' + (x.to === "alarm" ? " al" : "") + '" data-act="vlnext" data-to="' + x.to + '"' + (x.id ? ' data-k="' + esc(x.id) + '"' : "") + '><b>' + s("nextH") + "</b><span>" + s(x.k) + '</span><span class="vl-chev" aria-hidden="true">' + ico("chev") + "</span></button>" : "";
+    return x ? '<button type="button" class="vl-next' + (x.to === "alarm" ? " al" : "") + '" data-act="vlnext" data-to="' + x.to + '" data-n="' + x.k + '"' + (x.id ? ' data-k="' + esc(x.id) + '"' : "") + '><b>' + s("nextH") + "</b><span>" + s(x.k, { x: x.x }) + '</span><span class="vl-chev" aria-hidden="true">' + ico("chev") + "</span></button>" : "";
   }
+  // The strip follows the clock (round 6, U3): a live tick that crosses a threshold repaints it, never a stale line.
+  function syncNext() { var nx = q(".vl-next"), want = nextStep(); if ((nx ? nx.getAttribute("data-n") : "") !== (want ? want.k : "")) paintFoot(); }
   function paintFoot() {
     var f = $("vlFoot"); if (!f) return;
     var a = G.document.activeElement, sel = a && f.contains(a) && a.getAttribute("data-act") ? '[data-act="' + a.getAttribute("data-act") + '"]' + (a.getAttribute("data-k") ? '[data-k="' + a.getAttribute("data-k") + '"]' : "") : null;
@@ -1666,9 +1739,10 @@
       var w = warnings(), hard = w.filter(function (x) { return !x.info; }).length, pairOn = w.some(function (x) { return x.pair; });
       return nextHtml() + (w.length ? '<ul class="vl-warns"' + (hard ? ' role="alert"' : "") + ">" + w.map(function (x) { return '<li class="' + (x.info ? "info" : "") + '">' + (ico(x.info ? "info" : "warn") ? '<span aria-hidden="true">' + ico(x.info ? "info" : "warn") + "</span>" : "") + "<span>" + esc(x.t) +
         (x.pair ? '<button type="button" class="vl-pair is-pri" data-act="vlrrpair" data-v="' + x.pair + '">' + (ico("plus") || "") + "<span>" + s("rrPair", { n: x.pair }) + "</span></button>" : "") + "</span></li>"; }).join("") + "</ul>" : "") +
-        '<div class="vl-confirm"><button type="button" class="sp-btn sec" data-act="vlcancel">' + s("cancel") + "</button>" +
-        // with the safe rate pair on offer, the pair is the filled button and "Confirm anyway" is outlined (U7)
-        '<button type="button" class="sp-btn ' + (pairOn ? "sec vl-anyway" : "pri") + (hard && !pairOn ? " vl-warnbtn" : "") + '" data-act="vlconfirm">' + (ico("check") || "") + " " + (hard ? s("confirmAny") : n === 1 ? s("confirm1") : s("confirmN", { n: n })) + "</button></div>";
+        // a warning makes the safe way the filled button everywhere (round 6, U4): the rate pair when it is on offer, else
+        // Cancel; "Confirm anyway" is always the outlined one
+        '<div class="vl-confirm"><button type="button" class="sp-btn ' + (hard && !pairOn ? "pri" : "sec") + '" data-act="vlcancel">' + s("cancel") + "</button>" +
+        '<button type="button" class="sp-btn ' + (hard ? "sec vl-anyway" : "pri") + '" data-act="vlconfirm">' + (ico("check") || "") + " " + (hard ? s("confirmAny") : n === 1 ? s("confirm1") : s("confirmN", { n: n })) + "</button></div>";
     }
     var waits = [["300", "t5"], ["900", "t15"], ["1800", "t30"], ["3600", "t60"]];
     var stopped = lv() <= 1 && !R.live && !R.arrest ? '<p class="vl-tstop">' + s("timeStopped") + "</p>" : "";
@@ -1706,7 +1780,10 @@
     R.side = keys.some(function (k) { return OX_KEYS[k]; }) ? "ox" : "ve";
     R.chain = compose({ setB: setB, setA: setA, keys: keys, roB: roB, roA: roA, now: roB, prB: prB, prA: prA, reasons: reasons });
     R.log.push({ t: R.s.t, settings: clone(setA), readout: roA, action: "set:" + keys.join(",") });
-    if (R.tut && !R.tut.saw) { R.tut.pre = { r: roB, t: R.s.t }; R.tut.base = null; }
+    // the step's evidence is judged from before its FIRST change (U1, round 6): an overshoot and a correction in the
+    // same step (12, then 14) must not reset the base and leave the learner waiting 30 min for a change to show
+    if (R.tut && !R.tut.saw) { if (R.tut.preI !== R.tut.i) { R.tut.pre = { r: roB, t: R.s.t }; R.tut.preI = R.tut.i; } R.tut.base = null; }
+    var tsp = R.tut && tutStep(); if (tsp && tsp.do && keys.indexOf(tsp.do.key) >= 0) R.tut.tried = R.tut.i;
     markChange();
     var sEl = $("vlSet"); if (sEl) sEl.outerHTML = setHtml();
     var f = $("vlFoot"); if (f) f.innerHTML = footHtml();
@@ -1831,7 +1908,8 @@
     var steps = (c && c.steps) || (E() && E().CHAIN_STEPS) || ["setting", "ventilator", "mechanics", "waveforms", "gasExchange", "monitor", "abg", "patient"], beg = lv() <= 1;
     var ol = (c ? "" : '<p class="vl-empty">' + s("chainEmpty") + "</p>") + '<ol class="vl-chain' + (c ? "" : " idle") + '">' + steps.map(function (k) {
       var d = c && c.data[k], state = !c ? "idle" : still ? (d.on ? "on" : "same") : "wait";
-      var body = d ? '<p class="vl-cs-t">' + (beg ? txgS(d.plain) : d.lines.map(txgS).join("<br>")) + "</p>" : "";
+      // Level 1: one plain sentence per box with no brackets at all (round 6, U6): no glosses, no "(PaCO2)" asides
+      var body = d ? '<p class="vl-cs-t">' + (beg ? esc(String(d.plain || "").replace(/\s*\([^()]*\)/g, "")) : d.lines.map(txgS).join("<br>")) + "</p>" : "";
       return '<li class="vl-cs" data-step="' + esc(k) + '" data-state="' + state + '"><span class="vl-cs-dot" aria-hidden="true"></span><div class="vl-cs-b"><b>' + s("ch_" + k) + "</b>" + (beg && STR["cd_" + k] ? '<span class="vl-cs-d">' + s("cd_" + k) + "</span>" : "") +
         body + "</div></li>";
     }).join("") + "</ol>";
@@ -1909,7 +1987,7 @@
       (a0 ? '<th scope="col">' + s("before") + "<small>" + esc(clockText(a0.t)) + "</small></th>" : "") +
       '<th scope="col">' + s(a0 ? "now" : "now") + "<small>" + esc(clockText(a1.t)) + "</small></th>" + (a0 ? '<th scope="col"><span class="sp-sr">' + s("whyH") + "</span></th>" : "") + "</tr></thead><tbody>" + rows +
       (pf != null && !beg ? '<tr><th scope="row">' + s("pf") + "</th>" + (a0 ? "<td>" + esc(fmtN(a0.fio2 ? Math.round(a0.abg.PaO2 / (a0.fio2 / 100)) : null)) + "</td>" : "") + "<td><b>" + esc(fmtN(pf)) + "</b></td>" + (a0 ? "<td></td>" : "") + "</tr>" : "") +
-      "</tbody></table>" + interpHtml(a1.abg.interp, beg) + ((beg && a1.abg.curveNoteShort) || a1.abg.curveNote ? '<p class="vl-plain vl-curve">' + esc(t(beg && a1.abg.curveNoteShort ? a1.abg.curveNoteShort : a1.abg.curveNote).replace(/^./, function (c) { return c.toUpperCase(); })) + "</p>" : "") + (lv() <= 2 ? '<p class="vl-plain">' + s("pfVsS") + "</p>" : "") + (a0 ? why : '<p class="vl-empty">' + s("abgAgain") + "</p>");
+      "</tbody></table>" + interpHtml(a1.abg.interp, beg) + (((beg && a1.abg.curveNoteShort) || a1.abg.curveNote) && !(a1.abg.pH >= 7.35 && a1.abg.pH <= 7.45 && /acid|alkal/i.test(((beg && a1.abg.curveNoteShort) || a1.abg.curveNote).en || "")) ? /* round 6: never "acid blood" at a normal pH */ '<p class="vl-plain vl-curve">' + esc(t(beg && a1.abg.curveNoteShort ? a1.abg.curveNoteShort : a1.abg.curveNote).replace(/^./, function (c) { return c.toUpperCase(); })) + "</p>" : "") + (lv() <= 2 ? '<p class="vl-plain">' + s("pfVsS") + "</p>" : "") + (a0 ? why : '<p class="vl-empty">' + s("abgAgain") + "</p>");
   }
   // The engine's reading of a gas (abg().interp or E.interpretAbg): its label, and the steps (folded at Level 1).
   function interpHtml(ip, fold) {
@@ -2032,6 +2110,8 @@
     autoPeep: ["rr", "vt", "ti"], spo2Low: ["fio2", "peep", "mode"], fio2Low: ["fio2"], fio2High: ["fio2"], peepLow: ["peep"] };
   function causedBy(a) {
     if (a && a.causedBy && a.causedBy.key) return a.causedBy;
+    // SAFETY (round 6, E1): the engine looked and found no learner change behind this alarm; the UI never guesses one
+    if (a && a.causeChecked === true) return null;
     var keys = CAUSE_KEYS[a && a.id], since = R.seen[a.id] != null ? R.seen[a.id] : R.s.t, i, x, prev, k;
     if (!keys) return null;
     for (i = R.log.length - 1; i > 0; i--) {
@@ -2043,7 +2123,9 @@
       for (var j = i - 1; j >= 0; j--) if (R.log[j].settings) { prev = R.log[j].settings; break; }
       if (!prev) return null;
       var ch = x.action.slice(4).split(",");
-      for (k = 0; k < ch.length; k++) if (keys.indexOf(ch[k]) >= 0 && ch[k] !== "mode" && String(prev[ch[k]]) !== String(x.settings[ch[k]])) return { key: ch[k], from: prev[ch[k]], to: x.settings[ch[k]], minutesAgo: Math.round((R.s.t - x.t) / 60), ui: true };
+      // more oxygen (FiO2, PEEP, EPAP, P low raised) never causes low SpO2 or a low heart rate (round 6, E1)
+      for (k = 0; k < ch.length; k++) if (keys.indexOf(ch[k]) >= 0 && ch[k] !== "mode" && String(prev[ch[k]]) !== String(x.settings[ch[k]]) &&
+        !((a.id === "spo2Low" || a.id === "hrLow") && O2_UP[ch[k]] && +x.settings[ch[k]] > +prev[ch[k]])) return { key: ch[k], from: prev[ch[k]], to: x.settings[ch[k]], minutesAgo: Math.round((R.s.t - x.t) / 60), ui: true };
       return null;
     }
     return null;
@@ -2071,7 +2153,16 @@
     var id = b.getAttribute("data-k"), a = activeAlarms().filter(function (x) { return x.id === id; })[0], c = (learn().alarms || {})[id] || {}, beg = lv() <= 1;
     var list = function (arr) { return arr && arr.length ? "<ul>" + arr.map(function (x) { return "<li>" + txg(x) + "</li>"; }).join("") + "</ul>" : ""; };
     glossReset();
-    var cb = a ? causedBy(a) : null, top = "", lim = "", sev = sevOf(a), A0 = E().ACTIONS || {};
+    var cb = a ? causedBy(a) : null, top = "", lim = "", sev = sevOf(a), A0 = E().ACTIONS || {}, keepOx = "";
+    // SAFETY (round 6, E1 guard in the UI too): more oxygen or more PEEP never causes low SpO2, and the card never offers
+    // to take oxygen away on a low SpO2 alarm; it says to keep the raise until SpO2 is back
+    var ok0 = a && a.oxygenKeep && a.oxygenKeep.text;
+    if ((id === "spo2Low" || id === "hrLow") && cb && O2_UP[cb.key] && +cb.to >= +cb.from) {
+      if (!ok0) keepOx = '<p class="vl-note vl-keepox">' + s("keepOx", { x: setLabel(cb.key), v: setText(cb.key, cb.to) + (setUnit(cb.key) ? " " + setUnit(cb.key) : "") }) + "</p>";
+      cb = null;
+    }
+    // the engine's own "You raised FiO2 to 50%: keep it until SpO2 is back, then wean it in steps" (round 6, E1)
+    if (ok0) keepOx = '<p class="vl-note vl-keepox">' + tx(ok0) + "</p>";
     if (cb) {
       var u = setUnit(cb.key) ? " " + setUnit(cb.key) : "", can = setDef(cb.key) && String(R.set[cb.key]) === String(cb.to), n0 = cb.minutesAgo != null ? cb.minutesAgo : 0;
       if (ALARM_KEYS.indexOf(cb.key) >= 0) {
@@ -2096,6 +2187,9 @@
     // Engine r5 (E1): primary.second is the learner-caused fix, under the primary with its own heading. Older engines:
     // the UI's own rule for low SpO2.
     var sec2 = pr && pr.second;
+    // never a step that lowers FiO2 or PEEP on a low SpO2 card (round 6, E1 guard)
+    if (o2 && sec2 && sec2.kind === "setting" && O2_UP[sec2.key] && +sec2.to < +R.set[sec2.key]) sec2 = null;
+    if (!keepOx && P && P.oxygenKeep && P.oxygenKeep.text) keepOx = '<p class="vl-note vl-keepox">' + tx(P.oxygenKeep.text) + "</p>";
     if (sec2) {
       also = '<div class="vl-also"><h3 class="vl-h3">' + (sec2.heading ? tx(sec2.heading) : s("alsoThen")) + "</h3>" +
         (top ? top.replace(/sp-btn pri/g, "sp-btn sec") : sec2.kind === "action" && A0[sec2.id] ? bedBtn({ id: sec2.id, a: A0[sec2.id], on: true, sug: true }, true) : setDef(sec2.key) && ALARM_KEYS.indexOf(sec2.key) < 0 ? planBtn(sec2, "sec") + (sec2.why ? '<p class="vl-note vl-prim-why">' + txg(sec2.why) + "</p>" : "") : "") + "</div>";
@@ -2118,23 +2212,34 @@
     var call = (P && (P.spo2Band === "mild" || P.spo2Band === "emergency") ? '<p class="vl-band vl-band-' + P.spo2Band + '"><b>' + s("band_" + P.spo2Band) + "</b> " + s("bandT_" + P.spo2Band) + "</p>" : "") +
       (P && P.callNow ? '<p class="vl-call" role="note">' + (P.callWhy ? txg(P.callWhy) : s("ck_senior")) + "</p>" : "");
     var lineActs = {};
-    var ol = checks.length ? '<h3 class="vl-h3 vl-now-h">' + s("doNow") + '</h3><ol class="vl-ol vl-now">' + checks.map(function (x) {
+    // Round 6 (U5): the first three steps are the "Do now" summary; the rest fold under "More steps", so at 390 px the
+    // card is one screen of what to do before it is a manual
+    var liOf = function (x) {
       var k = x.action && A0[x.action] && x.action !== primAct ? x.action : null; if (k) lineActs[k] = 1;
       return "<li><span>" + (x.text ? tx(x.text) : tx(x)) + "</span>" + (k ? actBtn(k, false) : "") + "</li>";
-    }).join("") + "</ol>" : (beg ? '<p class="vl-look">' + s("lookFirst") + "</p>" : "");
+    };
+    var ol = checks.length ? '<h3 class="vl-h3 vl-now-h">' + s("doNow") + '</h3><ol class="vl-ol vl-now">' + checks.slice(0, 3).map(liOf).join("") + "</ol>" +
+      (checks.length > 3 ? '<details class="vl-more vl-moresteps"><summary>' + s("moreSteps", { n: checks.length - 3 }) + '</summary><ol class="vl-ol vl-now" start="4">' + checks.slice(3).map(liOf).join("") + "</ol></details>" : "")
+      : (beg ? '<p class="vl-look">' + s("lookFirst") + "</p>" : "");
+    // Bagging over with SpO2 still low (round 6, E9/U5): the ventilator must now give the oxygen the bag gave
+    // the engine's spo2Low.bagOver {text, fio2To} when it gives one (its plan then leads with FiO2 100), else the UI's own
+    var bo = (a && a.bagOver) || (P && P.bagOver) || null, primO2 = pr && pr.kind === "setting" && pr.key === "fio2" && +pr.to >= 100;
+    var bagOver = o2 && (bo || R.bagOver) && +R.set.fio2 < 100 ? '<div class="vl-call vl-bagover" role="note"><p>' + (bo && bo.text ? tx(bo.text) : s("bagOver")) + "</p>" +
+      (primO2 ? "" : planBtn({ key: "fio2", to: (bo && bo.fio2To) || 100, label: { en: STR.raiseFio2.en.replace("{v}", (bo && bo.fio2To) || 100), hi: STR.raiseFio2.hi.replace("{v}", (bo && bo.fio2To) || 100) } }, "sec")) + "</div>" : "";
     var rest = acts.filter(function (k) { return k !== primAct && !lineActs[k] && A0[k]; });
     var fio2 = !P && id === "spo2Low" ? '<p class="vl-fix vl-fio2l">' + (R.set.fio2 >= 100 ? s("fio2Max") : R.set.fio2 >= 60 ? s("fio2Hi", { v: R.set.fio2 }) : s("ams_spo2Low")) + "</p>" : "";
-    var now = call + prim + ol + fio2 + (rest.length ? '<div class="vl-bed-g vl-bed-s" role="group" aria-label="' + s("bedH") + '">' + rest.map(function (k) { return actBtn(k, false); }).join("") + "</div>" : "");
+    var now = bagOver + call + prim + keepOx + ol + fio2 + (rest.length ? '<div class="vl-bed-g vl-bed-s" role="group" aria-label="' + s("bedH") + '">' + rest.map(function (k) { return actBtn(k, false); }).join("") + "</div>" : "");
     var mon = MON_AL[id] ? "<p>" + s(id === "spo2Low" ? "am_spo2Low" : id === "mapLow" ? "am_mapLow" : "am_hr") + "</p>" + (!P && id === "mapLow" ? '<p class="vl-fix">' + s("ams_mapLow") + "</p>" : "") + '<p class="vl-note">' + s("monStays") + "</p>" : "";
     var more = mon + (c.causes ? '<h3 class="vl-h3">' + s(beg ? "a1_causes" : "causes") + "</h3>" + list(c.causes) : "") +
       (c.clue ? '<h3 class="vl-h3">' + s("clue") + "</h3><p>" + txg(c.clue) + "</p>" : "") +
       (c.steps ? '<h3 class="vl-h3">' + s(beg ? "a1_steps" : "trouble") + '</h3><ol class="vl-ol">' + c.steps.map(function (x) { return "<li>" + txg(x) + "</li>"; }).join("") + "</ol>" : "") +
       (c.fix ? '<h3 class="vl-h3">' + s(beg ? "a1_fix" : "fix") + '</h3><p class="vl-fix">' + txg(c.fix) + "</p>" : "") + lim;
-    // open for a high-priority alarm or a changed limit (the real guidance must not hide); folded under a setting cause
-    var open = sev === "danger" || !!lim || !top;
+    // open only for a changed limit (its set back lives there); the Do now summary above carries the real guidance, so
+    // causes and troubleshooting fold for every other alarm (round 6, U5: no 10-screen card at 390 px)
+    var open = !!lim;
     sheet((a ? tx(a.label) : esc(id)),
       '<div class="vl-acard ' + esc(sev) + '">' + top + now + also + (more ? '<details class="vl-more"' + (open ? " open" : "") + "><summary>" + s("otherCauses") + "</summary>" + more + "</details>" : "") + "</div>",
-      (silenceOk(a, P, id, band) ? '<button type="button" class="sp-btn sec" data-act="vlsil" data-k="' + esc(id) + '">' + s("silence") + "</button>" : '<p class="vl-nosil" role="note">' + (P && P.silenceWhy ? txg(P.silenceWhy) : a && a.silenceWhy ? txg(a.silenceWhy) : s("noSil")) + "</p>") +
+      (silenceOk(a, P, id, band) ? '<p class="vl-note vl-ackwhy">' + s("ackSilWhy") + '</p><button type="button" class="sp-btn sec" data-act="vlsil" data-k="' + esc(id) + '">' + s("silence") + "</button>" : '<p class="vl-nosil" role="note">' + (P && P.silenceWhy ? txg(P.silenceWhy) : a && a.silenceWhy ? txg(a.silenceWhy) : s("noSil")) + '</p><p class="vl-note vl-ackwhy">' + s("ackWhy") + "</p>") +
       '<button type="button" class="sp-btn sec" data-act="vlack" data-k="' + esc(id) + '">' + s("ack") + "</button>", b);
   };
   // Silence is not offered for an emergency or a high-priority patient alarm (S10): the engine's silenceOk when it gives
@@ -2323,16 +2428,27 @@
     if (R.s.t % 60 < sec) checkDrift(r);
     checkArrest(r);
   }
+  // Bagging over (round 6, E9/U5): the engine's readout().bagOver (a bag ended in the last 10 min, SpO2 still under the
+  // goal, FiO2 under 100). One toast when it first appears; the low SpO2 card carries the same line.
+  function bagWatch(r) {
+    var eb = r.bagOver && r.bagOver.text ? r.bagOver : null;
+    if (eb && !R.bagOver) toast("event", tx(eb.text));
+    R.bagOver = !!eb;
+  }
   // flash: a Confirm or a time skip (not a live tick): changed numbers get a brief tint so the eye finds them.
   function refresh(flash) {
     var r = cur();
     updMonitor(r, flash); updVent(r, flash);
     var ov = $("vlOv"); if (ov) ov.innerHTML = ovHtml(r);
-    updAlarms(); updBed();
+    bagWatch(r); updAlarms(); updBed(); syncNext();
     var c = $("vlClock"); if (c) c.textContent = raw("simTime", { x: clockText(R.s.t) });
     var h = $("vlHold"); if (h) { var hh = holdHtml(); if (h.innerHTML !== hh) h.innerHTML = hh; }
     events();
-    if (R.tut) tutWatch(r);
+    if (R.tut) {
+      tutWatch(r);
+      // the coach's live numbers follow every tick and time skip (no lag of one render, round 6)
+      var cn = $("vlCoNums"), sp = R.tut && tutStep(); if (cn && sp) { var nh = coachNums(sp); if (nh && cn.outerHTML !== nh) cn.outerHTML = nh; }
+    }
     return r;
   }
   // Scripted events: a dismissible note, and the drift line names the cause.
@@ -2480,11 +2596,11 @@
     // asked for a bedside action the learner already took after the last event (e.g. suction from the alarm card): done,
     // and its effect is judged from the readout just before that action, so Next never deadlocks (U1)
     var did = sp.do && sp.do.action && R.tut.acted && R.tut.acted[sp.do.action];
-    if (did && did.t >= (R.tut.evT || 0)) { R.tut.ok = true; R.tut.early = did; R.tut.pre = { r: did.r, t: did.t }; }
+    if (did && did.t >= (R.tut.evT || 0)) { R.tut.ok = true; R.tut.early = did; R.tut.pre = { r: did.r, t: did.t }; R.tut.preI = R.tut.i; }
     // an event step: the coach makes it happen now (the scenario timeline is off in a tutorial)
     if (sp.do && sp.do.event) {
       R.tut.evT = R.s.t; R.tut.acted = {};
-      R.tut.pre = { r: cur(), t: R.s.t };
+      R.tut.pre = { r: cur(), t: R.s.t }; R.tut.preI = R.tut.i;
       R.s = E().inject(R.s, sp.do.event, sp.do);
       R.log.push({ t: R.s.t, settings: clone(R.set), readout: cur(), action: "event:" + sp.do.event });
       // repaint at once (the clock may be stopped at Level 1, so no tick would show the alarm the event raises)
@@ -2530,6 +2646,11 @@
   // Live numbers for what the step points at, so the evidence is in the coach, not off screen.
   function coachNums(sp) {
     var r = cur(), keys = (sp.highlight || []).concat(sp.expect ? [expKey(sp)] : []), seen = {}, out = [];
+    // the dial the step asks for, live as it is turned (U2, round 6): the coach shows it even when the dial is off screen
+    if (!R.tut.ok && sp.do && sp.do.key != null && setDef(sp.do.key)) {
+      var dk = sp.do.key, dv = R.pend[dk] != null ? R.pend[dk] : R.set[dk];
+      out.push('<span class="vl-co-dial"><i>' + esc(setLabel(dk)) + "</i> " + esc(setText(dk, dv) + (setUnit(dk) ? " " + setUnit(dk) : "")) + "</span>"); seen[dk] = 1;
+    }
     keys.forEach(function (k) {
       if (seen[k]) return; seen[k] = 1;
       var v = roVal(r, k);
@@ -2537,7 +2658,7 @@
       if (v == null || typeof v === "object") return;
       out.push('<span><i>' + (STR["ro_" + k] ? s("ro_" + k) : esc(NUM_LAB[k] || k)) + "</i> " + esc(fmtN(v)) + "</span>");
     });
-    return out.length ? '<p class="vl-co-nums"><b>' + s("coNow") + "</b> " + out.slice(0, 4).join("") + "</p>" : "";
+    return out.length ? '<p class="vl-co-nums" id="vlCoNums"><b>' + s("coNow") + "</b> " + out.slice(0, 4).join("") + "</p>" : "";
   }
   // On the last step: if the tutorial left the patient outside a target, say so and offer the starting settings back.
   function tutLeftHtml(sp) {
@@ -2550,6 +2671,16 @@
     // the tutorial's own reason why this patient is not fully fixed yet (U11); else the offer to restore
     if (sp && sp.left) return '<p class="vl-co-wait vl-co-left">' + s("tutLeft", { x: bad.join(", ") }) + " " + txg(sp.left) + "</p>";
     return '<p class="vl-co-wait">' + s("tutLeft", { x: bad.join(", ") }) + '</p><button type="button" class="vl-co-link" data-act="vltutrst">' + s("restore") + "</button>";
+  }
+  // U1 (round 6): the learner turned the asked dial to another value: name both values and the presses that close the gap
+  function wrongHtml(sp) {
+    if (R.tut.ok || !sp.do || sp.do.key == null) return "";
+    var k = sp.do.key, d = setDef(k), pend = R.pend[k] != null, v = pend ? R.pend[k] : R.set[k];
+    if (!d) return "";
+    if (String(v) === String(sp.do.to)) return pend ? '<p class="vl-co-wrong" role="status">' + s("pendOk") + "</p>" : "";
+    if (d.options || (!pend && R.tut.tried !== R.tut.i)) return "";
+    var st = coarse(k) || d.step || 1, n = Math.max(1, Math.ceil(Math.abs(+sp.do.to - +v) / st - 1e-9));
+    return '<p class="vl-co-wrong" role="status">' + s("wrongVal", { v: setText(k, v), w: setText(k, sp.do.to), b: raw(+v > +sp.do.to ? "bMinus" : "bPlus"), n: n === 1 ? raw("nOnce") : n === 2 ? raw("nTwice") : raw("nTimes", { n: n }) }) + "</p>";
   }
   function coachHtml() {
     var tu = R.tut.tu, sp = tutStep(), n = tu.steps.length, last = R.tut.i >= n - 1, task = taskText(sp), exp = "";
@@ -2564,7 +2695,7 @@
       var d = dirOf(bv, nv);
       // the evidence names the real direction and the plain label ("peak pressure (Ppeak) went down, 25 to 17.8")
       if (R.tut.saw) exp = '<p class="vl-co-ok">' + (task ? "" : ico("check") || "") + (bv != null && nv != null && d ? s("sawMove", { x: expName(sp), d: raw(d < 0 ? "down" : "up"), a: fmtN(bv), b: fmtN(nv) }) : s("sawIt", { x: expName(sp), d: raw(sp.expect.direction === "down" ? "down" : "up") })) + "</p>";
-      else if (R.tut.flat) exp = '<p class="vl-co-wait">' + s("tutFlat", { x: expName(sp) }) + "</p>";
+      else if (R.tut.flat) exp = '<p class="vl-co-wait">' + s(R.tut.flat === "settled" ? "tutSettled" : "tutFlat", { x: expName(sp) }) + "</p>";
       else if (R.tut.ok) exp = '<p class="vl-co-wait">' + s("waitSee", { x: expName(sp) }) + "</p>";
       else exp = '<p class="vl-co-wait">' + s("tutLook", { x: expName(sp) }) + "</p>";
       if (R.tut.moved) exp += '<p class="vl-co-wait">' + s("tutMoved", { m: R.tut.moved }) + "</p>";
@@ -2574,7 +2705,8 @@
     // Next never looks dead without a reason: while the task waits, the task line itself ("Your turn") describes Next;
     // once it is done and the change is still to come, one line says to move time on. No line repeats another.
     var waitTask = !R.tut.ok && !!task, needTx = !waitTask && !canNext && sp.expect ? s("needWait", { x: expName(sp) }) : "";
-    var need = needTx ? '<p class="vl-co-need" id="vlCoNeed">' + needTx + "</p>" : "";
+    var need = (needTx ? '<p class="vl-co-need" id="vlCoNeed">' + needTx + "</p>" : "") +
+      (waitTask && R.tut.nudge === R.tut.i ? '<p class="vl-co-need" id="vlCoNudge" role="status">' + s("firstTurn") + "</p>" : "");
     // a step about an alarm that the learner has already cleared says so instead of narrating it as still sounding
     var cleared = sp.cleared && sp.alarm && !activeAlarms().some(function (a) { return a.id === sp.alarm; });
     var say = txg(cleared ? sp.cleared : sp.say);
@@ -2583,12 +2715,17 @@
     R.tut.gl = GL.seen; GL.seen = keep;
     // the instruction comes first while it waits (U12): "Your turn" above the explanation, then the explanation
     var taskL = task ? '<p class="vl-co-task"' + (waitTask ? ' id="vlCoNeed"' : "") + "><b>" + s("yourTurn") + "</b> " + task + (R.tut.ok ? ' <span class="vl-co-done">' + (ico("check") || "") + s("doneStep") + "</span>" : "") + "</p>" + show : "";
-    var sayL = '<p class="vl-co-say" id="vlCoSay" tabindex="-1">' + say + "</p>";
+    // Level 1, while the learner's turn waits (U2, round 6): one sentence above the dial work, the rest one tap away, so
+    // the docked coach stays short and the dial stays in the clear area
+    // (only a long rest folds: the More row costs a 44 px line, so a short second sentence stays in place)
+    var one = lv() <= 1 && waitTask ? oneSentence(say) : say, rest = one !== say ? say.slice(one.length).replace(/^\s+/, "") : "";
+    if (rest.length < 70) { one = say; rest = ""; }
+    var sayL = '<p class="vl-co-say" id="vlCoSay" tabindex="-1">' + one + "</p>" + (rest ? '<details class="vl-co-more"><summary>' + s("coMore") + "</summary><p>" + rest + "</p></details>" : "");
     return '<div class="vl-co-h"><button type="button" class="vl-co-min" data-act="vlcomin" aria-expanded="' + !R.coMin + '" aria-controls="vlCoBody"><span class="vl-co-ht"><span class="vl-co-tt">' + tx(tu.title) + '</span><span class="vl-co-st"> · ' + s("stepOf", { i: R.tut.i + 1, n: n }) + "</span>" +
       '</span><span class="vl-co-chev" aria-hidden="true">' + ico("chev") + '</span><span class="sp-sr">' + s(R.coMin ? "coMax" : "coMin") + '</span></button>' + (R.coMin && canNext ? '<button type="button" class="sp-btn pri vl-co-hn" data-act="vltutn">' + s(last ? "done" : "next") + "</button>" : '<button type="button" class="vl-co-x" data-act="vltutx">' + s("exitTut") + "</button>") + "</div>" +
       '<div class="vl-co-bar" aria-hidden="true"><i style="transform:scaleX(' + ((R.tut.i + 1) / n).toFixed(3) + ')"></i></div>' +
       '<div class="vl-co-body" id="vlCoBody">' +
-      (waitTask ? taskL + sayL : sayL + taskL) + exp + coachNums(sp) +
+      (waitTask ? taskL + wrongHtml(sp) + sayL : sayL + taskL) + exp + coachNums(sp) +
       (last ? tutLeftHtml(sp) + (tutChanges(tu) ? '<p class="vl-senior" role="note">' + s("seniorTut") + "</p>" : "") : "") + "</div>" +
       need + '<div class="vl-co-f">' + (task && !R.tut.ok ? '<button type="button" class="sp-btn sec" data-act="vltutdo">' + s("doIt") + "</button>" : "") +
       '<button type="button" class="sp-btn pri' + (canNext ? "" : " is-wait") + '" data-act="vltutn"' + (canNext ? "" : ' data-wait="1" aria-describedby="vlCoNeed"') + ">" + s(last ? "done" : "next") + "</button></div>";
@@ -2628,7 +2765,15 @@
         var sc = q(".sp-scroll"), rb = sc && sc.getBoundingClientRect(), tb = q(".vl-tabbar"), off = tb && tb.offsetHeight && sc && sc.contains(tb) ? tb.offsetHeight : 0;
         var shift = rb ? det.getBoundingClientRect().top - (rb.top + off + 12) : 0;
         scrollTo(rb && tg.getBoundingClientRect().bottom - shift > rb.bottom - 4 ? tg : det, false);
-      } else scrollTo(tg, true);
+      } else {
+        // a dial taller than the clear area below the tab bar lands with its + and minus buttons just above the coach
+        // (round 6, U2): the hand's target is in view, never under the docked coach
+        var sc2 = q(".sp-scroll"), rb2 = sc2 && sc2.getBoundingClientRect(), tb2 = q(".vl-tabbar"), off2 = tb2 && tb2.offsetHeight && sc2 && sc2.contains(tb2) ? tb2.offsetHeight : 0, rt = tg.getBoundingClientRect();
+        if (rb2 && sp.do.key != null && rt.height > rb2.height - off2 - 24) {
+          var top2 = Math.max(0, sc2.scrollTop + rt.bottom - rb2.bottom + 8);
+          try { sc2.scrollTo({ top: top2, behavior: reduced() ? "auto" : "smooth" }); } catch (e) { sc2.scrollTop = top2; }
+        } else scrollTo(tg, true);
+      }
       pulse(tg); var f = tg.querySelector ? tg.querySelector(".vl-dial") || tg : tg; try { f.focus({ preventScroll: true }); } catch (e) {}
     });
   };
@@ -2637,7 +2782,10 @@
   // visible page (the coach is outside the scroller, so the middle is always clear).
   function tutHighlight(still) {
     [].forEach.call(I.root().querySelectorAll(".vl-hl"), function (n) { n.classList.remove("vl-hl"); });
-    var sp = tutStep(); if (!sp || !sp.highlight) return;
+    var sp = tutStep(); if (!sp) return;
+    // the dial the step asks for stays outlined until it is set (U2, round 6); "Show me the control" scrolls to it
+    if (sp.do && sp.do.key != null && !R.tut.ok) { var kn = q('[data-knob="' + sp.do.key + '"]'); if (kn) kn.classList.add("vl-hl"); }
+    if (!sp.highlight) return;
     var first = null;
     sp.highlight.forEach(function (id) { [].forEach.call(I.root().querySelectorAll('[data-vl-id="' + id + '"]'), function (n) { n.classList.add("vl-hl"); first = first || n; }); });
     if (first && !still) { reveal(first); G.requestAnimationFrame(function () { scrollTo(first, true); }); }
@@ -2651,11 +2799,13 @@
     if (sp.do.action && (R.acts || []).some(function (x) { return x.id === sp.do.action && x.t >= (R.tut.t0 || 0); })) R.tut.ok = true;
     if (R.tut.ok && sp.expect && !R.tut.base) { R.tut.base = R.tut.pre || { r: cur(), t: R.s.t }; if (expMet(sp, R.tut.base.r, cur())) R.tut.saw = true; }
     paintCoach();
+    if (R.tut.ok) tutHighlight(true);
   }
   function tutWatch(r) {
     var sp = tutStep(); if (!sp || !sp.expect || R.tut.saw || !R.tut.ok || !R.tut.base) return;
     if (expMet(sp, R.tut.base.r, r)) { R.tut.saw = true; R.tut.flat = false; paintCoach(); say(raw("sawIt", { x: expName(sp), d: raw(sp.expect.direction === "down" ? "down" : "up") })); }
-    else if (!R.tut.flat && R.s.t - R.tut.base.t >= 1800) { R.tut.flat = true; paintCoach(); }
+    // a time step after the right value never leaves the learner on "press +5" (U1, round 6): the number has settled
+    else if (!R.tut.flat && R.s.t - R.tut.base.t >= 300) { R.tut.flat = "settled"; paintCoach(); }
   }
   A.vltutdo = function () {
     var sp = tutStep(); if (!sp || !sp.do) return;
@@ -2676,9 +2826,11 @@
     if (b.getAttribute("data-wait") === "1") {
       // Waiting: point at what to press first instead of doing nothing.
       var sp = tutStep();
+      // a grey Next says why in words, inside the coach (round 6, U1): "First do your turn above"
+      if (!R.tut.ok) { R.tut.nudge = R.tut.i; paintCoach(); }
       if (!R.tut.ok && sp && sp.do && (sp.do.key != null || sp.do.mode || sp.do.action)) A.vltutshow();
       else if (R.tut.ok) { var tg = q('[data-act=vlskip][data-k="300"]'); if (tg) { pulse(tg); try { tg.focus({ preventScroll: true }); } catch (e) {} } }
-      pulse($("vlCoNeed")); say(($("vlCoNeed") || {}).textContent || "");
+      var nd = $("vlCoNudge") || $("vlCoNeed"); pulse(nd); say((nd || {}).textContent || "");
       return;
     }
     if (R.tut.i >= R.tut.tu.steps.length - 1) { prefs().tuts[R.tut.tu.id] = 1; savePrefs(); return tutFinish(); }
@@ -2798,22 +2950,25 @@
     function goal(lab, val, ok, note) { tg.push("<tr><th scope=\"row\">" + lab + "</th><td>" + val + '</td><td class="' + (ok ? "ok" : "bad") + '">' + (note || s(ok ? "met" : "notMet")) + "</td></tr>"); }
     if (g.spo2) {
       var hiS = v.spo2 > g.spo2[1], okS = v.spo2 >= g.spo2[0] && (!hiS || fio2 <= 50);
-      goal("SpO2 " + g.spo2[0] + " to " + g.spo2[1], fmtN(v.spo2), okS, hiS ? s(okS ? "okHigh" : "weanO2") : null);
+      goal("SpO2 " + rng(g.spo2), fmtN(v.spo2), okS, hiS ? s(okS ? "okHigh" : "weanO2") : null);
     }
-    if (g.paco2) goal("PaCO2 " + g.paco2[0] + " to " + g.paco2[1], fmtN(gs.paco2), gs.paco2 >= g.paco2[0] && gs.paco2 <= g.paco2[1]);
-    if (g.ph) goal("pH " + g.ph[0] + " to " + g.ph[1], fmtN(gs.ph), gs.ph >= g.ph[0] && gs.ph <= g.ph[1]);
-    if (g.pplatMax && !SPONT[R.set.mode]) goal("Pplat &le; " + g.pplatMax, fmtN(vv.pplat), vv.pplat <= g.pplatMax);
-    if (g.drivingMax && vv.drivingP != null && !SPONT[R.set.mode]) goal("Driving P &le; " + g.drivingMax, fmtN(vv.drivingP), vv.drivingP <= g.drivingMax);
+    if (g.paco2) goal("PaCO2 " + rng(g.paco2), fmtN(gs.paco2), gs.paco2 >= g.paco2[0] && gs.paco2 <= g.paco2[1]);
+    if (g.ph) goal("pH " + rng(g.ph), fmtN(gs.ph), gs.ph >= g.ph[0] && gs.ph <= g.ph[1]);
+    if (g.pplatMax && !SPONT[R.set.mode]) goal(s("gPlat") + " &le; " + g.pplatMax, fmtN(vv.pplat), vv.pplat <= g.pplatMax);
+    if (g.drivingMax && vv.drivingP != null && !SPONT[R.set.mode]) goal(s("gDrive") + " &le; " + g.drivingMax, fmtN(vv.drivingP), vv.drivingP <= g.drivingMax);
     if (g.vtPerKg && vv.vte) {
       var pk = Math.round(vv.vte / kg * 10) / 10;
-      if (SPONT[R.set.mode] || R.set.mode === "aprv") tg.push('<tr><th scope="row">VT ' + g.vtPerKg[0] + " to " + g.vtPerKg[1] + " mL/kg</th><td>" + fmtN(pk) + '</td><td class="nsc">' + s("ownNotScored") + "</td></tr>");
-      else goal("VT " + g.vtPerKg[0] + " to " + g.vtPerKg[1] + " mL/kg", fmtN(pk), pk >= g.vtPerKg[0] - 0.3 && pk <= g.vtPerKg[1] + 0.3);
+      if (SPONT[R.set.mode] || R.set.mode === "aprv") tg.push('<tr><th scope="row">' + s("gVt") + " " + rng(g.vtPerKg) + " mL/kg</th><td>" + fmtN(pk) + '</td><td class="nsc">' + s("ownNotScored") + "</td></tr>");
+      else goal(s("gVt") + " " + rng(g.vtPerKg) + " mL/kg", fmtN(pk), pk >= g.vtPerKg[0] - 0.3 && pk <= g.vtPerKg[1] + 0.3);
     }
     var ws = sco.worstSpell, wsEn = ws && ws.what ? "Longest time off a goal" : null;
-    var us = unsafeList(sco), notes = (sco.notes || []).filter(function (n) { return !(wsEn && n && n.en && n.en.indexOf(wsEn) === 0); }).map(anyTx).filter(Boolean), good = sco.goodRun || sco.good || sco.goodRunDescription;
+    // every spell off a goal of 5 min or more, in time order (engine r6, E4); the engine's matching note is not repeated
+    var spells = (sco.offGoalSpells || []).filter(function (x) { return x && x.what; });
+    var us = unsafeList(sco), notes = (sco.notes || []).filter(function (n) { return !(wsEn && n && n.en && n.en.indexOf(wsEn) === 0) && !(spells.length && n && n.en && n.en.indexOf("Every time off a goal") === 0); }).map(anyTx).filter(Boolean), good = sco.goodRun || sco.good || sco.goodRunDescription;
     // the engine's "nothing to improve" note (its first note then) leads the debrief instead of hiding in the takeaways
     var noimp = sco.nothingToImprove ? (notes.length ? notes.shift() : s("noImprove")) : null;
-    var worst = ws && ws.what ? '<div class="vl-worst" role="note"><p class="vl-o2h-h"><b>' + s("worstH") + "</b></p><p>" + s("worstLine", { x: t(ws.what), a: ws.fromMin, b: ws.toMin, m: ws.minutes }) + "</p></div>" : "";
+    var worst = spells.length >= 2 ? '<div class="vl-worst" role="note"><p class="vl-o2h-h"><b>' + s("spellsH") + '</b></p><ul class="vl-spells">' + spells.map(function (x) { return "<li>" + s("worstLine", { x: t(x.what), a: x.fromMin, b: x.toMin, m: x.minutes }) + "</li>"; }).join("") + "</ul></div>"
+      : ws && ws.what ? '<div class="vl-worst" role="note"><p class="vl-o2h-h"><b>' + s("worstH") + "</b></p><p>" + s("worstLine", { x: t(ws.what), a: ws.fromMin, b: ws.toMin, m: ws.minutes }) + "</p></div>" : "";
     var key = (sc.debrief || []).map(function (n) { return txg(n); });
     var tone = R.arrest ? "bad" : sco.total >= 80 ? "ok" : sco.total >= 60 ? "mid" : "bad";
     I.paint(I.top(t(STR.backLab), s("debrief"), tx(sc.title), I.langBtn()) +
@@ -2873,11 +3028,11 @@
     var now = wi.now || e.readout(st0, set0), prB = wi.without || wi.before || e.readout(pB, set0), prA = wi["with"] || wi.after || e.readout(pA, set1);
     var reasons = safe(function () { return e.explainDelta(e.abg(pB), e.abg(pA), set0, set1, pB, pA); }, []);
     var chain = compose({ setB: set0, setA: set1, keys: [key], roB: e.readout(st0, set0), roA: e.readout(st0, set1), now: now, prB: prB, prA: prA, reasons: reasons, wiChain: presetChain });
-    return { key: key, from: set0[key], to: to, now: now, before: prB, after: prA, chain: chain };
+    return { key: key, from: set0[key], to: to, now: now, before: prB, after: prA, chain: chain, lung: wi.lung || null };
   }
   // One-sentence verdict (U5, round 4): what the change does in 30 min to oxygen, CO2 (or pH) and blood pressure, judged
   // against this patient's own goals: Helps, Trade off, Makes it worse, or Little change. b = without, a = with.
-  function verdictHtml(b, a, g, withPh) {
+  function verdictHtml(b, a, g, withPh, lung) {
     g = g || {};
     var items = [], good = 0, bad = 0;
     function dist(x, rg) { return x == null || !rg ? 0 : x < rg[0] ? rg[0] - x : x > rg[1] ? x - rg[1] : 0; }
@@ -2896,15 +3051,18 @@
     add(raw("vdMap"), gv(b, "vitals", "map"), gv(a, "vitals", "map"), 3, function (x, y) { return y < x ? (y < 65 || x - y >= 8 ? -1 : 0) : (x < 65 ? 1 : 0); });
     var pl0 = gv(b, "vent", "pplat"), pl1 = gv(a, "vent", "pplat"), pmax = g.pplatMax || 30;
     if (pl1 != null && pl0 != null && pl1 > pmax && pl1 > pl0 + 1) { bad++; items.push(raw("vdPlat", { b: fmtN(pl1) })); }
-    var tag = !items.length ? "vd_none" : bad && good ? "vd_mix" : bad ? "vd_bad" : good ? "vd_good" : "vd_none";
+    // the lung axis (engine r6, E6): a change that is safer for the lung is never only "Makes it worse"; a change that is
+    // harder on the lung is never only "Helps". Its line ("Safer for the lung; CO2 rises to 53: add rate") follows.
+    var la = lung && lung.axis; if (la === "safer") good++; else if (la === "harder") bad++;
+    var tag = !items.length && !la ? "vd_none" : bad && good ? "vd_mix" : bad ? "vd_bad" : good ? "vd_good" : "vd_none";
     var list = items.length > 1 ? items.slice(0, -1).join(", ") + raw("vdAnd") + items[items.length - 1] : items[0];
     var line = items.length ? raw("vdLine", { x: list }) : raw("vdNone");
-    return '<p class="vl-verdict vd-' + tag.slice(3) + '"><b>' + s(tag) + ":</b> " + esc(line) + "</p>";
+    return '<div class="vl-verdict vd-' + tag.slice(3) + '"><p><b>' + s(tag) + ":</b> " + esc(line) + "</p>" + (lung && lung.text ? '<p class="vl-verdict-l">' + tx(lung.text) + "</p>" : "") + "</div>";
   }
   function wiResHtml(res) {
     var u = setUnit(res.key);
     return '<h2 class="vl-h vl-wi-h">' + s("cSet", { x: setLabel(res.key), a: setText(res.key, res.from) + (u ? " " + u : ""), b: setText(res.key, res.to) + (u ? " " + u : "") }) + "</h2>" +
-      verdictHtml(res.before, res.after, (scById(WI.sc) || {}).goals) +
+      verdictHtml(res.before, res.after, (scById(WI.sc) || {}).goals, false, res.lung) +
       '<div class="vl-wi-grid"><div class="vl-card">' + p3Html(res.now, res.before, res.after, [["Pplat", "vent", "pplat", "cmH2O"], ["Driving P", "vent", "drivingP", "cmH2O"], ["Auto-PEEP", "vent", "autoPeep", "cmH2O"]], "vl-ba") +
       '<p class="sp-small">' + s("simulated") + "</p></div>" +
       '<section class="vl-card vl-chainw" aria-labelledby="vlChH"><h2 class="vl-h" id="vlChH">' + s("chain") + '</h2><div id="vlChain"></div></section></div>';
