@@ -292,7 +292,7 @@
 .nrk-root .vb-got:empty, .nrk-root #vbGot:empty { display: none; }
 .nrk-root .vb-gotb, .nrk-root .vb-next { width: 100%; min-height: 48px; }
 .nrk-root .vb-gotb .smd-ico { width: 18px; height: 18px; }
-.nrk-root .vb-gotd { margin: 0; display: flex; align-items: center; gap: 8px; font-size: 14.5px; font-weight: 650; color: var(--nk-ok); }
+.nrk-root .vb-gotd { margin: 0; min-height: 48px; display: flex; align-items: center; gap: 8px; font-size: 14.5px; font-weight: 650; color: var(--nk-ok); }
 .nrk-root .vb-gotd .smd-ico { width: 18px; height: 18px; }
 /* quiz end: review list, right answer, teach-back */
 .nrk-root .vb-qbtns { display: flex; flex-wrap: wrap; gap: 8px; width: 100%; }
@@ -451,4 +451,67 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .nrk-root .vb-tbar i { transition: none; }
+}
+
+/* ================= round 6: bugs only ================= */
+/* B6: one accent. Bridge primary buttons take the lab indigo (the host's brown/yellow is the medium-alarm colour here),
+   and focus rings, pressed segments and links follow it. Text is the plate colour: dark ink on light indigo in the dark
+   theme, near-white on deep indigo in the light theme (both well above 4.5:1). */
+.nrk-root:has(.vb-wrap) { --sp-acc: var(--vl-acc); --sp-acc-soft: var(--vl-acc-soft); --sp-link: var(--vl-acc); --sp-link-line: color-mix(in srgb, var(--vl-acc) 45%, transparent); }
+.nrk-root:has(.vb-wrap) .sp-btn.pri { background: var(--vl-acc); color: var(--vl-plate); border-color: transparent; }
+.nrk-root:has(.vb-wrap) .sp-btn.pri .smd-ico { color: currentColor; }
+.nrk-root .vb-wrap .sp-btn, .nrk-root .vb-dfoot .sp-btn { transition: transform 140ms var(--vl-ease, ease-out); }
+.nrk-root .vb-wrap .sp-btn:active, .nrk-root .vb-dfoot .sp-btn:active { transform: scale(.97); }
+
+/* B3: the screen-map explanation docks at the bottom of the screen while a number is selected (sticky: it rests in
+   the page again once its own place scrolls into view), so a tap near the top is answered in view. */
+.nrk-root .vb-info.vb-sheet { position: sticky; bottom: 0; z-index: 3; max-height: 44vh; max-height: 44dvh; overflow-y: auto; overscroll-behavior: contain;
+  border-color: color-mix(in srgb, var(--vl-acc) 45%, var(--vl-cline)); box-shadow: 0 -12px 28px -12px rgba(0, 0, 0, .45); }
+body:not(.dark):not(.v3-dark) .nrk-root .vb-info.vb-sheet { box-shadow: 0 -12px 28px -14px rgba(60, 45, 20, .3); }
+.nrk-root .vb-info-h .vb-kind { margin-left: auto; }
+.nrk-root .vb-infox { flex: 0 0 44px; width: 44px; height: 44px; margin: -8px -8px -8px 0; display: grid; place-items: center; border: 0; border-radius: 12px;
+  background: transparent; color: var(--sp-mut); cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+.nrk-root .vb-infox .smd-ico { width: 18px; height: 18px; }
+.nrk-root .vb-infox:focus-visible { outline: 2px solid var(--vl-acc); outline-offset: -2px; }
+
+/* B1: the readiness rule, stated on the check page and the 3 am drill page */
+.nrk-root .vb-rule { display: flex; gap: 8px; align-items: flex-start; margin: 8px 0 0; padding: 10px 12px; border-radius: 12px; background: var(--vl-acc-soft);
+  font-size: 14px; line-height: 1.45; font-variant-numeric: tabular-nums; }
+.nrk-root .vb-rule .smd-ico { width: 16px; height: 16px; flex: 0 0 16px; margin-top: 2px; color: var(--vl-acc); }
+.nrk-root .vb-needc { margin-top: 12px; }
+.nrk-root .vb-needc .sp-h2 { margin-top: 0; }
+.nrk-root .vb-need { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 6px; }
+.nrk-root .vb-need > li { display: flex; gap: 8px; align-items: flex-start; font-size: 14.5px; line-height: 1.45; }
+.nrk-root .vb-need > li.ok { color: var(--sp-mut); }
+.nrk-root .vb-needi { flex: 0 0 18px; height: 18px; margin-top: 2px; color: var(--vl-acc); }
+.nrk-root .vb-need > li.ok .vb-needi { color: var(--nk-ok); }
+.nrk-root .vb-needi .smd-ico { width: 18px; height: 18px; }
+.nrk-root .vb-needb { flex: 1 1 auto; width: 100%; min-height: 44px; display: flex; gap: 8px; align-items: center; padding: 8px 10px; border-radius: 12px; border: 1px solid var(--vl-cline);
+  background: var(--vl-card); color: var(--sp-text); font: inherit; font-size: 14.5px; line-height: 1.4; text-align: left; cursor: pointer; touch-action: manipulation; }
+.nrk-root .vb-needb > span:nth-child(2) { flex: 1 1 auto; min-width: 0; }
+.nrk-root .vb-needb .vb-needi { margin-top: 0; }
+.nrk-root .vb-needg { flex: 0 0 16px; color: var(--sp-mut); }
+.nrk-root .vb-needg .smd-ico { width: 16px; height: 16px; }
+.nrk-root .vb-needl { margin: 8px 0 0; }
+.nrk-root .vb-qend > .vb-need { margin: 4px 0 12px; }
+
+/* B4: Next drill names the drill it opens */
+.nrk-root .vb-dfoot .vb-dnext { flex-direction: column; gap: 0; height: auto; min-height: 48px; padding: 4px 10px; line-height: 1.2; }
+.nrk-root .vb-dnext small { display: block; max-width: 100%; font-size: 12px; font-weight: 500; opacity: .85; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* B5: the pocket card's VTe row is a per-patient rule */
+.vb-pcrule { font-weight: 650; }
+.vb-pcnote { margin-top: 4px !important; font-size: 12.5px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .nrk-root .vb-wrap .sp-btn, .nrk-root .vb-dfoot .sp-btn { transition: none; }
+  .nrk-root .vb-wrap .sp-btn:active, .nrk-root .vb-dfoot .sp-btn:active { transform: none; }
+}
+/* Finish gate (web interface guidelines): the docked sheet never hides a focused tile (focus scrolling keeps clear of
+   it), and the new controls have hover and focus states. */
+.nrk-root .sp-scroll:has(.vb-info.vb-sheet) { scroll-padding-bottom: 46vh; scroll-padding-bottom: 46dvh; }
+.nrk-root .vb-needb:focus-visible { outline: 2px solid var(--vl-acc); outline-offset: 2px; }
+@media (hover: hover) and (pointer: fine) {
+  .nrk-root .vb-needb:hover { border-color: color-mix(in srgb, var(--vl-acc) 55%, var(--vl-cline)); }
+  .nrk-root .vb-infox:hover { color: var(--sp-text); background: var(--vl-acc-soft); }
 }

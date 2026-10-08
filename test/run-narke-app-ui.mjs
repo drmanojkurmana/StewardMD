@@ -4,7 +4,7 @@
  * USAGE: node test/run-narke-app-ui.mjs   (PORT=<free port> so it serves this checkout)
  */
 import { spawn } from "node:child_process";
-import { readFileSync } from "node:fs";
+import { readFileSync, rmSync } from "node:fs";
 import { setTimeout as sleep } from "node:timers/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -12,6 +12,7 @@ const HERE = dirname(fileURLToPath(import.meta.url));
 // BASE (a running server) or PORT (the server this harness starts) and CHROME_PORT override the defaults, so parallel sessions do not collide.
 const BASE = (process.env.BASE || "http://localhost:" + (process.env.PORT || 8986) + "/").replace(/\/?$/, "/");
 const PORT = +(process.env.CHROME_PORT || 9388), userDir = (process.env.CLAUDE_JOB_DIR || "/tmp") + "/narke-app-chrome-" + PORT;
+rmSync(userDir, { recursive: true, force: true }); // a fresh profile each run: saved progress from an earlier run must not leak in
 const CHROME = process.env.CHROME || "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 
 let serveProc = null;
@@ -57,12 +58,12 @@ try {
   reqs.length = 0;
   await load(BASE);
   const ENG = /\/(specialty(-(core|data|stage|shell|learn|bank|explore|tools|notes))?\.(js|css)|narke\.(js|css)|narke-models\/)/;
-  ok(reqs.some((u) => /narke-loader\.js\?v=nrk5/.test(u)) && !reqs.some((u) => ENG.test(u)), "app boot loads narke-loader.js and no engine or Narkē file" + (reqs.filter((u) => ENG.test(u)).length ? ": " + reqs.filter((u) => ENG.test(u)).join(", ") : ""));
+  ok(reqs.some((u) => /narke-loader\.js\?v=nrk6/.test(u)) && !reqs.some((u) => ENG.test(u)), "app boot loads narke-loader.js and no engine or Narkē file" + (reqs.filter((u) => ENG.test(u)).length ? ": " + reqs.filter((u) => ENG.test(u)).join(", ") : ""));
   ok(await until(tile, 10000), "ON for all (owner 2026-10-06): the Narkē home tile renders by default");
   await ev(`SMD_openRoute("narke"); return 1;`);
   ok(await until(`return NARKE.isOpen() && !!document.getElementById("smdNarke");`, 20000), "stewardmd://narke opens the Narkē overlay");
   ok(await until(`return !!document.querySelector('#smdNarke [data-act=pick][data-t=learn]');`, 20000), "first open loads Narkē and asks Learn or Test");
-  ok(await ev(`return !!window.SPECIALTY_CORE && document.getElementById("smdNarke").classList.contains("nrk-root");`) === true && reqs.some((u) => /narke\.js\?v=nrk5/.test(u)), "the engine and narke.js loaded on open, at the loader's token, under .nrk-root");
+  ok(await ev(`return !!window.SPECIALTY_CORE && document.getElementById("smdNarke").classList.contains("nrk-root");`) === true && reqs.some((u) => /narke\.js\?v=nrk6/.test(u)), "the engine and narke.js loaded on open, at the loader's token, under .nrk-root");
   ok(/Narkē/.test(await ev(`return document.getElementById("smdNarke").textContent;`)), "the overlay names Narkē");
   await ev(`document.querySelector('#smdNarke [data-act=pick][data-t=test]').click(); return 1;`);
   await sleep(600);

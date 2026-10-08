@@ -9,7 +9,10 @@
    alarm and no hints: what first, what to read next), "Hands-on skills" (bagging with a PEEP valve, reconnecting,
    in-line suction, inspiratory hold, cuff gauge, circuit), "Daily care checks", "Handover" (with a blank alarm note
    template), "Pocket card" (one printable page; the senior's name and number stay on this phone only) and the
-   "First-night check" (12 mixed questions with teach-back; 10 of 12 earns "Ready to start under supervision").
+   "First-night check" (14 mixed questions with teach-back, two of them read a screen; 12 of 14 passes it). The
+   "Ready to start under supervision" badge needs the pass AND the rest of READY_IDS (round 6, B1); the check page and
+   the 3 am drill page state that rule. Every reading page (never, alarms, modes, skills, care, hand, card, glossary)
+   counts as done on "Got it" or once it is scrolled to the end.
    A glossary (with brand synonyms) sits under the rows.
    Content: narke/vent/bridge.json (review: ai_drafted). The lab home lists these through
    NARKE_VENT_BRIDGE.homeBlock(level), the one hook in narke-vent.js. Back returns to the lab home.
@@ -19,12 +22,17 @@
        items: [{ id, done, label: {en, hi}, open }],   // in path order; open() opens that page (a function in the
                                                         // browser once the lab is loaded; the page id string otherwise)
        doneCount, total,                                // items done / items listed
-       firstNightPassed: boolean                        // the First-night check was passed (10 of 12 or better)
+       firstNightPassed: boolean,                       // the First-night check was passed (12 of 14 or better)
+       ready: boolean,                                  // round 6: "Ready to start under supervision" is earned
+       missing: [ids]                                   // round 6: what still stands between the learner and ready,
+                                                        // in path order (a subset of READY_IDS); [] when ready
      }
+     READY_IDS (round 6, B1): check (First-night check passed), drills (all 5 night drills in a safe order), skills,
+     read (Read this screen finished), modes, alarms, screen (both screen-map quizzes finished). ready === !missing.length.
      ids, in order: never, bed, screen, modes, alarms, drills, read, skills, care, hand, card, check.
      It reads only this device's saved progress (localStorage "smd_narke_vbridge"), works before bridge.json has
      loaded, never throws, and returns a fresh object on every call.
-   Node (tests): module.exports = { STR, ITEMS, verdict, order, safeOrder, drillCount, progressOf, cardOrders,
+   Node (tests): module.exports = { STR, ITEMS, READY_IDS, verdict, order, safeOrder, drillCount, progressOf, cardOrders,
    noteText, perm }. */
 (function (G) {
   "use strict";
@@ -151,7 +159,7 @@
     hand: T("Handover to the next doctor", "अगले doctor को handover"), handSub: T("What to say, and an alarm note template", "क्या बताएँ, और alarm note का ढाँचा"),
     never: T("Never change settings alone on day one", "पहले दिन कभी अकेले settings न बदलें"), neverSub: T("What you may do, and when to call", "आप क्या कर सकते हैं, और कब call करें"),
     card: T("Pocket card", "Pocket card (जेब कार्ड)"), cardSub: T("One page to print or keep on your phone", "Print करने या phone पर रखने के लिए एक page"),
-    check: T("First-night check", "पहली रात की जाँच"), checkSub: T("12 mixed questions, pass with 10", "12 मिले जुले प्रश्न, 10 पर pass"),
+    check: T("First-night check", "पहली रात की जाँच"), checkSub: T("14 mixed questions, pass with 12", "14 मिले जुले प्रश्न, 12 पर pass"),
     gloss: T("Glossary", "शब्दकोश"), glossSub: T("Words in plain language, with brand names", "शब्द आसान भाषा में, brand नामों के साथ"),
     backLab: T("Back to the lab", "Lab पर वापस"), backDrills: T("Back to the drills", "Drills पर वापस"), backScreen: T("Back to the screen map", "Screen map पर वापस"),
     loading: T("Loading…", "लोड हो रहा है…"), loadErr: T("This part did not load. Check your connection and try again.", "यह हिस्सा लोड नहीं हुआ। कनेक्शन जाँचें और फिर कोशिश करें।"), retry: T("Try again", "फिर कोशिश करें"),
@@ -183,14 +191,18 @@
     closest: T("Closest in the lab", "Lab में सबसे नज़दीक"),
     yourOrder: T("Your order", "आपका क्रम"), pool: T("Steps", "Steps"), pickHint: T("Tap the steps in the order you would do them. Leave out anything you should not do.", "Steps को उसी क्रम में tap करें जिसमें आप करेंगे। जो नहीं करना चाहिए उसे छोड़ दें।"),
     empty: T("Nothing yet. Tap the first thing you would do.", "अभी कुछ नहीं। जो पहले करेंगे उसे tap करें।"),
-    undo: T("Undo last", "पिछला हटाएँ"), check: T("Check my order", "मेरा क्रम जाँचें"),
+    undo: T("Undo last", "पिछला हटाएँ"), checkOrd: T("Check my order", "मेरा क्रम जाँचें"),
     addAria: T("Add: {x}", "जोड़ें: {x}"), yourStep: T("your step {n}", "आपका step {n}"),
     st_ok: T("In a safe place", "सही जगह पर"), st_okAny: T("Right at any point", "किसी भी समय सही"), st_okOpt: T("Optional, and fine where you put it", "वैकल्पिक, और जहाँ रखा वहाँ ठीक"),
     st_late: T("Do this sooner: before “{x}”", "इसे पहले करें: “{x}” से पहले"), st_trap: T("Leave this out", "इसे छोड़ दें"),
     st_missed: T("Missing: this step is needed", "छूट गया: यह step ज़रूरी है"), st_skipped: T("Rightly left out", "सही छोड़ा"), st_optional: T("Optional: fine to leave out", "वैकल्पिक: छोड़ना ठीक है"),
     allRight: T("Safe order. This is what you do at 3 am.", "सुरक्षित क्रम। रात 3 बजे यही करना है।"),
     optLeft: T("Safe order. You left out an optional step: read why below.", "सुरक्षित क्रम। आपने एक वैकल्पिक step छोड़ा: नीचे कारण पढ़ें।"),
-    someWrong: T("Your {p} steps: {r} in a safe place, {x} to fix. {m} needed steps missed. Compare with the safe order, then try again.", "आपके {p} steps: {r} सही जगह पर, {x} ठीक करने हैं। {m} ज़रूरी steps छूटे। सुरक्षित क्रम से मिलाएँ, फिर दोबारा करें।"),
+    // The drill score, in parts so that 1 reads as one (round 6, B4): "Your 1 step", "1 needed step missed".
+    wrP: T("Your {p} steps:", "आपके {p} steps:"), wrP1: T("Your 1 step:", "आपका 1 step:"),
+    wrX: T("{r} in a safe place, {x} to fix.", "{r} सही जगह पर, {x} ठीक करने हैं।"), wrX1: T("{r} in a safe place, 1 to fix.", "{r} सही जगह पर, 1 ठीक करना है।"),
+    wrM: T("{m} needed steps missed.", "{m} ज़रूरी steps छूटे।"), wrM1: T("1 needed step missed.", "1 ज़रूरी step छूटा।"),
+    wrEnd: T("Compare with the safe order, then try again.", "सुरक्षित क्रम से मिलाएँ, फिर दोबारा करें।"),
     timeUp: T("Time is up.", "समय ख़त्म।"),
     cmpAria: T("Your order next to the safe order", "आपका क्रम, सुरक्षित क्रम के साथ"),
     safeH: T("Safe order", "सुरक्षित क्रम"), sameNote: T("Same number: any order between them.", "एक जैसा number: उनके बीच कोई भी क्रम।"),
@@ -198,6 +210,7 @@
     whyH: T("Why, step by step", "क्यों, step दर step"),
     sbarH: T("What to say to your senior (SBAR)", "Senior से क्या कहें (SBAR)"),
     nextDrill: T("Next drill", "अगली drill"), done: T("Done", "पूरा"),
+    drillsRule: T("Night drills count when all {m} are in a safe order. {n} of {m} so far.", "रात की drill तब पूरी होती हैं जब सभी {m} सुरक्षित क्रम में हों। अब तक {m} में से {n}।"),
     neverRow: T("Never change settings alone on day one", "पहले दिन कभी अकेले settings न बदलें"),
     mayH: T("You may", "आप कर सकते हैं"), mayNotH: T("Not alone, call first", "अकेले नहीं, पहले call करें"), callH: T("Call your senior now if", "Senior को अभी call करें अगर"),
     toDrills: T("Practise the 3 am drill", "रात 3 बजे की drill का अभ्यास करें"), toSilence: T("Practise: it keeps alarming", "अभ्यास: alarm बार बार बज रहा है"),
@@ -208,7 +221,15 @@
     screenT: T("Real ventilator screen", "असली ventilator screen"), screenS: T("SET, MEASURED, alarms and limits", "SET, MEASURED, alarms और limits"),
     neverT: T("Never alone on day one", "पहले दिन अकेले नहीं"), modesT: T("Mode names", "Mode के नाम"),
     careT: T("Daily care checks", "रोज़ की care जाँच"), handT: T("Handover", "Handover"), handS: T("To the next doctor", "अगले doctor को"),
-    got: T("Got it: mark as done", "समझ गया: पूरा करें"), gotDone: T("Marked done", "पूरा किया"),
+    got: T("Got it: mark as done", "समझ गया: पूरा करें"), gotDone: T("Marked done", "पूरा किया"), readEnd: T("Read to the end: marked done", "अंत तक पढ़ा: पूरा किया"),
+    // readiness (round 6, B1): what the "Ready to start under supervision" badge needs
+    needH: T("The badge needs all of these", "Badge के लिए ये सब चाहिए"), needLeft: T("Still to do: {n}", "अभी बाकी: {n}"),
+    passedNot: T("Passed. The badge also needs:", "Pass। Badge के लिए यह भी चाहिए:"),
+    need_screen: T("Screen map: both quizzes finished", "असली screen: दोनों quiz पूरी"), need_modes: T("Mode names", "Mode के नाम"),
+    need_alarms: T("Alarm messages", "Alarm messages का मतलब"), need_drills: T("Night drills: all 5 in a safe order", "रात की सभी 5 drill सुरक्षित क्रम में"),
+    need_read: T("Read this screen: every panel", "यह screen पढ़ें: हर panel"), need_skills: T("Hands-on skills", "हाथ से करने वाले skills"),
+    need_check: T("First-night check: {p} of {m} or better", "पहली रात की जाँच: {m} में से {p} या ज़्यादा"),
+    infoX: T("Close the explanation", "समझाना बंद करें"),
     nextUp: T("Next: {x}", "अगला: {x}"), toLab: T("Back to the lab", "Lab पर वापस"),
     // alarm map
     styleShow: T("Show the words on", "शब्द दिखाएँ"),
@@ -242,6 +263,8 @@
     { id: "read", label: "read", icon: "pulse" }, { id: "skills", label: "skills", icon: "sliders" }, { id: "care", label: "care", icon: "rounds" },
     { id: "hand", label: "hand", icon: "note" }, { id: "card", label: "card", icon: "print" }, { id: "check", label: "check", icon: "award" }
   ];
+  // What the "Ready to start under supervision" badge needs (round 6, B1), in path order.
+  var READY_IDS = ["screen", "modes", "alarms", "drills", "read", "skills", "check"];
   var PK = "smd_narke_vbridge", CK_KEY = "smd_narke_vcard";
   // Progress from saved prefs: p.done[id] is set by each page when its own done rule is met.
   function progressOf(p, opener) {
@@ -251,14 +274,15 @@
       var o = opener && opener[x.id];
       return { id: x.id, done: !!dn[x.id], label: { en: STR[x.label].en, hi: STR[x.label].hi }, open: o || x.id };
     });
-    var n = items.filter(function (x) { return x.done; }).length;
-    return { items: items, doneCount: n, total: items.length, firstNightPassed: !!(p.checkPass && dn.check) };
+    var n = items.filter(function (x) { return x.done; }).length, passed = !!(p.checkPass && dn.check);
+    var missing = READY_IDS.filter(function (id) { return id === "check" ? !passed : !dn[id]; });
+    return { items: items, doneCount: n, total: items.length, firstNightPassed: passed, ready: !missing.length, missing: missing };
   }
   var OPENER = null;
   function readPrefs() { try { var o = JSON.parse(G.localStorage.getItem(PK)); return o && typeof o === "object" ? o : {}; } catch (e) { return {}; } }
   function progress() { try { return progressOf(readPrefs(), OPENER); } catch (e) { return progressOf({}, null); } }
 
-  var PURE = { STR: STR, ITEMS: ITEMS, verdict: verdict, order: order, safeOrder: safeOrder, drillCount: drillCount, progressOf: progressOf, cardOrders: cardOrders, noteText: noteText, perm: perm };
+  var PURE = { STR: STR, ITEMS: ITEMS, READY_IDS: READY_IDS, verdict: verdict, order: order, safeOrder: safeOrder, drillCount: drillCount, progressOf: progressOf, cardOrders: cardOrders, noteText: noteText, perm: perm };
   if (typeof module !== "undefined" && module.exports) { module.exports = PURE; return; }
   G.NARKE_VENT_BRIDGE = PURE;
   PURE.progress = progress;
@@ -268,6 +292,8 @@
   if (!host || !host._internal || !host._ventLab || !G.document) return;
   var I = host._internal, st = host._st, esc = I.esc, A = I.ACTIONS;
   var B = { data: null, ready: null, err: null, p: null };
+  // Round 6 (B2): a per-visit salt, so the answer order changes between visits too (stable within one attempt).
+  var SALT = ":" + Math.floor(Math.random() * 1e6);
 
   function L() { return I.lang(); }
   function t(o) { return o == null ? "" : typeof o === "string" ? o : (o[L()] || o.en || ""); }
@@ -319,11 +345,40 @@
     return null;
   }
   // The end of a page: "Got it" marks it done (pages with no quiz or ticks), then a next step.
-  function gotBlock(id) {
+  // Round 6 (B4): the next page is always offered, so no page is a dead end.
+  function gotBlock(id, how) {
     var nx = nextAfter(id), d = isDone(id);
-    return '<div class="vb-got" id="vbGot">' + (d ? '<p class="vb-gotd" role="status"><span aria-hidden="true">' + ico("check") + "</span>" + s("gotDone") + "</p>"
+    return '<div class="vb-got" id="vbGot" data-k="' + id + '">' + (d ? '<p class="vb-gotd" role="status"><span aria-hidden="true">' + ico("check") + "</span>" + s(how || "gotDone") + "</p>"
       : '<button type="button" class="sp-btn pri vb-gotb" data-act="vbgot" data-k="' + id + '">' + ico("check") + " " + s("got") + "</button>") +
-      (d && nx ? '<button type="button" class="sp-btn sec vb-next" data-act="vbopen" data-k="' + nx.id + '">' + s("nextUp", { x: t(STR[nx.label]) }) + "</button>" : "") + "</div>";
+      (nx ? '<button type="button" class="sp-btn ' + (d ? "pri" : "sec") + ' vb-next" data-act="vbopen" data-k="' + nx.id + '">' + s("nextUp", { x: t(STR[nx.label]) }) + "</button>" : "") + "</div>";
+  }
+  function refreshGot(id, how) {
+    var gb = q("#vbGot"); if (!gb || gb.getAttribute("data-k") !== id) return;
+    var had = gb.contains(G.document.activeElement);
+    gb.outerHTML = gotBlock(id, how);
+    if (had) focus("#vbGot .vb-next, #vbGot .vb-gotd");
+  }
+  // Round 6 (B1): a reading page counts as done once its end has been scrolled into view (a page that fits the
+  // screen counts at once). Checks on scroll (a passive listener; an IntersectionObserver missed a filter-then-scroll in
+  // one frame); stops when the page is left or done. A page that opened long counts only once it was scrolled, so a
+  // glossary search that shrinks the page does not count.
+  function endWatch(id) {
+    var sc = q(".sp-scroll"), view = st.view;
+    if (isDone(id) || !sc || !q("#vbGot")) return;
+    var long = sc.scrollHeight > sc.clientHeight + 8;
+    function off() { sc.removeEventListener("scroll", chk); }
+    function chk() {
+      if (isDone(id) || st.view !== view) return off();
+      var end = q("#vbGot"); if (!end) return;
+      if (long ? sc.scrollTop < 8 : sc.scrollHeight > sc.clientHeight + 8) return;
+      var r = end.getBoundingClientRect(), b = sc.getBoundingClientRect();
+      if (r.top + Math.min(r.height, 48) / 2 > b.bottom) return;
+      off(); setDone(id, true); refreshGot(id, "readEnd");
+    }
+    sc.addEventListener("scroll", chk, { passive: true });
+    var prev = st.onLeave;
+    st.onLeave = function () { off(); if (prev) prev(); };
+    chk();
   }
   A.vbgot = function (b) {
     var id = b.getAttribute("data-k"); setDone(id, true); I.haptic("success");
@@ -353,10 +408,10 @@
       var dn = isDone(x.id), ln = x.id === "check" && pr.firstNightPassed ? '<span class="vb-badge-s">' + ico("award") + s("passH") + "</span>"
         : dn ? '<span class="vl-solved">' + ico("check") + s("done") + "</span>" : LINE[x.id] ? LINE[x.id]() : "";
       return I.row("vbopen", ' data-k="' + x.id + '"', I.tile(x.icon), s(x.label), s(x.label + "Sub"), ln);
-    }).join("") + I.row("vbopen", ' data-k="gloss"', I.tile("book"), s("gloss"), s("glossSub"), "");
+    }).join("") + I.row("vbopen", ' data-k="gloss"', I.tile("book"), s("gloss"), s("glossSub"), isDone("gloss") ? '<span class="vl-solved">' + ico("check") + s("done") + "</span>" : "");
     var bar = '<div class="vb-hprog"><p class="sp-small" id="vbHomeProg">' + s("homeProg", { n: I.fmt(pr.doneCount), m: I.fmt(pr.total) }) + "</p>" +
       '<span class="vb-bar" aria-hidden="true"><i style="transform:scaleX(' + (pr.doneCount / pr.total).toFixed(3) + ')"></i></span></div>';
-    var badge = pr.firstNightPassed && B.data ? '<p class="vb-badge" role="note"><span aria-hidden="true">' + ico("award") + "</span><span><b>" + tx((D().check || {}).badge) + "</b> " + tx((D().check || {}).badgeNote) + "</span></p>" : "";
+    var badge = pr.ready && B.data ? '<p class="vb-badge" role="note"><span aria-hidden="true">' + ico("award") + "</span><span><b>" + tx((D().check || {}).badge) + "</b> " + tx((D().check || {}).badgeNote) + "</span></p>" : "";
     return '<h2 class="sp-h2" id="vbHomeH">' + s("homeH") + '</h2><p class="vl-lvintro vb-homenote">' + s("homeNote") + "</p>" + bar + badge +
       '<ul class="sp-rows vb-rows" aria-labelledby="vbHomeH">' + rows + "</ul>" +
       (B.data ? '<p class="vb-review" role="note">' + tx(D().reviewNote) + "</p>" : "");
@@ -405,7 +460,7 @@
         (z.o.bestKey ? '<p class="sp-small">' + s("best", { n: I.fmt(prefs()[z.o.bestKey] || 0), m: I.fmt(n) }) + "</p>" : "") + rev + extra +
         '<div class="vb-qbtns"><button type="button" class="sp-btn sec" data-act="vbqagain" data-z="' + z.id + '">' + s(z.o.againKey || "again") + "</button>" + (z.o.next ? nextBtn(z.o.next) : "") + "</div></div>";
     }
-    var Q = qs[z.qi], ans = z.ans, pm = perm((Q.options || []).length, z.id + z.qi + ":" + z.tries);
+    var Q = qs[z.qi], ans = z.ans, pm = perm((Q.options || []).length, z.id + z.qi + ":" + z.tries + SALT);
     var opts = '<div class="sp-answers' + (ans != null ? " done" : "") + '" role="group" aria-labelledby="vbQ' + z.id + '">' + pm.map(function (j, pos) {
       var o = Q.options[j], state = ans == null ? "" : j === Q.answer ? "right" : j === ans ? "wrong" : "dim";
       return '<button type="button" class="sp-ans" data-act="vbqans" data-z="' + z.id + '" data-o="' + j + '"' + (state ? ' data-state="' + state + '" aria-disabled="true"' : "") + '><span class="k" aria-hidden="true">' + (state === "right" ? ico("check") || "A" : state === "wrong" ? ico("close") || "x" : "ABCD".charAt(pos)) + "</span>" + tx(o) + "</button>";
@@ -461,6 +516,7 @@
         '<p class="vl-lede vb-lede">' + tx(d.intro) + "</p>" + ckProg() + groups +
         '<div class="vl-card vb-done' + (all ? " on" : "") + '" id="vbBedDone" role="status"' + (all ? "" : " hidden") + "><p>" + (ico("check") ? '<span aria-hidden="true">' + ico("check") + "</span>" : "") + "<span>" + tx(d.done) + "</span></p></div>" +
         '<button type="button" class="sp-btn sec vb-clear" data-act="vbclear">' + s("clear") + "</button>" + (key === "care" ? gotBlock("care") : '<div id="vbGot">' + (all ? nextBtn("bed") : "") + "</div>"), focusSel);
+      if (key === "care") endWatch("care");
     });
   }
   OPEN.bed = function () { checklist("bed", s("bed"), s("bedS")); };
@@ -479,7 +535,7 @@
     if (dn) { if (n === m) { dn.hidden = false; G.requestAnimationFrame(function () { dn.classList.add("on"); }); if (on) I.haptic("success"); } else { dn.classList.remove("on"); dn.hidden = true; } }
     var gb = q("#vbGot");
     if (gb && CK === "bed") gb.innerHTML = n === m ? nextBtn("bed") : "";
-    if (gb && CK === "care" && n === m && on) gb.outerHTML = gotBlock("care");
+    if (CK === "care" && n === m && on) refreshGot("care");
   };
   A.vbclear = function () { prefs()[CK] = {}; if (CK === "bed") delete prefs().done.bed; save(); if (CK === "care") checklist("care", s("careT"), s("careSub"), ".vb-chk"); else checklist("bed", s("bed"), s("bedS"), ".vb-chk"); };
 
@@ -552,7 +608,7 @@
     var x = SC.sel && tiles()[SC.sel];
     if (!x) return '<p class="vb-hint">' + s("tapHint") + "</p>";
     var k = kindOf(x), lb = lab(x, SC.style), v = val(x, SC.style);
-    return '<div class="vb-info-h"><b>' + tx(x.name) + '</b><span class="vb-kind vb-' + k + '">' + s(KTAG[k]) + "</span></div>" +
+    return '<div class="vb-info-h"><b>' + tx(x.name) + '</b><span class="vb-kind vb-' + k + '">' + s(KTAG[k]) + '</span><button type="button" class="vb-infox" data-act="vbinfox" aria-label="' + s("infoX") + '">' + ico("close") + "</button></div>" +
       '<p class="vb-info-l"><span translate="no">' + esc(lb) + "</span>" + (v && v !== lb ? " " + esc(v) + (x.unit ? " " + esc(x.unit) : "") : "") + " · " + s(KLAB[k]) + "</p>" +
       '<h3 class="vl-h3">' + s("whatH") + "</h3><p>" + tx(x.what) + '</p><h3 class="vl-h3">' + s("watchH") + "</h3><p>" + tx(x.watch) + "</p>";
   }
@@ -582,7 +638,7 @@
         '<div id="vbPageSeg">' + pageSeg() + "</div>" +
         '<p class="vb-legend"><span><span class="vb-kind vb-set">' + s("set") + "</span> " + s("legendSet") + '</span><span><span class="vb-kind vb-meas">' + s("meas") + "</span> " + s("legendMeas") + "</span></p>" +
         '<div id="vbPanel">' + panel({ style: SC.style, page: SC.page, act: "vbtile", sel: SC.sel }) + "</div>" +
-        '<div class="vl-card vb-info" id="vbInfo" aria-live="polite">' + infoHtml() + "</div>" +
+        '<div class="vl-card vb-info' + (SC.sel ? " vb-sheet" : "") + '" id="vbInfo" aria-live="polite">' + infoHtml() + "</div>" +
         '<p class="sp-small vb-opened" id="vbOpened">' + openedLine() + "</p>" +
         '<button type="button" class="sp-btn pri vb-tofind" data-act="vbopen" data-k="find">' + s("findGo") + "</button>" +
         labelsHtml() + '<p class="vb-brand">' + tx(D().brandNote) + "</p>" +
@@ -614,13 +670,18 @@
     [].forEach.call(I.root().querySelectorAll("[data-act=vbtile]"), function (x) { var on = x.getAttribute("data-k") === k; x.setAttribute("aria-pressed", String(on)); if (on) x.classList.add("seen"); });
     var inf = q("#vbInfo"), op = q("#vbOpened");
     if (inf) {
-      inf.innerHTML = infoHtml();
+      // Round 6 (B3): the explanation docks at the bottom of the screen (sticky) so it is in view at once, and the
+      // panel the finger is on does not move. It sits back in the page once its own place scrolls into view.
+      inf.innerHTML = infoHtml(); inf.classList.add("vb-sheet"); inf.scrollTop = 0;
       if (!reduced()) { inf.classList.remove("vb-in"); void inf.offsetWidth; inf.classList.add("vb-in"); }
-      // Keep the explanation in view on a phone without moving the panel the finger is on.
-      var sc = q(".sp-scroll");
-      if (sc) { var r = inf.getBoundingClientRect(), bb = sc.getBoundingClientRect(); if (r.top > bb.bottom - 80) try { sc.scrollTo({ top: sc.scrollTop + r.top - bb.bottom + Math.min(r.height, bb.height * 0.45), behavior: reduced() ? "auto" : "smooth" }); } catch (e) {} }
     }
     if (op) op.innerHTML = openedLine();
+  };
+  A.vbinfox = function () {
+    var k = SC.sel, inf = q("#vbInfo"); SC.sel = null;
+    [].forEach.call(I.root().querySelectorAll("[data-act=vbtile]"), function (x) { x.setAttribute("aria-pressed", "false"); });
+    if (inf) { inf.classList.remove("vb-sheet", "vb-in"); inf.innerHTML = infoHtml(); }
+    if (k) focus('[data-act=vbtile][data-k="' + k + '"]');
   };
 
   /* ---------- find it on the screen: a tap-the-number quiz across the three styles ---------- */
@@ -684,7 +745,7 @@
     var e = (G.NARKE_MODELS || {})["vent-engine"], x = e && e.MODES && e.MODES[m];
     return x && x.title ? tx(x.title) : esc(String(m).toUpperCase());
   }
-  var ZMD = quizDef("md", function () { return (D().modes || {}).quiz || []; }, "vbQuizM", { bestKey: "modesBest", next: "modes", onFinish: function () { setDone("modes", true); } });
+  var ZMD = quizDef("md", function () { return (D().modes || {}).quiz || []; }, "vbQuizM", { bestKey: "modesBest", onFinish: function () { setDone("modes", true); refreshGot("modes"); } });
   function chips(arr, cls) { return '<ul class="vb-chips ' + cls + '">' + (arr || []).map(function (x) { return '<li translate="no">' + tx(x) + "</li>"; }).join("") + "</ul>"; }
   function modes(focusSel) {
     withData("vb-modes", modes, s("modesT"), s("modesSub"), function () {
@@ -698,7 +759,8 @@
             '<div class="vb-ml"><span>' + s("closest") + '</span><ul class="vb-mlabs">' + labs.map(function (m) { return "<li>" + engMode(m) + "</li>"; }).join("") + "</ul></div>" +
             '<p class="vb-never"><span aria-hidden="true">' + ico("lock") + "</span>" + tx(d.never) + "</p></li>";
         }).join("") + "</ul>" +
-        ((d.quiz || []).length ? '<h2 class="sp-h2">' + tx(d.quizH) + '</h2><div class="vb-quiz" id="vbQuizM">' + quizHtml(ZMD) + "</div>" : ""), focusSel);
+        ((d.quiz || []).length ? '<h2 class="sp-h2">' + tx(d.quizH) + '</h2><div class="vb-quiz" id="vbQuizM">' + quizHtml(ZMD) + "</div>" : "") + gotBlock("modes"), focusSel);
+      endWatch("modes");
     });
   }
   OPEN.modes = function () { qReset(ZMD); modes(); };
@@ -716,6 +778,7 @@
       screen("vb-alarms", alarms, "alarms", s("alarms"), s("alarmsSub"),
         '<p class="vl-lede vb-lede">' + tx(d.intro) + "</p>" + legend + '<p class="sp-small vb-showon">' + s("styleShow") + "</p>" + '<div id="vbAlSeg">' + styleSeg("vbalstyle", AL.style) + "</div>" +
         '<div id="vbAlList">' + list + "</div>" + gotBlock("alarms"), focusSel);
+      endWatch("alarms");
     });
   }
   OPEN.alarms = function () { alarms(); };
@@ -735,7 +798,9 @@
         return I.row("vbdrill", ' data-k="' + esc(x.id) + '"', I.tile("siren"), tx(x.title), tx(x.scene), p[x.id] ? '<span class="vl-solved">' + ico("check") + s("done") + "</span>" : "");
       }).join("") + I.row("vbopen", ' data-k="read"', I.tile("pulse"), s("read"), s("readSub"), isDone("read") ? '<span class="vl-solved">' + ico("check") + s("done") + "</span>" : "");
       var tm = segs("vbtimed", "data-v", [{ id: "0", name: s("untimed") }, { id: "1", name: s("timed") }], prefs().timed ? "1" : "0", s("timerH"));
+      var nSafe = drillList().filter(function (x) { return p[x.id]; }).length;
       screen("vb-drills", drills, "drills", s("drills"), s("drillsSub"), '<p class="vl-lede vb-lede">' + tx(d.intro) + "</p>" +
+        '<p class="vb-rule" id="vbDrRule"><span aria-hidden="true">' + ico(nSafe === drillList().length ? "check" : "info") + "</span><span>" + s("drillsRule", { n: I.fmt(nSafe), m: I.fmt(drillList().length) }) + "</span></p>" +
         '<h2 class="sp-h2" id="vbTimH">' + s("timerH") + "</h2>" + tm + (prefs().timed ? '<p class="sp-small vb-tnote">' + s("timedNote") + "</p>" : "") +
         '<ul class="sp-rows vb-drows">' + rows + "</ul>", focusSel);
     });
@@ -767,6 +832,16 @@
     return '<div class="vb-cmp" role="group" aria-label="' + s("cmpAria") + '"><section><h3 class="vb-ch">' + s("yourOrder") + '</h3><ol class="vb-cl">' + (mine || '<li class="vb-c"><span class="vb-ct">' + s("empty") + "</span></li>") + "</ol></section>" +
       '<section><h3 class="vb-ch">' + s("safeH") + '</h3><ol class="vb-cl">' + safe + "</ol>" + (shared ? '<p class="vb-cnote">' + s("sameNote") + "</p>" : "") + "</section></div>";
   }
+  function wrongLine(c) {
+    var v = { p: I.fmt(c.picked), r: I.fmt(c.right), x: I.fmt(c.fix), m: I.fmt(c.missed) };
+    return s(c.picked === 1 ? "wrP1" : "wrP", v) + " " + s(c.fix === 1 ? "wrX1" : "wrX", v) + (c.missed ? " " + s(c.missed === 1 ? "wrM1" : "wrM", v) : "") + " " + s("wrEnd");
+  }
+  // The next drill not yet in a safe order, after this one in list order and wrapping round (round 6, B4).
+  function nextDrill(cur) {
+    var l = drillList(), i = l.indexOf(cur), k, x;
+    for (k = 1; k < l.length; k++) { x = l[(i + k + l.length) % l.length]; if (!prefs().drills[x.id]) return x; }
+    return null;
+  }
   function stopTimer() { if (DR.timer) { G.clearInterval(DR.timer); DR.timer = null; } }
   function secsLeft() { return Math.max(0, Math.ceil((DR.end - Date.now()) / 1000)); }
   function tick() {
@@ -792,7 +867,7 @@
     } else {
       var cls = res.ok ? (res.optMissed ? "vb-neutral" : "ok") : "bad", c = drillCount(res);
       body = '<p class="sp-verdict ' + cls + ' vb-dv" tabindex="-1">' + (ico(res.ok && !res.optMissed ? "check" : "info") || "") + "<span>" + (DR.timeUp ? s("timeUp") + " " : "") +
-        (res.ok ? s(res.optMissed ? "optLeft" : "allRight") : s("someWrong", { p: I.fmt(c.picked), r: I.fmt(c.right), x: I.fmt(c.fix), m: I.fmt(c.missed) })) + "</span></p>" +
+        (res.ok ? s(res.optMissed ? "optLeft" : "allRight") : wrongLine(c)) + "</span></p>" +
         compare(dr, res) +
         '<h2 class="sp-h2">' + s("whyH") + '</h2><ol class="vb-res">' + res.items.map(function (it) {
           var x = stepBy(dr, it.id), good = it.state === "ok" || it.state === "skipped" || it.state === "optional";
@@ -803,9 +878,10 @@
           return '<div><dt><span class="vb-sb">' + k.toUpperCase() + "</span></dt><dd>" + tx((dr.sbar || {})[k]) + "</dd></div>";
         }).join("") + "</dl></div>";
     }
-    var list = drillList(), i = list.indexOf(dr), footer;
-    if (!res) footer = '<button type="button" class="sp-btn sec" data-act="vbundo"' + (DR.picked.length ? "" : ' disabled aria-disabled="true"') + ">" + s("undo") + '</button><button type="button" class="sp-btn pri" data-act="vbcheck"' + (DR.picked.length ? "" : ' disabled aria-disabled="true"') + ">" + s("check") + "</button>";
-    else footer = '<button type="button" class="sp-btn sec" data-act="vbdagain">' + s("again") + "</button>" + (i < list.length - 1 ? '<button type="button" class="sp-btn pri" data-act="vbdnext">' + s("nextDrill") + "</button>" : '<button type="button" class="sp-btn pri" data-act="vbopen" data-k="read">' + s("read") + "</button>");
+    var nd = res ? nextDrill(dr) : null, footer;
+    if (!res) footer = '<button type="button" class="sp-btn sec" data-act="vbundo"' + (DR.picked.length ? "" : ' disabled aria-disabled="true"') + ">" + s("undo") + '</button><button type="button" class="sp-btn pri" data-act="vbcheck"' + (DR.picked.length ? "" : ' disabled aria-disabled="true"') + ">" + s("checkOrd") + "</button>";
+    else footer = '<button type="button" class="sp-btn sec" data-act="vbdagain">' + s("again") + "</button>" + (nd ? '<button type="button" class="sp-btn pri vb-dnext" data-act="vbdnext" data-k="' + esc(nd.id) + '"><span>' + s("nextDrill") + '</span><small>' + tx(nd.title) + "</small></button>"
+      : nextBtn("drills").replace("sp-btn pri vb-next", "sp-btn pri"));
     I.leave();
     st.view = "vb-drill"; st.again = drill;
     st.onBack = function () { backDrills(); return true; };
@@ -841,7 +917,7 @@
   A.vbcheck = function () { if (!DR.picked.length) return; checkNow(); };
   // Try again reshuffles the pool, so the order is learned, not the positions.
   A.vbdagain = function () { DR.picked = []; DR.res = null; DR.tries++; startClock(); drill(".vb-step"); };
-  A.vbdnext = function () { var l = drillList(), i = l.indexOf(curDrill()); if (i >= 0 && i < l.length - 1) openDrill(l[i + 1].id); };
+  A.vbdnext = function (b) { var id = b.getAttribute("data-k"); if (drillList().some(function (x) { return x.id === id; })) openDrill(id); };
 
   /* ---------- read this screen: a full panel with an alarm, no hints ---------- */
   var RD = { i: 0, a1: null, a2: null, right: 0, fin: false, log: [] };
@@ -862,7 +938,7 @@
     }
     var marks = {}, a2ok = RD.a2 && R.q2.targets.indexOf(RD.a2) >= 0;
     if (RD.a2) { R.q2.targets.forEach(function (k) { marks[k] = "right"; }); if (!a2ok) marks[RD.a2] = "wrong"; }
-    var Q1 = R.q1, a1 = RD.a1, pm = perm(Q1.options.length, R.id + ":" + RD.tries);
+    var Q1 = R.q1, a1 = RD.a1, pm = perm(Q1.options.length, R.id + ":" + RD.tries + SALT);
     var q1 = '<h3 class="sp-h3 vl-q" id="vbRQ1">' + tx(Q1.q) + '</h3><div class="sp-answers' + (a1 != null ? " done" : "") + '" role="group" aria-labelledby="vbRQ1">' + pm.map(function (j, pos) {
       var stt = a1 == null ? "" : j === Q1.answer ? "right" : j === a1 ? "wrong" : "dim";
       return '<button type="button" class="sp-ans" data-act="vbr1" data-o="' + j + '"' + (stt ? ' data-state="' + stt + '" aria-disabled="true"' : "") + '><span class="k" aria-hidden="true">' + (stt === "right" ? ico("check") : stt === "wrong" ? ico("close") : "ABCD".charAt(pos)) + "</span>" + tx(Q1.options[j]) + "</button>";
@@ -916,7 +992,8 @@
             '<p class="vb-skw"><span class="vb-mwk">' + s("whenH") + "</span>" + tx(x.when) + '</p><ol class="vb-sks">' + (x.steps || []).map(function (y) { return "<li>" + tx(y) + "</li>"; }).join("") + "</ol>" +
             (x.warn ? '<p class="vb-skwarn"><span aria-hidden="true">' + ico("info") + "</span>" + tx(x.warn) + "</p>" : "") +
             '<button type="button" class="vb-chk vb-sktick" data-act="vbskill" data-k="' + esc(x.id) + '" aria-pressed="' + on + '"><span class="vb-box" aria-hidden="true">' + ico("check") + '</span><span class="vb-chk-b"><b>' + s("skillTick") + "</b></span></button></li>";
-        }).join("") + '</ol><div id="vbGot">' + (isDone("skills") ? nextBtn("skills") : "") + "</div>", focusSel);
+        }).join("") + "</ol>" + gotBlock("skills"), focusSel);
+      endWatch("skills");
     });
   }
   OPEN.skills = function () { skillsScr(); };
@@ -924,10 +1001,11 @@
     var k = b.getAttribute("data-k"), p = prefs().skills, on = !p[k];
     if (on) p[k] = 1; else delete p[k];
     var all = skillList().every(function (x) { return p[x.id]; });
-    if (all) prefs().done.skills = 1; else delete prefs().done.skills;
+    var was = isDone("skills");
+    if (all) prefs().done.skills = 1;
     save(); b.setAttribute("aria-pressed", String(on)); if (on) I.haptic(all ? "success" : "light");
     var n = q("#vbSkN"); if (n) n.innerHTML = LINE.skills();
-    var gb = q("#vbGot"); if (gb) gb.innerHTML = all ? nextBtn("skills") : "";
+    if (all && !was) refreshGot("skills");
   };
 
   /* ---------- handover to the next doctor, with a blank alarm note template ---------- */
@@ -944,6 +1022,7 @@
           nt.fields.map(function (f) { return "<div><dt>" + tx(f) + '</dt><dd aria-hidden="true"></dd></div>'; }).join("") + "</dl>" +
           '<button type="button" class="sp-btn sec vb-copy" data-act="vbcopy">' + ico("copy") + " " + s("copy") + '</button><p class="sp-small vb-copied" id="vbCopied" role="status"></p></section>' : "") +
         '<button type="button" class="sp-btn sec vb-todr" data-act="vbdrill" data-k="silence">' + s("toSilence") + "</button>" + gotBlock("hand"), focusSel);
+      endWatch("hand");
     });
   }
   OPEN.hand = function () { hand(); };
@@ -969,6 +1048,7 @@
           return '<div><dt><span class="vb-sb">' + esc(x.k) + "</span>" + tx(x.label) + "</dt><dd>" + tx(x.text) + "</dd></div>";
         }).join("") + "</dl></section>" +
         '<button type="button" class="sp-btn sec vb-todr" data-act="vbopen" data-k="drills">' + s("toDrills") + "</button>" + gotBlock("never"), focusSel);
+      endWatch("never");
     });
   }
   OPEN.never = function () { never(); };
@@ -981,6 +1061,8 @@
       var d = D(), c = d.card || {}, sc = d.screen || {}, tl = tiles(), cs = cardStore();
       var lims = (sc.limitRows || []).map(function (r) {
         var lo = r.low && tl[r.low], hi = r.high && tl[r.high], nw = r.now && tl[r.now], nm = r.label ? t(r.label) : nw ? (nw.labels || {}).generic : r.id;
+        // Round 6 (B5): a fixed VTe range is wrong for a small patient; the card gives the per-patient rule.
+        if (r.id === "vte" && c.vtRule) return "<tr><th scope=\"row\" translate=\"no\">" + esc(nm) + '</th><td colspan="2" class="vb-pcrule">' + tx(c.vtRule) + "</td></tr>";
         return "<tr><th scope=\"row\" translate=\"no\">" + esc(nm) + "</th><td>" + (lo ? esc(lo.value) : "") + "</td><td>" + (hi ? esc(hi.value) + (hi.unit ? " " + esc(hi.unit) : "") : "") + "</td></tr>";
       }).join("");
       var ords = cardOrders(drillList()).map(function (o) {
@@ -1004,11 +1086,12 @@
         '<section><h3>' + tx(c.silenceH) + "</h3><p>" + tx(c.silence) + "</p></section>" +
         '<section><h3>' + tx(c.dopeH) + "</h3><p>" + tx(c.dope) + "</p></section>" +
         '<section class="vb-pcw2"><h3>' + tx(c.ordersH) + '</h3><div class="vb-pcos">' + ords + '</div><p class="vb-pcany">' + s("anyCall") + "</p></section>" +
-        '<section><h3>' + tx(c.limitsH) + '</h3><table class="vb-pclim"><thead><tr><th scope="col">' + s("limAlarm") + '</th><th scope="col">' + s("limLow") + '</th><th scope="col">' + s("limHigh") + "</th></tr></thead><tbody>" + lims + "</tbody></table></section>" +
+        '<section><h3>' + tx(c.limitsH) + '</h3><table class="vb-pclim"><thead><tr><th scope="col">' + s("limAlarm") + '</th><th scope="col">' + s("limLow") + '</th><th scope="col">' + s("limHigh") + "</th></tr></thead><tbody>" + lims + "</tbody></table>" + (c.limitsNote ? '<p class="vb-pcnote">' + tx(c.limitsNote) + "</p>" : "") + "</section>" +
         '<section><h3>' + tx(c.callH) + '</h3><ul>' + callNow + "</ul></section>" +
         '<section><h3>' + tx(c.sbarH) + '</h3><ul class="vb-pcsbar">' + sbar + "</ul></section>" +
-        '<footer class="vb-pcf">' + s("cardFoot") + "</footer></article>", focusSel);
+        '<footer class="vb-pcf">' + s("cardFoot") + "</footer></article>" + gotBlock("card"), focusSel);
       [].forEach.call(I.root().querySelectorAll(".vb-who input"), function (inp) { inp.addEventListener("input", onCardInput); });
+      endWatch("card");
     });
   }
   function whoLine(cs, c) {
@@ -1022,7 +1105,7 @@
     var o = {};
     [].forEach.call(I.root().querySelectorAll(".vb-who input"), function (inp) { var v = String(inp.value || "").slice(0, 40).trim(); if (v) o[inp.getAttribute("data-c")] = v; });
     cardSave(o);
-    if (o.n1 && o.p1 && !isDone("card")) setDone("card", true);
+    if (o.n1 && o.p1 && !isDone("card")) { setDone("card", true); refreshGot("card"); }
     var w = q("#vbPcWho"); if (w) w.innerHTML = whoLine(o, D().card || {});
     if (cardT) G.clearTimeout(cardT);
     cardT = G.setTimeout(function () { var sv = q("#vbSaved"); if (sv) sv.textContent = Object.keys(o).length ? t(STR.savedHere) : ""; }, 400);
@@ -1032,7 +1115,7 @@
   A.vbprint = function () {
     // Print only the card: a copy at the top of <body> (outside the fixed overlay and its scroller), then clean up.
     var de = G.document.documentElement, card = q("#vbPcard"), hostEl = G.document.getElementById("vbPrintHost");
-    setDone("card", true);
+    if (!isDone("card")) { setDone("card", true); refreshGot("card"); }
     if (!card) return;
     if (!hostEl) { hostEl = G.document.createElement("div"); hostEl.id = "vbPrintHost"; G.document.body.appendChild(hostEl); }
     hostEl.setAttribute("lang", L());
@@ -1049,20 +1132,37 @@
   function today() { try { return new Date().toLocaleDateString(L() === "hi" ? "hi-IN-u-nu-latn" : "en-GB", { day: "numeric", month: "short", year: "numeric" }); } catch (e) { return new Date().toISOString().slice(0, 10); } }
   var ZCK = quizDef("ck", function () { return (D().check || {}).items || []; }, "vbCheck", {
     bestKey: "checkBest", againKey: "checkAgain",
-    onFinish: function (z) { if (z.right >= passMark()) { var p = prefs(); p.checkPass = p.checkPass || today(); p.done.check = 1; save(); } },
+    onFinish: function (z) { if (z.right >= passMark()) { var p = prefs(); p.checkPass = p.checkPass || today(); p.done.check = 1; save(); } var nb = q("#vbNeed"); if (nb) nb.outerHTML = needBlock(); },
     endHead: function (z, n) {
-      var c = D().check || {}, ok = z.right >= passMark();
+      var c = D().check || {}, ok = z.right >= passMark(), pr = progress();
+      if (ok && !pr.ready) return '<p class="sp-verdict ok vb-qscore" tabindex="-1">' + (ico("check") || "") + "<span>" + s("score", { n: I.fmt(z.right), m: I.fmt(n) }) + ". " + s("passedNot") + "</span></p>" + needList(pr.missing);
       return ok ? '<div class="vb-pass" role="status"><span class="vb-pass-i" aria-hidden="true">' + ico("award") + '</span><div><p class="sp-verdict ok vb-qscore" tabindex="-1"><span>' + s("passH") + ": " + s("score", { n: I.fmt(z.right), m: I.fmt(n) }) + "</span></p>" +
         '<p class="vb-pass-b">' + tx(c.badge) + '</p><p class="vb-why">' + tx(c.badgeNote) + "</p></div></div>"
         : '<p class="sp-verdict bad vb-qscore" tabindex="-1">' + (ico("info") || "") + "<span>" + s("score", { n: I.fmt(z.right), m: I.fmt(n) }) + ". " + s("failH", { p: I.fmt(passMark()), m: I.fmt(n) }) + "</span></p>";
     }
   });
+  // What the badge needs (round 6, B1): each item with its state; a missing one opens its page.
+  function needLabel(id) { var n = ((D().check || {}).items || []).length || 14; return s("need_" + id, { p: I.fmt(passMark()), m: I.fmt(n) }); }
+  function needList(ids) {
+    return '<ul class="vb-need">' + ids.map(function (id) {
+      return id === "check" ? '<li><span class="vb-needi" aria-hidden="true">' + ico("info") + "</span><span>" + needLabel(id) + "</span></li>"
+        : '<li><button type="button" class="vb-needb" data-act="vbopen" data-k="' + id + '"><span class="vb-needi" aria-hidden="true">' + ico("info") + "</span><span>" + needLabel(id) + '</span><span class="vb-needg" aria-hidden="true">' + ico("chev") + "</span></button></li>";
+    }).join("") + "</ul>";
+  }
+  function needBlock() {
+    var pr = progress(), miss = pr.missing;
+    return '<section class="vl-card vb-needc" id="vbNeed" aria-labelledby="vbNeedH"><h2 class="sp-h2" id="vbNeedH">' + s("needH") + "</h2>" +
+      '<ul class="vb-need">' + READY_IDS.map(function (id) {
+        var ok = miss.indexOf(id) < 0;
+        return '<li class="' + (ok ? "ok" : "") + '"><span class="vb-needi" aria-hidden="true">' + ico(ok ? "check" : "info") + "</span><span>" + needLabel(id) + '</span><span class="sp-sr">' + (ok ? s("done") : "") + "</span></li>";
+      }).join("") + "</ul>" + (miss.length ? '<p class="sp-small vb-needl">' + s("needLeft", { n: I.fmt(miss.length) }) + "</p>" : "") + "</section>";
+  }
   function checkScr(focusSel) {
     withData("vb-check", checkScr, s("check"), s("checkSub"), function () {
       var c = D().check || {}, p = prefs();
       screen("vb-check", checkScr, "check", s("check"), s("checkSub"),
         '<p class="vl-lede vb-lede">' + tx(c.intro) + "</p>" +
-        (p.checkPass ? '<p class="vb-badge" role="note"><span aria-hidden="true">' + ico("award") + "</span><span><b>" + tx(c.badge) + "</b> " + s("passedOn", { d: p.checkPass }) + "</span></p>" : "") +
+        (p.checkPass && progress().ready ? '<p class="vb-badge" role="note"><span aria-hidden="true">' + ico("award") + "</span><span><b>" + tx(c.badge) + "</b> " + s("passedOn", { d: p.checkPass }) + "</span></p>" : "") + needBlock() +
         '<div class="vb-quiz vb-check" id="vbCheck">' + quizHtml(ZCK) + "</div>", focusSel);
     });
   }
@@ -1078,7 +1178,8 @@
         '<dl class="vb-gl">' + its.map(function (x) {
           var key = (x.term + " " + x.aka + " " + x.plain.en + " " + x.plain.hi).toLowerCase();
           return '<div class="vb-gi" data-s="' + esc(key) + '"><dt translate="no">' + esc(x.term) + "</dt><dd><p>" + tx(x.plain) + '</p><p class="vb-gaka"><span>' + s("alsoH") + '</span><span translate="no">' + esc(x.aka) + "</span></p></dd></div>";
-        }).join("") + '</dl><p class="vb-empty" id="vbGnone" hidden>' + s("glossNone") + "</p>", focusSel);
+        }).join("") + '</dl><p class="vb-empty" id="vbGnone" hidden>' + s("glossNone") + "</p>" + gotBlock("gloss"), focusSel);
+      endWatch("gloss");
       var inp = q("#vbGq");
       if (inp) inp.addEventListener("input", function () {
         var v = String(inp.value || "").toLowerCase().trim(), n = 0;
