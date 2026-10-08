@@ -179,6 +179,8 @@ data/dose-rules-report.json
 # (tools/prep-upload-bank.mjs); only prep/taxonomy.json and each subject's index.json are committed and shipped.
 /prep/bank/v*/*/mcq/
 /prep/bank/v*/*/search.json
+# PYQ copies built into a bank version (tools/prep-explain.mjs --apply --pyq): recall text never enters git.
+/prep/bank/v*/pyq/
 /prep/build/*
 # Owner 2026-10-06: classifier outputs are kept in git so a lost worktree costs nothing; vectors stay local.
 !/prep/build/embed-*.json
@@ -198,4 +200,6 @@ data/dose-rules-report.json
 # PrepNucleus PYQ (tools/prep-pyq.mjs): recall question text, options and images never enter the public repo; they
 # go to R2 (prep-bank/v2/pyq/) and the private GCS bucket. Only the synthetic test fixture is committed.
 /prep/pyq/
+# PrepNucleus explanations (tools/prep-explain.mjs): prompts carry source-pack text; results go to R2 with the bank.
+/prep/explain/
 /prep/lessons/work-all/

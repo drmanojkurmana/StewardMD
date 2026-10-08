@@ -9,6 +9,11 @@
  *   solve   { q: [<= 7 { id, q, o[4], a }] }  a stays here; only stem and options reach the model
  *                                                                   -> { solved: [{ id, ok, ot }], usage }
  *   review  { q: [<= 7 { id, q, o[4], a, r?, kp? }], para: { id: text } } -> { gates: [{ id, i, g4..g11, old, why, pass }], usage }
+ *   imcq    { img: { mime, data (base64) }, near: [<= 12 { n, p?, h?, tx }], src? }   one image cut from the student's PDF
+ *           and the page text near it -> { items: [0 or 1 stored item, imgPlace "stem"], skipped: null | reason, usage }.
+ *           The image is one inline part of the same Gemini call; it is never stored or logged here. Gates: the model's
+ *           sure flag, the key's sentences (sn) among those sent, code gates 1 to 9b and verbatim on those sentences, the
+ *           key's words in them (gateImgSupport) and a stem that points at the image. A skipped image costs its call only.
  * Common fields: { op, deckId: "gen_<sha12>", idem, exam, profileV?, pv? }.
  * usage = { inTok, outTok, thinkTok, inr, deckTok, deckCapTok, dayDecks, monthDecks }.
  *
@@ -39,7 +44,7 @@ import { bump, istDay, istNextMidnightMs } from "../../_counters.js";
 import { ownerOK } from "../../_adminauth.js";
 import {
   PREP_OPS, PREP_LIMITS, getProfile, cleanText, prepScrub, parseModelJson,
-  buildFactsPrompt, buildMcqPrompt, buildSolvePrompt, buildReviewPrompt,
+  buildFactsPrompt, buildMcqPrompt, buildSolvePrompt, buildReviewPrompt, buildImageMcqPrompt, sanitizeImageMcq, gateImgSupport, imageStemOk, runCodeGates, sha12,
   sanitizeFacts, sanitizeMcq, sanitizeSolve, sanitizeReview, finalizeFacts, reviewPass,
   gateBatch, mulberry32, seedFrom, keyPositions, shuffleOptions, solveMatches, toStoredItem,
 } from "../../_prep-core.js";
@@ -50,6 +55,9 @@ const IDEM_TTL_S = 600;
 const DECK_TTL_S = 400 * 86400;               // the deck's token record outlives any "10 more" a student asks for
 const MONTH_TTL_S = 40 * 86400, DAY_TTL_S = 2 * 86400;
 const IST_MS = 5.5 * 3600 * 1000;
+const IMG_MIMES = { "image/jpeg": 1, "image/webp": 1, "image/png": 1 };
+export const PREP_IMG_B64_MAX = 360000;      // base64 chars (about 270 KB of image); the phone re-encodes to fit
+export const PREP_IMG_TOK = 1100;            // estimate for one image of at most 1280 px (Gemini tiles of 258 tokens)
 const RE = { deck: /^gen_[a-f0-9]{12}$/, idem: /^[A-Za-z0-9_-]{8,64}$/, fid: /^f_[a-f0-9]{12}$/, id: /^[A-Za-z0-9_-]{1,64}$/, t: /^[a-z0-9-]{1,40}$/, doc: /^[a-f0-9]{6,64}$/, pv: /^[A-Za-z0-9.-]{1,16}$/ };
 
 const num = (env, k, d) => { const v = Number(env && env[k]); return Number.isFinite(v) && v > 0 ? v : d; };
@@ -151,6 +159,20 @@ export function readRequest(body) {
       if (typeof b.src !== "object" || (b.src.doc != null && !RE.doc.test(String(b.src.doc))) || (b.src.name != null && !isStr(b.src.name, 0, 200))) return bad("src");
       req.src = { doc: b.src.doc || "", name: scrub(b.src.name || "", 160) };
     }
+  } else if (b.op === "imcq") {
+    const im = b.img;
+    if (!im || typeof im !== "object" || !IMG_MIMES[im.mime] || typeof im.data !== "string" || im.data.length < 100) return bad("img");
+    if (im.data.length > PREP_IMG_B64_MAX) return bad("img", 413);
+    if (!/^[A-Za-z0-9+/]+={0,2}$/.test(im.data)) return bad("img");
+    const near = readSents(b.near, PREP_LIMITS.imcq.near, 2000);
+    if (!near) return bad("near");
+    req.img = { mime: im.mime, data: im.data };
+    req.sents = near;
+    if (b.src != null) {
+      if (typeof b.src !== "object" || (b.src.doc != null && !RE.doc.test(String(b.src.doc))) || (b.src.name != null && !isStr(b.src.name, 0, 200))) return bad("src");
+      req.src = { doc: b.src.doc || "", name: scrub(b.src.name || "", 160) };
+    }
+    if (b.t != null) { if (!RE.t.test(String(b.t))) return bad("t"); req.t = b.t; }
   } else {
     if (!Array.isArray(b.q) || !b.q.length || b.q.length > PREP_LIMITS[b.op].maxItems) return bad("q");
     req.q = [];
@@ -181,6 +203,7 @@ export function readRequest(body) {
 /* ---- prompt per op ---- */
 function promptFor(req) {
   if (req.op === "facts") return buildFactsPrompt({ sents: req.sents });
+  if (req.op === "imcq") return buildImageMcqPrompt({ sents: req.sents, profile: req.profile });
   if (req.op === "mcq") return buildMcqPrompt({ facts: req.facts, profile: req.profile, mix: req.mix, avoid: req.avoid });
   // Blind solve: only stem and options are handed to the builder, never a.
   if (req.op === "solve") return buildSolvePrompt({ items: req.q.map((it) => ({ q: it.q, o: it.o })) });
@@ -206,12 +229,33 @@ function finish(req, text, model) {
     });
     return { items, rejected: g.rejected.map((r) => ({ fi: r.fi, fid: req.facts[r.fi].fid, gate: r.gate })) };
   }
+  if (req.op === "imcq") return finishImage(req, raw, model);
   if (req.op === "solve") {
     const picks = sanitizeSolve(raw, req.q.length); if (!picks) return null;
     return { solved: req.q.map((it, i) => ({ id: it.id, ok: solveMatches(picks[i], it), ot: picks[i] })) };
   }
   const gs = sanitizeReview(raw, req.q.length); if (!gs) return null;
   return { gates: req.q.map((it, i) => Object.assign({ id: it.id, i }, gs[i], { pass: reviewPass(gs[i]) })) };
+}
+
+/* imcq -> { items: [item] } or { items: [], skipped }. Only a question the page text supports is kept. */
+function finishImage(req, raw, model) {
+  const r = sanitizeImageMcq(raw, req.sents.map((s) => s.n));
+  if (!r) return null;
+  if (!r.sure) return { items: [], skipped: "unsure" };
+  if (!r.rq) return { items: [], skipped: "no-question" };
+  if (!r.sn.length) return { items: [], skipped: "no-source" };
+  const byN = new Map(req.sents.map((s) => [s.n, s])), cited = r.sn.map((n) => byN.get(n));
+  const source = cited.map((s) => s.tx).join(" ");
+  const g = runCodeGates(r.rq, source);
+  if (g) return { items: [], skipped: g };
+  if (!gateImgSupport(r.rq, source)) return { items: [], skipped: "unsupported" };
+  if (!imageStemOk(r.rq.st)) return { items: [], skipped: "no-image-ref" };
+  const rnd = mulberry32(seedFrom(req.deckId + ":" + req.idem));
+  const fact = { fid: "f_" + sha12(req.deckId + ":img:" + req.img.data.length + ":" + r.sn.join(",") + ":" + req.img.data.slice(0, 64)), sn: r.sn, p: Array.from(new Set(cited.map((s) => s.p).filter((p) => p))), h: cited[0].h || "" };
+  const it = toStoredItem(r.rq, shuffleOptions(r.rq, keyPositions(1, rnd)[0], rnd), { deckId: req.deckId, fact, prov: "USR", exam: req.exam, mv: model, src: req.src, t: req.t || undefined });
+  it.imgPlace = "stem";
+  return { items: [it], skipped: null };
 }
 
 /* ---- idempotency record, sealed so it is unreadable without the same request ---- */
@@ -314,7 +358,7 @@ export async function handlePrepGenerate(ctx) {
     if (deck.ch + req.chars > caps.chars) return fail(413, "too-large", "chars");
   }
   const p = promptFor(req);
-  const estIn = estTokens(p.system.length + p.user.length + JSON.stringify(p.schema).length);
+  const estIn = estTokens(p.system.length + p.user.length + JSON.stringify(p.schema).length) + (op === "imcq" ? PREP_IMG_TOK : 0);
   if (deck.tok + estIn + p.maxOut > caps.deckTok) return quota("token-cap", 0, { deckTok: deck.tok, deckCapTok: caps.deckTok });
 
   // 7. the one Gemini call
@@ -324,7 +368,8 @@ export async function handlePrepGenerate(ctx) {
   const meta = {}, t0 = Date.now();
   let text = "", err = null;
   try {
-    text = await callGemini(env, [{ text: p.user }], p.maxOut, { model, providers: ["vertex"], labels: { app: "prep" }, system: p.system, json: true, schema: p.schema, temperature, meta });
+    const parts = op === "imcq" ? [{ text: p.user }, { inline_data: { mime_type: req.img.mime, data: req.img.data } }] : [{ text: p.user }];
+    text = await callGemini(env, parts, p.maxOut, { model, providers: ["vertex"], labels: { app: "prep" }, system: p.system, json: true, schema: p.schema, temperature, meta });
   } catch (e) { err = e; }
   const latencyMs = Date.now() - t0;
   const u = meta.usage;

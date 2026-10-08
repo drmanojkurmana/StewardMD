@@ -292,7 +292,7 @@
   function contextLine(t, it) {
     if (t.id === "rop") {
       var bits = [];
-      if (it.ga) bits.push("GA\u00a0" + it.ga + "\u00a0weeks");
+      if (it.ga) bits.push("Gestational age\u00a0" + it.ga + "\u00a0weeks");
       if (it.bw) bits.push("birth weight " + fmt(it.bw) + "\u00a0g");
       if (it.sex) bits.push(it.sex);
       return "Preterm infant · " + bits.join(" · ");

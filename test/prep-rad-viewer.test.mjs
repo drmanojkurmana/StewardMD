@@ -66,7 +66,8 @@ test("rad: prep.js reads a subject's own bank version; prep-pyq.js serves bank-p
   assert.match(p, /"rd-"/);
   assert.match(p, /\.pn-yq-fig,\.pn-stack,/);
   const y = fs.readFileSync(new URL("../prep-pyq.js", import.meta.url), "utf8");
-  assert.match(y, /indexOf\("\/"\) >= 0 \? \(host\.bankApi/);
+  assert.match(y, /if \(f\.indexOf\("\/"\) >= 0\) \{ var u = \(host\.bankApi/);
+  assert.match(y, /data-u="' \+ e\(itemImg\(it, P\.host, f\)\)/);
   const l = fs.readFileSync(new URL("../prep-loader.js", import.meta.url), "utf8");
   assert.match(l, /"prep-pyq\.js", "prep-rad\.js"/);
   assert.match(l, /"prep-rad\.js": 1/);

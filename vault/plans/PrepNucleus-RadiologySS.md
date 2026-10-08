@@ -113,19 +113,47 @@ series per case, credited.
 ## 7. Scale plan (to about 1,500 DM-level questions)
 | Item | Pilot measure | At 1,500 |
 | --- | --- | --- |
-| Gemini Batch (gen + review + one redo) | see section 8 | about $2 to $3 (about $0.0015 an item) |
+| Gemini Batch (gen + review + one redo) | $0.101 for 92 drafts | about $5 for about 4,500 drafts |
 | Images | $0 (open licences) | $0 |
-| Haiku votes | 2 agent passes of 8 items | about 380 agent passes (subscription, no API spend) |
-| Open-i + Europe PMC fetch | about 2 s a candidate | 10 candidates an item: about 8 h, resumable, in `screen` |
-| Stacks | 7 stacks, 5.5 MB WebP, about 0.5 GB DICOM transient | 120 stacks (8% of items): about 100 MB in R2, 6 GB DICOM in batches of 1 GB |
+| Haiku votes | 28 agent passes for 83 drafts | about 1,500 agent passes (subscription, no API spend) |
+| Open-i + Europe PMC fetch | about 2 s a candidate | about 10 candidates a target: 15 to 20 h, resumable, in `screen` |
+| Stacks | 7 built (5.5 MB WebP), 3 used; 0.7 GB DICOM transient, deleted after the build | 120 stacks (8% of items): about 100 MB in R2; DICOM under 1 GB at a time |
+| Yield | 29 of 92 drafts (32%), 29 of 68 targets (43%) | plan for 3,500 to 4,500 targets |
 | Owner/clinician review | none yet | radiologist sample review of 10% before switching on widely |
 Order: 1) widen targets per module from a radiology blueprint list (about 80 diagnoses a module), 2) search and licence
 in batches of 200 targets, 3) curate contact sheets (a Haiku pre-pick can replace hand curation at scale, with the two
 final votes unchanged), 4) gen and review per 300 items, 5) votes, 6) upload as `v6` (add-only files, index last).
-Calendar estimate: 4 to 6 working days of agent time for 1,500, cost under $5 in Gemini.
+Calendar estimate: 10 to 15 working days of agent time for 1,500 (licence fetches, curation and votes dominate), Gemini
+under $10, images $0. What would lift the yield: a Haiku pre-pick of the best figure per target, cropping one panel out
+of multi-panel figures, and the round-2 prompt (stem never describes the finding) from the start.
 
 ## 8. Pilot results (2026-10-08)
-Filled at the end of the pilot run; see the branch report.
+- **Targets:** 61 image targets over 3 Open-i search rounds plus 7 stack targets. Some topics had no usable CC BY / CC0
+  hit (juvenile angiofibroma, pneumoperitoneum, avascular necrosis of the hip, extradural haematoma).
+- **Licence checks:** Europe PMC full text read per candidate until 3 passed: 136 articles passed the article-level
+  CC BY / CC BY-SA / CC0 check, 219 failed (NC/ND, no licence, or no case text). 196 figures fetched; one figure per
+  target picked by hand from contact sheets (multi-panel, burnt-in text and identifiers avoided where possible).
+- **Generation:** 3 runs (rad-pilot-1..3), 92 drafts over 68 targets (a later run regenerates a rejected target with
+  another figure); Batch gemini-3.1-flash-lite, stages gen, review (`_prep-core` gates, NEET-SS profile) and one redo.
+  148 Batch requests, **$0.101** in all (rows in the job's tmp/rad/log.tsv). Code gates mostly caught invented numbers,
+  12-word copies, a stem that did not refer to the image and the key named in the stem.
+- **Two Haiku votes:** 83 drafts voted, each by two independent Haiku agents (28 agent passes; verdicts kept in
+  `tools/prep-rad/votes/`). Both yes and key not flagged: **29**. The usual reason for a no: the figure does not show
+  what the case text says (small multi-panel figures, findings too small at phone size), then key or wording conflicts.
+- **Bank (`prep-bank/v6/ss-radiology/`, uploaded to R2, 179 files, 3.2 MB, one slice checked by bytes):** 29 questions
+  in 18 modules: 26 image questions and 3 scroll-stack questions (glioblastoma MRI 48 slices, clear cell renal cell
+  carcinoma CT 37 slices, pancreatic cancer with liver metastases CT 47 slices). Difficulty d1 7, d2 21, d3 1. Four more
+  stacks were built but their questions were rejected (vestibular schwannoma: split vote; adrenocortical carcinoma: a
+  portal-venous-only series cannot carry a washout question; lung: histology is not decidable on CT; HCC: gate failures).
+- **Hand fixes after a verifier fact flag (no key changed):** LAM table (costophrenic sparing belongs to LCH), XGP
+  ("pathognomonic" softened), two stack drafts (an invented age removed, then re-reviewed by the review stage).
+- **Key review list for the owner (held back, not in the bank):** Perthes (lateral pillar B called favourable; both
+  verifiers: intermediate prognosis), intussusception (lymphoma lead point management), emphysematous pyelonephritis
+  class 4 (key "antibiotics alone" against drainage), tension pneumothorax (drain-only plan), ovarian dermoid (two
+  options are synonyms).
+- **Not yet:** a radiologist's review; the structured explanation renderer for `x` (feat/prep-explain) is not on main,
+  so the app shows the key line, why the others are wrong and the pearl from `exp`, `r` and `kp`. Round-1 stems
+  sometimes describe the finding in words (the stricter "do not describe the finding" prompt came in round 2).
 
 ## 9. Open issues
 - No radiologist has reviewed the pilot items; the owner's clinical sign-off is pending.

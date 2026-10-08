@@ -21,8 +21,8 @@
     "w": 768,
     "h": 576,
     "alt": {
-      "en": "Two views of the optic disc. Left: a normal disc, pink with a sharp edge and a small pale cup in the middle. Vessels cross its edge clearly. Right: a swollen disc. It is raised with no cup, and its edge is blurred. Vessels are hidden where they cross the edge. Streaks of blood lie around the disc.",
-      "hi": "ऑप्टिक डिस्क के दो दृश्य। बाएँ: एक सामान्य डिस्क, गुलाबी, साफ़ किनारे वाली, और बीच में एक छोटा फीका कप। नसें उसके किनारे को साफ़ पार करती हैं। दाएँ: एक सूजी हुई डिस्क। यह उभरी हुई है, इसमें कप नहीं है, और किनारा धुंधला है। किनारा पार करते हुए नसें छिप जाती हैं। डिस्क के चारों ओर खून की धारियाँ हैं।"
+      "en": "Two views of the optic disc. Left: a normal disc, pink with a sharp edge and a small pale physiological cup in the middle. Vessels cross its edge clearly. Right: a swollen disc. It is raised with no cup, and its edge is blurred. Vessels are hidden where they cross the edge. Streaks of blood lie around the disc.",
+      "hi": "ऑप्टिक डिस्क के दो दृश्य। बाएँ: एक सामान्य डिस्क, गुलाबी, साफ़ किनारे वाली, और बीच में एक छोटा फीका कप (physiological cup)। नसें उसके किनारे को साफ़ पार करती हैं। दाएँ: एक सूजी हुई डिस्क। यह उभरी हुई है, इसमें कप नहीं है, और किनारा धुंधला है। किनारा पार करते हुए नसें छिप जाती हैं। डिस्क के चारों ओर खून की धारियाँ हैं।"
     },
     "caption": {
       "en": "Left, a normal disc. Right, a swollen disc as in papilloedema. In papilloedema both eyes look like this. This one is severe; early papilloedema is much subtler.",
@@ -62,8 +62,8 @@
           "hi": "उभरी डिस्क, कप नहीं"
         },
         "note": {
-          "en": "Blocked flow inside the nerve fibres makes them swell and lifts the disc.",
-          "hi": "नर्व के तंतुओं के अंदर बहाव रुकने से वे सूजते हैं और डिस्क उभर आती है।"
+          "en": "Blocked axoplasmic flow (the transport inside the nerve fibres) makes the retinal nerve fibres swell and lifts the disc.",
+          "hi": "नर्व के तंतुओं के अंदर का बहाव (axoplasmic flow) रुकने से रेटिना के नर्व तंतु सूजते हैं और डिस्क उभर आती है।"
         }
       },
       {
@@ -74,16 +74,16 @@
           "hi": "धुंधला किनारा, छिपी नलियाँ"
         },
         "note": {
-          "en": "The swollen fibres cover the vessels where they cross the edge.",
-          "hi": "सूजे तंतु किनारा पार करती नलियों को ढक लेते हैं।"
+          "en": "The swollen nerve fibres cover the branches of the central retinal artery and vein where they cross the edge.",
+          "hi": "सूजे नर्व तंतु किनारा पार करती सेंट्रल रेटिनल आर्टरी और शिरा (central retinal artery and vein) की शाखाओं को ढक लेते हैं।"
         }
       },
       {
         "x": 0.795,
         "y": 0.2,
         "label": {
-          "en": "Flame haemorrhage",
-          "hi": "लौ जैसा हेमरेज"
+          "en": "Flame haemorrhage (bleed)",
+          "hi": "लौ जैसा हेमरेज (haemorrhage, खून का रिसाव)"
         },
         "note": {
           "en": "Small bleeds lie along the nerve fibres at the edge.",
@@ -97,27 +97,49 @@
     ],
     "img": "learn/media/real/neuro-papilloedema.webp"
   },
+  "fields": {
+    "intro": {
+      "en": "Early papilloedema: vision is often normal, but the blind spot grows.",
+      "hi": "शुरुआती पैपिलीडीमा (papilloedema): दृष्टि अक्सर सामान्य रहती है, पर अंधा बिंदु (blind spot) बड़ा हो जाता है।"
+    },
+    "items": [
+      {
+        "id": "enlarged-blind-spot",
+        "label": {
+          "en": "Enlarged blind spot in both eyes",
+          "hi": "दोनों आँखों में बड़ा अंधा बिंदु (enlarged blind spot)"
+        },
+        "le": "blind-spot",
+        "re": "blind-spot",
+        "where": {
+          "en": "Both optic discs: the swollen disc covers more of the retina around it.",
+          "hi": "दोनों ऑप्टिक डिस्क (optic disc): सूजी डिस्क अपने आस-पास के रेटिना (retina) का ज़्यादा हिस्सा ढक लेती है।"
+        },
+        "lesion": "optic-nerve"
+      }
+    ]
+  },
   "why": {
     "steps": [
       {
-        "en": "A brain tumour, a clot in a brain vein or blocked fluid flow can raise [[intracranial-pressure]]. Sometimes no cause is found, as in [[iih]].",
-        "hi": "दिमाग की गाँठ, दिमाग की शिरा में थक्का या तरल का रुका बहाव [[intracranial-pressure]] बढ़ा सकता है। कभी कोई कारण नहीं मिलता, जैसे [[iih]] में।"
+        "en": "A brain tumour, a clot in a brain vein (cerebral venous sinus thrombosis) or blocked cerebrospinal fluid flow (hydrocephalus) can raise [[intracranial-pressure]]. Sometimes no cause is found, as in [[iih]].",
+        "hi": "दिमाग का ट्यूमर (brain tumour, गाँठ), दिमाग की शिरा में थक्का (cerebral venous sinus thrombosis) या सेरेब्रोस्पाइनल तरल (cerebrospinal fluid) का रुका बहाव (hydrocephalus) [[intracranial-pressure]] बढ़ा सकता है। कभी कोई कारण नहीं मिलता, जैसे [[iih]] में।"
       },
       {
-        "en": "The pressure passes along the fluid around each [[optic-nerve]]. It slows the flow inside the nerve fibres at the disc.",
-        "hi": "यह दबाव हर [[optic-nerve]] के चारों ओर के तरल से आगे पहुँचता है। यह डिस्क पर नर्व के तंतुओं के अंदर का बहाव धीमा कर देता है।"
+        "en": "The pressure passes along the cerebrospinal fluid that surrounds each [[optic-nerve]] inside its sheath. It slows the flow inside the nerve fibres at the disc.",
+        "hi": "यह दबाव हर [[optic-nerve]] को उसकी परत (sheath) के अंदर घेरने वाले सेरेब्रोस्पाइनल तरल (cerebrospinal fluid) से आगे पहुँचता है। यह डिस्क पर नर्व के तंतुओं के अंदर का बहाव धीमा कर देता है।"
       },
       {
         "en": "The fibres swell, so the disc rises, its edge blurs and the vessels hide. Veins widen and small bleeds appear.",
         "hi": "तंतु सूजते हैं, इसलिए डिस्क उभरती है, किनारा धुंधला होता है और नलियाँ छिप जाती हैं। शिराएँ चौड़ी होती हैं और छोटे हेमरेज दिखते हैं।"
       },
       {
-        "en": "Vision often stays normal early, but the blind spot grows. Grey-outs lasting seconds can happen on standing up.",
-        "hi": "शुरू में नज़र अक्सर ठीक रहती है, पर ब्लाइंड स्पॉट बड़ा हो जाता है। खड़े होने पर कुछ सेकंड के लिए धुंधलापन छा सकता है।"
+        "en": "Vision often stays normal early, but the blind spot grows. Transient visual obscurations (grey-outs lasting seconds) can happen on standing up.",
+        "hi": "शुरू में नज़र अक्सर ठीक रहती है, पर ब्लाइंड स्पॉट बड़ा हो जाता है। खड़े होने पर कुछ सेकंड के लिए धुंधलापन (transient visual obscurations) छा सकता है।"
       },
       {
-        "en": "Swelling of one disc alone is usually not papilloedema. Think of [[optic-neuritis]] or a stroke of the nerve instead.",
-        "hi": "सिर्फ़ एक डिस्क की सूजन आम तौर पर पैपिलीडीमा नहीं होती। उसकी जगह [[optic-neuritis]] या नर्व के स्ट्रोक के बारे में सोचें।"
+        "en": "Swelling of one disc alone is usually not papilloedema. Think of [[optic-neuritis]] or anterior ischaemic optic neuropathy (a stroke of the optic nerve head) instead.",
+        "hi": "सिर्फ़ एक डिस्क की सूजन आम तौर पर पैपिलीडीमा नहीं होती। उसकी जगह [[optic-neuritis]] या एंटीरियर इस्कीमिक ऑप्टिक न्यूरोपैथी (anterior ischaemic optic neuropathy, ऑप्टिक नर्व हेड का स्ट्रोक) के बारे में सोचें।"
       }
     ],
     "analogy": {
@@ -131,26 +153,26 @@
       "hi": "सिरदर्द जो लेटने पर या सुबह ज़्यादा हो, अक्सर जी मिचलाने या उल्टी के साथ।"
     },
     {
-      "en": "Both discs are swollen. Vision and colour are often normal early, and there is usually no RAPD.",
-      "hi": "दोनों डिस्क सूजी होती हैं। शुरू में नज़र और रंग अक्सर ठीक रहते हैं, और आम तौर पर RAPD नहीं होता।"
+      "en": "Both discs are swollen. Vision and colour are often normal early, and there is usually no relative afferent pupillary defect (RAPD).",
+      "hi": "दोनों डिस्क सूजी होती हैं। शुरू में नज़र और रंग अक्सर ठीक रहते हैं, और आम तौर पर relative afferent pupillary defect (RAPD) नहीं होता।"
     },
     {
-      "en": "Double vision from a [[sixth-nerve]] palsy can come with raised pressure.",
-      "hi": "बढ़े दबाव के साथ [[sixth-nerve]] के पक्षाघात से दोहरा दिखना हो सकता है।"
+      "en": "Double vision from a [[sixth-nerve]] palsy can come with raised pressure. This is because the long path of the sixth nerve along the skull base is stretched.",
+      "hi": "बढ़े दबाव के साथ [[sixth-nerve]] के पक्षाघात से दोहरा दिखना हो सकता है, क्योंकि खोपड़ी के आधार पर छठी नर्व का लंबा रास्ता खिंच जाता है।"
     }
   ],
   "todo": [
     {
-      "en": "Never assume. Swollen discs need same-day referral for a brain scan, with a scan of the brain veins.",
-      "hi": "कभी अंदाज़ा न लगाएँ। सूजी डिस्क में उसी दिन दिमाग के स्कैन और दिमाग की शिराओं के स्कैन के लिए भेजें।"
+      "en": "Never assume. Swollen discs need same-day referral for a brain scan (magnetic resonance imaging, MRI, or computed tomography, CT) with venography (a scan of the veins of the brain).",
+      "hi": "कभी अंदाज़ा न लगाएँ। सूजी डिस्क में उसी दिन दिमाग के स्कैन (magnetic resonance imaging, MRI, या computed tomography, CT) और वीनोग्राफ़ी (venography, दिमाग की शिराओं का स्कैन) के लिए भेजें।"
     },
     {
-      "en": "Do not do a [[lumbar-puncture]] before the scan. A mass could make it dangerous.",
-      "hi": "स्कैन से पहले [[lumbar-puncture]] न करें। कोई गाँठ हो तो यह ख़तरनाक हो सकता है।"
+      "en": "Do not do a [[lumbar-puncture]] before the scan. A mass could make it dangerous, because the pressure drop can push the brain down through the skull base (herniation).",
+      "hi": "स्कैन से पहले [[lumbar-puncture]] न करें। कोई ट्यूमर या गाँठ (mass) हो तो यह ख़तरनाक हो सकता है, क्योंकि दबाव गिरने से दिमाग खोपड़ी के आधार से नीचे धँस सकता है (herniation)।"
     },
     {
-      "en": "Check the blood pressure. Very high pressure can also swell both discs.",
-      "hi": "ब्लड प्रेशर जाँचें। बहुत ज़्यादा ब्लड प्रेशर से भी दोनों डिस्क सूज सकती हैं।"
+      "en": "Check the blood pressure. Very high blood pressure (malignant hypertension) can also swell both discs.",
+      "hi": "ब्लड प्रेशर जाँचें। बहुत ज़्यादा ब्लड प्रेशर (malignant hypertension) से भी दोनों डिस्क सूज सकती हैं।"
     }
   ],
   "remember": {
@@ -229,8 +251,8 @@
       ],
       "a": 0,
       "why": {
-        "en": "Imaging looks for a mass or a clot first. A lumbar puncture comes only after it.",
-        "hi": "जाँच पहले गाँठ या थक्का खोजती है। लम्बर पंक्चर उसके बाद ही होता है।"
+        "en": "Imaging looks for a mass or a venous sinus clot first. A lumbar puncture comes only after it.",
+        "hi": "जाँच पहले गाँठ या वेनस साइनस (venous sinus) के थक्के को खोजती है। लम्बर पंक्चर उसके बाद ही होता है।"
       }
     }
   ],

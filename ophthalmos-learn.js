@@ -75,7 +75,49 @@
     backLesson: { en: "Back to lesson", hi: "पाठ पर वापस" }, backTest: { en: "Back to Test", hi: "टेस्ट पर वापस" }, prevStep: { en: "Previous step", hi: "पिछला चरण" },
     more: { en: "More pictures", hi: "और तस्वीरें" }, pause: { en: "Pause", hi: "रोकें" }, play: { en: "Play", hi: "चलाएँ" },
     pauseA: { en: "Pause animation: {x}", hi: "एनिमेशन रोकें: {x}" }, playA: { en: "Play animation: {x}", hi: "एनिमेशन चलाएँ: {x}" },
-    mediaErr: { en: "This picture did not load.", hi: "यह तस्वीर लोड नहीं हुई।" }
+    mediaErr: { en: "This picture did not load.", hi: "यह तस्वीर लोड नहीं हुई।" },
+    // "What the patient sees" (content rule R5): field defects drawn on one everyday scene, as the patient sees it.
+    fields: { en: "What the patient sees", hi: "मरीज़ क्या देखता है" },
+    fieldsHow: { en: "Drawn as the patient sees it: the left eye's view on the left, the right eye's on the right.", hi: "जैसा मरीज़ देखता है वैसा बना है: बाईं आँख का दृश्य बाईं ओर, दाईं आँख का दाईं ओर।" },
+    fChoose: { en: "Choose a pattern", hi: "एक पैटर्न चुनें" }, fNormal: { en: "Normal", hi: "सामान्य (normal)" },
+    eyeL: { en: "Left eye", hi: "बाईं आँख" }, eyeR: { en: "Right eye", hi: "दाईं आँख" }, eyeB: { en: "Both eyes open", hi: "दोनों आँखें खुली" },
+    fWhere: { en: "Where the damage is", hi: "नुकसान कहाँ है" },
+    fStyle: { en: "Show the missing part as", hi: "न दिखने वाला हिस्सा ऐसे दिखाएँ" }, fDark: { en: "Dark", hi: "काला" }, fBlur: { en: "Blurred", hi: "धुंधला" },
+    fStyleNote: { en: "Patients rarely see black. Most describe a part that is missing or blurred.", hi: "मरीज़ को अक्सर काला नहीं दिखता। ज़्यादातर मरीज़ बताते हैं कि वह हिस्सा ग़ायब या धुंधला है।" },
+    fImgErr: { en: "The scene did not load. The pattern for each eye is written below each frame.", hi: "दृश्य लोड नहीं हुआ। हर आँख का पैटर्न हर फ़्रेम के नीचे लिखा है।" },
+    fSee: { en: "See what the patient sees", hi: "देखें मरीज़ क्या देखता है" },
+    fSeeA: { en: "See what the patient sees: {x}", hi: "देखें मरीज़ क्या देखता है: {x}" },
+    fBothSame: { en: "Both eyes lose the same part, so it stays missing with both eyes open.", hi: "दोनों आँखों में एक ही हिस्सा जाता है, इसलिए दोनों आँखें खुली होने पर भी वह नहीं दिखता।" },
+    fBothCover: { en: "With both eyes open, the other eye fills most of the gap. Covering the good eye shows it.", hi: "दोनों आँखें खुली हों तो दूसरी आँख ज़्यादातर कमी भर देती है। अच्छी आँख ढकने पर कमी दिखती है।" },
+    fBothBitemp: { en: "With both eyes open, each eye fills the other eye's gap in the centre. The outer edges of the visual field stay missing.", hi: "दोनों आँखें खुली हों तो बीच की कमी दूसरी आँख भर देती है। दृष्टि क्षेत्र (visual field) के बाहरी किनारे फिर भी नहीं दिखते।" },
+    fBothMix: { en: "With both eyes open, a part is missing only where both eyes miss it.", hi: "दोनों आँखें खुली हों तो वही हिस्सा नहीं दिखता जो दोनों आँखों में नहीं दिखता।" },
+    fBothNone: { en: "Both eyes see the whole visual field.", hi: "दोनों आँखें पूरा दृष्टि क्षेत्र (visual field) देखती हैं।" }
+  };
+  // What one eye loses, by pattern, in plain words (rule R1: the medical term first, the plain meaning in brackets).
+  var FPAT = {
+    full: { en: "Sees the whole visual field", hi: "पूरा दृष्टि क्षेत्र (visual field) दिखता है" },
+    blind: { en: "Sees nothing (a blind eye)", hi: "कुछ नहीं दिखता (अंधी आँख)" },
+    "left-half": { en: "Left half of the visual field lost", hi: "दृष्टि क्षेत्र (visual field) का बायाँ आधा नहीं दिखता" },
+    "right-half": { en: "Right half of the visual field lost", hi: "दृष्टि क्षेत्र (visual field) का दायाँ आधा नहीं दिखता" },
+    "temporal-L": { en: "Temporal half lost (the outer half: the left side for this eye)", hi: "टेम्पोरल (temporal) आधा नहीं दिखता (बाहरी आधा: इस आँख में बाईं ओर)" },
+    "temporal-R": { en: "Temporal half lost (the outer half: the right side for this eye)", hi: "टेम्पोरल (temporal) आधा नहीं दिखता (बाहरी आधा: इस आँख में दाईं ओर)" },
+    "nasal-L": { en: "Nasal half lost (the inner half: the right side for this eye)", hi: "नेज़ल (nasal) आधा नहीं दिखता (अंदरूनी आधा: इस आँख में दाईं ओर)" },
+    "nasal-R": { en: "Nasal half lost (the inner half: the left side for this eye)", hi: "नेज़ल (nasal) आधा नहीं दिखता (अंदरूनी आधा: इस आँख में बाईं ओर)" },
+    "sup-left": { en: "Upper left quarter lost (quadrantanopia)", hi: "ऊपरी बायाँ चौथाई हिस्सा नहीं दिखता (quadrantanopia)" },
+    "inf-left": { en: "Lower left quarter lost (quadrantanopia)", hi: "निचला बायाँ चौथाई हिस्सा नहीं दिखता (quadrantanopia)" },
+    "sup-right": { en: "Upper right quarter lost (quadrantanopia)", hi: "ऊपरी दायाँ चौथाई हिस्सा नहीं दिखता (quadrantanopia)" },
+    "inf-right": { en: "Lower right quarter lost (quadrantanopia)", hi: "निचला दायाँ चौथाई हिस्सा नहीं दिखता (quadrantanopia)" },
+    tunnel: { en: "Only a small central island is left (tunnel vision)", hi: "सिर्फ़ बीच का छोटा हिस्सा दिखता है (tunnel vision)" },
+    central: { en: "Central scotoma (the centre is missing)", hi: "सेंट्रल स्कोटोमा (central scotoma: बीच का हिस्सा नहीं दिखता)" },
+    "arcuate-sup": { en: "Upper arcuate scotoma (an arc above the centre)", hi: "ऊपरी आर्कुएट स्कोटोमा (arcuate scotoma: बीच के ऊपर एक चाप)" },
+    "arcuate-inf": { en: "Lower arcuate scotoma (an arc below the centre)", hi: "निचला आर्कुएट स्कोटोमा (arcuate scotoma: बीच के नीचे एक चाप)" },
+    "altitudinal-sup": { en: "Upper altitudinal defect (the top half is missing)", hi: "ऊपरी ऑल्टिट्यूडिनल डिफ़ेक्ट (altitudinal defect: ऊपर का आधा नहीं दिखता)" },
+    "altitudinal-inf": { en: "Lower altitudinal defect (the bottom half is missing)", hi: "निचला ऑल्टिट्यूडिनल डिफ़ेक्ट (altitudinal defect: नीचे का आधा नहीं दिखता)" },
+    "left-half-sparing": { en: "Left half lost with macular sparing (the centre is kept)", hi: "बायाँ आधा नहीं दिखता, मैक्युलर स्पेयरिंग (macular sparing: बीच का हिस्सा बचा रहता है)" },
+    "right-half-sparing": { en: "Right half lost with macular sparing (the centre is kept)", hi: "दायाँ आधा नहीं दिखता, मैक्युलर स्पेयरिंग (macular sparing: बीच का हिस्सा बचा रहता है)" },
+    "blind-spot": { en: "Enlarged blind spot (a bigger gap beside the centre)", hi: "बड़ा ब्लाइंड स्पॉट (blind spot: बीच के पास बड़ी खाली जगह)" },
+    blur: { en: "Everything is blurred", hi: "सब कुछ धुंधला दिखता है" },
+    patchy: { en: "Scattered dark patches", hi: "जगह-जगह काले धब्बे" }
   };
   function L() { return I.lang(); }
   // Chrome string, HTML-safe; {n}-style values are escaped.
@@ -92,14 +134,48 @@
   // Rich text: escaped, [[term]] links open the glossary sheet. Each is an inline span with button semantics, not a
   // <button>: a button is an atomic box, so a long term ("corneal light reflex test (Hirschberg test)") jumped to its
   // own centred lines instead of wrapping with the sentence. Enter and Space open it (termKey).
+  // Abbreviation terms (glossary abbr: true, rule R3): the first [[term]] of a lesson reads "lateral geniculate nucleus
+  // (LGN)", later ones "LGN". Outside a lesson (Revise, the glossary) each screen's first use is expanded.
   function rich(obj) {
-    var h = D.glossParts(D.t(obj, L())).map(function (p) {
+    var lang = L(), local = {};
+    var h = D.glossParts(D.t(obj, lang)).map(function (p) {
       if (p.text != null) return esc(p.text);
-      var label = esc(p.shown || termText(p.term));
-      return W.gloss && W.gloss[p.term] ? '<span class="ln-term" role="button" tabindex="0" data-act="lngloss" data-g="' + esc(p.term) + '" aria-haspopup="dialog">' + label + "</span>" : label;
+      var g = W.gloss && W.gloss[p.term], label = p.shown || termText(p.term), ab = D.glossAbbr(g);
+      if (ab && (!p.shown || p.shown === ab || p.shown === g.term.en || p.shown === g.term.hi)) {
+        var first = abbrFirst(p.term, lang), mine = first === undefined ? true : first === obj;
+        label = mine && !local[p.term] ? D.glossFull(g, lang) || label : ab;
+        local[p.term] = 1;
+      }
+      label = esc(label);
+      return g ? '<span class="ln-term" role="button" tabindex="0" data-act="lngloss" data-g="' + esc(p.term) + '" aria-haspopup="dialog">' + label + "</span>" : label;
     }).join("");
     return fell(obj) ? '<span lang="en">' + h + "</span>" : h;
   }
+  // The lesson text in reading order (the rich() fields of each step), for "first use".
+  function lessonTexts(l) {
+    var out = [l.idea];
+    ((l.see && l.see.hotspots) || []).forEach(function (h) { out.push(h.note); });
+    if (l.why) out = out.concat(l.why.steps || [], [l.why.analogy]);
+    if (l.fields) { out.push(l.fields.intro); (l.fields.items || []).forEach(function (it) { out.push(it.where); }); }
+    out = out.concat(l.spot || [], l.todo || [], [l.remember]);
+    (l.check || []).forEach(function (q) { out.push(q.q, q.why); });
+    return out.filter(function (x) { return x && typeof x === "object"; });
+  }
+  // The text object holding a term's first use in the open lesson (per language); undefined outside a lesson.
+  function abbrFirst(term, lang) {
+    var l = W.les;
+    if (!l) return undefined;
+    if (!W.abx || W.abx.l !== l || W.abx.lang !== lang) {
+      var first = {};
+      lessonTexts(l).forEach(function (o) {
+        D.glossParts(D.t(o, lang)).forEach(function (p) { if (p.term && !first[p.term]) first[p.term] = o; });
+      });
+      W.abx = { l: l, lang: lang, first: first };
+    }
+    return W.abx.first[term];
+  }
+  // A glossary term's title: an abbreviation shows its full form ("lateral geniculate nucleus (LGN)").
+  function glossTitle(g) { return D.glossFull(g, L()) || D.t(g.term, L()); }
 
   /* ---------- data ---------- */
   // media: the image library by id (learn/media/credits.json); svg: fetched animation sources by id; n: SVG instance count.
@@ -325,7 +401,9 @@
 
   /* ---------- lesson player: one step per screen ---------- */
   function stepKeys(l) {
-    var a = ["idea", "see", "why", "spot", "todo", "remember"];
+    var a = ["idea", "see", "why"];
+    if (fieldsOf(l)) a.push("fields"); // What the patient sees: after the picture and the why, before Spot it
+    a = a.concat(["spot", "todo", "remember"]);
     l.check.forEach(function (q, i) { a.push("check" + i); });
     a.push("done");
     return a;
@@ -334,7 +412,7 @@
     var l = W.lessons[id], u = unitOf(id), res = u ? u.level === "resident" : l && l.level === "resident";
     if (res && I.trial("learn.resident") === "used") return I.gate("learn.resident", function () {}); // the paywall; nothing to fetch
     if (!l) return fetchOpen(id);
-    var go = function () { I.leave(); st.session = null; W.les = l; W.picks = {}; W.hot = {}; W.act = null; prefetchSvgs(l); renderStep(0, true); };
+    var go = function () { I.leave(); st.session = null; W.les = l; W.picks = {}; W.hot = {}; W.act = null; W.fsel = null; prefetchSvgs(l); renderStep(0, true); };
     if (res) return I.gate("learn.resident", go);
     go();
   }
@@ -375,6 +453,8 @@
     else if (k === "why") {
       body = '<h2 class="ln-h">' + s("why") + '</h2><ol class="ln-steps">' + l.why.steps.map(function (x) { return "<li>" + rich(x) + "</li>"; }).join("") + "</ol>" +
         '<div class="ln-analogy"><b>' + s("analogy") + "</b><p>" + rich(l.why.analogy) + "</p></div>";
+    } else if (k === "fields") {
+      body = fieldsHtml(l);
     } else if (k === "spot" || k === "todo") {
       body = '<h2 class="ln-h">' + s(k) + '</h2><ul class="ln-list">' + l[k].map(function (x) { return "<li>" + rich(x) + "</li>"; }).join("") + "</ul>";
     } else if (k === "remember") {
@@ -406,6 +486,7 @@
     var art = G.document.getElementById("lnArt");
     if (!noAnim && art) { art.classList.add("oph-reveal", "pre"); G.requestAnimationFrame(function () { G.requestAnimationFrame(function () { art.classList.remove("pre"); }); }); }
     if (k === "see") { wireSee(l); fillSvgs(); }
+    if (k === "fields") paintFields();
     var ban = G.document.querySelector(".ln-banner img");
     if (ban) ban.addEventListener("error", function () { ban.parentNode.hidden = true; });
   }
@@ -532,7 +613,9 @@
   }
   function hotList(l) {
     return l.see.hotspots.map(function (h, i) {
-      return W.hot[i] ? '<li value="' + (i + 1) + '"><b>' + tx(h.label) + "</b> " + rich(h.note) + "</li>" : "";
+      var fi = W.hot[i] && fieldForSite(l, h);
+      return W.hot[i] ? '<li value="' + (i + 1) + '"><b>' + tx(h.label) + "</b> " + rich(h.note) +
+        (fi ? ' <button class="oph-link ln-fgo" data-act="lnfgo" data-f="' + esc(fi.id) + '" aria-label="' + s("fSeeA", { x: plain(fi.label) }) + '">' + s("fSee") + "</button>" : "") + "</li>" : "";
     }).join("");
   }
   // Size the frame to the picture once it loads, so hotspot fractions land on the picture (not on letterboxing).
@@ -576,6 +659,191 @@
     G.document.getElementById("lnHotList").innerHTML = hotList(l);
     if (l.see.hotspots.every(function (x, j) { return W.hot[j]; })) { var sa = G.document.querySelector(".ln-showall"); if (sa) sa.remove(); }
     I.haptic("tap");
+  }
+
+  /* ---------- What the patient sees: a lesson's "fields" block (content rule R5, owner 2026-10-08) ---------- */
+  // Each item names a pattern per eye (le, re), as the patient sees it. The renderer draws them on one shared everyday
+  // scene (media id "fields-scene", or fields.scene): the left eye's view, the right eye's view, and both eyes open.
+  // "Normal" is always the first choice, for comparison. Loss is drawn dark or blurred (the learner's choice) on
+  // canvases sized to the device pixel ratio (up to 3). No transition between items: the swap is the point.
+  var FSCENE = "fields-scene";
+  function fieldsOf(l) { return l && l.fields && l.fields.items && l.fields.items.length ? l.fields : null; }
+  function fieldItem(f, id) { for (var i = 0; i < f.items.length; i++) if (f.items[i].id === id) return f.items[i]; return null; }
+  function patText(p, eye) {
+    var k = p === "temporal" || p === "nasal" ? p + "-" + eye : p;
+    return D.t(FPAT[k] || FPAT.full, L());
+  }
+  // What "both eyes open" shows, in words: the same half lost (homonymous), one eye only, or only where both miss.
+  function bothText(it) {
+    if (!it) return s("fBothNone");
+    var a = D.fieldResolve(it.le, "L"), b = D.fieldResolve(it.re, "R");
+    if (a === "full" && b === "full") return s("fBothNone");
+    if (a === b && a !== "temporal" && a !== "nasal") return s("fBothSame");
+    if (a === "full" || b === "full") return s("fBothCover");
+    if (it.le === "temporal" && it.re === "temporal") return s("fBothBitemp");
+    return s("fBothMix");
+  }
+  function fieldsHtml(l) {
+    var f = fieldsOf(l), sel = W.fsel && fieldItem(f, W.fsel) ? W.fsel : "normal", it = sel === "normal" ? null : fieldItem(f, sel);
+    var style = st.prefs.fstyle === "blur" ? "blur" : "dark", m = W.media && W.media[f.scene || FSCENE];
+    var le = it ? it.le : "full", re = it ? it.re : "full";
+    function chip(id, label) {
+      return '<button class="ln-fchip" data-act="lnfsel" data-f="' + esc(id) + '" aria-pressed="' + (id === sel) + '">' + label + "</button>";
+    }
+    function pane(eye, p) {
+      var name = s(eye === "L" ? "eyeL" : "eyeR"), d = esc(patText(p, eye));
+      return '<figure class="ln-fpane"><div class="ln-fframe"><canvas class="ln-fcv" data-eye="' + eye + '" role="img" aria-label="' + name + ": " + d + '"></canvas></div>' +
+        "<figcaption><b>" + name + "</b><span>" + d + "</span></figcaption></figure>";
+    }
+    return '<h2 class="ln-h">' + s("fields") + "</h2>" +
+      (f.intro ? '<p class="ln-fintro">' + rich(f.intro) + "</p>" : "") +
+      '<div class="ln-fchips" role="group" aria-label="' + s("fChoose") + '">' + chip("normal", s("fNormal")) +
+      f.items.map(function (x) { return chip(x.id, tx(x.label)); }).join("") + "</div>" +
+      '<div class="ln-fsim' + (m ? "" : " err") + '" id="lnFSim" data-sel="' + esc(sel) + '" data-le="' + esc(le) + '" data-re="' + esc(re) + '" data-style="' + style + '">' +
+      '<span class="oph-sr" role="status" id="lnFLive"></span>' +
+      '<div class="ln-fpair">' + pane("L", le) + pane("R", re) + "</div>" +
+      '<figure class="ln-fpane ln-fboth"><div class="ln-fframe"><canvas class="ln-fcv" data-eye="B" role="img" aria-label="' + s("eyeB") + ": " + bothText(it) + '"></canvas></div>' +
+      "<figcaption><b>" + s("eyeB") + "</b><span>" + bothText(it) + "</span></figcaption></figure>" +
+      (m ? "" : '<p class="ln-imgerr" role="status">' + s("fImgErr") + "</p>") + "</div>" +
+      (it && it.where ? '<p class="ln-fwhere"><b>' + s("fWhere") + "</b>" + rich(it.where) + "</p>" : "") +
+      '<p class="oph-small ln-fhow">' + s("fieldsHow") + "</p>" +
+      '<div class="ln-fstyle"><span class="oph-small" id="lnFStyleL">' + s("fStyle") + '</span><div class="oph-seg" role="group" aria-labelledby="lnFStyleL">' +
+      '<button data-act="lnfstyle" data-s="dark" aria-pressed="' + (style === "dark") + '">' + s("fDark") + "</button>" +
+      '<button data-act="lnfstyle" data-s="blur" aria-pressed="' + (style === "blur") + '">' + s("fBlur") + "</button></div></div>" +
+      '<p class="oph-small">' + s("fStyleNote") + "</p>" +
+      (m ? '<p class="oph-small ln-fcredit">' + creditHtml(m) + "</p>" : "");
+  }
+  // The scene picture, loaded once and shared by every canvas.
+  function sceneImg(m) {
+    if (W.fimg && W.fimg.m === m) return W.fimg;
+    var img = new G.Image(), o = W.fimg = { m: m, img: img, ok: false, bad: false, wait: [] };
+    img.decoding = "async";
+    img.onload = function () { o.ok = true; o.wait.splice(0).forEach(function (f) { f(); }); };
+    img.onerror = function () { o.bad = true; o.wait.splice(0).forEach(function (f) { f(); }); };
+    img.src = mediaUrl(m);
+    return o;
+  }
+  // The loss mask for one canvas: a small alpha map (MW x MH) computed from the pattern model in ophthalmos-data.js,
+  // scaled up with smoothing so its edges stay soft; dark = the "d" channel, blur = "b" (+ "d" when drawn blurred).
+  var MW = 192, MH = 128;
+  function maskCanvas(eye, le, re, chan, style) {
+    var c = G.document.createElement("canvas"), x = c.getContext("2d"), id = x.createImageData(MW, MH), px = id.data, any = false;
+    c.width = MW; c.height = MH;
+    for (var j = 0; j < MH; j++) for (var i = 0; i < MW; i++) {
+      var u = (i + 0.5) / MW, v = (j + 0.5) / MH;
+      var r = eye === "B" ? D.fieldBoth(le, re, u, v, 1.5) : D.fieldAlpha(eye === "L" ? le : re, eye, u, v, 1.5);
+      var a = chan === "d" ? (style === "dark" ? r.d : 0) : (style === "blur" ? Math.max(r.b, r.d) : r.b);
+      var k = (j * MW + i) * 4;
+      px[k] = px[k + 1] = px[k + 2] = 0; px[k + 3] = Math.round(a * 255);
+      if (a > 0.004) any = true;
+    }
+    if (!any) return null;
+    x.putImageData(id, 0, 0);
+    return c;
+  }
+  // A blurred copy of the scene at w x h: the canvas filter where it works, else a downscale and smooth upscale.
+  function blurred(img, w, h) {
+    var c = G.document.createElement("canvas"), x = c.getContext("2d");
+    c.width = w; c.height = h;
+    // Halve four times, then double back up: each step is a smooth (bilinear) resample, so the result is an even
+    // blur on every WebView, without depending on the canvas filter property.
+    var src = img, sw = w, sh = h, chain = [], k;
+    for (k = 0; k < 4; k++) {
+      var t = G.document.createElement("canvas"), tc = t.getContext("2d");
+      sw = Math.max(4, Math.round(sw / 2)); sh = Math.max(3, Math.round(sh / 2));
+      t.width = sw; t.height = sh;
+      tc.imageSmoothingEnabled = true; tc.imageSmoothingQuality = "high";
+      tc.drawImage(src, 0, 0, sw, sh);
+      chain.push(t); src = t;
+    }
+    for (k = chain.length - 2; k >= 0; k--) {
+      var up = chain[k], uc = up.getContext("2d");
+      uc.clearRect(0, 0, up.width, up.height);
+      uc.drawImage(src, 0, 0, up.width, up.height);
+      src = up;
+    }
+    x.imageSmoothingEnabled = true; x.imageSmoothingQuality = "high";
+    x.drawImage(src, 0, 0, w, h);
+    return c;
+  }
+  function paintCanvas(cv, o, le, re, style) {
+    var eye = cv.getAttribute("data-eye"), dpr = Math.min(3, G.devicePixelRatio || 1);
+    var w = Math.max(1, Math.round(cv.clientWidth * dpr)), h = Math.max(1, Math.round(cv.clientHeight * dpr));
+    if (cv.width !== w) cv.width = w;
+    if (cv.height !== h) cv.height = h;
+    var x = cv.getContext("2d");
+    x.imageSmoothingEnabled = true; x.imageSmoothingQuality = "high";
+    x.globalCompositeOperation = "source-over";
+    x.drawImage(o.img, 0, 0, w, h);
+    [["b", null], ["d", "#0b0c0e"]].forEach(function (ch) {
+      var mk = maskCanvas(eye, le, re, ch[0], style);
+      if (!mk) return;
+      var layer = G.document.createElement("canvas"), lx = layer.getContext("2d");
+      layer.width = w; layer.height = h;
+      if (ch[1]) { lx.fillStyle = ch[1]; lx.fillRect(0, 0, w, h); }
+      else {
+        if (!o.blur || o.blur.width !== w || o.blur.height !== h) o.blur = blurred(o.img, w, h);
+        lx.drawImage(o.blur, 0, 0);
+      }
+      lx.globalCompositeOperation = "destination-in";
+      lx.imageSmoothingEnabled = true; lx.imageSmoothingQuality = "high";
+      lx.drawImage(mk, 0, 0, w, h);
+      x.drawImage(layer, 0, 0);
+    });
+  }
+  function paintFields() {
+    var sim = G.document.getElementById("lnFSim"), f = W.les && fieldsOf(W.les);
+    if (!sim || !f) return;
+    var m = W.media && W.media[f.scene || FSCENE];
+    if (!m) return;
+    var o = sceneImg(m), le = sim.getAttribute("data-le"), re = sim.getAttribute("data-re"), style = sim.getAttribute("data-style");
+    function go() {
+      if (!sim.isConnected) return;
+      if (o.bad) {
+        if (!sim.classList.contains("err")) { sim.classList.add("err"); sim.insertAdjacentHTML("beforeend", '<p class="ln-imgerr" role="status">' + s("fImgErr") + "</p>"); }
+        return;
+      }
+      Array.prototype.forEach.call(sim.querySelectorAll(".ln-fcv"), function (cv) { paintCanvas(cv, o, le, re, style); });
+    }
+    if (o.ok || o.bad) go(); else o.wait.push(go);
+  }
+  // A rotation or resize changes the canvases' size: repaint them at the new size (once per frame).
+  var fRaf = 0;
+  G.addEventListener("resize", function () {
+    if (fRaf || !G.document.getElementById("lnFSim")) return;
+    fRaf = G.requestAnimationFrame(function () { fRaf = 0; paintFields(); });
+  });
+  // Swap the pattern in place (no repaint of the step, so focus stays on the chip and nothing moves).
+  function selectField(id, focus) {
+    var l = W.les, f = fieldsOf(l);
+    if (!f) return;
+    W.fsel = id === "normal" || fieldItem(f, id) ? id : "normal";
+    var sc = G.document.getElementById("lnScroll"), top = sc ? sc.scrollTop : 0;
+    var art = G.document.getElementById("lnArt");
+    if (!art || art.getAttribute("data-step") !== "fields") return;
+    art.innerHTML = fieldsHtml(l);
+    if (sc) sc.scrollTop = top;
+    paintFields();
+    // Announce the new pattern: the status region is empty when inserted, then filled, so it is read out.
+    var it = W.fsel !== "normal" && fieldItem(f, W.fsel), live = G.document.getElementById("lnFLive");
+    G.setTimeout(function () { if (live && live.isConnected) live.textContent = it ? D.t(it.label, L()) : D.t(STR.fNormal, L()); }, 60);
+    var b = focus && art.querySelector(focus);
+    try { if (b) b.focus({ preventScroll: true }); } catch (e) {}
+  }
+  // A pathway site (a lesson's hotspot) -> its "fields" item, when the lesson has one for that lesion.
+  var SITE_RE = [["optic-nerve", /optic nerve/i], ["chiasm", /chiasm/i], ["optic-tract", /optic tract/i], ["lgn", /\bLGN\b|geniculate/i],
+    ["meyer-loop", /meyer/i], ["parietal-radiation", /parietal/i], ["occipital-cortex", /visual cortex|occipital/i], ["macula", /macula/i], ["retina", /retina/i]];
+  function siteOf(h) {
+    if (h.site) return h.site;
+    var t = (h.label && h.label.en) || "";
+    for (var i = 0; i < SITE_RE.length; i++) if (SITE_RE[i][1].test(t)) return SITE_RE[i][0];
+    return null;
+  }
+  function fieldForSite(l, h) {
+    var f = fieldsOf(l), site = f && siteOf(h);
+    if (!site) return null;
+    for (var i = 0; i < f.items.length; i++) if (f.items[i].lesion === site) return f.items[i];
+    return null;
   }
 
   /* ---------- enlarged picture: the clinic stage over the lesson (same as the notes reader) ---------- */
@@ -627,7 +895,7 @@
     if (L() === "hi") el.setAttribute("lang", "hi");
     el.innerHTML = '<div class="ln-scrim" data-act="lnsheetclose" aria-hidden="true"></div>' +
       '<div class="ln-sheet" role="dialog" aria-modal="true" aria-labelledby="lnSheetH"><div class="ln-grab" aria-hidden="true"></div>' +
-      '<h2 id="lnSheetH">' + tx(g.term) + "</h2><p>" + tx(g.def) + "</p>" +
+      '<h2 id="lnSheetH">' + esc(glossTitle(g)) + "</h2><p>" + tx(g.def) + "</p>" +
       '<button class="oph-btn sec oph-wide" data-act="lnsheetclose">' + s("closeSheet") + "</button></div>";
     Array.prototype.forEach.call(r.children, function (c) { c.inert = true; });
     r.appendChild(el);
@@ -647,10 +915,11 @@
   function glossList(focusSel) {
     st.view = "lngloss"; st.onBack = sheetBack; W.again = glossList;
     var g = W.gloss || {}, lang = L();
-    var ids = Object.keys(g).sort(function (a, b) { return D.t(g[a].term, lang).localeCompare(D.t(g[b].term, lang), lang); });
+    // Sorted by the title the row shows (an abbreviation term shows its full form first, owner rule R3).
+    var ids = Object.keys(g).sort(function (a, b) { return glossTitle(g[a]).localeCompare(glossTitle(g[b]), lang); });
     paint(I.top(s("backLearn"), s("glossary"), s("nTerms", { n: fmt(ids.length) }), langBtn()) +
       '<div class="oph-scroll oph-pad"><div class="ln-col"><ul class="ln-gloss">' + ids.map(function (id) {
-        return '<li><button class="ln-grow" data-act="lngloss" data-g="' + esc(id) + '" aria-haspopup="dialog"><b>' + tx(g[id].term) + "</b><span>" + tx(g[id].def) + "</span></button></li>";
+        return '<li><button class="ln-grow" data-act="lngloss" data-g="' + esc(id) + '" aria-haspopup="dialog"><b>' + esc(glossTitle(g[id])) + "</b><span>" + tx(g[id].def) + "</span></button></li>";
       }).join("") + "</ul></div></div>", focusSel);
   }
 
@@ -735,6 +1004,10 @@
   A.lnhot = function (b) { toggleHot(+b.getAttribute("data-k")); };
   A.lnshowall = function () { var l = W.les; l.see.hotspots.forEach(function (h, i) { if (!W.hot[i]) toggleHot(i, true); }); var t = G.document.querySelector(".ln-pic-b"); try { t.focus({ preventScroll: true }); } catch (e) {} };
   A.lnzoom = zoom;
+  A.lnfsel = function (b) { var id = b.getAttribute("data-f"); selectField(id, '[data-act=lnfsel][data-f="' + id + '"]'); I.haptic("tap"); };
+  A.lnfstyle = function (b) { setPrefs("fstyle", b.getAttribute("data-s")); selectField(W.fsel || "normal", '[data-act=lnfstyle][data-s="' + b.getAttribute("data-s") + '"]'); };
+  // A pathway site's "See what the patient sees": straight to the fields step with that pattern chosen.
+  A.lnfgo = function (b) { var l = W.les, i = l ? stepKeys(l).indexOf("fields") : -1; if (i < 0) return; W.fsel = b.getAttribute("data-f"); renderStep(i, false, '[data-act=lnfsel][aria-pressed="true"]'); };
   A.lnplay = togglePlay;
   A.lnzin = function () { if (W.zoom) W.zoom._z.zoomBy(1.5); };
   A.lnzfit = function () { if (W.zoom) W.zoom._z.reset(); };

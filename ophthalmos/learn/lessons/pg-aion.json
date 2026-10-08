@@ -10,12 +10,12 @@
     ]
   },
   "title": {
-    "en": "Ischaemic optic neuropathy: NAION or GCA?",
-    "hi": "इस्कीमिक ऑप्टिक न्यूरोपैथी: NAION या GCA?"
+    "en": "Ischaemic optic neuropathy: non-arteritic anterior ischaemic optic neuropathy (NAION) or giant cell arteritis (GCA)?",
+    "hi": "इस्कीमिक ऑप्टिक न्यूरोपैथी: non-arteritic anterior ischaemic optic neuropathy (NAION) या giant cell arteritis (GCA)?"
   },
   "idea": {
-    "en": "Sudden painless vision loss with a swollen disc after 50 is often ischaemic. Rule out [[gca]] first, because it can blind the other eye within days. If you suspect it, start steroids before the biopsy.",
-    "hi": "50 की उम्र के बाद सूजी डिस्क के साथ अचानक बिना दर्द नज़र जाना अक्सर इस्कीमिक होता है। पहले [[gca]] को ख़ारिज करें, क्योंकि यह कुछ ही दिनों में दूसरी आँख की नज़र भी ले सकता है। शक हो तो बायोप्सी से पहले स्टेरॉयड शुरू करें।"
+    "en": "Sudden painless vision loss with a swollen disc after 50 is often ischaemic (due to poor blood supply). Rule out [[gca]] first, because it can blind the other eye within days. If you suspect it, start steroids before the temporal artery biopsy.",
+    "hi": "50 की उम्र के बाद सूजी डिस्क के साथ अचानक बिना दर्द नज़र जाना अक्सर इस्कीमिक (ischaemic, खून की कमी से) होता है। पहले [[gca]] को ख़ारिज करें, क्योंकि यह कुछ ही दिनों में दूसरी आँख की नज़र भी ले सकता है। शक हो तो टेम्पोरल आर्टरी (temporal artery) की बायोप्सी से पहले स्टेरॉयड शुरू करें।"
   },
   "see": {
     "w": 768,
@@ -38,8 +38,8 @@
           "hi": "ख़तरे वाली डिस्क"
         },
         "note": {
-          "en": "A small disc with little or no cup crowds the fibres. It is the main anatomical risk for NAION.",
-          "hi": "कम या बिना कप वाली छोटी डिस्क में तंतु ठसाठस भरे होते हैं। यह NAION का मुख्य बनावटी ख़तरा है।"
+          "en": "A small disc with little or no cup crowds the optic nerve fibres as they leave the eye. It is the main anatomical risk for NAION.",
+          "hi": "कम या बिना कप वाली छोटी डिस्क में आँख से निकलते ऑप्टिक नर्व के तंतु ठसाठस भरे होते हैं। यह NAION का मुख्य बनावटी ख़तरा है।"
         }
       },
       {
@@ -50,8 +50,8 @@
           "hi": "एक हिस्से की सूजन"
         },
         "note": {
-          "en": "NAION often swells one part of the disc, with a matching field loss, often below.",
-          "hi": "NAION में अक्सर डिस्क का एक हिस्सा सूजता है, और उससे मेल खाती फ़ील्ड की कमी होती है, अक्सर नीचे की ओर।"
+          "en": "NAION often swells one part of the disc, with a matching visual field loss (part of the area you can see is lost), often below.",
+          "hi": "NAION में अक्सर डिस्क का एक हिस्सा सूजता है, और उससे मेल खाती दृष्टि क्षेत्र (visual field, यानी जितना आप देख पाते हैं) की कमी होती है, अक्सर नीचे की ओर।"
         }
       },
       {
@@ -96,40 +96,62 @@
       "neuro-aion"
     ]
   },
+  "fields": {
+    "intro": {
+      "en": "Non-arteritic anterior ischaemic optic neuropathy (NAION) often takes the lower field of one eye.",
+      "hi": "नॉन-आर्टेराइटिक एंटीरियर इस्कीमिक ऑप्टिक न्यूरोपैथी (non-arteritic anterior ischaemic optic neuropathy, NAION) में अक्सर एक आँख का नीचे का दृष्टि क्षेत्र जाता है।"
+    },
+    "items": [
+      {
+        "id": "altitudinal-inferior",
+        "label": {
+          "en": "Inferior altitudinal defect (lower half lost in one eye)",
+          "hi": "निचला अल्टीट्यूडिनल डिफ़ेक्ट (inferior altitudinal defect, एक आँख में नीचे का आधा जाना)"
+        },
+        "le": "full",
+        "re": "altitudinal-inf",
+        "where": {
+          "en": "Right optic nerve head: the upper part of the disc swells. It loses blood supply from the short posterior ciliary arteries. So the lower half of the right eye's field is lost.",
+          "hi": "दाईं ऑप्टिक नर्व हेड (optic nerve head): डिस्क का ऊपरी हिस्सा सूजता है और उसे शॉर्ट पोस्टीरियर सिलियरी आर्टरी (short posterior ciliary arteries) से खून कम मिलता है। इसलिए दाईं आँख के दृष्टि क्षेत्र का निचला आधा हिस्सा चला जाता है।"
+        },
+        "lesion": "optic-nerve"
+      }
+    ]
+  },
   "why": {
     "steps": [
       {
-        "en": "[[naion]] is a small stroke of the optic nerve head. Risks include a small crowded disc, diabetes and high blood pressure.",
-        "hi": "[[naion]] ऑप्टिक नर्व के सिरे का छोटा स्ट्रोक है। ख़तरे: छोटी भीड़ वाली डिस्क, डायबिटीज़ और हाई ब्लड प्रेशर।"
+        "en": "[[naion]] is a small stroke of the optic nerve head. It comes from poor blood flow in the short posterior ciliary arteries that supply it. Risks include a small crowded disc, diabetes and high blood pressure.",
+        "hi": "[[naion]] ऑप्टिक नर्व के सिरे का छोटा स्ट्रोक है, जो उसे खून देने वाली शॉर्ट पोस्टीरियर सिलियरी आर्टरी (short posterior ciliary arteries) में खून का बहाव घटने से होता है। ख़तरे: छोटी भीड़ वाली डिस्क, डायबिटीज़ और हाई ब्लड प्रेशर।"
       },
       {
-        "en": "Vision falls suddenly and without pain, often noticed on waking. The disc swells, often in one sector, with a matching field defect.",
-        "hi": "नज़र अचानक और बिना दर्द घटती है, अक्सर सुबह उठने पर पता चलता है। डिस्क सूजती है, अक्सर एक हिस्से में, और उससे मेल खाती फ़ील्ड की कमी होती है।"
+        "en": "Vision falls suddenly and without pain, often noticed on waking. The disc swells, often in one sector, with a matching visual field defect.",
+        "hi": "नज़र अचानक और बिना दर्द घटती है, अक्सर सुबह उठने पर पता चलता है। डिस्क सूजती है, अक्सर एक हिस्से में, और उससे मेल खाती दृष्टि क्षेत्र की कमी होती है।"
       },
       {
-        "en": "Arteritic AION comes from [[gca]]. The disc is often chalky white, and the loss is often severe.",
-        "hi": "आर्टेराइटिक AION [[gca]] से होता है। डिस्क अक्सर चॉक जैसी सफ़ेद होती है, और नज़र अक्सर बहुत घटती है।"
+        "en": "Arteritic anterior ischaemic optic neuropathy (AION) comes from [[gca]]. It inflames arteries, including the temporal artery and the short posterior ciliary arteries feeding the optic nerve head. The disc is often chalky white, and the loss is often severe.",
+        "hi": "आर्टेराइटिक anterior ischaemic optic neuropathy (AION) [[gca]] से होता है, जो धमनियों की सूजन है और इसमें टेम्पोरल आर्टरी (temporal artery) तथा ऑप्टिक नर्व हेड को खून देने वाली शॉर्ट पोस्टीरियर सिलियरी आर्टरी (short posterior ciliary arteries) शामिल हैं। डिस्क अक्सर चॉक जैसी सफ़ेद होती है, और नज़र अक्सर बहुत घटती है।"
       },
       {
         "en": "Ask about jaw pain on chewing, scalp tenderness, new headache, shoulder stiffness, weight loss and fever.",
         "hi": "चबाने पर जबड़े का दर्द, सिर की त्वचा छूने पर दर्द, नया सिरदर्द, कंधों की अकड़न, वज़न घटना और बुख़ार के बारे में पूछें।"
       },
       {
-        "en": "Check ESR and CRP the same day. The 2022 ACR/EULAR criteria give 3 points for ESR of 50 or more, or CRP of 10 mg/L or more.",
-        "hi": "उसी दिन ESR और CRP जाँचें। 2022 के ACR/EULAR मानदंड 50 या ज़्यादा ESR, या 10 mg/L या ज़्यादा CRP पर 3 अंक देते हैं।"
+        "en": "Check erythrocyte sedimentation rate (ESR) and C-reactive protein (CRP) the same day. The 2022 American College of Rheumatology and European Alliance of Associations for Rheumatology (ACR/EULAR) criteria score points. ESR of 50 or more, or CRP of 10 mg/L or more, gives 3.",
+        "hi": "उसी दिन erythrocyte sedimentation rate (ESR) और C-reactive protein (CRP) जाँचें। 2022 के American College of Rheumatology और European Alliance of Associations for Rheumatology (ACR/EULAR) मानदंड अंक देते हैं। 50 या ज़्यादा ESR, या 10 mg/L या ज़्यादा CRP पर 3 अंक मिलते हैं।"
       },
       {
         "en": "They also give 3 points for sudden vision loss and 2 for jaw pain. They classify patients for research, but they show which features weigh most.",
         "hi": "वे अचानक नज़र जाने पर भी 3 अंक और जबड़े के दर्द पर 2 अंक देते हैं। ये शोध के लिए मरीज़ों को बाँटते हैं, पर दिखाते हैं कि कौन सी बातें सबसे भारी हैं।"
       },
       {
-        "en": "If GCA is likely, start steroids at once; do not wait for the biopsy. With vision loss, give IV methylprednisolone 500 mg to 1 g daily for 3 days, then oral prednisolone. Without vision loss, give oral prednisolone 40 to 60 mg daily.",
-        "hi": "अगर GCA की संभावना हो, तो तुरंत स्टेरॉयड शुरू करें; बायोप्सी का इंतज़ार न करें। नज़र गई हो तो 3 दिन तक रोज़ 500 mg से 1 g IV मिथाइलप्रेडनिसोलोन दें, फिर मुँह से प्रेडनिसोलोन। नज़र न गई हो तो मुँह से रोज़ 40 से 60 mg प्रेडनिसोलोन दें।"
+        "en": "If GCA is likely, start steroids at once; do not wait for the biopsy. With vision loss, give intravenous (IV) methylprednisolone 500 mg to 1 g daily for 3 days, then oral prednisolone. Without vision loss, give oral prednisolone 40 to 60 mg daily.",
+        "hi": "अगर GCA की संभावना हो, तो तुरंत स्टेरॉयड शुरू करें; बायोप्सी का इंतज़ार न करें। नज़र गई हो तो 3 दिन तक रोज़ 500 mg से 1 g नस से (intravenous, IV) मिथाइलप्रेडनिसोलोन दें, फिर मुँह से प्रेडनिसोलोन। नज़र न गई हो तो मुँह से रोज़ 40 से 60 mg प्रेडनिसोलोन दें।"
       }
     ],
     "analogy": {
-      "en": "NAION is a jam in a narrow tunnel, because the disc is too crowded. GCA is a fire in the pipes that feed the tunnel, and it can spread to the other eye.",
-      "hi": "NAION एक संकरी सुरंग में जाम जैसा है, क्योंकि डिस्क में बहुत भीड़ है। GCA सुरंग तक खून पहुँचाने वाली पाइपों में आग जैसा है, जो दूसरी आँख तक फैल सकती है।"
+      "en": "NAION is a jam in a narrow tunnel, because the disc is too crowded. GCA is a fire in the pipes (the short posterior ciliary arteries) that feed the tunnel, and it can spread to the other eye.",
+      "hi": "NAION एक संकरी सुरंग में जाम जैसा है, क्योंकि डिस्क में बहुत भीड़ है। GCA सुरंग तक खून पहुँचाने वाली पाइपों (short posterior ciliary arteries) में आग जैसा है, जो दूसरी आँख तक फैल सकती है।"
     }
   },
   "spot": [
@@ -148,12 +170,12 @@
   ],
   "todo": [
     {
-      "en": "Suspected GCA: same-day ESR, CRP and full blood count with platelets. Start steroids, then arrange a temporal artery biopsy within 2 weeks or an ultrasound within 1 week.",
-      "hi": "GCA का शक: उसी दिन ESR, CRP और प्लेटलेट समेत पूरा ब्लड काउंट। स्टेरॉयड शुरू करें, फिर 2 हफ़्ते के अंदर टेम्पोरल आर्टरी की बायोप्सी या 1 हफ़्ते के अंदर अल्ट्रासाउंड करवाएँ।"
+      "en": "Suspected GCA: same-day ESR, CRP and full blood count with platelets. Start steroids, then arrange a temporal artery biopsy within 2 weeks or a temporal artery ultrasound within 1 week.",
+      "hi": "GCA का शक: उसी दिन ESR, CRP और प्लेटलेट समेत पूरा ब्लड काउंट। स्टेरॉयड शुरू करें, फिर 2 हफ़्ते के अंदर टेम्पोरल आर्टरी की बायोप्सी या 1 हफ़्ते के अंदर टेम्पोरल आर्टरी का अल्ट्रासाउंड करवाएँ।"
     },
     {
-      "en": "Confirmed NAION: no treatment is proven to help. Nerve sheath surgery did not help and may harm.",
-      "hi": "पक्का NAION: किसी इलाज का फ़ायदा साबित नहीं है। नर्व की परत की सर्जरी से फ़ायदा नहीं हुआ और नुक़सान हो सकता है।"
+      "en": "Confirmed NAION: no treatment is proven to help. Optic nerve sheath fenestration (cutting a window in the nerve sheath) did not help and may harm.",
+      "hi": "पक्का NAION: किसी इलाज का फ़ायदा साबित नहीं है। ऑप्टिक नर्व शीथ फ़ेनेस्ट्रेशन (optic nerve sheath fenestration, नर्व की परत में खिड़की काटना) से फ़ायदा नहीं हुआ और नुक़सान हो सकता है।"
     },
     {
       "en": "In NAION, control vascular risks such as diabetes, blood pressure and lipids.",
@@ -186,8 +208,8 @@
       ],
       "a": 0,
       "why": {
-        "en": "Jaw claudication comes from narrowed arteries that feed the chewing muscles.",
-        "hi": "जबड़े का यह दर्द चबाने वाली मांसपेशियों को खून देने वाली संकरी धमनियों से होता है।"
+        "en": "Jaw claudication (pain on chewing) comes from narrowed arteries (branches of the external carotid artery) that feed the chewing muscles.",
+        "hi": "जबड़े का यह दर्द चबाने वाली मांसपेशियों को खून देने वाली संकरी धमनियों (external carotid artery की शाखाओं) से होता है।"
       }
     },
     {

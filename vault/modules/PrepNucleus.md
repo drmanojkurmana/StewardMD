@@ -571,6 +571,110 @@ Owner decisions: [[decisions/Decisions]] "PrepNucleus pricing, free tier and soc
 - Headless: run-prep-ui.mjs checks the answer line, the dimmed options, the sticky row, the tapped-Next slide, the timed
   pick check and the result recap; run-prep-pyq-ui.mjs checks the right / others headings and the three reasons.
 
+## Structured explanations (2026-10-08, branch `feat/prep-explain`, `?v=prep22`, bank v5)
+- Owner (iPad, 2026-10-08): "How is explanation missing ... more details related to topic ... in easy readable way"
+  (Marrow screenshots). Bank v1: 24,497 items with empty `exp`, 29,436 under 200 chars.
+- Data: an item may carry `x = { key, notes, others: { letter: reason }, pearl }`; `exp` is never touched; `r` is
+  filled from x when the item has none (`r[a] = key`). Written by `tools/prep-explain.mjs` (Batch, resumable,
+  `--dry-run` per scope, `--pilot n`, `--apply --run <id> --to <dir>`). Work files and results live in the gitignored
+  `prep/explain/<run>/` (prompts carry source-pack text, StatPearls included).
+- Grounding: the item's exp + BM25 passages of its module pack (`prep/fill/packs`, `~/prep-data/packs-statpearls`) and
+  of the KB (`kb/`, boilerplate index lines dropped; a KB passage must share a stem word and, unless the stem asks for
+  the exception, a key word). Most MBBS modules have no pack, so the KB and exp carry most items.
+- Gates (code): g1 fields, `key` (key line names the stored answer: squashed text, or 60% of words with prefix and
+  2-letter slip tolerance, or the declared letter `ka` when the option has no nameable words), `align` (a reason under
+  the wrong letter), g9b numbers grounded, verbatim 12 words, `markup` (subset only, tables well formed), `source`,
+  `ai`, `dash`, `long`. Review: `buildReviewPrompt` + notes + gate `nt`; pass needs g7 g8 g9 g10 nt (g4 g6 g11 judge
+  the question's writing, recorded as `rv.qf`). One retry with the reason; still failing -> `pending`, old exp stays.
+- Pilot 1 lesson: asking for wrong-option reasons only (key = "") made the model pack reasons into A to C and leave D
+  empty, i.e. reasons under the wrong letter. Now every option gets a reason in order (ra..rd) and `align` checks it.
+- Client (prep.js pure part, unit-tested): `mdLite` (escape first, then `##`, `**`, `-`/`*` bullets, `1.` steps, pipe
+  tables in a focusable `.pn-xt` region that scrolls inside the card with the first column pinned), `legacyExp` (old
+  "*a *b" bullets -> list), `explainOf`. Runner and review screens: key line `.pn-xkey`, `.pn-xnotes`, why the others
+  are wrong (from r or x), `.pn-kp` "Remember". Headless: `test/run-prep-explain-ui.mjs` (synthetic fixture
+  `test/fixtures/prep-explain/items.json`, or `ITEMS=<pilot applied.json>` for real screenshots).
+- Grounding rule (owner, 2026-10-08): a pack or KB passage is sent only when on topic (a strong stem word plus a strong
+  key word; any option's word for "All of the above" or an EXCEPT stem; two stem words when no option has a word), else
+  none and the model works from the item's exp and the stem. Names with digits (CD20, CD 20, IL-2, I-131, 50S) are
+  exempt from the number gate. These cleared the 3 pilot pendings: pilot 60/60.
+- Scope (b) run (owner approved: empty + short exp, 46,173 items after the pilot): `--scope short --run scope-b
+  --skip-runs pilot,pilot-fix --parts 10 --conc 5 --max-usd 32` (a job that would pass the cap is never submitted).
+- Bank v5 = v4 + x/r: `node tools/prep-explain.mjs --apply --runs pilot,pilot-fix,pilot-fix2,scope-b --bank <v4>
+  --pyq <prep/pyq/out> --to <v5>` (refuses an existing folder). PYQ items matching a bank item with x (same key,
+  options one to one) and a thinner explanation take the bank's x; the PYQ files go to v5/pyq/ and the client reads
+  PYQ from `SMD_PREP_PYQ_VER` (default v5). A later PYQ build must be written under the version the client reads.
+- Images in explanations: an item may carry `img` (webp names) and `imgPlace` "stem" | "exp"; bank item images are
+  served at `/api/prep/bank/<VER>/img/<file>.webp` (route `IMG_RE`); `PREP_PYQ.figure(it, host, where)` draws both.
+
+## Practice setup and image questions (2026-10-08, branch `feat/prep-practice-setup`, `?v=prep23`)
+- `prep-setup.js` (`window.PREP_SETUP`, optional in the loader, after `prep-pyq.js`) + `prep-setup.css`. A sheet before a
+  set from a module (Practice and Timed test; "Review N due" stays direct), a subject (new "Practise <subject>" under the
+  hero), the custom module (its difficulty, count and mode panels moved into the sheet), My mistakes (no repeat row),
+  bookmarks, a PYQ paper ("Choose questions", and each "By subject" row), a module's PYQs, and a Layer C deck.
+  `prep.js` forwards `su-*` acts and asks `PREP_SETUP.back()` first. `window.SMD_PREP_SETUP = false` skips the sheet
+  (older headless suites set it).
+- Rows (each chip shows the pool it leaves, live): type All / Image-based / Clinical scenario / One-liner / Mix; count
+  10/20/30/50 or a stepper, capped by the pool; New / Incorrect before / Bookmarked / Due for review / All / Mix;
+  difficulty Easy/Moderate/Hard/Mix (`d` 1/2/3); mode Practice / Timed test; timer Off / Per question (30, 45, 60, 90 s,
+  stepper) / Whole set (exam pace 1 min a question, or minutes). A timed test has no Off. Per question: a timed test
+  moves on when time is up (unanswered), practice shows the ring only (`runQuestions` opts `qsec`, `limit`, `untimed`;
+  `qtick` in prep.js).
+- Image-based = `img` with `imgPlace` "stem", or a PYQ item with `img`. Clinical vs one-liner: `stemScore` (age +2, a
+  person +1, strong vignette cue +2/+3, weak cue +1, vitals +1, 35+ words +2 / 22+ +1; 3 or more = scenario; a USMLE
+  `ex` tag always a scenario), cached on the item as `_k`. Incorrect before = in `mt`, a lapse, or the card's
+  `due - last == 1` (a miss is rescheduled for the next day).
+- Draw: `customDraw` (prep.js) is the only picker; a Mix splits the count first (type thirds; repeat 50% new, 30% due,
+  20% incorrect, short groups refilled; difficulty in proportion to the pool). Empty pool: `relaxHint` names the row.
+- Remembered per scope in localStorage `smd_prep_setup` (`kind:id`, then `kind`, 40 kept). "Start with last settings"
+  (`su-last`, `PREP_SETUP.quick`) starts a module, subject, bookmarks or mistakes set in one tap; decks and PYQ open the
+  sheet already set to the last choice.
+- Subject pool: every module when the subject is downloaded, else modules with progress first, 16 files at most.
+- Layer C images: after a PDF's text is read, `PREP_SRC.extractImages` reads each page's operator list (`imageBoxes`:
+  CTM through save/restore/transform/form XObjects), `pickImages` keeps images of 200 x 200 px or more, at least 12% of
+  the page each way, no more than 4:1, not repeated on 2 pages (id or place), top to bottom, 20 at most; each is
+  rendered from its page area at its own size (1280 px at most), WebP else JPEG. The "Images in your PDF" screen
+  (`#pcImgView`) is a strip of toggles. After the text round, one `imcq` op per kept image with `nearSents` (caption
+  first, page text, neighbours when thin, 12 sentences, 1,500 chars). Server (`_prep-generate.js`, `_prep-core.js`
+  `buildImageMcqPrompt`): the image is an `inline_data` part of the same Vertex call; gates: `sure`, cited `sn` among
+  those sent, code gates on the cited text, `gateImgSupport` (60% of the key's words in it), `imageStemOk`; else
+  `skipped`. Same caps, metering and deck-not-started rule as the other ops; image base64 at most 360,000 chars (the
+  phone re-encodes smaller). Kept images live in IndexedDB `prep-gen` store `prep-imgs` (db version 2), only for
+  images that got a question; items carry `imgId`, `attachImages` puts the data URL in `img` at practice time and
+  `PREP_PYQ.figure` shows `data:` URLs as they are.
+- Gotcha: `emoji-icons.js` rewrites any on-screen "Page 3" text as a textbook citation line; the image strip shows the
+  page number by a glyph instead.
+- Tests: `test/prep-setup.test.mjs` (classifier, filters, draw, timer, synthetic 2-image PDF through vendored pdf.js,
+  deck image step), `test/prep-imcq.test.mjs` (request shape, gates), headless `test/run-prep-setup-ui.mjs`. Out of
+  scope: CT or MRI cine and video.
+
+## Radiology notes, set "radnotes" (2026-10-09, branch `feat/prep-radnotes-app`, `?v=prep25`)
+- Source: the owner's two radiology notes books (owner 2026-10-08: his own work, he holds the rights and authorises use;
+  third-party logos, exam-question screenshots, watermarks and citations are kept and listed for him, his call).
+  Built by `tools/prep-radnotes.mjs` (+ `tools/prep-radnotes-extract.py`, `test/prep-radnotes.test.mjs`). The PDFs, their
+  text and figures never enter git; work and outputs live in `~/prep-data/radnotes` (manifest with SHA-256:
+  `out/manifest.json`).
+- R2 (`stewardmd-offline/prep-bank/`): 50 lessons `v1/lessons/radnotes-<sid>.json`, the lessons index `v1/lessons/index.json`
+  (1,132 entries: the 1,082 generated + 50 radnotes; a radnotes entry carries `module` and `set: "radnotes"`), 54 figures
+  `img/radnotes/rn-<figid>.webp`, 12 MCQ overlays `overlay/radnotes/radiology/<module>.json` ({topic, set, v, items}; 256
+  items, 27 with a figure).
+- Route: `RADNOTES_RE` in `functions/api/prep/bank/[[path]].js` serves `img/radnotes/rn-<id>.webp` and
+  `overlay/radnotes/<subject>/<module>.json`, immutable.
+- Lessons: an index key is no longer always a module id. `lessonsFor(ix, mid)` lists the module's own lesson (key = mid)
+  first, then entries whose `module` is mid; one row reads "Lesson", several read by title (3, then "Show all N lessons",
+  `l-more`). Rows carry `data-l` (key); `open(sid, mid, h, key)`; progress `store.ls` is per key. Image steps
+  (`api/prep/bank/...`) resolve through the bank API base (`imgUrl`; tests point it at fixtures) and get
+  `SMD_API_BASE` (https://stewardmd.in) on native. Plan (`prep-plan.js`): lesson list entries carry `k` (key), the plan
+  item carries `l` when the key is not the module.
+- MCQs: `loadModule` = bank file + overlay items (`OVERLAYS`, default `{ radiology: ["radnotes"] }`, `mergeOverlay`: bank
+  first, then overlay items by new id; items untouched). Overlay files are cached in IndexedDB like module files; a 404
+  adds nothing; an offline miss is asked again later. Overlay items carry `_ov` (set); `PREP_PYQ.figure` draws them from
+  `img/<set>/` (prefixed with `SMD_API_BASE` on native, which also fixes PYQ and bank item figures on native). Lesson quick
+  questions, practice, setup, bookmarks and mistakes all see overlay items through `loadModule`.
+- Module MCQ counts on screens still come from the bank index (overlay items are not counted).
+- Tests: `test/prep-server.test.mjs` (route), `test/prep-lessons.test.mjs` / `test/prep-app.test.mjs` / `test/prep-plan.test.mjs`
+  (lessonsFor, imgUrl, mergeOverlay, plan by key), headless `test/run-prep-radnotes-ui.mjs` (synthetic fixture
+  `test/fixtures/prep-radnotes/api/`, no content from the notes).
+
 ## Store
 localStorage `smd_prep_v1`: `{v, cards, conf, days, mod:{t,ok,last}, bm, rep, exam, last, dl, hid, mt, goal, mh, ls, lsp, pl, pt, ra, fc}` (`ls`/`lsp`: Lessons;
 `pl`/`pt`/`ra`: Plan; `fc`: Cards). FSRS deck key
@@ -582,7 +686,7 @@ still reads cards and questions together (`recall()` over `p:<module>`).
 ## Tests
 `test/prep-app.test.mjs`, `test/prep-build-bank.test.mjs`, `test/prep-server.test.mjs`, `test/prep-core.test.mjs`,
 `test/prep-generate.test.mjs`, `test/prep-layerc-e2e.test.mjs`, `test/prep-create.test.mjs`, `test/prep-teacher.test.mjs`,
-`test/prep-tools.test.mjs`, `test/prep-lessons.test.mjs`, `test/prep-plan.test.mjs`, headless `test/run-prep-plan-ui.mjs`, `test/prep-flash.test.mjs`, headless `test/run-prep-flash-ui.mjs`, `test/edge-start-mcq.test.mjs`, headless `test/run-prep-lessons-ui.mjs`, headless `test/run-prep-create-ui.mjs`, `test/run-prep-arena-ui.mjs`, `test/prep-nudges.test.mjs`, headless `test/run-prep-nudges.mjs` and `test/run-prep-ui.mjs` (real app + fixture bank in `test/fixtures/prep/`;
+`test/prep-tools.test.mjs`, `test/prep-explain.test.mjs`, headless `test/run-prep-explain-ui.mjs`, `test/prep-lessons.test.mjs`, `test/prep-plan.test.mjs`, headless `test/run-prep-plan-ui.mjs`, `test/prep-flash.test.mjs`, headless `test/run-prep-flash-ui.mjs`, `test/edge-start-mcq.test.mjs`, headless `test/run-prep-lessons-ui.mjs`, headless `test/run-prep-create-ui.mjs`, `test/run-prep-arena-ui.mjs`, `test/prep-nudges.test.mjs`, headless `test/run-prep-nudges.mjs` and `test/run-prep-ui.mjs` (real app + fixture bank in `test/fixtures/prep/`;
 Chromium at `/opt/pw-browsers/chromium` by default, `CHROME=` to override).
 
 ## Bank v1 mapping (2026-10-06)
@@ -605,3 +709,22 @@ prefers confident Gemini answers; embeddings are only the fallback, so bge-small
   hidden list at fixtures (`SMD_PREP_BANK_API`, `SMD_PREP_FLAG_API`) and answers the report API inside the browser.
 - Practice uses FSRS (due, then new); once everything is seen and nothing is due it becomes a random set. A timed
   test is always a random draw.
+
+## Radiology NEET-SS pilot (2026-10-08, branch `feat/prep-radiology-ss`)
+Plan and results: [[plans/PrepNucleus-RadiologySS]]. Subject `ss-radiology` (code `srd`, 12 sections, 19 modules) in the
+NEET-SS tab (branch `ss-medicine`, behind `smd_prep`). New taxonomy field `bank` (app `bv`): this subject reads
+`prep/bank/v6/ss-radiology/index.json` and `/api/prep/bank/v6/ss-radiology/...` while every other subject stays on the
+global version (`prep.js` `bvOf`). 29 questions in R2 `prep-bank/v6/ss-radiology/` (26 image items, 3 scroll stacks).
+- **Client:** `prep-rad.js` (`window.PREP_RAD`, optional in `prep-loader.js`, data-act `rd-`): scroll-stack viewer for
+  `stack: { id, n, base, w, wl, ar, lbl }` (slices `<base><window>/<NNN>.webp`), drag, wheel, keys, scrubber, window
+  switch, enlarge with pinch zoom, preload outward, cine only on request. Item images with a "/" in the name are bank
+  paths (`prep-pyq.js` `imgUrl`).
+- **Route:** `functions/api/prep/bank/[[path]].js` `RAD_RE` (img and stack files, immutable).
+- **Tools (dev only):** `tools/prep-rad.mjs` (Open-i search, Europe PMC licence check and case text, fetch, Batch gen +
+  review, Haiku vote inputs, finalize with credits), `tools/prep-rad-stack.py` (TCIA CC BY series to windowed WebP
+  stacks), metadata in `tools/prep-rad/` (targets, stacks with licences and DOIs, verifier votes). Data outside git in
+  `~/prep-data/rad/`. Credits in terms.html section 31 only.
+- **Tests:** `test/prep-rad.test.mjs`, `test/prep-rad-viewer.test.mjs`, `test/run-prep-rad-ui.mjs` (fixture
+  `test/fixtures/prep-rad/`; `REAL=~/prep-data/rad/out` runs on the real pilot output; `SHOTS`, `PN_LIGHT`).
+- **Gotchas:** Arena's `NEET_SS_SUBJECTS` does not include `ss-radiology`. Files under v6 are add-only like any bank
+  version; a changed module file needs a new name or version once the subject is live.
