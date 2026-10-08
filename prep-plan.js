@@ -191,7 +191,8 @@
     redo: '<path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"/>', bolt: '<path d="M13 3L5 14h6l-1 7 8-11h-6z"/>',
     flame: '<path d="M12 21c-3.9 0-7-2.8-7-6.6 0-3.1 2-5.2 3.6-7 .4 1.8 1.5 3 2.6 3.4C11 7.4 12.6 4.6 15 3c-.3 2.6.9 4.4 2.2 6 1.1 1.4 1.8 3 1.8 4.9C19 18 15.9 21 12 21z"/>',
     bell: '<path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15zM10 20.5a2 2 0 0 0 4 0"/>', cap: '<path d="M2 9l10-5 10 5-10 5zM6 11v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5M22 9v6"/>',
-    spark: '<path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6-5.6-1.9 5.6-1.9zM19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8z"/>', plus: '<path d="M12 5v14M5 12h14"/>', chev: '<path d="M9 6l6 6-6 6"/>'
+    spark: '<path d="M12 3l1.9 5.6L19.5 10.5l-5.6 1.9L12 18l-1.9-5.6-5.6-1.9 5.6-1.9zM19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8z"/>', plus: '<path d="M12 5v14M5 12h14"/>', chev: '<path d="M9 6l6 6-6 6"/>',
+    back: '<path d="M15 18l-6-6 6-6"/>', up: '<path d="M6 15l6-6 6 6"/>', down: '<path d="M6 9l6 6 6-6"/>'
   };
   function ic(n) { return '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + ICO[n] + "</svg>"; }
   function esc(s) { return H.esc(s); }
@@ -430,27 +431,76 @@
 
   /* Plan settings (also the onboarding answers): exam, exam date, daily minutes, reminder time. */
   var SET = null;
+  // Round 6 pickers. The exam and minutes are segmented controls in the settings sheet (onboarding keeps the rows with
+  // their explanations); the exam date is a calendar (a cell that opens it in the sheet), the reminder a pair of
+  // spin wheels. All are buttons or spinbuttons with arrow keys; the native date and time inputs stay as
+  // "Type a date" / "Type a time" for exact entry. Nothing here changes what is stored.
+  var MON = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  var WD = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+  function isoOf(day) { return new Date(day * 864e5).toISOString().slice(0, 10); }
+  function dateLabel(iso) { var d = dayOfDate(iso); if (d == null) return ""; var x = new Date(d * 864e5); return x.getUTCDate() + " " + MON[x.getUTCMonth()].slice(0, 3) + " " + x.getUTCFullYear(); }
+  function minLabel(m) { return m < 60 ? m + " min" : m === 60 ? "1 hour" : m === 90 ? "1 h 30 min" : "2 hours"; }
+  function segHtml(act, label, opts, cur) {
+    return '<div class="pl-seg" role="radiogroup" aria-label="' + label + '">' + opts.map(function (o) {
+      var on = String(cur) === String(o[0]);
+      return '<button type="button" class="pl-segb' + (on ? " on" : "") + '" role="radio" aria-checked="' + on + '" tabindex="' + (on ? 0 : -1) + '" data-act="' + act + '" data-v="' + esc(o[0]) + '">' + o[1] + "</button>";
+    }).join("") + "</div>";
+  }
+  function calHtml(c) {
+    var td = H.today(), sel = dayOfDate(c.date), base = new Date((sel != null ? sel : td) * 864e5);
+    if (!P.cal) P.cal = { y: base.getUTCFullYear(), m: base.getUTCMonth() };
+    var y = P.cal.y, m = P.cal.m, first = Math.floor(Date.UTC(y, m, 1) / 864e5), n = new Date(Date.UTC(y, m + 1, 0)).getUTCDate();
+    var lead = (new Date(first * 864e5).getUTCDay() + 6) % 7, tdd = new Date(td * 864e5), atMin = y < tdd.getUTCFullYear() || (y === tdd.getUTCFullYear() && m <= tdd.getUTCMonth());
+    var focusDay = sel != null && sel >= first && sel < first + n ? sel : td >= first && td < first + n ? td : Math.max(first, td);
+    var cells = "";
+    for (var i = 0; i < lead; i++) cells += '<span class="pl-cd pl-cd-x" aria-hidden="true"></span>';
+    for (var d = 0; d < n; d++) {
+      var day = first + d, iso = isoOf(day), past = day < td, on = day === sel;
+      cells += '<button type="button" class="pl-cd' + (on ? " on" : "") + (day === td ? " td" : "") + '" data-act="p-f-cal" data-v="' + iso + '" tabindex="' + (day === focusDay ? 0 : -1) + '" aria-pressed="' + on + '"' + (past ? " disabled" : "") +
+        ' aria-label="' + WD[(lead + d) % 7] + " " + (d + 1) + " " + MON[m] + " " + y + (day === td ? ", today" : "") + '">' + (d + 1) + "</button>";
+    }
+    return '<div class="pl-cal"><div class="pl-calh"><button type="button" class="pn-ib pl-calnav" data-act="p-f-calm" data-v="-1" aria-label="Previous month"' + (atMin ? " disabled" : "") + ">" + ic("back") + '</button><b aria-live="polite">' + MON[m] + " " + y + '</b><button type="button" class="pn-ib pl-calnav" data-act="p-f-calm" data-v="1" aria-label="Next month">' + ic("chev") + "</button></div>" +
+      '<div class="pl-cwd" aria-hidden="true">' + WD.map(function (w) { return "<span>" + w.charAt(0) + "</span>"; }).join("") + '</div><div class="pl-cgrid" role="group" aria-label="Days of ' + MON[m] + " " + y + '">' + cells + "</div></div>";
+  }
+  function spin(part, v, max, label, off) {
+    var pad = function (x) { return (x < 10 ? "0" : "") + x; }, st = part === "h" ? 1 : 5, pv = (v - st + max) % max, nv = (v + st) % max;
+    return '<div class="pl-spin"><button type="button" class="pl-spb" data-act="p-f-t" data-v="' + part + '+1" aria-label="' + label + ' up" tabindex="-1">' + ic("up") + "</button>" +
+      '<span class="pl-spw" aria-hidden="true"><i>' + pad(pv) + "</i></span>" +
+      '<span class="pl-spv' + (off ? " off" : "") + '" role="spinbutton" tabindex="0" data-spin="' + part + '" aria-label="' + label + '" aria-valuenow="' + v + '" aria-valuemin="0" aria-valuemax="' + (max - st) + '" aria-valuetext="' + (off ? "Off" : pad(v)) + '">' + pad(v) + "</span>" +
+      '<span class="pl-spw" aria-hidden="true"><i>' + pad(nv) + "</i></span>" +
+      '<button type="button" class="pl-spb" data-act="p-f-t" data-v="' + part + '-1" aria-label="' + label + ' down" tabindex="-1">' + ic("down") + "</button></div>";
+  }
+  function timeStep(rem, arg) {
+    var t = /^(\d{2}):(\d{2})$/.exec(rem || "") || [0, "07", "30"], h = +t[1], m = Math.round(+t[2] / 5) * 5 % 60, d = arg.slice(1) === "+1" ? 1 : arg.slice(1) === "-1" ? -1 : 0;
+    if (arg.charAt(0) === "h") h = (h + d + 24) % 24; else m = (m + 5 * d + 60) % 60;
+    return (h < 10 ? "0" : "") + h + ":" + (m < 10 ? "0" : "") + m;
+  }
   function fieldsHtml(c, step) {
     var chip = function (act, v, on, label) { return '<button type="button" class="pn-chip' + (on ? " on" : "") + '" aria-pressed="' + on + '" data-act="' + act + '" data-v="' + esc(v) + '">' + label + "</button>"; };
-    var out = {};
-    out.exam = '<div class="pl-opts" role="radiogroup" aria-label="Exam">' + EXAM_CHOICES.map(function (e) {
+    var out = {}, ch = choiceOf(c.exam);
+    out.exam = step ? '<div class="pl-opts" role="radiogroup" aria-label="Exam">' + EXAM_CHOICES.map(function (e) {
       var on = c.exam === e.id;
       return '<button type="button" class="pl-opt' + (on ? " on" : "") + '" role="radio" aria-checked="' + on + '" data-act="p-f-exam" data-v="' + e.id + '"><span class="pn-rb"><b>' + esc(e.label) + "</b><small>" + esc(e.sub) + '</small></span><span class="pl-dot" aria-hidden="true">' + (on ? ic("check") : "") + "</span></button>";
-    }).join("") + "</div>";
-    var d = new Date(H.today() * 864e5), iso = d.toISOString().slice(0, 10);
-    out.date = '<label class="pn-sl"><span class="pn-mut pn-small">Exam date</span><input class="pn-in" type="date" id="plDate" name="examDate" min="' + iso + '" value="' + esc(c.date || "") + '"></label>' +
-      '<div class="pn-wrap">' + chip("p-f-nodate", "1", !c.date, "Not decided yet") + "</div>";
-    out.min = '<div class="pl-opts" role="radiogroup" aria-label="Minutes a day">' + MINUTES.map(function (m) {
+    }).join("") + "</div>" : segHtml("p-f-exam", "Exam", EXAM_CHOICES.map(function (e) { return [e.id, esc(e.label)]; }), c.exam) + '<p class="pn-mut pn-small pl-segsub">' + esc(ch ? ch.sub : "") + "</p>";
+    var d = new Date(H.today() * 864e5), iso = d.toISOString().slice(0, 10), left = c.date ? dayOfDate(c.date) - H.today() : null;
+    var exact = '<details class="pl-exact"><summary>Type a date</summary><label class="pn-sl"><span class="pn-mut pn-small">Exam date</span><input class="pn-in" type="date" id="plDate" name="examDate" min="' + iso + '" value="' + esc(c.date || "") + '"></label></details>';
+    var calBody = calHtml(c) + '<div class="pn-wrap">' + chip("p-f-nodate", "1", !c.date, "Not decided yet") + "</div>" + exact;
+    out.date = step ? calBody :
+      '<button type="button" class="pl-cell" data-act="p-f-calopen" aria-expanded="' + !!P.calOpen + '" aria-controls="plCalBox"><span class="pn-rb"><b>' + (c.date ? esc(dateLabel(c.date)) : "Not decided yet") + "</b><small>" + (c.date ? (left > 1 ? "In " + left + " days" : left === 1 ? "Tomorrow" : "Today") : "Pick the day to count down to") + '</small></span><span class="pl-chev" aria-hidden="true">' + ic("chev") + "</span></button>" +
+      '<div id="plCalBox" class="pl-calbox' + (P.calJust ? " pl-in" : "") + '"' + (P.calOpen ? "" : " hidden") + ">" + calBody + "</div>";
+    out.min = step ? '<div class="pl-opts" role="radiogroup" aria-label="Minutes a day">' + MINUTES.map(function (m) {
       var on = c.min === m;
-      return '<button type="button" class="pl-opt' + (on ? " on" : "") + '" role="radio" aria-checked="' + on + '" data-act="p-f-min" data-v="' + m + '"><span class="pn-rb"><b>' + (m < 60 ? m + " min" : m === 60 ? "1 hour" : m === 90 ? "1 h 30 min" : "2 hours") + "</b><small>About " + m + " questions, or reviews and a lesson</small></span><span class=\"pl-dot\" aria-hidden=\"true\">" + (on ? ic("check") : "") + "</span></button>";
-    }).join("") + "</div>";
-    out.rem = '<label class="pn-sl"><span class="pn-mut pn-small">Reminder time</span><input class="pn-in" type="time" id="plRem" name="reminderTime" value="' + esc(c.rem || "") + '"></label>' +
+      return '<button type="button" class="pl-opt' + (on ? " on" : "") + '" role="radio" aria-checked="' + on + '" data-act="p-f-min" data-v="' + m + '"><span class="pn-rb"><b>' + minLabel(m) + "</b><small>About " + m + " questions, or reviews and a lesson</small></span><span class=\"pl-dot\" aria-hidden=\"true\">" + (on ? ic("check") : "") + "</span></button>";
+    }).join("") + "</div>" : segHtml("p-f-min", "Minutes a day", MINUTES.map(function (m) { return [m, m < 60 ? m + " min" : m === 60 ? "1 h" : m === 90 ? "1 h 30" : "2 h"]; }), c.min) + '<p class="pn-mut pn-small pl-segsub">About ' + c.min + " questions, or reviews and a lesson.</p>";
+    var rt = /^(\d{2}):(\d{2})$/.exec(c.rem || "") || [0, "07", "30"];
+    out.rem = '<div class="pl-time' + (c.rem ? "" : " off") + '" role="group" aria-label="Reminder time">' + spin("h", +rt[1], 24, "Hour", !c.rem) + '<b class="pl-tsep" aria-hidden="true">:</b>' + spin("m", Math.round(+rt[2] / 5) * 5 % 60, 60, "Minutes", !c.rem) + "</div>" +
       '<div class="pn-wrap">' + chip("p-f-norem", "1", !c.rem, "No reminder") + "</div>" +
+      '<details class="pl-exact"><summary>Type a time</summary><label class="pn-sl"><span class="pn-mut pn-small">Reminder time</span><input class="pn-in" type="time" id="plRem" name="reminderTime" value="' + esc(c.rem || "") + '"></label></details>' +
       (G.PREP_NATIVE ? G.PREP_NATIVE.remHtml(c, !step) : '<p class="pn-mut pn-small">Your reminder time is kept on this phone.</p>');
     return step ? out[step] : out;
   }
   function settingsSheet() {
-    SET = JSON.parse(JSON.stringify(cfg()));
+    SET = JSON.parse(JSON.stringify(cfg())); P.cal = null; P.calOpen = false;
     if (!SET.exam) SET.exam = H.exam().id;
     drawSettings(true);
   }
@@ -469,9 +519,40 @@
   // Native date and time inputs report on change; the chips beside them clear the value.
   function wireInputs(c, redraw) {
     var r = root(), d = r && r.querySelector("#plDate"), t = r && r.querySelector("#plRem");
-    if (d) d.addEventListener("change", function () { c.date = dayOfDate(d.value) != null ? d.value : null; redraw(); });
+    if (d) d.addEventListener("change", function () { c.date = dayOfDate(d.value) != null ? d.value : null; P.cal = null; redraw(); });
     if (t) t.addEventListener("change", function () { c.rem = /^\d{2}:\d{2}$/.test(t.value) ? t.value : null; redraw(); });
+    var box = r && (r.querySelector("#pnPlanSheet .pl-setbody") || r.querySelector(".pl-ob"));
+    if (box) box.addEventListener("keydown", function (e) { pickKey(e, c, redraw); });
   }
+  // After a picker redraws, the same control (or the new day) keeps the focus.
+  function refocus(sel) { var r = root(), el = r && r.querySelector(sel); if (el) try { el.focus(); } catch (e) {} }
+  // Arrow keys: days move by one or a week (Page Up and Down by a month), segments move the choice, spin wheels step.
+  function pickKey(e, c, redraw) {
+    var t = e.target, k = e.key, act = t.getAttribute && t.getAttribute("data-act");
+    if (act === "p-f-cal") {
+      var dd = { ArrowLeft: -1, ArrowRight: 1, ArrowUp: -7, ArrowDown: 7 }[k], day = dayOfDate(t.getAttribute("data-v"));
+      if (!dd && (k === "PageUp" || k === "PageDown")) { e.preventDefault(); P.cal.m += k === "PageUp" ? -1 : 1; normCal(); redraw(); var b0 = root().querySelector(".pl-cgrid [tabindex='0']"); if (b0) b0.focus(); return; }
+      if (!dd) return;
+      e.preventDefault();
+      var nd = day + dd; if (nd < H.today()) return;
+      var x = new Date(nd * 864e5);
+      if (x.getUTCMonth() !== P.cal.m || x.getUTCFullYear() !== P.cal.y) { P.cal = { y: x.getUTCFullYear(), m: x.getUTCMonth() }; redraw(); }
+      var nb = root().querySelector('[data-act=p-f-cal][data-v="' + isoOf(nd) + '"]');
+      if (nb) { Array.prototype.forEach.call(root().querySelectorAll(".pl-cgrid [tabindex='0']"), function (o) { o.tabIndex = -1; }); nb.tabIndex = 0; nb.focus(); }
+      return;
+    }
+    if (t.hasAttribute && t.hasAttribute("data-spin") && (k === "ArrowUp" || k === "ArrowDown")) {
+      e.preventDefault(); var part = t.getAttribute("data-spin");
+      c.rem = timeStep(c.rem, part + (k === "ArrowUp" ? "+1" : "-1")); redraw(); refocus('[data-spin="' + part + '"]'); return;
+    }
+    if (t.classList && t.classList.contains("pl-segb")) {
+      var step = { ArrowLeft: -1, ArrowUp: -1, ArrowRight: 1, ArrowDown: 1 }[k]; if (!step) return;
+      e.preventDefault();
+      var bs = Array.prototype.slice.call(t.parentNode.querySelectorAll(".pl-segb")), i = (bs.indexOf(t) + step + bs.length) % bs.length;
+      bs[i].click();
+    }
+  }
+  function normCal() { while (P.cal.m < 0) { P.cal.m += 12; P.cal.y--; } while (P.cal.m > 11) { P.cal.m -= 12; P.cal.y++; } var td = new Date(H.today() * 864e5); if (P.cal.y * 12 + P.cal.m < td.getUTCFullYear() * 12 + td.getUTCMonth()) P.cal = { y: td.getUTCFullYear(), m: td.getUTCMonth() }; }
   function apply(c) {
     var s = store(), ch = choiceOf(c.exam);
     s.pl = { ob: 1, exam: ch ? ch.id : null, date: c.date || null, min: MINUTES.indexOf(c.min) >= 0 ? c.min : 30, rem: c.rem || null };
@@ -490,7 +571,7 @@
   ];
   function onboard(h) {
     H = h;
-    if (!P.ob) P.ob = { i: 0, c: { exam: null, date: null, min: 30, rem: null } };
+    if (!P.ob) { P.ob = { i: 0, c: { exam: null, date: null, min: 30, rem: null } }; P.cal = null; }
     var o = P.ob, st = STEPS[o.i], last = o.i === STEPS.length - 1, can = st[0] !== "exam" || !!o.c.exam;
     H.paint('<div class="pn-sky" aria-hidden="true"></div>' + H.bar("PrepNucleus", "Step " + (o.i + 1) + " of 4", "close", '<button type="button" class="pn-link pl-skip" data-act="p-skip">Skip</button>') +
       '<div class="pn-lsn-prog" aria-hidden="true">' + STEPS.map(function (x, i) { return "<i" + (i <= o.i ? ' class="on"' : "") + "></i>"; }).join("") + "</div>" +
@@ -531,7 +612,16 @@
       if (a === "p-f-nodate") c.date = null;
       if (a === "p-f-min") c.min = Number(v);
       if (a === "p-f-norem") c.rem = null;
-      return redraw();
+      if (a === "p-f-cal") c.date = v;
+      if (a === "p-f-calm") { P.cal.m += Number(v); normCal(); }
+      if (a === "p-f-calopen") { P.calOpen = !P.calOpen; P.calJust = P.calOpen; }
+      if (a === "p-f-t") c.rem = timeStep(c.rem, v);
+      redraw(); P.calJust = false;
+      // The control that was pressed keeps the focus; a pressed day keeps it on that day.
+      if (a === "p-f-calm") refocus('[data-act=p-f-calm][data-v="' + v + '"]:not([disabled])');
+      else if (a === "p-f-t") refocus('[data-spin="' + v.charAt(0) + '"]');
+      else refocus('[data-act="' + a + '"]' + (a === "p-f-calopen" ? "" : '[data-v="' + v + '"]'));
+      return;
     }
     if (a === "p-save") { apply(SET); closeSheet(true); return H.rerender(); }
     if (a === "p-skip") return finishOnboard(true);

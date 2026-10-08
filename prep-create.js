@@ -551,7 +551,8 @@
   function deckRow(host, m, pg) {
     var esc = host.esc, n = DK.questionCount(m), t = esc(m.title), id = esc(m.id), busy = job && !jobResult && job.deckId === m.id;
     var line = host.fmt(n) + (n === 1 ? " question" : " questions") + " · " + host.fmt(m.stats.cards || 0) + " cards" + (pg.due ? " · " + host.fmt(pg.due) + " due" : "") + (pg.cardsDue ? " · " + host.fmt(pg.cardsDue) + " cards due" : "");
-    return '<section class="pn-panel pc-deck" aria-label="' + t + '"><div class="pc-dh"><span class="pn-mb"><b>' + t + "</b><small>" + line + "</small>" +
+    var hue = 0; for (var i = 0; i < m.title.length; i++) hue = (hue * 31 + m.title.charCodeAt(i)) % 360;
+    return '<section class="pn-panel pc-deck" aria-label="' + t + '"><div class="pc-dh"><span class="pn-ic sm" style="--h:' + hue + '" aria-hidden="true">' + host.ico("deck") + '</span><span class="pn-mb"><b>' + t + "</b><small>" + line + "</small>" +
       ((m.source && m.source.ocr) || (m.cost && m.cost.stopped) ? '<small class="pc-lab">' + [m.source && m.source.ocr ? "Partly read by OCR" : "", m.cost && m.cost.stopped ? "Stopped: " + esc(stopWord(m.cost.stopped)) : ""].filter(Boolean).join(" · ") + "</small>" : "") + "</span>" +
       '<button type="button" class="pn-ib" data-act="c-del" data-d="' + id + '" aria-label="Delete the deck ' + t + '">' + host.ico("x") + "</button></div>" +
       '<div class="pc-acts">' +

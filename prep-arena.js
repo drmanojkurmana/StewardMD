@@ -240,9 +240,10 @@
     var el = G.document.createElement("div");
     el.className = "pn-sheet-wrap"; el.id = "pnSheet";
     el.innerHTML = '<div class="pn-scrim" data-act="a-nojoin"></div><section class="pn-sheet" role="dialog" aria-modal="true" aria-labelledby="pnSheetT" tabindex="-1">' +
-      '<span class="pn-grab" aria-hidden="true"></span><h2 id="pnSheetT">Join PrepNucleus Arena</h2>' +
+      '<span class="pn-grab" aria-hidden="true"></span><span class="pn-shart pn-shart-arena" aria-hidden="true"></span><h2 id="pnSheetT">Join PrepNucleus Arena</h2>' +
       "<p>Your name (<b>" + esc(displayName()) + "</b>), scores and answers in Arena events are sent to StewardMD and shown to other players. Practice stays on this phone.</p>" +
-      '<p class="pn-mut pn-small">Your email and StewardMD ID are never shown. You can leave the Arena at any time, which deletes your Arena results.</p>' +
+      '<ul class="pn-facts"><li><span class="pn-ic xs" style="--h:200" aria-hidden="true">' + H.ico("lock") + '</span><span><b>Never shown</b><small>Your email and StewardMD ID.</small></span></li>' +
+      '<li><span class="pn-ic xs" style="--h:20" aria-hidden="true">' + H.ico("leave") + '</span><span><b>Leave at any time</b><small>Leaving deletes your Arena results.</small></span></li></ul>' +
       '<div class="pn-sheet-act"><button type="button" class="pn-btn pri" data-act="a-join">Join Arena</button><button type="button" class="pn-btn" data-act="a-nojoin">Not now</button></div></section>';
     r.appendChild(el);
     try { el.querySelector("[data-act=a-join]").focus(); } catch (e) {}

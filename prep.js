@@ -195,6 +195,7 @@
   function toast(m) { try { if (G.toast) G.toast(m); } catch (e) {} }
   function today() { return C.dayNum(Date.now(), new Date().getTimezoneOffset()); }
   function fmt(n) { try { return Number(n).toLocaleString("en-IN"); } catch (e) { return String(n); } }
+  function dayMonth(t) { try { return new Date(t).toLocaleDateString("en-IN", { day: "numeric", month: "short" }); } catch (e) { return ""; } }
 
   /* ---------- store ---------- */
   function load() {
@@ -286,6 +287,7 @@
 
   /* ---------- shell ---------- */
   var ICON = {
+    lock: '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',
     back: '<path d="M15 18l-6-6 6-6"/>', close: '<path d="M18 6L6 18M6 6l12 12"/>', chev: '<path d="M9 6l6 6-6 6"/>',
     bm: '<path d="M6 3h12v18l-6-4-6 4z"/>', plus: '<path d="M12 5v14M5 12h14"/>', star: '<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/>',
     flag: '<path d="M5 21V4h11l-1.5 4L16 12H5"/>', play: '<path d="M7 5l12 7-12 7z"/>', clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
@@ -533,12 +535,15 @@
         html += '<h2 class="pn-sec">' + tx(sec.name) + '</h2><ol class="pn-mods" start="' + (first + 1) + '">' + rows.map(function (t) { return modRow(sid, t, prog, s, all.indexOf(t) + first + 1); }).join("") + "</ol>";
       });
       // Summary: modules completed and MCQs in this subject for the exam.
-      var mods = ix.topics.filter(function (t) { return t.group !== "mixed"; }), done = 0, q = 0;
-      mods.forEach(function (t) { var c = countFor(t, s.exam); q += c; if (c && statusOf((prog[t.id] || {}).answered, c) === "done") done++; });
+      var mods = ix.topics.filter(function (t) { return t.group !== "mixed"; }), done = 0, q = 0, part = 0;
+      mods.forEach(function (t) { var c = countFor(t, s.exam), k = c ? statusOf((prog[t.id] || {}).answered, c) : "new"; q += c; if (k === "done") done++; else if (k === "paused") part++; });
       // Round 4: the subject's own hero, tinted with its hue: the icon large, modules done, MCQs and reviews due, a ring.
+      // Round 6: over the library art, with a map of the modules (completed, in progress, not started) as one bar.
       var due = 0; mods.forEach(function (t) { due += (prog[t.id] || {}).due || 0; });
-      var dpct = mods.length ? Math.round(done * 100 / mods.length) : 0;
-      var head = '<section class="pn-subhead" style="--h:' + subjHue(sid) + '"><span class="pn-ic" aria-hidden="true">' + subjIco(sid) + '</span><span class="pn-tb"><b>' + done + " of " + mods.length + " modules completed</b><small>" + (q ? fmt(q) + " MCQs" : "Questions coming soon") + (due ? " · " + fmt(due) + " due" : "") + "</small></span>" + mring(dpct, dpct + "%") + "</section>";
+      var dpct = mods.length ? Math.round(done * 100 / mods.length) : 0, nm = mods.length || 1;
+      var seg = function (k, n) { return n ? '<i class="' + k + '" style="flex-grow:' + n + '"></i>' : ""; };
+      var head = '<section class="pn-subhead" style="--h:' + subjHue(sid) + '"><div class="pn-subtop"><span class="pn-ic" aria-hidden="true">' + subjIco(sid) + "</span>" + mring(dpct, dpct + "%") + '</div><span class="pn-tb"><b>' + done + " of " + mods.length + " modules completed</b><small>" + (q ? fmt(q) + " MCQs" : "Questions coming soon") + (due ? " · " + fmt(due) + " due" : "") + "</small></span>" +
+        (mods.length ? '<span class="pn-subbar pn-fills" aria-hidden="true">' + seg("d", done) + seg("p", part) + seg("n", nm - done - part) + '</span><span class="pn-subkey"><span><i class="d"></i>' + done + ' completed</span><span><i class="p"></i>' + part + ' in progress</span><span><i class="n"></i>' + (mods.length - done - part) + " not started</span></span>" : "") + "</section>";
       var mixed = ix.topics.filter(function (t) { return t.group === "mixed"; })[0];
       if (mixed && mixed.count && st.filter === "all") html += '<h2 class="pn-sec">More</h2><ol class="pn-mods">' + modRow(sid, mixed, prog, s, null) + "</ol>";
       var box = root.querySelector("#pnSub");
@@ -1031,12 +1036,19 @@
       var el = root.querySelector("#pnHits"); if (!el) return;
       el.innerHTML = hits.length ? '<p class="pn-mut pn-small">' + hits.length + (hits.length === 40 ? "+" : "") + " found</p><ul class=\"pn-mods\">" + hits.map(function (h) {
         var t = topicOf(sid, h.t);
-        return '<li><button type="button" class="pn-mod" data-act="hit" data-m="' + esc(h.t) + '" data-i="' + esc(h.id) + '"><span class="pn-ic sm" style="--h:' + subjHue(sid) + '" aria-hidden="true">' + ico("search") + '</span><span class="pn-mb"><b>' + esc(h.p) + "</b><small>" + (t ? tx(t.title) : "") + "</small></span>" + ico("chev") + "</button></li>";
+        return '<li><button type="button" class="pn-mod" data-act="hit" data-m="' + esc(h.t) + '" data-i="' + esc(h.id) + '"><span class="pn-ic sm" style="--h:' + subjHue(sid) + '" aria-hidden="true">' + ico("search") + '</span><span class="pn-mb"><b>' + hl(esc(h.p), q) + "</b><small>" + (t ? tx(t.title) : "") + "</small></span>" + ico("chev") + "</button></li>";
       }).join("") + "</ul>" : '<p class="pn-empty pn-art-sc">No question matches. Try fewer or other words.</p>';
     }, function () {
       var el = root && root.querySelector("#pnHits");
       if (el) el.innerHTML = '<p class="pn-err" role="alert">Search needs a connection the first time for each subject.</p>';
     });
+  }
+  // Round 6: the words that matched light up in each hit (on the escaped text, never inside an entity).
+  function hl(html, q) {
+    var w = String(q).toLowerCase().split(/[^a-z0-9]+/).filter(function (x) { return x.length >= 3; });
+    if (!w.length) return html;
+    var re = new RegExp("(" + w.join("|") + ")", "gi");
+    return html.split(/(&[#a-z0-9]+;)/i).map(function (part) { return /^&[#a-z0-9]+;$/i.test(part) ? part : part.replace(re, "<mark>$1</mark>"); }).join("");
   }
   function openHit(mid, id) {
     var sid = srch.sid;
@@ -1061,7 +1073,7 @@
     paint(bar("Bookmarks", fmt(ids.length) + " saved", "back") + '<div class="pn-body">' + (ids.length ?
       hband("bm", fmt(ids.length), ids.length === 1 ? "question saved" : "questions saved", "From " + Object.keys(by).length + (Object.keys(by).length === 1 ? " module" : " modules") + " in " + nbs + (nbs === 1 ? " subject" : " subjects") + ". Practise them as one set.") +
       '<button type="button" class="pn-btn pri" data-act="practicebm">' + ico("play") + " Practise all bookmarks</button>" +
-      '<ul class="pn-mods">' + Object.keys(by).map(function (k) { var p = k.split("|"), t = topicOf(p[0], p[1]), sb = subjectById(p[0]); return '<li><div class="pn-mod static"><span class="pn-ic sm" style="--h:' + subjHue(p[0]) + '" aria-hidden="true">' + subjIco(p[0]) + '</span><span class="pn-mb"><b>' + (t ? tx(t.title) : esc(p[1])) + "</b><small>" + (sb ? tx(sb.name) : "") + " · " + by[k].length + " saved</small></span></div></li>"; }).join("") + "</ul>"
+      '<ul class="pn-mods">' + Object.keys(by).map(function (k) { var p = k.split("|"), t = topicOf(p[0], p[1]), sb = subjectById(p[0]); var last = 0; by[k].forEach(function (id) { last = Math.max(last, +s.bm[id][2] || 0); }); return '<li><div class="pn-mod static"><span class="pn-ic sm" style="--h:' + subjHue(p[0]) + '" aria-hidden="true">' + subjIco(p[0]) + '</span><span class="pn-mb"><b>' + (t ? tx(t.title) : esc(p[1])) + "</b><small>" + (sb ? tx(sb.name) : "") + (last ? " · last saved " + dayMonth(last) : "") + '</small></span><span class="pn-st" aria-label="' + by[k].length + ' saved">' + by[k].length + "</span></div></li>"; }).join("") + "</ul>"
       : '<p class="pn-empty pn-art-bm">Bookmark a question with the ribbon at the top while practising, and it collects here.</p>') + "</div>");
     Object.keys(by).forEach(function (k) { var p = k.split("|"); loadIndex(p[0]); });
   }
@@ -1133,7 +1145,7 @@
     paint(bar("Offline downloads", "", "back") + '<div class="pn-body">' + hband("dl", ndl + " of " + subs.length, subs.length === 1 ? "subject offline" : "subjects offline", "A downloaded subject opens every module without a connection. Opened modules are kept anyway.") + '<ul class="pn-mods" id="pnDl">' +
       subs.map(function (sb) {
         var on = !!s.dl[sb.id];
-        return '<li><div class="pn-mod static' + (on ? " on" : "") + '"><span class="pn-ic sm" style="--h:' + subjHue(sb.id) + '" aria-hidden="true">' + subjIco(sb.id) + '</span><span class="pn-mb"><b>' + tx(sb.name) + '</b><small id="pnDl-' + esc(sb.id) + '">' + (on ? "Downloaded" : "Not downloaded") + "</small></span>" +
+        return '<li><div class="pn-mod static' + (on ? " on" : "") + '"><span class="pn-ic sm" style="--h:' + subjHue(sb.id) + '" aria-hidden="true">' + subjIco(sb.id) + '</span><span class="pn-mb"><b>' + tx(sb.name) + '</b><small id="pnDl-' + esc(sb.id) + '">' + (on ? "Downloaded" + (typeof s.dl[sb.id] === "number" ? " " + dayMonth(s.dl[sb.id]) : "") : "Not downloaded") + '</small><span class="pn-dlbar" id="pnDlb-' + esc(sb.id) + '" aria-hidden="true"><i></i></span></span>' +
           '<button type="button" class="pn-btn sm" data-act="' + (on ? "dlrm" : "dlget") + '" data-s="' + esc(sb.id) + '">' + (on ? "Remove" : "Download") + "</button></div></li>";
       }).join("") + "</ul></div>");
   }
@@ -1144,7 +1156,7 @@
       if (!ts.length) { var e0 = el(); if (e0) e0.textContent = "No questions yet"; return; }
       var step = function (i) {
         if (i >= ts.length) { s.dl[sid] = Date.now(); save(); return renderDownloads(); }
-        return loadModule(sid, ts[i].id).then(function () { done++; var e = el(); if (e) e.textContent = "Downloading " + done + " of " + ts.length + "…"; return step(i + 1); }, function () { var e = el(); if (e) e.textContent = "Stopped: no connection"; });
+        return loadModule(sid, ts[i].id).then(function () { done++; var e = el(), b = root && root.querySelector("#pnDlb-" + sid); if (e) e.textContent = "Downloading " + done + " of " + ts.length + "…"; if (b) { b.classList.add("on"); b.firstChild.style.transform = "scaleX(" + (done / ts.length).toFixed(3) + ")"; } return step(i + 1); }, function () { var e = el(); if (e) e.textContent = "Stopped: no connection"; });
       };
       return step(0);
     });

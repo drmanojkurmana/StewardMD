@@ -135,16 +135,19 @@
     var list = paperItems(P.items, pid), hid = hiddenOf(host), ok = list.filter(function (it) { return usable(it, hid); });
     // a compilation bigger than the real paper is timed as one real-size paper drawn at random from it
     var held = list.length - ok.length, mock = mockFor(host, "neet-pg"), tn = Math.min(ok.length, mock.n), sc = paperScheme(mock, tn), subj = bySubject(ok);
+    // Round 6: each subject row carries its icon tile and a bar for its share of the paper.
+    var top = 0; Object.keys(subj).forEach(function (k) { if (subj[k] > top) top = subj[k]; });
     var subs = Object.keys(subj).sort(function (a, b) { return subj[b] - subj[a]; }).map(function (sid) {
       var sb = host.subjectById(sid);
-      return '<li><span class="pn-yq-sn">' + (sb ? host.tx(sb.name) : "Not sorted yet") + '</span><span class="pn-st">' + subj[sid] + "</span></li>";
+      return '<li>' + (sb ? '<span class="pn-ic xs" style="--h:' + host.subjHue(sid) + '" aria-hidden="true">' + host.subjIco(sid) + "</span>" : '<span class="pn-ic xs pn-ic-none" aria-hidden="true">' + host.subjIco("") + "</span>") +
+        '<span class="pn-yq-sn">' + (sb ? host.tx(sb.name) : "Not sorted yet") + '<span class="pn-yq-bar" aria-hidden="true"><i data-p="' + (subj[sid] / top).toFixed(3) + '" style="transform:scaleX(' + (subj[sid] / top).toFixed(3) + ')"></i></span></span><span class="pn-st">' + subj[sid] + "</span></li>";
     }).join("");
     host.paint(host.bar(esc(paperTitle(p)), "Recall paper", "back") + '<div class="pn-body"><section class="pn-panel pn-modp pn-yqp" style="--h:262">' +
       '<p class="pn-big">' + host.fmt(ok.length) + ' questions</p><p class="pn-mut">' + (held ? held + " held back (unclear key or missing image) · " : "") + "memory-based recall</p>" +
       '<button type="button" class="pn-btn pri" data-act="y-start" data-v="' + esc(pid) + '" data-k="exam"' + (ok.length ? "" : " disabled") + ">" + host.ico("clock") + " Timed test: " + (tn < ok.length ? tn + " random questions, " : "") + fmtMin(Math.round(sc.limit / 60)) + ", +" + mock.plus + " / −" + fmtMark(mock.minus) + "</button>" +
       '<button type="button" class="pn-btn" data-act="y-start" data-v="' + esc(pid) + '" data-k="study"' + (ok.length ? "" : " disabled") + ">" + host.ico("play") + " Practice in paper order</button>" +
       '<p class="pn-mut pn-small">The timed test uses the ' + esc(mock.label) + " (" + mock.n + " questions in " + fmtMin(mock.min) + "), scaled to this paper. Practice shows each answer with its explanation.</p></section>" +
-      (subs ? '<h2 class="pn-sec">By subject</h2><ul class="pn-yq-subs">' + subs + "</ul>" : "") + "</div>");
+      (subs ? '<h2 class="pn-sec">By subject</h2><ul class="pn-yq-subs pn-fills">' + subs + "</ul>" : "") + "</div>");
   }
   function startPaper(host, pid, kind) {
     var p = null; P.ix.papers.forEach(function (x) { if (x.id === pid) p = x; });

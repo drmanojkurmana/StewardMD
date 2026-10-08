@@ -3,22 +3,19 @@
    Show answer, then the four grades with their next interval. Motion: the turn (260 ms) and the swipe exit (190 ms)
    are the only moving parts; keys and reduced motion change state without movement. Loaded by prep-loader.js. */
 .pn-root .pk-entry .pn-row { min-height: 68px; }
-.pn-root .pk-prog { flex: 0 0 auto; height: 5px; margin: 0 16px 8px; border-radius: 2px; background: var(--pn-s2); overflow: hidden; }
-.pn-root .pk-prog i { display: block; height: 100%; background: var(--pn-pri); transform-origin: 0 50%; transition: transform 240ms var(--pn-ease); }
-.pn-root .pk-body { gap: 12px; padding-top: 6px; touch-action: pan-y; }
+.pn-root .pk-body { gap: 12px; touch-action: pan-y; }
 
 /* ---- the card ---- */
-.pn-root .pk-card { position: relative; display: grid; min-height: clamp(280px, 52dvh, 480px); border-radius: 26px; -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent;
-  transition: transform 200ms var(--pn-ease), opacity 200ms var(--pn-ease); }
+.pn-root .pk-card { position: relative; display: grid; min-height: clamp(280px, 52dvh, 480px); border-radius: var(--pn-r-xl); -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent;
+  transition: transform var(--pn-d-quick) var(--pn-ease), opacity var(--pn-d-quick) var(--pn-ease); }
 .pn-root .pk-card[data-act] { cursor: pointer; }
 .pn-root .pk-card:focus-visible, .pn-root .pk-face:focus-visible { outline: 2px solid var(--pn-pri); outline-offset: 2px; }
-.pn-root .pk-card.in { animation: pn-rise 200ms var(--pn-ease); }
 .pn-root .pk-card.drag { transition: none; }
 .pn-root .pk-card.out-l { transform: translateX(-112%) rotate(-6deg); opacity: 0; transition-duration: 190ms; }
 .pn-root .pk-card.out-r { transform: translateX(112%) rotate(6deg); opacity: 0; transition-duration: 190ms; }
-.pn-root .pk-face, .pn-root .pk-plain { display: flex; flex-direction: column; justify-content: center; gap: 14px; padding: 28px 22px; border-radius: 20px; background: var(--pn-card); border: 1px solid var(--pn-edge); box-shadow: var(--pn-elev); }
+.pn-root .pk-face, .pn-root .pk-plain { display: flex; flex-direction: column; justify-content: center; gap: 14px; padding: 28px 22px; border-radius: var(--pn-r-lg); background: var(--pn-card); border: 1px solid var(--pn-edge); box-shadow: var(--pn-elev); }
 /* Basic cards turn over: both faces share one grid cell, each rotates on its own axis. */
-.pn-root .pk-face { grid-area: 1 / 1; -webkit-backface-visibility: hidden; backface-visibility: hidden; transition: transform 260ms var(--pn-ease); }
+.pn-root .pk-face { grid-area: 1 / 1; -webkit-backface-visibility: hidden; backface-visibility: hidden; transition: transform var(--pn-d-enter) var(--pn-ease); }
 .pn-root .pk-front { transform: perspective(1400px) rotateY(0deg); }
 .pn-root .pk-back { transform: perspective(1400px) rotateY(180deg); }
 .pn-root .pk-flip.on .pk-front { transform: perspective(1400px) rotateY(-180deg); }
@@ -33,26 +30,26 @@
 .pn-root .pk-q { font-size: 14px; line-height: 1.45; color: var(--pn-mut); padding-bottom: 14px; border-bottom: 1px solid var(--pn-line); }
 .pn-root .pk-bk { font-size: 19px; line-height: 1.55; font-weight: 500; max-width: 40ch; text-wrap: pretty; }
 .pn-root .pk-bk-w:not(.on) { display: none; }
-.pn-root .pk-bk-w.on { animation: pn-rise 200ms var(--pn-ease); }
+.pn-root .pk-bk-w.on { animation: pn-rise var(--pn-d-quick) var(--pn-ease); }
 .pn-root .pk-plain .pk-bk-w .pk-bk { font-size: 16px; color: var(--pn-mut); }
 
 /* Cloze: the blank keeps the term's width so nothing reflows on reveal. */
-.pn-root .pk-gap { padding: 0 3px; border-radius: 5px; background: var(--pn-s1); box-shadow: inset 0 -2px 0 var(--pn-pri); }
-.pn-root .pk-gap-t { color: transparent; transition: color 180ms ease; }
+.pn-root .pk-gap { padding: 0 3px; border-radius: var(--pn-r-xs); background: var(--pn-s1); box-shadow: inset 0 -2px 0 var(--pn-pri); }
+.pn-root .pk-gap-t { color: transparent; transition: color var(--pn-d-quick) ease; }
 .pn-root .pk-cloze.on .pk-gap { background: var(--pn-pri-soft); }
 .pn-root .pk-cloze.on .pk-gap-t { color: var(--pn-pri-ink); }
 
 /* Image occlusion: masks are buttons laid over the diagram in fractions of its size; each opens on its own. */
-.pn-root .pk-occ { position: relative; border-radius: 10px; overflow: hidden; background: #fff; border: 1px solid var(--pn-line); }
+.pn-root .pk-occ { position: relative; border-radius: var(--pn-r-sm); overflow: hidden; background: #fff; border: 1px solid var(--pn-line); }
 .pn-root .pk-occ img { display: block; width: 100%; height: auto; }
 body.dark .pn-root .pk-occ img { filter: brightness(.94); }
-.pn-root .pk-box { position: absolute; padding: 0; border: 1.5px solid var(--pn-pri); border-radius: 6px; background: var(--pn-pri-soft); transition: background-color 160ms ease, border-color 160ms ease; }
+.pn-root .pk-box { position: absolute; padding: 0; border: 1.5px solid var(--pn-pri); border-radius: var(--pn-r-xs); background: var(--pn-pri-soft); transition: background-color var(--pn-d-press) ease, border-color var(--pn-d-press) ease; }
 .pn-root .pk-box::before { content: ""; position: absolute; inset: -7px; }
 .pn-root .pk-box.on { background: transparent; border-color: transparent; cursor: default; }
 .pn-root .pk-box:focus-visible { outline: 2px solid var(--pn-pri); outline-offset: 2px; }
 
 /* Swipe stamp: names the grade the release will give. */
-.pn-root .pk-stamp { position: absolute; top: 16px; z-index: 2; padding: 4px 10px; border-radius: 8px; border: 2px solid currentColor; background: var(--pn-card); font-size: 15px; font-weight: 700; opacity: 0; pointer-events: none; transition: opacity 120ms ease; }
+.pn-root .pk-stamp { position: absolute; border-radius: var(--pn-r-sm); border: 2px solid currentColor; background: var(--pn-card); font-weight: 700; opacity: 0; pointer-events: none; transition: opacity var(--pn-d-press) ease; }
 .pn-root .pk-stamp.l { right: 16px; color: var(--pn-bad); }
 .pn-root .pk-stamp.r { left: 16px; color: var(--pn-pri); }
 .pn-root .pk-card.drag .pk-stamp { transition: none; }
@@ -63,18 +60,17 @@ body.dark .pn-root .pk-occ img { filter: brightness(.94); }
 .pn-root .pk-bar > * { width: 100%; max-width: 720px; margin: 0 auto; }
 .pn-root .pk-show { display: flex; width: 100%; }
 .pn-root .pk-grades { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
-.pn-root .pk-g { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; min-height: 58px; padding: 6px 4px; border-radius: 18px; border: 1px solid var(--pn-edge); box-shadow: var(--pn-elev); background: var(--pn-card); transition: transform 140ms var(--pn-ease); }
+.pn-root .pk-g { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; min-height: 58px; padding: 6px 4px; border-radius: var(--pn-r-lg); border: 1px solid var(--pn-edge); box-shadow: var(--pn-elev); background: var(--pn-card); transition: transform var(--pn-d-press) var(--pn-ease); }
 .pn-root .pk-g:active { transform: scale(.96); }
 .pn-root .pk-g b { font-size: 15px; font-weight: 650; }
 .pn-root .pk-g small { font-size: 12px; color: var(--pn-mut); font-variant-numeric: tabular-nums; }
 .pn-root .pk-again b { color: var(--pn-bad); }
 .pn-root .pk-hard b { color: var(--pn-warn); }
-.pn-root .pk-easy b { color: var(--pn-pri-ink); }
 .pn-root .pk-g.pk-good { background: var(--pn-pri-grad); border-color: transparent; color: var(--pn-on-pri); box-shadow: var(--pn-glow); }
 .pn-root .pk-g.pk-good small { color: var(--pn-on-pri); opacity: .85; }
 .pn-root .pk-kbd { display: none; }
 @media (hover: hover) and (pointer: fine) {
-  .pn-root .pk-kbd { display: inline-block; margin-left: 10px; padding: 1px 6px; border-radius: 5px; border: 1px solid currentColor; font: 600 11px/1.4 var(--sans, -apple-system, "Segoe UI", Roboto, sans-serif); opacity: .6; }
+  .pn-root .pk-kbd { display: inline-block; margin-left: 10px; padding: 1px 6px; border-radius: var(--pn-r-xs); border: 1px solid currentColor; font: 600 11px/1.4 var(--sans, -apple-system, "Segoe UI", Roboto, sans-serif); opacity: .6; }
   .pn-root .pk-g .pk-kbd { position: absolute; top: 5px; right: 6px; margin: 0; padding: 0 4px; font-size: 10px; }
   .pn-root .pk-g:hover { border-color: var(--pn-pri); }
 }
@@ -94,11 +90,11 @@ body.dark .pn-root .pk-occ img { filter: brightness(.94); }
 
 @media (prefers-reduced-motion: reduce) {
   /* No turning, no sliding: the faces cross-fade and a graded card is simply replaced. */
-  .pn-root .pk-face { transform: none !important; transition: opacity 150ms ease; }
+  .pn-root .pk-face { transform: none !important; transition: opacity var(--pn-d-press) ease; }
   .pn-root .pk-flip .pk-back, .pn-root .pk-flip.on .pk-front { opacity: 0; }
   .pn-root .pk-flip.on .pk-back { opacity: 1; }
-  .pn-root .pk-card, .pn-root .pk-g, .pn-root .pk-prog i { transition: none; }
-  .pn-root .pk-card.in, .pn-root .pk-bk-w.on { animation: pn-fade 150ms ease; }
+  .pn-root .pk-card, .pn-root .pk-g { transition: none; }
+  .pn-root .pk-card.in, .pn-root .pk-bk-w.on { animation: pn-fade var(--pn-d-press) ease; }
 }
 
 @media (prefers-reduced-transparency: reduce) {
@@ -111,17 +107,17 @@ body.dark .pn-root .pk-occ img { filter: brightness(.94); }
    card underneath is promoted into place. Session progress is a ring in the bar with the cards left in it. */
 .pn-root .pk-stack { position: relative; display: grid; }
 .pn-root .pk-stack > * { grid-area: 1 / 1; }
-.pn-root .pk-peek { border-radius: 20px; background: var(--pn-card); border: 1px solid var(--pn-edge); box-shadow: var(--pn-elev); transform-origin: 50% 100%; pointer-events: none; transition: transform 220ms var(--pn-ease), opacity 220ms ease; }
+.pn-root .pk-peek { border-radius: var(--pn-r-lg); background: var(--pn-card); border: 1px solid var(--pn-edge); box-shadow: var(--pn-elev); transform-origin: 50% 100%; pointer-events: none; transition: transform var(--pn-d-base) var(--pn-ease), opacity var(--pn-d-base) ease; }
 .pn-root .pk-peek.p1 { transform: translateY(14px) scale(.94); }
 .pn-root .pk-peek.p2 { transform: translateY(26px) scale(.88); opacity: .5; }
 body.dark .pn-root .pk-peek { background: #0a161b; }
 .pn-root .pk-peek.drag { transition: none; }
 .pn-root .pk-peek.p1.up { transform: none; transition-duration: 190ms; }
 .pn-root .pk-stack:has(.pk-peek) { margin-bottom: 26px; }
-.pn-root .pk-card.in { animation: pk-promote 220ms var(--pn-ease); }
+.pn-root .pk-card.in { animation: pk-promote var(--pn-d-base) var(--pn-ease); }
 @keyframes pk-promote { from { transform: translateY(14px) scale(.94); } }
 .pn-root .pk-card.out-u { transform: translateY(-110%); opacity: 0; transition-duration: 190ms; }
-.pn-root .pk-tint { position: absolute; inset: 0; z-index: 2; border-radius: 20px; pointer-events: none; opacity: 0; }
+.pn-root .pk-tint { position: absolute; inset: 0; z-index: 2; border-radius: var(--pn-r-lg); pointer-events: none; opacity: 0; }
 .pn-root .pk-tint.l { background: linear-gradient(270deg, rgba(220, 50, 70, 0) 10%, rgba(220, 50, 70, .26) 100%); box-shadow: inset 0 0 0 2px rgba(230, 70, 90, .7); }
 .pn-root .pk-tint.r { background: linear-gradient(90deg, rgba(20, 170, 150, 0) 10%, rgba(20, 170, 150, .26) 100%); box-shadow: inset 0 0 0 2px rgba(40, 200, 180, .75); }
 .pn-root .pk-tint.u { background: linear-gradient(0deg, rgba(70, 120, 240, 0) 10%, rgba(70, 120, 240, .26) 100%); box-shadow: inset 0 0 0 2px rgba(100, 150, 255, .75); }
@@ -139,7 +135,7 @@ body.dark .pn-root .pk-easy b { color: #8fb0ff; }
 .pn-root .pk-ring .rv { stroke: var(--pn-pri); stroke-linecap: round; }
 .pn-root .pk-ring b { font-family: var(--pn-num); font-size: 14px; font-weight: 800; font-variant-numeric: tabular-nums; }
 @media (prefers-reduced-motion: reduce) {
-  .pn-root .pk-card.in { animation: pn-fade 150ms ease; }
+  .pn-root .pk-card.in { animation: pn-fade var(--pn-d-press) ease; }
   .pn-root .pk-peek { transition: none; }
 }
 .pn-root .pk-body { padding-top: 22px; }

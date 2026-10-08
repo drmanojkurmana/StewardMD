@@ -420,7 +420,7 @@ Owner decisions: [[decisions/Decisions]] "PrepNucleus pricing, free tier and soc
 ## Premium UI round 2 (2026-10-07, same branch, `?v=prep15`)
 - Art: 14 WebP illustrations in `prep/art/` (about 300 KB; `scripts/build-www.sh` copies them): `hero-dark`/`hero-light`
   (home and onboarding sky), `ob-exam|date|min|rem`, `fin-mock` (set, test and event results), `fin-lesson` (lesson and
-  cards finish), `fin-win`/`fin-loss` (battle end; draw uses loss), `arena` (lobby banner, battle card), `empty-bm|nb|sc`.
+  cards finish), `fin-win`/`fin-loss` (battle end; draw uses loss), `arena` (lobby banner, battle card), `empty-bm|sc`.
   Made with Vertex `gemini-3.1-flash-image` at 1K ($0.067 an image; Imagen 4 ids were discontinued 2026-06-30 and 404),
   15 billed calls, $1.01. No text, people or logos in them.
 - Home scene: `.pn-sky` is the first child of the root on home and onboarding (CSS picks the theme's image); bar, tabs and
@@ -527,6 +527,32 @@ Owner decisions: [[decisions/Decisions]] "PrepNucleus pricing, free tier and soc
   pull springs back, a flick dismisses); run-prep-ui.mjs checks the teacher chat (stubbed native runtime).
 - Screenshots in dark need the OS in dark mode or Chrome started with `--force-dark-mode` (the app follows
   prefers-color-scheme at boot).
+
+## Premium UI round 6 (2026-10-08, same branch, `?v=prep19`)
+- Plan sheet pickers (prep-plan.js `fieldsHtml`): in the settings sheet the exam and minutes are segmented controls
+  (`.pl-seg`, radios with roving tabindex and arrow keys) with the choice's line under them; onboarding keeps the rows.
+  The exam date is a calendar (`calHtml`, Monday first, past days disabled, today dotted, arrow keys by day or week,
+  Page Up/Down by month, `P.cal` is the shown month); in settings it sits under a cell with the date and the count
+  (`p-f-calopen`, `P.calOpen`). The reminder is two spin wheels (`spin`, role spinbutton, Up/Down keys; hours 1, minutes
+  5, `timeStep`). The native `#plDate` / `#plRem` stay inside "Type a date" / "Type a time" details (exact entry; the
+  headless tests drive them). A picker redraw puts the focus back on the same control (`refocus`). Stored data unchanged.
+- Art (5 calls, $0.34): `subject` (subject hero, tinted to the subject's hue by a luminosity blend), `module` (module
+  head band), `offline` (downloads band), `bookmarks` (bookmarks band). `empty-dl.webp` and `empty-nb.webp` deleted
+  (nothing used them). `banner-dark|light.webp` had "AI-powered medical prep" painted under the wordmark: painted
+  out (owner rule); the unused `banner.webp` (same tagline) deleted; the 4K/PNG masters still carry it but never ship.
+  The Arena consent sheet uses `arena.webp` as its head and two icon rows (never shown; leave any time).
+- Screens: the subject hero carries a module map (`.pn-subbar`: completed, in progress, not started, with a key); the
+  module panel head is a band over the art; downloads show the date and a progress bar while downloading; bookmark rows
+  a count and the last saved date; search hits mark the matched words (`hl`, on escaped text, never inside an entity);
+  PYQ paper subjects get icon tiles and share bars; friends keep one hue each (`hueOf`), a challenge's time left is an
+  amber chip; decks lead with a hued tile. The list skeleton opens with a band shape.
+- Motion: `.pn-fills` (prep-motion.js) fills meters from empty only on the first paint after a push (subject map,
+  paper subjects, accuracy bars).
+- System: tokens on `.pn-root`: radius `--pn-r-xs|sm|md|lg|xl|pill` (4/10/14/20/26/999; square tiles, avatars and art
+  keep proportional radii), motion `--pn-d-press|quick|base|enter|draw` (140/180/240/280/700), `--pn-sh-hero`. Every
+  literal radius and duration in the six prep stylesheets maps onto them (`tmp/r6/radius.py`, `motion.py` in the job).
+  `.pl-sic` is the `.pn-ic.xs` tile. Dead CSS removed: unused classes (`deadcss.py`) and declarations overridden by a
+  later rule with the same selector (`dedupe.py`).
 
 ## Store
 localStorage `smd_prep_v1`: `{v, cards, conf, days, mod:{t,ok,last}, bm, rep, exam, last, dl, hid, mt, goal, mh, ls, lsp, pl, pt, ra, fc}` (`ls`/`lsp`: Lessons;

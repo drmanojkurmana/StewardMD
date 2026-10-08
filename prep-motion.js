@@ -71,7 +71,7 @@
 
   function scan(el) {
     if (!el || el.nodeType !== 1) return;
-    var list = [el].concat(Array.prototype.slice.call(el.querySelectorAll(".pl-hero,.pn-home,.pn-fb,.pn-score,.pn-lsn-fin,.pk-end,.pn-sheet,.pn-round,.pn-lobby,.pn-streak,.pn-vsi,.pn-rtick,.pn-heat,.pn-mast,.pn-lvb,.pn-mods,.pc-decks,.ps-list,.pl-ws,.pn-hbn")));
+    var list = [el].concat(Array.prototype.slice.call(el.querySelectorAll(".pl-hero,.pn-home,.pn-fb,.pn-score,.pn-lsn-fin,.pk-end,.pn-sheet,.pn-round,.pn-lobby,.pn-streak,.pn-vsi,.pn-rtick,.pn-heat,.pn-mast,.pn-lvb,.pn-mods,.pc-decks,.ps-list,.pl-ws,.pn-hbn,.pn-fills")));
     list.forEach(function (n) {
       if (n.__pnMo) return;
       var c = n.classList;
@@ -120,6 +120,16 @@
         if (c.contains("pn-hbn")) { rollNum(n); return; }
         var rows = Array.prototype.slice.call(n.children, 0, 12);
         if (rows.length > 1) anim(rows, { opacity: [0, 1], transform: ["translateY(10px)", "translateY(0px)"] }, { duration: 0.26, ease: EASE, delay: M.stagger(0.035, { startDelay: c.contains("pl-ws") ? 0.2 : 0.06 }) });
+        return;
+      }
+      // Round 6: meters fill from empty on the first paint after a push only (subject map, paper subjects, accuracy
+      // bars). Each [data-p] child scales to its own value; without one the element itself scales to full.
+      if (c.contains("pn-fills")) {
+        n.__pnMo = 1;
+        if (Date.now() - navAt > 1500) return;
+        var bars = Array.prototype.slice.call(n.querySelectorAll("[data-p]"), 0, 12);
+        if (!bars.length) bars = [n];
+        bars.forEach(function (b, i) { var v = b === n ? 1 : +b.getAttribute("data-p") || 0; if (v > 0) anim(b, { transform: ["scaleX(0)", "scaleX(" + v + ")"] }, { duration: 0.7, ease: EASE, delay: 0.08 + i * 0.04 }); });
         return;
       }
       if (c.contains("pn-rtick")) { n.__pnMo = 1; tickNum(n, +n.getAttribute("data-from"), +n.getAttribute("data-to"), 900); return; }

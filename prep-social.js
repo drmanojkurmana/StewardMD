@@ -51,8 +51,8 @@
       h += '<p class="ps-say">An independent check answered all <b>' + fmt(k.screened) + "</b> questions in the bank without seeing the key. It chose a different answer on <b>" +
         fmt(k.disputed) + "</b> (" + pct(k.rate, 1) + "). Those questions are hidden from practice until they are reviewed.</p>" +
         '<section class="ps-chart" aria-labelledby="psKeysT"><h3 class="pn-sec" id="psKeysT">Disputed keys by subject</h3><p class="pn-mut pn-small">Share of each subject\'s questions where the check disagreed, highest first.</p>' +
-        '<ol class="ps-bars">' + (k.subjects || []).map(function (s) {
-          return '<li><span class="ps-bn">' + esc(s.name) + '</span><span class="ps-bv">' + pct(s.rate, 1) + '</span><span class="ps-bar" aria-hidden="true"><i style="width:' + (max ? Math.max(1, Math.round(s.rate * 1000 / max) / 10) : 0) + '%"></i></span>' +
+        '<ol class="ps-bars pn-fills">' + (k.subjects || []).map(function (s) {
+          return '<li><span class="ps-bn">' + esc(s.name) + '</span><span class="ps-bv">' + pct(s.rate, 1) + '</span><span class="ps-bar" aria-hidden="true"><i data-p="1" style="width:' + (max ? Math.max(1, Math.round(s.rate * 1000 / max) / 10) : 0) + '%"></i></span>' +
             '<small class="ps-bs">' + fmt(s.disputed) + " of " + fmt(s.screened) + "</small></li>";
         }).join("") + "</ol></section>";
     } else h += "<p>" + NA + "</p>";
@@ -180,8 +180,10 @@
     return { sel: sel, restore: function () { var r2 = root(); if (!r2) return; Object.keys(vals).forEach(function (id) { var i = r2.querySelector("#" + id); if (i && !i.value) i.value = vals[id]; }); } };
   }
   function msg(id) { var m = S.err[id]; return '<p class="ps-msg' + (m && m.ok ? " ok" : "") + '" id="' + id + '" role="status"' + (m ? "" : " hidden") + ">" + (m ? esc(m.t) : "") + "</p>"; }
+  // Round 6: each person keeps one hue (from the name), as on the Arena boards.
+  function hueOf(n) { var h = 0, t = String(n || ""); for (var i = 0; i < t.length; i++) h = (h * 31 + t.charCodeAt(i)) % 360; return h; }
   function person(name, sub, actions) {
-    return '<li class="ps-item"><span class="ps-av" aria-hidden="true">' + esc(initials(name)) + '</span><span class="ps-ib"><b>' + esc(String(name || "Doctor").slice(0, 40)) + "</b>" + (sub ? "<small>" + sub + "</small>" : "") + '</span><span class="ps-act">' + (actions || "") + "</span></li>";
+    return '<li class="ps-item"><span class="ps-av" style="--h:' + hueOf(name) + '" aria-hidden="true">' + esc(initials(name)) + '</span><span class="ps-ib"><b>' + esc(String(name || "Doctor").slice(0, 40)) + "</b>" + (sub ? "<small>" + sub + "</small>" : "") + '</span><span class="ps-act">' + (actions || "") + "</span></li>";
   }
   function btn(act, label, v, cls, aria, exam) { return '<button type="button" class="pn-btn sm' + (cls ? " " + cls : "") + '" data-act="' + act + '" data-v="' + esc(v) + '"' + (exam ? ' data-x="' + esc(exam) + '"' : "") + (aria ? ' aria-label="' + esc(aria) + '"' : "") + ">" + label + "</button>"; }
 
@@ -191,7 +193,7 @@
     var inc = (c.incoming || []).filter(function (x) { return ms(x.expiresAt) > now; }), out = (c.outgoing || []).filter(function (x) { return ms(x.expiresAt) > now && x.status !== "declined" && x.status !== "expired"; });
     if (inc.length) h += '<h2 class="pn-sec">Challenges for you</h2><ul class="ps-list">' + inc.map(function (x) {
       var n = (x.from && x.from.name) || "A friend";
-      return person(n, esc(BATTLE_EXAMS[x.exam] || "NEET-PG") + " · " + left(x.expiresAt, now), btn("s-chno", "Decline", x.room, "", "Decline the challenge from " + n) + btn("s-chyes", "Play", x.room, "pri", "Accept the challenge from " + n, x.exam));
+      return person(n, esc(BATTLE_EXAMS[x.exam] || "NEET-PG") + ' · <span class="ps-left">' + left(x.expiresAt, now) + "</span>", btn("s-chno", "Decline", x.room, "", "Decline the challenge from " + n) + btn("s-chyes", "Play", x.room, "pri", "Accept the challenge from " + n, x.exam));
     }).join("") + "</ul>";
     if (out.length) h += '<h2 class="pn-sec">Challenges you sent</h2><ul class="ps-list">' + out.map(function (x) {
       var n = (x.to && x.to.name) || "your friend";
