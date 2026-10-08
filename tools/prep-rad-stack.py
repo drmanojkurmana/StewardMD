@@ -269,6 +269,8 @@ def main(argv):
             sel = pick(s["range"][0], s["range"][1], s["n"])
             ks = [min(range(len(sel)), key=lambda k: abs(sel[k] - o)) for o in s["views"]]
             ims = [Image.open(os.path.join(argv[2], "stacks", s["id"], s["wins"][0], "%03d.webp" % k)).convert("L") for k in ks]
+            if s.get("viewCrop"):  # x0 y0 x1 y1 in slice pixels: the verifiers see the lesion region, enlarged
+                ims = [i.crop(tuple(s["viewCrop"])).resize((512, 512)) for i in ims]
             sheet = Image.new("L", (sum(i.size[0] for i in ims) + 10 * (len(ims) - 1), max(i.size[1] for i in ims)))
             x = 0
             for i in ims:

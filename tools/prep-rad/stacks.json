@@ -27,7 +27,7 @@
    "creditTitle": "Segmentation of Vestibular Schwannoma from Magnetic Resonance Imaging: An Open Annotated Dataset and Baseline Algorithm (Vestibular-Schwannoma-SEG), version 2",
    "creditAuthor": "Shapey J, Kujawa A, Dorent R, Wang G, Bisdas S, et al. (2021); The Cancer Imaging Archive",
    "series": "Contrast-enhanced axial T1-weighted 3D gradient echo MRI acquired for Gamma Knife radiosurgery planning; 35 consecutive 1.5 mm slices from the lower pons to the lateral ventricles.",
-   "text": "Collection: patients with a single sporadic vestibular schwannoma referred for Gamma Knife stereotactic radiosurgery; the tumour was outlined on contrast-enhanced T1 images by neurosurgeon and physicist. This patient: a well-defined avidly enhancing extra-axial mass in the right cerebellopontine angle cistern that extends into and widens the right internal acoustic canal, with mass effect on the right middle cerebellar peduncle and pons. No dural tail is evident and the mass is centred on the porus acusticus.",
+   "text": "Collection: patients with a single sporadic vestibular schwannoma referred for Gamma Knife stereotactic radiosurgery; the tumour was outlined on contrast-enhanced T1 images by neurosurgeon and physicist. This patient: a well-defined avidly enhancing extra-axial mass in the right cerebellopontine angle cistern that extends into the right internal acoustic canal, with a cystic component, with mass effect on the right middle cerebellar peduncle and pons. The mass is centred on the porus acusticus. The facial soft tissues are blurred in the source data (de-identification).",
    "extra": "Vestibular schwannoma arises from the vestibular nerve within the internal acoustic canal; the intracanalicular component gives an ice cream cone shape. Meningioma is centred away from the porus, often broad based with a dural tail and calcification, and rarely enters the canal. Bilateral vestibular schwannomas define neurofibromatosis type 2. Small or slow growing tumours may be observed with serial MRI; radiosurgery or microsurgery treat growing tumours."
   },
   "gbm": {
@@ -87,7 +87,7 @@
    "creditAuthor": "Li P, Wang S, Li T, Lu J, HuangFu Y, Wang D (2020); The Cancer Imaging Archive",
    "series": "Axial chest CT, 5 mm slices from the lung bases to the aortic arch; lung and soft-tissue windows.",
    "text": "Collection: patients with suspected lung cancer who underwent standard of care lung biopsy and FDG PET-CT; patient IDs with G were squamous cell carcinoma on histopathology. This patient, 72-year-old man: a solitary lobulated, spiculated soft-tissue mass at the right lung base next to the right heart border, with strands radiating into the surrounding lung; no pleural effusion.",
-   "extra": "A spiculated solid lung mass in an older adult is lung cancer until proved otherwise. Work-up: contrast CT of chest and upper abdomen, then FDG PET-CT for nodal and distant staging and a tissue diagnosis (CT-guided biopsy for a peripheral lesion, bronchoscopy or endobronchial ultrasound for central lesions and for sampling mediastinal nodes). Squamous cell carcinoma is classically central and may cavitate; adenocarcinoma is classically peripheral."
+   "extra": "A spiculated solid lung mass in an older adult is lung cancer until proved otherwise. Work-up: contrast CT of chest and upper abdomen, then FDG PET-CT for nodal and distant staging and a tissue diagnosis (CT-guided biopsy for a peripheral lesion, bronchoscopy or endobronchial ultrasound for central lesions and for sampling mediastinal nodes). Squamous cell carcinoma is classically central and may cavitate; adenocarcinoma is classically peripheral. Histological type cannot be decided from CT; spiculation is seen with adenocarcinoma and squamous carcinoma alike."
   },
   "rcc": {
    "id": "rad-rcc-01",
@@ -132,9 +132,9 @@
     "soft"
    ],
    "views": [
-    60,
-    64,
-    68
+    58,
+    61,
+    64
    ],
    "label": "Axial contrast CT abdomen",
    "modality": "portal venous phase contrast-enhanced axial CT of the abdomen",
@@ -145,7 +145,13 @@
    "creditAuthor": "Moawad AW, Ahmed AA, ElMohr M, et al., Elsayes K (2023); The Cancer Imaging Archive",
    "series": "Portal venous phase contrast CT of the abdomen, 5 mm slices from the renal hila to the adrenal glands.",
    "text": "Collection: patients with histologically proven adrenocortical carcinoma imaged before surgery. This patient, 66-year-old woman presenting with hypertension: a heterogeneously enhancing solid mass of the left adrenal gland, pathological size 5.5 cm, with irregular internal low attenuation areas, lying anteromedial to the upper pole of the left kidney. Only a portal venous phase was acquired (no unenhanced or delayed series). Stage T2 N1 M0, Ki-67 index 15 percent.",
-   "extra": "An adrenal mass larger than 4 cm, heterogeneous with necrosis, haemorrhage or calcification, is suspicious for adrenocortical carcinoma. Lipid-rich adenoma measures 10 HU or less unenhanced; on adrenal protocol CT an adenoma shows absolute washout of 60 percent or more and relative washout of 40 percent or more. Pheochromocytoma must be excluded biochemically with plasma or urine metanephrines before biopsy or surgery; percutaneous biopsy of a suspected adrenocortical carcinoma is avoided because of tumour seeding."
+   "extra": "An adrenal mass larger than 4 cm, heterogeneous with necrosis, haemorrhage or calcification, is suspicious for adrenocortical carcinoma. Lipid-rich adenoma measures 10 HU or less unenhanced; on adrenal protocol CT an adenoma shows absolute washout of 60 percent or more and relative washout of 40 percent or more. Pheochromocytoma must be excluded biochemically with plasma or urine metanephrines before biopsy or surgery; percutaneous biopsy of a suspected adrenocortical carcinoma is avoided because of tumour seeding.",
+   "viewCrop": [
+    180,
+    110,
+    460,
+    390
+   ]
   },
   "hcc": {
    "id": "rad-hcc-01",
@@ -203,7 +209,13 @@
    "creditAuthor": "National Cancer Institute Clinical Proteomic Tumor Analysis Consortium (CPTAC) (2018); The Cancer Imaging Archive",
    "series": "Venous phase of a pancreas protocol CT, 3 mm slices from the kidneys to the liver dome.",
    "text": "Collection: patients with pancreatic ductal adenocarcinoma. This patient, 74-year-old man with pancreatic ductal adenocarcinoma: multiple round hypoattenuating lesions scattered through both lobes of the liver, the largest in the right lobe, consistent with hepatic metastases.",
-   "extra": "Hepatic metastases make pancreatic adenocarcinoma stage IV (M1) and unresectable whatever the local vascular involvement; treatment is systemic chemotherapy (for example FOLFIRINOX or gemcitabine with nab-paclitaxel) with tissue confirmation if needed. Resectability categories (resectable, borderline, locally advanced) apply only without distant metastases and depend on contact with the superior mesenteric artery, coeliac axis, common hepatic artery and the superior mesenteric and portal veins. Small liver metastases are better shown by MRI with diffusion."
+   "extra": "Hepatic metastases make pancreatic adenocarcinoma stage IV (M1) and unresectable whatever the local vascular involvement; treatment is systemic chemotherapy (for example FOLFIRINOX or gemcitabine with nab-paclitaxel) with tissue confirmation if needed. Resectability categories (resectable, borderline, locally advanced) apply only without distant metastases and depend on contact with the superior mesenteric artery, coeliac axis, common hepatic artery and the superior mesenteric and portal veins. Small liver metastases are better shown by MRI with diffusion.",
+   "viewCrop": [
+    30,
+    60,
+    330,
+    360
+   ]
   }
  }
 }

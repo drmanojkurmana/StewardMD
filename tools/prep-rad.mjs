@@ -114,6 +114,8 @@ export function genPrompt(t, g) {
     stack ? "The question shows a scrollable " + g.modality + " series of the patient (the student scrolls through it). The stem must say so in words such as 'Representative images from the scrollable series are shown' and describe only findings that the series data below states." :
       "The question shows the figure described by the caption. The stem must refer to it ('The image shown', 'An image from the study is shown') and must not describe the finding so fully that the image is not needed.",
     "Write a 2 to 4 sentence clinical vignette (age, sex, presentation, one or two relevant findings) built from the case data, then the question. " + (STYLE_HINT[t.style] || STYLE_HINT.dx),
+    "Use only the age, sex and numbers the case data gives; when it gives no age, write 'An adult' or 'A patient'. Name the modality and say the image is shown, but do not describe the imaging findings in the stem: the student must read them from the image. Never write 'Figure 1' or 'figure'.",
+    "ot must have exactly three entries, one per wrong option, and k must be that option's letter (A, B, C or D).",
     "Four options, all from the same category and plausible to a radiology resident, exactly one best answer. Do not name the diagnosis in the stem when the question asks for it.",
     "ky: one sentence that starts with the correct option text and says why it is right.",
     "nt: topic notes of 80 to 160 words that teach the topic for a radiologist: imaging features by modality, the key differential and how to tell it apart, and the step that follows. Format: one to three lines starting '## ' as short headings, '**bold**' for a few key terms, lines starting '- ' for bullets, and when a comparison helps one simple pipe table (a header row, a '| --- |' row, at most 4 rows and 3 columns). Nothing else.",
@@ -140,7 +142,11 @@ export function tidy(r) {
   if (!(a >= 0 && a <= 3)) return null;
   const clean = (s) => String(s || "").replace(/\s+\n/g, "\n").replace(/[ \t]+/g, " ").trim();
   const others = {};
-  for (const x of r.ot || []) { const k = String(x.k || "").trim().toUpperCase().replace(/[^A-D]/g, ""); if (k && L.indexOf(k) !== a) others[k] = clean(x.why); }
+  // ot keys should be the wrong options' letters; a reply with other keys ("BAD", "Option 2") but exactly three reasons
+  // is mapped onto the three wrong letters in order.
+  const ot = (r.ot || []).filter((x) => x && String(x.why || "").trim());
+  for (const x of ot) { const k = String(x.k || "").trim().toUpperCase().replace(/^OPTION\s*/, ""); if (/^[A-D]$/.test(k) && L.indexOf(k) !== a) others[k] = clean(x.why); }
+  if (Object.keys(others).length < 3 && ot.length === 3) { const wrong = L.filter((_, k) => k !== a); ot.forEach((x, i) => { others[wrong[i]] = clean(x.why); }); }
   return { q: clean(r.q), o: r.o.map((x) => clean(x).replace(/^[A-D][.)]\s+/, "")), a, ky: clean(r.ky), nt: clean(r.nt).replace(/\r/g, ""), others, pl: clean(r.pl).replace(/^(remember|pearl|note)\s*[:,-]?\s*/i, ""), d: Math.max(1, Math.min(3, Number(r.d) || 2)) };
 }
 /* numbers in text that never appear in the ground (ages, sizes, values). Small integers 1-4 and letters' ordinals pass. */
@@ -361,6 +367,7 @@ async function gen() {
     const ground = [x.g.text, x.g.caption || x.g.series || "", x.g.extra || ""].join("\n");
     const g = gates(d, x.t, ground);
     st.gen[k] = { draft: d, fail: g ? failWords(g, d, ground) : null, gate: g || null, tries: ((st.gen[k] && st.gen[k].tries) || 0) + 1 };
+    delete st.review[k];  // a new draft needs its own review
   }
   w(stF, st);
   // stage 2: review gates (_prep-core buildReviewPrompt, NEET-SS profile), 5 items a request
@@ -396,7 +403,7 @@ function vbatches() {
   const run = opt("run", "rad-pilot-1"), wd = path.join(DIR, "runs", run), st = j(path.join(wd, "state.json"));
   const ts = targets(), out = [];
   for (const t of ts) {
-    const rv = st.review[t.id]; if (!rv || !rv.pass) continue;
+    const rv = st.review[t.id]; if (!rv || !rv.pass || (opt("only") && !opt("only").split(",").includes(t.id))) continue;
     const d = st.gen[t.id].draft, g = groundFor(t);
     const v = { id: t.id, kind: t.kind, q: d.q, o: d.o.map((s, k) => L[k] + ". " + s), key: L[d.a] + ". " + d.o[d.a], exp: d.ky + " " + d.nt.replace(/\n/g, " ").slice(0, 900) };
     if (t.kind === "img") { v.image = path.join(DIR, "view", g.cand.file.replace(/\.webp$/, ".jpg")); v.caption = g.cand.caption.slice(0, 500); }
@@ -404,13 +411,25 @@ function vbatches() {
     out.push(v);
   }
   const size = +opt("size", 8); fs.mkdirSync(path.join(wd, "vb"), { recursive: true });
-  for (let i = 0; i < out.length; i += size) w(path.join(wd, "vb", `v${i / size}.json`), out.slice(i, i + size));
+  for (let i = 0; i < out.length; i += size) w(path.join(wd, "vb", `${opt("tag", "v")}${i / size}.json`), out.slice(i, i + size));
   console.log("verifier batches", Math.ceil(out.length / size), "items", out.length);
 }
 function finalize() {
-  const run = opt("run", "rad-pilot-1"), wd = path.join(DIR, "runs", run), st = j(path.join(wd, "state.json"));
-  const readV = (d) => { const o = {}, dir = path.join(wd, d); if (fs.existsSync(dir)) for (const f of fs.readdirSync(dir)) { let a; try { a = j(path.join(dir, f)); } catch (e) { console.error("bad verdict file", f); continue; } for (const r of a) o[r.id] = r; } return o; };
-  const vA = readV("votesA"), vB = readV("votesB"), ts = targets(), tax = j(path.join(ROOT, "prep/taxonomy.json"));
+  // --runs a,b: a target's newest run wins (a later run regenerates a target with a new figure or prompt).
+  const runs = String(opt("runs", opt("run", "rad-pilot-1"))).split(",");
+  const readV = (wd, d) => { const o = {}, dir = path.join(wd, d); if (fs.existsSync(dir)) for (const f of fs.readdirSync(dir)) { let a; try { a = j(path.join(dir, f)); } catch (e) { console.error("bad verdict file", f); continue; } for (const r of a) o[r.id] = r; } return o; };
+  const st = { gen: {} }, vA = {}, vB = {};
+  for (const run of runs) {
+    const wd = path.join(DIR, "runs", run), s = j(path.join(wd, "state.json")), a = readV(wd, "votesA"), b = readV(wd, "votesB");
+    for (const [id, g] of Object.entries(s.gen)) {
+      const rv = s.review[id];
+      st.gen[id] = { ...g, fail: g.fail || (rv && rv.pass ? null : "the reviewer failed it" + (rv && rv.gates && rv.gates.why ? ": " + rv.gates.why : "")) };
+      delete vA[id]; delete vB[id];
+      if (a[id]) vA[id] = a[id];
+      if (b[id]) vB[id] = b[id];
+    }
+  }
+  const ts = targets(), tax = j(path.join(ROOT, "prep/taxonomy.json"));
   const sub = tax.branches.flatMap((b) => b.subjects).find((s) => s.id === SUBJECT);
   const mods = {}; for (const sec of sub.sections) for (const m of sec.modules) mods[m.id] = [];
   const credits = [], report = { accepted: [], rejected: {} }, media = new Set();
@@ -428,7 +447,7 @@ function finalize() {
     if (t.kind === "img") {
       meta.img = `${BANK_VER}/${SUBJECT}/img/${g.cand.file}`; media.add(g.cand.file);  // a "/" name is relative to the bank API root (prep-pyq figure())
       fs.mkdirSync(path.join(out, "img"), { recursive: true }); fs.copyFileSync(path.join(DIR, "img", g.cand.file), path.join(out, "img", g.cand.file));
-      credits.push({ file: "img/" + g.cand.file, title: g.cand.title, author: g.cand.authors, licence: g.cand.lic.code, licenceUrl: g.cand.lic.url, source: `https://pmc.ncbi.nlm.nih.gov/articles/${g.cand.pmcid}/`, doi: g.cand.doi || "", note: "Figure " + g.cand.fig + " (cropped and converted to WebP)" });
+      credits.push({ file: "img/" + g.cand.file, title: g.cand.title, author: g.cand.authors, licence: g.cand.lic.code, licenceUrl: g.cand.lic.url, source: `https://pmc.ncbi.nlm.nih.gov/articles/${g.cand.pmcid}/`, doi: g.cand.doi || "", note: "Figure " + g.cand.fig + " (converted to WebP)" });
     } else {
       meta.stack = { id: g.s.id, n: g.s.n, base: `${BANK_VER}/${SUBJECT}/stack/${g.s.id}/`, w: g.s.wins, wl: g.s.labels, ar: +(g.s.h / g.s.w).toFixed(3), lbl: g.s.label };
       const src = path.join(DIR, "stacks", g.s.id), dst = path.join(out, "stack", g.s.id);
@@ -439,20 +458,24 @@ function finalize() {
     (mods[t.mod] || (mods[t.mod] = [])).push(it);
     report.accepted.push(t.id);
   }
-  // module files + subject index (prep.js shape: { id, topics: [{ id, count }], counts })
-  const counts = { total: 0, all: 0, d1: 0, d2: 0, d3: 0, flagged: 0 }, topics = [];
-  for (const [mid, list] of Object.entries(mods)) {
-    w(path.join(out, "mcq", mid + ".json"), { v: 1, module: mid, subject: SUBJECT, items: list });
-    topics.push({ id: mid, count: list.length });
-    for (const it of list) { counts.total++; counts.all++; counts["d" + it.d]++; }
+  // module files + subject index, the same shape as the v4 bank index (groups = sections, topics = modules), no source label
+  const counts = { total: 0, all: 0, d1: 0, d2: 0, d3: 0, flagged: 0 }, topics = [], groups = [];
+  for (const sec of sub.sections) {
+    groups.push({ id: sec.id, title: sec.name });
+    for (const m of sec.modules) {
+      const list = mods[m.id] || [];
+      if (list.length) w(path.join(out, "mcq", m.id + ".json"), { v: 1, module: m.id, subject: SUBJECT, items: list });
+      topics.push({ id: m.id, title: m.name, group: sec.id, count: list.length, all: list.length, usmle: 0, file: "mcq/" + m.id + ".json", size: m.size, target: { s: 15, m: 40, l: 80 }[m.size] || 40 });
+      for (const it of list) { counts.total++; counts.all++; counts["d" + it.d]++; }
+    }
   }
-  const ix = { id: SUBJECT, v: 1, branch: "ss-medicine", title: { en: sub.name.en }, ex: ["neet-ss"], counts, topics };
+  const ix = { id: SUBJECT, v: 6, branch: "ss-medicine", title: { en: sub.name.en }, ex: ["neet-ss"], counts, usmle: 0, groups, topics };
   w(path.join(out, "index.json"), ix);
   w(path.join(DIR, "out", "credits.json"), credits);
   fs.writeFileSync(path.join(DIR, "out", "credits.txt"), credits.map((c) => `${c.file} | ${c.title} | ${c.author} | ${c.licence} (${c.licenceUrl}) | ${c.source}`).join("\n") + "\n");
   // terms.html lines (title, author, licence, source); the app itself never shows them
   const h = (x) => String(x).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
-  fs.writeFileSync(path.join(DIR, "out", "credits.html"), credits.map((c) => `      <li>${h(c.title)}. ${h(c.author)}. <a href="${h(c.licenceUrl)}" target="_blank" rel="noopener">${h(c.licence)}</a>. Source: <a href="${h(c.source)}" target="_blank" rel="noopener">${h(c.source.replace(/^https?:\/\//, ""))}</a>${c.doi && c.doi !== c.source ? " (" + h(c.doi) + ")" : ""}. ${h(c.note)}.</li>`).join("\n") + "\n");
+  fs.writeFileSync(path.join(DIR, "out", "credits.html"), credits.map((c) => `      <li>${h(c.title.replace(/\.$/, ""))}. ${h(c.author.replace(/\.$/, ""))}. <a href="${h(c.licenceUrl)}" target="_blank" rel="noopener">${h(c.licence)}</a>. Source: <a href="${h(c.source)}" target="_blank" rel="noopener">${h(c.source.replace(/^https?:\/\//, ""))}</a>${c.doi && c.doi !== c.source ? " (" + h(c.doi) + ")" : ""}. ${h(c.note)}.</li>`).join("\n") + "\n");
   w(path.join(DIR, "out", "report.json"), report);
   console.log("accepted", report.accepted.length, "rejected", Object.keys(report.rejected).length, "media", media.size, "->", out);
 }
