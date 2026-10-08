@@ -2,7 +2,8 @@
 // No PDF text here: the fixtures are made-up radiology sentences.
 import test from "node:test";
 import assert from "node:assert/strict";
-import { segments, cleanPage, draftToItem, gates, shuffle, tallyVotes, slate, itemsFor, isAnswerPage, EXAMISH, readReview, L, fixCandidates } from "../tools/prep-radmax.mjs";
+import { segments, cleanPage, draftToItem, gates, shuffle, tallyVotes, slate, itemsFor, isAnswerPage, EXAMISH, readReview, L, fixCandidates, collectLessons } from "../tools/prep-radmax.mjs";
+import { buildDupInputs } from "../tools/prep-radmax-dup.mjs";
 
 const SRC = "Pleural effusion blunts the costophrenic angle on an erect radiograph. About 200 ml of fluid is needed before the lateral angle blunts. A subpulmonic effusion mimics a raised hemidiaphragm. Ultrasound detects small effusions and guides aspiration.";
 const unit = { uid: "notes1-p5", src: "notes1", kind: "text", pages: [5], header: "", segs: segments(5, SRC), want: [] };
@@ -86,4 +87,23 @@ test("fixCandidates: rewrites failed first-round text items, never doubted keys,
   const items = [{ id: "a", tag: "g1" }, { id: "b", tag: "g1" }, { id: "c", tag: "g2" }, { id: "d", tag: "g1", fig: { id: "f" } }, { id: "e", tag: "g1" }, { id: "g", tag: "g1" }];
   const fact = new Map([["a", { ok: false, key: true, why: "invented age" }], ["b", { ok: false, key: false, why: "key wrong" }], ["c", { ok: false, key: true }], ["d", { ok: false, key: true }], ["e", { ok: true, key: true }]]);
   assert.deepEqual(fixCandidates(items, fact).map((i) => i.id), ["a"]);
+});
+
+test("collectLessons: distinct reasons per unit, skips bookkeeping reasons", () => {
+  const m = collectLessons([{ uid: "u1", why: "fact check: invented age" }, { uid: "u1", why: "fact check: invented age" }, { uid: "u1", why: "image item superseded by the figure-checked regeneration" }, { uid: "u2", why: "" }, { uid: "u3", why: "blind solver disagreed" }]);
+  assert.deepEqual(m.get("u1"), ["fact check: invented age"]);
+  assert.equal(m.has("u2"), false);
+  assert.deepEqual(m.get("u3"), ["blind solver disagreed"]);
+});
+
+test("buildDupInputs: only checked items are new; live includes the bank and earlier accepted items", () => {
+  const it = (id, mod, extra = {}) => ({ id, mod, q: "q " + id, o: ["a", "b", "c", "d"], a: 1, ...extra });
+  const items = [it("n1", "m1", { run: "b3" }), it("n2", "m1", { run: "b3" }), it("n3", "m1", { run: "b3", fig: { id: "f" } }), it("n4", "m1", { run: "i2", fig: { id: "g" } })];
+  const fact = new Map(["n1", "n3", "n4"].map((id) => [id, { ok: true }]).concat([["n2", { ok: false }]]));
+  const va = new Map([["n3", { ok: true }], ["n4", { ok: true }]]), vb = new Map([["n3", { ok: true }], ["n4", { ok: true }]]);
+  const out = buildDupInputs({ items, fact, va, vb, imgRuns: ["i2"], liveOf: () => [it("L1", "m1")], assembled: [it("k1", "m1"), it("k2", "m2")] });
+  assert.equal(out.length, 1);
+  assert.deepEqual(out[0].new.map((x) => x.id), ["n1", "n4"]);
+  assert.deepEqual(out[0].live.map((x) => x.id), ["L1", "k1"]);
+  assert.equal(out[0].new[0].key, "B. b");
 });

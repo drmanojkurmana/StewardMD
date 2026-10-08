@@ -271,8 +271,9 @@ export function genPrompt(u, redo) {
       redo.map((r, i) => `R${i}: format ${r.fmt}, level ${r.dif}. Rejected because: ${cleanText(r.why, 400)}\nDraft stem: ${cleanText(r.q, 900)}\nDraft options: ${r.o.map((o, k) => L[k] + ". " + cleanText(o, 200)).join(" | ")}; key ${L[r.a]}`).join("\n\n");
   } else {
     const avoid = (u.avoid || []).length ? "\nThese questions already exist on these pages; test other facts or test at a clearly higher level (do not duplicate):\n" + u.avoid.map((s) => "- " + cleanText(s, 220)).join("\n") : "";
+    const learn = (u.lessons || []).length ? "\nEarlier drafts from these pages were rejected for these reasons; do not repeat these faults:\n" + u.lessons.map((s) => "- " + cleanText(s, 220)).join("\n") : "";
     ask = `Write ${u.want.length} items, each on a different concept of these pages (prefer items that combine several facts over near-duplicates), in this order:\n` + u.want.map((w, i) => `${i + 1}. format ${w.fmt}, level ${w.dif}`).join("\n") +
-      "\nIf the pages cannot support an item of the wished format or level, write the closest sound item instead (change the format or level and say so in fmt and dif). Return fewer items rather than unsupported ones." + avoid;
+      "\nIf the pages cannot support an item of the wished format or level, write the closest sound item instead (change the format or level and say so in fmt and dif). Return fewer items rather than unsupported ones." + avoid + learn;
   }
   return { op: "radmax-gen", system, user: src + "\n" + ask, schema: GEN_SCHEMA, maxOut: Math.min(8000, 300 + 1500 * (redo ? redo.length : u.want.length)), temperature: redo ? 0.5 : 0.8 };
 }
@@ -469,6 +470,7 @@ async function runAll(dir, args) {
     units = units.filter((u) => u.kind === "img").filter((u) => { const q = qa.get(u.fig.id); if (q && q.usable === true && q.giveaway !== true && cleanText(q.shows)) { u.shows = cleanText(q.shows, 300); return true; } return false; });
   }
   if (args.fix) return fixRun(dir, args, allU);
+  if (args.learn) attachLessons(units, lessonsByUnit(dir, String(args.learn).split(",")));
   const work = path.join(dir, "work", run), stFile = path.join(work, "state.json");
   const state = readJson(stFile, null) || { v: 1, run: "radmax-" + run, pick: args.pick || "", stages: {} };
   const dry = args.flags.has("dry-run"), cap = Number(args.cap || 100);
@@ -533,6 +535,18 @@ async function runAll(dir, args) {
 
 /* fixRun: one rewrite for items that passed the model gates in their first round (tag g1) but failed the Haiku fact
  * check; the reason goes to the writer. Items already rewritten once (tag g2) and items whose key the checker doubted are never redone. */
+/* lessonsByUnit(dir, runs) -> Map uid -> distinct reasons why earlier drafts from that unit were rejected in the pipeline
+ * (work/<run>/rejected.json) or left out after the Haiku checks (out/left-out.json). Fed to the writer in a gap round. */
+export function lessonsByUnit(dir, runs) {
+  const rows = runs.flatMap((r) => readJson(path.join(dir, "work", r, "rejected.json"), [])).concat(readJson(path.join(dir, "out/left-out.json"), []));
+  return collectLessons(rows);
+}
+export function collectLessons(rows, max = 6) {
+  const m = new Map();
+  for (const x of rows) { const why = cleanText(x.why || "", 300); if (!x.uid || !why || /superseded|no fact-check verdict/.test(why)) continue; const l = m.get(x.uid) || []; if (!l.includes(why) && l.length < max) l.push(why); m.set(x.uid, l); }
+  return m;
+}
+function attachLessons(units, m) { for (const u of units) if (m.has(u.uid)) u.lessons = m.get(u.uid); }
 /* fixCandidates(items, fact) -> text items from the first round (g1) that the fact check failed. An item whose key the
  * checker doubted (key false) is never rewritten: it goes to the owner flag list so no key changes silently. */
 export function fixCandidates(items, fact) {
@@ -687,6 +701,8 @@ function assemble(dir, args) {
   const sum = { accepted: kept.length, generatedAccepted: items0.length, leftOutAfterChecks: left.length, rejectedInPipeline: rejected.length,
     byLevel: count(kept, (i) => i.dif), byFormat: count(kept, (i) => i.fmt), byModule: count(kept, (i) => i.mod), bySource: count(kept, (i) => i.file),
     levelByFormat: count(kept, (i) => i.dif + " x " + i.fmt), images: kept.filter((i) => i.fig).length, flagged: flagged.length };
+  for (const n of readJson(path.join(hd, "clinical-notes.json"), [])) flagged.push({ kind: "clinical note", ...n }); // owner notes kept across re-assembles
+  sum.flagged = flagged.length;
   writeJson(path.join(out, "summary.json"), sum);
   writeJson(path.join(out, "left-out.json"), left);
   writeJson(path.join(out, "rejected-pipeline.json"), rejected);
