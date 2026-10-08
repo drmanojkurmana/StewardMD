@@ -95,3 +95,9 @@ body.dark .pn-root .su-chip.on .su-n { background: rgba(2, 35, 31, .18); }
 /* dark: chips need a step above the sheet's own surface to read as controls */
 body.dark .pn-root .su-chip:not(.on), body.dark .pn-root .su-step { background: #18323a; box-shadow: inset 0 0 0 1px rgba(190, 235, 240, .07); }
 body.dark .pn-root .su-sb { background: #224049; }
+/* iPad and wider (prep.css round 8): the sheet is a centred panel, so it fills the panel's height, the action bar
+   ends on the panel's rounded corners and drops the home-indicator inset. */
+@media (min-width: 700px) {
+  .pn-root .su-sheet { max-height: 100%; padding-bottom: 0; }
+  .pn-root .su-act { padding-bottom: 18px; border-radius: 0 0 var(--pn-r-xl) var(--pn-r-xl); }
+}

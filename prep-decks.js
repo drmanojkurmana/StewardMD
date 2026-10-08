@@ -64,13 +64,14 @@
   }
   function sha12(s) { return sha256(s).slice(0, 12); }
 
-  var LABEL = "AI-generated educational content";
+  // Owner rule (2026-10-07, 2026-10-09): no AI or source label in the app; the deck manifest carries none.
+  var LABEL = "";
   /* A new manifest (6.7). o = { id, title, exam, profileV, pv, model, source: { type, name, pages, sha }, now } */
   function newManifest(o) {
     return {
       id: o.id, v: 1, title: o.title || "My deck", exam: o.exam, profileV: o.profileV,
       source: { type: o.source.type, name: o.source.name || "", pages: o.source.pages || null, sha: o.source.sha },
-      prov: "AI", label: LABEL, model: o.model, pv: o.pv, created: o.now || Date.now(),
+      prov: "AI", model: o.model, pv: o.pv, created: o.now || Date.now(),
       stats: { facts: 0, generated: 0, accepted: 0, rejected: 0, regenerated: 0, cards: 0 },
       cost: { inTok: 0, outTok: 0, thinkTok: 0, inr: 0, stopped: null },
       topics: [], prog: { done: [] }

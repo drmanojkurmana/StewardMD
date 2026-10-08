@@ -10108,7 +10108,26 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     if (w < 340) { fs = .9; d = "compact"; } else if (w < 400) { fs = .95; d = "compact"; } else if (w < 600) { fs = 1.0; d = "default"; } else if (w < 900) { fs = 1.08; d = "comfortable"; } else { fs = 1.15; d = "comfortable"; }
     if (w > h && h < 500) d = "compact";
     if (dpr >= 3 && w >= 400) fs = Math.min(1.2, fs + .05);
+    // An iPad in Split View or Slide Over (a narrow window on a large touch screen) keeps zoom 1.0 and default density,
+    // so 44 px targets stay 44 px; the 0.9 and 0.95 steps are for small phones only.
+    if (fs < 1 && bigTouchD()) { fs = 1; d = "default"; }
+    if (fs === ds.fontScale && d === ds.density) { saveD(); refreshD(); return; }   // nothing to re-zoom (a resize that kept the band)
     ds.fontScale = fs; ds.density = d; applyD(); refreshD();
+  }
+  function bigTouchD() {
+    try { var sc = window.screen || {}; return (navigator.maxTouchPoints || 0) > 1 && Math.min(sc.width || 0, sc.height || 0) >= 600; } catch (e) { return false; }
+  }
+  // Auto fit follows rotation, Split View and window resizes (debounced); a manual display choice is left alone.
+  // Only a WIDTH change re-fits: a keyboard opening (height only) must never undo the OS text-size seed.
+  var _fitT = 0, _fitW = 0;
+  function fitOnResizeD() {
+    if (!ds.autoFit) return;
+    clearTimeout(_fitT);
+    _fitT = setTimeout(function () {
+      var w = window.innerWidth || 0;
+      if (!ds.autoFit || !w || Math.abs(w - _fitW) < 2) return;
+      _fitW = w; autoFitD();
+    }, 150);
   }
   // Seed the app font scale from the OS accessibility text size (iOS Dynamic Type / Android font scale) on
   // launch, so a user who set a larger SYSTEM size gets it without hunting for the in-app slider (CR5). Only
@@ -11502,7 +11521,8 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     var iv = setInterval(function () { if (attach() || ++tries > 60) clearInterval(iv); }, 500);
   })();
   function start() {
-    injectFont(); build(); applyD(); if (ds.autoFit) autoFitD(); seedOSTextScale(); watchReasonBtn(); wrapMyCases(); wrapSidebar(); try { enhanceAbout(); } catch (e) {}
+    injectFont(); build(); applyD(); if (ds.autoFit) autoFitD(); seedOSTextScale(); _fitW = window.innerWidth || 0;
+    try { window.addEventListener("resize", fitOnResizeD); window.addEventListener("orientationchange", fitOnResizeD); } catch (e) {} watchReasonBtn(); wrapMyCases(); wrapSidebar(); try { enhanceAbout(); } catch (e) {}
     try { initResume(); } catch (e) {}
     try { installSbScrollGuard(); } catch (e) {}
     if (IS_V2) {

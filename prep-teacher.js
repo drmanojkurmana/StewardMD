@@ -212,7 +212,8 @@
     if (typeof deps.generate !== "function") return Promise.resolve(fail("no-model"));
     var ground = groundingText(item, c, deps.sents), prompt = promptFor(item, c, ground);
     return Promise.resolve().then(function () { return deps.generate(prompt, SYSTEM); }).then(function (r) {
-      if (r && typeof r === "object" && r.error) return fail("model-error");
+      // A generator may name its own failure (Ask MaiK online: sign-in, tokens, connection) with a note to show.
+      if (r && typeof r === "object" && r.error) { var f = fail(NOTES[r.error] ? r.error : "model-error"); if (r.note) { f.note = r.note; f.why = r.error; } return f; }
       var text = cleanAnswer(r && typeof r === "object" ? r.text : r);
       if (!text) return fail("empty");
       if (NOT_COVERED.test(text)) return fail("not-covered");
@@ -243,7 +244,7 @@
     if (typeof deps.generate !== "function") return Promise.resolve({ ok: false, reason: "no-model", note: NOTES["no-model"] });
     var prompt = "GROUNDING:\n" + ground + "\n\nTASK: Explain this step again in simpler words, using only the grounding.";
     return Promise.resolve().then(function () { return deps.generate(prompt, STEP_SYSTEM); }).then(function (r) {
-      if (r && typeof r === "object" && r.error) return { ok: false, reason: "model-error", note: "MaiK could not answer on this phone just now." };
+      if (r && typeof r === "object" && r.error) return { ok: false, reason: "model-error", why: r.note ? r.error : undefined, note: r.note || "MaiK could not answer on this phone just now." };
       var text = cleanAnswer(r && typeof r === "object" ? r.text : r);
       if (!text) return { ok: false, reason: "empty", note: "MaiK gave no answer on this phone just now." };
       var ck = check(text, ground, deps.lexicon);
@@ -271,7 +272,9 @@
   // The runtime is there (native app with the llama plugin, MaiK's local engine loaded).
   function runtime() { var Lc = local(); try { return !!(native() && Lc && Lc.available && Lc.available() && typeof Lc.answer === "function" && models()); } catch (e) { return false; } }
   /* ready() -> bool, synchronous: runtime plus the selected pack marked downloaded (for showing the button). */
-  function ready() { try { var M = models(); return runtime() && !!(M.installedCached && M.installedCached(packId())); } catch (e) { return false; } }
+  // A pack on a phone too small to load it (suitability "no") is not ready: it would only fail at load.
+  function fits() { try { var M = models(), v = M.suitability ? M.suitability(packId()) : null; return !(v && v.level === "no"); } catch (e) { return true; } }
+  function ready() { try { var M = models(); return runtime() && !!(M.installedCached && M.installedCached(packId())) && fits(); } catch (e) { return false; } }
   /* available() -> Promise<bool>: runtime plus the selected pack verified on disk. */
   function available() {
     if (!runtime()) return Promise.resolve(false);
@@ -379,5 +382,7 @@
     });
   }
 
-  G.PREP_TEACHER = { available: available, ready: ready, explain: explain, explainStep: explainStep, _pure: PURE };
+  // Ask MaiK (prep-ask.js) runs the same teach() with the same local generator, sources and pack label.
+  G.PREP_TEACHER = { available: available, ready: ready, runtime: runtime, explain: explain, explainStep: explainStep, localGenerate: localGenerate,
+    sourceSentences: sourceSentences, packLabel: packLabel, packId: packId, isBusy: function () { return busy; }, setBusy: function (b) { busy = !!b; }, _pure: PURE };
 })(typeof window !== "undefined" ? window : this);

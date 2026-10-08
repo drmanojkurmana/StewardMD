@@ -281,7 +281,9 @@
       return '<div class="pk-bar" id="pkBar"><button type="button" class="pn-btn pri pk-show" data-act="k-flip">' + (occ ? ic("eye") + " Reveal all" : "Show answer") + '<kbd class="pk-kbd" aria-hidden="true">Space</kbd></button></div>';
     }
     var s = store(), today = host.today();
-    return '<div class="pk-bar" id="pkBar"><div class="pk-grades" role="group" aria-label="How well did you remember it?">' + GRADES.map(function (x) {
+    // Ask MaiK (prep-ask.js) about the turned card: on this phone or online, from the card's own two sides.
+    var ask = G.PREP_ASK && c.kind !== "occl" ? '<button type="button" class="pn-link pk-ask" data-act="k-ask"><span class="pt-av" aria-hidden="true"></span>Ask MaiK about this card</button>' : "";
+    return '<div class="pk-bar" id="pkBar">' + ask + '<div class="pk-grades" role="group" aria-label="How well did you remember it?">' + GRADES.map(function (x) {
       var d = intervalFor(s, c._m, c.id, x.g, today, C());
       return '<button type="button" class="pk-g pk-' + x.k + '" data-act="k-grade" data-g="' + x.g + '" aria-label="' + x.label + ", next in " + ivlWords(d) + '"><b>' + x.label + "</b><small>" + fmtIvl(d) + '</small><kbd class="pk-kbd" aria-hidden="true">' + x.g + "</kbd></button>";
     }).join("") + "</div></div>";
@@ -454,8 +456,8 @@
   /* ---------- keys: Space or Enter shows the answer, 1 to 4 grade. No animation for keys. ---------- */
   function onKey(e) {
     if (!K.run || !host || host.stackTop() !== K.view || K.run.i >= K.run.list.length || e.ctrlKey || e.metaKey || e.altKey) return;
-    var t = e.target, tag = t && t.tagName;
-    if (tag === "INPUT" || tag === "TEXTAREA") return;
+    var t = e.target, tag = t && t.tagName, rt = rootEl();
+    if (tag === "INPUT" || tag === "TEXTAREA" || (rt && rt.querySelector(".pn-sheet-wrap"))) return;
     if (!K.run.shown && (e.key === " " || (e.key === "Enter" && !(t && t.closest && t.closest("button"))))) { e.preventDefault(); return reveal(true); }
     if (K.run.shown && /^[1-4]$/.test(e.key)) { e.preventDefault(); return doGrade(Number(e.key), "key"); }
   }
@@ -556,6 +558,7 @@
     if (a === "k-due") return openDue(h);
     if (!K.run) return;
     if (a === "k-flip") return reveal(false);
+    if (a === "k-ask") { var kc = curCard(); if (kc && G.PREP_ASK) G.PREP_ASK.open({ kind: "card", fr: kc.fr, bk: kc.bk, title: K.run.title }, h); return; }
     if (a === "k-box") return boxTap(Number(b.getAttribute("data-i")));
     if (a === "k-grade") return doGrade(Number(b.getAttribute("data-g")), "tap");
     if (a === "k-more") return learnMore();

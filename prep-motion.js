@@ -71,10 +71,12 @@
 
   function scan(el) {
     if (!el || el.nodeType !== 1) return;
-    var list = [el].concat(Array.prototype.slice.call(el.querySelectorAll(".pl-hero,.pn-home,.pn-fb,.pn-score,.pn-lsn-fin,.pk-end,.pn-sheet,.pn-round,.pn-lobby,.pn-streak,.pn-vsi,.pn-rtick,.pn-heat,.pn-mast,.pn-lvb,.pn-mods,.pc-decks,.ps-list,.pl-ws,.pn-hbn,.pn-fills")));
+    var list = [el].concat(Array.prototype.slice.call(el.querySelectorAll(".pl-hero,.pn-home,.pn-fb,.pn-score,.pn-lsn-fin,.pk-end,.pn-sheet,.pn-round,.pn-lobby,.pn-streak,.pn-vsi,.pn-rtick,.pn-heat,.pn-mast,.pn-lvb,.pn-mods,.pc-decks,.ps-list,.pl-ws,.pn-hbn,.pn-fills,[data-cele]")));
     list.forEach(function (n) {
       if (n.__pnMo) return;
       var c = n.classList;
+      // A milestone on a surface that has no finish-card handling of its own (today's plan done): balloons only.
+      if (n.getAttribute("data-cele") === "balloons" && !(c.contains("pn-score") || c.contains("pn-lsn-fin") || c.contains("pk-end"))) { n.__pnMo = 1; balloons(n); return; }
       if (c.contains("pl-hero")) {
         n.__pnMo = 1; if (io) io.observe(n);
         var key = "hero:" + (n.getAttribute("aria-label") || ""), first = !seen[key], bar = n.querySelector(".pl-lvbar i");
@@ -146,11 +148,14 @@
         if (ring) drawRing(ring, null, "ring:" + Math.random());
         if (xp) countUp(xp);
         var pct = rv ? parseFloat(rv.getAttribute("stroke-dasharray")) || 0 : 0;
-        if (c.contains("win") || (xp && /^\+/.test(xp.textContent)) || pct >= 70) confetti(n);
+        // Balloons mark a milestone (data-cele, set by prep.js and prep-lessons.js) and win over confetti; confetti stays for
+        // a win, a set at 70% or more and the first lesson of the day (data-cf on the lesson card).
+        if (n.getAttribute("data-cele") === "balloons") balloons(n);
+        else if (c.contains("win") || (xp && /^\+/.test(xp.textContent) && (!c.contains("pn-lsn-fin") || n.getAttribute("data-cf") === "1")) || pct >= 70) confetti(n);
         if (!c.contains("pn-lobby") && (ring || c.contains("pn-lsn-fin") || c.contains("pk-end") || c.contains("win"))) haptic("success");
         return;
       }
-      if (c.contains("pn-sheet")) { n.__pnMo = 1; anim(n, { transform: ["translateY(100%)", "translateY(0%)"] }, { type: "spring", visualDuration: 0.34, bounce: 0.06 }); return; }
+      if (c.contains("pn-sheet")) { n.__pnMo = 1; var wide = false; try { wide = G.matchMedia("(min-width: 700px)").matches; } catch (e) {} if (wide) anim(n, { opacity: [0, 1], transform: ["scale(0.96)", "scale(1)"] }, { type: "spring", visualDuration: 0.28, bounce: 0 }); else anim(n, { transform: ["translateY(100%)", "translateY(0%)"] }, { type: "spring", visualDuration: 0.34, bounce: 0.06 }); return; }
       if (c.contains("pn-round")) { n.__pnMo = 1; anim(n, { opacity: [0, 1], transform: ["scale(0.95)", "scale(1)"] }, POP); haptic("light"); }
     });
   }
@@ -223,6 +228,42 @@
     G.setTimeout(function () { if (box.parentNode) box.parentNode.removeChild(box); }, 2400);
   }
 
+  /* Balloons (plan section 2.3): 7 on a phone, 9 on a card wider than 600 px, plus data-big (a new rank). Each is a
+     span.pn-bl that rises (translate3d, WAAPI, so it needs no Motion build) around an inner i that sways. Transform and
+     opacity only; pointer-events none; paused off screen and while the app is hidden; removed at 3.8 s. Reduced motion:
+     nothing is made (the milestone is said in words on the card). */
+  var BHUES = ["#63f0db", "#ffc35c", "#ff8fa3", "#9fb8ff", "#b6f58c", "#ffb38a"];
+  function balloons(host) {
+    if (!host || reduced() || !host.animate || host.querySelector(":scope > .pn-balloons")) return;
+    var w = host.offsetWidth || 340, h = host.offsetHeight || 300, n = (w > 600 ? 9 : 7) + (+host.getAttribute("data-big") || 0);
+    var box = D.createElement("span"); box.className = "pn-balloons"; box.setAttribute("aria-hidden", "true");
+    var made = [];
+    for (var i = 0; i < n; i++) {
+      var b = D.createElement("span"), inner = D.createElement("i");
+      b.className = "pn-bl"; b.style.left = (4 + (i + 0.5) * (88 / n) + (Math.random() * 4 - 2)).toFixed(1) + "%";
+      inner.style.backgroundColor = BHUES[i % BHUES.length];
+      b.appendChild(inner); box.appendChild(b); made.push([b, inner]);
+    }
+    host.appendChild(box);
+    var rise = h + 120;
+    made.forEach(function (p, i) {
+      var dx = (Math.random() * 2 - 1) * 26, y = function (f) { return "translate3d(" + (dx * f).toFixed(1) + "px, " + (-rise * f).toFixed(1) + "px, 0)"; };
+      try {
+        p[0].animate([{ transform: y(0), opacity: 0 }, { transform: y(0.08), opacity: 1, offset: 0.08 }, { transform: y(0.85), opacity: 1, offset: 0.85 }, { transform: y(1), opacity: 0 }],
+          { duration: 2600 + Math.random() * 800, delay: 120 + i * 30 + Math.random() * 120, easing: "cubic-bezier(.33, 0, .2, 1)", fill: "both" });
+        p[1].animate([{ transform: "rotate(-5deg) translateX(-4px)" }, { transform: "rotate(5deg) translateX(4px)" }], { duration: 1100 + Math.random() * 400, iterations: Infinity, direction: "alternate", easing: "ease-in-out" });
+      } catch (e) {}
+    });
+    if (io) io.observe(host);
+    G.setTimeout(function () { if (box.parentNode) box.parentNode.removeChild(box); }, 3800);
+  }
+  // Pause or play every balloon under el (off screen, app hidden).
+  function playBalloons(el, on) {
+    var bl = el && el.querySelectorAll ? el.querySelectorAll(".pn-balloons .pn-bl, .pn-balloons .pn-bl > i") : [];
+    Array.prototype.forEach.call(bl, function (x) { try { (x.getAnimations ? x.getAnimations() : []).forEach(function (a) { if (on) a.play(); else a.pause(); }); } catch (e) {} });
+  }
+  function onVis() { if (root) playBalloons(root, !D.hidden); }
+
   // Tiles lean toward a mouse or trackpad pointer (up to 6 degrees) and a spotlight follows it; touch never tilts.
   function onMove(e) {
     if (e.pointerType !== "mouse" || reduced()) return;
@@ -275,20 +316,23 @@
     ensure();
     if (M) ready();
     try {
-      io = G.IntersectionObserver ? new G.IntersectionObserver(function (es) { es.forEach(function (x) { x.target.classList.toggle("pn-off", !x.isIntersecting); }); }) : null;
+      io = G.IntersectionObserver ? new G.IntersectionObserver(function (es) { es.forEach(function (x) { x.target.classList.toggle("pn-off", !x.isIntersecting); playBalloons(x.target, x.isIntersecting); }); }) : null;
     } catch (e) { io = null; }
     mo = new G.MutationObserver(function (recs) {
-      if (!M) return;
+      // Without the Motion build only the balloons run (WAAPI); everything else shows its final state.
+      if (!M) { recs.forEach(function (rec) { Array.prototype.forEach.call(rec.addedNodes, function (n) { if (n.nodeType !== 1) return; var cs = [n].concat(Array.prototype.slice.call(n.querySelectorAll("[data-cele=balloons]"))); cs.forEach(function (x) { if (x.getAttribute && x.getAttribute("data-cele") === "balloons" && !x.__pnBl) { x.__pnBl = 1; balloons(x); } }); }); }); return; }
       recs.forEach(function (rec) { Array.prototype.forEach.call(rec.addedNodes, scan); });
     });
+    D.addEventListener("visibilitychange", onVis);
     mo.observe(root, { childList: true, subtree: true });
     if (finePointer()) { root.addEventListener("pointermove", onMove); root.addEventListener("pointerleave", untilt); }
   }
   function detach() {
     if (mo) mo.disconnect();
     if (io) io.disconnect();
+    D.removeEventListener("visibilitychange", onVis);
     if (root) { root.removeEventListener("pointermove", onMove); root.removeEventListener("pointerleave", untilt); root.removeEventListener("scroll", onScroll, true); }
     mo = io = null; root = null; tiltEl = null;
   }
-  G.PREP_MOTION = { attach: attach, detach: detach, nav: nav, ensure: ensure, ready: function () { return !!M; }, settle: settle, haptic: haptic, confetti: function (el) { if (M && root && !reduced()) confetti(el); } };
+  G.PREP_MOTION = { attach: attach, detach: detach, nav: nav, ensure: ensure, ready: function () { return !!M; }, settle: settle, haptic: haptic, confetti: function (el) { if (M && root && !reduced()) confetti(el); }, balloons: function (el) { if (root && !reduced()) balloons(el); } };
 })(typeof window !== "undefined" ? window : this);

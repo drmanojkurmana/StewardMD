@@ -257,3 +257,9 @@ body.dark .pn-root .pl-segb.on { background: var(--pn-seg); }
 @media (prefers-reduced-motion: reduce) { .pn-root .pl-calbox.pl-in { animation: none; } .pn-root .pl-segb, .pn-root .pl-cd, .pn-root .pl-chev { transition: none; } }
 .pn-root .pl-exact summary:focus-visible, .pn-root .pl-cell:focus-visible { outline: 2px solid var(--pn-pri); outline-offset: 2px; border-radius: var(--pn-r-sm); }
 @media (hover: hover) and (pointer: fine) { .pn-root .pl-segb:not(.on):hover, .pn-root .pl-spb:hover { color: var(--pn-text); } }
+/* iPad and wider (prep.css round 8): the plan sheets are centred panels; the sticky actions meet the panel's own
+   bottom padding (no home-indicator inset) and its rounded corners. */
+@media (min-width: 700px) {
+  .pn-root .pl-sheet { max-height: 100%; }
+  .pn-root .pl-sheet > .pn-sheet-act { bottom: -20px; margin-bottom: -20px; padding-bottom: 20px; border-radius: 0 0 var(--pn-r-xl) var(--pn-r-xl); }
+}

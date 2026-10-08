@@ -675,8 +675,39 @@ Owner decisions: [[decisions/Decisions]] "PrepNucleus pricing, free tier and soc
   (lessonsFor, imgUrl, mergeOverlay, plan by key), headless `test/run-prep-radnotes-ui.mjs` (synthetic fixture
   `test/fixtures/prep-radnotes/api/`, no content from the notes).
 
+## Ask MaiK everywhere, MaiK lines, balloons, iPad (2026-10-09, branch `feat/prep-ipad-maik`, `?v=prep27`)
+Plan: `vault/plans/PrepNucleus-iPad-Confetti-MaikLines.md` (on branch `feat/prep-ipad-plan`), owner decisions 2026-10-09.
+- **Ask MaiK** (`prep-ask.js`, `window.PREP_ASK`, data-act `ak-`, CSS `prep-ask.css`): one sheet, on every MCQ answer
+  (right or wrong), review, lesson step and flashcard back, web included. First use asks "On this phone" or "Online" with
+  "Don't ask again"; store key `ask` `{ m: "local" | "online", q: 1 }` (synced register); Your plan settings has an "Ask
+  MaiK" row (each time / on this phone / online). A web browser, an incapable phone and an unknown phone are told at once
+  and offered Online. Both paths run `prep-teacher.js` `teach()` / `teachStep()` (same grounding, prompt and check). With
+  the MaiK engine on Local, an online ask asks first; the engine setting is never changed. iPad landscape (>= 900 px) runner
+  and review: a 420 px right side panel (`pa-side`); >= 700 px a centred panel; phones a bottom sheet.
+- **Online route** `POST /api/ai/prep-teach` (`functions/api/ai/_prep-teach.js`): sign-in (401), `checkQuota` type
+  "prep" (breaker, rate), `gateAndCount("prep_tutor")` = the existing MaiK Token rules (free daily MT allowance, then the
+  prepaid balance, only while `AI_COST_CAP_ON` = 1; `prep_tutor` daily count 0 = unlimited by owner decision), one
+  Gemini call (`PREP_TEACH_MODEL`, default `MODEL_HARD_DEFAULT`), one usage record `prep:teach`. 429 `ai-cost-cap` opens
+  the app's "MaiK Tokens are used up" sheet (pro-paywall.js). Response carries `usage.mt` and `wallet`; the sheet shows
+  "Used about N MaiK Tokens" (and the balance when the cap is on). About 70 MT a typical ask, under 200 worst case.
+- **Device check** (`deviceVerdict`): today the llama plugin's total memory (7 GB or more = capable; iOS and Android) and
+  the Android version from the user agent (12+); with the next store build `@capacitor/device` 8.0.3 (package.json) adds
+  the model identifier, matched against `prep/device-capability.json` (52 Apple rows, ids UNVERIFIED, conservative), else
+  the rule "iPhone major id >= 16". Feature-checked: without the native plugin the memory rule decides.
+- **MaiK lines** `prep/maik-lines.json` (108 approved lines, 3 per subject + 3 per branch): one per app session after a
+  set of 5+ answered (`st.mlShown` + sessionStorage) and on the lesson finish card, never in mocks or battles; rotation
+  `store.ml[subject]` (synced). `pickLine` / `setSubject` in prep.js PURE.
+- **Balloons** (`prep-motion.js` `balloons()`, WAAPI, transform and opacity): milestones only (level-up, new rank +2,
+  streak 7/30/100/every 100 from 200, question milestones, first mock, first finished day plan), at most one a day except a
+  level-up; `store.cel { day, keys }` (synced) so none fires twice. 7 balloons, 9 on cards wider than 600 px; none under
+  reduced motion (the chip says it). Confetti stays for wins, sets at 70%+ and only the first lesson of the day (`data-cf`).
+- Retired: the "AI-generated educational content" deck label (prep-decks.js) and the old supported-phones text
+  (maik-models.js DEVICE_SUPPORTED now states the owner's cut-off, no "AI").
+- Tests: `test/prep-ask.test.mjs`, `test/prep-teach-server.test.mjs`, headless `test/run-prep-ask-ui.mjs` and
+  `test/run-prep-ipad.mjs`.
+
 ## Store
-localStorage `smd_prep_v1`: `{v, cards, conf, days, mod:{t,ok,last}, bm, rep, exam, last, dl, hid, mt, goal, mh, ls, lsp, pl, pt, ra, fc}` (`ls`/`lsp`: Lessons;
+localStorage `smd_prep_v1`: `{v, cards, conf, days, mod:{t,ok,last}, bm, rep, exam, last, dl, hid, mt, goal, mh, ls, lsp, pl, pt, ra, fc, ask, cel, ml}` (`ask`/`cel`/`ml`: Ask MaiK choice, celebrated milestones, MaiK line rotation) (`ls`/`lsp`: Lessons;
 `pl`/`pt`/`ra`: Plan; `fc`: Cards). FSRS deck key
 `p:<module>` (module cards `p:<module>:c`, Layer C decks `p:deck-<id>`). `hid` is the auto-hidden list, refreshed at most every 6 hours.
 Today's plan counts questions only: its "due reviews" and "new questions" skip card keys `p:<module>:c:<cardId>`

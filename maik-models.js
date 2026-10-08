@@ -126,8 +126,10 @@
    *
    * The device list is the owner's, kept verbatim rather than turned into a vague "recent flagship".
    */
-  var DEVICE_SUPPORTED = "iPhone 18 Pro, 17 Pro, 16 Pro. Samsung Galaxy Fold 7, 6, 5 or S24, S25, S26 Ultra.";
-  var DEVICE_WARNING = "Built for flagship, AI-enabled phones: " + DEVICE_SUPPORTED +
+  // Owner, 2026-10-09: the cut-off is an iPhone 15 Pro or newer, an iPad with an M1 chip or newer, or an Android phone
+  // with 8 GB of memory or more on Android 12 or newer (the same rule PrepNucleus Ask MaiK uses). No "AI" in app text.
+  var DEVICE_SUPPORTED = "an iPhone 15 Pro or newer, an iPad with an M1 chip or newer, or an Android phone with 8 GB of memory or more and Android 12 or newer.";
+  var DEVICE_WARNING = "Built for recent flagship phones: " + DEVICE_SUPPORTED +
     " On any other phone this is at your own risk. It may hang or crash the phone.";
 
   /* SPECULATIVE-DECODING DRAFTS (perf plan #6). A tiny model with the SAME tokeniser proposes a few
