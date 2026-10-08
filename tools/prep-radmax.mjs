@@ -246,6 +246,7 @@ function rulesText(bank) {
     "Every factual claim in the stem, the options, the key line, the reasons, the clue, the learning point and the notes must be stated in the SOURCE. Do not add any finding, number, dose, criterion, sign name, eponym, classification or statistic that the source does not state. You may combine facts from different lines of the source for higher-level items.",
     "ev lists the ids of the source lines (such as '12.3') that support the key and the explanation; cite every line you used.",
     "Single best answer: exactly one defensible option; the other three plausible to a radiology resident and clearly wrong by the source. Options parallel in form and similar in length; the key is never the longest; no 'all of the above' or 'none of the above'; no clue in grammar.",
+    "Clinical details in a stem (age, sex, symptoms, signs, history, lab values) must come from the source; when the source gives none, write 'A patient' and give only the imaging context. Never invent a symptom or an age.",
     "Do not test trivia (page furniture, book structure, author names, exam-writing tips). Test examinable radiology.",
     "Never copy 10 or more consecutive words from the source; write fresh wording. Never mention the book, notes, author, figure numbers, tables, case numbers or AI. No long dashes, no emoji. British spelling.",
     "kt: the correct option's text, copied exactly from o. ky: one sentence (at most 40 words) that starts with the correct option's text and says why it is right.",
@@ -283,7 +284,8 @@ export function imgPrompt(u, redo) {
     "The question must need the image: the stem says the image is shown ('The radiograph shown', 'The CT image shown') and never names or describes the answer finding in words. Ask for the diagnosis, the sign, the structure, the differential, the next investigation or the management, as the source supports.",
   ].concat(rulesText(bank)).join("\n");
   const src = "<source>\n" + (u.header ? "Context: " + u.header + "\n" : "") + u.segs.map((s) => "[" + s.id + "] " + s.tx).join("\n") + "\n</source>";
-  const ask = (u.modHint ? "Module: " + u.modHint + " is the usual module here.\n" : "") + (redo ? `A first draft was rejected because: ${cleanText(redo.why, 400)}. Draft stem: ${cleanText(redo.q, 600)}. Write a better item (format image, level ${w.dif}) or set sure to false.` : `Write one item: format image, level ${w.dif}. The image is attached.`);
+  const seen = u.shows ? "\nWhat a reviewer could clearly see in the image: " + u.shows + "\nAsk only about a finding that is visible as described and that the source explains." : "";
+  const ask = seen + "\n" + (u.modHint ? "Module: " + u.modHint + " is the usual module here.\n" : "") + (redo ? `A first draft was rejected because: ${cleanText(redo.why, 400)}. Draft stem: ${cleanText(redo.q, 600)}. Write a better item (format image, level ${w.dif}) or set sure to false.` : `Write one item: format image, level ${w.dif}. The image is attached.`);
   return { op: "radmax-img", system, user: src + "\n" + ask, schema: IMG_SCHEMA, maxOut: 2400, temperature: 0.5 };
 }
 const REVIEW_SCHEMA = O({ g: S("ARRAY", { items: O({ i: S("INTEGER"), g4: S("BOOLEAN"), g6: S("BOOLEAN"), g7: S("BOOLEAN"), g8: S("BOOLEAN"), g9: S("BOOLEAN"), gx: S("BOOLEAN"), g10: S("BOOLEAN"), gf: S("BOOLEAN"), gl: S("BOOLEAN"), why: S("STRING") }, ["i", "g4", "g6", "g7", "g8", "g9", "gx", "g10", "gf", "gl", "why"]) }) }, ["g"]);
@@ -461,7 +463,12 @@ function applyReview(rl, out) { for (const l of rl) readReview((out.get(l.key) |
 async function runAll(dir, args) {
   const run = args.run; if (!run) throw new Error("--run NAME");
   const allU = readJson(path.join(dir, "work/units.json"), null); if (!allU) throw new Error("run `units` first");
-  const units = pickUnits(allU.units, args.pick);
+  let units = pickUnits(allU.units, args.pick);
+  if (args.flags.has("img2")) {
+    const qa = new Map(fs.readdirSync(path.join(dir, "work/figqa")).filter((f) => /^out-\d+\.json$/.test(f)).flatMap((f) => readJson(path.join(dir, "work/figqa", f), [])).map((x) => [x.id, x]));
+    units = units.filter((u) => u.kind === "img").filter((u) => { const q = qa.get(u.fig.id); if (q && q.usable === true && q.giveaway !== true && cleanText(q.shows)) { u.shows = cleanText(q.shows, 300); return true; } return false; });
+  }
+  if (args.fix) return fixRun(dir, args, allU);
   const work = path.join(dir, "work", run), stFile = path.join(work, "state.json");
   const state = readJson(stFile, null) || { v: 1, run: "radmax-" + run, pick: args.pick || "", stages: {} };
   const dry = args.flags.has("dry-run"), cap = Number(args.cap || 100);
@@ -523,6 +530,50 @@ async function runAll(dir, args) {
   writeJson(path.join(work, "summary.json"), sum);
   console.log(JSON.stringify(sum));
 }
+
+/* fixRun: one rewrite for items that passed the model gates in their first round (tag g1) but failed the Haiku fact
+ * check; the reason goes to the writer. Items already rewritten once (tag g2) and items whose key the checker doubted are never redone. */
+/* fixCandidates(items, fact) -> text items from the first round (g1) that the fact check failed. An item whose key the
+ * checker doubted (key false) is never rewritten: it goes to the owner flag list so no key changes silently. */
+export function fixCandidates(items, fact) {
+  return items.filter((i) => { const f = fact.get(i.id); return !i.fig && i.tag === "g1" && f && f.ok !== true && f.key !== false; });
+}
+async function fixRun(dir, args, allU) {
+  const run = args.run, from = String(args.fix).split(","), hd = path.join(dir, "work/haiku");
+  const fact = new Map(fs.readdirSync(hd).filter((f) => /^fact-out-.*\.json$/.test(f)).flatMap((f) => readJson(path.join(hd, f), [])).map((v) => [v.id, v]));
+  const items = fixCandidates(from.flatMap((r) => readJson(path.join(dir, "work", r, "items.json"), [])), fact);
+  const U = new Map(allU.units.map((u) => [u.uid, u]));
+  const by = new Map(); for (const i of items) { if (!by.has(i.uid)) by.set(i.uid, []); by.get(i.uid).push(i); }
+  const units = [...by.keys()].map((k) => U.get(k)).filter(Boolean);
+  const work = path.join(dir, "work", run), stFile = path.join(work, "state.json");
+  const state = readJson(stFile, null) || { v: 1, run: "radmax-" + run, stages: {} };
+  const vx = args.flags.has("dry-run") ? { cfg: vertexConfig(process.env) } : createVertex({});
+  const sctx = { vx, work, state, save: () => writeJson(stFile, state), pollMs: 60000, noWait: false, maxWaitMs: 24 * 3600e3, jobPrefix: "radmax", log: console.log };
+  const go = async (name, lines, op, outFrac) => {
+    const inTok = lines.reduce((a, l) => a + reqTok(l.request), 0), outTok = lines.reduce((a, l) => a + l.request.generationConfig.maxOutputTokens * outFrac, 0), usd = costUsd({ inTok, outTok }, MODEL, { batch: true });
+    if (!(state.stages[name] && state.stages[name].jobId)) { logRow(dir, { run, stage: name, n: lines.length, inTok, outTok: Math.round(outTok), usd, note: "estimate" }); console.log(`  ${name}: ${lines.length} requests, estimate $${usd.toFixed(4)}`); if (args.flags.has("dry-run")) return null; }
+    const before = state.stages[name] && state.stages[name].status === "done";
+    const res = await stage(sctx, name, lines, op); const st = state.stages[name];
+    if (!before && st && st.usage) logRow(dir, { run, stage: name, n: lines.length, inTok: st.usage.inTok, outTok: st.usage.outTok + (st.usage.thinkTok || 0), usd: st.usage.usd });
+    return res;
+  };
+  console.log(`fix ${run}: ${items.length} items in ${units.length} units`);
+  const fl = units.map((u) => ({ key: u.uid, request: requestBody(genPrompt(u, by.get(u.uid).map((i) => ({ ...i, why: "a fact checker found: " + (fact.get(i.id).why || "unsupported claims") + ". Every clinical detail and every claim must come from the source." })))) }));
+  const g = await go("F1-fix", fl, "gen", 0.55); if (!g) return;
+  const d = readDrafts(units, g, "fix"), ok = d.filter((x) => x.it && !x.why);
+  const [s] = await Promise.all([go("F2-solve", solveLines(ok), "solve", 0.5), (async () => { const rl = reviewLines(ok); const o = await go("F3-review", rl.map(({ key, request }) => ({ key, request })), "review", 0.6); applyReview(rl, o); })()]);
+  applySolve(ok, s);
+  for (const x of ok) { if (!x.solved) x.why = "blind solver disagreed"; if (x.rev && !x.rev.pass) x.why = (x.why ? x.why + "; " : "") + x.rev.why; }
+  const acc = d.filter((x) => x.it && !x.why), rnd = mulberry32(seedFrom(run)), pos = keyPositions(acc.length, rnd);
+  const out = acc.map((x, i) => { const it = shuffle(x.it, x.u.uid + x.k + "fix", pos[i]); const pages = [...new Set(it.ev.map((e) => e.split(".")[0]).filter((p) => /^\d+$/.test(p)).map(Number))].sort((a, b) => a - b);
+    return { id: "rm-" + sha12(x.u.uid + "|" + normText(it.q)), run, uid: x.u.uid, src: x.u.src, file: SOURCES[x.u.src].file, pages: pages.length ? pages : x.u.pages, fig: null, tag: "fix", ...it }; });
+  writeJson(path.join(work, "items.json"), out);
+  writeJson(path.join(work, "rejected.json"), d.filter((x) => x.why).map((x) => ({ uid: x.u.uid, src: x.u.src, tag: "fix", fmt: x.it ? x.it.fmt : "", dif: x.it ? x.it.dif : "", why: x.why, q: x.it ? x.it.q.slice(0, 200) : "" })));
+  const usd = Object.values(state.stages).reduce((a, st) => a + ((st.usage && st.usage.usd) || 0), 0);
+  writeJson(path.join(work, "summary.json"), { fixInput: items.length, drafts: d.length, accepted: out.length, usd });
+  console.log(JSON.stringify({ fixInput: items.length, drafts: d.length, accepted: out.length, usd }));
+}
+
 function dryRest(dir, run, units) {
   const nText = units.filter((u) => u.kind === "text").reduce((a, u) => a + u.want.length, 0) * 0.85, nImg = units.filter((u) => u.kind === "img").length * 0.7;
   const segTok = units.reduce((a, u) => a + groundOf(u.segs).length / 4, 0) / Math.max(1, units.length);
@@ -572,7 +623,7 @@ function haikuPrep(dir, args) {
     return { id: i.id, image: jp, caption: cleanText(i.fig.caption, 300), q: i.q, o: i.o.map((o, k) => L[k] + ". " + o), key: L[i.a] + ". " + i.o[i.a], why: i.ky };
   });
   // fact check: item + the cited source lines (and the unit context)
-  const fc = fresh.map((i) => { const u = units.get(i.uid); const ev = new Set(i.ev); const lines = u ? u.segs.filter((s) => ev.has(s.id) || s.id === "cap") : []; return { id: i.id, q: i.q, o: i.o.map((o, k) => L[k] + ". " + o), key: L[i.a] + ". " + i.o[i.a], explanation: [i.ky, ...Object.entries(i.others).map(([k, v]) => k + ": " + v), "Clue: " + i.clue, "Learning point: " + i.lp, i.nt].join("\n"), source: (u && u.header ? u.header + "\n" : "") + lines.map((s) => "[" + s.id + "] " + s.tx).join("\n") }; });
+  const fc = fresh.map((i) => { const u = units.get(i.uid); const lines = u ? u.segs : []; return { id: i.id, q: i.q, o: i.o.map((o, k) => L[k] + ". " + o), key: L[i.a] + ". " + i.o[i.a], cited: i.ev.join(", "), explanation: [i.ky, ...Object.entries(i.others).map(([k, v]) => k + ": " + v), "Clue: " + i.clue, "Learning point: " + i.lp, i.nt].join("\n"), source: (u && u.header ? u.header + "\n" : "") + lines.map((s) => "[" + s.id + "] " + s.tx).join("\n") }; });
   const tag = args.tag || "h" + Date.now().toString(36);
   const put = (kind, list, per) => { for (let i = 0; i < list.length; i += per) writeJson(path.join(hd, `${kind}-${tag}-${String(i / per).padStart(2, "0")}.json`), list.slice(i, i + per)); return Math.ceil(list.length / per); };
   console.log(`image-vote files ${put("img", img, 12)} (${img.length} uses), fact-check files ${put("fact", fc, 20)} (${fc.length} items)`);
@@ -610,6 +661,7 @@ function assemble(dir, args) {
   const stems = new Map();
   for (const it of items0) {
     const why = [];
+    if (it.fig && args["img-runs"] && !String(args["img-runs"]).split(",").includes(it.run)) { left.push({ id: it.id, src: it.src, uid: it.uid, fmt: it.fmt, dif: it.dif, why: "image item superseded by the figure-checked regeneration" }); continue; }
     if (it.fig) { const v = votes.get(it.id); if (!v.ok) why.push("image vote: " + v.why); if (v.flag) flagged.push({ id: it.id, kind: "image content", why: v.flag, fig: it.fig.id, page: it.fig.page, file: it.file }); if (usedFig.has(it.fig.id)) why.push("figure already used"); }
     const f = fact.get(it.id);
     if (!f) why.push("no fact-check verdict"); else if (f.ok !== true) { why.push("fact check: " + (f.why || "")); if (f.key === false) flagged.push({ id: it.id, kind: "possibly wrong key", why: f.why, q: it.q, key: it.o[it.a], file: it.file, pages: it.pages }); }

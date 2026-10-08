@@ -2,7 +2,7 @@
 // No PDF text here: the fixtures are made-up radiology sentences.
 import test from "node:test";
 import assert from "node:assert/strict";
-import { segments, cleanPage, draftToItem, gates, shuffle, tallyVotes, slate, itemsFor, isAnswerPage, EXAMISH, readReview, L } from "../tools/prep-radmax.mjs";
+import { segments, cleanPage, draftToItem, gates, shuffle, tallyVotes, slate, itemsFor, isAnswerPage, EXAMISH, readReview, L, fixCandidates } from "../tools/prep-radmax.mjs";
 
 const SRC = "Pleural effusion blunts the costophrenic angle on an erect radiograph. About 200 ml of fluid is needed before the lateral angle blunts. A subpulmonic effusion mimics a raised hemidiaphragm. Ultrasound detects small effusions and guides aspiration.";
 const unit = { uid: "notes1-p5", src: "notes1", kind: "text", pages: [5], header: "", segs: segments(5, SRC), want: [] };
@@ -80,4 +80,10 @@ test("slate, itemsFor, answer pages, review parsing", () => {
   assert.ok(isAnswerPage("1.\n(a)\nTrue\n(b)\nFalse - no\n(c)\nTrue"));
   const r = readReview(JSON.stringify({ g: [{ i: 0, g4: true, g6: true, g7: true, g8: true, g9: true, gx: true, g10: true, gf: true, gl: true, why: "" }, { i: 1, g4: true, g6: true, g7: true, g8: true, g9: false, gx: true, g10: true, gf: true, gl: true, why: "not in source" }] }), 3);
   assert.equal(r[0].pass, true); assert.equal(r[1].pass, false); assert.equal(r[2].pass, false);
+});
+
+test("fixCandidates: rewrites failed first-round text items, never doubted keys, images or second rounds", () => {
+  const items = [{ id: "a", tag: "g1" }, { id: "b", tag: "g1" }, { id: "c", tag: "g2" }, { id: "d", tag: "g1", fig: { id: "f" } }, { id: "e", tag: "g1" }, { id: "g", tag: "g1" }];
+  const fact = new Map([["a", { ok: false, key: true, why: "invented age" }], ["b", { ok: false, key: false, why: "key wrong" }], ["c", { ok: false, key: true }], ["d", { ok: false, key: true }], ["e", { ok: true, key: true }]]);
+  assert.deepEqual(fixCandidates(items, fact).map((i) => i.id), ["a"]);
 });
