@@ -189,13 +189,23 @@ export function explainPrompt(items, opts = {}) {
   ].join("\n")).join("\n\n") + "\n</items>";
   return { op: "explain", system, user, schema: XSchema, maxOut: Math.min(8000, items.length * OUT_PER_ITEM * 2 + 64), temperature: 0.3 };
 }
-/* tidy(s, keepLines) -> model text cleaned: "5–10" -> "5 to 10", other long dashes -> ", ", emoji and control
+/* tidy(s, keepLines) -> model text cleaned: "5\u201310" -> "5 to 10", other long dashes -> ", ", emoji and control
  * characters out, trailing spaces off; keepLines keeps newlines (notes), else one line. */
 export function tidy(s, keepLines) {
   let t = String(s == null ? "" : s).replace(/\r\n?/g, "\n").replace(/\\n/g, "\n");
-  t = t.replace(/(\d)\s*[–—]\s*(\d)/g, "$1 to $2").replace(/\s*[–—]\s*/g, ", ").replace(/[\p{Extended_Pictographic}️]/gu, "");
+  t = t.replace(/(\d)\s*[\u2013\u2014]\s*(\d)/g, "$1 to $2").replace(/\s*[\u2013\u2014]\s*/g, ", ").replace(/[\p{Extended_Pictographic}\uFE0F]/gu, "");
   if (!keepLines) return t.replace(/\s+/g, " ").trim();
   return t.split("\n").map((l) => l.replace(/[\t ]+$/g, "").replace(/[\u0000-\u0008\u000b-\u001f\u007f]/g, "")).join("\n").replace(/\n{3,}/g, "\n\n").trim();
+}
+/* fixTables(notes) -> a table's "| --- |" row made as wide as its header row (the model sometimes adds a column). */
+export function fixTables(notes) {
+  const ls = String(notes).split("\n");
+  for (let i = 0; i + 1 < ls.length; i++) {
+    if (!/^\s*\|/.test(ls[i]) || !/^\s*\|?\s*:?-{2,}/.test(ls[i + 1])) continue;
+    const w = ls[i].trim().replace(/^\|/, "").replace(/\|$/, "").split("|").length;
+    ls[i + 1] = "|" + Array(w).fill(" --- ").join("|") + "|";
+  }
+  return ls.join("\n");
 }
 /* readX(text, items) -> one x or null per item. others never carries the key's letter. */
 export function readX(text, items) {
@@ -206,7 +216,7 @@ export function readX(text, items) {
     if (i < 0 || i >= items.length || out[i]) continue;
     const it = items[i], others = {};
     [r.ra, r.rb, r.rc, r.rd].forEach((w, k) => { if (k !== it.a && k < it.o.length) others[L[k]] = tidy(w).slice(0, 400); });
-    out[i] = { key: tidy(r.ky).slice(0, 400), notes: tidy(r.nt, true).slice(0, 3000), others, pearl: tidy(r.pl).slice(0, 400) };
+    out[i] = { key: tidy(r.ky).slice(0, 400), notes: fixTables(tidy(r.nt, true)).slice(0, 3000), others, pearl: tidy(r.pl).slice(0, 400) };
     Object.defineProperty(out[i], "ka", { value: String(r.ka || "").trim().toUpperCase().slice(0, 1), enumerable: false });
   }
   return out;
@@ -219,8 +229,9 @@ function lev(a, b) {
   return prev[b.length];
 }
 /* tokHit(w, toks) -> true when a word of the option is in the text: the same word, one a prefix of the other (5+
- * letters: "inhibit" / "inhibiting"), or a spelling slip of at most 2 letters in a word of 6+ ("acetylecysteine"). */
-const tokHit = (w, toks) => toks.some((t) => t === w || (Math.min(t.length, w.length) >= 5 && (t.startsWith(w) || w.startsWith(t))) || (w.length >= 6 && t.length >= 6 && lev(w, t) <= 2));
+ * letters: "inhibit" / "inhibiting"), a shared 6-letter start ("reverse" / "reversible"), or a spelling slip of at most 2 letters in a word of 6+ ("acetylecysteine"). */
+const prefixLen = (a, b) => { let i = 0; while (i < a.length && i < b.length && a[i] === b[i]) i++; return i; };
+const tokHit = (w, toks) => toks.some((t) => t === w || (Math.min(t.length, w.length) >= 5 && (t.startsWith(w) || w.startsWith(t) || prefixLen(t, w) >= 6)) || (w.length >= 6 && t.length >= 6 && lev(w, t) <= 2));
 const contentToks = (s) => normText(s).split(" ").filter((w) => w.length > 2 || /\d/.test(w));
 /* keyAgrees(key, item) -> true when the key line names the stored answer: its text (spaces and apostrophes aside:
  * "Buerger's disease" = "Buergers disease"), or 60% of its content words allowing prefixes and small slips. */
@@ -237,18 +248,23 @@ export function namesOther(key, it) {
   const k = squash(key);
   return !k.includes(squash(it.o[it.a])) && it.o.some((o, j) => j !== it.a && squash(o).length >= 6 && k.includes(squash(o)));
 }
-/* misaligned(item, x) -> the letter of a wrong-option reason that names none of its own option's words but a word only
- * another option has (a reason written under the wrong letter), else "". Options without such words are not judged. */
+/* misaligned(item, x) -> the first letter whose wrong-option reason looks written for another option, when the reasons
+ * look shifted: two or more of them name none of their own option's words but a word only another non-key option has,
+ * or one names another non-key option's whole text (two words or more) and not its own. Words of the key are left out (a reason often
+ * contrasts with the key). Options without words of 4+ letters are not judged. "" when aligned. */
 export function misaligned(it, x) {
   const own = it.o.map((o) => contentToks(o).filter((w) => w.length >= 4));
+  const keyW = new Set(own[it.a] || []);
+  const bad = [];
   for (let k = 0; k < it.o.length; k++) {
     if (k === it.a || !own[k].length) continue;
-    const rt = contentToks(x.others[L[k]] || "");
+    const txt = x.others[L[k]] || "", rt = contentToks(txt);
     if (own[k].some((w) => tokHit(w, rt))) continue;
-    const others = own.flatMap((ws, j) => (j === k ? [] : ws.filter((w) => !own[k].includes(w))));
-    if (others.some((w) => tokHit(w, rt))) return L[k];
+    if (it.o.some((o, j) => j !== k && j !== it.a && contentToks(o).length >= 2 && squash(o).length >= 8 && squash(txt).includes(squash(o)))) return L[k];
+    const others = own.flatMap((ws, j) => (j === k || j === it.a ? [] : ws.filter((w) => !own[k].includes(w) && !keyW.has(w))));
+    if (others.some((w) => tokHit(w, rt))) bad.push(L[k]);
   }
-  return "";
+  return bad.length >= 2 ? bad[0] : "";
 }
 /* tableOk(notes) -> false when a pipe table has rows of different widths or no separator row. */
 export function tableOk(notes) {
@@ -268,7 +284,9 @@ const SOURCE_RE = /\b(?:references?|ref\.|bibliography|textbook|statpearls|uptod
 const AI_RE = /\b(?:AI|A\.I\.|artificial intelligence|language model|chatbot|as an assistant)\b/;
 const MARKUP_RE = /<\s*\/?\s*[a-z!]|\]\(|!\[|```|https?:|www\./i;
 /* numbersText(x) -> the text whose numbers must be grounded (list markers "1." and heading marks dropped). */
-const numbersText = (x) => [x.key, x.notes.replace(/^\s*\d+[.)]\s+/gm, "").replace(/^#+\s*/gm, ""), ...Object.values(x.others), x.pearl].join("\n");
+// Names with digits in them (CD20, IL-2, I-131, COX-2, T3, HbA1c, P450) are identifiers, not quantities: left out.
+const IDENT = /\b[A-Za-z]{1,6}-?\d+[A-Za-z]?\d*\b/g;
+const numbersText = (x) => [x.key, x.notes.replace(/^\s*\d+[.)]\s+/gm, "").replace(/^#+\s*/gm, ""), ...Object.values(x.others), x.pearl].join("\n").replace(IDENT, " ");
 /* xGate(item, x, ground, avoid) -> null when every code check passes, else its name. */
 export function xGate(it, x, ground, avoid = []) {
   if (!x || !x.key || !x.notes || !x.pearl) return "g1";
@@ -284,7 +302,7 @@ export function xGate(it, x, ground, avoid = []) {
   if (MARKUP_RE.test(plain) || !tableOk(x.notes) || (x.notes.match(/^#{1,3}\s/gm) || []).length > 4 || /^#{4,}/m.test(x.notes)) return "markup";
   if (BRAND.test(plain) || BOOK_RE.test(plain) || SOURCE_RE.test(plain) || avoid.some((a) => a && new RegExp("\\b" + a.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "\\b", "i").test(plain))) return "source";
   if (AI_RE.test(plain)) return "ai";
-  if (/[–—]/.test(plain)) return "dash";
+  if (/[\u2013\u2014]/.test(plain)) return "dash";
   const nw = words(x.notes.replace(/[|#*-]/g, " "));
   if (words(x.key) > 40 || nw < 40 || nw > 240 || words(x.pearl) > 35 || Object.values(x.others).some((o) => words(o) > 35) || words(plain) > 380) return "long";
   return null;
@@ -446,17 +464,20 @@ export async function run(items, ctx, opts, deps = {}) {
   const vx = deps.vertex || createVertex({});
   const byId = new Map(items.map((x) => [x.id, x]));
   const G = new Map(items.map((x) => [x.id, groundFor(x, ctx)]));
+  // one Batch job -> { t: key -> reply text, lines: the request lines as SENT } (read back from disk on a resume, so a
+  // later change to the gates never pairs a saved reply with a different group), or null while it runs
+  const sentLines = (inF) => (fs.existsSync(inF) ? fs.readFileSync(inF, "utf8").split("\n").filter(Boolean).map((l) => JSON.parse(l)) : []);
   async function job(name, lines) {
     const st = state.stages[name] || (state.stages[name] = {});
     const outF = path.join(work, name + ".out.json"), inF = path.join(work, name + ".jsonl");
-    if (st.status === "done") return readJson(outF, {});
-    if (!lines.length) { st.status = "done"; writeJson(outF, {}); save(); return {}; }
+    if (st.status === "done") return { t: readJson(outF, {}), lines: sentLines(inF) };
+    if (!lines.length) { st.status = "done"; writeJson(outF, {}); fs.writeFileSync(inF, ""); save(); return { t: {}, lines: [] }; }
     if (!st.jobId) {
       fs.writeFileSync(inF, lines.map((l) => JSON.stringify(l)).join("\n") + "\n");
       Object.assign(st, { status: "submitted", requests: lines.length, ...(await vx.batch.submit({ name: "explain/" + name, run: state.run, lines })) });
       save(); log(`${name}: submitted ${lines.length} requests as ${st.jobId}`);
     }
-    const saved = fs.readFileSync(inF, "utf8").split("\n").filter(Boolean).map((l) => JSON.parse(l));
+    const saved = sentLines(inF);
     const info = await vx.batch.wait(st.jobId, { pollMs: opts.pollMs, maxWaitMs: opts.maxWaitMs });
     if (info.pending) { log(`${name}: ${info.state}; re-run to resume`); return null; }
     if (info.state !== "JOB_STATE_SUCCEEDED" && info.state !== "JOB_STATE_PARTIALLY_SUCCEEDED") { st.status = "failed"; st.error = info.error || info.state; save(); throw new Error(`${name} job ended ${info.state}`); }
@@ -467,34 +488,39 @@ export async function run(items, ctx, opts, deps = {}) {
     Object.assign(st, { status: "done", usage }); save();
     logCost({ run: state.run, stage: name, requests: saved.length, inTok: usage.inTok, outTok: usage.outTok, thinkTok: usage.thinkTok, usd: usage.usd });
     log(`${name}: done, ${usage.calls} replies, in ${usage.inTok} out ${usage.outTok}, $${usage.usd.toFixed(4)}`);
-    return text;
+    return { t: text, lines: saved };
   }
   const R = (id) => (res[id] = res[id] || {});
   // one pass: write, gate, review. Returns the ids that failed with their reason.
   async function pass(tag, list, redo) {
     const groups = groupsOf(list, PER);
     const lines = groups.map((g, i) => ({ key: tag + i, ids: g.map((x) => x.id), request: requestBody(explainPrompt(g.map((x) => ({ ...x, ground: G.get(x.id) })), { redo })) }));
-    const t = await job(tag === "e" ? "explain" : "explain-redo", lines);
-    if (!t) return null;
+    const j1 = await job(tag === "e" ? "explain" : "explain-redo", lines);
+    if (!j1) return null;
     const ok = [], fail = new Map(), gate = {};
-    lines.forEach((l, gi) => readX(t[l.key], groups[gi]).forEach((x, i) => {
-      const it = groups[gi][i], gr = G.get(it.id), g = xGate(it, x, gr, ctx.avoidOf ? ctx.avoidOf(it.t) : []);
+    j1.lines.forEach((l) => { const its = l.ids.map((id) => byId.get(id)); if (its.some((x) => !x)) return; readX(j1.t[l.key], its).forEach((x, i) => {
+      const it = its[i], gr = G.get(it.id), g = xGate(it, x, gr, ctx.avoidOf ? ctx.avoidOf(it.t) : []);
       if (g) { gate[g] = (gate[g] || 0) + 1; fail.set(it.id, x ? gateWhy(g, it, x, gr) : GATE_WHY.g1); R(it.id)[tag === "e" ? "g0" : "g1"] = g; }
       else ok.push({ it, x, ground: gr });
-    }));
+    }); });
     const rg = groupsOf(ok, 6);
     const rl = rg.map((g, i) => ({ key: (tag === "e" ? "r" : "y") + i, ids: g.map((x) => x.it.id), request: requestBody(reviewPrompt(g)) }));
-    const t2 = await job(tag === "e" ? "review" : "review-redo", rl);
-    if (!t2) return null;
+    const j2 = await job(tag === "e" ? "review" : "review-redo", rl);
+    if (!j2) return null;
     let accepted = 0;
-    rl.forEach((l, gi) => readReview(t2[l.key], l.ids.length).forEach((v, i) => {
-      const { it, x } = rg[gi][i];
+    const okById = new Map(ok.map((o) => [o.id || o.it.id, o])), seen = new Set();
+    j2.lines.forEach((l) => readReview(j2.t[l.key], l.ids.length).forEach((v, i) => {
+      const o = okById.get(l.ids[i]);
+      if (!o) return;   // reviewed, but the code gates (changed since) now reject it
+      seen.add(o.it.id);
+      const { it, x } = o;
       if (!reviewOk(v)) { gate.review = (gate.review || 0) + 1; fail.set(it.id, reviewWhy(v)); R(it.id)[tag === "e" ? "v0" : "v1"] = v; return; }
       accepted++;
       const qf = ["g4", "g6", "g11"].filter((k) => v[k] !== true);
       Object.assign(R(it.id), { x, rv: { pass: true, old: !!v.old, ...(qf.length ? { qf } : {}), ...(redo ? { redo: true } : {}) } });
       delete R(it.id).pending; delete R(it.id).why;
     }));
+    for (const o of ok) if (!seen.has(o.it.id)) { gate.review = (gate.review || 0) + 1; fail.set(o.it.id, "no review verdict came back"); }
     return { sent: list.length, accepted, fail, gate };
   }
   const report = {};

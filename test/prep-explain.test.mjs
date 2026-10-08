@@ -6,7 +6,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import {
-  passagesOf, index, namesOther, misaligned, queryOf, groundFor, explainPrompt, readX, tidy, keyAgrees, tableOk, xGate, gateWhy, reviewPrompt, readReview,
+  passagesOf, index, namesOther, misaligned, fixTables, queryOf, groundFor, explainPrompt, readX, tidy, keyAgrees, tableOk, xGate, gateWhy, reviewPrompt, readReview,
   reviewOk, XPASS, toR, applyX, scopeItems, pickPilot, estimate, run, XSchema, PER,
 } from "../tools/prep-explain.mjs";
 
@@ -20,7 +20,7 @@ const GOOD = {
 const G0 = { exp: IT.exp, notes: "", text: IT.exp + "\n" };
 
 test("tidy: long dashes become words or commas, emoji go, notes keep their lines", () => {
-  assert.equal(tidy("doses 5–10 mg — twice"), "doses 5 to 10 mg, twice");
+  assert.equal(tidy("doses 5\u201310 mg \u2014 twice"), "doses 5 to 10 mg, twice");
   assert.equal(tidy("ok \u{1F600} done"), "ok done");
   assert.equal(tidy("## H\\n- a\n\n\n\n- b  ", true), "## H\n- a\n\n- b");
 });
@@ -34,8 +34,13 @@ test("keyAgrees: spelling slips, apostrophes, prefixes; namesOther and misaligne
   assert.equal(namesOther("Fibromuscular dysplasia, not atheroma.", IT), false);
   assert.equal(misaligned(IT, GOOD), "");
   const shifted = { ...GOOD, others: { A: "Arteritis gives smooth aortic narrowing.", C: "An embolism cuts off flow.", D: "" } };
-  assert.equal(misaligned(IT, shifted), "A", "A's line talks about arteritis (option C)");
-  assert.equal(xGate(IT, { ...GOOD, others: { ...GOOD.others, A: "Arteritis gives smooth aortic narrowing in young women." } }, G0), "align");
+  assert.equal(misaligned(IT, { ...GOOD, others: { A: "Arteritis gives smooth aortic narrowing.", C: "An embolism cuts off flow.", D: "" } }), "A", "two reasons each about another option: shifted");
+  const IT2 = { ...IT, o: ["Atheroma", "Fibromuscular dysplasia", "Arteritis of the aorta", "Embolism"] };
+  assert.equal(misaligned(IT2, { ...GOOD, others: { ...GOOD.others, A: "Unlike arteritis of the aorta, this is wrong." } }), "A", "one reason naming another option's whole text");
+  assert.equal(misaligned(IT, { ...GOOD, others: { ...GOOD.others, A: "Not this one: think of embolism instead." } }), "", "a single loose word is not enough");
+  const rev = { o: ["Reversible", "Irreversible", "Can be reversed by catalase", "Competitive"], a: 1 };
+  assert.equal(misaligned(rev, { others: { A: "It does not proceed in the reverse direction.", C: "Catalase breaks down peroxide.", D: "Competitive describes inhibition." } }), "", "pilot false positive: a shared word start counts as its own option");
+  assert.equal(xGate(IT, { ...GOOD, others: { A: "Arteritis gives smooth aortic narrowing in young women.", C: "An embolism cuts off flow suddenly.", D: "Embolism again." } }, G0), "align");
   const k = Object.defineProperty({ ...GOOD, key: "Both statements are true, so this is the answer.", others: { A: "x", C: "y", D: "z" } }, "ka", { value: "B" });
   assert.equal(xGate({ ...IT, o: ["ab", "bde", "ce", "ad"] }, k, G0), null, "an option with no words: the declared letter decides");
   const bad = Object.defineProperty({ ...GOOD }, "ka", { value: "A" });
@@ -47,6 +52,11 @@ test("keyAgrees: the key line must name the stored answer", () => {
   assert.equal(keyAgrees("Atheroma is the cause here.", IT), false);
   assert.equal(keyAgrees("Fibromuscular disease of the wall.", IT), false, "one of two content words is not enough");
   assert.equal(keyAgrees("This is fibromuscular dysplasia.", { ...IT, o: ["x", "Fibromuscular dysplasia (FMD)", "y", "z"] }), true);
+});
+
+test("fixTables: the separator row follows the header width", () => {
+  assert.equal(fixTables("| a | b |\n| --- | --- | --- |\n| c | d |"), "| a | b |\n| --- | --- |\n| c | d |");
+  assert.equal(fixTables("no table\n- x"), "no table\n- x");
 });
 
 test("tableOk: a table needs a separator row and rows of one width", () => {
@@ -63,6 +73,7 @@ test("xGate: passes a grounded, well formed explanation and names each failure",
   assert.equal(xGate(IT, { ...GOOD, key: "Atheroma is right here." }, G0), "key");
   assert.equal(xGate(IT, { ...GOOD, pearl: "Seen in 90% of cases." }, G0), "g9b");
   assert.equal(xGate(IT, { ...GOOD, pearl: "Seen at age 30." }, G0), null, "a number in the stem is grounded");
+  assert.equal(xGate(IT, { ...GOOD, pearl: "CD20, IL-2, I-131 and HbA1c are names, not numbers." }, G0), null, "identifiers with digits are not quantities");
   assert.equal(xGate(IT, { ...GOOD, notes: GOOD.notes + "\n1. Third step" }, G0), null, "list markers are not numbers");
   assert.equal(xGate(IT, { ...GOOD, pearl: "Beaded look of the mid renal artery in young women is fibromuscular dysplasia and more." }, G0), "verbatim");
   assert.equal(xGate(IT, { ...GOOD, notes: GOOD.notes + "\n![x](y.png)" }, G0), "markup");
@@ -92,7 +103,7 @@ test("explainPrompt: one block per item with the key, the stored explanation and
   assert.match(p.user, /Correct: B \(Fibromuscular dysplasia\)/);
   assert.match(p.user, /Stored explanation: Beaded/);
   assert.match(p.user, /Notes: Note text\./);
-  assert.doesNotMatch(p.system, /[–—]/);
+  assert.doesNotMatch(p.system, /[\u2013\u2014]/);
   const r = explainPrompt([{ ...IT, ground: { exp: "", notes: "" }, prev: "it used a long dash" }], { redo: true });
   assert.match(r.user, /Rejected before because: it used a long dash/);
   assert.match(r.user, /Stored explanation: \(none\)/);

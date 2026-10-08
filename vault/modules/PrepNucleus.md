@@ -571,6 +571,29 @@ Owner decisions: [[decisions/Decisions]] "PrepNucleus pricing, free tier and soc
 - Headless: run-prep-ui.mjs checks the answer line, the dimmed options, the sticky row, the tapped-Next slide, the timed
   pick check and the result recap; run-prep-pyq-ui.mjs checks the right / others headings and the three reasons.
 
+## Structured explanations (2026-10-08, branch `feat/prep-explain`, `?v=prep21`)
+- Owner (iPad, 2026-10-08): "How is explanation missing ... more details related to topic ... in easy readable way"
+  (Marrow screenshots). Bank v1: 24,497 items with empty `exp`, 29,436 under 200 chars.
+- Data: an item may carry `x = { key, notes, others: { letter: reason }, pearl }`; `exp` is never touched; `r` is
+  filled from x when the item has none (`r[a] = key`). Written by `tools/prep-explain.mjs` (Batch, resumable,
+  `--dry-run` per scope, `--pilot n`, `--apply --run <id> --to <dir>`). Work files and results live in the gitignored
+  `prep/explain/<run>/` (prompts carry source-pack text, StatPearls included).
+- Grounding: the item's exp + BM25 passages of its module pack (`prep/fill/packs`, `~/prep-data/packs-statpearls`) and
+  of the KB (`kb/`, boilerplate index lines dropped; a KB passage must share a stem word and, unless the stem asks for
+  the exception, a key word). Most MBBS modules have no pack, so the KB and exp carry most items.
+- Gates (code): g1 fields, `key` (key line names the stored answer: squashed text, or 60% of words with prefix and
+  2-letter slip tolerance, or the declared letter `ka` when the option has no nameable words), `align` (a reason under
+  the wrong letter), g9b numbers grounded, verbatim 12 words, `markup` (subset only, tables well formed), `source`,
+  `ai`, `dash`, `long`. Review: `buildReviewPrompt` + notes + gate `nt`; pass needs g7 g8 g9 g10 nt (g4 g6 g11 judge
+  the question's writing, recorded as `rv.qf`). One retry with the reason; still failing -> `pending`, old exp stays.
+- Pilot 1 lesson: asking for wrong-option reasons only (key = "") made the model pack reasons into A to C and leave D
+  empty, i.e. reasons under the wrong letter. Now every option gets a reason in order (ra..rd) and `align` checks it.
+- Client (prep.js pure part, unit-tested): `mdLite` (escape first, then `##`, `**`, `-`/`*` bullets, `1.` steps, pipe
+  tables in a focusable `.pn-xt` region that scrolls inside the card with the first column pinned), `legacyExp` (old
+  "*a *b" bullets -> list), `explainOf`. Runner and review screens: key line `.pn-xkey`, `.pn-xnotes`, why the others
+  are wrong (from r or x), `.pn-kp` "Remember". Headless: `test/run-prep-explain-ui.mjs` (synthetic fixture
+  `test/fixtures/prep-explain/items.json`, or `ITEMS=<pilot applied.json>` for real screenshots).
+
 ## Store
 localStorage `smd_prep_v1`: `{v, cards, conf, days, mod:{t,ok,last}, bm, rep, exam, last, dl, hid, mt, goal, mh, ls, lsp, pl, pt, ra, fc}` (`ls`/`lsp`: Lessons;
 `pl`/`pt`/`ra`: Plan; `fc`: Cards). FSRS deck key
@@ -582,7 +605,7 @@ still reads cards and questions together (`recall()` over `p:<module>`).
 ## Tests
 `test/prep-app.test.mjs`, `test/prep-build-bank.test.mjs`, `test/prep-server.test.mjs`, `test/prep-core.test.mjs`,
 `test/prep-generate.test.mjs`, `test/prep-layerc-e2e.test.mjs`, `test/prep-create.test.mjs`, `test/prep-teacher.test.mjs`,
-`test/prep-tools.test.mjs`, `test/prep-lessons.test.mjs`, `test/prep-plan.test.mjs`, headless `test/run-prep-plan-ui.mjs`, `test/prep-flash.test.mjs`, headless `test/run-prep-flash-ui.mjs`, `test/edge-start-mcq.test.mjs`, headless `test/run-prep-lessons-ui.mjs`, headless `test/run-prep-create-ui.mjs`, `test/run-prep-arena-ui.mjs`, `test/prep-nudges.test.mjs`, headless `test/run-prep-nudges.mjs` and `test/run-prep-ui.mjs` (real app + fixture bank in `test/fixtures/prep/`;
+`test/prep-tools.test.mjs`, `test/prep-explain.test.mjs`, headless `test/run-prep-explain-ui.mjs`, `test/prep-lessons.test.mjs`, `test/prep-plan.test.mjs`, headless `test/run-prep-plan-ui.mjs`, `test/prep-flash.test.mjs`, headless `test/run-prep-flash-ui.mjs`, `test/edge-start-mcq.test.mjs`, headless `test/run-prep-lessons-ui.mjs`, headless `test/run-prep-create-ui.mjs`, `test/run-prep-arena-ui.mjs`, `test/prep-nudges.test.mjs`, headless `test/run-prep-nudges.mjs` and `test/run-prep-ui.mjs` (real app + fixture bank in `test/fixtures/prep/`;
 Chromium at `/opt/pw-browsers/chromium` by default, `CHROME=` to override).
 
 ## Bank v1 mapping (2026-10-06)
