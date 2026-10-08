@@ -1,178 +1,156 @@
 {
- "id": "juvenile_sjogren_syndrome",
- "name": "Juvenile Sjogren syndrome",
- "aliases": [
-  "childhood Sjogren syndrome",
-  "paediatric Sjogren syndrome",
-  "juvenile Sjögren syndrome",
-  "juvenile sicca syndrome"
- ],
- "class": "non_infective",
- "system": "Rheumatology / Paediatrics",
- "specialty": "Paediatric Rheumatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Textbook of Pediatric Rheumatology / ILAR & PRINTO criteria",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A chronic autoimmune exocrinopathy targeting salivary and lacrimal glands, but children often present differently from adults",
-   "Recurrent bilateral parotid gland swelling (parotitis) is a common and sometimes presenting feature in children, more so than the classic sicca symptoms",
-   "Dry eyes and dry mouth (sicca) may be underreported by children, so a low threshold for objective testing is needed",
-   "Extraglandular manifestations include arthralgia, arthritis, renal tubular acidosis, cytopenias and neurological involvement",
-   "Anti-Ro/SSA and anti-La/SSB antibodies, antinuclear antibody, rheumatoid factor and polyclonal hypergammaglobulinaemia support the diagnosis",
-   "There is a long-term, though low in childhood, risk of B-cell lymphoma, warranting attention to persistent glandular enlargement",
-   "Management is largely supportive for sicca symptoms, with immunosuppression reserved for significant systemic involvement"
+  "id": "juvenile_sjogren_syndrome",
+  "name": "Juvenile Sjogren syndrome",
+  "aliases": [
+    "childhood Sjogren syndrome",
+    "paediatric Sjogren syndrome",
+    "juvenile Sjögren syndrome",
+    "juvenile sicca syndrome"
   ],
-  "pathophysiology": "Juvenile Sjogren syndrome is characterised by lymphocytic infiltration of exocrine glands, chiefly the salivary and lacrimal glands, driven by autoreactive T and B cells. Glandular epithelial activation, type I interferon signalling and B-cell hyperactivity lead to progressive glandular dysfunction and the production of autoantibodies such as anti-Ro/SSA and anti-La/SSB. Chronic B-cell stimulation underlies the hypergammaglobulinaemia and the long-term predisposition to lymphoma, while immune complex and interferon-driven inflammation account for extraglandular features affecting joints, kidneys, blood and the nervous system.",
-  "additionalDifferentials": [
-   "Recurrent juvenile parotitis (idiopathic)",
-   "Viral parotitis (e.g. mumps, Epstein-Barr virus, HIV) and other infective sialadenitis",
-   "Systemic lupus erythematosus and other overlapping connective tissue disease",
-   "Sarcoidosis",
-   "IgG4-related disease",
-   "Lymphoma or other glandular neoplasm",
-   "Cystic fibrosis-related sialadenopathy"
-  ],
-  "additionalInvestigations": [
-   "Anti-Ro/SSA and anti-La/SSB antibodies, antinuclear antibody and rheumatoid factor",
-   "Immunoglobulin levels looking for polyclonal hypergammaglobulinaemia",
-   "Objective ocular testing (e.g. Schirmer test and ocular surface staining)",
-   "Salivary gland ultrasound and, where indicated, minor salivary gland biopsy",
-   "Renal function and urinalysis to detect tubular acidosis",
-   "Full blood count for cytopenias",
-   "Inflammatory markers and complement levels"
-  ],
-  "redFlags": [
-   "Persistent unilateral or hard glandular enlargement raising concern for lymphoma",
-   "Renal tubular acidosis with electrolyte disturbance",
-   "Neurological involvement such as myelopathy or neuropathy",
-   "Significant cytopenias or vasculitic features"
-  ],
-  "prognosis": "Childhood disease is often dominated by recurrent parotitis and may follow a relatively indolent glandular course, but systemic involvement and the lifelong, if low, lymphoma risk require ongoing surveillance. Sicca symptoms tend to persist and can affect dental and ocular health over time.",
-  "pitfalls": [
-   "Attributing recurrent parotid swelling to simple infection and missing the underlying autoimmune process",
-   "Relying on adult sicca-based criteria when children present with glandular swelling instead",
-   "Overlooking renal tubular acidosis and its metabolic consequences",
-   "Neglecting dental and ocular preventive care",
-   "Failing to investigate persistent asymmetrical glandular enlargement for lymphoma"
-  ],
-  "references": [
-   "Textbook of Pediatric Rheumatology",
-   "Proposed criteria for childhood Sjogren syndrome",
-   "ACR-EULAR classification criteria for Sjogren syndrome"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage ocular sicca with lubricating artificial tears and ocular surface protection, and stimulate saliva with sialogogues alongside intensive dental caries prevention",
-   "Use hydroxychloroquine for arthralgia, fatigue and mucocutaneous features",
-   "Add corticosteroids with further immunosuppression or rituximab for significant extraglandular disease",
-   "Detect and treat renal tubular acidosis with alkali replacement and monitor for cytopenias",
-   "Treat recurrent parotitis supportively and evaluate persistent or asymmetrical glandular enlargement for B-cell lymphoma",
-   "Maintain long-term surveillance for systemic involvement and the low but lifelong lymphoma risk",
-   "Coordinate multidisciplinary paediatric rheumatology, ophthalmology and dental care"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "juvenile_sjogren_syndrome-pathway",
-   "title": "Juvenile Sjogren syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A chronic autoimmune exocrinopathy targeting salivary and lacrimal glands, but children often present differently from adults",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Persistent unilateral or hard glandular enlargement raising concern for lymphoma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Anti-Ro/SSA and anti-La/SSB antibodies, antinuclear antibody and rheumatoid factor, Immunoglobulin levels looking for polyclonal hypergammaglobulinaemia, Objective ocular testing (e.g. Schirmer test and ocular surface"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage ocular sicca with lubricating artificial tears and ocular surface protection, and stimulate saliva with sialogogues alongside intensive dental caries prevention"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing recurrent parotid swelling to simple infection and missing the underlying autoimmune process"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of juvenile sjogren syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "juvenile_sjogren_syndrome-matrix",
-   "title": "Juvenile Sjogren syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A chronic autoimmune exocrinopathy targeting salivary and lacrimal glands, but children often present differently from adults",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Rheumatology / Paediatrics",
+  "specialty": "Paediatric Rheumatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Textbook of Pediatric Rheumatology / ILAR & PRINTO criteria",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A chronic autoimmune exocrinopathy targeting salivary and lacrimal glands, but children often present differently from adults",
+      "Recurrent bilateral parotid gland swelling (parotitis) is a common and sometimes presenting feature in children, more so than the classic sicca symptoms",
+      "Dry eyes and dry mouth (sicca) may be underreported by children, so a low threshold for objective testing is needed",
+      "Extraglandular manifestations include arthralgia, arthritis, renal tubular acidosis, cytopenias and neurological involvement",
+      "Anti-Ro/SSA and anti-La/SSB antibodies, antinuclear antibody, rheumatoid factor and polyclonal hypergammaglobulinaemia support the diagnosis",
+      "There is a long-term, though low in childhood, risk of B-cell lymphoma, warranting attention to persistent glandular enlargement",
+      "Management is largely supportive for sicca symptoms, with immunosuppression reserved for significant systemic involvement"
     ],
-    [
-     "Key Investigations",
-     "Anti-Ro/SSA and anti-La/SSB antibodies, antinuclear antibody and rheumatoid factor, Immunoglobulin levels looking for polyclonal",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Juvenile Sjogren syndrome is characterised by lymphocytic infiltration of exocrine glands, chiefly the salivary and lacrimal glands, driven by autoreactive T and B cells. Glandular epithelial activation, type I interferon signalling and B-cell hyperactivity lead to progressive glandular dysfunction and the production of autoantibodies such as anti-Ro/SSA and anti-La/SSB. Chronic B-cell stimulation underlies the hypergammaglobulinaemia and the long-term predisposition to lymphoma, while immune complex and interferon-driven inflammation account for extraglandular features affecting joints, kidneys, blood and the nervous system.",
+    "additionalDifferentials": [
+      "Recurrent juvenile parotitis (idiopathic)",
+      "Viral parotitis (e.g. mumps, Epstein-Barr virus, HIV) and other infective sialadenitis",
+      "Systemic lupus erythematosus and other overlapping connective tissue disease",
+      "Sarcoidosis",
+      "IgG4-related disease",
+      "Lymphoma or other glandular neoplasm",
+      "Cystic fibrosis-related sialadenopathy"
     ],
-    [
-     "Primary Differentials",
-     "Recurrent juvenile parotitis (idiopathic), Viral parotitis (e.g. mumps, Epstein-Barr virus, HIV) and other infective",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Anti-Ro/SSA and anti-La/SSB antibodies, antinuclear antibody and rheumatoid factor",
+      "Immunoglobulin levels looking for polyclonal hypergammaglobulinaemia",
+      "Objective ocular testing (e.g. Schirmer test and ocular surface staining)",
+      "Salivary gland ultrasound and, where indicated, minor salivary gland biopsy",
+      "Renal function and urinalysis to detect tubular acidosis",
+      "Full blood count for cytopenias",
+      "Inflammatory markers and complement levels"
     ],
-    [
-     "Management Strategy",
-     "Manage ocular sicca with lubricating artificial tears and ocular surface protection, and stimulate saliva with sialogogues",
-     "Core treatment modality"
+    "redFlags": [
+      "Persistent unilateral or hard glandular enlargement raising concern for lymphoma",
+      "Renal tubular acidosis with electrolyte disturbance",
+      "Neurological involvement such as myelopathy or neuropathy",
+      "Significant cytopenias or vasculitic features"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing recurrent parotid swelling to simple infection and missing the underlying autoimmune process",
-     "Prevent diagnostic or management error"
+    "prognosis": "Childhood disease is often dominated by recurrent parotitis and may follow a relatively indolent glandular course, but systemic involvement and the lifelong, if low, lymphoma risk require ongoing surveillance. Sicca symptoms tend to persist and can affect dental and ocular health over time.",
+    "pitfalls": [
+      "Attributing recurrent parotid swelling to simple infection and missing the underlying autoimmune process",
+      "Relying on adult sicca-based criteria when children present with glandular swelling instead",
+      "Overlooking renal tubular acidosis and its metabolic consequences",
+      "Neglecting dental and ocular preventive care",
+      "Failing to investigate persistent asymmetrical glandular enlargement for lymphoma"
+    ],
+    "references": [
+      "Textbook of Pediatric Rheumatology",
+      "Proposed criteria for childhood Sjogren syndrome",
+      "ACR-EULAR classification criteria for Sjogren syndrome"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage ocular sicca with lubricating artificial tears and ocular surface protection, and stimulate saliva with sialogogues alongside intensive dental caries prevention",
+      "Use hydroxychloroquine for arthralgia, fatigue and mucocutaneous features",
+      "Add corticosteroids with further immunosuppression or rituximab for significant extraglandular disease",
+      "Detect and treat renal tubular acidosis with alkali replacement and monitor for cytopenias",
+      "Treat recurrent parotitis supportively and evaluate persistent or asymmetrical glandular enlargement for B-cell lymphoma",
+      "Maintain long-term surveillance for systemic involvement and the low but lifelong lymphoma risk",
+      "Coordinate multidisciplinary paediatric rheumatology, ophthalmology and dental care"
     ]
-   ],
-   "caption": "Overview comparison matrix for juvenile sjogren syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "juvenile-sjogren-syndrome-real-image",
-   "title": "Juvenile Sjogren syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "juvenile_sjogren_syndrome-pathway",
+      "title": "Juvenile Sjogren syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A chronic autoimmune exocrinopathy targeting salivary and lacrimal glands, but children often present differently from adults",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Persistent unilateral or hard glandular enlargement raising concern for lymphoma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Anti-Ro/SSA and anti-La/SSB antibodies, antinuclear antibody and rheumatoid factor, Immunoglobulin levels looking for polyclonal hypergammaglobulinaemia, Objective ocular testing (e.g. Schirmer test and ocular surface"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage ocular sicca with lubricating artificial tears and ocular surface protection, and stimulate saliva with sialogogues alongside intensive dental caries prevention"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing recurrent parotid swelling to simple infection and missing the underlying autoimmune process"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of juvenile sjogren syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "juvenile_sjogren_syndrome-matrix",
+      "title": "Juvenile Sjogren syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A chronic autoimmune exocrinopathy targeting salivary and lacrimal glands, but children often present differently from adults",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Anti-Ro/SSA and anti-La/SSB antibodies, antinuclear antibody and rheumatoid factor, Immunoglobulin levels looking for polyclonal",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Recurrent juvenile parotitis (idiopathic), Viral parotitis (e.g. mumps, Epstein-Barr virus, HIV) and other infective",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage ocular sicca with lubricating artificial tears and ocular surface protection, and stimulate saliva with sialogogues",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing recurrent parotid swelling to simple infection and missing the underlying autoimmune process",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for juvenile sjogren syndrome."
+    }
+  ],
+  "diagrams": []
 }

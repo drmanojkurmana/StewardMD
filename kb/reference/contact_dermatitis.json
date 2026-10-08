@@ -1,171 +1,149 @@
 {
- "id": "contact_dermatitis",
- "name": "Contact dermatitis",
- "aliases": [
-  "contact eczema",
-  "allergic contact dermatitis",
-  "irritant contact dermatitis"
- ],
- "class": "non_infective",
- "system": "Skin / Dermatology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Distinguish irritant contact dermatitis (direct chemical or physical damage, no prior sensitisation, often stinging or burning) from allergic contact dermatitis (a delayed hypersensitivity reaction that is typically itchy)",
-   "The distribution of the rash is the key clue to the culprit; sharply demarcated eruptions localised to sites of contact point to an external cause",
-   "Common irritants include water, soaps, detergents, and solvents, while frequent allergens include nickel, fragrances, preservatives, rubber accelerators, and topical medicaments",
-   "Acute lesions are erythematous, oedematous, and vesicular; chronic exposure produces dryness, scaling, fissuring, and lichenification",
-   "Patch testing is the definitive method to identify a contact allergen, whereas irritant dermatitis is largely a clinical diagnosis",
-   "Cornerstone management is identification and avoidance of the offending agent alongside barrier restoration with emollients and, for flares, topical corticosteroids",
-   "Occupational exposure is a common driver (e.g. hairdressers, healthcare and construction workers), so take a detailed work and hobby history"
+  "id": "contact_dermatitis",
+  "name": "Contact dermatitis",
+  "aliases": [
+    "contact eczema",
+    "allergic contact dermatitis",
+    "irritant contact dermatitis"
   ],
-  "pathophysiology": "Contact dermatitis has two principal mechanisms. Irritant contact dermatitis results from direct, non-immunological damage to the epidermal barrier by chemical or physical agents, triggering innate inflammation; severity relates to the concentration and duration of exposure. Allergic contact dermatitis is a type IV, T-cell-mediated delayed hypersensitivity reaction: after an initial sensitisation phase in which small-molecule haptens bind skin proteins and prime allergen-specific T cells, re-exposure elicits an inflammatory eczematous response over one to several days. Repeated insult impairs the barrier further, perpetuating inflammation and, over time, chronic lichenified changes.",
-  "additionalDifferentials": [
-   "Atopic dermatitis",
-   "Seborrhoeic dermatitis",
-   "Nummular (discoid) eczema",
-   "Tinea (dermatophyte infection)",
-   "Psoriasis on the hands or feet",
-   "Cellulitis when acute unilateral limb involvement mimics infection"
-  ],
-  "additionalInvestigations": [
-   "Patch testing to identify causative allergens in suspected allergic contact dermatitis",
-   "Detailed occupational, cosmetic, and hobby exposure history",
-   "Skin swabs if secondary bacterial infection is suspected",
-   "Skin scrapings or mycology to exclude dermatophyte infection",
-   "Skin biopsy in atypical or diagnostically uncertain cases"
-  ],
-  "redFlags": [
-   "Widespread or erythrodermic involvement with systemic upset",
-   "Rapidly spreading eruption with fever suggesting secondary infection or an alternative diagnosis",
-   "Airborne or facial involvement with eyelid swelling affecting vision",
-   "Occupational disease threatening ability to work and requiring formal assessment"
-  ],
-  "prognosis": "Prognosis is excellent when the causative agent is identified and avoided; persistent exposure, especially occupational, leads to chronic relapsing dermatitis and may necessitate a change of work.",
-  "pitfalls": [
-   "Failing to perform patch testing and thus missing a treatable allergen",
-   "Overlooking a relevant occupational or cosmetic exposure in the history",
-   "Assuming persistent hand eczema is purely irritant when a superimposed allergy exists",
-   "Applying a topical product that itself contains a sensitising allergen and perpetuates the dermatitis"
-  ],
-  "references": [
-   "Fitzpatrick's Dermatology",
-   "Rook's Textbook of Dermatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Identify and avoid the offending irritant or allergen as the cornerstone of management, guided by patch testing for suspected allergic contact dermatitis",
-   "Restore the skin barrier with regular emollients and protective measures such as gloves and appropriate personal protective equipment",
-   "Treat flares with topical corticosteroids, using topical calcineurin inhibitors for sensitive sites",
-   "Treat secondary bacterial infection with antibiotics where present",
-   "Consider phototherapy or systemic immunosuppression for severe, chronic or refractory disease",
-   "Advise on occupational modification, since persistent exposure leads to chronic relapsing disease and may necessitate a change of work"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "contact_dermatitis-pathway",
-   "title": "Contact dermatitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Distinguish irritant contact dermatitis (direct chemical or physical damage, no prior sensitisation, often stinging or burning) from allergic contact dermatitis (a delayed hypersensitivity reaction that is typically itchy)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Widespread or erythrodermic involvement with systemic upset",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Patch testing to identify causative allergens in suspected allergic contact dermatitis, Detailed occupational, cosmetic, and hobby exposure history, Skin swabs if secondary bacterial infection is suspected"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Identify and avoid the offending irritant or allergen as the cornerstone of management, guided by patch testing for suspected allergic contact dermatitis"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to perform patch testing and thus missing a treatable allergen"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of contact dermatitis."
-  }
- ],
- "tables": [
-  {
-   "id": "contact_dermatitis-matrix",
-   "title": "Contact dermatitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Distinguish irritant contact dermatitis (direct chemical or physical damage, no prior sensitisation, often stinging or burning)",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Skin / Dermatology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Distinguish irritant contact dermatitis (direct chemical or physical damage, no prior sensitisation, often stinging or burning) from allergic contact dermatitis (a delayed hypersensitivity reaction that is typically itchy)",
+      "The distribution of the rash is the key clue to the culprit; sharply demarcated eruptions localised to sites of contact point to an external cause",
+      "Common irritants include water, soaps, detergents, and solvents, while frequent allergens include nickel, fragrances, preservatives, rubber accelerators, and topical medicaments",
+      "Acute lesions are erythematous, oedematous, and vesicular; chronic exposure produces dryness, scaling, fissuring, and lichenification",
+      "Patch testing is the definitive method to identify a contact allergen, whereas irritant dermatitis is largely a clinical diagnosis",
+      "Cornerstone management is identification and avoidance of the offending agent alongside barrier restoration with emollients and, for flares, topical corticosteroids",
+      "Occupational exposure is a common driver (e.g. hairdressers, healthcare and construction workers), so take a detailed work and hobby history"
     ],
-    [
-     "Key Investigations",
-     "Patch testing to identify causative allergens in suspected allergic contact dermatitis, Detailed occupational, cosmetic, and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Contact dermatitis has two principal mechanisms. Irritant contact dermatitis results from direct, non-immunological damage to the epidermal barrier by chemical or physical agents, triggering innate inflammation; severity relates to the concentration and duration of exposure. Allergic contact dermatitis is a type IV, T-cell-mediated delayed hypersensitivity reaction: after an initial sensitisation phase in which small-molecule haptens bind skin proteins and prime allergen-specific T cells, re-exposure elicits an inflammatory eczematous response over one to several days. Repeated insult impairs the barrier further, perpetuating inflammation and, over time, chronic lichenified changes.",
+    "additionalDifferentials": [
+      "Atopic dermatitis",
+      "Seborrhoeic dermatitis",
+      "Nummular (discoid) eczema",
+      "Tinea (dermatophyte infection)",
+      "Psoriasis on the hands or feet",
+      "Cellulitis when acute unilateral limb involvement mimics infection"
     ],
-    [
-     "Primary Differentials",
-     "Atopic dermatitis, Seborrhoeic dermatitis, Nummular (discoid) eczema",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Patch testing to identify causative allergens in suspected allergic contact dermatitis",
+      "Detailed occupational, cosmetic, and hobby exposure history",
+      "Skin swabs if secondary bacterial infection is suspected",
+      "Skin scrapings or mycology to exclude dermatophyte infection",
+      "Skin biopsy in atypical or diagnostically uncertain cases"
     ],
-    [
-     "Management Strategy",
-     "Identify and avoid the offending irritant or allergen as the cornerstone of management, guided by patch testing for suspected",
-     "Core treatment modality"
+    "redFlags": [
+      "Widespread or erythrodermic involvement with systemic upset",
+      "Rapidly spreading eruption with fever suggesting secondary infection or an alternative diagnosis",
+      "Airborne or facial involvement with eyelid swelling affecting vision",
+      "Occupational disease threatening ability to work and requiring formal assessment"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to perform patch testing and thus missing a treatable allergen",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is excellent when the causative agent is identified and avoided; persistent exposure, especially occupational, leads to chronic relapsing dermatitis and may necessitate a change of work.",
+    "pitfalls": [
+      "Failing to perform patch testing and thus missing a treatable allergen",
+      "Overlooking a relevant occupational or cosmetic exposure in the history",
+      "Assuming persistent hand eczema is purely irritant when a superimposed allergy exists",
+      "Applying a topical product that itself contains a sensitising allergen and perpetuates the dermatitis"
+    ],
+    "references": [
+      "Fitzpatrick's Dermatology",
+      "Rook's Textbook of Dermatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Identify and avoid the offending irritant or allergen as the cornerstone of management, guided by patch testing for suspected allergic contact dermatitis",
+      "Restore the skin barrier with regular emollients and protective measures such as gloves and appropriate personal protective equipment",
+      "Treat flares with topical corticosteroids, using topical calcineurin inhibitors for sensitive sites",
+      "Treat secondary bacterial infection with antibiotics where present",
+      "Consider phototherapy or systemic immunosuppression for severe, chronic or refractory disease",
+      "Advise on occupational modification, since persistent exposure leads to chronic relapsing disease and may necessitate a change of work"
     ]
-   ],
-   "caption": "Overview comparison matrix for contact dermatitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "contact-dermatitis-real-image",
-   "title": "Contact dermatitis: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "contact_dermatitis-pathway",
+      "title": "Contact dermatitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Distinguish irritant contact dermatitis (direct chemical or physical damage, no prior sensitisation, often stinging or burning) from allergic contact dermatitis (a delayed hypersensitivity reaction that is typically itchy)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Widespread or erythrodermic involvement with systemic upset",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Patch testing to identify causative allergens in suspected allergic contact dermatitis, Detailed occupational, cosmetic, and hobby exposure history, Skin swabs if secondary bacterial infection is suspected"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Identify and avoid the offending irritant or allergen as the cornerstone of management, guided by patch testing for suspected allergic contact dermatitis"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to perform patch testing and thus missing a treatable allergen"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of contact dermatitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "contact_dermatitis-matrix",
+      "title": "Contact dermatitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Distinguish irritant contact dermatitis (direct chemical or physical damage, no prior sensitisation, often stinging or burning)",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Patch testing to identify causative allergens in suspected allergic contact dermatitis, Detailed occupational, cosmetic, and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Atopic dermatitis, Seborrhoeic dermatitis, Nummular (discoid) eczema",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Identify and avoid the offending irritant or allergen as the cornerstone of management, guided by patch testing for suspected",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to perform patch testing and thus missing a treatable allergen",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for contact dermatitis."
+    }
+  ],
+  "diagrams": []
 }

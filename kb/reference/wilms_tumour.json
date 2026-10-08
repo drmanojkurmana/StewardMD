@@ -1,175 +1,153 @@
 {
- "id": "wilms_tumour",
- "name": "Wilms Tumour",
- "aliases": [
-  "nephroblastoma",
-  "Wilms tumor"
- ],
- "class": "non_infective",
- "system": "Renal / Oncology",
- "specialty": "Paediatrics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics",
-  "sourceEdition": "22e",
-  "pages": null,
-  "clinicalPearls": [
-   "The most common primary renal malignancy of childhood, typically presenting in preschool children around 2-5 years of age.",
-   "The usual presentation is an asymptomatic, smooth abdominal mass discovered by a parent or on routine examination, sometimes with abdominal pain, haematuria, or hypertension.",
-   "The mass characteristically does not cross the midline, in contrast to neuroblastoma.",
-   "Associated with syndromes and anomalies such as WAGR, Beckwith-Wiedemann, and Denys-Drash, and with hemihypertrophy and aniridia; these children warrant surveillance.",
-   "Examination should be gentle, avoiding vigorous palpation of the mass because of the risk of tumour rupture.",
-   "Staging and histology (favourable versus anaplastic) guide a multimodal approach combining surgery, chemotherapy, and sometimes radiotherapy.",
-   "Bilateral disease occurs in a minority and requires nephron-sparing strategies to preserve renal function.",
-   "The lungs are the most common site of metastatic spread, so chest imaging is part of staging.",
-   "Overall survival is high, making Wilms tumour one of the success stories of paediatric oncology."
+  "id": "wilms_tumour",
+  "name": "Wilms Tumour",
+  "aliases": [
+    "nephroblastoma",
+    "Wilms tumor"
   ],
-  "pathophysiology": "Wilms tumour arises from embryonal nephrogenic (metanephric) blastema, often showing a classic triphasic pattern of blastemal, epithelial, and stromal elements. It is linked to abnormalities of genes involved in kidney development, including WT1, and to epigenetic changes at chromosome 11p; persistent nephrogenic rests are precursor lesions. Anaplastic histology confers a worse prognosis and greater treatment resistance.",
-  "additionalDifferentials": [
-   "Neuroblastoma",
-   "Mesoblastic nephroma (in infants)",
-   "Renal cell carcinoma (older children)",
-   "Clear cell sarcoma or rhabdoid tumour of the kidney",
-   "Multicystic dysplastic kidney or hydronephrosis",
-   "Hepatoblastoma or other abdominal masses"
-  ],
-  "additionalInvestigations": [
-   "Abdominal ultrasound as the initial imaging test",
-   "Cross-sectional imaging (CT or MRI) of the abdomen to define the mass and the contralateral kidney",
-   "Chest imaging to assess pulmonary metastases",
-   "Full blood count, renal and liver function, urinalysis",
-   "Blood pressure measurement",
-   "Assessment for inferior vena cava or renal vein tumour thrombus"
-  ],
-  "redFlags": [
-   "Rapidly enlarging abdominal mass",
-   "Gross haematuria or significant hypertension",
-   "Features of tumour rupture (acute abdominal pain, distension, haemodynamic instability)",
-   "Respiratory symptoms suggesting pulmonary metastases",
-   "Signs of vascular (caval) extension"
-  ],
-  "prognosis": "With risk-adapted multimodal therapy, most children with favourable-histology disease are cured; prognosis is worse with anaplastic histology, advanced stage, or unfavourable biological features.",
-  "pitfalls": [
-   "Aggressive palpation of the abdominal mass, risking rupture",
-   "Confusing it with neuroblastoma, which typically crosses the midline and has different markers",
-   "Missing hypertension as an associated finding",
-   "Failing to screen children with predisposing syndromes",
-   "Overlooking the contralateral kidney for bilateral disease"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Multimodal, risk-adapted therapy combining surgery, chemotherapy and selective radiotherapy according to stage and favourable versus anaplastic histology",
-   "Radical nephrectomy with lymph node sampling as the surgical mainstay, with nephron-sparing surgery considered in bilateral or syndromic disease",
-   "Chemotherapy using agents such as vincristine, actinomycin D and, for higher-risk disease, doxorubicin, given as neoadjuvant or adjuvant treatment per protocol",
-   "Radiotherapy reserved for higher-stage, anaplastic or residual disease",
-   "Gentle handling with avoidance of vigorous palpation and unplanned biopsy because of the risk of tumour rupture and upstaging",
-   "Renal ultrasound surveillance in predisposing conditions such as WAGR, Beckwith-Wiedemann, Denys-Drash, hemihypertrophy and aniridia",
-   "Long-term monitoring for relapse and treatment late effects including anthracycline cardiotoxicity and renal impairment, within a paediatric oncology multidisciplinary team and with genetic counselling where syndromic"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "wilms_tumour-pathway",
-   "title": "Wilms Tumour: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The most common primary renal malignancy of childhood, typically presenting in preschool children around 2-5 years of age.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly enlarging abdominal mass",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Abdominal ultrasound as the initial imaging test, Cross-sectional imaging (CT or MRI) of the abdomen to define the mass and the contralateral kidney, Chest imaging to assess pulmonary metastases"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Multimodal, risk-adapted therapy combining surgery, chemotherapy and selective radiotherapy according to stage and favourable versus anaplastic histology"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Aggressive palpation of the abdominal mass, risking rupture"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of wilms tumour."
-  }
- ],
- "tables": [
-  {
-   "id": "wilms_tumour-matrix",
-   "title": "Wilms Tumour: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The most common primary renal malignancy of childhood, typically presenting in preschool children around 2-5 years of age.",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Renal / Oncology",
+  "specialty": "Paediatrics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics",
+    "sourceEdition": "22e",
+    "pages": null,
+    "clinicalPearls": [
+      "The most common primary renal malignancy of childhood, typically presenting in preschool children around 2-5 years of age.",
+      "The usual presentation is an asymptomatic, smooth abdominal mass discovered by a parent or on routine examination, sometimes with abdominal pain, haematuria, or hypertension.",
+      "The mass characteristically does not cross the midline, in contrast to neuroblastoma.",
+      "Associated with syndromes and anomalies such as WAGR, Beckwith-Wiedemann, and Denys-Drash, and with hemihypertrophy and aniridia; these children warrant surveillance.",
+      "Examination should be gentle, avoiding vigorous palpation of the mass because of the risk of tumour rupture.",
+      "Staging and histology (favourable versus anaplastic) guide a multimodal approach combining surgery, chemotherapy, and sometimes radiotherapy.",
+      "Bilateral disease occurs in a minority and requires nephron-sparing strategies to preserve renal function.",
+      "The lungs are the most common site of metastatic spread, so chest imaging is part of staging.",
+      "Overall survival is high, making Wilms tumour one of the success stories of paediatric oncology."
     ],
-    [
-     "Key Investigations",
-     "Abdominal ultrasound as the initial imaging test, Cross-sectional imaging (CT or MRI) of the abdomen to define the mass and the",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Wilms tumour arises from embryonal nephrogenic (metanephric) blastema, often showing a classic triphasic pattern of blastemal, epithelial, and stromal elements. It is linked to abnormalities of genes involved in kidney development, including WT1, and to epigenetic changes at chromosome 11p; persistent nephrogenic rests are precursor lesions. Anaplastic histology confers a worse prognosis and greater treatment resistance.",
+    "additionalDifferentials": [
+      "Neuroblastoma",
+      "Mesoblastic nephroma (in infants)",
+      "Renal cell carcinoma (older children)",
+      "Clear cell sarcoma or rhabdoid tumour of the kidney",
+      "Multicystic dysplastic kidney or hydronephrosis",
+      "Hepatoblastoma or other abdominal masses"
     ],
-    [
-     "Primary Differentials",
-     "Neuroblastoma, Mesoblastic nephroma (in infants), Renal cell carcinoma (older children)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Abdominal ultrasound as the initial imaging test",
+      "Cross-sectional imaging (CT or MRI) of the abdomen to define the mass and the contralateral kidney",
+      "Chest imaging to assess pulmonary metastases",
+      "Full blood count, renal and liver function, urinalysis",
+      "Blood pressure measurement",
+      "Assessment for inferior vena cava or renal vein tumour thrombus"
     ],
-    [
-     "Management Strategy",
-     "Multimodal, risk-adapted therapy combining surgery, chemotherapy and selective radiotherapy according to stage and favourable",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly enlarging abdominal mass",
+      "Gross haematuria or significant hypertension",
+      "Features of tumour rupture (acute abdominal pain, distension, haemodynamic instability)",
+      "Respiratory symptoms suggesting pulmonary metastases",
+      "Signs of vascular (caval) extension"
     ],
-    [
-     "Clinical Pitfall",
-     "Aggressive palpation of the abdominal mass, risking rupture",
-     "Prevent diagnostic or management error"
+    "prognosis": "With risk-adapted multimodal therapy, most children with favourable-histology disease are cured; prognosis is worse with anaplastic histology, advanced stage, or unfavourable biological features.",
+    "pitfalls": [
+      "Aggressive palpation of the abdominal mass, risking rupture",
+      "Confusing it with neuroblastoma, which typically crosses the midline and has different markers",
+      "Missing hypertension as an associated finding",
+      "Failing to screen children with predisposing syndromes",
+      "Overlooking the contralateral kidney for bilateral disease"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Multimodal, risk-adapted therapy combining surgery, chemotherapy and selective radiotherapy according to stage and favourable versus anaplastic histology",
+      "Radical nephrectomy with lymph node sampling as the surgical mainstay, with nephron-sparing surgery considered in bilateral or syndromic disease",
+      "Chemotherapy using agents such as vincristine, actinomycin D and, for higher-risk disease, doxorubicin, given as neoadjuvant or adjuvant treatment per protocol",
+      "Radiotherapy reserved for higher-stage, anaplastic or residual disease",
+      "Gentle handling with avoidance of vigorous palpation and unplanned biopsy because of the risk of tumour rupture and upstaging",
+      "Renal ultrasound surveillance in predisposing conditions such as WAGR, Beckwith-Wiedemann, Denys-Drash, hemihypertrophy and aniridia",
+      "Long-term monitoring for relapse and treatment late effects including anthracycline cardiotoxicity and renal impairment, within a paediatric oncology multidisciplinary team and with genetic counselling where syndromic"
     ]
-   ],
-   "caption": "Overview comparison matrix for wilms tumour."
-  }
- ],
- "diagrams": [
-  {
-   "id": "wilms-tumour-real-image",
-   "title": "Wilms Tumour: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "wilms_tumour-pathway",
+      "title": "Wilms Tumour: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The most common primary renal malignancy of childhood, typically presenting in preschool children around 2-5 years of age.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly enlarging abdominal mass",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Abdominal ultrasound as the initial imaging test, Cross-sectional imaging (CT or MRI) of the abdomen to define the mass and the contralateral kidney, Chest imaging to assess pulmonary metastases"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Multimodal, risk-adapted therapy combining surgery, chemotherapy and selective radiotherapy according to stage and favourable versus anaplastic histology"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Aggressive palpation of the abdominal mass, risking rupture"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of wilms tumour."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "wilms_tumour-matrix",
+      "title": "Wilms Tumour: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The most common primary renal malignancy of childhood, typically presenting in preschool children around 2-5 years of age.",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Abdominal ultrasound as the initial imaging test, Cross-sectional imaging (CT or MRI) of the abdomen to define the mass and the",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Neuroblastoma, Mesoblastic nephroma (in infants), Renal cell carcinoma (older children)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Multimodal, risk-adapted therapy combining surgery, chemotherapy and selective radiotherapy according to stage and favourable",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Aggressive palpation of the abdominal mass, risking rupture",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for wilms tumour."
+    }
+  ],
+  "diagrams": []
 }

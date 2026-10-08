@@ -1,173 +1,151 @@
 {
- "id": "double_outlet_right_ventricle",
- "name": "Double outlet right ventricle",
- "aliases": [
-  "DORV",
-  "double-outlet right ventricle",
-  "origin of both great arteries from the right ventricle"
- ],
- "class": "non_infective",
- "system": "Cardiovascular / Congenital",
- "specialty": "Congenital Cardiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Both great arteries arise wholly or predominantly from the right ventricle, and a ventricular septal defect is almost always the only outlet of the left ventricle",
-   "The clinical picture is determined by the position of the ventricular septal defect relative to the great arteries and by the presence of pulmonary stenosis",
-   "A subaortic defect without pulmonary stenosis behaves like a large ventricular septal defect with heart failure from pulmonary overcirculation",
-   "A subaortic defect with pulmonary stenosis mimics tetralogy of Fallot with cyanosis",
-   "A subpulmonary defect (Taussig-Bing anomaly) directs left ventricular blood to the pulmonary artery and behaves like transposition with cyanosis",
-   "A wide anatomical spectrum means individualised surgical planning is essential, guided by defect location and great-artery relationships",
-   "Repair aims to baffle the left ventricle to the aorta and relieve any outflow obstruction, sometimes requiring an arterial switch"
+  "id": "double_outlet_right_ventricle",
+  "name": "Double outlet right ventricle",
+  "aliases": [
+    "DORV",
+    "double-outlet right ventricle",
+    "origin of both great arteries from the right ventricle"
   ],
-  "pathophysiology": "Double outlet right ventricle is a conotruncal anomaly in which both great arteries connect entirely or mostly to the morphological right ventricle, so the left ventricle can eject only through a ventricular septal defect. The haemodynamics depend on how the defect relates to the great vessels and whether pulmonary outflow is obstructed. When the defect lies beneath the aorta, oxygenated blood streams preferentially to the aorta and the physiology resembles a simple ventricular septal defect, or tetralogy if pulmonary stenosis coexists. When the defect lies beneath the pulmonary artery, oxygenated left ventricular blood is directed into the pulmonary circulation while systemic output is relatively desaturated, producing a transposition-like picture with cyanosis. The balance of pulmonary and systemic flow and the presence of outflow obstruction thus govern cyanosis and heart failure.",
-  "additionalDifferentials": [
-   "Tetralogy of Fallot",
-   "Transposition of the great arteries with ventricular septal defect",
-   "Large isolated ventricular septal defect",
-   "Truncus arteriosus",
-   "Single ventricle physiology",
-   "Taussig-Bing anomaly as a subtype"
-  ],
-  "additionalInvestigations": [
-   "Echocardiography to define the great-artery origins, ventricular septal defect position and outflow obstruction",
-   "Cardiac CT or MR angiography to clarify spatial relationships for surgical planning",
-   "Cardiac catheterisation to assess pulmonary vascular resistance when needed",
-   "Chest radiograph for pulmonary vascularity and cardiac size",
-   "Electrocardiogram for chamber hypertrophy",
-   "Assessment for associated conotruncal and chromosomal anomalies"
-  ],
-  "redFlags": [
-   "Severe cyanosis in a subpulmonary defect with transposition-like streaming",
-   "Heart failure from unobstructed pulmonary overcirculation",
-   "Progressive pulmonary vascular disease from a long-standing large shunt",
-   "Duct-dependent circulation with critical outflow obstruction"
-  ],
-  "prognosis": "Outcome varies widely with anatomy; favourable subtypes have good results after biventricular repair, while complex forms with remote defects or straddling valves may require single-ventricle palliation and carry a more guarded prognosis.",
-  "pitfalls": [
-   "Assuming a fixed physiology when the picture depends heavily on defect location and pulmonary stenosis",
-   "Failing to recognise the Taussig-Bing subtype and its transposition-like cyanosis",
-   "Underestimating pulmonary vascular disease in an unobstructed large-shunt lesion",
-   "Neglecting to screen for associated chromosomal and conotruncal anomalies"
-  ],
-  "references": [
-   "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
-   "Anderson's Paediatric Cardiology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Definitive management is individualised surgical repair guided by ventricular septal defect position and great-artery relationships, typically an intraventricular baffle tunnelling the left ventricle to the aorta, with an arterial switch added for the Taussig-Bing subpulmonary type",
-   "Complex anatomy with remote defects or straddling atrioventricular valves may instead require staged single-ventricle palliation culminating in a Fontan circulation",
-   "In duct-dependent circulations maintain ductal patency with a prostaglandin infusion pending definitive assessment and surgery",
-   "Control pulmonary overcirculation and heart failure medically, using pulmonary artery banding as an interim measure where early complete repair is not feasible",
-   "Assess pulmonary vascular resistance by cardiac catheterisation before committing to biventricular repair, as fixed pulmonary hypertension may preclude it",
-   "Manage lifelong within a congenital cardiology and cardiac surgical service, monitoring for residual lesions, arrhythmia and baffle or conduit obstruction",
-   "Offer screening for associated conotruncal and chromosomal anomalies such as a 22q11 deletion, with genetic counselling for the family"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "double_outlet_right_ventricle-pathway",
-   "title": "Double outlet right ventricle: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Both great arteries arise wholly or predominantly from the right ventricle, and a ventricular septal defect is almost always the only outlet of the left ventricle",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe cyanosis in a subpulmonary defect with transposition-like streaming",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Echocardiography to define the great-artery origins, ventricular septal defect position and outflow obstruction, Cardiac CT or MR angiography to clarify spatial relationships for surgical planning, Cardiac catheterisation"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Definitive management is individualised surgical repair guided by ventricular septal defect position and great-artery relationships, typically an intraventricular baffle tunnelling the left ventricle to the aorta, with"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a fixed physiology when the picture depends heavily on defect location and pulmonary stenosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of double outlet right ventricle."
-  }
- ],
- "tables": [
-  {
-   "id": "double_outlet_right_ventricle-matrix",
-   "title": "Double outlet right ventricle: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Both great arteries arise wholly or predominantly from the right ventricle, and a ventricular septal defect is almost always the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular / Congenital",
+  "specialty": "Congenital Cardiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Both great arteries arise wholly or predominantly from the right ventricle, and a ventricular septal defect is almost always the only outlet of the left ventricle",
+      "The clinical picture is determined by the position of the ventricular septal defect relative to the great arteries and by the presence of pulmonary stenosis",
+      "A subaortic defect without pulmonary stenosis behaves like a large ventricular septal defect with heart failure from pulmonary overcirculation",
+      "A subaortic defect with pulmonary stenosis mimics tetralogy of Fallot with cyanosis",
+      "A subpulmonary defect (Taussig-Bing anomaly) directs left ventricular blood to the pulmonary artery and behaves like transposition with cyanosis",
+      "A wide anatomical spectrum means individualised surgical planning is essential, guided by defect location and great-artery relationships",
+      "Repair aims to baffle the left ventricle to the aorta and relieve any outflow obstruction, sometimes requiring an arterial switch"
     ],
-    [
-     "Key Investigations",
-     "Echocardiography to define the great-artery origins, ventricular septal defect position and outflow obstruction, Cardiac CT or MR",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Double outlet right ventricle is a conotruncal anomaly in which both great arteries connect entirely or mostly to the morphological right ventricle, so the left ventricle can eject only through a ventricular septal defect. The haemodynamics depend on how the defect relates to the great vessels and whether pulmonary outflow is obstructed. When the defect lies beneath the aorta, oxygenated blood streams preferentially to the aorta and the physiology resembles a simple ventricular septal defect, or tetralogy if pulmonary stenosis coexists. When the defect lies beneath the pulmonary artery, oxygenated left ventricular blood is directed into the pulmonary circulation while systemic output is relatively desaturated, producing a transposition-like picture with cyanosis. The balance of pulmonary and systemic flow and the presence of outflow obstruction thus govern cyanosis and heart failure.",
+    "additionalDifferentials": [
+      "Tetralogy of Fallot",
+      "Transposition of the great arteries with ventricular septal defect",
+      "Large isolated ventricular septal defect",
+      "Truncus arteriosus",
+      "Single ventricle physiology",
+      "Taussig-Bing anomaly as a subtype"
     ],
-    [
-     "Primary Differentials",
-     "Tetralogy of Fallot, Transposition of the great arteries with ventricular septal defect, Large isolated ventricular septal defect",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Echocardiography to define the great-artery origins, ventricular septal defect position and outflow obstruction",
+      "Cardiac CT or MR angiography to clarify spatial relationships for surgical planning",
+      "Cardiac catheterisation to assess pulmonary vascular resistance when needed",
+      "Chest radiograph for pulmonary vascularity and cardiac size",
+      "Electrocardiogram for chamber hypertrophy",
+      "Assessment for associated conotruncal and chromosomal anomalies"
     ],
-    [
-     "Management Strategy",
-     "Definitive management is individualised surgical repair guided by ventricular septal defect position and great-artery",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe cyanosis in a subpulmonary defect with transposition-like streaming",
+      "Heart failure from unobstructed pulmonary overcirculation",
+      "Progressive pulmonary vascular disease from a long-standing large shunt",
+      "Duct-dependent circulation with critical outflow obstruction"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a fixed physiology when the picture depends heavily on defect location and pulmonary stenosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome varies widely with anatomy; favourable subtypes have good results after biventricular repair, while complex forms with remote defects or straddling valves may require single-ventricle palliation and carry a more guarded prognosis.",
+    "pitfalls": [
+      "Assuming a fixed physiology when the picture depends heavily on defect location and pulmonary stenosis",
+      "Failing to recognise the Taussig-Bing subtype and its transposition-like cyanosis",
+      "Underestimating pulmonary vascular disease in an unobstructed large-shunt lesion",
+      "Neglecting to screen for associated chromosomal and conotruncal anomalies"
+    ],
+    "references": [
+      "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
+      "Anderson's Paediatric Cardiology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Definitive management is individualised surgical repair guided by ventricular septal defect position and great-artery relationships, typically an intraventricular baffle tunnelling the left ventricle to the aorta, with an arterial switch added for the Taussig-Bing subpulmonary type",
+      "Complex anatomy with remote defects or straddling atrioventricular valves may instead require staged single-ventricle palliation culminating in a Fontan circulation",
+      "In duct-dependent circulations maintain ductal patency with a prostaglandin infusion pending definitive assessment and surgery",
+      "Control pulmonary overcirculation and heart failure medically, using pulmonary artery banding as an interim measure where early complete repair is not feasible",
+      "Assess pulmonary vascular resistance by cardiac catheterisation before committing to biventricular repair, as fixed pulmonary hypertension may preclude it",
+      "Manage lifelong within a congenital cardiology and cardiac surgical service, monitoring for residual lesions, arrhythmia and baffle or conduit obstruction",
+      "Offer screening for associated conotruncal and chromosomal anomalies such as a 22q11 deletion, with genetic counselling for the family"
     ]
-   ],
-   "caption": "Overview comparison matrix for double outlet right ventricle."
-  }
- ],
- "diagrams": [
-  {
-   "id": "double-outlet-right-ventricle-real-image",
-   "title": "Double outlet right ventricle: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "double_outlet_right_ventricle-pathway",
+      "title": "Double outlet right ventricle: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Both great arteries arise wholly or predominantly from the right ventricle, and a ventricular septal defect is almost always the only outlet of the left ventricle",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe cyanosis in a subpulmonary defect with transposition-like streaming",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Echocardiography to define the great-artery origins, ventricular septal defect position and outflow obstruction, Cardiac CT or MR angiography to clarify spatial relationships for surgical planning, Cardiac catheterisation"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Definitive management is individualised surgical repair guided by ventricular septal defect position and great-artery relationships, typically an intraventricular baffle tunnelling the left ventricle to the aorta, with"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a fixed physiology when the picture depends heavily on defect location and pulmonary stenosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of double outlet right ventricle."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "double_outlet_right_ventricle-matrix",
+      "title": "Double outlet right ventricle: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Both great arteries arise wholly or predominantly from the right ventricle, and a ventricular septal defect is almost always the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Echocardiography to define the great-artery origins, ventricular septal defect position and outflow obstruction, Cardiac CT or MR",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Tetralogy of Fallot, Transposition of the great arteries with ventricular septal defect, Large isolated ventricular septal defect",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Definitive management is individualised surgical repair guided by ventricular septal defect position and great-artery",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a fixed physiology when the picture depends heavily on defect location and pulmonary stenosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for double outlet right ventricle."
+    }
+  ],
+  "diagrams": []
 }

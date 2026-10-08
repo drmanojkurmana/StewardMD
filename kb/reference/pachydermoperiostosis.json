@@ -1,174 +1,152 @@
 {
- "id": "pachydermoperiostosis",
- "name": "Pachydermoperiostosis (primary hypertrophic osteoarthropathy)",
- "aliases": [
-  "primary hypertrophic osteoarthropathy",
-  "Touraine-Solente-Gole syndrome",
-  "HPGD",
-  "SLCO2A1"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Metabolic bone",
- "specialty": "Metabolic Bone / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Resnick's Diagnosis of Bone and Joint Disorders / GeneReviews",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The primary (hereditary) form of hypertrophic osteoarthropathy, presenting with the triad of digital clubbing, periostosis of the long bones and pachydermia (thickened, furrowed facial and scalp skin)",
-   "Caused by defects in prostaglandin E2 metabolism, through recessive variants in HPGD (the degrading enzyme) or SLCO2A1 (the prostaglandin transporter), leading to raised prostaglandin E2 levels",
-   "Typically begins around adolescence, is more common and more severe in males, and progresses over years before stabilising",
-   "Skin changes include coarse thickened facial skin, deep scalp folds (cutis verticis gyrata) and oily skin with excessive sweating",
-   "Periostitis causes limb pain and swelling, and joint effusions may occur",
-   "The key clinical task is to distinguish primary disease from secondary hypertrophic osteoarthropathy, which signals underlying lung malignancy, cardiac or other visceral disease",
-   "Management is symptomatic, addressing pain and, where troublesome, the skin and joint manifestations, with reassurance once secondary causes are excluded"
+  "id": "pachydermoperiostosis",
+  "name": "Pachydermoperiostosis (primary hypertrophic osteoarthropathy)",
+  "aliases": [
+    "primary hypertrophic osteoarthropathy",
+    "Touraine-Solente-Gole syndrome",
+    "HPGD",
+    "SLCO2A1"
   ],
-  "pathophysiology": "Pachydermoperiostosis is caused by impaired inactivation of prostaglandin E2 due to biallelic variants in HPGD, encoding the enzyme that degrades prostaglandin E2, or in SLCO2A1, encoding the transporter that delivers prostaglandin E2 for degradation. Either defect raises circulating and tissue prostaglandin E2, which promotes periosteal new bone formation, soft-tissue and dermal proliferation and vascular changes. Clinically this manifests as digital clubbing, periostosis of the tubular bones with limb pain, and pachydermia with thickened, furrowed skin and increased sweating. The same pathway is implicated in secondary hypertrophic osteoarthropathy, but in the primary form the prostaglandin excess is intrinsic rather than driven by an underlying visceral disease.",
-  "additionalDifferentials": [
-   "Secondary hypertrophic osteoarthropathy from lung malignancy or chronic pulmonary disease",
-   "Acromegaly",
-   "Thyroid acropachy",
-   "Rheumatoid arthritis or other inflammatory arthropathies",
-   "Camurati-Engelmann disease (progressive diaphyseal dysplasia)",
-   "Cutis verticis gyrata from other causes"
-  ],
-  "additionalInvestigations": [
-   "Plain radiographs demonstrating symmetrical periosteal new bone along the long bones",
-   "Chest imaging to exclude an underlying pulmonary or mediastinal cause of secondary disease",
-   "Bone scintigraphy where the extent of periostosis needs characterising",
-   "Thyroid function and growth hormone/IGF-1 testing to exclude acropachy and acromegaly",
-   "HPGD and SLCO2A1 molecular genetic testing to confirm primary disease",
-   "Assessment of urinary or plasma prostaglandin E2 metabolites where available"
-  ],
-  "redFlags": [
-   "Rapid onset of clubbing and periostosis in an adult, strongly suggesting secondary disease and an occult malignancy",
-   "Respiratory symptoms, haemoptysis or weight loss pointing to underlying lung pathology",
-   "New cardiac or hepatic signs suggesting a visceral cause of secondary hypertrophic osteoarthropathy",
-   "Disproportionate or asymmetrical bone pain warranting exclusion of another process"
-  ],
-  "prognosis": "The primary disease is benign and self-limiting, typically progressing over years before stabilising, with morbidity from bone and joint pain and cosmetic skin changes rather than reduced life expectancy; recognising and excluding secondary causes is what matters most for outcome.",
-  "pitfalls": [
-   "Assuming primary pachydermoperiostosis without excluding secondary hypertrophic osteoarthropathy and its sinister causes",
-   "Missing an underlying lung malignancy in an adult presenting with new clubbing and periostosis",
-   "Mistaking the coarse facies for acromegaly without appropriate endocrine testing",
-   "Overlooking the autosomal recessive inheritance and family implications"
-  ],
-  "references": [
-   "Resnick's Diagnosis of Bone and Joint Disorders",
-   "GeneReviews: primary hypertrophic osteoarthropathy"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Relieve periostosis-related bone and joint pain with NSAIDs, using a COX-2 selective inhibitor such as etoricoxib that also targets the underlying prostaglandin E2 excess",
-   "Consider colchicine for inflammatory skin features and flares, and a bisphosphonate for refractory periostitis pain",
-   "Manage pachydermia and cutis verticis gyrata with topical retinoids, botulinum toxin, or cosmetic and plastic surgery for disfiguring scalp folds",
-   "Provide symptomatic care for excessive sweating and oily skin",
-   "Exclude secondary hypertrophic osteoarthropathy from lung malignancy, cardiac or other visceral disease with chest imaging before attributing features to the primary disorder",
-   "Confirm the diagnosis with HPGD and SLCO2A1 genetic testing and offer genetic counselling for this recessive condition",
-   "Coordinate rheumatology, dermatology and metabolic bone input"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pachydermoperiostosis-pathway",
-   "title": "Pachydermoperiostosis (primary hypertrophic osteoarthropathy): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The primary (hereditary) form of hypertrophic osteoarthropathy, presenting with the triad of digital clubbing, periostosis of the long bones and pachydermia (thickened, furrowed facial and scalp skin)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid onset of clubbing and periostosis in an adult, strongly suggesting secondary disease and an occult malignancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plain radiographs demonstrating symmetrical periosteal new bone along the long bones, Chest imaging to exclude an underlying pulmonary or mediastinal cause of secondary disease, Bone scintigraphy where the extent of"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Relieve periostosis-related bone and joint pain with NSAIDs, using a COX-2 selective inhibitor such as etoricoxib that also targets the underlying prostaglandin E2 excess"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming primary pachydermoperiostosis without excluding secondary hypertrophic osteoarthropathy and its sinister causes"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pachydermoperiostosis (primary hypertrophic osteoarthropathy)."
-  }
- ],
- "tables": [
-  {
-   "id": "pachydermoperiostosis-matrix",
-   "title": "Pachydermoperiostosis (primary hypertrophic osteoarthropathy): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The primary (hereditary) form of hypertrophic osteoarthropathy, presenting with the triad of digital clubbing, periostosis of the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Metabolic bone",
+  "specialty": "Metabolic Bone / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Resnick's Diagnosis of Bone and Joint Disorders / GeneReviews",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The primary (hereditary) form of hypertrophic osteoarthropathy, presenting with the triad of digital clubbing, periostosis of the long bones and pachydermia (thickened, furrowed facial and scalp skin)",
+      "Caused by defects in prostaglandin E2 metabolism, through recessive variants in HPGD (the degrading enzyme) or SLCO2A1 (the prostaglandin transporter), leading to raised prostaglandin E2 levels",
+      "Typically begins around adolescence, is more common and more severe in males, and progresses over years before stabilising",
+      "Skin changes include coarse thickened facial skin, deep scalp folds (cutis verticis gyrata) and oily skin with excessive sweating",
+      "Periostitis causes limb pain and swelling, and joint effusions may occur",
+      "The key clinical task is to distinguish primary disease from secondary hypertrophic osteoarthropathy, which signals underlying lung malignancy, cardiac or other visceral disease",
+      "Management is symptomatic, addressing pain and, where troublesome, the skin and joint manifestations, with reassurance once secondary causes are excluded"
     ],
-    [
-     "Key Investigations",
-     "Plain radiographs demonstrating symmetrical periosteal new bone along the long bones, Chest imaging to exclude an underlying",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Pachydermoperiostosis is caused by impaired inactivation of prostaglandin E2 due to biallelic variants in HPGD, encoding the enzyme that degrades prostaglandin E2, or in SLCO2A1, encoding the transporter that delivers prostaglandin E2 for degradation. Either defect raises circulating and tissue prostaglandin E2, which promotes periosteal new bone formation, soft-tissue and dermal proliferation and vascular changes. Clinically this manifests as digital clubbing, periostosis of the tubular bones with limb pain, and pachydermia with thickened, furrowed skin and increased sweating. The same pathway is implicated in secondary hypertrophic osteoarthropathy, but in the primary form the prostaglandin excess is intrinsic rather than driven by an underlying visceral disease.",
+    "additionalDifferentials": [
+      "Secondary hypertrophic osteoarthropathy from lung malignancy or chronic pulmonary disease",
+      "Acromegaly",
+      "Thyroid acropachy",
+      "Rheumatoid arthritis or other inflammatory arthropathies",
+      "Camurati-Engelmann disease (progressive diaphyseal dysplasia)",
+      "Cutis verticis gyrata from other causes"
     ],
-    [
-     "Primary Differentials",
-     "Secondary hypertrophic osteoarthropathy from lung malignancy or chronic pulmonary disease, Acromegaly, Thyroid acropachy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plain radiographs demonstrating symmetrical periosteal new bone along the long bones",
+      "Chest imaging to exclude an underlying pulmonary or mediastinal cause of secondary disease",
+      "Bone scintigraphy where the extent of periostosis needs characterising",
+      "Thyroid function and growth hormone/IGF-1 testing to exclude acropachy and acromegaly",
+      "HPGD and SLCO2A1 molecular genetic testing to confirm primary disease",
+      "Assessment of urinary or plasma prostaglandin E2 metabolites where available"
     ],
-    [
-     "Management Strategy",
-     "Relieve periostosis-related bone and joint pain with NSAIDs, using a COX-2 selective inhibitor such as etoricoxib that also",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid onset of clubbing and periostosis in an adult, strongly suggesting secondary disease and an occult malignancy",
+      "Respiratory symptoms, haemoptysis or weight loss pointing to underlying lung pathology",
+      "New cardiac or hepatic signs suggesting a visceral cause of secondary hypertrophic osteoarthropathy",
+      "Disproportionate or asymmetrical bone pain warranting exclusion of another process"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming primary pachydermoperiostosis without excluding secondary hypertrophic osteoarthropathy and its sinister causes",
-     "Prevent diagnostic or management error"
+    "prognosis": "The primary disease is benign and self-limiting, typically progressing over years before stabilising, with morbidity from bone and joint pain and cosmetic skin changes rather than reduced life expectancy; recognising and excluding secondary causes is what matters most for outcome.",
+    "pitfalls": [
+      "Assuming primary pachydermoperiostosis without excluding secondary hypertrophic osteoarthropathy and its sinister causes",
+      "Missing an underlying lung malignancy in an adult presenting with new clubbing and periostosis",
+      "Mistaking the coarse facies for acromegaly without appropriate endocrine testing",
+      "Overlooking the autosomal recessive inheritance and family implications"
+    ],
+    "references": [
+      "Resnick's Diagnosis of Bone and Joint Disorders",
+      "GeneReviews: primary hypertrophic osteoarthropathy"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Relieve periostosis-related bone and joint pain with NSAIDs, using a COX-2 selective inhibitor such as etoricoxib that also targets the underlying prostaglandin E2 excess",
+      "Consider colchicine for inflammatory skin features and flares, and a bisphosphonate for refractory periostitis pain",
+      "Manage pachydermia and cutis verticis gyrata with topical retinoids, botulinum toxin, or cosmetic and plastic surgery for disfiguring scalp folds",
+      "Provide symptomatic care for excessive sweating and oily skin",
+      "Exclude secondary hypertrophic osteoarthropathy from lung malignancy, cardiac or other visceral disease with chest imaging before attributing features to the primary disorder",
+      "Confirm the diagnosis with HPGD and SLCO2A1 genetic testing and offer genetic counselling for this recessive condition",
+      "Coordinate rheumatology, dermatology and metabolic bone input"
     ]
-   ],
-   "caption": "Overview comparison matrix for pachydermoperiostosis (primary hypertrophic osteoarthropathy)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pachydermoperiostosis-real-image",
-   "title": "Pachydermoperiostosis (primary hypertrophic osteoarthropathy): Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "pachydermoperiostosis-pathway",
+      "title": "Pachydermoperiostosis (primary hypertrophic osteoarthropathy): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The primary (hereditary) form of hypertrophic osteoarthropathy, presenting with the triad of digital clubbing, periostosis of the long bones and pachydermia (thickened, furrowed facial and scalp skin)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid onset of clubbing and periostosis in an adult, strongly suggesting secondary disease and an occult malignancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plain radiographs demonstrating symmetrical periosteal new bone along the long bones, Chest imaging to exclude an underlying pulmonary or mediastinal cause of secondary disease, Bone scintigraphy where the extent of"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Relieve periostosis-related bone and joint pain with NSAIDs, using a COX-2 selective inhibitor such as etoricoxib that also targets the underlying prostaglandin E2 excess"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming primary pachydermoperiostosis without excluding secondary hypertrophic osteoarthropathy and its sinister causes"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pachydermoperiostosis (primary hypertrophic osteoarthropathy)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pachydermoperiostosis-matrix",
+      "title": "Pachydermoperiostosis (primary hypertrophic osteoarthropathy): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The primary (hereditary) form of hypertrophic osteoarthropathy, presenting with the triad of digital clubbing, periostosis of the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plain radiographs demonstrating symmetrical periosteal new bone along the long bones, Chest imaging to exclude an underlying",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Secondary hypertrophic osteoarthropathy from lung malignancy or chronic pulmonary disease, Acromegaly, Thyroid acropachy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Relieve periostosis-related bone and joint pain with NSAIDs, using a COX-2 selective inhibitor such as etoricoxib that also",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming primary pachydermoperiostosis without excluding secondary hypertrophic osteoarthropathy and its sinister causes",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pachydermoperiostosis (primary hypertrophic osteoarthropathy)."
+    }
+  ],
+  "diagrams": []
 }

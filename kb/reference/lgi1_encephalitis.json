@@ -1,174 +1,152 @@
 {
- "id": "lgi1_encephalitis",
- "name": "LGI1 limbic encephalitis",
- "aliases": [
-  "anti-LGI1 encephalitis",
-  "leucine-rich glioma-inactivated 1 antibody encephalitis",
-  "VGKC-complex (LGI1) limbic encephalitis"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neuroimmunology",
- "specialty": "Neurology / Neuroimmunology",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff's Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Faciobrachial dystonic seizures — brief, frequent unilateral contractions of the face and arm — are highly characteristic and often precede the cognitive syndrome",
-   "The limbic phase brings subacute short-term memory loss, confusion, temporal-lobe seizures, and disturbed sleep or behaviour",
-   "Hyponatraemia is common and helps raise suspicion of the diagnosis",
-   "Antibodies target LGI1, a secreted neuronal protein once grouped within the voltage-gated potassium channel complex",
-   "Most cases are non-paraneoplastic, but tumour screening remains appropriate as a minority harbour an underlying neoplasm",
-   "Recognising and treating faciobrachial dystonic seizures early with immunotherapy may prevent progression to fixed cognitive impairment",
-   "First-line immunotherapy is corticosteroids with intravenous immunoglobulin or plasma exchange, escalating to rituximab in refractory disease"
+  "id": "lgi1_encephalitis",
+  "name": "LGI1 limbic encephalitis",
+  "aliases": [
+    "anti-LGI1 encephalitis",
+    "leucine-rich glioma-inactivated 1 antibody encephalitis",
+    "VGKC-complex (LGI1) limbic encephalitis"
   ],
-  "pathophysiology": "Antibodies are directed against leucine-rich glioma-inactivated 1 (LGI1), a protein secreted by neurons that bridges presynaptic ADAM23 and postsynaptic ADAM22 to regulate synaptic excitability and AMPA-receptor clustering. Antibody-mediated disruption of this signalling increases neuronal excitability within the temporal lobes and basal ganglia, producing seizures, and impairs limbic circuits underlying memory. Inflammation concentrates in the medial temporal structures, and associated hypothalamic involvement is thought to contribute to the frequent hyponatraemia. The response is usually not tumour-driven but is strongly linked to specific HLA types.",
-  "additionalDifferentials": [
-   "Herpes simplex and other infective limbic encephalitis",
-   "Paraneoplastic limbic encephalitis with intracellular antibodies",
-   "Other surface-antigen encephalitides (CASPR2, GABA-B, AMPA)",
-   "Temporal-lobe epilepsy of another cause",
-   "Rapidly progressive dementia including Creutzfeldt-Jakob disease",
-   "Wernicke encephalopathy"
-  ],
-  "additionalInvestigations": [
-   "Serum and cerebrospinal fluid testing for LGI1 antibodies, with serum often more sensitive for this antigen",
-   "MRI of the brain showing medial temporal and sometimes basal ganglia signal change",
-   "Electroencephalography to characterise temporal seizures and subclinical activity",
-   "Serum sodium measurement to detect hyponatraemia",
-   "Cerebrospinal fluid analysis for inflammation and to exclude infection",
-   "Targeted tumour screening given the small paraneoplastic association"
-  ],
-  "redFlags": [
-   "Frequent faciobrachial dystonic seizures signalling active, treatable disease before cognitive decline",
-   "Rapidly progressive memory loss or confusion",
-   "Severe hyponatraemia risking seizures and reduced consciousness",
-   "Status epilepticus or evolving encephalopathy"
-  ],
-  "prognosis": "Prompt immunotherapy often improves seizures and cognition, but delayed treatment is associated with persistent memory impairment and medial temporal atrophy. Relapses can occur, so ongoing monitoring is warranted.",
-  "pitfalls": [
-   "Mistaking faciobrachial dystonic seizures for tics, myoclonus, or psychogenic movements and delaying treatment",
-   "Relying on antiseizure drugs alone rather than starting immunotherapy",
-   "Overlooking hyponatraemia as a diagnostic clue",
-   "Assuming the disorder is always non-paraneoplastic and omitting tumour screening"
-  ],
-  "references": [
-   "Bradley and Daroff's Neurology in Clinical Practice",
-   "Adams and Victor's Principles of Neurology",
-   "Continuum: Autoimmune Neurology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "First-line immunotherapy with corticosteroids, intravenous immunoglobulin and/or plasma exchange",
-   "Second-line immunotherapy with rituximab or cyclophosphamide for refractory or relapsing disease",
-   "Early immunotherapy for faciobrachial dystonic seizures to prevent progression to fixed cognitive impairment, with antiseizure medication as adjunct",
-   "Correction and monitoring of hyponatraemia",
-   "Tumour screening despite the mostly non-paraneoplastic nature, treating any identified neoplasm",
-   "Cognitive rehabilitation and management of sleep and behavioural disturbance",
-   "Clinical and antibody follow-up to detect relapse, under neurology and neuroimmunology multidisciplinary care"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "lgi1_encephalitis-pathway",
-   "title": "LGI1 limbic encephalitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Faciobrachial dystonic seizures - brief, frequent unilateral contractions of the face and arm - are highly characteristic and often precede the cognitive syndrome",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Frequent faciobrachial dystonic seizures signalling active, treatable disease before cognitive decline",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum and cerebrospinal fluid testing for LGI1 antibodies, with serum often more sensitive for this antigen, MRI of the brain showing medial temporal and sometimes basal ganglia signal change, Electroencephalography to"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: First-line immunotherapy with corticosteroids, intravenous immunoglobulin and/or plasma exchange"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking faciobrachial dystonic seizures for tics, myoclonus, or psychogenic movements and delaying treatment"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of lgi1 limbic encephalitis."
-  }
- ],
- "tables": [
-  {
-   "id": "lgi1_encephalitis-matrix",
-   "title": "LGI1 limbic encephalitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Faciobrachial dystonic seizures - brief, frequent unilateral contractions of the face and arm - are highly characteristic and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neuroimmunology",
+  "specialty": "Neurology / Neuroimmunology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff's Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Faciobrachial dystonic seizures — brief, frequent unilateral contractions of the face and arm — are highly characteristic and often precede the cognitive syndrome",
+      "The limbic phase brings subacute short-term memory loss, confusion, temporal-lobe seizures, and disturbed sleep or behaviour",
+      "Hyponatraemia is common and helps raise suspicion of the diagnosis",
+      "Antibodies target LGI1, a secreted neuronal protein once grouped within the voltage-gated potassium channel complex",
+      "Most cases are non-paraneoplastic, but tumour screening remains appropriate as a minority harbour an underlying neoplasm",
+      "Recognising and treating faciobrachial dystonic seizures early with immunotherapy may prevent progression to fixed cognitive impairment",
+      "First-line immunotherapy is corticosteroids with intravenous immunoglobulin or plasma exchange, escalating to rituximab in refractory disease"
     ],
-    [
-     "Key Investigations",
-     "Serum and cerebrospinal fluid testing for LGI1 antibodies, with serum often more sensitive for this antigen, MRI of the brain",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Antibodies are directed against leucine-rich glioma-inactivated 1 (LGI1), a protein secreted by neurons that bridges presynaptic ADAM23 and postsynaptic ADAM22 to regulate synaptic excitability and AMPA-receptor clustering. Antibody-mediated disruption of this signalling increases neuronal excitability within the temporal lobes and basal ganglia, producing seizures, and impairs limbic circuits underlying memory. Inflammation concentrates in the medial temporal structures, and associated hypothalamic involvement is thought to contribute to the frequent hyponatraemia. The response is usually not tumour-driven but is strongly linked to specific HLA types.",
+    "additionalDifferentials": [
+      "Herpes simplex and other infective limbic encephalitis",
+      "Paraneoplastic limbic encephalitis with intracellular antibodies",
+      "Other surface-antigen encephalitides (CASPR2, GABA-B, AMPA)",
+      "Temporal-lobe epilepsy of another cause",
+      "Rapidly progressive dementia including Creutzfeldt-Jakob disease",
+      "Wernicke encephalopathy"
     ],
-    [
-     "Primary Differentials",
-     "Herpes simplex and other infective limbic encephalitis, Paraneoplastic limbic encephalitis with intracellular antibodies, Other",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum and cerebrospinal fluid testing for LGI1 antibodies, with serum often more sensitive for this antigen",
+      "MRI of the brain showing medial temporal and sometimes basal ganglia signal change",
+      "Electroencephalography to characterise temporal seizures and subclinical activity",
+      "Serum sodium measurement to detect hyponatraemia",
+      "Cerebrospinal fluid analysis for inflammation and to exclude infection",
+      "Targeted tumour screening given the small paraneoplastic association"
     ],
-    [
-     "Management Strategy",
-     "First-line immunotherapy with corticosteroids, intravenous immunoglobulin and/or plasma exchange",
-     "Core treatment modality"
+    "redFlags": [
+      "Frequent faciobrachial dystonic seizures signalling active, treatable disease before cognitive decline",
+      "Rapidly progressive memory loss or confusion",
+      "Severe hyponatraemia risking seizures and reduced consciousness",
+      "Status epilepticus or evolving encephalopathy"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking faciobrachial dystonic seizures for tics, myoclonus, or psychogenic movements and delaying treatment",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prompt immunotherapy often improves seizures and cognition, but delayed treatment is associated with persistent memory impairment and medial temporal atrophy. Relapses can occur, so ongoing monitoring is warranted.",
+    "pitfalls": [
+      "Mistaking faciobrachial dystonic seizures for tics, myoclonus, or psychogenic movements and delaying treatment",
+      "Relying on antiseizure drugs alone rather than starting immunotherapy",
+      "Overlooking hyponatraemia as a diagnostic clue",
+      "Assuming the disorder is always non-paraneoplastic and omitting tumour screening"
+    ],
+    "references": [
+      "Bradley and Daroff's Neurology in Clinical Practice",
+      "Adams and Victor's Principles of Neurology",
+      "Continuum: Autoimmune Neurology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "First-line immunotherapy with corticosteroids, intravenous immunoglobulin and/or plasma exchange",
+      "Second-line immunotherapy with rituximab or cyclophosphamide for refractory or relapsing disease",
+      "Early immunotherapy for faciobrachial dystonic seizures to prevent progression to fixed cognitive impairment, with antiseizure medication as adjunct",
+      "Correction and monitoring of hyponatraemia",
+      "Tumour screening despite the mostly non-paraneoplastic nature, treating any identified neoplasm",
+      "Cognitive rehabilitation and management of sleep and behavioural disturbance",
+      "Clinical and antibody follow-up to detect relapse, under neurology and neuroimmunology multidisciplinary care"
     ]
-   ],
-   "caption": "Overview comparison matrix for lgi1 limbic encephalitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "lgi1-encephalitis-real-image",
-   "title": "LGI1 limbic encephalitis: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "lgi1_encephalitis-pathway",
+      "title": "LGI1 limbic encephalitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Faciobrachial dystonic seizures - brief, frequent unilateral contractions of the face and arm - are highly characteristic and often precede the cognitive syndrome",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Frequent faciobrachial dystonic seizures signalling active, treatable disease before cognitive decline",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum and cerebrospinal fluid testing for LGI1 antibodies, with serum often more sensitive for this antigen, MRI of the brain showing medial temporal and sometimes basal ganglia signal change, Electroencephalography to"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: First-line immunotherapy with corticosteroids, intravenous immunoglobulin and/or plasma exchange"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking faciobrachial dystonic seizures for tics, myoclonus, or psychogenic movements and delaying treatment"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of lgi1 limbic encephalitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "lgi1_encephalitis-matrix",
+      "title": "LGI1 limbic encephalitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Faciobrachial dystonic seizures - brief, frequent unilateral contractions of the face and arm - are highly characteristic and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum and cerebrospinal fluid testing for LGI1 antibodies, with serum often more sensitive for this antigen, MRI of the brain",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Herpes simplex and other infective limbic encephalitis, Paraneoplastic limbic encephalitis with intracellular antibodies, Other",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "First-line immunotherapy with corticosteroids, intravenous immunoglobulin and/or plasma exchange",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking faciobrachial dystonic seizures for tics, myoclonus, or psychogenic movements and delaying treatment",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for lgi1 limbic encephalitis."
+    }
+  ],
+  "diagrams": []
 }

@@ -1,173 +1,151 @@
 {
- "id": "pancreatic_panniculitis",
- "name": "Pancreatic panniculitis",
- "aliases": [
-  "enzymatic panniculitis",
-  "pancreatic fat necrosis",
-  "subcutaneous fat necrosis of pancreatic disease"
- ],
- "class": "non_infective",
- "system": "Dermatology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents as tender, erythematous to violaceous subcutaneous nodules, classically on the lower legs but also thighs, buttocks and trunk",
-   "Nodules may soften, ulcerate and discharge an oily brown viscous material as liquefied fat is released",
-   "It signals underlying pancreatic disease, most often acute or chronic pancreatitis but also pancreatic carcinoma (especially acinar cell type)",
-   "Skin lesions can precede recognition of the pancreatic disorder, so unexplained leg nodules warrant pancreatic evaluation",
-   "The triad of panniculitis, polyarthritis and eosinophilia (PPP syndrome) carries a worse prognosis",
-   "Biopsy shows a lobular panniculitis with pathognomonic anucleate 'ghost' adipocytes and basophilic saponification of fat by calcium salts",
-   "Treatment is directed at the underlying pancreatic disease; the skin improves as the pancreatic process is controlled"
+  "id": "pancreatic_panniculitis",
+  "name": "Pancreatic panniculitis",
+  "aliases": [
+    "enzymatic panniculitis",
+    "pancreatic fat necrosis",
+    "subcutaneous fat necrosis of pancreatic disease"
   ],
-  "pathophysiology": "Pancreatic panniculitis results from release of pancreatic enzymes, principally lipase, amylase and trypsin, into the circulation during pancreatic inflammation or from an enzyme-secreting tumour. These enzymes reach the subcutaneous fat and hydrolyse triglycerides, liberating free fatty acids that combine with calcium to form insoluble soaps (saponification). This enzymatic fat necrosis destroys adipocytes, leaving characteristic anucleate ghost cells with thick shadowy walls and basophilic granular calcium deposits, surrounded by a mixed inflammatory infiltrate within the fat lobules.",
-  "additionalDifferentials": [
-   "Erythema nodosum",
-   "Erythema induratum / nodular vasculitis",
-   "Alpha-1-antitrypsin deficiency panniculitis",
-   "Infective panniculitis",
-   "Cutaneous polyarteritis nodosa",
-   "Subcutaneous fat necrosis of other cause"
-  ],
-  "additionalInvestigations": [
-   "Deep incisional biopsy of a fresh nodule including subcutaneous fat",
-   "Serum lipase and amylase",
-   "Cross-sectional pancreatic imaging (CT or MRI) to identify pancreatitis or tumour",
-   "Full blood count for peripheral eosinophilia",
-   "Tumour markers and further evaluation if pancreatic carcinoma is suspected",
-   "Serum calcium and inflammatory markers"
-  ],
-  "redFlags": [
-   "Panniculitis with polyarthritis and eosinophilia (PPP syndrome), which is associated with high mortality",
-   "Nodules arising without an obvious cause, raising suspicion of occult pancreatic carcinoma",
-   "Features of severe acute pancreatitis with systemic compromise",
-   "Extensive ulceration with secondary infection"
-  ],
-  "prognosis": "Outcome depends heavily on the underlying pancreatic disease: lesions accompanying self-limiting pancreatitis resolve as the pancreas recovers, whereas panniculitis linked to pancreatic carcinoma or the PPP syndrome carries a poor prognosis. Skin nodules often heal with atrophic hyperpigmented scars.",
-  "pitfalls": [
-   "Dismissing recurrent leg nodules as ordinary erythema nodosum and missing the pancreatic cause",
-   "Failing to search for an occult pancreatic tumour when pancreatitis is absent",
-   "Sampling too superficially to demonstrate the diagnostic saponified ghost adipocytes",
-   "Overlooking accompanying arthritis and eosinophilia that portend a worse course"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Bolognia Dermatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat the underlying pancreatic disorder, whether pancreatitis or an enzyme-secreting tumour, as the definitive management since the skin lesions follow the pancreatic disease",
-   "Resect or otherwise treat an underlying pancreatic carcinoma, especially the acinar cell type, where identified",
-   "Supportive management of acute pancreatitis with fluids and nutrition to reduce the circulating enzyme load",
-   "Supportive skin care with rest, elevation, analgesia and wound care for ulcerating, discharging nodules",
-   "Investigate for the panniculitis-polyarthritis-eosinophilia syndrome, which carries a worse prognosis",
-   "Cross-specialty referral to gastroenterology or pancreatic surgery and to dermatology",
-   "Monitor the skin lesions, expecting resolution with atrophic scarring as the pancreatic disease settles"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pancreatic_panniculitis-pathway",
-   "title": "Pancreatic panniculitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents as tender, erythematous to violaceous subcutaneous nodules, classically on the lower legs but also thighs, buttocks and trunk",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Panniculitis with polyarthritis and eosinophilia (PPP syndrome), which is associated with high mortality",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Deep incisional biopsy of a fresh nodule including subcutaneous fat, Serum lipase and amylase, Cross-sectional pancreatic imaging (CT or MRI) to identify pancreatitis or tumour"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat the underlying pancreatic disorder, whether pancreatitis or an enzyme-secreting tumour, as the definitive management since the skin lesions follow the pancreatic disease"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing recurrent leg nodules as ordinary erythema nodosum and missing the pancreatic cause"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pancreatic panniculitis."
-  }
- ],
- "tables": [
-  {
-   "id": "pancreatic_panniculitis-matrix",
-   "title": "Pancreatic panniculitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents as tender, erythematous to violaceous subcutaneous nodules, classically on the lower legs but also thighs, buttocks and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents as tender, erythematous to violaceous subcutaneous nodules, classically on the lower legs but also thighs, buttocks and trunk",
+      "Nodules may soften, ulcerate and discharge an oily brown viscous material as liquefied fat is released",
+      "It signals underlying pancreatic disease, most often acute or chronic pancreatitis but also pancreatic carcinoma (especially acinar cell type)",
+      "Skin lesions can precede recognition of the pancreatic disorder, so unexplained leg nodules warrant pancreatic evaluation",
+      "The triad of panniculitis, polyarthritis and eosinophilia (PPP syndrome) carries a worse prognosis",
+      "Biopsy shows a lobular panniculitis with pathognomonic anucleate 'ghost' adipocytes and basophilic saponification of fat by calcium salts",
+      "Treatment is directed at the underlying pancreatic disease; the skin improves as the pancreatic process is controlled"
     ],
-    [
-     "Key Investigations",
-     "Deep incisional biopsy of a fresh nodule including subcutaneous fat, Serum lipase and amylase, Cross-sectional pancreatic imaging",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Pancreatic panniculitis results from release of pancreatic enzymes, principally lipase, amylase and trypsin, into the circulation during pancreatic inflammation or from an enzyme-secreting tumour. These enzymes reach the subcutaneous fat and hydrolyse triglycerides, liberating free fatty acids that combine with calcium to form insoluble soaps (saponification). This enzymatic fat necrosis destroys adipocytes, leaving characteristic anucleate ghost cells with thick shadowy walls and basophilic granular calcium deposits, surrounded by a mixed inflammatory infiltrate within the fat lobules.",
+    "additionalDifferentials": [
+      "Erythema nodosum",
+      "Erythema induratum / nodular vasculitis",
+      "Alpha-1-antitrypsin deficiency panniculitis",
+      "Infective panniculitis",
+      "Cutaneous polyarteritis nodosa",
+      "Subcutaneous fat necrosis of other cause"
     ],
-    [
-     "Primary Differentials",
-     "Erythema nodosum, Erythema induratum / nodular vasculitis, Alpha-1-antitrypsin deficiency panniculitis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Deep incisional biopsy of a fresh nodule including subcutaneous fat",
+      "Serum lipase and amylase",
+      "Cross-sectional pancreatic imaging (CT or MRI) to identify pancreatitis or tumour",
+      "Full blood count for peripheral eosinophilia",
+      "Tumour markers and further evaluation if pancreatic carcinoma is suspected",
+      "Serum calcium and inflammatory markers"
     ],
-    [
-     "Management Strategy",
-     "Treat the underlying pancreatic disorder, whether pancreatitis or an enzyme-secreting tumour, as the definitive management since",
-     "Core treatment modality"
+    "redFlags": [
+      "Panniculitis with polyarthritis and eosinophilia (PPP syndrome), which is associated with high mortality",
+      "Nodules arising without an obvious cause, raising suspicion of occult pancreatic carcinoma",
+      "Features of severe acute pancreatitis with systemic compromise",
+      "Extensive ulceration with secondary infection"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing recurrent leg nodules as ordinary erythema nodosum and missing the pancreatic cause",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome depends heavily on the underlying pancreatic disease: lesions accompanying self-limiting pancreatitis resolve as the pancreas recovers, whereas panniculitis linked to pancreatic carcinoma or the PPP syndrome carries a poor prognosis. Skin nodules often heal with atrophic hyperpigmented scars.",
+    "pitfalls": [
+      "Dismissing recurrent leg nodules as ordinary erythema nodosum and missing the pancreatic cause",
+      "Failing to search for an occult pancreatic tumour when pancreatitis is absent",
+      "Sampling too superficially to demonstrate the diagnostic saponified ghost adipocytes",
+      "Overlooking accompanying arthritis and eosinophilia that portend a worse course"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Bolognia Dermatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat the underlying pancreatic disorder, whether pancreatitis or an enzyme-secreting tumour, as the definitive management since the skin lesions follow the pancreatic disease",
+      "Resect or otherwise treat an underlying pancreatic carcinoma, especially the acinar cell type, where identified",
+      "Supportive management of acute pancreatitis with fluids and nutrition to reduce the circulating enzyme load",
+      "Supportive skin care with rest, elevation, analgesia and wound care for ulcerating, discharging nodules",
+      "Investigate for the panniculitis-polyarthritis-eosinophilia syndrome, which carries a worse prognosis",
+      "Cross-specialty referral to gastroenterology or pancreatic surgery and to dermatology",
+      "Monitor the skin lesions, expecting resolution with atrophic scarring as the pancreatic disease settles"
     ]
-   ],
-   "caption": "Overview comparison matrix for pancreatic panniculitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pancreatic-panniculitis-real-image",
-   "title": "Pancreatic panniculitis: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "pancreatic_panniculitis-pathway",
+      "title": "Pancreatic panniculitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents as tender, erythematous to violaceous subcutaneous nodules, classically on the lower legs but also thighs, buttocks and trunk",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Panniculitis with polyarthritis and eosinophilia (PPP syndrome), which is associated with high mortality",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Deep incisional biopsy of a fresh nodule including subcutaneous fat, Serum lipase and amylase, Cross-sectional pancreatic imaging (CT or MRI) to identify pancreatitis or tumour"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat the underlying pancreatic disorder, whether pancreatitis or an enzyme-secreting tumour, as the definitive management since the skin lesions follow the pancreatic disease"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing recurrent leg nodules as ordinary erythema nodosum and missing the pancreatic cause"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pancreatic panniculitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pancreatic_panniculitis-matrix",
+      "title": "Pancreatic panniculitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents as tender, erythematous to violaceous subcutaneous nodules, classically on the lower legs but also thighs, buttocks and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Deep incisional biopsy of a fresh nodule including subcutaneous fat, Serum lipase and amylase, Cross-sectional pancreatic imaging",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Erythema nodosum, Erythema induratum / nodular vasculitis, Alpha-1-antitrypsin deficiency panniculitis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat the underlying pancreatic disorder, whether pancreatitis or an enzyme-secreting tumour, as the definitive management since",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing recurrent leg nodules as ordinary erythema nodosum and missing the pancreatic cause",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pancreatic panniculitis."
+    }
+  ],
+  "diagrams": []
 }

@@ -1,179 +1,157 @@
 {
- "id": "hibernoma",
- "name": "Hibernoma",
- "aliases": [
-  "Brown fat tumour",
-  "Lipoma of embryonic fat"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Soft tissue",
- "specialty": "Orthopaedic oncology / Pathology",
- "referenceOnly": true,
- "reference": {
-  "source": "WHO Classification of Soft Tissue and Bone Tumours / Enzinger and Weiss's Soft Tissue Tumors",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A benign tumour of brown adipose tissue, named for the fat that hibernating animals use for thermogenesis",
-   "Typically affects young to middle-aged adults and presents as a slow-growing, painless, mobile mass",
-   "Favoured sites are the interscapular region, back, neck, axilla, thigh, and mediastinum, mirroring the distribution of brown fat",
-   "The characteristic cell is a multivacuolated adipocyte with granular, eosinophilic, mitochondria-rich cytoplasm",
-   "The lesion is highly vascular and often intensely avid on FDG PET, which can lead to a false suspicion of malignancy",
-   "Recurrent chromosomal rearrangements affect the 11q13-21 region, distinguishing it from ordinary lipoma",
-   "On MRI it resembles fat but is typically slightly less bright than subcutaneous fat on T1 with prominent internal vascular flow voids",
-   "Marginal excision is curative and recurrence is not expected"
+  "id": "hibernoma",
+  "name": "Hibernoma",
+  "aliases": [
+    "Brown fat tumour",
+    "Lipoma of embryonic fat"
   ],
-  "pathophysiology": "Hibernoma is a benign neoplasm recapitulating brown adipose tissue, the specialised thermogenic fat abundant in the fetus and neonate and retained in adults at sites such as the interscapular region, neck, and mediastinum. The tumour cells are packed with mitochondria whose uncoupling protein activity gives the cytoplasm its granular, eosinophilic, multivacuolated appearance and accounts for the high metabolic activity seen on functional imaging. The rich capillary network reflects the high oxygen demand of thermogenic fat. Recurrent structural rearrangements of chromosome 11q13-21, including loss involving the region around the MEN1 locus, are characteristic and separate hibernoma from conventional white-fat lipomas. Despite its vascularity and metabolic avidity, the lesion is entirely benign with no capacity for local aggression or metastasis.",
-  "additionalDifferentials": [
-   "Lipoma and its variants",
-   "Atypical lipomatous tumour and well-differentiated liposarcoma",
-   "Myxoid liposarcoma when myxoid areas predominate",
-   "Rhabdomyoma or granular cell tumour on cytological grounds",
-   "Metastatic deposit or lymphoma given the PET avidity",
-   "Vascular soft tissue tumour"
-  ],
-  "additionalInvestigations": [
-   "MRI to characterise the fatty mass and its vascularity",
-   "FDG PET awareness that avidity is expected and does not indicate malignancy",
-   "Image-guided core biopsy when the diagnosis is uncertain",
-   "Histology demonstrating multivacuolated brown fat cells",
-   "Cytogenetic or molecular assessment for 11q rearrangements in difficult cases",
-   "Cross-sectional imaging to define the compartment before excision"
-  ],
-  "redFlags": [
-   "Intense metabolic avidity misinterpreted as a malignant or metastatic lesion",
-   "Rapid growth or infiltration raising concern for a liposarcoma",
-   "Mediastinal or deep location causing local mass effect",
-   "Unexpected recurrence after excision prompting review of the diagnosis"
-  ],
-  "prognosis": "Hibernoma is benign with an excellent prognosis; complete marginal excision is curative and local recurrence or malignant transformation does not occur. The main clinical hazard is misinterpretation of its metabolic avidity as malignancy.",
-  "pitfalls": [
-   "Over-investigating or over-treating a benign lesion because of striking FDG avidity",
-   "Confusing multivacuolated cells with the lipoblasts of liposarcoma",
-   "Underestimating intra-operative vascularity, which can cause troublesome bleeding",
-   "Failing to consider hibernoma in a fatty mass at a classic brown-fat site"
-  ],
-  "references": [
-   "WHO Classification of Soft Tissue and Bone Tumours",
-   "Enzinger and Weiss's Soft Tissue Tumors"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Hibernoma is a benign brown-fat tumor with no metastatic potential, so there is no systemic oncology treatment intent; management is purely local and surgical.",
-   "Secure the diagnosis before treatment with cross-sectional imaging (MRI preferred) to characterize the fatty mass, its vascularity, and the surgical compartment.",
-   "Intense FDG avidity on PET is an expected feature of hibernoma due to high mitochondrial content and should not by itself prompt a malignancy work-up.",
-   "Use image-guided core biopsy when imaging alone cannot confidently distinguish hibernoma from lipoma, atypical lipomatous tumor or well-differentiated liposarcoma, or other fatty or vascular lesions.",
-   "Complete surgical excision is the definitive and generally curative treatment.",
-   "A marginal rather than wide excision is generally accepted as adequate given the tumor's benign, non-infiltrative behavior.",
-   "Plan for vascularity and possible intraoperative bleeding, since brown-fat physiology gives these lesions a rich blood supply.",
-   "There is no established role for radiotherapy or for chemotherapy or targeted systemic agents in hibernoma.",
-   "There are no lines of therapy to sequence, since hibernoma is not a progressive or recurrent malignant disease.",
-   "Follow-up after excision can be routine post-operative wound and clinical monitoring, without sarcoma-style imaging surveillance.",
-   "If a mass recurs or imaging or histology shows atypical features, reconsider the diagnosis rather than assume aggressive hibernoma biology.",
-   "Refer to a soft tissue surgical oncologist or an experienced surgeon when the lesion is large, deep-seated, retroperitoneal, mediastinal, or near structures at surgical risk.",
-   "Refer for sarcoma-pathway review with imaging and biopsy whenever a fatty mass cannot be confidently distinguished from atypical lipomatous tumor, well-differentiated liposarcoma, or another fat-containing sarcoma before excision."
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hibernoma-pathway",
-   "title": "Hibernoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A benign tumour of brown adipose tissue, named for the fat that hibernating animals use for thermogenesis",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Intense metabolic avidity misinterpreted as a malignant or metastatic lesion",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI to characterise the fatty mass and its vascularity, FDG PET awareness that avidity is expected and does not indicate malignancy, Image-guided core biopsy when the diagnosis is uncertain"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Hibernoma is a benign brown-fat tumor with no metastatic potential, so there is no systemic oncology treatment intent; management is purely local and surgical."
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Over-investigating or over-treating a benign lesion because of striking FDG avidity"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hibernoma."
-  }
- ],
- "tables": [
-  {
-   "id": "hibernoma-matrix",
-   "title": "Hibernoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A benign tumour of brown adipose tissue, named for the fat that hibernating animals use for thermogenesis",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Soft tissue",
+  "specialty": "Orthopaedic oncology / Pathology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "WHO Classification of Soft Tissue and Bone Tumours / Enzinger and Weiss's Soft Tissue Tumors",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A benign tumour of brown adipose tissue, named for the fat that hibernating animals use for thermogenesis",
+      "Typically affects young to middle-aged adults and presents as a slow-growing, painless, mobile mass",
+      "Favoured sites are the interscapular region, back, neck, axilla, thigh, and mediastinum, mirroring the distribution of brown fat",
+      "The characteristic cell is a multivacuolated adipocyte with granular, eosinophilic, mitochondria-rich cytoplasm",
+      "The lesion is highly vascular and often intensely avid on FDG PET, which can lead to a false suspicion of malignancy",
+      "Recurrent chromosomal rearrangements affect the 11q13-21 region, distinguishing it from ordinary lipoma",
+      "On MRI it resembles fat but is typically slightly less bright than subcutaneous fat on T1 with prominent internal vascular flow voids",
+      "Marginal excision is curative and recurrence is not expected"
     ],
-    [
-     "Key Investigations",
-     "MRI to characterise the fatty mass and its vascularity, FDG PET awareness that avidity is expected and does not indicate",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Hibernoma is a benign neoplasm recapitulating brown adipose tissue, the specialised thermogenic fat abundant in the fetus and neonate and retained in adults at sites such as the interscapular region, neck, and mediastinum. The tumour cells are packed with mitochondria whose uncoupling protein activity gives the cytoplasm its granular, eosinophilic, multivacuolated appearance and accounts for the high metabolic activity seen on functional imaging. The rich capillary network reflects the high oxygen demand of thermogenic fat. Recurrent structural rearrangements of chromosome 11q13-21, including loss involving the region around the MEN1 locus, are characteristic and separate hibernoma from conventional white-fat lipomas. Despite its vascularity and metabolic avidity, the lesion is entirely benign with no capacity for local aggression or metastasis.",
+    "additionalDifferentials": [
+      "Lipoma and its variants",
+      "Atypical lipomatous tumour and well-differentiated liposarcoma",
+      "Myxoid liposarcoma when myxoid areas predominate",
+      "Rhabdomyoma or granular cell tumour on cytological grounds",
+      "Metastatic deposit or lymphoma given the PET avidity",
+      "Vascular soft tissue tumour"
     ],
-    [
-     "Primary Differentials",
-     "Lipoma and its variants, Atypical lipomatous tumour and well-differentiated liposarcoma, Myxoid liposarcoma when myxoid areas",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI to characterise the fatty mass and its vascularity",
+      "FDG PET awareness that avidity is expected and does not indicate malignancy",
+      "Image-guided core biopsy when the diagnosis is uncertain",
+      "Histology demonstrating multivacuolated brown fat cells",
+      "Cytogenetic or molecular assessment for 11q rearrangements in difficult cases",
+      "Cross-sectional imaging to define the compartment before excision"
     ],
-    [
-     "Management Strategy",
-     "Hibernoma is a benign brown-fat tumor with no metastatic potential, so there is no systemic oncology treatment intent; management",
-     "Core treatment modality"
+    "redFlags": [
+      "Intense metabolic avidity misinterpreted as a malignant or metastatic lesion",
+      "Rapid growth or infiltration raising concern for a liposarcoma",
+      "Mediastinal or deep location causing local mass effect",
+      "Unexpected recurrence after excision prompting review of the diagnosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Over-investigating or over-treating a benign lesion because of striking FDG avidity",
-     "Prevent diagnostic or management error"
+    "prognosis": "Hibernoma is benign with an excellent prognosis; complete marginal excision is curative and local recurrence or malignant transformation does not occur. The main clinical hazard is misinterpretation of its metabolic avidity as malignancy.",
+    "pitfalls": [
+      "Over-investigating or over-treating a benign lesion because of striking FDG avidity",
+      "Confusing multivacuolated cells with the lipoblasts of liposarcoma",
+      "Underestimating intra-operative vascularity, which can cause troublesome bleeding",
+      "Failing to consider hibernoma in a fatty mass at a classic brown-fat site"
+    ],
+    "references": [
+      "WHO Classification of Soft Tissue and Bone Tumours",
+      "Enzinger and Weiss's Soft Tissue Tumors"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Hibernoma is a benign brown-fat tumor with no metastatic potential, so there is no systemic oncology treatment intent; management is purely local and surgical.",
+      "Secure the diagnosis before treatment with cross-sectional imaging (MRI preferred) to characterize the fatty mass, its vascularity, and the surgical compartment.",
+      "Intense FDG avidity on PET is an expected feature of hibernoma due to high mitochondrial content and should not by itself prompt a malignancy work-up.",
+      "Use image-guided core biopsy when imaging alone cannot confidently distinguish hibernoma from lipoma, atypical lipomatous tumor or well-differentiated liposarcoma, or other fatty or vascular lesions.",
+      "Complete surgical excision is the definitive and generally curative treatment.",
+      "A marginal rather than wide excision is generally accepted as adequate given the tumor's benign, non-infiltrative behavior.",
+      "Plan for vascularity and possible intraoperative bleeding, since brown-fat physiology gives these lesions a rich blood supply.",
+      "There is no established role for radiotherapy or for chemotherapy or targeted systemic agents in hibernoma.",
+      "There are no lines of therapy to sequence, since hibernoma is not a progressive or recurrent malignant disease.",
+      "Follow-up after excision can be routine post-operative wound and clinical monitoring, without sarcoma-style imaging surveillance.",
+      "If a mass recurs or imaging or histology shows atypical features, reconsider the diagnosis rather than assume aggressive hibernoma biology.",
+      "Refer to a soft tissue surgical oncologist or an experienced surgeon when the lesion is large, deep-seated, retroperitoneal, mediastinal, or near structures at surgical risk.",
+      "Refer for sarcoma-pathway review with imaging and biopsy whenever a fatty mass cannot be confidently distinguished from atypical lipomatous tumor, well-differentiated liposarcoma, or another fat-containing sarcoma before excision."
     ]
-   ],
-   "caption": "Overview comparison matrix for hibernoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hibernoma-real-image",
-   "title": "Hibernoma: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "hibernoma-pathway",
+      "title": "Hibernoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A benign tumour of brown adipose tissue, named for the fat that hibernating animals use for thermogenesis",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Intense metabolic avidity misinterpreted as a malignant or metastatic lesion",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI to characterise the fatty mass and its vascularity, FDG PET awareness that avidity is expected and does not indicate malignancy, Image-guided core biopsy when the diagnosis is uncertain"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Hibernoma is a benign brown-fat tumor with no metastatic potential, so there is no systemic oncology treatment intent; management is purely local and surgical."
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Over-investigating or over-treating a benign lesion because of striking FDG avidity"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hibernoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hibernoma-matrix",
+      "title": "Hibernoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A benign tumour of brown adipose tissue, named for the fat that hibernating animals use for thermogenesis",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI to characterise the fatty mass and its vascularity, FDG PET awareness that avidity is expected and does not indicate",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Lipoma and its variants, Atypical lipomatous tumour and well-differentiated liposarcoma, Myxoid liposarcoma when myxoid areas",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Hibernoma is a benign brown-fat tumor with no metastatic potential, so there is no systemic oncology treatment intent; management",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Over-investigating or over-treating a benign lesion because of striking FDG avidity",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hibernoma."
+    }
+  ],
+  "diagrams": []
 }

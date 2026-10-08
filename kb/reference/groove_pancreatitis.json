@@ -1,174 +1,152 @@
 {
- "id": "groove_pancreatitis",
- "name": "Groove pancreatitis",
- "aliases": [
-  "paraduodenal pancreatitis",
-  "cystic dystrophy of the duodenal wall",
-  "pancreatic hamartoma of the duodenum",
-  "myoadenomatosis"
- ],
- "class": "non_infective",
- "system": "Gastroenterology / Hepatobiliary",
- "specialty": "Hepatobiliary / Pancreatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A form of focal chronic pancreatitis centred on the groove between the pancreatic head, the duodenum, and the common bile duct",
-   "Typically affects middle-aged men with a heavy alcohol history and is often associated with smoking",
-   "Presents with recurrent upper abdominal pain, postprandial vomiting, and weight loss, sometimes with jaundice from bile duct narrowing",
-   "Imaging shows sheet-like fibrous tissue in the groove, duodenal wall thickening, and small cysts within the duodenal wall or paraduodenal region",
-   "Duodenal luminal narrowing and reduced motility from wall oedema and fibrosis can produce a gastric outlet obstruction picture",
-   "The principal difficulty is distinguishing it from pancreatic head or periampullary carcinoma, which it can closely resemble",
-   "Management is initially conservative with alcohol and smoking cessation, pain control, and duodenal rest, reserving pancreaticoduodenectomy for intractable symptoms or when malignancy cannot be excluded"
+  "id": "groove_pancreatitis",
+  "name": "Groove pancreatitis",
+  "aliases": [
+    "paraduodenal pancreatitis",
+    "cystic dystrophy of the duodenal wall",
+    "pancreatic hamartoma of the duodenum",
+    "myoadenomatosis"
   ],
-  "pathophysiology": "Groove pancreatitis is a segmental chronic pancreatitis affecting the anatomical groove bounded by the dorsocranial pancreatic head, the duodenal wall, and the common bile duct. Impaired outflow of pancreatic secretions through the minor papilla and the dorsal duct region, frequently in the setting of alcohol excess and smoking, is thought to provoke inflammation and dense fibrosis in this space, often with cystic change (cystic dystrophy) within the duodenal wall itself. The resulting scar tissue thickens and stiffens the duodenal wall, can narrow the duodenal lumen and distal bile duct, and produces a mass-like appearance that mimics a periampullary neoplasm.",
-  "additionalDifferentials": [
-   "Pancreatic head or periampullary adenocarcinoma",
-   "Duodenal adenocarcinoma",
-   "Autoimmune pancreatitis",
-   "Duodenal duplication cyst",
-   "Cholangiocarcinoma involving the distal bile duct",
-   "Ampullary neoplasm"
-  ],
-  "additionalInvestigations": [
-   "Contrast-enhanced CT to characterise groove soft tissue, duodenal wall thickening, and cysts",
-   "MRI with MRCP to assess the biliary and pancreatic ducts and detect intramural cysts",
-   "Endoscopic ultrasound with fine-needle biopsy to sample the groove and exclude malignancy",
-   "Upper endoscopy to inspect the duodenal mucosa and assess luminal narrowing",
-   "Serum CA 19-9 to help weigh the likelihood of carcinoma",
-   "Liver function tests to detect biliary obstruction"
-  ],
-  "redFlags": [
-   "Features suggesting periampullary or pancreatic carcinoma, such as a discrete enhancing mass or vascular involvement",
-   "Progressive obstructive jaundice",
-   "Marked or persistent weight loss with an unexplained mass",
-   "Gastric outlet obstruction requiring intervention"
-  ],
-  "prognosis": "Symptoms often improve with abstinence from alcohol and smoking and supportive care, but disease may be relapsing; surgical resection is frequently effective for refractory pain or obstruction and, importantly, confirms the benign nature of the lesion when carcinoma has been a concern.",
-  "pitfalls": [
-   "Mistaking the fibrotic groove mass for a resectable or unresectable pancreatic carcinoma",
-   "Over-reliance on a single biopsy, as sampling error can miss coexisting malignancy",
-   "Failing to address ongoing alcohol and tobacco use, which perpetuates the disease",
-   "Attributing all upper gastrointestinal symptoms to the pancreas while overlooking duodenal obstruction"
-  ],
-  "references": [
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-   "Adsay and Zamboni, paraduodenal pancreatitis reviews",
-   "Radiology reviews of groove pancreatitis imaging"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Advise complete abstinence from alcohol and smoking cessation as the key modifiable drivers of the disease",
-   "Manage pain with analgesia and pancreatic rest, and provide nutritional support with pancreatic enzyme replacement for exocrine insufficiency",
-   "Relieve duodenal or gastric outlet obstruction and biliary narrowing, using endoscopic decompression or stenting where feasible",
-   "Exclude periampullary or pancreatic head carcinoma with endoscopic ultrasound-guided biopsy before committing to conservative treatment",
-   "Offer surgical resection such as pancreaticoduodenectomy for refractory pain, obstruction or persistent diagnostic uncertainty, which also confirms the benign nature of the lesion",
-   "Coordinate multidisciplinary hepatobiliary, pancreatology and surgical review"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "groove_pancreatitis-pathway",
-   "title": "Groove pancreatitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A form of focal chronic pancreatitis centred on the groove between the pancreatic head, the duodenum, and the common bile duct",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Features suggesting periampullary or pancreatic carcinoma, such as a discrete enhancing mass or vascular involvement",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Contrast-enhanced CT to characterise groove soft tissue, duodenal wall thickening, and cysts, MRI with MRCP to assess the biliary and pancreatic ducts and detect intramural cysts, Endoscopic ultrasound with fine-needle"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Advise complete abstinence from alcohol and smoking cessation as the key modifiable drivers of the disease"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking the fibrotic groove mass for a resectable or unresectable pancreatic carcinoma"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of groove pancreatitis."
-  }
- ],
- "tables": [
-  {
-   "id": "groove_pancreatitis-matrix",
-   "title": "Groove pancreatitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A form of focal chronic pancreatitis centred on the groove between the pancreatic head, the duodenum, and the common bile duct",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastroenterology / Hepatobiliary",
+  "specialty": "Hepatobiliary / Pancreatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A form of focal chronic pancreatitis centred on the groove between the pancreatic head, the duodenum, and the common bile duct",
+      "Typically affects middle-aged men with a heavy alcohol history and is often associated with smoking",
+      "Presents with recurrent upper abdominal pain, postprandial vomiting, and weight loss, sometimes with jaundice from bile duct narrowing",
+      "Imaging shows sheet-like fibrous tissue in the groove, duodenal wall thickening, and small cysts within the duodenal wall or paraduodenal region",
+      "Duodenal luminal narrowing and reduced motility from wall oedema and fibrosis can produce a gastric outlet obstruction picture",
+      "The principal difficulty is distinguishing it from pancreatic head or periampullary carcinoma, which it can closely resemble",
+      "Management is initially conservative with alcohol and smoking cessation, pain control, and duodenal rest, reserving pancreaticoduodenectomy for intractable symptoms or when malignancy cannot be excluded"
     ],
-    [
-     "Key Investigations",
-     "Contrast-enhanced CT to characterise groove soft tissue, duodenal wall thickening, and cysts, MRI with MRCP to assess the biliary",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Groove pancreatitis is a segmental chronic pancreatitis affecting the anatomical groove bounded by the dorsocranial pancreatic head, the duodenal wall, and the common bile duct. Impaired outflow of pancreatic secretions through the minor papilla and the dorsal duct region, frequently in the setting of alcohol excess and smoking, is thought to provoke inflammation and dense fibrosis in this space, often with cystic change (cystic dystrophy) within the duodenal wall itself. The resulting scar tissue thickens and stiffens the duodenal wall, can narrow the duodenal lumen and distal bile duct, and produces a mass-like appearance that mimics a periampullary neoplasm.",
+    "additionalDifferentials": [
+      "Pancreatic head or periampullary adenocarcinoma",
+      "Duodenal adenocarcinoma",
+      "Autoimmune pancreatitis",
+      "Duodenal duplication cyst",
+      "Cholangiocarcinoma involving the distal bile duct",
+      "Ampullary neoplasm"
     ],
-    [
-     "Primary Differentials",
-     "Pancreatic head or periampullary adenocarcinoma, Duodenal adenocarcinoma, Autoimmune pancreatitis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Contrast-enhanced CT to characterise groove soft tissue, duodenal wall thickening, and cysts",
+      "MRI with MRCP to assess the biliary and pancreatic ducts and detect intramural cysts",
+      "Endoscopic ultrasound with fine-needle biopsy to sample the groove and exclude malignancy",
+      "Upper endoscopy to inspect the duodenal mucosa and assess luminal narrowing",
+      "Serum CA 19-9 to help weigh the likelihood of carcinoma",
+      "Liver function tests to detect biliary obstruction"
     ],
-    [
-     "Management Strategy",
-     "Advise complete abstinence from alcohol and smoking cessation as the key modifiable drivers of the disease",
-     "Core treatment modality"
+    "redFlags": [
+      "Features suggesting periampullary or pancreatic carcinoma, such as a discrete enhancing mass or vascular involvement",
+      "Progressive obstructive jaundice",
+      "Marked or persistent weight loss with an unexplained mass",
+      "Gastric outlet obstruction requiring intervention"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking the fibrotic groove mass for a resectable or unresectable pancreatic carcinoma",
-     "Prevent diagnostic or management error"
+    "prognosis": "Symptoms often improve with abstinence from alcohol and smoking and supportive care, but disease may be relapsing; surgical resection is frequently effective for refractory pain or obstruction and, importantly, confirms the benign nature of the lesion when carcinoma has been a concern.",
+    "pitfalls": [
+      "Mistaking the fibrotic groove mass for a resectable or unresectable pancreatic carcinoma",
+      "Over-reliance on a single biopsy, as sampling error can miss coexisting malignancy",
+      "Failing to address ongoing alcohol and tobacco use, which perpetuates the disease",
+      "Attributing all upper gastrointestinal symptoms to the pancreas while overlooking duodenal obstruction"
+    ],
+    "references": [
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "Adsay and Zamboni, paraduodenal pancreatitis reviews",
+      "Radiology reviews of groove pancreatitis imaging"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Advise complete abstinence from alcohol and smoking cessation as the key modifiable drivers of the disease",
+      "Manage pain with analgesia and pancreatic rest, and provide nutritional support with pancreatic enzyme replacement for exocrine insufficiency",
+      "Relieve duodenal or gastric outlet obstruction and biliary narrowing, using endoscopic decompression or stenting where feasible",
+      "Exclude periampullary or pancreatic head carcinoma with endoscopic ultrasound-guided biopsy before committing to conservative treatment",
+      "Offer surgical resection such as pancreaticoduodenectomy for refractory pain, obstruction or persistent diagnostic uncertainty, which also confirms the benign nature of the lesion",
+      "Coordinate multidisciplinary hepatobiliary, pancreatology and surgical review"
     ]
-   ],
-   "caption": "Overview comparison matrix for groove pancreatitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "groove-pancreatitis-real-image",
-   "title": "Groove pancreatitis: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "groove_pancreatitis-pathway",
+      "title": "Groove pancreatitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A form of focal chronic pancreatitis centred on the groove between the pancreatic head, the duodenum, and the common bile duct",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Features suggesting periampullary or pancreatic carcinoma, such as a discrete enhancing mass or vascular involvement",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Contrast-enhanced CT to characterise groove soft tissue, duodenal wall thickening, and cysts, MRI with MRCP to assess the biliary and pancreatic ducts and detect intramural cysts, Endoscopic ultrasound with fine-needle"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Advise complete abstinence from alcohol and smoking cessation as the key modifiable drivers of the disease"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking the fibrotic groove mass for a resectable or unresectable pancreatic carcinoma"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of groove pancreatitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "groove_pancreatitis-matrix",
+      "title": "Groove pancreatitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A form of focal chronic pancreatitis centred on the groove between the pancreatic head, the duodenum, and the common bile duct",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Contrast-enhanced CT to characterise groove soft tissue, duodenal wall thickening, and cysts, MRI with MRCP to assess the biliary",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Pancreatic head or periampullary adenocarcinoma, Duodenal adenocarcinoma, Autoimmune pancreatitis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Advise complete abstinence from alcohol and smoking cessation as the key modifiable drivers of the disease",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking the fibrotic groove mass for a resectable or unresectable pancreatic carcinoma",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for groove pancreatitis."
+    }
+  ],
+  "diagrams": []
 }

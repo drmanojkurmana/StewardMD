@@ -1,175 +1,153 @@
 {
- "id": "bartholin_cyst",
- "name": "Bartholin gland cyst",
- "aliases": [
-  "Bartholin cyst",
-  "Bartholin duct cyst",
-  "Bartholin's cyst",
-  "greater vestibular gland cyst"
- ],
- "class": "non_infective",
- "system": "Gynaecology",
- "specialty": "Gynaecology",
- "referenceOnly": true,
- "reference": {
-  "source": "Standard gynaecology textbook and vulval surgery guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A Bartholin cyst forms when the duct of a greater vestibular gland becomes obstructed and mucus accumulates, producing a soft, usually painless swelling at the posterior part of the labium majus (classically the four- and eight-o'clock positions)",
-   "An uninfected cyst is often an incidental finding, whereas secondary infection produces a tender, hot, fluctuant abscess with surrounding oedema and difficulty sitting or walking",
-   "The key clinical distinction is the quiescent obstructed-duct cyst versus an acutely inflamed Bartholin abscess, which changes management from observation to drainage",
-   "Small asymptomatic cysts in younger women can simply be observed, sometimes with warm baths to encourage spontaneous drainage",
-   "Symptomatic cysts and abscesses are treated by drainage with a technique that creates a lasting epithelialised tract, such as marsupialisation or insertion of a Word catheter, to reduce recurrence",
-   "Simple incision and drainage alone tends to recur because the duct opening reseals, so a fistulising procedure is preferred",
-   "Antibiotics are reserved for surrounding cellulitis, systemic features, or high-risk patients rather than for uncomplicated drainage",
-   "A new or solid Bartholin-area mass in a woman over the age of about forty, or an atypical or recurrent lesion, warrants biopsy to exclude the rare Bartholin gland carcinoma"
+  "id": "bartholin_cyst",
+  "name": "Bartholin gland cyst",
+  "aliases": [
+    "Bartholin cyst",
+    "Bartholin duct cyst",
+    "Bartholin's cyst",
+    "greater vestibular gland cyst"
   ],
-  "pathophysiology": "The greater vestibular (Bartholin) glands lie deep to the posterior vulva and secrete mucus through ducts opening into the vestibule to lubricate the introitus. When a duct becomes obstructed, often after inflammation or minor trauma, secretions are retained and the duct distends into a cyst. If the retained fluid becomes secondarily infected, typically by mixed vaginal and enteric organisms, an abscess develops with the classic features of acute inflammation. Because the underlying problem is a blocked duct, treatments that merely evacuate the contents without maintaining an open drainage tract allow re-obstruction and recurrence.",
-  "additionalDifferentials": [
-   "Bartholin gland abscess",
-   "Vulval sebaceous or epidermoid inclusion cyst",
-   "Cyst of the canal of Nuck (hydrocele)",
-   "Vulval lipoma or fibroma",
-   "Vaginal wall cyst (e.g. Gartner duct cyst)",
-   "Bartholin gland carcinoma or other vulval malignancy"
-  ],
-  "additionalInvestigations": [
-   "Clinical inspection and palpation to characterise the swelling and detect fluctuance",
-   "Swab of any purulent discharge for culture, including screening for sexually transmitted infection where relevant",
-   "Biopsy or excision histology of solid, atypical, or recurrent lesions to exclude malignancy",
-   "Pelvic or vulval ultrasound if the anatomy or diagnosis is uncertain",
-   "Assessment for diabetes or immunosuppression in recurrent abscesses"
-  ],
-  "redFlags": [
-   "A solid or irregular Bartholin-area mass, particularly in a woman over forty, raising concern for carcinoma",
-   "Rapidly spreading cellulitis, systemic sepsis, or features suggesting necrotising infection",
-   "Recurrent abscesses that may indicate underlying diabetes or immunosuppression",
-   "Non-healing lesion after appropriate drainage"
-  ],
-  "prognosis": "Most Bartholin cysts and abscesses resolve well after drainage with a fistulising technique, though recurrence can occur; the rare Bartholin gland carcinoma carries a far more serious prognosis and must not be missed in older women.",
-  "pitfalls": [
-   "Performing simple incision and drainage without a marsupialisation or catheter technique, leading to recurrence",
-   "Missing a Bartholin gland carcinoma by assuming any posterior vulval mass in an older woman is a benign cyst",
-   "Prescribing antibiotics for a fluctuant abscess instead of draining it",
-   "Failing to consider diabetes or immunosuppression in recurrent disease",
-   "Mistaking other vulval or vaginal cysts for a Bartholin cyst because of location"
-  ],
-  "references": [
-   "Standard gynaecology reference text on vulval and vaginal cysts",
-   "Vulval surgery and minor procedures guidance"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Observation of small asymptomatic cysts, with warm sitz baths to encourage spontaneous drainage",
-   "Marsupialisation or Word catheter insertion for symptomatic cysts to create a lasting drainage tract",
-   "Avoidance of simple incision and drainage alone, which tends to recur as the duct reseals",
-   "Swab and treatment of any secondary infection, screening for sexually transmitted organisms where relevant",
-   "Gland excision for recurrent cysts resistant to fistulising procedures",
-   "Biopsy or excision histology of solid, atypical or recurrent lesions, particularly in older women, to exclude Bartholin gland carcinoma",
-   "Assessment for diabetes or immunosuppression in recurrent disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "bartholin_cyst-pathway",
-   "title": "Bartholin gland cyst: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A Bartholin cyst forms when the duct of a greater vestibular gland becomes obstructed and mucus accumulates, producing a soft, usually painless swelling at the posterior part of the labium majus (classically the four- and eight-o'clock",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A solid or irregular Bartholin-area mass, particularly in a woman over forty, raising concern for carcinoma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical inspection and palpation to characterise the swelling and detect fluctuance, Swab of any purulent discharge for culture, including screening for sexually transmitted infection where relevant, Biopsy or excision"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Observation of small asymptomatic cysts, with warm sitz baths to encourage spontaneous drainage"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Performing simple incision and drainage without a marsupialisation or catheter technique, leading to recurrence"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of bartholin gland cyst."
-  }
- ],
- "tables": [
-  {
-   "id": "bartholin_cyst-matrix",
-   "title": "Bartholin gland cyst: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A Bartholin cyst forms when the duct of a greater vestibular gland becomes obstructed and mucus accumulates, producing a soft,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gynaecology",
+  "specialty": "Gynaecology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Standard gynaecology textbook and vulval surgery guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A Bartholin cyst forms when the duct of a greater vestibular gland becomes obstructed and mucus accumulates, producing a soft, usually painless swelling at the posterior part of the labium majus (classically the four- and eight-o'clock positions)",
+      "An uninfected cyst is often an incidental finding, whereas secondary infection produces a tender, hot, fluctuant abscess with surrounding oedema and difficulty sitting or walking",
+      "The key clinical distinction is the quiescent obstructed-duct cyst versus an acutely inflamed Bartholin abscess, which changes management from observation to drainage",
+      "Small asymptomatic cysts in younger women can simply be observed, sometimes with warm baths to encourage spontaneous drainage",
+      "Symptomatic cysts and abscesses are treated by drainage with a technique that creates a lasting epithelialised tract, such as marsupialisation or insertion of a Word catheter, to reduce recurrence",
+      "Simple incision and drainage alone tends to recur because the duct opening reseals, so a fistulising procedure is preferred",
+      "Antibiotics are reserved for surrounding cellulitis, systemic features, or high-risk patients rather than for uncomplicated drainage",
+      "A new or solid Bartholin-area mass in a woman over the age of about forty, or an atypical or recurrent lesion, warrants biopsy to exclude the rare Bartholin gland carcinoma"
     ],
-    [
-     "Key Investigations",
-     "Clinical inspection and palpation to characterise the swelling and detect fluctuance, Swab of any purulent discharge for culture,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The greater vestibular (Bartholin) glands lie deep to the posterior vulva and secrete mucus through ducts opening into the vestibule to lubricate the introitus. When a duct becomes obstructed, often after inflammation or minor trauma, secretions are retained and the duct distends into a cyst. If the retained fluid becomes secondarily infected, typically by mixed vaginal and enteric organisms, an abscess develops with the classic features of acute inflammation. Because the underlying problem is a blocked duct, treatments that merely evacuate the contents without maintaining an open drainage tract allow re-obstruction and recurrence.",
+    "additionalDifferentials": [
+      "Bartholin gland abscess",
+      "Vulval sebaceous or epidermoid inclusion cyst",
+      "Cyst of the canal of Nuck (hydrocele)",
+      "Vulval lipoma or fibroma",
+      "Vaginal wall cyst (e.g. Gartner duct cyst)",
+      "Bartholin gland carcinoma or other vulval malignancy"
     ],
-    [
-     "Primary Differentials",
-     "Bartholin gland abscess, Vulval sebaceous or epidermoid inclusion cyst, Cyst of the canal of Nuck (hydrocele)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical inspection and palpation to characterise the swelling and detect fluctuance",
+      "Swab of any purulent discharge for culture, including screening for sexually transmitted infection where relevant",
+      "Biopsy or excision histology of solid, atypical, or recurrent lesions to exclude malignancy",
+      "Pelvic or vulval ultrasound if the anatomy or diagnosis is uncertain",
+      "Assessment for diabetes or immunosuppression in recurrent abscesses"
     ],
-    [
-     "Management Strategy",
-     "Observation of small asymptomatic cysts, with warm sitz baths to encourage spontaneous drainage",
-     "Core treatment modality"
+    "redFlags": [
+      "A solid or irregular Bartholin-area mass, particularly in a woman over forty, raising concern for carcinoma",
+      "Rapidly spreading cellulitis, systemic sepsis, or features suggesting necrotising infection",
+      "Recurrent abscesses that may indicate underlying diabetes or immunosuppression",
+      "Non-healing lesion after appropriate drainage"
     ],
-    [
-     "Clinical Pitfall",
-     "Performing simple incision and drainage without a marsupialisation or catheter technique, leading to recurrence",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most Bartholin cysts and abscesses resolve well after drainage with a fistulising technique, though recurrence can occur; the rare Bartholin gland carcinoma carries a far more serious prognosis and must not be missed in older women.",
+    "pitfalls": [
+      "Performing simple incision and drainage without a marsupialisation or catheter technique, leading to recurrence",
+      "Missing a Bartholin gland carcinoma by assuming any posterior vulval mass in an older woman is a benign cyst",
+      "Prescribing antibiotics for a fluctuant abscess instead of draining it",
+      "Failing to consider diabetes or immunosuppression in recurrent disease",
+      "Mistaking other vulval or vaginal cysts for a Bartholin cyst because of location"
+    ],
+    "references": [
+      "Standard gynaecology reference text on vulval and vaginal cysts",
+      "Vulval surgery and minor procedures guidance"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Observation of small asymptomatic cysts, with warm sitz baths to encourage spontaneous drainage",
+      "Marsupialisation or Word catheter insertion for symptomatic cysts to create a lasting drainage tract",
+      "Avoidance of simple incision and drainage alone, which tends to recur as the duct reseals",
+      "Swab and treatment of any secondary infection, screening for sexually transmitted organisms where relevant",
+      "Gland excision for recurrent cysts resistant to fistulising procedures",
+      "Biopsy or excision histology of solid, atypical or recurrent lesions, particularly in older women, to exclude Bartholin gland carcinoma",
+      "Assessment for diabetes or immunosuppression in recurrent disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for bartholin gland cyst."
-  }
- ],
- "diagrams": [
-  {
-   "id": "bartholin-cyst-real-image",
-   "title": "Bartholin gland cyst: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "bartholin_cyst-pathway",
+      "title": "Bartholin gland cyst: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A Bartholin cyst forms when the duct of a greater vestibular gland becomes obstructed and mucus accumulates, producing a soft, usually painless swelling at the posterior part of the labium majus (classically the four- and eight-o'clock",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A solid or irregular Bartholin-area mass, particularly in a woman over forty, raising concern for carcinoma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical inspection and palpation to characterise the swelling and detect fluctuance, Swab of any purulent discharge for culture, including screening for sexually transmitted infection where relevant, Biopsy or excision"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Observation of small asymptomatic cysts, with warm sitz baths to encourage spontaneous drainage"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Performing simple incision and drainage without a marsupialisation or catheter technique, leading to recurrence"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of bartholin gland cyst."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "bartholin_cyst-matrix",
+      "title": "Bartholin gland cyst: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A Bartholin cyst forms when the duct of a greater vestibular gland becomes obstructed and mucus accumulates, producing a soft,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical inspection and palpation to characterise the swelling and detect fluctuance, Swab of any purulent discharge for culture,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Bartholin gland abscess, Vulval sebaceous or epidermoid inclusion cyst, Cyst of the canal of Nuck (hydrocele)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Observation of small asymptomatic cysts, with warm sitz baths to encourage spontaneous drainage",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Performing simple incision and drainage without a marsupialisation or catheter technique, leading to recurrence",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for bartholin gland cyst."
+    }
+  ],
+  "diagrams": []
 }

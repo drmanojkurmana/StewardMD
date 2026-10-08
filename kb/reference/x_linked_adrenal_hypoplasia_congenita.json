@@ -1,173 +1,151 @@
 {
- "id": "x_linked_adrenal_hypoplasia_congenita",
- "name": "X-linked adrenal hypoplasia congenita (NR0B1/DAX1)",
- "aliases": [
-  "AHC",
-  "X-linked AHC",
-  "DAX1 deficiency",
-  "NR0B1-related adrenal hypoplasia",
-  "adrenal hypoplasia congenita with hypogonadotropic hypogonadism"
- ],
- "class": "non_infective",
- "system": "Endocrine / Genetics",
- "specialty": "Endocrinology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Textbook of Endocrinology / Nelson Textbook of Pediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An X-linked disorder of adrenal development caused by mutations in NR0B1, which encodes the nuclear receptor DAX1",
-   "Typically affects males and presents with primary adrenal insufficiency, often with a salt-wasting crisis in infancy or later childhood",
-   "Presentation includes hyponatraemia, hyperkalaemia, hypoglycaemia and hyperpigmentation from combined glucocorticoid and mineralocorticoid deficiency",
-   "Hypogonadotropic hypogonadism characteristically emerges later and manifests as absent or arrested puberty",
-   "The combination of primary adrenal failure and later gonadotropin deficiency is a strong diagnostic clue",
-   "Contiguous gene deletions at the locus can co-occur with Duchenne muscular dystrophy and glycerol kinase deficiency",
-   "Impaired spermatogenesis frequently persists, so fertility is often affected despite hormone replacement"
+  "id": "x_linked_adrenal_hypoplasia_congenita",
+  "name": "X-linked adrenal hypoplasia congenita (NR0B1/DAX1)",
+  "aliases": [
+    "AHC",
+    "X-linked AHC",
+    "DAX1 deficiency",
+    "NR0B1-related adrenal hypoplasia",
+    "adrenal hypoplasia congenita with hypogonadotropic hypogonadism"
   ],
-  "pathophysiology": "DAX1, the product of NR0B1, is a nuclear receptor essential for the development and function of the adrenal cortex and for the hypothalamic-pituitary-gonadal axis. Loss-of-function mutations lead to failure of normal adrenocortical development, producing primary adrenal insufficiency with deficiency of both glucocorticoids and mineralocorticoids. The same gene is required for normal gonadotropin regulation and gonadal function, so affected males also develop hypogonadotropic hypogonadism, typically becoming apparent around the age of expected puberty. The X-linked inheritance explains the predominance of affected males.",
-  "additionalDifferentials": [
-   "Congenital adrenal hyperplasia",
-   "Autoimmune primary adrenal insufficiency",
-   "Adrenoleukodystrophy",
-   "Familial glucocorticoid deficiency",
-   "Other causes of hypogonadotropic hypogonadism such as Kallmann syndrome"
-  ],
-  "additionalInvestigations": [
-   "Serum electrolytes, glucose and paired cortisol with ACTH",
-   "Plasma renin and aldosterone to assess mineralocorticoid status",
-   "ACTH stimulation testing to confirm adrenal insufficiency",
-   "Gonadotropins and sex steroids, especially around the age of expected puberty",
-   "Molecular genetic testing of NR0B1 including assessment for contiguous gene deletions"
-  ],
-  "redFlags": [
-   "Adrenal (salt-wasting) crisis with hypotension, hyponatraemia and hyperkalaemia requiring emergency treatment",
-   "Hypoglycaemia and collapse in an infant or child from glucocorticoid deficiency",
-   "Absent or arrested puberty indicating evolving hypogonadotropic hypogonadism",
-   "Associated neuromuscular features suggesting a contiguous gene deletion syndrome"
-  ],
-  "prognosis": "With lifelong glucocorticoid and mineralocorticoid replacement and induction of puberty when required, survival and development are generally good, although impaired fertility commonly persists and adrenal crises remain a lifelong risk if replacement lapses.",
-  "pitfalls": [
-   "Misattributing the adrenal insufficiency to congenital adrenal hyperplasia and missing the underlying diagnosis",
-   "Failing to anticipate later hypogonadotropic hypogonadism and delayed puberty",
-   "Overlooking associated neuromuscular disease from a contiguous gene deletion",
-   "Underestimating the ongoing risk of adrenal crisis during intercurrent illness"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "Nelson Textbook of Pediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Lifelong glucocorticoid replacement with hydrocortisone and mineralocorticoid replacement with fludrocortisone for the combined adrenal insufficiency",
-   "Salt supplementation in infancy to support mineralocorticoid deficiency",
-   "Emergency management of adrenal crisis with intravenous fluids, parenteral hydrocortisone and correction of hypoglycaemia and electrolyte disturbance, supported by sick-day dosing rules and a steroid emergency card",
-   "Induction of puberty and testosterone replacement for the hypogonadotropic hypogonadism, with assisted reproduction or gonadotropin therapy for the commonly impaired fertility",
-   "Regular monitoring of growth, electrolytes, blood pressure and pubertal progression",
-   "Molecular testing of NR0B1 including assessment for a contiguous gene deletion involving Duchenne muscular dystrophy and glycerol kinase deficiency, with genetic counselling for this X-linked condition",
-   "Endocrinology-led multidisciplinary follow-up with escalation for suspected crisis"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "x_linked_adrenal_hypoplasia_congenita-pathway",
-   "title": "X-linked adrenal hypoplasia congenita (NR0B1/DAX1): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An X-linked disorder of adrenal development caused by mutations in NR0B1, which encodes the nuclear receptor DAX1",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Adrenal (salt-wasting) crisis with hypotension, hyponatraemia and hyperkalaemia requiring emergency treatment",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum electrolytes, glucose and paired cortisol with ACTH, Plasma renin and aldosterone to assess mineralocorticoid status, ACTH stimulation testing to confirm adrenal insufficiency"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Lifelong glucocorticoid replacement with hydrocortisone and mineralocorticoid replacement with fludrocortisone for the combined adrenal insufficiency"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misattributing the adrenal insufficiency to congenital adrenal hyperplasia and missing the underlying diagnosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of x-linked adrenal hypoplasia congenita (nr0b1/dax1)."
-  }
- ],
- "tables": [
-  {
-   "id": "x_linked_adrenal_hypoplasia_congenita-matrix",
-   "title": "X-linked adrenal hypoplasia congenita (NR0B1/DAX1): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An X-linked disorder of adrenal development caused by mutations in NR0B1, which encodes the nuclear receptor DAX1",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine / Genetics",
+  "specialty": "Endocrinology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Textbook of Endocrinology / Nelson Textbook of Pediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An X-linked disorder of adrenal development caused by mutations in NR0B1, which encodes the nuclear receptor DAX1",
+      "Typically affects males and presents with primary adrenal insufficiency, often with a salt-wasting crisis in infancy or later childhood",
+      "Presentation includes hyponatraemia, hyperkalaemia, hypoglycaemia and hyperpigmentation from combined glucocorticoid and mineralocorticoid deficiency",
+      "Hypogonadotropic hypogonadism characteristically emerges later and manifests as absent or arrested puberty",
+      "The combination of primary adrenal failure and later gonadotropin deficiency is a strong diagnostic clue",
+      "Contiguous gene deletions at the locus can co-occur with Duchenne muscular dystrophy and glycerol kinase deficiency",
+      "Impaired spermatogenesis frequently persists, so fertility is often affected despite hormone replacement"
     ],
-    [
-     "Key Investigations",
-     "Serum electrolytes, glucose and paired cortisol with ACTH, Plasma renin and aldosterone to assess mineralocorticoid status, ACTH",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "DAX1, the product of NR0B1, is a nuclear receptor essential for the development and function of the adrenal cortex and for the hypothalamic-pituitary-gonadal axis. Loss-of-function mutations lead to failure of normal adrenocortical development, producing primary adrenal insufficiency with deficiency of both glucocorticoids and mineralocorticoids. The same gene is required for normal gonadotropin regulation and gonadal function, so affected males also develop hypogonadotropic hypogonadism, typically becoming apparent around the age of expected puberty. The X-linked inheritance explains the predominance of affected males.",
+    "additionalDifferentials": [
+      "Congenital adrenal hyperplasia",
+      "Autoimmune primary adrenal insufficiency",
+      "Adrenoleukodystrophy",
+      "Familial glucocorticoid deficiency",
+      "Other causes of hypogonadotropic hypogonadism such as Kallmann syndrome"
     ],
-    [
-     "Primary Differentials",
-     "Congenital adrenal hyperplasia, Autoimmune primary adrenal insufficiency, Adrenoleukodystrophy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum electrolytes, glucose and paired cortisol with ACTH",
+      "Plasma renin and aldosterone to assess mineralocorticoid status",
+      "ACTH stimulation testing to confirm adrenal insufficiency",
+      "Gonadotropins and sex steroids, especially around the age of expected puberty",
+      "Molecular genetic testing of NR0B1 including assessment for contiguous gene deletions"
     ],
-    [
-     "Management Strategy",
-     "Lifelong glucocorticoid replacement with hydrocortisone and mineralocorticoid replacement with fludrocortisone for the combined",
-     "Core treatment modality"
+    "redFlags": [
+      "Adrenal (salt-wasting) crisis with hypotension, hyponatraemia and hyperkalaemia requiring emergency treatment",
+      "Hypoglycaemia and collapse in an infant or child from glucocorticoid deficiency",
+      "Absent or arrested puberty indicating evolving hypogonadotropic hypogonadism",
+      "Associated neuromuscular features suggesting a contiguous gene deletion syndrome"
     ],
-    [
-     "Clinical Pitfall",
-     "Misattributing the adrenal insufficiency to congenital adrenal hyperplasia and missing the underlying diagnosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "With lifelong glucocorticoid and mineralocorticoid replacement and induction of puberty when required, survival and development are generally good, although impaired fertility commonly persists and adrenal crises remain a lifelong risk if replacement lapses.",
+    "pitfalls": [
+      "Misattributing the adrenal insufficiency to congenital adrenal hyperplasia and missing the underlying diagnosis",
+      "Failing to anticipate later hypogonadotropic hypogonadism and delayed puberty",
+      "Overlooking associated neuromuscular disease from a contiguous gene deletion",
+      "Underestimating the ongoing risk of adrenal crisis during intercurrent illness"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "Nelson Textbook of Pediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Lifelong glucocorticoid replacement with hydrocortisone and mineralocorticoid replacement with fludrocortisone for the combined adrenal insufficiency",
+      "Salt supplementation in infancy to support mineralocorticoid deficiency",
+      "Emergency management of adrenal crisis with intravenous fluids, parenteral hydrocortisone and correction of hypoglycaemia and electrolyte disturbance, supported by sick-day dosing rules and a steroid emergency card",
+      "Induction of puberty and testosterone replacement for the hypogonadotropic hypogonadism, with assisted reproduction or gonadotropin therapy for the commonly impaired fertility",
+      "Regular monitoring of growth, electrolytes, blood pressure and pubertal progression",
+      "Molecular testing of NR0B1 including assessment for a contiguous gene deletion involving Duchenne muscular dystrophy and glycerol kinase deficiency, with genetic counselling for this X-linked condition",
+      "Endocrinology-led multidisciplinary follow-up with escalation for suspected crisis"
     ]
-   ],
-   "caption": "Overview comparison matrix for x-linked adrenal hypoplasia congenita (nr0b1/dax1)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "x-linked-adrenal-hypoplasia-congenita-real-image",
-   "title": "X-linked adrenal hypoplasia congenita (NR0B1/DAX1): Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "x_linked_adrenal_hypoplasia_congenita-pathway",
+      "title": "X-linked adrenal hypoplasia congenita (NR0B1/DAX1): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An X-linked disorder of adrenal development caused by mutations in NR0B1, which encodes the nuclear receptor DAX1",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Adrenal (salt-wasting) crisis with hypotension, hyponatraemia and hyperkalaemia requiring emergency treatment",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum electrolytes, glucose and paired cortisol with ACTH, Plasma renin and aldosterone to assess mineralocorticoid status, ACTH stimulation testing to confirm adrenal insufficiency"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Lifelong glucocorticoid replacement with hydrocortisone and mineralocorticoid replacement with fludrocortisone for the combined adrenal insufficiency"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misattributing the adrenal insufficiency to congenital adrenal hyperplasia and missing the underlying diagnosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of x-linked adrenal hypoplasia congenita (nr0b1/dax1)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "x_linked_adrenal_hypoplasia_congenita-matrix",
+      "title": "X-linked adrenal hypoplasia congenita (NR0B1/DAX1): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An X-linked disorder of adrenal development caused by mutations in NR0B1, which encodes the nuclear receptor DAX1",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum electrolytes, glucose and paired cortisol with ACTH, Plasma renin and aldosterone to assess mineralocorticoid status, ACTH",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Congenital adrenal hyperplasia, Autoimmune primary adrenal insufficiency, Adrenoleukodystrophy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Lifelong glucocorticoid replacement with hydrocortisone and mineralocorticoid replacement with fludrocortisone for the combined",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misattributing the adrenal insufficiency to congenital adrenal hyperplasia and missing the underlying diagnosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for x-linked adrenal hypoplasia congenita (nr0b1/dax1)."
+    }
+  ],
+  "diagrams": []
 }

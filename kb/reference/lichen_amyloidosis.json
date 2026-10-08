@@ -1,175 +1,153 @@
 {
- "id": "lichen_amyloidosis",
- "name": "Lichen amyloidosis",
- "aliases": [
-  "lichenoid amyloidosis",
-  "primary cutaneous lichen amyloidosis",
-  "lichen amyloidosis"
- ],
- "class": "non_infective",
- "system": "Dermatology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A form of primary localised cutaneous amyloidosis presenting as intensely itchy, discrete, firm, hyperkeratotic and often hyperpigmented papules",
-   "Characteristically involves the shins (pretibial) bilaterally and may also affect the extensor forearms, thighs, and upper back",
-   "Papules frequently coalesce into rippled or rough plaques and commonly show the Koebner phenomenon from chronic scratching",
-   "The amyloid is keratin-derived, from degenerate keratinocyte (filamentous) material, and is not associated with systemic (AL) amyloidosis",
-   "Chronic rubbing and scratching are central, and the condition overlaps with, and may be a variant of, lichen simplex chronicus and prurigo",
-   "More common in South-East Asian, Middle-Eastern, and South American populations, with a familial subset associated with OSMR and IL31RA mutations",
-   "Diagnosis is confirmed histologically by amyloid in the papillary dermis that stains with Congo red and shows apple-green birefringence under polarised light",
-   "Treatment is difficult and centres on breaking the itch-scratch cycle with potent topical corticosteroids (often under occlusion), keratolytics, and phototherapy"
+  "id": "lichen_amyloidosis",
+  "name": "Lichen amyloidosis",
+  "aliases": [
+    "lichenoid amyloidosis",
+    "primary cutaneous lichen amyloidosis",
+    "lichen amyloidosis"
   ],
-  "pathophysiology": "In lichen amyloidosis the amyloid deposits are of keratinocyte origin. Chronic friction and scratching are thought to injure basal keratinocytes, which undergo apoptosis (filamentous degeneration) and shed cytokeratin that is then converted, with the help of dermal cells, into amyloid deposited in the papillary dermis. The keratin-derived nature of the amyloid explains why the disease remains confined to the skin without systemic organ involvement, and the persistence of the itch-scratch cycle continuously supplies degenerate keratin, perpetuating and enlarging the deposits.",
-  "additionalDifferentials": [
-   "Lichen simplex chronicus",
-   "Hypertrophic lichen planus",
-   "Prurigo nodularis",
-   "Macular or nodular cutaneous amyloidosis",
-   "Pretibial myxoedema",
-   "Colloid milium",
-   "Papular mucinosis"
-  ],
-  "additionalInvestigations": [
-   "Skin biopsy with Congo red staining showing apple-green birefringence and confirming papillary dermal amyloid",
-   "Immunohistochemistry for cytokeratin to demonstrate the keratinous origin of the amyloid",
-   "Assessment for a family history of primary cutaneous amyloidosis in familial forms",
-   "Evaluation to exclude systemic amyloidosis where the presentation is atypical, although this form is not systemic",
-   "Documentation of the itch-scratch pattern and Koebnerisation"
-  ],
-  "redFlags": [
-   "Atypical or widespread deposition prompting exclusion of systemic amyloidosis",
-   "Severe intractable pruritus with marked functional or sleep disturbance",
-   "Rapidly changing or ulcerating lesions requiring re-biopsy"
-  ],
-  "prognosis": "Benign but chronic and often refractory; it poses no systemic threat, but the itch and cosmetic appearance persist and lesions recur while scratching continues.",
-  "pitfalls": [
-   "Assuming an association with systemic amyloidosis, which does not apply to this keratin-derived form",
-   "Failing to address the itch-scratch cycle that perpetuates the deposits",
-   "Confusing it with lichen simplex chronicus or hypertrophic lichen planus without biopsy",
-   "Overlooking familial cases and their inheritance"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Fitzpatrick's Dermatology in General Medicine"
-  ],
-  "crossLinks": [
-   "macular_amyloidosis"
-  ],
-  "management": [
-   "Break the itch-scratch cycle as the mainstay, using potent topical corticosteroids, often under occlusion, together with antipruritic measures",
-   "Control pruritus with emollients, menthol preparations, oral antihistamines and, in resistant cases, gabapentinoids",
-   "Reduce hyperkeratotic papules and plaques with topical keratolytics, dimethyl sulfoxide or intralesional corticosteroids",
-   "Phototherapy with narrowband ultraviolet B or systemic retinoids such as acitretin for extensive or refractory disease",
-   "Physical measures and behavioural advice to prevent scratching and Koebnerisation",
-   "Reassurance that the condition is skin-limited and not associated with systemic amyloidosis",
-   "Consider familial evaluation for OSMR and IL31RA variants where there is a family history"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "lichen_amyloidosis-pathway",
-   "title": "Lichen amyloidosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A form of primary localised cutaneous amyloidosis presenting as intensely itchy, discrete, firm, hyperkeratotic and often hyperpigmented papules",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Atypical or widespread deposition prompting exclusion of systemic amyloidosis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin biopsy with Congo red staining showing apple-green birefringence and confirming papillary dermal amyloid, Immunohistochemistry for cytokeratin to demonstrate the keratinous origin of the amyloid, Assessment for a"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Break the itch-scratch cycle as the mainstay, using potent topical corticosteroids, often under occlusion, together with antipruritic measures"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming an association with systemic amyloidosis, which does not apply to this keratin-derived form"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of lichen amyloidosis."
-  }
- ],
- "tables": [
-  {
-   "id": "lichen_amyloidosis-matrix",
-   "title": "Lichen amyloidosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A form of primary localised cutaneous amyloidosis presenting as intensely itchy, discrete, firm, hyperkeratotic and often",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A form of primary localised cutaneous amyloidosis presenting as intensely itchy, discrete, firm, hyperkeratotic and often hyperpigmented papules",
+      "Characteristically involves the shins (pretibial) bilaterally and may also affect the extensor forearms, thighs, and upper back",
+      "Papules frequently coalesce into rippled or rough plaques and commonly show the Koebner phenomenon from chronic scratching",
+      "The amyloid is keratin-derived, from degenerate keratinocyte (filamentous) material, and is not associated with systemic (AL) amyloidosis",
+      "Chronic rubbing and scratching are central, and the condition overlaps with, and may be a variant of, lichen simplex chronicus and prurigo",
+      "More common in South-East Asian, Middle-Eastern, and South American populations, with a familial subset associated with OSMR and IL31RA mutations",
+      "Diagnosis is confirmed histologically by amyloid in the papillary dermis that stains with Congo red and shows apple-green birefringence under polarised light",
+      "Treatment is difficult and centres on breaking the itch-scratch cycle with potent topical corticosteroids (often under occlusion), keratolytics, and phototherapy"
     ],
-    [
-     "Key Investigations",
-     "Skin biopsy with Congo red staining showing apple-green birefringence and confirming papillary dermal amyloid,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "In lichen amyloidosis the amyloid deposits are of keratinocyte origin. Chronic friction and scratching are thought to injure basal keratinocytes, which undergo apoptosis (filamentous degeneration) and shed cytokeratin that is then converted, with the help of dermal cells, into amyloid deposited in the papillary dermis. The keratin-derived nature of the amyloid explains why the disease remains confined to the skin without systemic organ involvement, and the persistence of the itch-scratch cycle continuously supplies degenerate keratin, perpetuating and enlarging the deposits.",
+    "additionalDifferentials": [
+      "Lichen simplex chronicus",
+      "Hypertrophic lichen planus",
+      "Prurigo nodularis",
+      "Macular or nodular cutaneous amyloidosis",
+      "Pretibial myxoedema",
+      "Colloid milium",
+      "Papular mucinosis"
     ],
-    [
-     "Primary Differentials",
-     "Lichen simplex chronicus, Hypertrophic lichen planus, Prurigo nodularis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin biopsy with Congo red staining showing apple-green birefringence and confirming papillary dermal amyloid",
+      "Immunohistochemistry for cytokeratin to demonstrate the keratinous origin of the amyloid",
+      "Assessment for a family history of primary cutaneous amyloidosis in familial forms",
+      "Evaluation to exclude systemic amyloidosis where the presentation is atypical, although this form is not systemic",
+      "Documentation of the itch-scratch pattern and Koebnerisation"
     ],
-    [
-     "Management Strategy",
-     "Break the itch-scratch cycle as the mainstay, using potent topical corticosteroids, often under occlusion, together with",
-     "Core treatment modality"
+    "redFlags": [
+      "Atypical or widespread deposition prompting exclusion of systemic amyloidosis",
+      "Severe intractable pruritus with marked functional or sleep disturbance",
+      "Rapidly changing or ulcerating lesions requiring re-biopsy"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming an association with systemic amyloidosis, which does not apply to this keratin-derived form",
-     "Prevent diagnostic or management error"
+    "prognosis": "Benign but chronic and often refractory; it poses no systemic threat, but the itch and cosmetic appearance persist and lesions recur while scratching continues.",
+    "pitfalls": [
+      "Assuming an association with systemic amyloidosis, which does not apply to this keratin-derived form",
+      "Failing to address the itch-scratch cycle that perpetuates the deposits",
+      "Confusing it with lichen simplex chronicus or hypertrophic lichen planus without biopsy",
+      "Overlooking familial cases and their inheritance"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Fitzpatrick's Dermatology in General Medicine"
+    ],
+    "crossLinks": [
+      "macular_amyloidosis"
+    ],
+    "management": [
+      "Break the itch-scratch cycle as the mainstay, using potent topical corticosteroids, often under occlusion, together with antipruritic measures",
+      "Control pruritus with emollients, menthol preparations, oral antihistamines and, in resistant cases, gabapentinoids",
+      "Reduce hyperkeratotic papules and plaques with topical keratolytics, dimethyl sulfoxide or intralesional corticosteroids",
+      "Phototherapy with narrowband ultraviolet B or systemic retinoids such as acitretin for extensive or refractory disease",
+      "Physical measures and behavioural advice to prevent scratching and Koebnerisation",
+      "Reassurance that the condition is skin-limited and not associated with systemic amyloidosis",
+      "Consider familial evaluation for OSMR and IL31RA variants where there is a family history"
     ]
-   ],
-   "caption": "Overview comparison matrix for lichen amyloidosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "lichen-amyloidosis-real-image",
-   "title": "Lichen amyloidosis: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "lichen_amyloidosis-pathway",
+      "title": "Lichen amyloidosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A form of primary localised cutaneous amyloidosis presenting as intensely itchy, discrete, firm, hyperkeratotic and often hyperpigmented papules",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Atypical or widespread deposition prompting exclusion of systemic amyloidosis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin biopsy with Congo red staining showing apple-green birefringence and confirming papillary dermal amyloid, Immunohistochemistry for cytokeratin to demonstrate the keratinous origin of the amyloid, Assessment for a"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Break the itch-scratch cycle as the mainstay, using potent topical corticosteroids, often under occlusion, together with antipruritic measures"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming an association with systemic amyloidosis, which does not apply to this keratin-derived form"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of lichen amyloidosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "lichen_amyloidosis-matrix",
+      "title": "Lichen amyloidosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A form of primary localised cutaneous amyloidosis presenting as intensely itchy, discrete, firm, hyperkeratotic and often",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin biopsy with Congo red staining showing apple-green birefringence and confirming papillary dermal amyloid,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Lichen simplex chronicus, Hypertrophic lichen planus, Prurigo nodularis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Break the itch-scratch cycle as the mainstay, using potent topical corticosteroids, often under occlusion, together with",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming an association with systemic amyloidosis, which does not apply to this keratin-derived form",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for lichen amyloidosis."
+    }
+  ],
+  "diagrams": []
 }

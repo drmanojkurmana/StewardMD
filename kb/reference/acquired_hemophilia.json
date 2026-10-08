@@ -1,173 +1,151 @@
 {
- "id": "acquired_hemophilia",
- "name": "Acquired haemophilia A (factor VIII autoantibodies)",
- "aliases": [
-  "acquired haemophilia A",
-  "AHA",
-  "factor VIII inhibitor",
-  "acquired factor VIII deficiency"
- ],
- "class": "non_infective",
- "system": "Haematology",
- "specialty": "Haematology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Hematology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An autoimmune disorder in which acquired autoantibodies neutralise factor VIII, causing sudden severe bleeding in a person with no prior bleeding history",
-   "Bleeding is typically into soft tissues, muscles, skin (extensive bruising), and mucous membranes, in contrast to the haemarthroses of congenital haemophilia",
-   "Classically presents in older adults or in the peripartum period, and is often associated with malignancy, autoimmune disease, pregnancy, or drugs, though many cases are idiopathic",
-   "The screening clue is an isolated prolonged activated partial thromboplastin time with a normal prothrombin time",
-   "A mixing study fails to correct the prolonged APTT, and correction may worsen on incubation, indicating a time- and temperature-dependent inhibitor",
-   "Diagnosis is confirmed by a low factor VIII level with a measurable factor VIII inhibitor titre",
-   "Management combines control of acute bleeding with bypassing agents and eradication of the antibody with immunosuppression"
+  "id": "acquired_hemophilia",
+  "name": "Acquired haemophilia A (factor VIII autoantibodies)",
+  "aliases": [
+    "acquired haemophilia A",
+    "AHA",
+    "factor VIII inhibitor",
+    "acquired factor VIII deficiency"
   ],
-  "pathophysiology": "Acquired haemophilia A arises when the immune system generates autoantibodies against endogenous factor VIII. These inhibitors interfere with factor VIII's cofactor function in the intrinsic tenase complex, sharply reducing factor VIII activity and impairing thrombin generation. Unlike alloantibodies in congenital haemophilia, these autoantibodies often show complex, non-linear (type II) kinetics, so residual factor VIII may be detectable yet bleeding remains severe. The trigger for autoantibody formation is frequently an underlying malignancy, autoimmune condition, pregnancy, or medication, but a substantial proportion are idiopathic.",
-  "additionalDifferentials": [
-   "Congenital haemophilia A with an alloantibody inhibitor",
-   "Acquired von Willebrand syndrome",
-   "Lupus anticoagulant prolonging the APTT (typically without bleeding)",
-   "Disseminated intravascular coagulation",
-   "Heparin contamination of the sample",
-   "Vitamin K deficiency or liver disease affecting coagulation"
-  ],
-  "additionalInvestigations": [
-   "Activated partial thromboplastin time with prothrombin time to localise the defect",
-   "Mixing study, including incubated mixing, to demonstrate a time-dependent non-correcting inhibitor",
-   "Factor VIII activity assay showing a reduced level",
-   "Bethesda (or Nijmegen-modified) assay to quantify the factor VIII inhibitor titre",
-   "Von Willebrand factor studies to distinguish acquired von Willebrand syndrome",
-   "Investigation for an underlying malignancy or autoimmune disorder"
-  ],
-  "redFlags": [
-   "Extensive spontaneous bruising or muscle haematoma in a previously unaffected adult",
-   "Retroperitoneal, gastrointestinal, or intracranial bleeding",
-   "Compartment syndrome or airway compromise from an expanding haematoma",
-   "Peripartum bleeding with an unexplained isolated prolonged APTT"
-  ],
-  "prognosis": "Acute mortality is significant because of severe unheralded bleeding, but with prompt haemostatic control and antibody eradication most patients achieve remission. Relapse can occur, so monitoring after immunosuppression is important, and outcome is also influenced by any underlying disorder.",
-  "pitfalls": [
-   "Attributing an isolated prolonged APTT to a lupus anticoagulant and missing a bleeding inhibitor",
-   "Omitting an incubated mixing study, so a time-dependent inhibitor is not detected",
-   "Attempting factor VIII replacement alone when a bypassing strategy is needed for high-titre inhibitors",
-   "Failing to search for an underlying malignancy or autoimmune trigger"
-  ],
-  "references": [
-   "Williams Hematology",
-   "Hoffman: Hematology - Basic Principles and Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat acute haemorrhage with bypassing agents (recombinant activated factor VII or activated prothrombin complex concentrate) or recombinant porcine factor VIII",
-   "Immunosuppressive inhibitor eradication with corticosteroids, adding rituximab or cyclophosphamide for higher-titre or refractory disease",
-   "Avoid intramuscular injections, deep venepuncture and elective invasive procedures",
-   "Screen for and manage an underlying malignancy, autoimmune disorder or peripartum trigger",
-   "Serial monitoring of factor VIII level and inhibitor titre, with prophylaxis against infection during immunosuppression",
-   "Long-term haematological surveillance for relapse"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "acquired_hemophilia-pathway",
-   "title": "Acquired haemophilia A (factor VIII autoantibodies): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autoimmune disorder in which acquired autoantibodies neutralise factor VIII, causing sudden severe bleeding in a person with no prior bleeding history",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Extensive spontaneous bruising or muscle haematoma in a previously unaffected adult",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Activated partial thromboplastin time with prothrombin time to localise the defect, Mixing study, including incubated mixing, to demonstrate a time-dependent non-correcting inhibitor, Factor VIII activity assay showing a"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat acute haemorrhage with bypassing agents (recombinant activated factor VII or activated prothrombin complex concentrate) or recombinant porcine factor VIII"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing an isolated prolonged APTT to a lupus anticoagulant and missing a bleeding inhibitor"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of acquired haemophilia a (factor viii autoantibodies)."
-  }
- ],
- "tables": [
-  {
-   "id": "acquired_hemophilia-matrix",
-   "title": "Acquired haemophilia A (factor VIII autoantibodies): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autoimmune disorder in which acquired autoantibodies neutralise factor VIII, causing sudden severe bleeding in a person with",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematology",
+  "specialty": "Haematology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Hematology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An autoimmune disorder in which acquired autoantibodies neutralise factor VIII, causing sudden severe bleeding in a person with no prior bleeding history",
+      "Bleeding is typically into soft tissues, muscles, skin (extensive bruising), and mucous membranes, in contrast to the haemarthroses of congenital haemophilia",
+      "Classically presents in older adults or in the peripartum period, and is often associated with malignancy, autoimmune disease, pregnancy, or drugs, though many cases are idiopathic",
+      "The screening clue is an isolated prolonged activated partial thromboplastin time with a normal prothrombin time",
+      "A mixing study fails to correct the prolonged APTT, and correction may worsen on incubation, indicating a time- and temperature-dependent inhibitor",
+      "Diagnosis is confirmed by a low factor VIII level with a measurable factor VIII inhibitor titre",
+      "Management combines control of acute bleeding with bypassing agents and eradication of the antibody with immunosuppression"
     ],
-    [
-     "Key Investigations",
-     "Activated partial thromboplastin time with prothrombin time to localise the defect, Mixing study, including incubated mixing, to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Acquired haemophilia A arises when the immune system generates autoantibodies against endogenous factor VIII. These inhibitors interfere with factor VIII's cofactor function in the intrinsic tenase complex, sharply reducing factor VIII activity and impairing thrombin generation. Unlike alloantibodies in congenital haemophilia, these autoantibodies often show complex, non-linear (type II) kinetics, so residual factor VIII may be detectable yet bleeding remains severe. The trigger for autoantibody formation is frequently an underlying malignancy, autoimmune condition, pregnancy, or medication, but a substantial proportion are idiopathic.",
+    "additionalDifferentials": [
+      "Congenital haemophilia A with an alloantibody inhibitor",
+      "Acquired von Willebrand syndrome",
+      "Lupus anticoagulant prolonging the APTT (typically without bleeding)",
+      "Disseminated intravascular coagulation",
+      "Heparin contamination of the sample",
+      "Vitamin K deficiency or liver disease affecting coagulation"
     ],
-    [
-     "Primary Differentials",
-     "Congenital haemophilia A with an alloantibody inhibitor, Acquired von Willebrand syndrome, Lupus anticoagulant prolonging the",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Activated partial thromboplastin time with prothrombin time to localise the defect",
+      "Mixing study, including incubated mixing, to demonstrate a time-dependent non-correcting inhibitor",
+      "Factor VIII activity assay showing a reduced level",
+      "Bethesda (or Nijmegen-modified) assay to quantify the factor VIII inhibitor titre",
+      "Von Willebrand factor studies to distinguish acquired von Willebrand syndrome",
+      "Investigation for an underlying malignancy or autoimmune disorder"
     ],
-    [
-     "Management Strategy",
-     "Treat acute haemorrhage with bypassing agents (recombinant activated factor VII or activated prothrombin complex concentrate) or",
-     "Core treatment modality"
+    "redFlags": [
+      "Extensive spontaneous bruising or muscle haematoma in a previously unaffected adult",
+      "Retroperitoneal, gastrointestinal, or intracranial bleeding",
+      "Compartment syndrome or airway compromise from an expanding haematoma",
+      "Peripartum bleeding with an unexplained isolated prolonged APTT"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing an isolated prolonged APTT to a lupus anticoagulant and missing a bleeding inhibitor",
-     "Prevent diagnostic or management error"
+    "prognosis": "Acute mortality is significant because of severe unheralded bleeding, but with prompt haemostatic control and antibody eradication most patients achieve remission. Relapse can occur, so monitoring after immunosuppression is important, and outcome is also influenced by any underlying disorder.",
+    "pitfalls": [
+      "Attributing an isolated prolonged APTT to a lupus anticoagulant and missing a bleeding inhibitor",
+      "Omitting an incubated mixing study, so a time-dependent inhibitor is not detected",
+      "Attempting factor VIII replacement alone when a bypassing strategy is needed for high-titre inhibitors",
+      "Failing to search for an underlying malignancy or autoimmune trigger"
+    ],
+    "references": [
+      "Williams Hematology",
+      "Hoffman: Hematology - Basic Principles and Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat acute haemorrhage with bypassing agents (recombinant activated factor VII or activated prothrombin complex concentrate) or recombinant porcine factor VIII",
+      "Immunosuppressive inhibitor eradication with corticosteroids, adding rituximab or cyclophosphamide for higher-titre or refractory disease",
+      "Avoid intramuscular injections, deep venepuncture and elective invasive procedures",
+      "Screen for and manage an underlying malignancy, autoimmune disorder or peripartum trigger",
+      "Serial monitoring of factor VIII level and inhibitor titre, with prophylaxis against infection during immunosuppression",
+      "Long-term haematological surveillance for relapse"
     ]
-   ],
-   "caption": "Overview comparison matrix for acquired haemophilia a (factor viii autoantibodies)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "acquired-hemophilia-real-image",
-   "title": "Acquired haemophilia A (factor VIII autoantibodies): Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "acquired_hemophilia-pathway",
+      "title": "Acquired haemophilia A (factor VIII autoantibodies): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autoimmune disorder in which acquired autoantibodies neutralise factor VIII, causing sudden severe bleeding in a person with no prior bleeding history",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Extensive spontaneous bruising or muscle haematoma in a previously unaffected adult",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Activated partial thromboplastin time with prothrombin time to localise the defect, Mixing study, including incubated mixing, to demonstrate a time-dependent non-correcting inhibitor, Factor VIII activity assay showing a"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat acute haemorrhage with bypassing agents (recombinant activated factor VII or activated prothrombin complex concentrate) or recombinant porcine factor VIII"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing an isolated prolonged APTT to a lupus anticoagulant and missing a bleeding inhibitor"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of acquired haemophilia a (factor viii autoantibodies)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "acquired_hemophilia-matrix",
+      "title": "Acquired haemophilia A (factor VIII autoantibodies): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autoimmune disorder in which acquired autoantibodies neutralise factor VIII, causing sudden severe bleeding in a person with",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Activated partial thromboplastin time with prothrombin time to localise the defect, Mixing study, including incubated mixing, to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Congenital haemophilia A with an alloantibody inhibitor, Acquired von Willebrand syndrome, Lupus anticoagulant prolonging the",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat acute haemorrhage with bypassing agents (recombinant activated factor VII or activated prothrombin complex concentrate) or",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing an isolated prolonged APTT to a lupus anticoagulant and missing a bleeding inhibitor",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for acquired haemophilia a (factor viii autoantibodies)."
+    }
+  ],
+  "diagrams": []
 }

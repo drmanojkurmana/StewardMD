@@ -1,172 +1,150 @@
 {
- "id": "slow_channel_congenital_myasthenic_syndrome",
- "name": "Slow-channel congenital myasthenic syndrome",
- "aliases": [
-  "SCCMS",
-  "Slow-channel syndrome"
- ],
- "class": "non_infective",
- "system": "Neuromuscular junction",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Neuromuscular medicine references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Postsynaptic congenital myasthenic syndrome caused by dominant gain-of-function variants in acetylcholine receptor subunit genes that prolong channel opening.",
-   "Characteristically produces selective, severe weakness and wasting of the cervical, wrist and finger extensor muscles, an unusual pattern for a neuromuscular junction disorder.",
-   "Inheritance is autosomal dominant, so a family history of similar weakness across generations is a useful clue.",
-   "Cholinesterase inhibitors are contraindicated because they further prolong acetylcholine action and worsen the excitotoxic endplate damage.",
-   "Long-lived open-channel blockers such as fluoxetine or quinidine are the mainstay of treatment as they shorten channel open time.",
-   "Onset and severity are highly variable, ranging from infancy to adult life, and progression can be slow over decades.",
-   "A repetitive compound muscle action potential following a single stimulus reflects the prolonged endplate potential and is a characteristic finding."
+  "id": "slow_channel_congenital_myasthenic_syndrome",
+  "name": "Slow-channel congenital myasthenic syndrome",
+  "aliases": [
+    "SCCMS",
+    "Slow-channel syndrome"
   ],
-  "pathophysiology": "Slow-channel syndrome arises from dominant gain-of-function missense variants in genes encoding acetylcholine receptor subunits, which alter channel gating so that the receptor stays open far longer than normal after acetylcholine binds, and may also show increased affinity and reopening. The prolonged and repeated channel openings allow excessive cation influx, producing a lengthened endplate potential that generates repetitive muscle fibre firing after a single nerve impulse. Over time the sustained calcium overload at the endplate is excitotoxic, causing degeneration of the junctional folds, loss of receptors, vacuolar change and an endplate myopathy, which accounts for the fixed weakness and focal muscle wasting rather than pure fatigability. Because the fundamental problem is excess rather than deficient cholinergic signalling, any intervention that increases or prolongs acetylcholine availability, including cholinesterase inhibitors, aggravates the calcium-mediated damage, whereas agents that block the open channel and shorten its effective open time reduce cation overload and improve strength.",
-  "additionalDifferentials": [
-   "Fast-channel and other kinetic congenital myasthenic syndromes",
-   "Seronegative and acetylcholine-receptor-antibody-positive autoimmune myasthenia gravis",
-   "Distal myopathies and inclusion body myopathy given the selective forearm and finger extensor wasting",
-   "Motor neuron disease and focal amyotrophies",
-   "Hereditary neuropathies with distal weakness",
-   "Endplate acetylcholinesterase deficiency, which can also worsen with cholinesterase inhibitors"
-  ],
-  "additionalInvestigations": [
-   "Repetitive nerve stimulation showing a decrement and a characteristic repetitive compound muscle action potential to a single stimulus",
-   "Single-fibre electromyography demonstrating increased jitter and blocking",
-   "Targeted sequencing of acetylcholine receptor subunit genes or a congenital myasthenic syndrome gene panel",
-   "Negative acetylcholine receptor and muscle-specific kinase antibodies to exclude autoimmune disease",
-   "In-vitro microelectrode and single-channel endplate studies where specialised facilities exist",
-   "Documentation of clinical response to an open-channel blocker and of worsening with cholinesterase inhibition"
-  ],
-  "redFlags": [
-   "Clinical deterioration after administration of a cholinesterase inhibitor",
-   "Progressive respiratory muscle weakness with hypoventilation",
-   "Rapidly advancing bulbar or neck weakness with aspiration risk",
-   "New severe distal weakness compromising hand function or airway protection"
-  ],
-  "prognosis": "The disorder is usually slowly progressive over years to decades and can lead to significant disability, but open-channel blocker therapy often produces meaningful and durable improvement. Respiratory involvement warrants long-term surveillance.",
-  "pitfalls": [
-   "Prescribing cholinesterase inhibitors, which characteristically worsen this subtype",
-   "Mistaking the selective forearm and finger extensor wasting for a distal myopathy or motor neuron disease",
-   "Overlooking the autosomal dominant inheritance and failing to evaluate affected relatives",
-   "Expecting pure fatigability and being misled by the fixed weakness and muscle wasting of the endplate myopathy"
-  ],
-  "references": [
-   "Standard neuromuscular and paediatric neurology textbooks",
-   "Peer-reviewed reviews of congenital myasthenic syndromes"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Long-lived open-channel blockers such as fluoxetine or quinidine are the mainstay, shortening acetylcholine receptor channel open time and reducing endplate excitotoxicity.",
-   "Avoid cholinesterase inhibitors and other agents that prolong acetylcholine action, as they aggravate the excitotoxic endplate myopathy.",
-   "Physiotherapy, wrist and finger extensor splinting, and assistive devices to support the selective cervical and forearm extensor weakness and wasting.",
-   "Respiratory surveillance with periodic vital capacity and sleep-disordered-breathing assessment, introducing non-invasive ventilation when hypoventilation develops.",
-   "Anticipate and treat respiratory decompensation during intercurrent infection with ventilatory support.",
-   "Coordinate care through a neuromuscular specialist with genetics, respiratory and rehabilitation input.",
-   "Autosomal dominant inheritance warrants genetic counselling and clinical assessment of affected relatives across generations."
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "slow_channel_congenital_myasthenic_syndrome-pathway",
-   "title": "Slow-channel congenital myasthenic syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Postsynaptic congenital myasthenic syndrome caused by dominant gain-of-function variants in acetylcholine receptor subunit genes that prolong channel opening.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Clinical deterioration after administration of a cholinesterase inhibitor",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Repetitive nerve stimulation showing a decrement and a characteristic repetitive compound muscle action potential to a single stimulus, Single-fibre electromyography demonstrating increased jitter and blocking, Targeted"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Long-lived open-channel blockers such as fluoxetine or quinidine are the mainstay, shortening acetylcholine receptor channel open time and reducing endplate excitotoxicity."
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Prescribing cholinesterase inhibitors, which characteristically worsen this subtype"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of slow-channel congenital myasthenic syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "slow_channel_congenital_myasthenic_syndrome-matrix",
-   "title": "Slow-channel congenital myasthenic syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Postsynaptic congenital myasthenic syndrome caused by dominant gain-of-function variants in acetylcholine receptor subunit genes",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neuromuscular junction",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Neuromuscular medicine references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Postsynaptic congenital myasthenic syndrome caused by dominant gain-of-function variants in acetylcholine receptor subunit genes that prolong channel opening.",
+      "Characteristically produces selective, severe weakness and wasting of the cervical, wrist and finger extensor muscles, an unusual pattern for a neuromuscular junction disorder.",
+      "Inheritance is autosomal dominant, so a family history of similar weakness across generations is a useful clue.",
+      "Cholinesterase inhibitors are contraindicated because they further prolong acetylcholine action and worsen the excitotoxic endplate damage.",
+      "Long-lived open-channel blockers such as fluoxetine or quinidine are the mainstay of treatment as they shorten channel open time.",
+      "Onset and severity are highly variable, ranging from infancy to adult life, and progression can be slow over decades.",
+      "A repetitive compound muscle action potential following a single stimulus reflects the prolonged endplate potential and is a characteristic finding."
     ],
-    [
-     "Key Investigations",
-     "Repetitive nerve stimulation showing a decrement and a characteristic repetitive compound muscle action potential to a single",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Slow-channel syndrome arises from dominant gain-of-function missense variants in genes encoding acetylcholine receptor subunits, which alter channel gating so that the receptor stays open far longer than normal after acetylcholine binds, and may also show increased affinity and reopening. The prolonged and repeated channel openings allow excessive cation influx, producing a lengthened endplate potential that generates repetitive muscle fibre firing after a single nerve impulse. Over time the sustained calcium overload at the endplate is excitotoxic, causing degeneration of the junctional folds, loss of receptors, vacuolar change and an endplate myopathy, which accounts for the fixed weakness and focal muscle wasting rather than pure fatigability. Because the fundamental problem is excess rather than deficient cholinergic signalling, any intervention that increases or prolongs acetylcholine availability, including cholinesterase inhibitors, aggravates the calcium-mediated damage, whereas agents that block the open channel and shorten its effective open time reduce cation overload and improve strength.",
+    "additionalDifferentials": [
+      "Fast-channel and other kinetic congenital myasthenic syndromes",
+      "Seronegative and acetylcholine-receptor-antibody-positive autoimmune myasthenia gravis",
+      "Distal myopathies and inclusion body myopathy given the selective forearm and finger extensor wasting",
+      "Motor neuron disease and focal amyotrophies",
+      "Hereditary neuropathies with distal weakness",
+      "Endplate acetylcholinesterase deficiency, which can also worsen with cholinesterase inhibitors"
     ],
-    [
-     "Primary Differentials",
-     "Fast-channel and other kinetic congenital myasthenic syndromes, Seronegative and acetylcholine-receptor-antibody-positive",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Repetitive nerve stimulation showing a decrement and a characteristic repetitive compound muscle action potential to a single stimulus",
+      "Single-fibre electromyography demonstrating increased jitter and blocking",
+      "Targeted sequencing of acetylcholine receptor subunit genes or a congenital myasthenic syndrome gene panel",
+      "Negative acetylcholine receptor and muscle-specific kinase antibodies to exclude autoimmune disease",
+      "In-vitro microelectrode and single-channel endplate studies where specialised facilities exist",
+      "Documentation of clinical response to an open-channel blocker and of worsening with cholinesterase inhibition"
     ],
-    [
-     "Management Strategy",
-     "Long-lived open-channel blockers such as fluoxetine or quinidine are the mainstay, shortening acetylcholine receptor channel open",
-     "Core treatment modality"
+    "redFlags": [
+      "Clinical deterioration after administration of a cholinesterase inhibitor",
+      "Progressive respiratory muscle weakness with hypoventilation",
+      "Rapidly advancing bulbar or neck weakness with aspiration risk",
+      "New severe distal weakness compromising hand function or airway protection"
     ],
-    [
-     "Clinical Pitfall",
-     "Prescribing cholinesterase inhibitors, which characteristically worsen this subtype",
-     "Prevent diagnostic or management error"
+    "prognosis": "The disorder is usually slowly progressive over years to decades and can lead to significant disability, but open-channel blocker therapy often produces meaningful and durable improvement. Respiratory involvement warrants long-term surveillance.",
+    "pitfalls": [
+      "Prescribing cholinesterase inhibitors, which characteristically worsen this subtype",
+      "Mistaking the selective forearm and finger extensor wasting for a distal myopathy or motor neuron disease",
+      "Overlooking the autosomal dominant inheritance and failing to evaluate affected relatives",
+      "Expecting pure fatigability and being misled by the fixed weakness and muscle wasting of the endplate myopathy"
+    ],
+    "references": [
+      "Standard neuromuscular and paediatric neurology textbooks",
+      "Peer-reviewed reviews of congenital myasthenic syndromes"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Long-lived open-channel blockers such as fluoxetine or quinidine are the mainstay, shortening acetylcholine receptor channel open time and reducing endplate excitotoxicity.",
+      "Avoid cholinesterase inhibitors and other agents that prolong acetylcholine action, as they aggravate the excitotoxic endplate myopathy.",
+      "Physiotherapy, wrist and finger extensor splinting, and assistive devices to support the selective cervical and forearm extensor weakness and wasting.",
+      "Respiratory surveillance with periodic vital capacity and sleep-disordered-breathing assessment, introducing non-invasive ventilation when hypoventilation develops.",
+      "Anticipate and treat respiratory decompensation during intercurrent infection with ventilatory support.",
+      "Coordinate care through a neuromuscular specialist with genetics, respiratory and rehabilitation input.",
+      "Autosomal dominant inheritance warrants genetic counselling and clinical assessment of affected relatives across generations."
     ]
-   ],
-   "caption": "Overview comparison matrix for slow-channel congenital myasthenic syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "slow-channel-congenital-myasthenic-syndrome-real-image",
-   "title": "Slow-channel congenital myasthenic syndrome: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "slow_channel_congenital_myasthenic_syndrome-pathway",
+      "title": "Slow-channel congenital myasthenic syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Postsynaptic congenital myasthenic syndrome caused by dominant gain-of-function variants in acetylcholine receptor subunit genes that prolong channel opening.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Clinical deterioration after administration of a cholinesterase inhibitor",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Repetitive nerve stimulation showing a decrement and a characteristic repetitive compound muscle action potential to a single stimulus, Single-fibre electromyography demonstrating increased jitter and blocking, Targeted"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Long-lived open-channel blockers such as fluoxetine or quinidine are the mainstay, shortening acetylcholine receptor channel open time and reducing endplate excitotoxicity."
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Prescribing cholinesterase inhibitors, which characteristically worsen this subtype"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of slow-channel congenital myasthenic syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "slow_channel_congenital_myasthenic_syndrome-matrix",
+      "title": "Slow-channel congenital myasthenic syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Postsynaptic congenital myasthenic syndrome caused by dominant gain-of-function variants in acetylcholine receptor subunit genes",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Repetitive nerve stimulation showing a decrement and a characteristic repetitive compound muscle action potential to a single",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Fast-channel and other kinetic congenital myasthenic syndromes, Seronegative and acetylcholine-receptor-antibody-positive",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Long-lived open-channel blockers such as fluoxetine or quinidine are the mainstay, shortening acetylcholine receptor channel open",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Prescribing cholinesterase inhibitors, which characteristically worsen this subtype",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for slow-channel congenital myasthenic syndrome."
+    }
+  ],
+  "diagrams": []
 }

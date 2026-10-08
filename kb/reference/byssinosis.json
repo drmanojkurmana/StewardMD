@@ -1,171 +1,149 @@
 {
- "id": "byssinosis",
- "name": "Byssinosis",
- "aliases": [
-  "brown lung",
-  "cotton worker's lung",
-  "Monday fever"
- ],
- "class": "non_infective",
- "system": "Occupational / Environmental",
- "specialty": "Occupational & Environmental Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Hunter's Diseases of Occupations / WHO",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Byssinosis is caused by inhaling dust from cotton, flax or hemp processing, classically in textile mill workers",
-   "The hallmark symptom is chest tightness and breathlessness that is worst on the first working day after a break, giving the classic 'Monday feeling' pattern",
-   "Early disease shows symptoms only on the first day back at work, whereas advanced disease brings symptoms on most working days and eventually persistent airflow limitation",
-   "Endotoxin from bacterial contamination of the raw fibre is thought to be a key causative component of the dust",
-   "The temporal work pattern is diagnostically important and is captured through a careful occupational history and grading of symptoms",
-   "Serial lung function across the working week, showing a fall in FEV1 over a shift, supports the diagnosis",
-   "Prevention through dust suppression, ventilation and exposure limits is the mainstay, since established chronic disease is not reversible",
-   "Chronic heavy exposure can lead to fixed obstructive impairment resembling chronic obstructive pulmonary disease"
+  "id": "byssinosis",
+  "name": "Byssinosis",
+  "aliases": [
+    "brown lung",
+    "cotton worker's lung",
+    "Monday fever"
   ],
-  "pathophysiology": "Inhalation of vegetable fibre dust, particularly cotton contaminated with bacterial endotoxin, triggers release of inflammatory mediators and acute airway narrowing. Repeated exposure produces recurrent bronchoconstriction that is initially reversible and tied to the work cycle, but sustained long-term exposure leads to chronic airway inflammation and persistent, largely irreversible airflow obstruction.",
-  "additionalDifferentials": [
-   "Occupational asthma from other agents",
-   "Chronic obstructive pulmonary disease from smoking",
-   "Constitutional asthma",
-   "Hypersensitivity pneumonitis",
-   "Acute bronchitis"
-  ],
-  "additionalInvestigations": [
-   "Occupational history focusing on the first-day-of-week symptom pattern",
-   "Spirometry measured before and across a work shift to detect acute FEV1 decline",
-   "Serial peak flow monitoring over the working week",
-   "Symptom grading using recognised byssinosis classification",
-   "Chest imaging mainly to exclude other causes"
-  ],
-  "redFlags": [
-   "Progression from first-day symptoms to daily symptoms indicating chronic disease",
-   "Development of persistent breathlessness and fixed airflow obstruction",
-   "Acute severe respiratory distress after very heavy dust exposure",
-   "Superimposed respiratory infection worsening chronic impairment"
-  ],
-  "prognosis": "Symptoms in early byssinosis may resolve with removal from exposure, but repeated and prolonged exposure can cause permanent obstructive lung impairment; the outlook improves substantially where dust exposure is controlled and workers are removed early.",
-  "pitfalls": [
-   "Missing the characteristic first-working-day pattern by not asking about symptom timing",
-   "Attributing symptoms solely to smoking in a dust-exposed textile worker",
-   "Failing to act at the early reversible stage before fixed obstruction develops",
-   "Neglecting workplace dust control and surveillance of coworkers"
-  ],
-  "references": [
-   "Hunter's Diseases of Occupations",
-   "WHO guidance"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reduce and control exposure to cotton, flax and hemp dust with engineering controls, ventilation and respiratory protection, and remove affected workers from exposure early, which is the decisive intervention",
-   "Relieve acute airway narrowing with bronchodilators and treat established chronic airflow obstruction with inhaled therapy as for chronic obstructive pulmonary disease",
-   "Advise and support smoking cessation to limit additional decline in lung function",
-   "Monitor with serial spirometry and peak flow across the working week, symptom grading and surveillance of exposed workers",
-   "Apply occupational health measures, including workplace dust and endotoxin reduction and appropriate reporting or compensation",
-   "Refer to occupational and respiratory medicine and offer influenza and pneumococcal vaccination as for chronic airways disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "byssinosis-pathway",
-   "title": "Byssinosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Byssinosis is caused by inhaling dust from cotton, flax or hemp processing, classically in textile mill workers",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progression from first-day symptoms to daily symptoms indicating chronic disease",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Occupational history focusing on the first-day-of-week symptom pattern, Spirometry measured before and across a work shift to detect acute FEV1 decline, Serial peak flow monitoring over the working week"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reduce and control exposure to cotton, flax and hemp dust with engineering controls, ventilation and respiratory protection, and remove affected workers from exposure early, which is the decisive intervention"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing the characteristic first-working-day pattern by not asking about symptom timing"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of byssinosis."
-  }
- ],
- "tables": [
-  {
-   "id": "byssinosis-matrix",
-   "title": "Byssinosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Byssinosis is caused by inhaling dust from cotton, flax or hemp processing, classically in textile mill workers",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Occupational / Environmental",
+  "specialty": "Occupational & Environmental Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Hunter's Diseases of Occupations / WHO",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Byssinosis is caused by inhaling dust from cotton, flax or hemp processing, classically in textile mill workers",
+      "The hallmark symptom is chest tightness and breathlessness that is worst on the first working day after a break, giving the classic 'Monday feeling' pattern",
+      "Early disease shows symptoms only on the first day back at work, whereas advanced disease brings symptoms on most working days and eventually persistent airflow limitation",
+      "Endotoxin from bacterial contamination of the raw fibre is thought to be a key causative component of the dust",
+      "The temporal work pattern is diagnostically important and is captured through a careful occupational history and grading of symptoms",
+      "Serial lung function across the working week, showing a fall in FEV1 over a shift, supports the diagnosis",
+      "Prevention through dust suppression, ventilation and exposure limits is the mainstay, since established chronic disease is not reversible",
+      "Chronic heavy exposure can lead to fixed obstructive impairment resembling chronic obstructive pulmonary disease"
     ],
-    [
-     "Key Investigations",
-     "Occupational history focusing on the first-day-of-week symptom pattern, Spirometry measured before and across a work shift to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Inhalation of vegetable fibre dust, particularly cotton contaminated with bacterial endotoxin, triggers release of inflammatory mediators and acute airway narrowing. Repeated exposure produces recurrent bronchoconstriction that is initially reversible and tied to the work cycle, but sustained long-term exposure leads to chronic airway inflammation and persistent, largely irreversible airflow obstruction.",
+    "additionalDifferentials": [
+      "Occupational asthma from other agents",
+      "Chronic obstructive pulmonary disease from smoking",
+      "Constitutional asthma",
+      "Hypersensitivity pneumonitis",
+      "Acute bronchitis"
     ],
-    [
-     "Primary Differentials",
-     "Occupational asthma from other agents, Chronic obstructive pulmonary disease from smoking, Constitutional asthma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Occupational history focusing on the first-day-of-week symptom pattern",
+      "Spirometry measured before and across a work shift to detect acute FEV1 decline",
+      "Serial peak flow monitoring over the working week",
+      "Symptom grading using recognised byssinosis classification",
+      "Chest imaging mainly to exclude other causes"
     ],
-    [
-     "Management Strategy",
-     "Reduce and control exposure to cotton, flax and hemp dust with engineering controls, ventilation and respiratory protection, and",
-     "Core treatment modality"
+    "redFlags": [
+      "Progression from first-day symptoms to daily symptoms indicating chronic disease",
+      "Development of persistent breathlessness and fixed airflow obstruction",
+      "Acute severe respiratory distress after very heavy dust exposure",
+      "Superimposed respiratory infection worsening chronic impairment"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing the characteristic first-working-day pattern by not asking about symptom timing",
-     "Prevent diagnostic or management error"
+    "prognosis": "Symptoms in early byssinosis may resolve with removal from exposure, but repeated and prolonged exposure can cause permanent obstructive lung impairment; the outlook improves substantially where dust exposure is controlled and workers are removed early.",
+    "pitfalls": [
+      "Missing the characteristic first-working-day pattern by not asking about symptom timing",
+      "Attributing symptoms solely to smoking in a dust-exposed textile worker",
+      "Failing to act at the early reversible stage before fixed obstruction develops",
+      "Neglecting workplace dust control and surveillance of coworkers"
+    ],
+    "references": [
+      "Hunter's Diseases of Occupations",
+      "WHO guidance"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reduce and control exposure to cotton, flax and hemp dust with engineering controls, ventilation and respiratory protection, and remove affected workers from exposure early, which is the decisive intervention",
+      "Relieve acute airway narrowing with bronchodilators and treat established chronic airflow obstruction with inhaled therapy as for chronic obstructive pulmonary disease",
+      "Advise and support smoking cessation to limit additional decline in lung function",
+      "Monitor with serial spirometry and peak flow across the working week, symptom grading and surveillance of exposed workers",
+      "Apply occupational health measures, including workplace dust and endotoxin reduction and appropriate reporting or compensation",
+      "Refer to occupational and respiratory medicine and offer influenza and pneumococcal vaccination as for chronic airways disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for byssinosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "byssinosis-real-image",
-   "title": "Byssinosis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "byssinosis-pathway",
+      "title": "Byssinosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Byssinosis is caused by inhaling dust from cotton, flax or hemp processing, classically in textile mill workers",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progression from first-day symptoms to daily symptoms indicating chronic disease",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Occupational history focusing on the first-day-of-week symptom pattern, Spirometry measured before and across a work shift to detect acute FEV1 decline, Serial peak flow monitoring over the working week"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reduce and control exposure to cotton, flax and hemp dust with engineering controls, ventilation and respiratory protection, and remove affected workers from exposure early, which is the decisive intervention"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing the characteristic first-working-day pattern by not asking about symptom timing"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of byssinosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "byssinosis-matrix",
+      "title": "Byssinosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Byssinosis is caused by inhaling dust from cotton, flax or hemp processing, classically in textile mill workers",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Occupational history focusing on the first-day-of-week symptom pattern, Spirometry measured before and across a work shift to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Occupational asthma from other agents, Chronic obstructive pulmonary disease from smoking, Constitutional asthma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reduce and control exposure to cotton, flax and hemp dust with engineering controls, ventilation and respiratory protection, and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing the characteristic first-working-day pattern by not asking about symptom timing",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for byssinosis."
+    }
+  ],
+  "diagrams": []
 }

@@ -1,172 +1,150 @@
 {
- "id": "dermatitis_herpetiformis",
- "name": "Dermatitis Herpetiformis",
- "aliases": [
-  "DH",
-  "Duhring's disease",
-  "cutaneous coeliac disease"
- ],
- "class": "non_infective",
- "system": "Skin / Dermatology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents with intensely itchy, grouped (herpetiform) vesicles and papules symmetrically distributed over the extensor surfaces such as elbows, knees, buttocks, and scalp",
-   "The itch and burning are often so severe that intact blisters are rarely seen, replaced by excoriations and crusts from scratching",
-   "It is the cutaneous expression of gluten sensitivity and is strongly associated with coeliac disease, although many patients have few or no bowel symptoms",
-   "Diagnosis rests on skin biopsy for direct immunofluorescence, which shows granular IgA deposits in the dermal papillae of perilesional skin",
-   "Supportive serology includes anti-tissue transglutaminase and anti-endomysial antibodies, reflecting the shared autoimmunity with coeliac disease",
-   "A strict lifelong gluten-free diet is the cornerstone of management and addresses both the skin and the associated enteropathy",
-   "A sulphone-class agent can rapidly control itch and blistering while the diet takes effect, but requires screening for enzyme deficiency and monitoring for haemolysis",
-   "Screen for associated conditions including autoimmune thyroid disease and be aware of a small increased long-term risk of small-bowel lymphoma, which dietary control reduces"
+  "id": "dermatitis_herpetiformis",
+  "name": "Dermatitis Herpetiformis",
+  "aliases": [
+    "DH",
+    "Duhring's disease",
+    "cutaneous coeliac disease"
   ],
-  "pathophysiology": "Dermatitis herpetiformis is an autoimmune blistering disease driven by gluten sensitivity in genetically predisposed individuals carrying HLA-DQ2 or DQ8. Dietary gluten triggers production of IgA antibodies against tissue transglutaminase and, in the skin, cross-reactivity with epidermal transglutaminase. IgA immune complexes deposit in the dermal papillae, recruiting neutrophils that form the characteristic papillary microabscesses and cause subepidermal separation with vesicle formation. The same gluten-driven autoimmunity produces the small-bowel villous atrophy of coeliac disease, so skin and gut manifestations share a common mechanism and both respond to gluten withdrawal.",
-  "additionalDifferentials": [
-   "Bullous pemphigoid",
-   "Linear IgA bullous dermatosis",
-   "Scabies (intensely itchy, but with burrows and different distribution)",
-   "Atopic or other eczematous dermatitis",
-   "Papular urticaria or insect-bite reactions",
-   "Excoriated prurigo"
-  ],
-  "additionalInvestigations": [
-   "Skin biopsy of perilesional skin for direct immunofluorescence showing granular papillary IgA (the diagnostic standard)",
-   "Coeliac serology including anti-tissue transglutaminase and anti-endomysial IgA antibodies",
-   "Total IgA level to interpret serology correctly",
-   "Consideration of small-bowel evaluation in conjunction with gastroenterology",
-   "Screening for enzyme deficiency before starting sulphone therapy and for associated autoimmune disease, such as thyroid function"
-  ],
-  "redFlags": [
-   "New abdominal symptoms, weight loss, or anaemia raising concern for complications of coeliac disease including small-bowel lymphoma",
-   "Signs of haemolysis or methaemoglobinaemia in a patient on sulphone therapy",
-   "Widespread blistering with systemic upset prompting reconsideration of an alternative autoimmune bullous disease",
-   "Features of malabsorption or nutritional deficiency requiring investigation"
-  ],
-  "prognosis": "Dermatitis herpetiformis is a chronic condition, but a strict gluten-free diet usually controls the skin disease, allows medication to be reduced or stopped over time, heals the associated enteropathy, and lowers the long-term lymphoma risk; lapses in the diet typically provoke relapse.",
-  "pitfalls": [
-   "Taking the biopsy for immunofluorescence from lesional rather than perilesional skin and obtaining a false-negative result",
-   "Relying on the diet alone while overlooking the need to screen for and manage associated coeliac and autoimmune disease",
-   "Starting sulphone therapy without checking for enzyme deficiency and monitoring blood counts",
-   "Attributing the intense itch to eczema or scabies and missing the diagnosis"
-  ],
-  "references": [
-   "Fitzpatrick's Dermatology",
-   "Rook's Textbook of Dermatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Institute a strict lifelong gluten-free diet as the cornerstone, treating both the skin disease and the associated enteropathy, with dietitian support",
-   "Use dapsone to gain rapid control of itch and blistering while the diet takes effect",
-   "Screen for glucose-6-phosphate dehydrogenase deficiency before starting dapsone and monitor for haemolysis, methaemoglobinaemia and marrow suppression",
-   "Substitute an alternative sulphonamide such as sulfapyridine or sulfasalazine when dapsone is not tolerated",
-   "Screen for and manage associated conditions including coeliac enteropathy, autoimmune thyroid disease and nutritional deficiencies, in collaboration with gastroenterology",
-   "Provide long-term follow-up, tapering medication as the diet controls disease, and note that dietary adherence lowers the associated lymphoma risk"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "dermatitis_herpetiformis-pathway",
-   "title": "Dermatitis Herpetiformis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents with intensely itchy, grouped (herpetiform) vesicles and papules symmetrically distributed over the extensor surfaces such as elbows, knees, buttocks, and scalp",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New abdominal symptoms, weight loss, or anaemia raising concern for complications of coeliac disease including small-bowel lymphoma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin biopsy of perilesional skin for direct immunofluorescence showing granular papillary IgA (the diagnostic standard), Coeliac serology including anti-tissue transglutaminase and anti-endomysial IgA antibodies, Total IgA"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Institute a strict lifelong gluten-free diet as the cornerstone, treating both the skin disease and the associated enteropathy, with dietitian support"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Taking the biopsy for immunofluorescence from lesional rather than perilesional skin and obtaining a false-negative result"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of dermatitis herpetiformis."
-  }
- ],
- "tables": [
-  {
-   "id": "dermatitis_herpetiformis-matrix",
-   "title": "Dermatitis Herpetiformis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents with intensely itchy, grouped (herpetiform) vesicles and papules symmetrically distributed over the extensor surfaces",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Skin / Dermatology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents with intensely itchy, grouped (herpetiform) vesicles and papules symmetrically distributed over the extensor surfaces such as elbows, knees, buttocks, and scalp",
+      "The itch and burning are often so severe that intact blisters are rarely seen, replaced by excoriations and crusts from scratching",
+      "It is the cutaneous expression of gluten sensitivity and is strongly associated with coeliac disease, although many patients have few or no bowel symptoms",
+      "Diagnosis rests on skin biopsy for direct immunofluorescence, which shows granular IgA deposits in the dermal papillae of perilesional skin",
+      "Supportive serology includes anti-tissue transglutaminase and anti-endomysial antibodies, reflecting the shared autoimmunity with coeliac disease",
+      "A strict lifelong gluten-free diet is the cornerstone of management and addresses both the skin and the associated enteropathy",
+      "A sulphone-class agent can rapidly control itch and blistering while the diet takes effect, but requires screening for enzyme deficiency and monitoring for haemolysis",
+      "Screen for associated conditions including autoimmune thyroid disease and be aware of a small increased long-term risk of small-bowel lymphoma, which dietary control reduces"
     ],
-    [
-     "Key Investigations",
-     "Skin biopsy of perilesional skin for direct immunofluorescence showing granular papillary IgA (the diagnostic standard), Coeliac",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Dermatitis herpetiformis is an autoimmune blistering disease driven by gluten sensitivity in genetically predisposed individuals carrying HLA-DQ2 or DQ8. Dietary gluten triggers production of IgA antibodies against tissue transglutaminase and, in the skin, cross-reactivity with epidermal transglutaminase. IgA immune complexes deposit in the dermal papillae, recruiting neutrophils that form the characteristic papillary microabscesses and cause subepidermal separation with vesicle formation. The same gluten-driven autoimmunity produces the small-bowel villous atrophy of coeliac disease, so skin and gut manifestations share a common mechanism and both respond to gluten withdrawal.",
+    "additionalDifferentials": [
+      "Bullous pemphigoid",
+      "Linear IgA bullous dermatosis",
+      "Scabies (intensely itchy, but with burrows and different distribution)",
+      "Atopic or other eczematous dermatitis",
+      "Papular urticaria or insect-bite reactions",
+      "Excoriated prurigo"
     ],
-    [
-     "Primary Differentials",
-     "Bullous pemphigoid, Linear IgA bullous dermatosis, Scabies (intensely itchy, but with burrows and different distribution)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin biopsy of perilesional skin for direct immunofluorescence showing granular papillary IgA (the diagnostic standard)",
+      "Coeliac serology including anti-tissue transglutaminase and anti-endomysial IgA antibodies",
+      "Total IgA level to interpret serology correctly",
+      "Consideration of small-bowel evaluation in conjunction with gastroenterology",
+      "Screening for enzyme deficiency before starting sulphone therapy and for associated autoimmune disease, such as thyroid function"
     ],
-    [
-     "Management Strategy",
-     "Institute a strict lifelong gluten-free diet as the cornerstone, treating both the skin disease and the associated enteropathy,",
-     "Core treatment modality"
+    "redFlags": [
+      "New abdominal symptoms, weight loss, or anaemia raising concern for complications of coeliac disease including small-bowel lymphoma",
+      "Signs of haemolysis or methaemoglobinaemia in a patient on sulphone therapy",
+      "Widespread blistering with systemic upset prompting reconsideration of an alternative autoimmune bullous disease",
+      "Features of malabsorption or nutritional deficiency requiring investigation"
     ],
-    [
-     "Clinical Pitfall",
-     "Taking the biopsy for immunofluorescence from lesional rather than perilesional skin and obtaining a false-negative result",
-     "Prevent diagnostic or management error"
+    "prognosis": "Dermatitis herpetiformis is a chronic condition, but a strict gluten-free diet usually controls the skin disease, allows medication to be reduced or stopped over time, heals the associated enteropathy, and lowers the long-term lymphoma risk; lapses in the diet typically provoke relapse.",
+    "pitfalls": [
+      "Taking the biopsy for immunofluorescence from lesional rather than perilesional skin and obtaining a false-negative result",
+      "Relying on the diet alone while overlooking the need to screen for and manage associated coeliac and autoimmune disease",
+      "Starting sulphone therapy without checking for enzyme deficiency and monitoring blood counts",
+      "Attributing the intense itch to eczema or scabies and missing the diagnosis"
+    ],
+    "references": [
+      "Fitzpatrick's Dermatology",
+      "Rook's Textbook of Dermatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Institute a strict lifelong gluten-free diet as the cornerstone, treating both the skin disease and the associated enteropathy, with dietitian support",
+      "Use dapsone to gain rapid control of itch and blistering while the diet takes effect",
+      "Screen for glucose-6-phosphate dehydrogenase deficiency before starting dapsone and monitor for haemolysis, methaemoglobinaemia and marrow suppression",
+      "Substitute an alternative sulphonamide such as sulfapyridine or sulfasalazine when dapsone is not tolerated",
+      "Screen for and manage associated conditions including coeliac enteropathy, autoimmune thyroid disease and nutritional deficiencies, in collaboration with gastroenterology",
+      "Provide long-term follow-up, tapering medication as the diet controls disease, and note that dietary adherence lowers the associated lymphoma risk"
     ]
-   ],
-   "caption": "Overview comparison matrix for dermatitis herpetiformis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "dermatitis-herpetiformis-real-image",
-   "title": "Dermatitis Herpetiformis: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "dermatitis_herpetiformis-pathway",
+      "title": "Dermatitis Herpetiformis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents with intensely itchy, grouped (herpetiform) vesicles and papules symmetrically distributed over the extensor surfaces such as elbows, knees, buttocks, and scalp",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New abdominal symptoms, weight loss, or anaemia raising concern for complications of coeliac disease including small-bowel lymphoma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin biopsy of perilesional skin for direct immunofluorescence showing granular papillary IgA (the diagnostic standard), Coeliac serology including anti-tissue transglutaminase and anti-endomysial IgA antibodies, Total IgA"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Institute a strict lifelong gluten-free diet as the cornerstone, treating both the skin disease and the associated enteropathy, with dietitian support"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Taking the biopsy for immunofluorescence from lesional rather than perilesional skin and obtaining a false-negative result"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of dermatitis herpetiformis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "dermatitis_herpetiformis-matrix",
+      "title": "Dermatitis Herpetiformis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents with intensely itchy, grouped (herpetiform) vesicles and papules symmetrically distributed over the extensor surfaces",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin biopsy of perilesional skin for direct immunofluorescence showing granular papillary IgA (the diagnostic standard), Coeliac",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Bullous pemphigoid, Linear IgA bullous dermatosis, Scabies (intensely itchy, but with burrows and different distribution)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Institute a strict lifelong gluten-free diet as the cornerstone, treating both the skin disease and the associated enteropathy,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Taking the biopsy for immunofluorescence from lesional rather than perilesional skin and obtaining a false-negative result",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for dermatitis herpetiformis."
+    }
+  ],
+  "diagrams": []
 }

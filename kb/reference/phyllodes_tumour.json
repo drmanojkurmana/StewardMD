@@ -1,178 +1,156 @@
 {
- "id": "phyllodes_tumour",
- "name": "Phyllodes tumour",
- "aliases": [
-  "Cystosarcoma phyllodes",
-  "Phylloides tumour"
- ],
- "class": "non_infective",
- "system": "Breast",
- "specialty": "Breast surgery / Pathology",
- "referenceOnly": true,
- "reference": {
-  "source": "WHO Classification of Tumours: Breast Tumours",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Fibroepithelial neoplasm defined by a leaf-like (phyllodes) architecture with hypercellular stroma condensing around clefted epithelium.",
-   "Graded as benign, borderline or malignant using stromal cellularity, atypia, mitotic rate, stromal overgrowth and the nature of the tumour margin.",
-   "Typically presents as a firm, mobile, painless mass that enlarges more rapidly than a fibroadenoma, often in women in their fourth to fifth decade.",
-   "Core biopsy cannot reliably distinguish a phyllodes tumour from a cellular fibroadenoma; a report of 'cellular fibroepithelial lesion' warrants excision for definitive classification.",
-   "Wide local excision aiming for a clear margin (conventionally around 1 cm) is the mainstay; enucleation predisposes to local recurrence.",
-   "Axillary node dissection is not indicated as spread of malignant phyllodes is haematogenous, chiefly to lung and bone, rather than lymphatic.",
-   "Malignant transformation is characterised by pure stromal sarcomatous overgrowth; heterologous elements such as liposarcoma may occur.",
-   "Recurrence can show progression to a higher grade, so long-term clinical and imaging surveillance is advised after excision."
+  "id": "phyllodes_tumour",
+  "name": "Phyllodes tumour",
+  "aliases": [
+    "Cystosarcoma phyllodes",
+    "Phylloides tumour"
   ],
-  "pathophysiology": "Phyllodes tumours are biphasic fibroepithelial neoplasms arising from the intralobular (periductal) hormone-responsive stroma. Unlike fibroadenomas, the stromal component is the neoplastic driver and shows variable hypercellularity, atypia and mitotic activity, producing the characteristic elongated leaf-like fronds lined by benign ductal and myoepithelial epithelium. Progressive accumulation of stromal genetic alterations, including MED12 mutations shared with fibroadenoma and additional changes such as TERT promoter mutations and later cytogenetic aberrations, underlies the spectrum from benign through borderline to frankly malignant lesions in which the stroma overgrows and behaves as a sarcoma.",
-  "additionalDifferentials": [
-   "Fibroadenoma, particularly the cellular or juvenile variant",
-   "Primary breast sarcoma",
-   "Metaplastic (spindle cell) carcinoma",
-   "Juvenile fibroadenoma with rapid growth",
-   "Benign breast hamartoma",
-   "Well-circumscribed high-grade carcinoma",
-   "Pseudoangiomatous stromal hyperplasia forming a mass"
-  ],
-  "additionalInvestigations": [
-   "Triple assessment with clinical examination, ultrasound and mammography",
-   "Ultrasound-guided core needle biopsy for tissue architecture",
-   "Breast MRI to delineate large lesions and plan margins",
-   "Definitive excisional histology with margin assessment and grading",
-   "Immunohistochemistry (CD34, beta-catenin, p53, Ki-67) to support classification",
-   "Staging chest imaging where malignant phyllodes is confirmed",
-   "Multidisciplinary review of borderline and malignant cases"
-  ],
-  "redFlags": [
-   "Rapid interval enlargement of a previously stable breast mass",
-   "Very large tumour with overlying skin stretching, ulceration or venous prominence",
-   "Histological stromal overgrowth with high mitotic count and infiltrative margin",
-   "New respiratory or skeletal symptoms suggesting haematogenous metastasis",
-   "Repeated local recurrence with rising histological grade"
-  ],
-  "prognosis": "Benign phyllodes tumours have an excellent outlook after complete excision, though local recurrence may occur if margins are inadequate. Borderline and malignant lesions carry progressively higher recurrence and, for malignant tumours, a meaningful risk of distant metastasis that markedly worsens survival.",
-  "pitfalls": [
-   "Mislabelling a phyllodes tumour as a fibroadenoma on core biopsy and undertreating with simple enucleation",
-   "Performing unnecessary axillary surgery, since spread is haematogenous rather than nodal",
-   "Failing to obtain an adequate margin, the principal driver of local recurrence",
-   "Assuming benign histology excludes recurrence and omitting follow-up surveillance",
-   "Overlooking sarcomatous heterologous elements that upgrade a lesion to malignant"
-  ],
-  "references": [
-   "WHO Classification of Tumours: Breast Tumours (current edition)",
-   "Standard textbook of breast surgery and oncoplastic practice",
-   "National breast cancer and fibroepithelial lesion management guidance"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Perform wide local excision aiming for a clear margin as definitive treatment, with mastectomy for large lesions relative to breast size",
-   "Avoid enucleation, which leaves positive margins and predisposes to recurrence, and re-excise when margins are inadequate",
-   "Do not undertake axillary dissection, as malignant tumours metastasise haematogenously to lung and bone rather than to nodes",
-   "Consider adjuvant radiotherapy for malignant and selected borderline tumours or after re-excision",
-   "Reserve systemic sarcoma-type chemotherapy for large malignant or metastatic disease",
-   "Follow up with clinical examination and breast imaging for local recurrence, and stage the chest when malignant phyllodes is confirmed",
-   "Manage through a breast multidisciplinary team with specialist histological grading"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "phyllodes_tumour-pathway",
-   "title": "Phyllodes tumour: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Fibroepithelial neoplasm defined by a leaf-like (phyllodes) architecture with hypercellular stroma condensing around clefted epithelium.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid interval enlargement of a previously stable breast mass",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Triple assessment with clinical examination, ultrasound and mammography, Ultrasound-guided core needle biopsy for tissue architecture, Breast MRI to delineate large lesions and plan margins"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Perform wide local excision aiming for a clear margin as definitive treatment, with mastectomy for large lesions relative to breast size"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mislabelling a phyllodes tumour as a fibroadenoma on core biopsy and undertreating with simple enucleation"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of phyllodes tumour."
-  }
- ],
- "tables": [
-  {
-   "id": "phyllodes_tumour-matrix",
-   "title": "Phyllodes tumour: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Fibroepithelial neoplasm defined by a leaf-like (phyllodes) architecture with hypercellular stroma condensing around clefted",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Breast",
+  "specialty": "Breast surgery / Pathology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "WHO Classification of Tumours: Breast Tumours",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Fibroepithelial neoplasm defined by a leaf-like (phyllodes) architecture with hypercellular stroma condensing around clefted epithelium.",
+      "Graded as benign, borderline or malignant using stromal cellularity, atypia, mitotic rate, stromal overgrowth and the nature of the tumour margin.",
+      "Typically presents as a firm, mobile, painless mass that enlarges more rapidly than a fibroadenoma, often in women in their fourth to fifth decade.",
+      "Core biopsy cannot reliably distinguish a phyllodes tumour from a cellular fibroadenoma; a report of 'cellular fibroepithelial lesion' warrants excision for definitive classification.",
+      "Wide local excision aiming for a clear margin (conventionally around 1 cm) is the mainstay; enucleation predisposes to local recurrence.",
+      "Axillary node dissection is not indicated as spread of malignant phyllodes is haematogenous, chiefly to lung and bone, rather than lymphatic.",
+      "Malignant transformation is characterised by pure stromal sarcomatous overgrowth; heterologous elements such as liposarcoma may occur.",
+      "Recurrence can show progression to a higher grade, so long-term clinical and imaging surveillance is advised after excision."
     ],
-    [
-     "Key Investigations",
-     "Triple assessment with clinical examination, ultrasound and mammography, Ultrasound-guided core needle biopsy for tissue",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Phyllodes tumours are biphasic fibroepithelial neoplasms arising from the intralobular (periductal) hormone-responsive stroma. Unlike fibroadenomas, the stromal component is the neoplastic driver and shows variable hypercellularity, atypia and mitotic activity, producing the characteristic elongated leaf-like fronds lined by benign ductal and myoepithelial epithelium. Progressive accumulation of stromal genetic alterations, including MED12 mutations shared with fibroadenoma and additional changes such as TERT promoter mutations and later cytogenetic aberrations, underlies the spectrum from benign through borderline to frankly malignant lesions in which the stroma overgrows and behaves as a sarcoma.",
+    "additionalDifferentials": [
+      "Fibroadenoma, particularly the cellular or juvenile variant",
+      "Primary breast sarcoma",
+      "Metaplastic (spindle cell) carcinoma",
+      "Juvenile fibroadenoma with rapid growth",
+      "Benign breast hamartoma",
+      "Well-circumscribed high-grade carcinoma",
+      "Pseudoangiomatous stromal hyperplasia forming a mass"
     ],
-    [
-     "Primary Differentials",
-     "Fibroadenoma, particularly the cellular or juvenile variant, Primary breast sarcoma, Metaplastic (spindle cell) carcinoma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Triple assessment with clinical examination, ultrasound and mammography",
+      "Ultrasound-guided core needle biopsy for tissue architecture",
+      "Breast MRI to delineate large lesions and plan margins",
+      "Definitive excisional histology with margin assessment and grading",
+      "Immunohistochemistry (CD34, beta-catenin, p53, Ki-67) to support classification",
+      "Staging chest imaging where malignant phyllodes is confirmed",
+      "Multidisciplinary review of borderline and malignant cases"
     ],
-    [
-     "Management Strategy",
-     "Perform wide local excision aiming for a clear margin as definitive treatment, with mastectomy for large lesions relative to",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid interval enlargement of a previously stable breast mass",
+      "Very large tumour with overlying skin stretching, ulceration or venous prominence",
+      "Histological stromal overgrowth with high mitotic count and infiltrative margin",
+      "New respiratory or skeletal symptoms suggesting haematogenous metastasis",
+      "Repeated local recurrence with rising histological grade"
     ],
-    [
-     "Clinical Pitfall",
-     "Mislabelling a phyllodes tumour as a fibroadenoma on core biopsy and undertreating with simple enucleation",
-     "Prevent diagnostic or management error"
+    "prognosis": "Benign phyllodes tumours have an excellent outlook after complete excision, though local recurrence may occur if margins are inadequate. Borderline and malignant lesions carry progressively higher recurrence and, for malignant tumours, a meaningful risk of distant metastasis that markedly worsens survival.",
+    "pitfalls": [
+      "Mislabelling a phyllodes tumour as a fibroadenoma on core biopsy and undertreating with simple enucleation",
+      "Performing unnecessary axillary surgery, since spread is haematogenous rather than nodal",
+      "Failing to obtain an adequate margin, the principal driver of local recurrence",
+      "Assuming benign histology excludes recurrence and omitting follow-up surveillance",
+      "Overlooking sarcomatous heterologous elements that upgrade a lesion to malignant"
+    ],
+    "references": [
+      "WHO Classification of Tumours: Breast Tumours (current edition)",
+      "Standard textbook of breast surgery and oncoplastic practice",
+      "National breast cancer and fibroepithelial lesion management guidance"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Perform wide local excision aiming for a clear margin as definitive treatment, with mastectomy for large lesions relative to breast size",
+      "Avoid enucleation, which leaves positive margins and predisposes to recurrence, and re-excise when margins are inadequate",
+      "Do not undertake axillary dissection, as malignant tumours metastasise haematogenously to lung and bone rather than to nodes",
+      "Consider adjuvant radiotherapy for malignant and selected borderline tumours or after re-excision",
+      "Reserve systemic sarcoma-type chemotherapy for large malignant or metastatic disease",
+      "Follow up with clinical examination and breast imaging for local recurrence, and stage the chest when malignant phyllodes is confirmed",
+      "Manage through a breast multidisciplinary team with specialist histological grading"
     ]
-   ],
-   "caption": "Overview comparison matrix for phyllodes tumour."
-  }
- ],
- "diagrams": [
-  {
-   "id": "phyllodes-tumour-real-image",
-   "title": "Phyllodes tumour: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "phyllodes_tumour-pathway",
+      "title": "Phyllodes tumour: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Fibroepithelial neoplasm defined by a leaf-like (phyllodes) architecture with hypercellular stroma condensing around clefted epithelium.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid interval enlargement of a previously stable breast mass",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Triple assessment with clinical examination, ultrasound and mammography, Ultrasound-guided core needle biopsy for tissue architecture, Breast MRI to delineate large lesions and plan margins"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Perform wide local excision aiming for a clear margin as definitive treatment, with mastectomy for large lesions relative to breast size"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mislabelling a phyllodes tumour as a fibroadenoma on core biopsy and undertreating with simple enucleation"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of phyllodes tumour."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "phyllodes_tumour-matrix",
+      "title": "Phyllodes tumour: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Fibroepithelial neoplasm defined by a leaf-like (phyllodes) architecture with hypercellular stroma condensing around clefted",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Triple assessment with clinical examination, ultrasound and mammography, Ultrasound-guided core needle biopsy for tissue",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Fibroadenoma, particularly the cellular or juvenile variant, Primary breast sarcoma, Metaplastic (spindle cell) carcinoma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Perform wide local excision aiming for a clear margin as definitive treatment, with mastectomy for large lesions relative to",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mislabelling a phyllodes tumour as a fibroadenoma on core biopsy and undertreating with simple enucleation",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for phyllodes tumour."
+    }
+  ],
+  "diagrams": []
 }

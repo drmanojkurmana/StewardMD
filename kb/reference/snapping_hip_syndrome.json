@@ -1,173 +1,151 @@
 {
- "id": "snapping_hip_syndrome",
- "name": "Snapping hip syndrome (coxa saltans)",
- "aliases": [
-  "coxa saltans",
-  "dancer's hip",
-  "iliopsoas tendon snapping"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Hand & Peripheral nerve",
- "specialty": "Orthopaedics / Hand Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Green's Operative Hand Surgery / Campbell's Operative Orthopaedics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The hallmark is an audible or palpable snap or clunk felt during hip movement",
-   "The external type is caused by the iliotibial band or gluteus maximus tendon flicking over the greater trochanter, giving lateral symptoms",
-   "The internal type is caused by the iliopsoas tendon shifting over the iliopectineal eminence or femoral head, giving anterior or groin symptoms",
-   "The intra-articular type is caused by a labral tear, loose body or chondral lesion",
-   "It most often affects young active people such as dancers and athletes and is frequently painless, though it can become symptomatic",
-   "The external snap can often be reproduced and even seen by the patient, whereas the internal snap is elicited by extending the hip from a flexed, abducted, externally rotated position",
-   "Dynamic ultrasound is particularly useful to demonstrate the offending tendon snapping in real time",
-   "Generic management includes activity modification, stretching and physiotherapy, corticosteroid injection into the bursa or iliopsoas sheath, and surgical lengthening, release or arthroscopy for refractory or intra-articular causes"
+  "id": "snapping_hip_syndrome",
+  "name": "Snapping hip syndrome (coxa saltans)",
+  "aliases": [
+    "coxa saltans",
+    "dancer's hip",
+    "iliopsoas tendon snapping"
   ],
-  "pathophysiology": "Snapping hip syndrome describes a snapping sensation produced when a tendon or band catches on a bony prominence, or when an intra-articular lesion mechanically catches. In the external type the iliotibial band or gluteus maximus tendon flicks across the greater trochanter, while in the internal type the iliopsoas tendon abruptly shifts over the iliopectineal eminence or femoral head as the hip extends from a flexed position. The intra-articular type stems from labral tears or loose bodies. Repetitive movement of the offending structure commonly leads to a secondary tendinopathy or bursitis that generates pain.",
-  "additionalDifferentials": [
-   "Greater trochanteric pain syndrome or trochanteric bursitis",
-   "Iliopsoas bursitis or tendinopathy",
-   "Labral tear or femoroacetabular impingement",
-   "Intra-articular loose body or chondral lesion",
-   "Hip osteoarthritis",
-   "Femoral neck stress fracture",
-   "Athletic pubalgia"
-  ],
-  "additionalInvestigations": [
-   "Dynamic ultrasound as a first-line study to demonstrate the snapping tendon",
-   "Clinical reproduction manoeuvres for the external and internal types",
-   "Plain radiographs to assess bony morphology, impingement and osteoarthritis",
-   "MRI or MR arthrography to evaluate the labrum and intra-articular structures",
-   "A diagnostic injection into the iliopsoas sheath or bursa to confirm the pain source"
-  ],
-  "redFlags": [
-   "Intra-articular mechanical symptoms such as locking suggesting a loose body or labral tear",
-   "Night pain or systemic features raising concern for tumour or infection",
-   "Progressive activity-related pain suggesting a femoral neck stress fracture",
-   "Progressive loss of function"
-  ],
-  "prognosis": "Most patients respond to conservative measures, and surgery reserved for refractory cases generally gives good results, though intra-articular causes require specific treatment.",
-  "pitfalls": [
-   "Missing intra-articular pathology by labelling all snapping as a benign tendon cause",
-   "Overtreating asymptomatic snapping that needs only reassurance",
-   "Causing iatrogenic weakness through excessive tendon lengthening",
-   "Failing to use dynamic imaging to confirm the mechanism"
-  ],
-  "references": [
-   "Campbell's Operative Orthopaedics",
-   "Green's Operative Hand Surgery"
-  ],
-  "crossLinks": [],
-  "management": [
-   "First-line conservative management with activity modification, targeted physiotherapy stretching and strengthening of the iliotibial band or iliopsoas, and non-steroidal anti-inflammatory drugs.",
-   "Corticosteroid injection into the trochanteric bursa or iliopsoas sheath for painful tendinopathy or bursitis, which can also be diagnostic.",
-   "Surgical release or lengthening of the iliotibial band in the external type or the iliopsoas tendon in the internal type, reserved for refractory symptomatic cases.",
-   "Hip arthroscopy to address an intra-articular cause such as a labral tear, loose body or chondral lesion.",
-   "Reassure patients with painless snapping, for whom no intervention beyond load management is needed.",
-   "Refer to orthopaedics or hip-preservation surgery for symptoms resistant to conservative care."
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "snapping_hip_syndrome-pathway",
-   "title": "Snapping hip syndrome (coxa saltans): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The hallmark is an audible or palpable snap or clunk felt during hip movement",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Intra-articular mechanical symptoms such as locking suggesting a loose body or labral tear",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Dynamic ultrasound as a first-line study to demonstrate the snapping tendon, Clinical reproduction manoeuvres for the external and internal types, Plain radiographs to assess bony morphology, impingement and osteoarthritis"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: First-line conservative management with activity modification, targeted physiotherapy stretching and strengthening of the iliotibial band or iliopsoas, and non-steroidal anti-inflammatory drugs."
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing intra-articular pathology by labelling all snapping as a benign tendon cause"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of snapping hip syndrome (coxa saltans)."
-  }
- ],
- "tables": [
-  {
-   "id": "snapping_hip_syndrome-matrix",
-   "title": "Snapping hip syndrome (coxa saltans): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The hallmark is an audible or palpable snap or clunk felt during hip movement",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Hand & Peripheral nerve",
+  "specialty": "Orthopaedics / Hand Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Green's Operative Hand Surgery / Campbell's Operative Orthopaedics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The hallmark is an audible or palpable snap or clunk felt during hip movement",
+      "The external type is caused by the iliotibial band or gluteus maximus tendon flicking over the greater trochanter, giving lateral symptoms",
+      "The internal type is caused by the iliopsoas tendon shifting over the iliopectineal eminence or femoral head, giving anterior or groin symptoms",
+      "The intra-articular type is caused by a labral tear, loose body or chondral lesion",
+      "It most often affects young active people such as dancers and athletes and is frequently painless, though it can become symptomatic",
+      "The external snap can often be reproduced and even seen by the patient, whereas the internal snap is elicited by extending the hip from a flexed, abducted, externally rotated position",
+      "Dynamic ultrasound is particularly useful to demonstrate the offending tendon snapping in real time",
+      "Generic management includes activity modification, stretching and physiotherapy, corticosteroid injection into the bursa or iliopsoas sheath, and surgical lengthening, release or arthroscopy for refractory or intra-articular causes"
     ],
-    [
-     "Key Investigations",
-     "Dynamic ultrasound as a first-line study to demonstrate the snapping tendon, Clinical reproduction manoeuvres for the external",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Snapping hip syndrome describes a snapping sensation produced when a tendon or band catches on a bony prominence, or when an intra-articular lesion mechanically catches. In the external type the iliotibial band or gluteus maximus tendon flicks across the greater trochanter, while in the internal type the iliopsoas tendon abruptly shifts over the iliopectineal eminence or femoral head as the hip extends from a flexed position. The intra-articular type stems from labral tears or loose bodies. Repetitive movement of the offending structure commonly leads to a secondary tendinopathy or bursitis that generates pain.",
+    "additionalDifferentials": [
+      "Greater trochanteric pain syndrome or trochanteric bursitis",
+      "Iliopsoas bursitis or tendinopathy",
+      "Labral tear or femoroacetabular impingement",
+      "Intra-articular loose body or chondral lesion",
+      "Hip osteoarthritis",
+      "Femoral neck stress fracture",
+      "Athletic pubalgia"
     ],
-    [
-     "Primary Differentials",
-     "Greater trochanteric pain syndrome or trochanteric bursitis, Iliopsoas bursitis or tendinopathy, Labral tear or femoroacetabular",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Dynamic ultrasound as a first-line study to demonstrate the snapping tendon",
+      "Clinical reproduction manoeuvres for the external and internal types",
+      "Plain radiographs to assess bony morphology, impingement and osteoarthritis",
+      "MRI or MR arthrography to evaluate the labrum and intra-articular structures",
+      "A diagnostic injection into the iliopsoas sheath or bursa to confirm the pain source"
     ],
-    [
-     "Management Strategy",
-     "First-line conservative management with activity modification, targeted physiotherapy stretching and strengthening of the",
-     "Core treatment modality"
+    "redFlags": [
+      "Intra-articular mechanical symptoms such as locking suggesting a loose body or labral tear",
+      "Night pain or systemic features raising concern for tumour or infection",
+      "Progressive activity-related pain suggesting a femoral neck stress fracture",
+      "Progressive loss of function"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing intra-articular pathology by labelling all snapping as a benign tendon cause",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most patients respond to conservative measures, and surgery reserved for refractory cases generally gives good results, though intra-articular causes require specific treatment.",
+    "pitfalls": [
+      "Missing intra-articular pathology by labelling all snapping as a benign tendon cause",
+      "Overtreating asymptomatic snapping that needs only reassurance",
+      "Causing iatrogenic weakness through excessive tendon lengthening",
+      "Failing to use dynamic imaging to confirm the mechanism"
+    ],
+    "references": [
+      "Campbell's Operative Orthopaedics",
+      "Green's Operative Hand Surgery"
+    ],
+    "crossLinks": [],
+    "management": [
+      "First-line conservative management with activity modification, targeted physiotherapy stretching and strengthening of the iliotibial band or iliopsoas, and non-steroidal anti-inflammatory drugs.",
+      "Corticosteroid injection into the trochanteric bursa or iliopsoas sheath for painful tendinopathy or bursitis, which can also be diagnostic.",
+      "Surgical release or lengthening of the iliotibial band in the external type or the iliopsoas tendon in the internal type, reserved for refractory symptomatic cases.",
+      "Hip arthroscopy to address an intra-articular cause such as a labral tear, loose body or chondral lesion.",
+      "Reassure patients with painless snapping, for whom no intervention beyond load management is needed.",
+      "Refer to orthopaedics or hip-preservation surgery for symptoms resistant to conservative care."
     ]
-   ],
-   "caption": "Overview comparison matrix for snapping hip syndrome (coxa saltans)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "snapping-hip-syndrome-real-image",
-   "title": "Snapping hip syndrome (coxa saltans): Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "snapping_hip_syndrome-pathway",
+      "title": "Snapping hip syndrome (coxa saltans): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The hallmark is an audible or palpable snap or clunk felt during hip movement",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Intra-articular mechanical symptoms such as locking suggesting a loose body or labral tear",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Dynamic ultrasound as a first-line study to demonstrate the snapping tendon, Clinical reproduction manoeuvres for the external and internal types, Plain radiographs to assess bony morphology, impingement and osteoarthritis"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: First-line conservative management with activity modification, targeted physiotherapy stretching and strengthening of the iliotibial band or iliopsoas, and non-steroidal anti-inflammatory drugs."
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing intra-articular pathology by labelling all snapping as a benign tendon cause"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of snapping hip syndrome (coxa saltans)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "snapping_hip_syndrome-matrix",
+      "title": "Snapping hip syndrome (coxa saltans): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The hallmark is an audible or palpable snap or clunk felt during hip movement",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Dynamic ultrasound as a first-line study to demonstrate the snapping tendon, Clinical reproduction manoeuvres for the external",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Greater trochanteric pain syndrome or trochanteric bursitis, Iliopsoas bursitis or tendinopathy, Labral tear or femoroacetabular",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "First-line conservative management with activity modification, targeted physiotherapy stretching and strengthening of the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing intra-articular pathology by labelling all snapping as a benign tendon cause",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for snapping hip syndrome (coxa saltans)."
+    }
+  ],
+  "diagrams": []
 }

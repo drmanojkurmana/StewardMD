@@ -1,175 +1,153 @@
 {
- "id": "alg2_cdg",
- "name": "ALG2-CDG (congenital disorder of glycosylation type Ii)",
- "aliases": [
-  "ALG2-CDG",
-  "CDG-Ii",
-  "ALG2"
- ],
- "class": "non_infective",
- "system": "Metabolic / Congenital disorders of glycosylation",
- "specialty": "Metabolic medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Neurometabolic and glycosylation references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "ALG2 encodes the endoplasmic reticulum alpha-1,3/1,6-mannosyltransferase that adds the second and third mannose residues to the lipid-linked oligosaccharide during early N-glycan assembly, placing it among the type I CDGs.",
-   "The classic presentation is an early-infantile epileptic encephalopathy, often with infantile spasms (West syndrome), profound developmental delay and central hypotonia.",
-   "Ocular involvement (iris or retinal coloboma, nystagmus), hepatomegaly and coagulation-factor deficiency are recognised systemic features.",
-   "A distinct allelic disorder, ALG2-related congenital myasthenic syndrome with tubular aggregates, causes limb-girdle fatigable weakness, so the same gene can produce a potentially treatable neuromuscular phenotype.",
-   "Carbohydrate-deficient transferrin shows a type I pattern (loss of whole glycan chains), but this may be subtle or normalise, so molecular confirmation is essential.",
-   "Lipid-linked oligosaccharide analysis in cultured fibroblasts shows accumulation of the truncated Man1-2 species, biochemically pinpointing the enzymatic block.",
-   "Neuroimaging commonly demonstrates hypomyelination with cerebral and cerebellar atrophy."
+  "id": "alg2_cdg",
+  "name": "ALG2-CDG (congenital disorder of glycosylation type Ii)",
+  "aliases": [
+    "ALG2-CDG",
+    "CDG-Ii",
+    "ALG2"
   ],
-  "pathophysiology": "ALG2-CDG is an autosomal recessive type I congenital disorder of glycosylation caused by biallelic loss-of-function variants in ALG2, which encodes the endoplasmic reticulum alpha-1,3/1,6-mannosyltransferase. This enzyme catalyses addition of the second and third mannose residues onto the dolichol-linked GlcNAc2-Man1 intermediate on the cytosolic face of the ER, an early committed step in building the Glc3Man9GlcNAc2 lipid-linked oligosaccharide that is transferred en bloc to nascent proteins. Deficient activity stalls oligosaccharide elongation, yielding truncated donor glycans, reduced N-glycosylation site occupancy and hypoglycosylation of numerous serum and membrane glycoproteins, which underlies the multisystem phenotype. Because ALG2 also supports the glycosylation required for stable neuromuscular junction function, certain hypomorphic variants instead manifest as a congenital myasthenic syndrome with tubular aggregates rather than the encephalopathic CDG picture.",
-  "additionalDifferentials": [
-   "ALG1-CDG (CDG-Ik), which adds the first mannose and causes a clinically similar severe encephalopathy",
-   "ALG11-CDG (CDG-Ip), the neighbouring mannosyltransferase adding the fourth and fifth mannoses",
-   "ALG3-CDG and ALG12-CDG (luminal mannosyltransferase defects)",
-   "PMM2-CDG (CDG-Ia), the prototypic type I CDG",
-   "Other genetic early-infantile epileptic encephalopathies unrelated to glycosylation",
-   "Congenital myasthenic syndromes with tubular aggregates (e.g. GFPT1, DPAGT1) for the allelic neuromuscular phenotype"
-  ],
-  "additionalInvestigations": [
-   "Serum transferrin isoelectric focusing / carbohydrate-deficient transferrin (type I pattern)",
-   "Whole-exome or whole-genome sequencing, or a targeted CDG gene panel, confirming biallelic ALG2 variants",
-   "Lipid-linked oligosaccharide profiling in cultured skin fibroblasts",
-   "Coagulation studies including fibrinogen and the natural anticoagulant factors",
-   "EEG to characterise the epileptic encephalopathy and identify hypsarrhythmia",
-   "MRI brain for hypomyelination and cerebral/cerebellar atrophy",
-   "For the myasthenic phenotype, repetitive nerve stimulation and muscle biopsy looking for tubular aggregates"
-  ],
-  "redFlags": [
-   "Intractable infantile seizures with developmental regression",
-   "Coagulopathy predisposing to bleeding or thrombosis, particularly before surgery",
-   "Feeding failure with failure to thrive",
-   "Fatigable weakness or respiratory compromise in the allelic myasthenic form"
-  ],
-  "prognosis": "Prognosis is guarded, with the severe encephalopathic form associated with early morbidity and shortened survival. The allelic myasthenic phenotype may be milder and can respond to therapies that enhance neuromuscular transmission.",
-  "pitfalls": [
-   "Transferrin testing can be normal or normalise beyond infancy, so a normal result does not exclude ALG2-CDG.",
-   "Overlooking that ALG2 variants can cause a treatable myasthenic syndrome mislabelled as a primary myopathy.",
-   "Attributing the coagulation abnormalities to hepatic disease alone rather than glycoprotein hypoglycosylation.",
-   "Assuming an abnormal transferrin pattern is diagnostic of PMM2-CDG without confirmatory genotyping."
-  ],
-  "references": [
-   "Standard inborn errors of metabolism reference texts",
-   "Peer-reviewed reviews of congenital disorders of glycosylation",
-   "Clinical genetics and neurometabolic disease references"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No disease-specific therapy for the encephalopathic form; supportive management through a metabolic multidisciplinary team",
-   "Anticonvulsant therapy for the epileptic encephalopathy, with corticotropin or vigabatrin considered for infantile spasms",
-   "For the allelic ALG2 congenital myasthenic syndrome, agents enhancing neuromuscular transmission such as the acetylcholinesterase inhibitor pyridostigmine",
-   "Correct coagulation factor and natural anticoagulant deficiencies around illness and procedures",
-   "Ophthalmology assessment for coloboma and nystagmus, with monitoring of hepatomegaly",
-   "Nutritional, feeding and developmental support for central hypotonia and delay",
-   "Genetic counselling and carrier testing for this autosomal recessive disorder"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "alg2_cdg-pathway",
-   "title": "ALG2-CDG (congenital disorder of glycosylation type Ii): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "ALG2 encodes the endoplasmic reticulum alpha-1,3/1,6-mannosyltransferase that adds the second and third mannose residues to the lipid-linked oligosaccharide during early N-glycan assembly, placing it among the type I CDGs.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Intractable infantile seizures with developmental regression",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum transferrin isoelectric focusing / carbohydrate-deficient transferrin (type I pattern), Whole-exome or whole-genome sequencing, or a targeted CDG gene panel, confirming biallelic ALG2 variants, Lipid-linked"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No disease-specific therapy for the encephalopathic form; supportive management through a metabolic multidisciplinary team"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Transferrin testing can be normal or normalise beyond infancy, so a normal result does not exclude ALG2-CDG."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of alg2-cdg (congenital disorder of glycosylation type ii)."
-  }
- ],
- "tables": [
-  {
-   "id": "alg2_cdg-matrix",
-   "title": "ALG2-CDG (congenital disorder of glycosylation type Ii): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "ALG2 encodes the endoplasmic reticulum alpha-1,3/1,6-mannosyltransferase that adds the second and third mannose residues to the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Congenital disorders of glycosylation",
+  "specialty": "Metabolic medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Neurometabolic and glycosylation references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "ALG2 encodes the endoplasmic reticulum alpha-1,3/1,6-mannosyltransferase that adds the second and third mannose residues to the lipid-linked oligosaccharide during early N-glycan assembly, placing it among the type I CDGs.",
+      "The classic presentation is an early-infantile epileptic encephalopathy, often with infantile spasms (West syndrome), profound developmental delay and central hypotonia.",
+      "Ocular involvement (iris or retinal coloboma, nystagmus), hepatomegaly and coagulation-factor deficiency are recognised systemic features.",
+      "A distinct allelic disorder, ALG2-related congenital myasthenic syndrome with tubular aggregates, causes limb-girdle fatigable weakness, so the same gene can produce a potentially treatable neuromuscular phenotype.",
+      "Carbohydrate-deficient transferrin shows a type I pattern (loss of whole glycan chains), but this may be subtle or normalise, so molecular confirmation is essential.",
+      "Lipid-linked oligosaccharide analysis in cultured fibroblasts shows accumulation of the truncated Man1-2 species, biochemically pinpointing the enzymatic block.",
+      "Neuroimaging commonly demonstrates hypomyelination with cerebral and cerebellar atrophy."
     ],
-    [
-     "Key Investigations",
-     "Serum transferrin isoelectric focusing / carbohydrate-deficient transferrin (type I pattern), Whole-exome or whole-genome",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "ALG2-CDG is an autosomal recessive type I congenital disorder of glycosylation caused by biallelic loss-of-function variants in ALG2, which encodes the endoplasmic reticulum alpha-1,3/1,6-mannosyltransferase. This enzyme catalyses addition of the second and third mannose residues onto the dolichol-linked GlcNAc2-Man1 intermediate on the cytosolic face of the ER, an early committed step in building the Glc3Man9GlcNAc2 lipid-linked oligosaccharide that is transferred en bloc to nascent proteins. Deficient activity stalls oligosaccharide elongation, yielding truncated donor glycans, reduced N-glycosylation site occupancy and hypoglycosylation of numerous serum and membrane glycoproteins, which underlies the multisystem phenotype. Because ALG2 also supports the glycosylation required for stable neuromuscular junction function, certain hypomorphic variants instead manifest as a congenital myasthenic syndrome with tubular aggregates rather than the encephalopathic CDG picture.",
+    "additionalDifferentials": [
+      "ALG1-CDG (CDG-Ik), which adds the first mannose and causes a clinically similar severe encephalopathy",
+      "ALG11-CDG (CDG-Ip), the neighbouring mannosyltransferase adding the fourth and fifth mannoses",
+      "ALG3-CDG and ALG12-CDG (luminal mannosyltransferase defects)",
+      "PMM2-CDG (CDG-Ia), the prototypic type I CDG",
+      "Other genetic early-infantile epileptic encephalopathies unrelated to glycosylation",
+      "Congenital myasthenic syndromes with tubular aggregates (e.g. GFPT1, DPAGT1) for the allelic neuromuscular phenotype"
     ],
-    [
-     "Primary Differentials",
-     "ALG1-CDG (CDG-Ik), which adds the first mannose and causes a clinically similar severe encephalopathy, ALG11-CDG (CDG-Ip), the",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum transferrin isoelectric focusing / carbohydrate-deficient transferrin (type I pattern)",
+      "Whole-exome or whole-genome sequencing, or a targeted CDG gene panel, confirming biallelic ALG2 variants",
+      "Lipid-linked oligosaccharide profiling in cultured skin fibroblasts",
+      "Coagulation studies including fibrinogen and the natural anticoagulant factors",
+      "EEG to characterise the epileptic encephalopathy and identify hypsarrhythmia",
+      "MRI brain for hypomyelination and cerebral/cerebellar atrophy",
+      "For the myasthenic phenotype, repetitive nerve stimulation and muscle biopsy looking for tubular aggregates"
     ],
-    [
-     "Management Strategy",
-     "No disease-specific therapy for the encephalopathic form; supportive management through a metabolic multidisciplinary team",
-     "Core treatment modality"
+    "redFlags": [
+      "Intractable infantile seizures with developmental regression",
+      "Coagulopathy predisposing to bleeding or thrombosis, particularly before surgery",
+      "Feeding failure with failure to thrive",
+      "Fatigable weakness or respiratory compromise in the allelic myasthenic form"
     ],
-    [
-     "Clinical Pitfall",
-     "Transferrin testing can be normal or normalise beyond infancy, so a normal result does not exclude ALG2-CDG.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is guarded, with the severe encephalopathic form associated with early morbidity and shortened survival. The allelic myasthenic phenotype may be milder and can respond to therapies that enhance neuromuscular transmission.",
+    "pitfalls": [
+      "Transferrin testing can be normal or normalise beyond infancy, so a normal result does not exclude ALG2-CDG.",
+      "Overlooking that ALG2 variants can cause a treatable myasthenic syndrome mislabelled as a primary myopathy.",
+      "Attributing the coagulation abnormalities to hepatic disease alone rather than glycoprotein hypoglycosylation.",
+      "Assuming an abnormal transferrin pattern is diagnostic of PMM2-CDG without confirmatory genotyping."
+    ],
+    "references": [
+      "Standard inborn errors of metabolism reference texts",
+      "Peer-reviewed reviews of congenital disorders of glycosylation",
+      "Clinical genetics and neurometabolic disease references"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No disease-specific therapy for the encephalopathic form; supportive management through a metabolic multidisciplinary team",
+      "Anticonvulsant therapy for the epileptic encephalopathy, with corticotropin or vigabatrin considered for infantile spasms",
+      "For the allelic ALG2 congenital myasthenic syndrome, agents enhancing neuromuscular transmission such as the acetylcholinesterase inhibitor pyridostigmine",
+      "Correct coagulation factor and natural anticoagulant deficiencies around illness and procedures",
+      "Ophthalmology assessment for coloboma and nystagmus, with monitoring of hepatomegaly",
+      "Nutritional, feeding and developmental support for central hypotonia and delay",
+      "Genetic counselling and carrier testing for this autosomal recessive disorder"
     ]
-   ],
-   "caption": "Overview comparison matrix for alg2-cdg (congenital disorder of glycosylation type ii)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "alg2-cdg-real-image",
-   "title": "ALG2-CDG (congenital disorder of glycosylation type Ii): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "alg2_cdg-pathway",
+      "title": "ALG2-CDG (congenital disorder of glycosylation type Ii): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "ALG2 encodes the endoplasmic reticulum alpha-1,3/1,6-mannosyltransferase that adds the second and third mannose residues to the lipid-linked oligosaccharide during early N-glycan assembly, placing it among the type I CDGs.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Intractable infantile seizures with developmental regression",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum transferrin isoelectric focusing / carbohydrate-deficient transferrin (type I pattern), Whole-exome or whole-genome sequencing, or a targeted CDG gene panel, confirming biallelic ALG2 variants, Lipid-linked"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No disease-specific therapy for the encephalopathic form; supportive management through a metabolic multidisciplinary team"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Transferrin testing can be normal or normalise beyond infancy, so a normal result does not exclude ALG2-CDG."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of alg2-cdg (congenital disorder of glycosylation type ii)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "alg2_cdg-matrix",
+      "title": "ALG2-CDG (congenital disorder of glycosylation type Ii): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "ALG2 encodes the endoplasmic reticulum alpha-1,3/1,6-mannosyltransferase that adds the second and third mannose residues to the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum transferrin isoelectric focusing / carbohydrate-deficient transferrin (type I pattern), Whole-exome or whole-genome",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "ALG1-CDG (CDG-Ik), which adds the first mannose and causes a clinically similar severe encephalopathy, ALG11-CDG (CDG-Ip), the",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No disease-specific therapy for the encephalopathic form; supportive management through a metabolic multidisciplinary team",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Transferrin testing can be normal or normalise beyond infancy, so a normal result does not exclude ALG2-CDG.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for alg2-cdg (congenital disorder of glycosylation type ii)."
+    }
+  ],
+  "diagrams": []
 }

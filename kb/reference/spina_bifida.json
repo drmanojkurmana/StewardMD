@@ -1,173 +1,151 @@
 {
- "id": "spina_bifida",
- "name": "Spina bifida",
- "aliases": [
-  "myelomeningocele",
-  "meningocele",
-  "spina bifida occulta",
-  "neural tube defect"
- ],
- "class": "non_infective",
- "system": "Neurosurgery / Neurology",
- "specialty": "Neurosurgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Youmans & Winn Neurological Surgery / Harrison's Principles of Internal Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Spina bifida is a congenital neural tube defect ranging from the hidden spina bifida occulta to the severe open myelomeningocele",
-   "Myelomeningocele exposes neural tissue and typically causes lower limb weakness, sensory loss, and bladder and bowel dysfunction whose level reflects the anatomical lesion",
-   "It is frequently associated with a Chiari II malformation and hydrocephalus, which often needs cerebrospinal fluid diversion",
-   "Spina bifida occulta is usually asymptomatic and found incidentally, but cutaneous markers such as a tuft of hair, dimple, or lipoma over the spine can signal an underlying tethered cord",
-   "Periconceptional folic acid supplementation substantially reduces the risk of neural tube defects and is a key public health measure",
-   "Antenatal diagnosis is supported by maternal serum alpha-fetoprotein and detailed ultrasound, allowing planning of delivery and early surgery",
-   "Early surgical closure of an open defect protects exposed neural tissue and reduces infection risk, and fetal repair is offered in selected cases",
-   "Lifelong multidisciplinary care addresses mobility, urological, orthopaedic, and neurosurgical needs including shunt surveillance and tethered cord"
+  "id": "spina_bifida",
+  "name": "Spina bifida",
+  "aliases": [
+    "myelomeningocele",
+    "meningocele",
+    "spina bifida occulta",
+    "neural tube defect"
   ],
-  "pathophysiology": "Spina bifida results from failure of the neural tube to close completely during early embryonic development, leaving a midline defect in the vertebral arches and, in open forms, in the overlying tissues. In myelomeningocele the meninges and dysplastic spinal cord protrude through the defect, so neural function below the lesion is impaired. Disordered cerebrospinal fluid dynamics and the commonly associated Chiari II malformation predispose to hydrocephalus. In occult forms the cord may be abnormally low and tethered by a thickened filum or lipoma, and growth-related traction can produce progressive neurological, urological, or orthopaedic deterioration.",
-  "additionalDifferentials": [
-   "Sacrococcygeal teratoma or other congenital masses",
-   "Tethered cord syndrome from other causes",
-   "Spinal dysraphism variants (diastematomyelia, dermal sinus)",
-   "Caudal regression syndrome",
-   "Simple sacral dimple without dysraphism"
-  ],
-  "additionalInvestigations": [
-   "Antenatal ultrasound and maternal serum alpha-fetoprotein for prenatal detection",
-   "MRI of the spine and brain to define the lesion, cord tethering, and associated Chiari II malformation",
-   "Cranial imaging and head circumference monitoring to detect hydrocephalus",
-   "Urodynamic and renal tract assessment for neurogenic bladder",
-   "Orthopaedic evaluation of the spine, hips, and lower limbs"
-  ],
-  "redFlags": [
-   "Open defect with exposed neural tissue at risk of infection needing urgent protection and closure",
-   "Signs of associated hydrocephalus or Chiari II brainstem dysfunction in an infant",
-   "New or progressive neurological, urological, or orthopaedic decline suggesting tethered cord or shunt failure",
-   "Fever or CSF leak indicating possible meningitis or ventriculitis"
-  ],
-  "prognosis": "Outcome varies widely with the level and severity of the lesion; occulta is usually benign, whereas myelomeningocele typically causes lasting motor, sensory, and sphincter deficits, though multidisciplinary care and timely surgery improve function and reduce complications.",
-  "pitfalls": [
-   "Dismissing cutaneous spinal markers that may indicate occult dysraphism and a tethered cord",
-   "Failing to monitor for evolving hydrocephalus or shunt malfunction",
-   "Overlooking neurogenic bladder and the associated risk to the upper urinary tract",
-   "Attributing new deficits in a growing child to the original lesion rather than a tethered cord"
-  ],
-  "references": [
-   "Youmans & Winn Neurological Surgery",
-   "Harrison's Principles of Internal Medicine, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Early surgical closure of the myelomeningocele defect, or antenatal foetal repair in selected cases, to protect exposed neural tissue and reduce infection",
-   "Cerebrospinal fluid diversion by ventriculoperitoneal shunt or endoscopic third ventriculostomy for associated hydrocephalus",
-   "Neurogenic bladder management with intermittent catheterisation, anticholinergics and regular renal-tract surveillance to protect the kidneys",
-   "Structured bowel management programme for neurogenic bowel dysfunction",
-   "Orthopaedic and physiotherapy care for lower-limb weakness, spinal deformity and hip problems, with appropriate mobility aids and pressure-area skin care",
-   "Untethering surgery for a symptomatic tethered cord causing progressive neurological, urological or orthopaedic decline",
-   "Multidisciplinary follow-up, with periconceptional folic acid supplementation to prevent recurrence and genetic counselling for the family"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "spina_bifida-pathway",
-   "title": "Spina bifida: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Spina bifida is a congenital neural tube defect ranging from the hidden spina bifida occulta to the severe open myelomeningocele",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Open defect with exposed neural tissue at risk of infection needing urgent protection and closure",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Antenatal ultrasound and maternal serum alpha-fetoprotein for prenatal detection, MRI of the spine and brain to define the lesion, cord tethering, and associated Chiari II malformation, Cranial imaging and head"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Early surgical closure of the myelomeningocele defect, or antenatal foetal repair in selected cases, to protect exposed neural tissue and reduce infection"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing cutaneous spinal markers that may indicate occult dysraphism and a tethered cord"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of spina bifida."
-  }
- ],
- "tables": [
-  {
-   "id": "spina_bifida-matrix",
-   "title": "Spina bifida: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Spina bifida is a congenital neural tube defect ranging from the hidden spina bifida occulta to the severe open myelomeningocele",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neurosurgery / Neurology",
+  "specialty": "Neurosurgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Youmans & Winn Neurological Surgery / Harrison's Principles of Internal Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Spina bifida is a congenital neural tube defect ranging from the hidden spina bifida occulta to the severe open myelomeningocele",
+      "Myelomeningocele exposes neural tissue and typically causes lower limb weakness, sensory loss, and bladder and bowel dysfunction whose level reflects the anatomical lesion",
+      "It is frequently associated with a Chiari II malformation and hydrocephalus, which often needs cerebrospinal fluid diversion",
+      "Spina bifida occulta is usually asymptomatic and found incidentally, but cutaneous markers such as a tuft of hair, dimple, or lipoma over the spine can signal an underlying tethered cord",
+      "Periconceptional folic acid supplementation substantially reduces the risk of neural tube defects and is a key public health measure",
+      "Antenatal diagnosis is supported by maternal serum alpha-fetoprotein and detailed ultrasound, allowing planning of delivery and early surgery",
+      "Early surgical closure of an open defect protects exposed neural tissue and reduces infection risk, and fetal repair is offered in selected cases",
+      "Lifelong multidisciplinary care addresses mobility, urological, orthopaedic, and neurosurgical needs including shunt surveillance and tethered cord"
     ],
-    [
-     "Key Investigations",
-     "Antenatal ultrasound and maternal serum alpha-fetoprotein for prenatal detection, MRI of the spine and brain to define the",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Spina bifida results from failure of the neural tube to close completely during early embryonic development, leaving a midline defect in the vertebral arches and, in open forms, in the overlying tissues. In myelomeningocele the meninges and dysplastic spinal cord protrude through the defect, so neural function below the lesion is impaired. Disordered cerebrospinal fluid dynamics and the commonly associated Chiari II malformation predispose to hydrocephalus. In occult forms the cord may be abnormally low and tethered by a thickened filum or lipoma, and growth-related traction can produce progressive neurological, urological, or orthopaedic deterioration.",
+    "additionalDifferentials": [
+      "Sacrococcygeal teratoma or other congenital masses",
+      "Tethered cord syndrome from other causes",
+      "Spinal dysraphism variants (diastematomyelia, dermal sinus)",
+      "Caudal regression syndrome",
+      "Simple sacral dimple without dysraphism"
     ],
-    [
-     "Primary Differentials",
-     "Sacrococcygeal teratoma or other congenital masses, Tethered cord syndrome from other causes, Spinal dysraphism variants",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Antenatal ultrasound and maternal serum alpha-fetoprotein for prenatal detection",
+      "MRI of the spine and brain to define the lesion, cord tethering, and associated Chiari II malformation",
+      "Cranial imaging and head circumference monitoring to detect hydrocephalus",
+      "Urodynamic and renal tract assessment for neurogenic bladder",
+      "Orthopaedic evaluation of the spine, hips, and lower limbs"
     ],
-    [
-     "Management Strategy",
-     "Early surgical closure of the myelomeningocele defect, or antenatal foetal repair in selected cases, to protect exposed neural",
-     "Core treatment modality"
+    "redFlags": [
+      "Open defect with exposed neural tissue at risk of infection needing urgent protection and closure",
+      "Signs of associated hydrocephalus or Chiari II brainstem dysfunction in an infant",
+      "New or progressive neurological, urological, or orthopaedic decline suggesting tethered cord or shunt failure",
+      "Fever or CSF leak indicating possible meningitis or ventriculitis"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing cutaneous spinal markers that may indicate occult dysraphism and a tethered cord",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome varies widely with the level and severity of the lesion; occulta is usually benign, whereas myelomeningocele typically causes lasting motor, sensory, and sphincter deficits, though multidisciplinary care and timely surgery improve function and reduce complications.",
+    "pitfalls": [
+      "Dismissing cutaneous spinal markers that may indicate occult dysraphism and a tethered cord",
+      "Failing to monitor for evolving hydrocephalus or shunt malfunction",
+      "Overlooking neurogenic bladder and the associated risk to the upper urinary tract",
+      "Attributing new deficits in a growing child to the original lesion rather than a tethered cord"
+    ],
+    "references": [
+      "Youmans & Winn Neurological Surgery",
+      "Harrison's Principles of Internal Medicine, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Early surgical closure of the myelomeningocele defect, or antenatal foetal repair in selected cases, to protect exposed neural tissue and reduce infection",
+      "Cerebrospinal fluid diversion by ventriculoperitoneal shunt or endoscopic third ventriculostomy for associated hydrocephalus",
+      "Neurogenic bladder management with intermittent catheterisation, anticholinergics and regular renal-tract surveillance to protect the kidneys",
+      "Structured bowel management programme for neurogenic bowel dysfunction",
+      "Orthopaedic and physiotherapy care for lower-limb weakness, spinal deformity and hip problems, with appropriate mobility aids and pressure-area skin care",
+      "Untethering surgery for a symptomatic tethered cord causing progressive neurological, urological or orthopaedic decline",
+      "Multidisciplinary follow-up, with periconceptional folic acid supplementation to prevent recurrence and genetic counselling for the family"
     ]
-   ],
-   "caption": "Overview comparison matrix for spina bifida."
-  }
- ],
- "diagrams": [
-  {
-   "id": "spina-bifida-real-image",
-   "title": "Spina bifida: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "spina_bifida-pathway",
+      "title": "Spina bifida: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Spina bifida is a congenital neural tube defect ranging from the hidden spina bifida occulta to the severe open myelomeningocele",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Open defect with exposed neural tissue at risk of infection needing urgent protection and closure",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Antenatal ultrasound and maternal serum alpha-fetoprotein for prenatal detection, MRI of the spine and brain to define the lesion, cord tethering, and associated Chiari II malformation, Cranial imaging and head"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Early surgical closure of the myelomeningocele defect, or antenatal foetal repair in selected cases, to protect exposed neural tissue and reduce infection"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing cutaneous spinal markers that may indicate occult dysraphism and a tethered cord"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of spina bifida."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "spina_bifida-matrix",
+      "title": "Spina bifida: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Spina bifida is a congenital neural tube defect ranging from the hidden spina bifida occulta to the severe open myelomeningocele",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Antenatal ultrasound and maternal serum alpha-fetoprotein for prenatal detection, MRI of the spine and brain to define the",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Sacrococcygeal teratoma or other congenital masses, Tethered cord syndrome from other causes, Spinal dysraphism variants",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Early surgical closure of the myelomeningocele defect, or antenatal foetal repair in selected cases, to protect exposed neural",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing cutaneous spinal markers that may indicate occult dysraphism and a tethered cord",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for spina bifida."
+    }
+  ],
+  "diagrams": []
 }

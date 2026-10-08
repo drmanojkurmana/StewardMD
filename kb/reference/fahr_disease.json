@@ -1,178 +1,156 @@
 {
- "id": "fahr_disease",
- "name": "Fahr disease",
- "aliases": [
-  "primary familial brain calcification",
-  "PFBC",
-  "idiopathic basal ganglia calcification",
-  "SLC20A2",
-  "PDGFB",
-  "PDGFRB",
-  "XPR1",
-  "bilateral striopallidodentate calcinosis"
- ],
- "class": "non_infective",
- "system": "Nervous system / Genetics",
- "specialty": "Neurology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Movement-disorder and neurogenetics textbooks with peer-reviewed reviews",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Primary familial brain calcification (Fahr disease) is a genetic disorder of symmetrical brain calcification, most commonly autosomal dominant through variants in SLC20A2, PDGFB, PDGFRB, or XPR1 (recessive genes also described)",
-   "Diagnosis requires exclusion of secondary causes of basal ganglia calcification, above all disorders of calcium-phosphate metabolism such as hypoparathyroidism and pseudohypoparathyroidism",
-   "Clinical features are variable and include a movement disorder (parkinsonism, dystonia, chorea), cognitive decline, psychiatric symptoms, headache, and seizures, though some carriers remain asymptomatic",
-   "CT is the most sensitive means of demonstrating the calcification, showing symmetrical dense deposits in the basal ganglia (especially globus pallidus), thalamus, dentate nuclei, and subcortical white matter",
-   "On MRI the calcification can be missed or appear variable, so CT is preferred for detection and characterisation",
-   "Serum calcium, phosphate, and parathyroid hormone must be checked to exclude the important treatable metabolic mimics",
-   "Because inheritance is often dominant, family history and consideration of testing relatives are important",
-   "Management is symptomatic, and calcium-phosphate homeostasis should be optimised where relevant"
+  "id": "fahr_disease",
+  "name": "Fahr disease",
+  "aliases": [
+    "primary familial brain calcification",
+    "PFBC",
+    "idiopathic basal ganglia calcification",
+    "SLC20A2",
+    "PDGFB",
+    "PDGFRB",
+    "XPR1",
+    "bilateral striopallidodentate calcinosis"
   ],
-  "pathophysiology": "Primary familial brain calcification is characterised by progressive bilateral calcium deposition in the basal ganglia and other deep brain structures in the absence of a metabolic cause. The recognised genes converge on the neurovascular unit and phosphate homeostasis: SLC20A2 and XPR1 regulate inorganic phosphate transport, while PDGFB and PDGFRB maintain pericyte function and blood-brain barrier integrity. Disruption of phosphate handling and of the barrier is thought to promote mineral deposition within and around small vessel walls, leading to the calcification that underlies the movement, cognitive, and psychiatric manifestations.",
-  "additionalDifferentials": [
-   "Hypoparathyroidism and pseudohypoparathyroidism",
-   "Other endocrine or metabolic causes of brain calcification",
-   "Congenital or acquired infections with intracranial calcification",
-   "Mitochondrial disorders and other neurodegenerative parkinsonism/dementia syndromes",
-   "Toxic causes (for example prior radiation or lead exposure)",
-   "Physiological age-related pallidal calcification (as a benign incidental finding)"
-  ],
-  "additionalInvestigations": [
-   "Brain CT to demonstrate and characterise the symmetrical deep grey-matter and dentate calcification",
-   "Serum calcium, phosphate, and parathyroid hormone to exclude parathyroid and metabolic causes",
-   "Molecular genetic testing of the known primary familial brain calcification genes",
-   "Brain MRI to assess associated parenchymal change and complement CT",
-   "Screening for secondary causes (infective and toxic) when the picture is atypical"
-  ],
-  "redFlags": [
-   "New seizures or status epilepticus",
-   "Rapidly progressive cognitive decline or acute psychiatric crisis",
-   "Severe or disabling movement disorder",
-   "Features suggesting a treatable metabolic cause such as symptomatic hypocalcaemia"
-  ],
-  "prognosis": "The course is variable: some gene carriers remain asymptomatic while others develop progressive movement disorder, cognitive decline, and psychiatric disease, and there is no treatment that halts the calcification. Prognosis depends on the extent and rate of neurological involvement.",
-  "pitfalls": [
-   "Diagnosing primary (genetic) disease without first excluding secondary metabolic causes, particularly parathyroid disorders",
-   "Relying on MRI, which can under-detect calcification, rather than CT",
-   "Interpreting minor age-related pallidal calcification as pathological",
-   "Overlooking dominant inheritance and the value of family assessment and counselling"
-  ],
-  "references": [
-   "GeneReviews: Primary Familial Brain Calcification",
-   "Bradley's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No therapy halts the calcification, so management is symptomatic and supportive",
-   "Symptomatic treatment of the movement disorder, using levodopa or other agents for parkinsonism and appropriate drugs for chorea or dystonia",
-   "Antiepileptic drugs for seizures",
-   "Psychiatric treatment of associated mood, psychotic or behavioural symptoms alongside cognitive support",
-   "Exclusion and correction of secondary metabolic causes, particularly disordered calcium and phosphate handling and hypoparathyroidism, which are important treatable mimics",
-   "Multidisciplinary care with neurology, psychiatry and physiotherapy or occupational therapy",
-   "Genetic counselling and family assessment given the usually autosomal dominant inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "fahr_disease-pathway",
-   "title": "Fahr disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Primary familial brain calcification (Fahr disease) is a genetic disorder of symmetrical brain calcification, most commonly autosomal dominant through variants in SLC20A2, PDGFB, PDGFRB, or XPR1 (recessive genes also described)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New seizures or status epilepticus",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Brain CT to demonstrate and characterise the symmetrical deep grey-matter and dentate calcification, Serum calcium, phosphate, and parathyroid hormone to exclude parathyroid and metabolic causes, Molecular genetic testing"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No therapy halts the calcification, so management is symptomatic and supportive"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Diagnosing primary (genetic) disease without first excluding secondary metabolic causes, particularly parathyroid disorders"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of fahr disease."
-  }
- ],
- "tables": [
-  {
-   "id": "fahr_disease-matrix",
-   "title": "Fahr disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Primary familial brain calcification (Fahr disease) is a genetic disorder of symmetrical brain calcification, most commonly",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Genetics",
+  "specialty": "Neurology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Movement-disorder and neurogenetics textbooks with peer-reviewed reviews",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Primary familial brain calcification (Fahr disease) is a genetic disorder of symmetrical brain calcification, most commonly autosomal dominant through variants in SLC20A2, PDGFB, PDGFRB, or XPR1 (recessive genes also described)",
+      "Diagnosis requires exclusion of secondary causes of basal ganglia calcification, above all disorders of calcium-phosphate metabolism such as hypoparathyroidism and pseudohypoparathyroidism",
+      "Clinical features are variable and include a movement disorder (parkinsonism, dystonia, chorea), cognitive decline, psychiatric symptoms, headache, and seizures, though some carriers remain asymptomatic",
+      "CT is the most sensitive means of demonstrating the calcification, showing symmetrical dense deposits in the basal ganglia (especially globus pallidus), thalamus, dentate nuclei, and subcortical white matter",
+      "On MRI the calcification can be missed or appear variable, so CT is preferred for detection and characterisation",
+      "Serum calcium, phosphate, and parathyroid hormone must be checked to exclude the important treatable metabolic mimics",
+      "Because inheritance is often dominant, family history and consideration of testing relatives are important",
+      "Management is symptomatic, and calcium-phosphate homeostasis should be optimised where relevant"
     ],
-    [
-     "Key Investigations",
-     "Brain CT to demonstrate and characterise the symmetrical deep grey-matter and dentate calcification, Serum calcium, phosphate,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Primary familial brain calcification is characterised by progressive bilateral calcium deposition in the basal ganglia and other deep brain structures in the absence of a metabolic cause. The recognised genes converge on the neurovascular unit and phosphate homeostasis: SLC20A2 and XPR1 regulate inorganic phosphate transport, while PDGFB and PDGFRB maintain pericyte function and blood-brain barrier integrity. Disruption of phosphate handling and of the barrier is thought to promote mineral deposition within and around small vessel walls, leading to the calcification that underlies the movement, cognitive, and psychiatric manifestations.",
+    "additionalDifferentials": [
+      "Hypoparathyroidism and pseudohypoparathyroidism",
+      "Other endocrine or metabolic causes of brain calcification",
+      "Congenital or acquired infections with intracranial calcification",
+      "Mitochondrial disorders and other neurodegenerative parkinsonism/dementia syndromes",
+      "Toxic causes (for example prior radiation or lead exposure)",
+      "Physiological age-related pallidal calcification (as a benign incidental finding)"
     ],
-    [
-     "Primary Differentials",
-     "Hypoparathyroidism and pseudohypoparathyroidism, Other endocrine or metabolic causes of brain calcification, Congenital or",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Brain CT to demonstrate and characterise the symmetrical deep grey-matter and dentate calcification",
+      "Serum calcium, phosphate, and parathyroid hormone to exclude parathyroid and metabolic causes",
+      "Molecular genetic testing of the known primary familial brain calcification genes",
+      "Brain MRI to assess associated parenchymal change and complement CT",
+      "Screening for secondary causes (infective and toxic) when the picture is atypical"
     ],
-    [
-     "Management Strategy",
-     "No therapy halts the calcification, so management is symptomatic and supportive",
-     "Core treatment modality"
+    "redFlags": [
+      "New seizures or status epilepticus",
+      "Rapidly progressive cognitive decline or acute psychiatric crisis",
+      "Severe or disabling movement disorder",
+      "Features suggesting a treatable metabolic cause such as symptomatic hypocalcaemia"
     ],
-    [
-     "Clinical Pitfall",
-     "Diagnosing primary (genetic) disease without first excluding secondary metabolic causes, particularly parathyroid disorders",
-     "Prevent diagnostic or management error"
+    "prognosis": "The course is variable: some gene carriers remain asymptomatic while others develop progressive movement disorder, cognitive decline, and psychiatric disease, and there is no treatment that halts the calcification. Prognosis depends on the extent and rate of neurological involvement.",
+    "pitfalls": [
+      "Diagnosing primary (genetic) disease without first excluding secondary metabolic causes, particularly parathyroid disorders",
+      "Relying on MRI, which can under-detect calcification, rather than CT",
+      "Interpreting minor age-related pallidal calcification as pathological",
+      "Overlooking dominant inheritance and the value of family assessment and counselling"
+    ],
+    "references": [
+      "GeneReviews: Primary Familial Brain Calcification",
+      "Bradley's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No therapy halts the calcification, so management is symptomatic and supportive",
+      "Symptomatic treatment of the movement disorder, using levodopa or other agents for parkinsonism and appropriate drugs for chorea or dystonia",
+      "Antiepileptic drugs for seizures",
+      "Psychiatric treatment of associated mood, psychotic or behavioural symptoms alongside cognitive support",
+      "Exclusion and correction of secondary metabolic causes, particularly disordered calcium and phosphate handling and hypoparathyroidism, which are important treatable mimics",
+      "Multidisciplinary care with neurology, psychiatry and physiotherapy or occupational therapy",
+      "Genetic counselling and family assessment given the usually autosomal dominant inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for fahr disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "fahr-disease-real-image",
-   "title": "Fahr disease: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "fahr_disease-pathway",
+      "title": "Fahr disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Primary familial brain calcification (Fahr disease) is a genetic disorder of symmetrical brain calcification, most commonly autosomal dominant through variants in SLC20A2, PDGFB, PDGFRB, or XPR1 (recessive genes also described)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New seizures or status epilepticus",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Brain CT to demonstrate and characterise the symmetrical deep grey-matter and dentate calcification, Serum calcium, phosphate, and parathyroid hormone to exclude parathyroid and metabolic causes, Molecular genetic testing"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No therapy halts the calcification, so management is symptomatic and supportive"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Diagnosing primary (genetic) disease without first excluding secondary metabolic causes, particularly parathyroid disorders"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of fahr disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "fahr_disease-matrix",
+      "title": "Fahr disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Primary familial brain calcification (Fahr disease) is a genetic disorder of symmetrical brain calcification, most commonly",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Brain CT to demonstrate and characterise the symmetrical deep grey-matter and dentate calcification, Serum calcium, phosphate,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Hypoparathyroidism and pseudohypoparathyroidism, Other endocrine or metabolic causes of brain calcification, Congenital or",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No therapy halts the calcification, so management is symptomatic and supportive",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Diagnosing primary (genetic) disease without first excluding secondary metabolic causes, particularly parathyroid disorders",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for fahr disease."
+    }
+  ],
+  "diagrams": []
 }

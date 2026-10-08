@@ -1,171 +1,149 @@
 {
- "id": "heat_cramps",
- "name": "Heat cramps",
- "aliases": [
-  "exertional heat cramps",
-  "muscle cramps of heat",
-  "miner's cramps"
- ],
- "class": "non_infective",
- "system": "Environmental / Emergency",
- "specialty": "Emergency & Wilderness Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Auerbach's Wilderness Medicine / Bove and Davis' Diving Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Painful, involuntary muscle spasms occurring during or after strenuous exertion in the heat, typically in the heavily worked large muscle groups of the legs, arms, and abdomen",
-   "Classically affects unacclimatised individuals who sweat profusely and replace losses with water alone, leading to a sodium-depletion state",
-   "Core temperature and mental status are normal, distinguishing cramps from more serious heat illness",
-   "The mechanism is best understood as a sodium (salt) deficit rather than simple dehydration or a lack of potassium, calcium, or magnesium",
-   "Treatment is rest in a cool place and replacement of both salt and fluid, using oral electrolyte solutions or, in severe cases, intravenous saline",
-   "Plain water without added electrolyte can worsen the sodium deficit and prolong symptoms",
-   "Acclimatisation and adequate dietary salt greatly reduce recurrence in those working or exercising in the heat"
+  "id": "heat_cramps",
+  "name": "Heat cramps",
+  "aliases": [
+    "exertional heat cramps",
+    "muscle cramps of heat",
+    "miner's cramps"
   ],
-  "pathophysiology": "Heat cramps result from selective loss of sodium and chloride in sweat during heavy exertion, compounded when fluid losses are replaced with water that dilutes the remaining extracellular sodium. The relative sodium depletion and altered fluid balance at the neuromuscular junction of fatigued, heavily used muscles provoke sustained, painful contraction. Because overall thermoregulation is preserved, the core temperature and sensorium stay normal, marking this as a comparatively benign point on the spectrum of heat illness, though it may accompany or precede heat exhaustion.",
-  "additionalDifferentials": [
-   "Heat exhaustion",
-   "Exertional rhabdomyolysis",
-   "Exertional (dilutional) hyponatraemia",
-   "Ordinary exercise-associated muscle cramp from fatigue",
-   "Tetany from other electrolyte disturbance",
-   "Dystonic or drug-induced muscle spasm"
-  ],
-  "additionalInvestigations": [
-   "Clinical assessment with normal core temperature and mentation",
-   "Serum sodium and chloride to confirm salt depletion and exclude hyponatraemia",
-   "Other electrolytes (potassium, calcium, magnesium) to exclude alternative causes",
-   "Creatine kinase where rhabdomyolysis is suspected",
-   "Renal function and urinalysis in severe or prolonged cases"
-  ],
-  "redFlags": [
-   "Marked hyperthermia or altered mental status suggesting heat stroke rather than simple cramps",
-   "Very dark urine, severe muscle pain, or weakness suggesting rhabdomyolysis",
-   "Documented hyponatraemia, which changes fluid management entirely",
-   "Failure to settle with rest and salt/fluid replacement"
-  ],
-  "prognosis": "Heat cramps are self-limiting and resolve quickly with rest and combined salt and fluid replacement; recurrence is common without acclimatisation and adequate sodium intake but long-term sequelae are not expected.",
-  "pitfalls": [
-   "Attributing cramps to potassium, calcium, or magnesium deficiency and missing the underlying sodium deficit",
-   "Replacing losses with plain water and worsening the picture",
-   "Failing to recognise coexisting heat exhaustion",
-   "Overlooking exertional hyponatraemia before giving hypotonic fluids"
-  ],
-  "references": [
-   "Auerbach's Wilderness Medicine",
-   "Bove and Davis' Diving Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Rest the affected muscles in a cool environment away from ongoing heat stress",
-   "Replace both salt and fluid together using an oral electrolyte solution, or intravenous saline in severe cases",
-   "Avoid plain water alone, which dilutes extracellular sodium and prolongs the cramps",
-   "Apply gentle stretching and passive movement to the cramping muscle groups",
-   "Check serum sodium and chloride to confirm salt depletion and exclude hyponatraemia",
-   "Prevent recurrence through acclimatisation and adequate dietary and electrolyte salt intake before heavy exertion"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "heat_cramps-pathway",
-   "title": "Heat cramps: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Painful, involuntary muscle spasms occurring during or after strenuous exertion in the heat, typically in the heavily worked large muscle groups of the legs, arms, and abdomen",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Marked hyperthermia or altered mental status suggesting heat stroke rather than simple cramps",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical assessment with normal core temperature and mentation, Serum sodium and chloride to confirm salt depletion and exclude hyponatraemia, Other electrolytes (potassium, calcium, magnesium) to exclude alternative causes"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Rest the affected muscles in a cool environment away from ongoing heat stress"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing cramps to potassium, calcium, or magnesium deficiency and missing the underlying sodium deficit"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of heat cramps."
-  }
- ],
- "tables": [
-  {
-   "id": "heat_cramps-matrix",
-   "title": "Heat cramps: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Painful, involuntary muscle spasms occurring during or after strenuous exertion in the heat, typically in the heavily worked",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Environmental / Emergency",
+  "specialty": "Emergency & Wilderness Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Auerbach's Wilderness Medicine / Bove and Davis' Diving Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Painful, involuntary muscle spasms occurring during or after strenuous exertion in the heat, typically in the heavily worked large muscle groups of the legs, arms, and abdomen",
+      "Classically affects unacclimatised individuals who sweat profusely and replace losses with water alone, leading to a sodium-depletion state",
+      "Core temperature and mental status are normal, distinguishing cramps from more serious heat illness",
+      "The mechanism is best understood as a sodium (salt) deficit rather than simple dehydration or a lack of potassium, calcium, or magnesium",
+      "Treatment is rest in a cool place and replacement of both salt and fluid, using oral electrolyte solutions or, in severe cases, intravenous saline",
+      "Plain water without added electrolyte can worsen the sodium deficit and prolong symptoms",
+      "Acclimatisation and adequate dietary salt greatly reduce recurrence in those working or exercising in the heat"
     ],
-    [
-     "Key Investigations",
-     "Clinical assessment with normal core temperature and mentation, Serum sodium and chloride to confirm salt depletion and exclude",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Heat cramps result from selective loss of sodium and chloride in sweat during heavy exertion, compounded when fluid losses are replaced with water that dilutes the remaining extracellular sodium. The relative sodium depletion and altered fluid balance at the neuromuscular junction of fatigued, heavily used muscles provoke sustained, painful contraction. Because overall thermoregulation is preserved, the core temperature and sensorium stay normal, marking this as a comparatively benign point on the spectrum of heat illness, though it may accompany or precede heat exhaustion.",
+    "additionalDifferentials": [
+      "Heat exhaustion",
+      "Exertional rhabdomyolysis",
+      "Exertional (dilutional) hyponatraemia",
+      "Ordinary exercise-associated muscle cramp from fatigue",
+      "Tetany from other electrolyte disturbance",
+      "Dystonic or drug-induced muscle spasm"
     ],
-    [
-     "Primary Differentials",
-     "Heat exhaustion, Exertional rhabdomyolysis, Exertional (dilutional) hyponatraemia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical assessment with normal core temperature and mentation",
+      "Serum sodium and chloride to confirm salt depletion and exclude hyponatraemia",
+      "Other electrolytes (potassium, calcium, magnesium) to exclude alternative causes",
+      "Creatine kinase where rhabdomyolysis is suspected",
+      "Renal function and urinalysis in severe or prolonged cases"
     ],
-    [
-     "Management Strategy",
-     "Rest the affected muscles in a cool environment away from ongoing heat stress",
-     "Core treatment modality"
+    "redFlags": [
+      "Marked hyperthermia or altered mental status suggesting heat stroke rather than simple cramps",
+      "Very dark urine, severe muscle pain, or weakness suggesting rhabdomyolysis",
+      "Documented hyponatraemia, which changes fluid management entirely",
+      "Failure to settle with rest and salt/fluid replacement"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing cramps to potassium, calcium, or magnesium deficiency and missing the underlying sodium deficit",
-     "Prevent diagnostic or management error"
+    "prognosis": "Heat cramps are self-limiting and resolve quickly with rest and combined salt and fluid replacement; recurrence is common without acclimatisation and adequate sodium intake but long-term sequelae are not expected.",
+    "pitfalls": [
+      "Attributing cramps to potassium, calcium, or magnesium deficiency and missing the underlying sodium deficit",
+      "Replacing losses with plain water and worsening the picture",
+      "Failing to recognise coexisting heat exhaustion",
+      "Overlooking exertional hyponatraemia before giving hypotonic fluids"
+    ],
+    "references": [
+      "Auerbach's Wilderness Medicine",
+      "Bove and Davis' Diving Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Rest the affected muscles in a cool environment away from ongoing heat stress",
+      "Replace both salt and fluid together using an oral electrolyte solution, or intravenous saline in severe cases",
+      "Avoid plain water alone, which dilutes extracellular sodium and prolongs the cramps",
+      "Apply gentle stretching and passive movement to the cramping muscle groups",
+      "Check serum sodium and chloride to confirm salt depletion and exclude hyponatraemia",
+      "Prevent recurrence through acclimatisation and adequate dietary and electrolyte salt intake before heavy exertion"
     ]
-   ],
-   "caption": "Overview comparison matrix for heat cramps."
-  }
- ],
- "diagrams": [
-  {
-   "id": "heat-cramps-real-image",
-   "title": "Heat cramps: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "heat_cramps-pathway",
+      "title": "Heat cramps: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Painful, involuntary muscle spasms occurring during or after strenuous exertion in the heat, typically in the heavily worked large muscle groups of the legs, arms, and abdomen",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Marked hyperthermia or altered mental status suggesting heat stroke rather than simple cramps",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical assessment with normal core temperature and mentation, Serum sodium and chloride to confirm salt depletion and exclude hyponatraemia, Other electrolytes (potassium, calcium, magnesium) to exclude alternative causes"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Rest the affected muscles in a cool environment away from ongoing heat stress"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing cramps to potassium, calcium, or magnesium deficiency and missing the underlying sodium deficit"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of heat cramps."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "heat_cramps-matrix",
+      "title": "Heat cramps: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Painful, involuntary muscle spasms occurring during or after strenuous exertion in the heat, typically in the heavily worked",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical assessment with normal core temperature and mentation, Serum sodium and chloride to confirm salt depletion and exclude",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Heat exhaustion, Exertional rhabdomyolysis, Exertional (dilutional) hyponatraemia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Rest the affected muscles in a cool environment away from ongoing heat stress",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing cramps to potassium, calcium, or magnesium deficiency and missing the underlying sodium deficit",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for heat cramps."
+    }
+  ],
+  "diagrams": []
 }

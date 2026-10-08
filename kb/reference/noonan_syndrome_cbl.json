@@ -1,177 +1,155 @@
 {
- "id": "noonan_syndrome_cbl",
- "name": "Noonan syndrome-like disorder with CBL mutation",
- "aliases": [
-  "CBL syndrome",
-  "Noonan syndrome-like disorder with or without juvenile myelomonocytic leukaemia",
-  "NSLL",
-  "CBL-related RASopathy"
- ],
- "class": "non_infective",
- "system": "Genetics",
- "specialty": "Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / Nature Reviews chromatinopathy literature",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by germline variants in CBL, an E3 ubiquitin ligase that normally restrains RAS/MAPK signalling, placing the condition among the RASopathies rather than the chromatin-modifier disorders",
-   "The phenotype overlaps Noonan syndrome, with facial dysmorphism, short stature, a broad or webbed neck and variable developmental delay",
-   "There is a notable predisposition to juvenile myelomonocytic leukaemia (JMML), a myeloproliferative disorder of early childhood",
-   "Some CBL-associated JMML behaves indolently and may regress spontaneously, though close haematological monitoring is essential",
-   "Cardiac involvement and features overlapping other RASopathies may be present but are often milder than in classic Noonan syndrome",
-   "A predisposition to vasculitis and other RAS-pathway-related complications has been described",
-   "Diagnosis is molecular, distinguishing germline CBL variants from the somatic CBL changes acquired within leukaemic clones"
+  "id": "noonan_syndrome_cbl",
+  "name": "Noonan syndrome-like disorder with CBL mutation",
+  "aliases": [
+    "CBL syndrome",
+    "Noonan syndrome-like disorder with or without juvenile myelomonocytic leukaemia",
+    "NSLL",
+    "CBL-related RASopathy"
   ],
-  "pathophysiology": "CBL encodes an E3 ubiquitin ligase that tags activated receptor tyrosine kinases for degradation, thereby switching off upstream signals that feed the RAS/MAPK cascade controlling cell growth and proliferation. Loss-of-function or dominant-negative germline variants impair this braking function, so RAS/MAPK signalling remains inappropriately active, a mechanism shared with the wider RASopathy group. The persistent signalling produces the Noonan-like developmental and craniofacial features and, in the haematopoietic compartment, drives the excessive myeloid proliferation that underlies juvenile myelomonocytic leukaemia; the same overactivity may contribute to vascular complications, and loss of the remaining normal allele in blood cells can promote clonal expansion.",
-  "additionalDifferentials": [
-   "Noonan syndrome (PTPN11 and other RASopathy genes)",
-   "Noonan syndrome with multiple lentigines",
-   "Cardiofaciocutaneous syndrome",
-   "Costello syndrome (HRAS)",
-   "Neurofibromatosis type 1 (with its own JMML risk)",
-   "Noonan syndrome-like disorder with loose anagen hair (SHOC2)",
-   "Other causes of juvenile myelomonocytic leukaemia"
-  ],
-  "additionalInvestigations": [
-   "Exome or targeted RASopathy panel sequencing to identify germline CBL variants",
-   "Full blood count with film and haematology review to screen for myeloproliferation",
-   "Bone marrow examination and specialist assessment if JMML is suspected",
-   "Echocardiography for congenital heart disease",
-   "Growth monitoring and endocrine assessment of short stature",
-   "Neurodevelopmental assessment",
-   "Monitoring for vasculitis and other RAS-pathway complications"
-  ],
-  "redFlags": [
-   "Hepatosplenomegaly, rising monocytosis or leukocytosis suggesting juvenile myelomonocytic leukaemia",
-   "Unexplained fever, pallor, bruising or bleeding indicating marrow dysfunction",
-   "Features of vasculitis requiring urgent evaluation",
-   "Significant cardiac disease requiring intervention"
-  ],
-  "prognosis": "Prognosis is shaped chiefly by the haematological course: many children do well, and some CBL-associated juvenile myelomonocytic leukaemia follows an indolent or self-limiting course, but progressive or aggressive disease can occur and requires specialist haemato-oncology management, so long-term monitoring is essential while developmental and cardiac outcomes are often relatively favourable.",
-  "pitfalls": [
-   "Confusing germline CBL variants with the somatic CBL changes found within leukaemic clones",
-   "Assuming all CBL-related juvenile myelomonocytic leukaemia is aggressive and over-treating disease that might regress",
-   "Overlooking the leukaemia predisposition when the picture is dominated by Noonan-like features",
-   "Failing to arrange haematological surveillance after a molecular diagnosis"
-  ],
-  "references": [
-   "GeneReviews — Noonan Syndrome and related RASopathies (CBL-related disorder)",
-   "Nature Reviews Cancer — RAS/MAPK signalling and juvenile myelomonocytic leukaemia"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Undertake close haematological surveillance with full blood count and blood film for juvenile myelomonocytic leukaemia, the key complication",
-   "Adopt watchful monitoring for CBL-associated JMML that may follow an indolent or self-limiting course, reserving chemotherapy and haematopoietic stem-cell transplantation for progressive or aggressive disease",
-   "Assess and monitor cardiac involvement with echocardiography, though it is often milder than in classic Noonan syndrome",
-   "Monitor growth with endocrine assessment of short stature",
-   "Provide neurodevelopmental assessment and support for delay",
-   "Remain alert to RAS-pathway complications such as vasculitis",
-   "Offer genetic counselling for this autosomal dominant germline CBL RASopathy, with testing of relatives",
-   "Coordinate care through clinical genetics and paediatric haemato-oncology"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "noonan_syndrome_cbl-pathway",
-   "title": "Noonan syndrome-like disorder with CBL mutation: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by germline variants in CBL, an E3 ubiquitin ligase that normally restrains RAS/MAPK signalling, placing the condition among the RASopathies rather than the chromatin-modifier disorders",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Hepatosplenomegaly, rising monocytosis or leukocytosis suggesting juvenile myelomonocytic leukaemia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Exome or targeted RASopathy panel sequencing to identify germline CBL variants, Full blood count with film and haematology review to screen for myeloproliferation, Bone marrow examination and specialist assessment if JMML"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Undertake close haematological surveillance with full blood count and blood film for juvenile myelomonocytic leukaemia, the key complication"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing germline CBL variants with the somatic CBL changes found within leukaemic clones"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of noonan syndrome-like disorder with cbl mutation."
-  }
- ],
- "tables": [
-  {
-   "id": "noonan_syndrome_cbl-matrix",
-   "title": "Noonan syndrome-like disorder with CBL mutation: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by germline variants in CBL, an E3 ubiquitin ligase that normally restrains RAS/MAPK signalling, placing the condition",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetics",
+  "specialty": "Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / Nature Reviews chromatinopathy literature",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by germline variants in CBL, an E3 ubiquitin ligase that normally restrains RAS/MAPK signalling, placing the condition among the RASopathies rather than the chromatin-modifier disorders",
+      "The phenotype overlaps Noonan syndrome, with facial dysmorphism, short stature, a broad or webbed neck and variable developmental delay",
+      "There is a notable predisposition to juvenile myelomonocytic leukaemia (JMML), a myeloproliferative disorder of early childhood",
+      "Some CBL-associated JMML behaves indolently and may regress spontaneously, though close haematological monitoring is essential",
+      "Cardiac involvement and features overlapping other RASopathies may be present but are often milder than in classic Noonan syndrome",
+      "A predisposition to vasculitis and other RAS-pathway-related complications has been described",
+      "Diagnosis is molecular, distinguishing germline CBL variants from the somatic CBL changes acquired within leukaemic clones"
     ],
-    [
-     "Key Investigations",
-     "Exome or targeted RASopathy panel sequencing to identify germline CBL variants, Full blood count with film and haematology review",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "CBL encodes an E3 ubiquitin ligase that tags activated receptor tyrosine kinases for degradation, thereby switching off upstream signals that feed the RAS/MAPK cascade controlling cell growth and proliferation. Loss-of-function or dominant-negative germline variants impair this braking function, so RAS/MAPK signalling remains inappropriately active, a mechanism shared with the wider RASopathy group. The persistent signalling produces the Noonan-like developmental and craniofacial features and, in the haematopoietic compartment, drives the excessive myeloid proliferation that underlies juvenile myelomonocytic leukaemia; the same overactivity may contribute to vascular complications, and loss of the remaining normal allele in blood cells can promote clonal expansion.",
+    "additionalDifferentials": [
+      "Noonan syndrome (PTPN11 and other RASopathy genes)",
+      "Noonan syndrome with multiple lentigines",
+      "Cardiofaciocutaneous syndrome",
+      "Costello syndrome (HRAS)",
+      "Neurofibromatosis type 1 (with its own JMML risk)",
+      "Noonan syndrome-like disorder with loose anagen hair (SHOC2)",
+      "Other causes of juvenile myelomonocytic leukaemia"
     ],
-    [
-     "Primary Differentials",
-     "Noonan syndrome (PTPN11 and other RASopathy genes), Noonan syndrome with multiple lentigines, Cardiofaciocutaneous syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Exome or targeted RASopathy panel sequencing to identify germline CBL variants",
+      "Full blood count with film and haematology review to screen for myeloproliferation",
+      "Bone marrow examination and specialist assessment if JMML is suspected",
+      "Echocardiography for congenital heart disease",
+      "Growth monitoring and endocrine assessment of short stature",
+      "Neurodevelopmental assessment",
+      "Monitoring for vasculitis and other RAS-pathway complications"
     ],
-    [
-     "Management Strategy",
-     "Undertake close haematological surveillance with full blood count and blood film for juvenile myelomonocytic leukaemia, the key",
-     "Core treatment modality"
+    "redFlags": [
+      "Hepatosplenomegaly, rising monocytosis or leukocytosis suggesting juvenile myelomonocytic leukaemia",
+      "Unexplained fever, pallor, bruising or bleeding indicating marrow dysfunction",
+      "Features of vasculitis requiring urgent evaluation",
+      "Significant cardiac disease requiring intervention"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing germline CBL variants with the somatic CBL changes found within leukaemic clones",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is shaped chiefly by the haematological course: many children do well, and some CBL-associated juvenile myelomonocytic leukaemia follows an indolent or self-limiting course, but progressive or aggressive disease can occur and requires specialist haemato-oncology management, so long-term monitoring is essential while developmental and cardiac outcomes are often relatively favourable.",
+    "pitfalls": [
+      "Confusing germline CBL variants with the somatic CBL changes found within leukaemic clones",
+      "Assuming all CBL-related juvenile myelomonocytic leukaemia is aggressive and over-treating disease that might regress",
+      "Overlooking the leukaemia predisposition when the picture is dominated by Noonan-like features",
+      "Failing to arrange haematological surveillance after a molecular diagnosis"
+    ],
+    "references": [
+      "GeneReviews — Noonan Syndrome and related RASopathies (CBL-related disorder)",
+      "Nature Reviews Cancer — RAS/MAPK signalling and juvenile myelomonocytic leukaemia"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Undertake close haematological surveillance with full blood count and blood film for juvenile myelomonocytic leukaemia, the key complication",
+      "Adopt watchful monitoring for CBL-associated JMML that may follow an indolent or self-limiting course, reserving chemotherapy and haematopoietic stem-cell transplantation for progressive or aggressive disease",
+      "Assess and monitor cardiac involvement with echocardiography, though it is often milder than in classic Noonan syndrome",
+      "Monitor growth with endocrine assessment of short stature",
+      "Provide neurodevelopmental assessment and support for delay",
+      "Remain alert to RAS-pathway complications such as vasculitis",
+      "Offer genetic counselling for this autosomal dominant germline CBL RASopathy, with testing of relatives",
+      "Coordinate care through clinical genetics and paediatric haemato-oncology"
     ]
-   ],
-   "caption": "Overview comparison matrix for noonan syndrome-like disorder with cbl mutation."
-  }
- ],
- "diagrams": [
-  {
-   "id": "noonan-syndrome-cbl-real-image",
-   "title": "Noonan syndrome-like disorder with CBL mutation: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "noonan_syndrome_cbl-pathway",
+      "title": "Noonan syndrome-like disorder with CBL mutation: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by germline variants in CBL, an E3 ubiquitin ligase that normally restrains RAS/MAPK signalling, placing the condition among the RASopathies rather than the chromatin-modifier disorders",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Hepatosplenomegaly, rising monocytosis or leukocytosis suggesting juvenile myelomonocytic leukaemia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Exome or targeted RASopathy panel sequencing to identify germline CBL variants, Full blood count with film and haematology review to screen for myeloproliferation, Bone marrow examination and specialist assessment if JMML"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Undertake close haematological surveillance with full blood count and blood film for juvenile myelomonocytic leukaemia, the key complication"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing germline CBL variants with the somatic CBL changes found within leukaemic clones"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of noonan syndrome-like disorder with cbl mutation."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "noonan_syndrome_cbl-matrix",
+      "title": "Noonan syndrome-like disorder with CBL mutation: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by germline variants in CBL, an E3 ubiquitin ligase that normally restrains RAS/MAPK signalling, placing the condition",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Exome or targeted RASopathy panel sequencing to identify germline CBL variants, Full blood count with film and haematology review",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Noonan syndrome (PTPN11 and other RASopathy genes), Noonan syndrome with multiple lentigines, Cardiofaciocutaneous syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Undertake close haematological surveillance with full blood count and blood film for juvenile myelomonocytic leukaemia, the key",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing germline CBL variants with the somatic CBL changes found within leukaemic clones",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for noonan syndrome-like disorder with cbl mutation."
+    }
+  ],
+  "diagrams": []
 }

@@ -1,173 +1,151 @@
 {
- "id": "capillariasis",
- "name": "Intestinal capillariasis",
- "aliases": [
-  "Capillaria philippinensis infection",
-  "intestinal capillariosis",
-  "Paracapillaria philippinensis infection"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases / Tropical Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Mandell/Manson's Tropical Diseases",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Intestinal capillariasis is caused by the nematode Capillaria philippinensis, acquired by eating raw or undercooked small freshwater or brackish-water fish, and is endemic to parts of Southeast Asia",
-   "It is a potentially fatal helminthiasis, distinguished from most intestinal worms by its ability to build up enormous worm numbers through internal autoinfection",
-   "The illness presents with chronic watery diarrhoea, borborygmi, abdominal pain and progressive weight loss",
-   "Severe infection causes a protein-losing enteropathy with malabsorption, leading to hypoproteinaemia, electrolyte depletion, muscle wasting and oedema, and death if untreated",
-   "Diagnosis rests on identifying the characteristic peanut-shaped eggs, larvae or adult worms in the stool, sometimes requiring repeated examination",
-   "Because autoinfection sustains and amplifies the burden, prolonged anthelmintic courses are needed rather than a single dose",
-   "Albendazole or mebendazole given as an extended course is the mainstay, together with correction of fluid, electrolyte and protein deficits"
+  "id": "capillariasis",
+  "name": "Intestinal capillariasis",
+  "aliases": [
+    "Capillaria philippinensis infection",
+    "intestinal capillariosis",
+    "Paracapillaria philippinensis infection"
   ],
-  "pathophysiology": "Capillaria philippinensis normally cycles between fish-eating birds and freshwater fish, with humans infected by consuming raw fish containing infective larvae. The larvae mature into adults that burrow into the mucosa of the small intestine. Crucially, the females can produce larvae that develop in situ and reinvade the same host's intestine, a process of internal autoinfection that allows the worm population to multiply to very large numbers over time. This heavy mucosal infestation damages the small-bowel epithelium, causing villous atrophy and a severe protein-losing enteropathy with malabsorption of nutrients, protein and electrolytes; the resulting hypoproteinaemia, wasting, oedema and electrolyte disturbance account for the potentially fatal course of untreated disease.",
-  "additionalDifferentials": [
-   "Other soil-transmitted or fish-borne helminthiases",
-   "Giardiasis and other malabsorptive protozoal infections",
-   "Coeliac disease and tropical sprue",
-   "Inflammatory bowel disease",
-   "Other causes of protein-losing enteropathy",
-   "Chronic infective diarrhoea from other pathogens"
-  ],
-  "additionalInvestigations": [
-   "Stool microscopy for characteristic eggs, larvae and adult worms",
-   "Repeated stool examination given intermittent and sometimes scanty shedding",
-   "Serum albumin and total protein to assess protein loss",
-   "Electrolyte measurement to detect depletion",
-   "Full blood count and assessment of nutritional status",
-   "Small-bowel biopsy when stool examination is repeatedly negative"
-  ],
-  "redFlags": [
-   "Severe hypoproteinaemia with generalised oedema",
-   "Profound electrolyte disturbance and dehydration",
-   "Marked cachexia from prolonged malabsorption",
-   "Relapse after apparently successful treatment due to ongoing autoinfection"
-  ],
-  "prognosis": "Untreated heavy infection is frequently fatal, but with an adequate prolonged anthelmintic course and correction of protein, fluid and electrolyte deficits the outlook is good, though relapse can occur if treatment is too short.",
-  "pitfalls": [
-   "Giving a single short anthelmintic course, which fails to control autoinfection and permits relapse",
-   "Missing the diagnosis when stool shedding is scanty and only one sample is examined",
-   "Attributing chronic diarrhoea and wasting to other malabsorptive disease without stool parasitology in endemic areas",
-   "Underestimating the severity of fluid, electrolyte and protein losses"
-  ],
-  "references": [
-   "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
-   "Manson's Tropical Diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Prolonged anthelmintic therapy with albendazole (or mebendazole) extended well beyond symptom resolution to overcome internal autoinfection",
-   "Correction of protein, fluid and electrolyte deficits arising from the protein-losing enteropathy",
-   "Nutritional support to reverse wasting and the malabsorption of nutrients",
-   "Monitoring of serum albumin, total protein and electrolytes alongside clinical response during and after treatment",
-   "Repeat stool examination to confirm clearance and detect relapse, extending therapy if worms persist",
-   "Advice on avoiding raw or undercooked freshwater and brackish-water fish to prevent reinfection",
-   "Inpatient escalation for severe hypoproteinaemia, oedema or electrolyte disturbance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "capillariasis-pathway",
-   "title": "Intestinal capillariasis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Intestinal capillariasis is caused by the nematode Capillaria philippinensis, acquired by eating raw or undercooked small freshwater or brackish-water fish, and is endemic to parts of Southeast Asia",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe hypoproteinaemia with generalised oedema",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Stool microscopy for characteristic eggs, larvae and adult worms, Repeated stool examination given intermittent and sometimes scanty shedding, Serum albumin and total protein to assess protein loss"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Prolonged anthelmintic therapy with albendazole (or mebendazole) extended well beyond symptom resolution to overcome internal autoinfection"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Giving a single short anthelmintic course, which fails to control autoinfection and permits relapse"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of intestinal capillariasis."
-  }
- ],
- "tables": [
-  {
-   "id": "capillariasis-matrix",
-   "title": "Intestinal capillariasis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Intestinal capillariasis is caused by the nematode Capillaria philippinensis, acquired by eating raw or undercooked small",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases / Tropical Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mandell/Manson's Tropical Diseases",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Intestinal capillariasis is caused by the nematode Capillaria philippinensis, acquired by eating raw or undercooked small freshwater or brackish-water fish, and is endemic to parts of Southeast Asia",
+      "It is a potentially fatal helminthiasis, distinguished from most intestinal worms by its ability to build up enormous worm numbers through internal autoinfection",
+      "The illness presents with chronic watery diarrhoea, borborygmi, abdominal pain and progressive weight loss",
+      "Severe infection causes a protein-losing enteropathy with malabsorption, leading to hypoproteinaemia, electrolyte depletion, muscle wasting and oedema, and death if untreated",
+      "Diagnosis rests on identifying the characteristic peanut-shaped eggs, larvae or adult worms in the stool, sometimes requiring repeated examination",
+      "Because autoinfection sustains and amplifies the burden, prolonged anthelmintic courses are needed rather than a single dose",
+      "Albendazole or mebendazole given as an extended course is the mainstay, together with correction of fluid, electrolyte and protein deficits"
     ],
-    [
-     "Key Investigations",
-     "Stool microscopy for characteristic eggs, larvae and adult worms, Repeated stool examination given intermittent and sometimes",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Capillaria philippinensis normally cycles between fish-eating birds and freshwater fish, with humans infected by consuming raw fish containing infective larvae. The larvae mature into adults that burrow into the mucosa of the small intestine. Crucially, the females can produce larvae that develop in situ and reinvade the same host's intestine, a process of internal autoinfection that allows the worm population to multiply to very large numbers over time. This heavy mucosal infestation damages the small-bowel epithelium, causing villous atrophy and a severe protein-losing enteropathy with malabsorption of nutrients, protein and electrolytes; the resulting hypoproteinaemia, wasting, oedema and electrolyte disturbance account for the potentially fatal course of untreated disease.",
+    "additionalDifferentials": [
+      "Other soil-transmitted or fish-borne helminthiases",
+      "Giardiasis and other malabsorptive protozoal infections",
+      "Coeliac disease and tropical sprue",
+      "Inflammatory bowel disease",
+      "Other causes of protein-losing enteropathy",
+      "Chronic infective diarrhoea from other pathogens"
     ],
-    [
-     "Primary Differentials",
-     "Other soil-transmitted or fish-borne helminthiases, Giardiasis and other malabsorptive protozoal infections, Coeliac disease and",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Stool microscopy for characteristic eggs, larvae and adult worms",
+      "Repeated stool examination given intermittent and sometimes scanty shedding",
+      "Serum albumin and total protein to assess protein loss",
+      "Electrolyte measurement to detect depletion",
+      "Full blood count and assessment of nutritional status",
+      "Small-bowel biopsy when stool examination is repeatedly negative"
     ],
-    [
-     "Management Strategy",
-     "Prolonged anthelmintic therapy with albendazole (or mebendazole) extended well beyond symptom resolution to overcome internal",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe hypoproteinaemia with generalised oedema",
+      "Profound electrolyte disturbance and dehydration",
+      "Marked cachexia from prolonged malabsorption",
+      "Relapse after apparently successful treatment due to ongoing autoinfection"
     ],
-    [
-     "Clinical Pitfall",
-     "Giving a single short anthelmintic course, which fails to control autoinfection and permits relapse",
-     "Prevent diagnostic or management error"
+    "prognosis": "Untreated heavy infection is frequently fatal, but with an adequate prolonged anthelmintic course and correction of protein, fluid and electrolyte deficits the outlook is good, though relapse can occur if treatment is too short.",
+    "pitfalls": [
+      "Giving a single short anthelmintic course, which fails to control autoinfection and permits relapse",
+      "Missing the diagnosis when stool shedding is scanty and only one sample is examined",
+      "Attributing chronic diarrhoea and wasting to other malabsorptive disease without stool parasitology in endemic areas",
+      "Underestimating the severity of fluid, electrolyte and protein losses"
+    ],
+    "references": [
+      "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
+      "Manson's Tropical Diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Prolonged anthelmintic therapy with albendazole (or mebendazole) extended well beyond symptom resolution to overcome internal autoinfection",
+      "Correction of protein, fluid and electrolyte deficits arising from the protein-losing enteropathy",
+      "Nutritional support to reverse wasting and the malabsorption of nutrients",
+      "Monitoring of serum albumin, total protein and electrolytes alongside clinical response during and after treatment",
+      "Repeat stool examination to confirm clearance and detect relapse, extending therapy if worms persist",
+      "Advice on avoiding raw or undercooked freshwater and brackish-water fish to prevent reinfection",
+      "Inpatient escalation for severe hypoproteinaemia, oedema or electrolyte disturbance"
     ]
-   ],
-   "caption": "Overview comparison matrix for intestinal capillariasis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "capillariasis-real-image",
-   "title": "Intestinal capillariasis: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "capillariasis-pathway",
+      "title": "Intestinal capillariasis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Intestinal capillariasis is caused by the nematode Capillaria philippinensis, acquired by eating raw or undercooked small freshwater or brackish-water fish, and is endemic to parts of Southeast Asia",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe hypoproteinaemia with generalised oedema",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Stool microscopy for characteristic eggs, larvae and adult worms, Repeated stool examination given intermittent and sometimes scanty shedding, Serum albumin and total protein to assess protein loss"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Prolonged anthelmintic therapy with albendazole (or mebendazole) extended well beyond symptom resolution to overcome internal autoinfection"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Giving a single short anthelmintic course, which fails to control autoinfection and permits relapse"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of intestinal capillariasis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "capillariasis-matrix",
+      "title": "Intestinal capillariasis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Intestinal capillariasis is caused by the nematode Capillaria philippinensis, acquired by eating raw or undercooked small",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Stool microscopy for characteristic eggs, larvae and adult worms, Repeated stool examination given intermittent and sometimes",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other soil-transmitted or fish-borne helminthiases, Giardiasis and other malabsorptive protozoal infections, Coeliac disease and",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Prolonged anthelmintic therapy with albendazole (or mebendazole) extended well beyond symptom resolution to overcome internal",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Giving a single short anthelmintic course, which fails to control autoinfection and permits relapse",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for intestinal capillariasis."
+    }
+  ],
+  "diagrams": []
 }

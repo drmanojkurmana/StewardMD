@@ -1,177 +1,155 @@
 {
- "id": "s_adenosylhomocysteine_hydrolase_deficiency",
- "name": "S-adenosylhomocysteine hydrolase deficiency",
- "aliases": [
-  "AHCY deficiency",
-  "SAHH deficiency",
-  "S-adenosyl-L-homocysteine hydrolase deficiency",
-  "hypermethioninaemia due to AHCY deficiency",
-  "AHCY"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Scriver's OMMBID",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive defect of S-adenosylhomocysteine hydrolase, the enzyme that hydrolyses S-adenosylhomocysteine (SAH) to homocysteine and adenosine",
-   "In contrast to the benign hypermethioninaemias, this is a treatable disorder with real risk of neurological and hepatic disease if missed",
-   "Accumulated SAH inhibits many methyltransferases, so hypermethioninaemia occurs together with raised SAH and often raised S-adenosylmethionine",
-   "Typical features are hypotonia, myopathy with elevated creatine kinase, developmental delay and hepatic dysfunction",
-   "A markedly elevated SAH is the discriminating biochemical finding compared with MAT I/III and GNMT deficiency",
-   "May be detected through hypermethioninaemia on newborn screening, prompting confirmatory testing",
-   "Fetal or neonatal presentations with coagulopathy and severe hepatopathy have been described",
-   "Management is generic: a methionine-restricted diet with supplementation such as creatine and phosphatidylcholine to support methylation-dependent pathways"
+  "id": "s_adenosylhomocysteine_hydrolase_deficiency",
+  "name": "S-adenosylhomocysteine hydrolase deficiency",
+  "aliases": [
+    "AHCY deficiency",
+    "SAHH deficiency",
+    "S-adenosyl-L-homocysteine hydrolase deficiency",
+    "hypermethioninaemia due to AHCY deficiency",
+    "AHCY"
   ],
-  "pathophysiology": "S-adenosylhomocysteine hydrolase removes S-adenosylhomocysteine, the product formed whenever S-adenosylmethionine donates a methyl group. Because SAH is a potent feedback inhibitor of methyltransferases, its clearance is essential to keep transmethylation running. When the enzyme is deficient, SAH accumulates and inhibits methylation reactions throughout the body, while methionine and S-adenosylmethionine also rise as the cycle backs up. Impaired methylation, particularly of substrates important for muscle and liver, together with disturbed creatine and phosphatidylcholine synthesis, is thought to produce the myopathy, hepatopathy and neurodevelopmental features.",
-  "additionalDifferentials": [
-   "Methionine adenosyltransferase I/III deficiency",
-   "Glycine N-methyltransferase deficiency",
-   "Adenosine kinase deficiency",
-   "Classical homocystinuria with secondary hypermethioninaemia",
-   "Neonatal or infantile liver disease of other cause with raised methionine",
-   "Primary myopathies with raised creatine kinase"
-  ],
-  "additionalInvestigations": [
-   "Plasma amino acids demonstrating raised methionine",
-   "S-adenosylhomocysteine and S-adenosylmethionine measurement",
-   "Plasma total homocysteine",
-   "Creatine kinase and liver function tests including coagulation",
-   "AHCY gene sequencing for confirmation",
-   "Brain MRI where neurological features are present"
-  ],
-  "redFlags": [
-   "Severe neonatal hepatopathy with coagulopathy",
-   "Progressive myopathy or encephalopathy",
-   "Markedly and persistently elevated S-adenosylhomocysteine",
-   "Developmental regression suggesting untreated methylation failure"
-  ],
-  "prognosis": "Prognosis depends on early recognition and treatment; dietary and supplementary therapy can improve muscle, liver and developmental outcomes, whereas late diagnosis carries a risk of persistent neurological and hepatic impairment.",
-  "pitfalls": [
-   "Dismissing hypermethioninaemia as benign without measuring SAH, thereby missing this treatable disorder",
-   "Attributing the raised creatine kinase to a primary muscle disease",
-   "Mistaking the neonatal hepatopathy for another cause of infantile liver failure",
-   "Failing to distinguish it from MAT I/III and GNMT deficiency, which have very different implications"
-  ],
-  "references": [
-   "Scriver's OMMBID",
-   "Baric I et al. S-adenosylhomocysteine hydrolase deficiency",
-   "Mudd SH. Hypermethioninemias of genetic and non-genetic origin"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Methionine-restricted diet as the mainstay, lowering plasma methionine and the accumulating S-adenosylhomocysteine that inhibits transmethylation",
-   "Creatine supplementation to compensate for impaired creatine synthesis and support the myopathy, with attention to phosphatidylcholine status",
-   "Supportive management of the hepatopathy and myopathy, including correction of coagulopathy from impaired hepatic synthesis",
-   "Serial biochemical monitoring of plasma methionine, S-adenosylhomocysteine, creatine kinase, liver function and coagulation to guide dietary titration",
-   "Confirmatory testing after detection of hypermethioninaemia on newborn screening, with early dietitian and metabolic input",
-   "Multidisciplinary care coordinated by metabolic medicine with neurology, hepatology and dietetics for developmental and hepatic surveillance",
-   "Genetic counselling for this autosomal recessive disorder, with AHCY testing and screening of at-risk relatives"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "s_adenosylhomocysteine_hydrolase_deficiency-pathway",
-   "title": "S-adenosylhomocysteine hydrolase deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive defect of S-adenosylhomocysteine hydrolase, the enzyme that hydrolyses S-adenosylhomocysteine (SAH) to homocysteine and adenosine",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe neonatal hepatopathy with coagulopathy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plasma amino acids demonstrating raised methionine, S-adenosylhomocysteine and S-adenosylmethionine measurement, Plasma total homocysteine"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Methionine-restricted diet as the mainstay, lowering plasma methionine and the accumulating S-adenosylhomocysteine that inhibits transmethylation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing hypermethioninaemia as benign without measuring SAH, thereby missing this treatable disorder"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of s-adenosylhomocysteine hydrolase deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "s_adenosylhomocysteine_hydrolase_deficiency-matrix",
-   "title": "S-adenosylhomocysteine hydrolase deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive defect of S-adenosylhomocysteine hydrolase, the enzyme that hydrolyses S-adenosylhomocysteine (SAH) to",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Scriver's OMMBID",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive defect of S-adenosylhomocysteine hydrolase, the enzyme that hydrolyses S-adenosylhomocysteine (SAH) to homocysteine and adenosine",
+      "In contrast to the benign hypermethioninaemias, this is a treatable disorder with real risk of neurological and hepatic disease if missed",
+      "Accumulated SAH inhibits many methyltransferases, so hypermethioninaemia occurs together with raised SAH and often raised S-adenosylmethionine",
+      "Typical features are hypotonia, myopathy with elevated creatine kinase, developmental delay and hepatic dysfunction",
+      "A markedly elevated SAH is the discriminating biochemical finding compared with MAT I/III and GNMT deficiency",
+      "May be detected through hypermethioninaemia on newborn screening, prompting confirmatory testing",
+      "Fetal or neonatal presentations with coagulopathy and severe hepatopathy have been described",
+      "Management is generic: a methionine-restricted diet with supplementation such as creatine and phosphatidylcholine to support methylation-dependent pathways"
     ],
-    [
-     "Key Investigations",
-     "Plasma amino acids demonstrating raised methionine, S-adenosylhomocysteine and S-adenosylmethionine measurement, Plasma total",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "S-adenosylhomocysteine hydrolase removes S-adenosylhomocysteine, the product formed whenever S-adenosylmethionine donates a methyl group. Because SAH is a potent feedback inhibitor of methyltransferases, its clearance is essential to keep transmethylation running. When the enzyme is deficient, SAH accumulates and inhibits methylation reactions throughout the body, while methionine and S-adenosylmethionine also rise as the cycle backs up. Impaired methylation, particularly of substrates important for muscle and liver, together with disturbed creatine and phosphatidylcholine synthesis, is thought to produce the myopathy, hepatopathy and neurodevelopmental features.",
+    "additionalDifferentials": [
+      "Methionine adenosyltransferase I/III deficiency",
+      "Glycine N-methyltransferase deficiency",
+      "Adenosine kinase deficiency",
+      "Classical homocystinuria with secondary hypermethioninaemia",
+      "Neonatal or infantile liver disease of other cause with raised methionine",
+      "Primary myopathies with raised creatine kinase"
     ],
-    [
-     "Primary Differentials",
-     "Methionine adenosyltransferase I/III deficiency, Glycine N-methyltransferase deficiency, Adenosine kinase deficiency",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plasma amino acids demonstrating raised methionine",
+      "S-adenosylhomocysteine and S-adenosylmethionine measurement",
+      "Plasma total homocysteine",
+      "Creatine kinase and liver function tests including coagulation",
+      "AHCY gene sequencing for confirmation",
+      "Brain MRI where neurological features are present"
     ],
-    [
-     "Management Strategy",
-     "Methionine-restricted diet as the mainstay, lowering plasma methionine and the accumulating S-adenosylhomocysteine that inhibits",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe neonatal hepatopathy with coagulopathy",
+      "Progressive myopathy or encephalopathy",
+      "Markedly and persistently elevated S-adenosylhomocysteine",
+      "Developmental regression suggesting untreated methylation failure"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing hypermethioninaemia as benign without measuring SAH, thereby missing this treatable disorder",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends on early recognition and treatment; dietary and supplementary therapy can improve muscle, liver and developmental outcomes, whereas late diagnosis carries a risk of persistent neurological and hepatic impairment.",
+    "pitfalls": [
+      "Dismissing hypermethioninaemia as benign without measuring SAH, thereby missing this treatable disorder",
+      "Attributing the raised creatine kinase to a primary muscle disease",
+      "Mistaking the neonatal hepatopathy for another cause of infantile liver failure",
+      "Failing to distinguish it from MAT I/III and GNMT deficiency, which have very different implications"
+    ],
+    "references": [
+      "Scriver's OMMBID",
+      "Baric I et al. S-adenosylhomocysteine hydrolase deficiency",
+      "Mudd SH. Hypermethioninemias of genetic and non-genetic origin"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Methionine-restricted diet as the mainstay, lowering plasma methionine and the accumulating S-adenosylhomocysteine that inhibits transmethylation",
+      "Creatine supplementation to compensate for impaired creatine synthesis and support the myopathy, with attention to phosphatidylcholine status",
+      "Supportive management of the hepatopathy and myopathy, including correction of coagulopathy from impaired hepatic synthesis",
+      "Serial biochemical monitoring of plasma methionine, S-adenosylhomocysteine, creatine kinase, liver function and coagulation to guide dietary titration",
+      "Confirmatory testing after detection of hypermethioninaemia on newborn screening, with early dietitian and metabolic input",
+      "Multidisciplinary care coordinated by metabolic medicine with neurology, hepatology and dietetics for developmental and hepatic surveillance",
+      "Genetic counselling for this autosomal recessive disorder, with AHCY testing and screening of at-risk relatives"
     ]
-   ],
-   "caption": "Overview comparison matrix for s-adenosylhomocysteine hydrolase deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "s-adenosylhomocysteine-hydrolase-deficiency-real-image",
-   "title": "S-adenosylhomocysteine hydrolase deficiency: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "s_adenosylhomocysteine_hydrolase_deficiency-pathway",
+      "title": "S-adenosylhomocysteine hydrolase deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive defect of S-adenosylhomocysteine hydrolase, the enzyme that hydrolyses S-adenosylhomocysteine (SAH) to homocysteine and adenosine",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe neonatal hepatopathy with coagulopathy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plasma amino acids demonstrating raised methionine, S-adenosylhomocysteine and S-adenosylmethionine measurement, Plasma total homocysteine"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Methionine-restricted diet as the mainstay, lowering plasma methionine and the accumulating S-adenosylhomocysteine that inhibits transmethylation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing hypermethioninaemia as benign without measuring SAH, thereby missing this treatable disorder"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of s-adenosylhomocysteine hydrolase deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "s_adenosylhomocysteine_hydrolase_deficiency-matrix",
+      "title": "S-adenosylhomocysteine hydrolase deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive defect of S-adenosylhomocysteine hydrolase, the enzyme that hydrolyses S-adenosylhomocysteine (SAH) to",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plasma amino acids demonstrating raised methionine, S-adenosylhomocysteine and S-adenosylmethionine measurement, Plasma total",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Methionine adenosyltransferase I/III deficiency, Glycine N-methyltransferase deficiency, Adenosine kinase deficiency",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Methionine-restricted diet as the mainstay, lowering plasma methionine and the accumulating S-adenosylhomocysteine that inhibits",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing hypermethioninaemia as benign without measuring SAH, thereby missing this treatable disorder",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for s-adenosylhomocysteine hydrolase deficiency."
+    }
+  ],
+  "diagrams": []
 }

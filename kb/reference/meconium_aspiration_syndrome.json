@@ -1,174 +1,152 @@
 {
- "id": "meconium_aspiration_syndrome",
- "name": "Meconium Aspiration Syndrome",
- "aliases": [
-  "MAS",
-  "meconium aspiration"
- ],
- "class": "non_infective",
- "system": "Respiratory",
- "specialty": "Paediatrics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics",
-  "sourceEdition": "22e",
-  "pages": null,
-  "clinicalPearls": [
-   "Respiratory distress in a newborn born through meconium-stained amniotic fluid, when meconium is aspirated into the airways around the time of birth.",
-   "It occurs mainly in term and post-term infants and is associated with fetal distress and intrauterine hypoxia.",
-   "Affected infants may be meconium-stained, have distress from birth with tachypnoea and recession, and show a barrel-shaped, hyperinflated chest.",
-   "The chest radiograph typically shows patchy or coarse infiltrates with areas of hyperinflation and atelectasis, and air leaks are common.",
-   "Persistent pulmonary hypertension of the newborn frequently complicates the syndrome and contributes to severe hypoxaemia.",
-   "Routine intrapartum suctioning of the airway and routine tracheal suction of vigorous meconium-stained infants are no longer recommended.",
-   "Non-vigorous infants born through meconium may need resuscitation, and management is largely supportive with oxygen and respiratory support.",
-   "Severe cases may require mechanical ventilation, surfactant, inhaled nitric oxide for pulmonary hypertension, and occasionally extracorporeal membrane oxygenation.",
-   "Air leaks such as pneumothorax and pneumomediastinum are important and potentially sudden complications."
+  "id": "meconium_aspiration_syndrome",
+  "name": "Meconium Aspiration Syndrome",
+  "aliases": [
+    "MAS",
+    "meconium aspiration"
   ],
-  "pathophysiology": "Intrauterine stress and hypoxia can provoke passage of meconium into the amniotic fluid and gasping that draws it into the airways. Aspirated meconium causes mechanical airway obstruction with a ball-valve effect producing air trapping and air leaks, a chemical pneumonitis with inflammation, and inactivation of surfactant. These changes cause ventilation-perfusion mismatch and hypoxaemia, and, combined with hypoxia-driven pulmonary vasoconstriction, promote persistent pulmonary hypertension with right-to-left shunting.",
-  "additionalDifferentials": [
-   "Neonatal pneumonia or sepsis",
-   "Transient tachypnoea of the newborn",
-   "Respiratory distress syndrome (in less mature infants)",
-   "Persistent pulmonary hypertension from other causes",
-   "Air-leak syndromes",
-   "Congenital heart disease"
-  ],
-  "additionalInvestigations": [
-   "Chest radiograph for patchy infiltrates, hyperinflation, and air leaks",
-   "Pulse oximetry (pre- and post-ductal) and blood gas analysis",
-   "Echocardiography to assess for pulmonary hypertension",
-   "Sepsis screen when infection cannot be excluded",
-   "Continuous cardiorespiratory monitoring"
-  ],
-  "redFlags": [
-   "Severe or refractory hypoxaemia despite respiratory support",
-   "Large pre- to post-ductal saturation gradient suggesting pulmonary hypertension",
-   "Sudden deterioration indicating pneumothorax or other air leak",
-   "Signs of hypoxic-ischaemic injury to other organs",
-   "Escalating ventilatory requirements or shock"
-  ],
-  "prognosis": "Most infants with mild to moderate disease recover with supportive care, but severe disease complicated by persistent pulmonary hypertension or air leaks carries significant morbidity and mortality; survivors may have transient respiratory sequelae.",
-  "pitfalls": [
-   "Performing routine intrapartum or tracheal suctioning that is no longer recommended",
-   "Underestimating the risk of pneumothorax and missing a sudden air leak",
-   "Failing to recognise coexisting persistent pulmonary hypertension",
-   "Overlooking associated hypoxic-ischaemic injury to other organs",
-   "Delaying escalation of respiratory support in rapidly deteriorating infants"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Respiratory support graded to severity, from supplemental oxygen and CPAP to mechanical ventilation",
-   "Exogenous surfactant replacement, or surfactant lavage, to counter meconium-induced surfactant inactivation",
-   "Treat persistent pulmonary hypertension with inhaled nitric oxide, optimal oxygenation and avoidance of acidosis",
-   "Extracorporeal membrane oxygenation for refractory hypoxaemic respiratory failure",
-   "Vigilance for and prompt drainage of air leaks such as pneumothorax",
-   "Empirical antibacterials when sepsis cannot be excluded, alongside continuous cardiorespiratory monitoring and supportive neonatal intensive care",
-   "Follow current resuscitation guidance that no longer recommends routine intrapartum or tracheal suctioning of vigorous meconium-stained infants"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "meconium_aspiration_syndrome-pathway",
-   "title": "Meconium Aspiration Syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Respiratory distress in a newborn born through meconium-stained amniotic fluid, when meconium is aspirated into the airways around the time of birth.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe or refractory hypoxaemia despite respiratory support",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Chest radiograph for patchy infiltrates, hyperinflation, and air leaks, Pulse oximetry (pre- and post-ductal) and blood gas analysis, Echocardiography to assess for pulmonary hypertension"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Respiratory support graded to severity, from supplemental oxygen and CPAP to mechanical ventilation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Performing routine intrapartum or tracheal suctioning that is no longer recommended"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of meconium aspiration syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "meconium_aspiration_syndrome-matrix",
-   "title": "Meconium Aspiration Syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Respiratory distress in a newborn born through meconium-stained amniotic fluid, when meconium is aspirated into the airways",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Respiratory",
+  "specialty": "Paediatrics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics",
+    "sourceEdition": "22e",
+    "pages": null,
+    "clinicalPearls": [
+      "Respiratory distress in a newborn born through meconium-stained amniotic fluid, when meconium is aspirated into the airways around the time of birth.",
+      "It occurs mainly in term and post-term infants and is associated with fetal distress and intrauterine hypoxia.",
+      "Affected infants may be meconium-stained, have distress from birth with tachypnoea and recession, and show a barrel-shaped, hyperinflated chest.",
+      "The chest radiograph typically shows patchy or coarse infiltrates with areas of hyperinflation and atelectasis, and air leaks are common.",
+      "Persistent pulmonary hypertension of the newborn frequently complicates the syndrome and contributes to severe hypoxaemia.",
+      "Routine intrapartum suctioning of the airway and routine tracheal suction of vigorous meconium-stained infants are no longer recommended.",
+      "Non-vigorous infants born through meconium may need resuscitation, and management is largely supportive with oxygen and respiratory support.",
+      "Severe cases may require mechanical ventilation, surfactant, inhaled nitric oxide for pulmonary hypertension, and occasionally extracorporeal membrane oxygenation.",
+      "Air leaks such as pneumothorax and pneumomediastinum are important and potentially sudden complications."
     ],
-    [
-     "Key Investigations",
-     "Chest radiograph for patchy infiltrates, hyperinflation, and air leaks, Pulse oximetry (pre- and post-ductal) and blood gas",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Intrauterine stress and hypoxia can provoke passage of meconium into the amniotic fluid and gasping that draws it into the airways. Aspirated meconium causes mechanical airway obstruction with a ball-valve effect producing air trapping and air leaks, a chemical pneumonitis with inflammation, and inactivation of surfactant. These changes cause ventilation-perfusion mismatch and hypoxaemia, and, combined with hypoxia-driven pulmonary vasoconstriction, promote persistent pulmonary hypertension with right-to-left shunting.",
+    "additionalDifferentials": [
+      "Neonatal pneumonia or sepsis",
+      "Transient tachypnoea of the newborn",
+      "Respiratory distress syndrome (in less mature infants)",
+      "Persistent pulmonary hypertension from other causes",
+      "Air-leak syndromes",
+      "Congenital heart disease"
     ],
-    [
-     "Primary Differentials",
-     "Neonatal pneumonia or sepsis, Transient tachypnoea of the newborn, Respiratory distress syndrome (in less mature infants)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Chest radiograph for patchy infiltrates, hyperinflation, and air leaks",
+      "Pulse oximetry (pre- and post-ductal) and blood gas analysis",
+      "Echocardiography to assess for pulmonary hypertension",
+      "Sepsis screen when infection cannot be excluded",
+      "Continuous cardiorespiratory monitoring"
     ],
-    [
-     "Management Strategy",
-     "Respiratory support graded to severity, from supplemental oxygen and CPAP to mechanical ventilation",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe or refractory hypoxaemia despite respiratory support",
+      "Large pre- to post-ductal saturation gradient suggesting pulmonary hypertension",
+      "Sudden deterioration indicating pneumothorax or other air leak",
+      "Signs of hypoxic-ischaemic injury to other organs",
+      "Escalating ventilatory requirements or shock"
     ],
-    [
-     "Clinical Pitfall",
-     "Performing routine intrapartum or tracheal suctioning that is no longer recommended",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most infants with mild to moderate disease recover with supportive care, but severe disease complicated by persistent pulmonary hypertension or air leaks carries significant morbidity and mortality; survivors may have transient respiratory sequelae.",
+    "pitfalls": [
+      "Performing routine intrapartum or tracheal suctioning that is no longer recommended",
+      "Underestimating the risk of pneumothorax and missing a sudden air leak",
+      "Failing to recognise coexisting persistent pulmonary hypertension",
+      "Overlooking associated hypoxic-ischaemic injury to other organs",
+      "Delaying escalation of respiratory support in rapidly deteriorating infants"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Respiratory support graded to severity, from supplemental oxygen and CPAP to mechanical ventilation",
+      "Exogenous surfactant replacement, or surfactant lavage, to counter meconium-induced surfactant inactivation",
+      "Treat persistent pulmonary hypertension with inhaled nitric oxide, optimal oxygenation and avoidance of acidosis",
+      "Extracorporeal membrane oxygenation for refractory hypoxaemic respiratory failure",
+      "Vigilance for and prompt drainage of air leaks such as pneumothorax",
+      "Empirical antibacterials when sepsis cannot be excluded, alongside continuous cardiorespiratory monitoring and supportive neonatal intensive care",
+      "Follow current resuscitation guidance that no longer recommends routine intrapartum or tracheal suctioning of vigorous meconium-stained infants"
     ]
-   ],
-   "caption": "Overview comparison matrix for meconium aspiration syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "meconium-aspiration-syndrome-real-image",
-   "title": "Meconium Aspiration Syndrome: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "meconium_aspiration_syndrome-pathway",
+      "title": "Meconium Aspiration Syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Respiratory distress in a newborn born through meconium-stained amniotic fluid, when meconium is aspirated into the airways around the time of birth.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe or refractory hypoxaemia despite respiratory support",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Chest radiograph for patchy infiltrates, hyperinflation, and air leaks, Pulse oximetry (pre- and post-ductal) and blood gas analysis, Echocardiography to assess for pulmonary hypertension"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Respiratory support graded to severity, from supplemental oxygen and CPAP to mechanical ventilation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Performing routine intrapartum or tracheal suctioning that is no longer recommended"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of meconium aspiration syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "meconium_aspiration_syndrome-matrix",
+      "title": "Meconium Aspiration Syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Respiratory distress in a newborn born through meconium-stained amniotic fluid, when meconium is aspirated into the airways",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Chest radiograph for patchy infiltrates, hyperinflation, and air leaks, Pulse oximetry (pre- and post-ductal) and blood gas",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Neonatal pneumonia or sepsis, Transient tachypnoea of the newborn, Respiratory distress syndrome (in less mature infants)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Respiratory support graded to severity, from supplemental oxygen and CPAP to mechanical ventilation",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Performing routine intrapartum or tracheal suctioning that is no longer recommended",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for meconium aspiration syndrome."
+    }
+  ],
+  "diagrams": []
 }

@@ -1,173 +1,151 @@
 {
- "id": "secondary_peritonitis",
- "name": "Secondary peritonitis",
- "aliases": [
-  "acute secondary peritonitis",
-  "surgical peritonitis",
-  "generalised peritonitis"
- ],
- "class": "infective",
- "system": "GI / Peritoneum / Surgery",
- "specialty": "General Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Bailey & Love's Short Practice of Surgery / Sabiston Textbook of Surgery",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Results from bacterial contamination of the peritoneal cavity following perforation, ischaemia, or inflammation of an abdominal viscus, unlike primary (spontaneous) peritonitis",
-   "Presents with severe, constant abdominal pain worsened by movement, with tenderness, guarding, rigidity, and rebound, and the patient characteristically lies still",
-   "Common sources include perforated peptic ulcer, perforated appendix, perforated diverticular disease, and bowel ischaemia or anastomotic leak",
-   "Systemic features of sepsis develop rapidly: fever, tachycardia, hypotension, oliguria, and, if untreated, septic shock and multi-organ failure",
-   "The management triad is aggressive resuscitation, appropriate broad-spectrum antibiotics, and prompt source control of the underlying cause",
-   "Source control, achieved surgically or by radiological drainage, is the definitive step; antibiotics and resuscitation support but do not replace it",
-   "Faeculent peritonitis from colonic perforation carries a particularly heavy bacterial and endotoxin load and a high mortality",
-   "Peritoneal contamination is often graded (localised, diffuse, purulent, faeculent) and guides the extent of surgery and lavage"
+  "id": "secondary_peritonitis",
+  "name": "Secondary peritonitis",
+  "aliases": [
+    "acute secondary peritonitis",
+    "surgical peritonitis",
+    "generalised peritonitis"
   ],
-  "pathophysiology": "Secondary peritonitis is inflammation of the peritoneum caused by spillage of gastrointestinal contents and micro-organisms into the peritoneal cavity following a breach of a hollow viscus or transmural necrosis. Gut flora, typically a mix of coliforms and anaerobes, provoke an intense inflammatory response with fibrinopurulent exudate, large third-space fluid losses, and paralytic ileus. Absorption of bacteria and endotoxin across the vast peritoneal surface drives systemic inflammatory response, sepsis, and septic shock. The peritoneum may localise infection into abscesses, but diffuse contamination overwhelms these defences and threatens life.",
-  "additionalDifferentials": [
-   "Primary (spontaneous bacterial) peritonitis",
-   "Acute pancreatitis",
-   "Mesenteric ischaemia",
-   "Ruptured abdominal aortic aneurysm",
-   "Intra-abdominal abscess without generalised peritonitis",
-   "Medical causes of acute abdomen (diabetic ketoacidosis, inferior myocardial infarction)"
-  ],
-  "additionalInvestigations": [
-   "Bloods including full blood count, urea and electrolytes, CRP, amylase or lipase, blood cultures, and lactate",
-   "Arterial blood gas to assess acid-base status and organ perfusion",
-   "Erect chest radiograph for free subdiaphragmatic gas",
-   "CT abdomen and pelvis to identify the source and any collections",
-   "Peritoneal fluid sampling and culture when the diagnosis or source is unclear"
-  ],
-  "redFlags": [
-   "Generalised peritonitis with sepsis, hypotension, or rising lactate indicating septic shock (surgical emergency)",
-   "Faeculent contamination from colonic perforation with heavy sepsis burden",
-   "Progressive organ dysfunction (oliguria, confusion, respiratory compromise)",
-   "Failure to improve after resuscitation, indicating inadequate source control"
-  ],
-  "prognosis": "Outcome hinges on early recognition, prompt resuscitation, and timely source control; delay, faeculent contamination, advanced age, and comorbidity markedly increase mortality, which remains high in established diffuse peritonitis with septic shock.",
-  "pitfalls": [
-   "Delaying source control while awaiting response to antibiotics and fluids",
-   "Under-resuscitating a patient with large third-space and septic losses",
-   "Attributing peritonism to a medical cause and missing a surgical source",
-   "Inadequate peritoneal lavage or failing to address ongoing contamination at surgery"
-  ],
-  "references": [
-   "Bailey & Love's Short Practice of Surgery",
-   "Sabiston Textbook of Surgery"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Resuscitate aggressively with intravenous fluids and correct electrolyte and acid-base derangement",
-   "Start empirical broad-spectrum antibiotics covering enteric Gram-negative coliforms and anaerobes",
-   "Achieve definitive source control surgically (repair, resection, washout) or by radiological drainage of collections",
-   "Decompress the gut with a nasogastric tube for ileus and provide adequate analgesia",
-   "Escalate to critical care with vasopressor and organ support for sepsis and septic shock",
-   "Provide nutritional support during recovery",
-   "Reassess and re-image for persistent or recurrent collections requiring further drainage"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "secondary_peritonitis-pathway",
-   "title": "Secondary peritonitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Results from bacterial contamination of the peritoneal cavity following perforation, ischaemia, or inflammation of an abdominal viscus, unlike primary (spontaneous) peritonitis",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Generalised peritonitis with sepsis, hypotension, or rising lactate indicating septic shock (surgical emergency)",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Bloods including full blood count, urea and electrolytes, CRP, amylase or lipase, blood cultures, and lactate, Arterial blood gas to assess acid-base status and organ perfusion, Erect chest radiograph for free"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Resuscitate aggressively with intravenous fluids and correct electrolyte and acid-base derangement"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Delaying source control while awaiting response to antibiotics and fluids"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of secondary peritonitis."
-  }
- ],
- "tables": [
-  {
-   "id": "secondary_peritonitis-matrix",
-   "title": "Secondary peritonitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Results from bacterial contamination of the peritoneal cavity following perforation, ischaemia, or inflammation of an abdominal",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "GI / Peritoneum / Surgery",
+  "specialty": "General Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bailey & Love's Short Practice of Surgery / Sabiston Textbook of Surgery",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Results from bacterial contamination of the peritoneal cavity following perforation, ischaemia, or inflammation of an abdominal viscus, unlike primary (spontaneous) peritonitis",
+      "Presents with severe, constant abdominal pain worsened by movement, with tenderness, guarding, rigidity, and rebound, and the patient characteristically lies still",
+      "Common sources include perforated peptic ulcer, perforated appendix, perforated diverticular disease, and bowel ischaemia or anastomotic leak",
+      "Systemic features of sepsis develop rapidly: fever, tachycardia, hypotension, oliguria, and, if untreated, septic shock and multi-organ failure",
+      "The management triad is aggressive resuscitation, appropriate broad-spectrum antibiotics, and prompt source control of the underlying cause",
+      "Source control, achieved surgically or by radiological drainage, is the definitive step; antibiotics and resuscitation support but do not replace it",
+      "Faeculent peritonitis from colonic perforation carries a particularly heavy bacterial and endotoxin load and a high mortality",
+      "Peritoneal contamination is often graded (localised, diffuse, purulent, faeculent) and guides the extent of surgery and lavage"
     ],
-    [
-     "Key Investigations",
-     "Bloods including full blood count, urea and electrolytes, CRP, amylase or lipase, blood cultures, and lactate, Arterial blood gas",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Secondary peritonitis is inflammation of the peritoneum caused by spillage of gastrointestinal contents and micro-organisms into the peritoneal cavity following a breach of a hollow viscus or transmural necrosis. Gut flora, typically a mix of coliforms and anaerobes, provoke an intense inflammatory response with fibrinopurulent exudate, large third-space fluid losses, and paralytic ileus. Absorption of bacteria and endotoxin across the vast peritoneal surface drives systemic inflammatory response, sepsis, and septic shock. The peritoneum may localise infection into abscesses, but diffuse contamination overwhelms these defences and threatens life.",
+    "additionalDifferentials": [
+      "Primary (spontaneous bacterial) peritonitis",
+      "Acute pancreatitis",
+      "Mesenteric ischaemia",
+      "Ruptured abdominal aortic aneurysm",
+      "Intra-abdominal abscess without generalised peritonitis",
+      "Medical causes of acute abdomen (diabetic ketoacidosis, inferior myocardial infarction)"
     ],
-    [
-     "Primary Differentials",
-     "Primary (spontaneous bacterial) peritonitis, Acute pancreatitis, Mesenteric ischaemia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Bloods including full blood count, urea and electrolytes, CRP, amylase or lipase, blood cultures, and lactate",
+      "Arterial blood gas to assess acid-base status and organ perfusion",
+      "Erect chest radiograph for free subdiaphragmatic gas",
+      "CT abdomen and pelvis to identify the source and any collections",
+      "Peritoneal fluid sampling and culture when the diagnosis or source is unclear"
     ],
-    [
-     "Management Strategy",
-     "Resuscitate aggressively with intravenous fluids and correct electrolyte and acid-base derangement",
-     "Core treatment modality"
+    "redFlags": [
+      "Generalised peritonitis with sepsis, hypotension, or rising lactate indicating septic shock (surgical emergency)",
+      "Faeculent contamination from colonic perforation with heavy sepsis burden",
+      "Progressive organ dysfunction (oliguria, confusion, respiratory compromise)",
+      "Failure to improve after resuscitation, indicating inadequate source control"
     ],
-    [
-     "Clinical Pitfall",
-     "Delaying source control while awaiting response to antibiotics and fluids",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome hinges on early recognition, prompt resuscitation, and timely source control; delay, faeculent contamination, advanced age, and comorbidity markedly increase mortality, which remains high in established diffuse peritonitis with septic shock.",
+    "pitfalls": [
+      "Delaying source control while awaiting response to antibiotics and fluids",
+      "Under-resuscitating a patient with large third-space and septic losses",
+      "Attributing peritonism to a medical cause and missing a surgical source",
+      "Inadequate peritoneal lavage or failing to address ongoing contamination at surgery"
+    ],
+    "references": [
+      "Bailey & Love's Short Practice of Surgery",
+      "Sabiston Textbook of Surgery"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Resuscitate aggressively with intravenous fluids and correct electrolyte and acid-base derangement",
+      "Start empirical broad-spectrum antibiotics covering enteric Gram-negative coliforms and anaerobes",
+      "Achieve definitive source control surgically (repair, resection, washout) or by radiological drainage of collections",
+      "Decompress the gut with a nasogastric tube for ileus and provide adequate analgesia",
+      "Escalate to critical care with vasopressor and organ support for sepsis and septic shock",
+      "Provide nutritional support during recovery",
+      "Reassess and re-image for persistent or recurrent collections requiring further drainage"
     ]
-   ],
-   "caption": "Overview comparison matrix for secondary peritonitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "secondary-peritonitis-real-image",
-   "title": "Secondary peritonitis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "secondary_peritonitis-pathway",
+      "title": "Secondary peritonitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Results from bacterial contamination of the peritoneal cavity following perforation, ischaemia, or inflammation of an abdominal viscus, unlike primary (spontaneous) peritonitis",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Generalised peritonitis with sepsis, hypotension, or rising lactate indicating septic shock (surgical emergency)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Bloods including full blood count, urea and electrolytes, CRP, amylase or lipase, blood cultures, and lactate, Arterial blood gas to assess acid-base status and organ perfusion, Erect chest radiograph for free"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Resuscitate aggressively with intravenous fluids and correct electrolyte and acid-base derangement"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Delaying source control while awaiting response to antibiotics and fluids"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of secondary peritonitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "secondary_peritonitis-matrix",
+      "title": "Secondary peritonitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Results from bacterial contamination of the peritoneal cavity following perforation, ischaemia, or inflammation of an abdominal",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Bloods including full blood count, urea and electrolytes, CRP, amylase or lipase, blood cultures, and lactate, Arterial blood gas",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Primary (spontaneous bacterial) peritonitis, Acute pancreatitis, Mesenteric ischaemia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Resuscitate aggressively with intravenous fluids and correct electrolyte and acid-base derangement",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Delaying source control while awaiting response to antibiotics and fluids",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for secondary peritonitis."
+    }
+  ],
+  "diagrams": []
 }

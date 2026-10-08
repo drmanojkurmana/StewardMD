@@ -1,177 +1,155 @@
 {
- "id": "testicular_germ_cell_tumor",
- "name": "Testicular germ cell tumour (overview)",
- "aliases": [
-  "testicular cancer",
-  "germ cell tumour of the testis",
-  "TGCT",
-  "GCT"
- ],
- "class": "non_infective",
- "system": "Urology / Andrology",
- "specialty": "Urology",
- "referenceOnly": true,
- "reference": {
-  "source": "Campbell-Walsh-Wein Urology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Typically presents as a painless, firm, unilateral testicular mass or diffuse enlargement in a young or middle-aged man, and any solid intratesticular lesion is malignant until proven otherwise",
-   "Germ cell tumours are broadly divided into seminoma and non-seminomatous germ cell tumour (NSGCT), a distinction that drives staging, treatment, and follow-up",
-   "Serum tumour markers (AFP, beta-hCG, LDH) should always be measured before and after treatment: seminoma may raise beta-hCG and LDH but keeps a normal AFP, whereas a raised AFP indicates a non-seminomatous element regardless of histology",
-   "A history of cryptorchidism (including the contralateral, normally descended testis), prior contralateral tumour, family history, and infertility are recognised risk factors",
-   "Scrotal ultrasound is the first-line imaging test and radical inguinal orchidectomy is the standard approach for diagnosis and local control; trans-scrotal biopsy is avoided to prevent tumour seeding",
-   "Sperm banking should be offered before orchidectomy or systemic therapy because both the disease and its treatment threaten fertility",
-   "Staging with CT of the chest, abdomen, and pelvis assesses retroperitoneal nodal and visceral spread, and post-orchidectomy marker kinetics guide risk stratification"
+  "id": "testicular_germ_cell_tumor",
+  "name": "Testicular germ cell tumour (overview)",
+  "aliases": [
+    "testicular cancer",
+    "germ cell tumour of the testis",
+    "TGCT",
+    "GCT"
   ],
-  "pathophysiology": "Most testicular germ cell tumours arise from a precursor lesion, germ cell neoplasia in situ, in which malignant transformation of primordial germ cells within the seminiferous tubules is thought to begin in fetal life. Progression yields either seminoma, which resembles undifferentiated germ cells, or non-seminomatous tumours that recapitulate embryonic and extra-embryonic differentiation (embryonal carcinoma, yolk sac tumour, choriocarcinoma, teratoma), often as mixed tumours. Isochromosome 12p is a characteristic cytogenetic marker. Spread is typically lymphatic to the retroperitoneal nodes following gonadal drainage, with later haematogenous dissemination to lung and other viscera; choriocarcinoma has a particular tendency to early blood-borne spread.",
-  "additionalDifferentials": [
-   "Epididymo-orchitis or an inflammatory testicular mass",
-   "Testicular lymphoma, especially in older men",
-   "Sex cord-stromal tumours (Leydig or Sertoli cell tumour)",
-   "Spermatocele or epididymal cyst",
-   "Hydrocele obscuring an underlying tumour",
-   "Testicular torsion presenting as acute swelling",
-   "Metastasis to the testis from another primary"
-  ],
-  "additionalInvestigations": [
-   "Scrotal ultrasound to confirm an intratesticular solid lesion",
-   "Serum tumour markers AFP, beta-hCG, and LDH before and serially after orchidectomy",
-   "Radical inguinal orchidectomy for histological diagnosis and local control",
-   "CT of the chest, abdomen, and pelvis for nodal and visceral staging",
-   "Semen analysis and sperm banking prior to treatment",
-   "MRI or brain imaging when choriocarcinoma or neurological symptoms raise concern for cerebral metastases"
-  ],
-  "redFlags": [
-   "Bulky retroperitoneal disease or a supraclavicular node indicating advanced spread",
-   "Respiratory compromise or haemoptysis from pulmonary metastases",
-   "Very high beta-hCG with gynaecomastia or thyrotoxic features suggesting large tumour burden",
-   "Neurological symptoms raising suspicion of cerebral metastases from choriocarcinoma",
-   "Markers that fail to normalise after orchidectomy, indicating residual or metastatic disease"
-  ],
-  "prognosis": "Testicular germ cell tumour is among the most curable solid malignancies; the great majority of patients, including many with metastatic disease, achieve long-term cure with stage-appropriate surgery, surveillance, cisplatin-based chemotherapy, or radiotherapy, though prognosis worsens with high-risk marker elevation and non-pulmonary visceral metastases.",
-  "pitfalls": [
-   "Mistaking a tumour for epididymo-orchitis and delaying ultrasound and orchidectomy",
-   "Performing a trans-scrotal biopsy or orchidectomy and risking tumour seeding and altered lymphatic drainage",
-   "Omitting pre-treatment tumour markers, losing prognostic and monitoring information",
-   "Failing to offer sperm banking before orchidectomy or chemotherapy",
-   "Overlooking a small contralateral lesion or the increased contralateral risk in men with cryptorchidism"
-  ],
-  "references": [
-   "Campbell-Walsh-Wein Urology",
-   "EAU Guidelines on Testicular Cancer"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Perform radical inguinal orchidectomy for histological diagnosis and local control, avoiding trans-scrotal biopsy to prevent tumour seeding",
-   "Offer sperm banking before orchidectomy or systemic therapy given the fertility threat from disease and treatment",
-   "Measure serum AFP, beta-hCG and LDH before and serially after orchidectomy to guide staging, risk stratification and monitoring",
-   "Tailor treatment to seminoma-versus-non-seminoma histology and stage: active surveillance for many stage I tumours, cisplatin-based combination chemotherapy for metastatic disease, and radiotherapy as an option for seminoma",
-   "Consider retroperitoneal lymph-node dissection for selected non-seminomatous disease and resect residual post-chemotherapy masses",
-   "Maintain prolonged surveillance for relapse and a metachronous contralateral tumour, with androgen replacement if hypogonadism develops",
-   "Manage within a uro-oncology multidisciplinary team"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "testicular_germ_cell_tumor-pathway",
-   "title": "Testicular germ cell tumour (overview): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Typically presents as a painless, firm, unilateral testicular mass or diffuse enlargement in a young or middle-aged man, and any solid intratesticular lesion is malignant until proven otherwise",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Bulky retroperitoneal disease or a supraclavicular node indicating advanced spread",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Scrotal ultrasound to confirm an intratesticular solid lesion, Serum tumour markers AFP, beta-hCG, and LDH before and serially after orchidectomy, Radical inguinal orchidectomy for histological diagnosis and local control"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Perform radical inguinal orchidectomy for histological diagnosis and local control, avoiding trans-scrotal biopsy to prevent tumour seeding"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking a tumour for epididymo-orchitis and delaying ultrasound and orchidectomy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of testicular germ cell tumour (overview)."
-  }
- ],
- "tables": [
-  {
-   "id": "testicular_germ_cell_tumor-matrix",
-   "title": "Testicular germ cell tumour (overview): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Typically presents as a painless, firm, unilateral testicular mass or diffuse enlargement in a young or middle-aged man, and any",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Urology / Andrology",
+  "specialty": "Urology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Campbell-Walsh-Wein Urology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Typically presents as a painless, firm, unilateral testicular mass or diffuse enlargement in a young or middle-aged man, and any solid intratesticular lesion is malignant until proven otherwise",
+      "Germ cell tumours are broadly divided into seminoma and non-seminomatous germ cell tumour (NSGCT), a distinction that drives staging, treatment, and follow-up",
+      "Serum tumour markers (AFP, beta-hCG, LDH) should always be measured before and after treatment: seminoma may raise beta-hCG and LDH but keeps a normal AFP, whereas a raised AFP indicates a non-seminomatous element regardless of histology",
+      "A history of cryptorchidism (including the contralateral, normally descended testis), prior contralateral tumour, family history, and infertility are recognised risk factors",
+      "Scrotal ultrasound is the first-line imaging test and radical inguinal orchidectomy is the standard approach for diagnosis and local control; trans-scrotal biopsy is avoided to prevent tumour seeding",
+      "Sperm banking should be offered before orchidectomy or systemic therapy because both the disease and its treatment threaten fertility",
+      "Staging with CT of the chest, abdomen, and pelvis assesses retroperitoneal nodal and visceral spread, and post-orchidectomy marker kinetics guide risk stratification"
     ],
-    [
-     "Key Investigations",
-     "Scrotal ultrasound to confirm an intratesticular solid lesion, Serum tumour markers AFP, beta-hCG, and LDH before and serially",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Most testicular germ cell tumours arise from a precursor lesion, germ cell neoplasia in situ, in which malignant transformation of primordial germ cells within the seminiferous tubules is thought to begin in fetal life. Progression yields either seminoma, which resembles undifferentiated germ cells, or non-seminomatous tumours that recapitulate embryonic and extra-embryonic differentiation (embryonal carcinoma, yolk sac tumour, choriocarcinoma, teratoma), often as mixed tumours. Isochromosome 12p is a characteristic cytogenetic marker. Spread is typically lymphatic to the retroperitoneal nodes following gonadal drainage, with later haematogenous dissemination to lung and other viscera; choriocarcinoma has a particular tendency to early blood-borne spread.",
+    "additionalDifferentials": [
+      "Epididymo-orchitis or an inflammatory testicular mass",
+      "Testicular lymphoma, especially in older men",
+      "Sex cord-stromal tumours (Leydig or Sertoli cell tumour)",
+      "Spermatocele or epididymal cyst",
+      "Hydrocele obscuring an underlying tumour",
+      "Testicular torsion presenting as acute swelling",
+      "Metastasis to the testis from another primary"
     ],
-    [
-     "Primary Differentials",
-     "Epididymo-orchitis or an inflammatory testicular mass, Testicular lymphoma, especially in older men, Sex cord-stromal tumours",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Scrotal ultrasound to confirm an intratesticular solid lesion",
+      "Serum tumour markers AFP, beta-hCG, and LDH before and serially after orchidectomy",
+      "Radical inguinal orchidectomy for histological diagnosis and local control",
+      "CT of the chest, abdomen, and pelvis for nodal and visceral staging",
+      "Semen analysis and sperm banking prior to treatment",
+      "MRI or brain imaging when choriocarcinoma or neurological symptoms raise concern for cerebral metastases"
     ],
-    [
-     "Management Strategy",
-     "Perform radical inguinal orchidectomy for histological diagnosis and local control, avoiding trans-scrotal biopsy to prevent",
-     "Core treatment modality"
+    "redFlags": [
+      "Bulky retroperitoneal disease or a supraclavicular node indicating advanced spread",
+      "Respiratory compromise or haemoptysis from pulmonary metastases",
+      "Very high beta-hCG with gynaecomastia or thyrotoxic features suggesting large tumour burden",
+      "Neurological symptoms raising suspicion of cerebral metastases from choriocarcinoma",
+      "Markers that fail to normalise after orchidectomy, indicating residual or metastatic disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking a tumour for epididymo-orchitis and delaying ultrasound and orchidectomy",
-     "Prevent diagnostic or management error"
+    "prognosis": "Testicular germ cell tumour is among the most curable solid malignancies; the great majority of patients, including many with metastatic disease, achieve long-term cure with stage-appropriate surgery, surveillance, cisplatin-based chemotherapy, or radiotherapy, though prognosis worsens with high-risk marker elevation and non-pulmonary visceral metastases.",
+    "pitfalls": [
+      "Mistaking a tumour for epididymo-orchitis and delaying ultrasound and orchidectomy",
+      "Performing a trans-scrotal biopsy or orchidectomy and risking tumour seeding and altered lymphatic drainage",
+      "Omitting pre-treatment tumour markers, losing prognostic and monitoring information",
+      "Failing to offer sperm banking before orchidectomy or chemotherapy",
+      "Overlooking a small contralateral lesion or the increased contralateral risk in men with cryptorchidism"
+    ],
+    "references": [
+      "Campbell-Walsh-Wein Urology",
+      "EAU Guidelines on Testicular Cancer"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Perform radical inguinal orchidectomy for histological diagnosis and local control, avoiding trans-scrotal biopsy to prevent tumour seeding",
+      "Offer sperm banking before orchidectomy or systemic therapy given the fertility threat from disease and treatment",
+      "Measure serum AFP, beta-hCG and LDH before and serially after orchidectomy to guide staging, risk stratification and monitoring",
+      "Tailor treatment to seminoma-versus-non-seminoma histology and stage: active surveillance for many stage I tumours, cisplatin-based combination chemotherapy for metastatic disease, and radiotherapy as an option for seminoma",
+      "Consider retroperitoneal lymph-node dissection for selected non-seminomatous disease and resect residual post-chemotherapy masses",
+      "Maintain prolonged surveillance for relapse and a metachronous contralateral tumour, with androgen replacement if hypogonadism develops",
+      "Manage within a uro-oncology multidisciplinary team"
     ]
-   ],
-   "caption": "Overview comparison matrix for testicular germ cell tumour (overview)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "testicular-germ-cell-tumor-real-image",
-   "title": "Testicular germ cell tumour (overview): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "testicular_germ_cell_tumor-pathway",
+      "title": "Testicular germ cell tumour (overview): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Typically presents as a painless, firm, unilateral testicular mass or diffuse enlargement in a young or middle-aged man, and any solid intratesticular lesion is malignant until proven otherwise",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Bulky retroperitoneal disease or a supraclavicular node indicating advanced spread",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Scrotal ultrasound to confirm an intratesticular solid lesion, Serum tumour markers AFP, beta-hCG, and LDH before and serially after orchidectomy, Radical inguinal orchidectomy for histological diagnosis and local control"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Perform radical inguinal orchidectomy for histological diagnosis and local control, avoiding trans-scrotal biopsy to prevent tumour seeding"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking a tumour for epididymo-orchitis and delaying ultrasound and orchidectomy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of testicular germ cell tumour (overview)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "testicular_germ_cell_tumor-matrix",
+      "title": "Testicular germ cell tumour (overview): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Typically presents as a painless, firm, unilateral testicular mass or diffuse enlargement in a young or middle-aged man, and any",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Scrotal ultrasound to confirm an intratesticular solid lesion, Serum tumour markers AFP, beta-hCG, and LDH before and serially",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Epididymo-orchitis or an inflammatory testicular mass, Testicular lymphoma, especially in older men, Sex cord-stromal tumours",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Perform radical inguinal orchidectomy for histological diagnosis and local control, avoiding trans-scrotal biopsy to prevent",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking a tumour for epididymo-orchitis and delaying ultrasound and orchidectomy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for testicular germ cell tumour (overview)."
+    }
+  ],
+  "diagrams": []
 }

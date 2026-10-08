@@ -1,175 +1,153 @@
 {
- "id": "sinus_of_valsalva_aneurysm",
- "name": "Sinus of Valsalva aneurysm",
- "aliases": [
-  "aortic sinus aneurysm",
-  "SOVA",
-  "aneurysm of the sinus of Valsalva",
-  "Valsalva sinus aneurysm"
- ],
- "class": "non_infective",
- "system": "Cardiovascular",
- "specialty": "Cardiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Braunwald's Heart Disease / ESC guidelines on aortic disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An abnormal dilatation of one of the aortic sinuses, most often the right coronary sinus, arising from congenital weakness of the aortic wall at the sinus or from acquired causes",
-   "Unruptured aneurysms are frequently asymptomatic and found incidentally, though a large one may compress adjacent structures or distort the aortic valve",
-   "Rupture is the feared complication and usually drains into a low-pressure right-sided chamber, most commonly the right ventricle or right atrium, creating a left-to-right shunt",
-   "Acute rupture can present with sudden chest pain, breathlessness, and a continuous murmur, and may precipitate heart failure",
-   "A continuous murmur from a ruptured aneurysm can be mistaken for a patent ductus arteriosus or a coronary arteriovenous fistula",
-   "It is associated with connective tissue disorders, bicuspid aortic valve, and ventricular septal defect, and may follow infective endocarditis or trauma",
-   "Echocardiography, particularly transoesophageal, together with CT or MRI and cardiac catheterisation define the anatomy and any shunt",
-   "Symptomatic, ruptured, or enlarging aneurysms are treated by surgical or, in selected cases, transcatheter repair"
+  "id": "sinus_of_valsalva_aneurysm",
+  "name": "Sinus of Valsalva aneurysm",
+  "aliases": [
+    "aortic sinus aneurysm",
+    "SOVA",
+    "aneurysm of the sinus of Valsalva",
+    "Valsalva sinus aneurysm"
   ],
-  "pathophysiology": "A sinus of Valsalva aneurysm results from a deficiency in the elastic and muscular tissue where the aortic media meets the annulus fibrosus, allowing the affected aortic sinus to bulge. The weakness may be congenital or acquired through infection such as endocarditis, connective tissue disease, atherosclerosis, or trauma. Over time the thin-walled aneurysm enlarges under aortic pressure and may compress neighbouring structures or interfere with the aortic valve and coronary ostia. If the wall gives way, blood jets from the high-pressure aorta into an adjacent lower-pressure chamber, most often on the right side of the heart, establishing a left-to-right shunt with volume overload and, if large, acute heart failure.",
-  "additionalDifferentials": [
-   "Patent ductus arteriosus",
-   "Coronary arteriovenous fistula",
-   "Ventricular septal defect with aortic regurgitation",
-   "Ruptured aortic dissection into a cardiac chamber",
-   "Aortic root aneurysm from other causes",
-   "Coronary artery aneurysm"
-  ],
-  "additionalInvestigations": [
-   "Transthoracic and transoesophageal echocardiography with Doppler to define the aneurysm and detect a shunt",
-   "CT or MRI angiography of the aortic root to delineate anatomy and relationships",
-   "Cardiac catheterisation to quantify shunt and assess coronary anatomy before intervention",
-   "ECG and chest radiograph as initial assessment for chamber enlargement or pulmonary plethora",
-   "Evaluation for associated lesions such as bicuspid valve, ventricular septal defect, and connective tissue disease",
-   "Blood cultures where infective endocarditis is suspected as a cause"
-  ],
-  "redFlags": [
-   "Acute rupture with chest pain, breathlessness, and a new continuous murmur",
-   "Rapid onset of heart failure from a large left-to-right shunt",
-   "Compression of coronary ostia causing ischaemia",
-   "Conduction disturbance from an aneurysm involving the interventricular septum"
-  ],
-  "prognosis": "Unruptured aneurysms may remain stable for years, but rupture carries significant risk and, if untreated, can lead to progressive heart failure; surgical or transcatheter repair generally has good outcomes when performed promptly.",
-  "pitfalls": [
-   "Attributing a continuous murmur to a patent ductus arteriosus rather than a ruptured aneurysm",
-   "Missing an incidental unruptured aneurysm that warrants surveillance",
-   "Overlooking associated lesions such as ventricular septal defect or bicuspid aortic valve",
-   "Delaying repair once rupture or significant enlargement is evident"
-  ],
-  "references": [
-   "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
-   "ESC guidelines on the diagnosis and treatment of aortic diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Surgical repair with patch closure of the defect and aortic root repair, adding aortic valve repair or replacement where needed, is the definitive treatment for ruptured or symptomatic aneurysms",
-   "Transcatheter device closure as an alternative for selected ruptured aneurysms with suitable anatomy",
-   "Stabilisation of acute rupture with diuretics and afterload reduction for heart failure while expediting repair",
-   "Prompt treatment of infective endocarditis where implicated, with attention to endocarditis prevention",
-   "Surveillance of unruptured aneurysms with serial echocardiography and cross-sectional imaging for enlargement or valve or coronary compromise",
-   "Evaluation and management of associated lesions such as bicuspid aortic valve, ventricular septal defect and connective tissue disease",
-   "Coordinated cardiology and cardiac surgery input"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "sinus_of_valsalva_aneurysm-pathway",
-   "title": "Sinus of Valsalva aneurysm: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An abnormal dilatation of one of the aortic sinuses, most often the right coronary sinus, arising from congenital weakness of the aortic wall at the sinus or from acquired causes",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute rupture with chest pain, breathlessness, and a new continuous murmur",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Transthoracic and transoesophageal echocardiography with Doppler to define the aneurysm and detect a shunt, CT or MRI angiography of the aortic root to delineate anatomy and relationships, Cardiac catheterisation to"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Surgical repair with patch closure of the defect and aortic root repair, adding aortic valve repair or replacement where needed, is the definitive treatment for ruptured or symptomatic aneurysms"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing a continuous murmur to a patent ductus arteriosus rather than a ruptured aneurysm"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of sinus of valsalva aneurysm."
-  }
- ],
- "tables": [
-  {
-   "id": "sinus_of_valsalva_aneurysm-matrix",
-   "title": "Sinus of Valsalva aneurysm: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An abnormal dilatation of one of the aortic sinuses, most often the right coronary sinus, arising from congenital weakness of the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular",
+  "specialty": "Cardiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Braunwald's Heart Disease / ESC guidelines on aortic disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An abnormal dilatation of one of the aortic sinuses, most often the right coronary sinus, arising from congenital weakness of the aortic wall at the sinus or from acquired causes",
+      "Unruptured aneurysms are frequently asymptomatic and found incidentally, though a large one may compress adjacent structures or distort the aortic valve",
+      "Rupture is the feared complication and usually drains into a low-pressure right-sided chamber, most commonly the right ventricle or right atrium, creating a left-to-right shunt",
+      "Acute rupture can present with sudden chest pain, breathlessness, and a continuous murmur, and may precipitate heart failure",
+      "A continuous murmur from a ruptured aneurysm can be mistaken for a patent ductus arteriosus or a coronary arteriovenous fistula",
+      "It is associated with connective tissue disorders, bicuspid aortic valve, and ventricular septal defect, and may follow infective endocarditis or trauma",
+      "Echocardiography, particularly transoesophageal, together with CT or MRI and cardiac catheterisation define the anatomy and any shunt",
+      "Symptomatic, ruptured, or enlarging aneurysms are treated by surgical or, in selected cases, transcatheter repair"
     ],
-    [
-     "Key Investigations",
-     "Transthoracic and transoesophageal echocardiography with Doppler to define the aneurysm and detect a shunt, CT or MRI angiography",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A sinus of Valsalva aneurysm results from a deficiency in the elastic and muscular tissue where the aortic media meets the annulus fibrosus, allowing the affected aortic sinus to bulge. The weakness may be congenital or acquired through infection such as endocarditis, connective tissue disease, atherosclerosis, or trauma. Over time the thin-walled aneurysm enlarges under aortic pressure and may compress neighbouring structures or interfere with the aortic valve and coronary ostia. If the wall gives way, blood jets from the high-pressure aorta into an adjacent lower-pressure chamber, most often on the right side of the heart, establishing a left-to-right shunt with volume overload and, if large, acute heart failure.",
+    "additionalDifferentials": [
+      "Patent ductus arteriosus",
+      "Coronary arteriovenous fistula",
+      "Ventricular septal defect with aortic regurgitation",
+      "Ruptured aortic dissection into a cardiac chamber",
+      "Aortic root aneurysm from other causes",
+      "Coronary artery aneurysm"
     ],
-    [
-     "Primary Differentials",
-     "Patent ductus arteriosus, Coronary arteriovenous fistula, Ventricular septal defect with aortic regurgitation",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Transthoracic and transoesophageal echocardiography with Doppler to define the aneurysm and detect a shunt",
+      "CT or MRI angiography of the aortic root to delineate anatomy and relationships",
+      "Cardiac catheterisation to quantify shunt and assess coronary anatomy before intervention",
+      "ECG and chest radiograph as initial assessment for chamber enlargement or pulmonary plethora",
+      "Evaluation for associated lesions such as bicuspid valve, ventricular septal defect, and connective tissue disease",
+      "Blood cultures where infective endocarditis is suspected as a cause"
     ],
-    [
-     "Management Strategy",
-     "Surgical repair with patch closure of the defect and aortic root repair, adding aortic valve repair or replacement where needed,",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute rupture with chest pain, breathlessness, and a new continuous murmur",
+      "Rapid onset of heart failure from a large left-to-right shunt",
+      "Compression of coronary ostia causing ischaemia",
+      "Conduction disturbance from an aneurysm involving the interventricular septum"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing a continuous murmur to a patent ductus arteriosus rather than a ruptured aneurysm",
-     "Prevent diagnostic or management error"
+    "prognosis": "Unruptured aneurysms may remain stable for years, but rupture carries significant risk and, if untreated, can lead to progressive heart failure; surgical or transcatheter repair generally has good outcomes when performed promptly.",
+    "pitfalls": [
+      "Attributing a continuous murmur to a patent ductus arteriosus rather than a ruptured aneurysm",
+      "Missing an incidental unruptured aneurysm that warrants surveillance",
+      "Overlooking associated lesions such as ventricular septal defect or bicuspid aortic valve",
+      "Delaying repair once rupture or significant enlargement is evident"
+    ],
+    "references": [
+      "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
+      "ESC guidelines on the diagnosis and treatment of aortic diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Surgical repair with patch closure of the defect and aortic root repair, adding aortic valve repair or replacement where needed, is the definitive treatment for ruptured or symptomatic aneurysms",
+      "Transcatheter device closure as an alternative for selected ruptured aneurysms with suitable anatomy",
+      "Stabilisation of acute rupture with diuretics and afterload reduction for heart failure while expediting repair",
+      "Prompt treatment of infective endocarditis where implicated, with attention to endocarditis prevention",
+      "Surveillance of unruptured aneurysms with serial echocardiography and cross-sectional imaging for enlargement or valve or coronary compromise",
+      "Evaluation and management of associated lesions such as bicuspid aortic valve, ventricular septal defect and connective tissue disease",
+      "Coordinated cardiology and cardiac surgery input"
     ]
-   ],
-   "caption": "Overview comparison matrix for sinus of valsalva aneurysm."
-  }
- ],
- "diagrams": [
-  {
-   "id": "sinus-of-valsalva-aneurysm-real-image",
-   "title": "Sinus of Valsalva aneurysm: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "sinus_of_valsalva_aneurysm-pathway",
+      "title": "Sinus of Valsalva aneurysm: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An abnormal dilatation of one of the aortic sinuses, most often the right coronary sinus, arising from congenital weakness of the aortic wall at the sinus or from acquired causes",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute rupture with chest pain, breathlessness, and a new continuous murmur",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Transthoracic and transoesophageal echocardiography with Doppler to define the aneurysm and detect a shunt, CT or MRI angiography of the aortic root to delineate anatomy and relationships, Cardiac catheterisation to"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Surgical repair with patch closure of the defect and aortic root repair, adding aortic valve repair or replacement where needed, is the definitive treatment for ruptured or symptomatic aneurysms"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing a continuous murmur to a patent ductus arteriosus rather than a ruptured aneurysm"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of sinus of valsalva aneurysm."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "sinus_of_valsalva_aneurysm-matrix",
+      "title": "Sinus of Valsalva aneurysm: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An abnormal dilatation of one of the aortic sinuses, most often the right coronary sinus, arising from congenital weakness of the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Transthoracic and transoesophageal echocardiography with Doppler to define the aneurysm and detect a shunt, CT or MRI angiography",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Patent ductus arteriosus, Coronary arteriovenous fistula, Ventricular septal defect with aortic regurgitation",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Surgical repair with patch closure of the defect and aortic root repair, adding aortic valve repair or replacement where needed,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing a continuous murmur to a patent ductus arteriosus rather than a ruptured aneurysm",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for sinus of valsalva aneurysm."
+    }
+  ],
+  "diagrams": []
 }

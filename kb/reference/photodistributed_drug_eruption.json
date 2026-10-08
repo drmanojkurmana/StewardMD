@@ -1,174 +1,152 @@
 {
- "id": "photodistributed_drug_eruption",
- "name": "Photodistributed drug eruption",
- "aliases": [
-  "drug-induced photosensitivity",
-  "photodistributed drug eruption",
-  "drug photosensitivity reaction",
-  "systemic photosensitive drug reaction"
- ],
- "class": "non_infective",
- "system": "Dermatology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A drug-induced eruption confined to light-exposed skin, typically the face, V of the neck, dorsa of the hands and extensor forearms, with sparing of shaded sites",
-   "Reactions divide into phototoxic, which are common, dose-dependent and resemble exaggerated sunburn, and photoallergic, which are immune-mediated, eczematous and affect only sensitised individuals",
-   "The action spectrum is usually within the ultraviolet A range, so reactions can occur through window glass and despite ultraviolet-B-blocking sunscreens",
-   "Frequently implicated systemic drugs include certain thiazide diuretics, tetracyclines, fluoroquinolones, amiodarone, non-steroidal anti-inflammatory drugs and voriconazole",
-   "Sparing of the upper eyelids, submental region and skin behind the ears helps confirm a photodistributed pattern",
-   "Some drugs cause distinctive patterns such as photo-onycholysis, a lichenoid photoreaction, or pseudoporphyria with skin fragility and blistering",
-   "Chronic amiodarone or long-term photosensitisers can produce slate-grey pigmentation of exposed skin",
-   "Management is withdrawal or substitution of the culprit drug where possible, strict broad-spectrum photoprotection and topical corticosteroids for symptomatic skin"
+  "id": "photodistributed_drug_eruption",
+  "name": "Photodistributed drug eruption",
+  "aliases": [
+    "drug-induced photosensitivity",
+    "photodistributed drug eruption",
+    "drug photosensitivity reaction",
+    "systemic photosensitive drug reaction"
   ],
-  "pathophysiology": "Photodistributed drug eruptions arise when a systemic drug or its metabolite absorbs ultraviolet radiation in the skin. In phototoxic reactions the absorbed energy generates reactive oxygen species and other cytotoxic photoproducts that directly damage keratinocytes and other cutaneous cells, producing an exaggerated sunburn-like response that depends on the dose of both drug and light and can occur on first exposure. In photoallergic reactions the drug is converted by light into a photoproduct that acts as a hapten, provoking a delayed type IV, T-cell-mediated hypersensitivity that requires prior sensitisation and produces an eczematous eruption. The predominance of ultraviolet A in the action spectrum explains why reactions occur despite ordinary sunscreens and through glass.",
-  "additionalDifferentials": [
-   "Idiopathic photodermatoses such as polymorphic light eruption and chronic actinic dermatitis",
-   "Photoallergic and phototoxic contact reactions from topical agents",
-   "Cutaneous lupus erythematosus with photosensitivity",
-   "Porphyria cutanea tarda and drug-induced pseudoporphyria",
-   "Airborne allergic contact dermatitis",
-   "Pellagra and other nutritional photosensitive dermatoses"
-  ],
-  "additionalInvestigations": [
-   "Detailed drug and sun-exposure history correlating onset with photosensitising medication",
-   "Assessment of the distribution to confirm sparing of shaded sites",
-   "Phototesting to define the action spectrum and photopatch testing to identify photoallergy",
-   "Skin biopsy in atypical cases to distinguish phototoxic, lichenoid or pseudoporphyria patterns",
-   "Porphyrin studies to exclude true porphyria in blistering presentations",
-   "Autoimmune serology to exclude photosensitive lupus"
-  ],
-  "redFlags": [
-   "Blistering with skin fragility suggesting pseudoporphyria or true porphyria",
-   "Progression toward persistent light sensitivity or chronic actinic dermatitis",
-   "An essential photosensitising drug that cannot easily be withdrawn, requiring specialist input",
-   "Features raising the possibility of cutaneous or systemic lupus"
-  ],
-  "prognosis": "Most reactions resolve after the culprit drug is stopped and light exposure minimised, though phototoxic pigmentation and drug-induced photosensitivity can persist for a time after withdrawal, and rarely a lasting photosensitivity develops.",
-  "pitfalls": [
-   "Attributing a photodistributed eruption to a topical product while missing a systemic photosensitising drug",
-   "Advising only ultraviolet-B sunscreens when the reaction is driven by ultraviolet A",
-   "Failing to recognise pseudoporphyria and confusing it with true porphyria",
-   "Overlooking the sparing of shaded sites that defines the photodistributed pattern"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "British Association of Dermatologists guidance on drug-induced photosensitivity"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Withdraw or substitute the culprit photosensitising drug, such as a thiazide, tetracycline, fluoroquinolone, amiodarone, non-steroidal anti-inflammatory drug or voriconazole",
-   "Enforce photoprotection with broad-spectrum UVA sunscreen, protective clothing and sun avoidance, recognising reactions occur through window glass",
-   "Treat the eczematous photoallergic component with topical corticosteroids and give supportive care for the sunburn-like phototoxic reaction",
-   "Investigate blistering presentations with porphyrin studies to exclude pseudoporphyria and true porphyria",
-   "Where the drug is essential, adjust dosing and timing or select a non-photosensitising alternative in consultation with the prescriber",
-   "Monitor for resolution and for residual pigmentation or persisting photosensitivity after withdrawal"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "photodistributed_drug_eruption-pathway",
-   "title": "Photodistributed drug eruption: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A drug-induced eruption confined to light-exposed skin, typically the face, V of the neck, dorsa of the hands and extensor forearms, with sparing of shaded sites",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Blistering with skin fragility suggesting pseudoporphyria or true porphyria",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Detailed drug and sun-exposure history correlating onset with photosensitising medication, Assessment of the distribution to confirm sparing of shaded sites, Phototesting to define the action spectrum and photopatch"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Withdraw or substitute the culprit photosensitising drug, such as a thiazide, tetracycline, fluoroquinolone, amiodarone, non-steroidal anti-inflammatory drug or voriconazole"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing a photodistributed eruption to a topical product while missing a systemic photosensitising drug"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of photodistributed drug eruption."
-  }
- ],
- "tables": [
-  {
-   "id": "photodistributed_drug_eruption-matrix",
-   "title": "Photodistributed drug eruption: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A drug-induced eruption confined to light-exposed skin, typically the face, V of the neck, dorsa of the hands and extensor",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A drug-induced eruption confined to light-exposed skin, typically the face, V of the neck, dorsa of the hands and extensor forearms, with sparing of shaded sites",
+      "Reactions divide into phototoxic, which are common, dose-dependent and resemble exaggerated sunburn, and photoallergic, which are immune-mediated, eczematous and affect only sensitised individuals",
+      "The action spectrum is usually within the ultraviolet A range, so reactions can occur through window glass and despite ultraviolet-B-blocking sunscreens",
+      "Frequently implicated systemic drugs include certain thiazide diuretics, tetracyclines, fluoroquinolones, amiodarone, non-steroidal anti-inflammatory drugs and voriconazole",
+      "Sparing of the upper eyelids, submental region and skin behind the ears helps confirm a photodistributed pattern",
+      "Some drugs cause distinctive patterns such as photo-onycholysis, a lichenoid photoreaction, or pseudoporphyria with skin fragility and blistering",
+      "Chronic amiodarone or long-term photosensitisers can produce slate-grey pigmentation of exposed skin",
+      "Management is withdrawal or substitution of the culprit drug where possible, strict broad-spectrum photoprotection and topical corticosteroids for symptomatic skin"
     ],
-    [
-     "Key Investigations",
-     "Detailed drug and sun-exposure history correlating onset with photosensitising medication, Assessment of the distribution to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Photodistributed drug eruptions arise when a systemic drug or its metabolite absorbs ultraviolet radiation in the skin. In phototoxic reactions the absorbed energy generates reactive oxygen species and other cytotoxic photoproducts that directly damage keratinocytes and other cutaneous cells, producing an exaggerated sunburn-like response that depends on the dose of both drug and light and can occur on first exposure. In photoallergic reactions the drug is converted by light into a photoproduct that acts as a hapten, provoking a delayed type IV, T-cell-mediated hypersensitivity that requires prior sensitisation and produces an eczematous eruption. The predominance of ultraviolet A in the action spectrum explains why reactions occur despite ordinary sunscreens and through glass.",
+    "additionalDifferentials": [
+      "Idiopathic photodermatoses such as polymorphic light eruption and chronic actinic dermatitis",
+      "Photoallergic and phototoxic contact reactions from topical agents",
+      "Cutaneous lupus erythematosus with photosensitivity",
+      "Porphyria cutanea tarda and drug-induced pseudoporphyria",
+      "Airborne allergic contact dermatitis",
+      "Pellagra and other nutritional photosensitive dermatoses"
     ],
-    [
-     "Primary Differentials",
-     "Idiopathic photodermatoses such as polymorphic light eruption and chronic actinic dermatitis, Photoallergic and phototoxic",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Detailed drug and sun-exposure history correlating onset with photosensitising medication",
+      "Assessment of the distribution to confirm sparing of shaded sites",
+      "Phototesting to define the action spectrum and photopatch testing to identify photoallergy",
+      "Skin biopsy in atypical cases to distinguish phototoxic, lichenoid or pseudoporphyria patterns",
+      "Porphyrin studies to exclude true porphyria in blistering presentations",
+      "Autoimmune serology to exclude photosensitive lupus"
     ],
-    [
-     "Management Strategy",
-     "Withdraw or substitute the culprit photosensitising drug, such as a thiazide, tetracycline, fluoroquinolone, amiodarone,",
-     "Core treatment modality"
+    "redFlags": [
+      "Blistering with skin fragility suggesting pseudoporphyria or true porphyria",
+      "Progression toward persistent light sensitivity or chronic actinic dermatitis",
+      "An essential photosensitising drug that cannot easily be withdrawn, requiring specialist input",
+      "Features raising the possibility of cutaneous or systemic lupus"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing a photodistributed eruption to a topical product while missing a systemic photosensitising drug",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most reactions resolve after the culprit drug is stopped and light exposure minimised, though phototoxic pigmentation and drug-induced photosensitivity can persist for a time after withdrawal, and rarely a lasting photosensitivity develops.",
+    "pitfalls": [
+      "Attributing a photodistributed eruption to a topical product while missing a systemic photosensitising drug",
+      "Advising only ultraviolet-B sunscreens when the reaction is driven by ultraviolet A",
+      "Failing to recognise pseudoporphyria and confusing it with true porphyria",
+      "Overlooking the sparing of shaded sites that defines the photodistributed pattern"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "British Association of Dermatologists guidance on drug-induced photosensitivity"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Withdraw or substitute the culprit photosensitising drug, such as a thiazide, tetracycline, fluoroquinolone, amiodarone, non-steroidal anti-inflammatory drug or voriconazole",
+      "Enforce photoprotection with broad-spectrum UVA sunscreen, protective clothing and sun avoidance, recognising reactions occur through window glass",
+      "Treat the eczematous photoallergic component with topical corticosteroids and give supportive care for the sunburn-like phototoxic reaction",
+      "Investigate blistering presentations with porphyrin studies to exclude pseudoporphyria and true porphyria",
+      "Where the drug is essential, adjust dosing and timing or select a non-photosensitising alternative in consultation with the prescriber",
+      "Monitor for resolution and for residual pigmentation or persisting photosensitivity after withdrawal"
     ]
-   ],
-   "caption": "Overview comparison matrix for photodistributed drug eruption."
-  }
- ],
- "diagrams": [
-  {
-   "id": "photodistributed-drug-eruption-real-image",
-   "title": "Photodistributed drug eruption: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "photodistributed_drug_eruption-pathway",
+      "title": "Photodistributed drug eruption: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A drug-induced eruption confined to light-exposed skin, typically the face, V of the neck, dorsa of the hands and extensor forearms, with sparing of shaded sites",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Blistering with skin fragility suggesting pseudoporphyria or true porphyria",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Detailed drug and sun-exposure history correlating onset with photosensitising medication, Assessment of the distribution to confirm sparing of shaded sites, Phototesting to define the action spectrum and photopatch"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Withdraw or substitute the culprit photosensitising drug, such as a thiazide, tetracycline, fluoroquinolone, amiodarone, non-steroidal anti-inflammatory drug or voriconazole"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing a photodistributed eruption to a topical product while missing a systemic photosensitising drug"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of photodistributed drug eruption."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "photodistributed_drug_eruption-matrix",
+      "title": "Photodistributed drug eruption: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A drug-induced eruption confined to light-exposed skin, typically the face, V of the neck, dorsa of the hands and extensor",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Detailed drug and sun-exposure history correlating onset with photosensitising medication, Assessment of the distribution to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Idiopathic photodermatoses such as polymorphic light eruption and chronic actinic dermatitis, Photoallergic and phototoxic",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Withdraw or substitute the culprit photosensitising drug, such as a thiazide, tetracycline, fluoroquinolone, amiodarone,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing a photodistributed eruption to a topical product while missing a systemic photosensitising drug",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for photodistributed drug eruption."
+    }
+  ],
+  "diagrams": []
 }

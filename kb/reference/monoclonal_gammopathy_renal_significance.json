@@ -1,172 +1,150 @@
 {
- "id": "monoclonal_gammopathy_renal_significance",
- "name": "Monoclonal gammopathy of renal significance",
- "aliases": [
-  "MGRS",
-  "renal monoclonal gammopathy",
-  "monoclonal immunoglobulin-associated kidney disease"
- ],
- "class": "non_infective",
- "system": "Haematology",
- "specialty": "Haematology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Hematology / WHO classification of haematolymphoid tumours",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A group of kidney disorders caused by a nephrotoxic monoclonal immunoglobulin produced by a B-cell or plasma-cell clone that is itself too small to meet criteria for myeloma or lymphoma",
-   "The clone would otherwise be labelled a monoclonal gammopathy of undetermined significance, but the renal damage reclassifies it as clinically significant",
-   "Patients present with proteinuria, haematuria, progressive renal impairment or nephrotic syndrome without another clear cause",
-   "The kidney lesions are diverse and include monoclonal immunoglobulin deposition disease, proliferative glomerulonephritis with monoclonal deposits, light chain proximal tubulopathy and AL amyloidosis",
-   "A renal biopsy with immunofluorescence and electron microscopy is central to demonstrating the monoclonal immunoglobulin in the kidney",
-   "The paraprotein detected in serum or urine must be shown to match the deposited immunoglobulin to establish causation",
-   "Treatment is directed against the underlying clone to remove the pathogenic protein and preserve kidney function, and disease can recur after transplantation if the clone persists"
+  "id": "monoclonal_gammopathy_renal_significance",
+  "name": "Monoclonal gammopathy of renal significance",
+  "aliases": [
+    "MGRS",
+    "renal monoclonal gammopathy",
+    "monoclonal immunoglobulin-associated kidney disease"
   ],
-  "pathophysiology": "Monoclonal gammopathy of renal significance describes kidney injury caused by a monoclonal immunoglobulin or its fragments secreted by a small, non-malignant B-cell or plasma-cell clone. Despite a low tumour burden, the abnormal protein has physicochemical properties that make it nephrotoxic: it may deposit in glomerular or tubular basement membranes, form organised fibrils or crystals, aggregate within proximal tubular cells, or activate complement, depending on its structure. These mechanisms produce a spectrum of glomerular and tubulointerstitial lesions. Because damage stems from the protein rather than tumour bulk, effective treatment must suppress the clone that produces it.",
-  "additionalDifferentials": [
-   "Multiple myeloma with cast nephropathy",
-   "AL amyloidosis with systemic involvement",
-   "Monoclonal gammopathy of undetermined significance without renal disease",
-   "Diabetic or hypertensive nephropathy",
-   "Immune-complex glomerulonephritis of other cause",
-   "Cryoglobulinaemic renal disease"
-  ],
-  "additionalInvestigations": [
-   "Serum and urine protein electrophoresis with immunofixation and serum free light chains",
-   "Renal biopsy with immunofluorescence and electron microscopy",
-   "Matching of the deposited immunoglobulin with the circulating paraprotein",
-   "Bone marrow aspirate and trephine to characterise the clone",
-   "Quantification of proteinuria and assessment of renal function",
-   "Cross-sectional imaging or further staging to exclude overt myeloma or lymphoma"
-  ],
-  "redFlags": [
-   "Rapidly progressive renal impairment threatening dialysis dependence",
-   "Nephrotic-range proteinuria with hypoalbuminaemia",
-   "Features suggesting systemic amyloidosis or evolving overt malignancy",
-   "Recurrence of disease in a kidney transplant"
-  ],
-  "prognosis": "Kidney outcome depends on early recognition and effective clone-directed therapy; timely treatment can stabilise or improve renal function, whereas delayed diagnosis often leads to irreversible kidney failure, and the disease may recur after transplantation if the clone is not controlled.",
-  "pitfalls": [
-   "Dismissing a small monoclonal protein as benign despite unexplained kidney disease",
-   "Not performing a renal biopsy to define the specific lesion",
-   "Failing to confirm that the renal deposits match the circulating paraprotein",
-   "Transplanting the kidney without controlling the underlying clone, risking recurrence"
-  ],
-  "references": [
-   "Williams Hematology",
-   "WHO Classification of Haematolymphoid Tumours"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Clone-directed therapy is the definitive treatment, targeting the responsible clone even though its burden is low, with proteasome-inhibitor (bortezomib-based) regimens and daratumumab or autologous stem cell transplantation for plasma-cell clones and rituximab-based regimens for B-cell or lymphoid clones",
-   "Renal supportive care with blood-pressure control using renin-angiotensin system blockade, reduction of proteinuria and avoidance of nephrotoxins",
-   "Renal biopsy with immunofluorescence and electron microscopy to characterise the lesion and match the deposited immunoglobulin to the circulating paraprotein, directing therapy",
-   "Monitor haematological response by serum free light chains and paraprotein and renal response by proteinuria and renal function",
-   "Coordinated multidisciplinary haematology and nephrology management",
-   "Defer kidney transplantation until the clone is controlled and counsel on the high risk of recurrence in the graft if it is not"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "monoclonal_gammopathy_renal_significance-pathway",
-   "title": "Monoclonal gammopathy of renal significance: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A group of kidney disorders caused by a nephrotoxic monoclonal immunoglobulin produced by a B-cell or plasma-cell clone that is itself too small to meet criteria for myeloma or lymphoma",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive renal impairment threatening dialysis dependence",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum and urine protein electrophoresis with immunofixation and serum free light chains, Renal biopsy with immunofluorescence and electron microscopy, Matching of the deposited immunoglobulin with the circulating"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Clone-directed therapy is the definitive treatment, targeting the responsible clone even though its burden is low, with proteasome-inhibitor (bortezomib-based) regimens and daratumumab or autologous stem cell"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing a small monoclonal protein as benign despite unexplained kidney disease"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of monoclonal gammopathy of renal significance."
-  }
- ],
- "tables": [
-  {
-   "id": "monoclonal_gammopathy_renal_significance-matrix",
-   "title": "Monoclonal gammopathy of renal significance: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A group of kidney disorders caused by a nephrotoxic monoclonal immunoglobulin produced by a B-cell or plasma-cell clone that is",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematology",
+  "specialty": "Haematology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Hematology / WHO classification of haematolymphoid tumours",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A group of kidney disorders caused by a nephrotoxic monoclonal immunoglobulin produced by a B-cell or plasma-cell clone that is itself too small to meet criteria for myeloma or lymphoma",
+      "The clone would otherwise be labelled a monoclonal gammopathy of undetermined significance, but the renal damage reclassifies it as clinically significant",
+      "Patients present with proteinuria, haematuria, progressive renal impairment or nephrotic syndrome without another clear cause",
+      "The kidney lesions are diverse and include monoclonal immunoglobulin deposition disease, proliferative glomerulonephritis with monoclonal deposits, light chain proximal tubulopathy and AL amyloidosis",
+      "A renal biopsy with immunofluorescence and electron microscopy is central to demonstrating the monoclonal immunoglobulin in the kidney",
+      "The paraprotein detected in serum or urine must be shown to match the deposited immunoglobulin to establish causation",
+      "Treatment is directed against the underlying clone to remove the pathogenic protein and preserve kidney function, and disease can recur after transplantation if the clone persists"
     ],
-    [
-     "Key Investigations",
-     "Serum and urine protein electrophoresis with immunofixation and serum free light chains, Renal biopsy with immunofluorescence and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Monoclonal gammopathy of renal significance describes kidney injury caused by a monoclonal immunoglobulin or its fragments secreted by a small, non-malignant B-cell or plasma-cell clone. Despite a low tumour burden, the abnormal protein has physicochemical properties that make it nephrotoxic: it may deposit in glomerular or tubular basement membranes, form organised fibrils or crystals, aggregate within proximal tubular cells, or activate complement, depending on its structure. These mechanisms produce a spectrum of glomerular and tubulointerstitial lesions. Because damage stems from the protein rather than tumour bulk, effective treatment must suppress the clone that produces it.",
+    "additionalDifferentials": [
+      "Multiple myeloma with cast nephropathy",
+      "AL amyloidosis with systemic involvement",
+      "Monoclonal gammopathy of undetermined significance without renal disease",
+      "Diabetic or hypertensive nephropathy",
+      "Immune-complex glomerulonephritis of other cause",
+      "Cryoglobulinaemic renal disease"
     ],
-    [
-     "Primary Differentials",
-     "Multiple myeloma with cast nephropathy, AL amyloidosis with systemic involvement, Monoclonal gammopathy of undetermined",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum and urine protein electrophoresis with immunofixation and serum free light chains",
+      "Renal biopsy with immunofluorescence and electron microscopy",
+      "Matching of the deposited immunoglobulin with the circulating paraprotein",
+      "Bone marrow aspirate and trephine to characterise the clone",
+      "Quantification of proteinuria and assessment of renal function",
+      "Cross-sectional imaging or further staging to exclude overt myeloma or lymphoma"
     ],
-    [
-     "Management Strategy",
-     "Clone-directed therapy is the definitive treatment, targeting the responsible clone even though its burden is low, with",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive renal impairment threatening dialysis dependence",
+      "Nephrotic-range proteinuria with hypoalbuminaemia",
+      "Features suggesting systemic amyloidosis or evolving overt malignancy",
+      "Recurrence of disease in a kidney transplant"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing a small monoclonal protein as benign despite unexplained kidney disease",
-     "Prevent diagnostic or management error"
+    "prognosis": "Kidney outcome depends on early recognition and effective clone-directed therapy; timely treatment can stabilise or improve renal function, whereas delayed diagnosis often leads to irreversible kidney failure, and the disease may recur after transplantation if the clone is not controlled.",
+    "pitfalls": [
+      "Dismissing a small monoclonal protein as benign despite unexplained kidney disease",
+      "Not performing a renal biopsy to define the specific lesion",
+      "Failing to confirm that the renal deposits match the circulating paraprotein",
+      "Transplanting the kidney without controlling the underlying clone, risking recurrence"
+    ],
+    "references": [
+      "Williams Hematology",
+      "WHO Classification of Haematolymphoid Tumours"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Clone-directed therapy is the definitive treatment, targeting the responsible clone even though its burden is low, with proteasome-inhibitor (bortezomib-based) regimens and daratumumab or autologous stem cell transplantation for plasma-cell clones and rituximab-based regimens for B-cell or lymphoid clones",
+      "Renal supportive care with blood-pressure control using renin-angiotensin system blockade, reduction of proteinuria and avoidance of nephrotoxins",
+      "Renal biopsy with immunofluorescence and electron microscopy to characterise the lesion and match the deposited immunoglobulin to the circulating paraprotein, directing therapy",
+      "Monitor haematological response by serum free light chains and paraprotein and renal response by proteinuria and renal function",
+      "Coordinated multidisciplinary haematology and nephrology management",
+      "Defer kidney transplantation until the clone is controlled and counsel on the high risk of recurrence in the graft if it is not"
     ]
-   ],
-   "caption": "Overview comparison matrix for monoclonal gammopathy of renal significance."
-  }
- ],
- "diagrams": [
-  {
-   "id": "monoclonal-gammopathy-renal-significance-real-image",
-   "title": "Monoclonal gammopathy of renal significance: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "monoclonal_gammopathy_renal_significance-pathway",
+      "title": "Monoclonal gammopathy of renal significance: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A group of kidney disorders caused by a nephrotoxic monoclonal immunoglobulin produced by a B-cell or plasma-cell clone that is itself too small to meet criteria for myeloma or lymphoma",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive renal impairment threatening dialysis dependence",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum and urine protein electrophoresis with immunofixation and serum free light chains, Renal biopsy with immunofluorescence and electron microscopy, Matching of the deposited immunoglobulin with the circulating"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Clone-directed therapy is the definitive treatment, targeting the responsible clone even though its burden is low, with proteasome-inhibitor (bortezomib-based) regimens and daratumumab or autologous stem cell"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing a small monoclonal protein as benign despite unexplained kidney disease"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of monoclonal gammopathy of renal significance."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "monoclonal_gammopathy_renal_significance-matrix",
+      "title": "Monoclonal gammopathy of renal significance: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A group of kidney disorders caused by a nephrotoxic monoclonal immunoglobulin produced by a B-cell or plasma-cell clone that is",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum and urine protein electrophoresis with immunofixation and serum free light chains, Renal biopsy with immunofluorescence and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Multiple myeloma with cast nephropathy, AL amyloidosis with systemic involvement, Monoclonal gammopathy of undetermined",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Clone-directed therapy is the definitive treatment, targeting the responsible clone even though its burden is low, with",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing a small monoclonal protein as benign despite unexplained kidney disease",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for monoclonal gammopathy of renal significance."
+    }
+  ],
+  "diagrams": []
 }

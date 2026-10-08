@@ -1,174 +1,152 @@
 {
- "id": "aromatase_deficiency",
- "name": "Aromatase deficiency (CYP19A1)",
- "aliases": [
-  "CYP19A1 deficiency",
-  "congenital aromatase deficiency",
-  "P450 aromatase deficiency",
-  "oestrogen synthesis defect"
- ],
- "class": "non_infective",
- "system": "Endocrine / Reproductive genetics",
- "specialty": "Reproductive Endocrinology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Textbook of Endocrinology / Endocrine Society clinical guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An autosomal recessive defect of the enzyme that converts androgens to oestrogens, so both fetus and mother lose the placental oestrogen buffer",
-   "A 46,XX fetus is virilised at birth (ambiguous genitalia) because placental androgens are not aromatised to oestrogens",
-   "The mother often becomes virilised during pregnancy, with acne, hirsutism and voice change that resolve after delivery",
-   "In affected females puberty fails to progress, with primary amenorrhoea, undetectable oestrogen, high gonadotropins and polycystic ovaries",
-   "Both sexes show tall stature, delayed bone age initially but unfused growth plates, and eventual osteoporosis because oestrogen is essential for epiphyseal closure and bone mineralisation",
-   "Metabolic consequences include insulin resistance and abnormal lipids, reflecting oestrogen's systemic roles",
-   "Management centres on oestrogen replacement to induce puberty, close epiphyses and protect bone, tailored to sex and age"
+  "id": "aromatase_deficiency",
+  "name": "Aromatase deficiency (CYP19A1)",
+  "aliases": [
+    "CYP19A1 deficiency",
+    "congenital aromatase deficiency",
+    "P450 aromatase deficiency",
+    "oestrogen synthesis defect"
   ],
-  "pathophysiology": "Aromatase, encoded by CYP19A1, converts androgenic precursors into oestrogens in the placenta, gonads, adipose tissue, bone and brain. Biallelic loss-of-function variants abolish this conversion, so androgens accumulate and oestrogens are deficient. During pregnancy the placenta cannot aromatise fetal and maternal androgens, virilising a 46,XX fetus and transiently the mother. After birth the persistent oestrogen deficiency prevents normal pubertal development in girls, drives hypergonadotropic ovarian stimulation with cyst formation, and removes the oestrogen signal required for growth-plate fusion and bone mineral accrual, producing tall stature with delayed skeletal maturation followed by osteoporosis. Insulin resistance and dyslipidaemia reflect the loss of oestrogen action in metabolic tissues.",
-  "additionalDifferentials": [
-   "Congenital adrenal hyperplasia (21-hydroxylase deficiency) causing virilisation of a 46,XX infant",
-   "Maternal virilising tumour or luteoma of pregnancy",
-   "Placental sulfatase deficiency",
-   "Complete androgen insensitivity syndrome (in the differential of delayed puberty)",
-   "Oestrogen resistance (ESR1 defect)",
-   "Ovotesticular disorder of sex development"
-  ],
-  "additionalInvestigations": [
-   "Karyotype to confirm 46,XX in a virilised infant",
-   "Serum oestradiol (low or undetectable) with elevated androgens and gonadotropins",
-   "Molecular analysis of the CYP19A1 gene",
-   "Pelvic ultrasound showing enlarged multicystic ovaries",
-   "Bone age radiograph and bone mineral density assessment",
-   "Metabolic profile including fasting glucose, insulin and lipids"
-  ],
-  "redFlags": [
-   "Ambiguous genitalia in a newborn requiring exclusion of salt-wasting congenital adrenal hyperplasia",
-   "Maternal virilisation during pregnancy prompting evaluation for the fetal disorder",
-   "Progressive tall stature with unfused epiphyses and low bone density",
-   "Fragility fracture from untreated osteoporosis"
-  ],
-  "prognosis": "With oestrogen replacement, pubertal development, epiphyseal closure and bone health can be restored and metabolic disturbances improved; maternal virilisation resolves after delivery. Untreated disease leads to eunuchoid tall stature, severe osteoporosis and metabolic complications.",
-  "pitfalls": [
-   "Mistaking the virilised 46,XX infant for congenital adrenal hyperplasia and missing the aromatase defect",
-   "Overlooking maternal virilisation in pregnancy as a diagnostic clue",
-   "Delaying oestrogen replacement and allowing continued linear growth and bone loss",
-   "Neglecting metabolic surveillance for insulin resistance and dyslipidaemia"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "Endocrine Society clinical practice guidance on disorders of sex development"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Oestrogen replacement therapy is the mainstay, restoring the missing oestrogen signal to induce pubertal development, achieve epiphyseal closure and normal final height, and support bone mineral accrual in affected females",
-   "Titrated oestrogen replacement also dampens the hypergonadotropic drive, reducing recurrent multicystic ovarian enlargement",
-   "Address the metabolic sequelae of oestrogen deficiency, managing insulin resistance and dyslipidaemia with lifestyle measures and lipid-lowering therapy as needed",
-   "Consider examination and staged reconstructive surgery for the virilised 46,XX infant, with sex assignment and timing decided by a multidisciplinary team",
-   "Surveillance with serial bone age radiographs, bone mineral density and growth to guide oestrogen dosing and detect osteoporosis",
-   "Reassure that maternal virilisation acquired during pregnancy resolves spontaneously after delivery",
-   "Offer genetic counselling for this autosomal recessive CYP19A1 defect, with confirmatory molecular testing and carrier screening of the family"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "aromatase_deficiency-pathway",
-   "title": "Aromatase deficiency (CYP19A1): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autosomal recessive defect of the enzyme that converts androgens to oestrogens, so both fetus and mother lose the placental oestrogen buffer",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Ambiguous genitalia in a newborn requiring exclusion of salt-wasting congenital adrenal hyperplasia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Karyotype to confirm 46,XX in a virilised infant, Serum oestradiol (low or undetectable) with elevated androgens and gonadotropins, Molecular analysis of the CYP19A1 gene"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Oestrogen replacement therapy is the mainstay, restoring the missing oestrogen signal to induce pubertal development, achieve epiphyseal closure and normal final height, and support bone mineral accrual in affected"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking the virilised 46,XX infant for congenital adrenal hyperplasia and missing the aromatase defect"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of aromatase deficiency (cyp19a1)."
-  }
- ],
- "tables": [
-  {
-   "id": "aromatase_deficiency-matrix",
-   "title": "Aromatase deficiency (CYP19A1): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autosomal recessive defect of the enzyme that converts androgens to oestrogens, so both fetus and mother lose the placental",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine / Reproductive genetics",
+  "specialty": "Reproductive Endocrinology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Textbook of Endocrinology / Endocrine Society clinical guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An autosomal recessive defect of the enzyme that converts androgens to oestrogens, so both fetus and mother lose the placental oestrogen buffer",
+      "A 46,XX fetus is virilised at birth (ambiguous genitalia) because placental androgens are not aromatised to oestrogens",
+      "The mother often becomes virilised during pregnancy, with acne, hirsutism and voice change that resolve after delivery",
+      "In affected females puberty fails to progress, with primary amenorrhoea, undetectable oestrogen, high gonadotropins and polycystic ovaries",
+      "Both sexes show tall stature, delayed bone age initially but unfused growth plates, and eventual osteoporosis because oestrogen is essential for epiphyseal closure and bone mineralisation",
+      "Metabolic consequences include insulin resistance and abnormal lipids, reflecting oestrogen's systemic roles",
+      "Management centres on oestrogen replacement to induce puberty, close epiphyses and protect bone, tailored to sex and age"
     ],
-    [
-     "Key Investigations",
-     "Karyotype to confirm 46,XX in a virilised infant, Serum oestradiol (low or undetectable) with elevated androgens and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Aromatase, encoded by CYP19A1, converts androgenic precursors into oestrogens in the placenta, gonads, adipose tissue, bone and brain. Biallelic loss-of-function variants abolish this conversion, so androgens accumulate and oestrogens are deficient. During pregnancy the placenta cannot aromatise fetal and maternal androgens, virilising a 46,XX fetus and transiently the mother. After birth the persistent oestrogen deficiency prevents normal pubertal development in girls, drives hypergonadotropic ovarian stimulation with cyst formation, and removes the oestrogen signal required for growth-plate fusion and bone mineral accrual, producing tall stature with delayed skeletal maturation followed by osteoporosis. Insulin resistance and dyslipidaemia reflect the loss of oestrogen action in metabolic tissues.",
+    "additionalDifferentials": [
+      "Congenital adrenal hyperplasia (21-hydroxylase deficiency) causing virilisation of a 46,XX infant",
+      "Maternal virilising tumour or luteoma of pregnancy",
+      "Placental sulfatase deficiency",
+      "Complete androgen insensitivity syndrome (in the differential of delayed puberty)",
+      "Oestrogen resistance (ESR1 defect)",
+      "Ovotesticular disorder of sex development"
     ],
-    [
-     "Primary Differentials",
-     "Congenital adrenal hyperplasia (21-hydroxylase deficiency) causing virilisation of a 46,XX infant, Maternal virilising tumour or",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Karyotype to confirm 46,XX in a virilised infant",
+      "Serum oestradiol (low or undetectable) with elevated androgens and gonadotropins",
+      "Molecular analysis of the CYP19A1 gene",
+      "Pelvic ultrasound showing enlarged multicystic ovaries",
+      "Bone age radiograph and bone mineral density assessment",
+      "Metabolic profile including fasting glucose, insulin and lipids"
     ],
-    [
-     "Management Strategy",
-     "Oestrogen replacement therapy is the mainstay, restoring the missing oestrogen signal to induce pubertal development, achieve",
-     "Core treatment modality"
+    "redFlags": [
+      "Ambiguous genitalia in a newborn requiring exclusion of salt-wasting congenital adrenal hyperplasia",
+      "Maternal virilisation during pregnancy prompting evaluation for the fetal disorder",
+      "Progressive tall stature with unfused epiphyses and low bone density",
+      "Fragility fracture from untreated osteoporosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking the virilised 46,XX infant for congenital adrenal hyperplasia and missing the aromatase defect",
-     "Prevent diagnostic or management error"
+    "prognosis": "With oestrogen replacement, pubertal development, epiphyseal closure and bone health can be restored and metabolic disturbances improved; maternal virilisation resolves after delivery. Untreated disease leads to eunuchoid tall stature, severe osteoporosis and metabolic complications.",
+    "pitfalls": [
+      "Mistaking the virilised 46,XX infant for congenital adrenal hyperplasia and missing the aromatase defect",
+      "Overlooking maternal virilisation in pregnancy as a diagnostic clue",
+      "Delaying oestrogen replacement and allowing continued linear growth and bone loss",
+      "Neglecting metabolic surveillance for insulin resistance and dyslipidaemia"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "Endocrine Society clinical practice guidance on disorders of sex development"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Oestrogen replacement therapy is the mainstay, restoring the missing oestrogen signal to induce pubertal development, achieve epiphyseal closure and normal final height, and support bone mineral accrual in affected females",
+      "Titrated oestrogen replacement also dampens the hypergonadotropic drive, reducing recurrent multicystic ovarian enlargement",
+      "Address the metabolic sequelae of oestrogen deficiency, managing insulin resistance and dyslipidaemia with lifestyle measures and lipid-lowering therapy as needed",
+      "Consider examination and staged reconstructive surgery for the virilised 46,XX infant, with sex assignment and timing decided by a multidisciplinary team",
+      "Surveillance with serial bone age radiographs, bone mineral density and growth to guide oestrogen dosing and detect osteoporosis",
+      "Reassure that maternal virilisation acquired during pregnancy resolves spontaneously after delivery",
+      "Offer genetic counselling for this autosomal recessive CYP19A1 defect, with confirmatory molecular testing and carrier screening of the family"
     ]
-   ],
-   "caption": "Overview comparison matrix for aromatase deficiency (cyp19a1)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "aromatase-deficiency-real-image",
-   "title": "Aromatase deficiency (CYP19A1): Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "aromatase_deficiency-pathway",
+      "title": "Aromatase deficiency (CYP19A1): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autosomal recessive defect of the enzyme that converts androgens to oestrogens, so both fetus and mother lose the placental oestrogen buffer",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Ambiguous genitalia in a newborn requiring exclusion of salt-wasting congenital adrenal hyperplasia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Karyotype to confirm 46,XX in a virilised infant, Serum oestradiol (low or undetectable) with elevated androgens and gonadotropins, Molecular analysis of the CYP19A1 gene"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Oestrogen replacement therapy is the mainstay, restoring the missing oestrogen signal to induce pubertal development, achieve epiphyseal closure and normal final height, and support bone mineral accrual in affected"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking the virilised 46,XX infant for congenital adrenal hyperplasia and missing the aromatase defect"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of aromatase deficiency (cyp19a1)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "aromatase_deficiency-matrix",
+      "title": "Aromatase deficiency (CYP19A1): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autosomal recessive defect of the enzyme that converts androgens to oestrogens, so both fetus and mother lose the placental",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Karyotype to confirm 46,XX in a virilised infant, Serum oestradiol (low or undetectable) with elevated androgens and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Congenital adrenal hyperplasia (21-hydroxylase deficiency) causing virilisation of a 46,XX infant, Maternal virilising tumour or",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Oestrogen replacement therapy is the mainstay, restoring the missing oestrogen signal to induce pubertal development, achieve",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking the virilised 46,XX infant for congenital adrenal hyperplasia and missing the aromatase defect",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for aromatase deficiency (cyp19a1)."
+    }
+  ],
+  "diagrams": []
 }

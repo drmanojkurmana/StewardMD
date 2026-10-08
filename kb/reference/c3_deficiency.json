@@ -1,178 +1,156 @@
 {
- "id": "c3_deficiency",
- "name": "C3 deficiency",
- "aliases": [
-  "C3 deficiency",
-  "Complement C3 deficiency",
-  "Hereditary C3 deficiency"
- ],
- "class": "non_infective",
- "system": "Immune system",
- "specialty": "Immunology",
- "referenceOnly": true,
- "reference": {
-  "source": "Middleton's Allergy: Principles and Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "C3 is the central convergence point of all complement pathways, so its deficiency produces the most severe complement-related infective phenotype.",
-   "Patients suffer recurrent, often severe, pyogenic infections with encapsulated organisms from early childhood.",
-   "Immune-complex disease, including a lupus-like syndrome and membranoproliferative glomerulonephritis, is an important complication.",
-   "Both CH50 and AH50 are markedly reduced because C3 is shared by classical, lectin and alternative pathways.",
-   "A very low or absent C3 antigenic level confirms primary deficiency once secondary consumption is excluded.",
-   "Secondary C3 lowering from consumption (for example by C3 nephritic factor or factor H/I deficiency) must be distinguished from primary genetic deficiency.",
-   "Vaccination against encapsulated organisms and prompt, often prophylactic, antibiotic strategies are central to care.",
-   "Impaired opsonisation is the dominant defect, reflecting the loss of C3b-mediated coating of pathogens."
+  "id": "c3_deficiency",
+  "name": "C3 deficiency",
+  "aliases": [
+    "C3 deficiency",
+    "Complement C3 deficiency",
+    "Hereditary C3 deficiency"
   ],
-  "pathophysiology": "C3 lies at the hub of the complement system, where the classical, lectin and alternative pathways converge; its cleavage products C3b and C3a drive opsonisation, immune-complex solubilisation and downstream membrane attack complex formation. In complete C3 deficiency none of these functions proceeds effectively, so bacteria are poorly opsonised and cleared, leading to recurrent severe pyogenic infection with encapsulated organisms. The failure to solubilise and clear immune complexes and apoptotic debris promotes their tissue deposition, giving rise to lupus-like autoimmunity and membranoproliferative glomerulonephritis. Because C3 is upstream of the terminal components, its absence also impairs the bactericidal membrane attack complex, though opsonic failure predominates clinically.",
-  "additionalDifferentials": [
-   "Secondary C3 consumption (C3 nephritic factor, factor H or factor I deficiency)",
-   "Other early-component complement deficiencies",
-   "Severe antibody deficiency or combined immunodeficiency",
-   "Asplenia or hyposplenism",
-   "Idiopathic systemic lupus erythematosus",
-   "C3 glomerulopathy from complement dysregulation"
-  ],
-  "additionalInvestigations": [
-   "C3 antigenic level (markedly low or absent)",
-   "CH50 and AH50, both reduced in primary deficiency",
-   "Assays for C3 nephritic factor and regulatory proteins (factor H, factor I) to exclude secondary consumption",
-   "Genetic testing of the C3 gene",
-   "Renal function, urinalysis and, where indicated, renal biopsy",
-   "Autoimmune serology including ANA",
-   "Vaccination status and infection history documentation"
-  ],
-  "redFlags": [
-   "Fulminant sepsis or meningitis",
-   "Recurrent invasive encapsulated-organism infection",
-   "Rapidly progressive glomerulonephritis",
-   "Heavy proteinuria or declining renal function",
-   "Failure to thrive with recurrent infection in a child"
-  ],
-  "prognosis": "The infective risk is substantial and can be life-threatening, particularly in early childhood, but improves with vaccination and prompt antibiotic treatment; renal involvement is a key long-term determinant of outcome. Overall prognosis is generally more serious than for early-component deficiencies.",
-  "pitfalls": [
-   "Failing to distinguish primary genetic deficiency from secondary consumptive hypocomplementaemia.",
-   "Underestimating the severity of infective risk given C3's central role.",
-   "Omitting assessment for C3 nephritic factor and regulatory-protein defects.",
-   "Neglecting vaccination and antibiotic prophylaxis in affected children.",
-   "Missing associated membranoproliferative glomerulonephritis until renal function declines."
-  ],
-  "references": [
-   "Middleton's Allergy: Principles and Practice, current edition",
-   "Oxford Textbook of Medicine, current edition",
-   "Reviews on complement deficiencies and susceptibility to infection"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Immunise fully against encapsulated organisms with pneumococcal, meningococcal and Haemophilus influenzae type b vaccines to counter the profound opsonic defect.",
-   "Treat any febrile illness as a potential invasive pyogenic infection, with early broad empirical antibiotics covering encapsulated bacteria.",
-   "Use prophylactic antibiotics in childhood or in those with recurrent severe infection.",
-   "Manage immune-complex complications, including the lupus-like syndrome and membranoproliferative glomerulonephritis, with immunosuppression and nephrology input.",
-   "Monitor renal function and urinalysis regularly, as glomerulonephritis is a key determinant of long-term outcome.",
-   "Offer genetic counselling for autosomal recessive inheritance and screen at-risk relatives.",
-   "Provide an emergency plan and educate patient and family on urgent presentation for fever or suspected sepsis."
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "c3_deficiency-pathway",
-   "title": "C3 deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "C3 is the central convergence point of all complement pathways, so its deficiency produces the most severe complement-related infective phenotype.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Fulminant sepsis or meningitis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: C3 antigenic level (markedly low or absent), CH50 and AH50, both reduced in primary deficiency, Assays for C3 nephritic factor and regulatory proteins (factor H, factor I) to exclude secondary consumption"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Immunise fully against encapsulated organisms with pneumococcal, meningococcal and Haemophilus influenzae type b vaccines to counter the profound opsonic defect."
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to distinguish primary genetic deficiency from secondary consumptive hypocomplementaemia."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of c3 deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "c3_deficiency-matrix",
-   "title": "C3 deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "C3 is the central convergence point of all complement pathways, so its deficiency produces the most severe complement-related",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Immune system",
+  "specialty": "Immunology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Middleton's Allergy: Principles and Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "C3 is the central convergence point of all complement pathways, so its deficiency produces the most severe complement-related infective phenotype.",
+      "Patients suffer recurrent, often severe, pyogenic infections with encapsulated organisms from early childhood.",
+      "Immune-complex disease, including a lupus-like syndrome and membranoproliferative glomerulonephritis, is an important complication.",
+      "Both CH50 and AH50 are markedly reduced because C3 is shared by classical, lectin and alternative pathways.",
+      "A very low or absent C3 antigenic level confirms primary deficiency once secondary consumption is excluded.",
+      "Secondary C3 lowering from consumption (for example by C3 nephritic factor or factor H/I deficiency) must be distinguished from primary genetic deficiency.",
+      "Vaccination against encapsulated organisms and prompt, often prophylactic, antibiotic strategies are central to care.",
+      "Impaired opsonisation is the dominant defect, reflecting the loss of C3b-mediated coating of pathogens."
     ],
-    [
-     "Key Investigations",
-     "C3 antigenic level (markedly low or absent), CH50 and AH50, both reduced in primary deficiency, Assays for C3 nephritic factor",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "C3 lies at the hub of the complement system, where the classical, lectin and alternative pathways converge; its cleavage products C3b and C3a drive opsonisation, immune-complex solubilisation and downstream membrane attack complex formation. In complete C3 deficiency none of these functions proceeds effectively, so bacteria are poorly opsonised and cleared, leading to recurrent severe pyogenic infection with encapsulated organisms. The failure to solubilise and clear immune complexes and apoptotic debris promotes their tissue deposition, giving rise to lupus-like autoimmunity and membranoproliferative glomerulonephritis. Because C3 is upstream of the terminal components, its absence also impairs the bactericidal membrane attack complex, though opsonic failure predominates clinically.",
+    "additionalDifferentials": [
+      "Secondary C3 consumption (C3 nephritic factor, factor H or factor I deficiency)",
+      "Other early-component complement deficiencies",
+      "Severe antibody deficiency or combined immunodeficiency",
+      "Asplenia or hyposplenism",
+      "Idiopathic systemic lupus erythematosus",
+      "C3 glomerulopathy from complement dysregulation"
     ],
-    [
-     "Primary Differentials",
-     "Secondary C3 consumption (C3 nephritic factor, factor H or factor I deficiency), Other early-component complement deficiencies,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "C3 antigenic level (markedly low or absent)",
+      "CH50 and AH50, both reduced in primary deficiency",
+      "Assays for C3 nephritic factor and regulatory proteins (factor H, factor I) to exclude secondary consumption",
+      "Genetic testing of the C3 gene",
+      "Renal function, urinalysis and, where indicated, renal biopsy",
+      "Autoimmune serology including ANA",
+      "Vaccination status and infection history documentation"
     ],
-    [
-     "Management Strategy",
-     "Immunise fully against encapsulated organisms with pneumococcal, meningococcal and Haemophilus influenzae type b vaccines to",
-     "Core treatment modality"
+    "redFlags": [
+      "Fulminant sepsis or meningitis",
+      "Recurrent invasive encapsulated-organism infection",
+      "Rapidly progressive glomerulonephritis",
+      "Heavy proteinuria or declining renal function",
+      "Failure to thrive with recurrent infection in a child"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to distinguish primary genetic deficiency from secondary consumptive hypocomplementaemia.",
-     "Prevent diagnostic or management error"
+    "prognosis": "The infective risk is substantial and can be life-threatening, particularly in early childhood, but improves with vaccination and prompt antibiotic treatment; renal involvement is a key long-term determinant of outcome. Overall prognosis is generally more serious than for early-component deficiencies.",
+    "pitfalls": [
+      "Failing to distinguish primary genetic deficiency from secondary consumptive hypocomplementaemia.",
+      "Underestimating the severity of infective risk given C3's central role.",
+      "Omitting assessment for C3 nephritic factor and regulatory-protein defects.",
+      "Neglecting vaccination and antibiotic prophylaxis in affected children.",
+      "Missing associated membranoproliferative glomerulonephritis until renal function declines."
+    ],
+    "references": [
+      "Middleton's Allergy: Principles and Practice, current edition",
+      "Oxford Textbook of Medicine, current edition",
+      "Reviews on complement deficiencies and susceptibility to infection"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Immunise fully against encapsulated organisms with pneumococcal, meningococcal and Haemophilus influenzae type b vaccines to counter the profound opsonic defect.",
+      "Treat any febrile illness as a potential invasive pyogenic infection, with early broad empirical antibiotics covering encapsulated bacteria.",
+      "Use prophylactic antibiotics in childhood or in those with recurrent severe infection.",
+      "Manage immune-complex complications, including the lupus-like syndrome and membranoproliferative glomerulonephritis, with immunosuppression and nephrology input.",
+      "Monitor renal function and urinalysis regularly, as glomerulonephritis is a key determinant of long-term outcome.",
+      "Offer genetic counselling for autosomal recessive inheritance and screen at-risk relatives.",
+      "Provide an emergency plan and educate patient and family on urgent presentation for fever or suspected sepsis."
     ]
-   ],
-   "caption": "Overview comparison matrix for c3 deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "c3-deficiency-real-image",
-   "title": "C3 deficiency: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "c3_deficiency-pathway",
+      "title": "C3 deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "C3 is the central convergence point of all complement pathways, so its deficiency produces the most severe complement-related infective phenotype.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Fulminant sepsis or meningitis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: C3 antigenic level (markedly low or absent), CH50 and AH50, both reduced in primary deficiency, Assays for C3 nephritic factor and regulatory proteins (factor H, factor I) to exclude secondary consumption"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Immunise fully against encapsulated organisms with pneumococcal, meningococcal and Haemophilus influenzae type b vaccines to counter the profound opsonic defect."
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to distinguish primary genetic deficiency from secondary consumptive hypocomplementaemia."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of c3 deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "c3_deficiency-matrix",
+      "title": "C3 deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "C3 is the central convergence point of all complement pathways, so its deficiency produces the most severe complement-related",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "C3 antigenic level (markedly low or absent), CH50 and AH50, both reduced in primary deficiency, Assays for C3 nephritic factor",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Secondary C3 consumption (C3 nephritic factor, factor H or factor I deficiency), Other early-component complement deficiencies,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Immunise fully against encapsulated organisms with pneumococcal, meningococcal and Haemophilus influenzae type b vaccines to",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to distinguish primary genetic deficiency from secondary consumptive hypocomplementaemia.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for c3 deficiency."
+    }
+  ],
+  "diagrams": []
 }

@@ -1,175 +1,153 @@
 {
- "id": "adrenal_myelolipoma_large",
- "name": "Large adrenal myelolipoma",
- "aliases": [
-  "large adrenal myelolipoma",
-  "adrenal myelolipoma",
-  "giant myelolipoma"
- ],
- "class": "non_infective",
- "system": "Endocrine / Adrenal",
- "specialty": "Endocrinology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Textbook of Endocrinology / ESE-ENSAT Clinical Practice Guideline on the Management of Adrenal Incidentalomas",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A benign, hormonally inactive adrenal tumour composed of mature adipose tissue admixed with haematopoietic (myeloid) elements",
-   "Diagnosis can often be made confidently on imaging by identifying macroscopic (bulk) fat within the lesion on CT or MRI",
-   "Most are small and asymptomatic and found incidentally, while large lesions may cause flank or abdominal pain from mass effect",
-   "Large myelolipomas carry a risk of spontaneous retroperitoneal haemorrhage, which increases as the tumour enlarges",
-   "They are generally non-functioning, although they occasionally coexist with endocrine disorders",
-   "Small, asymptomatic, characteristic lesions are managed with surveillance, whereas large, symptomatic or bleeding lesions may warrant surgical removal",
-   "The presence of macroscopic fat helps separate it from a lipid-rich adenoma, which contains only microscopic intracytoplasmic lipid, and from malignant tumours"
+  "id": "adrenal_myelolipoma_large",
+  "name": "Large adrenal myelolipoma",
+  "aliases": [
+    "large adrenal myelolipoma",
+    "adrenal myelolipoma",
+    "giant myelolipoma"
   ],
-  "pathophysiology": "Adrenal myelolipoma consists of mature fat mixed with haematopoietic tissue resembling bone marrow, arising from metaplasia of adrenocortical stromal cells, possibly under hormonal or stress-related stimuli. The lesion is benign and typically non-secreting. As it enlarges, its friable, vascular composition and high fat content predispose to spontaneous haemorrhage, which is the principal complication of large tumours.",
-  "additionalDifferentials": [
-   "Lipid-rich adrenal adenoma",
-   "Adrenocortical carcinoma containing fat",
-   "Retroperitoneal liposarcoma or lipoma",
-   "Exophytic renal angiomyolipoma",
-   "Adrenal metastasis",
-   "Adrenal haemorrhage of another cause"
-  ],
-  "additionalInvestigations": [
-   "CT demonstrating macroscopic fat with markedly negative attenuation within the mass",
-   "MRI with fat-suppression sequences to confirm bulk fat",
-   "Hormonal screening with dexamethasone suppression, metanephrines and aldosterone-to-renin ratio as part of the incidentaloma workup",
-   "Size monitoring on interval imaging",
-   "Assessment for haemorrhage if acute pain develops",
-   "Surgical referral for large or symptomatic lesions"
-  ],
-  "redFlags": [
-   "Acute severe flank or abdominal pain or haemodynamic instability suggesting haemorrhage",
-   "Large size with mass effect on adjacent structures",
-   "Atypical imaging with soft-tissue components raising concern for malignancy",
-   "Rapid growth on surveillance"
-  ],
-  "prognosis": "Excellent; myelolipomas are benign and do not metastasise, and the outlook is determined mainly by size-related complications such as haemorrhage, which resolve well after treatment.",
-  "pitfalls": [
-   "Mistaking a fat-containing myelolipoma for a malignant retroperitoneal fatty tumour",
-   "Underestimating the haemorrhage risk of a very large lesion",
-   "Omitting hormonal screening simply because myelolipomas are usually non-functioning",
-   "Performing unnecessary surgery for a small, characteristic, asymptomatic lesion"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "ESE-ENSAT Clinical Practice Guideline on the Management of Adrenal Incidentalomas"
-  ],
-  "crossLinks": [
-   "adrenal_adenoma_nonfunctioning",
-   "adrenal_cyst"
-  ],
-  "management": [
-   "Confirm the benign diagnosis by demonstrating macroscopic bulk fat on CT or fat-suppression MRI",
-   "Screen biochemically as for any incidentaloma with dexamethasone suppression, metanephrines and aldosterone-to-renin ratio to confirm the lesion is non-functioning",
-   "Refer for surgical resection by adrenalectomy of large or symptomatic lesions given the heightened risk of spontaneous retroperitoneal haemorrhage",
-   "Monitor size on interval imaging where a large lesion is observed rather than resected",
-   "Resuscitate with fluid and blood replacement and stabilise urgently if acute retroperitoneal haemorrhage develops",
-   "Advise avoidance of flank trauma and prompt review for new or worsening flank pain"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "adrenal_myelolipoma_large-pathway",
-   "title": "Large adrenal myelolipoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A benign, hormonally inactive adrenal tumour composed of mature adipose tissue admixed with haematopoietic (myeloid) elements",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute severe flank or abdominal pain or haemodynamic instability suggesting haemorrhage",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: CT demonstrating macroscopic fat with markedly negative attenuation within the mass, MRI with fat-suppression sequences to confirm bulk fat, Hormonal screening with dexamethasone suppression, metanephrines and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Confirm the benign diagnosis by demonstrating macroscopic bulk fat on CT or fat-suppression MRI"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking a fat-containing myelolipoma for a malignant retroperitoneal fatty tumour"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of large adrenal myelolipoma."
-  }
- ],
- "tables": [
-  {
-   "id": "adrenal_myelolipoma_large-matrix",
-   "title": "Large adrenal myelolipoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A benign, hormonally inactive adrenal tumour composed of mature adipose tissue admixed with haematopoietic (myeloid) elements",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine / Adrenal",
+  "specialty": "Endocrinology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Textbook of Endocrinology / ESE-ENSAT Clinical Practice Guideline on the Management of Adrenal Incidentalomas",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A benign, hormonally inactive adrenal tumour composed of mature adipose tissue admixed with haematopoietic (myeloid) elements",
+      "Diagnosis can often be made confidently on imaging by identifying macroscopic (bulk) fat within the lesion on CT or MRI",
+      "Most are small and asymptomatic and found incidentally, while large lesions may cause flank or abdominal pain from mass effect",
+      "Large myelolipomas carry a risk of spontaneous retroperitoneal haemorrhage, which increases as the tumour enlarges",
+      "They are generally non-functioning, although they occasionally coexist with endocrine disorders",
+      "Small, asymptomatic, characteristic lesions are managed with surveillance, whereas large, symptomatic or bleeding lesions may warrant surgical removal",
+      "The presence of macroscopic fat helps separate it from a lipid-rich adenoma, which contains only microscopic intracytoplasmic lipid, and from malignant tumours"
     ],
-    [
-     "Key Investigations",
-     "CT demonstrating macroscopic fat with markedly negative attenuation within the mass, MRI with fat-suppression sequences to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Adrenal myelolipoma consists of mature fat mixed with haematopoietic tissue resembling bone marrow, arising from metaplasia of adrenocortical stromal cells, possibly under hormonal or stress-related stimuli. The lesion is benign and typically non-secreting. As it enlarges, its friable, vascular composition and high fat content predispose to spontaneous haemorrhage, which is the principal complication of large tumours.",
+    "additionalDifferentials": [
+      "Lipid-rich adrenal adenoma",
+      "Adrenocortical carcinoma containing fat",
+      "Retroperitoneal liposarcoma or lipoma",
+      "Exophytic renal angiomyolipoma",
+      "Adrenal metastasis",
+      "Adrenal haemorrhage of another cause"
     ],
-    [
-     "Primary Differentials",
-     "Lipid-rich adrenal adenoma, Adrenocortical carcinoma containing fat, Retroperitoneal liposarcoma or lipoma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "CT demonstrating macroscopic fat with markedly negative attenuation within the mass",
+      "MRI with fat-suppression sequences to confirm bulk fat",
+      "Hormonal screening with dexamethasone suppression, metanephrines and aldosterone-to-renin ratio as part of the incidentaloma workup",
+      "Size monitoring on interval imaging",
+      "Assessment for haemorrhage if acute pain develops",
+      "Surgical referral for large or symptomatic lesions"
     ],
-    [
-     "Management Strategy",
-     "Confirm the benign diagnosis by demonstrating macroscopic bulk fat on CT or fat-suppression MRI",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute severe flank or abdominal pain or haemodynamic instability suggesting haemorrhage",
+      "Large size with mass effect on adjacent structures",
+      "Atypical imaging with soft-tissue components raising concern for malignancy",
+      "Rapid growth on surveillance"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking a fat-containing myelolipoma for a malignant retroperitoneal fatty tumour",
-     "Prevent diagnostic or management error"
+    "prognosis": "Excellent; myelolipomas are benign and do not metastasise, and the outlook is determined mainly by size-related complications such as haemorrhage, which resolve well after treatment.",
+    "pitfalls": [
+      "Mistaking a fat-containing myelolipoma for a malignant retroperitoneal fatty tumour",
+      "Underestimating the haemorrhage risk of a very large lesion",
+      "Omitting hormonal screening simply because myelolipomas are usually non-functioning",
+      "Performing unnecessary surgery for a small, characteristic, asymptomatic lesion"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "ESE-ENSAT Clinical Practice Guideline on the Management of Adrenal Incidentalomas"
+    ],
+    "crossLinks": [
+      "adrenal_adenoma_nonfunctioning",
+      "adrenal_cyst"
+    ],
+    "management": [
+      "Confirm the benign diagnosis by demonstrating macroscopic bulk fat on CT or fat-suppression MRI",
+      "Screen biochemically as for any incidentaloma with dexamethasone suppression, metanephrines and aldosterone-to-renin ratio to confirm the lesion is non-functioning",
+      "Refer for surgical resection by adrenalectomy of large or symptomatic lesions given the heightened risk of spontaneous retroperitoneal haemorrhage",
+      "Monitor size on interval imaging where a large lesion is observed rather than resected",
+      "Resuscitate with fluid and blood replacement and stabilise urgently if acute retroperitoneal haemorrhage develops",
+      "Advise avoidance of flank trauma and prompt review for new or worsening flank pain"
     ]
-   ],
-   "caption": "Overview comparison matrix for large adrenal myelolipoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "adrenal-myelolipoma-large-real-image",
-   "title": "Large adrenal myelolipoma: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "adrenal_myelolipoma_large-pathway",
+      "title": "Large adrenal myelolipoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A benign, hormonally inactive adrenal tumour composed of mature adipose tissue admixed with haematopoietic (myeloid) elements",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute severe flank or abdominal pain or haemodynamic instability suggesting haemorrhage",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: CT demonstrating macroscopic fat with markedly negative attenuation within the mass, MRI with fat-suppression sequences to confirm bulk fat, Hormonal screening with dexamethasone suppression, metanephrines and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Confirm the benign diagnosis by demonstrating macroscopic bulk fat on CT or fat-suppression MRI"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking a fat-containing myelolipoma for a malignant retroperitoneal fatty tumour"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of large adrenal myelolipoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "adrenal_myelolipoma_large-matrix",
+      "title": "Large adrenal myelolipoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A benign, hormonally inactive adrenal tumour composed of mature adipose tissue admixed with haematopoietic (myeloid) elements",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "CT demonstrating macroscopic fat with markedly negative attenuation within the mass, MRI with fat-suppression sequences to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Lipid-rich adrenal adenoma, Adrenocortical carcinoma containing fat, Retroperitoneal liposarcoma or lipoma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Confirm the benign diagnosis by demonstrating macroscopic bulk fat on CT or fat-suppression MRI",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking a fat-containing myelolipoma for a malignant retroperitoneal fatty tumour",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for large adrenal myelolipoma."
+    }
+  ],
+  "diagrams": []
 }

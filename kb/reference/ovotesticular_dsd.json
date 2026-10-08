@@ -1,174 +1,152 @@
 {
- "id": "ovotesticular_dsd",
- "name": "Ovotesticular disorder of sex development",
- "aliases": [
-  "ovotesticular DSD",
-  "true hermaphroditism",
-  "ovotestis syndrome",
-  "OT-DSD"
- ],
- "class": "non_infective",
- "system": "Endocrine / Reproductive genetics",
- "specialty": "Reproductive Endocrinology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Textbook of Endocrinology / Endocrine Society clinical guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Defined by the presence of both ovarian tissue (with follicles) and testicular tissue (with seminiferous tubules) in the same individual, either as separate gonads or combined in an ovotestis",
-   "The most common karyotype is 46,XX, with 46,XX/46,XY chimerism and 46,XY seen less often",
-   "External genitalia are usually ambiguous, and the degree of virilisation reflects the amount and function of the testicular component",
-   "Mullerian and wolffian structures may coexist, with a uterus often present on the side bearing ovarian tissue",
-   "Definitive diagnosis requires gonadal histology demonstrating both tissue types, not imaging alone",
-   "Management is individualised around sex of rearing, functional gonadal potential and malignancy risk, with retention of gonadal tissue matched to the assigned sex where feasible",
-   "Gonadal tissue containing Y material or dysgenetic elements carries tumour risk and warrants removal or close surveillance"
+  "id": "ovotesticular_dsd",
+  "name": "Ovotesticular disorder of sex development",
+  "aliases": [
+    "ovotesticular DSD",
+    "true hermaphroditism",
+    "ovotestis syndrome",
+    "OT-DSD"
   ],
-  "pathophysiology": "Ovotesticular disorder of sex development arises when the bipotential gonad differentiates into both ovarian and testicular tissue within the same person. In 46,XX cases this can follow cryptic or translocated SRY, gain-of-function in the testis-promoting pathway (for example SOX9 duplication) or as-yet-undefined mechanisms that allow partial testis determination without a Y chromosome. The mixed gonadal tissue secretes a variable combination of testosterone and anti-mullerian hormone, so internal ducts and external genitalia develop along an intermediate path determined locally by the dominant tissue on each side. The result is a spectrum of ambiguity, and gonadal segments with testicular or dysgenetic elements can predispose to germ cell tumours.",
-  "additionalDifferentials": [
-   "Congenital adrenal hyperplasia causing virilisation of a 46,XX infant",
-   "Mixed gonadal dysgenesis (45,X/46,XY)",
-   "Partial androgen insensitivity syndrome",
-   "Partial gonadal dysgenesis",
-   "5-alpha-reductase deficiency",
-   "Placental aromatase deficiency"
-  ],
-  "additionalInvestigations": [
-   "Karyotype and molecular studies including SRY and copy-number analysis for SOX9",
-   "Pelvic and gonadal imaging by ultrasound or MRI to localise gonads and mullerian structures",
-   "Serum testosterone, anti-mullerian hormone and gonadotropins, with hCG stimulation to assess testicular function",
-   "Gonadal biopsy and histopathology to confirm the presence of both tissue types",
-   "Adrenal steroid profiling (including 17-hydroxyprogesterone) to exclude congenital adrenal hyperplasia",
-   "Germ cell tumour surveillance of retained gonadal tissue"
-  ],
-  "redFlags": [
-   "Ambiguous genitalia in a newborn requiring urgent exclusion of salt-wasting congenital adrenal hyperplasia",
-   "An enlarging gonadal mass suggesting germ cell malignancy in dysgenetic or Y-bearing tissue",
-   "Progressive inappropriate virilisation or feminisation after sex assignment",
-   "Delayed or absent puberty indicating gonadal insufficiency"
-  ],
-  "prognosis": "Outcomes depend on gonadal function preserved after surgery, the assigned sex and psychosocial support; fertility has occasionally been reported, particularly from the ovarian component. Malignancy risk in retained testicular or dysgenetic tissue necessitates lifelong awareness and surveillance.",
-  "pitfalls": [
-   "Assuming imaging can distinguish ovotestis from other gonads without histology",
-   "Overlooking coexisting congenital adrenal hyperplasia as a cause of ambiguity",
-   "Removing potentially functional gonadal tissue congruent with the sex of rearing",
-   "Neglecting the malignancy risk of retained Y-bearing or dysgenetic components"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "Endocrine Society clinical practice guidance on disorders of sex development"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage within a specialist multidisciplinary disorders-of-sex-development team, individualising decisions around sex of rearing, gonadal function and malignancy risk",
-   "Undertake gonadal surgery matched to the assigned sex, removing discordant or dysgenetic gonadal tissue while retaining functional tissue where feasible",
-   "Provide sex-steroid hormone replacement, oestrogen or testosterone, to induce and maintain puberty and secondary sexual characteristics appropriate to the assigned sex",
-   "Offer genital reconstructive surgery where indicated, timed and planned with the family and the young person",
-   "Maintain germ cell tumour surveillance of any retained testicular or dysgenetic gonadal tissue, or perform gonadectomy where malignancy risk is high",
-   "Provide psychological support to the child or young person and family throughout",
-   "Offer genetic counselling with karyotype and molecular characterisation including SRY and SOX9 to inform diagnosis and recurrence risk"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "ovotesticular_dsd-pathway",
-   "title": "Ovotesticular disorder of sex development: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Defined by the presence of both ovarian tissue (with follicles) and testicular tissue (with seminiferous tubules) in the same individual, either as separate gonads or combined in an ovotestis",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Ambiguous genitalia in a newborn requiring urgent exclusion of salt-wasting congenital adrenal hyperplasia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Karyotype and molecular studies including SRY and copy-number analysis for SOX9, Pelvic and gonadal imaging by ultrasound or MRI to localise gonads and mullerian structures, Serum testosterone, anti-mullerian hormone and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage within a specialist multidisciplinary disorders-of-sex-development team, individualising decisions around sex of rearing, gonadal function and malignancy risk"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming imaging can distinguish ovotestis from other gonads without histology"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of ovotesticular disorder of sex development."
-  }
- ],
- "tables": [
-  {
-   "id": "ovotesticular_dsd-matrix",
-   "title": "Ovotesticular disorder of sex development: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Defined by the presence of both ovarian tissue (with follicles) and testicular tissue (with seminiferous tubules) in the same",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine / Reproductive genetics",
+  "specialty": "Reproductive Endocrinology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Textbook of Endocrinology / Endocrine Society clinical guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Defined by the presence of both ovarian tissue (with follicles) and testicular tissue (with seminiferous tubules) in the same individual, either as separate gonads or combined in an ovotestis",
+      "The most common karyotype is 46,XX, with 46,XX/46,XY chimerism and 46,XY seen less often",
+      "External genitalia are usually ambiguous, and the degree of virilisation reflects the amount and function of the testicular component",
+      "Mullerian and wolffian structures may coexist, with a uterus often present on the side bearing ovarian tissue",
+      "Definitive diagnosis requires gonadal histology demonstrating both tissue types, not imaging alone",
+      "Management is individualised around sex of rearing, functional gonadal potential and malignancy risk, with retention of gonadal tissue matched to the assigned sex where feasible",
+      "Gonadal tissue containing Y material or dysgenetic elements carries tumour risk and warrants removal or close surveillance"
     ],
-    [
-     "Key Investigations",
-     "Karyotype and molecular studies including SRY and copy-number analysis for SOX9, Pelvic and gonadal imaging by ultrasound or MRI",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Ovotesticular disorder of sex development arises when the bipotential gonad differentiates into both ovarian and testicular tissue within the same person. In 46,XX cases this can follow cryptic or translocated SRY, gain-of-function in the testis-promoting pathway (for example SOX9 duplication) or as-yet-undefined mechanisms that allow partial testis determination without a Y chromosome. The mixed gonadal tissue secretes a variable combination of testosterone and anti-mullerian hormone, so internal ducts and external genitalia develop along an intermediate path determined locally by the dominant tissue on each side. The result is a spectrum of ambiguity, and gonadal segments with testicular or dysgenetic elements can predispose to germ cell tumours.",
+    "additionalDifferentials": [
+      "Congenital adrenal hyperplasia causing virilisation of a 46,XX infant",
+      "Mixed gonadal dysgenesis (45,X/46,XY)",
+      "Partial androgen insensitivity syndrome",
+      "Partial gonadal dysgenesis",
+      "5-alpha-reductase deficiency",
+      "Placental aromatase deficiency"
     ],
-    [
-     "Primary Differentials",
-     "Congenital adrenal hyperplasia causing virilisation of a 46,XX infant, Mixed gonadal dysgenesis (45,X/46,XY), Partial androgen",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Karyotype and molecular studies including SRY and copy-number analysis for SOX9",
+      "Pelvic and gonadal imaging by ultrasound or MRI to localise gonads and mullerian structures",
+      "Serum testosterone, anti-mullerian hormone and gonadotropins, with hCG stimulation to assess testicular function",
+      "Gonadal biopsy and histopathology to confirm the presence of both tissue types",
+      "Adrenal steroid profiling (including 17-hydroxyprogesterone) to exclude congenital adrenal hyperplasia",
+      "Germ cell tumour surveillance of retained gonadal tissue"
     ],
-    [
-     "Management Strategy",
-     "Manage within a specialist multidisciplinary disorders-of-sex-development team, individualising decisions around sex of rearing,",
-     "Core treatment modality"
+    "redFlags": [
+      "Ambiguous genitalia in a newborn requiring urgent exclusion of salt-wasting congenital adrenal hyperplasia",
+      "An enlarging gonadal mass suggesting germ cell malignancy in dysgenetic or Y-bearing tissue",
+      "Progressive inappropriate virilisation or feminisation after sex assignment",
+      "Delayed or absent puberty indicating gonadal insufficiency"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming imaging can distinguish ovotestis from other gonads without histology",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcomes depend on gonadal function preserved after surgery, the assigned sex and psychosocial support; fertility has occasionally been reported, particularly from the ovarian component. Malignancy risk in retained testicular or dysgenetic tissue necessitates lifelong awareness and surveillance.",
+    "pitfalls": [
+      "Assuming imaging can distinguish ovotestis from other gonads without histology",
+      "Overlooking coexisting congenital adrenal hyperplasia as a cause of ambiguity",
+      "Removing potentially functional gonadal tissue congruent with the sex of rearing",
+      "Neglecting the malignancy risk of retained Y-bearing or dysgenetic components"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "Endocrine Society clinical practice guidance on disorders of sex development"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage within a specialist multidisciplinary disorders-of-sex-development team, individualising decisions around sex of rearing, gonadal function and malignancy risk",
+      "Undertake gonadal surgery matched to the assigned sex, removing discordant or dysgenetic gonadal tissue while retaining functional tissue where feasible",
+      "Provide sex-steroid hormone replacement, oestrogen or testosterone, to induce and maintain puberty and secondary sexual characteristics appropriate to the assigned sex",
+      "Offer genital reconstructive surgery where indicated, timed and planned with the family and the young person",
+      "Maintain germ cell tumour surveillance of any retained testicular or dysgenetic gonadal tissue, or perform gonadectomy where malignancy risk is high",
+      "Provide psychological support to the child or young person and family throughout",
+      "Offer genetic counselling with karyotype and molecular characterisation including SRY and SOX9 to inform diagnosis and recurrence risk"
     ]
-   ],
-   "caption": "Overview comparison matrix for ovotesticular disorder of sex development."
-  }
- ],
- "diagrams": [
-  {
-   "id": "ovotesticular-dsd-real-image",
-   "title": "Ovotesticular disorder of sex development: Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "ovotesticular_dsd-pathway",
+      "title": "Ovotesticular disorder of sex development: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Defined by the presence of both ovarian tissue (with follicles) and testicular tissue (with seminiferous tubules) in the same individual, either as separate gonads or combined in an ovotestis",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Ambiguous genitalia in a newborn requiring urgent exclusion of salt-wasting congenital adrenal hyperplasia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Karyotype and molecular studies including SRY and copy-number analysis for SOX9, Pelvic and gonadal imaging by ultrasound or MRI to localise gonads and mullerian structures, Serum testosterone, anti-mullerian hormone and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage within a specialist multidisciplinary disorders-of-sex-development team, individualising decisions around sex of rearing, gonadal function and malignancy risk"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming imaging can distinguish ovotestis from other gonads without histology"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of ovotesticular disorder of sex development."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "ovotesticular_dsd-matrix",
+      "title": "Ovotesticular disorder of sex development: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Defined by the presence of both ovarian tissue (with follicles) and testicular tissue (with seminiferous tubules) in the same",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Karyotype and molecular studies including SRY and copy-number analysis for SOX9, Pelvic and gonadal imaging by ultrasound or MRI",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Congenital adrenal hyperplasia causing virilisation of a 46,XX infant, Mixed gonadal dysgenesis (45,X/46,XY), Partial androgen",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage within a specialist multidisciplinary disorders-of-sex-development team, individualising decisions around sex of rearing,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming imaging can distinguish ovotestis from other gonads without histology",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for ovotesticular disorder of sex development."
+    }
+  ],
+  "diagrams": []
 }

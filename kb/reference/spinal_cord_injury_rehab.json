@@ -1,177 +1,155 @@
 {
- "id": "spinal_cord_injury_rehab",
- "name": "Spinal cord injury rehabilitation",
- "aliases": [
-  "SCI",
-  "spinal cord injury rehab",
-  "tetraplegia",
-  "paraplegia",
-  "quadriplegia"
- ],
- "class": "non_infective",
- "system": "Rehabilitation / Pain",
- "specialty": "Rehabilitation Medicine (PM&R)",
- "referenceOnly": true,
- "reference": {
-  "source": "Braddom's Physical Medicine & Rehabilitation / pain medicine references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The neurological level and completeness of injury are defined using the International Standards for Neurological Classification of Spinal Cord Injury (ISNCSCI) and the ASIA Impairment Scale, which guide prognosis and goals",
-   "Distinguishing complete from incomplete injury and recognising patterns such as central cord, Brown-Sequard, and anterior cord syndromes informs expected functional outcomes",
-   "Comprehensive rehabilitation is organ-system based, addressing respiratory function, neurogenic bladder and bowel, skin integrity, spasticity, pain, sexuality, and psychological adjustment",
-   "Neurogenic bladder management aims to protect the upper urinary tract, and intermittent catheterisation is generally preferred over indwelling catheters to reduce complications",
-   "Meticulous pressure injury prevention through regular repositioning, pressure-relief cushions, and skin surveillance is critical because insensate skin is highly vulnerable",
-   "Venous thromboembolism risk is high after injury and warrants prophylaxis, and respiratory care is a priority in higher cervical injuries that weaken the diaphragm and cough",
-   "Autonomic dysreflexia is a medical emergency in injuries at or above the T6 level, triggered by a noxious stimulus below the injury such as a blocked catheter or bowel impaction, and presents with a surging blood pressure, pounding headache, and sweating above the lesion; treatment is to sit the patient up, remove the trigger, and give antihypertensives as needed",
-   "Function is maximised through goal-directed therapy, adaptive equipment, appropriate wheelchair prescription, and training for the patient and carers, with attention to long-term community reintegration"
+  "id": "spinal_cord_injury_rehab",
+  "name": "Spinal cord injury rehabilitation",
+  "aliases": [
+    "SCI",
+    "spinal cord injury rehab",
+    "tetraplegia",
+    "paraplegia",
+    "quadriplegia"
   ],
-  "pathophysiology": "Spinal cord injury involves a primary mechanical insult to the cord followed by a secondary injury cascade of ischaemia, oedema, excitotoxicity, inflammation, and free-radical damage that extends the initial neurological loss. Interruption of ascending and descending tracts produces motor, sensory, and autonomic dysfunction below the lesion. After the initial period of spinal shock with flaccid areflexia resolves, reflex activity returns below the level of injury, giving rise to spasticity, neurogenic bladder and bowel, and, in higher lesions, disordered autonomic control including autonomic dysreflexia and orthostatic hypotension.",
-  "additionalDifferentials": [
-   "Guillain-Barre syndrome or other acute polyneuropathy",
-   "Transverse myelitis or other inflammatory myelopathy",
-   "Spinal cord compression from tumour, abscess, or haematoma",
-   "Cauda equina syndrome",
-   "Vascular myelopathy or spinal cord infarction",
-   "Functional neurological disorder"
-  ],
-  "additionalInvestigations": [
-   "Serial ISNCSCI examination with ASIA Impairment Scale grading to define level and completeness",
-   "Spinal imaging with CT and MRI to characterise the injury and cord signal change",
-   "Urodynamic studies and renal tract imaging to guide neurogenic bladder management",
-   "Respiratory function assessment in cervical and high thoracic injuries",
-   "Screening for complications including venous thromboembolism, pressure injury, and heterotopic ossification"
-  ],
-  "redFlags": [
-   "Autonomic dysreflexia in injuries at or above T6, a hypertensive emergency requiring immediate identification and removal of the trigger",
-   "Ascending neurological level or new deficit suggesting cord compression, expanding haematoma, or syrinx",
-   "Respiratory fatigue or failure in high cervical injury",
-   "Signs of sepsis from urinary infection or pressure injury",
-   "Symptoms of pulmonary embolism in an immobilised patient"
-  ],
-  "prognosis": "Prognosis depends chiefly on the neurological level and completeness of injury; incomplete injuries and preserved sacral function carry a better outlook for recovery. Most neurological recovery occurs within the first months, and long-term outcomes are strongly influenced by prevention of complications such as pressure injury, urinary tract deterioration, and respiratory disease.",
-  "pitfalls": [
-   "Failing to recognise and treat autonomic dysreflexia promptly in at-risk patients",
-   "Relying on indwelling catheters and neglecting upper urinary tract protection",
-   "Inadequate pressure relief leading to preventable pressure injuries in insensate skin",
-   "Overlooking respiratory decline in high cervical injuries until failure occurs",
-   "Underestimating the psychological impact and the need for coordinated long-term support"
-  ],
-  "references": [
-   "Braddom's Physical Medicine and Rehabilitation"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Deliver organ-system-based rehabilitation in a specialist spinal injury unit, setting functional goals guided by the ISNCSCI neurological level and ASIA Impairment Scale grade",
-   "Protect the upper urinary tract with a neurogenic bladder programme favouring intermittent catheterisation over indwelling catheters, and manage neurogenic bowel with a scheduled bowel-care regimen",
-   "Prevent pressure injury through regular repositioning, pressure-relief cushions and vigilant surveillance of insensate skin",
-   "Manage spasticity with stretching, physiotherapy, oral antispasmodics such as baclofen, and intrathecal baclofen or botulinum toxin for refractory cases, and treat neuropathic pain with gabapentinoids",
-   "Provide venous thromboembolism prophylaxis and prioritise respiratory care with assisted coughing and ventilatory support in high cervical injuries",
-   "Recognise and urgently treat autonomic dysreflexia by sitting the patient upright, removing the noxious trigger such as bladder or bowel distension, and giving rapid-acting antihypertensives",
-   "Address sexuality, fertility, psychological adjustment and vocational reintegration through the multidisciplinary team",
-   "Surveil for heterotopic ossification, orthostatic hypotension and recurrent pressure injury over long-term follow-up"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "spinal_cord_injury_rehab-pathway",
-   "title": "Spinal cord injury rehabilitation: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The neurological level and completeness of injury are defined using the International Standards for Neurological Classification of Spinal Cord Injury (ISNCSCI) and the ASIA Impairment Scale, which guide prognosis and goals",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Autonomic dysreflexia in injuries at or above T6, a hypertensive emergency requiring immediate identification and removal of the trigger",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serial ISNCSCI examination with ASIA Impairment Scale grading to define level and completeness, Spinal imaging with CT and MRI to characterise the injury and cord signal change, Urodynamic studies and renal tract imaging"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Deliver organ-system-based rehabilitation in a specialist spinal injury unit, setting functional goals guided by the ISNCSCI neurological level and ASIA Impairment Scale grade"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to recognise and treat autonomic dysreflexia promptly in at-risk patients"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of spinal cord injury rehabilitation."
-  }
- ],
- "tables": [
-  {
-   "id": "spinal_cord_injury_rehab-matrix",
-   "title": "Spinal cord injury rehabilitation: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The neurological level and completeness of injury are defined using the International Standards for Neurological Classification",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Rehabilitation / Pain",
+  "specialty": "Rehabilitation Medicine (PM&R)",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Braddom's Physical Medicine & Rehabilitation / pain medicine references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The neurological level and completeness of injury are defined using the International Standards for Neurological Classification of Spinal Cord Injury (ISNCSCI) and the ASIA Impairment Scale, which guide prognosis and goals",
+      "Distinguishing complete from incomplete injury and recognising patterns such as central cord, Brown-Sequard, and anterior cord syndromes informs expected functional outcomes",
+      "Comprehensive rehabilitation is organ-system based, addressing respiratory function, neurogenic bladder and bowel, skin integrity, spasticity, pain, sexuality, and psychological adjustment",
+      "Neurogenic bladder management aims to protect the upper urinary tract, and intermittent catheterisation is generally preferred over indwelling catheters to reduce complications",
+      "Meticulous pressure injury prevention through regular repositioning, pressure-relief cushions, and skin surveillance is critical because insensate skin is highly vulnerable",
+      "Venous thromboembolism risk is high after injury and warrants prophylaxis, and respiratory care is a priority in higher cervical injuries that weaken the diaphragm and cough",
+      "Autonomic dysreflexia is a medical emergency in injuries at or above the T6 level, triggered by a noxious stimulus below the injury such as a blocked catheter or bowel impaction, and presents with a surging blood pressure, pounding headache, and sweating above the lesion; treatment is to sit the patient up, remove the trigger, and give antihypertensives as needed",
+      "Function is maximised through goal-directed therapy, adaptive equipment, appropriate wheelchair prescription, and training for the patient and carers, with attention to long-term community reintegration"
     ],
-    [
-     "Key Investigations",
-     "Serial ISNCSCI examination with ASIA Impairment Scale grading to define level and completeness, Spinal imaging with CT and MRI to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Spinal cord injury involves a primary mechanical insult to the cord followed by a secondary injury cascade of ischaemia, oedema, excitotoxicity, inflammation, and free-radical damage that extends the initial neurological loss. Interruption of ascending and descending tracts produces motor, sensory, and autonomic dysfunction below the lesion. After the initial period of spinal shock with flaccid areflexia resolves, reflex activity returns below the level of injury, giving rise to spasticity, neurogenic bladder and bowel, and, in higher lesions, disordered autonomic control including autonomic dysreflexia and orthostatic hypotension.",
+    "additionalDifferentials": [
+      "Guillain-Barre syndrome or other acute polyneuropathy",
+      "Transverse myelitis or other inflammatory myelopathy",
+      "Spinal cord compression from tumour, abscess, or haematoma",
+      "Cauda equina syndrome",
+      "Vascular myelopathy or spinal cord infarction",
+      "Functional neurological disorder"
     ],
-    [
-     "Primary Differentials",
-     "Guillain-Barre syndrome or other acute polyneuropathy, Transverse myelitis or other inflammatory myelopathy, Spinal cord",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serial ISNCSCI examination with ASIA Impairment Scale grading to define level and completeness",
+      "Spinal imaging with CT and MRI to characterise the injury and cord signal change",
+      "Urodynamic studies and renal tract imaging to guide neurogenic bladder management",
+      "Respiratory function assessment in cervical and high thoracic injuries",
+      "Screening for complications including venous thromboembolism, pressure injury, and heterotopic ossification"
     ],
-    [
-     "Management Strategy",
-     "Deliver organ-system-based rehabilitation in a specialist spinal injury unit, setting functional goals guided by the ISNCSCI",
-     "Core treatment modality"
+    "redFlags": [
+      "Autonomic dysreflexia in injuries at or above T6, a hypertensive emergency requiring immediate identification and removal of the trigger",
+      "Ascending neurological level or new deficit suggesting cord compression, expanding haematoma, or syrinx",
+      "Respiratory fatigue or failure in high cervical injury",
+      "Signs of sepsis from urinary infection or pressure injury",
+      "Symptoms of pulmonary embolism in an immobilised patient"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to recognise and treat autonomic dysreflexia promptly in at-risk patients",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends chiefly on the neurological level and completeness of injury; incomplete injuries and preserved sacral function carry a better outlook for recovery. Most neurological recovery occurs within the first months, and long-term outcomes are strongly influenced by prevention of complications such as pressure injury, urinary tract deterioration, and respiratory disease.",
+    "pitfalls": [
+      "Failing to recognise and treat autonomic dysreflexia promptly in at-risk patients",
+      "Relying on indwelling catheters and neglecting upper urinary tract protection",
+      "Inadequate pressure relief leading to preventable pressure injuries in insensate skin",
+      "Overlooking respiratory decline in high cervical injuries until failure occurs",
+      "Underestimating the psychological impact and the need for coordinated long-term support"
+    ],
+    "references": [
+      "Braddom's Physical Medicine and Rehabilitation"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Deliver organ-system-based rehabilitation in a specialist spinal injury unit, setting functional goals guided by the ISNCSCI neurological level and ASIA Impairment Scale grade",
+      "Protect the upper urinary tract with a neurogenic bladder programme favouring intermittent catheterisation over indwelling catheters, and manage neurogenic bowel with a scheduled bowel-care regimen",
+      "Prevent pressure injury through regular repositioning, pressure-relief cushions and vigilant surveillance of insensate skin",
+      "Manage spasticity with stretching, physiotherapy, oral antispasmodics such as baclofen, and intrathecal baclofen or botulinum toxin for refractory cases, and treat neuropathic pain with gabapentinoids",
+      "Provide venous thromboembolism prophylaxis and prioritise respiratory care with assisted coughing and ventilatory support in high cervical injuries",
+      "Recognise and urgently treat autonomic dysreflexia by sitting the patient upright, removing the noxious trigger such as bladder or bowel distension, and giving rapid-acting antihypertensives",
+      "Address sexuality, fertility, psychological adjustment and vocational reintegration through the multidisciplinary team",
+      "Surveil for heterotopic ossification, orthostatic hypotension and recurrent pressure injury over long-term follow-up"
     ]
-   ],
-   "caption": "Overview comparison matrix for spinal cord injury rehabilitation."
-  }
- ],
- "diagrams": [
-  {
-   "id": "spinal-cord-injury-rehab-real-image",
-   "title": "Spinal cord injury rehabilitation: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "spinal_cord_injury_rehab-pathway",
+      "title": "Spinal cord injury rehabilitation: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The neurological level and completeness of injury are defined using the International Standards for Neurological Classification of Spinal Cord Injury (ISNCSCI) and the ASIA Impairment Scale, which guide prognosis and goals",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Autonomic dysreflexia in injuries at or above T6, a hypertensive emergency requiring immediate identification and removal of the trigger",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serial ISNCSCI examination with ASIA Impairment Scale grading to define level and completeness, Spinal imaging with CT and MRI to characterise the injury and cord signal change, Urodynamic studies and renal tract imaging"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Deliver organ-system-based rehabilitation in a specialist spinal injury unit, setting functional goals guided by the ISNCSCI neurological level and ASIA Impairment Scale grade"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to recognise and treat autonomic dysreflexia promptly in at-risk patients"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of spinal cord injury rehabilitation."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "spinal_cord_injury_rehab-matrix",
+      "title": "Spinal cord injury rehabilitation: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The neurological level and completeness of injury are defined using the International Standards for Neurological Classification",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serial ISNCSCI examination with ASIA Impairment Scale grading to define level and completeness, Spinal imaging with CT and MRI to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Guillain-Barre syndrome or other acute polyneuropathy, Transverse myelitis or other inflammatory myelopathy, Spinal cord",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Deliver organ-system-based rehabilitation in a specialist spinal injury unit, setting functional goals guided by the ISNCSCI",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to recognise and treat autonomic dysreflexia promptly in at-risk patients",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for spinal cord injury rehabilitation."
+    }
+  ],
+  "diagrams": []
 }

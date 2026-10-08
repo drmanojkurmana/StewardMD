@@ -1,175 +1,153 @@
 {
- "id": "actinic_reticuloid",
- "name": "actinic reticuloid",
- "aliases": [
-  "chronic actinic dermatitis (severe variant)",
-  "photosensitivity dermatitis and actinic reticuloid syndrome"
- ],
- "class": "non_infective",
- "system": "Skin and integumentary",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Represents the most severe end of the chronic actinic dermatitis spectrum, typically in older men with intensely pruritic, thickened, lichenified and infiltrated plaques on sun-exposed skin.",
-   "The action spectrum is characteristically broad, with abnormal reactivity extending across UVB, UVA and often visible light, so ordinary sunscreens give incomplete protection.",
-   "Phototesting shows a markedly reduced minimal erythema dose across multiple wavebands, which is central to confirming the diagnosis.",
-   "Histology may closely mimic cutaneous T-cell lymphoma (a pseudolymphomatous pattern with atypical lymphocytes), but the dermal infiltrate is usually CD8 predominant rather than the CD4 predominance of true lymphoma.",
-   "Coexisting allergic contact or photocontact sensitivity is common, particularly to sesquiterpene lactones (Compositae plants), fragrances and sunscreens, so patch and photopatch testing are essential.",
-   "Severe disease may generalise to involve covered skin and progress to erythroderma with leonine facial thickening.",
-   "Strict photoprotection, including from visible light and behind window glass, combined with avoidance of identified contact allergens, is the cornerstone of management.",
-   "The condition mainly affects skin of the head, neck and dorsal hands, with a sharp cut-off at clothing lines when photo-driven."
+  "id": "actinic_reticuloid",
+  "name": "actinic reticuloid",
+  "aliases": [
+    "chronic actinic dermatitis (severe variant)",
+    "photosensitivity dermatitis and actinic reticuloid syndrome"
   ],
-  "pathophysiology": "Actinic reticuloid is understood as a persistent, delayed-type (cell-mediated) hypersensitivity response in which ultraviolet, and sometimes visible, radiation converts an endogenous cutaneous molecule into a photo-induced antigen. Repeated antigen presentation drives a chronic dermal T-lymphocyte infiltrate that produces the dense, lichenified plaques and the pseudolymphomatous histological appearance. Many patients have concurrent contact or photocontact allergy, which appears to prime or perpetuate the reaction, and abnormal reactivity persists long after the initiating exposure, explaining the chronic, self-sustaining course.",
-  "additionalDifferentials": [
-   "Cutaneous T-cell lymphoma / Sezary syndrome",
-   "Airborne allergic contact dermatitis",
-   "Atopic dermatitis with photoaggravation",
-   "Photoallergic contact dermatitis",
-   "Drug-induced photosensitivity",
-   "Systemic photosensitive lupus erythematosus",
-   "Cutaneous porphyria"
-  ],
-  "additionalInvestigations": [
-   "Monochromator phototesting to define the action spectrum and minimal erythema dose",
-   "Patch testing and photopatch testing for coexisting contact and photocontact allergy",
-   "Skin biopsy with assessment of infiltrate and immunophenotype (CD4/CD8 ratio)",
-   "Peripheral blood flow cytometry and T-cell clonality studies to exclude lymphoma when atypia is marked",
-   "Autoimmune serology (antinuclear and extractable nuclear antigen antibodies) to exclude lupus",
-   "Urinary and erythrocyte porphyrin studies to exclude porphyria"
-  ],
-  "redFlags": [
-   "Progression to erythroderma with systemic upset and temperature dysregulation",
-   "Persistent lymphadenopathy or circulating atypical lymphocytes raising concern for lymphoma",
-   "Rapidly enlarging or ulcerating plaques suggesting transformation",
-   "Failure to improve despite rigorous photoprotection and allergen avoidance"
-  ],
-  "prognosis": "The condition tends to be chronic and can persist for many years, but a substantial proportion of patients improve or remit with strict photoprotection and avoidance of identified allergens. Rarely, severe refractory disease requires systemic immunosuppression.",
-  "pitfalls": [
-   "Misinterpreting the pseudolymphomatous histology as cutaneous T-cell lymphoma, leading to inappropriate aggressive therapy.",
-   "Overlooking coexisting contact or photocontact allergy, which perpetuates the eruption.",
-   "Relying on standard UVB sunscreens that fail to block the visible and UVA wavelengths driving the disease.",
-   "Attributing generalised involvement to a primary lymphoma rather than to spread of photosensitive dermatitis onto covered skin."
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Fitzpatrick's Dermatology in General Medicine",
-   "British Journal of Dermatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Rigorous broad-spectrum photoprotection covering ultraviolet B, ultraviolet A and visible light, with sun avoidance, protective clothing and appropriate sunscreens",
-   "Identification and strict avoidance of contact and photocontact allergens such as Compositae-derived sesquiterpene lactones, fragrances and sunscreen constituents, guided by patch and photopatch testing",
-   "Topical and intermittent systemic corticosteroids for acute flares",
-   "Systemic immunosuppression with azathioprine, ciclosporin or mycophenolate mofetil for severe refractory disease",
-   "Emollients and antipruritic measures for symptom control",
-   "Monitoring for progression to erythroderma and, given histological overlap, surveillance to exclude cutaneous T-cell lymphoma",
-   "Dermatology or photodermatology referral for monochromator phototesting and specialist management"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "actinic_reticuloid-pathway",
-   "title": "actinic reticuloid: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Represents the most severe end of the chronic actinic dermatitis spectrum, typically in older men with intensely pruritic, thickened, lichenified and infiltrated plaques on sun-exposed skin.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progression to erythroderma with systemic upset and temperature dysregulation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Monochromator phototesting to define the action spectrum and minimal erythema dose, Patch testing and photopatch testing for coexisting contact and photocontact allergy, Skin biopsy with assessment of infiltrate and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Rigorous broad-spectrum photoprotection covering ultraviolet B, ultraviolet A and visible light, with sun avoidance, protective clothing and appropriate sunscreens"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misinterpreting the pseudolymphomatous histology as cutaneous T-cell lymphoma, leading to inappropriate aggressive therapy."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of actinic reticuloid."
-  }
- ],
- "tables": [
-  {
-   "id": "actinic_reticuloid-matrix",
-   "title": "actinic reticuloid: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Represents the most severe end of the chronic actinic dermatitis spectrum, typically in older men with intensely pruritic,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Skin and integumentary",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Represents the most severe end of the chronic actinic dermatitis spectrum, typically in older men with intensely pruritic, thickened, lichenified and infiltrated plaques on sun-exposed skin.",
+      "The action spectrum is characteristically broad, with abnormal reactivity extending across UVB, UVA and often visible light, so ordinary sunscreens give incomplete protection.",
+      "Phototesting shows a markedly reduced minimal erythema dose across multiple wavebands, which is central to confirming the diagnosis.",
+      "Histology may closely mimic cutaneous T-cell lymphoma (a pseudolymphomatous pattern with atypical lymphocytes), but the dermal infiltrate is usually CD8 predominant rather than the CD4 predominance of true lymphoma.",
+      "Coexisting allergic contact or photocontact sensitivity is common, particularly to sesquiterpene lactones (Compositae plants), fragrances and sunscreens, so patch and photopatch testing are essential.",
+      "Severe disease may generalise to involve covered skin and progress to erythroderma with leonine facial thickening.",
+      "Strict photoprotection, including from visible light and behind window glass, combined with avoidance of identified contact allergens, is the cornerstone of management.",
+      "The condition mainly affects skin of the head, neck and dorsal hands, with a sharp cut-off at clothing lines when photo-driven."
     ],
-    [
-     "Key Investigations",
-     "Monochromator phototesting to define the action spectrum and minimal erythema dose, Patch testing and photopatch testing for",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Actinic reticuloid is understood as a persistent, delayed-type (cell-mediated) hypersensitivity response in which ultraviolet, and sometimes visible, radiation converts an endogenous cutaneous molecule into a photo-induced antigen. Repeated antigen presentation drives a chronic dermal T-lymphocyte infiltrate that produces the dense, lichenified plaques and the pseudolymphomatous histological appearance. Many patients have concurrent contact or photocontact allergy, which appears to prime or perpetuate the reaction, and abnormal reactivity persists long after the initiating exposure, explaining the chronic, self-sustaining course.",
+    "additionalDifferentials": [
+      "Cutaneous T-cell lymphoma / Sezary syndrome",
+      "Airborne allergic contact dermatitis",
+      "Atopic dermatitis with photoaggravation",
+      "Photoallergic contact dermatitis",
+      "Drug-induced photosensitivity",
+      "Systemic photosensitive lupus erythematosus",
+      "Cutaneous porphyria"
     ],
-    [
-     "Primary Differentials",
-     "Cutaneous T-cell lymphoma / Sezary syndrome, Airborne allergic contact dermatitis, Atopic dermatitis with photoaggravation",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Monochromator phototesting to define the action spectrum and minimal erythema dose",
+      "Patch testing and photopatch testing for coexisting contact and photocontact allergy",
+      "Skin biopsy with assessment of infiltrate and immunophenotype (CD4/CD8 ratio)",
+      "Peripheral blood flow cytometry and T-cell clonality studies to exclude lymphoma when atypia is marked",
+      "Autoimmune serology (antinuclear and extractable nuclear antigen antibodies) to exclude lupus",
+      "Urinary and erythrocyte porphyrin studies to exclude porphyria"
     ],
-    [
-     "Management Strategy",
-     "Rigorous broad-spectrum photoprotection covering ultraviolet B, ultraviolet A and visible light, with sun avoidance, protective",
-     "Core treatment modality"
+    "redFlags": [
+      "Progression to erythroderma with systemic upset and temperature dysregulation",
+      "Persistent lymphadenopathy or circulating atypical lymphocytes raising concern for lymphoma",
+      "Rapidly enlarging or ulcerating plaques suggesting transformation",
+      "Failure to improve despite rigorous photoprotection and allergen avoidance"
     ],
-    [
-     "Clinical Pitfall",
-     "Misinterpreting the pseudolymphomatous histology as cutaneous T-cell lymphoma, leading to inappropriate aggressive therapy.",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition tends to be chronic and can persist for many years, but a substantial proportion of patients improve or remit with strict photoprotection and avoidance of identified allergens. Rarely, severe refractory disease requires systemic immunosuppression.",
+    "pitfalls": [
+      "Misinterpreting the pseudolymphomatous histology as cutaneous T-cell lymphoma, leading to inappropriate aggressive therapy.",
+      "Overlooking coexisting contact or photocontact allergy, which perpetuates the eruption.",
+      "Relying on standard UVB sunscreens that fail to block the visible and UVA wavelengths driving the disease.",
+      "Attributing generalised involvement to a primary lymphoma rather than to spread of photosensitive dermatitis onto covered skin."
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Fitzpatrick's Dermatology in General Medicine",
+      "British Journal of Dermatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Rigorous broad-spectrum photoprotection covering ultraviolet B, ultraviolet A and visible light, with sun avoidance, protective clothing and appropriate sunscreens",
+      "Identification and strict avoidance of contact and photocontact allergens such as Compositae-derived sesquiterpene lactones, fragrances and sunscreen constituents, guided by patch and photopatch testing",
+      "Topical and intermittent systemic corticosteroids for acute flares",
+      "Systemic immunosuppression with azathioprine, ciclosporin or mycophenolate mofetil for severe refractory disease",
+      "Emollients and antipruritic measures for symptom control",
+      "Monitoring for progression to erythroderma and, given histological overlap, surveillance to exclude cutaneous T-cell lymphoma",
+      "Dermatology or photodermatology referral for monochromator phototesting and specialist management"
     ]
-   ],
-   "caption": "Overview comparison matrix for actinic reticuloid."
-  }
- ],
- "diagrams": [
-  {
-   "id": "actinic-reticuloid-real-image",
-   "title": "actinic reticuloid: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "actinic_reticuloid-pathway",
+      "title": "actinic reticuloid: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Represents the most severe end of the chronic actinic dermatitis spectrum, typically in older men with intensely pruritic, thickened, lichenified and infiltrated plaques on sun-exposed skin.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progression to erythroderma with systemic upset and temperature dysregulation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Monochromator phototesting to define the action spectrum and minimal erythema dose, Patch testing and photopatch testing for coexisting contact and photocontact allergy, Skin biopsy with assessment of infiltrate and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Rigorous broad-spectrum photoprotection covering ultraviolet B, ultraviolet A and visible light, with sun avoidance, protective clothing and appropriate sunscreens"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misinterpreting the pseudolymphomatous histology as cutaneous T-cell lymphoma, leading to inappropriate aggressive therapy."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of actinic reticuloid."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "actinic_reticuloid-matrix",
+      "title": "actinic reticuloid: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Represents the most severe end of the chronic actinic dermatitis spectrum, typically in older men with intensely pruritic,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Monochromator phototesting to define the action spectrum and minimal erythema dose, Patch testing and photopatch testing for",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Cutaneous T-cell lymphoma / Sezary syndrome, Airborne allergic contact dermatitis, Atopic dermatitis with photoaggravation",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Rigorous broad-spectrum photoprotection covering ultraviolet B, ultraviolet A and visible light, with sun avoidance, protective",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misinterpreting the pseudolymphomatous histology as cutaneous T-cell lymphoma, leading to inappropriate aggressive therapy.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for actinic reticuloid."
+    }
+  ],
+  "diagrams": []
 }

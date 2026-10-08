@@ -1,179 +1,157 @@
 {
- "id": "medullary_cystic_kidney_disease",
- "name": "Medullary cystic kidney disease",
- "aliases": [
-  "ADTKD",
-  "Autosomal dominant tubulointerstitial kidney disease",
-  "MCKD",
-  "autosomal dominant tubulointerstitial kidney disease",
-  "medullary cystic kidney",
-  "nephronophthisis-medullary cystic kidney disease complex"
- ],
- "class": "non_infective",
- "system": "Renal",
- "specialty": "Nephrology",
- "referenceOnly": true,
- "reference": {
-  "source": "Comprehensive Clinical Nephrology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Now largely reclassified as autosomal dominant tubulointerstitial kidney disease (ADTKD), with UMOD and MUC1 the commonest causative genes.",
-   "Inheritance is autosomal dominant, with slowly progressive chronic kidney disease and characteristically bland urine showing little or no proteinuria or haematuria.",
-   "UMOD (uromodulin) disease typically causes hyperuricaemia and early-onset gout, often preceding renal impairment.",
-   "Cysts are few, small and corticomedullary and are frequently absent, so the historical name is a misnomer and the diagnosis is not made on imaging.",
-   "Kidneys are normal or small in size and imaging is usually non-specific.",
-   "Distinguish it from nephronophthisis, which is autosomal recessive, causes end-stage disease in childhood or adolescence and has retinal, hepatic and skeletal associations.",
-   "Diagnosis rests on family history, clinical phenotype and genetic testing; biopsy shows tubulointerstitial fibrosis and tubular atrophy.",
-   "Management is supportive, progressing over decades to end-stage renal disease requiring renal replacement or transplantation."
+  "id": "medullary_cystic_kidney_disease",
+  "name": "Medullary cystic kidney disease",
+  "aliases": [
+    "ADTKD",
+    "Autosomal dominant tubulointerstitial kidney disease",
+    "MCKD",
+    "autosomal dominant tubulointerstitial kidney disease",
+    "medullary cystic kidney",
+    "nephronophthisis-medullary cystic kidney disease complex"
   ],
-  "pathophysiology": "Medullary cystic kidney disease belongs to a group of autosomal dominant tubulointerstitial diseases caused by mutations in genes expressed in the distal nephron. UMOD mutations cause misfolding and intracellular retention of uromodulin within thick ascending limb cells, provoking endoplasmic reticulum stress and tubular injury, whereas MUC1 frameshift mutations generate a toxic mucin-1 neoprotein; HNF1B and REN mutations account for further cases. The common pathway is progressive tubulointerstitial fibrosis and tubular atrophy with relatively bland urine, and corticomedullary cysts, when present, are a secondary and inconstant feature.",
-  "additionalDifferentials": [
-   "Nephronophthisis (autosomal recessive)",
-   "Autosomal dominant polycystic kidney disease",
-   "Chronic interstitial nephritis (analgesic or obstructive)",
-   "Familial juvenile hyperuricaemic nephropathy (part of the UMOD spectrum)",
-   "Reflux nephropathy",
-   "Alport syndrome or thin basement membrane disease",
-   "Medullary sponge kidney"
-  ],
-  "additionalInvestigations": [
-   "Detailed family pedigree and inheritance assessment",
-   "Serum urate (hyperuricaemia in UMOD disease)",
-   "Urinalysis (characteristically bland)",
-   "Renal ultrasound (normal or small kidneys; cysts inconstant)",
-   "Serial renal function and eGFR trajectory",
-   "Genetic testing (UMOD, MUC1, HNF1B, REN)",
-   "Renal biopsy where genetics are unavailable, showing tubulointerstitial fibrosis"
-  ],
-  "redFlags": [
-   "Rapidly declining renal function",
-   "Uraemic symptoms indicating advanced chronic kidney disease",
-   "Refractory or tophaceous gout",
-   "Extrarenal features suggesting an alternative genetic syndrome"
-  ],
-  "prognosis": "The disease progresses slowly over decades, with most affected individuals reaching end-stage renal disease in adulthood; transplantation is successful because the condition does not recur in the graft.",
-  "pitfalls": [
-   "Expecting imaging cysts to confirm the diagnosis when they are often absent",
-   "Confusing autosomal recessive nephronophthisis with autosomal dominant ADTKD",
-   "Missing UMOD disease in young patients presenting with gout and chronic kidney disease",
-   "Overlooking the family history because of variable expression"
-  ],
-  "references": [
-   "Comprehensive Clinical Nephrology",
-   "Oxford Textbook of Medicine",
-   "KDIGO consensus report on autosomal dominant tubulointerstitial kidney disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide supportive chronic kidney disease care with blood pressure optimisation and avoidance of nephrotoxic drugs, as no targeted therapy exists",
-   "Lower urate with a xanthine oxidase inhibitor such as allopurinol to control the early gout of UMOD-related disease",
-   "Where REN is implicated, avoid renin-angiotensin inhibitors, NSAIDs and dehydration, and correct hypotension and hyperkalaemia with fludrocortisone",
-   "Track eGFR decline and serum urate to anticipate progression to kidney failure",
-   "Prepare for dialysis and kidney transplantation, which succeeds because the condition does not recur in the allograft",
-   "Confirm the causative gene by genetic testing and offer counselling for autosomal dominant inheritance with family screening"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "medullary_cystic_kidney_disease-pathway",
-   "title": "Medullary cystic kidney disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Now largely reclassified as autosomal dominant tubulointerstitial kidney disease (ADTKD), with UMOD and MUC1 the commonest causative genes.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly declining renal function",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Detailed family pedigree and inheritance assessment, Serum urate (hyperuricaemia in UMOD disease), Urinalysis (characteristically bland)"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide supportive chronic kidney disease care with blood pressure optimisation and avoidance of nephrotoxic drugs, as no targeted therapy exists"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Expecting imaging cysts to confirm the diagnosis when they are often absent"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of medullary cystic kidney disease."
-  }
- ],
- "tables": [
-  {
-   "id": "medullary_cystic_kidney_disease-matrix",
-   "title": "Medullary cystic kidney disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Now largely reclassified as autosomal dominant tubulointerstitial kidney disease (ADTKD), with UMOD and MUC1 the commonest",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Renal",
+  "specialty": "Nephrology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Comprehensive Clinical Nephrology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Now largely reclassified as autosomal dominant tubulointerstitial kidney disease (ADTKD), with UMOD and MUC1 the commonest causative genes.",
+      "Inheritance is autosomal dominant, with slowly progressive chronic kidney disease and characteristically bland urine showing little or no proteinuria or haematuria.",
+      "UMOD (uromodulin) disease typically causes hyperuricaemia and early-onset gout, often preceding renal impairment.",
+      "Cysts are few, small and corticomedullary and are frequently absent, so the historical name is a misnomer and the diagnosis is not made on imaging.",
+      "Kidneys are normal or small in size and imaging is usually non-specific.",
+      "Distinguish it from nephronophthisis, which is autosomal recessive, causes end-stage disease in childhood or adolescence and has retinal, hepatic and skeletal associations.",
+      "Diagnosis rests on family history, clinical phenotype and genetic testing; biopsy shows tubulointerstitial fibrosis and tubular atrophy.",
+      "Management is supportive, progressing over decades to end-stage renal disease requiring renal replacement or transplantation."
     ],
-    [
-     "Key Investigations",
-     "Detailed family pedigree and inheritance assessment, Serum urate (hyperuricaemia in UMOD disease), Urinalysis (characteristically",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Medullary cystic kidney disease belongs to a group of autosomal dominant tubulointerstitial diseases caused by mutations in genes expressed in the distal nephron. UMOD mutations cause misfolding and intracellular retention of uromodulin within thick ascending limb cells, provoking endoplasmic reticulum stress and tubular injury, whereas MUC1 frameshift mutations generate a toxic mucin-1 neoprotein; HNF1B and REN mutations account for further cases. The common pathway is progressive tubulointerstitial fibrosis and tubular atrophy with relatively bland urine, and corticomedullary cysts, when present, are a secondary and inconstant feature.",
+    "additionalDifferentials": [
+      "Nephronophthisis (autosomal recessive)",
+      "Autosomal dominant polycystic kidney disease",
+      "Chronic interstitial nephritis (analgesic or obstructive)",
+      "Familial juvenile hyperuricaemic nephropathy (part of the UMOD spectrum)",
+      "Reflux nephropathy",
+      "Alport syndrome or thin basement membrane disease",
+      "Medullary sponge kidney"
     ],
-    [
-     "Primary Differentials",
-     "Nephronophthisis (autosomal recessive), Autosomal dominant polycystic kidney disease, Chronic interstitial nephritis (analgesic",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Detailed family pedigree and inheritance assessment",
+      "Serum urate (hyperuricaemia in UMOD disease)",
+      "Urinalysis (characteristically bland)",
+      "Renal ultrasound (normal or small kidneys; cysts inconstant)",
+      "Serial renal function and eGFR trajectory",
+      "Genetic testing (UMOD, MUC1, HNF1B, REN)",
+      "Renal biopsy where genetics are unavailable, showing tubulointerstitial fibrosis"
     ],
-    [
-     "Management Strategy",
-     "Provide supportive chronic kidney disease care with blood pressure optimisation and avoidance of nephrotoxic drugs, as no",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly declining renal function",
+      "Uraemic symptoms indicating advanced chronic kidney disease",
+      "Refractory or tophaceous gout",
+      "Extrarenal features suggesting an alternative genetic syndrome"
     ],
-    [
-     "Clinical Pitfall",
-     "Expecting imaging cysts to confirm the diagnosis when they are often absent",
-     "Prevent diagnostic or management error"
+    "prognosis": "The disease progresses slowly over decades, with most affected individuals reaching end-stage renal disease in adulthood; transplantation is successful because the condition does not recur in the graft.",
+    "pitfalls": [
+      "Expecting imaging cysts to confirm the diagnosis when they are often absent",
+      "Confusing autosomal recessive nephronophthisis with autosomal dominant ADTKD",
+      "Missing UMOD disease in young patients presenting with gout and chronic kidney disease",
+      "Overlooking the family history because of variable expression"
+    ],
+    "references": [
+      "Comprehensive Clinical Nephrology",
+      "Oxford Textbook of Medicine",
+      "KDIGO consensus report on autosomal dominant tubulointerstitial kidney disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide supportive chronic kidney disease care with blood pressure optimisation and avoidance of nephrotoxic drugs, as no targeted therapy exists",
+      "Lower urate with a xanthine oxidase inhibitor such as allopurinol to control the early gout of UMOD-related disease",
+      "Where REN is implicated, avoid renin-angiotensin inhibitors, NSAIDs and dehydration, and correct hypotension and hyperkalaemia with fludrocortisone",
+      "Track eGFR decline and serum urate to anticipate progression to kidney failure",
+      "Prepare for dialysis and kidney transplantation, which succeeds because the condition does not recur in the allograft",
+      "Confirm the causative gene by genetic testing and offer counselling for autosomal dominant inheritance with family screening"
     ]
-   ],
-   "caption": "Overview comparison matrix for medullary cystic kidney disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "medullary-cystic-kidney-disease-real-image",
-   "title": "Medullary cystic kidney disease: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "medullary_cystic_kidney_disease-pathway",
+      "title": "Medullary cystic kidney disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Now largely reclassified as autosomal dominant tubulointerstitial kidney disease (ADTKD), with UMOD and MUC1 the commonest causative genes.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly declining renal function",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Detailed family pedigree and inheritance assessment, Serum urate (hyperuricaemia in UMOD disease), Urinalysis (characteristically bland)"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide supportive chronic kidney disease care with blood pressure optimisation and avoidance of nephrotoxic drugs, as no targeted therapy exists"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Expecting imaging cysts to confirm the diagnosis when they are often absent"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of medullary cystic kidney disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "medullary_cystic_kidney_disease-matrix",
+      "title": "Medullary cystic kidney disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Now largely reclassified as autosomal dominant tubulointerstitial kidney disease (ADTKD), with UMOD and MUC1 the commonest",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Detailed family pedigree and inheritance assessment, Serum urate (hyperuricaemia in UMOD disease), Urinalysis (characteristically",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Nephronophthisis (autosomal recessive), Autosomal dominant polycystic kidney disease, Chronic interstitial nephritis (analgesic",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide supportive chronic kidney disease care with blood pressure optimisation and avoidance of nephrotoxic drugs, as no",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Expecting imaging cysts to confirm the diagnosis when they are often absent",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for medullary cystic kidney disease."
+    }
+  ],
+  "diagrams": []
 }

@@ -1,174 +1,152 @@
 {
- "id": "cor_triatriatum",
- "name": "Cor triatriatum",
- "aliases": [
-  "cor triatriatum sinister",
-  "divided left atrium",
-  "triatrial heart",
-  "subdivided left atrium"
- ],
- "class": "non_infective",
- "system": "Cardiovascular / Congenital",
- "specialty": "Congenital Cardiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A fibromuscular membrane divides the left atrium into a proximal chamber receiving the pulmonary veins and a distal chamber containing the appendage and mitral valve",
-   "Haemodynamics mimic mitral stenosis, with pulmonary venous congestion, pulmonary hypertension and, in severe cases, low cardiac output",
-   "Severity depends on the size of the communicating orifice in the membrane; a small orifice presents in infancy while a large one may be silent until adulthood",
-   "Presentation ranges from breathlessness, recurrent chest infections and failure to thrive in infants to exertional dyspnoea or atrial arrhythmia in older patients",
-   "The dividing membrane sits above the level of the atrial appendage and fossa ovalis, distinguishing it from a supravalvar mitral ring",
-   "Associated lesions include atrial septal defect and anomalous pulmonary venous connection, which may modify the clinical picture",
-   "Definitive treatment is surgical resection of the obstructing membrane, which usually gives excellent relief when performed before fixed pulmonary vascular changes develop"
+  "id": "cor_triatriatum",
+  "name": "Cor triatriatum",
+  "aliases": [
+    "cor triatriatum sinister",
+    "divided left atrium",
+    "triatrial heart",
+    "subdivided left atrium"
   ],
-  "pathophysiology": "Cor triatriatum sinister arises when a fibromuscular membrane partitions the left atrium into a posterosuperior chamber that receives the pulmonary veins and an anteroinferior chamber bearing the left atrial appendage and mitral valve. The embryological basis is incomplete incorporation of the common pulmonary vein into the left atrium. Blood must cross a restrictive orifice within the membrane, producing an obstruction functionally equivalent to mitral stenosis. The upstream chamber and pulmonary veins become congested, pulmonary venous and then pulmonary arterial pressures rise, and right heart pressure loading follows. The degree of obstruction, and hence age at presentation, is governed by the diameter of the communicating orifice and any associated atrial septal communication that may decompress the proximal chamber.",
-  "additionalDifferentials": [
-   "Congenital mitral stenosis",
-   "Supravalvar mitral ring",
-   "Total or partial anomalous pulmonary venous return",
-   "Pulmonary vein stenosis",
-   "Left atrial myxoma or other mass",
-   "Restrictive cardiomyopathy"
-  ],
-  "additionalInvestigations": [
-   "Transthoracic and transoesophageal echocardiography to visualise the dividing membrane and measure the orifice gradient",
-   "Doppler assessment of flow across the membrane and estimation of pulmonary artery pressure",
-   "Cardiac CT or MR angiography to define pulmonary venous connections and chamber anatomy",
-   "Chest radiograph to assess pulmonary venous congestion and cardiac silhouette",
-   "Cardiac catheterisation when pulmonary vascular resistance or coexisting lesions need clarification",
-   "Electrocardiogram to detect right ventricular hypertrophy or atrial arrhythmia"
-  ],
-  "redFlags": [
-   "Severe pulmonary venous congestion or pulmonary oedema in a distressed infant",
-   "Signs of low cardiac output or shock from critical membrane obstruction",
-   "Rapidly progressive pulmonary hypertension",
-   "New atrial arrhythmia with haemodynamic compromise"
-  ],
-  "prognosis": "Surgical resection of the membrane is generally curative with low operative mortality and an excellent long-term outlook when performed before irreversible pulmonary vascular disease. Untreated severe obstruction in infancy carries high mortality.",
-  "pitfalls": [
-   "Mistaking the obstructing membrane for congenital mitral stenosis or a supravalvar ring, which changes surgical planning",
-   "Overlooking a small membrane orifice because a coexisting atrial septal defect masks the pressure gradient",
-   "Attributing an infant's respiratory distress to recurrent infection rather than pulmonary venous obstruction",
-   "Failing to search for associated anomalous pulmonary venous connections"
-  ],
-  "references": [
-   "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
-   "Anderson's Paediatric Cardiology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Surgical resection of the obstructing intra-atrial membrane is the definitive and generally curative treatment when obstruction is significant",
-   "Stabilise symptomatic pulmonary venous congestion pre-operatively with diuretics and, in critically obstructed infants, urgent surgical referral",
-   "Repair associated lesions such as atrial septal defect or anomalous pulmonary venous connection at the time of surgery",
-   "Manage atrial arrhythmia with rate or rhythm control and anticoagulation as indicated",
-   "Undertake postoperative echocardiographic surveillance for residual or recurrent obstruction and pulmonary pressure recovery",
-   "Coordinate care through a congenital cardiology and cardiac surgery multidisciplinary team",
-   "Escalate promptly for severe infantile obstruction, which carries high mortality if untreated"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "cor_triatriatum-pathway",
-   "title": "Cor triatriatum: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A fibromuscular membrane divides the left atrium into a proximal chamber receiving the pulmonary veins and a distal chamber containing the appendage and mitral valve",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe pulmonary venous congestion or pulmonary oedema in a distressed infant",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Transthoracic and transoesophageal echocardiography to visualise the dividing membrane and measure the orifice gradient, Doppler assessment of flow across the membrane and estimation of pulmonary artery pressure, Cardiac"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Surgical resection of the obstructing intra-atrial membrane is the definitive and generally curative treatment when obstruction is significant"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking the obstructing membrane for congenital mitral stenosis or a supravalvar ring, which changes surgical planning"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of cor triatriatum."
-  }
- ],
- "tables": [
-  {
-   "id": "cor_triatriatum-matrix",
-   "title": "Cor triatriatum: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A fibromuscular membrane divides the left atrium into a proximal chamber receiving the pulmonary veins and a distal chamber",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular / Congenital",
+  "specialty": "Congenital Cardiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A fibromuscular membrane divides the left atrium into a proximal chamber receiving the pulmonary veins and a distal chamber containing the appendage and mitral valve",
+      "Haemodynamics mimic mitral stenosis, with pulmonary venous congestion, pulmonary hypertension and, in severe cases, low cardiac output",
+      "Severity depends on the size of the communicating orifice in the membrane; a small orifice presents in infancy while a large one may be silent until adulthood",
+      "Presentation ranges from breathlessness, recurrent chest infections and failure to thrive in infants to exertional dyspnoea or atrial arrhythmia in older patients",
+      "The dividing membrane sits above the level of the atrial appendage and fossa ovalis, distinguishing it from a supravalvar mitral ring",
+      "Associated lesions include atrial septal defect and anomalous pulmonary venous connection, which may modify the clinical picture",
+      "Definitive treatment is surgical resection of the obstructing membrane, which usually gives excellent relief when performed before fixed pulmonary vascular changes develop"
     ],
-    [
-     "Key Investigations",
-     "Transthoracic and transoesophageal echocardiography to visualise the dividing membrane and measure the orifice gradient, Doppler",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Cor triatriatum sinister arises when a fibromuscular membrane partitions the left atrium into a posterosuperior chamber that receives the pulmonary veins and an anteroinferior chamber bearing the left atrial appendage and mitral valve. The embryological basis is incomplete incorporation of the common pulmonary vein into the left atrium. Blood must cross a restrictive orifice within the membrane, producing an obstruction functionally equivalent to mitral stenosis. The upstream chamber and pulmonary veins become congested, pulmonary venous and then pulmonary arterial pressures rise, and right heart pressure loading follows. The degree of obstruction, and hence age at presentation, is governed by the diameter of the communicating orifice and any associated atrial septal communication that may decompress the proximal chamber.",
+    "additionalDifferentials": [
+      "Congenital mitral stenosis",
+      "Supravalvar mitral ring",
+      "Total or partial anomalous pulmonary venous return",
+      "Pulmonary vein stenosis",
+      "Left atrial myxoma or other mass",
+      "Restrictive cardiomyopathy"
     ],
-    [
-     "Primary Differentials",
-     "Congenital mitral stenosis, Supravalvar mitral ring, Total or partial anomalous pulmonary venous return",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Transthoracic and transoesophageal echocardiography to visualise the dividing membrane and measure the orifice gradient",
+      "Doppler assessment of flow across the membrane and estimation of pulmonary artery pressure",
+      "Cardiac CT or MR angiography to define pulmonary venous connections and chamber anatomy",
+      "Chest radiograph to assess pulmonary venous congestion and cardiac silhouette",
+      "Cardiac catheterisation when pulmonary vascular resistance or coexisting lesions need clarification",
+      "Electrocardiogram to detect right ventricular hypertrophy or atrial arrhythmia"
     ],
-    [
-     "Management Strategy",
-     "Surgical resection of the obstructing intra-atrial membrane is the definitive and generally curative treatment when obstruction",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe pulmonary venous congestion or pulmonary oedema in a distressed infant",
+      "Signs of low cardiac output or shock from critical membrane obstruction",
+      "Rapidly progressive pulmonary hypertension",
+      "New atrial arrhythmia with haemodynamic compromise"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking the obstructing membrane for congenital mitral stenosis or a supravalvar ring, which changes surgical planning",
-     "Prevent diagnostic or management error"
+    "prognosis": "Surgical resection of the membrane is generally curative with low operative mortality and an excellent long-term outlook when performed before irreversible pulmonary vascular disease. Untreated severe obstruction in infancy carries high mortality.",
+    "pitfalls": [
+      "Mistaking the obstructing membrane for congenital mitral stenosis or a supravalvar ring, which changes surgical planning",
+      "Overlooking a small membrane orifice because a coexisting atrial septal defect masks the pressure gradient",
+      "Attributing an infant's respiratory distress to recurrent infection rather than pulmonary venous obstruction",
+      "Failing to search for associated anomalous pulmonary venous connections"
+    ],
+    "references": [
+      "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
+      "Anderson's Paediatric Cardiology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Surgical resection of the obstructing intra-atrial membrane is the definitive and generally curative treatment when obstruction is significant",
+      "Stabilise symptomatic pulmonary venous congestion pre-operatively with diuretics and, in critically obstructed infants, urgent surgical referral",
+      "Repair associated lesions such as atrial septal defect or anomalous pulmonary venous connection at the time of surgery",
+      "Manage atrial arrhythmia with rate or rhythm control and anticoagulation as indicated",
+      "Undertake postoperative echocardiographic surveillance for residual or recurrent obstruction and pulmonary pressure recovery",
+      "Coordinate care through a congenital cardiology and cardiac surgery multidisciplinary team",
+      "Escalate promptly for severe infantile obstruction, which carries high mortality if untreated"
     ]
-   ],
-   "caption": "Overview comparison matrix for cor triatriatum."
-  }
- ],
- "diagrams": [
-  {
-   "id": "cor-triatriatum-real-image",
-   "title": "Cor triatriatum: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "cor_triatriatum-pathway",
+      "title": "Cor triatriatum: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A fibromuscular membrane divides the left atrium into a proximal chamber receiving the pulmonary veins and a distal chamber containing the appendage and mitral valve",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe pulmonary venous congestion or pulmonary oedema in a distressed infant",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Transthoracic and transoesophageal echocardiography to visualise the dividing membrane and measure the orifice gradient, Doppler assessment of flow across the membrane and estimation of pulmonary artery pressure, Cardiac"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Surgical resection of the obstructing intra-atrial membrane is the definitive and generally curative treatment when obstruction is significant"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking the obstructing membrane for congenital mitral stenosis or a supravalvar ring, which changes surgical planning"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of cor triatriatum."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "cor_triatriatum-matrix",
+      "title": "Cor triatriatum: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A fibromuscular membrane divides the left atrium into a proximal chamber receiving the pulmonary veins and a distal chamber",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Transthoracic and transoesophageal echocardiography to visualise the dividing membrane and measure the orifice gradient, Doppler",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Congenital mitral stenosis, Supravalvar mitral ring, Total or partial anomalous pulmonary venous return",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Surgical resection of the obstructing intra-atrial membrane is the definitive and generally curative treatment when obstruction",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking the obstructing membrane for congenital mitral stenosis or a supravalvar ring, which changes surgical planning",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for cor triatriatum."
+    }
+  ],
+  "diagrams": []
 }

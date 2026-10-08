@@ -1,177 +1,155 @@
 {
- "id": "burn_wound_management",
- "name": "Burn wound management",
- "aliases": [
-  "thermal burn",
-  "burn injury",
-  "acute burn care"
- ],
- "class": "non_infective",
- "system": "Plastic / Reconstructive",
- "specialty": "Plastic Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Grabb & Smith's Plastic Surgery / standard references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Burn depth is classified as superficial (epidermal), superficial and deep partial thickness (dermal), and full thickness, with depth guiding whether a wound will heal spontaneously or require excision and grafting",
-   "Extent of burn is estimated using the rule of nines, Lund-Browder charts, or the patient's palm as roughly one percent of body surface area, and only partial and full thickness areas are counted for resuscitation",
-   "Fluid resuscitation for major burns is guided by a weight and burn-area formula (Parkland formula) with crystalloid titrated to urine output rather than to a fixed volume",
-   "Deep circumferential burns of a limb or the torso can produce a tourniquet or restrictive effect, and escharotomy may be needed to restore perfusion or ventilation",
-   "Early wound care emphasises cleaning, appropriate dressings, and preventing infection, while deep dermal and full thickness wounds benefit from early tangential excision and skin grafting",
-   "Inhalation injury, facial burns, singed nasal hair, soot in the airway, and hoarseness signal potential airway compromise that can progress rapidly to obstruction",
-   "Adequate analgesia, tetanus prophylaxis, nutritional support, and prevention of hypothermia are integral to burn care",
-   "Referral to a specialist burn centre is indicated for large burns, burns of the face, hands, feet, perineum or major joints, electrical and chemical burns, and burns with inhalation injury"
+  "id": "burn_wound_management",
+  "name": "Burn wound management",
+  "aliases": [
+    "thermal burn",
+    "burn injury",
+    "acute burn care"
   ],
-  "pathophysiology": "A burn causes coagulative tissue necrosis whose severity depends on temperature and contact time. Jackson described three zones: a central zone of coagulation (irreversible necrosis), a surrounding zone of stasis with compromised perfusion that can be salvaged or progress to necrosis, and an outer zone of hyperaemia. Large burns trigger a systemic inflammatory response with release of mediators that increase capillary permeability, causing fluid shift from the intravascular space into the interstitium and burn oedema. This produces hypovolaemia (burn shock) and, if inadequately treated, organ hypoperfusion. Loss of the skin barrier impairs thermoregulation and fluid balance and predisposes to infection and hypermetabolism.",
-  "additionalDifferentials": [
-   "Toxic epidermal necrolysis and Stevens-Johnson syndrome",
-   "Staphylococcal scalded skin syndrome",
-   "Necrotising soft tissue infection",
-   "Chemical injury (acid or alkali)",
-   "Cold injury (frostbite) mimicking burn appearance",
-   "Non-accidental injury in children with suspicious patterns"
-  ],
-  "additionalInvestigations": [
-   "Assessment of burn depth and total body surface area using Lund-Browder chart",
-   "Carboxyhaemoglobin level and arterial blood gases when inhalation injury or carbon monoxide exposure is suspected",
-   "Bronchoscopy to assess airway and inhalation injury",
-   "Baseline and serial electrolytes, renal function, and haematocrit to guide resuscitation",
-   "ECG and cardiac monitoring after high-voltage electrical injury",
-   "Creatine kinase and urine myoglobin when deep or electrical injury raises concern for rhabdomyolysis"
-  ],
-  "redFlags": [
-   "Signs of inhalation injury or impending airway obstruction (facial burns, stridor, hoarseness, soot in the airway) requiring early intubation",
-   "Large burns causing burn shock and needing prompt fluid resuscitation and burn centre transfer",
-   "Circumferential deep burns of a limb or the chest threatening perfusion or ventilation and requiring escharotomy",
-   "High-voltage electrical injury with cardiac arrhythmia or rhabdomyolysis",
-   "Features of burn wound sepsis or necrotising infection"
-  ],
-  "prognosis": "Outcome depends on burn size and depth, age, inhalation injury, and comorbidity. Superficial and superficial partial thickness burns generally heal without surgery and with minimal scarring, whereas deep dermal and full thickness burns require grafting and are prone to hypertrophic scarring and contracture. Timely resuscitation, early excision, infection control, and rehabilitation markedly improve survival and functional recovery.",
-  "pitfalls": [
-   "Overestimating or underestimating burn size, leading to inappropriate fluid resuscitation and either oedema or under-resuscitation",
-   "Counting superficial erythema when calculating burn area for resuscitation",
-   "Delaying recognition of inhalation injury until airway swelling makes intubation difficult",
-   "Failing to reassess deep dermal burns, which may convert to full thickness and need grafting",
-   "Neglecting hypothermia, analgesia, and nutrition during the acute phase",
-   "Missing the need for escharotomy in circumferential deep burns"
-  ],
-  "references": [
-   "Grabb & Smith's Plastic Surgery"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Stop the burning process, cool the wound and follow a structured ABCDE approach, securing the airway early with intubation when inhalation injury is suggested by facial burns, soot, singed nasal hair or hoarseness",
-   "Resuscitate major burns with crystalloid guided by a weight and burn-area formula such as the Parkland formula, titrating to urine output rather than a fixed volume",
-   "Perform escharotomy for deep circumferential limb or torso burns that compromise perfusion or ventilation",
-   "Deliver early wound care with cleaning, appropriate dressings, topical antimicrobials and tetanus prophylaxis, with infection surveillance",
-   "Undertake early tangential excision and skin grafting of deep dermal and full-thickness wounds",
-   "Give high-flow oxygen for carbon monoxide exposure and provide analgesia, temperature regulation and nutritional support for the hypermetabolic response",
-   "Provide rehabilitation with physiotherapy, scar management and pressure garments to prevent contractures",
-   "Refer to a specialist burns unit and manage through a multidisciplinary team"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "burn_wound_management-pathway",
-   "title": "Burn wound management: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Burn depth is classified as superficial (epidermal), superficial and deep partial thickness (dermal), and full thickness, with depth guiding whether a wound will heal spontaneously or require excision and grafting",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Signs of inhalation injury or impending airway obstruction (facial burns, stridor, hoarseness, soot in the airway) requiring early intubation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Assessment of burn depth and total body surface area using Lund-Browder chart, Carboxyhaemoglobin level and arterial blood gases when inhalation injury or carbon monoxide exposure is suspected, Bronchoscopy to assess"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Stop the burning process, cool the wound and follow a structured ABCDE approach, securing the airway early with intubation when inhalation injury is suggested by facial burns, soot, singed nasal hair or hoarseness"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overestimating or underestimating burn size, leading to inappropriate fluid resuscitation and either oedema or under-resuscitation"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of burn wound management."
-  }
- ],
- "tables": [
-  {
-   "id": "burn_wound_management-matrix",
-   "title": "Burn wound management: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Burn depth is classified as superficial (epidermal), superficial and deep partial thickness (dermal), and full thickness, with",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Plastic / Reconstructive",
+  "specialty": "Plastic Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Grabb & Smith's Plastic Surgery / standard references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Burn depth is classified as superficial (epidermal), superficial and deep partial thickness (dermal), and full thickness, with depth guiding whether a wound will heal spontaneously or require excision and grafting",
+      "Extent of burn is estimated using the rule of nines, Lund-Browder charts, or the patient's palm as roughly one percent of body surface area, and only partial and full thickness areas are counted for resuscitation",
+      "Fluid resuscitation for major burns is guided by a weight and burn-area formula (Parkland formula) with crystalloid titrated to urine output rather than to a fixed volume",
+      "Deep circumferential burns of a limb or the torso can produce a tourniquet or restrictive effect, and escharotomy may be needed to restore perfusion or ventilation",
+      "Early wound care emphasises cleaning, appropriate dressings, and preventing infection, while deep dermal and full thickness wounds benefit from early tangential excision and skin grafting",
+      "Inhalation injury, facial burns, singed nasal hair, soot in the airway, and hoarseness signal potential airway compromise that can progress rapidly to obstruction",
+      "Adequate analgesia, tetanus prophylaxis, nutritional support, and prevention of hypothermia are integral to burn care",
+      "Referral to a specialist burn centre is indicated for large burns, burns of the face, hands, feet, perineum or major joints, electrical and chemical burns, and burns with inhalation injury"
     ],
-    [
-     "Key Investigations",
-     "Assessment of burn depth and total body surface area using Lund-Browder chart, Carboxyhaemoglobin level and arterial blood gases",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A burn causes coagulative tissue necrosis whose severity depends on temperature and contact time. Jackson described three zones: a central zone of coagulation (irreversible necrosis), a surrounding zone of stasis with compromised perfusion that can be salvaged or progress to necrosis, and an outer zone of hyperaemia. Large burns trigger a systemic inflammatory response with release of mediators that increase capillary permeability, causing fluid shift from the intravascular space into the interstitium and burn oedema. This produces hypovolaemia (burn shock) and, if inadequately treated, organ hypoperfusion. Loss of the skin barrier impairs thermoregulation and fluid balance and predisposes to infection and hypermetabolism.",
+    "additionalDifferentials": [
+      "Toxic epidermal necrolysis and Stevens-Johnson syndrome",
+      "Staphylococcal scalded skin syndrome",
+      "Necrotising soft tissue infection",
+      "Chemical injury (acid or alkali)",
+      "Cold injury (frostbite) mimicking burn appearance",
+      "Non-accidental injury in children with suspicious patterns"
     ],
-    [
-     "Primary Differentials",
-     "Toxic epidermal necrolysis and Stevens-Johnson syndrome, Staphylococcal scalded skin syndrome, Necrotising soft tissue infection",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Assessment of burn depth and total body surface area using Lund-Browder chart",
+      "Carboxyhaemoglobin level and arterial blood gases when inhalation injury or carbon monoxide exposure is suspected",
+      "Bronchoscopy to assess airway and inhalation injury",
+      "Baseline and serial electrolytes, renal function, and haematocrit to guide resuscitation",
+      "ECG and cardiac monitoring after high-voltage electrical injury",
+      "Creatine kinase and urine myoglobin when deep or electrical injury raises concern for rhabdomyolysis"
     ],
-    [
-     "Management Strategy",
-     "Stop the burning process, cool the wound and follow a structured ABCDE approach, securing the airway early with intubation when",
-     "Core treatment modality"
+    "redFlags": [
+      "Signs of inhalation injury or impending airway obstruction (facial burns, stridor, hoarseness, soot in the airway) requiring early intubation",
+      "Large burns causing burn shock and needing prompt fluid resuscitation and burn centre transfer",
+      "Circumferential deep burns of a limb or the chest threatening perfusion or ventilation and requiring escharotomy",
+      "High-voltage electrical injury with cardiac arrhythmia or rhabdomyolysis",
+      "Features of burn wound sepsis or necrotising infection"
     ],
-    [
-     "Clinical Pitfall",
-     "Overestimating or underestimating burn size, leading to inappropriate fluid resuscitation and either oedema or under-resuscitation",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome depends on burn size and depth, age, inhalation injury, and comorbidity. Superficial and superficial partial thickness burns generally heal without surgery and with minimal scarring, whereas deep dermal and full thickness burns require grafting and are prone to hypertrophic scarring and contracture. Timely resuscitation, early excision, infection control, and rehabilitation markedly improve survival and functional recovery.",
+    "pitfalls": [
+      "Overestimating or underestimating burn size, leading to inappropriate fluid resuscitation and either oedema or under-resuscitation",
+      "Counting superficial erythema when calculating burn area for resuscitation",
+      "Delaying recognition of inhalation injury until airway swelling makes intubation difficult",
+      "Failing to reassess deep dermal burns, which may convert to full thickness and need grafting",
+      "Neglecting hypothermia, analgesia, and nutrition during the acute phase",
+      "Missing the need for escharotomy in circumferential deep burns"
+    ],
+    "references": [
+      "Grabb & Smith's Plastic Surgery"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Stop the burning process, cool the wound and follow a structured ABCDE approach, securing the airway early with intubation when inhalation injury is suggested by facial burns, soot, singed nasal hair or hoarseness",
+      "Resuscitate major burns with crystalloid guided by a weight and burn-area formula such as the Parkland formula, titrating to urine output rather than a fixed volume",
+      "Perform escharotomy for deep circumferential limb or torso burns that compromise perfusion or ventilation",
+      "Deliver early wound care with cleaning, appropriate dressings, topical antimicrobials and tetanus prophylaxis, with infection surveillance",
+      "Undertake early tangential excision and skin grafting of deep dermal and full-thickness wounds",
+      "Give high-flow oxygen for carbon monoxide exposure and provide analgesia, temperature regulation and nutritional support for the hypermetabolic response",
+      "Provide rehabilitation with physiotherapy, scar management and pressure garments to prevent contractures",
+      "Refer to a specialist burns unit and manage through a multidisciplinary team"
     ]
-   ],
-   "caption": "Overview comparison matrix for burn wound management."
-  }
- ],
- "diagrams": [
-  {
-   "id": "burn-wound-management-real-image",
-   "title": "Burn wound management: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "burn_wound_management-pathway",
+      "title": "Burn wound management: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Burn depth is classified as superficial (epidermal), superficial and deep partial thickness (dermal), and full thickness, with depth guiding whether a wound will heal spontaneously or require excision and grafting",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Signs of inhalation injury or impending airway obstruction (facial burns, stridor, hoarseness, soot in the airway) requiring early intubation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Assessment of burn depth and total body surface area using Lund-Browder chart, Carboxyhaemoglobin level and arterial blood gases when inhalation injury or carbon monoxide exposure is suspected, Bronchoscopy to assess"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Stop the burning process, cool the wound and follow a structured ABCDE approach, securing the airway early with intubation when inhalation injury is suggested by facial burns, soot, singed nasal hair or hoarseness"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overestimating or underestimating burn size, leading to inappropriate fluid resuscitation and either oedema or under-resuscitation"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of burn wound management."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "burn_wound_management-matrix",
+      "title": "Burn wound management: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Burn depth is classified as superficial (epidermal), superficial and deep partial thickness (dermal), and full thickness, with",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Assessment of burn depth and total body surface area using Lund-Browder chart, Carboxyhaemoglobin level and arterial blood gases",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Toxic epidermal necrolysis and Stevens-Johnson syndrome, Staphylococcal scalded skin syndrome, Necrotising soft tissue infection",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Stop the burning process, cool the wound and follow a structured ABCDE approach, securing the airway early with intubation when",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overestimating or underestimating burn size, leading to inappropriate fluid resuscitation and either oedema or under-resuscitation",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for burn wound management."
+    }
+  ],
+  "diagrams": []
 }

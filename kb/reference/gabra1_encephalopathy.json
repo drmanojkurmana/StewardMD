@@ -1,175 +1,153 @@
 {
- "id": "gabra1_encephalopathy",
- "name": "GABRA1-related developmental and epileptic encephalopathy",
- "aliases": [
-  "GABRA1 encephalopathy",
-  "GABRA1-related epilepsy",
-  "EIEE19",
-  "DEE19"
- ],
- "class": "non_infective",
- "system": "Neurology",
- "specialty": "Paediatric neurology / Epileptology",
- "referenceOnly": true,
- "reference": {
-  "source": "Epilepsy genetics references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by variants in GABRA1, encoding the alpha-1 subunit of the GABA-A receptor, the principal fast inhibitory chloride-conducting ligand-gated channel of the brain.",
-   "The phenotype is a continuum: inherited variants tend to cause milder genetic generalised epilepsies such as juvenile myoclonic epilepsy and childhood absence epilepsy, whereas de novo variants cause severe developmental and epileptic encephalopathy.",
-   "Severe cases resemble other early-infantile encephalopathies, including West syndrome (infantile spasms), Ohtahara syndrome and a Dravet-like course.",
-   "Seizure types are varied — myoclonic, absence, focal, tonic-clonic and spasms — with developmental slowing or regression at the encephalopathic end of the spectrum.",
-   "It is one of several GABA-A receptor subunit epilepsies, and identifying the specific gene requires panel or exome testing.",
-   "Loss-of-function or dominant-negative variants reduce GABAergic inhibition, tipping cortical networks towards hyperexcitability.",
-   "Management uses broad-spectrum antiseizure medicines; agents that potentiate GABA-A signalling are often chosen, though response is variable."
+  "id": "gabra1_encephalopathy",
+  "name": "GABRA1-related developmental and epileptic encephalopathy",
+  "aliases": [
+    "GABRA1 encephalopathy",
+    "GABRA1-related epilepsy",
+    "EIEE19",
+    "DEE19"
   ],
-  "pathophysiology": "GABRA1 encodes the alpha-1 subunit of the pentameric GABA-A receptor, the most widely expressed alpha subunit, which forms the ligand-gated chloride channel mediating fast inhibitory neurotransmission. Pathogenic variants — frequently de novo missense or truncating changes — reduce surface receptor expression or channel function through loss-of-function or dominant-negative mechanisms, diminishing inhibitory tone and promoting neuronal network hyperexcitability and seizures. The severity gradient broadly parallels the degree of functional impairment, so that near-complete loss produces developmental and epileptic encephalopathy while partial dysfunction yields milder generalised epilepsy. Inheritance is autosomal dominant, with the severe encephalopathic cases usually arising de novo.",
-  "additionalDifferentials": [
-   "Other GABA-A receptor subunit encephalopathies (GABRB3, GABRB2, GABRG2, GABRA5, GABRD)",
-   "SCN1A-related Dravet syndrome",
-   "STXBP1 developmental and epileptic encephalopathy",
-   "KCNQ2 developmental and epileptic encephalopathy",
-   "CDKL5 deficiency disorder",
-   "SCN2A and SCN8A encephalopathies",
-   "Structural or metabolic causes of infantile epileptic encephalopathy"
-  ],
-  "additionalInvestigations": [
-   "Epilepsy gene panel or trio exome/genome sequencing",
-   "EEG, which may show generalised spike-wave, hypsarrhythmia, burst-suppression or multifocal discharges depending on phenotype",
-   "Brain MRI, usually normal or nonspecific",
-   "Developmental and neuropsychological assessment",
-   "Metabolic screen to exclude treatable mimics",
-   "Parental testing to establish de novo status or inheritance"
-  ],
-  "redFlags": [
-   "Onset of intractable seizures in early infancy with developmental arrest",
-   "Epileptic spasms with hypsarrhythmia",
-   "Regression of previously acquired skills",
-   "Status epilepticus or seizure clustering with febrile illness"
-  ],
-  "prognosis": "Outcome is wide-ranging: inherited generalised epilepsy phenotypes may be well controlled with preserved cognition, whereas de novo encephalopathic cases often have refractory seizures with moderate-to-severe intellectual disability.",
-  "pitfalls": [
-   "Assuming a single gene from the phenotype alone, since the GABA-A subunit epilepsies overlap clinically and require genetic testing.",
-   "Overlooking milder familial generalised epilepsy caused by the same gene.",
-   "Expecting a diagnostic MRI, as imaging is usually unremarkable.",
-   "Assuming that GABAergic agents will always help, since response is variable despite the mechanism."
-  ],
-  "references": [
-   "Epilepsy genetics reference literature",
-   "Developmental and epileptic encephalopathy guidelines",
-   "Paediatric neurology reference texts"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Seizure control with antiseizure medications tailored to the phenotype, using broad-spectrum agents such as valproate, levetiracetam or lamotrigine for the generalised epilepsies and ethosuximide for absences",
-   "For the encephalopathic and infantile-spasm phenotypes, hormonal therapy with corticotrophin or corticosteroids or treatment with vigabatrin, and consideration of the ketogenic diet in drug-resistant seizures",
-   "Early developmental intervention with physiotherapy, occupational and speech therapy for the associated developmental delay or regression",
-   "Serial EEG and developmental or neuropsychological surveillance to guide treatment",
-   "Genetic counselling for this autosomal dominant disorder, with parental testing to establish de novo status and define recurrence risk",
-   "Multidisciplinary care led by paediatric neurology and epileptology"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "gabra1_encephalopathy-pathway",
-   "title": "GABRA1-related developmental and epileptic encephalopathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by variants in GABRA1, encoding the alpha-1 subunit of the GABA-A receptor, the principal fast inhibitory chloride-conducting ligand-gated channel of the brain.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Onset of intractable seizures in early infancy with developmental arrest",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Epilepsy gene panel or trio exome/genome sequencing, EEG, which may show generalised spike-wave, hypsarrhythmia, burst-suppression or multifocal discharges depending on phenotype, Brain MRI, usually normal or nonspecific"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Seizure control with antiseizure medications tailored to the phenotype, using broad-spectrum agents such as valproate, levetiracetam or lamotrigine for the generalised epilepsies and ethosuximide for absences"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a single gene from the phenotype alone, since the GABA-A subunit epilepsies overlap clinically and require genetic testing."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of gabra1-related developmental and epileptic encephalopathy."
-  }
- ],
- "tables": [
-  {
-   "id": "gabra1_encephalopathy-matrix",
-   "title": "GABRA1-related developmental and epileptic encephalopathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by variants in GABRA1, encoding the alpha-1 subunit of the GABA-A receptor, the principal fast inhibitory",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neurology",
+  "specialty": "Paediatric neurology / Epileptology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Epilepsy genetics references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by variants in GABRA1, encoding the alpha-1 subunit of the GABA-A receptor, the principal fast inhibitory chloride-conducting ligand-gated channel of the brain.",
+      "The phenotype is a continuum: inherited variants tend to cause milder genetic generalised epilepsies such as juvenile myoclonic epilepsy and childhood absence epilepsy, whereas de novo variants cause severe developmental and epileptic encephalopathy.",
+      "Severe cases resemble other early-infantile encephalopathies, including West syndrome (infantile spasms), Ohtahara syndrome and a Dravet-like course.",
+      "Seizure types are varied — myoclonic, absence, focal, tonic-clonic and spasms — with developmental slowing or regression at the encephalopathic end of the spectrum.",
+      "It is one of several GABA-A receptor subunit epilepsies, and identifying the specific gene requires panel or exome testing.",
+      "Loss-of-function or dominant-negative variants reduce GABAergic inhibition, tipping cortical networks towards hyperexcitability.",
+      "Management uses broad-spectrum antiseizure medicines; agents that potentiate GABA-A signalling are often chosen, though response is variable."
     ],
-    [
-     "Key Investigations",
-     "Epilepsy gene panel or trio exome/genome sequencing, EEG, which may show generalised spike-wave, hypsarrhythmia,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "GABRA1 encodes the alpha-1 subunit of the pentameric GABA-A receptor, the most widely expressed alpha subunit, which forms the ligand-gated chloride channel mediating fast inhibitory neurotransmission. Pathogenic variants — frequently de novo missense or truncating changes — reduce surface receptor expression or channel function through loss-of-function or dominant-negative mechanisms, diminishing inhibitory tone and promoting neuronal network hyperexcitability and seizures. The severity gradient broadly parallels the degree of functional impairment, so that near-complete loss produces developmental and epileptic encephalopathy while partial dysfunction yields milder generalised epilepsy. Inheritance is autosomal dominant, with the severe encephalopathic cases usually arising de novo.",
+    "additionalDifferentials": [
+      "Other GABA-A receptor subunit encephalopathies (GABRB3, GABRB2, GABRG2, GABRA5, GABRD)",
+      "SCN1A-related Dravet syndrome",
+      "STXBP1 developmental and epileptic encephalopathy",
+      "KCNQ2 developmental and epileptic encephalopathy",
+      "CDKL5 deficiency disorder",
+      "SCN2A and SCN8A encephalopathies",
+      "Structural or metabolic causes of infantile epileptic encephalopathy"
     ],
-    [
-     "Primary Differentials",
-     "Other GABA-A receptor subunit encephalopathies (GABRB3, GABRB2, GABRG2, GABRA5, GABRD), SCN1A-related Dravet syndrome, STXBP1",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Epilepsy gene panel or trio exome/genome sequencing",
+      "EEG, which may show generalised spike-wave, hypsarrhythmia, burst-suppression or multifocal discharges depending on phenotype",
+      "Brain MRI, usually normal or nonspecific",
+      "Developmental and neuropsychological assessment",
+      "Metabolic screen to exclude treatable mimics",
+      "Parental testing to establish de novo status or inheritance"
     ],
-    [
-     "Management Strategy",
-     "Seizure control with antiseizure medications tailored to the phenotype, using broad-spectrum agents such as valproate,",
-     "Core treatment modality"
+    "redFlags": [
+      "Onset of intractable seizures in early infancy with developmental arrest",
+      "Epileptic spasms with hypsarrhythmia",
+      "Regression of previously acquired skills",
+      "Status epilepticus or seizure clustering with febrile illness"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a single gene from the phenotype alone, since the GABA-A subunit epilepsies overlap clinically and require genetic",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome is wide-ranging: inherited generalised epilepsy phenotypes may be well controlled with preserved cognition, whereas de novo encephalopathic cases often have refractory seizures with moderate-to-severe intellectual disability.",
+    "pitfalls": [
+      "Assuming a single gene from the phenotype alone, since the GABA-A subunit epilepsies overlap clinically and require genetic testing.",
+      "Overlooking milder familial generalised epilepsy caused by the same gene.",
+      "Expecting a diagnostic MRI, as imaging is usually unremarkable.",
+      "Assuming that GABAergic agents will always help, since response is variable despite the mechanism."
+    ],
+    "references": [
+      "Epilepsy genetics reference literature",
+      "Developmental and epileptic encephalopathy guidelines",
+      "Paediatric neurology reference texts"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Seizure control with antiseizure medications tailored to the phenotype, using broad-spectrum agents such as valproate, levetiracetam or lamotrigine for the generalised epilepsies and ethosuximide for absences",
+      "For the encephalopathic and infantile-spasm phenotypes, hormonal therapy with corticotrophin or corticosteroids or treatment with vigabatrin, and consideration of the ketogenic diet in drug-resistant seizures",
+      "Early developmental intervention with physiotherapy, occupational and speech therapy for the associated developmental delay or regression",
+      "Serial EEG and developmental or neuropsychological surveillance to guide treatment",
+      "Genetic counselling for this autosomal dominant disorder, with parental testing to establish de novo status and define recurrence risk",
+      "Multidisciplinary care led by paediatric neurology and epileptology"
     ]
-   ],
-   "caption": "Overview comparison matrix for gabra1-related developmental and epileptic encephalopathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "gabra1-encephalopathy-real-image",
-   "title": "GABRA1-related developmental and epileptic encephalopathy: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "gabra1_encephalopathy-pathway",
+      "title": "GABRA1-related developmental and epileptic encephalopathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by variants in GABRA1, encoding the alpha-1 subunit of the GABA-A receptor, the principal fast inhibitory chloride-conducting ligand-gated channel of the brain.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Onset of intractable seizures in early infancy with developmental arrest",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Epilepsy gene panel or trio exome/genome sequencing, EEG, which may show generalised spike-wave, hypsarrhythmia, burst-suppression or multifocal discharges depending on phenotype, Brain MRI, usually normal or nonspecific"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Seizure control with antiseizure medications tailored to the phenotype, using broad-spectrum agents such as valproate, levetiracetam or lamotrigine for the generalised epilepsies and ethosuximide for absences"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a single gene from the phenotype alone, since the GABA-A subunit epilepsies overlap clinically and require genetic testing."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of gabra1-related developmental and epileptic encephalopathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "gabra1_encephalopathy-matrix",
+      "title": "GABRA1-related developmental and epileptic encephalopathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by variants in GABRA1, encoding the alpha-1 subunit of the GABA-A receptor, the principal fast inhibitory",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Epilepsy gene panel or trio exome/genome sequencing, EEG, which may show generalised spike-wave, hypsarrhythmia,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other GABA-A receptor subunit encephalopathies (GABRB3, GABRB2, GABRG2, GABRA5, GABRD), SCN1A-related Dravet syndrome, STXBP1",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Seizure control with antiseizure medications tailored to the phenotype, using broad-spectrum agents such as valproate,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a single gene from the phenotype alone, since the GABA-A subunit epilepsies overlap clinically and require genetic",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for gabra1-related developmental and epileptic encephalopathy."
+    }
+  ],
+  "diagrams": []
 }

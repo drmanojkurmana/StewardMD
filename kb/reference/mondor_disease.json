@@ -1,173 +1,151 @@
 {
- "id": "mondor_disease",
- "name": "Mondor disease of the breast",
- "aliases": [
-  "Mondor disease",
-  "Mondor's disease",
-  "superficial thrombophlebitis of the breast",
-  "thrombophlebitis of the thoracoepigastric vein"
- ],
- "class": "non_infective",
- "system": "Breast",
- "specialty": "Breast Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Standard breast surgery textbook and benign breast disease guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Mondor disease is superficial thrombophlebitis of the subcutaneous veins of the breast and anterior chest wall, most often the thoracoepigastric or lateral thoracic vein",
-   "It typically presents as a sudden, tender, cord-like subcutaneous structure that becomes more visible when the skin is stretched or the arm is raised",
-   "A characteristic skin dimple or groove may form along the line of the thrombosed vein, which can raise concern for underlying malignancy",
-   "The condition is usually self-limiting and benign, and recognising the palpable cord is key to avoiding unnecessary alarm",
-   "Recognised precipitants include local trauma, breast surgery, tight garments, strenuous exertion, and dehydration, although many cases are idiopathic",
-   "Because the tethering and dimpling can mimic carcinoma, imaging as part of triple assessment is used to reassure and exclude an underlying cancer",
-   "Management is conservative with reassurance, warmth, and simple analgesia, and the cord typically resolves over several weeks",
-   "An associated breast lump or atypical features should prompt full assessment, as Mondor disease can occasionally accompany an underlying malignancy"
+  "id": "mondor_disease",
+  "name": "Mondor disease of the breast",
+  "aliases": [
+    "Mondor disease",
+    "Mondor's disease",
+    "superficial thrombophlebitis of the breast",
+    "thrombophlebitis of the thoracoepigastric vein"
   ],
-  "pathophysiology": "Mondor disease is a localised thrombophlebitis affecting the superficial veins that drain the breast and adjacent chest wall. Thrombosis of the vein, together with an inflammatory reaction in and around the vessel wall, converts the vein into a firm, tender, palpable cord. As the process organises and the vein retracts, traction on the overlying skin produces the characteristic linear groove or dimple. The trigger is often venous stasis or endothelial injury from trauma, surgery, or compression, in keeping with the classic contributors to thrombosis, though a proportion of cases have no identifiable cause.",
-  "additionalDifferentials": [
-   "Breast carcinoma with skin tethering",
-   "Lymphatic obstruction or lymphangitis",
-   "Duct ectasia with skin change",
-   "Cellulitis or breast abscess",
-   "Traumatic fat necrosis",
-   "Superficial thrombophlebitis from other causes"
-  ],
-  "additionalInvestigations": [
-   "Clinical examination demonstrating a tender palpable cord and skin groove",
-   "Ultrasound to confirm a thrombosed superficial vein and exclude an underlying mass",
-   "Mammography in women of appropriate age as part of triple assessment",
-   "Core biopsy of any associated discrete lump",
-   "Assessment for precipitating factors such as recent trauma or surgery"
-  ],
-  "redFlags": [
-   "An associated discrete breast lump or suspicious imaging finding",
-   "Skin changes beyond a simple linear groove, such as thickening or peau d'orange",
-   "Failure of the cord to resolve within the expected timeframe",
-   "Recurrent or migratory thrombophlebitis suggesting an underlying systemic or thrombophilic cause"
-  ],
-  "prognosis": "Mondor disease is benign and self-limiting, with the thrombosed cord typically resolving spontaneously over a few weeks with conservative measures, and recurrence is uncommon.",
-  "pitfalls": [
-   "Mistaking the skin dimpling for a sign of carcinoma and alarming the patient without imaging",
-   "Failing to exclude an underlying malignancy, which can rarely coexist",
-   "Over-treating a self-limiting condition with anticoagulation or surgery",
-   "Overlooking an underlying thrombophilia in recurrent or migratory cases",
-   "Not addressing modifiable precipitants such as tight garments"
-  ],
-  "references": [
-   "Standard breast surgery reference text on benign breast disease",
-   "Guidance on evaluation of breast skin changes"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Conservative supportive care as the condition is benign and self-limiting, with reassurance, simple analgesia or non-steroidal anti-inflammatory drugs and warm compresses",
-   "Identify and address precipitants such as local trauma, tight garments, strenuous exertion and dehydration",
-   "Complete triple assessment with clinical examination, ultrasound and age-appropriate mammography to exclude an underlying breast carcinoma, since tethering and dimpling can mimic malignancy",
-   "Advise temporary restriction of strenuous upper-limb activity during the acute phase to aid resolution of the thrombosed cord",
-   "Monitor for spontaneous resolution and consider evaluation for an underlying thrombophilia or malignancy if the condition is recurrent or atypical"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "mondor_disease-pathway",
-   "title": "Mondor disease of the breast: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Mondor disease is superficial thrombophlebitis of the subcutaneous veins of the breast and anterior chest wall, most often the thoracoepigastric or lateral thoracic vein",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: An associated discrete breast lump or suspicious imaging finding",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical examination demonstrating a tender palpable cord and skin groove, Ultrasound to confirm a thrombosed superficial vein and exclude an underlying mass, Mammography in women of appropriate age as part of triple"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Conservative supportive care as the condition is benign and self-limiting, with reassurance, simple analgesia or non-steroidal anti-inflammatory drugs and warm compresses"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking the skin dimpling for a sign of carcinoma and alarming the patient without imaging"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of mondor disease of the breast."
-  }
- ],
- "tables": [
-  {
-   "id": "mondor_disease-matrix",
-   "title": "Mondor disease of the breast: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Mondor disease is superficial thrombophlebitis of the subcutaneous veins of the breast and anterior chest wall, most often the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Breast",
+  "specialty": "Breast Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Standard breast surgery textbook and benign breast disease guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Mondor disease is superficial thrombophlebitis of the subcutaneous veins of the breast and anterior chest wall, most often the thoracoepigastric or lateral thoracic vein",
+      "It typically presents as a sudden, tender, cord-like subcutaneous structure that becomes more visible when the skin is stretched or the arm is raised",
+      "A characteristic skin dimple or groove may form along the line of the thrombosed vein, which can raise concern for underlying malignancy",
+      "The condition is usually self-limiting and benign, and recognising the palpable cord is key to avoiding unnecessary alarm",
+      "Recognised precipitants include local trauma, breast surgery, tight garments, strenuous exertion, and dehydration, although many cases are idiopathic",
+      "Because the tethering and dimpling can mimic carcinoma, imaging as part of triple assessment is used to reassure and exclude an underlying cancer",
+      "Management is conservative with reassurance, warmth, and simple analgesia, and the cord typically resolves over several weeks",
+      "An associated breast lump or atypical features should prompt full assessment, as Mondor disease can occasionally accompany an underlying malignancy"
     ],
-    [
-     "Key Investigations",
-     "Clinical examination demonstrating a tender palpable cord and skin groove, Ultrasound to confirm a thrombosed superficial vein",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Mondor disease is a localised thrombophlebitis affecting the superficial veins that drain the breast and adjacent chest wall. Thrombosis of the vein, together with an inflammatory reaction in and around the vessel wall, converts the vein into a firm, tender, palpable cord. As the process organises and the vein retracts, traction on the overlying skin produces the characteristic linear groove or dimple. The trigger is often venous stasis or endothelial injury from trauma, surgery, or compression, in keeping with the classic contributors to thrombosis, though a proportion of cases have no identifiable cause.",
+    "additionalDifferentials": [
+      "Breast carcinoma with skin tethering",
+      "Lymphatic obstruction or lymphangitis",
+      "Duct ectasia with skin change",
+      "Cellulitis or breast abscess",
+      "Traumatic fat necrosis",
+      "Superficial thrombophlebitis from other causes"
     ],
-    [
-     "Primary Differentials",
-     "Breast carcinoma with skin tethering, Lymphatic obstruction or lymphangitis, Duct ectasia with skin change",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical examination demonstrating a tender palpable cord and skin groove",
+      "Ultrasound to confirm a thrombosed superficial vein and exclude an underlying mass",
+      "Mammography in women of appropriate age as part of triple assessment",
+      "Core biopsy of any associated discrete lump",
+      "Assessment for precipitating factors such as recent trauma or surgery"
     ],
-    [
-     "Management Strategy",
-     "Conservative supportive care as the condition is benign and self-limiting, with reassurance, simple analgesia or non-steroidal",
-     "Core treatment modality"
+    "redFlags": [
+      "An associated discrete breast lump or suspicious imaging finding",
+      "Skin changes beyond a simple linear groove, such as thickening or peau d'orange",
+      "Failure of the cord to resolve within the expected timeframe",
+      "Recurrent or migratory thrombophlebitis suggesting an underlying systemic or thrombophilic cause"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking the skin dimpling for a sign of carcinoma and alarming the patient without imaging",
-     "Prevent diagnostic or management error"
+    "prognosis": "Mondor disease is benign and self-limiting, with the thrombosed cord typically resolving spontaneously over a few weeks with conservative measures, and recurrence is uncommon.",
+    "pitfalls": [
+      "Mistaking the skin dimpling for a sign of carcinoma and alarming the patient without imaging",
+      "Failing to exclude an underlying malignancy, which can rarely coexist",
+      "Over-treating a self-limiting condition with anticoagulation or surgery",
+      "Overlooking an underlying thrombophilia in recurrent or migratory cases",
+      "Not addressing modifiable precipitants such as tight garments"
+    ],
+    "references": [
+      "Standard breast surgery reference text on benign breast disease",
+      "Guidance on evaluation of breast skin changes"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Conservative supportive care as the condition is benign and self-limiting, with reassurance, simple analgesia or non-steroidal anti-inflammatory drugs and warm compresses",
+      "Identify and address precipitants such as local trauma, tight garments, strenuous exertion and dehydration",
+      "Complete triple assessment with clinical examination, ultrasound and age-appropriate mammography to exclude an underlying breast carcinoma, since tethering and dimpling can mimic malignancy",
+      "Advise temporary restriction of strenuous upper-limb activity during the acute phase to aid resolution of the thrombosed cord",
+      "Monitor for spontaneous resolution and consider evaluation for an underlying thrombophilia or malignancy if the condition is recurrent or atypical"
     ]
-   ],
-   "caption": "Overview comparison matrix for mondor disease of the breast."
-  }
- ],
- "diagrams": [
-  {
-   "id": "mondor-disease-real-image",
-   "title": "Mondor disease of the breast: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "mondor_disease-pathway",
+      "title": "Mondor disease of the breast: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Mondor disease is superficial thrombophlebitis of the subcutaneous veins of the breast and anterior chest wall, most often the thoracoepigastric or lateral thoracic vein",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: An associated discrete breast lump or suspicious imaging finding",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical examination demonstrating a tender palpable cord and skin groove, Ultrasound to confirm a thrombosed superficial vein and exclude an underlying mass, Mammography in women of appropriate age as part of triple"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Conservative supportive care as the condition is benign and self-limiting, with reassurance, simple analgesia or non-steroidal anti-inflammatory drugs and warm compresses"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking the skin dimpling for a sign of carcinoma and alarming the patient without imaging"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of mondor disease of the breast."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "mondor_disease-matrix",
+      "title": "Mondor disease of the breast: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Mondor disease is superficial thrombophlebitis of the subcutaneous veins of the breast and anterior chest wall, most often the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical examination demonstrating a tender palpable cord and skin groove, Ultrasound to confirm a thrombosed superficial vein",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Breast carcinoma with skin tethering, Lymphatic obstruction or lymphangitis, Duct ectasia with skin change",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Conservative supportive care as the condition is benign and self-limiting, with reassurance, simple analgesia or non-steroidal",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking the skin dimpling for a sign of carcinoma and alarming the patient without imaging",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for mondor disease of the breast."
+    }
+  ],
+  "diagrams": []
 }

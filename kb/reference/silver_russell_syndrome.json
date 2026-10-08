@@ -1,172 +1,150 @@
 {
- "id": "silver_russell_syndrome",
- "name": "Silver-Russell syndrome",
- "aliases": [
-  "SRS",
-  "Russell-Silver syndrome",
-  "imprinting-related growth restriction"
- ],
- "class": "non_infective",
- "system": "Genetics / Dysmorphology",
- "specialty": "Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Smith's Recognizable Patterns of Human Malformation",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An imprinting disorder causing severe pre- and postnatal growth restriction with relative macrocephaly (head sparing) at birth",
-   "Characteristic features include a triangular face, broad forehead, body asymmetry (hemihypotrophy), and fifth-finger clinodactyly",
-   "Feeding difficulties, marked failure to thrive, and fasting hypoglycaemia due to low muscle and fat mass are common in infancy",
-   "Most cases are explained by loss of methylation at the IC1 (H19/IGF2) region on chromosome 11p15 or by maternal uniparental disomy of chromosome 7",
-   "It is broadly the molecular mirror image of Beckwith-Wiedemann syndrome, with reduced rather than increased IGF2-driven growth",
-   "The Netchine-Harbison clinical scoring system guides diagnosis and directs molecular testing when features are suggestive",
-   "Management centres on optimising nutrition and growth, monitoring for hypoglycaemia, and endocrine input including growth-promoting therapy where indicated"
+  "id": "silver_russell_syndrome",
+  "name": "Silver-Russell syndrome",
+  "aliases": [
+    "SRS",
+    "Russell-Silver syndrome",
+    "imprinting-related growth restriction"
   ],
-  "pathophysiology": "Silver-Russell syndrome is an imprinting disorder most often caused by hypomethylation of the paternally derived IC1 domain at chromosome 11p15, which reduces expression of the growth-promoting gene IGF2, or by maternal uniparental disomy of chromosome 7. Reduced IGF2-driven growth signalling produces profound intrauterine and postnatal growth restriction with relative sparing of head growth. Because the affected loci are imprinted, the parental origin of the epigenetic or chromosomal change determines the phenotype, and body asymmetry reflects mosaic distribution of the molecular defect.",
-  "additionalDifferentials": [
-   "Constitutional small-for-gestational-age without catch-up growth",
-   "Temple syndrome and other imprinting disorders",
-   "3-M syndrome and other primordial short-stature syndromes",
-   "IMAGe syndrome",
-   "Fetal alcohol spectrum disorder",
-   "Mulibrey nanism"
-  ],
-  "additionalInvestigations": [
-   "Methylation analysis of the 11p15 IC1 region and testing for maternal uniparental disomy of chromosome 7",
-   "Chromosomal microarray to exclude copy-number causes of growth restriction",
-   "Blood glucose monitoring for fasting hypoglycaemia in infancy",
-   "Growth monitoring with assessment of body asymmetry and limb-length discrepancy",
-   "Endocrine evaluation including growth hormone axis assessment",
-   "Nutritional and feeding assessment for failure to thrive"
-  ],
-  "redFlags": [
-   "Fasting hypoglycaemia risking neurological harm, especially during intercurrent illness",
-   "Severe failure to thrive requiring intensive nutritional support",
-   "Significant limb-length discrepancy affecting gait and posture",
-   "Signs of relative intracranial disproportion or raised pressure requiring assessment"
-  ],
-  "prognosis": "With early nutritional optimisation, hypoglycaemia prevention, and endocrine management, growth and general health improve, though final stature is often below average. Cognition is usually normal or near normal, and adult outcomes are generally favourable with appropriate support.",
-  "pitfalls": [
-   "Attributing severe growth restriction to placental insufficiency alone and not testing for imprinting defects",
-   "Missing fasting hypoglycaemia because of the child's small size and low reserves",
-   "Overlooking body asymmetry, which is a useful diagnostic clue",
-   "Failing to recognise the mirror-image relationship with Beckwith-Wiedemann when interpreting 11p15 results"
-  ],
-  "references": [
-   "Smith's Recognizable Patterns of Human Malformation",
-   "International consensus statement on the diagnosis and management of Silver-Russell syndrome"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Nutritional rehabilitation with feeding support and enteral feeding where needed to address failure to thrive, avoiding rapid catch-up adiposity",
-   "Prevention and treatment of fasting hypoglycaemia through regular feeds, uncooked cornstarch and an emergency regimen during illness, given the low muscle and fat mass",
-   "Recombinant growth hormone therapy to improve growth velocity, body composition and final stature",
-   "Orthopaedic management of body asymmetry and limb-length discrepancy with shoe raise or surgery, plus monitoring for and treatment of early or precocious puberty with a gonadotropin-releasing hormone analogue",
-   "Coordinated care through clinical genetics, paediatric endocrinology, dietetics, gastroenterology and orthopaedics",
-   "Genetic counselling with molecular confirmation of 11p15 hypomethylation or maternal uniparental disomy of chromosome 7, and discussion of recurrence risk"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "silver_russell_syndrome-pathway",
-   "title": "Silver-Russell syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An imprinting disorder causing severe pre- and postnatal growth restriction with relative macrocephaly (head sparing) at birth",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Fasting hypoglycaemia risking neurological harm, especially during intercurrent illness",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Methylation analysis of the 11p15 IC1 region and testing for maternal uniparental disomy of chromosome 7, Chromosomal microarray to exclude copy-number causes of growth restriction, Blood glucose monitoring for fasting"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Nutritional rehabilitation with feeding support and enteral feeding where needed to address failure to thrive, avoiding rapid catch-up adiposity"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing severe growth restriction to placental insufficiency alone and not testing for imprinting defects"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of silver-russell syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "silver_russell_syndrome-matrix",
-   "title": "Silver-Russell syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An imprinting disorder causing severe pre- and postnatal growth restriction with relative macrocephaly (head sparing) at birth",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetics / Dysmorphology",
+  "specialty": "Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Smith's Recognizable Patterns of Human Malformation",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An imprinting disorder causing severe pre- and postnatal growth restriction with relative macrocephaly (head sparing) at birth",
+      "Characteristic features include a triangular face, broad forehead, body asymmetry (hemihypotrophy), and fifth-finger clinodactyly",
+      "Feeding difficulties, marked failure to thrive, and fasting hypoglycaemia due to low muscle and fat mass are common in infancy",
+      "Most cases are explained by loss of methylation at the IC1 (H19/IGF2) region on chromosome 11p15 or by maternal uniparental disomy of chromosome 7",
+      "It is broadly the molecular mirror image of Beckwith-Wiedemann syndrome, with reduced rather than increased IGF2-driven growth",
+      "The Netchine-Harbison clinical scoring system guides diagnosis and directs molecular testing when features are suggestive",
+      "Management centres on optimising nutrition and growth, monitoring for hypoglycaemia, and endocrine input including growth-promoting therapy where indicated"
     ],
-    [
-     "Key Investigations",
-     "Methylation analysis of the 11p15 IC1 region and testing for maternal uniparental disomy of chromosome 7, Chromosomal microarray",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Silver-Russell syndrome is an imprinting disorder most often caused by hypomethylation of the paternally derived IC1 domain at chromosome 11p15, which reduces expression of the growth-promoting gene IGF2, or by maternal uniparental disomy of chromosome 7. Reduced IGF2-driven growth signalling produces profound intrauterine and postnatal growth restriction with relative sparing of head growth. Because the affected loci are imprinted, the parental origin of the epigenetic or chromosomal change determines the phenotype, and body asymmetry reflects mosaic distribution of the molecular defect.",
+    "additionalDifferentials": [
+      "Constitutional small-for-gestational-age without catch-up growth",
+      "Temple syndrome and other imprinting disorders",
+      "3-M syndrome and other primordial short-stature syndromes",
+      "IMAGe syndrome",
+      "Fetal alcohol spectrum disorder",
+      "Mulibrey nanism"
     ],
-    [
-     "Primary Differentials",
-     "Constitutional small-for-gestational-age without catch-up growth, Temple syndrome and other imprinting disorders, 3-M syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Methylation analysis of the 11p15 IC1 region and testing for maternal uniparental disomy of chromosome 7",
+      "Chromosomal microarray to exclude copy-number causes of growth restriction",
+      "Blood glucose monitoring for fasting hypoglycaemia in infancy",
+      "Growth monitoring with assessment of body asymmetry and limb-length discrepancy",
+      "Endocrine evaluation including growth hormone axis assessment",
+      "Nutritional and feeding assessment for failure to thrive"
     ],
-    [
-     "Management Strategy",
-     "Nutritional rehabilitation with feeding support and enteral feeding where needed to address failure to thrive, avoiding rapid",
-     "Core treatment modality"
+    "redFlags": [
+      "Fasting hypoglycaemia risking neurological harm, especially during intercurrent illness",
+      "Severe failure to thrive requiring intensive nutritional support",
+      "Significant limb-length discrepancy affecting gait and posture",
+      "Signs of relative intracranial disproportion or raised pressure requiring assessment"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing severe growth restriction to placental insufficiency alone and not testing for imprinting defects",
-     "Prevent diagnostic or management error"
+    "prognosis": "With early nutritional optimisation, hypoglycaemia prevention, and endocrine management, growth and general health improve, though final stature is often below average. Cognition is usually normal or near normal, and adult outcomes are generally favourable with appropriate support.",
+    "pitfalls": [
+      "Attributing severe growth restriction to placental insufficiency alone and not testing for imprinting defects",
+      "Missing fasting hypoglycaemia because of the child's small size and low reserves",
+      "Overlooking body asymmetry, which is a useful diagnostic clue",
+      "Failing to recognise the mirror-image relationship with Beckwith-Wiedemann when interpreting 11p15 results"
+    ],
+    "references": [
+      "Smith's Recognizable Patterns of Human Malformation",
+      "International consensus statement on the diagnosis and management of Silver-Russell syndrome"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Nutritional rehabilitation with feeding support and enteral feeding where needed to address failure to thrive, avoiding rapid catch-up adiposity",
+      "Prevention and treatment of fasting hypoglycaemia through regular feeds, uncooked cornstarch and an emergency regimen during illness, given the low muscle and fat mass",
+      "Recombinant growth hormone therapy to improve growth velocity, body composition and final stature",
+      "Orthopaedic management of body asymmetry and limb-length discrepancy with shoe raise or surgery, plus monitoring for and treatment of early or precocious puberty with a gonadotropin-releasing hormone analogue",
+      "Coordinated care through clinical genetics, paediatric endocrinology, dietetics, gastroenterology and orthopaedics",
+      "Genetic counselling with molecular confirmation of 11p15 hypomethylation or maternal uniparental disomy of chromosome 7, and discussion of recurrence risk"
     ]
-   ],
-   "caption": "Overview comparison matrix for silver-russell syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "silver-russell-syndrome-real-image",
-   "title": "Silver-Russell syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "silver_russell_syndrome-pathway",
+      "title": "Silver-Russell syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An imprinting disorder causing severe pre- and postnatal growth restriction with relative macrocephaly (head sparing) at birth",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Fasting hypoglycaemia risking neurological harm, especially during intercurrent illness",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Methylation analysis of the 11p15 IC1 region and testing for maternal uniparental disomy of chromosome 7, Chromosomal microarray to exclude copy-number causes of growth restriction, Blood glucose monitoring for fasting"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Nutritional rehabilitation with feeding support and enteral feeding where needed to address failure to thrive, avoiding rapid catch-up adiposity"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing severe growth restriction to placental insufficiency alone and not testing for imprinting defects"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of silver-russell syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "silver_russell_syndrome-matrix",
+      "title": "Silver-Russell syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An imprinting disorder causing severe pre- and postnatal growth restriction with relative macrocephaly (head sparing) at birth",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Methylation analysis of the 11p15 IC1 region and testing for maternal uniparental disomy of chromosome 7, Chromosomal microarray",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Constitutional small-for-gestational-age without catch-up growth, Temple syndrome and other imprinting disorders, 3-M syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Nutritional rehabilitation with feeding support and enteral feeding where needed to address failure to thrive, avoiding rapid",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing severe growth restriction to placental insufficiency alone and not testing for imprinting defects",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for silver-russell syndrome."
+    }
+  ],
+  "diagrams": []
 }

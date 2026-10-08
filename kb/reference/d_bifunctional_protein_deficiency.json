@@ -1,172 +1,150 @@
 {
- "id": "d_bifunctional_protein_deficiency",
- "name": "D-bifunctional protein deficiency",
- "aliases": [
-  "HSD17B4 deficiency",
-  "D-bifunctional protein deficiency (DBP)",
-  "17-beta-hydroxysteroid dehydrogenase type 4 deficiency",
-  "peroxisomal bifunctional enzyme deficiency"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Scriver's Online Metabolic and Molecular Bases of Inherited Disease (OMMBID) / Nelson Textbook of Paediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive single-enzyme peroxisomal beta-oxidation defect caused by HSD17B4 mutations affecting the D-bifunctional protein, which carries both hydratase and dehydrogenase activities",
-   "It is the most common isolated peroxisomal beta-oxidation defect and phenotypically overlaps closely with Zellweger-spectrum disorders",
-   "Neonates typically present with profound hypotonia, neonatal-onset seizures, poor feeding, and craniofacial dysmorphism resembling Zellweger syndrome",
-   "Biochemically there is elevation of very-long-chain fatty acids together with raised pristanic acid and bile-acid intermediates (DHCA/THCA), reflecting the enzyme's role in both straight- and branched-chain oxidation",
-   "Peroxisome biogenesis is intact, so structural peroxisome assembly markers are normal and the defect is at the level of a single beta-oxidation enzyme",
-   "Diagnosis combines the biochemical profile, fibroblast enzyme/functional studies, and HSD17B4 sequencing; management is supportive"
+  "id": "d_bifunctional_protein_deficiency",
+  "name": "D-bifunctional protein deficiency",
+  "aliases": [
+    "HSD17B4 deficiency",
+    "D-bifunctional protein deficiency (DBP)",
+    "17-beta-hydroxysteroid dehydrogenase type 4 deficiency",
+    "peroxisomal bifunctional enzyme deficiency"
   ],
-  "pathophysiology": "D-bifunctional protein deficiency arises from HSD17B4 mutations that impair the D-bifunctional protein, a peroxisomal enzyme providing the 2-enoyl-CoA hydratase and 3-hydroxyacyl-CoA dehydrogenase steps of peroxisomal beta-oxidation for both very-long-chain and branched-chain (pristanic) fatty acids and bile-acid precursors. Loss of these activities causes accumulation of VLCFA, pristanic acid, and bile-acid intermediates. The resulting lipid toxicity and abnormal neuronal migration produce severe neonatal encephalopathy with seizures, hypotonia, and, in many cases, structural brain malformation, phenocopying the Zellweger spectrum despite normal peroxisome assembly.",
-  "additionalDifferentials": [
-   "Zellweger-spectrum peroxisome biogenesis disorders",
-   "Acyl-CoA oxidase deficiency (another isolated beta-oxidation enzyme defect)",
-   "Neonatal adrenoleukodystrophy and X-linked adrenoleukodystrophy",
-   "Non-ketotic hyperglycinaemia and other neonatal epileptic encephalopathies",
-   "Mitochondrial neonatal encephalopathies",
-   "Congenital disorders of glycosylation presenting with hypotonia and seizures"
-  ],
-  "additionalInvestigations": [
-   "Plasma very-long-chain fatty acids, pristanic and phytanic acids, and bile-acid intermediates (DHCA/THCA)",
-   "HSD17B4 gene sequencing to confirm the diagnosis and define the enzymatic subtype",
-   "Fibroblast studies of peroxisomal beta-oxidation and specific enzyme activities",
-   "Brain MRI to identify neuronal migration abnormalities and demyelination",
-   "EEG for characterisation of the neonatal seizure disorder",
-   "Assessment confirming intact peroxisome biogenesis (normal plasmalogens/assembly markers)"
-  ],
-  "redFlags": [
-   "Neonatal-onset intractable seizures with profound hypotonia",
-   "Feeding failure and failure to thrive requiring nutritional support",
-   "Structural brain malformation on imaging indicating disturbed neuronal migration",
-   "Rapid early neurological deterioration"
-  ],
-  "prognosis": "The classic presentation is severe, with most affected infants having little developmental progress, refractory seizures, and death typically within the first years of life, although milder variants with longer survival are recognised. Treatment is supportive without a disease-modifying option.",
-  "pitfalls": [
-   "Diagnosing Zellweger syndrome without pursuing single-enzyme peroxisomal defects when biogenesis markers are normal",
-   "Relying on VLCFA alone and missing the branched-chain and bile-acid abnormalities that point to the bifunctional protein",
-   "Underestimating milder phenotypes that survive longer and present beyond the neonatal period",
-   "Not offering genetic counselling and carrier testing given the autosomal recessive inheritance"
-  ],
-  "references": [
-   "Scriver's Online Metabolic and Molecular Bases of Inherited Disease (OMMBID)",
-   "Nelson Textbook of Paediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage supportively through metabolic medicine and neurology, as there is no disease-modifying therapy for the underlying peroxisomal beta-oxidation defect",
-   "Treat neonatal-onset seizures with antiepileptic drugs, recognising that the epilepsy is frequently refractory",
-   "Provide feeding support, often nasogastric or gastrostomy feeding, for poor feeding and profound hypotonia",
-   "Give respiratory support and treat aspiration and recurrent chest infection as they arise",
-   "Offer genetic counselling for this autosomal recessive HSD17B4 disorder, with carrier testing and prenatal or reproductive options for the family",
-   "Involve palliative care early, given the severe prognosis with little developmental progress and death typically in the first years of life"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "d_bifunctional_protein_deficiency-pathway",
-   "title": "D-bifunctional protein deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive single-enzyme peroxisomal beta-oxidation defect caused by HSD17B4 mutations affecting the D-bifunctional protein, which carries both hydratase and dehydrogenase activities",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Neonatal-onset intractable seizures with profound hypotonia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plasma very-long-chain fatty acids, pristanic and phytanic acids, and bile-acid intermediates (DHCA/THCA), HSD17B4 gene sequencing to confirm the diagnosis and define the enzymatic subtype, Fibroblast studies of"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage supportively through metabolic medicine and neurology, as there is no disease-modifying therapy for the underlying peroxisomal beta-oxidation defect"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Diagnosing Zellweger syndrome without pursuing single-enzyme peroxisomal defects when biogenesis markers are normal"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of d-bifunctional protein deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "d_bifunctional_protein_deficiency-matrix",
-   "title": "D-bifunctional protein deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive single-enzyme peroxisomal beta-oxidation defect caused by HSD17B4 mutations affecting the D-bifunctional",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Scriver's Online Metabolic and Molecular Bases of Inherited Disease (OMMBID) / Nelson Textbook of Paediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive single-enzyme peroxisomal beta-oxidation defect caused by HSD17B4 mutations affecting the D-bifunctional protein, which carries both hydratase and dehydrogenase activities",
+      "It is the most common isolated peroxisomal beta-oxidation defect and phenotypically overlaps closely with Zellweger-spectrum disorders",
+      "Neonates typically present with profound hypotonia, neonatal-onset seizures, poor feeding, and craniofacial dysmorphism resembling Zellweger syndrome",
+      "Biochemically there is elevation of very-long-chain fatty acids together with raised pristanic acid and bile-acid intermediates (DHCA/THCA), reflecting the enzyme's role in both straight- and branched-chain oxidation",
+      "Peroxisome biogenesis is intact, so structural peroxisome assembly markers are normal and the defect is at the level of a single beta-oxidation enzyme",
+      "Diagnosis combines the biochemical profile, fibroblast enzyme/functional studies, and HSD17B4 sequencing; management is supportive"
     ],
-    [
-     "Key Investigations",
-     "Plasma very-long-chain fatty acids, pristanic and phytanic acids, and bile-acid intermediates (DHCA/THCA), HSD17B4 gene",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "D-bifunctional protein deficiency arises from HSD17B4 mutations that impair the D-bifunctional protein, a peroxisomal enzyme providing the 2-enoyl-CoA hydratase and 3-hydroxyacyl-CoA dehydrogenase steps of peroxisomal beta-oxidation for both very-long-chain and branched-chain (pristanic) fatty acids and bile-acid precursors. Loss of these activities causes accumulation of VLCFA, pristanic acid, and bile-acid intermediates. The resulting lipid toxicity and abnormal neuronal migration produce severe neonatal encephalopathy with seizures, hypotonia, and, in many cases, structural brain malformation, phenocopying the Zellweger spectrum despite normal peroxisome assembly.",
+    "additionalDifferentials": [
+      "Zellweger-spectrum peroxisome biogenesis disorders",
+      "Acyl-CoA oxidase deficiency (another isolated beta-oxidation enzyme defect)",
+      "Neonatal adrenoleukodystrophy and X-linked adrenoleukodystrophy",
+      "Non-ketotic hyperglycinaemia and other neonatal epileptic encephalopathies",
+      "Mitochondrial neonatal encephalopathies",
+      "Congenital disorders of glycosylation presenting with hypotonia and seizures"
     ],
-    [
-     "Primary Differentials",
-     "Zellweger-spectrum peroxisome biogenesis disorders, Acyl-CoA oxidase deficiency (another isolated beta-oxidation enzyme defect),",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plasma very-long-chain fatty acids, pristanic and phytanic acids, and bile-acid intermediates (DHCA/THCA)",
+      "HSD17B4 gene sequencing to confirm the diagnosis and define the enzymatic subtype",
+      "Fibroblast studies of peroxisomal beta-oxidation and specific enzyme activities",
+      "Brain MRI to identify neuronal migration abnormalities and demyelination",
+      "EEG for characterisation of the neonatal seizure disorder",
+      "Assessment confirming intact peroxisome biogenesis (normal plasmalogens/assembly markers)"
     ],
-    [
-     "Management Strategy",
-     "Manage supportively through metabolic medicine and neurology, as there is no disease-modifying therapy for the underlying",
-     "Core treatment modality"
+    "redFlags": [
+      "Neonatal-onset intractable seizures with profound hypotonia",
+      "Feeding failure and failure to thrive requiring nutritional support",
+      "Structural brain malformation on imaging indicating disturbed neuronal migration",
+      "Rapid early neurological deterioration"
     ],
-    [
-     "Clinical Pitfall",
-     "Diagnosing Zellweger syndrome without pursuing single-enzyme peroxisomal defects when biogenesis markers are normal",
-     "Prevent diagnostic or management error"
+    "prognosis": "The classic presentation is severe, with most affected infants having little developmental progress, refractory seizures, and death typically within the first years of life, although milder variants with longer survival are recognised. Treatment is supportive without a disease-modifying option.",
+    "pitfalls": [
+      "Diagnosing Zellweger syndrome without pursuing single-enzyme peroxisomal defects when biogenesis markers are normal",
+      "Relying on VLCFA alone and missing the branched-chain and bile-acid abnormalities that point to the bifunctional protein",
+      "Underestimating milder phenotypes that survive longer and present beyond the neonatal period",
+      "Not offering genetic counselling and carrier testing given the autosomal recessive inheritance"
+    ],
+    "references": [
+      "Scriver's Online Metabolic and Molecular Bases of Inherited Disease (OMMBID)",
+      "Nelson Textbook of Paediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage supportively through metabolic medicine and neurology, as there is no disease-modifying therapy for the underlying peroxisomal beta-oxidation defect",
+      "Treat neonatal-onset seizures with antiepileptic drugs, recognising that the epilepsy is frequently refractory",
+      "Provide feeding support, often nasogastric or gastrostomy feeding, for poor feeding and profound hypotonia",
+      "Give respiratory support and treat aspiration and recurrent chest infection as they arise",
+      "Offer genetic counselling for this autosomal recessive HSD17B4 disorder, with carrier testing and prenatal or reproductive options for the family",
+      "Involve palliative care early, given the severe prognosis with little developmental progress and death typically in the first years of life"
     ]
-   ],
-   "caption": "Overview comparison matrix for d-bifunctional protein deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "d-bifunctional-protein-deficiency-real-image",
-   "title": "D-bifunctional protein deficiency: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "d_bifunctional_protein_deficiency-pathway",
+      "title": "D-bifunctional protein deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive single-enzyme peroxisomal beta-oxidation defect caused by HSD17B4 mutations affecting the D-bifunctional protein, which carries both hydratase and dehydrogenase activities",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Neonatal-onset intractable seizures with profound hypotonia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plasma very-long-chain fatty acids, pristanic and phytanic acids, and bile-acid intermediates (DHCA/THCA), HSD17B4 gene sequencing to confirm the diagnosis and define the enzymatic subtype, Fibroblast studies of"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage supportively through metabolic medicine and neurology, as there is no disease-modifying therapy for the underlying peroxisomal beta-oxidation defect"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Diagnosing Zellweger syndrome without pursuing single-enzyme peroxisomal defects when biogenesis markers are normal"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of d-bifunctional protein deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "d_bifunctional_protein_deficiency-matrix",
+      "title": "D-bifunctional protein deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive single-enzyme peroxisomal beta-oxidation defect caused by HSD17B4 mutations affecting the D-bifunctional",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plasma very-long-chain fatty acids, pristanic and phytanic acids, and bile-acid intermediates (DHCA/THCA), HSD17B4 gene",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Zellweger-spectrum peroxisome biogenesis disorders, Acyl-CoA oxidase deficiency (another isolated beta-oxidation enzyme defect),",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage supportively through metabolic medicine and neurology, as there is no disease-modifying therapy for the underlying",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Diagnosing Zellweger syndrome without pursuing single-enzyme peroxisomal defects when biogenesis markers are normal",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for d-bifunctional protein deficiency."
+    }
+  ],
+  "diagrams": []
 }

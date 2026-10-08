@@ -1,175 +1,153 @@
 {
- "id": "chemical_eye_injury",
- "name": "Chemical eye injury",
- "aliases": [
-  "chemical burn of the eye",
-  "ocular chemical injury",
-  "alkali burn",
-  "acid burn",
-  "caustic eye injury"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A true ocular emergency in which immediate, copious irrigation takes priority over history-taking and detailed examination",
-   "Alkali burns are generally more damaging than acid burns because alkalis penetrate tissues rapidly by liquefactive necrosis, whereas acids cause coagulative necrosis that tends to limit deeper penetration",
-   "Irrigation should continue until the tear film pH returns to neutral, and the fornices must be swept and everted to remove any retained particulate matter (e.g. lime or cement)",
-   "The degree of limbal ischaemia (blanching) and corneal clarity are the key prognostic signs, forming the basis of grading systems such as Roper-Hall and Dua",
-   "A deceptively white, non-injected eye after an alkali burn can indicate severe limbal ischaemia rather than a mild injury",
-   "Later management principles aim to promote epithelial healing, control inflammation with topical steroids, prevent infection, support the ocular surface, and control intraocular pressure",
-   "Severe burns can be complicated by limbal stem cell deficiency, symblepharon, corneal melting and perforation, glaucoma, and eventual scarring",
-   "Bilateral injury and workplace or assault-related exposures require attention to both eyes and appropriate safeguarding and occupational follow-up"
+  "id": "chemical_eye_injury",
+  "name": "Chemical eye injury",
+  "aliases": [
+    "chemical burn of the eye",
+    "ocular chemical injury",
+    "alkali burn",
+    "acid burn",
+    "caustic eye injury"
   ],
-  "pathophysiology": "Chemical injury damages the ocular surface through direct chemical action on cells and the extracellular matrix. Alkalis dissolve cell membrane lipids and penetrate deeply by liquefactive necrosis, reaching the anterior chamber and damaging the limbal stem cells, corneal stroma, trabecular meshwork, and intraocular structures. Acids denature and precipitate proteins, producing coagulative necrosis that can form a barrier limiting deeper spread, though strong acids still cause severe injury. Destruction of limbal stem cells impairs corneal epithelial regeneration, leading to persistent epithelial defects, conjunctivalisation, and scarring, while ischaemia and inflammation predispose to stromal melting and perforation.",
-  "additionalDifferentials": [
-   "Thermal burn of the ocular surface",
-   "Ultraviolet or radiation keratitis (e.g. welder's flash)",
-   "Severe infective keratitis or corneal ulcer",
-   "Toxic keratoconjunctivitis from other agents",
-   "Corneal foreign body or abrasion"
-  ],
-  "additionalInvestigations": [
-   "Measurement of ocular surface pH before and after irrigation to guide continued irrigation",
-   "Slit-lamp examination with fluorescein to assess epithelial defect size and corneal clarity",
-   "Assessment and grading of limbal and conjunctival ischaemia",
-   "Intraocular pressure measurement, as burns can cause acute and chronic pressure rise",
-   "Eyelid eversion and fornix inspection for retained particulate chemical"
-  ],
-  "redFlags": [
-   "Any chemical exposure requires immediate copious irrigation before other assessment, as delay worsens outcome",
-   "Extensive limbal blanching/ischaemia and a hazy or opaque cornea indicating a severe, sight-threatening burn",
-   "A deceptively white, quiet eye masking severe ischaemic damage after alkali injury",
-   "Rising intraocular pressure, corneal melting, or threatened perforation requiring urgent specialist care"
-  ],
-  "prognosis": "Prognosis correlates closely with the initial extent of limbal ischaemia and corneal opacification; mild burns with minimal limbal involvement usually heal well, whereas severe burns with extensive limbal stem cell loss risk chronic surface failure, scarring, and permanent visual loss despite intensive treatment. Prompt and thorough irrigation is the single most important factor improving outcome.",
-  "pitfalls": [
-   "Delaying irrigation to complete history or examination first",
-   "Stopping irrigation before the pH has normalised or failing to check pH",
-   "Not everting the lids and sweeping the fornices, leaving retained caustic particles",
-   "Underestimating a white, non-inflamed eye that actually reflects severe limbal ischaemia"
-  ],
-  "references": [
-   "Parsons' Diseases of the Eye",
-   "Kanski's Clinical Ophthalmology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Immediate and copious irrigation continued until the tear-film pH returns to neutral, with eyelid eversion and sweeping of the fornices to remove retained particulate such as lime or cement, taking priority over history and examination",
-   "Promote epithelial healing with intensive lubrication, a bandage contact lens and ascorbate or citrate therapy, and autologous serum drops in severe surface failure",
-   "Control inflammation with topical corticosteroids in the early phase, adding cycloplegia for comfort",
-   "Prevent secondary infection with topical antibiotics",
-   "Control raised intraocular pressure with antiglaucoma medication",
-   "Grade limbal ischaemia and corneal clarity and monitor closely for stromal melting and perforation",
-   "Surgical intervention for severe injury, including amniotic membrane transplantation, limbal stem cell grafting and tarsorrhaphy",
-   "Urgent and ongoing ophthalmology involvement to guide staged surface rehabilitation"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "chemical_eye_injury-pathway",
-   "title": "Chemical eye injury: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A true ocular emergency in which immediate, copious irrigation takes priority over history-taking and detailed examination",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Any chemical exposure requires immediate copious irrigation before other assessment, as delay worsens outcome",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Measurement of ocular surface pH before and after irrigation to guide continued irrigation, Slit-lamp examination with fluorescein to assess epithelial defect size and corneal clarity, Assessment and grading of limbal and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Immediate and copious irrigation continued until the tear-film pH returns to neutral, with eyelid eversion and sweeping of the fornices to remove retained particulate such as lime or cement, taking priority over"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Delaying irrigation to complete history or examination first"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of chemical eye injury."
-  }
- ],
- "tables": [
-  {
-   "id": "chemical_eye_injury-matrix",
-   "title": "Chemical eye injury: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A true ocular emergency in which immediate, copious irrigation takes priority over history-taking and detailed examination",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A true ocular emergency in which immediate, copious irrigation takes priority over history-taking and detailed examination",
+      "Alkali burns are generally more damaging than acid burns because alkalis penetrate tissues rapidly by liquefactive necrosis, whereas acids cause coagulative necrosis that tends to limit deeper penetration",
+      "Irrigation should continue until the tear film pH returns to neutral, and the fornices must be swept and everted to remove any retained particulate matter (e.g. lime or cement)",
+      "The degree of limbal ischaemia (blanching) and corneal clarity are the key prognostic signs, forming the basis of grading systems such as Roper-Hall and Dua",
+      "A deceptively white, non-injected eye after an alkali burn can indicate severe limbal ischaemia rather than a mild injury",
+      "Later management principles aim to promote epithelial healing, control inflammation with topical steroids, prevent infection, support the ocular surface, and control intraocular pressure",
+      "Severe burns can be complicated by limbal stem cell deficiency, symblepharon, corneal melting and perforation, glaucoma, and eventual scarring",
+      "Bilateral injury and workplace or assault-related exposures require attention to both eyes and appropriate safeguarding and occupational follow-up"
     ],
-    [
-     "Key Investigations",
-     "Measurement of ocular surface pH before and after irrigation to guide continued irrigation, Slit-lamp examination with",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Chemical injury damages the ocular surface through direct chemical action on cells and the extracellular matrix. Alkalis dissolve cell membrane lipids and penetrate deeply by liquefactive necrosis, reaching the anterior chamber and damaging the limbal stem cells, corneal stroma, trabecular meshwork, and intraocular structures. Acids denature and precipitate proteins, producing coagulative necrosis that can form a barrier limiting deeper spread, though strong acids still cause severe injury. Destruction of limbal stem cells impairs corneal epithelial regeneration, leading to persistent epithelial defects, conjunctivalisation, and scarring, while ischaemia and inflammation predispose to stromal melting and perforation.",
+    "additionalDifferentials": [
+      "Thermal burn of the ocular surface",
+      "Ultraviolet or radiation keratitis (e.g. welder's flash)",
+      "Severe infective keratitis or corneal ulcer",
+      "Toxic keratoconjunctivitis from other agents",
+      "Corneal foreign body or abrasion"
     ],
-    [
-     "Primary Differentials",
-     "Thermal burn of the ocular surface, Ultraviolet or radiation keratitis (e.g. welder's flash), Severe infective keratitis or",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Measurement of ocular surface pH before and after irrigation to guide continued irrigation",
+      "Slit-lamp examination with fluorescein to assess epithelial defect size and corneal clarity",
+      "Assessment and grading of limbal and conjunctival ischaemia",
+      "Intraocular pressure measurement, as burns can cause acute and chronic pressure rise",
+      "Eyelid eversion and fornix inspection for retained particulate chemical"
     ],
-    [
-     "Management Strategy",
-     "Immediate and copious irrigation continued until the tear-film pH returns to neutral, with eyelid eversion and sweeping of the",
-     "Core treatment modality"
+    "redFlags": [
+      "Any chemical exposure requires immediate copious irrigation before other assessment, as delay worsens outcome",
+      "Extensive limbal blanching/ischaemia and a hazy or opaque cornea indicating a severe, sight-threatening burn",
+      "A deceptively white, quiet eye masking severe ischaemic damage after alkali injury",
+      "Rising intraocular pressure, corneal melting, or threatened perforation requiring urgent specialist care"
     ],
-    [
-     "Clinical Pitfall",
-     "Delaying irrigation to complete history or examination first",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis correlates closely with the initial extent of limbal ischaemia and corneal opacification; mild burns with minimal limbal involvement usually heal well, whereas severe burns with extensive limbal stem cell loss risk chronic surface failure, scarring, and permanent visual loss despite intensive treatment. Prompt and thorough irrigation is the single most important factor improving outcome.",
+    "pitfalls": [
+      "Delaying irrigation to complete history or examination first",
+      "Stopping irrigation before the pH has normalised or failing to check pH",
+      "Not everting the lids and sweeping the fornices, leaving retained caustic particles",
+      "Underestimating a white, non-inflamed eye that actually reflects severe limbal ischaemia"
+    ],
+    "references": [
+      "Parsons' Diseases of the Eye",
+      "Kanski's Clinical Ophthalmology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Immediate and copious irrigation continued until the tear-film pH returns to neutral, with eyelid eversion and sweeping of the fornices to remove retained particulate such as lime or cement, taking priority over history and examination",
+      "Promote epithelial healing with intensive lubrication, a bandage contact lens and ascorbate or citrate therapy, and autologous serum drops in severe surface failure",
+      "Control inflammation with topical corticosteroids in the early phase, adding cycloplegia for comfort",
+      "Prevent secondary infection with topical antibiotics",
+      "Control raised intraocular pressure with antiglaucoma medication",
+      "Grade limbal ischaemia and corneal clarity and monitor closely for stromal melting and perforation",
+      "Surgical intervention for severe injury, including amniotic membrane transplantation, limbal stem cell grafting and tarsorrhaphy",
+      "Urgent and ongoing ophthalmology involvement to guide staged surface rehabilitation"
     ]
-   ],
-   "caption": "Overview comparison matrix for chemical eye injury."
-  }
- ],
- "diagrams": [
-  {
-   "id": "chemical-eye-injury-real-image",
-   "title": "Chemical eye injury: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "chemical_eye_injury-pathway",
+      "title": "Chemical eye injury: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A true ocular emergency in which immediate, copious irrigation takes priority over history-taking and detailed examination",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Any chemical exposure requires immediate copious irrigation before other assessment, as delay worsens outcome",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Measurement of ocular surface pH before and after irrigation to guide continued irrigation, Slit-lamp examination with fluorescein to assess epithelial defect size and corneal clarity, Assessment and grading of limbal and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Immediate and copious irrigation continued until the tear-film pH returns to neutral, with eyelid eversion and sweeping of the fornices to remove retained particulate such as lime or cement, taking priority over"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Delaying irrigation to complete history or examination first"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of chemical eye injury."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "chemical_eye_injury-matrix",
+      "title": "Chemical eye injury: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A true ocular emergency in which immediate, copious irrigation takes priority over history-taking and detailed examination",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Measurement of ocular surface pH before and after irrigation to guide continued irrigation, Slit-lamp examination with",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Thermal burn of the ocular surface, Ultraviolet or radiation keratitis (e.g. welder's flash), Severe infective keratitis or",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Immediate and copious irrigation continued until the tear-film pH returns to neutral, with eyelid eversion and sweeping of the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Delaying irrigation to complete history or examination first",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for chemical eye injury."
+    }
+  ],
+  "diagrams": []
 }

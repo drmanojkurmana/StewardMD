@@ -1,178 +1,156 @@
 {
- "id": "isaacs_syndrome",
- "name": "Isaacs Syndrome",
- "aliases": [
-  "Acquired neuromyotonia",
-  "Peripheral nerve hyperexcitability syndrome",
-  "Continuous muscle fibre activity syndrome"
- ],
- "class": "non_infective",
- "system": "Neurology / Neuro-immunology",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Neurology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A disorder of peripheral nerve hyperexcitability characterised by continuous muscle fibre activity that persists during sleep and general anaesthesia.",
-   "The clinical hallmarks are muscle twitching (myokymia), cramps, stiffness and delayed relaxation, with visible rippling movements described as myokymia and often excessive sweating.",
-   "Electromyography is central to diagnosis, showing spontaneous myokymic and neuromyotonic discharges with a characteristic high intraburst firing frequency.",
-   "Frequently autoimmune, associated with antibodies to components of the voltage-gated potassium channel complex, particularly CASPR2 and sometimes LGI1.",
-   "May be paraneoplastic, with thymoma the classic association, so a thymic and broader malignancy search is important, especially with CASPR2 antibodies.",
-   "When peripheral nerve hyperexcitability combines with dysautonomia and encephalopathy or insomnia, consider Morvan syndrome, a related CASPR2-associated disorder.",
-   "Symptomatic relief comes from membrane-stabilising anticonvulsants such as carbamazepine or phenytoin that reduce ectopic nerve firing.",
-   "Immunotherapy including plasma exchange, intravenous immunoglobulin or immunosuppression benefits antibody-positive and refractory cases."
+  "id": "isaacs_syndrome",
+  "name": "Isaacs Syndrome",
+  "aliases": [
+    "Acquired neuromyotonia",
+    "Peripheral nerve hyperexcitability syndrome",
+    "Continuous muscle fibre activity syndrome"
   ],
-  "pathophysiology": "Isaacs syndrome results from hyperexcitability of the motor nerve, most prominently at its distal, terminal arborisation, where sustained ectopic and repetitive firing generates continuous involuntary muscle fibre activity. In the autoimmune form, antibodies are directed against proteins of the voltage-gated potassium channel complex, chiefly the axonal protein CASPR2 and its partner LGI1, rather than against the channel pore itself; loss of the normal potassium conductance that repolarises and stabilises the axonal membrane lowers the threshold for firing and permits spontaneous, self-sustaining discharges. The persistence of activity during sleep, proximal nerve block and general anaesthesia localises the generator to the peripheral nerve rather than central circuits, and its abolition by neuromuscular junction blockade confirms that the final common pathway is transmission across the junction to muscle. Continuous firing produces the clinical myokymia, cramps, impaired relaxation and pseudomyotonia, while associated autonomic overactivity, particularly hyperhidrosis, reflects involvement of autonomic axons. The frequent link with thymoma and other tumours indicates a paraneoplastic trigger of the antibody response in a subset, and when the same CASPR2 immunity extends to the central and autonomic nervous systems the broader Morvan phenotype of insomnia, dysautonomia and encephalopathy emerges.",
-  "additionalDifferentials": [
-   "Cramp-fasciculation syndrome",
-   "Morvan syndrome",
-   "Stiff-person syndrome",
-   "Motor neurone disease with prominent fasciculation and cramps",
-   "Myotonic disorders such as myotonic dystrophy or myotonia congenita",
-   "Tetany from hypocalcaemia or hypomagnesaemia",
-   "Hereditary or toxic peripheral nerve hyperexcitability"
-  ],
-  "additionalInvestigations": [
-   "Electromyography demonstrating myokymic and neuromyotonic discharges with high intraburst frequency",
-   "Serum CASPR2 and LGI1 (voltage-gated potassium channel complex) antibodies",
-   "Cross-sectional imaging of the chest for thymoma and broader tumour screening",
-   "Nerve conduction studies to characterise any coexisting peripheral neuropathy",
-   "Creatine kinase, which may be mildly raised from continuous muscle activity",
-   "Serum electrolytes including calcium and magnesium to exclude metabolic causes",
-   "Autoimmune and paraneoplastic antibody panel where Morvan features are present"
-  ],
-  "redFlags": [
-   "Features of Morvan syndrome with severe insomnia, confusion and autonomic instability",
-   "Identification of an underlying thymoma or other malignancy requiring urgent management",
-   "Bulbar or respiratory muscle involvement with laryngospasm compromising the airway",
-   "Rapidly progressive weakness or wasting suggesting an alternative motor neurone disorder",
-   "Severe autonomic disturbance with cardiac dysrhythmia or marked blood pressure swings"
-  ],
-  "prognosis": "Symptoms are often controllable with membrane-stabilising drugs, and antibody-positive or paraneoplastic cases frequently improve with immunotherapy or tumour treatment. The overall outlook is strongly influenced by any underlying malignancy and by whether the illness extends to the Morvan phenotype.",
-  "pitfalls": [
-   "Mistaking the continuous activity for a primary myotonic or muscle disorder rather than nerve hyperexcitability",
-   "Failing to search for thymoma, particularly in CASPR2-antibody-positive patients",
-   "Overlooking evolution into Morvan syndrome when insomnia and autonomic features appear",
-   "Attributing myokymia and cramps to benign fasciculation and missing the wider syndrome",
-   "Neglecting immunotherapy in antibody-positive disease that is refractory to symptomatic drugs"
-  ],
-  "references": [
-   "Bradley and Daroff's Neurology in Clinical Practice",
-   "Adams and Victor's Principles of Neurology",
-   "Peripheral Neuropathy (Dyck and Thomas)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Control the muscle hyperexcitability symptomatically with membrane-stabilising anticonvulsants such as carbamazepine or phenytoin",
-   "Treat the autoimmune process with immunotherapy using corticosteroids, intravenous immunoglobulin or plasma exchange in antibody-positive disease",
-   "Escalate to steroid-sparing immunosuppression such as azathioprine for refractory or relapsing disease",
-   "Search for and treat an underlying tumour, especially thymoma, with resection",
-   "Confirm the diagnosis with electromyography showing myokymic and neuromyotonic discharges and with CASPR2 and LGI1 antibody testing",
-   "Recognise and manage the Morvan phenotype with its dysautonomia and encephalopathy if the illness extends beyond the peripheral nerve"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "isaacs_syndrome-pathway",
-   "title": "Isaacs Syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A disorder of peripheral nerve hyperexcitability characterised by continuous muscle fibre activity that persists during sleep and general anaesthesia.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Features of Morvan syndrome with severe insomnia, confusion and autonomic instability",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Electromyography demonstrating myokymic and neuromyotonic discharges with high intraburst frequency, Serum CASPR2 and LGI1 (voltage-gated potassium channel complex) antibodies, Cross-sectional imaging of the chest for"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Control the muscle hyperexcitability symptomatically with membrane-stabilising anticonvulsants such as carbamazepine or phenytoin"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking the continuous activity for a primary myotonic or muscle disorder rather than nerve hyperexcitability"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of isaacs syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "isaacs_syndrome-matrix",
-   "title": "Isaacs Syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A disorder of peripheral nerve hyperexcitability characterised by continuous muscle fibre activity that persists during sleep and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neurology / Neuro-immunology",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Neurology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A disorder of peripheral nerve hyperexcitability characterised by continuous muscle fibre activity that persists during sleep and general anaesthesia.",
+      "The clinical hallmarks are muscle twitching (myokymia), cramps, stiffness and delayed relaxation, with visible rippling movements described as myokymia and often excessive sweating.",
+      "Electromyography is central to diagnosis, showing spontaneous myokymic and neuromyotonic discharges with a characteristic high intraburst firing frequency.",
+      "Frequently autoimmune, associated with antibodies to components of the voltage-gated potassium channel complex, particularly CASPR2 and sometimes LGI1.",
+      "May be paraneoplastic, with thymoma the classic association, so a thymic and broader malignancy search is important, especially with CASPR2 antibodies.",
+      "When peripheral nerve hyperexcitability combines with dysautonomia and encephalopathy or insomnia, consider Morvan syndrome, a related CASPR2-associated disorder.",
+      "Symptomatic relief comes from membrane-stabilising anticonvulsants such as carbamazepine or phenytoin that reduce ectopic nerve firing.",
+      "Immunotherapy including plasma exchange, intravenous immunoglobulin or immunosuppression benefits antibody-positive and refractory cases."
     ],
-    [
-     "Key Investigations",
-     "Electromyography demonstrating myokymic and neuromyotonic discharges with high intraburst frequency, Serum CASPR2 and LGI1",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Isaacs syndrome results from hyperexcitability of the motor nerve, most prominently at its distal, terminal arborisation, where sustained ectopic and repetitive firing generates continuous involuntary muscle fibre activity. In the autoimmune form, antibodies are directed against proteins of the voltage-gated potassium channel complex, chiefly the axonal protein CASPR2 and its partner LGI1, rather than against the channel pore itself; loss of the normal potassium conductance that repolarises and stabilises the axonal membrane lowers the threshold for firing and permits spontaneous, self-sustaining discharges. The persistence of activity during sleep, proximal nerve block and general anaesthesia localises the generator to the peripheral nerve rather than central circuits, and its abolition by neuromuscular junction blockade confirms that the final common pathway is transmission across the junction to muscle. Continuous firing produces the clinical myokymia, cramps, impaired relaxation and pseudomyotonia, while associated autonomic overactivity, particularly hyperhidrosis, reflects involvement of autonomic axons. The frequent link with thymoma and other tumours indicates a paraneoplastic trigger of the antibody response in a subset, and when the same CASPR2 immunity extends to the central and autonomic nervous systems the broader Morvan phenotype of insomnia, dysautonomia and encephalopathy emerges.",
+    "additionalDifferentials": [
+      "Cramp-fasciculation syndrome",
+      "Morvan syndrome",
+      "Stiff-person syndrome",
+      "Motor neurone disease with prominent fasciculation and cramps",
+      "Myotonic disorders such as myotonic dystrophy or myotonia congenita",
+      "Tetany from hypocalcaemia or hypomagnesaemia",
+      "Hereditary or toxic peripheral nerve hyperexcitability"
     ],
-    [
-     "Primary Differentials",
-     "Cramp-fasciculation syndrome, Morvan syndrome, Stiff-person syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Electromyography demonstrating myokymic and neuromyotonic discharges with high intraburst frequency",
+      "Serum CASPR2 and LGI1 (voltage-gated potassium channel complex) antibodies",
+      "Cross-sectional imaging of the chest for thymoma and broader tumour screening",
+      "Nerve conduction studies to characterise any coexisting peripheral neuropathy",
+      "Creatine kinase, which may be mildly raised from continuous muscle activity",
+      "Serum electrolytes including calcium and magnesium to exclude metabolic causes",
+      "Autoimmune and paraneoplastic antibody panel where Morvan features are present"
     ],
-    [
-     "Management Strategy",
-     "Control the muscle hyperexcitability symptomatically with membrane-stabilising anticonvulsants such as carbamazepine or phenytoin",
-     "Core treatment modality"
+    "redFlags": [
+      "Features of Morvan syndrome with severe insomnia, confusion and autonomic instability",
+      "Identification of an underlying thymoma or other malignancy requiring urgent management",
+      "Bulbar or respiratory muscle involvement with laryngospasm compromising the airway",
+      "Rapidly progressive weakness or wasting suggesting an alternative motor neurone disorder",
+      "Severe autonomic disturbance with cardiac dysrhythmia or marked blood pressure swings"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking the continuous activity for a primary myotonic or muscle disorder rather than nerve hyperexcitability",
-     "Prevent diagnostic or management error"
+    "prognosis": "Symptoms are often controllable with membrane-stabilising drugs, and antibody-positive or paraneoplastic cases frequently improve with immunotherapy or tumour treatment. The overall outlook is strongly influenced by any underlying malignancy and by whether the illness extends to the Morvan phenotype.",
+    "pitfalls": [
+      "Mistaking the continuous activity for a primary myotonic or muscle disorder rather than nerve hyperexcitability",
+      "Failing to search for thymoma, particularly in CASPR2-antibody-positive patients",
+      "Overlooking evolution into Morvan syndrome when insomnia and autonomic features appear",
+      "Attributing myokymia and cramps to benign fasciculation and missing the wider syndrome",
+      "Neglecting immunotherapy in antibody-positive disease that is refractory to symptomatic drugs"
+    ],
+    "references": [
+      "Bradley and Daroff's Neurology in Clinical Practice",
+      "Adams and Victor's Principles of Neurology",
+      "Peripheral Neuropathy (Dyck and Thomas)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Control the muscle hyperexcitability symptomatically with membrane-stabilising anticonvulsants such as carbamazepine or phenytoin",
+      "Treat the autoimmune process with immunotherapy using corticosteroids, intravenous immunoglobulin or plasma exchange in antibody-positive disease",
+      "Escalate to steroid-sparing immunosuppression such as azathioprine for refractory or relapsing disease",
+      "Search for and treat an underlying tumour, especially thymoma, with resection",
+      "Confirm the diagnosis with electromyography showing myokymic and neuromyotonic discharges and with CASPR2 and LGI1 antibody testing",
+      "Recognise and manage the Morvan phenotype with its dysautonomia and encephalopathy if the illness extends beyond the peripheral nerve"
     ]
-   ],
-   "caption": "Overview comparison matrix for isaacs syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "isaacs-syndrome-real-image",
-   "title": "Isaacs Syndrome: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "isaacs_syndrome-pathway",
+      "title": "Isaacs Syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A disorder of peripheral nerve hyperexcitability characterised by continuous muscle fibre activity that persists during sleep and general anaesthesia.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Features of Morvan syndrome with severe insomnia, confusion and autonomic instability",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Electromyography demonstrating myokymic and neuromyotonic discharges with high intraburst frequency, Serum CASPR2 and LGI1 (voltage-gated potassium channel complex) antibodies, Cross-sectional imaging of the chest for"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Control the muscle hyperexcitability symptomatically with membrane-stabilising anticonvulsants such as carbamazepine or phenytoin"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking the continuous activity for a primary myotonic or muscle disorder rather than nerve hyperexcitability"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of isaacs syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "isaacs_syndrome-matrix",
+      "title": "Isaacs Syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A disorder of peripheral nerve hyperexcitability characterised by continuous muscle fibre activity that persists during sleep and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Electromyography demonstrating myokymic and neuromyotonic discharges with high intraburst frequency, Serum CASPR2 and LGI1",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Cramp-fasciculation syndrome, Morvan syndrome, Stiff-person syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Control the muscle hyperexcitability symptomatically with membrane-stabilising anticonvulsants such as carbamazepine or phenytoin",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking the continuous activity for a primary myotonic or muscle disorder rather than nerve hyperexcitability",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for isaacs syndrome."
+    }
+  ],
+  "diagrams": []
 }

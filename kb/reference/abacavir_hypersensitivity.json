@@ -1,175 +1,153 @@
 {
- "id": "abacavir_hypersensitivity",
- "name": "Abacavir hypersensitivity (HLA-B*57:01)",
- "aliases": [
-  "abacavir hypersensitivity reaction",
-  "AHR",
-  "HLA-B*57:01",
-  "abacavir HSR",
-  "nucleoside reverse transcriptase inhibitor hypersensitivity"
- ],
- "class": "non_infective",
- "system": "Clinical pharmacology / Toxicology",
- "specialty": "Clinical Pharmacology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / Goldfrank's Toxicologic Emergencies",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A systemic, multiorgan hypersensitivity reaction typically beginning within the first six weeks of starting abacavir, an antiretroviral used in HIV",
-   "Presents with a combination of fever, rash, gastrointestinal symptoms (nausea, vomiting, abdominal pain), malaise and often respiratory symptoms",
-   "The reaction is strongly and specifically associated with carriage of the HLA-B*57:01 allele",
-   "Pre-treatment HLA-B*57:01 screening is standard practice and dramatically reduces the incidence of true immunologically confirmed reactions",
-   "Symptoms characteristically worsen with each successive dose, in contrast to many self-limiting drug intolerances",
-   "Management is immediate and permanent discontinuation of abacavir with supportive care",
-   "Rechallenge after a genuine hypersensitivity reaction is contraindicated because it can precipitate rapid, life-threatening hypotension and collapse",
-   "Absence of HLA-B*57:01 makes an immunologically confirmed reaction very unlikely but does not entirely exclude other drug intolerance"
+  "id": "abacavir_hypersensitivity",
+  "name": "Abacavir hypersensitivity (HLA-B*57:01)",
+  "aliases": [
+    "abacavir hypersensitivity reaction",
+    "AHR",
+    "HLA-B*57:01",
+    "abacavir HSR",
+    "nucleoside reverse transcriptase inhibitor hypersensitivity"
   ],
-  "pathophysiology": "Abacavir hypersensitivity is an HLA-restricted, T-cell-mediated immune reaction. Abacavir binds non-covalently within the antigen-binding groove of the HLA-B*57:01 molecule, altering the repertoire of self-peptides that are presented at the cell surface. This altered peptide display is recognised as foreign by cytotoxic CD8 T cells, driving a clonal T-cell response and release of inflammatory cytokines that produce the systemic multiorgan syndrome. Because the interaction is specific to the HLA-B*57:01 allele, susceptibility is genetically determined and can be predicted by pre-treatment genotyping. Repeat exposure amplifies the primed immune response, explaining the escalating severity and the danger of rechallenge.",
-  "additionalDifferentials": [
-   "Intercurrent viral or opportunistic infection in an HIV-positive patient",
-   "Immune reconstitution inflammatory syndrome",
-   "Other drug hypersensitivity reactions (e.g. to co-administered antiretrovirals or antimicrobials)",
-   "DRESS syndrome from another agent",
-   "Sepsis",
-   "Acute gastroenteritis"
-  ],
-  "additionalInvestigations": [
-   "HLA-B*57:01 genotyping (ideally before starting therapy)",
-   "Full blood count and eosinophil count",
-   "Liver and renal function tests to assess organ involvement",
-   "Inflammatory markers",
-   "Careful medication timeline correlating symptoms with dosing",
-   "Patch testing in specialist evaluation of uncertain historical reactions"
-  ],
-  "redFlags": [
-   "Hypotension or cardiovascular collapse, particularly after re-exposure",
-   "Rapidly progressive multiorgan symptoms",
-   "Respiratory distress",
-   "Any inadvertent rechallenge in a patient with a prior genuine reaction"
-  ],
-  "prognosis": "With prompt and permanent withdrawal, the reaction resolves fully over days and the outlook is excellent. Continued dosing or, especially, rechallenge can cause severe hypotension and death, so lifelong avoidance is mandatory once a genuine reaction has occurred.",
-  "pitfalls": [
-   "Rechallenging a patient who has had a genuine reaction, risking fatal hypotension",
-   "Failing to perform HLA-B*57:01 screening before initiating abacavir",
-   "Attributing early symptoms to a viral illness and continuing the drug",
-   "Labelling every mild intolerance as hypersensitivity, which unnecessarily removes a useful agent"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine",
-   "CPIC Guideline for HLA-B and abacavir"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Discontinue abacavir immediately and permanently at the first suspicion of hypersensitivity, which is the definitive treatment",
-   "Never rechallenge with abacavir after a genuine reaction, as re-exposure can precipitate life-threatening hypotension and death",
-   "Provide supportive care for the systemic reaction with fluid resuscitation, antipyretics and symptomatic measures while monitoring organ function",
-   "Substitute an alternative antiretroviral agent to maintain effective HIV suppression, in liaison with HIV specialist services",
-   "Prevent recurrence by screening for HLA-B*57:01 before ever prescribing abacavir and avoiding the drug in allele-positive individuals",
-   "Clearly document the reaction as a drug allergy and issue a patient warning so abacavir and any fixed-dose combination containing it is avoided lifelong"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "abacavir_hypersensitivity-pathway",
-   "title": "Abacavir hypersensitivity (HLA-B*57:01): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A systemic, multiorgan hypersensitivity reaction typically beginning within the first six weeks of starting abacavir, an antiretroviral used in HIV",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Hypotension or cardiovascular collapse, particularly after re-exposure",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: HLA-B*57:01 genotyping (ideally before starting therapy), Full blood count and eosinophil count, Liver and renal function tests to assess organ involvement"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Discontinue abacavir immediately and permanently at the first suspicion of hypersensitivity, which is the definitive treatment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Rechallenging a patient who has had a genuine reaction, risking fatal hypotension"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of abacavir hypersensitivity (hla-b*57:01)."
-  }
- ],
- "tables": [
-  {
-   "id": "abacavir_hypersensitivity-matrix",
-   "title": "Abacavir hypersensitivity (HLA-B*57:01): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A systemic, multiorgan hypersensitivity reaction typically beginning within the first six weeks of starting abacavir, an",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Clinical pharmacology / Toxicology",
+  "specialty": "Clinical Pharmacology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / Goldfrank's Toxicologic Emergencies",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A systemic, multiorgan hypersensitivity reaction typically beginning within the first six weeks of starting abacavir, an antiretroviral used in HIV",
+      "Presents with a combination of fever, rash, gastrointestinal symptoms (nausea, vomiting, abdominal pain), malaise and often respiratory symptoms",
+      "The reaction is strongly and specifically associated with carriage of the HLA-B*57:01 allele",
+      "Pre-treatment HLA-B*57:01 screening is standard practice and dramatically reduces the incidence of true immunologically confirmed reactions",
+      "Symptoms characteristically worsen with each successive dose, in contrast to many self-limiting drug intolerances",
+      "Management is immediate and permanent discontinuation of abacavir with supportive care",
+      "Rechallenge after a genuine hypersensitivity reaction is contraindicated because it can precipitate rapid, life-threatening hypotension and collapse",
+      "Absence of HLA-B*57:01 makes an immunologically confirmed reaction very unlikely but does not entirely exclude other drug intolerance"
     ],
-    [
-     "Key Investigations",
-     "HLA-B*57:01 genotyping (ideally before starting therapy), Full blood count and eosinophil count, Liver and renal function tests",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Abacavir hypersensitivity is an HLA-restricted, T-cell-mediated immune reaction. Abacavir binds non-covalently within the antigen-binding groove of the HLA-B*57:01 molecule, altering the repertoire of self-peptides that are presented at the cell surface. This altered peptide display is recognised as foreign by cytotoxic CD8 T cells, driving a clonal T-cell response and release of inflammatory cytokines that produce the systemic multiorgan syndrome. Because the interaction is specific to the HLA-B*57:01 allele, susceptibility is genetically determined and can be predicted by pre-treatment genotyping. Repeat exposure amplifies the primed immune response, explaining the escalating severity and the danger of rechallenge.",
+    "additionalDifferentials": [
+      "Intercurrent viral or opportunistic infection in an HIV-positive patient",
+      "Immune reconstitution inflammatory syndrome",
+      "Other drug hypersensitivity reactions (e.g. to co-administered antiretrovirals or antimicrobials)",
+      "DRESS syndrome from another agent",
+      "Sepsis",
+      "Acute gastroenteritis"
     ],
-    [
-     "Primary Differentials",
-     "Intercurrent viral or opportunistic infection in an HIV-positive patient, Immune reconstitution inflammatory syndrome, Other drug",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "HLA-B*57:01 genotyping (ideally before starting therapy)",
+      "Full blood count and eosinophil count",
+      "Liver and renal function tests to assess organ involvement",
+      "Inflammatory markers",
+      "Careful medication timeline correlating symptoms with dosing",
+      "Patch testing in specialist evaluation of uncertain historical reactions"
     ],
-    [
-     "Management Strategy",
-     "Discontinue abacavir immediately and permanently at the first suspicion of hypersensitivity, which is the definitive treatment",
-     "Core treatment modality"
+    "redFlags": [
+      "Hypotension or cardiovascular collapse, particularly after re-exposure",
+      "Rapidly progressive multiorgan symptoms",
+      "Respiratory distress",
+      "Any inadvertent rechallenge in a patient with a prior genuine reaction"
     ],
-    [
-     "Clinical Pitfall",
-     "Rechallenging a patient who has had a genuine reaction, risking fatal hypotension",
-     "Prevent diagnostic or management error"
+    "prognosis": "With prompt and permanent withdrawal, the reaction resolves fully over days and the outlook is excellent. Continued dosing or, especially, rechallenge can cause severe hypotension and death, so lifelong avoidance is mandatory once a genuine reaction has occurred.",
+    "pitfalls": [
+      "Rechallenging a patient who has had a genuine reaction, risking fatal hypotension",
+      "Failing to perform HLA-B*57:01 screening before initiating abacavir",
+      "Attributing early symptoms to a viral illness and continuing the drug",
+      "Labelling every mild intolerance as hypersensitivity, which unnecessarily removes a useful agent"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine",
+      "CPIC Guideline for HLA-B and abacavir"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Discontinue abacavir immediately and permanently at the first suspicion of hypersensitivity, which is the definitive treatment",
+      "Never rechallenge with abacavir after a genuine reaction, as re-exposure can precipitate life-threatening hypotension and death",
+      "Provide supportive care for the systemic reaction with fluid resuscitation, antipyretics and symptomatic measures while monitoring organ function",
+      "Substitute an alternative antiretroviral agent to maintain effective HIV suppression, in liaison with HIV specialist services",
+      "Prevent recurrence by screening for HLA-B*57:01 before ever prescribing abacavir and avoiding the drug in allele-positive individuals",
+      "Clearly document the reaction as a drug allergy and issue a patient warning so abacavir and any fixed-dose combination containing it is avoided lifelong"
     ]
-   ],
-   "caption": "Overview comparison matrix for abacavir hypersensitivity (hla-b*57:01)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "abacavir-hypersensitivity-real-image",
-   "title": "Abacavir hypersensitivity (HLA-B*57:01): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "abacavir_hypersensitivity-pathway",
+      "title": "Abacavir hypersensitivity (HLA-B*57:01): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A systemic, multiorgan hypersensitivity reaction typically beginning within the first six weeks of starting abacavir, an antiretroviral used in HIV",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Hypotension or cardiovascular collapse, particularly after re-exposure",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: HLA-B*57:01 genotyping (ideally before starting therapy), Full blood count and eosinophil count, Liver and renal function tests to assess organ involvement"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Discontinue abacavir immediately and permanently at the first suspicion of hypersensitivity, which is the definitive treatment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Rechallenging a patient who has had a genuine reaction, risking fatal hypotension"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of abacavir hypersensitivity (hla-b*57:01)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "abacavir_hypersensitivity-matrix",
+      "title": "Abacavir hypersensitivity (HLA-B*57:01): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A systemic, multiorgan hypersensitivity reaction typically beginning within the first six weeks of starting abacavir, an",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "HLA-B*57:01 genotyping (ideally before starting therapy), Full blood count and eosinophil count, Liver and renal function tests",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Intercurrent viral or opportunistic infection in an HIV-positive patient, Immune reconstitution inflammatory syndrome, Other drug",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Discontinue abacavir immediately and permanently at the first suspicion of hypersensitivity, which is the definitive treatment",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Rechallenging a patient who has had a genuine reaction, risking fatal hypotension",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for abacavir hypersensitivity (hla-b*57:01)."
+    }
+  ],
+  "diagrams": []
 }

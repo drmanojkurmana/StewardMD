@@ -1,178 +1,156 @@
 {
- "id": "bardet_biedl_syndrome",
- "name": "Bardet-Biedl syndrome",
- "aliases": [
-  "BBS",
-  "Laurence-Moon-Bardet-Biedl syndrome",
-  "BBS1",
-  "BBS10",
-  "BBSome",
-  "ciliopathy"
- ],
- "class": "non_infective",
- "system": "Genetics / Dysmorphology",
- "specialty": "Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A ciliopathy defined by a combination of rod-cone dystrophy (retinitis pigmentosa), postaxial polydactyly, truncal obesity, hypogonadism, renal anomalies and learning difficulty",
-   "Progressive retinal dystrophy typically presents with night blindness in childhood, advancing to severe visual loss by early adulthood",
-   "Renal involvement, ranging from structural malformation to progressive dysfunction, is a leading cause of morbidity and mortality and warrants monitoring",
-   "Postaxial polydactyly and other digit anomalies are an early, visible clue often noted at birth",
-   "Caused by biallelic variants in one of many BBS genes encoding components of the BBSome and cilia-related machinery, with autosomal recessive inheritance and locus heterogeneity",
-   "Obesity of early childhood onset, hyperphagia, type 2 diabetes and dyslipidaemia reflect hypothalamic and metabolic dysfunction",
-   "Learning difficulty is common but variable, and some individuals have normal cognition"
+  "id": "bardet_biedl_syndrome",
+  "name": "Bardet-Biedl syndrome",
+  "aliases": [
+    "BBS",
+    "Laurence-Moon-Bardet-Biedl syndrome",
+    "BBS1",
+    "BBS10",
+    "BBSome",
+    "ciliopathy"
   ],
-  "pathophysiology": "Bardet-Biedl syndrome is a ciliopathy caused by biallelic pathogenic variants in one of numerous BBS genes, many of which encode subunits of the BBSome, a protein complex that regulates trafficking of cargo to and from the primary cilium. Because primary cilia are present on most cell types and are essential for sensory function and developmental signalling, their dysfunction produces a pleiotropic, multisystem disorder affecting the retina, kidneys, limbs, reproductive system and hypothalamic appetite regulation. Locus and allelic heterogeneity, and occasional oligogenic contributions, account for the variable phenotype.",
-  "additionalDifferentials": [
-   "Alstrom syndrome",
-   "Prader-Willi syndrome",
-   "Isolated retinitis pigmentosa or Leber congenital amaurosis",
-   "McKusick-Kaufman syndrome",
-   "Nephronophthisis and related ciliopathies",
-   "Biedl-related MKS/Joubert spectrum ciliopathies"
-  ],
-  "additionalInvestigations": [
-   "Gene-panel or exome sequencing covering the BBS genes",
-   "Electroretinography and formal ophthalmological assessment to characterise the retinal dystrophy",
-   "Renal ultrasound and renal function testing with ongoing monitoring",
-   "Fasting glucose, HbA1c and lipid profile for metabolic complications",
-   "Blood pressure monitoring given renal and metabolic risk",
-   "Endocrine assessment of gonadal function and, in selected cases, hypothalamic function"
-  ],
-  "redFlags": [
-   "Declining renal function or hypertension signalling progressive nephropathy",
-   "Rapid visual deterioration requiring low-vision support",
-   "Features of poorly controlled diabetes or severe dyslipidaemia",
-   "Genitourinary obstruction from structural anomalies"
-  ],
-  "prognosis": "Vision is usually severely impaired by adulthood, and long-term outlook is dominated by renal disease and the metabolic consequences of obesity and diabetes. With proactive renal and metabolic management, many individuals have a reasonable lifespan, though end-stage renal disease is an important cause of premature death.",
-  "pitfalls": [
-   "Diagnosing isolated retinitis pigmentosa and missing the systemic ciliopathy",
-   "Overlooking silent progressive renal impairment until it is advanced",
-   "Attributing obesity to lifestyle alone rather than hypothalamic dysfunction",
-   "Confusing it with Alstrom syndrome, which lacks polydactyly but includes sensorineural deafness and cardiomyopathy"
-  ],
-  "references": [
-   "Smith's Recognizable Patterns of Human Malformation",
-   "Nelson Textbook of Pediatrics",
-   "GeneReviews: Bardet-Biedl syndrome"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Setmelanotide, an MC4R agonist, to control hypothalamic hyperphagia and obesity in eligible patients",
-   "Structured dietary, lifestyle and behavioural intervention for early-onset obesity and its metabolic consequences",
-   "Standard glucose-lowering and lipid-lowering therapy for type 2 diabetes and dyslipidaemia",
-   "Low-vision rehabilitation, visual aids and mobility support for the progressive rod-cone dystrophy",
-   "Regular renal function and blood-pressure surveillance, with renal replacement therapy or transplantation for end-stage renal disease",
-   "Surgical correction of polydactyly and orthopaedic input where indicated",
-   "Endocrine assessment and hormone replacement for hypogonadism",
-   "Multidisciplinary follow-up and genetic counselling for autosomal recessive inheritance, with family assessment"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "bardet_biedl_syndrome-pathway",
-   "title": "Bardet-Biedl syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A ciliopathy defined by a combination of rod-cone dystrophy (retinitis pigmentosa), postaxial polydactyly, truncal obesity, hypogonadism, renal anomalies and learning difficulty",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Declining renal function or hypertension signalling progressive nephropathy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Gene-panel or exome sequencing covering the BBS genes, Electroretinography and formal ophthalmological assessment to characterise the retinal dystrophy, Renal ultrasound and renal function testing with ongoing monitoring"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Setmelanotide, an MC4R agonist, to control hypothalamic hyperphagia and obesity in eligible patients"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Diagnosing isolated retinitis pigmentosa and missing the systemic ciliopathy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of bardet-biedl syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "bardet_biedl_syndrome-matrix",
-   "title": "Bardet-Biedl syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A ciliopathy defined by a combination of rod-cone dystrophy (retinitis pigmentosa), postaxial polydactyly, truncal obesity,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetics / Dysmorphology",
+  "specialty": "Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A ciliopathy defined by a combination of rod-cone dystrophy (retinitis pigmentosa), postaxial polydactyly, truncal obesity, hypogonadism, renal anomalies and learning difficulty",
+      "Progressive retinal dystrophy typically presents with night blindness in childhood, advancing to severe visual loss by early adulthood",
+      "Renal involvement, ranging from structural malformation to progressive dysfunction, is a leading cause of morbidity and mortality and warrants monitoring",
+      "Postaxial polydactyly and other digit anomalies are an early, visible clue often noted at birth",
+      "Caused by biallelic variants in one of many BBS genes encoding components of the BBSome and cilia-related machinery, with autosomal recessive inheritance and locus heterogeneity",
+      "Obesity of early childhood onset, hyperphagia, type 2 diabetes and dyslipidaemia reflect hypothalamic and metabolic dysfunction",
+      "Learning difficulty is common but variable, and some individuals have normal cognition"
     ],
-    [
-     "Key Investigations",
-     "Gene-panel or exome sequencing covering the BBS genes, Electroretinography and formal ophthalmological assessment to characterise",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Bardet-Biedl syndrome is a ciliopathy caused by biallelic pathogenic variants in one of numerous BBS genes, many of which encode subunits of the BBSome, a protein complex that regulates trafficking of cargo to and from the primary cilium. Because primary cilia are present on most cell types and are essential for sensory function and developmental signalling, their dysfunction produces a pleiotropic, multisystem disorder affecting the retina, kidneys, limbs, reproductive system and hypothalamic appetite regulation. Locus and allelic heterogeneity, and occasional oligogenic contributions, account for the variable phenotype.",
+    "additionalDifferentials": [
+      "Alstrom syndrome",
+      "Prader-Willi syndrome",
+      "Isolated retinitis pigmentosa or Leber congenital amaurosis",
+      "McKusick-Kaufman syndrome",
+      "Nephronophthisis and related ciliopathies",
+      "Biedl-related MKS/Joubert spectrum ciliopathies"
     ],
-    [
-     "Primary Differentials",
-     "Alstrom syndrome, Prader-Willi syndrome, Isolated retinitis pigmentosa or Leber congenital amaurosis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Gene-panel or exome sequencing covering the BBS genes",
+      "Electroretinography and formal ophthalmological assessment to characterise the retinal dystrophy",
+      "Renal ultrasound and renal function testing with ongoing monitoring",
+      "Fasting glucose, HbA1c and lipid profile for metabolic complications",
+      "Blood pressure monitoring given renal and metabolic risk",
+      "Endocrine assessment of gonadal function and, in selected cases, hypothalamic function"
     ],
-    [
-     "Management Strategy",
-     "Setmelanotide, an MC4R agonist, to control hypothalamic hyperphagia and obesity in eligible patients",
-     "Core treatment modality"
+    "redFlags": [
+      "Declining renal function or hypertension signalling progressive nephropathy",
+      "Rapid visual deterioration requiring low-vision support",
+      "Features of poorly controlled diabetes or severe dyslipidaemia",
+      "Genitourinary obstruction from structural anomalies"
     ],
-    [
-     "Clinical Pitfall",
-     "Diagnosing isolated retinitis pigmentosa and missing the systemic ciliopathy",
-     "Prevent diagnostic or management error"
+    "prognosis": "Vision is usually severely impaired by adulthood, and long-term outlook is dominated by renal disease and the metabolic consequences of obesity and diabetes. With proactive renal and metabolic management, many individuals have a reasonable lifespan, though end-stage renal disease is an important cause of premature death.",
+    "pitfalls": [
+      "Diagnosing isolated retinitis pigmentosa and missing the systemic ciliopathy",
+      "Overlooking silent progressive renal impairment until it is advanced",
+      "Attributing obesity to lifestyle alone rather than hypothalamic dysfunction",
+      "Confusing it with Alstrom syndrome, which lacks polydactyly but includes sensorineural deafness and cardiomyopathy"
+    ],
+    "references": [
+      "Smith's Recognizable Patterns of Human Malformation",
+      "Nelson Textbook of Pediatrics",
+      "GeneReviews: Bardet-Biedl syndrome"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Setmelanotide, an MC4R agonist, to control hypothalamic hyperphagia and obesity in eligible patients",
+      "Structured dietary, lifestyle and behavioural intervention for early-onset obesity and its metabolic consequences",
+      "Standard glucose-lowering and lipid-lowering therapy for type 2 diabetes and dyslipidaemia",
+      "Low-vision rehabilitation, visual aids and mobility support for the progressive rod-cone dystrophy",
+      "Regular renal function and blood-pressure surveillance, with renal replacement therapy or transplantation for end-stage renal disease",
+      "Surgical correction of polydactyly and orthopaedic input where indicated",
+      "Endocrine assessment and hormone replacement for hypogonadism",
+      "Multidisciplinary follow-up and genetic counselling for autosomal recessive inheritance, with family assessment"
     ]
-   ],
-   "caption": "Overview comparison matrix for bardet-biedl syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "bardet-biedl-syndrome-real-image",
-   "title": "Bardet-Biedl syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "bardet_biedl_syndrome-pathway",
+      "title": "Bardet-Biedl syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A ciliopathy defined by a combination of rod-cone dystrophy (retinitis pigmentosa), postaxial polydactyly, truncal obesity, hypogonadism, renal anomalies and learning difficulty",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Declining renal function or hypertension signalling progressive nephropathy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Gene-panel or exome sequencing covering the BBS genes, Electroretinography and formal ophthalmological assessment to characterise the retinal dystrophy, Renal ultrasound and renal function testing with ongoing monitoring"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Setmelanotide, an MC4R agonist, to control hypothalamic hyperphagia and obesity in eligible patients"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Diagnosing isolated retinitis pigmentosa and missing the systemic ciliopathy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of bardet-biedl syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "bardet_biedl_syndrome-matrix",
+      "title": "Bardet-Biedl syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A ciliopathy defined by a combination of rod-cone dystrophy (retinitis pigmentosa), postaxial polydactyly, truncal obesity,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Gene-panel or exome sequencing covering the BBS genes, Electroretinography and formal ophthalmological assessment to characterise",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Alstrom syndrome, Prader-Willi syndrome, Isolated retinitis pigmentosa or Leber congenital amaurosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Setmelanotide, an MC4R agonist, to control hypothalamic hyperphagia and obesity in eligible patients",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Diagnosing isolated retinitis pigmentosa and missing the systemic ciliopathy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for bardet-biedl syndrome."
+    }
+  ],
+  "diagrams": []
 }

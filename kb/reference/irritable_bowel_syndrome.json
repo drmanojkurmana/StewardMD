@@ -1,171 +1,149 @@
 {
- "id": "irritable_bowel_syndrome",
- "name": "Irritable bowel syndrome",
- "aliases": [
-  "IBS",
-  "spastic colon"
- ],
- "class": "non_infective",
- "system": "Gastrointestinal",
- "specialty": "Gastroenterology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rome IV criteria / gastroenterology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A disorder of gut-brain interaction defined by recurrent abdominal pain related to defecation and associated with a change in stool frequency or form",
-   "It is subclassified by predominant bowel habit into constipation-predominant, diarrhoea-predominant, mixed and unclassified types",
-   "It is a positive clinical diagnosis based on symptom criteria with limited targeted testing, not merely a diagnosis of exclusion",
-   "Alarm features such as weight loss, rectal bleeding, anaemia, older age of onset or a family history of bowel cancer warrant investigation",
-   "Coeliac serology and, where indicated, faecal calprotectin help exclude coeliac disease and inflammatory bowel disease",
-   "Management combines dietary measures, symptom-directed pharmacotherapy and psychological therapies"
+  "id": "irritable_bowel_syndrome",
+  "name": "Irritable bowel syndrome",
+  "aliases": [
+    "IBS",
+    "spastic colon"
   ],
-  "pathophysiology": "Irritable bowel syndrome is a disorder of gut-brain interaction in which altered gastrointestinal motility, visceral hypersensitivity, changes in the gut microbiota, low-grade mucosal immune activation, and disturbed central processing of visceral signals combine to produce pain and altered bowel habit. Bidirectional signalling along the gut-brain axis, often modulated by stress and psychological factors, amplifies visceral perception. There is no structural or biochemical abnormality that defines the condition, which is characterised instead by its symptom pattern.",
-  "additionalDifferentials": [
-   "Coeliac disease",
-   "Inflammatory bowel disease",
-   "Microscopic colitis",
-   "Bile acid diarrhoea",
-   "Colorectal cancer",
-   "Small intestinal bacterial overgrowth"
-  ],
-  "additionalInvestigations": [
-   "Symptom-based diagnosis using recognised criteria",
-   "Coeliac serology",
-   "Faecal calprotectin where inflammatory bowel disease is a concern",
-   "Full blood count and inflammatory markers",
-   "Colonoscopy or further imaging when alarm features are present"
-  ],
-  "redFlags": [
-   "Rectal bleeding or iron-deficiency anaemia",
-   "Unintentional weight loss",
-   "New symptoms in an older patient",
-   "Family history of colorectal cancer or inflammatory bowel disease",
-   "Nocturnal symptoms waking the patient"
-  ],
-  "prognosis": "The condition is chronic and relapsing but benign, and most patients achieve worthwhile symptom control with an individualised combination of diet, medication and psychological approaches.",
-  "pitfalls": [
-   "Treating it purely as a diagnosis of exclusion and over-investigating",
-   "Missing coeliac disease or inflammatory bowel disease presenting similarly",
-   "Ignoring alarm features",
-   "Overlooking the role of psychological factors and the gut-brain axis in management"
-  ],
-  "references": [
-   "Rome IV diagnostic criteria",
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Make a positive diagnosis on symptom criteria and exclude alarm features, coeliac disease and inflammatory bowel disease with targeted testing",
-   "Begin with dietary and lifestyle measures including regular meals, fibre adjustment and a supervised trial of a low-FODMAP diet with a dietitian",
-   "Direct pharmacotherapy at the predominant symptom, using antispasmodics for pain, laxatives for constipation and loperamide for diarrhoea",
-   "Add a gut-brain neuromodulator such as a tricyclic antidepressant or an SSRI for refractory pain",
-   "Consider disease-specific agents such as linaclotide for constipation-predominant disease and eluxadoline or a bile-acid sequestrant for diarrhoea-predominant disease",
-   "Offer psychological therapies such as cognitive behavioural therapy or gut-directed hypnotherapy for persistent symptoms",
-   "Provide reassurance within a positive therapeutic relationship and review periodically"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "irritable_bowel_syndrome-pathway",
-   "title": "Irritable bowel syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A disorder of gut-brain interaction defined by recurrent abdominal pain related to defecation and associated with a change in stool frequency or form",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rectal bleeding or iron-deficiency anaemia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Symptom-based diagnosis using recognised criteria, Coeliac serology, Faecal calprotectin where inflammatory bowel disease is a concern"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Make a positive diagnosis on symptom criteria and exclude alarm features, coeliac disease and inflammatory bowel disease with targeted testing"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating it purely as a diagnosis of exclusion and over-investigating"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of irritable bowel syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "irritable_bowel_syndrome-matrix",
-   "title": "Irritable bowel syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A disorder of gut-brain interaction defined by recurrent abdominal pain related to defecation and associated with a change in",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastrointestinal",
+  "specialty": "Gastroenterology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rome IV criteria / gastroenterology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A disorder of gut-brain interaction defined by recurrent abdominal pain related to defecation and associated with a change in stool frequency or form",
+      "It is subclassified by predominant bowel habit into constipation-predominant, diarrhoea-predominant, mixed and unclassified types",
+      "It is a positive clinical diagnosis based on symptom criteria with limited targeted testing, not merely a diagnosis of exclusion",
+      "Alarm features such as weight loss, rectal bleeding, anaemia, older age of onset or a family history of bowel cancer warrant investigation",
+      "Coeliac serology and, where indicated, faecal calprotectin help exclude coeliac disease and inflammatory bowel disease",
+      "Management combines dietary measures, symptom-directed pharmacotherapy and psychological therapies"
     ],
-    [
-     "Key Investigations",
-     "Symptom-based diagnosis using recognised criteria, Coeliac serology, Faecal calprotectin where inflammatory bowel disease is a",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Irritable bowel syndrome is a disorder of gut-brain interaction in which altered gastrointestinal motility, visceral hypersensitivity, changes in the gut microbiota, low-grade mucosal immune activation, and disturbed central processing of visceral signals combine to produce pain and altered bowel habit. Bidirectional signalling along the gut-brain axis, often modulated by stress and psychological factors, amplifies visceral perception. There is no structural or biochemical abnormality that defines the condition, which is characterised instead by its symptom pattern.",
+    "additionalDifferentials": [
+      "Coeliac disease",
+      "Inflammatory bowel disease",
+      "Microscopic colitis",
+      "Bile acid diarrhoea",
+      "Colorectal cancer",
+      "Small intestinal bacterial overgrowth"
     ],
-    [
-     "Primary Differentials",
-     "Coeliac disease, Inflammatory bowel disease, Microscopic colitis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Symptom-based diagnosis using recognised criteria",
+      "Coeliac serology",
+      "Faecal calprotectin where inflammatory bowel disease is a concern",
+      "Full blood count and inflammatory markers",
+      "Colonoscopy or further imaging when alarm features are present"
     ],
-    [
-     "Management Strategy",
-     "Make a positive diagnosis on symptom criteria and exclude alarm features, coeliac disease and inflammatory bowel disease with",
-     "Core treatment modality"
+    "redFlags": [
+      "Rectal bleeding or iron-deficiency anaemia",
+      "Unintentional weight loss",
+      "New symptoms in an older patient",
+      "Family history of colorectal cancer or inflammatory bowel disease",
+      "Nocturnal symptoms waking the patient"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating it purely as a diagnosis of exclusion and over-investigating",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is chronic and relapsing but benign, and most patients achieve worthwhile symptom control with an individualised combination of diet, medication and psychological approaches.",
+    "pitfalls": [
+      "Treating it purely as a diagnosis of exclusion and over-investigating",
+      "Missing coeliac disease or inflammatory bowel disease presenting similarly",
+      "Ignoring alarm features",
+      "Overlooking the role of psychological factors and the gut-brain axis in management"
+    ],
+    "references": [
+      "Rome IV diagnostic criteria",
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Make a positive diagnosis on symptom criteria and exclude alarm features, coeliac disease and inflammatory bowel disease with targeted testing",
+      "Begin with dietary and lifestyle measures including regular meals, fibre adjustment and a supervised trial of a low-FODMAP diet with a dietitian",
+      "Direct pharmacotherapy at the predominant symptom, using antispasmodics for pain, laxatives for constipation and loperamide for diarrhoea",
+      "Add a gut-brain neuromodulator such as a tricyclic antidepressant or an SSRI for refractory pain",
+      "Consider disease-specific agents such as linaclotide for constipation-predominant disease and eluxadoline or a bile-acid sequestrant for diarrhoea-predominant disease",
+      "Offer psychological therapies such as cognitive behavioural therapy or gut-directed hypnotherapy for persistent symptoms",
+      "Provide reassurance within a positive therapeutic relationship and review periodically"
     ]
-   ],
-   "caption": "Overview comparison matrix for irritable bowel syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "irritable-bowel-syndrome-real-image",
-   "title": "Irritable bowel syndrome: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "irritable_bowel_syndrome-pathway",
+      "title": "Irritable bowel syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A disorder of gut-brain interaction defined by recurrent abdominal pain related to defecation and associated with a change in stool frequency or form",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rectal bleeding or iron-deficiency anaemia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Symptom-based diagnosis using recognised criteria, Coeliac serology, Faecal calprotectin where inflammatory bowel disease is a concern"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Make a positive diagnosis on symptom criteria and exclude alarm features, coeliac disease and inflammatory bowel disease with targeted testing"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating it purely as a diagnosis of exclusion and over-investigating"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of irritable bowel syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "irritable_bowel_syndrome-matrix",
+      "title": "Irritable bowel syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A disorder of gut-brain interaction defined by recurrent abdominal pain related to defecation and associated with a change in",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Symptom-based diagnosis using recognised criteria, Coeliac serology, Faecal calprotectin where inflammatory bowel disease is a",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Coeliac disease, Inflammatory bowel disease, Microscopic colitis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Make a positive diagnosis on symptom criteria and exclude alarm features, coeliac disease and inflammatory bowel disease with",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating it purely as a diagnosis of exclusion and over-investigating",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for irritable bowel syndrome."
+    }
+  ],
+  "diagrams": []
 }

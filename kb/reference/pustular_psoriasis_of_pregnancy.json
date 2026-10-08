@@ -1,177 +1,155 @@
 {
- "id": "pustular_psoriasis_of_pregnancy",
- "name": "pustular psoriasis of pregnancy",
- "aliases": [
-  "impetigo herpetiformis",
-  "generalised pustular psoriasis of pregnancy"
- ],
- "class": "non_infective",
- "system": "skin",
- "specialty": "dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Regarded as generalised pustular psoriasis presenting in pregnancy; the historical name impetigo herpetiformis is a misnomer as it is neither infective nor herpetic.",
-   "Typically presents in the third trimester with erythematous patches fringed by sterile subcorneal pustules that extend centrifugally, often starting in the flexures.",
-   "Systemic upset is characteristic, with fever, malaise, delirium, and features of hypocalcaemia such as tetany, and it can be life-threatening.",
-   "Unlike the other pregnancy dermatoses it is often not markedly itchy; pain, burning and systemic illness dominate.",
-   "Hypocalcaemia, hypoalbuminaemia and secondary hypoparathyroidism may occur and require correction.",
-   "It carries a genuine risk of placental insufficiency, stillbirth and neonatal death, so fetal surveillance is essential.",
-   "First-line treatment is systemic corticosteroid; ciclosporin is an option in resistant disease and delivery may be needed if the fetus is compromised at term.",
-   "It tends to recur in subsequent pregnancies, often with earlier onset and greater severity."
+  "id": "pustular_psoriasis_of_pregnancy",
+  "name": "pustular psoriasis of pregnancy",
+  "aliases": [
+    "impetigo herpetiformis",
+    "generalised pustular psoriasis of pregnancy"
   ],
-  "pathophysiology": "Pustular psoriasis of pregnancy is a variant of generalised pustular psoriasis in which the pregnant state acts as a trigger, and a subset of patients carry mutations in IL36RN encoding the interleukin-36 receptor antagonist, leading to unopposed interleukin-36 signalling and intense neutrophilic inflammation. This produces the characteristic sterile spongiform pustules of Kogoj within the epidermis. Contributory factors include the relative hypocalcaemia and reduced parathyroid hormone activity of pregnancy and possible hormonal influences. The neutrophil-rich sterile pustulation and systemic inflammatory response account for the fever, leucocytosis and constitutional illness, while placental dysfunction underlies the associated fetal risk.",
-  "additionalDifferentials": [
-   "acute generalised exanthematous pustulosis",
-   "subcorneal pustular dermatosis (Sneddon-Wilkinson disease)",
-   "pemphigoid gestationis",
-   "polymorphic eruption of pregnancy",
-   "generalised pustular psoriasis unrelated to pregnancy",
-   "widespread bacterial or candidal pustular infection",
-   "drug reaction with pustulation"
-  ],
-  "additionalInvestigations": [
-   "skin biopsy (spongiform pustules of Kogoj, parakeratosis and neutrophilic infiltrate)",
-   "serum calcium, albumin, phosphate and parathyroid hormone",
-   "full blood count and inflammatory markers (leucocytosis, raised C-reactive protein and ESR)",
-   "swabs and pustule culture to confirm sterility and exclude infection",
-   "renal and liver function tests",
-   "fetal surveillance with cardiotocography and growth ultrasound; consider IL36RN genetic testing"
-  ],
-  "redFlags": [
-   "high fever, rigors, delirium or haemodynamic instability indicating systemic sepsis-like decompensation",
-   "tetany, perioral or peripheral paraesthesiae or seizures from hypocalcaemia",
-   "reduced fetal movements, growth restriction or abnormal cardiotocography signalling placental insufficiency",
-   "rapidly extending confluent pustulation with skin failure and fluid or electrolyte loss",
-   "signs of secondary bacterial infection or septicaemia"
-  ],
-  "prognosis": "With prompt systemic treatment, correction of electrolyte disturbance and fetal monitoring, maternal outcome is usually good, but there is a real risk of stillbirth, fetal growth restriction and neonatal death from placental insufficiency. It characteristically recurs in later pregnancies, frequently earlier and more severely.",
-  "pitfalls": [
-   "Mistaking sterile pustules for infection and delaying corticosteroid while pursuing antibiotics.",
-   "Failing to measure and correct calcium, risking tetany and seizures from unrecognised hypocalcaemia.",
-   "Underestimating fetal risk and omitting fetal surveillance, missing placental insufficiency.",
-   "Attributing the eruption to a benign pregnancy dermatosis and undertreating a potentially fatal condition.",
-   "Abruptly stopping systemic corticosteroid after delivery, precipitating a rebound flare."
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology, current edition",
-   "Ambros-Rudolph CM et al. The specific dermatoses of pregnancy revisited and reclassified, Journal of the American Academy of Dermatology",
-   "British Journal of Dermatology reviews on generalised pustular psoriasis and IL36RN"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Commence systemic corticosteroids as first-line therapy to control the sterile pustular eruption, escalating to ciclosporin or a biologic such as infliximab or the interleukin-36 receptor inhibitor spesolimab in refractory or severe disease",
-   "Correct hypocalcaemia, hypoalbuminaemia and secondary hypoparathyroidism with calcium, vitamin D and albumin support",
-   "Provide supportive care with fluid and electrolyte balance, temperature regulation, emollients and topical corticosteroids, and treat any secondary skin infection",
-   "Institute intensive foetal surveillance with cardiotocography and growth ultrasound because of the risk of placental insufficiency, and plan timely delivery, which often abates the disease",
-   "Monitor calcium, albumin, renal function and inflammatory markers while watching for systemic deterioration and delirium",
-   "Manage jointly across dermatology, obstetrics and neonatology",
-   "Counsel that the condition characteristically recurs in later pregnancies and may be provoked by oestrogen-containing contraception"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pustular_psoriasis_of_pregnancy-pathway",
-   "title": "pustular psoriasis of pregnancy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Regarded as generalised pustular psoriasis presenting in pregnancy; the historical name impetigo herpetiformis is a misnomer as it is neither infective nor herpetic.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: high fever, rigors, delirium or haemodynamic instability indicating systemic sepsis-like decompensation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: skin biopsy (spongiform pustules of Kogoj, parakeratosis and neutrophilic infiltrate), serum calcium, albumin, phosphate and parathyroid hormone, full blood count and inflammatory markers (leucocytosis, raised C-reactive"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Commence systemic corticosteroids as first-line therapy to control the sterile pustular eruption, escalating to ciclosporin or a biologic such as infliximab or the interleukin-36 receptor inhibitor spesolimab in"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking sterile pustules for infection and delaying corticosteroid while pursuing antibiotics."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pustular psoriasis of pregnancy."
-  }
- ],
- "tables": [
-  {
-   "id": "pustular_psoriasis_of_pregnancy-matrix",
-   "title": "pustular psoriasis of pregnancy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Regarded as generalised pustular psoriasis presenting in pregnancy; the historical name impetigo herpetiformis is a misnomer as",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "skin",
+  "specialty": "dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Regarded as generalised pustular psoriasis presenting in pregnancy; the historical name impetigo herpetiformis is a misnomer as it is neither infective nor herpetic.",
+      "Typically presents in the third trimester with erythematous patches fringed by sterile subcorneal pustules that extend centrifugally, often starting in the flexures.",
+      "Systemic upset is characteristic, with fever, malaise, delirium, and features of hypocalcaemia such as tetany, and it can be life-threatening.",
+      "Unlike the other pregnancy dermatoses it is often not markedly itchy; pain, burning and systemic illness dominate.",
+      "Hypocalcaemia, hypoalbuminaemia and secondary hypoparathyroidism may occur and require correction.",
+      "It carries a genuine risk of placental insufficiency, stillbirth and neonatal death, so fetal surveillance is essential.",
+      "First-line treatment is systemic corticosteroid; ciclosporin is an option in resistant disease and delivery may be needed if the fetus is compromised at term.",
+      "It tends to recur in subsequent pregnancies, often with earlier onset and greater severity."
     ],
-    [
-     "Key Investigations",
-     "skin biopsy (spongiform pustules of Kogoj, parakeratosis and neutrophilic infiltrate), serum calcium, albumin, phosphate and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Pustular psoriasis of pregnancy is a variant of generalised pustular psoriasis in which the pregnant state acts as a trigger, and a subset of patients carry mutations in IL36RN encoding the interleukin-36 receptor antagonist, leading to unopposed interleukin-36 signalling and intense neutrophilic inflammation. This produces the characteristic sterile spongiform pustules of Kogoj within the epidermis. Contributory factors include the relative hypocalcaemia and reduced parathyroid hormone activity of pregnancy and possible hormonal influences. The neutrophil-rich sterile pustulation and systemic inflammatory response account for the fever, leucocytosis and constitutional illness, while placental dysfunction underlies the associated fetal risk.",
+    "additionalDifferentials": [
+      "acute generalised exanthematous pustulosis",
+      "subcorneal pustular dermatosis (Sneddon-Wilkinson disease)",
+      "pemphigoid gestationis",
+      "polymorphic eruption of pregnancy",
+      "generalised pustular psoriasis unrelated to pregnancy",
+      "widespread bacterial or candidal pustular infection",
+      "drug reaction with pustulation"
     ],
-    [
-     "Primary Differentials",
-     "acute generalised exanthematous pustulosis, subcorneal pustular dermatosis (Sneddon-Wilkinson disease), pemphigoid gestationis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "skin biopsy (spongiform pustules of Kogoj, parakeratosis and neutrophilic infiltrate)",
+      "serum calcium, albumin, phosphate and parathyroid hormone",
+      "full blood count and inflammatory markers (leucocytosis, raised C-reactive protein and ESR)",
+      "swabs and pustule culture to confirm sterility and exclude infection",
+      "renal and liver function tests",
+      "fetal surveillance with cardiotocography and growth ultrasound; consider IL36RN genetic testing"
     ],
-    [
-     "Management Strategy",
-     "Commence systemic corticosteroids as first-line therapy to control the sterile pustular eruption, escalating to ciclosporin or a",
-     "Core treatment modality"
+    "redFlags": [
+      "high fever, rigors, delirium or haemodynamic instability indicating systemic sepsis-like decompensation",
+      "tetany, perioral or peripheral paraesthesiae or seizures from hypocalcaemia",
+      "reduced fetal movements, growth restriction or abnormal cardiotocography signalling placental insufficiency",
+      "rapidly extending confluent pustulation with skin failure and fluid or electrolyte loss",
+      "signs of secondary bacterial infection or septicaemia"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking sterile pustules for infection and delaying corticosteroid while pursuing antibiotics.",
-     "Prevent diagnostic or management error"
+    "prognosis": "With prompt systemic treatment, correction of electrolyte disturbance and fetal monitoring, maternal outcome is usually good, but there is a real risk of stillbirth, fetal growth restriction and neonatal death from placental insufficiency. It characteristically recurs in later pregnancies, frequently earlier and more severely.",
+    "pitfalls": [
+      "Mistaking sterile pustules for infection and delaying corticosteroid while pursuing antibiotics.",
+      "Failing to measure and correct calcium, risking tetany and seizures from unrecognised hypocalcaemia.",
+      "Underestimating fetal risk and omitting fetal surveillance, missing placental insufficiency.",
+      "Attributing the eruption to a benign pregnancy dermatosis and undertreating a potentially fatal condition.",
+      "Abruptly stopping systemic corticosteroid after delivery, precipitating a rebound flare."
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology, current edition",
+      "Ambros-Rudolph CM et al. The specific dermatoses of pregnancy revisited and reclassified, Journal of the American Academy of Dermatology",
+      "British Journal of Dermatology reviews on generalised pustular psoriasis and IL36RN"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Commence systemic corticosteroids as first-line therapy to control the sterile pustular eruption, escalating to ciclosporin or a biologic such as infliximab or the interleukin-36 receptor inhibitor spesolimab in refractory or severe disease",
+      "Correct hypocalcaemia, hypoalbuminaemia and secondary hypoparathyroidism with calcium, vitamin D and albumin support",
+      "Provide supportive care with fluid and electrolyte balance, temperature regulation, emollients and topical corticosteroids, and treat any secondary skin infection",
+      "Institute intensive foetal surveillance with cardiotocography and growth ultrasound because of the risk of placental insufficiency, and plan timely delivery, which often abates the disease",
+      "Monitor calcium, albumin, renal function and inflammatory markers while watching for systemic deterioration and delirium",
+      "Manage jointly across dermatology, obstetrics and neonatology",
+      "Counsel that the condition characteristically recurs in later pregnancies and may be provoked by oestrogen-containing contraception"
     ]
-   ],
-   "caption": "Overview comparison matrix for pustular psoriasis of pregnancy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pustular-psoriasis-of-pregnancy-real-image",
-   "title": "pustular psoriasis of pregnancy: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "pustular_psoriasis_of_pregnancy-pathway",
+      "title": "pustular psoriasis of pregnancy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Regarded as generalised pustular psoriasis presenting in pregnancy; the historical name impetigo herpetiformis is a misnomer as it is neither infective nor herpetic.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: high fever, rigors, delirium or haemodynamic instability indicating systemic sepsis-like decompensation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: skin biopsy (spongiform pustules of Kogoj, parakeratosis and neutrophilic infiltrate), serum calcium, albumin, phosphate and parathyroid hormone, full blood count and inflammatory markers (leucocytosis, raised C-reactive"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Commence systemic corticosteroids as first-line therapy to control the sterile pustular eruption, escalating to ciclosporin or a biologic such as infliximab or the interleukin-36 receptor inhibitor spesolimab in"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking sterile pustules for infection and delaying corticosteroid while pursuing antibiotics."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pustular psoriasis of pregnancy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pustular_psoriasis_of_pregnancy-matrix",
+      "title": "pustular psoriasis of pregnancy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Regarded as generalised pustular psoriasis presenting in pregnancy; the historical name impetigo herpetiformis is a misnomer as",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "skin biopsy (spongiform pustules of Kogoj, parakeratosis and neutrophilic infiltrate), serum calcium, albumin, phosphate and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "acute generalised exanthematous pustulosis, subcorneal pustular dermatosis (Sneddon-Wilkinson disease), pemphigoid gestationis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Commence systemic corticosteroids as first-line therapy to control the sterile pustular eruption, escalating to ciclosporin or a",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking sterile pustules for infection and delaying corticosteroid while pursuing antibiotics.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pustular psoriasis of pregnancy."
+    }
+  ],
+  "diagrams": []
 }

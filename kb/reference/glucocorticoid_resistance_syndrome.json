@@ -1,175 +1,153 @@
 {
- "id": "glucocorticoid_resistance_syndrome",
- "name": "Generalised glucocorticoid resistance (NR3C1)",
- "aliases": [
-  "generalised glucocorticoid resistance",
-  "primary generalised glucocorticoid resistance",
-  "Chrousos syndrome",
-  "cortisol resistance",
-  "NR3C1",
-  "glucocorticoid receptor deficiency"
- ],
- "class": "non_infective",
- "system": "Endocrine / Genetics",
- "specialty": "Endocrinology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Textbook of Endocrinology / OMIM",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by variants in NR3C1 encoding the glucocorticoid receptor, reducing tissue sensitivity to cortisol",
-   "There is high circulating cortisol and ACTH but, crucially, no Cushingoid phenotype because the tissues cannot respond to the excess",
-   "The compensatory ACTH drive stimulates adrenal overproduction of mineralocorticoids and androgens, producing the clinical features",
-   "Mineralocorticoid excess causes hypertension and hypokalaemic alkalosis, while androgen excess causes hirsutism, acne, menstrual disturbance, and precocious puberty or virilisation",
-   "The diagnosis rests on hypercortisolaemia with preserved (though upwardly reset) diurnal rhythm and resistance to dexamethasone suppression, in the absence of Cushingoid features",
-   "Management uses high-dose synthetic glucocorticoid with predominant glucocorticoid activity to suppress ACTH and thereby reduce the mineralocorticoid and androgen excess",
-   "Suspect the syndrome when biochemical hypercortisolism coexists with hypertension and androgen excess but no clinical Cushing syndrome"
+  "id": "glucocorticoid_resistance_syndrome",
+  "name": "Generalised glucocorticoid resistance (NR3C1)",
+  "aliases": [
+    "generalised glucocorticoid resistance",
+    "primary generalised glucocorticoid resistance",
+    "Chrousos syndrome",
+    "cortisol resistance",
+    "NR3C1",
+    "glucocorticoid receptor deficiency"
   ],
-  "pathophysiology": "The glucocorticoid receptor mediates the cellular actions of cortisol, including negative feedback on the hypothalamic-pituitary axis. Loss-of-function variants in NR3C1 reduce receptor number or function, so tissues are relatively resistant to cortisol. Impaired feedback allows ACTH to rise, which in turn drives the adrenal cortex to secrete more cortisol; because peripheral tissues remain unresponsive, the raised cortisol does not produce Cushingoid changes. The heightened ACTH stimulation also increases production of adrenal steroids with mineralocorticoid activity (such as deoxycorticosterone) and adrenal androgens, and the excess cortisol can spill over onto the mineralocorticoid receptor. This explains the combination of hypertension with hypokalaemic alkalosis and features of androgen excess despite normal or elevated cortisol.",
-  "additionalDifferentials": [
-   "Cushing syndrome",
-   "Congenital adrenal hyperplasia",
-   "Polycystic ovary syndrome (for the androgen features)",
-   "Primary hyperaldosteronism (for the hypertension and hypokalaemia)",
-   "Familial or acquired abnormalities of cortisol-binding globulin",
-   "Apparent mineralocorticoid excess"
-  ],
-  "additionalInvestigations": [
-   "Serum cortisol and ACTH showing elevated levels without Cushingoid features",
-   "Midnight cortisol and diurnal profiling demonstrating an upwardly reset but preserved rhythm",
-   "Dexamethasone suppression testing showing relative resistance to suppression",
-   "Serum potassium, renin, and adrenal androgen and mineralocorticoid precursor measurement",
-   "24-hour urinary free cortisol interpreted against the absence of clinical Cushing syndrome",
-   "NR3C1 gene sequencing"
-  ],
-  "redFlags": [
-   "Severe or resistant hypertension with hypokalaemia",
-   "Marked virilisation or precocious puberty in children",
-   "Adrenal hyperplasia or incidental adrenal enlargement from chronic ACTH drive",
-   "Fatigue and features suggesting relative tissue cortisol deficiency during stress"
-  ],
-  "prognosis": "With appropriate synthetic glucocorticoid therapy to suppress ACTH, blood pressure, electrolytes, and androgen-related features usually improve and the outlook is good; untreated disease carries the cardiovascular risks of chronic hypertension and the consequences of androgen excess.",
-  "pitfalls": [
-   "Misdiagnosing the biochemical hypercortisolism as Cushing syndrome despite the absent phenotype",
-   "Overlooking mineralocorticoid excess as the cause of hypertension and hypokalaemia",
-   "Attributing the androgen features to polycystic ovary syndrome alone",
-   "Failing to appreciate that affected tissues may be relatively cortisol-deficient under stress"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "OMIM entry for glucocorticoid resistance"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Suppress the compensatory ACTH drive with a potent synthetic glucocorticoid of predominant glucocorticoid activity such as dexamethasone, reducing adrenal mineralocorticoid and androgen overproduction",
-   "Treat residual hypertension and hypokalaemic alkalosis with a mineralocorticoid receptor antagonist such as spironolactone or eplerenone and potassium repletion where required",
-   "Address androgen-related features such as hirsutism, acne and menstrual disturbance, and manage virilisation or precocious puberty in children with growth monitoring",
-   "Titrate to the minimum glucocorticoid needed to normalise the axis, avoiding iatrogenic Cushingoid effects",
-   "Monitor cortisol, ACTH, mineralocorticoid and androgen precursors, electrolytes and blood pressure over the long term",
-   "Provide clinical genetics input with NR3C1 testing and screening of relatives, since the condition is heritable and can be clinically silent"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "glucocorticoid_resistance_syndrome-pathway",
-   "title": "Generalised glucocorticoid resistance (NR3C1): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by variants in NR3C1 encoding the glucocorticoid receptor, reducing tissue sensitivity to cortisol",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe or resistant hypertension with hypokalaemia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum cortisol and ACTH showing elevated levels without Cushingoid features, Midnight cortisol and diurnal profiling demonstrating an upwardly reset but preserved rhythm, Dexamethasone suppression testing showing relative"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Suppress the compensatory ACTH drive with a potent synthetic glucocorticoid of predominant glucocorticoid activity such as dexamethasone, reducing adrenal mineralocorticoid and androgen overproduction"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing the biochemical hypercortisolism as Cushing syndrome despite the absent phenotype"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of generalised glucocorticoid resistance (nr3c1)."
-  }
- ],
- "tables": [
-  {
-   "id": "glucocorticoid_resistance_syndrome-matrix",
-   "title": "Generalised glucocorticoid resistance (NR3C1): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by variants in NR3C1 encoding the glucocorticoid receptor, reducing tissue sensitivity to cortisol",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine / Genetics",
+  "specialty": "Endocrinology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Textbook of Endocrinology / OMIM",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by variants in NR3C1 encoding the glucocorticoid receptor, reducing tissue sensitivity to cortisol",
+      "There is high circulating cortisol and ACTH but, crucially, no Cushingoid phenotype because the tissues cannot respond to the excess",
+      "The compensatory ACTH drive stimulates adrenal overproduction of mineralocorticoids and androgens, producing the clinical features",
+      "Mineralocorticoid excess causes hypertension and hypokalaemic alkalosis, while androgen excess causes hirsutism, acne, menstrual disturbance, and precocious puberty or virilisation",
+      "The diagnosis rests on hypercortisolaemia with preserved (though upwardly reset) diurnal rhythm and resistance to dexamethasone suppression, in the absence of Cushingoid features",
+      "Management uses high-dose synthetic glucocorticoid with predominant glucocorticoid activity to suppress ACTH and thereby reduce the mineralocorticoid and androgen excess",
+      "Suspect the syndrome when biochemical hypercortisolism coexists with hypertension and androgen excess but no clinical Cushing syndrome"
     ],
-    [
-     "Key Investigations",
-     "Serum cortisol and ACTH showing elevated levels without Cushingoid features, Midnight cortisol and diurnal profiling",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The glucocorticoid receptor mediates the cellular actions of cortisol, including negative feedback on the hypothalamic-pituitary axis. Loss-of-function variants in NR3C1 reduce receptor number or function, so tissues are relatively resistant to cortisol. Impaired feedback allows ACTH to rise, which in turn drives the adrenal cortex to secrete more cortisol; because peripheral tissues remain unresponsive, the raised cortisol does not produce Cushingoid changes. The heightened ACTH stimulation also increases production of adrenal steroids with mineralocorticoid activity (such as deoxycorticosterone) and adrenal androgens, and the excess cortisol can spill over onto the mineralocorticoid receptor. This explains the combination of hypertension with hypokalaemic alkalosis and features of androgen excess despite normal or elevated cortisol.",
+    "additionalDifferentials": [
+      "Cushing syndrome",
+      "Congenital adrenal hyperplasia",
+      "Polycystic ovary syndrome (for the androgen features)",
+      "Primary hyperaldosteronism (for the hypertension and hypokalaemia)",
+      "Familial or acquired abnormalities of cortisol-binding globulin",
+      "Apparent mineralocorticoid excess"
     ],
-    [
-     "Primary Differentials",
-     "Cushing syndrome, Congenital adrenal hyperplasia, Polycystic ovary syndrome (for the androgen features)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum cortisol and ACTH showing elevated levels without Cushingoid features",
+      "Midnight cortisol and diurnal profiling demonstrating an upwardly reset but preserved rhythm",
+      "Dexamethasone suppression testing showing relative resistance to suppression",
+      "Serum potassium, renin, and adrenal androgen and mineralocorticoid precursor measurement",
+      "24-hour urinary free cortisol interpreted against the absence of clinical Cushing syndrome",
+      "NR3C1 gene sequencing"
     ],
-    [
-     "Management Strategy",
-     "Suppress the compensatory ACTH drive with a potent synthetic glucocorticoid of predominant glucocorticoid activity such as",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe or resistant hypertension with hypokalaemia",
+      "Marked virilisation or precocious puberty in children",
+      "Adrenal hyperplasia or incidental adrenal enlargement from chronic ACTH drive",
+      "Fatigue and features suggesting relative tissue cortisol deficiency during stress"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing the biochemical hypercortisolism as Cushing syndrome despite the absent phenotype",
-     "Prevent diagnostic or management error"
+    "prognosis": "With appropriate synthetic glucocorticoid therapy to suppress ACTH, blood pressure, electrolytes, and androgen-related features usually improve and the outlook is good; untreated disease carries the cardiovascular risks of chronic hypertension and the consequences of androgen excess.",
+    "pitfalls": [
+      "Misdiagnosing the biochemical hypercortisolism as Cushing syndrome despite the absent phenotype",
+      "Overlooking mineralocorticoid excess as the cause of hypertension and hypokalaemia",
+      "Attributing the androgen features to polycystic ovary syndrome alone",
+      "Failing to appreciate that affected tissues may be relatively cortisol-deficient under stress"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "OMIM entry for glucocorticoid resistance"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Suppress the compensatory ACTH drive with a potent synthetic glucocorticoid of predominant glucocorticoid activity such as dexamethasone, reducing adrenal mineralocorticoid and androgen overproduction",
+      "Treat residual hypertension and hypokalaemic alkalosis with a mineralocorticoid receptor antagonist such as spironolactone or eplerenone and potassium repletion where required",
+      "Address androgen-related features such as hirsutism, acne and menstrual disturbance, and manage virilisation or precocious puberty in children with growth monitoring",
+      "Titrate to the minimum glucocorticoid needed to normalise the axis, avoiding iatrogenic Cushingoid effects",
+      "Monitor cortisol, ACTH, mineralocorticoid and androgen precursors, electrolytes and blood pressure over the long term",
+      "Provide clinical genetics input with NR3C1 testing and screening of relatives, since the condition is heritable and can be clinically silent"
     ]
-   ],
-   "caption": "Overview comparison matrix for generalised glucocorticoid resistance (nr3c1)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "glucocorticoid-resistance-syndrome-real-image",
-   "title": "Generalised glucocorticoid resistance (NR3C1): Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "glucocorticoid_resistance_syndrome-pathway",
+      "title": "Generalised glucocorticoid resistance (NR3C1): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by variants in NR3C1 encoding the glucocorticoid receptor, reducing tissue sensitivity to cortisol",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe or resistant hypertension with hypokalaemia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum cortisol and ACTH showing elevated levels without Cushingoid features, Midnight cortisol and diurnal profiling demonstrating an upwardly reset but preserved rhythm, Dexamethasone suppression testing showing relative"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Suppress the compensatory ACTH drive with a potent synthetic glucocorticoid of predominant glucocorticoid activity such as dexamethasone, reducing adrenal mineralocorticoid and androgen overproduction"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing the biochemical hypercortisolism as Cushing syndrome despite the absent phenotype"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of generalised glucocorticoid resistance (nr3c1)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "glucocorticoid_resistance_syndrome-matrix",
+      "title": "Generalised glucocorticoid resistance (NR3C1): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by variants in NR3C1 encoding the glucocorticoid receptor, reducing tissue sensitivity to cortisol",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum cortisol and ACTH showing elevated levels without Cushingoid features, Midnight cortisol and diurnal profiling",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Cushing syndrome, Congenital adrenal hyperplasia, Polycystic ovary syndrome (for the androgen features)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Suppress the compensatory ACTH drive with a potent synthetic glucocorticoid of predominant glucocorticoid activity such as",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing the biochemical hypercortisolism as Cushing syndrome despite the absent phenotype",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for generalised glucocorticoid resistance (nr3c1)."
+    }
+  ],
+  "diagrams": []
 }

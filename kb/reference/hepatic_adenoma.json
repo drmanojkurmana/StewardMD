@@ -1,175 +1,153 @@
 {
- "id": "hepatic_adenoma",
- "name": "Hepatocellular adenoma",
- "aliases": [
-  "hepatic adenoma",
-  "liver cell adenoma",
-  "hepatocellular adenoma",
-  "HCA"
- ],
- "class": "non_infective",
- "system": "Gastroenterology / Hepatology",
- "specialty": "Hepatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Sherlock's Diseases of the Liver and Biliary System / EASL benign liver tumour guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A benign monoclonal hepatocellular neoplasm classically seen in women taking oestrogen-containing contraceptives and in users of anabolic-androgenic steroids",
-   "Multiple adenomas (adenomatosis) and specific subtypes are associated with glycogen storage disease, obesity and the metabolic syndrome",
-   "The two principal clinical concerns are haemorrhage, especially with lesions larger than about 5 cm or those that are subcapsular, and malignant transformation to hepatocellular carcinoma",
-   "Molecular subtyping is central: inflammatory, HNF1-alpha-inactivated, beta-catenin-activated, and unclassified types differ in behaviour",
-   "Beta-catenin-activated adenomas carry the greatest risk of malignant transformation and are more common in men",
-   "MRI helps subtype the lesion, with HNF1-alpha adenomas showing diffuse fat and inflammatory adenomas showing the atoll sign and marked enhancement",
-   "First-line management is oral-contraceptive cessation and weight loss with interval imaging, reserving embolisation or resection for large, growing, symptomatic, male-sex or high-risk subtype lesions"
+  "id": "hepatic_adenoma",
+  "name": "Hepatocellular adenoma",
+  "aliases": [
+    "hepatic adenoma",
+    "liver cell adenoma",
+    "hepatocellular adenoma",
+    "HCA"
   ],
-  "pathophysiology": "Hepatocellular adenoma is a benign clonal proliferation of hepatocytes strongly influenced by sex-steroid hormones, arising against a background of oestrogen or androgen exposure and metabolic factors. Distinct genetic drivers define subtypes: HNF1-alpha inactivation produces steatotic adenomas, activation of inflammatory signalling pathways produces telangiectatic/inflammatory adenomas prone to bleeding, and beta-catenin activation predisposes to atypia and malignant transformation. The lesions are perfused by unpaired arteries without a normal ductal framework, and their thin-walled vasculature and lack of fibrous support underlie the tendency to rupture and haemorrhage.",
-  "additionalDifferentials": [
-   "Focal nodular hyperplasia",
-   "Well-differentiated hepatocellular carcinoma",
-   "Fibrolamellar carcinoma",
-   "Focal fatty change or fat-containing lesion",
-   "Regenerative or dysplastic nodule",
-   "Hypervascular metastasis"
-  ],
-  "additionalInvestigations": [
-   "Multiphase contrast-enhanced MRI, ideally with a hepatobiliary agent, to characterise and subtype the lesion",
-   "Assessment of lesion size and subcapsular location to estimate bleeding risk",
-   "Liver function tests and, in adenomatosis, evaluation for glycogen storage disease",
-   "Alpha-fetoprotein and imaging surveillance to monitor for malignant transformation",
-   "Biopsy in selected cases to confirm subtype when management hinges on it",
-   "Hormonal and metabolic history including contraceptive, anabolic-steroid and metabolic-syndrome factors"
-  ],
-  "redFlags": [
-   "Acute severe abdominal pain with haemodynamic instability from ruptured adenoma and haemoperitoneum",
-   "Lesion larger than approximately 5 cm or demonstrable growth on follow-up",
-   "Beta-catenin-activated subtype or male sex, given elevated malignancy risk",
-   "Rising alpha-fetoprotein or imaging features suggesting transformation to carcinoma"
-  ],
-  "prognosis": "Many small adenomas stabilise or regress after removal of hormonal drivers and weight loss, but larger or high-risk lesions carry risks of haemorrhage and malignant transformation, so selected cases require intervention and continued surveillance.",
-  "pitfalls": [
-   "Mistaking an adenoma for focal nodular hyperplasia and underestimating bleeding and malignancy risk",
-   "Continuing oestrogen-containing contraception or anabolic steroids after diagnosis",
-   "Assuming a small lesion is safe without accounting for subtype and patient sex",
-   "Attempting biopsy of a highly vascular subcapsular lesion without weighing haemorrhage risk",
-   "Neglecting surveillance in patients managed conservatively"
-  ],
-  "references": [
-   "Sherlock's Diseases of the Liver and Biliary System",
-   "EASL Clinical Practice Guidelines on the management of benign liver tumours"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Withdraw hormonal drivers by stopping oestrogen-containing contraceptives and anabolic-androgenic steroids, and encourage weight loss, since many small adenomas then regress",
-   "Resect lesions that are large, subcapsular, enlarging, beta-catenin-activated, or occurring in men, given the risks of haemorrhage and malignant transformation",
-   "Manage acute intralesional or intraperitoneal haemorrhage with resuscitation and transarterial embolisation, followed by interval resection if needed",
-   "Surveil smaller lesions with serial contrast-enhanced MRI and alpha-fetoprotein for growth or malignant change",
-   "Counsel women on the risk of enlargement and rupture in pregnancy and plan accordingly",
-   "In adenomatosis, evaluate and manage associated glycogen storage disease and the metabolic syndrome",
-   "Refer to a hepatobiliary multidisciplinary team for decisions on resection versus surveillance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hepatic_adenoma-pathway",
-   "title": "Hepatocellular adenoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A benign monoclonal hepatocellular neoplasm classically seen in women taking oestrogen-containing contraceptives and in users of anabolic-androgenic steroids",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute severe abdominal pain with haemodynamic instability from ruptured adenoma and haemoperitoneum",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Multiphase contrast-enhanced MRI, ideally with a hepatobiliary agent, to characterise and subtype the lesion, Assessment of lesion size and subcapsular location to estimate bleeding risk, Liver function tests and, in"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Withdraw hormonal drivers by stopping oestrogen-containing contraceptives and anabolic-androgenic steroids, and encourage weight loss, since many small adenomas then regress"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking an adenoma for focal nodular hyperplasia and underestimating bleeding and malignancy risk"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hepatocellular adenoma."
-  }
- ],
- "tables": [
-  {
-   "id": "hepatic_adenoma-matrix",
-   "title": "Hepatocellular adenoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A benign monoclonal hepatocellular neoplasm classically seen in women taking oestrogen-containing contraceptives and in users of",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastroenterology / Hepatology",
+  "specialty": "Hepatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sherlock's Diseases of the Liver and Biliary System / EASL benign liver tumour guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A benign monoclonal hepatocellular neoplasm classically seen in women taking oestrogen-containing contraceptives and in users of anabolic-androgenic steroids",
+      "Multiple adenomas (adenomatosis) and specific subtypes are associated with glycogen storage disease, obesity and the metabolic syndrome",
+      "The two principal clinical concerns are haemorrhage, especially with lesions larger than about 5 cm or those that are subcapsular, and malignant transformation to hepatocellular carcinoma",
+      "Molecular subtyping is central: inflammatory, HNF1-alpha-inactivated, beta-catenin-activated, and unclassified types differ in behaviour",
+      "Beta-catenin-activated adenomas carry the greatest risk of malignant transformation and are more common in men",
+      "MRI helps subtype the lesion, with HNF1-alpha adenomas showing diffuse fat and inflammatory adenomas showing the atoll sign and marked enhancement",
+      "First-line management is oral-contraceptive cessation and weight loss with interval imaging, reserving embolisation or resection for large, growing, symptomatic, male-sex or high-risk subtype lesions"
     ],
-    [
-     "Key Investigations",
-     "Multiphase contrast-enhanced MRI, ideally with a hepatobiliary agent, to characterise and subtype the lesion, Assessment of",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Hepatocellular adenoma is a benign clonal proliferation of hepatocytes strongly influenced by sex-steroid hormones, arising against a background of oestrogen or androgen exposure and metabolic factors. Distinct genetic drivers define subtypes: HNF1-alpha inactivation produces steatotic adenomas, activation of inflammatory signalling pathways produces telangiectatic/inflammatory adenomas prone to bleeding, and beta-catenin activation predisposes to atypia and malignant transformation. The lesions are perfused by unpaired arteries without a normal ductal framework, and their thin-walled vasculature and lack of fibrous support underlie the tendency to rupture and haemorrhage.",
+    "additionalDifferentials": [
+      "Focal nodular hyperplasia",
+      "Well-differentiated hepatocellular carcinoma",
+      "Fibrolamellar carcinoma",
+      "Focal fatty change or fat-containing lesion",
+      "Regenerative or dysplastic nodule",
+      "Hypervascular metastasis"
     ],
-    [
-     "Primary Differentials",
-     "Focal nodular hyperplasia, Well-differentiated hepatocellular carcinoma, Fibrolamellar carcinoma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Multiphase contrast-enhanced MRI, ideally with a hepatobiliary agent, to characterise and subtype the lesion",
+      "Assessment of lesion size and subcapsular location to estimate bleeding risk",
+      "Liver function tests and, in adenomatosis, evaluation for glycogen storage disease",
+      "Alpha-fetoprotein and imaging surveillance to monitor for malignant transformation",
+      "Biopsy in selected cases to confirm subtype when management hinges on it",
+      "Hormonal and metabolic history including contraceptive, anabolic-steroid and metabolic-syndrome factors"
     ],
-    [
-     "Management Strategy",
-     "Withdraw hormonal drivers by stopping oestrogen-containing contraceptives and anabolic-androgenic steroids, and encourage weight",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute severe abdominal pain with haemodynamic instability from ruptured adenoma and haemoperitoneum",
+      "Lesion larger than approximately 5 cm or demonstrable growth on follow-up",
+      "Beta-catenin-activated subtype or male sex, given elevated malignancy risk",
+      "Rising alpha-fetoprotein or imaging features suggesting transformation to carcinoma"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking an adenoma for focal nodular hyperplasia and underestimating bleeding and malignancy risk",
-     "Prevent diagnostic or management error"
+    "prognosis": "Many small adenomas stabilise or regress after removal of hormonal drivers and weight loss, but larger or high-risk lesions carry risks of haemorrhage and malignant transformation, so selected cases require intervention and continued surveillance.",
+    "pitfalls": [
+      "Mistaking an adenoma for focal nodular hyperplasia and underestimating bleeding and malignancy risk",
+      "Continuing oestrogen-containing contraception or anabolic steroids after diagnosis",
+      "Assuming a small lesion is safe without accounting for subtype and patient sex",
+      "Attempting biopsy of a highly vascular subcapsular lesion without weighing haemorrhage risk",
+      "Neglecting surveillance in patients managed conservatively"
+    ],
+    "references": [
+      "Sherlock's Diseases of the Liver and Biliary System",
+      "EASL Clinical Practice Guidelines on the management of benign liver tumours"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Withdraw hormonal drivers by stopping oestrogen-containing contraceptives and anabolic-androgenic steroids, and encourage weight loss, since many small adenomas then regress",
+      "Resect lesions that are large, subcapsular, enlarging, beta-catenin-activated, or occurring in men, given the risks of haemorrhage and malignant transformation",
+      "Manage acute intralesional or intraperitoneal haemorrhage with resuscitation and transarterial embolisation, followed by interval resection if needed",
+      "Surveil smaller lesions with serial contrast-enhanced MRI and alpha-fetoprotein for growth or malignant change",
+      "Counsel women on the risk of enlargement and rupture in pregnancy and plan accordingly",
+      "In adenomatosis, evaluate and manage associated glycogen storage disease and the metabolic syndrome",
+      "Refer to a hepatobiliary multidisciplinary team for decisions on resection versus surveillance"
     ]
-   ],
-   "caption": "Overview comparison matrix for hepatocellular adenoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hepatic-adenoma-real-image",
-   "title": "Hepatocellular adenoma: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "hepatic_adenoma-pathway",
+      "title": "Hepatocellular adenoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A benign monoclonal hepatocellular neoplasm classically seen in women taking oestrogen-containing contraceptives and in users of anabolic-androgenic steroids",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute severe abdominal pain with haemodynamic instability from ruptured adenoma and haemoperitoneum",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Multiphase contrast-enhanced MRI, ideally with a hepatobiliary agent, to characterise and subtype the lesion, Assessment of lesion size and subcapsular location to estimate bleeding risk, Liver function tests and, in"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Withdraw hormonal drivers by stopping oestrogen-containing contraceptives and anabolic-androgenic steroids, and encourage weight loss, since many small adenomas then regress"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking an adenoma for focal nodular hyperplasia and underestimating bleeding and malignancy risk"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hepatocellular adenoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hepatic_adenoma-matrix",
+      "title": "Hepatocellular adenoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A benign monoclonal hepatocellular neoplasm classically seen in women taking oestrogen-containing contraceptives and in users of",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Multiphase contrast-enhanced MRI, ideally with a hepatobiliary agent, to characterise and subtype the lesion, Assessment of",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Focal nodular hyperplasia, Well-differentiated hepatocellular carcinoma, Fibrolamellar carcinoma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Withdraw hormonal drivers by stopping oestrogen-containing contraceptives and anabolic-androgenic steroids, and encourage weight",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking an adenoma for focal nodular hyperplasia and underestimating bleeding and malignancy risk",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hepatocellular adenoma."
+    }
+  ],
+  "diagrams": []
 }

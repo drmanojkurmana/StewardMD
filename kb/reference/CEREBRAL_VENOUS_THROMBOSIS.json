@@ -1,189 +1,167 @@
 {
- "id": "CEREBRAL_VENOUS_THROMBOSIS",
- "name": "Cerebral venous sinus thrombosis",
- "system": "Neurology",
- "class": "non_infective",
- "chapter": null,
- "page": null,
- "aliases": [
-  "cerebral venous",
-  "sinus thrombosis",
-  "CVST",
-  "cerebral venous thrombosis",
-  "CVT",
-  "dural venous sinus thrombosis",
-  "cortical vein thrombosis",
-  "venous stroke"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "clinicalPearls": [
-   "Suspect in a young patient (especially female on estrogen-containing contraception or postpartum) with new headache plus seizure, focal deficit, or altered consciousness",
-   "Headache is the most common presenting symptom and can be subacute, progressive, or thunderclap-like, sometimes mimicking idiopathic intracranial hypertension",
-   "Papilledema from raised intracranial pressure may occur even without a clear focal deficit",
-   "Deficits often do not respect a single arterial territory and may be bilateral or migrate, reflecting venous rather than arterial infarction",
-   "Hemorrhagic venous infarcts are common and should not by themselves prompt withholding anticoagulation",
-   "Seizures, especially with focal onset, occur more frequently than in typical arterial ischemic stroke",
-   "A normal non-contrast CT does not exclude the diagnosis; dedicated venous imaging is required",
-   "Consider an underlying prothrombotic, infectious, or inflammatory trigger in every confirmed case"
+  "id": "CEREBRAL_VENOUS_THROMBOSIS",
+  "name": "Cerebral venous sinus thrombosis",
+  "system": "Neurology",
+  "class": "non_infective",
+  "chapter": null,
+  "page": null,
+  "aliases": [
+    "cerebral venous",
+    "sinus thrombosis",
+    "CVST",
+    "cerebral venous thrombosis",
+    "CVT",
+    "dural venous sinus thrombosis",
+    "cortical vein thrombosis",
+    "venous stroke"
   ],
-  "pathophysiology": "Thrombosis of a dural venous sinus or cortical vein obstructs cerebral venous drainage, raising venous and capillary pressure. This leads to impaired CSF resorption with intracranial hypertension, and can progress to vasogenic edema, venous congestion, and eventually venous infarction with secondary hemorrhage. Because venous drainage territories overlap and are variable between individuals, resulting deficits are often atypical for a single vascular distribution.",
-  "additionalDifferentials": [
-   "Arterial ischemic stroke",
-   "Idiopathic intracranial hypertension",
-   "Subarachnoid hemorrhage",
-   "Meningitis or encephalitis",
-   "Posterior reversible encephalopathy syndrome",
-   "Primary or metastatic brain tumor with mass effect"
-  ],
-  "infectionMimics": [
-   "Bacterial meningitis",
-   "Cerebral abscess",
-   "Septic (infective) intracranial venous sinus thrombosis from adjacent otitis, mastoiditis, or sinusitis"
-  ],
-  "nonInfectiousMimics": [
-   "Idiopathic intracranial hypertension (pseudotumor cerebri)",
-   "Arterial ischemic stroke",
-   "Subarachnoid or intraparenchymal hemorrhage from other causes",
-   "Migraine with aura",
-   "Posterior reversible encephalopathy syndrome"
-  ],
-  "additionalInvestigations": [
-   "MR venography or CT venography — confirms sinus/cortical vein occlusion and is the primary diagnostic study",
-   "Non-contrast head CT — may show hyperdense sinus or hemorrhagic venous infarct but can be normal early on",
-   "MRI brain with venous sequences — detects venous infarction, edema, and hemorrhage better than CT",
-   "D-dimer — supportive if elevated but a normal level does not exclude the diagnosis, especially with isolated headache",
-   "Coagulation and thrombophilia workup — evaluates for underlying prothrombotic states once acute treatment is underway",
-   "Lumbar puncture with opening pressure — assesses for raised intracranial pressure and excludes infectious causes when imaging is inconclusive",
-   "Ophthalmologic exam for papilledema — assesses risk of visual loss from raised intracranial pressure",
-   "Screening for precipitating factors (pregnancy/postpartum status, oral contraceptive or hormonal therapy use, malignancy, recent infection or dehydration)"
-  ],
-  "redFlags": [
-   "Rapidly declining consciousness or signs of impending herniation",
-   "New or worsening papilledema with visual field loss threatening vision",
-   "Extensive bilateral hemorrhagic venous infarction on imaging",
-   "Status epilepticus or recurrent seizures at presentation",
-   "Clinical deterioration despite anticoagulation, suggesting need for endovascular or surgical intervention"
-  ],
-  "pitfalls": [
-   "Dismissing headache as migraine or tension-type without considering CVST in at-risk patients (pregnancy, postpartum, hormonal contraception, thrombophilia)",
-   "Withholding anticoagulation because of hemorrhagic venous infarction, which is generally still an indication for treatment rather than a contraindication",
-   "Relying on a normal non-contrast CT to exclude the diagnosis instead of obtaining dedicated venous imaging",
-   "Attributing bilateral or non-arterial-territory deficits to a psychiatric or functional cause rather than pursuing venous imaging"
-  ],
-  "prognosis": "Most patients who receive timely anticoagulation have a favorable outcome with good functional recovery, though a minority develop persistent neurological deficits, chronic intracranial hypertension, or, rarely, death from extensive venous infarction or herniation. Recurrence risk depends on the presence and persistence of underlying prothrombotic risk factors.",
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e — Cerebrovascular Diseases (Cerebral Venous Thrombosis)"
-  ],
-  "crossLinks": [
-   "ischemic_stroke"
-  ],
-  "management": [
-   "Prompt anticoagulation with therapeutic heparin followed by an oral anticoagulant, continued even when a haemorrhagic venous infarct is present.",
-   "Endovascular thrombectomy or thrombolysis reserved for patients who deteriorate despite adequate anticoagulation.",
-   "Management of raised intracranial pressure with acetazolamide, therapeutic lumbar puncture, and decompressive craniectomy for impending herniation.",
-   "Antiseizure medication for patients who have had seizures.",
-   "Identification and removal of precipitants, including stopping oestrogen-containing contraception and treating any underlying infection, with a thrombophilia and malignancy work-up.",
-   "Duration of anticoagulation guided by whether the event was provoked or unprovoked and by any identified thrombophilia.",
-   "Multidisciplinary stroke and neurology care, with escalation for declining consciousness or extensive venous infarction."
-  ]
- },
- "algorithms": [
-  {
-   "id": "cerebral_venous_thrombosis-pathway",
-   "title": "Cerebral venous sinus thrombosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Suspect in a young patient (especially female on estrogen-containing contraception or postpartum) with new headache plus seizure, focal deficit, or altered consciousness",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly declining consciousness or signs of impending herniation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MR venography or CT venography - confirms sinus/cortical vein occlusion and is the primary diagnostic study, Non-contrast head CT - may show hyperdense sinus or hemorrhagic venous infarct but can be normal early on, MRI"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Prompt anticoagulation with therapeutic heparin followed by an oral anticoagulant, continued even when a haemorrhagic venous infarct is present."
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing headache as migraine or tension-type without considering CVST in at-risk patients (pregnancy, postpartum, hormonal contraception, thrombophilia)"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of cerebral venous sinus thrombosis."
-  }
- ],
- "tables": [
-  {
-   "id": "cerebral_venous_thrombosis-matrix",
-   "title": "Cerebral venous sinus thrombosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Suspect in a young patient (especially female on estrogen-containing contraception or postpartum) with new headache plus seizure,",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "clinicalPearls": [
+      "Suspect in a young patient (especially female on estrogen-containing contraception or postpartum) with new headache plus seizure, focal deficit, or altered consciousness",
+      "Headache is the most common presenting symptom and can be subacute, progressive, or thunderclap-like, sometimes mimicking idiopathic intracranial hypertension",
+      "Papilledema from raised intracranial pressure may occur even without a clear focal deficit",
+      "Deficits often do not respect a single arterial territory and may be bilateral or migrate, reflecting venous rather than arterial infarction",
+      "Hemorrhagic venous infarcts are common and should not by themselves prompt withholding anticoagulation",
+      "Seizures, especially with focal onset, occur more frequently than in typical arterial ischemic stroke",
+      "A normal non-contrast CT does not exclude the diagnosis; dedicated venous imaging is required",
+      "Consider an underlying prothrombotic, infectious, or inflammatory trigger in every confirmed case"
     ],
-    [
-     "Key Investigations",
-     "MR venography or CT venography - confirms sinus/cortical vein occlusion and is the primary diagnostic study, Non-contrast head CT",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Thrombosis of a dural venous sinus or cortical vein obstructs cerebral venous drainage, raising venous and capillary pressure. This leads to impaired CSF resorption with intracranial hypertension, and can progress to vasogenic edema, venous congestion, and eventually venous infarction with secondary hemorrhage. Because venous drainage territories overlap and are variable between individuals, resulting deficits are often atypical for a single vascular distribution.",
+    "additionalDifferentials": [
+      "Arterial ischemic stroke",
+      "Idiopathic intracranial hypertension",
+      "Subarachnoid hemorrhage",
+      "Meningitis or encephalitis",
+      "Posterior reversible encephalopathy syndrome",
+      "Primary or metastatic brain tumor with mass effect"
     ],
-    [
-     "Primary Differentials",
-     "Arterial ischemic stroke, Idiopathic intracranial hypertension, Subarachnoid hemorrhage",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Bacterial meningitis",
+      "Cerebral abscess",
+      "Septic (infective) intracranial venous sinus thrombosis from adjacent otitis, mastoiditis, or sinusitis"
     ],
-    [
-     "Management Strategy",
-     "Prompt anticoagulation with therapeutic heparin followed by an oral anticoagulant, continued even when a haemorrhagic venous",
-     "Core treatment modality"
+    "nonInfectiousMimics": [
+      "Idiopathic intracranial hypertension (pseudotumor cerebri)",
+      "Arterial ischemic stroke",
+      "Subarachnoid or intraparenchymal hemorrhage from other causes",
+      "Migraine with aura",
+      "Posterior reversible encephalopathy syndrome"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing headache as migraine or tension-type without considering CVST in at-risk patients (pregnancy, postpartum, hormonal",
-     "Prevent diagnostic or management error"
+    "additionalInvestigations": [
+      "MR venography or CT venography — confirms sinus/cortical vein occlusion and is the primary diagnostic study",
+      "Non-contrast head CT — may show hyperdense sinus or hemorrhagic venous infarct but can be normal early on",
+      "MRI brain with venous sequences — detects venous infarction, edema, and hemorrhage better than CT",
+      "D-dimer — supportive if elevated but a normal level does not exclude the diagnosis, especially with isolated headache",
+      "Coagulation and thrombophilia workup — evaluates for underlying prothrombotic states once acute treatment is underway",
+      "Lumbar puncture with opening pressure — assesses for raised intracranial pressure and excludes infectious causes when imaging is inconclusive",
+      "Ophthalmologic exam for papilledema — assesses risk of visual loss from raised intracranial pressure",
+      "Screening for precipitating factors (pregnancy/postpartum status, oral contraceptive or hormonal therapy use, malignancy, recent infection or dehydration)"
+    ],
+    "redFlags": [
+      "Rapidly declining consciousness or signs of impending herniation",
+      "New or worsening papilledema with visual field loss threatening vision",
+      "Extensive bilateral hemorrhagic venous infarction on imaging",
+      "Status epilepticus or recurrent seizures at presentation",
+      "Clinical deterioration despite anticoagulation, suggesting need for endovascular or surgical intervention"
+    ],
+    "pitfalls": [
+      "Dismissing headache as migraine or tension-type without considering CVST in at-risk patients (pregnancy, postpartum, hormonal contraception, thrombophilia)",
+      "Withholding anticoagulation because of hemorrhagic venous infarction, which is generally still an indication for treatment rather than a contraindication",
+      "Relying on a normal non-contrast CT to exclude the diagnosis instead of obtaining dedicated venous imaging",
+      "Attributing bilateral or non-arterial-territory deficits to a psychiatric or functional cause rather than pursuing venous imaging"
+    ],
+    "prognosis": "Most patients who receive timely anticoagulation have a favorable outcome with good functional recovery, though a minority develop persistent neurological deficits, chronic intracranial hypertension, or, rarely, death from extensive venous infarction or herniation. Recurrence risk depends on the presence and persistence of underlying prothrombotic risk factors.",
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e — Cerebrovascular Diseases (Cerebral Venous Thrombosis)"
+    ],
+    "crossLinks": [
+      "ischemic_stroke"
+    ],
+    "management": [
+      "Prompt anticoagulation with therapeutic heparin followed by an oral anticoagulant, continued even when a haemorrhagic venous infarct is present.",
+      "Endovascular thrombectomy or thrombolysis reserved for patients who deteriorate despite adequate anticoagulation.",
+      "Management of raised intracranial pressure with acetazolamide, therapeutic lumbar puncture, and decompressive craniectomy for impending herniation.",
+      "Antiseizure medication for patients who have had seizures.",
+      "Identification and removal of precipitants, including stopping oestrogen-containing contraception and treating any underlying infection, with a thrombophilia and malignancy work-up.",
+      "Duration of anticoagulation guided by whether the event was provoked or unprovoked and by any identified thrombophilia.",
+      "Multidisciplinary stroke and neurology care, with escalation for declining consciousness or extensive venous infarction."
     ]
-   ],
-   "caption": "Overview comparison matrix for cerebral venous sinus thrombosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "cerebral-venous-thrombosis-real-image",
-   "title": "Cerebral venous sinus thrombosis: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "cerebral_venous_thrombosis-pathway",
+      "title": "Cerebral venous sinus thrombosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Suspect in a young patient (especially female on estrogen-containing contraception or postpartum) with new headache plus seizure, focal deficit, or altered consciousness",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly declining consciousness or signs of impending herniation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MR venography or CT venography - confirms sinus/cortical vein occlusion and is the primary diagnostic study, Non-contrast head CT - may show hyperdense sinus or hemorrhagic venous infarct but can be normal early on, MRI"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Prompt anticoagulation with therapeutic heparin followed by an oral anticoagulant, continued even when a haemorrhagic venous infarct is present."
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing headache as migraine or tension-type without considering CVST in at-risk patients (pregnancy, postpartum, hormonal contraception, thrombophilia)"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of cerebral venous sinus thrombosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "cerebral_venous_thrombosis-matrix",
+      "title": "Cerebral venous sinus thrombosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Suspect in a young patient (especially female on estrogen-containing contraception or postpartum) with new headache plus seizure,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MR venography or CT venography - confirms sinus/cortical vein occlusion and is the primary diagnostic study, Non-contrast head CT",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Arterial ischemic stroke, Idiopathic intracranial hypertension, Subarachnoid hemorrhage",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Prompt anticoagulation with therapeutic heparin followed by an oral anticoagulant, continued even when a haemorrhagic venous",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing headache as migraine or tension-type without considering CVST in at-risk patients (pregnancy, postpartum, hormonal",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for cerebral venous sinus thrombosis."
+    }
+  ],
+  "diagrams": []
 }

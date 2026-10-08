@@ -1,175 +1,153 @@
 {
- "id": "radiation_proctitis",
- "name": "Radiation proctitis",
- "aliases": [
-  "radiation proctopathy"
- ],
- "class": "non_infective",
- "system": "Gastrointestinal",
- "specialty": "Gastroenterology / Clinical oncology",
- "referenceOnly": true,
- "reference": {
-  "source": "Gastroenterology and oncology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Rectal injury from pelvic radiotherapy, occurring in acute (during/soon after treatment) and chronic (months to years later) forms",
-   "Acute proctitis causes diarrhoea, urgency, tenesmus and mucus; chronic disease causes rectal bleeding from telangiectasia",
-   "It commonly follows radiotherapy for prostate, cervical, rectal or other pelvic cancers",
-   "Chronic radiation proctopathy is characterised by mucosal telangiectasia, ischaemia and fibrosis",
-   "Endoscopy shows friable mucosa with telangiectasia, and biopsy carries a fistula risk in irradiated tissue",
-   "Treatment ranges from topical therapies to endoscopic ablation (for example argon plasma coagulation) for bleeding"
+  "id": "radiation_proctitis",
+  "name": "Radiation proctitis",
+  "aliases": [
+    "radiation proctopathy"
   ],
-  "pathophysiology": "Radiation proctitis results from ionising radiation damage to the rectal mucosa and vasculature. Acute injury reflects direct mucosal cell death and inflammation during treatment, which usually recovers. Chronic radiation proctopathy develops later from progressive obliterative endarteritis and fibrosis, producing mucosal ischaemia and fragile telangiectatic vessels that bleed, and in severe cases strictures, ulceration or fistulae. The chronic changes are progressive and relate to the radiation dose and technique.",
-  "additionalDifferentials": [
-   "Inflammatory bowel disease proctitis",
-   "Infective proctitis",
-   "Ischaemic proctitis",
-   "Recurrent or new pelvic malignancy",
-   "Solitary rectal ulcer syndrome"
-  ],
-  "additionalInvestigations": [
-   "History of pelvic radiotherapy",
-   "Sigmoidoscopy or colonoscopy documenting telangiectasia and mucosal change",
-   "Cautious biopsy given fistula risk in irradiated tissue",
-   "Full blood count and iron studies for chronic bleeding",
-   "Imaging if stricture, fistula or recurrent tumour is suspected"
-  ],
-  "redFlags": [
-   "Severe or transfusion-dependent rectal bleeding",
-   "Fistula formation (for example rectovaginal or rectovesical)",
-   "Stricturing with obstruction",
-   "Features suggesting recurrent malignancy"
-  ],
-  "prognosis": "Acute proctitis usually settles after treatment ends; chronic proctopathy tends to be persistent or progressive but bleeding is often controllable with endoscopic and medical measures.",
-  "pitfalls": [
-   "Aggressive biopsy of irradiated rectum precipitating a fistula",
-   "Attributing bleeding to radiation without excluding recurrent tumour",
-   "Confusing it with inflammatory bowel disease",
-   "Underestimating chronic progressive change"
-  ],
-  "references": [
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-   "Clinical oncology references (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Acute proctitis (within weeks of pelvic radiotherapy) is managed conservatively with dietary fiber and lactose reduction, plus antidiarrheal agents such as loperamide or diphenoxylate/atropine class agents if symptoms are more than mild",
-   "Treatment-related hemorrhoids are managed with sitz baths and topical hydrocortisone, and radiotherapy is usually continued through mild to moderate acute proctitis, with treatment breaks reserved for severe symptoms and decided jointly with radiation oncology",
-   "Milder chronic rectal bleeding and mucous discharge are treated with topical steroid suppositories, sitz baths, and increased dietary fiber",
-   "Bleeding refractory to conservative measures is treated with endoscopic argon plasma coagulation to ablate telangiectatic vessels",
-   "Hyperbaric oxygen therapy is used for refractory chronic bleeding to improve mucosal oxygenation and healing",
-   "Topical sucralfate and formalin application are additional options described for hemorrhagic radiation proctopathy refractory to simpler measures",
-   "Chronic bleeding should prompt evaluation for iron-deficiency anemia with iron replacement and transfusion as needed",
-   "Deep rectal biopsy and cauterization or other instrumentation of irradiated tissue should be avoided unless absolutely necessary because of elevated fistula risk",
-   "Surgical referral is reserved for stricture, fistula, or bleeding refractory to endoscopic and medical measures, approached cautiously and with imaging",
-   "Before attributing bowel symptoms to radiation, recurrent or new pelvic malignancy, inflammatory bowel disease, infective proctitis, and ischemic proctitis must be excluded, especially with new or progressive bleeding",
-   "Rectal spacer placement at the time of prostate radiotherapy planning reduces the incidence and severity of late rectal toxicity, while adding a brachytherapy boost increases severe late gastrointestinal toxicity risk, a trade-off weighed during initial treatment planning",
-   "Ongoing or recurrent bleeding should be monitored with blood counts and iron studies, with endoscopic follow-up used judiciously and favoring visual assessment over biopsy",
-   "Severe or transfusion-dependent bleeding, suspected fistula, or obstructing stricture warrants referral to gastroenterology or colorectal surgery and the treating radiation oncologist",
-   "Any suspicion of recurrent or new pelvic malignancy as the cause of symptoms should prompt urgent oncology re-evaluation rather than assuming a purely radiation-related cause"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "radiation_proctitis-pathway",
-   "title": "Radiation proctitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Rectal injury from pelvic radiotherapy, occurring in acute (during/soon after treatment) and chronic (months to years later) forms",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe or transfusion-dependent rectal bleeding",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: History of pelvic radiotherapy, Sigmoidoscopy or colonoscopy documenting telangiectasia and mucosal change, Cautious biopsy given fistula risk in irradiated tissue"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Acute proctitis (within weeks of pelvic radiotherapy) is managed conservatively with dietary fiber and lactose reduction, plus antidiarrheal agents such as loperamide or diphenoxylate/atropine class agents if symptoms"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Aggressive biopsy of irradiated rectum precipitating a fistula"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of radiation proctitis."
-  }
- ],
- "tables": [
-  {
-   "id": "radiation_proctitis-matrix",
-   "title": "Radiation proctitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Rectal injury from pelvic radiotherapy, occurring in acute (during/soon after treatment) and chronic (months to years later) forms",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastrointestinal",
+  "specialty": "Gastroenterology / Clinical oncology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Gastroenterology and oncology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Rectal injury from pelvic radiotherapy, occurring in acute (during/soon after treatment) and chronic (months to years later) forms",
+      "Acute proctitis causes diarrhoea, urgency, tenesmus and mucus; chronic disease causes rectal bleeding from telangiectasia",
+      "It commonly follows radiotherapy for prostate, cervical, rectal or other pelvic cancers",
+      "Chronic radiation proctopathy is characterised by mucosal telangiectasia, ischaemia and fibrosis",
+      "Endoscopy shows friable mucosa with telangiectasia, and biopsy carries a fistula risk in irradiated tissue",
+      "Treatment ranges from topical therapies to endoscopic ablation (for example argon plasma coagulation) for bleeding"
     ],
-    [
-     "Key Investigations",
-     "History of pelvic radiotherapy, Sigmoidoscopy or colonoscopy documenting telangiectasia and mucosal change, Cautious biopsy given",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Radiation proctitis results from ionising radiation damage to the rectal mucosa and vasculature. Acute injury reflects direct mucosal cell death and inflammation during treatment, which usually recovers. Chronic radiation proctopathy develops later from progressive obliterative endarteritis and fibrosis, producing mucosal ischaemia and fragile telangiectatic vessels that bleed, and in severe cases strictures, ulceration or fistulae. The chronic changes are progressive and relate to the radiation dose and technique.",
+    "additionalDifferentials": [
+      "Inflammatory bowel disease proctitis",
+      "Infective proctitis",
+      "Ischaemic proctitis",
+      "Recurrent or new pelvic malignancy",
+      "Solitary rectal ulcer syndrome"
     ],
-    [
-     "Primary Differentials",
-     "Inflammatory bowel disease proctitis, Infective proctitis, Ischaemic proctitis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "History of pelvic radiotherapy",
+      "Sigmoidoscopy or colonoscopy documenting telangiectasia and mucosal change",
+      "Cautious biopsy given fistula risk in irradiated tissue",
+      "Full blood count and iron studies for chronic bleeding",
+      "Imaging if stricture, fistula or recurrent tumour is suspected"
     ],
-    [
-     "Management Strategy",
-     "Acute proctitis (within weeks of pelvic radiotherapy) is managed conservatively with dietary fiber and lactose reduction, plus",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe or transfusion-dependent rectal bleeding",
+      "Fistula formation (for example rectovaginal or rectovesical)",
+      "Stricturing with obstruction",
+      "Features suggesting recurrent malignancy"
     ],
-    [
-     "Clinical Pitfall",
-     "Aggressive biopsy of irradiated rectum precipitating a fistula",
-     "Prevent diagnostic or management error"
+    "prognosis": "Acute proctitis usually settles after treatment ends; chronic proctopathy tends to be persistent or progressive but bleeding is often controllable with endoscopic and medical measures.",
+    "pitfalls": [
+      "Aggressive biopsy of irradiated rectum precipitating a fistula",
+      "Attributing bleeding to radiation without excluding recurrent tumour",
+      "Confusing it with inflammatory bowel disease",
+      "Underestimating chronic progressive change"
+    ],
+    "references": [
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "Clinical oncology references (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Acute proctitis (within weeks of pelvic radiotherapy) is managed conservatively with dietary fiber and lactose reduction, plus antidiarrheal agents such as loperamide or diphenoxylate/atropine class agents if symptoms are more than mild",
+      "Treatment-related hemorrhoids are managed with sitz baths and topical hydrocortisone, and radiotherapy is usually continued through mild to moderate acute proctitis, with treatment breaks reserved for severe symptoms and decided jointly with radiation oncology",
+      "Milder chronic rectal bleeding and mucous discharge are treated with topical steroid suppositories, sitz baths, and increased dietary fiber",
+      "Bleeding refractory to conservative measures is treated with endoscopic argon plasma coagulation to ablate telangiectatic vessels",
+      "Hyperbaric oxygen therapy is used for refractory chronic bleeding to improve mucosal oxygenation and healing",
+      "Topical sucralfate and formalin application are additional options described for hemorrhagic radiation proctopathy refractory to simpler measures",
+      "Chronic bleeding should prompt evaluation for iron-deficiency anemia with iron replacement and transfusion as needed",
+      "Deep rectal biopsy and cauterization or other instrumentation of irradiated tissue should be avoided unless absolutely necessary because of elevated fistula risk",
+      "Surgical referral is reserved for stricture, fistula, or bleeding refractory to endoscopic and medical measures, approached cautiously and with imaging",
+      "Before attributing bowel symptoms to radiation, recurrent or new pelvic malignancy, inflammatory bowel disease, infective proctitis, and ischemic proctitis must be excluded, especially with new or progressive bleeding",
+      "Rectal spacer placement at the time of prostate radiotherapy planning reduces the incidence and severity of late rectal toxicity, while adding a brachytherapy boost increases severe late gastrointestinal toxicity risk, a trade-off weighed during initial treatment planning",
+      "Ongoing or recurrent bleeding should be monitored with blood counts and iron studies, with endoscopic follow-up used judiciously and favoring visual assessment over biopsy",
+      "Severe or transfusion-dependent bleeding, suspected fistula, or obstructing stricture warrants referral to gastroenterology or colorectal surgery and the treating radiation oncologist",
+      "Any suspicion of recurrent or new pelvic malignancy as the cause of symptoms should prompt urgent oncology re-evaluation rather than assuming a purely radiation-related cause"
     ]
-   ],
-   "caption": "Overview comparison matrix for radiation proctitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "radiation-proctitis-real-image",
-   "title": "Radiation proctitis: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "radiation_proctitis-pathway",
+      "title": "Radiation proctitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Rectal injury from pelvic radiotherapy, occurring in acute (during/soon after treatment) and chronic (months to years later) forms",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe or transfusion-dependent rectal bleeding",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: History of pelvic radiotherapy, Sigmoidoscopy or colonoscopy documenting telangiectasia and mucosal change, Cautious biopsy given fistula risk in irradiated tissue"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Acute proctitis (within weeks of pelvic radiotherapy) is managed conservatively with dietary fiber and lactose reduction, plus antidiarrheal agents such as loperamide or diphenoxylate/atropine class agents if symptoms"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Aggressive biopsy of irradiated rectum precipitating a fistula"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of radiation proctitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "radiation_proctitis-matrix",
+      "title": "Radiation proctitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Rectal injury from pelvic radiotherapy, occurring in acute (during/soon after treatment) and chronic (months to years later) forms",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "History of pelvic radiotherapy, Sigmoidoscopy or colonoscopy documenting telangiectasia and mucosal change, Cautious biopsy given",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Inflammatory bowel disease proctitis, Infective proctitis, Ischaemic proctitis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Acute proctitis (within weeks of pelvic radiotherapy) is managed conservatively with dietary fiber and lactose reduction, plus",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Aggressive biopsy of irradiated rectum precipitating a fistula",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for radiation proctitis."
+    }
+  ],
+  "diagrams": []
 }

@@ -1,174 +1,152 @@
 {
- "id": "pilonidal_disease",
- "name": "Pilonidal disease",
- "aliases": [
-  "pilonidal sinus",
-  "pilonidal cyst",
-  "sacrococcygeal pilonidal disease",
-  "jeep disease"
- ],
- "class": "non_infective",
- "system": "Colorectal / Pelvic floor",
- "specialty": "Colorectal Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "ASCRS Textbook of Colon and Rectal Surgery",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An acquired condition of the natal cleft in which loose hairs are driven into the skin, provoking a foreign-body reaction and forming midline pits and a chronic sinus",
-   "Typically affects young, hirsute men, and is associated with a deep natal cleft, sedentary occupations, obesity, and poor local hygiene",
-   "May present acutely as a painful fluctuant abscess or chronically with intermittent discharge and one or more midline pits, often with lateral secondary openings",
-   "Characteristic midline pits in the intergluteal cleft, sometimes containing protruding hair tufts, are the diagnostic hallmark",
-   "Acute abscesses are treated by incision and drainage placed off the midline; definitive treatment of the sinus follows once inflammation settles",
-   "Definitive options range from minimally invasive (pit picking, phenol or laser ablation) to excision with off-midline or flap closure (Karydakis, Bascom cleft-lift, Limberg flap), which flatten the cleft and reduce recurrence",
-   "Hair removal, hygiene, and keeping the cleft clean and dry reduce recurrence after treatment"
+  "id": "pilonidal_disease",
+  "name": "Pilonidal disease",
+  "aliases": [
+    "pilonidal sinus",
+    "pilonidal cyst",
+    "sacrococcygeal pilonidal disease",
+    "jeep disease"
   ],
-  "pathophysiology": "Pilonidal disease is now regarded as acquired rather than congenital. Friction and movement in the natal cleft, together with a hair-friendly microenvironment, allow shed hairs to penetrate the skin through enlarged follicles or midline pits. The embedded hair acts as a foreign body, provoking chronic inflammation, granulation, and a sinus lined by granulation tissue that discharges and can abscess. A deep cleft, hirsutism, obesity, and prolonged sitting perpetuate the cycle, and midline wounds that heal poorly predispose to recurrence.",
-  "additionalDifferentials": [
-   "Perianal or anal fistula tracking towards the natal cleft",
-   "Hidradenitis suppurativa",
-   "Furuncle, carbuncle, or infected sebaceous cyst",
-   "Sacrococcygeal dermoid or teratoma",
-   "Crohn's perianal disease",
-   "Presacral sinus or osteomyelitis with cutaneous discharge"
-  ],
-  "additionalInvestigations": [
-   "Clinical inspection of the natal cleft for midline pits and secondary tracks",
-   "Examination under anaesthesia with probing for complex or recurrent disease",
-   "MRI in atypical, recurrent, or extensive disease to map tracks",
-   "Assessment for Crohn's disease when perianal features are atypical",
-   "Swab and culture of discharge if secondary infection is suspected",
-   "Biopsy of chronic, non-healing lesions to exclude malignant change"
-  ],
-  "redFlags": [
-   "A chronic non-healing sinus with induration or a mass suggesting malignant (squamous) change",
-   "Extensive or atypical tracks suggesting Crohn's disease or hidradenitis suppurativa",
-   "Rapidly spreading sepsis in an immunocompromised or diabetic patient",
-   "A fistulous communication with the anal canal"
-  ],
-  "prognosis": "Pilonidal disease is prone to recurrence, particularly with midline wounds and persistent risk factors; off-midline closure techniques and diligent hair control substantially improve long-term healing.",
-  "pitfalls": [
-   "Closing wounds in the midline, which heal poorly and recur",
-   "Neglecting hair removal and hygiene advice after surgery",
-   "Mistaking a pilonidal track for an anal fistula, or the reverse",
-   "Overlooking rare malignant transformation in long-standing disease"
-  ],
-  "references": [
-   "ASCRS Textbook of Colon and Rectal Surgery",
-   "Keighley & Williams' Surgery of the Anus, Rectum and Colon"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat an acute pilonidal abscess with incision and drainage sited off the midline to relieve sepsis",
-   "Once inflammation settles, offer definitive treatment ranging from minimally invasive pit picking, phenol injection or laser ablation to excision with off-midline or flap closure",
-   "Prefer off-midline and flap reconstructions such as the Karydakis, Bascom cleft-lift or Limberg flap, which flatten the natal cleft and lower recurrence",
-   "Institute meticulous hair control with regular depilation or laser epilation and local hygiene to interrupt the disease cycle",
-   "Advise weight reduction and avoidance of prolonged sitting to reduce friction and recurrence",
-   "Provide structured wound care for open or healing midline wounds",
-   "Biopsy chronic non-healing lesions to exclude malignant change and reassess recurrent disease with examination under anaesthesia or MRI to map tracks"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pilonidal_disease-pathway",
-   "title": "Pilonidal disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An acquired condition of the natal cleft in which loose hairs are driven into the skin, provoking a foreign-body reaction and forming midline pits and a chronic sinus",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A chronic non-healing sinus with induration or a mass suggesting malignant (squamous) change",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical inspection of the natal cleft for midline pits and secondary tracks, Examination under anaesthesia with probing for complex or recurrent disease, MRI in atypical, recurrent, or extensive disease to map tracks"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat an acute pilonidal abscess with incision and drainage sited off the midline to relieve sepsis"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Closing wounds in the midline, which heal poorly and recur"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pilonidal disease."
-  }
- ],
- "tables": [
-  {
-   "id": "pilonidal_disease-matrix",
-   "title": "Pilonidal disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An acquired condition of the natal cleft in which loose hairs are driven into the skin, provoking a foreign-body reaction and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Colorectal / Pelvic floor",
+  "specialty": "Colorectal Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ASCRS Textbook of Colon and Rectal Surgery",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An acquired condition of the natal cleft in which loose hairs are driven into the skin, provoking a foreign-body reaction and forming midline pits and a chronic sinus",
+      "Typically affects young, hirsute men, and is associated with a deep natal cleft, sedentary occupations, obesity, and poor local hygiene",
+      "May present acutely as a painful fluctuant abscess or chronically with intermittent discharge and one or more midline pits, often with lateral secondary openings",
+      "Characteristic midline pits in the intergluteal cleft, sometimes containing protruding hair tufts, are the diagnostic hallmark",
+      "Acute abscesses are treated by incision and drainage placed off the midline; definitive treatment of the sinus follows once inflammation settles",
+      "Definitive options range from minimally invasive (pit picking, phenol or laser ablation) to excision with off-midline or flap closure (Karydakis, Bascom cleft-lift, Limberg flap), which flatten the cleft and reduce recurrence",
+      "Hair removal, hygiene, and keeping the cleft clean and dry reduce recurrence after treatment"
     ],
-    [
-     "Key Investigations",
-     "Clinical inspection of the natal cleft for midline pits and secondary tracks, Examination under anaesthesia with probing for",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Pilonidal disease is now regarded as acquired rather than congenital. Friction and movement in the natal cleft, together with a hair-friendly microenvironment, allow shed hairs to penetrate the skin through enlarged follicles or midline pits. The embedded hair acts as a foreign body, provoking chronic inflammation, granulation, and a sinus lined by granulation tissue that discharges and can abscess. A deep cleft, hirsutism, obesity, and prolonged sitting perpetuate the cycle, and midline wounds that heal poorly predispose to recurrence.",
+    "additionalDifferentials": [
+      "Perianal or anal fistula tracking towards the natal cleft",
+      "Hidradenitis suppurativa",
+      "Furuncle, carbuncle, or infected sebaceous cyst",
+      "Sacrococcygeal dermoid or teratoma",
+      "Crohn's perianal disease",
+      "Presacral sinus or osteomyelitis with cutaneous discharge"
     ],
-    [
-     "Primary Differentials",
-     "Perianal or anal fistula tracking towards the natal cleft, Hidradenitis suppurativa, Furuncle, carbuncle, or infected sebaceous",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical inspection of the natal cleft for midline pits and secondary tracks",
+      "Examination under anaesthesia with probing for complex or recurrent disease",
+      "MRI in atypical, recurrent, or extensive disease to map tracks",
+      "Assessment for Crohn's disease when perianal features are atypical",
+      "Swab and culture of discharge if secondary infection is suspected",
+      "Biopsy of chronic, non-healing lesions to exclude malignant change"
     ],
-    [
-     "Management Strategy",
-     "Treat an acute pilonidal abscess with incision and drainage sited off the midline to relieve sepsis",
-     "Core treatment modality"
+    "redFlags": [
+      "A chronic non-healing sinus with induration or a mass suggesting malignant (squamous) change",
+      "Extensive or atypical tracks suggesting Crohn's disease or hidradenitis suppurativa",
+      "Rapidly spreading sepsis in an immunocompromised or diabetic patient",
+      "A fistulous communication with the anal canal"
     ],
-    [
-     "Clinical Pitfall",
-     "Closing wounds in the midline, which heal poorly and recur",
-     "Prevent diagnostic or management error"
+    "prognosis": "Pilonidal disease is prone to recurrence, particularly with midline wounds and persistent risk factors; off-midline closure techniques and diligent hair control substantially improve long-term healing.",
+    "pitfalls": [
+      "Closing wounds in the midline, which heal poorly and recur",
+      "Neglecting hair removal and hygiene advice after surgery",
+      "Mistaking a pilonidal track for an anal fistula, or the reverse",
+      "Overlooking rare malignant transformation in long-standing disease"
+    ],
+    "references": [
+      "ASCRS Textbook of Colon and Rectal Surgery",
+      "Keighley & Williams' Surgery of the Anus, Rectum and Colon"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat an acute pilonidal abscess with incision and drainage sited off the midline to relieve sepsis",
+      "Once inflammation settles, offer definitive treatment ranging from minimally invasive pit picking, phenol injection or laser ablation to excision with off-midline or flap closure",
+      "Prefer off-midline and flap reconstructions such as the Karydakis, Bascom cleft-lift or Limberg flap, which flatten the natal cleft and lower recurrence",
+      "Institute meticulous hair control with regular depilation or laser epilation and local hygiene to interrupt the disease cycle",
+      "Advise weight reduction and avoidance of prolonged sitting to reduce friction and recurrence",
+      "Provide structured wound care for open or healing midline wounds",
+      "Biopsy chronic non-healing lesions to exclude malignant change and reassess recurrent disease with examination under anaesthesia or MRI to map tracks"
     ]
-   ],
-   "caption": "Overview comparison matrix for pilonidal disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pilonidal-disease-real-image",
-   "title": "Pilonidal disease: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "pilonidal_disease-pathway",
+      "title": "Pilonidal disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An acquired condition of the natal cleft in which loose hairs are driven into the skin, provoking a foreign-body reaction and forming midline pits and a chronic sinus",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A chronic non-healing sinus with induration or a mass suggesting malignant (squamous) change",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical inspection of the natal cleft for midline pits and secondary tracks, Examination under anaesthesia with probing for complex or recurrent disease, MRI in atypical, recurrent, or extensive disease to map tracks"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat an acute pilonidal abscess with incision and drainage sited off the midline to relieve sepsis"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Closing wounds in the midline, which heal poorly and recur"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pilonidal disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pilonidal_disease-matrix",
+      "title": "Pilonidal disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An acquired condition of the natal cleft in which loose hairs are driven into the skin, provoking a foreign-body reaction and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical inspection of the natal cleft for midline pits and secondary tracks, Examination under anaesthesia with probing for",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Perianal or anal fistula tracking towards the natal cleft, Hidradenitis suppurativa, Furuncle, carbuncle, or infected sebaceous",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat an acute pilonidal abscess with incision and drainage sited off the midline to relieve sepsis",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Closing wounds in the midline, which heal poorly and recur",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pilonidal disease."
+    }
+  ],
+  "diagrams": []
 }

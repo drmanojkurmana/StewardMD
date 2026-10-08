@@ -1,176 +1,154 @@
 {
- "id": "doose_syndrome",
- "name": "Doose syndrome",
- "aliases": [
-  "Myoclonic-atonic epilepsy",
-  "Myoclonic-astatic epilepsy",
-  "Epilepsy with myoclonic-atonic seizures"
- ],
- "class": "non_infective",
- "system": "Nervous system",
- "specialty": "Paediatric neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "ILAE classification and clinical guidance on the epilepsy syndromes",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Genetic generalised epilepsy of early childhood characterised by myoclonic, atonic and combined myoclonic-atonic (drop) seizures.",
-   "Onset is usually between 1 and 5 years in a previously normal child, with a male predominance.",
-   "Drop attacks from myoclonic-atonic seizures cause frequent falls and injury.",
-   "EEG shows generalised spike-wave and polyspike-wave, often with a biparietal or central theta rhythm; the background may initially be normal.",
-   "Generalised tonic-clonic and absence seizures frequently coexist, and non-convulsive status epilepticus can occur.",
-   "Ketogenic dietary therapy is notably effective and is often introduced early.",
-   "Sodium-channel-blocking drugs and vigabatrin may aggravate seizures and are generally avoided.",
-   "Outcome ranges from seizure freedom with normal cognition to refractory epilepsy with intellectual impairment."
+  "id": "doose_syndrome",
+  "name": "Doose syndrome",
+  "aliases": [
+    "Myoclonic-atonic epilepsy",
+    "Myoclonic-astatic epilepsy",
+    "Epilepsy with myoclonic-atonic seizures"
   ],
-  "pathophysiology": "Doose syndrome is a genetically influenced generalised epilepsy in which thalamocortical network hyperexcitability produces bilaterally synchronous epileptic discharges. The basis is usually polygenic, with monogenic contributions in a minority, including SLC2A1 (GLUT1 deficiency), SCN1A and others; GLUT1 deficiency is important to identify because it responds to ketogenic therapy. The combination of positive (myoclonic) and negative (atonic) motor phenomena reflects rapidly generalising cortical discharges.",
-  "additionalDifferentials": [
-   "Lennox-Gastaut syndrome",
-   "Childhood absence epilepsy",
-   "Dravet syndrome",
-   "Epilepsy with myoclonic absences",
-   "GLUT1 deficiency syndrome",
-   "Progressive myoclonic epilepsies",
-   "Eyelid myoclonia with absences (Jeavons)"
-  ],
-  "additionalInvestigations": [
-   "Video-EEG capturing ictal drop attacks and interictal discharges",
-   "MRI brain, usually normal, to exclude a structural cause",
-   "Genetic testing including SLC2A1 and epilepsy gene panels",
-   "CSF-to-blood glucose ratio or SLC2A1 analysis for GLUT1 deficiency",
-   "Metabolic screening where the presentation is atypical",
-   "Neuropsychological assessment"
-  ],
-  "redFlags": [
-   "Frequent injurious drop attacks",
-   "Cognitive or behavioural regression",
-   "Non-convulsive status epilepticus with fluctuating responsiveness",
-   "Seizure aggravation after starting an antiseizure medication"
-  ],
-  "prognosis": "Highly variable; a substantial proportion achieve seizure freedom with preserved cognition, while others develop drug-resistant epilepsy and intellectual disability. Early effective treatment, including the ketogenic diet, may improve outcome.",
-  "pitfalls": [
-   "Confusing it with Lennox-Gastaut syndrome, which features tonic seizures, slow spike-wave and a worse prognosis.",
-   "Using sodium-channel blockers that may worsen seizures.",
-   "Missing GLUT1 deficiency, which is amenable to ketogenic therapy.",
-   "Overlooking non-convulsive status as a cause of apparent regression."
-  ],
-  "references": [
-   "ILAE position papers on classification of the epilepsies",
-   "Panayiotopoulos CP. A Clinical Guide to Epileptic Syndromes and their Treatment",
-   "Standard textbook of paediatric neurology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Broad-spectrum antiseizure medication such as sodium valproate, levetiracetam, lamotrigine or ethosuximide as first-line pharmacotherapy",
-   "Early introduction of ketogenic dietary therapy, which is notably effective and essential where GLUT1 deficiency is present",
-   "Avoid sodium-channel-blocking antiseizure drugs such as carbamazepine and oxcarbazepine, which can aggravate myoclonic and atonic seizures",
-   "Identify GLUT1 deficiency (SLC2A1), as it responds specifically to ketogenic therapy",
-   "Injury prevention for drop attacks including protective headgear, with benzodiazepine rescue protocols for prolonged or non-convulsive status epilepticus",
-   "Neuropsychological assessment and educational support to address cognitive and developmental outcome",
-   "Genetic counselling given the genetic basis, with paediatric neurology follow-up"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "doose_syndrome-pathway",
-   "title": "Doose syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Genetic generalised epilepsy of early childhood characterised by myoclonic, atonic and combined myoclonic-atonic (drop) seizures.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Frequent injurious drop attacks",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Video-EEG capturing ictal drop attacks and interictal discharges, MRI brain, usually normal, to exclude a structural cause, Genetic testing including SLC2A1 and epilepsy gene panels"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Broad-spectrum antiseizure medication such as sodium valproate, levetiracetam, lamotrigine or ethosuximide as first-line pharmacotherapy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing it with Lennox-Gastaut syndrome, which features tonic seizures, slow spike-wave and a worse prognosis."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of doose syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "doose_syndrome-matrix",
-   "title": "Doose syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Genetic generalised epilepsy of early childhood characterised by myoclonic, atonic and combined myoclonic-atonic (drop) seizures.",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system",
+  "specialty": "Paediatric neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ILAE classification and clinical guidance on the epilepsy syndromes",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Genetic generalised epilepsy of early childhood characterised by myoclonic, atonic and combined myoclonic-atonic (drop) seizures.",
+      "Onset is usually between 1 and 5 years in a previously normal child, with a male predominance.",
+      "Drop attacks from myoclonic-atonic seizures cause frequent falls and injury.",
+      "EEG shows generalised spike-wave and polyspike-wave, often with a biparietal or central theta rhythm; the background may initially be normal.",
+      "Generalised tonic-clonic and absence seizures frequently coexist, and non-convulsive status epilepticus can occur.",
+      "Ketogenic dietary therapy is notably effective and is often introduced early.",
+      "Sodium-channel-blocking drugs and vigabatrin may aggravate seizures and are generally avoided.",
+      "Outcome ranges from seizure freedom with normal cognition to refractory epilepsy with intellectual impairment."
     ],
-    [
-     "Key Investigations",
-     "Video-EEG capturing ictal drop attacks and interictal discharges, MRI brain, usually normal, to exclude a structural cause,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Doose syndrome is a genetically influenced generalised epilepsy in which thalamocortical network hyperexcitability produces bilaterally synchronous epileptic discharges. The basis is usually polygenic, with monogenic contributions in a minority, including SLC2A1 (GLUT1 deficiency), SCN1A and others; GLUT1 deficiency is important to identify because it responds to ketogenic therapy. The combination of positive (myoclonic) and negative (atonic) motor phenomena reflects rapidly generalising cortical discharges.",
+    "additionalDifferentials": [
+      "Lennox-Gastaut syndrome",
+      "Childhood absence epilepsy",
+      "Dravet syndrome",
+      "Epilepsy with myoclonic absences",
+      "GLUT1 deficiency syndrome",
+      "Progressive myoclonic epilepsies",
+      "Eyelid myoclonia with absences (Jeavons)"
     ],
-    [
-     "Primary Differentials",
-     "Lennox-Gastaut syndrome, Childhood absence epilepsy, Dravet syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Video-EEG capturing ictal drop attacks and interictal discharges",
+      "MRI brain, usually normal, to exclude a structural cause",
+      "Genetic testing including SLC2A1 and epilepsy gene panels",
+      "CSF-to-blood glucose ratio or SLC2A1 analysis for GLUT1 deficiency",
+      "Metabolic screening where the presentation is atypical",
+      "Neuropsychological assessment"
     ],
-    [
-     "Management Strategy",
-     "Broad-spectrum antiseizure medication such as sodium valproate, levetiracetam, lamotrigine or ethosuximide as first-line",
-     "Core treatment modality"
+    "redFlags": [
+      "Frequent injurious drop attacks",
+      "Cognitive or behavioural regression",
+      "Non-convulsive status epilepticus with fluctuating responsiveness",
+      "Seizure aggravation after starting an antiseizure medication"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing it with Lennox-Gastaut syndrome, which features tonic seizures, slow spike-wave and a worse prognosis.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Highly variable; a substantial proportion achieve seizure freedom with preserved cognition, while others develop drug-resistant epilepsy and intellectual disability. Early effective treatment, including the ketogenic diet, may improve outcome.",
+    "pitfalls": [
+      "Confusing it with Lennox-Gastaut syndrome, which features tonic seizures, slow spike-wave and a worse prognosis.",
+      "Using sodium-channel blockers that may worsen seizures.",
+      "Missing GLUT1 deficiency, which is amenable to ketogenic therapy.",
+      "Overlooking non-convulsive status as a cause of apparent regression."
+    ],
+    "references": [
+      "ILAE position papers on classification of the epilepsies",
+      "Panayiotopoulos CP. A Clinical Guide to Epileptic Syndromes and their Treatment",
+      "Standard textbook of paediatric neurology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Broad-spectrum antiseizure medication such as sodium valproate, levetiracetam, lamotrigine or ethosuximide as first-line pharmacotherapy",
+      "Early introduction of ketogenic dietary therapy, which is notably effective and essential where GLUT1 deficiency is present",
+      "Avoid sodium-channel-blocking antiseizure drugs such as carbamazepine and oxcarbazepine, which can aggravate myoclonic and atonic seizures",
+      "Identify GLUT1 deficiency (SLC2A1), as it responds specifically to ketogenic therapy",
+      "Injury prevention for drop attacks including protective headgear, with benzodiazepine rescue protocols for prolonged or non-convulsive status epilepticus",
+      "Neuropsychological assessment and educational support to address cognitive and developmental outcome",
+      "Genetic counselling given the genetic basis, with paediatric neurology follow-up"
     ]
-   ],
-   "caption": "Overview comparison matrix for doose syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "doose-syndrome-real-image",
-   "title": "Doose syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "doose_syndrome-pathway",
+      "title": "Doose syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Genetic generalised epilepsy of early childhood characterised by myoclonic, atonic and combined myoclonic-atonic (drop) seizures.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Frequent injurious drop attacks",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Video-EEG capturing ictal drop attacks and interictal discharges, MRI brain, usually normal, to exclude a structural cause, Genetic testing including SLC2A1 and epilepsy gene panels"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Broad-spectrum antiseizure medication such as sodium valproate, levetiracetam, lamotrigine or ethosuximide as first-line pharmacotherapy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing it with Lennox-Gastaut syndrome, which features tonic seizures, slow spike-wave and a worse prognosis."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of doose syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "doose_syndrome-matrix",
+      "title": "Doose syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Genetic generalised epilepsy of early childhood characterised by myoclonic, atonic and combined myoclonic-atonic (drop) seizures.",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Video-EEG capturing ictal drop attacks and interictal discharges, MRI brain, usually normal, to exclude a structural cause,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Lennox-Gastaut syndrome, Childhood absence epilepsy, Dravet syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Broad-spectrum antiseizure medication such as sodium valproate, levetiracetam, lamotrigine or ethosuximide as first-line",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing it with Lennox-Gastaut syndrome, which features tonic seizures, slow spike-wave and a worse prognosis.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for doose syndrome."
+    }
+  ],
+  "diagrams": []
 }

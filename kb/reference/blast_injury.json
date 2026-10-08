@@ -1,172 +1,150 @@
 {
- "id": "blast_injury",
- "name": "Blast injury",
- "aliases": [
-  "explosion injury",
-  "blast trauma"
- ],
- "class": "non_infective",
- "system": "Emergency / Trauma / Critical care",
- "specialty": "Emergency Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "ATLS / Harrison's Principles of Internal Medicine (critical care)",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Classify blast injury into primary (pressure wave), secondary (flying fragments), tertiary (body displacement), and quaternary (burns, inhalation, and other effects) mechanisms to avoid missing occult injury",
-   "Primary blast injury preferentially damages gas-containing organs: the ears, lungs, and bowel",
-   "Blast lung, presenting as respiratory distress and hypoxaemia, is a leading cause of early death and may evolve over hours",
-   "Ruptured tympanic membranes are common but their absence does not exclude significant primary blast injury elsewhere",
-   "Apply the standard primary survey, as penetrating fragments and blunt displacement often cause the injuries that need immediate treatment",
-   "Suspect occult bowel injury, which can present in a delayed fashion with perforation",
-   "In enclosed-space explosions injuries are more severe, and consider inhalation and toxic exposure",
-   "Beware air embolism from blast lung, which can cause sudden cardiovascular or neurological collapse"
+  "id": "blast_injury",
+  "name": "Blast injury",
+  "aliases": [
+    "explosion injury",
+    "blast trauma"
   ],
-  "pathophysiology": "An explosion generates a high-pressure blast wave that transmits energy across tissue interfaces of differing density. Where gas meets fluid or solid, as in the alveoli, middle ear, and gut, shearing and implosion-reexpansion forces rupture delicate structures, producing pulmonary haemorrhage and oedema (blast lung), tympanic perforation, and bowel contusion or perforation. Secondary injury results from fragments propelled by the blast causing penetrating wounds, tertiary injury from the body being thrown, and quaternary effects from burns, crush, inhalation, and toxic exposure. Blast lung can allow air to enter pulmonary veins, producing systemic air embolism to the brain or coronary circulation.",
-  "additionalDifferentials": [
-   "Isolated penetrating trauma from fragments",
-   "Blunt polytrauma from displacement",
-   "Thermal or inhalational burn injury",
-   "Crush injury from structural collapse",
-   "Toxic gas or chemical exposure"
-  ],
-  "additionalInvestigations": [
-   "Chest radiograph and CT for blast lung and pneumothorax",
-   "Arterial blood gas to assess oxygenation",
-   "Otoscopy to identify tympanic membrane rupture",
-   "Imaging and serial abdominal examination for occult bowel injury",
-   "Assessment for penetrating fragments including radiographs to localise foreign bodies"
-  ],
-  "redFlags": [
-   "Respiratory distress and hypoxaemia from blast lung, which may progress rapidly",
-   "Sudden cardiovascular or neurological collapse suggesting systemic air embolism",
-   "Signs of occult bowel perforation appearing hours after the blast",
-   "Uncontrolled haemorrhage from penetrating fragment wounds",
-   "Enclosed-space exposure with combined burns, inhalation, and toxic effects"
-  ],
-  "prognosis": "Prognosis depends on the dominant mechanism and injury burden. Blast lung and multi-mechanism injuries carry significant early mortality, while many fragment and displacement injuries are survivable with prompt trauma care; delayed presentations such as bowel perforation add later risk.",
-  "pitfalls": [
-   "Considering only the visible wounds and missing primary blast injury to lung or bowel",
-   "Assuming intact eardrums exclude significant blast exposure",
-   "Aggressive positive-pressure ventilation aggravating blast lung and air embolism",
-   "Failing to anticipate delayed bowel perforation",
-   "Underestimating severity of injuries sustained in enclosed spaces"
-  ],
-  "references": [
-   "ATLS (Advanced Trauma Life Support)",
-   "Harrison's Principles of Internal Medicine, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Apply a structured primary survey and trauma resuscitation, prioritising the fragment and displacement injuries that most often threaten life immediately",
-   "Manage blast lung with supplemental oxygen and lung-protective ventilation, treating associated pneumothorax and remaining alert to systemic air embolism",
-   "Control haemorrhage and debride penetrating fragment wounds, localising retained foreign bodies radiographically",
-   "Monitor for occult bowel injury with serial abdominal examination and imaging, proceeding to laparotomy for perforation",
-   "Assess ruptured tympanic membranes with otological referral, recognising their absence does not exclude serious primary blast injury",
-   "Treat concurrent burns, crush and inhalational injury, coordinating care through a trauma multidisciplinary team"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "blast_injury-pathway",
-   "title": "Blast injury: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Classify blast injury into primary (pressure wave), secondary (flying fragments), tertiary (body displacement), and quaternary (burns, inhalation, and other effects) mechanisms to avoid missing occult injury",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Respiratory distress and hypoxaemia from blast lung, which may progress rapidly",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Chest radiograph and CT for blast lung and pneumothorax, Arterial blood gas to assess oxygenation, Otoscopy to identify tympanic membrane rupture"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Apply a structured primary survey and trauma resuscitation, prioritising the fragment and displacement injuries that most often threaten life immediately"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Considering only the visible wounds and missing primary blast injury to lung or bowel"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of blast injury."
-  }
- ],
- "tables": [
-  {
-   "id": "blast_injury-matrix",
-   "title": "Blast injury: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Classify blast injury into primary (pressure wave), secondary (flying fragments), tertiary (body displacement), and quaternary",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Emergency / Trauma / Critical care",
+  "specialty": "Emergency Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ATLS / Harrison's Principles of Internal Medicine (critical care)",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Classify blast injury into primary (pressure wave), secondary (flying fragments), tertiary (body displacement), and quaternary (burns, inhalation, and other effects) mechanisms to avoid missing occult injury",
+      "Primary blast injury preferentially damages gas-containing organs: the ears, lungs, and bowel",
+      "Blast lung, presenting as respiratory distress and hypoxaemia, is a leading cause of early death and may evolve over hours",
+      "Ruptured tympanic membranes are common but their absence does not exclude significant primary blast injury elsewhere",
+      "Apply the standard primary survey, as penetrating fragments and blunt displacement often cause the injuries that need immediate treatment",
+      "Suspect occult bowel injury, which can present in a delayed fashion with perforation",
+      "In enclosed-space explosions injuries are more severe, and consider inhalation and toxic exposure",
+      "Beware air embolism from blast lung, which can cause sudden cardiovascular or neurological collapse"
     ],
-    [
-     "Key Investigations",
-     "Chest radiograph and CT for blast lung and pneumothorax, Arterial blood gas to assess oxygenation, Otoscopy to identify tympanic",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "An explosion generates a high-pressure blast wave that transmits energy across tissue interfaces of differing density. Where gas meets fluid or solid, as in the alveoli, middle ear, and gut, shearing and implosion-reexpansion forces rupture delicate structures, producing pulmonary haemorrhage and oedema (blast lung), tympanic perforation, and bowel contusion or perforation. Secondary injury results from fragments propelled by the blast causing penetrating wounds, tertiary injury from the body being thrown, and quaternary effects from burns, crush, inhalation, and toxic exposure. Blast lung can allow air to enter pulmonary veins, producing systemic air embolism to the brain or coronary circulation.",
+    "additionalDifferentials": [
+      "Isolated penetrating trauma from fragments",
+      "Blunt polytrauma from displacement",
+      "Thermal or inhalational burn injury",
+      "Crush injury from structural collapse",
+      "Toxic gas or chemical exposure"
     ],
-    [
-     "Primary Differentials",
-     "Isolated penetrating trauma from fragments, Blunt polytrauma from displacement, Thermal or inhalational burn injury",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Chest radiograph and CT for blast lung and pneumothorax",
+      "Arterial blood gas to assess oxygenation",
+      "Otoscopy to identify tympanic membrane rupture",
+      "Imaging and serial abdominal examination for occult bowel injury",
+      "Assessment for penetrating fragments including radiographs to localise foreign bodies"
     ],
-    [
-     "Management Strategy",
-     "Apply a structured primary survey and trauma resuscitation, prioritising the fragment and displacement injuries that most often",
-     "Core treatment modality"
+    "redFlags": [
+      "Respiratory distress and hypoxaemia from blast lung, which may progress rapidly",
+      "Sudden cardiovascular or neurological collapse suggesting systemic air embolism",
+      "Signs of occult bowel perforation appearing hours after the blast",
+      "Uncontrolled haemorrhage from penetrating fragment wounds",
+      "Enclosed-space exposure with combined burns, inhalation, and toxic effects"
     ],
-    [
-     "Clinical Pitfall",
-     "Considering only the visible wounds and missing primary blast injury to lung or bowel",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends on the dominant mechanism and injury burden. Blast lung and multi-mechanism injuries carry significant early mortality, while many fragment and displacement injuries are survivable with prompt trauma care; delayed presentations such as bowel perforation add later risk.",
+    "pitfalls": [
+      "Considering only the visible wounds and missing primary blast injury to lung or bowel",
+      "Assuming intact eardrums exclude significant blast exposure",
+      "Aggressive positive-pressure ventilation aggravating blast lung and air embolism",
+      "Failing to anticipate delayed bowel perforation",
+      "Underestimating severity of injuries sustained in enclosed spaces"
+    ],
+    "references": [
+      "ATLS (Advanced Trauma Life Support)",
+      "Harrison's Principles of Internal Medicine, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Apply a structured primary survey and trauma resuscitation, prioritising the fragment and displacement injuries that most often threaten life immediately",
+      "Manage blast lung with supplemental oxygen and lung-protective ventilation, treating associated pneumothorax and remaining alert to systemic air embolism",
+      "Control haemorrhage and debride penetrating fragment wounds, localising retained foreign bodies radiographically",
+      "Monitor for occult bowel injury with serial abdominal examination and imaging, proceeding to laparotomy for perforation",
+      "Assess ruptured tympanic membranes with otological referral, recognising their absence does not exclude serious primary blast injury",
+      "Treat concurrent burns, crush and inhalational injury, coordinating care through a trauma multidisciplinary team"
     ]
-   ],
-   "caption": "Overview comparison matrix for blast injury."
-  }
- ],
- "diagrams": [
-  {
-   "id": "blast-injury-real-image",
-   "title": "Blast injury: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "blast_injury-pathway",
+      "title": "Blast injury: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Classify blast injury into primary (pressure wave), secondary (flying fragments), tertiary (body displacement), and quaternary (burns, inhalation, and other effects) mechanisms to avoid missing occult injury",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Respiratory distress and hypoxaemia from blast lung, which may progress rapidly",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Chest radiograph and CT for blast lung and pneumothorax, Arterial blood gas to assess oxygenation, Otoscopy to identify tympanic membrane rupture"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Apply a structured primary survey and trauma resuscitation, prioritising the fragment and displacement injuries that most often threaten life immediately"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Considering only the visible wounds and missing primary blast injury to lung or bowel"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of blast injury."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "blast_injury-matrix",
+      "title": "Blast injury: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Classify blast injury into primary (pressure wave), secondary (flying fragments), tertiary (body displacement), and quaternary",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Chest radiograph and CT for blast lung and pneumothorax, Arterial blood gas to assess oxygenation, Otoscopy to identify tympanic",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Isolated penetrating trauma from fragments, Blunt polytrauma from displacement, Thermal or inhalational burn injury",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Apply a structured primary survey and trauma resuscitation, prioritising the fragment and displacement injuries that most often",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Considering only the visible wounds and missing primary blast injury to lung or bowel",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for blast injury."
+    }
+  ],
+  "diagrams": []
 }

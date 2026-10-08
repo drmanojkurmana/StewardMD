@@ -1,176 +1,154 @@
 {
- "id": "currarino_syndrome",
- "name": "Currarino syndrome (sacral agenesis + anorectal + presacral mass)",
- "aliases": [
-  "Currarino triad",
-  "Currarino-Silverman syndrome",
-  "sacral agenesis with presacral mass",
-  "ASP triad"
- ],
- "class": "non_infective",
- "system": "Paediatric surgery",
- "specialty": "Paediatric Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics / Ashcraft Pediatric Surgery",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Defined by a triad of a sacral bony defect, an anorectal malformation, and a presacral mass",
-   "The characteristic sacral anomaly is a hemisacrum with a crescentic (scimitar) sacral defect that spares the first sacral segment",
-   "The anorectal component ranges from anal stenosis and chronic constipation to a frank anorectal malformation",
-   "The presacral mass is most often an anterior meningocele, a teratoma, an enteric duplication cyst, or a combination of these",
-   "Frequently familial with autosomal dominant inheritance linked to MNX1 (HLXB9) mutations, so family screening is worthwhile",
-   "Chronic refractory constipation from birth, especially with a sacral abnormality on radiograph, should prompt evaluation for the triad",
-   "Management is individualised, addressing the anorectal defect surgically and resecting or repairing the presacral mass with neurosurgical input for a meningocele"
+  "id": "currarino_syndrome",
+  "name": "Currarino syndrome (sacral agenesis + anorectal + presacral mass)",
+  "aliases": [
+    "Currarino triad",
+    "Currarino-Silverman syndrome",
+    "sacral agenesis with presacral mass",
+    "ASP triad"
   ],
-  "pathophysiology": "Currarino syndrome is a developmental disorder of the caudal cell mass and notochord, in which abnormal separation of the neuroectoderm and endoderm and defective sacral formation produce the characteristic combination of anomalies. Many cases carry mutations in the MNX1 (HLXB9) homeobox gene, which is important in caudal and hindgut development. The resulting hemisacrum leaves a persistent anterior sacral defect through which a presacral mass such as an anterior meningocele, teratoma, or enteric duplication protrudes, while concurrent maldevelopment of the hindgut yields the anorectal malformation or anal stenosis. Tethered cord and other spinal dysraphic features may coexist.",
-  "additionalDifferentials": [
-   "Isolated anorectal malformation without sacral or presacral anomaly",
-   "Sacrococcygeal teratoma",
-   "Isolated anterior sacral meningocele",
-   "Caudal regression syndrome",
-   "Hirschsprung disease as a cause of chronic constipation",
-   "Tethered cord syndrome"
-  ],
-  "additionalInvestigations": [
-   "Sacral and pelvic radiographs to demonstrate the scimitar hemisacrum",
-   "Pelvic and spinal MRI to characterise the presacral mass and detect tethered cord or meningocele",
-   "Ultrasound of the spine and pelvis in the neonate",
-   "MNX1 (HLXB9) genetic testing and screening of first-degree relatives",
-   "Contrast studies or examination to define the anorectal anatomy",
-   "Assessment for associated urogenital and spinal anomalies"
-  ],
-  "redFlags": [
-   "Meningitis or signs of central nervous system infection from a communicating anterior meningocele",
-   "Neurological deterioration suggesting tethered cord or cord compression",
-   "Features raising concern for malignant change within a presacral teratoma",
-   "Severe obstructive symptoms from a large presacral mass",
-   "Recurrent urinary or faecal complications from the associated malformations"
-  ],
-  "prognosis": "With recognition of all three components and appropriate surgical and neurosurgical management, prognosis is generally good, though continence outcomes depend on the anorectal lesion and sacral integrity. Undiagnosed meningocele risks life-threatening meningitis, and a small proportion of presacral teratomas may undergo malignant transformation.",
-  "pitfalls": [
-   "Treating chronic constipation without imaging the sacrum and missing the underlying triad",
-   "Overlooking an anterior meningocele and risking meningitis during transrectal or perineal procedures",
-   "Assuming a presacral mass is benign without appropriate imaging and follow-up",
-   "Failing to screen family members despite autosomal dominant inheritance",
-   "Neglecting spinal cord tethering when planning management"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics",
-   "Ashcraft's Pediatric Surgery"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Surgical correction of the anorectal malformation, such as posterior sagittal anorectoplasty or anoplasty for anal stenosis",
-   "Neurosurgical excision or repair of the presacral mass, including anterior meningocele repair or teratoma resection, with untethering of a tethered cord",
-   "Structured bowel-management programme with laxatives or enemas for chronic constipation",
-   "Prompt repair to prevent life-threatening meningitis from an anterior meningocele, avoiding transrectal needling",
-   "Histological examination of the resected presacral mass to exclude malignant change, with assessment for associated urogenital and spinal anomalies",
-   "Genetic testing for MNX1 and screening of first-degree relatives given autosomal dominant inheritance",
-   "Multidisciplinary care through paediatric surgery, neurosurgery and urology with long-term continence follow-up"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "currarino_syndrome-pathway",
-   "title": "Currarino syndrome (sacral agenesis + anorectal + presacral mass): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Defined by a triad of a sacral bony defect, an anorectal malformation, and a presacral mass",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Meningitis or signs of central nervous system infection from a communicating anterior meningocele",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Sacral and pelvic radiographs to demonstrate the scimitar hemisacrum, Pelvic and spinal MRI to characterise the presacral mass and detect tethered cord or meningocele, Ultrasound of the spine and pelvis in the neonate"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Surgical correction of the anorectal malformation, such as posterior sagittal anorectoplasty or anoplasty for anal stenosis"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating chronic constipation without imaging the sacrum and missing the underlying triad"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of currarino syndrome (sacral agenesis + anorectal + presacral mass)."
-  }
- ],
- "tables": [
-  {
-   "id": "currarino_syndrome-matrix",
-   "title": "Currarino syndrome (sacral agenesis + anorectal + presacral mass): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Defined by a triad of a sacral bony defect, an anorectal malformation, and a presacral mass",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Paediatric surgery",
+  "specialty": "Paediatric Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics / Ashcraft Pediatric Surgery",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Defined by a triad of a sacral bony defect, an anorectal malformation, and a presacral mass",
+      "The characteristic sacral anomaly is a hemisacrum with a crescentic (scimitar) sacral defect that spares the first sacral segment",
+      "The anorectal component ranges from anal stenosis and chronic constipation to a frank anorectal malformation",
+      "The presacral mass is most often an anterior meningocele, a teratoma, an enteric duplication cyst, or a combination of these",
+      "Frequently familial with autosomal dominant inheritance linked to MNX1 (HLXB9) mutations, so family screening is worthwhile",
+      "Chronic refractory constipation from birth, especially with a sacral abnormality on radiograph, should prompt evaluation for the triad",
+      "Management is individualised, addressing the anorectal defect surgically and resecting or repairing the presacral mass with neurosurgical input for a meningocele"
     ],
-    [
-     "Key Investigations",
-     "Sacral and pelvic radiographs to demonstrate the scimitar hemisacrum, Pelvic and spinal MRI to characterise the presacral mass",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Currarino syndrome is a developmental disorder of the caudal cell mass and notochord, in which abnormal separation of the neuroectoderm and endoderm and defective sacral formation produce the characteristic combination of anomalies. Many cases carry mutations in the MNX1 (HLXB9) homeobox gene, which is important in caudal and hindgut development. The resulting hemisacrum leaves a persistent anterior sacral defect through which a presacral mass such as an anterior meningocele, teratoma, or enteric duplication protrudes, while concurrent maldevelopment of the hindgut yields the anorectal malformation or anal stenosis. Tethered cord and other spinal dysraphic features may coexist.",
+    "additionalDifferentials": [
+      "Isolated anorectal malformation without sacral or presacral anomaly",
+      "Sacrococcygeal teratoma",
+      "Isolated anterior sacral meningocele",
+      "Caudal regression syndrome",
+      "Hirschsprung disease as a cause of chronic constipation",
+      "Tethered cord syndrome"
     ],
-    [
-     "Primary Differentials",
-     "Isolated anorectal malformation without sacral or presacral anomaly, Sacrococcygeal teratoma, Isolated anterior sacral meningocele",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Sacral and pelvic radiographs to demonstrate the scimitar hemisacrum",
+      "Pelvic and spinal MRI to characterise the presacral mass and detect tethered cord or meningocele",
+      "Ultrasound of the spine and pelvis in the neonate",
+      "MNX1 (HLXB9) genetic testing and screening of first-degree relatives",
+      "Contrast studies or examination to define the anorectal anatomy",
+      "Assessment for associated urogenital and spinal anomalies"
     ],
-    [
-     "Management Strategy",
-     "Surgical correction of the anorectal malformation, such as posterior sagittal anorectoplasty or anoplasty for anal stenosis",
-     "Core treatment modality"
+    "redFlags": [
+      "Meningitis or signs of central nervous system infection from a communicating anterior meningocele",
+      "Neurological deterioration suggesting tethered cord or cord compression",
+      "Features raising concern for malignant change within a presacral teratoma",
+      "Severe obstructive symptoms from a large presacral mass",
+      "Recurrent urinary or faecal complications from the associated malformations"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating chronic constipation without imaging the sacrum and missing the underlying triad",
-     "Prevent diagnostic or management error"
+    "prognosis": "With recognition of all three components and appropriate surgical and neurosurgical management, prognosis is generally good, though continence outcomes depend on the anorectal lesion and sacral integrity. Undiagnosed meningocele risks life-threatening meningitis, and a small proportion of presacral teratomas may undergo malignant transformation.",
+    "pitfalls": [
+      "Treating chronic constipation without imaging the sacrum and missing the underlying triad",
+      "Overlooking an anterior meningocele and risking meningitis during transrectal or perineal procedures",
+      "Assuming a presacral mass is benign without appropriate imaging and follow-up",
+      "Failing to screen family members despite autosomal dominant inheritance",
+      "Neglecting spinal cord tethering when planning management"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics",
+      "Ashcraft's Pediatric Surgery"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Surgical correction of the anorectal malformation, such as posterior sagittal anorectoplasty or anoplasty for anal stenosis",
+      "Neurosurgical excision or repair of the presacral mass, including anterior meningocele repair or teratoma resection, with untethering of a tethered cord",
+      "Structured bowel-management programme with laxatives or enemas for chronic constipation",
+      "Prompt repair to prevent life-threatening meningitis from an anterior meningocele, avoiding transrectal needling",
+      "Histological examination of the resected presacral mass to exclude malignant change, with assessment for associated urogenital and spinal anomalies",
+      "Genetic testing for MNX1 and screening of first-degree relatives given autosomal dominant inheritance",
+      "Multidisciplinary care through paediatric surgery, neurosurgery and urology with long-term continence follow-up"
     ]
-   ],
-   "caption": "Overview comparison matrix for currarino syndrome (sacral agenesis + anorectal + presacral mass)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "currarino-syndrome-real-image",
-   "title": "Currarino syndrome (sacral agenesis + anorectal + presacral mass): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "currarino_syndrome-pathway",
+      "title": "Currarino syndrome (sacral agenesis + anorectal + presacral mass): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Defined by a triad of a sacral bony defect, an anorectal malformation, and a presacral mass",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Meningitis or signs of central nervous system infection from a communicating anterior meningocele",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Sacral and pelvic radiographs to demonstrate the scimitar hemisacrum, Pelvic and spinal MRI to characterise the presacral mass and detect tethered cord or meningocele, Ultrasound of the spine and pelvis in the neonate"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Surgical correction of the anorectal malformation, such as posterior sagittal anorectoplasty or anoplasty for anal stenosis"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating chronic constipation without imaging the sacrum and missing the underlying triad"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of currarino syndrome (sacral agenesis + anorectal + presacral mass)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "currarino_syndrome-matrix",
+      "title": "Currarino syndrome (sacral agenesis + anorectal + presacral mass): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Defined by a triad of a sacral bony defect, an anorectal malformation, and a presacral mass",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Sacral and pelvic radiographs to demonstrate the scimitar hemisacrum, Pelvic and spinal MRI to characterise the presacral mass",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Isolated anorectal malformation without sacral or presacral anomaly, Sacrococcygeal teratoma, Isolated anterior sacral meningocele",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Surgical correction of the anorectal malformation, such as posterior sagittal anorectoplasty or anoplasty for anal stenosis",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating chronic constipation without imaging the sacrum and missing the underlying triad",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for currarino syndrome (sacral agenesis + anorectal + presacral mass)."
+    }
+  ],
+  "diagrams": []
 }

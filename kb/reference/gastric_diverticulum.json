@@ -1,175 +1,153 @@
 {
- "id": "gastric_diverticulum",
- "name": "gastric diverticulum",
- "aliases": [
-  "gastric diverticulum",
-  "stomach diverticulum"
- ],
- "class": "non_infective",
- "system": "gastrointestinal",
- "specialty": "gastroenterology",
- "referenceOnly": true,
- "reference": {
-  "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Gastric diverticulum is a rare outpouching of the stomach wall, with the great majority being congenital true diverticula located on the posterior wall of the gastric fundus just below the oesophagogastric junction.",
-   "The characteristic juxta-cardial posterior fundal location and its cystic appearance can mimic an adrenal mass, pancreatic pseudocyst or other retroperitoneal lesion on cross-sectional imaging.",
-   "Acquired diverticula are less common, usually located in the antrum or prepyloric region, and tend to be pulsion or traction type related to adjacent inflammation, ulcer or prior surgery.",
-   "Most gastric diverticula are asymptomatic and found incidentally; when symptomatic they cause vague epigastric or postprandial pain, dyspepsia, nausea or a sensation of fullness.",
-   "Complications, though uncommon, include bleeding from mucosal ulceration within the sac, perforation and, rarely, malignancy arising in the diverticulum.",
-   "Upper gastrointestinal endoscopy with retroflexion in the fundus, or barium study, confirms the diagnosis and helps distinguish it from an extrinsic mass.",
-   "Because it can be mistaken for an adrenal or pancreatic lesion, awareness prevents unnecessary intervention; oral contrast filling the sac on imaging is a helpful clue.",
-   "Symptomatic or complicated diverticula are treated with surgical resection, increasingly by laparoscopic diverticulectomy, while asymptomatic lesions are managed conservatively."
+  "id": "gastric_diverticulum",
+  "name": "gastric diverticulum",
+  "aliases": [
+    "gastric diverticulum",
+    "stomach diverticulum"
   ],
-  "pathophysiology": "Gastric diverticula are either congenital or acquired. Congenital (true) diverticula contain all layers of the gastric wall and typically arise on the posterior fundic wall near the cardia, at a point of relative muscular weakness where the longitudinal and circular muscle layers are deficient and where extraperitoneal support is limited. Acquired diverticula are usually false (pulsion) diverticula, in which mucosa and submucosa herniate through the muscular wall in response to raised intraluminal pressure, or traction diverticula caused by external scarring from adjacent inflammatory processes such as peptic ulcer, pancreatitis or prior surgery; these are more often antral or prepyloric. Retention of food and acid within the sac may lead to mucosal inflammation, ulceration and, rarely, bleeding or perforation. The characteristic posterior juxta-cardial position of congenital diverticula explains why they are readily mistaken for retroperitoneal or adrenal lesions on imaging.",
-  "additionalDifferentials": [
-   "adrenal mass or adenoma on cross-sectional imaging",
-   "pancreatic pseudocyst or cystic neoplasm",
-   "para-oesophageal hiatus hernia",
-   "gastric duplication cyst",
-   "gastrointestinal stromal tumour or submucosal gastric mass",
-   "gastric ulcer or malignancy",
-   "retroperitoneal cyst or lymphadenopathy"
-  ],
-  "additionalInvestigations": [
-   "upper gastrointestinal endoscopy with fundal retroflexion",
-   "barium meal to demonstrate contrast filling the sac",
-   "computed tomography with oral contrast to confirm communication with the stomach",
-   "endoscopic ultrasound to assess wall layers and exclude a submucosal mass",
-   "cross-sectional imaging to distinguish from adrenal or pancreatic lesions",
-   "biopsy of the diverticular mucosa if malignancy is suspected"
-  ],
-  "redFlags": [
-   "gastrointestinal bleeding or melaena from the sac",
-   "severe or acute abdominal pain suggesting perforation",
-   "weight loss or a mass raising concern for malignancy",
-   "signs of gastric outlet compromise",
-   "rapidly enlarging or irregular lesion on imaging"
-  ],
-  "prognosis": "The prognosis is excellent for the majority of asymptomatic diverticula managed conservatively, and surgical resection of symptomatic lesions is generally curative. Malignant transformation is rare but carries the prognosis of the underlying tumour.",
-  "pitfalls": [
-   "Misdiagnosing a posterior fundal diverticulum as an adrenal or pancreatic mass and pursuing unnecessary intervention.",
-   "Failing to retroflex in the fundus at endoscopy and missing the diverticular opening.",
-   "Attributing non-specific dyspepsia to the diverticulum without excluding commoner causes.",
-   "Overlooking bleeding or ulceration within the sac as a source of occult blood loss.",
-   "Not considering malignancy in a symptomatic or atypical diverticulum."
-  ],
-  "references": [
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease, current edition",
-   "Shackelford's Surgery of the Alimentary Tract, current edition"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassure and observe asymptomatic diverticula, which need no intervention",
-   "Give acid suppression with a proton-pump inhibitor for symptomatic mucosal inflammation or ulceration within the sac",
-   "Undertake surgical resection, often laparoscopic diverticulectomy, for persistently symptomatic or complicated diverticula",
-   "Manage complications such as bleeding or perforation with endoscopic or surgical intervention",
-   "Confirm the diagnosis and distinguish it from an adrenal or pancreatic mass using fundal-retroflexion endoscopy or contrast imaging before intervention",
-   "Biopsy suspicious mucosa to exclude malignancy arising within the diverticulum"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "gastric_diverticulum-pathway",
-   "title": "gastric diverticulum: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Gastric diverticulum is a rare outpouching of the stomach wall, with the great majority being congenital true diverticula located on the posterior wall of the gastric fundus just below the oesophagogastric junction.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: gastrointestinal bleeding or melaena from the sac",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: upper gastrointestinal endoscopy with fundal retroflexion, barium meal to demonstrate contrast filling the sac, computed tomography with oral contrast to confirm communication with the stomach"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassure and observe asymptomatic diverticula, which need no intervention"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing a posterior fundal diverticulum as an adrenal or pancreatic mass and pursuing unnecessary intervention."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of gastric diverticulum."
-  }
- ],
- "tables": [
-  {
-   "id": "gastric_diverticulum-matrix",
-   "title": "gastric diverticulum: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Gastric diverticulum is a rare outpouching of the stomach wall, with the great majority being congenital true diverticula located",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "gastrointestinal",
+  "specialty": "gastroenterology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Gastric diverticulum is a rare outpouching of the stomach wall, with the great majority being congenital true diverticula located on the posterior wall of the gastric fundus just below the oesophagogastric junction.",
+      "The characteristic juxta-cardial posterior fundal location and its cystic appearance can mimic an adrenal mass, pancreatic pseudocyst or other retroperitoneal lesion on cross-sectional imaging.",
+      "Acquired diverticula are less common, usually located in the antrum or prepyloric region, and tend to be pulsion or traction type related to adjacent inflammation, ulcer or prior surgery.",
+      "Most gastric diverticula are asymptomatic and found incidentally; when symptomatic they cause vague epigastric or postprandial pain, dyspepsia, nausea or a sensation of fullness.",
+      "Complications, though uncommon, include bleeding from mucosal ulceration within the sac, perforation and, rarely, malignancy arising in the diverticulum.",
+      "Upper gastrointestinal endoscopy with retroflexion in the fundus, or barium study, confirms the diagnosis and helps distinguish it from an extrinsic mass.",
+      "Because it can be mistaken for an adrenal or pancreatic lesion, awareness prevents unnecessary intervention; oral contrast filling the sac on imaging is a helpful clue.",
+      "Symptomatic or complicated diverticula are treated with surgical resection, increasingly by laparoscopic diverticulectomy, while asymptomatic lesions are managed conservatively."
     ],
-    [
-     "Key Investigations",
-     "upper gastrointestinal endoscopy with fundal retroflexion, barium meal to demonstrate contrast filling the sac, computed",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Gastric diverticula are either congenital or acquired. Congenital (true) diverticula contain all layers of the gastric wall and typically arise on the posterior fundic wall near the cardia, at a point of relative muscular weakness where the longitudinal and circular muscle layers are deficient and where extraperitoneal support is limited. Acquired diverticula are usually false (pulsion) diverticula, in which mucosa and submucosa herniate through the muscular wall in response to raised intraluminal pressure, or traction diverticula caused by external scarring from adjacent inflammatory processes such as peptic ulcer, pancreatitis or prior surgery; these are more often antral or prepyloric. Retention of food and acid within the sac may lead to mucosal inflammation, ulceration and, rarely, bleeding or perforation. The characteristic posterior juxta-cardial position of congenital diverticula explains why they are readily mistaken for retroperitoneal or adrenal lesions on imaging.",
+    "additionalDifferentials": [
+      "adrenal mass or adenoma on cross-sectional imaging",
+      "pancreatic pseudocyst or cystic neoplasm",
+      "para-oesophageal hiatus hernia",
+      "gastric duplication cyst",
+      "gastrointestinal stromal tumour or submucosal gastric mass",
+      "gastric ulcer or malignancy",
+      "retroperitoneal cyst or lymphadenopathy"
     ],
-    [
-     "Primary Differentials",
-     "adrenal mass or adenoma on cross-sectional imaging, pancreatic pseudocyst or cystic neoplasm, para-oesophageal hiatus hernia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "upper gastrointestinal endoscopy with fundal retroflexion",
+      "barium meal to demonstrate contrast filling the sac",
+      "computed tomography with oral contrast to confirm communication with the stomach",
+      "endoscopic ultrasound to assess wall layers and exclude a submucosal mass",
+      "cross-sectional imaging to distinguish from adrenal or pancreatic lesions",
+      "biopsy of the diverticular mucosa if malignancy is suspected"
     ],
-    [
-     "Management Strategy",
-     "Reassure and observe asymptomatic diverticula, which need no intervention",
-     "Core treatment modality"
+    "redFlags": [
+      "gastrointestinal bleeding or melaena from the sac",
+      "severe or acute abdominal pain suggesting perforation",
+      "weight loss or a mass raising concern for malignancy",
+      "signs of gastric outlet compromise",
+      "rapidly enlarging or irregular lesion on imaging"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing a posterior fundal diverticulum as an adrenal or pancreatic mass and pursuing unnecessary intervention.",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis is excellent for the majority of asymptomatic diverticula managed conservatively, and surgical resection of symptomatic lesions is generally curative. Malignant transformation is rare but carries the prognosis of the underlying tumour.",
+    "pitfalls": [
+      "Misdiagnosing a posterior fundal diverticulum as an adrenal or pancreatic mass and pursuing unnecessary intervention.",
+      "Failing to retroflex in the fundus at endoscopy and missing the diverticular opening.",
+      "Attributing non-specific dyspepsia to the diverticulum without excluding commoner causes.",
+      "Overlooking bleeding or ulceration within the sac as a source of occult blood loss.",
+      "Not considering malignancy in a symptomatic or atypical diverticulum."
+    ],
+    "references": [
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease, current edition",
+      "Shackelford's Surgery of the Alimentary Tract, current edition"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassure and observe asymptomatic diverticula, which need no intervention",
+      "Give acid suppression with a proton-pump inhibitor for symptomatic mucosal inflammation or ulceration within the sac",
+      "Undertake surgical resection, often laparoscopic diverticulectomy, for persistently symptomatic or complicated diverticula",
+      "Manage complications such as bleeding or perforation with endoscopic or surgical intervention",
+      "Confirm the diagnosis and distinguish it from an adrenal or pancreatic mass using fundal-retroflexion endoscopy or contrast imaging before intervention",
+      "Biopsy suspicious mucosa to exclude malignancy arising within the diverticulum"
     ]
-   ],
-   "caption": "Overview comparison matrix for gastric diverticulum."
-  }
- ],
- "diagrams": [
-  {
-   "id": "gastric-diverticulum-real-image",
-   "title": "gastric diverticulum: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "gastric_diverticulum-pathway",
+      "title": "gastric diverticulum: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Gastric diverticulum is a rare outpouching of the stomach wall, with the great majority being congenital true diverticula located on the posterior wall of the gastric fundus just below the oesophagogastric junction.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: gastrointestinal bleeding or melaena from the sac",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: upper gastrointestinal endoscopy with fundal retroflexion, barium meal to demonstrate contrast filling the sac, computed tomography with oral contrast to confirm communication with the stomach"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassure and observe asymptomatic diverticula, which need no intervention"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing a posterior fundal diverticulum as an adrenal or pancreatic mass and pursuing unnecessary intervention."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of gastric diverticulum."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "gastric_diverticulum-matrix",
+      "title": "gastric diverticulum: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Gastric diverticulum is a rare outpouching of the stomach wall, with the great majority being congenital true diverticula located",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "upper gastrointestinal endoscopy with fundal retroflexion, barium meal to demonstrate contrast filling the sac, computed",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "adrenal mass or adenoma on cross-sectional imaging, pancreatic pseudocyst or cystic neoplasm, para-oesophageal hiatus hernia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassure and observe asymptomatic diverticula, which need no intervention",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing a posterior fundal diverticulum as an adrenal or pancreatic mass and pursuing unnecessary intervention.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for gastric diverticulum."
+    }
+  ],
+  "diagrams": []
 }

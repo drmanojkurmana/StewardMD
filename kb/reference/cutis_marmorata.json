@@ -1,176 +1,154 @@
 {
- "id": "cutis_marmorata",
- "name": "cutis marmorata",
- "aliases": [
-  "physiological livedo reticularis",
-  "marbled skin"
- ],
- "class": "non_infective",
- "system": "Skin and subcutaneous tissue",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Cutis marmorata is a transient, symmetrical reticulated blue-red mottling of the skin provoked by cold exposure and resolving fully on rewarming, reflecting a physiological vasomotor response rather than fixed structural vessel disease.",
-   "It is extremely common in neonates and infants because of immature autonomic control of the cutaneous vasculature, and typically diminishes with age.",
-   "The pattern arises from cold-induced constriction of the ascending arterioles supplying dermal vascular cones, so surrounding venous plexuses dilate and deoxygenated blood pools in a net-like configuration.",
-   "Distinguish physiological cutis marmorata from persistent, non-reversible livedo reticularis or livedo racemosa, which suggest underlying vasculopathy, thrombophilia or connective-tissue disease and warrant investigation.",
-   "Persistent or pronounced cutis marmorata in a neonate should prompt consideration of hypothyroidism, Down syndrome, trisomy 18, Cornelia de Lange syndrome and other neurodevelopmental disorders.",
-   "It must be differentiated from cutis marmorata telangiectatica congenita, a fixed congenital vascular malformation that does not fully disappear on warming and may be associated with limb atrophy or asymmetry.",
-   "No treatment is required for the physiological form; reassurance and avoidance of cold exposure suffice, with the reticulate colour normalising once ambient or core temperature rises.",
-   "Reappearance or accentuation of a marbled pattern in a critically ill adult may signal peripheral hypoperfusion, shock or impending cardiovascular collapse and should not be dismissed as benign."
+  "id": "cutis_marmorata",
+  "name": "cutis marmorata",
+  "aliases": [
+    "physiological livedo reticularis",
+    "marbled skin"
   ],
-  "pathophysiology": "Cutis marmorata represents an exaggerated but physiological vasomotor reaction of the cutaneous microcirculation to cold. The dermal blood supply is organised into cone-shaped units in which a central ascending arteriole feeds a superficial capillary bed drained by a peripheral venous plexus. On cooling, sympathetically mediated vasoconstriction narrows the central arterioles while the peripheral venules dilate and fill with slow-flowing, deoxygenated blood. This produces the characteristic reticulated, bluish-red network delineating areas of relative venous stasis around islands of better-perfused skin. Because the change is purely functional and driven by neurovascular tone, it reverses completely with rewarming. Immaturity of autonomic vascular regulation explains its prevalence in neonates, whereas in adults a similar reversible pattern may reflect labile vasomotor tone or, in the unwell patient, systemic hypoperfusion.",
-  "additionalDifferentials": [
-   "Livedo reticularis (persistent/pathological forms)",
-   "Livedo racemosa associated with antiphospholipid syndrome or vasculitis",
-   "Cutis marmorata telangiectatica congenita",
-   "Neonatal lupus and other connective-tissue disease-related livedo",
-   "Sneddon syndrome",
-   "Cholesterol embolisation-associated livedo",
-   "Physiological acrocyanosis of the newborn"
-  ],
-  "additionalInvestigations": [
-   "Careful clinical observation of reversibility on rewarming (usually diagnostic; no tests needed for physiological form)",
-   "Thyroid function tests where persistent neonatal mottling raises concern for hypothyroidism",
-   "Chromosomal/genetic evaluation if dysmorphic features suggest a syndromic association",
-   "Antinuclear antibody and antiphospholipid antibody screen if a fixed livedo pattern emerges",
-   "Skin biopsy reserved for atypical or persistent lesions to exclude vasculopathy",
-   "Assessment of perfusion, blood pressure and lactate in an acutely unwell patient with new mottling",
-   "Doppler or vascular imaging if a congenital vascular malformation is suspected"
-  ],
-  "redFlags": [
-   "Mottling that persists on rewarming or has a broken, irregular (racemosa) pattern",
-   "New or worsening skin marbling in an acutely unwell or hypotensive patient",
-   "Associated dysmorphic features, developmental delay or failure to thrive in an infant",
-   "Ulceration, atrophy or limb asymmetry accompanying the reticulate pattern",
-   "Systemic symptoms such as arthralgia, neurological deficit or thrombotic events"
-  ],
-  "prognosis": "Physiological cutis marmorata is entirely benign and self-limiting, typically becoming less prominent as autonomic vascular control matures. Persistent or syndrome-associated patterns carry the prognosis of the underlying condition rather than the skin change itself.",
-  "pitfalls": [
-   "Mislabelling a fixed, pathological livedo racemosa as benign cutis marmorata and missing an underlying thrombophilia or vasculitis",
-   "Overlooking new skin mottling as an early sign of shock or poor perfusion in a deteriorating patient",
-   "Confusing cutis marmorata telangiectatica congenita with the transient physiological form",
-   "Failing to screen for hypothyroidism or a genetic syndrome when neonatal mottling is persistent and marked",
-   "Over-investigating a clearly reversible, cold-induced pattern in an otherwise well child"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Nelson Textbook of Pediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassurance that the physiological form is benign and needs no active treatment",
-   "Simple rewarming and keeping the infant warm, which reverses the mottling",
-   "Investigate persistent neonatal mottling for hypothyroidism with thyroid function tests, treating with levothyroxine where confirmed",
-   "Distinguish a fixed livedo pattern, arranging antinuclear and antiphospholipid antibody screening when vasculopathy or thrombophilia is suspected",
-   "Differentiate from cutis marmorata telangiectatica congenita and from syndromic associations warranting genetic evaluation",
-   "Escalate urgently when new mottling appears in an acutely unwell patient, assessing perfusion as a sign of shock"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "cutis_marmorata-pathway",
-   "title": "cutis marmorata: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Cutis marmorata is a transient, symmetrical reticulated blue-red mottling of the skin provoked by cold exposure and resolving fully on rewarming, reflecting a physiological vasomotor response rather than fixed structural vessel disease.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Mottling that persists on rewarming or has a broken, irregular (racemosa) pattern",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Careful clinical observation of reversibility on rewarming (usually diagnostic; no tests needed for physiological form), Thyroid function tests where persistent neonatal mottling raises concern for hypothyroidism,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassurance that the physiological form is benign and needs no active treatment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mislabelling a fixed, pathological livedo racemosa as benign cutis marmorata and missing an underlying thrombophilia or vasculitis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of cutis marmorata."
-  }
- ],
- "tables": [
-  {
-   "id": "cutis_marmorata-matrix",
-   "title": "cutis marmorata: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Cutis marmorata is a transient, symmetrical reticulated blue-red mottling of the skin provoked by cold exposure and resolving",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Skin and subcutaneous tissue",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Cutis marmorata is a transient, symmetrical reticulated blue-red mottling of the skin provoked by cold exposure and resolving fully on rewarming, reflecting a physiological vasomotor response rather than fixed structural vessel disease.",
+      "It is extremely common in neonates and infants because of immature autonomic control of the cutaneous vasculature, and typically diminishes with age.",
+      "The pattern arises from cold-induced constriction of the ascending arterioles supplying dermal vascular cones, so surrounding venous plexuses dilate and deoxygenated blood pools in a net-like configuration.",
+      "Distinguish physiological cutis marmorata from persistent, non-reversible livedo reticularis or livedo racemosa, which suggest underlying vasculopathy, thrombophilia or connective-tissue disease and warrant investigation.",
+      "Persistent or pronounced cutis marmorata in a neonate should prompt consideration of hypothyroidism, Down syndrome, trisomy 18, Cornelia de Lange syndrome and other neurodevelopmental disorders.",
+      "It must be differentiated from cutis marmorata telangiectatica congenita, a fixed congenital vascular malformation that does not fully disappear on warming and may be associated with limb atrophy or asymmetry.",
+      "No treatment is required for the physiological form; reassurance and avoidance of cold exposure suffice, with the reticulate colour normalising once ambient or core temperature rises.",
+      "Reappearance or accentuation of a marbled pattern in a critically ill adult may signal peripheral hypoperfusion, shock or impending cardiovascular collapse and should not be dismissed as benign."
     ],
-    [
-     "Key Investigations",
-     "Careful clinical observation of reversibility on rewarming (usually diagnostic; no tests needed for physiological form), Thyroid",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Cutis marmorata represents an exaggerated but physiological vasomotor reaction of the cutaneous microcirculation to cold. The dermal blood supply is organised into cone-shaped units in which a central ascending arteriole feeds a superficial capillary bed drained by a peripheral venous plexus. On cooling, sympathetically mediated vasoconstriction narrows the central arterioles while the peripheral venules dilate and fill with slow-flowing, deoxygenated blood. This produces the characteristic reticulated, bluish-red network delineating areas of relative venous stasis around islands of better-perfused skin. Because the change is purely functional and driven by neurovascular tone, it reverses completely with rewarming. Immaturity of autonomic vascular regulation explains its prevalence in neonates, whereas in adults a similar reversible pattern may reflect labile vasomotor tone or, in the unwell patient, systemic hypoperfusion.",
+    "additionalDifferentials": [
+      "Livedo reticularis (persistent/pathological forms)",
+      "Livedo racemosa associated with antiphospholipid syndrome or vasculitis",
+      "Cutis marmorata telangiectatica congenita",
+      "Neonatal lupus and other connective-tissue disease-related livedo",
+      "Sneddon syndrome",
+      "Cholesterol embolisation-associated livedo",
+      "Physiological acrocyanosis of the newborn"
     ],
-    [
-     "Primary Differentials",
-     "Livedo reticularis (persistent/pathological forms), Livedo racemosa associated with antiphospholipid syndrome or vasculitis,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Careful clinical observation of reversibility on rewarming (usually diagnostic; no tests needed for physiological form)",
+      "Thyroid function tests where persistent neonatal mottling raises concern for hypothyroidism",
+      "Chromosomal/genetic evaluation if dysmorphic features suggest a syndromic association",
+      "Antinuclear antibody and antiphospholipid antibody screen if a fixed livedo pattern emerges",
+      "Skin biopsy reserved for atypical or persistent lesions to exclude vasculopathy",
+      "Assessment of perfusion, blood pressure and lactate in an acutely unwell patient with new mottling",
+      "Doppler or vascular imaging if a congenital vascular malformation is suspected"
     ],
-    [
-     "Management Strategy",
-     "Reassurance that the physiological form is benign and needs no active treatment",
-     "Core treatment modality"
+    "redFlags": [
+      "Mottling that persists on rewarming or has a broken, irregular (racemosa) pattern",
+      "New or worsening skin marbling in an acutely unwell or hypotensive patient",
+      "Associated dysmorphic features, developmental delay or failure to thrive in an infant",
+      "Ulceration, atrophy or limb asymmetry accompanying the reticulate pattern",
+      "Systemic symptoms such as arthralgia, neurological deficit or thrombotic events"
     ],
-    [
-     "Clinical Pitfall",
-     "Mislabelling a fixed, pathological livedo racemosa as benign cutis marmorata and missing an underlying thrombophilia or vasculitis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Physiological cutis marmorata is entirely benign and self-limiting, typically becoming less prominent as autonomic vascular control matures. Persistent or syndrome-associated patterns carry the prognosis of the underlying condition rather than the skin change itself.",
+    "pitfalls": [
+      "Mislabelling a fixed, pathological livedo racemosa as benign cutis marmorata and missing an underlying thrombophilia or vasculitis",
+      "Overlooking new skin mottling as an early sign of shock or poor perfusion in a deteriorating patient",
+      "Confusing cutis marmorata telangiectatica congenita with the transient physiological form",
+      "Failing to screen for hypothyroidism or a genetic syndrome when neonatal mottling is persistent and marked",
+      "Over-investigating a clearly reversible, cold-induced pattern in an otherwise well child"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Nelson Textbook of Pediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassurance that the physiological form is benign and needs no active treatment",
+      "Simple rewarming and keeping the infant warm, which reverses the mottling",
+      "Investigate persistent neonatal mottling for hypothyroidism with thyroid function tests, treating with levothyroxine where confirmed",
+      "Distinguish a fixed livedo pattern, arranging antinuclear and antiphospholipid antibody screening when vasculopathy or thrombophilia is suspected",
+      "Differentiate from cutis marmorata telangiectatica congenita and from syndromic associations warranting genetic evaluation",
+      "Escalate urgently when new mottling appears in an acutely unwell patient, assessing perfusion as a sign of shock"
     ]
-   ],
-   "caption": "Overview comparison matrix for cutis marmorata."
-  }
- ],
- "diagrams": [
-  {
-   "id": "cutis-marmorata-real-image",
-   "title": "cutis marmorata: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "cutis_marmorata-pathway",
+      "title": "cutis marmorata: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Cutis marmorata is a transient, symmetrical reticulated blue-red mottling of the skin provoked by cold exposure and resolving fully on rewarming, reflecting a physiological vasomotor response rather than fixed structural vessel disease.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Mottling that persists on rewarming or has a broken, irregular (racemosa) pattern",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Careful clinical observation of reversibility on rewarming (usually diagnostic; no tests needed for physiological form), Thyroid function tests where persistent neonatal mottling raises concern for hypothyroidism,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassurance that the physiological form is benign and needs no active treatment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mislabelling a fixed, pathological livedo racemosa as benign cutis marmorata and missing an underlying thrombophilia or vasculitis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of cutis marmorata."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "cutis_marmorata-matrix",
+      "title": "cutis marmorata: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Cutis marmorata is a transient, symmetrical reticulated blue-red mottling of the skin provoked by cold exposure and resolving",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Careful clinical observation of reversibility on rewarming (usually diagnostic; no tests needed for physiological form), Thyroid",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Livedo reticularis (persistent/pathological forms), Livedo racemosa associated with antiphospholipid syndrome or vasculitis,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassurance that the physiological form is benign and needs no active treatment",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mislabelling a fixed, pathological livedo racemosa as benign cutis marmorata and missing an underlying thrombophilia or vasculitis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for cutis marmorata."
+    }
+  ],
+  "diagrams": []
 }

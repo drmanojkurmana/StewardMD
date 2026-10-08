@@ -1,176 +1,154 @@
 {
- "id": "costello_syndrome",
- "name": "Costello syndrome",
- "aliases": [
-  "faciocutaneoskeletal syndrome",
-  "FCS syndrome",
-  "HRAS",
-  "RASopathy"
- ],
- "class": "non_infective",
- "system": "Genetics / Dysmorphology",
- "specialty": "Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A RASopathy caused by germline activating variants in HRAS, distinguishing it from Noonan and cardiofaciocutaneous syndromes at the molecular level",
-   "The face is coarse with full lips, a wide mouth, epicanthic folds and low-set ears, becoming more marked with age",
-   "Deep palmar and plantar creases with soft, loose skin and papillomata around the nose and mouth are characteristic cutaneous clues",
-   "There is a substantial risk of both benign and malignant tumours, notably rhabdomyosarcoma, neuroblastoma and bladder carcinoma, mandating structured surveillance",
-   "Failure to thrive with severe feeding difficulty often necessitating tube feeding is usual in infancy despite a large birth weight",
-   "Hypertrophic cardiomyopathy, arrhythmia (particularly atrial tachycardia) and pulmonary stenosis are important cardiac features",
-   "Almost all cases are de novo and follow autosomal dominant inheritance"
+  "id": "costello_syndrome",
+  "name": "Costello syndrome",
+  "aliases": [
+    "faciocutaneoskeletal syndrome",
+    "FCS syndrome",
+    "HRAS",
+    "RASopathy"
   ],
-  "pathophysiology": "Costello syndrome is caused by germline activating variants in HRAS, a small GTPase that is a central switch of the RAS-MAPK signalling pathway controlling cell growth, differentiation and survival. Pathogenic variants lock HRAS in an active, GTP-bound state, driving constitutive downstream signalling. This sustained activation not only disturbs craniofacial, cardiac and connective-tissue development but also promotes cellular proliferation, explaining the characteristic phenotype and the notably elevated predisposition to embryonal tumours.",
-  "additionalDifferentials": [
-   "Noonan syndrome",
-   "Cardiofaciocutaneous syndrome",
-   "Beckwith-Wiedemann syndrome",
-   "Simpson-Golabi-Behmel syndrome",
-   "Mucopolysaccharidoses and other storage disorders with coarse features",
-   "Neurofibromatosis type 1"
-  ],
-  "additionalInvestigations": [
-   "Targeted HRAS sequencing, or RASopathy gene-panel testing",
-   "Echocardiography and electrocardiography for hypertrophic cardiomyopathy, pulmonary stenosis and arrhythmia",
-   "Tumour surveillance including abdominal and pelvic ultrasound and urinalysis for haematuria per established protocols",
-   "Growth and nutritional assessment with feeding evaluation",
-   "Brain and spine imaging for Chiari I malformation and syringomyelia when clinically indicated",
-   "Endocrine assessment for growth hormone deficiency and hypoglycaemia"
-  ],
-  "redFlags": [
-   "New mass, unexplained pain or haematuria prompting urgent tumour evaluation",
-   "Palpitations or signs of atrial tachyarrhythmia and cardiomyopathy",
-   "Failure to thrive and dehydration from severe feeding difficulty",
-   "Neurological signs suggesting Chiari malformation or syringomyelia"
-  ],
-  "prognosis": "Life expectancy is reduced primarily by cardiac complications, especially cardiomyopathy and arrhythmia, and by malignancy; structured tumour surveillance improves early detection. Intellectual disability is usually mild to moderate, and affected individuals often have a sociable, engaging personality.",
-  "pitfalls": [
-   "Failing to institute tumour surveillance given the high embryonal cancer risk",
-   "Misclassifying it as Noonan or cardiofaciocutaneous syndrome, altering cancer risk counselling",
-   "Overlooking atrial tachyarrhythmia that may be intermittent",
-   "Attributing infantile feeding failure to reflux alone and delaying tube feeding"
-  ],
-  "references": [
-   "Smith's Recognizable Patterns of Human Malformation",
-   "Nelson Textbook of Pediatrics",
-   "GeneReviews: Costello syndrome"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Multidisciplinary supportive care coordinated through clinical genetics, as no targeted therapy corrects the underlying HRAS activation",
-   "Structured tumour surveillance with serial abdominal and pelvic ultrasound and urinalysis for haematuria to detect rhabdomyosarcoma, neuroblastoma and bladder carcinoma early",
-   "Cardiac monitoring with regular echocardiography and electrocardiography for hypertrophic cardiomyopathy, atrial tachycardia and pulmonary stenosis, with antiarrhythmic or interventional treatment as needed",
-   "Nutritional support for failure to thrive and severe feeding difficulty, frequently requiring nasogastric or gastrostomy tube feeding in infancy",
-   "Endocrine assessment and treatment of growth hormone deficiency and hypoglycaemia",
-   "Developmental support with physiotherapy, occupational and speech therapy and early educational intervention",
-   "Neurosurgical assessment for symptomatic Chiari I malformation or syringomyelia",
-   "Genetic counselling with HRAS confirmatory testing, noting most cases arise de novo"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "costello_syndrome-pathway",
-   "title": "Costello syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A RASopathy caused by germline activating variants in HRAS, distinguishing it from Noonan and cardiofaciocutaneous syndromes at the molecular level",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New mass, unexplained pain or haematuria prompting urgent tumour evaluation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Targeted HRAS sequencing, or RASopathy gene-panel testing, Echocardiography and electrocardiography for hypertrophic cardiomyopathy, pulmonary stenosis and arrhythmia, Tumour surveillance including abdominal and pelvic"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Multidisciplinary supportive care coordinated through clinical genetics, as no targeted therapy corrects the underlying HRAS activation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to institute tumour surveillance given the high embryonal cancer risk"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of costello syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "costello_syndrome-matrix",
-   "title": "Costello syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A RASopathy caused by germline activating variants in HRAS, distinguishing it from Noonan and cardiofaciocutaneous syndromes at",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetics / Dysmorphology",
+  "specialty": "Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A RASopathy caused by germline activating variants in HRAS, distinguishing it from Noonan and cardiofaciocutaneous syndromes at the molecular level",
+      "The face is coarse with full lips, a wide mouth, epicanthic folds and low-set ears, becoming more marked with age",
+      "Deep palmar and plantar creases with soft, loose skin and papillomata around the nose and mouth are characteristic cutaneous clues",
+      "There is a substantial risk of both benign and malignant tumours, notably rhabdomyosarcoma, neuroblastoma and bladder carcinoma, mandating structured surveillance",
+      "Failure to thrive with severe feeding difficulty often necessitating tube feeding is usual in infancy despite a large birth weight",
+      "Hypertrophic cardiomyopathy, arrhythmia (particularly atrial tachycardia) and pulmonary stenosis are important cardiac features",
+      "Almost all cases are de novo and follow autosomal dominant inheritance"
     ],
-    [
-     "Key Investigations",
-     "Targeted HRAS sequencing, or RASopathy gene-panel testing, Echocardiography and electrocardiography for hypertrophic",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Costello syndrome is caused by germline activating variants in HRAS, a small GTPase that is a central switch of the RAS-MAPK signalling pathway controlling cell growth, differentiation and survival. Pathogenic variants lock HRAS in an active, GTP-bound state, driving constitutive downstream signalling. This sustained activation not only disturbs craniofacial, cardiac and connective-tissue development but also promotes cellular proliferation, explaining the characteristic phenotype and the notably elevated predisposition to embryonal tumours.",
+    "additionalDifferentials": [
+      "Noonan syndrome",
+      "Cardiofaciocutaneous syndrome",
+      "Beckwith-Wiedemann syndrome",
+      "Simpson-Golabi-Behmel syndrome",
+      "Mucopolysaccharidoses and other storage disorders with coarse features",
+      "Neurofibromatosis type 1"
     ],
-    [
-     "Primary Differentials",
-     "Noonan syndrome, Cardiofaciocutaneous syndrome, Beckwith-Wiedemann syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Targeted HRAS sequencing, or RASopathy gene-panel testing",
+      "Echocardiography and electrocardiography for hypertrophic cardiomyopathy, pulmonary stenosis and arrhythmia",
+      "Tumour surveillance including abdominal and pelvic ultrasound and urinalysis for haematuria per established protocols",
+      "Growth and nutritional assessment with feeding evaluation",
+      "Brain and spine imaging for Chiari I malformation and syringomyelia when clinically indicated",
+      "Endocrine assessment for growth hormone deficiency and hypoglycaemia"
     ],
-    [
-     "Management Strategy",
-     "Multidisciplinary supportive care coordinated through clinical genetics, as no targeted therapy corrects the underlying HRAS",
-     "Core treatment modality"
+    "redFlags": [
+      "New mass, unexplained pain or haematuria prompting urgent tumour evaluation",
+      "Palpitations or signs of atrial tachyarrhythmia and cardiomyopathy",
+      "Failure to thrive and dehydration from severe feeding difficulty",
+      "Neurological signs suggesting Chiari malformation or syringomyelia"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to institute tumour surveillance given the high embryonal cancer risk",
-     "Prevent diagnostic or management error"
+    "prognosis": "Life expectancy is reduced primarily by cardiac complications, especially cardiomyopathy and arrhythmia, and by malignancy; structured tumour surveillance improves early detection. Intellectual disability is usually mild to moderate, and affected individuals often have a sociable, engaging personality.",
+    "pitfalls": [
+      "Failing to institute tumour surveillance given the high embryonal cancer risk",
+      "Misclassifying it as Noonan or cardiofaciocutaneous syndrome, altering cancer risk counselling",
+      "Overlooking atrial tachyarrhythmia that may be intermittent",
+      "Attributing infantile feeding failure to reflux alone and delaying tube feeding"
+    ],
+    "references": [
+      "Smith's Recognizable Patterns of Human Malformation",
+      "Nelson Textbook of Pediatrics",
+      "GeneReviews: Costello syndrome"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Multidisciplinary supportive care coordinated through clinical genetics, as no targeted therapy corrects the underlying HRAS activation",
+      "Structured tumour surveillance with serial abdominal and pelvic ultrasound and urinalysis for haematuria to detect rhabdomyosarcoma, neuroblastoma and bladder carcinoma early",
+      "Cardiac monitoring with regular echocardiography and electrocardiography for hypertrophic cardiomyopathy, atrial tachycardia and pulmonary stenosis, with antiarrhythmic or interventional treatment as needed",
+      "Nutritional support for failure to thrive and severe feeding difficulty, frequently requiring nasogastric or gastrostomy tube feeding in infancy",
+      "Endocrine assessment and treatment of growth hormone deficiency and hypoglycaemia",
+      "Developmental support with physiotherapy, occupational and speech therapy and early educational intervention",
+      "Neurosurgical assessment for symptomatic Chiari I malformation or syringomyelia",
+      "Genetic counselling with HRAS confirmatory testing, noting most cases arise de novo"
     ]
-   ],
-   "caption": "Overview comparison matrix for costello syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "costello-syndrome-real-image",
-   "title": "Costello syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "costello_syndrome-pathway",
+      "title": "Costello syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A RASopathy caused by germline activating variants in HRAS, distinguishing it from Noonan and cardiofaciocutaneous syndromes at the molecular level",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New mass, unexplained pain or haematuria prompting urgent tumour evaluation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Targeted HRAS sequencing, or RASopathy gene-panel testing, Echocardiography and electrocardiography for hypertrophic cardiomyopathy, pulmonary stenosis and arrhythmia, Tumour surveillance including abdominal and pelvic"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Multidisciplinary supportive care coordinated through clinical genetics, as no targeted therapy corrects the underlying HRAS activation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to institute tumour surveillance given the high embryonal cancer risk"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of costello syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "costello_syndrome-matrix",
+      "title": "Costello syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A RASopathy caused by germline activating variants in HRAS, distinguishing it from Noonan and cardiofaciocutaneous syndromes at",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Targeted HRAS sequencing, or RASopathy gene-panel testing, Echocardiography and electrocardiography for hypertrophic",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Noonan syndrome, Cardiofaciocutaneous syndrome, Beckwith-Wiedemann syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Multidisciplinary supportive care coordinated through clinical genetics, as no targeted therapy corrects the underlying HRAS",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to institute tumour surveillance given the high embryonal cancer risk",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for costello syndrome."
+    }
+  ],
+  "diagrams": []
 }

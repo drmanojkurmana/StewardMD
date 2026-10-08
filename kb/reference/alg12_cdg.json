@@ -1,174 +1,152 @@
 {
- "id": "alg12_cdg",
- "name": "ALG12-CDG (CDG-Ig)",
- "aliases": [
-  "ALG12",
-  "congenital disorder of glycosylation type Ig",
-  "CDG-Ig",
-  "dolichyl-P-mannose:Man7GlcNAc2-PP-dolichol mannosyltransferase deficiency"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An N-linked type I CDG caused by biallelic ALG12 variants affecting a mannosyltransferase in endoplasmic reticulum assembly of the lipid-linked oligosaccharide",
-   "Presents in infancy with developmental delay, hypotonia, microcephaly, dysmorphic features and failure to thrive",
-   "Recurrent infections with hypogammaglobulinaemia are a notable feature, reflecting hypoglycosylation of immunoglobulins",
-   "Genital and skeletal abnormalities and feeding difficulties are also reported within the phenotype",
-   "Serum transferrin isoelectric focusing shows a type I pattern from under-occupancy of N-glycan sites",
-   "Coagulopathy and hepatic involvement can occur as part of the multisystem picture",
-   "Management is supportive and multidisciplinary; ALG12 sequencing confirms the diagnosis after a suggestive transferrin pattern"
+  "id": "alg12_cdg",
+  "name": "ALG12-CDG (CDG-Ig)",
+  "aliases": [
+    "ALG12",
+    "congenital disorder of glycosylation type Ig",
+    "CDG-Ig",
+    "dolichyl-P-mannose:Man7GlcNAc2-PP-dolichol mannosyltransferase deficiency"
   ],
-  "pathophysiology": "ALG12 encodes a dolichol-phosphate-mannose-dependent mannosyltransferase that adds a mannose residue during endoplasmic reticulum assembly of the dolichol-linked oligosaccharide precursor. Deficiency leaves an incomplete precursor that is transferred inefficiently or as a truncated glycan, causing under-occupancy of N-linked sites and a type I transferrin pattern. Hypoglycosylation of immunoglobulins and other proteins contributes to the recurrent infections, developmental and multisystem features. The defect lies in precursor assembly and transfer rather than glycan processing, consistent with its type I classification.",
-  "additionalDifferentials": [
-   "Other type I CDG subtypes (e.g. PMM2-CDG, ALG1-CDG, ALG3-CDG)",
-   "Primary immunodeficiency with recurrent infection and hypogammaglobulinaemia",
-   "Syndromic causes of microcephaly with developmental delay",
-   "Mitochondrial disease in infancy",
-   "Peroxisomal disorders",
-   "Chromosomal or copy-number syndromes with dysmorphism"
-  ],
-  "additionalInvestigations": [
-   "Transferrin isoelectric focusing or mass spectrometry demonstrating a type I pattern",
-   "ALG12 molecular genetic testing",
-   "Immunoglobulin levels and immune function assessment",
-   "Coagulation studies and liver function tests",
-   "Neuroimaging for microcephaly and structural change",
-   "Growth, endocrine and dysmorphology evaluation"
-  ],
-  "redFlags": [
-   "Recurrent or severe infections indicating clinically significant immunodeficiency",
-   "Progressive microcephaly or developmental regression",
-   "Bleeding from coagulation factor deficiency",
-   "Failure to thrive with multi-organ involvement"
-  ],
-  "prognosis": "ALG12-CDG causes lasting neurodevelopmental disability, and outcome depends heavily on the frequency and severity of infections and other systemic complications. Severity varies with residual enzyme function.",
-  "pitfalls": [
-   "Investigating recurrent infection as isolated immunodeficiency without recognising an underlying CDG",
-   "Confusing the type I transferrin pattern with secondary causes",
-   "Overlooking bleeding risk before procedures",
-   "Assuming disease-modifying therapy exists when care is supportive"
-  ],
-  "references": [
-   "Scriver's OMMBID, congenital disorders of glycosylation",
-   "Nelson Textbook of Paediatrics, disorders of glycosylation"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No disease-specific therapy exists; care is supportive and coordinated by a metabolic multidisciplinary team",
-   "Immunoglobulin replacement and prompt antimicrobial treatment of infections given hypogammaglobulinaemia",
-   "Anticonvulsant therapy and developmental support for seizures, hypotonia and delay",
-   "Nutritional support for failure to thrive with enteral feeding when required",
-   "Monitor and correct coagulopathy and manage associated hepatic involvement",
-   "Endocrine and growth surveillance with management of associated abnormalities",
-   "Genetic counselling and family testing for this autosomal recessive condition"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "alg12_cdg-pathway",
-   "title": "ALG12-CDG (CDG-Ig): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An N-linked type I CDG caused by biallelic ALG12 variants affecting a mannosyltransferase in endoplasmic reticulum assembly of the lipid-linked oligosaccharide",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Recurrent or severe infections indicating clinically significant immunodeficiency",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Transferrin isoelectric focusing or mass spectrometry demonstrating a type I pattern, ALG12 molecular genetic testing, Immunoglobulin levels and immune function assessment"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No disease-specific therapy exists; care is supportive and coordinated by a metabolic multidisciplinary team"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Investigating recurrent infection as isolated immunodeficiency without recognising an underlying CDG"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of alg12-cdg (cdg-ig)."
-  }
- ],
- "tables": [
-  {
-   "id": "alg12_cdg-matrix",
-   "title": "ALG12-CDG (CDG-Ig): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An N-linked type I CDG caused by biallelic ALG12 variants affecting a mannosyltransferase in endoplasmic reticulum assembly of",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An N-linked type I CDG caused by biallelic ALG12 variants affecting a mannosyltransferase in endoplasmic reticulum assembly of the lipid-linked oligosaccharide",
+      "Presents in infancy with developmental delay, hypotonia, microcephaly, dysmorphic features and failure to thrive",
+      "Recurrent infections with hypogammaglobulinaemia are a notable feature, reflecting hypoglycosylation of immunoglobulins",
+      "Genital and skeletal abnormalities and feeding difficulties are also reported within the phenotype",
+      "Serum transferrin isoelectric focusing shows a type I pattern from under-occupancy of N-glycan sites",
+      "Coagulopathy and hepatic involvement can occur as part of the multisystem picture",
+      "Management is supportive and multidisciplinary; ALG12 sequencing confirms the diagnosis after a suggestive transferrin pattern"
     ],
-    [
-     "Key Investigations",
-     "Transferrin isoelectric focusing or mass spectrometry demonstrating a type I pattern, ALG12 molecular genetic testing,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "ALG12 encodes a dolichol-phosphate-mannose-dependent mannosyltransferase that adds a mannose residue during endoplasmic reticulum assembly of the dolichol-linked oligosaccharide precursor. Deficiency leaves an incomplete precursor that is transferred inefficiently or as a truncated glycan, causing under-occupancy of N-linked sites and a type I transferrin pattern. Hypoglycosylation of immunoglobulins and other proteins contributes to the recurrent infections, developmental and multisystem features. The defect lies in precursor assembly and transfer rather than glycan processing, consistent with its type I classification.",
+    "additionalDifferentials": [
+      "Other type I CDG subtypes (e.g. PMM2-CDG, ALG1-CDG, ALG3-CDG)",
+      "Primary immunodeficiency with recurrent infection and hypogammaglobulinaemia",
+      "Syndromic causes of microcephaly with developmental delay",
+      "Mitochondrial disease in infancy",
+      "Peroxisomal disorders",
+      "Chromosomal or copy-number syndromes with dysmorphism"
     ],
-    [
-     "Primary Differentials",
-     "Other type I CDG subtypes (e.g. PMM2-CDG, ALG1-CDG, ALG3-CDG), Primary immunodeficiency with recurrent infection and",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Transferrin isoelectric focusing or mass spectrometry demonstrating a type I pattern",
+      "ALG12 molecular genetic testing",
+      "Immunoglobulin levels and immune function assessment",
+      "Coagulation studies and liver function tests",
+      "Neuroimaging for microcephaly and structural change",
+      "Growth, endocrine and dysmorphology evaluation"
     ],
-    [
-     "Management Strategy",
-     "No disease-specific therapy exists; care is supportive and coordinated by a metabolic multidisciplinary team",
-     "Core treatment modality"
+    "redFlags": [
+      "Recurrent or severe infections indicating clinically significant immunodeficiency",
+      "Progressive microcephaly or developmental regression",
+      "Bleeding from coagulation factor deficiency",
+      "Failure to thrive with multi-organ involvement"
     ],
-    [
-     "Clinical Pitfall",
-     "Investigating recurrent infection as isolated immunodeficiency without recognising an underlying CDG",
-     "Prevent diagnostic or management error"
+    "prognosis": "ALG12-CDG causes lasting neurodevelopmental disability, and outcome depends heavily on the frequency and severity of infections and other systemic complications. Severity varies with residual enzyme function.",
+    "pitfalls": [
+      "Investigating recurrent infection as isolated immunodeficiency without recognising an underlying CDG",
+      "Confusing the type I transferrin pattern with secondary causes",
+      "Overlooking bleeding risk before procedures",
+      "Assuming disease-modifying therapy exists when care is supportive"
+    ],
+    "references": [
+      "Scriver's OMMBID, congenital disorders of glycosylation",
+      "Nelson Textbook of Paediatrics, disorders of glycosylation"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No disease-specific therapy exists; care is supportive and coordinated by a metabolic multidisciplinary team",
+      "Immunoglobulin replacement and prompt antimicrobial treatment of infections given hypogammaglobulinaemia",
+      "Anticonvulsant therapy and developmental support for seizures, hypotonia and delay",
+      "Nutritional support for failure to thrive with enteral feeding when required",
+      "Monitor and correct coagulopathy and manage associated hepatic involvement",
+      "Endocrine and growth surveillance with management of associated abnormalities",
+      "Genetic counselling and family testing for this autosomal recessive condition"
     ]
-   ],
-   "caption": "Overview comparison matrix for alg12-cdg (cdg-ig)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "alg12-cdg-real-image",
-   "title": "ALG12-CDG (CDG-Ig): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "alg12_cdg-pathway",
+      "title": "ALG12-CDG (CDG-Ig): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An N-linked type I CDG caused by biallelic ALG12 variants affecting a mannosyltransferase in endoplasmic reticulum assembly of the lipid-linked oligosaccharide",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Recurrent or severe infections indicating clinically significant immunodeficiency",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Transferrin isoelectric focusing or mass spectrometry demonstrating a type I pattern, ALG12 molecular genetic testing, Immunoglobulin levels and immune function assessment"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No disease-specific therapy exists; care is supportive and coordinated by a metabolic multidisciplinary team"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Investigating recurrent infection as isolated immunodeficiency without recognising an underlying CDG"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of alg12-cdg (cdg-ig)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "alg12_cdg-matrix",
+      "title": "ALG12-CDG (CDG-Ig): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An N-linked type I CDG caused by biallelic ALG12 variants affecting a mannosyltransferase in endoplasmic reticulum assembly of",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Transferrin isoelectric focusing or mass spectrometry demonstrating a type I pattern, ALG12 molecular genetic testing,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other type I CDG subtypes (e.g. PMM2-CDG, ALG1-CDG, ALG3-CDG), Primary immunodeficiency with recurrent infection and",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No disease-specific therapy exists; care is supportive and coordinated by a metabolic multidisciplinary team",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Investigating recurrent infection as isolated immunodeficiency without recognising an underlying CDG",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for alg12-cdg (cdg-ig)."
+    }
+  ],
+  "diagrams": []
 }

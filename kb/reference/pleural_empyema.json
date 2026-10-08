@@ -1,174 +1,152 @@
 {
- "id": "pleural_empyema",
- "name": "Pleural empyema",
- "aliases": [
-  "empyema",
-  "empyema thoracis",
-  "pyothorax",
-  "complicated parapneumonic effusion"
- ],
- "class": "infective",
- "system": "Respiratory",
- "specialty": "Pulmonology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / GOLD & ATS guidelines",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Empyema is the presence of pus within the pleural space, most commonly a complication of bacterial pneumonia (parapneumonic effusion)",
-   "Presents with persistent or worsening fever, pleuritic chest pain, breathlessness, and failure to improve despite pneumonia treatment",
-   "Suspect empyema when a parapneumonic effusion is large, loculated, or associated with ongoing sepsis",
-   "Pleural fluid sampling is key; frankly purulent fluid, positive Gram stain or culture, low pH, low glucose, and high LDH indicate a complicated effusion or empyema needing drainage",
-   "Contrast CT and ultrasound help characterise loculations, pleural thickening, and the underlying lung and guide drainage",
-   "Effective management combines prompt drainage of the infected space with appropriate antimicrobial therapy covering likely organisms",
-   "Loculated or organising collections may require intrapleural fibrinolytics or surgical intervention such as decortication",
-   "Anaerobes and mixed flora are common, particularly with aspiration, and treatment should reflect the likely microbiology"
+  "id": "pleural_empyema",
+  "name": "Pleural empyema",
+  "aliases": [
+    "empyema",
+    "empyema thoracis",
+    "pyothorax",
+    "complicated parapneumonic effusion"
   ],
-  "pathophysiology": "Empyema typically evolves through stages from an initial free-flowing exudative parapneumonic effusion, as infection and inflammation increase pleural capillary permeability. Bacterial invasion of the pleural fluid promotes neutrophil influx, fibrin deposition, and metabolic activity that lower fluid pH and glucose and raise LDH. Fibrin strands then organise the collection into loculations (fibrinopurulent stage). If untreated, fibroblast proliferation produces a thick, inelastic pleural peel that traps the lung and restricts expansion (organising stage), impairing recovery.",
-  "additionalDifferentials": [
-   "Uncomplicated parapneumonic effusion",
-   "Malignant pleural effusion",
-   "Tuberculous pleural effusion",
-   "Haemothorax",
-   "Lung abscess",
-   "Transudative effusion from heart failure"
-  ],
-  "additionalInvestigations": [
-   "Diagnostic pleural aspiration with fluid pH, glucose, LDH, protein, Gram stain, and culture",
-   "Chest ultrasound to detect loculations and guide sampling and drainage",
-   "Contrast-enhanced CT of the chest to define pleural collections and underlying pathology",
-   "Blood cultures and inflammatory markers to assess systemic infection",
-   "Cytology and mycobacterial studies where malignancy or tuberculosis is possible"
-  ],
-  "redFlags": [
-   "Signs of severe sepsis or septic shock",
-   "Large or rapidly accumulating collection causing respiratory compromise",
-   "Failure to improve despite antibiotics and initial drainage, suggesting loculation or trapped lung",
-   "Development of a bronchopleural fistula or spreading infection"
-  ],
-  "prognosis": "With early recognition, adequate drainage, and appropriate antibiotics, most patients recover well; delayed or inadequate treatment allows loculation and pleural thickening, leading to prolonged illness, the need for surgery, chronic respiratory impairment, and higher mortality, particularly in frail or comorbid patients.",
-  "pitfalls": [
-   "Managing an infected pleural collection with antibiotics alone without adequate drainage",
-   "Delaying pleural fluid sampling in a non-resolving pneumonia",
-   "Underestimating loculated collections on plain radiography without ultrasound or CT",
-   "Overlooking anaerobic or aspiration-related organisms when choosing antimicrobial cover"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "GOLD/ATS guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Drain the infected pleural space promptly with an intercostal chest tube, guided by ultrasound",
-   "Start empirical broad-spectrum antibiotics covering likely organisms including anaerobes, then rationalise to culture results and continue a prolonged course",
-   "Instil intrapleural fibrinolytic combined with DNase for loculated or septated collections that drain poorly",
-   "Refer for surgical intervention, such as video-assisted thoracoscopic surgery or decortication, when drainage fails or an organising empyema traps the lung",
-   "Treat the underlying pneumonia and any source of infection for adequate source control",
-   "Provide supportive care with nutritional support, venous thromboembolism prophylaxis and analgesia, and monitor recovery with imaging and inflammatory markers",
-   "Refer to respiratory medicine and thoracic surgery, and escalate for persistent sepsis or failure to re-expand the lung"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pleural_empyema-pathway",
-   "title": "Pleural empyema: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Empyema is the presence of pus within the pleural space, most commonly a complication of bacterial pneumonia (parapneumonic effusion)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Signs of severe sepsis or septic shock",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Diagnostic pleural aspiration with fluid pH, glucose, LDH, protein, Gram stain, and culture, Chest ultrasound to detect loculations and guide sampling and drainage, Contrast-enhanced CT of the chest to define pleural"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Drain the infected pleural space promptly with an intercostal chest tube, guided by ultrasound"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Managing an infected pleural collection with antibiotics alone without adequate drainage"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pleural empyema."
-  }
- ],
- "tables": [
-  {
-   "id": "pleural_empyema-matrix",
-   "title": "Pleural empyema: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Empyema is the presence of pus within the pleural space, most commonly a complication of bacterial pneumonia (parapneumonic",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Respiratory",
+  "specialty": "Pulmonology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / GOLD & ATS guidelines",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Empyema is the presence of pus within the pleural space, most commonly a complication of bacterial pneumonia (parapneumonic effusion)",
+      "Presents with persistent or worsening fever, pleuritic chest pain, breathlessness, and failure to improve despite pneumonia treatment",
+      "Suspect empyema when a parapneumonic effusion is large, loculated, or associated with ongoing sepsis",
+      "Pleural fluid sampling is key; frankly purulent fluid, positive Gram stain or culture, low pH, low glucose, and high LDH indicate a complicated effusion or empyema needing drainage",
+      "Contrast CT and ultrasound help characterise loculations, pleural thickening, and the underlying lung and guide drainage",
+      "Effective management combines prompt drainage of the infected space with appropriate antimicrobial therapy covering likely organisms",
+      "Loculated or organising collections may require intrapleural fibrinolytics or surgical intervention such as decortication",
+      "Anaerobes and mixed flora are common, particularly with aspiration, and treatment should reflect the likely microbiology"
     ],
-    [
-     "Key Investigations",
-     "Diagnostic pleural aspiration with fluid pH, glucose, LDH, protein, Gram stain, and culture, Chest ultrasound to detect",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Empyema typically evolves through stages from an initial free-flowing exudative parapneumonic effusion, as infection and inflammation increase pleural capillary permeability. Bacterial invasion of the pleural fluid promotes neutrophil influx, fibrin deposition, and metabolic activity that lower fluid pH and glucose and raise LDH. Fibrin strands then organise the collection into loculations (fibrinopurulent stage). If untreated, fibroblast proliferation produces a thick, inelastic pleural peel that traps the lung and restricts expansion (organising stage), impairing recovery.",
+    "additionalDifferentials": [
+      "Uncomplicated parapneumonic effusion",
+      "Malignant pleural effusion",
+      "Tuberculous pleural effusion",
+      "Haemothorax",
+      "Lung abscess",
+      "Transudative effusion from heart failure"
     ],
-    [
-     "Primary Differentials",
-     "Uncomplicated parapneumonic effusion, Malignant pleural effusion, Tuberculous pleural effusion",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Diagnostic pleural aspiration with fluid pH, glucose, LDH, protein, Gram stain, and culture",
+      "Chest ultrasound to detect loculations and guide sampling and drainage",
+      "Contrast-enhanced CT of the chest to define pleural collections and underlying pathology",
+      "Blood cultures and inflammatory markers to assess systemic infection",
+      "Cytology and mycobacterial studies where malignancy or tuberculosis is possible"
     ],
-    [
-     "Management Strategy",
-     "Drain the infected pleural space promptly with an intercostal chest tube, guided by ultrasound",
-     "Core treatment modality"
+    "redFlags": [
+      "Signs of severe sepsis or septic shock",
+      "Large or rapidly accumulating collection causing respiratory compromise",
+      "Failure to improve despite antibiotics and initial drainage, suggesting loculation or trapped lung",
+      "Development of a bronchopleural fistula or spreading infection"
     ],
-    [
-     "Clinical Pitfall",
-     "Managing an infected pleural collection with antibiotics alone without adequate drainage",
-     "Prevent diagnostic or management error"
+    "prognosis": "With early recognition, adequate drainage, and appropriate antibiotics, most patients recover well; delayed or inadequate treatment allows loculation and pleural thickening, leading to prolonged illness, the need for surgery, chronic respiratory impairment, and higher mortality, particularly in frail or comorbid patients.",
+    "pitfalls": [
+      "Managing an infected pleural collection with antibiotics alone without adequate drainage",
+      "Delaying pleural fluid sampling in a non-resolving pneumonia",
+      "Underestimating loculated collections on plain radiography without ultrasound or CT",
+      "Overlooking anaerobic or aspiration-related organisms when choosing antimicrobial cover"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "GOLD/ATS guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Drain the infected pleural space promptly with an intercostal chest tube, guided by ultrasound",
+      "Start empirical broad-spectrum antibiotics covering likely organisms including anaerobes, then rationalise to culture results and continue a prolonged course",
+      "Instil intrapleural fibrinolytic combined with DNase for loculated or septated collections that drain poorly",
+      "Refer for surgical intervention, such as video-assisted thoracoscopic surgery or decortication, when drainage fails or an organising empyema traps the lung",
+      "Treat the underlying pneumonia and any source of infection for adequate source control",
+      "Provide supportive care with nutritional support, venous thromboembolism prophylaxis and analgesia, and monitor recovery with imaging and inflammatory markers",
+      "Refer to respiratory medicine and thoracic surgery, and escalate for persistent sepsis or failure to re-expand the lung"
     ]
-   ],
-   "caption": "Overview comparison matrix for pleural empyema."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pleural-empyema-real-image",
-   "title": "Pleural empyema: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "pleural_empyema-pathway",
+      "title": "Pleural empyema: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Empyema is the presence of pus within the pleural space, most commonly a complication of bacterial pneumonia (parapneumonic effusion)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Signs of severe sepsis or septic shock",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Diagnostic pleural aspiration with fluid pH, glucose, LDH, protein, Gram stain, and culture, Chest ultrasound to detect loculations and guide sampling and drainage, Contrast-enhanced CT of the chest to define pleural"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Drain the infected pleural space promptly with an intercostal chest tube, guided by ultrasound"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Managing an infected pleural collection with antibiotics alone without adequate drainage"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pleural empyema."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pleural_empyema-matrix",
+      "title": "Pleural empyema: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Empyema is the presence of pus within the pleural space, most commonly a complication of bacterial pneumonia (parapneumonic",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Diagnostic pleural aspiration with fluid pH, glucose, LDH, protein, Gram stain, and culture, Chest ultrasound to detect",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Uncomplicated parapneumonic effusion, Malignant pleural effusion, Tuberculous pleural effusion",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Drain the infected pleural space promptly with an intercostal chest tube, guided by ultrasound",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Managing an infected pleural collection with antibiotics alone without adequate drainage",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pleural empyema."
+    }
+  ],
+  "diagrams": []
 }

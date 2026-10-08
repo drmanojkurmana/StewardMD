@@ -1,171 +1,149 @@
 {
- "id": "recurrent_pericarditis",
- "name": "Recurrent pericarditis",
- "aliases": [
-  "relapsing pericarditis",
-  "recurrent acute pericarditis",
-  "incessant pericarditis"
- ],
- "class": "non_infective",
- "system": "Cardiovascular",
- "specialty": "Cardiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Braunwald's Heart Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A recurrence of pericarditis after a symptom-free interval following a first episode, typically presenting with the same pleuritic chest pain that eases on sitting forward",
-   "Most cases are presumed immune-mediated following an initial viral or idiopathic episode, and an autoinflammatory mechanism is increasingly recognised",
-   "Diagnosis rests on recurrent pericarditic pain with supportive features such as a friction rub, typical electrocardiographic changes, a new or worsening effusion, or a rise in inflammatory markers",
-   "Colchicine added to anti-inflammatory therapy reduces the risk of further recurrences and is a cornerstone of treatment",
-   "Corticosteroids relieve symptoms but promote steroid dependence and further relapses, so they are reserved for specific indications and used sparingly",
-   "Refractory, corticosteroid-dependent disease may respond to interleukin-1 blockade, reflecting the autoinflammatory basis",
-   "The long-term outlook is generally good, and progression to constriction is uncommon in idiopathic recurrent disease"
+  "id": "recurrent_pericarditis",
+  "name": "Recurrent pericarditis",
+  "aliases": [
+    "relapsing pericarditis",
+    "recurrent acute pericarditis",
+    "incessant pericarditis"
   ],
-  "pathophysiology": "Recurrent pericarditis usually follows an initial acute episode of viral or idiopathic pericarditis and is thought to reflect a dysregulated immune or autoinflammatory response rather than persistent infection. Inflammation of the pericardial layers produces the characteristic pleuritic pain, a friction rub, and often a small effusion, with release of inflammatory mediators, particularly the interleukin-1 pathway, driving relapses. Incomplete treatment of the first attack and early or high reliance on corticosteroids favour recurrence. Repeated inflammation can occasionally lead to pericardial thickening, but in idiopathic disease progression to significant constriction is unusual.",
-  "additionalDifferentials": [
-   "Acute coronary syndrome",
-   "Pulmonary embolism",
-   "Pleuritis or pneumonia",
-   "Pericarditis from systemic autoimmune disease such as lupus",
-   "Post-cardiac injury syndrome",
-   "Myopericarditis with myocardial involvement"
-  ],
-  "additionalInvestigations": [
-   "Electrocardiography for widespread saddle-shaped ST elevation and PR depression",
-   "Inflammatory markers including C-reactive protein to confirm activity and guide tapering",
-   "Echocardiography to detect and size a pericardial effusion and assess for tamponade",
-   "Cardiac MRI to demonstrate pericardial inflammation and late gadolinium enhancement in uncertain cases",
-   "Targeted screening for autoimmune or systemic causes when features suggest secondary disease"
-  ],
-  "redFlags": [
-   "Signs of cardiac tamponade such as hypotension, raised jugular venous pressure, and pulsus paradoxus",
-   "A large or rapidly accumulating pericardial effusion",
-   "Features of evolving constriction with right heart failure",
-   "Troponin rise or ventricular dysfunction indicating significant myocardial involvement"
-  ],
-  "prognosis": "Most patients have a favourable long-term outcome with control of recurrences, and although relapses can be troublesome and prolonged, progression to constrictive pericarditis is rare in idiopathic recurrent disease.",
-  "pitfalls": [
-   "Early or excessive use of corticosteroids, which fosters dependence and further recurrences",
-   "Omitting colchicine, thereby losing its proven protection against relapse",
-   "Stopping anti-inflammatory therapy abruptly rather than tapering guided by symptoms and C-reactive protein",
-   "Advising undue restriction of activity or missing an underlying systemic autoimmune cause"
-  ],
-  "references": [
-   "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
-   "ESC Guidelines for the diagnosis and management of pericardial diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "First-line anti-inflammatory therapy with an NSAID or aspirin plus gastric protection, tapered as symptoms and C-reactive protein settle",
-   "Add colchicine as a cornerstone for a prolonged course to reduce further recurrences",
-   "Reserve corticosteroids at the lowest effective dose with slow taper for specific indications such as NSAID contraindication, connective-tissue disease or pregnancy, given their tendency to promote steroid dependence and relapse",
-   "Use interleukin-1 blockade with anakinra or rilonacept for corticosteroid-dependent, colchicine-resistant disease reflecting its autoinflammatory basis",
-   "Restrict exercise until symptoms resolve and inflammatory markers normalise",
-   "Monitor with serial C-reactive protein and echocardiography to guide tapering and detect effusion or tamponade, screening for and treating underlying systemic causes and referring refractory cases to a specialist pericardial service"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "recurrent_pericarditis-pathway",
-   "title": "Recurrent pericarditis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A recurrence of pericarditis after a symptom-free interval following a first episode, typically presenting with the same pleuritic chest pain that eases on sitting forward",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Signs of cardiac tamponade such as hypotension, raised jugular venous pressure, and pulsus paradoxus",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Electrocardiography for widespread saddle-shaped ST elevation and PR depression, Inflammatory markers including C-reactive protein to confirm activity and guide tapering, Echocardiography to detect and size a pericardial"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: First-line anti-inflammatory therapy with an NSAID or aspirin plus gastric protection, tapered as symptoms and C-reactive protein settle"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Early or excessive use of corticosteroids, which fosters dependence and further recurrences"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of recurrent pericarditis."
-  }
- ],
- "tables": [
-  {
-   "id": "recurrent_pericarditis-matrix",
-   "title": "Recurrent pericarditis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A recurrence of pericarditis after a symptom-free interval following a first episode, typically presenting with the same",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular",
+  "specialty": "Cardiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Braunwald's Heart Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A recurrence of pericarditis after a symptom-free interval following a first episode, typically presenting with the same pleuritic chest pain that eases on sitting forward",
+      "Most cases are presumed immune-mediated following an initial viral or idiopathic episode, and an autoinflammatory mechanism is increasingly recognised",
+      "Diagnosis rests on recurrent pericarditic pain with supportive features such as a friction rub, typical electrocardiographic changes, a new or worsening effusion, or a rise in inflammatory markers",
+      "Colchicine added to anti-inflammatory therapy reduces the risk of further recurrences and is a cornerstone of treatment",
+      "Corticosteroids relieve symptoms but promote steroid dependence and further relapses, so they are reserved for specific indications and used sparingly",
+      "Refractory, corticosteroid-dependent disease may respond to interleukin-1 blockade, reflecting the autoinflammatory basis",
+      "The long-term outlook is generally good, and progression to constriction is uncommon in idiopathic recurrent disease"
     ],
-    [
-     "Key Investigations",
-     "Electrocardiography for widespread saddle-shaped ST elevation and PR depression, Inflammatory markers including C-reactive",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Recurrent pericarditis usually follows an initial acute episode of viral or idiopathic pericarditis and is thought to reflect a dysregulated immune or autoinflammatory response rather than persistent infection. Inflammation of the pericardial layers produces the characteristic pleuritic pain, a friction rub, and often a small effusion, with release of inflammatory mediators, particularly the interleukin-1 pathway, driving relapses. Incomplete treatment of the first attack and early or high reliance on corticosteroids favour recurrence. Repeated inflammation can occasionally lead to pericardial thickening, but in idiopathic disease progression to significant constriction is unusual.",
+    "additionalDifferentials": [
+      "Acute coronary syndrome",
+      "Pulmonary embolism",
+      "Pleuritis or pneumonia",
+      "Pericarditis from systemic autoimmune disease such as lupus",
+      "Post-cardiac injury syndrome",
+      "Myopericarditis with myocardial involvement"
     ],
-    [
-     "Primary Differentials",
-     "Acute coronary syndrome, Pulmonary embolism, Pleuritis or pneumonia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Electrocardiography for widespread saddle-shaped ST elevation and PR depression",
+      "Inflammatory markers including C-reactive protein to confirm activity and guide tapering",
+      "Echocardiography to detect and size a pericardial effusion and assess for tamponade",
+      "Cardiac MRI to demonstrate pericardial inflammation and late gadolinium enhancement in uncertain cases",
+      "Targeted screening for autoimmune or systemic causes when features suggest secondary disease"
     ],
-    [
-     "Management Strategy",
-     "First-line anti-inflammatory therapy with an NSAID or aspirin plus gastric protection, tapered as symptoms and C-reactive protein",
-     "Core treatment modality"
+    "redFlags": [
+      "Signs of cardiac tamponade such as hypotension, raised jugular venous pressure, and pulsus paradoxus",
+      "A large or rapidly accumulating pericardial effusion",
+      "Features of evolving constriction with right heart failure",
+      "Troponin rise or ventricular dysfunction indicating significant myocardial involvement"
     ],
-    [
-     "Clinical Pitfall",
-     "Early or excessive use of corticosteroids, which fosters dependence and further recurrences",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most patients have a favourable long-term outcome with control of recurrences, and although relapses can be troublesome and prolonged, progression to constrictive pericarditis is rare in idiopathic recurrent disease.",
+    "pitfalls": [
+      "Early or excessive use of corticosteroids, which fosters dependence and further recurrences",
+      "Omitting colchicine, thereby losing its proven protection against relapse",
+      "Stopping anti-inflammatory therapy abruptly rather than tapering guided by symptoms and C-reactive protein",
+      "Advising undue restriction of activity or missing an underlying systemic autoimmune cause"
+    ],
+    "references": [
+      "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
+      "ESC Guidelines for the diagnosis and management of pericardial diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "First-line anti-inflammatory therapy with an NSAID or aspirin plus gastric protection, tapered as symptoms and C-reactive protein settle",
+      "Add colchicine as a cornerstone for a prolonged course to reduce further recurrences",
+      "Reserve corticosteroids at the lowest effective dose with slow taper for specific indications such as NSAID contraindication, connective-tissue disease or pregnancy, given their tendency to promote steroid dependence and relapse",
+      "Use interleukin-1 blockade with anakinra or rilonacept for corticosteroid-dependent, colchicine-resistant disease reflecting its autoinflammatory basis",
+      "Restrict exercise until symptoms resolve and inflammatory markers normalise",
+      "Monitor with serial C-reactive protein and echocardiography to guide tapering and detect effusion or tamponade, screening for and treating underlying systemic causes and referring refractory cases to a specialist pericardial service"
     ]
-   ],
-   "caption": "Overview comparison matrix for recurrent pericarditis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "recurrent-pericarditis-real-image",
-   "title": "Recurrent pericarditis: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "recurrent_pericarditis-pathway",
+      "title": "Recurrent pericarditis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A recurrence of pericarditis after a symptom-free interval following a first episode, typically presenting with the same pleuritic chest pain that eases on sitting forward",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Signs of cardiac tamponade such as hypotension, raised jugular venous pressure, and pulsus paradoxus",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Electrocardiography for widespread saddle-shaped ST elevation and PR depression, Inflammatory markers including C-reactive protein to confirm activity and guide tapering, Echocardiography to detect and size a pericardial"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: First-line anti-inflammatory therapy with an NSAID or aspirin plus gastric protection, tapered as symptoms and C-reactive protein settle"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Early or excessive use of corticosteroids, which fosters dependence and further recurrences"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of recurrent pericarditis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "recurrent_pericarditis-matrix",
+      "title": "Recurrent pericarditis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A recurrence of pericarditis after a symptom-free interval following a first episode, typically presenting with the same",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Electrocardiography for widespread saddle-shaped ST elevation and PR depression, Inflammatory markers including C-reactive",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Acute coronary syndrome, Pulmonary embolism, Pleuritis or pneumonia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "First-line anti-inflammatory therapy with an NSAID or aspirin plus gastric protection, tapered as symptoms and C-reactive protein",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Early or excessive use of corticosteroids, which fosters dependence and further recurrences",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for recurrent pericarditis."
+    }
+  ],
+  "diagrams": []
 }

@@ -1,177 +1,155 @@
 {
- "id": "lrba_deficiency",
- "name": "LRBA deficiency",
- "aliases": [
-  "LRBA",
-  "LPS-responsive beige-like anchor protein deficiency",
-  "CVID with autoimmunity and enteropathy"
- ],
- "class": "non_infective",
- "system": "Immunology / Genetics",
- "specialty": "Clinical Immunology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Stiehm's Immunologic Disorders / IUIS classification of inborn errors of immunity",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Combines early-onset immune dysregulation with immunodeficiency, typically presenting in childhood with severe autoimmunity, enteropathy, lymphoproliferation and recurrent infection",
-   "Autoimmune cytopenias, chronic diarrhoea with an inflammatory bowel disease-like enteropathy and endocrinopathies such as type 1 diabetes and thyroid disease are common",
-   "Hypogammaglobulinaemia with poor vaccine responses frequently develops, so cases are often initially labelled common variable immunodeficiency",
-   "The mechanism converges on CTLA-4, because LRBA loss accelerates CTLA-4 degradation, so the phenotype closely resembles CTLA4 haploinsufficiency",
-   "Granulomatous-lymphocytic interstitial lung disease and organ-infiltrating lymphocytic disease can occur",
-   "Inheritance is autosomal recessive, from biallelic loss-of-function variants in LRBA",
-   "CTLA4-Ig fusion therapy (abatacept) is effective because it substitutes for the reduced CTLA-4 signalling, and haematopoietic stem cell transplantation is curative in severe disease",
-   "Diagnosis rests on reduced or absent LRBA protein by flow cytometry together with biallelic variants"
+  "id": "lrba_deficiency",
+  "name": "LRBA deficiency",
+  "aliases": [
+    "LRBA",
+    "LPS-responsive beige-like anchor protein deficiency",
+    "CVID with autoimmunity and enteropathy"
   ],
-  "pathophysiology": "LRBA (lipopolysaccharide-responsive beige-like anchor protein) is an intracellular trafficking protein that protects CTLA-4 from lysosomal degradation and recycles it back to the cell surface. In its absence, CTLA-4 is degraded excessively, so regulatory T cells cannot deliver the inhibitory signal that normally restrains effector T-cell activation. The resulting loss of peripheral tolerance produces widespread autoimmunity and lymphocytic organ infiltration, mirroring CTLA4 haploinsufficiency, while impaired B-cell survival and differentiation lead to progressive hypogammaglobulinaemia and infection susceptibility. Because the defect ultimately reduces functional CTLA-4, replacing that signal is therapeutically effective.",
-  "additionalDifferentials": [
-   "CTLA4 haploinsufficiency",
-   "Common variable immunodeficiency",
-   "IPEX and IPEX-like syndromes",
-   "Autoimmune lymphoproliferative syndrome (ALPS)",
-   "Very-early-onset inflammatory bowel disease of other genetic cause",
-   "Activated PI3K-delta syndrome"
-  ],
-  "additionalInvestigations": [
-   "Flow cytometry for LRBA protein expression in lymphocytes",
-   "Lymphocyte subsets and regulatory T-cell enumeration with CTLA-4 expression studies",
-   "Serum immunoglobulins and specific antibody responses",
-   "Autoantibody screen and direct antiglobulin test for autoimmune cytopenias",
-   "LRBA gene sequencing for biallelic loss-of-function variants",
-   "Endoscopy with biopsy and chest imaging for enteropathy and interstitial lung disease"
-  ],
-  "redFlags": [
-   "Severe autoimmune cytopenia with life-threatening anaemia or bleeding",
-   "Refractory enteropathy with malnutrition and growth failure",
-   "Rapidly progressive interstitial lung disease",
-   "Lymphoproliferation or organomegaly raising concern for malignant transformation",
-   "New endocrine crisis such as diabetic ketoacidosis or adrenal insufficiency"
-  ],
-  "prognosis": "Untreated disease is severe and often life-limiting from autoimmune and infective complications, but recognition allows targeted CTLA4-Ig therapy and, where indicated, haematopoietic stem cell transplantation, both of which substantially improve outcome.",
-  "pitfalls": [
-   "Settling on a diagnosis of common variable immunodeficiency and not pursuing genetic and protein testing",
-   "Treating the enteropathy as ordinary inflammatory bowel disease",
-   "Overlooking the shared CTLA-4 mechanism and the resulting response to targeted therapy",
-   "Missing associated endocrinopathies until they present in crisis",
-   "Delaying definitive treatment until multi-organ autoimmune damage is established"
-  ],
-  "references": [
-   "Stiehm's Immunologic Disorders in Infants and Children",
-   "IUIS Expert Committee classification of inborn errors of immunity"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Use CTLA4-Ig therapy (abatacept) as targeted treatment, replacing the deficient CTLA-4 inhibitory signal to control the immune dysregulation",
-   "Give immunoglobulin replacement for hypogammaglobulinaemia and antimicrobial prophylaxis to reduce recurrent infection",
-   "Control autoimmunity and lymphoproliferation with immunosuppression, using agents such as sirolimus, corticosteroids or other steroid-sparing drugs as needed",
-   "Consider allogeneic haematopoietic stem cell transplantation as a potentially curative option in severe disease",
-   "Monitor for and treat organ-specific complications including autoimmune cytopenias, enteropathy, endocrinopathies such as type 1 diabetes and thyroid disease, and granulomatous-lymphocytic interstitial lung disease",
-   "Coordinate care through clinical immunology alongside relevant organ specialists",
-   "Offer genetic counselling for this autosomal recessive disorder with cascade family testing",
-   "Escalate for severe cytopenias, uncontrolled autoimmunity or progressive lung disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "lrba_deficiency-pathway",
-   "title": "LRBA deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Combines early-onset immune dysregulation with immunodeficiency, typically presenting in childhood with severe autoimmunity, enteropathy, lymphoproliferation and recurrent infection",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe autoimmune cytopenia with life-threatening anaemia or bleeding",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Flow cytometry for LRBA protein expression in lymphocytes, Lymphocyte subsets and regulatory T-cell enumeration with CTLA-4 expression studies, Serum immunoglobulins and specific antibody responses"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Use CTLA4-Ig therapy (abatacept) as targeted treatment, replacing the deficient CTLA-4 inhibitory signal to control the immune dysregulation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Settling on a diagnosis of common variable immunodeficiency and not pursuing genetic and protein testing"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of lrba deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "lrba_deficiency-matrix",
-   "title": "LRBA deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Combines early-onset immune dysregulation with immunodeficiency, typically presenting in childhood with severe autoimmunity,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Immunology / Genetics",
+  "specialty": "Clinical Immunology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Stiehm's Immunologic Disorders / IUIS classification of inborn errors of immunity",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Combines early-onset immune dysregulation with immunodeficiency, typically presenting in childhood with severe autoimmunity, enteropathy, lymphoproliferation and recurrent infection",
+      "Autoimmune cytopenias, chronic diarrhoea with an inflammatory bowel disease-like enteropathy and endocrinopathies such as type 1 diabetes and thyroid disease are common",
+      "Hypogammaglobulinaemia with poor vaccine responses frequently develops, so cases are often initially labelled common variable immunodeficiency",
+      "The mechanism converges on CTLA-4, because LRBA loss accelerates CTLA-4 degradation, so the phenotype closely resembles CTLA4 haploinsufficiency",
+      "Granulomatous-lymphocytic interstitial lung disease and organ-infiltrating lymphocytic disease can occur",
+      "Inheritance is autosomal recessive, from biallelic loss-of-function variants in LRBA",
+      "CTLA4-Ig fusion therapy (abatacept) is effective because it substitutes for the reduced CTLA-4 signalling, and haematopoietic stem cell transplantation is curative in severe disease",
+      "Diagnosis rests on reduced or absent LRBA protein by flow cytometry together with biallelic variants"
     ],
-    [
-     "Key Investigations",
-     "Flow cytometry for LRBA protein expression in lymphocytes, Lymphocyte subsets and regulatory T-cell enumeration with CTLA-4",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "LRBA (lipopolysaccharide-responsive beige-like anchor protein) is an intracellular trafficking protein that protects CTLA-4 from lysosomal degradation and recycles it back to the cell surface. In its absence, CTLA-4 is degraded excessively, so regulatory T cells cannot deliver the inhibitory signal that normally restrains effector T-cell activation. The resulting loss of peripheral tolerance produces widespread autoimmunity and lymphocytic organ infiltration, mirroring CTLA4 haploinsufficiency, while impaired B-cell survival and differentiation lead to progressive hypogammaglobulinaemia and infection susceptibility. Because the defect ultimately reduces functional CTLA-4, replacing that signal is therapeutically effective.",
+    "additionalDifferentials": [
+      "CTLA4 haploinsufficiency",
+      "Common variable immunodeficiency",
+      "IPEX and IPEX-like syndromes",
+      "Autoimmune lymphoproliferative syndrome (ALPS)",
+      "Very-early-onset inflammatory bowel disease of other genetic cause",
+      "Activated PI3K-delta syndrome"
     ],
-    [
-     "Primary Differentials",
-     "CTLA4 haploinsufficiency, Common variable immunodeficiency, IPEX and IPEX-like syndromes",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Flow cytometry for LRBA protein expression in lymphocytes",
+      "Lymphocyte subsets and regulatory T-cell enumeration with CTLA-4 expression studies",
+      "Serum immunoglobulins and specific antibody responses",
+      "Autoantibody screen and direct antiglobulin test for autoimmune cytopenias",
+      "LRBA gene sequencing for biallelic loss-of-function variants",
+      "Endoscopy with biopsy and chest imaging for enteropathy and interstitial lung disease"
     ],
-    [
-     "Management Strategy",
-     "Use CTLA4-Ig therapy (abatacept) as targeted treatment, replacing the deficient CTLA-4 inhibitory signal to control the immune",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe autoimmune cytopenia with life-threatening anaemia or bleeding",
+      "Refractory enteropathy with malnutrition and growth failure",
+      "Rapidly progressive interstitial lung disease",
+      "Lymphoproliferation or organomegaly raising concern for malignant transformation",
+      "New endocrine crisis such as diabetic ketoacidosis or adrenal insufficiency"
     ],
-    [
-     "Clinical Pitfall",
-     "Settling on a diagnosis of common variable immunodeficiency and not pursuing genetic and protein testing",
-     "Prevent diagnostic or management error"
+    "prognosis": "Untreated disease is severe and often life-limiting from autoimmune and infective complications, but recognition allows targeted CTLA4-Ig therapy and, where indicated, haematopoietic stem cell transplantation, both of which substantially improve outcome.",
+    "pitfalls": [
+      "Settling on a diagnosis of common variable immunodeficiency and not pursuing genetic and protein testing",
+      "Treating the enteropathy as ordinary inflammatory bowel disease",
+      "Overlooking the shared CTLA-4 mechanism and the resulting response to targeted therapy",
+      "Missing associated endocrinopathies until they present in crisis",
+      "Delaying definitive treatment until multi-organ autoimmune damage is established"
+    ],
+    "references": [
+      "Stiehm's Immunologic Disorders in Infants and Children",
+      "IUIS Expert Committee classification of inborn errors of immunity"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Use CTLA4-Ig therapy (abatacept) as targeted treatment, replacing the deficient CTLA-4 inhibitory signal to control the immune dysregulation",
+      "Give immunoglobulin replacement for hypogammaglobulinaemia and antimicrobial prophylaxis to reduce recurrent infection",
+      "Control autoimmunity and lymphoproliferation with immunosuppression, using agents such as sirolimus, corticosteroids or other steroid-sparing drugs as needed",
+      "Consider allogeneic haematopoietic stem cell transplantation as a potentially curative option in severe disease",
+      "Monitor for and treat organ-specific complications including autoimmune cytopenias, enteropathy, endocrinopathies such as type 1 diabetes and thyroid disease, and granulomatous-lymphocytic interstitial lung disease",
+      "Coordinate care through clinical immunology alongside relevant organ specialists",
+      "Offer genetic counselling for this autosomal recessive disorder with cascade family testing",
+      "Escalate for severe cytopenias, uncontrolled autoimmunity or progressive lung disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for lrba deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "lrba-deficiency-real-image",
-   "title": "LRBA deficiency: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "lrba_deficiency-pathway",
+      "title": "LRBA deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Combines early-onset immune dysregulation with immunodeficiency, typically presenting in childhood with severe autoimmunity, enteropathy, lymphoproliferation and recurrent infection",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe autoimmune cytopenia with life-threatening anaemia or bleeding",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Flow cytometry for LRBA protein expression in lymphocytes, Lymphocyte subsets and regulatory T-cell enumeration with CTLA-4 expression studies, Serum immunoglobulins and specific antibody responses"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Use CTLA4-Ig therapy (abatacept) as targeted treatment, replacing the deficient CTLA-4 inhibitory signal to control the immune dysregulation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Settling on a diagnosis of common variable immunodeficiency and not pursuing genetic and protein testing"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of lrba deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "lrba_deficiency-matrix",
+      "title": "LRBA deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Combines early-onset immune dysregulation with immunodeficiency, typically presenting in childhood with severe autoimmunity,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Flow cytometry for LRBA protein expression in lymphocytes, Lymphocyte subsets and regulatory T-cell enumeration with CTLA-4",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "CTLA4 haploinsufficiency, Common variable immunodeficiency, IPEX and IPEX-like syndromes",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Use CTLA4-Ig therapy (abatacept) as targeted treatment, replacing the deficient CTLA-4 inhibitory signal to control the immune",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Settling on a diagnosis of common variable immunodeficiency and not pursuing genetic and protein testing",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for lrba deficiency."
+    }
+  ],
+  "diagrams": []
 }

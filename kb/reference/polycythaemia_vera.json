@@ -1,170 +1,148 @@
 {
- "id": "polycythaemia_vera",
- "name": "Polycythaemia vera",
- "aliases": [
-  "polycythemia vera",
-  "primary polycythaemia",
-  "PV"
- ],
- "class": "non_infective",
- "system": "Haematology",
- "specialty": "Haematology",
- "referenceOnly": true,
- "reference": {
-  "source": "WHO haematolymphoid classification / haematology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A myeloproliferative neoplasm characterised by autonomous overproduction of red cells, often with raised white cells and platelets",
-   "Almost all cases carry a JAK2 mutation (V617F or exon 12)",
-   "Symptoms include aquagenic pruritus, erythromelalgia, headache, plethora and thrombosis",
-   "A low serum erythropoietin supports the diagnosis and helps distinguish it from secondary polycythaemia",
-   "The dominant risks are arterial and venous thrombosis, with later potential to transform to myelofibrosis or acute leukaemia",
-   "Management combines venesection to a target haematocrit, aspirin and, in higher-risk patients, cytoreduction"
+  "id": "polycythaemia_vera",
+  "name": "Polycythaemia vera",
+  "aliases": [
+    "polycythemia vera",
+    "primary polycythaemia",
+    "PV"
   ],
-  "pathophysiology": "Polycythaemia vera is a clonal stem cell disorder driven in nearly all cases by activating JAK2 mutations, which render erythroid (and often myeloid and megakaryocytic) progenitors hypersensitive to, or independent of, erythropoietin. The resulting unregulated proliferation expands the red cell mass and frequently the granulocyte and platelet lines. The elevated haematocrit raises blood viscosity and, together with qualitative platelet and endothelial changes, produces the high thrombotic risk, while progressive marrow fibrosis or clonal evolution underlies transformation.",
-  "additionalDifferentials": [
-   "Secondary polycythaemia (hypoxia, erythropoietin-secreting tumour)",
-   "Relative (apparent) polycythaemia from plasma volume contraction",
-   "Essential thrombocythaemia or primary myelofibrosis",
-   "Congenital polycythaemia",
-   "Chronic myeloid leukaemia"
-  ],
-  "additionalInvestigations": [
-   "Full blood count and haematocrit",
-   "JAK2 V617F and, if negative, exon 12 mutation analysis",
-   "Serum erythropoietin (characteristically low)",
-   "Bone marrow examination where needed",
-   "Assessment of thrombotic risk factors"
-  ],
-  "redFlags": [
-   "Arterial or venous thrombosis, including unusual-site thrombosis",
-   "Very high haematocrit with hyperviscosity symptoms",
-   "Progressive splenomegaly or cytopenias suggesting transformation to myelofibrosis",
-   "Blasts suggesting leukaemic transformation"
-  ],
-  "prognosis": "With haematocrit control and thrombosis prevention many patients live for decades, but the disease carries thrombotic risk and a smaller long-term risk of transformation to myelofibrosis or acute leukaemia.",
-  "pitfalls": [
-   "Confusing it with secondary or relative polycythaemia",
-   "Failing to control the haematocrit to target",
-   "Overlooking JAK2-negative cases needing exon 12 testing",
-   "Missing transformation signalled by new cytopenias or splenomegaly"
-  ],
-  "references": [
-   "WHO classification of haematolymphoid tumours",
-   "Haematology reference texts (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Venesection to a target haematocrit to reduce blood viscosity and thrombotic risk, the cornerstone of treatment",
-   "Low-dose aspirin for all patients without contraindication to lower arterial and venous thrombotic risk",
-   "Cytoreductive therapy, with hydroxycarbamide first-line or interferon particularly in younger patients and pregnancy, for high-risk patients",
-   "Ruxolitinib, a JAK inhibitor, for hydroxycarbamide-resistant or intolerant disease and troublesome symptoms",
-   "Symptom control for aquagenic pruritus and erythromelalgia, with optimisation of cardiovascular risk factors",
-   "Monitor full blood count and haematocrit and surveil for progression to myelofibrosis or leukaemic transformation",
-   "Refer to haematology for pregnancy, thrombosis or evidence of disease transformation"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "polycythaemia_vera-pathway",
-   "title": "Polycythaemia vera: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A myeloproliferative neoplasm characterised by autonomous overproduction of red cells, often with raised white cells and platelets",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Arterial or venous thrombosis, including unusual-site thrombosis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full blood count and haematocrit, JAK2 V617F and, if negative, exon 12 mutation analysis, Serum erythropoietin (characteristically low)"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Venesection to a target haematocrit to reduce blood viscosity and thrombotic risk, the cornerstone of treatment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing it with secondary or relative polycythaemia"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of polycythaemia vera."
-  }
- ],
- "tables": [
-  {
-   "id": "polycythaemia_vera-matrix",
-   "title": "Polycythaemia vera: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A myeloproliferative neoplasm characterised by autonomous overproduction of red cells, often with raised white cells and platelets",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematology",
+  "specialty": "Haematology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "WHO haematolymphoid classification / haematology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A myeloproliferative neoplasm characterised by autonomous overproduction of red cells, often with raised white cells and platelets",
+      "Almost all cases carry a JAK2 mutation (V617F or exon 12)",
+      "Symptoms include aquagenic pruritus, erythromelalgia, headache, plethora and thrombosis",
+      "A low serum erythropoietin supports the diagnosis and helps distinguish it from secondary polycythaemia",
+      "The dominant risks are arterial and venous thrombosis, with later potential to transform to myelofibrosis or acute leukaemia",
+      "Management combines venesection to a target haematocrit, aspirin and, in higher-risk patients, cytoreduction"
     ],
-    [
-     "Key Investigations",
-     "Full blood count and haematocrit, JAK2 V617F and, if negative, exon 12 mutation analysis, Serum erythropoietin",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Polycythaemia vera is a clonal stem cell disorder driven in nearly all cases by activating JAK2 mutations, which render erythroid (and often myeloid and megakaryocytic) progenitors hypersensitive to, or independent of, erythropoietin. The resulting unregulated proliferation expands the red cell mass and frequently the granulocyte and platelet lines. The elevated haematocrit raises blood viscosity and, together with qualitative platelet and endothelial changes, produces the high thrombotic risk, while progressive marrow fibrosis or clonal evolution underlies transformation.",
+    "additionalDifferentials": [
+      "Secondary polycythaemia (hypoxia, erythropoietin-secreting tumour)",
+      "Relative (apparent) polycythaemia from plasma volume contraction",
+      "Essential thrombocythaemia or primary myelofibrosis",
+      "Congenital polycythaemia",
+      "Chronic myeloid leukaemia"
     ],
-    [
-     "Primary Differentials",
-     "Secondary polycythaemia (hypoxia, erythropoietin-secreting tumour), Relative (apparent) polycythaemia from plasma volume",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full blood count and haematocrit",
+      "JAK2 V617F and, if negative, exon 12 mutation analysis",
+      "Serum erythropoietin (characteristically low)",
+      "Bone marrow examination where needed",
+      "Assessment of thrombotic risk factors"
     ],
-    [
-     "Management Strategy",
-     "Venesection to a target haematocrit to reduce blood viscosity and thrombotic risk, the cornerstone of treatment",
-     "Core treatment modality"
+    "redFlags": [
+      "Arterial or venous thrombosis, including unusual-site thrombosis",
+      "Very high haematocrit with hyperviscosity symptoms",
+      "Progressive splenomegaly or cytopenias suggesting transformation to myelofibrosis",
+      "Blasts suggesting leukaemic transformation"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing it with secondary or relative polycythaemia",
-     "Prevent diagnostic or management error"
+    "prognosis": "With haematocrit control and thrombosis prevention many patients live for decades, but the disease carries thrombotic risk and a smaller long-term risk of transformation to myelofibrosis or acute leukaemia.",
+    "pitfalls": [
+      "Confusing it with secondary or relative polycythaemia",
+      "Failing to control the haematocrit to target",
+      "Overlooking JAK2-negative cases needing exon 12 testing",
+      "Missing transformation signalled by new cytopenias or splenomegaly"
+    ],
+    "references": [
+      "WHO classification of haematolymphoid tumours",
+      "Haematology reference texts (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Venesection to a target haematocrit to reduce blood viscosity and thrombotic risk, the cornerstone of treatment",
+      "Low-dose aspirin for all patients without contraindication to lower arterial and venous thrombotic risk",
+      "Cytoreductive therapy, with hydroxycarbamide first-line or interferon particularly in younger patients and pregnancy, for high-risk patients",
+      "Ruxolitinib, a JAK inhibitor, for hydroxycarbamide-resistant or intolerant disease and troublesome symptoms",
+      "Symptom control for aquagenic pruritus and erythromelalgia, with optimisation of cardiovascular risk factors",
+      "Monitor full blood count and haematocrit and surveil for progression to myelofibrosis or leukaemic transformation",
+      "Refer to haematology for pregnancy, thrombosis or evidence of disease transformation"
     ]
-   ],
-   "caption": "Overview comparison matrix for polycythaemia vera."
-  }
- ],
- "diagrams": [
-  {
-   "id": "polycythaemia-vera-real-image",
-   "title": "Polycythaemia vera: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "polycythaemia_vera-pathway",
+      "title": "Polycythaemia vera: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A myeloproliferative neoplasm characterised by autonomous overproduction of red cells, often with raised white cells and platelets",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Arterial or venous thrombosis, including unusual-site thrombosis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full blood count and haematocrit, JAK2 V617F and, if negative, exon 12 mutation analysis, Serum erythropoietin (characteristically low)"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Venesection to a target haematocrit to reduce blood viscosity and thrombotic risk, the cornerstone of treatment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing it with secondary or relative polycythaemia"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of polycythaemia vera."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "polycythaemia_vera-matrix",
+      "title": "Polycythaemia vera: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A myeloproliferative neoplasm characterised by autonomous overproduction of red cells, often with raised white cells and platelets",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full blood count and haematocrit, JAK2 V617F and, if negative, exon 12 mutation analysis, Serum erythropoietin",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Secondary polycythaemia (hypoxia, erythropoietin-secreting tumour), Relative (apparent) polycythaemia from plasma volume",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Venesection to a target haematocrit to reduce blood viscosity and thrombotic risk, the cornerstone of treatment",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing it with secondary or relative polycythaemia",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for polycythaemia vera."
+    }
+  ],
+  "diagrams": []
 }

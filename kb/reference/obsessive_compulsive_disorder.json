@@ -1,173 +1,151 @@
 {
- "id": "obsessive_compulsive_disorder",
- "name": "Obsessive-compulsive disorder",
- "aliases": [
-  "OCD",
-  "obsessive compulsive disorder"
- ],
- "class": "non_infective",
- "system": "Psychiatry / Mental health",
- "specialty": "Psychiatry",
- "referenceOnly": true,
- "reference": {
-  "source": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Characterised by obsessions (intrusive, unwanted, distressing thoughts, images, or urges) and/or compulsions (repetitive behaviours or mental acts performed to reduce anxiety or prevent a feared outcome)",
-   "Symptoms are time-consuming or cause marked distress and functional impairment; patients often recognise them as excessive, though insight varies",
-   "Common themes include contamination with washing, doubt with checking, symmetry with ordering, and taboo intrusive thoughts",
-   "First-line treatment is cognitive behavioural therapy with exposure and response prevention, which is highly effective",
-   "Pharmacotherapy principles favour SSRIs, often needing higher doses and longer trials than in depression before judging response",
-   "Clomipramine is an effective alternative, and augmentation strategies are considered in resistant cases",
-   "Distinguish from obsessive-compulsive personality disorder, which involves ego-syntonic perfectionism and rigidity rather than distressing intrusive symptoms",
-   "Assess for comorbid depression, tic disorders, and hoarding, and ask about suicidal ideation"
+  "id": "obsessive_compulsive_disorder",
+  "name": "Obsessive-compulsive disorder",
+  "aliases": [
+    "OCD",
+    "obsessive compulsive disorder"
   ],
-  "pathophysiology": "Obsessive-compulsive disorder is associated with dysfunction of cortico-striato-thalamo-cortical circuits, particularly hyperactivity involving the orbitofrontal cortex, anterior cingulate, and basal ganglia, together with serotonergic and glutamatergic dysregulation. Genetic factors contribute, and in some children symptom onset has been linked to post-streptococcal autoimmune processes.",
-  "additionalDifferentials": [
-   "Generalized anxiety disorder",
-   "Obsessive-compulsive personality disorder",
-   "Body dysmorphic disorder",
-   "Hoarding disorder",
-   "Tic disorders and Tourette syndrome",
-   "Illness anxiety disorder",
-   "Psychotic disorder when insight is absent"
-  ],
-  "additionalInvestigations": [
-   "Standardised OCD severity rating scales to quantify symptoms and monitor treatment",
-   "Screening for comorbid depression, anxiety, and tic disorders",
-   "Assessment of insight and degree of functional impairment",
-   "Consideration of post-streptococcal aetiology in abrupt paediatric onset"
-  ],
-  "redFlags": [
-   "Suicidal ideation, particularly with comorbid depression",
-   "Severe functional incapacity from time-consuming rituals",
-   "Complete loss of insight suggesting a psychotic process",
-   "Self-harm from compulsions such as excessive washing causing skin breakdown"
-  ],
-  "prognosis": "Obsessive-compulsive disorder is typically chronic with waxing and waning severity, but many patients achieve substantial improvement with exposure and response prevention and adequate pharmacotherapy. Early onset, poor insight, and comorbidity are associated with a more persistent course.",
-  "pitfalls": [
-   "Confusing OCD with obsessive-compulsive personality disorder",
-   "Judging SSRI non-response before an adequately high dose and prolonged trial",
-   "Providing reassurance that inadvertently reinforces compulsive checking",
-   "Overlooking comorbid depression and suicide risk",
-   "Failing to offer or refer for exposure and response prevention, the most effective psychotherapy"
-  ],
-  "references": [
-   "Kaplan & Sadock's Synopsis of Psychiatry",
-   "DSM-5-TR"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Cognitive behavioural therapy with exposure and response prevention as the first-line, highly effective treatment",
-   "Pharmacotherapy with SSRIs, typically at higher doses and over longer trials than in depression before judging response",
-   "Clomipramine as an effective alternative for those intolerant of or unresponsive to SSRIs",
-   "Augmentation with antipsychotics or other strategies in treatment-resistant cases",
-   "Identification and treatment of comorbid depression, anxiety and tic disorders",
-   "Consideration of a post-streptococcal (PANDAS) aetiology in abrupt-onset paediatric cases",
-   "Referral to specialist services, with neuromodulation or neurosurgery considered in severe refractory disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "obsessive_compulsive_disorder-pathway",
-   "title": "Obsessive-compulsive disorder: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Characterised by obsessions (intrusive, unwanted, distressing thoughts, images, or urges) and/or compulsions (repetitive behaviours or mental acts performed to reduce anxiety or prevent a feared outcome)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Suicidal ideation, particularly with comorbid depression",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Standardised OCD severity rating scales to quantify symptoms and monitor treatment, Screening for comorbid depression, anxiety, and tic disorders, Assessment of insight and degree of functional impairment"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Cognitive behavioural therapy with exposure and response prevention as the first-line, highly effective treatment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing OCD with obsessive-compulsive personality disorder"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of obsessive-compulsive disorder."
-  }
- ],
- "tables": [
-  {
-   "id": "obsessive_compulsive_disorder-matrix",
-   "title": "Obsessive-compulsive disorder: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Characterised by obsessions (intrusive, unwanted, distressing thoughts, images, or urges) and/or compulsions (repetitive",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Psychiatry / Mental health",
+  "specialty": "Psychiatry",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Characterised by obsessions (intrusive, unwanted, distressing thoughts, images, or urges) and/or compulsions (repetitive behaviours or mental acts performed to reduce anxiety or prevent a feared outcome)",
+      "Symptoms are time-consuming or cause marked distress and functional impairment; patients often recognise them as excessive, though insight varies",
+      "Common themes include contamination with washing, doubt with checking, symmetry with ordering, and taboo intrusive thoughts",
+      "First-line treatment is cognitive behavioural therapy with exposure and response prevention, which is highly effective",
+      "Pharmacotherapy principles favour SSRIs, often needing higher doses and longer trials than in depression before judging response",
+      "Clomipramine is an effective alternative, and augmentation strategies are considered in resistant cases",
+      "Distinguish from obsessive-compulsive personality disorder, which involves ego-syntonic perfectionism and rigidity rather than distressing intrusive symptoms",
+      "Assess for comorbid depression, tic disorders, and hoarding, and ask about suicidal ideation"
     ],
-    [
-     "Key Investigations",
-     "Standardised OCD severity rating scales to quantify symptoms and monitor treatment, Screening for comorbid depression, anxiety,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Obsessive-compulsive disorder is associated with dysfunction of cortico-striato-thalamo-cortical circuits, particularly hyperactivity involving the orbitofrontal cortex, anterior cingulate, and basal ganglia, together with serotonergic and glutamatergic dysregulation. Genetic factors contribute, and in some children symptom onset has been linked to post-streptococcal autoimmune processes.",
+    "additionalDifferentials": [
+      "Generalized anxiety disorder",
+      "Obsessive-compulsive personality disorder",
+      "Body dysmorphic disorder",
+      "Hoarding disorder",
+      "Tic disorders and Tourette syndrome",
+      "Illness anxiety disorder",
+      "Psychotic disorder when insight is absent"
     ],
-    [
-     "Primary Differentials",
-     "Generalized anxiety disorder, Obsessive-compulsive personality disorder, Body dysmorphic disorder",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Standardised OCD severity rating scales to quantify symptoms and monitor treatment",
+      "Screening for comorbid depression, anxiety, and tic disorders",
+      "Assessment of insight and degree of functional impairment",
+      "Consideration of post-streptococcal aetiology in abrupt paediatric onset"
     ],
-    [
-     "Management Strategy",
-     "Cognitive behavioural therapy with exposure and response prevention as the first-line, highly effective treatment",
-     "Core treatment modality"
+    "redFlags": [
+      "Suicidal ideation, particularly with comorbid depression",
+      "Severe functional incapacity from time-consuming rituals",
+      "Complete loss of insight suggesting a psychotic process",
+      "Self-harm from compulsions such as excessive washing causing skin breakdown"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing OCD with obsessive-compulsive personality disorder",
-     "Prevent diagnostic or management error"
+    "prognosis": "Obsessive-compulsive disorder is typically chronic with waxing and waning severity, but many patients achieve substantial improvement with exposure and response prevention and adequate pharmacotherapy. Early onset, poor insight, and comorbidity are associated with a more persistent course.",
+    "pitfalls": [
+      "Confusing OCD with obsessive-compulsive personality disorder",
+      "Judging SSRI non-response before an adequately high dose and prolonged trial",
+      "Providing reassurance that inadvertently reinforces compulsive checking",
+      "Overlooking comorbid depression and suicide risk",
+      "Failing to offer or refer for exposure and response prevention, the most effective psychotherapy"
+    ],
+    "references": [
+      "Kaplan & Sadock's Synopsis of Psychiatry",
+      "DSM-5-TR"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Cognitive behavioural therapy with exposure and response prevention as the first-line, highly effective treatment",
+      "Pharmacotherapy with SSRIs, typically at higher doses and over longer trials than in depression before judging response",
+      "Clomipramine as an effective alternative for those intolerant of or unresponsive to SSRIs",
+      "Augmentation with antipsychotics or other strategies in treatment-resistant cases",
+      "Identification and treatment of comorbid depression, anxiety and tic disorders",
+      "Consideration of a post-streptococcal (PANDAS) aetiology in abrupt-onset paediatric cases",
+      "Referral to specialist services, with neuromodulation or neurosurgery considered in severe refractory disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for obsessive-compulsive disorder."
-  }
- ],
- "diagrams": [
-  {
-   "id": "obsessive-compulsive-disorder-real-image",
-   "title": "Obsessive-compulsive disorder: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "obsessive_compulsive_disorder-pathway",
+      "title": "Obsessive-compulsive disorder: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Characterised by obsessions (intrusive, unwanted, distressing thoughts, images, or urges) and/or compulsions (repetitive behaviours or mental acts performed to reduce anxiety or prevent a feared outcome)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Suicidal ideation, particularly with comorbid depression",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Standardised OCD severity rating scales to quantify symptoms and monitor treatment, Screening for comorbid depression, anxiety, and tic disorders, Assessment of insight and degree of functional impairment"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Cognitive behavioural therapy with exposure and response prevention as the first-line, highly effective treatment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing OCD with obsessive-compulsive personality disorder"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of obsessive-compulsive disorder."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "obsessive_compulsive_disorder-matrix",
+      "title": "Obsessive-compulsive disorder: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Characterised by obsessions (intrusive, unwanted, distressing thoughts, images, or urges) and/or compulsions (repetitive",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Standardised OCD severity rating scales to quantify symptoms and monitor treatment, Screening for comorbid depression, anxiety,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Generalized anxiety disorder, Obsessive-compulsive personality disorder, Body dysmorphic disorder",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Cognitive behavioural therapy with exposure and response prevention as the first-line, highly effective treatment",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing OCD with obsessive-compulsive personality disorder",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for obsessive-compulsive disorder."
+    }
+  ],
+  "diagrams": []
 }

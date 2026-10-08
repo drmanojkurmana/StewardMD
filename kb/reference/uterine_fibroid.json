@@ -1,179 +1,157 @@
 {
- "id": "uterine_fibroid",
- "name": "Uterine fibroid",
- "aliases": [
-  "Uterine leiomyoma",
-  "Fibromyoma",
-  "Myoma"
- ],
- "class": "non_infective",
- "system": "Reproductive / Gynaecology",
- "specialty": "Gynaecology",
- "referenceOnly": true,
- "reference": {
-  "source": "Berek & Novak's Gynecology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Fibroids are benign monoclonal smooth-muscle tumours and the commonest pelvic tumour of reproductive-age women; the majority are asymptomatic and discovered incidentally.",
-   "Growth is oestrogen- and progesterone-dependent, so lesions tend to enlarge during pregnancy and typically regress after the menopause.",
-   "The FIGO leiomyoma classification (types 0 to 8) localises lesions from submucosal through intramural to subserosal; submucosal fibroids most affect menstrual bleeding and fertility.",
-   "Heavy menstrual bleeding is the dominant symptom and may lead to iron-deficiency anaemia, whereas subserosal and pedunculated lesions rarely cause bleeding.",
-   "Bulk-related symptoms such as pelvic pressure, urinary frequency and constipation reflect large or subserosal lesions rather than the bleeding pattern.",
-   "Red (carneous) degeneration classically causes acute pain in mid-pregnancy; other degenerative changes include hyaline, cystic and calcific.",
-   "Rapid enlargement, or any growth after the menopause, should raise concern for leiomyosarcoma even though malignant transformation is very rare.",
-   "Management is individualised across expectant, medical (antifibrinolytics, hormonal therapy, gonadotrophin-releasing hormone analogues, selective progesterone receptor modulators), uterine artery embolisation and surgery (myomectomy or hysterectomy), guided by symptoms and fertility wishes."
+  "id": "uterine_fibroid",
+  "name": "Uterine fibroid",
+  "aliases": [
+    "Uterine leiomyoma",
+    "Fibromyoma",
+    "Myoma"
   ],
-  "pathophysiology": "A fibroid arises from a single transformed myometrial smooth-muscle cell that proliferates as a monoclonal nodule of smooth muscle within an abundant extracellular matrix of collagen, fibronectin and proteoglycan, giving the characteristic whorled cut surface and a surrounding pseudocapsule of compressed myometrium. Growth is driven by oestrogen and progesterone, with overexpression of their receptors and of local growth factors, and somatic MED12 mutations are frequently implicated. Heavy menstrual bleeding results from distortion and enlargement of the endometrial surface, dysregulation of vasoactive and angiogenic factors, and impaired local haemostasis, while enlarging lesions produce pressure effects on adjacent pelvic viscera.",
-  "additionalDifferentials": [
-   "Adenomyosis",
-   "Endometrial polyp",
-   "Ovarian or adnexal mass",
-   "Leiomyosarcoma",
-   "Endometrial hyperplasia or carcinoma",
-   "Intrauterine pregnancy causing an enlarged uterus",
-   "Uterine adenomyoma"
-  ],
-  "additionalInvestigations": [
-   "Full blood count to assess for anaemia",
-   "Transvaginal with or without transabdominal ultrasound as first-line imaging",
-   "Saline infusion sonohysterography to delineate submucosal lesions",
-   "Diagnostic and operative hysteroscopy for submucosal fibroids",
-   "Pelvic MRI for mapping, distinguishing adenomyosis and planning embolisation or surgery",
-   "Ferritin and iron studies",
-   "Endometrial biopsy when abnormal bleeding is accompanied by risk factors for hyperplasia"
-  ],
-  "redFlags": [
-   "Rapidly enlarging mass, or any growth after the menopause, suggesting leiomyosarcoma",
-   "Severe symptomatic anaemia from heavy bleeding, potentially requiring transfusion",
-   "Acute severe pelvic pain from torsion of a pedunculated fibroid or red degeneration",
-   "Urinary retention or hydronephrosis from mass effect",
-   "Postmenopausal bleeding requiring exclusion of endometrial pathology"
-  ],
-  "prognosis": "The prognosis is excellent as fibroids are benign, with most remaining asymptomatic and stable and symptomatic lesions responding well to treatment and regressing after the menopause. Recurrence can follow myomectomy, and malignant transformation is exceptionally rare.",
-  "pitfalls": [
-   "Attributing all abnormal uterine bleeding to fibroids and missing coexistent endometrial hyperplasia or carcinoma.",
-   "Failing to consider leiomyosarcoma before morcellation, particularly in postmenopausal or rapidly growing masses.",
-   "Overlooking coexisting adenomyosis, which frequently mimics and accompanies fibroids.",
-   "Neglecting to correct iron-deficiency anaemia before intervention.",
-   "Assuming subserosal or pedunculated fibroids are the cause of heavy menstrual bleeding."
-  ],
-  "references": [
-   "Berek & Novak's Gynecology",
-   "NICE guideline: Heavy menstrual bleeding — assessment and management",
-   "FIGO PALM-COEIN classification of abnormal uterine bleeding"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Expectant management with reassurance for asymptomatic fibroids",
-   "Medical control of heavy menstrual bleeding with the levonorgestrel-releasing intrauterine system, tranexamic acid, NSAIDs or combined hormonal contraception",
-   "GnRH agonists with add-back therapy or GnRH antagonists to shrink fibroids and control bleeding, particularly before surgery",
-   "Iron supplementation to correct iron-deficiency anaemia",
-   "Uterine artery embolisation as a uterus-preserving radiological option",
-   "Myomectomy, including hysteroscopic resection for submucosal lesions, to preserve fertility, or hysterectomy for definitive treatment",
-   "Surveillance of fibroid growth with ultrasound and reconsideration of the diagnosis if there is rapid enlargement"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "uterine_fibroid-pathway",
-   "title": "Uterine fibroid: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Fibroids are benign monoclonal smooth-muscle tumours and the commonest pelvic tumour of reproductive-age women; the majority are asymptomatic and discovered incidentally.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly enlarging mass, or any growth after the menopause, suggesting leiomyosarcoma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full blood count to assess for anaemia, Transvaginal with or without transabdominal ultrasound as first-line imaging, Saline infusion sonohysterography to delineate submucosal lesions"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Expectant management with reassurance for asymptomatic fibroids"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing all abnormal uterine bleeding to fibroids and missing coexistent endometrial hyperplasia or carcinoma."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of uterine fibroid."
-  }
- ],
- "tables": [
-  {
-   "id": "uterine_fibroid-matrix",
-   "title": "Uterine fibroid: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Fibroids are benign monoclonal smooth-muscle tumours and the commonest pelvic tumour of reproductive-age women; the majority are",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Reproductive / Gynaecology",
+  "specialty": "Gynaecology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Berek & Novak's Gynecology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Fibroids are benign monoclonal smooth-muscle tumours and the commonest pelvic tumour of reproductive-age women; the majority are asymptomatic and discovered incidentally.",
+      "Growth is oestrogen- and progesterone-dependent, so lesions tend to enlarge during pregnancy and typically regress after the menopause.",
+      "The FIGO leiomyoma classification (types 0 to 8) localises lesions from submucosal through intramural to subserosal; submucosal fibroids most affect menstrual bleeding and fertility.",
+      "Heavy menstrual bleeding is the dominant symptom and may lead to iron-deficiency anaemia, whereas subserosal and pedunculated lesions rarely cause bleeding.",
+      "Bulk-related symptoms such as pelvic pressure, urinary frequency and constipation reflect large or subserosal lesions rather than the bleeding pattern.",
+      "Red (carneous) degeneration classically causes acute pain in mid-pregnancy; other degenerative changes include hyaline, cystic and calcific.",
+      "Rapid enlargement, or any growth after the menopause, should raise concern for leiomyosarcoma even though malignant transformation is very rare.",
+      "Management is individualised across expectant, medical (antifibrinolytics, hormonal therapy, gonadotrophin-releasing hormone analogues, selective progesterone receptor modulators), uterine artery embolisation and surgery (myomectomy or hysterectomy), guided by symptoms and fertility wishes."
     ],
-    [
-     "Key Investigations",
-     "Full blood count to assess for anaemia, Transvaginal with or without transabdominal ultrasound as first-line imaging, Saline",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A fibroid arises from a single transformed myometrial smooth-muscle cell that proliferates as a monoclonal nodule of smooth muscle within an abundant extracellular matrix of collagen, fibronectin and proteoglycan, giving the characteristic whorled cut surface and a surrounding pseudocapsule of compressed myometrium. Growth is driven by oestrogen and progesterone, with overexpression of their receptors and of local growth factors, and somatic MED12 mutations are frequently implicated. Heavy menstrual bleeding results from distortion and enlargement of the endometrial surface, dysregulation of vasoactive and angiogenic factors, and impaired local haemostasis, while enlarging lesions produce pressure effects on adjacent pelvic viscera.",
+    "additionalDifferentials": [
+      "Adenomyosis",
+      "Endometrial polyp",
+      "Ovarian or adnexal mass",
+      "Leiomyosarcoma",
+      "Endometrial hyperplasia or carcinoma",
+      "Intrauterine pregnancy causing an enlarged uterus",
+      "Uterine adenomyoma"
     ],
-    [
-     "Primary Differentials",
-     "Adenomyosis, Endometrial polyp, Ovarian or adnexal mass",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full blood count to assess for anaemia",
+      "Transvaginal with or without transabdominal ultrasound as first-line imaging",
+      "Saline infusion sonohysterography to delineate submucosal lesions",
+      "Diagnostic and operative hysteroscopy for submucosal fibroids",
+      "Pelvic MRI for mapping, distinguishing adenomyosis and planning embolisation or surgery",
+      "Ferritin and iron studies",
+      "Endometrial biopsy when abnormal bleeding is accompanied by risk factors for hyperplasia"
     ],
-    [
-     "Management Strategy",
-     "Expectant management with reassurance for asymptomatic fibroids",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly enlarging mass, or any growth after the menopause, suggesting leiomyosarcoma",
+      "Severe symptomatic anaemia from heavy bleeding, potentially requiring transfusion",
+      "Acute severe pelvic pain from torsion of a pedunculated fibroid or red degeneration",
+      "Urinary retention or hydronephrosis from mass effect",
+      "Postmenopausal bleeding requiring exclusion of endometrial pathology"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing all abnormal uterine bleeding to fibroids and missing coexistent endometrial hyperplasia or carcinoma.",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis is excellent as fibroids are benign, with most remaining asymptomatic and stable and symptomatic lesions responding well to treatment and regressing after the menopause. Recurrence can follow myomectomy, and malignant transformation is exceptionally rare.",
+    "pitfalls": [
+      "Attributing all abnormal uterine bleeding to fibroids and missing coexistent endometrial hyperplasia or carcinoma.",
+      "Failing to consider leiomyosarcoma before morcellation, particularly in postmenopausal or rapidly growing masses.",
+      "Overlooking coexisting adenomyosis, which frequently mimics and accompanies fibroids.",
+      "Neglecting to correct iron-deficiency anaemia before intervention.",
+      "Assuming subserosal or pedunculated fibroids are the cause of heavy menstrual bleeding."
+    ],
+    "references": [
+      "Berek & Novak's Gynecology",
+      "NICE guideline: Heavy menstrual bleeding — assessment and management",
+      "FIGO PALM-COEIN classification of abnormal uterine bleeding"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Expectant management with reassurance for asymptomatic fibroids",
+      "Medical control of heavy menstrual bleeding with the levonorgestrel-releasing intrauterine system, tranexamic acid, NSAIDs or combined hormonal contraception",
+      "GnRH agonists with add-back therapy or GnRH antagonists to shrink fibroids and control bleeding, particularly before surgery",
+      "Iron supplementation to correct iron-deficiency anaemia",
+      "Uterine artery embolisation as a uterus-preserving radiological option",
+      "Myomectomy, including hysteroscopic resection for submucosal lesions, to preserve fertility, or hysterectomy for definitive treatment",
+      "Surveillance of fibroid growth with ultrasound and reconsideration of the diagnosis if there is rapid enlargement"
     ]
-   ],
-   "caption": "Overview comparison matrix for uterine fibroid."
-  }
- ],
- "diagrams": [
-  {
-   "id": "uterine-fibroid-real-image",
-   "title": "Uterine fibroid: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "uterine_fibroid-pathway",
+      "title": "Uterine fibroid: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Fibroids are benign monoclonal smooth-muscle tumours and the commonest pelvic tumour of reproductive-age women; the majority are asymptomatic and discovered incidentally.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly enlarging mass, or any growth after the menopause, suggesting leiomyosarcoma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full blood count to assess for anaemia, Transvaginal with or without transabdominal ultrasound as first-line imaging, Saline infusion sonohysterography to delineate submucosal lesions"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Expectant management with reassurance for asymptomatic fibroids"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing all abnormal uterine bleeding to fibroids and missing coexistent endometrial hyperplasia or carcinoma."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of uterine fibroid."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "uterine_fibroid-matrix",
+      "title": "Uterine fibroid: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Fibroids are benign monoclonal smooth-muscle tumours and the commonest pelvic tumour of reproductive-age women; the majority are",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full blood count to assess for anaemia, Transvaginal with or without transabdominal ultrasound as first-line imaging, Saline",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Adenomyosis, Endometrial polyp, Ovarian or adnexal mass",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Expectant management with reassurance for asymptomatic fibroids",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing all abnormal uterine bleeding to fibroids and missing coexistent endometrial hyperplasia or carcinoma.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for uterine fibroid."
+    }
+  ],
+  "diagrams": []
 }

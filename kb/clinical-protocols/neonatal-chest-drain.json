@@ -1,200 +1,178 @@
 {
- "id": "neonatal-chest-drain",
- "title": "Chest drain and needle aspiration in neonates",
- "subject": "paediatrics",
- "population": "Neonates",
- "basis": "international",
- "setting": "Delivery room, SNCU, NICU, transport",
- "aliases": [
-  "chest tube",
-  "intercostal drain",
-  "ICD",
-  "tube thoracostomy",
-  "needle thoracocentesis",
-  "needle aspiration pneumothorax",
-  "pigtail catheter",
-  "neonatal pneumothorax",
-  "tension pneumothorax newborn",
-  "pleural effusion drainage",
-  "chylothorax drain"
- ],
- "summary": "Drain a neonatal pneumothorax or effusion causing distress, low oxygen saturation or instability. Aspirate air through the 2nd or 3rd intercostal space in the midclavicular line, or place a 10 or 12 Fr drain in the 4th or 5th space between the anterior and midaxillary lines, inserted 2 to 3 cm in small preterm and 3 to 4 cm in term babies. Confirm on AP and lateral X-ray.",
- "sections": [
-  {
-   "kind": "recognise",
-   "title": "Indications",
-   "items": [
-    "Drain a pneumothorax causing respiratory distress, low oxygen saturation or haemodynamic instability. With mild distress and no severe instability, one surgical unit tried needle aspiration first and placed a tube only if air kept accumulating.",
-    "Drains also remove fluid: effusion, chylothorax, haemothorax and empyema."
-   ]
-  },
-  {
-   "kind": "immediate",
-   "title": "Needle aspiration",
-   "items": [
-    "Attach a needle or angiocatheter to a 10 to 20 mL syringe and enter the 2nd or 3rd intercostal space in the midclavicular line. Stop advancing as soon as air flows into the syringe, to avoid lung injury.",
-    "Alternative site: 4th to 5th intercostal space in the midaxillary line, needle pointed toward the opposite shoulder. Ultrasound guidance can be used instead of fixed landmarks.",
-    "Systematic reviews found no difference between needle aspiration and chest tube in safety or immediate success; aspiration causes less pain and a shorter hospital stay."
-   ]
-  },
-  {
-   "kind": "treatment",
-   "title": "Chest drain",
-   "items": [
-    "Site (Buelau position): between the anterior and midaxillary lines in the 4th or 5th intercostal space, just above the rib margin; safe on both sides in preterm and term babies.",
-    "Drain size 10 or 12 Fr. Insertion length 2 to 3 cm in small preterm and 3 to 4 cm in term infants.",
-    "For air, aim the tip anteriorly: enter near the anterior axillary line and direct the tip toward the xiphisternum, away from breast tissue. For fluid, place the tip posterior to the lung.",
-    "Pigtail catheters (Seldinger) and traditional tubes have comparable safety and effectiveness; pigtails are fast and easy in preterm babies. Trocar insertion needs more force and is linked to more organ injury.",
-    "Point-of-care ultrasound guidance gives high success and few complications."
-   ]
-  },
-  {
-   "kind": "monitoring",
-   "title": "After insertion",
-   "items": [
-    "Get AP and lateral chest X-rays immediately. The tip and all side holes must lie in the pleural space.",
-    "For a persistent air leak after drainage, one unit used continuous suction at 5 to 10 cmH2O and advised against a second or third drain."
-   ]
-  },
-  {
-   "kind": "pitfalls",
-   "title": "Complications and pitfalls",
-   "items": [
-    "Minor: dislodgement and blockage. Major: infection, lung laceration or perforation, effusion, pericardial perforation, phrenic nerve injury and diaphragm paralysis.",
-    "In preterm babies the pericardium is close to the skin entry point: a drain advanced on its mandrel perforated the pericardium and caused tamponade. Plan the path and depth, and use ultrasound.",
-    "Subcutaneous emphysema has followed trocar drain placement; the reporting unit switched to Seldinger pigtail catheters."
-   ]
-  }
- ],
- "sources": [
-  {
-   "org": "Int J Pediatr (Zubi ZBH et al.)",
-   "title": "Indications, Measurements, and Complications of Ten Essential Neonatal Procedures",
-   "year": 2023,
-   "url": "https://doi.org/10.1155/2023/3241607"
-  },
-  {
-   "org": "Case Rep Pediatr (Grandmougin D et al.)",
-   "title": "Iatrogenic cardiac tamponade following chest drain insertion for tension pneumothorax in a premature newborn",
-   "year": 2025,
-   "url": "https://doi.org/10.1155/crpe/7960753"
-  },
-  {
-   "org": "Front Pediatr (Liu J et al.)",
-   "title": "Neonatal massive pneumothorax treated by ultrasound-guided pleural puncture: case report",
-   "year": 2021,
-   "url": "https://doi.org/10.3389/fped.2021.779615"
-  },
-  {
-   "org": "Turk J Med Sci (Huseynov M, Hakalmaz AE)",
-   "title": "Neonatal pneumothorax from the perspective of a pediatric surgeon: classification and management protocol",
-   "year": 2021,
-   "url": "https://doi.org/10.3906/sag-2010-286"
-  },
-  {
-   "org": "Cureus (Jilani TS et al.)",
-   "title": "Neonatal subcutaneous emphysema secondary to chest tube placement using the trocar technique",
-   "year": 2024,
-   "url": "https://doi.org/10.7759/cureus.51879"
-  }
- ],
- "review": {
-  "status": "ai_drafted",
-  "compiled": "2026-09-30"
- },
- "algorithms": [
-  {
-   "id": "neonatal-chest-drain-pathway",
-   "title": "Chest drain and needle aspiration in neonates Clinical Decision & Management Pathway",
-   "steps": [
+  "id": "neonatal-chest-drain",
+  "title": "Chest drain and needle aspiration in neonates",
+  "subject": "paediatrics",
+  "population": "Neonates",
+  "basis": "international",
+  "setting": "Delivery room, SNCU, NICU, transport",
+  "aliases": [
+    "chest tube",
+    "intercostal drain",
+    "ICD",
+    "tube thoracostomy",
+    "needle thoracocentesis",
+    "needle aspiration pneumothorax",
+    "pigtail catheter",
+    "neonatal pneumothorax",
+    "tension pneumothorax newborn",
+    "pleural effusion drainage",
+    "chylothorax drain"
+  ],
+  "summary": "Drain a neonatal pneumothorax or effusion causing distress, low oxygen saturation or instability. Aspirate air through the 2nd or 3rd intercostal space in the midclavicular line, or place a 10 or 12 Fr drain in the 4th or 5th space between the anterior and midaxillary lines, inserted 2 to 3 cm in small preterm and 3 to 4 cm in term babies. Confirm on AP and lateral X-ray.",
+  "sections": [
     {
-     "step": "Triage & Clinical Presentation",
-     "action": "Drain a pneumothorax causing respiratory distress, low oxygen saturation or haemodynamic instability. With mild distress and no severe instability, one surgical unit tried needle aspiration first and placed a tube only if air kept",
-     "critical": true
+      "kind": "recognise",
+      "title": "Indications",
+      "items": [
+        "Drain a pneumothorax causing respiratory distress, low oxygen saturation or haemodynamic instability. With mild distress and no severe instability, one surgical unit tried needle aspiration first and placed a tube only if air kept accumulating.",
+        "Drains also remove fluid: effusion, chylothorax, haemothorax and empyema."
+      ]
     },
     {
-     "step": "Immediate Stabilization",
-     "branch": "Emergency Stabilization",
-     "action": "Attach a needle or angiocatheter to a 10 to 20 mL syringe and enter the 2nd or 3rd intercostal space in the midclavicular line. Stop advancing as soon as air flows into the syringe, to avoid lung injury.",
-     "critical": true
+      "kind": "immediate",
+      "title": "Needle aspiration",
+      "items": [
+        "Attach a needle or angiocatheter to a 10 to 20 mL syringe and enter the 2nd or 3rd intercostal space in the midclavicular line. Stop advancing as soon as air flows into the syringe, to avoid lung injury.",
+        "Alternative site: 4th to 5th intercostal space in the midaxillary line, needle pointed toward the opposite shoulder. Ultrasound guidance can be used instead of fixed landmarks.",
+        "Systematic reviews found no difference between needle aspiration and chest tube in safety or immediate success; aspiration causes less pain and a shorter hospital stay."
+      ]
     },
     {
-     "step": "Diagnostic Workup & Risk Stratification",
-     "action": "Obtain baseline laboratory investigations, biomarkers, and targeted imaging."
+      "kind": "treatment",
+      "title": "Chest drain",
+      "items": [
+        "Site (Buelau position): between the anterior and midaxillary lines in the 4th or 5th intercostal space, just above the rib margin; safe on both sides in preterm and term babies.",
+        "Drain size 10 or 12 Fr. Insertion length 2 to 3 cm in small preterm and 3 to 4 cm in term infants.",
+        "For air, aim the tip anteriorly: enter near the anterior axillary line and direct the tip toward the xiphisternum, away from breast tissue. For fluid, place the tip posterior to the lung.",
+        "Pigtail catheters (Seldinger) and traditional tubes have comparable safety and effectiveness; pigtails are fast and easy in preterm babies. Trocar insertion needs more force and is linked to more organ injury.",
+        "Point-of-care ultrasound guidance gives high success and few complications."
+      ]
     },
     {
-     "step": "Definitive Medical Management",
-     "branch": "Targeted Therapy",
-     "action": "Site (Buelau position): between the anterior and midaxillary lines in the 4th or 5th intercostal space, just above the rib margin; safe on both sides in preterm and term babies."
+      "kind": "monitoring",
+      "title": "After insertion",
+      "items": [
+        "Get AP and lateral chest X-rays immediately. The tip and all side holes must lie in the pleural space.",
+        "For a persistent air leak after drainage, one unit used continuous suction at 5 to 10 cmH2O and advised against a second or third drain."
+      ]
     },
     {
-     "step": "Monitoring & Escalation Thresholds",
-     "action": "Get AP and lateral chest X-rays immediately. The tip and all side holes must lie in the pleural space."
+      "kind": "pitfalls",
+      "title": "Complications and pitfalls",
+      "items": [
+        "Minor: dislodgement and blockage. Major: infection, lung laceration or perforation, effusion, pericardial perforation, phrenic nerve injury and diaphragm paralysis.",
+        "In preterm babies the pericardium is close to the skin entry point: a drain advanced on its mandrel perforated the pericardium and caused tamponade. Plan the path and depth, and use ultrasound.",
+        "Subcutaneous emphysema has followed trocar drain placement; the reporting unit switched to Seldinger pigtail catheters."
+      ]
     }
-   ],
-   "caption": "Evidence-based clinical decision pathway for chest drain and needle aspiration in neonates."
-  }
- ],
- "tables": [
-  {
-   "id": "neonatal-chest-drain-summary-matrix",
-   "title": "Chest drain and needle aspiration in neonates Clinical Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Drain a pneumothorax causing respiratory distress, low oxygen saturation or haemodynamic instability. With mild distress and no severe",
-     "Mandatory clinical criteria"
-    ],
-    [
-     "Immediate Priority",
-     "Attach a needle or angiocatheter to a 10 to 20 mL syringe and enter the 2nd or 3rd intercostal space in the midclavicular line. Stop",
-     "Time-critical initial resuscitation"
-    ],
-    [
-     "Key Investigations",
-     "Standard laboratory and imaging workup",
-     "Differentiates etiology and severity"
-    ],
-    [
-     "Targeted Treatment",
-     "Site (Buelau position): between the anterior and midaxillary lines in the 4th or 5th intercostal space, just above the rib margin; safe on",
-     "Definitive management protocol"
-    ],
-    [
-     "Critical Pitfall",
-     "Minor: dislodgement and blockage. Major: infection, lung laceration or perforation, effusion, pericardial perforation, phrenic nerve injury",
-     "Avoid preventable clinical error"
-    ]
-   ],
-   "caption": "Core clinical management matrix for chest drain and needle aspiration in neonates."
-  }
- ],
- "diagrams": [
-  {
-   "id": "neonatal-chest-drain-real-image",
-   "title": "Chest drain and needle aspiration in neonates: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  ],
+  "sources": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
+      "org": "Int J Pediatr (Zubi ZBH et al.)",
+      "title": "Indications, Measurements, and Complications of Ten Essential Neonatal Procedures",
+      "year": 2023,
+      "url": "https://doi.org/10.1155/2023/3241607"
     },
     {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
+      "org": "Case Rep Pediatr (Grandmougin D et al.)",
+      "title": "Iatrogenic cardiac tamponade following chest drain insertion for tension pneumothorax in a premature newborn",
+      "year": 2025,
+      "url": "https://doi.org/10.1155/crpe/7960753"
     },
     {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "org": "Front Pediatr (Liu J et al.)",
+      "title": "Neonatal massive pneumothorax treated by ultrasound-guided pleural puncture: case report",
+      "year": 2021,
+      "url": "https://doi.org/10.3389/fped.2021.779615"
+    },
+    {
+      "org": "Turk J Med Sci (Huseynov M, Hakalmaz AE)",
+      "title": "Neonatal pneumothorax from the perspective of a pediatric surgeon: classification and management protocol",
+      "year": 2021,
+      "url": "https://doi.org/10.3906/sag-2010-286"
+    },
+    {
+      "org": "Cureus (Jilani TS et al.)",
+      "title": "Neonatal subcutaneous emphysema secondary to chest tube placement using the trocar technique",
+      "year": 2024,
+      "url": "https://doi.org/10.7759/cureus.51879"
     }
-   ]
-  }
- ]
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "compiled": "2026-09-30"
+  },
+  "algorithms": [
+    {
+      "id": "neonatal-chest-drain-pathway",
+      "title": "Chest drain and needle aspiration in neonates Clinical Decision & Management Pathway",
+      "steps": [
+        {
+          "step": "Triage & Clinical Presentation",
+          "action": "Drain a pneumothorax causing respiratory distress, low oxygen saturation or haemodynamic instability. With mild distress and no severe instability, one surgical unit tried needle aspiration first and placed a tube only if air kept",
+          "critical": true
+        },
+        {
+          "step": "Immediate Stabilization",
+          "branch": "Emergency Stabilization",
+          "action": "Attach a needle or angiocatheter to a 10 to 20 mL syringe and enter the 2nd or 3rd intercostal space in the midclavicular line. Stop advancing as soon as air flows into the syringe, to avoid lung injury.",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Risk Stratification",
+          "action": "Obtain baseline laboratory investigations, biomarkers, and targeted imaging."
+        },
+        {
+          "step": "Definitive Medical Management",
+          "branch": "Targeted Therapy",
+          "action": "Site (Buelau position): between the anterior and midaxillary lines in the 4th or 5th intercostal space, just above the rib margin; safe on both sides in preterm and term babies."
+        },
+        {
+          "step": "Monitoring & Escalation Thresholds",
+          "action": "Get AP and lateral chest X-rays immediately. The tip and all side holes must lie in the pleural space."
+        }
+      ],
+      "caption": "Evidence-based clinical decision pathway for chest drain and needle aspiration in neonates."
+    }
+  ],
+  "tables": [
+    {
+      "id": "neonatal-chest-drain-summary-matrix",
+      "title": "Chest drain and needle aspiration in neonates Clinical Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Drain a pneumothorax causing respiratory distress, low oxygen saturation or haemodynamic instability. With mild distress and no severe",
+          "Mandatory clinical criteria"
+        ],
+        [
+          "Immediate Priority",
+          "Attach a needle or angiocatheter to a 10 to 20 mL syringe and enter the 2nd or 3rd intercostal space in the midclavicular line. Stop",
+          "Time-critical initial resuscitation"
+        ],
+        [
+          "Key Investigations",
+          "Standard laboratory and imaging workup",
+          "Differentiates etiology and severity"
+        ],
+        [
+          "Targeted Treatment",
+          "Site (Buelau position): between the anterior and midaxillary lines in the 4th or 5th intercostal space, just above the rib margin; safe on",
+          "Definitive management protocol"
+        ],
+        [
+          "Critical Pitfall",
+          "Minor: dislodgement and blockage. Major: infection, lung laceration or perforation, effusion, pericardial perforation, phrenic nerve injury",
+          "Avoid preventable clinical error"
+        ]
+      ],
+      "caption": "Core clinical management matrix for chest drain and needle aspiration in neonates."
+    }
+  ],
+  "diagrams": []
 }

@@ -1,170 +1,148 @@
 {
- "id": "antrochoanal_polyp",
- "name": "Antrochoanal polyp",
- "aliases": [
-  "Killian polyp",
-  "ACP",
-  "maxillary antrochoanal polyp"
- ],
- "class": "non_infective",
- "system": "ENT / Otorhinolaryngology",
- "specialty": "ENT",
- "referenceOnly": true,
- "reference": {
-  "source": "Dhingra, Diseases of Ear, Nose and Throat",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A solitary benign polyp that arises from the maxillary antrum, passes through its ostium (usually the accessory ostium), and extends back into the choana and nasopharynx",
-   "It is most common in children and young adults and is typically unilateral, unlike bilateral ethmoidal inflammatory polyps",
-   "Presents with progressive unilateral nasal obstruction that may become bilateral, and a large polyp can be seen or felt in the nasopharynx and occasionally hangs behind the soft palate",
-   "It has three parts, an antral part, a part in the nasal cavity, and a choanal part, which explains its dumbbell shape",
-   "Nasal endoscopy shows a smooth pale polyp, and computed tomography demonstrates the antral origin and opacified maxillary sinus",
-   "The definitive treatment is complete removal including the antral origin, as leaving the maxillary attachment leads to recurrence",
-   "Endoscopic sinus surgery with removal of the antral component has largely replaced simple avulsion because it lowers recurrence",
-   "A unilateral nasal mass should always be evaluated to exclude more sinister pathology before assuming it is an antrochoanal polyp"
+  "id": "antrochoanal_polyp",
+  "name": "Antrochoanal polyp",
+  "aliases": [
+    "Killian polyp",
+    "ACP",
+    "maxillary antrochoanal polyp"
   ],
-  "pathophysiology": "An antrochoanal polyp is thought to originate from a cystic or oedematous swelling of the maxillary antral mucosa, often related to chronic inflammation or an antral cyst. The polyp enlarges within the antrum and then prolapses through the maxillary ostium, most often a widened accessory ostium, into the nasal cavity. Continued growth carries it posteriorly through the choana into the nasopharynx, producing its characteristic dumbbell configuration with a narrow neck at the ostium. It is a benign, single, unilateral lesion and, unlike multiple inflammatory polyps, is only loosely linked to allergy.",
-  "additionalDifferentials": [
-   "Bilateral ethmoidal inflammatory nasal polyps",
-   "Inverted papilloma",
-   "Juvenile nasopharyngeal angiofibroma in an adolescent male",
-   "Nasal or nasopharyngeal malignancy",
-   "Rhinosporidiosis",
-   "Encephalocoele or meningocoele in a midline mass"
-  ],
-  "additionalInvestigations": [
-   "Nasal endoscopy to characterise the polyp and its posterior extension",
-   "Computed tomography of the sinuses to confirm the antral origin and define anatomy for surgery",
-   "Biopsy or histology of the excised specimen to confirm the benign nature and exclude neoplasia",
-   "Assessment for coexisting sinus disease or allergy where relevant"
-  ],
-  "redFlags": [
-   "A unilateral nasal mass that bleeds readily, particularly in an adolescent male, suggesting angiofibroma rather than a benign polyp",
-   "Rapid growth, bony destruction, orbital or neurological signs suggesting malignancy",
-   "A midline mass that could be a meningocoele or encephalocoele before any biopsy",
-   "Recurrent unilateral polyp raising suspicion of inverted papilloma or missed antral attachment"
-  ],
-  "prognosis": "The lesion is benign and the outlook is very good after complete surgical removal; recurrence is uncommon when the antral origin is fully excised but is more frequent after simple avulsion that leaves the maxillary attachment behind.",
-  "pitfalls": [
-   "Assuming a unilateral mass is a simple polyp and biopsying a vascular angiofibroma or a meningocoele",
-   "Removing only the nasal part and leaving the antral origin, leading to recurrence",
-   "Overlooking malignancy in an adult with a unilateral nasal mass",
-   "Failing to obtain cross-sectional imaging before surgery"
-  ],
-  "references": [
-   "Dhingra, Diseases of Ear, Nose and Throat"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat definitively by complete surgical excision, using functional endoscopic sinus surgery to remove the choanal, nasal and antral components together",
-   "Ensure the maxillary antral origin is fully removed through a wide middle meatal antrostomy, with canine fossa puncture or a limited Caldwell-Luc approach if the attachment cannot otherwise be reached, since a retained attachment causes recurrence",
-   "Obtain preoperative CT of the sinuses to confirm the antral origin and plan the surgical approach",
-   "Send the excised specimen for histology to confirm the benign nature and exclude neoplasia",
-   "Consider topical intranasal corticosteroids for associated mucosal inflammation, recognising these are adjunctive and not curative",
-   "Treat any coexisting sinus disease or allergy, and follow up with nasal endoscopy to detect recurrence"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "antrochoanal_polyp-pathway",
-   "title": "Antrochoanal polyp: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A solitary benign polyp that arises from the maxillary antrum, passes through its ostium (usually the accessory ostium), and extends back into the choana and nasopharynx",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A unilateral nasal mass that bleeds readily, particularly in an adolescent male, suggesting angiofibroma rather than a benign polyp",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Nasal endoscopy to characterise the polyp and its posterior extension, Computed tomography of the sinuses to confirm the antral origin and define anatomy for surgery, Biopsy or histology of the excised specimen to confirm"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat definitively by complete surgical excision, using functional endoscopic sinus surgery to remove the choanal, nasal and antral components together"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a unilateral mass is a simple polyp and biopsying a vascular angiofibroma or a meningocoele"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of antrochoanal polyp."
-  }
- ],
- "tables": [
-  {
-   "id": "antrochoanal_polyp-matrix",
-   "title": "Antrochoanal polyp: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A solitary benign polyp that arises from the maxillary antrum, passes through its ostium (usually the accessory ostium), and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "ENT / Otorhinolaryngology",
+  "specialty": "ENT",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Dhingra, Diseases of Ear, Nose and Throat",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A solitary benign polyp that arises from the maxillary antrum, passes through its ostium (usually the accessory ostium), and extends back into the choana and nasopharynx",
+      "It is most common in children and young adults and is typically unilateral, unlike bilateral ethmoidal inflammatory polyps",
+      "Presents with progressive unilateral nasal obstruction that may become bilateral, and a large polyp can be seen or felt in the nasopharynx and occasionally hangs behind the soft palate",
+      "It has three parts, an antral part, a part in the nasal cavity, and a choanal part, which explains its dumbbell shape",
+      "Nasal endoscopy shows a smooth pale polyp, and computed tomography demonstrates the antral origin and opacified maxillary sinus",
+      "The definitive treatment is complete removal including the antral origin, as leaving the maxillary attachment leads to recurrence",
+      "Endoscopic sinus surgery with removal of the antral component has largely replaced simple avulsion because it lowers recurrence",
+      "A unilateral nasal mass should always be evaluated to exclude more sinister pathology before assuming it is an antrochoanal polyp"
     ],
-    [
-     "Key Investigations",
-     "Nasal endoscopy to characterise the polyp and its posterior extension, Computed tomography of the sinuses to confirm the antral",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "An antrochoanal polyp is thought to originate from a cystic or oedematous swelling of the maxillary antral mucosa, often related to chronic inflammation or an antral cyst. The polyp enlarges within the antrum and then prolapses through the maxillary ostium, most often a widened accessory ostium, into the nasal cavity. Continued growth carries it posteriorly through the choana into the nasopharynx, producing its characteristic dumbbell configuration with a narrow neck at the ostium. It is a benign, single, unilateral lesion and, unlike multiple inflammatory polyps, is only loosely linked to allergy.",
+    "additionalDifferentials": [
+      "Bilateral ethmoidal inflammatory nasal polyps",
+      "Inverted papilloma",
+      "Juvenile nasopharyngeal angiofibroma in an adolescent male",
+      "Nasal or nasopharyngeal malignancy",
+      "Rhinosporidiosis",
+      "Encephalocoele or meningocoele in a midline mass"
     ],
-    [
-     "Primary Differentials",
-     "Bilateral ethmoidal inflammatory nasal polyps, Inverted papilloma, Juvenile nasopharyngeal angiofibroma in an adolescent male",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Nasal endoscopy to characterise the polyp and its posterior extension",
+      "Computed tomography of the sinuses to confirm the antral origin and define anatomy for surgery",
+      "Biopsy or histology of the excised specimen to confirm the benign nature and exclude neoplasia",
+      "Assessment for coexisting sinus disease or allergy where relevant"
     ],
-    [
-     "Management Strategy",
-     "Treat definitively by complete surgical excision, using functional endoscopic sinus surgery to remove the choanal, nasal and",
-     "Core treatment modality"
+    "redFlags": [
+      "A unilateral nasal mass that bleeds readily, particularly in an adolescent male, suggesting angiofibroma rather than a benign polyp",
+      "Rapid growth, bony destruction, orbital or neurological signs suggesting malignancy",
+      "A midline mass that could be a meningocoele or encephalocoele before any biopsy",
+      "Recurrent unilateral polyp raising suspicion of inverted papilloma or missed antral attachment"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a unilateral mass is a simple polyp and biopsying a vascular angiofibroma or a meningocoele",
-     "Prevent diagnostic or management error"
+    "prognosis": "The lesion is benign and the outlook is very good after complete surgical removal; recurrence is uncommon when the antral origin is fully excised but is more frequent after simple avulsion that leaves the maxillary attachment behind.",
+    "pitfalls": [
+      "Assuming a unilateral mass is a simple polyp and biopsying a vascular angiofibroma or a meningocoele",
+      "Removing only the nasal part and leaving the antral origin, leading to recurrence",
+      "Overlooking malignancy in an adult with a unilateral nasal mass",
+      "Failing to obtain cross-sectional imaging before surgery"
+    ],
+    "references": [
+      "Dhingra, Diseases of Ear, Nose and Throat"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat definitively by complete surgical excision, using functional endoscopic sinus surgery to remove the choanal, nasal and antral components together",
+      "Ensure the maxillary antral origin is fully removed through a wide middle meatal antrostomy, with canine fossa puncture or a limited Caldwell-Luc approach if the attachment cannot otherwise be reached, since a retained attachment causes recurrence",
+      "Obtain preoperative CT of the sinuses to confirm the antral origin and plan the surgical approach",
+      "Send the excised specimen for histology to confirm the benign nature and exclude neoplasia",
+      "Consider topical intranasal corticosteroids for associated mucosal inflammation, recognising these are adjunctive and not curative",
+      "Treat any coexisting sinus disease or allergy, and follow up with nasal endoscopy to detect recurrence"
     ]
-   ],
-   "caption": "Overview comparison matrix for antrochoanal polyp."
-  }
- ],
- "diagrams": [
-  {
-   "id": "antrochoanal-polyp-real-image",
-   "title": "Antrochoanal polyp: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "antrochoanal_polyp-pathway",
+      "title": "Antrochoanal polyp: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A solitary benign polyp that arises from the maxillary antrum, passes through its ostium (usually the accessory ostium), and extends back into the choana and nasopharynx",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A unilateral nasal mass that bleeds readily, particularly in an adolescent male, suggesting angiofibroma rather than a benign polyp",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Nasal endoscopy to characterise the polyp and its posterior extension, Computed tomography of the sinuses to confirm the antral origin and define anatomy for surgery, Biopsy or histology of the excised specimen to confirm"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat definitively by complete surgical excision, using functional endoscopic sinus surgery to remove the choanal, nasal and antral components together"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a unilateral mass is a simple polyp and biopsying a vascular angiofibroma or a meningocoele"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of antrochoanal polyp."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "antrochoanal_polyp-matrix",
+      "title": "Antrochoanal polyp: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A solitary benign polyp that arises from the maxillary antrum, passes through its ostium (usually the accessory ostium), and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Nasal endoscopy to characterise the polyp and its posterior extension, Computed tomography of the sinuses to confirm the antral",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Bilateral ethmoidal inflammatory nasal polyps, Inverted papilloma, Juvenile nasopharyngeal angiofibroma in an adolescent male",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat definitively by complete surgical excision, using functional endoscopic sinus surgery to remove the choanal, nasal and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a unilateral mass is a simple polyp and biopsying a vascular angiofibroma or a meningocoele",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for antrochoanal polyp."
+    }
+  ],
+  "diagrams": []
 }

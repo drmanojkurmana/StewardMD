@@ -1,176 +1,154 @@
 {
- "id": "behcet_disease",
- "name": "Behçet disease",
- "aliases": [
-  "Behcet disease",
-  "Behçet syndrome",
-  "Silk Road disease",
-  "variable-vessel vasculitis"
- ],
- "class": "non_infective",
- "system": "Rheumatology / MSK",
- "specialty": "Rheumatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / ACR-EULAR",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A variable-vessel vasculitis defined clinically by recurrent oral aphthous ulceration together with other features, as there is no specific diagnostic test",
-   "Recurrent painful genital ulcers and skin lesions such as erythema nodosum and pseudofolliculitis are characteristic",
-   "Ocular disease, particularly relapsing posterior uveitis and retinal vasculitis, is a major cause of vision loss",
-   "Pathergy (a papulo-pustular skin reaction to needle prick) supports the diagnosis where present",
-   "It is more prevalent along the historical Silk Road and is associated with HLA-B51",
-   "Vascular involvement is distinctive in affecting both arteries and veins, causing venous thromboses and arterial aneurysms, including pulmonary artery aneurysms",
-   "Neurological (neuro-Behçet) and gastrointestinal involvement carry significant morbidity",
-   "Treatment is tailored to organ involvement, using colchicine and topical measures for mucocutaneous disease and systemic immunosuppression or biologics for major organ threat"
+  "id": "behcet_disease",
+  "name": "Behçet disease",
+  "aliases": [
+    "Behcet disease",
+    "Behçet syndrome",
+    "Silk Road disease",
+    "variable-vessel vasculitis"
   ],
-  "pathophysiology": "Behçet disease is a chronic relapsing inflammatory disorder classified as a variable-vessel vasculitis because it can affect vessels of any size and type, both arterial and venous. Its cause is uncertain but involves genetic susceptibility (notably HLA-B51) and dysregulated innate and adaptive immunity with prominent neutrophil hyperactivity, elevated Th1/Th17 responses, and inflammation triggered in predisposed individuals. Vascular inflammation produces thrombosis, aneurysm formation, and tissue damage, while immune-mediated inflammation drives the recurrent mucocutaneous, ocular, neurological, and gastrointestinal lesions.",
-  "additionalDifferentials": [
-   "Recurrent aphthous stomatitis without systemic disease",
-   "Inflammatory bowel disease with oral and skin manifestations",
-   "Reactive arthritis and other spondyloarthritides",
-   "Herpes simplex and other infective causes of genital ulceration",
-   "Systemic lupus erythematosus",
-   "Sarcoidosis and other causes of uveitis"
-  ],
-  "additionalInvestigations": [
-   "Clinical assessment against recognised diagnostic/classification criteria (no confirmatory laboratory test)",
-   "Pathergy test where available",
-   "Ophthalmological examination for uveitis and retinal vasculitis",
-   "Vascular imaging for venous thrombosis and arterial aneurysms, including pulmonary vessels",
-   "MRI brain and cerebrospinal fluid analysis when neuro-Behçet is suspected; HLA-B51 typing as supportive"
-  ],
-  "redFlags": [
-   "Sudden or progressive visual loss from posterior uveitis or retinal vasculitis requiring urgent ophthalmology and immunosuppression",
-   "Neurological deficits (brainstem or cerebral involvement) or cerebral venous sinus thrombosis indicating neuro-Behçet",
-   "Pulmonary artery aneurysm presenting with haemoptysis, a life-threatening complication",
-   "Major vessel thrombosis or arterial aneurysm at risk of rupture",
-   "Severe gastrointestinal ulceration with bleeding or perforation"
-  ],
-  "prognosis": "Course is relapsing and remitting and tends to be more severe in young men. Mucocutaneous disease is troublesome but not dangerous, whereas ocular, neurological, and major vascular involvement drive the risk of blindness, disability, and death. Early aggressive treatment of organ-threatening disease improves outcome.",
-  "pitfalls": [
-   "Treating recurrent oral ulcers in isolation and missing systemic Behçet disease",
-   "Delaying immunosuppression for eye involvement and risking irreversible vision loss",
-   "Managing vascular thrombosis with anticoagulation alone without addressing the underlying inflammation, and overlooking coexisting aneurysms",
-   "Attributing neurological symptoms to other causes rather than neuro-Behçet",
-   "Assuming absence of pathergy or HLA-B51 excludes the diagnosis"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "ACR/EULAR guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Control recurrent oral and genital aphthous ulcers with topical corticosteroids and colchicine, adding apremilast for refractory oral ulceration",
-   "Treat arthritis and erythema nodosum with colchicine, using short corticosteroid courses or azathioprine for persistent disease",
-   "Manage relapsing posterior uveitis and retinal vasculitis aggressively with systemic corticosteroids and immunosuppression (azathioprine or ciclosporin), escalating to infliximab, adalimumab or interferon-alpha to preserve vision",
-   "Treat major vascular disease, including venous thrombosis and arterial or pulmonary artery aneurysms, with corticosteroids and immunosuppression such as cyclophosphamide or anti-TNF therapy rather than relying on anticoagulation",
-   "Manage neuro-Behcet with corticosteroids and immunosuppressants, avoiding ciclosporin owing to neurotoxicity",
-   "Treat gastrointestinal involvement with corticosteroids, aminosalicylates and azathioprine or anti-TNF agents, with surgery for perforation or uncontrolled bleeding",
-   "Provide multidisciplinary follow-up and escalate immunosuppression promptly for organ- or sight-threatening disease, which runs a more severe course in young men"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "behcet_disease-pathway",
-   "title": "Behçet disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A variable-vessel vasculitis defined clinically by recurrent oral aphthous ulceration together with other features, as there is no specific diagnostic test",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Sudden or progressive visual loss from posterior uveitis or retinal vasculitis requiring urgent ophthalmology and immunosuppression",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical assessment against recognised diagnostic/classification criteria (no confirmatory laboratory test), Pathergy test where available, Ophthalmological examination for uveitis and retinal vasculitis"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Control recurrent oral and genital aphthous ulcers with topical corticosteroids and colchicine, adding apremilast for refractory oral ulceration"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating recurrent oral ulcers in isolation and missing systemic Behçet disease"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of behçet disease."
-  }
- ],
- "tables": [
-  {
-   "id": "behcet_disease-matrix",
-   "title": "Behçet disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A variable-vessel vasculitis defined clinically by recurrent oral aphthous ulceration together with other features, as there is",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Rheumatology / MSK",
+  "specialty": "Rheumatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / ACR-EULAR",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A variable-vessel vasculitis defined clinically by recurrent oral aphthous ulceration together with other features, as there is no specific diagnostic test",
+      "Recurrent painful genital ulcers and skin lesions such as erythema nodosum and pseudofolliculitis are characteristic",
+      "Ocular disease, particularly relapsing posterior uveitis and retinal vasculitis, is a major cause of vision loss",
+      "Pathergy (a papulo-pustular skin reaction to needle prick) supports the diagnosis where present",
+      "It is more prevalent along the historical Silk Road and is associated with HLA-B51",
+      "Vascular involvement is distinctive in affecting both arteries and veins, causing venous thromboses and arterial aneurysms, including pulmonary artery aneurysms",
+      "Neurological (neuro-Behçet) and gastrointestinal involvement carry significant morbidity",
+      "Treatment is tailored to organ involvement, using colchicine and topical measures for mucocutaneous disease and systemic immunosuppression or biologics for major organ threat"
     ],
-    [
-     "Key Investigations",
-     "Clinical assessment against recognised diagnostic/classification criteria (no confirmatory laboratory test), Pathergy test where",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Behçet disease is a chronic relapsing inflammatory disorder classified as a variable-vessel vasculitis because it can affect vessels of any size and type, both arterial and venous. Its cause is uncertain but involves genetic susceptibility (notably HLA-B51) and dysregulated innate and adaptive immunity with prominent neutrophil hyperactivity, elevated Th1/Th17 responses, and inflammation triggered in predisposed individuals. Vascular inflammation produces thrombosis, aneurysm formation, and tissue damage, while immune-mediated inflammation drives the recurrent mucocutaneous, ocular, neurological, and gastrointestinal lesions.",
+    "additionalDifferentials": [
+      "Recurrent aphthous stomatitis without systemic disease",
+      "Inflammatory bowel disease with oral and skin manifestations",
+      "Reactive arthritis and other spondyloarthritides",
+      "Herpes simplex and other infective causes of genital ulceration",
+      "Systemic lupus erythematosus",
+      "Sarcoidosis and other causes of uveitis"
     ],
-    [
-     "Primary Differentials",
-     "Recurrent aphthous stomatitis without systemic disease, Inflammatory bowel disease with oral and skin manifestations, Reactive",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical assessment against recognised diagnostic/classification criteria (no confirmatory laboratory test)",
+      "Pathergy test where available",
+      "Ophthalmological examination for uveitis and retinal vasculitis",
+      "Vascular imaging for venous thrombosis and arterial aneurysms, including pulmonary vessels",
+      "MRI brain and cerebrospinal fluid analysis when neuro-Behçet is suspected; HLA-B51 typing as supportive"
     ],
-    [
-     "Management Strategy",
-     "Control recurrent oral and genital aphthous ulcers with topical corticosteroids and colchicine, adding apremilast for refractory",
-     "Core treatment modality"
+    "redFlags": [
+      "Sudden or progressive visual loss from posterior uveitis or retinal vasculitis requiring urgent ophthalmology and immunosuppression",
+      "Neurological deficits (brainstem or cerebral involvement) or cerebral venous sinus thrombosis indicating neuro-Behçet",
+      "Pulmonary artery aneurysm presenting with haemoptysis, a life-threatening complication",
+      "Major vessel thrombosis or arterial aneurysm at risk of rupture",
+      "Severe gastrointestinal ulceration with bleeding or perforation"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating recurrent oral ulcers in isolation and missing systemic Behçet disease",
-     "Prevent diagnostic or management error"
+    "prognosis": "Course is relapsing and remitting and tends to be more severe in young men. Mucocutaneous disease is troublesome but not dangerous, whereas ocular, neurological, and major vascular involvement drive the risk of blindness, disability, and death. Early aggressive treatment of organ-threatening disease improves outcome.",
+    "pitfalls": [
+      "Treating recurrent oral ulcers in isolation and missing systemic Behçet disease",
+      "Delaying immunosuppression for eye involvement and risking irreversible vision loss",
+      "Managing vascular thrombosis with anticoagulation alone without addressing the underlying inflammation, and overlooking coexisting aneurysms",
+      "Attributing neurological symptoms to other causes rather than neuro-Behçet",
+      "Assuming absence of pathergy or HLA-B51 excludes the diagnosis"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "ACR/EULAR guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Control recurrent oral and genital aphthous ulcers with topical corticosteroids and colchicine, adding apremilast for refractory oral ulceration",
+      "Treat arthritis and erythema nodosum with colchicine, using short corticosteroid courses or azathioprine for persistent disease",
+      "Manage relapsing posterior uveitis and retinal vasculitis aggressively with systemic corticosteroids and immunosuppression (azathioprine or ciclosporin), escalating to infliximab, adalimumab or interferon-alpha to preserve vision",
+      "Treat major vascular disease, including venous thrombosis and arterial or pulmonary artery aneurysms, with corticosteroids and immunosuppression such as cyclophosphamide or anti-TNF therapy rather than relying on anticoagulation",
+      "Manage neuro-Behcet with corticosteroids and immunosuppressants, avoiding ciclosporin owing to neurotoxicity",
+      "Treat gastrointestinal involvement with corticosteroids, aminosalicylates and azathioprine or anti-TNF agents, with surgery for perforation or uncontrolled bleeding",
+      "Provide multidisciplinary follow-up and escalate immunosuppression promptly for organ- or sight-threatening disease, which runs a more severe course in young men"
     ]
-   ],
-   "caption": "Overview comparison matrix for behçet disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "behcet-disease-real-image",
-   "title": "Behçet disease: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "behcet_disease-pathway",
+      "title": "Behçet disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A variable-vessel vasculitis defined clinically by recurrent oral aphthous ulceration together with other features, as there is no specific diagnostic test",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Sudden or progressive visual loss from posterior uveitis or retinal vasculitis requiring urgent ophthalmology and immunosuppression",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical assessment against recognised diagnostic/classification criteria (no confirmatory laboratory test), Pathergy test where available, Ophthalmological examination for uveitis and retinal vasculitis"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Control recurrent oral and genital aphthous ulcers with topical corticosteroids and colchicine, adding apremilast for refractory oral ulceration"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating recurrent oral ulcers in isolation and missing systemic Behçet disease"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of behçet disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "behcet_disease-matrix",
+      "title": "Behçet disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A variable-vessel vasculitis defined clinically by recurrent oral aphthous ulceration together with other features, as there is",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical assessment against recognised diagnostic/classification criteria (no confirmatory laboratory test), Pathergy test where",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Recurrent aphthous stomatitis without systemic disease, Inflammatory bowel disease with oral and skin manifestations, Reactive",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Control recurrent oral and genital aphthous ulcers with topical corticosteroids and colchicine, adding apremilast for refractory",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating recurrent oral ulcers in isolation and missing systemic Behçet disease",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for behçet disease."
+    }
+  ],
+  "diagrams": []
 }

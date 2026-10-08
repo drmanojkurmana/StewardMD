@@ -1,175 +1,153 @@
 {
- "id": "arteriovenous_fistula",
- "name": "Arteriovenous fistula",
- "aliases": [
-  "AV fistula",
-  "AVF",
-  "arteriovenous malformation",
-  "acquired arteriovenous fistula",
-  "congenital arteriovenous fistula"
- ],
- "class": "non_infective",
- "system": "Vascular",
- "specialty": "Vascular Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Rutherford's Vascular Surgery / Harrison's Principles of Internal Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An abnormal direct communication between an artery and a vein that bypasses the capillary bed",
-   "May be congenital, acquired through trauma or iatrogenic injury, or surgically created for haemodialysis access",
-   "Classic local signs include a palpable thrill and a continuous machinery-like bruit over the lesion",
-   "Compression of the fistula can transiently slow the heart rate as venous return and cardiac output fall (Branham or Nicoladoni-Branham sign)",
-   "Large or longstanding fistulae shunt blood away from distal tissue and can cause limb ischaemia, venous hypertension, and swelling",
-   "High-flow shunting increases venous return and cardiac output and, if substantial, can precipitate high-output cardiac failure",
-   "Duplex ultrasound, CT or MR angiography, and catheter angiography characterise the anatomy and haemodynamic impact",
-   "Treatment options include observation, endovascular embolisation or stent grafting, and open surgical repair depending on cause, size, and symptoms"
+  "id": "arteriovenous_fistula",
+  "name": "Arteriovenous fistula",
+  "aliases": [
+    "AV fistula",
+    "AVF",
+    "arteriovenous malformation",
+    "acquired arteriovenous fistula",
+    "congenital arteriovenous fistula"
   ],
-  "pathophysiology": "An arteriovenous fistula creates a low-resistance channel that diverts arterial blood directly into the venous system, bypassing the capillary bed. This produces a steal effect that can reduce distal arterial perfusion, while transmission of arterial pressure into the veins causes venous hypertension, dilatation, and secondary tissue changes. The reduced systemic vascular resistance increases venous return, stroke volume, and cardiac output; a large chronic shunt can lead to cardiac chamber enlargement and high-output heart failure. Congenital lesions reflect abnormal vascular development, whereas acquired fistulae follow penetrating trauma, procedures, or erosion between an adjacent artery and vein.",
-  "additionalDifferentials": [
-   "Pseudoaneurysm",
-   "True arterial aneurysm",
-   "Venous malformation or haemangioma",
-   "Deep vein thrombosis with limb swelling",
-   "Varicose veins and chronic venous insufficiency",
-   "Soft-tissue vascular tumour"
-  ],
-  "additionalInvestigations": [
-   "Duplex ultrasound to demonstrate the communication and flow characteristics",
-   "CT or MR angiography to map anatomy and feeding and draining vessels",
-   "Catheter angiography for detailed assessment and to guide endovascular treatment",
-   "Echocardiography to assess cardiac output and chamber size in high-flow lesions",
-   "Assessment of distal perfusion and venous hypertension in the affected limb"
-  ],
-  "redFlags": [
-   "Features of high-output cardiac failure from a large chronic shunt",
-   "Distal limb ischaemia from arterial steal threatening tissue viability",
-   "Rapid enlargement, haemorrhage, or an expanding pulsatile mass suggesting associated pseudoaneurysm",
-   "Severe venous hypertension with skin breakdown or ulceration"
-  ],
-  "prognosis": "Small fistulae may remain asymptomatic and be safely observed, while large or high-flow lesions can progressively cause limb complications or cardiac strain and generally require intervention. Outcomes after embolisation or surgical repair are favourable when the lesion is anatomically suitable, though congenital malformations can recur.",
-  "pitfalls": [
-   "Missing an acquired fistula after penetrating trauma or vascular procedures",
-   "Overlooking high-output cardiac failure as a consequence of a large chronic shunt",
-   "Confusing a fistula with a pseudoaneurysm and choosing the wrong treatment",
-   "Underestimating distal ischaemia caused by arterial steal"
-  ],
-  "references": [
-   "Rutherford's Vascular Surgery",
-   "Harrison's Principles of Internal Medicine, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Observation for small, asymptomatic fistulae, which may remain stable",
-   "Endovascular embolisation as first-line closure for anatomically suitable lesions",
-   "Surgical ligation or repair for fistulae not amenable to endovascular treatment",
-   "Ultrasound-guided compression or thrombin injection for iatrogenic femoral access fistulae",
-   "Manage high-output cardiac failure with diuretics and neurohormonal therapy while planning definitive closure",
-   "Treat limb complications of venous hypertension and distal ischaemia from the steal effect",
-   "For dialysis-access fistulae, salvage function while managing steal or aneurysmal degeneration, with duplex and cardiac surveillance of high-flow lesions"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "arteriovenous_fistula-pathway",
-   "title": "Arteriovenous fistula: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An abnormal direct communication between an artery and a vein that bypasses the capillary bed",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Features of high-output cardiac failure from a large chronic shunt",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Duplex ultrasound to demonstrate the communication and flow characteristics, CT or MR angiography to map anatomy and feeding and draining vessels, Catheter angiography for detailed assessment and to guide endovascular"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Observation for small, asymptomatic fistulae, which may remain stable"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing an acquired fistula after penetrating trauma or vascular procedures"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of arteriovenous fistula."
-  }
- ],
- "tables": [
-  {
-   "id": "arteriovenous_fistula-matrix",
-   "title": "Arteriovenous fistula: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An abnormal direct communication between an artery and a vein that bypasses the capillary bed",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Vascular",
+  "specialty": "Vascular Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rutherford's Vascular Surgery / Harrison's Principles of Internal Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An abnormal direct communication between an artery and a vein that bypasses the capillary bed",
+      "May be congenital, acquired through trauma or iatrogenic injury, or surgically created for haemodialysis access",
+      "Classic local signs include a palpable thrill and a continuous machinery-like bruit over the lesion",
+      "Compression of the fistula can transiently slow the heart rate as venous return and cardiac output fall (Branham or Nicoladoni-Branham sign)",
+      "Large or longstanding fistulae shunt blood away from distal tissue and can cause limb ischaemia, venous hypertension, and swelling",
+      "High-flow shunting increases venous return and cardiac output and, if substantial, can precipitate high-output cardiac failure",
+      "Duplex ultrasound, CT or MR angiography, and catheter angiography characterise the anatomy and haemodynamic impact",
+      "Treatment options include observation, endovascular embolisation or stent grafting, and open surgical repair depending on cause, size, and symptoms"
     ],
-    [
-     "Key Investigations",
-     "Duplex ultrasound to demonstrate the communication and flow characteristics, CT or MR angiography to map anatomy and feeding and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "An arteriovenous fistula creates a low-resistance channel that diverts arterial blood directly into the venous system, bypassing the capillary bed. This produces a steal effect that can reduce distal arterial perfusion, while transmission of arterial pressure into the veins causes venous hypertension, dilatation, and secondary tissue changes. The reduced systemic vascular resistance increases venous return, stroke volume, and cardiac output; a large chronic shunt can lead to cardiac chamber enlargement and high-output heart failure. Congenital lesions reflect abnormal vascular development, whereas acquired fistulae follow penetrating trauma, procedures, or erosion between an adjacent artery and vein.",
+    "additionalDifferentials": [
+      "Pseudoaneurysm",
+      "True arterial aneurysm",
+      "Venous malformation or haemangioma",
+      "Deep vein thrombosis with limb swelling",
+      "Varicose veins and chronic venous insufficiency",
+      "Soft-tissue vascular tumour"
     ],
-    [
-     "Primary Differentials",
-     "Pseudoaneurysm, True arterial aneurysm, Venous malformation or haemangioma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Duplex ultrasound to demonstrate the communication and flow characteristics",
+      "CT or MR angiography to map anatomy and feeding and draining vessels",
+      "Catheter angiography for detailed assessment and to guide endovascular treatment",
+      "Echocardiography to assess cardiac output and chamber size in high-flow lesions",
+      "Assessment of distal perfusion and venous hypertension in the affected limb"
     ],
-    [
-     "Management Strategy",
-     "Observation for small, asymptomatic fistulae, which may remain stable",
-     "Core treatment modality"
+    "redFlags": [
+      "Features of high-output cardiac failure from a large chronic shunt",
+      "Distal limb ischaemia from arterial steal threatening tissue viability",
+      "Rapid enlargement, haemorrhage, or an expanding pulsatile mass suggesting associated pseudoaneurysm",
+      "Severe venous hypertension with skin breakdown or ulceration"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing an acquired fistula after penetrating trauma or vascular procedures",
-     "Prevent diagnostic or management error"
+    "prognosis": "Small fistulae may remain asymptomatic and be safely observed, while large or high-flow lesions can progressively cause limb complications or cardiac strain and generally require intervention. Outcomes after embolisation or surgical repair are favourable when the lesion is anatomically suitable, though congenital malformations can recur.",
+    "pitfalls": [
+      "Missing an acquired fistula after penetrating trauma or vascular procedures",
+      "Overlooking high-output cardiac failure as a consequence of a large chronic shunt",
+      "Confusing a fistula with a pseudoaneurysm and choosing the wrong treatment",
+      "Underestimating distal ischaemia caused by arterial steal"
+    ],
+    "references": [
+      "Rutherford's Vascular Surgery",
+      "Harrison's Principles of Internal Medicine, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Observation for small, asymptomatic fistulae, which may remain stable",
+      "Endovascular embolisation as first-line closure for anatomically suitable lesions",
+      "Surgical ligation or repair for fistulae not amenable to endovascular treatment",
+      "Ultrasound-guided compression or thrombin injection for iatrogenic femoral access fistulae",
+      "Manage high-output cardiac failure with diuretics and neurohormonal therapy while planning definitive closure",
+      "Treat limb complications of venous hypertension and distal ischaemia from the steal effect",
+      "For dialysis-access fistulae, salvage function while managing steal or aneurysmal degeneration, with duplex and cardiac surveillance of high-flow lesions"
     ]
-   ],
-   "caption": "Overview comparison matrix for arteriovenous fistula."
-  }
- ],
- "diagrams": [
-  {
-   "id": "arteriovenous-fistula-real-image",
-   "title": "Arteriovenous fistula: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "arteriovenous_fistula-pathway",
+      "title": "Arteriovenous fistula: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An abnormal direct communication between an artery and a vein that bypasses the capillary bed",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Features of high-output cardiac failure from a large chronic shunt",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Duplex ultrasound to demonstrate the communication and flow characteristics, CT or MR angiography to map anatomy and feeding and draining vessels, Catheter angiography for detailed assessment and to guide endovascular"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Observation for small, asymptomatic fistulae, which may remain stable"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing an acquired fistula after penetrating trauma or vascular procedures"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of arteriovenous fistula."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "arteriovenous_fistula-matrix",
+      "title": "Arteriovenous fistula: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An abnormal direct communication between an artery and a vein that bypasses the capillary bed",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Duplex ultrasound to demonstrate the communication and flow characteristics, CT or MR angiography to map anatomy and feeding and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Pseudoaneurysm, True arterial aneurysm, Venous malformation or haemangioma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Observation for small, asymptomatic fistulae, which may remain stable",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing an acquired fistula after penetrating trauma or vascular procedures",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for arteriovenous fistula."
+    }
+  ],
+  "diagrams": []
 }

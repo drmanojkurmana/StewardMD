@@ -1,178 +1,156 @@
 {
- "id": "cardiac_haemochromatosis",
- "name": "cardiac haemochromatosis",
- "aliases": [
-  "iron-overload cardiomyopathy",
-  "haemochromatotic heart disease"
- ],
- "class": "non_infective",
- "system": "cardiovascular",
- "specialty": "cardiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Braunwald's Heart Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Myocardial iron deposition may arise from hereditary haemochromatosis (typically HFE C282Y homozygosity) or from secondary/transfusional iron overload (thalassaemia major, sideroblastic anaemia, myelodysplasia); the secondary forms often cause the most severe cardiac disease because transfused iron bypasses regulatory absorption controls.",
-   "The cardiomyopathy characteristically evolves through an early restrictive/diastolic phase into a later dilated phase with systolic impairment, so a normal ejection fraction does not exclude significant iron loading.",
-   "Iron preferentially accumulates in ventricular myocardium and the conduction system, producing a mixed picture of heart failure plus atrial and ventricular arrhythmias and heart block.",
-   "Cardiac T2* magnetic resonance is the pivotal non-invasive tool: a myocardial T2* below the accepted threshold identifies clinically important iron loading before ejection fraction falls, and it guides intensification of chelation.",
-   "Serum ferritin and transferrin saturation reflect total body iron but correlate poorly with myocardial iron, so cardiac assessment must not rely on ferritin alone.",
-   "Iron-related cardiac dysfunction is substantially reversible if chelation (or venesection in primary disease) is instituted before end-stage fibrosis develops, distinguishing it from most other restrictive cardiomyopathies.",
-   "In transfusion-dependent patients, combining or intensifying iron chelators for cardiac indications can recover ventricular function and reduce arrhythmic death.",
-   "Coexisting endocrinopathy (diabetes, hypogonadism, hypothyroidism) and hepatic disease frequently accompany the cardiomyopathy and worsen overall prognosis."
+  "id": "cardiac_haemochromatosis",
+  "name": "cardiac haemochromatosis",
+  "aliases": [
+    "iron-overload cardiomyopathy",
+    "haemochromatotic heart disease"
   ],
-  "pathophysiology": "Excess iron, whether from dysregulated intestinal absorption in hereditary haemochromatosis or from repeated transfusion, saturates transferrin and circulates as non-transferrin-bound iron that is taken up by cardiomyocytes largely through L-type and T-type calcium channels. Intracellular labile iron catalyses Fenton-type generation of reactive oxygen species, causing lipid peroxidation, mitochondrial injury and impaired excitation-contraction coupling. Iron is deposited within lysosomes and myofibrils, initially stiffening the ventricle and impairing relaxation (a restrictive physiology), and later provoking myocyte loss and replacement fibrosis that culminate in ventricular dilatation and systolic failure. Iron loading of the sinoatrial node, atrioventricular node and conducting tissue underlies the associated bradyarrhythmias, heart block and atrial and ventricular tachyarrhythmias.",
-  "additionalDifferentials": [
-   "cardiac amyloidosis",
-   "cardiac sarcoidosis",
-   "Fabry cardiomyopathy",
-   "idiopathic restrictive cardiomyopathy",
-   "hypertrophic cardiomyopathy",
-   "dilated cardiomyopathy of other aetiology",
-   "glycogen storage cardiomyopathy"
-  ],
-  "additionalInvestigations": [
-   "cardiac magnetic resonance with myocardial T2* mapping",
-   "serum ferritin and transferrin saturation",
-   "HFE genotyping (C282Y, H63D) in suspected hereditary disease",
-   "echocardiography with diastolic and tissue Doppler assessment",
-   "ambulatory ECG monitoring for arrhythmia and conduction disease",
-   "liver iron quantification (MRI R2/R2*) and liver function tests",
-   "endocrine screen including fasting glucose, thyroid and gonadal axes"
-  ],
-  "redFlags": [
-   "new or progressive heart failure in a transfusion-dependent patient",
-   "high-grade atrioventricular block or symptomatic bradyarrhythmia",
-   "sustained ventricular arrhythmia or syncope",
-   "falling ejection fraction with markedly reduced myocardial T2*",
-   "rapid decompensation suggesting advanced iron-related systolic failure"
-  ],
-  "prognosis": "Prognosis is favourable when iron overload is detected and treated before irreversible fibrosis, with substantial recovery of ventricular function and rhythm; established dilated systolic failure or advanced conduction disease carries high morbidity and mortality, and cardiac iron loading remains a leading cause of death in transfusion-dependent thalassaemia.",
-  "pitfalls": [
-   "relying on serum ferritin, which does not reliably reflect myocardial iron burden",
-   "assuming a normal ejection fraction excludes dangerous iron loading",
-   "attributing arrhythmia or heart block to other causes and missing reversible iron toxicity",
-   "under-dosing or delaying chelation once cardiac involvement is evident",
-   "overlooking secondary transfusional overload because HFE testing is negative"
-  ],
-  "references": [
-   "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
-   "ESC Guidelines on cardiomyopathies",
-   "Thalassaemia International Federation guidelines for management of transfusion-dependent thalassaemia"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reduce myocardial iron burden as the mainstay: iron chelation with deferoxamine, deferasirox or deferiprone in transfusional overload, or therapeutic venesection in hereditary disease once anaemia allows",
-   "Intensify or combine chelation therapy when cardiac iron loading is demonstrated, aiming to reverse iron-mediated dysfunction before replacement fibrosis becomes established",
-   "Treat the dilated systolic phase with guideline-directed heart-failure therapy including diuretics, beta-blockers and renin-angiotensin blockade",
-   "Manage atrial and ventricular arrhythmias and conduction disease, with pacing for symptomatic heart block and antiarrhythmic or device therapy as indicated",
-   "Guide chelation intensity and monitor response with serial cardiac T2* magnetic resonance and echocardiography rather than serum ferritin alone",
-   "Refer for combined cardiology and haematology care, and consider advanced heart-failure options or transplantation in end-stage, iron-fixed disease",
-   "Offer HFE genotyping and cascade family screening in hereditary haemochromatosis, with counselling on inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "cardiac_haemochromatosis-pathway",
-   "title": "cardiac haemochromatosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Myocardial iron deposition may arise from hereditary haemochromatosis (typically HFE C282Y homozygosity) or from secondary/transfusional iron overload (thalassaemia major, sideroblastic anaemia, myelodysplasia); the secondary forms often",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: new or progressive heart failure in a transfusion-dependent patient",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: cardiac magnetic resonance with myocardial T2* mapping, serum ferritin and transferrin saturation, HFE genotyping (C282Y, H63D) in suspected hereditary disease"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reduce myocardial iron burden as the mainstay: iron chelation with deferoxamine, deferasirox or deferiprone in transfusional overload, or therapeutic venesection in hereditary disease once anaemia allows"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: relying on serum ferritin, which does not reliably reflect myocardial iron burden"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of cardiac haemochromatosis."
-  }
- ],
- "tables": [
-  {
-   "id": "cardiac_haemochromatosis-matrix",
-   "title": "cardiac haemochromatosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Myocardial iron deposition may arise from hereditary haemochromatosis (typically HFE C282Y homozygosity) or from",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "cardiovascular",
+  "specialty": "cardiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Braunwald's Heart Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Myocardial iron deposition may arise from hereditary haemochromatosis (typically HFE C282Y homozygosity) or from secondary/transfusional iron overload (thalassaemia major, sideroblastic anaemia, myelodysplasia); the secondary forms often cause the most severe cardiac disease because transfused iron bypasses regulatory absorption controls.",
+      "The cardiomyopathy characteristically evolves through an early restrictive/diastolic phase into a later dilated phase with systolic impairment, so a normal ejection fraction does not exclude significant iron loading.",
+      "Iron preferentially accumulates in ventricular myocardium and the conduction system, producing a mixed picture of heart failure plus atrial and ventricular arrhythmias and heart block.",
+      "Cardiac T2* magnetic resonance is the pivotal non-invasive tool: a myocardial T2* below the accepted threshold identifies clinically important iron loading before ejection fraction falls, and it guides intensification of chelation.",
+      "Serum ferritin and transferrin saturation reflect total body iron but correlate poorly with myocardial iron, so cardiac assessment must not rely on ferritin alone.",
+      "Iron-related cardiac dysfunction is substantially reversible if chelation (or venesection in primary disease) is instituted before end-stage fibrosis develops, distinguishing it from most other restrictive cardiomyopathies.",
+      "In transfusion-dependent patients, combining or intensifying iron chelators for cardiac indications can recover ventricular function and reduce arrhythmic death.",
+      "Coexisting endocrinopathy (diabetes, hypogonadism, hypothyroidism) and hepatic disease frequently accompany the cardiomyopathy and worsen overall prognosis."
     ],
-    [
-     "Key Investigations",
-     "cardiac magnetic resonance with myocardial T2* mapping, serum ferritin and transferrin saturation, HFE genotyping (C282Y, H63D)",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Excess iron, whether from dysregulated intestinal absorption in hereditary haemochromatosis or from repeated transfusion, saturates transferrin and circulates as non-transferrin-bound iron that is taken up by cardiomyocytes largely through L-type and T-type calcium channels. Intracellular labile iron catalyses Fenton-type generation of reactive oxygen species, causing lipid peroxidation, mitochondrial injury and impaired excitation-contraction coupling. Iron is deposited within lysosomes and myofibrils, initially stiffening the ventricle and impairing relaxation (a restrictive physiology), and later provoking myocyte loss and replacement fibrosis that culminate in ventricular dilatation and systolic failure. Iron loading of the sinoatrial node, atrioventricular node and conducting tissue underlies the associated bradyarrhythmias, heart block and atrial and ventricular tachyarrhythmias.",
+    "additionalDifferentials": [
+      "cardiac amyloidosis",
+      "cardiac sarcoidosis",
+      "Fabry cardiomyopathy",
+      "idiopathic restrictive cardiomyopathy",
+      "hypertrophic cardiomyopathy",
+      "dilated cardiomyopathy of other aetiology",
+      "glycogen storage cardiomyopathy"
     ],
-    [
-     "Primary Differentials",
-     "cardiac amyloidosis, cardiac sarcoidosis, Fabry cardiomyopathy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "cardiac magnetic resonance with myocardial T2* mapping",
+      "serum ferritin and transferrin saturation",
+      "HFE genotyping (C282Y, H63D) in suspected hereditary disease",
+      "echocardiography with diastolic and tissue Doppler assessment",
+      "ambulatory ECG monitoring for arrhythmia and conduction disease",
+      "liver iron quantification (MRI R2/R2*) and liver function tests",
+      "endocrine screen including fasting glucose, thyroid and gonadal axes"
     ],
-    [
-     "Management Strategy",
-     "Reduce myocardial iron burden as the mainstay: iron chelation with deferoxamine, deferasirox or deferiprone in transfusional",
-     "Core treatment modality"
+    "redFlags": [
+      "new or progressive heart failure in a transfusion-dependent patient",
+      "high-grade atrioventricular block or symptomatic bradyarrhythmia",
+      "sustained ventricular arrhythmia or syncope",
+      "falling ejection fraction with markedly reduced myocardial T2*",
+      "rapid decompensation suggesting advanced iron-related systolic failure"
     ],
-    [
-     "Clinical Pitfall",
-     "relying on serum ferritin, which does not reliably reflect myocardial iron burden",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is favourable when iron overload is detected and treated before irreversible fibrosis, with substantial recovery of ventricular function and rhythm; established dilated systolic failure or advanced conduction disease carries high morbidity and mortality, and cardiac iron loading remains a leading cause of death in transfusion-dependent thalassaemia.",
+    "pitfalls": [
+      "relying on serum ferritin, which does not reliably reflect myocardial iron burden",
+      "assuming a normal ejection fraction excludes dangerous iron loading",
+      "attributing arrhythmia or heart block to other causes and missing reversible iron toxicity",
+      "under-dosing or delaying chelation once cardiac involvement is evident",
+      "overlooking secondary transfusional overload because HFE testing is negative"
+    ],
+    "references": [
+      "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
+      "ESC Guidelines on cardiomyopathies",
+      "Thalassaemia International Federation guidelines for management of transfusion-dependent thalassaemia"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reduce myocardial iron burden as the mainstay: iron chelation with deferoxamine, deferasirox or deferiprone in transfusional overload, or therapeutic venesection in hereditary disease once anaemia allows",
+      "Intensify or combine chelation therapy when cardiac iron loading is demonstrated, aiming to reverse iron-mediated dysfunction before replacement fibrosis becomes established",
+      "Treat the dilated systolic phase with guideline-directed heart-failure therapy including diuretics, beta-blockers and renin-angiotensin blockade",
+      "Manage atrial and ventricular arrhythmias and conduction disease, with pacing for symptomatic heart block and antiarrhythmic or device therapy as indicated",
+      "Guide chelation intensity and monitor response with serial cardiac T2* magnetic resonance and echocardiography rather than serum ferritin alone",
+      "Refer for combined cardiology and haematology care, and consider advanced heart-failure options or transplantation in end-stage, iron-fixed disease",
+      "Offer HFE genotyping and cascade family screening in hereditary haemochromatosis, with counselling on inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for cardiac haemochromatosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "cardiac-haemochromatosis-real-image",
-   "title": "cardiac haemochromatosis: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "cardiac_haemochromatosis-pathway",
+      "title": "cardiac haemochromatosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Myocardial iron deposition may arise from hereditary haemochromatosis (typically HFE C282Y homozygosity) or from secondary/transfusional iron overload (thalassaemia major, sideroblastic anaemia, myelodysplasia); the secondary forms often",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: new or progressive heart failure in a transfusion-dependent patient",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: cardiac magnetic resonance with myocardial T2* mapping, serum ferritin and transferrin saturation, HFE genotyping (C282Y, H63D) in suspected hereditary disease"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reduce myocardial iron burden as the mainstay: iron chelation with deferoxamine, deferasirox or deferiprone in transfusional overload, or therapeutic venesection in hereditary disease once anaemia allows"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: relying on serum ferritin, which does not reliably reflect myocardial iron burden"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of cardiac haemochromatosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "cardiac_haemochromatosis-matrix",
+      "title": "cardiac haemochromatosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Myocardial iron deposition may arise from hereditary haemochromatosis (typically HFE C282Y homozygosity) or from",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "cardiac magnetic resonance with myocardial T2* mapping, serum ferritin and transferrin saturation, HFE genotyping (C282Y, H63D)",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "cardiac amyloidosis, cardiac sarcoidosis, Fabry cardiomyopathy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reduce myocardial iron burden as the mainstay: iron chelation with deferoxamine, deferasirox or deferiprone in transfusional",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "relying on serum ferritin, which does not reliably reflect myocardial iron burden",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for cardiac haemochromatosis."
+    }
+  ],
+  "diagrams": []
 }

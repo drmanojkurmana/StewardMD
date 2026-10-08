@@ -1,179 +1,157 @@
 {
- "id": "papillary_renal_cell_carcinoma",
- "name": "Papillary renal cell carcinoma",
- "aliases": [
-  "papillary RCC",
-  "pRCC",
-  "chromophil renal cell carcinoma"
- ],
- "class": "non_infective",
- "system": "Genitourinary / Kidney",
- "specialty": "Uro-oncology",
- "referenceOnly": true,
- "reference": {
-  "source": "Uro-oncology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The second most common subtype of renal cell carcinoma after clear cell disease",
-   "Often appears as a hypovascular renal mass, enhancing less avidly than clear cell tumours on contrast imaging",
-   "Frequently multifocal and bilateral, more so than other subtypes",
-   "Traditionally divided into type 1 and type 2, with type 2 generally behaving more aggressively",
-   "Hereditary forms include hereditary papillary renal carcinoma (MET) and hereditary leiomyomatosis and renal cell cancer (fumarate hydratase)",
-   "A fumarate hydratase-deficient tumour should prompt genetic assessment because of its aggressive nature",
-   "Localised low-grade disease generally carries a good prognosis after surgery"
+  "id": "papillary_renal_cell_carcinoma",
+  "name": "Papillary renal cell carcinoma",
+  "aliases": [
+    "papillary RCC",
+    "pRCC",
+    "chromophil renal cell carcinoma"
   ],
-  "pathophysiology": "Papillary renal cell carcinoma arises from the epithelium of the proximal or distal tubule and is characterised by papillary or tubulopapillary growth, often with foamy macrophages and haemosiderin. Type 1 tumours are frequently associated with gains of chromosomes 7 and 17 and, in hereditary cases, activating MET mutations. Type 2 tumours are more heterogeneous and include fumarate hydratase-deficient cancers linked to hereditary leiomyomatosis and renal cell cancer, which pursue an aggressive course. The relatively poor vascularity explains the characteristically modest enhancement on imaging.",
-  "additionalDifferentials": [
-   "Clear cell renal cell carcinoma",
-   "Chromophobe renal cell carcinoma",
-   "Collecting duct carcinoma",
-   "Metanephric adenoma",
-   "Fumarate hydratase-deficient renal cell carcinoma",
-   "MiT family translocation renal cell carcinoma"
-  ],
-  "additionalInvestigations": [
-   "Contrast-enhanced CT or MRI to characterise and stage the mass",
-   "Renal mass biopsy where it will guide management",
-   "Immunohistochemistry and, where indicated, fumarate hydratase staining",
-   "Genetic assessment when hereditary features or syndromic signs are present",
-   "Chest imaging and baseline bloods for staging of larger tumours"
-  ],
-  "redFlags": [
-   "High-grade or type 2 histology, especially fumarate hydratase-deficient tumours",
-   "Locally advanced or metastatic disease at presentation",
-   "Cutaneous or uterine leiomyomas suggesting a hereditary syndrome",
-   "Rapid growth of a previously indolent lesion"
-  ],
-  "prognosis": "Localised, low-grade type 1 tumours generally have a favourable prognosis after surgery; higher-grade type 2 and fumarate hydratase-deficient tumours carry a worse outlook with a greater risk of metastasis.",
-  "pitfalls": [
-   "Assuming a hypovascular mass is benign because it enhances poorly",
-   "Overlooking multifocal or contralateral tumours",
-   "Missing a hereditary syndrome in a young patient with an aggressive type 2 tumour",
-   "Applying clear cell prognostic assumptions to papillary disease"
-  ],
-  "references": [
-   "Campbell-Walsh-Wein Urology (standard reference)",
-   "WHO Classification of Urinary and Male Genital Tumours"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Recognize type 1 (MET pathway driven, indolent) versus type 2 (CDKN2A/SETD2/TFE3-TFEB, more aggressive, worst with FH mutation/HLRCC) to guide treatment intensity and follow up",
-   "For small localised masses, choose between radical nephrectomy, partial nephron sparing nephrectomy, thermal ablation, or active surveillance based on size, location, comorbidity and renal function, led by a urologist experienced in kidney cancer",
-   "Favor partial nephrectomy for small renal masses when feasible to preserve renal parenchyma",
-   "Offer active surveillance with serial imaging every three to six months for selected patients, particularly small or complex cystic lesions or significant competing comorbidity",
-   "For locally advanced disease with venous or caval extension, proceed to surgery (radical nephrectomy with thrombectomy, escalating to vascular reconstruction as needed) regardless of histology",
-   "Reserve regional lymphadenectomy mainly as a staging tool in node negative disease, used selectively, but perform it as standard when nodes are radiographically involved",
-   "Treat adjuvant systemic therapy after resection as not clearly established for papillary histology outside a clinical trial, and individualise through a genitourinary oncology multidisciplinary team, favoring trial enrollment when available",
-   "In MET-driven papillary disease, consider MET pathway inhibition (such as foretinib) as a biologically rational but only modestly effective option, and test for MET mutation to help select likely responders",
-   "For metastatic disease without papillary-specific data, apply general RCC systemic therapy classes (VEGF pathway tyrosine kinase inhibitors, mTOR inhibitors, immune checkpoint inhibitor combinations) sequenced by risk group and prior therapy, discussed with a genitourinary oncology multidisciplinary team",
-   "Prefer clinical trial enrollment for metastatic papillary RCC given the limited histology-specific evidence base",
-   "Suspect a germline MET mutation and refer for genetic assessment when multifocal, bilateral type 1 tumours are seen, and offer relatives cascade testing and renal imaging surveillance",
-   "Suspect HLRCC in aggressive, typically solitary type 2 tumours with FH mutation, especially with personal or family history of cutaneous or uterine leiomyomas, and pursue prompt genetic referral with closer surveillance",
-   "Monitor postoperatively with cross-sectional chest and abdominal imaging timed and intensified by stage, grade and histologic risk, with higher intensity for type 2 or FH-deficient tumours",
-   "Refer to urology for any renal mass needing biopsy, surgical planning or ablation candidacy, and to a genitourinary oncology multidisciplinary team for locally advanced, adjuvant, or any metastatic disease decision"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "papillary_renal_cell_carcinoma-pathway",
-   "title": "Papillary renal cell carcinoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The second most common subtype of renal cell carcinoma after clear cell disease",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: High-grade or type 2 histology, especially fumarate hydratase-deficient tumours",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Contrast-enhanced CT or MRI to characterise and stage the mass, Renal mass biopsy where it will guide management, Immunohistochemistry and, where indicated, fumarate hydratase staining"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Recognize type 1 (MET pathway driven, indolent) versus type 2 (CDKN2A/SETD2/TFE3-TFEB, more aggressive, worst with FH mutation/HLRCC) to guide treatment intensity and follow up"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a hypovascular mass is benign because it enhances poorly"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of papillary renal cell carcinoma."
-  }
- ],
- "tables": [
-  {
-   "id": "papillary_renal_cell_carcinoma-matrix",
-   "title": "Papillary renal cell carcinoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The second most common subtype of renal cell carcinoma after clear cell disease",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genitourinary / Kidney",
+  "specialty": "Uro-oncology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Uro-oncology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The second most common subtype of renal cell carcinoma after clear cell disease",
+      "Often appears as a hypovascular renal mass, enhancing less avidly than clear cell tumours on contrast imaging",
+      "Frequently multifocal and bilateral, more so than other subtypes",
+      "Traditionally divided into type 1 and type 2, with type 2 generally behaving more aggressively",
+      "Hereditary forms include hereditary papillary renal carcinoma (MET) and hereditary leiomyomatosis and renal cell cancer (fumarate hydratase)",
+      "A fumarate hydratase-deficient tumour should prompt genetic assessment because of its aggressive nature",
+      "Localised low-grade disease generally carries a good prognosis after surgery"
     ],
-    [
-     "Key Investigations",
-     "Contrast-enhanced CT or MRI to characterise and stage the mass, Renal mass biopsy where it will guide management,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Papillary renal cell carcinoma arises from the epithelium of the proximal or distal tubule and is characterised by papillary or tubulopapillary growth, often with foamy macrophages and haemosiderin. Type 1 tumours are frequently associated with gains of chromosomes 7 and 17 and, in hereditary cases, activating MET mutations. Type 2 tumours are more heterogeneous and include fumarate hydratase-deficient cancers linked to hereditary leiomyomatosis and renal cell cancer, which pursue an aggressive course. The relatively poor vascularity explains the characteristically modest enhancement on imaging.",
+    "additionalDifferentials": [
+      "Clear cell renal cell carcinoma",
+      "Chromophobe renal cell carcinoma",
+      "Collecting duct carcinoma",
+      "Metanephric adenoma",
+      "Fumarate hydratase-deficient renal cell carcinoma",
+      "MiT family translocation renal cell carcinoma"
     ],
-    [
-     "Primary Differentials",
-     "Clear cell renal cell carcinoma, Chromophobe renal cell carcinoma, Collecting duct carcinoma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Contrast-enhanced CT or MRI to characterise and stage the mass",
+      "Renal mass biopsy where it will guide management",
+      "Immunohistochemistry and, where indicated, fumarate hydratase staining",
+      "Genetic assessment when hereditary features or syndromic signs are present",
+      "Chest imaging and baseline bloods for staging of larger tumours"
     ],
-    [
-     "Management Strategy",
-     "Recognize type 1 (MET pathway driven, indolent) versus type 2 (CDKN2A/SETD2/TFE3-TFEB, more aggressive, worst with FH",
-     "Core treatment modality"
+    "redFlags": [
+      "High-grade or type 2 histology, especially fumarate hydratase-deficient tumours",
+      "Locally advanced or metastatic disease at presentation",
+      "Cutaneous or uterine leiomyomas suggesting a hereditary syndrome",
+      "Rapid growth of a previously indolent lesion"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a hypovascular mass is benign because it enhances poorly",
-     "Prevent diagnostic or management error"
+    "prognosis": "Localised, low-grade type 1 tumours generally have a favourable prognosis after surgery; higher-grade type 2 and fumarate hydratase-deficient tumours carry a worse outlook with a greater risk of metastasis.",
+    "pitfalls": [
+      "Assuming a hypovascular mass is benign because it enhances poorly",
+      "Overlooking multifocal or contralateral tumours",
+      "Missing a hereditary syndrome in a young patient with an aggressive type 2 tumour",
+      "Applying clear cell prognostic assumptions to papillary disease"
+    ],
+    "references": [
+      "Campbell-Walsh-Wein Urology (standard reference)",
+      "WHO Classification of Urinary and Male Genital Tumours"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Recognize type 1 (MET pathway driven, indolent) versus type 2 (CDKN2A/SETD2/TFE3-TFEB, more aggressive, worst with FH mutation/HLRCC) to guide treatment intensity and follow up",
+      "For small localised masses, choose between radical nephrectomy, partial nephron sparing nephrectomy, thermal ablation, or active surveillance based on size, location, comorbidity and renal function, led by a urologist experienced in kidney cancer",
+      "Favor partial nephrectomy for small renal masses when feasible to preserve renal parenchyma",
+      "Offer active surveillance with serial imaging every three to six months for selected patients, particularly small or complex cystic lesions or significant competing comorbidity",
+      "For locally advanced disease with venous or caval extension, proceed to surgery (radical nephrectomy with thrombectomy, escalating to vascular reconstruction as needed) regardless of histology",
+      "Reserve regional lymphadenectomy mainly as a staging tool in node negative disease, used selectively, but perform it as standard when nodes are radiographically involved",
+      "Treat adjuvant systemic therapy after resection as not clearly established for papillary histology outside a clinical trial, and individualise through a genitourinary oncology multidisciplinary team, favoring trial enrollment when available",
+      "In MET-driven papillary disease, consider MET pathway inhibition (such as foretinib) as a biologically rational but only modestly effective option, and test for MET mutation to help select likely responders",
+      "For metastatic disease without papillary-specific data, apply general RCC systemic therapy classes (VEGF pathway tyrosine kinase inhibitors, mTOR inhibitors, immune checkpoint inhibitor combinations) sequenced by risk group and prior therapy, discussed with a genitourinary oncology multidisciplinary team",
+      "Prefer clinical trial enrollment for metastatic papillary RCC given the limited histology-specific evidence base",
+      "Suspect a germline MET mutation and refer for genetic assessment when multifocal, bilateral type 1 tumours are seen, and offer relatives cascade testing and renal imaging surveillance",
+      "Suspect HLRCC in aggressive, typically solitary type 2 tumours with FH mutation, especially with personal or family history of cutaneous or uterine leiomyomas, and pursue prompt genetic referral with closer surveillance",
+      "Monitor postoperatively with cross-sectional chest and abdominal imaging timed and intensified by stage, grade and histologic risk, with higher intensity for type 2 or FH-deficient tumours",
+      "Refer to urology for any renal mass needing biopsy, surgical planning or ablation candidacy, and to a genitourinary oncology multidisciplinary team for locally advanced, adjuvant, or any metastatic disease decision"
     ]
-   ],
-   "caption": "Overview comparison matrix for papillary renal cell carcinoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "papillary-renal-cell-carcinoma-real-image",
-   "title": "Papillary renal cell carcinoma: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "papillary_renal_cell_carcinoma-pathway",
+      "title": "Papillary renal cell carcinoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The second most common subtype of renal cell carcinoma after clear cell disease",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: High-grade or type 2 histology, especially fumarate hydratase-deficient tumours",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Contrast-enhanced CT or MRI to characterise and stage the mass, Renal mass biopsy where it will guide management, Immunohistochemistry and, where indicated, fumarate hydratase staining"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Recognize type 1 (MET pathway driven, indolent) versus type 2 (CDKN2A/SETD2/TFE3-TFEB, more aggressive, worst with FH mutation/HLRCC) to guide treatment intensity and follow up"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a hypovascular mass is benign because it enhances poorly"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of papillary renal cell carcinoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "papillary_renal_cell_carcinoma-matrix",
+      "title": "Papillary renal cell carcinoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The second most common subtype of renal cell carcinoma after clear cell disease",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Contrast-enhanced CT or MRI to characterise and stage the mass, Renal mass biopsy where it will guide management,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Clear cell renal cell carcinoma, Chromophobe renal cell carcinoma, Collecting duct carcinoma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Recognize type 1 (MET pathway driven, indolent) versus type 2 (CDKN2A/SETD2/TFE3-TFEB, more aggressive, worst with FH",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a hypovascular mass is benign because it enhances poorly",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for papillary renal cell carcinoma."
+    }
+  ],
+  "diagrams": []
 }

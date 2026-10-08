@@ -1,172 +1,150 @@
 {
- "id": "oxygen_toxicity",
- "name": "Oxygen toxicity",
- "aliases": [
-  "oxygen poisoning",
-  "hyperoxia",
-  "CNS oxygen toxicity",
-  "pulmonary oxygen toxicity"
- ],
- "class": "non_infective",
- "system": "Environmental / Emergency",
- "specialty": "Emergency & Wilderness Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Auerbach's Wilderness Medicine / Bove and Davis' Diving Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Results from breathing oxygen at a raised partial pressure, as occurs with deep diving on oxygen-enriched mixtures or during hyperbaric oxygen therapy",
-   "The central nervous system form comes on relatively acutely at high oxygen partial pressure and can culminate in a generalised seizure, which is especially dangerous underwater",
-   "Warning symptoms of CNS toxicity may include visual disturbance, tinnitus, nausea, twitching (notably facial), irritability, and dizziness, though a seizure can occur without warning",
-   "The pulmonary form develops with prolonged exposure to elevated oxygen and causes retrosternal burning, cough, and progressive reduction in lung function",
-   "Management is to remove or reduce the excess oxygen exposure promptly, after which the effects are largely reversible",
-   "A convulsion in the water risks drowning, so prevention through oxygen exposure limits is critical",
-   "Susceptibility varies between individuals and is increased by factors such as carbon dioxide retention and immersion"
+  "id": "oxygen_toxicity",
+  "name": "Oxygen toxicity",
+  "aliases": [
+    "oxygen poisoning",
+    "hyperoxia",
+    "CNS oxygen toxicity",
+    "pulmonary oxygen toxicity"
   ],
-  "pathophysiology": "Oxygen toxicity is caused by excessive generation of reactive oxygen species when tissues are exposed to a high partial pressure of oxygen that overwhelms antioxidant defences. In the central nervous system, high oxygen partial pressure disturbs neuronal excitability and can trigger seizures, typically after relatively short high-level exposures. In the lungs, more prolonged hyperoxia injures the alveolar-capillary membrane and airway epithelium, producing inflammation, tracheobronchial irritation, and impaired gas exchange. Both forms depend on the dose and duration of oxygen exposure and are largely reversible once exposure is curtailed.",
-  "additionalDifferentials": [
-   "Nitrogen narcosis",
-   "Carbon dioxide retention (hypercapnia)",
-   "Decompression illness with neurological features",
-   "Contaminated gas or carbon monoxide poisoning",
-   "Epilepsy from another cause",
-   "Pulmonary barotrauma or immersion pulmonary oedema (for the lung form)"
-  ],
-  "additionalInvestigations": [
-   "Clinical recognition based on oxygen exposure history and the dive or treatment profile",
-   "Review of the breathing gas oxygen fraction and depth or hyperbaric pressure",
-   "Neurological assessment following any seizure to exclude other causes",
-   "Pulmonary function assessment and chest examination for suspected pulmonary toxicity",
-   "Exclusion of hypercapnia and gas contamination as contributors"
-  ],
-  "redFlags": [
-   "Seizure occurring underwater, with a high risk of drowning",
-   "Progressive respiratory symptoms with declining lung function",
-   "Persisting neurological deficit after the event, suggesting an alternative diagnosis",
-   "Coexisting decompression illness or gas contamination"
-  ],
-  "prognosis": "Both central nervous system and pulmonary oxygen toxicity are generally reversible once the excessive oxygen exposure is stopped; the principal danger is a seizure occurring underwater leading to drowning rather than lasting toxicity itself.",
-  "pitfalls": [
-   "Exceeding recommended oxygen exposure limits on enriched gas mixtures",
-   "Assuming a warning aura always precedes a seizure",
-   "Confusing CNS oxygen toxicity with nitrogen narcosis or decompression illness",
-   "Overlooking carbon dioxide retention, which lowers the seizure threshold"
-  ],
-  "references": [
-   "Auerbach's Wilderness Medicine",
-   "Bove and Davis' Diving Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Immediately reduce or remove the excess oxygen exposure by switching the diver to a lower oxygen fraction or ascending shallower, and by lowering the inspired oxygen fraction during hyperbaric therapy, after which effects are largely reversible",
-   "During a central nervous system seizure protect the airway and prevent aspiration, and in the water keep the airway sealed and control ascent to avoid drowning and pulmonary barotrauma",
-   "Recognise premonitory features such as visual disturbance, tinnitus, nausea, facial twitching and irritability as a prompt to curtail exposure, while noting a seizure can occur without warning",
-   "Provide supportive respiratory care for the pulmonary form, allowing recovery of lung function once hyperoxia is stopped",
-   "Exclude and correct contributors such as hypercapnia and breathing-gas contamination",
-   "Prevent recurrence by adhering to oxygen partial-pressure and duration exposure limits and safe gas planning for diving and hyperbaric treatment"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "oxygen_toxicity-pathway",
-   "title": "Oxygen toxicity: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Results from breathing oxygen at a raised partial pressure, as occurs with deep diving on oxygen-enriched mixtures or during hyperbaric oxygen therapy",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Seizure occurring underwater, with a high risk of drowning",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical recognition based on oxygen exposure history and the dive or treatment profile, Review of the breathing gas oxygen fraction and depth or hyperbaric pressure, Neurological assessment following any seizure to"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Immediately reduce or remove the excess oxygen exposure by switching the diver to a lower oxygen fraction or ascending shallower, and by lowering the inspired oxygen fraction during hyperbaric therapy, after which"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Exceeding recommended oxygen exposure limits on enriched gas mixtures"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of oxygen toxicity."
-  }
- ],
- "tables": [
-  {
-   "id": "oxygen_toxicity-matrix",
-   "title": "Oxygen toxicity: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Results from breathing oxygen at a raised partial pressure, as occurs with deep diving on oxygen-enriched mixtures or during",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Environmental / Emergency",
+  "specialty": "Emergency & Wilderness Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Auerbach's Wilderness Medicine / Bove and Davis' Diving Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Results from breathing oxygen at a raised partial pressure, as occurs with deep diving on oxygen-enriched mixtures or during hyperbaric oxygen therapy",
+      "The central nervous system form comes on relatively acutely at high oxygen partial pressure and can culminate in a generalised seizure, which is especially dangerous underwater",
+      "Warning symptoms of CNS toxicity may include visual disturbance, tinnitus, nausea, twitching (notably facial), irritability, and dizziness, though a seizure can occur without warning",
+      "The pulmonary form develops with prolonged exposure to elevated oxygen and causes retrosternal burning, cough, and progressive reduction in lung function",
+      "Management is to remove or reduce the excess oxygen exposure promptly, after which the effects are largely reversible",
+      "A convulsion in the water risks drowning, so prevention through oxygen exposure limits is critical",
+      "Susceptibility varies between individuals and is increased by factors such as carbon dioxide retention and immersion"
     ],
-    [
-     "Key Investigations",
-     "Clinical recognition based on oxygen exposure history and the dive or treatment profile, Review of the breathing gas oxygen",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Oxygen toxicity is caused by excessive generation of reactive oxygen species when tissues are exposed to a high partial pressure of oxygen that overwhelms antioxidant defences. In the central nervous system, high oxygen partial pressure disturbs neuronal excitability and can trigger seizures, typically after relatively short high-level exposures. In the lungs, more prolonged hyperoxia injures the alveolar-capillary membrane and airway epithelium, producing inflammation, tracheobronchial irritation, and impaired gas exchange. Both forms depend on the dose and duration of oxygen exposure and are largely reversible once exposure is curtailed.",
+    "additionalDifferentials": [
+      "Nitrogen narcosis",
+      "Carbon dioxide retention (hypercapnia)",
+      "Decompression illness with neurological features",
+      "Contaminated gas or carbon monoxide poisoning",
+      "Epilepsy from another cause",
+      "Pulmonary barotrauma or immersion pulmonary oedema (for the lung form)"
     ],
-    [
-     "Primary Differentials",
-     "Nitrogen narcosis, Carbon dioxide retention (hypercapnia), Decompression illness with neurological features",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical recognition based on oxygen exposure history and the dive or treatment profile",
+      "Review of the breathing gas oxygen fraction and depth or hyperbaric pressure",
+      "Neurological assessment following any seizure to exclude other causes",
+      "Pulmonary function assessment and chest examination for suspected pulmonary toxicity",
+      "Exclusion of hypercapnia and gas contamination as contributors"
     ],
-    [
-     "Management Strategy",
-     "Immediately reduce or remove the excess oxygen exposure by switching the diver to a lower oxygen fraction or ascending shallower,",
-     "Core treatment modality"
+    "redFlags": [
+      "Seizure occurring underwater, with a high risk of drowning",
+      "Progressive respiratory symptoms with declining lung function",
+      "Persisting neurological deficit after the event, suggesting an alternative diagnosis",
+      "Coexisting decompression illness or gas contamination"
     ],
-    [
-     "Clinical Pitfall",
-     "Exceeding recommended oxygen exposure limits on enriched gas mixtures",
-     "Prevent diagnostic or management error"
+    "prognosis": "Both central nervous system and pulmonary oxygen toxicity are generally reversible once the excessive oxygen exposure is stopped; the principal danger is a seizure occurring underwater leading to drowning rather than lasting toxicity itself.",
+    "pitfalls": [
+      "Exceeding recommended oxygen exposure limits on enriched gas mixtures",
+      "Assuming a warning aura always precedes a seizure",
+      "Confusing CNS oxygen toxicity with nitrogen narcosis or decompression illness",
+      "Overlooking carbon dioxide retention, which lowers the seizure threshold"
+    ],
+    "references": [
+      "Auerbach's Wilderness Medicine",
+      "Bove and Davis' Diving Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Immediately reduce or remove the excess oxygen exposure by switching the diver to a lower oxygen fraction or ascending shallower, and by lowering the inspired oxygen fraction during hyperbaric therapy, after which effects are largely reversible",
+      "During a central nervous system seizure protect the airway and prevent aspiration, and in the water keep the airway sealed and control ascent to avoid drowning and pulmonary barotrauma",
+      "Recognise premonitory features such as visual disturbance, tinnitus, nausea, facial twitching and irritability as a prompt to curtail exposure, while noting a seizure can occur without warning",
+      "Provide supportive respiratory care for the pulmonary form, allowing recovery of lung function once hyperoxia is stopped",
+      "Exclude and correct contributors such as hypercapnia and breathing-gas contamination",
+      "Prevent recurrence by adhering to oxygen partial-pressure and duration exposure limits and safe gas planning for diving and hyperbaric treatment"
     ]
-   ],
-   "caption": "Overview comparison matrix for oxygen toxicity."
-  }
- ],
- "diagrams": [
-  {
-   "id": "oxygen-toxicity-real-image",
-   "title": "Oxygen toxicity: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "oxygen_toxicity-pathway",
+      "title": "Oxygen toxicity: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Results from breathing oxygen at a raised partial pressure, as occurs with deep diving on oxygen-enriched mixtures or during hyperbaric oxygen therapy",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Seizure occurring underwater, with a high risk of drowning",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical recognition based on oxygen exposure history and the dive or treatment profile, Review of the breathing gas oxygen fraction and depth or hyperbaric pressure, Neurological assessment following any seizure to"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Immediately reduce or remove the excess oxygen exposure by switching the diver to a lower oxygen fraction or ascending shallower, and by lowering the inspired oxygen fraction during hyperbaric therapy, after which"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Exceeding recommended oxygen exposure limits on enriched gas mixtures"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of oxygen toxicity."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "oxygen_toxicity-matrix",
+      "title": "Oxygen toxicity: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Results from breathing oxygen at a raised partial pressure, as occurs with deep diving on oxygen-enriched mixtures or during",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical recognition based on oxygen exposure history and the dive or treatment profile, Review of the breathing gas oxygen",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Nitrogen narcosis, Carbon dioxide retention (hypercapnia), Decompression illness with neurological features",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Immediately reduce or remove the excess oxygen exposure by switching the diver to a lower oxygen fraction or ascending shallower,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Exceeding recommended oxygen exposure limits on enriched gas mixtures",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for oxygen toxicity."
+    }
+  ],
+  "diagrams": []
 }

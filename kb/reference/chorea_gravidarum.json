@@ -1,178 +1,156 @@
 {
- "id": "chorea_gravidarum",
- "name": "chorea gravidarum",
- "aliases": [
-  "gestational chorea",
-  "pregnancy-associated chorea"
- ],
- "class": "non_infective",
- "system": "nervous system",
- "specialty": "neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff's Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Chorea gravidarum is a descriptive term for any chorea arising during pregnancy, not a single disease entity; it reflects an underlying predisposition unmasked by the hormonal state.",
-   "Historically most cases followed prior Sydenham chorea or rheumatic fever, but with declining rheumatic disease, antiphospholipid syndrome and systemic lupus erythematosus are now leading causes.",
-   "Onset is typically in the first half of pregnancy and often remits spontaneously after delivery or termination.",
-   "A comparable oestrogen-related mechanism produces chorea with combined oral contraceptive use, supporting a hormonal trigger.",
-   "Chorea may be unilateral or generalised and can be severe enough to interfere with feeding, sleep and safety.",
-   "A prior episode strongly predicts recurrence in subsequent pregnancies or with oestrogen exposure.",
-   "Thorough evaluation for an underlying secondary cause is mandatory, as management and prognosis depend on the aetiology rather than the pregnancy itself.",
-   "Treatment is reserved for disabling symptoms, favouring the lowest effective dose of agents with the most reassuring gestational safety profile after specialist counselling."
+  "id": "chorea_gravidarum",
+  "name": "chorea gravidarum",
+  "aliases": [
+    "gestational chorea",
+    "pregnancy-associated chorea"
   ],
-  "pathophysiology": "Chorea gravidarum arises when the physiological rise in oestrogen and progesterone during pregnancy sensitises or unmasks striatal dopaminergic pathways in a predisposed individual. Oestrogens are thought to modulate dopamine receptor sensitivity within the basal ganglia, and in those with prior basal ganglia injury (notably previous Sydenham chorea) or circulating antibodies (antiphospholipid or anti-basal ganglia antibodies in lupus), this heightened dopaminergic responsiveness precipitates dysfunction of the striatal indirect pathway. The resultant reduction in inhibitory output produces disinhibited involuntary movements. The frequent postpartum remission mirrors the fall in sex hormone levels, and the same mechanism explains contraceptive-induced chorea.",
-  "additionalDifferentials": [
-   "Antiphospholipid antibody syndrome",
-   "Systemic lupus erythematosus",
-   "Recurrent or persistent Sydenham chorea",
-   "Wilson disease unmasked in pregnancy",
-   "Thyrotoxicosis-associated chorea",
-   "Polycythaemia and other metabolic choreas",
-   "Functional (psychogenic) movement disorder"
-  ],
-  "additionalInvestigations": [
-   "Antiphospholipid antibodies (lupus anticoagulant, anticardiolipin, anti-beta-2-glycoprotein I)",
-   "Antinuclear and extractable nuclear antigen antibodies for lupus",
-   "Anti-streptolysin O / anti-DNase B titres and echocardiography if rheumatic history",
-   "Thyroid function tests",
-   "Serum caeruloplasmin, copper and slit-lamp examination for Wilson disease",
-   "Full blood count for polycythaemia",
-   "MRI brain (used selectively, with appropriate gestational precautions)"
-  ],
-  "redFlags": [
-   "Features of antiphospholipid syndrome such as thrombosis or recurrent pregnancy loss requiring anticoagulation assessment",
-   "Systemic features of active lupus (rash, arthritis, nephritis, cytopenias)",
-   "Severe chorea threatening maternal exhaustion, rhabdomyolysis or fetal wellbeing",
-   "New neurological or cardiac signs suggesting an alternative or additional diagnosis",
-   "Hyperthyroid crisis features accompanying the chorea"
-  ],
-  "prognosis": "Chorea gravidarum usually remits after delivery or termination and carries a good prognosis when no serious underlying disorder is present, although it commonly recurs in later pregnancies or with oestrogen exposure. Overall outlook is determined by the underlying cause, particularly antiphospholipid syndrome or lupus.",
-  "pitfalls": [
-   "Regarding chorea gravidarum as a benign self-contained diagnosis and failing to investigate for antiphospholipid syndrome or lupus.",
-   "Overlooking a missed antiphospholipid syndrome that also endangers the pregnancy through thrombosis.",
-   "Prescribing dopamine-blocking drugs without specialist counselling on gestational safety.",
-   "Missing thyrotoxicosis or Wilson disease as reversible contributors.",
-   "Not advising on recurrence risk with future pregnancies and oestrogen-containing contraception."
-  ],
-  "references": [
-   "Bradley and Daroff's Neurology in Clinical Practice",
-   "Adams and Victor's Principles of Neurology",
-   "Movement Disorders in pregnancy - standard neurology reference reviews"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat the unmasked underlying disorder — anticoagulation or antiplatelet therapy with rheumatology input for antiphospholipid syndrome, immunosuppression for lupus, and antistreptococcal and rheumatic follow-up where prior Sydenham chorea is implicated",
-   "Withdraw oestrogen exposure by stopping combined oral contraceptives and counselling against oestrogen-containing preparations, as this often abolishes the chorea",
-   "Reserve symptomatic dopamine-blocking or dopamine-depleting agents such as a typical neuroleptic or a benzodiazepine for chorea severe enough to threaten feeding, sleep or safety, choosing agents with the most favourable pregnancy-safety profile",
-   "Provide supportive care with a safe environment to prevent injury and attention to nutrition, hydration and rest during the hyperkinetic phase",
-   "Monitor for spontaneous remission after delivery or termination and for rheumatic carditis with echocardiography when a rheumatic aetiology is suspected",
-   "Coordinate joint obstetric, neurology and rheumatology care with a maternal-foetal medicine plan for delivery",
-   "Counsel about the high likelihood of recurrence in future pregnancies or with later oestrogen exposure"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "chorea_gravidarum-pathway",
-   "title": "chorea gravidarum: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Chorea gravidarum is a descriptive term for any chorea arising during pregnancy, not a single disease entity; it reflects an underlying predisposition unmasked by the hormonal state.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Features of antiphospholipid syndrome such as thrombosis or recurrent pregnancy loss requiring anticoagulation assessment",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Antiphospholipid antibodies (lupus anticoagulant, anticardiolipin, anti-beta-2-glycoprotein I), Antinuclear and extractable nuclear antigen antibodies for lupus, Anti-streptolysin O / anti-DNase B titres and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat the unmasked underlying disorder - anticoagulation or antiplatelet therapy with rheumatology input for antiphospholipid syndrome, immunosuppression for lupus, and antistreptococcal and rheumatic follow-up where"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Regarding chorea gravidarum as a benign self-contained diagnosis and failing to investigate for antiphospholipid syndrome or lupus."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of chorea gravidarum."
-  }
- ],
- "tables": [
-  {
-   "id": "chorea_gravidarum-matrix",
-   "title": "chorea gravidarum: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Chorea gravidarum is a descriptive term for any chorea arising during pregnancy, not a single disease entity; it reflects an",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "nervous system",
+  "specialty": "neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff's Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Chorea gravidarum is a descriptive term for any chorea arising during pregnancy, not a single disease entity; it reflects an underlying predisposition unmasked by the hormonal state.",
+      "Historically most cases followed prior Sydenham chorea or rheumatic fever, but with declining rheumatic disease, antiphospholipid syndrome and systemic lupus erythematosus are now leading causes.",
+      "Onset is typically in the first half of pregnancy and often remits spontaneously after delivery or termination.",
+      "A comparable oestrogen-related mechanism produces chorea with combined oral contraceptive use, supporting a hormonal trigger.",
+      "Chorea may be unilateral or generalised and can be severe enough to interfere with feeding, sleep and safety.",
+      "A prior episode strongly predicts recurrence in subsequent pregnancies or with oestrogen exposure.",
+      "Thorough evaluation for an underlying secondary cause is mandatory, as management and prognosis depend on the aetiology rather than the pregnancy itself.",
+      "Treatment is reserved for disabling symptoms, favouring the lowest effective dose of agents with the most reassuring gestational safety profile after specialist counselling."
     ],
-    [
-     "Key Investigations",
-     "Antiphospholipid antibodies (lupus anticoagulant, anticardiolipin, anti-beta-2-glycoprotein I), Antinuclear and extractable",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Chorea gravidarum arises when the physiological rise in oestrogen and progesterone during pregnancy sensitises or unmasks striatal dopaminergic pathways in a predisposed individual. Oestrogens are thought to modulate dopamine receptor sensitivity within the basal ganglia, and in those with prior basal ganglia injury (notably previous Sydenham chorea) or circulating antibodies (antiphospholipid or anti-basal ganglia antibodies in lupus), this heightened dopaminergic responsiveness precipitates dysfunction of the striatal indirect pathway. The resultant reduction in inhibitory output produces disinhibited involuntary movements. The frequent postpartum remission mirrors the fall in sex hormone levels, and the same mechanism explains contraceptive-induced chorea.",
+    "additionalDifferentials": [
+      "Antiphospholipid antibody syndrome",
+      "Systemic lupus erythematosus",
+      "Recurrent or persistent Sydenham chorea",
+      "Wilson disease unmasked in pregnancy",
+      "Thyrotoxicosis-associated chorea",
+      "Polycythaemia and other metabolic choreas",
+      "Functional (psychogenic) movement disorder"
     ],
-    [
-     "Primary Differentials",
-     "Antiphospholipid antibody syndrome, Systemic lupus erythematosus, Recurrent or persistent Sydenham chorea",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Antiphospholipid antibodies (lupus anticoagulant, anticardiolipin, anti-beta-2-glycoprotein I)",
+      "Antinuclear and extractable nuclear antigen antibodies for lupus",
+      "Anti-streptolysin O / anti-DNase B titres and echocardiography if rheumatic history",
+      "Thyroid function tests",
+      "Serum caeruloplasmin, copper and slit-lamp examination for Wilson disease",
+      "Full blood count for polycythaemia",
+      "MRI brain (used selectively, with appropriate gestational precautions)"
     ],
-    [
-     "Management Strategy",
-     "Treat the unmasked underlying disorder - anticoagulation or antiplatelet therapy with rheumatology input for antiphospholipid",
-     "Core treatment modality"
+    "redFlags": [
+      "Features of antiphospholipid syndrome such as thrombosis or recurrent pregnancy loss requiring anticoagulation assessment",
+      "Systemic features of active lupus (rash, arthritis, nephritis, cytopenias)",
+      "Severe chorea threatening maternal exhaustion, rhabdomyolysis or fetal wellbeing",
+      "New neurological or cardiac signs suggesting an alternative or additional diagnosis",
+      "Hyperthyroid crisis features accompanying the chorea"
     ],
-    [
-     "Clinical Pitfall",
-     "Regarding chorea gravidarum as a benign self-contained diagnosis and failing to investigate for antiphospholipid syndrome or",
-     "Prevent diagnostic or management error"
+    "prognosis": "Chorea gravidarum usually remits after delivery or termination and carries a good prognosis when no serious underlying disorder is present, although it commonly recurs in later pregnancies or with oestrogen exposure. Overall outlook is determined by the underlying cause, particularly antiphospholipid syndrome or lupus.",
+    "pitfalls": [
+      "Regarding chorea gravidarum as a benign self-contained diagnosis and failing to investigate for antiphospholipid syndrome or lupus.",
+      "Overlooking a missed antiphospholipid syndrome that also endangers the pregnancy through thrombosis.",
+      "Prescribing dopamine-blocking drugs without specialist counselling on gestational safety.",
+      "Missing thyrotoxicosis or Wilson disease as reversible contributors.",
+      "Not advising on recurrence risk with future pregnancies and oestrogen-containing contraception."
+    ],
+    "references": [
+      "Bradley and Daroff's Neurology in Clinical Practice",
+      "Adams and Victor's Principles of Neurology",
+      "Movement Disorders in pregnancy - standard neurology reference reviews"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat the unmasked underlying disorder — anticoagulation or antiplatelet therapy with rheumatology input for antiphospholipid syndrome, immunosuppression for lupus, and antistreptococcal and rheumatic follow-up where prior Sydenham chorea is implicated",
+      "Withdraw oestrogen exposure by stopping combined oral contraceptives and counselling against oestrogen-containing preparations, as this often abolishes the chorea",
+      "Reserve symptomatic dopamine-blocking or dopamine-depleting agents such as a typical neuroleptic or a benzodiazepine for chorea severe enough to threaten feeding, sleep or safety, choosing agents with the most favourable pregnancy-safety profile",
+      "Provide supportive care with a safe environment to prevent injury and attention to nutrition, hydration and rest during the hyperkinetic phase",
+      "Monitor for spontaneous remission after delivery or termination and for rheumatic carditis with echocardiography when a rheumatic aetiology is suspected",
+      "Coordinate joint obstetric, neurology and rheumatology care with a maternal-foetal medicine plan for delivery",
+      "Counsel about the high likelihood of recurrence in future pregnancies or with later oestrogen exposure"
     ]
-   ],
-   "caption": "Overview comparison matrix for chorea gravidarum."
-  }
- ],
- "diagrams": [
-  {
-   "id": "chorea-gravidarum-real-image",
-   "title": "chorea gravidarum: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "chorea_gravidarum-pathway",
+      "title": "chorea gravidarum: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Chorea gravidarum is a descriptive term for any chorea arising during pregnancy, not a single disease entity; it reflects an underlying predisposition unmasked by the hormonal state.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Features of antiphospholipid syndrome such as thrombosis or recurrent pregnancy loss requiring anticoagulation assessment",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Antiphospholipid antibodies (lupus anticoagulant, anticardiolipin, anti-beta-2-glycoprotein I), Antinuclear and extractable nuclear antigen antibodies for lupus, Anti-streptolysin O / anti-DNase B titres and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat the unmasked underlying disorder - anticoagulation or antiplatelet therapy with rheumatology input for antiphospholipid syndrome, immunosuppression for lupus, and antistreptococcal and rheumatic follow-up where"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Regarding chorea gravidarum as a benign self-contained diagnosis and failing to investigate for antiphospholipid syndrome or lupus."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of chorea gravidarum."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "chorea_gravidarum-matrix",
+      "title": "chorea gravidarum: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Chorea gravidarum is a descriptive term for any chorea arising during pregnancy, not a single disease entity; it reflects an",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Antiphospholipid antibodies (lupus anticoagulant, anticardiolipin, anti-beta-2-glycoprotein I), Antinuclear and extractable",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Antiphospholipid antibody syndrome, Systemic lupus erythematosus, Recurrent or persistent Sydenham chorea",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat the unmasked underlying disorder - anticoagulation or antiplatelet therapy with rheumatology input for antiphospholipid",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Regarding chorea gravidarum as a benign self-contained diagnosis and failing to investigate for antiphospholipid syndrome or",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for chorea gravidarum."
+    }
+  ],
+  "diagrams": []
 }

@@ -1,174 +1,152 @@
 {
- "id": "blau_syndrome",
- "name": "Blau syndrome",
- "aliases": [
-  "NOD2",
-  "CARD15",
-  "early-onset sarcoidosis",
-  "familial juvenile systemic granulomatosis",
-  "paediatric granulomatous arthritis"
- ],
- "class": "non_infective",
- "system": "Immunology / Genetics",
- "specialty": "Clinical Immunology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Firestein & Kelley's Textbook of Rheumatology / Cassidy's Textbook of Pediatric Rheumatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An autosomal dominant granulomatous autoinflammatory disease caused by gain-of-function mutations in NOD2 (CARD15)",
-   "The classic triad is granulomatous polyarthritis, dermatitis and uveitis, typically beginning in early childhood",
-   "The arthritis is often a boggy, exuberant tenosynovitis with characteristic cystic swelling of the wrists and ankles",
-   "The uveitis is frequently a severe, chronic, potentially sight-threatening panuveitis and is a leading cause of morbidity",
-   "The rash is an early, often subtle scaly or ichthyosiform/granulomatous eruption",
-   "Non-caseating granulomas on biopsy overlap histologically with sarcoidosis, but early onset and the familial triad distinguish Blau syndrome",
-   "The NOD2 mutations differ from those associated with Crohn disease and act by constitutive activation rather than loss of function"
+  "id": "blau_syndrome",
+  "name": "Blau syndrome",
+  "aliases": [
+    "NOD2",
+    "CARD15",
+    "early-onset sarcoidosis",
+    "familial juvenile systemic granulomatosis",
+    "paediatric granulomatous arthritis"
   ],
-  "pathophysiology": "Blau syndrome is an autosomal dominant granulomatous disorder caused by gain-of-function mutations in NOD2 (also called CARD15), an intracellular pattern-recognition receptor that senses bacterial peptidoglycan fragments. The disease-causing mutations lie in the nucleotide-binding domain and render the receptor constitutively active, driving ligand-independent activation of the pro-inflammatory transcription factor NF-kB and dysregulated innate immune signalling. This sustained activation promotes formation of non-caseating epithelioid granulomas in the joints, skin and eyes. The mutations are mechanistically and topographically distinct from the Crohn-disease-associated NOD2 variants, which impair rather than enhance receptor function.",
-  "additionalDifferentials": [
-   "Sarcoidosis (including childhood-onset systemic sarcoidosis)",
-   "Juvenile idiopathic arthritis with uveitis",
-   "Other granulomatous diseases (infective, including tuberculosis)",
-   "Granulomatosis with polyangiitis and other vasculitides",
-   "Common variable immunodeficiency with granulomatous disease",
-   "Crohn disease with extra-intestinal manifestations"
-  ],
-  "additionalInvestigations": [
-   "Genetic testing of NOD2/CARD15",
-   "Biopsy of skin or synovium demonstrating non-caseating granulomas",
-   "Slit-lamp examination and full ophthalmological assessment for uveitis",
-   "Acute phase reactants and inflammatory markers",
-   "Serum angiotensin-converting enzyme and calcium to help distinguish sarcoidosis",
-   "Exclusion of infective granulomatous causes including mycobacterial studies"
-  ],
-  "redFlags": [
-   "Sight-threatening panuveitis with visual deterioration",
-   "Progressive joint deformity or contractures from uncontrolled granulomatous arthritis",
-   "Evidence of visceral or systemic granulomatous involvement beyond the classic triad",
-   "Ocular complications such as cataract, glaucoma or macular oedema"
-  ],
-  "prognosis": "The joint and skin disease are often manageable, but the chronic uveitis is the principal threat to long-term outcome and can lead to visual loss if not aggressively monitored and treated; systemic involvement in atypical cases can broaden morbidity.",
-  "pitfalls": [
-   "Diagnosing early-onset sarcoidosis without recognising the genetic Blau syndrome in a young child with the triad",
-   "Underestimating and under-monitoring the uveitis, allowing preventable visual loss",
-   "Confusing the gain-of-function Blau NOD2 mutations with the loss-of-function Crohn-associated variants",
-   "Mistaking the boggy tenosynovitis for ordinary juvenile idiopathic arthritis"
-  ],
-  "references": [
-   "Firestein & Kelley's Textbook of Rheumatology",
-   "Cassidy's Textbook of Pediatric Rheumatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Immunosuppression as the mainstay — corticosteroids and steroid-sparing agents such as methotrexate, escalating to biologics (anti-TNF, IL-1 or IL-6 inhibitors) for refractory disease",
-   "Aggressive, ophthalmology-led treatment of the sight-threatening panuveitis with combined local and systemic anti-inflammatory therapy",
-   "Regular slit-lamp surveillance to detect and control uveitis before irreversible visual loss occurs",
-   "Manage the granulomatous arthritis and tenosynovitis with anti-inflammatory therapy and physiotherapy to preserve joint function",
-   "Coordinate care across clinical immunology or rheumatology and ophthalmology",
-   "Provide genetic counselling and family assessment given autosomal dominant NOD2 inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "blau_syndrome-pathway",
-   "title": "Blau syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autosomal dominant granulomatous autoinflammatory disease caused by gain-of-function mutations in NOD2 (CARD15)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Sight-threatening panuveitis with visual deterioration",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Genetic testing of NOD2/CARD15, Biopsy of skin or synovium demonstrating non-caseating granulomas, Slit-lamp examination and full ophthalmological assessment for uveitis"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Immunosuppression as the mainstay - corticosteroids and steroid-sparing agents such as methotrexate, escalating to biologics (anti-TNF, IL-1 or IL-6 inhibitors) for refractory disease"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Diagnosing early-onset sarcoidosis without recognising the genetic Blau syndrome in a young child with the triad"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of blau syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "blau_syndrome-matrix",
-   "title": "Blau syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autosomal dominant granulomatous autoinflammatory disease caused by gain-of-function mutations in NOD2 (CARD15)",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Immunology / Genetics",
+  "specialty": "Clinical Immunology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Firestein & Kelley's Textbook of Rheumatology / Cassidy's Textbook of Pediatric Rheumatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An autosomal dominant granulomatous autoinflammatory disease caused by gain-of-function mutations in NOD2 (CARD15)",
+      "The classic triad is granulomatous polyarthritis, dermatitis and uveitis, typically beginning in early childhood",
+      "The arthritis is often a boggy, exuberant tenosynovitis with characteristic cystic swelling of the wrists and ankles",
+      "The uveitis is frequently a severe, chronic, potentially sight-threatening panuveitis and is a leading cause of morbidity",
+      "The rash is an early, often subtle scaly or ichthyosiform/granulomatous eruption",
+      "Non-caseating granulomas on biopsy overlap histologically with sarcoidosis, but early onset and the familial triad distinguish Blau syndrome",
+      "The NOD2 mutations differ from those associated with Crohn disease and act by constitutive activation rather than loss of function"
     ],
-    [
-     "Key Investigations",
-     "Genetic testing of NOD2/CARD15, Biopsy of skin or synovium demonstrating non-caseating granulomas, Slit-lamp examination and full",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Blau syndrome is an autosomal dominant granulomatous disorder caused by gain-of-function mutations in NOD2 (also called CARD15), an intracellular pattern-recognition receptor that senses bacterial peptidoglycan fragments. The disease-causing mutations lie in the nucleotide-binding domain and render the receptor constitutively active, driving ligand-independent activation of the pro-inflammatory transcription factor NF-kB and dysregulated innate immune signalling. This sustained activation promotes formation of non-caseating epithelioid granulomas in the joints, skin and eyes. The mutations are mechanistically and topographically distinct from the Crohn-disease-associated NOD2 variants, which impair rather than enhance receptor function.",
+    "additionalDifferentials": [
+      "Sarcoidosis (including childhood-onset systemic sarcoidosis)",
+      "Juvenile idiopathic arthritis with uveitis",
+      "Other granulomatous diseases (infective, including tuberculosis)",
+      "Granulomatosis with polyangiitis and other vasculitides",
+      "Common variable immunodeficiency with granulomatous disease",
+      "Crohn disease with extra-intestinal manifestations"
     ],
-    [
-     "Primary Differentials",
-     "Sarcoidosis (including childhood-onset systemic sarcoidosis), Juvenile idiopathic arthritis with uveitis, Other granulomatous",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Genetic testing of NOD2/CARD15",
+      "Biopsy of skin or synovium demonstrating non-caseating granulomas",
+      "Slit-lamp examination and full ophthalmological assessment for uveitis",
+      "Acute phase reactants and inflammatory markers",
+      "Serum angiotensin-converting enzyme and calcium to help distinguish sarcoidosis",
+      "Exclusion of infective granulomatous causes including mycobacterial studies"
     ],
-    [
-     "Management Strategy",
-     "Immunosuppression as the mainstay - corticosteroids and steroid-sparing agents such as methotrexate, escalating to biologics",
-     "Core treatment modality"
+    "redFlags": [
+      "Sight-threatening panuveitis with visual deterioration",
+      "Progressive joint deformity or contractures from uncontrolled granulomatous arthritis",
+      "Evidence of visceral or systemic granulomatous involvement beyond the classic triad",
+      "Ocular complications such as cataract, glaucoma or macular oedema"
     ],
-    [
-     "Clinical Pitfall",
-     "Diagnosing early-onset sarcoidosis without recognising the genetic Blau syndrome in a young child with the triad",
-     "Prevent diagnostic or management error"
+    "prognosis": "The joint and skin disease are often manageable, but the chronic uveitis is the principal threat to long-term outcome and can lead to visual loss if not aggressively monitored and treated; systemic involvement in atypical cases can broaden morbidity.",
+    "pitfalls": [
+      "Diagnosing early-onset sarcoidosis without recognising the genetic Blau syndrome in a young child with the triad",
+      "Underestimating and under-monitoring the uveitis, allowing preventable visual loss",
+      "Confusing the gain-of-function Blau NOD2 mutations with the loss-of-function Crohn-associated variants",
+      "Mistaking the boggy tenosynovitis for ordinary juvenile idiopathic arthritis"
+    ],
+    "references": [
+      "Firestein & Kelley's Textbook of Rheumatology",
+      "Cassidy's Textbook of Pediatric Rheumatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Immunosuppression as the mainstay — corticosteroids and steroid-sparing agents such as methotrexate, escalating to biologics (anti-TNF, IL-1 or IL-6 inhibitors) for refractory disease",
+      "Aggressive, ophthalmology-led treatment of the sight-threatening panuveitis with combined local and systemic anti-inflammatory therapy",
+      "Regular slit-lamp surveillance to detect and control uveitis before irreversible visual loss occurs",
+      "Manage the granulomatous arthritis and tenosynovitis with anti-inflammatory therapy and physiotherapy to preserve joint function",
+      "Coordinate care across clinical immunology or rheumatology and ophthalmology",
+      "Provide genetic counselling and family assessment given autosomal dominant NOD2 inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for blau syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "blau-syndrome-real-image",
-   "title": "Blau syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "blau_syndrome-pathway",
+      "title": "Blau syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autosomal dominant granulomatous autoinflammatory disease caused by gain-of-function mutations in NOD2 (CARD15)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Sight-threatening panuveitis with visual deterioration",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Genetic testing of NOD2/CARD15, Biopsy of skin or synovium demonstrating non-caseating granulomas, Slit-lamp examination and full ophthalmological assessment for uveitis"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Immunosuppression as the mainstay - corticosteroids and steroid-sparing agents such as methotrexate, escalating to biologics (anti-TNF, IL-1 or IL-6 inhibitors) for refractory disease"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Diagnosing early-onset sarcoidosis without recognising the genetic Blau syndrome in a young child with the triad"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of blau syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "blau_syndrome-matrix",
+      "title": "Blau syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autosomal dominant granulomatous autoinflammatory disease caused by gain-of-function mutations in NOD2 (CARD15)",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Genetic testing of NOD2/CARD15, Biopsy of skin or synovium demonstrating non-caseating granulomas, Slit-lamp examination and full",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Sarcoidosis (including childhood-onset systemic sarcoidosis), Juvenile idiopathic arthritis with uveitis, Other granulomatous",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Immunosuppression as the mainstay - corticosteroids and steroid-sparing agents such as methotrexate, escalating to biologics",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Diagnosing early-onset sarcoidosis without recognising the genetic Blau syndrome in a young child with the triad",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for blau syndrome."
+    }
+  ],
+  "diagrams": []
 }

@@ -1,180 +1,158 @@
 {
- "id": "amniotic_fluid_embolism",
- "name": "Amniotic Fluid Embolism",
- "aliases": [
-  "amniotic fluid embolism",
-  "AFE",
-  "anaphylactoid syndrome of pregnancy"
- ],
- "class": "non_infective",
- "system": "Obstetrics / Gynaecology",
- "specialty": "Obstetrics & Gynaecology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Obstetrics / Novak's Gynecology / Campbell-Walsh Urology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Amniotic fluid embolism is a rare, unpredictable, and catastrophic obstetric emergency in which entry of amniotic fluid and fetal material into the maternal circulation triggers sudden cardiorespiratory collapse and coagulopathy",
-   "The classic presentation is abrupt hypoxia, hypotension or cardiac arrest, and disseminated intravascular coagulation occurring during labour, delivery, or the immediate postpartum period",
-   "Premonitory features may include breathlessness, chest pain, agitation, a sense of impending doom, and altered mental state before collapse",
-   "It is a clinical diagnosis of exclusion made on the characteristic sudden presentation; no confirmatory test exists in the acute setting",
-   "Management is supportive and immediate: high-quality resuscitation, airway and oxygenation support, circulatory support, and aggressive correction of coagulopathy with blood products",
-   "If maternal cardiac arrest occurs undelivered, perimortem caesarean delivery is undertaken promptly to aid maternal resuscitation and salvage the fetus",
-   "Because coagulopathy is often severe and early, activation of a massive transfusion protocol and involvement of haematology are key",
-   "Risk associations include advanced maternal age, multiparity, placental abnormalities, operative delivery, and induction of labour, though the condition is essentially unpreventable",
-   "Care is best delivered by a rapidly assembled multidisciplinary team including obstetrics, anaesthesia, intensive care, and haematology"
+  "id": "amniotic_fluid_embolism",
+  "name": "Amniotic Fluid Embolism",
+  "aliases": [
+    "amniotic fluid embolism",
+    "AFE",
+    "anaphylactoid syndrome of pregnancy"
   ],
-  "pathophysiology": "Amniotic fluid and fetal cellular debris gain access to the maternal circulation, usually through breaches in the uteroplacental interface or endocervical veins. Rather than simple mechanical embolic obstruction, the syndrome is thought to reflect an abnormal host response resembling anaphylaxis and systemic inflammatory activation. This provokes intense pulmonary vasoconstriction and acute right ventricular failure, causing profound hypoxaemia and cardiovascular collapse, often followed by left ventricular dysfunction. Simultaneous activation of the coagulation cascade produces rapid, severe disseminated intravascular coagulation with consumption of clotting factors and life-threatening haemorrhage.",
-  "additionalDifferentials": [
-   "Pulmonary thromboembolism",
-   "Eclampsia",
-   "Haemorrhagic shock from obstetric haemorrhage",
-   "Anaphylaxis to drugs administered peripartum",
-   "Myocardial infarction or peripartum cardiomyopathy",
-   "Septic shock",
-   "High neuraxial block or local anaesthetic toxicity",
-   "Air or venous embolism"
-  ],
-  "additionalInvestigations": [
-   "Arterial blood gases to quantify hypoxaemia and acidosis",
-   "Full blood count and urgent coagulation studies including fibrinogen to confirm and monitor DIC",
-   "Cross-match and activation of a massive transfusion pathway",
-   "Electrocardiogram and echocardiography where feasible to assess right and left ventricular function",
-   "Continuous haemodynamic and oxygen saturation monitoring",
-   "Investigations principally to exclude alternative diagnoses, as no specific confirmatory test exists"
-  ],
-  "redFlags": [
-   "OBSTETRIC EMERGENCY: sudden peripartum cardiorespiratory collapse or cardiac arrest requiring immediate resuscitation",
-   "Rapid-onset severe hypoxia and hypotension during or just after delivery",
-   "Disseminated intravascular coagulation with uncontrolled haemorrhage",
-   "Maternal cardiac arrest with an undelivered fetus mandating perimortem caesarean delivery",
-   "Premonitory breathlessness, agitation, or sense of impending doom preceding collapse"
-  ],
-  "prognosis": "Amniotic fluid embolism carries high maternal mortality and a substantial risk of permanent neurological injury among survivors, with outcome strongly dependent on the speed and quality of resuscitation. Perinatal outcome is likewise poor when collapse occurs before delivery. Prompt recognition, immediate resuscitation, perimortem delivery when indicated, and early correction of coagulopathy improve survival, and recent outcomes have improved with organised team-based care.",
-  "pitfalls": [
-   "Delaying resuscitation while seeking a confirmatory test that does not exist",
-   "Underestimating the speed and severity of the coagulopathy and transfusing too late",
-   "Failing to perform timely perimortem caesarean delivery during maternal arrest",
-   "Anchoring on pulmonary embolism or haemorrhage and missing the diagnosis",
-   "Not mobilising a full multidisciplinary team early in the event"
-  ],
-  "references": [
-   "Williams Obstetrics",
-   "Novak's Gynecology",
-   "Campbell-Walsh Urology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Deliver immediate high-quality resuscitation with early airway control, high-flow oxygen and, if arrest occurs, prompt advanced life support with left-uterine displacement",
-   "Support the circulation with fluids, vasopressors and inotropes, avoiding fluid overload given right ventricular failure",
-   "Treat right ventricular failure and pulmonary hypertension with pulmonary vasodilators and consider extracorporeal membrane oxygenation in refractory collapse",
-   "Correct disseminated intravascular coagulation aggressively with a massive transfusion protocol of red cells, fresh frozen plasma, cryoprecipitate or fibrinogen and platelets, guided by coagulation testing",
-   "Undertake perimortem caesarean delivery promptly when maternal cardiac arrest occurs before delivery, to aid resuscitation and salvage the foetus",
-   "Control postpartum haemorrhage with uterotonics and surgical measures as needed",
-   "Manage in critical care with a multidisciplinary obstetric, anaesthetic, haematology and intensive care team and monitor for neurological injury"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "amniotic_fluid_embolism-pathway",
-   "title": "Amniotic Fluid Embolism: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Amniotic fluid embolism is a rare, unpredictable, and catastrophic obstetric emergency in which entry of amniotic fluid and fetal material into the maternal circulation triggers sudden cardiorespiratory collapse and coagulopathy",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: OBSTETRIC EMERGENCY: sudden peripartum cardiorespiratory collapse or cardiac arrest requiring immediate resuscitation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Arterial blood gases to quantify hypoxaemia and acidosis, Full blood count and urgent coagulation studies including fibrinogen to confirm and monitor DIC, Cross-match and activation of a massive transfusion pathway"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Deliver immediate high-quality resuscitation with early airway control, high-flow oxygen and, if arrest occurs, prompt advanced life support with left-uterine displacement"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Delaying resuscitation while seeking a confirmatory test that does not exist"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of amniotic fluid embolism."
-  }
- ],
- "tables": [
-  {
-   "id": "amniotic_fluid_embolism-matrix",
-   "title": "Amniotic Fluid Embolism: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Amniotic fluid embolism is a rare, unpredictable, and catastrophic obstetric emergency in which entry of amniotic fluid and fetal",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Obstetrics / Gynaecology",
+  "specialty": "Obstetrics & Gynaecology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Obstetrics / Novak's Gynecology / Campbell-Walsh Urology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Amniotic fluid embolism is a rare, unpredictable, and catastrophic obstetric emergency in which entry of amniotic fluid and fetal material into the maternal circulation triggers sudden cardiorespiratory collapse and coagulopathy",
+      "The classic presentation is abrupt hypoxia, hypotension or cardiac arrest, and disseminated intravascular coagulation occurring during labour, delivery, or the immediate postpartum period",
+      "Premonitory features may include breathlessness, chest pain, agitation, a sense of impending doom, and altered mental state before collapse",
+      "It is a clinical diagnosis of exclusion made on the characteristic sudden presentation; no confirmatory test exists in the acute setting",
+      "Management is supportive and immediate: high-quality resuscitation, airway and oxygenation support, circulatory support, and aggressive correction of coagulopathy with blood products",
+      "If maternal cardiac arrest occurs undelivered, perimortem caesarean delivery is undertaken promptly to aid maternal resuscitation and salvage the fetus",
+      "Because coagulopathy is often severe and early, activation of a massive transfusion protocol and involvement of haematology are key",
+      "Risk associations include advanced maternal age, multiparity, placental abnormalities, operative delivery, and induction of labour, though the condition is essentially unpreventable",
+      "Care is best delivered by a rapidly assembled multidisciplinary team including obstetrics, anaesthesia, intensive care, and haematology"
     ],
-    [
-     "Key Investigations",
-     "Arterial blood gases to quantify hypoxaemia and acidosis, Full blood count and urgent coagulation studies including fibrinogen to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Amniotic fluid and fetal cellular debris gain access to the maternal circulation, usually through breaches in the uteroplacental interface or endocervical veins. Rather than simple mechanical embolic obstruction, the syndrome is thought to reflect an abnormal host response resembling anaphylaxis and systemic inflammatory activation. This provokes intense pulmonary vasoconstriction and acute right ventricular failure, causing profound hypoxaemia and cardiovascular collapse, often followed by left ventricular dysfunction. Simultaneous activation of the coagulation cascade produces rapid, severe disseminated intravascular coagulation with consumption of clotting factors and life-threatening haemorrhage.",
+    "additionalDifferentials": [
+      "Pulmonary thromboembolism",
+      "Eclampsia",
+      "Haemorrhagic shock from obstetric haemorrhage",
+      "Anaphylaxis to drugs administered peripartum",
+      "Myocardial infarction or peripartum cardiomyopathy",
+      "Septic shock",
+      "High neuraxial block or local anaesthetic toxicity",
+      "Air or venous embolism"
     ],
-    [
-     "Primary Differentials",
-     "Pulmonary thromboembolism, Eclampsia, Haemorrhagic shock from obstetric haemorrhage",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Arterial blood gases to quantify hypoxaemia and acidosis",
+      "Full blood count and urgent coagulation studies including fibrinogen to confirm and monitor DIC",
+      "Cross-match and activation of a massive transfusion pathway",
+      "Electrocardiogram and echocardiography where feasible to assess right and left ventricular function",
+      "Continuous haemodynamic and oxygen saturation monitoring",
+      "Investigations principally to exclude alternative diagnoses, as no specific confirmatory test exists"
     ],
-    [
-     "Management Strategy",
-     "Deliver immediate high-quality resuscitation with early airway control, high-flow oxygen and, if arrest occurs, prompt advanced",
-     "Core treatment modality"
+    "redFlags": [
+      "OBSTETRIC EMERGENCY: sudden peripartum cardiorespiratory collapse or cardiac arrest requiring immediate resuscitation",
+      "Rapid-onset severe hypoxia and hypotension during or just after delivery",
+      "Disseminated intravascular coagulation with uncontrolled haemorrhage",
+      "Maternal cardiac arrest with an undelivered fetus mandating perimortem caesarean delivery",
+      "Premonitory breathlessness, agitation, or sense of impending doom preceding collapse"
     ],
-    [
-     "Clinical Pitfall",
-     "Delaying resuscitation while seeking a confirmatory test that does not exist",
-     "Prevent diagnostic or management error"
+    "prognosis": "Amniotic fluid embolism carries high maternal mortality and a substantial risk of permanent neurological injury among survivors, with outcome strongly dependent on the speed and quality of resuscitation. Perinatal outcome is likewise poor when collapse occurs before delivery. Prompt recognition, immediate resuscitation, perimortem delivery when indicated, and early correction of coagulopathy improve survival, and recent outcomes have improved with organised team-based care.",
+    "pitfalls": [
+      "Delaying resuscitation while seeking a confirmatory test that does not exist",
+      "Underestimating the speed and severity of the coagulopathy and transfusing too late",
+      "Failing to perform timely perimortem caesarean delivery during maternal arrest",
+      "Anchoring on pulmonary embolism or haemorrhage and missing the diagnosis",
+      "Not mobilising a full multidisciplinary team early in the event"
+    ],
+    "references": [
+      "Williams Obstetrics",
+      "Novak's Gynecology",
+      "Campbell-Walsh Urology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Deliver immediate high-quality resuscitation with early airway control, high-flow oxygen and, if arrest occurs, prompt advanced life support with left-uterine displacement",
+      "Support the circulation with fluids, vasopressors and inotropes, avoiding fluid overload given right ventricular failure",
+      "Treat right ventricular failure and pulmonary hypertension with pulmonary vasodilators and consider extracorporeal membrane oxygenation in refractory collapse",
+      "Correct disseminated intravascular coagulation aggressively with a massive transfusion protocol of red cells, fresh frozen plasma, cryoprecipitate or fibrinogen and platelets, guided by coagulation testing",
+      "Undertake perimortem caesarean delivery promptly when maternal cardiac arrest occurs before delivery, to aid resuscitation and salvage the foetus",
+      "Control postpartum haemorrhage with uterotonics and surgical measures as needed",
+      "Manage in critical care with a multidisciplinary obstetric, anaesthetic, haematology and intensive care team and monitor for neurological injury"
     ]
-   ],
-   "caption": "Overview comparison matrix for amniotic fluid embolism."
-  }
- ],
- "diagrams": [
-  {
-   "id": "amniotic-fluid-embolism-real-image",
-   "title": "Amniotic Fluid Embolism: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "amniotic_fluid_embolism-pathway",
+      "title": "Amniotic Fluid Embolism: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Amniotic fluid embolism is a rare, unpredictable, and catastrophic obstetric emergency in which entry of amniotic fluid and fetal material into the maternal circulation triggers sudden cardiorespiratory collapse and coagulopathy",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: OBSTETRIC EMERGENCY: sudden peripartum cardiorespiratory collapse or cardiac arrest requiring immediate resuscitation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Arterial blood gases to quantify hypoxaemia and acidosis, Full blood count and urgent coagulation studies including fibrinogen to confirm and monitor DIC, Cross-match and activation of a massive transfusion pathway"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Deliver immediate high-quality resuscitation with early airway control, high-flow oxygen and, if arrest occurs, prompt advanced life support with left-uterine displacement"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Delaying resuscitation while seeking a confirmatory test that does not exist"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of amniotic fluid embolism."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "amniotic_fluid_embolism-matrix",
+      "title": "Amniotic Fluid Embolism: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Amniotic fluid embolism is a rare, unpredictable, and catastrophic obstetric emergency in which entry of amniotic fluid and fetal",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Arterial blood gases to quantify hypoxaemia and acidosis, Full blood count and urgent coagulation studies including fibrinogen to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Pulmonary thromboembolism, Eclampsia, Haemorrhagic shock from obstetric haemorrhage",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Deliver immediate high-quality resuscitation with early airway control, high-flow oxygen and, if arrest occurs, prompt advanced",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Delaying resuscitation while seeking a confirmatory test that does not exist",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for amniotic fluid embolism."
+    }
+  ],
+  "diagrams": []
 }

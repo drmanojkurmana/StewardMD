@@ -1,177 +1,155 @@
 {
- "id": "omphalomesenteric_duct_remnant",
- "name": "omphalomesenteric duct remnant",
- "aliases": [
-  "vitelline duct remnant",
-  "omphalomesenteric duct anomaly"
- ],
- "class": "non_infective",
- "system": "Gastrointestinal",
- "specialty": "Paediatric Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Ashcraft's Pediatric Surgery",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The omphalomesenteric (vitelline) duct normally connects the embryonic midgut to the yolk sac and involutes in early gestation; incomplete obliteration yields a spectrum of remnants.",
-   "Meckel diverticulum is by far the commonest remnant, arising when the intestinal end persists; a patent duct, umbilical sinus, vitelline cyst, umbilical polyp, or fibrous band represent other patterns.",
-   "A completely patent duct presents in the neonate with enteric or faecal discharge from the umbilicus, whereas a persisting fibrous band predisposes to volvulus and internal herniation.",
-   "An umbilical polyp is a firm, bright-red mucosal nodule of retained gastrointestinal epithelium that does not respond to silver nitrate, unlike an umbilical granuloma.",
-   "A vitelline cyst forms when both ends of the duct obliterate but a central patent segment traps secretions.",
-   "Ectopic gastric mucosa within a remnant can ulcerate and bleed, and a technetium-99m pertechnetate scan helps localise it.",
-   "Persistent umbilical discharge demands distinction from a urachal remnant, which drains urine rather than enteric content.",
-   "Symptomatic remnants and persistent bands are managed by surgical excision, including division of the band to prevent obstruction."
+  "id": "omphalomesenteric_duct_remnant",
+  "name": "omphalomesenteric duct remnant",
+  "aliases": [
+    "vitelline duct remnant",
+    "omphalomesenteric duct anomaly"
   ],
-  "pathophysiology": "During early development the omphalomesenteric duct links the yolk sac to the primitive midgut and normally regresses as the placenta takes over nutrition. Failure of this involution leaves a remnant whose clinical form depends on which portion persists and whether it remains patent. Persistence of the intestinal end produces a Meckel diverticulum; a fully patent lumen creates an entero-umbilical fistula; obliteration of the ends with a patent centre yields a vitelline cyst; and a fibrous cord may persist as a band tethering the bowel to the umbilicus. Retained mucosa is frequently gastrointestinal and may include ectopic gastric or pancreatic tissue, whose acid secretion causes ulceration and bleeding. A persistent band or the mesodiverticular vessels provide a fixed point around which small bowel can twist, producing volvulus or internal herniation.",
-  "additionalDifferentials": [
-   "urachal remnant or patent urachus",
-   "umbilical granuloma",
-   "Meckel diverticulum",
-   "umbilical hernia",
-   "omphalitis",
-   "patent vitellointestinal fistula versus enterocutaneous fistula",
-   "umbilical dermoid"
-  ],
-  "additionalInvestigations": [
-   "abdominal and umbilical ultrasound",
-   "sinogram or fistulogram to define a patent tract",
-   "technetium-99m pertechnetate scintigraphy for ectopic gastric mucosa",
-   "contrast luminal studies to demonstrate communication with bowel",
-   "MRI for complex or ambiguous anatomy",
-   "histopathology of the excised remnant"
-  ],
-  "redFlags": [
-   "bilious vomiting or obstruction suggesting volvulus around a persistent band",
-   "gastrointestinal or umbilical bleeding indicating ectopic gastric mucosa",
-   "persistent enteric or faecal umbilical discharge",
-   "signs of peritonitis from perforation or strangulation",
-   "prolapse of bowel mucosa through a patent duct"
-  ],
-  "prognosis": "Prognosis is excellent after complete excision of the remnant. Untreated persistent bands carry an ongoing risk of obstruction, and unrecognised ectopic mucosa may bleed.",
-  "pitfalls": [
-   "confusing a vitelline remnant with a urachal anomaly by not distinguishing enteric from urinary discharge",
-   "treating an umbilical polyp as a granuloma with repeated silver nitrate application",
-   "overlooking ectopic gastric mucosa as a source of occult bleeding",
-   "failing to divide an asymptomatic band discovered incidentally, leaving a future obstruction risk",
-   "incomplete excision leaving residual mucosa at the umbilicus"
-  ],
-  "references": [
-   "Ashcraft's Pediatric Surgery",
-   "Coran, Pediatric Surgery",
-   "Nelson Textbook of Pediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Complete surgical excision of the remnant is definitive: diverticulectomy or segmental resection for a Meckel diverticulum, and full excision of any patent duct, umbilical sinus, vitelline cyst or fibrous band",
-   "Resect the base widely to remove all ectopic gastric or pancreatic mucosa, since retained acid-secreting tissue is the source of ulceration and bleeding",
-   "Excise an umbilical polyp surgically with histological confirmation, as it will not respond to silver nitrate cautery unlike an umbilical granuloma",
-   "Treat a bleeding remnant with fluid resuscitation, correction of anaemia and transfusion before proceeding to operative removal",
-   "Manage a persistent band causing volvulus or internal herniation as a surgical emergency with laparotomy or laparoscopy, detorsion and division of the band",
-   "Send the excised specimen for histopathology to confirm ectopic tissue and exclude other pathology",
-   "Manage within a paediatric surgical service with routine postoperative follow-up given the excellent outcome after complete excision"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "omphalomesenteric_duct_remnant-pathway",
-   "title": "omphalomesenteric duct remnant: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The omphalomesenteric (vitelline) duct normally connects the embryonic midgut to the yolk sac and involutes in early gestation; incomplete obliteration yields a spectrum of remnants.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: bilious vomiting or obstruction suggesting volvulus around a persistent band",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: abdominal and umbilical ultrasound, sinogram or fistulogram to define a patent tract, technetium-99m pertechnetate scintigraphy for ectopic gastric mucosa"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Complete surgical excision of the remnant is definitive: diverticulectomy or segmental resection for a Meckel diverticulum, and full excision of any patent duct, umbilical sinus, vitelline cyst or fibrous band"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: confusing a vitelline remnant with a urachal anomaly by not distinguishing enteric from urinary discharge"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of omphalomesenteric duct remnant."
-  }
- ],
- "tables": [
-  {
-   "id": "omphalomesenteric_duct_remnant-matrix",
-   "title": "omphalomesenteric duct remnant: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The omphalomesenteric (vitelline) duct normally connects the embryonic midgut to the yolk sac and involutes in early gestation;",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastrointestinal",
+  "specialty": "Paediatric Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Ashcraft's Pediatric Surgery",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The omphalomesenteric (vitelline) duct normally connects the embryonic midgut to the yolk sac and involutes in early gestation; incomplete obliteration yields a spectrum of remnants.",
+      "Meckel diverticulum is by far the commonest remnant, arising when the intestinal end persists; a patent duct, umbilical sinus, vitelline cyst, umbilical polyp, or fibrous band represent other patterns.",
+      "A completely patent duct presents in the neonate with enteric or faecal discharge from the umbilicus, whereas a persisting fibrous band predisposes to volvulus and internal herniation.",
+      "An umbilical polyp is a firm, bright-red mucosal nodule of retained gastrointestinal epithelium that does not respond to silver nitrate, unlike an umbilical granuloma.",
+      "A vitelline cyst forms when both ends of the duct obliterate but a central patent segment traps secretions.",
+      "Ectopic gastric mucosa within a remnant can ulcerate and bleed, and a technetium-99m pertechnetate scan helps localise it.",
+      "Persistent umbilical discharge demands distinction from a urachal remnant, which drains urine rather than enteric content.",
+      "Symptomatic remnants and persistent bands are managed by surgical excision, including division of the band to prevent obstruction."
     ],
-    [
-     "Key Investigations",
-     "abdominal and umbilical ultrasound, sinogram or fistulogram to define a patent tract, technetium-99m pertechnetate scintigraphy",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "During early development the omphalomesenteric duct links the yolk sac to the primitive midgut and normally regresses as the placenta takes over nutrition. Failure of this involution leaves a remnant whose clinical form depends on which portion persists and whether it remains patent. Persistence of the intestinal end produces a Meckel diverticulum; a fully patent lumen creates an entero-umbilical fistula; obliteration of the ends with a patent centre yields a vitelline cyst; and a fibrous cord may persist as a band tethering the bowel to the umbilicus. Retained mucosa is frequently gastrointestinal and may include ectopic gastric or pancreatic tissue, whose acid secretion causes ulceration and bleeding. A persistent band or the mesodiverticular vessels provide a fixed point around which small bowel can twist, producing volvulus or internal herniation.",
+    "additionalDifferentials": [
+      "urachal remnant or patent urachus",
+      "umbilical granuloma",
+      "Meckel diverticulum",
+      "umbilical hernia",
+      "omphalitis",
+      "patent vitellointestinal fistula versus enterocutaneous fistula",
+      "umbilical dermoid"
     ],
-    [
-     "Primary Differentials",
-     "urachal remnant or patent urachus, umbilical granuloma, Meckel diverticulum",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "abdominal and umbilical ultrasound",
+      "sinogram or fistulogram to define a patent tract",
+      "technetium-99m pertechnetate scintigraphy for ectopic gastric mucosa",
+      "contrast luminal studies to demonstrate communication with bowel",
+      "MRI for complex or ambiguous anatomy",
+      "histopathology of the excised remnant"
     ],
-    [
-     "Management Strategy",
-     "Complete surgical excision of the remnant is definitive: diverticulectomy or segmental resection for a Meckel diverticulum, and",
-     "Core treatment modality"
+    "redFlags": [
+      "bilious vomiting or obstruction suggesting volvulus around a persistent band",
+      "gastrointestinal or umbilical bleeding indicating ectopic gastric mucosa",
+      "persistent enteric or faecal umbilical discharge",
+      "signs of peritonitis from perforation or strangulation",
+      "prolapse of bowel mucosa through a patent duct"
     ],
-    [
-     "Clinical Pitfall",
-     "confusing a vitelline remnant with a urachal anomaly by not distinguishing enteric from urinary discharge",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is excellent after complete excision of the remnant. Untreated persistent bands carry an ongoing risk of obstruction, and unrecognised ectopic mucosa may bleed.",
+    "pitfalls": [
+      "confusing a vitelline remnant with a urachal anomaly by not distinguishing enteric from urinary discharge",
+      "treating an umbilical polyp as a granuloma with repeated silver nitrate application",
+      "overlooking ectopic gastric mucosa as a source of occult bleeding",
+      "failing to divide an asymptomatic band discovered incidentally, leaving a future obstruction risk",
+      "incomplete excision leaving residual mucosa at the umbilicus"
+    ],
+    "references": [
+      "Ashcraft's Pediatric Surgery",
+      "Coran, Pediatric Surgery",
+      "Nelson Textbook of Pediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Complete surgical excision of the remnant is definitive: diverticulectomy or segmental resection for a Meckel diverticulum, and full excision of any patent duct, umbilical sinus, vitelline cyst or fibrous band",
+      "Resect the base widely to remove all ectopic gastric or pancreatic mucosa, since retained acid-secreting tissue is the source of ulceration and bleeding",
+      "Excise an umbilical polyp surgically with histological confirmation, as it will not respond to silver nitrate cautery unlike an umbilical granuloma",
+      "Treat a bleeding remnant with fluid resuscitation, correction of anaemia and transfusion before proceeding to operative removal",
+      "Manage a persistent band causing volvulus or internal herniation as a surgical emergency with laparotomy or laparoscopy, detorsion and division of the band",
+      "Send the excised specimen for histopathology to confirm ectopic tissue and exclude other pathology",
+      "Manage within a paediatric surgical service with routine postoperative follow-up given the excellent outcome after complete excision"
     ]
-   ],
-   "caption": "Overview comparison matrix for omphalomesenteric duct remnant."
-  }
- ],
- "diagrams": [
-  {
-   "id": "omphalomesenteric-duct-remnant-real-image",
-   "title": "omphalomesenteric duct remnant: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "omphalomesenteric_duct_remnant-pathway",
+      "title": "omphalomesenteric duct remnant: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The omphalomesenteric (vitelline) duct normally connects the embryonic midgut to the yolk sac and involutes in early gestation; incomplete obliteration yields a spectrum of remnants.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: bilious vomiting or obstruction suggesting volvulus around a persistent band",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: abdominal and umbilical ultrasound, sinogram or fistulogram to define a patent tract, technetium-99m pertechnetate scintigraphy for ectopic gastric mucosa"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Complete surgical excision of the remnant is definitive: diverticulectomy or segmental resection for a Meckel diverticulum, and full excision of any patent duct, umbilical sinus, vitelline cyst or fibrous band"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: confusing a vitelline remnant with a urachal anomaly by not distinguishing enteric from urinary discharge"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of omphalomesenteric duct remnant."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "omphalomesenteric_duct_remnant-matrix",
+      "title": "omphalomesenteric duct remnant: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The omphalomesenteric (vitelline) duct normally connects the embryonic midgut to the yolk sac and involutes in early gestation;",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "abdominal and umbilical ultrasound, sinogram or fistulogram to define a patent tract, technetium-99m pertechnetate scintigraphy",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "urachal remnant or patent urachus, umbilical granuloma, Meckel diverticulum",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Complete surgical excision of the remnant is definitive: diverticulectomy or segmental resection for a Meckel diverticulum, and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "confusing a vitelline remnant with a urachal anomaly by not distinguishing enteric from urinary discharge",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for omphalomesenteric duct remnant."
+    }
+  ],
+  "diagrams": []
 }

@@ -1,174 +1,152 @@
 {
- "id": "scheie_syndrome",
- "name": "Scheie syndrome (MPS IS)",
- "aliases": [
-  "MPS IS",
-  "MPS V (historical)",
-  "attenuated alpha-L-iduronidase deficiency",
-  "IDUA deficiency (mild form)",
-  "mucopolysaccharidosis type I - Scheie"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics / Scriver's OMMBID",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Represents the mildest (attenuated) end of the mucopolysaccharidosis type I spectrum, caused by partial deficiency of the lysosomal enzyme alpha-L-iduronidase",
-   "Intelligence is characteristically preserved, distinguishing it clinically from severe Hurler syndrome at the opposite end of the same enzymatic disorder",
-   "Presentation is often delayed into later childhood or adulthood with corneal clouding, joint stiffness, and carpal tunnel syndrome",
-   "Aortic valve disease, particularly regurgitation, is a recognised cardiac manifestation",
-   "Stature is usually normal or only mildly reduced, contrasting with the marked growth failure of Hurler syndrome",
-   "Diagnosis rests on demonstrating reduced alpha-L-iduronidase activity together with raised urinary dermatan and heparan sulfate",
-   "Molecular confirmation of IDUA gene variants clarifies the phenotype and supports genetic counselling"
+  "id": "scheie_syndrome",
+  "name": "Scheie syndrome (MPS IS)",
+  "aliases": [
+    "MPS IS",
+    "MPS V (historical)",
+    "attenuated alpha-L-iduronidase deficiency",
+    "IDUA deficiency (mild form)",
+    "mucopolysaccharidosis type I - Scheie"
   ],
-  "pathophysiology": "Scheie syndrome arises from biallelic pathogenic variants in the IDUA gene, which encodes the lysosomal hydrolase alpha-L-iduronidase. Residual enzyme activity is greater than in Hurler syndrome, producing a milder phenotype within the same disease continuum. Impaired breakdown of the glycosaminoglycans dermatan sulfate and heparan sulfate leads to their progressive accumulation within lysosomes of connective tissue, cornea, cartilage, heart valves, and other organs. The stored substrate is also excreted in excess in the urine. Because intellectual function is generally spared, the clinical burden is dominated by musculoskeletal, ocular, and cardiac involvement that worsens slowly over years. Inheritance is autosomal recessive.",
-  "additionalDifferentials": [
-   "Hurler and Hurler-Scheie syndromes (other points on the MPS I spectrum)",
-   "Hunter syndrome (MPS II)",
-   "Maroteaux-Lamy syndrome (MPS VI)",
-   "Rheumatoid or juvenile idiopathic arthritis given the joint stiffness",
-   "Mucolipidoses with overlapping skeletal and connective tissue features",
-   "Other causes of corneal clouding such as cystinosis or Fabry disease"
-  ],
-  "additionalInvestigations": [
-   "Leucocyte or fibroblast alpha-L-iduronidase enzyme assay",
-   "Quantitative urinary glycosaminoglycan analysis with electrophoresis for dermatan and heparan sulfate",
-   "IDUA gene sequencing for molecular confirmation and genotype-phenotype correlation",
-   "Slit-lamp examination to document corneal clouding",
-   "Echocardiography to assess aortic and mitral valve function",
-   "Nerve conduction studies where carpal tunnel syndrome is suspected"
-  ],
-  "redFlags": [
-   "Progressive aortic valve regurgitation or other cardiac valve dysfunction",
-   "Visual deterioration from advancing corneal clouding",
-   "Median nerve compression causing hand weakness and wasting",
-   "Cervical spine or airway compromise from connective tissue deposition"
-  ],
-  "prognosis": "Life expectancy can approach normal in many patients, though progressive cardiac valve disease, corneal clouding, and joint limitation cause substantial long-term morbidity. Enzyme replacement therapy may help systemic manifestations but does not correct established corneal or valvular changes.",
-  "pitfalls": [
-   "Attributing joint stiffness to inflammatory arthritis and missing the underlying storage disorder",
-   "Assuming preserved intellect excludes a mucopolysaccharidosis",
-   "Overlooking silent valvular heart disease that requires surveillance",
-   "Delaying enzyme replacement therapy because early features are subtle"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics",
-   "Scriver's Online Metabolic and Molecular Bases of Inherited Disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Offer enzyme replacement therapy with laronidase (recombinant alpha-L-iduronidase) as the mainstay to reduce glycosaminoglycan storage and systemic burden",
-   "Refer for surgical carpal tunnel decompression and provide physiotherapy for joint stiffness and contractures",
-   "Manage progressive aortic valve disease with cardiology surveillance and valve surgery when indicated",
-   "Arrange corneal transplantation for visually significant corneal clouding, which enzyme therapy does not reverse",
-   "Monitor with serial echocardiography, slit-lamp examination, nerve conduction studies, and screening for sleep-disordered breathing",
-   "Coordinate multidisciplinary care and offer genetic counselling for the autosomal recessive inheritance and family screening"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "scheie_syndrome-pathway",
-   "title": "Scheie syndrome (MPS IS): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Represents the mildest (attenuated) end of the mucopolysaccharidosis type I spectrum, caused by partial deficiency of the lysosomal enzyme alpha-L-iduronidase",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive aortic valve regurgitation or other cardiac valve dysfunction",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Leucocyte or fibroblast alpha-L-iduronidase enzyme assay, Quantitative urinary glycosaminoglycan analysis with electrophoresis for dermatan and heparan sulfate, IDUA gene sequencing for molecular confirmation and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Offer enzyme replacement therapy with laronidase (recombinant alpha-L-iduronidase) as the mainstay to reduce glycosaminoglycan storage and systemic burden"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing joint stiffness to inflammatory arthritis and missing the underlying storage disorder"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of scheie syndrome (mps is)."
-  }
- ],
- "tables": [
-  {
-   "id": "scheie_syndrome-matrix",
-   "title": "Scheie syndrome (MPS IS): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Represents the mildest (attenuated) end of the mucopolysaccharidosis type I spectrum, caused by partial deficiency of the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics / Scriver's OMMBID",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Represents the mildest (attenuated) end of the mucopolysaccharidosis type I spectrum, caused by partial deficiency of the lysosomal enzyme alpha-L-iduronidase",
+      "Intelligence is characteristically preserved, distinguishing it clinically from severe Hurler syndrome at the opposite end of the same enzymatic disorder",
+      "Presentation is often delayed into later childhood or adulthood with corneal clouding, joint stiffness, and carpal tunnel syndrome",
+      "Aortic valve disease, particularly regurgitation, is a recognised cardiac manifestation",
+      "Stature is usually normal or only mildly reduced, contrasting with the marked growth failure of Hurler syndrome",
+      "Diagnosis rests on demonstrating reduced alpha-L-iduronidase activity together with raised urinary dermatan and heparan sulfate",
+      "Molecular confirmation of IDUA gene variants clarifies the phenotype and supports genetic counselling"
     ],
-    [
-     "Key Investigations",
-     "Leucocyte or fibroblast alpha-L-iduronidase enzyme assay, Quantitative urinary glycosaminoglycan analysis with electrophoresis",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Scheie syndrome arises from biallelic pathogenic variants in the IDUA gene, which encodes the lysosomal hydrolase alpha-L-iduronidase. Residual enzyme activity is greater than in Hurler syndrome, producing a milder phenotype within the same disease continuum. Impaired breakdown of the glycosaminoglycans dermatan sulfate and heparan sulfate leads to their progressive accumulation within lysosomes of connective tissue, cornea, cartilage, heart valves, and other organs. The stored substrate is also excreted in excess in the urine. Because intellectual function is generally spared, the clinical burden is dominated by musculoskeletal, ocular, and cardiac involvement that worsens slowly over years. Inheritance is autosomal recessive.",
+    "additionalDifferentials": [
+      "Hurler and Hurler-Scheie syndromes (other points on the MPS I spectrum)",
+      "Hunter syndrome (MPS II)",
+      "Maroteaux-Lamy syndrome (MPS VI)",
+      "Rheumatoid or juvenile idiopathic arthritis given the joint stiffness",
+      "Mucolipidoses with overlapping skeletal and connective tissue features",
+      "Other causes of corneal clouding such as cystinosis or Fabry disease"
     ],
-    [
-     "Primary Differentials",
-     "Hurler and Hurler-Scheie syndromes (other points on the MPS I spectrum), Hunter syndrome (MPS II), Maroteaux-Lamy syndrome (MPS",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Leucocyte or fibroblast alpha-L-iduronidase enzyme assay",
+      "Quantitative urinary glycosaminoglycan analysis with electrophoresis for dermatan and heparan sulfate",
+      "IDUA gene sequencing for molecular confirmation and genotype-phenotype correlation",
+      "Slit-lamp examination to document corneal clouding",
+      "Echocardiography to assess aortic and mitral valve function",
+      "Nerve conduction studies where carpal tunnel syndrome is suspected"
     ],
-    [
-     "Management Strategy",
-     "Offer enzyme replacement therapy with laronidase (recombinant alpha-L-iduronidase) as the mainstay to reduce glycosaminoglycan",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive aortic valve regurgitation or other cardiac valve dysfunction",
+      "Visual deterioration from advancing corneal clouding",
+      "Median nerve compression causing hand weakness and wasting",
+      "Cervical spine or airway compromise from connective tissue deposition"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing joint stiffness to inflammatory arthritis and missing the underlying storage disorder",
-     "Prevent diagnostic or management error"
+    "prognosis": "Life expectancy can approach normal in many patients, though progressive cardiac valve disease, corneal clouding, and joint limitation cause substantial long-term morbidity. Enzyme replacement therapy may help systemic manifestations but does not correct established corneal or valvular changes.",
+    "pitfalls": [
+      "Attributing joint stiffness to inflammatory arthritis and missing the underlying storage disorder",
+      "Assuming preserved intellect excludes a mucopolysaccharidosis",
+      "Overlooking silent valvular heart disease that requires surveillance",
+      "Delaying enzyme replacement therapy because early features are subtle"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics",
+      "Scriver's Online Metabolic and Molecular Bases of Inherited Disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Offer enzyme replacement therapy with laronidase (recombinant alpha-L-iduronidase) as the mainstay to reduce glycosaminoglycan storage and systemic burden",
+      "Refer for surgical carpal tunnel decompression and provide physiotherapy for joint stiffness and contractures",
+      "Manage progressive aortic valve disease with cardiology surveillance and valve surgery when indicated",
+      "Arrange corneal transplantation for visually significant corneal clouding, which enzyme therapy does not reverse",
+      "Monitor with serial echocardiography, slit-lamp examination, nerve conduction studies, and screening for sleep-disordered breathing",
+      "Coordinate multidisciplinary care and offer genetic counselling for the autosomal recessive inheritance and family screening"
     ]
-   ],
-   "caption": "Overview comparison matrix for scheie syndrome (mps is)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "scheie-syndrome-real-image",
-   "title": "Scheie syndrome (MPS IS): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "scheie_syndrome-pathway",
+      "title": "Scheie syndrome (MPS IS): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Represents the mildest (attenuated) end of the mucopolysaccharidosis type I spectrum, caused by partial deficiency of the lysosomal enzyme alpha-L-iduronidase",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive aortic valve regurgitation or other cardiac valve dysfunction",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Leucocyte or fibroblast alpha-L-iduronidase enzyme assay, Quantitative urinary glycosaminoglycan analysis with electrophoresis for dermatan and heparan sulfate, IDUA gene sequencing for molecular confirmation and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Offer enzyme replacement therapy with laronidase (recombinant alpha-L-iduronidase) as the mainstay to reduce glycosaminoglycan storage and systemic burden"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing joint stiffness to inflammatory arthritis and missing the underlying storage disorder"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of scheie syndrome (mps is)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "scheie_syndrome-matrix",
+      "title": "Scheie syndrome (MPS IS): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Represents the mildest (attenuated) end of the mucopolysaccharidosis type I spectrum, caused by partial deficiency of the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Leucocyte or fibroblast alpha-L-iduronidase enzyme assay, Quantitative urinary glycosaminoglycan analysis with electrophoresis",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Hurler and Hurler-Scheie syndromes (other points on the MPS I spectrum), Hunter syndrome (MPS II), Maroteaux-Lamy syndrome (MPS",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Offer enzyme replacement therapy with laronidase (recombinant alpha-L-iduronidase) as the mainstay to reduce glycosaminoglycan",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing joint stiffness to inflammatory arthritis and missing the underlying storage disorder",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for scheie syndrome (mps is)."
+    }
+  ],
+  "diagrams": []
 }

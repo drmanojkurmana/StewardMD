@@ -1,176 +1,154 @@
 {
- "id": "trichinellosis",
- "name": "Trichinellosis",
- "aliases": [
-  "trichinosis",
-  "Trichinella spiralis infection",
-  "trichiniasis"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases / Tropical Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Manson's Tropical Diseases; CDC parasitic disease guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A zoonotic tissue nematode infection acquired by eating raw or undercooked meat containing Trichinella larvae, classically pork but also wild game such as bear and boar",
-   "The early intestinal phase causes diarrhoea, abdominal pain and nausea within days of ingestion",
-   "The later muscle-invasion phase produces fever, myalgia, weakness and the characteristic periorbital and facial oedema",
-   "Marked peripheral eosinophilia and raised muscle enzymes (creatine kinase) are typical laboratory findings",
-   "Splinter haemorrhages, conjunctival and subungual haemorrhages, and a rash may be seen",
-   "Serology becomes positive over the first weeks; muscle biopsy showing encysted larvae is diagnostic when needed",
-   "Treatment combines anthelmintics such as albendazole or mebendazole with corticosteroids to control the inflammatory reaction in severe disease",
-   "Serious complications include myocarditis, encephalitis and respiratory muscle involvement, which are the main causes of death"
+  "id": "trichinellosis",
+  "name": "Trichinellosis",
+  "aliases": [
+    "trichinosis",
+    "Trichinella spiralis infection",
+    "trichiniasis"
   ],
-  "pathophysiology": "Trichinellosis begins when a person eats raw or undercooked meat containing encysted Trichinella larvae. Gastric digestion frees the larvae, which mature into adult worms in the small intestine; the females release newborn larvae that penetrate the mucosa and disseminate through the bloodstream and lymphatics. These larvae preferentially invade striated skeletal muscle, where they encyst within modified muscle cells (nurse cells), provoking an intense eosinophilic and inflammatory response. This muscle invasion accounts for the myositis, myalgia and periorbital oedema, while migration through other tissues can inflame the myocardium, central nervous system and respiratory muscles, explaining the potentially fatal complications.",
-  "additionalDifferentials": [
-   "Dermatomyositis or polymyositis",
-   "Other causes of eosinophilia with myalgia (eosinophilia-myalgia syndrome, hypereosinophilic syndrome)",
-   "Influenza or other viral myositis",
-   "Leptospirosis",
-   "Angioedema or allergic reaction (periorbital swelling)",
-   "Other tissue-invasive helminth infections",
-   "Systemic vasculitis"
-  ],
-  "additionalInvestigations": [
-   "Full blood count and blood film for eosinophilia",
-   "Serum creatine kinase and other muscle enzymes",
-   "Trichinella serology (antibody testing)",
-   "Detailed dietary history for raw or undercooked pork or game",
-   "Muscle biopsy for encysted larvae in uncertain cases",
-   "ECG and cardiac assessment, and neurological evaluation, when complications are suspected"
-  ],
-  "redFlags": [
-   "Chest pain, arrhythmia or heart failure suggesting myocarditis",
-   "Headache, confusion or focal deficits suggesting encephalitis",
-   "Breathlessness from respiratory muscle involvement",
-   "Severe systemic illness with very high eosinophilia and muscle enzyme elevation"
-  ],
-  "prognosis": "Most cases are mild and self-limiting with a good outcome, but heavy infections with myocardial, neurological or respiratory involvement can be life-threatening; prompt treatment shortens illness and reduces complications.",
-  "pitfalls": [
-   "Missing the dietary history of undercooked pork or wild game",
-   "Mistaking the myositis and periorbital oedema for dermatomyositis or an allergic reaction",
-   "Relying on early serology, which may be negative in the first days of illness",
-   "Failing to give anthelmintics early, before larvae encyst in muscle, when the diagnosis is suspected",
-   "Overlooking cardiac or neurological complications that determine prognosis"
-  ],
-  "references": [
-   "Manson's Tropical Diseases",
-   "CDC guidance on trichinellosis"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Start a benzimidazole anthelmintic (albendazole or mebendazole) promptly to kill intestinal adult worms and curtail release of newborn larvae; efficacy is greatest early before muscle encystment",
-   "Add systemic corticosteroids for severe inflammatory disease, particularly myocarditis, central nervous system involvement or marked myositis, to suppress the intense eosinophilic hypersensitivity response",
-   "Provide supportive symptomatic care with antipyretics and simple analgesia for fever and myalgia, together with bed rest and adequate hydration",
-   "Institute early ECG and cardiac monitoring and watch for myocardial, neurological and respiratory-muscle complications, tracking eosinophilia and creatine kinase",
-   "Escalate to critical care for myocarditis with arrhythmia or heart failure, encephalitis or respiratory-muscle weakness",
-   "Refer to infectious diseases or tropical medicine, involving cardiology and neurology when organ involvement is suspected",
-   "Notify public health, trace the implicated meat source and advise thorough cooking or freezing of pork and game to prevent further cases and treat co-exposed individuals"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "trichinellosis-pathway",
-   "title": "Trichinellosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A zoonotic tissue nematode infection acquired by eating raw or undercooked meat containing Trichinella larvae, classically pork but also wild game such as bear and boar",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Chest pain, arrhythmia or heart failure suggesting myocarditis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full blood count and blood film for eosinophilia, Serum creatine kinase and other muscle enzymes, Trichinella serology (antibody testing)"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Start a benzimidazole anthelmintic (albendazole or mebendazole) promptly to kill intestinal adult worms and curtail release of newborn larvae; efficacy is greatest early before muscle encystment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing the dietary history of undercooked pork or wild game"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of trichinellosis."
-  }
- ],
- "tables": [
-  {
-   "id": "trichinellosis-matrix",
-   "title": "Trichinellosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A zoonotic tissue nematode infection acquired by eating raw or undercooked meat containing Trichinella larvae, classically pork",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases / Tropical Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Manson's Tropical Diseases; CDC parasitic disease guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A zoonotic tissue nematode infection acquired by eating raw or undercooked meat containing Trichinella larvae, classically pork but also wild game such as bear and boar",
+      "The early intestinal phase causes diarrhoea, abdominal pain and nausea within days of ingestion",
+      "The later muscle-invasion phase produces fever, myalgia, weakness and the characteristic periorbital and facial oedema",
+      "Marked peripheral eosinophilia and raised muscle enzymes (creatine kinase) are typical laboratory findings",
+      "Splinter haemorrhages, conjunctival and subungual haemorrhages, and a rash may be seen",
+      "Serology becomes positive over the first weeks; muscle biopsy showing encysted larvae is diagnostic when needed",
+      "Treatment combines anthelmintics such as albendazole or mebendazole with corticosteroids to control the inflammatory reaction in severe disease",
+      "Serious complications include myocarditis, encephalitis and respiratory muscle involvement, which are the main causes of death"
     ],
-    [
-     "Key Investigations",
-     "Full blood count and blood film for eosinophilia, Serum creatine kinase and other muscle enzymes, Trichinella serology (antibody",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Trichinellosis begins when a person eats raw or undercooked meat containing encysted Trichinella larvae. Gastric digestion frees the larvae, which mature into adult worms in the small intestine; the females release newborn larvae that penetrate the mucosa and disseminate through the bloodstream and lymphatics. These larvae preferentially invade striated skeletal muscle, where they encyst within modified muscle cells (nurse cells), provoking an intense eosinophilic and inflammatory response. This muscle invasion accounts for the myositis, myalgia and periorbital oedema, while migration through other tissues can inflame the myocardium, central nervous system and respiratory muscles, explaining the potentially fatal complications.",
+    "additionalDifferentials": [
+      "Dermatomyositis or polymyositis",
+      "Other causes of eosinophilia with myalgia (eosinophilia-myalgia syndrome, hypereosinophilic syndrome)",
+      "Influenza or other viral myositis",
+      "Leptospirosis",
+      "Angioedema or allergic reaction (periorbital swelling)",
+      "Other tissue-invasive helminth infections",
+      "Systemic vasculitis"
     ],
-    [
-     "Primary Differentials",
-     "Dermatomyositis or polymyositis, Other causes of eosinophilia with myalgia (eosinophilia-myalgia syndrome, hypereosinophilic",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full blood count and blood film for eosinophilia",
+      "Serum creatine kinase and other muscle enzymes",
+      "Trichinella serology (antibody testing)",
+      "Detailed dietary history for raw or undercooked pork or game",
+      "Muscle biopsy for encysted larvae in uncertain cases",
+      "ECG and cardiac assessment, and neurological evaluation, when complications are suspected"
     ],
-    [
-     "Management Strategy",
-     "Start a benzimidazole anthelmintic (albendazole or mebendazole) promptly to kill intestinal adult worms and curtail release of",
-     "Core treatment modality"
+    "redFlags": [
+      "Chest pain, arrhythmia or heart failure suggesting myocarditis",
+      "Headache, confusion or focal deficits suggesting encephalitis",
+      "Breathlessness from respiratory muscle involvement",
+      "Severe systemic illness with very high eosinophilia and muscle enzyme elevation"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing the dietary history of undercooked pork or wild game",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most cases are mild and self-limiting with a good outcome, but heavy infections with myocardial, neurological or respiratory involvement can be life-threatening; prompt treatment shortens illness and reduces complications.",
+    "pitfalls": [
+      "Missing the dietary history of undercooked pork or wild game",
+      "Mistaking the myositis and periorbital oedema for dermatomyositis or an allergic reaction",
+      "Relying on early serology, which may be negative in the first days of illness",
+      "Failing to give anthelmintics early, before larvae encyst in muscle, when the diagnosis is suspected",
+      "Overlooking cardiac or neurological complications that determine prognosis"
+    ],
+    "references": [
+      "Manson's Tropical Diseases",
+      "CDC guidance on trichinellosis"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Start a benzimidazole anthelmintic (albendazole or mebendazole) promptly to kill intestinal adult worms and curtail release of newborn larvae; efficacy is greatest early before muscle encystment",
+      "Add systemic corticosteroids for severe inflammatory disease, particularly myocarditis, central nervous system involvement or marked myositis, to suppress the intense eosinophilic hypersensitivity response",
+      "Provide supportive symptomatic care with antipyretics and simple analgesia for fever and myalgia, together with bed rest and adequate hydration",
+      "Institute early ECG and cardiac monitoring and watch for myocardial, neurological and respiratory-muscle complications, tracking eosinophilia and creatine kinase",
+      "Escalate to critical care for myocarditis with arrhythmia or heart failure, encephalitis or respiratory-muscle weakness",
+      "Refer to infectious diseases or tropical medicine, involving cardiology and neurology when organ involvement is suspected",
+      "Notify public health, trace the implicated meat source and advise thorough cooking or freezing of pork and game to prevent further cases and treat co-exposed individuals"
     ]
-   ],
-   "caption": "Overview comparison matrix for trichinellosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "trichinellosis-real-image",
-   "title": "Trichinellosis: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "trichinellosis-pathway",
+      "title": "Trichinellosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A zoonotic tissue nematode infection acquired by eating raw or undercooked meat containing Trichinella larvae, classically pork but also wild game such as bear and boar",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Chest pain, arrhythmia or heart failure suggesting myocarditis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full blood count and blood film for eosinophilia, Serum creatine kinase and other muscle enzymes, Trichinella serology (antibody testing)"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Start a benzimidazole anthelmintic (albendazole or mebendazole) promptly to kill intestinal adult worms and curtail release of newborn larvae; efficacy is greatest early before muscle encystment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing the dietary history of undercooked pork or wild game"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of trichinellosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "trichinellosis-matrix",
+      "title": "Trichinellosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A zoonotic tissue nematode infection acquired by eating raw or undercooked meat containing Trichinella larvae, classically pork",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full blood count and blood film for eosinophilia, Serum creatine kinase and other muscle enzymes, Trichinella serology (antibody",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Dermatomyositis or polymyositis, Other causes of eosinophilia with myalgia (eosinophilia-myalgia syndrome, hypereosinophilic",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Start a benzimidazole anthelmintic (albendazole or mebendazole) promptly to kill intestinal adult worms and curtail release of",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing the dietary history of undercooked pork or wild game",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for trichinellosis."
+    }
+  ],
+  "diagrams": []
 }

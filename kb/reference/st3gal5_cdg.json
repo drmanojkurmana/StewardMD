@@ -1,175 +1,153 @@
 {
- "id": "st3gal5_cdg",
- "name": "ST3GAL5-CDG (GM3 Synthase Deficiency)",
- "aliases": [
-  "GM3 synthase deficiency",
-  "Salt and pepper syndrome",
-  "Amish infantile epilepsy syndrome",
-  "ST3GAL5"
- ],
- "class": "non_infective",
- "system": "Metabolic / Glycosylation",
- "specialty": "Metabolic medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Congenital disorders of glycosylation references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive defect of ganglioside biosynthesis caused by biallelic ST3GAL5 variants encoding GM3 synthase (lactosylceramide alpha-2,3-sialyltransferase).",
-   "Presents in early infancy with intractable epilepsy, marked irritability and arrest then regression of development, progressing to profound intellectual disability.",
-   "A distinctive later feature is cutaneous dyspigmentation in a salt-and-pepper pattern of hyper- and hypopigmented macules, giving the eponymous salt-and-pepper syndrome.",
-   "Acquired sensorineural deafness and cortical visual impairment are common, and a movement disorder with choreoathetosis and dystonia develops.",
-   "First delineated in the Old Order Amish as the Amish infantile epilepsy syndrome, it is now recognised across several populations.",
-   "Because the block is in glycosphingolipid (ganglioside) synthesis rather than protein N-glycosylation, serum transferrin isoelectric focusing is usually normal, so a normal CDG screen does not exclude it.",
-   "Feeding difficulty with faltering growth and stagnant head circumference (acquired microcephaly) is typical."
+  "id": "st3gal5_cdg",
+  "name": "ST3GAL5-CDG (GM3 Synthase Deficiency)",
+  "aliases": [
+    "GM3 synthase deficiency",
+    "Salt and pepper syndrome",
+    "Amish infantile epilepsy syndrome",
+    "ST3GAL5"
   ],
-  "pathophysiology": "ST3GAL5 encodes GM3 synthase, the sialyltransferase that transfers sialic acid onto lactosylceramide to form GM3, the obligate precursor of the a- and b-series complex gangliosides. Loss-of-function variants abolish GM3 synthesis and deplete the downstream gangliosides that are heavily enriched in neuronal and melanocyte membranes and that are essential for synaptic signalling, receptor modulation and cell-cell recognition, while precursor and alternative-series glycolipids accumulate. Profound deficiency of complex gangliosides in the developing brain produces the severe infantile epileptic encephalopathy and progressive neurodegeneration, and disturbed melanocyte glycolipids account for the characteristic salt-and-pepper dyspigmentation.",
-  "additionalDifferentials": [
-   "ST3GAL3-related epileptic encephalopathy and intellectual disability (a related sialyltransferase defect)",
-   "B4GALNT1 deficiency (hereditary spastic paraplegia SPG26, with overlapping ganglioside-series disturbance)",
-   "Other early-infantile epileptic encephalopathies (CDKL5, STXBP1, KCNQ2)",
-   "GM1 and GM2 gangliosidoses and neuronal ceroid lipofuscinoses (progressive neuroregression with seizures)",
-   "Menkes disease and other neurodegenerative disorders with pigmentary or hair changes",
-   "Peroxisomal and mitochondrial encephalopathies of infancy"
-  ],
-  "additionalInvestigations": [
-   "Molecular testing of ST3GAL5 with an epileptic-encephalopathy or CDG gene panel, or exome sequencing",
-   "Plasma glycosphingolipid and ganglioside profiling (reduced GM3 and downstream species)",
-   "EEG (often multifocal epileptiform activity or hypsarrhythmia-like patterns)",
-   "Brain MRI (progressive cerebral atrophy)",
-   "Serum transferrin isoelectric focusing (typically normal, helping to exclude N-glycosylation CDGs)",
-   "Ophthalmology and audiology assessment, including visual evoked potentials and brainstem auditory responses"
-  ],
-  "redFlags": [
-   "Onset of refractory seizures with developmental arrest in early infancy",
-   "Loss of previously acquired skills (neuroregression)",
-   "Progressive loss of vision and hearing",
-   "Feeding failure with aspiration risk and faltering growth"
-  ],
-  "prognosis": "The disorder is severe and progressive, producing profound and permanent neurodisability; many affected children have a markedly shortened lifespan, and care is supportive with a focus on seizure control, feeding and comfort.",
-  "pitfalls": [
-   "Relying on a normal transferrin CDG screen to exclude the diagnosis, as ganglioside defects are not detected by that test.",
-   "Attributing the picture to a channelopathy epileptic encephalopathy and stopping the genetic work-up before ST3GAL5 is tested.",
-   "Overlooking the diagnostic value of the salt-and-pepper dyspigmentation, which may appear only later in the course.",
-   "Misreading acquired microcephaly and regression as a static encephalopathy."
-  ],
-  "references": [
-   "Physician's Guide to the Diagnosis, Treatment and Follow-up of Inherited Metabolic Diseases",
-   "Congenital disorders of glycosylation and glycosphingolipid biosynthesis reviews",
-   "Paediatric neurology and neurometabolic reference texts"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No disease-specific therapy exists; care is supportive with a focus on seizure control, feeding and comfort",
-   "Antiseizure medications for the intractable infantile epilepsy",
-   "Nutritional support and management of feeding difficulties, including gastrostomy where needed",
-   "Management of the movement disorder with choreoathetosis and dystonia, and of marked irritability",
-   "Audiology support for acquired sensorineural deafness and ophthalmology/visual support for cortical visual impairment",
-   "Multidisciplinary developmental, physiotherapy and palliative care given the progressive neurodegeneration",
-   "Genetic counselling for this autosomal recessive disorder, with family screening, noting the founder variant in the Old Order Amish"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "st3gal5_cdg-pathway",
-   "title": "ST3GAL5-CDG (GM3 Synthase Deficiency): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive defect of ganglioside biosynthesis caused by biallelic ST3GAL5 variants encoding GM3 synthase (lactosylceramide alpha-2,3-sialyltransferase).",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Onset of refractory seizures with developmental arrest in early infancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Molecular testing of ST3GAL5 with an epileptic-encephalopathy or CDG gene panel, or exome sequencing, Plasma glycosphingolipid and ganglioside profiling (reduced GM3 and downstream species), EEG (often multifocal"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No disease-specific therapy exists; care is supportive with a focus on seizure control, feeding and comfort"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Relying on a normal transferrin CDG screen to exclude the diagnosis, as ganglioside defects are not detected by that test."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of st3gal5-cdg (gm3 synthase deficiency)."
-  }
- ],
- "tables": [
-  {
-   "id": "st3gal5_cdg-matrix",
-   "title": "ST3GAL5-CDG (GM3 Synthase Deficiency): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive defect of ganglioside biosynthesis caused by biallelic ST3GAL5 variants encoding GM3 synthase",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Glycosylation",
+  "specialty": "Metabolic medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Congenital disorders of glycosylation references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive defect of ganglioside biosynthesis caused by biallelic ST3GAL5 variants encoding GM3 synthase (lactosylceramide alpha-2,3-sialyltransferase).",
+      "Presents in early infancy with intractable epilepsy, marked irritability and arrest then regression of development, progressing to profound intellectual disability.",
+      "A distinctive later feature is cutaneous dyspigmentation in a salt-and-pepper pattern of hyper- and hypopigmented macules, giving the eponymous salt-and-pepper syndrome.",
+      "Acquired sensorineural deafness and cortical visual impairment are common, and a movement disorder with choreoathetosis and dystonia develops.",
+      "First delineated in the Old Order Amish as the Amish infantile epilepsy syndrome, it is now recognised across several populations.",
+      "Because the block is in glycosphingolipid (ganglioside) synthesis rather than protein N-glycosylation, serum transferrin isoelectric focusing is usually normal, so a normal CDG screen does not exclude it.",
+      "Feeding difficulty with faltering growth and stagnant head circumference (acquired microcephaly) is typical."
     ],
-    [
-     "Key Investigations",
-     "Molecular testing of ST3GAL5 with an epileptic-encephalopathy or CDG gene panel, or exome sequencing, Plasma glycosphingolipid",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "ST3GAL5 encodes GM3 synthase, the sialyltransferase that transfers sialic acid onto lactosylceramide to form GM3, the obligate precursor of the a- and b-series complex gangliosides. Loss-of-function variants abolish GM3 synthesis and deplete the downstream gangliosides that are heavily enriched in neuronal and melanocyte membranes and that are essential for synaptic signalling, receptor modulation and cell-cell recognition, while precursor and alternative-series glycolipids accumulate. Profound deficiency of complex gangliosides in the developing brain produces the severe infantile epileptic encephalopathy and progressive neurodegeneration, and disturbed melanocyte glycolipids account for the characteristic salt-and-pepper dyspigmentation.",
+    "additionalDifferentials": [
+      "ST3GAL3-related epileptic encephalopathy and intellectual disability (a related sialyltransferase defect)",
+      "B4GALNT1 deficiency (hereditary spastic paraplegia SPG26, with overlapping ganglioside-series disturbance)",
+      "Other early-infantile epileptic encephalopathies (CDKL5, STXBP1, KCNQ2)",
+      "GM1 and GM2 gangliosidoses and neuronal ceroid lipofuscinoses (progressive neuroregression with seizures)",
+      "Menkes disease and other neurodegenerative disorders with pigmentary or hair changes",
+      "Peroxisomal and mitochondrial encephalopathies of infancy"
     ],
-    [
-     "Primary Differentials",
-     "ST3GAL3-related epileptic encephalopathy and intellectual disability (a related sialyltransferase defect), B4GALNT1 deficiency",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Molecular testing of ST3GAL5 with an epileptic-encephalopathy or CDG gene panel, or exome sequencing",
+      "Plasma glycosphingolipid and ganglioside profiling (reduced GM3 and downstream species)",
+      "EEG (often multifocal epileptiform activity or hypsarrhythmia-like patterns)",
+      "Brain MRI (progressive cerebral atrophy)",
+      "Serum transferrin isoelectric focusing (typically normal, helping to exclude N-glycosylation CDGs)",
+      "Ophthalmology and audiology assessment, including visual evoked potentials and brainstem auditory responses"
     ],
-    [
-     "Management Strategy",
-     "No disease-specific therapy exists; care is supportive with a focus on seizure control, feeding and comfort",
-     "Core treatment modality"
+    "redFlags": [
+      "Onset of refractory seizures with developmental arrest in early infancy",
+      "Loss of previously acquired skills (neuroregression)",
+      "Progressive loss of vision and hearing",
+      "Feeding failure with aspiration risk and faltering growth"
     ],
-    [
-     "Clinical Pitfall",
-     "Relying on a normal transferrin CDG screen to exclude the diagnosis, as ganglioside defects are not detected by that test.",
-     "Prevent diagnostic or management error"
+    "prognosis": "The disorder is severe and progressive, producing profound and permanent neurodisability; many affected children have a markedly shortened lifespan, and care is supportive with a focus on seizure control, feeding and comfort.",
+    "pitfalls": [
+      "Relying on a normal transferrin CDG screen to exclude the diagnosis, as ganglioside defects are not detected by that test.",
+      "Attributing the picture to a channelopathy epileptic encephalopathy and stopping the genetic work-up before ST3GAL5 is tested.",
+      "Overlooking the diagnostic value of the salt-and-pepper dyspigmentation, which may appear only later in the course.",
+      "Misreading acquired microcephaly and regression as a static encephalopathy."
+    ],
+    "references": [
+      "Physician's Guide to the Diagnosis, Treatment and Follow-up of Inherited Metabolic Diseases",
+      "Congenital disorders of glycosylation and glycosphingolipid biosynthesis reviews",
+      "Paediatric neurology and neurometabolic reference texts"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No disease-specific therapy exists; care is supportive with a focus on seizure control, feeding and comfort",
+      "Antiseizure medications for the intractable infantile epilepsy",
+      "Nutritional support and management of feeding difficulties, including gastrostomy where needed",
+      "Management of the movement disorder with choreoathetosis and dystonia, and of marked irritability",
+      "Audiology support for acquired sensorineural deafness and ophthalmology/visual support for cortical visual impairment",
+      "Multidisciplinary developmental, physiotherapy and palliative care given the progressive neurodegeneration",
+      "Genetic counselling for this autosomal recessive disorder, with family screening, noting the founder variant in the Old Order Amish"
     ]
-   ],
-   "caption": "Overview comparison matrix for st3gal5-cdg (gm3 synthase deficiency)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "st3gal5-cdg-real-image",
-   "title": "ST3GAL5-CDG (GM3 Synthase Deficiency): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "st3gal5_cdg-pathway",
+      "title": "ST3GAL5-CDG (GM3 Synthase Deficiency): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive defect of ganglioside biosynthesis caused by biallelic ST3GAL5 variants encoding GM3 synthase (lactosylceramide alpha-2,3-sialyltransferase).",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Onset of refractory seizures with developmental arrest in early infancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Molecular testing of ST3GAL5 with an epileptic-encephalopathy or CDG gene panel, or exome sequencing, Plasma glycosphingolipid and ganglioside profiling (reduced GM3 and downstream species), EEG (often multifocal"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No disease-specific therapy exists; care is supportive with a focus on seizure control, feeding and comfort"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Relying on a normal transferrin CDG screen to exclude the diagnosis, as ganglioside defects are not detected by that test."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of st3gal5-cdg (gm3 synthase deficiency)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "st3gal5_cdg-matrix",
+      "title": "ST3GAL5-CDG (GM3 Synthase Deficiency): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive defect of ganglioside biosynthesis caused by biallelic ST3GAL5 variants encoding GM3 synthase",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Molecular testing of ST3GAL5 with an epileptic-encephalopathy or CDG gene panel, or exome sequencing, Plasma glycosphingolipid",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "ST3GAL3-related epileptic encephalopathy and intellectual disability (a related sialyltransferase defect), B4GALNT1 deficiency",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No disease-specific therapy exists; care is supportive with a focus on seizure control, feeding and comfort",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Relying on a normal transferrin CDG screen to exclude the diagnosis, as ganglioside defects are not detected by that test.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for st3gal5-cdg (gm3 synthase deficiency)."
+    }
+  ],
+  "diagrams": []
 }

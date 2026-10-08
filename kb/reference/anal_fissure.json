@@ -1,172 +1,150 @@
 {
- "id": "anal_fissure",
- "name": "Anal fissure",
- "aliases": [
-  "fissure-in-ano",
-  "anal fissure",
-  "chronic anal fissure"
- ],
- "class": "non_infective",
- "system": "GI / Anorectal / Surgery",
- "specialty": "General Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Bailey & Love's Short Practice of Surgery / Sabiston Textbook of Surgery",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents with severe, sharp anal pain during and often for a prolonged period after defaecation, frequently with a small amount of bright red blood on the paper",
-   "Most fissures occur in the posterior midline; anterior fissures are more common in women, and fissures away from the midline should raise suspicion of underlying disease",
-   "Pain and reflex internal sphincter spasm create a cycle of ischaemia that impairs healing and perpetuates the fissure",
-   "A chronic fissure shows a triad of a sentinel skin tag, exposed internal sphincter fibres in the base, and a hypertrophied anal papilla",
-   "Examination is often too painful for a digital rectal examination, which may need to be deferred or performed under anaesthesia",
-   "First-line management aims to break the spasm-ischaemia cycle with stool softening, fibre, and topical agents that relax the internal sphincter such as glyceryl trinitrate or a calcium channel blocker",
-   "Refractory fissures may be treated with botulinum toxin injection or lateral internal sphincterotomy, the latter carrying a small risk of incontinence",
-   "Multiple, lateral, or atypical fissures warrant investigation for Crohn's disease, tuberculosis, sexually transmitted infection, or malignancy"
+  "id": "anal_fissure",
+  "name": "Anal fissure",
+  "aliases": [
+    "fissure-in-ano",
+    "anal fissure",
+    "chronic anal fissure"
   ],
-  "pathophysiology": "An anal fissure is a longitudinal tear in the anoderm of the distal anal canal, usually initiated by the passage of a hard or bulky stool. Resulting pain triggers spasm and hypertonia of the internal anal sphincter, which raises resting anal pressure and reduces blood flow to the relatively poorly perfused posterior midline. This local ischaemia impairs mucosal healing, converting an acute tear into a chronic non-healing ulcer. Persistent inflammation produces the sentinel tag, papilla hypertrophy, and exposure of sphincter fibres seen in chronic fissures.",
-  "additionalDifferentials": [
-   "Thrombosed external haemorrhoid or perianal haematoma",
-   "Anorectal abscess",
-   "Fistula-in-ano",
-   "Crohn's disease or ulcerative proctitis",
-   "Anal carcinoma",
-   "Sexually transmitted infection (herpes, syphilis)",
-   "Pruritus ani with excoriation"
-  ],
-  "additionalInvestigations": [
-   "Gentle inspection of the anal verge, often with the patient positioned to allow the fissure to be seen",
-   "Examination under anaesthesia when pain precludes assessment or the diagnosis is unclear",
-   "Endoscopic evaluation and biopsy for atypical, multiple, or non-healing fissures",
-   "Investigations for inflammatory bowel disease or infection when clinically suspected"
-  ],
-  "redFlags": [
-   "Atypical, lateral, or multiple fissures suggesting Crohn's disease, infection, or malignancy",
-   "A non-healing indurated ulcer that may represent anal carcinoma",
-   "Associated perianal sepsis, abscess, or fistula",
-   "Systemic features of inflammatory bowel disease or immunosuppression"
-  ],
-  "prognosis": "Acute fissures commonly heal with conservative treatment and stool softening. A substantial proportion of chronic fissures heal with topical sphincter-relaxing therapy, and most of the remainder respond to botulinum toxin or sphincterotomy, though a small risk of minor incontinence follows surgery.",
-  "pitfalls": [
-   "Forcing a digital or instrumental examination through severe pain rather than deferring or examining under anaesthesia",
-   "Overlooking Crohn's disease or malignancy in atypical or non-healing fissures",
-   "Proceeding to sphincterotomy without considering continence risk, especially in women and older patients",
-   "Failing to address ongoing constipation, allowing recurrence"
-  ],
-  "references": [
-   "Bailey & Love's Short Practice of Surgery",
-   "Sabiston Textbook of Surgery"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Begin conservative treatment with dietary fibre, adequate fluids, stool softeners and warm sitz baths to ease defaecation",
-   "Apply a topical internal-sphincter relaxant such as glyceryl trinitrate or a calcium channel blocker like diltiazem to break the spasm-ischaemia cycle",
-   "Offer botulinum toxin injection into the internal sphincter for fissures failing topical therapy",
-   "Reserve lateral internal sphincterotomy for chronic fissures refractory to medical treatment, counselling on the small risk of minor incontinence",
-   "Investigate atypical, lateral, multiple or non-healing fissures for inflammatory bowel disease, infection or other underlying disease",
-   "Address ongoing constipation to prevent recurrence"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "anal_fissure-pathway",
-   "title": "Anal fissure: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents with severe, sharp anal pain during and often for a prolonged period after defaecation, frequently with a small amount of bright red blood on the paper",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Atypical, lateral, or multiple fissures suggesting Crohn's disease, infection, or malignancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Gentle inspection of the anal verge, often with the patient positioned to allow the fissure to be seen, Examination under anaesthesia when pain precludes assessment or the diagnosis is unclear, Endoscopic evaluation and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Begin conservative treatment with dietary fibre, adequate fluids, stool softeners and warm sitz baths to ease defaecation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Forcing a digital or instrumental examination through severe pain rather than deferring or examining under anaesthesia"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of anal fissure."
-  }
- ],
- "tables": [
-  {
-   "id": "anal_fissure-matrix",
-   "title": "Anal fissure: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents with severe, sharp anal pain during and often for a prolonged period after defaecation, frequently with a small amount",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "GI / Anorectal / Surgery",
+  "specialty": "General Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bailey & Love's Short Practice of Surgery / Sabiston Textbook of Surgery",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents with severe, sharp anal pain during and often for a prolonged period after defaecation, frequently with a small amount of bright red blood on the paper",
+      "Most fissures occur in the posterior midline; anterior fissures are more common in women, and fissures away from the midline should raise suspicion of underlying disease",
+      "Pain and reflex internal sphincter spasm create a cycle of ischaemia that impairs healing and perpetuates the fissure",
+      "A chronic fissure shows a triad of a sentinel skin tag, exposed internal sphincter fibres in the base, and a hypertrophied anal papilla",
+      "Examination is often too painful for a digital rectal examination, which may need to be deferred or performed under anaesthesia",
+      "First-line management aims to break the spasm-ischaemia cycle with stool softening, fibre, and topical agents that relax the internal sphincter such as glyceryl trinitrate or a calcium channel blocker",
+      "Refractory fissures may be treated with botulinum toxin injection or lateral internal sphincterotomy, the latter carrying a small risk of incontinence",
+      "Multiple, lateral, or atypical fissures warrant investigation for Crohn's disease, tuberculosis, sexually transmitted infection, or malignancy"
     ],
-    [
-     "Key Investigations",
-     "Gentle inspection of the anal verge, often with the patient positioned to allow the fissure to be seen, Examination under",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "An anal fissure is a longitudinal tear in the anoderm of the distal anal canal, usually initiated by the passage of a hard or bulky stool. Resulting pain triggers spasm and hypertonia of the internal anal sphincter, which raises resting anal pressure and reduces blood flow to the relatively poorly perfused posterior midline. This local ischaemia impairs mucosal healing, converting an acute tear into a chronic non-healing ulcer. Persistent inflammation produces the sentinel tag, papilla hypertrophy, and exposure of sphincter fibres seen in chronic fissures.",
+    "additionalDifferentials": [
+      "Thrombosed external haemorrhoid or perianal haematoma",
+      "Anorectal abscess",
+      "Fistula-in-ano",
+      "Crohn's disease or ulcerative proctitis",
+      "Anal carcinoma",
+      "Sexually transmitted infection (herpes, syphilis)",
+      "Pruritus ani with excoriation"
     ],
-    [
-     "Primary Differentials",
-     "Thrombosed external haemorrhoid or perianal haematoma, Anorectal abscess, Fistula-in-ano",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Gentle inspection of the anal verge, often with the patient positioned to allow the fissure to be seen",
+      "Examination under anaesthesia when pain precludes assessment or the diagnosis is unclear",
+      "Endoscopic evaluation and biopsy for atypical, multiple, or non-healing fissures",
+      "Investigations for inflammatory bowel disease or infection when clinically suspected"
     ],
-    [
-     "Management Strategy",
-     "Begin conservative treatment with dietary fibre, adequate fluids, stool softeners and warm sitz baths to ease defaecation",
-     "Core treatment modality"
+    "redFlags": [
+      "Atypical, lateral, or multiple fissures suggesting Crohn's disease, infection, or malignancy",
+      "A non-healing indurated ulcer that may represent anal carcinoma",
+      "Associated perianal sepsis, abscess, or fistula",
+      "Systemic features of inflammatory bowel disease or immunosuppression"
     ],
-    [
-     "Clinical Pitfall",
-     "Forcing a digital or instrumental examination through severe pain rather than deferring or examining under anaesthesia",
-     "Prevent diagnostic or management error"
+    "prognosis": "Acute fissures commonly heal with conservative treatment and stool softening. A substantial proportion of chronic fissures heal with topical sphincter-relaxing therapy, and most of the remainder respond to botulinum toxin or sphincterotomy, though a small risk of minor incontinence follows surgery.",
+    "pitfalls": [
+      "Forcing a digital or instrumental examination through severe pain rather than deferring or examining under anaesthesia",
+      "Overlooking Crohn's disease or malignancy in atypical or non-healing fissures",
+      "Proceeding to sphincterotomy without considering continence risk, especially in women and older patients",
+      "Failing to address ongoing constipation, allowing recurrence"
+    ],
+    "references": [
+      "Bailey & Love's Short Practice of Surgery",
+      "Sabiston Textbook of Surgery"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Begin conservative treatment with dietary fibre, adequate fluids, stool softeners and warm sitz baths to ease defaecation",
+      "Apply a topical internal-sphincter relaxant such as glyceryl trinitrate or a calcium channel blocker like diltiazem to break the spasm-ischaemia cycle",
+      "Offer botulinum toxin injection into the internal sphincter for fissures failing topical therapy",
+      "Reserve lateral internal sphincterotomy for chronic fissures refractory to medical treatment, counselling on the small risk of minor incontinence",
+      "Investigate atypical, lateral, multiple or non-healing fissures for inflammatory bowel disease, infection or other underlying disease",
+      "Address ongoing constipation to prevent recurrence"
     ]
-   ],
-   "caption": "Overview comparison matrix for anal fissure."
-  }
- ],
- "diagrams": [
-  {
-   "id": "anal-fissure-real-image",
-   "title": "Anal fissure: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "anal_fissure-pathway",
+      "title": "Anal fissure: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents with severe, sharp anal pain during and often for a prolonged period after defaecation, frequently with a small amount of bright red blood on the paper",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Atypical, lateral, or multiple fissures suggesting Crohn's disease, infection, or malignancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Gentle inspection of the anal verge, often with the patient positioned to allow the fissure to be seen, Examination under anaesthesia when pain precludes assessment or the diagnosis is unclear, Endoscopic evaluation and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Begin conservative treatment with dietary fibre, adequate fluids, stool softeners and warm sitz baths to ease defaecation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Forcing a digital or instrumental examination through severe pain rather than deferring or examining under anaesthesia"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of anal fissure."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "anal_fissure-matrix",
+      "title": "Anal fissure: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents with severe, sharp anal pain during and often for a prolonged period after defaecation, frequently with a small amount",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Gentle inspection of the anal verge, often with the patient positioned to allow the fissure to be seen, Examination under",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Thrombosed external haemorrhoid or perianal haematoma, Anorectal abscess, Fistula-in-ano",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Begin conservative treatment with dietary fibre, adequate fluids, stool softeners and warm sitz baths to ease defaecation",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Forcing a digital or instrumental examination through severe pain rather than deferring or examining under anaesthesia",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for anal fissure."
+    }
+  ],
+  "diagrams": []
 }

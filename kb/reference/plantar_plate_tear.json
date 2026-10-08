@@ -1,179 +1,157 @@
 {
- "id": "plantar_plate_tear",
- "name": "Plantar plate tear",
- "aliases": [
-  "plantar plate insufficiency",
-  "plantar plate rupture",
-  "lesser MTP joint instability",
-  "predislocation syndrome"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Foot & Ankle",
- "specialty": "Orthopaedics / Podiatry",
- "referenceOnly": true,
- "reference": {
-  "source": "Mann's Surgery of the Foot and Ankle",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The plantar plate is the fibrocartilaginous plantar stabiliser of the lesser metatarsophalangeal joint, and its attrition or tear causes pain and progressive instability",
-   "The second toe is most commonly affected, and patients describe plantar pain at the base of the toe, often with a feeling of walking on a lump and swelling of the joint",
-   "The modified drawer (Lachman-type) test, in which dorsal translation of the proximal phalanx on the metatarsal head reproduces pain and shows increased laxity, is the key clinical sign",
-   "Progressive insufficiency leads to dorsal and medial drift of the toe, producing the crossover toe deformity in which the second toe overrides the hallux",
-   "The V-sign, a widening gap between the second and third toes, is an early indicator of medial deviation from plantar plate failure",
-   "Ultrasound and MRI are the most useful investigations to confirm the tear and grade its severity, while weight-bearing radiographs assess alignment and exclude other causes",
-   "Distinguish it from interdigital neuroma, which typically causes interspace rather than joint pain and lacks the instability signs",
-   "Early management is conservative with metatarsal offloading orthoses, toe strapping or taping to hold the toe plantarward, stiff-soled footwear, and activity modification, with plantar plate repair or reconstruction and associated deformity correction reserved for failed cases"
+  "id": "plantar_plate_tear",
+  "name": "Plantar plate tear",
+  "aliases": [
+    "plantar plate insufficiency",
+    "plantar plate rupture",
+    "lesser MTP joint instability",
+    "predislocation syndrome"
   ],
-  "pathophysiology": "The plantar plate is a thick fibrocartilaginous structure on the plantar surface of the lesser metatarsophalangeal joint that resists dorsiflexion and hyperextension and, together with the collateral ligaments, provides the main static stability of the joint. Chronic dorsiflexion overload, as occurs with a long metatarsal, hallux valgus that crowds the second toe, high-heeled footwear, or inflammatory disease, produces cumulative attritional injury that weakens and eventually tears the plate, usually near its insertion into the base of the proximal phalanx. As the plantar restraint fails, the proximal phalanx drifts dorsally and the toe becomes unstable, and asymmetrical involvement of the collateral ligaments allows medial deviation, giving the characteristic crossover second toe that overrides the hallux. Loss of the plantar cushioning contributes to metatarsalgia beneath the involved head. The process is typically gradual and degenerative rather than the result of a single acute event.",
-  "additionalDifferentials": [
-   "Interdigital (Morton's) neuroma",
-   "Freiberg's infraction of the metatarsal head",
-   "Metatarsophalangeal joint synovitis from inflammatory arthritis",
-   "Metatarsal stress fracture",
-   "Mechanical metatarsalgia from other causes",
-   "Hammer or claw toe deformity from other mechanisms",
-   "Capsulitis of the metatarsophalangeal joint"
-  ],
-  "additionalInvestigations": [
-   "Clinical examination including the modified drawer test and inspection for crossover deformity and the V-sign",
-   "Weight-bearing foot radiographs to assess metatarsal length, alignment, and toe position",
-   "Ultrasound to visualise the plantar plate and dynamic instability",
-   "MRI to confirm and grade the tear and assess collateral ligament involvement",
-   "Assessment for associated hallux valgus and metatarsal length abnormality",
-   "Pedobarography to characterise forefoot overload where relevant",
-   "Inflammatory markers and serology if a synovitic or inflammatory cause is suspected"
-  ],
-  "redFlags": [
-   "Rapidly progressive dorsal dislocation of the toe with fixed crossover deformity",
-   "Symmetrical or multiple joint synovitis suggesting underlying inflammatory arthritis",
-   "Focal bony tenderness suggesting a coexisting stress fracture",
-   "A hot, swollen joint raising the possibility of septic arthritis or crystal arthropathy",
-   "Neurovascular compromise of the drifting toe"
-  ],
-  "prognosis": "Early and partial tears often stabilise or improve with offloading, taping, and footwear modification, though these measures control symptoms rather than heal the plate. Once fixed deformity or dislocation develops, conservative treatment is less effective and surgical plantar plate repair or reconstruction with deformity correction is required; results are generally good but some residual stiffness, recurrence, or floating toe may occur.",
-  "pitfalls": [
-   "Misdiagnosing the condition as an interdigital neuroma and treating the wrong structure",
-   "Failing to perform the drawer test and missing early instability before fixed deformity develops",
-   "Overlooking associated hallux valgus or a long metatarsal that drives recurrence if uncorrected",
-   "Assuming conservative treatment will heal a complete tear rather than merely control symptoms",
-   "Missing an inflammatory arthropathy underlying multiple-joint synovitis"
-  ],
-  "references": [
-   "Mann's Surgery of the Foot and Ankle",
-   "Miller's Review of Orthopaedics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Initial offloading with metatarsal domes or pads, taping of the toe into plantarflexion or a Budin splint, and stiff-soled or rocker-bottom footwear to reduce dorsiflexion overload of the lesser metatarsophalangeal joint",
-   "Activity modification and avoidance of high-heeled and narrow footwear that crowd and hyperextend the toe",
-   "Simple analgesics or NSAIDs for pain, using intra-articular corticosteroid only sparingly as it may accelerate plate rupture and worsen instability",
-   "Correct contributing deformity, addressing associated hallux valgus and relative metatarsal length that perpetuate the overload",
-   "Surgical plantar plate repair or reconstruction, commonly combined with a Weil shortening metatarsal osteotomy, for fixed deformity, joint dislocation or failed conservative care, with rebalancing of the crossover toe",
-   "Monitor for progression to fixed deformity, dorsal dislocation and secondary chondral damage",
-   "Refer to orthopaedic foot and ankle surgery or podiatry for grading and definitive planning"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "plantar_plate_tear-pathway",
-   "title": "Plantar plate tear: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The plantar plate is the fibrocartilaginous plantar stabiliser of the lesser metatarsophalangeal joint, and its attrition or tear causes pain and progressive instability",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive dorsal dislocation of the toe with fixed crossover deformity",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical examination including the modified drawer test and inspection for crossover deformity and the V-sign, Weight-bearing foot radiographs to assess metatarsal length, alignment, and toe position, Ultrasound to"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Initial offloading with metatarsal domes or pads, taping of the toe into plantarflexion or a Budin splint, and stiff-soled or rocker-bottom footwear to reduce dorsiflexion overload of the lesser metatarsophalangeal"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing the condition as an interdigital neuroma and treating the wrong structure"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of plantar plate tear."
-  }
- ],
- "tables": [
-  {
-   "id": "plantar_plate_tear-matrix",
-   "title": "Plantar plate tear: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The plantar plate is the fibrocartilaginous plantar stabiliser of the lesser metatarsophalangeal joint, and its attrition or tear",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Foot & Ankle",
+  "specialty": "Orthopaedics / Podiatry",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mann's Surgery of the Foot and Ankle",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The plantar plate is the fibrocartilaginous plantar stabiliser of the lesser metatarsophalangeal joint, and its attrition or tear causes pain and progressive instability",
+      "The second toe is most commonly affected, and patients describe plantar pain at the base of the toe, often with a feeling of walking on a lump and swelling of the joint",
+      "The modified drawer (Lachman-type) test, in which dorsal translation of the proximal phalanx on the metatarsal head reproduces pain and shows increased laxity, is the key clinical sign",
+      "Progressive insufficiency leads to dorsal and medial drift of the toe, producing the crossover toe deformity in which the second toe overrides the hallux",
+      "The V-sign, a widening gap between the second and third toes, is an early indicator of medial deviation from plantar plate failure",
+      "Ultrasound and MRI are the most useful investigations to confirm the tear and grade its severity, while weight-bearing radiographs assess alignment and exclude other causes",
+      "Distinguish it from interdigital neuroma, which typically causes interspace rather than joint pain and lacks the instability signs",
+      "Early management is conservative with metatarsal offloading orthoses, toe strapping or taping to hold the toe plantarward, stiff-soled footwear, and activity modification, with plantar plate repair or reconstruction and associated deformity correction reserved for failed cases"
     ],
-    [
-     "Key Investigations",
-     "Clinical examination including the modified drawer test and inspection for crossover deformity and the V-sign, Weight-bearing",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The plantar plate is a thick fibrocartilaginous structure on the plantar surface of the lesser metatarsophalangeal joint that resists dorsiflexion and hyperextension and, together with the collateral ligaments, provides the main static stability of the joint. Chronic dorsiflexion overload, as occurs with a long metatarsal, hallux valgus that crowds the second toe, high-heeled footwear, or inflammatory disease, produces cumulative attritional injury that weakens and eventually tears the plate, usually near its insertion into the base of the proximal phalanx. As the plantar restraint fails, the proximal phalanx drifts dorsally and the toe becomes unstable, and asymmetrical involvement of the collateral ligaments allows medial deviation, giving the characteristic crossover second toe that overrides the hallux. Loss of the plantar cushioning contributes to metatarsalgia beneath the involved head. The process is typically gradual and degenerative rather than the result of a single acute event.",
+    "additionalDifferentials": [
+      "Interdigital (Morton's) neuroma",
+      "Freiberg's infraction of the metatarsal head",
+      "Metatarsophalangeal joint synovitis from inflammatory arthritis",
+      "Metatarsal stress fracture",
+      "Mechanical metatarsalgia from other causes",
+      "Hammer or claw toe deformity from other mechanisms",
+      "Capsulitis of the metatarsophalangeal joint"
     ],
-    [
-     "Primary Differentials",
-     "Interdigital (Morton's) neuroma, Freiberg's infraction of the metatarsal head, Metatarsophalangeal joint synovitis from",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical examination including the modified drawer test and inspection for crossover deformity and the V-sign",
+      "Weight-bearing foot radiographs to assess metatarsal length, alignment, and toe position",
+      "Ultrasound to visualise the plantar plate and dynamic instability",
+      "MRI to confirm and grade the tear and assess collateral ligament involvement",
+      "Assessment for associated hallux valgus and metatarsal length abnormality",
+      "Pedobarography to characterise forefoot overload where relevant",
+      "Inflammatory markers and serology if a synovitic or inflammatory cause is suspected"
     ],
-    [
-     "Management Strategy",
-     "Initial offloading with metatarsal domes or pads, taping of the toe into plantarflexion or a Budin splint, and stiff-soled or",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive dorsal dislocation of the toe with fixed crossover deformity",
+      "Symmetrical or multiple joint synovitis suggesting underlying inflammatory arthritis",
+      "Focal bony tenderness suggesting a coexisting stress fracture",
+      "A hot, swollen joint raising the possibility of septic arthritis or crystal arthropathy",
+      "Neurovascular compromise of the drifting toe"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing the condition as an interdigital neuroma and treating the wrong structure",
-     "Prevent diagnostic or management error"
+    "prognosis": "Early and partial tears often stabilise or improve with offloading, taping, and footwear modification, though these measures control symptoms rather than heal the plate. Once fixed deformity or dislocation develops, conservative treatment is less effective and surgical plantar plate repair or reconstruction with deformity correction is required; results are generally good but some residual stiffness, recurrence, or floating toe may occur.",
+    "pitfalls": [
+      "Misdiagnosing the condition as an interdigital neuroma and treating the wrong structure",
+      "Failing to perform the drawer test and missing early instability before fixed deformity develops",
+      "Overlooking associated hallux valgus or a long metatarsal that drives recurrence if uncorrected",
+      "Assuming conservative treatment will heal a complete tear rather than merely control symptoms",
+      "Missing an inflammatory arthropathy underlying multiple-joint synovitis"
+    ],
+    "references": [
+      "Mann's Surgery of the Foot and Ankle",
+      "Miller's Review of Orthopaedics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Initial offloading with metatarsal domes or pads, taping of the toe into plantarflexion or a Budin splint, and stiff-soled or rocker-bottom footwear to reduce dorsiflexion overload of the lesser metatarsophalangeal joint",
+      "Activity modification and avoidance of high-heeled and narrow footwear that crowd and hyperextend the toe",
+      "Simple analgesics or NSAIDs for pain, using intra-articular corticosteroid only sparingly as it may accelerate plate rupture and worsen instability",
+      "Correct contributing deformity, addressing associated hallux valgus and relative metatarsal length that perpetuate the overload",
+      "Surgical plantar plate repair or reconstruction, commonly combined with a Weil shortening metatarsal osteotomy, for fixed deformity, joint dislocation or failed conservative care, with rebalancing of the crossover toe",
+      "Monitor for progression to fixed deformity, dorsal dislocation and secondary chondral damage",
+      "Refer to orthopaedic foot and ankle surgery or podiatry for grading and definitive planning"
     ]
-   ],
-   "caption": "Overview comparison matrix for plantar plate tear."
-  }
- ],
- "diagrams": [
-  {
-   "id": "plantar-plate-tear-real-image",
-   "title": "Plantar plate tear: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "plantar_plate_tear-pathway",
+      "title": "Plantar plate tear: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The plantar plate is the fibrocartilaginous plantar stabiliser of the lesser metatarsophalangeal joint, and its attrition or tear causes pain and progressive instability",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive dorsal dislocation of the toe with fixed crossover deformity",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical examination including the modified drawer test and inspection for crossover deformity and the V-sign, Weight-bearing foot radiographs to assess metatarsal length, alignment, and toe position, Ultrasound to"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Initial offloading with metatarsal domes or pads, taping of the toe into plantarflexion or a Budin splint, and stiff-soled or rocker-bottom footwear to reduce dorsiflexion overload of the lesser metatarsophalangeal"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing the condition as an interdigital neuroma and treating the wrong structure"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of plantar plate tear."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "plantar_plate_tear-matrix",
+      "title": "Plantar plate tear: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The plantar plate is the fibrocartilaginous plantar stabiliser of the lesser metatarsophalangeal joint, and its attrition or tear",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical examination including the modified drawer test and inspection for crossover deformity and the V-sign, Weight-bearing",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Interdigital (Morton's) neuroma, Freiberg's infraction of the metatarsal head, Metatarsophalangeal joint synovitis from",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Initial offloading with metatarsal domes or pads, taping of the toe into plantarflexion or a Budin splint, and stiff-soled or",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing the condition as an interdigital neuroma and treating the wrong structure",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for plantar plate tear."
+    }
+  ],
+  "diagrams": []
 }

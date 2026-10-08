@@ -1,169 +1,147 @@
 {
- "id": "carbamate_poisoning",
- "name": "Carbamate poisoning",
- "aliases": [
-  "carbamate insecticide poisoning",
-  "carbamate cholinergic toxicity"
- ],
- "class": "non_infective",
- "system": "Multisystem / Toxicology",
- "specialty": "Emergency medicine / Toxicology",
- "referenceOnly": true,
- "reference": {
-  "source": "Standard toxicology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Carbamates inhibit acetylcholinesterase and cause a cholinergic toxidrome similar to organophosphate poisoning",
-   "Features combine muscarinic effects (salivation, lacrimation, urination, diarrhoea, bronchorrhoea and bronchospasm), nicotinic effects (fasciculations and weakness) and central effects",
-   "Bronchorrhoea and respiratory failure are the main causes of death",
-   "Unlike organophosphates, the enzyme inhibition is reversible and self-limiting, so recovery is usually faster",
-   "Atropine is the mainstay to counter muscarinic effects; routine use of an oxime is generally considered unnecessary",
-   "The classic intermediate syndrome and delayed neuropathy of organophosphates are not typical of carbamates"
+  "id": "carbamate_poisoning",
+  "name": "Carbamate poisoning",
+  "aliases": [
+    "carbamate insecticide poisoning",
+    "carbamate cholinergic toxicity"
   ],
-  "pathophysiology": "Carbamates bind and inhibit acetylcholinesterase, causing accumulation of acetylcholine at muscarinic and nicotinic synapses and producing the cholinergic syndrome. In contrast to organophosphates, the carbamate-enzyme bond does not undergo irreversible ageing and dissociates spontaneously within hours, so cholinesterase activity recovers relatively quickly. This reversibility explains the generally shorter course and the reduced role for oxime therapy compared with organophosphate poisoning.",
-  "additionalDifferentials": [
-   "Organophosphate poisoning",
-   "Nerve agent exposure",
-   "Cholinergic mushroom (muscarinic) poisoning",
-   "Asthma or acute pulmonary oedema (for respiratory features)",
-   "Other causes of coma with excess secretions"
-  ],
-  "additionalInvestigations": [
-   "Clinical recognition of the cholinergic toxidrome and exposure history",
-   "Red-cell (and plasma) cholinesterase activity where available",
-   "Oxygenation and airway assessment given bronchorrhoea risk",
-   "Cardiac monitoring",
-   "Assessment for co-ingestants, especially the solvent carrier"
-  ],
-  "redFlags": [
-   "Copious respiratory secretions or respiratory failure",
-   "Bradyarrhythmia or haemodynamic instability",
-   "Depressed consciousness with an unprotected airway",
-   "Seizures"
-  ],
-  "prognosis": "Because enzyme inhibition is reversible, prognosis is generally better than for organophosphates, and most patients recover within a day or two with prompt atropinisation and respiratory support.",
-  "pitfalls": [
-   "Assuming the prolonged course and oxime need of organophosphate poisoning",
-   "Under-atropinising and failing to dry pulmonary secretions",
-   "Overlooking the toxic hydrocarbon solvent carrier",
-   "Delaying airway support in a patient with bronchorrhoea"
-  ],
-  "references": [
-   "Goldfrank's Toxicologic Emergencies",
-   "Tintinalli's Emergency Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Atropine as the mainstay to reverse muscarinic effects, titrated to drying of secretions and adequate oxygenation",
-   "Airway protection, oxygen and mechanical ventilation for bronchorrhoea and respiratory failure, the main causes of death",
-   "Decontamination with removal of contaminated clothing and skin washing, using staff personal protection",
-   "Oximes generally unnecessary given the reversible, spontaneously dissociating enzyme inhibition",
-   "Benzodiazepines for seizures or agitation",
-   "Cardiac and respiratory monitoring during the expected short course of recovery",
-   "Consideration of co-ingestants, particularly the hydrocarbon solvent carrier"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "carbamate_poisoning-pathway",
-   "title": "Carbamate poisoning: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Carbamates inhibit acetylcholinesterase and cause a cholinergic toxidrome similar to organophosphate poisoning",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Copious respiratory secretions or respiratory failure",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical recognition of the cholinergic toxidrome and exposure history, Red-cell (and plasma) cholinesterase activity where available, Oxygenation and airway assessment given bronchorrhoea risk"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Atropine as the mainstay to reverse muscarinic effects, titrated to drying of secretions and adequate oxygenation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming the prolonged course and oxime need of organophosphate poisoning"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of carbamate poisoning."
-  }
- ],
- "tables": [
-  {
-   "id": "carbamate_poisoning-matrix",
-   "title": "Carbamate poisoning: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Carbamates inhibit acetylcholinesterase and cause a cholinergic toxidrome similar to organophosphate poisoning",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Multisystem / Toxicology",
+  "specialty": "Emergency medicine / Toxicology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Standard toxicology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Carbamates inhibit acetylcholinesterase and cause a cholinergic toxidrome similar to organophosphate poisoning",
+      "Features combine muscarinic effects (salivation, lacrimation, urination, diarrhoea, bronchorrhoea and bronchospasm), nicotinic effects (fasciculations and weakness) and central effects",
+      "Bronchorrhoea and respiratory failure are the main causes of death",
+      "Unlike organophosphates, the enzyme inhibition is reversible and self-limiting, so recovery is usually faster",
+      "Atropine is the mainstay to counter muscarinic effects; routine use of an oxime is generally considered unnecessary",
+      "The classic intermediate syndrome and delayed neuropathy of organophosphates are not typical of carbamates"
     ],
-    [
-     "Key Investigations",
-     "Clinical recognition of the cholinergic toxidrome and exposure history, Red-cell (and plasma) cholinesterase activity where",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Carbamates bind and inhibit acetylcholinesterase, causing accumulation of acetylcholine at muscarinic and nicotinic synapses and producing the cholinergic syndrome. In contrast to organophosphates, the carbamate-enzyme bond does not undergo irreversible ageing and dissociates spontaneously within hours, so cholinesterase activity recovers relatively quickly. This reversibility explains the generally shorter course and the reduced role for oxime therapy compared with organophosphate poisoning.",
+    "additionalDifferentials": [
+      "Organophosphate poisoning",
+      "Nerve agent exposure",
+      "Cholinergic mushroom (muscarinic) poisoning",
+      "Asthma or acute pulmonary oedema (for respiratory features)",
+      "Other causes of coma with excess secretions"
     ],
-    [
-     "Primary Differentials",
-     "Organophosphate poisoning, Nerve agent exposure, Cholinergic mushroom (muscarinic) poisoning",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical recognition of the cholinergic toxidrome and exposure history",
+      "Red-cell (and plasma) cholinesterase activity where available",
+      "Oxygenation and airway assessment given bronchorrhoea risk",
+      "Cardiac monitoring",
+      "Assessment for co-ingestants, especially the solvent carrier"
     ],
-    [
-     "Management Strategy",
-     "Atropine as the mainstay to reverse muscarinic effects, titrated to drying of secretions and adequate oxygenation",
-     "Core treatment modality"
+    "redFlags": [
+      "Copious respiratory secretions or respiratory failure",
+      "Bradyarrhythmia or haemodynamic instability",
+      "Depressed consciousness with an unprotected airway",
+      "Seizures"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming the prolonged course and oxime need of organophosphate poisoning",
-     "Prevent diagnostic or management error"
+    "prognosis": "Because enzyme inhibition is reversible, prognosis is generally better than for organophosphates, and most patients recover within a day or two with prompt atropinisation and respiratory support.",
+    "pitfalls": [
+      "Assuming the prolonged course and oxime need of organophosphate poisoning",
+      "Under-atropinising and failing to dry pulmonary secretions",
+      "Overlooking the toxic hydrocarbon solvent carrier",
+      "Delaying airway support in a patient with bronchorrhoea"
+    ],
+    "references": [
+      "Goldfrank's Toxicologic Emergencies",
+      "Tintinalli's Emergency Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Atropine as the mainstay to reverse muscarinic effects, titrated to drying of secretions and adequate oxygenation",
+      "Airway protection, oxygen and mechanical ventilation for bronchorrhoea and respiratory failure, the main causes of death",
+      "Decontamination with removal of contaminated clothing and skin washing, using staff personal protection",
+      "Oximes generally unnecessary given the reversible, spontaneously dissociating enzyme inhibition",
+      "Benzodiazepines for seizures or agitation",
+      "Cardiac and respiratory monitoring during the expected short course of recovery",
+      "Consideration of co-ingestants, particularly the hydrocarbon solvent carrier"
     ]
-   ],
-   "caption": "Overview comparison matrix for carbamate poisoning."
-  }
- ],
- "diagrams": [
-  {
-   "id": "carbamate-poisoning-real-image",
-   "title": "Carbamate poisoning: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "carbamate_poisoning-pathway",
+      "title": "Carbamate poisoning: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Carbamates inhibit acetylcholinesterase and cause a cholinergic toxidrome similar to organophosphate poisoning",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Copious respiratory secretions or respiratory failure",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical recognition of the cholinergic toxidrome and exposure history, Red-cell (and plasma) cholinesterase activity where available, Oxygenation and airway assessment given bronchorrhoea risk"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Atropine as the mainstay to reverse muscarinic effects, titrated to drying of secretions and adequate oxygenation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming the prolonged course and oxime need of organophosphate poisoning"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of carbamate poisoning."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "carbamate_poisoning-matrix",
+      "title": "Carbamate poisoning: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Carbamates inhibit acetylcholinesterase and cause a cholinergic toxidrome similar to organophosphate poisoning",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical recognition of the cholinergic toxidrome and exposure history, Red-cell (and plasma) cholinesterase activity where",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Organophosphate poisoning, Nerve agent exposure, Cholinergic mushroom (muscarinic) poisoning",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Atropine as the mainstay to reverse muscarinic effects, titrated to drying of secretions and adequate oxygenation",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming the prolonged course and oxime need of organophosphate poisoning",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for carbamate poisoning."
+    }
+  ],
+  "diagrams": []
 }

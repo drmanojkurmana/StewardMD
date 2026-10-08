@@ -1,167 +1,145 @@
 {
- "id": "canaliculitis",
- "name": "Canaliculitis",
- "aliases": [
-  "lacrimal canaliculitis"
- ],
- "class": "infective",
- "system": "Eye / Orbit and adnexa",
- "specialty": "Ophthalmology / Oculoplastics",
- "referenceOnly": true,
- "reference": {
-  "source": "Kanski's Clinical Ophthalmology / lacrimal disease literature",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A chronic infection of the lacrimal canaliculus that is frequently misdiagnosed as recurrent conjunctivitis",
-   "Presents with a red, tender, pouting punctum, unilateral discharge and epiphora",
-   "Expression of the canaliculus may release characteristic concretions (sulphur-like granules)",
-   "The classic organism is Actinomyces israelii, though other bacteria and fungi occur",
-   "It is often unilateral and resistant to topical antibiotics alone",
-   "Definitive treatment usually requires removal of the concretions, commonly by canaliculotomy and curettage"
+  "id": "canaliculitis",
+  "name": "Canaliculitis",
+  "aliases": [
+    "lacrimal canaliculitis"
   ],
-  "pathophysiology": "Canaliculitis is infection within the lacrimal canaliculus, most classically by the filamentous bacterium Actinomyces israelii, which forms concretions (dacryoliths) within the lumen. These concretions harbour organisms and perpetuate the infection, causing chronic inflammation, a pouting inflamed punctum and discharge. Because topical antibiotics cannot eradicate organisms sequestered within the concretions, mechanical removal is generally required for cure.",
-  "additionalDifferentials": [
-   "Chronic or recurrent conjunctivitis",
-   "Dacryocystitis",
-   "Punctal or canalicular tumour",
-   "Nasolacrimal duct obstruction",
-   "Herpetic or other viral lid disease"
-  ],
-  "additionalInvestigations": [
-   "Clinical diagnosis from the pouting punctum and expressible concretions",
-   "Microbiological examination and culture of expressed material",
-   "Assessment of the lacrimal drainage system",
-   "Imaging only if a tumour or extensive disease is suspected",
-   "Examination for concretions at the time of any procedure"
-  ],
-  "redFlags": [
-   "A mass or atypical lesion suggesting canalicular tumour",
-   "Spread to dacryocystitis or surrounding tissues",
-   "Failure to resolve after concretion removal",
-   "Marked recurrent disease"
-  ],
-  "prognosis": "The prognosis is excellent once the concretions are removed, though cases treated with antibiotics alone tend to recur until the sequestered material is cleared.",
-  "pitfalls": [
-   "Treating it repeatedly as conjunctivitis and missing the diagnosis",
-   "Relying on topical antibiotics without removing concretions",
-   "Overlooking a canalicular tumour",
-   "Not sending expressed material for microbiology"
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology",
-   "Oculoplastic and lacrimal surgery references (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Achieve cure by mechanically removing the causative concretions, typically through canaliculotomy and curettage",
-   "Express the canaliculus and dilate the punctum to evacuate dacryoliths",
-   "Use topical antibiotic drops or canalicular irrigation as an adjunct directed against Actinomyces and other cultured organisms",
-   "Apply warm compresses and canalicular massage to aid drainage",
-   "Send expressed material for microscopy and culture to guide adjunctive therapy",
-   "Follow up to confirm resolution, recognising that antibiotic treatment alone recurs until the sequestered material is cleared"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "canaliculitis-pathway",
-   "title": "Canaliculitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A chronic infection of the lacrimal canaliculus that is frequently misdiagnosed as recurrent conjunctivitis",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A mass or atypical lesion suggesting canalicular tumour",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical diagnosis from the pouting punctum and expressible concretions, Microbiological examination and culture of expressed material, Assessment of the lacrimal drainage system"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Achieve cure by mechanically removing the causative concretions, typically through canaliculotomy and curettage"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating it repeatedly as conjunctivitis and missing the diagnosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of canaliculitis."
-  }
- ],
- "tables": [
-  {
-   "id": "canaliculitis-matrix",
-   "title": "Canaliculitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A chronic infection of the lacrimal canaliculus that is frequently misdiagnosed as recurrent conjunctivitis",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Eye / Orbit and adnexa",
+  "specialty": "Ophthalmology / Oculoplastics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kanski's Clinical Ophthalmology / lacrimal disease literature",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A chronic infection of the lacrimal canaliculus that is frequently misdiagnosed as recurrent conjunctivitis",
+      "Presents with a red, tender, pouting punctum, unilateral discharge and epiphora",
+      "Expression of the canaliculus may release characteristic concretions (sulphur-like granules)",
+      "The classic organism is Actinomyces israelii, though other bacteria and fungi occur",
+      "It is often unilateral and resistant to topical antibiotics alone",
+      "Definitive treatment usually requires removal of the concretions, commonly by canaliculotomy and curettage"
     ],
-    [
-     "Key Investigations",
-     "Clinical diagnosis from the pouting punctum and expressible concretions, Microbiological examination and culture of expressed",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Canaliculitis is infection within the lacrimal canaliculus, most classically by the filamentous bacterium Actinomyces israelii, which forms concretions (dacryoliths) within the lumen. These concretions harbour organisms and perpetuate the infection, causing chronic inflammation, a pouting inflamed punctum and discharge. Because topical antibiotics cannot eradicate organisms sequestered within the concretions, mechanical removal is generally required for cure.",
+    "additionalDifferentials": [
+      "Chronic or recurrent conjunctivitis",
+      "Dacryocystitis",
+      "Punctal or canalicular tumour",
+      "Nasolacrimal duct obstruction",
+      "Herpetic or other viral lid disease"
     ],
-    [
-     "Primary Differentials",
-     "Chronic or recurrent conjunctivitis, Dacryocystitis, Punctal or canalicular tumour",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical diagnosis from the pouting punctum and expressible concretions",
+      "Microbiological examination and culture of expressed material",
+      "Assessment of the lacrimal drainage system",
+      "Imaging only if a tumour or extensive disease is suspected",
+      "Examination for concretions at the time of any procedure"
     ],
-    [
-     "Management Strategy",
-     "Achieve cure by mechanically removing the causative concretions, typically through canaliculotomy and curettage",
-     "Core treatment modality"
+    "redFlags": [
+      "A mass or atypical lesion suggesting canalicular tumour",
+      "Spread to dacryocystitis or surrounding tissues",
+      "Failure to resolve after concretion removal",
+      "Marked recurrent disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating it repeatedly as conjunctivitis and missing the diagnosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis is excellent once the concretions are removed, though cases treated with antibiotics alone tend to recur until the sequestered material is cleared.",
+    "pitfalls": [
+      "Treating it repeatedly as conjunctivitis and missing the diagnosis",
+      "Relying on topical antibiotics without removing concretions",
+      "Overlooking a canalicular tumour",
+      "Not sending expressed material for microbiology"
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology",
+      "Oculoplastic and lacrimal surgery references (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Achieve cure by mechanically removing the causative concretions, typically through canaliculotomy and curettage",
+      "Express the canaliculus and dilate the punctum to evacuate dacryoliths",
+      "Use topical antibiotic drops or canalicular irrigation as an adjunct directed against Actinomyces and other cultured organisms",
+      "Apply warm compresses and canalicular massage to aid drainage",
+      "Send expressed material for microscopy and culture to guide adjunctive therapy",
+      "Follow up to confirm resolution, recognising that antibiotic treatment alone recurs until the sequestered material is cleared"
     ]
-   ],
-   "caption": "Overview comparison matrix for canaliculitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "canaliculitis-real-image",
-   "title": "Canaliculitis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "canaliculitis-pathway",
+      "title": "Canaliculitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A chronic infection of the lacrimal canaliculus that is frequently misdiagnosed as recurrent conjunctivitis",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A mass or atypical lesion suggesting canalicular tumour",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical diagnosis from the pouting punctum and expressible concretions, Microbiological examination and culture of expressed material, Assessment of the lacrimal drainage system"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Achieve cure by mechanically removing the causative concretions, typically through canaliculotomy and curettage"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating it repeatedly as conjunctivitis and missing the diagnosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of canaliculitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "canaliculitis-matrix",
+      "title": "Canaliculitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A chronic infection of the lacrimal canaliculus that is frequently misdiagnosed as recurrent conjunctivitis",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical diagnosis from the pouting punctum and expressible concretions, Microbiological examination and culture of expressed",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Chronic or recurrent conjunctivitis, Dacryocystitis, Punctal or canalicular tumour",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Achieve cure by mechanically removing the causative concretions, typically through canaliculotomy and curettage",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating it repeatedly as conjunctivitis and missing the diagnosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for canaliculitis."
+    }
+  ],
+  "diagrams": []
 }

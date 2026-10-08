@@ -1,182 +1,160 @@
 {
- "id": "x_linked_agammaglobulinaemia",
- "name": "X-linked agammaglobulinaemia",
- "aliases": [
-  "Bruton agammaglobulinaemia",
-  "Bruton agammaglobulinemia",
-  "Bruton tyrosine kinase deficiency",
-  "X-linked agammaglobulinemia",
-  "XLA",
-  "x linked agammaglobulinemia"
- ],
- "class": "non_infective",
- "system": "Immune system",
- "specialty": "Clinical immunology",
- "referenceOnly": true,
- "reference": {
-  "source": "Middleton's Allergy: Principles and Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by loss-of-function mutations in the BTK gene, arresting B-cell development at the pre-B stage so that mature B cells and immunoglobulin of all classes are profoundly deficient.",
-   "Affected boys typically present after 6 months of age once transplacental maternal IgG wanes, with recurrent sinopulmonary infections by encapsulated bacteria such as pneumococcus and Haemophilus.",
-   "Hallmark examination finding is absent or vestigial tonsils and lymph nodes because germinal centres cannot form without B cells.",
-   "Enteroviral infection is a feared complication, causing chronic meningoencephalitis and a dermatomyositis-like syndrome; live oral poliovirus vaccine is contraindicated.",
-   "Diagnosis rests on very low or absent circulating CD19+ B cells (usually under 2 percent) together with markedly reduced IgG, IgA and IgM.",
-   "Immunoglobulin replacement, given intravenously or subcutaneously, is the mainstay of therapy and dramatically reduces infection frequency.",
-   "Susceptibility to Giardia, Campylobacter, Mycoplasma and Ureaplasma is characteristic, and Pneumocystis is not typical because T-cell immunity is intact.",
-   "Bronchiectasis from recurrent or inadequately treated pulmonary infection remains the major cause of long-term morbidity."
+  "id": "x_linked_agammaglobulinaemia",
+  "name": "X-linked agammaglobulinaemia",
+  "aliases": [
+    "Bruton agammaglobulinaemia",
+    "Bruton agammaglobulinemia",
+    "Bruton tyrosine kinase deficiency",
+    "X-linked agammaglobulinemia",
+    "XLA",
+    "x linked agammaglobulinemia"
   ],
-  "pathophysiology": "X-linked agammaglobulinaemia results from mutations in the gene encoding Bruton tyrosine kinase (BTK), a cytoplasmic signalling molecule essential for pre-B-cell receptor signalling. Without functional BTK, developing B lymphocytes cannot progress beyond the pro-B to pre-B transition in the bone marrow, so peripheral mature B cells are virtually absent. The consequent failure to generate plasma cells leaves the patient without effective antibody of any isotype, crippling humoral defence against encapsulated pyogenic bacteria and enteroviruses, while T-cell-mediated immunity is preserved. The X-linked recessive inheritance explains near-exclusive occurrence in males.",
-  "additionalDifferentials": [
-   "Common variable immunodeficiency",
-   "Autosomal recessive agammaglobulinaemia (mu heavy chain, lambda-5, BLNK or Ig-alpha defects)",
-   "Transient hypogammaglobulinaemia of infancy",
-   "Hyper-IgM syndrome",
-   "Severe combined immunodeficiency",
-   "Good syndrome (thymoma with immunodeficiency)",
-   "Protein-losing states causing secondary hypogammaglobulinaemia"
-  ],
-  "additionalInvestigations": [
-   "Serum immunoglobulin levels (IgG, IgA, IgM) showing panhypogammaglobulinaemia",
-   "Peripheral blood lymphocyte immunophenotyping demonstrating absent CD19+/CD20+ B cells",
-   "BTK gene sequencing and assessment of BTK protein expression in monocytes",
-   "Specific antibody responses to protein and polysaccharide vaccines (absent)",
-   "High-resolution CT of the chest to detect bronchiectasis",
-   "Sputum and stool cultures for recurrent or atypical pathogens",
-   "Carrier testing and genetic counselling for female relatives"
-  ],
-  "redFlags": [
-   "Enteroviral central nervous system infection presenting with progressive encephalitis",
-   "Established bronchiectasis with declining pulmonary function",
-   "Overwhelming sepsis from encapsulated organisms",
-   "Chronic Giardia or Campylobacter infection with malabsorption and failure to thrive",
-   "Development of lymphoreticular or gastrointestinal malignancy"
-  ],
-  "prognosis": "With early diagnosis and lifelong immunoglobulin replacement most patients reach adulthood with a good quality of life, though chronic lung disease and enteroviral infection can shorten survival. Delayed recognition and consequent bronchiectasis are the principal determinants of poor outcome.",
-  "pitfalls": [
-   "Attributing recurrent infections in an infant to normal childhood illness and delaying immunological work-up.",
-   "Measuring immunoglobulins before 6 months when maternal IgG may mask the deficiency.",
-   "Administering live vaccines, particularly oral polio, which can cause vaccine-associated disease.",
-   "Under-dosing immunoglobulin replacement so that trough levels remain inadequate to prevent sinopulmonary infection.",
-   "Overlooking chronic enteroviral or ureaplasmal infection because routine cultures are negative."
-  ],
-  "references": [
-   "Middleton's Allergy: Principles and Practice, current edition",
-   "Stiehm's Immune Deficiencies, current edition",
-   "International Union of Immunological Societies phenotypic classification of inborn errors of immunity"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Immunoglobulin replacement given intravenously or subcutaneously is the mainstay, restoring humoral defence and markedly reducing infection frequency",
-   "Prompt, aggressive antibiotic treatment of bacterial infections, with prophylactic antibiotics considered for recurrent sinopulmonary disease",
-   "Avoidance of live vaccines, in particular oral poliovirus vaccine, because of the risk of vaccine-derived infection",
-   "Active surveillance for and management of bronchiectasis with airway clearance, interval CT and lung function monitoring",
-   "Vigilance for chronic enteroviral infection, including meningoencephalitis, given the specific vulnerability of this defect",
-   "Genetic counselling for this X-linked disorder with maternal carrier testing and family screening",
-   "Clinical immunology-led multidisciplinary follow-up to preserve lung function and detect complications early"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "x_linked_agammaglobulinaemia-pathway",
-   "title": "X-linked agammaglobulinaemia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by loss-of-function mutations in the BTK gene, arresting B-cell development at the pre-B stage so that mature B cells and immunoglobulin of all classes are profoundly deficient.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Enteroviral central nervous system infection presenting with progressive encephalitis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum immunoglobulin levels (IgG, IgA, IgM) showing panhypogammaglobulinaemia, Peripheral blood lymphocyte immunophenotyping demonstrating absent CD19+/CD20+ B cells, BTK gene sequencing and assessment of BTK protein"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Immunoglobulin replacement given intravenously or subcutaneously is the mainstay, restoring humoral defence and markedly reducing infection frequency"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing recurrent infections in an infant to normal childhood illness and delaying immunological work-up."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of x-linked agammaglobulinaemia."
-  }
- ],
- "tables": [
-  {
-   "id": "x_linked_agammaglobulinaemia-matrix",
-   "title": "X-linked agammaglobulinaemia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by loss-of-function mutations in the BTK gene, arresting B-cell development at the pre-B stage so that mature B cells and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Immune system",
+  "specialty": "Clinical immunology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Middleton's Allergy: Principles and Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by loss-of-function mutations in the BTK gene, arresting B-cell development at the pre-B stage so that mature B cells and immunoglobulin of all classes are profoundly deficient.",
+      "Affected boys typically present after 6 months of age once transplacental maternal IgG wanes, with recurrent sinopulmonary infections by encapsulated bacteria such as pneumococcus and Haemophilus.",
+      "Hallmark examination finding is absent or vestigial tonsils and lymph nodes because germinal centres cannot form without B cells.",
+      "Enteroviral infection is a feared complication, causing chronic meningoencephalitis and a dermatomyositis-like syndrome; live oral poliovirus vaccine is contraindicated.",
+      "Diagnosis rests on very low or absent circulating CD19+ B cells (usually under 2 percent) together with markedly reduced IgG, IgA and IgM.",
+      "Immunoglobulin replacement, given intravenously or subcutaneously, is the mainstay of therapy and dramatically reduces infection frequency.",
+      "Susceptibility to Giardia, Campylobacter, Mycoplasma and Ureaplasma is characteristic, and Pneumocystis is not typical because T-cell immunity is intact.",
+      "Bronchiectasis from recurrent or inadequately treated pulmonary infection remains the major cause of long-term morbidity."
     ],
-    [
-     "Key Investigations",
-     "Serum immunoglobulin levels (IgG, IgA, IgM) showing panhypogammaglobulinaemia, Peripheral blood lymphocyte immunophenotyping",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "X-linked agammaglobulinaemia results from mutations in the gene encoding Bruton tyrosine kinase (BTK), a cytoplasmic signalling molecule essential for pre-B-cell receptor signalling. Without functional BTK, developing B lymphocytes cannot progress beyond the pro-B to pre-B transition in the bone marrow, so peripheral mature B cells are virtually absent. The consequent failure to generate plasma cells leaves the patient without effective antibody of any isotype, crippling humoral defence against encapsulated pyogenic bacteria and enteroviruses, while T-cell-mediated immunity is preserved. The X-linked recessive inheritance explains near-exclusive occurrence in males.",
+    "additionalDifferentials": [
+      "Common variable immunodeficiency",
+      "Autosomal recessive agammaglobulinaemia (mu heavy chain, lambda-5, BLNK or Ig-alpha defects)",
+      "Transient hypogammaglobulinaemia of infancy",
+      "Hyper-IgM syndrome",
+      "Severe combined immunodeficiency",
+      "Good syndrome (thymoma with immunodeficiency)",
+      "Protein-losing states causing secondary hypogammaglobulinaemia"
     ],
-    [
-     "Primary Differentials",
-     "Common variable immunodeficiency, Autosomal recessive agammaglobulinaemia (mu heavy chain, lambda-5, BLNK or Ig-alpha defects),",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum immunoglobulin levels (IgG, IgA, IgM) showing panhypogammaglobulinaemia",
+      "Peripheral blood lymphocyte immunophenotyping demonstrating absent CD19+/CD20+ B cells",
+      "BTK gene sequencing and assessment of BTK protein expression in monocytes",
+      "Specific antibody responses to protein and polysaccharide vaccines (absent)",
+      "High-resolution CT of the chest to detect bronchiectasis",
+      "Sputum and stool cultures for recurrent or atypical pathogens",
+      "Carrier testing and genetic counselling for female relatives"
     ],
-    [
-     "Management Strategy",
-     "Immunoglobulin replacement given intravenously or subcutaneously is the mainstay, restoring humoral defence and markedly reducing",
-     "Core treatment modality"
+    "redFlags": [
+      "Enteroviral central nervous system infection presenting with progressive encephalitis",
+      "Established bronchiectasis with declining pulmonary function",
+      "Overwhelming sepsis from encapsulated organisms",
+      "Chronic Giardia or Campylobacter infection with malabsorption and failure to thrive",
+      "Development of lymphoreticular or gastrointestinal malignancy"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing recurrent infections in an infant to normal childhood illness and delaying immunological work-up.",
-     "Prevent diagnostic or management error"
+    "prognosis": "With early diagnosis and lifelong immunoglobulin replacement most patients reach adulthood with a good quality of life, though chronic lung disease and enteroviral infection can shorten survival. Delayed recognition and consequent bronchiectasis are the principal determinants of poor outcome.",
+    "pitfalls": [
+      "Attributing recurrent infections in an infant to normal childhood illness and delaying immunological work-up.",
+      "Measuring immunoglobulins before 6 months when maternal IgG may mask the deficiency.",
+      "Administering live vaccines, particularly oral polio, which can cause vaccine-associated disease.",
+      "Under-dosing immunoglobulin replacement so that trough levels remain inadequate to prevent sinopulmonary infection.",
+      "Overlooking chronic enteroviral or ureaplasmal infection because routine cultures are negative."
+    ],
+    "references": [
+      "Middleton's Allergy: Principles and Practice, current edition",
+      "Stiehm's Immune Deficiencies, current edition",
+      "International Union of Immunological Societies phenotypic classification of inborn errors of immunity"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Immunoglobulin replacement given intravenously or subcutaneously is the mainstay, restoring humoral defence and markedly reducing infection frequency",
+      "Prompt, aggressive antibiotic treatment of bacterial infections, with prophylactic antibiotics considered for recurrent sinopulmonary disease",
+      "Avoidance of live vaccines, in particular oral poliovirus vaccine, because of the risk of vaccine-derived infection",
+      "Active surveillance for and management of bronchiectasis with airway clearance, interval CT and lung function monitoring",
+      "Vigilance for chronic enteroviral infection, including meningoencephalitis, given the specific vulnerability of this defect",
+      "Genetic counselling for this X-linked disorder with maternal carrier testing and family screening",
+      "Clinical immunology-led multidisciplinary follow-up to preserve lung function and detect complications early"
     ]
-   ],
-   "caption": "Overview comparison matrix for x-linked agammaglobulinaemia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "x-linked-agammaglobulinaemia-real-image",
-   "title": "X-linked agammaglobulinaemia: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "x_linked_agammaglobulinaemia-pathway",
+      "title": "X-linked agammaglobulinaemia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by loss-of-function mutations in the BTK gene, arresting B-cell development at the pre-B stage so that mature B cells and immunoglobulin of all classes are profoundly deficient.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Enteroviral central nervous system infection presenting with progressive encephalitis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum immunoglobulin levels (IgG, IgA, IgM) showing panhypogammaglobulinaemia, Peripheral blood lymphocyte immunophenotyping demonstrating absent CD19+/CD20+ B cells, BTK gene sequencing and assessment of BTK protein"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Immunoglobulin replacement given intravenously or subcutaneously is the mainstay, restoring humoral defence and markedly reducing infection frequency"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing recurrent infections in an infant to normal childhood illness and delaying immunological work-up."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of x-linked agammaglobulinaemia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "x_linked_agammaglobulinaemia-matrix",
+      "title": "X-linked agammaglobulinaemia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by loss-of-function mutations in the BTK gene, arresting B-cell development at the pre-B stage so that mature B cells and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum immunoglobulin levels (IgG, IgA, IgM) showing panhypogammaglobulinaemia, Peripheral blood lymphocyte immunophenotyping",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Common variable immunodeficiency, Autosomal recessive agammaglobulinaemia (mu heavy chain, lambda-5, BLNK or Ig-alpha defects),",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Immunoglobulin replacement given intravenously or subcutaneously is the mainstay, restoring humoral defence and markedly reducing",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing recurrent infections in an infant to normal childhood illness and delaying immunological work-up.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for x-linked agammaglobulinaemia."
+    }
+  ],
+  "diagrams": []
 }

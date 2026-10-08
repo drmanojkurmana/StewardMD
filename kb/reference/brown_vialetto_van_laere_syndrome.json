@@ -1,178 +1,156 @@
 {
- "id": "brown_vialetto_van_laere_syndrome",
- "name": "Brown-Vialetto-Van Laere syndrome",
- "aliases": [
-  "BVVL",
-  "riboflavin transporter deficiency neuronopathy",
-  "SLC52A2",
-  "SLC52A3",
-  "pontobulbar palsy with deafness"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "OMIM / GeneReviews / Nelson Textbook of Paediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A treatable riboflavin transporter defect: consider it in any child or young adult with progressive sensorineural deafness combined with a motor neuronopathy, because timely riboflavin supplementation can arrest and partly reverse the course",
-   "Caused by biallelic pathogenic variants in the riboflavin transporter genes SLC52A2 (RFVT2) or SLC52A3 (RFVT3), inherited in an autosomal recessive pattern",
-   "The hallmark is a pontobulbar palsy: progressive bulbar weakness with dysphagia, dysarthria, facial and tongue wasting, plus sensorineural hearing loss",
-   "Additional features include limb weakness, optic atrophy, sensory ataxia, axial hypotonia and respiratory insufficiency, which can be life-limiting if untreated",
-   "Plasma flavin levels and an acylcarnitine profile resembling a multiple acyl-CoA dehydrogenation defect may support the diagnosis, but a normal biochemical screen does not exclude it",
-   "High-dose oral riboflavin supplementation is the mainstay of treatment and should be started empirically on clinical suspicion rather than waiting for genetic confirmation",
-   "Fazio-Londe disease is regarded as the same disorder without prominent deafness, sitting on the same riboflavin-transporter spectrum",
-   "Response to riboflavin is often dramatic, so early recognition materially changes outcome"
+  "id": "brown_vialetto_van_laere_syndrome",
+  "name": "Brown-Vialetto-Van Laere syndrome",
+  "aliases": [
+    "BVVL",
+    "riboflavin transporter deficiency neuronopathy",
+    "SLC52A2",
+    "SLC52A3",
+    "pontobulbar palsy with deafness"
   ],
-  "pathophysiology": "The syndrome arises from defective cellular uptake of riboflavin (vitamin B2) due to loss-of-function variants in the riboflavin transporter genes SLC52A2 and SLC52A3. Impaired riboflavin transport lowers tissue levels of the flavin cofactors FMN and FAD, which are essential for numerous flavoenzymes, particularly those of mitochondrial fatty-acid beta-oxidation and the respiratory chain. The resulting energy failure and oxidative stress preferentially injure cranial nerve motor nuclei, anterior horn cells and the auditory pathway, producing the characteristic progressive pontobulbar palsy with deafness. Because the defect is one of cofactor delivery rather than an irreparable structural lesion, supplying supraphysiological riboflavin can restore flavoenzyme activity and halt neurodegeneration.",
-  "additionalDifferentials": [
-   "Amyotrophic lateral sclerosis and other motor neurone disease",
-   "Spinal muscular atrophy and Fazio-Londe disease",
-   "Mitochondrial encephalomyopathy with hearing loss",
-   "Multiple acyl-CoA dehydrogenase deficiency (glutaric aciduria type II)",
-   "Charcot-Marie-Tooth disease with cranial involvement",
-   "Myasthenic syndromes with bulbar features"
-  ],
-  "additionalInvestigations": [
-   "Molecular genetic testing of SLC52A2 and SLC52A3",
-   "Plasma and, where available, tissue flavin (riboflavin/FAD) concentrations",
-   "Plasma acylcarnitine profile and urine organic acids looking for a MADD-like pattern",
-   "Audiometry and brainstem auditory evoked responses",
-   "Nerve conduction studies and electromyography to characterise the neuronopathy",
-   "Ophthalmological assessment for optic atrophy"
-  ],
-  "redFlags": [
-   "Progressive respiratory insufficiency or stridor from bulbar and diaphragmatic weakness",
-   "Rapidly advancing dysphagia with aspiration risk",
-   "Acute deterioration during intercurrent catabolic illness",
-   "Progressive visual loss from optic atrophy"
-  ],
-  "prognosis": "Untreated disease is progressive and can be fatal from respiratory or bulbar failure, but early high-dose riboflavin supplementation frequently stabilises and partially reverses neurological deficits, so prognosis depends heavily on prompt recognition and treatment.",
-  "pitfalls": [
-   "Mislabelling the presentation as motor neurone disease or a non-treatable neurodegeneration and missing a treatable cause",
-   "Delaying empirical riboflavin while awaiting genetic results",
-   "Assuming a normal plasma flavin or acylcarnitine profile excludes the diagnosis",
-   "Overlooking deafness as an early and pivotal diagnostic clue"
-  ],
-  "references": [
-   "GeneReviews: Riboflavin Transporter Deficiency Neuronopathy",
-   "OMIM entries for SLC52A2 and SLC52A3",
-   "Nelson Textbook of Paediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Start high-dose oral riboflavin supplementation empirically on clinical suspicion to replenish FMN and FAD cofactors and restore flavoenzyme activity, without waiting for genetic confirmation",
-   "Provide swallowing assessment and nutritional support, with gastrostomy feeding where progressive bulbar weakness causes unsafe dysphagia",
-   "Monitor respiratory function and institute non-invasive ventilation and airway clearance as respiratory insufficiency develops",
-   "Offer auditory rehabilitation with hearing aids or cochlear implantation for the sensorineural hearing loss",
-   "Engage physiotherapy, occupational therapy and speech and language therapy for limb and bulbar weakness and communication needs",
-   "Monitor treatment response with serial neurological, audiometric and respiratory assessment alongside plasma flavin and acylcarnitine profiles",
-   "Coordinate care through a multidisciplinary neurology and metabolic medicine team",
-   "Provide genetic counselling and test siblings for biallelic SLC52A2 or SLC52A3 variants so affected relatives can begin riboflavin early"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "brown_vialetto_van_laere_syndrome-pathway",
-   "title": "Brown-Vialetto-Van Laere syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A treatable riboflavin transporter defect: consider it in any child or young adult with progressive sensorineural deafness combined with a motor neuronopathy, because timely riboflavin supplementation can arrest and partly reverse the",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive respiratory insufficiency or stridor from bulbar and diaphragmatic weakness",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Molecular genetic testing of SLC52A2 and SLC52A3, Plasma and, where available, tissue flavin (riboflavin/FAD) concentrations, Plasma acylcarnitine profile and urine organic acids looking for a MADD-like pattern"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Start high-dose oral riboflavin supplementation empirically on clinical suspicion to replenish FMN and FAD cofactors and restore flavoenzyme activity, without waiting for genetic confirmation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mislabelling the presentation as motor neurone disease or a non-treatable neurodegeneration and missing a treatable cause"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of brown-vialetto-van laere syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "brown_vialetto_van_laere_syndrome-matrix",
-   "title": "Brown-Vialetto-Van Laere syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A treatable riboflavin transporter defect: consider it in any child or young adult with progressive sensorineural deafness",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "OMIM / GeneReviews / Nelson Textbook of Paediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A treatable riboflavin transporter defect: consider it in any child or young adult with progressive sensorineural deafness combined with a motor neuronopathy, because timely riboflavin supplementation can arrest and partly reverse the course",
+      "Caused by biallelic pathogenic variants in the riboflavin transporter genes SLC52A2 (RFVT2) or SLC52A3 (RFVT3), inherited in an autosomal recessive pattern",
+      "The hallmark is a pontobulbar palsy: progressive bulbar weakness with dysphagia, dysarthria, facial and tongue wasting, plus sensorineural hearing loss",
+      "Additional features include limb weakness, optic atrophy, sensory ataxia, axial hypotonia and respiratory insufficiency, which can be life-limiting if untreated",
+      "Plasma flavin levels and an acylcarnitine profile resembling a multiple acyl-CoA dehydrogenation defect may support the diagnosis, but a normal biochemical screen does not exclude it",
+      "High-dose oral riboflavin supplementation is the mainstay of treatment and should be started empirically on clinical suspicion rather than waiting for genetic confirmation",
+      "Fazio-Londe disease is regarded as the same disorder without prominent deafness, sitting on the same riboflavin-transporter spectrum",
+      "Response to riboflavin is often dramatic, so early recognition materially changes outcome"
     ],
-    [
-     "Key Investigations",
-     "Molecular genetic testing of SLC52A2 and SLC52A3, Plasma and, where available, tissue flavin (riboflavin/FAD) concentrations,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The syndrome arises from defective cellular uptake of riboflavin (vitamin B2) due to loss-of-function variants in the riboflavin transporter genes SLC52A2 and SLC52A3. Impaired riboflavin transport lowers tissue levels of the flavin cofactors FMN and FAD, which are essential for numerous flavoenzymes, particularly those of mitochondrial fatty-acid beta-oxidation and the respiratory chain. The resulting energy failure and oxidative stress preferentially injure cranial nerve motor nuclei, anterior horn cells and the auditory pathway, producing the characteristic progressive pontobulbar palsy with deafness. Because the defect is one of cofactor delivery rather than an irreparable structural lesion, supplying supraphysiological riboflavin can restore flavoenzyme activity and halt neurodegeneration.",
+    "additionalDifferentials": [
+      "Amyotrophic lateral sclerosis and other motor neurone disease",
+      "Spinal muscular atrophy and Fazio-Londe disease",
+      "Mitochondrial encephalomyopathy with hearing loss",
+      "Multiple acyl-CoA dehydrogenase deficiency (glutaric aciduria type II)",
+      "Charcot-Marie-Tooth disease with cranial involvement",
+      "Myasthenic syndromes with bulbar features"
     ],
-    [
-     "Primary Differentials",
-     "Amyotrophic lateral sclerosis and other motor neurone disease, Spinal muscular atrophy and Fazio-Londe disease, Mitochondrial",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Molecular genetic testing of SLC52A2 and SLC52A3",
+      "Plasma and, where available, tissue flavin (riboflavin/FAD) concentrations",
+      "Plasma acylcarnitine profile and urine organic acids looking for a MADD-like pattern",
+      "Audiometry and brainstem auditory evoked responses",
+      "Nerve conduction studies and electromyography to characterise the neuronopathy",
+      "Ophthalmological assessment for optic atrophy"
     ],
-    [
-     "Management Strategy",
-     "Start high-dose oral riboflavin supplementation empirically on clinical suspicion to replenish FMN and FAD cofactors and restore",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive respiratory insufficiency or stridor from bulbar and diaphragmatic weakness",
+      "Rapidly advancing dysphagia with aspiration risk",
+      "Acute deterioration during intercurrent catabolic illness",
+      "Progressive visual loss from optic atrophy"
     ],
-    [
-     "Clinical Pitfall",
-     "Mislabelling the presentation as motor neurone disease or a non-treatable neurodegeneration and missing a treatable cause",
-     "Prevent diagnostic or management error"
+    "prognosis": "Untreated disease is progressive and can be fatal from respiratory or bulbar failure, but early high-dose riboflavin supplementation frequently stabilises and partially reverses neurological deficits, so prognosis depends heavily on prompt recognition and treatment.",
+    "pitfalls": [
+      "Mislabelling the presentation as motor neurone disease or a non-treatable neurodegeneration and missing a treatable cause",
+      "Delaying empirical riboflavin while awaiting genetic results",
+      "Assuming a normal plasma flavin or acylcarnitine profile excludes the diagnosis",
+      "Overlooking deafness as an early and pivotal diagnostic clue"
+    ],
+    "references": [
+      "GeneReviews: Riboflavin Transporter Deficiency Neuronopathy",
+      "OMIM entries for SLC52A2 and SLC52A3",
+      "Nelson Textbook of Paediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Start high-dose oral riboflavin supplementation empirically on clinical suspicion to replenish FMN and FAD cofactors and restore flavoenzyme activity, without waiting for genetic confirmation",
+      "Provide swallowing assessment and nutritional support, with gastrostomy feeding where progressive bulbar weakness causes unsafe dysphagia",
+      "Monitor respiratory function and institute non-invasive ventilation and airway clearance as respiratory insufficiency develops",
+      "Offer auditory rehabilitation with hearing aids or cochlear implantation for the sensorineural hearing loss",
+      "Engage physiotherapy, occupational therapy and speech and language therapy for limb and bulbar weakness and communication needs",
+      "Monitor treatment response with serial neurological, audiometric and respiratory assessment alongside plasma flavin and acylcarnitine profiles",
+      "Coordinate care through a multidisciplinary neurology and metabolic medicine team",
+      "Provide genetic counselling and test siblings for biallelic SLC52A2 or SLC52A3 variants so affected relatives can begin riboflavin early"
     ]
-   ],
-   "caption": "Overview comparison matrix for brown-vialetto-van laere syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "brown-vialetto-van-laere-syndrome-real-image",
-   "title": "Brown-Vialetto-Van Laere syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "brown_vialetto_van_laere_syndrome-pathway",
+      "title": "Brown-Vialetto-Van Laere syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A treatable riboflavin transporter defect: consider it in any child or young adult with progressive sensorineural deafness combined with a motor neuronopathy, because timely riboflavin supplementation can arrest and partly reverse the",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive respiratory insufficiency or stridor from bulbar and diaphragmatic weakness",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Molecular genetic testing of SLC52A2 and SLC52A3, Plasma and, where available, tissue flavin (riboflavin/FAD) concentrations, Plasma acylcarnitine profile and urine organic acids looking for a MADD-like pattern"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Start high-dose oral riboflavin supplementation empirically on clinical suspicion to replenish FMN and FAD cofactors and restore flavoenzyme activity, without waiting for genetic confirmation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mislabelling the presentation as motor neurone disease or a non-treatable neurodegeneration and missing a treatable cause"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of brown-vialetto-van laere syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "brown_vialetto_van_laere_syndrome-matrix",
+      "title": "Brown-Vialetto-Van Laere syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A treatable riboflavin transporter defect: consider it in any child or young adult with progressive sensorineural deafness",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Molecular genetic testing of SLC52A2 and SLC52A3, Plasma and, where available, tissue flavin (riboflavin/FAD) concentrations,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Amyotrophic lateral sclerosis and other motor neurone disease, Spinal muscular atrophy and Fazio-Londe disease, Mitochondrial",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Start high-dose oral riboflavin supplementation empirically on clinical suspicion to replenish FMN and FAD cofactors and restore",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mislabelling the presentation as motor neurone disease or a non-treatable neurodegeneration and missing a treatable cause",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for brown-vialetto-van laere syndrome."
+    }
+  ],
+  "diagrams": []
 }

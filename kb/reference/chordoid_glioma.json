@@ -1,182 +1,160 @@
 {
- "id": "chordoid_glioma",
- "name": "Chordoid glioma of the third ventricle",
- "aliases": [
-  "chordoid glioma",
-  "chordoid glioma of the third ventricle",
-  "third ventricular chordoid glioma",
-  "PRKCA-mutant chordoid glioma",
-  "CNS WHO grade 2 chordoid glioma"
- ],
- "class": "non_infective",
- "system": "Oncology / Neuro-oncology",
- "specialty": "Neuro-oncology / Neuropathology",
- "referenceOnly": true,
- "reference": {
-  "source": "WHO Classification of Tumours of the CNS",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare, slow-growing glial tumour (CNS WHO grade 2) arising characteristically in the anterior third ventricle of adults, more often women",
-   "Its location near the hypothalamus and optic pathways produces visual disturbance, endocrine and hypothalamic dysfunction, and features of raised intracranial pressure",
-   "MRI typically shows a well-circumscribed, ovoid, homogeneously enhancing suprasellar/third-ventricular mass",
-   "A recurrent PRKCA gene mutation is highly characteristic and aids molecular diagnosis",
-   "Histology shows cords and clusters of epithelioid glial cells in a mucinous, chordoid matrix with a lymphoplasmacytic infiltrate",
-   "The tumour is GFAP-positive, confirming its glial nature",
-   "Complete resection is desirable but often difficult owing to adherence to critical hypothalamic structures"
+  "id": "chordoid_glioma",
+  "name": "Chordoid glioma of the third ventricle",
+  "aliases": [
+    "chordoid glioma",
+    "chordoid glioma of the third ventricle",
+    "third ventricular chordoid glioma",
+    "PRKCA-mutant chordoid glioma",
+    "CNS WHO grade 2 chordoid glioma"
   ],
-  "pathophysiology": "Chordoid glioma is a rare, low-grade glial tumour that arises in the anterior third ventricle, probably from specialised ependymal or tanycyte-like cells of the region near the lamina terminalis. It grows as a circumscribed mass composed of cords and nests of epithelioid, glial-fibrillary-acidic-protein-positive cells embedded in a mucinous, chordoid stroma, typically accompanied by a lymphoplasmacytic inflammatory infiltrate. A recurrent activating mutation of the PRKCA gene is a defining molecular feature. Although histologically low grade and slow-growing, its intimate relationship with the hypothalamus, optic chiasm and cerebrospinal fluid pathways makes it clinically significant and surgically challenging.",
-  "additionalDifferentials": [
-   "Craniopharyngioma",
-   "Pituitary macroadenoma with suprasellar extension",
-   "Suprasellar meningioma",
-   "Hypothalamic/optic pathway glioma",
-   "Germ cell tumour",
-   "Chordoid meningioma"
-  ],
-  "additionalInvestigations": [
-   "Contrast-enhanced brain MRI to characterise the third-ventricular/suprasellar mass",
-   "Formal visual field and acuity assessment for chiasmal compression",
-   "Anterior pituitary and hypothalamic endocrine evaluation",
-   "Histopathology showing epithelioid glial cords in a chordoid, mucinous matrix",
-   "GFAP immunohistochemistry to confirm glial origin",
-   "PRKCA molecular testing to support the diagnosis"
-  ],
-  "redFlags": [
-   "Progressive visual field loss from chiasmal compression",
-   "Hypothalamic dysfunction such as disordered temperature, appetite or consciousness",
-   "Obstructive hydrocephalus with raised intracranial pressure",
-   "Postoperative hypothalamic injury causing endocrine and autonomic instability"
-  ],
-  "prognosis": "As a low-grade tumour, prognosis after complete resection is favourable, but its deep location adjacent to the hypothalamus frequently prevents total removal, leading to recurrence and significant surgical morbidity. Subtotally resected tumours may be managed with adjuvant radiotherapy, and long-term endocrine and visual sequelae are common.",
-  "pitfalls": [
-   "Confusing it with craniopharyngioma or meningioma and misjudging the surgical approach",
-   "Attempting radical resection at the cost of severe hypothalamic injury",
-   "Underestimating perioperative endocrine and hypothalamic complications",
-   "Not considering PRKCA testing to confirm an uncertain diagnosis"
-  ],
-  "references": [
-   "WHO Classification of Tumours of the Central Nervous System",
-   "Louis DN et al. The 2021 WHO Classification of Tumors of the Central Nervous System"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Maximal safe surgical resection is the primary and generally only established treatment, aiming for gross total removal when feasible without unacceptable risk to the hypothalamus and optic apparatus",
-   "Surgery also provides diagnostic tissue for histology and PRKCA mutation testing",
-   "A transcallosal or transcortical approach is typically used to access the third ventricle, but the deep location often limits complete resection and carries risk of hypothalamic and endocrine injury",
-   "Adjuvant radiotherapy (fractionated external beam or stereotactic radiosurgery) is considered when resection is subtotal or tumour is left in situ due to hypothalamic adherence",
-   "Radiotherapy is also used at recurrence or on further growth of residual disease, rather than routinely after complete resection",
-   "There is no established role for cytotoxic chemotherapy or targeted systemic therapy in this tumour",
-   "For recurrent disease, options are re-resection where feasible or radiotherapy if not already given, decided within a neuro-oncology or skull base multidisciplinary team",
-   "In unresectable or high-risk lesions in poor surgical candidates, a more conservative approach of biopsy plus radiotherapy or close observation with serial imaging may be considered",
-   "Surveillance brain MRI at intervals to detect recurrence or progression of residual tumour",
-   "Serial formal visual field and visual acuity assessment given proximity to the optic chiasm",
-   "Ongoing anterior pituitary and hypothalamic endocrine evaluation, since hypothalamic-pituitary dysfunction including diabetes insipidus is common and may evolve over time",
-   "Clinical monitoring for signs of raised intracranial pressure or recurrent hydrocephalus given the tumour's potential to obstruct CSF flow",
-   "Prompt referral to a neurosurgical service with third-ventricular and skull base experience, ideally within a neuro-oncology multidisciplinary team",
-   "Referral to endocrinology, radiation oncology, and ophthalmology as appropriate for perioperative endocrine management, adjuvant or salvage radiotherapy, and visual surveillance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "chordoid_glioma-pathway",
-   "title": "Chordoid glioma of the third ventricle: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare, slow-growing glial tumour (CNS WHO grade 2) arising characteristically in the anterior third ventricle of adults, more often women",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive visual field loss from chiasmal compression",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Contrast-enhanced brain MRI to characterise the third-ventricular/suprasellar mass, Formal visual field and acuity assessment for chiasmal compression, Anterior pituitary and hypothalamic endocrine evaluation"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Maximal safe surgical resection is the primary and generally only established treatment, aiming for gross total removal when feasible without unacceptable risk to the hypothalamus and optic apparatus"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing it with craniopharyngioma or meningioma and misjudging the surgical approach"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of chordoid glioma of the third ventricle."
-  }
- ],
- "tables": [
-  {
-   "id": "chordoid_glioma-matrix",
-   "title": "Chordoid glioma of the third ventricle: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare, slow-growing glial tumour (CNS WHO grade 2) arising characteristically in the anterior third ventricle of adults, more",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Oncology / Neuro-oncology",
+  "specialty": "Neuro-oncology / Neuropathology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "WHO Classification of Tumours of the CNS",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare, slow-growing glial tumour (CNS WHO grade 2) arising characteristically in the anterior third ventricle of adults, more often women",
+      "Its location near the hypothalamus and optic pathways produces visual disturbance, endocrine and hypothalamic dysfunction, and features of raised intracranial pressure",
+      "MRI typically shows a well-circumscribed, ovoid, homogeneously enhancing suprasellar/third-ventricular mass",
+      "A recurrent PRKCA gene mutation is highly characteristic and aids molecular diagnosis",
+      "Histology shows cords and clusters of epithelioid glial cells in a mucinous, chordoid matrix with a lymphoplasmacytic infiltrate",
+      "The tumour is GFAP-positive, confirming its glial nature",
+      "Complete resection is desirable but often difficult owing to adherence to critical hypothalamic structures"
     ],
-    [
-     "Key Investigations",
-     "Contrast-enhanced brain MRI to characterise the third-ventricular/suprasellar mass, Formal visual field and acuity assessment for",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Chordoid glioma is a rare, low-grade glial tumour that arises in the anterior third ventricle, probably from specialised ependymal or tanycyte-like cells of the region near the lamina terminalis. It grows as a circumscribed mass composed of cords and nests of epithelioid, glial-fibrillary-acidic-protein-positive cells embedded in a mucinous, chordoid stroma, typically accompanied by a lymphoplasmacytic inflammatory infiltrate. A recurrent activating mutation of the PRKCA gene is a defining molecular feature. Although histologically low grade and slow-growing, its intimate relationship with the hypothalamus, optic chiasm and cerebrospinal fluid pathways makes it clinically significant and surgically challenging.",
+    "additionalDifferentials": [
+      "Craniopharyngioma",
+      "Pituitary macroadenoma with suprasellar extension",
+      "Suprasellar meningioma",
+      "Hypothalamic/optic pathway glioma",
+      "Germ cell tumour",
+      "Chordoid meningioma"
     ],
-    [
-     "Primary Differentials",
-     "Craniopharyngioma, Pituitary macroadenoma with suprasellar extension, Suprasellar meningioma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Contrast-enhanced brain MRI to characterise the third-ventricular/suprasellar mass",
+      "Formal visual field and acuity assessment for chiasmal compression",
+      "Anterior pituitary and hypothalamic endocrine evaluation",
+      "Histopathology showing epithelioid glial cords in a chordoid, mucinous matrix",
+      "GFAP immunohistochemistry to confirm glial origin",
+      "PRKCA molecular testing to support the diagnosis"
     ],
-    [
-     "Management Strategy",
-     "Maximal safe surgical resection is the primary and generally only established treatment, aiming for gross total removal when",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive visual field loss from chiasmal compression",
+      "Hypothalamic dysfunction such as disordered temperature, appetite or consciousness",
+      "Obstructive hydrocephalus with raised intracranial pressure",
+      "Postoperative hypothalamic injury causing endocrine and autonomic instability"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing it with craniopharyngioma or meningioma and misjudging the surgical approach",
-     "Prevent diagnostic or management error"
+    "prognosis": "As a low-grade tumour, prognosis after complete resection is favourable, but its deep location adjacent to the hypothalamus frequently prevents total removal, leading to recurrence and significant surgical morbidity. Subtotally resected tumours may be managed with adjuvant radiotherapy, and long-term endocrine and visual sequelae are common.",
+    "pitfalls": [
+      "Confusing it with craniopharyngioma or meningioma and misjudging the surgical approach",
+      "Attempting radical resection at the cost of severe hypothalamic injury",
+      "Underestimating perioperative endocrine and hypothalamic complications",
+      "Not considering PRKCA testing to confirm an uncertain diagnosis"
+    ],
+    "references": [
+      "WHO Classification of Tumours of the Central Nervous System",
+      "Louis DN et al. The 2021 WHO Classification of Tumors of the Central Nervous System"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Maximal safe surgical resection is the primary and generally only established treatment, aiming for gross total removal when feasible without unacceptable risk to the hypothalamus and optic apparatus",
+      "Surgery also provides diagnostic tissue for histology and PRKCA mutation testing",
+      "A transcallosal or transcortical approach is typically used to access the third ventricle, but the deep location often limits complete resection and carries risk of hypothalamic and endocrine injury",
+      "Adjuvant radiotherapy (fractionated external beam or stereotactic radiosurgery) is considered when resection is subtotal or tumour is left in situ due to hypothalamic adherence",
+      "Radiotherapy is also used at recurrence or on further growth of residual disease, rather than routinely after complete resection",
+      "There is no established role for cytotoxic chemotherapy or targeted systemic therapy in this tumour",
+      "For recurrent disease, options are re-resection where feasible or radiotherapy if not already given, decided within a neuro-oncology or skull base multidisciplinary team",
+      "In unresectable or high-risk lesions in poor surgical candidates, a more conservative approach of biopsy plus radiotherapy or close observation with serial imaging may be considered",
+      "Surveillance brain MRI at intervals to detect recurrence or progression of residual tumour",
+      "Serial formal visual field and visual acuity assessment given proximity to the optic chiasm",
+      "Ongoing anterior pituitary and hypothalamic endocrine evaluation, since hypothalamic-pituitary dysfunction including diabetes insipidus is common and may evolve over time",
+      "Clinical monitoring for signs of raised intracranial pressure or recurrent hydrocephalus given the tumour's potential to obstruct CSF flow",
+      "Prompt referral to a neurosurgical service with third-ventricular and skull base experience, ideally within a neuro-oncology multidisciplinary team",
+      "Referral to endocrinology, radiation oncology, and ophthalmology as appropriate for perioperative endocrine management, adjuvant or salvage radiotherapy, and visual surveillance"
     ]
-   ],
-   "caption": "Overview comparison matrix for chordoid glioma of the third ventricle."
-  }
- ],
- "diagrams": [
-  {
-   "id": "chordoid-glioma-real-image",
-   "title": "Chordoid glioma of the third ventricle: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "chordoid_glioma-pathway",
+      "title": "Chordoid glioma of the third ventricle: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare, slow-growing glial tumour (CNS WHO grade 2) arising characteristically in the anterior third ventricle of adults, more often women",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive visual field loss from chiasmal compression",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Contrast-enhanced brain MRI to characterise the third-ventricular/suprasellar mass, Formal visual field and acuity assessment for chiasmal compression, Anterior pituitary and hypothalamic endocrine evaluation"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Maximal safe surgical resection is the primary and generally only established treatment, aiming for gross total removal when feasible without unacceptable risk to the hypothalamus and optic apparatus"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing it with craniopharyngioma or meningioma and misjudging the surgical approach"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of chordoid glioma of the third ventricle."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "chordoid_glioma-matrix",
+      "title": "Chordoid glioma of the third ventricle: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare, slow-growing glial tumour (CNS WHO grade 2) arising characteristically in the anterior third ventricle of adults, more",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Contrast-enhanced brain MRI to characterise the third-ventricular/suprasellar mass, Formal visual field and acuity assessment for",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Craniopharyngioma, Pituitary macroadenoma with suprasellar extension, Suprasellar meningioma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Maximal safe surgical resection is the primary and generally only established treatment, aiming for gross total removal when",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing it with craniopharyngioma or meningioma and misjudging the surgical approach",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for chordoid glioma of the third ventricle."
+    }
+  ],
+  "diagrams": []
 }

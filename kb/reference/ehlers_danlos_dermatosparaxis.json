@@ -1,175 +1,153 @@
 {
- "id": "ehlers_danlos_dermatosparaxis",
- "name": "Dermatosparaxis Ehlers-Danlos syndrome",
- "aliases": [
-  "dEDS",
-  "EDS type VIIC",
-  "Human dermatosparaxis"
- ],
- "class": "non_infective",
- "system": "Connective tissue / Skeletal",
- "specialty": "Clinical genetics / Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Clinical genetics and connective tissue disorder references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Rare autosomal recessive subtype caused by biallelic ADAMTS2 mutations, which abolish procollagen I N-proteinase and prevent cleavage of the N-terminal propeptide of type I procollagen.",
-   "Hallmark is extreme skin fragility with soft, doughy, redundant and sagging skin giving an aged appearance, together with severe, easy bruising.",
-   "The skin is fragile and lax rather than markedly hyperextensible with atrophic scarring — a useful contrast with classical Ehlers-Danlos syndrome.",
-   "Characteristic facies include puffy oedematous eyelids, epicanthic folds and micrognathia, with blue sclerae and often delayed closure of the fontanelles.",
-   "Umbilical and inguinal herniae, rectal prolapse, short stature and osteopenia are frequent.",
-   "Electron microscopy of skin shows irregular, ribbon-like collagen fibrils with 'hieroglyphic' cross-sections — highly suggestive.",
-   "The name derives from a homologous, well-described disorder of cattle and sheep ('dermatosparaxis', meaning torn skin).",
-   "Coagulation studies are typically normal despite dramatic bruising, and surgical wounds heal poorly, so unnecessary operations should be avoided."
+  "id": "ehlers_danlos_dermatosparaxis",
+  "name": "Dermatosparaxis Ehlers-Danlos syndrome",
+  "aliases": [
+    "dEDS",
+    "EDS type VIIC",
+    "Human dermatosparaxis"
   ],
-  "pathophysiology": "Dermatosparaxis Ehlers-Danlos syndrome results from biallelic loss-of-function mutations in ADAMTS2, which encodes procollagen I N-proteinase, a secreted metalloproteinase that removes the amino-terminal propeptide from type I (and, less critically, types II and III) procollagen during collagen maturation. When this propeptide is not excised, partially processed pN-collagen is incorporated into fibrils and sterically interferes with normal lateral packing, producing the irregular, ribbon-like fibrils seen on electron microscopy. Because type I collagen provides tensile strength to skin, fascia, blood vessels and other tissues, the poorly assembled matrix is profoundly fragile and lax, explaining the sagging redundant skin, easy tearing and bruising, herniae and organ prolapse. The disorder is the enzymatic counterpart of arthrochalasia Ehlers-Danlos syndrome, in which the same processing step fails because the collagen substrate itself lacks the cleavage site rather than because the enzyme is deficient.",
-  "additionalDifferentials": [
-   "Classical Ehlers-Danlos syndrome (COL5A1/COL5A2)",
-   "Arthrochalasia Ehlers-Danlos syndrome",
-   "Cutis laxa syndromes (elastin, fibulin or ATP7A related)",
-   "Kyphoscoliotic Ehlers-Danlos syndrome",
-   "Geroderma osteodysplasticum and De Barsy syndrome",
-   "Non-accidental injury (for the bruising)"
-  ],
-  "additionalInvestigations": [
-   "Molecular genetic testing of ADAMTS2",
-   "Electron microscopy of a skin biopsy for ribbon-like ('hieroglyphic') collagen fibrils",
-   "Biochemical collagen studies demonstrating accumulation of unprocessed pN-collagen",
-   "Coagulation screen (characteristically normal) to exclude a bleeding diathesis",
-   "Skeletal radiographs for osteopenia",
-   "Clinical and imaging assessment of herniae and pelvic-floor or rectal prolapse"
-  ],
-  "redFlags": [
-   "Extensive spontaneous bruising or large haematomata",
-   "Skin lacerations or wound dehiscence after minor trauma or surgery",
-   "Incarceration or strangulation of a hernia",
-   "Signs of visceral or bladder rupture"
-  ],
-  "prognosis": "Skin and tissue fragility persist lifelong and cause considerable morbidity from bruising, wounds, herniae and prolapse; with careful, conservative management life expectancy is often near normal, though severe neonatal presentations occur.",
-  "pitfalls": [
-   "Misdiagnosing the sagging skin as a cutis laxa syndrome",
-   "Attributing severe bruising to a primary bleeding disorder or to non-accidental injury",
-   "Proceeding to elective surgery in tissues that tear and heal poorly",
-   "Overlooking herniae, prolapse or bladder complications"
-  ],
-  "references": [
-   "Clinical genetics reference texts",
-   "International Ehlers-Danlos syndromes classification guidance",
-   "Connective tissue disorder reference texts"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No disease-specific therapy exists; base care on protecting the extremely fragile skin with gentle handling, padding and avoidance of trauma",
-   "Manage wounds with careful closure, skin support or taping and infection prevention, anticipating poor tensile strength and easy tearing",
-   "Repair umbilical and inguinal herniae and manage rectal or pelvic-floor prolapse surgically using tissue-sparing technique given the fragility",
-   "Address easy bruising supportively and confirm a normal coagulation screen to exclude a true bleeding diathesis",
-   "Monitor and manage osteopenia and short stature with skeletal review and bone health optimisation",
-   "Provide multidisciplinary support through dermatology and clinical genetics, with paediatric input for neonatal presentations",
-   "Offer genetic counselling and family screening given autosomal recessive ADAMTS2 inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "ehlers_danlos_dermatosparaxis-pathway",
-   "title": "Dermatosparaxis Ehlers-Danlos syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Rare autosomal recessive subtype caused by biallelic ADAMTS2 mutations, which abolish procollagen I N-proteinase and prevent cleavage of the N-terminal propeptide of type I procollagen.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Extensive spontaneous bruising or large haematomata",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Molecular genetic testing of ADAMTS2, Electron microscopy of a skin biopsy for ribbon-like ('hieroglyphic') collagen fibrils, Biochemical collagen studies demonstrating accumulation of unprocessed pN-collagen"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No disease-specific therapy exists; base care on protecting the extremely fragile skin with gentle handling, padding and avoidance of trauma"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing the sagging skin as a cutis laxa syndrome"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of dermatosparaxis ehlers-danlos syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "ehlers_danlos_dermatosparaxis-matrix",
-   "title": "Dermatosparaxis Ehlers-Danlos syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Rare autosomal recessive subtype caused by biallelic ADAMTS2 mutations, which abolish procollagen I N-proteinase and prevent",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Connective tissue / Skeletal",
+  "specialty": "Clinical genetics / Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Clinical genetics and connective tissue disorder references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Rare autosomal recessive subtype caused by biallelic ADAMTS2 mutations, which abolish procollagen I N-proteinase and prevent cleavage of the N-terminal propeptide of type I procollagen.",
+      "Hallmark is extreme skin fragility with soft, doughy, redundant and sagging skin giving an aged appearance, together with severe, easy bruising.",
+      "The skin is fragile and lax rather than markedly hyperextensible with atrophic scarring — a useful contrast with classical Ehlers-Danlos syndrome.",
+      "Characteristic facies include puffy oedematous eyelids, epicanthic folds and micrognathia, with blue sclerae and often delayed closure of the fontanelles.",
+      "Umbilical and inguinal herniae, rectal prolapse, short stature and osteopenia are frequent.",
+      "Electron microscopy of skin shows irregular, ribbon-like collagen fibrils with 'hieroglyphic' cross-sections — highly suggestive.",
+      "The name derives from a homologous, well-described disorder of cattle and sheep ('dermatosparaxis', meaning torn skin).",
+      "Coagulation studies are typically normal despite dramatic bruising, and surgical wounds heal poorly, so unnecessary operations should be avoided."
     ],
-    [
-     "Key Investigations",
-     "Molecular genetic testing of ADAMTS2, Electron microscopy of a skin biopsy for ribbon-like ('hieroglyphic') collagen fibrils,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Dermatosparaxis Ehlers-Danlos syndrome results from biallelic loss-of-function mutations in ADAMTS2, which encodes procollagen I N-proteinase, a secreted metalloproteinase that removes the amino-terminal propeptide from type I (and, less critically, types II and III) procollagen during collagen maturation. When this propeptide is not excised, partially processed pN-collagen is incorporated into fibrils and sterically interferes with normal lateral packing, producing the irregular, ribbon-like fibrils seen on electron microscopy. Because type I collagen provides tensile strength to skin, fascia, blood vessels and other tissues, the poorly assembled matrix is profoundly fragile and lax, explaining the sagging redundant skin, easy tearing and bruising, herniae and organ prolapse. The disorder is the enzymatic counterpart of arthrochalasia Ehlers-Danlos syndrome, in which the same processing step fails because the collagen substrate itself lacks the cleavage site rather than because the enzyme is deficient.",
+    "additionalDifferentials": [
+      "Classical Ehlers-Danlos syndrome (COL5A1/COL5A2)",
+      "Arthrochalasia Ehlers-Danlos syndrome",
+      "Cutis laxa syndromes (elastin, fibulin or ATP7A related)",
+      "Kyphoscoliotic Ehlers-Danlos syndrome",
+      "Geroderma osteodysplasticum and De Barsy syndrome",
+      "Non-accidental injury (for the bruising)"
     ],
-    [
-     "Primary Differentials",
-     "Classical Ehlers-Danlos syndrome (COL5A1/COL5A2), Arthrochalasia Ehlers-Danlos syndrome, Cutis laxa syndromes (elastin, fibulin",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Molecular genetic testing of ADAMTS2",
+      "Electron microscopy of a skin biopsy for ribbon-like ('hieroglyphic') collagen fibrils",
+      "Biochemical collagen studies demonstrating accumulation of unprocessed pN-collagen",
+      "Coagulation screen (characteristically normal) to exclude a bleeding diathesis",
+      "Skeletal radiographs for osteopenia",
+      "Clinical and imaging assessment of herniae and pelvic-floor or rectal prolapse"
     ],
-    [
-     "Management Strategy",
-     "No disease-specific therapy exists; base care on protecting the extremely fragile skin with gentle handling, padding and",
-     "Core treatment modality"
+    "redFlags": [
+      "Extensive spontaneous bruising or large haematomata",
+      "Skin lacerations or wound dehiscence after minor trauma or surgery",
+      "Incarceration or strangulation of a hernia",
+      "Signs of visceral or bladder rupture"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing the sagging skin as a cutis laxa syndrome",
-     "Prevent diagnostic or management error"
+    "prognosis": "Skin and tissue fragility persist lifelong and cause considerable morbidity from bruising, wounds, herniae and prolapse; with careful, conservative management life expectancy is often near normal, though severe neonatal presentations occur.",
+    "pitfalls": [
+      "Misdiagnosing the sagging skin as a cutis laxa syndrome",
+      "Attributing severe bruising to a primary bleeding disorder or to non-accidental injury",
+      "Proceeding to elective surgery in tissues that tear and heal poorly",
+      "Overlooking herniae, prolapse or bladder complications"
+    ],
+    "references": [
+      "Clinical genetics reference texts",
+      "International Ehlers-Danlos syndromes classification guidance",
+      "Connective tissue disorder reference texts"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No disease-specific therapy exists; base care on protecting the extremely fragile skin with gentle handling, padding and avoidance of trauma",
+      "Manage wounds with careful closure, skin support or taping and infection prevention, anticipating poor tensile strength and easy tearing",
+      "Repair umbilical and inguinal herniae and manage rectal or pelvic-floor prolapse surgically using tissue-sparing technique given the fragility",
+      "Address easy bruising supportively and confirm a normal coagulation screen to exclude a true bleeding diathesis",
+      "Monitor and manage osteopenia and short stature with skeletal review and bone health optimisation",
+      "Provide multidisciplinary support through dermatology and clinical genetics, with paediatric input for neonatal presentations",
+      "Offer genetic counselling and family screening given autosomal recessive ADAMTS2 inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for dermatosparaxis ehlers-danlos syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "ehlers-danlos-dermatosparaxis-real-image",
-   "title": "Dermatosparaxis Ehlers-Danlos syndrome: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "ehlers_danlos_dermatosparaxis-pathway",
+      "title": "Dermatosparaxis Ehlers-Danlos syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Rare autosomal recessive subtype caused by biallelic ADAMTS2 mutations, which abolish procollagen I N-proteinase and prevent cleavage of the N-terminal propeptide of type I procollagen.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Extensive spontaneous bruising or large haematomata",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Molecular genetic testing of ADAMTS2, Electron microscopy of a skin biopsy for ribbon-like ('hieroglyphic') collagen fibrils, Biochemical collagen studies demonstrating accumulation of unprocessed pN-collagen"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No disease-specific therapy exists; base care on protecting the extremely fragile skin with gentle handling, padding and avoidance of trauma"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing the sagging skin as a cutis laxa syndrome"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of dermatosparaxis ehlers-danlos syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "ehlers_danlos_dermatosparaxis-matrix",
+      "title": "Dermatosparaxis Ehlers-Danlos syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Rare autosomal recessive subtype caused by biallelic ADAMTS2 mutations, which abolish procollagen I N-proteinase and prevent",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Molecular genetic testing of ADAMTS2, Electron microscopy of a skin biopsy for ribbon-like ('hieroglyphic') collagen fibrils,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Classical Ehlers-Danlos syndrome (COL5A1/COL5A2), Arthrochalasia Ehlers-Danlos syndrome, Cutis laxa syndromes (elastin, fibulin",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No disease-specific therapy exists; base care on protecting the extremely fragile skin with gentle handling, padding and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing the sagging skin as a cutis laxa syndrome",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for dermatosparaxis ehlers-danlos syndrome."
+    }
+  ],
+  "diagrams": []
 }

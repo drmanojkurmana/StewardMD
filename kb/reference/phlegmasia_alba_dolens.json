@@ -1,179 +1,157 @@
 {
- "id": "phlegmasia_alba_dolens",
- "name": "phlegmasia alba dolens",
- "aliases": [
-  "painful white leg",
-  "milk leg",
-  "phlegmasia alba"
- ],
- "class": "non_infective",
- "system": "Cardiovascular / Vascular",
- "specialty": "Vascular Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Rutherford's Vascular Surgery and Endovascular Therapy",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Phlegmasia alba dolens ('painful white leg', 'milk leg') is a severe form of acute iliofemoral deep vein thrombosis in which massive venous outflow obstruction produces a swollen, painful, pale limb; it is classically described postpartum but occurs with any cause of extensive proximal thrombosis",
-   "The pallor reflects tense subcutaneous oedema together with reflex arterial spasm, while patent collateral veins still permit some venous drainage, distinguishing it from the later cyanotic stage",
-   "The condition lies on a continuum: untreated progression to phlegmasia cerulea dolens (a cyanotic, near-total venous occlusion involving the collaterals) and then to venous gangrene threatens both the limb and life",
-   "Peripheral pulses are typically preserved in phlegmasia alba dolens, which helps differentiate it from acute arterial occlusion where the limb is likewise pale and painful",
-   "Massive fluid sequestration into the affected limb can precipitate hypovolaemia and circulatory compromise, and severe swelling may cause a compartment syndrome",
-   "Management centres on prompt therapeutic anticoagulation, limb elevation and consideration of catheter-directed thrombolysis or venous thrombectomy, alongside a search for underlying causes such as May-Thurner iliac vein compression or occult malignancy",
-   "It is a limb- and life-threatening emergency requiring urgent vascular assessment; venous gangrene carries a high risk of amputation and significant mortality and is strongly associated with malignancy and heparin-induced thrombocytopenia"
+  "id": "phlegmasia_alba_dolens",
+  "name": "phlegmasia alba dolens",
+  "aliases": [
+    "painful white leg",
+    "milk leg",
+    "phlegmasia alba"
   ],
-  "pathophysiology": "Extensive thrombosis of the iliofemoral venous segment obstructs venous outflow from the limb. In the alba stage the collateral veins remain patent, so the limb is pale, tensely swollen and painful, and reflex arterial vasospasm contributes to the pallor and to diminished distal perfusion. As thrombus propagates to involve the collateral and microvascular beds (phlegmasia cerulea dolens), venous drainage fails almost completely; capillary and venular pressures rise steeply, the limb becomes cyanotic and severely swollen, and large volumes of fluid sequester into the tissues, causing hypovolaemia. The resulting rise in tissue pressure, together with progressive microvascular thrombosis, impairs arterial inflow and can culminate in venous gangrene.",
-  "additionalDifferentials": [
-   "Acute arterial occlusion (embolic or thrombotic limb ischaemia)",
-   "Uncomplicated deep vein thrombosis",
-   "Compartment syndrome from another cause",
-   "Necrotising soft tissue infection",
-   "Acute cellulitis of the limb",
-   "Lymphoedema complicated by cellulitis",
-   "Ruptured popliteal (Baker) cyst"
-  ],
-  "additionalInvestigations": [
-   "Duplex ultrasound to confirm and localise the venous thrombosis",
-   "CT or MR venography to define the iliocaval extent and identify compressive lesions such as May-Thurner",
-   "Assessment of arterial perfusion (ankle pressures and Doppler) to exclude arterial occlusion",
-   "Full blood count with serial platelet monitoring for heparin-induced thrombocytopenia, and a coagulation profile",
-   "Renal function and metabolic screen given fluid sequestration and possible tissue injury",
-   "Evaluation for underlying malignancy and, where appropriate, thrombophilia",
-   "Compartment pressure assessment and markers of tissue injury if gangrene or compartment syndrome is suspected"
-  ],
-  "redFlags": [
-   "Progression to cyanosis (phlegmasia cerulea dolens) or to skin blistering and gangrene",
-   "Absent distal pulses or other signs of arterial compromise",
-   "Tense swelling suggesting an evolving compartment syndrome",
-   "Haemodynamic instability from fluid sequestration",
-   "A falling platelet count suggesting heparin-induced thrombocytopenia"
-  ],
-  "prognosis": "With prompt anticoagulation and thrombus removal the white-leg stage can resolve, but progression to venous gangrene carries high rates of amputation and mortality. Long-term post-thrombotic syndrome is common in survivors, particularly after extensive iliofemoral thrombosis.",
-  "pitfalls": [
-   "Mistaking the pale, painful limb for acute arterial ischaemia and delaying anticoagulation",
-   "Underestimating fluid sequestration and failing to resuscitate the circulation",
-   "Missing an underlying iliac vein compression or occult malignancy",
-   "Overlooking an evolving compartment syndrome",
-   "Continuing heparin despite thrombocytopenia when heparin-induced thrombocytopenia is driving the thrombosis"
-  ],
-  "references": [
-   "Rutherford's Vascular Surgery and Endovascular Therapy",
-   "Haimovici's Vascular Surgery",
-   "CHEST guidelines on antithrombotic therapy for venous thromboembolic disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Start immediate therapeutic anticoagulation with unfractionated or low-molecular-weight heparin to arrest thrombus propagation",
-   "Elevate the limb and give fluid resuscitation to counter massive fluid sequestration and hypovolaemia",
-   "Consider catheter-directed thrombolysis or pharmacomechanical/surgical venous thrombectomy to clear extensive iliofemoral thrombus",
-   "Identify and treat an underlying cause, stenting May-Thurner iliac compression and investigating for occult malignancy",
-   "Monitor closely for progression to phlegmasia cerulea dolens, venous gangrene or compartment syndrome requiring fasciotomy",
-   "Monitor platelet count for heparin-induced thrombocytopenia during heparin therapy",
-   "Continue long-term anticoagulation and graduated compression to limit post-thrombotic syndrome",
-   "Escalate urgently to vascular surgery for the threatened limb"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "phlegmasia_alba_dolens-pathway",
-   "title": "phlegmasia alba dolens: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Phlegmasia alba dolens ('painful white leg', 'milk leg') is a severe form of acute iliofemoral deep vein thrombosis in which massive venous outflow obstruction produces a swollen, painful, pale limb; it is classically described postpartum",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progression to cyanosis (phlegmasia cerulea dolens) or to skin blistering and gangrene",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Duplex ultrasound to confirm and localise the venous thrombosis, CT or MR venography to define the iliocaval extent and identify compressive lesions such as May-Thurner, Assessment of arterial perfusion (ankle pressures"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Start immediate therapeutic anticoagulation with unfractionated or low-molecular-weight heparin to arrest thrombus propagation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking the pale, painful limb for acute arterial ischaemia and delaying anticoagulation"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of phlegmasia alba dolens."
-  }
- ],
- "tables": [
-  {
-   "id": "phlegmasia_alba_dolens-matrix",
-   "title": "phlegmasia alba dolens: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Phlegmasia alba dolens ('painful white leg', 'milk leg') is a severe form of acute iliofemoral deep vein thrombosis in which",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular / Vascular",
+  "specialty": "Vascular Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rutherford's Vascular Surgery and Endovascular Therapy",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Phlegmasia alba dolens ('painful white leg', 'milk leg') is a severe form of acute iliofemoral deep vein thrombosis in which massive venous outflow obstruction produces a swollen, painful, pale limb; it is classically described postpartum but occurs with any cause of extensive proximal thrombosis",
+      "The pallor reflects tense subcutaneous oedema together with reflex arterial spasm, while patent collateral veins still permit some venous drainage, distinguishing it from the later cyanotic stage",
+      "The condition lies on a continuum: untreated progression to phlegmasia cerulea dolens (a cyanotic, near-total venous occlusion involving the collaterals) and then to venous gangrene threatens both the limb and life",
+      "Peripheral pulses are typically preserved in phlegmasia alba dolens, which helps differentiate it from acute arterial occlusion where the limb is likewise pale and painful",
+      "Massive fluid sequestration into the affected limb can precipitate hypovolaemia and circulatory compromise, and severe swelling may cause a compartment syndrome",
+      "Management centres on prompt therapeutic anticoagulation, limb elevation and consideration of catheter-directed thrombolysis or venous thrombectomy, alongside a search for underlying causes such as May-Thurner iliac vein compression or occult malignancy",
+      "It is a limb- and life-threatening emergency requiring urgent vascular assessment; venous gangrene carries a high risk of amputation and significant mortality and is strongly associated with malignancy and heparin-induced thrombocytopenia"
     ],
-    [
-     "Key Investigations",
-     "Duplex ultrasound to confirm and localise the venous thrombosis, CT or MR venography to define the iliocaval extent and identify",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Extensive thrombosis of the iliofemoral venous segment obstructs venous outflow from the limb. In the alba stage the collateral veins remain patent, so the limb is pale, tensely swollen and painful, and reflex arterial vasospasm contributes to the pallor and to diminished distal perfusion. As thrombus propagates to involve the collateral and microvascular beds (phlegmasia cerulea dolens), venous drainage fails almost completely; capillary and venular pressures rise steeply, the limb becomes cyanotic and severely swollen, and large volumes of fluid sequester into the tissues, causing hypovolaemia. The resulting rise in tissue pressure, together with progressive microvascular thrombosis, impairs arterial inflow and can culminate in venous gangrene.",
+    "additionalDifferentials": [
+      "Acute arterial occlusion (embolic or thrombotic limb ischaemia)",
+      "Uncomplicated deep vein thrombosis",
+      "Compartment syndrome from another cause",
+      "Necrotising soft tissue infection",
+      "Acute cellulitis of the limb",
+      "Lymphoedema complicated by cellulitis",
+      "Ruptured popliteal (Baker) cyst"
     ],
-    [
-     "Primary Differentials",
-     "Acute arterial occlusion (embolic or thrombotic limb ischaemia), Uncomplicated deep vein thrombosis, Compartment syndrome from",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Duplex ultrasound to confirm and localise the venous thrombosis",
+      "CT or MR venography to define the iliocaval extent and identify compressive lesions such as May-Thurner",
+      "Assessment of arterial perfusion (ankle pressures and Doppler) to exclude arterial occlusion",
+      "Full blood count with serial platelet monitoring for heparin-induced thrombocytopenia, and a coagulation profile",
+      "Renal function and metabolic screen given fluid sequestration and possible tissue injury",
+      "Evaluation for underlying malignancy and, where appropriate, thrombophilia",
+      "Compartment pressure assessment and markers of tissue injury if gangrene or compartment syndrome is suspected"
     ],
-    [
-     "Management Strategy",
-     "Start immediate therapeutic anticoagulation with unfractionated or low-molecular-weight heparin to arrest thrombus propagation",
-     "Core treatment modality"
+    "redFlags": [
+      "Progression to cyanosis (phlegmasia cerulea dolens) or to skin blistering and gangrene",
+      "Absent distal pulses or other signs of arterial compromise",
+      "Tense swelling suggesting an evolving compartment syndrome",
+      "Haemodynamic instability from fluid sequestration",
+      "A falling platelet count suggesting heparin-induced thrombocytopenia"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking the pale, painful limb for acute arterial ischaemia and delaying anticoagulation",
-     "Prevent diagnostic or management error"
+    "prognosis": "With prompt anticoagulation and thrombus removal the white-leg stage can resolve, but progression to venous gangrene carries high rates of amputation and mortality. Long-term post-thrombotic syndrome is common in survivors, particularly after extensive iliofemoral thrombosis.",
+    "pitfalls": [
+      "Mistaking the pale, painful limb for acute arterial ischaemia and delaying anticoagulation",
+      "Underestimating fluid sequestration and failing to resuscitate the circulation",
+      "Missing an underlying iliac vein compression or occult malignancy",
+      "Overlooking an evolving compartment syndrome",
+      "Continuing heparin despite thrombocytopenia when heparin-induced thrombocytopenia is driving the thrombosis"
+    ],
+    "references": [
+      "Rutherford's Vascular Surgery and Endovascular Therapy",
+      "Haimovici's Vascular Surgery",
+      "CHEST guidelines on antithrombotic therapy for venous thromboembolic disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Start immediate therapeutic anticoagulation with unfractionated or low-molecular-weight heparin to arrest thrombus propagation",
+      "Elevate the limb and give fluid resuscitation to counter massive fluid sequestration and hypovolaemia",
+      "Consider catheter-directed thrombolysis or pharmacomechanical/surgical venous thrombectomy to clear extensive iliofemoral thrombus",
+      "Identify and treat an underlying cause, stenting May-Thurner iliac compression and investigating for occult malignancy",
+      "Monitor closely for progression to phlegmasia cerulea dolens, venous gangrene or compartment syndrome requiring fasciotomy",
+      "Monitor platelet count for heparin-induced thrombocytopenia during heparin therapy",
+      "Continue long-term anticoagulation and graduated compression to limit post-thrombotic syndrome",
+      "Escalate urgently to vascular surgery for the threatened limb"
     ]
-   ],
-   "caption": "Overview comparison matrix for phlegmasia alba dolens."
-  }
- ],
- "diagrams": [
-  {
-   "id": "phlegmasia-alba-dolens-real-image",
-   "title": "phlegmasia alba dolens: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "phlegmasia_alba_dolens-pathway",
+      "title": "phlegmasia alba dolens: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Phlegmasia alba dolens ('painful white leg', 'milk leg') is a severe form of acute iliofemoral deep vein thrombosis in which massive venous outflow obstruction produces a swollen, painful, pale limb; it is classically described postpartum",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progression to cyanosis (phlegmasia cerulea dolens) or to skin blistering and gangrene",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Duplex ultrasound to confirm and localise the venous thrombosis, CT or MR venography to define the iliocaval extent and identify compressive lesions such as May-Thurner, Assessment of arterial perfusion (ankle pressures"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Start immediate therapeutic anticoagulation with unfractionated or low-molecular-weight heparin to arrest thrombus propagation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking the pale, painful limb for acute arterial ischaemia and delaying anticoagulation"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of phlegmasia alba dolens."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "phlegmasia_alba_dolens-matrix",
+      "title": "phlegmasia alba dolens: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Phlegmasia alba dolens ('painful white leg', 'milk leg') is a severe form of acute iliofemoral deep vein thrombosis in which",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Duplex ultrasound to confirm and localise the venous thrombosis, CT or MR venography to define the iliocaval extent and identify",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Acute arterial occlusion (embolic or thrombotic limb ischaemia), Uncomplicated deep vein thrombosis, Compartment syndrome from",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Start immediate therapeutic anticoagulation with unfractionated or low-molecular-weight heparin to arrest thrombus propagation",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking the pale, painful limb for acute arterial ischaemia and delaying anticoagulation",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for phlegmasia alba dolens."
+    }
+  ],
+  "diagrams": []
 }

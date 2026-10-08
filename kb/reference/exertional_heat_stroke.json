@@ -1,169 +1,147 @@
 {
- "id": "exertional_heat_stroke",
- "name": "Exertional heat stroke",
- "aliases": [
-  "exercise-induced heat stroke"
- ],
- "class": "non_infective",
- "system": "Multisystem",
- "specialty": "Sports medicine / Emergency medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Sports medicine and emergency medicine references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A life-threatening emergency defined by a very high core temperature with central nervous system dysfunction arising during strenuous exertion",
-   "It affects young, fit individuals such as athletes and military recruits, often in hot humid conditions",
-   "Central nervous system features such as confusion, agitation, seizures or collapse distinguish it from milder heat illness",
-   "Unlike classic heat stroke, patients may still be sweating",
-   "Rapid whole-body cooling, ideally by cold-water immersion, is the priority and should not await transfer",
-   "Complications include rhabdomyolysis, acute kidney injury, disseminated intravascular coagulation and liver injury"
+  "id": "exertional_heat_stroke",
+  "name": "Exertional heat stroke",
+  "aliases": [
+    "exercise-induced heat stroke"
   ],
-  "pathophysiology": "Exertional heat stroke occurs when intense muscular heat production during exercise overwhelms the body's capacity to dissipate heat, causing core temperature to rise to a level that injures tissues. Excessive heat denatures proteins and triggers a systemic inflammatory response and endothelial injury, which can progress to multi-organ dysfunction. Muscle breakdown releases myoglobin and potassium, and the combination of hyperthermia, inflammation and hypoperfusion drives rhabdomyolysis, coagulopathy and acute kidney and liver injury. The speed of cooling strongly influences outcome.",
-  "additionalDifferentials": [
-   "Classic (non-exertional) heat stroke",
-   "Sepsis",
-   "Serotonin syndrome or neuroleptic malignant syndrome",
-   "Thyroid storm",
-   "Exercise-associated hyponatraemia",
-   "Status epilepticus"
-  ],
-  "additionalInvestigations": [
-   "Immediate core (rectal) temperature measurement",
-   "Creatine kinase, renal and liver function and coagulation studies",
-   "Electrolytes including potassium and sodium",
-   "Assessment for rhabdomyolysis and disseminated intravascular coagulation",
-   "Exclusion of infection and other causes of hyperthermia"
-  ],
-  "redFlags": [
-   "Very high core temperature with altered consciousness",
-   "Seizures or coma",
-   "Evidence of multi-organ dysfunction",
-   "Hyperkalaemia or rapidly rising creatine kinase"
-  ],
-  "prognosis": "With immediate aggressive cooling most patients recover fully, but delayed cooling or established multi-organ failure carries a high risk of death or lasting organ damage.",
-  "pitfalls": [
-   "Delaying cooling to obtain investigations or arrange transfer",
-   "Assuming the patient is not heat-struck because they are still sweating",
-   "Confusing it with exercise-associated hyponatraemia and mismanaging fluids",
-   "Underestimating rhabdomyolysis and kidney injury"
-  ],
-  "references": [
-   "Sports medicine references (standard reference)",
-   "Tintinalli's Emergency Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Immediate rapid whole-body cooling, ideally by cold-water immersion, begun on site before transfer ('cool first, transport second')",
-   "Stop active cooling once core temperature approaches normal to avoid overshoot hypothermia, guided by continuous rectal temperature monitoring",
-   "Airway, breathing and circulation support with intravenous crystalloid fluid resuscitation",
-   "Benzodiazepines to control seizures, agitation and shivering during cooling",
-   "Anticipate and manage complications: rhabdomyolysis, acute kidney injury, disseminated intravascular coagulation, hepatic injury and hyperkalaemia",
-   "Admit to critical care for organ-support and monitoring in established multi-organ dysfunction",
-   "Exclude sepsis and other causes of hyperthermia"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "exertional_heat_stroke-pathway",
-   "title": "Exertional heat stroke: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A life-threatening emergency defined by a very high core temperature with central nervous system dysfunction arising during strenuous exertion",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Very high core temperature with altered consciousness",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Immediate core (rectal) temperature measurement, Creatine kinase, renal and liver function and coagulation studies, Electrolytes including potassium and sodium"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Immediate rapid whole-body cooling, ideally by cold-water immersion, begun on site before transfer ('cool first, transport second')"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Delaying cooling to obtain investigations or arrange transfer"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of exertional heat stroke."
-  }
- ],
- "tables": [
-  {
-   "id": "exertional_heat_stroke-matrix",
-   "title": "Exertional heat stroke: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A life-threatening emergency defined by a very high core temperature with central nervous system dysfunction arising during",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Multisystem",
+  "specialty": "Sports medicine / Emergency medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sports medicine and emergency medicine references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A life-threatening emergency defined by a very high core temperature with central nervous system dysfunction arising during strenuous exertion",
+      "It affects young, fit individuals such as athletes and military recruits, often in hot humid conditions",
+      "Central nervous system features such as confusion, agitation, seizures or collapse distinguish it from milder heat illness",
+      "Unlike classic heat stroke, patients may still be sweating",
+      "Rapid whole-body cooling, ideally by cold-water immersion, is the priority and should not await transfer",
+      "Complications include rhabdomyolysis, acute kidney injury, disseminated intravascular coagulation and liver injury"
     ],
-    [
-     "Key Investigations",
-     "Immediate core (rectal) temperature measurement, Creatine kinase, renal and liver function and coagulation studies, Electrolytes",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Exertional heat stroke occurs when intense muscular heat production during exercise overwhelms the body's capacity to dissipate heat, causing core temperature to rise to a level that injures tissues. Excessive heat denatures proteins and triggers a systemic inflammatory response and endothelial injury, which can progress to multi-organ dysfunction. Muscle breakdown releases myoglobin and potassium, and the combination of hyperthermia, inflammation and hypoperfusion drives rhabdomyolysis, coagulopathy and acute kidney and liver injury. The speed of cooling strongly influences outcome.",
+    "additionalDifferentials": [
+      "Classic (non-exertional) heat stroke",
+      "Sepsis",
+      "Serotonin syndrome or neuroleptic malignant syndrome",
+      "Thyroid storm",
+      "Exercise-associated hyponatraemia",
+      "Status epilepticus"
     ],
-    [
-     "Primary Differentials",
-     "Classic (non-exertional) heat stroke, Sepsis, Serotonin syndrome or neuroleptic malignant syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Immediate core (rectal) temperature measurement",
+      "Creatine kinase, renal and liver function and coagulation studies",
+      "Electrolytes including potassium and sodium",
+      "Assessment for rhabdomyolysis and disseminated intravascular coagulation",
+      "Exclusion of infection and other causes of hyperthermia"
     ],
-    [
-     "Management Strategy",
-     "Immediate rapid whole-body cooling, ideally by cold-water immersion, begun on site before transfer ('cool first, transport",
-     "Core treatment modality"
+    "redFlags": [
+      "Very high core temperature with altered consciousness",
+      "Seizures or coma",
+      "Evidence of multi-organ dysfunction",
+      "Hyperkalaemia or rapidly rising creatine kinase"
     ],
-    [
-     "Clinical Pitfall",
-     "Delaying cooling to obtain investigations or arrange transfer",
-     "Prevent diagnostic or management error"
+    "prognosis": "With immediate aggressive cooling most patients recover fully, but delayed cooling or established multi-organ failure carries a high risk of death or lasting organ damage.",
+    "pitfalls": [
+      "Delaying cooling to obtain investigations or arrange transfer",
+      "Assuming the patient is not heat-struck because they are still sweating",
+      "Confusing it with exercise-associated hyponatraemia and mismanaging fluids",
+      "Underestimating rhabdomyolysis and kidney injury"
+    ],
+    "references": [
+      "Sports medicine references (standard reference)",
+      "Tintinalli's Emergency Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Immediate rapid whole-body cooling, ideally by cold-water immersion, begun on site before transfer ('cool first, transport second')",
+      "Stop active cooling once core temperature approaches normal to avoid overshoot hypothermia, guided by continuous rectal temperature monitoring",
+      "Airway, breathing and circulation support with intravenous crystalloid fluid resuscitation",
+      "Benzodiazepines to control seizures, agitation and shivering during cooling",
+      "Anticipate and manage complications: rhabdomyolysis, acute kidney injury, disseminated intravascular coagulation, hepatic injury and hyperkalaemia",
+      "Admit to critical care for organ-support and monitoring in established multi-organ dysfunction",
+      "Exclude sepsis and other causes of hyperthermia"
     ]
-   ],
-   "caption": "Overview comparison matrix for exertional heat stroke."
-  }
- ],
- "diagrams": [
-  {
-   "id": "exertional-heat-stroke-real-image",
-   "title": "Exertional heat stroke: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "exertional_heat_stroke-pathway",
+      "title": "Exertional heat stroke: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A life-threatening emergency defined by a very high core temperature with central nervous system dysfunction arising during strenuous exertion",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Very high core temperature with altered consciousness",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Immediate core (rectal) temperature measurement, Creatine kinase, renal and liver function and coagulation studies, Electrolytes including potassium and sodium"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Immediate rapid whole-body cooling, ideally by cold-water immersion, begun on site before transfer ('cool first, transport second')"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Delaying cooling to obtain investigations or arrange transfer"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of exertional heat stroke."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "exertional_heat_stroke-matrix",
+      "title": "Exertional heat stroke: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A life-threatening emergency defined by a very high core temperature with central nervous system dysfunction arising during",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Immediate core (rectal) temperature measurement, Creatine kinase, renal and liver function and coagulation studies, Electrolytes",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Classic (non-exertional) heat stroke, Sepsis, Serotonin syndrome or neuroleptic malignant syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Immediate rapid whole-body cooling, ideally by cold-water immersion, begun on site before transfer ('cool first, transport",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Delaying cooling to obtain investigations or arrange transfer",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for exertional heat stroke."
+    }
+  ],
+  "diagrams": []
 }

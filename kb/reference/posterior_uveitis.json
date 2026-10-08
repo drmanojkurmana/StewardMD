@@ -1,174 +1,152 @@
 {
- "id": "posterior_uveitis",
- "name": "Posterior uveitis",
- "aliases": [
-  "choroiditis",
-  "chorioretinitis",
-  "retinochoroiditis"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Typically presents with painless blurred vision and floaters rather than the pain and redness seen with anterior involvement",
-   "Inflammation centres on the choroid and retina, so signs are found on fundus examination as vitritis, focal or multifocal chorioretinal lesions, and vascular sheathing",
-   "Vitreous haze grading gives a useful measure of activity and treatment response",
-   "Toxoplasma retinochoroiditis is a leading infective cause and characteristically produces a focal lesion adjacent to an old pigmented scar",
-   "Non-infective causes include sarcoidosis, Behcet disease, sympathetic ophthalmia, and the white-dot syndromes",
-   "Distinguishing infective from immune-mediated aetiology is essential because immunosuppression can worsen an untreated infection",
-   "Management of non-infective disease relies on corticosteroids and steroid-sparing immunosuppression, whereas infective disease requires targeted antimicrobial cover first",
-   "Complications that threaten sight include cystoid macular oedema, retinal detachment, choroidal neovascular membranes, and optic nerve involvement"
+  "id": "posterior_uveitis",
+  "name": "Posterior uveitis",
+  "aliases": [
+    "choroiditis",
+    "chorioretinitis",
+    "retinochoroiditis"
   ],
-  "pathophysiology": "Posterior uveitis is inflammation predominantly affecting the choroid and overlying retina, often with secondary vitreous involvement. It may arise from direct infection (for example Toxoplasma, tuberculosis, syphilis, viral retinitis) or from immune-mediated processes such as sarcoidosis, Behcet disease, or an autoimmune reaction to ocular antigens as in sympathetic ophthalmia. Inflammatory cells and mediators disrupt the outer blood-retinal barrier, causing exudation, oedema, and eventual chorioretinal scarring. Ischaemia and chronic inflammation can drive neovascularisation, and macular or optic nerve involvement determines the visual outcome.",
-  "additionalDifferentials": [
-   "Intraocular lymphoma masquerading as chronic vitritis",
-   "Central serous chorioretinopathy",
-   "Retinal vein occlusion with macular oedema",
-   "Endophthalmitis",
-   "Age-related macular degeneration with choroidal neovascular membrane",
-   "Hereditary retinal dystrophy"
-  ],
-  "additionalInvestigations": [
-   "Dilated fundus examination and vitreous haze grading to assess activity",
-   "Optical coherence tomography to detect macular oedema and monitor response",
-   "Fundus fluorescein and indocyanine green angiography to map retinal and choroidal inflammation",
-   "Serology and targeted testing for toxoplasma, syphilis, tuberculosis, and sarcoidosis",
-   "Vitreous or aqueous sampling with PCR or cytology when infection or lymphoma is suspected",
-   "Systemic imaging (e.g. chest imaging) when sarcoidosis or tuberculosis is considered"
-  ],
-  "redFlags": [
-   "Rapidly progressive retinitis suggesting viral (necrotising) infection needing urgent antiviral therapy",
-   "Bilateral panuveitis after ocular injury or surgery raising concern for sympathetic ophthalmia",
-   "Persistent vitritis in an older patient that may represent intraocular lymphoma",
-   "Macular or optic nerve involvement with declining acuity requiring prompt treatment"
-  ],
-  "prognosis": "Outcome depends on the underlying cause and on whether the macula and optic nerve are spared; focal treatable infections such as toxoplasmosis often heal with scarring away from the fovea, but recurrent or immune-mediated disease can cause cumulative visual loss from macular oedema, scarring, or neovascular complications.",
-  "pitfalls": [
-   "Starting immunosuppression before excluding an infective cause, which can allow infection to progress",
-   "Overlooking cystoid macular oedema as the reason for reduced acuity in a quiet-looking eye",
-   "Attributing chronic vitritis in an older patient to inflammation and missing masquerade lymphoma",
-   "Failing to screen for a systemic disease that the eye findings are heralding"
-  ],
-  "references": [
-   "Parsons' Diseases of the Eye",
-   "Kanski's Clinical Ophthalmology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Establish whether the cause is infective or immune-mediated first, since immunosuppression can worsen an untreated infection",
-   "Treat infective causes with targeted antimicrobials: anti-toxoplasma therapy such as pyrimethamine with sulfadiazine or co-trimoxazole for toxoplasma retinochoroiditis, antivirals such as valganciclovir or aciclovir for viral retinitis, and appropriate antibiotics for syphilitic or tuberculous disease",
-   "Treat non-infective immune-mediated disease with systemic corticosteroids, adding steroid-sparing immunosuppression such as methotrexate, mycophenolate or azathioprine, or a biologic anti-TNF agent for sarcoidosis or Behcet disease",
-   "Use local corticosteroid therapy by periocular or intravitreal route as an adjunct, only after infection is excluded or covered",
-   "Detect and treat macular oedema and inflammatory complications, monitoring activity with vitreous haze grading and optical coherence tomography",
-   "Screen for and cover latent tuberculosis and syphilis before initiating immunosuppression",
-   "Refer to uveitis specialists and relevant physicians to co-manage associated systemic disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "posterior_uveitis-pathway",
-   "title": "Posterior uveitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Typically presents with painless blurred vision and floaters rather than the pain and redness seen with anterior involvement",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive retinitis suggesting viral (necrotising) infection needing urgent antiviral therapy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Dilated fundus examination and vitreous haze grading to assess activity, Optical coherence tomography to detect macular oedema and monitor response, Fundus fluorescein and indocyanine green angiography to map retinal and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Establish whether the cause is infective or immune-mediated first, since immunosuppression can worsen an untreated infection"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Starting immunosuppression before excluding an infective cause, which can allow infection to progress"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of posterior uveitis."
-  }
- ],
- "tables": [
-  {
-   "id": "posterior_uveitis-matrix",
-   "title": "Posterior uveitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Typically presents with painless blurred vision and floaters rather than the pain and redness seen with anterior involvement",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Typically presents with painless blurred vision and floaters rather than the pain and redness seen with anterior involvement",
+      "Inflammation centres on the choroid and retina, so signs are found on fundus examination as vitritis, focal or multifocal chorioretinal lesions, and vascular sheathing",
+      "Vitreous haze grading gives a useful measure of activity and treatment response",
+      "Toxoplasma retinochoroiditis is a leading infective cause and characteristically produces a focal lesion adjacent to an old pigmented scar",
+      "Non-infective causes include sarcoidosis, Behcet disease, sympathetic ophthalmia, and the white-dot syndromes",
+      "Distinguishing infective from immune-mediated aetiology is essential because immunosuppression can worsen an untreated infection",
+      "Management of non-infective disease relies on corticosteroids and steroid-sparing immunosuppression, whereas infective disease requires targeted antimicrobial cover first",
+      "Complications that threaten sight include cystoid macular oedema, retinal detachment, choroidal neovascular membranes, and optic nerve involvement"
     ],
-    [
-     "Key Investigations",
-     "Dilated fundus examination and vitreous haze grading to assess activity, Optical coherence tomography to detect macular oedema",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Posterior uveitis is inflammation predominantly affecting the choroid and overlying retina, often with secondary vitreous involvement. It may arise from direct infection (for example Toxoplasma, tuberculosis, syphilis, viral retinitis) or from immune-mediated processes such as sarcoidosis, Behcet disease, or an autoimmune reaction to ocular antigens as in sympathetic ophthalmia. Inflammatory cells and mediators disrupt the outer blood-retinal barrier, causing exudation, oedema, and eventual chorioretinal scarring. Ischaemia and chronic inflammation can drive neovascularisation, and macular or optic nerve involvement determines the visual outcome.",
+    "additionalDifferentials": [
+      "Intraocular lymphoma masquerading as chronic vitritis",
+      "Central serous chorioretinopathy",
+      "Retinal vein occlusion with macular oedema",
+      "Endophthalmitis",
+      "Age-related macular degeneration with choroidal neovascular membrane",
+      "Hereditary retinal dystrophy"
     ],
-    [
-     "Primary Differentials",
-     "Intraocular lymphoma masquerading as chronic vitritis, Central serous chorioretinopathy, Retinal vein occlusion with macular",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Dilated fundus examination and vitreous haze grading to assess activity",
+      "Optical coherence tomography to detect macular oedema and monitor response",
+      "Fundus fluorescein and indocyanine green angiography to map retinal and choroidal inflammation",
+      "Serology and targeted testing for toxoplasma, syphilis, tuberculosis, and sarcoidosis",
+      "Vitreous or aqueous sampling with PCR or cytology when infection or lymphoma is suspected",
+      "Systemic imaging (e.g. chest imaging) when sarcoidosis or tuberculosis is considered"
     ],
-    [
-     "Management Strategy",
-     "Establish whether the cause is infective or immune-mediated first, since immunosuppression can worsen an untreated infection",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive retinitis suggesting viral (necrotising) infection needing urgent antiviral therapy",
+      "Bilateral panuveitis after ocular injury or surgery raising concern for sympathetic ophthalmia",
+      "Persistent vitritis in an older patient that may represent intraocular lymphoma",
+      "Macular or optic nerve involvement with declining acuity requiring prompt treatment"
     ],
-    [
-     "Clinical Pitfall",
-     "Starting immunosuppression before excluding an infective cause, which can allow infection to progress",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome depends on the underlying cause and on whether the macula and optic nerve are spared; focal treatable infections such as toxoplasmosis often heal with scarring away from the fovea, but recurrent or immune-mediated disease can cause cumulative visual loss from macular oedema, scarring, or neovascular complications.",
+    "pitfalls": [
+      "Starting immunosuppression before excluding an infective cause, which can allow infection to progress",
+      "Overlooking cystoid macular oedema as the reason for reduced acuity in a quiet-looking eye",
+      "Attributing chronic vitritis in an older patient to inflammation and missing masquerade lymphoma",
+      "Failing to screen for a systemic disease that the eye findings are heralding"
+    ],
+    "references": [
+      "Parsons' Diseases of the Eye",
+      "Kanski's Clinical Ophthalmology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Establish whether the cause is infective or immune-mediated first, since immunosuppression can worsen an untreated infection",
+      "Treat infective causes with targeted antimicrobials: anti-toxoplasma therapy such as pyrimethamine with sulfadiazine or co-trimoxazole for toxoplasma retinochoroiditis, antivirals such as valganciclovir or aciclovir for viral retinitis, and appropriate antibiotics for syphilitic or tuberculous disease",
+      "Treat non-infective immune-mediated disease with systemic corticosteroids, adding steroid-sparing immunosuppression such as methotrexate, mycophenolate or azathioprine, or a biologic anti-TNF agent for sarcoidosis or Behcet disease",
+      "Use local corticosteroid therapy by periocular or intravitreal route as an adjunct, only after infection is excluded or covered",
+      "Detect and treat macular oedema and inflammatory complications, monitoring activity with vitreous haze grading and optical coherence tomography",
+      "Screen for and cover latent tuberculosis and syphilis before initiating immunosuppression",
+      "Refer to uveitis specialists and relevant physicians to co-manage associated systemic disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for posterior uveitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "posterior-uveitis-real-image",
-   "title": "Posterior uveitis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "posterior_uveitis-pathway",
+      "title": "Posterior uveitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Typically presents with painless blurred vision and floaters rather than the pain and redness seen with anterior involvement",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive retinitis suggesting viral (necrotising) infection needing urgent antiviral therapy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Dilated fundus examination and vitreous haze grading to assess activity, Optical coherence tomography to detect macular oedema and monitor response, Fundus fluorescein and indocyanine green angiography to map retinal and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Establish whether the cause is infective or immune-mediated first, since immunosuppression can worsen an untreated infection"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Starting immunosuppression before excluding an infective cause, which can allow infection to progress"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of posterior uveitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "posterior_uveitis-matrix",
+      "title": "Posterior uveitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Typically presents with painless blurred vision and floaters rather than the pain and redness seen with anterior involvement",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Dilated fundus examination and vitreous haze grading to assess activity, Optical coherence tomography to detect macular oedema",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Intraocular lymphoma masquerading as chronic vitritis, Central serous chorioretinopathy, Retinal vein occlusion with macular",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Establish whether the cause is infective or immune-mediated first, since immunosuppression can worsen an untreated infection",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Starting immunosuppression before excluding an infective cause, which can allow infection to progress",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for posterior uveitis."
+    }
+  ],
+  "diagrams": []
 }

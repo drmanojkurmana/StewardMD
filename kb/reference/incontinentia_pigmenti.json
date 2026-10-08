@@ -1,173 +1,151 @@
 {
- "id": "incontinentia_pigmenti",
- "name": "Incontinentia pigmenti",
- "aliases": [
-  "IKBKG",
-  "NEMO",
-  "Bloch-Sulzberger syndrome",
-  "IP"
- ],
- "class": "non_infective",
- "system": "Dermatology / Genetics",
- "specialty": "Dermatology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "X-linked dominant disorder caused by variants in IKBKG (NEMO); usually lethal in males in utero, so it predominantly affects females",
-   "Skin lesions evolve through four classic stages along Blaschko lines: vesicular, verrucous, hyperpigmented (whorled/swirled), and atrophic/hypopigmented",
-   "The blistering first stage in a neonate can be mistaken for infection, and there is often a peripheral eosinophilia",
-   "Associated dental anomalies (peg or missing teeth), alopecia, and nail dystrophy are common",
-   "Ocular involvement includes a retinal vasculopathy that can cause retinal detachment and blindness if not detected",
-   "Neurological complications (seizures, stroke-like episodes, developmental delay) may occur, mainly in the neonatal period",
-   "Diagnosis rests on characteristic staged skin findings, Blaschkoid distribution, and IKBKG genetic testing"
+  "id": "incontinentia_pigmenti",
+  "name": "Incontinentia pigmenti",
+  "aliases": [
+    "IKBKG",
+    "NEMO",
+    "Bloch-Sulzberger syndrome",
+    "IP"
   ],
-  "pathophysiology": "Incontinentia pigmenti is caused by loss-of-function variants in IKBKG, encoding NEMO, an essential regulatory component of the NF-kappaB signalling pathway. NF-kappaB activation protects cells from apoptosis and coordinates inflammatory responses, so cells that carry the mutation on the active X chromosome are prone to death and to abnormal inflammatory signalling. Random X-inactivation produces a mosaic of affected and unaffected cells, explaining the Blaschko-linear pattern of skin lesions and the variable multisystem involvement. The histological hallmark of 'pigment incontinence', with melanin dropping from damaged basal keratinocytes into the dermis, gives the disorder its name.",
-  "additionalDifferentials": [
-   "Neonatal herpes simplex or bullous impetigo (vesicular stage)",
-   "Epidermolytic ichthyosis and other blistering genodermatoses",
-   "Linear and whorled naevoid hypermelanosis",
-   "Hypomelanosis of Ito (late hypopigmented stage)",
-   "Epidermal naevi (verrucous stage)"
-  ],
-  "additionalInvestigations": [
-   "IKBKG molecular genetic testing (including the common deletion)",
-   "Skin biopsy showing stage-dependent features including eosinophilic spongiosis or dermal pigment incontinence",
-   "Full blood count for peripheral eosinophilia in the neonatal period",
-   "Urgent paediatric ophthalmology review with retinal examination and fluorescein angiography",
-   "Neuroimaging and EEG if neurological symptoms occur",
-   "Dental assessment for tooth anomalies"
-  ],
-  "redFlags": [
-   "Retinal neovascularisation or detachment threatening vision",
-   "Neonatal seizures or stroke-like neurological events",
-   "Extensive vesicular eruption mistaken for, or complicated by, infection",
-   "Developmental regression requiring neurological evaluation"
-  ],
-  "prognosis": "The skin manifestations are generally self-limiting and evolve to subtle residual changes, and most affected females have a normal lifespan; overall prognosis is determined largely by the presence and severity of ocular and neurological involvement.",
-  "pitfalls": [
-   "Mistaking the neonatal vesicular stage for herpes or bacterial infection and delaying diagnosis",
-   "Failing to arrange prompt retinal screening, risking preventable visual loss",
-   "Overlooking the diagnostic significance of Blaschko-linear lesions and eosinophilia",
-   "Not counselling about X-linked inheritance and male lethality for family planning"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Fitzpatrick's Dermatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Conservative skin care through the evolving stages, with gentle wound management of the vesicular phase and prevention of secondary infection",
-   "Urgent and ongoing ophthalmology surveillance with retinal examination, treating retinal vasculopathy by laser photocoagulation or anti-VEGF therapy to prevent detachment and blindness",
-   "Neurological monitoring with neuroimaging and EEG, and anticonvulsant treatment of seizures, mainly in the neonatal period",
-   "Dental assessment and restorative management for missing or peg-shaped teeth",
-   "Developmental assessment and support with paediatric input for children with neurological involvement",
-   "Coordinated multidisciplinary care across dermatology, ophthalmology, neurology, dentistry and genetics",
-   "Genetic counselling and family assessment given X-linked dominant inheritance, including discussion of recurrent male miscarriage"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "incontinentia_pigmenti-pathway",
-   "title": "Incontinentia pigmenti: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "X-linked dominant disorder caused by variants in IKBKG (NEMO); usually lethal in males in utero, so it predominantly affects females",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Retinal neovascularisation or detachment threatening vision",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: IKBKG molecular genetic testing (including the common deletion), Skin biopsy showing stage-dependent features including eosinophilic spongiosis or dermal pigment incontinence, Full blood count for peripheral eosinophilia"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Conservative skin care through the evolving stages, with gentle wound management of the vesicular phase and prevention of secondary infection"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking the neonatal vesicular stage for herpes or bacterial infection and delaying diagnosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of incontinentia pigmenti."
-  }
- ],
- "tables": [
-  {
-   "id": "incontinentia_pigmenti-matrix",
-   "title": "Incontinentia pigmenti: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "X-linked dominant disorder caused by variants in IKBKG (NEMO); usually lethal in males in utero, so it predominantly affects",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology / Genetics",
+  "specialty": "Dermatology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "X-linked dominant disorder caused by variants in IKBKG (NEMO); usually lethal in males in utero, so it predominantly affects females",
+      "Skin lesions evolve through four classic stages along Blaschko lines: vesicular, verrucous, hyperpigmented (whorled/swirled), and atrophic/hypopigmented",
+      "The blistering first stage in a neonate can be mistaken for infection, and there is often a peripheral eosinophilia",
+      "Associated dental anomalies (peg or missing teeth), alopecia, and nail dystrophy are common",
+      "Ocular involvement includes a retinal vasculopathy that can cause retinal detachment and blindness if not detected",
+      "Neurological complications (seizures, stroke-like episodes, developmental delay) may occur, mainly in the neonatal period",
+      "Diagnosis rests on characteristic staged skin findings, Blaschkoid distribution, and IKBKG genetic testing"
     ],
-    [
-     "Key Investigations",
-     "IKBKG molecular genetic testing (including the common deletion), Skin biopsy showing stage-dependent features including",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Incontinentia pigmenti is caused by loss-of-function variants in IKBKG, encoding NEMO, an essential regulatory component of the NF-kappaB signalling pathway. NF-kappaB activation protects cells from apoptosis and coordinates inflammatory responses, so cells that carry the mutation on the active X chromosome are prone to death and to abnormal inflammatory signalling. Random X-inactivation produces a mosaic of affected and unaffected cells, explaining the Blaschko-linear pattern of skin lesions and the variable multisystem involvement. The histological hallmark of 'pigment incontinence', with melanin dropping from damaged basal keratinocytes into the dermis, gives the disorder its name.",
+    "additionalDifferentials": [
+      "Neonatal herpes simplex or bullous impetigo (vesicular stage)",
+      "Epidermolytic ichthyosis and other blistering genodermatoses",
+      "Linear and whorled naevoid hypermelanosis",
+      "Hypomelanosis of Ito (late hypopigmented stage)",
+      "Epidermal naevi (verrucous stage)"
     ],
-    [
-     "Primary Differentials",
-     "Neonatal herpes simplex or bullous impetigo (vesicular stage), Epidermolytic ichthyosis and other blistering genodermatoses,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "IKBKG molecular genetic testing (including the common deletion)",
+      "Skin biopsy showing stage-dependent features including eosinophilic spongiosis or dermal pigment incontinence",
+      "Full blood count for peripheral eosinophilia in the neonatal period",
+      "Urgent paediatric ophthalmology review with retinal examination and fluorescein angiography",
+      "Neuroimaging and EEG if neurological symptoms occur",
+      "Dental assessment for tooth anomalies"
     ],
-    [
-     "Management Strategy",
-     "Conservative skin care through the evolving stages, with gentle wound management of the vesicular phase and prevention of",
-     "Core treatment modality"
+    "redFlags": [
+      "Retinal neovascularisation or detachment threatening vision",
+      "Neonatal seizures or stroke-like neurological events",
+      "Extensive vesicular eruption mistaken for, or complicated by, infection",
+      "Developmental regression requiring neurological evaluation"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking the neonatal vesicular stage for herpes or bacterial infection and delaying diagnosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "The skin manifestations are generally self-limiting and evolve to subtle residual changes, and most affected females have a normal lifespan; overall prognosis is determined largely by the presence and severity of ocular and neurological involvement.",
+    "pitfalls": [
+      "Mistaking the neonatal vesicular stage for herpes or bacterial infection and delaying diagnosis",
+      "Failing to arrange prompt retinal screening, risking preventable visual loss",
+      "Overlooking the diagnostic significance of Blaschko-linear lesions and eosinophilia",
+      "Not counselling about X-linked inheritance and male lethality for family planning"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Fitzpatrick's Dermatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Conservative skin care through the evolving stages, with gentle wound management of the vesicular phase and prevention of secondary infection",
+      "Urgent and ongoing ophthalmology surveillance with retinal examination, treating retinal vasculopathy by laser photocoagulation or anti-VEGF therapy to prevent detachment and blindness",
+      "Neurological monitoring with neuroimaging and EEG, and anticonvulsant treatment of seizures, mainly in the neonatal period",
+      "Dental assessment and restorative management for missing or peg-shaped teeth",
+      "Developmental assessment and support with paediatric input for children with neurological involvement",
+      "Coordinated multidisciplinary care across dermatology, ophthalmology, neurology, dentistry and genetics",
+      "Genetic counselling and family assessment given X-linked dominant inheritance, including discussion of recurrent male miscarriage"
     ]
-   ],
-   "caption": "Overview comparison matrix for incontinentia pigmenti."
-  }
- ],
- "diagrams": [
-  {
-   "id": "incontinentia-pigmenti-real-image",
-   "title": "Incontinentia pigmenti: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "incontinentia_pigmenti-pathway",
+      "title": "Incontinentia pigmenti: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "X-linked dominant disorder caused by variants in IKBKG (NEMO); usually lethal in males in utero, so it predominantly affects females",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Retinal neovascularisation or detachment threatening vision",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: IKBKG molecular genetic testing (including the common deletion), Skin biopsy showing stage-dependent features including eosinophilic spongiosis or dermal pigment incontinence, Full blood count for peripheral eosinophilia"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Conservative skin care through the evolving stages, with gentle wound management of the vesicular phase and prevention of secondary infection"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking the neonatal vesicular stage for herpes or bacterial infection and delaying diagnosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of incontinentia pigmenti."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "incontinentia_pigmenti-matrix",
+      "title": "Incontinentia pigmenti: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "X-linked dominant disorder caused by variants in IKBKG (NEMO); usually lethal in males in utero, so it predominantly affects",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "IKBKG molecular genetic testing (including the common deletion), Skin biopsy showing stage-dependent features including",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Neonatal herpes simplex or bullous impetigo (vesicular stage), Epidermolytic ichthyosis and other blistering genodermatoses,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Conservative skin care through the evolving stages, with gentle wound management of the vesicular phase and prevention of",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking the neonatal vesicular stage for herpes or bacterial infection and delaying diagnosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for incontinentia pigmenti."
+    }
+  ],
+  "diagrams": []
 }

@@ -1,175 +1,153 @@
 {
- "id": "paroxysmal_sympathetic_hyperactivity",
- "name": "Paroxysmal sympathetic hyperactivity",
- "aliases": [
-  "PSH",
-  "sympathetic storm",
-  "paroxysmal autonomic instability with dystonia",
-  "dysautonomia after severe brain injury"
- ],
- "class": "non_infective",
- "system": "Nervous system / Autonomic",
- "specialty": "Neurology / Autonomic",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff Neurology in Clinical Practice / Low's Clinical Autonomic Disorders",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Episodic 'sympathetic storms' after severe acquired brain injury, most often traumatic but also hypoxic-ischaemic or following stroke and haemorrhage",
-   "Paroxysms of tachycardia, hypertension, tachypnoea, hyperthermia, sweating, and abnormal extensor posturing",
-   "Episodes are often triggered by otherwise innocuous stimuli such as tracheal suctioning, turning, or pain, reflecting an allodynia-like sensitivity",
-   "A diagnosis of exclusion: sepsis, seizures, pulmonary embolism, raised intracranial pressure, and drug withdrawal must be ruled out",
-   "Typically emerges during recovery from coma, sometimes weeks into the illness, and is associated with more severe injury and longer hospital stay",
-   "Diagnostic likelihood tools such as the PSH-Assessment Measure combine clinical features with their severity",
-   "Sustained hyperthermia and hypertension risk secondary brain injury and metabolic stress",
-   "Management: minimise and avoid triggering stimuli, provide supportive cooling and hydration, and control sympathetic overactivity pharmacologically alongside treating the underlying injury"
+  "id": "paroxysmal_sympathetic_hyperactivity",
+  "name": "Paroxysmal sympathetic hyperactivity",
+  "aliases": [
+    "PSH",
+    "sympathetic storm",
+    "paroxysmal autonomic instability with dystonia",
+    "dysautonomia after severe brain injury"
   ],
-  "pathophysiology": "Paroxysmal sympathetic hyperactivity follows severe brain injury and reflects a loss of the normal inhibitory control that higher centres exert over spinal and brainstem sympathetic circuits. One influential model proposes that injury disconnects descending inhibitory pathways, leaving excitatory spinal circuits disinhibited, so that ordinarily non-noxious stimuli provoke exaggerated, paroxysmal sympathetic discharges (an 'excitatory-to-inhibitory ratio' disturbance). The result is episodic surges of sympathetic outflow producing tachycardia, hypertension, hyperthermia, sweating, and motor posturing, often with allodynia-like sensitivity to stimulation. The paroxysms subside as recovery progresses, but sustained autonomic and metabolic stress can aggravate secondary brain injury.",
-  "additionalDifferentials": [
-   "Sepsis or systemic infection",
-   "Seizure activity, including non-convulsive status epilepticus",
-   "Raised intracranial pressure or rebleeding",
-   "Neuroleptic malignant syndrome, serotonin syndrome, or malignant hyperthermia",
-   "Drug or alcohol withdrawal",
-   "Pulmonary embolism or another cause of tachycardia and hypoxia"
-  ],
-  "additionalInvestigations": [
-   "Continuous monitoring of heart rate, blood pressure, temperature, and respiratory rate to document paroxysms",
-   "Septic screen with cultures, inflammatory markers, and imaging to exclude infection",
-   "EEG to exclude seizures and non-convulsive status epilepticus",
-   "Neuroimaging to exclude raised intracranial pressure, hydrocephalus, or rebleeding",
-   "Application of a diagnostic likelihood tool such as the PSH-Assessment Measure",
-   "Review of medications and possible withdrawal states"
-  ],
-  "redFlags": [
-   "Sustained extreme hyperthermia or hypertension threatening secondary organ or brain injury",
-   "Features pointing to untreated sepsis, seizures, or raised intracranial pressure",
-   "Haemodynamic instability unresponsive to initial measures",
-   "New focal neurological deterioration"
-  ],
-  "prognosis": "The presence of paroxysmal sympathetic hyperactivity is associated with more severe brain injury, longer intensive care and hospital stays, and worse short-term outcomes; the paroxysms themselves usually diminish over weeks to months as the brain recovers, although some autonomic features may persist.",
-  "pitfalls": [
-   "Anchoring on the diagnosis before excluding sepsis, seizures, and raised intracranial pressure",
-   "Provoking paroxysms through unrecognised triggering care activities",
-   "Undertreating hyperthermia and hypertension, allowing secondary injury",
-   "Abruptly stopping controlling medication and precipitating rebound storms"
-  ],
-  "references": [
-   "Bradley and Daroff's Neurology in Clinical Practice",
-   "Low's Clinical Autonomic Disorders"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reduce and cluster noxious stimulation such as suctioning, turning, and pain, since innocuous stimuli provoke paroxysms, and treat any underlying precipitant",
-   "Abort acute sympathetic surges with opioids such as morphine and short-acting benzodiazepines",
-   "Give scheduled preventive therapy with non-selective beta-blockers such as propranolol, central alpha-2 agonists such as clonidine or dexmedetomidine, and gabapentin",
-   "Add bromocriptine, or baclofen for associated dystonia and posturing, as adjuncts in refractory cases",
-   "Support with active temperature control, adequate hydration, and high-calorie nutrition to meet the increased metabolic demand",
-   "Monitor heart rate, blood pressure, and temperature to document and titrate against paroxysms, having first excluded sepsis, seizures, and raised intracranial pressure",
-   "Involve neuro-critical care and begin early neurorehabilitation, including physiotherapy to prevent contractures"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "paroxysmal_sympathetic_hyperactivity-pathway",
-   "title": "Paroxysmal sympathetic hyperactivity: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Episodic 'sympathetic storms' after severe acquired brain injury, most often traumatic but also hypoxic-ischaemic or following stroke and haemorrhage",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Sustained extreme hyperthermia or hypertension threatening secondary organ or brain injury",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Continuous monitoring of heart rate, blood pressure, temperature, and respiratory rate to document paroxysms, Septic screen with cultures, inflammatory markers, and imaging to exclude infection, EEG to exclude seizures and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reduce and cluster noxious stimulation such as suctioning, turning, and pain, since innocuous stimuli provoke paroxysms, and treat any underlying precipitant"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Anchoring on the diagnosis before excluding sepsis, seizures, and raised intracranial pressure"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of paroxysmal sympathetic hyperactivity."
-  }
- ],
- "tables": [
-  {
-   "id": "paroxysmal_sympathetic_hyperactivity-matrix",
-   "title": "Paroxysmal sympathetic hyperactivity: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Episodic 'sympathetic storms' after severe acquired brain injury, most often traumatic but also hypoxic-ischaemic or following",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Autonomic",
+  "specialty": "Neurology / Autonomic",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff Neurology in Clinical Practice / Low's Clinical Autonomic Disorders",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Episodic 'sympathetic storms' after severe acquired brain injury, most often traumatic but also hypoxic-ischaemic or following stroke and haemorrhage",
+      "Paroxysms of tachycardia, hypertension, tachypnoea, hyperthermia, sweating, and abnormal extensor posturing",
+      "Episodes are often triggered by otherwise innocuous stimuli such as tracheal suctioning, turning, or pain, reflecting an allodynia-like sensitivity",
+      "A diagnosis of exclusion: sepsis, seizures, pulmonary embolism, raised intracranial pressure, and drug withdrawal must be ruled out",
+      "Typically emerges during recovery from coma, sometimes weeks into the illness, and is associated with more severe injury and longer hospital stay",
+      "Diagnostic likelihood tools such as the PSH-Assessment Measure combine clinical features with their severity",
+      "Sustained hyperthermia and hypertension risk secondary brain injury and metabolic stress",
+      "Management: minimise and avoid triggering stimuli, provide supportive cooling and hydration, and control sympathetic overactivity pharmacologically alongside treating the underlying injury"
     ],
-    [
-     "Key Investigations",
-     "Continuous monitoring of heart rate, blood pressure, temperature, and respiratory rate to document paroxysms, Septic screen with",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Paroxysmal sympathetic hyperactivity follows severe brain injury and reflects a loss of the normal inhibitory control that higher centres exert over spinal and brainstem sympathetic circuits. One influential model proposes that injury disconnects descending inhibitory pathways, leaving excitatory spinal circuits disinhibited, so that ordinarily non-noxious stimuli provoke exaggerated, paroxysmal sympathetic discharges (an 'excitatory-to-inhibitory ratio' disturbance). The result is episodic surges of sympathetic outflow producing tachycardia, hypertension, hyperthermia, sweating, and motor posturing, often with allodynia-like sensitivity to stimulation. The paroxysms subside as recovery progresses, but sustained autonomic and metabolic stress can aggravate secondary brain injury.",
+    "additionalDifferentials": [
+      "Sepsis or systemic infection",
+      "Seizure activity, including non-convulsive status epilepticus",
+      "Raised intracranial pressure or rebleeding",
+      "Neuroleptic malignant syndrome, serotonin syndrome, or malignant hyperthermia",
+      "Drug or alcohol withdrawal",
+      "Pulmonary embolism or another cause of tachycardia and hypoxia"
     ],
-    [
-     "Primary Differentials",
-     "Sepsis or systemic infection, Seizure activity, including non-convulsive status epilepticus, Raised intracranial pressure or",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Continuous monitoring of heart rate, blood pressure, temperature, and respiratory rate to document paroxysms",
+      "Septic screen with cultures, inflammatory markers, and imaging to exclude infection",
+      "EEG to exclude seizures and non-convulsive status epilepticus",
+      "Neuroimaging to exclude raised intracranial pressure, hydrocephalus, or rebleeding",
+      "Application of a diagnostic likelihood tool such as the PSH-Assessment Measure",
+      "Review of medications and possible withdrawal states"
     ],
-    [
-     "Management Strategy",
-     "Reduce and cluster noxious stimulation such as suctioning, turning, and pain, since innocuous stimuli provoke paroxysms, and",
-     "Core treatment modality"
+    "redFlags": [
+      "Sustained extreme hyperthermia or hypertension threatening secondary organ or brain injury",
+      "Features pointing to untreated sepsis, seizures, or raised intracranial pressure",
+      "Haemodynamic instability unresponsive to initial measures",
+      "New focal neurological deterioration"
     ],
-    [
-     "Clinical Pitfall",
-     "Anchoring on the diagnosis before excluding sepsis, seizures, and raised intracranial pressure",
-     "Prevent diagnostic or management error"
+    "prognosis": "The presence of paroxysmal sympathetic hyperactivity is associated with more severe brain injury, longer intensive care and hospital stays, and worse short-term outcomes; the paroxysms themselves usually diminish over weeks to months as the brain recovers, although some autonomic features may persist.",
+    "pitfalls": [
+      "Anchoring on the diagnosis before excluding sepsis, seizures, and raised intracranial pressure",
+      "Provoking paroxysms through unrecognised triggering care activities",
+      "Undertreating hyperthermia and hypertension, allowing secondary injury",
+      "Abruptly stopping controlling medication and precipitating rebound storms"
+    ],
+    "references": [
+      "Bradley and Daroff's Neurology in Clinical Practice",
+      "Low's Clinical Autonomic Disorders"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reduce and cluster noxious stimulation such as suctioning, turning, and pain, since innocuous stimuli provoke paroxysms, and treat any underlying precipitant",
+      "Abort acute sympathetic surges with opioids such as morphine and short-acting benzodiazepines",
+      "Give scheduled preventive therapy with non-selective beta-blockers such as propranolol, central alpha-2 agonists such as clonidine or dexmedetomidine, and gabapentin",
+      "Add bromocriptine, or baclofen for associated dystonia and posturing, as adjuncts in refractory cases",
+      "Support with active temperature control, adequate hydration, and high-calorie nutrition to meet the increased metabolic demand",
+      "Monitor heart rate, blood pressure, and temperature to document and titrate against paroxysms, having first excluded sepsis, seizures, and raised intracranial pressure",
+      "Involve neuro-critical care and begin early neurorehabilitation, including physiotherapy to prevent contractures"
     ]
-   ],
-   "caption": "Overview comparison matrix for paroxysmal sympathetic hyperactivity."
-  }
- ],
- "diagrams": [
-  {
-   "id": "paroxysmal-sympathetic-hyperactivity-real-image",
-   "title": "Paroxysmal sympathetic hyperactivity: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "paroxysmal_sympathetic_hyperactivity-pathway",
+      "title": "Paroxysmal sympathetic hyperactivity: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Episodic 'sympathetic storms' after severe acquired brain injury, most often traumatic but also hypoxic-ischaemic or following stroke and haemorrhage",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Sustained extreme hyperthermia or hypertension threatening secondary organ or brain injury",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Continuous monitoring of heart rate, blood pressure, temperature, and respiratory rate to document paroxysms, Septic screen with cultures, inflammatory markers, and imaging to exclude infection, EEG to exclude seizures and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reduce and cluster noxious stimulation such as suctioning, turning, and pain, since innocuous stimuli provoke paroxysms, and treat any underlying precipitant"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Anchoring on the diagnosis before excluding sepsis, seizures, and raised intracranial pressure"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of paroxysmal sympathetic hyperactivity."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "paroxysmal_sympathetic_hyperactivity-matrix",
+      "title": "Paroxysmal sympathetic hyperactivity: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Episodic 'sympathetic storms' after severe acquired brain injury, most often traumatic but also hypoxic-ischaemic or following",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Continuous monitoring of heart rate, blood pressure, temperature, and respiratory rate to document paroxysms, Septic screen with",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Sepsis or systemic infection, Seizure activity, including non-convulsive status epilepticus, Raised intracranial pressure or",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reduce and cluster noxious stimulation such as suctioning, turning, and pain, since innocuous stimuli provoke paroxysms, and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Anchoring on the diagnosis before excluding sepsis, seizures, and raised intracranial pressure",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for paroxysmal sympathetic hyperactivity."
+    }
+  ],
+  "diagrams": []
 }

@@ -1,174 +1,152 @@
 {
- "id": "nephronophthisis",
- "name": "Nephronophthisis",
- "aliases": [
-  "NPHP",
-  "juvenile nephronophthisis",
-  "ciliopathy",
-  "NPHP1"
- ],
- "class": "non_infective",
- "system": "Renal / Genetics",
- "specialty": "Nephrology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Comprehensive Clinical Nephrology / OMIM",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An autosomal recessive tubulointerstitial kidney disease and the most common genetic cause of kidney failure in children and young adults",
-   "It is a ciliopathy caused by variants in numerous NPHP genes, with a large deletion of NPHP1 being the single most frequent cause",
-   "Early features reflect impaired urinary concentration: polyuria, polydipsia, nocturia and secondary enuresis, often with salt wasting",
-   "Growth retardation and anaemia can be disproportionate to the degree of kidney impairment",
-   "Ultrasound classically shows normal or slightly reduced kidney size with increased echogenicity, loss of corticomedullary differentiation and corticomedullary cysts, distinguishing it from polycystic kidney disease with its large kidneys",
-   "Extrarenal ciliopathy features may coexist, including retinal degeneration (Senior-Loken syndrome), cerebellar vermis hypoplasia (Joubert syndrome), liver fibrosis and skeletal changes",
-   "Blood pressure is often normal until late, unlike many other progressive nephropathies"
+  "id": "nephronophthisis",
+  "name": "Nephronophthisis",
+  "aliases": [
+    "NPHP",
+    "juvenile nephronophthisis",
+    "ciliopathy",
+    "NPHP1"
   ],
-  "pathophysiology": "Nephronophthisis is an inherited ciliopathy in which variants in NPHP genes disrupt proteins (nephrocystins) that localise to the primary cilium, basal body and cell junctions of renal tubular epithelial cells. Impaired ciliary signalling and planar cell polarity disturb tubular development, cell adhesion and repair, leading to a chronic tubulointerstitial nephropathy with tubular basement membrane disruption, interstitial fibrosis and small corticomedullary cysts. Because the concentrating mechanism is affected early, the disease presents with polyuria and salt wasting before progressing to fibrosis and kidney failure. The same ciliary dysfunction in other organs accounts for the associated retinal, cerebellar, hepatic and skeletal syndromes.",
-  "additionalDifferentials": [
-   "Autosomal dominant and recessive polycystic kidney disease",
-   "Medullary cystic kidney disease / autosomal dominant tubulointerstitial kidney disease",
-   "Other chronic tubulointerstitial nephropathies",
-   "Bardet-Biedl and other syndromic ciliopathies",
-   "Reflux or obstructive nephropathy",
-   "Alport syndrome and other hereditary nephropathies"
-  ],
-  "additionalInvestigations": [
-   "Renal ultrasound assessing kidney size, echogenicity, corticomedullary differentiation and cysts",
-   "Genetic testing including screening for the NPHP1 deletion and broader ciliopathy gene panels",
-   "Assessment of urinary concentrating ability and evidence of salt wasting",
-   "Serial kidney function and electrolyte monitoring",
-   "Ophthalmological review and, where indicated, brain imaging and liver assessment for extrarenal disease",
-   "Kidney biopsy in selected cases showing tubulointerstitial fibrosis with tubular basement membrane changes"
-  ],
-  "redFlags": [
-   "Progressive decline toward kidney failure requiring planning for kidney replacement therapy",
-   "Marked polyuria with dehydration and electrolyte disturbance",
-   "Visual symptoms suggesting associated retinal degeneration",
-   "Neurological signs suggesting a syndromic ciliopathy such as Joubert syndrome"
-  ],
-  "prognosis": "Nephronophthisis is progressive and typically leads to kidney failure, with the age of onset varying by subtype (infantile, juvenile and adolescent forms); the juvenile form commonly reaches kidney failure in the teenage years. Outcome after transplantation is generally good as the disease does not recur in the graft.",
-  "pitfalls": [
-   "Expecting enlarged kidneys and dismissing the diagnosis when ultrasound shows normal-sized echogenic kidneys",
-   "Missing the diagnosis in a child with unexplained polyuria, anaemia and growth failure",
-   "Failing to screen for retinal and neurological extrarenal manifestations",
-   "Attributing early salt wasting and polyuria to a primary concentrating defect without considering nephronophthisis"
-  ],
-  "references": [
-   "Comprehensive Clinical Nephrology",
-   "OMIM: Nephronophthisis (NPHP1)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Correct the early urinary concentrating defect and salt wasting with generous fluid and sodium replacement to avoid volume depletion",
-   "Manage progressive chronic kidney disease with control of anaemia (erythropoiesis-stimulating agents and iron), renal bone disease and electrolyte disturbance",
-   "Optimise growth and nutrition, including recombinant growth hormone where growth retardation is significant",
-   "Prepare for and deliver kidney replacement therapy with dialysis and pre-emptive transplantation, which is curative for the renal disease as it does not recur in the graft",
-   "Screen for and manage extrarenal ciliopathy manifestations with ophthalmological review for retinal degeneration and assessment for hepatic fibrosis and cerebellar involvement",
-   "Refer to paediatric nephrology and clinical genetics for coordinated multidisciplinary care",
-   "Offer genetic counselling and family screening given autosomal recessive inheritance, including testing for the NPHP1 deletion"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "nephronophthisis-pathway",
-   "title": "Nephronophthisis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autosomal recessive tubulointerstitial kidney disease and the most common genetic cause of kidney failure in children and young adults",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive decline toward kidney failure requiring planning for kidney replacement therapy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Renal ultrasound assessing kidney size, echogenicity, corticomedullary differentiation and cysts, Genetic testing including screening for the NPHP1 deletion and broader ciliopathy gene panels, Assessment of urinary"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Correct the early urinary concentrating defect and salt wasting with generous fluid and sodium replacement to avoid volume depletion"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Expecting enlarged kidneys and dismissing the diagnosis when ultrasound shows normal-sized echogenic kidneys"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of nephronophthisis."
-  }
- ],
- "tables": [
-  {
-   "id": "nephronophthisis-matrix",
-   "title": "Nephronophthisis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autosomal recessive tubulointerstitial kidney disease and the most common genetic cause of kidney failure in children and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Renal / Genetics",
+  "specialty": "Nephrology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Comprehensive Clinical Nephrology / OMIM",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An autosomal recessive tubulointerstitial kidney disease and the most common genetic cause of kidney failure in children and young adults",
+      "It is a ciliopathy caused by variants in numerous NPHP genes, with a large deletion of NPHP1 being the single most frequent cause",
+      "Early features reflect impaired urinary concentration: polyuria, polydipsia, nocturia and secondary enuresis, often with salt wasting",
+      "Growth retardation and anaemia can be disproportionate to the degree of kidney impairment",
+      "Ultrasound classically shows normal or slightly reduced kidney size with increased echogenicity, loss of corticomedullary differentiation and corticomedullary cysts, distinguishing it from polycystic kidney disease with its large kidneys",
+      "Extrarenal ciliopathy features may coexist, including retinal degeneration (Senior-Loken syndrome), cerebellar vermis hypoplasia (Joubert syndrome), liver fibrosis and skeletal changes",
+      "Blood pressure is often normal until late, unlike many other progressive nephropathies"
     ],
-    [
-     "Key Investigations",
-     "Renal ultrasound assessing kidney size, echogenicity, corticomedullary differentiation and cysts, Genetic testing including",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Nephronophthisis is an inherited ciliopathy in which variants in NPHP genes disrupt proteins (nephrocystins) that localise to the primary cilium, basal body and cell junctions of renal tubular epithelial cells. Impaired ciliary signalling and planar cell polarity disturb tubular development, cell adhesion and repair, leading to a chronic tubulointerstitial nephropathy with tubular basement membrane disruption, interstitial fibrosis and small corticomedullary cysts. Because the concentrating mechanism is affected early, the disease presents with polyuria and salt wasting before progressing to fibrosis and kidney failure. The same ciliary dysfunction in other organs accounts for the associated retinal, cerebellar, hepatic and skeletal syndromes.",
+    "additionalDifferentials": [
+      "Autosomal dominant and recessive polycystic kidney disease",
+      "Medullary cystic kidney disease / autosomal dominant tubulointerstitial kidney disease",
+      "Other chronic tubulointerstitial nephropathies",
+      "Bardet-Biedl and other syndromic ciliopathies",
+      "Reflux or obstructive nephropathy",
+      "Alport syndrome and other hereditary nephropathies"
     ],
-    [
-     "Primary Differentials",
-     "Autosomal dominant and recessive polycystic kidney disease, Medullary cystic kidney disease / autosomal dominant",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Renal ultrasound assessing kidney size, echogenicity, corticomedullary differentiation and cysts",
+      "Genetic testing including screening for the NPHP1 deletion and broader ciliopathy gene panels",
+      "Assessment of urinary concentrating ability and evidence of salt wasting",
+      "Serial kidney function and electrolyte monitoring",
+      "Ophthalmological review and, where indicated, brain imaging and liver assessment for extrarenal disease",
+      "Kidney biopsy in selected cases showing tubulointerstitial fibrosis with tubular basement membrane changes"
     ],
-    [
-     "Management Strategy",
-     "Correct the early urinary concentrating defect and salt wasting with generous fluid and sodium replacement to avoid volume",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive decline toward kidney failure requiring planning for kidney replacement therapy",
+      "Marked polyuria with dehydration and electrolyte disturbance",
+      "Visual symptoms suggesting associated retinal degeneration",
+      "Neurological signs suggesting a syndromic ciliopathy such as Joubert syndrome"
     ],
-    [
-     "Clinical Pitfall",
-     "Expecting enlarged kidneys and dismissing the diagnosis when ultrasound shows normal-sized echogenic kidneys",
-     "Prevent diagnostic or management error"
+    "prognosis": "Nephronophthisis is progressive and typically leads to kidney failure, with the age of onset varying by subtype (infantile, juvenile and adolescent forms); the juvenile form commonly reaches kidney failure in the teenage years. Outcome after transplantation is generally good as the disease does not recur in the graft.",
+    "pitfalls": [
+      "Expecting enlarged kidneys and dismissing the diagnosis when ultrasound shows normal-sized echogenic kidneys",
+      "Missing the diagnosis in a child with unexplained polyuria, anaemia and growth failure",
+      "Failing to screen for retinal and neurological extrarenal manifestations",
+      "Attributing early salt wasting and polyuria to a primary concentrating defect without considering nephronophthisis"
+    ],
+    "references": [
+      "Comprehensive Clinical Nephrology",
+      "OMIM: Nephronophthisis (NPHP1)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Correct the early urinary concentrating defect and salt wasting with generous fluid and sodium replacement to avoid volume depletion",
+      "Manage progressive chronic kidney disease with control of anaemia (erythropoiesis-stimulating agents and iron), renal bone disease and electrolyte disturbance",
+      "Optimise growth and nutrition, including recombinant growth hormone where growth retardation is significant",
+      "Prepare for and deliver kidney replacement therapy with dialysis and pre-emptive transplantation, which is curative for the renal disease as it does not recur in the graft",
+      "Screen for and manage extrarenal ciliopathy manifestations with ophthalmological review for retinal degeneration and assessment for hepatic fibrosis and cerebellar involvement",
+      "Refer to paediatric nephrology and clinical genetics for coordinated multidisciplinary care",
+      "Offer genetic counselling and family screening given autosomal recessive inheritance, including testing for the NPHP1 deletion"
     ]
-   ],
-   "caption": "Overview comparison matrix for nephronophthisis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "nephronophthisis-real-image",
-   "title": "Nephronophthisis: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "nephronophthisis-pathway",
+      "title": "Nephronophthisis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autosomal recessive tubulointerstitial kidney disease and the most common genetic cause of kidney failure in children and young adults",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive decline toward kidney failure requiring planning for kidney replacement therapy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Renal ultrasound assessing kidney size, echogenicity, corticomedullary differentiation and cysts, Genetic testing including screening for the NPHP1 deletion and broader ciliopathy gene panels, Assessment of urinary"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Correct the early urinary concentrating defect and salt wasting with generous fluid and sodium replacement to avoid volume depletion"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Expecting enlarged kidneys and dismissing the diagnosis when ultrasound shows normal-sized echogenic kidneys"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of nephronophthisis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "nephronophthisis-matrix",
+      "title": "Nephronophthisis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autosomal recessive tubulointerstitial kidney disease and the most common genetic cause of kidney failure in children and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Renal ultrasound assessing kidney size, echogenicity, corticomedullary differentiation and cysts, Genetic testing including",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Autosomal dominant and recessive polycystic kidney disease, Medullary cystic kidney disease / autosomal dominant",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Correct the early urinary concentrating defect and salt wasting with generous fluid and sodium replacement to avoid volume",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Expecting enlarged kidneys and dismissing the diagnosis when ultrasound shows normal-sized echogenic kidneys",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for nephronophthisis."
+    }
+  ],
+  "diagrams": []
 }

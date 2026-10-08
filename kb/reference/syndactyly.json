@@ -1,173 +1,151 @@
 {
- "id": "syndactyly",
- "name": "Syndactyly",
- "aliases": [
-  "webbed fingers",
-  "simple syndactyly",
-  "complex syndactyly",
-  "complete syndactyly",
-  "incomplete syndactyly"
- ],
- "class": "non_infective",
- "system": "Paediatric orthopaedics",
- "specialty": "Paediatric Hand & Upper Limb",
- "referenceOnly": true,
- "reference": {
-  "source": "Green's Operative Hand Surgery / Tachdjian's Pediatric Orthopaedics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Syndactyly is failure of separation of adjacent digits and is the commonest congenital hand difference; it is classified as simple (soft tissue only) or complex (with bony fusion), and as complete (to the fingertips) or incomplete",
-   "Complicated syndactyly involves additional or abnormal bones, tendons, or neurovascular structures beyond a simple bony bridge",
-   "The third web space (long-ring) is most often affected; the condition is frequently bilateral and may be familial (autosomal dominant with variable penetrance)",
-   "Border-digit and unequal-length pairings (such as ring-little or thumb-index) should be separated earlier, because tethering causes progressive angular and rotational deformity as the digits grow at different rates",
-   "Syndromic links include Apert syndrome (complex symmetrical syndactyly producing a 'mitten hand'), Poland syndrome (with chest-wall and pectoral deficiency), and constriction ring (amniotic band) sequence",
-   "Surgical separation uses interdigitating (zig-zag) incisions to resurface the sides of the digits and reconstructs the web (commissure) with local flaps, frequently supplemented by skin grafts",
-   "The two sides of a single digit are generally not released at the same operation, so as to protect that digit's blood supply"
+  "id": "syndactyly",
+  "name": "Syndactyly",
+  "aliases": [
+    "webbed fingers",
+    "simple syndactyly",
+    "complex syndactyly",
+    "complete syndactyly",
+    "incomplete syndactyly"
   ],
-  "pathophysiology": "Syndactyly results from failure of the normal programmed cell death (apoptosis) that separates the digital rays during limb development, so adjacent digits remain joined by skin and, in complex forms, by bone. It represents a failure of differentiation and may occur in isolation, be inherited, or form part of a syndrome in which broader signalling defects affect both the hand and other structures, as in the acrocephalosyndactyly of Apert syndrome or the vascular disruption of constriction ring sequence.",
-  "additionalDifferentials": [
-   "Polysyndactyly (syndactyly combined with duplication)",
-   "Constriction ring (amniotic band) sequence with acrosyndactyly",
-   "Symphalangism (congenitally stiff interphalangeal joints)",
-   "Camptodactyly or clinodactyly (angular deformity without fusion)",
-   "Acquired web contracture from burn or trauma",
-   "Cleft hand with abnormal web spaces"
-  ],
-  "additionalInvestigations": [
-   "Radiographs to distinguish simple from complex (bony) syndactyly and to define shared skeletal structures",
-   "Careful clinical assessment of the affected web pairing and relative digit lengths",
-   "Screening for syndromic features (craniofacial in Apert, chest wall in Poland)",
-   "Vascular assessment and staged planning for complex or complete syndactyly",
-   "Genetic evaluation where the pattern is syndromic or strongly familial"
-  ],
-  "redFlags": [
-   "Complex or complicated syndactyly with a shared neurovascular bundle risking devascularisation at separation",
-   "Progressive deformity of border digits from tethered unequal growth",
-   "Features of Apert or another syndrome requiring multidisciplinary care"
-  ],
-  "prognosis": "Simple isolated syndactyly has excellent results after zig-zag separation and web reconstruction; complex and syndromic forms, especially Apert syndrome, are more likely to need multiple procedures and to leave residual stiffness, distal migration of the web ('web creep'), and imperfect appearance.",
-  "pitfalls": [
-   "Releasing both sides of the same digit at one operation and compromising its blood supply",
-   "Delaying separation of unequal-length border digits, allowing fixed deformity to develop",
-   "Reconstructing the web too shallow or narrow, leading to web creep",
-   "Underestimating shared bony or neurovascular anatomy in complex syndactyly"
-  ],
-  "references": [
-   "Green's Operative Hand Surgery",
-   "Tachdjian's Pediatric Orthopaedics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Definitive treatment is surgical separation using interdigitating zig-zag incisions with reconstruction of the web commissure by local flaps, frequently supplemented by skin grafts",
-   "Time surgery by anatomy, separating border-digit and unequal-length pairs earlier to prevent progressive angular and rotational deformity, and avoiding operating on both sides of a digit at once to protect its blood supply",
-   "Plan complex or bony syndactyly carefully with attention to shared skeletal, tendon and neurovascular structures",
-   "Provide postoperative splinting, hand therapy and scar management, and monitor for web creep and joint contracture",
-   "Screen for and manage syndromic associations such as Apert and Poland syndromes",
-   "Offer genetic evaluation and counselling where the pattern is syndromic or strongly familial",
-   "Manage through a paediatric hand and upper-limb surgical service"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "syndactyly-pathway",
-   "title": "Syndactyly: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Syndactyly is failure of separation of adjacent digits and is the commonest congenital hand difference; it is classified as simple (soft tissue only) or complex (with bony fusion), and as complete (to the fingertips) or incomplete",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Complex or complicated syndactyly with a shared neurovascular bundle risking devascularisation at separation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Radiographs to distinguish simple from complex (bony) syndactyly and to define shared skeletal structures, Careful clinical assessment of the affected web pairing and relative digit lengths, Screening for syndromic"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Definitive treatment is surgical separation using interdigitating zig-zag incisions with reconstruction of the web commissure by local flaps, frequently supplemented by skin grafts"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Releasing both sides of the same digit at one operation and compromising its blood supply"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of syndactyly."
-  }
- ],
- "tables": [
-  {
-   "id": "syndactyly-matrix",
-   "title": "Syndactyly: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Syndactyly is failure of separation of adjacent digits and is the commonest congenital hand difference; it is classified as",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Paediatric orthopaedics",
+  "specialty": "Paediatric Hand & Upper Limb",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Green's Operative Hand Surgery / Tachdjian's Pediatric Orthopaedics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Syndactyly is failure of separation of adjacent digits and is the commonest congenital hand difference; it is classified as simple (soft tissue only) or complex (with bony fusion), and as complete (to the fingertips) or incomplete",
+      "Complicated syndactyly involves additional or abnormal bones, tendons, or neurovascular structures beyond a simple bony bridge",
+      "The third web space (long-ring) is most often affected; the condition is frequently bilateral and may be familial (autosomal dominant with variable penetrance)",
+      "Border-digit and unequal-length pairings (such as ring-little or thumb-index) should be separated earlier, because tethering causes progressive angular and rotational deformity as the digits grow at different rates",
+      "Syndromic links include Apert syndrome (complex symmetrical syndactyly producing a 'mitten hand'), Poland syndrome (with chest-wall and pectoral deficiency), and constriction ring (amniotic band) sequence",
+      "Surgical separation uses interdigitating (zig-zag) incisions to resurface the sides of the digits and reconstructs the web (commissure) with local flaps, frequently supplemented by skin grafts",
+      "The two sides of a single digit are generally not released at the same operation, so as to protect that digit's blood supply"
     ],
-    [
-     "Key Investigations",
-     "Radiographs to distinguish simple from complex (bony) syndactyly and to define shared skeletal structures, Careful clinical",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Syndactyly results from failure of the normal programmed cell death (apoptosis) that separates the digital rays during limb development, so adjacent digits remain joined by skin and, in complex forms, by bone. It represents a failure of differentiation and may occur in isolation, be inherited, or form part of a syndrome in which broader signalling defects affect both the hand and other structures, as in the acrocephalosyndactyly of Apert syndrome or the vascular disruption of constriction ring sequence.",
+    "additionalDifferentials": [
+      "Polysyndactyly (syndactyly combined with duplication)",
+      "Constriction ring (amniotic band) sequence with acrosyndactyly",
+      "Symphalangism (congenitally stiff interphalangeal joints)",
+      "Camptodactyly or clinodactyly (angular deformity without fusion)",
+      "Acquired web contracture from burn or trauma",
+      "Cleft hand with abnormal web spaces"
     ],
-    [
-     "Primary Differentials",
-     "Polysyndactyly (syndactyly combined with duplication), Constriction ring (amniotic band) sequence with acrosyndactyly,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Radiographs to distinguish simple from complex (bony) syndactyly and to define shared skeletal structures",
+      "Careful clinical assessment of the affected web pairing and relative digit lengths",
+      "Screening for syndromic features (craniofacial in Apert, chest wall in Poland)",
+      "Vascular assessment and staged planning for complex or complete syndactyly",
+      "Genetic evaluation where the pattern is syndromic or strongly familial"
     ],
-    [
-     "Management Strategy",
-     "Definitive treatment is surgical separation using interdigitating zig-zag incisions with reconstruction of the web commissure by",
-     "Core treatment modality"
+    "redFlags": [
+      "Complex or complicated syndactyly with a shared neurovascular bundle risking devascularisation at separation",
+      "Progressive deformity of border digits from tethered unequal growth",
+      "Features of Apert or another syndrome requiring multidisciplinary care"
     ],
-    [
-     "Clinical Pitfall",
-     "Releasing both sides of the same digit at one operation and compromising its blood supply",
-     "Prevent diagnostic or management error"
+    "prognosis": "Simple isolated syndactyly has excellent results after zig-zag separation and web reconstruction; complex and syndromic forms, especially Apert syndrome, are more likely to need multiple procedures and to leave residual stiffness, distal migration of the web ('web creep'), and imperfect appearance.",
+    "pitfalls": [
+      "Releasing both sides of the same digit at one operation and compromising its blood supply",
+      "Delaying separation of unequal-length border digits, allowing fixed deformity to develop",
+      "Reconstructing the web too shallow or narrow, leading to web creep",
+      "Underestimating shared bony or neurovascular anatomy in complex syndactyly"
+    ],
+    "references": [
+      "Green's Operative Hand Surgery",
+      "Tachdjian's Pediatric Orthopaedics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Definitive treatment is surgical separation using interdigitating zig-zag incisions with reconstruction of the web commissure by local flaps, frequently supplemented by skin grafts",
+      "Time surgery by anatomy, separating border-digit and unequal-length pairs earlier to prevent progressive angular and rotational deformity, and avoiding operating on both sides of a digit at once to protect its blood supply",
+      "Plan complex or bony syndactyly carefully with attention to shared skeletal, tendon and neurovascular structures",
+      "Provide postoperative splinting, hand therapy and scar management, and monitor for web creep and joint contracture",
+      "Screen for and manage syndromic associations such as Apert and Poland syndromes",
+      "Offer genetic evaluation and counselling where the pattern is syndromic or strongly familial",
+      "Manage through a paediatric hand and upper-limb surgical service"
     ]
-   ],
-   "caption": "Overview comparison matrix for syndactyly."
-  }
- ],
- "diagrams": [
-  {
-   "id": "syndactyly-real-image",
-   "title": "Syndactyly: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "syndactyly-pathway",
+      "title": "Syndactyly: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Syndactyly is failure of separation of adjacent digits and is the commonest congenital hand difference; it is classified as simple (soft tissue only) or complex (with bony fusion), and as complete (to the fingertips) or incomplete",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Complex or complicated syndactyly with a shared neurovascular bundle risking devascularisation at separation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Radiographs to distinguish simple from complex (bony) syndactyly and to define shared skeletal structures, Careful clinical assessment of the affected web pairing and relative digit lengths, Screening for syndromic"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Definitive treatment is surgical separation using interdigitating zig-zag incisions with reconstruction of the web commissure by local flaps, frequently supplemented by skin grafts"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Releasing both sides of the same digit at one operation and compromising its blood supply"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of syndactyly."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "syndactyly-matrix",
+      "title": "Syndactyly: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Syndactyly is failure of separation of adjacent digits and is the commonest congenital hand difference; it is classified as",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Radiographs to distinguish simple from complex (bony) syndactyly and to define shared skeletal structures, Careful clinical",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Polysyndactyly (syndactyly combined with duplication), Constriction ring (amniotic band) sequence with acrosyndactyly,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Definitive treatment is surgical separation using interdigitating zig-zag incisions with reconstruction of the web commissure by",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Releasing both sides of the same digit at one operation and compromising its blood supply",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for syndactyly."
+    }
+  ],
+  "diagrams": []
 }

@@ -1,172 +1,150 @@
 {
- "id": "otitis_externa",
- "name": "Otitis externa",
- "aliases": [
-  "external ear infection",
-  "swimmer's ear",
-  "diffuse otitis externa"
- ],
- "class": "infective",
- "system": "ENT / Otorhinolaryngology",
- "specialty": "ENT",
- "referenceOnly": true,
- "reference": {
-  "source": "Dhingra, Diseases of Ear, Nose and Throat",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Inflammation of the external auditory canal presenting with ear pain, itching, discharge and a feeling of fullness",
-   "Pain on moving the tragus or pinna is a hallmark that helps distinguish it from middle ear disease",
-   "Moisture, trauma from cotton buds, and a disrupted acidic canal environment are common predisposing factors",
-   "The localised furuncular form is a staphylococcal infection of a hair follicle in the outer cartilaginous canal, while the diffuse form is often associated with Pseudomonas",
-   "Otomycosis (fungal otitis externa) typically shows itching with visible fungal debris such as blotting-paper or fluffy growth in the canal",
-   "Management principles include meticulous aural toileting, topical antimicrobial and anti-inflammatory drops, analgesia and keeping the ear dry",
-   "Malignant (necrotising) otitis externa is a serious osteomyelitis of the skull base, seen mainly in elderly diabetics and the immunocompromised, and demands urgent recognition",
-   "Recurrent or treatment-resistant disease should prompt review for underlying dermatological conditions, diabetes or immunosuppression"
+  "id": "otitis_externa",
+  "name": "Otitis externa",
+  "aliases": [
+    "external ear infection",
+    "swimmer's ear",
+    "diffuse otitis externa"
   ],
-  "pathophysiology": "Otitis externa is inflammation of the skin lining the external auditory canal. Breakdown of the canal's protective barrier, through excess moisture, mechanical trauma, cerumen removal, or altered pH, allows bacterial or fungal overgrowth. The resulting inflammation causes oedema, discharge and narrowing of the canal, producing pain and conductive hearing loss when the lumen is occluded. In malignant otitis externa, infection (typically Pseudomonas) spreads from the soft tissue into the temporal bone and skull base, causing progressive osteomyelitis and potential cranial nerve involvement.",
-  "additionalDifferentials": [
-   "Acute otitis media with perforation and discharge",
-   "Chronic suppurative otitis media",
-   "Furuncle of the canal",
-   "Otomycosis",
-   "Eczematous or seborrhoeic dermatitis of the canal",
-   "Malignancy of the external canal"
-  ],
-  "additionalInvestigations": [
-   "Otoscopy or otomicroscopy to inspect the canal and clear debris",
-   "Swab of discharge for bacterial and fungal culture in resistant cases",
-   "Blood glucose and inflammatory markers when necrotising disease is suspected",
-   "CT or MRI of the temporal bone and skull base for suspected malignant otitis externa",
-   "Biopsy of granulation tissue where malignancy or necrotising disease is a concern"
-  ],
-  "redFlags": [
-   "Severe, disproportionate pain with granulation tissue in an elderly diabetic suggesting necrotising otitis externa",
-   "Cranial nerve palsies (especially facial nerve) indicating skull base osteomyelitis",
-   "Spreading cellulitis, fever or systemic upset",
-   "Failure to respond to standard topical therapy"
-  ],
-  "prognosis": "Uncomplicated otitis externa usually resolves with topical treatment and ear care, but malignant otitis externa is potentially life-threatening and requires prolonged systemic therapy and close monitoring.",
-  "pitfalls": [
-   "Missing a perforation or middle ear disease as the source of discharge",
-   "Overlooking necrotising otitis externa in a diabetic with severe pain",
-   "Ineffective treatment because the canal was not adequately cleaned",
-   "Failing to identify and treat an underlying fungal or dermatological cause"
-  ],
-  "references": [
-   "Dhingra, Diseases of Ear, Nose and Throat"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Meticulous aural toilet to clear debris and allow topical therapy to reach the canal skin",
-   "Topical antibiotic and corticosteroid ear drops, with an ear wick inserted when the canal is oedematous and occluded",
-   "Adequate analgesia with advice to keep the ear dry and avoid cotton buds or further trauma",
-   "Incision or drainage of a localised furuncle in the cartilaginous canal where it points",
-   "Antifungal drops for otomycosis identified on otoscopy after thorough debris removal",
-   "Urgent recognition of malignant (necrotising) otitis externa, with systemic anti-pseudomonal antibiotics, skull-base imaging and specialist ENT referral",
-   "Correct predisposing factors such as moisture exposure and address diabetes or immunosuppression"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "otitis_externa-pathway",
-   "title": "Otitis externa: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Inflammation of the external auditory canal presenting with ear pain, itching, discharge and a feeling of fullness",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe, disproportionate pain with granulation tissue in an elderly diabetic suggesting necrotising otitis externa",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Otoscopy or otomicroscopy to inspect the canal and clear debris, Swab of discharge for bacterial and fungal culture in resistant cases, Blood glucose and inflammatory markers when necrotising disease is suspected"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Meticulous aural toilet to clear debris and allow topical therapy to reach the canal skin"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing a perforation or middle ear disease as the source of discharge"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of otitis externa."
-  }
- ],
- "tables": [
-  {
-   "id": "otitis_externa-matrix",
-   "title": "Otitis externa: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Inflammation of the external auditory canal presenting with ear pain, itching, discharge and a feeling of fullness",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "ENT / Otorhinolaryngology",
+  "specialty": "ENT",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Dhingra, Diseases of Ear, Nose and Throat",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Inflammation of the external auditory canal presenting with ear pain, itching, discharge and a feeling of fullness",
+      "Pain on moving the tragus or pinna is a hallmark that helps distinguish it from middle ear disease",
+      "Moisture, trauma from cotton buds, and a disrupted acidic canal environment are common predisposing factors",
+      "The localised furuncular form is a staphylococcal infection of a hair follicle in the outer cartilaginous canal, while the diffuse form is often associated with Pseudomonas",
+      "Otomycosis (fungal otitis externa) typically shows itching with visible fungal debris such as blotting-paper or fluffy growth in the canal",
+      "Management principles include meticulous aural toileting, topical antimicrobial and anti-inflammatory drops, analgesia and keeping the ear dry",
+      "Malignant (necrotising) otitis externa is a serious osteomyelitis of the skull base, seen mainly in elderly diabetics and the immunocompromised, and demands urgent recognition",
+      "Recurrent or treatment-resistant disease should prompt review for underlying dermatological conditions, diabetes or immunosuppression"
     ],
-    [
-     "Key Investigations",
-     "Otoscopy or otomicroscopy to inspect the canal and clear debris, Swab of discharge for bacterial and fungal culture in resistant",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Otitis externa is inflammation of the skin lining the external auditory canal. Breakdown of the canal's protective barrier, through excess moisture, mechanical trauma, cerumen removal, or altered pH, allows bacterial or fungal overgrowth. The resulting inflammation causes oedema, discharge and narrowing of the canal, producing pain and conductive hearing loss when the lumen is occluded. In malignant otitis externa, infection (typically Pseudomonas) spreads from the soft tissue into the temporal bone and skull base, causing progressive osteomyelitis and potential cranial nerve involvement.",
+    "additionalDifferentials": [
+      "Acute otitis media with perforation and discharge",
+      "Chronic suppurative otitis media",
+      "Furuncle of the canal",
+      "Otomycosis",
+      "Eczematous or seborrhoeic dermatitis of the canal",
+      "Malignancy of the external canal"
     ],
-    [
-     "Primary Differentials",
-     "Acute otitis media with perforation and discharge, Chronic suppurative otitis media, Furuncle of the canal",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Otoscopy or otomicroscopy to inspect the canal and clear debris",
+      "Swab of discharge for bacterial and fungal culture in resistant cases",
+      "Blood glucose and inflammatory markers when necrotising disease is suspected",
+      "CT or MRI of the temporal bone and skull base for suspected malignant otitis externa",
+      "Biopsy of granulation tissue where malignancy or necrotising disease is a concern"
     ],
-    [
-     "Management Strategy",
-     "Meticulous aural toilet to clear debris and allow topical therapy to reach the canal skin",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe, disproportionate pain with granulation tissue in an elderly diabetic suggesting necrotising otitis externa",
+      "Cranial nerve palsies (especially facial nerve) indicating skull base osteomyelitis",
+      "Spreading cellulitis, fever or systemic upset",
+      "Failure to respond to standard topical therapy"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing a perforation or middle ear disease as the source of discharge",
-     "Prevent diagnostic or management error"
+    "prognosis": "Uncomplicated otitis externa usually resolves with topical treatment and ear care, but malignant otitis externa is potentially life-threatening and requires prolonged systemic therapy and close monitoring.",
+    "pitfalls": [
+      "Missing a perforation or middle ear disease as the source of discharge",
+      "Overlooking necrotising otitis externa in a diabetic with severe pain",
+      "Ineffective treatment because the canal was not adequately cleaned",
+      "Failing to identify and treat an underlying fungal or dermatological cause"
+    ],
+    "references": [
+      "Dhingra, Diseases of Ear, Nose and Throat"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Meticulous aural toilet to clear debris and allow topical therapy to reach the canal skin",
+      "Topical antibiotic and corticosteroid ear drops, with an ear wick inserted when the canal is oedematous and occluded",
+      "Adequate analgesia with advice to keep the ear dry and avoid cotton buds or further trauma",
+      "Incision or drainage of a localised furuncle in the cartilaginous canal where it points",
+      "Antifungal drops for otomycosis identified on otoscopy after thorough debris removal",
+      "Urgent recognition of malignant (necrotising) otitis externa, with systemic anti-pseudomonal antibiotics, skull-base imaging and specialist ENT referral",
+      "Correct predisposing factors such as moisture exposure and address diabetes or immunosuppression"
     ]
-   ],
-   "caption": "Overview comparison matrix for otitis externa."
-  }
- ],
- "diagrams": [
-  {
-   "id": "otitis-externa-real-image",
-   "title": "Otitis externa: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "otitis_externa-pathway",
+      "title": "Otitis externa: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Inflammation of the external auditory canal presenting with ear pain, itching, discharge and a feeling of fullness",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe, disproportionate pain with granulation tissue in an elderly diabetic suggesting necrotising otitis externa",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Otoscopy or otomicroscopy to inspect the canal and clear debris, Swab of discharge for bacterial and fungal culture in resistant cases, Blood glucose and inflammatory markers when necrotising disease is suspected"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Meticulous aural toilet to clear debris and allow topical therapy to reach the canal skin"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing a perforation or middle ear disease as the source of discharge"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of otitis externa."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "otitis_externa-matrix",
+      "title": "Otitis externa: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Inflammation of the external auditory canal presenting with ear pain, itching, discharge and a feeling of fullness",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Otoscopy or otomicroscopy to inspect the canal and clear debris, Swab of discharge for bacterial and fungal culture in resistant",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Acute otitis media with perforation and discharge, Chronic suppurative otitis media, Furuncle of the canal",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Meticulous aural toilet to clear debris and allow topical therapy to reach the canal skin",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing a perforation or middle ear disease as the source of discharge",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for otitis externa."
+    }
+  ],
+  "diagrams": []
 }

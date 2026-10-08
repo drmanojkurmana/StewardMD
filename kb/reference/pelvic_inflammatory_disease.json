@@ -1,177 +1,155 @@
 {
- "id": "pelvic_inflammatory_disease",
- "name": "Pelvic inflammatory disease",
- "aliases": [
-  "PID",
-  "salpingitis",
-  "pelvic infection",
-  "endometritis-salpingitis-oophoritis"
- ],
- "class": "infective",
- "system": "Obstetrics / Gynaecology",
- "specialty": "Obstetrics & Gynaecology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Obstetrics / Novak's Gynecology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "PID is infection and inflammation of the upper female genital tract, encompassing endometritis, salpingitis, oophoritis, tubo-ovarian abscess, and pelvic peritonitis",
-   "It is usually an ascending infection, most commonly caused by Chlamydia trachomatis and Neisseria gonorrhoeae, often with anaerobes and other vaginal flora",
-   "The clinical picture is variable and often subtle; classic findings are lower abdominal pain, deep dyspareunia, abnormal discharge, and cervical motion, uterine, or adnexal tenderness",
-   "Because sequelae are serious and diagnosis is imprecise, a low threshold for empirical treatment in at-risk women is recommended",
-   "Antibiotic regimens are broad-spectrum to cover gonococcus, chlamydia, and anaerobes; sexual partners should be evaluated and treated to prevent reinfection",
-   "Fitz-Hugh-Curtis syndrome (perihepatitis) causes right upper quadrant pain and can mimic hepatobiliary disease",
-   "Intrauterine device users, recent instrumentation, and multiple sexual partners increase risk",
-   "Long-term consequences include tubal-factor infertility, ectopic pregnancy, and chronic pelvic pain, and risk rises with each recurrent episode"
+  "id": "pelvic_inflammatory_disease",
+  "name": "Pelvic inflammatory disease",
+  "aliases": [
+    "PID",
+    "salpingitis",
+    "pelvic infection",
+    "endometritis-salpingitis-oophoritis"
   ],
-  "pathophysiology": "PID arises when micro-organisms ascend from the vagina and cervix through the endometrial cavity to the fallopian tubes and adjacent structures. Sexually transmitted pathogens, chiefly Chlamydia trachomatis and Neisseria gonorrhoeae, disrupt the cervical barrier and facilitate co-infection with endogenous aerobic and anaerobic vaginal flora. The resulting inflammation damages the tubal epithelium and cilia, leading to scarring, adhesions, and tubal occlusion. Progression can produce pyosalpinx, tubo-ovarian abscess, and pelvic peritonitis; spread to the hepatic capsule causes perihepatitis.",
-  "additionalDifferentials": [
-   "Ectopic pregnancy",
-   "Acute appendicitis",
-   "Ovarian cyst accident (rupture, haemorrhage, or torsion)",
-   "Endometriosis",
-   "Urinary tract infection",
-   "Functional or irritable bowel-related pelvic pain"
-  ],
-  "additionalInvestigations": [
-   "Pregnancy test to exclude ectopic pregnancy",
-   "Endocervical or vaginal nucleic acid amplification testing for chlamydia and gonorrhoea",
-   "Microscopy and culture of genital tract samples",
-   "Inflammatory markers and full blood count",
-   "Pelvic ultrasound to detect tubo-ovarian abscess or pelvic collection",
-   "Laparoscopy when the diagnosis is uncertain or the patient fails to respond"
-  ],
-  "redFlags": [
-   "Signs of a tubo-ovarian abscess such as a tender adnexal mass with high fever",
-   "Peritonitis or suspicion of a ruptured abscess causing sepsis",
-   "Haemodynamic instability or systemic sepsis",
-   "Inability to tolerate oral therapy, pregnancy, or failure of outpatient treatment requiring admission",
-   "Severe right upper quadrant pain raising concern for perihepatitis or an alternative surgical diagnosis"
-  ],
-  "prognosis": "Prompt, adequate antibiotic treatment usually resolves acute infection, but even treated PID carries appreciable risk of long-term tubal damage. Each recurrent episode further increases the likelihood of infertility, ectopic pregnancy, and chronic pelvic pain, so prevention and partner treatment are central to a good outcome.",
-  "pitfalls": [
-   "Withholding treatment while awaiting definitive confirmation, allowing tubal damage to progress",
-   "Missing an ectopic pregnancy by not performing a pregnancy test",
-   "Neglecting to test for and treat sexual partners, leading to reinfection",
-   "Failing to recognise or drain a tubo-ovarian abscess",
-   "Assuming an absence of fever or normal inflammatory markers excludes PID"
-  ],
-  "references": [
-   "Williams Obstetrics",
-   "Novak's Gynecology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Start empirical broad-spectrum antibiotics covering gonococcus, chlamydia and anaerobes, typically ceftriaxone with doxycycline and metronidazole, with a low threshold for treatment given imprecise diagnosis and serious sequelae",
-   "Admit for intravenous therapy and consider drainage for severe disease, tubo-ovarian abscess, pregnancy or failure of oral treatment",
-   "Provide analgesia and advise rest, reassessing response and considering removal of an intrauterine device if there is no improvement",
-   "Notify, evaluate and treat sexual partners and advise abstinence until treatment is completed to prevent reinfection",
-   "Screen for coexisting sexually transmitted infections including HIV and offer contraception and safer-sex counselling",
-   "Exclude ectopic pregnancy and, where the diagnosis is uncertain or the patient fails to respond, consider laparoscopy",
-   "Counsel on the long-term risks of tubal infertility, ectopic pregnancy and chronic pelvic pain and arrange follow-up"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pelvic_inflammatory_disease-pathway",
-   "title": "Pelvic inflammatory disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "PID is infection and inflammation of the upper female genital tract, encompassing endometritis, salpingitis, oophoritis, tubo-ovarian abscess, and pelvic peritonitis",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Signs of a tubo-ovarian abscess such as a tender adnexal mass with high fever",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Pregnancy test to exclude ectopic pregnancy, Endocervical or vaginal nucleic acid amplification testing for chlamydia and gonorrhoea, Microscopy and culture of genital tract samples"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Start empirical broad-spectrum antibiotics covering gonococcus, chlamydia and anaerobes, typically ceftriaxone with doxycycline and metronidazole, with a low threshold for treatment given imprecise diagnosis and"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Withholding treatment while awaiting definitive confirmation, allowing tubal damage to progress"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pelvic inflammatory disease."
-  }
- ],
- "tables": [
-  {
-   "id": "pelvic_inflammatory_disease-matrix",
-   "title": "Pelvic inflammatory disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "PID is infection and inflammation of the upper female genital tract, encompassing endometritis, salpingitis, oophoritis,",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Obstetrics / Gynaecology",
+  "specialty": "Obstetrics & Gynaecology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Obstetrics / Novak's Gynecology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "PID is infection and inflammation of the upper female genital tract, encompassing endometritis, salpingitis, oophoritis, tubo-ovarian abscess, and pelvic peritonitis",
+      "It is usually an ascending infection, most commonly caused by Chlamydia trachomatis and Neisseria gonorrhoeae, often with anaerobes and other vaginal flora",
+      "The clinical picture is variable and often subtle; classic findings are lower abdominal pain, deep dyspareunia, abnormal discharge, and cervical motion, uterine, or adnexal tenderness",
+      "Because sequelae are serious and diagnosis is imprecise, a low threshold for empirical treatment in at-risk women is recommended",
+      "Antibiotic regimens are broad-spectrum to cover gonococcus, chlamydia, and anaerobes; sexual partners should be evaluated and treated to prevent reinfection",
+      "Fitz-Hugh-Curtis syndrome (perihepatitis) causes right upper quadrant pain and can mimic hepatobiliary disease",
+      "Intrauterine device users, recent instrumentation, and multiple sexual partners increase risk",
+      "Long-term consequences include tubal-factor infertility, ectopic pregnancy, and chronic pelvic pain, and risk rises with each recurrent episode"
     ],
-    [
-     "Key Investigations",
-     "Pregnancy test to exclude ectopic pregnancy, Endocervical or vaginal nucleic acid amplification testing for chlamydia and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "PID arises when micro-organisms ascend from the vagina and cervix through the endometrial cavity to the fallopian tubes and adjacent structures. Sexually transmitted pathogens, chiefly Chlamydia trachomatis and Neisseria gonorrhoeae, disrupt the cervical barrier and facilitate co-infection with endogenous aerobic and anaerobic vaginal flora. The resulting inflammation damages the tubal epithelium and cilia, leading to scarring, adhesions, and tubal occlusion. Progression can produce pyosalpinx, tubo-ovarian abscess, and pelvic peritonitis; spread to the hepatic capsule causes perihepatitis.",
+    "additionalDifferentials": [
+      "Ectopic pregnancy",
+      "Acute appendicitis",
+      "Ovarian cyst accident (rupture, haemorrhage, or torsion)",
+      "Endometriosis",
+      "Urinary tract infection",
+      "Functional or irritable bowel-related pelvic pain"
     ],
-    [
-     "Primary Differentials",
-     "Ectopic pregnancy, Acute appendicitis, Ovarian cyst accident (rupture, haemorrhage, or torsion)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Pregnancy test to exclude ectopic pregnancy",
+      "Endocervical or vaginal nucleic acid amplification testing for chlamydia and gonorrhoea",
+      "Microscopy and culture of genital tract samples",
+      "Inflammatory markers and full blood count",
+      "Pelvic ultrasound to detect tubo-ovarian abscess or pelvic collection",
+      "Laparoscopy when the diagnosis is uncertain or the patient fails to respond"
     ],
-    [
-     "Management Strategy",
-     "Start empirical broad-spectrum antibiotics covering gonococcus, chlamydia and anaerobes, typically ceftriaxone with doxycycline",
-     "Core treatment modality"
+    "redFlags": [
+      "Signs of a tubo-ovarian abscess such as a tender adnexal mass with high fever",
+      "Peritonitis or suspicion of a ruptured abscess causing sepsis",
+      "Haemodynamic instability or systemic sepsis",
+      "Inability to tolerate oral therapy, pregnancy, or failure of outpatient treatment requiring admission",
+      "Severe right upper quadrant pain raising concern for perihepatitis or an alternative surgical diagnosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Withholding treatment while awaiting definitive confirmation, allowing tubal damage to progress",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prompt, adequate antibiotic treatment usually resolves acute infection, but even treated PID carries appreciable risk of long-term tubal damage. Each recurrent episode further increases the likelihood of infertility, ectopic pregnancy, and chronic pelvic pain, so prevention and partner treatment are central to a good outcome.",
+    "pitfalls": [
+      "Withholding treatment while awaiting definitive confirmation, allowing tubal damage to progress",
+      "Missing an ectopic pregnancy by not performing a pregnancy test",
+      "Neglecting to test for and treat sexual partners, leading to reinfection",
+      "Failing to recognise or drain a tubo-ovarian abscess",
+      "Assuming an absence of fever or normal inflammatory markers excludes PID"
+    ],
+    "references": [
+      "Williams Obstetrics",
+      "Novak's Gynecology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Start empirical broad-spectrum antibiotics covering gonococcus, chlamydia and anaerobes, typically ceftriaxone with doxycycline and metronidazole, with a low threshold for treatment given imprecise diagnosis and serious sequelae",
+      "Admit for intravenous therapy and consider drainage for severe disease, tubo-ovarian abscess, pregnancy or failure of oral treatment",
+      "Provide analgesia and advise rest, reassessing response and considering removal of an intrauterine device if there is no improvement",
+      "Notify, evaluate and treat sexual partners and advise abstinence until treatment is completed to prevent reinfection",
+      "Screen for coexisting sexually transmitted infections including HIV and offer contraception and safer-sex counselling",
+      "Exclude ectopic pregnancy and, where the diagnosis is uncertain or the patient fails to respond, consider laparoscopy",
+      "Counsel on the long-term risks of tubal infertility, ectopic pregnancy and chronic pelvic pain and arrange follow-up"
     ]
-   ],
-   "caption": "Overview comparison matrix for pelvic inflammatory disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pelvic-inflammatory-disease-real-image",
-   "title": "Pelvic inflammatory disease: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "pelvic_inflammatory_disease-pathway",
+      "title": "Pelvic inflammatory disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "PID is infection and inflammation of the upper female genital tract, encompassing endometritis, salpingitis, oophoritis, tubo-ovarian abscess, and pelvic peritonitis",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Signs of a tubo-ovarian abscess such as a tender adnexal mass with high fever",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Pregnancy test to exclude ectopic pregnancy, Endocervical or vaginal nucleic acid amplification testing for chlamydia and gonorrhoea, Microscopy and culture of genital tract samples"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Start empirical broad-spectrum antibiotics covering gonococcus, chlamydia and anaerobes, typically ceftriaxone with doxycycline and metronidazole, with a low threshold for treatment given imprecise diagnosis and"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Withholding treatment while awaiting definitive confirmation, allowing tubal damage to progress"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pelvic inflammatory disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pelvic_inflammatory_disease-matrix",
+      "title": "Pelvic inflammatory disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "PID is infection and inflammation of the upper female genital tract, encompassing endometritis, salpingitis, oophoritis,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Pregnancy test to exclude ectopic pregnancy, Endocervical or vaginal nucleic acid amplification testing for chlamydia and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Ectopic pregnancy, Acute appendicitis, Ovarian cyst accident (rupture, haemorrhage, or torsion)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Start empirical broad-spectrum antibiotics covering gonococcus, chlamydia and anaerobes, typically ceftriaxone with doxycycline",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Withholding treatment while awaiting definitive confirmation, allowing tubal damage to progress",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pelvic inflammatory disease."
+    }
+  ],
+  "diagrams": []
 }

@@ -1,176 +1,154 @@
 {
- "id": "kernicterus",
- "name": "Kernicterus",
- "aliases": [
-  "bilirubin encephalopathy",
-  "chronic bilirubin encephalopathy",
-  "acute bilirubin encephalopathy"
- ],
- "class": "non_infective",
- "system": "Neonatology",
- "specialty": "Paediatrics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics",
-  "sourceEdition": "22e",
-  "pages": null,
-  "clinicalPearls": [
-   "Kernicterus refers to the neurological injury caused by deposition of unconjugated bilirubin in the brain, classically in the basal ganglia and brainstem nuclei.",
-   "It is a preventable complication of severe neonatal unconjugated hyperbilirubinaemia and represents the chronic, permanent form of bilirubin neurotoxicity.",
-   "Acute bilirubin encephalopathy evolves through phases: early lethargy, hypotonia, and poor feeding, followed by hypertonia with backward arching (retrocollis and opisthotonus), high-pitched cry, and fever, and later apnoea, seizures, and coma.",
-   "The classic chronic tetrad includes choreoathetoid cerebral palsy, high-frequency sensorineural hearing loss (or auditory neuropathy), impaired upward gaze, and dental enamel dysplasia.",
-   "Only unconjugated (indirect) bilirubin that is not bound to albumin can cross the blood-brain barrier, so free bilirubin and factors lowering albumin binding increase risk.",
-   "Prematurity, haemolysis, sepsis, acidosis, hypoalbuminaemia, and certain drugs that displace bilirubin heighten vulnerability at any given bilirubin level.",
-   "Prevention rests on identifying and monitoring at-risk newborns, timely phototherapy, and exchange transfusion when bilirubin approaches neurotoxic thresholds.",
-   "Once established, chronic bilirubin encephalopathy is largely irreversible, underscoring the importance of early recognition and treatment of hyperbilirubinaemia.",
-   "Structured predischarge risk assessment and follow-up of jaundiced newborns reduce the incidence of this now-rare but devastating condition."
+  "id": "kernicterus",
+  "name": "Kernicterus",
+  "aliases": [
+    "bilirubin encephalopathy",
+    "chronic bilirubin encephalopathy",
+    "acute bilirubin encephalopathy"
   ],
-  "pathophysiology": "Unconjugated bilirubin is normally tightly bound to albumin and does not enter the brain. When the bilirubin load overwhelms albumin binding capacity, or binding is reduced by acidosis, hypoalbuminaemia, prematurity, or competing substances, free unconjugated bilirubin crosses the blood-brain barrier. It is neurotoxic, being preferentially deposited in and damaging the basal ganglia (notably the globus pallidus and subthalamic nuclei), the brainstem auditory and oculomotor nuclei, hippocampus, and cerebellum. Bilirubin impairs mitochondrial function and neuronal signalling, causing acute dysfunction and, if sustained, permanent neuronal loss and gliosis with the characteristic clinical sequelae.",
-  "additionalDifferentials": [
-   "Neonatal sepsis or meningitis",
-   "Hypoxic-ischaemic encephalopathy",
-   "Inborn errors of metabolism causing encephalopathy",
-   "Neonatal seizures of other cause",
-   "Hypoglycaemic or electrolyte-related encephalopathy",
-   "Other causes of neonatal hypertonia or abnormal movements"
-  ],
-  "additionalInvestigations": [
-   "Serial total and unconjugated bilirubin, interpreted against age-in-hours nomograms",
-   "Albumin level and bilirubin-to-albumin ratio to gauge binding reserve",
-   "Haemolysis workup (blood group, direct antiglobulin test, blood film, reticulocytes)",
-   "Auditory brainstem response testing for auditory neuropathy",
-   "MRI showing characteristic basal ganglia signal changes in established disease",
-   "Evaluation for contributing factors such as sepsis, acidosis, and prematurity"
-  ],
-  "redFlags": [
-   "Signs of acute bilirubin encephalopathy: lethargy or hypertonia, retrocollis/opisthotonus, high-pitched cry, poor feeding",
-   "Bilirubin approaching or exceeding exchange transfusion thresholds for the infant's age and risk",
-   "Apnoea, seizures, or coma in a severely jaundiced newborn",
-   "Rapidly rising bilirubin, especially with haemolysis, sepsis, or acidosis",
-   "Jaundice in a preterm or unwell infant where binding reserve is reduced"
-  ],
-  "prognosis": "Acute bilirubin encephalopathy may be partly reversible if bilirubin is lowered promptly, but progression to chronic kernicterus produces permanent, often severe disability including movement disorder, hearing loss, and gaze abnormalities. Because the condition is largely preventable, prognosis hinges on timely detection and treatment of severe hyperbilirubinaemia.",
-  "pitfalls": [
-   "Interpreting bilirubin values without reference to the infant's age in hours and risk factors",
-   "Underestimating neurotoxic risk in preterm, acidotic, hypoalbuminaemic, or septic infants at lower bilirubin levels",
-   "Delaying phototherapy or exchange transfusion while bilirubin rises",
-   "Missing early, subtle neurological signs of acute encephalopathy",
-   "Discharging a jaundiced newborn without adequate follow-up and risk assessment"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Intensive phototherapy to lower unconjugated bilirubin as the primary intervention in acute bilirubin encephalopathy",
-   "Exchange transfusion for severe or rapidly rising hyperbilirubinaemia or signs of acute encephalopathy",
-   "Intravenous immunoglobulin for isoimmune haemolytic disease to reduce ongoing haemolysis",
-   "Correction of aggravating factors such as sepsis, acidosis, hypoalbuminaemia and dehydration that increase free bilirubin and neurotoxicity",
-   "Treatment of the underlying cause of haemolysis with adequate hydration and feeding support",
-   "Long-term management of choreoathetoid cerebral palsy with medications and rehabilitation therapies, and cochlear implantation or hearing aids for auditory neuropathy",
-   "Multidisciplinary developmental, audiological and visual follow-up, with prevention through timely bilirubin screening against age-in-hours nomograms"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "kernicterus-pathway",
-   "title": "Kernicterus: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Kernicterus refers to the neurological injury caused by deposition of unconjugated bilirubin in the brain, classically in the basal ganglia and brainstem nuclei.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Signs of acute bilirubin encephalopathy: lethargy or hypertonia, retrocollis/opisthotonus, high-pitched cry, poor feeding",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serial total and unconjugated bilirubin, interpreted against age-in-hours nomograms, Albumin level and bilirubin-to-albumin ratio to gauge binding reserve, Haemolysis workup (blood group, direct antiglobulin test, blood"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Intensive phototherapy to lower unconjugated bilirubin as the primary intervention in acute bilirubin encephalopathy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Interpreting bilirubin values without reference to the infant's age in hours and risk factors"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of kernicterus."
-  }
- ],
- "tables": [
-  {
-   "id": "kernicterus-matrix",
-   "title": "Kernicterus: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Kernicterus refers to the neurological injury caused by deposition of unconjugated bilirubin in the brain, classically in the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neonatology",
+  "specialty": "Paediatrics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics",
+    "sourceEdition": "22e",
+    "pages": null,
+    "clinicalPearls": [
+      "Kernicterus refers to the neurological injury caused by deposition of unconjugated bilirubin in the brain, classically in the basal ganglia and brainstem nuclei.",
+      "It is a preventable complication of severe neonatal unconjugated hyperbilirubinaemia and represents the chronic, permanent form of bilirubin neurotoxicity.",
+      "Acute bilirubin encephalopathy evolves through phases: early lethargy, hypotonia, and poor feeding, followed by hypertonia with backward arching (retrocollis and opisthotonus), high-pitched cry, and fever, and later apnoea, seizures, and coma.",
+      "The classic chronic tetrad includes choreoathetoid cerebral palsy, high-frequency sensorineural hearing loss (or auditory neuropathy), impaired upward gaze, and dental enamel dysplasia.",
+      "Only unconjugated (indirect) bilirubin that is not bound to albumin can cross the blood-brain barrier, so free bilirubin and factors lowering albumin binding increase risk.",
+      "Prematurity, haemolysis, sepsis, acidosis, hypoalbuminaemia, and certain drugs that displace bilirubin heighten vulnerability at any given bilirubin level.",
+      "Prevention rests on identifying and monitoring at-risk newborns, timely phototherapy, and exchange transfusion when bilirubin approaches neurotoxic thresholds.",
+      "Once established, chronic bilirubin encephalopathy is largely irreversible, underscoring the importance of early recognition and treatment of hyperbilirubinaemia.",
+      "Structured predischarge risk assessment and follow-up of jaundiced newborns reduce the incidence of this now-rare but devastating condition."
     ],
-    [
-     "Key Investigations",
-     "Serial total and unconjugated bilirubin, interpreted against age-in-hours nomograms, Albumin level and bilirubin-to-albumin ratio",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Unconjugated bilirubin is normally tightly bound to albumin and does not enter the brain. When the bilirubin load overwhelms albumin binding capacity, or binding is reduced by acidosis, hypoalbuminaemia, prematurity, or competing substances, free unconjugated bilirubin crosses the blood-brain barrier. It is neurotoxic, being preferentially deposited in and damaging the basal ganglia (notably the globus pallidus and subthalamic nuclei), the brainstem auditory and oculomotor nuclei, hippocampus, and cerebellum. Bilirubin impairs mitochondrial function and neuronal signalling, causing acute dysfunction and, if sustained, permanent neuronal loss and gliosis with the characteristic clinical sequelae.",
+    "additionalDifferentials": [
+      "Neonatal sepsis or meningitis",
+      "Hypoxic-ischaemic encephalopathy",
+      "Inborn errors of metabolism causing encephalopathy",
+      "Neonatal seizures of other cause",
+      "Hypoglycaemic or electrolyte-related encephalopathy",
+      "Other causes of neonatal hypertonia or abnormal movements"
     ],
-    [
-     "Primary Differentials",
-     "Neonatal sepsis or meningitis, Hypoxic-ischaemic encephalopathy, Inborn errors of metabolism causing encephalopathy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serial total and unconjugated bilirubin, interpreted against age-in-hours nomograms",
+      "Albumin level and bilirubin-to-albumin ratio to gauge binding reserve",
+      "Haemolysis workup (blood group, direct antiglobulin test, blood film, reticulocytes)",
+      "Auditory brainstem response testing for auditory neuropathy",
+      "MRI showing characteristic basal ganglia signal changes in established disease",
+      "Evaluation for contributing factors such as sepsis, acidosis, and prematurity"
     ],
-    [
-     "Management Strategy",
-     "Intensive phototherapy to lower unconjugated bilirubin as the primary intervention in acute bilirubin encephalopathy",
-     "Core treatment modality"
+    "redFlags": [
+      "Signs of acute bilirubin encephalopathy: lethargy or hypertonia, retrocollis/opisthotonus, high-pitched cry, poor feeding",
+      "Bilirubin approaching or exceeding exchange transfusion thresholds for the infant's age and risk",
+      "Apnoea, seizures, or coma in a severely jaundiced newborn",
+      "Rapidly rising bilirubin, especially with haemolysis, sepsis, or acidosis",
+      "Jaundice in a preterm or unwell infant where binding reserve is reduced"
     ],
-    [
-     "Clinical Pitfall",
-     "Interpreting bilirubin values without reference to the infant's age in hours and risk factors",
-     "Prevent diagnostic or management error"
+    "prognosis": "Acute bilirubin encephalopathy may be partly reversible if bilirubin is lowered promptly, but progression to chronic kernicterus produces permanent, often severe disability including movement disorder, hearing loss, and gaze abnormalities. Because the condition is largely preventable, prognosis hinges on timely detection and treatment of severe hyperbilirubinaemia.",
+    "pitfalls": [
+      "Interpreting bilirubin values without reference to the infant's age in hours and risk factors",
+      "Underestimating neurotoxic risk in preterm, acidotic, hypoalbuminaemic, or septic infants at lower bilirubin levels",
+      "Delaying phototherapy or exchange transfusion while bilirubin rises",
+      "Missing early, subtle neurological signs of acute encephalopathy",
+      "Discharging a jaundiced newborn without adequate follow-up and risk assessment"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Intensive phototherapy to lower unconjugated bilirubin as the primary intervention in acute bilirubin encephalopathy",
+      "Exchange transfusion for severe or rapidly rising hyperbilirubinaemia or signs of acute encephalopathy",
+      "Intravenous immunoglobulin for isoimmune haemolytic disease to reduce ongoing haemolysis",
+      "Correction of aggravating factors such as sepsis, acidosis, hypoalbuminaemia and dehydration that increase free bilirubin and neurotoxicity",
+      "Treatment of the underlying cause of haemolysis with adequate hydration and feeding support",
+      "Long-term management of choreoathetoid cerebral palsy with medications and rehabilitation therapies, and cochlear implantation or hearing aids for auditory neuropathy",
+      "Multidisciplinary developmental, audiological and visual follow-up, with prevention through timely bilirubin screening against age-in-hours nomograms"
     ]
-   ],
-   "caption": "Overview comparison matrix for kernicterus."
-  }
- ],
- "diagrams": [
-  {
-   "id": "kernicterus-real-image",
-   "title": "Kernicterus: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "kernicterus-pathway",
+      "title": "Kernicterus: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Kernicterus refers to the neurological injury caused by deposition of unconjugated bilirubin in the brain, classically in the basal ganglia and brainstem nuclei.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Signs of acute bilirubin encephalopathy: lethargy or hypertonia, retrocollis/opisthotonus, high-pitched cry, poor feeding",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serial total and unconjugated bilirubin, interpreted against age-in-hours nomograms, Albumin level and bilirubin-to-albumin ratio to gauge binding reserve, Haemolysis workup (blood group, direct antiglobulin test, blood"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Intensive phototherapy to lower unconjugated bilirubin as the primary intervention in acute bilirubin encephalopathy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Interpreting bilirubin values without reference to the infant's age in hours and risk factors"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of kernicterus."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "kernicterus-matrix",
+      "title": "Kernicterus: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Kernicterus refers to the neurological injury caused by deposition of unconjugated bilirubin in the brain, classically in the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serial total and unconjugated bilirubin, interpreted against age-in-hours nomograms, Albumin level and bilirubin-to-albumin ratio",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Neonatal sepsis or meningitis, Hypoxic-ischaemic encephalopathy, Inborn errors of metabolism causing encephalopathy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Intensive phototherapy to lower unconjugated bilirubin as the primary intervention in acute bilirubin encephalopathy",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Interpreting bilirubin values without reference to the infant's age in hours and risk factors",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for kernicterus."
+    }
+  ],
+  "diagrams": []
 }

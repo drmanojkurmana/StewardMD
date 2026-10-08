@@ -1,175 +1,153 @@
 {
- "id": "chronic_granulomatous_disease",
- "name": "Chronic granulomatous disease",
- "aliases": [
-  "CGD",
-  "NADPH oxidase deficiency",
-  "phagocyte oxidative burst defect"
- ],
- "class": "non_infective",
- "system": "Immunology / Allergy",
- "specialty": "Allergy & Immunology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / Middleton's Allergy",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "CGD is a primary phagocyte disorder in which defective NADPH oxidase prevents the respiratory burst, so neutrophils and macrophages ingest but cannot kill certain microbes",
-   "Infections are characteristically caused by catalase-positive organisms, notably Staphylococcus aureus, Serratia, Burkholderia, Nocardia, and the mould Aspergillus",
-   "Recurrent deep-seated infections-pneumonia, lymphadenitis, liver and other abscesses, and osteomyelitis-are typical and often present in early childhood",
-   "Exuberant granuloma formation reflects dysregulated inflammation and can obstruct hollow viscera, causing gastrointestinal or genitourinary problems that mimic inflammatory bowel disease",
-   "Most cases are X-linked (gp91phox/CYBB) and therefore affect boys, with autosomal recessive forms tending to run a milder course",
-   "Diagnosis relies on tests of the oxidative burst, historically the nitroblue tetrazolium test and now the more quantitative dihydrorhodamine (DHR) flow-cytometric assay, with genetic confirmation",
-   "Long-term prophylaxis against bacteria and fungi plus interferon-gamma reduces serious infections, and prompt aggressive treatment of intercurrent infection is essential",
-   "Invasive aspergillosis and other fungal infections are leading causes of death, so a high index of suspicion and early antifungal therapy are important",
-   "Allogeneic haematopoietic stem-cell transplantation is the established curative option, and gene therapy is an evolving approach"
+  "id": "chronic_granulomatous_disease",
+  "name": "Chronic granulomatous disease",
+  "aliases": [
+    "CGD",
+    "NADPH oxidase deficiency",
+    "phagocyte oxidative burst defect"
   ],
-  "pathophysiology": "CGD is caused by mutations in any of the subunits of the phagocyte NADPH oxidase complex (gp91phox, p22phox, p47phox, p67phox, p40phox). This enzyme normally generates superoxide and downstream reactive oxygen species that drive the microbicidal respiratory burst within the phagosome. Without a functional oxidase, phagocytes engulf organisms but fail to kill catalase-positive microbes that can neutralise their own hydrogen peroxide. Persistence of viable organisms and impaired resolution of inflammation lead to chronic granuloma formation and tissue damage. The most common form is X-linked (CYBB), with autosomal recessive forms accounting for the remainder.",
-  "additionalDifferentials": [
-   "Other primary immunodeficiencies with recurrent infection (e.g. leukocyte adhesion deficiency, hyper-IgE syndrome)",
-   "Congenital or acquired neutropenia",
-   "Inflammatory bowel disease (granulomatous colitis can mimic Crohn disease)",
-   "Mycobacterial infection and Mendelian susceptibility to mycobacterial disease",
-   "Cystic fibrosis or bronchiectasis with recurrent pulmonary infection",
-   "Glucose-6-phosphate dehydrogenase deficiency causing a CGD-like oxidative defect"
-  ],
-  "additionalInvestigations": [
-   "Dihydrorhodamine (DHR) flow-cytometric assay of the neutrophil oxidative burst",
-   "Nitroblue tetrazolium test where DHR is unavailable",
-   "Genetic testing to identify the affected oxidase subunit and inheritance pattern",
-   "Microbiologic sampling and culture of infected sites, including for fungi and Nocardia",
-   "Cross-sectional imaging to localise deep abscesses and granulomatous complications",
-   "Carrier testing and genetic counselling for family members"
-  ],
-  "redFlags": [
-   "Invasive fungal infection, particularly aspergillosis, with respiratory or systemic decline",
-   "Deep abscess, sepsis, or rapidly progressive pneumonia requiring urgent intervention",
-   "Bowel or urinary obstruction from granulomatous inflammation",
-   "Infection with Burkholderia or Nocardia signalling severe, potentially fatal disease"
-  ],
-  "prognosis": "Prophylactic antibacterial and antifungal therapy with interferon-gamma has substantially improved survival, though serious infections and inflammatory complications still occur. Invasive fungal disease remains a leading cause of death. Haematopoietic stem-cell transplantation can be curative, especially with well-matched donors performed before major organ damage.",
-  "pitfalls": [
-   "Underestimating fungal risk and delaying antifungal therapy in a febrile CGD patient",
-   "Mistaking granulomatous colitis for ordinary inflammatory bowel disease and missing the underlying immunodeficiency",
-   "Stopping antimicrobial and antifungal prophylaxis during periods of apparent wellness",
-   "Failing to pursue genetic diagnosis, carrier testing, and consideration of curative transplantation"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "Middleton's Allergy: Principles and Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Lifelong antibacterial prophylaxis with co-trimoxazole and antifungal prophylaxis with itraconazole against catalase-positive organisms",
-   "Interferon-gamma immunomodulation to reduce the frequency of serious infection",
-   "Aggressive, prolonged, culture-directed treatment of intercurrent infections, including antifungal therapy for invasive Aspergillus and surgical drainage of abscesses",
-   "Corticosteroids for obstructive granulomatous and inflammatory complications, such as gastrointestinal or genitourinary involvement mimicking inflammatory bowel disease",
-   "Allogeneic haematopoietic stem-cell transplantation as the curative option, with gene therapy an emerging approach",
-   "Immunology specialist follow-up with cross-sectional imaging surveillance for deep-seated infection",
-   "Genetic counselling and carrier testing for family members, given predominantly X-linked and less commonly autosomal recessive inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "chronic_granulomatous_disease-pathway",
-   "title": "Chronic granulomatous disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "CGD is a primary phagocyte disorder in which defective NADPH oxidase prevents the respiratory burst, so neutrophils and macrophages ingest but cannot kill certain microbes",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Invasive fungal infection, particularly aspergillosis, with respiratory or systemic decline",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Dihydrorhodamine (DHR) flow-cytometric assay of the neutrophil oxidative burst, Nitroblue tetrazolium test where DHR is unavailable, Genetic testing to identify the affected oxidase subunit and inheritance pattern"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Lifelong antibacterial prophylaxis with co-trimoxazole and antifungal prophylaxis with itraconazole against catalase-positive organisms"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Underestimating fungal risk and delaying antifungal therapy in a febrile CGD patient"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of chronic granulomatous disease."
-  }
- ],
- "tables": [
-  {
-   "id": "chronic_granulomatous_disease-matrix",
-   "title": "Chronic granulomatous disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "CGD is a primary phagocyte disorder in which defective NADPH oxidase prevents the respiratory burst, so neutrophils and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Immunology / Allergy",
+  "specialty": "Allergy & Immunology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / Middleton's Allergy",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "CGD is a primary phagocyte disorder in which defective NADPH oxidase prevents the respiratory burst, so neutrophils and macrophages ingest but cannot kill certain microbes",
+      "Infections are characteristically caused by catalase-positive organisms, notably Staphylococcus aureus, Serratia, Burkholderia, Nocardia, and the mould Aspergillus",
+      "Recurrent deep-seated infections-pneumonia, lymphadenitis, liver and other abscesses, and osteomyelitis-are typical and often present in early childhood",
+      "Exuberant granuloma formation reflects dysregulated inflammation and can obstruct hollow viscera, causing gastrointestinal or genitourinary problems that mimic inflammatory bowel disease",
+      "Most cases are X-linked (gp91phox/CYBB) and therefore affect boys, with autosomal recessive forms tending to run a milder course",
+      "Diagnosis relies on tests of the oxidative burst, historically the nitroblue tetrazolium test and now the more quantitative dihydrorhodamine (DHR) flow-cytometric assay, with genetic confirmation",
+      "Long-term prophylaxis against bacteria and fungi plus interferon-gamma reduces serious infections, and prompt aggressive treatment of intercurrent infection is essential",
+      "Invasive aspergillosis and other fungal infections are leading causes of death, so a high index of suspicion and early antifungal therapy are important",
+      "Allogeneic haematopoietic stem-cell transplantation is the established curative option, and gene therapy is an evolving approach"
     ],
-    [
-     "Key Investigations",
-     "Dihydrorhodamine (DHR) flow-cytometric assay of the neutrophil oxidative burst, Nitroblue tetrazolium test where DHR is",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "CGD is caused by mutations in any of the subunits of the phagocyte NADPH oxidase complex (gp91phox, p22phox, p47phox, p67phox, p40phox). This enzyme normally generates superoxide and downstream reactive oxygen species that drive the microbicidal respiratory burst within the phagosome. Without a functional oxidase, phagocytes engulf organisms but fail to kill catalase-positive microbes that can neutralise their own hydrogen peroxide. Persistence of viable organisms and impaired resolution of inflammation lead to chronic granuloma formation and tissue damage. The most common form is X-linked (CYBB), with autosomal recessive forms accounting for the remainder.",
+    "additionalDifferentials": [
+      "Other primary immunodeficiencies with recurrent infection (e.g. leukocyte adhesion deficiency, hyper-IgE syndrome)",
+      "Congenital or acquired neutropenia",
+      "Inflammatory bowel disease (granulomatous colitis can mimic Crohn disease)",
+      "Mycobacterial infection and Mendelian susceptibility to mycobacterial disease",
+      "Cystic fibrosis or bronchiectasis with recurrent pulmonary infection",
+      "Glucose-6-phosphate dehydrogenase deficiency causing a CGD-like oxidative defect"
     ],
-    [
-     "Primary Differentials",
-     "Other primary immunodeficiencies with recurrent infection (e.g. leukocyte adhesion deficiency, hyper-IgE syndrome), Congenital or",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Dihydrorhodamine (DHR) flow-cytometric assay of the neutrophil oxidative burst",
+      "Nitroblue tetrazolium test where DHR is unavailable",
+      "Genetic testing to identify the affected oxidase subunit and inheritance pattern",
+      "Microbiologic sampling and culture of infected sites, including for fungi and Nocardia",
+      "Cross-sectional imaging to localise deep abscesses and granulomatous complications",
+      "Carrier testing and genetic counselling for family members"
     ],
-    [
-     "Management Strategy",
-     "Lifelong antibacterial prophylaxis with co-trimoxazole and antifungal prophylaxis with itraconazole against catalase-positive",
-     "Core treatment modality"
+    "redFlags": [
+      "Invasive fungal infection, particularly aspergillosis, with respiratory or systemic decline",
+      "Deep abscess, sepsis, or rapidly progressive pneumonia requiring urgent intervention",
+      "Bowel or urinary obstruction from granulomatous inflammation",
+      "Infection with Burkholderia or Nocardia signalling severe, potentially fatal disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Underestimating fungal risk and delaying antifungal therapy in a febrile CGD patient",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prophylactic antibacterial and antifungal therapy with interferon-gamma has substantially improved survival, though serious infections and inflammatory complications still occur. Invasive fungal disease remains a leading cause of death. Haematopoietic stem-cell transplantation can be curative, especially with well-matched donors performed before major organ damage.",
+    "pitfalls": [
+      "Underestimating fungal risk and delaying antifungal therapy in a febrile CGD patient",
+      "Mistaking granulomatous colitis for ordinary inflammatory bowel disease and missing the underlying immunodeficiency",
+      "Stopping antimicrobial and antifungal prophylaxis during periods of apparent wellness",
+      "Failing to pursue genetic diagnosis, carrier testing, and consideration of curative transplantation"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "Middleton's Allergy: Principles and Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Lifelong antibacterial prophylaxis with co-trimoxazole and antifungal prophylaxis with itraconazole against catalase-positive organisms",
+      "Interferon-gamma immunomodulation to reduce the frequency of serious infection",
+      "Aggressive, prolonged, culture-directed treatment of intercurrent infections, including antifungal therapy for invasive Aspergillus and surgical drainage of abscesses",
+      "Corticosteroids for obstructive granulomatous and inflammatory complications, such as gastrointestinal or genitourinary involvement mimicking inflammatory bowel disease",
+      "Allogeneic haematopoietic stem-cell transplantation as the curative option, with gene therapy an emerging approach",
+      "Immunology specialist follow-up with cross-sectional imaging surveillance for deep-seated infection",
+      "Genetic counselling and carrier testing for family members, given predominantly X-linked and less commonly autosomal recessive inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for chronic granulomatous disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "chronic-granulomatous-disease-real-image",
-   "title": "Chronic granulomatous disease: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "chronic_granulomatous_disease-pathway",
+      "title": "Chronic granulomatous disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "CGD is a primary phagocyte disorder in which defective NADPH oxidase prevents the respiratory burst, so neutrophils and macrophages ingest but cannot kill certain microbes",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Invasive fungal infection, particularly aspergillosis, with respiratory or systemic decline",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Dihydrorhodamine (DHR) flow-cytometric assay of the neutrophil oxidative burst, Nitroblue tetrazolium test where DHR is unavailable, Genetic testing to identify the affected oxidase subunit and inheritance pattern"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Lifelong antibacterial prophylaxis with co-trimoxazole and antifungal prophylaxis with itraconazole against catalase-positive organisms"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Underestimating fungal risk and delaying antifungal therapy in a febrile CGD patient"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of chronic granulomatous disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "chronic_granulomatous_disease-matrix",
+      "title": "Chronic granulomatous disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "CGD is a primary phagocyte disorder in which defective NADPH oxidase prevents the respiratory burst, so neutrophils and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Dihydrorhodamine (DHR) flow-cytometric assay of the neutrophil oxidative burst, Nitroblue tetrazolium test where DHR is",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other primary immunodeficiencies with recurrent infection (e.g. leukocyte adhesion deficiency, hyper-IgE syndrome), Congenital or",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Lifelong antibacterial prophylaxis with co-trimoxazole and antifungal prophylaxis with itraconazole against catalase-positive",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Underestimating fungal risk and delaying antifungal therapy in a febrile CGD patient",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for chronic granulomatous disease."
+    }
+  ],
+  "diagrams": []
 }

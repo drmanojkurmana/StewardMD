@@ -1,175 +1,153 @@
 {
- "id": "eclampsia",
- "name": "Eclampsia",
- "aliases": [
-  "eclamptic seizure",
-  "eclamptic convulsion",
-  "convulsive pre-eclampsia"
- ],
- "class": "non_infective",
- "system": "Obstetrics / Gynaecology",
- "specialty": "Obstetrics & Gynaecology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Obstetrics / Novak's Gynecology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Defined as new-onset generalised tonic-clonic seizures in a woman with pre-eclampsia that cannot be attributed to another cause",
-   "Seizures may occur antepartum, intrapartum, or postpartum, and a substantial proportion arise after delivery",
-   "Premonitory features include severe headache, visual disturbance, epigastric pain, and hyperreflexia, though seizures can occur without warning",
-   "Magnesium sulfate is the treatment of choice for controlling and preventing recurrent seizures and is superior to conventional anticonvulsants in this setting",
-   "Immediate priorities are maternal airway protection, oxygenation, and prevention of injury and aspiration during the seizure",
-   "Blood pressure must be controlled with antihypertensives to reduce the risk of intracranial haemorrhage",
-   "Delivery is undertaken once the mother is stabilised; eclampsia itself is not an indication for immediate caesarean if vaginal delivery is achievable and conditions are favourable",
-   "Magnesium toxicity is monitored clinically (loss of deep tendon reflexes, respiratory depression) and calcium gluconate is the antidote"
+  "id": "eclampsia",
+  "name": "Eclampsia",
+  "aliases": [
+    "eclamptic seizure",
+    "eclamptic convulsion",
+    "convulsive pre-eclampsia"
   ],
-  "pathophysiology": "Eclampsia represents the cerebral manifestation of the endothelial dysfunction and vasospasm of pre-eclampsia. Loss of cerebral autoregulation and endothelial injury lead to hyperperfusion, vasogenic and cytotoxic oedema (often in the posterior circulation, akin to posterior reversible encephalopathy syndrome), and focal ischaemia, which lower the seizure threshold and provoke generalised convulsions. Cerebral haemorrhage is the most feared and lethal complication.",
-  "additionalDifferentials": [
-   "Epilepsy and other primary seizure disorders",
-   "Cerebral venous sinus thrombosis",
-   "Intracranial haemorrhage or ischaemic stroke",
-   "Hypoglycaemia or other metabolic derangement",
-   "CNS infection (meningitis, encephalitis)",
-   "Thrombotic thrombocytopenic purpura"
-  ],
-  "additionalInvestigations": [
-   "Bloods as for severe pre-eclampsia: full blood count, liver enzymes, renal function, coagulation, and lactate dehydrogenase",
-   "Blood glucose to exclude hypoglycaemia",
-   "Neuroimaging (CT or MRI) if seizures are atypical, focal, recurrent despite magnesium, or if focal neurological deficit persists",
-   "Continuous fetal monitoring after maternal stabilisation",
-   "Magnesium level monitoring where clinically indicated during infusion"
-  ],
-  "redFlags": [
-   "Recurrent or prolonged seizures despite magnesium sulfate (status eclampticus)",
-   "Focal neurological deficit or reduced conscious level suggesting intracranial haemorrhage",
-   "Severe uncontrolled hypertension threatening stroke",
-   "Signs of magnesium toxicity such as respiratory depression or absent reflexes",
-   "Maternal hypoxia, aspiration, or airway compromise during a seizure"
-  ],
-  "prognosis": "With prompt seizure control, blood pressure management, and delivery, most women recover without lasting neurological deficit. However, eclampsia is associated with significant maternal mortality and morbidity worldwide, particularly from intracranial haemorrhage, aspiration, and organ failure, and with increased perinatal loss.",
-  "pitfalls": [
-   "Attributing a peripartum seizure to epilepsy and delaying magnesium therapy",
-   "Discontinuing magnesium too early after delivery when postpartum eclampsia remains a risk",
-   "Rushing to caesarean during an active seizure rather than stabilising the mother first",
-   "Overlooking magnesium toxicity by not monitoring reflexes and respiratory rate",
-   "Neglecting ongoing postpartum blood pressure surveillance"
-  ],
-  "references": [
-   "Williams Obstetrics",
-   "Novak's Gynecology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Control and prevent recurrent seizures with intravenous magnesium sulphate, the agent of choice, continued through and after delivery",
-   "Secure the airway, give supplemental oxygen and protect from injury and aspiration during convulsions, nursing in the left lateral position",
-   "Control severe hypertension with antihypertensives such as labetalol, hydralazine or nifedipine to reduce the risk of intracranial haemorrhage",
-   "Expedite delivery once the mother is stabilised, as delivery is the definitive treatment, with continuous foetal monitoring",
-   "Monitor for magnesium toxicity by reflexes, respiration and urine output, keeping calcium gluconate available as antidote, and watch for pulmonary oedema and fluid overload",
-   "Surveil for HELLP syndrome, renal failure, coagulopathy and cerebral haemorrhage, and image the brain if seizures are atypical, focal or persist despite magnesium",
-   "Manage jointly with obstetrics, anaesthetics or critical care and neonatology, with postpartum blood pressure follow-up and counselling on recurrence risk"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "eclampsia-pathway",
-   "title": "Eclampsia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Defined as new-onset generalised tonic-clonic seizures in a woman with pre-eclampsia that cannot be attributed to another cause",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Recurrent or prolonged seizures despite magnesium sulfate (status eclampticus)",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Bloods as for severe pre-eclampsia: full blood count, liver enzymes, renal function, coagulation, and lactate dehydrogenase, Blood glucose to exclude hypoglycaemia, Neuroimaging (CT or MRI) if seizures are atypical, focal,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Control and prevent recurrent seizures with intravenous magnesium sulphate, the agent of choice, continued through and after delivery"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing a peripartum seizure to epilepsy and delaying magnesium therapy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of eclampsia."
-  }
- ],
- "tables": [
-  {
-   "id": "eclampsia-matrix",
-   "title": "Eclampsia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Defined as new-onset generalised tonic-clonic seizures in a woman with pre-eclampsia that cannot be attributed to another cause",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Obstetrics / Gynaecology",
+  "specialty": "Obstetrics & Gynaecology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Obstetrics / Novak's Gynecology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Defined as new-onset generalised tonic-clonic seizures in a woman with pre-eclampsia that cannot be attributed to another cause",
+      "Seizures may occur antepartum, intrapartum, or postpartum, and a substantial proportion arise after delivery",
+      "Premonitory features include severe headache, visual disturbance, epigastric pain, and hyperreflexia, though seizures can occur without warning",
+      "Magnesium sulfate is the treatment of choice for controlling and preventing recurrent seizures and is superior to conventional anticonvulsants in this setting",
+      "Immediate priorities are maternal airway protection, oxygenation, and prevention of injury and aspiration during the seizure",
+      "Blood pressure must be controlled with antihypertensives to reduce the risk of intracranial haemorrhage",
+      "Delivery is undertaken once the mother is stabilised; eclampsia itself is not an indication for immediate caesarean if vaginal delivery is achievable and conditions are favourable",
+      "Magnesium toxicity is monitored clinically (loss of deep tendon reflexes, respiratory depression) and calcium gluconate is the antidote"
     ],
-    [
-     "Key Investigations",
-     "Bloods as for severe pre-eclampsia: full blood count, liver enzymes, renal function, coagulation, and lactate dehydrogenase,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Eclampsia represents the cerebral manifestation of the endothelial dysfunction and vasospasm of pre-eclampsia. Loss of cerebral autoregulation and endothelial injury lead to hyperperfusion, vasogenic and cytotoxic oedema (often in the posterior circulation, akin to posterior reversible encephalopathy syndrome), and focal ischaemia, which lower the seizure threshold and provoke generalised convulsions. Cerebral haemorrhage is the most feared and lethal complication.",
+    "additionalDifferentials": [
+      "Epilepsy and other primary seizure disorders",
+      "Cerebral venous sinus thrombosis",
+      "Intracranial haemorrhage or ischaemic stroke",
+      "Hypoglycaemia or other metabolic derangement",
+      "CNS infection (meningitis, encephalitis)",
+      "Thrombotic thrombocytopenic purpura"
     ],
-    [
-     "Primary Differentials",
-     "Epilepsy and other primary seizure disorders, Cerebral venous sinus thrombosis, Intracranial haemorrhage or ischaemic stroke",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Bloods as for severe pre-eclampsia: full blood count, liver enzymes, renal function, coagulation, and lactate dehydrogenase",
+      "Blood glucose to exclude hypoglycaemia",
+      "Neuroimaging (CT or MRI) if seizures are atypical, focal, recurrent despite magnesium, or if focal neurological deficit persists",
+      "Continuous fetal monitoring after maternal stabilisation",
+      "Magnesium level monitoring where clinically indicated during infusion"
     ],
-    [
-     "Management Strategy",
-     "Control and prevent recurrent seizures with intravenous magnesium sulphate, the agent of choice, continued through and after",
-     "Core treatment modality"
+    "redFlags": [
+      "Recurrent or prolonged seizures despite magnesium sulfate (status eclampticus)",
+      "Focal neurological deficit or reduced conscious level suggesting intracranial haemorrhage",
+      "Severe uncontrolled hypertension threatening stroke",
+      "Signs of magnesium toxicity such as respiratory depression or absent reflexes",
+      "Maternal hypoxia, aspiration, or airway compromise during a seizure"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing a peripartum seizure to epilepsy and delaying magnesium therapy",
-     "Prevent diagnostic or management error"
+    "prognosis": "With prompt seizure control, blood pressure management, and delivery, most women recover without lasting neurological deficit. However, eclampsia is associated with significant maternal mortality and morbidity worldwide, particularly from intracranial haemorrhage, aspiration, and organ failure, and with increased perinatal loss.",
+    "pitfalls": [
+      "Attributing a peripartum seizure to epilepsy and delaying magnesium therapy",
+      "Discontinuing magnesium too early after delivery when postpartum eclampsia remains a risk",
+      "Rushing to caesarean during an active seizure rather than stabilising the mother first",
+      "Overlooking magnesium toxicity by not monitoring reflexes and respiratory rate",
+      "Neglecting ongoing postpartum blood pressure surveillance"
+    ],
+    "references": [
+      "Williams Obstetrics",
+      "Novak's Gynecology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Control and prevent recurrent seizures with intravenous magnesium sulphate, the agent of choice, continued through and after delivery",
+      "Secure the airway, give supplemental oxygen and protect from injury and aspiration during convulsions, nursing in the left lateral position",
+      "Control severe hypertension with antihypertensives such as labetalol, hydralazine or nifedipine to reduce the risk of intracranial haemorrhage",
+      "Expedite delivery once the mother is stabilised, as delivery is the definitive treatment, with continuous foetal monitoring",
+      "Monitor for magnesium toxicity by reflexes, respiration and urine output, keeping calcium gluconate available as antidote, and watch for pulmonary oedema and fluid overload",
+      "Surveil for HELLP syndrome, renal failure, coagulopathy and cerebral haemorrhage, and image the brain if seizures are atypical, focal or persist despite magnesium",
+      "Manage jointly with obstetrics, anaesthetics or critical care and neonatology, with postpartum blood pressure follow-up and counselling on recurrence risk"
     ]
-   ],
-   "caption": "Overview comparison matrix for eclampsia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "eclampsia-real-image",
-   "title": "Eclampsia: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "eclampsia-pathway",
+      "title": "Eclampsia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Defined as new-onset generalised tonic-clonic seizures in a woman with pre-eclampsia that cannot be attributed to another cause",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Recurrent or prolonged seizures despite magnesium sulfate (status eclampticus)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Bloods as for severe pre-eclampsia: full blood count, liver enzymes, renal function, coagulation, and lactate dehydrogenase, Blood glucose to exclude hypoglycaemia, Neuroimaging (CT or MRI) if seizures are atypical, focal,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Control and prevent recurrent seizures with intravenous magnesium sulphate, the agent of choice, continued through and after delivery"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing a peripartum seizure to epilepsy and delaying magnesium therapy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of eclampsia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "eclampsia-matrix",
+      "title": "Eclampsia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Defined as new-onset generalised tonic-clonic seizures in a woman with pre-eclampsia that cannot be attributed to another cause",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Bloods as for severe pre-eclampsia: full blood count, liver enzymes, renal function, coagulation, and lactate dehydrogenase,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Epilepsy and other primary seizure disorders, Cerebral venous sinus thrombosis, Intracranial haemorrhage or ischaemic stroke",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Control and prevent recurrent seizures with intravenous magnesium sulphate, the agent of choice, continued through and after",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing a peripartum seizure to epilepsy and delaying magnesium therapy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for eclampsia."
+    }
+  ],
+  "diagrams": []
 }

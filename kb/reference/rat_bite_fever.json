@@ -1,177 +1,155 @@
 {
- "id": "rat_bite_fever",
- "name": "Rat-bite fever",
- "aliases": [
-  "Streptobacillus moniliformis infection",
-  "Spirillum minus infection",
-  "streptobacillary rat-bite fever",
-  "Haverhill fever",
-  "sodoku"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases / Tropical Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases / Manson's Tropical Diseases",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Rat-bite fever has two forms: streptobacillary disease (Streptobacillus moniliformis), predominant in the Americas and Europe, and spirillary disease (Spirillum minus, 'sodoku'), predominant in Asia",
-   "Acquired from the bite or scratch of rats or other rodents, or by handling them; streptobacillary disease may also be foodborne (Haverhill fever) from contaminated milk or water",
-   "Streptobacillary disease presents abruptly with fever, rigors, myalgia, a maculopapular or petechial rash favouring the extremities including palms and soles, and a migratory polyarthritis",
-   "Spirillary disease has a longer incubation, relapsing fever, induration or ulceration at the healed bite site with regional lymphadenopathy, and a rash, but arthritis is uncommon",
-   "Diagnosis of streptobacillary disease relies on culture of blood or joint fluid (fastidious organism) or molecular methods; Spirillum minus cannot be cultured and is identified by dark-field microscopy of lesion or blood material",
-   "Untreated disease can lead to endocarditis, myocarditis, meningitis, abscesses and septic arthritis, with appreciable mortality",
-   "Penicillin-class antibiotics are the treatment of choice, with alternatives for penicillin allergy and escalation for endocarditis"
+  "id": "rat_bite_fever",
+  "name": "Rat-bite fever",
+  "aliases": [
+    "Streptobacillus moniliformis infection",
+    "Spirillum minus infection",
+    "streptobacillary rat-bite fever",
+    "Haverhill fever",
+    "sodoku"
   ],
-  "pathophysiology": "The causative bacteria are commensals of the rodent nasopharynx and are introduced into humans through bites, scratches, handling or ingestion of contaminated food and water. Streptobacillus moniliformis, a fastidious pleomorphic Gram-negative bacillus, disseminates haematogenously to produce systemic febrile illness, immune-mediated rash and a reactive or septic polyarthritis, and can seed heart valves and other sites. Spirillum minus, a spiral organism, causes relapsing fever with characteristic reactivation of the healed inoculation site and regional lymphadenitis. Both can progress to metastatic infection and endovascular involvement if untreated.",
-  "additionalDifferentials": [
-   "Meningococcaemia and other causes of fever with petechial rash",
-   "Disseminated gonococcal infection (fever, rash, arthritis)",
-   "Rocky Mountain spotted fever and other rickettsioses",
-   "Leptospirosis",
-   "Secondary syphilis (rash on palms and soles)",
-   "Reactive or septic arthritis of other cause",
-   "Infective endocarditis from other organisms"
-  ],
-  "additionalInvestigations": [
-   "Blood cultures (prolonged incubation for the fastidious organism) and culture of joint aspirate",
-   "Dark-field microscopy of blood, lesion exudate or lymph node aspirate for Spirillum minus",
-   "Molecular testing (PCR/16S sequencing) for Streptobacillus moniliformis",
-   "Full blood count and inflammatory markers",
-   "Echocardiography if endocarditis is suspected",
-   "Joint imaging or aspiration in arthritis, and lumbar puncture if meningitis is suspected"
-  ],
-  "redFlags": [
-   "Features of endocarditis, myocarditis or a new murmur",
-   "Meningism or altered consciousness suggesting central nervous system involvement",
-   "Septic arthritis or deep abscess formation",
-   "Haemodynamic instability or sepsis",
-   "Persistent or relapsing fever despite initial treatment"
-  ],
-  "prognosis": "With prompt antibiotic therapy the prognosis is excellent, but untreated rat-bite fever carries substantial mortality, largely from endocarditis and other metastatic complications.",
-  "pitfalls": [
-   "Not eliciting a history of rodent exposure, which is key to considering the diagnosis",
-   "Discarding blood cultures too early before the fastidious organism grows",
-   "Attempting to culture Spirillum minus, which does not grow on artificial media",
-   "Mistaking the rash and arthritis for meningococcaemia or disseminated gonococcal infection without pursuing exposure history",
-   "Under-treating when endovascular or CNS involvement is present"
-  ],
-  "references": [
-   "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
-   "Manson's Tropical Diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "A beta-lactam such as penicillin as first-line antimicrobial therapy for both streptobacillary and spirillary disease, with doxycycline or a cephalosporin as alternatives",
-   "Prolonged intravenous therapy for endovascular involvement such as endocarditis",
-   "Cleansing and care of the inoculation wound",
-   "Evaluation and management of metastatic complications including septic arthritis, meningitis and abscesses",
-   "Echocardiography and specialist input where endocarditis is suspected",
-   "Advice on rodent-handling precautions and exposure avoidance to prevent re-infection"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "rat_bite_fever-pathway",
-   "title": "Rat-bite fever: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Rat-bite fever has two forms: streptobacillary disease (Streptobacillus moniliformis), predominant in the Americas and Europe, and spirillary disease (Spirillum minus, 'sodoku'), predominant in Asia",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Features of endocarditis, myocarditis or a new murmur",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Blood cultures (prolonged incubation for the fastidious organism) and culture of joint aspirate, Dark-field microscopy of blood, lesion exudate or lymph node aspirate for Spirillum minus, Molecular testing (PCR/16S"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: A beta-lactam such as penicillin as first-line antimicrobial therapy for both streptobacillary and spirillary disease, with doxycycline or a cephalosporin as alternatives"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Not eliciting a history of rodent exposure, which is key to considering the diagnosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of rat-bite fever."
-  }
- ],
- "tables": [
-  {
-   "id": "rat_bite_fever-matrix",
-   "title": "Rat-bite fever: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Rat-bite fever has two forms: streptobacillary disease (Streptobacillus moniliformis), predominant in the Americas and Europe,",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases / Tropical Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases / Manson's Tropical Diseases",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Rat-bite fever has two forms: streptobacillary disease (Streptobacillus moniliformis), predominant in the Americas and Europe, and spirillary disease (Spirillum minus, 'sodoku'), predominant in Asia",
+      "Acquired from the bite or scratch of rats or other rodents, or by handling them; streptobacillary disease may also be foodborne (Haverhill fever) from contaminated milk or water",
+      "Streptobacillary disease presents abruptly with fever, rigors, myalgia, a maculopapular or petechial rash favouring the extremities including palms and soles, and a migratory polyarthritis",
+      "Spirillary disease has a longer incubation, relapsing fever, induration or ulceration at the healed bite site with regional lymphadenopathy, and a rash, but arthritis is uncommon",
+      "Diagnosis of streptobacillary disease relies on culture of blood or joint fluid (fastidious organism) or molecular methods; Spirillum minus cannot be cultured and is identified by dark-field microscopy of lesion or blood material",
+      "Untreated disease can lead to endocarditis, myocarditis, meningitis, abscesses and septic arthritis, with appreciable mortality",
+      "Penicillin-class antibiotics are the treatment of choice, with alternatives for penicillin allergy and escalation for endocarditis"
     ],
-    [
-     "Key Investigations",
-     "Blood cultures (prolonged incubation for the fastidious organism) and culture of joint aspirate, Dark-field microscopy of blood,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The causative bacteria are commensals of the rodent nasopharynx and are introduced into humans through bites, scratches, handling or ingestion of contaminated food and water. Streptobacillus moniliformis, a fastidious pleomorphic Gram-negative bacillus, disseminates haematogenously to produce systemic febrile illness, immune-mediated rash and a reactive or septic polyarthritis, and can seed heart valves and other sites. Spirillum minus, a spiral organism, causes relapsing fever with characteristic reactivation of the healed inoculation site and regional lymphadenitis. Both can progress to metastatic infection and endovascular involvement if untreated.",
+    "additionalDifferentials": [
+      "Meningococcaemia and other causes of fever with petechial rash",
+      "Disseminated gonococcal infection (fever, rash, arthritis)",
+      "Rocky Mountain spotted fever and other rickettsioses",
+      "Leptospirosis",
+      "Secondary syphilis (rash on palms and soles)",
+      "Reactive or septic arthritis of other cause",
+      "Infective endocarditis from other organisms"
     ],
-    [
-     "Primary Differentials",
-     "Meningococcaemia and other causes of fever with petechial rash, Disseminated gonococcal infection (fever, rash, arthritis), Rocky",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Blood cultures (prolonged incubation for the fastidious organism) and culture of joint aspirate",
+      "Dark-field microscopy of blood, lesion exudate or lymph node aspirate for Spirillum minus",
+      "Molecular testing (PCR/16S sequencing) for Streptobacillus moniliformis",
+      "Full blood count and inflammatory markers",
+      "Echocardiography if endocarditis is suspected",
+      "Joint imaging or aspiration in arthritis, and lumbar puncture if meningitis is suspected"
     ],
-    [
-     "Management Strategy",
-     "A beta-lactam such as penicillin as first-line antimicrobial therapy for both streptobacillary and spirillary disease, with",
-     "Core treatment modality"
+    "redFlags": [
+      "Features of endocarditis, myocarditis or a new murmur",
+      "Meningism or altered consciousness suggesting central nervous system involvement",
+      "Septic arthritis or deep abscess formation",
+      "Haemodynamic instability or sepsis",
+      "Persistent or relapsing fever despite initial treatment"
     ],
-    [
-     "Clinical Pitfall",
-     "Not eliciting a history of rodent exposure, which is key to considering the diagnosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "With prompt antibiotic therapy the prognosis is excellent, but untreated rat-bite fever carries substantial mortality, largely from endocarditis and other metastatic complications.",
+    "pitfalls": [
+      "Not eliciting a history of rodent exposure, which is key to considering the diagnosis",
+      "Discarding blood cultures too early before the fastidious organism grows",
+      "Attempting to culture Spirillum minus, which does not grow on artificial media",
+      "Mistaking the rash and arthritis for meningococcaemia or disseminated gonococcal infection without pursuing exposure history",
+      "Under-treating when endovascular or CNS involvement is present"
+    ],
+    "references": [
+      "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
+      "Manson's Tropical Diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "A beta-lactam such as penicillin as first-line antimicrobial therapy for both streptobacillary and spirillary disease, with doxycycline or a cephalosporin as alternatives",
+      "Prolonged intravenous therapy for endovascular involvement such as endocarditis",
+      "Cleansing and care of the inoculation wound",
+      "Evaluation and management of metastatic complications including septic arthritis, meningitis and abscesses",
+      "Echocardiography and specialist input where endocarditis is suspected",
+      "Advice on rodent-handling precautions and exposure avoidance to prevent re-infection"
     ]
-   ],
-   "caption": "Overview comparison matrix for rat-bite fever."
-  }
- ],
- "diagrams": [
-  {
-   "id": "rat-bite-fever-real-image",
-   "title": "Rat-bite fever: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "rat_bite_fever-pathway",
+      "title": "Rat-bite fever: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Rat-bite fever has two forms: streptobacillary disease (Streptobacillus moniliformis), predominant in the Americas and Europe, and spirillary disease (Spirillum minus, 'sodoku'), predominant in Asia",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Features of endocarditis, myocarditis or a new murmur",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Blood cultures (prolonged incubation for the fastidious organism) and culture of joint aspirate, Dark-field microscopy of blood, lesion exudate or lymph node aspirate for Spirillum minus, Molecular testing (PCR/16S"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: A beta-lactam such as penicillin as first-line antimicrobial therapy for both streptobacillary and spirillary disease, with doxycycline or a cephalosporin as alternatives"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Not eliciting a history of rodent exposure, which is key to considering the diagnosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of rat-bite fever."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "rat_bite_fever-matrix",
+      "title": "Rat-bite fever: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Rat-bite fever has two forms: streptobacillary disease (Streptobacillus moniliformis), predominant in the Americas and Europe,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Blood cultures (prolonged incubation for the fastidious organism) and culture of joint aspirate, Dark-field microscopy of blood,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Meningococcaemia and other causes of fever with petechial rash, Disseminated gonococcal infection (fever, rash, arthritis), Rocky",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "A beta-lactam such as penicillin as first-line antimicrobial therapy for both streptobacillary and spirillary disease, with",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Not eliciting a history of rodent exposure, which is key to considering the diagnosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for rat-bite fever."
+    }
+  ],
+  "diagrams": []
 }

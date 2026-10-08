@@ -1,176 +1,154 @@
 {
- "id": "scarlet_fever",
- "name": "Scarlet fever",
- "aliases": [
-  "scarlatina",
-  "streptococcal scarlet fever",
-  "second disease"
- ],
- "class": "infective",
- "system": "Infectious Diseases",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / WHO",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Results from infection with group A streptococcus strains that produce erythrogenic (pyrogenic) exotoxins, usually complicating streptococcal pharyngitis and occasionally skin infection",
-   "Presents with sore throat, fever, and a diffuse fine erythematous rash with a sandpaper texture that blanches on pressure",
-   "The rash characteristically accentuates in skin folds (Pastia's lines) and spares the perioral area, giving circumoral pallor",
-   "The tongue shows a white coating that peels to reveal a red, swollen surface with prominent papillae described as a strawberry tongue",
-   "Desquamation of the skin, particularly of the fingertips and toes, follows as the rash fades over the ensuing days to weeks",
-   "Diagnosis rests on the clinical picture supported by throat swab culture or rapid antigen testing for group A streptococcus",
-   "Timely antibiotic treatment shortens illness, reduces spread, and lowers the risk of suppurative and non-suppurative complications, with penicillin-class agents as the mainstay"
+  "id": "scarlet_fever",
+  "name": "Scarlet fever",
+  "aliases": [
+    "scarlatina",
+    "streptococcal scarlet fever",
+    "second disease"
   ],
-  "pathophysiology": "Group A Streptococcus (Streptococcus pyogenes) strains lysogenised by bacteriophages produce streptococcal pyrogenic exotoxins. In a host lacking antibody to the relevant toxin, these act as superantigens and toxins that cause the characteristic diffuse erythematous eruption and systemic features. The primary focus is usually the pharynx. Beyond the local infection, immune-mediated sequelae can follow, including acute rheumatic fever and post-streptococcal glomerulonephritis, and unchecked infection can extend to suppurative complications.",
-  "additionalDifferentials": [
-   "Measles",
-   "Rubella",
-   "Kawasaki disease",
-   "Toxic shock syndrome (staphylococcal or streptococcal)",
-   "Drug reaction / hypersensitivity eruption",
-   "Viral exanthems such as erythema infantum or enteroviral rash"
-  ],
-  "infectionMimics": [
-   "Staphylococcal scalded skin / toxic shock syndrome",
-   "Measles",
-   "Kawasaki disease",
-   "Enteroviral exanthem"
-  ],
-  "additionalInvestigations": [
-   "Throat swab for culture and/or rapid antigen detection of group A streptococcus",
-   "Anti-streptolysin O and other streptococcal antibody titres to confirm recent infection when needed",
-   "Urinalysis to screen for post-streptococcal glomerulonephritis in the convalescent phase",
-   "Inflammatory markers and basic bloods if a complicated or invasive infection is suspected"
-  ],
-  "redFlags": [
-   "Features of acute rheumatic fever such as migratory arthritis, carditis, or new murmur developing after the illness",
-   "Signs of post-streptococcal glomerulonephritis including haematuria, oedema, and hypertension",
-   "Suppurative complications such as peritonsillar or retropharyngeal abscess, otitis media, or cervical lymphadenitis",
-   "Rapid deterioration with hypotension and multi-organ involvement suggesting streptococcal toxic shock syndrome or invasive disease"
-  ],
-  "prognosis": "With prompt antibiotic therapy the outlook is excellent and most children recover fully; the main concern with untreated or inadequately treated disease is the risk of rheumatic fever, glomerulonephritis, and suppurative spread.",
-  "pitfalls": [
-   "Missing the diagnosis when the rash is faint or the pharyngitis mild, delaying treatment that prevents complications",
-   "Failing to complete the full antibiotic course, which is important for preventing rheumatic sequelae",
-   "Confusing scarlet fever with Kawasaki disease and overlooking coronary risk in a young child",
-   "Not monitoring for delayed post-streptococcal renal or cardiac complications after apparent recovery"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "WHO guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat with a penicillin such as phenoxymethylpenicillin as first-line antibiotic therapy, using a macrolide for penicillin allergy",
-   "Complete the full antibiotic course to eradicate group A streptococcus and prevent rheumatic fever and suppurative complications",
-   "Provide supportive care with antipyretics, analgesia, and adequate fluid intake",
-   "Exclude the child from school or nursery until an appropriate interval after starting antibiotics to limit spread",
-   "Monitor during convalescence for post-streptococcal glomerulonephritis and features of acute rheumatic fever",
-   "Notify public health authorities and consider treating symptomatic close contacts, particularly during outbreaks"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "scarlet_fever-pathway",
-   "title": "Scarlet fever: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Results from infection with group A streptococcus strains that produce erythrogenic (pyrogenic) exotoxins, usually complicating streptococcal pharyngitis and occasionally skin infection",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Features of acute rheumatic fever such as migratory arthritis, carditis, or new murmur developing after the illness",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Throat swab for culture and/or rapid antigen detection of group A streptococcus, Anti-streptolysin O and other streptococcal antibody titres to confirm recent infection when needed, Urinalysis to screen for"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat with a penicillin such as phenoxymethylpenicillin as first-line antibiotic therapy, using a macrolide for penicillin allergy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing the diagnosis when the rash is faint or the pharyngitis mild, delaying treatment that prevents complications"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of scarlet fever."
-  }
- ],
- "tables": [
-  {
-   "id": "scarlet_fever-matrix",
-   "title": "Scarlet fever: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Results from infection with group A streptococcus strains that produce erythrogenic (pyrogenic) exotoxins, usually complicating",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious Diseases",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / WHO",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Results from infection with group A streptococcus strains that produce erythrogenic (pyrogenic) exotoxins, usually complicating streptococcal pharyngitis and occasionally skin infection",
+      "Presents with sore throat, fever, and a diffuse fine erythematous rash with a sandpaper texture that blanches on pressure",
+      "The rash characteristically accentuates in skin folds (Pastia's lines) and spares the perioral area, giving circumoral pallor",
+      "The tongue shows a white coating that peels to reveal a red, swollen surface with prominent papillae described as a strawberry tongue",
+      "Desquamation of the skin, particularly of the fingertips and toes, follows as the rash fades over the ensuing days to weeks",
+      "Diagnosis rests on the clinical picture supported by throat swab culture or rapid antigen testing for group A streptococcus",
+      "Timely antibiotic treatment shortens illness, reduces spread, and lowers the risk of suppurative and non-suppurative complications, with penicillin-class agents as the mainstay"
     ],
-    [
-     "Key Investigations",
-     "Throat swab for culture and/or rapid antigen detection of group A streptococcus, Anti-streptolysin O and other streptococcal",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Group A Streptococcus (Streptococcus pyogenes) strains lysogenised by bacteriophages produce streptococcal pyrogenic exotoxins. In a host lacking antibody to the relevant toxin, these act as superantigens and toxins that cause the characteristic diffuse erythematous eruption and systemic features. The primary focus is usually the pharynx. Beyond the local infection, immune-mediated sequelae can follow, including acute rheumatic fever and post-streptococcal glomerulonephritis, and unchecked infection can extend to suppurative complications.",
+    "additionalDifferentials": [
+      "Measles",
+      "Rubella",
+      "Kawasaki disease",
+      "Toxic shock syndrome (staphylococcal or streptococcal)",
+      "Drug reaction / hypersensitivity eruption",
+      "Viral exanthems such as erythema infantum or enteroviral rash"
     ],
-    [
-     "Primary Differentials",
-     "Measles, Rubella, Kawasaki disease",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Staphylococcal scalded skin / toxic shock syndrome",
+      "Measles",
+      "Kawasaki disease",
+      "Enteroviral exanthem"
     ],
-    [
-     "Management Strategy",
-     "Treat with a penicillin such as phenoxymethylpenicillin as first-line antibiotic therapy, using a macrolide for penicillin allergy",
-     "Core treatment modality"
+    "additionalInvestigations": [
+      "Throat swab for culture and/or rapid antigen detection of group A streptococcus",
+      "Anti-streptolysin O and other streptococcal antibody titres to confirm recent infection when needed",
+      "Urinalysis to screen for post-streptococcal glomerulonephritis in the convalescent phase",
+      "Inflammatory markers and basic bloods if a complicated or invasive infection is suspected"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing the diagnosis when the rash is faint or the pharyngitis mild, delaying treatment that prevents complications",
-     "Prevent diagnostic or management error"
+    "redFlags": [
+      "Features of acute rheumatic fever such as migratory arthritis, carditis, or new murmur developing after the illness",
+      "Signs of post-streptococcal glomerulonephritis including haematuria, oedema, and hypertension",
+      "Suppurative complications such as peritonsillar or retropharyngeal abscess, otitis media, or cervical lymphadenitis",
+      "Rapid deterioration with hypotension and multi-organ involvement suggesting streptococcal toxic shock syndrome or invasive disease"
+    ],
+    "prognosis": "With prompt antibiotic therapy the outlook is excellent and most children recover fully; the main concern with untreated or inadequately treated disease is the risk of rheumatic fever, glomerulonephritis, and suppurative spread.",
+    "pitfalls": [
+      "Missing the diagnosis when the rash is faint or the pharyngitis mild, delaying treatment that prevents complications",
+      "Failing to complete the full antibiotic course, which is important for preventing rheumatic sequelae",
+      "Confusing scarlet fever with Kawasaki disease and overlooking coronary risk in a young child",
+      "Not monitoring for delayed post-streptococcal renal or cardiac complications after apparent recovery"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "WHO guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat with a penicillin such as phenoxymethylpenicillin as first-line antibiotic therapy, using a macrolide for penicillin allergy",
+      "Complete the full antibiotic course to eradicate group A streptococcus and prevent rheumatic fever and suppurative complications",
+      "Provide supportive care with antipyretics, analgesia, and adequate fluid intake",
+      "Exclude the child from school or nursery until an appropriate interval after starting antibiotics to limit spread",
+      "Monitor during convalescence for post-streptococcal glomerulonephritis and features of acute rheumatic fever",
+      "Notify public health authorities and consider treating symptomatic close contacts, particularly during outbreaks"
     ]
-   ],
-   "caption": "Overview comparison matrix for scarlet fever."
-  }
- ],
- "diagrams": [
-  {
-   "id": "scarlet-fever-real-image",
-   "title": "Scarlet fever: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "scarlet_fever-pathway",
+      "title": "Scarlet fever: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Results from infection with group A streptococcus strains that produce erythrogenic (pyrogenic) exotoxins, usually complicating streptococcal pharyngitis and occasionally skin infection",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Features of acute rheumatic fever such as migratory arthritis, carditis, or new murmur developing after the illness",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Throat swab for culture and/or rapid antigen detection of group A streptococcus, Anti-streptolysin O and other streptococcal antibody titres to confirm recent infection when needed, Urinalysis to screen for"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat with a penicillin such as phenoxymethylpenicillin as first-line antibiotic therapy, using a macrolide for penicillin allergy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing the diagnosis when the rash is faint or the pharyngitis mild, delaying treatment that prevents complications"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of scarlet fever."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "scarlet_fever-matrix",
+      "title": "Scarlet fever: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Results from infection with group A streptococcus strains that produce erythrogenic (pyrogenic) exotoxins, usually complicating",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Throat swab for culture and/or rapid antigen detection of group A streptococcus, Anti-streptolysin O and other streptococcal",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Measles, Rubella, Kawasaki disease",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat with a penicillin such as phenoxymethylpenicillin as first-line antibiotic therapy, using a macrolide for penicillin allergy",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing the diagnosis when the rash is faint or the pharyngitis mild, delaying treatment that prevents complications",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for scarlet fever."
+    }
+  ],
+  "diagrams": []
 }

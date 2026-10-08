@@ -1,177 +1,155 @@
 {
- "id": "cervical_cancer",
- "name": "Cervical Cancer",
- "aliases": [
-  "carcinoma of the cervix",
-  "cervical carcinoma",
-  "cervical malignancy",
-  "invasive cervical cancer"
- ],
- "class": "non_infective",
- "system": "Obstetrics / Gynaecology",
- "specialty": "Obstetrics & Gynaecology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Obstetrics / Novak's Gynecology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Persistent infection with high-risk human papillomavirus, especially types 16 and 18, underlies the great majority of cases and drives progression from precursor lesions to invasive disease",
-   "Squamous cell carcinoma is the commonest histological subtype, followed by adenocarcinoma, which tends to arise higher in the endocervical canal and can be missed on cytology",
-   "Abnormal vaginal bleeding, particularly postcoital or intermenstrual bleeding, together with an offensive or blood-stained discharge, are classic early symptoms",
-   "Diagnosis is confirmed by biopsy of visible lesions or by colposcopically directed biopsy, not by cytology alone",
-   "Staging is clinical and increasingly incorporates imaging, with tumour size, parametrial spread, and nodal involvement determining management",
-   "Early-stage disease may be treated with surgery (radical hysterectomy or fertility-sparing trachelectomy in selected women) while locally advanced disease is managed with concurrent chemoradiation",
-   "Organised cytology and HPV-based screening programmes with prophylactic HPV vaccination markedly reduce incidence and mortality",
-   "Advanced disease may present with pelvic or leg pain, lymphoedema, ureteric obstruction, or fistula formation into the bladder or rectum"
+  "id": "cervical_cancer",
+  "name": "Cervical Cancer",
+  "aliases": [
+    "carcinoma of the cervix",
+    "cervical carcinoma",
+    "cervical malignancy",
+    "invasive cervical cancer"
   ],
-  "pathophysiology": "Oncogenic HPV integrates into the host genome of cervical epithelial cells, and its E6 and E7 oncoproteins inactivate the tumour suppressor proteins p53 and retinoblastoma protein, deregulating the cell cycle and permitting accumulation of genetic damage. Most infections clear spontaneously, but persistent infection produces cervical intraepithelial neoplasia that may progress over years to invasive carcinoma. Invasion typically begins at the transformation zone and extends locally into the cervical stroma, vagina, and parametrium, then to pelvic and para-aortic lymph nodes and distant sites.",
-  "additionalDifferentials": [
-   "Cervical intraepithelial neoplasia (pre-invasive disease)",
-   "Cervical polyp or ectropion",
-   "Cervicitis from infection",
-   "Endometrial carcinoma extending to the cervix",
-   "Vaginal carcinoma",
-   "Metastatic disease involving the cervix"
-  ],
-  "additionalInvestigations": [
-   "Colposcopy with directed biopsy of suspicious areas",
-   "Histopathological examination of biopsy or cone specimen for subtype and depth of invasion",
-   "Pelvic MRI to assess tumour size, parametrial and vaginal extension",
-   "CT or PET-CT to evaluate nodal and distant metastatic disease",
-   "Examination under anaesthesia with cystoscopy and proctoscopy when local invasion is suspected",
-   "Renal function and imaging of the urinary tract to detect ureteric obstruction"
-  ],
-  "redFlags": [
-   "Heavy or uncontrolled vaginal haemorrhage from a friable tumour",
-   "Features of ureteric obstruction with hydronephrosis and renal impairment",
-   "Development of vesicovaginal or rectovaginal fistula",
-   "Signs of pelvic sidewall involvement with leg swelling and neuropathic pain",
-   "Evidence of distant metastatic spread requiring urgent oncology referral"
-  ],
-  "prognosis": "Prognosis depends strongly on stage at diagnosis: disease confined to the cervix carries high cure rates, whereas parametrial extension, nodal involvement, and distant spread substantially reduce survival. Tumour size, histological subtype, and depth of invasion further influence outcome, and screening plus vaccination continue to shift diagnosis toward earlier, more curable stages.",
-  "pitfalls": [
-   "Relying on cytology alone and failing to biopsy a visibly abnormal or friable cervix",
-   "Missing endocervical adenocarcinoma that lies above the reach of routine sampling",
-   "Attributing postcoital or postmenopausal bleeding to benign causes without adequate assessment",
-   "Underestimating local extent without appropriate cross-sectional imaging",
-   "Overlooking renal impairment from silent ureteric obstruction in advanced disease"
-  ],
-  "references": [
-   "Williams Obstetrics",
-   "Novak's Gynecology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat early-stage disease surgically with radical hysterectomy and pelvic lymphadenectomy, or fertility-sparing trachelectomy in selected women, with conisation or simple hysterectomy for microinvasive disease",
-   "Manage locally advanced disease with concurrent chemoradiation using external beam radiotherapy and cisplatin-based chemotherapy, followed by a brachytherapy boost",
-   "Treat metastatic or recurrent disease with platinum-based systemic chemotherapy plus bevacizumab, adding immune checkpoint inhibitors such as pembrolizumab for eligible disease",
-   "Relieve ureteric obstruction with nephrostomy or stenting and manage bleeding, pain and other symptoms",
-   "Plan care through a multidisciplinary gynae-oncology team and provide psychosexual, fertility and menopause support",
-   "Conduct post-treatment surveillance for recurrence and support prevention through HPV vaccination and cervical screening",
-   "Involve palliative care for advanced disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "cervical_cancer-pathway",
-   "title": "Cervical Cancer: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Persistent infection with high-risk human papillomavirus, especially types 16 and 18, underlies the great majority of cases and drives progression from precursor lesions to invasive disease",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Heavy or uncontrolled vaginal haemorrhage from a friable tumour",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Colposcopy with directed biopsy of suspicious areas, Histopathological examination of biopsy or cone specimen for subtype and depth of invasion, Pelvic MRI to assess tumour size, parametrial and vaginal extension"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat early-stage disease surgically with radical hysterectomy and pelvic lymphadenectomy, or fertility-sparing trachelectomy in selected women, with conisation or simple hysterectomy for microinvasive disease"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Relying on cytology alone and failing to biopsy a visibly abnormal or friable cervix"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of cervical cancer."
-  }
- ],
- "tables": [
-  {
-   "id": "cervical_cancer-matrix",
-   "title": "Cervical Cancer: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Persistent infection with high-risk human papillomavirus, especially types 16 and 18, underlies the great majority of cases and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Obstetrics / Gynaecology",
+  "specialty": "Obstetrics & Gynaecology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Obstetrics / Novak's Gynecology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Persistent infection with high-risk human papillomavirus, especially types 16 and 18, underlies the great majority of cases and drives progression from precursor lesions to invasive disease",
+      "Squamous cell carcinoma is the commonest histological subtype, followed by adenocarcinoma, which tends to arise higher in the endocervical canal and can be missed on cytology",
+      "Abnormal vaginal bleeding, particularly postcoital or intermenstrual bleeding, together with an offensive or blood-stained discharge, are classic early symptoms",
+      "Diagnosis is confirmed by biopsy of visible lesions or by colposcopically directed biopsy, not by cytology alone",
+      "Staging is clinical and increasingly incorporates imaging, with tumour size, parametrial spread, and nodal involvement determining management",
+      "Early-stage disease may be treated with surgery (radical hysterectomy or fertility-sparing trachelectomy in selected women) while locally advanced disease is managed with concurrent chemoradiation",
+      "Organised cytology and HPV-based screening programmes with prophylactic HPV vaccination markedly reduce incidence and mortality",
+      "Advanced disease may present with pelvic or leg pain, lymphoedema, ureteric obstruction, or fistula formation into the bladder or rectum"
     ],
-    [
-     "Key Investigations",
-     "Colposcopy with directed biopsy of suspicious areas, Histopathological examination of biopsy or cone specimen for subtype and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Oncogenic HPV integrates into the host genome of cervical epithelial cells, and its E6 and E7 oncoproteins inactivate the tumour suppressor proteins p53 and retinoblastoma protein, deregulating the cell cycle and permitting accumulation of genetic damage. Most infections clear spontaneously, but persistent infection produces cervical intraepithelial neoplasia that may progress over years to invasive carcinoma. Invasion typically begins at the transformation zone and extends locally into the cervical stroma, vagina, and parametrium, then to pelvic and para-aortic lymph nodes and distant sites.",
+    "additionalDifferentials": [
+      "Cervical intraepithelial neoplasia (pre-invasive disease)",
+      "Cervical polyp or ectropion",
+      "Cervicitis from infection",
+      "Endometrial carcinoma extending to the cervix",
+      "Vaginal carcinoma",
+      "Metastatic disease involving the cervix"
     ],
-    [
-     "Primary Differentials",
-     "Cervical intraepithelial neoplasia (pre-invasive disease), Cervical polyp or ectropion, Cervicitis from infection",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Colposcopy with directed biopsy of suspicious areas",
+      "Histopathological examination of biopsy or cone specimen for subtype and depth of invasion",
+      "Pelvic MRI to assess tumour size, parametrial and vaginal extension",
+      "CT or PET-CT to evaluate nodal and distant metastatic disease",
+      "Examination under anaesthesia with cystoscopy and proctoscopy when local invasion is suspected",
+      "Renal function and imaging of the urinary tract to detect ureteric obstruction"
     ],
-    [
-     "Management Strategy",
-     "Treat early-stage disease surgically with radical hysterectomy and pelvic lymphadenectomy, or fertility-sparing trachelectomy in",
-     "Core treatment modality"
+    "redFlags": [
+      "Heavy or uncontrolled vaginal haemorrhage from a friable tumour",
+      "Features of ureteric obstruction with hydronephrosis and renal impairment",
+      "Development of vesicovaginal or rectovaginal fistula",
+      "Signs of pelvic sidewall involvement with leg swelling and neuropathic pain",
+      "Evidence of distant metastatic spread requiring urgent oncology referral"
     ],
-    [
-     "Clinical Pitfall",
-     "Relying on cytology alone and failing to biopsy a visibly abnormal or friable cervix",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends strongly on stage at diagnosis: disease confined to the cervix carries high cure rates, whereas parametrial extension, nodal involvement, and distant spread substantially reduce survival. Tumour size, histological subtype, and depth of invasion further influence outcome, and screening plus vaccination continue to shift diagnosis toward earlier, more curable stages.",
+    "pitfalls": [
+      "Relying on cytology alone and failing to biopsy a visibly abnormal or friable cervix",
+      "Missing endocervical adenocarcinoma that lies above the reach of routine sampling",
+      "Attributing postcoital or postmenopausal bleeding to benign causes without adequate assessment",
+      "Underestimating local extent without appropriate cross-sectional imaging",
+      "Overlooking renal impairment from silent ureteric obstruction in advanced disease"
+    ],
+    "references": [
+      "Williams Obstetrics",
+      "Novak's Gynecology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat early-stage disease surgically with radical hysterectomy and pelvic lymphadenectomy, or fertility-sparing trachelectomy in selected women, with conisation or simple hysterectomy for microinvasive disease",
+      "Manage locally advanced disease with concurrent chemoradiation using external beam radiotherapy and cisplatin-based chemotherapy, followed by a brachytherapy boost",
+      "Treat metastatic or recurrent disease with platinum-based systemic chemotherapy plus bevacizumab, adding immune checkpoint inhibitors such as pembrolizumab for eligible disease",
+      "Relieve ureteric obstruction with nephrostomy or stenting and manage bleeding, pain and other symptoms",
+      "Plan care through a multidisciplinary gynae-oncology team and provide psychosexual, fertility and menopause support",
+      "Conduct post-treatment surveillance for recurrence and support prevention through HPV vaccination and cervical screening",
+      "Involve palliative care for advanced disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for cervical cancer."
-  }
- ],
- "diagrams": [
-  {
-   "id": "cervical-cancer-real-image",
-   "title": "Cervical Cancer: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "cervical_cancer-pathway",
+      "title": "Cervical Cancer: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Persistent infection with high-risk human papillomavirus, especially types 16 and 18, underlies the great majority of cases and drives progression from precursor lesions to invasive disease",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Heavy or uncontrolled vaginal haemorrhage from a friable tumour",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Colposcopy with directed biopsy of suspicious areas, Histopathological examination of biopsy or cone specimen for subtype and depth of invasion, Pelvic MRI to assess tumour size, parametrial and vaginal extension"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat early-stage disease surgically with radical hysterectomy and pelvic lymphadenectomy, or fertility-sparing trachelectomy in selected women, with conisation or simple hysterectomy for microinvasive disease"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Relying on cytology alone and failing to biopsy a visibly abnormal or friable cervix"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of cervical cancer."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "cervical_cancer-matrix",
+      "title": "Cervical Cancer: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Persistent infection with high-risk human papillomavirus, especially types 16 and 18, underlies the great majority of cases and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Colposcopy with directed biopsy of suspicious areas, Histopathological examination of biopsy or cone specimen for subtype and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Cervical intraepithelial neoplasia (pre-invasive disease), Cervical polyp or ectropion, Cervicitis from infection",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat early-stage disease surgically with radical hysterectomy and pelvic lymphadenectomy, or fertility-sparing trachelectomy in",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Relying on cytology alone and failing to biopsy a visibly abnormal or friable cervix",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for cervical cancer."
+    }
+  ],
+  "diagrams": []
 }

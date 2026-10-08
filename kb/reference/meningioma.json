@@ -1,171 +1,149 @@
 {
- "id": "meningioma",
- "name": "Meningioma",
- "aliases": [
-  "meningeal tumour",
-  "dural-based tumour"
- ],
- "class": "non_infective",
- "system": "Neurosurgery / Neurology",
- "specialty": "Neurosurgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Youmans & Winn Neurological Surgery / Harrison's Principles of Internal Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Meningiomas are the most common primary intracranial tumours and are usually slow-growing and benign, arising from the meningeal covering of the brain and spinal cord",
-   "Many are asymptomatic and discovered incidentally on imaging performed for other reasons",
-   "When symptomatic, features depend on location and result from gradual compression, producing focal deficits, seizures, or symptoms of raised intracranial pressure",
-   "They are more common in women and their growth can be influenced by hormonal factors; some carry hormone receptors",
-   "On imaging they are typically well-defined, extra-axial, dural-based, avidly and homogeneously enhancing masses, often with a dural tail and sometimes adjacent bony change",
-   "Small asymptomatic meningiomas are frequently managed by surveillance imaging, reserving intervention for growth or symptoms",
-   "Symptomatic or enlarging tumours are usually treated by surgical resection, with radiotherapy or radiosurgery for residual, recurrent, higher-grade, or surgically inaccessible lesions",
-   "Although most are low grade, a minority are atypical or malignant with a greater tendency to recur, so histological grading guides follow-up"
+  "id": "meningioma",
+  "name": "Meningioma",
+  "aliases": [
+    "meningeal tumour",
+    "dural-based tumour"
   ],
-  "pathophysiology": "Meningiomas arise from meningothelial (arachnoid cap) cells of the meninges and are therefore extra-axial, growing outside the brain parenchyma and compressing it from the surface. They are typically slow-growing and attached to the dura, and their growth can distort adjacent brain, cranial nerves, and vessels, provoke surrounding oedema, and erode or hyperostose overlying bone. Symptoms arise from mass effect at the specific location rather than infiltration. Most are histologically low grade, but atypical and anaplastic variants show more aggressive behaviour and higher recurrence rates. Prior cranial irradiation and certain genetic conditions increase risk.",
-  "additionalDifferentials": [
-   "Dural metastasis",
-   "Solitary fibrous tumour / haemangiopericytoma",
-   "Schwannoma (at skull base sites)",
-   "Dural-based lymphoma or granulomatous disease",
-   "Extra-axial abscess or empyema"
-  ],
-  "additionalInvestigations": [
-   "MRI brain or spine with contrast to characterise the extra-axial dural-based mass and dural tail",
-   "CT to assess associated hyperostosis, calcification, or bony erosion",
-   "Serial imaging to monitor growth of incidental or conservatively managed lesions",
-   "Histopathology and grading after biopsy or resection",
-   "Vascular imaging when preoperative embolisation of a highly vascular tumour is considered"
-  ],
-  "redFlags": [
-   "Rapid growth or atypical imaging features suggesting a higher-grade tumour",
-   "Progressive neurological deficit, new seizures, or cranial nerve compromise",
-   "Signs of raised intracranial pressure from a large lesion with oedema and mass effect",
-   "Acute deterioration from peritumoural oedema or, rarely, haemorrhage"
-  ],
-  "prognosis": "Most meningiomas are benign and, when completely resected, have an excellent prognosis with low recurrence; incompletely removed, atypical, or malignant tumours recur more often and may need adjuvant radiotherapy and closer surveillance.",
-  "pitfalls": [
-   "Assuming every dural-based enhancing mass is a benign meningioma without considering metastasis or other lesions",
-   "Over-treating small, stable, asymptomatic incidental tumours",
-   "Underestimating the recurrence risk of atypical or malignant subtypes",
-   "Overlooking peritumoural oedema as a treatable cause of symptoms"
-  ],
-  "references": [
-   "Youmans & Winn Neurological Surgery",
-   "Harrison's Principles of Internal Medicine, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Active surveillance with serial contrast MRI for small, asymptomatic, incidentally found tumours",
-   "Maximal safe surgical resection as the mainstay for symptomatic or enlarging lesions, aiming for complete removal of tumour and dural attachment",
-   "Stereotactic radiosurgery or fractionated radiotherapy for residual, recurrent, atypical or anaplastic tumours and surgically inaccessible sites",
-   "Corticosteroids to control symptomatic peritumoural oedema and antiseizure medication for tumour-related seizures",
-   "Preoperative embolisation of highly vascular tumours to reduce operative haemorrhage",
-   "Histological grading to guide the need for adjuvant radiotherapy and the intensity of follow-up",
-   "Neuro-oncology multidisciplinary management with long-term surveillance imaging for recurrence"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "meningioma-pathway",
-   "title": "Meningioma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Meningiomas are the most common primary intracranial tumours and are usually slow-growing and benign, arising from the meningeal covering of the brain and spinal cord",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid growth or atypical imaging features suggesting a higher-grade tumour",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI brain or spine with contrast to characterise the extra-axial dural-based mass and dural tail, CT to assess associated hyperostosis, calcification, or bony erosion, Serial imaging to monitor growth of incidental or"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Active surveillance with serial contrast MRI for small, asymptomatic, incidentally found tumours"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming every dural-based enhancing mass is a benign meningioma without considering metastasis or other lesions"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of meningioma."
-  }
- ],
- "tables": [
-  {
-   "id": "meningioma-matrix",
-   "title": "Meningioma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Meningiomas are the most common primary intracranial tumours and are usually slow-growing and benign, arising from the meningeal",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neurosurgery / Neurology",
+  "specialty": "Neurosurgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Youmans & Winn Neurological Surgery / Harrison's Principles of Internal Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Meningiomas are the most common primary intracranial tumours and are usually slow-growing and benign, arising from the meningeal covering of the brain and spinal cord",
+      "Many are asymptomatic and discovered incidentally on imaging performed for other reasons",
+      "When symptomatic, features depend on location and result from gradual compression, producing focal deficits, seizures, or symptoms of raised intracranial pressure",
+      "They are more common in women and their growth can be influenced by hormonal factors; some carry hormone receptors",
+      "On imaging they are typically well-defined, extra-axial, dural-based, avidly and homogeneously enhancing masses, often with a dural tail and sometimes adjacent bony change",
+      "Small asymptomatic meningiomas are frequently managed by surveillance imaging, reserving intervention for growth or symptoms",
+      "Symptomatic or enlarging tumours are usually treated by surgical resection, with radiotherapy or radiosurgery for residual, recurrent, higher-grade, or surgically inaccessible lesions",
+      "Although most are low grade, a minority are atypical or malignant with a greater tendency to recur, so histological grading guides follow-up"
     ],
-    [
-     "Key Investigations",
-     "MRI brain or spine with contrast to characterise the extra-axial dural-based mass and dural tail, CT to assess associated",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Meningiomas arise from meningothelial (arachnoid cap) cells of the meninges and are therefore extra-axial, growing outside the brain parenchyma and compressing it from the surface. They are typically slow-growing and attached to the dura, and their growth can distort adjacent brain, cranial nerves, and vessels, provoke surrounding oedema, and erode or hyperostose overlying bone. Symptoms arise from mass effect at the specific location rather than infiltration. Most are histologically low grade, but atypical and anaplastic variants show more aggressive behaviour and higher recurrence rates. Prior cranial irradiation and certain genetic conditions increase risk.",
+    "additionalDifferentials": [
+      "Dural metastasis",
+      "Solitary fibrous tumour / haemangiopericytoma",
+      "Schwannoma (at skull base sites)",
+      "Dural-based lymphoma or granulomatous disease",
+      "Extra-axial abscess or empyema"
     ],
-    [
-     "Primary Differentials",
-     "Dural metastasis, Solitary fibrous tumour / haemangiopericytoma, Schwannoma (at skull base sites)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI brain or spine with contrast to characterise the extra-axial dural-based mass and dural tail",
+      "CT to assess associated hyperostosis, calcification, or bony erosion",
+      "Serial imaging to monitor growth of incidental or conservatively managed lesions",
+      "Histopathology and grading after biopsy or resection",
+      "Vascular imaging when preoperative embolisation of a highly vascular tumour is considered"
     ],
-    [
-     "Management Strategy",
-     "Active surveillance with serial contrast MRI for small, asymptomatic, incidentally found tumours",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid growth or atypical imaging features suggesting a higher-grade tumour",
+      "Progressive neurological deficit, new seizures, or cranial nerve compromise",
+      "Signs of raised intracranial pressure from a large lesion with oedema and mass effect",
+      "Acute deterioration from peritumoural oedema or, rarely, haemorrhage"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming every dural-based enhancing mass is a benign meningioma without considering metastasis or other lesions",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most meningiomas are benign and, when completely resected, have an excellent prognosis with low recurrence; incompletely removed, atypical, or malignant tumours recur more often and may need adjuvant radiotherapy and closer surveillance.",
+    "pitfalls": [
+      "Assuming every dural-based enhancing mass is a benign meningioma without considering metastasis or other lesions",
+      "Over-treating small, stable, asymptomatic incidental tumours",
+      "Underestimating the recurrence risk of atypical or malignant subtypes",
+      "Overlooking peritumoural oedema as a treatable cause of symptoms"
+    ],
+    "references": [
+      "Youmans & Winn Neurological Surgery",
+      "Harrison's Principles of Internal Medicine, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Active surveillance with serial contrast MRI for small, asymptomatic, incidentally found tumours",
+      "Maximal safe surgical resection as the mainstay for symptomatic or enlarging lesions, aiming for complete removal of tumour and dural attachment",
+      "Stereotactic radiosurgery or fractionated radiotherapy for residual, recurrent, atypical or anaplastic tumours and surgically inaccessible sites",
+      "Corticosteroids to control symptomatic peritumoural oedema and antiseizure medication for tumour-related seizures",
+      "Preoperative embolisation of highly vascular tumours to reduce operative haemorrhage",
+      "Histological grading to guide the need for adjuvant radiotherapy and the intensity of follow-up",
+      "Neuro-oncology multidisciplinary management with long-term surveillance imaging for recurrence"
     ]
-   ],
-   "caption": "Overview comparison matrix for meningioma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "meningioma-real-image",
-   "title": "Meningioma: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "meningioma-pathway",
+      "title": "Meningioma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Meningiomas are the most common primary intracranial tumours and are usually slow-growing and benign, arising from the meningeal covering of the brain and spinal cord",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid growth or atypical imaging features suggesting a higher-grade tumour",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI brain or spine with contrast to characterise the extra-axial dural-based mass and dural tail, CT to assess associated hyperostosis, calcification, or bony erosion, Serial imaging to monitor growth of incidental or"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Active surveillance with serial contrast MRI for small, asymptomatic, incidentally found tumours"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming every dural-based enhancing mass is a benign meningioma without considering metastasis or other lesions"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of meningioma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "meningioma-matrix",
+      "title": "Meningioma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Meningiomas are the most common primary intracranial tumours and are usually slow-growing and benign, arising from the meningeal",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI brain or spine with contrast to characterise the extra-axial dural-based mass and dural tail, CT to assess associated",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Dural metastasis, Solitary fibrous tumour / haemangiopericytoma, Schwannoma (at skull base sites)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Active surveillance with serial contrast MRI for small, asymptomatic, incidentally found tumours",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming every dural-based enhancing mass is a benign meningioma without considering metastasis or other lesions",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for meningioma."
+    }
+  ],
+  "diagrams": []
 }

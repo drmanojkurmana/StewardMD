@@ -1,175 +1,153 @@
 {
- "id": "metabolic_alkalosis",
- "name": "Metabolic alkalosis",
- "aliases": [
-  "metabolic alkalaemia",
-  "chloride-responsive alkalosis",
-  "chloride-resistant alkalosis"
- ],
- "class": "non_infective",
- "system": "Renal",
- "specialty": "Nephrology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / KDIGO",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Metabolic alkalosis is a primary rise in serum bicarbonate with a compensatory increase in carbon dioxide from reduced ventilation",
-   "Understanding it requires separating the process that generates the alkalosis from the factors that allow the kidney to maintain it",
-   "Urine chloride is the single most useful test for classification, dividing cases into chloride-responsive (low urine chloride) and chloride-resistant (high urine chloride) forms",
-   "Chloride-responsive alkalosis, from vomiting, nasogastric suction, or diuretics, is accompanied by volume and chloride depletion and corrects with saline and potassium repletion",
-   "Chloride-resistant alkalosis reflects mineralocorticoid excess or severe potassium depletion and does not respond to saline, so the underlying disorder must be treated",
-   "Hypokalaemia both contributes to and is worsened by alkalosis, and the two often need correcting together",
-   "Maintenance of the alkalosis depends on factors such as volume contraction, chloride depletion, potassium depletion, and mineralocorticoid activity that impair renal bicarbonate excretion",
-   "Severe alkalaemia can cause neuromuscular irritability, arrhythmias, and reduced tissue oxygen delivery, and may need more aggressive correction"
+  "id": "metabolic_alkalosis",
+  "name": "Metabolic alkalosis",
+  "aliases": [
+    "metabolic alkalaemia",
+    "chloride-responsive alkalosis",
+    "chloride-resistant alkalosis"
   ],
-  "pathophysiology": "Metabolic alkalosis arises when there is a net gain of bicarbonate or a loss of hydrogen ions, but its persistence depends on the kidney's inability to excrete the excess bicarbonate. Normally the kidney can excrete a large bicarbonate load rapidly, so an alkalosis is only sustained when a maintenance factor is present. Generation occurs through loss of acid from the upper gastrointestinal tract or the kidney, or from a gain of alkali. Maintenance results from conditions that increase renal bicarbonate reabsorption, including reduced effective circulating volume, chloride depletion, potassium depletion, and excess mineralocorticoid activity, all of which enhance sodium and bicarbonate reabsorption and hydrogen secretion. In chloride-responsive states, volume and chloride depletion drive the maintenance and are corrected by saline; in chloride-resistant states, ongoing mineralocorticoid excess or profound potassium loss sustains the alkalosis despite adequate volume.",
-  "additionalDifferentials": [
-   "Vomiting or nasogastric suction",
-   "Diuretic therapy",
-   "Primary hyperaldosteronism and other mineralocorticoid excess states",
-   "Cushing syndrome",
-   "Bartter and Gitelman syndromes",
-   "Milk-alkali syndrome or excessive alkali administration",
-   "Severe potassium or magnesium depletion"
-  ],
-  "additionalInvestigations": [
-   "Arterial or venous blood gas with serum bicarbonate to confirm the primary alkalosis and assess compensation",
-   "Serum electrolytes including potassium, chloride, and magnesium",
-   "Urine chloride to classify chloride-responsive versus chloride-resistant disease",
-   "Assessment of volume status and blood pressure",
-   "Plasma renin and aldosterone when a mineralocorticoid cause is suspected",
-   "Review of medications and history for vomiting, diuretic, or laxative use"
-  ],
-  "redFlags": [
-   "Severe alkalaemia causing tetany, seizures, or cardiac arrhythmia",
-   "Profound hypokalaemia with muscle weakness or arrhythmia risk",
-   "Marked volume depletion with haemodynamic compromise",
-   "Hypertension with hypokalaemic alkalosis suggesting mineralocorticoid excess"
-  ],
-  "prognosis": "Most cases resolve readily once the generating cause is removed and the maintenance factors (volume, chloride, and potassium depletion) are corrected. Chloride-resistant forms require treatment of the underlying disorder and may persist otherwise. Severe alkalaemia is dangerous but usually reversible with appropriate management, and overall outcome is governed by the underlying condition.",
-  "pitfalls": [
-   "Giving saline to a chloride-resistant alkalosis that will not respond",
-   "Failing to measure urine chloride and thereby misclassifying the disorder",
-   "Neglecting concurrent potassium and magnesium deficits that perpetuate the alkalosis",
-   "Overlooking surreptitious vomiting or diuretic use as the underlying cause"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "KDIGO guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Identify and remove the generating cause, stopping loop or thiazide diuretics and controlling vomiting or nasogastric losses with antiemetics and acid-suppression",
-   "Correct chloride-responsive disease by restoring volume and chloride with sodium chloride solution alongside potassium chloride repletion",
-   "Replace potassium and magnesium, as hypokalaemia both drives and worsens the alkalosis",
-   "Treat chloride-resistant disease by addressing the underlying mineralocorticoid excess, using an aldosterone antagonist or definitive management of an adrenal source",
-   "Use the carbonic anhydrase inhibitor acetazolamide in selected volume-overloaded patients in whom saline loading is undesirable",
-   "Reserve haemodialysis or dilute hydrochloric acid infusion for severe alkalaemia with renal impairment unresponsive to other measures",
-   "Monitor blood gases and electrolytes, watching for arrhythmia and compensatory hypoventilation"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "metabolic_alkalosis-pathway",
-   "title": "Metabolic alkalosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Metabolic alkalosis is a primary rise in serum bicarbonate with a compensatory increase in carbon dioxide from reduced ventilation",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe alkalaemia causing tetany, seizures, or cardiac arrhythmia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Arterial or venous blood gas with serum bicarbonate to confirm the primary alkalosis and assess compensation, Serum electrolytes including potassium, chloride, and magnesium, Urine chloride to classify chloride-responsive"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Identify and remove the generating cause, stopping loop or thiazide diuretics and controlling vomiting or nasogastric losses with antiemetics and acid-suppression"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Giving saline to a chloride-resistant alkalosis that will not respond"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of metabolic alkalosis."
-  }
- ],
- "tables": [
-  {
-   "id": "metabolic_alkalosis-matrix",
-   "title": "Metabolic alkalosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Metabolic alkalosis is a primary rise in serum bicarbonate with a compensatory increase in carbon dioxide from reduced ventilation",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Renal",
+  "specialty": "Nephrology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / KDIGO",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Metabolic alkalosis is a primary rise in serum bicarbonate with a compensatory increase in carbon dioxide from reduced ventilation",
+      "Understanding it requires separating the process that generates the alkalosis from the factors that allow the kidney to maintain it",
+      "Urine chloride is the single most useful test for classification, dividing cases into chloride-responsive (low urine chloride) and chloride-resistant (high urine chloride) forms",
+      "Chloride-responsive alkalosis, from vomiting, nasogastric suction, or diuretics, is accompanied by volume and chloride depletion and corrects with saline and potassium repletion",
+      "Chloride-resistant alkalosis reflects mineralocorticoid excess or severe potassium depletion and does not respond to saline, so the underlying disorder must be treated",
+      "Hypokalaemia both contributes to and is worsened by alkalosis, and the two often need correcting together",
+      "Maintenance of the alkalosis depends on factors such as volume contraction, chloride depletion, potassium depletion, and mineralocorticoid activity that impair renal bicarbonate excretion",
+      "Severe alkalaemia can cause neuromuscular irritability, arrhythmias, and reduced tissue oxygen delivery, and may need more aggressive correction"
     ],
-    [
-     "Key Investigations",
-     "Arterial or venous blood gas with serum bicarbonate to confirm the primary alkalosis and assess compensation, Serum electrolytes",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Metabolic alkalosis arises when there is a net gain of bicarbonate or a loss of hydrogen ions, but its persistence depends on the kidney's inability to excrete the excess bicarbonate. Normally the kidney can excrete a large bicarbonate load rapidly, so an alkalosis is only sustained when a maintenance factor is present. Generation occurs through loss of acid from the upper gastrointestinal tract or the kidney, or from a gain of alkali. Maintenance results from conditions that increase renal bicarbonate reabsorption, including reduced effective circulating volume, chloride depletion, potassium depletion, and excess mineralocorticoid activity, all of which enhance sodium and bicarbonate reabsorption and hydrogen secretion. In chloride-responsive states, volume and chloride depletion drive the maintenance and are corrected by saline; in chloride-resistant states, ongoing mineralocorticoid excess or profound potassium loss sustains the alkalosis despite adequate volume.",
+    "additionalDifferentials": [
+      "Vomiting or nasogastric suction",
+      "Diuretic therapy",
+      "Primary hyperaldosteronism and other mineralocorticoid excess states",
+      "Cushing syndrome",
+      "Bartter and Gitelman syndromes",
+      "Milk-alkali syndrome or excessive alkali administration",
+      "Severe potassium or magnesium depletion"
     ],
-    [
-     "Primary Differentials",
-     "Vomiting or nasogastric suction, Diuretic therapy, Primary hyperaldosteronism and other mineralocorticoid excess states",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Arterial or venous blood gas with serum bicarbonate to confirm the primary alkalosis and assess compensation",
+      "Serum electrolytes including potassium, chloride, and magnesium",
+      "Urine chloride to classify chloride-responsive versus chloride-resistant disease",
+      "Assessment of volume status and blood pressure",
+      "Plasma renin and aldosterone when a mineralocorticoid cause is suspected",
+      "Review of medications and history for vomiting, diuretic, or laxative use"
     ],
-    [
-     "Management Strategy",
-     "Identify and remove the generating cause, stopping loop or thiazide diuretics and controlling vomiting or nasogastric losses with",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe alkalaemia causing tetany, seizures, or cardiac arrhythmia",
+      "Profound hypokalaemia with muscle weakness or arrhythmia risk",
+      "Marked volume depletion with haemodynamic compromise",
+      "Hypertension with hypokalaemic alkalosis suggesting mineralocorticoid excess"
     ],
-    [
-     "Clinical Pitfall",
-     "Giving saline to a chloride-resistant alkalosis that will not respond",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most cases resolve readily once the generating cause is removed and the maintenance factors (volume, chloride, and potassium depletion) are corrected. Chloride-resistant forms require treatment of the underlying disorder and may persist otherwise. Severe alkalaemia is dangerous but usually reversible with appropriate management, and overall outcome is governed by the underlying condition.",
+    "pitfalls": [
+      "Giving saline to a chloride-resistant alkalosis that will not respond",
+      "Failing to measure urine chloride and thereby misclassifying the disorder",
+      "Neglecting concurrent potassium and magnesium deficits that perpetuate the alkalosis",
+      "Overlooking surreptitious vomiting or diuretic use as the underlying cause"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "KDIGO guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Identify and remove the generating cause, stopping loop or thiazide diuretics and controlling vomiting or nasogastric losses with antiemetics and acid-suppression",
+      "Correct chloride-responsive disease by restoring volume and chloride with sodium chloride solution alongside potassium chloride repletion",
+      "Replace potassium and magnesium, as hypokalaemia both drives and worsens the alkalosis",
+      "Treat chloride-resistant disease by addressing the underlying mineralocorticoid excess, using an aldosterone antagonist or definitive management of an adrenal source",
+      "Use the carbonic anhydrase inhibitor acetazolamide in selected volume-overloaded patients in whom saline loading is undesirable",
+      "Reserve haemodialysis or dilute hydrochloric acid infusion for severe alkalaemia with renal impairment unresponsive to other measures",
+      "Monitor blood gases and electrolytes, watching for arrhythmia and compensatory hypoventilation"
     ]
-   ],
-   "caption": "Overview comparison matrix for metabolic alkalosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "metabolic-alkalosis-real-image",
-   "title": "Metabolic alkalosis: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "metabolic_alkalosis-pathway",
+      "title": "Metabolic alkalosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Metabolic alkalosis is a primary rise in serum bicarbonate with a compensatory increase in carbon dioxide from reduced ventilation",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe alkalaemia causing tetany, seizures, or cardiac arrhythmia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Arterial or venous blood gas with serum bicarbonate to confirm the primary alkalosis and assess compensation, Serum electrolytes including potassium, chloride, and magnesium, Urine chloride to classify chloride-responsive"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Identify and remove the generating cause, stopping loop or thiazide diuretics and controlling vomiting or nasogastric losses with antiemetics and acid-suppression"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Giving saline to a chloride-resistant alkalosis that will not respond"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of metabolic alkalosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "metabolic_alkalosis-matrix",
+      "title": "Metabolic alkalosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Metabolic alkalosis is a primary rise in serum bicarbonate with a compensatory increase in carbon dioxide from reduced ventilation",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Arterial or venous blood gas with serum bicarbonate to confirm the primary alkalosis and assess compensation, Serum electrolytes",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Vomiting or nasogastric suction, Diuretic therapy, Primary hyperaldosteronism and other mineralocorticoid excess states",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Identify and remove the generating cause, stopping loop or thiazide diuretics and controlling vomiting or nasogastric losses with",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Giving saline to a chloride-resistant alkalosis that will not respond",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for metabolic alkalosis."
+    }
+  ],
+  "diagrams": []
 }

@@ -1,177 +1,155 @@
 {
- "id": "aplastic_anemia",
- "name": "Aplastic anaemia",
- "aliases": [
-  "AA",
-  "acquired aplastic anaemia",
-  "aplastic anaemia",
-  "aplastic anemia",
-  "bone marrow aplasia",
-  "hypoplastic anaemia"
- ],
- "class": "non_infective",
- "system": "Haematology",
- "specialty": "Haematology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine",
-  "sourceEdition": "22e",
-  "pages": null,
-  "clinicalPearls": [
-   "Defined by pancytopenia with a hypocellular bone marrow in the absence of abnormal infiltrating cells or fibrosis, reflecting failure of the haematopoietic stem cell compartment",
-   "Presentation reflects the affected lineages: fatigue and breathlessness from anaemia, mucocutaneous bleeding and petechiae from thrombocytopenia, and infections from neutropenia",
-   "Most cases are acquired and immune-mediated, with T-cell attack on stem cells; drugs, chemicals (e.g. benzene), viral hepatitis (seronegative), and radiation are recognised triggers",
-   "Inherited causes such as Fanconi anaemia and dyskeratosis congenita should be considered in younger patients or those with characteristic physical or family features",
-   "Severity is graded by degree of neutropenia, reticulocytopenia, and thrombocytopenia; very severe disease carries the highest risk of early death from infection or haemorrhage",
-   "Definitive management is either allogeneic stem cell transplant (favoured in younger patients with a matched sibling donor) or immunosuppressive therapy combining antithymocyte globulin and a calcineurin inhibitor",
-   "A thrombopoietin receptor agonist can augment haematopoietic recovery when added to immunosuppression",
-   "Overlap exists with paroxysmal nocturnal haemoglobinuria and hypoplastic myelodysplasia, so flow cytometry for PNH clones and marrow cytogenetics are important at diagnosis"
+  "id": "aplastic_anemia",
+  "name": "Aplastic anaemia",
+  "aliases": [
+    "AA",
+    "acquired aplastic anaemia",
+    "aplastic anaemia",
+    "aplastic anemia",
+    "bone marrow aplasia",
+    "hypoplastic anaemia"
   ],
-  "pathophysiology": "Aplastic anaemia results from destruction or profound suppression of pluripotent haematopoietic stem cells, leaving an empty (hypocellular) marrow and peripheral pancytopenia. In most acquired cases the mechanism is autoimmune: activated cytotoxic T lymphocytes and their cytokines (interferon-gamma, tumour necrosis factor) drive stem cell apoptosis. Environmental exposures, certain drugs, and viral illness can initiate this immune attack, while inherited marrow failure syndromes reflect defects in DNA repair or telomere maintenance that exhaust the stem cell pool. Clonal disorders such as PNH and MDS can emerge from a damaged marrow because surviving abnormal clones gain a survival advantage.",
-  "additionalDifferentials": [
-   "Hypoplastic myelodysplastic syndrome",
-   "Paroxysmal nocturnal haemoglobinuria",
-   "Acute leukaemia (particularly hypocellular presentations)",
-   "Marrow infiltration or fibrosis causing pancytopenia",
-   "Severe megaloblastic anaemia (B12 or folate deficiency)",
-   "Overwhelming infection or hypersplenism causing peripheral cytopenias"
-  ],
-  "additionalInvestigations": [
-   "Full blood count with reticulocyte count and blood film to confirm pancytopenia and exclude abnormal cells",
-   "Bone marrow aspirate and trephine biopsy to demonstrate hypocellularity and exclude infiltration or dysplasia",
-   "Cytogenetic and molecular studies to differentiate from myelodysplasia",
-   "Peripheral blood flow cytometry for a PNH clone",
-   "Chromosomal fragility testing and telomere length in suspected inherited syndromes",
-   "Viral serology (including hepatitis) and screening for autoimmune disease"
-  ],
-  "redFlags": [
-   "Severe neutropenia with fever, indicating potentially fatal sepsis requiring urgent broad-spectrum antibiotics",
-   "Profound thrombocytopenia with mucosal bleeding or signs of intracranial haemorrhage",
-   "Rapidly falling counts defining very severe aplastic anaemia and the need for prompt referral to a transplant centre",
-   "Emergence of dysplastic or cytogenetic abnormalities suggesting clonal evolution to MDS or leukaemia"
-  ],
-  "prognosis": "Untreated severe aplastic anaemia is frequently fatal from infection or bleeding, but outcomes have transformed with early allogeneic transplantation and effective immunosuppression; younger patients with matched sibling donors have high survival, while older patients rely on immunosuppressive therapy with a meaningful risk of relapse and late clonal disease.",
-  "pitfalls": [
-   "Attributing pancytopenia to a peripheral cause and omitting a marrow biopsy that would reveal hypocellularity",
-   "Overlooking a coexisting PNH clone or evolving myelodysplasia",
-   "Delaying HLA typing and transplant referral in young patients with severe disease",
-   "Failing to recognise an inherited marrow failure syndrome, which changes treatment and family counselling",
-   "Giving platelet or red cell transfusions without irradiation or leucodepletion in a potential transplant candidate"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat definitively with allogeneic stem cell transplantation, favoured in younger patients with a matched sibling donor",
-   "Where transplant is not appropriate, use immunosuppressive therapy combining antithymocyte globulin with a calcineurin inhibitor such as ciclosporin, adding eltrombopag to augment marrow recovery",
-   "Provide supportive care with irradiated, leucodepleted red cell and platelet transfusions, minimising exposure to preserve future transplant options",
-   "Manage the infection risk from neutropenia with prompt broad-spectrum antibiotics for febrile episodes and antimicrobial prophylaxis",
-   "Withdraw implicated drugs and remove toxin exposure such as benzene, and treat seronegative hepatitis-associated disease",
-   "Test for a paroxysmal nocturnal haemoglobinuria clone and for inherited syndromes (Fanconi anaemia, dyskeratosis congenita) with fragility and telomere studies, guiding treatment and family counselling",
-   "Grade severity by blood counts and marrow cellularity to prioritise urgency, and monitor for clonal evolution"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "aplastic_anemia-pathway",
-   "title": "Aplastic anaemia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Defined by pancytopenia with a hypocellular bone marrow in the absence of abnormal infiltrating cells or fibrosis, reflecting failure of the haematopoietic stem cell compartment",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe neutropenia with fever, indicating potentially fatal sepsis requiring urgent broad-spectrum antibiotics",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full blood count with reticulocyte count and blood film to confirm pancytopenia and exclude abnormal cells, Bone marrow aspirate and trephine biopsy to demonstrate hypocellularity and exclude infiltration or dysplasia,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat definitively with allogeneic stem cell transplantation, favoured in younger patients with a matched sibling donor"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing pancytopenia to a peripheral cause and omitting a marrow biopsy that would reveal hypocellularity"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of aplastic anaemia."
-  }
- ],
- "tables": [
-  {
-   "id": "aplastic_anemia-matrix",
-   "title": "Aplastic anaemia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Defined by pancytopenia with a hypocellular bone marrow in the absence of abnormal infiltrating cells or fibrosis, reflecting",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematology",
+  "specialty": "Haematology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine",
+    "sourceEdition": "22e",
+    "pages": null,
+    "clinicalPearls": [
+      "Defined by pancytopenia with a hypocellular bone marrow in the absence of abnormal infiltrating cells or fibrosis, reflecting failure of the haematopoietic stem cell compartment",
+      "Presentation reflects the affected lineages: fatigue and breathlessness from anaemia, mucocutaneous bleeding and petechiae from thrombocytopenia, and infections from neutropenia",
+      "Most cases are acquired and immune-mediated, with T-cell attack on stem cells; drugs, chemicals (e.g. benzene), viral hepatitis (seronegative), and radiation are recognised triggers",
+      "Inherited causes such as Fanconi anaemia and dyskeratosis congenita should be considered in younger patients or those with characteristic physical or family features",
+      "Severity is graded by degree of neutropenia, reticulocytopenia, and thrombocytopenia; very severe disease carries the highest risk of early death from infection or haemorrhage",
+      "Definitive management is either allogeneic stem cell transplant (favoured in younger patients with a matched sibling donor) or immunosuppressive therapy combining antithymocyte globulin and a calcineurin inhibitor",
+      "A thrombopoietin receptor agonist can augment haematopoietic recovery when added to immunosuppression",
+      "Overlap exists with paroxysmal nocturnal haemoglobinuria and hypoplastic myelodysplasia, so flow cytometry for PNH clones and marrow cytogenetics are important at diagnosis"
     ],
-    [
-     "Key Investigations",
-     "Full blood count with reticulocyte count and blood film to confirm pancytopenia and exclude abnormal cells, Bone marrow aspirate",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Aplastic anaemia results from destruction or profound suppression of pluripotent haematopoietic stem cells, leaving an empty (hypocellular) marrow and peripheral pancytopenia. In most acquired cases the mechanism is autoimmune: activated cytotoxic T lymphocytes and their cytokines (interferon-gamma, tumour necrosis factor) drive stem cell apoptosis. Environmental exposures, certain drugs, and viral illness can initiate this immune attack, while inherited marrow failure syndromes reflect defects in DNA repair or telomere maintenance that exhaust the stem cell pool. Clonal disorders such as PNH and MDS can emerge from a damaged marrow because surviving abnormal clones gain a survival advantage.",
+    "additionalDifferentials": [
+      "Hypoplastic myelodysplastic syndrome",
+      "Paroxysmal nocturnal haemoglobinuria",
+      "Acute leukaemia (particularly hypocellular presentations)",
+      "Marrow infiltration or fibrosis causing pancytopenia",
+      "Severe megaloblastic anaemia (B12 or folate deficiency)",
+      "Overwhelming infection or hypersplenism causing peripheral cytopenias"
     ],
-    [
-     "Primary Differentials",
-     "Hypoplastic myelodysplastic syndrome, Paroxysmal nocturnal haemoglobinuria, Acute leukaemia (particularly hypocellular",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full blood count with reticulocyte count and blood film to confirm pancytopenia and exclude abnormal cells",
+      "Bone marrow aspirate and trephine biopsy to demonstrate hypocellularity and exclude infiltration or dysplasia",
+      "Cytogenetic and molecular studies to differentiate from myelodysplasia",
+      "Peripheral blood flow cytometry for a PNH clone",
+      "Chromosomal fragility testing and telomere length in suspected inherited syndromes",
+      "Viral serology (including hepatitis) and screening for autoimmune disease"
     ],
-    [
-     "Management Strategy",
-     "Treat definitively with allogeneic stem cell transplantation, favoured in younger patients with a matched sibling donor",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe neutropenia with fever, indicating potentially fatal sepsis requiring urgent broad-spectrum antibiotics",
+      "Profound thrombocytopenia with mucosal bleeding or signs of intracranial haemorrhage",
+      "Rapidly falling counts defining very severe aplastic anaemia and the need for prompt referral to a transplant centre",
+      "Emergence of dysplastic or cytogenetic abnormalities suggesting clonal evolution to MDS or leukaemia"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing pancytopenia to a peripheral cause and omitting a marrow biopsy that would reveal hypocellularity",
-     "Prevent diagnostic or management error"
+    "prognosis": "Untreated severe aplastic anaemia is frequently fatal from infection or bleeding, but outcomes have transformed with early allogeneic transplantation and effective immunosuppression; younger patients with matched sibling donors have high survival, while older patients rely on immunosuppressive therapy with a meaningful risk of relapse and late clonal disease.",
+    "pitfalls": [
+      "Attributing pancytopenia to a peripheral cause and omitting a marrow biopsy that would reveal hypocellularity",
+      "Overlooking a coexisting PNH clone or evolving myelodysplasia",
+      "Delaying HLA typing and transplant referral in young patients with severe disease",
+      "Failing to recognise an inherited marrow failure syndrome, which changes treatment and family counselling",
+      "Giving platelet or red cell transfusions without irradiation or leucodepletion in a potential transplant candidate"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat definitively with allogeneic stem cell transplantation, favoured in younger patients with a matched sibling donor",
+      "Where transplant is not appropriate, use immunosuppressive therapy combining antithymocyte globulin with a calcineurin inhibitor such as ciclosporin, adding eltrombopag to augment marrow recovery",
+      "Provide supportive care with irradiated, leucodepleted red cell and platelet transfusions, minimising exposure to preserve future transplant options",
+      "Manage the infection risk from neutropenia with prompt broad-spectrum antibiotics for febrile episodes and antimicrobial prophylaxis",
+      "Withdraw implicated drugs and remove toxin exposure such as benzene, and treat seronegative hepatitis-associated disease",
+      "Test for a paroxysmal nocturnal haemoglobinuria clone and for inherited syndromes (Fanconi anaemia, dyskeratosis congenita) with fragility and telomere studies, guiding treatment and family counselling",
+      "Grade severity by blood counts and marrow cellularity to prioritise urgency, and monitor for clonal evolution"
     ]
-   ],
-   "caption": "Overview comparison matrix for aplastic anaemia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "aplastic-anemia-real-image",
-   "title": "Aplastic anaemia: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "aplastic_anemia-pathway",
+      "title": "Aplastic anaemia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Defined by pancytopenia with a hypocellular bone marrow in the absence of abnormal infiltrating cells or fibrosis, reflecting failure of the haematopoietic stem cell compartment",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe neutropenia with fever, indicating potentially fatal sepsis requiring urgent broad-spectrum antibiotics",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full blood count with reticulocyte count and blood film to confirm pancytopenia and exclude abnormal cells, Bone marrow aspirate and trephine biopsy to demonstrate hypocellularity and exclude infiltration or dysplasia,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat definitively with allogeneic stem cell transplantation, favoured in younger patients with a matched sibling donor"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing pancytopenia to a peripheral cause and omitting a marrow biopsy that would reveal hypocellularity"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of aplastic anaemia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "aplastic_anemia-matrix",
+      "title": "Aplastic anaemia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Defined by pancytopenia with a hypocellular bone marrow in the absence of abnormal infiltrating cells or fibrosis, reflecting",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full blood count with reticulocyte count and blood film to confirm pancytopenia and exclude abnormal cells, Bone marrow aspirate",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Hypoplastic myelodysplastic syndrome, Paroxysmal nocturnal haemoglobinuria, Acute leukaemia (particularly hypocellular",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat definitively with allogeneic stem cell transplantation, favoured in younger patients with a matched sibling donor",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing pancytopenia to a peripheral cause and omitting a marrow biopsy that would reveal hypocellularity",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for aplastic anaemia."
+    }
+  ],
+  "diagrams": []
 }

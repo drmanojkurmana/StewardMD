@@ -1,172 +1,150 @@
 {
- "id": "mycobacterium_chelonae_infection",
- "name": "Mycobacterium chelonae infection",
- "aliases": [
-  "M. chelonae infection",
-  "Mycobacterium chelonae soft-tissue infection"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Mandell, Douglas and Bennett / ATS-IDSA NTM guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rapidly growing mycobacterium widely distributed in water, causing predominantly skin, soft-tissue, and post-procedural infection",
-   "Disseminated cutaneous disease with multiple nodules on the limbs is characteristic in immunosuppressed patients, especially those on corticosteroids or after solid-organ transplantation",
-   "Associated with outbreaks linked to tattoo ink, mesotherapy, injections, and contaminated water, and with catheter-related infection",
-   "A recognised cause of keratitis following laser refractive and other eye surgery",
-   "Unlike some rapid growers it usually lacks a functional inducible macrolide-resistance gene and is often macrolide-susceptible, with tobramycin frequently more active than amikacin",
-   "Pulmonary disease is much less common than with M. abscessus",
-   "Management combines susceptibility-guided macrolide-based multidrug therapy with surgical debridement and removal of any infected foreign material"
+  "id": "mycobacterium_chelonae_infection",
+  "name": "Mycobacterium chelonae infection",
+  "aliases": [
+    "M. chelonae infection",
+    "Mycobacterium chelonae soft-tissue infection"
   ],
-  "pathophysiology": "Mycobacterium chelonae is an environmental rapidly growing mycobacterium found in water supplies. Disease usually follows percutaneous inoculation through trauma, surgery, injection, or contaminated solutions and devices, producing localised nodules and abscesses. In immunocompetent hosts infection tends to remain localised, whereas impaired cell-mediated immunity, particularly corticosteroid therapy and transplantation, predisposes to disseminated cutaneous disease with crops of nodules and to deeper infection. The organism forms biofilms on catheters and prosthetic material, and its relatively preserved susceptibility to macrolides distinguishes it from the more resistant M. abscessus.",
-  "additionalDifferentials": [
-   "Other rapidly growing mycobacteria (M. abscessus, M. fortuitum)",
-   "Bacterial furunculosis or abscess",
-   "Disseminated fungal infection with cutaneous nodules",
-   "Nocardiosis",
-   "Cutaneous vasculitis or panniculitis",
-   "Sporotrichosis"
-  ],
-  "additionalInvestigations": [
-   "Culture of skin or tissue showing rapid mycobacterial growth",
-   "Molecular speciation to distinguish it from other rapid growers",
-   "Drug-susceptibility testing including macrolides, tobramycin, and amikacin",
-   "Skin biopsy for histology and staining",
-   "Assessment of immune status and medication review in disseminated disease",
-   "Corneal scrape and culture in suspected post-surgical keratitis"
-  ],
-  "redFlags": [
-   "Disseminated cutaneous nodules indicating impaired cell-mediated immunity",
-   "Catheter-related or prosthesis-related infection requiring device removal",
-   "Post-operative keratitis threatening vision",
-   "Progressive infection despite apparently appropriate therapy"
-  ],
-  "prognosis": "Localised infection in immunocompetent hosts generally responds well to combined medical and surgical treatment. Disseminated disease in immunosuppressed patients requires prolonged therapy and reduction of immunosuppression where possible, and outcomes depend on the underlying condition; relapse can occur if infected foreign material is not removed.",
-  "pitfalls": [
-   "Assuming the drug-resistance pattern of M. abscessus and withholding a potentially effective macrolide",
-   "Continuing immunosuppression unchanged in disseminated disease",
-   "Treating device-associated infection without removing the device",
-   "Missing a common contaminated injection or cosmetic-procedure source in clustered cases"
-  ],
-  "references": [
-   "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
-   "ATS/IDSA guideline on nontuberculous mycobacterial diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Guide therapy by susceptibility testing, exploiting its usually preserved macrolide susceptibility with a macrolide such as clarithromycin or azithromycin, and noting that tobramycin is often more active than amikacin",
-   "Use combination antimicrobial therapy rather than monotherapy, particularly for disseminated cutaneous disease, to prevent emergent resistance",
-   "Achieve source control through surgical debridement or drainage of abscesses and removal of infected intravascular catheters or prosthetic material",
-   "Reduce immunosuppression where feasible, tapering corticosteroids or minimising transplant immunosuppression to aid clearance",
-   "Treat post-surgical keratitis with topical antimycobacterial therapy under ophthalmology guidance",
-   "Monitor response with repeat cultures and watch for drug toxicity during prolonged treatment",
-   "Refer to infectious diseases, with outcome in disseminated disease depending on control of the underlying immunocompromising condition"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "mycobacterium_chelonae_infection-pathway",
-   "title": "Mycobacterium chelonae infection: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rapidly growing mycobacterium widely distributed in water, causing predominantly skin, soft-tissue, and post-procedural infection",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Disseminated cutaneous nodules indicating impaired cell-mediated immunity",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Culture of skin or tissue showing rapid mycobacterial growth, Molecular speciation to distinguish it from other rapid growers, Drug-susceptibility testing including macrolides, tobramycin, and amikacin"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Guide therapy by susceptibility testing, exploiting its usually preserved macrolide susceptibility with a macrolide such as clarithromycin or azithromycin, and noting that tobramycin is often more active than amikacin"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming the drug-resistance pattern of M. abscessus and withholding a potentially effective macrolide"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of mycobacterium chelonae infection."
-  }
- ],
- "tables": [
-  {
-   "id": "mycobacterium_chelonae_infection-matrix",
-   "title": "Mycobacterium chelonae infection: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rapidly growing mycobacterium widely distributed in water, causing predominantly skin, soft-tissue, and post-procedural",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mandell, Douglas and Bennett / ATS-IDSA NTM guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rapidly growing mycobacterium widely distributed in water, causing predominantly skin, soft-tissue, and post-procedural infection",
+      "Disseminated cutaneous disease with multiple nodules on the limbs is characteristic in immunosuppressed patients, especially those on corticosteroids or after solid-organ transplantation",
+      "Associated with outbreaks linked to tattoo ink, mesotherapy, injections, and contaminated water, and with catheter-related infection",
+      "A recognised cause of keratitis following laser refractive and other eye surgery",
+      "Unlike some rapid growers it usually lacks a functional inducible macrolide-resistance gene and is often macrolide-susceptible, with tobramycin frequently more active than amikacin",
+      "Pulmonary disease is much less common than with M. abscessus",
+      "Management combines susceptibility-guided macrolide-based multidrug therapy with surgical debridement and removal of any infected foreign material"
     ],
-    [
-     "Key Investigations",
-     "Culture of skin or tissue showing rapid mycobacterial growth, Molecular speciation to distinguish it from other rapid growers,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Mycobacterium chelonae is an environmental rapidly growing mycobacterium found in water supplies. Disease usually follows percutaneous inoculation through trauma, surgery, injection, or contaminated solutions and devices, producing localised nodules and abscesses. In immunocompetent hosts infection tends to remain localised, whereas impaired cell-mediated immunity, particularly corticosteroid therapy and transplantation, predisposes to disseminated cutaneous disease with crops of nodules and to deeper infection. The organism forms biofilms on catheters and prosthetic material, and its relatively preserved susceptibility to macrolides distinguishes it from the more resistant M. abscessus.",
+    "additionalDifferentials": [
+      "Other rapidly growing mycobacteria (M. abscessus, M. fortuitum)",
+      "Bacterial furunculosis or abscess",
+      "Disseminated fungal infection with cutaneous nodules",
+      "Nocardiosis",
+      "Cutaneous vasculitis or panniculitis",
+      "Sporotrichosis"
     ],
-    [
-     "Primary Differentials",
-     "Other rapidly growing mycobacteria (M. abscessus, M. fortuitum), Bacterial furunculosis or abscess, Disseminated fungal infection",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Culture of skin or tissue showing rapid mycobacterial growth",
+      "Molecular speciation to distinguish it from other rapid growers",
+      "Drug-susceptibility testing including macrolides, tobramycin, and amikacin",
+      "Skin biopsy for histology and staining",
+      "Assessment of immune status and medication review in disseminated disease",
+      "Corneal scrape and culture in suspected post-surgical keratitis"
     ],
-    [
-     "Management Strategy",
-     "Guide therapy by susceptibility testing, exploiting its usually preserved macrolide susceptibility with a macrolide such as",
-     "Core treatment modality"
+    "redFlags": [
+      "Disseminated cutaneous nodules indicating impaired cell-mediated immunity",
+      "Catheter-related or prosthesis-related infection requiring device removal",
+      "Post-operative keratitis threatening vision",
+      "Progressive infection despite apparently appropriate therapy"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming the drug-resistance pattern of M. abscessus and withholding a potentially effective macrolide",
-     "Prevent diagnostic or management error"
+    "prognosis": "Localised infection in immunocompetent hosts generally responds well to combined medical and surgical treatment. Disseminated disease in immunosuppressed patients requires prolonged therapy and reduction of immunosuppression where possible, and outcomes depend on the underlying condition; relapse can occur if infected foreign material is not removed.",
+    "pitfalls": [
+      "Assuming the drug-resistance pattern of M. abscessus and withholding a potentially effective macrolide",
+      "Continuing immunosuppression unchanged in disseminated disease",
+      "Treating device-associated infection without removing the device",
+      "Missing a common contaminated injection or cosmetic-procedure source in clustered cases"
+    ],
+    "references": [
+      "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases",
+      "ATS/IDSA guideline on nontuberculous mycobacterial diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Guide therapy by susceptibility testing, exploiting its usually preserved macrolide susceptibility with a macrolide such as clarithromycin or azithromycin, and noting that tobramycin is often more active than amikacin",
+      "Use combination antimicrobial therapy rather than monotherapy, particularly for disseminated cutaneous disease, to prevent emergent resistance",
+      "Achieve source control through surgical debridement or drainage of abscesses and removal of infected intravascular catheters or prosthetic material",
+      "Reduce immunosuppression where feasible, tapering corticosteroids or minimising transplant immunosuppression to aid clearance",
+      "Treat post-surgical keratitis with topical antimycobacterial therapy under ophthalmology guidance",
+      "Monitor response with repeat cultures and watch for drug toxicity during prolonged treatment",
+      "Refer to infectious diseases, with outcome in disseminated disease depending on control of the underlying immunocompromising condition"
     ]
-   ],
-   "caption": "Overview comparison matrix for mycobacterium chelonae infection."
-  }
- ],
- "diagrams": [
-  {
-   "id": "mycobacterium-chelonae-infection-real-image",
-   "title": "Mycobacterium chelonae infection: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "mycobacterium_chelonae_infection-pathway",
+      "title": "Mycobacterium chelonae infection: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rapidly growing mycobacterium widely distributed in water, causing predominantly skin, soft-tissue, and post-procedural infection",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Disseminated cutaneous nodules indicating impaired cell-mediated immunity",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Culture of skin or tissue showing rapid mycobacterial growth, Molecular speciation to distinguish it from other rapid growers, Drug-susceptibility testing including macrolides, tobramycin, and amikacin"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Guide therapy by susceptibility testing, exploiting its usually preserved macrolide susceptibility with a macrolide such as clarithromycin or azithromycin, and noting that tobramycin is often more active than amikacin"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming the drug-resistance pattern of M. abscessus and withholding a potentially effective macrolide"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of mycobacterium chelonae infection."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "mycobacterium_chelonae_infection-matrix",
+      "title": "Mycobacterium chelonae infection: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rapidly growing mycobacterium widely distributed in water, causing predominantly skin, soft-tissue, and post-procedural",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Culture of skin or tissue showing rapid mycobacterial growth, Molecular speciation to distinguish it from other rapid growers,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other rapidly growing mycobacteria (M. abscessus, M. fortuitum), Bacterial furunculosis or abscess, Disseminated fungal infection",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Guide therapy by susceptibility testing, exploiting its usually preserved macrolide susceptibility with a macrolide such as",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming the drug-resistance pattern of M. abscessus and withholding a potentially effective macrolide",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for mycobacterium chelonae infection."
+    }
+  ],
+  "diagrams": []
 }

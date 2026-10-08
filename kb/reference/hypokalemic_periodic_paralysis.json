@@ -1,178 +1,156 @@
 {
- "id": "hypokalemic_periodic_paralysis",
- "name": "Hypokalaemic periodic paralysis",
- "aliases": [
-  "CACNA1S",
-  "HypoPP",
-  "SCN4A",
-  "calcium channelopathy of muscle",
-  "familial hypokalaemic periodic paralysis",
-  "hypoPP",
-  "hypokalaemic periodic paralysis",
-  "primary periodic paralysis"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neuromuscular",
- "specialty": "Neurology / Neuromuscular",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff Neurology in Clinical Practice / GeneReviews",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents with recurrent episodes of flaccid limb weakness that spare the respiratory and bulbar muscles in most attacks, with preserved consciousness throughout",
-   "Attacks are typically triggered by rest following vigorous exercise and by carbohydrate-rich meals, and often begin in the second or third decade",
-   "Serum potassium falls during an attack because of an intracellular potassium shift, not a true whole-body deficit, so aggressive supplementation risks rebound hyperkalaemia",
-   "Most cases are autosomal dominant with reduced penetrance, more clinically apparent in males, and are caused by mutations in the CACNA1S calcium channel gene or, less often, the SCN4A sodium channel gene",
-   "A thyrotoxic form clinically mimics the hereditary disease and should be excluded, particularly in patients of Asian ancestry",
-   "Long-term management centres on trigger avoidance, potassium-sparing strategies and carbonic anhydrase inhibitors used as prophylaxis",
-   "A fixed proximal vacuolar myopathy can develop over decades independent of attack frequency, sometimes as the dominant late feature"
+  "id": "hypokalemic_periodic_paralysis",
+  "name": "Hypokalaemic periodic paralysis",
+  "aliases": [
+    "CACNA1S",
+    "HypoPP",
+    "SCN4A",
+    "calcium channelopathy of muscle",
+    "familial hypokalaemic periodic paralysis",
+    "hypoPP",
+    "hypokalaemic periodic paralysis",
+    "primary periodic paralysis"
   ],
-  "pathophysiology": "Hypokalaemic periodic paralysis arises from mutations in genes encoding skeletal-muscle voltage-gated ion channels, most commonly the dihydropyridine receptor calcium channel (CACNA1S) and less often the sodium channel (SCN4A). Many disease-causing variants affect arginine residues in the voltage-sensing domains, creating an aberrant gating-pore current that leaks cations through the sensor. During provocation, an insulin- or catecholamine-driven shift of potassium into muscle cells combines with this abnormal leak to paradoxically depolarise and then inactivate the sarcolemma, rendering the fibre inexcitable and producing flaccid weakness. The transient low serum potassium reflects redistribution rather than depletion, and repeated depolarisation over years may contribute to the vacuolar myopathy seen in some patients.",
-  "additionalDifferentials": [
-   "Thyrotoxic periodic paralysis",
-   "Secondary hypokalaemia from renal or gastrointestinal potassium loss (e.g. renal tubular disorders, diuretics, vomiting)",
-   "Andersen-Tawil syndrome",
-   "Guillain-Barre syndrome and other acute flaccid weakness",
-   "Myasthenia gravis and other neuromuscular transmission disorders",
-   "Functional or psychogenic weakness"
-  ],
-  "additionalInvestigations": [
-   "Serum potassium measured during a spontaneous attack, ideally with paired baseline values",
-   "Thyroid function tests to exclude thyrotoxic periodic paralysis",
-   "Electrocardiogram to detect hypokalaemic changes and to screen for the QU features of Andersen-Tawil syndrome",
-   "Prolonged (long) exercise electromyography protocol showing a post-exercise decrement in compound muscle action potential amplitude",
-   "Targeted genetic testing of CACNA1S and SCN4A",
-   "Muscle biopsy where a fixed myopathy is suspected, looking for tubular aggregates or vacuolar change"
-  ],
-  "redFlags": [
-   "Respiratory or bulbar involvement or unusually severe generalised paralysis during an attack",
-   "Cardiac arrhythmia or marked electrocardiographic disturbance during potassium shifts",
-   "Rebound hyperkalaemia following overzealous potassium replacement",
-   "Progressive fixed proximal weakness suggesting an established vacuolar myopathy"
-  ],
-  "prognosis": "Attack frequency often lessens with age and with effective prophylaxis, and most patients have a normal lifespan, but a proportion develop a slowly progressive fixed proximal myopathy that can cause lasting disability independent of the acute episodes.",
-  "pitfalls": [
-   "Assuming a true potassium deficit and over-replacing, which can precipitate dangerous rebound hyperkalaemia",
-   "Overlooking thyrotoxic periodic paralysis, a treatable acquired mimic",
-   "Relying on interictal potassium and creatine kinase, which are frequently normal between attacks",
-   "Missing the association with certain general anaesthetic and glucose-loading situations that can provoke attacks"
-  ],
-  "references": [
-   "Bradley and Daroff Neurology in Clinical Practice",
-   "GeneReviews: Hypokalemic Periodic Paralysis"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Abort acute attacks with oral potassium, giving carefully titrated intravenous potassium only for severe weakness, since the low potassium reflects redistribution and over-replacement risks rebound hyperkalaemia",
-   "Counsel strict avoidance of triggers, chiefly carbohydrate-rich meals and rest after vigorous exercise",
-   "Use carbonic anhydrase inhibitors such as acetazolamide or dichlorphenamide as the mainstay of prophylaxis",
-   "Consider potassium-sparing diuretics and a low-carbohydrate, low-sodium diet as adjunctive prevention",
-   "Exclude thyrotoxic periodic paralysis and treat any underlying thyrotoxicosis, especially in patients of Asian ancestry",
-   "Monitor for a slowly progressive fixed proximal myopathy and support with physiotherapy",
-   "Provide anaesthetic precautions and offer genetic counselling for this autosomal dominant CACNA1S or SCN4A channelopathy"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hypokalemic_periodic_paralysis-pathway",
-   "title": "Hypokalaemic periodic paralysis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents with recurrent episodes of flaccid limb weakness that spare the respiratory and bulbar muscles in most attacks, with preserved consciousness throughout",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Respiratory or bulbar involvement or unusually severe generalised paralysis during an attack",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum potassium measured during a spontaneous attack, ideally with paired baseline values, Thyroid function tests to exclude thyrotoxic periodic paralysis, Electrocardiogram to detect hypokalaemic changes and to screen for"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Abort acute attacks with oral potassium, giving carefully titrated intravenous potassium only for severe weakness, since the low potassium reflects redistribution and over-replacement risks rebound hyperkalaemia"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a true potassium deficit and over-replacing, which can precipitate dangerous rebound hyperkalaemia"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hypokalaemic periodic paralysis."
-  }
- ],
- "tables": [
-  {
-   "id": "hypokalemic_periodic_paralysis-matrix",
-   "title": "Hypokalaemic periodic paralysis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents with recurrent episodes of flaccid limb weakness that spare the respiratory and bulbar muscles in most attacks, with",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neuromuscular",
+  "specialty": "Neurology / Neuromuscular",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff Neurology in Clinical Practice / GeneReviews",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents with recurrent episodes of flaccid limb weakness that spare the respiratory and bulbar muscles in most attacks, with preserved consciousness throughout",
+      "Attacks are typically triggered by rest following vigorous exercise and by carbohydrate-rich meals, and often begin in the second or third decade",
+      "Serum potassium falls during an attack because of an intracellular potassium shift, not a true whole-body deficit, so aggressive supplementation risks rebound hyperkalaemia",
+      "Most cases are autosomal dominant with reduced penetrance, more clinically apparent in males, and are caused by mutations in the CACNA1S calcium channel gene or, less often, the SCN4A sodium channel gene",
+      "A thyrotoxic form clinically mimics the hereditary disease and should be excluded, particularly in patients of Asian ancestry",
+      "Long-term management centres on trigger avoidance, potassium-sparing strategies and carbonic anhydrase inhibitors used as prophylaxis",
+      "A fixed proximal vacuolar myopathy can develop over decades independent of attack frequency, sometimes as the dominant late feature"
     ],
-    [
-     "Key Investigations",
-     "Serum potassium measured during a spontaneous attack, ideally with paired baseline values, Thyroid function tests to exclude",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Hypokalaemic periodic paralysis arises from mutations in genes encoding skeletal-muscle voltage-gated ion channels, most commonly the dihydropyridine receptor calcium channel (CACNA1S) and less often the sodium channel (SCN4A). Many disease-causing variants affect arginine residues in the voltage-sensing domains, creating an aberrant gating-pore current that leaks cations through the sensor. During provocation, an insulin- or catecholamine-driven shift of potassium into muscle cells combines with this abnormal leak to paradoxically depolarise and then inactivate the sarcolemma, rendering the fibre inexcitable and producing flaccid weakness. The transient low serum potassium reflects redistribution rather than depletion, and repeated depolarisation over years may contribute to the vacuolar myopathy seen in some patients.",
+    "additionalDifferentials": [
+      "Thyrotoxic periodic paralysis",
+      "Secondary hypokalaemia from renal or gastrointestinal potassium loss (e.g. renal tubular disorders, diuretics, vomiting)",
+      "Andersen-Tawil syndrome",
+      "Guillain-Barre syndrome and other acute flaccid weakness",
+      "Myasthenia gravis and other neuromuscular transmission disorders",
+      "Functional or psychogenic weakness"
     ],
-    [
-     "Primary Differentials",
-     "Thyrotoxic periodic paralysis, Secondary hypokalaemia from renal or gastrointestinal potassium loss (e.g. renal tubular",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum potassium measured during a spontaneous attack, ideally with paired baseline values",
+      "Thyroid function tests to exclude thyrotoxic periodic paralysis",
+      "Electrocardiogram to detect hypokalaemic changes and to screen for the QU features of Andersen-Tawil syndrome",
+      "Prolonged (long) exercise electromyography protocol showing a post-exercise decrement in compound muscle action potential amplitude",
+      "Targeted genetic testing of CACNA1S and SCN4A",
+      "Muscle biopsy where a fixed myopathy is suspected, looking for tubular aggregates or vacuolar change"
     ],
-    [
-     "Management Strategy",
-     "Abort acute attacks with oral potassium, giving carefully titrated intravenous potassium only for severe weakness, since the low",
-     "Core treatment modality"
+    "redFlags": [
+      "Respiratory or bulbar involvement or unusually severe generalised paralysis during an attack",
+      "Cardiac arrhythmia or marked electrocardiographic disturbance during potassium shifts",
+      "Rebound hyperkalaemia following overzealous potassium replacement",
+      "Progressive fixed proximal weakness suggesting an established vacuolar myopathy"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a true potassium deficit and over-replacing, which can precipitate dangerous rebound hyperkalaemia",
-     "Prevent diagnostic or management error"
+    "prognosis": "Attack frequency often lessens with age and with effective prophylaxis, and most patients have a normal lifespan, but a proportion develop a slowly progressive fixed proximal myopathy that can cause lasting disability independent of the acute episodes.",
+    "pitfalls": [
+      "Assuming a true potassium deficit and over-replacing, which can precipitate dangerous rebound hyperkalaemia",
+      "Overlooking thyrotoxic periodic paralysis, a treatable acquired mimic",
+      "Relying on interictal potassium and creatine kinase, which are frequently normal between attacks",
+      "Missing the association with certain general anaesthetic and glucose-loading situations that can provoke attacks"
+    ],
+    "references": [
+      "Bradley and Daroff Neurology in Clinical Practice",
+      "GeneReviews: Hypokalemic Periodic Paralysis"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Abort acute attacks with oral potassium, giving carefully titrated intravenous potassium only for severe weakness, since the low potassium reflects redistribution and over-replacement risks rebound hyperkalaemia",
+      "Counsel strict avoidance of triggers, chiefly carbohydrate-rich meals and rest after vigorous exercise",
+      "Use carbonic anhydrase inhibitors such as acetazolamide or dichlorphenamide as the mainstay of prophylaxis",
+      "Consider potassium-sparing diuretics and a low-carbohydrate, low-sodium diet as adjunctive prevention",
+      "Exclude thyrotoxic periodic paralysis and treat any underlying thyrotoxicosis, especially in patients of Asian ancestry",
+      "Monitor for a slowly progressive fixed proximal myopathy and support with physiotherapy",
+      "Provide anaesthetic precautions and offer genetic counselling for this autosomal dominant CACNA1S or SCN4A channelopathy"
     ]
-   ],
-   "caption": "Overview comparison matrix for hypokalaemic periodic paralysis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hypokalemic-periodic-paralysis-real-image",
-   "title": "Hypokalaemic periodic paralysis: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "hypokalemic_periodic_paralysis-pathway",
+      "title": "Hypokalaemic periodic paralysis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents with recurrent episodes of flaccid limb weakness that spare the respiratory and bulbar muscles in most attacks, with preserved consciousness throughout",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Respiratory or bulbar involvement or unusually severe generalised paralysis during an attack",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum potassium measured during a spontaneous attack, ideally with paired baseline values, Thyroid function tests to exclude thyrotoxic periodic paralysis, Electrocardiogram to detect hypokalaemic changes and to screen for"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Abort acute attacks with oral potassium, giving carefully titrated intravenous potassium only for severe weakness, since the low potassium reflects redistribution and over-replacement risks rebound hyperkalaemia"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a true potassium deficit and over-replacing, which can precipitate dangerous rebound hyperkalaemia"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hypokalaemic periodic paralysis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hypokalemic_periodic_paralysis-matrix",
+      "title": "Hypokalaemic periodic paralysis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents with recurrent episodes of flaccid limb weakness that spare the respiratory and bulbar muscles in most attacks, with",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum potassium measured during a spontaneous attack, ideally with paired baseline values, Thyroid function tests to exclude",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Thyrotoxic periodic paralysis, Secondary hypokalaemia from renal or gastrointestinal potassium loss (e.g. renal tubular",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Abort acute attacks with oral potassium, giving carefully titrated intravenous potassium only for severe weakness, since the low",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a true potassium deficit and over-replacing, which can precipitate dangerous rebound hyperkalaemia",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hypokalaemic periodic paralysis."
+    }
+  ],
+  "diagrams": []
 }

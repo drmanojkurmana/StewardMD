@@ -1,173 +1,151 @@
 {
- "id": "neurocutaneous_melanosis",
- "name": "Neurocutaneous melanosis",
- "aliases": [
-  "neurocutaneous melanocytosis",
-  "NCM",
-  "leptomeningeal melanosis with congenital melanocytic naevi"
- ],
- "class": "non_infective",
- "system": "Dermatology / Neurocutaneous",
- "specialty": "Dermatology / Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology / Neurocutaneous Disorders (current reference texts)",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Defined by large or multiple congenital melanocytic naevi together with abnormal melanocytic proliferation in the leptomeninges",
-   "Risk is highest with a large or giant congenital melanocytic naevus in a posterior axial (head, neck or spine) location and with numerous satellite naevi",
-   "Caused by post-zygotic activating variants, most often in NRAS, affecting neural-crest-derived melanocyte precursors",
-   "Many affected children are neurologically asymptomatic, but leptomeningeal melanosis can cause raised intracranial pressure and hydrocephalus",
-   "Presenting neurological features include seizures, developmental delay, cranial nerve palsies and signs of a mass lesion",
-   "There is a significant risk of central nervous system melanoma arising within the abnormal leptomeningeal melanocytes",
-   "Management is generic and supportive: neuroimaging surveillance, treatment of hydrocephalus and seizures, and oncological referral if melanoma develops"
+  "id": "neurocutaneous_melanosis",
+  "name": "Neurocutaneous melanosis",
+  "aliases": [
+    "neurocutaneous melanocytosis",
+    "NCM",
+    "leptomeningeal melanosis with congenital melanocytic naevi"
   ],
-  "pathophysiology": "Neurocutaneous melanosis results from a post-zygotic activating variant, most commonly in NRAS, occurring in a neural-crest melanocyte precursor early in embryogenesis. The affected clone gives rise both to large or multiple congenital melanocytic naevi in the skin and to an excess of melanocytes that populate the leptomeninges. Proliferation of these leptomeningeal melanocytes can impair cerebrospinal fluid flow, producing hydrocephalus and raised intracranial pressure, and may undergo malignant transformation into central nervous system melanoma. The shared NRAS driver explains the concurrence of extensive cutaneous pigmentation and intracranial melanocytic disease.",
-  "additionalDifferentials": [
-   "Isolated large congenital melanocytic naevus without CNS involvement",
-   "Primary central nervous system melanoma",
-   "Meningeal metastatic melanoma",
-   "Other causes of infantile hydrocephalus",
-   "Leptomeningeal infiltration from other neoplasia",
-   "Sturge-Weber syndrome"
-  ],
-  "additionalInvestigations": [
-   "MRI of the brain and spine, ideally in infancy before myelination obscures melanin signal, to detect leptomeningeal melanosis",
-   "Neurological and developmental assessment",
-   "Assessment for hydrocephalus and raised intracranial pressure",
-   "Cerebrospinal fluid cytology where malignant transformation is suspected",
-   "Skin examination to map the number and distribution of congenital melanocytic naevi",
-   "Molecular testing of naevus tissue for NRAS variants where available"
-  ],
-  "redFlags": [
-   "Signs of raised intracranial pressure or rapidly enlarging head circumference",
-   "New seizures, focal deficit or cranial nerve palsy",
-   "Developmental regression",
-   "Any feature suggesting central nervous system melanoma"
-  ],
-  "prognosis": "Prognosis varies widely: asymptomatic children may remain well, but symptomatic leptomeningeal disease carries a guarded outlook, and the development of central nervous system melanoma is associated with a poor prognosis despite treatment.",
-  "pitfalls": [
-   "Focusing only on cutaneous naevi and not arranging early MRI in high-risk patients",
-   "Delaying imaging until after infancy when myelination reduces sensitivity for melanin",
-   "Attributing hydrocephalus to other causes and missing leptomeningeal melanosis",
-   "Underestimating the melanoma risk in symptomatic disease"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Happle R. Mosaicism in Human Skin"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Establish the extent of disease with neuraxis MRI in infancy and characterise the cutaneous naevi to guide prognosis and monitoring",
-   "Relieve symptomatic hydrocephalus and raised intracranial pressure with cerebrospinal fluid diversion such as a ventriculoperitoneal shunt",
-   "Control seizures with antiseizure medication",
-   "Undertake surveillance for malignant transformation with clinical review and neuroimaging, and cerebrospinal fluid cytology where central nervous system melanoma is suspected",
-   "Manage established central nervous system melanoma palliatively through a neuro-oncology team, as it responds poorly to treatment",
-   "Address the cutaneous naevi with dermatological monitoring and consider surgical management for melanoma risk and cosmesis",
-   "Provide multidisciplinary neurology, dermatology and neurosurgical care with developmental support and family counselling"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "neurocutaneous_melanosis-pathway",
-   "title": "Neurocutaneous melanosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Defined by large or multiple congenital melanocytic naevi together with abnormal melanocytic proliferation in the leptomeninges",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Signs of raised intracranial pressure or rapidly enlarging head circumference",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI of the brain and spine, ideally in infancy before myelination obscures melanin signal, to detect leptomeningeal melanosis, Neurological and developmental assessment, Assessment for hydrocephalus and raised intracranial"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Establish the extent of disease with neuraxis MRI in infancy and characterise the cutaneous naevi to guide prognosis and monitoring"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Focusing only on cutaneous naevi and not arranging early MRI in high-risk patients"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of neurocutaneous melanosis."
-  }
- ],
- "tables": [
-  {
-   "id": "neurocutaneous_melanosis-matrix",
-   "title": "Neurocutaneous melanosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Defined by large or multiple congenital melanocytic naevi together with abnormal melanocytic proliferation in the leptomeninges",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology / Neurocutaneous",
+  "specialty": "Dermatology / Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology / Neurocutaneous Disorders (current reference texts)",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Defined by large or multiple congenital melanocytic naevi together with abnormal melanocytic proliferation in the leptomeninges",
+      "Risk is highest with a large or giant congenital melanocytic naevus in a posterior axial (head, neck or spine) location and with numerous satellite naevi",
+      "Caused by post-zygotic activating variants, most often in NRAS, affecting neural-crest-derived melanocyte precursors",
+      "Many affected children are neurologically asymptomatic, but leptomeningeal melanosis can cause raised intracranial pressure and hydrocephalus",
+      "Presenting neurological features include seizures, developmental delay, cranial nerve palsies and signs of a mass lesion",
+      "There is a significant risk of central nervous system melanoma arising within the abnormal leptomeningeal melanocytes",
+      "Management is generic and supportive: neuroimaging surveillance, treatment of hydrocephalus and seizures, and oncological referral if melanoma develops"
     ],
-    [
-     "Key Investigations",
-     "MRI of the brain and spine, ideally in infancy before myelination obscures melanin signal, to detect leptomeningeal melanosis,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Neurocutaneous melanosis results from a post-zygotic activating variant, most commonly in NRAS, occurring in a neural-crest melanocyte precursor early in embryogenesis. The affected clone gives rise both to large or multiple congenital melanocytic naevi in the skin and to an excess of melanocytes that populate the leptomeninges. Proliferation of these leptomeningeal melanocytes can impair cerebrospinal fluid flow, producing hydrocephalus and raised intracranial pressure, and may undergo malignant transformation into central nervous system melanoma. The shared NRAS driver explains the concurrence of extensive cutaneous pigmentation and intracranial melanocytic disease.",
+    "additionalDifferentials": [
+      "Isolated large congenital melanocytic naevus without CNS involvement",
+      "Primary central nervous system melanoma",
+      "Meningeal metastatic melanoma",
+      "Other causes of infantile hydrocephalus",
+      "Leptomeningeal infiltration from other neoplasia",
+      "Sturge-Weber syndrome"
     ],
-    [
-     "Primary Differentials",
-     "Isolated large congenital melanocytic naevus without CNS involvement, Primary central nervous system melanoma, Meningeal",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI of the brain and spine, ideally in infancy before myelination obscures melanin signal, to detect leptomeningeal melanosis",
+      "Neurological and developmental assessment",
+      "Assessment for hydrocephalus and raised intracranial pressure",
+      "Cerebrospinal fluid cytology where malignant transformation is suspected",
+      "Skin examination to map the number and distribution of congenital melanocytic naevi",
+      "Molecular testing of naevus tissue for NRAS variants where available"
     ],
-    [
-     "Management Strategy",
-     "Establish the extent of disease with neuraxis MRI in infancy and characterise the cutaneous naevi to guide prognosis and",
-     "Core treatment modality"
+    "redFlags": [
+      "Signs of raised intracranial pressure or rapidly enlarging head circumference",
+      "New seizures, focal deficit or cranial nerve palsy",
+      "Developmental regression",
+      "Any feature suggesting central nervous system melanoma"
     ],
-    [
-     "Clinical Pitfall",
-     "Focusing only on cutaneous naevi and not arranging early MRI in high-risk patients",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis varies widely: asymptomatic children may remain well, but symptomatic leptomeningeal disease carries a guarded outlook, and the development of central nervous system melanoma is associated with a poor prognosis despite treatment.",
+    "pitfalls": [
+      "Focusing only on cutaneous naevi and not arranging early MRI in high-risk patients",
+      "Delaying imaging until after infancy when myelination reduces sensitivity for melanin",
+      "Attributing hydrocephalus to other causes and missing leptomeningeal melanosis",
+      "Underestimating the melanoma risk in symptomatic disease"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Happle R. Mosaicism in Human Skin"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Establish the extent of disease with neuraxis MRI in infancy and characterise the cutaneous naevi to guide prognosis and monitoring",
+      "Relieve symptomatic hydrocephalus and raised intracranial pressure with cerebrospinal fluid diversion such as a ventriculoperitoneal shunt",
+      "Control seizures with antiseizure medication",
+      "Undertake surveillance for malignant transformation with clinical review and neuroimaging, and cerebrospinal fluid cytology where central nervous system melanoma is suspected",
+      "Manage established central nervous system melanoma palliatively through a neuro-oncology team, as it responds poorly to treatment",
+      "Address the cutaneous naevi with dermatological monitoring and consider surgical management for melanoma risk and cosmesis",
+      "Provide multidisciplinary neurology, dermatology and neurosurgical care with developmental support and family counselling"
     ]
-   ],
-   "caption": "Overview comparison matrix for neurocutaneous melanosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "neurocutaneous-melanosis-real-image",
-   "title": "Neurocutaneous melanosis: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "neurocutaneous_melanosis-pathway",
+      "title": "Neurocutaneous melanosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Defined by large or multiple congenital melanocytic naevi together with abnormal melanocytic proliferation in the leptomeninges",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Signs of raised intracranial pressure or rapidly enlarging head circumference",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI of the brain and spine, ideally in infancy before myelination obscures melanin signal, to detect leptomeningeal melanosis, Neurological and developmental assessment, Assessment for hydrocephalus and raised intracranial"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Establish the extent of disease with neuraxis MRI in infancy and characterise the cutaneous naevi to guide prognosis and monitoring"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Focusing only on cutaneous naevi and not arranging early MRI in high-risk patients"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of neurocutaneous melanosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "neurocutaneous_melanosis-matrix",
+      "title": "Neurocutaneous melanosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Defined by large or multiple congenital melanocytic naevi together with abnormal melanocytic proliferation in the leptomeninges",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI of the brain and spine, ideally in infancy before myelination obscures melanin signal, to detect leptomeningeal melanosis,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Isolated large congenital melanocytic naevus without CNS involvement, Primary central nervous system melanoma, Meningeal",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Establish the extent of disease with neuraxis MRI in infancy and characterise the cutaneous naevi to guide prognosis and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Focusing only on cutaneous naevi and not arranging early MRI in high-risk patients",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for neurocutaneous melanosis."
+    }
+  ],
+  "diagrams": []
 }

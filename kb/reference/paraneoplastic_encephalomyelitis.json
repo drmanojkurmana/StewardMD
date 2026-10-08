@@ -1,176 +1,154 @@
 {
- "id": "paraneoplastic_encephalomyelitis",
- "name": "paraneoplastic encephalomyelitis",
- "aliases": [
-  "anti-Hu syndrome",
-  "paraneoplastic encephalomyelitis/sensory neuronopathy"
- ],
- "class": "non_infective",
- "system": "nervous system",
- "specialty": "neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff's Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Multifocal disorder combining two or more of limbic encephalitis, brainstem encephalitis, cerebellar degeneration, myelitis, dorsal root ganglionopathy and autonomic failure.",
-   "Anti-Hu (ANNA-1) is the archetypal antibody, with small-cell lung carcinoma found in the large majority of cases.",
-   "Anti-CV2/CRMP5 disease may add chorea, optic neuritis and peripheral neuropathy to the picture.",
-   "Brainstem involvement produces vertigo, nystagmus, diplopia, dysarthria and dysphagia, and can threaten respiration.",
-   "Autonomic involvement is common and may manifest as gastrointestinal pseudo-obstruction from enteric neuronal loss, orthostatic hypotension or cardiac dysrhythmia.",
-   "Neurological symptoms usually antedate the cancer diagnosis and the underlying tumour is often small and limited-stage.",
-   "Response to immunotherapy is generally poor; prompt treatment of the tumour offers the best chance of neurological stabilisation.",
-   "CSF is usually inflammatory (pleocytosis, raised protein, oligoclonal bands) even when MRI is normal."
+  "id": "paraneoplastic_encephalomyelitis",
+  "name": "paraneoplastic encephalomyelitis",
+  "aliases": [
+    "anti-Hu syndrome",
+    "paraneoplastic encephalomyelitis/sensory neuronopathy"
   ],
-  "pathophysiology": "Tumour cells (most often small-cell lung carcinoma) express intracellular onconeural antigens such as HuD that are normally restricted to neurons. The resulting immune response is dominated by antigen-specific cytotoxic T lymphocytes that infiltrate multiple levels of the neuraxis, producing perivascular inflammation, microglial nodules and neuronal loss in cortex, brainstem, cerebellum, spinal cord, dorsal root ganglia and autonomic ganglia. The detected antibodies (anti-Hu, anti-CV2/CRMP5, anti-amphiphysin) are useful diagnostic markers but are largely not directly pathogenic, which accounts for the poor reversibility.",
-  "additionalDifferentials": [
-   "infectious rhombencephalitis (e.g. listerial) and other viral encephalomyelitides",
-   "Bickerstaff brainstem encephalitis",
-   "multiple sclerosis or neuromyelitis optica spectrum disorder",
-   "primary CNS lymphoma or leptomeningeal metastatic disease",
-   "vitamin B12 or vitamin E deficiency (subacute combined degeneration)",
-   "toxic or metabolic encephalopathy",
-   "Creutzfeldt-Jakob disease"
-  ],
-  "additionalInvestigations": [
-   "serum and CSF anti-Hu (ANNA-1) and extended paraneoplastic antibody panel",
-   "MRI brain and whole spine with contrast",
-   "CSF analysis with cytology and oligoclonal bands",
-   "whole-body FDG-PET/CT and CT chest, with bronchoscopy if indicated",
-   "nerve conduction studies and EMG for associated neuronopathy",
-   "autonomic function testing and gastrointestinal transit studies",
-   "EEG when encephalopathy or seizures are present"
-  ],
-  "redFlags": [
-   "respiratory failure or bulbar compromise from brainstem involvement",
-   "autonomic instability with cardiac dysrhythmia",
-   "gastrointestinal pseudo-obstruction",
-   "rapidly progressive multifocal neurological deficit",
-   "newly identified malignancy requiring urgent staging"
-  ],
-  "prognosis": "Neurological prognosis is generally poor; deficits often persist even when the tumour is controlled, although the disease may stabilise with effective oncological treatment. Paradoxically, anti-Hu-associated small-cell lung carcinoma is sometimes detected at a limited stage and may show relatively favourable tumour control.",
-  "pitfalls": [
-   "Attributing multifocal neurological signs to cerebral metastases rather than a paraneoplastic process.",
-   "Discontinuing the tumour search after an initial negative imaging screen.",
-   "Underestimating autonomic involvement, which can be life-threatening.",
-   "Delaying oncological treatment while awaiting a neurological response to immunotherapy."
-  ],
-  "references": [
-   "Graus F, Delattre JY, et al. Recommended diagnostic criteria for paraneoplastic neurological syndromes.",
-   "Dalmau J, Rosenfeld MR. Paraneoplastic syndromes of the CNS. Lancet Neurology.",
-   "Bradley and Daroff's Neurology in Clinical Practice, current edition."
-  ],
-  "crossLinks": [],
-  "management": [
-   "Detection and definitive oncological treatment of the underlying tumour, most often small-cell lung carcinoma, as the primary intervention",
-   "Immunotherapy with corticosteroids, intravenous immunoglobulin or plasma exchange, with cyclophosphamide or rituximab considered, recognising limited reversibility of onconeural anti-Hu antibody disease",
-   "Symptomatic management of seizures with anticonvulsants and of autonomic failure, including orthostatic hypotension and gastrointestinal pseudo-obstruction",
-   "Cardiac monitoring for dysrhythmia and respiratory support for brainstem involvement threatening ventilation",
-   "Continued whole-body tumour surveillance when initial imaging is negative, as neurological symptoms usually precede the cancer",
-   "Coordinated neurology and oncology multidisciplinary management with supportive rehabilitation"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "paraneoplastic_encephalomyelitis-pathway",
-   "title": "paraneoplastic encephalomyelitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Multifocal disorder combining two or more of limbic encephalitis, brainstem encephalitis, cerebellar degeneration, myelitis, dorsal root ganglionopathy and autonomic failure.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: respiratory failure or bulbar compromise from brainstem involvement",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: serum and CSF anti-Hu (ANNA-1) and extended paraneoplastic antibody panel, MRI brain and whole spine with contrast, CSF analysis with cytology and oligoclonal bands"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Detection and definitive oncological treatment of the underlying tumour, most often small-cell lung carcinoma, as the primary intervention"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing multifocal neurological signs to cerebral metastases rather than a paraneoplastic process."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of paraneoplastic encephalomyelitis."
-  }
- ],
- "tables": [
-  {
-   "id": "paraneoplastic_encephalomyelitis-matrix",
-   "title": "paraneoplastic encephalomyelitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Multifocal disorder combining two or more of limbic encephalitis, brainstem encephalitis, cerebellar degeneration, myelitis,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "nervous system",
+  "specialty": "neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff's Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Multifocal disorder combining two or more of limbic encephalitis, brainstem encephalitis, cerebellar degeneration, myelitis, dorsal root ganglionopathy and autonomic failure.",
+      "Anti-Hu (ANNA-1) is the archetypal antibody, with small-cell lung carcinoma found in the large majority of cases.",
+      "Anti-CV2/CRMP5 disease may add chorea, optic neuritis and peripheral neuropathy to the picture.",
+      "Brainstem involvement produces vertigo, nystagmus, diplopia, dysarthria and dysphagia, and can threaten respiration.",
+      "Autonomic involvement is common and may manifest as gastrointestinal pseudo-obstruction from enteric neuronal loss, orthostatic hypotension or cardiac dysrhythmia.",
+      "Neurological symptoms usually antedate the cancer diagnosis and the underlying tumour is often small and limited-stage.",
+      "Response to immunotherapy is generally poor; prompt treatment of the tumour offers the best chance of neurological stabilisation.",
+      "CSF is usually inflammatory (pleocytosis, raised protein, oligoclonal bands) even when MRI is normal."
     ],
-    [
-     "Key Investigations",
-     "serum and CSF anti-Hu (ANNA-1) and extended paraneoplastic antibody panel, MRI brain and whole spine with contrast, CSF analysis",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Tumour cells (most often small-cell lung carcinoma) express intracellular onconeural antigens such as HuD that are normally restricted to neurons. The resulting immune response is dominated by antigen-specific cytotoxic T lymphocytes that infiltrate multiple levels of the neuraxis, producing perivascular inflammation, microglial nodules and neuronal loss in cortex, brainstem, cerebellum, spinal cord, dorsal root ganglia and autonomic ganglia. The detected antibodies (anti-Hu, anti-CV2/CRMP5, anti-amphiphysin) are useful diagnostic markers but are largely not directly pathogenic, which accounts for the poor reversibility.",
+    "additionalDifferentials": [
+      "infectious rhombencephalitis (e.g. listerial) and other viral encephalomyelitides",
+      "Bickerstaff brainstem encephalitis",
+      "multiple sclerosis or neuromyelitis optica spectrum disorder",
+      "primary CNS lymphoma or leptomeningeal metastatic disease",
+      "vitamin B12 or vitamin E deficiency (subacute combined degeneration)",
+      "toxic or metabolic encephalopathy",
+      "Creutzfeldt-Jakob disease"
     ],
-    [
-     "Primary Differentials",
-     "infectious rhombencephalitis (e.g. listerial) and other viral encephalomyelitides, Bickerstaff brainstem encephalitis, multiple",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "serum and CSF anti-Hu (ANNA-1) and extended paraneoplastic antibody panel",
+      "MRI brain and whole spine with contrast",
+      "CSF analysis with cytology and oligoclonal bands",
+      "whole-body FDG-PET/CT and CT chest, with bronchoscopy if indicated",
+      "nerve conduction studies and EMG for associated neuronopathy",
+      "autonomic function testing and gastrointestinal transit studies",
+      "EEG when encephalopathy or seizures are present"
     ],
-    [
-     "Management Strategy",
-     "Detection and definitive oncological treatment of the underlying tumour, most often small-cell lung carcinoma, as the primary",
-     "Core treatment modality"
+    "redFlags": [
+      "respiratory failure or bulbar compromise from brainstem involvement",
+      "autonomic instability with cardiac dysrhythmia",
+      "gastrointestinal pseudo-obstruction",
+      "rapidly progressive multifocal neurological deficit",
+      "newly identified malignancy requiring urgent staging"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing multifocal neurological signs to cerebral metastases rather than a paraneoplastic process.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Neurological prognosis is generally poor; deficits often persist even when the tumour is controlled, although the disease may stabilise with effective oncological treatment. Paradoxically, anti-Hu-associated small-cell lung carcinoma is sometimes detected at a limited stage and may show relatively favourable tumour control.",
+    "pitfalls": [
+      "Attributing multifocal neurological signs to cerebral metastases rather than a paraneoplastic process.",
+      "Discontinuing the tumour search after an initial negative imaging screen.",
+      "Underestimating autonomic involvement, which can be life-threatening.",
+      "Delaying oncological treatment while awaiting a neurological response to immunotherapy."
+    ],
+    "references": [
+      "Graus F, Delattre JY, et al. Recommended diagnostic criteria for paraneoplastic neurological syndromes.",
+      "Dalmau J, Rosenfeld MR. Paraneoplastic syndromes of the CNS. Lancet Neurology.",
+      "Bradley and Daroff's Neurology in Clinical Practice, current edition."
+    ],
+    "crossLinks": [],
+    "management": [
+      "Detection and definitive oncological treatment of the underlying tumour, most often small-cell lung carcinoma, as the primary intervention",
+      "Immunotherapy with corticosteroids, intravenous immunoglobulin or plasma exchange, with cyclophosphamide or rituximab considered, recognising limited reversibility of onconeural anti-Hu antibody disease",
+      "Symptomatic management of seizures with anticonvulsants and of autonomic failure, including orthostatic hypotension and gastrointestinal pseudo-obstruction",
+      "Cardiac monitoring for dysrhythmia and respiratory support for brainstem involvement threatening ventilation",
+      "Continued whole-body tumour surveillance when initial imaging is negative, as neurological symptoms usually precede the cancer",
+      "Coordinated neurology and oncology multidisciplinary management with supportive rehabilitation"
     ]
-   ],
-   "caption": "Overview comparison matrix for paraneoplastic encephalomyelitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "paraneoplastic-encephalomyelitis-real-image",
-   "title": "paraneoplastic encephalomyelitis: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "paraneoplastic_encephalomyelitis-pathway",
+      "title": "paraneoplastic encephalomyelitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Multifocal disorder combining two or more of limbic encephalitis, brainstem encephalitis, cerebellar degeneration, myelitis, dorsal root ganglionopathy and autonomic failure.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: respiratory failure or bulbar compromise from brainstem involvement",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: serum and CSF anti-Hu (ANNA-1) and extended paraneoplastic antibody panel, MRI brain and whole spine with contrast, CSF analysis with cytology and oligoclonal bands"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Detection and definitive oncological treatment of the underlying tumour, most often small-cell lung carcinoma, as the primary intervention"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing multifocal neurological signs to cerebral metastases rather than a paraneoplastic process."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of paraneoplastic encephalomyelitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "paraneoplastic_encephalomyelitis-matrix",
+      "title": "paraneoplastic encephalomyelitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Multifocal disorder combining two or more of limbic encephalitis, brainstem encephalitis, cerebellar degeneration, myelitis,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "serum and CSF anti-Hu (ANNA-1) and extended paraneoplastic antibody panel, MRI brain and whole spine with contrast, CSF analysis",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "infectious rhombencephalitis (e.g. listerial) and other viral encephalomyelitides, Bickerstaff brainstem encephalitis, multiple",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Detection and definitive oncological treatment of the underlying tumour, most often small-cell lung carcinoma, as the primary",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing multifocal neurological signs to cerebral metastases rather than a paraneoplastic process.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for paraneoplastic encephalomyelitis."
+    }
+  ],
+  "diagrams": []
 }

@@ -1,178 +1,156 @@
 {
- "id": "nipah_virus",
- "name": "Nipah virus infection",
- "aliases": [
-  "NiV",
-  "Nipah encephalitis",
-  "Nipah virus disease"
- ],
- "class": "infective",
- "system": "Infectious / Tropical",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / WHO / India national programmes",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A highly lethal zoonotic paramyxovirus (henipavirus) whose natural reservoir is fruit bats (Pteropus species)",
-   "In India transmission has been linked to consumption of date-palm sap contaminated by bat secretions and to close contact with infected patients, with documented person-to-person and nosocomial spread",
-   "Presents as rapidly progressive encephalitis with fever, headache, altered mental status and often prominent brainstem signs; respiratory involvement may also occur",
-   "Case fatality is very high, and survivors may suffer residual neurological deficits or relapsing/late-onset encephalitis",
-   "No licensed antiviral or vaccine is established; management is supportive with rigorous infection control",
-   "Strict barrier precautions, patient isolation and contact tracing are essential because human-to-human transmission drives outbreaks",
-   "It is classified as a priority pathogen of pandemic potential requiring immediate public-health notification",
-   "Diagnosis uses RT-PCR on respiratory secretions, CSF, urine or blood, and serology (IgM/IgG ELISA), performed in high-containment laboratories"
+  "id": "nipah_virus",
+  "name": "Nipah virus infection",
+  "aliases": [
+    "NiV",
+    "Nipah encephalitis",
+    "Nipah virus disease"
   ],
-  "pathophysiology": "Nipah virus is an enveloped RNA henipavirus that infects endothelium and neurons. After spillover from fruit bats (directly, via contaminated food, or from intermediate hosts such as pigs), the virus causes a systemic vasculitis with endothelial infection, syncytium formation, thrombosis and microinfarction, particularly in the central nervous system. This vasculitic and direct neuronal injury produces the severe encephalitis, while pulmonary endothelial and epithelial infection can cause acute respiratory distress. The capacity of the virus to persist may underlie relapsing or delayed-onset encephalitis in some survivors.",
-  "additionalDifferentials": [
-   "Japanese encephalitis and other viral encephalitides",
-   "Herpes simplex encephalitis",
-   "Cerebral malaria",
-   "Bacterial or tuberculous meningoencephalitis",
-   "Scrub typhus with CNS involvement",
-   "Leptospirosis with meningoencephalitis"
-  ],
-  "infectionMimics": [
-   "Autoimmune encephalitis",
-   "Acute disseminated encephalomyelitis",
-   "Severe sepsis with encephalopathy"
-  ],
-  "additionalInvestigations": [
-   "RT-PCR of throat/nasal swabs, CSF, urine and blood in a biosafe reference laboratory",
-   "Nipah-specific IgM and IgG serology by ELISA",
-   "MRI brain, which may show disseminated small cortical and subcortical lesions",
-   "CSF examination when safe, typically showing lymphocytic pleocytosis",
-   "Chest imaging if respiratory involvement is suspected"
-  ],
-  "redFlags": [
-   "Rapidly deteriorating consciousness or brainstem dysfunction signalling life-threatening encephalitis",
-   "Any respiratory distress raising concern for airborne/droplet transmissibility and severe disease",
-   "Cluster of cases or contact with a confirmed case, mandating immediate isolation and outbreak response",
-   "Autonomic instability or seizures requiring critical-care support"
-  ],
-  "prognosis": "Nipah virus disease is one of the most lethal human encephalitides, with case fatality frequently exceeding half of symptomatic cases. Survivors may be left with persistent neurological impairment, and a minority develop relapsing or late-onset encephalitis months to years later.",
-  "pitfalls": [
-   "Failing to institute isolation and barrier precautions early, allowing nosocomial and family transmission",
-   "Delaying notification to public-health authorities during a suspected cluster",
-   "Attributing the illness to more common encephalitides and not sending appropriate high-containment testing",
-   "Underestimating the risk to healthcare workers during aerosol-generating procedures"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "WHO guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Deliver intensive supportive care as there is no licensed antiviral, with mechanical ventilation and organ support for encephalitis and acute respiratory distress",
-   "Consider investigational therapies such as ribavirin or a monoclonal antibody (m102.4) within research or compassionate-use frameworks",
-   "Enforce strict infection control with patient isolation, barrier precautions and personal protective equipment, given documented person-to-person and nosocomial transmission",
-   "Manage the encephalitis with seizure control, treatment of raised intracranial pressure and meticulous neurocritical care",
-   "Notify public health authorities and undertake contact tracing and outbreak control, including avoidance of raw date-palm sap and contact with sick animals",
-   "Monitor survivors for residual neurological deficits and for relapsing or late-onset encephalitis",
-   "Coordinate care through infectious diseases and critical care within a designated high-consequence pathogen pathway"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "nipah_virus-pathway",
-   "title": "Nipah virus infection: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A highly lethal zoonotic paramyxovirus (henipavirus) whose natural reservoir is fruit bats (Pteropus species)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly deteriorating consciousness or brainstem dysfunction signalling life-threatening encephalitis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: RT-PCR of throat/nasal swabs, CSF, urine and blood in a biosafe reference laboratory, Nipah-specific IgM and IgG serology by ELISA, MRI brain, which may show disseminated small cortical and subcortical lesions"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Deliver intensive supportive care as there is no licensed antiviral, with mechanical ventilation and organ support for encephalitis and acute respiratory distress"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to institute isolation and barrier precautions early, allowing nosocomial and family transmission"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of nipah virus infection."
-  }
- ],
- "tables": [
-  {
-   "id": "nipah_virus-matrix",
-   "title": "Nipah virus infection: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A highly lethal zoonotic paramyxovirus (henipavirus) whose natural reservoir is fruit bats (Pteropus species)",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious / Tropical",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / WHO / India national programmes",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A highly lethal zoonotic paramyxovirus (henipavirus) whose natural reservoir is fruit bats (Pteropus species)",
+      "In India transmission has been linked to consumption of date-palm sap contaminated by bat secretions and to close contact with infected patients, with documented person-to-person and nosocomial spread",
+      "Presents as rapidly progressive encephalitis with fever, headache, altered mental status and often prominent brainstem signs; respiratory involvement may also occur",
+      "Case fatality is very high, and survivors may suffer residual neurological deficits or relapsing/late-onset encephalitis",
+      "No licensed antiviral or vaccine is established; management is supportive with rigorous infection control",
+      "Strict barrier precautions, patient isolation and contact tracing are essential because human-to-human transmission drives outbreaks",
+      "It is classified as a priority pathogen of pandemic potential requiring immediate public-health notification",
+      "Diagnosis uses RT-PCR on respiratory secretions, CSF, urine or blood, and serology (IgM/IgG ELISA), performed in high-containment laboratories"
     ],
-    [
-     "Key Investigations",
-     "RT-PCR of throat/nasal swabs, CSF, urine and blood in a biosafe reference laboratory, Nipah-specific IgM and IgG serology by",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Nipah virus is an enveloped RNA henipavirus that infects endothelium and neurons. After spillover from fruit bats (directly, via contaminated food, or from intermediate hosts such as pigs), the virus causes a systemic vasculitis with endothelial infection, syncytium formation, thrombosis and microinfarction, particularly in the central nervous system. This vasculitic and direct neuronal injury produces the severe encephalitis, while pulmonary endothelial and epithelial infection can cause acute respiratory distress. The capacity of the virus to persist may underlie relapsing or delayed-onset encephalitis in some survivors.",
+    "additionalDifferentials": [
+      "Japanese encephalitis and other viral encephalitides",
+      "Herpes simplex encephalitis",
+      "Cerebral malaria",
+      "Bacterial or tuberculous meningoencephalitis",
+      "Scrub typhus with CNS involvement",
+      "Leptospirosis with meningoencephalitis"
     ],
-    [
-     "Primary Differentials",
-     "Japanese encephalitis and other viral encephalitides, Herpes simplex encephalitis, Cerebral malaria",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Autoimmune encephalitis",
+      "Acute disseminated encephalomyelitis",
+      "Severe sepsis with encephalopathy"
     ],
-    [
-     "Management Strategy",
-     "Deliver intensive supportive care as there is no licensed antiviral, with mechanical ventilation and organ support for",
-     "Core treatment modality"
+    "additionalInvestigations": [
+      "RT-PCR of throat/nasal swabs, CSF, urine and blood in a biosafe reference laboratory",
+      "Nipah-specific IgM and IgG serology by ELISA",
+      "MRI brain, which may show disseminated small cortical and subcortical lesions",
+      "CSF examination when safe, typically showing lymphocytic pleocytosis",
+      "Chest imaging if respiratory involvement is suspected"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to institute isolation and barrier precautions early, allowing nosocomial and family transmission",
-     "Prevent diagnostic or management error"
+    "redFlags": [
+      "Rapidly deteriorating consciousness or brainstem dysfunction signalling life-threatening encephalitis",
+      "Any respiratory distress raising concern for airborne/droplet transmissibility and severe disease",
+      "Cluster of cases or contact with a confirmed case, mandating immediate isolation and outbreak response",
+      "Autonomic instability or seizures requiring critical-care support"
+    ],
+    "prognosis": "Nipah virus disease is one of the most lethal human encephalitides, with case fatality frequently exceeding half of symptomatic cases. Survivors may be left with persistent neurological impairment, and a minority develop relapsing or late-onset encephalitis months to years later.",
+    "pitfalls": [
+      "Failing to institute isolation and barrier precautions early, allowing nosocomial and family transmission",
+      "Delaying notification to public-health authorities during a suspected cluster",
+      "Attributing the illness to more common encephalitides and not sending appropriate high-containment testing",
+      "Underestimating the risk to healthcare workers during aerosol-generating procedures"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "WHO guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Deliver intensive supportive care as there is no licensed antiviral, with mechanical ventilation and organ support for encephalitis and acute respiratory distress",
+      "Consider investigational therapies such as ribavirin or a monoclonal antibody (m102.4) within research or compassionate-use frameworks",
+      "Enforce strict infection control with patient isolation, barrier precautions and personal protective equipment, given documented person-to-person and nosocomial transmission",
+      "Manage the encephalitis with seizure control, treatment of raised intracranial pressure and meticulous neurocritical care",
+      "Notify public health authorities and undertake contact tracing and outbreak control, including avoidance of raw date-palm sap and contact with sick animals",
+      "Monitor survivors for residual neurological deficits and for relapsing or late-onset encephalitis",
+      "Coordinate care through infectious diseases and critical care within a designated high-consequence pathogen pathway"
     ]
-   ],
-   "caption": "Overview comparison matrix for nipah virus infection."
-  }
- ],
- "diagrams": [
-  {
-   "id": "nipah-virus-real-image",
-   "title": "Nipah virus infection: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "nipah_virus-pathway",
+      "title": "Nipah virus infection: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A highly lethal zoonotic paramyxovirus (henipavirus) whose natural reservoir is fruit bats (Pteropus species)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly deteriorating consciousness or brainstem dysfunction signalling life-threatening encephalitis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: RT-PCR of throat/nasal swabs, CSF, urine and blood in a biosafe reference laboratory, Nipah-specific IgM and IgG serology by ELISA, MRI brain, which may show disseminated small cortical and subcortical lesions"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Deliver intensive supportive care as there is no licensed antiviral, with mechanical ventilation and organ support for encephalitis and acute respiratory distress"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to institute isolation and barrier precautions early, allowing nosocomial and family transmission"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of nipah virus infection."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "nipah_virus-matrix",
+      "title": "Nipah virus infection: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A highly lethal zoonotic paramyxovirus (henipavirus) whose natural reservoir is fruit bats (Pteropus species)",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "RT-PCR of throat/nasal swabs, CSF, urine and blood in a biosafe reference laboratory, Nipah-specific IgM and IgG serology by",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Japanese encephalitis and other viral encephalitides, Herpes simplex encephalitis, Cerebral malaria",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Deliver intensive supportive care as there is no licensed antiviral, with mechanical ventilation and organ support for",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to institute isolation and barrier precautions early, allowing nosocomial and family transmission",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for nipah virus infection."
+    }
+  ],
+  "diagrams": []
 }

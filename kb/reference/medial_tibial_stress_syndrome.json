@@ -1,169 +1,147 @@
 {
- "id": "medial_tibial_stress_syndrome",
- "name": "Medial tibial stress syndrome",
- "aliases": [
-  "shin splints",
-  "tibial periostitis"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal",
- "specialty": "Sports medicine / Orthopaedics",
- "referenceOnly": true,
- "reference": {
-  "source": "Sports medicine references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Exercise-induced pain along the posteromedial border of the tibia, typically over a diffuse length rather than a focal point",
-   "Pain characteristically eases with rest early on but can become more persistent with continued activity",
-   "It is an overuse injury common in runners, dancers and military recruits, often after a change in training load or surface",
-   "A key differential is tibial stress fracture, which causes more focal tenderness and pain, and chronic exertional compartment syndrome",
-   "Tenderness is spread over several centimetres of the distal medial tibia, unlike the pinpoint tenderness of a stress fracture",
-   "Management centres on relative rest, load modification, addressing biomechanical and training factors, and graded return"
+  "id": "medial_tibial_stress_syndrome",
+  "name": "Medial tibial stress syndrome",
+  "aliases": [
+    "shin splints",
+    "tibial periostitis"
   ],
-  "pathophysiology": "Medial tibial stress syndrome represents a bone-stress and periosteal overload injury along the posteromedial tibia, sitting on a continuum that can progress to tibial stress fracture. Repetitive loading exceeds the bone's capacity to remodel, producing periosteal and cortical stress and traction from the muscles attaching along the tibial border. Contributing factors include training errors, poor footwear, hard surfaces and biomechanical abnormalities such as overpronation, which concentrate load on the medial tibia.",
-  "additionalDifferentials": [
-   "Tibial stress fracture",
-   "Chronic exertional compartment syndrome",
-   "Popliteal artery entrapment syndrome",
-   "Tendinopathy of tibialis posterior or soleus",
-   "Nerve entrapment causing exertional leg pain"
-  ],
-  "additionalInvestigations": [
-   "Clinical diagnosis from the diffuse posteromedial tibial tenderness",
-   "Plain radiographs, often normal, to exclude other bony pathology",
-   "MRI or bone scan where stress fracture needs to be distinguished",
-   "Assessment of training load, footwear and biomechanics",
-   "Compartment pressure testing if exertional compartment syndrome is suspected"
-  ],
-  "redFlags": [
-   "Focal tenderness and night or rest pain suggesting stress fracture",
-   "Neurovascular symptoms suggesting compartment syndrome or arterial entrapment",
-   "Failure to improve with appropriate load management",
-   "Features suggesting bone pathology other than stress injury"
-  ],
-  "prognosis": "The condition usually resolves with load modification and correction of contributing factors, though recovery can be slow and recurrence is common if training errors persist.",
-  "pitfalls": [
-   "Missing a progressing tibial stress fracture",
-   "Overlooking chronic exertional compartment syndrome as the true cause",
-   "Returning to full training too quickly",
-   "Failing to correct biomechanical and training-load factors"
-  ],
-  "references": [
-   "Sports medicine references (standard reference)",
-   "Orthopaedic reference texts (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Relative rest and load modification, reducing the aggravating running or impact volume",
-   "Correct contributing factors: training errors, running surface, appropriate footwear and orthoses for overpronation",
-   "Symptomatic relief with ice and simple analgesia",
-   "Rehabilitation with calf and lower-limb strengthening and gait retraining",
-   "Graded, progressive return to impact loading once symptoms settle",
-   "Monitor for progression to tibial stress fracture and image if focal pain develops",
-   "Refer for specialist assessment in refractory cases, with surgery such as posterior fasciotomy or periosteal release rarely required"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "medial_tibial_stress_syndrome-pathway",
-   "title": "Medial tibial stress syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Exercise-induced pain along the posteromedial border of the tibia, typically over a diffuse length rather than a focal point",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Focal tenderness and night or rest pain suggesting stress fracture",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical diagnosis from the diffuse posteromedial tibial tenderness, Plain radiographs, often normal, to exclude other bony pathology, MRI or bone scan where stress fracture needs to be distinguished"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Relative rest and load modification, reducing the aggravating running or impact volume"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing a progressing tibial stress fracture"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of medial tibial stress syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "medial_tibial_stress_syndrome-matrix",
-   "title": "Medial tibial stress syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Exercise-induced pain along the posteromedial border of the tibia, typically over a diffuse length rather than a focal point",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal",
+  "specialty": "Sports medicine / Orthopaedics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sports medicine references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Exercise-induced pain along the posteromedial border of the tibia, typically over a diffuse length rather than a focal point",
+      "Pain characteristically eases with rest early on but can become more persistent with continued activity",
+      "It is an overuse injury common in runners, dancers and military recruits, often after a change in training load or surface",
+      "A key differential is tibial stress fracture, which causes more focal tenderness and pain, and chronic exertional compartment syndrome",
+      "Tenderness is spread over several centimetres of the distal medial tibia, unlike the pinpoint tenderness of a stress fracture",
+      "Management centres on relative rest, load modification, addressing biomechanical and training factors, and graded return"
     ],
-    [
-     "Key Investigations",
-     "Clinical diagnosis from the diffuse posteromedial tibial tenderness, Plain radiographs, often normal, to exclude other bony",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Medial tibial stress syndrome represents a bone-stress and periosteal overload injury along the posteromedial tibia, sitting on a continuum that can progress to tibial stress fracture. Repetitive loading exceeds the bone's capacity to remodel, producing periosteal and cortical stress and traction from the muscles attaching along the tibial border. Contributing factors include training errors, poor footwear, hard surfaces and biomechanical abnormalities such as overpronation, which concentrate load on the medial tibia.",
+    "additionalDifferentials": [
+      "Tibial stress fracture",
+      "Chronic exertional compartment syndrome",
+      "Popliteal artery entrapment syndrome",
+      "Tendinopathy of tibialis posterior or soleus",
+      "Nerve entrapment causing exertional leg pain"
     ],
-    [
-     "Primary Differentials",
-     "Tibial stress fracture, Chronic exertional compartment syndrome, Popliteal artery entrapment syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical diagnosis from the diffuse posteromedial tibial tenderness",
+      "Plain radiographs, often normal, to exclude other bony pathology",
+      "MRI or bone scan where stress fracture needs to be distinguished",
+      "Assessment of training load, footwear and biomechanics",
+      "Compartment pressure testing if exertional compartment syndrome is suspected"
     ],
-    [
-     "Management Strategy",
-     "Relative rest and load modification, reducing the aggravating running or impact volume",
-     "Core treatment modality"
+    "redFlags": [
+      "Focal tenderness and night or rest pain suggesting stress fracture",
+      "Neurovascular symptoms suggesting compartment syndrome or arterial entrapment",
+      "Failure to improve with appropriate load management",
+      "Features suggesting bone pathology other than stress injury"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing a progressing tibial stress fracture",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition usually resolves with load modification and correction of contributing factors, though recovery can be slow and recurrence is common if training errors persist.",
+    "pitfalls": [
+      "Missing a progressing tibial stress fracture",
+      "Overlooking chronic exertional compartment syndrome as the true cause",
+      "Returning to full training too quickly",
+      "Failing to correct biomechanical and training-load factors"
+    ],
+    "references": [
+      "Sports medicine references (standard reference)",
+      "Orthopaedic reference texts (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Relative rest and load modification, reducing the aggravating running or impact volume",
+      "Correct contributing factors: training errors, running surface, appropriate footwear and orthoses for overpronation",
+      "Symptomatic relief with ice and simple analgesia",
+      "Rehabilitation with calf and lower-limb strengthening and gait retraining",
+      "Graded, progressive return to impact loading once symptoms settle",
+      "Monitor for progression to tibial stress fracture and image if focal pain develops",
+      "Refer for specialist assessment in refractory cases, with surgery such as posterior fasciotomy or periosteal release rarely required"
     ]
-   ],
-   "caption": "Overview comparison matrix for medial tibial stress syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "medial-tibial-stress-syndrome-real-image",
-   "title": "Medial tibial stress syndrome: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "medial_tibial_stress_syndrome-pathway",
+      "title": "Medial tibial stress syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Exercise-induced pain along the posteromedial border of the tibia, typically over a diffuse length rather than a focal point",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Focal tenderness and night or rest pain suggesting stress fracture",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical diagnosis from the diffuse posteromedial tibial tenderness, Plain radiographs, often normal, to exclude other bony pathology, MRI or bone scan where stress fracture needs to be distinguished"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Relative rest and load modification, reducing the aggravating running or impact volume"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing a progressing tibial stress fracture"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of medial tibial stress syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "medial_tibial_stress_syndrome-matrix",
+      "title": "Medial tibial stress syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Exercise-induced pain along the posteromedial border of the tibia, typically over a diffuse length rather than a focal point",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical diagnosis from the diffuse posteromedial tibial tenderness, Plain radiographs, often normal, to exclude other bony",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Tibial stress fracture, Chronic exertional compartment syndrome, Popliteal artery entrapment syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Relative rest and load modification, reducing the aggravating running or impact volume",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing a progressing tibial stress fracture",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for medial tibial stress syndrome."
+    }
+  ],
+  "diagrams": []
 }

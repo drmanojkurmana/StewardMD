@@ -1,175 +1,153 @@
 {
- "id": "osteogenesis_imperfecta",
- "name": "Osteogenesis imperfecta",
- "aliases": [
-  "OI",
-  "brittle bone disease",
-  "COL1A1",
-  "COL1A2",
-  "Sillence types I-IV"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Genetics",
- "specialty": "Clinical Genetics / Skeletal Dysplasia",
- "referenceOnly": true,
- "reference": {
-  "source": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Classically presents with bone fragility and recurrent fractures from little or no trauma, often prompting consideration of non-accidental injury which must be excluded",
-   "Most cases result from dominant pathogenic variants in COL1A1 or COL1A2 affecting type I collagen quantity or structure, though recessive forms involving collagen-processing genes exist",
-   "Extraskeletal features frequently include blue or grey sclerae, dentinogenesis imperfecta, ligamentous laxity, and progressive conductive or mixed hearing loss",
-   "The Sillence classification (types I-IV, with expanded modern subtypes) ranges from mild (type I) through perinatally lethal (type II) to progressively deforming (type III)",
-   "Radiographs show generalised osteopenia, thin cortices, gracile or bowed long bones, wormian bones in the skull, and vertebral compression",
-   "Bisphosphonates are used to reduce fracture frequency and bone pain, alongside physiotherapy, orthopaedic fracture and deformity management, and audiology surveillance",
-   "Basilar invagination is an important late craniocervical complication in severe deforming disease"
+  "id": "osteogenesis_imperfecta",
+  "name": "Osteogenesis imperfecta",
+  "aliases": [
+    "OI",
+    "brittle bone disease",
+    "COL1A1",
+    "COL1A2",
+    "Sillence types I-IV"
   ],
-  "pathophysiology": "Osteogenesis imperfecta is a heritable disorder of connective tissue in which abnormal type I collagen, the principal protein of bone matrix, leads to reduced bone mass and mechanical fragility. Most patients carry dominant variants in COL1A1 or COL1A2; null variants reduce the amount of otherwise normal collagen and cause milder disease, whereas variants that distort the collagen triple helix produce a more severe dominant-negative effect. Rarer recessive forms disrupt genes involved in collagen folding, post-translational modification, or bone mineralisation. The resulting defective matrix impairs bone strength and also affects other collagen-rich tissues such as sclera, dentine, and the middle ear ossicles.",
-  "additionalDifferentials": [
-   "Non-accidental injury (inflicted skeletal trauma)",
-   "Idiopathic juvenile osteoporosis",
-   "Hypophosphatasia",
-   "Bruck syndrome (OI with congenital contractures)",
-   "Cole-Carpenter and other osteoporosis-fracture syndromes",
-   "Menkes disease and other collagen or copper metabolism disorders"
-  ],
-  "additionalInvestigations": [
-   "Skeletal survey to characterise fracture pattern, bowing, wormian bones, and vertebral changes",
-   "Molecular genetic testing of COL1A1/COL1A2 and, if negative, an extended skeletal dysplasia/recessive OI gene panel",
-   "Dual-energy X-ray absorptiometry to quantify bone mineral density",
-   "Audiological assessment for conductive or mixed hearing loss",
-   "Dental review for dentinogenesis imperfecta",
-   "Craniocervical imaging in severe disease to detect basilar invagination"
-  ],
-  "redFlags": [
-   "Multiple fractures at different healing stages requiring careful differentiation from non-accidental injury",
-   "Progressive spinal deformity with restrictive respiratory compromise",
-   "Neurological signs suggesting basilar invagination or brainstem compression",
-   "Perinatal presentation with a small deformed thorax and multiple in-utero fractures suggesting a lethal form"
-  ],
-  "prognosis": "Prognosis spans from a near-normal lifespan and function in mild type I disease to perinatal lethality in type II. Severe deforming forms carry lifelong mobility limitation, and outcome is strongly influenced by respiratory reserve and craniocervical complications.",
-  "pitfalls": [
-   "Attributing fractures solely to abuse, or conversely dismissing genuine inflicted injury as OI, without appropriate multidisciplinary assessment",
-   "Relying on sclerae colour alone, as blue sclerae are non-specific and may be absent in some types",
-   "Overlooking hearing loss and dental disease, which need proactive surveillance",
-   "Failing to monitor for basilar invagination in progressively deforming disease"
-  ],
-  "references": [
-   "Smith's Recognizable Patterns of Human Malformation",
-   "Nelson Textbook of Pediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Bisphosphonate antiresorptive therapy to reduce fracture frequency and bone pain in moderate-to-severe disease",
-   "Orthopaedic fracture management and intramedullary rodding to stabilise and correct deformity in bowed or repeatedly fracturing long bones",
-   "Physiotherapy, rehabilitation and mobility aids to build strength and maximise function and independence",
-   "Audiological surveillance for conductive or mixed hearing loss and dental care for dentinogenesis imperfecta",
-   "Monitoring with bone densitometry and, in severe disease, craniocervical imaging for basilar invagination",
-   "Coordinated care through a multidisciplinary bone and skeletal-dysplasia team",
-   "Genetic counselling and family assessment given dominant COL1A1/COL1A2 inheritance and rarer recessive forms"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "osteogenesis_imperfecta-pathway",
-   "title": "Osteogenesis imperfecta: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Classically presents with bone fragility and recurrent fractures from little or no trauma, often prompting consideration of non-accidental injury which must be excluded",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Multiple fractures at different healing stages requiring careful differentiation from non-accidental injury",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skeletal survey to characterise fracture pattern, bowing, wormian bones, and vertebral changes, Molecular genetic testing of COL1A1/COL1A2 and, if negative, an extended skeletal dysplasia/recessive OI gene panel,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Bisphosphonate antiresorptive therapy to reduce fracture frequency and bone pain in moderate-to-severe disease"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing fractures solely to abuse, or conversely dismissing genuine inflicted injury as OI, without appropriate multidisciplinary assessment"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of osteogenesis imperfecta."
-  }
- ],
- "tables": [
-  {
-   "id": "osteogenesis_imperfecta-matrix",
-   "title": "Osteogenesis imperfecta: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Classically presents with bone fragility and recurrent fractures from little or no trauma, often prompting consideration of",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Genetics",
+  "specialty": "Clinical Genetics / Skeletal Dysplasia",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Classically presents with bone fragility and recurrent fractures from little or no trauma, often prompting consideration of non-accidental injury which must be excluded",
+      "Most cases result from dominant pathogenic variants in COL1A1 or COL1A2 affecting type I collagen quantity or structure, though recessive forms involving collagen-processing genes exist",
+      "Extraskeletal features frequently include blue or grey sclerae, dentinogenesis imperfecta, ligamentous laxity, and progressive conductive or mixed hearing loss",
+      "The Sillence classification (types I-IV, with expanded modern subtypes) ranges from mild (type I) through perinatally lethal (type II) to progressively deforming (type III)",
+      "Radiographs show generalised osteopenia, thin cortices, gracile or bowed long bones, wormian bones in the skull, and vertebral compression",
+      "Bisphosphonates are used to reduce fracture frequency and bone pain, alongside physiotherapy, orthopaedic fracture and deformity management, and audiology surveillance",
+      "Basilar invagination is an important late craniocervical complication in severe deforming disease"
     ],
-    [
-     "Key Investigations",
-     "Skeletal survey to characterise fracture pattern, bowing, wormian bones, and vertebral changes, Molecular genetic testing of",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Osteogenesis imperfecta is a heritable disorder of connective tissue in which abnormal type I collagen, the principal protein of bone matrix, leads to reduced bone mass and mechanical fragility. Most patients carry dominant variants in COL1A1 or COL1A2; null variants reduce the amount of otherwise normal collagen and cause milder disease, whereas variants that distort the collagen triple helix produce a more severe dominant-negative effect. Rarer recessive forms disrupt genes involved in collagen folding, post-translational modification, or bone mineralisation. The resulting defective matrix impairs bone strength and also affects other collagen-rich tissues such as sclera, dentine, and the middle ear ossicles.",
+    "additionalDifferentials": [
+      "Non-accidental injury (inflicted skeletal trauma)",
+      "Idiopathic juvenile osteoporosis",
+      "Hypophosphatasia",
+      "Bruck syndrome (OI with congenital contractures)",
+      "Cole-Carpenter and other osteoporosis-fracture syndromes",
+      "Menkes disease and other collagen or copper metabolism disorders"
     ],
-    [
-     "Primary Differentials",
-     "Non-accidental injury (inflicted skeletal trauma), Idiopathic juvenile osteoporosis, Hypophosphatasia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skeletal survey to characterise fracture pattern, bowing, wormian bones, and vertebral changes",
+      "Molecular genetic testing of COL1A1/COL1A2 and, if negative, an extended skeletal dysplasia/recessive OI gene panel",
+      "Dual-energy X-ray absorptiometry to quantify bone mineral density",
+      "Audiological assessment for conductive or mixed hearing loss",
+      "Dental review for dentinogenesis imperfecta",
+      "Craniocervical imaging in severe disease to detect basilar invagination"
     ],
-    [
-     "Management Strategy",
-     "Bisphosphonate antiresorptive therapy to reduce fracture frequency and bone pain in moderate-to-severe disease",
-     "Core treatment modality"
+    "redFlags": [
+      "Multiple fractures at different healing stages requiring careful differentiation from non-accidental injury",
+      "Progressive spinal deformity with restrictive respiratory compromise",
+      "Neurological signs suggesting basilar invagination or brainstem compression",
+      "Perinatal presentation with a small deformed thorax and multiple in-utero fractures suggesting a lethal form"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing fractures solely to abuse, or conversely dismissing genuine inflicted injury as OI, without appropriate",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis spans from a near-normal lifespan and function in mild type I disease to perinatal lethality in type II. Severe deforming forms carry lifelong mobility limitation, and outcome is strongly influenced by respiratory reserve and craniocervical complications.",
+    "pitfalls": [
+      "Attributing fractures solely to abuse, or conversely dismissing genuine inflicted injury as OI, without appropriate multidisciplinary assessment",
+      "Relying on sclerae colour alone, as blue sclerae are non-specific and may be absent in some types",
+      "Overlooking hearing loss and dental disease, which need proactive surveillance",
+      "Failing to monitor for basilar invagination in progressively deforming disease"
+    ],
+    "references": [
+      "Smith's Recognizable Patterns of Human Malformation",
+      "Nelson Textbook of Pediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Bisphosphonate antiresorptive therapy to reduce fracture frequency and bone pain in moderate-to-severe disease",
+      "Orthopaedic fracture management and intramedullary rodding to stabilise and correct deformity in bowed or repeatedly fracturing long bones",
+      "Physiotherapy, rehabilitation and mobility aids to build strength and maximise function and independence",
+      "Audiological surveillance for conductive or mixed hearing loss and dental care for dentinogenesis imperfecta",
+      "Monitoring with bone densitometry and, in severe disease, craniocervical imaging for basilar invagination",
+      "Coordinated care through a multidisciplinary bone and skeletal-dysplasia team",
+      "Genetic counselling and family assessment given dominant COL1A1/COL1A2 inheritance and rarer recessive forms"
     ]
-   ],
-   "caption": "Overview comparison matrix for osteogenesis imperfecta."
-  }
- ],
- "diagrams": [
-  {
-   "id": "osteogenesis-imperfecta-real-image",
-   "title": "Osteogenesis imperfecta: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "osteogenesis_imperfecta-pathway",
+      "title": "Osteogenesis imperfecta: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Classically presents with bone fragility and recurrent fractures from little or no trauma, often prompting consideration of non-accidental injury which must be excluded",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Multiple fractures at different healing stages requiring careful differentiation from non-accidental injury",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skeletal survey to characterise fracture pattern, bowing, wormian bones, and vertebral changes, Molecular genetic testing of COL1A1/COL1A2 and, if negative, an extended skeletal dysplasia/recessive OI gene panel,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Bisphosphonate antiresorptive therapy to reduce fracture frequency and bone pain in moderate-to-severe disease"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing fractures solely to abuse, or conversely dismissing genuine inflicted injury as OI, without appropriate multidisciplinary assessment"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of osteogenesis imperfecta."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "osteogenesis_imperfecta-matrix",
+      "title": "Osteogenesis imperfecta: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Classically presents with bone fragility and recurrent fractures from little or no trauma, often prompting consideration of",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skeletal survey to characterise fracture pattern, bowing, wormian bones, and vertebral changes, Molecular genetic testing of",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Non-accidental injury (inflicted skeletal trauma), Idiopathic juvenile osteoporosis, Hypophosphatasia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Bisphosphonate antiresorptive therapy to reduce fracture frequency and bone pain in moderate-to-severe disease",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing fractures solely to abuse, or conversely dismissing genuine inflicted injury as OI, without appropriate",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for osteogenesis imperfecta."
+    }
+  ],
+  "diagrams": []
 }

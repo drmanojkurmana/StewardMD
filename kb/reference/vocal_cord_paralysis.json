@@ -1,173 +1,151 @@
 {
- "id": "vocal_cord_paralysis",
- "name": "Vocal fold paralysis",
- "aliases": [
-  "vocal cord paralysis",
-  "recurrent laryngeal nerve palsy",
-  "unilateral vocal fold paralysis",
-  "bilateral vocal fold paralysis"
- ],
- "class": "non_infective",
- "system": "Ear-Nose-Throat / Laryngology",
- "specialty": "Otolaryngology",
- "referenceOnly": true,
- "reference": {
-  "source": "Cummings Otolaryngology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Results from impaired function of the vagus or recurrent laryngeal nerve, so establishing the cause along the whole nerve course is essential",
-   "Unilateral paralysis typically causes a breathy, weak voice with a poor cough and aspiration risk from incomplete glottic closure",
-   "Bilateral paralysis, with both folds near the midline, threatens the airway and can present with stridor and dyspnoea, often with a surprisingly good voice",
-   "The left recurrent laryngeal nerve's long intrathoracic course makes it vulnerable to mediastinal and aortic pathology",
-   "Iatrogenic injury, especially after thyroid, parathyroid, anterior cervical spine, or cardiothoracic surgery, is a leading cause",
-   "Unilateral cases are managed with voice therapy and, where compensation is inadequate, injection augmentation or medialisation thyroplasty",
-   "Bilateral paralysis may require a temporary tracheostomy for the airway, with later procedures to enlarge the glottis balanced against voice"
+  "id": "vocal_cord_paralysis",
+  "name": "Vocal fold paralysis",
+  "aliases": [
+    "vocal cord paralysis",
+    "recurrent laryngeal nerve palsy",
+    "unilateral vocal fold paralysis",
+    "bilateral vocal fold paralysis"
   ],
-  "pathophysiology": "Vocal fold paralysis arises from interruption of the motor supply to the intrinsic laryngeal muscles anywhere along the vagus nerve and its recurrent laryngeal branch, from the brainstem nucleus to the muscle. Because the recurrent laryngeal nerve loops into the thorax, particularly on the left around the aortic arch, lesions in the neck, chest, or skull base can all be responsible; common mechanisms include surgical trauma, malignant infiltration, and neuropathy, with a proportion remaining idiopathic. Loss of adductor and abductor tone leaves the fold in a paramedian or intermediate position. In unilateral loss the mobile fold cannot fully compensate, giving incomplete closure with a breathy voice and aspiration; in bilateral loss both folds sit near the midline, so the voice may be preserved but the airway is critically narrowed.",
-  "additionalDifferentials": [
-   "Cricoarytenoid joint fixation (e.g. from rheumatoid arthritis or intubation trauma)",
-   "Posterior glottic stenosis",
-   "Functional (non-organic) dysphonia",
-   "Myasthenia gravis affecting the larynx",
-   "Central neurological disease affecting vagal nuclei",
-   "Laryngeal malignancy restricting fold movement"
-  ],
-  "additionalInvestigations": [
-   "Flexible fibreoptic laryngoscopy to confirm impaired mobility and fold position",
-   "Laryngeal electromyography to distinguish neurogenic paralysis from mechanical fixation and assess prognosis",
-   "CT from skull base to mediastinum to trace the vagus and recurrent laryngeal nerve course",
-   "Videostroboscopy to assess glottic closure and the mucosal wave",
-   "Targeted investigation for thyroid, oesophageal, pulmonary, or mediastinal pathology when no surgical cause is evident"
-  ],
-  "redFlags": [
-   "Bilateral paralysis with stridor or dyspnoea, an airway emergency",
-   "A new paralysis without an obvious surgical cause, mandating a search for malignancy along the nerve",
-   "Significant aspiration with recurrent chest infection or weight loss",
-   "Accompanying cranial nerve deficits pointing to a skull base or brainstem lesion"
-  ],
-  "prognosis": "Idiopathic and some postsurgical unilateral palsies may recover over many months, and most patients achieve a functional voice with therapy or medialisation; bilateral paralysis has a more guarded outlook because improving the airway usually comes at the expense of voice quality.",
-  "pitfalls": [
-   "Labelling a paralysis idiopathic before adequately imaging the entire course of the vagus and recurrent laryngeal nerve",
-   "Mistaking cricoarytenoid joint fixation for neurogenic paralysis without electromyography",
-   "Performing a permanent static medialisation too early, before spontaneous recovery has been given time",
-   "Underestimating the airway risk of bilateral paralysis and delaying airway protection"
-  ],
-  "references": [
-   "Cummings Otolaryngology: Head and Neck Surgery",
-   "Scott-Brown's Otorhinolaryngology, Head and Neck Surgery"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Establish and treat the cause along the vagus and recurrent laryngeal nerve course, addressing any malignancy or thoracic pathology",
-   "Voice therapy for unilateral paralysis to aid compensation and improve glottic closure",
-   "Injection augmentation or medialisation thyroplasty, with arytenoid adduction where needed, when compensation is inadequate",
-   "Swallowing assessment and aspiration precautions because of poor glottic closure and weak cough",
-   "Prioritise the airway in bilateral paralysis, using acute tracheostomy then posterior cordotomy, arytenoidectomy or reinnervation to balance airway and voice",
-   "Laryngeal electromyography to assess prognosis and timing before permanent surgery",
-   "ENT laryngology and speech therapy referral"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "vocal_cord_paralysis-pathway",
-   "title": "Vocal fold paralysis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Results from impaired function of the vagus or recurrent laryngeal nerve, so establishing the cause along the whole nerve course is essential",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Bilateral paralysis with stridor or dyspnoea, an airway emergency",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Flexible fibreoptic laryngoscopy to confirm impaired mobility and fold position, Laryngeal electromyography to distinguish neurogenic paralysis from mechanical fixation and assess prognosis, CT from skull base to"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Establish and treat the cause along the vagus and recurrent laryngeal nerve course, addressing any malignancy or thoracic pathology"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Labelling a paralysis idiopathic before adequately imaging the entire course of the vagus and recurrent laryngeal nerve"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of vocal fold paralysis."
-  }
- ],
- "tables": [
-  {
-   "id": "vocal_cord_paralysis-matrix",
-   "title": "Vocal fold paralysis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Results from impaired function of the vagus or recurrent laryngeal nerve, so establishing the cause along the whole nerve course",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Ear-Nose-Throat / Laryngology",
+  "specialty": "Otolaryngology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Cummings Otolaryngology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Results from impaired function of the vagus or recurrent laryngeal nerve, so establishing the cause along the whole nerve course is essential",
+      "Unilateral paralysis typically causes a breathy, weak voice with a poor cough and aspiration risk from incomplete glottic closure",
+      "Bilateral paralysis, with both folds near the midline, threatens the airway and can present with stridor and dyspnoea, often with a surprisingly good voice",
+      "The left recurrent laryngeal nerve's long intrathoracic course makes it vulnerable to mediastinal and aortic pathology",
+      "Iatrogenic injury, especially after thyroid, parathyroid, anterior cervical spine, or cardiothoracic surgery, is a leading cause",
+      "Unilateral cases are managed with voice therapy and, where compensation is inadequate, injection augmentation or medialisation thyroplasty",
+      "Bilateral paralysis may require a temporary tracheostomy for the airway, with later procedures to enlarge the glottis balanced against voice"
     ],
-    [
-     "Key Investigations",
-     "Flexible fibreoptic laryngoscopy to confirm impaired mobility and fold position, Laryngeal electromyography to distinguish",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Vocal fold paralysis arises from interruption of the motor supply to the intrinsic laryngeal muscles anywhere along the vagus nerve and its recurrent laryngeal branch, from the brainstem nucleus to the muscle. Because the recurrent laryngeal nerve loops into the thorax, particularly on the left around the aortic arch, lesions in the neck, chest, or skull base can all be responsible; common mechanisms include surgical trauma, malignant infiltration, and neuropathy, with a proportion remaining idiopathic. Loss of adductor and abductor tone leaves the fold in a paramedian or intermediate position. In unilateral loss the mobile fold cannot fully compensate, giving incomplete closure with a breathy voice and aspiration; in bilateral loss both folds sit near the midline, so the voice may be preserved but the airway is critically narrowed.",
+    "additionalDifferentials": [
+      "Cricoarytenoid joint fixation (e.g. from rheumatoid arthritis or intubation trauma)",
+      "Posterior glottic stenosis",
+      "Functional (non-organic) dysphonia",
+      "Myasthenia gravis affecting the larynx",
+      "Central neurological disease affecting vagal nuclei",
+      "Laryngeal malignancy restricting fold movement"
     ],
-    [
-     "Primary Differentials",
-     "Cricoarytenoid joint fixation (e.g. from rheumatoid arthritis or intubation trauma), Posterior glottic stenosis, Functional",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Flexible fibreoptic laryngoscopy to confirm impaired mobility and fold position",
+      "Laryngeal electromyography to distinguish neurogenic paralysis from mechanical fixation and assess prognosis",
+      "CT from skull base to mediastinum to trace the vagus and recurrent laryngeal nerve course",
+      "Videostroboscopy to assess glottic closure and the mucosal wave",
+      "Targeted investigation for thyroid, oesophageal, pulmonary, or mediastinal pathology when no surgical cause is evident"
     ],
-    [
-     "Management Strategy",
-     "Establish and treat the cause along the vagus and recurrent laryngeal nerve course, addressing any malignancy or thoracic",
-     "Core treatment modality"
+    "redFlags": [
+      "Bilateral paralysis with stridor or dyspnoea, an airway emergency",
+      "A new paralysis without an obvious surgical cause, mandating a search for malignancy along the nerve",
+      "Significant aspiration with recurrent chest infection or weight loss",
+      "Accompanying cranial nerve deficits pointing to a skull base or brainstem lesion"
     ],
-    [
-     "Clinical Pitfall",
-     "Labelling a paralysis idiopathic before adequately imaging the entire course of the vagus and recurrent laryngeal nerve",
-     "Prevent diagnostic or management error"
+    "prognosis": "Idiopathic and some postsurgical unilateral palsies may recover over many months, and most patients achieve a functional voice with therapy or medialisation; bilateral paralysis has a more guarded outlook because improving the airway usually comes at the expense of voice quality.",
+    "pitfalls": [
+      "Labelling a paralysis idiopathic before adequately imaging the entire course of the vagus and recurrent laryngeal nerve",
+      "Mistaking cricoarytenoid joint fixation for neurogenic paralysis without electromyography",
+      "Performing a permanent static medialisation too early, before spontaneous recovery has been given time",
+      "Underestimating the airway risk of bilateral paralysis and delaying airway protection"
+    ],
+    "references": [
+      "Cummings Otolaryngology: Head and Neck Surgery",
+      "Scott-Brown's Otorhinolaryngology, Head and Neck Surgery"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Establish and treat the cause along the vagus and recurrent laryngeal nerve course, addressing any malignancy or thoracic pathology",
+      "Voice therapy for unilateral paralysis to aid compensation and improve glottic closure",
+      "Injection augmentation or medialisation thyroplasty, with arytenoid adduction where needed, when compensation is inadequate",
+      "Swallowing assessment and aspiration precautions because of poor glottic closure and weak cough",
+      "Prioritise the airway in bilateral paralysis, using acute tracheostomy then posterior cordotomy, arytenoidectomy or reinnervation to balance airway and voice",
+      "Laryngeal electromyography to assess prognosis and timing before permanent surgery",
+      "ENT laryngology and speech therapy referral"
     ]
-   ],
-   "caption": "Overview comparison matrix for vocal fold paralysis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "vocal-cord-paralysis-real-image",
-   "title": "Vocal fold paralysis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "vocal_cord_paralysis-pathway",
+      "title": "Vocal fold paralysis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Results from impaired function of the vagus or recurrent laryngeal nerve, so establishing the cause along the whole nerve course is essential",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Bilateral paralysis with stridor or dyspnoea, an airway emergency",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Flexible fibreoptic laryngoscopy to confirm impaired mobility and fold position, Laryngeal electromyography to distinguish neurogenic paralysis from mechanical fixation and assess prognosis, CT from skull base to"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Establish and treat the cause along the vagus and recurrent laryngeal nerve course, addressing any malignancy or thoracic pathology"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Labelling a paralysis idiopathic before adequately imaging the entire course of the vagus and recurrent laryngeal nerve"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of vocal fold paralysis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "vocal_cord_paralysis-matrix",
+      "title": "Vocal fold paralysis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Results from impaired function of the vagus or recurrent laryngeal nerve, so establishing the cause along the whole nerve course",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Flexible fibreoptic laryngoscopy to confirm impaired mobility and fold position, Laryngeal electromyography to distinguish",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Cricoarytenoid joint fixation (e.g. from rheumatoid arthritis or intubation trauma), Posterior glottic stenosis, Functional",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Establish and treat the cause along the vagus and recurrent laryngeal nerve course, addressing any malignancy or thoracic",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Labelling a paralysis idiopathic before adequately imaging the entire course of the vagus and recurrent laryngeal nerve",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for vocal fold paralysis."
+    }
+  ],
+  "diagrams": []
 }

@@ -1,179 +1,157 @@
 {
- "id": "oleander_poisoning",
- "name": "Oleander poisoning",
- "aliases": [
-  "Nerium oleander poisoning",
-  "Yellow oleander poisoning",
-  "Thevetia poisoning"
- ],
- "class": "non_infective",
- "system": "Cardiovascular / Gastrointestinal",
- "specialty": "Toxicology / Emergency medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Toxicology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "All parts of common oleander (Nerium oleander) and yellow oleander (Cascabela/Thevetia peruviana) contain cardiac glycosides such as oleandrin and thevetin that act like digoxin.",
-   "Yellow oleander seed ingestion is a common means of deliberate self-poisoning in parts of South Asia and can cause fatal cardiotoxicity.",
-   "Clinical picture combines gastrointestinal upset (nausea, vomiting, abdominal pain) with cardiac glycoside toxicity: bradyarrhythmias, varying degrees of heart block and ventricular ectopy.",
-   "Hyperkalaemia from inhibition of the sodium-potassium ATPase is a marker of severe acute poisoning and correlates with poor outcome, mirroring acute digoxin toxicity.",
-   "The glycosides inhibit the myocardial sodium-potassium pump, raising intracellular calcium and increasing vagal tone, which enhances automaticity while depressing conduction.",
-   "Smoke from burning the plant and even honey or water contaminated by it can transmit toxin; boiling and cooking do not render the plant safe.",
-   "Digoxin-specific antibody fragments can bind oleander glycosides and are the definitive treatment for life-threatening arrhythmia or hyperkalaemia, though larger amounts may be needed due to cross-reactivity differences.",
-   "Standard serum digoxin immunoassays may cross-react and give a positive but unreliable quantitative result, useful qualitatively to support the diagnosis."
+  "id": "oleander_poisoning",
+  "name": "Oleander poisoning",
+  "aliases": [
+    "Nerium oleander poisoning",
+    "Yellow oleander poisoning",
+    "Thevetia poisoning"
   ],
-  "pathophysiology": "Oleander poisoning is caused by cardenolide cardiac glycosides, notably oleandrin in Nerium oleander and thevetin and related glycosides in yellow oleander, which are present throughout the plant including leaves, flowers, sap and seeds. Like digoxin these glycosides inhibit the membrane sodium-potassium ATPase of cardiac and other cells. Inhibition of the pump raises intracellular sodium, which reduces the driving force for the sodium-calcium exchanger and thereby increases intracellular calcium, augmenting myocardial contractility but also promoting delayed afterdepolarisations and increased automaticity. Simultaneously the glycosides enhance vagal tone and slow conduction through the sinoatrial and atrioventricular nodes, producing the characteristic combination of increased ventricular ectopy with bradyarrhythmias and atrioventricular block. In acute poisoning, widespread inhibition of the sodium-potassium pump in skeletal muscle and other tissues causes efflux of potassium into the plasma, so that rising serum potassium reflects the severity of toxin effect and predicts adverse outcome. Gastrointestinal glycoside effects and mucosal irritation account for the early vomiting and diarrhoea. Because the toxins are heat-stable, cooking, boiling or burning does not eliminate the hazard.",
-  "additionalDifferentials": [
-   "Digoxin or other medicinal cardiac glycoside toxicity",
-   "Other cardiac-glycoside-containing plants such as foxglove (Digitalis) or lily of the valley",
-   "Aconite poisoning causing ventricular arrhythmia",
-   "Beta-blocker or calcium-channel-blocker overdose with bradycardia",
-   "Primary cardiac conduction disease or ischaemia",
-   "Hyperkalaemia from renal failure or other cause",
-   "Acute gastroenteritis with electrolyte disturbance"
-  ],
-  "additionalInvestigations": [
-   "Continuous cardiac monitoring and serial 12-lead ECGs for bradyarrhythmia, heart block and ectopy",
-   "Serum potassium and other electrolytes, with potassium as a key severity marker",
-   "Renal function and acid-base assessment",
-   "Serum digoxin immunoassay used qualitatively given cross-reactivity with oleander glycosides",
-   "Magnesium and calcium levels to guide arrhythmia management",
-   "Blood glucose and basic metabolic screen to exclude mimics",
-   "Identification of the plant, seeds or preparation ingested"
-  ],
-  "redFlags": [
-   "Bradyarrhythmia or high-grade atrioventricular block",
-   "Rising serum potassium indicating severe glycoside effect",
-   "Ventricular ectopy or ventricular tachyarrhythmia",
-   "Haemodynamic instability or syncope",
-   "Deliberate ingestion of yellow oleander seeds"
-  ],
-  "prognosis": "Many patients recover with monitoring and supportive care, but poisoning complicated by marked hyperkalaemia, high-grade heart block or ventricular arrhythmia carries a substantial mortality. Timely use of digoxin-specific antibody fragments and cardiac support improves survival in severe cases.",
-  "pitfalls": [
-   "Relying on the quantitative serum digoxin level to gauge severity, as immunoassay cross-reactivity is only approximate",
-   "Giving calcium for hyperkalaemia as one might in other settings, which is generally avoided in cardiac glycoside toxicity",
-   "Assuming boiling, cooking or burning detoxifies the plant",
-   "Overlooking contaminated honey, water or smoke as sources of exposure",
-   "Failing to anticipate deterioration in an initially stable patient after seed ingestion"
-  ],
-  "references": [
-   "Standard clinical toxicology textbooks",
-   "Plant poisoning and cardiac glycoside reference materials",
-   "Emergency medicine and cardiology reference texts"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Digoxin-specific antibody fragments (Fab) are the definitive antidote for significant cardiac glycoside toxicity",
-   "Gastrointestinal decontamination with activated charcoal in early presentation, with multiple-dose charcoal considered",
-   "Continuous cardiac monitoring, treating bradyarrhythmia and heart block with atropine and temporary pacing as required",
-   "Manage hyperkalaemia, a marker of severe poisoning, while avoiding intravenous calcium given the risk in glycoside toxicity, and treat ventricular arrhythmia with agents such as lidocaine or magnesium",
-   "Correct electrolytes and monitor potassium, magnesium, renal function and acid-base status",
-   "Supportive care for gastrointestinal losses and fluid balance",
-   "Psychiatric assessment after deliberate self-poisoning, and critical-care escalation for high-grade block, refractory arrhythmia or marked hyperkalaemia"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "oleander_poisoning-pathway",
-   "title": "Oleander poisoning: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "All parts of common oleander (Nerium oleander) and yellow oleander (Cascabela/Thevetia peruviana) contain cardiac glycosides such as oleandrin and thevetin that act like digoxin.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Bradyarrhythmia or high-grade atrioventricular block",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Continuous cardiac monitoring and serial 12-lead ECGs for bradyarrhythmia, heart block and ectopy, Serum potassium and other electrolytes, with potassium as a key severity marker, Renal function and acid-base assessment"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Digoxin-specific antibody fragments (Fab) are the definitive antidote for significant cardiac glycoside toxicity"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Relying on the quantitative serum digoxin level to gauge severity, as immunoassay cross-reactivity is only approximate"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of oleander poisoning."
-  }
- ],
- "tables": [
-  {
-   "id": "oleander_poisoning-matrix",
-   "title": "Oleander poisoning: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "All parts of common oleander (Nerium oleander) and yellow oleander (Cascabela/Thevetia peruviana) contain cardiac glycosides such",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular / Gastrointestinal",
+  "specialty": "Toxicology / Emergency medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Toxicology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "All parts of common oleander (Nerium oleander) and yellow oleander (Cascabela/Thevetia peruviana) contain cardiac glycosides such as oleandrin and thevetin that act like digoxin.",
+      "Yellow oleander seed ingestion is a common means of deliberate self-poisoning in parts of South Asia and can cause fatal cardiotoxicity.",
+      "Clinical picture combines gastrointestinal upset (nausea, vomiting, abdominal pain) with cardiac glycoside toxicity: bradyarrhythmias, varying degrees of heart block and ventricular ectopy.",
+      "Hyperkalaemia from inhibition of the sodium-potassium ATPase is a marker of severe acute poisoning and correlates with poor outcome, mirroring acute digoxin toxicity.",
+      "The glycosides inhibit the myocardial sodium-potassium pump, raising intracellular calcium and increasing vagal tone, which enhances automaticity while depressing conduction.",
+      "Smoke from burning the plant and even honey or water contaminated by it can transmit toxin; boiling and cooking do not render the plant safe.",
+      "Digoxin-specific antibody fragments can bind oleander glycosides and are the definitive treatment for life-threatening arrhythmia or hyperkalaemia, though larger amounts may be needed due to cross-reactivity differences.",
+      "Standard serum digoxin immunoassays may cross-react and give a positive but unreliable quantitative result, useful qualitatively to support the diagnosis."
     ],
-    [
-     "Key Investigations",
-     "Continuous cardiac monitoring and serial 12-lead ECGs for bradyarrhythmia, heart block and ectopy, Serum potassium and other",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Oleander poisoning is caused by cardenolide cardiac glycosides, notably oleandrin in Nerium oleander and thevetin and related glycosides in yellow oleander, which are present throughout the plant including leaves, flowers, sap and seeds. Like digoxin these glycosides inhibit the membrane sodium-potassium ATPase of cardiac and other cells. Inhibition of the pump raises intracellular sodium, which reduces the driving force for the sodium-calcium exchanger and thereby increases intracellular calcium, augmenting myocardial contractility but also promoting delayed afterdepolarisations and increased automaticity. Simultaneously the glycosides enhance vagal tone and slow conduction through the sinoatrial and atrioventricular nodes, producing the characteristic combination of increased ventricular ectopy with bradyarrhythmias and atrioventricular block. In acute poisoning, widespread inhibition of the sodium-potassium pump in skeletal muscle and other tissues causes efflux of potassium into the plasma, so that rising serum potassium reflects the severity of toxin effect and predicts adverse outcome. Gastrointestinal glycoside effects and mucosal irritation account for the early vomiting and diarrhoea. Because the toxins are heat-stable, cooking, boiling or burning does not eliminate the hazard.",
+    "additionalDifferentials": [
+      "Digoxin or other medicinal cardiac glycoside toxicity",
+      "Other cardiac-glycoside-containing plants such as foxglove (Digitalis) or lily of the valley",
+      "Aconite poisoning causing ventricular arrhythmia",
+      "Beta-blocker or calcium-channel-blocker overdose with bradycardia",
+      "Primary cardiac conduction disease or ischaemia",
+      "Hyperkalaemia from renal failure or other cause",
+      "Acute gastroenteritis with electrolyte disturbance"
     ],
-    [
-     "Primary Differentials",
-     "Digoxin or other medicinal cardiac glycoside toxicity, Other cardiac-glycoside-containing plants such as foxglove (Digitalis) or",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Continuous cardiac monitoring and serial 12-lead ECGs for bradyarrhythmia, heart block and ectopy",
+      "Serum potassium and other electrolytes, with potassium as a key severity marker",
+      "Renal function and acid-base assessment",
+      "Serum digoxin immunoassay used qualitatively given cross-reactivity with oleander glycosides",
+      "Magnesium and calcium levels to guide arrhythmia management",
+      "Blood glucose and basic metabolic screen to exclude mimics",
+      "Identification of the plant, seeds or preparation ingested"
     ],
-    [
-     "Management Strategy",
-     "Digoxin-specific antibody fragments (Fab) are the definitive antidote for significant cardiac glycoside toxicity",
-     "Core treatment modality"
+    "redFlags": [
+      "Bradyarrhythmia or high-grade atrioventricular block",
+      "Rising serum potassium indicating severe glycoside effect",
+      "Ventricular ectopy or ventricular tachyarrhythmia",
+      "Haemodynamic instability or syncope",
+      "Deliberate ingestion of yellow oleander seeds"
     ],
-    [
-     "Clinical Pitfall",
-     "Relying on the quantitative serum digoxin level to gauge severity, as immunoassay cross-reactivity is only approximate",
-     "Prevent diagnostic or management error"
+    "prognosis": "Many patients recover with monitoring and supportive care, but poisoning complicated by marked hyperkalaemia, high-grade heart block or ventricular arrhythmia carries a substantial mortality. Timely use of digoxin-specific antibody fragments and cardiac support improves survival in severe cases.",
+    "pitfalls": [
+      "Relying on the quantitative serum digoxin level to gauge severity, as immunoassay cross-reactivity is only approximate",
+      "Giving calcium for hyperkalaemia as one might in other settings, which is generally avoided in cardiac glycoside toxicity",
+      "Assuming boiling, cooking or burning detoxifies the plant",
+      "Overlooking contaminated honey, water or smoke as sources of exposure",
+      "Failing to anticipate deterioration in an initially stable patient after seed ingestion"
+    ],
+    "references": [
+      "Standard clinical toxicology textbooks",
+      "Plant poisoning and cardiac glycoside reference materials",
+      "Emergency medicine and cardiology reference texts"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Digoxin-specific antibody fragments (Fab) are the definitive antidote for significant cardiac glycoside toxicity",
+      "Gastrointestinal decontamination with activated charcoal in early presentation, with multiple-dose charcoal considered",
+      "Continuous cardiac monitoring, treating bradyarrhythmia and heart block with atropine and temporary pacing as required",
+      "Manage hyperkalaemia, a marker of severe poisoning, while avoiding intravenous calcium given the risk in glycoside toxicity, and treat ventricular arrhythmia with agents such as lidocaine or magnesium",
+      "Correct electrolytes and monitor potassium, magnesium, renal function and acid-base status",
+      "Supportive care for gastrointestinal losses and fluid balance",
+      "Psychiatric assessment after deliberate self-poisoning, and critical-care escalation for high-grade block, refractory arrhythmia or marked hyperkalaemia"
     ]
-   ],
-   "caption": "Overview comparison matrix for oleander poisoning."
-  }
- ],
- "diagrams": [
-  {
-   "id": "oleander-poisoning-real-image",
-   "title": "Oleander poisoning: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "oleander_poisoning-pathway",
+      "title": "Oleander poisoning: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "All parts of common oleander (Nerium oleander) and yellow oleander (Cascabela/Thevetia peruviana) contain cardiac glycosides such as oleandrin and thevetin that act like digoxin.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Bradyarrhythmia or high-grade atrioventricular block",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Continuous cardiac monitoring and serial 12-lead ECGs for bradyarrhythmia, heart block and ectopy, Serum potassium and other electrolytes, with potassium as a key severity marker, Renal function and acid-base assessment"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Digoxin-specific antibody fragments (Fab) are the definitive antidote for significant cardiac glycoside toxicity"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Relying on the quantitative serum digoxin level to gauge severity, as immunoassay cross-reactivity is only approximate"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of oleander poisoning."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "oleander_poisoning-matrix",
+      "title": "Oleander poisoning: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "All parts of common oleander (Nerium oleander) and yellow oleander (Cascabela/Thevetia peruviana) contain cardiac glycosides such",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Continuous cardiac monitoring and serial 12-lead ECGs for bradyarrhythmia, heart block and ectopy, Serum potassium and other",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Digoxin or other medicinal cardiac glycoside toxicity, Other cardiac-glycoside-containing plants such as foxglove (Digitalis) or",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Digoxin-specific antibody fragments (Fab) are the definitive antidote for significant cardiac glycoside toxicity",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Relying on the quantitative serum digoxin level to gauge severity, as immunoassay cross-reactivity is only approximate",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for oleander poisoning."
+    }
+  ],
+  "diagrams": []
 }

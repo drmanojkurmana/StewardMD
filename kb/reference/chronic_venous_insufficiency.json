@@ -1,175 +1,153 @@
 {
- "id": "chronic_venous_insufficiency",
- "name": "Chronic venous insufficiency",
- "aliases": [
-  "CVI",
-  "chronic venous disease",
-  "venous stasis",
-  "venous insufficiency"
- ],
- "class": "non_infective",
- "system": "Cardiovascular / Vascular",
- "specialty": "Vascular Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Rutherford's Vascular Surgery and Endovascular Therapy",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Results from sustained venous hypertension due to valvular incompetence (reflux), venous obstruction, or calf-muscle pump failure, or a combination of these",
-   "The clinical spectrum runs from telangiectasia and varicose veins to oedema, skin changes (haemosiderin pigmentation, venous eczema, lipodermatosclerosis, atrophie blanche), and venous ulceration",
-   "The CEAP classification (Clinical, aEtiological, Anatomical, Pathophysiological) grades severity, with clinical classes C0 to C6, C6 being an active venous ulcer",
-   "Venous ulcers characteristically occur in the gaiter area around the medial malleolus, are shallow with irregular margins, and are often preceded by lipodermatosclerosis",
-   "Venous duplex ultrasound is the key investigation, mapping reflux and obstruction to guide treatment",
-   "Compression therapy is the cornerstone of management once significant arterial disease is excluded by the ankle-brachial pressure index; it promotes ulcer healing and prevents recurrence",
-   "Correcting superficial reflux by endovenous ablation (thermal or non-thermal) or surgery improves symptoms and ulcer healing in suitable patients"
+  "id": "chronic_venous_insufficiency",
+  "name": "Chronic venous insufficiency",
+  "aliases": [
+    "CVI",
+    "chronic venous disease",
+    "venous stasis",
+    "venous insufficiency"
   ],
-  "pathophysiology": "Chronic venous insufficiency stems from persistent ambulatory venous hypertension in the lower limb. Valvular incompetence in the superficial, deep, or perforating veins allows reflux, while venous outflow obstruction (for example after deep vein thrombosis) and calf-muscle pump failure also contribute. The elevated venous pressure is transmitted to the microcirculation, causing capillary leakage, fibrin deposition, leucocyte activation, and chronic inflammation. This produces oedema, characteristic skin changes such as haemosiderin staining and lipodermatosclerosis, and ultimately tissue breakdown and venous ulceration, typically in the gaiter region.",
-  "additionalDifferentials": [
-   "Peripheral arterial disease or arterial ulcer",
-   "Lymphoedema",
-   "Cardiac, renal, or hepatic oedema",
-   "Cellulitis",
-   "Diabetic neuropathic ulcer",
-   "Vasculitic ulcer or pyoderma gangrenosum",
-   "Acute deep vein thrombosis"
-  ],
-  "additionalInvestigations": [
-   "Venous duplex ultrasound to map reflux and obstruction",
-   "Ankle-brachial pressure index to exclude significant arterial disease before compression",
-   "Photoplethysmography or venous filling assessment where indicated",
-   "Cross-sectional venography (CT or MR) for suspected proximal or iliac obstruction",
-   "Ulcer swab and, if atypical or non-healing, biopsy to exclude malignancy",
-   "Assessment for coexisting cardiac, renal, or hepatic causes of oedema"
-  ],
-  "redFlags": [
-   "A non-healing or atypical ulcer requiring biopsy to exclude malignancy (Marjolin's ulcer)",
-   "Coexisting significant arterial disease making compression hazardous",
-   "Signs of deep vein thrombosis or spreading cellulitis",
-   "A rapidly deteriorating limb or systemic sepsis"
-  ],
-  "prognosis": "A chronic, relapsing condition; compression and correction of reflux heal most venous ulcers, but recurrence is common without ongoing compression and risk-factor control, and advanced skin changes are only partly reversible.",
-  "pitfalls": [
-   "Applying compression without checking the ankle-brachial pressure index for arterial disease",
-   "Attributing all leg ulcers to venous disease and missing arterial, malignant, or vasculitic causes",
-   "Under-treating with inadequate compression, leading to non-healing",
-   "Neglecting to treat correctable superficial reflux"
-  ],
-  "references": [
-   "Rutherford's Vascular Surgery and Endovascular Therapy",
-   "ESVS Clinical Practice Guidelines on Chronic Venous Disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Graduated compression therapy as the mainstay, applied once significant arterial disease is excluded by the ankle-brachial pressure index, to heal ulcers and prevent recurrence",
-   "Ablation of superficial reflux by endovenous thermal ablation, foam sclerotherapy or surgical stripping, guided by duplex mapping",
-   "Venous stenting for deep or iliac outflow obstruction where appropriate",
-   "Adjunctive limb elevation, calf-muscle exercise, weight reduction and emollient skin care, with a topical corticosteroid for venous eczema and a venoactive agent such as micronised purified flavonoid fraction or pentoxifylline to aid ulcer healing",
-   "Venous ulcer wound management under compression, with biopsy of non-healing or atypical ulcers to exclude malignancy",
-   "Surveillance for ulcer recurrence and progression of skin changes, with ongoing maintenance compression",
-   "Referral to vascular services and exclusion of coexisting cardiac, renal or hepatic causes of oedema"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "chronic_venous_insufficiency-pathway",
-   "title": "Chronic venous insufficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Results from sustained venous hypertension due to valvular incompetence (reflux), venous obstruction, or calf-muscle pump failure, or a combination of these",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A non-healing or atypical ulcer requiring biopsy to exclude malignancy (Marjolin's ulcer)",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Venous duplex ultrasound to map reflux and obstruction, Ankle-brachial pressure index to exclude significant arterial disease before compression, Photoplethysmography or venous filling assessment where indicated"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Graduated compression therapy as the mainstay, applied once significant arterial disease is excluded by the ankle-brachial pressure index, to heal ulcers and prevent recurrence"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Applying compression without checking the ankle-brachial pressure index for arterial disease"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of chronic venous insufficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "chronic_venous_insufficiency-matrix",
-   "title": "Chronic venous insufficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Results from sustained venous hypertension due to valvular incompetence (reflux), venous obstruction, or calf-muscle pump",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular / Vascular",
+  "specialty": "Vascular Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rutherford's Vascular Surgery and Endovascular Therapy",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Results from sustained venous hypertension due to valvular incompetence (reflux), venous obstruction, or calf-muscle pump failure, or a combination of these",
+      "The clinical spectrum runs from telangiectasia and varicose veins to oedema, skin changes (haemosiderin pigmentation, venous eczema, lipodermatosclerosis, atrophie blanche), and venous ulceration",
+      "The CEAP classification (Clinical, aEtiological, Anatomical, Pathophysiological) grades severity, with clinical classes C0 to C6, C6 being an active venous ulcer",
+      "Venous ulcers characteristically occur in the gaiter area around the medial malleolus, are shallow with irregular margins, and are often preceded by lipodermatosclerosis",
+      "Venous duplex ultrasound is the key investigation, mapping reflux and obstruction to guide treatment",
+      "Compression therapy is the cornerstone of management once significant arterial disease is excluded by the ankle-brachial pressure index; it promotes ulcer healing and prevents recurrence",
+      "Correcting superficial reflux by endovenous ablation (thermal or non-thermal) or surgery improves symptoms and ulcer healing in suitable patients"
     ],
-    [
-     "Key Investigations",
-     "Venous duplex ultrasound to map reflux and obstruction, Ankle-brachial pressure index to exclude significant arterial disease",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Chronic venous insufficiency stems from persistent ambulatory venous hypertension in the lower limb. Valvular incompetence in the superficial, deep, or perforating veins allows reflux, while venous outflow obstruction (for example after deep vein thrombosis) and calf-muscle pump failure also contribute. The elevated venous pressure is transmitted to the microcirculation, causing capillary leakage, fibrin deposition, leucocyte activation, and chronic inflammation. This produces oedema, characteristic skin changes such as haemosiderin staining and lipodermatosclerosis, and ultimately tissue breakdown and venous ulceration, typically in the gaiter region.",
+    "additionalDifferentials": [
+      "Peripheral arterial disease or arterial ulcer",
+      "Lymphoedema",
+      "Cardiac, renal, or hepatic oedema",
+      "Cellulitis",
+      "Diabetic neuropathic ulcer",
+      "Vasculitic ulcer or pyoderma gangrenosum",
+      "Acute deep vein thrombosis"
     ],
-    [
-     "Primary Differentials",
-     "Peripheral arterial disease or arterial ulcer, Lymphoedema, Cardiac, renal, or hepatic oedema",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Venous duplex ultrasound to map reflux and obstruction",
+      "Ankle-brachial pressure index to exclude significant arterial disease before compression",
+      "Photoplethysmography or venous filling assessment where indicated",
+      "Cross-sectional venography (CT or MR) for suspected proximal or iliac obstruction",
+      "Ulcer swab and, if atypical or non-healing, biopsy to exclude malignancy",
+      "Assessment for coexisting cardiac, renal, or hepatic causes of oedema"
     ],
-    [
-     "Management Strategy",
-     "Graduated compression therapy as the mainstay, applied once significant arterial disease is excluded by the ankle-brachial",
-     "Core treatment modality"
+    "redFlags": [
+      "A non-healing or atypical ulcer requiring biopsy to exclude malignancy (Marjolin's ulcer)",
+      "Coexisting significant arterial disease making compression hazardous",
+      "Signs of deep vein thrombosis or spreading cellulitis",
+      "A rapidly deteriorating limb or systemic sepsis"
     ],
-    [
-     "Clinical Pitfall",
-     "Applying compression without checking the ankle-brachial pressure index for arterial disease",
-     "Prevent diagnostic or management error"
+    "prognosis": "A chronic, relapsing condition; compression and correction of reflux heal most venous ulcers, but recurrence is common without ongoing compression and risk-factor control, and advanced skin changes are only partly reversible.",
+    "pitfalls": [
+      "Applying compression without checking the ankle-brachial pressure index for arterial disease",
+      "Attributing all leg ulcers to venous disease and missing arterial, malignant, or vasculitic causes",
+      "Under-treating with inadequate compression, leading to non-healing",
+      "Neglecting to treat correctable superficial reflux"
+    ],
+    "references": [
+      "Rutherford's Vascular Surgery and Endovascular Therapy",
+      "ESVS Clinical Practice Guidelines on Chronic Venous Disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Graduated compression therapy as the mainstay, applied once significant arterial disease is excluded by the ankle-brachial pressure index, to heal ulcers and prevent recurrence",
+      "Ablation of superficial reflux by endovenous thermal ablation, foam sclerotherapy or surgical stripping, guided by duplex mapping",
+      "Venous stenting for deep or iliac outflow obstruction where appropriate",
+      "Adjunctive limb elevation, calf-muscle exercise, weight reduction and emollient skin care, with a topical corticosteroid for venous eczema and a venoactive agent such as micronised purified flavonoid fraction or pentoxifylline to aid ulcer healing",
+      "Venous ulcer wound management under compression, with biopsy of non-healing or atypical ulcers to exclude malignancy",
+      "Surveillance for ulcer recurrence and progression of skin changes, with ongoing maintenance compression",
+      "Referral to vascular services and exclusion of coexisting cardiac, renal or hepatic causes of oedema"
     ]
-   ],
-   "caption": "Overview comparison matrix for chronic venous insufficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "chronic-venous-insufficiency-real-image",
-   "title": "Chronic venous insufficiency: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "chronic_venous_insufficiency-pathway",
+      "title": "Chronic venous insufficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Results from sustained venous hypertension due to valvular incompetence (reflux), venous obstruction, or calf-muscle pump failure, or a combination of these",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A non-healing or atypical ulcer requiring biopsy to exclude malignancy (Marjolin's ulcer)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Venous duplex ultrasound to map reflux and obstruction, Ankle-brachial pressure index to exclude significant arterial disease before compression, Photoplethysmography or venous filling assessment where indicated"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Graduated compression therapy as the mainstay, applied once significant arterial disease is excluded by the ankle-brachial pressure index, to heal ulcers and prevent recurrence"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Applying compression without checking the ankle-brachial pressure index for arterial disease"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of chronic venous insufficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "chronic_venous_insufficiency-matrix",
+      "title": "Chronic venous insufficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Results from sustained venous hypertension due to valvular incompetence (reflux), venous obstruction, or calf-muscle pump",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Venous duplex ultrasound to map reflux and obstruction, Ankle-brachial pressure index to exclude significant arterial disease",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Peripheral arterial disease or arterial ulcer, Lymphoedema, Cardiac, renal, or hepatic oedema",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Graduated compression therapy as the mainstay, applied once significant arterial disease is excluded by the ankle-brachial",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Applying compression without checking the ankle-brachial pressure index for arterial disease",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for chronic venous insufficiency."
+    }
+  ],
+  "diagrams": []
 }

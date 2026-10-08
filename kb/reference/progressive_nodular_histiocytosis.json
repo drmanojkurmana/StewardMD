@@ -1,177 +1,155 @@
 {
- "id": "progressive_nodular_histiocytosis",
- "name": "Progressive nodular histiocytosis",
- "aliases": [
-  "PNH",
-  "progressive nodular histiocytoma"
- ],
- "class": "non_infective",
- "system": "Skin / Haematology",
- "specialty": "Dermatology / Haematology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare, persistent and progressive non-Langerhans cell histiocytosis characterised by two coexisting lesion types: superficial yellowish xanthomatous papules and deeper firm red-brown to skin-coloured nodules.",
-   "Lesions accumulate steadily over time without the spontaneous involution seen in other cutaneous non-Langerhans cell histiocytoses.",
-   "Extensive facial involvement can coalesce to produce a disfiguring leonine facies, and lesions around the eyes, mouth and larynx may impair function.",
-   "In contrast to xanthoma disseminatum, lesions are not confined to flexures and there is characteristically no mucosal, pituitary or systemic organ involvement, though mucosal lesions are occasionally reported.",
-   "Serum lipids are normal, and there is no consistent association with diabetes insipidus or paraproteinaemia.",
-   "Histology reveals two populations of histiocytes: superficial foamy xanthomatous cells with Touton giant cells and deeper spindle-shaped histiocytes in a storiform arrangement resembling dermatofibroma.",
-   "Immunohistochemistry shows CD68 positivity with CD1a and langerin negativity, consistent with a macrophage rather than Langerhans cell lineage.",
-   "The condition is notoriously refractory to treatment, and surgical or physical removal of individual disfiguring or obstructing lesions is often the mainstay."
+  "id": "progressive_nodular_histiocytosis",
+  "name": "Progressive nodular histiocytosis",
+  "aliases": [
+    "PNH",
+    "progressive nodular histiocytoma"
   ],
-  "pathophysiology": "Progressive nodular histiocytosis is a proliferative disorder of macrophage-derived histiocytes within the non-Langerhans cell histiocytosis group, distinguished by the coexistence of superficial lipidised xanthomatous histiocytes with Touton giant cells and deeper spindle-shaped histiocytes arranged in a storiform pattern. The lesional cells express macrophage markers such as CD68 and factor XIIIa but lack CD1a, langerin and Birbeck granules. Unlike the self-healing cutaneous non-Langerhans cell histiocytoses, the infiltrate here proliferates progressively and does not regress, producing an ever-increasing burden of papules and nodules; the reason for this relentless behaviour in the absence of systemic involvement or a paraprotein is not fully understood, but it distinguishes progressive nodular histiocytosis as the most persistent and disfiguring of the purely cutaneous forms.",
-  "additionalDifferentials": [
-   "Xanthoma disseminatum",
-   "Multiple dermatofibromas",
-   "Juvenile / adult xanthogranuloma",
-   "Multicentric reticulohistiocytosis",
-   "Erdheim-Chester disease",
-   "Cutaneous involvement by Langerhans cell histiocytosis",
-   "Eruptive xanthomas"
-  ],
-  "additionalInvestigations": [
-   "Skin biopsy sampling both superficial and deep lesions with immunohistochemistry (CD68, factor XIIIa, CD1a, langerin)",
-   "Fasting serum lipid profile to confirm normolipaemia",
-   "Serum and urine protein electrophoresis to exclude paraproteinaemia",
-   "Assessment for diabetes insipidus to distinguish from xanthoma disseminatum",
-   "Laryngoscopy if hoarseness or airway symptoms occur",
-   "Imaging only if systemic involvement is clinically suspected",
-   "Ophthalmological review where periorbital lesions threaten vision"
-  ],
-  "redFlags": [
-   "Progressive facial infiltration producing leonine facies and functional impairment",
-   "Periorbital or eyelid nodules threatening vision",
-   "Laryngeal or perioral lesions causing airway or feeding compromise",
-   "Rapid enlargement or ulceration of nodules",
-   "Emergence of systemic features suggesting an alternative multisystem histiocytosis"
-  ],
-  "prognosis": "The condition follows a chronic, relentlessly progressive course without spontaneous remission; it does not shorten life through systemic disease but causes substantial disfigurement and functional morbidity, and it is characteristically resistant to medical therapy.",
-  "pitfalls": [
-   "Mistaking the deep storiform lesions for multiple dermatofibromas and underestimating the disorder.",
-   "Confusing it with xanthoma disseminatum despite the absence of flexural predilection, mucosal disease and diabetes insipidus.",
-   "Expecting spontaneous involution and delaying intervention on disfiguring or obstructing lesions.",
-   "Assuming an associated paraproteinaemia or systemic disease that is not typically present.",
-   "Over-relying on systemic therapy for a condition that is largely treatment-resistant."
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology (current edition)",
-   "WHO Classification of Histiocytoses and revised histiocytosis classification (current)",
-   "Standard dermatology reference texts (current editions)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No reliably effective medical therapy exists; treatment targets disfiguring and functionally obstructing lesions rather than cure",
-   "Surgical excision or laser removal, such as carbon dioxide laser, of symptomatic, obstructing or cosmetically troublesome nodules, including periorificial and laryngeal lesions",
-   "Airway assessment and intervention for laryngeal involvement causing hoarseness or obstruction",
-   "Trial of systemic agents used in histiocytoses, such as retinoids or chemotherapeutic and immunomodulatory drugs, in extensive disease, recognising limited and variable response",
-   "Confirm the diagnosis histologically and monitor for the uncommon emergence of systemic features, distinguishing it from xanthoma disseminatum and paraproteinaemia-associated histiocytosis",
-   "Multidisciplinary dermatology, haematology and, where needed, ENT and ophthalmology care, with psychological support for disfigurement"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "progressive_nodular_histiocytosis-pathway",
-   "title": "Progressive nodular histiocytosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare, persistent and progressive non-Langerhans cell histiocytosis characterised by two coexisting lesion types: superficial yellowish xanthomatous papules and deeper firm red-brown to skin-coloured nodules.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive facial infiltration producing leonine facies and functional impairment",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin biopsy sampling both superficial and deep lesions with immunohistochemistry (CD68, factor XIIIa, CD1a, langerin), Fasting serum lipid profile to confirm normolipaemia, Serum and urine protein electrophoresis to"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No reliably effective medical therapy exists; treatment targets disfiguring and functionally obstructing lesions rather than cure"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking the deep storiform lesions for multiple dermatofibromas and underestimating the disorder."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of progressive nodular histiocytosis."
-  }
- ],
- "tables": [
-  {
-   "id": "progressive_nodular_histiocytosis-matrix",
-   "title": "Progressive nodular histiocytosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare, persistent and progressive non-Langerhans cell histiocytosis characterised by two coexisting lesion types: superficial",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Skin / Haematology",
+  "specialty": "Dermatology / Haematology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare, persistent and progressive non-Langerhans cell histiocytosis characterised by two coexisting lesion types: superficial yellowish xanthomatous papules and deeper firm red-brown to skin-coloured nodules.",
+      "Lesions accumulate steadily over time without the spontaneous involution seen in other cutaneous non-Langerhans cell histiocytoses.",
+      "Extensive facial involvement can coalesce to produce a disfiguring leonine facies, and lesions around the eyes, mouth and larynx may impair function.",
+      "In contrast to xanthoma disseminatum, lesions are not confined to flexures and there is characteristically no mucosal, pituitary or systemic organ involvement, though mucosal lesions are occasionally reported.",
+      "Serum lipids are normal, and there is no consistent association with diabetes insipidus or paraproteinaemia.",
+      "Histology reveals two populations of histiocytes: superficial foamy xanthomatous cells with Touton giant cells and deeper spindle-shaped histiocytes in a storiform arrangement resembling dermatofibroma.",
+      "Immunohistochemistry shows CD68 positivity with CD1a and langerin negativity, consistent with a macrophage rather than Langerhans cell lineage.",
+      "The condition is notoriously refractory to treatment, and surgical or physical removal of individual disfiguring or obstructing lesions is often the mainstay."
     ],
-    [
-     "Key Investigations",
-     "Skin biopsy sampling both superficial and deep lesions with immunohistochemistry (CD68, factor XIIIa, CD1a, langerin), Fasting",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Progressive nodular histiocytosis is a proliferative disorder of macrophage-derived histiocytes within the non-Langerhans cell histiocytosis group, distinguished by the coexistence of superficial lipidised xanthomatous histiocytes with Touton giant cells and deeper spindle-shaped histiocytes arranged in a storiform pattern. The lesional cells express macrophage markers such as CD68 and factor XIIIa but lack CD1a, langerin and Birbeck granules. Unlike the self-healing cutaneous non-Langerhans cell histiocytoses, the infiltrate here proliferates progressively and does not regress, producing an ever-increasing burden of papules and nodules; the reason for this relentless behaviour in the absence of systemic involvement or a paraprotein is not fully understood, but it distinguishes progressive nodular histiocytosis as the most persistent and disfiguring of the purely cutaneous forms.",
+    "additionalDifferentials": [
+      "Xanthoma disseminatum",
+      "Multiple dermatofibromas",
+      "Juvenile / adult xanthogranuloma",
+      "Multicentric reticulohistiocytosis",
+      "Erdheim-Chester disease",
+      "Cutaneous involvement by Langerhans cell histiocytosis",
+      "Eruptive xanthomas"
     ],
-    [
-     "Primary Differentials",
-     "Xanthoma disseminatum, Multiple dermatofibromas, Juvenile / adult xanthogranuloma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin biopsy sampling both superficial and deep lesions with immunohistochemistry (CD68, factor XIIIa, CD1a, langerin)",
+      "Fasting serum lipid profile to confirm normolipaemia",
+      "Serum and urine protein electrophoresis to exclude paraproteinaemia",
+      "Assessment for diabetes insipidus to distinguish from xanthoma disseminatum",
+      "Laryngoscopy if hoarseness or airway symptoms occur",
+      "Imaging only if systemic involvement is clinically suspected",
+      "Ophthalmological review where periorbital lesions threaten vision"
     ],
-    [
-     "Management Strategy",
-     "No reliably effective medical therapy exists; treatment targets disfiguring and functionally obstructing lesions rather than cure",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive facial infiltration producing leonine facies and functional impairment",
+      "Periorbital or eyelid nodules threatening vision",
+      "Laryngeal or perioral lesions causing airway or feeding compromise",
+      "Rapid enlargement or ulceration of nodules",
+      "Emergence of systemic features suggesting an alternative multisystem histiocytosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking the deep storiform lesions for multiple dermatofibromas and underestimating the disorder.",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition follows a chronic, relentlessly progressive course without spontaneous remission; it does not shorten life through systemic disease but causes substantial disfigurement and functional morbidity, and it is characteristically resistant to medical therapy.",
+    "pitfalls": [
+      "Mistaking the deep storiform lesions for multiple dermatofibromas and underestimating the disorder.",
+      "Confusing it with xanthoma disseminatum despite the absence of flexural predilection, mucosal disease and diabetes insipidus.",
+      "Expecting spontaneous involution and delaying intervention on disfiguring or obstructing lesions.",
+      "Assuming an associated paraproteinaemia or systemic disease that is not typically present.",
+      "Over-relying on systemic therapy for a condition that is largely treatment-resistant."
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology (current edition)",
+      "WHO Classification of Histiocytoses and revised histiocytosis classification (current)",
+      "Standard dermatology reference texts (current editions)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No reliably effective medical therapy exists; treatment targets disfiguring and functionally obstructing lesions rather than cure",
+      "Surgical excision or laser removal, such as carbon dioxide laser, of symptomatic, obstructing or cosmetically troublesome nodules, including periorificial and laryngeal lesions",
+      "Airway assessment and intervention for laryngeal involvement causing hoarseness or obstruction",
+      "Trial of systemic agents used in histiocytoses, such as retinoids or chemotherapeutic and immunomodulatory drugs, in extensive disease, recognising limited and variable response",
+      "Confirm the diagnosis histologically and monitor for the uncommon emergence of systemic features, distinguishing it from xanthoma disseminatum and paraproteinaemia-associated histiocytosis",
+      "Multidisciplinary dermatology, haematology and, where needed, ENT and ophthalmology care, with psychological support for disfigurement"
     ]
-   ],
-   "caption": "Overview comparison matrix for progressive nodular histiocytosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "progressive-nodular-histiocytosis-real-image",
-   "title": "Progressive nodular histiocytosis: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "progressive_nodular_histiocytosis-pathway",
+      "title": "Progressive nodular histiocytosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare, persistent and progressive non-Langerhans cell histiocytosis characterised by two coexisting lesion types: superficial yellowish xanthomatous papules and deeper firm red-brown to skin-coloured nodules.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive facial infiltration producing leonine facies and functional impairment",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin biopsy sampling both superficial and deep lesions with immunohistochemistry (CD68, factor XIIIa, CD1a, langerin), Fasting serum lipid profile to confirm normolipaemia, Serum and urine protein electrophoresis to"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No reliably effective medical therapy exists; treatment targets disfiguring and functionally obstructing lesions rather than cure"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking the deep storiform lesions for multiple dermatofibromas and underestimating the disorder."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of progressive nodular histiocytosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "progressive_nodular_histiocytosis-matrix",
+      "title": "Progressive nodular histiocytosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare, persistent and progressive non-Langerhans cell histiocytosis characterised by two coexisting lesion types: superficial",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin biopsy sampling both superficial and deep lesions with immunohistochemistry (CD68, factor XIIIa, CD1a, langerin), Fasting",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Xanthoma disseminatum, Multiple dermatofibromas, Juvenile / adult xanthogranuloma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No reliably effective medical therapy exists; treatment targets disfiguring and functionally obstructing lesions rather than cure",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking the deep storiform lesions for multiple dermatofibromas and underestimating the disorder.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for progressive nodular histiocytosis."
+    }
+  ],
+  "diagrams": []
 }

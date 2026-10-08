@@ -1,176 +1,154 @@
 {
- "id": "hematospermia",
- "name": "Haematospermia",
- "aliases": [
-  "haemospermia",
-  "hemospermia",
-  "blood in semen",
-  "bloody ejaculate"
- ],
- "class": "non_infective",
- "system": "Urology / Andrology",
- "specialty": "Urology",
- "referenceOnly": true,
- "reference": {
-  "source": "Campbell-Walsh-Wein Urology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The presence of blood in the ejaculate, which is alarming to patients but is most often benign, particularly in younger men",
-   "In men under about 40 with no risk factors, an isolated or short-lived episode is usually self-limiting and needs only reassurance after a basic assessment",
-   "Persistent, recurrent, or high-volume haematospermia, and any case in men over 40, warrants fuller evaluation to exclude significant pathology",
-   "Common benign causes include inflammation or infection of the prostate, seminal vesicles, or ejaculatory ducts, and recent prostate biopsy or instrumentation",
-   "Important causes to exclude include prostate cancer, other genitourinary malignancy, tuberculosis or sexually transmitted infection, bleeding disorders, and, uncommonly, systemic hypertension",
-   "Assessment includes examination with digital rectal examination and blood-pressure measurement, urinalysis and culture, sexually transmitted infection screening, and PSA in the appropriate age group",
-   "Treatment is directed at any underlying cause, and where none is found reassurance and observation are appropriate, as most cases resolve spontaneously"
+  "id": "hematospermia",
+  "name": "Haematospermia",
+  "aliases": [
+    "haemospermia",
+    "hemospermia",
+    "blood in semen",
+    "bloody ejaculate"
   ],
-  "pathophysiology": "Semen is derived largely from the seminal vesicles and prostate, and blood can enter it anywhere along the ejaculatory tract, including the prostate, seminal vesicles, ejaculatory ducts, vasa, and posterior urethra. The commonest mechanism is inflammation or infection producing fragile, congested mucosa that bleeds, or iatrogenic trauma after prostate biopsy or instrumentation. Obstruction and dilatation of the ejaculatory ducts, calculi, cysts, vascular malformations, and neoplasia are less frequent sources, while systemic factors such as coagulopathy or severe hypertension occasionally contribute. The age-related shift in likely aetiology explains why older men merit more thorough evaluation for malignancy.",
-  "additionalDifferentials": [
-   "Prostatitis or seminal vesiculitis",
-   "Post-prostate-biopsy or post-instrumentation bleeding",
-   "Prostate cancer",
-   "Sexually transmitted infection or genitourinary tuberculosis",
-   "Ejaculatory duct obstruction, cyst, or calculi",
-   "Bleeding diathesis or anticoagulation",
-   "Severe hypertension"
-  ],
-  "additionalInvestigations": [
-   "Urinalysis and urine culture",
-   "Sexually transmitted infection screen, including nucleic acid amplification testing",
-   "Digital rectal examination and blood-pressure measurement",
-   "PSA in men over 40 or with risk factors",
-   "MRI of the prostate and seminal vesicles",
-   "Transrectal ultrasound, with semen analysis and a coagulation screen where indicated"
-  ],
-  "redFlags": [
-   "Age over 40 with persistent or recurrent haematospermia",
-   "Associated haematuria",
-   "An abnormal prostate on examination or a raised PSA",
-   "Systemic features such as weight loss, fever, or night sweats suggesting tuberculosis or malignancy",
-   "Unexplained bleeding elsewhere"
-  ],
-  "prognosis": "Excellent in the great majority, particularly in younger men in whom episodes are self-limiting; the prognosis then depends on any identified underlying cause, most of which are treatable.",
-  "pitfalls": [
-   "Over-investigating young men with a single self-limiting episode and no risk factors",
-   "Under-investigating men over 40 or those with persistent symptoms, missing prostate cancer or other serious pathology",
-   "Forgetting to check blood pressure and to take a coagulation and medication history",
-   "Overlooking recent instrumentation or prostate biopsy as an obvious benign cause",
-   "Not screening for infection, sexually transmitted infection, or tuberculosis where epidemiologically relevant"
-  ],
-  "references": [
-   "Campbell-Walsh-Wein Urology",
-   "Smith & Tanagho's General Urology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassure young men without risk factors after a basic assessment, since an isolated episode is usually self-limiting",
-   "Treat identified infection or inflammation with appropriate antimicrobials, such as antibiotics for bacterial prostatitis, seminal vesiculitis or a sexually transmitted infection",
-   "Investigate persistent, recurrent or high-volume haematospermia, and any case in older men, to exclude prostate or other genitourinary malignancy with digital rectal examination, PSA and prostate and seminal-vesicle MRI",
-   "Control contributory systemic factors such as hypertension and correct any bleeding tendency",
-   "Manage post-procedural haematospermia after prostate biopsy or instrumentation expectantly, as it typically resolves",
-   "Refer to urology for persistent or high-risk cases and for treatment of an identified structural lesion, calculus or cyst"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hematospermia-pathway",
-   "title": "Haematospermia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The presence of blood in the ejaculate, which is alarming to patients but is most often benign, particularly in younger men",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Age over 40 with persistent or recurrent haematospermia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Urinalysis and urine culture, Sexually transmitted infection screen, including nucleic acid amplification testing, Digital rectal examination and blood-pressure measurement"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassure young men without risk factors after a basic assessment, since an isolated episode is usually self-limiting"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Over-investigating young men with a single self-limiting episode and no risk factors"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of haematospermia."
-  }
- ],
- "tables": [
-  {
-   "id": "hematospermia-matrix",
-   "title": "Haematospermia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The presence of blood in the ejaculate, which is alarming to patients but is most often benign, particularly in younger men",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Urology / Andrology",
+  "specialty": "Urology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Campbell-Walsh-Wein Urology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The presence of blood in the ejaculate, which is alarming to patients but is most often benign, particularly in younger men",
+      "In men under about 40 with no risk factors, an isolated or short-lived episode is usually self-limiting and needs only reassurance after a basic assessment",
+      "Persistent, recurrent, or high-volume haematospermia, and any case in men over 40, warrants fuller evaluation to exclude significant pathology",
+      "Common benign causes include inflammation or infection of the prostate, seminal vesicles, or ejaculatory ducts, and recent prostate biopsy or instrumentation",
+      "Important causes to exclude include prostate cancer, other genitourinary malignancy, tuberculosis or sexually transmitted infection, bleeding disorders, and, uncommonly, systemic hypertension",
+      "Assessment includes examination with digital rectal examination and blood-pressure measurement, urinalysis and culture, sexually transmitted infection screening, and PSA in the appropriate age group",
+      "Treatment is directed at any underlying cause, and where none is found reassurance and observation are appropriate, as most cases resolve spontaneously"
     ],
-    [
-     "Key Investigations",
-     "Urinalysis and urine culture, Sexually transmitted infection screen, including nucleic acid amplification testing, Digital rectal",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Semen is derived largely from the seminal vesicles and prostate, and blood can enter it anywhere along the ejaculatory tract, including the prostate, seminal vesicles, ejaculatory ducts, vasa, and posterior urethra. The commonest mechanism is inflammation or infection producing fragile, congested mucosa that bleeds, or iatrogenic trauma after prostate biopsy or instrumentation. Obstruction and dilatation of the ejaculatory ducts, calculi, cysts, vascular malformations, and neoplasia are less frequent sources, while systemic factors such as coagulopathy or severe hypertension occasionally contribute. The age-related shift in likely aetiology explains why older men merit more thorough evaluation for malignancy.",
+    "additionalDifferentials": [
+      "Prostatitis or seminal vesiculitis",
+      "Post-prostate-biopsy or post-instrumentation bleeding",
+      "Prostate cancer",
+      "Sexually transmitted infection or genitourinary tuberculosis",
+      "Ejaculatory duct obstruction, cyst, or calculi",
+      "Bleeding diathesis or anticoagulation",
+      "Severe hypertension"
     ],
-    [
-     "Primary Differentials",
-     "Prostatitis or seminal vesiculitis, Post-prostate-biopsy or post-instrumentation bleeding, Prostate cancer",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Urinalysis and urine culture",
+      "Sexually transmitted infection screen, including nucleic acid amplification testing",
+      "Digital rectal examination and blood-pressure measurement",
+      "PSA in men over 40 or with risk factors",
+      "MRI of the prostate and seminal vesicles",
+      "Transrectal ultrasound, with semen analysis and a coagulation screen where indicated"
     ],
-    [
-     "Management Strategy",
-     "Reassure young men without risk factors after a basic assessment, since an isolated episode is usually self-limiting",
-     "Core treatment modality"
+    "redFlags": [
+      "Age over 40 with persistent or recurrent haematospermia",
+      "Associated haematuria",
+      "An abnormal prostate on examination or a raised PSA",
+      "Systemic features such as weight loss, fever, or night sweats suggesting tuberculosis or malignancy",
+      "Unexplained bleeding elsewhere"
     ],
-    [
-     "Clinical Pitfall",
-     "Over-investigating young men with a single self-limiting episode and no risk factors",
-     "Prevent diagnostic or management error"
+    "prognosis": "Excellent in the great majority, particularly in younger men in whom episodes are self-limiting; the prognosis then depends on any identified underlying cause, most of which are treatable.",
+    "pitfalls": [
+      "Over-investigating young men with a single self-limiting episode and no risk factors",
+      "Under-investigating men over 40 or those with persistent symptoms, missing prostate cancer or other serious pathology",
+      "Forgetting to check blood pressure and to take a coagulation and medication history",
+      "Overlooking recent instrumentation or prostate biopsy as an obvious benign cause",
+      "Not screening for infection, sexually transmitted infection, or tuberculosis where epidemiologically relevant"
+    ],
+    "references": [
+      "Campbell-Walsh-Wein Urology",
+      "Smith & Tanagho's General Urology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassure young men without risk factors after a basic assessment, since an isolated episode is usually self-limiting",
+      "Treat identified infection or inflammation with appropriate antimicrobials, such as antibiotics for bacterial prostatitis, seminal vesiculitis or a sexually transmitted infection",
+      "Investigate persistent, recurrent or high-volume haematospermia, and any case in older men, to exclude prostate or other genitourinary malignancy with digital rectal examination, PSA and prostate and seminal-vesicle MRI",
+      "Control contributory systemic factors such as hypertension and correct any bleeding tendency",
+      "Manage post-procedural haematospermia after prostate biopsy or instrumentation expectantly, as it typically resolves",
+      "Refer to urology for persistent or high-risk cases and for treatment of an identified structural lesion, calculus or cyst"
     ]
-   ],
-   "caption": "Overview comparison matrix for haematospermia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hematospermia-real-image",
-   "title": "Haematospermia: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "hematospermia-pathway",
+      "title": "Haematospermia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The presence of blood in the ejaculate, which is alarming to patients but is most often benign, particularly in younger men",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Age over 40 with persistent or recurrent haematospermia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Urinalysis and urine culture, Sexually transmitted infection screen, including nucleic acid amplification testing, Digital rectal examination and blood-pressure measurement"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassure young men without risk factors after a basic assessment, since an isolated episode is usually self-limiting"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Over-investigating young men with a single self-limiting episode and no risk factors"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of haematospermia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hematospermia-matrix",
+      "title": "Haematospermia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The presence of blood in the ejaculate, which is alarming to patients but is most often benign, particularly in younger men",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Urinalysis and urine culture, Sexually transmitted infection screen, including nucleic acid amplification testing, Digital rectal",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Prostatitis or seminal vesiculitis, Post-prostate-biopsy or post-instrumentation bleeding, Prostate cancer",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassure young men without risk factors after a basic assessment, since an isolated episode is usually self-limiting",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Over-investigating young men with a single self-limiting episode and no risk factors",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for haematospermia."
+    }
+  ],
+  "diagrams": []
 }

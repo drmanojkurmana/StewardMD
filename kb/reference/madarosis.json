@@ -1,170 +1,148 @@
 {
- "id": "madarosis",
- "name": "Madarosis",
- "aliases": [
-  "eyelash loss",
-  "eyebrow and eyelash loss"
- ],
- "class": "non_infective",
- "system": "Eye / Orbit and adnexa",
- "specialty": "Ophthalmology / Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Ophthalmology and dermatology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Loss of eyelashes, and sometimes eyebrows, which is a sign rather than a disease in itself",
-   "Causes are broad: local lid disease, dermatological conditions, systemic disease, drugs, trauma and psychiatric causes",
-   "Chronic blepharitis is a common local cause, while alopecia areata and cicatricial alopecias affect the follicles",
-   "Loss of the lateral third of the eyebrows is a classic sign of hypothyroidism and of leprosy",
-   "Trichotillomania and factitious causes should be considered, especially with irregular patchy loss",
-   "A lid margin lesion with associated madarosis raises concern for eyelid malignancy"
+  "id": "madarosis",
+  "name": "Madarosis",
+  "aliases": [
+    "eyelash loss",
+    "eyebrow and eyelash loss"
   ],
-  "pathophysiology": "Madarosis results from any process that damages or destroys the eyelash (and eyebrow) follicles or disrupts the hair cycle. Non-scarring loss occurs with conditions such as alopecia areata, telogen effluvium, hypothyroidism and drug effects, where follicles are preserved and regrowth is possible. Scarring (cicatricial) loss follows chronic inflammation, cicatrising skin disease or infiltrating eyelid tumours that destroy the follicles, causing permanent loss. Identifying whether the loss is scarring or non-scarring guides the search for cause and the likelihood of regrowth.",
-  "additionalDifferentials": [
-   "Chronic blepharitis",
-   "Alopecia areata or other alopecias",
-   "Hypothyroidism",
-   "Eyelid malignancy (for example basal or sebaceous cell carcinoma)",
-   "Trichotillomania",
-   "Leprosy (in endemic settings)"
-  ],
-  "additionalInvestigations": [
-   "Examination of the lid margin, skin and pattern of hair loss",
-   "Assessment for scarring versus non-scarring loss",
-   "Thyroid function tests where indicated",
-   "Biopsy of any suspicious lid margin lesion",
-   "Investigation for systemic or dermatological causes as directed by the history"
-  ],
-  "redFlags": [
-   "A localised lid margin lesion with lash loss suggesting malignancy",
-   "Scarring loss indicating follicle destruction",
-   "Systemic features suggesting endocrine or infiltrative disease",
-   "Rapidly progressive or asymmetric loss"
-  ],
-  "prognosis": "Prognosis depends on the cause: non-scarring loss often recovers when the underlying condition is treated, whereas scarring loss and tumour-related loss are permanent.",
-  "pitfalls": [
-   "Overlooking an eyelid malignancy causing localised lash loss",
-   "Missing hypothyroidism with lateral eyebrow loss",
-   "Not distinguishing scarring from non-scarring loss",
-   "Failing to consider trichotillomania"
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology",
-   "Dermatology reference texts (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat the identified underlying cause, since madarosis is a sign rather than a disease in itself",
-   "Manage local lid disease, especially chronic blepharitis, with lid hygiene, warm compresses and topical or systemic antibiotics as indicated",
-   "Treat dermatological causes, using topical or intralesional corticosteroids or immunotherapy for alopecia areata and managing cicatricial alopecias",
-   "Correct systemic contributors with thyroid hormone replacement for hypothyroidism, multidrug antimicrobial therapy for leprosy, and review of causative drugs",
-   "Address psychiatric causes such as trichotillomania with behavioural therapy and psychiatric support",
-   "Biopsy and refer any suspicious lid-margin lesion for management of possible eyelid malignancy",
-   "Cosmetic and restorative options including eyelash and eyebrow restoration, a prostaglandin-analogue eyelash agent, tattooing or grafting for permanent scarring loss"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "madarosis-pathway",
-   "title": "Madarosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Loss of eyelashes, and sometimes eyebrows, which is a sign rather than a disease in itself",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A localised lid margin lesion with lash loss suggesting malignancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Examination of the lid margin, skin and pattern of hair loss, Assessment for scarring versus non-scarring loss, Thyroid function tests where indicated"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat the identified underlying cause, since madarosis is a sign rather than a disease in itself"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking an eyelid malignancy causing localised lash loss"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of madarosis."
-  }
- ],
- "tables": [
-  {
-   "id": "madarosis-matrix",
-   "title": "Madarosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Loss of eyelashes, and sometimes eyebrows, which is a sign rather than a disease in itself",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Orbit and adnexa",
+  "specialty": "Ophthalmology / Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Ophthalmology and dermatology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Loss of eyelashes, and sometimes eyebrows, which is a sign rather than a disease in itself",
+      "Causes are broad: local lid disease, dermatological conditions, systemic disease, drugs, trauma and psychiatric causes",
+      "Chronic blepharitis is a common local cause, while alopecia areata and cicatricial alopecias affect the follicles",
+      "Loss of the lateral third of the eyebrows is a classic sign of hypothyroidism and of leprosy",
+      "Trichotillomania and factitious causes should be considered, especially with irregular patchy loss",
+      "A lid margin lesion with associated madarosis raises concern for eyelid malignancy"
     ],
-    [
-     "Key Investigations",
-     "Examination of the lid margin, skin and pattern of hair loss, Assessment for scarring versus non-scarring loss, Thyroid function",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Madarosis results from any process that damages or destroys the eyelash (and eyebrow) follicles or disrupts the hair cycle. Non-scarring loss occurs with conditions such as alopecia areata, telogen effluvium, hypothyroidism and drug effects, where follicles are preserved and regrowth is possible. Scarring (cicatricial) loss follows chronic inflammation, cicatrising skin disease or infiltrating eyelid tumours that destroy the follicles, causing permanent loss. Identifying whether the loss is scarring or non-scarring guides the search for cause and the likelihood of regrowth.",
+    "additionalDifferentials": [
+      "Chronic blepharitis",
+      "Alopecia areata or other alopecias",
+      "Hypothyroidism",
+      "Eyelid malignancy (for example basal or sebaceous cell carcinoma)",
+      "Trichotillomania",
+      "Leprosy (in endemic settings)"
     ],
-    [
-     "Primary Differentials",
-     "Chronic blepharitis, Alopecia areata or other alopecias, Hypothyroidism",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Examination of the lid margin, skin and pattern of hair loss",
+      "Assessment for scarring versus non-scarring loss",
+      "Thyroid function tests where indicated",
+      "Biopsy of any suspicious lid margin lesion",
+      "Investigation for systemic or dermatological causes as directed by the history"
     ],
-    [
-     "Management Strategy",
-     "Treat the identified underlying cause, since madarosis is a sign rather than a disease in itself",
-     "Core treatment modality"
+    "redFlags": [
+      "A localised lid margin lesion with lash loss suggesting malignancy",
+      "Scarring loss indicating follicle destruction",
+      "Systemic features suggesting endocrine or infiltrative disease",
+      "Rapidly progressive or asymmetric loss"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking an eyelid malignancy causing localised lash loss",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends on the cause: non-scarring loss often recovers when the underlying condition is treated, whereas scarring loss and tumour-related loss are permanent.",
+    "pitfalls": [
+      "Overlooking an eyelid malignancy causing localised lash loss",
+      "Missing hypothyroidism with lateral eyebrow loss",
+      "Not distinguishing scarring from non-scarring loss",
+      "Failing to consider trichotillomania"
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology",
+      "Dermatology reference texts (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat the identified underlying cause, since madarosis is a sign rather than a disease in itself",
+      "Manage local lid disease, especially chronic blepharitis, with lid hygiene, warm compresses and topical or systemic antibiotics as indicated",
+      "Treat dermatological causes, using topical or intralesional corticosteroids or immunotherapy for alopecia areata and managing cicatricial alopecias",
+      "Correct systemic contributors with thyroid hormone replacement for hypothyroidism, multidrug antimicrobial therapy for leprosy, and review of causative drugs",
+      "Address psychiatric causes such as trichotillomania with behavioural therapy and psychiatric support",
+      "Biopsy and refer any suspicious lid-margin lesion for management of possible eyelid malignancy",
+      "Cosmetic and restorative options including eyelash and eyebrow restoration, a prostaglandin-analogue eyelash agent, tattooing or grafting for permanent scarring loss"
     ]
-   ],
-   "caption": "Overview comparison matrix for madarosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "madarosis-real-image",
-   "title": "Madarosis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "madarosis-pathway",
+      "title": "Madarosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Loss of eyelashes, and sometimes eyebrows, which is a sign rather than a disease in itself",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A localised lid margin lesion with lash loss suggesting malignancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Examination of the lid margin, skin and pattern of hair loss, Assessment for scarring versus non-scarring loss, Thyroid function tests where indicated"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat the identified underlying cause, since madarosis is a sign rather than a disease in itself"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking an eyelid malignancy causing localised lash loss"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of madarosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "madarosis-matrix",
+      "title": "Madarosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Loss of eyelashes, and sometimes eyebrows, which is a sign rather than a disease in itself",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Examination of the lid margin, skin and pattern of hair loss, Assessment for scarring versus non-scarring loss, Thyroid function",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Chronic blepharitis, Alopecia areata or other alopecias, Hypothyroidism",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat the identified underlying cause, since madarosis is a sign rather than a disease in itself",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking an eyelid malignancy causing localised lash loss",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for madarosis."
+    }
+  ],
+  "diagrams": []
 }

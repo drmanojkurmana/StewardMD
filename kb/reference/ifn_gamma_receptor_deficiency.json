@@ -1,178 +1,156 @@
 {
- "id": "ifn_gamma_receptor_deficiency",
- "name": "Interferon-gamma receptor deficiency",
- "aliases": [
-  "IFNGR1 deficiency",
-  "IFNGR2 deficiency",
-  "IFN-gamma receptor deficiency"
- ],
- "class": "non_infective",
- "system": "Immunology / Inborn errors of immunity",
- "specialty": "Immunology / Infectious disease",
- "referenceOnly": true,
- "reference": {
-  "source": "Clinical immunology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A prototypic cause of Mendelian susceptibility to mycobacterial disease, resulting from defects in the interferon-gamma receptor chains IFNGR1 or IFNGR2.",
-   "Complete (biallelic null) deficiency causes severe, early-onset disseminated mycobacterial disease with poorly formed, multibacillary granulomata.",
-   "Partial deficiency, including the dominant-negative IFNGR1 hotspot in which a small deletion leaves a surface-accumulating truncated receptor, is milder and often presents with mycobacterial osteomyelitis.",
-   "Plasma interferon-gamma is characteristically very high because the cytokine cannot be consumed through its receptor, which is a useful diagnostic clue.",
-   "Recombinant interferon-gamma is effective only when some receptor signalling remains (partial forms) and is futile in complete deficiency.",
-   "Complete deficiency often requires haematopoietic stem cell transplantation, although very high circulating interferon-gamma can compromise engraftment.",
-   "Live BCG vaccination frequently unmasks the disorder as disseminated BCG disease."
+  "id": "ifn_gamma_receptor_deficiency",
+  "name": "Interferon-gamma receptor deficiency",
+  "aliases": [
+    "IFNGR1 deficiency",
+    "IFNGR2 deficiency",
+    "IFN-gamma receptor deficiency"
   ],
-  "pathophysiology": "The interferon-gamma receptor is a heterotetramer of two ligand-binding IFNGR1 chains and two signal-transducing IFNGR2 chains; ligand engagement activates receptor-associated JAK1 and JAK2, which phosphorylate STAT1 to form the gamma-activated factor homodimer that transcribes genes arming mononuclear phagocytes against intracellular pathogens. Loss-of-function mutations in IFNGR1 or IFNGR2 abolish or attenuate this signal. Complete recessive deficiency leaves macrophages unable to respond to interferon-gamma, producing severe multibacillary disease, whereas partial recessive and partial dominant forms retain some signalling. A recurrent small-deletion hotspot in IFNGR1 generates a truncated receptor lacking the intracellular recycling and degradation motif; the receptor accumulates on the cell surface and acts in a dominant-negative fashion, the basis of autosomal dominant partial deficiency. Because interferon-gamma is normally internalised and consumed through its receptor, defective receptors lead to strikingly elevated circulating interferon-gamma.",
-  "additionalDifferentials": [
-   "IL-12/IL-23 axis defects (IL12B, IL12RB1) causing MSMD",
-   "STAT1 loss-of-function deficiency",
-   "Chronic granulomatous disease",
-   "GATA2 deficiency",
-   "Anti-interferon-gamma autoantibody syndrome",
-   "Disseminated tuberculosis or leprosy in an apparently immunocompetent host",
-   "Severe combined immunodeficiency"
-  ],
-  "additionalInvestigations": [
-   "Flow cytometry for IFNGR1 and IFNGR2 surface expression, including detection of accumulated truncated receptor",
-   "Assay of STAT1 phosphorylation and downstream gene induction after interferon-gamma stimulation",
-   "Sequencing of IFNGR1 and IFNGR2",
-   "Plasma interferon-gamma concentration, typically strikingly elevated",
-   "Mycobacterial culture with species identification and typing",
-   "Tissue biopsy for granuloma morphology and bacillary load",
-   "Whole-blood functional immunoassays of the IL-12-interferon-gamma circuit"
-  ],
-  "redFlags": [
-   "Disseminated BCG or non-tuberculous mycobacterial disease in infancy",
-   "Mycobacterial osteomyelitis, a signature of partial dominant deficiency",
-   "Multibacillary, poorly organised granulomata",
-   "Relentless mycobacterial disease despite adequate antimicrobial therapy",
-   "Very high circulating interferon-gamma in the presence of ongoing mycobacterial infection"
-  ],
-  "prognosis": "Partial forms often have a good outlook with prolonged antimycobacterial therapy and recombinant interferon-gamma, whereas complete receptor deficiency has a poor prognosis and is frequently fatal without haematopoietic stem cell transplantation, which is itself complicated by high interferon-gamma levels.",
-  "pitfalls": [
-   "Prescribing recombinant interferon-gamma in complete deficiency, where it cannot act.",
-   "Interpreting a high plasma interferon-gamma as reassuring rather than as a marker of receptor failure.",
-   "Missing surface-accumulated truncated receptor unless it is specifically sought on flow cytometry.",
-   "Confusing BCG disease with tuberculosis without species typing.",
-   "Delaying transplant assessment in complete deficiency."
-  ],
-  "references": [
-   "International Union of Immunological Societies (IUIS) inborn errors of immunity classification",
-   "Clinical immunology reference texts",
-   "Paediatric infectious diseases reference texts"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat mycobacterial infections with prolonged multidrug antimycobacterial regimens, often lifelong, guided by species identification and susceptibility",
-   "Reserve recombinant interferon-gamma for partial forms with residual signalling, as it is futile in complete receptor deficiency",
-   "Offer allogeneic haematopoietic stem cell transplantation for complete deficiency, recognising that very high circulating interferon-gamma can compromise engraftment",
-   "Use long-term macrolide-based antimycobacterial prophylaxis and strictly avoid live BCG and other live vaccines",
-   "Manage disseminated disease and febrile deterioration aggressively with cultures and directed antimicrobials",
-   "Monitor with serial mycobacterial cultures, inflammatory markers and imaging for relapse",
-   "Provide genetic counselling and cascade family screening for this recessively inherited disorder"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "ifn_gamma_receptor_deficiency-pathway",
-   "title": "Interferon-gamma receptor deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A prototypic cause of Mendelian susceptibility to mycobacterial disease, resulting from defects in the interferon-gamma receptor chains IFNGR1 or IFNGR2.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Disseminated BCG or non-tuberculous mycobacterial disease in infancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Flow cytometry for IFNGR1 and IFNGR2 surface expression, including detection of accumulated truncated receptor, Assay of STAT1 phosphorylation and downstream gene induction after interferon-gamma stimulation, Sequencing of"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat mycobacterial infections with prolonged multidrug antimycobacterial regimens, often lifelong, guided by species identification and susceptibility"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Prescribing recombinant interferon-gamma in complete deficiency, where it cannot act."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of interferon-gamma receptor deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "ifn_gamma_receptor_deficiency-matrix",
-   "title": "Interferon-gamma receptor deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A prototypic cause of Mendelian susceptibility to mycobacterial disease, resulting from defects in the interferon-gamma receptor",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Immunology / Inborn errors of immunity",
+  "specialty": "Immunology / Infectious disease",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Clinical immunology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A prototypic cause of Mendelian susceptibility to mycobacterial disease, resulting from defects in the interferon-gamma receptor chains IFNGR1 or IFNGR2.",
+      "Complete (biallelic null) deficiency causes severe, early-onset disseminated mycobacterial disease with poorly formed, multibacillary granulomata.",
+      "Partial deficiency, including the dominant-negative IFNGR1 hotspot in which a small deletion leaves a surface-accumulating truncated receptor, is milder and often presents with mycobacterial osteomyelitis.",
+      "Plasma interferon-gamma is characteristically very high because the cytokine cannot be consumed through its receptor, which is a useful diagnostic clue.",
+      "Recombinant interferon-gamma is effective only when some receptor signalling remains (partial forms) and is futile in complete deficiency.",
+      "Complete deficiency often requires haematopoietic stem cell transplantation, although very high circulating interferon-gamma can compromise engraftment.",
+      "Live BCG vaccination frequently unmasks the disorder as disseminated BCG disease."
     ],
-    [
-     "Key Investigations",
-     "Flow cytometry for IFNGR1 and IFNGR2 surface expression, including detection of accumulated truncated receptor, Assay of STAT1",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The interferon-gamma receptor is a heterotetramer of two ligand-binding IFNGR1 chains and two signal-transducing IFNGR2 chains; ligand engagement activates receptor-associated JAK1 and JAK2, which phosphorylate STAT1 to form the gamma-activated factor homodimer that transcribes genes arming mononuclear phagocytes against intracellular pathogens. Loss-of-function mutations in IFNGR1 or IFNGR2 abolish or attenuate this signal. Complete recessive deficiency leaves macrophages unable to respond to interferon-gamma, producing severe multibacillary disease, whereas partial recessive and partial dominant forms retain some signalling. A recurrent small-deletion hotspot in IFNGR1 generates a truncated receptor lacking the intracellular recycling and degradation motif; the receptor accumulates on the cell surface and acts in a dominant-negative fashion, the basis of autosomal dominant partial deficiency. Because interferon-gamma is normally internalised and consumed through its receptor, defective receptors lead to strikingly elevated circulating interferon-gamma.",
+    "additionalDifferentials": [
+      "IL-12/IL-23 axis defects (IL12B, IL12RB1) causing MSMD",
+      "STAT1 loss-of-function deficiency",
+      "Chronic granulomatous disease",
+      "GATA2 deficiency",
+      "Anti-interferon-gamma autoantibody syndrome",
+      "Disseminated tuberculosis or leprosy in an apparently immunocompetent host",
+      "Severe combined immunodeficiency"
     ],
-    [
-     "Primary Differentials",
-     "IL-12/IL-23 axis defects (IL12B, IL12RB1) causing MSMD, STAT1 loss-of-function deficiency, Chronic granulomatous disease",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Flow cytometry for IFNGR1 and IFNGR2 surface expression, including detection of accumulated truncated receptor",
+      "Assay of STAT1 phosphorylation and downstream gene induction after interferon-gamma stimulation",
+      "Sequencing of IFNGR1 and IFNGR2",
+      "Plasma interferon-gamma concentration, typically strikingly elevated",
+      "Mycobacterial culture with species identification and typing",
+      "Tissue biopsy for granuloma morphology and bacillary load",
+      "Whole-blood functional immunoassays of the IL-12-interferon-gamma circuit"
     ],
-    [
-     "Management Strategy",
-     "Treat mycobacterial infections with prolonged multidrug antimycobacterial regimens, often lifelong, guided by species",
-     "Core treatment modality"
+    "redFlags": [
+      "Disseminated BCG or non-tuberculous mycobacterial disease in infancy",
+      "Mycobacterial osteomyelitis, a signature of partial dominant deficiency",
+      "Multibacillary, poorly organised granulomata",
+      "Relentless mycobacterial disease despite adequate antimicrobial therapy",
+      "Very high circulating interferon-gamma in the presence of ongoing mycobacterial infection"
     ],
-    [
-     "Clinical Pitfall",
-     "Prescribing recombinant interferon-gamma in complete deficiency, where it cannot act.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Partial forms often have a good outlook with prolonged antimycobacterial therapy and recombinant interferon-gamma, whereas complete receptor deficiency has a poor prognosis and is frequently fatal without haematopoietic stem cell transplantation, which is itself complicated by high interferon-gamma levels.",
+    "pitfalls": [
+      "Prescribing recombinant interferon-gamma in complete deficiency, where it cannot act.",
+      "Interpreting a high plasma interferon-gamma as reassuring rather than as a marker of receptor failure.",
+      "Missing surface-accumulated truncated receptor unless it is specifically sought on flow cytometry.",
+      "Confusing BCG disease with tuberculosis without species typing.",
+      "Delaying transplant assessment in complete deficiency."
+    ],
+    "references": [
+      "International Union of Immunological Societies (IUIS) inborn errors of immunity classification",
+      "Clinical immunology reference texts",
+      "Paediatric infectious diseases reference texts"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat mycobacterial infections with prolonged multidrug antimycobacterial regimens, often lifelong, guided by species identification and susceptibility",
+      "Reserve recombinant interferon-gamma for partial forms with residual signalling, as it is futile in complete receptor deficiency",
+      "Offer allogeneic haematopoietic stem cell transplantation for complete deficiency, recognising that very high circulating interferon-gamma can compromise engraftment",
+      "Use long-term macrolide-based antimycobacterial prophylaxis and strictly avoid live BCG and other live vaccines",
+      "Manage disseminated disease and febrile deterioration aggressively with cultures and directed antimicrobials",
+      "Monitor with serial mycobacterial cultures, inflammatory markers and imaging for relapse",
+      "Provide genetic counselling and cascade family screening for this recessively inherited disorder"
     ]
-   ],
-   "caption": "Overview comparison matrix for interferon-gamma receptor deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "ifn-gamma-receptor-deficiency-real-image",
-   "title": "Interferon-gamma receptor deficiency: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "ifn_gamma_receptor_deficiency-pathway",
+      "title": "Interferon-gamma receptor deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A prototypic cause of Mendelian susceptibility to mycobacterial disease, resulting from defects in the interferon-gamma receptor chains IFNGR1 or IFNGR2.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Disseminated BCG or non-tuberculous mycobacterial disease in infancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Flow cytometry for IFNGR1 and IFNGR2 surface expression, including detection of accumulated truncated receptor, Assay of STAT1 phosphorylation and downstream gene induction after interferon-gamma stimulation, Sequencing of"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat mycobacterial infections with prolonged multidrug antimycobacterial regimens, often lifelong, guided by species identification and susceptibility"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Prescribing recombinant interferon-gamma in complete deficiency, where it cannot act."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of interferon-gamma receptor deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "ifn_gamma_receptor_deficiency-matrix",
+      "title": "Interferon-gamma receptor deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A prototypic cause of Mendelian susceptibility to mycobacterial disease, resulting from defects in the interferon-gamma receptor",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Flow cytometry for IFNGR1 and IFNGR2 surface expression, including detection of accumulated truncated receptor, Assay of STAT1",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "IL-12/IL-23 axis defects (IL12B, IL12RB1) causing MSMD, STAT1 loss-of-function deficiency, Chronic granulomatous disease",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat mycobacterial infections with prolonged multidrug antimycobacterial regimens, often lifelong, guided by species",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Prescribing recombinant interferon-gamma in complete deficiency, where it cannot act.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for interferon-gamma receptor deficiency."
+    }
+  ],
+  "diagrams": []
 }

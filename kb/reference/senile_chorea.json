@@ -1,177 +1,155 @@
 {
- "id": "senile_chorea",
- "name": "senile chorea",
- "aliases": [
-  "senile chorea of the elderly",
-  "late-onset sporadic chorea"
- ],
- "class": "non_infective",
- "system": "nervous system",
- "specialty": "neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff's Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Senile chorea is a controversial descriptive label for late-onset chorea in the elderly without dementia, psychiatric decline or a family history of Huntington disease.",
-   "It is a diagnosis of exclusion; many historical cases would now be reclassified as late-onset Huntington disease, Huntington disease-like syndromes or secondary chorea.",
-   "Chorea is typically generalised, symmetrical and predominantly affects the limbs and orobuccolingual region.",
-   "Cognition is characteristically preserved, distinguishing it from the cognitive and behavioural decline of Huntington disease.",
-   "Genetic testing for the HTT CAG repeat expansion and for C9orf72 and other phenocopies is essential before accepting the label.",
-   "Structural basal ganglia lesions, metabolic derangement, drugs and autoimmune causes must be systematically excluded.",
-   "Progression, if any, is generally slow and confined to the movement disorder without the relentless multisystem decline of Huntington disease.",
-   "Treatment is symptomatic and reserved for functionally disabling chorea, using dopamine-depleting or dopamine-blocking agents cautiously in view of age and comorbidity."
+  "id": "senile_chorea",
+  "name": "senile chorea",
+  "aliases": [
+    "senile chorea of the elderly",
+    "late-onset sporadic chorea"
   ],
-  "pathophysiology": "Senile chorea is best understood as a clinical syndrome rather than a unified pathological entity, reflecting age-related or acquired dysfunction of the striatal indirect pathway. In many patients neuropathological or genetic re-evaluation reveals late-onset Huntington disease with reduced-penetrance CAG expansions, or Huntington disease phenocopies. In genuinely sporadic cases, degeneration or vascular and gliotic change within the caudate and putamen is thought to reduce inhibitory striatal output to the globus pallidus, disinhibiting thalamocortical drive and producing chorea. The relative sparing of cognition suggests that pathology is more restricted to motor striatal circuits than in classical Huntington disease, though the boundaries of the concept remain debated.",
-  "additionalDifferentials": [
-   "Late-onset Huntington disease",
-   "Huntington disease-like syndromes and C9orf72 expansion",
-   "Neuroacanthocytosis and related syndromes",
-   "Vascular (post-stroke) chorea",
-   "Drug-induced chorea and tardive dyskinesia",
-   "Metabolic chorea (non-ketotic hyperglycaemia, thyrotoxicosis, polycythaemia)",
-   "Autoimmune and paraneoplastic chorea"
-  ],
-  "additionalInvestigations": [
-   "HTT CAG repeat genetic testing for Huntington disease",
-   "Genetic testing for Huntington disease phenocopies (C9orf72, JPH3, others) where indicated",
-   "MRI brain to assess caudate atrophy and vascular or structural lesions",
-   "Peripheral blood film for acanthocytes and creatine kinase",
-   "Metabolic screen including glucose, thyroid function and full blood count",
-   "Autoimmune and paraneoplastic antibody panel where clinically suspected",
-   "Serum caeruloplasmin and copper studies in younger-appearing presentations"
-  ],
-  "redFlags": [
-   "Emerging cognitive decline or psychiatric change suggesting Huntington disease rather than isolated senile chorea",
-   "Abrupt onset or focal signs indicating a vascular or structural lesion",
-   "Systemic features suggesting paraneoplastic or autoimmune aetiology",
-   "Rapid progression prompting reconsideration of the diagnosis",
-   "Metabolic derangement such as marked hyperglycaemia requiring urgent correction"
-  ],
-  "prognosis": "When a serious underlying cause is excluded, senile chorea tends to follow a relatively benign, slowly progressive or static course with preserved cognition and reasonable functional outlook. Prognosis worsens substantially if the presentation ultimately proves to be late-onset Huntington disease or another neurodegenerative disorder.",
-  "pitfalls": [
-   "Accepting the label without genetic testing and thereby missing late-onset Huntington disease.",
-   "Assuming a negative family history excludes Huntington disease, which may reflect non-paternity, early parental death or reduced penetrance.",
-   "Overlooking reversible metabolic causes such as non-ketotic hyperglycaemia.",
-   "Attributing chorea to ageing and not screening for drug-induced or tardive movement disorders.",
-   "Using dopamine antagonists without regard to fall risk, sedation and anticholinergic burden in older patients."
-  ],
-  "references": [
-   "Bradley and Daroff's Neurology in Clinical Practice",
-   "Adams and Victor's Principles of Neurology",
-   "Movement Disorders textbook reviews of late-onset chorea"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat any identified underlying cause, since this is a diagnosis of exclusion, and withdraw offending drugs where implicated",
-   "Suppress functionally disabling chorea with a dopamine-depleting agent such as tetrabenazine or a cautious antidopaminergic",
-   "Provide supportive physiotherapy, occupational therapy, falls prevention, and nutritional support",
-   "Undertake genetic counselling and HTT CAG repeat testing, with phenocopy testing, before accepting the descriptive label",
-   "Systematically exclude structural basal ganglia lesions, metabolic derangement, and autoimmune causes",
-   "Refer to neurology and monitor for emerging cognitive or behavioural decline that would reclassify the illness as late-onset Huntington disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "senile_chorea-pathway",
-   "title": "senile chorea: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Senile chorea is a controversial descriptive label for late-onset chorea in the elderly without dementia, psychiatric decline or a family history of Huntington disease.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Emerging cognitive decline or psychiatric change suggesting Huntington disease rather than isolated senile chorea",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: HTT CAG repeat genetic testing for Huntington disease, Genetic testing for Huntington disease phenocopies (C9orf72, JPH3, others) where indicated, MRI brain to assess caudate atrophy and vascular or structural lesions"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat any identified underlying cause, since this is a diagnosis of exclusion, and withdraw offending drugs where implicated"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Accepting the label without genetic testing and thereby missing late-onset Huntington disease."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of senile chorea."
-  }
- ],
- "tables": [
-  {
-   "id": "senile_chorea-matrix",
-   "title": "senile chorea: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Senile chorea is a controversial descriptive label for late-onset chorea in the elderly without dementia, psychiatric decline or",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "nervous system",
+  "specialty": "neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff's Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Senile chorea is a controversial descriptive label for late-onset chorea in the elderly without dementia, psychiatric decline or a family history of Huntington disease.",
+      "It is a diagnosis of exclusion; many historical cases would now be reclassified as late-onset Huntington disease, Huntington disease-like syndromes or secondary chorea.",
+      "Chorea is typically generalised, symmetrical and predominantly affects the limbs and orobuccolingual region.",
+      "Cognition is characteristically preserved, distinguishing it from the cognitive and behavioural decline of Huntington disease.",
+      "Genetic testing for the HTT CAG repeat expansion and for C9orf72 and other phenocopies is essential before accepting the label.",
+      "Structural basal ganglia lesions, metabolic derangement, drugs and autoimmune causes must be systematically excluded.",
+      "Progression, if any, is generally slow and confined to the movement disorder without the relentless multisystem decline of Huntington disease.",
+      "Treatment is symptomatic and reserved for functionally disabling chorea, using dopamine-depleting or dopamine-blocking agents cautiously in view of age and comorbidity."
     ],
-    [
-     "Key Investigations",
-     "HTT CAG repeat genetic testing for Huntington disease, Genetic testing for Huntington disease phenocopies (C9orf72, JPH3, others)",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Senile chorea is best understood as a clinical syndrome rather than a unified pathological entity, reflecting age-related or acquired dysfunction of the striatal indirect pathway. In many patients neuropathological or genetic re-evaluation reveals late-onset Huntington disease with reduced-penetrance CAG expansions, or Huntington disease phenocopies. In genuinely sporadic cases, degeneration or vascular and gliotic change within the caudate and putamen is thought to reduce inhibitory striatal output to the globus pallidus, disinhibiting thalamocortical drive and producing chorea. The relative sparing of cognition suggests that pathology is more restricted to motor striatal circuits than in classical Huntington disease, though the boundaries of the concept remain debated.",
+    "additionalDifferentials": [
+      "Late-onset Huntington disease",
+      "Huntington disease-like syndromes and C9orf72 expansion",
+      "Neuroacanthocytosis and related syndromes",
+      "Vascular (post-stroke) chorea",
+      "Drug-induced chorea and tardive dyskinesia",
+      "Metabolic chorea (non-ketotic hyperglycaemia, thyrotoxicosis, polycythaemia)",
+      "Autoimmune and paraneoplastic chorea"
     ],
-    [
-     "Primary Differentials",
-     "Late-onset Huntington disease, Huntington disease-like syndromes and C9orf72 expansion, Neuroacanthocytosis and related syndromes",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "HTT CAG repeat genetic testing for Huntington disease",
+      "Genetic testing for Huntington disease phenocopies (C9orf72, JPH3, others) where indicated",
+      "MRI brain to assess caudate atrophy and vascular or structural lesions",
+      "Peripheral blood film for acanthocytes and creatine kinase",
+      "Metabolic screen including glucose, thyroid function and full blood count",
+      "Autoimmune and paraneoplastic antibody panel where clinically suspected",
+      "Serum caeruloplasmin and copper studies in younger-appearing presentations"
     ],
-    [
-     "Management Strategy",
-     "Treat any identified underlying cause, since this is a diagnosis of exclusion, and withdraw offending drugs where implicated",
-     "Core treatment modality"
+    "redFlags": [
+      "Emerging cognitive decline or psychiatric change suggesting Huntington disease rather than isolated senile chorea",
+      "Abrupt onset or focal signs indicating a vascular or structural lesion",
+      "Systemic features suggesting paraneoplastic or autoimmune aetiology",
+      "Rapid progression prompting reconsideration of the diagnosis",
+      "Metabolic derangement such as marked hyperglycaemia requiring urgent correction"
     ],
-    [
-     "Clinical Pitfall",
-     "Accepting the label without genetic testing and thereby missing late-onset Huntington disease.",
-     "Prevent diagnostic or management error"
+    "prognosis": "When a serious underlying cause is excluded, senile chorea tends to follow a relatively benign, slowly progressive or static course with preserved cognition and reasonable functional outlook. Prognosis worsens substantially if the presentation ultimately proves to be late-onset Huntington disease or another neurodegenerative disorder.",
+    "pitfalls": [
+      "Accepting the label without genetic testing and thereby missing late-onset Huntington disease.",
+      "Assuming a negative family history excludes Huntington disease, which may reflect non-paternity, early parental death or reduced penetrance.",
+      "Overlooking reversible metabolic causes such as non-ketotic hyperglycaemia.",
+      "Attributing chorea to ageing and not screening for drug-induced or tardive movement disorders.",
+      "Using dopamine antagonists without regard to fall risk, sedation and anticholinergic burden in older patients."
+    ],
+    "references": [
+      "Bradley and Daroff's Neurology in Clinical Practice",
+      "Adams and Victor's Principles of Neurology",
+      "Movement Disorders textbook reviews of late-onset chorea"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat any identified underlying cause, since this is a diagnosis of exclusion, and withdraw offending drugs where implicated",
+      "Suppress functionally disabling chorea with a dopamine-depleting agent such as tetrabenazine or a cautious antidopaminergic",
+      "Provide supportive physiotherapy, occupational therapy, falls prevention, and nutritional support",
+      "Undertake genetic counselling and HTT CAG repeat testing, with phenocopy testing, before accepting the descriptive label",
+      "Systematically exclude structural basal ganglia lesions, metabolic derangement, and autoimmune causes",
+      "Refer to neurology and monitor for emerging cognitive or behavioural decline that would reclassify the illness as late-onset Huntington disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for senile chorea."
-  }
- ],
- "diagrams": [
-  {
-   "id": "senile-chorea-real-image",
-   "title": "senile chorea: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "senile_chorea-pathway",
+      "title": "senile chorea: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Senile chorea is a controversial descriptive label for late-onset chorea in the elderly without dementia, psychiatric decline or a family history of Huntington disease.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Emerging cognitive decline or psychiatric change suggesting Huntington disease rather than isolated senile chorea",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: HTT CAG repeat genetic testing for Huntington disease, Genetic testing for Huntington disease phenocopies (C9orf72, JPH3, others) where indicated, MRI brain to assess caudate atrophy and vascular or structural lesions"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat any identified underlying cause, since this is a diagnosis of exclusion, and withdraw offending drugs where implicated"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Accepting the label without genetic testing and thereby missing late-onset Huntington disease."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of senile chorea."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "senile_chorea-matrix",
+      "title": "senile chorea: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Senile chorea is a controversial descriptive label for late-onset chorea in the elderly without dementia, psychiatric decline or",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "HTT CAG repeat genetic testing for Huntington disease, Genetic testing for Huntington disease phenocopies (C9orf72, JPH3, others)",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Late-onset Huntington disease, Huntington disease-like syndromes and C9orf72 expansion, Neuroacanthocytosis and related syndromes",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat any identified underlying cause, since this is a diagnosis of exclusion, and withdraw offending drugs where implicated",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Accepting the label without genetic testing and thereby missing late-onset Huntington disease.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for senile chorea."
+    }
+  ],
+  "diagrams": []
 }

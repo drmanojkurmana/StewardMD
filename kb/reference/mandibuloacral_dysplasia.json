@@ -1,177 +1,155 @@
 {
- "id": "mandibuloacral_dysplasia",
- "name": "Mandibuloacral dysplasia (LMNA/ZMPSTE24)",
- "aliases": [
-  "MAD",
-  "MADA (LMNA)",
-  "MADB (ZMPSTE24)",
-  "mandibuloacral dysplasia with lipodystrophy"
- ],
- "class": "non_infective",
- "system": "Endocrine / Genetics",
- "specialty": "Endocrinology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Textbook of Endocrinology / Endocrine Society clinical guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Rare autosomal recessive progeroid disorder combining skeletal dysplasia with partial or generalised lipodystrophy",
-   "Type A (MADA) arises from LMNA (lamin A/C) mutations, while type B (MADB) results from ZMPSTE24 mutations affecting prelamin A processing",
-   "Skeletal hallmarks include mandibular and clavicular hypoplasia, acro-osteolysis (resorption of the terminal finger phalanges), delayed cranial suture closure, and joint contractures",
-   "The MADA fat pattern is typically partial with limb fat loss and relative truncal sparing, whereas MADB tends toward more generalised fat loss with earlier, more severe features",
-   "Progeroid skin and features, mottled pigmentation, alopecia, and a beaked nose accompany the phenotype",
-   "Loss of subcutaneous fat produces insulin resistance, acanthosis nigricans, and a predisposition to hypertriglyceridaemia and diabetes",
-   "Management targets the metabolic complications with insulin sensitisers and lipid control, with leptin (metreleptin) replacement considered when leptin is low",
-   "Diagnosis integrates the skeletal-progeroid-lipodystrophy triad with LMNA and ZMPSTE24 genetics"
+  "id": "mandibuloacral_dysplasia",
+  "name": "Mandibuloacral dysplasia (LMNA/ZMPSTE24)",
+  "aliases": [
+    "MAD",
+    "MADA (LMNA)",
+    "MADB (ZMPSTE24)",
+    "mandibuloacral dysplasia with lipodystrophy"
   ],
-  "pathophysiology": "Mandibuloacral dysplasia is a laminopathy-spectrum disorder caused by biallelic mutations in LMNA, which encodes the nuclear-lamina proteins lamin A/C, or in ZMPSTE24, the metalloprotease that cleaves prelamin A to mature lamin A. Defective lamin processing destabilises the nuclear envelope, impairing the function and survival of mesenchymal-derived tissues including bone and adipocytes. This produces the characteristic mandibular and acral skeletal defects, progeroid connective-tissue changes, and loss of subcutaneous fat. As with other lipodystrophies, reduced fat-storage capacity drives ectopic lipid deposition, insulin resistance, acanthosis nigricans, and a tendency to hypertriglyceridaemia and diabetes.",
-  "additionalDifferentials": [
-   "Familial partial lipodystrophy (LMNA-related)",
-   "Hutchinson-Gilford progeria and other progeroid syndromes",
-   "Congenital generalised lipodystrophy (for MADB)",
-   "Acro-osteolysis syndromes such as Hajdu-Cheney",
-   "Cleidocranial dysplasia (for clavicular/cranial features)",
-   "Werner syndrome and adult progeroid disorders",
-   "Other skeletal dysplasias with metabolic features"
-  ],
-  "additionalInvestigations": [
-   "Skeletal survey demonstrating mandibular/clavicular hypoplasia and acro-osteolysis",
-   "Regional fat imaging (DEXA/MRI) to characterise the lipodystrophy pattern",
-   "Fasting glucose/HbA1c, insulin, and lipid profile",
-   "Serum leptin to guide consideration of leptin replacement",
-   "Genetic testing of LMNA and ZMPSTE24",
-   "Liver function tests and hepatic imaging for steatosis"
-  ],
-  "redFlags": [
-   "Severe hypertriglyceridaemia risking pancreatitis",
-   "Progressive skeletal deformity and joint contractures limiting function",
-   "Rapidly advancing progeroid features in the more severe MADB form",
-   "Poorly controlled insulin-resistant diabetes"
-  ],
-  "prognosis": "Prognosis varies with subtype and severity; the LMNA-related type A tends to be milder with a partial lipodystrophy phenotype, whereas the ZMPSTE24-related type B is more severe and progeroid, and long-term outlook is shaped by metabolic and skeletal complications.",
-  "pitfalls": [
-   "Mistaking the disorder for isolated familial partial lipodystrophy and missing the skeletal features",
-   "Overlooking acro-osteolysis on hand radiographs",
-   "Failing to distinguish the milder LMNA type from the more severe ZMPSTE24 type",
-   "Neglecting metabolic screening for diabetes and hypertriglyceridaemia",
-   "Not arranging genetic confirmation and counselling"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "Endocrine Society clinical practice guidance on lipodystrophy"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage insulin resistance and diabetes with lifestyle measures and insulin-sensitising therapy such as metformin, adding insulin where needed",
-   "Treat hypertriglyceridaemia with a low-fat diet plus fibrates and/or statins to reduce pancreatitis and cardiovascular risk",
-   "Consider recombinant leptin (metreleptin) replacement in significant lipodystrophy with metabolic complications and low leptin",
-   "Undertake metabolic surveillance with fasting glucose, HbA1c, lipid profile and monitoring for hepatic steatosis",
-   "Provide orthopaedic and physiotherapy input for joint contractures and monitor acro-osteolysis and skeletal dysplasia",
-   "Coordinate care across endocrinology, clinical genetics and orthopaedics",
-   "Offer genetic counselling for autosomal recessive LMNA or ZMPSTE24 disease with testing of at-risk relatives"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "mandibuloacral_dysplasia-pathway",
-   "title": "Mandibuloacral dysplasia (LMNA/ZMPSTE24): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Rare autosomal recessive progeroid disorder combining skeletal dysplasia with partial or generalised lipodystrophy",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe hypertriglyceridaemia risking pancreatitis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skeletal survey demonstrating mandibular/clavicular hypoplasia and acro-osteolysis, Regional fat imaging (DEXA/MRI) to characterise the lipodystrophy pattern, Fasting glucose/HbA1c, insulin, and lipid profile"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage insulin resistance and diabetes with lifestyle measures and insulin-sensitising therapy such as metformin, adding insulin where needed"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking the disorder for isolated familial partial lipodystrophy and missing the skeletal features"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of mandibuloacral dysplasia (lmna/zmpste24)."
-  }
- ],
- "tables": [
-  {
-   "id": "mandibuloacral_dysplasia-matrix",
-   "title": "Mandibuloacral dysplasia (LMNA/ZMPSTE24): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Rare autosomal recessive progeroid disorder combining skeletal dysplasia with partial or generalised lipodystrophy",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine / Genetics",
+  "specialty": "Endocrinology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Textbook of Endocrinology / Endocrine Society clinical guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Rare autosomal recessive progeroid disorder combining skeletal dysplasia with partial or generalised lipodystrophy",
+      "Type A (MADA) arises from LMNA (lamin A/C) mutations, while type B (MADB) results from ZMPSTE24 mutations affecting prelamin A processing",
+      "Skeletal hallmarks include mandibular and clavicular hypoplasia, acro-osteolysis (resorption of the terminal finger phalanges), delayed cranial suture closure, and joint contractures",
+      "The MADA fat pattern is typically partial with limb fat loss and relative truncal sparing, whereas MADB tends toward more generalised fat loss with earlier, more severe features",
+      "Progeroid skin and features, mottled pigmentation, alopecia, and a beaked nose accompany the phenotype",
+      "Loss of subcutaneous fat produces insulin resistance, acanthosis nigricans, and a predisposition to hypertriglyceridaemia and diabetes",
+      "Management targets the metabolic complications with insulin sensitisers and lipid control, with leptin (metreleptin) replacement considered when leptin is low",
+      "Diagnosis integrates the skeletal-progeroid-lipodystrophy triad with LMNA and ZMPSTE24 genetics"
     ],
-    [
-     "Key Investigations",
-     "Skeletal survey demonstrating mandibular/clavicular hypoplasia and acro-osteolysis, Regional fat imaging (DEXA/MRI) to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Mandibuloacral dysplasia is a laminopathy-spectrum disorder caused by biallelic mutations in LMNA, which encodes the nuclear-lamina proteins lamin A/C, or in ZMPSTE24, the metalloprotease that cleaves prelamin A to mature lamin A. Defective lamin processing destabilises the nuclear envelope, impairing the function and survival of mesenchymal-derived tissues including bone and adipocytes. This produces the characteristic mandibular and acral skeletal defects, progeroid connective-tissue changes, and loss of subcutaneous fat. As with other lipodystrophies, reduced fat-storage capacity drives ectopic lipid deposition, insulin resistance, acanthosis nigricans, and a tendency to hypertriglyceridaemia and diabetes.",
+    "additionalDifferentials": [
+      "Familial partial lipodystrophy (LMNA-related)",
+      "Hutchinson-Gilford progeria and other progeroid syndromes",
+      "Congenital generalised lipodystrophy (for MADB)",
+      "Acro-osteolysis syndromes such as Hajdu-Cheney",
+      "Cleidocranial dysplasia (for clavicular/cranial features)",
+      "Werner syndrome and adult progeroid disorders",
+      "Other skeletal dysplasias with metabolic features"
     ],
-    [
-     "Primary Differentials",
-     "Familial partial lipodystrophy (LMNA-related), Hutchinson-Gilford progeria and other progeroid syndromes, Congenital generalised",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skeletal survey demonstrating mandibular/clavicular hypoplasia and acro-osteolysis",
+      "Regional fat imaging (DEXA/MRI) to characterise the lipodystrophy pattern",
+      "Fasting glucose/HbA1c, insulin, and lipid profile",
+      "Serum leptin to guide consideration of leptin replacement",
+      "Genetic testing of LMNA and ZMPSTE24",
+      "Liver function tests and hepatic imaging for steatosis"
     ],
-    [
-     "Management Strategy",
-     "Manage insulin resistance and diabetes with lifestyle measures and insulin-sensitising therapy such as metformin, adding insulin",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe hypertriglyceridaemia risking pancreatitis",
+      "Progressive skeletal deformity and joint contractures limiting function",
+      "Rapidly advancing progeroid features in the more severe MADB form",
+      "Poorly controlled insulin-resistant diabetes"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking the disorder for isolated familial partial lipodystrophy and missing the skeletal features",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis varies with subtype and severity; the LMNA-related type A tends to be milder with a partial lipodystrophy phenotype, whereas the ZMPSTE24-related type B is more severe and progeroid, and long-term outlook is shaped by metabolic and skeletal complications.",
+    "pitfalls": [
+      "Mistaking the disorder for isolated familial partial lipodystrophy and missing the skeletal features",
+      "Overlooking acro-osteolysis on hand radiographs",
+      "Failing to distinguish the milder LMNA type from the more severe ZMPSTE24 type",
+      "Neglecting metabolic screening for diabetes and hypertriglyceridaemia",
+      "Not arranging genetic confirmation and counselling"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "Endocrine Society clinical practice guidance on lipodystrophy"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage insulin resistance and diabetes with lifestyle measures and insulin-sensitising therapy such as metformin, adding insulin where needed",
+      "Treat hypertriglyceridaemia with a low-fat diet plus fibrates and/or statins to reduce pancreatitis and cardiovascular risk",
+      "Consider recombinant leptin (metreleptin) replacement in significant lipodystrophy with metabolic complications and low leptin",
+      "Undertake metabolic surveillance with fasting glucose, HbA1c, lipid profile and monitoring for hepatic steatosis",
+      "Provide orthopaedic and physiotherapy input for joint contractures and monitor acro-osteolysis and skeletal dysplasia",
+      "Coordinate care across endocrinology, clinical genetics and orthopaedics",
+      "Offer genetic counselling for autosomal recessive LMNA or ZMPSTE24 disease with testing of at-risk relatives"
     ]
-   ],
-   "caption": "Overview comparison matrix for mandibuloacral dysplasia (lmna/zmpste24)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "mandibuloacral-dysplasia-real-image",
-   "title": "Mandibuloacral dysplasia (LMNA/ZMPSTE24): Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "mandibuloacral_dysplasia-pathway",
+      "title": "Mandibuloacral dysplasia (LMNA/ZMPSTE24): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Rare autosomal recessive progeroid disorder combining skeletal dysplasia with partial or generalised lipodystrophy",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe hypertriglyceridaemia risking pancreatitis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skeletal survey demonstrating mandibular/clavicular hypoplasia and acro-osteolysis, Regional fat imaging (DEXA/MRI) to characterise the lipodystrophy pattern, Fasting glucose/HbA1c, insulin, and lipid profile"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage insulin resistance and diabetes with lifestyle measures and insulin-sensitising therapy such as metformin, adding insulin where needed"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking the disorder for isolated familial partial lipodystrophy and missing the skeletal features"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of mandibuloacral dysplasia (lmna/zmpste24)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "mandibuloacral_dysplasia-matrix",
+      "title": "Mandibuloacral dysplasia (LMNA/ZMPSTE24): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Rare autosomal recessive progeroid disorder combining skeletal dysplasia with partial or generalised lipodystrophy",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skeletal survey demonstrating mandibular/clavicular hypoplasia and acro-osteolysis, Regional fat imaging (DEXA/MRI) to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Familial partial lipodystrophy (LMNA-related), Hutchinson-Gilford progeria and other progeroid syndromes, Congenital generalised",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage insulin resistance and diabetes with lifestyle measures and insulin-sensitising therapy such as metformin, adding insulin",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking the disorder for isolated familial partial lipodystrophy and missing the skeletal features",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for mandibuloacral dysplasia (lmna/zmpste24)."
+    }
+  ],
+  "diagrams": []
 }

@@ -1,176 +1,154 @@
 {
- "id": "pseudoxanthoma_elasticum",
- "name": "Pseudoxanthoma elasticum",
- "aliases": [
-  "PXE",
-  "Groenblad-Strandberg syndrome",
-  "ABCC6-related disorder"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Genetics",
- "specialty": "Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Emery and Rimoin's Principles and Practice of Medical Genetics / GeneReviews",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive disorder caused by variants in ABCC6, leading to progressive mineralisation and fragmentation of elastic fibres",
-   "Skin changes are the earliest sign: yellowish papules (a 'plucked chicken skin' appearance) coalescing into lax plaques in flexural areas such as the neck and axillae",
-   "Angioid streaks of the retina are a hallmark ocular finding and predispose to choroidal neovascularisation and central visual loss",
-   "Cardiovascular involvement includes premature peripheral arterial disease, intermittent claudication, and increased risk of ischaemic events",
-   "Gastrointestinal haemorrhage can occur from mineralisation of arteries in the gastric mucosa",
-   "Diagnosis rests on characteristic skin and eye findings, skin biopsy showing calcified fragmented elastic fibres, and ABCC6 molecular testing",
-   "Management is supportive and preventive: retinal surveillance with prompt treatment of neovascularisation, cardiovascular risk reduction, and avoidance of antiplatelet or anticoagulant excess where bleeding risk is high",
-   "Genetic counselling should reflect the autosomal recessive inheritance and carrier implications for the family"
+  "id": "pseudoxanthoma_elasticum",
+  "name": "Pseudoxanthoma elasticum",
+  "aliases": [
+    "PXE",
+    "Groenblad-Strandberg syndrome",
+    "ABCC6-related disorder"
   ],
-  "pathophysiology": "Pseudoxanthoma elasticum is caused by loss of function of ABCC6, a transporter expressed mainly in the liver and kidney. Reduced ABCC6 activity lowers circulating levels of inorganic pyrophosphate, a key inhibitor of ectopic mineralisation. The resulting imbalance allows calcium and phosphate to deposit on elastic fibres in the skin, the Bruch membrane of the eye, and the arterial wall. Progressive calcification and fragmentation of these elastic fibres produce the characteristic cutaneous papules, retinal angioid streaks with neovascular complications, and premature arterial disease with a tendency to haemorrhage.",
-  "additionalDifferentials": [
-   "Cutis laxa",
-   "Elastosis perforans serpiginosa",
-   "Solar (actinic) elastosis",
-   "Beta-thalassaemia-associated PXE-like syndrome",
-   "Other causes of angioid streaks such as Paget disease of bone",
-   "Fibroelastolytic papulosis of the neck"
-  ],
-  "additionalInvestigations": [
-   "Skin biopsy with elastic-tissue staining to demonstrate calcified fragmented elastic fibres",
-   "Dilated fundus examination and retinal imaging for angioid streaks and neovascularisation",
-   "Molecular genetic testing of ABCC6",
-   "Ankle-brachial pressure index and vascular imaging for peripheral arterial disease",
-   "Cardiovascular risk assessment including blood pressure and lipids",
-   "Investigation for gastrointestinal bleeding when clinically indicated"
-  ],
-  "redFlags": [
-   "Sudden central visual distortion or loss suggesting choroidal neovascularisation or retinal haemorrhage",
-   "Gastrointestinal bleeding from mineralised mucosal arteries",
-   "Symptoms of myocardial or cerebral ischaemia",
-   "Rapidly worsening claudication or critical limb ischaemia",
-   "Ocular trauma in a patient with fragile Bruch membrane"
-  ],
-  "prognosis": "Life expectancy is usually near normal, but progressive visual loss from retinal complications and the burden of premature vascular disease are the main sources of morbidity. Early retinal surveillance and cardiovascular risk management improve outcomes.",
-  "pitfalls": [
-   "Dismissing early flexural skin papules as a cosmetic issue rather than a diagnostic sign",
-   "Failing to arrange retinal surveillance, allowing preventable neovascular visual loss",
-   "Overlooking premature cardiovascular disease in a relatively young patient",
-   "Prescribing antithrombotic therapy without weighing the heightened bleeding risk",
-   "Not recognising angioid streaks as a pointer to systemic disease"
-  ],
-  "references": [
-   "GeneReviews: Pseudoxanthoma elasticum",
-   "Emery and Rimoin's Principles and Practice of Medical Genetics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No disease-modifying drug exists, so management centres on aggressive cardiovascular risk reduction with blood pressure control, lipid lowering and smoking cessation to limit premature arterial disease",
-   "Regular dilated fundus examination and retinal imaging for angioid streaks, with prompt intravitreal anti-VEGF therapy for choroidal neovascularisation to preserve sight",
-   "Avoid unnecessary antiplatelet and anticoagulant drugs and contact sports given the tendency to haemorrhage",
-   "Supportive dermatological and plastic surgical management of lax cutaneous plaques for cosmesis",
-   "Surveillance for peripheral arterial disease with supervised exercise for claudication and vascular input as required",
-   "Screening for and prompt treatment of gastrointestinal haemorrhage from mineralised gastric arteries",
-   "Genetic counselling for autosomal recessive inheritance and testing of at-risk relatives, coordinated within a multidisciplinary team spanning dermatology, ophthalmology, cardiology and clinical genetics"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pseudoxanthoma_elasticum-pathway",
-   "title": "Pseudoxanthoma elasticum: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive disorder caused by variants in ABCC6, leading to progressive mineralisation and fragmentation of elastic fibres",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Sudden central visual distortion or loss suggesting choroidal neovascularisation or retinal haemorrhage",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin biopsy with elastic-tissue staining to demonstrate calcified fragmented elastic fibres, Dilated fundus examination and retinal imaging for angioid streaks and neovascularisation, Molecular genetic testing of ABCC6"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No disease-modifying drug exists, so management centres on aggressive cardiovascular risk reduction with blood pressure control, lipid lowering and smoking cessation to limit premature arterial disease"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing early flexural skin papules as a cosmetic issue rather than a diagnostic sign"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pseudoxanthoma elasticum."
-  }
- ],
- "tables": [
-  {
-   "id": "pseudoxanthoma_elasticum-matrix",
-   "title": "Pseudoxanthoma elasticum: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive disorder caused by variants in ABCC6, leading to progressive mineralisation and fragmentation of elastic",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Genetics",
+  "specialty": "Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Emery and Rimoin's Principles and Practice of Medical Genetics / GeneReviews",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive disorder caused by variants in ABCC6, leading to progressive mineralisation and fragmentation of elastic fibres",
+      "Skin changes are the earliest sign: yellowish papules (a 'plucked chicken skin' appearance) coalescing into lax plaques in flexural areas such as the neck and axillae",
+      "Angioid streaks of the retina are a hallmark ocular finding and predispose to choroidal neovascularisation and central visual loss",
+      "Cardiovascular involvement includes premature peripheral arterial disease, intermittent claudication, and increased risk of ischaemic events",
+      "Gastrointestinal haemorrhage can occur from mineralisation of arteries in the gastric mucosa",
+      "Diagnosis rests on characteristic skin and eye findings, skin biopsy showing calcified fragmented elastic fibres, and ABCC6 molecular testing",
+      "Management is supportive and preventive: retinal surveillance with prompt treatment of neovascularisation, cardiovascular risk reduction, and avoidance of antiplatelet or anticoagulant excess where bleeding risk is high",
+      "Genetic counselling should reflect the autosomal recessive inheritance and carrier implications for the family"
     ],
-    [
-     "Key Investigations",
-     "Skin biopsy with elastic-tissue staining to demonstrate calcified fragmented elastic fibres, Dilated fundus examination and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Pseudoxanthoma elasticum is caused by loss of function of ABCC6, a transporter expressed mainly in the liver and kidney. Reduced ABCC6 activity lowers circulating levels of inorganic pyrophosphate, a key inhibitor of ectopic mineralisation. The resulting imbalance allows calcium and phosphate to deposit on elastic fibres in the skin, the Bruch membrane of the eye, and the arterial wall. Progressive calcification and fragmentation of these elastic fibres produce the characteristic cutaneous papules, retinal angioid streaks with neovascular complications, and premature arterial disease with a tendency to haemorrhage.",
+    "additionalDifferentials": [
+      "Cutis laxa",
+      "Elastosis perforans serpiginosa",
+      "Solar (actinic) elastosis",
+      "Beta-thalassaemia-associated PXE-like syndrome",
+      "Other causes of angioid streaks such as Paget disease of bone",
+      "Fibroelastolytic papulosis of the neck"
     ],
-    [
-     "Primary Differentials",
-     "Cutis laxa, Elastosis perforans serpiginosa, Solar (actinic) elastosis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin biopsy with elastic-tissue staining to demonstrate calcified fragmented elastic fibres",
+      "Dilated fundus examination and retinal imaging for angioid streaks and neovascularisation",
+      "Molecular genetic testing of ABCC6",
+      "Ankle-brachial pressure index and vascular imaging for peripheral arterial disease",
+      "Cardiovascular risk assessment including blood pressure and lipids",
+      "Investigation for gastrointestinal bleeding when clinically indicated"
     ],
-    [
-     "Management Strategy",
-     "No disease-modifying drug exists, so management centres on aggressive cardiovascular risk reduction with blood pressure control,",
-     "Core treatment modality"
+    "redFlags": [
+      "Sudden central visual distortion or loss suggesting choroidal neovascularisation or retinal haemorrhage",
+      "Gastrointestinal bleeding from mineralised mucosal arteries",
+      "Symptoms of myocardial or cerebral ischaemia",
+      "Rapidly worsening claudication or critical limb ischaemia",
+      "Ocular trauma in a patient with fragile Bruch membrane"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing early flexural skin papules as a cosmetic issue rather than a diagnostic sign",
-     "Prevent diagnostic or management error"
+    "prognosis": "Life expectancy is usually near normal, but progressive visual loss from retinal complications and the burden of premature vascular disease are the main sources of morbidity. Early retinal surveillance and cardiovascular risk management improve outcomes.",
+    "pitfalls": [
+      "Dismissing early flexural skin papules as a cosmetic issue rather than a diagnostic sign",
+      "Failing to arrange retinal surveillance, allowing preventable neovascular visual loss",
+      "Overlooking premature cardiovascular disease in a relatively young patient",
+      "Prescribing antithrombotic therapy without weighing the heightened bleeding risk",
+      "Not recognising angioid streaks as a pointer to systemic disease"
+    ],
+    "references": [
+      "GeneReviews: Pseudoxanthoma elasticum",
+      "Emery and Rimoin's Principles and Practice of Medical Genetics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No disease-modifying drug exists, so management centres on aggressive cardiovascular risk reduction with blood pressure control, lipid lowering and smoking cessation to limit premature arterial disease",
+      "Regular dilated fundus examination and retinal imaging for angioid streaks, with prompt intravitreal anti-VEGF therapy for choroidal neovascularisation to preserve sight",
+      "Avoid unnecessary antiplatelet and anticoagulant drugs and contact sports given the tendency to haemorrhage",
+      "Supportive dermatological and plastic surgical management of lax cutaneous plaques for cosmesis",
+      "Surveillance for peripheral arterial disease with supervised exercise for claudication and vascular input as required",
+      "Screening for and prompt treatment of gastrointestinal haemorrhage from mineralised gastric arteries",
+      "Genetic counselling for autosomal recessive inheritance and testing of at-risk relatives, coordinated within a multidisciplinary team spanning dermatology, ophthalmology, cardiology and clinical genetics"
     ]
-   ],
-   "caption": "Overview comparison matrix for pseudoxanthoma elasticum."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pseudoxanthoma-elasticum-real-image",
-   "title": "Pseudoxanthoma elasticum: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "pseudoxanthoma_elasticum-pathway",
+      "title": "Pseudoxanthoma elasticum: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive disorder caused by variants in ABCC6, leading to progressive mineralisation and fragmentation of elastic fibres",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Sudden central visual distortion or loss suggesting choroidal neovascularisation or retinal haemorrhage",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin biopsy with elastic-tissue staining to demonstrate calcified fragmented elastic fibres, Dilated fundus examination and retinal imaging for angioid streaks and neovascularisation, Molecular genetic testing of ABCC6"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No disease-modifying drug exists, so management centres on aggressive cardiovascular risk reduction with blood pressure control, lipid lowering and smoking cessation to limit premature arterial disease"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing early flexural skin papules as a cosmetic issue rather than a diagnostic sign"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pseudoxanthoma elasticum."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pseudoxanthoma_elasticum-matrix",
+      "title": "Pseudoxanthoma elasticum: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive disorder caused by variants in ABCC6, leading to progressive mineralisation and fragmentation of elastic",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin biopsy with elastic-tissue staining to demonstrate calcified fragmented elastic fibres, Dilated fundus examination and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Cutis laxa, Elastosis perforans serpiginosa, Solar (actinic) elastosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No disease-modifying drug exists, so management centres on aggressive cardiovascular risk reduction with blood pressure control,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing early flexural skin papules as a cosmetic issue rather than a diagnostic sign",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pseudoxanthoma elasticum."
+    }
+  ],
+  "diagrams": []
 }

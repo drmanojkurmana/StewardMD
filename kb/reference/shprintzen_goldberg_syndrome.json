@@ -1,176 +1,154 @@
 {
- "id": "shprintzen_goldberg_syndrome",
- "name": "Shprintzen-Goldberg syndrome",
- "aliases": [
-  "SGS",
-  "SKI",
-  "marfanoid craniosynostosis syndrome",
-  "Shprintzen-Goldberg craniosynostosis syndrome"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Genetics",
- "specialty": "Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "OMIM / GeneReviews / Emery and Rimoin's Principles and Practice of Medical Genetics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Characterised by a marfanoid habitus combined with craniosynostosis and, in most cases, intellectual disability, which helps distinguish it from Marfan and Loeys-Dietz syndromes",
-   "Caused by pathogenic variants in SKI, usually arising de novo, affecting a regulator of transforming growth factor beta signalling",
-   "Craniofacial features include craniosynostosis, dolichocephaly, hypertelorism, proptosis, a high-arched palate and micrognathia",
-   "Skeletal features overlap with Marfan syndrome: arachnodactyly, dolichostenomelia, pectus deformity, scoliosis and joint hypermobility or contractures",
-   "Hypotonia, developmental delay and intellectual disability are common and are more prominent than in other marfanoid connective-tissue disorders",
-   "Aortic root dilatation can occur but is generally milder and less frequent than in Marfan or Loeys-Dietz syndromes, so cardiovascular surveillance is still warranted",
-   "Additional features include hernias and, in some, brain anomalies such as Chiari I malformation",
-   "Diagnosis rests on the characteristic pattern of findings with confirmatory SKI genetic testing"
+  "id": "shprintzen_goldberg_syndrome",
+  "name": "Shprintzen-Goldberg syndrome",
+  "aliases": [
+    "SGS",
+    "SKI",
+    "marfanoid craniosynostosis syndrome",
+    "Shprintzen-Goldberg craniosynostosis syndrome"
   ],
-  "pathophysiology": "Shprintzen-Goldberg syndrome is a heritable connective-tissue disorder caused by pathogenic variants in SKI, which encodes a repressor of transforming growth factor beta (TGF-beta) signalling. Loss of normal SKI-mediated repression is thought to enhance TGF-beta signalling, a mechanism shared with Marfan and Loeys-Dietz syndromes, disturbing the development and integrity of connective tissue, bone and the cardiovascular system. This produces the marfanoid skeletal habitus, the craniofacial features including premature fusion of cranial sutures (craniosynostosis), and connective-tissue laxity, alongside the neurodevelopmental impairment that distinguishes the condition. Aortic root involvement reflects the same connective-tissue vulnerability but tends to be less severe than in related aortopathies.",
-  "additionalDifferentials": [
-   "Marfan syndrome",
-   "Loeys-Dietz syndrome",
-   "Congenital contractural arachnodactyly (Beals syndrome)",
-   "Other craniosynostosis syndromes",
-   "Homocystinuria (marfanoid habitus)",
-   "Other TGF-beta pathway connective-tissue disorders"
-  ],
-  "additionalInvestigations": [
-   "SKI molecular genetic testing",
-   "Echocardiography for aortic root dimensions",
-   "Skull imaging to assess craniosynostosis",
-   "Skeletal survey for scoliosis, pectus and limb proportions",
-   "Brain MRI when Chiari malformation or other anomaly is suspected",
-   "Developmental and ophthalmological assessment"
-  ],
-  "redFlags": [
-   "Progressive aortic root dilatation",
-   "Raised intracranial pressure from craniosynostosis",
-   "Severe scoliosis compromising respiratory function",
-   "Airway or feeding difficulties from craniofacial anomalies"
-  ],
-  "prognosis": "Prognosis depends on the severity of skeletal, neurological and cardiovascular involvement; intellectual disability is common, and although aortic disease is usually milder than in Marfan syndrome, cardiovascular surveillance remains important.",
-  "pitfalls": [
-   "Labelling the patient as having Marfan syndrome and missing the craniosynostosis and intellectual disability",
-   "Assuming aortic involvement is absent and omitting cardiovascular surveillance",
-   "Overlooking raised intracranial pressure from suture fusion",
-   "Attributing developmental delay to an unrelated cause"
-  ],
-  "references": [
-   "GeneReviews / OMIM entry for Shprintzen-Goldberg Syndrome (SKI)",
-   "Emery and Rimoin's Principles and Practice of Medical Genetics",
-   "Consensus literature on TGF-beta connective-tissue disorders"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Cardiovascular surveillance with serial echocardiography for aortic root dilatation, with beta-blocker or angiotensin receptor blocker therapy to reduce aortic wall stress when dilatation is present",
-   "Prophylactic aortic root surgery if dilatation progresses to established surgical criteria",
-   "Craniofacial and neurosurgical assessment of craniosynostosis with cranial vault expansion where raised intracranial pressure or progressive deformity demands it",
-   "Orthopaedic management of scoliosis, pectus deformity and joint hypermobility or contractures with bracing, physiotherapy or corrective surgery",
-   "Early developmental intervention and educational support for hypotonia, developmental delay and intellectual disability, with ophthalmological review",
-   "Coordinated multidisciplinary care across clinical genetics, cardiology, craniofacial surgery, orthopaedics and developmental paediatrics",
-   "Genetic counselling explaining the usually de novo SKI variant and consequently low recurrence risk"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "shprintzen_goldberg_syndrome-pathway",
-   "title": "Shprintzen-Goldberg syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Characterised by a marfanoid habitus combined with craniosynostosis and, in most cases, intellectual disability, which helps distinguish it from Marfan and Loeys-Dietz syndromes",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive aortic root dilatation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: SKI molecular genetic testing, Echocardiography for aortic root dimensions, Skull imaging to assess craniosynostosis"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Cardiovascular surveillance with serial echocardiography for aortic root dilatation, with beta-blocker or angiotensin receptor blocker therapy to reduce aortic wall stress when dilatation is present"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Labelling the patient as having Marfan syndrome and missing the craniosynostosis and intellectual disability"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of shprintzen-goldberg syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "shprintzen_goldberg_syndrome-matrix",
-   "title": "Shprintzen-Goldberg syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Characterised by a marfanoid habitus combined with craniosynostosis and, in most cases, intellectual disability, which helps",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Genetics",
+  "specialty": "Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "OMIM / GeneReviews / Emery and Rimoin's Principles and Practice of Medical Genetics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Characterised by a marfanoid habitus combined with craniosynostosis and, in most cases, intellectual disability, which helps distinguish it from Marfan and Loeys-Dietz syndromes",
+      "Caused by pathogenic variants in SKI, usually arising de novo, affecting a regulator of transforming growth factor beta signalling",
+      "Craniofacial features include craniosynostosis, dolichocephaly, hypertelorism, proptosis, a high-arched palate and micrognathia",
+      "Skeletal features overlap with Marfan syndrome: arachnodactyly, dolichostenomelia, pectus deformity, scoliosis and joint hypermobility or contractures",
+      "Hypotonia, developmental delay and intellectual disability are common and are more prominent than in other marfanoid connective-tissue disorders",
+      "Aortic root dilatation can occur but is generally milder and less frequent than in Marfan or Loeys-Dietz syndromes, so cardiovascular surveillance is still warranted",
+      "Additional features include hernias and, in some, brain anomalies such as Chiari I malformation",
+      "Diagnosis rests on the characteristic pattern of findings with confirmatory SKI genetic testing"
     ],
-    [
-     "Key Investigations",
-     "SKI molecular genetic testing, Echocardiography for aortic root dimensions, Skull imaging to assess craniosynostosis",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Shprintzen-Goldberg syndrome is a heritable connective-tissue disorder caused by pathogenic variants in SKI, which encodes a repressor of transforming growth factor beta (TGF-beta) signalling. Loss of normal SKI-mediated repression is thought to enhance TGF-beta signalling, a mechanism shared with Marfan and Loeys-Dietz syndromes, disturbing the development and integrity of connective tissue, bone and the cardiovascular system. This produces the marfanoid skeletal habitus, the craniofacial features including premature fusion of cranial sutures (craniosynostosis), and connective-tissue laxity, alongside the neurodevelopmental impairment that distinguishes the condition. Aortic root involvement reflects the same connective-tissue vulnerability but tends to be less severe than in related aortopathies.",
+    "additionalDifferentials": [
+      "Marfan syndrome",
+      "Loeys-Dietz syndrome",
+      "Congenital contractural arachnodactyly (Beals syndrome)",
+      "Other craniosynostosis syndromes",
+      "Homocystinuria (marfanoid habitus)",
+      "Other TGF-beta pathway connective-tissue disorders"
     ],
-    [
-     "Primary Differentials",
-     "Marfan syndrome, Loeys-Dietz syndrome, Congenital contractural arachnodactyly (Beals syndrome)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "SKI molecular genetic testing",
+      "Echocardiography for aortic root dimensions",
+      "Skull imaging to assess craniosynostosis",
+      "Skeletal survey for scoliosis, pectus and limb proportions",
+      "Brain MRI when Chiari malformation or other anomaly is suspected",
+      "Developmental and ophthalmological assessment"
     ],
-    [
-     "Management Strategy",
-     "Cardiovascular surveillance with serial echocardiography for aortic root dilatation, with beta-blocker or angiotensin receptor",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive aortic root dilatation",
+      "Raised intracranial pressure from craniosynostosis",
+      "Severe scoliosis compromising respiratory function",
+      "Airway or feeding difficulties from craniofacial anomalies"
     ],
-    [
-     "Clinical Pitfall",
-     "Labelling the patient as having Marfan syndrome and missing the craniosynostosis and intellectual disability",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends on the severity of skeletal, neurological and cardiovascular involvement; intellectual disability is common, and although aortic disease is usually milder than in Marfan syndrome, cardiovascular surveillance remains important.",
+    "pitfalls": [
+      "Labelling the patient as having Marfan syndrome and missing the craniosynostosis and intellectual disability",
+      "Assuming aortic involvement is absent and omitting cardiovascular surveillance",
+      "Overlooking raised intracranial pressure from suture fusion",
+      "Attributing developmental delay to an unrelated cause"
+    ],
+    "references": [
+      "GeneReviews / OMIM entry for Shprintzen-Goldberg Syndrome (SKI)",
+      "Emery and Rimoin's Principles and Practice of Medical Genetics",
+      "Consensus literature on TGF-beta connective-tissue disorders"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Cardiovascular surveillance with serial echocardiography for aortic root dilatation, with beta-blocker or angiotensin receptor blocker therapy to reduce aortic wall stress when dilatation is present",
+      "Prophylactic aortic root surgery if dilatation progresses to established surgical criteria",
+      "Craniofacial and neurosurgical assessment of craniosynostosis with cranial vault expansion where raised intracranial pressure or progressive deformity demands it",
+      "Orthopaedic management of scoliosis, pectus deformity and joint hypermobility or contractures with bracing, physiotherapy or corrective surgery",
+      "Early developmental intervention and educational support for hypotonia, developmental delay and intellectual disability, with ophthalmological review",
+      "Coordinated multidisciplinary care across clinical genetics, cardiology, craniofacial surgery, orthopaedics and developmental paediatrics",
+      "Genetic counselling explaining the usually de novo SKI variant and consequently low recurrence risk"
     ]
-   ],
-   "caption": "Overview comparison matrix for shprintzen-goldberg syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "shprintzen-goldberg-syndrome-real-image",
-   "title": "Shprintzen-Goldberg syndrome: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "shprintzen_goldberg_syndrome-pathway",
+      "title": "Shprintzen-Goldberg syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Characterised by a marfanoid habitus combined with craniosynostosis and, in most cases, intellectual disability, which helps distinguish it from Marfan and Loeys-Dietz syndromes",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive aortic root dilatation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: SKI molecular genetic testing, Echocardiography for aortic root dimensions, Skull imaging to assess craniosynostosis"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Cardiovascular surveillance with serial echocardiography for aortic root dilatation, with beta-blocker or angiotensin receptor blocker therapy to reduce aortic wall stress when dilatation is present"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Labelling the patient as having Marfan syndrome and missing the craniosynostosis and intellectual disability"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of shprintzen-goldberg syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "shprintzen_goldberg_syndrome-matrix",
+      "title": "Shprintzen-Goldberg syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Characterised by a marfanoid habitus combined with craniosynostosis and, in most cases, intellectual disability, which helps",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "SKI molecular genetic testing, Echocardiography for aortic root dimensions, Skull imaging to assess craniosynostosis",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Marfan syndrome, Loeys-Dietz syndrome, Congenital contractural arachnodactyly (Beals syndrome)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Cardiovascular surveillance with serial echocardiography for aortic root dilatation, with beta-blocker or angiotensin receptor",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Labelling the patient as having Marfan syndrome and missing the craniosynostosis and intellectual disability",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for shprintzen-goldberg syndrome."
+    }
+  ],
+  "diagrams": []
 }

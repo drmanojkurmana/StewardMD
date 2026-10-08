@@ -1,178 +1,156 @@
 {
- "id": "anti_dppx_encephalitis",
- "name": "Anti-DPPX encephalitis",
- "aliases": [
-  "DPPX antibody encephalitis",
-  "Anti-dipeptidyl-peptidase-like protein 6 encephalitis",
-  "DPP6 antibody syndrome"
- ],
- "class": "non_infective",
- "system": "Neurology / Autoimmune encephalitis",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Neuro-immunology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A prodrome of prominent, often severe, gastrointestinal disturbance with diarrhoea and marked weight loss is a highly characteristic early clue.",
-   "The triad of gastrointestinal symptoms, central nervous system hyperexcitability and cognitive or psychiatric change points strongly to DPPX.",
-   "Central nervous system hyperexcitability manifests as exaggerated startle, myoclonus, tremor, rigidity and hyperekplexia-like features.",
-   "There is clinical overlap with the progressive encephalomyelitis with rigidity and myoclonus (PERM) spectrum.",
-   "It is usually non-paraneoplastic, but an association with B-cell neoplasms such as lymphoma is recognised and warrants screening.",
-   "Dysautonomia, sleep disturbance and brainstem or cerebellar features may accompany the syndrome.",
-   "Because the target regulates a potassium channel, its dysfunction produces neuronal hyperexcitability throughout central and enteric networks.",
-   "It is a rare but treatable cause of unexplained weight loss with neurological signs, so early recognition matters."
+  "id": "anti_dppx_encephalitis",
+  "name": "Anti-DPPX encephalitis",
+  "aliases": [
+    "DPPX antibody encephalitis",
+    "Anti-dipeptidyl-peptidase-like protein 6 encephalitis",
+    "DPP6 antibody syndrome"
   ],
-  "pathophysiology": "Dipeptidyl-peptidase-like protein 6 (DPPX, encoded by DPP6) is an auxiliary, catalytically inactive subunit of the Kv4.2 voltage-gated potassium channel complex that regulates the gating, surface trafficking and kinetics of the somatodendritic A-type potassium current. It is expressed widely in the central nervous system and in the myenteric plexus of the gut. Pathogenic IgG antibodies, predominantly IgG1 and IgG4, bind DPPX and reduce surface levels of the DPPX-Kv4.2 complex, diminishing the A-type potassium current that normally restrains neuronal firing. Loss of this inhibitory current yields widespread neuronal hyperexcitability, accounting for the exaggerated startle, myoclonus, rigidity and seizures centrally, and for enteric neuronal overactivity that produces the prominent diarrhoea and weight loss. The broad anatomical distribution of DPPX explains the combined gastrointestinal, cognitive, psychiatric and hyperexcitability phenotype and its overlap with PERM. Most cases are idiopathic, but a subset arises in association with B-cell lymphoproliferative disorders, implicating aberrant B-cell activity in generating the antibody.",
-  "additionalDifferentials": [
-   "Progressive encephalomyelitis with rigidity and myoclonus and stiff-person spectrum (including anti-GlyR and anti-GAD)",
-   "Anti-CASPR2 disease with hyperexcitability",
-   "Coeliac or other enteropathy causing weight loss with neurological features",
-   "Creutzfeldt-Jakob disease and other rapidly progressive dementias",
-   "Hereditary or acquired hyperekplexia of other cause",
-   "Paraneoplastic brainstem encephalitis",
-   "Functional or psychiatric gastrointestinal disorder with anxiety"
-  ],
-  "additionalInvestigations": [
-   "Serum and cerebrospinal fluid cell-based assay for DPPX IgG",
-   "Investigations for B-cell lymphoproliferative disease including cross-sectional imaging and haematological work-up",
-   "Brain and spinal cord MRI",
-   "Electroencephalography and electromyography to characterise hyperexcitability and myoclonus",
-   "Gastrointestinal evaluation for chronic diarrhoea and to exclude structural or infective causes",
-   "Cerebrospinal fluid analysis with oligoclonal bands and infection exclusion",
-   "Autonomic function testing where dysautonomia is prominent"
-  ],
-  "redFlags": [
-   "Severe unexplained diarrhoea and weight loss preceding neurological decline",
-   "Exaggerated startle with rigidity and myoclonus suggesting a PERM-like course",
-   "Evidence of an underlying B-cell lymphoma on screening",
-   "Autonomic instability or respiratory compromise from severe rigidity",
-   "Rapidly progressive encephalopathy"
-  ],
-  "prognosis": "The disorder is often responsive to immunotherapy, but relapses occur and recovery can be protracted, with residual hyperexcitability or cognitive symptoms in some. Prognosis is poorer where an associated lymphoproliferative malignancy is present.",
-  "pitfalls": [
-   "Investigating the gastrointestinal prodrome in isolation and missing the neurological association",
-   "Overlooking screening for B-cell lymphoproliferative disease",
-   "Confusing the presentation with a primary functional gastrointestinal or anxiety disorder",
-   "Failing to recognise the PERM-like overlap and its treatment implications",
-   "Delaying immunotherapy in a treatable but potentially relapsing condition"
-  ],
-  "references": [
-   "Standard neurology and neuro-immunology textbooks",
-   "Autoimmune encephalitis diagnostic and management consensus guidance",
-   "Peer-reviewed neuro-immunology reference reviews"
-  ],
-  "crossLinks": [],
-  "management": [
-   "First-line immunotherapy with corticosteroids, intravenous immunoglobulin or plasma exchange, escalating to rituximab or cyclophosphamide",
-   "Screen for and treat an associated B-cell lymphoproliferative disorder such as lymphoma",
-   "Symptomatic suppression of central nervous system hyperexcitability, myoclonus and startle with benzodiazepines",
-   "Nutritional support and management of the prominent diarrhoea and weight loss, correcting resultant deficits",
-   "Monitor for and manage dysautonomia and progressive encephalomyelitis with rigidity and myoclonus overlap features",
-   "Maintenance immunotherapy and relapse surveillance with multidisciplinary follow-up"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "anti_dppx_encephalitis-pathway",
-   "title": "Anti-DPPX encephalitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A prodrome of prominent, often severe, gastrointestinal disturbance with diarrhoea and marked weight loss is a highly characteristic early clue.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe unexplained diarrhoea and weight loss preceding neurological decline",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum and cerebrospinal fluid cell-based assay for DPPX IgG, Investigations for B-cell lymphoproliferative disease including cross-sectional imaging and haematological work-up, Brain and spinal cord MRI"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: First-line immunotherapy with corticosteroids, intravenous immunoglobulin or plasma exchange, escalating to rituximab or cyclophosphamide"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Investigating the gastrointestinal prodrome in isolation and missing the neurological association"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of anti-dppx encephalitis."
-  }
- ],
- "tables": [
-  {
-   "id": "anti_dppx_encephalitis-matrix",
-   "title": "Anti-DPPX encephalitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A prodrome of prominent, often severe, gastrointestinal disturbance with diarrhoea and marked weight loss is a highly",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neurology / Autoimmune encephalitis",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Neuro-immunology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A prodrome of prominent, often severe, gastrointestinal disturbance with diarrhoea and marked weight loss is a highly characteristic early clue.",
+      "The triad of gastrointestinal symptoms, central nervous system hyperexcitability and cognitive or psychiatric change points strongly to DPPX.",
+      "Central nervous system hyperexcitability manifests as exaggerated startle, myoclonus, tremor, rigidity and hyperekplexia-like features.",
+      "There is clinical overlap with the progressive encephalomyelitis with rigidity and myoclonus (PERM) spectrum.",
+      "It is usually non-paraneoplastic, but an association with B-cell neoplasms such as lymphoma is recognised and warrants screening.",
+      "Dysautonomia, sleep disturbance and brainstem or cerebellar features may accompany the syndrome.",
+      "Because the target regulates a potassium channel, its dysfunction produces neuronal hyperexcitability throughout central and enteric networks.",
+      "It is a rare but treatable cause of unexplained weight loss with neurological signs, so early recognition matters."
     ],
-    [
-     "Key Investigations",
-     "Serum and cerebrospinal fluid cell-based assay for DPPX IgG, Investigations for B-cell lymphoproliferative disease including",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Dipeptidyl-peptidase-like protein 6 (DPPX, encoded by DPP6) is an auxiliary, catalytically inactive subunit of the Kv4.2 voltage-gated potassium channel complex that regulates the gating, surface trafficking and kinetics of the somatodendritic A-type potassium current. It is expressed widely in the central nervous system and in the myenteric plexus of the gut. Pathogenic IgG antibodies, predominantly IgG1 and IgG4, bind DPPX and reduce surface levels of the DPPX-Kv4.2 complex, diminishing the A-type potassium current that normally restrains neuronal firing. Loss of this inhibitory current yields widespread neuronal hyperexcitability, accounting for the exaggerated startle, myoclonus, rigidity and seizures centrally, and for enteric neuronal overactivity that produces the prominent diarrhoea and weight loss. The broad anatomical distribution of DPPX explains the combined gastrointestinal, cognitive, psychiatric and hyperexcitability phenotype and its overlap with PERM. Most cases are idiopathic, but a subset arises in association with B-cell lymphoproliferative disorders, implicating aberrant B-cell activity in generating the antibody.",
+    "additionalDifferentials": [
+      "Progressive encephalomyelitis with rigidity and myoclonus and stiff-person spectrum (including anti-GlyR and anti-GAD)",
+      "Anti-CASPR2 disease with hyperexcitability",
+      "Coeliac or other enteropathy causing weight loss with neurological features",
+      "Creutzfeldt-Jakob disease and other rapidly progressive dementias",
+      "Hereditary or acquired hyperekplexia of other cause",
+      "Paraneoplastic brainstem encephalitis",
+      "Functional or psychiatric gastrointestinal disorder with anxiety"
     ],
-    [
-     "Primary Differentials",
-     "Progressive encephalomyelitis with rigidity and myoclonus and stiff-person spectrum (including anti-GlyR and anti-GAD),",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum and cerebrospinal fluid cell-based assay for DPPX IgG",
+      "Investigations for B-cell lymphoproliferative disease including cross-sectional imaging and haematological work-up",
+      "Brain and spinal cord MRI",
+      "Electroencephalography and electromyography to characterise hyperexcitability and myoclonus",
+      "Gastrointestinal evaluation for chronic diarrhoea and to exclude structural or infective causes",
+      "Cerebrospinal fluid analysis with oligoclonal bands and infection exclusion",
+      "Autonomic function testing where dysautonomia is prominent"
     ],
-    [
-     "Management Strategy",
-     "First-line immunotherapy with corticosteroids, intravenous immunoglobulin or plasma exchange, escalating to rituximab or",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe unexplained diarrhoea and weight loss preceding neurological decline",
+      "Exaggerated startle with rigidity and myoclonus suggesting a PERM-like course",
+      "Evidence of an underlying B-cell lymphoma on screening",
+      "Autonomic instability or respiratory compromise from severe rigidity",
+      "Rapidly progressive encephalopathy"
     ],
-    [
-     "Clinical Pitfall",
-     "Investigating the gastrointestinal prodrome in isolation and missing the neurological association",
-     "Prevent diagnostic or management error"
+    "prognosis": "The disorder is often responsive to immunotherapy, but relapses occur and recovery can be protracted, with residual hyperexcitability or cognitive symptoms in some. Prognosis is poorer where an associated lymphoproliferative malignancy is present.",
+    "pitfalls": [
+      "Investigating the gastrointestinal prodrome in isolation and missing the neurological association",
+      "Overlooking screening for B-cell lymphoproliferative disease",
+      "Confusing the presentation with a primary functional gastrointestinal or anxiety disorder",
+      "Failing to recognise the PERM-like overlap and its treatment implications",
+      "Delaying immunotherapy in a treatable but potentially relapsing condition"
+    ],
+    "references": [
+      "Standard neurology and neuro-immunology textbooks",
+      "Autoimmune encephalitis diagnostic and management consensus guidance",
+      "Peer-reviewed neuro-immunology reference reviews"
+    ],
+    "crossLinks": [],
+    "management": [
+      "First-line immunotherapy with corticosteroids, intravenous immunoglobulin or plasma exchange, escalating to rituximab or cyclophosphamide",
+      "Screen for and treat an associated B-cell lymphoproliferative disorder such as lymphoma",
+      "Symptomatic suppression of central nervous system hyperexcitability, myoclonus and startle with benzodiazepines",
+      "Nutritional support and management of the prominent diarrhoea and weight loss, correcting resultant deficits",
+      "Monitor for and manage dysautonomia and progressive encephalomyelitis with rigidity and myoclonus overlap features",
+      "Maintenance immunotherapy and relapse surveillance with multidisciplinary follow-up"
     ]
-   ],
-   "caption": "Overview comparison matrix for anti-dppx encephalitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "anti-dppx-encephalitis-real-image",
-   "title": "Anti-DPPX encephalitis: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "anti_dppx_encephalitis-pathway",
+      "title": "Anti-DPPX encephalitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A prodrome of prominent, often severe, gastrointestinal disturbance with diarrhoea and marked weight loss is a highly characteristic early clue.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe unexplained diarrhoea and weight loss preceding neurological decline",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum and cerebrospinal fluid cell-based assay for DPPX IgG, Investigations for B-cell lymphoproliferative disease including cross-sectional imaging and haematological work-up, Brain and spinal cord MRI"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: First-line immunotherapy with corticosteroids, intravenous immunoglobulin or plasma exchange, escalating to rituximab or cyclophosphamide"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Investigating the gastrointestinal prodrome in isolation and missing the neurological association"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of anti-dppx encephalitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "anti_dppx_encephalitis-matrix",
+      "title": "Anti-DPPX encephalitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A prodrome of prominent, often severe, gastrointestinal disturbance with diarrhoea and marked weight loss is a highly",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum and cerebrospinal fluid cell-based assay for DPPX IgG, Investigations for B-cell lymphoproliferative disease including",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Progressive encephalomyelitis with rigidity and myoclonus and stiff-person spectrum (including anti-GlyR and anti-GAD),",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "First-line immunotherapy with corticosteroids, intravenous immunoglobulin or plasma exchange, escalating to rituximab or",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Investigating the gastrointestinal prodrome in isolation and missing the neurological association",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for anti-dppx encephalitis."
+    }
+  ],
+  "diagrams": []
 }

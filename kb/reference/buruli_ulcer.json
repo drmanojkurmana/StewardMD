@@ -1,177 +1,155 @@
 {
- "id": "buruli_ulcer",
- "name": "Buruli ulcer",
- "aliases": [
-  "Mycobacterium ulcerans infection",
-  "Bairnsdale ulcer",
-  "Daintree ulcer",
-  "Searls ulcer"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases / Tropical Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Manson's Tropical Diseases / Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by Mycobacterium ulcerans, an environmental mycobacterium associated with slow-moving or stagnant water; most cases occur in West and Central Africa, with foci in Australia and elsewhere",
-   "The organism produces the toxin mycolactone, which causes tissue necrosis and local immunosuppression, explaining the characteristically painless lesion",
-   "Early disease presents as a painless nodule, plaque or oedematous area; without treatment it progresses to a painless ulcer with widely undermined edges",
-   "The undermined, deeply excavated ulcer with necrotic base extending beyond the visible skin margin is the hallmark of established disease",
-   "Diagnosis is confirmed by PCR for the IS2404 insertion sequence, supported by microscopy for acid-fast bacilli, culture and histopathology",
-   "Because lesions are painless, patients often present late with extensive tissue loss, and disease over joints can cause disabling contractures",
-   "Treatment combines prolonged rifampicin-based anti-mycobacterial therapy with wound care, and surgery or skin grafting for larger lesions; physiotherapy prevents contractures"
+  "id": "buruli_ulcer",
+  "name": "Buruli ulcer",
+  "aliases": [
+    "Mycobacterium ulcerans infection",
+    "Bairnsdale ulcer",
+    "Daintree ulcer",
+    "Searls ulcer"
   ],
-  "pathophysiology": "Mycobacterium ulcerans is acquired from aquatic environments, though the precise mode of transmission remains uncertain. Once in subcutaneous tissue it secretes mycolactone, a diffusible lipid toxin that induces coagulative necrosis of fat and dermis while suppressing local immune and pain responses, accounting for the painless, minimally inflamed lesion. Necrosis spreads laterally in the subcutaneous plane, producing ulcers whose undermined edges extend well beyond the surface defect. As anti-mycobacterial therapy reduces bacillary load, the local immunosuppressive effect lifts and healing can proceed, sometimes with a paradoxical inflammatory reaction.",
-  "additionalDifferentials": [
-   "Tropical phagedenic ulcer",
-   "Cutaneous leishmaniasis",
-   "Venous or arterial leg ulcer",
-   "Pyoderma gangrenosum",
-   "Squamous cell carcinoma (including within chronic ulcers)",
-   "Other mycobacterial or deep fungal infection",
-   "Necrotising bacterial infection"
-  ],
-  "additionalInvestigations": [
-   "PCR for the IS2404 sequence on swab or tissue (most sensitive confirmatory test)",
-   "Ziehl-Neelsen microscopy of swab or tissue for acid-fast bacilli",
-   "Culture of M. ulcerans (slow-growing, requires lower incubation temperature)",
-   "Histopathology showing necrosis with clumps of extracellular acid-fast bacilli",
-   "Imaging to assess deep or bone involvement in extensive disease",
-   "Assessment of functional impairment where lesions cross joints"
-  ],
-  "redFlags": [
-   "Rapidly enlarging or oedematous lesions suggesting aggressive disease",
-   "Lesions crossing joints with impending contracture and disability",
-   "Bone involvement (osteomyelitis)",
-   "Malignant transformation in a long-standing chronic ulcer",
-   "Extensive tissue loss requiring reconstructive surgery"
-  ],
-  "prognosis": "Early nodular disease can heal with antibiotics alone and minimal scarring, but late, extensive ulceration frequently leaves disfiguring scars, contractures and functional disability; relapse is uncommon with adequate combination therapy.",
-  "pitfalls": [
-   "Attributing a painless chronic ulcer to trivial trauma and delaying diagnosis",
-   "Underestimating the true extent of necrosis, which extends beyond the visible ulcer margin",
-   "Relying on surgery alone without anti-mycobacterial therapy, risking recurrence",
-   "Neglecting physiotherapy, allowing preventable contractures",
-   "Missing malignant change in long-standing ulcers"
-  ],
-  "references": [
-   "Manson's Tropical Diseases",
-   "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Give combination anti-mycobacterial therapy against Mycobacterium ulcerans, typically oral rifampicin with clarithromycin (or with an aminoglycoside such as streptomycin), as the mainstay that can heal early lesions without surgery",
-   "Provide wound care and dressings, with surgical debridement, excision and skin grafting for extensive or non-healing lesions",
-   "Anticipate and manage paradoxical inflammatory reactions that may occur during or after antibiotic treatment as bacillary load and mycolactone-driven immunosuppression fall",
-   "Deliver physiotherapy and contracture prevention for lesions crossing joints, with functional rehabilitation of established disability",
-   "Provide analgesia and treat secondary bacterial infection of ulcers",
-   "Monitor for relapse, which is uncommon with adequate combination therapy, and assess for deep or bone involvement in extensive disease",
-   "Refer to specialist or tropical medicine services and manage jointly with surgery and physiotherapy"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "buruli_ulcer-pathway",
-   "title": "Buruli ulcer: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by Mycobacterium ulcerans, an environmental mycobacterium associated with slow-moving or stagnant water; most cases occur in West and Central Africa, with foci in Australia and elsewhere",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly enlarging or oedematous lesions suggesting aggressive disease",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: PCR for the IS2404 sequence on swab or tissue (most sensitive confirmatory test), Ziehl-Neelsen microscopy of swab or tissue for acid-fast bacilli, Culture of M. ulcerans (slow-growing, requires lower incubation"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Give combination anti-mycobacterial therapy against Mycobacterium ulcerans, typically oral rifampicin with clarithromycin (or with an aminoglycoside such as streptomycin), as the mainstay that can heal early lesions"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing a painless chronic ulcer to trivial trauma and delaying diagnosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of buruli ulcer."
-  }
- ],
- "tables": [
-  {
-   "id": "buruli_ulcer-matrix",
-   "title": "Buruli ulcer: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by Mycobacterium ulcerans, an environmental mycobacterium associated with slow-moving or stagnant water; most cases occur",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases / Tropical Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Manson's Tropical Diseases / Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by Mycobacterium ulcerans, an environmental mycobacterium associated with slow-moving or stagnant water; most cases occur in West and Central Africa, with foci in Australia and elsewhere",
+      "The organism produces the toxin mycolactone, which causes tissue necrosis and local immunosuppression, explaining the characteristically painless lesion",
+      "Early disease presents as a painless nodule, plaque or oedematous area; without treatment it progresses to a painless ulcer with widely undermined edges",
+      "The undermined, deeply excavated ulcer with necrotic base extending beyond the visible skin margin is the hallmark of established disease",
+      "Diagnosis is confirmed by PCR for the IS2404 insertion sequence, supported by microscopy for acid-fast bacilli, culture and histopathology",
+      "Because lesions are painless, patients often present late with extensive tissue loss, and disease over joints can cause disabling contractures",
+      "Treatment combines prolonged rifampicin-based anti-mycobacterial therapy with wound care, and surgery or skin grafting for larger lesions; physiotherapy prevents contractures"
     ],
-    [
-     "Key Investigations",
-     "PCR for the IS2404 sequence on swab or tissue (most sensitive confirmatory test), Ziehl-Neelsen microscopy of swab or tissue for",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Mycobacterium ulcerans is acquired from aquatic environments, though the precise mode of transmission remains uncertain. Once in subcutaneous tissue it secretes mycolactone, a diffusible lipid toxin that induces coagulative necrosis of fat and dermis while suppressing local immune and pain responses, accounting for the painless, minimally inflamed lesion. Necrosis spreads laterally in the subcutaneous plane, producing ulcers whose undermined edges extend well beyond the surface defect. As anti-mycobacterial therapy reduces bacillary load, the local immunosuppressive effect lifts and healing can proceed, sometimes with a paradoxical inflammatory reaction.",
+    "additionalDifferentials": [
+      "Tropical phagedenic ulcer",
+      "Cutaneous leishmaniasis",
+      "Venous or arterial leg ulcer",
+      "Pyoderma gangrenosum",
+      "Squamous cell carcinoma (including within chronic ulcers)",
+      "Other mycobacterial or deep fungal infection",
+      "Necrotising bacterial infection"
     ],
-    [
-     "Primary Differentials",
-     "Tropical phagedenic ulcer, Cutaneous leishmaniasis, Venous or arterial leg ulcer",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "PCR for the IS2404 sequence on swab or tissue (most sensitive confirmatory test)",
+      "Ziehl-Neelsen microscopy of swab or tissue for acid-fast bacilli",
+      "Culture of M. ulcerans (slow-growing, requires lower incubation temperature)",
+      "Histopathology showing necrosis with clumps of extracellular acid-fast bacilli",
+      "Imaging to assess deep or bone involvement in extensive disease",
+      "Assessment of functional impairment where lesions cross joints"
     ],
-    [
-     "Management Strategy",
-     "Give combination anti-mycobacterial therapy against Mycobacterium ulcerans, typically oral rifampicin with clarithromycin (or",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly enlarging or oedematous lesions suggesting aggressive disease",
+      "Lesions crossing joints with impending contracture and disability",
+      "Bone involvement (osteomyelitis)",
+      "Malignant transformation in a long-standing chronic ulcer",
+      "Extensive tissue loss requiring reconstructive surgery"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing a painless chronic ulcer to trivial trauma and delaying diagnosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Early nodular disease can heal with antibiotics alone and minimal scarring, but late, extensive ulceration frequently leaves disfiguring scars, contractures and functional disability; relapse is uncommon with adequate combination therapy.",
+    "pitfalls": [
+      "Attributing a painless chronic ulcer to trivial trauma and delaying diagnosis",
+      "Underestimating the true extent of necrosis, which extends beyond the visible ulcer margin",
+      "Relying on surgery alone without anti-mycobacterial therapy, risking recurrence",
+      "Neglecting physiotherapy, allowing preventable contractures",
+      "Missing malignant change in long-standing ulcers"
+    ],
+    "references": [
+      "Manson's Tropical Diseases",
+      "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Give combination anti-mycobacterial therapy against Mycobacterium ulcerans, typically oral rifampicin with clarithromycin (or with an aminoglycoside such as streptomycin), as the mainstay that can heal early lesions without surgery",
+      "Provide wound care and dressings, with surgical debridement, excision and skin grafting for extensive or non-healing lesions",
+      "Anticipate and manage paradoxical inflammatory reactions that may occur during or after antibiotic treatment as bacillary load and mycolactone-driven immunosuppression fall",
+      "Deliver physiotherapy and contracture prevention for lesions crossing joints, with functional rehabilitation of established disability",
+      "Provide analgesia and treat secondary bacterial infection of ulcers",
+      "Monitor for relapse, which is uncommon with adequate combination therapy, and assess for deep or bone involvement in extensive disease",
+      "Refer to specialist or tropical medicine services and manage jointly with surgery and physiotherapy"
     ]
-   ],
-   "caption": "Overview comparison matrix for buruli ulcer."
-  }
- ],
- "diagrams": [
-  {
-   "id": "buruli-ulcer-real-image",
-   "title": "Buruli ulcer: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "buruli_ulcer-pathway",
+      "title": "Buruli ulcer: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by Mycobacterium ulcerans, an environmental mycobacterium associated with slow-moving or stagnant water; most cases occur in West and Central Africa, with foci in Australia and elsewhere",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly enlarging or oedematous lesions suggesting aggressive disease",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: PCR for the IS2404 sequence on swab or tissue (most sensitive confirmatory test), Ziehl-Neelsen microscopy of swab or tissue for acid-fast bacilli, Culture of M. ulcerans (slow-growing, requires lower incubation"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Give combination anti-mycobacterial therapy against Mycobacterium ulcerans, typically oral rifampicin with clarithromycin (or with an aminoglycoside such as streptomycin), as the mainstay that can heal early lesions"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing a painless chronic ulcer to trivial trauma and delaying diagnosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of buruli ulcer."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "buruli_ulcer-matrix",
+      "title": "Buruli ulcer: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by Mycobacterium ulcerans, an environmental mycobacterium associated with slow-moving or stagnant water; most cases occur",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "PCR for the IS2404 sequence on swab or tissue (most sensitive confirmatory test), Ziehl-Neelsen microscopy of swab or tissue for",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Tropical phagedenic ulcer, Cutaneous leishmaniasis, Venous or arterial leg ulcer",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Give combination anti-mycobacterial therapy against Mycobacterium ulcerans, typically oral rifampicin with clarithromycin (or",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing a painless chronic ulcer to trivial trauma and delaying diagnosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for buruli ulcer."
+    }
+  ],
+  "diagrams": []
 }

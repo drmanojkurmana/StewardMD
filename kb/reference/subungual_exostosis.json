@@ -1,173 +1,151 @@
 {
- "id": "subungual_exostosis",
- "name": "Subungual exostosis",
- "aliases": [
-  "Dupuytren exostosis",
-  "subungual osteochondroma",
-  "subungual bony outgrowth"
- ],
- "class": "non_infective",
- "system": "Dermatology / Nail",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology / Baran and Dawber's Diseases of the Nails",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Subungual exostosis is a benign bony outgrowth arising from the dorsal aspect of the distal phalanx, most often on the great toe",
-   "It classically presents in adolescents and young adults as a firm, tender, slowly enlarging swelling that lifts or distorts the nail",
-   "Pain is common, particularly with pressure from footwear, and the overlying nail may be elevated or destroyed",
-   "A history of trauma or chronic irritation is frequently reported, and the lesion is not a true nail tumour but a bone lesion presenting through the nail",
-   "A lateral radiograph of the toe is the key investigation and shows a bony projection continuous with the phalanx, capped by fibrocartilage",
-   "It is benign but is often mistaken for a wart, pyogenic granuloma, or ingrowing toenail, delaying correct diagnosis",
-   "Definitive treatment is surgical excision of the bony outgrowth, and incomplete removal may be followed by recurrence"
+  "id": "subungual_exostosis",
+  "name": "Subungual exostosis",
+  "aliases": [
+    "Dupuytren exostosis",
+    "subungual osteochondroma",
+    "subungual bony outgrowth"
   ],
-  "pathophysiology": "Subungual exostosis is an outgrowth of mature trabecular bone capped by fibrocartilage that projects from the dorsal surface of the distal phalanx, usually of the hallux, into the space beneath or beside the nail. It is generally regarded as a reactive proliferation, often linked to previous trauma or chronic irritation, rather than an inherited skeletal disorder, and it differs from a true osteochondroma in its cartilage cap and clinical setting. As the bony mass enlarges it pushes upward against the nail bed and plate, causing elevation, distortion, or partial destruction of the nail and producing pain when compressed by shoes.",
-  "additionalDifferentials": [
-   "Viral wart (verruca) of the nail unit",
-   "Pyogenic granuloma",
-   "Ingrowing toenail with granulation tissue",
-   "Subungual osteochondroma or other bony lesion",
-   "Glomus tumour",
-   "Amelanotic subungual melanoma",
-   "Subungual keratoacanthoma"
-  ],
-  "additionalInvestigations": [
-   "Lateral and oblique radiographs of the affected toe to demonstrate the bony outgrowth",
-   "Clinical inspection for nail elevation, distortion, or destruction",
-   "Onychoscopy to assess the surface and vascular pattern of the lesion",
-   "Histological examination of the excised specimen to confirm the diagnosis",
-   "Assessment for a history of trauma or chronic pressure",
-   "Consideration of cross-sectional imaging for atypical or recurrent lesions"
-  ],
-  "redFlags": [
-   "Rapid growth, ulceration, or bleeding raising concern for a malignant bone or soft-tissue lesion",
-   "Atypical radiographic features suggesting a more aggressive process",
-   "Recurrence after excision indicating incomplete removal",
-   "Persistent pain with destruction of the nail unit requiring surgical assessment"
-  ],
-  "prognosis": "Subungual exostosis is benign and is cured by complete surgical excision, after which the nail usually regrows, although incomplete removal can lead to recurrence and some residual nail deformity may persist.",
-  "pitfalls": [
-   "Misdiagnosing the lesion as a wart or pyogenic granuloma and treating it destructively without imaging",
-   "Omitting a radiograph, which is essential to reveal the bony origin",
-   "Incomplete excision of the bony base, leading to recurrence",
-   "Failing to send tissue for histology to exclude a malignant mimic"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Baran and Dawber's Diseases of the Nails and their Management"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Complete surgical excision of the bony outgrowth, including its fibrocartilage cap, is curative and the definitive treatment",
-   "Avulse or partially remove the overlying nail plate to access the lesion and curette the base to minimise recurrence",
-   "Confirm the diagnosis histologically on the excised specimen",
-   "Provide analgesia and advise roomy, pressure-relieving footwear for symptom control before and after surgery",
-   "Follow up for recurrence, which follows incomplete removal, counselling that the nail usually regrows though some deformity may persist",
-   "Refer for dermatological or podiatric surgery with a planning radiograph of the toe"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "subungual_exostosis-pathway",
-   "title": "Subungual exostosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Subungual exostosis is a benign bony outgrowth arising from the dorsal aspect of the distal phalanx, most often on the great toe",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid growth, ulceration, or bleeding raising concern for a malignant bone or soft-tissue lesion",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Lateral and oblique radiographs of the affected toe to demonstrate the bony outgrowth, Clinical inspection for nail elevation, distortion, or destruction, Onychoscopy to assess the surface and vascular pattern of the lesion"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Complete surgical excision of the bony outgrowth, including its fibrocartilage cap, is curative and the definitive treatment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing the lesion as a wart or pyogenic granuloma and treating it destructively without imaging"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of subungual exostosis."
-  }
- ],
- "tables": [
-  {
-   "id": "subungual_exostosis-matrix",
-   "title": "Subungual exostosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Subungual exostosis is a benign bony outgrowth arising from the dorsal aspect of the distal phalanx, most often on the great toe",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology / Nail",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology / Baran and Dawber's Diseases of the Nails",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Subungual exostosis is a benign bony outgrowth arising from the dorsal aspect of the distal phalanx, most often on the great toe",
+      "It classically presents in adolescents and young adults as a firm, tender, slowly enlarging swelling that lifts or distorts the nail",
+      "Pain is common, particularly with pressure from footwear, and the overlying nail may be elevated or destroyed",
+      "A history of trauma or chronic irritation is frequently reported, and the lesion is not a true nail tumour but a bone lesion presenting through the nail",
+      "A lateral radiograph of the toe is the key investigation and shows a bony projection continuous with the phalanx, capped by fibrocartilage",
+      "It is benign but is often mistaken for a wart, pyogenic granuloma, or ingrowing toenail, delaying correct diagnosis",
+      "Definitive treatment is surgical excision of the bony outgrowth, and incomplete removal may be followed by recurrence"
     ],
-    [
-     "Key Investigations",
-     "Lateral and oblique radiographs of the affected toe to demonstrate the bony outgrowth, Clinical inspection for nail elevation,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Subungual exostosis is an outgrowth of mature trabecular bone capped by fibrocartilage that projects from the dorsal surface of the distal phalanx, usually of the hallux, into the space beneath or beside the nail. It is generally regarded as a reactive proliferation, often linked to previous trauma or chronic irritation, rather than an inherited skeletal disorder, and it differs from a true osteochondroma in its cartilage cap and clinical setting. As the bony mass enlarges it pushes upward against the nail bed and plate, causing elevation, distortion, or partial destruction of the nail and producing pain when compressed by shoes.",
+    "additionalDifferentials": [
+      "Viral wart (verruca) of the nail unit",
+      "Pyogenic granuloma",
+      "Ingrowing toenail with granulation tissue",
+      "Subungual osteochondroma or other bony lesion",
+      "Glomus tumour",
+      "Amelanotic subungual melanoma",
+      "Subungual keratoacanthoma"
     ],
-    [
-     "Primary Differentials",
-     "Viral wart (verruca) of the nail unit, Pyogenic granuloma, Ingrowing toenail with granulation tissue",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Lateral and oblique radiographs of the affected toe to demonstrate the bony outgrowth",
+      "Clinical inspection for nail elevation, distortion, or destruction",
+      "Onychoscopy to assess the surface and vascular pattern of the lesion",
+      "Histological examination of the excised specimen to confirm the diagnosis",
+      "Assessment for a history of trauma or chronic pressure",
+      "Consideration of cross-sectional imaging for atypical or recurrent lesions"
     ],
-    [
-     "Management Strategy",
-     "Complete surgical excision of the bony outgrowth, including its fibrocartilage cap, is curative and the definitive treatment",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid growth, ulceration, or bleeding raising concern for a malignant bone or soft-tissue lesion",
+      "Atypical radiographic features suggesting a more aggressive process",
+      "Recurrence after excision indicating incomplete removal",
+      "Persistent pain with destruction of the nail unit requiring surgical assessment"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing the lesion as a wart or pyogenic granuloma and treating it destructively without imaging",
-     "Prevent diagnostic or management error"
+    "prognosis": "Subungual exostosis is benign and is cured by complete surgical excision, after which the nail usually regrows, although incomplete removal can lead to recurrence and some residual nail deformity may persist.",
+    "pitfalls": [
+      "Misdiagnosing the lesion as a wart or pyogenic granuloma and treating it destructively without imaging",
+      "Omitting a radiograph, which is essential to reveal the bony origin",
+      "Incomplete excision of the bony base, leading to recurrence",
+      "Failing to send tissue for histology to exclude a malignant mimic"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Baran and Dawber's Diseases of the Nails and their Management"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Complete surgical excision of the bony outgrowth, including its fibrocartilage cap, is curative and the definitive treatment",
+      "Avulse or partially remove the overlying nail plate to access the lesion and curette the base to minimise recurrence",
+      "Confirm the diagnosis histologically on the excised specimen",
+      "Provide analgesia and advise roomy, pressure-relieving footwear for symptom control before and after surgery",
+      "Follow up for recurrence, which follows incomplete removal, counselling that the nail usually regrows though some deformity may persist",
+      "Refer for dermatological or podiatric surgery with a planning radiograph of the toe"
     ]
-   ],
-   "caption": "Overview comparison matrix for subungual exostosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "subungual-exostosis-real-image",
-   "title": "Subungual exostosis: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "subungual_exostosis-pathway",
+      "title": "Subungual exostosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Subungual exostosis is a benign bony outgrowth arising from the dorsal aspect of the distal phalanx, most often on the great toe",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid growth, ulceration, or bleeding raising concern for a malignant bone or soft-tissue lesion",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Lateral and oblique radiographs of the affected toe to demonstrate the bony outgrowth, Clinical inspection for nail elevation, distortion, or destruction, Onychoscopy to assess the surface and vascular pattern of the lesion"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Complete surgical excision of the bony outgrowth, including its fibrocartilage cap, is curative and the definitive treatment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing the lesion as a wart or pyogenic granuloma and treating it destructively without imaging"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of subungual exostosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "subungual_exostosis-matrix",
+      "title": "Subungual exostosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Subungual exostosis is a benign bony outgrowth arising from the dorsal aspect of the distal phalanx, most often on the great toe",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Lateral and oblique radiographs of the affected toe to demonstrate the bony outgrowth, Clinical inspection for nail elevation,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Viral wart (verruca) of the nail unit, Pyogenic granuloma, Ingrowing toenail with granulation tissue",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Complete surgical excision of the bony outgrowth, including its fibrocartilage cap, is curative and the definitive treatment",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing the lesion as a wart or pyogenic granuloma and treating it destructively without imaging",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for subungual exostosis."
+    }
+  ],
+  "diagrams": []
 }

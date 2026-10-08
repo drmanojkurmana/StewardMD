@@ -1,176 +1,154 @@
 {
- "id": "crigler_najjar_syndrome",
- "name": "Crigler-Najjar syndrome",
- "aliases": [
-  "UGT1A1 deficiency",
-  "hereditary unconjugated hyperbilirubinaemia",
-  "Crigler-Najjar type 1",
-  "Crigler-Najjar type 2",
-  "Arias syndrome"
- ],
- "class": "non_infective",
- "system": "Gastroenterology / Hepatology / Genetics",
- "specialty": "Hepatology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Sherlock's Diseases of the Liver and Biliary System / Nelson Textbook of Pediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An inherited disorder of bilirubin conjugation caused by deficient hepatic UDP-glucuronosyltransferase 1A1 (UGT1A1) activity",
-   "It produces unconjugated (indirect) hyperbilirubinaemia with otherwise normal liver enzymes and no haemolysis or biliary obstruction",
-   "Type 1 reflects virtually absent enzyme activity, causing severe unremitting jaundice from birth and a high risk of kernicterus",
-   "Type 2 (Arias syndrome) reflects markedly reduced but residual activity, with milder jaundice that characteristically falls in response to enzyme-inducing therapy",
-   "A reduction in bilirubin after an enzyme-inducer challenge helps distinguish type 2 from type 1, in which such a response is absent",
-   "Type 1 management relies on intensive phototherapy to keep bilirubin in a safe range, with liver transplantation being the definitive cure",
-   "It is distinguished from the milder, common Gilbert syndrome, which also involves reduced UGT1A1 activity but does not cause dangerous bilirubin levels"
+  "id": "crigler_najjar_syndrome",
+  "name": "Crigler-Najjar syndrome",
+  "aliases": [
+    "UGT1A1 deficiency",
+    "hereditary unconjugated hyperbilirubinaemia",
+    "Crigler-Najjar type 1",
+    "Crigler-Najjar type 2",
+    "Arias syndrome"
   ],
-  "pathophysiology": "Bilirubin produced from haem breakdown must be conjugated with glucuronic acid by the hepatic enzyme UDP-glucuronosyltransferase 1A1 before it can be excreted in bile. In Crigler-Najjar syndrome, biallelic mutations in UGT1A1 abolish (type 1) or severely reduce (type 2) this enzyme activity, so unconjugated bilirubin cannot be efficiently processed and accumulates in the blood. Because unconjugated bilirubin is lipid soluble it can cross the blood-brain barrier, and at high concentrations it deposits in the basal ganglia and brainstem, causing bilirubin encephalopathy (kernicterus). The liver is otherwise structurally normal with no cholestasis or hepatocellular injury.",
-  "additionalDifferentials": [
-   "Gilbert syndrome",
-   "Physiological and breast-milk jaundice of the newborn",
-   "Haemolytic anaemia causing unconjugated hyperbilirubinaemia",
-   "Hypothyroidism-associated neonatal jaundice",
-   "Dubin-Johnson and Rotor syndromes (conjugated, distinguishing them)",
-   "Drug-induced inhibition of bilirubin conjugation or uptake"
-  ],
-  "additionalInvestigations": [
-   "Fractionated bilirubin confirming predominantly unconjugated hyperbilirubinaemia",
-   "Haemolysis screen including blood film, reticulocytes, and haptoglobin to exclude haemolytic causes",
-   "Otherwise normal liver enzymes and synthetic function to exclude hepatocellular or cholestatic disease",
-   "Response of serum bilirubin to an enzyme-inducer challenge to separate type 2 from type 1",
-   "UGT1A1 molecular genetic testing",
-   "Analysis of bile bilirubin conjugates where specialised testing is available"
-  ],
-  "redFlags": [
-   "Rising unconjugated bilirubin with lethargy, hypotonia, or abnormal tone signalling impending kernicterus",
-   "Failure of bilirubin to respond to intensive phototherapy",
-   "Intercurrent illness, fasting, or drugs precipitating a sharp rise in bilirubin",
-   "Progressive loss of phototherapy efficacy as skin surface area increases with growth"
-  ],
-  "prognosis": "Type 2 disease is generally compatible with a normal life expectancy and low neurological risk when managed appropriately, whereas untreated type 1 carries a high risk of kernicterus and death; sustained phototherapy delays complications, and liver transplantation offers definitive correction of the enzyme defect.",
-  "pitfalls": [
-   "Confusing severe Crigler-Najjar with benign Gilbert syndrome and underestimating kernicterus risk",
-   "Failing to appreciate that phototherapy becomes progressively less effective with age and growth",
-   "Prescribing drugs that displace bilirubin from albumin or that are conjugated by the same pathway",
-   "Delaying liver transplantation assessment in type 1 disease",
-   "Overlooking precipitants such as fasting, infection, or stress that acutely worsen jaundice"
-  ],
-  "references": [
-   "Sherlock's Diseases of the Liver and Biliary System",
-   "Nelson Textbook of Pediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "In type 1, rely on intensive phototherapy to keep unconjugated bilirubin within a safe range and prevent kernicterus",
-   "In type 2 (Arias syndrome), use enzyme-inducing therapy with phenobarbital to upregulate residual UGT1A1 and lower bilirubin",
-   "Reserve liver transplantation as the definitive cure for type 1 disease",
-   "Use exchange transfusion for acute dangerous rises in bilirubin or early signs of encephalopathy",
-   "Avoid recognised precipitants including fasting, dehydration, intercurrent illness and bilirubin-displacing drugs",
-   "Monitor serum bilirubin with neurological and auditory (brainstem response) surveillance for bilirubin toxicity",
-   "Provide genetic counselling for this autosomal recessive UGT1A1 disorder with family testing"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "crigler_najjar_syndrome-pathway",
-   "title": "Crigler-Najjar syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An inherited disorder of bilirubin conjugation caused by deficient hepatic UDP-glucuronosyltransferase 1A1 (UGT1A1) activity",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rising unconjugated bilirubin with lethargy, hypotonia, or abnormal tone signalling impending kernicterus",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Fractionated bilirubin confirming predominantly unconjugated hyperbilirubinaemia, Haemolysis screen including blood film, reticulocytes, and haptoglobin to exclude haemolytic causes, Otherwise normal liver enzymes and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: In type 1, rely on intensive phototherapy to keep unconjugated bilirubin within a safe range and prevent kernicterus"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing severe Crigler-Najjar with benign Gilbert syndrome and underestimating kernicterus risk"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of crigler-najjar syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "crigler_najjar_syndrome-matrix",
-   "title": "Crigler-Najjar syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An inherited disorder of bilirubin conjugation caused by deficient hepatic UDP-glucuronosyltransferase 1A1 (UGT1A1) activity",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastroenterology / Hepatology / Genetics",
+  "specialty": "Hepatology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sherlock's Diseases of the Liver and Biliary System / Nelson Textbook of Pediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An inherited disorder of bilirubin conjugation caused by deficient hepatic UDP-glucuronosyltransferase 1A1 (UGT1A1) activity",
+      "It produces unconjugated (indirect) hyperbilirubinaemia with otherwise normal liver enzymes and no haemolysis or biliary obstruction",
+      "Type 1 reflects virtually absent enzyme activity, causing severe unremitting jaundice from birth and a high risk of kernicterus",
+      "Type 2 (Arias syndrome) reflects markedly reduced but residual activity, with milder jaundice that characteristically falls in response to enzyme-inducing therapy",
+      "A reduction in bilirubin after an enzyme-inducer challenge helps distinguish type 2 from type 1, in which such a response is absent",
+      "Type 1 management relies on intensive phototherapy to keep bilirubin in a safe range, with liver transplantation being the definitive cure",
+      "It is distinguished from the milder, common Gilbert syndrome, which also involves reduced UGT1A1 activity but does not cause dangerous bilirubin levels"
     ],
-    [
-     "Key Investigations",
-     "Fractionated bilirubin confirming predominantly unconjugated hyperbilirubinaemia, Haemolysis screen including blood film,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Bilirubin produced from haem breakdown must be conjugated with glucuronic acid by the hepatic enzyme UDP-glucuronosyltransferase 1A1 before it can be excreted in bile. In Crigler-Najjar syndrome, biallelic mutations in UGT1A1 abolish (type 1) or severely reduce (type 2) this enzyme activity, so unconjugated bilirubin cannot be efficiently processed and accumulates in the blood. Because unconjugated bilirubin is lipid soluble it can cross the blood-brain barrier, and at high concentrations it deposits in the basal ganglia and brainstem, causing bilirubin encephalopathy (kernicterus). The liver is otherwise structurally normal with no cholestasis or hepatocellular injury.",
+    "additionalDifferentials": [
+      "Gilbert syndrome",
+      "Physiological and breast-milk jaundice of the newborn",
+      "Haemolytic anaemia causing unconjugated hyperbilirubinaemia",
+      "Hypothyroidism-associated neonatal jaundice",
+      "Dubin-Johnson and Rotor syndromes (conjugated, distinguishing them)",
+      "Drug-induced inhibition of bilirubin conjugation or uptake"
     ],
-    [
-     "Primary Differentials",
-     "Gilbert syndrome, Physiological and breast-milk jaundice of the newborn, Haemolytic anaemia causing unconjugated",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Fractionated bilirubin confirming predominantly unconjugated hyperbilirubinaemia",
+      "Haemolysis screen including blood film, reticulocytes, and haptoglobin to exclude haemolytic causes",
+      "Otherwise normal liver enzymes and synthetic function to exclude hepatocellular or cholestatic disease",
+      "Response of serum bilirubin to an enzyme-inducer challenge to separate type 2 from type 1",
+      "UGT1A1 molecular genetic testing",
+      "Analysis of bile bilirubin conjugates where specialised testing is available"
     ],
-    [
-     "Management Strategy",
-     "In type 1, rely on intensive phototherapy to keep unconjugated bilirubin within a safe range and prevent kernicterus",
-     "Core treatment modality"
+    "redFlags": [
+      "Rising unconjugated bilirubin with lethargy, hypotonia, or abnormal tone signalling impending kernicterus",
+      "Failure of bilirubin to respond to intensive phototherapy",
+      "Intercurrent illness, fasting, or drugs precipitating a sharp rise in bilirubin",
+      "Progressive loss of phototherapy efficacy as skin surface area increases with growth"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing severe Crigler-Najjar with benign Gilbert syndrome and underestimating kernicterus risk",
-     "Prevent diagnostic or management error"
+    "prognosis": "Type 2 disease is generally compatible with a normal life expectancy and low neurological risk when managed appropriately, whereas untreated type 1 carries a high risk of kernicterus and death; sustained phototherapy delays complications, and liver transplantation offers definitive correction of the enzyme defect.",
+    "pitfalls": [
+      "Confusing severe Crigler-Najjar with benign Gilbert syndrome and underestimating kernicterus risk",
+      "Failing to appreciate that phototherapy becomes progressively less effective with age and growth",
+      "Prescribing drugs that displace bilirubin from albumin or that are conjugated by the same pathway",
+      "Delaying liver transplantation assessment in type 1 disease",
+      "Overlooking precipitants such as fasting, infection, or stress that acutely worsen jaundice"
+    ],
+    "references": [
+      "Sherlock's Diseases of the Liver and Biliary System",
+      "Nelson Textbook of Pediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "In type 1, rely on intensive phototherapy to keep unconjugated bilirubin within a safe range and prevent kernicterus",
+      "In type 2 (Arias syndrome), use enzyme-inducing therapy with phenobarbital to upregulate residual UGT1A1 and lower bilirubin",
+      "Reserve liver transplantation as the definitive cure for type 1 disease",
+      "Use exchange transfusion for acute dangerous rises in bilirubin or early signs of encephalopathy",
+      "Avoid recognised precipitants including fasting, dehydration, intercurrent illness and bilirubin-displacing drugs",
+      "Monitor serum bilirubin with neurological and auditory (brainstem response) surveillance for bilirubin toxicity",
+      "Provide genetic counselling for this autosomal recessive UGT1A1 disorder with family testing"
     ]
-   ],
-   "caption": "Overview comparison matrix for crigler-najjar syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "crigler-najjar-syndrome-real-image",
-   "title": "Crigler-Najjar syndrome: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "crigler_najjar_syndrome-pathway",
+      "title": "Crigler-Najjar syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An inherited disorder of bilirubin conjugation caused by deficient hepatic UDP-glucuronosyltransferase 1A1 (UGT1A1) activity",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rising unconjugated bilirubin with lethargy, hypotonia, or abnormal tone signalling impending kernicterus",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Fractionated bilirubin confirming predominantly unconjugated hyperbilirubinaemia, Haemolysis screen including blood film, reticulocytes, and haptoglobin to exclude haemolytic causes, Otherwise normal liver enzymes and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: In type 1, rely on intensive phototherapy to keep unconjugated bilirubin within a safe range and prevent kernicterus"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing severe Crigler-Najjar with benign Gilbert syndrome and underestimating kernicterus risk"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of crigler-najjar syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "crigler_najjar_syndrome-matrix",
+      "title": "Crigler-Najjar syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An inherited disorder of bilirubin conjugation caused by deficient hepatic UDP-glucuronosyltransferase 1A1 (UGT1A1) activity",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Fractionated bilirubin confirming predominantly unconjugated hyperbilirubinaemia, Haemolysis screen including blood film,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Gilbert syndrome, Physiological and breast-milk jaundice of the newborn, Haemolytic anaemia causing unconjugated",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "In type 1, rely on intensive phototherapy to keep unconjugated bilirubin within a safe range and prevent kernicterus",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing severe Crigler-Najjar with benign Gilbert syndrome and underestimating kernicterus risk",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for crigler-najjar syndrome."
+    }
+  ],
+  "diagrams": []
 }

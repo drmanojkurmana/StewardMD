@@ -1,176 +1,154 @@
 {
- "id": "murine_typhus",
- "name": "Murine (endemic) typhus",
- "aliases": [
-  "endemic typhus",
-  "flea-borne typhus",
-  "Rickettsia typhi infection",
-  "shop typhus"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Mandell, Douglas and Bennett / Harrison's Principles of Internal Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by Rickettsia typhi and transmitted mainly by the rat flea (Xenopsylla cheopis), with rats as the classic reservoir and cat fleas implicated in some urban and suburban settings",
-   "Infection follows contamination of the bite site or mucosae with infected flea faeces rather than the flea bite itself",
-   "Distributed worldwide in warm coastal and port regions, and often linked to rodent activity around homes and businesses",
-   "After an incubation of roughly 1-2 weeks there is fever, headache and myalgia, with a rash appearing in a variable minority of patients",
-   "When present the rash is often faint and macular, starting on the trunk, so its absence does not exclude the diagnosis",
-   "The illness is generally milder than epidemic typhus but can cause pneumonitis, hepatitis, renal impairment and, uncommonly, severe multi-organ disease",
-   "Doxycycline is the treatment of choice and should be started empirically, as serology is usually negative early in the illness"
+  "id": "murine_typhus",
+  "name": "Murine (endemic) typhus",
+  "aliases": [
+    "endemic typhus",
+    "flea-borne typhus",
+    "Rickettsia typhi infection",
+    "shop typhus"
   ],
-  "pathophysiology": "Rickettsia typhi is an obligate intracellular bacterium maintained in a rat-flea-rat cycle. Humans are infected when flea faeces containing viable organisms are inoculated through the bite wound, abraded skin or mucous membranes. The bacteria invade and proliferate within vascular endothelial cells, producing a widespread small-vessel vasculitis with increased vascular permeability and perivascular inflammation. This endothelial injury underlies the fever, rash and, in more severe disease, involvement of the lungs, liver, kidneys and central nervous system.",
-  "additionalDifferentials": [
-   "Epidemic (louse-borne) typhus",
-   "Spotted fever group rickettsioses",
-   "Dengue and other arboviral fevers",
-   "Typhoid fever",
-   "Leptospirosis",
-   "Undifferentiated viral febrile illness"
-  ],
-  "additionalInvestigations": [
-   "Indirect immunofluorescence antibody serology on paired acute and convalescent sera",
-   "PCR of blood where available",
-   "Full blood count, which may show thrombocytopenia",
-   "Liver enzymes, often mildly elevated",
-   "Renal function and serum sodium",
-   "Chest imaging if pneumonitis is suspected"
-  ],
-  "redFlags": [
-   "Confusion or other neurological signs suggesting meningoencephalitis",
-   "Respiratory distress from pneumonitis or acute respiratory distress syndrome",
-   "Jaundice or marked hepatic dysfunction",
-   "Acute kidney injury",
-   "Failure to improve on empirical antibiotics, prompting review of the diagnosis"
-  ],
-  "prognosis": "Murine typhus is usually a self-limiting febrile illness with low mortality and responds rapidly to doxycycline, although severe complications and occasional deaths occur, particularly with delayed treatment or in older or comorbid patients.",
-  "pitfalls": [
-   "Excluding the diagnosis because there is no rash, which is frequently absent or subtle",
-   "Waiting for confirmatory serology before starting treatment",
-   "Failing to elicit rodent or flea exposure in the history",
-   "Attributing the illness to a nonspecific viral fever and missing a treatable rickettsiosis",
-   "Overlooking the possibility of severe organ involvement in apparently mild cases"
-  ],
-  "references": [
-   "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
-   "Harrison's Principles of Internal Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Prompt empirical antibiotic therapy with doxycycline, started on clinical suspicion without awaiting serological confirmation, as it produces rapid defervescence",
-   "Use a tetracycline-class agent as the mainstay, reserving alternatives for situations where tetracyclines are contraindicated",
-   "Supportive care with fluids, antipyretics and analgesia",
-   "Monitor for and manage complications such as pneumonitis, hepatitis and renal impairment, with organ support in severe multi-organ disease",
-   "Monitor full blood count, liver enzymes, renal function and sodium for thrombocytopenia, transaminitis, renal impairment and hyponatraemia",
-   "Environmental rodent and flea control to prevent reinfection and protect the household",
-   "Escalate to inpatient or critical care for severe or complicated disease, particularly in older or comorbid patients"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "murine_typhus-pathway",
-   "title": "Murine (endemic) typhus: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by Rickettsia typhi and transmitted mainly by the rat flea (Xenopsylla cheopis), with rats as the classic reservoir and cat fleas implicated in some urban and suburban settings",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Confusion or other neurological signs suggesting meningoencephalitis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Indirect immunofluorescence antibody serology on paired acute and convalescent sera, PCR of blood where available, Full blood count, which may show thrombocytopenia"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Prompt empirical antibiotic therapy with doxycycline, started on clinical suspicion without awaiting serological confirmation, as it produces rapid defervescence"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Excluding the diagnosis because there is no rash, which is frequently absent or subtle"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of murine (endemic) typhus."
-  }
- ],
- "tables": [
-  {
-   "id": "murine_typhus-matrix",
-   "title": "Murine (endemic) typhus: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by Rickettsia typhi and transmitted mainly by the rat flea (Xenopsylla cheopis), with rats as the classic reservoir and",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Mandell, Douglas and Bennett / Harrison's Principles of Internal Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by Rickettsia typhi and transmitted mainly by the rat flea (Xenopsylla cheopis), with rats as the classic reservoir and cat fleas implicated in some urban and suburban settings",
+      "Infection follows contamination of the bite site or mucosae with infected flea faeces rather than the flea bite itself",
+      "Distributed worldwide in warm coastal and port regions, and often linked to rodent activity around homes and businesses",
+      "After an incubation of roughly 1-2 weeks there is fever, headache and myalgia, with a rash appearing in a variable minority of patients",
+      "When present the rash is often faint and macular, starting on the trunk, so its absence does not exclude the diagnosis",
+      "The illness is generally milder than epidemic typhus but can cause pneumonitis, hepatitis, renal impairment and, uncommonly, severe multi-organ disease",
+      "Doxycycline is the treatment of choice and should be started empirically, as serology is usually negative early in the illness"
     ],
-    [
-     "Key Investigations",
-     "Indirect immunofluorescence antibody serology on paired acute and convalescent sera, PCR of blood where available, Full blood",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Rickettsia typhi is an obligate intracellular bacterium maintained in a rat-flea-rat cycle. Humans are infected when flea faeces containing viable organisms are inoculated through the bite wound, abraded skin or mucous membranes. The bacteria invade and proliferate within vascular endothelial cells, producing a widespread small-vessel vasculitis with increased vascular permeability and perivascular inflammation. This endothelial injury underlies the fever, rash and, in more severe disease, involvement of the lungs, liver, kidneys and central nervous system.",
+    "additionalDifferentials": [
+      "Epidemic (louse-borne) typhus",
+      "Spotted fever group rickettsioses",
+      "Dengue and other arboviral fevers",
+      "Typhoid fever",
+      "Leptospirosis",
+      "Undifferentiated viral febrile illness"
     ],
-    [
-     "Primary Differentials",
-     "Epidemic (louse-borne) typhus, Spotted fever group rickettsioses, Dengue and other arboviral fevers",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Indirect immunofluorescence antibody serology on paired acute and convalescent sera",
+      "PCR of blood where available",
+      "Full blood count, which may show thrombocytopenia",
+      "Liver enzymes, often mildly elevated",
+      "Renal function and serum sodium",
+      "Chest imaging if pneumonitis is suspected"
     ],
-    [
-     "Management Strategy",
-     "Prompt empirical antibiotic therapy with doxycycline, started on clinical suspicion without awaiting serological confirmation, as",
-     "Core treatment modality"
+    "redFlags": [
+      "Confusion or other neurological signs suggesting meningoencephalitis",
+      "Respiratory distress from pneumonitis or acute respiratory distress syndrome",
+      "Jaundice or marked hepatic dysfunction",
+      "Acute kidney injury",
+      "Failure to improve on empirical antibiotics, prompting review of the diagnosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Excluding the diagnosis because there is no rash, which is frequently absent or subtle",
-     "Prevent diagnostic or management error"
+    "prognosis": "Murine typhus is usually a self-limiting febrile illness with low mortality and responds rapidly to doxycycline, although severe complications and occasional deaths occur, particularly with delayed treatment or in older or comorbid patients.",
+    "pitfalls": [
+      "Excluding the diagnosis because there is no rash, which is frequently absent or subtle",
+      "Waiting for confirmatory serology before starting treatment",
+      "Failing to elicit rodent or flea exposure in the history",
+      "Attributing the illness to a nonspecific viral fever and missing a treatable rickettsiosis",
+      "Overlooking the possibility of severe organ involvement in apparently mild cases"
+    ],
+    "references": [
+      "Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
+      "Harrison's Principles of Internal Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Prompt empirical antibiotic therapy with doxycycline, started on clinical suspicion without awaiting serological confirmation, as it produces rapid defervescence",
+      "Use a tetracycline-class agent as the mainstay, reserving alternatives for situations where tetracyclines are contraindicated",
+      "Supportive care with fluids, antipyretics and analgesia",
+      "Monitor for and manage complications such as pneumonitis, hepatitis and renal impairment, with organ support in severe multi-organ disease",
+      "Monitor full blood count, liver enzymes, renal function and sodium for thrombocytopenia, transaminitis, renal impairment and hyponatraemia",
+      "Environmental rodent and flea control to prevent reinfection and protect the household",
+      "Escalate to inpatient or critical care for severe or complicated disease, particularly in older or comorbid patients"
     ]
-   ],
-   "caption": "Overview comparison matrix for murine (endemic) typhus."
-  }
- ],
- "diagrams": [
-  {
-   "id": "murine-typhus-real-image",
-   "title": "Murine (endemic) typhus: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "murine_typhus-pathway",
+      "title": "Murine (endemic) typhus: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by Rickettsia typhi and transmitted mainly by the rat flea (Xenopsylla cheopis), with rats as the classic reservoir and cat fleas implicated in some urban and suburban settings",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Confusion or other neurological signs suggesting meningoencephalitis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Indirect immunofluorescence antibody serology on paired acute and convalescent sera, PCR of blood where available, Full blood count, which may show thrombocytopenia"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Prompt empirical antibiotic therapy with doxycycline, started on clinical suspicion without awaiting serological confirmation, as it produces rapid defervescence"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Excluding the diagnosis because there is no rash, which is frequently absent or subtle"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of murine (endemic) typhus."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "murine_typhus-matrix",
+      "title": "Murine (endemic) typhus: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by Rickettsia typhi and transmitted mainly by the rat flea (Xenopsylla cheopis), with rats as the classic reservoir and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Indirect immunofluorescence antibody serology on paired acute and convalescent sera, PCR of blood where available, Full blood",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Epidemic (louse-borne) typhus, Spotted fever group rickettsioses, Dengue and other arboviral fevers",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Prompt empirical antibiotic therapy with doxycycline, started on clinical suspicion without awaiting serological confirmation, as",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Excluding the diagnosis because there is no rash, which is frequently absent or subtle",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for murine (endemic) typhus."
+    }
+  ],
+  "diagrams": []
 }

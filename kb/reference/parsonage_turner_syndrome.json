@@ -1,175 +1,153 @@
 {
- "id": "parsonage_turner_syndrome",
- "name": "Parsonage-Turner syndrome (neuralgic amyotrophy)",
- "aliases": [
-  "neuralgic amyotrophy",
-  "idiopathic brachial plexopathy",
-  "brachial neuritis",
-  "acute brachial plexus neuropathy"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurology",
- "specialty": "Neurology / Neuropsychiatry",
- "referenceOnly": true,
- "reference": {
-  "source": "Adams and Victor's Principles of Neurology / Bradley's Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Typically begins with sudden, severe neuropathic pain around the shoulder and upper arm, often waking the patient at night",
-   "As the pain subsides over days to weeks, patchy weakness and wasting of shoulder-girdle and arm muscles emerge",
-   "The distribution is patchy and often does not conform to a single nerve or root, reflecting involvement of individual plexus branches",
-   "The long thoracic, suprascapular, and anterior interosseous nerves are characteristically affected, producing scapular winging or a weak pinch",
-   "Frequently follows an antecedent trigger such as recent infection, immunisation, surgery, or strenuous exertion",
-   "Diagnosis is largely clinical, supported by electromyography and MRI, after excluding compressive and structural lesions",
-   "Management centres on analgesia for the acute painful phase, physiotherapy, and a role for corticosteroids and immunotherapy in selected cases"
+  "id": "parsonage_turner_syndrome",
+  "name": "Parsonage-Turner syndrome (neuralgic amyotrophy)",
+  "aliases": [
+    "neuralgic amyotrophy",
+    "idiopathic brachial plexopathy",
+    "brachial neuritis",
+    "acute brachial plexus neuropathy"
   ],
-  "pathophysiology": "Parsonage-Turner syndrome is an immune-mediated inflammatory disorder of the brachial plexus and its branches. An aberrant immune response, frequently triggered by a preceding infection, vaccination, surgery, or physical stress, produces multifocal inflammation and secondary axonal damage of individual nerve fascicles. This patchy involvement explains why weakness does not follow a single nerve or root territory and why certain nerves such as the long thoracic, suprascapular, and anterior interosseous are preferentially affected. Nerve constrictions and hourglass-like fascicular changes have been demonstrated on imaging and at surgery. The severe early pain reflects the acute inflammatory phase, after which axonal loss produces the weakness and wasting.",
-  "additionalDifferentials": [
-   "Cervical radiculopathy from disc prolapse or foraminal stenosis",
-   "Compressive or infiltrative (e.g. neoplastic) brachial plexopathy",
-   "Rotator cuff or other primary shoulder pathology",
-   "Mononeuritis multiplex from vasculitis",
-   "Hereditary neuralgic amyotrophy (SEPT9)",
-   "Thoracic outlet syndrome",
-   "Amyotrophic lateral sclerosis presenting focally"
-  ],
-  "additionalInvestigations": [
-   "Electromyography and nerve conduction studies localising patchy plexus or branch involvement",
-   "MRI of the brachial plexus showing nerve oedema, and MRI of muscles showing denervation change",
-   "MRI cervical spine to exclude radiculopathy or structural lesion",
-   "Bloods including inflammatory markers and screen for vasculitis or infection where suspected",
-   "Chest imaging to exclude an apical or mediastinal lesion affecting the plexus",
-   "Genetic testing for SEPT9 in recurrent or familial cases"
-  ],
-  "redFlags": [
-   "Progressive or relentless weakness suggesting a compressive or neoplastic plexopathy",
-   "Systemic features or multifocal neuropathy raising concern for vasculitis",
-   "Bilateral or recurrent episodes suggesting a hereditary cause",
-   "Respiratory compromise from phrenic nerve involvement"
-  ],
-  "prognosis": "Most patients recover useful function over months to a few years, though recovery can be slow and incomplete, with residual weakness, fatigue, or scapular winging; recurrence is uncommon in the idiopathic form.",
-  "pitfalls": [
-   "Mistaking the acute pain for a primary shoulder or musculoskeletal problem and delaying diagnosis",
-   "Attributing patchy weakness to a single radiculopathy",
-   "Overlooking phrenic or long thoracic involvement",
-   "Failing to consider a hereditary (SEPT9) cause in recurrent or familial cases",
-   "Assuming a uniformly rapid and complete recovery"
-  ],
-  "references": [
-   "Adams and Victor's Principles of Neurology",
-   "Bradley's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage the severe early pain with analgesia and consider a short course of oral corticosteroids in the acute phase, which may shorten pain and hasten recovery when started early",
-   "Treat persistent neuropathic pain with agents such as gabapentinoids or amitriptyline",
-   "Begin physiotherapy once pain settles, focusing on maintaining range of movement and scapular stabilisation and strengthening",
-   "Involve occupational therapy to support function during the prolonged recovery",
-   "Monitor recovery clinically and with electromyography, referring for nerve surgery or tendon transfer where hourglass fascicular constrictions or failed recovery persist",
-   "Offer genetic testing for SEPT9 and counselling in recurrent or familial hereditary neuralgic amyotrophy"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "parsonage_turner_syndrome-pathway",
-   "title": "Parsonage-Turner syndrome (neuralgic amyotrophy): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Typically begins with sudden, severe neuropathic pain around the shoulder and upper arm, often waking the patient at night",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive or relentless weakness suggesting a compressive or neoplastic plexopathy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Electromyography and nerve conduction studies localising patchy plexus or branch involvement, MRI of the brachial plexus showing nerve oedema, and MRI of muscles showing denervation change, MRI cervical spine to exclude"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage the severe early pain with analgesia and consider a short course of oral corticosteroids in the acute phase, which may shorten pain and hasten recovery when started early"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking the acute pain for a primary shoulder or musculoskeletal problem and delaying diagnosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of parsonage-turner syndrome (neuralgic amyotrophy)."
-  }
- ],
- "tables": [
-  {
-   "id": "parsonage_turner_syndrome-matrix",
-   "title": "Parsonage-Turner syndrome (neuralgic amyotrophy): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Typically begins with sudden, severe neuropathic pain around the shoulder and upper arm, often waking the patient at night",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurology",
+  "specialty": "Neurology / Neuropsychiatry",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Adams and Victor's Principles of Neurology / Bradley's Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Typically begins with sudden, severe neuropathic pain around the shoulder and upper arm, often waking the patient at night",
+      "As the pain subsides over days to weeks, patchy weakness and wasting of shoulder-girdle and arm muscles emerge",
+      "The distribution is patchy and often does not conform to a single nerve or root, reflecting involvement of individual plexus branches",
+      "The long thoracic, suprascapular, and anterior interosseous nerves are characteristically affected, producing scapular winging or a weak pinch",
+      "Frequently follows an antecedent trigger such as recent infection, immunisation, surgery, or strenuous exertion",
+      "Diagnosis is largely clinical, supported by electromyography and MRI, after excluding compressive and structural lesions",
+      "Management centres on analgesia for the acute painful phase, physiotherapy, and a role for corticosteroids and immunotherapy in selected cases"
     ],
-    [
-     "Key Investigations",
-     "Electromyography and nerve conduction studies localising patchy plexus or branch involvement, MRI of the brachial plexus showing",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Parsonage-Turner syndrome is an immune-mediated inflammatory disorder of the brachial plexus and its branches. An aberrant immune response, frequently triggered by a preceding infection, vaccination, surgery, or physical stress, produces multifocal inflammation and secondary axonal damage of individual nerve fascicles. This patchy involvement explains why weakness does not follow a single nerve or root territory and why certain nerves such as the long thoracic, suprascapular, and anterior interosseous are preferentially affected. Nerve constrictions and hourglass-like fascicular changes have been demonstrated on imaging and at surgery. The severe early pain reflects the acute inflammatory phase, after which axonal loss produces the weakness and wasting.",
+    "additionalDifferentials": [
+      "Cervical radiculopathy from disc prolapse or foraminal stenosis",
+      "Compressive or infiltrative (e.g. neoplastic) brachial plexopathy",
+      "Rotator cuff or other primary shoulder pathology",
+      "Mononeuritis multiplex from vasculitis",
+      "Hereditary neuralgic amyotrophy (SEPT9)",
+      "Thoracic outlet syndrome",
+      "Amyotrophic lateral sclerosis presenting focally"
     ],
-    [
-     "Primary Differentials",
-     "Cervical radiculopathy from disc prolapse or foraminal stenosis, Compressive or infiltrative (e.g. neoplastic) brachial",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Electromyography and nerve conduction studies localising patchy plexus or branch involvement",
+      "MRI of the brachial plexus showing nerve oedema, and MRI of muscles showing denervation change",
+      "MRI cervical spine to exclude radiculopathy or structural lesion",
+      "Bloods including inflammatory markers and screen for vasculitis or infection where suspected",
+      "Chest imaging to exclude an apical or mediastinal lesion affecting the plexus",
+      "Genetic testing for SEPT9 in recurrent or familial cases"
     ],
-    [
-     "Management Strategy",
-     "Manage the severe early pain with analgesia and consider a short course of oral corticosteroids in the acute phase, which may",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive or relentless weakness suggesting a compressive or neoplastic plexopathy",
+      "Systemic features or multifocal neuropathy raising concern for vasculitis",
+      "Bilateral or recurrent episodes suggesting a hereditary cause",
+      "Respiratory compromise from phrenic nerve involvement"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking the acute pain for a primary shoulder or musculoskeletal problem and delaying diagnosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most patients recover useful function over months to a few years, though recovery can be slow and incomplete, with residual weakness, fatigue, or scapular winging; recurrence is uncommon in the idiopathic form.",
+    "pitfalls": [
+      "Mistaking the acute pain for a primary shoulder or musculoskeletal problem and delaying diagnosis",
+      "Attributing patchy weakness to a single radiculopathy",
+      "Overlooking phrenic or long thoracic involvement",
+      "Failing to consider a hereditary (SEPT9) cause in recurrent or familial cases",
+      "Assuming a uniformly rapid and complete recovery"
+    ],
+    "references": [
+      "Adams and Victor's Principles of Neurology",
+      "Bradley's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage the severe early pain with analgesia and consider a short course of oral corticosteroids in the acute phase, which may shorten pain and hasten recovery when started early",
+      "Treat persistent neuropathic pain with agents such as gabapentinoids or amitriptyline",
+      "Begin physiotherapy once pain settles, focusing on maintaining range of movement and scapular stabilisation and strengthening",
+      "Involve occupational therapy to support function during the prolonged recovery",
+      "Monitor recovery clinically and with electromyography, referring for nerve surgery or tendon transfer where hourglass fascicular constrictions or failed recovery persist",
+      "Offer genetic testing for SEPT9 and counselling in recurrent or familial hereditary neuralgic amyotrophy"
     ]
-   ],
-   "caption": "Overview comparison matrix for parsonage-turner syndrome (neuralgic amyotrophy)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "parsonage-turner-syndrome-real-image",
-   "title": "Parsonage-Turner syndrome (neuralgic amyotrophy): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "parsonage_turner_syndrome-pathway",
+      "title": "Parsonage-Turner syndrome (neuralgic amyotrophy): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Typically begins with sudden, severe neuropathic pain around the shoulder and upper arm, often waking the patient at night",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive or relentless weakness suggesting a compressive or neoplastic plexopathy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Electromyography and nerve conduction studies localising patchy plexus or branch involvement, MRI of the brachial plexus showing nerve oedema, and MRI of muscles showing denervation change, MRI cervical spine to exclude"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage the severe early pain with analgesia and consider a short course of oral corticosteroids in the acute phase, which may shorten pain and hasten recovery when started early"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking the acute pain for a primary shoulder or musculoskeletal problem and delaying diagnosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of parsonage-turner syndrome (neuralgic amyotrophy)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "parsonage_turner_syndrome-matrix",
+      "title": "Parsonage-Turner syndrome (neuralgic amyotrophy): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Typically begins with sudden, severe neuropathic pain around the shoulder and upper arm, often waking the patient at night",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Electromyography and nerve conduction studies localising patchy plexus or branch involvement, MRI of the brachial plexus showing",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Cervical radiculopathy from disc prolapse or foraminal stenosis, Compressive or infiltrative (e.g. neoplastic) brachial",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage the severe early pain with analgesia and consider a short course of oral corticosteroids in the acute phase, which may",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking the acute pain for a primary shoulder or musculoskeletal problem and delaying diagnosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for parsonage-turner syndrome (neuralgic amyotrophy)."
+    }
+  ],
+  "diagrams": []
 }

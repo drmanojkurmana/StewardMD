@@ -1,173 +1,151 @@
 {
- "id": "achondroplasia",
- "name": "Achondroplasia",
- "aliases": [
-  "FGFR3",
-  "ACH",
-  "rhizomelic short-limbed dwarfism"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Genetics",
- "specialty": "Clinical Genetics / Skeletal Dysplasia",
- "referenceOnly": true,
- "reference": {
-  "source": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The most common non-lethal skeletal dysplasia, characterised by disproportionate short stature with rhizomelic (proximal) limb shortening",
-   "Nearly all cases arise from a recurrent gain-of-function variant in FGFR3; inheritance is autosomal dominant with high de novo rates, and paternal age is a risk factor",
-   "Typical features include macrocephaly with frontal bossing and midface hypoplasia, a trident hand configuration, and thoracolumbar kyphosis in infancy",
-   "Radiographs show short tubular bones, narrowing rather than widening of the interpedicular distance descending the lumbar spine, squared iliac wings, and champagne-glass pelvis",
-   "Foramen magnum stenosis is a critical early complication that can cause cervicomedullary compression, central apnoea, and sudden death in infancy",
-   "Later complications include spinal canal stenosis, obstructive sleep apnoea, recurrent otitis media, and genu varum",
-   "A targeted FGFR3-modulating therapy is now available to promote linear growth, alongside multidisciplinary surveillance"
+  "id": "achondroplasia",
+  "name": "Achondroplasia",
+  "aliases": [
+    "FGFR3",
+    "ACH",
+    "rhizomelic short-limbed dwarfism"
   ],
-  "pathophysiology": "Achondroplasia is caused by an activating variant in FGFR3, the fibroblast growth factor receptor 3 gene. Constitutive receptor signalling suppresses chondrocyte proliferation and differentiation in the growth plate, impairing endochondral ossification. Because long bones grow chiefly through endochondral ossification while membranous ossification is relatively spared, the result is disproportionate shortening of the limbs with a relatively normal trunk length and a large skull. The same mechanism underlies the characteristic craniofacial and spinal features, including a small foramen magnum and narrow spinal canal.",
-  "additionalDifferentials": [
-   "Hypochondroplasia",
-   "Thanatophoric dysplasia",
-   "Pseudoachondroplasia",
-   "Spondyloepiphyseal dysplasia",
-   "Cartilage-hair hypoplasia",
-   "SHOX-related short stature"
-  ],
-  "additionalInvestigations": [
-   "Skeletal survey demonstrating rhizomelic shortening and characteristic pelvic and spinal changes",
-   "Targeted FGFR3 molecular testing to confirm the diagnosis",
-   "Craniocervical MRI and neurological assessment to evaluate foramen magnum stenosis in infancy",
-   "Polysomnography for suspected central or obstructive sleep apnoea",
-   "Serial head circumference and disproportionate growth charting on condition-specific curves",
-   "Spinal imaging for symptomatic canal stenosis or kyphosis"
-  ],
-  "redFlags": [
-   "Signs of cervicomedullary compression such as central apnoea, hypotonia, or long-tract signs in infancy",
-   "Rapidly progressive hydrocephalus or raised intracranial pressure",
-   "Progressive neurogenic claudication or myelopathy from spinal stenosis",
-   "Severe fixed thoracolumbar kyphosis with neurological involvement"
-  ],
-  "prognosis": "Intelligence and lifespan are usually normal with appropriate surveillance, though foramen magnum stenosis raises early infant mortality if unrecognised. Adult stature is markedly reduced, and morbidity later relates chiefly to spinal stenosis, sleep-disordered breathing, and joint problems.",
-  "pitfalls": [
-   "Attributing infant apnoea or hypotonia to benign causes and missing foramen magnum compression",
-   "Plotting growth on standard rather than condition-specific charts",
-   "Assuming developmental delay when early gross-motor milestones are expectedly slow due to body proportions",
-   "Overlooking recurrent middle-ear disease and its impact on hearing and speech"
-  ],
-  "references": [
-   "Smith's Recognizable Patterns of Human Malformation",
-   "Nelson Textbook of Pediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Disease-modifying therapy with the C-type natriuretic peptide analogue vosoritide to increase growth velocity in eligible children",
-   "Early craniocervical MRI with neurological and respiratory assessment to detect foramen magnum stenosis, proceeding to neurosurgical decompression if cervicomedullary compression develops",
-   "Polysomnography with management of obstructive and central sleep apnoea",
-   "Surveillance and treatment of recurrent otitis media and conductive hearing loss, with monitoring of speech development",
-   "Orthopaedic management of thoracolumbar kyphosis, genu varum and later symptomatic spinal canal stenosis, including decompressive surgery",
-   "Growth monitoring on achondroplasia-specific charts within a multidisciplinary team spanning genetics, orthopaedics, ENT and neurosurgery",
-   "Genetic counselling for the autosomal dominant inheritance and family-planning advice"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "achondroplasia-pathway",
-   "title": "Achondroplasia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The most common non-lethal skeletal dysplasia, characterised by disproportionate short stature with rhizomelic (proximal) limb shortening",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Signs of cervicomedullary compression such as central apnoea, hypotonia, or long-tract signs in infancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skeletal survey demonstrating rhizomelic shortening and characteristic pelvic and spinal changes, Targeted FGFR3 molecular testing to confirm the diagnosis, Craniocervical MRI and neurological assessment to evaluate"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Disease-modifying therapy with the C-type natriuretic peptide analogue vosoritide to increase growth velocity in eligible children"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing infant apnoea or hypotonia to benign causes and missing foramen magnum compression"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of achondroplasia."
-  }
- ],
- "tables": [
-  {
-   "id": "achondroplasia-matrix",
-   "title": "Achondroplasia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The most common non-lethal skeletal dysplasia, characterised by disproportionate short stature with rhizomelic (proximal) limb",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Genetics",
+  "specialty": "Clinical Genetics / Skeletal Dysplasia",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The most common non-lethal skeletal dysplasia, characterised by disproportionate short stature with rhizomelic (proximal) limb shortening",
+      "Nearly all cases arise from a recurrent gain-of-function variant in FGFR3; inheritance is autosomal dominant with high de novo rates, and paternal age is a risk factor",
+      "Typical features include macrocephaly with frontal bossing and midface hypoplasia, a trident hand configuration, and thoracolumbar kyphosis in infancy",
+      "Radiographs show short tubular bones, narrowing rather than widening of the interpedicular distance descending the lumbar spine, squared iliac wings, and champagne-glass pelvis",
+      "Foramen magnum stenosis is a critical early complication that can cause cervicomedullary compression, central apnoea, and sudden death in infancy",
+      "Later complications include spinal canal stenosis, obstructive sleep apnoea, recurrent otitis media, and genu varum",
+      "A targeted FGFR3-modulating therapy is now available to promote linear growth, alongside multidisciplinary surveillance"
     ],
-    [
-     "Key Investigations",
-     "Skeletal survey demonstrating rhizomelic shortening and characteristic pelvic and spinal changes, Targeted FGFR3 molecular",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Achondroplasia is caused by an activating variant in FGFR3, the fibroblast growth factor receptor 3 gene. Constitutive receptor signalling suppresses chondrocyte proliferation and differentiation in the growth plate, impairing endochondral ossification. Because long bones grow chiefly through endochondral ossification while membranous ossification is relatively spared, the result is disproportionate shortening of the limbs with a relatively normal trunk length and a large skull. The same mechanism underlies the characteristic craniofacial and spinal features, including a small foramen magnum and narrow spinal canal.",
+    "additionalDifferentials": [
+      "Hypochondroplasia",
+      "Thanatophoric dysplasia",
+      "Pseudoachondroplasia",
+      "Spondyloepiphyseal dysplasia",
+      "Cartilage-hair hypoplasia",
+      "SHOX-related short stature"
     ],
-    [
-     "Primary Differentials",
-     "Hypochondroplasia, Thanatophoric dysplasia, Pseudoachondroplasia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skeletal survey demonstrating rhizomelic shortening and characteristic pelvic and spinal changes",
+      "Targeted FGFR3 molecular testing to confirm the diagnosis",
+      "Craniocervical MRI and neurological assessment to evaluate foramen magnum stenosis in infancy",
+      "Polysomnography for suspected central or obstructive sleep apnoea",
+      "Serial head circumference and disproportionate growth charting on condition-specific curves",
+      "Spinal imaging for symptomatic canal stenosis or kyphosis"
     ],
-    [
-     "Management Strategy",
-     "Disease-modifying therapy with the C-type natriuretic peptide analogue vosoritide to increase growth velocity in eligible children",
-     "Core treatment modality"
+    "redFlags": [
+      "Signs of cervicomedullary compression such as central apnoea, hypotonia, or long-tract signs in infancy",
+      "Rapidly progressive hydrocephalus or raised intracranial pressure",
+      "Progressive neurogenic claudication or myelopathy from spinal stenosis",
+      "Severe fixed thoracolumbar kyphosis with neurological involvement"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing infant apnoea or hypotonia to benign causes and missing foramen magnum compression",
-     "Prevent diagnostic or management error"
+    "prognosis": "Intelligence and lifespan are usually normal with appropriate surveillance, though foramen magnum stenosis raises early infant mortality if unrecognised. Adult stature is markedly reduced, and morbidity later relates chiefly to spinal stenosis, sleep-disordered breathing, and joint problems.",
+    "pitfalls": [
+      "Attributing infant apnoea or hypotonia to benign causes and missing foramen magnum compression",
+      "Plotting growth on standard rather than condition-specific charts",
+      "Assuming developmental delay when early gross-motor milestones are expectedly slow due to body proportions",
+      "Overlooking recurrent middle-ear disease and its impact on hearing and speech"
+    ],
+    "references": [
+      "Smith's Recognizable Patterns of Human Malformation",
+      "Nelson Textbook of Pediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Disease-modifying therapy with the C-type natriuretic peptide analogue vosoritide to increase growth velocity in eligible children",
+      "Early craniocervical MRI with neurological and respiratory assessment to detect foramen magnum stenosis, proceeding to neurosurgical decompression if cervicomedullary compression develops",
+      "Polysomnography with management of obstructive and central sleep apnoea",
+      "Surveillance and treatment of recurrent otitis media and conductive hearing loss, with monitoring of speech development",
+      "Orthopaedic management of thoracolumbar kyphosis, genu varum and later symptomatic spinal canal stenosis, including decompressive surgery",
+      "Growth monitoring on achondroplasia-specific charts within a multidisciplinary team spanning genetics, orthopaedics, ENT and neurosurgery",
+      "Genetic counselling for the autosomal dominant inheritance and family-planning advice"
     ]
-   ],
-   "caption": "Overview comparison matrix for achondroplasia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "achondroplasia-real-image",
-   "title": "Achondroplasia: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "achondroplasia-pathway",
+      "title": "Achondroplasia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The most common non-lethal skeletal dysplasia, characterised by disproportionate short stature with rhizomelic (proximal) limb shortening",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Signs of cervicomedullary compression such as central apnoea, hypotonia, or long-tract signs in infancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skeletal survey demonstrating rhizomelic shortening and characteristic pelvic and spinal changes, Targeted FGFR3 molecular testing to confirm the diagnosis, Craniocervical MRI and neurological assessment to evaluate"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Disease-modifying therapy with the C-type natriuretic peptide analogue vosoritide to increase growth velocity in eligible children"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing infant apnoea or hypotonia to benign causes and missing foramen magnum compression"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of achondroplasia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "achondroplasia-matrix",
+      "title": "Achondroplasia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The most common non-lethal skeletal dysplasia, characterised by disproportionate short stature with rhizomelic (proximal) limb",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skeletal survey demonstrating rhizomelic shortening and characteristic pelvic and spinal changes, Targeted FGFR3 molecular",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Hypochondroplasia, Thanatophoric dysplasia, Pseudoachondroplasia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Disease-modifying therapy with the C-type natriuretic peptide analogue vosoritide to increase growth velocity in eligible children",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing infant apnoea or hypotonia to benign causes and missing foramen magnum compression",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for achondroplasia."
+    }
+  ],
+  "diagrams": []
 }

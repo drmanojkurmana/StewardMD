@@ -1,178 +1,156 @@
 {
- "id": "toddlers_diarrhoea",
- "name": "Toddler's diarrhoea",
- "aliases": [
-  "Chronic nonspecific diarrhoea of childhood",
-  "Functional diarrhoea",
-  "Peas-and-carrots diarrhoea"
- ],
- "class": "non_infective",
- "system": "Gastrointestinal",
- "specialty": "Paediatric gastroenterology",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The most common cause of chronic diarrhoea in a well, thriving preschool child, broadly between six months and five years of age.",
-   "Passage of several loose stools daily, often containing recognisable undigested food such as vegetable fragments (the 'peas and carrots' sign).",
-   "Classic diurnal pattern: the first stool of the day is larger and more formed, with subsequent stools becoming progressively looser, and no diarrhoea overnight.",
-   "Normal growth and the absence of nocturnal symptoms are the cardinal reassuring features and are central to the diagnosis.",
-   "Strongly linked to excessive intake of fruit juice and squash rich in fructose and sorbitol, overhydration and paradoxically low-fat, high-fibre 'toddler' diets.",
-   "It is a functional disorder of rapid intestinal transit; there is no malabsorption and nutrient absorption is preserved.",
-   "Management is dietary through the 'four Fs': ensure adequate Fat, reduce excess Fluid, limit Fruit juice, and provide appropriate rather than excessive Fibre.",
-   "Investigations are usually unnecessary when the history is classic and the growth trajectory is normal."
+  "id": "toddlers_diarrhoea",
+  "name": "Toddler's diarrhoea",
+  "aliases": [
+    "Chronic nonspecific diarrhoea of childhood",
+    "Functional diarrhoea",
+    "Peas-and-carrots diarrhoea"
   ],
-  "pathophysiology": "Toddler's diarrhoea is a functional disorder attributed to dysregulated intestinal motility with rapid small- and large-bowel transit, in the absence of mucosal, infective or malabsorptive disease. Excessive ingestion of fluids, particularly fruit juices and squashes rich in poorly absorbed carbohydrates such as fructose and sorbitol, delivers an osmotic carbohydrate load to the colon that exceeds absorptive and fermentative capacity, drawing water into the lumen and accelerating transit. Diets low in fat, which would normally slow gastric emptying and transit, and disproportionately high in fibre further shorten transit time. The net effect is frequent loose stools containing undigested food, without impaired nutrient absorption, so growth and development are preserved.",
-  "additionalDifferentials": [
-   "Coeliac disease",
-   "Cow's milk or other food protein allergy",
-   "Giardiasis and other chronic enteric infections",
-   "Carbohydrate malabsorption (lactose intolerance, congenital sucrase-isomaltase deficiency)",
-   "Cystic fibrosis and other causes of exocrine pancreatic insufficiency",
-   "Inflammatory bowel disease",
-   "Constipation with overflow soiling masquerading as diarrhoea"
-  ],
-  "additionalInvestigations": [
-   "Plotting and review of the growth chart (central to the diagnosis)",
-   "Coeliac serology (tissue transglutaminase IgA with total IgA)",
-   "Stool microscopy, culture and Giardia antigen testing",
-   "Faecal calprotectin if inflammatory bowel disease is suspected",
-   "Faecal elastase or sweat test if pancreatic insufficiency or cystic fibrosis is suspected",
-   "Full blood count, inflammatory markers and ferritin",
-   "Dietary diary review of fluid, juice, fat and fibre intake"
-  ],
-  "redFlags": [
-   "Faltering growth or weight loss",
-   "Nocturnal diarrhoea waking the child",
-   "Blood or mucus in the stool",
-   "Bilious or persistent vomiting, significant abdominal pain or distension",
-   "Steatorrhoea with bulky, pale, greasy, offensive stools"
-  ],
-  "prognosis": "A benign, self-limiting condition that resolves spontaneously by school age, typically around four to five years, as bowel habit matures and continence is established; growth and development are unaffected.",
-  "pitfalls": [
-   "Undertaking extensive investigations or imposing restrictive diets in a thriving child with a classic history.",
-   "Over-restricting dietary fat, which can worsen symptoms and compromise energy intake.",
-   "Assuming a functional cause without checking growth and thereby missing coeliac disease or giardiasis.",
-   "Overlooking constipation with overflow soiling presenting as apparent diarrhoea.",
-   "Escalating fibre inappropriately in the belief that it will firm the stools."
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics",
-   "Walker's Pediatric Gastrointestinal Disease",
-   "Rome IV criteria for paediatric functional gastrointestinal disorders"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassure the family that this is a benign functional disorder of rapid transit in a well, growing child needing no drug therapy",
-   "Reduce excessive fluid intake and limit fructose- and sorbitol-rich fruit juices and squashes that deliver an osmotic carbohydrate load to the colon",
-   "Increase dietary fat and moderate excessive fibre to lengthen intestinal transit time",
-   "Monitor and plot growth serially, as preserved growth is central to confirming the diagnosis",
-   "Avoid unwarranted investigation and empirical exclusion diets when there are no red flags",
-   "Review and investigate for organic causes such as coeliac disease, giardiasis, or inflammatory bowel disease only if growth falters or nocturnal or systemic symptoms appear"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "toddlers_diarrhoea-pathway",
-   "title": "Toddler's diarrhoea: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The most common cause of chronic diarrhoea in a well, thriving preschool child, broadly between six months and five years of age.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Faltering growth or weight loss",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plotting and review of the growth chart (central to the diagnosis), Coeliac serology (tissue transglutaminase IgA with total IgA), Stool microscopy, culture and Giardia antigen testing"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassure the family that this is a benign functional disorder of rapid transit in a well, growing child needing no drug therapy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Undertaking extensive investigations or imposing restrictive diets in a thriving child with a classic history."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of toddler's diarrhoea."
-  }
- ],
- "tables": [
-  {
-   "id": "toddlers_diarrhoea-matrix",
-   "title": "Toddler's diarrhoea: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The most common cause of chronic diarrhoea in a well, thriving preschool child, broadly between six months and five years of age.",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastrointestinal",
+  "specialty": "Paediatric gastroenterology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The most common cause of chronic diarrhoea in a well, thriving preschool child, broadly between six months and five years of age.",
+      "Passage of several loose stools daily, often containing recognisable undigested food such as vegetable fragments (the 'peas and carrots' sign).",
+      "Classic diurnal pattern: the first stool of the day is larger and more formed, with subsequent stools becoming progressively looser, and no diarrhoea overnight.",
+      "Normal growth and the absence of nocturnal symptoms are the cardinal reassuring features and are central to the diagnosis.",
+      "Strongly linked to excessive intake of fruit juice and squash rich in fructose and sorbitol, overhydration and paradoxically low-fat, high-fibre 'toddler' diets.",
+      "It is a functional disorder of rapid intestinal transit; there is no malabsorption and nutrient absorption is preserved.",
+      "Management is dietary through the 'four Fs': ensure adequate Fat, reduce excess Fluid, limit Fruit juice, and provide appropriate rather than excessive Fibre.",
+      "Investigations are usually unnecessary when the history is classic and the growth trajectory is normal."
     ],
-    [
-     "Key Investigations",
-     "Plotting and review of the growth chart (central to the diagnosis), Coeliac serology (tissue transglutaminase IgA with total",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Toddler's diarrhoea is a functional disorder attributed to dysregulated intestinal motility with rapid small- and large-bowel transit, in the absence of mucosal, infective or malabsorptive disease. Excessive ingestion of fluids, particularly fruit juices and squashes rich in poorly absorbed carbohydrates such as fructose and sorbitol, delivers an osmotic carbohydrate load to the colon that exceeds absorptive and fermentative capacity, drawing water into the lumen and accelerating transit. Diets low in fat, which would normally slow gastric emptying and transit, and disproportionately high in fibre further shorten transit time. The net effect is frequent loose stools containing undigested food, without impaired nutrient absorption, so growth and development are preserved.",
+    "additionalDifferentials": [
+      "Coeliac disease",
+      "Cow's milk or other food protein allergy",
+      "Giardiasis and other chronic enteric infections",
+      "Carbohydrate malabsorption (lactose intolerance, congenital sucrase-isomaltase deficiency)",
+      "Cystic fibrosis and other causes of exocrine pancreatic insufficiency",
+      "Inflammatory bowel disease",
+      "Constipation with overflow soiling masquerading as diarrhoea"
     ],
-    [
-     "Primary Differentials",
-     "Coeliac disease, Cow's milk or other food protein allergy, Giardiasis and other chronic enteric infections",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plotting and review of the growth chart (central to the diagnosis)",
+      "Coeliac serology (tissue transglutaminase IgA with total IgA)",
+      "Stool microscopy, culture and Giardia antigen testing",
+      "Faecal calprotectin if inflammatory bowel disease is suspected",
+      "Faecal elastase or sweat test if pancreatic insufficiency or cystic fibrosis is suspected",
+      "Full blood count, inflammatory markers and ferritin",
+      "Dietary diary review of fluid, juice, fat and fibre intake"
     ],
-    [
-     "Management Strategy",
-     "Reassure the family that this is a benign functional disorder of rapid transit in a well, growing child needing no drug therapy",
-     "Core treatment modality"
+    "redFlags": [
+      "Faltering growth or weight loss",
+      "Nocturnal diarrhoea waking the child",
+      "Blood or mucus in the stool",
+      "Bilious or persistent vomiting, significant abdominal pain or distension",
+      "Steatorrhoea with bulky, pale, greasy, offensive stools"
     ],
-    [
-     "Clinical Pitfall",
-     "Undertaking extensive investigations or imposing restrictive diets in a thriving child with a classic history.",
-     "Prevent diagnostic or management error"
+    "prognosis": "A benign, self-limiting condition that resolves spontaneously by school age, typically around four to five years, as bowel habit matures and continence is established; growth and development are unaffected.",
+    "pitfalls": [
+      "Undertaking extensive investigations or imposing restrictive diets in a thriving child with a classic history.",
+      "Over-restricting dietary fat, which can worsen symptoms and compromise energy intake.",
+      "Assuming a functional cause without checking growth and thereby missing coeliac disease or giardiasis.",
+      "Overlooking constipation with overflow soiling presenting as apparent diarrhoea.",
+      "Escalating fibre inappropriately in the belief that it will firm the stools."
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics",
+      "Walker's Pediatric Gastrointestinal Disease",
+      "Rome IV criteria for paediatric functional gastrointestinal disorders"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassure the family that this is a benign functional disorder of rapid transit in a well, growing child needing no drug therapy",
+      "Reduce excessive fluid intake and limit fructose- and sorbitol-rich fruit juices and squashes that deliver an osmotic carbohydrate load to the colon",
+      "Increase dietary fat and moderate excessive fibre to lengthen intestinal transit time",
+      "Monitor and plot growth serially, as preserved growth is central to confirming the diagnosis",
+      "Avoid unwarranted investigation and empirical exclusion diets when there are no red flags",
+      "Review and investigate for organic causes such as coeliac disease, giardiasis, or inflammatory bowel disease only if growth falters or nocturnal or systemic symptoms appear"
     ]
-   ],
-   "caption": "Overview comparison matrix for toddler's diarrhoea."
-  }
- ],
- "diagrams": [
-  {
-   "id": "toddlers-diarrhoea-real-image",
-   "title": "Toddler's diarrhoea: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "toddlers_diarrhoea-pathway",
+      "title": "Toddler's diarrhoea: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The most common cause of chronic diarrhoea in a well, thriving preschool child, broadly between six months and five years of age.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Faltering growth or weight loss",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plotting and review of the growth chart (central to the diagnosis), Coeliac serology (tissue transglutaminase IgA with total IgA), Stool microscopy, culture and Giardia antigen testing"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassure the family that this is a benign functional disorder of rapid transit in a well, growing child needing no drug therapy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Undertaking extensive investigations or imposing restrictive diets in a thriving child with a classic history."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of toddler's diarrhoea."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "toddlers_diarrhoea-matrix",
+      "title": "Toddler's diarrhoea: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The most common cause of chronic diarrhoea in a well, thriving preschool child, broadly between six months and five years of age.",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plotting and review of the growth chart (central to the diagnosis), Coeliac serology (tissue transglutaminase IgA with total",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Coeliac disease, Cow's milk or other food protein allergy, Giardiasis and other chronic enteric infections",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassure the family that this is a benign functional disorder of rapid transit in a well, growing child needing no drug therapy",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Undertaking extensive investigations or imposing restrictive diets in a thriving child with a classic history.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for toddler's diarrhoea."
+    }
+  ],
+  "diagrams": []
 }

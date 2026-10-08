@@ -1,176 +1,154 @@
 {
- "id": "fibrosing_mediastinitis",
- "name": "Fibrosing mediastinitis",
- "aliases": [
-  "Sclerosing mediastinitis",
-  "Mediastinal fibrosis"
- ],
- "class": "non_infective",
- "system": "Respiratory / Mediastinum",
- "specialty": "Respiratory medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Respiratory and thoracic medicine references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Rare disorder of invasive, dense mediastinal fibrosis that encases and compresses vital structures.",
-   "In endemic regions the commonest antecedent is prior Histoplasma capsulatum infection; tuberculosis is another recognised trigger.",
-   "The fibrosis represents an exuberant immune and fibrotic reaction rather than ongoing active infection.",
-   "A diffuse infiltrative form is frequently non-infectious and may belong to the IgG4-related disease spectrum.",
-   "Superior vena cava syndrome is a classic presentation; airway, pulmonary artery, pulmonary vein and oesophageal compression also occur.",
-   "Two patterns are described: a focal, often calcified granulomatous type and a diffuse infiltrative type.",
-   "Pulmonary vein or artery stenosis can cause pulmonary hypertension and mimic chronic thromboembolic disease on perfusion imaging.",
-   "Established, burnt-out fibrosis responds poorly to medical therapy; symptomatic vascular or airway stenosis may be palliated with endovascular or airway stenting."
+  "id": "fibrosing_mediastinitis",
+  "name": "Fibrosing mediastinitis",
+  "aliases": [
+    "Sclerosing mediastinitis",
+    "Mediastinal fibrosis"
   ],
-  "pathophysiology": "Fibrosing mediastinitis is characterised by the proliferation of dense, invasive, largely acellular collagenous tissue within the mediastinum that infiltrates and encases vital structures. In endemic regions the commonest antecedent is Histoplasma capsulatum infection, and the disorder is thought to represent an exuberant, immunologically mediated fibrotic response to fungal antigens released from mediastinal lymph nodes rather than ongoing active infection; tuberculosis can provoke a similar reaction. A separate, diffuse infiltrative form is frequently non-infectious and increasingly recognised as part of the IgG4-related disease spectrum, with lymphoplasmacytic infiltrates, storiform fibrosis and obliterative phlebitis, while other associations include sarcoidosis, prior radiotherapy and certain drugs; a proportion remain idiopathic. Progressive fibrosis narrows or occludes the superior vena cava, pulmonary arteries and veins, central airways and oesophagus, producing the compressive syndromes that dominate the clinical picture, and pulmonary vascular obstruction may culminate in pulmonary hypertension and right heart strain.",
-  "additionalDifferentials": [
-   "Malignant mediastinal infiltration (lymphoma, metastatic carcinoma)",
-   "Sarcoidosis with mediastinal lymphadenopathy",
-   "IgG4-related disease with retroperitoneal fibrosis overlap",
-   "Primary mediastinal tumours",
-   "Superior vena cava thrombosis from indwelling devices",
-   "Chronic thromboembolic pulmonary hypertension (when pulmonary arteries are involved)",
-   "Constrictive pericarditis (compressive cardiac picture)"
-  ],
-  "additionalInvestigations": [
-   "Contrast-enhanced CT of the chest (infiltrative soft-tissue mass, calcification, vessel and airway encasement)",
-   "MRI for soft-tissue characterisation and vascular involvement",
-   "Testing for Histoplasma and tuberculosis (serology, antigen assays, interferon-gamma release assay)",
-   "Serum IgG4 with tissue IgG4 immunostaining",
-   "Biopsy to exclude malignancy and characterise the fibrosis",
-   "Echocardiography and, where indicated, right heart catheterisation for pulmonary hypertension",
-   "Ventilation-perfusion scanning, which may show perfusion defects mimicking chronic thromboembolic disease"
-  ],
-  "redFlags": [
-   "Superior vena cava syndrome with facial and upper limb swelling and distended neck veins",
-   "Haemoptysis from pulmonary vessel involvement",
-   "Exertional syncope or other signs of pulmonary hypertension and right heart failure",
-   "Rapidly progressive dysphagia or central airway compromise"
-  ],
-  "prognosis": "Outcome depends on the extent and bilaterality of vital-structure involvement. Unilateral disease is often compatible with prolonged survival, whereas bilateral central vascular and airway encasement carries substantial morbidity and mortality.",
-  "pitfalls": [
-   "Mistaking the infiltrative mass for malignancy on imaging, or vice versa, without tissue confirmation.",
-   "Overlooking treatable IgG4-related disease that may respond to corticosteroids or immunosuppression.",
-   "Misattributing perfusion defects to chronic thromboembolic disease and pursuing inappropriate pulmonary endarterectomy.",
-   "Expecting antifungal therapy to reverse established, burnt-out fibrosis."
-  ],
-  "references": [
-   "Respiratory medicine references",
-   "Mediastinal disease and thoracic imaging references",
-   "IgG4-related disease consensus references"
-  ],
-  "crossLinks": [],
-  "management": [
-   "For the IgG4-related or idiopathic infiltrative form, immunosuppression with corticosteroids and steroid-sparing agents such as rituximab",
-   "In histoplasma-associated disease, a trial of azole antifungal therapy such as itraconazole is sometimes used, though established fibrosis often responds poorly",
-   "Endovascular relief of vital-structure compression by stenting of the superior vena cava, pulmonary veins or arteries, or central airways for symptomatic obstruction",
-   "Symptomatic and supportive care of superior vena cava syndrome, breathlessness and post-obstructive complications",
-   "Surveillance for and management of pulmonary hypertension, guided by echocardiography and right-heart catheterisation",
-   "Multidisciplinary involvement of respiratory medicine, interventional radiology, thoracic surgery and infectious diseases, with biopsy to exclude malignancy",
-   "Escalation for life-threatening central airway or vascular compromise, recognising that extensive open surgical resection is hazardous"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "fibrosing_mediastinitis-pathway",
-   "title": "Fibrosing mediastinitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Rare disorder of invasive, dense mediastinal fibrosis that encases and compresses vital structures.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Superior vena cava syndrome with facial and upper limb swelling and distended neck veins",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Contrast-enhanced CT of the chest (infiltrative soft-tissue mass, calcification, vessel and airway encasement), MRI for soft-tissue characterisation and vascular involvement, Testing for Histoplasma and tuberculosis"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: For the IgG4-related or idiopathic infiltrative form, immunosuppression with corticosteroids and steroid-sparing agents such as rituximab"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking the infiltrative mass for malignancy on imaging, or vice versa, without tissue confirmation."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of fibrosing mediastinitis."
-  }
- ],
- "tables": [
-  {
-   "id": "fibrosing_mediastinitis-matrix",
-   "title": "Fibrosing mediastinitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Rare disorder of invasive, dense mediastinal fibrosis that encases and compresses vital structures.",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Respiratory / Mediastinum",
+  "specialty": "Respiratory medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Respiratory and thoracic medicine references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Rare disorder of invasive, dense mediastinal fibrosis that encases and compresses vital structures.",
+      "In endemic regions the commonest antecedent is prior Histoplasma capsulatum infection; tuberculosis is another recognised trigger.",
+      "The fibrosis represents an exuberant immune and fibrotic reaction rather than ongoing active infection.",
+      "A diffuse infiltrative form is frequently non-infectious and may belong to the IgG4-related disease spectrum.",
+      "Superior vena cava syndrome is a classic presentation; airway, pulmonary artery, pulmonary vein and oesophageal compression also occur.",
+      "Two patterns are described: a focal, often calcified granulomatous type and a diffuse infiltrative type.",
+      "Pulmonary vein or artery stenosis can cause pulmonary hypertension and mimic chronic thromboembolic disease on perfusion imaging.",
+      "Established, burnt-out fibrosis responds poorly to medical therapy; symptomatic vascular or airway stenosis may be palliated with endovascular or airway stenting."
     ],
-    [
-     "Key Investigations",
-     "Contrast-enhanced CT of the chest (infiltrative soft-tissue mass, calcification, vessel and airway encasement), MRI for",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Fibrosing mediastinitis is characterised by the proliferation of dense, invasive, largely acellular collagenous tissue within the mediastinum that infiltrates and encases vital structures. In endemic regions the commonest antecedent is Histoplasma capsulatum infection, and the disorder is thought to represent an exuberant, immunologically mediated fibrotic response to fungal antigens released from mediastinal lymph nodes rather than ongoing active infection; tuberculosis can provoke a similar reaction. A separate, diffuse infiltrative form is frequently non-infectious and increasingly recognised as part of the IgG4-related disease spectrum, with lymphoplasmacytic infiltrates, storiform fibrosis and obliterative phlebitis, while other associations include sarcoidosis, prior radiotherapy and certain drugs; a proportion remain idiopathic. Progressive fibrosis narrows or occludes the superior vena cava, pulmonary arteries and veins, central airways and oesophagus, producing the compressive syndromes that dominate the clinical picture, and pulmonary vascular obstruction may culminate in pulmonary hypertension and right heart strain.",
+    "additionalDifferentials": [
+      "Malignant mediastinal infiltration (lymphoma, metastatic carcinoma)",
+      "Sarcoidosis with mediastinal lymphadenopathy",
+      "IgG4-related disease with retroperitoneal fibrosis overlap",
+      "Primary mediastinal tumours",
+      "Superior vena cava thrombosis from indwelling devices",
+      "Chronic thromboembolic pulmonary hypertension (when pulmonary arteries are involved)",
+      "Constrictive pericarditis (compressive cardiac picture)"
     ],
-    [
-     "Primary Differentials",
-     "Malignant mediastinal infiltration (lymphoma, metastatic carcinoma), Sarcoidosis with mediastinal lymphadenopathy, IgG4-related",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Contrast-enhanced CT of the chest (infiltrative soft-tissue mass, calcification, vessel and airway encasement)",
+      "MRI for soft-tissue characterisation and vascular involvement",
+      "Testing for Histoplasma and tuberculosis (serology, antigen assays, interferon-gamma release assay)",
+      "Serum IgG4 with tissue IgG4 immunostaining",
+      "Biopsy to exclude malignancy and characterise the fibrosis",
+      "Echocardiography and, where indicated, right heart catheterisation for pulmonary hypertension",
+      "Ventilation-perfusion scanning, which may show perfusion defects mimicking chronic thromboembolic disease"
     ],
-    [
-     "Management Strategy",
-     "For the IgG4-related or idiopathic infiltrative form, immunosuppression with corticosteroids and steroid-sparing agents such as",
-     "Core treatment modality"
+    "redFlags": [
+      "Superior vena cava syndrome with facial and upper limb swelling and distended neck veins",
+      "Haemoptysis from pulmonary vessel involvement",
+      "Exertional syncope or other signs of pulmonary hypertension and right heart failure",
+      "Rapidly progressive dysphagia or central airway compromise"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking the infiltrative mass for malignancy on imaging, or vice versa, without tissue confirmation.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome depends on the extent and bilaterality of vital-structure involvement. Unilateral disease is often compatible with prolonged survival, whereas bilateral central vascular and airway encasement carries substantial morbidity and mortality.",
+    "pitfalls": [
+      "Mistaking the infiltrative mass for malignancy on imaging, or vice versa, without tissue confirmation.",
+      "Overlooking treatable IgG4-related disease that may respond to corticosteroids or immunosuppression.",
+      "Misattributing perfusion defects to chronic thromboembolic disease and pursuing inappropriate pulmonary endarterectomy.",
+      "Expecting antifungal therapy to reverse established, burnt-out fibrosis."
+    ],
+    "references": [
+      "Respiratory medicine references",
+      "Mediastinal disease and thoracic imaging references",
+      "IgG4-related disease consensus references"
+    ],
+    "crossLinks": [],
+    "management": [
+      "For the IgG4-related or idiopathic infiltrative form, immunosuppression with corticosteroids and steroid-sparing agents such as rituximab",
+      "In histoplasma-associated disease, a trial of azole antifungal therapy such as itraconazole is sometimes used, though established fibrosis often responds poorly",
+      "Endovascular relief of vital-structure compression by stenting of the superior vena cava, pulmonary veins or arteries, or central airways for symptomatic obstruction",
+      "Symptomatic and supportive care of superior vena cava syndrome, breathlessness and post-obstructive complications",
+      "Surveillance for and management of pulmonary hypertension, guided by echocardiography and right-heart catheterisation",
+      "Multidisciplinary involvement of respiratory medicine, interventional radiology, thoracic surgery and infectious diseases, with biopsy to exclude malignancy",
+      "Escalation for life-threatening central airway or vascular compromise, recognising that extensive open surgical resection is hazardous"
     ]
-   ],
-   "caption": "Overview comparison matrix for fibrosing mediastinitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "fibrosing-mediastinitis-real-image",
-   "title": "Fibrosing mediastinitis: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "fibrosing_mediastinitis-pathway",
+      "title": "Fibrosing mediastinitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Rare disorder of invasive, dense mediastinal fibrosis that encases and compresses vital structures.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Superior vena cava syndrome with facial and upper limb swelling and distended neck veins",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Contrast-enhanced CT of the chest (infiltrative soft-tissue mass, calcification, vessel and airway encasement), MRI for soft-tissue characterisation and vascular involvement, Testing for Histoplasma and tuberculosis"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: For the IgG4-related or idiopathic infiltrative form, immunosuppression with corticosteroids and steroid-sparing agents such as rituximab"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking the infiltrative mass for malignancy on imaging, or vice versa, without tissue confirmation."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of fibrosing mediastinitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "fibrosing_mediastinitis-matrix",
+      "title": "Fibrosing mediastinitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Rare disorder of invasive, dense mediastinal fibrosis that encases and compresses vital structures.",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Contrast-enhanced CT of the chest (infiltrative soft-tissue mass, calcification, vessel and airway encasement), MRI for",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Malignant mediastinal infiltration (lymphoma, metastatic carcinoma), Sarcoidosis with mediastinal lymphadenopathy, IgG4-related",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "For the IgG4-related or idiopathic infiltrative form, immunosuppression with corticosteroids and steroid-sparing agents such as",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking the infiltrative mass for malignancy on imaging, or vice versa, without tissue confirmation.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for fibrosing mediastinitis."
+    }
+  ],
+  "diagrams": []
 }

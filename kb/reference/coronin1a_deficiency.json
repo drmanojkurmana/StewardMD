@@ -1,177 +1,155 @@
 {
- "id": "coronin1a_deficiency",
- "name": "Coronin-1A deficiency",
- "aliases": [
-  "coronin-1A deficiency",
-  "CORO1A deficiency",
-  "coronin 1A combined immunodeficiency",
-  "T-cell lymphopenia with EBV-associated lymphoproliferation"
- ],
- "class": "non_infective",
- "system": "Immunology / Genetics",
- "specialty": "Clinical Immunology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Stiehm's Immunologic Disorders / IUIS classification",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An autosomal recessive combined immunodeficiency caused by loss of coronin-1A, an actin-regulatory protein critical for T-cell survival and migration",
-   "The characteristic laboratory finding is T-cell lymphopenia, which may be detected through newborn screening for severe combined immunodeficiency",
-   "Presentation ranges from a severe combined immunodeficiency phenotype in infancy to a milder combined immunodeficiency presenting later in childhood",
-   "Epstein-Barr-virus-driven lymphoproliferation and B-cell lymphoma are a distinctive complication reflecting impaired T-cell control of the virus",
-   "Recurrent respiratory and mucocutaneous infections occur, and some patients have features of immune dysregulation",
-   "Diagnosis combines demonstration of reduced naive T cells and impaired T-cell function with confirmatory CORO1A sequencing",
-   "Definitive treatment is haematopoietic stem cell transplantation, with immunoglobulin replacement and antimicrobial prophylaxis in the interim"
+  "id": "coronin1a_deficiency",
+  "name": "Coronin-1A deficiency",
+  "aliases": [
+    "coronin-1A deficiency",
+    "CORO1A deficiency",
+    "coronin 1A combined immunodeficiency",
+    "T-cell lymphopenia with EBV-associated lymphoproliferation"
   ],
-  "pathophysiology": "Coronin-1A, encoded by CORO1A, regulates the actin cytoskeleton and is highly expressed in lymphocytes, where it controls the dynamic actin remodelling needed for thymocyte egress, T-cell survival in the periphery, and T-cell migration and activation. When coronin-1A is deficient, T cells are inefficiently released from the thymus and fail to persist and move normally in the periphery, so naive T-cell numbers fall and T-cell responses are weakened. Because effective control of Epstein-Barr virus depends on cytotoxic T-cell surveillance, this T-cell defect allows the virus to drive B-cell proliferation and predisposes to lymphoproliferative disease and lymphoma. The resulting combined immunodeficiency underlies the susceptibility to recurrent and opportunistic infection.",
-  "additionalDifferentials": [
-   "Typical severe combined immunodeficiency of other genetic causes",
-   "Other actin-regulation defects such as DOCK2 and DOCK8 deficiency",
-   "X-linked lymphoproliferative disease and other EBV-susceptibility disorders",
-   "Idiopathic CD4 lymphopenia",
-   "Ataxia-telangiectasia and other combined immunodeficiencies with lymphopenia",
-   "Acquired T-cell lymphopenia including HIV"
-  ],
-  "additionalInvestigations": [
-   "Lymphocyte subset enumeration with naive and memory T-cell analysis",
-   "T-cell receptor excision circle quantification, including on newborn screening",
-   "T-cell proliferation and activation assays",
-   "Epstein-Barr virus load monitoring and assessment for lymphoproliferation",
-   "Quantitative immunoglobulins and specific antibody responses",
-   "Genetic sequencing of CORO1A",
-   "Imaging and histology where lymphoma is suspected"
-  ],
-  "redFlags": [
-   "Low naive T cells or an abnormal newborn severe combined immunodeficiency screen",
-   "Epstein-Barr-virus-associated lymphoproliferation or lymphoma",
-   "Severe or opportunistic infection in infancy",
-   "Failure to thrive with recurrent infection",
-   "Consanguinity with a family history of early infection or lymphoma"
-  ],
-  "prognosis": "Prognosis depends on severity and on timely recognition; severe infantile disease is life-threatening without haematopoietic stem cell transplantation, and the risk of Epstein-Barr-virus-driven lymphoproliferation adds to morbidity, so early transplantation offers the best outcome.",
-  "pitfalls": [
-   "Overlooking milder later-presenting disease when lymphopenia is only moderate",
-   "Attributing lymphoproliferation to primary lymphoma without recognising the underlying immunodeficiency",
-   "Giving live vaccines before the T-cell defect is excluded",
-   "Missing the diagnosis when newborn screening is unavailable",
-   "Delaying transplantation while managing recurrent infections"
-  ],
-  "references": [
-   "Stiehm's Immunologic Disorders in Infants and Children",
-   "IUIS Expert Committee classification of inborn errors of immunity"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Allogeneic haematopoietic stem cell transplantation is the definitive treatment, offering the best outcome and being life-saving in severe infantile combined immunodeficiency",
-   "Provide antimicrobial prophylaxis against Pneumocystis, fungal and viral pathogens while immunodeficient",
-   "Give immunoglobulin replacement therapy for impaired antibody responses and recurrent infection",
-   "Monitor Epstein-Barr virus load and treat virus-driven lymphoproliferation pre-emptively with rituximab, maintaining lymphoma surveillance",
-   "Avoid live vaccines and use irradiated, cytomegalovirus-safe blood products",
-   "Offer genetic counselling for this autosomal recessive disorder with family testing, and support newborn screening detection through low T-cell receptor excision circles",
-   "Manage through a clinical immunology and transplant multidisciplinary team with early referral"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "coronin1a_deficiency-pathway",
-   "title": "Coronin-1A deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autosomal recessive combined immunodeficiency caused by loss of coronin-1A, an actin-regulatory protein critical for T-cell survival and migration",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Low naive T cells or an abnormal newborn severe combined immunodeficiency screen",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Lymphocyte subset enumeration with naive and memory T-cell analysis, T-cell receptor excision circle quantification, including on newborn screening, T-cell proliferation and activation assays"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Allogeneic haematopoietic stem cell transplantation is the definitive treatment, offering the best outcome and being life-saving in severe infantile combined immunodeficiency"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking milder later-presenting disease when lymphopenia is only moderate"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of coronin-1a deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "coronin1a_deficiency-matrix",
-   "title": "Coronin-1A deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autosomal recessive combined immunodeficiency caused by loss of coronin-1A, an actin-regulatory protein critical for T-cell",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Immunology / Genetics",
+  "specialty": "Clinical Immunology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Stiehm's Immunologic Disorders / IUIS classification",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An autosomal recessive combined immunodeficiency caused by loss of coronin-1A, an actin-regulatory protein critical for T-cell survival and migration",
+      "The characteristic laboratory finding is T-cell lymphopenia, which may be detected through newborn screening for severe combined immunodeficiency",
+      "Presentation ranges from a severe combined immunodeficiency phenotype in infancy to a milder combined immunodeficiency presenting later in childhood",
+      "Epstein-Barr-virus-driven lymphoproliferation and B-cell lymphoma are a distinctive complication reflecting impaired T-cell control of the virus",
+      "Recurrent respiratory and mucocutaneous infections occur, and some patients have features of immune dysregulation",
+      "Diagnosis combines demonstration of reduced naive T cells and impaired T-cell function with confirmatory CORO1A sequencing",
+      "Definitive treatment is haematopoietic stem cell transplantation, with immunoglobulin replacement and antimicrobial prophylaxis in the interim"
     ],
-    [
-     "Key Investigations",
-     "Lymphocyte subset enumeration with naive and memory T-cell analysis, T-cell receptor excision circle quantification, including on",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Coronin-1A, encoded by CORO1A, regulates the actin cytoskeleton and is highly expressed in lymphocytes, where it controls the dynamic actin remodelling needed for thymocyte egress, T-cell survival in the periphery, and T-cell migration and activation. When coronin-1A is deficient, T cells are inefficiently released from the thymus and fail to persist and move normally in the periphery, so naive T-cell numbers fall and T-cell responses are weakened. Because effective control of Epstein-Barr virus depends on cytotoxic T-cell surveillance, this T-cell defect allows the virus to drive B-cell proliferation and predisposes to lymphoproliferative disease and lymphoma. The resulting combined immunodeficiency underlies the susceptibility to recurrent and opportunistic infection.",
+    "additionalDifferentials": [
+      "Typical severe combined immunodeficiency of other genetic causes",
+      "Other actin-regulation defects such as DOCK2 and DOCK8 deficiency",
+      "X-linked lymphoproliferative disease and other EBV-susceptibility disorders",
+      "Idiopathic CD4 lymphopenia",
+      "Ataxia-telangiectasia and other combined immunodeficiencies with lymphopenia",
+      "Acquired T-cell lymphopenia including HIV"
     ],
-    [
-     "Primary Differentials",
-     "Typical severe combined immunodeficiency of other genetic causes, Other actin-regulation defects such as DOCK2 and DOCK8",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Lymphocyte subset enumeration with naive and memory T-cell analysis",
+      "T-cell receptor excision circle quantification, including on newborn screening",
+      "T-cell proliferation and activation assays",
+      "Epstein-Barr virus load monitoring and assessment for lymphoproliferation",
+      "Quantitative immunoglobulins and specific antibody responses",
+      "Genetic sequencing of CORO1A",
+      "Imaging and histology where lymphoma is suspected"
     ],
-    [
-     "Management Strategy",
-     "Allogeneic haematopoietic stem cell transplantation is the definitive treatment, offering the best outcome and being life-saving",
-     "Core treatment modality"
+    "redFlags": [
+      "Low naive T cells or an abnormal newborn severe combined immunodeficiency screen",
+      "Epstein-Barr-virus-associated lymphoproliferation or lymphoma",
+      "Severe or opportunistic infection in infancy",
+      "Failure to thrive with recurrent infection",
+      "Consanguinity with a family history of early infection or lymphoma"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking milder later-presenting disease when lymphopenia is only moderate",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends on severity and on timely recognition; severe infantile disease is life-threatening without haematopoietic stem cell transplantation, and the risk of Epstein-Barr-virus-driven lymphoproliferation adds to morbidity, so early transplantation offers the best outcome.",
+    "pitfalls": [
+      "Overlooking milder later-presenting disease when lymphopenia is only moderate",
+      "Attributing lymphoproliferation to primary lymphoma without recognising the underlying immunodeficiency",
+      "Giving live vaccines before the T-cell defect is excluded",
+      "Missing the diagnosis when newborn screening is unavailable",
+      "Delaying transplantation while managing recurrent infections"
+    ],
+    "references": [
+      "Stiehm's Immunologic Disorders in Infants and Children",
+      "IUIS Expert Committee classification of inborn errors of immunity"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Allogeneic haematopoietic stem cell transplantation is the definitive treatment, offering the best outcome and being life-saving in severe infantile combined immunodeficiency",
+      "Provide antimicrobial prophylaxis against Pneumocystis, fungal and viral pathogens while immunodeficient",
+      "Give immunoglobulin replacement therapy for impaired antibody responses and recurrent infection",
+      "Monitor Epstein-Barr virus load and treat virus-driven lymphoproliferation pre-emptively with rituximab, maintaining lymphoma surveillance",
+      "Avoid live vaccines and use irradiated, cytomegalovirus-safe blood products",
+      "Offer genetic counselling for this autosomal recessive disorder with family testing, and support newborn screening detection through low T-cell receptor excision circles",
+      "Manage through a clinical immunology and transplant multidisciplinary team with early referral"
     ]
-   ],
-   "caption": "Overview comparison matrix for coronin-1a deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "coronin1a-deficiency-real-image",
-   "title": "Coronin-1A deficiency: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "coronin1a_deficiency-pathway",
+      "title": "Coronin-1A deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autosomal recessive combined immunodeficiency caused by loss of coronin-1A, an actin-regulatory protein critical for T-cell survival and migration",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Low naive T cells or an abnormal newborn severe combined immunodeficiency screen",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Lymphocyte subset enumeration with naive and memory T-cell analysis, T-cell receptor excision circle quantification, including on newborn screening, T-cell proliferation and activation assays"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Allogeneic haematopoietic stem cell transplantation is the definitive treatment, offering the best outcome and being life-saving in severe infantile combined immunodeficiency"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking milder later-presenting disease when lymphopenia is only moderate"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of coronin-1a deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "coronin1a_deficiency-matrix",
+      "title": "Coronin-1A deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autosomal recessive combined immunodeficiency caused by loss of coronin-1A, an actin-regulatory protein critical for T-cell",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Lymphocyte subset enumeration with naive and memory T-cell analysis, T-cell receptor excision circle quantification, including on",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Typical severe combined immunodeficiency of other genetic causes, Other actin-regulation defects such as DOCK2 and DOCK8",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Allogeneic haematopoietic stem cell transplantation is the definitive treatment, offering the best outcome and being life-saving",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking milder later-presenting disease when lymphopenia is only moderate",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for coronin-1a deficiency."
+    }
+  ],
+  "diagrams": []
 }

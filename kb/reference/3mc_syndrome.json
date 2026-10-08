@@ -1,174 +1,152 @@
 {
- "id": "3mc_syndrome",
- "name": "3MC syndrome",
- "aliases": [
-  "Malpuech-Michels-Mingarelli-Carnevale syndrome",
-  "Mingarelli-Malpuech-Michels-Carnevale spectrum",
-  "3MC syndrome types 1-4"
- ],
- "class": "non_infective",
- "system": "Genetics",
- "specialty": "Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / Smith's Recognizable Patterns of Human Malformation",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A unifying label for the overlapping Malpuech, Michels, Mingarelli, and Carnevale phenotypes, now recognised as one spectrum",
-   "Caused by biallelic variants in genes of the lectin complement pathway, including COLEC11, MASP1, and COLEC10",
-   "Characteristic facial features include hypertelorism, blepharophimosis, blepharoptosis, and highly arched eyebrows",
-   "Orofacial clefting, particularly cleft lip and palate, is a frequent finding",
-   "Craniosynostosis and other cranial anomalies occur in a proportion of individuals",
-   "Additional features may include growth restriction, developmental delay, genital anomalies, and umbilical abnormalities",
-   "The complement-pathway proteins involved guide neural crest cell migration during development, explaining the craniofacial emphasis",
-   "Diagnosis is confirmed by molecular testing of the relevant complement-pathway genes"
+  "id": "3mc_syndrome",
+  "name": "3MC syndrome",
+  "aliases": [
+    "Malpuech-Michels-Mingarelli-Carnevale syndrome",
+    "Mingarelli-Malpuech-Michels-Carnevale spectrum",
+    "3MC syndrome types 1-4"
   ],
-  "pathophysiology": "3MC syndrome arises from biallelic loss-of-function variants in genes encoding components of the lectin arm of the complement system, notably the collectins COLEC11 and COLEC10 and the serine protease MASP1/3. Beyond their classical role in innate immunity, these molecules act as extracellular guidance cues that direct the migration of neural crest cells during embryogenesis. When their function is lost, neural crest derivatives fail to migrate correctly, disturbing the development of craniofacial structures and other tissues that depend on neural crest contribution. This accounts for the hypertelorism, clefting, ptosis, craniosynostosis, and the range of additional developmental anomalies that characterise the spectrum, inherited in an autosomal recessive manner.",
-  "additionalDifferentials": [
-   "Blepharophimosis-ptosis-epicanthus inversus syndrome",
-   "Waardenburg syndrome and other neural crest disorders",
-   "Frontonasal dysplasia and midline craniofacial malformation syndromes",
-   "Other autosomal recessive intellectual disability syndromes with clefting",
-   "Craniosynostosis syndromes such as those due to fibroblast growth factor receptor variants",
-   "Kabuki syndrome with overlapping facial and developmental features"
-  ],
-  "additionalInvestigations": [
-   "Molecular testing of COLEC11, MASP1, and COLEC10, often via a gene panel or exome sequencing",
-   "Craniofacial imaging to assess for craniosynostosis and skull morphology",
-   "Ophthalmological assessment of ptosis, blepharophimosis, and vision",
-   "Cleft and palate evaluation with multidisciplinary input",
-   "Renal and genital assessment for associated structural anomalies",
-   "Developmental assessment and hearing testing"
-  ],
-  "redFlags": [
-   "Ptosis or blepharophimosis obstructing vision and risking amblyopia",
-   "Feeding or airway compromise related to orofacial clefting",
-   "Raised intracranial pressure from significant craniosynostosis",
-   "Major associated structural anomaly requiring surgical planning"
-  ],
-  "prognosis": "The prognosis varies with the severity of the malformations; many individuals have a normal lifespan, and craniofacial and ocular anomalies are often amenable to surgical correction, while the degree of any intellectual disability and the presence of major internal anomalies principally determine long-term function and support needs.",
-  "pitfalls": [
-   "Treating the historical eponymous conditions as distinct rather than as one spectrum, delaying correct testing",
-   "Overlooking craniosynostosis and its risk of raised intracranial pressure",
-   "Failing to address vision-threatening ptosis early in childhood",
-   "Not recognising the autosomal recessive inheritance when counselling consanguineous families"
-  ],
-  "references": [
-   "GeneReviews: 3MC syndrome",
-   "Smith's Recognizable Patterns of Human Malformation"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No disease-specific medical therapy; management centres on staged surgical correction of orofacial clefts such as cleft lip and palate repair.",
-   "Surgical management of craniosynostosis and of ptosis and blepharophimosis where these threaten vision or function.",
-   "Ophthalmological assessment and treatment of ptosis, blepharophimosis and refractive or visual problems.",
-   "Feeding support for clefting, with speech and language therapy and monitoring and management of hearing loss.",
-   "Assessment and management of associated renal, genital and umbilical anomalies.",
-   "Developmental assessment and educational support where intellectual disability is present.",
-   "Coordinated craniofacial multidisciplinary team care, with genetic counselling for this autosomal recessive condition and family screening."
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "3mc_syndrome-pathway",
-   "title": "3MC syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A unifying label for the overlapping Malpuech, Michels, Mingarelli, and Carnevale phenotypes, now recognised as one spectrum",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Ptosis or blepharophimosis obstructing vision and risking amblyopia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Molecular testing of COLEC11, MASP1, and COLEC10, often via a gene panel or exome sequencing, Craniofacial imaging to assess for craniosynostosis and skull morphology, Ophthalmological assessment of ptosis,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No disease-specific medical therapy; management centres on staged surgical correction of orofacial clefts such as cleft lip and palate repair."
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating the historical eponymous conditions as distinct rather than as one spectrum, delaying correct testing"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of 3mc syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "3mc_syndrome-matrix",
-   "title": "3MC syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A unifying label for the overlapping Malpuech, Michels, Mingarelli, and Carnevale phenotypes, now recognised as one spectrum",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetics",
+  "specialty": "Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / Smith's Recognizable Patterns of Human Malformation",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A unifying label for the overlapping Malpuech, Michels, Mingarelli, and Carnevale phenotypes, now recognised as one spectrum",
+      "Caused by biallelic variants in genes of the lectin complement pathway, including COLEC11, MASP1, and COLEC10",
+      "Characteristic facial features include hypertelorism, blepharophimosis, blepharoptosis, and highly arched eyebrows",
+      "Orofacial clefting, particularly cleft lip and palate, is a frequent finding",
+      "Craniosynostosis and other cranial anomalies occur in a proportion of individuals",
+      "Additional features may include growth restriction, developmental delay, genital anomalies, and umbilical abnormalities",
+      "The complement-pathway proteins involved guide neural crest cell migration during development, explaining the craniofacial emphasis",
+      "Diagnosis is confirmed by molecular testing of the relevant complement-pathway genes"
     ],
-    [
-     "Key Investigations",
-     "Molecular testing of COLEC11, MASP1, and COLEC10, often via a gene panel or exome sequencing, Craniofacial imaging to assess for",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "3MC syndrome arises from biallelic loss-of-function variants in genes encoding components of the lectin arm of the complement system, notably the collectins COLEC11 and COLEC10 and the serine protease MASP1/3. Beyond their classical role in innate immunity, these molecules act as extracellular guidance cues that direct the migration of neural crest cells during embryogenesis. When their function is lost, neural crest derivatives fail to migrate correctly, disturbing the development of craniofacial structures and other tissues that depend on neural crest contribution. This accounts for the hypertelorism, clefting, ptosis, craniosynostosis, and the range of additional developmental anomalies that characterise the spectrum, inherited in an autosomal recessive manner.",
+    "additionalDifferentials": [
+      "Blepharophimosis-ptosis-epicanthus inversus syndrome",
+      "Waardenburg syndrome and other neural crest disorders",
+      "Frontonasal dysplasia and midline craniofacial malformation syndromes",
+      "Other autosomal recessive intellectual disability syndromes with clefting",
+      "Craniosynostosis syndromes such as those due to fibroblast growth factor receptor variants",
+      "Kabuki syndrome with overlapping facial and developmental features"
     ],
-    [
-     "Primary Differentials",
-     "Blepharophimosis-ptosis-epicanthus inversus syndrome, Waardenburg syndrome and other neural crest disorders, Frontonasal",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Molecular testing of COLEC11, MASP1, and COLEC10, often via a gene panel or exome sequencing",
+      "Craniofacial imaging to assess for craniosynostosis and skull morphology",
+      "Ophthalmological assessment of ptosis, blepharophimosis, and vision",
+      "Cleft and palate evaluation with multidisciplinary input",
+      "Renal and genital assessment for associated structural anomalies",
+      "Developmental assessment and hearing testing"
     ],
-    [
-     "Management Strategy",
-     "No disease-specific medical therapy; management centres on staged surgical correction of orofacial clefts such as cleft lip and",
-     "Core treatment modality"
+    "redFlags": [
+      "Ptosis or blepharophimosis obstructing vision and risking amblyopia",
+      "Feeding or airway compromise related to orofacial clefting",
+      "Raised intracranial pressure from significant craniosynostosis",
+      "Major associated structural anomaly requiring surgical planning"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating the historical eponymous conditions as distinct rather than as one spectrum, delaying correct testing",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis varies with the severity of the malformations; many individuals have a normal lifespan, and craniofacial and ocular anomalies are often amenable to surgical correction, while the degree of any intellectual disability and the presence of major internal anomalies principally determine long-term function and support needs.",
+    "pitfalls": [
+      "Treating the historical eponymous conditions as distinct rather than as one spectrum, delaying correct testing",
+      "Overlooking craniosynostosis and its risk of raised intracranial pressure",
+      "Failing to address vision-threatening ptosis early in childhood",
+      "Not recognising the autosomal recessive inheritance when counselling consanguineous families"
+    ],
+    "references": [
+      "GeneReviews: 3MC syndrome",
+      "Smith's Recognizable Patterns of Human Malformation"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No disease-specific medical therapy; management centres on staged surgical correction of orofacial clefts such as cleft lip and palate repair.",
+      "Surgical management of craniosynostosis and of ptosis and blepharophimosis where these threaten vision or function.",
+      "Ophthalmological assessment and treatment of ptosis, blepharophimosis and refractive or visual problems.",
+      "Feeding support for clefting, with speech and language therapy and monitoring and management of hearing loss.",
+      "Assessment and management of associated renal, genital and umbilical anomalies.",
+      "Developmental assessment and educational support where intellectual disability is present.",
+      "Coordinated craniofacial multidisciplinary team care, with genetic counselling for this autosomal recessive condition and family screening."
     ]
-   ],
-   "caption": "Overview comparison matrix for 3mc syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "3mc-syndrome-real-image",
-   "title": "3MC syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "3mc_syndrome-pathway",
+      "title": "3MC syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A unifying label for the overlapping Malpuech, Michels, Mingarelli, and Carnevale phenotypes, now recognised as one spectrum",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Ptosis or blepharophimosis obstructing vision and risking amblyopia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Molecular testing of COLEC11, MASP1, and COLEC10, often via a gene panel or exome sequencing, Craniofacial imaging to assess for craniosynostosis and skull morphology, Ophthalmological assessment of ptosis,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No disease-specific medical therapy; management centres on staged surgical correction of orofacial clefts such as cleft lip and palate repair."
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating the historical eponymous conditions as distinct rather than as one spectrum, delaying correct testing"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of 3mc syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "3mc_syndrome-matrix",
+      "title": "3MC syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A unifying label for the overlapping Malpuech, Michels, Mingarelli, and Carnevale phenotypes, now recognised as one spectrum",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Molecular testing of COLEC11, MASP1, and COLEC10, often via a gene panel or exome sequencing, Craniofacial imaging to assess for",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Blepharophimosis-ptosis-epicanthus inversus syndrome, Waardenburg syndrome and other neural crest disorders, Frontonasal",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No disease-specific medical therapy; management centres on staged surgical correction of orofacial clefts such as cleft lip and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating the historical eponymous conditions as distinct rather than as one spectrum, delaying correct testing",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for 3mc syndrome."
+    }
+  ],
+  "diagrams": []
 }

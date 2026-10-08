@@ -1,180 +1,158 @@
 {
- "id": "mhc_class_ii_deficiency",
- "name": "MHC class II deficiency (bare lymphocyte syndrome type II)",
- "aliases": [
-  "bare lymphocyte syndrome type II",
-  "BLS type II",
-  "CIITA",
-  "RFX5",
-  "RFXAP",
-  "RFXANK",
-  "HLA class II deficiency"
- ],
- "class": "non_infective",
- "system": "Immunology / Genetics",
- "specialty": "Clinical Immunology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Stiehm's Immunologic Disorders / IUIS classification of inborn errors of immunity",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents in infancy or early childhood with a combined immunodeficiency, recurrent respiratory and gastrointestinal infection, chronic diarrhoea and failure to thrive",
-   "The defining feature is absent HLA class II (HLA-DR, DP, DQ) expression on antigen-presenting cells and other cells, demonstrated by flow cytometry",
-   "It is not caused by defects in the HLA genes themselves but by mutations in the transcription factors that regulate their expression, principally CIITA, RFX5, RFXAP and RFXANK",
-   "Because positive selection of CD4 cells depends on class II, there is marked CD4 T-cell lymphopenia with a reduced CD4:CD8 ratio, while CD8 numbers are relatively preserved",
-   "Antibody responses are impaired owing to defective CD4-dependent T-cell help despite normal B-cell numbers, producing hypogammaglobulinaemia",
-   "Sclerosing cholangitis, often linked to chronic Cryptosporidium infection, and other opportunistic infections are important complications",
-   "Inheritance is autosomal recessive and is more prevalent in populations with high consanguinity, notably of North African origin",
-   "Allogeneic haematopoietic stem cell transplantation is the only curative treatment but outcomes are less favourable than in some other combined immunodeficiencies"
+  "id": "mhc_class_ii_deficiency",
+  "name": "MHC class II deficiency (bare lymphocyte syndrome type II)",
+  "aliases": [
+    "bare lymphocyte syndrome type II",
+    "BLS type II",
+    "CIITA",
+    "RFX5",
+    "RFXAP",
+    "RFXANK",
+    "HLA class II deficiency"
   ],
-  "pathophysiology": "MHC class II deficiency results from loss-of-function variants in the transcriptional regulators that drive HLA class II gene expression, most often CIITA, RFX5, RFXAP or RFXANK, rather than from defects in the HLA loci themselves. Without these regulators, class II molecules are not expressed on antigen-presenting cells, so peptides cannot be presented to CD4 T cells; positive selection of CD4 thymocytes fails, causing profound CD4 lymphopenia, and mature CD4 cells cannot be activated. The lack of effective CD4 help cripples antibody production and cell-mediated immunity, yielding a combined immunodeficiency with susceptibility to a broad range of viral, bacterial, fungal and protozoal pathogens.",
-  "additionalDifferentials": [
-   "Severe combined immunodeficiency of other genotype",
-   "MHC class I deficiency (bare lymphocyte syndrome type I)",
-   "CD4 lymphopenia from other T-cell defects",
-   "Idiopathic CD4 lymphopenia",
-   "HIV infection",
-   "Hyper-IgM syndromes"
-  ],
-  "additionalInvestigations": [
-   "Flow cytometry for HLA class II (HLA-DR) expression on monocytes and B cells",
-   "Lymphocyte subsets showing CD4 lymphopenia and a reduced CD4:CD8 ratio",
-   "Serum immunoglobulins and specific antibody responses",
-   "Lymphocyte proliferation assays",
-   "Sequencing of CIITA, RFX5, RFXAP and RFXANK",
-   "Investigation for opportunistic infection including Cryptosporidium and hepatobiliary imaging for sclerosing cholangitis"
-  ],
-  "redFlags": [
-   "Progressive cholestasis suggesting sclerosing cholangitis with cryptosporidial infection",
-   "Opportunistic or disseminated infection in an infant with CD4 lymphopenia",
-   "Failure to thrive with chronic intractable diarrhoea",
-   "Complications following live vaccination or non-irradiated blood products",
-   "Rapid clinical deterioration awaiting transplantation"
-  ],
-  "prognosis": "The natural history is poor with early mortality from infection and hepatobiliary disease; allogeneic haematopoietic stem cell transplantation offers the only cure but survival is lower than for several other combined immunodeficiencies, underlining the value of early diagnosis.",
-  "pitfalls": [
-   "Assuming the defect lies in the HLA genes rather than their transcriptional regulators",
-   "Overlooking the diagnosis because B-cell numbers and total lymphocyte count can be normal",
-   "Not measuring HLA class II expression directly by flow cytometry",
-   "Missing cryptosporidial infection and evolving sclerosing cholangitis",
-   "Giving live vaccines or non-irradiated blood products before diagnosis"
-  ],
-  "references": [
-   "Stiehm's Immunologic Disorders in Infants and Children",
-   "IUIS Expert Committee classification of inborn errors of immunity"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Offer early allogeneic haematopoietic stem cell transplantation as the only curative treatment for this combined immunodeficiency",
-   "Give infection prophylaxis with co-trimoxazole against Pneumocystis alongside antifungal and antiviral prophylaxis",
-   "Provide immunoglobulin replacement therapy for the associated antibody deficiency",
-   "Treat intercurrent and opportunistic infections aggressively, using only irradiated cytomegalovirus-safe blood products and avoiding live vaccines",
-   "Prevent Cryptosporidium exposure with boiled or filtered water and undertake hepatobiliary surveillance for sclerosing cholangitis",
-   "Provide nutritional support for chronic diarrhoea and failure to thrive through immunology, transplant, and hepatology teams",
-   "Offer genetic counselling and family screening for the causative transcription-factor variants (CIITA, RFX5, RFXAP, RFXANK) and HLA-type siblings as potential donors"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "mhc_class_ii_deficiency-pathway",
-   "title": "MHC class II deficiency (bare lymphocyte syndrome type II): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents in infancy or early childhood with a combined immunodeficiency, recurrent respiratory and gastrointestinal infection, chronic diarrhoea and failure to thrive",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive cholestasis suggesting sclerosing cholangitis with cryptosporidial infection",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Flow cytometry for HLA class II (HLA-DR) expression on monocytes and B cells, Lymphocyte subsets showing CD4 lymphopenia and a reduced CD4:CD8 ratio, Serum immunoglobulins and specific antibody responses"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Offer early allogeneic haematopoietic stem cell transplantation as the only curative treatment for this combined immunodeficiency"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming the defect lies in the HLA genes rather than their transcriptional regulators"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of mhc class ii deficiency (bare lymphocyte syndrome type ii)."
-  }
- ],
- "tables": [
-  {
-   "id": "mhc_class_ii_deficiency-matrix",
-   "title": "MHC class II deficiency (bare lymphocyte syndrome type II): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents in infancy or early childhood with a combined immunodeficiency, recurrent respiratory and gastrointestinal infection,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Immunology / Genetics",
+  "specialty": "Clinical Immunology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Stiehm's Immunologic Disorders / IUIS classification of inborn errors of immunity",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents in infancy or early childhood with a combined immunodeficiency, recurrent respiratory and gastrointestinal infection, chronic diarrhoea and failure to thrive",
+      "The defining feature is absent HLA class II (HLA-DR, DP, DQ) expression on antigen-presenting cells and other cells, demonstrated by flow cytometry",
+      "It is not caused by defects in the HLA genes themselves but by mutations in the transcription factors that regulate their expression, principally CIITA, RFX5, RFXAP and RFXANK",
+      "Because positive selection of CD4 cells depends on class II, there is marked CD4 T-cell lymphopenia with a reduced CD4:CD8 ratio, while CD8 numbers are relatively preserved",
+      "Antibody responses are impaired owing to defective CD4-dependent T-cell help despite normal B-cell numbers, producing hypogammaglobulinaemia",
+      "Sclerosing cholangitis, often linked to chronic Cryptosporidium infection, and other opportunistic infections are important complications",
+      "Inheritance is autosomal recessive and is more prevalent in populations with high consanguinity, notably of North African origin",
+      "Allogeneic haematopoietic stem cell transplantation is the only curative treatment but outcomes are less favourable than in some other combined immunodeficiencies"
     ],
-    [
-     "Key Investigations",
-     "Flow cytometry for HLA class II (HLA-DR) expression on monocytes and B cells, Lymphocyte subsets showing CD4 lymphopenia and a",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "MHC class II deficiency results from loss-of-function variants in the transcriptional regulators that drive HLA class II gene expression, most often CIITA, RFX5, RFXAP or RFXANK, rather than from defects in the HLA loci themselves. Without these regulators, class II molecules are not expressed on antigen-presenting cells, so peptides cannot be presented to CD4 T cells; positive selection of CD4 thymocytes fails, causing profound CD4 lymphopenia, and mature CD4 cells cannot be activated. The lack of effective CD4 help cripples antibody production and cell-mediated immunity, yielding a combined immunodeficiency with susceptibility to a broad range of viral, bacterial, fungal and protozoal pathogens.",
+    "additionalDifferentials": [
+      "Severe combined immunodeficiency of other genotype",
+      "MHC class I deficiency (bare lymphocyte syndrome type I)",
+      "CD4 lymphopenia from other T-cell defects",
+      "Idiopathic CD4 lymphopenia",
+      "HIV infection",
+      "Hyper-IgM syndromes"
     ],
-    [
-     "Primary Differentials",
-     "Severe combined immunodeficiency of other genotype, MHC class I deficiency (bare lymphocyte syndrome type I), CD4 lymphopenia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Flow cytometry for HLA class II (HLA-DR) expression on monocytes and B cells",
+      "Lymphocyte subsets showing CD4 lymphopenia and a reduced CD4:CD8 ratio",
+      "Serum immunoglobulins and specific antibody responses",
+      "Lymphocyte proliferation assays",
+      "Sequencing of CIITA, RFX5, RFXAP and RFXANK",
+      "Investigation for opportunistic infection including Cryptosporidium and hepatobiliary imaging for sclerosing cholangitis"
     ],
-    [
-     "Management Strategy",
-     "Offer early allogeneic haematopoietic stem cell transplantation as the only curative treatment for this combined immunodeficiency",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive cholestasis suggesting sclerosing cholangitis with cryptosporidial infection",
+      "Opportunistic or disseminated infection in an infant with CD4 lymphopenia",
+      "Failure to thrive with chronic intractable diarrhoea",
+      "Complications following live vaccination or non-irradiated blood products",
+      "Rapid clinical deterioration awaiting transplantation"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming the defect lies in the HLA genes rather than their transcriptional regulators",
-     "Prevent diagnostic or management error"
+    "prognosis": "The natural history is poor with early mortality from infection and hepatobiliary disease; allogeneic haematopoietic stem cell transplantation offers the only cure but survival is lower than for several other combined immunodeficiencies, underlining the value of early diagnosis.",
+    "pitfalls": [
+      "Assuming the defect lies in the HLA genes rather than their transcriptional regulators",
+      "Overlooking the diagnosis because B-cell numbers and total lymphocyte count can be normal",
+      "Not measuring HLA class II expression directly by flow cytometry",
+      "Missing cryptosporidial infection and evolving sclerosing cholangitis",
+      "Giving live vaccines or non-irradiated blood products before diagnosis"
+    ],
+    "references": [
+      "Stiehm's Immunologic Disorders in Infants and Children",
+      "IUIS Expert Committee classification of inborn errors of immunity"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Offer early allogeneic haematopoietic stem cell transplantation as the only curative treatment for this combined immunodeficiency",
+      "Give infection prophylaxis with co-trimoxazole against Pneumocystis alongside antifungal and antiviral prophylaxis",
+      "Provide immunoglobulin replacement therapy for the associated antibody deficiency",
+      "Treat intercurrent and opportunistic infections aggressively, using only irradiated cytomegalovirus-safe blood products and avoiding live vaccines",
+      "Prevent Cryptosporidium exposure with boiled or filtered water and undertake hepatobiliary surveillance for sclerosing cholangitis",
+      "Provide nutritional support for chronic diarrhoea and failure to thrive through immunology, transplant, and hepatology teams",
+      "Offer genetic counselling and family screening for the causative transcription-factor variants (CIITA, RFX5, RFXAP, RFXANK) and HLA-type siblings as potential donors"
     ]
-   ],
-   "caption": "Overview comparison matrix for mhc class ii deficiency (bare lymphocyte syndrome type ii)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "mhc-class-ii-deficiency-real-image",
-   "title": "MHC class II deficiency (bare lymphocyte syndrome type II): Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "mhc_class_ii_deficiency-pathway",
+      "title": "MHC class II deficiency (bare lymphocyte syndrome type II): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents in infancy or early childhood with a combined immunodeficiency, recurrent respiratory and gastrointestinal infection, chronic diarrhoea and failure to thrive",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive cholestasis suggesting sclerosing cholangitis with cryptosporidial infection",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Flow cytometry for HLA class II (HLA-DR) expression on monocytes and B cells, Lymphocyte subsets showing CD4 lymphopenia and a reduced CD4:CD8 ratio, Serum immunoglobulins and specific antibody responses"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Offer early allogeneic haematopoietic stem cell transplantation as the only curative treatment for this combined immunodeficiency"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming the defect lies in the HLA genes rather than their transcriptional regulators"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of mhc class ii deficiency (bare lymphocyte syndrome type ii)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "mhc_class_ii_deficiency-matrix",
+      "title": "MHC class II deficiency (bare lymphocyte syndrome type II): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents in infancy or early childhood with a combined immunodeficiency, recurrent respiratory and gastrointestinal infection,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Flow cytometry for HLA class II (HLA-DR) expression on monocytes and B cells, Lymphocyte subsets showing CD4 lymphopenia and a",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Severe combined immunodeficiency of other genotype, MHC class I deficiency (bare lymphocyte syndrome type I), CD4 lymphopenia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Offer early allogeneic haematopoietic stem cell transplantation as the only curative treatment for this combined immunodeficiency",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming the defect lies in the HLA genes rather than their transcriptional regulators",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for mhc class ii deficiency (bare lymphocyte syndrome type ii)."
+    }
+  ],
+  "diagrams": []
 }

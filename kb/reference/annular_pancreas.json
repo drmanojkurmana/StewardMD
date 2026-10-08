@@ -1,172 +1,150 @@
 {
- "id": "annular_pancreas",
- "name": "Annular pancreas",
- "aliases": [
-  "annular pancreatic ring",
-  "pancreatic ring anomaly"
- ],
- "class": "non_infective",
- "system": "Gastroenterology / Hepatobiliary",
- "specialty": "Hepatobiliary / Pancreatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A congenital anomaly in which a ring of pancreatic tissue encircles the second part of the duodenum, potentially obstructing it",
-   "Has a bimodal presentation: neonates with duodenal obstruction and vomiting, and adults presenting later with pancreatitis, peptic ulceration, or obstructive symptoms",
-   "In neonates it may produce the double-bubble sign on plain radiography and is associated with Down syndrome, malrotation, and other atresias",
-   "Many adult cases are asymptomatic and discovered incidentally on cross-sectional imaging or endoscopy",
-   "CT or MRI with MRCP demonstrates pancreatic tissue surrounding the descending duodenum and can show the annular duct",
-   "Symptomatic obstruction is treated surgically by bypass (usually duodenoduodenostomy or gastrojejunostomy) rather than by dividing the ring, which risks fistula and pancreatitis",
-   "The encircling parenchyma may be complete or incomplete, which influences the degree of obstruction"
+  "id": "annular_pancreas",
+  "name": "Annular pancreas",
+  "aliases": [
+    "annular pancreatic ring",
+    "pancreatic ring anomaly"
   ],
-  "pathophysiology": "Annular pancreas arises from a failure of normal rotation and fusion of the ventral pancreatic bud during embryogenesis, so that pancreatic tissue comes to encircle the descending (second part of the) duodenum instead of migrating to lie posterior to it. The resulting ring of normal exocrine pancreatic tissue, which contains its own duct system draining into the main pancreatic or bile duct, can constrict the duodenal lumen. The degree of narrowing determines whether obstruction manifests in the newborn period or only later in life, and the abnormal ductal anatomy also predisposes to pancreatitis. Because it is normal pancreatic parenchyma, the ring shares in any inflammatory or neoplastic process affecting the gland.",
-  "additionalDifferentials": [
-   "Duodenal atresia or web",
-   "Malrotation with midgut volvulus",
-   "Duodenal stenosis from other causes",
-   "Superior mesenteric artery (Wilkie) syndrome",
-   "Pancreatic head mass causing extrinsic duodenal compression",
-   "Peptic stricture of the duodenum"
-  ],
-  "additionalInvestigations": [
-   "Abdominal radiography in neonates to detect the double-bubble sign",
-   "Contrast-enhanced CT to show pancreatic tissue encircling the duodenum",
-   "MRI with MRCP to define the annular duct and biliary anatomy",
-   "Upper gastrointestinal contrast study to demonstrate the level and degree of obstruction",
-   "Upper endoscopy to assess the duodenal lumen and exclude mucosal pathology",
-   "Serum amylase and lipase if pancreatitis is suspected"
-  ],
-  "redFlags": [
-   "Bilious vomiting in a neonate requiring urgent evaluation for obstruction and malrotation",
-   "Complete high-grade duodenal obstruction",
-   "Superimposed acute pancreatitis with systemic upset",
-   "An associated pancreatic head mass on imaging"
-  ],
-  "prognosis": "Asymptomatic incidental annular pancreas needs no treatment and has an excellent outlook; symptomatic obstruction generally resolves well after a bypass procedure, though associated congenital anomalies in neonates influence overall outcome.",
-  "pitfalls": [
-   "Dividing the pancreatic ring surgically, which risks pancreatic fistula, pancreatitis, and recurrent obstruction",
-   "Overlooking coexisting duodenal atresia, malrotation, or other anomalies in affected neonates",
-   "Attributing adult symptoms solely to the anomaly without excluding peptic disease or malignancy",
-   "Missing the diagnosis when the ring is incomplete and obstruction is subtle"
-  ],
-  "references": [
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-   "Paediatric surgery texts on congenital duodenal obstruction",
-   "Radiology reviews of pancreatic developmental anomalies"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage asymptomatic incidental disease with reassurance and no intervention",
-   "Relieve symptomatic duodenal obstruction by surgical bypass such as duodenoduodenostomy or gastrojejunostomy rather than dividing the ring, which risks fistula and pancreatitis",
-   "Stabilise the obstructed neonate with nasogastric decompression and fluid and electrolyte resuscitation before surgery",
-   "Treat associated pancreatitis supportively with fluids, analgesia, and rest of oral intake",
-   "Actively screen for and manage associated anomalies including Down syndrome, malrotation, and duodenal atresia",
-   "Refer to paediatric or hepatobiliary surgery and provide pancreatology follow-up"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "annular_pancreas-pathway",
-   "title": "Annular pancreas: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A congenital anomaly in which a ring of pancreatic tissue encircles the second part of the duodenum, potentially obstructing it",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Bilious vomiting in a neonate requiring urgent evaluation for obstruction and malrotation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Abdominal radiography in neonates to detect the double-bubble sign, Contrast-enhanced CT to show pancreatic tissue encircling the duodenum, MRI with MRCP to define the annular duct and biliary anatomy"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage asymptomatic incidental disease with reassurance and no intervention"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dividing the pancreatic ring surgically, which risks pancreatic fistula, pancreatitis, and recurrent obstruction"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of annular pancreas."
-  }
- ],
- "tables": [
-  {
-   "id": "annular_pancreas-matrix",
-   "title": "Annular pancreas: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A congenital anomaly in which a ring of pancreatic tissue encircles the second part of the duodenum, potentially obstructing it",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastroenterology / Hepatobiliary",
+  "specialty": "Hepatobiliary / Pancreatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A congenital anomaly in which a ring of pancreatic tissue encircles the second part of the duodenum, potentially obstructing it",
+      "Has a bimodal presentation: neonates with duodenal obstruction and vomiting, and adults presenting later with pancreatitis, peptic ulceration, or obstructive symptoms",
+      "In neonates it may produce the double-bubble sign on plain radiography and is associated with Down syndrome, malrotation, and other atresias",
+      "Many adult cases are asymptomatic and discovered incidentally on cross-sectional imaging or endoscopy",
+      "CT or MRI with MRCP demonstrates pancreatic tissue surrounding the descending duodenum and can show the annular duct",
+      "Symptomatic obstruction is treated surgically by bypass (usually duodenoduodenostomy or gastrojejunostomy) rather than by dividing the ring, which risks fistula and pancreatitis",
+      "The encircling parenchyma may be complete or incomplete, which influences the degree of obstruction"
     ],
-    [
-     "Key Investigations",
-     "Abdominal radiography in neonates to detect the double-bubble sign, Contrast-enhanced CT to show pancreatic tissue encircling the",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Annular pancreas arises from a failure of normal rotation and fusion of the ventral pancreatic bud during embryogenesis, so that pancreatic tissue comes to encircle the descending (second part of the) duodenum instead of migrating to lie posterior to it. The resulting ring of normal exocrine pancreatic tissue, which contains its own duct system draining into the main pancreatic or bile duct, can constrict the duodenal lumen. The degree of narrowing determines whether obstruction manifests in the newborn period or only later in life, and the abnormal ductal anatomy also predisposes to pancreatitis. Because it is normal pancreatic parenchyma, the ring shares in any inflammatory or neoplastic process affecting the gland.",
+    "additionalDifferentials": [
+      "Duodenal atresia or web",
+      "Malrotation with midgut volvulus",
+      "Duodenal stenosis from other causes",
+      "Superior mesenteric artery (Wilkie) syndrome",
+      "Pancreatic head mass causing extrinsic duodenal compression",
+      "Peptic stricture of the duodenum"
     ],
-    [
-     "Primary Differentials",
-     "Duodenal atresia or web, Malrotation with midgut volvulus, Duodenal stenosis from other causes",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Abdominal radiography in neonates to detect the double-bubble sign",
+      "Contrast-enhanced CT to show pancreatic tissue encircling the duodenum",
+      "MRI with MRCP to define the annular duct and biliary anatomy",
+      "Upper gastrointestinal contrast study to demonstrate the level and degree of obstruction",
+      "Upper endoscopy to assess the duodenal lumen and exclude mucosal pathology",
+      "Serum amylase and lipase if pancreatitis is suspected"
     ],
-    [
-     "Management Strategy",
-     "Manage asymptomatic incidental disease with reassurance and no intervention",
-     "Core treatment modality"
+    "redFlags": [
+      "Bilious vomiting in a neonate requiring urgent evaluation for obstruction and malrotation",
+      "Complete high-grade duodenal obstruction",
+      "Superimposed acute pancreatitis with systemic upset",
+      "An associated pancreatic head mass on imaging"
     ],
-    [
-     "Clinical Pitfall",
-     "Dividing the pancreatic ring surgically, which risks pancreatic fistula, pancreatitis, and recurrent obstruction",
-     "Prevent diagnostic or management error"
+    "prognosis": "Asymptomatic incidental annular pancreas needs no treatment and has an excellent outlook; symptomatic obstruction generally resolves well after a bypass procedure, though associated congenital anomalies in neonates influence overall outcome.",
+    "pitfalls": [
+      "Dividing the pancreatic ring surgically, which risks pancreatic fistula, pancreatitis, and recurrent obstruction",
+      "Overlooking coexisting duodenal atresia, malrotation, or other anomalies in affected neonates",
+      "Attributing adult symptoms solely to the anomaly without excluding peptic disease or malignancy",
+      "Missing the diagnosis when the ring is incomplete and obstruction is subtle"
+    ],
+    "references": [
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "Paediatric surgery texts on congenital duodenal obstruction",
+      "Radiology reviews of pancreatic developmental anomalies"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage asymptomatic incidental disease with reassurance and no intervention",
+      "Relieve symptomatic duodenal obstruction by surgical bypass such as duodenoduodenostomy or gastrojejunostomy rather than dividing the ring, which risks fistula and pancreatitis",
+      "Stabilise the obstructed neonate with nasogastric decompression and fluid and electrolyte resuscitation before surgery",
+      "Treat associated pancreatitis supportively with fluids, analgesia, and rest of oral intake",
+      "Actively screen for and manage associated anomalies including Down syndrome, malrotation, and duodenal atresia",
+      "Refer to paediatric or hepatobiliary surgery and provide pancreatology follow-up"
     ]
-   ],
-   "caption": "Overview comparison matrix for annular pancreas."
-  }
- ],
- "diagrams": [
-  {
-   "id": "annular-pancreas-real-image",
-   "title": "Annular pancreas: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "annular_pancreas-pathway",
+      "title": "Annular pancreas: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A congenital anomaly in which a ring of pancreatic tissue encircles the second part of the duodenum, potentially obstructing it",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Bilious vomiting in a neonate requiring urgent evaluation for obstruction and malrotation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Abdominal radiography in neonates to detect the double-bubble sign, Contrast-enhanced CT to show pancreatic tissue encircling the duodenum, MRI with MRCP to define the annular duct and biliary anatomy"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage asymptomatic incidental disease with reassurance and no intervention"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dividing the pancreatic ring surgically, which risks pancreatic fistula, pancreatitis, and recurrent obstruction"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of annular pancreas."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "annular_pancreas-matrix",
+      "title": "Annular pancreas: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A congenital anomaly in which a ring of pancreatic tissue encircles the second part of the duodenum, potentially obstructing it",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Abdominal radiography in neonates to detect the double-bubble sign, Contrast-enhanced CT to show pancreatic tissue encircling the",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Duodenal atresia or web, Malrotation with midgut volvulus, Duodenal stenosis from other causes",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage asymptomatic incidental disease with reassurance and no intervention",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dividing the pancreatic ring surgically, which risks pancreatic fistula, pancreatitis, and recurrent obstruction",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for annular pancreas."
+    }
+  ],
+  "diagrams": []
 }

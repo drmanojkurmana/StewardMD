@@ -227,29 +227,7 @@
       "caption": "Core clinical management matrix for acute kidney injury (adult)."
     }
   ],
-  "diagrams": [
-    {
-      "id": "acute-kidney-injury-real-image",
-      "title": "Acute kidney injury (adult): Diagnostic Renal Ultrasonography",
-      "type": "ultrasound",
-      "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-      "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-      "annotations": [
-        {
-          "label": "Renal Cortex",
-          "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-        },
-        {
-          "label": "Corticomedullary Junction",
-          "description": "Medullary pyramid definition and structural architecture."
-        },
-        {
-          "label": "Collecting System",
-          "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
-        }
-      ]
-    }
-  ],
+  "diagrams": [],
   "citations": [
     {
       "id": "c2",
@@ -268,7 +246,7 @@
       ],
       "rows": [
         {
-          "parameter": "BUN/creatinine ratio",
+          "parameter": "BUN/creatinine ratio (BUN, not urea)",
           "unit": "ratio",
           "cells": [
             {
@@ -367,7 +345,7 @@
           "cite": "c2"
         }
       ],
-      "footnote": "FENa (%) = (UNa x PCr x 100) / (PNa x UCr), where U = urine and P = plasma."
+      "footnote": "FENa (%) = (UNa x PCr x 100) / (PNa x UCr), where U = urine and P = plasma. FENa is unreliable after diuretics, in sepsis, with contrast-associated AKI and in CKD; interpret with the clinical picture."
     }
   ]
 }

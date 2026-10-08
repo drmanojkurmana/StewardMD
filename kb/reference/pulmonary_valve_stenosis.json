@@ -1,172 +1,150 @@
 {
- "id": "pulmonary_valve_stenosis",
- "name": "Pulmonary valve stenosis",
- "aliases": [
-  "pulmonary stenosis",
-  "valvular pulmonary stenosis",
-  "PS"
- ],
- "class": "non_infective",
- "system": "Cardiovascular",
- "specialty": "Cardiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Braunwald's Heart Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Obstruction to right ventricular outflow at valve level, usually congenital and often due to a domed, fused pliable valve, though dysplastic valves occur in Noonan syndrome",
-   "Signs include an ejection systolic click that decreases with inspiration, an ejection systolic murmur loudest at the left upper sternal edge (pulmonary area), and a widely split second heart sound with a soft pulmonary component as severity increases",
-   "Mild stenosis is common, frequently asymptomatic, and tends not to progress, whereas moderate to severe obstruction produces exertional breathlessness, fatigue, and eventually right heart failure",
-   "The right ventricle hypertrophies to overcome the gradient, and severe long-standing obstruction can cause tricuspid regurgitation and raised right atrial pressure",
-   "Balloon valvuloplasty is the treatment of choice for a suitable pliable domed valve and gives durable relief in most patients",
-   "Dysplastic and heavily calcified valves respond poorly to balloon dilatation and may need surgical valvotomy or valve replacement",
-   "Echocardiography with Doppler estimation of the peak gradient guides the timing of intervention alongside symptoms and right ventricular changes"
+  "id": "pulmonary_valve_stenosis",
+  "name": "Pulmonary valve stenosis",
+  "aliases": [
+    "pulmonary stenosis",
+    "valvular pulmonary stenosis",
+    "PS"
   ],
-  "pathophysiology": "In valvular pulmonary stenosis the pulmonary valve is narrowed, most often by commissural fusion of a congenitally domed valve or by thickened, poorly mobile dysplastic leaflets. The obstruction imposes a pressure load on the right ventricle, which hypertrophies to maintain output across the narrowed orifice; the resulting high-velocity jet produces post-stenotic dilatation of the pulmonary trunk. With severe, chronic obstruction the hypertrophied right ventricle may fail, right atrial pressure rises, and any coexisting atrial communication can permit right-to-left shunting with cyanosis. Relief of the gradient allows the ventricular hypertrophy to regress over time.",
-  "additionalDifferentials": [
-   "Subvalvular (infundibular) right ventricular outflow obstruction",
-   "Supravalvular pulmonary or branch pulmonary artery stenosis",
-   "Tetralogy of Fallot",
-   "Atrial septal defect with a pulmonary flow murmur",
-   "Innocent pulmonary flow murmur",
-   "Double-chambered right ventricle"
-  ],
-  "additionalInvestigations": [
-   "Transthoracic echocardiography with Doppler to localise the obstruction and estimate the peak gradient",
-   "Assessment of right ventricular size, hypertrophy, and function and of tricuspid regurgitation",
-   "Cardiac MRI to quantify right ventricular volumes and clarify the level of obstruction",
-   "Electrocardiography and chest radiography for right ventricular hypertrophy and post-stenotic pulmonary artery dilatation",
-   "Right heart catheterisation when non-invasive gradient assessment is discordant or before balloon valvuloplasty"
-  ],
-  "redFlags": [
-   "Exertional syncope or presyncope indicating severe obstruction",
-   "Signs of right heart failure with raised jugular venous pressure and peripheral oedema",
-   "Cyanosis from right-to-left shunting through an atrial communication",
-   "Severe stenosis with a dysplastic or calcified valve unsuitable for balloon treatment"
-  ],
-  "prognosis": "Mild pulmonary stenosis carries an excellent outlook and rarely progresses, while moderate to severe obstruction responds well to balloon valvuloplasty or surgery with durable relief and regression of right ventricular hypertrophy.",
-  "pitfalls": [
-   "Overlooking a dysplastic valve, especially in Noonan syndrome, that will respond poorly to balloon valvuloplasty",
-   "Attributing the murmur to an innocent flow murmur and missing significant obstruction",
-   "Failing to recognise coexisting infundibular obstruction that persists after valve relief",
-   "Not assessing for an atrial communication that may allow cyanosis in severe disease"
-  ],
-  "references": [
-   "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
-   "ESC Guidelines for the management of adult congenital heart disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Observe mild stenosis, which rarely progresses and needs no intervention",
-   "Relieve moderate to severe obstruction of a suitable pliable domed valve with balloon valvuloplasty, the treatment of choice, giving durable relief",
-   "Refer dysplastic or heavily calcified valves that respond poorly to balloon dilatation for surgical valvotomy or valve replacement",
-   "Treat right heart failure symptoms with diuretic therapy in advanced obstruction",
-   "Monitor with serial echocardiography and Doppler to track the gradient, right ventricular hypertrophy and function",
-   "Evaluate for Noonan syndrome where a dysplastic valve is present and offer genetic counselling and family screening",
-   "Manage within a cardiology or congenital heart disease service"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pulmonary_valve_stenosis-pathway",
-   "title": "Pulmonary valve stenosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Obstruction to right ventricular outflow at valve level, usually congenital and often due to a domed, fused pliable valve, though dysplastic valves occur in Noonan syndrome",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Exertional syncope or presyncope indicating severe obstruction",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Transthoracic echocardiography with Doppler to localise the obstruction and estimate the peak gradient, Assessment of right ventricular size, hypertrophy, and function and of tricuspid regurgitation, Cardiac MRI to"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Observe mild stenosis, which rarely progresses and needs no intervention"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking a dysplastic valve, especially in Noonan syndrome, that will respond poorly to balloon valvuloplasty"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pulmonary valve stenosis."
-  }
- ],
- "tables": [
-  {
-   "id": "pulmonary_valve_stenosis-matrix",
-   "title": "Pulmonary valve stenosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Obstruction to right ventricular outflow at valve level, usually congenital and often due to a domed, fused pliable valve, though",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular",
+  "specialty": "Cardiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Braunwald's Heart Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Obstruction to right ventricular outflow at valve level, usually congenital and often due to a domed, fused pliable valve, though dysplastic valves occur in Noonan syndrome",
+      "Signs include an ejection systolic click that decreases with inspiration, an ejection systolic murmur loudest at the left upper sternal edge (pulmonary area), and a widely split second heart sound with a soft pulmonary component as severity increases",
+      "Mild stenosis is common, frequently asymptomatic, and tends not to progress, whereas moderate to severe obstruction produces exertional breathlessness, fatigue, and eventually right heart failure",
+      "The right ventricle hypertrophies to overcome the gradient, and severe long-standing obstruction can cause tricuspid regurgitation and raised right atrial pressure",
+      "Balloon valvuloplasty is the treatment of choice for a suitable pliable domed valve and gives durable relief in most patients",
+      "Dysplastic and heavily calcified valves respond poorly to balloon dilatation and may need surgical valvotomy or valve replacement",
+      "Echocardiography with Doppler estimation of the peak gradient guides the timing of intervention alongside symptoms and right ventricular changes"
     ],
-    [
-     "Key Investigations",
-     "Transthoracic echocardiography with Doppler to localise the obstruction and estimate the peak gradient, Assessment of right",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "In valvular pulmonary stenosis the pulmonary valve is narrowed, most often by commissural fusion of a congenitally domed valve or by thickened, poorly mobile dysplastic leaflets. The obstruction imposes a pressure load on the right ventricle, which hypertrophies to maintain output across the narrowed orifice; the resulting high-velocity jet produces post-stenotic dilatation of the pulmonary trunk. With severe, chronic obstruction the hypertrophied right ventricle may fail, right atrial pressure rises, and any coexisting atrial communication can permit right-to-left shunting with cyanosis. Relief of the gradient allows the ventricular hypertrophy to regress over time.",
+    "additionalDifferentials": [
+      "Subvalvular (infundibular) right ventricular outflow obstruction",
+      "Supravalvular pulmonary or branch pulmonary artery stenosis",
+      "Tetralogy of Fallot",
+      "Atrial septal defect with a pulmonary flow murmur",
+      "Innocent pulmonary flow murmur",
+      "Double-chambered right ventricle"
     ],
-    [
-     "Primary Differentials",
-     "Subvalvular (infundibular) right ventricular outflow obstruction, Supravalvular pulmonary or branch pulmonary artery stenosis,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Transthoracic echocardiography with Doppler to localise the obstruction and estimate the peak gradient",
+      "Assessment of right ventricular size, hypertrophy, and function and of tricuspid regurgitation",
+      "Cardiac MRI to quantify right ventricular volumes and clarify the level of obstruction",
+      "Electrocardiography and chest radiography for right ventricular hypertrophy and post-stenotic pulmonary artery dilatation",
+      "Right heart catheterisation when non-invasive gradient assessment is discordant or before balloon valvuloplasty"
     ],
-    [
-     "Management Strategy",
-     "Observe mild stenosis, which rarely progresses and needs no intervention",
-     "Core treatment modality"
+    "redFlags": [
+      "Exertional syncope or presyncope indicating severe obstruction",
+      "Signs of right heart failure with raised jugular venous pressure and peripheral oedema",
+      "Cyanosis from right-to-left shunting through an atrial communication",
+      "Severe stenosis with a dysplastic or calcified valve unsuitable for balloon treatment"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking a dysplastic valve, especially in Noonan syndrome, that will respond poorly to balloon valvuloplasty",
-     "Prevent diagnostic or management error"
+    "prognosis": "Mild pulmonary stenosis carries an excellent outlook and rarely progresses, while moderate to severe obstruction responds well to balloon valvuloplasty or surgery with durable relief and regression of right ventricular hypertrophy.",
+    "pitfalls": [
+      "Overlooking a dysplastic valve, especially in Noonan syndrome, that will respond poorly to balloon valvuloplasty",
+      "Attributing the murmur to an innocent flow murmur and missing significant obstruction",
+      "Failing to recognise coexisting infundibular obstruction that persists after valve relief",
+      "Not assessing for an atrial communication that may allow cyanosis in severe disease"
+    ],
+    "references": [
+      "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
+      "ESC Guidelines for the management of adult congenital heart disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Observe mild stenosis, which rarely progresses and needs no intervention",
+      "Relieve moderate to severe obstruction of a suitable pliable domed valve with balloon valvuloplasty, the treatment of choice, giving durable relief",
+      "Refer dysplastic or heavily calcified valves that respond poorly to balloon dilatation for surgical valvotomy or valve replacement",
+      "Treat right heart failure symptoms with diuretic therapy in advanced obstruction",
+      "Monitor with serial echocardiography and Doppler to track the gradient, right ventricular hypertrophy and function",
+      "Evaluate for Noonan syndrome where a dysplastic valve is present and offer genetic counselling and family screening",
+      "Manage within a cardiology or congenital heart disease service"
     ]
-   ],
-   "caption": "Overview comparison matrix for pulmonary valve stenosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pulmonary-valve-stenosis-real-image",
-   "title": "Pulmonary valve stenosis: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "pulmonary_valve_stenosis-pathway",
+      "title": "Pulmonary valve stenosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Obstruction to right ventricular outflow at valve level, usually congenital and often due to a domed, fused pliable valve, though dysplastic valves occur in Noonan syndrome",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Exertional syncope or presyncope indicating severe obstruction",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Transthoracic echocardiography with Doppler to localise the obstruction and estimate the peak gradient, Assessment of right ventricular size, hypertrophy, and function and of tricuspid regurgitation, Cardiac MRI to"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Observe mild stenosis, which rarely progresses and needs no intervention"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking a dysplastic valve, especially in Noonan syndrome, that will respond poorly to balloon valvuloplasty"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pulmonary valve stenosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pulmonary_valve_stenosis-matrix",
+      "title": "Pulmonary valve stenosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Obstruction to right ventricular outflow at valve level, usually congenital and often due to a domed, fused pliable valve, though",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Transthoracic echocardiography with Doppler to localise the obstruction and estimate the peak gradient, Assessment of right",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Subvalvular (infundibular) right ventricular outflow obstruction, Supravalvular pulmonary or branch pulmonary artery stenosis,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Observe mild stenosis, which rarely progresses and needs no intervention",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking a dysplastic valve, especially in Noonan syndrome, that will respond poorly to balloon valvuloplasty",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pulmonary valve stenosis."
+    }
+  ],
+  "diagrams": []
 }

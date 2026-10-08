@@ -1,172 +1,150 @@
 {
- "id": "trachyonychia",
- "name": "Trachyonychia (twenty-nail dystrophy)",
- "aliases": [
-  "twenty-nail dystrophy",
-  "rough nails",
-  "sandpaper nails"
- ],
- "class": "non_infective",
- "system": "Dermatology / Nail",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology / Baran and Dawber's Diseases of the Nails",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Trachyonychia produces rough, brittle, longitudinally ridged nails with a sandpaper-like surface, often with a loss of lustre",
-   "It may affect several or all twenty nails, hence the older term twenty-nail dystrophy, and is more common in children",
-   "It is a reaction pattern of the nail matrix rather than a single disease, and is associated with alopecia areata, lichen planus, and psoriasis",
-   "Two clinical forms are recognised: an opaque, rough sandpaper type and a shinier variety with numerous small superficial pits",
-   "It is usually a benign, cosmetic problem that does not scar the nail, particularly in the idiopathic childhood form",
-   "Diagnosis is generally clinical, and matrix biopsy is reserved for atypical cases because the appearance rarely predicts the underlying association",
-   "Management is largely supportive with reassurance and nail protection, as many childhood cases improve spontaneously over years"
+  "id": "trachyonychia",
+  "name": "Trachyonychia (twenty-nail dystrophy)",
+  "aliases": [
+    "twenty-nail dystrophy",
+    "rough nails",
+    "sandpaper nails"
   ],
-  "pathophysiology": "Trachyonychia reflects inflammation of the nail matrix that disturbs the orderly production of the nail plate, so that the emerging nail is irregular, rough, and ridged. The matrix inflammation is a shared final pathway for several conditions, including alopecia areata, lichen planus, psoriasis, and eczema, which is why the clinical appearance alone seldom identifies the cause. Because the inflammation usually affects the matrix without destroying it, the process is generally non-scarring and the nail can recover, although the widespread involvement of many nails reflects a diffuse matrix response.",
-  "additionalDifferentials": [
-   "Nail lichen planus (with risk of scarring and pterygium in severe cases)",
-   "Nail psoriasis",
-   "Alopecia areata-associated nail changes",
-   "Chronic eczema affecting the nail matrix",
-   "Idiopathic twenty-nail dystrophy of childhood",
-   "Nail changes of lichen striatus"
-  ],
-  "additionalInvestigations": [
-   "Clinical examination of all twenty nails and the hair and skin for associated disease",
-   "Onychoscopy to characterise pitting, ridging, and surface changes",
-   "Assessment for alopecia areata, lichen planus, and psoriasis elsewhere",
-   "Nail matrix biopsy reserved for atypical, scarring, or diagnostically uncertain cases",
-   "Mycology if fungal infection needs to be excluded",
-   "Longitudinal review to monitor spontaneous improvement, especially in children"
-  ],
-  "redFlags": [
-   "Features suggesting nail lichen planus with scarring, such as pterygium formation, which needs prompt attention",
-   "Rapidly progressive or destructive nail change inconsistent with benign trachyonychia",
-   "Associated systemic or extensive cutaneous disease requiring specific treatment",
-   "Single-nail atypical change that does not fit the diffuse pattern and warrants biopsy"
-  ],
-  "prognosis": "Trachyonychia is generally benign and non-scarring, and the idiopathic childhood form often resolves spontaneously over several years, although nails associated with lichen planus can occasionally scar and warrant closer follow-up.",
-  "pitfalls": [
-   "Over-investigating a benign, self-limiting childhood presentation",
-   "Missing scarring lichen planus of the nail, which requires earlier intervention",
-   "Assuming a fungal cause and treating with antifungals without confirmation",
-   "Promising rapid resolution when recovery is typically slow over months to years"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Baran and Dawber's Diseases of the Nails and their Management"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassure and observe, particularly in the idiopathic childhood form, which is benign, non-scarring and usually resolves spontaneously over several years",
-   "General nail care with emollients and hydration, nail-hardening lacquers, and avoidance of trauma and irritants to limit brittleness",
-   "Treat any associated matrix dermatosis, using topical or intralesional corticosteroids for lichen planus and vitamin D analogues or corticosteroids for psoriasis",
-   "Intralesional corticosteroid injection to the nail matrix for troublesome or refractory disease",
-   "Screen for and manage coexisting alopecia areata, lichen planus and psoriasis elsewhere on the skin and hair",
-   "Reserve nail matrix biopsy for atypical or scarring cases, with closer follow-up where lichen planus threatens permanent nail damage"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "trachyonychia-pathway",
-   "title": "Trachyonychia (twenty-nail dystrophy): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Trachyonychia produces rough, brittle, longitudinally ridged nails with a sandpaper-like surface, often with a loss of lustre",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Features suggesting nail lichen planus with scarring, such as pterygium formation, which needs prompt attention",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical examination of all twenty nails and the hair and skin for associated disease, Onychoscopy to characterise pitting, ridging, and surface changes, Assessment for alopecia areata, lichen planus, and psoriasis"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassure and observe, particularly in the idiopathic childhood form, which is benign, non-scarring and usually resolves spontaneously over several years"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Over-investigating a benign, self-limiting childhood presentation"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of trachyonychia (twenty-nail dystrophy)."
-  }
- ],
- "tables": [
-  {
-   "id": "trachyonychia-matrix",
-   "title": "Trachyonychia (twenty-nail dystrophy): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Trachyonychia produces rough, brittle, longitudinally ridged nails with a sandpaper-like surface, often with a loss of lustre",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology / Nail",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology / Baran and Dawber's Diseases of the Nails",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Trachyonychia produces rough, brittle, longitudinally ridged nails with a sandpaper-like surface, often with a loss of lustre",
+      "It may affect several or all twenty nails, hence the older term twenty-nail dystrophy, and is more common in children",
+      "It is a reaction pattern of the nail matrix rather than a single disease, and is associated with alopecia areata, lichen planus, and psoriasis",
+      "Two clinical forms are recognised: an opaque, rough sandpaper type and a shinier variety with numerous small superficial pits",
+      "It is usually a benign, cosmetic problem that does not scar the nail, particularly in the idiopathic childhood form",
+      "Diagnosis is generally clinical, and matrix biopsy is reserved for atypical cases because the appearance rarely predicts the underlying association",
+      "Management is largely supportive with reassurance and nail protection, as many childhood cases improve spontaneously over years"
     ],
-    [
-     "Key Investigations",
-     "Clinical examination of all twenty nails and the hair and skin for associated disease, Onychoscopy to characterise pitting,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Trachyonychia reflects inflammation of the nail matrix that disturbs the orderly production of the nail plate, so that the emerging nail is irregular, rough, and ridged. The matrix inflammation is a shared final pathway for several conditions, including alopecia areata, lichen planus, psoriasis, and eczema, which is why the clinical appearance alone seldom identifies the cause. Because the inflammation usually affects the matrix without destroying it, the process is generally non-scarring and the nail can recover, although the widespread involvement of many nails reflects a diffuse matrix response.",
+    "additionalDifferentials": [
+      "Nail lichen planus (with risk of scarring and pterygium in severe cases)",
+      "Nail psoriasis",
+      "Alopecia areata-associated nail changes",
+      "Chronic eczema affecting the nail matrix",
+      "Idiopathic twenty-nail dystrophy of childhood",
+      "Nail changes of lichen striatus"
     ],
-    [
-     "Primary Differentials",
-     "Nail lichen planus (with risk of scarring and pterygium in severe cases), Nail psoriasis, Alopecia areata-associated nail changes",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical examination of all twenty nails and the hair and skin for associated disease",
+      "Onychoscopy to characterise pitting, ridging, and surface changes",
+      "Assessment for alopecia areata, lichen planus, and psoriasis elsewhere",
+      "Nail matrix biopsy reserved for atypical, scarring, or diagnostically uncertain cases",
+      "Mycology if fungal infection needs to be excluded",
+      "Longitudinal review to monitor spontaneous improvement, especially in children"
     ],
-    [
-     "Management Strategy",
-     "Reassure and observe, particularly in the idiopathic childhood form, which is benign, non-scarring and usually resolves",
-     "Core treatment modality"
+    "redFlags": [
+      "Features suggesting nail lichen planus with scarring, such as pterygium formation, which needs prompt attention",
+      "Rapidly progressive or destructive nail change inconsistent with benign trachyonychia",
+      "Associated systemic or extensive cutaneous disease requiring specific treatment",
+      "Single-nail atypical change that does not fit the diffuse pattern and warrants biopsy"
     ],
-    [
-     "Clinical Pitfall",
-     "Over-investigating a benign, self-limiting childhood presentation",
-     "Prevent diagnostic or management error"
+    "prognosis": "Trachyonychia is generally benign and non-scarring, and the idiopathic childhood form often resolves spontaneously over several years, although nails associated with lichen planus can occasionally scar and warrant closer follow-up.",
+    "pitfalls": [
+      "Over-investigating a benign, self-limiting childhood presentation",
+      "Missing scarring lichen planus of the nail, which requires earlier intervention",
+      "Assuming a fungal cause and treating with antifungals without confirmation",
+      "Promising rapid resolution when recovery is typically slow over months to years"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Baran and Dawber's Diseases of the Nails and their Management"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassure and observe, particularly in the idiopathic childhood form, which is benign, non-scarring and usually resolves spontaneously over several years",
+      "General nail care with emollients and hydration, nail-hardening lacquers, and avoidance of trauma and irritants to limit brittleness",
+      "Treat any associated matrix dermatosis, using topical or intralesional corticosteroids for lichen planus and vitamin D analogues or corticosteroids for psoriasis",
+      "Intralesional corticosteroid injection to the nail matrix for troublesome or refractory disease",
+      "Screen for and manage coexisting alopecia areata, lichen planus and psoriasis elsewhere on the skin and hair",
+      "Reserve nail matrix biopsy for atypical or scarring cases, with closer follow-up where lichen planus threatens permanent nail damage"
     ]
-   ],
-   "caption": "Overview comparison matrix for trachyonychia (twenty-nail dystrophy)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "trachyonychia-real-image",
-   "title": "Trachyonychia (twenty-nail dystrophy): Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "trachyonychia-pathway",
+      "title": "Trachyonychia (twenty-nail dystrophy): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Trachyonychia produces rough, brittle, longitudinally ridged nails with a sandpaper-like surface, often with a loss of lustre",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Features suggesting nail lichen planus with scarring, such as pterygium formation, which needs prompt attention",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical examination of all twenty nails and the hair and skin for associated disease, Onychoscopy to characterise pitting, ridging, and surface changes, Assessment for alopecia areata, lichen planus, and psoriasis"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassure and observe, particularly in the idiopathic childhood form, which is benign, non-scarring and usually resolves spontaneously over several years"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Over-investigating a benign, self-limiting childhood presentation"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of trachyonychia (twenty-nail dystrophy)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "trachyonychia-matrix",
+      "title": "Trachyonychia (twenty-nail dystrophy): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Trachyonychia produces rough, brittle, longitudinally ridged nails with a sandpaper-like surface, often with a loss of lustre",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical examination of all twenty nails and the hair and skin for associated disease, Onychoscopy to characterise pitting,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Nail lichen planus (with risk of scarring and pterygium in severe cases), Nail psoriasis, Alopecia areata-associated nail changes",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassure and observe, particularly in the idiopathic childhood form, which is benign, non-scarring and usually resolves",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Over-investigating a benign, self-limiting childhood presentation",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for trachyonychia (twenty-nail dystrophy)."
+    }
+  ],
+  "diagrams": []
 }

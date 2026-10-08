@@ -1,171 +1,149 @@
 {
- "id": "progressive_cardiac_conduction_disease",
- "name": "Progressive cardiac conduction disease",
- "aliases": [
-  "Lenegre disease",
-  "Lev disease",
-  "hereditary bundle branch disease"
- ],
- "class": "non_infective",
- "system": "Cardiovascular",
- "specialty": "Cardiology / Inherited cardiac conditions",
- "referenceOnly": true,
- "reference": {
-  "source": "Cardiology references / inherited arrhythmia literature",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Progressive impairment of impulse conduction through the His-Purkinje system, causing widening QRS and heart block",
-   "It presents with syncope, bradycardia or sudden death, and may be familial or degenerative",
-   "The inherited form is associated with SCN5A and other conduction-gene mutations and can present at a younger age",
-   "SCN5A mutations link it to an overlap spectrum with Brugada syndrome and other sodium-channel disorders",
-   "It differs from age-related conduction fibrosis chiefly by earlier onset and family history",
-   "A permanent pacemaker is the mainstay of treatment for symptomatic or high-grade conduction block"
+  "id": "progressive_cardiac_conduction_disease",
+  "name": "Progressive cardiac conduction disease",
+  "aliases": [
+    "Lenegre disease",
+    "Lev disease",
+    "hereditary bundle branch disease"
   ],
-  "pathophysiology": "Progressive cardiac conduction disease results from progressive fibrosis and functional impairment of the specialised conduction tissue. In inherited forms, mutations in genes encoding the cardiac sodium channel (SCN5A) and other conduction-related proteins reduce conduction reserve, so conduction slows and blocks over time, producing bundle branch block, then higher-grade atrioventricular block. Age-related degeneration (Lenegre-Lev disease) causes a similar picture through sclerosis of the conduction system. The shared SCN5A basis explains overlap with Brugada syndrome in some families.",
-  "additionalDifferentials": [
-   "Age-related (idiopathic) conduction system fibrosis",
-   "Ischaemic conduction disease",
-   "Cardiomyopathy with conduction disease (for example laminopathy)",
-   "Sarcoidosis or other infiltrative disease",
-   "Brugada syndrome overlap",
-   "Drug-induced conduction block"
-  ],
-  "additionalInvestigations": [
-   "Serial electrocardiograms documenting conduction progression",
-   "Ambulatory monitoring for intermittent block",
-   "Echocardiography and, where indicated, cardiac MRI to exclude structural or infiltrative disease",
-   "Genetic testing (for example SCN5A) in early-onset or familial cases",
-   "Family screening"
-  ],
-  "redFlags": [
-   "Syncope or high-grade atrioventricular block",
-   "Rapidly progressive conduction disease",
-   "Family history of sudden death or pacemakers at a young age",
-   "Associated structural or infiltrative cardiac disease"
-  ],
-  "prognosis": "With timely pacing, symptomatic conduction disease is well managed; prognosis otherwise depends on associated arrhythmic risk and any underlying cardiomyopathy or channelopathy.",
-  "pitfalls": [
-   "Attributing early-onset conduction disease to ageing and missing a genetic cause",
-   "Overlooking an infiltrative cardiomyopathy such as sarcoidosis",
-   "Missing associated Brugada-type risk in SCN5A families",
-   "Delaying pacing in high-grade block"
-  ],
-  "references": [
-   "Braunwald's Heart Disease",
-   "Inherited cardiac conditions guidelines (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Permanent pacemaker is the definitive treatment for symptomatic bradycardia or high-grade conduction block",
-   "No pharmacological therapy corrects the underlying conduction failure; avoid drugs that slow conduction such as class I antiarrhythmics and atrioventricular-nodal blocking agents unless clearly indicated",
-   "Consider defibrillator therapy where an overlapping Brugada phenotype or an underlying cardiomyopathy adds arrhythmic risk",
-   "Serial ECGs and ambulatory monitoring to document progression and detect intermittent block",
-   "Echocardiography and, where indicated, cardiac MRI to exclude structural or infiltrative disease",
-   "Genetic testing such as SCN5A in early-onset or familial cases, with cascade family screening and counselling",
-   "Educate on syncope and escalate urgently for pacing when complete heart block develops"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "progressive_cardiac_conduction_disease-pathway",
-   "title": "Progressive cardiac conduction disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Progressive impairment of impulse conduction through the His-Purkinje system, causing widening QRS and heart block",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Syncope or high-grade atrioventricular block",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serial electrocardiograms documenting conduction progression, Ambulatory monitoring for intermittent block, Echocardiography and, where indicated, cardiac MRI to exclude structural or infiltrative disease"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Permanent pacemaker is the definitive treatment for symptomatic bradycardia or high-grade conduction block"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing early-onset conduction disease to ageing and missing a genetic cause"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of progressive cardiac conduction disease."
-  }
- ],
- "tables": [
-  {
-   "id": "progressive_cardiac_conduction_disease-matrix",
-   "title": "Progressive cardiac conduction disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Progressive impairment of impulse conduction through the His-Purkinje system, causing widening QRS and heart block",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular",
+  "specialty": "Cardiology / Inherited cardiac conditions",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Cardiology references / inherited arrhythmia literature",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Progressive impairment of impulse conduction through the His-Purkinje system, causing widening QRS and heart block",
+      "It presents with syncope, bradycardia or sudden death, and may be familial or degenerative",
+      "The inherited form is associated with SCN5A and other conduction-gene mutations and can present at a younger age",
+      "SCN5A mutations link it to an overlap spectrum with Brugada syndrome and other sodium-channel disorders",
+      "It differs from age-related conduction fibrosis chiefly by earlier onset and family history",
+      "A permanent pacemaker is the mainstay of treatment for symptomatic or high-grade conduction block"
     ],
-    [
-     "Key Investigations",
-     "Serial electrocardiograms documenting conduction progression, Ambulatory monitoring for intermittent block, Echocardiography and,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Progressive cardiac conduction disease results from progressive fibrosis and functional impairment of the specialised conduction tissue. In inherited forms, mutations in genes encoding the cardiac sodium channel (SCN5A) and other conduction-related proteins reduce conduction reserve, so conduction slows and blocks over time, producing bundle branch block, then higher-grade atrioventricular block. Age-related degeneration (Lenegre-Lev disease) causes a similar picture through sclerosis of the conduction system. The shared SCN5A basis explains overlap with Brugada syndrome in some families.",
+    "additionalDifferentials": [
+      "Age-related (idiopathic) conduction system fibrosis",
+      "Ischaemic conduction disease",
+      "Cardiomyopathy with conduction disease (for example laminopathy)",
+      "Sarcoidosis or other infiltrative disease",
+      "Brugada syndrome overlap",
+      "Drug-induced conduction block"
     ],
-    [
-     "Primary Differentials",
-     "Age-related (idiopathic) conduction system fibrosis, Ischaemic conduction disease, Cardiomyopathy with conduction disease (for",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serial electrocardiograms documenting conduction progression",
+      "Ambulatory monitoring for intermittent block",
+      "Echocardiography and, where indicated, cardiac MRI to exclude structural or infiltrative disease",
+      "Genetic testing (for example SCN5A) in early-onset or familial cases",
+      "Family screening"
     ],
-    [
-     "Management Strategy",
-     "Permanent pacemaker is the definitive treatment for symptomatic bradycardia or high-grade conduction block",
-     "Core treatment modality"
+    "redFlags": [
+      "Syncope or high-grade atrioventricular block",
+      "Rapidly progressive conduction disease",
+      "Family history of sudden death or pacemakers at a young age",
+      "Associated structural or infiltrative cardiac disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing early-onset conduction disease to ageing and missing a genetic cause",
-     "Prevent diagnostic or management error"
+    "prognosis": "With timely pacing, symptomatic conduction disease is well managed; prognosis otherwise depends on associated arrhythmic risk and any underlying cardiomyopathy or channelopathy.",
+    "pitfalls": [
+      "Attributing early-onset conduction disease to ageing and missing a genetic cause",
+      "Overlooking an infiltrative cardiomyopathy such as sarcoidosis",
+      "Missing associated Brugada-type risk in SCN5A families",
+      "Delaying pacing in high-grade block"
+    ],
+    "references": [
+      "Braunwald's Heart Disease",
+      "Inherited cardiac conditions guidelines (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Permanent pacemaker is the definitive treatment for symptomatic bradycardia or high-grade conduction block",
+      "No pharmacological therapy corrects the underlying conduction failure; avoid drugs that slow conduction such as class I antiarrhythmics and atrioventricular-nodal blocking agents unless clearly indicated",
+      "Consider defibrillator therapy where an overlapping Brugada phenotype or an underlying cardiomyopathy adds arrhythmic risk",
+      "Serial ECGs and ambulatory monitoring to document progression and detect intermittent block",
+      "Echocardiography and, where indicated, cardiac MRI to exclude structural or infiltrative disease",
+      "Genetic testing such as SCN5A in early-onset or familial cases, with cascade family screening and counselling",
+      "Educate on syncope and escalate urgently for pacing when complete heart block develops"
     ]
-   ],
-   "caption": "Overview comparison matrix for progressive cardiac conduction disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "progressive-cardiac-conduction-disease-real-image",
-   "title": "Progressive cardiac conduction disease: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "progressive_cardiac_conduction_disease-pathway",
+      "title": "Progressive cardiac conduction disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Progressive impairment of impulse conduction through the His-Purkinje system, causing widening QRS and heart block",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Syncope or high-grade atrioventricular block",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serial electrocardiograms documenting conduction progression, Ambulatory monitoring for intermittent block, Echocardiography and, where indicated, cardiac MRI to exclude structural or infiltrative disease"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Permanent pacemaker is the definitive treatment for symptomatic bradycardia or high-grade conduction block"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing early-onset conduction disease to ageing and missing a genetic cause"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of progressive cardiac conduction disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "progressive_cardiac_conduction_disease-matrix",
+      "title": "Progressive cardiac conduction disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Progressive impairment of impulse conduction through the His-Purkinje system, causing widening QRS and heart block",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serial electrocardiograms documenting conduction progression, Ambulatory monitoring for intermittent block, Echocardiography and,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Age-related (idiopathic) conduction system fibrosis, Ischaemic conduction disease, Cardiomyopathy with conduction disease (for",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Permanent pacemaker is the definitive treatment for symptomatic bradycardia or high-grade conduction block",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing early-onset conduction disease to ageing and missing a genetic cause",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for progressive cardiac conduction disease."
+    }
+  ],
+  "diagrams": []
 }

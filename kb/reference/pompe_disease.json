@@ -1,172 +1,150 @@
 {
- "id": "pompe_disease",
- "name": "Pompe disease",
- "aliases": [
-  "acid alpha-glucosidase deficiency",
-  "acid maltase deficiency",
-  "glycogen storage disease type II",
-  "GSD II"
- ],
- "class": "non_infective",
- "system": "Genetic / Metabolic",
- "specialty": "Metabolic Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics / standard metabolic references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An autosomal recessive disorder caused by deficiency of the lysosomal enzyme acid alpha-glucosidase (acid maltase), resulting in lysosomal glycogen accumulation; it is classified as glycogen storage disease type II",
-   "It is unusual among the glycogenoses in being a lysosomal disorder rather than affecting cytoplasmic glycogen metabolism, so fasting hypoglycaemia is not a feature",
-   "The classic infantile form presents in the first months with profound hypotonia, a rapidly enlarging heart (hypertrophic cardiomyopathy), and feeding and respiratory difficulty",
-   "A markedly enlarged tongue and prominent cardiomegaly on chest imaging are useful clues in infants",
-   "Late-onset (juvenile and adult) forms present with progressive proximal and respiratory muscle weakness and often lack significant cardiac involvement",
-   "Diaphragmatic weakness can cause respiratory failure that is disproportionate to limb weakness",
-   "Serum creatine kinase is commonly elevated, reflecting the underlying myopathy",
-   "Enzyme replacement therapy has transformed the outlook, particularly in infantile disease, and newborn screening enables earlier treatment"
+  "id": "pompe_disease",
+  "name": "Pompe disease",
+  "aliases": [
+    "acid alpha-glucosidase deficiency",
+    "acid maltase deficiency",
+    "glycogen storage disease type II",
+    "GSD II"
   ],
-  "pathophysiology": "Pompe disease is caused by pathogenic variants in the GAA gene encoding acid alpha-glucosidase, the lysosomal enzyme that degrades glycogen to glucose within the lysosome. Deficient activity leads to progressive lysosomal glycogen accumulation, most damaging in cardiac and skeletal muscle. Lysosomal engorgement and subsequent autophagic dysfunction impair muscle architecture and function, producing cardiomegaly and hypotonia in infants and progressive skeletal and respiratory muscle weakness in later-onset disease. The degree of residual enzyme activity broadly correlates with age of onset and severity.",
-  "additionalDifferentials": [
-   "Spinal muscular atrophy and other causes of infantile hypotonia",
-   "Congenital muscular dystrophies and congenital myopathies",
-   "Other causes of infantile hypertrophic cardiomyopathy",
-   "Limb-girdle muscular dystrophies in later-onset presentations",
-   "Other glycogen storage disorders affecting muscle"
-  ],
-  "additionalInvestigations": [
-   "Assay of acid alpha-glucosidase activity, including dried blood spot screening with confirmatory testing",
-   "GAA molecular genetic testing",
-   "Serum creatine kinase measurement",
-   "Echocardiography and ECG to assess cardiomyopathy in infants",
-   "Pulmonary function testing and muscle assessment in later-onset disease"
-  ],
-  "redFlags": [
-   "Rapidly progressive hypertrophic cardiomyopathy in an infant",
-   "Respiratory compromise from diaphragmatic weakness",
-   "Severe feeding difficulty with failure to thrive",
-   "Progressive respiratory decline out of proportion to limb weakness in older patients"
-  ],
-  "prognosis": "Untreated classic infantile disease is usually fatal within the first year from cardiorespiratory failure. Enzyme replacement therapy substantially improves survival and cardiac outcomes, especially when started early, though respiratory and motor sequelae may persist. Late-onset disease progresses more slowly, with respiratory function being a key determinant of long-term outcome.",
-  "pitfalls": [
-   "Expecting hypoglycaemia and being misled when it is absent, since this is a lysosomal rather than cytoplasmic glycogenosis",
-   "Attributing infantile hypotonia to a neuromuscular cause without checking for cardiomyopathy",
-   "Underestimating respiratory muscle involvement in later-onset disease",
-   "Delaying treatment when early initiation most influences outcome"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Enzyme replacement therapy with recombinant acid alpha-glucosidase (alglucosidase alfa or avalglucosidase alfa) as the disease-specific mainstay, started as early as possible in infantile disease",
-   "Immune tolerance induction with agents such as rituximab, methotrexate and immunoglobulin in CRIM-negative infants to limit neutralising anti-enzyme antibodies",
-   "Respiratory support for diaphragmatic and respiratory muscle weakness, including non-invasive or invasive ventilation and airway clearance",
-   "Cardiac monitoring and heart-failure management for the hypertrophic cardiomyopathy of the infantile form",
-   "Physiotherapy, occupational therapy and mobility aids, with dietetic support and safe-swallow measures for feeding difficulty",
-   "Regular surveillance of respiratory function, motor status, cardiac status and anti-enzyme antibody titres",
-   "Metabolic medicine-led multidisciplinary care with genetic counselling and family testing for autosomal recessive inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pompe_disease-pathway",
-   "title": "Pompe disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autosomal recessive disorder caused by deficiency of the lysosomal enzyme acid alpha-glucosidase (acid maltase), resulting in lysosomal glycogen accumulation; it is classified as glycogen storage disease type II",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive hypertrophic cardiomyopathy in an infant",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Assay of acid alpha-glucosidase activity, including dried blood spot screening with confirmatory testing, GAA molecular genetic testing, Serum creatine kinase measurement"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Enzyme replacement therapy with recombinant acid alpha-glucosidase (alglucosidase alfa or avalglucosidase alfa) as the disease-specific mainstay, started as early as possible in infantile disease"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Expecting hypoglycaemia and being misled when it is absent, since this is a lysosomal rather than cytoplasmic glycogenosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pompe disease."
-  }
- ],
- "tables": [
-  {
-   "id": "pompe_disease-matrix",
-   "title": "Pompe disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autosomal recessive disorder caused by deficiency of the lysosomal enzyme acid alpha-glucosidase (acid maltase), resulting in",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetic / Metabolic",
+  "specialty": "Metabolic Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics / standard metabolic references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An autosomal recessive disorder caused by deficiency of the lysosomal enzyme acid alpha-glucosidase (acid maltase), resulting in lysosomal glycogen accumulation; it is classified as glycogen storage disease type II",
+      "It is unusual among the glycogenoses in being a lysosomal disorder rather than affecting cytoplasmic glycogen metabolism, so fasting hypoglycaemia is not a feature",
+      "The classic infantile form presents in the first months with profound hypotonia, a rapidly enlarging heart (hypertrophic cardiomyopathy), and feeding and respiratory difficulty",
+      "A markedly enlarged tongue and prominent cardiomegaly on chest imaging are useful clues in infants",
+      "Late-onset (juvenile and adult) forms present with progressive proximal and respiratory muscle weakness and often lack significant cardiac involvement",
+      "Diaphragmatic weakness can cause respiratory failure that is disproportionate to limb weakness",
+      "Serum creatine kinase is commonly elevated, reflecting the underlying myopathy",
+      "Enzyme replacement therapy has transformed the outlook, particularly in infantile disease, and newborn screening enables earlier treatment"
     ],
-    [
-     "Key Investigations",
-     "Assay of acid alpha-glucosidase activity, including dried blood spot screening with confirmatory testing, GAA molecular genetic",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Pompe disease is caused by pathogenic variants in the GAA gene encoding acid alpha-glucosidase, the lysosomal enzyme that degrades glycogen to glucose within the lysosome. Deficient activity leads to progressive lysosomal glycogen accumulation, most damaging in cardiac and skeletal muscle. Lysosomal engorgement and subsequent autophagic dysfunction impair muscle architecture and function, producing cardiomegaly and hypotonia in infants and progressive skeletal and respiratory muscle weakness in later-onset disease. The degree of residual enzyme activity broadly correlates with age of onset and severity.",
+    "additionalDifferentials": [
+      "Spinal muscular atrophy and other causes of infantile hypotonia",
+      "Congenital muscular dystrophies and congenital myopathies",
+      "Other causes of infantile hypertrophic cardiomyopathy",
+      "Limb-girdle muscular dystrophies in later-onset presentations",
+      "Other glycogen storage disorders affecting muscle"
     ],
-    [
-     "Primary Differentials",
-     "Spinal muscular atrophy and other causes of infantile hypotonia, Congenital muscular dystrophies and congenital myopathies, Other",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Assay of acid alpha-glucosidase activity, including dried blood spot screening with confirmatory testing",
+      "GAA molecular genetic testing",
+      "Serum creatine kinase measurement",
+      "Echocardiography and ECG to assess cardiomyopathy in infants",
+      "Pulmonary function testing and muscle assessment in later-onset disease"
     ],
-    [
-     "Management Strategy",
-     "Enzyme replacement therapy with recombinant acid alpha-glucosidase (alglucosidase alfa or avalglucosidase alfa) as the",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive hypertrophic cardiomyopathy in an infant",
+      "Respiratory compromise from diaphragmatic weakness",
+      "Severe feeding difficulty with failure to thrive",
+      "Progressive respiratory decline out of proportion to limb weakness in older patients"
     ],
-    [
-     "Clinical Pitfall",
-     "Expecting hypoglycaemia and being misled when it is absent, since this is a lysosomal rather than cytoplasmic glycogenosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Untreated classic infantile disease is usually fatal within the first year from cardiorespiratory failure. Enzyme replacement therapy substantially improves survival and cardiac outcomes, especially when started early, though respiratory and motor sequelae may persist. Late-onset disease progresses more slowly, with respiratory function being a key determinant of long-term outcome.",
+    "pitfalls": [
+      "Expecting hypoglycaemia and being misled when it is absent, since this is a lysosomal rather than cytoplasmic glycogenosis",
+      "Attributing infantile hypotonia to a neuromuscular cause without checking for cardiomyopathy",
+      "Underestimating respiratory muscle involvement in later-onset disease",
+      "Delaying treatment when early initiation most influences outcome"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Enzyme replacement therapy with recombinant acid alpha-glucosidase (alglucosidase alfa or avalglucosidase alfa) as the disease-specific mainstay, started as early as possible in infantile disease",
+      "Immune tolerance induction with agents such as rituximab, methotrexate and immunoglobulin in CRIM-negative infants to limit neutralising anti-enzyme antibodies",
+      "Respiratory support for diaphragmatic and respiratory muscle weakness, including non-invasive or invasive ventilation and airway clearance",
+      "Cardiac monitoring and heart-failure management for the hypertrophic cardiomyopathy of the infantile form",
+      "Physiotherapy, occupational therapy and mobility aids, with dietetic support and safe-swallow measures for feeding difficulty",
+      "Regular surveillance of respiratory function, motor status, cardiac status and anti-enzyme antibody titres",
+      "Metabolic medicine-led multidisciplinary care with genetic counselling and family testing for autosomal recessive inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for pompe disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pompe-disease-real-image",
-   "title": "Pompe disease: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "pompe_disease-pathway",
+      "title": "Pompe disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autosomal recessive disorder caused by deficiency of the lysosomal enzyme acid alpha-glucosidase (acid maltase), resulting in lysosomal glycogen accumulation; it is classified as glycogen storage disease type II",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive hypertrophic cardiomyopathy in an infant",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Assay of acid alpha-glucosidase activity, including dried blood spot screening with confirmatory testing, GAA molecular genetic testing, Serum creatine kinase measurement"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Enzyme replacement therapy with recombinant acid alpha-glucosidase (alglucosidase alfa or avalglucosidase alfa) as the disease-specific mainstay, started as early as possible in infantile disease"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Expecting hypoglycaemia and being misled when it is absent, since this is a lysosomal rather than cytoplasmic glycogenosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pompe disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pompe_disease-matrix",
+      "title": "Pompe disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autosomal recessive disorder caused by deficiency of the lysosomal enzyme acid alpha-glucosidase (acid maltase), resulting in",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Assay of acid alpha-glucosidase activity, including dried blood spot screening with confirmatory testing, GAA molecular genetic",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Spinal muscular atrophy and other causes of infantile hypotonia, Congenital muscular dystrophies and congenital myopathies, Other",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Enzyme replacement therapy with recombinant acid alpha-glucosidase (alglucosidase alfa or avalglucosidase alfa) as the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Expecting hypoglycaemia and being misled when it is absent, since this is a lysosomal rather than cytoplasmic glycogenosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pompe disease."
+    }
+  ],
+  "diagrams": []
 }

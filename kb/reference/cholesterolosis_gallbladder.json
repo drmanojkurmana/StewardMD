@@ -1,174 +1,152 @@
 {
- "id": "cholesterolosis_gallbladder",
- "name": "cholesterolosis gallbladder",
- "aliases": [
-  "cholesterolosis of the gallbladder",
-  "strawberry gallbladder",
-  "cholesterol polyposis"
- ],
- "class": "non_infective",
- "system": "Hepatobiliary",
- "specialty": "Hepatology / Gastroenterology",
- "referenceOnly": true,
- "reference": {
-  "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Cholesterolosis is a benign condition in which cholesterol esters and triglycerides accumulate within lipid-laden macrophages in the lamina propria of the gallbladder mucosa, producing yellow flecks against a hyperaemic mucosa (the strawberry gallbladder appearance)",
-   "It is subdivided into a diffuse (planar) form and a polypoid form, the latter giving rise to cholesterol polyps, the commonest type of gallbladder polyp",
-   "Most cases are asymptomatic incidental findings at ultrasound or on histology after cholecystectomy, and it is not premalignant",
-   "Cholesterol polyps are typically small, may be multiple, and characteristically show comet-tail or twinkling artefact and lack of vascularity or growth, features that help distinguish them from neoplastic polyps",
-   "Symptoms, when present, resemble biliary colic and are often related to coexisting gallstones, cholesterol crystals, or occasional detachment of a polyp causing transient obstruction",
-   "Polyp size and morphology guide management: small typical cholesterol polyps are followed by ultrasound surveillance, while larger, growing, sessile, or otherwise atypical polyps prompt consideration of cholecystectomy",
-   "It is part of the spectrum of hyperplastic cholecystoses along with adenomyomatosis, though the two are histologically and mechanistically distinct",
-   "The condition is unrelated to systemic hypercholesterolaemia and reflects local disturbance of gallbladder cholesterol handling rather than serum lipid levels"
+  "id": "cholesterolosis_gallbladder",
+  "name": "cholesterolosis gallbladder",
+  "aliases": [
+    "cholesterolosis of the gallbladder",
+    "strawberry gallbladder",
+    "cholesterol polyposis"
   ],
-  "pathophysiology": "Cholesterolosis arises from a local abnormality of cholesterol metabolism within the gallbladder wall in which excess cholesterol, derived from cholesterol-supersaturated bile, is absorbed across the mucosa and esterified. The esterified cholesterol and triglyceride accumulate within macrophages (foam cells) that aggregate in the lamina propria at the tips of the mucosal villi, producing the yellow speckling of the diffuse form. Where these lipid-laden aggregates enlarge and become covered by hyperplastic epithelium on a slender stalk, they form pedunculated cholesterol polyps that project into the lumen. The deposits are confined to the mucosa without inflammation or muscular hypertrophy, distinguishing cholesterolosis from adenomyomatosis. Although the process shares the biliary cholesterol supersaturation that also underlies cholesterol gallstones, it correlates poorly with serum cholesterol concentrations, indicating that altered mucosal handling and biliary lipid composition, rather than systemic hyperlipidaemia, are the key drivers.",
-  "additionalDifferentials": [
-   "Adenomatous or other neoplastic gallbladder polyp",
-   "Gallbladder adenomyomatosis",
-   "Adherent gallstone or biliary sludge ball mimicking a polyp",
-   "Inflammatory polyp associated with chronic cholecystitis",
-   "Early gallbladder carcinoma presenting as a polypoid lesion",
-   "Gallbladder metastasis or, rarely, a mesenchymal tumour"
-  ],
-  "additionalInvestigations": [
-   "Abdominal ultrasound characterising polyp size, number, echotexture, and any comet-tail or twinkling artefact",
-   "Serial ultrasound surveillance to assess polyp stability or growth over time",
-   "Contrast-enhanced or high-resolution ultrasound to evaluate vascularity of indeterminate polyps",
-   "Endoscopic ultrasound for detailed assessment of larger or atypical polyps",
-   "MRI with MRCP when the biliary tree or an indeterminate lesion needs further characterisation",
-   "Histological examination of the cholecystectomy specimen for definitive diagnosis"
-  ],
-  "redFlags": [
-   "A gallbladder polyp that is large, sessile, or shows interval growth on surveillance",
-   "A solitary polyp associated with wall thickening or loss of normal wall layering",
-   "Coexisting gallstones with a polyp in an older patient or one with primary sclerosing cholangitis, raising malignancy risk",
-   "New or progressive jaundice or biliary obstruction",
-   "Detected vascularity within a polyp suggesting a neoplastic lesion"
-  ],
-  "prognosis": "Cholesterolosis is entirely benign with an excellent prognosis, carries no malignant potential, and typically requires no treatment when asymptomatic; symptomatic patients or those with polyps meeting resection criteria are cured by cholecystectomy.",
-  "pitfalls": [
-   "Assuming any gallbladder polyp is a benign cholesterol polyp and thereby missing a neoplastic lesion that meets resection or surveillance criteria",
-   "Attributing biliary symptoms to cholesterolosis when coexisting gallstones are the true cause",
-   "Confusing cholesterolosis with adenomyomatosis, which is a distinct hyperplastic cholecystosis",
-   "Wrongly linking the condition to serum hypercholesterolaemia and instituting unnecessary lipid investigation",
-   "Failing to arrange appropriate surveillance for polyps that fall below the threshold for immediate surgery"
-  ],
-  "references": [
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-   "Blumgart's Surgery of the Liver, Biliary Tract and Pancreas"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassure and avoid intervention in asymptomatic incidental cholesterolosis, which is benign and not premalignant",
-   "Follow small typical cholesterol polyps with periodic ultrasound surveillance for stability and growth",
-   "Offer laparoscopic cholecystectomy for symptomatic disease or for polyps that are larger, growing, sessile or otherwise atypical",
-   "Perform cholecystectomy where symptomatic coexisting gallstones or biliary colic are present",
-   "Discharge from surveillance small polyps that remain stable over time"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "cholesterolosis_gallbladder-pathway",
-   "title": "cholesterolosis gallbladder: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Cholesterolosis is a benign condition in which cholesterol esters and triglycerides accumulate within lipid-laden macrophages in the lamina propria of the gallbladder mucosa, producing yellow flecks against a hyperaemic mucosa (the",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A gallbladder polyp that is large, sessile, or shows interval growth on surveillance",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Abdominal ultrasound characterising polyp size, number, echotexture, and any comet-tail or twinkling artefact, Serial ultrasound surveillance to assess polyp stability or growth over time, Contrast-enhanced or"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassure and avoid intervention in asymptomatic incidental cholesterolosis, which is benign and not premalignant"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming any gallbladder polyp is a benign cholesterol polyp and thereby missing a neoplastic lesion that meets resection or surveillance criteria"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of cholesterolosis gallbladder."
-  }
- ],
- "tables": [
-  {
-   "id": "cholesterolosis_gallbladder-matrix",
-   "title": "cholesterolosis gallbladder: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Cholesterolosis is a benign condition in which cholesterol esters and triglycerides accumulate within lipid-laden macrophages in",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Hepatobiliary",
+  "specialty": "Hepatology / Gastroenterology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Cholesterolosis is a benign condition in which cholesterol esters and triglycerides accumulate within lipid-laden macrophages in the lamina propria of the gallbladder mucosa, producing yellow flecks against a hyperaemic mucosa (the strawberry gallbladder appearance)",
+      "It is subdivided into a diffuse (planar) form and a polypoid form, the latter giving rise to cholesterol polyps, the commonest type of gallbladder polyp",
+      "Most cases are asymptomatic incidental findings at ultrasound or on histology after cholecystectomy, and it is not premalignant",
+      "Cholesterol polyps are typically small, may be multiple, and characteristically show comet-tail or twinkling artefact and lack of vascularity or growth, features that help distinguish them from neoplastic polyps",
+      "Symptoms, when present, resemble biliary colic and are often related to coexisting gallstones, cholesterol crystals, or occasional detachment of a polyp causing transient obstruction",
+      "Polyp size and morphology guide management: small typical cholesterol polyps are followed by ultrasound surveillance, while larger, growing, sessile, or otherwise atypical polyps prompt consideration of cholecystectomy",
+      "It is part of the spectrum of hyperplastic cholecystoses along with adenomyomatosis, though the two are histologically and mechanistically distinct",
+      "The condition is unrelated to systemic hypercholesterolaemia and reflects local disturbance of gallbladder cholesterol handling rather than serum lipid levels"
     ],
-    [
-     "Key Investigations",
-     "Abdominal ultrasound characterising polyp size, number, echotexture, and any comet-tail or twinkling artefact, Serial ultrasound",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Cholesterolosis arises from a local abnormality of cholesterol metabolism within the gallbladder wall in which excess cholesterol, derived from cholesterol-supersaturated bile, is absorbed across the mucosa and esterified. The esterified cholesterol and triglyceride accumulate within macrophages (foam cells) that aggregate in the lamina propria at the tips of the mucosal villi, producing the yellow speckling of the diffuse form. Where these lipid-laden aggregates enlarge and become covered by hyperplastic epithelium on a slender stalk, they form pedunculated cholesterol polyps that project into the lumen. The deposits are confined to the mucosa without inflammation or muscular hypertrophy, distinguishing cholesterolosis from adenomyomatosis. Although the process shares the biliary cholesterol supersaturation that also underlies cholesterol gallstones, it correlates poorly with serum cholesterol concentrations, indicating that altered mucosal handling and biliary lipid composition, rather than systemic hyperlipidaemia, are the key drivers.",
+    "additionalDifferentials": [
+      "Adenomatous or other neoplastic gallbladder polyp",
+      "Gallbladder adenomyomatosis",
+      "Adherent gallstone or biliary sludge ball mimicking a polyp",
+      "Inflammatory polyp associated with chronic cholecystitis",
+      "Early gallbladder carcinoma presenting as a polypoid lesion",
+      "Gallbladder metastasis or, rarely, a mesenchymal tumour"
     ],
-    [
-     "Primary Differentials",
-     "Adenomatous or other neoplastic gallbladder polyp, Gallbladder adenomyomatosis, Adherent gallstone or biliary sludge ball",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Abdominal ultrasound characterising polyp size, number, echotexture, and any comet-tail or twinkling artefact",
+      "Serial ultrasound surveillance to assess polyp stability or growth over time",
+      "Contrast-enhanced or high-resolution ultrasound to evaluate vascularity of indeterminate polyps",
+      "Endoscopic ultrasound for detailed assessment of larger or atypical polyps",
+      "MRI with MRCP when the biliary tree or an indeterminate lesion needs further characterisation",
+      "Histological examination of the cholecystectomy specimen for definitive diagnosis"
     ],
-    [
-     "Management Strategy",
-     "Reassure and avoid intervention in asymptomatic incidental cholesterolosis, which is benign and not premalignant",
-     "Core treatment modality"
+    "redFlags": [
+      "A gallbladder polyp that is large, sessile, or shows interval growth on surveillance",
+      "A solitary polyp associated with wall thickening or loss of normal wall layering",
+      "Coexisting gallstones with a polyp in an older patient or one with primary sclerosing cholangitis, raising malignancy risk",
+      "New or progressive jaundice or biliary obstruction",
+      "Detected vascularity within a polyp suggesting a neoplastic lesion"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming any gallbladder polyp is a benign cholesterol polyp and thereby missing a neoplastic lesion that meets resection or",
-     "Prevent diagnostic or management error"
+    "prognosis": "Cholesterolosis is entirely benign with an excellent prognosis, carries no malignant potential, and typically requires no treatment when asymptomatic; symptomatic patients or those with polyps meeting resection criteria are cured by cholecystectomy.",
+    "pitfalls": [
+      "Assuming any gallbladder polyp is a benign cholesterol polyp and thereby missing a neoplastic lesion that meets resection or surveillance criteria",
+      "Attributing biliary symptoms to cholesterolosis when coexisting gallstones are the true cause",
+      "Confusing cholesterolosis with adenomyomatosis, which is a distinct hyperplastic cholecystosis",
+      "Wrongly linking the condition to serum hypercholesterolaemia and instituting unnecessary lipid investigation",
+      "Failing to arrange appropriate surveillance for polyps that fall below the threshold for immediate surgery"
+    ],
+    "references": [
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "Blumgart's Surgery of the Liver, Biliary Tract and Pancreas"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassure and avoid intervention in asymptomatic incidental cholesterolosis, which is benign and not premalignant",
+      "Follow small typical cholesterol polyps with periodic ultrasound surveillance for stability and growth",
+      "Offer laparoscopic cholecystectomy for symptomatic disease or for polyps that are larger, growing, sessile or otherwise atypical",
+      "Perform cholecystectomy where symptomatic coexisting gallstones or biliary colic are present",
+      "Discharge from surveillance small polyps that remain stable over time"
     ]
-   ],
-   "caption": "Overview comparison matrix for cholesterolosis gallbladder."
-  }
- ],
- "diagrams": [
-  {
-   "id": "cholesterolosis-gallbladder-real-image",
-   "title": "cholesterolosis gallbladder: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "cholesterolosis_gallbladder-pathway",
+      "title": "cholesterolosis gallbladder: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Cholesterolosis is a benign condition in which cholesterol esters and triglycerides accumulate within lipid-laden macrophages in the lamina propria of the gallbladder mucosa, producing yellow flecks against a hyperaemic mucosa (the",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A gallbladder polyp that is large, sessile, or shows interval growth on surveillance",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Abdominal ultrasound characterising polyp size, number, echotexture, and any comet-tail or twinkling artefact, Serial ultrasound surveillance to assess polyp stability or growth over time, Contrast-enhanced or"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassure and avoid intervention in asymptomatic incidental cholesterolosis, which is benign and not premalignant"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming any gallbladder polyp is a benign cholesterol polyp and thereby missing a neoplastic lesion that meets resection or surveillance criteria"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of cholesterolosis gallbladder."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "cholesterolosis_gallbladder-matrix",
+      "title": "cholesterolosis gallbladder: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Cholesterolosis is a benign condition in which cholesterol esters and triglycerides accumulate within lipid-laden macrophages in",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Abdominal ultrasound characterising polyp size, number, echotexture, and any comet-tail or twinkling artefact, Serial ultrasound",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Adenomatous or other neoplastic gallbladder polyp, Gallbladder adenomyomatosis, Adherent gallstone or biliary sludge ball",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassure and avoid intervention in asymptomatic incidental cholesterolosis, which is benign and not premalignant",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming any gallbladder polyp is a benign cholesterol polyp and thereby missing a neoplastic lesion that meets resection or",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for cholesterolosis gallbladder."
+    }
+  ],
+  "diagrams": []
 }

@@ -1,175 +1,153 @@
 {
- "id": "phlyctenulosis",
- "name": "Phlyctenular keratoconjunctivitis",
- "aliases": [
-  "phlyctenulosis",
-  "phlyctenular keratoconjunctivitis",
-  "corneal phlycten"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology / Cornea",
- "referenceOnly": true,
- "reference": {
-  "source": "Kanski Clinical Ophthalmology / Cornea by Krachmer",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A delayed (type IV) hypersensitivity reaction of the conjunctiva and cornea, presenting as small raised nodules (phlyctens) with surrounding hyperaemia",
-   "The classic antigenic triggers are staphylococcal antigens (associated with chronic blepharitis) and, historically or in endemic areas, tuberculoprotein",
-   "Conjunctival phlyctens near the limbus are often self-limiting, whereas corneal phlyctens cause marked photophobia, tearing, and blepharospasm",
-   "Corneal lesions may migrate centrally, dragging a leash of vessels behind them and leaving a triangular scar with its apex toward the centre",
-   "Predominantly affects children and young adults and is more common where tuberculosis and malnutrition are prevalent",
-   "Recurrent corneal phlyctens can cause thinning, scarring, and vascularisation with lasting visual impairment",
-   "Management pairs treatment of the underlying trigger (lid hygiene for staphylococcal disease, evaluation for tuberculosis) with topical corticosteroids to control the hypersensitivity reaction",
-   "Because it may signal underlying tuberculosis, systemic evaluation is warranted, particularly in endemic settings"
+  "id": "phlyctenulosis",
+  "name": "Phlyctenular keratoconjunctivitis",
+  "aliases": [
+    "phlyctenulosis",
+    "phlyctenular keratoconjunctivitis",
+    "corneal phlycten"
   ],
-  "pathophysiology": "Phlyctenular keratoconjunctivitis is a delayed-type hypersensitivity response to microbial antigens, most often staphylococcal proteins associated with chronic blepharitis, and historically tuberculoprotein. Sensitised T lymphocytes react to the antigen at the limbus, cornea, or conjunctiva, producing a localised nodular infiltrate (the phlycten) with surrounding vascular congestion. The overlying epithelium may ulcerate. Corneal phlyctens can advance centrally, drawing a wedge of new vessels and leaving a scar. Repeated episodes cause progressive corneal vascularisation, thinning, and scarring. As the disorder reflects an immune reaction to a remote antigen rather than active local infection, treatment targets both the antigenic source and the hypersensitivity response.",
-  "additionalDifferentials": [
-   "Marginal (staphylococcal hypersensitivity) keratitis",
-   "Herpes simplex or herpes zoster keratitis",
-   "Nodular episcleritis",
-   "Inflamed pinguecula or limbal nodule",
-   "Vernal keratoconjunctivitis with limbal nodules",
-   "Infective (bacterial) limbal keratitis"
-  ],
-  "additionalInvestigations": [
-   "Slit-lamp examination documenting limbal or corneal phlyctens and associated vascular leash",
-   "Assessment for blepharitis and staphylococcal lid disease",
-   "Tuberculosis evaluation (tuberculin skin test or interferon-gamma release assay, chest imaging) especially in endemic areas or recurrent disease",
-   "Fluorescein staining to assess epithelial ulceration over the phlycten",
-   "Screening for malnutrition or systemic predisposition in children",
-   "Cultures if secondary infection is suspected"
-  ],
-  "redFlags": [
-   "Central corneal involvement with scarring and visual loss",
-   "Features suggesting underlying active tuberculosis requiring systemic investigation",
-   "Corneal thinning or ulceration risking perforation",
-   "Recurrent disease indicating an uncontrolled antigenic trigger"
-  ],
-  "prognosis": "Conjunctival phlyctens are usually self-limiting and resolve without sequelae, whereas recurrent corneal disease can cause scarring, vascularisation, and lasting visual impairment. Controlling the underlying trigger reduces recurrence and preserves vision.",
-  "pitfalls": [
-   "Treating the eye with steroids without addressing the underlying blepharitis or investigating for tuberculosis",
-   "Missing an infective keratitis mimicking a phlycten before prescribing steroids",
-   "Overlooking central corneal scarring as a cause of reduced vision",
-   "Failing to screen for tuberculosis and malnutrition in at-risk children"
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology",
-   "Cornea by Krachmer, Mannis and Holland"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Suppress the hypersensitivity inflammation with a short course of topical corticosteroid, tapered to the lowest effective strength",
-   "Eliminate the antigenic source by treating staphylococcal blepharitis with lid hygiene, warm compresses and topical antibiotic ointment",
-   "Give oral tetracyclines in adults, or a macrolide such as erythromycin in children, for recalcitrant lid disease",
-   "Evaluate for and treat tuberculosis with standard antituberculous therapy where it is the implicated trigger",
-   "Relieve photophobia and pain with ocular lubricants and a cycloplegic agent",
-   "Address malnutrition and general health in affected children",
-   "Follow up under ophthalmology for corneal lesions and monitor for scarring and vascularisation",
-   "Prevent recurrence through ongoing control of blepharitis and lid margin disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "phlyctenulosis-pathway",
-   "title": "Phlyctenular keratoconjunctivitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A delayed (type IV) hypersensitivity reaction of the conjunctiva and cornea, presenting as small raised nodules (phlyctens) with surrounding hyperaemia",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Central corneal involvement with scarring and visual loss",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Slit-lamp examination documenting limbal or corneal phlyctens and associated vascular leash, Assessment for blepharitis and staphylococcal lid disease, Tuberculosis evaluation (tuberculin skin test or interferon-gamma"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Suppress the hypersensitivity inflammation with a short course of topical corticosteroid, tapered to the lowest effective strength"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating the eye with steroids without addressing the underlying blepharitis or investigating for tuberculosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of phlyctenular keratoconjunctivitis."
-  }
- ],
- "tables": [
-  {
-   "id": "phlyctenulosis-matrix",
-   "title": "Phlyctenular keratoconjunctivitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A delayed (type IV) hypersensitivity reaction of the conjunctiva and cornea, presenting as small raised nodules (phlyctens) with",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology / Cornea",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kanski Clinical Ophthalmology / Cornea by Krachmer",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A delayed (type IV) hypersensitivity reaction of the conjunctiva and cornea, presenting as small raised nodules (phlyctens) with surrounding hyperaemia",
+      "The classic antigenic triggers are staphylococcal antigens (associated with chronic blepharitis) and, historically or in endemic areas, tuberculoprotein",
+      "Conjunctival phlyctens near the limbus are often self-limiting, whereas corneal phlyctens cause marked photophobia, tearing, and blepharospasm",
+      "Corneal lesions may migrate centrally, dragging a leash of vessels behind them and leaving a triangular scar with its apex toward the centre",
+      "Predominantly affects children and young adults and is more common where tuberculosis and malnutrition are prevalent",
+      "Recurrent corneal phlyctens can cause thinning, scarring, and vascularisation with lasting visual impairment",
+      "Management pairs treatment of the underlying trigger (lid hygiene for staphylococcal disease, evaluation for tuberculosis) with topical corticosteroids to control the hypersensitivity reaction",
+      "Because it may signal underlying tuberculosis, systemic evaluation is warranted, particularly in endemic settings"
     ],
-    [
-     "Key Investigations",
-     "Slit-lamp examination documenting limbal or corneal phlyctens and associated vascular leash, Assessment for blepharitis and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Phlyctenular keratoconjunctivitis is a delayed-type hypersensitivity response to microbial antigens, most often staphylococcal proteins associated with chronic blepharitis, and historically tuberculoprotein. Sensitised T lymphocytes react to the antigen at the limbus, cornea, or conjunctiva, producing a localised nodular infiltrate (the phlycten) with surrounding vascular congestion. The overlying epithelium may ulcerate. Corneal phlyctens can advance centrally, drawing a wedge of new vessels and leaving a scar. Repeated episodes cause progressive corneal vascularisation, thinning, and scarring. As the disorder reflects an immune reaction to a remote antigen rather than active local infection, treatment targets both the antigenic source and the hypersensitivity response.",
+    "additionalDifferentials": [
+      "Marginal (staphylococcal hypersensitivity) keratitis",
+      "Herpes simplex or herpes zoster keratitis",
+      "Nodular episcleritis",
+      "Inflamed pinguecula or limbal nodule",
+      "Vernal keratoconjunctivitis with limbal nodules",
+      "Infective (bacterial) limbal keratitis"
     ],
-    [
-     "Primary Differentials",
-     "Marginal (staphylococcal hypersensitivity) keratitis, Herpes simplex or herpes zoster keratitis, Nodular episcleritis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Slit-lamp examination documenting limbal or corneal phlyctens and associated vascular leash",
+      "Assessment for blepharitis and staphylococcal lid disease",
+      "Tuberculosis evaluation (tuberculin skin test or interferon-gamma release assay, chest imaging) especially in endemic areas or recurrent disease",
+      "Fluorescein staining to assess epithelial ulceration over the phlycten",
+      "Screening for malnutrition or systemic predisposition in children",
+      "Cultures if secondary infection is suspected"
     ],
-    [
-     "Management Strategy",
-     "Suppress the hypersensitivity inflammation with a short course of topical corticosteroid, tapered to the lowest effective strength",
-     "Core treatment modality"
+    "redFlags": [
+      "Central corneal involvement with scarring and visual loss",
+      "Features suggesting underlying active tuberculosis requiring systemic investigation",
+      "Corneal thinning or ulceration risking perforation",
+      "Recurrent disease indicating an uncontrolled antigenic trigger"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating the eye with steroids without addressing the underlying blepharitis or investigating for tuberculosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Conjunctival phlyctens are usually self-limiting and resolve without sequelae, whereas recurrent corneal disease can cause scarring, vascularisation, and lasting visual impairment. Controlling the underlying trigger reduces recurrence and preserves vision.",
+    "pitfalls": [
+      "Treating the eye with steroids without addressing the underlying blepharitis or investigating for tuberculosis",
+      "Missing an infective keratitis mimicking a phlycten before prescribing steroids",
+      "Overlooking central corneal scarring as a cause of reduced vision",
+      "Failing to screen for tuberculosis and malnutrition in at-risk children"
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology",
+      "Cornea by Krachmer, Mannis and Holland"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Suppress the hypersensitivity inflammation with a short course of topical corticosteroid, tapered to the lowest effective strength",
+      "Eliminate the antigenic source by treating staphylococcal blepharitis with lid hygiene, warm compresses and topical antibiotic ointment",
+      "Give oral tetracyclines in adults, or a macrolide such as erythromycin in children, for recalcitrant lid disease",
+      "Evaluate for and treat tuberculosis with standard antituberculous therapy where it is the implicated trigger",
+      "Relieve photophobia and pain with ocular lubricants and a cycloplegic agent",
+      "Address malnutrition and general health in affected children",
+      "Follow up under ophthalmology for corneal lesions and monitor for scarring and vascularisation",
+      "Prevent recurrence through ongoing control of blepharitis and lid margin disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for phlyctenular keratoconjunctivitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "phlyctenulosis-real-image",
-   "title": "Phlyctenular keratoconjunctivitis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "phlyctenulosis-pathway",
+      "title": "Phlyctenular keratoconjunctivitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A delayed (type IV) hypersensitivity reaction of the conjunctiva and cornea, presenting as small raised nodules (phlyctens) with surrounding hyperaemia",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Central corneal involvement with scarring and visual loss",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Slit-lamp examination documenting limbal or corneal phlyctens and associated vascular leash, Assessment for blepharitis and staphylococcal lid disease, Tuberculosis evaluation (tuberculin skin test or interferon-gamma"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Suppress the hypersensitivity inflammation with a short course of topical corticosteroid, tapered to the lowest effective strength"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating the eye with steroids without addressing the underlying blepharitis or investigating for tuberculosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of phlyctenular keratoconjunctivitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "phlyctenulosis-matrix",
+      "title": "Phlyctenular keratoconjunctivitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A delayed (type IV) hypersensitivity reaction of the conjunctiva and cornea, presenting as small raised nodules (phlyctens) with",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Slit-lamp examination documenting limbal or corneal phlyctens and associated vascular leash, Assessment for blepharitis and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Marginal (staphylococcal hypersensitivity) keratitis, Herpes simplex or herpes zoster keratitis, Nodular episcleritis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Suppress the hypersensitivity inflammation with a short course of topical corticosteroid, tapered to the lowest effective strength",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating the eye with steroids without addressing the underlying blepharitis or investigating for tuberculosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for phlyctenular keratoconjunctivitis."
+    }
+  ],
+  "diagrams": []
 }

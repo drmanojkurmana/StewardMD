@@ -1,174 +1,152 @@
 {
- "id": "intermediate_uveitis",
- "name": "Intermediate uveitis",
- "aliases": [
-  "intermediate uveitis",
-  "vitritis",
-  "peripheral uveitis"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology / Retina",
- "referenceOnly": true,
- "reference": {
-  "source": "Kanski's Clinical Ophthalmology / Ryan's Retina",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Inflammation is centred on the vitreous, the peripheral retina and the pars plana rather than the anterior segment",
-   "The usual symptoms are floaters and blurred vision, typically in a white, comfortable eye with little pain or redness",
-   "Vitreous inflammatory aggregates (snowballs) and exudative material over the pars plana (snowbanking) are the hallmark signs, best seen on indented indirect ophthalmoscopy",
-   "Cystoid macular oedema is the leading cause of visual loss and should be sought on optical coherence tomography",
-   "Recognised associations include multiple sclerosis, sarcoidosis, Lyme disease and tuberculosis, although many cases are idiopathic",
-   "Peripheral retinal vasculitis and neovascularisation of the snowbank may occur and can bleed",
-   "Treatment follows a stepladder of corticosteroids, then steroid-sparing immunosuppression, with control of macular oedema as the main goal"
+  "id": "intermediate_uveitis",
+  "name": "Intermediate uveitis",
+  "aliases": [
+    "intermediate uveitis",
+    "vitritis",
+    "peripheral uveitis"
   ],
-  "pathophysiology": "Intermediate uveitis is a chronic, predominantly T-cell mediated inflammation of the vitreous base, peripheral retina and pars plana. Inflammatory cells aggregate within the vitreous as snowballs and become organised into a snowbank overlying the inferior pars plana. Breakdown of the blood-retinal barrier and release of inflammatory cytokines lead to cystoid macular oedema, the principal threat to vision. The disorder may be idiopathic or form part of a systemic inflammatory or infective disease such as sarcoidosis, multiple sclerosis or tuberculosis.",
-  "additionalDifferentials": [
-   "Posterior uveitis",
-   "Sarcoid uveitis",
-   "Multiple sclerosis-associated uveitis",
-   "Lyme disease",
-   "Tuberculous uveitis",
-   "Primary intraocular lymphoma (masquerade syndrome)",
-   "Ocular toxocariasis"
-  ],
-  "additionalInvestigations": [
-   "Indirect ophthalmoscopy with scleral indentation to detect snowballs and snowbanking",
-   "Optical coherence tomography of the macula for cystoid macular oedema",
-   "Fluorescein angiography to demonstrate peripheral vasculitis and leakage",
-   "Magnetic resonance imaging of the brain when demyelination is suspected",
-   "Serology for Lyme disease and syphilis",
-   "Chest imaging and serum angiotensin-converting enzyme for sarcoidosis, with tuberculosis testing"
-  ],
-  "redFlags": [
-   "Dense vitritis in an older patient, raising the possibility of masquerade lymphoma",
-   "Neurological symptoms suggesting multiple sclerosis",
-   "Profound or refractory cystoid macular oedema",
-   "Vitreous haemorrhage or tractional detachment from snowbank neovascularisation"
-  ],
-  "prognosis": "The course is frequently chronic and relapsing; the visual outcome is largely determined by how well cystoid macular oedema is controlled, and many patients maintain good vision with appropriate treatment.",
-  "pitfalls": [
-   "Failing to investigate for an underlying systemic association such as multiple sclerosis or sarcoidosis",
-   "Overlooking masquerade lymphoma in older patients with persistent vitritis",
-   "Under-treating chronic cystoid macular oedema",
-   "Not examining the peripheral retina and pars plana adequately"
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology",
-   "Ryan's Retina",
-   "American Academy of Ophthalmology, Basic and Clinical Science Course: Uveitis and Ocular Inflammation"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Control inflammation with corticosteroids by periocular or intravitreal injection or systemic route, using a stepladder approach",
-   "Add steroid-sparing immunosuppression (methotrexate or mycophenolate) and escalate to biologics such as anti-TNF agents for chronic or refractory disease",
-   "Treat cystoid macular oedema, the main threat to vision, and monitor it with optical coherence tomography",
-   "Identify and treat any underlying systemic cause (sarcoidosis, tuberculosis, Lyme disease or multiple sclerosis) with appropriate directed therapy",
-   "Manage peripheral retinal neovascularisation of the snowbank with laser photocoagulation or cryotherapy, and consider vitrectomy for non-clearing vitreous haemorrhage or persistent inflammation",
-   "Coordinate care between ophthalmology and relevant physicians (neurology, respiratory or infectious diseases) for associated systemic disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "intermediate_uveitis-pathway",
-   "title": "Intermediate uveitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Inflammation is centred on the vitreous, the peripheral retina and the pars plana rather than the anterior segment",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Dense vitritis in an older patient, raising the possibility of masquerade lymphoma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Indirect ophthalmoscopy with scleral indentation to detect snowballs and snowbanking, Optical coherence tomography of the macula for cystoid macular oedema, Fluorescein angiography to demonstrate peripheral vasculitis and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Control inflammation with corticosteroids by periocular or intravitreal injection or systemic route, using a stepladder approach"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to investigate for an underlying systemic association such as multiple sclerosis or sarcoidosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of intermediate uveitis."
-  }
- ],
- "tables": [
-  {
-   "id": "intermediate_uveitis-matrix",
-   "title": "Intermediate uveitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Inflammation is centred on the vitreous, the peripheral retina and the pars plana rather than the anterior segment",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology / Retina",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kanski's Clinical Ophthalmology / Ryan's Retina",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Inflammation is centred on the vitreous, the peripheral retina and the pars plana rather than the anterior segment",
+      "The usual symptoms are floaters and blurred vision, typically in a white, comfortable eye with little pain or redness",
+      "Vitreous inflammatory aggregates (snowballs) and exudative material over the pars plana (snowbanking) are the hallmark signs, best seen on indented indirect ophthalmoscopy",
+      "Cystoid macular oedema is the leading cause of visual loss and should be sought on optical coherence tomography",
+      "Recognised associations include multiple sclerosis, sarcoidosis, Lyme disease and tuberculosis, although many cases are idiopathic",
+      "Peripheral retinal vasculitis and neovascularisation of the snowbank may occur and can bleed",
+      "Treatment follows a stepladder of corticosteroids, then steroid-sparing immunosuppression, with control of macular oedema as the main goal"
     ],
-    [
-     "Key Investigations",
-     "Indirect ophthalmoscopy with scleral indentation to detect snowballs and snowbanking, Optical coherence tomography of the macula",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Intermediate uveitis is a chronic, predominantly T-cell mediated inflammation of the vitreous base, peripheral retina and pars plana. Inflammatory cells aggregate within the vitreous as snowballs and become organised into a snowbank overlying the inferior pars plana. Breakdown of the blood-retinal barrier and release of inflammatory cytokines lead to cystoid macular oedema, the principal threat to vision. The disorder may be idiopathic or form part of a systemic inflammatory or infective disease such as sarcoidosis, multiple sclerosis or tuberculosis.",
+    "additionalDifferentials": [
+      "Posterior uveitis",
+      "Sarcoid uveitis",
+      "Multiple sclerosis-associated uveitis",
+      "Lyme disease",
+      "Tuberculous uveitis",
+      "Primary intraocular lymphoma (masquerade syndrome)",
+      "Ocular toxocariasis"
     ],
-    [
-     "Primary Differentials",
-     "Posterior uveitis, Sarcoid uveitis, Multiple sclerosis-associated uveitis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Indirect ophthalmoscopy with scleral indentation to detect snowballs and snowbanking",
+      "Optical coherence tomography of the macula for cystoid macular oedema",
+      "Fluorescein angiography to demonstrate peripheral vasculitis and leakage",
+      "Magnetic resonance imaging of the brain when demyelination is suspected",
+      "Serology for Lyme disease and syphilis",
+      "Chest imaging and serum angiotensin-converting enzyme for sarcoidosis, with tuberculosis testing"
     ],
-    [
-     "Management Strategy",
-     "Control inflammation with corticosteroids by periocular or intravitreal injection or systemic route, using a stepladder approach",
-     "Core treatment modality"
+    "redFlags": [
+      "Dense vitritis in an older patient, raising the possibility of masquerade lymphoma",
+      "Neurological symptoms suggesting multiple sclerosis",
+      "Profound or refractory cystoid macular oedema",
+      "Vitreous haemorrhage or tractional detachment from snowbank neovascularisation"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to investigate for an underlying systemic association such as multiple sclerosis or sarcoidosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "The course is frequently chronic and relapsing; the visual outcome is largely determined by how well cystoid macular oedema is controlled, and many patients maintain good vision with appropriate treatment.",
+    "pitfalls": [
+      "Failing to investigate for an underlying systemic association such as multiple sclerosis or sarcoidosis",
+      "Overlooking masquerade lymphoma in older patients with persistent vitritis",
+      "Under-treating chronic cystoid macular oedema",
+      "Not examining the peripheral retina and pars plana adequately"
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology",
+      "Ryan's Retina",
+      "American Academy of Ophthalmology, Basic and Clinical Science Course: Uveitis and Ocular Inflammation"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Control inflammation with corticosteroids by periocular or intravitreal injection or systemic route, using a stepladder approach",
+      "Add steroid-sparing immunosuppression (methotrexate or mycophenolate) and escalate to biologics such as anti-TNF agents for chronic or refractory disease",
+      "Treat cystoid macular oedema, the main threat to vision, and monitor it with optical coherence tomography",
+      "Identify and treat any underlying systemic cause (sarcoidosis, tuberculosis, Lyme disease or multiple sclerosis) with appropriate directed therapy",
+      "Manage peripheral retinal neovascularisation of the snowbank with laser photocoagulation or cryotherapy, and consider vitrectomy for non-clearing vitreous haemorrhage or persistent inflammation",
+      "Coordinate care between ophthalmology and relevant physicians (neurology, respiratory or infectious diseases) for associated systemic disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for intermediate uveitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "intermediate-uveitis-real-image",
-   "title": "Intermediate uveitis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "intermediate_uveitis-pathway",
+      "title": "Intermediate uveitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Inflammation is centred on the vitreous, the peripheral retina and the pars plana rather than the anterior segment",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Dense vitritis in an older patient, raising the possibility of masquerade lymphoma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Indirect ophthalmoscopy with scleral indentation to detect snowballs and snowbanking, Optical coherence tomography of the macula for cystoid macular oedema, Fluorescein angiography to demonstrate peripheral vasculitis and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Control inflammation with corticosteroids by periocular or intravitreal injection or systemic route, using a stepladder approach"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to investigate for an underlying systemic association such as multiple sclerosis or sarcoidosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of intermediate uveitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "intermediate_uveitis-matrix",
+      "title": "Intermediate uveitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Inflammation is centred on the vitreous, the peripheral retina and the pars plana rather than the anterior segment",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Indirect ophthalmoscopy with scleral indentation to detect snowballs and snowbanking, Optical coherence tomography of the macula",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Posterior uveitis, Sarcoid uveitis, Multiple sclerosis-associated uveitis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Control inflammation with corticosteroids by periocular or intravitreal injection or systemic route, using a stepladder approach",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to investigate for an underlying systemic association such as multiple sclerosis or sarcoidosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for intermediate uveitis."
+    }
+  ],
+  "diagrams": []
 }

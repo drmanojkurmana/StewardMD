@@ -1,176 +1,154 @@
 {
- "id": "congenital_hypomyelinating_neuropathy",
- "name": "Congenital hypomyelinating neuropathy",
- "aliases": [
-  "CHN",
-  "congenital hypomyelination",
-  "EGR2",
-  "MPZ",
-  "PMP22"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neuromuscular",
- "specialty": "Neurology / Neuromuscular",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / Bradley and Daroff Neurology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Most severe congenital demyelinating neuropathy, presenting at or shortly after birth with profound hypotonia and weakness (the floppy infant)",
-   "Results from a failure of Schwann cells to form myelin, associated with variants in EGR2, MPZ, PMP22 and related myelin genes",
-   "Neonates often have respiratory and feeding difficulties, areflexia and distal contractures (arthrogryposis) reflecting antenatal immobility",
-   "Nerve conduction studies show extremely slow, often barely detectable motor conduction velocities because myelin is essentially absent",
-   "Nerve biopsy reveals a striking lack of myelin with thin or absent sheaths and basal lamina onion bulbs, distinguishing hypomyelination from later demyelination",
-   "It represents the most severe end of the CMT1/Dejerine-Sottas spectrum and can be difficult to separate clinically from severe Dejerine-Sottas disease",
-   "Diagnosis combines the neonatal presentation, profoundly slow electrophysiology, biopsy findings and genetic confirmation"
+  "id": "congenital_hypomyelinating_neuropathy",
+  "name": "Congenital hypomyelinating neuropathy",
+  "aliases": [
+    "CHN",
+    "congenital hypomyelination",
+    "EGR2",
+    "MPZ",
+    "PMP22"
   ],
-  "pathophysiology": "Congenital hypomyelinating neuropathy arises when variants in genes controlling myelin formation, notably the transcription factor EGR2 and the structural proteins encoded by MPZ and PMP22, prevent Schwann cells from myelinating peripheral axons during development. Unlike the demyelinating CMTs, in which myelin forms and is then lost, here myelin is never properly established, so nerves remain largely amyelinated with basal lamina onion bulbs. The near-complete absence of myelin abolishes efficient saltatory conduction, producing the extremely slow or unobtainable conduction velocities and the severe, early neuromuscular dysfunction. Antenatal weakness can lead to joint contractures.",
-  "additionalDifferentials": [
-   "Dejerine-Sottas disease",
-   "Spinal muscular atrophy presenting as a floppy infant",
-   "Congenital myopathies and congenital myasthenic syndromes",
-   "Congenital muscular dystrophy",
-   "Neonatal inflammatory neuropathy",
-   "Metabolic and mitochondrial disorders causing neonatal hypotonia"
-  ],
-  "additionalInvestigations": [
-   "Nerve conduction studies showing profoundly slow or absent responses",
-   "Sural nerve biopsy demonstrating amyelination and basal lamina onion bulbs",
-   "Sequencing of EGR2, MPZ, PMP22 and a broad neuropathy panel",
-   "Respiratory and swallowing assessment in the neonate",
-   "Genetic testing for spinal muscular atrophy and other floppy-infant causes",
-   "Multidisciplinary neonatal neuromuscular evaluation"
-  ],
-  "redFlags": [
-   "Neonatal respiratory failure requiring urgent support",
-   "Severe feeding and swallowing difficulty with aspiration risk",
-   "Rapidly progressive weakness in the neonatal period",
-   "Multiple joint contractures indicating significant antenatal involvement"
-  ],
-  "prognosis": "Generally poor, with severe disability and, in the most affected infants, early respiratory compromise; outcome depends on the specific variant, and some children survive with major motor impairment.",
-  "pitfalls": [
-   "Confusing hypomyelination (myelin never formed) with acquired or later-onset demyelination",
-   "Attributing neonatal hypotonia to a central cause without electrophysiology",
-   "Overlooking respiratory involvement, which drives early prognosis",
-   "Failing to distinguish it from spinal muscular atrophy and other floppy-infant syndromes"
-  ],
-  "references": [
-   "GeneReviews: EGR2- and Myelin-Gene-Related Congenital Hypomyelinating Neuropathy",
-   "Bradley and Daroff's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No disease-modifying therapy exists; care is supportive, centred on early respiratory support with non-invasive or invasive ventilation for neonatal respiratory failure",
-   "Secure nutrition with nasogastric or gastrostomy feeding to overcome bulbar weakness and feeding difficulty",
-   "Physiotherapy, orthoses and serial casting or corrective surgery to manage arthrogrypotic contractures and preserve range of movement",
-   "Occupational therapy with adaptive seating and powered mobility aids for profound weakness",
-   "Ongoing surveillance for respiratory insufficiency, scoliosis and progressive orthopaedic deformity",
-   "Coordinated multidisciplinary neuromuscular team including neurology, respiratory, orthopaedics and rehabilitation",
-   "Genetic counselling with family and carrier testing given autosomal EGR2, MPZ and PMP22 inheritance, offering prenatal testing",
-   "Advance care planning with palliative input for the most severely affected infants"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "congenital_hypomyelinating_neuropathy-pathway",
-   "title": "Congenital hypomyelinating neuropathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Most severe congenital demyelinating neuropathy, presenting at or shortly after birth with profound hypotonia and weakness (the floppy infant)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Neonatal respiratory failure requiring urgent support",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Nerve conduction studies showing profoundly slow or absent responses, Sural nerve biopsy demonstrating amyelination and basal lamina onion bulbs, Sequencing of EGR2, MPZ, PMP22 and a broad neuropathy panel"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No disease-modifying therapy exists; care is supportive, centred on early respiratory support with non-invasive or invasive ventilation for neonatal respiratory failure"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing hypomyelination (myelin never formed) with acquired or later-onset demyelination"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of congenital hypomyelinating neuropathy."
-  }
- ],
- "tables": [
-  {
-   "id": "congenital_hypomyelinating_neuropathy-matrix",
-   "title": "Congenital hypomyelinating neuropathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Most severe congenital demyelinating neuropathy, presenting at or shortly after birth with profound hypotonia and weakness (the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neuromuscular",
+  "specialty": "Neurology / Neuromuscular",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / Bradley and Daroff Neurology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Most severe congenital demyelinating neuropathy, presenting at or shortly after birth with profound hypotonia and weakness (the floppy infant)",
+      "Results from a failure of Schwann cells to form myelin, associated with variants in EGR2, MPZ, PMP22 and related myelin genes",
+      "Neonates often have respiratory and feeding difficulties, areflexia and distal contractures (arthrogryposis) reflecting antenatal immobility",
+      "Nerve conduction studies show extremely slow, often barely detectable motor conduction velocities because myelin is essentially absent",
+      "Nerve biopsy reveals a striking lack of myelin with thin or absent sheaths and basal lamina onion bulbs, distinguishing hypomyelination from later demyelination",
+      "It represents the most severe end of the CMT1/Dejerine-Sottas spectrum and can be difficult to separate clinically from severe Dejerine-Sottas disease",
+      "Diagnosis combines the neonatal presentation, profoundly slow electrophysiology, biopsy findings and genetic confirmation"
     ],
-    [
-     "Key Investigations",
-     "Nerve conduction studies showing profoundly slow or absent responses, Sural nerve biopsy demonstrating amyelination and basal",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Congenital hypomyelinating neuropathy arises when variants in genes controlling myelin formation, notably the transcription factor EGR2 and the structural proteins encoded by MPZ and PMP22, prevent Schwann cells from myelinating peripheral axons during development. Unlike the demyelinating CMTs, in which myelin forms and is then lost, here myelin is never properly established, so nerves remain largely amyelinated with basal lamina onion bulbs. The near-complete absence of myelin abolishes efficient saltatory conduction, producing the extremely slow or unobtainable conduction velocities and the severe, early neuromuscular dysfunction. Antenatal weakness can lead to joint contractures.",
+    "additionalDifferentials": [
+      "Dejerine-Sottas disease",
+      "Spinal muscular atrophy presenting as a floppy infant",
+      "Congenital myopathies and congenital myasthenic syndromes",
+      "Congenital muscular dystrophy",
+      "Neonatal inflammatory neuropathy",
+      "Metabolic and mitochondrial disorders causing neonatal hypotonia"
     ],
-    [
-     "Primary Differentials",
-     "Dejerine-Sottas disease, Spinal muscular atrophy presenting as a floppy infant, Congenital myopathies and congenital myasthenic",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Nerve conduction studies showing profoundly slow or absent responses",
+      "Sural nerve biopsy demonstrating amyelination and basal lamina onion bulbs",
+      "Sequencing of EGR2, MPZ, PMP22 and a broad neuropathy panel",
+      "Respiratory and swallowing assessment in the neonate",
+      "Genetic testing for spinal muscular atrophy and other floppy-infant causes",
+      "Multidisciplinary neonatal neuromuscular evaluation"
     ],
-    [
-     "Management Strategy",
-     "No disease-modifying therapy exists; care is supportive, centred on early respiratory support with non-invasive or invasive",
-     "Core treatment modality"
+    "redFlags": [
+      "Neonatal respiratory failure requiring urgent support",
+      "Severe feeding and swallowing difficulty with aspiration risk",
+      "Rapidly progressive weakness in the neonatal period",
+      "Multiple joint contractures indicating significant antenatal involvement"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing hypomyelination (myelin never formed) with acquired or later-onset demyelination",
-     "Prevent diagnostic or management error"
+    "prognosis": "Generally poor, with severe disability and, in the most affected infants, early respiratory compromise; outcome depends on the specific variant, and some children survive with major motor impairment.",
+    "pitfalls": [
+      "Confusing hypomyelination (myelin never formed) with acquired or later-onset demyelination",
+      "Attributing neonatal hypotonia to a central cause without electrophysiology",
+      "Overlooking respiratory involvement, which drives early prognosis",
+      "Failing to distinguish it from spinal muscular atrophy and other floppy-infant syndromes"
+    ],
+    "references": [
+      "GeneReviews: EGR2- and Myelin-Gene-Related Congenital Hypomyelinating Neuropathy",
+      "Bradley and Daroff's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No disease-modifying therapy exists; care is supportive, centred on early respiratory support with non-invasive or invasive ventilation for neonatal respiratory failure",
+      "Secure nutrition with nasogastric or gastrostomy feeding to overcome bulbar weakness and feeding difficulty",
+      "Physiotherapy, orthoses and serial casting or corrective surgery to manage arthrogrypotic contractures and preserve range of movement",
+      "Occupational therapy with adaptive seating and powered mobility aids for profound weakness",
+      "Ongoing surveillance for respiratory insufficiency, scoliosis and progressive orthopaedic deformity",
+      "Coordinated multidisciplinary neuromuscular team including neurology, respiratory, orthopaedics and rehabilitation",
+      "Genetic counselling with family and carrier testing given autosomal EGR2, MPZ and PMP22 inheritance, offering prenatal testing",
+      "Advance care planning with palliative input for the most severely affected infants"
     ]
-   ],
-   "caption": "Overview comparison matrix for congenital hypomyelinating neuropathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "congenital-hypomyelinating-neuropathy-real-image",
-   "title": "Congenital hypomyelinating neuropathy: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "congenital_hypomyelinating_neuropathy-pathway",
+      "title": "Congenital hypomyelinating neuropathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Most severe congenital demyelinating neuropathy, presenting at or shortly after birth with profound hypotonia and weakness (the floppy infant)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Neonatal respiratory failure requiring urgent support",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Nerve conduction studies showing profoundly slow or absent responses, Sural nerve biopsy demonstrating amyelination and basal lamina onion bulbs, Sequencing of EGR2, MPZ, PMP22 and a broad neuropathy panel"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No disease-modifying therapy exists; care is supportive, centred on early respiratory support with non-invasive or invasive ventilation for neonatal respiratory failure"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing hypomyelination (myelin never formed) with acquired or later-onset demyelination"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of congenital hypomyelinating neuropathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "congenital_hypomyelinating_neuropathy-matrix",
+      "title": "Congenital hypomyelinating neuropathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Most severe congenital demyelinating neuropathy, presenting at or shortly after birth with profound hypotonia and weakness (the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Nerve conduction studies showing profoundly slow or absent responses, Sural nerve biopsy demonstrating amyelination and basal",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Dejerine-Sottas disease, Spinal muscular atrophy presenting as a floppy infant, Congenital myopathies and congenital myasthenic",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No disease-modifying therapy exists; care is supportive, centred on early respiratory support with non-invasive or invasive",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing hypomyelination (myelin never formed) with acquired or later-onset demyelination",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for congenital hypomyelinating neuropathy."
+    }
+  ],
+  "diagrams": []
 }

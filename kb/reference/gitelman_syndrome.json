@@ -1,173 +1,151 @@
 {
- "id": "gitelman_syndrome",
- "name": "Gitelman syndrome",
- "aliases": [
-  "Gitelman's syndrome",
-  "familial hypokalaemia-hypomagnesaemia",
-  "thiazide-like tubulopathy"
- ],
- "class": "non_infective",
- "system": "Renal",
- "specialty": "Nephrology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / KDIGO",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Gitelman syndrome is an inherited tubulopathy that mimics chronic thiazide diuretic use because the defect is in sodium chloride transport in the distal convoluted tubule",
-   "The distinguishing electrolyte signature is hypokalaemia and metabolic alkalosis together with hypomagnesaemia and low urinary calcium excretion",
-   "It usually presents later than Bartter syndrome, often in adolescence or adulthood, with mild symptoms such as cramps, fatigue, tetany, and salt craving",
-   "Hypocalciuria and hypomagnesaemia are the key features separating it from Bartter syndrome, which typically shows normal or high calcium excretion",
-   "Blood pressure is normal or low, and renin and aldosterone are elevated as a compensatory response to salt wasting",
-   "Chondrocalcinosis and joint symptoms can occur, related to chronic magnesium depletion",
-   "Management principles are generous replacement of potassium and magnesium, liberal salt intake, and sometimes potassium-sparing agents, with magnesium repletion being essential for correcting the hypokalaemia"
+  "id": "gitelman_syndrome",
+  "name": "Gitelman syndrome",
+  "aliases": [
+    "Gitelman's syndrome",
+    "familial hypokalaemia-hypomagnesaemia",
+    "thiazide-like tubulopathy"
   ],
-  "pathophysiology": "Gitelman syndrome is an autosomal recessive disorder caused by loss-of-function mutations in the thiazide-sensitive sodium-chloride cotransporter of the distal convoluted tubule. Impaired sodium chloride reabsorption at this site leads to renal salt wasting and mild volume contraction, activating the renin-angiotensin-aldosterone system. Increased distal sodium delivery combined with secondary hyperaldosteronism promotes potassium and hydrogen secretion, producing hypokalaemia and metabolic alkalosis. The defect enhances calcium reabsorption downstream, giving the characteristic hypocalciuria, while magnesium wasting from altered distal tubular handling causes hypomagnesaemia. The overall picture closely resembles the effect of long-term thiazide therapy.",
-  "additionalDifferentials": [
-   "Bartter syndrome",
-   "Surreptitious thiazide diuretic use",
-   "Chronic vomiting",
-   "Laxative abuse",
-   "Primary hypomagnesaemia from other causes",
-   "Primary hyperaldosteronism (distinguished by hypertension)"
-  ],
-  "additionalInvestigations": [
-   "Serum potassium, magnesium, and bicarbonate to define the hypokalaemic, hypomagnesaemic alkalosis",
-   "Urinary calcium-to-creatinine ratio demonstrating hypocalciuria",
-   "Plasma renin and aldosterone, usually elevated",
-   "Urine electrolytes and screening for covert diuretic use",
-   "Genetic testing to confirm the diagnosis and for family counselling",
-   "ECG when significant hypokalaemia or hypomagnesaemia is present"
-  ],
-  "redFlags": [
-   "Symptomatic hypomagnesaemia with tetany or seizures",
-   "Severe hypokalaemia with arrhythmia risk or marked weakness",
-   "Prolonged QT interval predisposing to dangerous arrhythmia",
-   "Persistent symptoms despite apparent replacement, suggesting inadequate magnesium correction"
-  ],
-  "prognosis": "The long-term outlook is generally good, with preserved renal function in most patients, though lifelong electrolyte replacement is required and symptoms can affect quality of life. Correcting magnesium is often the key to stabilising potassium and preventing arrhythmia.",
-  "pitfalls": [
-   "Attempting to correct hypokalaemia without also replacing magnesium, so the potassium remains refractory",
-   "Confusing Gitelman with Bartter syndrome by not measuring urinary calcium and serum magnesium",
-   "Missing surreptitious thiazide use as a mimic of the syndrome",
-   "Overlooking the diagnosis in a normotensive adult with chronic unexplained hypokalaemic alkalosis"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "KDIGO guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Lifelong oral magnesium replacement is the priority, as correcting hypomagnesaemia is usually the key to stabilising potassium",
-   "Oral potassium supplementation together with a liberal, unrestricted salt and fluid intake to offset renal salt wasting",
-   "Potassium-sparing agents such as spironolactone, eplerenone or amiloride to reduce renal potassium and magnesium loss",
-   "Escalate to intravenous magnesium and potassium replacement for severe symptomatic depletion, tetany or arrhythmia",
-   "Regular monitoring of serum potassium and magnesium, with ECG surveillance for arrhythmia during marked disturbance",
-   "Avoid QT-prolonging drugs and counsel on maintaining salt and fluid intake during vomiting, diarrhoea or heat that risk further loss",
-   "Confirm with genetic testing and offer counselling for this autosomal recessive condition, with assessment of at-risk relatives"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "gitelman_syndrome-pathway",
-   "title": "Gitelman syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Gitelman syndrome is an inherited tubulopathy that mimics chronic thiazide diuretic use because the defect is in sodium chloride transport in the distal convoluted tubule",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Symptomatic hypomagnesaemia with tetany or seizures",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum potassium, magnesium, and bicarbonate to define the hypokalaemic, hypomagnesaemic alkalosis, Urinary calcium-to-creatinine ratio demonstrating hypocalciuria, Plasma renin and aldosterone, usually elevated"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Lifelong oral magnesium replacement is the priority, as correcting hypomagnesaemia is usually the key to stabilising potassium"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attempting to correct hypokalaemia without also replacing magnesium, so the potassium remains refractory"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of gitelman syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "gitelman_syndrome-matrix",
-   "title": "Gitelman syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Gitelman syndrome is an inherited tubulopathy that mimics chronic thiazide diuretic use because the defect is in sodium chloride",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Renal",
+  "specialty": "Nephrology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / KDIGO",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Gitelman syndrome is an inherited tubulopathy that mimics chronic thiazide diuretic use because the defect is in sodium chloride transport in the distal convoluted tubule",
+      "The distinguishing electrolyte signature is hypokalaemia and metabolic alkalosis together with hypomagnesaemia and low urinary calcium excretion",
+      "It usually presents later than Bartter syndrome, often in adolescence or adulthood, with mild symptoms such as cramps, fatigue, tetany, and salt craving",
+      "Hypocalciuria and hypomagnesaemia are the key features separating it from Bartter syndrome, which typically shows normal or high calcium excretion",
+      "Blood pressure is normal or low, and renin and aldosterone are elevated as a compensatory response to salt wasting",
+      "Chondrocalcinosis and joint symptoms can occur, related to chronic magnesium depletion",
+      "Management principles are generous replacement of potassium and magnesium, liberal salt intake, and sometimes potassium-sparing agents, with magnesium repletion being essential for correcting the hypokalaemia"
     ],
-    [
-     "Key Investigations",
-     "Serum potassium, magnesium, and bicarbonate to define the hypokalaemic, hypomagnesaemic alkalosis, Urinary calcium-to-creatinine",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Gitelman syndrome is an autosomal recessive disorder caused by loss-of-function mutations in the thiazide-sensitive sodium-chloride cotransporter of the distal convoluted tubule. Impaired sodium chloride reabsorption at this site leads to renal salt wasting and mild volume contraction, activating the renin-angiotensin-aldosterone system. Increased distal sodium delivery combined with secondary hyperaldosteronism promotes potassium and hydrogen secretion, producing hypokalaemia and metabolic alkalosis. The defect enhances calcium reabsorption downstream, giving the characteristic hypocalciuria, while magnesium wasting from altered distal tubular handling causes hypomagnesaemia. The overall picture closely resembles the effect of long-term thiazide therapy.",
+    "additionalDifferentials": [
+      "Bartter syndrome",
+      "Surreptitious thiazide diuretic use",
+      "Chronic vomiting",
+      "Laxative abuse",
+      "Primary hypomagnesaemia from other causes",
+      "Primary hyperaldosteronism (distinguished by hypertension)"
     ],
-    [
-     "Primary Differentials",
-     "Bartter syndrome, Surreptitious thiazide diuretic use, Chronic vomiting",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum potassium, magnesium, and bicarbonate to define the hypokalaemic, hypomagnesaemic alkalosis",
+      "Urinary calcium-to-creatinine ratio demonstrating hypocalciuria",
+      "Plasma renin and aldosterone, usually elevated",
+      "Urine electrolytes and screening for covert diuretic use",
+      "Genetic testing to confirm the diagnosis and for family counselling",
+      "ECG when significant hypokalaemia or hypomagnesaemia is present"
     ],
-    [
-     "Management Strategy",
-     "Lifelong oral magnesium replacement is the priority, as correcting hypomagnesaemia is usually the key to stabilising potassium",
-     "Core treatment modality"
+    "redFlags": [
+      "Symptomatic hypomagnesaemia with tetany or seizures",
+      "Severe hypokalaemia with arrhythmia risk or marked weakness",
+      "Prolonged QT interval predisposing to dangerous arrhythmia",
+      "Persistent symptoms despite apparent replacement, suggesting inadequate magnesium correction"
     ],
-    [
-     "Clinical Pitfall",
-     "Attempting to correct hypokalaemia without also replacing magnesium, so the potassium remains refractory",
-     "Prevent diagnostic or management error"
+    "prognosis": "The long-term outlook is generally good, with preserved renal function in most patients, though lifelong electrolyte replacement is required and symptoms can affect quality of life. Correcting magnesium is often the key to stabilising potassium and preventing arrhythmia.",
+    "pitfalls": [
+      "Attempting to correct hypokalaemia without also replacing magnesium, so the potassium remains refractory",
+      "Confusing Gitelman with Bartter syndrome by not measuring urinary calcium and serum magnesium",
+      "Missing surreptitious thiazide use as a mimic of the syndrome",
+      "Overlooking the diagnosis in a normotensive adult with chronic unexplained hypokalaemic alkalosis"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "KDIGO guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Lifelong oral magnesium replacement is the priority, as correcting hypomagnesaemia is usually the key to stabilising potassium",
+      "Oral potassium supplementation together with a liberal, unrestricted salt and fluid intake to offset renal salt wasting",
+      "Potassium-sparing agents such as spironolactone, eplerenone or amiloride to reduce renal potassium and magnesium loss",
+      "Escalate to intravenous magnesium and potassium replacement for severe symptomatic depletion, tetany or arrhythmia",
+      "Regular monitoring of serum potassium and magnesium, with ECG surveillance for arrhythmia during marked disturbance",
+      "Avoid QT-prolonging drugs and counsel on maintaining salt and fluid intake during vomiting, diarrhoea or heat that risk further loss",
+      "Confirm with genetic testing and offer counselling for this autosomal recessive condition, with assessment of at-risk relatives"
     ]
-   ],
-   "caption": "Overview comparison matrix for gitelman syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "gitelman-syndrome-real-image",
-   "title": "Gitelman syndrome: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "gitelman_syndrome-pathway",
+      "title": "Gitelman syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Gitelman syndrome is an inherited tubulopathy that mimics chronic thiazide diuretic use because the defect is in sodium chloride transport in the distal convoluted tubule",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Symptomatic hypomagnesaemia with tetany or seizures",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum potassium, magnesium, and bicarbonate to define the hypokalaemic, hypomagnesaemic alkalosis, Urinary calcium-to-creatinine ratio demonstrating hypocalciuria, Plasma renin and aldosterone, usually elevated"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Lifelong oral magnesium replacement is the priority, as correcting hypomagnesaemia is usually the key to stabilising potassium"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attempting to correct hypokalaemia without also replacing magnesium, so the potassium remains refractory"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of gitelman syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "gitelman_syndrome-matrix",
+      "title": "Gitelman syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Gitelman syndrome is an inherited tubulopathy that mimics chronic thiazide diuretic use because the defect is in sodium chloride",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum potassium, magnesium, and bicarbonate to define the hypokalaemic, hypomagnesaemic alkalosis, Urinary calcium-to-creatinine",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Bartter syndrome, Surreptitious thiazide diuretic use, Chronic vomiting",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Lifelong oral magnesium replacement is the priority, as correcting hypomagnesaemia is usually the key to stabilising potassium",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attempting to correct hypokalaemia without also replacing magnesium, so the potassium remains refractory",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for gitelman syndrome."
+    }
+  ],
+  "diagrams": []
 }

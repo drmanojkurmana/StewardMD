@@ -1,176 +1,154 @@
 {
- "id": "omenn_syndrome",
- "name": "Omenn syndrome",
- "aliases": [
-  "OS",
-  "RAG1",
-  "RAG2",
-  "leaky severe combined immunodeficiency"
- ],
- "class": "non_infective",
- "system": "Genetics / Immunology",
- "specialty": "Clinical Genetics / Immunology",
- "referenceOnly": true,
- "reference": {
-  "source": "OMIM / GeneReviews (NCBI) and standard clinical immunology texts",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A form of leaky combined immunodeficiency, most often caused by hypomorphic variants in RAG1 or RAG2 that permit limited, oligoclonal T-cell development",
-   "Presents in early infancy with an erythrodermic, often exfoliative rash, alopecia and loss of eyebrows and eyelashes",
-   "Generalised lymphadenopathy and hepatosplenomegaly accompany failure to thrive and chronic diarrhoea",
-   "Characteristic laboratory picture is an elevated eosinophil count and markedly raised IgE with low or absent other immunoglobulins",
-   "T cells are present but restricted (oligoclonal) and activated, whereas B cells are typically absent or very low",
-   "The autologous activated T cells infiltrate skin, gut and other organs, producing a picture that can mimic graft-versus-host disease",
-   "Susceptibility to opportunistic and severe infection is high and the condition is fatal without treatment",
-   "Haematopoietic stem cell transplantation is the definitive treatment, with immunosuppression to control the inflammatory phenotype beforehand"
+  "id": "omenn_syndrome",
+  "name": "Omenn syndrome",
+  "aliases": [
+    "OS",
+    "RAG1",
+    "RAG2",
+    "leaky severe combined immunodeficiency"
   ],
-  "pathophysiology": "Omenn syndrome arises when residual (hypomorphic) activity of the V(D)J recombination machinery, most commonly RAG1 or RAG2, allows a small number of autoreactive T-cell clones to develop rather than complete arrest of lymphocyte maturation. Defective central and peripheral tolerance, thymic dysfunction and reduced regulatory T cells permit these oligoclonal, activated, T-helper-2-skewed T cells to expand and infiltrate the skin and gut, generating the erythroderma, eosinophilia and raised IgE. B-cell development fails, causing agammaglobulinaemia and profound infection susceptibility.",
-  "additionalDifferentials": [
-   "Classic severe combined immunodeficiency without the Omenn phenotype",
-   "Maternal T-cell engraftment in severe combined immunodeficiency",
-   "Neonatal or infantile graft-versus-host disease",
-   "Atopic dermatitis or other neonatal erythrodermas",
-   "Netherton syndrome",
-   "Langerhans cell histiocytosis"
-  ],
-  "additionalInvestigations": [
-   "Full blood count with differential showing eosinophilia",
-   "Immunoglobulin levels demonstrating raised IgE with low IgG, IgA and IgM",
-   "Lymphocyte subset analysis and T-cell receptor repertoire (clonality) studies",
-   "Molecular genetic testing of RAG1, RAG2 and other combined immunodeficiency genes",
-   "Newborn screening T-cell receptor excision circle (TREC) assay where available",
-   "Skin biopsy and infection screen for opportunistic pathogens"
-  ],
-  "redFlags": [
-   "Severe or opportunistic infection in an infant with erythroderma",
-   "Rapidly worsening exfoliative rash with fluid and protein loss",
-   "Signs of end-organ infiltration or systemic inflammatory decompensation",
-   "Failure to thrive with intractable diarrhoea"
-  ],
-  "prognosis": "Omenn syndrome is uniformly fatal in infancy without treatment. Timely haematopoietic stem cell transplantation, ideally after control of the inflammatory phenotype, offers the prospect of immune reconstitution and long-term survival.",
-  "pitfalls": [
-   "Misdiagnosing the erythroderma as atopic dermatitis and delaying immunological evaluation",
-   "Overlooking the diagnosis because T cells are present, unlike classic severe combined immunodeficiency",
-   "Failing to consider maternal engraftment or graft-versus-host disease in the differential",
-   "Administering live vaccines or non-irradiated blood products before the immune defect is recognised"
-  ],
-  "references": [
-   "GeneReviews (NCBI): RAG deficiency and Omenn syndrome",
-   "OMIM: Omenn syndrome"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Allogeneic haematopoietic stem cell transplantation is the only curative treatment and the definitive goal",
-   "Immunosuppression to control the erythrodermic, activated-T-cell inflammatory phenotype before transplant, using corticosteroids, ciclosporin and sometimes biologic agents",
-   "Aggressive infection prophylaxis and prompt treatment with antibacterial, anti-Pneumocystis, antifungal and antiviral cover for the profound combined immunodeficiency",
-   "Immunoglobulin replacement therapy for the accompanying agammaglobulinaemia",
-   "Use only irradiated, cytomegalovirus-safe blood products and strictly avoid live vaccines",
-   "Nutritional and skin support addressing failure to thrive, chronic diarrhoea and protein and fluid losses from erythroderma",
-   "Multidisciplinary immunology and transplant care in a specialist centre",
-   "Genetic counselling and family testing for the RAG1/RAG2 autosomal recessive defect, with newborn T-cell receptor excision circle screening of relatives"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "omenn_syndrome-pathway",
-   "title": "Omenn syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A form of leaky combined immunodeficiency, most often caused by hypomorphic variants in RAG1 or RAG2 that permit limited, oligoclonal T-cell development",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe or opportunistic infection in an infant with erythroderma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full blood count with differential showing eosinophilia, Immunoglobulin levels demonstrating raised IgE with low IgG, IgA and IgM, Lymphocyte subset analysis and T-cell receptor repertoire (clonality) studies"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Allogeneic haematopoietic stem cell transplantation is the only curative treatment and the definitive goal"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing the erythroderma as atopic dermatitis and delaying immunological evaluation"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of omenn syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "omenn_syndrome-matrix",
-   "title": "Omenn syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A form of leaky combined immunodeficiency, most often caused by hypomorphic variants in RAG1 or RAG2 that permit limited,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genetics / Immunology",
+  "specialty": "Clinical Genetics / Immunology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "OMIM / GeneReviews (NCBI) and standard clinical immunology texts",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A form of leaky combined immunodeficiency, most often caused by hypomorphic variants in RAG1 or RAG2 that permit limited, oligoclonal T-cell development",
+      "Presents in early infancy with an erythrodermic, often exfoliative rash, alopecia and loss of eyebrows and eyelashes",
+      "Generalised lymphadenopathy and hepatosplenomegaly accompany failure to thrive and chronic diarrhoea",
+      "Characteristic laboratory picture is an elevated eosinophil count and markedly raised IgE with low or absent other immunoglobulins",
+      "T cells are present but restricted (oligoclonal) and activated, whereas B cells are typically absent or very low",
+      "The autologous activated T cells infiltrate skin, gut and other organs, producing a picture that can mimic graft-versus-host disease",
+      "Susceptibility to opportunistic and severe infection is high and the condition is fatal without treatment",
+      "Haematopoietic stem cell transplantation is the definitive treatment, with immunosuppression to control the inflammatory phenotype beforehand"
     ],
-    [
-     "Key Investigations",
-     "Full blood count with differential showing eosinophilia, Immunoglobulin levels demonstrating raised IgE with low IgG, IgA and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Omenn syndrome arises when residual (hypomorphic) activity of the V(D)J recombination machinery, most commonly RAG1 or RAG2, allows a small number of autoreactive T-cell clones to develop rather than complete arrest of lymphocyte maturation. Defective central and peripheral tolerance, thymic dysfunction and reduced regulatory T cells permit these oligoclonal, activated, T-helper-2-skewed T cells to expand and infiltrate the skin and gut, generating the erythroderma, eosinophilia and raised IgE. B-cell development fails, causing agammaglobulinaemia and profound infection susceptibility.",
+    "additionalDifferentials": [
+      "Classic severe combined immunodeficiency without the Omenn phenotype",
+      "Maternal T-cell engraftment in severe combined immunodeficiency",
+      "Neonatal or infantile graft-versus-host disease",
+      "Atopic dermatitis or other neonatal erythrodermas",
+      "Netherton syndrome",
+      "Langerhans cell histiocytosis"
     ],
-    [
-     "Primary Differentials",
-     "Classic severe combined immunodeficiency without the Omenn phenotype, Maternal T-cell engraftment in severe combined",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full blood count with differential showing eosinophilia",
+      "Immunoglobulin levels demonstrating raised IgE with low IgG, IgA and IgM",
+      "Lymphocyte subset analysis and T-cell receptor repertoire (clonality) studies",
+      "Molecular genetic testing of RAG1, RAG2 and other combined immunodeficiency genes",
+      "Newborn screening T-cell receptor excision circle (TREC) assay where available",
+      "Skin biopsy and infection screen for opportunistic pathogens"
     ],
-    [
-     "Management Strategy",
-     "Allogeneic haematopoietic stem cell transplantation is the only curative treatment and the definitive goal",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe or opportunistic infection in an infant with erythroderma",
+      "Rapidly worsening exfoliative rash with fluid and protein loss",
+      "Signs of end-organ infiltration or systemic inflammatory decompensation",
+      "Failure to thrive with intractable diarrhoea"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing the erythroderma as atopic dermatitis and delaying immunological evaluation",
-     "Prevent diagnostic or management error"
+    "prognosis": "Omenn syndrome is uniformly fatal in infancy without treatment. Timely haematopoietic stem cell transplantation, ideally after control of the inflammatory phenotype, offers the prospect of immune reconstitution and long-term survival.",
+    "pitfalls": [
+      "Misdiagnosing the erythroderma as atopic dermatitis and delaying immunological evaluation",
+      "Overlooking the diagnosis because T cells are present, unlike classic severe combined immunodeficiency",
+      "Failing to consider maternal engraftment or graft-versus-host disease in the differential",
+      "Administering live vaccines or non-irradiated blood products before the immune defect is recognised"
+    ],
+    "references": [
+      "GeneReviews (NCBI): RAG deficiency and Omenn syndrome",
+      "OMIM: Omenn syndrome"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Allogeneic haematopoietic stem cell transplantation is the only curative treatment and the definitive goal",
+      "Immunosuppression to control the erythrodermic, activated-T-cell inflammatory phenotype before transplant, using corticosteroids, ciclosporin and sometimes biologic agents",
+      "Aggressive infection prophylaxis and prompt treatment with antibacterial, anti-Pneumocystis, antifungal and antiviral cover for the profound combined immunodeficiency",
+      "Immunoglobulin replacement therapy for the accompanying agammaglobulinaemia",
+      "Use only irradiated, cytomegalovirus-safe blood products and strictly avoid live vaccines",
+      "Nutritional and skin support addressing failure to thrive, chronic diarrhoea and protein and fluid losses from erythroderma",
+      "Multidisciplinary immunology and transplant care in a specialist centre",
+      "Genetic counselling and family testing for the RAG1/RAG2 autosomal recessive defect, with newborn T-cell receptor excision circle screening of relatives"
     ]
-   ],
-   "caption": "Overview comparison matrix for omenn syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "omenn-syndrome-real-image",
-   "title": "Omenn syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "omenn_syndrome-pathway",
+      "title": "Omenn syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A form of leaky combined immunodeficiency, most often caused by hypomorphic variants in RAG1 or RAG2 that permit limited, oligoclonal T-cell development",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe or opportunistic infection in an infant with erythroderma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full blood count with differential showing eosinophilia, Immunoglobulin levels demonstrating raised IgE with low IgG, IgA and IgM, Lymphocyte subset analysis and T-cell receptor repertoire (clonality) studies"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Allogeneic haematopoietic stem cell transplantation is the only curative treatment and the definitive goal"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing the erythroderma as atopic dermatitis and delaying immunological evaluation"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of omenn syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "omenn_syndrome-matrix",
+      "title": "Omenn syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A form of leaky combined immunodeficiency, most often caused by hypomorphic variants in RAG1 or RAG2 that permit limited,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full blood count with differential showing eosinophilia, Immunoglobulin levels demonstrating raised IgE with low IgG, IgA and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Classic severe combined immunodeficiency without the Omenn phenotype, Maternal T-cell engraftment in severe combined",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Allogeneic haematopoietic stem cell transplantation is the only curative treatment and the definitive goal",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing the erythroderma as atopic dermatitis and delaying immunological evaluation",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for omenn syndrome."
+    }
+  ],
+  "diagrams": []
 }

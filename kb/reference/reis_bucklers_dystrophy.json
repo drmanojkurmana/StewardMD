@@ -1,177 +1,155 @@
 {
- "id": "reis_bucklers_dystrophy",
- "name": "Reis-Bucklers corneal dystrophy",
- "aliases": [
-  "TGFBI-related Bowman layer dystrophy",
-  "corneal dystrophy of Bowman layer type 1",
-  "corneal dystrophy of Bowman layer type I (CDB1)",
-  "granular corneal dystrophy type 3",
-  "granular corneal dystrophy type III",
-  "reis bucklers corneal dystrophy"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology / Cornea",
- "referenceOnly": true,
- "reference": {
-  "source": "Kanski Clinical Ophthalmology / Cornea by Krachmer",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An autosomal dominant dystrophy of the Bowman layer and superficial stroma, presenting in childhood with painful recurrent erosions",
-   "Caused by mutations in the TGFBI gene, placing it within the same gene cluster as granular and lattice dystrophies",
-   "Slit-lamp examination shows confluent greyish geographic or ring-shaped opacities at the level of Bowman layer",
-   "The deposits are granular (hyaline) material staining red with Masson trichrome, distinguishing it from the curly-fibre Thiel-Behnke dystrophy",
-   "Recurrent erosions are typically frequent and severe early in life, later giving way to reduced vision from superficial scarring and surface irregularity",
-   "Corneal sensation may be reduced and the surface becomes progressively irregular, degrading vision",
-   "Management uses lubrication and erosion care, with phototherapeutic keratectomy or lamellar keratoplasty for scarring and visual loss",
-   "Deposits and erosions characteristically recur superficially after treatment, including within grafts"
+  "id": "reis_bucklers_dystrophy",
+  "name": "Reis-Bucklers corneal dystrophy",
+  "aliases": [
+    "TGFBI-related Bowman layer dystrophy",
+    "corneal dystrophy of Bowman layer type 1",
+    "corneal dystrophy of Bowman layer type I (CDB1)",
+    "granular corneal dystrophy type 3",
+    "granular corneal dystrophy type III",
+    "reis bucklers corneal dystrophy"
   ],
-  "pathophysiology": "Reis-Bucklers corneal dystrophy is an autosomal dominant disorder caused by mutations in the transforming growth factor beta-induced gene (TGFBI). Abnormal mutant protein accumulates as hyaline (granular) deposits that replace and disrupt the Bowman layer and superficial stroma. Destruction of the Bowman layer weakens epithelial adhesion, producing frequent painful erosions in early life, while progressive deposition and superficial scarring create an irregular, hazy surface that reduces vision over time. Because the deposits arise from an inherited protein abnormality, they tend to recur in the superficial cornea after surgical removal.",
-  "additionalDifferentials": [
-   "Thiel-Behnke corneal dystrophy (honeycomb Bowman layer dystrophy)",
-   "Granular corneal dystrophy",
-   "Lattice corneal dystrophy",
-   "Epithelial basement membrane dystrophy with recurrent erosions",
-   "Superficial stromal scarring from prior keratitis",
-   "Salzmann nodular degeneration"
-  ],
-  "additionalInvestigations": [
-   "Slit-lamp biomicroscopy showing geographic Bowman layer opacities",
-   "Histology with Masson trichrome staining of hyaline deposits",
-   "TGFBI genetic testing to confirm diagnosis and distinguish from Thiel-Behnke dystrophy",
-   "Electron microscopy to differentiate granular rod-like from curly-fibre deposits when needed",
-   "Anterior segment optical coherence tomography to assess depth of superficial deposits",
-   "Corneal topography to quantify surface irregularity before treatment"
-  ],
-  "redFlags": [
-   "Frequent severe erosions causing disabling pain in childhood",
-   "Non-healing epithelial defect with risk of secondary infection",
-   "Progressive superficial scarring and irregular astigmatism reducing vision",
-   "Rapid recurrence of deposits after phototherapeutic keratectomy or grafting"
-  ],
-  "prognosis": "Painful recurrent erosions dominate early life and later diminish as superficial scarring reduces vision. Superficial procedures can improve the surface, but deposits and erosions commonly recur, sometimes requiring repeated intervention.",
-  "pitfalls": [
-   "Confusing it with Thiel-Behnke dystrophy without histological or genetic confirmation",
-   "Attributing childhood erosions to trauma and missing the hereditary dystrophy",
-   "Assuming a single procedure is curative despite the tendency to recur",
-   "Overlooking reduced corneal sensation and its impact on healing"
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology",
-   "Cornea by Krachmer, Mannis and Holland"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage the frequent painful erosions of early life with ocular lubricants, hyperosmotic drops and a bandage contact lens, adding topical antibiotic cover for epithelial defects",
-   "Phototherapeutic keratectomy or superficial keratectomy to ablate the hyaline Bowman-layer deposits and rehabilitate vision and surface regularity",
-   "Favour superficial ablative techniques over full-thickness keratoplasty, as the inherited protein deposits recur in the superficial cornea after removal",
-   "Analgesia and, where needed, autologous serum drops to promote healing of recurrent erosions and improve epithelial adhesion",
-   "Serial slit-lamp examination, anterior segment imaging and topography to monitor deposit progression and surface irregularity",
-   "Genetic counselling for autosomal dominant TGFBI disease with examination of first-degree relatives",
-   "Refer to a corneal subspecialist for surgical planning and management of recurrent deposits, which may require repeated intervention"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "reis_bucklers_dystrophy-pathway",
-   "title": "Reis-Bucklers corneal dystrophy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autosomal dominant dystrophy of the Bowman layer and superficial stroma, presenting in childhood with painful recurrent erosions",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Frequent severe erosions causing disabling pain in childhood",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Slit-lamp biomicroscopy showing geographic Bowman layer opacities, Histology with Masson trichrome staining of hyaline deposits, TGFBI genetic testing to confirm diagnosis and distinguish from Thiel-Behnke dystrophy"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage the frequent painful erosions of early life with ocular lubricants, hyperosmotic drops and a bandage contact lens, adding topical antibiotic cover for epithelial defects"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing it with Thiel-Behnke dystrophy without histological or genetic confirmation"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of reis-bucklers corneal dystrophy."
-  }
- ],
- "tables": [
-  {
-   "id": "reis_bucklers_dystrophy-matrix",
-   "title": "Reis-Bucklers corneal dystrophy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autosomal dominant dystrophy of the Bowman layer and superficial stroma, presenting in childhood with painful recurrent",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology / Cornea",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kanski Clinical Ophthalmology / Cornea by Krachmer",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An autosomal dominant dystrophy of the Bowman layer and superficial stroma, presenting in childhood with painful recurrent erosions",
+      "Caused by mutations in the TGFBI gene, placing it within the same gene cluster as granular and lattice dystrophies",
+      "Slit-lamp examination shows confluent greyish geographic or ring-shaped opacities at the level of Bowman layer",
+      "The deposits are granular (hyaline) material staining red with Masson trichrome, distinguishing it from the curly-fibre Thiel-Behnke dystrophy",
+      "Recurrent erosions are typically frequent and severe early in life, later giving way to reduced vision from superficial scarring and surface irregularity",
+      "Corneal sensation may be reduced and the surface becomes progressively irregular, degrading vision",
+      "Management uses lubrication and erosion care, with phototherapeutic keratectomy or lamellar keratoplasty for scarring and visual loss",
+      "Deposits and erosions characteristically recur superficially after treatment, including within grafts"
     ],
-    [
-     "Key Investigations",
-     "Slit-lamp biomicroscopy showing geographic Bowman layer opacities, Histology with Masson trichrome staining of hyaline deposits,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Reis-Bucklers corneal dystrophy is an autosomal dominant disorder caused by mutations in the transforming growth factor beta-induced gene (TGFBI). Abnormal mutant protein accumulates as hyaline (granular) deposits that replace and disrupt the Bowman layer and superficial stroma. Destruction of the Bowman layer weakens epithelial adhesion, producing frequent painful erosions in early life, while progressive deposition and superficial scarring create an irregular, hazy surface that reduces vision over time. Because the deposits arise from an inherited protein abnormality, they tend to recur in the superficial cornea after surgical removal.",
+    "additionalDifferentials": [
+      "Thiel-Behnke corneal dystrophy (honeycomb Bowman layer dystrophy)",
+      "Granular corneal dystrophy",
+      "Lattice corneal dystrophy",
+      "Epithelial basement membrane dystrophy with recurrent erosions",
+      "Superficial stromal scarring from prior keratitis",
+      "Salzmann nodular degeneration"
     ],
-    [
-     "Primary Differentials",
-     "Thiel-Behnke corneal dystrophy (honeycomb Bowman layer dystrophy), Granular corneal dystrophy, Lattice corneal dystrophy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Slit-lamp biomicroscopy showing geographic Bowman layer opacities",
+      "Histology with Masson trichrome staining of hyaline deposits",
+      "TGFBI genetic testing to confirm diagnosis and distinguish from Thiel-Behnke dystrophy",
+      "Electron microscopy to differentiate granular rod-like from curly-fibre deposits when needed",
+      "Anterior segment optical coherence tomography to assess depth of superficial deposits",
+      "Corneal topography to quantify surface irregularity before treatment"
     ],
-    [
-     "Management Strategy",
-     "Manage the frequent painful erosions of early life with ocular lubricants, hyperosmotic drops and a bandage contact lens, adding",
-     "Core treatment modality"
+    "redFlags": [
+      "Frequent severe erosions causing disabling pain in childhood",
+      "Non-healing epithelial defect with risk of secondary infection",
+      "Progressive superficial scarring and irregular astigmatism reducing vision",
+      "Rapid recurrence of deposits after phototherapeutic keratectomy or grafting"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing it with Thiel-Behnke dystrophy without histological or genetic confirmation",
-     "Prevent diagnostic or management error"
+    "prognosis": "Painful recurrent erosions dominate early life and later diminish as superficial scarring reduces vision. Superficial procedures can improve the surface, but deposits and erosions commonly recur, sometimes requiring repeated intervention.",
+    "pitfalls": [
+      "Confusing it with Thiel-Behnke dystrophy without histological or genetic confirmation",
+      "Attributing childhood erosions to trauma and missing the hereditary dystrophy",
+      "Assuming a single procedure is curative despite the tendency to recur",
+      "Overlooking reduced corneal sensation and its impact on healing"
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology",
+      "Cornea by Krachmer, Mannis and Holland"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage the frequent painful erosions of early life with ocular lubricants, hyperosmotic drops and a bandage contact lens, adding topical antibiotic cover for epithelial defects",
+      "Phototherapeutic keratectomy or superficial keratectomy to ablate the hyaline Bowman-layer deposits and rehabilitate vision and surface regularity",
+      "Favour superficial ablative techniques over full-thickness keratoplasty, as the inherited protein deposits recur in the superficial cornea after removal",
+      "Analgesia and, where needed, autologous serum drops to promote healing of recurrent erosions and improve epithelial adhesion",
+      "Serial slit-lamp examination, anterior segment imaging and topography to monitor deposit progression and surface irregularity",
+      "Genetic counselling for autosomal dominant TGFBI disease with examination of first-degree relatives",
+      "Refer to a corneal subspecialist for surgical planning and management of recurrent deposits, which may require repeated intervention"
     ]
-   ],
-   "caption": "Overview comparison matrix for reis-bucklers corneal dystrophy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "reis-bucklers-dystrophy-real-image",
-   "title": "Reis-Bucklers corneal dystrophy: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "reis_bucklers_dystrophy-pathway",
+      "title": "Reis-Bucklers corneal dystrophy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autosomal dominant dystrophy of the Bowman layer and superficial stroma, presenting in childhood with painful recurrent erosions",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Frequent severe erosions causing disabling pain in childhood",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Slit-lamp biomicroscopy showing geographic Bowman layer opacities, Histology with Masson trichrome staining of hyaline deposits, TGFBI genetic testing to confirm diagnosis and distinguish from Thiel-Behnke dystrophy"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage the frequent painful erosions of early life with ocular lubricants, hyperosmotic drops and a bandage contact lens, adding topical antibiotic cover for epithelial defects"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing it with Thiel-Behnke dystrophy without histological or genetic confirmation"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of reis-bucklers corneal dystrophy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "reis_bucklers_dystrophy-matrix",
+      "title": "Reis-Bucklers corneal dystrophy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autosomal dominant dystrophy of the Bowman layer and superficial stroma, presenting in childhood with painful recurrent",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Slit-lamp biomicroscopy showing geographic Bowman layer opacities, Histology with Masson trichrome staining of hyaline deposits,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Thiel-Behnke corneal dystrophy (honeycomb Bowman layer dystrophy), Granular corneal dystrophy, Lattice corneal dystrophy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage the frequent painful erosions of early life with ocular lubricants, hyperosmotic drops and a bandage contact lens, adding",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing it with Thiel-Behnke dystrophy without histological or genetic confirmation",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for reis-bucklers corneal dystrophy."
+    }
+  ],
+  "diagrams": []
 }

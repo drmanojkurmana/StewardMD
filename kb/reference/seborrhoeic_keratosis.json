@@ -1,174 +1,152 @@
 {
- "id": "seborrhoeic_keratosis",
- "name": "seborrhoeic keratosis",
- "aliases": [
-  "seborrhoeic wart",
-  "basal cell papilloma",
-  "senile wart"
- ],
- "class": "non_infective",
- "system": "integumentary",
- "specialty": "dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents as a well-demarcated, 'stuck-on' waxy or verrucous papule or plaque, most often on the trunk, face and scalp of middle-aged and older adults.",
-   "Colour ranges from pale tan through brown to almost black; heavily pigmented lesions on the face are a common source of melanoma referral.",
-   "Surface horn cysts (keratin-filled pseudocysts) and comedo-like plugged follicular openings are characteristic and best appreciated on dermoscopy.",
-   "Dermoscopic hallmarks include milia-like cysts, comedo-like openings, a cerebriform 'brain-like' pattern, fat fingers and sharply demarcated moth-eaten borders.",
-   "The dermatosis papulosa nigra and stucco keratosis variants represent phenotypic subtypes seen respectively in darker skin and on the distal lower limbs.",
-   "The sudden eruption of numerous lesions with pruritus (the sign of Leser-Trelat) may rarely signal an internal adenocarcinoma and warrants malignancy screening.",
-   "Irritated lesions can become inflamed, crusted and clinically alarming, mimicking melanoma or squamous cell carcinoma.",
-   "No treatment is needed for asymptomatic lesions; cryotherapy, curettage or shave excision are used for symptomatic or diagnostically uncertain lesions, with histology if malignancy is suspected."
+  "id": "seborrhoeic_keratosis",
+  "name": "seborrhoeic keratosis",
+  "aliases": [
+    "seborrhoeic wart",
+    "basal cell papilloma",
+    "senile wart"
   ],
-  "pathophysiology": "Seborrhoeic keratoses are benign epidermal proliferations composed of monomorphous basaloid keratinocytes with variable squamous differentiation, forming acanthotic plaques containing horn cysts and pseudo-horn cysts. Activating somatic mutations in FGFR3 and in the PIK3CA gene are frequently identified, indicating clonal keratinocyte expansion, yet the lesions have negligible malignant potential. Accumulation of melanin within the proliferating keratinocytes accounts for the variable pigmentation. Their prevalence rises steeply with age and there is a clear familial predisposition, with ultraviolet exposure implicated in facial and truncal lesions.",
-  "additionalDifferentials": [
-   "melanocytic naevus",
-   "malignant melanoma (particularly heavily pigmented or irritated lesions)",
-   "pigmented basal cell carcinoma",
-   "viral wart",
-   "actinic keratosis",
-   "solar lentigo",
-   "epidermal naevus"
-  ],
-  "additionalInvestigations": [
-   "dermoscopy to identify milia-like cysts and comedo-like openings",
-   "clinical photography for lesion monitoring",
-   "shave or punch biopsy of atypical lesions",
-   "excisional biopsy with histopathology where melanoma cannot be excluded",
-   "screening for occult malignancy if the sign of Leser-Trelat is suspected"
-  ],
-  "redFlags": [
-   "rapid eruption of multiple lesions with pruritus (sign of Leser-Trelat) prompting a search for internal malignancy",
-   "asymmetry, irregular pigment network or ulceration suggesting melanoma",
-   "recent change in size, colour or bleeding within a pre-existing lesion",
-   "a solitary rapidly enlarging keratotic nodule raising concern for squamous cell carcinoma"
-  ],
-  "prognosis": "Seborrhoeic keratoses are entirely benign with no intrinsic malignant potential, although individual lesions persist indefinitely and new ones accumulate with age. Recurrence after superficial removal is common if the lesion is incompletely destroyed.",
-  "pitfalls": [
-   "Misdiagnosing a heavily pigmented or irritated lesion as benign when it is actually melanoma, or vice versa, leading to inappropriate management.",
-   "Destroying a lesion by cryotherapy or curettage without histology when the clinical diagnosis is uncertain, thereby losing the specimen.",
-   "Overlooking the sign of Leser-Trelat and failing to investigate for an underlying adenocarcinoma.",
-   "Confusing a solitary lesion with a viral wart and applying inappropriate keratolytic treatment."
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Bolognia Dermatology",
-   "British Association of Dermatologists guidance"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassure and observe, as lesions are entirely benign with no malignant potential",
-   "Remove symptomatic, irritated or cosmetically unwanted lesions by cryotherapy, curettage or shave excision, or electrocautery",
-   "Send tissue for histopathology whenever melanoma or another pigmented malignancy cannot be excluded",
-   "Take a diagnostic biopsy of atypical lesions rather than destroying them blindly",
-   "Investigate for an occult internal adenocarcinoma when a sudden eruption suggests the sign of Leser-Trelat",
-   "Advise that new lesions accumulate with age and that superficially treated lesions may recur"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "seborrhoeic_keratosis-pathway",
-   "title": "seborrhoeic keratosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents as a well-demarcated, 'stuck-on' waxy or verrucous papule or plaque, most often on the trunk, face and scalp of middle-aged and older adults.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: rapid eruption of multiple lesions with pruritus (sign of Leser-Trelat) prompting a search for internal malignancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: dermoscopy to identify milia-like cysts and comedo-like openings, clinical photography for lesion monitoring, shave or punch biopsy of atypical lesions"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassure and observe, as lesions are entirely benign with no malignant potential"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing a heavily pigmented or irritated lesion as benign when it is actually melanoma, or vice versa, leading to inappropriate management."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of seborrhoeic keratosis."
-  }
- ],
- "tables": [
-  {
-   "id": "seborrhoeic_keratosis-matrix",
-   "title": "seborrhoeic keratosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents as a well-demarcated, 'stuck-on' waxy or verrucous papule or plaque, most often on the trunk, face and scalp of",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "integumentary",
+  "specialty": "dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents as a well-demarcated, 'stuck-on' waxy or verrucous papule or plaque, most often on the trunk, face and scalp of middle-aged and older adults.",
+      "Colour ranges from pale tan through brown to almost black; heavily pigmented lesions on the face are a common source of melanoma referral.",
+      "Surface horn cysts (keratin-filled pseudocysts) and comedo-like plugged follicular openings are characteristic and best appreciated on dermoscopy.",
+      "Dermoscopic hallmarks include milia-like cysts, comedo-like openings, a cerebriform 'brain-like' pattern, fat fingers and sharply demarcated moth-eaten borders.",
+      "The dermatosis papulosa nigra and stucco keratosis variants represent phenotypic subtypes seen respectively in darker skin and on the distal lower limbs.",
+      "The sudden eruption of numerous lesions with pruritus (the sign of Leser-Trelat) may rarely signal an internal adenocarcinoma and warrants malignancy screening.",
+      "Irritated lesions can become inflamed, crusted and clinically alarming, mimicking melanoma or squamous cell carcinoma.",
+      "No treatment is needed for asymptomatic lesions; cryotherapy, curettage or shave excision are used for symptomatic or diagnostically uncertain lesions, with histology if malignancy is suspected."
     ],
-    [
-     "Key Investigations",
-     "dermoscopy to identify milia-like cysts and comedo-like openings, clinical photography for lesion monitoring, shave or punch",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Seborrhoeic keratoses are benign epidermal proliferations composed of monomorphous basaloid keratinocytes with variable squamous differentiation, forming acanthotic plaques containing horn cysts and pseudo-horn cysts. Activating somatic mutations in FGFR3 and in the PIK3CA gene are frequently identified, indicating clonal keratinocyte expansion, yet the lesions have negligible malignant potential. Accumulation of melanin within the proliferating keratinocytes accounts for the variable pigmentation. Their prevalence rises steeply with age and there is a clear familial predisposition, with ultraviolet exposure implicated in facial and truncal lesions.",
+    "additionalDifferentials": [
+      "melanocytic naevus",
+      "malignant melanoma (particularly heavily pigmented or irritated lesions)",
+      "pigmented basal cell carcinoma",
+      "viral wart",
+      "actinic keratosis",
+      "solar lentigo",
+      "epidermal naevus"
     ],
-    [
-     "Primary Differentials",
-     "melanocytic naevus, malignant melanoma (particularly heavily pigmented or irritated lesions), pigmented basal cell carcinoma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "dermoscopy to identify milia-like cysts and comedo-like openings",
+      "clinical photography for lesion monitoring",
+      "shave or punch biopsy of atypical lesions",
+      "excisional biopsy with histopathology where melanoma cannot be excluded",
+      "screening for occult malignancy if the sign of Leser-Trelat is suspected"
     ],
-    [
-     "Management Strategy",
-     "Reassure and observe, as lesions are entirely benign with no malignant potential",
-     "Core treatment modality"
+    "redFlags": [
+      "rapid eruption of multiple lesions with pruritus (sign of Leser-Trelat) prompting a search for internal malignancy",
+      "asymmetry, irregular pigment network or ulceration suggesting melanoma",
+      "recent change in size, colour or bleeding within a pre-existing lesion",
+      "a solitary rapidly enlarging keratotic nodule raising concern for squamous cell carcinoma"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing a heavily pigmented or irritated lesion as benign when it is actually melanoma, or vice versa, leading to",
-     "Prevent diagnostic or management error"
+    "prognosis": "Seborrhoeic keratoses are entirely benign with no intrinsic malignant potential, although individual lesions persist indefinitely and new ones accumulate with age. Recurrence after superficial removal is common if the lesion is incompletely destroyed.",
+    "pitfalls": [
+      "Misdiagnosing a heavily pigmented or irritated lesion as benign when it is actually melanoma, or vice versa, leading to inappropriate management.",
+      "Destroying a lesion by cryotherapy or curettage without histology when the clinical diagnosis is uncertain, thereby losing the specimen.",
+      "Overlooking the sign of Leser-Trelat and failing to investigate for an underlying adenocarcinoma.",
+      "Confusing a solitary lesion with a viral wart and applying inappropriate keratolytic treatment."
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Bolognia Dermatology",
+      "British Association of Dermatologists guidance"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassure and observe, as lesions are entirely benign with no malignant potential",
+      "Remove symptomatic, irritated or cosmetically unwanted lesions by cryotherapy, curettage or shave excision, or electrocautery",
+      "Send tissue for histopathology whenever melanoma or another pigmented malignancy cannot be excluded",
+      "Take a diagnostic biopsy of atypical lesions rather than destroying them blindly",
+      "Investigate for an occult internal adenocarcinoma when a sudden eruption suggests the sign of Leser-Trelat",
+      "Advise that new lesions accumulate with age and that superficially treated lesions may recur"
     ]
-   ],
-   "caption": "Overview comparison matrix for seborrhoeic keratosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "seborrhoeic-keratosis-real-image",
-   "title": "seborrhoeic keratosis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "seborrhoeic_keratosis-pathway",
+      "title": "seborrhoeic keratosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents as a well-demarcated, 'stuck-on' waxy or verrucous papule or plaque, most often on the trunk, face and scalp of middle-aged and older adults.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: rapid eruption of multiple lesions with pruritus (sign of Leser-Trelat) prompting a search for internal malignancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: dermoscopy to identify milia-like cysts and comedo-like openings, clinical photography for lesion monitoring, shave or punch biopsy of atypical lesions"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassure and observe, as lesions are entirely benign with no malignant potential"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing a heavily pigmented or irritated lesion as benign when it is actually melanoma, or vice versa, leading to inappropriate management."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of seborrhoeic keratosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "seborrhoeic_keratosis-matrix",
+      "title": "seborrhoeic keratosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents as a well-demarcated, 'stuck-on' waxy or verrucous papule or plaque, most often on the trunk, face and scalp of",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "dermoscopy to identify milia-like cysts and comedo-like openings, clinical photography for lesion monitoring, shave or punch",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "melanocytic naevus, malignant melanoma (particularly heavily pigmented or irritated lesions), pigmented basal cell carcinoma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassure and observe, as lesions are entirely benign with no malignant potential",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing a heavily pigmented or irritated lesion as benign when it is actually melanoma, or vice versa, leading to",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for seborrhoeic keratosis."
+    }
+  ],
+  "diagrams": []
 }

@@ -1,174 +1,152 @@
 {
- "id": "permanent_neonatal_diabetes_mellitus",
- "name": "Permanent neonatal diabetes mellitus",
- "aliases": [
-  "PNDM",
-  "Permanent monogenic neonatal diabetes"
- ],
- "class": "non_infective",
- "system": "Endocrine / Monogenic",
- "specialty": "Paediatric endocrinology / Clinical genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Monogenic diabetes references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Diabetes presenting within the first six months of life is almost never autoimmune type 1 disease; a monogenic cause should be assumed and pursued urgently.",
-   "Activating mutations in the beta-cell ATP-sensitive potassium channel subunits (KCNJ11/Kir6.2 and ABCC8/SUR1) are the commonest causes and are frequently responsive to high-dose oral sulfonylureas, allowing transfer off insulin.",
-   "Heterozygous insulin (INS) gene mutations cause misfolding of proinsulin with endoplasmic reticulum stress and beta-cell loss, and typically require lifelong insulin.",
-   "Reduced foetal insulin secretion impairs intrauterine growth, so affected infants are commonly small for gestational age at birth.",
-   "The severe end of the KCNJ11 spectrum is the DEND phenotype (developmental delay, epilepsy and neonatal diabetes), reflecting channel expression in brain, muscle and nerve.",
-   "Islet autoantibodies are negative and C-peptide is low or undetectable, supporting a non-autoimmune beta-cell defect.",
-   "Establishing the precise genotype changes treatment, prognosis, surveillance and family counselling, so genetic testing is not merely confirmatory."
+  "id": "permanent_neonatal_diabetes_mellitus",
+  "name": "Permanent neonatal diabetes mellitus",
+  "aliases": [
+    "PNDM",
+    "Permanent monogenic neonatal diabetes"
   ],
-  "pathophysiology": "Permanent neonatal diabetes is a genetically heterogeneous group of monogenic disorders in which insulin deficiency arises from disrupted beta-cell function or development rather than autoimmune destruction. The commonest mechanism is a gain-of-function defect in the beta-cell ATP-sensitive potassium channel: activating mutations in KCNJ11 (encoding the Kir6.2 pore) or ABCC8 (encoding the SUR1 regulatory subunit) hold the channel open despite rising intracellular ATP, preventing the membrane depolarisation and calcium influx that trigger insulin exocytosis; because sulfonylureas close this channel independently of ATP, many such patients can be managed on oral agents. A second important mechanism is dominant misfolding of preproinsulin from INS mutations, generating chronic endoplasmic reticulum stress and progressive beta-cell apoptosis. Other genotypes disrupt pancreatic development or beta-cell survival, including homozygous glucokinase deficiency (loss of the glucose sensor), transcription-factor defects causing pancreatic hypoplasia or agenesis, and recessive syndromic causes. The unifying result is profound insulinopenia presenting in early infancy with hyperglycaemia, poor weight gain and, in some, ketoacidosis.",
-  "additionalDifferentials": [
-   "Transient neonatal diabetes mellitus (6q24 imprinting or potassium-channel related, remitting course)",
-   "Wolcott-Rallison syndrome (EIF2AK3) with skeletal dysplasia and episodic liver failure",
-   "IPEX syndrome (FOXP3) with early autoimmune enteropathy and dermatitis",
-   "Syndromic pancreatic agenesis or hypoplasia (GATA6, PDX1, PTF1A, GLIS3)",
-   "Early-onset autoimmune type 1 diabetes presenting later in infancy",
-   "Stress or transient hyperglycaemia of the sick or preterm neonate"
-  ],
-  "additionalInvestigations": [
-   "Targeted or panel genetic testing covering KCNJ11, ABCC8, INS and related neonatal-diabetes genes",
-   "Serum C-peptide with paired glucose to confirm endogenous insulin deficiency",
-   "Islet autoantibody panel (expected negative) to exclude autoimmune diabetes",
-   "Capillary and venous glucose, blood gas and ketone assessment for acidosis",
-   "Pancreatic imaging and exocrine function tests when agenesis or hypoplasia is suspected",
-   "Developmental and neurological assessment where a potassium-channel genotype raises concern for DEND features"
-  ],
-  "redFlags": [
-   "Diabetic ketoacidosis with dehydration and acidotic breathing at presentation",
-   "Seizures or marked developmental delay suggesting the severe potassium-channel (DEND) phenotype",
-   "Failure to thrive with persistent hyperglycaemia despite feeding",
-   "Family history of consanguinity or affected siblings pointing to a recessive syndromic cause"
-  ],
-  "prognosis": "With a precise genetic diagnosis and genotype-directed therapy, glycaemic control and quality of life are often excellent, and potassium-channel forms may achieve stable control on sulfonylureas alone. Long-term outcome depends heavily on genotype, with neurodevelopmental impairment in severe channel mutations and multisystem morbidity in syndromic causes.",
-  "pitfalls": [
-   "Reflexively labelling early diabetes as type 1 and committing an infant to lifelong insulin when a sulfonylurea-responsive channel defect is present.",
-   "Delaying genetic testing until after discharge, missing the window to trial oral therapy.",
-   "Overlooking subtle neurological signs that reclassify a KCNJ11 case within the DEND spectrum.",
-   "Attributing small birth size solely to placental causes rather than recognising reduced foetal insulin.",
-   "Assuming negative autoantibodies alone confirm the subtype without defining the causative gene."
-  ],
-  "references": [
-   "Paediatric endocrinology reference texts",
-   "International consensus guidance on monogenic and neonatal diabetes",
-   "Clinical genetics reference resources on beta-cell disorders"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Obtain urgent genetic testing, as the genotype directs treatment in this monogenic diabetes",
-   "Transfer ATP-sensitive potassium channel forms (KCNJ11/Kir6.2, ABCC8/SUR1) from insulin to high-dose oral sulfonylureas where the genotype allows",
-   "Provide lifelong insulin replacement for INS-gene and other insulin-deficient forms not responsive to sulfonylureas",
-   "Stabilise the acute presentation with intravenous fluids, insulin and correction of ketoacidosis and dehydration",
-   "Monitor growth and glycaemic control and, in potassium-channel genotypes, watch for DEND neurological features such as developmental delay and epilepsy",
-   "Deliver care through paediatric endocrinology with diabetes nursing and dietetic input",
-   "Offer genetic counselling and family screening given the heritable, monogenic basis"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "permanent_neonatal_diabetes_mellitus-pathway",
-   "title": "Permanent neonatal diabetes mellitus: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Diabetes presenting within the first six months of life is almost never autoimmune type 1 disease; a monogenic cause should be assumed and pursued urgently.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Diabetic ketoacidosis with dehydration and acidotic breathing at presentation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Targeted or panel genetic testing covering KCNJ11, ABCC8, INS and related neonatal-diabetes genes, Serum C-peptide with paired glucose to confirm endogenous insulin deficiency, Islet autoantibody panel (expected negative)"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Obtain urgent genetic testing, as the genotype directs treatment in this monogenic diabetes"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Reflexively labelling early diabetes as type 1 and committing an infant to lifelong insulin when a sulfonylurea-responsive channel defect is present."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of permanent neonatal diabetes mellitus."
-  }
- ],
- "tables": [
-  {
-   "id": "permanent_neonatal_diabetes_mellitus-matrix",
-   "title": "Permanent neonatal diabetes mellitus: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Diabetes presenting within the first six months of life is almost never autoimmune type 1 disease; a monogenic cause should be",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine / Monogenic",
+  "specialty": "Paediatric endocrinology / Clinical genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Monogenic diabetes references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Diabetes presenting within the first six months of life is almost never autoimmune type 1 disease; a monogenic cause should be assumed and pursued urgently.",
+      "Activating mutations in the beta-cell ATP-sensitive potassium channel subunits (KCNJ11/Kir6.2 and ABCC8/SUR1) are the commonest causes and are frequently responsive to high-dose oral sulfonylureas, allowing transfer off insulin.",
+      "Heterozygous insulin (INS) gene mutations cause misfolding of proinsulin with endoplasmic reticulum stress and beta-cell loss, and typically require lifelong insulin.",
+      "Reduced foetal insulin secretion impairs intrauterine growth, so affected infants are commonly small for gestational age at birth.",
+      "The severe end of the KCNJ11 spectrum is the DEND phenotype (developmental delay, epilepsy and neonatal diabetes), reflecting channel expression in brain, muscle and nerve.",
+      "Islet autoantibodies are negative and C-peptide is low or undetectable, supporting a non-autoimmune beta-cell defect.",
+      "Establishing the precise genotype changes treatment, prognosis, surveillance and family counselling, so genetic testing is not merely confirmatory."
     ],
-    [
-     "Key Investigations",
-     "Targeted or panel genetic testing covering KCNJ11, ABCC8, INS and related neonatal-diabetes genes, Serum C-peptide with paired",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Permanent neonatal diabetes is a genetically heterogeneous group of monogenic disorders in which insulin deficiency arises from disrupted beta-cell function or development rather than autoimmune destruction. The commonest mechanism is a gain-of-function defect in the beta-cell ATP-sensitive potassium channel: activating mutations in KCNJ11 (encoding the Kir6.2 pore) or ABCC8 (encoding the SUR1 regulatory subunit) hold the channel open despite rising intracellular ATP, preventing the membrane depolarisation and calcium influx that trigger insulin exocytosis; because sulfonylureas close this channel independently of ATP, many such patients can be managed on oral agents. A second important mechanism is dominant misfolding of preproinsulin from INS mutations, generating chronic endoplasmic reticulum stress and progressive beta-cell apoptosis. Other genotypes disrupt pancreatic development or beta-cell survival, including homozygous glucokinase deficiency (loss of the glucose sensor), transcription-factor defects causing pancreatic hypoplasia or agenesis, and recessive syndromic causes. The unifying result is profound insulinopenia presenting in early infancy with hyperglycaemia, poor weight gain and, in some, ketoacidosis.",
+    "additionalDifferentials": [
+      "Transient neonatal diabetes mellitus (6q24 imprinting or potassium-channel related, remitting course)",
+      "Wolcott-Rallison syndrome (EIF2AK3) with skeletal dysplasia and episodic liver failure",
+      "IPEX syndrome (FOXP3) with early autoimmune enteropathy and dermatitis",
+      "Syndromic pancreatic agenesis or hypoplasia (GATA6, PDX1, PTF1A, GLIS3)",
+      "Early-onset autoimmune type 1 diabetes presenting later in infancy",
+      "Stress or transient hyperglycaemia of the sick or preterm neonate"
     ],
-    [
-     "Primary Differentials",
-     "Transient neonatal diabetes mellitus (6q24 imprinting or potassium-channel related, remitting course), Wolcott-Rallison syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Targeted or panel genetic testing covering KCNJ11, ABCC8, INS and related neonatal-diabetes genes",
+      "Serum C-peptide with paired glucose to confirm endogenous insulin deficiency",
+      "Islet autoantibody panel (expected negative) to exclude autoimmune diabetes",
+      "Capillary and venous glucose, blood gas and ketone assessment for acidosis",
+      "Pancreatic imaging and exocrine function tests when agenesis or hypoplasia is suspected",
+      "Developmental and neurological assessment where a potassium-channel genotype raises concern for DEND features"
     ],
-    [
-     "Management Strategy",
-     "Obtain urgent genetic testing, as the genotype directs treatment in this monogenic diabetes",
-     "Core treatment modality"
+    "redFlags": [
+      "Diabetic ketoacidosis with dehydration and acidotic breathing at presentation",
+      "Seizures or marked developmental delay suggesting the severe potassium-channel (DEND) phenotype",
+      "Failure to thrive with persistent hyperglycaemia despite feeding",
+      "Family history of consanguinity or affected siblings pointing to a recessive syndromic cause"
     ],
-    [
-     "Clinical Pitfall",
-     "Reflexively labelling early diabetes as type 1 and committing an infant to lifelong insulin when a sulfonylurea-responsive",
-     "Prevent diagnostic or management error"
+    "prognosis": "With a precise genetic diagnosis and genotype-directed therapy, glycaemic control and quality of life are often excellent, and potassium-channel forms may achieve stable control on sulfonylureas alone. Long-term outcome depends heavily on genotype, with neurodevelopmental impairment in severe channel mutations and multisystem morbidity in syndromic causes.",
+    "pitfalls": [
+      "Reflexively labelling early diabetes as type 1 and committing an infant to lifelong insulin when a sulfonylurea-responsive channel defect is present.",
+      "Delaying genetic testing until after discharge, missing the window to trial oral therapy.",
+      "Overlooking subtle neurological signs that reclassify a KCNJ11 case within the DEND spectrum.",
+      "Attributing small birth size solely to placental causes rather than recognising reduced foetal insulin.",
+      "Assuming negative autoantibodies alone confirm the subtype without defining the causative gene."
+    ],
+    "references": [
+      "Paediatric endocrinology reference texts",
+      "International consensus guidance on monogenic and neonatal diabetes",
+      "Clinical genetics reference resources on beta-cell disorders"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Obtain urgent genetic testing, as the genotype directs treatment in this monogenic diabetes",
+      "Transfer ATP-sensitive potassium channel forms (KCNJ11/Kir6.2, ABCC8/SUR1) from insulin to high-dose oral sulfonylureas where the genotype allows",
+      "Provide lifelong insulin replacement for INS-gene and other insulin-deficient forms not responsive to sulfonylureas",
+      "Stabilise the acute presentation with intravenous fluids, insulin and correction of ketoacidosis and dehydration",
+      "Monitor growth and glycaemic control and, in potassium-channel genotypes, watch for DEND neurological features such as developmental delay and epilepsy",
+      "Deliver care through paediatric endocrinology with diabetes nursing and dietetic input",
+      "Offer genetic counselling and family screening given the heritable, monogenic basis"
     ]
-   ],
-   "caption": "Overview comparison matrix for permanent neonatal diabetes mellitus."
-  }
- ],
- "diagrams": [
-  {
-   "id": "permanent-neonatal-diabetes-mellitus-real-image",
-   "title": "Permanent neonatal diabetes mellitus: Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "permanent_neonatal_diabetes_mellitus-pathway",
+      "title": "Permanent neonatal diabetes mellitus: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Diabetes presenting within the first six months of life is almost never autoimmune type 1 disease; a monogenic cause should be assumed and pursued urgently.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Diabetic ketoacidosis with dehydration and acidotic breathing at presentation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Targeted or panel genetic testing covering KCNJ11, ABCC8, INS and related neonatal-diabetes genes, Serum C-peptide with paired glucose to confirm endogenous insulin deficiency, Islet autoantibody panel (expected negative)"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Obtain urgent genetic testing, as the genotype directs treatment in this monogenic diabetes"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Reflexively labelling early diabetes as type 1 and committing an infant to lifelong insulin when a sulfonylurea-responsive channel defect is present."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of permanent neonatal diabetes mellitus."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "permanent_neonatal_diabetes_mellitus-matrix",
+      "title": "Permanent neonatal diabetes mellitus: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Diabetes presenting within the first six months of life is almost never autoimmune type 1 disease; a monogenic cause should be",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Targeted or panel genetic testing covering KCNJ11, ABCC8, INS and related neonatal-diabetes genes, Serum C-peptide with paired",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Transient neonatal diabetes mellitus (6q24 imprinting or potassium-channel related, remitting course), Wolcott-Rallison syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Obtain urgent genetic testing, as the genotype directs treatment in this monogenic diabetes",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Reflexively labelling early diabetes as type 1 and committing an infant to lifelong insulin when a sulfonylurea-responsive",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for permanent neonatal diabetes mellitus."
+    }
+  ],
+  "diagrams": []
 }

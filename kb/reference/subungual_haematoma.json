@@ -1,178 +1,156 @@
 {
- "id": "subungual_haematoma",
- "name": "Subungual haematoma",
- "aliases": [
-  "Bleeding under the nail",
-  "Subungual haemorrhage",
-  "blood under the nail",
-  "subungual haemorrhage",
-  "subungual hematoma"
- ],
- "class": "non_infective",
- "system": "Skin / Hair and nails",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A collection of blood beneath the nail plate, usually following acute crush or stubbing trauma, or repetitive microtrauma from ill-fitting footwear in runners and hikers.",
-   "Acute lesions are intensely painful because of pressure within the closed subungual space; chronic or repetitive ones may be painless.",
-   "Colour evolves over time from red-purple to blue-black and finally brown, and the pigment characteristically migrates distally with nail growth, moving away from the proximal fold.",
-   "Dermoscopy typically shows a homogeneous red-black globular or streaked pattern with peripheral fading and sometimes tiny blood spots, without the parallel pigment network of melanocytic lesions.",
-   "Acute painful haematomas involving a large fraction of the nail benefit from trephination (nail plate perforation) to release pressure and relieve pain.",
-   "A key clinical rule is that a pigmented subungual lesion that does not move distally over weeks, or that is associated with nail dystrophy or periungual pigment, warrants biopsy to exclude melanoma.",
-   "Associated finger or toe fractures, particularly distal phalangeal tuft fractures, should be considered and imaged when the mechanism is significant.",
-   "Complete resolution follows the pace of nail growth, which is slower in toenails than fingernails."
+  "id": "subungual_haematoma",
+  "name": "Subungual haematoma",
+  "aliases": [
+    "Bleeding under the nail",
+    "Subungual haemorrhage",
+    "blood under the nail",
+    "subungual haemorrhage",
+    "subungual hematoma"
   ],
-  "pathophysiology": "Trauma to the nail apparatus ruptures the rich vascular network of the nail bed and matrix, and extravasated blood becomes trapped between the firmly adherent nail plate and the underlying bed. Because this compartment is relatively non-distensible, even a small volume of blood raises pressure sharply and stimulates nociceptors, producing the throbbing pain of an acute lesion. Haemoglobin breakdown accounts for the evolving colour changes. As the nail plate grows outward from the matrix, the adherent pigmented blood is carried distally, which is the basis of the diagnostically useful distal migration. Repetitive low-grade trauma, as in athletes, produces recurrent painless haemorrhage often affecting several toenails symmetrically.",
-  "additionalDifferentials": [
-   "Subungual melanoma",
-   "Melanocytic naevus of the nail matrix",
-   "Squamous cell carcinoma of the nail unit",
-   "Glomus tumour (painful lesions)",
-   "Subungual exostosis",
-   "Pseudomonas or fungal pigmentation",
-   "Splinter haemorrhages from other causes"
-  ],
-  "additionalInvestigations": [
-   "Dermoscopy of the nail plate to characterise the pigment pattern and margins",
-   "Radiograph of the digit to exclude underlying phalangeal fracture",
-   "Serial review to confirm distal migration of the pigment with nail growth",
-   "Nail plate paring or clipping to assess whether pigment is blood or melanin",
-   "Nail matrix biopsy if melanoma cannot be excluded",
-   "Assessment of footwear and activity in recurrent toenail lesions"
-  ],
-  "redFlags": [
-   "A pigmented band or lesion that fails to migrate distally over several weeks",
-   "Hutchinson sign with pigment extending onto the proximal or lateral nail fold",
-   "Subungual pigmentation without a convincing history of trauma, especially in a single digit",
-   "Associated nail plate dystrophy, ulceration or bleeding suggesting malignancy",
-   "Significant crush injury with suspected open fracture or nail bed laceration"
-  ],
-  "prognosis": "Uncomplicated subungual haematoma resolves completely as the nail grows out, though large matrix injuries can leave permanent nail dystrophy. The main clinical hazard is misattributing a subungual melanoma to trauma and delaying diagnosis.",
-  "pitfalls": [
-   "Reflexively attributing all subungual pigment to trauma and missing a melanoma",
-   "Failing to image a significant crush injury and overlooking a distal phalangeal fracture or nail bed laceration",
-   "Delaying trephination in a painful acute lesion when prompt drainage would relieve symptoms",
-   "Not arranging follow-up to confirm distal migration of the pigment"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology, current edition",
-   "Baran and Dawber's Diseases of the Nails and their Management, current edition"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Relieve pain in an acute haematoma involving a large portion of the nail by trephination to decompress the trapped blood",
-   "Provide simple analgesia and elevation for smaller or settling lesions",
-   "Radiograph after significant trauma to exclude a distal phalangeal fracture",
-   "For extensive nail bed laceration or an associated displaced fracture, remove the nail plate and repair the nail bed, with tetanus prophylaxis for open injury",
-   "Confirm resolution by observing distal migration of the pigment with nail growth",
-   "Biopsy the nail matrix if pigment fails to migrate or a subungual melanoma cannot be excluded",
-   "Advise correctly fitting footwear and activity modification for recurrent runner's toenail lesions"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "subungual_haematoma-pathway",
-   "title": "Subungual haematoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A collection of blood beneath the nail plate, usually following acute crush or stubbing trauma, or repetitive microtrauma from ill-fitting footwear in runners and hikers.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A pigmented band or lesion that fails to migrate distally over several weeks",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Dermoscopy of the nail plate to characterise the pigment pattern and margins, Radiograph of the digit to exclude underlying phalangeal fracture, Serial review to confirm distal migration of the pigment with nail growth"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Relieve pain in an acute haematoma involving a large portion of the nail by trephination to decompress the trapped blood"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Reflexively attributing all subungual pigment to trauma and missing a melanoma"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of subungual haematoma."
-  }
- ],
- "tables": [
-  {
-   "id": "subungual_haematoma-matrix",
-   "title": "Subungual haematoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A collection of blood beneath the nail plate, usually following acute crush or stubbing trauma, or repetitive microtrauma from",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Skin / Hair and nails",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A collection of blood beneath the nail plate, usually following acute crush or stubbing trauma, or repetitive microtrauma from ill-fitting footwear in runners and hikers.",
+      "Acute lesions are intensely painful because of pressure within the closed subungual space; chronic or repetitive ones may be painless.",
+      "Colour evolves over time from red-purple to blue-black and finally brown, and the pigment characteristically migrates distally with nail growth, moving away from the proximal fold.",
+      "Dermoscopy typically shows a homogeneous red-black globular or streaked pattern with peripheral fading and sometimes tiny blood spots, without the parallel pigment network of melanocytic lesions.",
+      "Acute painful haematomas involving a large fraction of the nail benefit from trephination (nail plate perforation) to release pressure and relieve pain.",
+      "A key clinical rule is that a pigmented subungual lesion that does not move distally over weeks, or that is associated with nail dystrophy or periungual pigment, warrants biopsy to exclude melanoma.",
+      "Associated finger or toe fractures, particularly distal phalangeal tuft fractures, should be considered and imaged when the mechanism is significant.",
+      "Complete resolution follows the pace of nail growth, which is slower in toenails than fingernails."
     ],
-    [
-     "Key Investigations",
-     "Dermoscopy of the nail plate to characterise the pigment pattern and margins, Radiograph of the digit to exclude underlying",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Trauma to the nail apparatus ruptures the rich vascular network of the nail bed and matrix, and extravasated blood becomes trapped between the firmly adherent nail plate and the underlying bed. Because this compartment is relatively non-distensible, even a small volume of blood raises pressure sharply and stimulates nociceptors, producing the throbbing pain of an acute lesion. Haemoglobin breakdown accounts for the evolving colour changes. As the nail plate grows outward from the matrix, the adherent pigmented blood is carried distally, which is the basis of the diagnostically useful distal migration. Repetitive low-grade trauma, as in athletes, produces recurrent painless haemorrhage often affecting several toenails symmetrically.",
+    "additionalDifferentials": [
+      "Subungual melanoma",
+      "Melanocytic naevus of the nail matrix",
+      "Squamous cell carcinoma of the nail unit",
+      "Glomus tumour (painful lesions)",
+      "Subungual exostosis",
+      "Pseudomonas or fungal pigmentation",
+      "Splinter haemorrhages from other causes"
     ],
-    [
-     "Primary Differentials",
-     "Subungual melanoma, Melanocytic naevus of the nail matrix, Squamous cell carcinoma of the nail unit",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Dermoscopy of the nail plate to characterise the pigment pattern and margins",
+      "Radiograph of the digit to exclude underlying phalangeal fracture",
+      "Serial review to confirm distal migration of the pigment with nail growth",
+      "Nail plate paring or clipping to assess whether pigment is blood or melanin",
+      "Nail matrix biopsy if melanoma cannot be excluded",
+      "Assessment of footwear and activity in recurrent toenail lesions"
     ],
-    [
-     "Management Strategy",
-     "Relieve pain in an acute haematoma involving a large portion of the nail by trephination to decompress the trapped blood",
-     "Core treatment modality"
+    "redFlags": [
+      "A pigmented band or lesion that fails to migrate distally over several weeks",
+      "Hutchinson sign with pigment extending onto the proximal or lateral nail fold",
+      "Subungual pigmentation without a convincing history of trauma, especially in a single digit",
+      "Associated nail plate dystrophy, ulceration or bleeding suggesting malignancy",
+      "Significant crush injury with suspected open fracture or nail bed laceration"
     ],
-    [
-     "Clinical Pitfall",
-     "Reflexively attributing all subungual pigment to trauma and missing a melanoma",
-     "Prevent diagnostic or management error"
+    "prognosis": "Uncomplicated subungual haematoma resolves completely as the nail grows out, though large matrix injuries can leave permanent nail dystrophy. The main clinical hazard is misattributing a subungual melanoma to trauma and delaying diagnosis.",
+    "pitfalls": [
+      "Reflexively attributing all subungual pigment to trauma and missing a melanoma",
+      "Failing to image a significant crush injury and overlooking a distal phalangeal fracture or nail bed laceration",
+      "Delaying trephination in a painful acute lesion when prompt drainage would relieve symptoms",
+      "Not arranging follow-up to confirm distal migration of the pigment"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology, current edition",
+      "Baran and Dawber's Diseases of the Nails and their Management, current edition"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Relieve pain in an acute haematoma involving a large portion of the nail by trephination to decompress the trapped blood",
+      "Provide simple analgesia and elevation for smaller or settling lesions",
+      "Radiograph after significant trauma to exclude a distal phalangeal fracture",
+      "For extensive nail bed laceration or an associated displaced fracture, remove the nail plate and repair the nail bed, with tetanus prophylaxis for open injury",
+      "Confirm resolution by observing distal migration of the pigment with nail growth",
+      "Biopsy the nail matrix if pigment fails to migrate or a subungual melanoma cannot be excluded",
+      "Advise correctly fitting footwear and activity modification for recurrent runner's toenail lesions"
     ]
-   ],
-   "caption": "Overview comparison matrix for subungual haematoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "subungual-haematoma-real-image",
-   "title": "Subungual haematoma: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "subungual_haematoma-pathway",
+      "title": "Subungual haematoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A collection of blood beneath the nail plate, usually following acute crush or stubbing trauma, or repetitive microtrauma from ill-fitting footwear in runners and hikers.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A pigmented band or lesion that fails to migrate distally over several weeks",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Dermoscopy of the nail plate to characterise the pigment pattern and margins, Radiograph of the digit to exclude underlying phalangeal fracture, Serial review to confirm distal migration of the pigment with nail growth"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Relieve pain in an acute haematoma involving a large portion of the nail by trephination to decompress the trapped blood"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Reflexively attributing all subungual pigment to trauma and missing a melanoma"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of subungual haematoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "subungual_haematoma-matrix",
+      "title": "Subungual haematoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A collection of blood beneath the nail plate, usually following acute crush or stubbing trauma, or repetitive microtrauma from",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Dermoscopy of the nail plate to characterise the pigment pattern and margins, Radiograph of the digit to exclude underlying",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Subungual melanoma, Melanocytic naevus of the nail matrix, Squamous cell carcinoma of the nail unit",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Relieve pain in an acute haematoma involving a large portion of the nail by trephination to decompress the trapped blood",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Reflexively attributing all subungual pigment to trauma and missing a melanoma",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for subungual haematoma."
+    }
+  ],
+  "diagrams": []
 }

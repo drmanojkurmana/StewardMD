@@ -1,175 +1,153 @@
 {
- "id": "retained_placenta",
- "name": "Retained placenta",
- "aliases": [
-  "retained placenta",
-  "adherent placenta"
- ],
- "class": "non_infective",
- "system": "Reproductive / Obstetrics",
- "specialty": "Obstetrics and gynaecology",
- "referenceOnly": true,
- "reference": {
-  "source": "RCOG Green-top Guideline / Williams Obstetrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Retained placenta is failure to deliver the placenta within a defined interval after birth, commonly thirty minutes with active management of the third stage or up to an hour with physiological management",
-   "Three broad mechanisms are recognised: a separated placenta trapped behind a closed cervix (trapped placenta), a placenta that fails to separate because of inadequate uterine contraction (placenta adherens), and a morbidly adherent placenta of the accreta spectrum",
-   "It is an important cause of primary postpartum haemorrhage, both because the uterus cannot contract effectively around retained tissue and because partial separation opens maternal sinuses",
-   "Risk factors include a previous retained placenta, previous uterine surgery or curettage, preterm delivery, placenta praevia, and grand multiparity; abnormal placentation should be considered when the uterus is scarred",
-   "Initial steps are to ensure the bladder is empty, encourage breastfeeding or nipple stimulation, give a uterotonic, and attempt controlled cord traction; injudicious traction risks cord avulsion or uterine inversion",
-   "If these measures fail, manual removal of the placenta under regional or general anaesthesia is required, with antibiotic cover and careful assessment for completeness",
-   "If the placenta cannot be separated and morbid adherence is evident, forced removal must be avoided; senior help and preparation for major haemorrhage and possible hysterectomy are needed",
-   "After delivery of the placenta, examine it for completeness, since retained fragments can cause ongoing or secondary haemorrhage and endometritis"
+  "id": "retained_placenta",
+  "name": "Retained placenta",
+  "aliases": [
+    "retained placenta",
+    "adherent placenta"
   ],
-  "pathophysiology": "Normal placental separation depends on brisk contraction and retraction of the myometrium after delivery of the fetus, which shears the placenta from the decidua basalis along the plane of the spongy layer and then closes off the underlying spiral arteries. Retention arises when this sequence fails. In placenta adherens, poor and often localised myometrial contraction prevents shearing, so the placenta remains attached. In a trapped placenta, the placenta separates but the cervix contracts down before expulsion, imprisoning it. In placenta accreta spectrum, deficient decidua, typically over a scar, allows chorionic villi to invade the myometrium so that no cleavage plane exists. Because retained tissue prevents the uterus from contracting fully, the exposed vascular placental bed continues to bleed, linking retained placenta closely with postpartum haemorrhage.",
-  "additionalDifferentials": [
-   "Placenta adherens due to uterine atony",
-   "Trapped or incarcerated placenta behind a constriction ring or closed cervix",
-   "Placenta accreta, increta, or percreta",
-   "A succenturiate lobe left in situ",
-   "Uterine inversion presenting as failure to deliver the placenta",
-   "A constriction ring or hourglass contraction from mismanaged third stage"
-  ],
-  "additionalInvestigations": [
-   "Clinical assessment of blood loss, uterine tone, and maternal haemodynamic status",
-   "Full blood count and group-and-save or crossmatch, with coagulation studies if bleeding is heavy",
-   "Examination of the delivered placenta and membranes for completeness",
-   "Bedside ultrasound to assess for retained tissue and features suggesting abnormal placentation",
-   "Review of antenatal imaging for placenta accreta spectrum when the placenta will not separate over a scar",
-   "Observations and inflammatory markers if delayed retention presents with suspected endometritis"
-  ],
-  "redFlags": [
-   "Heavy or continuing postpartum bleeding with the placenta still undelivered",
-   "Signs of hypovolaemic shock",
-   "Inability to separate the placenta with suspicion of accreta spectrum",
-   "Uterine inversion, with sudden pain, haemorrhage, and a mass at or beyond the introitus",
-   "Fever and offensive lochia suggesting infected retained tissue"
-  ],
-  "prognosis": "With prompt uterotonics, bladder emptying, and timely manual removal, most cases resolve without lasting harm; delay increases the risk of major haemorrhage, and cases complicated by placenta accreta spectrum carry a significant risk of massive haemorrhage and hysterectomy.",
-  "pitfalls": [
-   "Applying vigorous cord traction against a poorly contracted uterus, causing cord avulsion or uterine inversion",
-   "Failing to empty the bladder, which impedes uterine contraction and placental delivery",
-   "Persisting with attempts at manual removal when placenta accreta is evident",
-   "Not inspecting the placenta for missing cotyledons or a succenturiate lobe",
-   "Underestimating cumulative blood loss and delaying escalation"
-  ],
-  "references": [
-   "RCOG Green-top Guideline on postpartum haemorrhage",
-   "Williams Obstetrics",
-   "Oxford Handbook of Obstetrics and Gynaecology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Begin with simple measures: empty the bladder, encourage breastfeeding or nipple stimulation, give a uterotonic such as oxytocin, and attempt gentle controlled cord traction, avoiding forceful traction that risks cord avulsion or uterine inversion",
-   "Perform manual removal of the placenta under regional or general anaesthesia when initial measures fail, checking the specimen for completeness",
-   "Give antibiotic prophylaxis at the time of manual removal",
-   "Manage associated postpartum haemorrhage with intravenous access, fluid resuscitation, uterotonics, tranexamic acid and crossmatched blood as needed",
-   "Suspect placenta accreta spectrum when the placenta will not separate over a uterine scar, and prepare for possible hysterectomy",
-   "Escalate promptly to senior obstetric and anaesthetic teams, with interventional radiology or specialist input for morbidly adherent placentation"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "retained_placenta-pathway",
-   "title": "Retained placenta: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Retained placenta is failure to deliver the placenta within a defined interval after birth, commonly thirty minutes with active management of the third stage or up to an hour with physiological management",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Heavy or continuing postpartum bleeding with the placenta still undelivered",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical assessment of blood loss, uterine tone, and maternal haemodynamic status, Full blood count and group-and-save or crossmatch, with coagulation studies if bleeding is heavy, Examination of the delivered placenta and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Begin with simple measures: empty the bladder, encourage breastfeeding or nipple stimulation, give a uterotonic such as oxytocin, and attempt gentle controlled cord traction, avoiding forceful traction that risks cord"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Applying vigorous cord traction against a poorly contracted uterus, causing cord avulsion or uterine inversion"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of retained placenta."
-  }
- ],
- "tables": [
-  {
-   "id": "retained_placenta-matrix",
-   "title": "Retained placenta: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Retained placenta is failure to deliver the placenta within a defined interval after birth, commonly thirty minutes with active",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Reproductive / Obstetrics",
+  "specialty": "Obstetrics and gynaecology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "RCOG Green-top Guideline / Williams Obstetrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Retained placenta is failure to deliver the placenta within a defined interval after birth, commonly thirty minutes with active management of the third stage or up to an hour with physiological management",
+      "Three broad mechanisms are recognised: a separated placenta trapped behind a closed cervix (trapped placenta), a placenta that fails to separate because of inadequate uterine contraction (placenta adherens), and a morbidly adherent placenta of the accreta spectrum",
+      "It is an important cause of primary postpartum haemorrhage, both because the uterus cannot contract effectively around retained tissue and because partial separation opens maternal sinuses",
+      "Risk factors include a previous retained placenta, previous uterine surgery or curettage, preterm delivery, placenta praevia, and grand multiparity; abnormal placentation should be considered when the uterus is scarred",
+      "Initial steps are to ensure the bladder is empty, encourage breastfeeding or nipple stimulation, give a uterotonic, and attempt controlled cord traction; injudicious traction risks cord avulsion or uterine inversion",
+      "If these measures fail, manual removal of the placenta under regional or general anaesthesia is required, with antibiotic cover and careful assessment for completeness",
+      "If the placenta cannot be separated and morbid adherence is evident, forced removal must be avoided; senior help and preparation for major haemorrhage and possible hysterectomy are needed",
+      "After delivery of the placenta, examine it for completeness, since retained fragments can cause ongoing or secondary haemorrhage and endometritis"
     ],
-    [
-     "Key Investigations",
-     "Clinical assessment of blood loss, uterine tone, and maternal haemodynamic status, Full blood count and group-and-save or",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Normal placental separation depends on brisk contraction and retraction of the myometrium after delivery of the fetus, which shears the placenta from the decidua basalis along the plane of the spongy layer and then closes off the underlying spiral arteries. Retention arises when this sequence fails. In placenta adherens, poor and often localised myometrial contraction prevents shearing, so the placenta remains attached. In a trapped placenta, the placenta separates but the cervix contracts down before expulsion, imprisoning it. In placenta accreta spectrum, deficient decidua, typically over a scar, allows chorionic villi to invade the myometrium so that no cleavage plane exists. Because retained tissue prevents the uterus from contracting fully, the exposed vascular placental bed continues to bleed, linking retained placenta closely with postpartum haemorrhage.",
+    "additionalDifferentials": [
+      "Placenta adherens due to uterine atony",
+      "Trapped or incarcerated placenta behind a constriction ring or closed cervix",
+      "Placenta accreta, increta, or percreta",
+      "A succenturiate lobe left in situ",
+      "Uterine inversion presenting as failure to deliver the placenta",
+      "A constriction ring or hourglass contraction from mismanaged third stage"
     ],
-    [
-     "Primary Differentials",
-     "Placenta adherens due to uterine atony, Trapped or incarcerated placenta behind a constriction ring or closed cervix, Placenta",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical assessment of blood loss, uterine tone, and maternal haemodynamic status",
+      "Full blood count and group-and-save or crossmatch, with coagulation studies if bleeding is heavy",
+      "Examination of the delivered placenta and membranes for completeness",
+      "Bedside ultrasound to assess for retained tissue and features suggesting abnormal placentation",
+      "Review of antenatal imaging for placenta accreta spectrum when the placenta will not separate over a scar",
+      "Observations and inflammatory markers if delayed retention presents with suspected endometritis"
     ],
-    [
-     "Management Strategy",
-     "Begin with simple measures: empty the bladder, encourage breastfeeding or nipple stimulation, give a uterotonic such as oxytocin,",
-     "Core treatment modality"
+    "redFlags": [
+      "Heavy or continuing postpartum bleeding with the placenta still undelivered",
+      "Signs of hypovolaemic shock",
+      "Inability to separate the placenta with suspicion of accreta spectrum",
+      "Uterine inversion, with sudden pain, haemorrhage, and a mass at or beyond the introitus",
+      "Fever and offensive lochia suggesting infected retained tissue"
     ],
-    [
-     "Clinical Pitfall",
-     "Applying vigorous cord traction against a poorly contracted uterus, causing cord avulsion or uterine inversion",
-     "Prevent diagnostic or management error"
+    "prognosis": "With prompt uterotonics, bladder emptying, and timely manual removal, most cases resolve without lasting harm; delay increases the risk of major haemorrhage, and cases complicated by placenta accreta spectrum carry a significant risk of massive haemorrhage and hysterectomy.",
+    "pitfalls": [
+      "Applying vigorous cord traction against a poorly contracted uterus, causing cord avulsion or uterine inversion",
+      "Failing to empty the bladder, which impedes uterine contraction and placental delivery",
+      "Persisting with attempts at manual removal when placenta accreta is evident",
+      "Not inspecting the placenta for missing cotyledons or a succenturiate lobe",
+      "Underestimating cumulative blood loss and delaying escalation"
+    ],
+    "references": [
+      "RCOG Green-top Guideline on postpartum haemorrhage",
+      "Williams Obstetrics",
+      "Oxford Handbook of Obstetrics and Gynaecology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Begin with simple measures: empty the bladder, encourage breastfeeding or nipple stimulation, give a uterotonic such as oxytocin, and attempt gentle controlled cord traction, avoiding forceful traction that risks cord avulsion or uterine inversion",
+      "Perform manual removal of the placenta under regional or general anaesthesia when initial measures fail, checking the specimen for completeness",
+      "Give antibiotic prophylaxis at the time of manual removal",
+      "Manage associated postpartum haemorrhage with intravenous access, fluid resuscitation, uterotonics, tranexamic acid and crossmatched blood as needed",
+      "Suspect placenta accreta spectrum when the placenta will not separate over a uterine scar, and prepare for possible hysterectomy",
+      "Escalate promptly to senior obstetric and anaesthetic teams, with interventional radiology or specialist input for morbidly adherent placentation"
     ]
-   ],
-   "caption": "Overview comparison matrix for retained placenta."
-  }
- ],
- "diagrams": [
-  {
-   "id": "retained-placenta-real-image",
-   "title": "Retained placenta: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "retained_placenta-pathway",
+      "title": "Retained placenta: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Retained placenta is failure to deliver the placenta within a defined interval after birth, commonly thirty minutes with active management of the third stage or up to an hour with physiological management",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Heavy or continuing postpartum bleeding with the placenta still undelivered",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical assessment of blood loss, uterine tone, and maternal haemodynamic status, Full blood count and group-and-save or crossmatch, with coagulation studies if bleeding is heavy, Examination of the delivered placenta and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Begin with simple measures: empty the bladder, encourage breastfeeding or nipple stimulation, give a uterotonic such as oxytocin, and attempt gentle controlled cord traction, avoiding forceful traction that risks cord"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Applying vigorous cord traction against a poorly contracted uterus, causing cord avulsion or uterine inversion"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of retained placenta."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "retained_placenta-matrix",
+      "title": "Retained placenta: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Retained placenta is failure to deliver the placenta within a defined interval after birth, commonly thirty minutes with active",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical assessment of blood loss, uterine tone, and maternal haemodynamic status, Full blood count and group-and-save or",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Placenta adherens due to uterine atony, Trapped or incarcerated placenta behind a constriction ring or closed cervix, Placenta",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Begin with simple measures: empty the bladder, encourage breastfeeding or nipple stimulation, give a uterotonic such as oxytocin,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Applying vigorous cord traction against a poorly contracted uterus, causing cord avulsion or uterine inversion",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for retained placenta."
+    }
+  ],
+  "diagrams": []
 }

@@ -1,173 +1,151 @@
 {
- "id": "myd88_deficiency",
- "name": "MyD88 Deficiency",
- "aliases": [
-  "MYD88",
-  "MyD88",
-  "Myeloid differentiation primary response 88 deficiency"
- ],
- "class": "non_infective",
- "system": "Immunology / Inborn errors of immunity",
- "specialty": "Immunology",
- "referenceOnly": true,
- "reference": {
-  "source": "Clinical immunology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive MyD88 deficiency produces a clinical picture essentially indistinguishable from IRAK-4 deficiency, reflecting the adjacent roles of the two proteins in the same signalling pathway.",
-   "Susceptibility is narrow: recurrent invasive pyogenic bacterial infection, particularly Streptococcus pneumoniae, Staphylococcus aureus and Pseudomonas aeruginosa.",
-   "Inflammatory responses are blunted, so fever and acute-phase reactants may be low or absent despite serious infection.",
-   "Antiviral, antifungal and antiparasitic immunity is largely intact because TLR3 and several other pathways are MyD88-independent.",
-   "Infection risk peaks in early childhood and tends to diminish as the patient grows older.",
-   "Standard immunological screening is frequently normal, requiring a high index of suspicion.",
-   "Antibiotic prophylaxis, immunoglobulin replacement and vaccination against encapsulated organisms are central to management."
+  "id": "myd88_deficiency",
+  "name": "MyD88 Deficiency",
+  "aliases": [
+    "MYD88",
+    "MyD88",
+    "Myeloid differentiation primary response 88 deficiency"
   ],
-  "pathophysiology": "MYD88 encodes the cytosolic adaptor protein MyD88, which links Toll-like receptors (all except TLR3) and interleukin-1 receptor family members to their downstream kinases. On receptor engagement, MyD88 recruits IRAK-4 and IRAK-1 to assemble the myddosome, driving NF-kappaB and MAPK activation and proinflammatory cytokine production. Biallelic loss-of-function variants abolish this adaptor function and produce the same failure of early innate inflammatory responses seen in IRAK-4 deficiency, hence the shared susceptibility to invasive pyogenic bacteria and the characteristically muted febrile and acute-phase response. This germline loss-of-function state is mechanistically distinct from the somatic gain-of-function MYD88 variants that occur in certain lymphoid malignancies.",
-  "additionalDifferentials": [
-   "IRAK-4 deficiency (clinically identical)",
-   "Congenital or functional asplenia",
-   "Complement deficiency",
-   "Primary antibody deficiency",
-   "NEMO/IKBKG-related immunodeficiency",
-   "Severe congenital neutropenia"
-  ],
-  "additionalInvestigations": [
-   "Genetic sequencing of MYD88",
-   "Functional Toll-like and interleukin-1 receptor stimulation assays demonstrating impaired cytokine production",
-   "Baseline immunoglobulins, complement and blood counts to exclude alternatives",
-   "Blood film for splenic-function markers such as Howell-Jolly bodies",
-   "Aggressive microbiological sampling and cultures during infective episodes",
-   "Site-directed imaging guided by the focus of infection"
-  ],
-  "redFlags": [
-   "Invasive pyogenic infection with a disproportionately mild fever or acute-phase response",
-   "Recurrent invasive pneumococcal or staphylococcal disease in a young child",
-   "Clinical deterioration despite reassuring inflammatory markers"
-  ],
-  "prognosis": "As with IRAK-4 deficiency, early childhood carries the highest mortality risk during invasive episodes, but prophylaxis, vaccination and prompt treatment substantially improve outcomes, with susceptibility decreasing over time.",
-  "pitfalls": [
-   "Confusing germline loss-of-function MyD88 deficiency (an immunodeficiency) with the somatic activating MYD88 mutations found in lymphomas such as Waldenstrom macroglobulinaemia, which are entirely different clinical entities.",
-   "Using fever or acute-phase markers to judge severity, which can be dangerously misleading.",
-   "Assuming that normal routine immunology excludes the disorder.",
-   "Withholding early empirical antibiotics pending confirmatory signs of inflammation."
-  ],
-  "references": [
-   "IUIS Expert Committee classification of inborn errors of immunity",
-   "Stiehm's Immune Deficiencies",
-   "ESID clinical guidance on innate immune defects"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Give long-term antibacterial prophylaxis against invasive pyogenic organisms, typically penicillin or co-trimoxazole, targeting Streptococcus pneumoniae, Staphylococcus aureus, and Pseudomonas aeruginosa",
-   "Provide immunoglobulin replacement therapy to supplement humoral protection during the high-risk early childhood years",
-   "Vaccinate against encapsulated organisms, including pneumococcal, Haemophilus influenzae type b, and meningococcal vaccines",
-   "Treat suspected infection with prompt aggressive empirical broad-spectrum antibiotics at the earliest sign, since blunted fever and acute-phase responses mask severity",
-   "Educate the patient and family to seek urgent medical care with any infective symptoms, given the muted clinical picture",
-   "Undertake aggressive microbiological sampling, cultures, and site-directed imaging during infective episodes and monitor with a high index of suspicion",
-   "Offer genetic counselling and family screening given autosomal recessive inheritance, and manage under an immunology specialist"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "myd88_deficiency-pathway",
-   "title": "MyD88 Deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive MyD88 deficiency produces a clinical picture essentially indistinguishable from IRAK-4 deficiency, reflecting the adjacent roles of the two proteins in the same signalling pathway.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Invasive pyogenic infection with a disproportionately mild fever or acute-phase response",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Genetic sequencing of MYD88, Functional Toll-like and interleukin-1 receptor stimulation assays demonstrating impaired cytokine production, Baseline immunoglobulins, complement and blood counts to exclude alternatives"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Give long-term antibacterial prophylaxis against invasive pyogenic organisms, typically penicillin or co-trimoxazole, targeting Streptococcus pneumoniae, Staphylococcus aureus, and Pseudomonas aeruginosa"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing germline loss-of-function MyD88 deficiency (an immunodeficiency) with the somatic activating MYD88 mutations found in lymphomas such as Waldenstrom macroglobulinaemia, which are entirely different clinical"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of myd88 deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "myd88_deficiency-matrix",
-   "title": "MyD88 Deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive MyD88 deficiency produces a clinical picture essentially indistinguishable from IRAK-4 deficiency, reflecting",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Immunology / Inborn errors of immunity",
+  "specialty": "Immunology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Clinical immunology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive MyD88 deficiency produces a clinical picture essentially indistinguishable from IRAK-4 deficiency, reflecting the adjacent roles of the two proteins in the same signalling pathway.",
+      "Susceptibility is narrow: recurrent invasive pyogenic bacterial infection, particularly Streptococcus pneumoniae, Staphylococcus aureus and Pseudomonas aeruginosa.",
+      "Inflammatory responses are blunted, so fever and acute-phase reactants may be low or absent despite serious infection.",
+      "Antiviral, antifungal and antiparasitic immunity is largely intact because TLR3 and several other pathways are MyD88-independent.",
+      "Infection risk peaks in early childhood and tends to diminish as the patient grows older.",
+      "Standard immunological screening is frequently normal, requiring a high index of suspicion.",
+      "Antibiotic prophylaxis, immunoglobulin replacement and vaccination against encapsulated organisms are central to management."
     ],
-    [
-     "Key Investigations",
-     "Genetic sequencing of MYD88, Functional Toll-like and interleukin-1 receptor stimulation assays demonstrating impaired cytokine",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "MYD88 encodes the cytosolic adaptor protein MyD88, which links Toll-like receptors (all except TLR3) and interleukin-1 receptor family members to their downstream kinases. On receptor engagement, MyD88 recruits IRAK-4 and IRAK-1 to assemble the myddosome, driving NF-kappaB and MAPK activation and proinflammatory cytokine production. Biallelic loss-of-function variants abolish this adaptor function and produce the same failure of early innate inflammatory responses seen in IRAK-4 deficiency, hence the shared susceptibility to invasive pyogenic bacteria and the characteristically muted febrile and acute-phase response. This germline loss-of-function state is mechanistically distinct from the somatic gain-of-function MYD88 variants that occur in certain lymphoid malignancies.",
+    "additionalDifferentials": [
+      "IRAK-4 deficiency (clinically identical)",
+      "Congenital or functional asplenia",
+      "Complement deficiency",
+      "Primary antibody deficiency",
+      "NEMO/IKBKG-related immunodeficiency",
+      "Severe congenital neutropenia"
     ],
-    [
-     "Primary Differentials",
-     "IRAK-4 deficiency (clinically identical), Congenital or functional asplenia, Complement deficiency",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Genetic sequencing of MYD88",
+      "Functional Toll-like and interleukin-1 receptor stimulation assays demonstrating impaired cytokine production",
+      "Baseline immunoglobulins, complement and blood counts to exclude alternatives",
+      "Blood film for splenic-function markers such as Howell-Jolly bodies",
+      "Aggressive microbiological sampling and cultures during infective episodes",
+      "Site-directed imaging guided by the focus of infection"
     ],
-    [
-     "Management Strategy",
-     "Give long-term antibacterial prophylaxis against invasive pyogenic organisms, typically penicillin or co-trimoxazole, targeting",
-     "Core treatment modality"
+    "redFlags": [
+      "Invasive pyogenic infection with a disproportionately mild fever or acute-phase response",
+      "Recurrent invasive pneumococcal or staphylococcal disease in a young child",
+      "Clinical deterioration despite reassuring inflammatory markers"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing germline loss-of-function MyD88 deficiency (an immunodeficiency) with the somatic activating MYD88 mutations found in",
-     "Prevent diagnostic or management error"
+    "prognosis": "As with IRAK-4 deficiency, early childhood carries the highest mortality risk during invasive episodes, but prophylaxis, vaccination and prompt treatment substantially improve outcomes, with susceptibility decreasing over time.",
+    "pitfalls": [
+      "Confusing germline loss-of-function MyD88 deficiency (an immunodeficiency) with the somatic activating MYD88 mutations found in lymphomas such as Waldenstrom macroglobulinaemia, which are entirely different clinical entities.",
+      "Using fever or acute-phase markers to judge severity, which can be dangerously misleading.",
+      "Assuming that normal routine immunology excludes the disorder.",
+      "Withholding early empirical antibiotics pending confirmatory signs of inflammation."
+    ],
+    "references": [
+      "IUIS Expert Committee classification of inborn errors of immunity",
+      "Stiehm's Immune Deficiencies",
+      "ESID clinical guidance on innate immune defects"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Give long-term antibacterial prophylaxis against invasive pyogenic organisms, typically penicillin or co-trimoxazole, targeting Streptococcus pneumoniae, Staphylococcus aureus, and Pseudomonas aeruginosa",
+      "Provide immunoglobulin replacement therapy to supplement humoral protection during the high-risk early childhood years",
+      "Vaccinate against encapsulated organisms, including pneumococcal, Haemophilus influenzae type b, and meningococcal vaccines",
+      "Treat suspected infection with prompt aggressive empirical broad-spectrum antibiotics at the earliest sign, since blunted fever and acute-phase responses mask severity",
+      "Educate the patient and family to seek urgent medical care with any infective symptoms, given the muted clinical picture",
+      "Undertake aggressive microbiological sampling, cultures, and site-directed imaging during infective episodes and monitor with a high index of suspicion",
+      "Offer genetic counselling and family screening given autosomal recessive inheritance, and manage under an immunology specialist"
     ]
-   ],
-   "caption": "Overview comparison matrix for myd88 deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "myd88-deficiency-real-image",
-   "title": "MyD88 Deficiency: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "myd88_deficiency-pathway",
+      "title": "MyD88 Deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive MyD88 deficiency produces a clinical picture essentially indistinguishable from IRAK-4 deficiency, reflecting the adjacent roles of the two proteins in the same signalling pathway.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Invasive pyogenic infection with a disproportionately mild fever or acute-phase response",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Genetic sequencing of MYD88, Functional Toll-like and interleukin-1 receptor stimulation assays demonstrating impaired cytokine production, Baseline immunoglobulins, complement and blood counts to exclude alternatives"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Give long-term antibacterial prophylaxis against invasive pyogenic organisms, typically penicillin or co-trimoxazole, targeting Streptococcus pneumoniae, Staphylococcus aureus, and Pseudomonas aeruginosa"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing germline loss-of-function MyD88 deficiency (an immunodeficiency) with the somatic activating MYD88 mutations found in lymphomas such as Waldenstrom macroglobulinaemia, which are entirely different clinical"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of myd88 deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "myd88_deficiency-matrix",
+      "title": "MyD88 Deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive MyD88 deficiency produces a clinical picture essentially indistinguishable from IRAK-4 deficiency, reflecting",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Genetic sequencing of MYD88, Functional Toll-like and interleukin-1 receptor stimulation assays demonstrating impaired cytokine",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "IRAK-4 deficiency (clinically identical), Congenital or functional asplenia, Complement deficiency",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Give long-term antibacterial prophylaxis against invasive pyogenic organisms, typically penicillin or co-trimoxazole, targeting",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing germline loss-of-function MyD88 deficiency (an immunodeficiency) with the somatic activating MYD88 mutations found in",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for myd88 deficiency."
+    }
+  ],
+  "diagrams": []
 }

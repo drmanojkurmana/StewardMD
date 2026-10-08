@@ -1,175 +1,153 @@
 {
- "id": "hereditary_pulmonary_alveolar_proteinosis",
- "name": "Hereditary pulmonary alveolar proteinosis",
- "aliases": [
-  "hereditary PAP",
-  "CSF2RA deficiency",
-  "CSF2RB deficiency",
-  "GM-CSF receptor deficiency",
-  "congenital pulmonary alveolar proteinosis"
- ],
- "class": "non_infective",
- "system": "Respiratory / Genetics",
- "specialty": "Respiratory Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "ERS/ATS guidance and respiratory genetics texts",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents with progressive exertional breathlessness and dry cough, often with hypoxaemia disproportionate to the physical examination",
-   "Hereditary disease from CSF2RA or CSF2RB mutations typically presents in childhood, unlike the commoner autoimmune (anti-GM-CSF antibody) form of adults",
-   "High-resolution imaging classically shows a crazy-paving pattern of ground-glass opacity with superimposed septal thickening",
-   "Bronchoalveolar lavage returns characteristically milky, opaque fluid rich in lipoproteinaceous material that stains positive with periodic acid-Schiff",
-   "Serum GM-CSF autoantibodies are absent in the hereditary form, and elevated serum GM-CSF levels point to receptor dysfunction",
-   "Whole-lung lavage is the mainstay for clearing accumulated material, and GM-CSF-directed strategies are used chiefly in the autoimmune form",
-   "Secondary infection, including with opportunistic organisms, can complicate the accumulated alveolar material"
+  "id": "hereditary_pulmonary_alveolar_proteinosis",
+  "name": "Hereditary pulmonary alveolar proteinosis",
+  "aliases": [
+    "hereditary PAP",
+    "CSF2RA deficiency",
+    "CSF2RB deficiency",
+    "GM-CSF receptor deficiency",
+    "congenital pulmonary alveolar proteinosis"
   ],
-  "pathophysiology": "Granulocyte-macrophage colony-stimulating factor (GM-CSF) signalling is essential for alveolar macrophages to mature and clear surfactant. In hereditary pulmonary alveolar proteinosis, biallelic mutations in CSF2RA or CSF2RB disrupt the GM-CSF receptor, so macrophages cannot catabolise surfactant despite abundant GM-CSF. Surfactant-derived lipoprotein therefore accumulates within the alveoli, impairing gas exchange and producing progressive restrictive lung disease and hypoxaemia. This contrasts with the autoimmune form, in which neutralising anti-GM-CSF antibodies block the same pathway.",
-  "additionalDifferentials": [
-   "Autoimmune (anti-GM-CSF antibody) pulmonary alveolar proteinosis",
-   "Secondary alveolar proteinosis from haematological disease or dust exposure",
-   "Pneumocystis and other atypical pneumonias",
-   "Hypersensitivity pneumonitis",
-   "Pulmonary oedema",
-   "Other childhood interstitial lung diseases including surfactant disorders"
-  ],
-  "additionalInvestigations": [
-   "High-resolution chest computed tomography looking for crazy-paving",
-   "Bronchoalveolar lavage for characteristic milky fluid and periodic acid-Schiff staining",
-   "Serum anti-GM-CSF antibody assay to distinguish autoimmune from hereditary disease",
-   "Serum GM-CSF level and genetic testing of CSF2RA and CSF2RB",
-   "Pulmonary function tests showing a restrictive pattern with reduced gas transfer",
-   "Arterial blood gas or oximetry to quantify hypoxaemia"
-  ],
-  "redFlags": [
-   "Worsening hypoxaemia or respiratory failure requiring urgent whole-lung lavage",
-   "Superimposed infection with fever and clinical deterioration",
-   "Failure to thrive or exercise intolerance in an affected child",
-   "Development of pulmonary fibrosis on serial imaging"
-  ],
-  "prognosis": "Whole-lung lavage can produce substantial symptomatic and physiological improvement, but hereditary disease often requires repeated procedures; long-term outcome depends on disease severity, response to lavage, and prevention of secondary infection and fibrosis.",
-  "pitfalls": [
-   "Assuming all pulmonary alveolar proteinosis is autoimmune and omitting genetic testing in children",
-   "Mistaking crazy-paving for infection or pulmonary oedema and delaying diagnostic lavage",
-   "Overlooking secondary opportunistic infection when a stable patient deteriorates",
-   "Expecting a single lavage to be curative in the hereditary form"
-  ],
-  "references": [
-   "European Respiratory Society guidance on pulmonary alveolar proteinosis",
-   "Standard respiratory medicine texts"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Use whole-lung lavage as the mainstay to physically clear accumulated surfactant lipoprotein, accepting that repeated procedures are often required",
-   "Recognise that GM-CSF augmentation with inhaled or subcutaneous GM-CSF benefits the autoimmune form and is generally ineffective in receptor-defect hereditary disease",
-   "Provide supplemental oxygen and supportive care for hypoxaemia",
-   "Treat secondary respiratory infections promptly and maintain immunisation",
-   "Monitor with pulmonary function testing and gas transfer, oximetry and imaging to time repeat lavage",
-   "Consider lung transplantation for severe refractory disease, recognising the possibility of recurrence",
-   "Offer genetic counselling for the autosomal recessive CSF2RA or CSF2RB receptor defect and family testing"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hereditary_pulmonary_alveolar_proteinosis-pathway",
-   "title": "Hereditary pulmonary alveolar proteinosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents with progressive exertional breathlessness and dry cough, often with hypoxaemia disproportionate to the physical examination",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Worsening hypoxaemia or respiratory failure requiring urgent whole-lung lavage",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: High-resolution chest computed tomography looking for crazy-paving, Bronchoalveolar lavage for characteristic milky fluid and periodic acid-Schiff staining, Serum anti-GM-CSF antibody assay to distinguish autoimmune from"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Use whole-lung lavage as the mainstay to physically clear accumulated surfactant lipoprotein, accepting that repeated procedures are often required"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming all pulmonary alveolar proteinosis is autoimmune and omitting genetic testing in children"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hereditary pulmonary alveolar proteinosis."
-  }
- ],
- "tables": [
-  {
-   "id": "hereditary_pulmonary_alveolar_proteinosis-matrix",
-   "title": "Hereditary pulmonary alveolar proteinosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents with progressive exertional breathlessness and dry cough, often with hypoxaemia disproportionate to the physical",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Respiratory / Genetics",
+  "specialty": "Respiratory Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ERS/ATS guidance and respiratory genetics texts",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents with progressive exertional breathlessness and dry cough, often with hypoxaemia disproportionate to the physical examination",
+      "Hereditary disease from CSF2RA or CSF2RB mutations typically presents in childhood, unlike the commoner autoimmune (anti-GM-CSF antibody) form of adults",
+      "High-resolution imaging classically shows a crazy-paving pattern of ground-glass opacity with superimposed septal thickening",
+      "Bronchoalveolar lavage returns characteristically milky, opaque fluid rich in lipoproteinaceous material that stains positive with periodic acid-Schiff",
+      "Serum GM-CSF autoantibodies are absent in the hereditary form, and elevated serum GM-CSF levels point to receptor dysfunction",
+      "Whole-lung lavage is the mainstay for clearing accumulated material, and GM-CSF-directed strategies are used chiefly in the autoimmune form",
+      "Secondary infection, including with opportunistic organisms, can complicate the accumulated alveolar material"
     ],
-    [
-     "Key Investigations",
-     "High-resolution chest computed tomography looking for crazy-paving, Bronchoalveolar lavage for characteristic milky fluid and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Granulocyte-macrophage colony-stimulating factor (GM-CSF) signalling is essential for alveolar macrophages to mature and clear surfactant. In hereditary pulmonary alveolar proteinosis, biallelic mutations in CSF2RA or CSF2RB disrupt the GM-CSF receptor, so macrophages cannot catabolise surfactant despite abundant GM-CSF. Surfactant-derived lipoprotein therefore accumulates within the alveoli, impairing gas exchange and producing progressive restrictive lung disease and hypoxaemia. This contrasts with the autoimmune form, in which neutralising anti-GM-CSF antibodies block the same pathway.",
+    "additionalDifferentials": [
+      "Autoimmune (anti-GM-CSF antibody) pulmonary alveolar proteinosis",
+      "Secondary alveolar proteinosis from haematological disease or dust exposure",
+      "Pneumocystis and other atypical pneumonias",
+      "Hypersensitivity pneumonitis",
+      "Pulmonary oedema",
+      "Other childhood interstitial lung diseases including surfactant disorders"
     ],
-    [
-     "Primary Differentials",
-     "Autoimmune (anti-GM-CSF antibody) pulmonary alveolar proteinosis, Secondary alveolar proteinosis from haematological disease or",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "High-resolution chest computed tomography looking for crazy-paving",
+      "Bronchoalveolar lavage for characteristic milky fluid and periodic acid-Schiff staining",
+      "Serum anti-GM-CSF antibody assay to distinguish autoimmune from hereditary disease",
+      "Serum GM-CSF level and genetic testing of CSF2RA and CSF2RB",
+      "Pulmonary function tests showing a restrictive pattern with reduced gas transfer",
+      "Arterial blood gas or oximetry to quantify hypoxaemia"
     ],
-    [
-     "Management Strategy",
-     "Use whole-lung lavage as the mainstay to physically clear accumulated surfactant lipoprotein, accepting that repeated procedures",
-     "Core treatment modality"
+    "redFlags": [
+      "Worsening hypoxaemia or respiratory failure requiring urgent whole-lung lavage",
+      "Superimposed infection with fever and clinical deterioration",
+      "Failure to thrive or exercise intolerance in an affected child",
+      "Development of pulmonary fibrosis on serial imaging"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming all pulmonary alveolar proteinosis is autoimmune and omitting genetic testing in children",
-     "Prevent diagnostic or management error"
+    "prognosis": "Whole-lung lavage can produce substantial symptomatic and physiological improvement, but hereditary disease often requires repeated procedures; long-term outcome depends on disease severity, response to lavage, and prevention of secondary infection and fibrosis.",
+    "pitfalls": [
+      "Assuming all pulmonary alveolar proteinosis is autoimmune and omitting genetic testing in children",
+      "Mistaking crazy-paving for infection or pulmonary oedema and delaying diagnostic lavage",
+      "Overlooking secondary opportunistic infection when a stable patient deteriorates",
+      "Expecting a single lavage to be curative in the hereditary form"
+    ],
+    "references": [
+      "European Respiratory Society guidance on pulmonary alveolar proteinosis",
+      "Standard respiratory medicine texts"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Use whole-lung lavage as the mainstay to physically clear accumulated surfactant lipoprotein, accepting that repeated procedures are often required",
+      "Recognise that GM-CSF augmentation with inhaled or subcutaneous GM-CSF benefits the autoimmune form and is generally ineffective in receptor-defect hereditary disease",
+      "Provide supplemental oxygen and supportive care for hypoxaemia",
+      "Treat secondary respiratory infections promptly and maintain immunisation",
+      "Monitor with pulmonary function testing and gas transfer, oximetry and imaging to time repeat lavage",
+      "Consider lung transplantation for severe refractory disease, recognising the possibility of recurrence",
+      "Offer genetic counselling for the autosomal recessive CSF2RA or CSF2RB receptor defect and family testing"
     ]
-   ],
-   "caption": "Overview comparison matrix for hereditary pulmonary alveolar proteinosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hereditary-pulmonary-alveolar-proteinosis-real-image",
-   "title": "Hereditary pulmonary alveolar proteinosis: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "hereditary_pulmonary_alveolar_proteinosis-pathway",
+      "title": "Hereditary pulmonary alveolar proteinosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents with progressive exertional breathlessness and dry cough, often with hypoxaemia disproportionate to the physical examination",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Worsening hypoxaemia or respiratory failure requiring urgent whole-lung lavage",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: High-resolution chest computed tomography looking for crazy-paving, Bronchoalveolar lavage for characteristic milky fluid and periodic acid-Schiff staining, Serum anti-GM-CSF antibody assay to distinguish autoimmune from"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Use whole-lung lavage as the mainstay to physically clear accumulated surfactant lipoprotein, accepting that repeated procedures are often required"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming all pulmonary alveolar proteinosis is autoimmune and omitting genetic testing in children"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hereditary pulmonary alveolar proteinosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hereditary_pulmonary_alveolar_proteinosis-matrix",
+      "title": "Hereditary pulmonary alveolar proteinosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents with progressive exertional breathlessness and dry cough, often with hypoxaemia disproportionate to the physical",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "High-resolution chest computed tomography looking for crazy-paving, Bronchoalveolar lavage for characteristic milky fluid and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Autoimmune (anti-GM-CSF antibody) pulmonary alveolar proteinosis, Secondary alveolar proteinosis from haematological disease or",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Use whole-lung lavage as the mainstay to physically clear accumulated surfactant lipoprotein, accepting that repeated procedures",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming all pulmonary alveolar proteinosis is autoimmune and omitting genetic testing in children",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hereditary pulmonary alveolar proteinosis."
+    }
+  ],
+  "diagrams": []
 }

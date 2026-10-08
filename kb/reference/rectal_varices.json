@@ -1,167 +1,145 @@
 {
- "id": "rectal_varices",
- "name": "Rectal varices",
- "aliases": [
-  "anorectal varices"
- ],
- "class": "non_infective",
- "system": "Gastrointestinal",
- "specialty": "Gastroenterology / Hepatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Hepatology and gastroenterology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Dilated portosystemic collateral veins in the rectum arising in portal hypertension",
-   "They are distinct from haemorrhoids, which are dilatations of the normal haemorrhoidal cushions",
-   "They appear as serpentine submucosal veins extending upward from the anorectum on endoscopy",
-   "They can cause significant, sometimes massive, lower gastrointestinal bleeding",
-   "Recognising portal hypertension is essential, as management differs from haemorrhoid treatment",
-   "Treatment targets portal pressure (for example with portosystemic shunting) alongside local haemostatic measures; conventional haemorrhoid procedures can provoke severe bleeding"
+  "id": "rectal_varices",
+  "name": "Rectal varices",
+  "aliases": [
+    "anorectal varices"
   ],
-  "pathophysiology": "Rectal varices form when portal hypertension drives blood through portosystemic collaterals between the superior rectal veins (portal system) and the middle and inferior rectal veins (systemic system). The resulting dilated submucosal veins can rupture and bleed. Unlike haemorrhoids, which are downward displacements of vascular cushions, rectal varices are true varices reflecting elevated portal pressure, so definitive control often requires reducing portal pressure rather than local excision.",
-  "additionalDifferentials": [
-   "Haemorrhoids",
-   "Other causes of lower gastrointestinal bleeding (angiodysplasia, neoplasm, diverticular)",
-   "Ischaemic or inflammatory proctitis",
-   "Rectal neoplasm",
-   "Colonic varices"
-  ],
-  "additionalInvestigations": [
-   "Endoscopic identification distinguishing varices from haemorrhoids",
-   "Assessment for portal hypertension and its cause (liver disease, portal vein thrombosis)",
-   "Cross-sectional or Doppler imaging of the portal system",
-   "Full blood count and coagulation/liver function tests",
-   "Assessment of overall variceal burden"
-  ],
-  "redFlags": [
-   "Massive or recurrent rectal bleeding",
-   "Haemodynamic instability",
-   "Decompensated liver disease",
-   "Coagulopathy compounding bleeding"
-  ],
-  "prognosis": "Bleeding can be controlled and prognosis is largely determined by the underlying portal hypertension and liver disease; recurrence is likely unless portal pressure is addressed.",
-  "pitfalls": [
-   "Mistaking rectal varices for haemorrhoids and treating with banding or excision, risking severe bleeding",
-   "Failing to recognise underlying portal hypertension",
-   "Overlooking other bleeding sources in portal hypertension",
-   "Not addressing coagulopathy"
-  ],
-  "references": [
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-   "Hepatology reference texts (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reduce portal pressure as the definitive strategy, with non-selective beta-blockers and treatment of the underlying liver disease",
-   "Achieve endoscopic haemostasis of bleeding varices with band ligation, sclerotherapy or coil-and-glue embolisation, avoiding conventional haemorrhoid procedures that can provoke severe haemorrhage",
-   "Resuscitate acute lower gastrointestinal bleeding with transfusion and correction of coagulopathy",
-   "Consider a transjugular intrahepatic portosystemic shunt or interventional radiological embolisation for refractory or massive bleeding",
-   "Investigate and manage the cause of portal hypertension, such as cirrhosis or portal vein thrombosis",
-   "Multidisciplinary care with hepatology, interventional radiology and endoscopy, with surveillance for recurrent bleeding unless portal pressure is addressed"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "rectal_varices-pathway",
-   "title": "Rectal varices: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Dilated portosystemic collateral veins in the rectum arising in portal hypertension",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Massive or recurrent rectal bleeding",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Endoscopic identification distinguishing varices from haemorrhoids, Assessment for portal hypertension and its cause (liver disease, portal vein thrombosis), Cross-sectional or Doppler imaging of the portal system"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reduce portal pressure as the definitive strategy, with non-selective beta-blockers and treatment of the underlying liver disease"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking rectal varices for haemorrhoids and treating with banding or excision, risking severe bleeding"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of rectal varices."
-  }
- ],
- "tables": [
-  {
-   "id": "rectal_varices-matrix",
-   "title": "Rectal varices: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Dilated portosystemic collateral veins in the rectum arising in portal hypertension",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastrointestinal",
+  "specialty": "Gastroenterology / Hepatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Hepatology and gastroenterology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Dilated portosystemic collateral veins in the rectum arising in portal hypertension",
+      "They are distinct from haemorrhoids, which are dilatations of the normal haemorrhoidal cushions",
+      "They appear as serpentine submucosal veins extending upward from the anorectum on endoscopy",
+      "They can cause significant, sometimes massive, lower gastrointestinal bleeding",
+      "Recognising portal hypertension is essential, as management differs from haemorrhoid treatment",
+      "Treatment targets portal pressure (for example with portosystemic shunting) alongside local haemostatic measures; conventional haemorrhoid procedures can provoke severe bleeding"
     ],
-    [
-     "Key Investigations",
-     "Endoscopic identification distinguishing varices from haemorrhoids, Assessment for portal hypertension and its cause (liver",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Rectal varices form when portal hypertension drives blood through portosystemic collaterals between the superior rectal veins (portal system) and the middle and inferior rectal veins (systemic system). The resulting dilated submucosal veins can rupture and bleed. Unlike haemorrhoids, which are downward displacements of vascular cushions, rectal varices are true varices reflecting elevated portal pressure, so definitive control often requires reducing portal pressure rather than local excision.",
+    "additionalDifferentials": [
+      "Haemorrhoids",
+      "Other causes of lower gastrointestinal bleeding (angiodysplasia, neoplasm, diverticular)",
+      "Ischaemic or inflammatory proctitis",
+      "Rectal neoplasm",
+      "Colonic varices"
     ],
-    [
-     "Primary Differentials",
-     "Haemorrhoids, Other causes of lower gastrointestinal bleeding (angiodysplasia, neoplasm, diverticular), Ischaemic or inflammatory",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Endoscopic identification distinguishing varices from haemorrhoids",
+      "Assessment for portal hypertension and its cause (liver disease, portal vein thrombosis)",
+      "Cross-sectional or Doppler imaging of the portal system",
+      "Full blood count and coagulation/liver function tests",
+      "Assessment of overall variceal burden"
     ],
-    [
-     "Management Strategy",
-     "Reduce portal pressure as the definitive strategy, with non-selective beta-blockers and treatment of the underlying liver disease",
-     "Core treatment modality"
+    "redFlags": [
+      "Massive or recurrent rectal bleeding",
+      "Haemodynamic instability",
+      "Decompensated liver disease",
+      "Coagulopathy compounding bleeding"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking rectal varices for haemorrhoids and treating with banding or excision, risking severe bleeding",
-     "Prevent diagnostic or management error"
+    "prognosis": "Bleeding can be controlled and prognosis is largely determined by the underlying portal hypertension and liver disease; recurrence is likely unless portal pressure is addressed.",
+    "pitfalls": [
+      "Mistaking rectal varices for haemorrhoids and treating with banding or excision, risking severe bleeding",
+      "Failing to recognise underlying portal hypertension",
+      "Overlooking other bleeding sources in portal hypertension",
+      "Not addressing coagulopathy"
+    ],
+    "references": [
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "Hepatology reference texts (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reduce portal pressure as the definitive strategy, with non-selective beta-blockers and treatment of the underlying liver disease",
+      "Achieve endoscopic haemostasis of bleeding varices with band ligation, sclerotherapy or coil-and-glue embolisation, avoiding conventional haemorrhoid procedures that can provoke severe haemorrhage",
+      "Resuscitate acute lower gastrointestinal bleeding with transfusion and correction of coagulopathy",
+      "Consider a transjugular intrahepatic portosystemic shunt or interventional radiological embolisation for refractory or massive bleeding",
+      "Investigate and manage the cause of portal hypertension, such as cirrhosis or portal vein thrombosis",
+      "Multidisciplinary care with hepatology, interventional radiology and endoscopy, with surveillance for recurrent bleeding unless portal pressure is addressed"
     ]
-   ],
-   "caption": "Overview comparison matrix for rectal varices."
-  }
- ],
- "diagrams": [
-  {
-   "id": "rectal-varices-real-image",
-   "title": "Rectal varices: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "rectal_varices-pathway",
+      "title": "Rectal varices: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Dilated portosystemic collateral veins in the rectum arising in portal hypertension",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Massive or recurrent rectal bleeding",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Endoscopic identification distinguishing varices from haemorrhoids, Assessment for portal hypertension and its cause (liver disease, portal vein thrombosis), Cross-sectional or Doppler imaging of the portal system"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reduce portal pressure as the definitive strategy, with non-selective beta-blockers and treatment of the underlying liver disease"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking rectal varices for haemorrhoids and treating with banding or excision, risking severe bleeding"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of rectal varices."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "rectal_varices-matrix",
+      "title": "Rectal varices: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Dilated portosystemic collateral veins in the rectum arising in portal hypertension",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Endoscopic identification distinguishing varices from haemorrhoids, Assessment for portal hypertension and its cause (liver",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Haemorrhoids, Other causes of lower gastrointestinal bleeding (angiodysplasia, neoplasm, diverticular), Ischaemic or inflammatory",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reduce portal pressure as the definitive strategy, with non-selective beta-blockers and treatment of the underlying liver disease",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking rectal varices for haemorrhoids and treating with banding or excision, risking severe bleeding",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for rectal varices."
+    }
+  ],
+  "diagrams": []
 }

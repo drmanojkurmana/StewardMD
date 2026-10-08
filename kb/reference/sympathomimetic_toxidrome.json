@@ -1,170 +1,148 @@
 {
- "id": "sympathomimetic_toxidrome",
- "name": "Sympathomimetic toxidrome",
- "aliases": [
-  "adrenergic toxidrome",
-  "stimulant toxidrome"
- ],
- "class": "non_infective",
- "system": "Multisystem / Toxicology",
- "specialty": "Emergency medicine / Toxicology",
- "referenceOnly": true,
- "reference": {
-  "source": "Standard toxicology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Characterised by agitation, tachycardia, hypertension, hyperthermia, dilated pupils and prominent sweating",
-   "Typical causes include cocaine, amphetamines and related stimulants and some decongestants",
-   "The presence of sweating and usually preserved bowel sounds distinguishes it from the dry anticholinergic toxidrome",
-   "Benzodiazepines are the cornerstone of treatment, controlling agitation, tachycardia and hypertension",
-   "Complications include seizures, myocardial ischaemia, hyperthermia, rhabdomyolysis and intracranial haemorrhage",
-   "Traditional teaching cautions against beta-blocker monotherapy in cocaine toxicity because of concern about unopposed alpha stimulation"
+  "id": "sympathomimetic_toxidrome",
+  "name": "Sympathomimetic toxidrome",
+  "aliases": [
+    "adrenergic toxidrome",
+    "stimulant toxidrome"
   ],
-  "pathophysiology": "The sympathomimetic toxidrome results from excessive stimulation of adrenergic receptors through increased release or reduced reuptake of catecholamines, or direct receptor agonism. The resulting adrenergic overdrive raises heart rate, blood pressure and temperature, dilates pupils and stimulates sweating, while central stimulation causes agitation and can provoke seizures. End-organ complications arise from vasoconstriction and increased metabolic demand, including myocardial ischaemia, cerebral haemorrhage and hyperthermia with rhabdomyolysis.",
-  "additionalDifferentials": [
-   "Anticholinergic toxidrome",
-   "Serotonin syndrome",
-   "Neuroleptic malignant syndrome",
-   "Thyroid storm",
-   "Alcohol or sedative withdrawal",
-   "Sepsis or CNS infection"
-  ],
-  "additionalInvestigations": [
-   "Clinical recognition and a substance-use history",
-   "Electrocardiogram and cardiac assessment for ischaemia and arrhythmia",
-   "Temperature, creatine kinase and renal function for hyperthermia and rhabdomyolysis",
-   "Neuroimaging if focal signs or severe headache suggest intracranial haemorrhage",
-   "Glucose and electrolytes to exclude mimics"
-  ],
-  "redFlags": [
-   "Chest pain or electrocardiographic evidence of ischaemia",
-   "Severe hyperthermia",
-   "Seizures or focal neurological signs",
-   "Uncontrolled hypertension with end-organ compromise"
-  ],
-  "prognosis": "Most patients recover with sedation and supportive care, but severe hyperthermia, myocardial infarction, intracranial haemorrhage or status epilepticus can be fatal.",
-  "pitfalls": [
-   "Confusing it with the anticholinergic toxidrome (sweaty versus dry skin)",
-   "Under-sedating agitated patients and allowing hyperthermia to progress",
-   "Overlooking myocardial ischaemia or intracranial haemorrhage",
-   "Giving beta-blocker monotherapy in cocaine toxicity against traditional caution"
-  ],
-  "references": [
-   "Goldfrank's Toxicologic Emergencies",
-   "Tintinalli's Emergency Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Give benzodiazepines as first-line treatment to control agitation, tachycardia, hypertension and seizures",
-   "Treat significant hyperthermia with rapid external cooling and manage rhabdomyolysis with intravenous fluids",
-   "Control persistent hypertension or myocardial ischaemia with vasodilators such as nitrates or phentolamine, avoiding beta-blocker monotherapy in suspected cocaine toxicity because of unopposed alpha stimulation",
-   "Provide supportive care with cardiac monitoring and correction of glucose and electrolyte abnormalities",
-   "Consider gastrointestinal decontamination for recent oral ingestion or drug body-packing",
-   "Investigate and treat complications including seizures, arrhythmia and intracranial haemorrhage",
-   "Involve a clinical toxicology or poisons service for guidance in severe cases"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "sympathomimetic_toxidrome-pathway",
-   "title": "Sympathomimetic toxidrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Characterised by agitation, tachycardia, hypertension, hyperthermia, dilated pupils and prominent sweating",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Chest pain or electrocardiographic evidence of ischaemia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical recognition and a substance-use history, Electrocardiogram and cardiac assessment for ischaemia and arrhythmia, Temperature, creatine kinase and renal function for hyperthermia and rhabdomyolysis"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Give benzodiazepines as first-line treatment to control agitation, tachycardia, hypertension and seizures"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing it with the anticholinergic toxidrome (sweaty versus dry skin)"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of sympathomimetic toxidrome."
-  }
- ],
- "tables": [
-  {
-   "id": "sympathomimetic_toxidrome-matrix",
-   "title": "Sympathomimetic toxidrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Characterised by agitation, tachycardia, hypertension, hyperthermia, dilated pupils and prominent sweating",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Multisystem / Toxicology",
+  "specialty": "Emergency medicine / Toxicology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Standard toxicology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Characterised by agitation, tachycardia, hypertension, hyperthermia, dilated pupils and prominent sweating",
+      "Typical causes include cocaine, amphetamines and related stimulants and some decongestants",
+      "The presence of sweating and usually preserved bowel sounds distinguishes it from the dry anticholinergic toxidrome",
+      "Benzodiazepines are the cornerstone of treatment, controlling agitation, tachycardia and hypertension",
+      "Complications include seizures, myocardial ischaemia, hyperthermia, rhabdomyolysis and intracranial haemorrhage",
+      "Traditional teaching cautions against beta-blocker monotherapy in cocaine toxicity because of concern about unopposed alpha stimulation"
     ],
-    [
-     "Key Investigations",
-     "Clinical recognition and a substance-use history, Electrocardiogram and cardiac assessment for ischaemia and arrhythmia,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The sympathomimetic toxidrome results from excessive stimulation of adrenergic receptors through increased release or reduced reuptake of catecholamines, or direct receptor agonism. The resulting adrenergic overdrive raises heart rate, blood pressure and temperature, dilates pupils and stimulates sweating, while central stimulation causes agitation and can provoke seizures. End-organ complications arise from vasoconstriction and increased metabolic demand, including myocardial ischaemia, cerebral haemorrhage and hyperthermia with rhabdomyolysis.",
+    "additionalDifferentials": [
+      "Anticholinergic toxidrome",
+      "Serotonin syndrome",
+      "Neuroleptic malignant syndrome",
+      "Thyroid storm",
+      "Alcohol or sedative withdrawal",
+      "Sepsis or CNS infection"
     ],
-    [
-     "Primary Differentials",
-     "Anticholinergic toxidrome, Serotonin syndrome, Neuroleptic malignant syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical recognition and a substance-use history",
+      "Electrocardiogram and cardiac assessment for ischaemia and arrhythmia",
+      "Temperature, creatine kinase and renal function for hyperthermia and rhabdomyolysis",
+      "Neuroimaging if focal signs or severe headache suggest intracranial haemorrhage",
+      "Glucose and electrolytes to exclude mimics"
     ],
-    [
-     "Management Strategy",
-     "Give benzodiazepines as first-line treatment to control agitation, tachycardia, hypertension and seizures",
-     "Core treatment modality"
+    "redFlags": [
+      "Chest pain or electrocardiographic evidence of ischaemia",
+      "Severe hyperthermia",
+      "Seizures or focal neurological signs",
+      "Uncontrolled hypertension with end-organ compromise"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing it with the anticholinergic toxidrome (sweaty versus dry skin)",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most patients recover with sedation and supportive care, but severe hyperthermia, myocardial infarction, intracranial haemorrhage or status epilepticus can be fatal.",
+    "pitfalls": [
+      "Confusing it with the anticholinergic toxidrome (sweaty versus dry skin)",
+      "Under-sedating agitated patients and allowing hyperthermia to progress",
+      "Overlooking myocardial ischaemia or intracranial haemorrhage",
+      "Giving beta-blocker monotherapy in cocaine toxicity against traditional caution"
+    ],
+    "references": [
+      "Goldfrank's Toxicologic Emergencies",
+      "Tintinalli's Emergency Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Give benzodiazepines as first-line treatment to control agitation, tachycardia, hypertension and seizures",
+      "Treat significant hyperthermia with rapid external cooling and manage rhabdomyolysis with intravenous fluids",
+      "Control persistent hypertension or myocardial ischaemia with vasodilators such as nitrates or phentolamine, avoiding beta-blocker monotherapy in suspected cocaine toxicity because of unopposed alpha stimulation",
+      "Provide supportive care with cardiac monitoring and correction of glucose and electrolyte abnormalities",
+      "Consider gastrointestinal decontamination for recent oral ingestion or drug body-packing",
+      "Investigate and treat complications including seizures, arrhythmia and intracranial haemorrhage",
+      "Involve a clinical toxicology or poisons service for guidance in severe cases"
     ]
-   ],
-   "caption": "Overview comparison matrix for sympathomimetic toxidrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "sympathomimetic-toxidrome-real-image",
-   "title": "Sympathomimetic toxidrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "sympathomimetic_toxidrome-pathway",
+      "title": "Sympathomimetic toxidrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Characterised by agitation, tachycardia, hypertension, hyperthermia, dilated pupils and prominent sweating",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Chest pain or electrocardiographic evidence of ischaemia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical recognition and a substance-use history, Electrocardiogram and cardiac assessment for ischaemia and arrhythmia, Temperature, creatine kinase and renal function for hyperthermia and rhabdomyolysis"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Give benzodiazepines as first-line treatment to control agitation, tachycardia, hypertension and seizures"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing it with the anticholinergic toxidrome (sweaty versus dry skin)"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of sympathomimetic toxidrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "sympathomimetic_toxidrome-matrix",
+      "title": "Sympathomimetic toxidrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Characterised by agitation, tachycardia, hypertension, hyperthermia, dilated pupils and prominent sweating",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical recognition and a substance-use history, Electrocardiogram and cardiac assessment for ischaemia and arrhythmia,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Anticholinergic toxidrome, Serotonin syndrome, Neuroleptic malignant syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Give benzodiazepines as first-line treatment to control agitation, tachycardia, hypertension and seizures",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing it with the anticholinergic toxidrome (sweaty versus dry skin)",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for sympathomimetic toxidrome."
+    }
+  ],
+  "diagrams": []
 }

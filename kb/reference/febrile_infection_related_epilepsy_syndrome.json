@@ -1,176 +1,154 @@
 {
- "id": "febrile_infection_related_epilepsy_syndrome",
- "name": "Febrile infection-related epilepsy syndrome",
- "aliases": [
-  "FIRES",
-  "Acute encephalitis with refractory repetitive partial seizures"
- ],
- "class": "non_infective",
- "system": "Nervous system",
- "specialty": "Paediatric neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "ILAE classification and consensus guidance on NORSE and FIRES",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A catastrophic epileptic encephalopathy in previously healthy children, defined by refractory status epilepticus beginning between 24 hours and 2 weeks after a febrile illness, often with fever absent at seizure onset.",
-   "Considered the paediatric subtype of new-onset refractory status epilepticus (NORSE) with an obligatory preceding febrile infection.",
-   "Seizures are typically focal with secondary generalisation, extremely frequent and highly drug-resistant, often requiring prolonged anaesthetic coma.",
-   "It is a diagnosis of exclusion, as extensive investigation usually fails to identify a specific infective or autoimmune cause.",
-   "Emerging evidence implicates innate immune, cytokine-mediated neuroinflammation, notably the interleukin-1 pathway.",
-   "Early ketogenic diet and immunotherapy, including interleukin-1 blockade, are increasingly used in the acute phase.",
-   "Survivors typically enter a chronic phase of drug-resistant epilepsy with cognitive and behavioural impairment.",
-   "MRI may be normal early and later show mesial temporal and diffuse atrophy, while CSF may show mild pleocytosis."
+  "id": "febrile_infection_related_epilepsy_syndrome",
+  "name": "Febrile infection-related epilepsy syndrome",
+  "aliases": [
+    "FIRES",
+    "Acute encephalitis with refractory repetitive partial seizures"
   ],
-  "pathophysiology": "FIRES is thought to be an immune-mediated encephalopathy triggered by a preceding febrile infection in a genetically susceptible child, rather than a direct central nervous system infection. Activation of innate immunity with excessive pro-inflammatory cytokine signalling, particularly the interleukin-1-beta pathway, is proposed to lower seizure threshold and drive self-sustaining status epilepticus and neuronal injury. A vicious cycle of seizures, neuroinflammation and metabolic stress perpetuates the refractory state, with the hippocampus especially vulnerable.",
-  "additionalDifferentials": [
-   "Autoimmune or antibody-mediated encephalitis, including anti-NMDA-receptor encephalitis",
-   "Viral and bacterial meningoencephalitis",
-   "Other causes of NORSE (paraneoplastic, cryptogenic)",
-   "Mitochondrial and other metabolic encephalopathies",
-   "Genetic epileptic encephalopathies such as POLG- and PCDH19-related disease",
-   "Toxic encephalopathy"
-  ],
-  "additionalInvestigations": [
-   "Continuous EEG monitoring",
-   "MRI brain, initial and serial",
-   "Comprehensive CSF analysis including cell count, viral PCR and autoimmune antibodies",
-   "Serum and CSF autoimmune and paraneoplastic antibody panels",
-   "Infective screen of blood, CSF and respiratory samples to exclude active infection",
-   "Metabolic and mitochondrial workup with genetic testing",
-   "Inflammatory markers and cytokine profiling where available"
-  ],
-  "redFlags": [
-   "Refractory status epilepticus requiring escalating anaesthesia",
-   "Autonomic instability and complications of prolonged critical illness",
-   "Rising intracranial pressure or cerebral oedema",
-   "Multi-organ complications of prolonged anaesthetic therapy"
-  ],
-  "prognosis": "Poor overall, with appreciable mortality in the acute phase and a high burden of chronic drug-resistant epilepsy, cognitive impairment and disability among survivors; earlier immunomodulation and ketogenic therapy may improve outcomes.",
-  "pitfalls": [
-   "Assuming a treatable central nervous system infection and delaying immunomodulation or ketogenic diet.",
-   "Labelling the presentation as ordinary febrile status epilepticus and underestimating its severity.",
-   "Delaying the ketogenic diet, which can be effective but requires setup.",
-   "Failing to exclude autoimmune encephalitis and metabolic or genetic mimics.",
-   "Under-recognising the complications of prolonged therapeutic coma."
-  ],
-  "references": [
-   "International consensus definitions for NORSE, FIRES and related conditions",
-   "ILAE position papers on status epilepticus",
-   "Standard textbook of paediatric neurology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat the refractory status epilepticus aggressively with escalating antiseizure medications and anaesthetic burst-suppression using agents such as midazolam, thiopental or ketamine",
-   "Introduce the ketogenic diet early in the acute phase",
-   "Give immunotherapy with corticosteroids, intravenous immunoglobulin and/or plasma exchange for the presumed immune-mediated encephalopathy",
-   "Target the interleukin-1 pathway with anakinra, with tocilizumab or other agents considered in refractory cases",
-   "Provide intensive neurocritical supportive care with continuous EEG monitoring",
-   "Manage chronic drug-resistant epilepsy and cognitive and neurorehabilitation needs in survivors",
-   "Coordinate paediatric neurology, intensive care and immunology multidisciplinary input"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "febrile_infection_related_epilepsy_syndrome-pathway",
-   "title": "Febrile infection-related epilepsy syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A catastrophic epileptic encephalopathy in previously healthy children, defined by refractory status epilepticus beginning between 24 hours and 2 weeks after a febrile illness, often with fever absent at seizure onset.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Refractory status epilepticus requiring escalating anaesthesia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Continuous EEG monitoring, MRI brain, initial and serial, Comprehensive CSF analysis including cell count, viral PCR and autoimmune antibodies"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat the refractory status epilepticus aggressively with escalating antiseizure medications and anaesthetic burst-suppression using agents such as midazolam, thiopental or ketamine"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a treatable central nervous system infection and delaying immunomodulation or ketogenic diet."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of febrile infection-related epilepsy syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "febrile_infection_related_epilepsy_syndrome-matrix",
-   "title": "Febrile infection-related epilepsy syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A catastrophic epileptic encephalopathy in previously healthy children, defined by refractory status epilepticus beginning",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system",
+  "specialty": "Paediatric neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ILAE classification and consensus guidance on NORSE and FIRES",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A catastrophic epileptic encephalopathy in previously healthy children, defined by refractory status epilepticus beginning between 24 hours and 2 weeks after a febrile illness, often with fever absent at seizure onset.",
+      "Considered the paediatric subtype of new-onset refractory status epilepticus (NORSE) with an obligatory preceding febrile infection.",
+      "Seizures are typically focal with secondary generalisation, extremely frequent and highly drug-resistant, often requiring prolonged anaesthetic coma.",
+      "It is a diagnosis of exclusion, as extensive investigation usually fails to identify a specific infective or autoimmune cause.",
+      "Emerging evidence implicates innate immune, cytokine-mediated neuroinflammation, notably the interleukin-1 pathway.",
+      "Early ketogenic diet and immunotherapy, including interleukin-1 blockade, are increasingly used in the acute phase.",
+      "Survivors typically enter a chronic phase of drug-resistant epilepsy with cognitive and behavioural impairment.",
+      "MRI may be normal early and later show mesial temporal and diffuse atrophy, while CSF may show mild pleocytosis."
     ],
-    [
-     "Key Investigations",
-     "Continuous EEG monitoring, MRI brain, initial and serial, Comprehensive CSF analysis including cell count, viral PCR and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "FIRES is thought to be an immune-mediated encephalopathy triggered by a preceding febrile infection in a genetically susceptible child, rather than a direct central nervous system infection. Activation of innate immunity with excessive pro-inflammatory cytokine signalling, particularly the interleukin-1-beta pathway, is proposed to lower seizure threshold and drive self-sustaining status epilepticus and neuronal injury. A vicious cycle of seizures, neuroinflammation and metabolic stress perpetuates the refractory state, with the hippocampus especially vulnerable.",
+    "additionalDifferentials": [
+      "Autoimmune or antibody-mediated encephalitis, including anti-NMDA-receptor encephalitis",
+      "Viral and bacterial meningoencephalitis",
+      "Other causes of NORSE (paraneoplastic, cryptogenic)",
+      "Mitochondrial and other metabolic encephalopathies",
+      "Genetic epileptic encephalopathies such as POLG- and PCDH19-related disease",
+      "Toxic encephalopathy"
     ],
-    [
-     "Primary Differentials",
-     "Autoimmune or antibody-mediated encephalitis, including anti-NMDA-receptor encephalitis, Viral and bacterial meningoencephalitis,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Continuous EEG monitoring",
+      "MRI brain, initial and serial",
+      "Comprehensive CSF analysis including cell count, viral PCR and autoimmune antibodies",
+      "Serum and CSF autoimmune and paraneoplastic antibody panels",
+      "Infective screen of blood, CSF and respiratory samples to exclude active infection",
+      "Metabolic and mitochondrial workup with genetic testing",
+      "Inflammatory markers and cytokine profiling where available"
     ],
-    [
-     "Management Strategy",
-     "Treat the refractory status epilepticus aggressively with escalating antiseizure medications and anaesthetic burst-suppression",
-     "Core treatment modality"
+    "redFlags": [
+      "Refractory status epilepticus requiring escalating anaesthesia",
+      "Autonomic instability and complications of prolonged critical illness",
+      "Rising intracranial pressure or cerebral oedema",
+      "Multi-organ complications of prolonged anaesthetic therapy"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a treatable central nervous system infection and delaying immunomodulation or ketogenic diet.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Poor overall, with appreciable mortality in the acute phase and a high burden of chronic drug-resistant epilepsy, cognitive impairment and disability among survivors; earlier immunomodulation and ketogenic therapy may improve outcomes.",
+    "pitfalls": [
+      "Assuming a treatable central nervous system infection and delaying immunomodulation or ketogenic diet.",
+      "Labelling the presentation as ordinary febrile status epilepticus and underestimating its severity.",
+      "Delaying the ketogenic diet, which can be effective but requires setup.",
+      "Failing to exclude autoimmune encephalitis and metabolic or genetic mimics.",
+      "Under-recognising the complications of prolonged therapeutic coma."
+    ],
+    "references": [
+      "International consensus definitions for NORSE, FIRES and related conditions",
+      "ILAE position papers on status epilepticus",
+      "Standard textbook of paediatric neurology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat the refractory status epilepticus aggressively with escalating antiseizure medications and anaesthetic burst-suppression using agents such as midazolam, thiopental or ketamine",
+      "Introduce the ketogenic diet early in the acute phase",
+      "Give immunotherapy with corticosteroids, intravenous immunoglobulin and/or plasma exchange for the presumed immune-mediated encephalopathy",
+      "Target the interleukin-1 pathway with anakinra, with tocilizumab or other agents considered in refractory cases",
+      "Provide intensive neurocritical supportive care with continuous EEG monitoring",
+      "Manage chronic drug-resistant epilepsy and cognitive and neurorehabilitation needs in survivors",
+      "Coordinate paediatric neurology, intensive care and immunology multidisciplinary input"
     ]
-   ],
-   "caption": "Overview comparison matrix for febrile infection-related epilepsy syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "febrile-infection-related-epilepsy-syndrome-real-image",
-   "title": "Febrile infection-related epilepsy syndrome: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "febrile_infection_related_epilepsy_syndrome-pathway",
+      "title": "Febrile infection-related epilepsy syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A catastrophic epileptic encephalopathy in previously healthy children, defined by refractory status epilepticus beginning between 24 hours and 2 weeks after a febrile illness, often with fever absent at seizure onset.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Refractory status epilepticus requiring escalating anaesthesia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Continuous EEG monitoring, MRI brain, initial and serial, Comprehensive CSF analysis including cell count, viral PCR and autoimmune antibodies"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat the refractory status epilepticus aggressively with escalating antiseizure medications and anaesthetic burst-suppression using agents such as midazolam, thiopental or ketamine"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a treatable central nervous system infection and delaying immunomodulation or ketogenic diet."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of febrile infection-related epilepsy syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "febrile_infection_related_epilepsy_syndrome-matrix",
+      "title": "Febrile infection-related epilepsy syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A catastrophic epileptic encephalopathy in previously healthy children, defined by refractory status epilepticus beginning",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Continuous EEG monitoring, MRI brain, initial and serial, Comprehensive CSF analysis including cell count, viral PCR and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Autoimmune or antibody-mediated encephalitis, including anti-NMDA-receptor encephalitis, Viral and bacterial meningoencephalitis,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat the refractory status epilepticus aggressively with escalating antiseizure medications and anaesthetic burst-suppression",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a treatable central nervous system infection and delaying immunomodulation or ketogenic diet.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for febrile infection-related epilepsy syndrome."
+    }
+  ],
+  "diagrams": []
 }

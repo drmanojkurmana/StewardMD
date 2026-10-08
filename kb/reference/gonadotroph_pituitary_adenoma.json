@@ -1,174 +1,152 @@
 {
- "id": "gonadotroph_pituitary_adenoma",
- "name": "Gonadotroph (clinically non-functioning) pituitary adenoma",
- "aliases": [
-  "non-functioning pituitary adenoma",
-  "NFPA",
-  "gonadotroph adenoma",
-  "clinically silent gonadotroph tumour"
- ],
- "class": "non_infective",
- "system": "Endocrine",
- "specialty": "Endocrinology",
- "referenceOnly": true,
- "reference": {
-  "source": "Standard endocrinology reference texts and pituitary tumour consensus guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The most common type of clinically non-functioning pituitary macroadenoma, usually of gonadotroph lineage, which typically presents through mass effect rather than a hormone excess syndrome",
-   "Although immunopositive for gonadotropins or their subunits, secretion is usually inefficient and clinically silent, so patients rarely have symptomatic FSH or LH excess",
-   "Presentation is often with headache, visual field defects (classically bitemporal hemianopia) and features of hypopituitarism from compression of the normal gland",
-   "Stalk compression can raise prolactin modestly, but this stalk-effect hyperprolactinaemia must be distinguished from a true prolactinoma",
-   "Many are found incidentally on imaging performed for unrelated reasons (pituitary incidentaloma)",
-   "Because they are not hormonally driven, medical therapy is of limited benefit and transsphenoidal surgery is the mainstay for symptomatic or growing tumours",
-   "Pituitary apoplexy from haemorrhage or infarction can be the dramatic first presentation of a previously unrecognised adenoma"
+  "id": "gonadotroph_pituitary_adenoma",
+  "name": "Gonadotroph (clinically non-functioning) pituitary adenoma",
+  "aliases": [
+    "non-functioning pituitary adenoma",
+    "NFPA",
+    "gonadotroph adenoma",
+    "clinically silent gonadotroph tumour"
   ],
-  "pathophysiology": "This is a benign monoclonal tumour arising from pituitary gonadotroph cells. Although the cells often express FSH, LH or the glycoprotein alpha-subunit on immunostaining, they generally secrete these hormones inefficiently and without a recognisable clinical syndrome, hence the label clinically non-functioning. The clinical consequences instead arise from progressive tumour growth: compression of the optic chiasm causes visual field loss, distortion of the pituitary stalk interrupts dopaminergic inhibition and mildly raises prolactin, and destruction or compression of the normal anterior pituitary produces variable hypopituitarism. Sudden haemorrhagic or ischaemic change within the tumour causes pituitary apoplexy.",
-  "additionalDifferentials": [
-   "Prolactinoma (true prolactin-secreting adenoma)",
-   "Craniopharyngioma",
-   "Meningioma of the sellar or suprasellar region",
-   "Rathke cleft cyst",
-   "Hypophysitis",
-   "Metastatic deposit or other sellar mass",
-   "Pituitary hyperplasia (e.g. from primary hypothyroidism)"
-  ],
-  "additionalInvestigations": [
-   "Pituitary MRI to define tumour size, suprasellar extension and chiasmal or cavernous sinus involvement",
-   "Full anterior pituitary hormone profile to detect hypopituitarism",
-   "Serum prolactin, interpreted in the context of possible stalk effect",
-   "Measurement of FSH, LH and alpha-subunit to characterise gonadotroph output",
-   "Formal visual field testing (perimetry) when the tumour approaches the optic chiasm",
-   "Assessment of secondary adrenal and thyroid axes before any surgery"
-  ],
-  "redFlags": [
-   "Progressive or acute visual field loss from chiasmal compression",
-   "Pituitary apoplexy with sudden severe headache, ophthalmoplegia and collapse",
-   "Secondary adrenal insufficiency requiring urgent glucocorticoid cover",
-   "Rapid tumour enlargement or invasion on serial imaging"
-  ],
-  "prognosis": "Surgical decompression usually improves visual fields and stabilises the tumour, and many patients do well long term, though hypopituitarism often persists and requires hormone replacement. Residual or recurrent tumour is common enough to warrant lifelong imaging and endocrine surveillance, with radiotherapy considered for progressive remnants.",
-  "pitfalls": [
-   "Mistaking stalk-effect hyperprolactinaemia for a prolactinoma and treating with dopamine agonists instead of operating",
-   "Failing to diagnose and replace secondary adrenal insufficiency before surgery or stress",
-   "Assuming an incidental pituitary lesion is stable without documenting visual fields and pituitary function",
-   "Overlooking early apoplexy in a patient with sudden headache and subtle eye signs"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "Consensus guidance on non-functioning pituitary adenomas"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Offer transsphenoidal surgical resection as the mainstay for symptomatic or growing tumours causing mass effect or optic chiasm compression",
-   "Use radiotherapy, including stereotactic radiosurgery, for residual, recurrent or surgically inaccessible tumour",
-   "Replace deficient anterior pituitary hormones (glucocorticoid, thyroid hormone, sex steroids and growth hormone) for hypopituitarism, ensuring perioperative glucocorticoid cover",
-   "Recognise and treat pituitary apoplexy as an emergency with glucocorticoids and urgent surgical decompression when vision is threatened",
-   "Manage asymptomatic incidentalomas conservatively with serial imaging and visual and endocrine monitoring",
-   "Provide long-term surveillance with pituitary MRI, formal perimetry and endocrine review through multidisciplinary neurosurgery, endocrinology and neuro-ophthalmology"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "gonadotroph_pituitary_adenoma-pathway",
-   "title": "Gonadotroph (clinically non-functioning) pituitary adenoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The most common type of clinically non-functioning pituitary macroadenoma, usually of gonadotroph lineage, which typically presents through mass effect rather than a hormone excess syndrome",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive or acute visual field loss from chiasmal compression",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Pituitary MRI to define tumour size, suprasellar extension and chiasmal or cavernous sinus involvement, Full anterior pituitary hormone profile to detect hypopituitarism, Serum prolactin, interpreted in the context of"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Offer transsphenoidal surgical resection as the mainstay for symptomatic or growing tumours causing mass effect or optic chiasm compression"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking stalk-effect hyperprolactinaemia for a prolactinoma and treating with dopamine agonists instead of operating"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of gonadotroph (clinically non-functioning) pituitary adenoma."
-  }
- ],
- "tables": [
-  {
-   "id": "gonadotroph_pituitary_adenoma-matrix",
-   "title": "Gonadotroph (clinically non-functioning) pituitary adenoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The most common type of clinically non-functioning pituitary macroadenoma, usually of gonadotroph lineage, which typically",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine",
+  "specialty": "Endocrinology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Standard endocrinology reference texts and pituitary tumour consensus guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The most common type of clinically non-functioning pituitary macroadenoma, usually of gonadotroph lineage, which typically presents through mass effect rather than a hormone excess syndrome",
+      "Although immunopositive for gonadotropins or their subunits, secretion is usually inefficient and clinically silent, so patients rarely have symptomatic FSH or LH excess",
+      "Presentation is often with headache, visual field defects (classically bitemporal hemianopia) and features of hypopituitarism from compression of the normal gland",
+      "Stalk compression can raise prolactin modestly, but this stalk-effect hyperprolactinaemia must be distinguished from a true prolactinoma",
+      "Many are found incidentally on imaging performed for unrelated reasons (pituitary incidentaloma)",
+      "Because they are not hormonally driven, medical therapy is of limited benefit and transsphenoidal surgery is the mainstay for symptomatic or growing tumours",
+      "Pituitary apoplexy from haemorrhage or infarction can be the dramatic first presentation of a previously unrecognised adenoma"
     ],
-    [
-     "Key Investigations",
-     "Pituitary MRI to define tumour size, suprasellar extension and chiasmal or cavernous sinus involvement, Full anterior pituitary",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "This is a benign monoclonal tumour arising from pituitary gonadotroph cells. Although the cells often express FSH, LH or the glycoprotein alpha-subunit on immunostaining, they generally secrete these hormones inefficiently and without a recognisable clinical syndrome, hence the label clinically non-functioning. The clinical consequences instead arise from progressive tumour growth: compression of the optic chiasm causes visual field loss, distortion of the pituitary stalk interrupts dopaminergic inhibition and mildly raises prolactin, and destruction or compression of the normal anterior pituitary produces variable hypopituitarism. Sudden haemorrhagic or ischaemic change within the tumour causes pituitary apoplexy.",
+    "additionalDifferentials": [
+      "Prolactinoma (true prolactin-secreting adenoma)",
+      "Craniopharyngioma",
+      "Meningioma of the sellar or suprasellar region",
+      "Rathke cleft cyst",
+      "Hypophysitis",
+      "Metastatic deposit or other sellar mass",
+      "Pituitary hyperplasia (e.g. from primary hypothyroidism)"
     ],
-    [
-     "Primary Differentials",
-     "Prolactinoma (true prolactin-secreting adenoma), Craniopharyngioma, Meningioma of the sellar or suprasellar region",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Pituitary MRI to define tumour size, suprasellar extension and chiasmal or cavernous sinus involvement",
+      "Full anterior pituitary hormone profile to detect hypopituitarism",
+      "Serum prolactin, interpreted in the context of possible stalk effect",
+      "Measurement of FSH, LH and alpha-subunit to characterise gonadotroph output",
+      "Formal visual field testing (perimetry) when the tumour approaches the optic chiasm",
+      "Assessment of secondary adrenal and thyroid axes before any surgery"
     ],
-    [
-     "Management Strategy",
-     "Offer transsphenoidal surgical resection as the mainstay for symptomatic or growing tumours causing mass effect or optic chiasm",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive or acute visual field loss from chiasmal compression",
+      "Pituitary apoplexy with sudden severe headache, ophthalmoplegia and collapse",
+      "Secondary adrenal insufficiency requiring urgent glucocorticoid cover",
+      "Rapid tumour enlargement or invasion on serial imaging"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking stalk-effect hyperprolactinaemia for a prolactinoma and treating with dopamine agonists instead of operating",
-     "Prevent diagnostic or management error"
+    "prognosis": "Surgical decompression usually improves visual fields and stabilises the tumour, and many patients do well long term, though hypopituitarism often persists and requires hormone replacement. Residual or recurrent tumour is common enough to warrant lifelong imaging and endocrine surveillance, with radiotherapy considered for progressive remnants.",
+    "pitfalls": [
+      "Mistaking stalk-effect hyperprolactinaemia for a prolactinoma and treating with dopamine agonists instead of operating",
+      "Failing to diagnose and replace secondary adrenal insufficiency before surgery or stress",
+      "Assuming an incidental pituitary lesion is stable without documenting visual fields and pituitary function",
+      "Overlooking early apoplexy in a patient with sudden headache and subtle eye signs"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "Consensus guidance on non-functioning pituitary adenomas"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Offer transsphenoidal surgical resection as the mainstay for symptomatic or growing tumours causing mass effect or optic chiasm compression",
+      "Use radiotherapy, including stereotactic radiosurgery, for residual, recurrent or surgically inaccessible tumour",
+      "Replace deficient anterior pituitary hormones (glucocorticoid, thyroid hormone, sex steroids and growth hormone) for hypopituitarism, ensuring perioperative glucocorticoid cover",
+      "Recognise and treat pituitary apoplexy as an emergency with glucocorticoids and urgent surgical decompression when vision is threatened",
+      "Manage asymptomatic incidentalomas conservatively with serial imaging and visual and endocrine monitoring",
+      "Provide long-term surveillance with pituitary MRI, formal perimetry and endocrine review through multidisciplinary neurosurgery, endocrinology and neuro-ophthalmology"
     ]
-   ],
-   "caption": "Overview comparison matrix for gonadotroph (clinically non-functioning) pituitary adenoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "gonadotroph-pituitary-adenoma-real-image",
-   "title": "Gonadotroph (clinically non-functioning) pituitary adenoma: Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "gonadotroph_pituitary_adenoma-pathway",
+      "title": "Gonadotroph (clinically non-functioning) pituitary adenoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The most common type of clinically non-functioning pituitary macroadenoma, usually of gonadotroph lineage, which typically presents through mass effect rather than a hormone excess syndrome",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive or acute visual field loss from chiasmal compression",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Pituitary MRI to define tumour size, suprasellar extension and chiasmal or cavernous sinus involvement, Full anterior pituitary hormone profile to detect hypopituitarism, Serum prolactin, interpreted in the context of"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Offer transsphenoidal surgical resection as the mainstay for symptomatic or growing tumours causing mass effect or optic chiasm compression"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking stalk-effect hyperprolactinaemia for a prolactinoma and treating with dopamine agonists instead of operating"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of gonadotroph (clinically non-functioning) pituitary adenoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "gonadotroph_pituitary_adenoma-matrix",
+      "title": "Gonadotroph (clinically non-functioning) pituitary adenoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The most common type of clinically non-functioning pituitary macroadenoma, usually of gonadotroph lineage, which typically",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Pituitary MRI to define tumour size, suprasellar extension and chiasmal or cavernous sinus involvement, Full anterior pituitary",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Prolactinoma (true prolactin-secreting adenoma), Craniopharyngioma, Meningioma of the sellar or suprasellar region",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Offer transsphenoidal surgical resection as the mainstay for symptomatic or growing tumours causing mass effect or optic chiasm",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking stalk-effect hyperprolactinaemia for a prolactinoma and treating with dopamine agonists instead of operating",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for gonadotroph (clinically non-functioning) pituitary adenoma."
+    }
+  ],
+  "diagrams": []
 }

@@ -1,175 +1,153 @@
 {
- "id": "schizencephaly",
- "name": "Schizencephaly",
- "aliases": [
-  "cleft brain",
-  "open-lip schizencephaly",
-  "closed-lip schizencephaly",
-  "EMX2-associated schizencephaly"
- ],
- "class": "non_infective",
- "system": "Nervous system / Genetics",
- "specialty": "Neurology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Volpe's Neurology of the Newborn / Nelson Textbook of Paediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A malformation characterised by a full-thickness cleft extending from the pial surface to the lateral ventricle, lined throughout by grey matter, usually polymicrogyric cortex",
-   "It is classified as closed-lip when the cleft walls are apposed or open-lip when they are separated by cerebrospinal fluid, and it may be unilateral or bilateral",
-   "The grey-matter lining distinguishes it from an acquired porencephalic cyst, which is lined by white matter or gliotic tissue",
-   "It is frequently associated with absence of the septum pellucidum and with optic nerve hypoplasia, overlapping with septo-optic dysplasia",
-   "Most cases are thought to result from a destructive vascular or disruptive insult to the developing cortex, though some carry genetic contributions such as EMX2 variants",
-   "Clinical features vary with size and laterality, from hemiparesis and focal epilepsy in unilateral closed-lip clefts to severe global delay, spasticity, and refractory seizures in bilateral open-lip disease",
-   "Diagnosis is by MRI demonstrating the grey-matter-lined cleft, with evaluation for associated midline and optic anomalies"
+  "id": "schizencephaly",
+  "name": "Schizencephaly",
+  "aliases": [
+    "cleft brain",
+    "open-lip schizencephaly",
+    "closed-lip schizencephaly",
+    "EMX2-associated schizencephaly"
   ],
-  "pathophysiology": "Schizencephaly is a disorder of cortical formation in which a cleft lined by dysplastic grey matter spans the full thickness of the hemisphere from the ventricle to the cortical surface. It is thought to arise most often from a disruptive prenatal insult, such as a vascular event, that damages the germinal zone and developing cortex, sometimes combined with genetic susceptibility affecting cortical patterning. Because the injury occurs while the cortex is still developing, the cleft becomes lined by abnormal, typically polymicrogyric grey matter, and associated failure of midline structures such as the septum pellucidum and optic apparatus is common.",
-  "additionalDifferentials": [
-   "Porencephaly, which is lined by white matter or glial tissue rather than grey matter",
-   "Open-lip schizencephaly versus severe hydrocephalus or hydranencephaly",
-   "Septo-optic dysplasia",
-   "Polymicrogyria without a full-thickness cleft",
-   "Focal cortical dysplasia",
-   "Arachnoid cyst communicating with the ventricle"
-  ],
-  "additionalInvestigations": [
-   "Brain MRI to confirm the grey-matter-lined transmantle cleft and its laterality and type",
-   "Assessment of the septum pellucidum and optic nerves for associated septo-optic dysplasia",
-   "Ophthalmological examination for optic nerve hypoplasia",
-   "Endocrine evaluation of the hypothalamic-pituitary axis when midline anomalies are present",
-   "Electroencephalography to characterise epilepsy",
-   "Genetic evaluation including EMX2 and cortical malformation testing where indicated"
-  ],
-  "redFlags": [
-   "Drug-resistant focal or generalised epilepsy",
-   "Endocrine dysfunction when associated with septo-optic dysplasia",
-   "Progressive macrocephaly or raised intracranial pressure in large open-lip clefts",
-   "Visual impairment from optic nerve hypoplasia"
-  ],
-  "prognosis": "Prognosis depends on the size, type, and laterality of the cleft. Unilateral closed-lip schizencephaly may cause only mild hemiparesis and manageable epilepsy, whereas bilateral open-lip disease is typically associated with severe motor and cognitive disability and refractory seizures.",
-  "pitfalls": [
-   "Mistaking schizencephaly for a porencephalic cyst by failing to identify the grey-matter lining",
-   "Overlooking associated absence of the septum pellucidum and optic nerve hypoplasia",
-   "Not screening for hypothalamic-pituitary dysfunction when septo-optic features coexist",
-   "Confusing a large open-lip cleft with hydrocephalus or hydranencephaly on imaging"
-  ],
-  "references": [
-   "Volpe's Neurology of the Newborn",
-   "Nelson Textbook of Paediatrics",
-   "Barkovich Pediatric Neuroimaging"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No specific therapy corrects the malformation, so management targets its neurological consequences",
-   "Control focal or refractory epilepsy with antiseizure medication, escalating to epilepsy surgery evaluation in drug-resistant cases",
-   "Treat spasticity and hemiparesis with physiotherapy, occupational therapy, orthotics and antispasticity measures such as botulinum toxin or baclofen",
-   "Provide developmental, educational and speech and language support for cognitive delay",
-   "Screen for and manage associated septo-optic dysplasia, replacing deficient hypothalamic-pituitary hormones and treating visual impairment from optic nerve hypoplasia",
-   "Coordinate multidisciplinary paediatric neurology, neurosurgery, ophthalmology, endocrinology and rehabilitation care",
-   "Offer genetic evaluation and counselling where a genetic cause such as an EMX2 variant is identified"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "schizencephaly-pathway",
-   "title": "Schizencephaly: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A malformation characterised by a full-thickness cleft extending from the pial surface to the lateral ventricle, lined throughout by grey matter, usually polymicrogyric cortex",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Drug-resistant focal or generalised epilepsy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Brain MRI to confirm the grey-matter-lined transmantle cleft and its laterality and type, Assessment of the septum pellucidum and optic nerves for associated septo-optic dysplasia, Ophthalmological examination for optic"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No specific therapy corrects the malformation, so management targets its neurological consequences"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking schizencephaly for a porencephalic cyst by failing to identify the grey-matter lining"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of schizencephaly."
-  }
- ],
- "tables": [
-  {
-   "id": "schizencephaly-matrix",
-   "title": "Schizencephaly: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A malformation characterised by a full-thickness cleft extending from the pial surface to the lateral ventricle, lined throughout",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Genetics",
+  "specialty": "Neurology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Volpe's Neurology of the Newborn / Nelson Textbook of Paediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A malformation characterised by a full-thickness cleft extending from the pial surface to the lateral ventricle, lined throughout by grey matter, usually polymicrogyric cortex",
+      "It is classified as closed-lip when the cleft walls are apposed or open-lip when they are separated by cerebrospinal fluid, and it may be unilateral or bilateral",
+      "The grey-matter lining distinguishes it from an acquired porencephalic cyst, which is lined by white matter or gliotic tissue",
+      "It is frequently associated with absence of the septum pellucidum and with optic nerve hypoplasia, overlapping with septo-optic dysplasia",
+      "Most cases are thought to result from a destructive vascular or disruptive insult to the developing cortex, though some carry genetic contributions such as EMX2 variants",
+      "Clinical features vary with size and laterality, from hemiparesis and focal epilepsy in unilateral closed-lip clefts to severe global delay, spasticity, and refractory seizures in bilateral open-lip disease",
+      "Diagnosis is by MRI demonstrating the grey-matter-lined cleft, with evaluation for associated midline and optic anomalies"
     ],
-    [
-     "Key Investigations",
-     "Brain MRI to confirm the grey-matter-lined transmantle cleft and its laterality and type, Assessment of the septum pellucidum and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Schizencephaly is a disorder of cortical formation in which a cleft lined by dysplastic grey matter spans the full thickness of the hemisphere from the ventricle to the cortical surface. It is thought to arise most often from a disruptive prenatal insult, such as a vascular event, that damages the germinal zone and developing cortex, sometimes combined with genetic susceptibility affecting cortical patterning. Because the injury occurs while the cortex is still developing, the cleft becomes lined by abnormal, typically polymicrogyric grey matter, and associated failure of midline structures such as the septum pellucidum and optic apparatus is common.",
+    "additionalDifferentials": [
+      "Porencephaly, which is lined by white matter or glial tissue rather than grey matter",
+      "Open-lip schizencephaly versus severe hydrocephalus or hydranencephaly",
+      "Septo-optic dysplasia",
+      "Polymicrogyria without a full-thickness cleft",
+      "Focal cortical dysplasia",
+      "Arachnoid cyst communicating with the ventricle"
     ],
-    [
-     "Primary Differentials",
-     "Porencephaly, which is lined by white matter or glial tissue rather than grey matter, Open-lip schizencephaly versus severe",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Brain MRI to confirm the grey-matter-lined transmantle cleft and its laterality and type",
+      "Assessment of the septum pellucidum and optic nerves for associated septo-optic dysplasia",
+      "Ophthalmological examination for optic nerve hypoplasia",
+      "Endocrine evaluation of the hypothalamic-pituitary axis when midline anomalies are present",
+      "Electroencephalography to characterise epilepsy",
+      "Genetic evaluation including EMX2 and cortical malformation testing where indicated"
     ],
-    [
-     "Management Strategy",
-     "No specific therapy corrects the malformation, so management targets its neurological consequences",
-     "Core treatment modality"
+    "redFlags": [
+      "Drug-resistant focal or generalised epilepsy",
+      "Endocrine dysfunction when associated with septo-optic dysplasia",
+      "Progressive macrocephaly or raised intracranial pressure in large open-lip clefts",
+      "Visual impairment from optic nerve hypoplasia"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking schizencephaly for a porencephalic cyst by failing to identify the grey-matter lining",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends on the size, type, and laterality of the cleft. Unilateral closed-lip schizencephaly may cause only mild hemiparesis and manageable epilepsy, whereas bilateral open-lip disease is typically associated with severe motor and cognitive disability and refractory seizures.",
+    "pitfalls": [
+      "Mistaking schizencephaly for a porencephalic cyst by failing to identify the grey-matter lining",
+      "Overlooking associated absence of the septum pellucidum and optic nerve hypoplasia",
+      "Not screening for hypothalamic-pituitary dysfunction when septo-optic features coexist",
+      "Confusing a large open-lip cleft with hydrocephalus or hydranencephaly on imaging"
+    ],
+    "references": [
+      "Volpe's Neurology of the Newborn",
+      "Nelson Textbook of Paediatrics",
+      "Barkovich Pediatric Neuroimaging"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No specific therapy corrects the malformation, so management targets its neurological consequences",
+      "Control focal or refractory epilepsy with antiseizure medication, escalating to epilepsy surgery evaluation in drug-resistant cases",
+      "Treat spasticity and hemiparesis with physiotherapy, occupational therapy, orthotics and antispasticity measures such as botulinum toxin or baclofen",
+      "Provide developmental, educational and speech and language support for cognitive delay",
+      "Screen for and manage associated septo-optic dysplasia, replacing deficient hypothalamic-pituitary hormones and treating visual impairment from optic nerve hypoplasia",
+      "Coordinate multidisciplinary paediatric neurology, neurosurgery, ophthalmology, endocrinology and rehabilitation care",
+      "Offer genetic evaluation and counselling where a genetic cause such as an EMX2 variant is identified"
     ]
-   ],
-   "caption": "Overview comparison matrix for schizencephaly."
-  }
- ],
- "diagrams": [
-  {
-   "id": "schizencephaly-real-image",
-   "title": "Schizencephaly: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "schizencephaly-pathway",
+      "title": "Schizencephaly: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A malformation characterised by a full-thickness cleft extending from the pial surface to the lateral ventricle, lined throughout by grey matter, usually polymicrogyric cortex",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Drug-resistant focal or generalised epilepsy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Brain MRI to confirm the grey-matter-lined transmantle cleft and its laterality and type, Assessment of the septum pellucidum and optic nerves for associated septo-optic dysplasia, Ophthalmological examination for optic"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No specific therapy corrects the malformation, so management targets its neurological consequences"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking schizencephaly for a porencephalic cyst by failing to identify the grey-matter lining"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of schizencephaly."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "schizencephaly-matrix",
+      "title": "Schizencephaly: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A malformation characterised by a full-thickness cleft extending from the pial surface to the lateral ventricle, lined throughout",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Brain MRI to confirm the grey-matter-lined transmantle cleft and its laterality and type, Assessment of the septum pellucidum and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Porencephaly, which is lined by white matter or glial tissue rather than grey matter, Open-lip schizencephaly versus severe",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No specific therapy corrects the malformation, so management targets its neurological consequences",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking schizencephaly for a porencephalic cyst by failing to identify the grey-matter lining",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for schizencephaly."
+    }
+  ],
+  "diagrams": []
 }

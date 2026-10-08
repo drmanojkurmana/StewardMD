@@ -1,174 +1,152 @@
 {
- "id": "superficial_thrombophlebitis",
- "name": "Superficial thrombophlebitis",
- "aliases": [
-  "superficial venous thrombosis",
-  "SVT",
-  "superficial vein thrombophlebitis",
-  "phlebitis"
- ],
- "class": "non_infective",
- "system": "Vascular",
- "specialty": "Vascular Surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Rutherford's Vascular Surgery / Harrison's Principles of Internal Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents as a tender, warm, erythematous, palpable cord along the course of a superficial vein, most often in the lower limb",
-   "Commonly arises in varicose veins, but can also follow intravenous cannulation or occur in otherwise normal veins",
-   "It is frequently a benign, self-limiting process, yet it should not be dismissed because it can coexist with or extend into deep vein thrombosis",
-   "Duplex ultrasound is used to confirm the diagnosis, define clot extent, and assess proximity to the saphenofemoral or saphenopopliteal junctions and the deep system",
-   "Thrombus close to a deep junction or of substantial length carries a higher risk of propagation and venous thromboembolism, influencing whether anticoagulation is used",
-   "Management ranges from symptomatic measures for limited disease to a course of anticoagulation for extensive or junction-approaching thrombus",
-   "Migratory or recurrent superficial thrombophlebitis without varicosities should prompt consideration of an underlying thrombophilia or occult malignancy",
-   "Suppurative (septic) thrombophlebitis is a distinct infective complication requiring urgent treatment and is not the typical bland form"
+  "id": "superficial_thrombophlebitis",
+  "name": "Superficial thrombophlebitis",
+  "aliases": [
+    "superficial venous thrombosis",
+    "SVT",
+    "superficial vein thrombophlebitis",
+    "phlebitis"
   ],
-  "pathophysiology": "Superficial thrombophlebitis is thrombosis with accompanying inflammation of a superficial vein. The elements of Virchow's triad apply: venous stasis (notably in varicose veins), endothelial injury (for example from cannulation), and hypercoagulability. Thrombus formation within the superficial vein triggers a local inflammatory response producing the characteristic tender palpable cord. Because superficial and deep systems communicate through perforators and saphenous junctions, thrombus can propagate into the deep veins, linking the condition to venous thromboembolism.",
-  "additionalDifferentials": [
-   "Cellulitis",
-   "Deep vein thrombosis",
-   "Lymphangitis",
-   "Ruptured Baker cyst",
-   "Erythema nodosum",
-   "Contact dermatitis or insect bite reaction"
-  ],
-  "additionalInvestigations": [
-   "Venous duplex ultrasound to confirm diagnosis, measure clot length, and assess junctional and deep involvement",
-   "Assessment for deep vein thrombosis when clinical suspicion exists",
-   "Thrombophilia evaluation in recurrent or unprovoked cases without varicosities",
-   "Consideration of malignancy screening in migratory or recurrent disease",
-   "Review of intravenous access sites when catheter-related"
-  ],
-  "redFlags": [
-   "Thrombus extending toward or reaching the saphenofemoral or saphenopopliteal junction, with risk of deep extension and pulmonary embolism",
-   "Symptoms or signs of concurrent deep vein thrombosis",
-   "Fever, purulence, or systemic upset suggesting septic (suppurative) thrombophlebitis",
-   "Migratory or recurrent phlebitis raising concern for occult malignancy or thrombophilia"
-  ],
-  "prognosis": "Localised superficial thrombophlebitis in varicose veins is usually self-limiting with a good outcome, whereas extensive disease or thrombus near a deep junction carries a meaningful risk of progression to deep vein thrombosis or pulmonary embolism. Recurrence is common when underlying venous disease or a prothrombotic state persists.",
-  "pitfalls": [
-   "Assuming all superficial thrombophlebitis is benign and failing to assess deep or junctional extension",
-   "Mistaking it for cellulitis and treating with antibiotics alone",
-   "Overlooking an underlying malignancy or thrombophilia in migratory or recurrent cases",
-   "Not arranging duplex assessment when clot proximity to the deep system would change management"
-  ],
-  "references": [
-   "Rutherford's Vascular Surgery",
-   "Harrison's Principles of Internal Medicine, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage limited disease symptomatically with non-steroidal anti-inflammatory drugs, warm compresses, compression stockings and continued mobilisation",
-   "Give anticoagulation at prophylactic intensity, such as fondaparinux or low-molecular-weight heparin, for extensive thrombus or thrombus approaching the saphenofemoral or saphenopopliteal junction",
-   "Escalate to therapeutic anticoagulation when thrombus extends into the deep venous system, treating as for deep vein thrombosis",
-   "Remove the offending cannula when the process is catheter-related",
-   "Confirm extent and junctional proximity with duplex ultrasound and repeat imaging if there is clinical extension",
-   "Investigate for thrombophilia or occult malignancy in recurrent, migratory or unprovoked cases",
-   "Treat the underlying varicose veins once the acute episode has settled to reduce recurrence"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "superficial_thrombophlebitis-pathway",
-   "title": "Superficial thrombophlebitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents as a tender, warm, erythematous, palpable cord along the course of a superficial vein, most often in the lower limb",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Thrombus extending toward or reaching the saphenofemoral or saphenopopliteal junction, with risk of deep extension and pulmonary embolism",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Venous duplex ultrasound to confirm diagnosis, measure clot length, and assess junctional and deep involvement, Assessment for deep vein thrombosis when clinical suspicion exists, Thrombophilia evaluation in recurrent or"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage limited disease symptomatically with non-steroidal anti-inflammatory drugs, warm compresses, compression stockings and continued mobilisation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming all superficial thrombophlebitis is benign and failing to assess deep or junctional extension"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of superficial thrombophlebitis."
-  }
- ],
- "tables": [
-  {
-   "id": "superficial_thrombophlebitis-matrix",
-   "title": "Superficial thrombophlebitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents as a tender, warm, erythematous, palpable cord along the course of a superficial vein, most often in the lower limb",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Vascular",
+  "specialty": "Vascular Surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rutherford's Vascular Surgery / Harrison's Principles of Internal Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents as a tender, warm, erythematous, palpable cord along the course of a superficial vein, most often in the lower limb",
+      "Commonly arises in varicose veins, but can also follow intravenous cannulation or occur in otherwise normal veins",
+      "It is frequently a benign, self-limiting process, yet it should not be dismissed because it can coexist with or extend into deep vein thrombosis",
+      "Duplex ultrasound is used to confirm the diagnosis, define clot extent, and assess proximity to the saphenofemoral or saphenopopliteal junctions and the deep system",
+      "Thrombus close to a deep junction or of substantial length carries a higher risk of propagation and venous thromboembolism, influencing whether anticoagulation is used",
+      "Management ranges from symptomatic measures for limited disease to a course of anticoagulation for extensive or junction-approaching thrombus",
+      "Migratory or recurrent superficial thrombophlebitis without varicosities should prompt consideration of an underlying thrombophilia or occult malignancy",
+      "Suppurative (septic) thrombophlebitis is a distinct infective complication requiring urgent treatment and is not the typical bland form"
     ],
-    [
-     "Key Investigations",
-     "Venous duplex ultrasound to confirm diagnosis, measure clot length, and assess junctional and deep involvement, Assessment for",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Superficial thrombophlebitis is thrombosis with accompanying inflammation of a superficial vein. The elements of Virchow's triad apply: venous stasis (notably in varicose veins), endothelial injury (for example from cannulation), and hypercoagulability. Thrombus formation within the superficial vein triggers a local inflammatory response producing the characteristic tender palpable cord. Because superficial and deep systems communicate through perforators and saphenous junctions, thrombus can propagate into the deep veins, linking the condition to venous thromboembolism.",
+    "additionalDifferentials": [
+      "Cellulitis",
+      "Deep vein thrombosis",
+      "Lymphangitis",
+      "Ruptured Baker cyst",
+      "Erythema nodosum",
+      "Contact dermatitis or insect bite reaction"
     ],
-    [
-     "Primary Differentials",
-     "Cellulitis, Deep vein thrombosis, Lymphangitis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Venous duplex ultrasound to confirm diagnosis, measure clot length, and assess junctional and deep involvement",
+      "Assessment for deep vein thrombosis when clinical suspicion exists",
+      "Thrombophilia evaluation in recurrent or unprovoked cases without varicosities",
+      "Consideration of malignancy screening in migratory or recurrent disease",
+      "Review of intravenous access sites when catheter-related"
     ],
-    [
-     "Management Strategy",
-     "Manage limited disease symptomatically with non-steroidal anti-inflammatory drugs, warm compresses, compression stockings and",
-     "Core treatment modality"
+    "redFlags": [
+      "Thrombus extending toward or reaching the saphenofemoral or saphenopopliteal junction, with risk of deep extension and pulmonary embolism",
+      "Symptoms or signs of concurrent deep vein thrombosis",
+      "Fever, purulence, or systemic upset suggesting septic (suppurative) thrombophlebitis",
+      "Migratory or recurrent phlebitis raising concern for occult malignancy or thrombophilia"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming all superficial thrombophlebitis is benign and failing to assess deep or junctional extension",
-     "Prevent diagnostic or management error"
+    "prognosis": "Localised superficial thrombophlebitis in varicose veins is usually self-limiting with a good outcome, whereas extensive disease or thrombus near a deep junction carries a meaningful risk of progression to deep vein thrombosis or pulmonary embolism. Recurrence is common when underlying venous disease or a prothrombotic state persists.",
+    "pitfalls": [
+      "Assuming all superficial thrombophlebitis is benign and failing to assess deep or junctional extension",
+      "Mistaking it for cellulitis and treating with antibiotics alone",
+      "Overlooking an underlying malignancy or thrombophilia in migratory or recurrent cases",
+      "Not arranging duplex assessment when clot proximity to the deep system would change management"
+    ],
+    "references": [
+      "Rutherford's Vascular Surgery",
+      "Harrison's Principles of Internal Medicine, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage limited disease symptomatically with non-steroidal anti-inflammatory drugs, warm compresses, compression stockings and continued mobilisation",
+      "Give anticoagulation at prophylactic intensity, such as fondaparinux or low-molecular-weight heparin, for extensive thrombus or thrombus approaching the saphenofemoral or saphenopopliteal junction",
+      "Escalate to therapeutic anticoagulation when thrombus extends into the deep venous system, treating as for deep vein thrombosis",
+      "Remove the offending cannula when the process is catheter-related",
+      "Confirm extent and junctional proximity with duplex ultrasound and repeat imaging if there is clinical extension",
+      "Investigate for thrombophilia or occult malignancy in recurrent, migratory or unprovoked cases",
+      "Treat the underlying varicose veins once the acute episode has settled to reduce recurrence"
     ]
-   ],
-   "caption": "Overview comparison matrix for superficial thrombophlebitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "superficial-thrombophlebitis-real-image",
-   "title": "Superficial thrombophlebitis: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "superficial_thrombophlebitis-pathway",
+      "title": "Superficial thrombophlebitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents as a tender, warm, erythematous, palpable cord along the course of a superficial vein, most often in the lower limb",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Thrombus extending toward or reaching the saphenofemoral or saphenopopliteal junction, with risk of deep extension and pulmonary embolism",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Venous duplex ultrasound to confirm diagnosis, measure clot length, and assess junctional and deep involvement, Assessment for deep vein thrombosis when clinical suspicion exists, Thrombophilia evaluation in recurrent or"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage limited disease symptomatically with non-steroidal anti-inflammatory drugs, warm compresses, compression stockings and continued mobilisation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming all superficial thrombophlebitis is benign and failing to assess deep or junctional extension"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of superficial thrombophlebitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "superficial_thrombophlebitis-matrix",
+      "title": "Superficial thrombophlebitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents as a tender, warm, erythematous, palpable cord along the course of a superficial vein, most often in the lower limb",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Venous duplex ultrasound to confirm diagnosis, measure clot length, and assess junctional and deep involvement, Assessment for",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Cellulitis, Deep vein thrombosis, Lymphangitis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage limited disease symptomatically with non-steroidal anti-inflammatory drugs, warm compresses, compression stockings and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming all superficial thrombophlebitis is benign and failing to assess deep or junctional extension",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for superficial thrombophlebitis."
+    }
+  ],
+  "diagrams": []
 }

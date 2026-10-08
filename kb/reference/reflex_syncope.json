@@ -1,174 +1,152 @@
 {
- "id": "reflex_syncope",
- "name": "Reflex (vasovagal) syncope",
- "aliases": [
-  "vasovagal syncope",
-  "neurocardiogenic syncope",
-  "neurally mediated syncope",
-  "common faint"
- ],
- "class": "non_infective",
- "system": "Nervous system / Autonomic",
- "specialty": "Neurology / Autonomic",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff Neurology in Clinical Practice / Low's Clinical Autonomic Disorders",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The commonest cause of transient loss of consciousness, resulting from a reflex fall in heart rate and/or blood pressure with transient global cerebral hypoperfusion",
-   "Typical triggers include prolonged standing, heat, pain, venepuncture, emotion, or the sight of blood",
-   "A prodrome of light-headedness, nausea, sweating, pallor, and visual greying usually precedes the faint, helping distinguish it from cardiac syncope and seizures",
-   "Brief myoclonic jerks (convulsive syncope) can occur and be mistaken for epilepsy",
-   "Recovery is rapid with little or no confusion, unlike the post-ictal state after a seizure",
-   "Diagnosis is clinical from a good history and eyewitness account; head-up tilt testing can support it in uncertain cases",
-   "Cardioinhibitory, vasodepressor, and mixed haemodynamic patterns are recognised",
-   "Management: education, trigger avoidance, adequate fluid and salt intake, recognising the prodrome and lying down, and physical counter-pressure manoeuvres"
+  "id": "reflex_syncope",
+  "name": "Reflex (vasovagal) syncope",
+  "aliases": [
+    "vasovagal syncope",
+    "neurocardiogenic syncope",
+    "neurally mediated syncope",
+    "common faint"
   ],
-  "pathophysiology": "Reflex (vasovagal) syncope results from a transient, inappropriate autonomic reflex. Triggers such as prolonged standing or emotional stress lead, in susceptible people, to a paradoxical withdrawal of sympathetic vasoconstrictor tone together with a surge of vagal (parasympathetic) activity. This produces vasodilatation (the vasodepressor component) and/or bradycardia or asystole (the cardioinhibitory component), causing a sudden fall in blood pressure and transient global cerebral hypoperfusion with loss of consciousness. Because the mechanism is self-limiting and posture-dependent, lying flat restores cerebral perfusion and consciousness returns quickly. Reduced venous return from lower-body pooling and relative hypovolaemia predispose to the reflex.",
-  "additionalDifferentials": [
-   "Cardiac (arrhythmic or structural) syncope",
-   "Orthostatic hypotension",
-   "Carotid sinus hypersensitivity",
-   "Epileptic seizure",
-   "Situational syncope (cough, micturition, defecation)",
-   "Functional (dissociative) episodes"
-  ],
-  "additionalInvestigations": [
-   "Detailed history and eyewitness account of the event and its prodrome",
-   "12-lead ECG to screen for arrhythmia or conduction disease",
-   "Lying and standing blood pressure to detect orthostatic hypotension",
-   "Head-up tilt-table testing in recurrent or uncertain cases",
-   "Ambulatory ECG or an implantable loop recorder for infrequent unexplained episodes",
-   "Echocardiography where structural heart disease is suspected"
-  ],
-  "redFlags": [
-   "Syncope during exertion or when supine, suggesting a cardiac cause",
-   "Absence of a prodrome, or syncope causing serious injury",
-   "Family history of sudden cardiac death or an abnormal ECG",
-   "Palpitations preceding collapse or known structural heart disease"
-  ],
-  "prognosis": "Reflex syncope is benign in terms of mortality, but recurrent episodes can cause injury and impair quality of life; most patients respond well to education, trigger avoidance, and physical counter-manoeuvres.",
-  "pitfalls": [
-   "Misdiagnosing convulsive syncope as epilepsy and starting antiepileptic drugs",
-   "Failing to exclude cardiac syncope, which carries a worse prognosis",
-   "Over-relying on tilt testing, which has limited sensitivity and specificity",
-   "Not teaching counter-pressure manoeuvres and prodrome recognition"
-  ],
-  "references": [
-   "Bradley and Daroff's Neurology in Clinical Practice",
-   "Low's Clinical Autonomic Disorders"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassure and educate about the benign nature, teaching recognition of the prodrome and prompt lying down with leg elevation",
-   "Advise trigger avoidance such as prolonged standing, heat and dehydration, with generous fluid and salt intake",
-   "Teach physical counter-pressure manoeuvres such as leg crossing and hand-gripping at the prodrome to abort episodes",
-   "Review and reduce hypotensive and vasodilator medications",
-   "Consider midodrine or fludrocortisone for recurrent episodes refractory to conservative measures",
-   "Consider cardiac pacing in selected older patients with a documented cardioinhibitory asystolic response, referring recurrent or uncertain cases to an autonomic or syncope service"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "reflex_syncope-pathway",
-   "title": "Reflex (vasovagal) syncope: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The commonest cause of transient loss of consciousness, resulting from a reflex fall in heart rate and/or blood pressure with transient global cerebral hypoperfusion",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Syncope during exertion or when supine, suggesting a cardiac cause",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Detailed history and eyewitness account of the event and its prodrome, 12-lead ECG to screen for arrhythmia or conduction disease, Lying and standing blood pressure to detect orthostatic hypotension"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassure and educate about the benign nature, teaching recognition of the prodrome and prompt lying down with leg elevation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing convulsive syncope as epilepsy and starting antiepileptic drugs"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of reflex (vasovagal) syncope."
-  }
- ],
- "tables": [
-  {
-   "id": "reflex_syncope-matrix",
-   "title": "Reflex (vasovagal) syncope: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The commonest cause of transient loss of consciousness, resulting from a reflex fall in heart rate and/or blood pressure with",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Autonomic",
+  "specialty": "Neurology / Autonomic",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff Neurology in Clinical Practice / Low's Clinical Autonomic Disorders",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The commonest cause of transient loss of consciousness, resulting from a reflex fall in heart rate and/or blood pressure with transient global cerebral hypoperfusion",
+      "Typical triggers include prolonged standing, heat, pain, venepuncture, emotion, or the sight of blood",
+      "A prodrome of light-headedness, nausea, sweating, pallor, and visual greying usually precedes the faint, helping distinguish it from cardiac syncope and seizures",
+      "Brief myoclonic jerks (convulsive syncope) can occur and be mistaken for epilepsy",
+      "Recovery is rapid with little or no confusion, unlike the post-ictal state after a seizure",
+      "Diagnosis is clinical from a good history and eyewitness account; head-up tilt testing can support it in uncertain cases",
+      "Cardioinhibitory, vasodepressor, and mixed haemodynamic patterns are recognised",
+      "Management: education, trigger avoidance, adequate fluid and salt intake, recognising the prodrome and lying down, and physical counter-pressure manoeuvres"
     ],
-    [
-     "Key Investigations",
-     "Detailed history and eyewitness account of the event and its prodrome, 12-lead ECG to screen for arrhythmia or conduction",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Reflex (vasovagal) syncope results from a transient, inappropriate autonomic reflex. Triggers such as prolonged standing or emotional stress lead, in susceptible people, to a paradoxical withdrawal of sympathetic vasoconstrictor tone together with a surge of vagal (parasympathetic) activity. This produces vasodilatation (the vasodepressor component) and/or bradycardia or asystole (the cardioinhibitory component), causing a sudden fall in blood pressure and transient global cerebral hypoperfusion with loss of consciousness. Because the mechanism is self-limiting and posture-dependent, lying flat restores cerebral perfusion and consciousness returns quickly. Reduced venous return from lower-body pooling and relative hypovolaemia predispose to the reflex.",
+    "additionalDifferentials": [
+      "Cardiac (arrhythmic or structural) syncope",
+      "Orthostatic hypotension",
+      "Carotid sinus hypersensitivity",
+      "Epileptic seizure",
+      "Situational syncope (cough, micturition, defecation)",
+      "Functional (dissociative) episodes"
     ],
-    [
-     "Primary Differentials",
-     "Cardiac (arrhythmic or structural) syncope, Orthostatic hypotension, Carotid sinus hypersensitivity",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Detailed history and eyewitness account of the event and its prodrome",
+      "12-lead ECG to screen for arrhythmia or conduction disease",
+      "Lying and standing blood pressure to detect orthostatic hypotension",
+      "Head-up tilt-table testing in recurrent or uncertain cases",
+      "Ambulatory ECG or an implantable loop recorder for infrequent unexplained episodes",
+      "Echocardiography where structural heart disease is suspected"
     ],
-    [
-     "Management Strategy",
-     "Reassure and educate about the benign nature, teaching recognition of the prodrome and prompt lying down with leg elevation",
-     "Core treatment modality"
+    "redFlags": [
+      "Syncope during exertion or when supine, suggesting a cardiac cause",
+      "Absence of a prodrome, or syncope causing serious injury",
+      "Family history of sudden cardiac death or an abnormal ECG",
+      "Palpitations preceding collapse or known structural heart disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing convulsive syncope as epilepsy and starting antiepileptic drugs",
-     "Prevent diagnostic or management error"
+    "prognosis": "Reflex syncope is benign in terms of mortality, but recurrent episodes can cause injury and impair quality of life; most patients respond well to education, trigger avoidance, and physical counter-manoeuvres.",
+    "pitfalls": [
+      "Misdiagnosing convulsive syncope as epilepsy and starting antiepileptic drugs",
+      "Failing to exclude cardiac syncope, which carries a worse prognosis",
+      "Over-relying on tilt testing, which has limited sensitivity and specificity",
+      "Not teaching counter-pressure manoeuvres and prodrome recognition"
+    ],
+    "references": [
+      "Bradley and Daroff's Neurology in Clinical Practice",
+      "Low's Clinical Autonomic Disorders"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassure and educate about the benign nature, teaching recognition of the prodrome and prompt lying down with leg elevation",
+      "Advise trigger avoidance such as prolonged standing, heat and dehydration, with generous fluid and salt intake",
+      "Teach physical counter-pressure manoeuvres such as leg crossing and hand-gripping at the prodrome to abort episodes",
+      "Review and reduce hypotensive and vasodilator medications",
+      "Consider midodrine or fludrocortisone for recurrent episodes refractory to conservative measures",
+      "Consider cardiac pacing in selected older patients with a documented cardioinhibitory asystolic response, referring recurrent or uncertain cases to an autonomic or syncope service"
     ]
-   ],
-   "caption": "Overview comparison matrix for reflex (vasovagal) syncope."
-  }
- ],
- "diagrams": [
-  {
-   "id": "reflex-syncope-real-image",
-   "title": "Reflex (vasovagal) syncope: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "reflex_syncope-pathway",
+      "title": "Reflex (vasovagal) syncope: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The commonest cause of transient loss of consciousness, resulting from a reflex fall in heart rate and/or blood pressure with transient global cerebral hypoperfusion",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Syncope during exertion or when supine, suggesting a cardiac cause",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Detailed history and eyewitness account of the event and its prodrome, 12-lead ECG to screen for arrhythmia or conduction disease, Lying and standing blood pressure to detect orthostatic hypotension"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassure and educate about the benign nature, teaching recognition of the prodrome and prompt lying down with leg elevation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing convulsive syncope as epilepsy and starting antiepileptic drugs"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of reflex (vasovagal) syncope."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "reflex_syncope-matrix",
+      "title": "Reflex (vasovagal) syncope: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The commonest cause of transient loss of consciousness, resulting from a reflex fall in heart rate and/or blood pressure with",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Detailed history and eyewitness account of the event and its prodrome, 12-lead ECG to screen for arrhythmia or conduction",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Cardiac (arrhythmic or structural) syncope, Orthostatic hypotension, Carotid sinus hypersensitivity",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassure and educate about the benign nature, teaching recognition of the prodrome and prompt lying down with leg elevation",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing convulsive syncope as epilepsy and starting antiepileptic drugs",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for reflex (vasovagal) syncope."
+    }
+  ],
+  "diagrams": []
 }

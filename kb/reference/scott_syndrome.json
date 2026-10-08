@@ -1,178 +1,156 @@
 {
- "id": "scott_syndrome",
- "name": "Scott syndrome",
- "aliases": [
-  "Scott syndrome",
-  "Platelet procoagulant deficiency",
-  "Phospholipid scramblase deficiency"
- ],
- "class": "non_infective",
- "system": "Haematological system",
- "specialty": "Haematology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Hematology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An exceptionally rare inherited bleeding disorder caused by defective exposure of procoagulant phosphatidylserine on the activated platelet surface.",
-   "Most cases result from autosomal recessive mutations in ANO6 (TMEM16F), which encodes a calcium-activated phospholipid scramblase.",
-   "Platelet count, morphology and standard aggregation studies are normal, so routine coagulation and platelet testing are typically unremarkable.",
-   "Bleeding is characteristically deep and delayed after trauma or surgery, resembling a coagulation defect more than a typical platelet disorder.",
-   "The defect impairs assembly of tenase and prothrombinase complexes on the platelet membrane because the phosphatidylserine platform is not externalised.",
-   "Diagnosis relies on specialised assays showing reduced platelet-dependent thrombin generation and diminished annexin V binding by flow cytometry.",
-   "Failure of microparticle release and impaired factor Va/factor Xa binding are hallmark laboratory findings.",
-   "Management centres on antifibrinolytics and platelet transfusion for significant bleeding, since no specific replacement therapy exists."
+  "id": "scott_syndrome",
+  "name": "Scott syndrome",
+  "aliases": [
+    "Scott syndrome",
+    "Platelet procoagulant deficiency",
+    "Phospholipid scramblase deficiency"
   ],
-  "pathophysiology": "Scott syndrome is caused by failure of the transmembrane phospholipid scrambling that normally follows platelet activation. In health, a rise in cytosolic calcium activates the scramblase encoded by ANO6 (TMEM16F), which collapses membrane phospholipid asymmetry and externalises phosphatidylserine on the outer leaflet of activated platelets, red cells and microparticles. This anionic surface is the essential catalytic platform for assembly of the tenase (factor VIIIa/IXa) and prothrombinase (factor Va/Xa) complexes that accelerate thrombin generation. In Scott syndrome, loss-of-function mutations abolish scramblase activity, so phosphatidylserine remains sequestered internally, microparticle formation is deficient and localised thrombin generation at the platelet surface is markedly impaired despite normal clotting factors and platelet aggregation. The result is a haemostatic defect that manifests chiefly after surgical or traumatic challenge.",
-  "additionalDifferentials": [
-   "Mild haemophilia A or B",
-   "von Willebrand disease",
-   "Platelet storage pool or secretion defects",
-   "Factor XI deficiency",
-   "Acquired coagulopathy or anticoagulant effect",
-   "Vascular/connective tissue bleeding disorder",
-   "Combined factor V and factor VIII deficiency"
-  ],
-  "additionalInvestigations": [
-   "Platelet-dependent thrombin generation assay (reduced)",
-   "Flow-cytometric annexin V binding to activated platelets (decreased phosphatidylserine exposure)",
-   "Assessment of platelet-derived microparticle formation",
-   "Prothrombin consumption / serum prothrombin time",
-   "Standard coagulation screen and platelet aggregometry (typically normal)",
-   "ANO6 (TMEM16F) gene sequencing",
-   "von Willebrand factor and coagulation factor assays to exclude alternatives"
-  ],
-  "redFlags": [
-   "Severe delayed haemorrhage following surgery, dental extraction or trauma",
-   "Post-partum haemorrhage",
-   "Bleeding disproportionate to normal routine coagulation and platelet tests",
-   "Large deep haematoma or intramuscular bleeding",
-   "Recurrent bleeding requiring repeated transfusion with alloimmunisation risk"
-  ],
-  "prognosis": "With awareness of the diagnosis and appropriate peri-procedural haemostatic support the prognosis is good and spontaneous bleeding is uncommon. The main hazard is unanticipated severe bleeding during surgery or trauma when the disorder has not been recognised.",
-  "pitfalls": [
-   "Excluding a bleeding disorder because routine coagulation and platelet function tests are normal.",
-   "Overlooking the need for specialised phosphatidylserine-exposure and thrombin-generation assays.",
-   "Assuming platelet transfusion alone always suffices without antifibrinolytic support.",
-   "Failing to plan haemostatic cover before elective surgery in a known patient.",
-   "Confusing the delayed deep bleeding pattern with a coagulation factor deficiency and misdirecting factor replacement."
-  ],
-  "references": [
-   "Williams Hematology, current edition",
-   "International Society on Thrombosis and Haemostasis guidance on rare bleeding disorders",
-   "Nathan and Oski's Hematology and Oncology of Infancy and Childhood, current edition"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Provide platelet transfusion as the mainstay haemostatic cover for surgery, trauma, or significant bleeding, supplying a functional procoagulant platelet surface",
-   "Plan peri-procedural haemostatic support in advance, adding an antifibrinolytic such as tranexamic acid and considering recombinant activated factor VII for refractory bleeding",
-   "Avoid antiplatelet agents and other drugs that impair haemostasis",
-   "Ensure the rare diagnosis is documented and communicated, for example via an alert card, to anticipate deep, delayed bleeding",
-   "Confirm and monitor with specialised platelet-dependent thrombin generation and annexin V flow-cytometry assays",
-   "Offer genetic counselling for this autosomal recessive ANO6 (TMEM16F) disorder and refer to a haemostasis centre"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "scott_syndrome-pathway",
-   "title": "Scott syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An exceptionally rare inherited bleeding disorder caused by defective exposure of procoagulant phosphatidylserine on the activated platelet surface.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe delayed haemorrhage following surgery, dental extraction or trauma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Platelet-dependent thrombin generation assay (reduced), Flow-cytometric annexin V binding to activated platelets (decreased phosphatidylserine exposure), Assessment of platelet-derived microparticle formation"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Provide platelet transfusion as the mainstay haemostatic cover for surgery, trauma, or significant bleeding, supplying a functional procoagulant platelet surface"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Excluding a bleeding disorder because routine coagulation and platelet function tests are normal."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of scott syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "scott_syndrome-matrix",
-   "title": "Scott syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An exceptionally rare inherited bleeding disorder caused by defective exposure of procoagulant phosphatidylserine on the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematological system",
+  "specialty": "Haematology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Hematology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An exceptionally rare inherited bleeding disorder caused by defective exposure of procoagulant phosphatidylserine on the activated platelet surface.",
+      "Most cases result from autosomal recessive mutations in ANO6 (TMEM16F), which encodes a calcium-activated phospholipid scramblase.",
+      "Platelet count, morphology and standard aggregation studies are normal, so routine coagulation and platelet testing are typically unremarkable.",
+      "Bleeding is characteristically deep and delayed after trauma or surgery, resembling a coagulation defect more than a typical platelet disorder.",
+      "The defect impairs assembly of tenase and prothrombinase complexes on the platelet membrane because the phosphatidylserine platform is not externalised.",
+      "Diagnosis relies on specialised assays showing reduced platelet-dependent thrombin generation and diminished annexin V binding by flow cytometry.",
+      "Failure of microparticle release and impaired factor Va/factor Xa binding are hallmark laboratory findings.",
+      "Management centres on antifibrinolytics and platelet transfusion for significant bleeding, since no specific replacement therapy exists."
     ],
-    [
-     "Key Investigations",
-     "Platelet-dependent thrombin generation assay (reduced), Flow-cytometric annexin V binding to activated platelets (decreased",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Scott syndrome is caused by failure of the transmembrane phospholipid scrambling that normally follows platelet activation. In health, a rise in cytosolic calcium activates the scramblase encoded by ANO6 (TMEM16F), which collapses membrane phospholipid asymmetry and externalises phosphatidylserine on the outer leaflet of activated platelets, red cells and microparticles. This anionic surface is the essential catalytic platform for assembly of the tenase (factor VIIIa/IXa) and prothrombinase (factor Va/Xa) complexes that accelerate thrombin generation. In Scott syndrome, loss-of-function mutations abolish scramblase activity, so phosphatidylserine remains sequestered internally, microparticle formation is deficient and localised thrombin generation at the platelet surface is markedly impaired despite normal clotting factors and platelet aggregation. The result is a haemostatic defect that manifests chiefly after surgical or traumatic challenge.",
+    "additionalDifferentials": [
+      "Mild haemophilia A or B",
+      "von Willebrand disease",
+      "Platelet storage pool or secretion defects",
+      "Factor XI deficiency",
+      "Acquired coagulopathy or anticoagulant effect",
+      "Vascular/connective tissue bleeding disorder",
+      "Combined factor V and factor VIII deficiency"
     ],
-    [
-     "Primary Differentials",
-     "Mild haemophilia A or B, von Willebrand disease, Platelet storage pool or secretion defects",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Platelet-dependent thrombin generation assay (reduced)",
+      "Flow-cytometric annexin V binding to activated platelets (decreased phosphatidylserine exposure)",
+      "Assessment of platelet-derived microparticle formation",
+      "Prothrombin consumption / serum prothrombin time",
+      "Standard coagulation screen and platelet aggregometry (typically normal)",
+      "ANO6 (TMEM16F) gene sequencing",
+      "von Willebrand factor and coagulation factor assays to exclude alternatives"
     ],
-    [
-     "Management Strategy",
-     "Provide platelet transfusion as the mainstay haemostatic cover for surgery, trauma, or significant bleeding, supplying a",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe delayed haemorrhage following surgery, dental extraction or trauma",
+      "Post-partum haemorrhage",
+      "Bleeding disproportionate to normal routine coagulation and platelet tests",
+      "Large deep haematoma or intramuscular bleeding",
+      "Recurrent bleeding requiring repeated transfusion with alloimmunisation risk"
     ],
-    [
-     "Clinical Pitfall",
-     "Excluding a bleeding disorder because routine coagulation and platelet function tests are normal.",
-     "Prevent diagnostic or management error"
+    "prognosis": "With awareness of the diagnosis and appropriate peri-procedural haemostatic support the prognosis is good and spontaneous bleeding is uncommon. The main hazard is unanticipated severe bleeding during surgery or trauma when the disorder has not been recognised.",
+    "pitfalls": [
+      "Excluding a bleeding disorder because routine coagulation and platelet function tests are normal.",
+      "Overlooking the need for specialised phosphatidylserine-exposure and thrombin-generation assays.",
+      "Assuming platelet transfusion alone always suffices without antifibrinolytic support.",
+      "Failing to plan haemostatic cover before elective surgery in a known patient.",
+      "Confusing the delayed deep bleeding pattern with a coagulation factor deficiency and misdirecting factor replacement."
+    ],
+    "references": [
+      "Williams Hematology, current edition",
+      "International Society on Thrombosis and Haemostasis guidance on rare bleeding disorders",
+      "Nathan and Oski's Hematology and Oncology of Infancy and Childhood, current edition"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Provide platelet transfusion as the mainstay haemostatic cover for surgery, trauma, or significant bleeding, supplying a functional procoagulant platelet surface",
+      "Plan peri-procedural haemostatic support in advance, adding an antifibrinolytic such as tranexamic acid and considering recombinant activated factor VII for refractory bleeding",
+      "Avoid antiplatelet agents and other drugs that impair haemostasis",
+      "Ensure the rare diagnosis is documented and communicated, for example via an alert card, to anticipate deep, delayed bleeding",
+      "Confirm and monitor with specialised platelet-dependent thrombin generation and annexin V flow-cytometry assays",
+      "Offer genetic counselling for this autosomal recessive ANO6 (TMEM16F) disorder and refer to a haemostasis centre"
     ]
-   ],
-   "caption": "Overview comparison matrix for scott syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "scott-syndrome-real-image",
-   "title": "Scott syndrome: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "scott_syndrome-pathway",
+      "title": "Scott syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An exceptionally rare inherited bleeding disorder caused by defective exposure of procoagulant phosphatidylserine on the activated platelet surface.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe delayed haemorrhage following surgery, dental extraction or trauma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Platelet-dependent thrombin generation assay (reduced), Flow-cytometric annexin V binding to activated platelets (decreased phosphatidylserine exposure), Assessment of platelet-derived microparticle formation"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Provide platelet transfusion as the mainstay haemostatic cover for surgery, trauma, or significant bleeding, supplying a functional procoagulant platelet surface"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Excluding a bleeding disorder because routine coagulation and platelet function tests are normal."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of scott syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "scott_syndrome-matrix",
+      "title": "Scott syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An exceptionally rare inherited bleeding disorder caused by defective exposure of procoagulant phosphatidylserine on the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Platelet-dependent thrombin generation assay (reduced), Flow-cytometric annexin V binding to activated platelets (decreased",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Mild haemophilia A or B, von Willebrand disease, Platelet storage pool or secretion defects",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Provide platelet transfusion as the mainstay haemostatic cover for surgery, trauma, or significant bleeding, supplying a",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Excluding a bleeding disorder because routine coagulation and platelet function tests are normal.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for scott syndrome."
+    }
+  ],
+  "diagrams": []
 }

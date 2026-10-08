@@ -1,176 +1,154 @@
 {
- "id": "visceral_larva_migrans",
- "name": "Visceral larva migrans",
- "aliases": [
-  "toxocariasis",
-  "Toxocara canis infection",
-  "Toxocara cati infection",
-  "VLM"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases / Tropical Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Manson's Tropical Diseases; CDC parasitic disease guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A tissue-invasive infection caused by migrating larvae of the dog and cat roundworms Toxocara canis and Toxocara cati",
-   "Humans, especially young children who ingest soil contaminated with embryonated eggs, are accidental hosts in which larvae cannot mature",
-   "The classic visceral form presents with fever, hepatomegaly, wheeze or cough, and marked eosinophilia",
-   "A separate ocular form causes unilateral visual loss, often mistaken for retinoblastoma, and typically lacks prominent eosinophilia",
-   "Diagnosis relies on serology (Toxocara-specific antibodies), as larvae are rarely recovered and stool examination is unhelpful because worms do not reach the gut in humans",
-   "A history of pica, geophagia, or close contact with puppies or contaminated environments supports the diagnosis",
-   "Most visceral disease is self-limiting; anthelmintics such as albendazole with corticosteroids for the inflammatory reaction are used in significant or organ-threatening infection",
-   "Prevention centres on deworming pets, hand hygiene and reducing environmental soil contamination"
+  "id": "visceral_larva_migrans",
+  "name": "Visceral larva migrans",
+  "aliases": [
+    "toxocariasis",
+    "Toxocara canis infection",
+    "Toxocara cati infection",
+    "VLM"
   ],
-  "pathophysiology": "Visceral larva migrans occurs when a human ingests embryonated Toxocara eggs from soil, faeces or contaminated food. The eggs hatch in the intestine and release larvae that penetrate the gut wall and migrate through the bloodstream to organs such as the liver, lungs, muscle, eye and brain. Because humans are not the natural host, the larvae cannot complete their life cycle or mature into adult worms; instead they persist and wander through tissues, provoking eosinophil-rich granulomatous inflammation and a strong immunoglobulin E response. The organ-specific symptoms and the intense eosinophilia reflect this larval migration and the host inflammatory reaction to it.",
-  "additionalDifferentials": [
-   "Hypereosinophilic syndrome",
-   "Other tissue-migrating helminth infections (ascariasis, strongyloidiasis, hookworm)",
-   "Acute schistosomiasis (Katayama syndrome)",
-   "Hepatic abscess or other focal liver lesions",
-   "Retinoblastoma (in the ocular form)",
-   "Eosinophilic leukaemia or lymphoma",
-   "Allergic or asthmatic pulmonary disease"
-  ],
-  "additionalInvestigations": [
-   "Full blood count and blood film for eosinophilia",
-   "Toxocara-specific serology (antibody testing)",
-   "Serum total immunoglobulin E",
-   "Liver ultrasound or cross-sectional imaging for hepatic and pulmonary lesions",
-   "Ophthalmological examination when ocular disease is suspected",
-   "Exclusion of other tissue-invasive helminths and haematological causes of eosinophilia"
-  ],
-  "redFlags": [
-   "Neurological features suggesting central nervous system involvement",
-   "Unilateral visual loss or leukocoria requiring urgent ophthalmological review",
-   "Myocardial or severe pulmonary involvement",
-   "Persistent very high eosinophilia with systemic upset"
-  ],
-  "prognosis": "The visceral form is usually self-limiting with a good outcome, but heavy or organ-threatening infection, and particularly ocular or central nervous system disease, can cause lasting damage such as permanent visual impairment.",
-  "pitfalls": [
-   "Examining stool for ova, which is futile because the parasite does not mature in humans",
-   "Overlooking the diagnosis in a child with eosinophilia and pica or puppy contact",
-   "Confusing ocular toxocariasis with retinoblastoma",
-   "Relying on a single serology result without clinical correlation",
-   "Neglecting anti-inflammatory cover when treating heavy infection with anthelmintics"
-  ],
-  "references": [
-   "Manson's Tropical Diseases",
-   "CDC guidance on toxocariasis"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Anthelmintic therapy with albendazole, or mebendazole, to kill migrating Toxocara larvae in symptomatic visceral disease",
-   "Corticosteroids alongside anthelmintics for severe inflammation and for ocular or central nervous system involvement",
-   "Ophthalmological management of ocular toxocariasis with corticosteroids and, where needed, laser or vitreoretinal surgery",
-   "Symptomatic support such as bronchodilators for wheeze in the pulmonary form",
-   "Monitor eosinophilia and clinical response, with Toxocara serology to support the diagnosis",
-   "Prevention through regular deworming of pets, hand hygiene, and avoidance of pica and geophagia in young children"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "visceral_larva_migrans-pathway",
-   "title": "Visceral larva migrans: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A tissue-invasive infection caused by migrating larvae of the dog and cat roundworms Toxocara canis and Toxocara cati",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Neurological features suggesting central nervous system involvement",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full blood count and blood film for eosinophilia, Toxocara-specific serology (antibody testing), Serum total immunoglobulin E"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Anthelmintic therapy with albendazole, or mebendazole, to kill migrating Toxocara larvae in symptomatic visceral disease"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Examining stool for ova, which is futile because the parasite does not mature in humans"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of visceral larva migrans."
-  }
- ],
- "tables": [
-  {
-   "id": "visceral_larva_migrans-matrix",
-   "title": "Visceral larva migrans: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A tissue-invasive infection caused by migrating larvae of the dog and cat roundworms Toxocara canis and Toxocara cati",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases / Tropical Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Manson's Tropical Diseases; CDC parasitic disease guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A tissue-invasive infection caused by migrating larvae of the dog and cat roundworms Toxocara canis and Toxocara cati",
+      "Humans, especially young children who ingest soil contaminated with embryonated eggs, are accidental hosts in which larvae cannot mature",
+      "The classic visceral form presents with fever, hepatomegaly, wheeze or cough, and marked eosinophilia",
+      "A separate ocular form causes unilateral visual loss, often mistaken for retinoblastoma, and typically lacks prominent eosinophilia",
+      "Diagnosis relies on serology (Toxocara-specific antibodies), as larvae are rarely recovered and stool examination is unhelpful because worms do not reach the gut in humans",
+      "A history of pica, geophagia, or close contact with puppies or contaminated environments supports the diagnosis",
+      "Most visceral disease is self-limiting; anthelmintics such as albendazole with corticosteroids for the inflammatory reaction are used in significant or organ-threatening infection",
+      "Prevention centres on deworming pets, hand hygiene and reducing environmental soil contamination"
     ],
-    [
-     "Key Investigations",
-     "Full blood count and blood film for eosinophilia, Toxocara-specific serology (antibody testing), Serum total immunoglobulin E",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Visceral larva migrans occurs when a human ingests embryonated Toxocara eggs from soil, faeces or contaminated food. The eggs hatch in the intestine and release larvae that penetrate the gut wall and migrate through the bloodstream to organs such as the liver, lungs, muscle, eye and brain. Because humans are not the natural host, the larvae cannot complete their life cycle or mature into adult worms; instead they persist and wander through tissues, provoking eosinophil-rich granulomatous inflammation and a strong immunoglobulin E response. The organ-specific symptoms and the intense eosinophilia reflect this larval migration and the host inflammatory reaction to it.",
+    "additionalDifferentials": [
+      "Hypereosinophilic syndrome",
+      "Other tissue-migrating helminth infections (ascariasis, strongyloidiasis, hookworm)",
+      "Acute schistosomiasis (Katayama syndrome)",
+      "Hepatic abscess or other focal liver lesions",
+      "Retinoblastoma (in the ocular form)",
+      "Eosinophilic leukaemia or lymphoma",
+      "Allergic or asthmatic pulmonary disease"
     ],
-    [
-     "Primary Differentials",
-     "Hypereosinophilic syndrome, Other tissue-migrating helminth infections (ascariasis, strongyloidiasis, hookworm), Acute",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full blood count and blood film for eosinophilia",
+      "Toxocara-specific serology (antibody testing)",
+      "Serum total immunoglobulin E",
+      "Liver ultrasound or cross-sectional imaging for hepatic and pulmonary lesions",
+      "Ophthalmological examination when ocular disease is suspected",
+      "Exclusion of other tissue-invasive helminths and haematological causes of eosinophilia"
     ],
-    [
-     "Management Strategy",
-     "Anthelmintic therapy with albendazole, or mebendazole, to kill migrating Toxocara larvae in symptomatic visceral disease",
-     "Core treatment modality"
+    "redFlags": [
+      "Neurological features suggesting central nervous system involvement",
+      "Unilateral visual loss or leukocoria requiring urgent ophthalmological review",
+      "Myocardial or severe pulmonary involvement",
+      "Persistent very high eosinophilia with systemic upset"
     ],
-    [
-     "Clinical Pitfall",
-     "Examining stool for ova, which is futile because the parasite does not mature in humans",
-     "Prevent diagnostic or management error"
+    "prognosis": "The visceral form is usually self-limiting with a good outcome, but heavy or organ-threatening infection, and particularly ocular or central nervous system disease, can cause lasting damage such as permanent visual impairment.",
+    "pitfalls": [
+      "Examining stool for ova, which is futile because the parasite does not mature in humans",
+      "Overlooking the diagnosis in a child with eosinophilia and pica or puppy contact",
+      "Confusing ocular toxocariasis with retinoblastoma",
+      "Relying on a single serology result without clinical correlation",
+      "Neglecting anti-inflammatory cover when treating heavy infection with anthelmintics"
+    ],
+    "references": [
+      "Manson's Tropical Diseases",
+      "CDC guidance on toxocariasis"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Anthelmintic therapy with albendazole, or mebendazole, to kill migrating Toxocara larvae in symptomatic visceral disease",
+      "Corticosteroids alongside anthelmintics for severe inflammation and for ocular or central nervous system involvement",
+      "Ophthalmological management of ocular toxocariasis with corticosteroids and, where needed, laser or vitreoretinal surgery",
+      "Symptomatic support such as bronchodilators for wheeze in the pulmonary form",
+      "Monitor eosinophilia and clinical response, with Toxocara serology to support the diagnosis",
+      "Prevention through regular deworming of pets, hand hygiene, and avoidance of pica and geophagia in young children"
     ]
-   ],
-   "caption": "Overview comparison matrix for visceral larva migrans."
-  }
- ],
- "diagrams": [
-  {
-   "id": "visceral-larva-migrans-real-image",
-   "title": "Visceral larva migrans: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "visceral_larva_migrans-pathway",
+      "title": "Visceral larva migrans: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A tissue-invasive infection caused by migrating larvae of the dog and cat roundworms Toxocara canis and Toxocara cati",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Neurological features suggesting central nervous system involvement",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full blood count and blood film for eosinophilia, Toxocara-specific serology (antibody testing), Serum total immunoglobulin E"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Anthelmintic therapy with albendazole, or mebendazole, to kill migrating Toxocara larvae in symptomatic visceral disease"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Examining stool for ova, which is futile because the parasite does not mature in humans"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of visceral larva migrans."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "visceral_larva_migrans-matrix",
+      "title": "Visceral larva migrans: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A tissue-invasive infection caused by migrating larvae of the dog and cat roundworms Toxocara canis and Toxocara cati",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full blood count and blood film for eosinophilia, Toxocara-specific serology (antibody testing), Serum total immunoglobulin E",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Hypereosinophilic syndrome, Other tissue-migrating helminth infections (ascariasis, strongyloidiasis, hookworm), Acute",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Anthelmintic therapy with albendazole, or mebendazole, to kill migrating Toxocara larvae in symptomatic visceral disease",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Examining stool for ova, which is futile because the parasite does not mature in humans",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for visceral larva migrans."
+    }
+  ],
+  "diagrams": []
 }

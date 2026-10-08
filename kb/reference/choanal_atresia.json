@@ -1,173 +1,151 @@
 {
- "id": "choanal_atresia",
- "name": "Choanal atresia",
- "aliases": [
-  "posterior choanal atresia",
-  "congenital choanal atresia",
-  "bilateral choanal atresia",
-  "unilateral choanal atresia"
- ],
- "class": "non_infective",
- "system": "Ear-Nose-Throat / Laryngology",
- "specialty": "Otolaryngology",
- "referenceOnly": true,
- "reference": {
-  "source": "Cummings Otolaryngology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Congenital failure of the posterior nasal aperture to canalise, leaving a bony, membranous, or mixed obstruction between the nasal cavity and nasopharynx",
-   "Bilateral atresia is a neonatal airway emergency because neonates are obligate nasal breathers, producing cyclical cyanosis relieved by crying",
-   "Unilateral atresia often presents later in childhood with persistent unilateral nasal obstruction and discharge",
-   "Failure to pass a fine catheter through the nose and absence of misting on a cold mirror suggest the diagnosis",
-   "CT best characterises whether the obstruction is bony, membranous, or mixed and guides surgical planning",
-   "Association with CHARGE and other syndromes means a bilateral case warrants a search for additional anomalies",
-   "The immediate priority in a bilateral case is to establish an oral airway, classically with an oral airway device or feeding-teat adaptation, before definitive surgical repair"
+  "id": "choanal_atresia",
+  "name": "Choanal atresia",
+  "aliases": [
+    "posterior choanal atresia",
+    "congenital choanal atresia",
+    "bilateral choanal atresia",
+    "unilateral choanal atresia"
   ],
-  "pathophysiology": "Choanal atresia results from persistence of tissue that should break down during development of the posterior nasal apertures, leaving the choana occluded by bone, membrane, or a combination of the two. Several embryological explanations have been proposed, including failure of rupture of the bucconasal membrane and abnormal mesodermal persistence. Because newborns preferentially breathe through the nose, complete bilateral obstruction prevents effective nasal airflow, so the infant becomes cyanotic at rest and improves paradoxically when crying opens the mouth, giving the classic cyclical pattern. In unilateral disease the patent side maintains the airway, and the condition presents insidiously with chronic one-sided obstruction and discharge.",
-  "additionalDifferentials": [
-   "Neonatal nasal obstruction from mucosal oedema or rhinitis",
-   "Pyriform aperture stenosis",
-   "Nasolacrimal duct cyst (dacryocystocele)",
-   "Nasal dermoid, glioma, or encephalocele",
-   "Midnasal stenosis",
-   "Choanal stenosis without complete atresia"
-  ],
-  "additionalInvestigations": [
-   "Attempted passage of a fine catheter through each nostril and the cold-mirror misting test at the cot side",
-   "Flexible nasal endoscopy to inspect the posterior nasal cavity",
-   "CT of the nose and skull base to define the nature and thickness of the atretic plate",
-   "Assessment for CHARGE and other syndromic associations, including cardiac and ophthalmological review",
-   "Genetic evaluation where a syndrome is suspected"
-  ],
-  "redFlags": [
-   "Cyclical cyanosis relieved by crying in a neonate, indicating bilateral atresia and an airway emergency",
-   "Respiratory distress and feeding difficulty in the newborn",
-   "Features suggesting CHARGE association such as coloboma, cardiac, or ear anomalies",
-   "Failure to establish or maintain an adequate oral airway"
-  ],
-  "prognosis": "With prompt airway management and surgical repair the outlook is good, though restenosis can occur and may require revision, and prognosis in bilateral cases is influenced by any associated syndromic anomalies.",
-  "pitfalls": [
-   "Failing to recognise bilateral atresia promptly in a distressed neonate and delaying airway support",
-   "Attributing unilateral discharge and obstruction in a child to infection rather than investigating for atresia",
-   "Overlooking CHARGE and other syndromic associations in bilateral cases",
-   "Underestimating the risk of postoperative restenosis and not planning appropriate follow-up"
-  ],
-  "references": [
-   "Cummings Otolaryngology: Head and Neck Surgery",
-   "Scott-Brown's Otorhinolaryngology, Head and Neck Surgery"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Secure the neonatal airway urgently in bilateral atresia with an oral airway or modified McGovern nipple, or intubation, since neonates are obligate nasal breathers",
-   "Definitive treatment is surgical perforation of the atretic plate, usually by transnasal endoscopic drilling of the bony or membranous obstruction with restoration of choanal patency",
-   "Maintain post-operative patency with nasal stenting, saline irrigation and topical decongestant or steroid measures, with regular debridement",
-   "Undertake surveillance nasendoscopy for restenosis, with dilatation, revision surgery or topical mitomycin application where re-stenosis recurs",
-   "Support feeding and growth with nasogastric or careful oral feeding until the airway is secured",
-   "Screen bilateral cases for CHARGE and other syndromes with cardiology, ophthalmology and genetic evaluation",
-   "Manage within a paediatric ENT, neonatology and anaesthetic multidisciplinary team"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "choanal_atresia-pathway",
-   "title": "Choanal atresia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Congenital failure of the posterior nasal aperture to canalise, leaving a bony, membranous, or mixed obstruction between the nasal cavity and nasopharynx",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Cyclical cyanosis relieved by crying in a neonate, indicating bilateral atresia and an airway emergency",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Attempted passage of a fine catheter through each nostril and the cold-mirror misting test at the cot side, Flexible nasal endoscopy to inspect the posterior nasal cavity, CT of the nose and skull base to define the nature"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Secure the neonatal airway urgently in bilateral atresia with an oral airway or modified McGovern nipple, or intubation, since neonates are obligate nasal breathers"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to recognise bilateral atresia promptly in a distressed neonate and delaying airway support"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of choanal atresia."
-  }
- ],
- "tables": [
-  {
-   "id": "choanal_atresia-matrix",
-   "title": "Choanal atresia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Congenital failure of the posterior nasal aperture to canalise, leaving a bony, membranous, or mixed obstruction between the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Ear-Nose-Throat / Laryngology",
+  "specialty": "Otolaryngology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Cummings Otolaryngology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Congenital failure of the posterior nasal aperture to canalise, leaving a bony, membranous, or mixed obstruction between the nasal cavity and nasopharynx",
+      "Bilateral atresia is a neonatal airway emergency because neonates are obligate nasal breathers, producing cyclical cyanosis relieved by crying",
+      "Unilateral atresia often presents later in childhood with persistent unilateral nasal obstruction and discharge",
+      "Failure to pass a fine catheter through the nose and absence of misting on a cold mirror suggest the diagnosis",
+      "CT best characterises whether the obstruction is bony, membranous, or mixed and guides surgical planning",
+      "Association with CHARGE and other syndromes means a bilateral case warrants a search for additional anomalies",
+      "The immediate priority in a bilateral case is to establish an oral airway, classically with an oral airway device or feeding-teat adaptation, before definitive surgical repair"
     ],
-    [
-     "Key Investigations",
-     "Attempted passage of a fine catheter through each nostril and the cold-mirror misting test at the cot side, Flexible nasal",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Choanal atresia results from persistence of tissue that should break down during development of the posterior nasal apertures, leaving the choana occluded by bone, membrane, or a combination of the two. Several embryological explanations have been proposed, including failure of rupture of the bucconasal membrane and abnormal mesodermal persistence. Because newborns preferentially breathe through the nose, complete bilateral obstruction prevents effective nasal airflow, so the infant becomes cyanotic at rest and improves paradoxically when crying opens the mouth, giving the classic cyclical pattern. In unilateral disease the patent side maintains the airway, and the condition presents insidiously with chronic one-sided obstruction and discharge.",
+    "additionalDifferentials": [
+      "Neonatal nasal obstruction from mucosal oedema or rhinitis",
+      "Pyriform aperture stenosis",
+      "Nasolacrimal duct cyst (dacryocystocele)",
+      "Nasal dermoid, glioma, or encephalocele",
+      "Midnasal stenosis",
+      "Choanal stenosis without complete atresia"
     ],
-    [
-     "Primary Differentials",
-     "Neonatal nasal obstruction from mucosal oedema or rhinitis, Pyriform aperture stenosis, Nasolacrimal duct cyst (dacryocystocele)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Attempted passage of a fine catheter through each nostril and the cold-mirror misting test at the cot side",
+      "Flexible nasal endoscopy to inspect the posterior nasal cavity",
+      "CT of the nose and skull base to define the nature and thickness of the atretic plate",
+      "Assessment for CHARGE and other syndromic associations, including cardiac and ophthalmological review",
+      "Genetic evaluation where a syndrome is suspected"
     ],
-    [
-     "Management Strategy",
-     "Secure the neonatal airway urgently in bilateral atresia with an oral airway or modified McGovern nipple, or intubation, since",
-     "Core treatment modality"
+    "redFlags": [
+      "Cyclical cyanosis relieved by crying in a neonate, indicating bilateral atresia and an airway emergency",
+      "Respiratory distress and feeding difficulty in the newborn",
+      "Features suggesting CHARGE association such as coloboma, cardiac, or ear anomalies",
+      "Failure to establish or maintain an adequate oral airway"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to recognise bilateral atresia promptly in a distressed neonate and delaying airway support",
-     "Prevent diagnostic or management error"
+    "prognosis": "With prompt airway management and surgical repair the outlook is good, though restenosis can occur and may require revision, and prognosis in bilateral cases is influenced by any associated syndromic anomalies.",
+    "pitfalls": [
+      "Failing to recognise bilateral atresia promptly in a distressed neonate and delaying airway support",
+      "Attributing unilateral discharge and obstruction in a child to infection rather than investigating for atresia",
+      "Overlooking CHARGE and other syndromic associations in bilateral cases",
+      "Underestimating the risk of postoperative restenosis and not planning appropriate follow-up"
+    ],
+    "references": [
+      "Cummings Otolaryngology: Head and Neck Surgery",
+      "Scott-Brown's Otorhinolaryngology, Head and Neck Surgery"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Secure the neonatal airway urgently in bilateral atresia with an oral airway or modified McGovern nipple, or intubation, since neonates are obligate nasal breathers",
+      "Definitive treatment is surgical perforation of the atretic plate, usually by transnasal endoscopic drilling of the bony or membranous obstruction with restoration of choanal patency",
+      "Maintain post-operative patency with nasal stenting, saline irrigation and topical decongestant or steroid measures, with regular debridement",
+      "Undertake surveillance nasendoscopy for restenosis, with dilatation, revision surgery or topical mitomycin application where re-stenosis recurs",
+      "Support feeding and growth with nasogastric or careful oral feeding until the airway is secured",
+      "Screen bilateral cases for CHARGE and other syndromes with cardiology, ophthalmology and genetic evaluation",
+      "Manage within a paediatric ENT, neonatology and anaesthetic multidisciplinary team"
     ]
-   ],
-   "caption": "Overview comparison matrix for choanal atresia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "choanal-atresia-real-image",
-   "title": "Choanal atresia: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "choanal_atresia-pathway",
+      "title": "Choanal atresia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Congenital failure of the posterior nasal aperture to canalise, leaving a bony, membranous, or mixed obstruction between the nasal cavity and nasopharynx",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Cyclical cyanosis relieved by crying in a neonate, indicating bilateral atresia and an airway emergency",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Attempted passage of a fine catheter through each nostril and the cold-mirror misting test at the cot side, Flexible nasal endoscopy to inspect the posterior nasal cavity, CT of the nose and skull base to define the nature"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Secure the neonatal airway urgently in bilateral atresia with an oral airway or modified McGovern nipple, or intubation, since neonates are obligate nasal breathers"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to recognise bilateral atresia promptly in a distressed neonate and delaying airway support"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of choanal atresia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "choanal_atresia-matrix",
+      "title": "Choanal atresia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Congenital failure of the posterior nasal aperture to canalise, leaving a bony, membranous, or mixed obstruction between the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Attempted passage of a fine catheter through each nostril and the cold-mirror misting test at the cot side, Flexible nasal",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Neonatal nasal obstruction from mucosal oedema or rhinitis, Pyriform aperture stenosis, Nasolacrimal duct cyst (dacryocystocele)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Secure the neonatal airway urgently in bilateral atresia with an oral airway or modified McGovern nipple, or intubation, since",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to recognise bilateral atresia promptly in a distressed neonate and delaying airway support",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for choanal atresia."
+    }
+  ],
+  "diagrams": []
 }

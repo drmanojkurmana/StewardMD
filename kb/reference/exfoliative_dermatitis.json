@@ -1,176 +1,154 @@
 {
- "id": "exfoliative_dermatitis",
- "name": "Exfoliative dermatitis (erythroderma workup)",
- "aliases": [
-  "erythroderma",
-  "exfoliative dermatitis",
-  "generalised exfoliative dermatitis",
-  "red man syndrome"
- ],
- "class": "non_infective",
- "system": "Dermatology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Defined as erythema and scaling affecting at least ninety per cent of the body surface, representing a dermatological emergency rather than a single diagnosis",
-   "The commonest underlying causes are pre-existing dermatoses (notably psoriasis and eczema), drug reactions, and cutaneous T-cell lymphoma, with a proportion remaining idiopathic",
-   "Widespread inflammation impairs the skin barrier, causing high-output fluid, protein and heat loss with a risk of hypothermia, dehydration and electrolyte disturbance",
-   "Peripheral oedema, lymphadenopathy and hepatosplenomegaly may accompany the skin changes, and high-output cardiac failure can occur in vulnerable patients",
-   "Clues to the underlying cause include nail and scalp changes suggesting psoriasis, a preceding drug history, or islands of sparing and intense pruritus suggesting lymphoma",
-   "Repeated skin biopsies over time, together with blood film and lymphocyte studies, help identify Sezary syndrome and other specific causes",
-   "Secondary infection and sepsis are important complications given the disrupted barrier and thermoregulation",
-   "Management combines urgent supportive care (fluid balance, warmth, emollients and nutrition) with withdrawal of any culprit drug and treatment directed at the underlying disease"
+  "id": "exfoliative_dermatitis",
+  "name": "Exfoliative dermatitis (erythroderma workup)",
+  "aliases": [
+    "erythroderma",
+    "exfoliative dermatitis",
+    "generalised exfoliative dermatitis",
+    "red man syndrome"
   ],
-  "pathophysiology": "Erythroderma results from a massive increase in the rate of epidermal turnover and a generalised inflammatory infiltrate that together produce diffuse erythema and scaling. The widespread cutaneous vasodilatation and loss of the epidermal barrier lead to substantial transepidermal water loss, heat loss and protein loss through desquamated scale, disturbing fluid, electrolyte and temperature homeostasis. Increased cutaneous blood flow can precipitate high-output cardiac failure, while barrier failure predisposes to infection. The underlying trigger differs by cause, ranging from the amplified inflammation of an existing dermatosis or a drug hypersensitivity reaction to malignant T-cell proliferation in cutaneous lymphoma, but the shared final pathway explains the common systemic complications.",
-  "additionalDifferentials": [
-   "Psoriasis (erythrodermic psoriasis)",
-   "Atopic and other eczemas",
-   "Drug reaction, including drug reaction with eosinophilia and systemic symptoms",
-   "Cutaneous T-cell lymphoma and Sezary syndrome",
-   "Pityriasis rubra pilaris",
-   "Idiopathic erythroderma and, in neonates, inherited ichthyoses"
-  ],
-  "additionalInvestigations": [
-   "Serial skin biopsies to seek a specific underlying dermatosis or lymphoma",
-   "Full blood count with blood film and Sezary cell count, plus peripheral blood flow cytometry",
-   "Renal function, electrolytes, albumin and inflammatory markers to assess metabolic consequences",
-   "Comprehensive drug history and review of recently introduced medications",
-   "Assessment for lymphadenopathy and organomegaly with imaging if lymphoma is suspected",
-   "Cultures of skin and blood if secondary infection or sepsis is suspected"
-  ],
-  "redFlags": [
-   "Haemodynamic instability, hypothermia or high-output cardiac failure",
-   "Fluid, electrolyte and protein depletion from barrier failure",
-   "Sepsis arising from secondary skin infection",
-   "Features suggesting cutaneous lymphoma such as intense pruritus, lymphadenopathy or atypical circulating lymphocytes",
-   "A drug reaction with systemic involvement requiring immediate drug withdrawal"
-  ],
-  "prognosis": "Prognosis depends on the underlying cause and the patient's comorbidities: erythroderma from a benign dermatosis or a withdrawn drug usually settles with treatment, whereas lymphoma-associated erythroderma carries a poorer outlook, and the acute metabolic complications can be life-threatening in the elderly or frail.",
-  "pitfalls": [
-   "Treating erythroderma as a diagnosis in itself and failing to search for the underlying cause",
-   "Underestimating the fluid, protein and temperature losses and the risk of high-output cardiac failure",
-   "Relying on a single non-diagnostic biopsy rather than repeating biopsies to detect lymphoma",
-   "Missing a culprit drug or overlooking secondary infection and sepsis"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "British Association of Dermatologists guidance on erythroderma"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Identify and treat the underlying cause: withdraw the culprit drug, treat the causative dermatosis (psoriasis, eczema) or manage cutaneous T-cell lymphoma",
-   "Intensive supportive skin care with liberal emollients, wet wraps and mild topical corticosteroids to restore barrier function",
-   "Correct fluid and electrolyte disturbance, maintain ambient warmth to prevent hypothermia and provide nutritional/protein support",
-   "Treat secondary skin or bloodstream infection with appropriate antibiotics and monitor for sepsis",
-   "Monitor for high-output cardiac failure in vulnerable patients",
-   "Directed systemic therapy according to cause (systemic immunosuppression or biologics for inflammatory disease, lymphoma-directed treatment) with repeated biopsies to establish the diagnosis",
-   "Admit and manage as a dermatological emergency under a dermatology-led multidisciplinary team"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "exfoliative_dermatitis-pathway",
-   "title": "Exfoliative dermatitis (erythroderma workup): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Defined as erythema and scaling affecting at least ninety per cent of the body surface, representing a dermatological emergency rather than a single diagnosis",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Haemodynamic instability, hypothermia or high-output cardiac failure",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serial skin biopsies to seek a specific underlying dermatosis or lymphoma, Full blood count with blood film and Sezary cell count, plus peripheral blood flow cytometry, Renal function, electrolytes, albumin and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Identify and treat the underlying cause: withdraw the culprit drug, treat the causative dermatosis (psoriasis, eczema) or manage cutaneous T-cell lymphoma"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating erythroderma as a diagnosis in itself and failing to search for the underlying cause"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of exfoliative dermatitis (erythroderma workup)."
-  }
- ],
- "tables": [
-  {
-   "id": "exfoliative_dermatitis-matrix",
-   "title": "Exfoliative dermatitis (erythroderma workup): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Defined as erythema and scaling affecting at least ninety per cent of the body surface, representing a dermatological emergency",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Defined as erythema and scaling affecting at least ninety per cent of the body surface, representing a dermatological emergency rather than a single diagnosis",
+      "The commonest underlying causes are pre-existing dermatoses (notably psoriasis and eczema), drug reactions, and cutaneous T-cell lymphoma, with a proportion remaining idiopathic",
+      "Widespread inflammation impairs the skin barrier, causing high-output fluid, protein and heat loss with a risk of hypothermia, dehydration and electrolyte disturbance",
+      "Peripheral oedema, lymphadenopathy and hepatosplenomegaly may accompany the skin changes, and high-output cardiac failure can occur in vulnerable patients",
+      "Clues to the underlying cause include nail and scalp changes suggesting psoriasis, a preceding drug history, or islands of sparing and intense pruritus suggesting lymphoma",
+      "Repeated skin biopsies over time, together with blood film and lymphocyte studies, help identify Sezary syndrome and other specific causes",
+      "Secondary infection and sepsis are important complications given the disrupted barrier and thermoregulation",
+      "Management combines urgent supportive care (fluid balance, warmth, emollients and nutrition) with withdrawal of any culprit drug and treatment directed at the underlying disease"
     ],
-    [
-     "Key Investigations",
-     "Serial skin biopsies to seek a specific underlying dermatosis or lymphoma, Full blood count with blood film and Sezary cell",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Erythroderma results from a massive increase in the rate of epidermal turnover and a generalised inflammatory infiltrate that together produce diffuse erythema and scaling. The widespread cutaneous vasodilatation and loss of the epidermal barrier lead to substantial transepidermal water loss, heat loss and protein loss through desquamated scale, disturbing fluid, electrolyte and temperature homeostasis. Increased cutaneous blood flow can precipitate high-output cardiac failure, while barrier failure predisposes to infection. The underlying trigger differs by cause, ranging from the amplified inflammation of an existing dermatosis or a drug hypersensitivity reaction to malignant T-cell proliferation in cutaneous lymphoma, but the shared final pathway explains the common systemic complications.",
+    "additionalDifferentials": [
+      "Psoriasis (erythrodermic psoriasis)",
+      "Atopic and other eczemas",
+      "Drug reaction, including drug reaction with eosinophilia and systemic symptoms",
+      "Cutaneous T-cell lymphoma and Sezary syndrome",
+      "Pityriasis rubra pilaris",
+      "Idiopathic erythroderma and, in neonates, inherited ichthyoses"
     ],
-    [
-     "Primary Differentials",
-     "Psoriasis (erythrodermic psoriasis), Atopic and other eczemas, Drug reaction, including drug reaction with eosinophilia and",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serial skin biopsies to seek a specific underlying dermatosis or lymphoma",
+      "Full blood count with blood film and Sezary cell count, plus peripheral blood flow cytometry",
+      "Renal function, electrolytes, albumin and inflammatory markers to assess metabolic consequences",
+      "Comprehensive drug history and review of recently introduced medications",
+      "Assessment for lymphadenopathy and organomegaly with imaging if lymphoma is suspected",
+      "Cultures of skin and blood if secondary infection or sepsis is suspected"
     ],
-    [
-     "Management Strategy",
-     "Identify and treat the underlying cause: withdraw the culprit drug, treat the causative dermatosis (psoriasis, eczema) or manage",
-     "Core treatment modality"
+    "redFlags": [
+      "Haemodynamic instability, hypothermia or high-output cardiac failure",
+      "Fluid, electrolyte and protein depletion from barrier failure",
+      "Sepsis arising from secondary skin infection",
+      "Features suggesting cutaneous lymphoma such as intense pruritus, lymphadenopathy or atypical circulating lymphocytes",
+      "A drug reaction with systemic involvement requiring immediate drug withdrawal"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating erythroderma as a diagnosis in itself and failing to search for the underlying cause",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends on the underlying cause and the patient's comorbidities: erythroderma from a benign dermatosis or a withdrawn drug usually settles with treatment, whereas lymphoma-associated erythroderma carries a poorer outlook, and the acute metabolic complications can be life-threatening in the elderly or frail.",
+    "pitfalls": [
+      "Treating erythroderma as a diagnosis in itself and failing to search for the underlying cause",
+      "Underestimating the fluid, protein and temperature losses and the risk of high-output cardiac failure",
+      "Relying on a single non-diagnostic biopsy rather than repeating biopsies to detect lymphoma",
+      "Missing a culprit drug or overlooking secondary infection and sepsis"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "British Association of Dermatologists guidance on erythroderma"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Identify and treat the underlying cause: withdraw the culprit drug, treat the causative dermatosis (psoriasis, eczema) or manage cutaneous T-cell lymphoma",
+      "Intensive supportive skin care with liberal emollients, wet wraps and mild topical corticosteroids to restore barrier function",
+      "Correct fluid and electrolyte disturbance, maintain ambient warmth to prevent hypothermia and provide nutritional/protein support",
+      "Treat secondary skin or bloodstream infection with appropriate antibiotics and monitor for sepsis",
+      "Monitor for high-output cardiac failure in vulnerable patients",
+      "Directed systemic therapy according to cause (systemic immunosuppression or biologics for inflammatory disease, lymphoma-directed treatment) with repeated biopsies to establish the diagnosis",
+      "Admit and manage as a dermatological emergency under a dermatology-led multidisciplinary team"
     ]
-   ],
-   "caption": "Overview comparison matrix for exfoliative dermatitis (erythroderma workup)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "exfoliative-dermatitis-real-image",
-   "title": "Exfoliative dermatitis (erythroderma workup): Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "exfoliative_dermatitis-pathway",
+      "title": "Exfoliative dermatitis (erythroderma workup): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Defined as erythema and scaling affecting at least ninety per cent of the body surface, representing a dermatological emergency rather than a single diagnosis",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Haemodynamic instability, hypothermia or high-output cardiac failure",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serial skin biopsies to seek a specific underlying dermatosis or lymphoma, Full blood count with blood film and Sezary cell count, plus peripheral blood flow cytometry, Renal function, electrolytes, albumin and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Identify and treat the underlying cause: withdraw the culprit drug, treat the causative dermatosis (psoriasis, eczema) or manage cutaneous T-cell lymphoma"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating erythroderma as a diagnosis in itself and failing to search for the underlying cause"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of exfoliative dermatitis (erythroderma workup)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "exfoliative_dermatitis-matrix",
+      "title": "Exfoliative dermatitis (erythroderma workup): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Defined as erythema and scaling affecting at least ninety per cent of the body surface, representing a dermatological emergency",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serial skin biopsies to seek a specific underlying dermatosis or lymphoma, Full blood count with blood film and Sezary cell",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Psoriasis (erythrodermic psoriasis), Atopic and other eczemas, Drug reaction, including drug reaction with eosinophilia and",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Identify and treat the underlying cause: withdraw the culprit drug, treat the causative dermatosis (psoriasis, eczema) or manage",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating erythroderma as a diagnosis in itself and failing to search for the underlying cause",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for exfoliative dermatitis (erythroderma workup)."
+    }
+  ],
+  "diagrams": []
 }

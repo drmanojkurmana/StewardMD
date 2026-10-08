@@ -1,174 +1,152 @@
 {
- "id": "livedo_reticularis",
- "name": "livedo reticularis",
- "aliases": [
-  "livedo racemosa (pathological variant)",
-  "cutis marmorata"
- ],
- "class": "non_infective",
- "system": "Skin and integumentary",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A net-like, reticular violaceous mottling of the skin caused by altered flow within the dermal vascular network.",
-   "The physiological form (cutis marmorata) produces complete, symmetrical rings that reverse with warming and is common and benign in infants and young women.",
-   "Livedo racemosa, by contrast, shows broken, irregular, asymmetrical rings that persist on warming and signals an underlying vasculopathy.",
-   "Livedo racemosa is an important cutaneous marker of Sneddon syndrome (with cerebrovascular events) and of antiphospholipid syndrome.",
-   "Secondary causes include vasculitis such as polyarteritis nodosa, cholesterol embolisation, calciphylaxis, hyperviscosity, cryoglobulinaemia and certain drugs.",
-   "Reversibility with warming and the regularity of the pattern help separate the benign from the pathological forms.",
-   "When biopsy is needed it should be deep and taken from the pale centre of the network rather than the blue rim, where the culprit vessel is more likely to be sampled."
+  "id": "livedo_reticularis",
+  "name": "livedo reticularis",
+  "aliases": [
+    "livedo racemosa (pathological variant)",
+    "cutis marmorata"
   ],
-  "pathophysiology": "The reticular pattern reflects the cone-shaped territories supplied by ascending dermal arterioles: deoxygenated blood pooling in the venous plexus at the periphery of each cone produces the bluish reticulate network. Anything that reduces inflow or increases stasis at the cone periphery accentuates the pattern, including vasospasm, luminal obstruction from thrombosis, emboli or hyperviscosity, and inflammatory vessel-wall disease. In the physiological form the change is purely vasomotor and reverses with warming, whereas in pathological livedo racemosa fixed vascular occlusion or wall damage produces a persistent, irregular pattern.",
-  "additionalDifferentials": [
-   "Cutis marmorata (physiological livedo)",
-   "Livedo racemosa secondary to systemic disease",
-   "Livedoid vasculopathy",
-   "Erythema ab igne",
-   "Cutis marmorata telangiectatica congenita",
-   "Reticulate erythema of connective tissue disease",
-   "Cholesterol embolisation syndrome"
-  ],
-  "additionalInvestigations": [
-   "Antiphospholipid antibody testing (lupus anticoagulant, anticardiolipin and anti-beta-2-glycoprotein-I antibodies)",
-   "Autoimmune screen including antinuclear antibodies and ANCA",
-   "Cryoglobulins and complement levels",
-   "Deep skin biopsy taken from the centre of the pale area",
-   "Screening for an embolic source and a thrombophilia workup",
-   "Neuroimaging when Sneddon syndrome is suspected"
-  ],
-  "redFlags": [
-   "Neurological symptoms such as stroke or transient ischaemic attack suggesting Sneddon syndrome",
-   "Skin ulceration or necrosis",
-   "Systemic features of vasculitis or embolic disease",
-   "A fixed, irregular racemosa pattern that does not resolve with warming"
-  ],
-  "prognosis": "The physiological form is entirely benign, whereas the prognosis of pathological livedo depends on the underlying disorder, with thrombotic risk in antiphospholipid and Sneddon syndromes being of particular concern.",
-  "pitfalls": [
-   "Dismissing pathological livedo racemosa as benign cutis marmorata.",
-   "Taking a superficial or peripherally placed biopsy that misses the affected vessel.",
-   "Failing to test for antiphospholipid syndrome in a young patient presenting with livedo and stroke.",
-   "Attributing drug-induced or embolic livedo to a primary skin disorder."
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Fitzpatrick's Dermatology in General Medicine",
-   "Harrison's Principles of Internal Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassure and advise warmth with avoidance of cold for benign physiological cutis marmorata, which needs no specific treatment",
-   "Identify and treat the underlying cause, distinguishing benign livedo reticularis from pathological livedo racemosa",
-   "Give antiplatelet or anticoagulant therapy where associated with antiphospholipid syndrome or Sneddon syndrome and thrombotic risk",
-   "Treat specific secondary causes, such as immunosuppression for polyarteritis nodosa or management of cholesterol embolisation, calciphylaxis and cryoglobulinaemia",
-   "Address modifiable vascular risk factors and withdraw any causative drugs",
-   "Investigate and monitor for cerebrovascular events when Sneddon syndrome is suspected",
-   "Refer to dermatology, rheumatology or neurology according to the underlying disorder"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "livedo_reticularis-pathway",
-   "title": "livedo reticularis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A net-like, reticular violaceous mottling of the skin caused by altered flow within the dermal vascular network.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Neurological symptoms such as stroke or transient ischaemic attack suggesting Sneddon syndrome",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Antiphospholipid antibody testing (lupus anticoagulant, anticardiolipin and anti-beta-2-glycoprotein-I antibodies), Autoimmune screen including antinuclear antibodies and ANCA, Cryoglobulins and complement levels"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassure and advise warmth with avoidance of cold for benign physiological cutis marmorata, which needs no specific treatment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing pathological livedo racemosa as benign cutis marmorata."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of livedo reticularis."
-  }
- ],
- "tables": [
-  {
-   "id": "livedo_reticularis-matrix",
-   "title": "livedo reticularis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A net-like, reticular violaceous mottling of the skin caused by altered flow within the dermal vascular network.",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Skin and integumentary",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A net-like, reticular violaceous mottling of the skin caused by altered flow within the dermal vascular network.",
+      "The physiological form (cutis marmorata) produces complete, symmetrical rings that reverse with warming and is common and benign in infants and young women.",
+      "Livedo racemosa, by contrast, shows broken, irregular, asymmetrical rings that persist on warming and signals an underlying vasculopathy.",
+      "Livedo racemosa is an important cutaneous marker of Sneddon syndrome (with cerebrovascular events) and of antiphospholipid syndrome.",
+      "Secondary causes include vasculitis such as polyarteritis nodosa, cholesterol embolisation, calciphylaxis, hyperviscosity, cryoglobulinaemia and certain drugs.",
+      "Reversibility with warming and the regularity of the pattern help separate the benign from the pathological forms.",
+      "When biopsy is needed it should be deep and taken from the pale centre of the network rather than the blue rim, where the culprit vessel is more likely to be sampled."
     ],
-    [
-     "Key Investigations",
-     "Antiphospholipid antibody testing (lupus anticoagulant, anticardiolipin and anti-beta-2-glycoprotein-I antibodies), Autoimmune",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The reticular pattern reflects the cone-shaped territories supplied by ascending dermal arterioles: deoxygenated blood pooling in the venous plexus at the periphery of each cone produces the bluish reticulate network. Anything that reduces inflow or increases stasis at the cone periphery accentuates the pattern, including vasospasm, luminal obstruction from thrombosis, emboli or hyperviscosity, and inflammatory vessel-wall disease. In the physiological form the change is purely vasomotor and reverses with warming, whereas in pathological livedo racemosa fixed vascular occlusion or wall damage produces a persistent, irregular pattern.",
+    "additionalDifferentials": [
+      "Cutis marmorata (physiological livedo)",
+      "Livedo racemosa secondary to systemic disease",
+      "Livedoid vasculopathy",
+      "Erythema ab igne",
+      "Cutis marmorata telangiectatica congenita",
+      "Reticulate erythema of connective tissue disease",
+      "Cholesterol embolisation syndrome"
     ],
-    [
-     "Primary Differentials",
-     "Cutis marmorata (physiological livedo), Livedo racemosa secondary to systemic disease, Livedoid vasculopathy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Antiphospholipid antibody testing (lupus anticoagulant, anticardiolipin and anti-beta-2-glycoprotein-I antibodies)",
+      "Autoimmune screen including antinuclear antibodies and ANCA",
+      "Cryoglobulins and complement levels",
+      "Deep skin biopsy taken from the centre of the pale area",
+      "Screening for an embolic source and a thrombophilia workup",
+      "Neuroimaging when Sneddon syndrome is suspected"
     ],
-    [
-     "Management Strategy",
-     "Reassure and advise warmth with avoidance of cold for benign physiological cutis marmorata, which needs no specific treatment",
-     "Core treatment modality"
+    "redFlags": [
+      "Neurological symptoms such as stroke or transient ischaemic attack suggesting Sneddon syndrome",
+      "Skin ulceration or necrosis",
+      "Systemic features of vasculitis or embolic disease",
+      "A fixed, irregular racemosa pattern that does not resolve with warming"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing pathological livedo racemosa as benign cutis marmorata.",
-     "Prevent diagnostic or management error"
+    "prognosis": "The physiological form is entirely benign, whereas the prognosis of pathological livedo depends on the underlying disorder, with thrombotic risk in antiphospholipid and Sneddon syndromes being of particular concern.",
+    "pitfalls": [
+      "Dismissing pathological livedo racemosa as benign cutis marmorata.",
+      "Taking a superficial or peripherally placed biopsy that misses the affected vessel.",
+      "Failing to test for antiphospholipid syndrome in a young patient presenting with livedo and stroke.",
+      "Attributing drug-induced or embolic livedo to a primary skin disorder."
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Fitzpatrick's Dermatology in General Medicine",
+      "Harrison's Principles of Internal Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassure and advise warmth with avoidance of cold for benign physiological cutis marmorata, which needs no specific treatment",
+      "Identify and treat the underlying cause, distinguishing benign livedo reticularis from pathological livedo racemosa",
+      "Give antiplatelet or anticoagulant therapy where associated with antiphospholipid syndrome or Sneddon syndrome and thrombotic risk",
+      "Treat specific secondary causes, such as immunosuppression for polyarteritis nodosa or management of cholesterol embolisation, calciphylaxis and cryoglobulinaemia",
+      "Address modifiable vascular risk factors and withdraw any causative drugs",
+      "Investigate and monitor for cerebrovascular events when Sneddon syndrome is suspected",
+      "Refer to dermatology, rheumatology or neurology according to the underlying disorder"
     ]
-   ],
-   "caption": "Overview comparison matrix for livedo reticularis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "livedo-reticularis-real-image",
-   "title": "livedo reticularis: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "livedo_reticularis-pathway",
+      "title": "livedo reticularis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A net-like, reticular violaceous mottling of the skin caused by altered flow within the dermal vascular network.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Neurological symptoms such as stroke or transient ischaemic attack suggesting Sneddon syndrome",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Antiphospholipid antibody testing (lupus anticoagulant, anticardiolipin and anti-beta-2-glycoprotein-I antibodies), Autoimmune screen including antinuclear antibodies and ANCA, Cryoglobulins and complement levels"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassure and advise warmth with avoidance of cold for benign physiological cutis marmorata, which needs no specific treatment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing pathological livedo racemosa as benign cutis marmorata."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of livedo reticularis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "livedo_reticularis-matrix",
+      "title": "livedo reticularis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A net-like, reticular violaceous mottling of the skin caused by altered flow within the dermal vascular network.",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Antiphospholipid antibody testing (lupus anticoagulant, anticardiolipin and anti-beta-2-glycoprotein-I antibodies), Autoimmune",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Cutis marmorata (physiological livedo), Livedo racemosa secondary to systemic disease, Livedoid vasculopathy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassure and advise warmth with avoidance of cold for benign physiological cutis marmorata, which needs no specific treatment",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing pathological livedo racemosa as benign cutis marmorata.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for livedo reticularis."
+    }
+  ],
+  "diagrams": []
 }

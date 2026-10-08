@@ -1,174 +1,152 @@
 {
- "id": "striate_palmoplantar_keratoderma",
- "name": "Striate palmoplantar keratoderma",
- "aliases": [
-  "SPPK",
-  "Brünauer-Fuhs-Siemens keratoderma",
-  "DSG1",
-  "DSP"
- ],
- "class": "non_infective",
- "system": "Dermatology / Genetics",
- "specialty": "Dermatology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An autosomal dominant focal palmoplantar keratoderma with linear (striate) hyperkeratosis running along the palms and fingers and focal thickening on the soles",
-   "Caused by heterozygous variants in desmosomal genes, most often DSG1 (desmoglein 1) or DSP (desmoplakin), and occasionally KRT1",
-   "The linear pattern follows lines of mechanical stress, so the fingers and weight-bearing soles are typically involved",
-   "Because desmoplakin also functions in cardiac desmosomes, some DSP variants are associated with cardiocutaneous syndromes, so a cardiac history should be considered",
-   "Nails and hair are usually normal, helping to distinguish it from syndromic keratodermas",
-   "Diagnosis is clinical with family history; biopsy shows hyperkeratosis with widened intercellular spaces and can be supported by molecular testing",
-   "Management is supportive with keratolytics, emollients, mechanical paring and protective measures, with oral retinoids reserved for severe disease"
+  "id": "striate_palmoplantar_keratoderma",
+  "name": "Striate palmoplantar keratoderma",
+  "aliases": [
+    "SPPK",
+    "Brünauer-Fuhs-Siemens keratoderma",
+    "DSG1",
+    "DSP"
   ],
-  "pathophysiology": "Striate palmoplantar keratoderma results from haploinsufficiency or dominant-negative effects of variants in desmosomal proteins, chiefly desmoglein 1 and desmoplakin, which anchor keratin filaments to cell-cell junctions in the epidermis. Weakened desmosomal adhesion is most consequential in acral skin subjected to shearing and pressure, where impaired keratinocyte cohesion triggers compensatory hyperkeratosis along lines of mechanical stress, producing the characteristic striate pattern. Certain desmoplakin variants additionally impair cardiac desmosomes, linking the skin phenotype to arrhythmogenic cardiomyopathy in some families.",
-  "additionalDifferentials": [
-   "Diffuse palmoplantar keratoderma (Unna-Thost / Vörner)",
-   "Focal palmoplantar keratoderma of pachyonychia congenita",
-   "Punctate palmoplantar keratoderma",
-   "Naxos disease and Carvajal syndrome (cardiocutaneous keratodermas)",
-   "Acquired keratoderma from friction or eczema",
-   "Keratosis palmoplantaris of Wachters"
-  ],
-  "additionalInvestigations": [
-   "Molecular genetic testing of DSG1, DSP and related desmosomal genes",
-   "Skin biopsy showing hyperkeratosis with acantholytic-like widening of intercellular spaces",
-   "Family history and pedigree analysis",
-   "Cardiac assessment (history, ECG and echocardiography) where a DSP variant or cardiocutaneous syndrome is suspected",
-   "Nail and hair examination to exclude syndromic keratoderma",
-   "Clinical photography to document the striate pattern"
-  ],
-  "redFlags": [
-   "Personal or family history of arrhythmia, syncope or cardiomyopathy suggesting a cardiocutaneous desmoplakin syndrome",
-   "Woolly hair with keratoderma raising concern for Carvajal or Naxos syndrome",
-   "Painful fissuring causing functional impairment",
-   "Secondary infection of fissured keratoderma"
-  ],
-  "prognosis": "The cutaneous prognosis is good, with lifelong but manageable focal keratoderma; overall prognosis depends on excluding the cardiac involvement associated with some desmoplakin variants.",
-  "pitfalls": [
-   "Failing to consider cardiac evaluation in desmoplakin-related disease",
-   "Confusing the linear pattern with a friction or occupational keratoderma",
-   "Overlooking woolly hair as a clue to a cardiocutaneous syndrome",
-   "Relying on systemic retinoids before optimising topical and mechanical care"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Harper's Textbook of Paediatric Dermatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Topical keratolytics such as urea, salicylic acid and lactic-acid preparations with regular emollients to soften and reduce hyperkeratosis",
-   "Mechanical measures: regular paring or debridement of thickened skin, cushioned footwear and orthotics to offload lines of mechanical stress",
-   "Oral retinoids such as acitretin considered for severe, disabling keratoderma, weighed against their side effects",
-   "Treat painful fissuring and any superimposed fungal or bacterial infection",
-   "Cardiac assessment with ECG and echocardiography where a desmoplakin (DSP) variant raises the risk of arrhythmogenic cardiomyopathy",
-   "Molecular genetic confirmation of DSG1, DSP and related genes with referral to clinical genetics",
-   "Genetic counselling and family screening given autosomal dominant inheritance, extending cardiac screening to relatives where a DSP variant is identified"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "striate_palmoplantar_keratoderma-pathway",
-   "title": "Striate palmoplantar keratoderma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autosomal dominant focal palmoplantar keratoderma with linear (striate) hyperkeratosis running along the palms and fingers and focal thickening on the soles",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Personal or family history of arrhythmia, syncope or cardiomyopathy suggesting a cardiocutaneous desmoplakin syndrome",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Molecular genetic testing of DSG1, DSP and related desmosomal genes, Skin biopsy showing hyperkeratosis with acantholytic-like widening of intercellular spaces, Family history and pedigree analysis"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Topical keratolytics such as urea, salicylic acid and lactic-acid preparations with regular emollients to soften and reduce hyperkeratosis"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to consider cardiac evaluation in desmoplakin-related disease"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of striate palmoplantar keratoderma."
-  }
- ],
- "tables": [
-  {
-   "id": "striate_palmoplantar_keratoderma-matrix",
-   "title": "Striate palmoplantar keratoderma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autosomal dominant focal palmoplantar keratoderma with linear (striate) hyperkeratosis running along the palms and fingers and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology / Genetics",
+  "specialty": "Dermatology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An autosomal dominant focal palmoplantar keratoderma with linear (striate) hyperkeratosis running along the palms and fingers and focal thickening on the soles",
+      "Caused by heterozygous variants in desmosomal genes, most often DSG1 (desmoglein 1) or DSP (desmoplakin), and occasionally KRT1",
+      "The linear pattern follows lines of mechanical stress, so the fingers and weight-bearing soles are typically involved",
+      "Because desmoplakin also functions in cardiac desmosomes, some DSP variants are associated with cardiocutaneous syndromes, so a cardiac history should be considered",
+      "Nails and hair are usually normal, helping to distinguish it from syndromic keratodermas",
+      "Diagnosis is clinical with family history; biopsy shows hyperkeratosis with widened intercellular spaces and can be supported by molecular testing",
+      "Management is supportive with keratolytics, emollients, mechanical paring and protective measures, with oral retinoids reserved for severe disease"
     ],
-    [
-     "Key Investigations",
-     "Molecular genetic testing of DSG1, DSP and related desmosomal genes, Skin biopsy showing hyperkeratosis with acantholytic-like",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Striate palmoplantar keratoderma results from haploinsufficiency or dominant-negative effects of variants in desmosomal proteins, chiefly desmoglein 1 and desmoplakin, which anchor keratin filaments to cell-cell junctions in the epidermis. Weakened desmosomal adhesion is most consequential in acral skin subjected to shearing and pressure, where impaired keratinocyte cohesion triggers compensatory hyperkeratosis along lines of mechanical stress, producing the characteristic striate pattern. Certain desmoplakin variants additionally impair cardiac desmosomes, linking the skin phenotype to arrhythmogenic cardiomyopathy in some families.",
+    "additionalDifferentials": [
+      "Diffuse palmoplantar keratoderma (Unna-Thost / Vörner)",
+      "Focal palmoplantar keratoderma of pachyonychia congenita",
+      "Punctate palmoplantar keratoderma",
+      "Naxos disease and Carvajal syndrome (cardiocutaneous keratodermas)",
+      "Acquired keratoderma from friction or eczema",
+      "Keratosis palmoplantaris of Wachters"
     ],
-    [
-     "Primary Differentials",
-     "Diffuse palmoplantar keratoderma (Unna-Thost / Vörner), Focal palmoplantar keratoderma of pachyonychia congenita, Punctate",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Molecular genetic testing of DSG1, DSP and related desmosomal genes",
+      "Skin biopsy showing hyperkeratosis with acantholytic-like widening of intercellular spaces",
+      "Family history and pedigree analysis",
+      "Cardiac assessment (history, ECG and echocardiography) where a DSP variant or cardiocutaneous syndrome is suspected",
+      "Nail and hair examination to exclude syndromic keratoderma",
+      "Clinical photography to document the striate pattern"
     ],
-    [
-     "Management Strategy",
-     "Topical keratolytics such as urea, salicylic acid and lactic-acid preparations with regular emollients to soften and reduce",
-     "Core treatment modality"
+    "redFlags": [
+      "Personal or family history of arrhythmia, syncope or cardiomyopathy suggesting a cardiocutaneous desmoplakin syndrome",
+      "Woolly hair with keratoderma raising concern for Carvajal or Naxos syndrome",
+      "Painful fissuring causing functional impairment",
+      "Secondary infection of fissured keratoderma"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to consider cardiac evaluation in desmoplakin-related disease",
-     "Prevent diagnostic or management error"
+    "prognosis": "The cutaneous prognosis is good, with lifelong but manageable focal keratoderma; overall prognosis depends on excluding the cardiac involvement associated with some desmoplakin variants.",
+    "pitfalls": [
+      "Failing to consider cardiac evaluation in desmoplakin-related disease",
+      "Confusing the linear pattern with a friction or occupational keratoderma",
+      "Overlooking woolly hair as a clue to a cardiocutaneous syndrome",
+      "Relying on systemic retinoids before optimising topical and mechanical care"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Harper's Textbook of Paediatric Dermatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Topical keratolytics such as urea, salicylic acid and lactic-acid preparations with regular emollients to soften and reduce hyperkeratosis",
+      "Mechanical measures: regular paring or debridement of thickened skin, cushioned footwear and orthotics to offload lines of mechanical stress",
+      "Oral retinoids such as acitretin considered for severe, disabling keratoderma, weighed against their side effects",
+      "Treat painful fissuring and any superimposed fungal or bacterial infection",
+      "Cardiac assessment with ECG and echocardiography where a desmoplakin (DSP) variant raises the risk of arrhythmogenic cardiomyopathy",
+      "Molecular genetic confirmation of DSG1, DSP and related genes with referral to clinical genetics",
+      "Genetic counselling and family screening given autosomal dominant inheritance, extending cardiac screening to relatives where a DSP variant is identified"
     ]
-   ],
-   "caption": "Overview comparison matrix for striate palmoplantar keratoderma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "striate-palmoplantar-keratoderma-real-image",
-   "title": "Striate palmoplantar keratoderma: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "striate_palmoplantar_keratoderma-pathway",
+      "title": "Striate palmoplantar keratoderma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autosomal dominant focal palmoplantar keratoderma with linear (striate) hyperkeratosis running along the palms and fingers and focal thickening on the soles",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Personal or family history of arrhythmia, syncope or cardiomyopathy suggesting a cardiocutaneous desmoplakin syndrome",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Molecular genetic testing of DSG1, DSP and related desmosomal genes, Skin biopsy showing hyperkeratosis with acantholytic-like widening of intercellular spaces, Family history and pedigree analysis"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Topical keratolytics such as urea, salicylic acid and lactic-acid preparations with regular emollients to soften and reduce hyperkeratosis"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to consider cardiac evaluation in desmoplakin-related disease"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of striate palmoplantar keratoderma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "striate_palmoplantar_keratoderma-matrix",
+      "title": "Striate palmoplantar keratoderma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autosomal dominant focal palmoplantar keratoderma with linear (striate) hyperkeratosis running along the palms and fingers and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Molecular genetic testing of DSG1, DSP and related desmosomal genes, Skin biopsy showing hyperkeratosis with acantholytic-like",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Diffuse palmoplantar keratoderma (Unna-Thost / Vörner), Focal palmoplantar keratoderma of pachyonychia congenita, Punctate",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Topical keratolytics such as urea, salicylic acid and lactic-acid preparations with regular emollients to soften and reduce",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to consider cardiac evaluation in desmoplakin-related disease",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for striate palmoplantar keratoderma."
+    }
+  ],
+  "diagrams": []
 }

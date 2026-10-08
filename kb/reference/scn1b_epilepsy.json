@@ -1,175 +1,153 @@
 {
- "id": "scn1b_epilepsy",
- "name": "SCN1B-related epilepsy (GEFS+/Dravet-like)",
- "aliases": [
-  "SCN1B",
-  "SCN1B-related epilepsy",
-  "sodium channel beta1 subunit epilepsy",
-  "GEFS+ type 1",
-  "SCN1B Dravet-like encephalopathy"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurogenetics",
- "specialty": "Neurology / Epileptology",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / ILAE",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by variants in SCN1B, which encodes the beta1 auxiliary subunit of the voltage-gated sodium channel that modulates channel gating, trafficking, and cell adhesion",
-   "Heterozygous variants classically cause genetic epilepsy with febrile seizures plus (GEFS+), an autosomal dominant familial spectrum with variable severity",
-   "Biallelic (homozygous or compound heterozygous) loss-of-function variants can cause a severe early infantile Dravet-like developmental and epileptic encephalopathy",
-   "The GEFS+ spectrum includes simple febrile seizures, febrile seizures persisting beyond the usual age, and afebrile generalised or focal seizures within the same family",
-   "Fever sensitivity and prolonged seizures are recurrent features, overlapping clinically with SCN1A-related disorders",
-   "Because the beta subunit modulates neuronal sodium channels, disturbed channel function alters excitability, and antiseizure choice should account for the Dravet-like overlap where sodium-channel blockers may be poorly tolerated in the severe phenotype",
-   "The severe biallelic phenotype carries developmental impairment and, as with related sodium-channel epilepsies, attention to sudden unexpected death in epilepsy risk"
+  "id": "scn1b_epilepsy",
+  "name": "SCN1B-related epilepsy (GEFS+/Dravet-like)",
+  "aliases": [
+    "SCN1B",
+    "SCN1B-related epilepsy",
+    "sodium channel beta1 subunit epilepsy",
+    "GEFS+ type 1",
+    "SCN1B Dravet-like encephalopathy"
   ],
-  "pathophysiology": "SCN1B encodes the beta1 subunit of the voltage-gated sodium channel, an auxiliary transmembrane protein that regulates the gating kinetics, surface trafficking, and localisation of the pore-forming alpha subunits and also functions as a cell-adhesion molecule influencing neuronal development. Heterozygous variants partially disturb sodium channel behaviour and produce the variable GEFS+ spectrum, while complete loss of beta1 function from biallelic variants more profoundly deranges channel regulation, resulting in the severe Dravet-like encephalopathy. The consequent instability of neuronal firing, particularly under the stress of fever, lowers the seizure threshold and, in the severe form, impairs the developing brain.",
-  "additionalDifferentials": [
-   "SCN1A-related GEFS+ and Dravet syndrome",
-   "SCN1A and GABRG2 febrile seizure spectrum disorders",
-   "PCDH19 clustering epilepsy",
-   "HCN1-related Dravet-like epilepsy",
-   "Genetic generalised epilepsies",
-   "Other genetic causes of febrile-seizure-associated epilepsy"
-  ],
-  "additionalInvestigations": [
-   "Epilepsy gene panel or whole-exome sequencing, noting zygosity to distinguish GEFS+ from the biallelic Dravet-like phenotype",
-   "Electroencephalography to characterise generalised and focal features",
-   "Brain magnetic resonance imaging to exclude structural causes in severe presentations",
-   "Detailed family history and segregation analysis for the dominant GEFS+ spectrum",
-   "Developmental assessment in the severe phenotype",
-   "Seizure and fever-trigger documentation"
-  ],
-  "redFlags": [
-   "Prolonged febrile-triggered seizures or febrile status epilepticus",
-   "Developmental regression in the biallelic Dravet-like phenotype",
-   "Drug-resistant mixed seizures",
-   "Features suggesting sudden unexpected death in epilepsy risk"
-  ],
-  "prognosis": "Heterozygous GEFS+ often has a favourable outcome with age-limited febrile seizures and normal cognition, whereas the biallelic Dravet-like encephalopathy carries drug-resistant seizures and developmental impairment.",
-  "pitfalls": [
-   "Not checking zygosity, which distinguishes the mild dominant spectrum from severe recessive disease",
-   "Applying sodium-channel-blocker therapy indiscriminately in the Dravet-like phenotype",
-   "Anchoring on SCN1A and missing SCN1B in a GEFS+ family",
-   "Underestimating fever sensitivity and prolonged-seizure risk"
-  ],
-  "references": [
-   "GeneReviews and OMIM resources on SCN1B-related epilepsy and GEFS+",
-   "ILAE resources on genetic epilepsy with febrile seizures plus"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Control seizures in the severe phenotype with broad-spectrum antiseizure medication such as sodium valproate, levetiracetam, or clobazam",
-   "Use sodium-channel-blocking agents cautiously in the biallelic Dravet-like phenotype, where they may be poorly tolerated",
-   "Treat fever promptly with antipyretics, since fever lowers the seizure threshold and provokes prolonged seizures",
-   "Provide a rescue benzodiazepine protocol for prolonged seizures and counsel families on managing status epilepticus",
-   "Undertake developmental surveillance and early intervention in the severe encephalopathy",
-   "Offer genetic counselling with family segregation analysis, distinguishing dominant GEFS+ from biallelic disease",
-   "Refer to paediatric neurology and epileptology for phenotype-guided drug selection"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "scn1b_epilepsy-pathway",
-   "title": "SCN1B-related epilepsy (GEFS+/Dravet-like): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by variants in SCN1B, which encodes the beta1 auxiliary subunit of the voltage-gated sodium channel that modulates channel gating, trafficking, and cell adhesion",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Prolonged febrile-triggered seizures or febrile status epilepticus",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Epilepsy gene panel or whole-exome sequencing, noting zygosity to distinguish GEFS+ from the biallelic Dravet-like phenotype, Electroencephalography to characterise generalised and focal features, Brain magnetic resonance"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Control seizures in the severe phenotype with broad-spectrum antiseizure medication such as sodium valproate, levetiracetam, or clobazam"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Not checking zygosity, which distinguishes the mild dominant spectrum from severe recessive disease"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of scn1b-related epilepsy (gefs+/dravet-like)."
-  }
- ],
- "tables": [
-  {
-   "id": "scn1b_epilepsy-matrix",
-   "title": "SCN1B-related epilepsy (GEFS+/Dravet-like): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by variants in SCN1B, which encodes the beta1 auxiliary subunit of the voltage-gated sodium channel that modulates channel",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurogenetics",
+  "specialty": "Neurology / Epileptology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / ILAE",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by variants in SCN1B, which encodes the beta1 auxiliary subunit of the voltage-gated sodium channel that modulates channel gating, trafficking, and cell adhesion",
+      "Heterozygous variants classically cause genetic epilepsy with febrile seizures plus (GEFS+), an autosomal dominant familial spectrum with variable severity",
+      "Biallelic (homozygous or compound heterozygous) loss-of-function variants can cause a severe early infantile Dravet-like developmental and epileptic encephalopathy",
+      "The GEFS+ spectrum includes simple febrile seizures, febrile seizures persisting beyond the usual age, and afebrile generalised or focal seizures within the same family",
+      "Fever sensitivity and prolonged seizures are recurrent features, overlapping clinically with SCN1A-related disorders",
+      "Because the beta subunit modulates neuronal sodium channels, disturbed channel function alters excitability, and antiseizure choice should account for the Dravet-like overlap where sodium-channel blockers may be poorly tolerated in the severe phenotype",
+      "The severe biallelic phenotype carries developmental impairment and, as with related sodium-channel epilepsies, attention to sudden unexpected death in epilepsy risk"
     ],
-    [
-     "Key Investigations",
-     "Epilepsy gene panel or whole-exome sequencing, noting zygosity to distinguish GEFS+ from the biallelic Dravet-like phenotype,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "SCN1B encodes the beta1 subunit of the voltage-gated sodium channel, an auxiliary transmembrane protein that regulates the gating kinetics, surface trafficking, and localisation of the pore-forming alpha subunits and also functions as a cell-adhesion molecule influencing neuronal development. Heterozygous variants partially disturb sodium channel behaviour and produce the variable GEFS+ spectrum, while complete loss of beta1 function from biallelic variants more profoundly deranges channel regulation, resulting in the severe Dravet-like encephalopathy. The consequent instability of neuronal firing, particularly under the stress of fever, lowers the seizure threshold and, in the severe form, impairs the developing brain.",
+    "additionalDifferentials": [
+      "SCN1A-related GEFS+ and Dravet syndrome",
+      "SCN1A and GABRG2 febrile seizure spectrum disorders",
+      "PCDH19 clustering epilepsy",
+      "HCN1-related Dravet-like epilepsy",
+      "Genetic generalised epilepsies",
+      "Other genetic causes of febrile-seizure-associated epilepsy"
     ],
-    [
-     "Primary Differentials",
-     "SCN1A-related GEFS+ and Dravet syndrome, SCN1A and GABRG2 febrile seizure spectrum disorders, PCDH19 clustering epilepsy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Epilepsy gene panel or whole-exome sequencing, noting zygosity to distinguish GEFS+ from the biallelic Dravet-like phenotype",
+      "Electroencephalography to characterise generalised and focal features",
+      "Brain magnetic resonance imaging to exclude structural causes in severe presentations",
+      "Detailed family history and segregation analysis for the dominant GEFS+ spectrum",
+      "Developmental assessment in the severe phenotype",
+      "Seizure and fever-trigger documentation"
     ],
-    [
-     "Management Strategy",
-     "Control seizures in the severe phenotype with broad-spectrum antiseizure medication such as sodium valproate, levetiracetam, or",
-     "Core treatment modality"
+    "redFlags": [
+      "Prolonged febrile-triggered seizures or febrile status epilepticus",
+      "Developmental regression in the biallelic Dravet-like phenotype",
+      "Drug-resistant mixed seizures",
+      "Features suggesting sudden unexpected death in epilepsy risk"
     ],
-    [
-     "Clinical Pitfall",
-     "Not checking zygosity, which distinguishes the mild dominant spectrum from severe recessive disease",
-     "Prevent diagnostic or management error"
+    "prognosis": "Heterozygous GEFS+ often has a favourable outcome with age-limited febrile seizures and normal cognition, whereas the biallelic Dravet-like encephalopathy carries drug-resistant seizures and developmental impairment.",
+    "pitfalls": [
+      "Not checking zygosity, which distinguishes the mild dominant spectrum from severe recessive disease",
+      "Applying sodium-channel-blocker therapy indiscriminately in the Dravet-like phenotype",
+      "Anchoring on SCN1A and missing SCN1B in a GEFS+ family",
+      "Underestimating fever sensitivity and prolonged-seizure risk"
+    ],
+    "references": [
+      "GeneReviews and OMIM resources on SCN1B-related epilepsy and GEFS+",
+      "ILAE resources on genetic epilepsy with febrile seizures plus"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Control seizures in the severe phenotype with broad-spectrum antiseizure medication such as sodium valproate, levetiracetam, or clobazam",
+      "Use sodium-channel-blocking agents cautiously in the biallelic Dravet-like phenotype, where they may be poorly tolerated",
+      "Treat fever promptly with antipyretics, since fever lowers the seizure threshold and provokes prolonged seizures",
+      "Provide a rescue benzodiazepine protocol for prolonged seizures and counsel families on managing status epilepticus",
+      "Undertake developmental surveillance and early intervention in the severe encephalopathy",
+      "Offer genetic counselling with family segregation analysis, distinguishing dominant GEFS+ from biallelic disease",
+      "Refer to paediatric neurology and epileptology for phenotype-guided drug selection"
     ]
-   ],
-   "caption": "Overview comparison matrix for scn1b-related epilepsy (gefs+/dravet-like)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "scn1b-epilepsy-real-image",
-   "title": "SCN1B-related epilepsy (GEFS+/Dravet-like): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "scn1b_epilepsy-pathway",
+      "title": "SCN1B-related epilepsy (GEFS+/Dravet-like): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by variants in SCN1B, which encodes the beta1 auxiliary subunit of the voltage-gated sodium channel that modulates channel gating, trafficking, and cell adhesion",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Prolonged febrile-triggered seizures or febrile status epilepticus",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Epilepsy gene panel or whole-exome sequencing, noting zygosity to distinguish GEFS+ from the biallelic Dravet-like phenotype, Electroencephalography to characterise generalised and focal features, Brain magnetic resonance"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Control seizures in the severe phenotype with broad-spectrum antiseizure medication such as sodium valproate, levetiracetam, or clobazam"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Not checking zygosity, which distinguishes the mild dominant spectrum from severe recessive disease"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of scn1b-related epilepsy (gefs+/dravet-like)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "scn1b_epilepsy-matrix",
+      "title": "SCN1B-related epilepsy (GEFS+/Dravet-like): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by variants in SCN1B, which encodes the beta1 auxiliary subunit of the voltage-gated sodium channel that modulates channel",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Epilepsy gene panel or whole-exome sequencing, noting zygosity to distinguish GEFS+ from the biallelic Dravet-like phenotype,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "SCN1A-related GEFS+ and Dravet syndrome, SCN1A and GABRG2 febrile seizure spectrum disorders, PCDH19 clustering epilepsy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Control seizures in the severe phenotype with broad-spectrum antiseizure medication such as sodium valproate, levetiracetam, or",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Not checking zygosity, which distinguishes the mild dominant spectrum from severe recessive disease",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for scn1b-related epilepsy (gefs+/dravet-like)."
+    }
+  ],
+  "diagrams": []
 }

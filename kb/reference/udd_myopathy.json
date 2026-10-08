@@ -1,176 +1,154 @@
 {
- "id": "udd_myopathy",
- "name": "Udd distal myopathy / tibial muscular dystrophy (titin)",
- "aliases": [
-  "tibial muscular dystrophy",
-  "TMD",
-  "Udd distal myopathy",
-  "titinopathy",
-  "TTN-related distal myopathy",
-  "Finnish distal myopathy"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neuromuscular",
- "specialty": "Neurology / Neuromuscular",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff Neurology in Clinical Practice / GeneReviews",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An autosomal dominant late-onset distal myopathy caused by variants in the C-terminal (M-line) region of the titin gene (TTN), with a well-described Finnish founder mutation",
-   "Onset is usually after the age of 35-40 years, with slowly progressive weakness of the anterior lower-leg muscles, particularly the tibialis anterior, causing foot drop",
-   "Weakness and atrophy are often relatively selective for the tibialis anterior on imaging, with the deep posterior and other compartments spared until later",
-   "Heterozygotes typically have a mild distal phenotype and retain ambulation, whereas homozygous or compound heterozygous TTN variants cause a severe limb-girdle muscular dystrophy (LGMD R10, formerly LGMD2J)",
-   "Creatine kinase is normal or mildly elevated and electromyography confirms a myopathic process",
-   "Muscle biopsy shows dystrophic or myopathic changes, often with rimmed vacuoles",
-   "Muscle MRI demonstrating selective anterior tibial involvement is a useful diagnostic pointer",
-   "Diagnosis rests on the anterior-compartment distal weakness pattern together with TTN genetic testing"
+  "id": "udd_myopathy",
+  "name": "Udd distal myopathy / tibial muscular dystrophy (titin)",
+  "aliases": [
+    "tibial muscular dystrophy",
+    "TMD",
+    "Udd distal myopathy",
+    "titinopathy",
+    "TTN-related distal myopathy",
+    "Finnish distal myopathy"
   ],
-  "pathophysiology": "Udd myopathy results from dominant variants affecting the C-terminal M-line region of titin, the giant sarcomeric protein that spans from the Z-disc to the M-line and provides passive elasticity and a scaffold for sarcomere assembly and signalling. Mutations disrupt the interaction of titin with M-line binding partners such as calpain-3, impairing sarcomeric integrity and maintenance. The anterior lower-leg muscles are affected earliest, producing distal weakness and foot drop, while a double dose of TTN variants causes more widespread muscle breakdown and a severe limb-girdle phenotype.",
-  "additionalDifferentials": [
-   "Laing distal myopathy and other anterior-compartment distal myopathies",
-   "Charcot-Marie-Tooth disease and peroneal neuropathy causing foot drop",
-   "Inclusion body myositis",
-   "Myotonic dystrophy",
-   "L5 radiculopathy or common peroneal nerve palsy",
-   "Distal spinal muscular atrophy"
-  ],
-  "additionalInvestigations": [
-   "Serum creatine kinase",
-   "Nerve conduction studies and electromyography to distinguish myopathy from neuropathy",
-   "Muscle MRI showing selective tibialis anterior involvement",
-   "Muscle biopsy for dystrophic changes and rimmed vacuoles",
-   "Targeted TTN M-line sequencing or a comprehensive distal myopathy/LGMD panel",
-   "Family evaluation given dominant inheritance and the severe recessive limb-girdle phenotype"
-  ],
-  "redFlags": [
-   "Severe early-onset generalised weakness suggesting a homozygous limb-girdle titinopathy",
-   "Cardiac symptoms, since some TTN variants are associated with cardiomyopathy",
-   "Respiratory muscle weakness with declining vital capacity",
-   "Rapid progression atypical for the classic heterozygous phenotype"
-  ],
-  "prognosis": "The heterozygous tibial muscular dystrophy phenotype progresses slowly, and most patients retain independent walking with a normal lifespan; homozygous or compound heterozygous disease produces a much more severe, disabling limb-girdle muscular dystrophy.",
-  "pitfalls": [
-   "Mistaking the foot drop for a peroneal nerve palsy or radiculopathy",
-   "Failing to consider a severe recessive titinopathy in relatives when counselling families",
-   "Assuming normal creatine kinase excludes myopathy",
-   "Overlooking possible cardiac involvement associated with certain titin variants"
-  ],
-  "references": [
-   "Bradley and Daroff Neurology in Clinical Practice",
-   "GeneReviews: Udd distal myopathy / titinopathy"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No disease-specific pharmacotherapy exists, so care centres on physiotherapy and a stretching programme to preserve ankle range and function against the tibialis anterior weakness",
-   "Ankle-foot orthoses to correct foot drop and improve gait stability and safety",
-   "Occupational therapy and mobility aids to maintain independence as distal weakness progresses",
-   "Respiratory and cardiac assessment, particularly in the severe homozygous or compound heterozygous limb-girdle phenotype where more widespread muscle involvement occurs",
-   "Multidisciplinary follow-up through a neuromuscular clinic with periodic reassessment of functional status",
-   "Genetic counselling and family evaluation given autosomal dominant inheritance and the severe recessive limb-girdle phenotype in offspring of two carriers"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "udd_myopathy-pathway",
-   "title": "Udd distal myopathy / tibial muscular dystrophy (titin): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autosomal dominant late-onset distal myopathy caused by variants in the C-terminal (M-line) region of the titin gene (TTN), with a well-described Finnish founder mutation",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe early-onset generalised weakness suggesting a homozygous limb-girdle titinopathy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum creatine kinase, Nerve conduction studies and electromyography to distinguish myopathy from neuropathy, Muscle MRI showing selective tibialis anterior involvement"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No disease-specific pharmacotherapy exists, so care centres on physiotherapy and a stretching programme to preserve ankle range and function against the tibialis anterior weakness"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking the foot drop for a peroneal nerve palsy or radiculopathy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of udd distal myopathy / tibial muscular dystrophy (titin)."
-  }
- ],
- "tables": [
-  {
-   "id": "udd_myopathy-matrix",
-   "title": "Udd distal myopathy / tibial muscular dystrophy (titin): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autosomal dominant late-onset distal myopathy caused by variants in the C-terminal (M-line) region of the titin gene (TTN),",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neuromuscular",
+  "specialty": "Neurology / Neuromuscular",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff Neurology in Clinical Practice / GeneReviews",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An autosomal dominant late-onset distal myopathy caused by variants in the C-terminal (M-line) region of the titin gene (TTN), with a well-described Finnish founder mutation",
+      "Onset is usually after the age of 35-40 years, with slowly progressive weakness of the anterior lower-leg muscles, particularly the tibialis anterior, causing foot drop",
+      "Weakness and atrophy are often relatively selective for the tibialis anterior on imaging, with the deep posterior and other compartments spared until later",
+      "Heterozygotes typically have a mild distal phenotype and retain ambulation, whereas homozygous or compound heterozygous TTN variants cause a severe limb-girdle muscular dystrophy (LGMD R10, formerly LGMD2J)",
+      "Creatine kinase is normal or mildly elevated and electromyography confirms a myopathic process",
+      "Muscle biopsy shows dystrophic or myopathic changes, often with rimmed vacuoles",
+      "Muscle MRI demonstrating selective anterior tibial involvement is a useful diagnostic pointer",
+      "Diagnosis rests on the anterior-compartment distal weakness pattern together with TTN genetic testing"
     ],
-    [
-     "Key Investigations",
-     "Serum creatine kinase, Nerve conduction studies and electromyography to distinguish myopathy from neuropathy, Muscle MRI showing",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Udd myopathy results from dominant variants affecting the C-terminal M-line region of titin, the giant sarcomeric protein that spans from the Z-disc to the M-line and provides passive elasticity and a scaffold for sarcomere assembly and signalling. Mutations disrupt the interaction of titin with M-line binding partners such as calpain-3, impairing sarcomeric integrity and maintenance. The anterior lower-leg muscles are affected earliest, producing distal weakness and foot drop, while a double dose of TTN variants causes more widespread muscle breakdown and a severe limb-girdle phenotype.",
+    "additionalDifferentials": [
+      "Laing distal myopathy and other anterior-compartment distal myopathies",
+      "Charcot-Marie-Tooth disease and peroneal neuropathy causing foot drop",
+      "Inclusion body myositis",
+      "Myotonic dystrophy",
+      "L5 radiculopathy or common peroneal nerve palsy",
+      "Distal spinal muscular atrophy"
     ],
-    [
-     "Primary Differentials",
-     "Laing distal myopathy and other anterior-compartment distal myopathies, Charcot-Marie-Tooth disease and peroneal neuropathy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum creatine kinase",
+      "Nerve conduction studies and electromyography to distinguish myopathy from neuropathy",
+      "Muscle MRI showing selective tibialis anterior involvement",
+      "Muscle biopsy for dystrophic changes and rimmed vacuoles",
+      "Targeted TTN M-line sequencing or a comprehensive distal myopathy/LGMD panel",
+      "Family evaluation given dominant inheritance and the severe recessive limb-girdle phenotype"
     ],
-    [
-     "Management Strategy",
-     "No disease-specific pharmacotherapy exists, so care centres on physiotherapy and a stretching programme to preserve ankle range",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe early-onset generalised weakness suggesting a homozygous limb-girdle titinopathy",
+      "Cardiac symptoms, since some TTN variants are associated with cardiomyopathy",
+      "Respiratory muscle weakness with declining vital capacity",
+      "Rapid progression atypical for the classic heterozygous phenotype"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking the foot drop for a peroneal nerve palsy or radiculopathy",
-     "Prevent diagnostic or management error"
+    "prognosis": "The heterozygous tibial muscular dystrophy phenotype progresses slowly, and most patients retain independent walking with a normal lifespan; homozygous or compound heterozygous disease produces a much more severe, disabling limb-girdle muscular dystrophy.",
+    "pitfalls": [
+      "Mistaking the foot drop for a peroneal nerve palsy or radiculopathy",
+      "Failing to consider a severe recessive titinopathy in relatives when counselling families",
+      "Assuming normal creatine kinase excludes myopathy",
+      "Overlooking possible cardiac involvement associated with certain titin variants"
+    ],
+    "references": [
+      "Bradley and Daroff Neurology in Clinical Practice",
+      "GeneReviews: Udd distal myopathy / titinopathy"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No disease-specific pharmacotherapy exists, so care centres on physiotherapy and a stretching programme to preserve ankle range and function against the tibialis anterior weakness",
+      "Ankle-foot orthoses to correct foot drop and improve gait stability and safety",
+      "Occupational therapy and mobility aids to maintain independence as distal weakness progresses",
+      "Respiratory and cardiac assessment, particularly in the severe homozygous or compound heterozygous limb-girdle phenotype where more widespread muscle involvement occurs",
+      "Multidisciplinary follow-up through a neuromuscular clinic with periodic reassessment of functional status",
+      "Genetic counselling and family evaluation given autosomal dominant inheritance and the severe recessive limb-girdle phenotype in offspring of two carriers"
     ]
-   ],
-   "caption": "Overview comparison matrix for udd distal myopathy / tibial muscular dystrophy (titin)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "udd-myopathy-real-image",
-   "title": "Udd distal myopathy / tibial muscular dystrophy (titin): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "udd_myopathy-pathway",
+      "title": "Udd distal myopathy / tibial muscular dystrophy (titin): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autosomal dominant late-onset distal myopathy caused by variants in the C-terminal (M-line) region of the titin gene (TTN), with a well-described Finnish founder mutation",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe early-onset generalised weakness suggesting a homozygous limb-girdle titinopathy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum creatine kinase, Nerve conduction studies and electromyography to distinguish myopathy from neuropathy, Muscle MRI showing selective tibialis anterior involvement"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No disease-specific pharmacotherapy exists, so care centres on physiotherapy and a stretching programme to preserve ankle range and function against the tibialis anterior weakness"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking the foot drop for a peroneal nerve palsy or radiculopathy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of udd distal myopathy / tibial muscular dystrophy (titin)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "udd_myopathy-matrix",
+      "title": "Udd distal myopathy / tibial muscular dystrophy (titin): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autosomal dominant late-onset distal myopathy caused by variants in the C-terminal (M-line) region of the titin gene (TTN),",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum creatine kinase, Nerve conduction studies and electromyography to distinguish myopathy from neuropathy, Muscle MRI showing",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Laing distal myopathy and other anterior-compartment distal myopathies, Charcot-Marie-Tooth disease and peroneal neuropathy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No disease-specific pharmacotherapy exists, so care centres on physiotherapy and a stretching programme to preserve ankle range",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking the foot drop for a peroneal nerve palsy or radiculopathy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for udd distal myopathy / tibial muscular dystrophy (titin)."
+    }
+  ],
+  "diagrams": []
 }

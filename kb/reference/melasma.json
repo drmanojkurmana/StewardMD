@@ -1,171 +1,149 @@
 {
- "id": "melasma",
- "name": "Melasma",
- "aliases": [
-  "chloasma",
-  "mask of pregnancy",
-  "melasma faciei"
- ],
- "class": "non_infective",
- "system": "Skin / Dermatology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents as symmetrical, poorly defined brown to grey-brown patches on sun-exposed facial skin, typically the cheeks, forehead, upper lip, and chin",
-   "It is far more common in women and in people with darker skin phototypes, and often follows pregnancy or hormonal exposure",
-   "Recognised patterns are centrofacial, malar, and mandibular; a similar eruption can also occur on the forearms",
-   "Wood's lamp examination can help gauge the depth of pigment, with epidermal pigment enhanced and dermal pigment less so, which influences treatment expectations",
-   "Ultraviolet and visible light, including screen and heat exposure, are major drivers, so broad-spectrum photoprotection with a tinted (iron-oxide-containing) product is the cornerstone of care",
-   "Combination topical lightening agents and gentle chemical peels can help, but aggressive procedures risk post-inflammatory hyperpigmentation, especially in darker skin",
-   "Review and, where feasible, stop contributory hormonal exposures such as combined oral contraception",
-   "Set realistic expectations: recurrence is common and lifelong sun protection and maintenance are usually needed"
+  "id": "melasma",
+  "name": "Melasma",
+  "aliases": [
+    "chloasma",
+    "mask of pregnancy",
+    "melasma faciei"
   ],
-  "pathophysiology": "Melasma reflects an acquired disorder of localised hyperpigmentation in which functionally hyperactive melanocytes deposit excess melanin in the epidermis, dermis, or both. Ultraviolet and visible light, hormonal influences (pregnancy, oestrogen), and a genetic predisposition upregulate melanogenic signalling, while an altered dermal environment with solar elastosis, increased vascularity, and a disrupted basement membrane allows pigment to drop into the dermis. This basement-membrane damage helps explain the chronic, relapsing nature and the resistance of dermal pigment to topical therapy.",
-  "additionalDifferentials": [
-   "Post-inflammatory hyperpigmentation following acne or dermatitis",
-   "Solar lentigines and other photo-induced pigmentation",
-   "Drug-induced pigmentation",
-   "Ochronosis (which can be exogenous, from overuse of hydroquinone)",
-   "Riehl's melanosis / pigmented contact dermatitis",
-   "Naevus of Ota or acquired dermal melanocytosis"
-  ],
-  "additionalInvestigations": [
-   "Primarily a clinical diagnosis supported by dermoscopy",
-   "Wood's lamp examination to help assess pigment depth",
-   "Skin biopsy only in atypical or treatment-resistant cases",
-   "Review of hormonal and drug history as part of assessment"
-  ],
-  "redFlags": [
-   "Asymmetric, irregular, or evolving pigmented lesions raising concern for melanoma rather than melasma",
-   "Rapidly darkening or nodular change within a pigmented area",
-   "Paradoxical darkening or blue-black discolouration suggesting exogenous ochronosis from prolonged skin-lightening use"
-  ],
-  "prognosis": "Melasma is typically chronic and relapsing; pregnancy-related disease may fade after delivery, but many patients experience persistence or recurrence, and long-term photoprotection with maintenance therapy is usually required to sustain improvement.",
-  "pitfalls": [
-   "Neglecting visible-light protection and relying only on conventional UV sunscreen",
-   "Provoking post-inflammatory hyperpigmentation with overly aggressive peels or lasers in darker skin",
-   "Causing exogenous ochronosis through prolonged, unsupervised use of skin-lightening agents",
-   "Promising a permanent cure rather than emphasising control and maintenance"
-  ],
-  "references": [
-   "Fitzpatrick's Dermatology",
-   "Rook's Textbook of Dermatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Apply rigorous broad-spectrum photoprotection with a tinted iron-oxide-containing sunscreen shielding against both ultraviolet and visible light as the cornerstone",
-   "Prescribe topical lightening therapy with hydroquinone, or a triple combination of hydroquinone, a retinoid and a corticosteroid, with alternatives such as azelaic acid or cysteamine",
-   "Use oral tranexamic acid for resistant or extensive disease",
-   "Add gentle superficial chemical peels as an adjunct, avoiding aggressive procedures that risk post-inflammatory hyperpigmentation",
-   "Identify and remove hormonal triggers such as combined oral contraceptives where feasible",
-   "Use laser and energy devices cautiously, particularly in darker skin phototypes",
-   "Continue long-term maintenance therapy and sustained photoprotection given the chronic relapsing course"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "melasma-pathway",
-   "title": "Melasma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents as symmetrical, poorly defined brown to grey-brown patches on sun-exposed facial skin, typically the cheeks, forehead, upper lip, and chin",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Asymmetric, irregular, or evolving pigmented lesions raising concern for melanoma rather than melasma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Primarily a clinical diagnosis supported by dermoscopy, Wood's lamp examination to help assess pigment depth, Skin biopsy only in atypical or treatment-resistant cases"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Apply rigorous broad-spectrum photoprotection with a tinted iron-oxide-containing sunscreen shielding against both ultraviolet and visible light as the cornerstone"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Neglecting visible-light protection and relying only on conventional UV sunscreen"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of melasma."
-  }
- ],
- "tables": [
-  {
-   "id": "melasma-matrix",
-   "title": "Melasma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents as symmetrical, poorly defined brown to grey-brown patches on sun-exposed facial skin, typically the cheeks, forehead,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Skin / Dermatology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents as symmetrical, poorly defined brown to grey-brown patches on sun-exposed facial skin, typically the cheeks, forehead, upper lip, and chin",
+      "It is far more common in women and in people with darker skin phototypes, and often follows pregnancy or hormonal exposure",
+      "Recognised patterns are centrofacial, malar, and mandibular; a similar eruption can also occur on the forearms",
+      "Wood's lamp examination can help gauge the depth of pigment, with epidermal pigment enhanced and dermal pigment less so, which influences treatment expectations",
+      "Ultraviolet and visible light, including screen and heat exposure, are major drivers, so broad-spectrum photoprotection with a tinted (iron-oxide-containing) product is the cornerstone of care",
+      "Combination topical lightening agents and gentle chemical peels can help, but aggressive procedures risk post-inflammatory hyperpigmentation, especially in darker skin",
+      "Review and, where feasible, stop contributory hormonal exposures such as combined oral contraception",
+      "Set realistic expectations: recurrence is common and lifelong sun protection and maintenance are usually needed"
     ],
-    [
-     "Key Investigations",
-     "Primarily a clinical diagnosis supported by dermoscopy, Wood's lamp examination to help assess pigment depth, Skin biopsy only in",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Melasma reflects an acquired disorder of localised hyperpigmentation in which functionally hyperactive melanocytes deposit excess melanin in the epidermis, dermis, or both. Ultraviolet and visible light, hormonal influences (pregnancy, oestrogen), and a genetic predisposition upregulate melanogenic signalling, while an altered dermal environment with solar elastosis, increased vascularity, and a disrupted basement membrane allows pigment to drop into the dermis. This basement-membrane damage helps explain the chronic, relapsing nature and the resistance of dermal pigment to topical therapy.",
+    "additionalDifferentials": [
+      "Post-inflammatory hyperpigmentation following acne or dermatitis",
+      "Solar lentigines and other photo-induced pigmentation",
+      "Drug-induced pigmentation",
+      "Ochronosis (which can be exogenous, from overuse of hydroquinone)",
+      "Riehl's melanosis / pigmented contact dermatitis",
+      "Naevus of Ota or acquired dermal melanocytosis"
     ],
-    [
-     "Primary Differentials",
-     "Post-inflammatory hyperpigmentation following acne or dermatitis, Solar lentigines and other photo-induced pigmentation,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Primarily a clinical diagnosis supported by dermoscopy",
+      "Wood's lamp examination to help assess pigment depth",
+      "Skin biopsy only in atypical or treatment-resistant cases",
+      "Review of hormonal and drug history as part of assessment"
     ],
-    [
-     "Management Strategy",
-     "Apply rigorous broad-spectrum photoprotection with a tinted iron-oxide-containing sunscreen shielding against both ultraviolet",
-     "Core treatment modality"
+    "redFlags": [
+      "Asymmetric, irregular, or evolving pigmented lesions raising concern for melanoma rather than melasma",
+      "Rapidly darkening or nodular change within a pigmented area",
+      "Paradoxical darkening or blue-black discolouration suggesting exogenous ochronosis from prolonged skin-lightening use"
     ],
-    [
-     "Clinical Pitfall",
-     "Neglecting visible-light protection and relying only on conventional UV sunscreen",
-     "Prevent diagnostic or management error"
+    "prognosis": "Melasma is typically chronic and relapsing; pregnancy-related disease may fade after delivery, but many patients experience persistence or recurrence, and long-term photoprotection with maintenance therapy is usually required to sustain improvement.",
+    "pitfalls": [
+      "Neglecting visible-light protection and relying only on conventional UV sunscreen",
+      "Provoking post-inflammatory hyperpigmentation with overly aggressive peels or lasers in darker skin",
+      "Causing exogenous ochronosis through prolonged, unsupervised use of skin-lightening agents",
+      "Promising a permanent cure rather than emphasising control and maintenance"
+    ],
+    "references": [
+      "Fitzpatrick's Dermatology",
+      "Rook's Textbook of Dermatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Apply rigorous broad-spectrum photoprotection with a tinted iron-oxide-containing sunscreen shielding against both ultraviolet and visible light as the cornerstone",
+      "Prescribe topical lightening therapy with hydroquinone, or a triple combination of hydroquinone, a retinoid and a corticosteroid, with alternatives such as azelaic acid or cysteamine",
+      "Use oral tranexamic acid for resistant or extensive disease",
+      "Add gentle superficial chemical peels as an adjunct, avoiding aggressive procedures that risk post-inflammatory hyperpigmentation",
+      "Identify and remove hormonal triggers such as combined oral contraceptives where feasible",
+      "Use laser and energy devices cautiously, particularly in darker skin phototypes",
+      "Continue long-term maintenance therapy and sustained photoprotection given the chronic relapsing course"
     ]
-   ],
-   "caption": "Overview comparison matrix for melasma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "melasma-real-image",
-   "title": "Melasma: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "melasma-pathway",
+      "title": "Melasma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents as symmetrical, poorly defined brown to grey-brown patches on sun-exposed facial skin, typically the cheeks, forehead, upper lip, and chin",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Asymmetric, irregular, or evolving pigmented lesions raising concern for melanoma rather than melasma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Primarily a clinical diagnosis supported by dermoscopy, Wood's lamp examination to help assess pigment depth, Skin biopsy only in atypical or treatment-resistant cases"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Apply rigorous broad-spectrum photoprotection with a tinted iron-oxide-containing sunscreen shielding against both ultraviolet and visible light as the cornerstone"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Neglecting visible-light protection and relying only on conventional UV sunscreen"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of melasma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "melasma-matrix",
+      "title": "Melasma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents as symmetrical, poorly defined brown to grey-brown patches on sun-exposed facial skin, typically the cheeks, forehead,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Primarily a clinical diagnosis supported by dermoscopy, Wood's lamp examination to help assess pigment depth, Skin biopsy only in",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Post-inflammatory hyperpigmentation following acne or dermatitis, Solar lentigines and other photo-induced pigmentation,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Apply rigorous broad-spectrum photoprotection with a tinted iron-oxide-containing sunscreen shielding against both ultraviolet",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Neglecting visible-light protection and relying only on conventional UV sunscreen",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for melasma."
+    }
+  ],
+  "diagrams": []
 }

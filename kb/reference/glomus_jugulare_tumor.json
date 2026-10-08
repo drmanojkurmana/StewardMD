@@ -1,174 +1,152 @@
 {
- "id": "glomus_jugulare_tumor",
- "name": "Glomus jugulare tumour (jugular paraganglioma)",
- "aliases": [
-  "jugular paraganglioma",
-  "glomus jugulare paraganglioma",
-  "jugulotympanic paraganglioma",
-  "chemodectoma of the jugular bulb"
- ],
- "class": "non_infective",
- "system": "Ear-Nose-Throat / Head and Neck",
- "specialty": "Otolaryngology",
- "referenceOnly": true,
- "reference": {
-  "source": "Cummings Otolaryngology - Head and Neck Surgery",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A slow-growing, highly vascular paraganglioma arising from paraganglionic tissue around the jugular bulb at the skull base",
-   "Pulsatile tinnitus and conductive hearing loss are common early symptoms, often with a red-blue retrotympanic mass behind the eardrum",
-   "Growth into the jugular foramen produces lower cranial nerve palsies (glossopharyngeal, vagus, accessory and hypoglossal), the jugular foramen syndrome",
-   "A minority are functionally active and secrete catecholamines, so a secretory phenotype should be screened for before intervention",
-   "Multiple or familial paragangliomas occur, particularly with succinate dehydrogenase gene mutations, warranting genetic evaluation",
-   "MRI classically shows a 'salt-and-pepper' appearance from flow voids, while CT demonstrates the irregular, moth-eaten erosion of the jugular foramen",
-   "Because of intense vascularity, biopsy is generally avoided and preoperative angiography with embolisation is often used before surgery",
-   "Management is individualised between microsurgical resection, stereotactic radiosurgery or radiotherapy, and observation, balancing tumour control against cranial nerve morbidity"
+  "id": "glomus_jugulare_tumor",
+  "name": "Glomus jugulare tumour (jugular paraganglioma)",
+  "aliases": [
+    "jugular paraganglioma",
+    "glomus jugulare paraganglioma",
+    "jugulotympanic paraganglioma",
+    "chemodectoma of the jugular bulb"
   ],
-  "pathophysiology": "Glomus jugulare tumours are paragangliomas derived from neural-crest paraganglion cells associated with the autonomic nervous system near the jugular bulb and adjacent Jacobson and Arnold nerves. They are typically benign but locally invasive, spreading along paths of least resistance through the temporal bone, jugular foramen and middle ear, and eroding bone as they enlarge. Their rich vascularity accounts for the pulsatile tinnitus and the risk of haemorrhage with biopsy. A subset secrete catecholamines, and germline mutations, especially in succinate dehydrogenase subunit genes, predispose to multifocal and familial disease.",
-  "additionalDifferentials": [
-   "Glomus tympanicum tumour confined to the middle ear",
-   "Aberrant internal carotid artery or high jugular bulb",
-   "Meningioma or schwannoma of the jugular foramen",
-   "Cholesteatoma or chronic otitis media",
-   "Endolymphatic sac tumour",
-   "Metastasis or other skull-base malignancy"
-  ],
-  "additionalInvestigations": [
-   "MRI of the skull base showing characteristic flow voids",
-   "High-resolution temporal bone CT to assess bony erosion of the jugular foramen",
-   "Catecholamine and metanephrine screening to detect a secretory tumour",
-   "Angiography with consideration of preoperative embolisation",
-   "Genetic testing for succinate dehydrogenase and related mutations, with screening for multifocal disease"
-  ],
-  "redFlags": [
-   "Progressive lower cranial nerve palsies causing hoarseness, dysphagia or aspiration",
-   "Symptoms or biochemical evidence of catecholamine secretion",
-   "Intracranial extension with brainstem or cerebellar compression",
-   "Rapid growth or features suggesting rare malignant paraganglioma"
-  ],
-  "prognosis": "As a predominantly benign but locally aggressive tumour, prognosis for survival is generally good, and slow growth may allow observation in selected older patients. Treatment aims for durable control while preserving cranial nerve function; surgery and radiotherapy each achieve high control rates, though cranial nerve deficits can be permanent and recurrence or new tumours may occur, especially in hereditary disease.",
-  "pitfalls": [
-   "Performing biopsy of a vascular retrotympanic mass and precipitating significant bleeding",
-   "Failing to screen for catecholamine secretion before surgery or embolisation",
-   "Overlooking a hereditary syndrome and coexisting paragangliomas or phaeochromocytoma",
-   "Underestimating the cranial nerve morbidity of aggressive resection in slow-growing tumours"
-  ],
-  "references": [
-   "Cummings Otolaryngology - Head and Neck Surgery",
-   "Scott-Brown's Otorhinolaryngology, Head and Neck Surgery"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Microsurgical resection for definitive control, or stereotactic radiosurgery and radiotherapy to achieve tumour control while preserving cranial nerve function",
-   "Observation with serial imaging is reasonable for small, slow-growing tumours in older or comorbid patients",
-   "Preoperative angiography with embolisation to reduce the vascularity and bleeding risk of resection",
-   "Screen for catecholamine secretion and, if a secretory tumour is confirmed, establish alpha-adrenergic blockade before any intervention",
-   "Cranial nerve rehabilitation with swallowing and voice therapy for the lower cranial nerve deficits of jugular foramen syndrome",
-   "Offer genetic testing for succinate dehydrogenase mutations with screening for multifocal or familial paraganglioma",
-   "Manage through a skull base multidisciplinary team with long-term surveillance imaging"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "glomus_jugulare_tumor-pathway",
-   "title": "Glomus jugulare tumour (jugular paraganglioma): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A slow-growing, highly vascular paraganglioma arising from paraganglionic tissue around the jugular bulb at the skull base",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive lower cranial nerve palsies causing hoarseness, dysphagia or aspiration",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI of the skull base showing characteristic flow voids, High-resolution temporal bone CT to assess bony erosion of the jugular foramen, Catecholamine and metanephrine screening to detect a secretory tumour"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Microsurgical resection for definitive control, or stereotactic radiosurgery and radiotherapy to achieve tumour control while preserving cranial nerve function"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Performing biopsy of a vascular retrotympanic mass and precipitating significant bleeding"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of glomus jugulare tumour (jugular paraganglioma)."
-  }
- ],
- "tables": [
-  {
-   "id": "glomus_jugulare_tumor-matrix",
-   "title": "Glomus jugulare tumour (jugular paraganglioma): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A slow-growing, highly vascular paraganglioma arising from paraganglionic tissue around the jugular bulb at the skull base",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Ear-Nose-Throat / Head and Neck",
+  "specialty": "Otolaryngology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Cummings Otolaryngology - Head and Neck Surgery",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A slow-growing, highly vascular paraganglioma arising from paraganglionic tissue around the jugular bulb at the skull base",
+      "Pulsatile tinnitus and conductive hearing loss are common early symptoms, often with a red-blue retrotympanic mass behind the eardrum",
+      "Growth into the jugular foramen produces lower cranial nerve palsies (glossopharyngeal, vagus, accessory and hypoglossal), the jugular foramen syndrome",
+      "A minority are functionally active and secrete catecholamines, so a secretory phenotype should be screened for before intervention",
+      "Multiple or familial paragangliomas occur, particularly with succinate dehydrogenase gene mutations, warranting genetic evaluation",
+      "MRI classically shows a 'salt-and-pepper' appearance from flow voids, while CT demonstrates the irregular, moth-eaten erosion of the jugular foramen",
+      "Because of intense vascularity, biopsy is generally avoided and preoperative angiography with embolisation is often used before surgery",
+      "Management is individualised between microsurgical resection, stereotactic radiosurgery or radiotherapy, and observation, balancing tumour control against cranial nerve morbidity"
     ],
-    [
-     "Key Investigations",
-     "MRI of the skull base showing characteristic flow voids, High-resolution temporal bone CT to assess bony erosion of the jugular",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Glomus jugulare tumours are paragangliomas derived from neural-crest paraganglion cells associated with the autonomic nervous system near the jugular bulb and adjacent Jacobson and Arnold nerves. They are typically benign but locally invasive, spreading along paths of least resistance through the temporal bone, jugular foramen and middle ear, and eroding bone as they enlarge. Their rich vascularity accounts for the pulsatile tinnitus and the risk of haemorrhage with biopsy. A subset secrete catecholamines, and germline mutations, especially in succinate dehydrogenase subunit genes, predispose to multifocal and familial disease.",
+    "additionalDifferentials": [
+      "Glomus tympanicum tumour confined to the middle ear",
+      "Aberrant internal carotid artery or high jugular bulb",
+      "Meningioma or schwannoma of the jugular foramen",
+      "Cholesteatoma or chronic otitis media",
+      "Endolymphatic sac tumour",
+      "Metastasis or other skull-base malignancy"
     ],
-    [
-     "Primary Differentials",
-     "Glomus tympanicum tumour confined to the middle ear, Aberrant internal carotid artery or high jugular bulb, Meningioma or",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI of the skull base showing characteristic flow voids",
+      "High-resolution temporal bone CT to assess bony erosion of the jugular foramen",
+      "Catecholamine and metanephrine screening to detect a secretory tumour",
+      "Angiography with consideration of preoperative embolisation",
+      "Genetic testing for succinate dehydrogenase and related mutations, with screening for multifocal disease"
     ],
-    [
-     "Management Strategy",
-     "Microsurgical resection for definitive control, or stereotactic radiosurgery and radiotherapy to achieve tumour control while",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive lower cranial nerve palsies causing hoarseness, dysphagia or aspiration",
+      "Symptoms or biochemical evidence of catecholamine secretion",
+      "Intracranial extension with brainstem or cerebellar compression",
+      "Rapid growth or features suggesting rare malignant paraganglioma"
     ],
-    [
-     "Clinical Pitfall",
-     "Performing biopsy of a vascular retrotympanic mass and precipitating significant bleeding",
-     "Prevent diagnostic or management error"
+    "prognosis": "As a predominantly benign but locally aggressive tumour, prognosis for survival is generally good, and slow growth may allow observation in selected older patients. Treatment aims for durable control while preserving cranial nerve function; surgery and radiotherapy each achieve high control rates, though cranial nerve deficits can be permanent and recurrence or new tumours may occur, especially in hereditary disease.",
+    "pitfalls": [
+      "Performing biopsy of a vascular retrotympanic mass and precipitating significant bleeding",
+      "Failing to screen for catecholamine secretion before surgery or embolisation",
+      "Overlooking a hereditary syndrome and coexisting paragangliomas or phaeochromocytoma",
+      "Underestimating the cranial nerve morbidity of aggressive resection in slow-growing tumours"
+    ],
+    "references": [
+      "Cummings Otolaryngology - Head and Neck Surgery",
+      "Scott-Brown's Otorhinolaryngology, Head and Neck Surgery"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Microsurgical resection for definitive control, or stereotactic radiosurgery and radiotherapy to achieve tumour control while preserving cranial nerve function",
+      "Observation with serial imaging is reasonable for small, slow-growing tumours in older or comorbid patients",
+      "Preoperative angiography with embolisation to reduce the vascularity and bleeding risk of resection",
+      "Screen for catecholamine secretion and, if a secretory tumour is confirmed, establish alpha-adrenergic blockade before any intervention",
+      "Cranial nerve rehabilitation with swallowing and voice therapy for the lower cranial nerve deficits of jugular foramen syndrome",
+      "Offer genetic testing for succinate dehydrogenase mutations with screening for multifocal or familial paraganglioma",
+      "Manage through a skull base multidisciplinary team with long-term surveillance imaging"
     ]
-   ],
-   "caption": "Overview comparison matrix for glomus jugulare tumour (jugular paraganglioma)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "glomus-jugulare-tumor-real-image",
-   "title": "Glomus jugulare tumour (jugular paraganglioma): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "glomus_jugulare_tumor-pathway",
+      "title": "Glomus jugulare tumour (jugular paraganglioma): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A slow-growing, highly vascular paraganglioma arising from paraganglionic tissue around the jugular bulb at the skull base",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive lower cranial nerve palsies causing hoarseness, dysphagia or aspiration",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI of the skull base showing characteristic flow voids, High-resolution temporal bone CT to assess bony erosion of the jugular foramen, Catecholamine and metanephrine screening to detect a secretory tumour"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Microsurgical resection for definitive control, or stereotactic radiosurgery and radiotherapy to achieve tumour control while preserving cranial nerve function"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Performing biopsy of a vascular retrotympanic mass and precipitating significant bleeding"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of glomus jugulare tumour (jugular paraganglioma)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "glomus_jugulare_tumor-matrix",
+      "title": "Glomus jugulare tumour (jugular paraganglioma): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A slow-growing, highly vascular paraganglioma arising from paraganglionic tissue around the jugular bulb at the skull base",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI of the skull base showing characteristic flow voids, High-resolution temporal bone CT to assess bony erosion of the jugular",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Glomus tympanicum tumour confined to the middle ear, Aberrant internal carotid artery or high jugular bulb, Meningioma or",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Microsurgical resection for definitive control, or stereotactic radiosurgery and radiotherapy to achieve tumour control while",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Performing biopsy of a vascular retrotympanic mass and precipitating significant bleeding",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for glomus jugulare tumour (jugular paraganglioma)."
+    }
+  ],
+  "diagrams": []
 }

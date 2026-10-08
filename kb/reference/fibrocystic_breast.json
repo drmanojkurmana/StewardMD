@@ -1,182 +1,160 @@
 {
- "id": "fibrocystic_breast",
- "name": "Fibrocystic Breast Change",
- "aliases": [
-  "fibrocystic breast change",
-  "fibrocystic breast disease",
-  "fibrocystic changes",
-  "benign breast change",
-  "cystic mastopathy"
- ],
- "class": "non_infective",
- "system": "Obstetrics / Gynaecology",
- "specialty": "Obstetrics & Gynaecology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Obstetrics / Novak's Gynecology / Campbell-Walsh Urology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Fibrocystic change is the commonest benign breast condition, presenting with lumpy, nodular, often tender breasts that vary with the menstrual cycle, typically in women of reproductive age",
-   "Symptoms characteristically worsen in the luteal (premenstrual) phase and improve after menstruation, reflecting hormonal influence on breast tissue",
-   "Examination often reveals diffuse nodularity or discrete cysts, most prominent in the upper outer quadrants, sometimes with cyclical mastalgia",
-   "It is better regarded as a physiological change than a disease, and most forms carry no increased breast cancer risk; only certain proliferative changes with atypia elevate risk",
-   "Assessment follows triple assessment principles, combining clinical examination, imaging (ultrasound in younger women, mammography in older), and needle sampling of any dominant or suspicious lump",
-   "A simple cyst confirmed on ultrasound is benign; aspiration is done for symptomatic relief or if the cyst is complex or the fluid is bloodstained",
-   "Bloodstained cyst aspirate, a residual mass after aspiration, or a rapidly recurring cyst should prompt further evaluation to exclude malignancy",
-   "Management of cyclical breast pain is largely reassurance and supportive measures such as a well-fitting supportive bra and simple analgesia, with reserved use of specific pharmacological agents for severe refractory pain",
-   "A new discrete, hard, or fixed lump, or one that does not fluctuate with the cycle, must be investigated rather than attributed to fibrocystic change"
+  "id": "fibrocystic_breast",
+  "name": "Fibrocystic Breast Change",
+  "aliases": [
+    "fibrocystic breast change",
+    "fibrocystic breast disease",
+    "fibrocystic changes",
+    "benign breast change",
+    "cystic mastopathy"
   ],
-  "pathophysiology": "Fibrocystic change reflects an exaggerated but benign response of breast stroma and epithelium to cyclical ovarian hormones. Fluctuating oestrogen and progesterone drive proliferation and involution of the terminal duct-lobular units, producing a spectrum of histological changes including cyst formation, fibrosis (stromal overgrowth), adenosis, and varying degrees of epithelial hyperplasia. Obstruction and dilatation of ducts and lobules generate fluid-filled cysts, while fibrosis produces the palpable nodularity. The hormonal cyclicity explains the premenstrual worsening of pain and swelling and improvement after menstruation.",
-  "additionalDifferentials": [
-   "Fibroadenoma",
-   "Simple or complex breast cyst",
-   "Breast carcinoma",
-   "Breast abscess or mastitis",
-   "Fat necrosis",
-   "Phyllodes tumour",
-   "Duct ectasia"
-  ],
-  "additionalInvestigations": [
-   "Clinical breast examination as part of triple assessment",
-   "Breast ultrasound, preferred in younger women, to characterise cysts and solid lesions",
-   "Mammography in older women or where malignancy is a concern",
-   "Fine-needle aspiration or core biopsy of dominant, solid, or suspicious lesions",
-   "Cyst aspiration for symptomatic relief and cytology of bloodstained fluid",
-   "Histological assessment to identify proliferative change with atypia where relevant to risk"
-  ],
-  "redFlags": [
-   "A new hard, fixed, or irregular lump, or one that persists after aspiration",
-   "Bloodstained cyst aspirate or spontaneous bloody nipple discharge",
-   "Rapidly recurring cyst at the same site",
-   "Skin dimpling, nipple retraction, or overlying skin change",
-   "Axillary lymphadenopathy or a lump that does not vary with the menstrual cycle",
-   "Proliferative change with atypia on biopsy indicating elevated cancer risk"
-  ],
-  "prognosis": "Fibrocystic change is benign and does not, in its common forms, increase breast cancer risk; symptoms often improve with reassurance and simple measures and tend to settle after the menopause. Cysts may recur but are readily managed. Only the minority with proliferative epithelial change and atypia carry an increased future cancer risk and warrant closer surveillance.",
-  "pitfalls": [
-   "Attributing a new discrete or suspicious lump to fibrocystic change without triple assessment",
-   "Ignoring bloodstained aspirate or a residual mass after cyst aspiration",
-   "Falsely reassuring a patient by labelling all breast lumpiness as benign disease",
-   "Overlooking proliferative atypical changes that do raise cancer risk",
-   "Failing to reassess a symptom that does not fluctuate with the menstrual cycle"
-  ],
-  "references": [
-   "Williams Obstetrics",
-   "Novak's Gynecology",
-   "Campbell-Walsh Urology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassure that fibrocystic change is a benign, hormonally driven physiological process once malignancy is excluded",
-   "Complete triple assessment with clinical examination, ultrasound in younger women or mammography in older women, and needle sampling of any dominant or suspicious lump",
-   "Give symptomatic relief with a well-supporting bra, simple analgesia and a trial of reduced caffeine where it helps",
-   "Aspirate symptomatic or large simple cysts for relief and send any bloodstained fluid for cytology",
-   "Manage cyclical mastalgia with topical non-steroidal anti-inflammatory drugs and, in refractory cases, hormonal agents such as danazol or tamoxifen under specialist guidance",
-   "Undertake core biopsy and closer surveillance where proliferative change with atypia is identified given the increased cancer risk",
-   "Refer to a breast clinic for any dominant, complex or suspicious lesion"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "fibrocystic_breast-pathway",
-   "title": "Fibrocystic Breast Change: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Fibrocystic change is the commonest benign breast condition, presenting with lumpy, nodular, often tender breasts that vary with the menstrual cycle, typically in women of reproductive age",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A new hard, fixed, or irregular lump, or one that persists after aspiration",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical breast examination as part of triple assessment, Breast ultrasound, preferred in younger women, to characterise cysts and solid lesions, Mammography in older women or where malignancy is a concern"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassure that fibrocystic change is a benign, hormonally driven physiological process once malignancy is excluded"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing a new discrete or suspicious lump to fibrocystic change without triple assessment"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of fibrocystic breast change."
-  }
- ],
- "tables": [
-  {
-   "id": "fibrocystic_breast-matrix",
-   "title": "Fibrocystic Breast Change: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Fibrocystic change is the commonest benign breast condition, presenting with lumpy, nodular, often tender breasts that vary with",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Obstetrics / Gynaecology",
+  "specialty": "Obstetrics & Gynaecology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Obstetrics / Novak's Gynecology / Campbell-Walsh Urology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Fibrocystic change is the commonest benign breast condition, presenting with lumpy, nodular, often tender breasts that vary with the menstrual cycle, typically in women of reproductive age",
+      "Symptoms characteristically worsen in the luteal (premenstrual) phase and improve after menstruation, reflecting hormonal influence on breast tissue",
+      "Examination often reveals diffuse nodularity or discrete cysts, most prominent in the upper outer quadrants, sometimes with cyclical mastalgia",
+      "It is better regarded as a physiological change than a disease, and most forms carry no increased breast cancer risk; only certain proliferative changes with atypia elevate risk",
+      "Assessment follows triple assessment principles, combining clinical examination, imaging (ultrasound in younger women, mammography in older), and needle sampling of any dominant or suspicious lump",
+      "A simple cyst confirmed on ultrasound is benign; aspiration is done for symptomatic relief or if the cyst is complex or the fluid is bloodstained",
+      "Bloodstained cyst aspirate, a residual mass after aspiration, or a rapidly recurring cyst should prompt further evaluation to exclude malignancy",
+      "Management of cyclical breast pain is largely reassurance and supportive measures such as a well-fitting supportive bra and simple analgesia, with reserved use of specific pharmacological agents for severe refractory pain",
+      "A new discrete, hard, or fixed lump, or one that does not fluctuate with the cycle, must be investigated rather than attributed to fibrocystic change"
     ],
-    [
-     "Key Investigations",
-     "Clinical breast examination as part of triple assessment, Breast ultrasound, preferred in younger women, to characterise cysts",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Fibrocystic change reflects an exaggerated but benign response of breast stroma and epithelium to cyclical ovarian hormones. Fluctuating oestrogen and progesterone drive proliferation and involution of the terminal duct-lobular units, producing a spectrum of histological changes including cyst formation, fibrosis (stromal overgrowth), adenosis, and varying degrees of epithelial hyperplasia. Obstruction and dilatation of ducts and lobules generate fluid-filled cysts, while fibrosis produces the palpable nodularity. The hormonal cyclicity explains the premenstrual worsening of pain and swelling and improvement after menstruation.",
+    "additionalDifferentials": [
+      "Fibroadenoma",
+      "Simple or complex breast cyst",
+      "Breast carcinoma",
+      "Breast abscess or mastitis",
+      "Fat necrosis",
+      "Phyllodes tumour",
+      "Duct ectasia"
     ],
-    [
-     "Primary Differentials",
-     "Fibroadenoma, Simple or complex breast cyst, Breast carcinoma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical breast examination as part of triple assessment",
+      "Breast ultrasound, preferred in younger women, to characterise cysts and solid lesions",
+      "Mammography in older women or where malignancy is a concern",
+      "Fine-needle aspiration or core biopsy of dominant, solid, or suspicious lesions",
+      "Cyst aspiration for symptomatic relief and cytology of bloodstained fluid",
+      "Histological assessment to identify proliferative change with atypia where relevant to risk"
     ],
-    [
-     "Management Strategy",
-     "Reassure that fibrocystic change is a benign, hormonally driven physiological process once malignancy is excluded",
-     "Core treatment modality"
+    "redFlags": [
+      "A new hard, fixed, or irregular lump, or one that persists after aspiration",
+      "Bloodstained cyst aspirate or spontaneous bloody nipple discharge",
+      "Rapidly recurring cyst at the same site",
+      "Skin dimpling, nipple retraction, or overlying skin change",
+      "Axillary lymphadenopathy or a lump that does not vary with the menstrual cycle",
+      "Proliferative change with atypia on biopsy indicating elevated cancer risk"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing a new discrete or suspicious lump to fibrocystic change without triple assessment",
-     "Prevent diagnostic or management error"
+    "prognosis": "Fibrocystic change is benign and does not, in its common forms, increase breast cancer risk; symptoms often improve with reassurance and simple measures and tend to settle after the menopause. Cysts may recur but are readily managed. Only the minority with proliferative epithelial change and atypia carry an increased future cancer risk and warrant closer surveillance.",
+    "pitfalls": [
+      "Attributing a new discrete or suspicious lump to fibrocystic change without triple assessment",
+      "Ignoring bloodstained aspirate or a residual mass after cyst aspiration",
+      "Falsely reassuring a patient by labelling all breast lumpiness as benign disease",
+      "Overlooking proliferative atypical changes that do raise cancer risk",
+      "Failing to reassess a symptom that does not fluctuate with the menstrual cycle"
+    ],
+    "references": [
+      "Williams Obstetrics",
+      "Novak's Gynecology",
+      "Campbell-Walsh Urology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassure that fibrocystic change is a benign, hormonally driven physiological process once malignancy is excluded",
+      "Complete triple assessment with clinical examination, ultrasound in younger women or mammography in older women, and needle sampling of any dominant or suspicious lump",
+      "Give symptomatic relief with a well-supporting bra, simple analgesia and a trial of reduced caffeine where it helps",
+      "Aspirate symptomatic or large simple cysts for relief and send any bloodstained fluid for cytology",
+      "Manage cyclical mastalgia with topical non-steroidal anti-inflammatory drugs and, in refractory cases, hormonal agents such as danazol or tamoxifen under specialist guidance",
+      "Undertake core biopsy and closer surveillance where proliferative change with atypia is identified given the increased cancer risk",
+      "Refer to a breast clinic for any dominant, complex or suspicious lesion"
     ]
-   ],
-   "caption": "Overview comparison matrix for fibrocystic breast change."
-  }
- ],
- "diagrams": [
-  {
-   "id": "fibrocystic-breast-real-image",
-   "title": "Fibrocystic Breast Change: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "fibrocystic_breast-pathway",
+      "title": "Fibrocystic Breast Change: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Fibrocystic change is the commonest benign breast condition, presenting with lumpy, nodular, often tender breasts that vary with the menstrual cycle, typically in women of reproductive age",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A new hard, fixed, or irregular lump, or one that persists after aspiration",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical breast examination as part of triple assessment, Breast ultrasound, preferred in younger women, to characterise cysts and solid lesions, Mammography in older women or where malignancy is a concern"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassure that fibrocystic change is a benign, hormonally driven physiological process once malignancy is excluded"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing a new discrete or suspicious lump to fibrocystic change without triple assessment"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of fibrocystic breast change."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "fibrocystic_breast-matrix",
+      "title": "Fibrocystic Breast Change: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Fibrocystic change is the commonest benign breast condition, presenting with lumpy, nodular, often tender breasts that vary with",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical breast examination as part of triple assessment, Breast ultrasound, preferred in younger women, to characterise cysts",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Fibroadenoma, Simple or complex breast cyst, Breast carcinoma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassure that fibrocystic change is a benign, hormonally driven physiological process once malignancy is excluded",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing a new discrete or suspicious lump to fibrocystic change without triple assessment",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for fibrocystic breast change."
+    }
+  ],
+  "diagrams": []
 }

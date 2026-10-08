@@ -1,169 +1,147 @@
 {
- "id": "stingray_injury",
- "name": "Stingray injury",
- "aliases": [
-  "stingray envenomation",
-  "stingray sting"
- ],
- "class": "non_infective",
- "system": "Multisystem / Toxicology",
- "specialty": "Emergency medicine / Toxicology",
- "referenceOnly": true,
- "reference": {
-  "source": "Standard toxicology and marine-envenomation references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Injury combines a penetrating or laceration wound from the barbed spine with envenomation by a heat-labile venom",
-   "Pain is typically immediate, intense and out of proportion to the visible wound",
-   "Immersion of the affected part in hot (not scalding) water helps relieve pain by denaturing the venom",
-   "Retained spine or sheath fragments in the wound are common and can be missed",
-   "Wounds are prone to secondary infection, including marine organisms, so wound care and consideration of antibiotics are important",
-   "Truncal or penetrating chest and abdominal wounds can be life-threatening and need urgent surgical assessment"
+  "id": "stingray_injury",
+  "name": "Stingray injury",
+  "aliases": [
+    "stingray envenomation",
+    "stingray sting"
   ],
-  "pathophysiology": "Stingray injury results from the tail spine penetrating tissue while releasing venom from glandular tissue along the spine. The venom is a heat-labile mixture that causes intense local pain, vasoconstriction and tissue injury, while the barbed spine produces mechanical laceration and can retain fragments. Local necrosis and a high infection risk follow from the combination of envenomation, tissue trauma and contamination, and deep penetrating wounds may damage vital structures.",
-  "additionalDifferentials": [
-   "Other marine envenomation (stonefish, weeverfish)",
-   "Simple laceration or puncture wound",
-   "Retained foreign body without envenomation",
-   "Secondary wound infection or cellulitis",
-   "Allergic reaction to the sting"
-  ],
-  "additionalInvestigations": [
-   "Wound exploration and imaging to identify retained spine fragments",
-   "Assessment of the depth and structures involved, especially for truncal wounds",
-   "Consideration of tetanus status and infection risk",
-   "Observation for systemic symptoms in severe envenoming",
-   "Surgical review for deep or penetrating body-cavity wounds"
-  ],
-  "redFlags": [
-   "Penetrating chest, abdominal or neck wounds",
-   "Signs of systemic envenoming or haemodynamic compromise",
-   "Evidence of deep infection or necrosis",
-   "Neurovascular compromise of a limb"
-  ],
-  "prognosis": "Most limb injuries do well with hot-water analgesia, wound care and removal of foreign material, but truncal penetrating wounds and severe infections can be serious or fatal.",
-  "pitfalls": [
-   "Failing to search for and remove retained spine fragments",
-   "Prematurely closing a contaminated marine wound",
-   "Underestimating pain and delaying hot-water immersion",
-   "Missing deep penetrating injury to vital structures"
-  ],
-  "references": [
-   "Goldfrank's Toxicologic Emergencies",
-   "Tintinalli's Emergency Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Immediate hot-water immersion at a tolerable, non-scalding temperature to denature the heat-labile venom and relieve pain",
-   "Wound exploration, irrigation and removal of retained spine or sheath fragments, leaving wounds open to heal by secondary intention",
-   "Analgesia, including local anaesthetic infiltration or regional block for severe pain",
-   "Tetanus prophylaxis and thorough wound cleaning",
-   "Antibiotics covering marine organisms such as ciprofloxacin or doxycycline for Vibrio in high-risk or infected wounds",
-   "Urgent surgical assessment for truncal or body-cavity penetrating wounds that may injure vital structures",
-   "Observe for secondary infection and systemic features of severe envenoming"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "stingray_injury-pathway",
-   "title": "Stingray injury: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Injury combines a penetrating or laceration wound from the barbed spine with envenomation by a heat-labile venom",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Penetrating chest, abdominal or neck wounds",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Wound exploration and imaging to identify retained spine fragments, Assessment of the depth and structures involved, especially for truncal wounds, Consideration of tetanus status and infection risk"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Immediate hot-water immersion at a tolerable, non-scalding temperature to denature the heat-labile venom and relieve pain"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to search for and remove retained spine fragments"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of stingray injury."
-  }
- ],
- "tables": [
-  {
-   "id": "stingray_injury-matrix",
-   "title": "Stingray injury: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Injury combines a penetrating or laceration wound from the barbed spine with envenomation by a heat-labile venom",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Multisystem / Toxicology",
+  "specialty": "Emergency medicine / Toxicology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Standard toxicology and marine-envenomation references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Injury combines a penetrating or laceration wound from the barbed spine with envenomation by a heat-labile venom",
+      "Pain is typically immediate, intense and out of proportion to the visible wound",
+      "Immersion of the affected part in hot (not scalding) water helps relieve pain by denaturing the venom",
+      "Retained spine or sheath fragments in the wound are common and can be missed",
+      "Wounds are prone to secondary infection, including marine organisms, so wound care and consideration of antibiotics are important",
+      "Truncal or penetrating chest and abdominal wounds can be life-threatening and need urgent surgical assessment"
     ],
-    [
-     "Key Investigations",
-     "Wound exploration and imaging to identify retained spine fragments, Assessment of the depth and structures involved, especially",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Stingray injury results from the tail spine penetrating tissue while releasing venom from glandular tissue along the spine. The venom is a heat-labile mixture that causes intense local pain, vasoconstriction and tissue injury, while the barbed spine produces mechanical laceration and can retain fragments. Local necrosis and a high infection risk follow from the combination of envenomation, tissue trauma and contamination, and deep penetrating wounds may damage vital structures.",
+    "additionalDifferentials": [
+      "Other marine envenomation (stonefish, weeverfish)",
+      "Simple laceration or puncture wound",
+      "Retained foreign body without envenomation",
+      "Secondary wound infection or cellulitis",
+      "Allergic reaction to the sting"
     ],
-    [
-     "Primary Differentials",
-     "Other marine envenomation (stonefish, weeverfish), Simple laceration or puncture wound, Retained foreign body without envenomation",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Wound exploration and imaging to identify retained spine fragments",
+      "Assessment of the depth and structures involved, especially for truncal wounds",
+      "Consideration of tetanus status and infection risk",
+      "Observation for systemic symptoms in severe envenoming",
+      "Surgical review for deep or penetrating body-cavity wounds"
     ],
-    [
-     "Management Strategy",
-     "Immediate hot-water immersion at a tolerable, non-scalding temperature to denature the heat-labile venom and relieve pain",
-     "Core treatment modality"
+    "redFlags": [
+      "Penetrating chest, abdominal or neck wounds",
+      "Signs of systemic envenoming or haemodynamic compromise",
+      "Evidence of deep infection or necrosis",
+      "Neurovascular compromise of a limb"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to search for and remove retained spine fragments",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most limb injuries do well with hot-water analgesia, wound care and removal of foreign material, but truncal penetrating wounds and severe infections can be serious or fatal.",
+    "pitfalls": [
+      "Failing to search for and remove retained spine fragments",
+      "Prematurely closing a contaminated marine wound",
+      "Underestimating pain and delaying hot-water immersion",
+      "Missing deep penetrating injury to vital structures"
+    ],
+    "references": [
+      "Goldfrank's Toxicologic Emergencies",
+      "Tintinalli's Emergency Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Immediate hot-water immersion at a tolerable, non-scalding temperature to denature the heat-labile venom and relieve pain",
+      "Wound exploration, irrigation and removal of retained spine or sheath fragments, leaving wounds open to heal by secondary intention",
+      "Analgesia, including local anaesthetic infiltration or regional block for severe pain",
+      "Tetanus prophylaxis and thorough wound cleaning",
+      "Antibiotics covering marine organisms such as ciprofloxacin or doxycycline for Vibrio in high-risk or infected wounds",
+      "Urgent surgical assessment for truncal or body-cavity penetrating wounds that may injure vital structures",
+      "Observe for secondary infection and systemic features of severe envenoming"
     ]
-   ],
-   "caption": "Overview comparison matrix for stingray injury."
-  }
- ],
- "diagrams": [
-  {
-   "id": "stingray-injury-real-image",
-   "title": "Stingray injury: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "stingray_injury-pathway",
+      "title": "Stingray injury: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Injury combines a penetrating or laceration wound from the barbed spine with envenomation by a heat-labile venom",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Penetrating chest, abdominal or neck wounds",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Wound exploration and imaging to identify retained spine fragments, Assessment of the depth and structures involved, especially for truncal wounds, Consideration of tetanus status and infection risk"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Immediate hot-water immersion at a tolerable, non-scalding temperature to denature the heat-labile venom and relieve pain"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to search for and remove retained spine fragments"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of stingray injury."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "stingray_injury-matrix",
+      "title": "Stingray injury: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Injury combines a penetrating or laceration wound from the barbed spine with envenomation by a heat-labile venom",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Wound exploration and imaging to identify retained spine fragments, Assessment of the depth and structures involved, especially",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other marine envenomation (stonefish, weeverfish), Simple laceration or puncture wound, Retained foreign body without envenomation",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Immediate hot-water immersion at a tolerable, non-scalding temperature to denature the heat-labile venom and relieve pain",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to search for and remove retained spine fragments",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for stingray injury."
+    }
+  ],
+  "diagrams": []
 }

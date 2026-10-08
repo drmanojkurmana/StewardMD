@@ -1,176 +1,154 @@
 {
- "id": "charcot_marie_tooth_disease_type_4f",
- "name": "Charcot-Marie-Tooth disease type 4F",
- "aliases": [
-  "CMT4F",
-  "PRX",
-  "Periaxin neuropathy"
- ],
- "class": "non_infective",
- "system": "Neurology / Hereditary neuropathy",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Neurogenetics references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive demyelinating Charcot-Marie-Tooth neuropathy caused by mutations in PRX, the gene encoding periaxin, a Schwann cell protein essential for myelin sheath stabilisation.",
-   "Onset is usually in infancy or early childhood with delayed walking, and the phenotype can resemble Dejerine-Sottas disease.",
-   "A hallmark is disproportionately prominent sensory involvement, with sensory ataxia and large-fibre sensory loss dominating the picture.",
-   "Motor nerve conduction velocities are markedly slowed, reflecting severe demyelination.",
-   "Skeletal complications such as pes cavus and progressive scoliosis are common and contribute substantially to disability.",
-   "Nerve biopsy shows demyelination with onion-bulb formation and focally folded myelin.",
-   "Periaxin is part of the dystroglycan-DRP2-periaxin complex that links the Schwann cell to its basal lamina, and its loss destabilises the myelin sheath.",
-   "Despite early and sometimes severe onset, progression is often relatively slow so that ambulation may be retained for many years."
+  "id": "charcot_marie_tooth_disease_type_4f",
+  "name": "Charcot-Marie-Tooth disease type 4F",
+  "aliases": [
+    "CMT4F",
+    "PRX",
+    "Periaxin neuropathy"
   ],
-  "pathophysiology": "Charcot-Marie-Tooth disease type 4F is an autosomal recessive demyelinating neuropathy caused by biallelic loss-of-function mutations in PRX (chromosome 19), which encodes periaxin. Periaxin exists as two isoforms in myelinating Schwann cells and, through its PDZ domain, forms part of the dystroglycan-DRP2-periaxin (DRP2) complex that anchors the abaxonal Schwann cell membrane to the surrounding basal lamina. This scaffold is required for the mechanical stabilisation and normal elongation of the myelin sheath and for the formation of Cajal bands. Loss of functional periaxin destabilises myelin, producing a severe demyelinating neuropathy with recurrent demyelination and remyelination that gives rise to onion-bulb formations and focally folded myelin on biopsy. The disproportionate large-fibre sensory dysfunction and sensory ataxia that characterise CMT4F reflect the particular vulnerability of heavily myelinated sensory fibres to this Schwann cell adhesion defect.",
-  "additionalDifferentials": [
-   "Charcot-Marie-Tooth disease type 4H (FGD4), another recessive demyelinating childhood-onset CMT",
-   "Charcot-Marie-Tooth disease type 4C (SH3TC2) with early scoliosis",
-   "Charcot-Marie-Tooth disease type 4A (GDAP1)",
-   "Charcot-Marie-Tooth disease type 4B1/4B2 (MTMR2/SBF2) with myelin outfoldings",
-   "Dejerine-Sottas disease and congenital hypomyelinating neuropathy",
-   "Demyelinating CMT1 caused by PMP22 or MPZ mutations",
-   "Acquired chronic inflammatory demyelinating polyradiculoneuropathy in childhood"
-  ],
-  "additionalInvestigations": [
-   "Nerve conduction studies demonstrating markedly slowed motor velocities consistent with severe demyelination",
-   "PRX sequencing or a hereditary neuropathy gene panel to confirm biallelic mutations",
-   "Nerve biopsy in atypical cases, showing onion bulbs, demyelination and focally folded myelin",
-   "Spinal imaging and orthopaedic review to monitor scoliosis",
-   "Detailed sensory and proprioceptive testing to document the prominent sensory ataxia",
-   "Three-generation pedigree and enquiry into consanguinity given recessive inheritance"
-  ],
-  "redFlags": [
-   "Severe or rapidly worsening sensory ataxia impairing balance and safe mobility",
-   "Rapidly progressive scoliosis threatening respiratory function or requiring surgical intervention",
-   "Emergence of respiratory or bulbar symptoms, which are uncommon and warrant reassessment",
-   "Any subacute deterioration suggesting a superimposed acquired inflammatory neuropathy"
-  ],
-  "prognosis": "CMT4F begins early and can be clinically severe, but progression is frequently slow, so that many affected individuals retain ambulation into adulthood; long-term disability is driven mainly by sensory ataxia and skeletal deformity such as scoliosis.",
-  "pitfalls": [
-   "The striking sensory ataxia may be misattributed to a cerebellar or dorsal-column disorder rather than a demyelinating neuropathy.",
-   "The Dejerine-Sottas-like severity can be wrongly assumed to indicate a poor motor outcome despite the often slow progression.",
-   "Recessive inheritance means the family history is frequently unremarkable, which should not deter genetic testing.",
-   "Focally folded myelin on biopsy overlaps with other recessive demyelinating subtypes, so genetic confirmation is required."
-  ],
-  "references": [
-   "Comprehensive clinical neurology reference texts",
-   "Peripheral and hereditary neuropathy reference texts",
-   "Clinical neurogenetics references"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No disease-specific pharmacotherapy; supportive and rehabilitative care through a neuromuscular multidisciplinary team",
-   "Physiotherapy with balance and gait rehabilitation and mobility aids for the prominent sensory ataxia",
-   "Ankle-foot orthoses and podiatry for foot deformity and pes cavus",
-   "Orthopaedic and spinal management of progressive scoliosis",
-   "Neuropathic pain management with gabapentinoids or tricyclic agents",
-   "Avoidance of neurotoxic drugs such as vincristine",
-   "Autosomal recessive genetic counselling with carrier testing and family screening, guided by consanguinity"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "charcot_marie_tooth_disease_type_4f-pathway",
-   "title": "Charcot-Marie-Tooth disease type 4F: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive demyelinating Charcot-Marie-Tooth neuropathy caused by mutations in PRX, the gene encoding periaxin, a Schwann cell protein essential for myelin sheath stabilisation.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe or rapidly worsening sensory ataxia impairing balance and safe mobility",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Nerve conduction studies demonstrating markedly slowed motor velocities consistent with severe demyelination, PRX sequencing or a hereditary neuropathy gene panel to confirm biallelic mutations, Nerve biopsy in atypical"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No disease-specific pharmacotherapy; supportive and rehabilitative care through a neuromuscular multidisciplinary team"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: The striking sensory ataxia may be misattributed to a cerebellar or dorsal-column disorder rather than a demyelinating neuropathy."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of charcot-marie-tooth disease type 4f."
-  }
- ],
- "tables": [
-  {
-   "id": "charcot_marie_tooth_disease_type_4f-matrix",
-   "title": "Charcot-Marie-Tooth disease type 4F: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive demyelinating Charcot-Marie-Tooth neuropathy caused by mutations in PRX, the gene encoding periaxin, a",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neurology / Hereditary neuropathy",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Neurogenetics references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive demyelinating Charcot-Marie-Tooth neuropathy caused by mutations in PRX, the gene encoding periaxin, a Schwann cell protein essential for myelin sheath stabilisation.",
+      "Onset is usually in infancy or early childhood with delayed walking, and the phenotype can resemble Dejerine-Sottas disease.",
+      "A hallmark is disproportionately prominent sensory involvement, with sensory ataxia and large-fibre sensory loss dominating the picture.",
+      "Motor nerve conduction velocities are markedly slowed, reflecting severe demyelination.",
+      "Skeletal complications such as pes cavus and progressive scoliosis are common and contribute substantially to disability.",
+      "Nerve biopsy shows demyelination with onion-bulb formation and focally folded myelin.",
+      "Periaxin is part of the dystroglycan-DRP2-periaxin complex that links the Schwann cell to its basal lamina, and its loss destabilises the myelin sheath.",
+      "Despite early and sometimes severe onset, progression is often relatively slow so that ambulation may be retained for many years."
     ],
-    [
-     "Key Investigations",
-     "Nerve conduction studies demonstrating markedly slowed motor velocities consistent with severe demyelination, PRX sequencing or a",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Charcot-Marie-Tooth disease type 4F is an autosomal recessive demyelinating neuropathy caused by biallelic loss-of-function mutations in PRX (chromosome 19), which encodes periaxin. Periaxin exists as two isoforms in myelinating Schwann cells and, through its PDZ domain, forms part of the dystroglycan-DRP2-periaxin (DRP2) complex that anchors the abaxonal Schwann cell membrane to the surrounding basal lamina. This scaffold is required for the mechanical stabilisation and normal elongation of the myelin sheath and for the formation of Cajal bands. Loss of functional periaxin destabilises myelin, producing a severe demyelinating neuropathy with recurrent demyelination and remyelination that gives rise to onion-bulb formations and focally folded myelin on biopsy. The disproportionate large-fibre sensory dysfunction and sensory ataxia that characterise CMT4F reflect the particular vulnerability of heavily myelinated sensory fibres to this Schwann cell adhesion defect.",
+    "additionalDifferentials": [
+      "Charcot-Marie-Tooth disease type 4H (FGD4), another recessive demyelinating childhood-onset CMT",
+      "Charcot-Marie-Tooth disease type 4C (SH3TC2) with early scoliosis",
+      "Charcot-Marie-Tooth disease type 4A (GDAP1)",
+      "Charcot-Marie-Tooth disease type 4B1/4B2 (MTMR2/SBF2) with myelin outfoldings",
+      "Dejerine-Sottas disease and congenital hypomyelinating neuropathy",
+      "Demyelinating CMT1 caused by PMP22 or MPZ mutations",
+      "Acquired chronic inflammatory demyelinating polyradiculoneuropathy in childhood"
     ],
-    [
-     "Primary Differentials",
-     "Charcot-Marie-Tooth disease type 4H (FGD4), another recessive demyelinating childhood-onset CMT, Charcot-Marie-Tooth disease type",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Nerve conduction studies demonstrating markedly slowed motor velocities consistent with severe demyelination",
+      "PRX sequencing or a hereditary neuropathy gene panel to confirm biallelic mutations",
+      "Nerve biopsy in atypical cases, showing onion bulbs, demyelination and focally folded myelin",
+      "Spinal imaging and orthopaedic review to monitor scoliosis",
+      "Detailed sensory and proprioceptive testing to document the prominent sensory ataxia",
+      "Three-generation pedigree and enquiry into consanguinity given recessive inheritance"
     ],
-    [
-     "Management Strategy",
-     "No disease-specific pharmacotherapy; supportive and rehabilitative care through a neuromuscular multidisciplinary team",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe or rapidly worsening sensory ataxia impairing balance and safe mobility",
+      "Rapidly progressive scoliosis threatening respiratory function or requiring surgical intervention",
+      "Emergence of respiratory or bulbar symptoms, which are uncommon and warrant reassessment",
+      "Any subacute deterioration suggesting a superimposed acquired inflammatory neuropathy"
     ],
-    [
-     "Clinical Pitfall",
-     "The striking sensory ataxia may be misattributed to a cerebellar or dorsal-column disorder rather than a demyelinating neuropathy.",
-     "Prevent diagnostic or management error"
+    "prognosis": "CMT4F begins early and can be clinically severe, but progression is frequently slow, so that many affected individuals retain ambulation into adulthood; long-term disability is driven mainly by sensory ataxia and skeletal deformity such as scoliosis.",
+    "pitfalls": [
+      "The striking sensory ataxia may be misattributed to a cerebellar or dorsal-column disorder rather than a demyelinating neuropathy.",
+      "The Dejerine-Sottas-like severity can be wrongly assumed to indicate a poor motor outcome despite the often slow progression.",
+      "Recessive inheritance means the family history is frequently unremarkable, which should not deter genetic testing.",
+      "Focally folded myelin on biopsy overlaps with other recessive demyelinating subtypes, so genetic confirmation is required."
+    ],
+    "references": [
+      "Comprehensive clinical neurology reference texts",
+      "Peripheral and hereditary neuropathy reference texts",
+      "Clinical neurogenetics references"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No disease-specific pharmacotherapy; supportive and rehabilitative care through a neuromuscular multidisciplinary team",
+      "Physiotherapy with balance and gait rehabilitation and mobility aids for the prominent sensory ataxia",
+      "Ankle-foot orthoses and podiatry for foot deformity and pes cavus",
+      "Orthopaedic and spinal management of progressive scoliosis",
+      "Neuropathic pain management with gabapentinoids or tricyclic agents",
+      "Avoidance of neurotoxic drugs such as vincristine",
+      "Autosomal recessive genetic counselling with carrier testing and family screening, guided by consanguinity"
     ]
-   ],
-   "caption": "Overview comparison matrix for charcot-marie-tooth disease type 4f."
-  }
- ],
- "diagrams": [
-  {
-   "id": "charcot-marie-tooth-disease-type-4f-real-image",
-   "title": "Charcot-Marie-Tooth disease type 4F: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "charcot_marie_tooth_disease_type_4f-pathway",
+      "title": "Charcot-Marie-Tooth disease type 4F: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive demyelinating Charcot-Marie-Tooth neuropathy caused by mutations in PRX, the gene encoding periaxin, a Schwann cell protein essential for myelin sheath stabilisation.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe or rapidly worsening sensory ataxia impairing balance and safe mobility",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Nerve conduction studies demonstrating markedly slowed motor velocities consistent with severe demyelination, PRX sequencing or a hereditary neuropathy gene panel to confirm biallelic mutations, Nerve biopsy in atypical"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No disease-specific pharmacotherapy; supportive and rehabilitative care through a neuromuscular multidisciplinary team"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: The striking sensory ataxia may be misattributed to a cerebellar or dorsal-column disorder rather than a demyelinating neuropathy."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of charcot-marie-tooth disease type 4f."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "charcot_marie_tooth_disease_type_4f-matrix",
+      "title": "Charcot-Marie-Tooth disease type 4F: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive demyelinating Charcot-Marie-Tooth neuropathy caused by mutations in PRX, the gene encoding periaxin, a",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Nerve conduction studies demonstrating markedly slowed motor velocities consistent with severe demyelination, PRX sequencing or a",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Charcot-Marie-Tooth disease type 4H (FGD4), another recessive demyelinating childhood-onset CMT, Charcot-Marie-Tooth disease type",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No disease-specific pharmacotherapy; supportive and rehabilitative care through a neuromuscular multidisciplinary team",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "The striking sensory ataxia may be misattributed to a cerebellar or dorsal-column disorder rather than a demyelinating neuropathy.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for charcot-marie-tooth disease type 4f."
+    }
+  ],
+  "diagrams": []
 }

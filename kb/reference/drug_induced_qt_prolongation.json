@@ -1,177 +1,155 @@
 {
- "id": "drug_induced_qt_prolongation",
- "name": "Drug-induced QT prolongation / torsades",
- "aliases": [
-  "acquired long QT syndrome",
-  "drug-induced torsades de pointes",
-  "QTc prolongation",
-  "hERG channel blockade",
-  "drug-induced polymorphic ventricular tachycardia"
- ],
- "class": "non_infective",
- "system": "Clinical pharmacology / Toxicology",
- "specialty": "Clinical Pharmacology",
- "referenceOnly": true,
- "reference": {
-  "source": "Goldfrank's Toxicologic Emergencies / Harrison's Principles of Internal Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Many drugs prolong the QT interval and predispose to torsades de pointes, a polymorphic ventricular tachycardia that can degenerate into ventricular fibrillation",
-   "Common culprits include certain antiarrhythmics, macrolide and fluoroquinolone antibiotics, antipsychotics, methadone and some antiemetics",
-   "Risk is compounded by hypokalaemia, hypomagnesaemia, hypocalcaemia, bradycardia, female sex and underlying cardiac disease",
-   "Concomitant use of multiple QT-prolonging drugs or agents that inhibit their metabolism greatly increases risk",
-   "The mechanism is blockade of the rapid delayed rectifier potassium current (IKr) carried by the hERG channel, delaying repolarisation",
-   "Torsades often follows a short-long-short RR sequence and may present with palpitations, syncope or cardiac arrest",
-   "Management includes stopping offending drugs, correcting electrolytes, intravenous magnesium and increasing heart rate (pacing or isoprenaline) to shorten the QT",
-   "Always calculate a rate-corrected QT (QTc) and reassess after starting or changing high-risk drugs"
+  "id": "drug_induced_qt_prolongation",
+  "name": "Drug-induced QT prolongation / torsades",
+  "aliases": [
+    "acquired long QT syndrome",
+    "drug-induced torsades de pointes",
+    "QTc prolongation",
+    "hERG channel blockade",
+    "drug-induced polymorphic ventricular tachycardia"
   ],
-  "pathophysiology": "Ventricular repolarisation depends heavily on the rapid delayed rectifier potassium current (IKr) conducted by the hERG channel. Many structurally diverse drugs block this channel, prolonging the action potential duration and the QT interval on the surface electrocardiogram. Delayed repolarisation predisposes to early afterdepolarisations, which can trigger torsades de pointes, a polymorphic ventricular tachycardia with a twisting axis. Susceptibility is increased when repolarisation reserve is already reduced by electrolyte disturbance (particularly low potassium, magnesium or calcium), bradycardia, structural heart disease, or subclinical congenital long QT mutations. Drug interactions that raise plasma levels of a QT-prolonging agent, or combine several such agents, further impair repolarisation and heighten arrhythmic risk.",
-  "additionalDifferentials": [
-   "Congenital long QT syndrome",
-   "Electrolyte disturbance causing QT prolongation independent of drugs",
-   "Ischaemic polymorphic ventricular tachycardia",
-   "Other causes of syncope (vasovagal, structural heart disease, heart block)",
-   "Bradyarrhythmias with secondary QT prolongation",
-   "Hypothermia or raised intracranial pressure affecting the QT"
-  ],
-  "additionalInvestigations": [
-   "Twelve-lead electrocardiogram with QTc calculation and serial monitoring",
-   "Serum potassium, magnesium and calcium",
-   "Review of all medications for QT-prolonging agents and interactions",
-   "Continuous cardiac (telemetry) monitoring in high-risk patients",
-   "Renal and hepatic function affecting drug clearance",
-   "Consideration of genetic testing where congenital long QT is suspected"
-  ],
-  "redFlags": [
-   "Documented torsades de pointes or polymorphic ventricular tachycardia",
-   "Syncope or presyncope in a patient with a markedly prolonged QTc",
-   "Progressive QTc prolongation after starting a culprit drug",
-   "Severe electrolyte disturbance compounding QT prolongation",
-   "Cardiac arrest"
-  ],
-  "prognosis": "With prompt recognition, drug withdrawal and correction of precipitants, the QT usually normalises and the arrhythmic risk resolves. Untreated torsades can be rapidly fatal, but appropriately managed episodes generally have a good outcome.",
-  "pitfalls": [
-   "Prescribing additional QT-prolonging drugs without reviewing existing therapy",
-   "Overlooking hypokalaemia or hypomagnesaemia that markedly amplifies risk",
-   "Relying on the uncorrected QT rather than a rate-corrected QTc",
-   "Missing drug interactions that raise plasma concentrations of a QT-prolonging agent",
-   "Failing to monitor the electrocardiogram after initiating a high-risk medication"
-  ],
-  "references": [
-   "Goldfrank's Toxicologic Emergencies",
-   "Harrison's Principles of Internal Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Immediately stop the offending QT-prolonging drug and avoid concomitant QT-prolonging agents and interacting drugs that raise its plasma levels",
-   "Correct and replete electrolytes, particularly potassium, magnesium and calcium, to restore repolarisation reserve",
-   "Treat torsades de pointes with intravenous magnesium sulphate and correction of precipitants, and defibrillate sustained or haemodynamically unstable episodes",
-   "For recurrent or bradycardia- and pause-dependent torsades, raise the heart rate with overdrive pacing or an isoprenaline infusion",
-   "Monitor with serial twelve-lead ECG QTc measurement and continuous telemetry in high-risk patients",
-   "Review renal and hepatic function affecting drug clearance and refer to cardiology, considering congenital long-QT testing where suspected"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "drug_induced_qt_prolongation-pathway",
-   "title": "Drug-induced QT prolongation / torsades: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Many drugs prolong the QT interval and predispose to torsades de pointes, a polymorphic ventricular tachycardia that can degenerate into ventricular fibrillation",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Documented torsades de pointes or polymorphic ventricular tachycardia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Twelve-lead electrocardiogram with QTc calculation and serial monitoring, Serum potassium, magnesium and calcium, Review of all medications for QT-prolonging agents and interactions"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Immediately stop the offending QT-prolonging drug and avoid concomitant QT-prolonging agents and interacting drugs that raise its plasma levels"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Prescribing additional QT-prolonging drugs without reviewing existing therapy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of drug-induced qt prolongation / torsades."
-  }
- ],
- "tables": [
-  {
-   "id": "drug_induced_qt_prolongation-matrix",
-   "title": "Drug-induced QT prolongation / torsades: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Many drugs prolong the QT interval and predispose to torsades de pointes, a polymorphic ventricular tachycardia that can",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Clinical pharmacology / Toxicology",
+  "specialty": "Clinical Pharmacology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Goldfrank's Toxicologic Emergencies / Harrison's Principles of Internal Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Many drugs prolong the QT interval and predispose to torsades de pointes, a polymorphic ventricular tachycardia that can degenerate into ventricular fibrillation",
+      "Common culprits include certain antiarrhythmics, macrolide and fluoroquinolone antibiotics, antipsychotics, methadone and some antiemetics",
+      "Risk is compounded by hypokalaemia, hypomagnesaemia, hypocalcaemia, bradycardia, female sex and underlying cardiac disease",
+      "Concomitant use of multiple QT-prolonging drugs or agents that inhibit their metabolism greatly increases risk",
+      "The mechanism is blockade of the rapid delayed rectifier potassium current (IKr) carried by the hERG channel, delaying repolarisation",
+      "Torsades often follows a short-long-short RR sequence and may present with palpitations, syncope or cardiac arrest",
+      "Management includes stopping offending drugs, correcting electrolytes, intravenous magnesium and increasing heart rate (pacing or isoprenaline) to shorten the QT",
+      "Always calculate a rate-corrected QT (QTc) and reassess after starting or changing high-risk drugs"
     ],
-    [
-     "Key Investigations",
-     "Twelve-lead electrocardiogram with QTc calculation and serial monitoring, Serum potassium, magnesium and calcium, Review of all",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Ventricular repolarisation depends heavily on the rapid delayed rectifier potassium current (IKr) conducted by the hERG channel. Many structurally diverse drugs block this channel, prolonging the action potential duration and the QT interval on the surface electrocardiogram. Delayed repolarisation predisposes to early afterdepolarisations, which can trigger torsades de pointes, a polymorphic ventricular tachycardia with a twisting axis. Susceptibility is increased when repolarisation reserve is already reduced by electrolyte disturbance (particularly low potassium, magnesium or calcium), bradycardia, structural heart disease, or subclinical congenital long QT mutations. Drug interactions that raise plasma levels of a QT-prolonging agent, or combine several such agents, further impair repolarisation and heighten arrhythmic risk.",
+    "additionalDifferentials": [
+      "Congenital long QT syndrome",
+      "Electrolyte disturbance causing QT prolongation independent of drugs",
+      "Ischaemic polymorphic ventricular tachycardia",
+      "Other causes of syncope (vasovagal, structural heart disease, heart block)",
+      "Bradyarrhythmias with secondary QT prolongation",
+      "Hypothermia or raised intracranial pressure affecting the QT"
     ],
-    [
-     "Primary Differentials",
-     "Congenital long QT syndrome, Electrolyte disturbance causing QT prolongation independent of drugs, Ischaemic polymorphic",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Twelve-lead electrocardiogram with QTc calculation and serial monitoring",
+      "Serum potassium, magnesium and calcium",
+      "Review of all medications for QT-prolonging agents and interactions",
+      "Continuous cardiac (telemetry) monitoring in high-risk patients",
+      "Renal and hepatic function affecting drug clearance",
+      "Consideration of genetic testing where congenital long QT is suspected"
     ],
-    [
-     "Management Strategy",
-     "Immediately stop the offending QT-prolonging drug and avoid concomitant QT-prolonging agents and interacting drugs that raise its",
-     "Core treatment modality"
+    "redFlags": [
+      "Documented torsades de pointes or polymorphic ventricular tachycardia",
+      "Syncope or presyncope in a patient with a markedly prolonged QTc",
+      "Progressive QTc prolongation after starting a culprit drug",
+      "Severe electrolyte disturbance compounding QT prolongation",
+      "Cardiac arrest"
     ],
-    [
-     "Clinical Pitfall",
-     "Prescribing additional QT-prolonging drugs without reviewing existing therapy",
-     "Prevent diagnostic or management error"
+    "prognosis": "With prompt recognition, drug withdrawal and correction of precipitants, the QT usually normalises and the arrhythmic risk resolves. Untreated torsades can be rapidly fatal, but appropriately managed episodes generally have a good outcome.",
+    "pitfalls": [
+      "Prescribing additional QT-prolonging drugs without reviewing existing therapy",
+      "Overlooking hypokalaemia or hypomagnesaemia that markedly amplifies risk",
+      "Relying on the uncorrected QT rather than a rate-corrected QTc",
+      "Missing drug interactions that raise plasma concentrations of a QT-prolonging agent",
+      "Failing to monitor the electrocardiogram after initiating a high-risk medication"
+    ],
+    "references": [
+      "Goldfrank's Toxicologic Emergencies",
+      "Harrison's Principles of Internal Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Immediately stop the offending QT-prolonging drug and avoid concomitant QT-prolonging agents and interacting drugs that raise its plasma levels",
+      "Correct and replete electrolytes, particularly potassium, magnesium and calcium, to restore repolarisation reserve",
+      "Treat torsades de pointes with intravenous magnesium sulphate and correction of precipitants, and defibrillate sustained or haemodynamically unstable episodes",
+      "For recurrent or bradycardia- and pause-dependent torsades, raise the heart rate with overdrive pacing or an isoprenaline infusion",
+      "Monitor with serial twelve-lead ECG QTc measurement and continuous telemetry in high-risk patients",
+      "Review renal and hepatic function affecting drug clearance and refer to cardiology, considering congenital long-QT testing where suspected"
     ]
-   ],
-   "caption": "Overview comparison matrix for drug-induced qt prolongation / torsades."
-  }
- ],
- "diagrams": [
-  {
-   "id": "drug-induced-qt-prolongation-real-image",
-   "title": "Drug-induced QT prolongation / torsades: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "drug_induced_qt_prolongation-pathway",
+      "title": "Drug-induced QT prolongation / torsades: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Many drugs prolong the QT interval and predispose to torsades de pointes, a polymorphic ventricular tachycardia that can degenerate into ventricular fibrillation",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Documented torsades de pointes or polymorphic ventricular tachycardia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Twelve-lead electrocardiogram with QTc calculation and serial monitoring, Serum potassium, magnesium and calcium, Review of all medications for QT-prolonging agents and interactions"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Immediately stop the offending QT-prolonging drug and avoid concomitant QT-prolonging agents and interacting drugs that raise its plasma levels"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Prescribing additional QT-prolonging drugs without reviewing existing therapy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of drug-induced qt prolongation / torsades."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "drug_induced_qt_prolongation-matrix",
+      "title": "Drug-induced QT prolongation / torsades: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Many drugs prolong the QT interval and predispose to torsades de pointes, a polymorphic ventricular tachycardia that can",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Twelve-lead electrocardiogram with QTc calculation and serial monitoring, Serum potassium, magnesium and calcium, Review of all",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Congenital long QT syndrome, Electrolyte disturbance causing QT prolongation independent of drugs, Ischaemic polymorphic",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Immediately stop the offending QT-prolonging drug and avoid concomitant QT-prolonging agents and interacting drugs that raise its",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Prescribing additional QT-prolonging drugs without reviewing existing therapy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for drug-induced qt prolongation / torsades."
+    }
+  ],
+  "diagrams": []
 }

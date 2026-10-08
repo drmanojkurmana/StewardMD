@@ -1,175 +1,153 @@
 {
- "id": "legg_calve_perthes_disease",
- "name": "Legg-Calve-Perthes disease",
- "aliases": [
-  "Perthes disease",
-  "Legg-Calve-Perthes",
-  "coxa plana",
-  "idiopathic osteonecrosis of the capital femoral epiphysis"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Orthopaedics",
- "specialty": "Orthopaedics",
- "referenceOnly": true,
- "reference": {
-  "source": "Tachdjian's Pediatric Orthopaedics / Campbell's Operative Orthopaedics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A true idiopathic osteonecrosis of the capital femoral epiphysis in the growing child, not a traction apophysitis",
-   "Affected bone is the femoral head (capital femoral epiphysis) of the hip",
-   "Typically affects children roughly four to eight years of age, and is several times more common in boys, usually unilateral",
-   "Presents with a painless or mildly painful limp and referred pain to the groin, thigh or knee, with restricted hip abduction and internal rotation",
-   "The radiographic hallmark evolves from a smaller, denser epiphysis and a subchondral crescent fracture line through fragmentation to reossification and residual deformity",
-   "The lateral pillar (Herring) and Catterall classifications describe the extent of femoral head involvement and guide prognosis",
-   "Knee or thigh pain in a young child should always prompt examination of the hip to avoid missing the diagnosis",
-   "Management centres on maintaining hip motion and femoral head containment using activity modification, physiotherapy, bracing or containment surgery as needed"
+  "id": "legg_calve_perthes_disease",
+  "name": "Legg-Calve-Perthes disease",
+  "aliases": [
+    "Perthes disease",
+    "Legg-Calve-Perthes",
+    "coxa plana",
+    "idiopathic osteonecrosis of the capital femoral epiphysis"
   ],
-  "pathophysiology": "Legg-Calve-Perthes disease is an idiopathic osteonecrosis of the capital femoral epiphysis caused by interruption of its blood supply in the immature hip. The precarious vascular supply of the developing femoral head, dependent largely on the lateral epiphyseal vessels, undergoes one or more episodes of ischaemia, leading to death of the subchondral bone and marrow. The necrotic bone becomes mechanically weak, and a subchondral fracture may occur followed by fragmentation and resorption. Revascularisation and creeping substitution then rebuild the epiphysis, but during this vulnerable phase the softened femoral head can deform under load, producing flattening and enlargement (coxa plana and coxa magna). The ultimate shape of the femoral head and its congruency with the acetabulum determine long-term hip function.",
-  "additionalDifferentials": [
-   "Transient synovitis of the hip",
-   "Septic arthritis or osteomyelitis of the hip",
-   "Slipped capital femoral epiphysis",
-   "Multiple epiphyseal dysplasia or spondyloepiphyseal dysplasia",
-   "Secondary osteonecrosis (for example from corticosteroids, sickle cell disease or Gaucher disease)",
-   "Juvenile idiopathic arthritis of the hip"
-  ],
-  "additionalInvestigations": [
-   "Anteroposterior and frog-lateral pelvic radiographs to assess the epiphysis and stage the disease",
-   "Magnetic resonance imaging for early diagnosis before radiographic change and to assess femoral head coverage",
-   "Lateral pillar (Herring) classification to help predict outcome",
-   "Assessment of hip range of motion, particularly abduction and internal rotation",
-   "Bilateral imaging and consideration of an epiphyseal dysplasia if changes are symmetrical",
-   "Investigations for a secondary cause of osteonecrosis when the presentation is atypical"
-  ],
-  "redFlags": [
-   "Fever, systemic upset or a markedly irritable hip suggesting septic arthritis",
-   "Bilateral symmetrical epiphyseal changes indicating a skeletal dysplasia rather than Perthes disease",
-   "An acute inability to bear weight, which may signal slipped capital femoral epiphysis",
-   "Progressive femoral head extrusion and loss of containment during the fragmentation phase"
-  ],
-  "prognosis": "Outcome depends on age at onset, extent of femoral head involvement and residual head shape; younger children with limited involvement often remodel well, whereas older children with extensive involvement and an aspherical, incongruent head are at greater risk of premature osteoarthritis.",
-  "pitfalls": [
-   "Attributing a child's knee or thigh pain to a local cause and failing to examine and image the hip",
-   "Mistaking early Perthes disease for transient synovitis and not arranging follow-up",
-   "Overlooking bilateral symmetrical changes that indicate an epiphyseal dysplasia",
-   "Losing femoral head containment by neglecting range of motion during the vulnerable fragmentation phase"
-  ],
-  "references": [
-   "Tachdjian's Pediatric Orthopaedics",
-   "Campbell's Operative Orthopaedics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Base management on the principle of containment, keeping the femoral head within the acetabulum during the biologically plastic phase",
-   "In younger children with limited involvement, use non-operative care with activity modification, protected weight-bearing and simple analgesia",
-   "Maintain and restore hip movement, especially abduction and internal rotation, with physiotherapy and where needed an abduction orthosis",
-   "Consider containment surgery such as femoral varus or pelvic (acetabular) osteotomy for older children or those with extensive femoral head involvement",
-   "Provide symptomatic pain relief with anti-inflammatory agents during painful phases",
-   "Monitor with serial radiographs, staging progression and femoral head coverage (for example the lateral pillar classification) to guide treatment",
-   "Refer to paediatric orthopaedics with long-term follow-up for residual deformity and later risk of premature osteoarthritis requiring joint-preserving or replacement surgery"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "legg_calve_perthes_disease-pathway",
-   "title": "Legg-Calve-Perthes disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A true idiopathic osteonecrosis of the capital femoral epiphysis in the growing child, not a traction apophysitis",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Fever, systemic upset or a markedly irritable hip suggesting septic arthritis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Anteroposterior and frog-lateral pelvic radiographs to assess the epiphysis and stage the disease, Magnetic resonance imaging for early diagnosis before radiographic change and to assess femoral head coverage, Lateral"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Base management on the principle of containment, keeping the femoral head within the acetabulum during the biologically plastic phase"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing a child's knee or thigh pain to a local cause and failing to examine and image the hip"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of legg-calve-perthes disease."
-  }
- ],
- "tables": [
-  {
-   "id": "legg_calve_perthes_disease-matrix",
-   "title": "Legg-Calve-Perthes disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A true idiopathic osteonecrosis of the capital femoral epiphysis in the growing child, not a traction apophysitis",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Orthopaedics",
+  "specialty": "Orthopaedics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Tachdjian's Pediatric Orthopaedics / Campbell's Operative Orthopaedics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A true idiopathic osteonecrosis of the capital femoral epiphysis in the growing child, not a traction apophysitis",
+      "Affected bone is the femoral head (capital femoral epiphysis) of the hip",
+      "Typically affects children roughly four to eight years of age, and is several times more common in boys, usually unilateral",
+      "Presents with a painless or mildly painful limp and referred pain to the groin, thigh or knee, with restricted hip abduction and internal rotation",
+      "The radiographic hallmark evolves from a smaller, denser epiphysis and a subchondral crescent fracture line through fragmentation to reossification and residual deformity",
+      "The lateral pillar (Herring) and Catterall classifications describe the extent of femoral head involvement and guide prognosis",
+      "Knee or thigh pain in a young child should always prompt examination of the hip to avoid missing the diagnosis",
+      "Management centres on maintaining hip motion and femoral head containment using activity modification, physiotherapy, bracing or containment surgery as needed"
     ],
-    [
-     "Key Investigations",
-     "Anteroposterior and frog-lateral pelvic radiographs to assess the epiphysis and stage the disease, Magnetic resonance imaging for",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Legg-Calve-Perthes disease is an idiopathic osteonecrosis of the capital femoral epiphysis caused by interruption of its blood supply in the immature hip. The precarious vascular supply of the developing femoral head, dependent largely on the lateral epiphyseal vessels, undergoes one or more episodes of ischaemia, leading to death of the subchondral bone and marrow. The necrotic bone becomes mechanically weak, and a subchondral fracture may occur followed by fragmentation and resorption. Revascularisation and creeping substitution then rebuild the epiphysis, but during this vulnerable phase the softened femoral head can deform under load, producing flattening and enlargement (coxa plana and coxa magna). The ultimate shape of the femoral head and its congruency with the acetabulum determine long-term hip function.",
+    "additionalDifferentials": [
+      "Transient synovitis of the hip",
+      "Septic arthritis or osteomyelitis of the hip",
+      "Slipped capital femoral epiphysis",
+      "Multiple epiphyseal dysplasia or spondyloepiphyseal dysplasia",
+      "Secondary osteonecrosis (for example from corticosteroids, sickle cell disease or Gaucher disease)",
+      "Juvenile idiopathic arthritis of the hip"
     ],
-    [
-     "Primary Differentials",
-     "Transient synovitis of the hip, Septic arthritis or osteomyelitis of the hip, Slipped capital femoral epiphysis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Anteroposterior and frog-lateral pelvic radiographs to assess the epiphysis and stage the disease",
+      "Magnetic resonance imaging for early diagnosis before radiographic change and to assess femoral head coverage",
+      "Lateral pillar (Herring) classification to help predict outcome",
+      "Assessment of hip range of motion, particularly abduction and internal rotation",
+      "Bilateral imaging and consideration of an epiphyseal dysplasia if changes are symmetrical",
+      "Investigations for a secondary cause of osteonecrosis when the presentation is atypical"
     ],
-    [
-     "Management Strategy",
-     "Base management on the principle of containment, keeping the femoral head within the acetabulum during the biologically plastic",
-     "Core treatment modality"
+    "redFlags": [
+      "Fever, systemic upset or a markedly irritable hip suggesting septic arthritis",
+      "Bilateral symmetrical epiphyseal changes indicating a skeletal dysplasia rather than Perthes disease",
+      "An acute inability to bear weight, which may signal slipped capital femoral epiphysis",
+      "Progressive femoral head extrusion and loss of containment during the fragmentation phase"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing a child's knee or thigh pain to a local cause and failing to examine and image the hip",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome depends on age at onset, extent of femoral head involvement and residual head shape; younger children with limited involvement often remodel well, whereas older children with extensive involvement and an aspherical, incongruent head are at greater risk of premature osteoarthritis.",
+    "pitfalls": [
+      "Attributing a child's knee or thigh pain to a local cause and failing to examine and image the hip",
+      "Mistaking early Perthes disease for transient synovitis and not arranging follow-up",
+      "Overlooking bilateral symmetrical changes that indicate an epiphyseal dysplasia",
+      "Losing femoral head containment by neglecting range of motion during the vulnerable fragmentation phase"
+    ],
+    "references": [
+      "Tachdjian's Pediatric Orthopaedics",
+      "Campbell's Operative Orthopaedics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Base management on the principle of containment, keeping the femoral head within the acetabulum during the biologically plastic phase",
+      "In younger children with limited involvement, use non-operative care with activity modification, protected weight-bearing and simple analgesia",
+      "Maintain and restore hip movement, especially abduction and internal rotation, with physiotherapy and where needed an abduction orthosis",
+      "Consider containment surgery such as femoral varus or pelvic (acetabular) osteotomy for older children or those with extensive femoral head involvement",
+      "Provide symptomatic pain relief with anti-inflammatory agents during painful phases",
+      "Monitor with serial radiographs, staging progression and femoral head coverage (for example the lateral pillar classification) to guide treatment",
+      "Refer to paediatric orthopaedics with long-term follow-up for residual deformity and later risk of premature osteoarthritis requiring joint-preserving or replacement surgery"
     ]
-   ],
-   "caption": "Overview comparison matrix for legg-calve-perthes disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "legg-calve-perthes-disease-real-image",
-   "title": "Legg-Calve-Perthes disease: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "legg_calve_perthes_disease-pathway",
+      "title": "Legg-Calve-Perthes disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A true idiopathic osteonecrosis of the capital femoral epiphysis in the growing child, not a traction apophysitis",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Fever, systemic upset or a markedly irritable hip suggesting septic arthritis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Anteroposterior and frog-lateral pelvic radiographs to assess the epiphysis and stage the disease, Magnetic resonance imaging for early diagnosis before radiographic change and to assess femoral head coverage, Lateral"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Base management on the principle of containment, keeping the femoral head within the acetabulum during the biologically plastic phase"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing a child's knee or thigh pain to a local cause and failing to examine and image the hip"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of legg-calve-perthes disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "legg_calve_perthes_disease-matrix",
+      "title": "Legg-Calve-Perthes disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A true idiopathic osteonecrosis of the capital femoral epiphysis in the growing child, not a traction apophysitis",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Anteroposterior and frog-lateral pelvic radiographs to assess the epiphysis and stage the disease, Magnetic resonance imaging for",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Transient synovitis of the hip, Septic arthritis or osteomyelitis of the hip, Slipped capital femoral epiphysis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Base management on the principle of containment, keeping the femoral head within the acetabulum during the biologically plastic",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing a child's knee or thigh pain to a local cause and failing to examine and image the hip",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for legg-calve-perthes disease."
+    }
+  ],
+  "diagrams": []
 }

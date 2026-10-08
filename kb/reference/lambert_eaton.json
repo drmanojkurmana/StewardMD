@@ -1,178 +1,156 @@
 {
- "id": "lambert_eaton",
- "name": "Lambert-Eaton myasthenic syndrome",
- "aliases": [
-  "Eaton-Lambert syndrome",
-  "LEMS",
-  "Lambert-Eaton syndrome",
-  "lambert eaton myasthenic syndrome",
-  "myasthenic syndrome of Lambert-Eaton",
-  "myasthenic-myopathic syndrome"
- ],
- "class": "non_infective",
- "system": "Neurology",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / Bradley's Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A presynaptic disorder of neuromuscular transmission caused by antibodies against voltage-gated calcium channels that reduce acetylcholine release",
-   "Presents with proximal limb weakness, especially the legs, together with autonomic features such as dry mouth, constipation, and erectile dysfunction",
-   "Strength may transiently improve with sustained or repeated effort (post-exercise facilitation), and depressed reflexes can augment after exercise",
-   "Ocular and bulbar symptoms are usually milder than in myasthenia gravis, though some overlap occurs",
-   "About half of cases are paraneoplastic, most often linked to small-cell lung cancer, and may precede the tumour diagnosis",
-   "Repetitive nerve stimulation shows a low baseline compound muscle action potential with decrement at low frequency and marked increment at high frequency or after exercise",
-   "Treatment addresses any underlying tumour and enhances acetylcholine release; immunotherapy is used for symptom control",
-   "A validated screening score helps stratify the likelihood of underlying small-cell lung cancer and guides surveillance"
+  "id": "lambert_eaton",
+  "name": "Lambert-Eaton myasthenic syndrome",
+  "aliases": [
+    "Eaton-Lambert syndrome",
+    "LEMS",
+    "Lambert-Eaton syndrome",
+    "lambert eaton myasthenic syndrome",
+    "myasthenic syndrome of Lambert-Eaton",
+    "myasthenic-myopathic syndrome"
   ],
-  "pathophysiology": "In LEMS, IgG autoantibodies target P/Q-type voltage-gated calcium channels on the presynaptic motor nerve terminal. Reduced calcium influx during depolarisation diminishes the quantal release of acetylcholine, so the endplate potential often fails to reach threshold at rest, causing weakness. Repeated activity allows calcium to accumulate in the terminal, temporarily augmenting release and improving strength, which explains facilitation. The same antibodies act on autonomic ganglia and terminals, producing cholinergic autonomic failure. In paraneoplastic cases the tumour expresses calcium channels that trigger the cross-reactive immune response.",
-  "additionalDifferentials": [
-   "Myasthenia gravis",
-   "Inflammatory or metabolic myopathy",
-   "Motor neuron disease",
-   "Chronic inflammatory demyelinating polyradiculoneuropathy",
-   "Botulism (also a presynaptic disorder)",
-   "Guillain-Barre syndrome"
-  ],
-  "additionalInvestigations": [
-   "Serum antibodies against P/Q-type voltage-gated calcium channels",
-   "Repetitive nerve stimulation at low and high frequency and post-exercise testing",
-   "CT of the chest and, if negative, FDG-PET to search for small-cell lung cancer",
-   "Interval tumour surveillance imaging when initial screening is negative but risk is high",
-   "SOX1 antibodies as a marker supporting an underlying small-cell lung cancer",
-   "Single-fibre electromyography in equivocal neuromuscular transmission cases"
-  ],
-  "redFlags": [
-   "Any new diagnosis should trigger a directed search for occult malignancy, especially small-cell lung cancer",
-   "Weight loss, haemoptysis, or a smoking history increasing suspicion of underlying tumour",
-   "Progressive bulbar or respiratory weakness requiring monitoring of airway and ventilation",
-   "Severe autonomic failure causing symptomatic hypotension or gastrointestinal stasis"
-  ],
-  "prognosis": "Symptoms often improve with treatment of any underlying cancer and with therapies that enhance acetylcholine release; the overall outlook is dominated by the associated malignancy when present, whereas non-paraneoplastic disease tends to follow a more indolent, manageable course.",
-  "pitfalls": [
-   "Misdiagnosing LEMS as myasthenia gravis and missing the search for lung cancer",
-   "Stopping tumour surveillance too early after an initially negative chest scan",
-   "Overlooking autonomic symptoms that are an important diagnostic clue",
-   "Failing to appreciate post-exercise facilitation on examination and electrophysiology",
-   "Attributing proximal weakness to a primary myopathy without neuromuscular junction testing"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "Bradley's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Start symptomatic treatment with amifampridine (3,4-diaminopyridine) to enhance presynaptic acetylcholine release, adding pyridostigmine where helpful",
-   "Search for and treat underlying small-cell lung cancer, since successful tumour treatment often improves the neurological syndrome",
-   "Use immunotherapy - corticosteroids, azathioprine, intravenous immunoglobulin, plasma exchange or rituximab - for disabling or refractory weakness",
-   "Continue interval tumour surveillance with CT and FDG-PET when initial screening is negative but malignancy risk remains high",
-   "Provide supportive care including physiotherapy and symptomatic treatment of autonomic features such as dry mouth and constipation",
-   "Coordinate multidisciplinary care across neurology, oncology and respiratory medicine",
-   "Escalate and monitor ventilation if severe, bulbar or respiratory weakness develops"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "lambert_eaton-pathway",
-   "title": "Lambert-Eaton myasthenic syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A presynaptic disorder of neuromuscular transmission caused by antibodies against voltage-gated calcium channels that reduce acetylcholine release",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Any new diagnosis should trigger a directed search for occult malignancy, especially small-cell lung cancer",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum antibodies against P/Q-type voltage-gated calcium channels, Repetitive nerve stimulation at low and high frequency and post-exercise testing, CT of the chest and, if negative, FDG-PET to search for small-cell lung"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Start symptomatic treatment with amifampridine (3,4-diaminopyridine) to enhance presynaptic acetylcholine release, adding pyridostigmine where helpful"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing LEMS as myasthenia gravis and missing the search for lung cancer"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of lambert-eaton myasthenic syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "lambert_eaton-matrix",
-   "title": "Lambert-Eaton myasthenic syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A presynaptic disorder of neuromuscular transmission caused by antibodies against voltage-gated calcium channels that reduce",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neurology",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / Bradley's Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A presynaptic disorder of neuromuscular transmission caused by antibodies against voltage-gated calcium channels that reduce acetylcholine release",
+      "Presents with proximal limb weakness, especially the legs, together with autonomic features such as dry mouth, constipation, and erectile dysfunction",
+      "Strength may transiently improve with sustained or repeated effort (post-exercise facilitation), and depressed reflexes can augment after exercise",
+      "Ocular and bulbar symptoms are usually milder than in myasthenia gravis, though some overlap occurs",
+      "About half of cases are paraneoplastic, most often linked to small-cell lung cancer, and may precede the tumour diagnosis",
+      "Repetitive nerve stimulation shows a low baseline compound muscle action potential with decrement at low frequency and marked increment at high frequency or after exercise",
+      "Treatment addresses any underlying tumour and enhances acetylcholine release; immunotherapy is used for symptom control",
+      "A validated screening score helps stratify the likelihood of underlying small-cell lung cancer and guides surveillance"
     ],
-    [
-     "Key Investigations",
-     "Serum antibodies against P/Q-type voltage-gated calcium channels, Repetitive nerve stimulation at low and high frequency and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "In LEMS, IgG autoantibodies target P/Q-type voltage-gated calcium channels on the presynaptic motor nerve terminal. Reduced calcium influx during depolarisation diminishes the quantal release of acetylcholine, so the endplate potential often fails to reach threshold at rest, causing weakness. Repeated activity allows calcium to accumulate in the terminal, temporarily augmenting release and improving strength, which explains facilitation. The same antibodies act on autonomic ganglia and terminals, producing cholinergic autonomic failure. In paraneoplastic cases the tumour expresses calcium channels that trigger the cross-reactive immune response.",
+    "additionalDifferentials": [
+      "Myasthenia gravis",
+      "Inflammatory or metabolic myopathy",
+      "Motor neuron disease",
+      "Chronic inflammatory demyelinating polyradiculoneuropathy",
+      "Botulism (also a presynaptic disorder)",
+      "Guillain-Barre syndrome"
     ],
-    [
-     "Primary Differentials",
-     "Myasthenia gravis, Inflammatory or metabolic myopathy, Motor neuron disease",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum antibodies against P/Q-type voltage-gated calcium channels",
+      "Repetitive nerve stimulation at low and high frequency and post-exercise testing",
+      "CT of the chest and, if negative, FDG-PET to search for small-cell lung cancer",
+      "Interval tumour surveillance imaging when initial screening is negative but risk is high",
+      "SOX1 antibodies as a marker supporting an underlying small-cell lung cancer",
+      "Single-fibre electromyography in equivocal neuromuscular transmission cases"
     ],
-    [
-     "Management Strategy",
-     "Start symptomatic treatment with amifampridine (3,4-diaminopyridine) to enhance presynaptic acetylcholine release, adding",
-     "Core treatment modality"
+    "redFlags": [
+      "Any new diagnosis should trigger a directed search for occult malignancy, especially small-cell lung cancer",
+      "Weight loss, haemoptysis, or a smoking history increasing suspicion of underlying tumour",
+      "Progressive bulbar or respiratory weakness requiring monitoring of airway and ventilation",
+      "Severe autonomic failure causing symptomatic hypotension or gastrointestinal stasis"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing LEMS as myasthenia gravis and missing the search for lung cancer",
-     "Prevent diagnostic or management error"
+    "prognosis": "Symptoms often improve with treatment of any underlying cancer and with therapies that enhance acetylcholine release; the overall outlook is dominated by the associated malignancy when present, whereas non-paraneoplastic disease tends to follow a more indolent, manageable course.",
+    "pitfalls": [
+      "Misdiagnosing LEMS as myasthenia gravis and missing the search for lung cancer",
+      "Stopping tumour surveillance too early after an initially negative chest scan",
+      "Overlooking autonomic symptoms that are an important diagnostic clue",
+      "Failing to appreciate post-exercise facilitation on examination and electrophysiology",
+      "Attributing proximal weakness to a primary myopathy without neuromuscular junction testing"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "Bradley's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Start symptomatic treatment with amifampridine (3,4-diaminopyridine) to enhance presynaptic acetylcholine release, adding pyridostigmine where helpful",
+      "Search for and treat underlying small-cell lung cancer, since successful tumour treatment often improves the neurological syndrome",
+      "Use immunotherapy - corticosteroids, azathioprine, intravenous immunoglobulin, plasma exchange or rituximab - for disabling or refractory weakness",
+      "Continue interval tumour surveillance with CT and FDG-PET when initial screening is negative but malignancy risk remains high",
+      "Provide supportive care including physiotherapy and symptomatic treatment of autonomic features such as dry mouth and constipation",
+      "Coordinate multidisciplinary care across neurology, oncology and respiratory medicine",
+      "Escalate and monitor ventilation if severe, bulbar or respiratory weakness develops"
     ]
-   ],
-   "caption": "Overview comparison matrix for lambert-eaton myasthenic syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "lambert-eaton-real-image",
-   "title": "Lambert-Eaton myasthenic syndrome: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "lambert_eaton-pathway",
+      "title": "Lambert-Eaton myasthenic syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A presynaptic disorder of neuromuscular transmission caused by antibodies against voltage-gated calcium channels that reduce acetylcholine release",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Any new diagnosis should trigger a directed search for occult malignancy, especially small-cell lung cancer",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum antibodies against P/Q-type voltage-gated calcium channels, Repetitive nerve stimulation at low and high frequency and post-exercise testing, CT of the chest and, if negative, FDG-PET to search for small-cell lung"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Start symptomatic treatment with amifampridine (3,4-diaminopyridine) to enhance presynaptic acetylcholine release, adding pyridostigmine where helpful"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing LEMS as myasthenia gravis and missing the search for lung cancer"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of lambert-eaton myasthenic syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "lambert_eaton-matrix",
+      "title": "Lambert-Eaton myasthenic syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A presynaptic disorder of neuromuscular transmission caused by antibodies against voltage-gated calcium channels that reduce",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum antibodies against P/Q-type voltage-gated calcium channels, Repetitive nerve stimulation at low and high frequency and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Myasthenia gravis, Inflammatory or metabolic myopathy, Motor neuron disease",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Start symptomatic treatment with amifampridine (3,4-diaminopyridine) to enhance presynaptic acetylcholine release, adding",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing LEMS as myasthenia gravis and missing the search for lung cancer",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for lambert-eaton myasthenic syndrome."
+    }
+  ],
+  "diagrams": []
 }

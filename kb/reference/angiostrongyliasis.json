@@ -1,175 +1,153 @@
 {
- "id": "angiostrongyliasis",
- "name": "Angiostrongyliasis",
- "aliases": [
-  "Angiostrongylus cantonensis infection",
-  "rat lungworm disease",
-  "eosinophilic meningitis",
-  "neuroangiostrongyliasis"
- ],
- "class": "infective",
- "system": "Infectious disease",
- "specialty": "Infectious Diseases / Tropical Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Manson's Tropical Diseases; CDC parasitic disease guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The leading infective cause of eosinophilic meningitis worldwide, caused by the rat lungworm Angiostrongylus cantonensis",
-   "Acquired by eating raw or undercooked snails and slugs, or paratenic hosts such as freshwater prawns, crabs and frogs, or contaminated unwashed produce",
-   "Endemic in Southeast Asia and the Pacific, with expanding distribution including parts of the Americas",
-   "Presents with severe headache, neck stiffness, nausea and often striking paraesthesiae or hyperaesthesia; cranial nerve palsies can occur",
-   "Cerebrospinal fluid characteristically shows a raised opening pressure with eosinophilic pleocytosis",
-   "A related species, Angiostrongylus costaricensis, instead causes abdominal (intestinal) angiostrongyliasis",
-   "Management is largely supportive, with analgesia, repeated therapeutic lumbar puncture to relieve pressure and headache, and corticosteroids for the inflammatory reaction; the role of anthelmintics is debated",
-   "Most immunocompetent patients recover, but heavy infections can cause lasting neurological damage or death"
+  "id": "angiostrongyliasis",
+  "name": "Angiostrongyliasis",
+  "aliases": [
+    "Angiostrongylus cantonensis infection",
+    "rat lungworm disease",
+    "eosinophilic meningitis",
+    "neuroangiostrongyliasis"
   ],
-  "pathophysiology": "Angiostrongylus cantonensis completes its natural cycle in rats and molluscs. Humans become accidental hosts by ingesting third-stage larvae in raw or undercooked snails, slugs or paratenic hosts, or on contaminated produce. The larvae penetrate the intestine, enter the circulation and migrate to the central nervous system, where they cannot complete development. Their migration and death within the brain, meninges and cerebrospinal fluid provoke an intense eosinophil-rich inflammatory response, producing eosinophilic meningitis with raised intracranial pressure. Dying larvae and the surrounding inflammation account for the headache, sensory disturbances and, in severe cases, focal neurological injury.",
-  "additionalDifferentials": [
-   "Gnathostomiasis and other parasitic causes of eosinophilic meningitis",
-   "Neurocysticercosis",
-   "Coccidioidal or other fungal meningitis",
-   "Tuberculous meningitis",
-   "Central nervous system malignancy or drug-induced eosinophilic meningitis",
-   "Viral (aseptic) meningitis"
-  ],
-  "additionalInvestigations": [
-   "Lumbar puncture with measurement of opening pressure and cerebrospinal fluid cell count and differential",
-   "Cerebrospinal fluid and blood eosinophil quantification",
-   "Serology or molecular testing for Angiostrongylus where available",
-   "MRI of the brain for migratory or inflammatory lesions",
-   "Dietary and exposure history (snails, slugs, prawns, unwashed vegetables)",
-   "Exclusion of tuberculous, fungal and neoplastic causes of eosinophilic meningitis"
-  ],
-  "redFlags": [
-   "Depressed consciousness or focal neurological deficit",
-   "Cranial nerve palsies or visual involvement",
-   "Rapidly rising intracranial pressure",
-   "Signs of severe or complicated meningoencephalitis"
-  ],
-  "prognosis": "Most immunocompetent patients recover over weeks with supportive care, though headache and paraesthesiae may be prolonged; heavy larval burdens can cause permanent neurological sequelae or death.",
-  "pitfalls": [
-   "Not requesting a cerebrospinal fluid differential and thereby missing the eosinophilic pleocytosis",
-   "Overlooking the exposure history to snails, slugs or unwashed produce",
-   "Giving anthelmintics without corticosteroid cover, which may worsen inflammation as larvae die",
-   "Failing to relieve raised intracranial pressure with therapeutic lumbar puncture",
-   "Confusing it with the abdominal disease caused by Angiostrongylus costaricensis"
-  ],
-  "references": [
-   "Manson's Tropical Diseases",
-   "CDC guidance on Angiostrongylus infection"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Corticosteroids to suppress the eosinophilic inflammatory response and shorten the headache and neurological symptoms",
-   "Serial therapeutic lumbar punctures to relieve raised intracranial pressure and headache",
-   "Analgesia and supportive care for headache and paraesthesiae during the largely self-limiting course",
-   "Anthelmintic therapy such as albendazole only with concurrent corticosteroid cover and by specialist decision, as killing larvae can intensify inflammation",
-   "Neurological monitoring for complications such as cranial nerve palsies and focal deficits, with escalation for severe intracranial hypertension",
-   "Preventive advice on thoroughly cooking snails, slugs and freshwater crustaceans and washing produce"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "angiostrongyliasis-pathway",
-   "title": "Angiostrongyliasis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The leading infective cause of eosinophilic meningitis worldwide, caused by the rat lungworm Angiostrongylus cantonensis",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Depressed consciousness or focal neurological deficit",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Lumbar puncture with measurement of opening pressure and cerebrospinal fluid cell count and differential, Cerebrospinal fluid and blood eosinophil quantification, Serology or molecular testing for Angiostrongylus where"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Corticosteroids to suppress the eosinophilic inflammatory response and shorten the headache and neurological symptoms"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Not requesting a cerebrospinal fluid differential and thereby missing the eosinophilic pleocytosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of angiostrongyliasis."
-  }
- ],
- "tables": [
-  {
-   "id": "angiostrongyliasis-matrix",
-   "title": "Angiostrongyliasis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The leading infective cause of eosinophilic meningitis worldwide, caused by the rat lungworm Angiostrongylus cantonensis",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious disease",
+  "specialty": "Infectious Diseases / Tropical Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Manson's Tropical Diseases; CDC parasitic disease guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The leading infective cause of eosinophilic meningitis worldwide, caused by the rat lungworm Angiostrongylus cantonensis",
+      "Acquired by eating raw or undercooked snails and slugs, or paratenic hosts such as freshwater prawns, crabs and frogs, or contaminated unwashed produce",
+      "Endemic in Southeast Asia and the Pacific, with expanding distribution including parts of the Americas",
+      "Presents with severe headache, neck stiffness, nausea and often striking paraesthesiae or hyperaesthesia; cranial nerve palsies can occur",
+      "Cerebrospinal fluid characteristically shows a raised opening pressure with eosinophilic pleocytosis",
+      "A related species, Angiostrongylus costaricensis, instead causes abdominal (intestinal) angiostrongyliasis",
+      "Management is largely supportive, with analgesia, repeated therapeutic lumbar puncture to relieve pressure and headache, and corticosteroids for the inflammatory reaction; the role of anthelmintics is debated",
+      "Most immunocompetent patients recover, but heavy infections can cause lasting neurological damage or death"
     ],
-    [
-     "Key Investigations",
-     "Lumbar puncture with measurement of opening pressure and cerebrospinal fluid cell count and differential, Cerebrospinal fluid and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Angiostrongylus cantonensis completes its natural cycle in rats and molluscs. Humans become accidental hosts by ingesting third-stage larvae in raw or undercooked snails, slugs or paratenic hosts, or on contaminated produce. The larvae penetrate the intestine, enter the circulation and migrate to the central nervous system, where they cannot complete development. Their migration and death within the brain, meninges and cerebrospinal fluid provoke an intense eosinophil-rich inflammatory response, producing eosinophilic meningitis with raised intracranial pressure. Dying larvae and the surrounding inflammation account for the headache, sensory disturbances and, in severe cases, focal neurological injury.",
+    "additionalDifferentials": [
+      "Gnathostomiasis and other parasitic causes of eosinophilic meningitis",
+      "Neurocysticercosis",
+      "Coccidioidal or other fungal meningitis",
+      "Tuberculous meningitis",
+      "Central nervous system malignancy or drug-induced eosinophilic meningitis",
+      "Viral (aseptic) meningitis"
     ],
-    [
-     "Primary Differentials",
-     "Gnathostomiasis and other parasitic causes of eosinophilic meningitis, Neurocysticercosis, Coccidioidal or other fungal meningitis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Lumbar puncture with measurement of opening pressure and cerebrospinal fluid cell count and differential",
+      "Cerebrospinal fluid and blood eosinophil quantification",
+      "Serology or molecular testing for Angiostrongylus where available",
+      "MRI of the brain for migratory or inflammatory lesions",
+      "Dietary and exposure history (snails, slugs, prawns, unwashed vegetables)",
+      "Exclusion of tuberculous, fungal and neoplastic causes of eosinophilic meningitis"
     ],
-    [
-     "Management Strategy",
-     "Corticosteroids to suppress the eosinophilic inflammatory response and shorten the headache and neurological symptoms",
-     "Core treatment modality"
+    "redFlags": [
+      "Depressed consciousness or focal neurological deficit",
+      "Cranial nerve palsies or visual involvement",
+      "Rapidly rising intracranial pressure",
+      "Signs of severe or complicated meningoencephalitis"
     ],
-    [
-     "Clinical Pitfall",
-     "Not requesting a cerebrospinal fluid differential and thereby missing the eosinophilic pleocytosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most immunocompetent patients recover over weeks with supportive care, though headache and paraesthesiae may be prolonged; heavy larval burdens can cause permanent neurological sequelae or death.",
+    "pitfalls": [
+      "Not requesting a cerebrospinal fluid differential and thereby missing the eosinophilic pleocytosis",
+      "Overlooking the exposure history to snails, slugs or unwashed produce",
+      "Giving anthelmintics without corticosteroid cover, which may worsen inflammation as larvae die",
+      "Failing to relieve raised intracranial pressure with therapeutic lumbar puncture",
+      "Confusing it with the abdominal disease caused by Angiostrongylus costaricensis"
+    ],
+    "references": [
+      "Manson's Tropical Diseases",
+      "CDC guidance on Angiostrongylus infection"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Corticosteroids to suppress the eosinophilic inflammatory response and shorten the headache and neurological symptoms",
+      "Serial therapeutic lumbar punctures to relieve raised intracranial pressure and headache",
+      "Analgesia and supportive care for headache and paraesthesiae during the largely self-limiting course",
+      "Anthelmintic therapy such as albendazole only with concurrent corticosteroid cover and by specialist decision, as killing larvae can intensify inflammation",
+      "Neurological monitoring for complications such as cranial nerve palsies and focal deficits, with escalation for severe intracranial hypertension",
+      "Preventive advice on thoroughly cooking snails, slugs and freshwater crustaceans and washing produce"
     ]
-   ],
-   "caption": "Overview comparison matrix for angiostrongyliasis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "angiostrongyliasis-real-image",
-   "title": "Angiostrongyliasis: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "angiostrongyliasis-pathway",
+      "title": "Angiostrongyliasis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The leading infective cause of eosinophilic meningitis worldwide, caused by the rat lungworm Angiostrongylus cantonensis",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Depressed consciousness or focal neurological deficit",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Lumbar puncture with measurement of opening pressure and cerebrospinal fluid cell count and differential, Cerebrospinal fluid and blood eosinophil quantification, Serology or molecular testing for Angiostrongylus where"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Corticosteroids to suppress the eosinophilic inflammatory response and shorten the headache and neurological symptoms"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Not requesting a cerebrospinal fluid differential and thereby missing the eosinophilic pleocytosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of angiostrongyliasis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "angiostrongyliasis-matrix",
+      "title": "Angiostrongyliasis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The leading infective cause of eosinophilic meningitis worldwide, caused by the rat lungworm Angiostrongylus cantonensis",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Lumbar puncture with measurement of opening pressure and cerebrospinal fluid cell count and differential, Cerebrospinal fluid and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Gnathostomiasis and other parasitic causes of eosinophilic meningitis, Neurocysticercosis, Coccidioidal or other fungal meningitis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Corticosteroids to suppress the eosinophilic inflammatory response and shorten the headache and neurological symptoms",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Not requesting a cerebrospinal fluid differential and thereby missing the eosinophilic pleocytosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for angiostrongyliasis."
+    }
+  ],
+  "diagrams": []
 }

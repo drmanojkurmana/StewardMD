@@ -1,178 +1,156 @@
 {
- "id": "solar_retinopathy",
- "name": "solar retinopathy",
- "aliases": [
-  "foveomacular retinitis",
-  "solar maculopathy",
-  "eclipse retinopathy"
- ],
- "class": "non_infective",
- "system": "ophthalmic",
- "specialty": "ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Ryan's Retina",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by direct or prolonged viewing of the sun, classically after solar eclipse gazing, sun worship, or telescope viewing without adequate filters, and increasingly reported after use of hallucinogens or psychiatric illness where sun-staring occurs.",
-   "Patients present hours to a day or two after exposure with bilateral (occasionally asymmetrical) central or paracentral scotoma, blurred vision, metamorphopsia, dyschromatopsia and sometimes chromatopsia or micropsia.",
-   "Visual acuity is often only mildly to moderately reduced despite marked symptomatic disturbance, and a positive history of sun exposure is the key to diagnosis.",
-   "Early fundus signs are subtle, a small yellow-white foveal spot, later evolving into a sharply defined reddish foveal lesion, and may be missed without careful stereoscopic macular examination.",
-   "Optical coherence tomography is the most sensitive investigation, characteristically showing a focal defect in the outer retinal layers at the fovea with disruption of the ellipsoid zone and interdigitation zone.",
-   "The injury is predominantly photochemical (and to a lesser extent thermal) damage to the photoreceptors and retinal pigment epithelium rather than a burn from focused heat alone.",
-   "Fluorescein angiography is often normal or shows only a subtle window defect, helping to distinguish it from exudative maculopathies.",
-   "No proven specific treatment exists; management centres on preventing further exposure, patient education and observation, with corticosteroids of unproven benefit."
+  "id": "solar_retinopathy",
+  "name": "solar retinopathy",
+  "aliases": [
+    "foveomacular retinitis",
+    "solar maculopathy",
+    "eclipse retinopathy"
   ],
-  "pathophysiology": "Solar retinopathy results chiefly from photochemical injury to the outer retina when short-wavelength (blue) and near-ultraviolet light from direct solar viewing is focused by the optics of the eye onto the fovea. Absorbed radiant energy generates reactive oxygen species that damage photoreceptor outer segments and the underlying retinal pigment epithelium, with a smaller contribution from thermal energy that raises local tissue temperature. The fovea is preferentially affected because it lies at the point of optical focus and lacks the protective screening of inner retinal vasculature and, being cone-rich, is metabolically vulnerable. The acute insult produces oedema and disruption of the photoreceptor layer; over subsequent weeks the pigment epithelium and photoreceptors may partially recover or leave a permanent focal outer retinal defect, sometimes a small lamellar cavity, accounting for the residual scotoma. Predisposing factors include a clear atmosphere, dilated pupils, youth with clear ocular media, and pharmacological or behavioural states that prolong sun-gazing.",
-  "additionalDifferentials": [
-   "Laser pointer or welding-arc phototoxic maculopathy",
-   "Macular hole or impending macular hole",
-   "Acute idiopathic maculopathy",
-   "Central serous chorioretinopathy",
-   "Poppers (amyl nitrite) maculopathy",
-   "Torpedo maculopathy or other focal outer retinal defect",
-   "Occult macular dystrophy"
-  ],
-  "additionalInvestigations": [
-   "Spectral-domain optical coherence tomography of the fovea for outer retinal and ellipsoid zone defects",
-   "Fundus autofluorescence to detect focal pigment epithelial change",
-   "Amsler grid testing to map the central scotoma and metamorphopsia",
-   "Fluorescein angiography to exclude exudative or inflammatory maculopathy",
-   "Microperimetry to quantify central sensitivity loss",
-   "Colour vision testing for acquired dyschromatopsia",
-   "Multifocal electroretinography in atypical or medicolegal cases"
-  ],
-  "redFlags": [
-   "History of prolonged or repeated unprotected sun-gazing suggesting cumulative bilateral injury",
-   "Persistent dense central scotoma beyond the expected recovery window indicating permanent foveal damage",
-   "Bilateral involvement threatening reading and driving vision",
-   "Underlying psychiatric illness or substance use driving compulsive sun-staring and re-injury",
-   "Progressive enlargement of the foveal defect suggesting an alternative or additional diagnosis"
-  ],
-  "prognosis": "Most patients experience partial or substantial recovery of visual acuity over weeks to months, though a small residual central or paracentral scotoma and subtle metamorphopsia frequently persist owing to the focal outer retinal defect. Prognosis is worse with more prolonged exposure, bilateral involvement or repeated injury.",
-  "pitfalls": [
-   "Missing the diagnosis because visual acuity is relatively preserved and early fundus findings are subtle, without eliciting the exposure history.",
-   "Mistaking the small foveal lesion for an early macular hole and pursuing surgical rather than conservative management.",
-   "Relying on ophthalmoscopy alone rather than obtaining optical coherence tomography, which is far more sensitive for the outer retinal defect.",
-   "Prescribing corticosteroids as if for an inflammatory maculopathy despite absence of proven benefit.",
-   "Neglecting to counsel on eye protection and address any underlying behavioural or psychiatric driver, risking recurrent phototoxic injury."
-  ],
-  "references": [
-   "Ryan's Retina (current edition)",
-   "Kanski's Clinical Ophthalmology (current edition)",
-   "American Academy of Ophthalmology Basic and Clinical Science Course, Retina and Vitreous"
-  ],
-  "crossLinks": [],
-  "management": [
-   "There is no proven specific treatment; management is largely supportive observation, as visual acuity often recovers partially or substantially over weeks to months.",
-   "Remove ongoing exposure and counsel firmly against further sun-gazing.",
-   "A short course of corticosteroids is sometimes used, though evidence of benefit is limited.",
-   "Prevention through patient education, use of certified solar-eclipse filters, and addressing underlying drivers such as hallucinogen use or psychiatric illness prompting sun-staring.",
-   "Monitor recovery with optical coherence tomography of the fovea, visual acuity and Amsler grid mapping of the scotoma.",
-   "Refer to ophthalmology for confirmation, macular assessment and exclusion of other maculopathies."
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "solar_retinopathy-pathway",
-   "title": "solar retinopathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by direct or prolonged viewing of the sun, classically after solar eclipse gazing, sun worship, or telescope viewing without adequate filters, and increasingly reported after use of hallucinogens or psychiatric illness where",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: History of prolonged or repeated unprotected sun-gazing suggesting cumulative bilateral injury",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Spectral-domain optical coherence tomography of the fovea for outer retinal and ellipsoid zone defects, Fundus autofluorescence to detect focal pigment epithelial change, Amsler grid testing to map the central scotoma and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: There is no proven specific treatment; management is largely supportive observation, as visual acuity often recovers partially or substantially over weeks to months."
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Missing the diagnosis because visual acuity is relatively preserved and early fundus findings are subtle, without eliciting the exposure history."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of solar retinopathy."
-  }
- ],
- "tables": [
-  {
-   "id": "solar_retinopathy-matrix",
-   "title": "solar retinopathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by direct or prolonged viewing of the sun, classically after solar eclipse gazing, sun worship, or telescope viewing",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "ophthalmic",
+  "specialty": "ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Ryan's Retina",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by direct or prolonged viewing of the sun, classically after solar eclipse gazing, sun worship, or telescope viewing without adequate filters, and increasingly reported after use of hallucinogens or psychiatric illness where sun-staring occurs.",
+      "Patients present hours to a day or two after exposure with bilateral (occasionally asymmetrical) central or paracentral scotoma, blurred vision, metamorphopsia, dyschromatopsia and sometimes chromatopsia or micropsia.",
+      "Visual acuity is often only mildly to moderately reduced despite marked symptomatic disturbance, and a positive history of sun exposure is the key to diagnosis.",
+      "Early fundus signs are subtle, a small yellow-white foveal spot, later evolving into a sharply defined reddish foveal lesion, and may be missed without careful stereoscopic macular examination.",
+      "Optical coherence tomography is the most sensitive investigation, characteristically showing a focal defect in the outer retinal layers at the fovea with disruption of the ellipsoid zone and interdigitation zone.",
+      "The injury is predominantly photochemical (and to a lesser extent thermal) damage to the photoreceptors and retinal pigment epithelium rather than a burn from focused heat alone.",
+      "Fluorescein angiography is often normal or shows only a subtle window defect, helping to distinguish it from exudative maculopathies.",
+      "No proven specific treatment exists; management centres on preventing further exposure, patient education and observation, with corticosteroids of unproven benefit."
     ],
-    [
-     "Key Investigations",
-     "Spectral-domain optical coherence tomography of the fovea for outer retinal and ellipsoid zone defects, Fundus autofluorescence",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Solar retinopathy results chiefly from photochemical injury to the outer retina when short-wavelength (blue) and near-ultraviolet light from direct solar viewing is focused by the optics of the eye onto the fovea. Absorbed radiant energy generates reactive oxygen species that damage photoreceptor outer segments and the underlying retinal pigment epithelium, with a smaller contribution from thermal energy that raises local tissue temperature. The fovea is preferentially affected because it lies at the point of optical focus and lacks the protective screening of inner retinal vasculature and, being cone-rich, is metabolically vulnerable. The acute insult produces oedema and disruption of the photoreceptor layer; over subsequent weeks the pigment epithelium and photoreceptors may partially recover or leave a permanent focal outer retinal defect, sometimes a small lamellar cavity, accounting for the residual scotoma. Predisposing factors include a clear atmosphere, dilated pupils, youth with clear ocular media, and pharmacological or behavioural states that prolong sun-gazing.",
+    "additionalDifferentials": [
+      "Laser pointer or welding-arc phototoxic maculopathy",
+      "Macular hole or impending macular hole",
+      "Acute idiopathic maculopathy",
+      "Central serous chorioretinopathy",
+      "Poppers (amyl nitrite) maculopathy",
+      "Torpedo maculopathy or other focal outer retinal defect",
+      "Occult macular dystrophy"
     ],
-    [
-     "Primary Differentials",
-     "Laser pointer or welding-arc phototoxic maculopathy, Macular hole or impending macular hole, Acute idiopathic maculopathy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Spectral-domain optical coherence tomography of the fovea for outer retinal and ellipsoid zone defects",
+      "Fundus autofluorescence to detect focal pigment epithelial change",
+      "Amsler grid testing to map the central scotoma and metamorphopsia",
+      "Fluorescein angiography to exclude exudative or inflammatory maculopathy",
+      "Microperimetry to quantify central sensitivity loss",
+      "Colour vision testing for acquired dyschromatopsia",
+      "Multifocal electroretinography in atypical or medicolegal cases"
     ],
-    [
-     "Management Strategy",
-     "There is no proven specific treatment; management is largely supportive observation, as visual acuity often recovers partially or",
-     "Core treatment modality"
+    "redFlags": [
+      "History of prolonged or repeated unprotected sun-gazing suggesting cumulative bilateral injury",
+      "Persistent dense central scotoma beyond the expected recovery window indicating permanent foveal damage",
+      "Bilateral involvement threatening reading and driving vision",
+      "Underlying psychiatric illness or substance use driving compulsive sun-staring and re-injury",
+      "Progressive enlargement of the foveal defect suggesting an alternative or additional diagnosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Missing the diagnosis because visual acuity is relatively preserved and early fundus findings are subtle, without eliciting the",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most patients experience partial or substantial recovery of visual acuity over weeks to months, though a small residual central or paracentral scotoma and subtle metamorphopsia frequently persist owing to the focal outer retinal defect. Prognosis is worse with more prolonged exposure, bilateral involvement or repeated injury.",
+    "pitfalls": [
+      "Missing the diagnosis because visual acuity is relatively preserved and early fundus findings are subtle, without eliciting the exposure history.",
+      "Mistaking the small foveal lesion for an early macular hole and pursuing surgical rather than conservative management.",
+      "Relying on ophthalmoscopy alone rather than obtaining optical coherence tomography, which is far more sensitive for the outer retinal defect.",
+      "Prescribing corticosteroids as if for an inflammatory maculopathy despite absence of proven benefit.",
+      "Neglecting to counsel on eye protection and address any underlying behavioural or psychiatric driver, risking recurrent phototoxic injury."
+    ],
+    "references": [
+      "Ryan's Retina (current edition)",
+      "Kanski's Clinical Ophthalmology (current edition)",
+      "American Academy of Ophthalmology Basic and Clinical Science Course, Retina and Vitreous"
+    ],
+    "crossLinks": [],
+    "management": [
+      "There is no proven specific treatment; management is largely supportive observation, as visual acuity often recovers partially or substantially over weeks to months.",
+      "Remove ongoing exposure and counsel firmly against further sun-gazing.",
+      "A short course of corticosteroids is sometimes used, though evidence of benefit is limited.",
+      "Prevention through patient education, use of certified solar-eclipse filters, and addressing underlying drivers such as hallucinogen use or psychiatric illness prompting sun-staring.",
+      "Monitor recovery with optical coherence tomography of the fovea, visual acuity and Amsler grid mapping of the scotoma.",
+      "Refer to ophthalmology for confirmation, macular assessment and exclusion of other maculopathies."
     ]
-   ],
-   "caption": "Overview comparison matrix for solar retinopathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "solar-retinopathy-real-image",
-   "title": "solar retinopathy: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "solar_retinopathy-pathway",
+      "title": "solar retinopathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by direct or prolonged viewing of the sun, classically after solar eclipse gazing, sun worship, or telescope viewing without adequate filters, and increasingly reported after use of hallucinogens or psychiatric illness where",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: History of prolonged or repeated unprotected sun-gazing suggesting cumulative bilateral injury",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Spectral-domain optical coherence tomography of the fovea for outer retinal and ellipsoid zone defects, Fundus autofluorescence to detect focal pigment epithelial change, Amsler grid testing to map the central scotoma and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: There is no proven specific treatment; management is largely supportive observation, as visual acuity often recovers partially or substantially over weeks to months."
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Missing the diagnosis because visual acuity is relatively preserved and early fundus findings are subtle, without eliciting the exposure history."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of solar retinopathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "solar_retinopathy-matrix",
+      "title": "solar retinopathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by direct or prolonged viewing of the sun, classically after solar eclipse gazing, sun worship, or telescope viewing",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Spectral-domain optical coherence tomography of the fovea for outer retinal and ellipsoid zone defects, Fundus autofluorescence",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Laser pointer or welding-arc phototoxic maculopathy, Macular hole or impending macular hole, Acute idiopathic maculopathy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "There is no proven specific treatment; management is largely supportive observation, as visual acuity often recovers partially or",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Missing the diagnosis because visual acuity is relatively preserved and early fundus findings are subtle, without eliciting the",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for solar retinopathy."
+    }
+  ],
+  "diagrams": []
 }

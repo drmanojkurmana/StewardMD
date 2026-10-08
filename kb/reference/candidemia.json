@@ -1,179 +1,157 @@
 {
- "id": "candidemia",
- "name": "Candidemia",
- "aliases": [
-  "candidaemia",
-  "Candida bloodstream infection",
-  "invasive candidiasis",
-  "candidal sepsis"
- ],
- "class": "infective",
- "system": "Infectious Diseases",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / IDSA",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The presence of Candida species in the bloodstream and a leading cause of healthcare-associated bloodstream infection in critically ill and immunocompromised patients",
-   "Major risk factors include central venous catheters, broad-spectrum antibiotics, total parenteral nutrition, abdominal surgery, neutropenia, and prolonged ICU stay",
-   "Candida albicans remains common, but non-albicans species with variable azole susceptibility, including the multidrug-resistant Candida auris, are increasingly important",
-   "Any positive blood culture for Candida should be regarded as significant and never dismissed as a contaminant",
-   "Echinocandins are generally favoured as initial therapy in unstable or seriously ill patients, with de-escalation to an azole guided by species and susceptibility",
-   "Prompt removal or exchange of infected intravascular catheters is a key part of source control",
-   "Dilated fundoscopic examination is advised to detect ocular involvement (chorioretinitis or endophthalmitis) that can affect treatment duration",
-   "Follow-up blood cultures to confirm clearance, and evaluation for endocarditis or deep-seated foci in persistent candidemia, are recommended"
+  "id": "candidemia",
+  "name": "Candidemia",
+  "aliases": [
+    "candidaemia",
+    "Candida bloodstream infection",
+    "invasive candidiasis",
+    "candidal sepsis"
   ],
-  "pathophysiology": "Candida species are common commensals of the gastrointestinal tract, skin, and mucosa. Disruption of these barriers, by mucosal breakdown, surgery, or indwelling devices, together with impaired host defences from neutropenia, immunosuppression, or broad-spectrum antibiotics that eliminate competing bacterial flora, allows Candida to translocate into the bloodstream or seed from a catheter biofilm. Once in the circulation, the organism can disseminate haematogenously to the eyes, heart valves, bones, and deep organs, producing metastatic foci that are difficult to eradicate without prolonged therapy and source control.",
-  "additionalDifferentials": [
-   "Bacterial bloodstream infection or sepsis",
-   "Catheter-related bacterial bloodstream infection",
-   "Disseminated mould infection in the neutropenic host",
-   "Non-infective causes of persistent fever in the critically ill",
-   "Contaminant growth in blood cultures (rare with Candida and should not be assumed)"
-  ],
-  "infectionMimics": [
-   "Drug fever or transfusion reaction in a critically ill patient",
-   "Bacterial sepsis with negative fungal cultures",
-   "Malignancy-associated fever",
-   "Non-infective systemic inflammatory response"
-  ],
-  "additionalInvestigations": [
-   "Blood cultures with species identification and antifungal susceptibility testing",
-   "Repeat blood cultures to document clearance and define duration of therapy",
-   "Dilated ophthalmological examination for chorioretinitis or endophthalmitis",
-   "Echocardiography and imaging for deep-seated foci when candidemia is persistent",
-   "Culture of the catheter tip after removal and assessment of other potential sources"
-  ],
-  "redFlags": [
-   "Septic shock or haemodynamic instability from candidemia requiring urgent resuscitation and source control",
-   "Persistent positive cultures despite therapy suggesting endocarditis, a retained infected catheter, or another deep focus",
-   "Ocular involvement threatening vision",
-   "Isolation of Candida auris or other resistant species with implications for treatment and infection control"
-  ],
-  "prognosis": "Candidemia carries high attributable mortality, especially with delayed effective antifungal therapy, failure to remove infected catheters, persistent fungaemia, or severe underlying illness; earlier appropriate treatment and source control improve survival.",
-  "pitfalls": [
-   "Dismissing a positive Candida blood culture as a contaminant",
-   "Delaying effective antifungal therapy while awaiting species identification",
-   "Leaving an infected central catheter in place",
-   "Omitting fundoscopy and follow-up cultures, missing ocular disease or persistent infection"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "IDSA guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Start empirical antifungal therapy with an echinocandin in unstable or seriously ill patients",
-   "De-escalate to an azole such as fluconazole once the species and susceptibility allow and the patient stabilises",
-   "Remove or exchange infected intravascular catheters promptly as essential source control",
-   "Repeat blood cultures to document clearance and continue therapy for a defined period after the first negative culture",
-   "Perform dilated fundoscopy for chorioretinitis or endophthalmitis and echocardiography for endocarditis when fungaemia persists",
-   "Treat metastatic deep-seated foci with prolonged therapy and consider a lipid formulation of amphotericin B or newer agents for resistant species such as Candida auris",
-   "Involve infectious diseases specialists to guide agent choice and duration"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "candidemia-pathway",
-   "title": "Candidemia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The presence of Candida species in the bloodstream and a leading cause of healthcare-associated bloodstream infection in critically ill and immunocompromised patients",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Septic shock or haemodynamic instability from candidemia requiring urgent resuscitation and source control",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Blood cultures with species identification and antifungal susceptibility testing, Repeat blood cultures to document clearance and define duration of therapy, Dilated ophthalmological examination for chorioretinitis or"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Start empirical antifungal therapy with an echinocandin in unstable or seriously ill patients"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing a positive Candida blood culture as a contaminant"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of candidemia."
-  }
- ],
- "tables": [
-  {
-   "id": "candidemia-matrix",
-   "title": "Candidemia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The presence of Candida species in the bloodstream and a leading cause of healthcare-associated bloodstream infection in",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious Diseases",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / IDSA",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The presence of Candida species in the bloodstream and a leading cause of healthcare-associated bloodstream infection in critically ill and immunocompromised patients",
+      "Major risk factors include central venous catheters, broad-spectrum antibiotics, total parenteral nutrition, abdominal surgery, neutropenia, and prolonged ICU stay",
+      "Candida albicans remains common, but non-albicans species with variable azole susceptibility, including the multidrug-resistant Candida auris, are increasingly important",
+      "Any positive blood culture for Candida should be regarded as significant and never dismissed as a contaminant",
+      "Echinocandins are generally favoured as initial therapy in unstable or seriously ill patients, with de-escalation to an azole guided by species and susceptibility",
+      "Prompt removal or exchange of infected intravascular catheters is a key part of source control",
+      "Dilated fundoscopic examination is advised to detect ocular involvement (chorioretinitis or endophthalmitis) that can affect treatment duration",
+      "Follow-up blood cultures to confirm clearance, and evaluation for endocarditis or deep-seated foci in persistent candidemia, are recommended"
     ],
-    [
-     "Key Investigations",
-     "Blood cultures with species identification and antifungal susceptibility testing, Repeat blood cultures to document clearance and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Candida species are common commensals of the gastrointestinal tract, skin, and mucosa. Disruption of these barriers, by mucosal breakdown, surgery, or indwelling devices, together with impaired host defences from neutropenia, immunosuppression, or broad-spectrum antibiotics that eliminate competing bacterial flora, allows Candida to translocate into the bloodstream or seed from a catheter biofilm. Once in the circulation, the organism can disseminate haematogenously to the eyes, heart valves, bones, and deep organs, producing metastatic foci that are difficult to eradicate without prolonged therapy and source control.",
+    "additionalDifferentials": [
+      "Bacterial bloodstream infection or sepsis",
+      "Catheter-related bacterial bloodstream infection",
+      "Disseminated mould infection in the neutropenic host",
+      "Non-infective causes of persistent fever in the critically ill",
+      "Contaminant growth in blood cultures (rare with Candida and should not be assumed)"
     ],
-    [
-     "Primary Differentials",
-     "Bacterial bloodstream infection or sepsis, Catheter-related bacterial bloodstream infection, Disseminated mould infection in the",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Drug fever or transfusion reaction in a critically ill patient",
+      "Bacterial sepsis with negative fungal cultures",
+      "Malignancy-associated fever",
+      "Non-infective systemic inflammatory response"
     ],
-    [
-     "Management Strategy",
-     "Start empirical antifungal therapy with an echinocandin in unstable or seriously ill patients",
-     "Core treatment modality"
+    "additionalInvestigations": [
+      "Blood cultures with species identification and antifungal susceptibility testing",
+      "Repeat blood cultures to document clearance and define duration of therapy",
+      "Dilated ophthalmological examination for chorioretinitis or endophthalmitis",
+      "Echocardiography and imaging for deep-seated foci when candidemia is persistent",
+      "Culture of the catheter tip after removal and assessment of other potential sources"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing a positive Candida blood culture as a contaminant",
-     "Prevent diagnostic or management error"
+    "redFlags": [
+      "Septic shock or haemodynamic instability from candidemia requiring urgent resuscitation and source control",
+      "Persistent positive cultures despite therapy suggesting endocarditis, a retained infected catheter, or another deep focus",
+      "Ocular involvement threatening vision",
+      "Isolation of Candida auris or other resistant species with implications for treatment and infection control"
+    ],
+    "prognosis": "Candidemia carries high attributable mortality, especially with delayed effective antifungal therapy, failure to remove infected catheters, persistent fungaemia, or severe underlying illness; earlier appropriate treatment and source control improve survival.",
+    "pitfalls": [
+      "Dismissing a positive Candida blood culture as a contaminant",
+      "Delaying effective antifungal therapy while awaiting species identification",
+      "Leaving an infected central catheter in place",
+      "Omitting fundoscopy and follow-up cultures, missing ocular disease or persistent infection"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "IDSA guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Start empirical antifungal therapy with an echinocandin in unstable or seriously ill patients",
+      "De-escalate to an azole such as fluconazole once the species and susceptibility allow and the patient stabilises",
+      "Remove or exchange infected intravascular catheters promptly as essential source control",
+      "Repeat blood cultures to document clearance and continue therapy for a defined period after the first negative culture",
+      "Perform dilated fundoscopy for chorioretinitis or endophthalmitis and echocardiography for endocarditis when fungaemia persists",
+      "Treat metastatic deep-seated foci with prolonged therapy and consider a lipid formulation of amphotericin B or newer agents for resistant species such as Candida auris",
+      "Involve infectious diseases specialists to guide agent choice and duration"
     ]
-   ],
-   "caption": "Overview comparison matrix for candidemia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "candidemia-real-image",
-   "title": "Candidemia: Diagnostic Microbiological / Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/malaria-blood-smear.jpg?v=kbri3",
-   "caption": "Diagnostic microscopic evaluation displaying microbiological morphology, cellular response, and pathogen identification.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Pathogen Detection",
-     "description": "Microscopic morphology, staining characteristics, and intra/extracellular localization."
-    },
-    {
-     "label": "Inflammatory Response",
-     "description": "Host cellular infiltrate, neutrophil predominance, and tissue reaction."
-    },
-    {
-     "label": "Diagnostic Confirmation",
-     "description": "Direct visualization correlating with clinical syndrome and biomarkers."
+      "id": "candidemia-pathway",
+      "title": "Candidemia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The presence of Candida species in the bloodstream and a leading cause of healthcare-associated bloodstream infection in critically ill and immunocompromised patients",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Septic shock or haemodynamic instability from candidemia requiring urgent resuscitation and source control",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Blood cultures with species identification and antifungal susceptibility testing, Repeat blood cultures to document clearance and define duration of therapy, Dilated ophthalmological examination for chorioretinitis or"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Start empirical antifungal therapy with an echinocandin in unstable or seriously ill patients"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing a positive Candida blood culture as a contaminant"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of candidemia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "candidemia-matrix",
+      "title": "Candidemia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The presence of Candida species in the bloodstream and a leading cause of healthcare-associated bloodstream infection in",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Blood cultures with species identification and antifungal susceptibility testing, Repeat blood cultures to document clearance and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Bacterial bloodstream infection or sepsis, Catheter-related bacterial bloodstream infection, Disseminated mould infection in the",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Start empirical antifungal therapy with an echinocandin in unstable or seriously ill patients",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing a positive Candida blood culture as a contaminant",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for candidemia."
+    }
+  ],
+  "diagrams": []
 }

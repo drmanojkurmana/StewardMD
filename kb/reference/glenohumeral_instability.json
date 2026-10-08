@@ -1,175 +1,153 @@
 {
- "id": "glenohumeral_instability",
- "name": "glenohumeral instability",
- "aliases": [
-  "shoulder instability",
-  "recurrent shoulder dislocation"
- ],
- "class": "non_infective",
- "system": "musculoskeletal",
- "specialty": "orthopaedics",
- "referenceOnly": true,
- "reference": {
-  "source": "Rockwood and Matsen's The Shoulder",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Instability spans a spectrum from subluxation to frank dislocation and is broadly categorised by direction (anterior, posterior, multidirectional) and by aetiology (traumatic structural versus atraumatic).",
-   "Anterior instability is by far the most common and typically follows a traumatic anterior dislocation with the arm in abduction and external rotation.",
-   "Younger age at first traumatic dislocation is the strongest predictor of recurrence, reflecting soft-tissue healing capacity and activity demands.",
-   "A Bankart lesion (anteroinferior labral detachment) and a Hill-Sachs impaction defect of the posterolateral humeral head are the classic structural correlates of anterior instability.",
-   "Quantify glenoid and humeral bone loss carefully; engaging bipolar lesions and significant glenoid deficiency predict failure of soft-tissue-only repair.",
-   "Posterior instability is easily missed and should be suspected after seizures, electrocution or a posteriorly directed force on a flexed adducted arm.",
-   "Atraumatic multidirectional instability is associated with generalised ligamentous laxity and responds primarily to a prolonged programme of rotator cuff and scapular rehabilitation.",
-   "The apprehension and relocation tests support anterior instability, while a positive jerk or Kim test suggests posteroinferior pathology."
+  "id": "glenohumeral_instability",
+  "name": "glenohumeral instability",
+  "aliases": [
+    "shoulder instability",
+    "recurrent shoulder dislocation"
   ],
-  "pathophysiology": "Glenohumeral stability depends on the balance between static restraints (the labrum, glenohumeral ligaments and capsule, concavity-compression and negative intra-articular pressure) and dynamic restraints (the rotator cuff, long head of biceps and coordinated scapular motion). Traumatic instability usually results from a discrete injury that detaches the anteroinferior labrum and capsule from the glenoid rim (Bankart lesion), sometimes with an associated bony fragment or an impaction fracture of the humeral head, compromising the static checkrein. Repeated episodes cause progressive capsulolabral attenuation and escalating bone loss, lowering the threshold for further events. Atraumatic and multidirectional instability instead reflect a capacious redundant capsule and constitutional collagen laxity, sometimes compounded by neuromuscular incoordination and voluntary positioning, so that the humeral head translates excessively without a single structural lesion.",
-  "additionalDifferentials": [
-   "Rotator cuff tear, particularly in older patients after dislocation",
-   "SLAP (superior labral) tear",
-   "Subacromial impingement with secondary instability",
-   "Adhesive capsulitis",
-   "Brachial plexus or axillary nerve injury following dislocation",
-   "Scapular dyskinesis contributing to functional instability",
-   "Seizure-related recurrent posterior dislocation"
-  ],
-  "additionalInvestigations": [
-   "Plain radiographs including axillary and specialised views to confirm reduction and detect bony lesions",
-   "CT with three-dimensional reconstruction to quantify glenoid and humeral head bone loss",
-   "MR arthrography to delineate labral, capsular and ligamentous injury",
-   "Examination under anaesthesia to grade translation and directionality",
-   "Assessment for generalised joint hypermobility",
-   "Neurological assessment of axillary nerve and brachial plexus function after dislocation"
-  ],
-  "redFlags": [
-   "Neurovascular deficit after dislocation, especially axillary nerve palsy or vascular compromise",
-   "Inability to reduce a dislocation or a locked posterior dislocation",
-   "First-time dislocation in an older patient, which carries a high risk of concomitant rotator cuff tear",
-   "Recurrent instability with progressive bone loss threatening the success of soft-tissue repair"
-  ],
-  "prognosis": "Traumatic anterior instability in young, active individuals has a high recurrence rate with non-operative treatment, whereas anatomical stabilisation restores stability in most, provided bone loss is addressed. Atraumatic multidirectional instability generally responds well to committed rehabilitation, though outcomes are poorer when a voluntary or behavioural component persists.",
-  "pitfalls": [
-   "Failing to recognise a posterior dislocation, which is commonly missed on inadequate radiographic views.",
-   "Underestimating glenoid or humeral bone loss and performing a soft-tissue repair destined to fail.",
-   "Attempting surgical stabilisation in behavioural or voluntary instability without adequate rehabilitation.",
-   "Overlooking an associated rotator cuff tear or nerve injury after dislocation in older patients."
-  ],
-  "references": [
-   "Rockwood and Matsen's The Shoulder",
-   "Apley & Solomon's System of Orthopaedics and Trauma",
-   "Miller's Review of Orthopaedics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Prompt closed reduction of acute dislocation with a period of sling immobilisation and analgesia",
-   "Structured physiotherapy focused on rotator cuff, deltoid and scapular stabiliser strengthening, the mainstay for atraumatic and multidirectional instability",
-   "Arthroscopic Bankart capsulolabral repair for recurrent traumatic anterior instability with minimal bone loss, particularly in young active patients",
-   "Bony augmentation such as a Latarjet coracoid transfer or bone-block procedure where there is significant glenoid deficiency or an engaging bipolar lesion",
-   "Activity modification with avoidance of provocative abduction and external rotation positions during rehabilitation",
-   "Assess and document axillary nerve and brachial plexus function after dislocation and reduction",
-   "Refer to a shoulder surgeon for recurrent instability, with bone loss quantified on CT to guide the choice of procedure"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "glenohumeral_instability-pathway",
-   "title": "glenohumeral instability: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Instability spans a spectrum from subluxation to frank dislocation and is broadly categorised by direction (anterior, posterior, multidirectional) and by aetiology (traumatic structural versus atraumatic).",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Neurovascular deficit after dislocation, especially axillary nerve palsy or vascular compromise",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plain radiographs including axillary and specialised views to confirm reduction and detect bony lesions, CT with three-dimensional reconstruction to quantify glenoid and humeral head bone loss, MR arthrography to delineate"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Prompt closed reduction of acute dislocation with a period of sling immobilisation and analgesia"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to recognise a posterior dislocation, which is commonly missed on inadequate radiographic views."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of glenohumeral instability."
-  }
- ],
- "tables": [
-  {
-   "id": "glenohumeral_instability-matrix",
-   "title": "glenohumeral instability: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Instability spans a spectrum from subluxation to frank dislocation and is broadly categorised by direction (anterior, posterior,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "musculoskeletal",
+  "specialty": "orthopaedics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rockwood and Matsen's The Shoulder",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Instability spans a spectrum from subluxation to frank dislocation and is broadly categorised by direction (anterior, posterior, multidirectional) and by aetiology (traumatic structural versus atraumatic).",
+      "Anterior instability is by far the most common and typically follows a traumatic anterior dislocation with the arm in abduction and external rotation.",
+      "Younger age at first traumatic dislocation is the strongest predictor of recurrence, reflecting soft-tissue healing capacity and activity demands.",
+      "A Bankart lesion (anteroinferior labral detachment) and a Hill-Sachs impaction defect of the posterolateral humeral head are the classic structural correlates of anterior instability.",
+      "Quantify glenoid and humeral bone loss carefully; engaging bipolar lesions and significant glenoid deficiency predict failure of soft-tissue-only repair.",
+      "Posterior instability is easily missed and should be suspected after seizures, electrocution or a posteriorly directed force on a flexed adducted arm.",
+      "Atraumatic multidirectional instability is associated with generalised ligamentous laxity and responds primarily to a prolonged programme of rotator cuff and scapular rehabilitation.",
+      "The apprehension and relocation tests support anterior instability, while a positive jerk or Kim test suggests posteroinferior pathology."
     ],
-    [
-     "Key Investigations",
-     "Plain radiographs including axillary and specialised views to confirm reduction and detect bony lesions, CT with",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Glenohumeral stability depends on the balance between static restraints (the labrum, glenohumeral ligaments and capsule, concavity-compression and negative intra-articular pressure) and dynamic restraints (the rotator cuff, long head of biceps and coordinated scapular motion). Traumatic instability usually results from a discrete injury that detaches the anteroinferior labrum and capsule from the glenoid rim (Bankart lesion), sometimes with an associated bony fragment or an impaction fracture of the humeral head, compromising the static checkrein. Repeated episodes cause progressive capsulolabral attenuation and escalating bone loss, lowering the threshold for further events. Atraumatic and multidirectional instability instead reflect a capacious redundant capsule and constitutional collagen laxity, sometimes compounded by neuromuscular incoordination and voluntary positioning, so that the humeral head translates excessively without a single structural lesion.",
+    "additionalDifferentials": [
+      "Rotator cuff tear, particularly in older patients after dislocation",
+      "SLAP (superior labral) tear",
+      "Subacromial impingement with secondary instability",
+      "Adhesive capsulitis",
+      "Brachial plexus or axillary nerve injury following dislocation",
+      "Scapular dyskinesis contributing to functional instability",
+      "Seizure-related recurrent posterior dislocation"
     ],
-    [
-     "Primary Differentials",
-     "Rotator cuff tear, particularly in older patients after dislocation, SLAP (superior labral) tear, Subacromial impingement with",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plain radiographs including axillary and specialised views to confirm reduction and detect bony lesions",
+      "CT with three-dimensional reconstruction to quantify glenoid and humeral head bone loss",
+      "MR arthrography to delineate labral, capsular and ligamentous injury",
+      "Examination under anaesthesia to grade translation and directionality",
+      "Assessment for generalised joint hypermobility",
+      "Neurological assessment of axillary nerve and brachial plexus function after dislocation"
     ],
-    [
-     "Management Strategy",
-     "Prompt closed reduction of acute dislocation with a period of sling immobilisation and analgesia",
-     "Core treatment modality"
+    "redFlags": [
+      "Neurovascular deficit after dislocation, especially axillary nerve palsy or vascular compromise",
+      "Inability to reduce a dislocation or a locked posterior dislocation",
+      "First-time dislocation in an older patient, which carries a high risk of concomitant rotator cuff tear",
+      "Recurrent instability with progressive bone loss threatening the success of soft-tissue repair"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to recognise a posterior dislocation, which is commonly missed on inadequate radiographic views.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Traumatic anterior instability in young, active individuals has a high recurrence rate with non-operative treatment, whereas anatomical stabilisation restores stability in most, provided bone loss is addressed. Atraumatic multidirectional instability generally responds well to committed rehabilitation, though outcomes are poorer when a voluntary or behavioural component persists.",
+    "pitfalls": [
+      "Failing to recognise a posterior dislocation, which is commonly missed on inadequate radiographic views.",
+      "Underestimating glenoid or humeral bone loss and performing a soft-tissue repair destined to fail.",
+      "Attempting surgical stabilisation in behavioural or voluntary instability without adequate rehabilitation.",
+      "Overlooking an associated rotator cuff tear or nerve injury after dislocation in older patients."
+    ],
+    "references": [
+      "Rockwood and Matsen's The Shoulder",
+      "Apley & Solomon's System of Orthopaedics and Trauma",
+      "Miller's Review of Orthopaedics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Prompt closed reduction of acute dislocation with a period of sling immobilisation and analgesia",
+      "Structured physiotherapy focused on rotator cuff, deltoid and scapular stabiliser strengthening, the mainstay for atraumatic and multidirectional instability",
+      "Arthroscopic Bankart capsulolabral repair for recurrent traumatic anterior instability with minimal bone loss, particularly in young active patients",
+      "Bony augmentation such as a Latarjet coracoid transfer or bone-block procedure where there is significant glenoid deficiency or an engaging bipolar lesion",
+      "Activity modification with avoidance of provocative abduction and external rotation positions during rehabilitation",
+      "Assess and document axillary nerve and brachial plexus function after dislocation and reduction",
+      "Refer to a shoulder surgeon for recurrent instability, with bone loss quantified on CT to guide the choice of procedure"
     ]
-   ],
-   "caption": "Overview comparison matrix for glenohumeral instability."
-  }
- ],
- "diagrams": [
-  {
-   "id": "glenohumeral-instability-real-image",
-   "title": "glenohumeral instability: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "glenohumeral_instability-pathway",
+      "title": "glenohumeral instability: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Instability spans a spectrum from subluxation to frank dislocation and is broadly categorised by direction (anterior, posterior, multidirectional) and by aetiology (traumatic structural versus atraumatic).",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Neurovascular deficit after dislocation, especially axillary nerve palsy or vascular compromise",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plain radiographs including axillary and specialised views to confirm reduction and detect bony lesions, CT with three-dimensional reconstruction to quantify glenoid and humeral head bone loss, MR arthrography to delineate"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Prompt closed reduction of acute dislocation with a period of sling immobilisation and analgesia"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to recognise a posterior dislocation, which is commonly missed on inadequate radiographic views."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of glenohumeral instability."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "glenohumeral_instability-matrix",
+      "title": "glenohumeral instability: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Instability spans a spectrum from subluxation to frank dislocation and is broadly categorised by direction (anterior, posterior,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plain radiographs including axillary and specialised views to confirm reduction and detect bony lesions, CT with",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Rotator cuff tear, particularly in older patients after dislocation, SLAP (superior labral) tear, Subacromial impingement with",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Prompt closed reduction of acute dislocation with a period of sling immobilisation and analgesia",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to recognise a posterior dislocation, which is commonly missed on inadequate radiographic views.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for glenohumeral instability."
+    }
+  ],
+  "diagrams": []
 }

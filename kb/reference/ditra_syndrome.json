@@ -1,175 +1,153 @@
 {
- "id": "ditra_syndrome",
- "name": "DITRA (deficiency of the IL-36 receptor antagonist)",
- "aliases": [
-  "deficiency of the interleukin-36 receptor antagonist",
-  "IL36RN deficiency",
-  "IL36RN",
-  "generalised pustular psoriasis with IL36RN mutation"
- ],
- "class": "non_infective",
- "system": "Immunology / Autoinflammatory",
- "specialty": "Clinical Immunology / Rheumatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Textbook of Autoinflammation / Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by recessive loss-of-function mutations in IL36RN, which encodes the interleukin-36 receptor antagonist",
-   "Presents with recurrent flares of generalised pustular psoriasis, often with high fever and marked systemic inflammation",
-   "Flares may be triggered by infection, pregnancy, menstruation, or withdrawal of corticosteroids",
-   "Skin shows widespread sterile pustules on erythematous, tender skin, sometimes with mucosal involvement and geographic tongue",
-   "Distinguished from ordinary plaque psoriasis by the pustular, systemic, and relapsing nature and the earlier age of onset in many cases",
-   "Managed with therapies targeting the interleukin-36 and interleukin-17/23 pathways, alongside general biologic therapy for pustular psoriasis",
-   "Acute severe flares can be life-threatening owing to fluid loss, sepsis-like inflammation, and metabolic disturbance"
+  "id": "ditra_syndrome",
+  "name": "DITRA (deficiency of the IL-36 receptor antagonist)",
+  "aliases": [
+    "deficiency of the interleukin-36 receptor antagonist",
+    "IL36RN deficiency",
+    "IL36RN",
+    "generalised pustular psoriasis with IL36RN mutation"
   ],
-  "pathophysiology": "DITRA results from biallelic loss-of-function mutations in IL36RN, encoding the interleukin-36 receptor antagonist. Loss of this antagonist removes the normal brake on interleukin-36 signalling, so IL-36 cytokines drive amplified activation of keratinocytes and recruitment of neutrophils. The resulting cytokine cascade, involving downstream interleukin-8, interleukin-17 and interleukin-23 pathways, produces the sterile neutrophilic pustulosis and systemic inflammation characteristic of generalised pustular psoriasis. Because IL-36 signalling is central, biologics targeting this and related axes can control disease.",
-  "additionalDifferentials": [
-   "Generalised pustular psoriasis without identified mutation",
-   "Acute generalised exanthematous pustulosis (drug reaction)",
-   "DIRA in neonates and infants",
-   "Subcorneal pustular dermatosis (Sneddon-Wilkinson disease)",
-   "Staphylococcal or streptococcal pustular infection",
-   "Reactive arthritis-associated pustular skin disease"
-  ],
-  "additionalInvestigations": [
-   "Genetic testing for IL36RN mutations",
-   "Skin biopsy demonstrating spongiform pustules of Kogoj and neutrophilic infiltrate",
-   "Acute-phase reactants and full blood count showing neutrophil leucocytosis",
-   "Bacterial swabs and cultures of pustules to confirm sterility",
-   "Assessment of triggers including recent drug exposure and pregnancy status",
-   "Metabolic and fluid balance monitoring during severe flares"
-  ],
-  "redFlags": [
-   "Extensive erythroderma with high fever and haemodynamic instability",
-   "Signs of secondary infection or sepsis complicating open skin",
-   "Significant hypoalbuminaemia, hypocalcaemia, or dehydration from skin barrier loss",
-   "Flare during pregnancy threatening maternal and fetal wellbeing"
-  ],
-  "prognosis": "The disease follows a relapsing-remitting course; individual flares can be severe or life-threatening, but targeted anti-cytokine therapy has improved control and long-term outcomes for many patients.",
-  "pitfalls": [
-   "Treating a pustular flare as bacterial infection and missing the autoinflammatory diagnosis",
-   "Abruptly withdrawing systemic corticosteroids, which can precipitate a severe flare",
-   "Failing to recognise generalised pustular psoriasis as distinct from plaque psoriasis",
-   "Overlooking metabolic and fluid derangements during extensive skin involvement"
-  ],
-  "references": [
-   "Textbook of Autoinflammation",
-   "Rook's Textbook of Dermatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Targeted biologic therapy against the interleukin-36 receptor (spesolimab) to abort and prevent generalised pustular psoriasis flares",
-   "Biologics directed at the interleukin-17 and interleukin-23 pathways, and conventional systemic agents such as ciclosporin, acitretin or methotrexate, for ongoing disease control",
-   "Supportive care of acute flares with fluid and electrolyte replacement, temperature regulation, skin care and analgesia",
-   "Identify and treat triggers such as infection, and avoid abrupt corticosteroid withdrawal which can precipitate flares",
-   "Monitor acute-phase reactants, full blood count and fluid balance during severe flares, culturing pustules to confirm sterility and exclude secondary infection",
-   "Multidisciplinary dermatology-led care with input for pregnancy-related and menstrual triggers",
-   "Genetic counselling and family testing given autosomal recessive IL36RN inheritance",
-   "Escalate to inpatient or high-dependency care for severe systemic inflammation or haemodynamic instability"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "ditra_syndrome-pathway",
-   "title": "DITRA (deficiency of the IL-36 receptor antagonist): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by recessive loss-of-function mutations in IL36RN, which encodes the interleukin-36 receptor antagonist",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Extensive erythroderma with high fever and haemodynamic instability",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Genetic testing for IL36RN mutations, Skin biopsy demonstrating spongiform pustules of Kogoj and neutrophilic infiltrate, Acute-phase reactants and full blood count showing neutrophil leucocytosis"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Targeted biologic therapy against the interleukin-36 receptor (spesolimab) to abort and prevent generalised pustular psoriasis flares"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating a pustular flare as bacterial infection and missing the autoinflammatory diagnosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of ditra (deficiency of the il-36 receptor antagonist)."
-  }
- ],
- "tables": [
-  {
-   "id": "ditra_syndrome-matrix",
-   "title": "DITRA (deficiency of the IL-36 receptor antagonist): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by recessive loss-of-function mutations in IL36RN, which encodes the interleukin-36 receptor antagonist",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Immunology / Autoinflammatory",
+  "specialty": "Clinical Immunology / Rheumatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Textbook of Autoinflammation / Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by recessive loss-of-function mutations in IL36RN, which encodes the interleukin-36 receptor antagonist",
+      "Presents with recurrent flares of generalised pustular psoriasis, often with high fever and marked systemic inflammation",
+      "Flares may be triggered by infection, pregnancy, menstruation, or withdrawal of corticosteroids",
+      "Skin shows widespread sterile pustules on erythematous, tender skin, sometimes with mucosal involvement and geographic tongue",
+      "Distinguished from ordinary plaque psoriasis by the pustular, systemic, and relapsing nature and the earlier age of onset in many cases",
+      "Managed with therapies targeting the interleukin-36 and interleukin-17/23 pathways, alongside general biologic therapy for pustular psoriasis",
+      "Acute severe flares can be life-threatening owing to fluid loss, sepsis-like inflammation, and metabolic disturbance"
     ],
-    [
-     "Key Investigations",
-     "Genetic testing for IL36RN mutations, Skin biopsy demonstrating spongiform pustules of Kogoj and neutrophilic infiltrate,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "DITRA results from biallelic loss-of-function mutations in IL36RN, encoding the interleukin-36 receptor antagonist. Loss of this antagonist removes the normal brake on interleukin-36 signalling, so IL-36 cytokines drive amplified activation of keratinocytes and recruitment of neutrophils. The resulting cytokine cascade, involving downstream interleukin-8, interleukin-17 and interleukin-23 pathways, produces the sterile neutrophilic pustulosis and systemic inflammation characteristic of generalised pustular psoriasis. Because IL-36 signalling is central, biologics targeting this and related axes can control disease.",
+    "additionalDifferentials": [
+      "Generalised pustular psoriasis without identified mutation",
+      "Acute generalised exanthematous pustulosis (drug reaction)",
+      "DIRA in neonates and infants",
+      "Subcorneal pustular dermatosis (Sneddon-Wilkinson disease)",
+      "Staphylococcal or streptococcal pustular infection",
+      "Reactive arthritis-associated pustular skin disease"
     ],
-    [
-     "Primary Differentials",
-     "Generalised pustular psoriasis without identified mutation, Acute generalised exanthematous pustulosis (drug reaction), DIRA in",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Genetic testing for IL36RN mutations",
+      "Skin biopsy demonstrating spongiform pustules of Kogoj and neutrophilic infiltrate",
+      "Acute-phase reactants and full blood count showing neutrophil leucocytosis",
+      "Bacterial swabs and cultures of pustules to confirm sterility",
+      "Assessment of triggers including recent drug exposure and pregnancy status",
+      "Metabolic and fluid balance monitoring during severe flares"
     ],
-    [
-     "Management Strategy",
-     "Targeted biologic therapy against the interleukin-36 receptor (spesolimab) to abort and prevent generalised pustular psoriasis",
-     "Core treatment modality"
+    "redFlags": [
+      "Extensive erythroderma with high fever and haemodynamic instability",
+      "Signs of secondary infection or sepsis complicating open skin",
+      "Significant hypoalbuminaemia, hypocalcaemia, or dehydration from skin barrier loss",
+      "Flare during pregnancy threatening maternal and fetal wellbeing"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating a pustular flare as bacterial infection and missing the autoinflammatory diagnosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "The disease follows a relapsing-remitting course; individual flares can be severe or life-threatening, but targeted anti-cytokine therapy has improved control and long-term outcomes for many patients.",
+    "pitfalls": [
+      "Treating a pustular flare as bacterial infection and missing the autoinflammatory diagnosis",
+      "Abruptly withdrawing systemic corticosteroids, which can precipitate a severe flare",
+      "Failing to recognise generalised pustular psoriasis as distinct from plaque psoriasis",
+      "Overlooking metabolic and fluid derangements during extensive skin involvement"
+    ],
+    "references": [
+      "Textbook of Autoinflammation",
+      "Rook's Textbook of Dermatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Targeted biologic therapy against the interleukin-36 receptor (spesolimab) to abort and prevent generalised pustular psoriasis flares",
+      "Biologics directed at the interleukin-17 and interleukin-23 pathways, and conventional systemic agents such as ciclosporin, acitretin or methotrexate, for ongoing disease control",
+      "Supportive care of acute flares with fluid and electrolyte replacement, temperature regulation, skin care and analgesia",
+      "Identify and treat triggers such as infection, and avoid abrupt corticosteroid withdrawal which can precipitate flares",
+      "Monitor acute-phase reactants, full blood count and fluid balance during severe flares, culturing pustules to confirm sterility and exclude secondary infection",
+      "Multidisciplinary dermatology-led care with input for pregnancy-related and menstrual triggers",
+      "Genetic counselling and family testing given autosomal recessive IL36RN inheritance",
+      "Escalate to inpatient or high-dependency care for severe systemic inflammation or haemodynamic instability"
     ]
-   ],
-   "caption": "Overview comparison matrix for ditra (deficiency of the il-36 receptor antagonist)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "ditra-syndrome-real-image",
-   "title": "DITRA (deficiency of the IL-36 receptor antagonist): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "ditra_syndrome-pathway",
+      "title": "DITRA (deficiency of the IL-36 receptor antagonist): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by recessive loss-of-function mutations in IL36RN, which encodes the interleukin-36 receptor antagonist",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Extensive erythroderma with high fever and haemodynamic instability",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Genetic testing for IL36RN mutations, Skin biopsy demonstrating spongiform pustules of Kogoj and neutrophilic infiltrate, Acute-phase reactants and full blood count showing neutrophil leucocytosis"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Targeted biologic therapy against the interleukin-36 receptor (spesolimab) to abort and prevent generalised pustular psoriasis flares"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating a pustular flare as bacterial infection and missing the autoinflammatory diagnosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of ditra (deficiency of the il-36 receptor antagonist)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "ditra_syndrome-matrix",
+      "title": "DITRA (deficiency of the IL-36 receptor antagonist): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by recessive loss-of-function mutations in IL36RN, which encodes the interleukin-36 receptor antagonist",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Genetic testing for IL36RN mutations, Skin biopsy demonstrating spongiform pustules of Kogoj and neutrophilic infiltrate,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Generalised pustular psoriasis without identified mutation, Acute generalised exanthematous pustulosis (drug reaction), DIRA in",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Targeted biologic therapy against the interleukin-36 receptor (spesolimab) to abort and prevent generalised pustular psoriasis",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating a pustular flare as bacterial infection and missing the autoinflammatory diagnosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for ditra (deficiency of the il-36 receptor antagonist)."
+    }
+  ],
+  "diagrams": []
 }

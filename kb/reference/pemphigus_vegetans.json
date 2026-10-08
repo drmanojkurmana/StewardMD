@@ -1,177 +1,155 @@
 {
- "id": "pemphigus_vegetans",
- "name": "pemphigus vegetans",
- "aliases": [
-  "pemphigus vegetans of Neumann",
-  "pemphigus vegetans of Hallopeau"
- ],
- "class": "non_infective",
- "system": "integumentary",
- "specialty": "dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare vegetating variant of pemphigus vulgaris characterised by hypertrophic, verrucous, exudative plaques favouring intertriginous and periorificial sites.",
-   "Two forms are described: the Neumann type, which begins with flaccid bullae and erosions that evolve into vegetations, and the milder Hallopeau type, which starts with pustules.",
-   "Flexural predilection includes the axillae, groin, inframammary folds, perianal region and the angles of the mouth; the scalp and face may also be affected.",
-   "Oral mucosal involvement is common and may include cerebriform changes of the tongue, mirroring the mucosal disease of pemphigus vulgaris.",
-   "Histology shows suprabasal acantholysis with pseudoepitheliomatous hyperplasia and characteristic intraepidermal eosinophilic microabscesses.",
-   "Direct immunofluorescence demonstrates intercellular IgG and C3 in a net-like (chicken-wire) pattern, and serum antibodies target desmoglein 3 (and often desmoglein 1).",
-   "The Hallopeau type generally follows a more indolent course and may respond to lower doses of systemic therapy than classical pemphigus vulgaris.",
-   "Systemic corticosteroids with steroid-sparing immunosuppressants remain the mainstay, with rituximab increasingly used for refractory or steroid-dependent disease."
+  "id": "pemphigus_vegetans",
+  "name": "pemphigus vegetans",
+  "aliases": [
+    "pemphigus vegetans of Neumann",
+    "pemphigus vegetans of Hallopeau"
   ],
-  "pathophysiology": "Pemphigus vegetans is a clinical and histological variant of pemphigus vulgaris driven by IgG autoantibodies against the desmosomal cadherins desmoglein 3 and, in many cases, desmoglein 1. Antibody binding disrupts desmosomal adhesion between keratinocytes, producing suprabasal acantholysis and flaccid blistering. At intertriginous and periorificial sites, the warm moist environment and chronic irritation are thought to provoke an exuberant reparative epidermal response, giving rise to pseudoepitheliomatous hyperplasia and the characteristic vegetating plaques studded with eosinophilic microabscesses. The reason certain patients develop vegetating rather than classical lesions is incompletely understood but may reflect host reactive patterns and local factors.",
-  "additionalDifferentials": [
-   "pemphigus vulgaris (classical)",
-   "Hailey-Hailey disease (benign familial pemphigus)",
-   "condylomata lata of secondary syphilis",
-   "granular parakeratosis and intertrigo with candidiasis",
-   "halogenoderma (bromoderma / iododerma)",
-   "pyoderma vegetans / blastomycosis-like pyoderma",
-   "inverse psoriasis"
-  ],
-  "additionalInvestigations": [
-   "lesional biopsy for histopathology (suprabasal acantholysis, eosinophilic microabscesses, pseudoepitheliomatous hyperplasia)",
-   "perilesional biopsy for direct immunofluorescence (intercellular IgG and C3)",
-   "indirect immunofluorescence for circulating intercellular antibodies",
-   "ELISA for desmoglein 1 and desmoglein 3 antibodies",
-   "swabs and culture to exclude secondary bacterial or candidal infection",
-   "syphilis serology when perianal or genital vegetations raise suspicion of condylomata lata",
-   "baseline screening prior to immunosuppression (glucose, blood pressure, infection screen)"
-  ],
-  "redFlags": [
-   "extensive erosions with fluid loss, secondary infection or sepsis",
-   "severe oropharyngeal involvement limiting oral intake and nutrition",
-   "rapid progression or transformation to widespread classical pemphigus vulgaris",
-   "signs of systemic infection arising from immunosuppressive therapy"
-  ],
-  "prognosis": "With appropriate immunosuppression the disease is controllable, and the Hallopeau type in particular may follow a relatively benign, indolent course; however relapses are frequent and the Neumann type can be chronic and difficult to clear.",
-  "pitfalls": [
-   "Mistaking flexural vegetations for intertrigo, candidiasis or condylomata lata and delaying biopsy.",
-   "Biopsying only the vegetating surface and missing diagnostic acantholysis at the edge.",
-   "Overlooking oral disease that may be the earliest and most persistent manifestation.",
-   "Attributing treatment failure to disease when secondary bacterial or candidal colonisation is driving the plaques.",
-   "Assuming the milder Hallopeau course applies to all patients and under-treating Neumann-type disease."
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology, current edition",
-   "Fitzpatrick's Dermatology in General Medicine, current edition",
-   "Bolognia Dermatology, current edition"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Induce remission with systemic corticosteroids as first-line therapy",
-   "Add steroid-sparing immunosuppression such as azathioprine or mycophenolate mofetil, or rituximab, for durable control",
-   "Manage vegetating flexural plaques with topical corticosteroids and antiseptic measures",
-   "Treat secondary bacterial or candidal superinfection of macerated intertriginous lesions",
-   "Provide oral care, analgesia and dietary modification for painful mucosal erosions",
-   "Monitor anti-desmoglein antibody titres and surveil for complications of immunosuppression",
-   "Refer to dermatology, with oral medicine input for mucosal disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pemphigus_vegetans-pathway",
-   "title": "pemphigus vegetans: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare vegetating variant of pemphigus vulgaris characterised by hypertrophic, verrucous, exudative plaques favouring intertriginous and periorificial sites.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: extensive erosions with fluid loss, secondary infection or sepsis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: lesional biopsy for histopathology (suprabasal acantholysis, eosinophilic microabscesses, pseudoepitheliomatous hyperplasia), perilesional biopsy for direct immunofluorescence (intercellular IgG and C3), indirect"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Induce remission with systemic corticosteroids as first-line therapy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking flexural vegetations for intertrigo, candidiasis or condylomata lata and delaying biopsy."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pemphigus vegetans."
-  }
- ],
- "tables": [
-  {
-   "id": "pemphigus_vegetans-matrix",
-   "title": "pemphigus vegetans: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare vegetating variant of pemphigus vulgaris characterised by hypertrophic, verrucous, exudative plaques favouring",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "integumentary",
+  "specialty": "dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare vegetating variant of pemphigus vulgaris characterised by hypertrophic, verrucous, exudative plaques favouring intertriginous and periorificial sites.",
+      "Two forms are described: the Neumann type, which begins with flaccid bullae and erosions that evolve into vegetations, and the milder Hallopeau type, which starts with pustules.",
+      "Flexural predilection includes the axillae, groin, inframammary folds, perianal region and the angles of the mouth; the scalp and face may also be affected.",
+      "Oral mucosal involvement is common and may include cerebriform changes of the tongue, mirroring the mucosal disease of pemphigus vulgaris.",
+      "Histology shows suprabasal acantholysis with pseudoepitheliomatous hyperplasia and characteristic intraepidermal eosinophilic microabscesses.",
+      "Direct immunofluorescence demonstrates intercellular IgG and C3 in a net-like (chicken-wire) pattern, and serum antibodies target desmoglein 3 (and often desmoglein 1).",
+      "The Hallopeau type generally follows a more indolent course and may respond to lower doses of systemic therapy than classical pemphigus vulgaris.",
+      "Systemic corticosteroids with steroid-sparing immunosuppressants remain the mainstay, with rituximab increasingly used for refractory or steroid-dependent disease."
     ],
-    [
-     "Key Investigations",
-     "lesional biopsy for histopathology (suprabasal acantholysis, eosinophilic microabscesses, pseudoepitheliomatous hyperplasia),",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Pemphigus vegetans is a clinical and histological variant of pemphigus vulgaris driven by IgG autoantibodies against the desmosomal cadherins desmoglein 3 and, in many cases, desmoglein 1. Antibody binding disrupts desmosomal adhesion between keratinocytes, producing suprabasal acantholysis and flaccid blistering. At intertriginous and periorificial sites, the warm moist environment and chronic irritation are thought to provoke an exuberant reparative epidermal response, giving rise to pseudoepitheliomatous hyperplasia and the characteristic vegetating plaques studded with eosinophilic microabscesses. The reason certain patients develop vegetating rather than classical lesions is incompletely understood but may reflect host reactive patterns and local factors.",
+    "additionalDifferentials": [
+      "pemphigus vulgaris (classical)",
+      "Hailey-Hailey disease (benign familial pemphigus)",
+      "condylomata lata of secondary syphilis",
+      "granular parakeratosis and intertrigo with candidiasis",
+      "halogenoderma (bromoderma / iododerma)",
+      "pyoderma vegetans / blastomycosis-like pyoderma",
+      "inverse psoriasis"
     ],
-    [
-     "Primary Differentials",
-     "pemphigus vulgaris (classical), Hailey-Hailey disease (benign familial pemphigus), condylomata lata of secondary syphilis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "lesional biopsy for histopathology (suprabasal acantholysis, eosinophilic microabscesses, pseudoepitheliomatous hyperplasia)",
+      "perilesional biopsy for direct immunofluorescence (intercellular IgG and C3)",
+      "indirect immunofluorescence for circulating intercellular antibodies",
+      "ELISA for desmoglein 1 and desmoglein 3 antibodies",
+      "swabs and culture to exclude secondary bacterial or candidal infection",
+      "syphilis serology when perianal or genital vegetations raise suspicion of condylomata lata",
+      "baseline screening prior to immunosuppression (glucose, blood pressure, infection screen)"
     ],
-    [
-     "Management Strategy",
-     "Induce remission with systemic corticosteroids as first-line therapy",
-     "Core treatment modality"
+    "redFlags": [
+      "extensive erosions with fluid loss, secondary infection or sepsis",
+      "severe oropharyngeal involvement limiting oral intake and nutrition",
+      "rapid progression or transformation to widespread classical pemphigus vulgaris",
+      "signs of systemic infection arising from immunosuppressive therapy"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking flexural vegetations for intertrigo, candidiasis or condylomata lata and delaying biopsy.",
-     "Prevent diagnostic or management error"
+    "prognosis": "With appropriate immunosuppression the disease is controllable, and the Hallopeau type in particular may follow a relatively benign, indolent course; however relapses are frequent and the Neumann type can be chronic and difficult to clear.",
+    "pitfalls": [
+      "Mistaking flexural vegetations for intertrigo, candidiasis or condylomata lata and delaying biopsy.",
+      "Biopsying only the vegetating surface and missing diagnostic acantholysis at the edge.",
+      "Overlooking oral disease that may be the earliest and most persistent manifestation.",
+      "Attributing treatment failure to disease when secondary bacterial or candidal colonisation is driving the plaques.",
+      "Assuming the milder Hallopeau course applies to all patients and under-treating Neumann-type disease."
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology, current edition",
+      "Fitzpatrick's Dermatology in General Medicine, current edition",
+      "Bolognia Dermatology, current edition"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Induce remission with systemic corticosteroids as first-line therapy",
+      "Add steroid-sparing immunosuppression such as azathioprine or mycophenolate mofetil, or rituximab, for durable control",
+      "Manage vegetating flexural plaques with topical corticosteroids and antiseptic measures",
+      "Treat secondary bacterial or candidal superinfection of macerated intertriginous lesions",
+      "Provide oral care, analgesia and dietary modification for painful mucosal erosions",
+      "Monitor anti-desmoglein antibody titres and surveil for complications of immunosuppression",
+      "Refer to dermatology, with oral medicine input for mucosal disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for pemphigus vegetans."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pemphigus-vegetans-real-image",
-   "title": "pemphigus vegetans: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "pemphigus_vegetans-pathway",
+      "title": "pemphigus vegetans: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare vegetating variant of pemphigus vulgaris characterised by hypertrophic, verrucous, exudative plaques favouring intertriginous and periorificial sites.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: extensive erosions with fluid loss, secondary infection or sepsis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: lesional biopsy for histopathology (suprabasal acantholysis, eosinophilic microabscesses, pseudoepitheliomatous hyperplasia), perilesional biopsy for direct immunofluorescence (intercellular IgG and C3), indirect"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Induce remission with systemic corticosteroids as first-line therapy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking flexural vegetations for intertrigo, candidiasis or condylomata lata and delaying biopsy."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pemphigus vegetans."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pemphigus_vegetans-matrix",
+      "title": "pemphigus vegetans: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare vegetating variant of pemphigus vulgaris characterised by hypertrophic, verrucous, exudative plaques favouring",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "lesional biopsy for histopathology (suprabasal acantholysis, eosinophilic microabscesses, pseudoepitheliomatous hyperplasia),",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "pemphigus vulgaris (classical), Hailey-Hailey disease (benign familial pemphigus), condylomata lata of secondary syphilis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Induce remission with systemic corticosteroids as first-line therapy",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking flexural vegetations for intertrigo, candidiasis or condylomata lata and delaying biopsy.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pemphigus vegetans."
+    }
+  ],
+  "diagrams": []
 }

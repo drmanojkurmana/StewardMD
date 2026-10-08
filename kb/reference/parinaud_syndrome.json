@@ -1,173 +1,151 @@
 {
- "id": "parinaud_syndrome",
- "name": "Parinaud syndrome",
- "aliases": [
-  "dorsal midbrain syndrome",
-  "pretectal syndrome",
-  "Sylvian aqueduct syndrome",
-  "vertical gaze palsy syndrome"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neuro-ophthalmology",
- "specialty": "Neurology / Ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Walsh and Hoyt Clinical Neuro-Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The classic triad is a supranuclear upgaze palsy, convergence-retraction nystagmus on attempted upward saccades, and light-near dissociation of the pupils",
-   "Pupils are typically mid-dilated and react poorly to light but constrict on convergence (light-near dissociation)",
-   "Lid retraction (Collier sign) and impaired convergence or accommodation may accompany the gaze findings",
-   "Convergence-retraction nystagmus is best elicited with a downward-rotating optokinetic drum, provoking co-contraction of horizontal recti",
-   "In children the commonest cause is a pineal region tumour, and in young adults demyelination or hydrocephalus",
-   "In older patients midbrain infarction and hydrocephalus with dilation of the third ventricle are frequent causes",
-   "Downgaze is usually preserved early, distinguishing it from progressive supranuclear palsy where downgaze is prominently affected"
+  "id": "parinaud_syndrome",
+  "name": "Parinaud syndrome",
+  "aliases": [
+    "dorsal midbrain syndrome",
+    "pretectal syndrome",
+    "Sylvian aqueduct syndrome",
+    "vertical gaze palsy syndrome"
   ],
-  "pathophysiology": "The dorsal midbrain and pretectal region contain the rostral interstitial nucleus of the medial longitudinal fasciculus and the posterior commissure fibres that mediate vertical gaze, together with the pretectal olivary nuclei serving the pupillary light reflex. Compression or damage here abolishes voluntary upgaze, disrupts the light reflex pathway while sparing the near response, and disinhibits vergence pathways producing convergence-retraction movements. Causes include pineal and tectal tumours compressing the region, obstructive hydrocephalus dilating the aqueduct and third ventricle, midbrain infarction, and demyelination.",
-  "additionalDifferentials": [
-   "Progressive supranuclear palsy with vertical gaze failure",
-   "Thyroid eye disease limiting elevation",
-   "Myasthenia gravis with variable ophthalmoplegia",
-   "Bilateral oculomotor nerve involvement",
-   "Wernicke encephalopathy with gaze disturbance",
-   "Congenital or physiological limitation of upgaze in the elderly"
-  ],
-  "additionalInvestigations": [
-   "MRI of the brain focused on the pineal region and dorsal midbrain",
-   "Imaging assessment of the ventricular system for hydrocephalus",
-   "Serum and cerebrospinal fluid tumour markers when a pineal germ cell tumour is suspected",
-   "Cerebrospinal fluid analysis where demyelination or infiltration is possible",
-   "Pupillary testing to document light-near dissociation",
-   "Vascular workup in older patients with an acute presentation"
-  ],
-  "redFlags": [
-   "Signs of raised intracranial pressure or hydrocephalus requiring urgent neurosurgical assessment",
-   "A pineal or tectal mass on imaging needing prompt oncological and surgical evaluation",
-   "Rapidly progressive gaze failure with headache and papilloedema",
-   "New reduced consciousness suggesting acute aqueduct obstruction"
-  ],
-  "prognosis": "Prognosis depends entirely on the cause; relief of hydrocephalus or treatment of a tumour can improve the eye signs, while some patients retain a chronic upgaze limitation and pupillary abnormality.",
-  "pitfalls": [
-   "Confusing the syndrome with progressive supranuclear palsy, which characteristically affects downgaze",
-   "Missing early hydrocephalus that is treatable if recognised",
-   "Overlooking light-near dissociation because pupil testing is not performed in the near",
-   "Attributing upgaze limitation in the elderly solely to ageing and failing to image"
-  ],
-  "references": [
-   "Walsh and Hoyt Clinical Neuro-Ophthalmology",
-   "Adams and Victor's Principles of Neurology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Direct treatment at the underlying cause, as the gaze syndrome itself has no specific drug therapy",
-   "Relieve obstructive hydrocephalus urgently with cerebrospinal fluid diversion such as endoscopic third ventriculostomy or ventricular shunting",
-   "Treat a causative pineal or tectal tumour with the appropriate combination of surgery, radiotherapy and chemotherapy, guided by tissue diagnosis and tumour markers",
-   "Manage midbrain infarction or demyelination as the acute cause requires, including immunomodulation for a demyelinating relapse",
-   "Offer symptomatic relief of diplopia and convergence problems with prisms, and consider strabismus surgery for stable, persistent upgaze limitation",
-   "Monitor eye signs and ventricular size over time, coordinating neurosurgery, neurology and neuro-ophthalmology"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "parinaud_syndrome-pathway",
-   "title": "Parinaud syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The classic triad is a supranuclear upgaze palsy, convergence-retraction nystagmus on attempted upward saccades, and light-near dissociation of the pupils",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Signs of raised intracranial pressure or hydrocephalus requiring urgent neurosurgical assessment",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: MRI of the brain focused on the pineal region and dorsal midbrain, Imaging assessment of the ventricular system for hydrocephalus, Serum and cerebrospinal fluid tumour markers when a pineal germ cell tumour is suspected"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Direct treatment at the underlying cause, as the gaze syndrome itself has no specific drug therapy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing the syndrome with progressive supranuclear palsy, which characteristically affects downgaze"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of parinaud syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "parinaud_syndrome-matrix",
-   "title": "Parinaud syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The classic triad is a supranuclear upgaze palsy, convergence-retraction nystagmus on attempted upward saccades, and light-near",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neuro-ophthalmology",
+  "specialty": "Neurology / Ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Walsh and Hoyt Clinical Neuro-Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The classic triad is a supranuclear upgaze palsy, convergence-retraction nystagmus on attempted upward saccades, and light-near dissociation of the pupils",
+      "Pupils are typically mid-dilated and react poorly to light but constrict on convergence (light-near dissociation)",
+      "Lid retraction (Collier sign) and impaired convergence or accommodation may accompany the gaze findings",
+      "Convergence-retraction nystagmus is best elicited with a downward-rotating optokinetic drum, provoking co-contraction of horizontal recti",
+      "In children the commonest cause is a pineal region tumour, and in young adults demyelination or hydrocephalus",
+      "In older patients midbrain infarction and hydrocephalus with dilation of the third ventricle are frequent causes",
+      "Downgaze is usually preserved early, distinguishing it from progressive supranuclear palsy where downgaze is prominently affected"
     ],
-    [
-     "Key Investigations",
-     "MRI of the brain focused on the pineal region and dorsal midbrain, Imaging assessment of the ventricular system for",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The dorsal midbrain and pretectal region contain the rostral interstitial nucleus of the medial longitudinal fasciculus and the posterior commissure fibres that mediate vertical gaze, together with the pretectal olivary nuclei serving the pupillary light reflex. Compression or damage here abolishes voluntary upgaze, disrupts the light reflex pathway while sparing the near response, and disinhibits vergence pathways producing convergence-retraction movements. Causes include pineal and tectal tumours compressing the region, obstructive hydrocephalus dilating the aqueduct and third ventricle, midbrain infarction, and demyelination.",
+    "additionalDifferentials": [
+      "Progressive supranuclear palsy with vertical gaze failure",
+      "Thyroid eye disease limiting elevation",
+      "Myasthenia gravis with variable ophthalmoplegia",
+      "Bilateral oculomotor nerve involvement",
+      "Wernicke encephalopathy with gaze disturbance",
+      "Congenital or physiological limitation of upgaze in the elderly"
     ],
-    [
-     "Primary Differentials",
-     "Progressive supranuclear palsy with vertical gaze failure, Thyroid eye disease limiting elevation, Myasthenia gravis with",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "MRI of the brain focused on the pineal region and dorsal midbrain",
+      "Imaging assessment of the ventricular system for hydrocephalus",
+      "Serum and cerebrospinal fluid tumour markers when a pineal germ cell tumour is suspected",
+      "Cerebrospinal fluid analysis where demyelination or infiltration is possible",
+      "Pupillary testing to document light-near dissociation",
+      "Vascular workup in older patients with an acute presentation"
     ],
-    [
-     "Management Strategy",
-     "Direct treatment at the underlying cause, as the gaze syndrome itself has no specific drug therapy",
-     "Core treatment modality"
+    "redFlags": [
+      "Signs of raised intracranial pressure or hydrocephalus requiring urgent neurosurgical assessment",
+      "A pineal or tectal mass on imaging needing prompt oncological and surgical evaluation",
+      "Rapidly progressive gaze failure with headache and papilloedema",
+      "New reduced consciousness suggesting acute aqueduct obstruction"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing the syndrome with progressive supranuclear palsy, which characteristically affects downgaze",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends entirely on the cause; relief of hydrocephalus or treatment of a tumour can improve the eye signs, while some patients retain a chronic upgaze limitation and pupillary abnormality.",
+    "pitfalls": [
+      "Confusing the syndrome with progressive supranuclear palsy, which characteristically affects downgaze",
+      "Missing early hydrocephalus that is treatable if recognised",
+      "Overlooking light-near dissociation because pupil testing is not performed in the near",
+      "Attributing upgaze limitation in the elderly solely to ageing and failing to image"
+    ],
+    "references": [
+      "Walsh and Hoyt Clinical Neuro-Ophthalmology",
+      "Adams and Victor's Principles of Neurology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Direct treatment at the underlying cause, as the gaze syndrome itself has no specific drug therapy",
+      "Relieve obstructive hydrocephalus urgently with cerebrospinal fluid diversion such as endoscopic third ventriculostomy or ventricular shunting",
+      "Treat a causative pineal or tectal tumour with the appropriate combination of surgery, radiotherapy and chemotherapy, guided by tissue diagnosis and tumour markers",
+      "Manage midbrain infarction or demyelination as the acute cause requires, including immunomodulation for a demyelinating relapse",
+      "Offer symptomatic relief of diplopia and convergence problems with prisms, and consider strabismus surgery for stable, persistent upgaze limitation",
+      "Monitor eye signs and ventricular size over time, coordinating neurosurgery, neurology and neuro-ophthalmology"
     ]
-   ],
-   "caption": "Overview comparison matrix for parinaud syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "parinaud-syndrome-real-image",
-   "title": "Parinaud syndrome: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "parinaud_syndrome-pathway",
+      "title": "Parinaud syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The classic triad is a supranuclear upgaze palsy, convergence-retraction nystagmus on attempted upward saccades, and light-near dissociation of the pupils",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Signs of raised intracranial pressure or hydrocephalus requiring urgent neurosurgical assessment",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: MRI of the brain focused on the pineal region and dorsal midbrain, Imaging assessment of the ventricular system for hydrocephalus, Serum and cerebrospinal fluid tumour markers when a pineal germ cell tumour is suspected"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Direct treatment at the underlying cause, as the gaze syndrome itself has no specific drug therapy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing the syndrome with progressive supranuclear palsy, which characteristically affects downgaze"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of parinaud syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "parinaud_syndrome-matrix",
+      "title": "Parinaud syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The classic triad is a supranuclear upgaze palsy, convergence-retraction nystagmus on attempted upward saccades, and light-near",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "MRI of the brain focused on the pineal region and dorsal midbrain, Imaging assessment of the ventricular system for",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Progressive supranuclear palsy with vertical gaze failure, Thyroid eye disease limiting elevation, Myasthenia gravis with",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Direct treatment at the underlying cause, as the gaze syndrome itself has no specific drug therapy",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing the syndrome with progressive supranuclear palsy, which characteristically affects downgaze",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for parinaud syndrome."
+    }
+  ],
+  "diagrams": []
 }

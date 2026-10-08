@@ -1,172 +1,150 @@
 {
- "id": "splenosis",
- "name": "splenosis",
- "aliases": [
-  "splenic autotransplantation",
-  "heterotopic splenic implantation"
- ],
- "class": "non_infective",
- "system": "Haematological / Reticuloendothelial system",
- "specialty": "General surgery / Radiology",
- "referenceOnly": true,
- "reference": {
-  "source": "Grainger & Allison's Diagnostic Radiology / Postgraduate Haematology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Represents acquired heterotopic autotransplantation of splenic pulp after splenic rupture or splenectomy, with implants seeding peritoneal and serosal surfaces and acquiring a new blood supply",
-   "Distinguished from an accessory spleen, which is congenital, usually solitary and near the hilum, possesses a hilum and is supplied by the splenic artery, whereas splenosis is acquired, multiple, lacks a hilum and parasitises surrounding vessels",
-   "Thoracic splenosis follows combined splenic and left diaphragmatic injury, producing left pleural-based nodules that can mimic malignancy",
-   "Usually asymptomatic and found incidentally, but can be mistaken for peritoneal metastases, carcinomatosis, mesothelioma, lymphoma or endometriosis",
-   "Technetium-labelled heat-damaged red cell scintigraphy, ideally with SPECT/CT, confirms functioning splenic tissue and averts unnecessary biopsy or surgery",
-   "Implants restore only partial splenic function, so vaccination and infection prophylaxis appropriate to hyposplenism should still be considered",
-   "Disappearance of Howell-Jolly bodies from the blood film after splenectomy can be a clue to functioning splenosis",
-   "Implants can be found throughout the abdomen and pelvis, and rarely in the thorax, liver or subcutaneous tissue at old wound sites"
+  "id": "splenosis",
+  "name": "splenosis",
+  "aliases": [
+    "splenic autotransplantation",
+    "heterotopic splenic implantation"
   ],
-  "pathophysiology": "Splenosis develops when splenic pulp is disseminated during traumatic rupture or at splenectomy, seeding the peritoneal cavity, omentum, serosal surfaces of the bowel, mesentery and diaphragm, or the pleural space when the diaphragm is breached. The viable red pulp fragments implant on vascularised surfaces and induce neovascularisation, deriving a blood supply from the surrounding host tissue rather than from the splenic artery. The resulting nodules are histologically splenic and retain some filtering and immune capacity, but their total mass and disordered architecture usually provide only incomplete restoration of splenic function. Because they enlarge slowly and appear as multiple soft-tissue nodules, they frequently masquerade radiologically as metastatic or peritoneal malignancy.",
-  "additionalDifferentials": [
-   "Accessory spleen",
-   "Peritoneal carcinomatosis or metastatic deposits",
-   "Peritoneal mesothelioma",
-   "Endometriosis",
-   "Lymphoma or gastrointestinal stromal tumour",
-   "Pleural tumour or metastasis in thoracic splenosis",
-   "Hepatic adenoma or focal lesion when intrahepatic"
-  ],
-  "additionalInvestigations": [
-   "Technetium heat-damaged red cell or sulphur-colloid scintigraphy with SPECT/CT",
-   "Contrast-enhanced CT to map the nodules and their distribution",
-   "MRI, including superparamagnetic iron oxide-enhanced sequences exploiting reticuloendothelial uptake",
-   "Full blood count and peripheral blood film for Howell-Jolly bodies and other hyposplenic features",
-   "Documentation of prior splenic trauma or splenectomy in the history",
-   "Image-guided biopsy only where the diagnosis remains genuinely uncertain"
-  ],
-  "redFlags": [
-   "Imaging features that cannot confidently be distinguished from malignancy and require exclusion",
-   "Gastrointestinal bleeding or bowel obstruction attributable to an implant",
-   "Haemoptysis or pleuritic symptoms in thoracic splenosis"
-  ],
-  "prognosis": "Splenosis is benign and the great majority of patients remain asymptomatic for life, needing no treatment. The principal hazard is misdiagnosis as malignancy leading to unnecessary intervention.",
-  "pitfalls": [
-   "Misinterpreting implants as malignancy and proceeding to needless biopsy or resection",
-   "Assuming splenosis fully restores immune function and omitting vaccination and prophylaxis",
-   "Not considering the diagnosis in a patient with prior splenic trauma and new peritoneal or pleural nodules",
-   "Confusing splenosis with a congenital accessory spleen"
-  ],
-  "references": [
-   "Grainger & Allison's Diagnostic Radiology",
-   "Postgraduate Haematology (Hoffbrand)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No treatment for asymptomatic splenosis, which is benign and requires only recognition",
-   "Confirm the diagnosis non-invasively with technetium heat-damaged red cell scintigraphy, ideally with SPECT/CT, to avoid unnecessary biopsy or surgery",
-   "Avoid resection or biopsy unless the diagnosis remains genuinely uncertain or implants become symptomatic through pain, bleeding or obstruction",
-   "Because implants restore only partial splenic function, consider vaccination and infection prophylaxis appropriate to hyposplenism",
-   "Monitor the peripheral blood film for hyposplenic features such as Howell-Jolly bodies to gauge residual splenic function",
-   "Reserve surgical excision for genuinely symptomatic implants or complications"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "splenosis-pathway",
-   "title": "splenosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Represents acquired heterotopic autotransplantation of splenic pulp after splenic rupture or splenectomy, with implants seeding peritoneal and serosal surfaces and acquiring a new blood supply",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Imaging features that cannot confidently be distinguished from malignancy and require exclusion",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Technetium heat-damaged red cell or sulphur-colloid scintigraphy with SPECT/CT, Contrast-enhanced CT to map the nodules and their distribution, MRI, including superparamagnetic iron oxide-enhanced sequences exploiting"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No treatment for asymptomatic splenosis, which is benign and requires only recognition"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misinterpreting implants as malignancy and proceeding to needless biopsy or resection"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of splenosis."
-  }
- ],
- "tables": [
-  {
-   "id": "splenosis-matrix",
-   "title": "splenosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Represents acquired heterotopic autotransplantation of splenic pulp after splenic rupture or splenectomy, with implants seeding",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematological / Reticuloendothelial system",
+  "specialty": "General surgery / Radiology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Grainger & Allison's Diagnostic Radiology / Postgraduate Haematology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Represents acquired heterotopic autotransplantation of splenic pulp after splenic rupture or splenectomy, with implants seeding peritoneal and serosal surfaces and acquiring a new blood supply",
+      "Distinguished from an accessory spleen, which is congenital, usually solitary and near the hilum, possesses a hilum and is supplied by the splenic artery, whereas splenosis is acquired, multiple, lacks a hilum and parasitises surrounding vessels",
+      "Thoracic splenosis follows combined splenic and left diaphragmatic injury, producing left pleural-based nodules that can mimic malignancy",
+      "Usually asymptomatic and found incidentally, but can be mistaken for peritoneal metastases, carcinomatosis, mesothelioma, lymphoma or endometriosis",
+      "Technetium-labelled heat-damaged red cell scintigraphy, ideally with SPECT/CT, confirms functioning splenic tissue and averts unnecessary biopsy or surgery",
+      "Implants restore only partial splenic function, so vaccination and infection prophylaxis appropriate to hyposplenism should still be considered",
+      "Disappearance of Howell-Jolly bodies from the blood film after splenectomy can be a clue to functioning splenosis",
+      "Implants can be found throughout the abdomen and pelvis, and rarely in the thorax, liver or subcutaneous tissue at old wound sites"
     ],
-    [
-     "Key Investigations",
-     "Technetium heat-damaged red cell or sulphur-colloid scintigraphy with SPECT/CT, Contrast-enhanced CT to map the nodules and their",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Splenosis develops when splenic pulp is disseminated during traumatic rupture or at splenectomy, seeding the peritoneal cavity, omentum, serosal surfaces of the bowel, mesentery and diaphragm, or the pleural space when the diaphragm is breached. The viable red pulp fragments implant on vascularised surfaces and induce neovascularisation, deriving a blood supply from the surrounding host tissue rather than from the splenic artery. The resulting nodules are histologically splenic and retain some filtering and immune capacity, but their total mass and disordered architecture usually provide only incomplete restoration of splenic function. Because they enlarge slowly and appear as multiple soft-tissue nodules, they frequently masquerade radiologically as metastatic or peritoneal malignancy.",
+    "additionalDifferentials": [
+      "Accessory spleen",
+      "Peritoneal carcinomatosis or metastatic deposits",
+      "Peritoneal mesothelioma",
+      "Endometriosis",
+      "Lymphoma or gastrointestinal stromal tumour",
+      "Pleural tumour or metastasis in thoracic splenosis",
+      "Hepatic adenoma or focal lesion when intrahepatic"
     ],
-    [
-     "Primary Differentials",
-     "Accessory spleen, Peritoneal carcinomatosis or metastatic deposits, Peritoneal mesothelioma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Technetium heat-damaged red cell or sulphur-colloid scintigraphy with SPECT/CT",
+      "Contrast-enhanced CT to map the nodules and their distribution",
+      "MRI, including superparamagnetic iron oxide-enhanced sequences exploiting reticuloendothelial uptake",
+      "Full blood count and peripheral blood film for Howell-Jolly bodies and other hyposplenic features",
+      "Documentation of prior splenic trauma or splenectomy in the history",
+      "Image-guided biopsy only where the diagnosis remains genuinely uncertain"
     ],
-    [
-     "Management Strategy",
-     "No treatment for asymptomatic splenosis, which is benign and requires only recognition",
-     "Core treatment modality"
+    "redFlags": [
+      "Imaging features that cannot confidently be distinguished from malignancy and require exclusion",
+      "Gastrointestinal bleeding or bowel obstruction attributable to an implant",
+      "Haemoptysis or pleuritic symptoms in thoracic splenosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Misinterpreting implants as malignancy and proceeding to needless biopsy or resection",
-     "Prevent diagnostic or management error"
+    "prognosis": "Splenosis is benign and the great majority of patients remain asymptomatic for life, needing no treatment. The principal hazard is misdiagnosis as malignancy leading to unnecessary intervention.",
+    "pitfalls": [
+      "Misinterpreting implants as malignancy and proceeding to needless biopsy or resection",
+      "Assuming splenosis fully restores immune function and omitting vaccination and prophylaxis",
+      "Not considering the diagnosis in a patient with prior splenic trauma and new peritoneal or pleural nodules",
+      "Confusing splenosis with a congenital accessory spleen"
+    ],
+    "references": [
+      "Grainger & Allison's Diagnostic Radiology",
+      "Postgraduate Haematology (Hoffbrand)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No treatment for asymptomatic splenosis, which is benign and requires only recognition",
+      "Confirm the diagnosis non-invasively with technetium heat-damaged red cell scintigraphy, ideally with SPECT/CT, to avoid unnecessary biopsy or surgery",
+      "Avoid resection or biopsy unless the diagnosis remains genuinely uncertain or implants become symptomatic through pain, bleeding or obstruction",
+      "Because implants restore only partial splenic function, consider vaccination and infection prophylaxis appropriate to hyposplenism",
+      "Monitor the peripheral blood film for hyposplenic features such as Howell-Jolly bodies to gauge residual splenic function",
+      "Reserve surgical excision for genuinely symptomatic implants or complications"
     ]
-   ],
-   "caption": "Overview comparison matrix for splenosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "splenosis-real-image",
-   "title": "splenosis: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "splenosis-pathway",
+      "title": "splenosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Represents acquired heterotopic autotransplantation of splenic pulp after splenic rupture or splenectomy, with implants seeding peritoneal and serosal surfaces and acquiring a new blood supply",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Imaging features that cannot confidently be distinguished from malignancy and require exclusion",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Technetium heat-damaged red cell or sulphur-colloid scintigraphy with SPECT/CT, Contrast-enhanced CT to map the nodules and their distribution, MRI, including superparamagnetic iron oxide-enhanced sequences exploiting"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No treatment for asymptomatic splenosis, which is benign and requires only recognition"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misinterpreting implants as malignancy and proceeding to needless biopsy or resection"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of splenosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "splenosis-matrix",
+      "title": "splenosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Represents acquired heterotopic autotransplantation of splenic pulp after splenic rupture or splenectomy, with implants seeding",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Technetium heat-damaged red cell or sulphur-colloid scintigraphy with SPECT/CT, Contrast-enhanced CT to map the nodules and their",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Accessory spleen, Peritoneal carcinomatosis or metastatic deposits, Peritoneal mesothelioma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No treatment for asymptomatic splenosis, which is benign and requires only recognition",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misinterpreting implants as malignancy and proceeding to needless biopsy or resection",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for splenosis."
+    }
+  ],
+  "diagrams": []
 }

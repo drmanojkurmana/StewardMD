@@ -1,173 +1,151 @@
 {
- "id": "vitamin_b12_deficiency",
- "name": "Vitamin B12 deficiency",
- "aliases": [
-  "cobalamin deficiency",
-  "pernicious anaemia",
-  "hypocobalaminaemia"
- ],
- "class": "non_infective",
- "system": "Nutrition / Metabolic",
- "specialty": "Nutrition & Metabolic Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / WHO nutrition guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Classically causes a macrocytic megaloblastic anaemia, but neurological features can appear before anaemia and even with normal blood counts",
-   "Subacute combined degeneration of the cord produces symmetrical distal paraesthesiae, loss of proprioception and vibration sense, and an unsteady gait",
-   "Autoimmune loss of gastric intrinsic factor (pernicious anaemia) and prior gastric or terminal ileal surgery are common mechanisms of malabsorption",
-   "Strict vegetarian and vegan diets, common in parts of India, are an important dietary cause because the vitamin is almost exclusively of animal origin",
-   "A blood film may show oval macrocytes and hypersegmented neutrophils; marrow is megaloblastic",
-   "Serum cobalamin can be borderline, so raised methylmalonic acid and homocysteine are useful confirmatory markers",
-   "Replacement reverses the anaemia reliably, but longstanding neurological damage may only partially recover, making early treatment important",
-   "Correcting B12 with folate alone can precipitate or worsen neurological deterioration, so B12 status must be assessed before treating a megaloblastic anaemia"
+  "id": "vitamin_b12_deficiency",
+  "name": "Vitamin B12 deficiency",
+  "aliases": [
+    "cobalamin deficiency",
+    "pernicious anaemia",
+    "hypocobalaminaemia"
   ],
-  "pathophysiology": "Cobalamin is a cofactor for methionine synthase and methylmalonyl-CoA mutase. Deficiency impairs conversion of homocysteine to methionine and of methylmalonyl-CoA to succinyl-CoA, disrupting DNA synthesis and myelin maintenance. Impaired DNA synthesis in haematopoietic precursors yields megaloblastic, ineffective erythropoiesis, while disordered myelin metabolism underlies the neuropathy and cord degeneration. Absorption depends on intrinsic factor from gastric parietal cells and an intact terminal ileum, so autoimmune gastritis, atrophic gastritis, gastric or ileal resection, and malabsorptive states all reduce uptake; dietary lack occurs when animal products are excluded.",
-  "additionalDifferentials": [
-   "Folate deficiency (other cause of megaloblastic anaemia)",
-   "Myelodysplastic syndrome",
-   "Hypothyroidism causing macrocytosis",
-   "Alcohol-related macrocytosis and marrow suppression",
-   "Other causes of peripheral neuropathy such as diabetes",
-   "Copper deficiency myeloneuropathy"
-  ],
-  "additionalInvestigations": [
-   "Full blood count and blood film for macrocytosis and hypersegmented neutrophils",
-   "Serum cobalamin, with methylmalonic acid and homocysteine when the level is equivocal",
-   "Anti-intrinsic factor and anti-parietal cell antibodies for pernicious anaemia",
-   "Reticulocyte count and haemolysis markers as ineffective erythropoiesis can raise LDH and bilirubin",
-   "Assessment for malabsorption and coexisting iron or folate deficiency"
-  ],
-  "redFlags": [
-   "Progressive myelopathy or gait disturbance indicating subacute combined degeneration needing urgent treatment",
-   "Severe anaemia with cardiorespiratory compromise",
-   "Cognitive decline or psychiatric change attributable to deficiency",
-   "Pancytopenia from profound megaloblastic marrow failure"
-  ],
-  "prognosis": "Haematological recovery is usually complete with replacement, but neurological recovery depends on how long deficiency was present; early treatment gives the best outcome while advanced cord degeneration may leave residual deficits.",
-  "pitfalls": [
-   "Treating megaloblastic anaemia with folate alone and masking or worsening B12-related neurological disease",
-   "Attributing neurological symptoms to another cause because the blood count is normal",
-   "Relying solely on a borderline serum cobalamin without functional markers",
-   "Failing to identify and monitor pernicious anaemia and its association with other autoimmune disease and gastric cancer"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "WHO nutrition guidance"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Cobalamin replacement with intramuscular hydroxocobalamin for pernicious anaemia and malabsorptive causes and oral cyanocobalamin for dietary deficiency",
-   "Lifelong parenteral maintenance therapy in pernicious anaemia and after gastric or terminal ileal surgery",
-   "Dietary counselling and supplementation for strict vegetarians and vegans, in whom intake is the limiting factor",
-   "Correct coexisting iron and folate deficiency, avoiding folate replacement alone as it can precipitate or worsen neurological deterioration",
-   "Monitor the reticulocyte and haematological response and watch for hypokalaemia during recovery",
-   "Treat neurological features early, as recovery from subacute combined degeneration depends on prompt replacement, referring to neurology for severe deficits",
-   "Endoscopic surveillance for gastric neoplasia in confirmed pernicious anaemia"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "vitamin_b12_deficiency-pathway",
-   "title": "Vitamin B12 deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Classically causes a macrocytic megaloblastic anaemia, but neurological features can appear before anaemia and even with normal blood counts",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive myelopathy or gait disturbance indicating subacute combined degeneration needing urgent treatment",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full blood count and blood film for macrocytosis and hypersegmented neutrophils, Serum cobalamin, with methylmalonic acid and homocysteine when the level is equivocal, Anti-intrinsic factor and anti-parietal cell"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Cobalamin replacement with intramuscular hydroxocobalamin for pernicious anaemia and malabsorptive causes and oral cyanocobalamin for dietary deficiency"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating megaloblastic anaemia with folate alone and masking or worsening B12-related neurological disease"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of vitamin b12 deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "vitamin_b12_deficiency-matrix",
-   "title": "Vitamin B12 deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Classically causes a macrocytic megaloblastic anaemia, but neurological features can appear before anaemia and even with normal",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nutrition / Metabolic",
+  "specialty": "Nutrition & Metabolic Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / WHO nutrition guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Classically causes a macrocytic megaloblastic anaemia, but neurological features can appear before anaemia and even with normal blood counts",
+      "Subacute combined degeneration of the cord produces symmetrical distal paraesthesiae, loss of proprioception and vibration sense, and an unsteady gait",
+      "Autoimmune loss of gastric intrinsic factor (pernicious anaemia) and prior gastric or terminal ileal surgery are common mechanisms of malabsorption",
+      "Strict vegetarian and vegan diets, common in parts of India, are an important dietary cause because the vitamin is almost exclusively of animal origin",
+      "A blood film may show oval macrocytes and hypersegmented neutrophils; marrow is megaloblastic",
+      "Serum cobalamin can be borderline, so raised methylmalonic acid and homocysteine are useful confirmatory markers",
+      "Replacement reverses the anaemia reliably, but longstanding neurological damage may only partially recover, making early treatment important",
+      "Correcting B12 with folate alone can precipitate or worsen neurological deterioration, so B12 status must be assessed before treating a megaloblastic anaemia"
     ],
-    [
-     "Key Investigations",
-     "Full blood count and blood film for macrocytosis and hypersegmented neutrophils, Serum cobalamin, with methylmalonic acid and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Cobalamin is a cofactor for methionine synthase and methylmalonyl-CoA mutase. Deficiency impairs conversion of homocysteine to methionine and of methylmalonyl-CoA to succinyl-CoA, disrupting DNA synthesis and myelin maintenance. Impaired DNA synthesis in haematopoietic precursors yields megaloblastic, ineffective erythropoiesis, while disordered myelin metabolism underlies the neuropathy and cord degeneration. Absorption depends on intrinsic factor from gastric parietal cells and an intact terminal ileum, so autoimmune gastritis, atrophic gastritis, gastric or ileal resection, and malabsorptive states all reduce uptake; dietary lack occurs when animal products are excluded.",
+    "additionalDifferentials": [
+      "Folate deficiency (other cause of megaloblastic anaemia)",
+      "Myelodysplastic syndrome",
+      "Hypothyroidism causing macrocytosis",
+      "Alcohol-related macrocytosis and marrow suppression",
+      "Other causes of peripheral neuropathy such as diabetes",
+      "Copper deficiency myeloneuropathy"
     ],
-    [
-     "Primary Differentials",
-     "Folate deficiency (other cause of megaloblastic anaemia), Myelodysplastic syndrome, Hypothyroidism causing macrocytosis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full blood count and blood film for macrocytosis and hypersegmented neutrophils",
+      "Serum cobalamin, with methylmalonic acid and homocysteine when the level is equivocal",
+      "Anti-intrinsic factor and anti-parietal cell antibodies for pernicious anaemia",
+      "Reticulocyte count and haemolysis markers as ineffective erythropoiesis can raise LDH and bilirubin",
+      "Assessment for malabsorption and coexisting iron or folate deficiency"
     ],
-    [
-     "Management Strategy",
-     "Cobalamin replacement with intramuscular hydroxocobalamin for pernicious anaemia and malabsorptive causes and oral cyanocobalamin",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive myelopathy or gait disturbance indicating subacute combined degeneration needing urgent treatment",
+      "Severe anaemia with cardiorespiratory compromise",
+      "Cognitive decline or psychiatric change attributable to deficiency",
+      "Pancytopenia from profound megaloblastic marrow failure"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating megaloblastic anaemia with folate alone and masking or worsening B12-related neurological disease",
-     "Prevent diagnostic or management error"
+    "prognosis": "Haematological recovery is usually complete with replacement, but neurological recovery depends on how long deficiency was present; early treatment gives the best outcome while advanced cord degeneration may leave residual deficits.",
+    "pitfalls": [
+      "Treating megaloblastic anaemia with folate alone and masking or worsening B12-related neurological disease",
+      "Attributing neurological symptoms to another cause because the blood count is normal",
+      "Relying solely on a borderline serum cobalamin without functional markers",
+      "Failing to identify and monitor pernicious anaemia and its association with other autoimmune disease and gastric cancer"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "WHO nutrition guidance"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Cobalamin replacement with intramuscular hydroxocobalamin for pernicious anaemia and malabsorptive causes and oral cyanocobalamin for dietary deficiency",
+      "Lifelong parenteral maintenance therapy in pernicious anaemia and after gastric or terminal ileal surgery",
+      "Dietary counselling and supplementation for strict vegetarians and vegans, in whom intake is the limiting factor",
+      "Correct coexisting iron and folate deficiency, avoiding folate replacement alone as it can precipitate or worsen neurological deterioration",
+      "Monitor the reticulocyte and haematological response and watch for hypokalaemia during recovery",
+      "Treat neurological features early, as recovery from subacute combined degeneration depends on prompt replacement, referring to neurology for severe deficits",
+      "Endoscopic surveillance for gastric neoplasia in confirmed pernicious anaemia"
     ]
-   ],
-   "caption": "Overview comparison matrix for vitamin b12 deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "vitamin-b12-deficiency-real-image",
-   "title": "Vitamin B12 deficiency: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "vitamin_b12_deficiency-pathway",
+      "title": "Vitamin B12 deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Classically causes a macrocytic megaloblastic anaemia, but neurological features can appear before anaemia and even with normal blood counts",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive myelopathy or gait disturbance indicating subacute combined degeneration needing urgent treatment",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full blood count and blood film for macrocytosis and hypersegmented neutrophils, Serum cobalamin, with methylmalonic acid and homocysteine when the level is equivocal, Anti-intrinsic factor and anti-parietal cell"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Cobalamin replacement with intramuscular hydroxocobalamin for pernicious anaemia and malabsorptive causes and oral cyanocobalamin for dietary deficiency"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating megaloblastic anaemia with folate alone and masking or worsening B12-related neurological disease"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of vitamin b12 deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "vitamin_b12_deficiency-matrix",
+      "title": "Vitamin B12 deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Classically causes a macrocytic megaloblastic anaemia, but neurological features can appear before anaemia and even with normal",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full blood count and blood film for macrocytosis and hypersegmented neutrophils, Serum cobalamin, with methylmalonic acid and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Folate deficiency (other cause of megaloblastic anaemia), Myelodysplastic syndrome, Hypothyroidism causing macrocytosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Cobalamin replacement with intramuscular hydroxocobalamin for pernicious anaemia and malabsorptive causes and oral cyanocobalamin",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating megaloblastic anaemia with folate alone and masking or worsening B12-related neurological disease",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for vitamin b12 deficiency."
+    }
+  ],
+  "diagrams": []
 }

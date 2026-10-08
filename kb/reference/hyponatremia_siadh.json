@@ -1,177 +1,155 @@
 {
- "id": "hyponatremia_siadh",
- "name": "Hyponatraemia and SIADH",
- "aliases": [
-  "SIADH",
-  "syndrome of inappropriate antidiuretic hormone secretion",
-  "hyponatremia",
-  "hyponatraemia",
-  "inappropriate ADH secretion"
- ],
- "class": "non_infective",
- "system": "Renal",
- "specialty": "Nephrology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / KDIGO",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Hyponatraemia is the most common electrolyte disturbance in hospitalised patients and reflects a relative excess of water compared with sodium, usually driven by impaired water excretion",
-   "The diagnostic approach begins by confirming true hypotonic hyponatraemia, then assessing volume status and measuring urine osmolality and urine sodium",
-   "SIADH is a euvolaemic hypotonic hyponatraemia with inappropriately concentrated urine, elevated urine sodium, and normal thyroid and adrenal function, diagnosed after excluding other causes",
-   "Common triggers of SIADH include malignancy, pulmonary disease, central nervous system disorders, and numerous drugs",
-   "The severity of symptoms depends more on how quickly sodium falls than on the absolute value, ranging from mild confusion to seizures and cerebral oedema in acute severe cases",
-   "The cornerstone of management in SIADH is fluid restriction, with the underlying cause treated wherever possible",
-   "Correction must be gradual in chronic hyponatraemia because overly rapid rises in sodium risk osmotic demyelination, whereas acute symptomatic hyponatraemia with severe neurological signs warrants prompt but controlled correction with hypertonic saline",
-   "Exclude pseudohyponatraemia and hyperglycaemia-related dilution before attributing a low sodium to a water-handling disorder"
+  "id": "hyponatremia_siadh",
+  "name": "Hyponatraemia and SIADH",
+  "aliases": [
+    "SIADH",
+    "syndrome of inappropriate antidiuretic hormone secretion",
+    "hyponatremia",
+    "hyponatraemia",
+    "inappropriate ADH secretion"
   ],
-  "pathophysiology": "Hyponatraemia develops when water intake exceeds the kidney's ability to excrete free water, diluting plasma sodium. Antidiuretic hormone is central: when its release is appropriate (as in volume depletion or reduced effective circulating volume in heart failure and cirrhosis) or inappropriate (as in SIADH), water is retained and urine remains concentrated. In SIADH, ADH is secreted or acts independently of osmotic and volume signals, so the kidney retains water despite plasma hypotonicity; patients are clinically euvolaemic because the retained water distributes across body compartments and mild volume expansion promotes natriuresis. The fall in plasma osmolality drives water into brain cells, and the resulting cerebral oedema accounts for the neurological features. In chronic hyponatraemia the brain adapts by extruding solutes, which is why rapid correction can dehydrate neurons and cause osmotic demyelination.",
-  "additionalDifferentials": [
-   "Hypovolaemic hyponatraemia from renal or extrarenal sodium loss",
-   "Hypervolaemic hyponatraemia in heart failure, cirrhosis, or nephrotic syndrome",
-   "Hypothyroidism and adrenal insufficiency",
-   "Primary polydipsia and low-solute intake",
-   "Thiazide-induced hyponatraemia",
-   "Pseudohyponatraemia and hyperglycaemia-related dilutional hyponatraemia"
-  ],
-  "additionalInvestigations": [
-   "Plasma osmolality to confirm true hypotonic hyponatraemia",
-   "Urine osmolality and urine sodium to assess water handling and volume status",
-   "Thyroid function and assessment of adrenal function",
-   "Careful clinical evaluation of volume status",
-   "Review of medications that can cause hyponatraemia",
-   "Investigation for underlying malignancy, pulmonary, or central nervous system disease when SIADH is suspected"
-  ],
-  "redFlags": [
-   "Seizures, marked confusion, or reduced consciousness indicating severe or acute hyponatraemia",
-   "Rapid onset of symptoms suggesting acute cerebral oedema",
-   "Signs of raised intracranial pressure",
-   "Overly rapid correction risking osmotic demyelination"
-  ],
-  "prognosis": "Mild chronic hyponatraemia is often well tolerated but is associated with falls, cognitive impairment, and worse outcomes in the underlying illness. Acute severe hyponatraemia can be life-threatening from cerebral oedema, while inappropriately rapid correction can cause devastating osmotic demyelination. With cause-directed treatment and appropriately paced correction most patients recover, and SIADH prognosis largely follows that of its underlying cause.",
-  "pitfalls": [
-   "Correcting chronic hyponatraemia too quickly and precipitating osmotic demyelination",
-   "Diagnosing SIADH without excluding hypothyroidism, adrenal insufficiency, and volume depletion",
-   "Giving isotonic saline in SIADH, which can paradoxically worsen the sodium",
-   "Overlooking a drug or occult malignancy as the driver of persistent SIADH"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "KDIGO guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat the underlying trigger of SIADH, such as malignancy, pulmonary or central nervous system disease, or an offending drug, wherever it can be identified and reversed",
-   "Make fluid restriction the cornerstone of chronic SIADH management",
-   "Treat acute severe symptomatic hyponatraemia with seizures or marked confusion using hypertonic saline, raising the sodium in a slow, controlled manner",
-   "Strictly limit the rate of sodium rise to avoid osmotic demyelination, re-lowering with hypotonic fluid or desmopressin if correction overshoots",
-   "Use second-line agents for persistent hyponatraemia, such as oral urea, vasopressin receptor antagonists or demeclocycline",
-   "Review and stop medications that provoke hyponatraemia",
-   "Monitor serum sodium frequently during correction, having first confirmed true hypotonic, euvolaemic hyponatraemia",
-   "Involve nephrology or endocrinology for refractory or diagnostically uncertain cases"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hyponatremia_siadh-pathway",
-   "title": "Hyponatraemia and SIADH: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Hyponatraemia is the most common electrolyte disturbance in hospitalised patients and reflects a relative excess of water compared with sodium, usually driven by impaired water excretion",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Seizures, marked confusion, or reduced consciousness indicating severe or acute hyponatraemia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plasma osmolality to confirm true hypotonic hyponatraemia, Urine osmolality and urine sodium to assess water handling and volume status, Thyroid function and assessment of adrenal function"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat the underlying trigger of SIADH, such as malignancy, pulmonary or central nervous system disease, or an offending drug, wherever it can be identified and reversed"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Correcting chronic hyponatraemia too quickly and precipitating osmotic demyelination"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hyponatraemia and siadh."
-  }
- ],
- "tables": [
-  {
-   "id": "hyponatremia_siadh-matrix",
-   "title": "Hyponatraemia and SIADH: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Hyponatraemia is the most common electrolyte disturbance in hospitalised patients and reflects a relative excess of water",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Renal",
+  "specialty": "Nephrology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / KDIGO",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Hyponatraemia is the most common electrolyte disturbance in hospitalised patients and reflects a relative excess of water compared with sodium, usually driven by impaired water excretion",
+      "The diagnostic approach begins by confirming true hypotonic hyponatraemia, then assessing volume status and measuring urine osmolality and urine sodium",
+      "SIADH is a euvolaemic hypotonic hyponatraemia with inappropriately concentrated urine, elevated urine sodium, and normal thyroid and adrenal function, diagnosed after excluding other causes",
+      "Common triggers of SIADH include malignancy, pulmonary disease, central nervous system disorders, and numerous drugs",
+      "The severity of symptoms depends more on how quickly sodium falls than on the absolute value, ranging from mild confusion to seizures and cerebral oedema in acute severe cases",
+      "The cornerstone of management in SIADH is fluid restriction, with the underlying cause treated wherever possible",
+      "Correction must be gradual in chronic hyponatraemia because overly rapid rises in sodium risk osmotic demyelination, whereas acute symptomatic hyponatraemia with severe neurological signs warrants prompt but controlled correction with hypertonic saline",
+      "Exclude pseudohyponatraemia and hyperglycaemia-related dilution before attributing a low sodium to a water-handling disorder"
     ],
-    [
-     "Key Investigations",
-     "Plasma osmolality to confirm true hypotonic hyponatraemia, Urine osmolality and urine sodium to assess water handling and volume",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Hyponatraemia develops when water intake exceeds the kidney's ability to excrete free water, diluting plasma sodium. Antidiuretic hormone is central: when its release is appropriate (as in volume depletion or reduced effective circulating volume in heart failure and cirrhosis) or inappropriate (as in SIADH), water is retained and urine remains concentrated. In SIADH, ADH is secreted or acts independently of osmotic and volume signals, so the kidney retains water despite plasma hypotonicity; patients are clinically euvolaemic because the retained water distributes across body compartments and mild volume expansion promotes natriuresis. The fall in plasma osmolality drives water into brain cells, and the resulting cerebral oedema accounts for the neurological features. In chronic hyponatraemia the brain adapts by extruding solutes, which is why rapid correction can dehydrate neurons and cause osmotic demyelination.",
+    "additionalDifferentials": [
+      "Hypovolaemic hyponatraemia from renal or extrarenal sodium loss",
+      "Hypervolaemic hyponatraemia in heart failure, cirrhosis, or nephrotic syndrome",
+      "Hypothyroidism and adrenal insufficiency",
+      "Primary polydipsia and low-solute intake",
+      "Thiazide-induced hyponatraemia",
+      "Pseudohyponatraemia and hyperglycaemia-related dilutional hyponatraemia"
     ],
-    [
-     "Primary Differentials",
-     "Hypovolaemic hyponatraemia from renal or extrarenal sodium loss, Hypervolaemic hyponatraemia in heart failure, cirrhosis, or",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plasma osmolality to confirm true hypotonic hyponatraemia",
+      "Urine osmolality and urine sodium to assess water handling and volume status",
+      "Thyroid function and assessment of adrenal function",
+      "Careful clinical evaluation of volume status",
+      "Review of medications that can cause hyponatraemia",
+      "Investigation for underlying malignancy, pulmonary, or central nervous system disease when SIADH is suspected"
     ],
-    [
-     "Management Strategy",
-     "Treat the underlying trigger of SIADH, such as malignancy, pulmonary or central nervous system disease, or an offending drug,",
-     "Core treatment modality"
+    "redFlags": [
+      "Seizures, marked confusion, or reduced consciousness indicating severe or acute hyponatraemia",
+      "Rapid onset of symptoms suggesting acute cerebral oedema",
+      "Signs of raised intracranial pressure",
+      "Overly rapid correction risking osmotic demyelination"
     ],
-    [
-     "Clinical Pitfall",
-     "Correcting chronic hyponatraemia too quickly and precipitating osmotic demyelination",
-     "Prevent diagnostic or management error"
+    "prognosis": "Mild chronic hyponatraemia is often well tolerated but is associated with falls, cognitive impairment, and worse outcomes in the underlying illness. Acute severe hyponatraemia can be life-threatening from cerebral oedema, while inappropriately rapid correction can cause devastating osmotic demyelination. With cause-directed treatment and appropriately paced correction most patients recover, and SIADH prognosis largely follows that of its underlying cause.",
+    "pitfalls": [
+      "Correcting chronic hyponatraemia too quickly and precipitating osmotic demyelination",
+      "Diagnosing SIADH without excluding hypothyroidism, adrenal insufficiency, and volume depletion",
+      "Giving isotonic saline in SIADH, which can paradoxically worsen the sodium",
+      "Overlooking a drug or occult malignancy as the driver of persistent SIADH"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "KDIGO guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat the underlying trigger of SIADH, such as malignancy, pulmonary or central nervous system disease, or an offending drug, wherever it can be identified and reversed",
+      "Make fluid restriction the cornerstone of chronic SIADH management",
+      "Treat acute severe symptomatic hyponatraemia with seizures or marked confusion using hypertonic saline, raising the sodium in a slow, controlled manner",
+      "Strictly limit the rate of sodium rise to avoid osmotic demyelination, re-lowering with hypotonic fluid or desmopressin if correction overshoots",
+      "Use second-line agents for persistent hyponatraemia, such as oral urea, vasopressin receptor antagonists or demeclocycline",
+      "Review and stop medications that provoke hyponatraemia",
+      "Monitor serum sodium frequently during correction, having first confirmed true hypotonic, euvolaemic hyponatraemia",
+      "Involve nephrology or endocrinology for refractory or diagnostically uncertain cases"
     ]
-   ],
-   "caption": "Overview comparison matrix for hyponatraemia and siadh."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hyponatremia-siadh-real-image",
-   "title": "Hyponatraemia and SIADH: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "hyponatremia_siadh-pathway",
+      "title": "Hyponatraemia and SIADH: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Hyponatraemia is the most common electrolyte disturbance in hospitalised patients and reflects a relative excess of water compared with sodium, usually driven by impaired water excretion",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Seizures, marked confusion, or reduced consciousness indicating severe or acute hyponatraemia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plasma osmolality to confirm true hypotonic hyponatraemia, Urine osmolality and urine sodium to assess water handling and volume status, Thyroid function and assessment of adrenal function"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat the underlying trigger of SIADH, such as malignancy, pulmonary or central nervous system disease, or an offending drug, wherever it can be identified and reversed"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Correcting chronic hyponatraemia too quickly and precipitating osmotic demyelination"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hyponatraemia and siadh."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hyponatremia_siadh-matrix",
+      "title": "Hyponatraemia and SIADH: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Hyponatraemia is the most common electrolyte disturbance in hospitalised patients and reflects a relative excess of water",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plasma osmolality to confirm true hypotonic hyponatraemia, Urine osmolality and urine sodium to assess water handling and volume",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Hypovolaemic hyponatraemia from renal or extrarenal sodium loss, Hypervolaemic hyponatraemia in heart failure, cirrhosis, or",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat the underlying trigger of SIADH, such as malignancy, pulmonary or central nervous system disease, or an offending drug,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Correcting chronic hyponatraemia too quickly and precipitating osmotic demyelination",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hyponatraemia and siadh."
+    }
+  ],
+  "diagrams": []
 }

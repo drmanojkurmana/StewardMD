@@ -1,173 +1,151 @@
 {
- "id": "phacomatosis_pigmentokeratotica",
- "name": "Phacomatosis pigmentokeratotica",
- "aliases": [
-  "PPK",
-  "phakomatosis pigmentokeratotica",
-  "naevus spilus with sebaceous naevus"
- ],
- "class": "non_infective",
- "system": "Dermatology / Neurocutaneous",
- "specialty": "Dermatology / Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology / Neurocutaneous Disorders (current reference texts)",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Defined by the coexistence of a papular naevus spilus (speckled lentiginous naevus) with an organoid naevus sebaceus or epidermal naevus in the same patient",
-   "Regarded as an example of twin spotting (didymosis), where two mosaic clones arise from a single post-zygotic event",
-   "Post-zygotic activating HRAS variants have been identified, linking it to the naevus sebaceus and Schimmelpenning spectrum",
-   "Extracutaneous features may include neurological abnormalities such as seizures and developmental delay",
-   "Ocular and skeletal anomalies, and segmental sensory or motor disturbance (dysaesthesia, muscular weakness) may accompany the cutaneous lesions",
-   "Hemihypertrophy and hypophosphataemic (vitamin-D-resistant) rickets are recognised systemic associations",
-   "Management is generic and multidisciplinary: surveillance of the naevi, antiseizure therapy where needed, and correction of any hypophosphataemic rickets"
+  "id": "phacomatosis_pigmentokeratotica",
+  "name": "Phacomatosis pigmentokeratotica",
+  "aliases": [
+    "PPK",
+    "phakomatosis pigmentokeratotica",
+    "naevus spilus with sebaceous naevus"
   ],
-  "pathophysiology": "Phacomatosis pigmentokeratotica is understood as a form of twin spotting, in which a single post-zygotic somatic recombination event produces two genetically distinct daughter clones side by side, one giving rise to a pigmentary papular naevus spilus and the other to an organoid naevus sebaceus or epidermal naevus. Activating HRAS variants in the RAS-MAPK pathway have been implicated, which is why the condition overlaps mechanistically with naevus sebaceus and Schimmelpenning syndrome. When the mosaic clones also involve neuroectodermal, ocular and mesodermal tissue, the associated neurological, ocular and skeletal anomalies, hemihypertrophy and FGF23-mediated hypophosphataemic rickets develop.",
-  "additionalDifferentials": [
-   "Isolated naevus spilus (speckled lentiginous naevus)",
-   "Isolated naevus sebaceus",
-   "Schimmelpenning syndrome",
-   "Phakomatosis pigmentovascularis",
-   "Epidermal naevus syndrome",
-   "Neurofibromatosis type 1"
-  ],
-  "additionalInvestigations": [
-   "Skin examination and biopsy to characterise both naevus components",
-   "MRI of the brain where neurological features are present",
-   "Serum phosphate and skeletal survey to detect hypophosphataemic rickets and hemihypertrophy",
-   "Ophthalmological assessment for ocular anomalies",
-   "Neurological evaluation of any segmental sensory or motor disturbance",
-   "Molecular testing of lesional tissue for HRAS variants where available"
-  ],
-  "redFlags": [
-   "New-onset or refractory seizures",
-   "Progressive neurological deficit or segmental weakness",
-   "Suspicious change within the melanocytic or organoid naevus",
-   "Unexplained bone pain or fractures suggesting hypophosphataemic rickets"
-  ],
-  "prognosis": "Prognosis depends on the extent of extracutaneous involvement; limited cutaneous disease has a good outlook, whereas neurological, skeletal or metabolic complications increase morbidity and require ongoing multidisciplinary management.",
-  "pitfalls": [
-   "Regarding the two naevi as coincidental rather than recognising the twin-spotting syndrome",
-   "Missing treatable hypophosphataemic rickets as a cause of skeletal symptoms",
-   "Overlooking segmental sensory or motor disturbance as part of the condition",
-   "Failing to arrange neuroimaging when neurological features are present"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Happle R. Mosaicism in Human Skin"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No curative therapy exists, so management is directed at the individual manifestations across affected systems",
-   "Dermatological management of the naevus sebaceus or epidermal naevus and the naevus spilus, with excision of symptomatic or suspicious lesions given the risk of secondary neoplasms",
-   "Correction of FGF23-mediated hypophosphataemic rickets with oral phosphate and active vitamin D analogues, and anti-FGF23 antibody therapy where appropriate, monitoring phosphate and renal function",
-   "Antiepileptic therapy and neurological management of seizures and developmental delay",
-   "Ophthalmological assessment and treatment of ocular anomalies, and orthopaedic management of skeletal anomalies, hemihypertrophy and segmental sensory or motor disturbance",
-   "Multidisciplinary follow-up across dermatology, neurology, endocrinology and ophthalmology",
-   "Genetic counselling explaining the sporadic post-zygotic mosaic HRAS basis and generally low recurrence risk"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "phacomatosis_pigmentokeratotica-pathway",
-   "title": "Phacomatosis pigmentokeratotica: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Defined by the coexistence of a papular naevus spilus (speckled lentiginous naevus) with an organoid naevus sebaceus or epidermal naevus in the same patient",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: New-onset or refractory seizures",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin examination and biopsy to characterise both naevus components, MRI of the brain where neurological features are present, Serum phosphate and skeletal survey to detect hypophosphataemic rickets and hemihypertrophy"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No curative therapy exists, so management is directed at the individual manifestations across affected systems"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Regarding the two naevi as coincidental rather than recognising the twin-spotting syndrome"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of phacomatosis pigmentokeratotica."
-  }
- ],
- "tables": [
-  {
-   "id": "phacomatosis_pigmentokeratotica-matrix",
-   "title": "Phacomatosis pigmentokeratotica: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Defined by the coexistence of a papular naevus spilus (speckled lentiginous naevus) with an organoid naevus sebaceus or epidermal",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology / Neurocutaneous",
+  "specialty": "Dermatology / Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology / Neurocutaneous Disorders (current reference texts)",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Defined by the coexistence of a papular naevus spilus (speckled lentiginous naevus) with an organoid naevus sebaceus or epidermal naevus in the same patient",
+      "Regarded as an example of twin spotting (didymosis), where two mosaic clones arise from a single post-zygotic event",
+      "Post-zygotic activating HRAS variants have been identified, linking it to the naevus sebaceus and Schimmelpenning spectrum",
+      "Extracutaneous features may include neurological abnormalities such as seizures and developmental delay",
+      "Ocular and skeletal anomalies, and segmental sensory or motor disturbance (dysaesthesia, muscular weakness) may accompany the cutaneous lesions",
+      "Hemihypertrophy and hypophosphataemic (vitamin-D-resistant) rickets are recognised systemic associations",
+      "Management is generic and multidisciplinary: surveillance of the naevi, antiseizure therapy where needed, and correction of any hypophosphataemic rickets"
     ],
-    [
-     "Key Investigations",
-     "Skin examination and biopsy to characterise both naevus components, MRI of the brain where neurological features are present,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Phacomatosis pigmentokeratotica is understood as a form of twin spotting, in which a single post-zygotic somatic recombination event produces two genetically distinct daughter clones side by side, one giving rise to a pigmentary papular naevus spilus and the other to an organoid naevus sebaceus or epidermal naevus. Activating HRAS variants in the RAS-MAPK pathway have been implicated, which is why the condition overlaps mechanistically with naevus sebaceus and Schimmelpenning syndrome. When the mosaic clones also involve neuroectodermal, ocular and mesodermal tissue, the associated neurological, ocular and skeletal anomalies, hemihypertrophy and FGF23-mediated hypophosphataemic rickets develop.",
+    "additionalDifferentials": [
+      "Isolated naevus spilus (speckled lentiginous naevus)",
+      "Isolated naevus sebaceus",
+      "Schimmelpenning syndrome",
+      "Phakomatosis pigmentovascularis",
+      "Epidermal naevus syndrome",
+      "Neurofibromatosis type 1"
     ],
-    [
-     "Primary Differentials",
-     "Isolated naevus spilus (speckled lentiginous naevus), Isolated naevus sebaceus, Schimmelpenning syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin examination and biopsy to characterise both naevus components",
+      "MRI of the brain where neurological features are present",
+      "Serum phosphate and skeletal survey to detect hypophosphataemic rickets and hemihypertrophy",
+      "Ophthalmological assessment for ocular anomalies",
+      "Neurological evaluation of any segmental sensory or motor disturbance",
+      "Molecular testing of lesional tissue for HRAS variants where available"
     ],
-    [
-     "Management Strategy",
-     "No curative therapy exists, so management is directed at the individual manifestations across affected systems",
-     "Core treatment modality"
+    "redFlags": [
+      "New-onset or refractory seizures",
+      "Progressive neurological deficit or segmental weakness",
+      "Suspicious change within the melanocytic or organoid naevus",
+      "Unexplained bone pain or fractures suggesting hypophosphataemic rickets"
     ],
-    [
-     "Clinical Pitfall",
-     "Regarding the two naevi as coincidental rather than recognising the twin-spotting syndrome",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends on the extent of extracutaneous involvement; limited cutaneous disease has a good outlook, whereas neurological, skeletal or metabolic complications increase morbidity and require ongoing multidisciplinary management.",
+    "pitfalls": [
+      "Regarding the two naevi as coincidental rather than recognising the twin-spotting syndrome",
+      "Missing treatable hypophosphataemic rickets as a cause of skeletal symptoms",
+      "Overlooking segmental sensory or motor disturbance as part of the condition",
+      "Failing to arrange neuroimaging when neurological features are present"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Happle R. Mosaicism in Human Skin"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No curative therapy exists, so management is directed at the individual manifestations across affected systems",
+      "Dermatological management of the naevus sebaceus or epidermal naevus and the naevus spilus, with excision of symptomatic or suspicious lesions given the risk of secondary neoplasms",
+      "Correction of FGF23-mediated hypophosphataemic rickets with oral phosphate and active vitamin D analogues, and anti-FGF23 antibody therapy where appropriate, monitoring phosphate and renal function",
+      "Antiepileptic therapy and neurological management of seizures and developmental delay",
+      "Ophthalmological assessment and treatment of ocular anomalies, and orthopaedic management of skeletal anomalies, hemihypertrophy and segmental sensory or motor disturbance",
+      "Multidisciplinary follow-up across dermatology, neurology, endocrinology and ophthalmology",
+      "Genetic counselling explaining the sporadic post-zygotic mosaic HRAS basis and generally low recurrence risk"
     ]
-   ],
-   "caption": "Overview comparison matrix for phacomatosis pigmentokeratotica."
-  }
- ],
- "diagrams": [
-  {
-   "id": "phacomatosis-pigmentokeratotica-real-image",
-   "title": "Phacomatosis pigmentokeratotica: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "phacomatosis_pigmentokeratotica-pathway",
+      "title": "Phacomatosis pigmentokeratotica: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Defined by the coexistence of a papular naevus spilus (speckled lentiginous naevus) with an organoid naevus sebaceus or epidermal naevus in the same patient",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: New-onset or refractory seizures",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin examination and biopsy to characterise both naevus components, MRI of the brain where neurological features are present, Serum phosphate and skeletal survey to detect hypophosphataemic rickets and hemihypertrophy"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No curative therapy exists, so management is directed at the individual manifestations across affected systems"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Regarding the two naevi as coincidental rather than recognising the twin-spotting syndrome"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of phacomatosis pigmentokeratotica."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "phacomatosis_pigmentokeratotica-matrix",
+      "title": "Phacomatosis pigmentokeratotica: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Defined by the coexistence of a papular naevus spilus (speckled lentiginous naevus) with an organoid naevus sebaceus or epidermal",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin examination and biopsy to characterise both naevus components, MRI of the brain where neurological features are present,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Isolated naevus spilus (speckled lentiginous naevus), Isolated naevus sebaceus, Schimmelpenning syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No curative therapy exists, so management is directed at the individual manifestations across affected systems",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Regarding the two naevi as coincidental rather than recognising the twin-spotting syndrome",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for phacomatosis pigmentokeratotica."
+    }
+  ],
+  "diagrams": []
 }

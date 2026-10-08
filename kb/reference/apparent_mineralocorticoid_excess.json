@@ -1,175 +1,153 @@
 {
- "id": "apparent_mineralocorticoid_excess",
- "name": "Apparent mineralocorticoid excess",
- "aliases": [
-  "AME",
-  "HSD11B2 deficiency",
-  "11-beta-hydroxysteroid dehydrogenase type 2 deficiency",
-  "cortisol-mediated mineralocorticoid excess"
- ],
- "class": "non_infective",
- "system": "Renal / Genetics",
- "specialty": "Nephrology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Oxford Handbook of Nephrology and Hypertension / Williams Textbook of Endocrinology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Apparent mineralocorticoid excess is an autosomal recessive disorder caused by loss-of-function variants in HSD11B2, encoding 11-beta-hydroxysteroid dehydrogenase type 2",
-   "This enzyme normally converts cortisol to inactive cortisone within mineralocorticoid target cells, protecting the mineralocorticoid receptor from being activated by cortisol",
-   "When it fails, cortisol floods and activates the mineralocorticoid receptor, producing a mineralocorticoid-excess state despite normal aldosterone",
-   "The hallmark is severe low-renin hypertension with hypokalaemic metabolic alkalosis, and both renin and aldosterone are suppressed",
-   "An elevated urinary cortisol-to-cortisone metabolite ratio is characteristic and helps confirm the diagnosis",
-   "The acquired phenocopy is heavy licorice or carbenoxolone ingestion, which inhibits the same enzyme",
-   "Management combines mineralocorticoid-receptor blockade and sometimes an ENaC blocker with salt restriction; suppressing endogenous cortisol may be considered in selected cases"
+  "id": "apparent_mineralocorticoid_excess",
+  "name": "Apparent mineralocorticoid excess",
+  "aliases": [
+    "AME",
+    "HSD11B2 deficiency",
+    "11-beta-hydroxysteroid dehydrogenase type 2 deficiency",
+    "cortisol-mediated mineralocorticoid excess"
   ],
-  "pathophysiology": "Apparent mineralocorticoid excess arises from deficiency of 11-beta-hydroxysteroid dehydrogenase type 2, an enzyme expressed in aldosterone-responsive tissues that inactivates cortisol to cortisone. Cortisol binds the mineralocorticoid receptor with affinity similar to aldosterone, but is normally circulating at far higher concentrations; the enzyme provides tissue specificity by locally clearing cortisol so that only aldosterone reaches the receptor. When the enzyme is deficient, intracellular cortisol accumulates and inappropriately activates the mineralocorticoid receptor in the distal nephron, driving sodium retention and potassium and hydrogen loss. The resulting volume expansion causes low-renin hypertension and hypokalaemic alkalosis, while the same volume expansion suppresses aldosterone, so the biochemistry shows mineralocorticoid effects without a raised mineralocorticoid hormone.",
-  "additionalDifferentials": [
-   "Liddle syndrome (ENaC gain-of-function)",
-   "Primary hyperaldosteronism",
-   "Licorice or carbenoxolone ingestion (acquired AME)",
-   "Glucocorticoid-remediable aldosteronism",
-   "Cushing syndrome",
-   "Congenital adrenal hyperplasia with mineralocorticoid excess (11-beta or 17-alpha hydroxylase types)"
-  ],
-  "additionalInvestigations": [
-   "Plasma renin activity and aldosterone (both suppressed)",
-   "Serum potassium and bicarbonate to document hypokalaemic alkalosis",
-   "Urinary steroid metabolite profile showing an increased cortisol-to-cortisone ratio",
-   "Screening for licorice, carbenoxolone and other enzyme-inhibiting exposures",
-   "Renal and cardiac end-organ assessment given severe hypertension",
-   "Molecular genetic testing of HSD11B2"
-  ],
-  "redFlags": [
-   "Severe hypertension presenting in childhood or young adulthood",
-   "Profound hypokalaemia with weakness or arrhythmia",
-   "Hypertensive end-organ damage including nephrocalcinosis and left ventricular hypertrophy",
-   "Failure to thrive or growth restriction in affected children",
-   "Hypertensive crisis or stroke"
-  ],
-  "prognosis": "Outlook depends on how early treatment begins; poorly controlled disease leads to severe hypertensive complications and chronic kidney damage, whereas mineralocorticoid-receptor blockade with salt restriction can achieve reasonable control.",
-  "pitfalls": [
-   "Attributing the picture to primary hyperaldosteronism despite the suppressed aldosterone",
-   "Missing a dietary licorice or carbenoxolone cause of an identical biochemical picture",
-   "Relying on aldosterone antagonism alone when severe disease may also need ENaC blockade and salt restriction",
-   "Overlooking the recessive inheritance and the need to evaluate siblings"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "Oxford Handbook of Nephrology and Hypertension"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Block the mineralocorticoid receptor with an antagonist such as spironolactone or eplerenone to control hypertension and correct the potassium and acid-base disturbance",
-   "Institute dietary sodium restriction to reduce the volume expansion driving the disease",
-   "Correct hypokalaemia with potassium supplementation and add an epithelial sodium channel blocker such as amiloride where needed",
-   "Avoid enzyme-inhibiting exposures including liquorice and carbenoxolone that reproduce or worsen the phenotype",
-   "Consider a glucocorticoid such as dexamethasone to suppress ACTH-driven cortisol in selected resistant cases, and add conventional antihypertensives if blood pressure remains uncontrolled",
-   "Monitor for hypertensive end-organ damage and chronic kidney disease with blood-pressure, electrolyte and renal surveillance",
-   "Offer genetic counselling and family screening given autosomal recessive HSD11B2 inheritance, and consider renal transplantation which can be curative in end-stage disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "apparent_mineralocorticoid_excess-pathway",
-   "title": "Apparent mineralocorticoid excess: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Apparent mineralocorticoid excess is an autosomal recessive disorder caused by loss-of-function variants in HSD11B2, encoding 11-beta-hydroxysteroid dehydrogenase type 2",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe hypertension presenting in childhood or young adulthood",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plasma renin activity and aldosterone (both suppressed), Serum potassium and bicarbonate to document hypokalaemic alkalosis, Urinary steroid metabolite profile showing an increased cortisol-to-cortisone ratio"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Block the mineralocorticoid receptor with an antagonist such as spironolactone or eplerenone to control hypertension and correct the potassium and acid-base disturbance"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing the picture to primary hyperaldosteronism despite the suppressed aldosterone"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of apparent mineralocorticoid excess."
-  }
- ],
- "tables": [
-  {
-   "id": "apparent_mineralocorticoid_excess-matrix",
-   "title": "Apparent mineralocorticoid excess: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Apparent mineralocorticoid excess is an autosomal recessive disorder caused by loss-of-function variants in HSD11B2, encoding",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Renal / Genetics",
+  "specialty": "Nephrology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Oxford Handbook of Nephrology and Hypertension / Williams Textbook of Endocrinology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Apparent mineralocorticoid excess is an autosomal recessive disorder caused by loss-of-function variants in HSD11B2, encoding 11-beta-hydroxysteroid dehydrogenase type 2",
+      "This enzyme normally converts cortisol to inactive cortisone within mineralocorticoid target cells, protecting the mineralocorticoid receptor from being activated by cortisol",
+      "When it fails, cortisol floods and activates the mineralocorticoid receptor, producing a mineralocorticoid-excess state despite normal aldosterone",
+      "The hallmark is severe low-renin hypertension with hypokalaemic metabolic alkalosis, and both renin and aldosterone are suppressed",
+      "An elevated urinary cortisol-to-cortisone metabolite ratio is characteristic and helps confirm the diagnosis",
+      "The acquired phenocopy is heavy licorice or carbenoxolone ingestion, which inhibits the same enzyme",
+      "Management combines mineralocorticoid-receptor blockade and sometimes an ENaC blocker with salt restriction; suppressing endogenous cortisol may be considered in selected cases"
     ],
-    [
-     "Key Investigations",
-     "Plasma renin activity and aldosterone (both suppressed), Serum potassium and bicarbonate to document hypokalaemic alkalosis,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Apparent mineralocorticoid excess arises from deficiency of 11-beta-hydroxysteroid dehydrogenase type 2, an enzyme expressed in aldosterone-responsive tissues that inactivates cortisol to cortisone. Cortisol binds the mineralocorticoid receptor with affinity similar to aldosterone, but is normally circulating at far higher concentrations; the enzyme provides tissue specificity by locally clearing cortisol so that only aldosterone reaches the receptor. When the enzyme is deficient, intracellular cortisol accumulates and inappropriately activates the mineralocorticoid receptor in the distal nephron, driving sodium retention and potassium and hydrogen loss. The resulting volume expansion causes low-renin hypertension and hypokalaemic alkalosis, while the same volume expansion suppresses aldosterone, so the biochemistry shows mineralocorticoid effects without a raised mineralocorticoid hormone.",
+    "additionalDifferentials": [
+      "Liddle syndrome (ENaC gain-of-function)",
+      "Primary hyperaldosteronism",
+      "Licorice or carbenoxolone ingestion (acquired AME)",
+      "Glucocorticoid-remediable aldosteronism",
+      "Cushing syndrome",
+      "Congenital adrenal hyperplasia with mineralocorticoid excess (11-beta or 17-alpha hydroxylase types)"
     ],
-    [
-     "Primary Differentials",
-     "Liddle syndrome (ENaC gain-of-function), Primary hyperaldosteronism, Licorice or carbenoxolone ingestion (acquired AME)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plasma renin activity and aldosterone (both suppressed)",
+      "Serum potassium and bicarbonate to document hypokalaemic alkalosis",
+      "Urinary steroid metabolite profile showing an increased cortisol-to-cortisone ratio",
+      "Screening for licorice, carbenoxolone and other enzyme-inhibiting exposures",
+      "Renal and cardiac end-organ assessment given severe hypertension",
+      "Molecular genetic testing of HSD11B2"
     ],
-    [
-     "Management Strategy",
-     "Block the mineralocorticoid receptor with an antagonist such as spironolactone or eplerenone to control hypertension and correct",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe hypertension presenting in childhood or young adulthood",
+      "Profound hypokalaemia with weakness or arrhythmia",
+      "Hypertensive end-organ damage including nephrocalcinosis and left ventricular hypertrophy",
+      "Failure to thrive or growth restriction in affected children",
+      "Hypertensive crisis or stroke"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing the picture to primary hyperaldosteronism despite the suppressed aldosterone",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outlook depends on how early treatment begins; poorly controlled disease leads to severe hypertensive complications and chronic kidney damage, whereas mineralocorticoid-receptor blockade with salt restriction can achieve reasonable control.",
+    "pitfalls": [
+      "Attributing the picture to primary hyperaldosteronism despite the suppressed aldosterone",
+      "Missing a dietary licorice or carbenoxolone cause of an identical biochemical picture",
+      "Relying on aldosterone antagonism alone when severe disease may also need ENaC blockade and salt restriction",
+      "Overlooking the recessive inheritance and the need to evaluate siblings"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "Oxford Handbook of Nephrology and Hypertension"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Block the mineralocorticoid receptor with an antagonist such as spironolactone or eplerenone to control hypertension and correct the potassium and acid-base disturbance",
+      "Institute dietary sodium restriction to reduce the volume expansion driving the disease",
+      "Correct hypokalaemia with potassium supplementation and add an epithelial sodium channel blocker such as amiloride where needed",
+      "Avoid enzyme-inhibiting exposures including liquorice and carbenoxolone that reproduce or worsen the phenotype",
+      "Consider a glucocorticoid such as dexamethasone to suppress ACTH-driven cortisol in selected resistant cases, and add conventional antihypertensives if blood pressure remains uncontrolled",
+      "Monitor for hypertensive end-organ damage and chronic kidney disease with blood-pressure, electrolyte and renal surveillance",
+      "Offer genetic counselling and family screening given autosomal recessive HSD11B2 inheritance, and consider renal transplantation which can be curative in end-stage disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for apparent mineralocorticoid excess."
-  }
- ],
- "diagrams": [
-  {
-   "id": "apparent-mineralocorticoid-excess-real-image",
-   "title": "Apparent mineralocorticoid excess: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "apparent_mineralocorticoid_excess-pathway",
+      "title": "Apparent mineralocorticoid excess: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Apparent mineralocorticoid excess is an autosomal recessive disorder caused by loss-of-function variants in HSD11B2, encoding 11-beta-hydroxysteroid dehydrogenase type 2",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe hypertension presenting in childhood or young adulthood",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plasma renin activity and aldosterone (both suppressed), Serum potassium and bicarbonate to document hypokalaemic alkalosis, Urinary steroid metabolite profile showing an increased cortisol-to-cortisone ratio"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Block the mineralocorticoid receptor with an antagonist such as spironolactone or eplerenone to control hypertension and correct the potassium and acid-base disturbance"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing the picture to primary hyperaldosteronism despite the suppressed aldosterone"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of apparent mineralocorticoid excess."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "apparent_mineralocorticoid_excess-matrix",
+      "title": "Apparent mineralocorticoid excess: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Apparent mineralocorticoid excess is an autosomal recessive disorder caused by loss-of-function variants in HSD11B2, encoding",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plasma renin activity and aldosterone (both suppressed), Serum potassium and bicarbonate to document hypokalaemic alkalosis,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Liddle syndrome (ENaC gain-of-function), Primary hyperaldosteronism, Licorice or carbenoxolone ingestion (acquired AME)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Block the mineralocorticoid receptor with an antagonist such as spironolactone or eplerenone to control hypertension and correct",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing the picture to primary hyperaldosteronism despite the suppressed aldosterone",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for apparent mineralocorticoid excess."
+    }
+  ],
+  "diagrams": []
 }

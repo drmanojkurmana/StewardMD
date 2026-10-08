@@ -1,173 +1,151 @@
 {
- "id": "campomelic_dysplasia",
- "name": "Campomelic dysplasia",
- "aliases": [
-  "SOX9",
-  "CD",
-  "campomelic dwarfism"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Genetics",
- "specialty": "Clinical Genetics / Skeletal Dysplasia",
- "referenceOnly": true,
- "reference": {
-  "source": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Characterised by bowing (campomelia) of the long bones, particularly the tibiae and femora, often with a cutaneous dimple over the apex of the bend",
-   "Caused by dominant variants in or around SOX9, a master transcription factor for chondrocyte differentiation and testis development",
-   "Sex reversal is a key association, with many chromosomally male (46,XY) infants having female or ambiguous external genitalia",
-   "Respiratory distress is common and frequently fatal in the neonatal period, related to a small thorax, tracheobronchomalacia, and hypotonia",
-   "Additional features include a large head with a flat face and small chest, cleft palate, talipes, and hypoplastic scapulae",
-   "Radiographs show bowed long bones, hypoplastic scapulae, non-mineralised thoracic pedicles, small iliac wings, and only eleven pairs of ribs in many cases",
-   "Diagnosis relies on the radiographic pattern, karyotype with genital assessment, and SOX9 molecular testing"
+  "id": "campomelic_dysplasia",
+  "name": "Campomelic dysplasia",
+  "aliases": [
+    "SOX9",
+    "CD",
+    "campomelic dwarfism"
   ],
-  "pathophysiology": "Campomelic dysplasia arises from haploinsufficiency of SOX9, a transcription factor essential both for chondrocyte differentiation and cartilage matrix gene expression and for testis determination. Disrupted SOX9 function impairs endochondral ossification, producing bowed and hypoplastic bones and a small thorax, while defective testicular development in genetically male fetuses causes the frequent gonadal sex reversal. Airway cartilage deficiency and a narrow chest contribute to the respiratory insufficiency that dominates the neonatal course.",
-  "additionalDifferentials": [
-   "Osteogenesis imperfecta",
-   "Thanatophoric dysplasia",
-   "Kyphomelic dysplasia",
-   "Bent-bone dysplasias of other cause",
-   "Cumming syndrome",
-   "Antenatal-onset hypophosphatasia"
-  ],
-  "additionalInvestigations": [
-   "Skeletal survey demonstrating long-bone bowing, hypoplastic scapulae, and thoracic changes",
-   "Karyotype and molecular testing of SOX9 to confirm the diagnosis",
-   "Assessment of genital anatomy and gonadal status with imaging and endocrine input",
-   "Respiratory and airway evaluation including for laryngotracheomalacia",
-   "Cervical spine imaging for instability",
-   "Audiological assessment given frequent hearing loss"
-  ],
-  "redFlags": [
-   "Severe neonatal respiratory failure from a small thorax and airway malacia",
-   "Airway collapse requiring urgent support",
-   "Discordance between chromosomal and phenotypic sex requiring sensitive multidisciplinary management",
-   "Cervical instability with neurological signs"
-  ],
-  "prognosis": "The classic form is frequently lethal in the neonatal period owing to respiratory failure, though a milder acampomelic variant and rare longer-term survivors exist. Survivors face significant respiratory, orthopaedic, and developmental morbidity and require multidisciplinary care.",
-  "pitfalls": [
-   "Assuming phenotypic sex reflects the karyotype and mismanaging gonadal and genital issues",
-   "Attributing long-bone bowing solely to osteogenesis imperfecta without genetic testing",
-   "Underestimating airway malacia as a cause of respiratory failure",
-   "Overlooking hearing loss and cervical instability in survivors"
-  ],
-  "references": [
-   "Smith's Recognizable Patterns of Human Malformation",
-   "Nelson Textbook of Pediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Prioritise neonatal airway and respiratory support, with ventilation and a low threshold for tracheostomy given tracheobronchomalacia and a small thorax",
-   "Involve palliative care early, as the classic form is frequently lethal in the neonatal period from respiratory failure",
-   "Manage skeletal manifestations including limb bowing, talipes and progressive scoliosis with orthopaedic input",
-   "Determine gonadal status and assign sex with endocrine and urology input, considering gonadectomy for the raised gonadoblastoma risk in 46,XY infants",
-   "Monitor for cervical spine instability and provide cleft palate repair, audiological support and feeding assistance",
-   "Coordinate care across neonatology, clinical genetics, orthopaedics and endocrinology",
-   "Offer genetic counselling for this SOX9 disorder, noting most cases are de novo, and discuss prenatal and future-pregnancy testing"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "campomelic_dysplasia-pathway",
-   "title": "Campomelic dysplasia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Characterised by bowing (campomelia) of the long bones, particularly the tibiae and femora, often with a cutaneous dimple over the apex of the bend",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe neonatal respiratory failure from a small thorax and airway malacia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skeletal survey demonstrating long-bone bowing, hypoplastic scapulae, and thoracic changes, Karyotype and molecular testing of SOX9 to confirm the diagnosis, Assessment of genital anatomy and gonadal status with imaging"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Prioritise neonatal airway and respiratory support, with ventilation and a low threshold for tracheostomy given tracheobronchomalacia and a small thorax"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming phenotypic sex reflects the karyotype and mismanaging gonadal and genital issues"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of campomelic dysplasia."
-  }
- ],
- "tables": [
-  {
-   "id": "campomelic_dysplasia-matrix",
-   "title": "Campomelic dysplasia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Characterised by bowing (campomelia) of the long bones, particularly the tibiae and femora, often with a cutaneous dimple over",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Genetics",
+  "specialty": "Clinical Genetics / Skeletal Dysplasia",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Characterised by bowing (campomelia) of the long bones, particularly the tibiae and femora, often with a cutaneous dimple over the apex of the bend",
+      "Caused by dominant variants in or around SOX9, a master transcription factor for chondrocyte differentiation and testis development",
+      "Sex reversal is a key association, with many chromosomally male (46,XY) infants having female or ambiguous external genitalia",
+      "Respiratory distress is common and frequently fatal in the neonatal period, related to a small thorax, tracheobronchomalacia, and hypotonia",
+      "Additional features include a large head with a flat face and small chest, cleft palate, talipes, and hypoplastic scapulae",
+      "Radiographs show bowed long bones, hypoplastic scapulae, non-mineralised thoracic pedicles, small iliac wings, and only eleven pairs of ribs in many cases",
+      "Diagnosis relies on the radiographic pattern, karyotype with genital assessment, and SOX9 molecular testing"
     ],
-    [
-     "Key Investigations",
-     "Skeletal survey demonstrating long-bone bowing, hypoplastic scapulae, and thoracic changes, Karyotype and molecular testing of",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Campomelic dysplasia arises from haploinsufficiency of SOX9, a transcription factor essential both for chondrocyte differentiation and cartilage matrix gene expression and for testis determination. Disrupted SOX9 function impairs endochondral ossification, producing bowed and hypoplastic bones and a small thorax, while defective testicular development in genetically male fetuses causes the frequent gonadal sex reversal. Airway cartilage deficiency and a narrow chest contribute to the respiratory insufficiency that dominates the neonatal course.",
+    "additionalDifferentials": [
+      "Osteogenesis imperfecta",
+      "Thanatophoric dysplasia",
+      "Kyphomelic dysplasia",
+      "Bent-bone dysplasias of other cause",
+      "Cumming syndrome",
+      "Antenatal-onset hypophosphatasia"
     ],
-    [
-     "Primary Differentials",
-     "Osteogenesis imperfecta, Thanatophoric dysplasia, Kyphomelic dysplasia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skeletal survey demonstrating long-bone bowing, hypoplastic scapulae, and thoracic changes",
+      "Karyotype and molecular testing of SOX9 to confirm the diagnosis",
+      "Assessment of genital anatomy and gonadal status with imaging and endocrine input",
+      "Respiratory and airway evaluation including for laryngotracheomalacia",
+      "Cervical spine imaging for instability",
+      "Audiological assessment given frequent hearing loss"
     ],
-    [
-     "Management Strategy",
-     "Prioritise neonatal airway and respiratory support, with ventilation and a low threshold for tracheostomy given",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe neonatal respiratory failure from a small thorax and airway malacia",
+      "Airway collapse requiring urgent support",
+      "Discordance between chromosomal and phenotypic sex requiring sensitive multidisciplinary management",
+      "Cervical instability with neurological signs"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming phenotypic sex reflects the karyotype and mismanaging gonadal and genital issues",
-     "Prevent diagnostic or management error"
+    "prognosis": "The classic form is frequently lethal in the neonatal period owing to respiratory failure, though a milder acampomelic variant and rare longer-term survivors exist. Survivors face significant respiratory, orthopaedic, and developmental morbidity and require multidisciplinary care.",
+    "pitfalls": [
+      "Assuming phenotypic sex reflects the karyotype and mismanaging gonadal and genital issues",
+      "Attributing long-bone bowing solely to osteogenesis imperfecta without genetic testing",
+      "Underestimating airway malacia as a cause of respiratory failure",
+      "Overlooking hearing loss and cervical instability in survivors"
+    ],
+    "references": [
+      "Smith's Recognizable Patterns of Human Malformation",
+      "Nelson Textbook of Pediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Prioritise neonatal airway and respiratory support, with ventilation and a low threshold for tracheostomy given tracheobronchomalacia and a small thorax",
+      "Involve palliative care early, as the classic form is frequently lethal in the neonatal period from respiratory failure",
+      "Manage skeletal manifestations including limb bowing, talipes and progressive scoliosis with orthopaedic input",
+      "Determine gonadal status and assign sex with endocrine and urology input, considering gonadectomy for the raised gonadoblastoma risk in 46,XY infants",
+      "Monitor for cervical spine instability and provide cleft palate repair, audiological support and feeding assistance",
+      "Coordinate care across neonatology, clinical genetics, orthopaedics and endocrinology",
+      "Offer genetic counselling for this SOX9 disorder, noting most cases are de novo, and discuss prenatal and future-pregnancy testing"
     ]
-   ],
-   "caption": "Overview comparison matrix for campomelic dysplasia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "campomelic-dysplasia-real-image",
-   "title": "Campomelic dysplasia: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "campomelic_dysplasia-pathway",
+      "title": "Campomelic dysplasia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Characterised by bowing (campomelia) of the long bones, particularly the tibiae and femora, often with a cutaneous dimple over the apex of the bend",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe neonatal respiratory failure from a small thorax and airway malacia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skeletal survey demonstrating long-bone bowing, hypoplastic scapulae, and thoracic changes, Karyotype and molecular testing of SOX9 to confirm the diagnosis, Assessment of genital anatomy and gonadal status with imaging"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Prioritise neonatal airway and respiratory support, with ventilation and a low threshold for tracheostomy given tracheobronchomalacia and a small thorax"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming phenotypic sex reflects the karyotype and mismanaging gonadal and genital issues"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of campomelic dysplasia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "campomelic_dysplasia-matrix",
+      "title": "Campomelic dysplasia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Characterised by bowing (campomelia) of the long bones, particularly the tibiae and femora, often with a cutaneous dimple over",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skeletal survey demonstrating long-bone bowing, hypoplastic scapulae, and thoracic changes, Karyotype and molecular testing of",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Osteogenesis imperfecta, Thanatophoric dysplasia, Kyphomelic dysplasia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Prioritise neonatal airway and respiratory support, with ventilation and a low threshold for tracheostomy given",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming phenotypic sex reflects the karyotype and mismanaging gonadal and genital issues",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for campomelic dysplasia."
+    }
+  ],
+  "diagrams": []
 }

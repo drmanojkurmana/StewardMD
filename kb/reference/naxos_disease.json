@@ -1,177 +1,155 @@
 {
- "id": "naxos_disease",
- "name": "Naxos disease",
- "aliases": [
-  "JUP-related cardiocutaneous syndrome",
-  "plakoglobin cardiocutaneous syndrome",
-  "Naxos syndrome",
-  "arrhythmogenic cardiomyopathy with woolly hair and palmoplantar keratoderma"
- ],
- "class": "non_infective",
- "system": "Cardiovascular / Genetics",
- "specialty": "Cardiology / Inherited Cardiac Conditions",
- "referenceOnly": true,
- "reference": {
-  "source": "ESC/AHA cardiomyopathy guidelines; specialist inherited cardiomyopathy and dermatology literature",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "An autosomal recessive cardiocutaneous syndrome combining arrhythmogenic cardiomyopathy with woolly hair and palmoplantar keratoderma",
-   "Caused by variants in the JUP gene encoding plakoglobin (junction plakoglobin), a desmosomal protein shared by heart and skin",
-   "The cutaneous features (tightly curled woolly hair from infancy and thickened palms and soles) appear in childhood, before the cardiac disease becomes evident",
-   "The cardiomyopathy resembles arrhythmogenic right ventricular cardiomyopathy, with fibrofatty replacement, ventricular arrhythmia and risk of sudden death, typically emerging by adolescence",
-   "The recognisable skin and hair phenotype offers an early clue to identify individuals at future cardiac risk",
-   "Cardiac management mirrors arrhythmogenic cardiomyopathy, including exercise restriction, antiarrhythmic therapy and a defibrillator for high-risk patients",
-   "It clusters in families from Naxos and other Greek islands and Mediterranean regions, reflecting founder effects",
-   "A related recessive desmoplakin cardiocutaneous condition, Carvajal syndrome, features a more left-dominant cardiomyopathy"
+  "id": "naxos_disease",
+  "name": "Naxos disease",
+  "aliases": [
+    "JUP-related cardiocutaneous syndrome",
+    "plakoglobin cardiocutaneous syndrome",
+    "Naxos syndrome",
+    "arrhythmogenic cardiomyopathy with woolly hair and palmoplantar keratoderma"
   ],
-  "pathophysiology": "Naxos disease is caused by recessive variants in JUP, which encodes plakoglobin, a component of the desmosomes and adherens junctions that mechanically couple cells. Because plakoglobin is expressed in both cardiac muscle and the epidermis, its dysfunction weakens cell-cell adhesion in both tissues. In the heart, impaired desmosomal integrity under mechanical stress leads to myocyte death and fibrofatty replacement, creating an arrhythmogenic substrate akin to arrhythmogenic right ventricular cardiomyopathy. In the skin and hair follicles, defective adhesion produces the woolly hair and palmoplantar keratoderma that characterise the syndrome.",
-  "additionalDifferentials": [
-   "Arrhythmogenic right ventricular cardiomyopathy from other desmosomal genes",
-   "Carvajal syndrome (desmoplakin-related cardiocutaneous disease)",
-   "Other inherited palmoplantar keratodermas",
-   "Dilated cardiomyopathy",
-   "Idiopathic woolly hair without cardiac disease",
-   "Cardiac sarcoidosis"
-  ],
-  "additionalInvestigations": [
-   "Dermatological assessment of hair texture and palmoplantar skin",
-   "12-lead ECG for right precordial changes and ventricular arrhythmia",
-   "Echocardiography and cardiac MRI for ventricular structure and fibrofatty change",
-   "Ambulatory monitoring and exercise testing for arrhythmia burden",
-   "Genetic testing for JUP variants",
-   "Family screening given autosomal recessive inheritance"
-  ],
-  "redFlags": [
-   "Syncope or sustained ventricular arrhythmia in a child or young adult with the cutaneous phenotype",
-   "Progressive heart failure",
-   "Family history of sudden death, especially in consanguineous or founder-population families",
-   "Documented ventricular tachycardia of right ventricular origin"
-  ],
-  "prognosis": "The cutaneous features are benign, but the associated arrhythmogenic cardiomyopathy is progressive and carries a significant risk of ventricular arrhythmia, heart failure and sudden death; early recognition through the skin phenotype allows timely cardiac surveillance and risk reduction.",
-  "pitfalls": [
-   "Regarding the woolly hair and keratoderma as purely cosmetic and missing the cardiac risk",
-   "Failing to institute cardiac surveillance before symptoms appear",
-   "Confusing it with dominant arrhythmogenic cardiomyopathy and overlooking recessive inheritance and family risk",
-   "Permitting intense exercise, which accelerates the cardiomyopathy",
-   "Not distinguishing it from the desmoplakin-related Carvajal syndrome"
-  ],
-  "references": [
-   "ESC Guidelines for the management of cardiomyopathies",
-   "GeneReviews / specialist literature on Naxos disease and arrhythmogenic cardiomyopathy"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Exercise restriction, avoiding competitive and endurance sport that accelerates arrhythmogenic myocardial change",
-   "Antiarrhythmic therapy with beta-blockers, adding agents such as amiodarone or sotalol for ventricular arrhythmia",
-   "Implantable cardioverter-defibrillator for high-risk patients to prevent sudden cardiac death",
-   "Catheter ablation for recurrent or drug-refractory ventricular tachycardia",
-   "Standard heart failure therapy for ventricular dysfunction, with cardiac transplantation for end-stage disease",
-   "Topical emollients and keratolytics for the palmoplantar keratoderma",
-   "Lifelong cardiac surveillance with ECG, echocardiography or cardiac MRI and ambulatory monitoring of arrhythmia burden",
-   "Genetic counselling and cascade family screening for the autosomal recessive JUP variant"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "naxos_disease-pathway",
-   "title": "Naxos disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "An autosomal recessive cardiocutaneous syndrome combining arrhythmogenic cardiomyopathy with woolly hair and palmoplantar keratoderma",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Syncope or sustained ventricular arrhythmia in a child or young adult with the cutaneous phenotype",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Dermatological assessment of hair texture and palmoplantar skin, 12-lead ECG for right precordial changes and ventricular arrhythmia, Echocardiography and cardiac MRI for ventricular structure and fibrofatty change"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Exercise restriction, avoiding competitive and endurance sport that accelerates arrhythmogenic myocardial change"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Regarding the woolly hair and keratoderma as purely cosmetic and missing the cardiac risk"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of naxos disease."
-  }
- ],
- "tables": [
-  {
-   "id": "naxos_disease-matrix",
-   "title": "Naxos disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "An autosomal recessive cardiocutaneous syndrome combining arrhythmogenic cardiomyopathy with woolly hair and palmoplantar",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular / Genetics",
+  "specialty": "Cardiology / Inherited Cardiac Conditions",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ESC/AHA cardiomyopathy guidelines; specialist inherited cardiomyopathy and dermatology literature",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "An autosomal recessive cardiocutaneous syndrome combining arrhythmogenic cardiomyopathy with woolly hair and palmoplantar keratoderma",
+      "Caused by variants in the JUP gene encoding plakoglobin (junction plakoglobin), a desmosomal protein shared by heart and skin",
+      "The cutaneous features (tightly curled woolly hair from infancy and thickened palms and soles) appear in childhood, before the cardiac disease becomes evident",
+      "The cardiomyopathy resembles arrhythmogenic right ventricular cardiomyopathy, with fibrofatty replacement, ventricular arrhythmia and risk of sudden death, typically emerging by adolescence",
+      "The recognisable skin and hair phenotype offers an early clue to identify individuals at future cardiac risk",
+      "Cardiac management mirrors arrhythmogenic cardiomyopathy, including exercise restriction, antiarrhythmic therapy and a defibrillator for high-risk patients",
+      "It clusters in families from Naxos and other Greek islands and Mediterranean regions, reflecting founder effects",
+      "A related recessive desmoplakin cardiocutaneous condition, Carvajal syndrome, features a more left-dominant cardiomyopathy"
     ],
-    [
-     "Key Investigations",
-     "Dermatological assessment of hair texture and palmoplantar skin, 12-lead ECG for right precordial changes and ventricular",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Naxos disease is caused by recessive variants in JUP, which encodes plakoglobin, a component of the desmosomes and adherens junctions that mechanically couple cells. Because plakoglobin is expressed in both cardiac muscle and the epidermis, its dysfunction weakens cell-cell adhesion in both tissues. In the heart, impaired desmosomal integrity under mechanical stress leads to myocyte death and fibrofatty replacement, creating an arrhythmogenic substrate akin to arrhythmogenic right ventricular cardiomyopathy. In the skin and hair follicles, defective adhesion produces the woolly hair and palmoplantar keratoderma that characterise the syndrome.",
+    "additionalDifferentials": [
+      "Arrhythmogenic right ventricular cardiomyopathy from other desmosomal genes",
+      "Carvajal syndrome (desmoplakin-related cardiocutaneous disease)",
+      "Other inherited palmoplantar keratodermas",
+      "Dilated cardiomyopathy",
+      "Idiopathic woolly hair without cardiac disease",
+      "Cardiac sarcoidosis"
     ],
-    [
-     "Primary Differentials",
-     "Arrhythmogenic right ventricular cardiomyopathy from other desmosomal genes, Carvajal syndrome (desmoplakin-related",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Dermatological assessment of hair texture and palmoplantar skin",
+      "12-lead ECG for right precordial changes and ventricular arrhythmia",
+      "Echocardiography and cardiac MRI for ventricular structure and fibrofatty change",
+      "Ambulatory monitoring and exercise testing for arrhythmia burden",
+      "Genetic testing for JUP variants",
+      "Family screening given autosomal recessive inheritance"
     ],
-    [
-     "Management Strategy",
-     "Exercise restriction, avoiding competitive and endurance sport that accelerates arrhythmogenic myocardial change",
-     "Core treatment modality"
+    "redFlags": [
+      "Syncope or sustained ventricular arrhythmia in a child or young adult with the cutaneous phenotype",
+      "Progressive heart failure",
+      "Family history of sudden death, especially in consanguineous or founder-population families",
+      "Documented ventricular tachycardia of right ventricular origin"
     ],
-    [
-     "Clinical Pitfall",
-     "Regarding the woolly hair and keratoderma as purely cosmetic and missing the cardiac risk",
-     "Prevent diagnostic or management error"
+    "prognosis": "The cutaneous features are benign, but the associated arrhythmogenic cardiomyopathy is progressive and carries a significant risk of ventricular arrhythmia, heart failure and sudden death; early recognition through the skin phenotype allows timely cardiac surveillance and risk reduction.",
+    "pitfalls": [
+      "Regarding the woolly hair and keratoderma as purely cosmetic and missing the cardiac risk",
+      "Failing to institute cardiac surveillance before symptoms appear",
+      "Confusing it with dominant arrhythmogenic cardiomyopathy and overlooking recessive inheritance and family risk",
+      "Permitting intense exercise, which accelerates the cardiomyopathy",
+      "Not distinguishing it from the desmoplakin-related Carvajal syndrome"
+    ],
+    "references": [
+      "ESC Guidelines for the management of cardiomyopathies",
+      "GeneReviews / specialist literature on Naxos disease and arrhythmogenic cardiomyopathy"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Exercise restriction, avoiding competitive and endurance sport that accelerates arrhythmogenic myocardial change",
+      "Antiarrhythmic therapy with beta-blockers, adding agents such as amiodarone or sotalol for ventricular arrhythmia",
+      "Implantable cardioverter-defibrillator for high-risk patients to prevent sudden cardiac death",
+      "Catheter ablation for recurrent or drug-refractory ventricular tachycardia",
+      "Standard heart failure therapy for ventricular dysfunction, with cardiac transplantation for end-stage disease",
+      "Topical emollients and keratolytics for the palmoplantar keratoderma",
+      "Lifelong cardiac surveillance with ECG, echocardiography or cardiac MRI and ambulatory monitoring of arrhythmia burden",
+      "Genetic counselling and cascade family screening for the autosomal recessive JUP variant"
     ]
-   ],
-   "caption": "Overview comparison matrix for naxos disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "naxos-disease-real-image",
-   "title": "Naxos disease: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "naxos_disease-pathway",
+      "title": "Naxos disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "An autosomal recessive cardiocutaneous syndrome combining arrhythmogenic cardiomyopathy with woolly hair and palmoplantar keratoderma",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Syncope or sustained ventricular arrhythmia in a child or young adult with the cutaneous phenotype",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Dermatological assessment of hair texture and palmoplantar skin, 12-lead ECG for right precordial changes and ventricular arrhythmia, Echocardiography and cardiac MRI for ventricular structure and fibrofatty change"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Exercise restriction, avoiding competitive and endurance sport that accelerates arrhythmogenic myocardial change"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Regarding the woolly hair and keratoderma as purely cosmetic and missing the cardiac risk"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of naxos disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "naxos_disease-matrix",
+      "title": "Naxos disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "An autosomal recessive cardiocutaneous syndrome combining arrhythmogenic cardiomyopathy with woolly hair and palmoplantar",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Dermatological assessment of hair texture and palmoplantar skin, 12-lead ECG for right precordial changes and ventricular",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Arrhythmogenic right ventricular cardiomyopathy from other desmosomal genes, Carvajal syndrome (desmoplakin-related",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Exercise restriction, avoiding competitive and endurance sport that accelerates arrhythmogenic myocardial change",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Regarding the woolly hair and keratoderma as purely cosmetic and missing the cardiac risk",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for naxos disease."
+    }
+  ],
+  "diagrams": []
 }

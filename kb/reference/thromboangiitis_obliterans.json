@@ -1,175 +1,153 @@
 {
- "id": "thromboangiitis_obliterans",
- "name": "thromboangiitis obliterans",
- "aliases": [
-  "Buerger disease",
-  "Buerger's disease"
- ],
- "class": "non_infective",
- "system": "Cardiovascular and vascular",
- "specialty": "Vascular medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Rutherford's Vascular Surgery and Endovascular Therapy",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A non-atherosclerotic, segmental inflammatory occlusive disease affecting the small and medium arteries and veins of the extremities.",
-   "Occurs almost exclusively in tobacco users, characteristically young men, though incidence in women is rising with changing smoking patterns.",
-   "Presents with distal extremity ischaemia — digital ischaemia, foot or instep claudication, rest pain, ulceration and gangrene.",
-   "Superficial migratory thrombophlebitis and Raynaud phenomenon are common accompanying features.",
-   "Both upper and lower limbs are typically involved, and the Allen test is frequently abnormal, so the hands must always be examined.",
-   "Angiography classically shows segmental occlusions with 'corkscrew' collaterals and normal, smooth proximal vessels free of atheroma.",
-   "Complete and permanent tobacco cessation, including smokeless products and nicotine replacement, is the only proven measure that halts progression and prevents amputation.",
-   "Diagnosis is essentially one of exclusion, guided by criteria such as those of Olin and Shionoya."
+  "id": "thromboangiitis_obliterans",
+  "name": "thromboangiitis obliterans",
+  "aliases": [
+    "Buerger disease",
+    "Buerger's disease"
   ],
-  "pathophysiology": "Thromboangiitis obliterans is characterised by a highly cellular, inflammatory occlusive thrombus within small and medium arteries and veins, with relative preservation of the vessel wall and internal elastic lamina, distinguishing it from both atherosclerosis and classic necrotising vasculitis. Tobacco exposure is central: constituents of tobacco are thought to provoke endothelial dysfunction and an immune-mediated inflammatory response, possibly involving hypersensitivity to tobacco antigens and impaired endothelium-dependent vasodilatation. The result is segmental thrombotic occlusion of distal vessels with sparing of proximal arteries.",
-  "additionalDifferentials": [
-   "Atherosclerotic peripheral arterial disease",
-   "Thromboembolic arterial occlusion",
-   "Systemic vasculitides such as polyarteritis nodosa or ANCA-associated vasculitis",
-   "Connective tissue disease vasculopathy (systemic sclerosis, systemic lupus erythematosus)",
-   "Antiphospholipid syndrome and hypercoagulable states",
-   "Popliteal artery entrapment or adventitial cystic disease",
-   "Ergotism, cocaine or cannabis-associated arteritis"
-  ],
-  "additionalInvestigations": [
-   "Echocardiography and proximal arterial imaging to exclude an embolic source",
-   "Autoimmune and vasculitis serology (antinuclear antibodies, ANCA, complement, rheumatoid factor)",
-   "Antiphospholipid antibodies and a thrombophilia screen",
-   "Catheter or CT/MR arteriography of both upper and lower limbs seeking corkscrew collaterals",
-   "Urine and serum toxicology for cocaine and cannabis",
-   "Screening for diabetes and hyperlipidaemia to exclude atherosclerotic disease"
-  ],
-  "redFlags": [
-   "Ischaemic rest pain or tissue loss with digital ulceration or gangrene",
-   "Ascending infection or spreading cellulitis of an ischaemic digit",
-   "Continued tobacco use despite established disease",
-   "Rapidly progressive multi-limb ischaemia"
-  ],
-  "prognosis": "Limb prognosis is excellent with complete tobacco abstinence, whereas continued smoking leads to recurrent ischaemia and a high risk of amputation; overall life expectancy is close to normal as the disease spares the coronary and cerebral circulations.",
-  "pitfalls": [
-   "Misattributing distal ischaemia in a young smoker to premature atherosclerosis.",
-   "Underestimating ongoing nicotine exposure from smokeless tobacco or nicotine replacement as a driver of progression.",
-   "Failing to consider the diagnosis in young women.",
-   "Examining only the lower limbs and missing upper-limb and Allen test involvement."
-  ],
-  "references": [
-   "Rutherford's Vascular Surgery and Endovascular Therapy",
-   "Harrison's Principles of Internal Medicine",
-   "Circulation"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Complete and permanent cessation of all tobacco and nicotine exposure is the definitive disease-modifying intervention and the single strongest determinant of limb salvage",
-   "Give intravenous prostanoids such as iloprost for critical ischaemia, ischaemic rest pain and ulceration",
-   "Provide meticulous foot and wound care, analgesia and protection from cold and trauma to the affected limbs",
-   "Manage the accompanying superficial migratory thrombophlebitis and Raynaud phenomenon",
-   "Recognise that conventional surgical revascularisation is rarely feasible because of distal, segmental disease; consider sympathectomy or intermittent pneumatic compression for refractory ischaemia",
-   "Reserve amputation for intractable gangrene or infection",
-   "Coordinate multidisciplinary vascular and intensive smoking-cessation support and escalate promptly for critical limb ischaemia"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "thromboangiitis_obliterans-pathway",
-   "title": "thromboangiitis obliterans: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A non-atherosclerotic, segmental inflammatory occlusive disease affecting the small and medium arteries and veins of the extremities.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Ischaemic rest pain or tissue loss with digital ulceration or gangrene",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Echocardiography and proximal arterial imaging to exclude an embolic source, Autoimmune and vasculitis serology (antinuclear antibodies, ANCA, complement, rheumatoid factor), Antiphospholipid antibodies and a thrombophilia"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Complete and permanent cessation of all tobacco and nicotine exposure is the definitive disease-modifying intervention and the single strongest determinant of limb salvage"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misattributing distal ischaemia in a young smoker to premature atherosclerosis."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of thromboangiitis obliterans."
-  }
- ],
- "tables": [
-  {
-   "id": "thromboangiitis_obliterans-matrix",
-   "title": "thromboangiitis obliterans: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A non-atherosclerotic, segmental inflammatory occlusive disease affecting the small and medium arteries and veins of the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Cardiovascular and vascular",
+  "specialty": "Vascular medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rutherford's Vascular Surgery and Endovascular Therapy",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A non-atherosclerotic, segmental inflammatory occlusive disease affecting the small and medium arteries and veins of the extremities.",
+      "Occurs almost exclusively in tobacco users, characteristically young men, though incidence in women is rising with changing smoking patterns.",
+      "Presents with distal extremity ischaemia — digital ischaemia, foot or instep claudication, rest pain, ulceration and gangrene.",
+      "Superficial migratory thrombophlebitis and Raynaud phenomenon are common accompanying features.",
+      "Both upper and lower limbs are typically involved, and the Allen test is frequently abnormal, so the hands must always be examined.",
+      "Angiography classically shows segmental occlusions with 'corkscrew' collaterals and normal, smooth proximal vessels free of atheroma.",
+      "Complete and permanent tobacco cessation, including smokeless products and nicotine replacement, is the only proven measure that halts progression and prevents amputation.",
+      "Diagnosis is essentially one of exclusion, guided by criteria such as those of Olin and Shionoya."
     ],
-    [
-     "Key Investigations",
-     "Echocardiography and proximal arterial imaging to exclude an embolic source, Autoimmune and vasculitis serology (antinuclear",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Thromboangiitis obliterans is characterised by a highly cellular, inflammatory occlusive thrombus within small and medium arteries and veins, with relative preservation of the vessel wall and internal elastic lamina, distinguishing it from both atherosclerosis and classic necrotising vasculitis. Tobacco exposure is central: constituents of tobacco are thought to provoke endothelial dysfunction and an immune-mediated inflammatory response, possibly involving hypersensitivity to tobacco antigens and impaired endothelium-dependent vasodilatation. The result is segmental thrombotic occlusion of distal vessels with sparing of proximal arteries.",
+    "additionalDifferentials": [
+      "Atherosclerotic peripheral arterial disease",
+      "Thromboembolic arterial occlusion",
+      "Systemic vasculitides such as polyarteritis nodosa or ANCA-associated vasculitis",
+      "Connective tissue disease vasculopathy (systemic sclerosis, systemic lupus erythematosus)",
+      "Antiphospholipid syndrome and hypercoagulable states",
+      "Popliteal artery entrapment or adventitial cystic disease",
+      "Ergotism, cocaine or cannabis-associated arteritis"
     ],
-    [
-     "Primary Differentials",
-     "Atherosclerotic peripheral arterial disease, Thromboembolic arterial occlusion, Systemic vasculitides such as polyarteritis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Echocardiography and proximal arterial imaging to exclude an embolic source",
+      "Autoimmune and vasculitis serology (antinuclear antibodies, ANCA, complement, rheumatoid factor)",
+      "Antiphospholipid antibodies and a thrombophilia screen",
+      "Catheter or CT/MR arteriography of both upper and lower limbs seeking corkscrew collaterals",
+      "Urine and serum toxicology for cocaine and cannabis",
+      "Screening for diabetes and hyperlipidaemia to exclude atherosclerotic disease"
     ],
-    [
-     "Management Strategy",
-     "Complete and permanent cessation of all tobacco and nicotine exposure is the definitive disease-modifying intervention and the",
-     "Core treatment modality"
+    "redFlags": [
+      "Ischaemic rest pain or tissue loss with digital ulceration or gangrene",
+      "Ascending infection or spreading cellulitis of an ischaemic digit",
+      "Continued tobacco use despite established disease",
+      "Rapidly progressive multi-limb ischaemia"
     ],
-    [
-     "Clinical Pitfall",
-     "Misattributing distal ischaemia in a young smoker to premature atherosclerosis.",
-     "Prevent diagnostic or management error"
+    "prognosis": "Limb prognosis is excellent with complete tobacco abstinence, whereas continued smoking leads to recurrent ischaemia and a high risk of amputation; overall life expectancy is close to normal as the disease spares the coronary and cerebral circulations.",
+    "pitfalls": [
+      "Misattributing distal ischaemia in a young smoker to premature atherosclerosis.",
+      "Underestimating ongoing nicotine exposure from smokeless tobacco or nicotine replacement as a driver of progression.",
+      "Failing to consider the diagnosis in young women.",
+      "Examining only the lower limbs and missing upper-limb and Allen test involvement."
+    ],
+    "references": [
+      "Rutherford's Vascular Surgery and Endovascular Therapy",
+      "Harrison's Principles of Internal Medicine",
+      "Circulation"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Complete and permanent cessation of all tobacco and nicotine exposure is the definitive disease-modifying intervention and the single strongest determinant of limb salvage",
+      "Give intravenous prostanoids such as iloprost for critical ischaemia, ischaemic rest pain and ulceration",
+      "Provide meticulous foot and wound care, analgesia and protection from cold and trauma to the affected limbs",
+      "Manage the accompanying superficial migratory thrombophlebitis and Raynaud phenomenon",
+      "Recognise that conventional surgical revascularisation is rarely feasible because of distal, segmental disease; consider sympathectomy or intermittent pneumatic compression for refractory ischaemia",
+      "Reserve amputation for intractable gangrene or infection",
+      "Coordinate multidisciplinary vascular and intensive smoking-cessation support and escalate promptly for critical limb ischaemia"
     ]
-   ],
-   "caption": "Overview comparison matrix for thromboangiitis obliterans."
-  }
- ],
- "diagrams": [
-  {
-   "id": "thromboangiitis-obliterans-real-image",
-   "title": "thromboangiitis obliterans: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "thromboangiitis_obliterans-pathway",
+      "title": "thromboangiitis obliterans: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A non-atherosclerotic, segmental inflammatory occlusive disease affecting the small and medium arteries and veins of the extremities.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Ischaemic rest pain or tissue loss with digital ulceration or gangrene",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Echocardiography and proximal arterial imaging to exclude an embolic source, Autoimmune and vasculitis serology (antinuclear antibodies, ANCA, complement, rheumatoid factor), Antiphospholipid antibodies and a thrombophilia"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Complete and permanent cessation of all tobacco and nicotine exposure is the definitive disease-modifying intervention and the single strongest determinant of limb salvage"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misattributing distal ischaemia in a young smoker to premature atherosclerosis."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of thromboangiitis obliterans."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "thromboangiitis_obliterans-matrix",
+      "title": "thromboangiitis obliterans: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A non-atherosclerotic, segmental inflammatory occlusive disease affecting the small and medium arteries and veins of the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Echocardiography and proximal arterial imaging to exclude an embolic source, Autoimmune and vasculitis serology (antinuclear",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Atherosclerotic peripheral arterial disease, Thromboembolic arterial occlusion, Systemic vasculitides such as polyarteritis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Complete and permanent cessation of all tobacco and nicotine exposure is the definitive disease-modifying intervention and the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misattributing distal ischaemia in a young smoker to premature atherosclerosis.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for thromboangiitis obliterans."
+    }
+  ],
+  "diagrams": []
 }

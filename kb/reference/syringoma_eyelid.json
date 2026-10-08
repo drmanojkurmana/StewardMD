@@ -1,175 +1,153 @@
 {
- "id": "syringoma_eyelid",
- "name": "Syringoma (eyelid)",
- "aliases": [
-  "eyelid syringoma",
-  "eccrine syringoma"
- ],
- "class": "non_infective",
- "system": "Ophthalmic / integumentary (eyelid)",
- "specialty": "Ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Kanski's Clinical Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Syringomas are benign adnexal tumours of the eccrine sweat ducts presenting as multiple small, soft, skin-coloured to yellowish papules clustered on the lower eyelids and upper cheeks.",
-   "They are typically bilateral and symmetrical, appear around puberty or in early adulthood, and are commoner in women.",
-   "Individual papules are small and firm; they are usually asymptomatic and the concern is almost entirely cosmetic.",
-   "The periorbital region, especially the lower lids, is the classic site, and the clustered, symmetrical distribution is a helpful diagnostic clue.",
-   "There is a recognised association with Down syndrome, and an eruptive variant can appear on the trunk; diabetes has been linked to a clear-cell histological variant.",
-   "Diagnosis is usually clinical, but biopsy with histology confirms the characteristic ductal structures when there is doubt.",
-   "Treatment is for cosmesis only and is difficult, as lesions are dermal and multiple; options include ablative laser, electrocautery, excision and chemical peels, all with a tendency to recur and a risk of eyelid scarring.",
-   "Syringomas must be distinguished from xanthelasma, milia, sebaceous hyperplasia and, importantly, from the more aggressive microcystic adnexal carcinoma and morphoeic basal cell carcinoma when a lesion is solitary, indurated or growing."
+  "id": "syringoma_eyelid",
+  "name": "Syringoma (eyelid)",
+  "aliases": [
+    "eyelid syringoma",
+    "eccrine syringoma"
   ],
-  "pathophysiology": "Syringomas are benign proliferations (hamartomatous or adenomatous) of the intraepidermal eccrine sweat duct. Histology shows small ducts and solid epithelial cords embedded in a fibrous dermal stroma, with characteristic comma-shaped or tadpole-like ductal profiles lined by two layers of cuboidal cells. The proliferation is confined to the superficial to mid dermis without invasion, and hormonal influence is implicated by the tendency to appear or worsen around puberty and in women. Because the lesions are dermal and multifocal, they neither regress spontaneously nor respond to superficial treatment, and their depth explains the difficulty of complete cosmetic clearance.",
-  "additionalDifferentials": [
-   "Xanthelasma palpebrarum",
-   "Milia",
-   "Sebaceous hyperplasia",
-   "Trichoepithelioma and other benign adnexal tumours",
-   "Microcystic adnexal carcinoma",
-   "Morphoeic (sclerosing) basal cell carcinoma",
-   "Flat warts or lichen planus papules"
-  ],
-  "additionalInvestigations": [
-   "Slit-lamp and external examination of the periorbital distribution",
-   "Dermoscopy to assess surface and vascular pattern",
-   "Skin biopsy with histopathology when diagnosis is uncertain or a lesion is atypical",
-   "External photography to document distribution and monitor after treatment",
-   "Evaluation for associated conditions (e.g. Down syndrome) where clinically indicated",
-   "Deeper or excisional biopsy if microcystic adnexal carcinoma is suspected"
-  ],
-  "redFlags": [
-   "A solitary, indurated, enlarging or ill-defined lesion suggesting microcystic adnexal carcinoma or morphoeic basal cell carcinoma",
-   "Ulceration, bleeding or loss of eyelashes",
-   "Rapid change in a previously stable lesion",
-   "Deep infiltration or recurrence after excision suggesting a more aggressive adnexal tumour"
-  ],
-  "prognosis": "Benign with an excellent prognosis and no threat to vision; lesions persist indefinitely. Cosmetic treatment is often only partially effective and recurrence is common, with a risk of scarring on the delicate eyelid skin.",
-  "pitfalls": [
-   "Confusing syringomas with xanthelasma and thereby missing an opportunity to counsel on lipids, or vice versa",
-   "Mistaking an infiltrative microcystic adnexal carcinoma for benign syringomas and delaying appropriate excision",
-   "Aggressive ablative treatment of lower-lid lesions causing scarring, dyspigmentation or ectropion",
-   "Promising complete cosmetic clearance despite the high recurrence rate of dermal lesions",
-   "Failing to biopsy an atypical or solitary lesion before cosmetic destruction"
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology: A Systematic Approach",
-   "American Academy of Ophthalmology, Basic and Clinical Science Course — Oculofacial Plastic and Orbital Surgery",
-   "Rook's Textbook of Dermatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassurance that eyelid syringomas are benign and pose no threat to vision, so intervention is cosmetic and optional",
-   "Careful ablative treatment with carbon dioxide laser, electrodesiccation, or fine cautery, using corneal shielding to protect the ocular surface",
-   "Surgical excision reserved for isolated lesions, mindful of the delicate eyelid skin and the risk of lid-margin scarring or ectropion",
-   "Counsel on frequent recurrence and the risk of scarring and pigmentary change on periorbital skin",
-   "Histological confirmation to distinguish from microcystic adnexal carcinoma when a lesion is atypical",
-   "Assessment for associated conditions such as Down syndrome where clinically indicated, with ophthalmology-led follow-up"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "syringoma_eyelid-pathway",
-   "title": "Syringoma (eyelid): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Syringomas are benign adnexal tumours of the eccrine sweat ducts presenting as multiple small, soft, skin-coloured to yellowish papules clustered on the lower eyelids and upper cheeks.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A solitary, indurated, enlarging or ill-defined lesion suggesting microcystic adnexal carcinoma or morphoeic basal cell carcinoma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Slit-lamp and external examination of the periorbital distribution, Dermoscopy to assess surface and vascular pattern, Skin biopsy with histopathology when diagnosis is uncertain or a lesion is atypical"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassurance that eyelid syringomas are benign and pose no threat to vision, so intervention is cosmetic and optional"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing syringomas with xanthelasma and thereby missing an opportunity to counsel on lipids, or vice versa"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of syringoma (eyelid)."
-  }
- ],
- "tables": [
-  {
-   "id": "syringoma_eyelid-matrix",
-   "title": "Syringoma (eyelid): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Syringomas are benign adnexal tumours of the eccrine sweat ducts presenting as multiple small, soft, skin-coloured to yellowish",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Ophthalmic / integumentary (eyelid)",
+  "specialty": "Ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kanski's Clinical Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Syringomas are benign adnexal tumours of the eccrine sweat ducts presenting as multiple small, soft, skin-coloured to yellowish papules clustered on the lower eyelids and upper cheeks.",
+      "They are typically bilateral and symmetrical, appear around puberty or in early adulthood, and are commoner in women.",
+      "Individual papules are small and firm; they are usually asymptomatic and the concern is almost entirely cosmetic.",
+      "The periorbital region, especially the lower lids, is the classic site, and the clustered, symmetrical distribution is a helpful diagnostic clue.",
+      "There is a recognised association with Down syndrome, and an eruptive variant can appear on the trunk; diabetes has been linked to a clear-cell histological variant.",
+      "Diagnosis is usually clinical, but biopsy with histology confirms the characteristic ductal structures when there is doubt.",
+      "Treatment is for cosmesis only and is difficult, as lesions are dermal and multiple; options include ablative laser, electrocautery, excision and chemical peels, all with a tendency to recur and a risk of eyelid scarring.",
+      "Syringomas must be distinguished from xanthelasma, milia, sebaceous hyperplasia and, importantly, from the more aggressive microcystic adnexal carcinoma and morphoeic basal cell carcinoma when a lesion is solitary, indurated or growing."
     ],
-    [
-     "Key Investigations",
-     "Slit-lamp and external examination of the periorbital distribution, Dermoscopy to assess surface and vascular pattern, Skin",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Syringomas are benign proliferations (hamartomatous or adenomatous) of the intraepidermal eccrine sweat duct. Histology shows small ducts and solid epithelial cords embedded in a fibrous dermal stroma, with characteristic comma-shaped or tadpole-like ductal profiles lined by two layers of cuboidal cells. The proliferation is confined to the superficial to mid dermis without invasion, and hormonal influence is implicated by the tendency to appear or worsen around puberty and in women. Because the lesions are dermal and multifocal, they neither regress spontaneously nor respond to superficial treatment, and their depth explains the difficulty of complete cosmetic clearance.",
+    "additionalDifferentials": [
+      "Xanthelasma palpebrarum",
+      "Milia",
+      "Sebaceous hyperplasia",
+      "Trichoepithelioma and other benign adnexal tumours",
+      "Microcystic adnexal carcinoma",
+      "Morphoeic (sclerosing) basal cell carcinoma",
+      "Flat warts or lichen planus papules"
     ],
-    [
-     "Primary Differentials",
-     "Xanthelasma palpebrarum, Milia, Sebaceous hyperplasia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Slit-lamp and external examination of the periorbital distribution",
+      "Dermoscopy to assess surface and vascular pattern",
+      "Skin biopsy with histopathology when diagnosis is uncertain or a lesion is atypical",
+      "External photography to document distribution and monitor after treatment",
+      "Evaluation for associated conditions (e.g. Down syndrome) where clinically indicated",
+      "Deeper or excisional biopsy if microcystic adnexal carcinoma is suspected"
     ],
-    [
-     "Management Strategy",
-     "Reassurance that eyelid syringomas are benign and pose no threat to vision, so intervention is cosmetic and optional",
-     "Core treatment modality"
+    "redFlags": [
+      "A solitary, indurated, enlarging or ill-defined lesion suggesting microcystic adnexal carcinoma or morphoeic basal cell carcinoma",
+      "Ulceration, bleeding or loss of eyelashes",
+      "Rapid change in a previously stable lesion",
+      "Deep infiltration or recurrence after excision suggesting a more aggressive adnexal tumour"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing syringomas with xanthelasma and thereby missing an opportunity to counsel on lipids, or vice versa",
-     "Prevent diagnostic or management error"
+    "prognosis": "Benign with an excellent prognosis and no threat to vision; lesions persist indefinitely. Cosmetic treatment is often only partially effective and recurrence is common, with a risk of scarring on the delicate eyelid skin.",
+    "pitfalls": [
+      "Confusing syringomas with xanthelasma and thereby missing an opportunity to counsel on lipids, or vice versa",
+      "Mistaking an infiltrative microcystic adnexal carcinoma for benign syringomas and delaying appropriate excision",
+      "Aggressive ablative treatment of lower-lid lesions causing scarring, dyspigmentation or ectropion",
+      "Promising complete cosmetic clearance despite the high recurrence rate of dermal lesions",
+      "Failing to biopsy an atypical or solitary lesion before cosmetic destruction"
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology: A Systematic Approach",
+      "American Academy of Ophthalmology, Basic and Clinical Science Course — Oculofacial Plastic and Orbital Surgery",
+      "Rook's Textbook of Dermatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassurance that eyelid syringomas are benign and pose no threat to vision, so intervention is cosmetic and optional",
+      "Careful ablative treatment with carbon dioxide laser, electrodesiccation, or fine cautery, using corneal shielding to protect the ocular surface",
+      "Surgical excision reserved for isolated lesions, mindful of the delicate eyelid skin and the risk of lid-margin scarring or ectropion",
+      "Counsel on frequent recurrence and the risk of scarring and pigmentary change on periorbital skin",
+      "Histological confirmation to distinguish from microcystic adnexal carcinoma when a lesion is atypical",
+      "Assessment for associated conditions such as Down syndrome where clinically indicated, with ophthalmology-led follow-up"
     ]
-   ],
-   "caption": "Overview comparison matrix for syringoma (eyelid)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "syringoma-eyelid-real-image",
-   "title": "Syringoma (eyelid): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "syringoma_eyelid-pathway",
+      "title": "Syringoma (eyelid): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Syringomas are benign adnexal tumours of the eccrine sweat ducts presenting as multiple small, soft, skin-coloured to yellowish papules clustered on the lower eyelids and upper cheeks.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A solitary, indurated, enlarging or ill-defined lesion suggesting microcystic adnexal carcinoma or morphoeic basal cell carcinoma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Slit-lamp and external examination of the periorbital distribution, Dermoscopy to assess surface and vascular pattern, Skin biopsy with histopathology when diagnosis is uncertain or a lesion is atypical"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassurance that eyelid syringomas are benign and pose no threat to vision, so intervention is cosmetic and optional"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing syringomas with xanthelasma and thereby missing an opportunity to counsel on lipids, or vice versa"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of syringoma (eyelid)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "syringoma_eyelid-matrix",
+      "title": "Syringoma (eyelid): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Syringomas are benign adnexal tumours of the eccrine sweat ducts presenting as multiple small, soft, skin-coloured to yellowish",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Slit-lamp and external examination of the periorbital distribution, Dermoscopy to assess surface and vascular pattern, Skin",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Xanthelasma palpebrarum, Milia, Sebaceous hyperplasia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassurance that eyelid syringomas are benign and pose no threat to vision, so intervention is cosmetic and optional",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing syringomas with xanthelasma and thereby missing an opportunity to counsel on lipids, or vice versa",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for syringoma (eyelid)."
+    }
+  ],
+  "diagrams": []
 }

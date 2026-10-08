@@ -1,175 +1,153 @@
 {
- "id": "essential_thrombocythemia",
- "name": "Essential thrombocythaemia",
- "aliases": [
-  "ET",
-  "essential thrombocythaemia",
-  "essential thrombocythemia",
-  "essential thrombocytosis",
-  "primary thrombocythaemia"
- ],
- "class": "non_infective",
- "system": "Haematology",
- "specialty": "Haematology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine",
-  "sourceEdition": "22e",
-  "pages": null,
-  "clinicalPearls": [
-   "A myeloproliferative neoplasm characterised by a sustained rise in platelet count from clonal overproduction of megakaryocytes",
-   "Many patients are asymptomatic and detected on a routine blood count, while others present with vasomotor symptoms such as headache, erythromelalgia (burning red extremities), and visual disturbance",
-   "Both arterial and venous thrombosis and, paradoxically, bleeding can occur; bleeding risk rises with very high platelet counts due to acquired von Willebrand factor deficiency",
-   "Most cases carry a driver mutation in JAK2, CALR, or MPL, which supports clonality and helps distinguish ET from reactive thrombocytosis",
-   "Reactive causes of a high platelet count (iron deficiency, infection, inflammation, malignancy, post-splenectomy) must be excluded before diagnosing ET",
-   "Treatment intensity is guided by thrombotic risk, factoring in age, prior thrombosis, and JAK2 status; low-dose aspirin is used for microvascular symptoms and thrombosis prevention",
-   "Cytoreduction (for example with hydroxyurea) is reserved for higher-risk patients to lower the platelet count and reduce thrombotic events",
-   "Long-term risks include transformation to myelofibrosis or, less commonly, acute leukaemia"
+  "id": "essential_thrombocythemia",
+  "name": "Essential thrombocythaemia",
+  "aliases": [
+    "ET",
+    "essential thrombocythaemia",
+    "essential thrombocythemia",
+    "essential thrombocytosis",
+    "primary thrombocythaemia"
   ],
-  "pathophysiology": "ET is a clonal disorder of the haematopoietic stem cell in which constitutive activation of the JAK-STAT signalling pathway, most often through JAK2 V617F, CALR, or MPL mutations, drives excessive megakaryocyte proliferation and platelet production independent of normal regulatory signals. The expanded platelet mass and qualitatively abnormal platelets promote thrombosis in the microcirculation and larger vessels. At very high counts, platelets adsorb and clear large von Willebrand factor multimers, producing an acquired von Willebrand syndrome and a paradoxical bleeding tendency. Over years the clone may evolve towards marrow fibrosis or acute leukaemia.",
-  "additionalDifferentials": [
-   "Reactive (secondary) thrombocytosis from iron deficiency, infection, or inflammation",
-   "Chronic myeloid leukaemia",
-   "Polycythaemia vera",
-   "Primary myelofibrosis (prefibrotic stage)",
-   "Myelodysplastic syndrome with thrombocytosis",
-   "Post-splenectomy thrombocytosis"
-  ],
-  "additionalInvestigations": [
-   "Full blood count and blood film to confirm sustained thrombocytosis and assess morphology",
-   "Molecular testing for JAK2 V617F, and if negative, CALR and MPL mutations",
-   "BCR-ABL1 testing to exclude chronic myeloid leukaemia",
-   "Bone marrow aspirate and trephine showing enlarged, clustered megakaryocytes",
-   "Iron studies, inflammatory markers, and screening for occult malignancy to exclude reactive causes",
-   "Assessment for acquired von Willebrand syndrome when counts are very high or bleeding occurs"
-  ],
-  "redFlags": [
-   "Acute arterial or venous thrombosis, including stroke, myocardial infarction, or splanchnic vein thrombosis",
-   "Significant haemorrhage, particularly with extreme thrombocytosis and acquired von Willebrand deficiency",
-   "Transient neurological or visual symptoms indicating microvascular ischaemia",
-   "Features of transformation to myelofibrosis or acute leukaemia such as worsening cytopenias or new blasts"
-  ],
-  "prognosis": "Life expectancy in ET is close to that of the general population for many patients, with the principal threats being thrombosis and haemorrhage; a minority progress over years to myelofibrosis or acute leukaemia, which markedly worsens outlook.",
-  "pitfalls": [
-   "Diagnosing ET without excluding reactive thrombocytosis and chronic myeloid leukaemia",
-   "Prescribing aspirin at very high platelet counts without recognising acquired von Willebrand syndrome and bleeding risk",
-   "Underestimating thrombotic risk in JAK2-positive or older patients",
-   "Attributing microvascular symptoms to unrelated causes and missing the underlying disorder",
-   "Failing to reassess for transformation when the blood picture changes"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Low-dose aspirin for vasomotor and microvascular symptoms and thrombosis prevention, provided acquired von Willebrand syndrome is excluded",
-   "Risk-adapted platelet-lowering cytoreduction, using hydroxycarbamide first-line with interferon-alfa or anagrelide as alternatives, guided by age, prior thrombosis and JAK2 status",
-   "Modify thrombotic risk factors such as smoking, hypertension and hyperlipidaemia",
-   "Suspend antiplatelet therapy and manage the acquired von Willebrand syndrome when bleeding occurs at very high counts",
-   "Serial monitoring of the full blood count and surveillance for progression to myelofibrosis or acute leukaemia",
-   "Ongoing haematology review with individualised risk reassessment"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "essential_thrombocythemia-pathway",
-   "title": "Essential thrombocythaemia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A myeloproliferative neoplasm characterised by a sustained rise in platelet count from clonal overproduction of megakaryocytes",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Acute arterial or venous thrombosis, including stroke, myocardial infarction, or splanchnic vein thrombosis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full blood count and blood film to confirm sustained thrombocytosis and assess morphology, Molecular testing for JAK2 V617F, and if negative, CALR and MPL mutations, BCR-ABL1 testing to exclude chronic myeloid leukaemia"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Low-dose aspirin for vasomotor and microvascular symptoms and thrombosis prevention, provided acquired von Willebrand syndrome is excluded"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Diagnosing ET without excluding reactive thrombocytosis and chronic myeloid leukaemia"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of essential thrombocythaemia."
-  }
- ],
- "tables": [
-  {
-   "id": "essential_thrombocythemia-matrix",
-   "title": "Essential thrombocythaemia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A myeloproliferative neoplasm characterised by a sustained rise in platelet count from clonal overproduction of megakaryocytes",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematology",
+  "specialty": "Haematology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine",
+    "sourceEdition": "22e",
+    "pages": null,
+    "clinicalPearls": [
+      "A myeloproliferative neoplasm characterised by a sustained rise in platelet count from clonal overproduction of megakaryocytes",
+      "Many patients are asymptomatic and detected on a routine blood count, while others present with vasomotor symptoms such as headache, erythromelalgia (burning red extremities), and visual disturbance",
+      "Both arterial and venous thrombosis and, paradoxically, bleeding can occur; bleeding risk rises with very high platelet counts due to acquired von Willebrand factor deficiency",
+      "Most cases carry a driver mutation in JAK2, CALR, or MPL, which supports clonality and helps distinguish ET from reactive thrombocytosis",
+      "Reactive causes of a high platelet count (iron deficiency, infection, inflammation, malignancy, post-splenectomy) must be excluded before diagnosing ET",
+      "Treatment intensity is guided by thrombotic risk, factoring in age, prior thrombosis, and JAK2 status; low-dose aspirin is used for microvascular symptoms and thrombosis prevention",
+      "Cytoreduction (for example with hydroxyurea) is reserved for higher-risk patients to lower the platelet count and reduce thrombotic events",
+      "Long-term risks include transformation to myelofibrosis or, less commonly, acute leukaemia"
     ],
-    [
-     "Key Investigations",
-     "Full blood count and blood film to confirm sustained thrombocytosis and assess morphology, Molecular testing for JAK2 V617F, and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "ET is a clonal disorder of the haematopoietic stem cell in which constitutive activation of the JAK-STAT signalling pathway, most often through JAK2 V617F, CALR, or MPL mutations, drives excessive megakaryocyte proliferation and platelet production independent of normal regulatory signals. The expanded platelet mass and qualitatively abnormal platelets promote thrombosis in the microcirculation and larger vessels. At very high counts, platelets adsorb and clear large von Willebrand factor multimers, producing an acquired von Willebrand syndrome and a paradoxical bleeding tendency. Over years the clone may evolve towards marrow fibrosis or acute leukaemia.",
+    "additionalDifferentials": [
+      "Reactive (secondary) thrombocytosis from iron deficiency, infection, or inflammation",
+      "Chronic myeloid leukaemia",
+      "Polycythaemia vera",
+      "Primary myelofibrosis (prefibrotic stage)",
+      "Myelodysplastic syndrome with thrombocytosis",
+      "Post-splenectomy thrombocytosis"
     ],
-    [
-     "Primary Differentials",
-     "Reactive (secondary) thrombocytosis from iron deficiency, infection, or inflammation, Chronic myeloid leukaemia, Polycythaemia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full blood count and blood film to confirm sustained thrombocytosis and assess morphology",
+      "Molecular testing for JAK2 V617F, and if negative, CALR and MPL mutations",
+      "BCR-ABL1 testing to exclude chronic myeloid leukaemia",
+      "Bone marrow aspirate and trephine showing enlarged, clustered megakaryocytes",
+      "Iron studies, inflammatory markers, and screening for occult malignancy to exclude reactive causes",
+      "Assessment for acquired von Willebrand syndrome when counts are very high or bleeding occurs"
     ],
-    [
-     "Management Strategy",
-     "Low-dose aspirin for vasomotor and microvascular symptoms and thrombosis prevention, provided acquired von Willebrand syndrome is",
-     "Core treatment modality"
+    "redFlags": [
+      "Acute arterial or venous thrombosis, including stroke, myocardial infarction, or splanchnic vein thrombosis",
+      "Significant haemorrhage, particularly with extreme thrombocytosis and acquired von Willebrand deficiency",
+      "Transient neurological or visual symptoms indicating microvascular ischaemia",
+      "Features of transformation to myelofibrosis or acute leukaemia such as worsening cytopenias or new blasts"
     ],
-    [
-     "Clinical Pitfall",
-     "Diagnosing ET without excluding reactive thrombocytosis and chronic myeloid leukaemia",
-     "Prevent diagnostic or management error"
+    "prognosis": "Life expectancy in ET is close to that of the general population for many patients, with the principal threats being thrombosis and haemorrhage; a minority progress over years to myelofibrosis or acute leukaemia, which markedly worsens outlook.",
+    "pitfalls": [
+      "Diagnosing ET without excluding reactive thrombocytosis and chronic myeloid leukaemia",
+      "Prescribing aspirin at very high platelet counts without recognising acquired von Willebrand syndrome and bleeding risk",
+      "Underestimating thrombotic risk in JAK2-positive or older patients",
+      "Attributing microvascular symptoms to unrelated causes and missing the underlying disorder",
+      "Failing to reassess for transformation when the blood picture changes"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Low-dose aspirin for vasomotor and microvascular symptoms and thrombosis prevention, provided acquired von Willebrand syndrome is excluded",
+      "Risk-adapted platelet-lowering cytoreduction, using hydroxycarbamide first-line with interferon-alfa or anagrelide as alternatives, guided by age, prior thrombosis and JAK2 status",
+      "Modify thrombotic risk factors such as smoking, hypertension and hyperlipidaemia",
+      "Suspend antiplatelet therapy and manage the acquired von Willebrand syndrome when bleeding occurs at very high counts",
+      "Serial monitoring of the full blood count and surveillance for progression to myelofibrosis or acute leukaemia",
+      "Ongoing haematology review with individualised risk reassessment"
     ]
-   ],
-   "caption": "Overview comparison matrix for essential thrombocythaemia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "essential-thrombocythemia-real-image",
-   "title": "Essential thrombocythaemia: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "essential_thrombocythemia-pathway",
+      "title": "Essential thrombocythaemia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A myeloproliferative neoplasm characterised by a sustained rise in platelet count from clonal overproduction of megakaryocytes",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Acute arterial or venous thrombosis, including stroke, myocardial infarction, or splanchnic vein thrombosis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full blood count and blood film to confirm sustained thrombocytosis and assess morphology, Molecular testing for JAK2 V617F, and if negative, CALR and MPL mutations, BCR-ABL1 testing to exclude chronic myeloid leukaemia"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Low-dose aspirin for vasomotor and microvascular symptoms and thrombosis prevention, provided acquired von Willebrand syndrome is excluded"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Diagnosing ET without excluding reactive thrombocytosis and chronic myeloid leukaemia"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of essential thrombocythaemia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "essential_thrombocythemia-matrix",
+      "title": "Essential thrombocythaemia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A myeloproliferative neoplasm characterised by a sustained rise in platelet count from clonal overproduction of megakaryocytes",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full blood count and blood film to confirm sustained thrombocytosis and assess morphology, Molecular testing for JAK2 V617F, and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Reactive (secondary) thrombocytosis from iron deficiency, infection, or inflammation, Chronic myeloid leukaemia, Polycythaemia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Low-dose aspirin for vasomotor and microvascular symptoms and thrombosis prevention, provided acquired von Willebrand syndrome is",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Diagnosing ET without excluding reactive thrombocytosis and chronic myeloid leukaemia",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for essential thrombocythaemia."
+    }
+  ],
+  "diagrams": []
 }

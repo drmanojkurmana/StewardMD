@@ -1,172 +1,150 @@
 {
- "id": "dry_socket",
- "name": "Dry socket",
- "aliases": [
-  "alveolar osteitis",
-  "localised osteitis",
-  "fibrinolytic alveolitis",
-  "post-extraction alveolitis"
- ],
- "class": "non_infective",
- "system": "Oral / Dental / Maxillofacial",
- "specialty": "Dentistry / OMFS",
- "referenceOnly": true,
- "reference": {
-  "source": "Standard oral medicine & OMFS references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Dry socket is a painful complication of tooth extraction caused by disintegration or loss of the protective blood clot, exposing alveolar bone",
-   "Severe throbbing pain characteristically begins two to four days after extraction, later than the pain of the surgery itself",
-   "The socket appears empty with exposed bone and often malodour, but there is usually no purulent discharge or significant systemic upset",
-   "It is most common after mandibular molar extractions, particularly lower third molars",
-   "Recognised risk factors include smoking, oral contraceptive use, traumatic or difficult extractions, and poor oral hygiene",
-   "It is primarily an inflammatory and fibrinolytic process rather than a true infection, so antibiotics are usually not indicated",
-   "Management is supportive: irrigation, gentle debridement, and placement of a sedative dressing to relieve pain and protect the bone",
-   "Preventive measures include atraumatic technique, avoiding smoking, and good postoperative care"
+  "id": "dry_socket",
+  "name": "Dry socket",
+  "aliases": [
+    "alveolar osteitis",
+    "localised osteitis",
+    "fibrinolytic alveolitis",
+    "post-extraction alveolitis"
   ],
-  "pathophysiology": "Dry socket, or alveolar osteitis, develops when the blood clot that normally fills and protects an extraction socket is lost prematurely, often through excessive local fibrinolysis. Breakdown of the clot exposes the alveolar bone and nerve endings to the oral environment, producing intense pain. Contributing factors such as smoking, bacterial contamination, trauma during extraction, and elevated fibrinolytic activity impair clot stability and delay the normal organisation and healing of the socket. The condition is characterised by inflammation of the exposed bone rather than an established suppurative infection.",
-  "additionalDifferentials": [
-   "Post-extraction infection with suppuration",
-   "Retained root fragment or foreign body",
-   "Osteomyelitis of the jaw",
-   "Medication-related osteonecrosis of the jaw",
-   "Referred or neuropathic post-surgical pain"
-  ],
-  "additionalInvestigations": [
-   "Clinical examination of the socket for an absent clot and exposed bone",
-   "Assessment for systemic signs to distinguish from spreading infection",
-   "Radiography if a retained root, foreign body, or bony pathology is suspected",
-   "Review of risk factors including smoking and medication history",
-   "Consideration of osteonecrosis risk in patients on antiresorptive therapy"
-  ],
-  "redFlags": [
-   "Spreading swelling, fever, trismus, or purulent discharge suggesting true infection rather than simple dry socket",
-   "Failure to heal or exposed necrotic bone in a patient on antiresorptive or antiangiogenic drugs raising concern for osteonecrosis",
-   "Persistent numbness or worsening pain suggesting nerve injury or osteomyelitis"
-  ],
-  "prognosis": "Dry socket is self-limiting and typically resolves over one to two weeks with supportive care and adequate analgesia, without long-term sequelae in most patients.",
-  "pitfalls": [
-   "Prescribing antibiotics for uncomplicated dry socket, which is not an infection",
-   "Mistaking spreading infection or osteomyelitis for simple alveolar osteitis",
-   "Overlooking a retained root fragment as the cause of persistent socket pain",
-   "Failing to consider medication-related osteonecrosis in at-risk patients with non-healing sockets"
-  ],
-  "references": [
-   "Burket's Oral Medicine",
-   "Standard OMFS references"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Gently irrigate the socket with warm saline to remove food debris and necrotic material from the exposed bone",
-   "Place a sedative obtundent intra-alveolar dressing (for example one containing eugenol) to cover exposed bone and relieve pain, changing it at review as needed",
-   "Provide adequate analgesia with simple analgesics and non-steroidal anti-inflammatory drugs for the self-limiting inflammatory pain",
-   "Avoid routine antibiotics, since this is a fibrinolytic and inflammatory process rather than an established infection",
-   "Advise smoking cessation and meticulous oral hygiene with warm saline or antiseptic rinses to support healing",
-   "Review until symptoms settle, and image to exclude a retained root, foreign body or bony pathology if pain persists",
-   "Escalate and reconsider the diagnosis if spreading infection develops or if the patient is on antiresorptive therapy raising osteonecrosis risk"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "dry_socket-pathway",
-   "title": "Dry socket: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Dry socket is a painful complication of tooth extraction caused by disintegration or loss of the protective blood clot, exposing alveolar bone",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Spreading swelling, fever, trismus, or purulent discharge suggesting true infection rather than simple dry socket",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical examination of the socket for an absent clot and exposed bone, Assessment for systemic signs to distinguish from spreading infection, Radiography if a retained root, foreign body, or bony pathology is suspected"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Gently irrigate the socket with warm saline to remove food debris and necrotic material from the exposed bone"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Prescribing antibiotics for uncomplicated dry socket, which is not an infection"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of dry socket."
-  }
- ],
- "tables": [
-  {
-   "id": "dry_socket-matrix",
-   "title": "Dry socket: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Dry socket is a painful complication of tooth extraction caused by disintegration or loss of the protective blood clot, exposing",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Oral / Dental / Maxillofacial",
+  "specialty": "Dentistry / OMFS",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Standard oral medicine & OMFS references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Dry socket is a painful complication of tooth extraction caused by disintegration or loss of the protective blood clot, exposing alveolar bone",
+      "Severe throbbing pain characteristically begins two to four days after extraction, later than the pain of the surgery itself",
+      "The socket appears empty with exposed bone and often malodour, but there is usually no purulent discharge or significant systemic upset",
+      "It is most common after mandibular molar extractions, particularly lower third molars",
+      "Recognised risk factors include smoking, oral contraceptive use, traumatic or difficult extractions, and poor oral hygiene",
+      "It is primarily an inflammatory and fibrinolytic process rather than a true infection, so antibiotics are usually not indicated",
+      "Management is supportive: irrigation, gentle debridement, and placement of a sedative dressing to relieve pain and protect the bone",
+      "Preventive measures include atraumatic technique, avoiding smoking, and good postoperative care"
     ],
-    [
-     "Key Investigations",
-     "Clinical examination of the socket for an absent clot and exposed bone, Assessment for systemic signs to distinguish from",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Dry socket, or alveolar osteitis, develops when the blood clot that normally fills and protects an extraction socket is lost prematurely, often through excessive local fibrinolysis. Breakdown of the clot exposes the alveolar bone and nerve endings to the oral environment, producing intense pain. Contributing factors such as smoking, bacterial contamination, trauma during extraction, and elevated fibrinolytic activity impair clot stability and delay the normal organisation and healing of the socket. The condition is characterised by inflammation of the exposed bone rather than an established suppurative infection.",
+    "additionalDifferentials": [
+      "Post-extraction infection with suppuration",
+      "Retained root fragment or foreign body",
+      "Osteomyelitis of the jaw",
+      "Medication-related osteonecrosis of the jaw",
+      "Referred or neuropathic post-surgical pain"
     ],
-    [
-     "Primary Differentials",
-     "Post-extraction infection with suppuration, Retained root fragment or foreign body, Osteomyelitis of the jaw",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical examination of the socket for an absent clot and exposed bone",
+      "Assessment for systemic signs to distinguish from spreading infection",
+      "Radiography if a retained root, foreign body, or bony pathology is suspected",
+      "Review of risk factors including smoking and medication history",
+      "Consideration of osteonecrosis risk in patients on antiresorptive therapy"
     ],
-    [
-     "Management Strategy",
-     "Gently irrigate the socket with warm saline to remove food debris and necrotic material from the exposed bone",
-     "Core treatment modality"
+    "redFlags": [
+      "Spreading swelling, fever, trismus, or purulent discharge suggesting true infection rather than simple dry socket",
+      "Failure to heal or exposed necrotic bone in a patient on antiresorptive or antiangiogenic drugs raising concern for osteonecrosis",
+      "Persistent numbness or worsening pain suggesting nerve injury or osteomyelitis"
     ],
-    [
-     "Clinical Pitfall",
-     "Prescribing antibiotics for uncomplicated dry socket, which is not an infection",
-     "Prevent diagnostic or management error"
+    "prognosis": "Dry socket is self-limiting and typically resolves over one to two weeks with supportive care and adequate analgesia, without long-term sequelae in most patients.",
+    "pitfalls": [
+      "Prescribing antibiotics for uncomplicated dry socket, which is not an infection",
+      "Mistaking spreading infection or osteomyelitis for simple alveolar osteitis",
+      "Overlooking a retained root fragment as the cause of persistent socket pain",
+      "Failing to consider medication-related osteonecrosis in at-risk patients with non-healing sockets"
+    ],
+    "references": [
+      "Burket's Oral Medicine",
+      "Standard OMFS references"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Gently irrigate the socket with warm saline to remove food debris and necrotic material from the exposed bone",
+      "Place a sedative obtundent intra-alveolar dressing (for example one containing eugenol) to cover exposed bone and relieve pain, changing it at review as needed",
+      "Provide adequate analgesia with simple analgesics and non-steroidal anti-inflammatory drugs for the self-limiting inflammatory pain",
+      "Avoid routine antibiotics, since this is a fibrinolytic and inflammatory process rather than an established infection",
+      "Advise smoking cessation and meticulous oral hygiene with warm saline or antiseptic rinses to support healing",
+      "Review until symptoms settle, and image to exclude a retained root, foreign body or bony pathology if pain persists",
+      "Escalate and reconsider the diagnosis if spreading infection develops or if the patient is on antiresorptive therapy raising osteonecrosis risk"
     ]
-   ],
-   "caption": "Overview comparison matrix for dry socket."
-  }
- ],
- "diagrams": [
-  {
-   "id": "dry-socket-real-image",
-   "title": "Dry socket: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "dry_socket-pathway",
+      "title": "Dry socket: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Dry socket is a painful complication of tooth extraction caused by disintegration or loss of the protective blood clot, exposing alveolar bone",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Spreading swelling, fever, trismus, or purulent discharge suggesting true infection rather than simple dry socket",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical examination of the socket for an absent clot and exposed bone, Assessment for systemic signs to distinguish from spreading infection, Radiography if a retained root, foreign body, or bony pathology is suspected"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Gently irrigate the socket with warm saline to remove food debris and necrotic material from the exposed bone"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Prescribing antibiotics for uncomplicated dry socket, which is not an infection"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of dry socket."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "dry_socket-matrix",
+      "title": "Dry socket: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Dry socket is a painful complication of tooth extraction caused by disintegration or loss of the protective blood clot, exposing",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical examination of the socket for an absent clot and exposed bone, Assessment for systemic signs to distinguish from",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Post-extraction infection with suppuration, Retained root fragment or foreign body, Osteomyelitis of the jaw",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Gently irrigate the socket with warm saline to remove food debris and necrotic material from the exposed bone",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Prescribing antibiotics for uncomplicated dry socket, which is not an infection",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for dry socket."
+    }
+  ],
+  "diagrams": []
 }

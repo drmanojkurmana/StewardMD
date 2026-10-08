@@ -1,175 +1,153 @@
 {
- "id": "dyschromatosis",
- "name": "dyschromatosis",
- "aliases": [
-  "dyschromatosis symmetrica hereditaria",
-  "dyschromatosis universalis hereditaria"
- ],
- "class": "non_infective",
- "system": "Integumentary",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A group of inherited pigmentary genodermatoses characterised by the coexistence of hyperpigmented and hypopigmented macules producing a mottled or reticulate pattern.",
-   "Dyschromatosis symmetrica hereditaria (DSH) is caused by mutations in ADAR1 (DSRAD) and typically presents with symmetrical reticulate macules on the dorsa of the hands and feet.",
-   "Dyschromatosis universalis hereditaria (DUH) shows generalised, more widespread mixed macules and is associated with ABCB6 and other loci.",
-   "Onset is usually in infancy or early childhood, with lesions becoming established before puberty and remaining largely stable thereafter.",
-   "Inheritance is most often autosomal dominant, though recessive kindreds are described, so a detailed pedigree is valuable.",
-   "DSH may rarely be associated with neurological features such as dystonia and developmental delay, reflecting the wider role of ADAR1 in RNA editing.",
-   "The face, trunk, and limbs can be involved in DUH, and mucosae and nails are usually spared.",
-   "Diagnosis is clinical, supported by family history and, where available, molecular confirmation; histology shows corresponding increases and decreases in epidermal melanin."
+  "id": "dyschromatosis",
+  "name": "dyschromatosis",
+  "aliases": [
+    "dyschromatosis symmetrica hereditaria",
+    "dyschromatosis universalis hereditaria"
   ],
-  "pathophysiology": "The dyschromatoses arise from disturbed regulation of melanin production and distribution rather than melanocyte loss. In dyschromatosis symmetrica hereditaria, loss-of-function mutations in ADAR1, which encodes an adenosine deaminase acting on double-stranded RNA (RNA editing enzyme), disrupt post-transcriptional RNA editing; the resulting dysregulation of melanocyte gene expression produces adjacent zones of increased and decreased epidermal melanin, giving the reticulate acral pattern. In dyschromatosis universalis hereditaria, mutations in ABCB6, a mitochondrial and lysosomal porphyrin transporter contributing to melanosome function, and in other identified loci, similarly perturb the balance of melanogenesis to yield widespread mixed macules. Histologically the hyperpigmented macules show increased basal melanin and the hypopigmented macules show reduced melanin, with melanocytes generally preserved in number, confirming that the disorder reflects abnormal pigment regulation within a normal melanocyte population.",
-  "additionalDifferentials": [
-   "Dowling-Degos disease",
-   "Reticulate acropigmentation of Kitamura",
-   "Xeroderma pigmentosum",
-   "Vitiligo with perilesional hyperpigmentation",
-   "Poikiloderma of various causes",
-   "Naevoid pigmentary mosaicism",
-   "Acropigmentation of Dohi variants"
-  ],
-  "additionalInvestigations": [
-   "Detailed three-generation family pedigree to establish inheritance pattern",
-   "Molecular genetic testing for ADAR1 (DSH) and ABCB6 and related genes (DUH)",
-   "Skin biopsy of paired hyper- and hypopigmented macules showing corresponding melanin changes",
-   "Wood's lamp examination to characterise the pattern of pigment change",
-   "Neurological assessment where dystonia or developmental features are present in DSH",
-   "Dermoscopy to define the reticulate pigmentary pattern"
-  ],
-  "redFlags": [
-   "Neurological deterioration, dystonia, or developmental regression suggesting ADAR1-related systemic involvement",
-   "Marked photosensitivity or early cutaneous malignancy raising suspicion of xeroderma pigmentosum",
-   "Progressive poikiloderma with atrophy and telangiectasia indicating an alternative genodermatosis",
-   "Rapidly changing or ulcerating pigmented lesions warranting exclusion of malignancy"
-  ],
-  "prognosis": "The dyschromatoses are benign, stable, and lifelong pigmentary disorders that do not undergo malignant change, and the cutaneous findings are of cosmetic rather than medical concern. Prognosis is chiefly determined by any associated systemic features, notably the rare neurological involvement described in some ADAR1-related cases.",
-  "pitfalls": [
-   "Confusing the reticulate pattern with Dowling-Degos disease or Kitamura acropigmentation, which have distinct distributions and genetics",
-   "Overlooking xeroderma pigmentosum when photosensitivity or early skin cancers accompany the dyschromia",
-   "Failing to enquire about neurological symptoms in suspected DSH",
-   "Assuming a purely cosmetic disorder and omitting genetic counselling for affected families",
-   "Attempting aggressive depigmenting or laser therapy for a stable, benign, and genetically determined pattern"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology, current edition",
-   "Fitzpatrick's Dermatology in General Medicine, current edition",
-   "Harper's Textbook of Paediatric Dermatology, current edition"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassure the patient that this is a benign, stable, lifelong pigmentary disorder with no malignant potential, so no medical treatment is required",
-   "Advise photoprotection with broad-spectrum sunscreen to reduce the contrast between hyperpigmented and hypopigmented macules",
-   "Offer cosmetic camouflage and discuss the limited and unpredictable role of laser therapy for cosmetically troublesome lesions",
-   "Assess for and refer any neurological features such as dystonia or developmental delay in dyschromatosis symmetrica hereditaria, reflecting the wider role of ADAR1",
-   "Confirm the subtype where needed with molecular testing (ADAR1 in DSH, ABCB6 and related loci in DUH) and paired skin biopsy of affected macules",
-   "Offer genetic counselling based on the typically autosomal dominant inheritance, using a detailed pedigree and family screening"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "dyschromatosis-pathway",
-   "title": "dyschromatosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A group of inherited pigmentary genodermatoses characterised by the coexistence of hyperpigmented and hypopigmented macules producing a mottled or reticulate pattern.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Neurological deterioration, dystonia, or developmental regression suggesting ADAR1-related systemic involvement",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Detailed three-generation family pedigree to establish inheritance pattern, Molecular genetic testing for ADAR1 (DSH) and ABCB6 and related genes (DUH), Skin biopsy of paired hyper- and hypopigmented macules showing"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassure the patient that this is a benign, stable, lifelong pigmentary disorder with no malignant potential, so no medical treatment is required"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing the reticulate pattern with Dowling-Degos disease or Kitamura acropigmentation, which have distinct distributions and genetics"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of dyschromatosis."
-  }
- ],
- "tables": [
-  {
-   "id": "dyschromatosis-matrix",
-   "title": "dyschromatosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A group of inherited pigmentary genodermatoses characterised by the coexistence of hyperpigmented and hypopigmented macules",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Integumentary",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A group of inherited pigmentary genodermatoses characterised by the coexistence of hyperpigmented and hypopigmented macules producing a mottled or reticulate pattern.",
+      "Dyschromatosis symmetrica hereditaria (DSH) is caused by mutations in ADAR1 (DSRAD) and typically presents with symmetrical reticulate macules on the dorsa of the hands and feet.",
+      "Dyschromatosis universalis hereditaria (DUH) shows generalised, more widespread mixed macules and is associated with ABCB6 and other loci.",
+      "Onset is usually in infancy or early childhood, with lesions becoming established before puberty and remaining largely stable thereafter.",
+      "Inheritance is most often autosomal dominant, though recessive kindreds are described, so a detailed pedigree is valuable.",
+      "DSH may rarely be associated with neurological features such as dystonia and developmental delay, reflecting the wider role of ADAR1 in RNA editing.",
+      "The face, trunk, and limbs can be involved in DUH, and mucosae and nails are usually spared.",
+      "Diagnosis is clinical, supported by family history and, where available, molecular confirmation; histology shows corresponding increases and decreases in epidermal melanin."
     ],
-    [
-     "Key Investigations",
-     "Detailed three-generation family pedigree to establish inheritance pattern, Molecular genetic testing for ADAR1 (DSH) and ABCB6",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The dyschromatoses arise from disturbed regulation of melanin production and distribution rather than melanocyte loss. In dyschromatosis symmetrica hereditaria, loss-of-function mutations in ADAR1, which encodes an adenosine deaminase acting on double-stranded RNA (RNA editing enzyme), disrupt post-transcriptional RNA editing; the resulting dysregulation of melanocyte gene expression produces adjacent zones of increased and decreased epidermal melanin, giving the reticulate acral pattern. In dyschromatosis universalis hereditaria, mutations in ABCB6, a mitochondrial and lysosomal porphyrin transporter contributing to melanosome function, and in other identified loci, similarly perturb the balance of melanogenesis to yield widespread mixed macules. Histologically the hyperpigmented macules show increased basal melanin and the hypopigmented macules show reduced melanin, with melanocytes generally preserved in number, confirming that the disorder reflects abnormal pigment regulation within a normal melanocyte population.",
+    "additionalDifferentials": [
+      "Dowling-Degos disease",
+      "Reticulate acropigmentation of Kitamura",
+      "Xeroderma pigmentosum",
+      "Vitiligo with perilesional hyperpigmentation",
+      "Poikiloderma of various causes",
+      "Naevoid pigmentary mosaicism",
+      "Acropigmentation of Dohi variants"
     ],
-    [
-     "Primary Differentials",
-     "Dowling-Degos disease, Reticulate acropigmentation of Kitamura, Xeroderma pigmentosum",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Detailed three-generation family pedigree to establish inheritance pattern",
+      "Molecular genetic testing for ADAR1 (DSH) and ABCB6 and related genes (DUH)",
+      "Skin biopsy of paired hyper- and hypopigmented macules showing corresponding melanin changes",
+      "Wood's lamp examination to characterise the pattern of pigment change",
+      "Neurological assessment where dystonia or developmental features are present in DSH",
+      "Dermoscopy to define the reticulate pigmentary pattern"
     ],
-    [
-     "Management Strategy",
-     "Reassure the patient that this is a benign, stable, lifelong pigmentary disorder with no malignant potential, so no medical",
-     "Core treatment modality"
+    "redFlags": [
+      "Neurological deterioration, dystonia, or developmental regression suggesting ADAR1-related systemic involvement",
+      "Marked photosensitivity or early cutaneous malignancy raising suspicion of xeroderma pigmentosum",
+      "Progressive poikiloderma with atrophy and telangiectasia indicating an alternative genodermatosis",
+      "Rapidly changing or ulcerating pigmented lesions warranting exclusion of malignancy"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing the reticulate pattern with Dowling-Degos disease or Kitamura acropigmentation, which have distinct distributions and",
-     "Prevent diagnostic or management error"
+    "prognosis": "The dyschromatoses are benign, stable, and lifelong pigmentary disorders that do not undergo malignant change, and the cutaneous findings are of cosmetic rather than medical concern. Prognosis is chiefly determined by any associated systemic features, notably the rare neurological involvement described in some ADAR1-related cases.",
+    "pitfalls": [
+      "Confusing the reticulate pattern with Dowling-Degos disease or Kitamura acropigmentation, which have distinct distributions and genetics",
+      "Overlooking xeroderma pigmentosum when photosensitivity or early skin cancers accompany the dyschromia",
+      "Failing to enquire about neurological symptoms in suspected DSH",
+      "Assuming a purely cosmetic disorder and omitting genetic counselling for affected families",
+      "Attempting aggressive depigmenting or laser therapy for a stable, benign, and genetically determined pattern"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology, current edition",
+      "Fitzpatrick's Dermatology in General Medicine, current edition",
+      "Harper's Textbook of Paediatric Dermatology, current edition"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassure the patient that this is a benign, stable, lifelong pigmentary disorder with no malignant potential, so no medical treatment is required",
+      "Advise photoprotection with broad-spectrum sunscreen to reduce the contrast between hyperpigmented and hypopigmented macules",
+      "Offer cosmetic camouflage and discuss the limited and unpredictable role of laser therapy for cosmetically troublesome lesions",
+      "Assess for and refer any neurological features such as dystonia or developmental delay in dyschromatosis symmetrica hereditaria, reflecting the wider role of ADAR1",
+      "Confirm the subtype where needed with molecular testing (ADAR1 in DSH, ABCB6 and related loci in DUH) and paired skin biopsy of affected macules",
+      "Offer genetic counselling based on the typically autosomal dominant inheritance, using a detailed pedigree and family screening"
     ]
-   ],
-   "caption": "Overview comparison matrix for dyschromatosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "dyschromatosis-real-image",
-   "title": "dyschromatosis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "dyschromatosis-pathway",
+      "title": "dyschromatosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A group of inherited pigmentary genodermatoses characterised by the coexistence of hyperpigmented and hypopigmented macules producing a mottled or reticulate pattern.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Neurological deterioration, dystonia, or developmental regression suggesting ADAR1-related systemic involvement",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Detailed three-generation family pedigree to establish inheritance pattern, Molecular genetic testing for ADAR1 (DSH) and ABCB6 and related genes (DUH), Skin biopsy of paired hyper- and hypopigmented macules showing"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassure the patient that this is a benign, stable, lifelong pigmentary disorder with no malignant potential, so no medical treatment is required"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing the reticulate pattern with Dowling-Degos disease or Kitamura acropigmentation, which have distinct distributions and genetics"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of dyschromatosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "dyschromatosis-matrix",
+      "title": "dyschromatosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A group of inherited pigmentary genodermatoses characterised by the coexistence of hyperpigmented and hypopigmented macules",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Detailed three-generation family pedigree to establish inheritance pattern, Molecular genetic testing for ADAR1 (DSH) and ABCB6",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Dowling-Degos disease, Reticulate acropigmentation of Kitamura, Xeroderma pigmentosum",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassure the patient that this is a benign, stable, lifelong pigmentary disorder with no malignant potential, so no medical",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing the reticulate pattern with Dowling-Degos disease or Kitamura acropigmentation, which have distinct distributions and",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for dyschromatosis."
+    }
+  ],
+  "diagrams": []
 }

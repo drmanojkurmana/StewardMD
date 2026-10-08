@@ -1,174 +1,152 @@
 {
- "id": "multiple_endocrine_neoplasia_type_4",
- "name": "Multiple endocrine neoplasia type 4 (CDKN1B)",
- "aliases": [
-  "multiple endocrine neoplasia type 4",
-  "MEN4",
-  "MENX",
-  "CDKN1B",
-  "p27 deficiency"
- ],
- "class": "non_infective",
- "system": "Endocrine / Genetics",
- "specialty": "Endocrinology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Textbook of Endocrinology / OMIM",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Rare autosomal dominant syndrome caused by variants in CDKN1B, encoding the cell-cycle inhibitor p27",
-   "Clinically resembles MEN1, with primary hyperparathyroidism and anterior pituitary tumours as the commonest features",
-   "It is an important consideration in patients with a MEN1-like phenotype who test negative for MEN1 mutations",
-   "Parathyroid disease is usually the earliest and most frequent manifestation, causing hypercalcaemia",
-   "Pituitary tumours may be functioning (for example somatotroph or corticotroph) or non-functioning, and other neuroendocrine and reproductive-tract tumours are reported",
-   "Management mirrors MEN1: biochemical and imaging surveillance for parathyroid, pituitary, and neuroendocrine tumours with tumour-directed treatment",
-   "Test CDKN1B in a MEN1-like presentation that is MEN1 mutation-negative"
+  "id": "multiple_endocrine_neoplasia_type_4",
+  "name": "Multiple endocrine neoplasia type 4 (CDKN1B)",
+  "aliases": [
+    "multiple endocrine neoplasia type 4",
+    "MEN4",
+    "MENX",
+    "CDKN1B",
+    "p27 deficiency"
   ],
-  "pathophysiology": "CDKN1B encodes p27, a cyclin-dependent kinase inhibitor that restrains progression through the cell cycle and thus functions as a tumour suppressor in endocrine tissues. Germline loss-of-function variants reduce p27 activity, releasing this brake on proliferation and predisposing to tumour development in the parathyroid glands, anterior pituitary, and other neuroendocrine tissues. The resulting phenotype overlaps closely with MEN1 because both disorders disturb pathways controlling endocrine cell growth, producing primary hyperparathyroidism and pituitary adenomas as the leading manifestations. Because the syndrome is rare and clinically similar to MEN1, molecular testing is needed to distinguish the two.",
-  "additionalDifferentials": [
-   "Multiple endocrine neoplasia type 1",
-   "Multiple endocrine neoplasia type 2",
-   "Sporadic primary hyperparathyroidism",
-   "Familial isolated pituitary adenoma",
-   "Hyperparathyroidism-jaw tumour syndrome",
-   "Familial isolated hyperparathyroidism"
-  ],
-  "additionalInvestigations": [
-   "Serum calcium and parathyroid hormone for primary hyperparathyroidism",
-   "Anterior pituitary hormone profile including prolactin, IGF-1, and cortisol axis testing",
-   "Pituitary MRI for adenomas",
-   "Gut hormone and neuroendocrine tumour screening as clinically indicated",
-   "MEN1 sequencing that is negative, prompting further testing",
-   "CDKN1B gene sequencing"
-  ],
-  "redFlags": [
-   "Symptomatic hypercalcaemia from hyperparathyroidism",
-   "Visual field loss or hormonal excess from a pituitary macroadenoma",
-   "Features of a functioning neuroendocrine tumour",
-   "Progressive disease across multiple endocrine organs"
-  ],
-  "prognosis": "The outlook depends on the specific tumours that arise; with regular surveillance and timely treatment of parathyroid and pituitary disease most patients do well, though the syndrome is too rare for precise long-term risk figures.",
-  "pitfalls": [
-   "Stopping the diagnostic workup at a negative MEN1 test in a MEN1-like patient",
-   "Underestimating the need for lifelong multi-organ surveillance",
-   "Attributing isolated hyperparathyroidism to sporadic disease without a family assessment",
-   "Overlooking non-functioning pituitary tumours that are clinically silent"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "OMIM entry for multiple endocrine neoplasia type 4"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Tumour-directed definitive therapy: parathyroidectomy for primary hyperparathyroidism, and transsphenoidal surgery or targeted medical therapy (dopamine agonists for prolactinomas, somatostatin analogues for growth-hormone-secreting adenomas) for pituitary tumours",
-   "Correct hypercalcaemia with rehydration and, where required, bisphosphonates or the calcimimetic cinacalcet while awaiting surgery",
-   "Lifelong biochemical surveillance of serum calcium, parathyroid hormone and anterior pituitary hormones to detect recurrent or new endocrine tumours",
-   "Periodic pituitary MRI and screening for gastro-entero-pancreatic and other neuroendocrine tumours as clinically indicated",
-   "Manage within a combined endocrinology, endocrine-surgery and neurosurgery multidisciplinary team",
-   "Offer genetic counselling and cascade CDKN1B testing to at-risk relatives, with structured surveillance of confirmed carriers"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "multiple_endocrine_neoplasia_type_4-pathway",
-   "title": "Multiple endocrine neoplasia type 4 (CDKN1B): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Rare autosomal dominant syndrome caused by variants in CDKN1B, encoding the cell-cycle inhibitor p27",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Symptomatic hypercalcaemia from hyperparathyroidism",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum calcium and parathyroid hormone for primary hyperparathyroidism, Anterior pituitary hormone profile including prolactin, IGF-1, and cortisol axis testing, Pituitary MRI for adenomas"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Tumour-directed definitive therapy: parathyroidectomy for primary hyperparathyroidism, and transsphenoidal surgery or targeted medical therapy (dopamine agonists for prolactinomas, somatostatin analogues for"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Stopping the diagnostic workup at a negative MEN1 test in a MEN1-like patient"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of multiple endocrine neoplasia type 4 (cdkn1b)."
-  }
- ],
- "tables": [
-  {
-   "id": "multiple_endocrine_neoplasia_type_4-matrix",
-   "title": "Multiple endocrine neoplasia type 4 (CDKN1B): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Rare autosomal dominant syndrome caused by variants in CDKN1B, encoding the cell-cycle inhibitor p27",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine / Genetics",
+  "specialty": "Endocrinology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Textbook of Endocrinology / OMIM",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Rare autosomal dominant syndrome caused by variants in CDKN1B, encoding the cell-cycle inhibitor p27",
+      "Clinically resembles MEN1, with primary hyperparathyroidism and anterior pituitary tumours as the commonest features",
+      "It is an important consideration in patients with a MEN1-like phenotype who test negative for MEN1 mutations",
+      "Parathyroid disease is usually the earliest and most frequent manifestation, causing hypercalcaemia",
+      "Pituitary tumours may be functioning (for example somatotroph or corticotroph) or non-functioning, and other neuroendocrine and reproductive-tract tumours are reported",
+      "Management mirrors MEN1: biochemical and imaging surveillance for parathyroid, pituitary, and neuroendocrine tumours with tumour-directed treatment",
+      "Test CDKN1B in a MEN1-like presentation that is MEN1 mutation-negative"
     ],
-    [
-     "Key Investigations",
-     "Serum calcium and parathyroid hormone for primary hyperparathyroidism, Anterior pituitary hormone profile including prolactin,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "CDKN1B encodes p27, a cyclin-dependent kinase inhibitor that restrains progression through the cell cycle and thus functions as a tumour suppressor in endocrine tissues. Germline loss-of-function variants reduce p27 activity, releasing this brake on proliferation and predisposing to tumour development in the parathyroid glands, anterior pituitary, and other neuroendocrine tissues. The resulting phenotype overlaps closely with MEN1 because both disorders disturb pathways controlling endocrine cell growth, producing primary hyperparathyroidism and pituitary adenomas as the leading manifestations. Because the syndrome is rare and clinically similar to MEN1, molecular testing is needed to distinguish the two.",
+    "additionalDifferentials": [
+      "Multiple endocrine neoplasia type 1",
+      "Multiple endocrine neoplasia type 2",
+      "Sporadic primary hyperparathyroidism",
+      "Familial isolated pituitary adenoma",
+      "Hyperparathyroidism-jaw tumour syndrome",
+      "Familial isolated hyperparathyroidism"
     ],
-    [
-     "Primary Differentials",
-     "Multiple endocrine neoplasia type 1, Multiple endocrine neoplasia type 2, Sporadic primary hyperparathyroidism",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum calcium and parathyroid hormone for primary hyperparathyroidism",
+      "Anterior pituitary hormone profile including prolactin, IGF-1, and cortisol axis testing",
+      "Pituitary MRI for adenomas",
+      "Gut hormone and neuroendocrine tumour screening as clinically indicated",
+      "MEN1 sequencing that is negative, prompting further testing",
+      "CDKN1B gene sequencing"
     ],
-    [
-     "Management Strategy",
-     "Tumour-directed definitive therapy: parathyroidectomy for primary hyperparathyroidism, and transsphenoidal surgery or targeted",
-     "Core treatment modality"
+    "redFlags": [
+      "Symptomatic hypercalcaemia from hyperparathyroidism",
+      "Visual field loss or hormonal excess from a pituitary macroadenoma",
+      "Features of a functioning neuroendocrine tumour",
+      "Progressive disease across multiple endocrine organs"
     ],
-    [
-     "Clinical Pitfall",
-     "Stopping the diagnostic workup at a negative MEN1 test in a MEN1-like patient",
-     "Prevent diagnostic or management error"
+    "prognosis": "The outlook depends on the specific tumours that arise; with regular surveillance and timely treatment of parathyroid and pituitary disease most patients do well, though the syndrome is too rare for precise long-term risk figures.",
+    "pitfalls": [
+      "Stopping the diagnostic workup at a negative MEN1 test in a MEN1-like patient",
+      "Underestimating the need for lifelong multi-organ surveillance",
+      "Attributing isolated hyperparathyroidism to sporadic disease without a family assessment",
+      "Overlooking non-functioning pituitary tumours that are clinically silent"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "OMIM entry for multiple endocrine neoplasia type 4"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Tumour-directed definitive therapy: parathyroidectomy for primary hyperparathyroidism, and transsphenoidal surgery or targeted medical therapy (dopamine agonists for prolactinomas, somatostatin analogues for growth-hormone-secreting adenomas) for pituitary tumours",
+      "Correct hypercalcaemia with rehydration and, where required, bisphosphonates or the calcimimetic cinacalcet while awaiting surgery",
+      "Lifelong biochemical surveillance of serum calcium, parathyroid hormone and anterior pituitary hormones to detect recurrent or new endocrine tumours",
+      "Periodic pituitary MRI and screening for gastro-entero-pancreatic and other neuroendocrine tumours as clinically indicated",
+      "Manage within a combined endocrinology, endocrine-surgery and neurosurgery multidisciplinary team",
+      "Offer genetic counselling and cascade CDKN1B testing to at-risk relatives, with structured surveillance of confirmed carriers"
     ]
-   ],
-   "caption": "Overview comparison matrix for multiple endocrine neoplasia type 4 (cdkn1b)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "multiple-endocrine-neoplasia-type-4-real-image",
-   "title": "Multiple endocrine neoplasia type 4 (CDKN1B): Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "multiple_endocrine_neoplasia_type_4-pathway",
+      "title": "Multiple endocrine neoplasia type 4 (CDKN1B): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Rare autosomal dominant syndrome caused by variants in CDKN1B, encoding the cell-cycle inhibitor p27",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Symptomatic hypercalcaemia from hyperparathyroidism",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum calcium and parathyroid hormone for primary hyperparathyroidism, Anterior pituitary hormone profile including prolactin, IGF-1, and cortisol axis testing, Pituitary MRI for adenomas"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Tumour-directed definitive therapy: parathyroidectomy for primary hyperparathyroidism, and transsphenoidal surgery or targeted medical therapy (dopamine agonists for prolactinomas, somatostatin analogues for"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Stopping the diagnostic workup at a negative MEN1 test in a MEN1-like patient"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of multiple endocrine neoplasia type 4 (cdkn1b)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "multiple_endocrine_neoplasia_type_4-matrix",
+      "title": "Multiple endocrine neoplasia type 4 (CDKN1B): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Rare autosomal dominant syndrome caused by variants in CDKN1B, encoding the cell-cycle inhibitor p27",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum calcium and parathyroid hormone for primary hyperparathyroidism, Anterior pituitary hormone profile including prolactin,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Multiple endocrine neoplasia type 1, Multiple endocrine neoplasia type 2, Sporadic primary hyperparathyroidism",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Tumour-directed definitive therapy: parathyroidectomy for primary hyperparathyroidism, and transsphenoidal surgery or targeted",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Stopping the diagnostic workup at a negative MEN1 test in a MEN1-like patient",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for multiple endocrine neoplasia type 4 (cdkn1b)."
+    }
+  ],
+  "diagrams": []
 }

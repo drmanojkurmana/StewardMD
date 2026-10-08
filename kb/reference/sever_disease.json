@@ -1,175 +1,153 @@
 {
- "id": "sever_disease",
- "name": "Sever disease",
- "aliases": [
-  "calcaneal apophysitis",
-  "Sever's disease",
-  "os calcis apophysitis",
-  "posterior heel apophysitis"
- ],
- "class": "non_infective",
- "system": "Musculoskeletal / Orthopaedics",
- "specialty": "Orthopaedics",
- "referenceOnly": true,
- "reference": {
-  "source": "Tachdjian's Pediatric Orthopaedics / Campbell's Operative Orthopaedics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A traction apophysitis of the calcaneal (heel) apophysis rather than a true osteonecrosis",
-   "Affected site is the posterior calcaneal apophysis at the insertion of the Achilles tendon",
-   "Typically affects active children roughly eight to fourteen years of age around a growth spurt, often bilaterally",
-   "Presents with activity-related posterior heel pain relieved by rest, with tenderness on medial-lateral squeeze of the heel",
-   "It is a clinical diagnosis; radiographs are usually obtained to exclude other causes rather than to confirm the condition",
-   "Sclerosis and fragmentation of the calcaneal apophysis is a normal developmental appearance and does not by itself establish the diagnosis",
-   "A positive squeeze test and tight gastrocnemius-soleus complex on examination support the diagnosis",
-   "Management is conservative with activity modification, heel cups or orthoses, calf and hamstring stretching and physiotherapy as needed"
+  "id": "sever_disease",
+  "name": "Sever disease",
+  "aliases": [
+    "calcaneal apophysitis",
+    "Sever's disease",
+    "os calcis apophysitis",
+    "posterior heel apophysitis"
   ],
-  "pathophysiology": "Sever disease is a traction apophysitis of the posterior calcaneal apophysis, arising where the powerful Achilles tendon inserts onto the still-cartilaginous growth centre of the heel. During periods of rapid growth the bones lengthen faster than the surrounding muscle-tendon units, increasing tension across the apophysis, while repetitive impact from running and jumping adds cyclical traction and compression. This repetitive microtrauma at the vulnerable cartilaginous apophysis produces inflammation and pain. The radiographic sclerosis and fragmentation often seen at the apophysis represent normal variation in ossification rather than avascular necrosis, and the condition resolves once the apophysis fuses at skeletal maturity.",
-  "additionalDifferentials": [
-   "Achilles tendinopathy or insertional Achilles tendinitis",
-   "Retrocalcaneal or superficial calcaneal bursitis",
-   "Calcaneal stress fracture",
-   "Plantar fasciitis",
-   "Osteomyelitis or bone tumour of the calcaneus",
-   "Tarsal coalition presenting with hindfoot pain"
-  ],
-  "additionalInvestigations": [
-   "Clinical squeeze (compression) test of the heel reproducing pain",
-   "Assessment of gastrocnemius-soleus tightness and ankle dorsiflexion",
-   "Plain radiographs primarily to exclude fracture, infection or tumour",
-   "Magnetic resonance imaging reserved for atypical, persistent or unilateral cases",
-   "Inflammatory markers if infection or inflammatory arthropathy is suspected",
-   "Gait and footwear assessment in the active child"
-  ],
-  "redFlags": [
-   "Rest pain, night pain or systemic features suggesting infection or malignancy",
-   "A discrete focal bony lesion or fracture line on imaging",
-   "Persistent unilateral pain not settling with conservative measures",
-   "Swelling, warmth or erythema over the heel pointing to an alternative diagnosis"
-  ],
-  "prognosis": "The prognosis is excellent; symptoms are self-limiting and resolve with skeletal maturity as the apophysis fuses, with activity modification and stretching controlling pain in the interim and no long-term sequelae expected.",
-  "pitfalls": [
-   "Interpreting the normal fragmented, sclerotic apophysis on radiographs as diagnostic or as osteonecrosis",
-   "Missing a calcaneal stress fracture, infection or tumour presenting as atypical heel pain",
-   "Failing to address tight calf musculature that perpetuates apophyseal traction",
-   "Complete immobilisation and deconditioning when relative activity modification would suffice"
-  ],
-  "references": [
-   "Tachdjian's Pediatric Orthopaedics",
-   "Campbell's Operative Orthopaedics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassure the child and family that it is a benign, self-limiting condition that resolves at skeletal maturity",
-   "Activity modification with reduction of running and jumping load during symptomatic flares",
-   "Calf (gastrocnemius-soleus) stretching and heel-cord flexibility exercises",
-   "Heel cushioning or heel-raise orthoses to reduce traction on the calcaneal apophysis",
-   "Simple analgesia such as paracetamol or NSAIDs for pain during flares",
-   "Graded return to sport as symptoms settle, with footwear review",
-   "Reassess or image only for atypical, unilateral, or persistent presentations to exclude other pathology"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "sever_disease-pathway",
-   "title": "Sever disease: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A traction apophysitis of the calcaneal (heel) apophysis rather than a true osteonecrosis",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rest pain, night pain or systemic features suggesting infection or malignancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical squeeze (compression) test of the heel reproducing pain, Assessment of gastrocnemius-soleus tightness and ankle dorsiflexion, Plain radiographs primarily to exclude fracture, infection or tumour"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassure the child and family that it is a benign, self-limiting condition that resolves at skeletal maturity"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Interpreting the normal fragmented, sclerotic apophysis on radiographs as diagnostic or as osteonecrosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of sever disease."
-  }
- ],
- "tables": [
-  {
-   "id": "sever_disease-matrix",
-   "title": "Sever disease: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A traction apophysitis of the calcaneal (heel) apophysis rather than a true osteonecrosis",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Musculoskeletal / Orthopaedics",
+  "specialty": "Orthopaedics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Tachdjian's Pediatric Orthopaedics / Campbell's Operative Orthopaedics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A traction apophysitis of the calcaneal (heel) apophysis rather than a true osteonecrosis",
+      "Affected site is the posterior calcaneal apophysis at the insertion of the Achilles tendon",
+      "Typically affects active children roughly eight to fourteen years of age around a growth spurt, often bilaterally",
+      "Presents with activity-related posterior heel pain relieved by rest, with tenderness on medial-lateral squeeze of the heel",
+      "It is a clinical diagnosis; radiographs are usually obtained to exclude other causes rather than to confirm the condition",
+      "Sclerosis and fragmentation of the calcaneal apophysis is a normal developmental appearance and does not by itself establish the diagnosis",
+      "A positive squeeze test and tight gastrocnemius-soleus complex on examination support the diagnosis",
+      "Management is conservative with activity modification, heel cups or orthoses, calf and hamstring stretching and physiotherapy as needed"
     ],
-    [
-     "Key Investigations",
-     "Clinical squeeze (compression) test of the heel reproducing pain, Assessment of gastrocnemius-soleus tightness and ankle",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Sever disease is a traction apophysitis of the posterior calcaneal apophysis, arising where the powerful Achilles tendon inserts onto the still-cartilaginous growth centre of the heel. During periods of rapid growth the bones lengthen faster than the surrounding muscle-tendon units, increasing tension across the apophysis, while repetitive impact from running and jumping adds cyclical traction and compression. This repetitive microtrauma at the vulnerable cartilaginous apophysis produces inflammation and pain. The radiographic sclerosis and fragmentation often seen at the apophysis represent normal variation in ossification rather than avascular necrosis, and the condition resolves once the apophysis fuses at skeletal maturity.",
+    "additionalDifferentials": [
+      "Achilles tendinopathy or insertional Achilles tendinitis",
+      "Retrocalcaneal or superficial calcaneal bursitis",
+      "Calcaneal stress fracture",
+      "Plantar fasciitis",
+      "Osteomyelitis or bone tumour of the calcaneus",
+      "Tarsal coalition presenting with hindfoot pain"
     ],
-    [
-     "Primary Differentials",
-     "Achilles tendinopathy or insertional Achilles tendinitis, Retrocalcaneal or superficial calcaneal bursitis, Calcaneal stress",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical squeeze (compression) test of the heel reproducing pain",
+      "Assessment of gastrocnemius-soleus tightness and ankle dorsiflexion",
+      "Plain radiographs primarily to exclude fracture, infection or tumour",
+      "Magnetic resonance imaging reserved for atypical, persistent or unilateral cases",
+      "Inflammatory markers if infection or inflammatory arthropathy is suspected",
+      "Gait and footwear assessment in the active child"
     ],
-    [
-     "Management Strategy",
-     "Reassure the child and family that it is a benign, self-limiting condition that resolves at skeletal maturity",
-     "Core treatment modality"
+    "redFlags": [
+      "Rest pain, night pain or systemic features suggesting infection or malignancy",
+      "A discrete focal bony lesion or fracture line on imaging",
+      "Persistent unilateral pain not settling with conservative measures",
+      "Swelling, warmth or erythema over the heel pointing to an alternative diagnosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Interpreting the normal fragmented, sclerotic apophysis on radiographs as diagnostic or as osteonecrosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis is excellent; symptoms are self-limiting and resolve with skeletal maturity as the apophysis fuses, with activity modification and stretching controlling pain in the interim and no long-term sequelae expected.",
+    "pitfalls": [
+      "Interpreting the normal fragmented, sclerotic apophysis on radiographs as diagnostic or as osteonecrosis",
+      "Missing a calcaneal stress fracture, infection or tumour presenting as atypical heel pain",
+      "Failing to address tight calf musculature that perpetuates apophyseal traction",
+      "Complete immobilisation and deconditioning when relative activity modification would suffice"
+    ],
+    "references": [
+      "Tachdjian's Pediatric Orthopaedics",
+      "Campbell's Operative Orthopaedics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassure the child and family that it is a benign, self-limiting condition that resolves at skeletal maturity",
+      "Activity modification with reduction of running and jumping load during symptomatic flares",
+      "Calf (gastrocnemius-soleus) stretching and heel-cord flexibility exercises",
+      "Heel cushioning or heel-raise orthoses to reduce traction on the calcaneal apophysis",
+      "Simple analgesia such as paracetamol or NSAIDs for pain during flares",
+      "Graded return to sport as symptoms settle, with footwear review",
+      "Reassess or image only for atypical, unilateral, or persistent presentations to exclude other pathology"
     ]
-   ],
-   "caption": "Overview comparison matrix for sever disease."
-  }
- ],
- "diagrams": [
-  {
-   "id": "sever-disease-real-image",
-   "title": "Sever disease: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "sever_disease-pathway",
+      "title": "Sever disease: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A traction apophysitis of the calcaneal (heel) apophysis rather than a true osteonecrosis",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rest pain, night pain or systemic features suggesting infection or malignancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical squeeze (compression) test of the heel reproducing pain, Assessment of gastrocnemius-soleus tightness and ankle dorsiflexion, Plain radiographs primarily to exclude fracture, infection or tumour"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassure the child and family that it is a benign, self-limiting condition that resolves at skeletal maturity"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Interpreting the normal fragmented, sclerotic apophysis on radiographs as diagnostic or as osteonecrosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of sever disease."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "sever_disease-matrix",
+      "title": "Sever disease: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A traction apophysitis of the calcaneal (heel) apophysis rather than a true osteonecrosis",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical squeeze (compression) test of the heel reproducing pain, Assessment of gastrocnemius-soleus tightness and ankle",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Achilles tendinopathy or insertional Achilles tendinitis, Retrocalcaneal or superficial calcaneal bursitis, Calcaneal stress",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassure the child and family that it is a benign, self-limiting condition that resolves at skeletal maturity",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Interpreting the normal fragmented, sclerotic apophysis on radiographs as diagnostic or as osteonecrosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for sever disease."
+    }
+  ],
+  "diagrams": []
 }

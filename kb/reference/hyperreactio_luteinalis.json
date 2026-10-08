@@ -1,176 +1,154 @@
 {
- "id": "hyperreactio_luteinalis",
- "name": "hyperreactio luteinalis",
- "aliases": [
-  "hyperreactio luteinalis of pregnancy",
-  "bilateral theca-lutein hyperplasia of pregnancy"
- ],
- "class": "non_infective",
- "system": "Reproductive",
- "specialty": "Obstetrics and Gynaecology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Obstetrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Benign bilateral multicystic ovarian enlargement arising in pregnancy from an exaggerated theca-lutein response to human chorionic gonadotrophin, occurring even with normally rising hCG rather than only with pathologically raised levels.",
-   "Unlike the classic theca-lutein cysts of gestational trophoblastic disease, hyperreactio luteinalis most often complicates an otherwise normal singleton pregnancy and may present in any trimester or first come to light at caesarean delivery.",
-   "Maternal hyperandrogenism with virilisation (acne, hirsutism, clitoromegaly, voice deepening) occurs in a substantial minority owing to luteinised theca cells secreting androgens; fetal virilisation is rare because placental aromatase largely protects the fetus.",
-   "Often discovered incidentally on antenatal ultrasound as bilaterally enlarged ovaries containing multiple thin-walled cysts with a 'spoke-wheel' or 'soap-bubble' appearance.",
-   "The cardinal management principle is conservative expectant care; the ovaries regress spontaneously over weeks to months after delivery once the hCG stimulus falls.",
-   "The greatest hazard is misdiagnosis as a malignant or borderline ovarian neoplasm, prompting unnecessary oophorectomy; recognising the pregnancy context and the bilateral, uniform cystic pattern prevents this.",
-   "Associated with multiple gestation, fetal hydrops, and diabetic or rhesus-sensitised pregnancies, and with any state of relative hCG excess or heightened ovarian sensitivity.",
-   "Complications mirror those of other large adnexal masses, including torsion, rupture and intracystic haemorrhage, but are uncommon."
+  "id": "hyperreactio_luteinalis",
+  "name": "hyperreactio luteinalis",
+  "aliases": [
+    "hyperreactio luteinalis of pregnancy",
+    "bilateral theca-lutein hyperplasia of pregnancy"
   ],
-  "pathophysiology": "Hyperreactio luteinalis results from an exaggerated ovarian response to circulating human chorionic gonadotrophin during pregnancy. Because hCG shares structural homology with luteinising hormone and acts on the same receptor, it drives proliferation and luteinisation of ovarian theca-interna cells, producing numerous bilateral theca-lutein cysts and gross ovarian enlargement. The response may reflect either pathologically raised hCG (as in trophoblastic disease or multiple gestation) or, characteristically, an increased ovarian sensitivity to physiological hCG, which explains its occurrence in normal singleton pregnancies. Luteinised theca cells can secrete substantial androgens, accounting for maternal virilisation, while the fetus is usually spared because placental aromatase converts these androgens to oestrogens. As the process is hormonally driven and functional rather than neoplastic, withdrawal of the hCG stimulus after delivery leads to regression.",
-  "additionalDifferentials": [
-   "Theca-lutein cysts complicating gestational trophoblastic disease",
-   "Ovarian hyperstimulation syndrome",
-   "Bilateral cystic ovarian neoplasm (mucinous cystadenoma or borderline tumour)",
-   "Luteoma of pregnancy",
-   "Polycystic ovaries",
-   "Bilateral endometriomas or haemorrhagic functional cysts",
-   "Ovarian torsion with cystic degeneration"
-  ],
-  "additionalInvestigations": [
-   "Serial quantitative serum hCG",
-   "Pelvic ultrasound with Doppler to characterise cyst morphology and ovarian perfusion",
-   "Maternal serum total and free testosterone and androstenedione when virilisation is present",
-   "Exclusion of gestational trophoblastic disease with uterine ultrasound and the hCG trend",
-   "Pelvic MRI where sonography is indeterminate, to avoid mistaking the mass for malignancy",
-   "Tumour markers interpreted with caution, as CA-125 and others are physiologically raised in pregnancy",
-   "Postpartum imaging to confirm spontaneous regression"
-  ],
-  "redFlags": [
-   "Rapidly enlarging or fixed adnexal mass with solid components or ascites suggesting malignancy",
-   "Acute abdominal pain with peritonism indicating torsion, rupture or haemorrhage",
-   "Progressive maternal virilisation raising concern for an androgen-secreting tumour",
-   "Imaging features of virilisation in a female fetus"
-  ],
-  "prognosis": "The condition is benign and self-limiting, with ovarian enlargement and any biochemical hyperandrogenism resolving spontaneously after delivery. Maternal virilising features usually improve postpartum, although some skin and voice changes may persist.",
-  "pitfalls": [
-   "Mistaking the bilateral cystic ovaries for malignancy and proceeding to unnecessary surgery or oophorectomy",
-   "Assuming markedly raised hCG is a prerequisite and dismissing the diagnosis in a normal singleton pregnancy",
-   "Interpreting physiologically raised pregnancy tumour markers as evidence of cancer",
-   "Overlooking maternal virilisation as merely cosmetic rather than a diagnostic clue",
-   "Operating on cysts that would regress spontaneously after delivery"
-  ],
-  "references": [
-   "Williams Obstetrics",
-   "Berek & Novak's Gynecology",
-   "Dewhurst's Textbook of Obstetrics and Gynaecology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Conservative expectant management as the mainstay, since the ovaries regress spontaneously after delivery once the hCG stimulus falls",
-   "Avoid unnecessary oophorectomy by recognising the benign bilateral cystic pattern and the pregnancy context",
-   "Serial pelvic ultrasound and quantitative hCG monitoring to confirm stability and regression",
-   "Exclude gestational trophoblastic disease and reassure regarding maternal virilisation, which usually resolves postpartum",
-   "Reserve surgical intervention for complications such as ovarian torsion, rupture or haemorrhage",
-   "Obstetric multidisciplinary follow-up with postpartum confirmation of ovarian regression"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hyperreactio_luteinalis-pathway",
-   "title": "hyperreactio luteinalis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Benign bilateral multicystic ovarian enlargement arising in pregnancy from an exaggerated theca-lutein response to human chorionic gonadotrophin, occurring even with normally rising hCG rather than only with pathologically raised levels.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly enlarging or fixed adnexal mass with solid components or ascites suggesting malignancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serial quantitative serum hCG, Pelvic ultrasound with Doppler to characterise cyst morphology and ovarian perfusion, Maternal serum total and free testosterone and androstenedione when virilisation is present"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Conservative expectant management as the mainstay, since the ovaries regress spontaneously after delivery once the hCG stimulus falls"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking the bilateral cystic ovaries for malignancy and proceeding to unnecessary surgery or oophorectomy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hyperreactio luteinalis."
-  }
- ],
- "tables": [
-  {
-   "id": "hyperreactio_luteinalis-matrix",
-   "title": "hyperreactio luteinalis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Benign bilateral multicystic ovarian enlargement arising in pregnancy from an exaggerated theca-lutein response to human",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Reproductive",
+  "specialty": "Obstetrics and Gynaecology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Obstetrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Benign bilateral multicystic ovarian enlargement arising in pregnancy from an exaggerated theca-lutein response to human chorionic gonadotrophin, occurring even with normally rising hCG rather than only with pathologically raised levels.",
+      "Unlike the classic theca-lutein cysts of gestational trophoblastic disease, hyperreactio luteinalis most often complicates an otherwise normal singleton pregnancy and may present in any trimester or first come to light at caesarean delivery.",
+      "Maternal hyperandrogenism with virilisation (acne, hirsutism, clitoromegaly, voice deepening) occurs in a substantial minority owing to luteinised theca cells secreting androgens; fetal virilisation is rare because placental aromatase largely protects the fetus.",
+      "Often discovered incidentally on antenatal ultrasound as bilaterally enlarged ovaries containing multiple thin-walled cysts with a 'spoke-wheel' or 'soap-bubble' appearance.",
+      "The cardinal management principle is conservative expectant care; the ovaries regress spontaneously over weeks to months after delivery once the hCG stimulus falls.",
+      "The greatest hazard is misdiagnosis as a malignant or borderline ovarian neoplasm, prompting unnecessary oophorectomy; recognising the pregnancy context and the bilateral, uniform cystic pattern prevents this.",
+      "Associated with multiple gestation, fetal hydrops, and diabetic or rhesus-sensitised pregnancies, and with any state of relative hCG excess or heightened ovarian sensitivity.",
+      "Complications mirror those of other large adnexal masses, including torsion, rupture and intracystic haemorrhage, but are uncommon."
     ],
-    [
-     "Key Investigations",
-     "Serial quantitative serum hCG, Pelvic ultrasound with Doppler to characterise cyst morphology and ovarian perfusion, Maternal",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Hyperreactio luteinalis results from an exaggerated ovarian response to circulating human chorionic gonadotrophin during pregnancy. Because hCG shares structural homology with luteinising hormone and acts on the same receptor, it drives proliferation and luteinisation of ovarian theca-interna cells, producing numerous bilateral theca-lutein cysts and gross ovarian enlargement. The response may reflect either pathologically raised hCG (as in trophoblastic disease or multiple gestation) or, characteristically, an increased ovarian sensitivity to physiological hCG, which explains its occurrence in normal singleton pregnancies. Luteinised theca cells can secrete substantial androgens, accounting for maternal virilisation, while the fetus is usually spared because placental aromatase converts these androgens to oestrogens. As the process is hormonally driven and functional rather than neoplastic, withdrawal of the hCG stimulus after delivery leads to regression.",
+    "additionalDifferentials": [
+      "Theca-lutein cysts complicating gestational trophoblastic disease",
+      "Ovarian hyperstimulation syndrome",
+      "Bilateral cystic ovarian neoplasm (mucinous cystadenoma or borderline tumour)",
+      "Luteoma of pregnancy",
+      "Polycystic ovaries",
+      "Bilateral endometriomas or haemorrhagic functional cysts",
+      "Ovarian torsion with cystic degeneration"
     ],
-    [
-     "Primary Differentials",
-     "Theca-lutein cysts complicating gestational trophoblastic disease, Ovarian hyperstimulation syndrome, Bilateral cystic ovarian",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serial quantitative serum hCG",
+      "Pelvic ultrasound with Doppler to characterise cyst morphology and ovarian perfusion",
+      "Maternal serum total and free testosterone and androstenedione when virilisation is present",
+      "Exclusion of gestational trophoblastic disease with uterine ultrasound and the hCG trend",
+      "Pelvic MRI where sonography is indeterminate, to avoid mistaking the mass for malignancy",
+      "Tumour markers interpreted with caution, as CA-125 and others are physiologically raised in pregnancy",
+      "Postpartum imaging to confirm spontaneous regression"
     ],
-    [
-     "Management Strategy",
-     "Conservative expectant management as the mainstay, since the ovaries regress spontaneously after delivery once the hCG stimulus",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly enlarging or fixed adnexal mass with solid components or ascites suggesting malignancy",
+      "Acute abdominal pain with peritonism indicating torsion, rupture or haemorrhage",
+      "Progressive maternal virilisation raising concern for an androgen-secreting tumour",
+      "Imaging features of virilisation in a female fetus"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking the bilateral cystic ovaries for malignancy and proceeding to unnecessary surgery or oophorectomy",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is benign and self-limiting, with ovarian enlargement and any biochemical hyperandrogenism resolving spontaneously after delivery. Maternal virilising features usually improve postpartum, although some skin and voice changes may persist.",
+    "pitfalls": [
+      "Mistaking the bilateral cystic ovaries for malignancy and proceeding to unnecessary surgery or oophorectomy",
+      "Assuming markedly raised hCG is a prerequisite and dismissing the diagnosis in a normal singleton pregnancy",
+      "Interpreting physiologically raised pregnancy tumour markers as evidence of cancer",
+      "Overlooking maternal virilisation as merely cosmetic rather than a diagnostic clue",
+      "Operating on cysts that would regress spontaneously after delivery"
+    ],
+    "references": [
+      "Williams Obstetrics",
+      "Berek & Novak's Gynecology",
+      "Dewhurst's Textbook of Obstetrics and Gynaecology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Conservative expectant management as the mainstay, since the ovaries regress spontaneously after delivery once the hCG stimulus falls",
+      "Avoid unnecessary oophorectomy by recognising the benign bilateral cystic pattern and the pregnancy context",
+      "Serial pelvic ultrasound and quantitative hCG monitoring to confirm stability and regression",
+      "Exclude gestational trophoblastic disease and reassure regarding maternal virilisation, which usually resolves postpartum",
+      "Reserve surgical intervention for complications such as ovarian torsion, rupture or haemorrhage",
+      "Obstetric multidisciplinary follow-up with postpartum confirmation of ovarian regression"
     ]
-   ],
-   "caption": "Overview comparison matrix for hyperreactio luteinalis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hyperreactio-luteinalis-real-image",
-   "title": "hyperreactio luteinalis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "hyperreactio_luteinalis-pathway",
+      "title": "hyperreactio luteinalis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Benign bilateral multicystic ovarian enlargement arising in pregnancy from an exaggerated theca-lutein response to human chorionic gonadotrophin, occurring even with normally rising hCG rather than only with pathologically raised levels.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly enlarging or fixed adnexal mass with solid components or ascites suggesting malignancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serial quantitative serum hCG, Pelvic ultrasound with Doppler to characterise cyst morphology and ovarian perfusion, Maternal serum total and free testosterone and androstenedione when virilisation is present"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Conservative expectant management as the mainstay, since the ovaries regress spontaneously after delivery once the hCG stimulus falls"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking the bilateral cystic ovaries for malignancy and proceeding to unnecessary surgery or oophorectomy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hyperreactio luteinalis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hyperreactio_luteinalis-matrix",
+      "title": "hyperreactio luteinalis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Benign bilateral multicystic ovarian enlargement arising in pregnancy from an exaggerated theca-lutein response to human",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serial quantitative serum hCG, Pelvic ultrasound with Doppler to characterise cyst morphology and ovarian perfusion, Maternal",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Theca-lutein cysts complicating gestational trophoblastic disease, Ovarian hyperstimulation syndrome, Bilateral cystic ovarian",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Conservative expectant management as the mainstay, since the ovaries regress spontaneously after delivery once the hCG stimulus",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking the bilateral cystic ovaries for malignancy and proceeding to unnecessary surgery or oophorectomy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hyperreactio luteinalis."
+    }
+  ],
+  "diagrams": []
 }

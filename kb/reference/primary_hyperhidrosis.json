@@ -1,176 +1,154 @@
 {
- "id": "primary_hyperhidrosis",
- "name": "Primary focal hyperhidrosis",
- "aliases": [
-  "primary hyperhidrosis",
-  "focal hyperhidrosis",
-  "essential hyperhidrosis",
-  "idiopathic hyperhidrosis"
- ],
- "class": "non_infective",
- "system": "Dermatology",
- "specialty": "Dermatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Characterised by excessive eccrine sweating beyond physiological needs, focal and symmetrical, most often affecting the palms, soles, axillae and craniofacial skin",
-   "Onset is usually in childhood or adolescence, and there is frequently a positive family history",
-   "By definition the excess sweating stops during sleep, a key feature distinguishing it from secondary generalised hyperhidrosis",
-   "It can cause considerable social, occupational and psychological impairment despite being a benign condition",
-   "The eccrine glands are structurally normal, and the problem lies in their neural overstimulation rather than in gland pathology",
-   "Diagnosis is clinical, supported by criteria such as focal symmetrical sweating for at least six months, early onset, family history and cessation during sleep",
-   "Complications include maceration, secondary bacterial and fungal infection, pitted keratolysis and contact dermatitis",
-   "Treatment follows a stepwise approach with topical antiperspirants (aluminium salts), iontophoresis for palms and soles, botulinum toxin injections for focal areas, and systemic anticholinergics or surgery in resistant cases"
+  "id": "primary_hyperhidrosis",
+  "name": "Primary focal hyperhidrosis",
+  "aliases": [
+    "primary hyperhidrosis",
+    "focal hyperhidrosis",
+    "essential hyperhidrosis",
+    "idiopathic hyperhidrosis"
   ],
-  "pathophysiology": "Primary focal hyperhidrosis is thought to result from an exaggerated or dysregulated sympathetic response producing excessive cholinergic stimulation of structurally normal eccrine sweat glands. The eccrine glands are innervated by sympathetic fibres that release acetylcholine, and in affected individuals these glands are overstimulated out of proportion to thermoregulatory need, particularly at sites of high eccrine density such as the palms, soles and axillae. The frequent family history suggests a genetic predisposition, and emotional and thermal stimuli often exacerbate the sweating. The cessation of symptoms during sleep reflects the withdrawal of the emotional and cortical drive to sympathetic outflow.",
-  "additionalDifferentials": [
-   "Secondary generalised hyperhidrosis from systemic disease (thyrotoxicosis, diabetes, phaeochromocytoma)",
-   "Menopausal or hormonally driven sweating and flushing",
-   "Drug-induced or withdrawal-related sweating",
-   "Infection-related or malignancy-related night sweats",
-   "Gustatory sweating (Frey syndrome)",
-   "Anxiety and other psychiatric causes of sweating"
-  ],
-  "additionalInvestigations": [
-   "Clinical assessment against diagnostic criteria including symmetry, early onset and cessation during sleep",
-   "Focused history and examination to exclude features of secondary hyperhidrosis",
-   "Thyroid function tests and glucose when a systemic cause is suspected",
-   "Gravimetric or starch-iodine testing to map and quantify affected areas when required",
-   "Assessment for secondary skin infection such as pitted keratolysis or dermatophytosis",
-   "Screening for phaeochromocytoma or other endocrine causes if the pattern is generalised or nocturnal"
-  ],
-  "redFlags": [
-   "Generalised, asymmetrical or night-time sweating suggesting a secondary systemic cause",
-   "Associated weight loss, fever or lymphadenopathy pointing to infection or malignancy",
-   "Unilateral sweating raising concern about underlying neurological or thoracic pathology",
-   "Sudden onset in adulthood without a lifelong history"
-  ],
-  "prognosis": "Primary focal hyperhidrosis is a benign, chronic condition that often persists for many years but frequently improves with age; quality of life can be substantially restored with appropriate stepwise treatment, and it carries no threat to general health.",
-  "pitfalls": [
-   "Failing to distinguish primary focal from secondary generalised hyperhidrosis and missing an underlying systemic cause",
-   "Underestimating the psychosocial burden of a benign condition",
-   "Escalating to invasive treatment before trialling topical antiperspirants and iontophoresis",
-   "Overlooking secondary skin infection such as pitted keratolysis"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "British Association of Dermatologists guidance on hyperhidrosis"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Stepwise first-line topical aluminium chloride hexahydrate antiperspirant applied to the affected sites",
-   "Tap-water iontophoresis for palmar and plantar disease",
-   "Intradermal botulinum toxin injections for axillary or palmar hyperhidrosis unresponsive to topical measures",
-   "Topical or oral anticholinergic agents such as glycopyrronium or oxybutynin for craniofacial or more widespread sweating, counselling on dry mouth and other antimuscarinic effects",
-   "Energy-based axillary treatment such as microwave thermolysis or local gland excision, reserving endoscopic thoracic sympathectomy for severe refractory palmar disease with explicit warning about compensatory sweating",
-   "Treat coexisting skin complications such as pitted keratolysis or dermatophyte infection",
-   "Address the psychological, social and occupational impact and reassure regarding the benign nature",
-   "Reassess and exclude a secondary cause if sweating becomes generalised, nocturnal or of late onset"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "primary_hyperhidrosis-pathway",
-   "title": "Primary focal hyperhidrosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Characterised by excessive eccrine sweating beyond physiological needs, focal and symmetrical, most often affecting the palms, soles, axillae and craniofacial skin",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Generalised, asymmetrical or night-time sweating suggesting a secondary systemic cause",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical assessment against diagnostic criteria including symmetry, early onset and cessation during sleep, Focused history and examination to exclude features of secondary hyperhidrosis, Thyroid function tests and glucose"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Stepwise first-line topical aluminium chloride hexahydrate antiperspirant applied to the affected sites"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to distinguish primary focal from secondary generalised hyperhidrosis and missing an underlying systemic cause"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of primary focal hyperhidrosis."
-  }
- ],
- "tables": [
-  {
-   "id": "primary_hyperhidrosis-matrix",
-   "title": "Primary focal hyperhidrosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Characterised by excessive eccrine sweating beyond physiological needs, focal and symmetrical, most often affecting the palms,",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology",
+  "specialty": "Dermatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Characterised by excessive eccrine sweating beyond physiological needs, focal and symmetrical, most often affecting the palms, soles, axillae and craniofacial skin",
+      "Onset is usually in childhood or adolescence, and there is frequently a positive family history",
+      "By definition the excess sweating stops during sleep, a key feature distinguishing it from secondary generalised hyperhidrosis",
+      "It can cause considerable social, occupational and psychological impairment despite being a benign condition",
+      "The eccrine glands are structurally normal, and the problem lies in their neural overstimulation rather than in gland pathology",
+      "Diagnosis is clinical, supported by criteria such as focal symmetrical sweating for at least six months, early onset, family history and cessation during sleep",
+      "Complications include maceration, secondary bacterial and fungal infection, pitted keratolysis and contact dermatitis",
+      "Treatment follows a stepwise approach with topical antiperspirants (aluminium salts), iontophoresis for palms and soles, botulinum toxin injections for focal areas, and systemic anticholinergics or surgery in resistant cases"
     ],
-    [
-     "Key Investigations",
-     "Clinical assessment against diagnostic criteria including symmetry, early onset and cessation during sleep, Focused history and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Primary focal hyperhidrosis is thought to result from an exaggerated or dysregulated sympathetic response producing excessive cholinergic stimulation of structurally normal eccrine sweat glands. The eccrine glands are innervated by sympathetic fibres that release acetylcholine, and in affected individuals these glands are overstimulated out of proportion to thermoregulatory need, particularly at sites of high eccrine density such as the palms, soles and axillae. The frequent family history suggests a genetic predisposition, and emotional and thermal stimuli often exacerbate the sweating. The cessation of symptoms during sleep reflects the withdrawal of the emotional and cortical drive to sympathetic outflow.",
+    "additionalDifferentials": [
+      "Secondary generalised hyperhidrosis from systemic disease (thyrotoxicosis, diabetes, phaeochromocytoma)",
+      "Menopausal or hormonally driven sweating and flushing",
+      "Drug-induced or withdrawal-related sweating",
+      "Infection-related or malignancy-related night sweats",
+      "Gustatory sweating (Frey syndrome)",
+      "Anxiety and other psychiatric causes of sweating"
     ],
-    [
-     "Primary Differentials",
-     "Secondary generalised hyperhidrosis from systemic disease (thyrotoxicosis, diabetes, phaeochromocytoma), Menopausal or hormonally",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical assessment against diagnostic criteria including symmetry, early onset and cessation during sleep",
+      "Focused history and examination to exclude features of secondary hyperhidrosis",
+      "Thyroid function tests and glucose when a systemic cause is suspected",
+      "Gravimetric or starch-iodine testing to map and quantify affected areas when required",
+      "Assessment for secondary skin infection such as pitted keratolysis or dermatophytosis",
+      "Screening for phaeochromocytoma or other endocrine causes if the pattern is generalised or nocturnal"
     ],
-    [
-     "Management Strategy",
-     "Stepwise first-line topical aluminium chloride hexahydrate antiperspirant applied to the affected sites",
-     "Core treatment modality"
+    "redFlags": [
+      "Generalised, asymmetrical or night-time sweating suggesting a secondary systemic cause",
+      "Associated weight loss, fever or lymphadenopathy pointing to infection or malignancy",
+      "Unilateral sweating raising concern about underlying neurological or thoracic pathology",
+      "Sudden onset in adulthood without a lifelong history"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to distinguish primary focal from secondary generalised hyperhidrosis and missing an underlying systemic cause",
-     "Prevent diagnostic or management error"
+    "prognosis": "Primary focal hyperhidrosis is a benign, chronic condition that often persists for many years but frequently improves with age; quality of life can be substantially restored with appropriate stepwise treatment, and it carries no threat to general health.",
+    "pitfalls": [
+      "Failing to distinguish primary focal from secondary generalised hyperhidrosis and missing an underlying systemic cause",
+      "Underestimating the psychosocial burden of a benign condition",
+      "Escalating to invasive treatment before trialling topical antiperspirants and iontophoresis",
+      "Overlooking secondary skin infection such as pitted keratolysis"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "British Association of Dermatologists guidance on hyperhidrosis"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Stepwise first-line topical aluminium chloride hexahydrate antiperspirant applied to the affected sites",
+      "Tap-water iontophoresis for palmar and plantar disease",
+      "Intradermal botulinum toxin injections for axillary or palmar hyperhidrosis unresponsive to topical measures",
+      "Topical or oral anticholinergic agents such as glycopyrronium or oxybutynin for craniofacial or more widespread sweating, counselling on dry mouth and other antimuscarinic effects",
+      "Energy-based axillary treatment such as microwave thermolysis or local gland excision, reserving endoscopic thoracic sympathectomy for severe refractory palmar disease with explicit warning about compensatory sweating",
+      "Treat coexisting skin complications such as pitted keratolysis or dermatophyte infection",
+      "Address the psychological, social and occupational impact and reassure regarding the benign nature",
+      "Reassess and exclude a secondary cause if sweating becomes generalised, nocturnal or of late onset"
     ]
-   ],
-   "caption": "Overview comparison matrix for primary focal hyperhidrosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "primary-hyperhidrosis-real-image",
-   "title": "Primary focal hyperhidrosis: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "primary_hyperhidrosis-pathway",
+      "title": "Primary focal hyperhidrosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Characterised by excessive eccrine sweating beyond physiological needs, focal and symmetrical, most often affecting the palms, soles, axillae and craniofacial skin",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Generalised, asymmetrical or night-time sweating suggesting a secondary systemic cause",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical assessment against diagnostic criteria including symmetry, early onset and cessation during sleep, Focused history and examination to exclude features of secondary hyperhidrosis, Thyroid function tests and glucose"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Stepwise first-line topical aluminium chloride hexahydrate antiperspirant applied to the affected sites"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to distinguish primary focal from secondary generalised hyperhidrosis and missing an underlying systemic cause"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of primary focal hyperhidrosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "primary_hyperhidrosis-matrix",
+      "title": "Primary focal hyperhidrosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Characterised by excessive eccrine sweating beyond physiological needs, focal and symmetrical, most often affecting the palms,",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical assessment against diagnostic criteria including symmetry, early onset and cessation during sleep, Focused history and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Secondary generalised hyperhidrosis from systemic disease (thyrotoxicosis, diabetes, phaeochromocytoma), Menopausal or hormonally",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Stepwise first-line topical aluminium chloride hexahydrate antiperspirant applied to the affected sites",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to distinguish primary focal from secondary generalised hyperhidrosis and missing an underlying systemic cause",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for primary focal hyperhidrosis."
+    }
+  ],
+  "diagrams": []
 }

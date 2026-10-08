@@ -1,175 +1,153 @@
 {
- "id": "albright_hereditary_osteodystrophy",
- "name": "Albright hereditary osteodystrophy",
- "aliases": [
-  "AHO",
-  "GNAS-related disorder",
-  "pseudohypoparathyroidism type 1a",
-  "pseudopseudohypoparathyroidism"
- ],
- "class": "non_infective",
- "system": "Endocrine / Metabolic bone",
- "specialty": "Endocrinology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Standard endocrinology and clinical genetics references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A distinctive physical phenotype caused by variants in GNAS, which encodes the alpha subunit of the stimulatory G protein (Gs-alpha)",
-   "Characteristic features are short stature, a rounded face, obesity, brachydactyly (notably shortened fourth and fifth metacarpals), and subcutaneous ossifications",
-   "When AHO occurs with resistance to parathyroid hormone (and often other hormones such as TSH), it is termed pseudohypoparathyroidism type 1a, producing hypocalcaemia and hyperphosphataemia with a raised PTH",
-   "The same AHO physical phenotype without hormone resistance is called pseudopseudohypoparathyroidism, reflecting the parent-of-origin (imprinting) effect of GNAS",
-   "Hormone resistance appears when the defective allele is inherited maternally, because Gs-alpha is expressed largely from the maternal allele in key tissues such as the renal proximal tubule",
-   "Ectopic dermal or subcutaneous ossification and characteristic hand radiographs (short metacarpals) are useful diagnostic clues",
-   "Management centres on correcting hypocalcaemia with calcium and active vitamin D and monitoring for associated hormone resistances"
+  "id": "albright_hereditary_osteodystrophy",
+  "name": "Albright hereditary osteodystrophy",
+  "aliases": [
+    "AHO",
+    "GNAS-related disorder",
+    "pseudohypoparathyroidism type 1a",
+    "pseudopseudohypoparathyroidism"
   ],
-  "pathophysiology": "Albright hereditary osteodystrophy stems from inactivating variants in GNAS, the gene for Gs-alpha, the signalling protein that couples numerous hormone receptors to adenylate cyclase and cyclic AMP generation. GNAS is subject to tissue-specific genomic imprinting: in tissues such as the renal proximal tubule, expression is predominantly from the maternal allele. When the inactivating variant is maternally inherited, tissues lose most Gs-alpha activity, so hormones acting through Gs-coupled receptors (notably PTH, and often TSH and gonadotrophins) cannot signal effectively, producing multi-hormone resistance and hypocalcaemia despite elevated PTH. When the same variant is paternally inherited, imprinting preserves signalling in these tissues, so the physical AHO phenotype occurs without hormone resistance. The skeletal and soft-tissue features (brachydactyly, ectopic ossification) reflect impaired Gs-alpha-dependent signalling in developing bone and connective tissue.",
-  "additionalDifferentials": [
-   "Primary or surgical hypoparathyroidism",
-   "Kenny-Caffey and Sanjad-Sakati syndromes",
-   "Acrodysostosis and other brachydactyly syndromes",
-   "Turner syndrome (short stature, short metacarpals)",
-   "Progressive osseous heteroplasia (also GNAS-related)",
-   "Vitamin D deficiency causing secondary hyperparathyroidism"
-  ],
-  "additionalInvestigations": [
-   "Serum calcium, phosphate and corrected calcium",
-   "Intact PTH level (raised in the resistance form despite hypocalcaemia)",
-   "Thyroid function tests to detect associated TSH resistance",
-   "Hand and skeletal radiographs for brachydactyly and ectopic ossification",
-   "Molecular genetic testing of GNAS with methylation studies where indicated",
-   "Family evaluation clarifying the parent of origin for counselling"
-  ],
-  "redFlags": [
-   "Symptomatic hypocalcaemia with tetany, seizures or prolonged QT interval",
-   "Progressive deep or disabling ectopic ossification",
-   "Untreated associated hypothyroidism from TSH resistance",
-   "Neurodevelopmental concerns requiring early assessment"
-  ],
-  "prognosis": "With appropriate calcium and active vitamin D therapy and surveillance for additional hormone resistances, the metabolic disturbance is manageable and life expectancy is generally normal, though short stature, brachydactyly, and ectopic ossification are permanent.",
-  "pitfalls": [
-   "Confusing pseudohypoparathyroidism with true hypoparathyroidism by not measuring PTH",
-   "Overlooking associated hypothyroidism because attention is fixed on calcium",
-   "Ignoring the imprinting basis, leading to inaccurate recurrence-risk counselling",
-   "Missing subtle brachydactyly or ectopic ossification that would prompt genetic testing"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "GeneReviews / OMIM entries on GNAS-related disorders"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Correct hypocalcaemia and hyperphosphataemia with oral calcium and active vitamin D analogues such as calcitriol or alfacalcidol in the resistance form",
-   "Thyroid hormone replacement with levothyroxine where associated TSH resistance causes hypothyroidism",
-   "Screen for and manage additional hormone resistances, including gonadotrophin and growth hormone-releasing hormone, as they emerge",
-   "Monitor serum calcium, phosphate and PTH to titrate therapy while avoiding hypercalciuria and nephrocalcinosis",
-   "Weight management and support for obesity, short stature and brachydactyly",
-   "Orthopaedic or dermatological input for symptomatic subcutaneous and ectopic ossifications",
-   "Multidisciplinary endocrine and genetics follow-up",
-   "Genetic counselling explaining the parent-of-origin imprinting effect, with testing of relatives"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "albright_hereditary_osteodystrophy-pathway",
-   "title": "Albright hereditary osteodystrophy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A distinctive physical phenotype caused by variants in GNAS, which encodes the alpha subunit of the stimulatory G protein (Gs-alpha)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Symptomatic hypocalcaemia with tetany, seizures or prolonged QT interval",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum calcium, phosphate and corrected calcium, Intact PTH level (raised in the resistance form despite hypocalcaemia), Thyroid function tests to detect associated TSH resistance"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Correct hypocalcaemia and hyperphosphataemia with oral calcium and active vitamin D analogues such as calcitriol or alfacalcidol in the resistance form"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing pseudohypoparathyroidism with true hypoparathyroidism by not measuring PTH"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of albright hereditary osteodystrophy."
-  }
- ],
- "tables": [
-  {
-   "id": "albright_hereditary_osteodystrophy-matrix",
-   "title": "Albright hereditary osteodystrophy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A distinctive physical phenotype caused by variants in GNAS, which encodes the alpha subunit of the stimulatory G protein",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine / Metabolic bone",
+  "specialty": "Endocrinology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Standard endocrinology and clinical genetics references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A distinctive physical phenotype caused by variants in GNAS, which encodes the alpha subunit of the stimulatory G protein (Gs-alpha)",
+      "Characteristic features are short stature, a rounded face, obesity, brachydactyly (notably shortened fourth and fifth metacarpals), and subcutaneous ossifications",
+      "When AHO occurs with resistance to parathyroid hormone (and often other hormones such as TSH), it is termed pseudohypoparathyroidism type 1a, producing hypocalcaemia and hyperphosphataemia with a raised PTH",
+      "The same AHO physical phenotype without hormone resistance is called pseudopseudohypoparathyroidism, reflecting the parent-of-origin (imprinting) effect of GNAS",
+      "Hormone resistance appears when the defective allele is inherited maternally, because Gs-alpha is expressed largely from the maternal allele in key tissues such as the renal proximal tubule",
+      "Ectopic dermal or subcutaneous ossification and characteristic hand radiographs (short metacarpals) are useful diagnostic clues",
+      "Management centres on correcting hypocalcaemia with calcium and active vitamin D and monitoring for associated hormone resistances"
     ],
-    [
-     "Key Investigations",
-     "Serum calcium, phosphate and corrected calcium, Intact PTH level (raised in the resistance form despite hypocalcaemia), Thyroid",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Albright hereditary osteodystrophy stems from inactivating variants in GNAS, the gene for Gs-alpha, the signalling protein that couples numerous hormone receptors to adenylate cyclase and cyclic AMP generation. GNAS is subject to tissue-specific genomic imprinting: in tissues such as the renal proximal tubule, expression is predominantly from the maternal allele. When the inactivating variant is maternally inherited, tissues lose most Gs-alpha activity, so hormones acting through Gs-coupled receptors (notably PTH, and often TSH and gonadotrophins) cannot signal effectively, producing multi-hormone resistance and hypocalcaemia despite elevated PTH. When the same variant is paternally inherited, imprinting preserves signalling in these tissues, so the physical AHO phenotype occurs without hormone resistance. The skeletal and soft-tissue features (brachydactyly, ectopic ossification) reflect impaired Gs-alpha-dependent signalling in developing bone and connective tissue.",
+    "additionalDifferentials": [
+      "Primary or surgical hypoparathyroidism",
+      "Kenny-Caffey and Sanjad-Sakati syndromes",
+      "Acrodysostosis and other brachydactyly syndromes",
+      "Turner syndrome (short stature, short metacarpals)",
+      "Progressive osseous heteroplasia (also GNAS-related)",
+      "Vitamin D deficiency causing secondary hyperparathyroidism"
     ],
-    [
-     "Primary Differentials",
-     "Primary or surgical hypoparathyroidism, Kenny-Caffey and Sanjad-Sakati syndromes, Acrodysostosis and other brachydactyly syndromes",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum calcium, phosphate and corrected calcium",
+      "Intact PTH level (raised in the resistance form despite hypocalcaemia)",
+      "Thyroid function tests to detect associated TSH resistance",
+      "Hand and skeletal radiographs for brachydactyly and ectopic ossification",
+      "Molecular genetic testing of GNAS with methylation studies where indicated",
+      "Family evaluation clarifying the parent of origin for counselling"
     ],
-    [
-     "Management Strategy",
-     "Correct hypocalcaemia and hyperphosphataemia with oral calcium and active vitamin D analogues such as calcitriol or alfacalcidol",
-     "Core treatment modality"
+    "redFlags": [
+      "Symptomatic hypocalcaemia with tetany, seizures or prolonged QT interval",
+      "Progressive deep or disabling ectopic ossification",
+      "Untreated associated hypothyroidism from TSH resistance",
+      "Neurodevelopmental concerns requiring early assessment"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing pseudohypoparathyroidism with true hypoparathyroidism by not measuring PTH",
-     "Prevent diagnostic or management error"
+    "prognosis": "With appropriate calcium and active vitamin D therapy and surveillance for additional hormone resistances, the metabolic disturbance is manageable and life expectancy is generally normal, though short stature, brachydactyly, and ectopic ossification are permanent.",
+    "pitfalls": [
+      "Confusing pseudohypoparathyroidism with true hypoparathyroidism by not measuring PTH",
+      "Overlooking associated hypothyroidism because attention is fixed on calcium",
+      "Ignoring the imprinting basis, leading to inaccurate recurrence-risk counselling",
+      "Missing subtle brachydactyly or ectopic ossification that would prompt genetic testing"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "GeneReviews / OMIM entries on GNAS-related disorders"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Correct hypocalcaemia and hyperphosphataemia with oral calcium and active vitamin D analogues such as calcitriol or alfacalcidol in the resistance form",
+      "Thyroid hormone replacement with levothyroxine where associated TSH resistance causes hypothyroidism",
+      "Screen for and manage additional hormone resistances, including gonadotrophin and growth hormone-releasing hormone, as they emerge",
+      "Monitor serum calcium, phosphate and PTH to titrate therapy while avoiding hypercalciuria and nephrocalcinosis",
+      "Weight management and support for obesity, short stature and brachydactyly",
+      "Orthopaedic or dermatological input for symptomatic subcutaneous and ectopic ossifications",
+      "Multidisciplinary endocrine and genetics follow-up",
+      "Genetic counselling explaining the parent-of-origin imprinting effect, with testing of relatives"
     ]
-   ],
-   "caption": "Overview comparison matrix for albright hereditary osteodystrophy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "albright-hereditary-osteodystrophy-real-image",
-   "title": "Albright hereditary osteodystrophy: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "albright_hereditary_osteodystrophy-pathway",
+      "title": "Albright hereditary osteodystrophy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A distinctive physical phenotype caused by variants in GNAS, which encodes the alpha subunit of the stimulatory G protein (Gs-alpha)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Symptomatic hypocalcaemia with tetany, seizures or prolonged QT interval",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum calcium, phosphate and corrected calcium, Intact PTH level (raised in the resistance form despite hypocalcaemia), Thyroid function tests to detect associated TSH resistance"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Correct hypocalcaemia and hyperphosphataemia with oral calcium and active vitamin D analogues such as calcitriol or alfacalcidol in the resistance form"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing pseudohypoparathyroidism with true hypoparathyroidism by not measuring PTH"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of albright hereditary osteodystrophy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "albright_hereditary_osteodystrophy-matrix",
+      "title": "Albright hereditary osteodystrophy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A distinctive physical phenotype caused by variants in GNAS, which encodes the alpha subunit of the stimulatory G protein",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum calcium, phosphate and corrected calcium, Intact PTH level (raised in the resistance form despite hypocalcaemia), Thyroid",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Primary or surgical hypoparathyroidism, Kenny-Caffey and Sanjad-Sakati syndromes, Acrodysostosis and other brachydactyly syndromes",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Correct hypocalcaemia and hyperphosphataemia with oral calcium and active vitamin D analogues such as calcitriol or alfacalcidol",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing pseudohypoparathyroidism with true hypoparathyroidism by not measuring PTH",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for albright hereditary osteodystrophy."
+    }
+  ],
+  "diagrams": []
 }

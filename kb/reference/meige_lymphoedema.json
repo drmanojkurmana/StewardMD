@@ -1,178 +1,156 @@
 {
- "id": "meige_lymphoedema",
- "name": "meige lymphoedema",
- "aliases": [
-  "lymphoedema praecox",
-  "hereditary lymphoedema type II"
- ],
- "class": "non_infective",
- "system": "lymphatic and vascular",
- "specialty": "vascular medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Rutherford's Vascular Surgery and Endovascular Therapy",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The most common form of primary lymphoedema, defined by onset around puberty and before the age of 35 years, hence the alternative term lymphoedema praecox.",
-   "It shows a clear female predominance and typically presents as bilateral, often asymmetrical, lower-limb swelling.",
-   "Inheritance is usually autosomal dominant with variable penetrance and expressivity, so an affected first-degree relative supports the diagnosis.",
-   "It is distinguished from Milroy disease, which is congenital, type I and classically linked to FLT4 (VEGFR3) mutations, whereas Meige disease presents later and is genetically heterogeneous.",
-   "By definition Meige disease is isolated lymphoedema; the presence of distichiasis points instead to FOXC2-related lymphoedema-distichiasis and warrants ophthalmic examination.",
-   "The Stemmer sign is positive and the swelling begins distally before ascending, becoming progressively less pitting over time.",
-   "As with all chronic lymphoedema, recurrent cellulitis is common and both worsens and is worsened by the underlying lymphatic failure.",
-   "Lymphoscintigraphy confirms impaired lymphatic transport and helps exclude a secondary cause when onset is unusually asymmetrical or abrupt."
+  "id": "meige_lymphoedema",
+  "name": "meige lymphoedema",
+  "aliases": [
+    "lymphoedema praecox",
+    "hereditary lymphoedema type II"
   ],
-  "pathophysiology": "Meige lymphoedema arises from a constitutional abnormality of the peripheral lymphatic vessels, most often hypoplasia or aplasia of the collecting lymphatics, which becomes clinically manifest around puberty. The peripubertal timing suggests a hormonal trigger that unmasks marginal lymphatic reserve. Deficient lymphatic drainage causes accumulation of protein-rich interstitial fluid, and the resulting chronic inflammation drives adipose deposition and dermal fibrosis in the same self-perpetuating manner seen across primary lymphoedema. The condition is genetically heterogeneous, and it must be separated from defined single-gene entities such as FOXC2-related lymphoedema-distichiasis and GJC2-associated disease, which have distinct features and inheritance.",
-  "additionalDifferentials": [
-   "Milroy disease (congenital hereditary lymphoedema type I)",
-   "lymphoedema-distichiasis syndrome (FOXC2)",
-   "lymphoedema tarda with onset after 35 years",
-   "secondary lymphoedema from infection, malignancy or trauma",
-   "lipoedema",
-   "chronic venous insufficiency",
-   "systemic oedema from cardiac, renal or hepatic disease"
-  ],
-  "additionalInvestigations": [
-   "lymphoscintigraphy to demonstrate impaired lymphatic transport",
-   "detailed family pedigree and targeted genetic testing",
-   "venous duplex ultrasonography to exclude venous disease",
-   "MR or CT lymphangiography for anatomical assessment",
-   "slit-lamp ophthalmic examination to exclude distichiasis",
-   "thyroid, renal, hepatic and cardiac evaluation to exclude systemic oedema"
-  ],
-  "redFlags": [
-   "recurrent cellulitis with systemic sepsis",
-   "new violaceous or haemorrhagic cutaneous nodules suggesting angiosarcoma",
-   "rapidly progressive or newly asymmetrical swelling prompting exclusion of malignancy",
-   "syndromic features such as distichiasis, ptosis or yellow nails indicating an alternative diagnosis",
-   "skin ulceration or lymphorrhoea"
-  ],
-  "prognosis": "Meige lymphoedema is a lifelong condition, but with compression, skin care, exercise and infection prevention most patients maintain good limb function and a favourable quality of life. The outlook worsens with recurrent cellulitis and advanced fibrosis, and the small long-term risk of angiosarcoma persists.",
-  "pitfalls": [
-   "labelling all pubertal-onset lymphoedema as isolated Meige disease without checking for distichiasis or other syndromic features",
-   "failing to take a family history and thereby missing the hereditary pattern",
-   "confusing early presentation with lipoedema",
-   "undertreating cellulitis and accelerating lymphatic damage",
-   "attributing swelling to venous disease and delaying appropriate lymphatic management"
-  ],
-  "references": [
-   "Rutherford's Vascular Surgery and Endovascular Therapy",
-   "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
-   "International Society of Lymphology Consensus Document on the diagnosis and treatment of peripheral lymphoedema"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Deliver complete decongestive therapy with multilayer bandaging and graduated compression garments as the mainstay",
-   "Maintain meticulous skin care and hygiene to preserve the skin barrier and reduce infection risk",
-   "Treat cellulitis promptly with antibiotics and offer antibiotic prophylaxis for recurrent episodes",
-   "Encourage exercise, limb elevation and weight optimisation to support lymphatic drainage",
-   "Provide manual lymphatic drainage and consider surgery such as lymphaticovenous anastomosis, vascularised lymph node transfer or debulking in selected refractory cases",
-   "Exclude systemic causes of oedema and defined single-gene entities such as FOXC2-related lymphoedema-distichiasis",
-   "Offer genetic counselling given the autosomal dominant inheritance with variable penetrance",
-   "Undertake long-term surveillance for advancing fibrosis and the rare long-term risk of angiosarcoma"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "meige_lymphoedema-pathway",
-   "title": "meige lymphoedema: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The most common form of primary lymphoedema, defined by onset around puberty and before the age of 35 years, hence the alternative term lymphoedema praecox.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: recurrent cellulitis with systemic sepsis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: lymphoscintigraphy to demonstrate impaired lymphatic transport, detailed family pedigree and targeted genetic testing, venous duplex ultrasonography to exclude venous disease"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Deliver complete decongestive therapy with multilayer bandaging and graduated compression garments as the mainstay"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: labelling all pubertal-onset lymphoedema as isolated Meige disease without checking for distichiasis or other syndromic features"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of meige lymphoedema."
-  }
- ],
- "tables": [
-  {
-   "id": "meige_lymphoedema-matrix",
-   "title": "meige lymphoedema: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The most common form of primary lymphoedema, defined by onset around puberty and before the age of 35 years, hence the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "lymphatic and vascular",
+  "specialty": "vascular medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rutherford's Vascular Surgery and Endovascular Therapy",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The most common form of primary lymphoedema, defined by onset around puberty and before the age of 35 years, hence the alternative term lymphoedema praecox.",
+      "It shows a clear female predominance and typically presents as bilateral, often asymmetrical, lower-limb swelling.",
+      "Inheritance is usually autosomal dominant with variable penetrance and expressivity, so an affected first-degree relative supports the diagnosis.",
+      "It is distinguished from Milroy disease, which is congenital, type I and classically linked to FLT4 (VEGFR3) mutations, whereas Meige disease presents later and is genetically heterogeneous.",
+      "By definition Meige disease is isolated lymphoedema; the presence of distichiasis points instead to FOXC2-related lymphoedema-distichiasis and warrants ophthalmic examination.",
+      "The Stemmer sign is positive and the swelling begins distally before ascending, becoming progressively less pitting over time.",
+      "As with all chronic lymphoedema, recurrent cellulitis is common and both worsens and is worsened by the underlying lymphatic failure.",
+      "Lymphoscintigraphy confirms impaired lymphatic transport and helps exclude a secondary cause when onset is unusually asymmetrical or abrupt."
     ],
-    [
-     "Key Investigations",
-     "lymphoscintigraphy to demonstrate impaired lymphatic transport, detailed family pedigree and targeted genetic testing, venous",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Meige lymphoedema arises from a constitutional abnormality of the peripheral lymphatic vessels, most often hypoplasia or aplasia of the collecting lymphatics, which becomes clinically manifest around puberty. The peripubertal timing suggests a hormonal trigger that unmasks marginal lymphatic reserve. Deficient lymphatic drainage causes accumulation of protein-rich interstitial fluid, and the resulting chronic inflammation drives adipose deposition and dermal fibrosis in the same self-perpetuating manner seen across primary lymphoedema. The condition is genetically heterogeneous, and it must be separated from defined single-gene entities such as FOXC2-related lymphoedema-distichiasis and GJC2-associated disease, which have distinct features and inheritance.",
+    "additionalDifferentials": [
+      "Milroy disease (congenital hereditary lymphoedema type I)",
+      "lymphoedema-distichiasis syndrome (FOXC2)",
+      "lymphoedema tarda with onset after 35 years",
+      "secondary lymphoedema from infection, malignancy or trauma",
+      "lipoedema",
+      "chronic venous insufficiency",
+      "systemic oedema from cardiac, renal or hepatic disease"
     ],
-    [
-     "Primary Differentials",
-     "Milroy disease (congenital hereditary lymphoedema type I), lymphoedema-distichiasis syndrome (FOXC2), lymphoedema tarda with",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "lymphoscintigraphy to demonstrate impaired lymphatic transport",
+      "detailed family pedigree and targeted genetic testing",
+      "venous duplex ultrasonography to exclude venous disease",
+      "MR or CT lymphangiography for anatomical assessment",
+      "slit-lamp ophthalmic examination to exclude distichiasis",
+      "thyroid, renal, hepatic and cardiac evaluation to exclude systemic oedema"
     ],
-    [
-     "Management Strategy",
-     "Deliver complete decongestive therapy with multilayer bandaging and graduated compression garments as the mainstay",
-     "Core treatment modality"
+    "redFlags": [
+      "recurrent cellulitis with systemic sepsis",
+      "new violaceous or haemorrhagic cutaneous nodules suggesting angiosarcoma",
+      "rapidly progressive or newly asymmetrical swelling prompting exclusion of malignancy",
+      "syndromic features such as distichiasis, ptosis or yellow nails indicating an alternative diagnosis",
+      "skin ulceration or lymphorrhoea"
     ],
-    [
-     "Clinical Pitfall",
-     "labelling all pubertal-onset lymphoedema as isolated Meige disease without checking for distichiasis or other syndromic features",
-     "Prevent diagnostic or management error"
+    "prognosis": "Meige lymphoedema is a lifelong condition, but with compression, skin care, exercise and infection prevention most patients maintain good limb function and a favourable quality of life. The outlook worsens with recurrent cellulitis and advanced fibrosis, and the small long-term risk of angiosarcoma persists.",
+    "pitfalls": [
+      "labelling all pubertal-onset lymphoedema as isolated Meige disease without checking for distichiasis or other syndromic features",
+      "failing to take a family history and thereby missing the hereditary pattern",
+      "confusing early presentation with lipoedema",
+      "undertreating cellulitis and accelerating lymphatic damage",
+      "attributing swelling to venous disease and delaying appropriate lymphatic management"
+    ],
+    "references": [
+      "Rutherford's Vascular Surgery and Endovascular Therapy",
+      "Browse's Introduction to the Symptoms and Signs of Surgical Disease",
+      "International Society of Lymphology Consensus Document on the diagnosis and treatment of peripheral lymphoedema"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Deliver complete decongestive therapy with multilayer bandaging and graduated compression garments as the mainstay",
+      "Maintain meticulous skin care and hygiene to preserve the skin barrier and reduce infection risk",
+      "Treat cellulitis promptly with antibiotics and offer antibiotic prophylaxis for recurrent episodes",
+      "Encourage exercise, limb elevation and weight optimisation to support lymphatic drainage",
+      "Provide manual lymphatic drainage and consider surgery such as lymphaticovenous anastomosis, vascularised lymph node transfer or debulking in selected refractory cases",
+      "Exclude systemic causes of oedema and defined single-gene entities such as FOXC2-related lymphoedema-distichiasis",
+      "Offer genetic counselling given the autosomal dominant inheritance with variable penetrance",
+      "Undertake long-term surveillance for advancing fibrosis and the rare long-term risk of angiosarcoma"
     ]
-   ],
-   "caption": "Overview comparison matrix for meige lymphoedema."
-  }
- ],
- "diagrams": [
-  {
-   "id": "meige-lymphoedema-real-image",
-   "title": "meige lymphoedema: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "meige_lymphoedema-pathway",
+      "title": "meige lymphoedema: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The most common form of primary lymphoedema, defined by onset around puberty and before the age of 35 years, hence the alternative term lymphoedema praecox.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: recurrent cellulitis with systemic sepsis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: lymphoscintigraphy to demonstrate impaired lymphatic transport, detailed family pedigree and targeted genetic testing, venous duplex ultrasonography to exclude venous disease"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Deliver complete decongestive therapy with multilayer bandaging and graduated compression garments as the mainstay"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: labelling all pubertal-onset lymphoedema as isolated Meige disease without checking for distichiasis or other syndromic features"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of meige lymphoedema."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "meige_lymphoedema-matrix",
+      "title": "meige lymphoedema: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The most common form of primary lymphoedema, defined by onset around puberty and before the age of 35 years, hence the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "lymphoscintigraphy to demonstrate impaired lymphatic transport, detailed family pedigree and targeted genetic testing, venous",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Milroy disease (congenital hereditary lymphoedema type I), lymphoedema-distichiasis syndrome (FOXC2), lymphoedema tarda with",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Deliver complete decongestive therapy with multilayer bandaging and graduated compression garments as the mainstay",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "labelling all pubertal-onset lymphoedema as isolated Meige disease without checking for distichiasis or other syndromic features",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for meige lymphoedema."
+    }
+  ],
+  "diagrams": []
 }

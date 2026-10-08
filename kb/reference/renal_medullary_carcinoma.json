@@ -1,178 +1,156 @@
 {
- "id": "renal_medullary_carcinoma",
- "name": "Renal medullary carcinoma",
- "aliases": [
-  "RMC",
-  "renal medullary cancer"
- ],
- "class": "non_infective",
- "system": "Genitourinary / Kidney",
- "specialty": "Uro-oncology / Nephrology",
- "referenceOnly": true,
- "reference": {
-  "source": "Uro-oncology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare, highly aggressive renal malignancy that arises from the collecting duct epithelium of the renal medulla",
-   "Occurs almost exclusively in young people with sickle cell trait, and less often with sickle cell disease or other haemoglobinopathies",
-   "Typically presents with haematuria, flank or abdominal pain, and a palpable mass, often with weight loss",
-   "Most patients have metastatic disease at diagnosis, commonly to lymph nodes, lung, liver and bone",
-   "Tumours characteristically show loss of the SMARCB1 (INI1) tumour-suppressor protein on immunohistochemistry",
-   "It should be suspected in any young Black patient with sickle cell trait who presents with a renal mass",
-   "Prognosis is poor and it responds poorly to conventional targeted agents used in clear cell disease"
+  "id": "renal_medullary_carcinoma",
+  "name": "Renal medullary carcinoma",
+  "aliases": [
+    "RMC",
+    "renal medullary cancer"
   ],
-  "pathophysiology": "Renal medullary carcinoma arises from the distal collecting duct or calyceal epithelium within the renal medulla. The chronic hypoxic, hypertonic medullary environment in individuals with sickling haemoglobinopathies is thought to promote genomic instability and malignant transformation. Loss of function of the SWI/SNF chromatin-remodelling subunit SMARCB1 (INI1) is a defining molecular event, driving an aggressive, poorly differentiated tumour with early lymphovascular invasion and rapid metastatic spread.",
-  "additionalDifferentials": [
-   "Collecting duct (Bellini) carcinoma",
-   "Urothelial carcinoma of the upper tract",
-   "High-grade clear cell renal cell carcinoma",
-   "Papillary renal cell carcinoma",
-   "Metastatic deposit within the kidney",
-   "Renal lymphoma"
-  ],
-  "additionalInvestigations": [
-   "Contrast-enhanced CT of the abdomen and pelvis to characterise the mass and assess spread",
-   "Cross-sectional imaging of chest for pulmonary metastases",
-   "Tissue biopsy with immunohistochemistry, including SMARCB1 (INI1) staining",
-   "Haemoglobinopathy testing (sickle solubility test and haemoglobin electrophoresis)",
-   "Baseline bloods including renal function and markers of tumour burden"
-  ],
-  "redFlags": [
-   "Visible haematuria with a renal mass in a young patient with sickle cell trait",
-   "Rapidly enlarging mass with systemic symptoms",
-   "Evidence of widespread metastatic disease at presentation",
-   "Bone pain or pathological fracture suggesting skeletal spread"
-  ],
-  "prognosis": "The prognosis is generally poor, with most patients presenting with advanced disease and short survival; localised disease treated with surgery combined with systemic chemotherapy offers the best, though still limited, outcomes.",
-  "pitfalls": [
-   "Overlooking the diagnosis in a young patient because renal cancer is assumed to affect older adults",
-   "Failing to test for sickle cell trait when a medullary renal mass is found",
-   "Misclassifying it as clear cell carcinoma and offering ineffective targeted therapy",
-   "Delaying tissue diagnosis in a rapidly progressive tumour"
-  ],
-  "references": [
-   "Campbell-Walsh-Wein Urology (standard reference)",
-   "WHO Classification of Urinary and Male Genital Tumours"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Refer promptly to a uro-oncology multidisciplinary team as soon as diagnosis is suspected, given the rapid pace of progression.",
-   "For localised or locally advanced disease, radical nephrectomy with regional lymphadenectomy is the mainstay, but perioperative systemic chemotherapy is generally added given the high rate of occult micrometastatic spread rather than surgery alone.",
-   "For metastatic disease at diagnosis, which is most patients, systemic chemotherapy is the primary treatment intent, with surgery to the primary or metastasis-directed therapy considered selectively in good responders.",
-   "First-line systemic therapy is intensive combination cytotoxic chemotherapy, with platinum-based combination regimens forming the backbone of most reported treatment.",
-   "Anti-angiogenic and mTOR-pathway targeted agents used in clear cell renal cell carcinoma have limited and inconsistent activity in renal medullary carcinoma and are not a reliable substitute for cytotoxic chemotherapy.",
-   "On progression, further cytotoxic combinations or single agents may be tried, but clinical trial referral is preferred over empiric sequencing of standard agents whenever a trial is accessible.",
-   "Investigational approaches targeting loss of the SMARCB1 (INI1) chromatin-remodelling protein, the tumour's defining molecular lesion, are of active trial interest but not established standard of care.",
-   "Radical nephrectomy can debulk or consolidate disease in selected responders to systemic therapy, but surgery alone is not curative given the propensity for early micrometastatic spread.",
-   "Resection or ablation of isolated, symptomatic, or oligometastatic sites may be considered case by case as part of a multimodal, multidisciplinary plan.",
-   "Radiotherapy is used mainly for palliation of pain or local symptoms from metastatic deposits rather than with curative intent.",
-   "Confirm the underlying sickling haemoglobinopathy with sickle solubility testing and haemoglobin electrophoresis, and provide supportive haematological care.",
-   "Offer genetic counselling and family sickle cell screening given the strong association with sickling haemoglobinopathies.",
-   "Provide early palliative and supportive care alongside active treatment because of the generally short survival and high symptom burden.",
-   "Monitor with periodic cross-sectional imaging of chest, abdomen and pelvis to assess treatment response and detect progression, and monitor renal function given baseline risk from sickling haemoglobinopathies."
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "renal_medullary_carcinoma-pathway",
-   "title": "Renal medullary carcinoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare, highly aggressive renal malignancy that arises from the collecting duct epithelium of the renal medulla",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Visible haematuria with a renal mass in a young patient with sickle cell trait",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Contrast-enhanced CT of the abdomen and pelvis to characterise the mass and assess spread, Cross-sectional imaging of chest for pulmonary metastases, Tissue biopsy with immunohistochemistry, including SMARCB1 (INI1)"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Refer promptly to a uro-oncology multidisciplinary team as soon as diagnosis is suspected, given the rapid pace of progression."
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking the diagnosis in a young patient because renal cancer is assumed to affect older adults"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of renal medullary carcinoma."
-  }
- ],
- "tables": [
-  {
-   "id": "renal_medullary_carcinoma-matrix",
-   "title": "Renal medullary carcinoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare, highly aggressive renal malignancy that arises from the collecting duct epithelium of the renal medulla",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Genitourinary / Kidney",
+  "specialty": "Uro-oncology / Nephrology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Uro-oncology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare, highly aggressive renal malignancy that arises from the collecting duct epithelium of the renal medulla",
+      "Occurs almost exclusively in young people with sickle cell trait, and less often with sickle cell disease or other haemoglobinopathies",
+      "Typically presents with haematuria, flank or abdominal pain, and a palpable mass, often with weight loss",
+      "Most patients have metastatic disease at diagnosis, commonly to lymph nodes, lung, liver and bone",
+      "Tumours characteristically show loss of the SMARCB1 (INI1) tumour-suppressor protein on immunohistochemistry",
+      "It should be suspected in any young Black patient with sickle cell trait who presents with a renal mass",
+      "Prognosis is poor and it responds poorly to conventional targeted agents used in clear cell disease"
     ],
-    [
-     "Key Investigations",
-     "Contrast-enhanced CT of the abdomen and pelvis to characterise the mass and assess spread, Cross-sectional imaging of chest for",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Renal medullary carcinoma arises from the distal collecting duct or calyceal epithelium within the renal medulla. The chronic hypoxic, hypertonic medullary environment in individuals with sickling haemoglobinopathies is thought to promote genomic instability and malignant transformation. Loss of function of the SWI/SNF chromatin-remodelling subunit SMARCB1 (INI1) is a defining molecular event, driving an aggressive, poorly differentiated tumour with early lymphovascular invasion and rapid metastatic spread.",
+    "additionalDifferentials": [
+      "Collecting duct (Bellini) carcinoma",
+      "Urothelial carcinoma of the upper tract",
+      "High-grade clear cell renal cell carcinoma",
+      "Papillary renal cell carcinoma",
+      "Metastatic deposit within the kidney",
+      "Renal lymphoma"
     ],
-    [
-     "Primary Differentials",
-     "Collecting duct (Bellini) carcinoma, Urothelial carcinoma of the upper tract, High-grade clear cell renal cell carcinoma",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Contrast-enhanced CT of the abdomen and pelvis to characterise the mass and assess spread",
+      "Cross-sectional imaging of chest for pulmonary metastases",
+      "Tissue biopsy with immunohistochemistry, including SMARCB1 (INI1) staining",
+      "Haemoglobinopathy testing (sickle solubility test and haemoglobin electrophoresis)",
+      "Baseline bloods including renal function and markers of tumour burden"
     ],
-    [
-     "Management Strategy",
-     "Refer promptly to a uro-oncology multidisciplinary team as soon as diagnosis is suspected, given the rapid pace of progression.",
-     "Core treatment modality"
+    "redFlags": [
+      "Visible haematuria with a renal mass in a young patient with sickle cell trait",
+      "Rapidly enlarging mass with systemic symptoms",
+      "Evidence of widespread metastatic disease at presentation",
+      "Bone pain or pathological fracture suggesting skeletal spread"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking the diagnosis in a young patient because renal cancer is assumed to affect older adults",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis is generally poor, with most patients presenting with advanced disease and short survival; localised disease treated with surgery combined with systemic chemotherapy offers the best, though still limited, outcomes.",
+    "pitfalls": [
+      "Overlooking the diagnosis in a young patient because renal cancer is assumed to affect older adults",
+      "Failing to test for sickle cell trait when a medullary renal mass is found",
+      "Misclassifying it as clear cell carcinoma and offering ineffective targeted therapy",
+      "Delaying tissue diagnosis in a rapidly progressive tumour"
+    ],
+    "references": [
+      "Campbell-Walsh-Wein Urology (standard reference)",
+      "WHO Classification of Urinary and Male Genital Tumours"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Refer promptly to a uro-oncology multidisciplinary team as soon as diagnosis is suspected, given the rapid pace of progression.",
+      "For localised or locally advanced disease, radical nephrectomy with regional lymphadenectomy is the mainstay, but perioperative systemic chemotherapy is generally added given the high rate of occult micrometastatic spread rather than surgery alone.",
+      "For metastatic disease at diagnosis, which is most patients, systemic chemotherapy is the primary treatment intent, with surgery to the primary or metastasis-directed therapy considered selectively in good responders.",
+      "First-line systemic therapy is intensive combination cytotoxic chemotherapy, with platinum-based combination regimens forming the backbone of most reported treatment.",
+      "Anti-angiogenic and mTOR-pathway targeted agents used in clear cell renal cell carcinoma have limited and inconsistent activity in renal medullary carcinoma and are not a reliable substitute for cytotoxic chemotherapy.",
+      "On progression, further cytotoxic combinations or single agents may be tried, but clinical trial referral is preferred over empiric sequencing of standard agents whenever a trial is accessible.",
+      "Investigational approaches targeting loss of the SMARCB1 (INI1) chromatin-remodelling protein, the tumour's defining molecular lesion, are of active trial interest but not established standard of care.",
+      "Radical nephrectomy can debulk or consolidate disease in selected responders to systemic therapy, but surgery alone is not curative given the propensity for early micrometastatic spread.",
+      "Resection or ablation of isolated, symptomatic, or oligometastatic sites may be considered case by case as part of a multimodal, multidisciplinary plan.",
+      "Radiotherapy is used mainly for palliation of pain or local symptoms from metastatic deposits rather than with curative intent.",
+      "Confirm the underlying sickling haemoglobinopathy with sickle solubility testing and haemoglobin electrophoresis, and provide supportive haematological care.",
+      "Offer genetic counselling and family sickle cell screening given the strong association with sickling haemoglobinopathies.",
+      "Provide early palliative and supportive care alongside active treatment because of the generally short survival and high symptom burden.",
+      "Monitor with periodic cross-sectional imaging of chest, abdomen and pelvis to assess treatment response and detect progression, and monitor renal function given baseline risk from sickling haemoglobinopathies."
     ]
-   ],
-   "caption": "Overview comparison matrix for renal medullary carcinoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "renal-medullary-carcinoma-real-image",
-   "title": "Renal medullary carcinoma: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "renal_medullary_carcinoma-pathway",
+      "title": "Renal medullary carcinoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare, highly aggressive renal malignancy that arises from the collecting duct epithelium of the renal medulla",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Visible haematuria with a renal mass in a young patient with sickle cell trait",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Contrast-enhanced CT of the abdomen and pelvis to characterise the mass and assess spread, Cross-sectional imaging of chest for pulmonary metastases, Tissue biopsy with immunohistochemistry, including SMARCB1 (INI1)"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Refer promptly to a uro-oncology multidisciplinary team as soon as diagnosis is suspected, given the rapid pace of progression."
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking the diagnosis in a young patient because renal cancer is assumed to affect older adults"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of renal medullary carcinoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "renal_medullary_carcinoma-matrix",
+      "title": "Renal medullary carcinoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare, highly aggressive renal malignancy that arises from the collecting duct epithelium of the renal medulla",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Contrast-enhanced CT of the abdomen and pelvis to characterise the mass and assess spread, Cross-sectional imaging of chest for",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Collecting duct (Bellini) carcinoma, Urothelial carcinoma of the upper tract, High-grade clear cell renal cell carcinoma",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Refer promptly to a uro-oncology multidisciplinary team as soon as diagnosis is suspected, given the rapid pace of progression.",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking the diagnosis in a young patient because renal cancer is assumed to affect older adults",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for renal medullary carcinoma."
+    }
+  ],
+  "diagrams": []
 }

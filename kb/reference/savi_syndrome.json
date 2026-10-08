@@ -1,175 +1,153 @@
 {
- "id": "savi_syndrome",
- "name": "SAVI (STING-associated vasculopathy of infancy)",
- "aliases": [
-  "STING-associated vasculopathy with onset in infancy",
-  "TMEM173",
-  "STING1",
-  "STING gain-of-function disease"
- ],
- "class": "non_infective",
- "system": "Immunology / Autoinflammatory",
- "specialty": "Clinical Immunology / Rheumatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Textbook of Autoinflammation / Nelson Textbook of Paediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A type I interferonopathy caused by gain-of-function mutations in TMEM173 (STING1), leading to constitutive STING activation",
-   "Presents in infancy with systemic inflammation, failure to thrive, and a severe cutaneous vasculopathy affecting acral sites",
-   "Skin disease produces violaceous, telangiectatic, and ulcerating lesions of the cheeks, nose, ears, and digits, sometimes progressing to acral gangrene and tissue loss",
-   "Interstitial lung disease with progressive fibrosis is a major and potentially fatal feature",
-   "A strong interferon signature in blood supports the diagnosis alongside genetic confirmation",
-   "Recurrent fevers, arthritis, and myositis may accompany the vascular and pulmonary manifestations",
-   "JAK inhibition targeting interferon signalling is the mainstay of therapy and can stabilise skin and lung disease"
+  "id": "savi_syndrome",
+  "name": "SAVI (STING-associated vasculopathy of infancy)",
+  "aliases": [
+    "STING-associated vasculopathy with onset in infancy",
+    "TMEM173",
+    "STING1",
+    "STING gain-of-function disease"
   ],
-  "pathophysiology": "SAVI is caused by gain-of-function mutations in TMEM173 (STING1) that lock the STING protein in a constitutively active state. Persistent STING signalling drives sustained transcription of type I interferons independent of the usual cytosolic nucleic-acid triggers. The resulting interferon excess produces a small-vessel vasculopathy, particularly at cool acral surfaces, and progressive interstitial lung inflammation and fibrosis. This interferon-dominated mechanism underlies the systemic inflammation and provides the rationale for JAK inhibition to interrupt downstream interferon signalling.",
-  "additionalDifferentials": [
-   "CANDLE syndrome and other type I interferonopathies",
-   "Systemic-onset vasculitis of childhood",
-   "Cryoglobulinaemic or cold-induced vasculopathy",
-   "Neonatal lupus and systemic lupus erythematosus",
-   "Antiphospholipid syndrome with acral ischaemia",
-   "Interstitial lung disease of other autoimmune cause"
-  ],
-  "additionalInvestigations": [
-   "Genetic testing for TMEM173 (STING1) gain-of-function mutations",
-   "Interferon signature in blood",
-   "High-resolution chest CT for interstitial lung disease and fibrosis",
-   "Skin biopsy of vasculopathic lesions",
-   "Autoantibody panel to help exclude systemic lupus and antiphospholipid syndrome",
-   "Pulmonary function testing where age permits"
-  ],
-  "redFlags": [
-   "Progressive interstitial lung disease with respiratory failure",
-   "Acral gangrene threatening loss of digits or facial tissue",
-   "Severe failure to thrive with unremitting inflammation",
-   "Rapid clinical deterioration despite immunosuppression"
-  ],
-  "prognosis": "SAVI is a serious disease with substantial morbidity and mortality driven mainly by progressive lung fibrosis; JAK inhibition can stabilise disease but pulmonary and acral damage may be irreversible.",
-  "pitfalls": [
-   "Mistaking acral vasculopathy for frostbite, cold injury, or primary vasculitis",
-   "Underestimating and under-monitoring the interstitial lung disease",
-   "Relying on corticosteroids alone rather than targeting interferon signalling",
-   "Delaying genetic testing and interferon signature assessment in an unwell infant"
-  ],
-  "references": [
-   "Textbook of Autoinflammation",
-   "Nelson Textbook of Paediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Use Janus kinase (JAK) inhibitors such as baricitinib or ruxolitinib as the mainstay to interrupt downstream type I interferon signalling",
-   "Employ corticosteroids for acute inflammatory flares, recognising that conventional immunosuppression alone is often insufficient",
-   "Provide meticulous wound care for acral vasculopathy and ulceration, protect extremities from cold, and avoid tobacco to limit acral ischaemia and tissue loss",
-   "Monitor interstitial lung disease with high-resolution chest CT and pulmonary function testing, as progressive fibrosis drives mortality",
-   "Screen for infection during immunomodulatory therapy and vaccinate appropriately",
-   "Consider lung transplantation for end-stage pulmonary fibrosis",
-   "Coordinate care across clinical immunology, rheumatology, and respiratory teams",
-   "Offer genetic counselling for the autosomal dominant TMEM173 (STING1) gain-of-function variant, noting many arise de novo"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "savi_syndrome-pathway",
-   "title": "SAVI (STING-associated vasculopathy of infancy): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A type I interferonopathy caused by gain-of-function mutations in TMEM173 (STING1), leading to constitutive STING activation",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive interstitial lung disease with respiratory failure",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Genetic testing for TMEM173 (STING1) gain-of-function mutations, Interferon signature in blood, High-resolution chest CT for interstitial lung disease and fibrosis"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Use Janus kinase (JAK) inhibitors such as baricitinib or ruxolitinib as the mainstay to interrupt downstream type I interferon signalling"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking acral vasculopathy for frostbite, cold injury, or primary vasculitis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of savi (sting-associated vasculopathy of infancy)."
-  }
- ],
- "tables": [
-  {
-   "id": "savi_syndrome-matrix",
-   "title": "SAVI (STING-associated vasculopathy of infancy): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A type I interferonopathy caused by gain-of-function mutations in TMEM173 (STING1), leading to constitutive STING activation",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Immunology / Autoinflammatory",
+  "specialty": "Clinical Immunology / Rheumatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Textbook of Autoinflammation / Nelson Textbook of Paediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A type I interferonopathy caused by gain-of-function mutations in TMEM173 (STING1), leading to constitutive STING activation",
+      "Presents in infancy with systemic inflammation, failure to thrive, and a severe cutaneous vasculopathy affecting acral sites",
+      "Skin disease produces violaceous, telangiectatic, and ulcerating lesions of the cheeks, nose, ears, and digits, sometimes progressing to acral gangrene and tissue loss",
+      "Interstitial lung disease with progressive fibrosis is a major and potentially fatal feature",
+      "A strong interferon signature in blood supports the diagnosis alongside genetic confirmation",
+      "Recurrent fevers, arthritis, and myositis may accompany the vascular and pulmonary manifestations",
+      "JAK inhibition targeting interferon signalling is the mainstay of therapy and can stabilise skin and lung disease"
     ],
-    [
-     "Key Investigations",
-     "Genetic testing for TMEM173 (STING1) gain-of-function mutations, Interferon signature in blood, High-resolution chest CT for",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "SAVI is caused by gain-of-function mutations in TMEM173 (STING1) that lock the STING protein in a constitutively active state. Persistent STING signalling drives sustained transcription of type I interferons independent of the usual cytosolic nucleic-acid triggers. The resulting interferon excess produces a small-vessel vasculopathy, particularly at cool acral surfaces, and progressive interstitial lung inflammation and fibrosis. This interferon-dominated mechanism underlies the systemic inflammation and provides the rationale for JAK inhibition to interrupt downstream interferon signalling.",
+    "additionalDifferentials": [
+      "CANDLE syndrome and other type I interferonopathies",
+      "Systemic-onset vasculitis of childhood",
+      "Cryoglobulinaemic or cold-induced vasculopathy",
+      "Neonatal lupus and systemic lupus erythematosus",
+      "Antiphospholipid syndrome with acral ischaemia",
+      "Interstitial lung disease of other autoimmune cause"
     ],
-    [
-     "Primary Differentials",
-     "CANDLE syndrome and other type I interferonopathies, Systemic-onset vasculitis of childhood, Cryoglobulinaemic or cold-induced",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Genetic testing for TMEM173 (STING1) gain-of-function mutations",
+      "Interferon signature in blood",
+      "High-resolution chest CT for interstitial lung disease and fibrosis",
+      "Skin biopsy of vasculopathic lesions",
+      "Autoantibody panel to help exclude systemic lupus and antiphospholipid syndrome",
+      "Pulmonary function testing where age permits"
     ],
-    [
-     "Management Strategy",
-     "Use Janus kinase (JAK) inhibitors such as baricitinib or ruxolitinib as the mainstay to interrupt downstream type I interferon",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive interstitial lung disease with respiratory failure",
+      "Acral gangrene threatening loss of digits or facial tissue",
+      "Severe failure to thrive with unremitting inflammation",
+      "Rapid clinical deterioration despite immunosuppression"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking acral vasculopathy for frostbite, cold injury, or primary vasculitis",
-     "Prevent diagnostic or management error"
+    "prognosis": "SAVI is a serious disease with substantial morbidity and mortality driven mainly by progressive lung fibrosis; JAK inhibition can stabilise disease but pulmonary and acral damage may be irreversible.",
+    "pitfalls": [
+      "Mistaking acral vasculopathy for frostbite, cold injury, or primary vasculitis",
+      "Underestimating and under-monitoring the interstitial lung disease",
+      "Relying on corticosteroids alone rather than targeting interferon signalling",
+      "Delaying genetic testing and interferon signature assessment in an unwell infant"
+    ],
+    "references": [
+      "Textbook of Autoinflammation",
+      "Nelson Textbook of Paediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Use Janus kinase (JAK) inhibitors such as baricitinib or ruxolitinib as the mainstay to interrupt downstream type I interferon signalling",
+      "Employ corticosteroids for acute inflammatory flares, recognising that conventional immunosuppression alone is often insufficient",
+      "Provide meticulous wound care for acral vasculopathy and ulceration, protect extremities from cold, and avoid tobacco to limit acral ischaemia and tissue loss",
+      "Monitor interstitial lung disease with high-resolution chest CT and pulmonary function testing, as progressive fibrosis drives mortality",
+      "Screen for infection during immunomodulatory therapy and vaccinate appropriately",
+      "Consider lung transplantation for end-stage pulmonary fibrosis",
+      "Coordinate care across clinical immunology, rheumatology, and respiratory teams",
+      "Offer genetic counselling for the autosomal dominant TMEM173 (STING1) gain-of-function variant, noting many arise de novo"
     ]
-   ],
-   "caption": "Overview comparison matrix for savi (sting-associated vasculopathy of infancy)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "savi-syndrome-real-image",
-   "title": "SAVI (STING-associated vasculopathy of infancy): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "savi_syndrome-pathway",
+      "title": "SAVI (STING-associated vasculopathy of infancy): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A type I interferonopathy caused by gain-of-function mutations in TMEM173 (STING1), leading to constitutive STING activation",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive interstitial lung disease with respiratory failure",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Genetic testing for TMEM173 (STING1) gain-of-function mutations, Interferon signature in blood, High-resolution chest CT for interstitial lung disease and fibrosis"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Use Janus kinase (JAK) inhibitors such as baricitinib or ruxolitinib as the mainstay to interrupt downstream type I interferon signalling"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking acral vasculopathy for frostbite, cold injury, or primary vasculitis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of savi (sting-associated vasculopathy of infancy)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "savi_syndrome-matrix",
+      "title": "SAVI (STING-associated vasculopathy of infancy): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A type I interferonopathy caused by gain-of-function mutations in TMEM173 (STING1), leading to constitutive STING activation",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Genetic testing for TMEM173 (STING1) gain-of-function mutations, Interferon signature in blood, High-resolution chest CT for",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "CANDLE syndrome and other type I interferonopathies, Systemic-onset vasculitis of childhood, Cryoglobulinaemic or cold-induced",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Use Janus kinase (JAK) inhibitors such as baricitinib or ruxolitinib as the mainstay to interrupt downstream type I interferon",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking acral vasculopathy for frostbite, cold injury, or primary vasculitis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for savi (sting-associated vasculopathy of infancy)."
+    }
+  ],
+  "diagrams": []
 }

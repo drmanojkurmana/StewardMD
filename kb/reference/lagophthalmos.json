@@ -1,169 +1,147 @@
 {
- "id": "lagophthalmos",
- "name": "Lagophthalmos",
- "aliases": [
-  "incomplete eyelid closure"
- ],
- "class": "non_infective",
- "system": "Eye / Orbit and adnexa",
- "specialty": "Ophthalmology / Oculoplastics",
- "referenceOnly": true,
- "reference": {
-  "source": "Ophthalmology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Incomplete closure of the eyelids, leaving the ocular surface exposed and at risk of drying",
-   "The commonest cause is facial (seventh nerve) palsy weakening the orbicularis oculi",
-   "Nocturnal lagophthalmos, exposure from proptosis or lid retraction, and cicatricial lid shortening are other causes",
-   "A protective upward rotation of the globe on attempted closure (Bell phenomenon) helps guard the cornea",
-   "Exposure keratopathy, ranging from punctate staining to ulceration, is the main threat to sight",
-   "Management centres on intensive ocular surface lubrication and protection, with surgical measures for persistent cases"
+  "id": "lagophthalmos",
+  "name": "Lagophthalmos",
+  "aliases": [
+    "incomplete eyelid closure"
   ],
-  "pathophysiology": "Lagophthalmos occurs when the eyelids cannot fully appose, whether from weakness of the orbicularis oculi (as in facial nerve palsy), mechanical factors such as proptosis or lid retraction, or cicatricial shortening of the lids. Failure of the normal blink and closure leaves the interpalpebral cornea and conjunctiva exposed, so the tear film evaporates and the surface dries. Without an effective Bell phenomenon or protective measures, exposure leads to epithelial breakdown, keratopathy and potential ulceration or perforation.",
-  "additionalDifferentials": [
-   "Facial nerve palsy",
-   "Thyroid eye disease with proptosis or retraction",
-   "Cicatricial eyelid shortening",
-   "Proptosis from orbital disease",
-   "Nocturnal lagophthalmos",
-   "Floppy eyelid syndrome"
-  ],
-  "additionalInvestigations": [
-   "Measurement of the closure gap and assessment of blink",
-   "Corneal examination with fluorescein for exposure keratopathy",
-   "Assessment of the Bell phenomenon and corneal sensation",
-   "Evaluation for facial nerve palsy or orbital cause",
-   "Thyroid assessment where relevant"
-  ],
-  "redFlags": [
-   "Corneal ulceration or thinning",
-   "Reduced corneal sensation compounding exposure risk (neurotrophic component)",
-   "Absent Bell phenomenon",
-   "Progressive or severe exposure with visual loss"
-  ],
-  "prognosis": "With diligent lubrication and protection the cornea can be preserved, and many neurogenic cases improve as the palsy recovers; persistent or severe exposure may need surgical lid procedures to protect sight.",
-  "pitfalls": [
-   "Underestimating exposure risk when corneal sensation is also reduced",
-   "Relying on infrequent lubrication in significant lagophthalmos",
-   "Overlooking nocturnal lagophthalmos as a cause of morning irritation",
-   "Failing to protect the eye during the recovery phase of facial palsy"
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology",
-   "Oculoplastic surgery references (standard reference)"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Intensive ocular surface lubrication is the mainstay - frequent artificial tears through the day and a lubricating ointment at night",
-   "Provide mechanical protection with lid taping, a moisture chamber or an overnight eyelid dressing to shield the exposed cornea",
-   "Treat the underlying cause, such as managing facial nerve palsy or thyroid eye disease and addressing proptosis or lid retraction",
-   "Offer surgical measures for persistent exposure - upper-lid weight implantation, tarsorrhaphy, lower-lid tightening or correction of cicatricial lid shortening",
-   "Monitor the cornea with fluorescein for exposure keratopathy and treat secondary microbial keratitis promptly",
-   "Refer to ophthalmology or oculoplastics for assessment and surgical planning",
-   "Escalate urgently if corneal ulceration or perforation threatens sight"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "lagophthalmos-pathway",
-   "title": "Lagophthalmos: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Incomplete closure of the eyelids, leaving the ocular surface exposed and at risk of drying",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Corneal ulceration or thinning",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Measurement of the closure gap and assessment of blink, Corneal examination with fluorescein for exposure keratopathy, Assessment of the Bell phenomenon and corneal sensation"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Intensive ocular surface lubrication is the mainstay - frequent artificial tears through the day and a lubricating ointment at night"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Underestimating exposure risk when corneal sensation is also reduced"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of lagophthalmos."
-  }
- ],
- "tables": [
-  {
-   "id": "lagophthalmos-matrix",
-   "title": "Lagophthalmos: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Incomplete closure of the eyelids, leaving the ocular surface exposed and at risk of drying",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Orbit and adnexa",
+  "specialty": "Ophthalmology / Oculoplastics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Ophthalmology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Incomplete closure of the eyelids, leaving the ocular surface exposed and at risk of drying",
+      "The commonest cause is facial (seventh nerve) palsy weakening the orbicularis oculi",
+      "Nocturnal lagophthalmos, exposure from proptosis or lid retraction, and cicatricial lid shortening are other causes",
+      "A protective upward rotation of the globe on attempted closure (Bell phenomenon) helps guard the cornea",
+      "Exposure keratopathy, ranging from punctate staining to ulceration, is the main threat to sight",
+      "Management centres on intensive ocular surface lubrication and protection, with surgical measures for persistent cases"
     ],
-    [
-     "Key Investigations",
-     "Measurement of the closure gap and assessment of blink, Corneal examination with fluorescein for exposure keratopathy, Assessment",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Lagophthalmos occurs when the eyelids cannot fully appose, whether from weakness of the orbicularis oculi (as in facial nerve palsy), mechanical factors such as proptosis or lid retraction, or cicatricial shortening of the lids. Failure of the normal blink and closure leaves the interpalpebral cornea and conjunctiva exposed, so the tear film evaporates and the surface dries. Without an effective Bell phenomenon or protective measures, exposure leads to epithelial breakdown, keratopathy and potential ulceration or perforation.",
+    "additionalDifferentials": [
+      "Facial nerve palsy",
+      "Thyroid eye disease with proptosis or retraction",
+      "Cicatricial eyelid shortening",
+      "Proptosis from orbital disease",
+      "Nocturnal lagophthalmos",
+      "Floppy eyelid syndrome"
     ],
-    [
-     "Primary Differentials",
-     "Facial nerve palsy, Thyroid eye disease with proptosis or retraction, Cicatricial eyelid shortening",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Measurement of the closure gap and assessment of blink",
+      "Corneal examination with fluorescein for exposure keratopathy",
+      "Assessment of the Bell phenomenon and corneal sensation",
+      "Evaluation for facial nerve palsy or orbital cause",
+      "Thyroid assessment where relevant"
     ],
-    [
-     "Management Strategy",
-     "Intensive ocular surface lubrication is the mainstay - frequent artificial tears through the day and a lubricating ointment at",
-     "Core treatment modality"
+    "redFlags": [
+      "Corneal ulceration or thinning",
+      "Reduced corneal sensation compounding exposure risk (neurotrophic component)",
+      "Absent Bell phenomenon",
+      "Progressive or severe exposure with visual loss"
     ],
-    [
-     "Clinical Pitfall",
-     "Underestimating exposure risk when corneal sensation is also reduced",
-     "Prevent diagnostic or management error"
+    "prognosis": "With diligent lubrication and protection the cornea can be preserved, and many neurogenic cases improve as the palsy recovers; persistent or severe exposure may need surgical lid procedures to protect sight.",
+    "pitfalls": [
+      "Underestimating exposure risk when corneal sensation is also reduced",
+      "Relying on infrequent lubrication in significant lagophthalmos",
+      "Overlooking nocturnal lagophthalmos as a cause of morning irritation",
+      "Failing to protect the eye during the recovery phase of facial palsy"
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology",
+      "Oculoplastic surgery references (standard reference)"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Intensive ocular surface lubrication is the mainstay - frequent artificial tears through the day and a lubricating ointment at night",
+      "Provide mechanical protection with lid taping, a moisture chamber or an overnight eyelid dressing to shield the exposed cornea",
+      "Treat the underlying cause, such as managing facial nerve palsy or thyroid eye disease and addressing proptosis or lid retraction",
+      "Offer surgical measures for persistent exposure - upper-lid weight implantation, tarsorrhaphy, lower-lid tightening or correction of cicatricial lid shortening",
+      "Monitor the cornea with fluorescein for exposure keratopathy and treat secondary microbial keratitis promptly",
+      "Refer to ophthalmology or oculoplastics for assessment and surgical planning",
+      "Escalate urgently if corneal ulceration or perforation threatens sight"
     ]
-   ],
-   "caption": "Overview comparison matrix for lagophthalmos."
-  }
- ],
- "diagrams": [
-  {
-   "id": "lagophthalmos-real-image",
-   "title": "Lagophthalmos: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "lagophthalmos-pathway",
+      "title": "Lagophthalmos: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Incomplete closure of the eyelids, leaving the ocular surface exposed and at risk of drying",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Corneal ulceration or thinning",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Measurement of the closure gap and assessment of blink, Corneal examination with fluorescein for exposure keratopathy, Assessment of the Bell phenomenon and corneal sensation"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Intensive ocular surface lubrication is the mainstay - frequent artificial tears through the day and a lubricating ointment at night"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Underestimating exposure risk when corneal sensation is also reduced"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of lagophthalmos."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "lagophthalmos-matrix",
+      "title": "Lagophthalmos: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Incomplete closure of the eyelids, leaving the ocular surface exposed and at risk of drying",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Measurement of the closure gap and assessment of blink, Corneal examination with fluorescein for exposure keratopathy, Assessment",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Facial nerve palsy, Thyroid eye disease with proptosis or retraction, Cicatricial eyelid shortening",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Intensive ocular surface lubrication is the mainstay - frequent artificial tears through the day and a lubricating ointment at",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Underestimating exposure risk when corneal sensation is also reduced",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for lagophthalmos."
+    }
+  ],
+  "diagrams": []
 }

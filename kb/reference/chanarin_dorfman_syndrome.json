@@ -1,175 +1,153 @@
 {
- "id": "chanarin_dorfman_syndrome",
- "name": "Chanarin-Dorfman syndrome",
- "aliases": [
-  "neutral lipid storage disease with ichthyosis",
-  "NLSDI",
-  "ABHD5",
-  "CGI-58 deficiency"
- ],
- "class": "non_infective",
- "system": "Dermatology / Genetics",
- "specialty": "Dermatology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare autosomal recessive disorder combining a non-bullous congenital ichthyosiform erythroderma with systemic lipid accumulation",
-   "Caused by biallelic variants in ABHD5 (CGI-58), which activates adipose triglyceride lipase, so neutral lipid droplets accumulate in multiple tissues",
-   "The diagnostic hallmark is the Jordans anomaly: cytoplasmic lipid vacuoles seen within neutrophils and other leucocytes on a peripheral blood film",
-   "Fine white scaling is present from birth, often with a collodion-like presentation, over a background of erythroderma",
-   "Multisystem involvement is common, including hepatic steatosis and hepatomegaly, myopathy, sensorineural hearing loss, cataract, and neurological features",
-   "Confirm with blood-film examination for vacuolated leucocytes followed by molecular testing of ABHD5",
-   "Management is supportive with emollients and gentle keratolytics for the skin plus monitoring and treatment of hepatic and other systemic complications"
+  "id": "chanarin_dorfman_syndrome",
+  "name": "Chanarin-Dorfman syndrome",
+  "aliases": [
+    "neutral lipid storage disease with ichthyosis",
+    "NLSDI",
+    "ABHD5",
+    "CGI-58 deficiency"
   ],
-  "pathophysiology": "Chanarin-Dorfman syndrome arises from loss-of-function variants in ABHD5, which encodes the co-activator protein CGI-58 that normally stimulates adipose triglyceride lipase. When this co-activator is deficient, triglycerides cannot be efficiently hydrolysed and neutral lipid droplets accumulate within the cytoplasm of many cell types, including keratinocytes, hepatocytes, myocytes and circulating leucocytes. In the epidermis, disordered lipid metabolism disrupts the lamellar barrier of the stratum corneum and produces an ichthyosiform erythroderma, while lipid storage elsewhere accounts for hepatic steatosis, myopathy and the characteristic vacuolated leucocytes.",
-  "additionalDifferentials": [
-   "Non-bullous congenital ichthyosiform erythroderma from other transglutaminase or lipoxygenase defects",
-   "Lamellar ichthyosis",
-   "Netherton syndrome",
-   "Sjögren-Larsson syndrome",
-   "Refsum disease",
-   "Trichothiodystrophy with ichthyosis",
-   "Multisystem triglyceride storage disease without ichthyosis (NLSDM, PNPLA2)"
-  ],
-  "additionalInvestigations": [
-   "Peripheral blood film for Jordans anomaly (lipid vacuoles in neutrophils and monocytes)",
-   "Molecular genetic testing of ABHD5",
-   "Liver function tests and hepatic ultrasound for steatosis and hepatomegaly",
-   "Creatine kinase and, if indicated, muscle assessment for myopathy",
-   "Audiometry and ophthalmological review for hearing loss and cataract",
-   "Skin biopsy showing lipid droplets within epidermal and other cells",
-   "Fasting lipid profile"
-  ],
-  "redFlags": [
-   "Progressive hepatic dysfunction or cirrhosis developing from chronic steatosis",
-   "Marked collodion presentation in the neonate with fluid, electrolyte and temperature instability",
-   "Rising creatine kinase or clinical myopathy suggesting significant muscle involvement",
-   "Progressive sensorineural hearing loss or visual impairment"
-  ],
-  "prognosis": "The ichthyosis is lifelong but generally manageable; prognosis is chiefly determined by systemic organ involvement, particularly the risk of progressive liver disease, and by myopathic, auditory and neurological complications.",
-  "pitfalls": [
-   "Labelling the child as simple congenital ichthyosis and never examining a blood film for Jordans anomaly",
-   "Overlooking hepatic steatosis, which can progress silently to fibrosis",
-   "Attributing raised creatine kinase to another cause and missing the lipid myopathy",
-   "Assuming skin-directed therapy alone is sufficient without multisystem surveillance"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Harper's Textbook of Paediatric Dermatology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Manage the ichthyosis with intensive skin care using emollients, keratolytic agents such as urea or lactic acid preparations, and topical retinoids for scaling",
-   "Trial a low-fat diet with medium-chain triglyceride substitution, which may reduce lipid accumulation and improve the dermatological and hepatic features",
-   "Monitor liver involvement with regular liver function tests and hepatic imaging for steatosis, and avoid additional hepatotoxic insults such as alcohol",
-   "Monitor for myopathy with creatine kinase and functional assessment, and screen periodically with audiometry and ophthalmological review for sensorineural hearing loss and cataract",
-   "Provide multidisciplinary care coordinating dermatology, hepatology, neurology, audiology and ophthalmology",
-   "Offer genetic counselling and family screening given the autosomal recessive ABHD5 inheritance, with testing of at-risk relatives"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "chanarin_dorfman_syndrome-pathway",
-   "title": "Chanarin-Dorfman syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare autosomal recessive disorder combining a non-bullous congenital ichthyosiform erythroderma with systemic lipid accumulation",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive hepatic dysfunction or cirrhosis developing from chronic steatosis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Peripheral blood film for Jordans anomaly (lipid vacuoles in neutrophils and monocytes), Molecular genetic testing of ABHD5, Liver function tests and hepatic ultrasound for steatosis and hepatomegaly"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Manage the ichthyosis with intensive skin care using emollients, keratolytic agents such as urea or lactic acid preparations, and topical retinoids for scaling"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Labelling the child as simple congenital ichthyosis and never examining a blood film for Jordans anomaly"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of chanarin-dorfman syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "chanarin_dorfman_syndrome-matrix",
-   "title": "Chanarin-Dorfman syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare autosomal recessive disorder combining a non-bullous congenital ichthyosiform erythroderma with systemic lipid accumulation",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology / Genetics",
+  "specialty": "Dermatology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare autosomal recessive disorder combining a non-bullous congenital ichthyosiform erythroderma with systemic lipid accumulation",
+      "Caused by biallelic variants in ABHD5 (CGI-58), which activates adipose triglyceride lipase, so neutral lipid droplets accumulate in multiple tissues",
+      "The diagnostic hallmark is the Jordans anomaly: cytoplasmic lipid vacuoles seen within neutrophils and other leucocytes on a peripheral blood film",
+      "Fine white scaling is present from birth, often with a collodion-like presentation, over a background of erythroderma",
+      "Multisystem involvement is common, including hepatic steatosis and hepatomegaly, myopathy, sensorineural hearing loss, cataract, and neurological features",
+      "Confirm with blood-film examination for vacuolated leucocytes followed by molecular testing of ABHD5",
+      "Management is supportive with emollients and gentle keratolytics for the skin plus monitoring and treatment of hepatic and other systemic complications"
     ],
-    [
-     "Key Investigations",
-     "Peripheral blood film for Jordans anomaly (lipid vacuoles in neutrophils and monocytes), Molecular genetic testing of ABHD5,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Chanarin-Dorfman syndrome arises from loss-of-function variants in ABHD5, which encodes the co-activator protein CGI-58 that normally stimulates adipose triglyceride lipase. When this co-activator is deficient, triglycerides cannot be efficiently hydrolysed and neutral lipid droplets accumulate within the cytoplasm of many cell types, including keratinocytes, hepatocytes, myocytes and circulating leucocytes. In the epidermis, disordered lipid metabolism disrupts the lamellar barrier of the stratum corneum and produces an ichthyosiform erythroderma, while lipid storage elsewhere accounts for hepatic steatosis, myopathy and the characteristic vacuolated leucocytes.",
+    "additionalDifferentials": [
+      "Non-bullous congenital ichthyosiform erythroderma from other transglutaminase or lipoxygenase defects",
+      "Lamellar ichthyosis",
+      "Netherton syndrome",
+      "Sjögren-Larsson syndrome",
+      "Refsum disease",
+      "Trichothiodystrophy with ichthyosis",
+      "Multisystem triglyceride storage disease without ichthyosis (NLSDM, PNPLA2)"
     ],
-    [
-     "Primary Differentials",
-     "Non-bullous congenital ichthyosiform erythroderma from other transglutaminase or lipoxygenase defects, Lamellar ichthyosis,",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Peripheral blood film for Jordans anomaly (lipid vacuoles in neutrophils and monocytes)",
+      "Molecular genetic testing of ABHD5",
+      "Liver function tests and hepatic ultrasound for steatosis and hepatomegaly",
+      "Creatine kinase and, if indicated, muscle assessment for myopathy",
+      "Audiometry and ophthalmological review for hearing loss and cataract",
+      "Skin biopsy showing lipid droplets within epidermal and other cells",
+      "Fasting lipid profile"
     ],
-    [
-     "Management Strategy",
-     "Manage the ichthyosis with intensive skin care using emollients, keratolytic agents such as urea or lactic acid preparations, and",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive hepatic dysfunction or cirrhosis developing from chronic steatosis",
+      "Marked collodion presentation in the neonate with fluid, electrolyte and temperature instability",
+      "Rising creatine kinase or clinical myopathy suggesting significant muscle involvement",
+      "Progressive sensorineural hearing loss or visual impairment"
     ],
-    [
-     "Clinical Pitfall",
-     "Labelling the child as simple congenital ichthyosis and never examining a blood film for Jordans anomaly",
-     "Prevent diagnostic or management error"
+    "prognosis": "The ichthyosis is lifelong but generally manageable; prognosis is chiefly determined by systemic organ involvement, particularly the risk of progressive liver disease, and by myopathic, auditory and neurological complications.",
+    "pitfalls": [
+      "Labelling the child as simple congenital ichthyosis and never examining a blood film for Jordans anomaly",
+      "Overlooking hepatic steatosis, which can progress silently to fibrosis",
+      "Attributing raised creatine kinase to another cause and missing the lipid myopathy",
+      "Assuming skin-directed therapy alone is sufficient without multisystem surveillance"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Harper's Textbook of Paediatric Dermatology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Manage the ichthyosis with intensive skin care using emollients, keratolytic agents such as urea or lactic acid preparations, and topical retinoids for scaling",
+      "Trial a low-fat diet with medium-chain triglyceride substitution, which may reduce lipid accumulation and improve the dermatological and hepatic features",
+      "Monitor liver involvement with regular liver function tests and hepatic imaging for steatosis, and avoid additional hepatotoxic insults such as alcohol",
+      "Monitor for myopathy with creatine kinase and functional assessment, and screen periodically with audiometry and ophthalmological review for sensorineural hearing loss and cataract",
+      "Provide multidisciplinary care coordinating dermatology, hepatology, neurology, audiology and ophthalmology",
+      "Offer genetic counselling and family screening given the autosomal recessive ABHD5 inheritance, with testing of at-risk relatives"
     ]
-   ],
-   "caption": "Overview comparison matrix for chanarin-dorfman syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "chanarin-dorfman-syndrome-real-image",
-   "title": "Chanarin-Dorfman syndrome: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "chanarin_dorfman_syndrome-pathway",
+      "title": "Chanarin-Dorfman syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare autosomal recessive disorder combining a non-bullous congenital ichthyosiform erythroderma with systemic lipid accumulation",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive hepatic dysfunction or cirrhosis developing from chronic steatosis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Peripheral blood film for Jordans anomaly (lipid vacuoles in neutrophils and monocytes), Molecular genetic testing of ABHD5, Liver function tests and hepatic ultrasound for steatosis and hepatomegaly"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Manage the ichthyosis with intensive skin care using emollients, keratolytic agents such as urea or lactic acid preparations, and topical retinoids for scaling"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Labelling the child as simple congenital ichthyosis and never examining a blood film for Jordans anomaly"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of chanarin-dorfman syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "chanarin_dorfman_syndrome-matrix",
+      "title": "Chanarin-Dorfman syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare autosomal recessive disorder combining a non-bullous congenital ichthyosiform erythroderma with systemic lipid accumulation",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Peripheral blood film for Jordans anomaly (lipid vacuoles in neutrophils and monocytes), Molecular genetic testing of ABHD5,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Non-bullous congenital ichthyosiform erythroderma from other transglutaminase or lipoxygenase defects, Lamellar ichthyosis,",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Manage the ichthyosis with intensive skin care using emollients, keratolytic agents such as urea or lactic acid preparations, and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Labelling the child as simple congenital ichthyosis and never examining a blood film for Jordans anomaly",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for chanarin-dorfman syndrome."
+    }
+  ],
+  "diagrams": []
 }

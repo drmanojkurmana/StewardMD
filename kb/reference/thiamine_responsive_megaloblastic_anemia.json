@@ -1,177 +1,155 @@
 {
- "id": "thiamine_responsive_megaloblastic_anemia",
- "name": "Thiamine-responsive megaloblastic anaemia",
- "aliases": [
-  "Rogers syndrome",
-  "SLC19A2",
-  "SLC19A2 deficiency",
-  "TRMA",
-  "thiamine responsive megaloblastic anaemia",
-  "thiamine transporter 1 deficiency"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "OMIM / GeneReviews / Nathan and Oski's Haematology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Recognise the classic triad: megaloblastic anaemia, diabetes mellitus and progressive sensorineural deafness, all presenting in infancy or early childhood",
-   "Autosomal recessive disorder caused by biallelic pathogenic variants in SLC19A2, encoding high-affinity thiamine transporter 1 (THTR1)",
-   "The megaloblastic anaemia does not respond to vitamin B12 or folate, but does respond to pharmacological thiamine supplementation",
-   "Thiamine treatment can correct the anaemia and improve glycaemic control, though it usually does not reverse the sensorineural hearing loss",
-   "The bone marrow shows megaloblastic changes and often ringed sideroblasts",
-   "Diabetes is typically non-autoimmune and may become insulin-dependent over time",
-   "Additional features can include optic atrophy, retinal changes, cardiac defects and short stature",
-   "Lifelong thiamine supplementation is required; interruption can allow anaemia and hyperglycaemia to recur"
+  "id": "thiamine_responsive_megaloblastic_anemia",
+  "name": "Thiamine-responsive megaloblastic anaemia",
+  "aliases": [
+    "Rogers syndrome",
+    "SLC19A2",
+    "SLC19A2 deficiency",
+    "TRMA",
+    "thiamine responsive megaloblastic anaemia",
+    "thiamine transporter 1 deficiency"
   ],
-  "pathophysiology": "Rogers syndrome results from loss of function of the high-affinity thiamine transporter THTR1 encoded by SLC19A2. Cells that depend heavily on this transporter for thiamine uptake, notably haematopoietic precursors, pancreatic beta cells and cochlear cells, become thiamine deficient at the intracellular level despite normal systemic thiamine. Impaired thiamine-dependent enzyme activity (including transketolase and the pyruvate and alpha-ketoglutarate dehydrogenase complexes) disrupts nucleic acid ribose synthesis and energy metabolism, producing megaloblastic dyserythropoiesis, beta-cell failure with diabetes, and cochlear degeneration with deafness. Supraphysiological thiamine can drive residual low-affinity transport and restore intracellular thiamine, correcting the haematological and metabolic features.",
-  "additionalDifferentials": [
-   "Vitamin B12 or folate deficiency megaloblastic anaemia",
-   "Congenital sideroblastic anaemias",
-   "Myelodysplastic syndrome in childhood",
-   "Pearson marrow-pancreas syndrome and other mitochondrial disorders",
-   "Wolfram syndrome (DIDMOAD) given diabetes with deafness",
-   "Neonatal or MODY-type diabetes syndromes"
-  ],
-  "additionalInvestigations": [
-   "SLC19A2 molecular genetic testing",
-   "Full blood count and blood film showing macrocytic anaemia",
-   "Bone marrow examination for megaloblastic change and ringed sideroblasts",
-   "Fasting glucose and glycated haemoglobin for diabetes",
-   "Audiometry for sensorineural hearing loss",
-   "Ophthalmological and echocardiographic assessment for associated anomalies"
-  ],
-  "redFlags": [
-   "Severe symptomatic anaemia requiring transfusion in an infant",
-   "Uncontrolled hyperglycaemia or diabetic ketoacidosis",
-   "Rapidly progressive hearing loss",
-   "Cardiac decompensation from associated structural defects"
-  ],
-  "prognosis": "Thiamine supplementation typically corrects the anaemia and improves diabetes control, but sensorineural deafness is usually irreversible and lifelong treatment with monitoring is needed to maintain remission.",
-  "pitfalls": [
-   "Treating the anaemia with B12 or folate and concluding the marrow is unresponsive",
-   "Failing to link the anaemia, diabetes and deafness as one syndrome",
-   "Stopping thiamine once counts normalise, allowing relapse",
-   "Missing the diagnosis in a child labelled as having early-onset diabetes alone"
-  ],
-  "references": [
-   "GeneReviews: Thiamine-Responsive Megaloblastic Anemia Syndrome",
-   "OMIM entry for SLC19A2",
-   "Nathan and Oski's Hematology and Oncology of Infancy and Childhood"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Start and continue lifelong high-dose thiamine supplementation, which drives residual low-affinity transport to correct the anaemia and improve diabetes control",
-   "Recognise that the anaemia does not respond to vitamin B12 or folate, so thiamine is the specific treatment",
-   "Treat the non-autoimmune diabetes with insulin as it becomes insulin-dependent, adjusting as thiamine improves early glycaemic control",
-   "Provide hearing aids or cochlear implantation for the progressive sensorineural deafness, which is usually irreversible",
-   "Monitor the full blood count, glycated haemoglobin and hearing, and screen for associated cardiac and ophthalmological anomalies",
-   "Offer genetic counselling and testing for biallelic SLC19A2 variants, with screening of at-risk relatives given autosomal recessive inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "thiamine_responsive_megaloblastic_anemia-pathway",
-   "title": "Thiamine-responsive megaloblastic anaemia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Recognise the classic triad: megaloblastic anaemia, diabetes mellitus and progressive sensorineural deafness, all presenting in infancy or early childhood",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe symptomatic anaemia requiring transfusion in an infant",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: SLC19A2 molecular genetic testing, Full blood count and blood film showing macrocytic anaemia, Bone marrow examination for megaloblastic change and ringed sideroblasts"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Start and continue lifelong high-dose thiamine supplementation, which drives residual low-affinity transport to correct the anaemia and improve diabetes control"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating the anaemia with B12 or folate and concluding the marrow is unresponsive"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of thiamine-responsive megaloblastic anaemia."
-  }
- ],
- "tables": [
-  {
-   "id": "thiamine_responsive_megaloblastic_anemia-matrix",
-   "title": "Thiamine-responsive megaloblastic anaemia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Recognise the classic triad: megaloblastic anaemia, diabetes mellitus and progressive sensorineural deafness, all presenting in",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "OMIM / GeneReviews / Nathan and Oski's Haematology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Recognise the classic triad: megaloblastic anaemia, diabetes mellitus and progressive sensorineural deafness, all presenting in infancy or early childhood",
+      "Autosomal recessive disorder caused by biallelic pathogenic variants in SLC19A2, encoding high-affinity thiamine transporter 1 (THTR1)",
+      "The megaloblastic anaemia does not respond to vitamin B12 or folate, but does respond to pharmacological thiamine supplementation",
+      "Thiamine treatment can correct the anaemia and improve glycaemic control, though it usually does not reverse the sensorineural hearing loss",
+      "The bone marrow shows megaloblastic changes and often ringed sideroblasts",
+      "Diabetes is typically non-autoimmune and may become insulin-dependent over time",
+      "Additional features can include optic atrophy, retinal changes, cardiac defects and short stature",
+      "Lifelong thiamine supplementation is required; interruption can allow anaemia and hyperglycaemia to recur"
     ],
-    [
-     "Key Investigations",
-     "SLC19A2 molecular genetic testing, Full blood count and blood film showing macrocytic anaemia, Bone marrow examination for",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Rogers syndrome results from loss of function of the high-affinity thiamine transporter THTR1 encoded by SLC19A2. Cells that depend heavily on this transporter for thiamine uptake, notably haematopoietic precursors, pancreatic beta cells and cochlear cells, become thiamine deficient at the intracellular level despite normal systemic thiamine. Impaired thiamine-dependent enzyme activity (including transketolase and the pyruvate and alpha-ketoglutarate dehydrogenase complexes) disrupts nucleic acid ribose synthesis and energy metabolism, producing megaloblastic dyserythropoiesis, beta-cell failure with diabetes, and cochlear degeneration with deafness. Supraphysiological thiamine can drive residual low-affinity transport and restore intracellular thiamine, correcting the haematological and metabolic features.",
+    "additionalDifferentials": [
+      "Vitamin B12 or folate deficiency megaloblastic anaemia",
+      "Congenital sideroblastic anaemias",
+      "Myelodysplastic syndrome in childhood",
+      "Pearson marrow-pancreas syndrome and other mitochondrial disorders",
+      "Wolfram syndrome (DIDMOAD) given diabetes with deafness",
+      "Neonatal or MODY-type diabetes syndromes"
     ],
-    [
-     "Primary Differentials",
-     "Vitamin B12 or folate deficiency megaloblastic anaemia, Congenital sideroblastic anaemias, Myelodysplastic syndrome in childhood",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "SLC19A2 molecular genetic testing",
+      "Full blood count and blood film showing macrocytic anaemia",
+      "Bone marrow examination for megaloblastic change and ringed sideroblasts",
+      "Fasting glucose and glycated haemoglobin for diabetes",
+      "Audiometry for sensorineural hearing loss",
+      "Ophthalmological and echocardiographic assessment for associated anomalies"
     ],
-    [
-     "Management Strategy",
-     "Start and continue lifelong high-dose thiamine supplementation, which drives residual low-affinity transport to correct the",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe symptomatic anaemia requiring transfusion in an infant",
+      "Uncontrolled hyperglycaemia or diabetic ketoacidosis",
+      "Rapidly progressive hearing loss",
+      "Cardiac decompensation from associated structural defects"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating the anaemia with B12 or folate and concluding the marrow is unresponsive",
-     "Prevent diagnostic or management error"
+    "prognosis": "Thiamine supplementation typically corrects the anaemia and improves diabetes control, but sensorineural deafness is usually irreversible and lifelong treatment with monitoring is needed to maintain remission.",
+    "pitfalls": [
+      "Treating the anaemia with B12 or folate and concluding the marrow is unresponsive",
+      "Failing to link the anaemia, diabetes and deafness as one syndrome",
+      "Stopping thiamine once counts normalise, allowing relapse",
+      "Missing the diagnosis in a child labelled as having early-onset diabetes alone"
+    ],
+    "references": [
+      "GeneReviews: Thiamine-Responsive Megaloblastic Anemia Syndrome",
+      "OMIM entry for SLC19A2",
+      "Nathan and Oski's Hematology and Oncology of Infancy and Childhood"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Start and continue lifelong high-dose thiamine supplementation, which drives residual low-affinity transport to correct the anaemia and improve diabetes control",
+      "Recognise that the anaemia does not respond to vitamin B12 or folate, so thiamine is the specific treatment",
+      "Treat the non-autoimmune diabetes with insulin as it becomes insulin-dependent, adjusting as thiamine improves early glycaemic control",
+      "Provide hearing aids or cochlear implantation for the progressive sensorineural deafness, which is usually irreversible",
+      "Monitor the full blood count, glycated haemoglobin and hearing, and screen for associated cardiac and ophthalmological anomalies",
+      "Offer genetic counselling and testing for biallelic SLC19A2 variants, with screening of at-risk relatives given autosomal recessive inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for thiamine-responsive megaloblastic anaemia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "thiamine-responsive-megaloblastic-anemia-real-image",
-   "title": "Thiamine-responsive megaloblastic anaemia: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "thiamine_responsive_megaloblastic_anemia-pathway",
+      "title": "Thiamine-responsive megaloblastic anaemia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Recognise the classic triad: megaloblastic anaemia, diabetes mellitus and progressive sensorineural deafness, all presenting in infancy or early childhood",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe symptomatic anaemia requiring transfusion in an infant",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: SLC19A2 molecular genetic testing, Full blood count and blood film showing macrocytic anaemia, Bone marrow examination for megaloblastic change and ringed sideroblasts"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Start and continue lifelong high-dose thiamine supplementation, which drives residual low-affinity transport to correct the anaemia and improve diabetes control"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating the anaemia with B12 or folate and concluding the marrow is unresponsive"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of thiamine-responsive megaloblastic anaemia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "thiamine_responsive_megaloblastic_anemia-matrix",
+      "title": "Thiamine-responsive megaloblastic anaemia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Recognise the classic triad: megaloblastic anaemia, diabetes mellitus and progressive sensorineural deafness, all presenting in",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "SLC19A2 molecular genetic testing, Full blood count and blood film showing macrocytic anaemia, Bone marrow examination for",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Vitamin B12 or folate deficiency megaloblastic anaemia, Congenital sideroblastic anaemias, Myelodysplastic syndrome in childhood",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Start and continue lifelong high-dose thiamine supplementation, which drives residual low-affinity transport to correct the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating the anaemia with B12 or folate and concluding the marrow is unresponsive",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for thiamine-responsive megaloblastic anaemia."
+    }
+  ],
+  "diagrams": []
 }

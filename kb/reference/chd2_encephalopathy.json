@@ -1,175 +1,153 @@
 {
- "id": "chd2_encephalopathy",
- "name": "CHD2 encephalopathy",
- "aliases": [
-  "CHD2",
-  "CHD2-related epilepsy",
-  "CHD2 myoclonic encephalopathy",
-  "chromodomain helicase DNA-binding protein 2 disorder"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurogenetics",
- "specialty": "Neurology / Epileptology",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / ILAE",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by usually de novo loss-of-function variants in CHD2, which encodes a chromatin remodelling enzyme that regulates gene expression during neurodevelopment rather than an ion channel",
-   "Presents as a developmental and epileptic encephalopathy with onset typically in early childhood, often preceded by normal or near-normal early development",
-   "Myoclonic seizures are characteristic, and the phenotype frequently includes atonic, absence, and generalised tonic-clonic seizures with features overlapping myoclonic-atonic epilepsy",
-   "Photosensitivity and fixation-off sensitivity on electroencephalography are notable and relatively distinctive clues",
-   "Fever-triggered and prolonged seizures can occur, producing overlap with Dravet syndrome",
-   "Intellectual disability, autism spectrum features, and behavioural difficulties are common and may progress after seizure onset",
-   "Seizures are often drug-resistant, and broad-spectrum antiseizure agents are generally preferred over narrow sodium-channel-selective ones"
+  "id": "chd2_encephalopathy",
+  "name": "CHD2 encephalopathy",
+  "aliases": [
+    "CHD2",
+    "CHD2-related epilepsy",
+    "CHD2 myoclonic encephalopathy",
+    "chromodomain helicase DNA-binding protein 2 disorder"
   ],
-  "pathophysiology": "CHD2 encodes chromodomain helicase DNA-binding protein 2, an ATP-dependent chromatin remodeller that repositions nucleosomes to regulate the transcription of genes important for neuronal development and function. Pathogenic variants, typically causing haploinsufficiency, disrupt the normal programme of gene expression during brain maturation. Unlike the direct membrane effects of channelopathies, the epileptogenic and neurodevelopmental consequences arise indirectly from dysregulated expression of downstream neuronal genes, destabilising network excitability and impairing cognitive and behavioural development. This transcriptional mechanism explains the mixed epilepsy and neurodevelopmental phenotype.",
-  "additionalDifferentials": [
-   "SCN1A-related Dravet syndrome",
-   "Myoclonic-atonic epilepsy (Doose syndrome)",
-   "Lennox-Gastaut syndrome",
-   "SLC6A1-related myoclonic-atonic epilepsy",
-   "SYNGAP1 encephalopathy",
-   "Other genetic generalised and photosensitive epilepsies"
-  ],
-  "additionalInvestigations": [
-   "Epilepsy gene panel or whole-exome sequencing to identify the CHD2 variant",
-   "Electroencephalography including photic stimulation to detect photosensitivity and fixation-off sensitivity",
-   "Brain magnetic resonance imaging to exclude structural causes",
-   "Developmental, cognitive, and autism-spectrum assessment",
-   "Neuropsychological and behavioural evaluation",
-   "Seizure-trigger history including photosensitivity and fever"
-  ],
-  "redFlags": [
-   "Escalating myoclonic or atonic seizures with injury risk",
-   "Developmental regression after seizure onset",
-   "Status epilepticus, including myoclonic status",
-   "Marked behavioural or autistic deterioration"
-  ],
-  "prognosis": "Most affected individuals have drug-resistant epilepsy with intellectual disability and behavioural challenges, though seizure burden and cognitive outcome vary and some achieve partial seizure control.",
-  "pitfalls": [
-   "Assuming an ion-channel mechanism and selecting narrow sodium-channel agents rather than broad-spectrum therapy",
-   "Missing photosensitivity and fixation-off sensitivity as diagnostic clues",
-   "Attributing the presentation solely to Dravet syndrome",
-   "Underestimating the autistic and behavioural comorbidity"
-  ],
-  "references": [
-   "GeneReviews: CHD2-Related Neurodevelopmental Disorders",
-   "ILAE resources on myoclonic and developmental and epileptic encephalopathies"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Broad-spectrum antiseizure therapy targeting the myoclonic, atonic, absence and generalised tonic-clonic seizures, using agents such as valproate, levetiracetam, clobazam or benzodiazepines",
-   "Avoid sodium-channel-blocking antiseizure drugs that may aggravate myoclonic and generalised seizures",
-   "Reduce visual precipitants given photosensitivity and fixation-off sensitivity, with tinted lenses and screen precautions",
-   "Provide a rescue benzodiazepine plan for prolonged seizures and status epilepticus",
-   "Consider the ketogenic diet in drug-resistant epilepsy",
-   "Developmental, behavioural and educational support including therapies directed at autism-spectrum features and intellectual disability",
-   "Multidisciplinary care with epileptology and developmental paediatrics",
-   "Genetic counselling, noting the variant is usually de novo, with parental testing to inform recurrence risk"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "chd2_encephalopathy-pathway",
-   "title": "CHD2 encephalopathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by usually de novo loss-of-function variants in CHD2, which encodes a chromatin remodelling enzyme that regulates gene expression during neurodevelopment rather than an ion channel",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Escalating myoclonic or atonic seizures with injury risk",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Epilepsy gene panel or whole-exome sequencing to identify the CHD2 variant, Electroencephalography including photic stimulation to detect photosensitivity and fixation-off sensitivity, Brain magnetic resonance imaging to"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Broad-spectrum antiseizure therapy targeting the myoclonic, atonic, absence and generalised tonic-clonic seizures, using agents such as valproate, levetiracetam, clobazam or benzodiazepines"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming an ion-channel mechanism and selecting narrow sodium-channel agents rather than broad-spectrum therapy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of chd2 encephalopathy."
-  }
- ],
- "tables": [
-  {
-   "id": "chd2_encephalopathy-matrix",
-   "title": "CHD2 encephalopathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by usually de novo loss-of-function variants in CHD2, which encodes a chromatin remodelling enzyme that regulates gene",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurogenetics",
+  "specialty": "Neurology / Epileptology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / ILAE",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by usually de novo loss-of-function variants in CHD2, which encodes a chromatin remodelling enzyme that regulates gene expression during neurodevelopment rather than an ion channel",
+      "Presents as a developmental and epileptic encephalopathy with onset typically in early childhood, often preceded by normal or near-normal early development",
+      "Myoclonic seizures are characteristic, and the phenotype frequently includes atonic, absence, and generalised tonic-clonic seizures with features overlapping myoclonic-atonic epilepsy",
+      "Photosensitivity and fixation-off sensitivity on electroencephalography are notable and relatively distinctive clues",
+      "Fever-triggered and prolonged seizures can occur, producing overlap with Dravet syndrome",
+      "Intellectual disability, autism spectrum features, and behavioural difficulties are common and may progress after seizure onset",
+      "Seizures are often drug-resistant, and broad-spectrum antiseizure agents are generally preferred over narrow sodium-channel-selective ones"
     ],
-    [
-     "Key Investigations",
-     "Epilepsy gene panel or whole-exome sequencing to identify the CHD2 variant, Electroencephalography including photic stimulation",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "CHD2 encodes chromodomain helicase DNA-binding protein 2, an ATP-dependent chromatin remodeller that repositions nucleosomes to regulate the transcription of genes important for neuronal development and function. Pathogenic variants, typically causing haploinsufficiency, disrupt the normal programme of gene expression during brain maturation. Unlike the direct membrane effects of channelopathies, the epileptogenic and neurodevelopmental consequences arise indirectly from dysregulated expression of downstream neuronal genes, destabilising network excitability and impairing cognitive and behavioural development. This transcriptional mechanism explains the mixed epilepsy and neurodevelopmental phenotype.",
+    "additionalDifferentials": [
+      "SCN1A-related Dravet syndrome",
+      "Myoclonic-atonic epilepsy (Doose syndrome)",
+      "Lennox-Gastaut syndrome",
+      "SLC6A1-related myoclonic-atonic epilepsy",
+      "SYNGAP1 encephalopathy",
+      "Other genetic generalised and photosensitive epilepsies"
     ],
-    [
-     "Primary Differentials",
-     "SCN1A-related Dravet syndrome, Myoclonic-atonic epilepsy (Doose syndrome), Lennox-Gastaut syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Epilepsy gene panel or whole-exome sequencing to identify the CHD2 variant",
+      "Electroencephalography including photic stimulation to detect photosensitivity and fixation-off sensitivity",
+      "Brain magnetic resonance imaging to exclude structural causes",
+      "Developmental, cognitive, and autism-spectrum assessment",
+      "Neuropsychological and behavioural evaluation",
+      "Seizure-trigger history including photosensitivity and fever"
     ],
-    [
-     "Management Strategy",
-     "Broad-spectrum antiseizure therapy targeting the myoclonic, atonic, absence and generalised tonic-clonic seizures, using agents",
-     "Core treatment modality"
+    "redFlags": [
+      "Escalating myoclonic or atonic seizures with injury risk",
+      "Developmental regression after seizure onset",
+      "Status epilepticus, including myoclonic status",
+      "Marked behavioural or autistic deterioration"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming an ion-channel mechanism and selecting narrow sodium-channel agents rather than broad-spectrum therapy",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most affected individuals have drug-resistant epilepsy with intellectual disability and behavioural challenges, though seizure burden and cognitive outcome vary and some achieve partial seizure control.",
+    "pitfalls": [
+      "Assuming an ion-channel mechanism and selecting narrow sodium-channel agents rather than broad-spectrum therapy",
+      "Missing photosensitivity and fixation-off sensitivity as diagnostic clues",
+      "Attributing the presentation solely to Dravet syndrome",
+      "Underestimating the autistic and behavioural comorbidity"
+    ],
+    "references": [
+      "GeneReviews: CHD2-Related Neurodevelopmental Disorders",
+      "ILAE resources on myoclonic and developmental and epileptic encephalopathies"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Broad-spectrum antiseizure therapy targeting the myoclonic, atonic, absence and generalised tonic-clonic seizures, using agents such as valproate, levetiracetam, clobazam or benzodiazepines",
+      "Avoid sodium-channel-blocking antiseizure drugs that may aggravate myoclonic and generalised seizures",
+      "Reduce visual precipitants given photosensitivity and fixation-off sensitivity, with tinted lenses and screen precautions",
+      "Provide a rescue benzodiazepine plan for prolonged seizures and status epilepticus",
+      "Consider the ketogenic diet in drug-resistant epilepsy",
+      "Developmental, behavioural and educational support including therapies directed at autism-spectrum features and intellectual disability",
+      "Multidisciplinary care with epileptology and developmental paediatrics",
+      "Genetic counselling, noting the variant is usually de novo, with parental testing to inform recurrence risk"
     ]
-   ],
-   "caption": "Overview comparison matrix for chd2 encephalopathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "chd2-encephalopathy-real-image",
-   "title": "CHD2 encephalopathy: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "chd2_encephalopathy-pathway",
+      "title": "CHD2 encephalopathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by usually de novo loss-of-function variants in CHD2, which encodes a chromatin remodelling enzyme that regulates gene expression during neurodevelopment rather than an ion channel",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Escalating myoclonic or atonic seizures with injury risk",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Epilepsy gene panel or whole-exome sequencing to identify the CHD2 variant, Electroencephalography including photic stimulation to detect photosensitivity and fixation-off sensitivity, Brain magnetic resonance imaging to"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Broad-spectrum antiseizure therapy targeting the myoclonic, atonic, absence and generalised tonic-clonic seizures, using agents such as valproate, levetiracetam, clobazam or benzodiazepines"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming an ion-channel mechanism and selecting narrow sodium-channel agents rather than broad-spectrum therapy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of chd2 encephalopathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "chd2_encephalopathy-matrix",
+      "title": "CHD2 encephalopathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by usually de novo loss-of-function variants in CHD2, which encodes a chromatin remodelling enzyme that regulates gene",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Epilepsy gene panel or whole-exome sequencing to identify the CHD2 variant, Electroencephalography including photic stimulation",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "SCN1A-related Dravet syndrome, Myoclonic-atonic epilepsy (Doose syndrome), Lennox-Gastaut syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Broad-spectrum antiseizure therapy targeting the myoclonic, atonic, absence and generalised tonic-clonic seizures, using agents",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming an ion-channel mechanism and selecting narrow sodium-channel agents rather than broad-spectrum therapy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for chd2 encephalopathy."
+    }
+  ],
+  "diagrams": []
 }

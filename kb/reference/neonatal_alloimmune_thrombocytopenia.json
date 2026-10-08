@@ -1,175 +1,153 @@
 {
- "id": "neonatal_alloimmune_thrombocytopenia",
- "name": "Neonatal alloimmune thrombocytopenia",
- "aliases": [
-  "NAIT",
-  "FNAIT",
-  "foetal and neonatal alloimmune thrombocytopenia",
-  "feto-maternal alloimmune thrombocytopenia"
- ],
- "class": "non_infective",
- "system": "Neonatology",
- "specialty": "Neonatology",
- "referenceOnly": true,
- "reference": {
-  "source": "Cloherty and Stark Manual of Neonatal Care / Nathan and Oski's Hematology of Infancy and Childhood",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Neonatal alloimmune thrombocytopenia classically causes severe isolated thrombocytopenia in an otherwise well-appearing term neonate born to a healthy mother with a normal platelet count",
-   "It is the platelet equivalent of haemolytic disease of the newborn, caused by maternal antibodies against paternally inherited platelet antigens the mother lacks",
-   "In many populations the most common culprit is alloimmunisation to the human platelet antigen HPA-1a",
-   "Unlike red cell disease, a first pregnancy can be severely affected, and there may be no warning until bleeding or thrombocytopenia is discovered",
-   "The most feared complication is intracranial haemorrhage, which can occur antenatally as well as after birth",
-   "Diagnosis is supported by demonstrating maternal platelet-specific alloantibodies and incompatibility between maternal and foetal or paternal platelet antigens",
-   "Management principles include prompt platelet transfusion for significant bleeding or very low counts, with antigen-compatible or washed maternal platelets preferred, and intravenous immunoglobulin as an adjunct"
+  "id": "neonatal_alloimmune_thrombocytopenia",
+  "name": "Neonatal alloimmune thrombocytopenia",
+  "aliases": [
+    "NAIT",
+    "FNAIT",
+    "foetal and neonatal alloimmune thrombocytopenia",
+    "feto-maternal alloimmune thrombocytopenia"
   ],
-  "pathophysiology": "Neonatal alloimmune thrombocytopenia occurs when the foetus inherits a platelet antigen from the father that is absent in the mother. Foetal platelets crossing into the maternal circulation stimulate production of maternal IgG alloantibodies, which then cross the placenta and bind foetal and neonatal platelets bearing the target antigen. These opsonised platelets are removed by the reticuloendothelial system, producing severe thrombocytopenia. Because IgG transfer and sensitisation can occur early, a first pregnancy may be affected and haemorrhage, including intracranial bleeding, can develop before birth. The mother remains unaffected because her own platelets lack the antigen, which is why she has a normal platelet count.",
-  "additionalDifferentials": [
-   "Neonatal sepsis or disseminated intravascular coagulation causing thrombocytopenia",
-   "Maternal immune thrombocytopenia with transplacental autoantibodies",
-   "Congenital infection such as cytomegalovirus, toxoplasmosis, or rubella",
-   "Inherited thrombocytopenia or bone marrow failure syndromes",
-   "Thrombocytopenia associated with placental insufficiency or intrauterine growth restriction",
-   "Consumptive thrombocytopenia from thrombosis or a giant haemangioma"
-  ],
-  "additionalInvestigations": [
-   "Full blood count and blood film to confirm isolated thrombocytopenia and exclude other cytopenias",
-   "Maternal and paternal (or neonatal) platelet antigen typing to demonstrate incompatibility",
-   "Detection of maternal platelet-specific alloantibodies",
-   "Cranial ultrasound to screen for intracranial haemorrhage",
-   "Maternal platelet count to distinguish alloimmune from maternal autoimmune causes",
-   "Sepsis and congenital infection screen when the clinical picture is atypical"
-  ],
-  "redFlags": [
-   "Signs of intracranial haemorrhage such as seizures, bulging fontanelle, apnoea, or altered consciousness",
-   "Profoundly low platelet count with active bleeding",
-   "Antenatal detection of foetal intracranial haemorrhage or ventriculomegaly",
-   "A previously affected sibling, which predicts more severe disease in subsequent pregnancies"
-  ],
-  "prognosis": "Most affected neonates recover as maternal antibody levels fall and platelet counts normalise over days to a few weeks. Prognosis is excellent in the absence of intracranial haemorrhage, but antenatal or neonatal intracranial bleeding can cause death or lasting neurological disability. Subsequent pregnancies are typically as severe or more severe and warrant specialist antenatal management.",
-  "pitfalls": [
-   "Attributing severe thrombocytopenia in a well neonate to sepsis and missing the alloimmune diagnosis",
-   "Transfusing only random-donor platelets when antigen-negative or washed maternal platelets are more effective",
-   "Failing to arrange cranial imaging to look for occult intracranial haemorrhage",
-   "Not counselling parents about the high recurrence risk and need for specialist care in future pregnancies",
-   "Confusing alloimmune with maternal autoimmune thrombocytopenia, which differ in mechanism and management"
-  ],
-  "references": [
-   "Cloherty and Stark Manual of Neonatal Care",
-   "Nathan and Oski's Hematology of Infancy and Childhood"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Transfuse antigen-negative (e.g. HPA-1a-negative), compatible platelets as first-line for severe thrombocytopenia or active bleeding, using washed maternal or matched-donor units where available",
-   "Give intravenous immunoglobulin, with or without corticosteroids, to raise the platelet count when antigen-matched platelets are unavailable or as an adjunct",
-   "Transfuse random-donor platelets without delay in an emergency if compatible units cannot be obtained",
-   "Perform serial full blood counts to track platelet recovery as maternal alloantibody wanes over days to weeks",
-   "Undertake cranial ultrasound surveillance for intracranial haemorrhage, the most feared complication",
-   "Refer to foetal medicine and give antenatal maternal intravenous immunoglobulin (with corticosteroids) in subsequent at-risk pregnancies to prevent foetal haemorrhage",
-   "Arrange parental platelet antigen typing and genetic counselling regarding the high recurrence and increasing severity in future pregnancies"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "neonatal_alloimmune_thrombocytopenia-pathway",
-   "title": "Neonatal alloimmune thrombocytopenia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Neonatal alloimmune thrombocytopenia classically causes severe isolated thrombocytopenia in an otherwise well-appearing term neonate born to a healthy mother with a normal platelet count",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Signs of intracranial haemorrhage such as seizures, bulging fontanelle, apnoea, or altered consciousness",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full blood count and blood film to confirm isolated thrombocytopenia and exclude other cytopenias, Maternal and paternal (or neonatal) platelet antigen typing to demonstrate incompatibility, Detection of maternal"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Transfuse antigen-negative (e.g. HPA-1a-negative), compatible platelets as first-line for severe thrombocytopenia or active bleeding, using washed maternal or matched-donor units where available"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing severe thrombocytopenia in a well neonate to sepsis and missing the alloimmune diagnosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of neonatal alloimmune thrombocytopenia."
-  }
- ],
- "tables": [
-  {
-   "id": "neonatal_alloimmune_thrombocytopenia-matrix",
-   "title": "Neonatal alloimmune thrombocytopenia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Neonatal alloimmune thrombocytopenia classically causes severe isolated thrombocytopenia in an otherwise well-appearing term",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neonatology",
+  "specialty": "Neonatology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Cloherty and Stark Manual of Neonatal Care / Nathan and Oski's Hematology of Infancy and Childhood",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Neonatal alloimmune thrombocytopenia classically causes severe isolated thrombocytopenia in an otherwise well-appearing term neonate born to a healthy mother with a normal platelet count",
+      "It is the platelet equivalent of haemolytic disease of the newborn, caused by maternal antibodies against paternally inherited platelet antigens the mother lacks",
+      "In many populations the most common culprit is alloimmunisation to the human platelet antigen HPA-1a",
+      "Unlike red cell disease, a first pregnancy can be severely affected, and there may be no warning until bleeding or thrombocytopenia is discovered",
+      "The most feared complication is intracranial haemorrhage, which can occur antenatally as well as after birth",
+      "Diagnosis is supported by demonstrating maternal platelet-specific alloantibodies and incompatibility between maternal and foetal or paternal platelet antigens",
+      "Management principles include prompt platelet transfusion for significant bleeding or very low counts, with antigen-compatible or washed maternal platelets preferred, and intravenous immunoglobulin as an adjunct"
     ],
-    [
-     "Key Investigations",
-     "Full blood count and blood film to confirm isolated thrombocytopenia and exclude other cytopenias, Maternal and paternal (or",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Neonatal alloimmune thrombocytopenia occurs when the foetus inherits a platelet antigen from the father that is absent in the mother. Foetal platelets crossing into the maternal circulation stimulate production of maternal IgG alloantibodies, which then cross the placenta and bind foetal and neonatal platelets bearing the target antigen. These opsonised platelets are removed by the reticuloendothelial system, producing severe thrombocytopenia. Because IgG transfer and sensitisation can occur early, a first pregnancy may be affected and haemorrhage, including intracranial bleeding, can develop before birth. The mother remains unaffected because her own platelets lack the antigen, which is why she has a normal platelet count.",
+    "additionalDifferentials": [
+      "Neonatal sepsis or disseminated intravascular coagulation causing thrombocytopenia",
+      "Maternal immune thrombocytopenia with transplacental autoantibodies",
+      "Congenital infection such as cytomegalovirus, toxoplasmosis, or rubella",
+      "Inherited thrombocytopenia or bone marrow failure syndromes",
+      "Thrombocytopenia associated with placental insufficiency or intrauterine growth restriction",
+      "Consumptive thrombocytopenia from thrombosis or a giant haemangioma"
     ],
-    [
-     "Primary Differentials",
-     "Neonatal sepsis or disseminated intravascular coagulation causing thrombocytopenia, Maternal immune thrombocytopenia with",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full blood count and blood film to confirm isolated thrombocytopenia and exclude other cytopenias",
+      "Maternal and paternal (or neonatal) platelet antigen typing to demonstrate incompatibility",
+      "Detection of maternal platelet-specific alloantibodies",
+      "Cranial ultrasound to screen for intracranial haemorrhage",
+      "Maternal platelet count to distinguish alloimmune from maternal autoimmune causes",
+      "Sepsis and congenital infection screen when the clinical picture is atypical"
     ],
-    [
-     "Management Strategy",
-     "Transfuse antigen-negative (e.g. HPA-1a-negative), compatible platelets as first-line for severe thrombocytopenia or active",
-     "Core treatment modality"
+    "redFlags": [
+      "Signs of intracranial haemorrhage such as seizures, bulging fontanelle, apnoea, or altered consciousness",
+      "Profoundly low platelet count with active bleeding",
+      "Antenatal detection of foetal intracranial haemorrhage or ventriculomegaly",
+      "A previously affected sibling, which predicts more severe disease in subsequent pregnancies"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing severe thrombocytopenia in a well neonate to sepsis and missing the alloimmune diagnosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most affected neonates recover as maternal antibody levels fall and platelet counts normalise over days to a few weeks. Prognosis is excellent in the absence of intracranial haemorrhage, but antenatal or neonatal intracranial bleeding can cause death or lasting neurological disability. Subsequent pregnancies are typically as severe or more severe and warrant specialist antenatal management.",
+    "pitfalls": [
+      "Attributing severe thrombocytopenia in a well neonate to sepsis and missing the alloimmune diagnosis",
+      "Transfusing only random-donor platelets when antigen-negative or washed maternal platelets are more effective",
+      "Failing to arrange cranial imaging to look for occult intracranial haemorrhage",
+      "Not counselling parents about the high recurrence risk and need for specialist care in future pregnancies",
+      "Confusing alloimmune with maternal autoimmune thrombocytopenia, which differ in mechanism and management"
+    ],
+    "references": [
+      "Cloherty and Stark Manual of Neonatal Care",
+      "Nathan and Oski's Hematology of Infancy and Childhood"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Transfuse antigen-negative (e.g. HPA-1a-negative), compatible platelets as first-line for severe thrombocytopenia or active bleeding, using washed maternal or matched-donor units where available",
+      "Give intravenous immunoglobulin, with or without corticosteroids, to raise the platelet count when antigen-matched platelets are unavailable or as an adjunct",
+      "Transfuse random-donor platelets without delay in an emergency if compatible units cannot be obtained",
+      "Perform serial full blood counts to track platelet recovery as maternal alloantibody wanes over days to weeks",
+      "Undertake cranial ultrasound surveillance for intracranial haemorrhage, the most feared complication",
+      "Refer to foetal medicine and give antenatal maternal intravenous immunoglobulin (with corticosteroids) in subsequent at-risk pregnancies to prevent foetal haemorrhage",
+      "Arrange parental platelet antigen typing and genetic counselling regarding the high recurrence and increasing severity in future pregnancies"
     ]
-   ],
-   "caption": "Overview comparison matrix for neonatal alloimmune thrombocytopenia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "neonatal-alloimmune-thrombocytopenia-real-image",
-   "title": "Neonatal alloimmune thrombocytopenia: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "neonatal_alloimmune_thrombocytopenia-pathway",
+      "title": "Neonatal alloimmune thrombocytopenia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Neonatal alloimmune thrombocytopenia classically causes severe isolated thrombocytopenia in an otherwise well-appearing term neonate born to a healthy mother with a normal platelet count",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Signs of intracranial haemorrhage such as seizures, bulging fontanelle, apnoea, or altered consciousness",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full blood count and blood film to confirm isolated thrombocytopenia and exclude other cytopenias, Maternal and paternal (or neonatal) platelet antigen typing to demonstrate incompatibility, Detection of maternal"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Transfuse antigen-negative (e.g. HPA-1a-negative), compatible platelets as first-line for severe thrombocytopenia or active bleeding, using washed maternal or matched-donor units where available"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing severe thrombocytopenia in a well neonate to sepsis and missing the alloimmune diagnosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of neonatal alloimmune thrombocytopenia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "neonatal_alloimmune_thrombocytopenia-matrix",
+      "title": "Neonatal alloimmune thrombocytopenia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Neonatal alloimmune thrombocytopenia classically causes severe isolated thrombocytopenia in an otherwise well-appearing term",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full blood count and blood film to confirm isolated thrombocytopenia and exclude other cytopenias, Maternal and paternal (or",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Neonatal sepsis or disseminated intravascular coagulation causing thrombocytopenia, Maternal immune thrombocytopenia with",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Transfuse antigen-negative (e.g. HPA-1a-negative), compatible platelets as first-line for severe thrombocytopenia or active",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing severe thrombocytopenia in a well neonate to sepsis and missing the alloimmune diagnosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for neonatal alloimmune thrombocytopenia."
+    }
+  ],
+  "diagrams": []
 }

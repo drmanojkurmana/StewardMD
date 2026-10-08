@@ -1,178 +1,156 @@
 {
- "id": "pheochromocytoma_paraganglioma",
- "name": "Pheochromocytoma and paraganglioma",
- "aliases": [
-  "phaeochromocytoma",
-  "PPGL",
-  "paraganglioma",
-  "chromaffin cell tumour",
-  "the 10% tumour"
- ],
- "class": "non_infective",
- "system": "Endocrine / Metabolic",
- "specialty": "Endocrinology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / Endocrine Society",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Catecholamine-secreting tumours arising from adrenal medulla (pheochromocytoma) or extra-adrenal sympathetic and parasympathetic ganglia (paraganglioma)",
-   "The classic paroxysmal triad is episodic headache, palpitations, and sweating, often with hypertension that may be sustained or episodic",
-   "Should be suspected in resistant hypertension, hypertension in the young, hypertensive spikes during anaesthesia or procedures, and incidentally found adrenal masses",
-   "Diagnosis rests on demonstrating excess catecholamine metabolites, with plasma or urinary fractionated metanephrines being the most sensitive tests",
-   "Imaging localises the tumour after biochemical confirmation, and functional imaging helps detect extra-adrenal or metastatic disease",
-   "A substantial proportion are associated with hereditary syndromes such as MEN2, von Hippel-Lindau, neurofibromatosis type 1, and SDH-related paraganglioma syndromes, so genetic evaluation is recommended",
-   "Definitive treatment is surgical resection, but adequate preoperative alpha-adrenergic blockade before any beta-blockade is essential to prevent catastrophic intraoperative crises",
-   "Because malignancy cannot be reliably predicted histologically, lifelong biochemical and clinical surveillance is required"
+  "id": "pheochromocytoma_paraganglioma",
+  "name": "Pheochromocytoma and paraganglioma",
+  "aliases": [
+    "phaeochromocytoma",
+    "PPGL",
+    "paraganglioma",
+    "chromaffin cell tumour",
+    "the 10% tumour"
   ],
-  "pathophysiology": "Pheochromocytomas and paragangliomas are neuroendocrine tumours of chromaffin or paraganglionic tissue that synthesise, store, and episodically release catecholamines (noradrenaline, adrenaline, and sometimes dopamine). Unregulated catecholamine secretion produces alpha-mediated vasoconstriction and beta-mediated cardiac stimulation, causing paroxysmal or sustained hypertension, tachyarrhythmia, and end-organ stress. Chronic catecholamine excess can lead to cardiomyopathy and volume contraction. A large fraction harbour germline or somatic mutations in genes such as RET, VHL, NF1, and the succinate dehydrogenase (SDHx) complex, linking them to defined hereditary syndromes and influencing malignant potential and secretory phenotype.",
-  "additionalDifferentials": [
-   "Essential or resistant hypertension",
-   "Anxiety or panic disorder",
-   "Hyperthyroidism",
-   "Carcinoid syndrome",
-   "Hypoglycaemia and other causes of adrenergic surges",
-   "Drug effects (sympathomimetics, monoamine oxidase interactions, withdrawal states)"
-  ],
-  "additionalInvestigations": [
-   "Plasma free or 24-hour urinary fractionated metanephrines as first-line biochemical testing",
-   "CT or MRI of the abdomen and pelvis to localise adrenal or extra-adrenal tumours",
-   "Functional imaging such as MIBG or somatostatin-receptor/PET studies for metastatic or extra-adrenal disease",
-   "Genetic testing given the high rate of heritable disease",
-   "Assessment for associated syndromic features and screening of at-risk relatives",
-   "Cardiac evaluation for catecholamine cardiomyopathy where indicated"
-  ],
-  "redFlags": [
-   "Pheochromocytoma crisis with severe hypertension, arrhythmia, cardiovascular collapse, or multi-organ failure requiring emergency management",
-   "Hypertensive surges during anaesthesia, surgery, or procedures in an unprepared patient",
-   "Inadvertent beta-blockade before alpha-blockade precipitating unopposed alpha vasoconstriction and hypertensive emergency",
-   "Signs of metastatic disease or rapid tumour progression"
-  ],
-  "prognosis": "Complete surgical removal of a benign tumour is usually curative with resolution of catecholamine excess, but hypertension may persist in some; metastatic disease carries a more guarded prognosis, and hereditary cases require indefinite surveillance for recurrence and new tumours.",
-  "pitfalls": [
-   "Administering a beta-blocker before adequate alpha-blockade, risking a hypertensive crisis",
-   "Performing biopsy of an unprepared catecholamine-secreting mass",
-   "Relying on a single normal test in a strongly suspicious clinical setting",
-   "Failing to arrange genetic testing and family screening",
-   "Assuming cure without long-term biochemical follow-up given unpredictable malignant behaviour"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "Endocrine Society guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Complete surgical resection (laparoscopic adrenalectomy or excision of extra-adrenal paraganglioma) is the definitive curative treatment",
-   "Preoperative preparation with alpha-adrenergic blockade (phenoxybenzamine or doxazosin) first, adding beta-blockade only after adequate alpha-blockade to avoid unopposed alpha vasoconstriction",
-   "Liberalise salt and fluid intake preoperatively to counter catecholamine-induced volume contraction and prevent post-resection hypotension",
-   "Manage hypertensive crises with intravenous phentolamine or sodium nitroprusside, and never give a beta-blocker before alpha-blockade",
-   "Treat unresectable or metastatic disease with radiolabelled MIBG therapy, combination chemotherapy, somatostatin analogues or tyrosine kinase inhibitors",
-   "Lifelong biochemical surveillance with plasma or urinary fractionated metanephrines for recurrence and metachronous tumours",
-   "Offer germline genetic testing (RET, VHL, NF1, SDHx) with cascade screening and syndrome-specific surveillance of at-risk relatives",
-   "Coordinate care across endocrinology, endocrine surgery and specialist anaesthesia, and assess for catecholamine cardiomyopathy"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "pheochromocytoma_paraganglioma-pathway",
-   "title": "Pheochromocytoma and paraganglioma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Catecholamine-secreting tumours arising from adrenal medulla (pheochromocytoma) or extra-adrenal sympathetic and parasympathetic ganglia (paraganglioma)",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Pheochromocytoma crisis with severe hypertension, arrhythmia, cardiovascular collapse, or multi-organ failure requiring emergency management",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plasma free or 24-hour urinary fractionated metanephrines as first-line biochemical testing, CT or MRI of the abdomen and pelvis to localise adrenal or extra-adrenal tumours, Functional imaging such as MIBG or"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Complete surgical resection (laparoscopic adrenalectomy or excision of extra-adrenal paraganglioma) is the definitive curative treatment"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Administering a beta-blocker before adequate alpha-blockade, risking a hypertensive crisis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of pheochromocytoma and paraganglioma."
-  }
- ],
- "tables": [
-  {
-   "id": "pheochromocytoma_paraganglioma-matrix",
-   "title": "Pheochromocytoma and paraganglioma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Catecholamine-secreting tumours arising from adrenal medulla (pheochromocytoma) or extra-adrenal sympathetic and parasympathetic",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine / Metabolic",
+  "specialty": "Endocrinology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / Endocrine Society",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Catecholamine-secreting tumours arising from adrenal medulla (pheochromocytoma) or extra-adrenal sympathetic and parasympathetic ganglia (paraganglioma)",
+      "The classic paroxysmal triad is episodic headache, palpitations, and sweating, often with hypertension that may be sustained or episodic",
+      "Should be suspected in resistant hypertension, hypertension in the young, hypertensive spikes during anaesthesia or procedures, and incidentally found adrenal masses",
+      "Diagnosis rests on demonstrating excess catecholamine metabolites, with plasma or urinary fractionated metanephrines being the most sensitive tests",
+      "Imaging localises the tumour after biochemical confirmation, and functional imaging helps detect extra-adrenal or metastatic disease",
+      "A substantial proportion are associated with hereditary syndromes such as MEN2, von Hippel-Lindau, neurofibromatosis type 1, and SDH-related paraganglioma syndromes, so genetic evaluation is recommended",
+      "Definitive treatment is surgical resection, but adequate preoperative alpha-adrenergic blockade before any beta-blockade is essential to prevent catastrophic intraoperative crises",
+      "Because malignancy cannot be reliably predicted histologically, lifelong biochemical and clinical surveillance is required"
     ],
-    [
-     "Key Investigations",
-     "Plasma free or 24-hour urinary fractionated metanephrines as first-line biochemical testing, CT or MRI of the abdomen and pelvis",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Pheochromocytomas and paragangliomas are neuroendocrine tumours of chromaffin or paraganglionic tissue that synthesise, store, and episodically release catecholamines (noradrenaline, adrenaline, and sometimes dopamine). Unregulated catecholamine secretion produces alpha-mediated vasoconstriction and beta-mediated cardiac stimulation, causing paroxysmal or sustained hypertension, tachyarrhythmia, and end-organ stress. Chronic catecholamine excess can lead to cardiomyopathy and volume contraction. A large fraction harbour germline or somatic mutations in genes such as RET, VHL, NF1, and the succinate dehydrogenase (SDHx) complex, linking them to defined hereditary syndromes and influencing malignant potential and secretory phenotype.",
+    "additionalDifferentials": [
+      "Essential or resistant hypertension",
+      "Anxiety or panic disorder",
+      "Hyperthyroidism",
+      "Carcinoid syndrome",
+      "Hypoglycaemia and other causes of adrenergic surges",
+      "Drug effects (sympathomimetics, monoamine oxidase interactions, withdrawal states)"
     ],
-    [
-     "Primary Differentials",
-     "Essential or resistant hypertension, Anxiety or panic disorder, Hyperthyroidism",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plasma free or 24-hour urinary fractionated metanephrines as first-line biochemical testing",
+      "CT or MRI of the abdomen and pelvis to localise adrenal or extra-adrenal tumours",
+      "Functional imaging such as MIBG or somatostatin-receptor/PET studies for metastatic or extra-adrenal disease",
+      "Genetic testing given the high rate of heritable disease",
+      "Assessment for associated syndromic features and screening of at-risk relatives",
+      "Cardiac evaluation for catecholamine cardiomyopathy where indicated"
     ],
-    [
-     "Management Strategy",
-     "Complete surgical resection (laparoscopic adrenalectomy or excision of extra-adrenal paraganglioma) is the definitive curative",
-     "Core treatment modality"
+    "redFlags": [
+      "Pheochromocytoma crisis with severe hypertension, arrhythmia, cardiovascular collapse, or multi-organ failure requiring emergency management",
+      "Hypertensive surges during anaesthesia, surgery, or procedures in an unprepared patient",
+      "Inadvertent beta-blockade before alpha-blockade precipitating unopposed alpha vasoconstriction and hypertensive emergency",
+      "Signs of metastatic disease or rapid tumour progression"
     ],
-    [
-     "Clinical Pitfall",
-     "Administering a beta-blocker before adequate alpha-blockade, risking a hypertensive crisis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Complete surgical removal of a benign tumour is usually curative with resolution of catecholamine excess, but hypertension may persist in some; metastatic disease carries a more guarded prognosis, and hereditary cases require indefinite surveillance for recurrence and new tumours.",
+    "pitfalls": [
+      "Administering a beta-blocker before adequate alpha-blockade, risking a hypertensive crisis",
+      "Performing biopsy of an unprepared catecholamine-secreting mass",
+      "Relying on a single normal test in a strongly suspicious clinical setting",
+      "Failing to arrange genetic testing and family screening",
+      "Assuming cure without long-term biochemical follow-up given unpredictable malignant behaviour"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "Endocrine Society guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Complete surgical resection (laparoscopic adrenalectomy or excision of extra-adrenal paraganglioma) is the definitive curative treatment",
+      "Preoperative preparation with alpha-adrenergic blockade (phenoxybenzamine or doxazosin) first, adding beta-blockade only after adequate alpha-blockade to avoid unopposed alpha vasoconstriction",
+      "Liberalise salt and fluid intake preoperatively to counter catecholamine-induced volume contraction and prevent post-resection hypotension",
+      "Manage hypertensive crises with intravenous phentolamine or sodium nitroprusside, and never give a beta-blocker before alpha-blockade",
+      "Treat unresectable or metastatic disease with radiolabelled MIBG therapy, combination chemotherapy, somatostatin analogues or tyrosine kinase inhibitors",
+      "Lifelong biochemical surveillance with plasma or urinary fractionated metanephrines for recurrence and metachronous tumours",
+      "Offer germline genetic testing (RET, VHL, NF1, SDHx) with cascade screening and syndrome-specific surveillance of at-risk relatives",
+      "Coordinate care across endocrinology, endocrine surgery and specialist anaesthesia, and assess for catecholamine cardiomyopathy"
     ]
-   ],
-   "caption": "Overview comparison matrix for pheochromocytoma and paraganglioma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "pheochromocytoma-paraganglioma-real-image",
-   "title": "Pheochromocytoma and paraganglioma: Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "pheochromocytoma_paraganglioma-pathway",
+      "title": "Pheochromocytoma and paraganglioma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Catecholamine-secreting tumours arising from adrenal medulla (pheochromocytoma) or extra-adrenal sympathetic and parasympathetic ganglia (paraganglioma)",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Pheochromocytoma crisis with severe hypertension, arrhythmia, cardiovascular collapse, or multi-organ failure requiring emergency management",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plasma free or 24-hour urinary fractionated metanephrines as first-line biochemical testing, CT or MRI of the abdomen and pelvis to localise adrenal or extra-adrenal tumours, Functional imaging such as MIBG or"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Complete surgical resection (laparoscopic adrenalectomy or excision of extra-adrenal paraganglioma) is the definitive curative treatment"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Administering a beta-blocker before adequate alpha-blockade, risking a hypertensive crisis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of pheochromocytoma and paraganglioma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "pheochromocytoma_paraganglioma-matrix",
+      "title": "Pheochromocytoma and paraganglioma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Catecholamine-secreting tumours arising from adrenal medulla (pheochromocytoma) or extra-adrenal sympathetic and parasympathetic",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plasma free or 24-hour urinary fractionated metanephrines as first-line biochemical testing, CT or MRI of the abdomen and pelvis",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Essential or resistant hypertension, Anxiety or panic disorder, Hyperthyroidism",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Complete surgical resection (laparoscopic adrenalectomy or excision of extra-adrenal paraganglioma) is the definitive curative",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Administering a beta-blocker before adequate alpha-blockade, risking a hypertensive crisis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for pheochromocytoma and paraganglioma."
+    }
+  ],
+  "diagrams": []
 }

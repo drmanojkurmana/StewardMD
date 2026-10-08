@@ -1,174 +1,152 @@
 {
- "id": "vohwinkel_syndrome",
- "name": "Vohwinkel syndrome",
- "aliases": [
-  "mutilating keratoderma",
-  "keratoderma hereditaria mutilans",
-  "GJB2 (classic Vohwinkel)",
-  "LOR (variant Vohwinkel)"
- ],
- "class": "non_infective",
- "system": "Dermatology / Genetics",
- "specialty": "Dermatology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A mutilating palmoplantar keratoderma characterised by a distinctive honeycomb (honeycomb-patterned) hyperkeratosis of the palms and soles",
-   "Starfish-shaped (stellate) keratoses over the knuckles and dorsa of the digits are a highly suggestive sign",
-   "Constricting fibrous bands (pseudo-ainhum) form around digits and can progress to autoamputation",
-   "The classic form is associated with sensorineural deafness and results from dominant GJB2 (connexin 26) mutations",
-   "A variant form (Camisa) has associated ichthyosis and is caused by loronin mutations in the LOR gene",
-   "Onset is usually in infancy or early childhood with progression of the keratoderma over time",
-   "Management is supportive with emollients/keratolytics and oral retinoids, with surgical release of constricting bands to prevent digital loss"
+  "id": "vohwinkel_syndrome",
+  "name": "Vohwinkel syndrome",
+  "aliases": [
+    "mutilating keratoderma",
+    "keratoderma hereditaria mutilans",
+    "GJB2 (classic Vohwinkel)",
+    "LOR (variant Vohwinkel)"
   ],
-  "pathophysiology": "Vohwinkel syndrome exists in two genetically distinct forms. The classic form with deafness is caused by dominant mutations in GJB2 encoding connexin 26, a gap-junction protein; abnormal gap-junction channels disturb epidermal cell-to-cell communication and cochlear function. The variant form associated with ichthyosis arises from mutations in LOR encoding loricrin, a major component of the cornified cell envelope, leading to defective envelope assembly and abnormal terminal differentiation of keratinocytes. In both, disordered keratinisation produces the honeycomb keratoderma and stellate keratoses, and progressive fibrous constriction (pseudo-ainhum) around digits can strangulate them, causing autoamputation.",
-  "additionalDifferentials": [
-   "Mal de Meleda (transgrediens palmoplantar keratoderma)",
-   "Olmsted syndrome",
-   "Papillon-Lefevre syndrome",
-   "Other mutilating/constricting keratodermas with pseudo-ainhum",
-   "True ainhum (idiopathic constricting band)",
-   "Keratoderma associated with KID syndrome"
-  ],
-  "additionalInvestigations": [
-   "Skin biopsy showing orthohyperkeratosis and, in the loricrin variant, retained nuclei within the stratum corneum",
-   "Molecular genetic testing of GJB2 and LOR",
-   "Audiological assessment for sensorineural hearing loss (classic form)",
-   "Clinical and photographic monitoring of digital constriction bands",
-   "Radiographs of digits where bony involvement or impending autoamputation is suspected",
-   "Assessment for associated ichthyosis in the variant form"
-  ],
-  "redFlags": [
-   "Progressive pseudo-ainhum threatening digital viability or autoamputation",
-   "Secondary infection or ulceration of fissured keratotic skin",
-   "New or worsening hearing loss requiring audiological input",
-   "Functional impairment of the hands limiting activity"
-  ],
-  "prognosis": "The keratoderma is chronic and progressive, and the principal threat is loss of digits from constricting bands. With emollient/keratolytic care, oral retinoids and timely surgical band release, digital function can often be preserved, though the condition is not curable.",
-  "pitfalls": [
-   "Failing to recognise and release pseudo-ainhum bands early, allowing digital autoamputation",
-   "Not distinguishing the deafness-associated (GJB2) form from the ichthyosis (loricrin) variant, which affects counselling",
-   "Overlooking the honeycomb pattern and stellate knuckle keratoses that distinguish it from other keratodermas",
-   "Reliance on keratolytics alone when retinoids and surgery may be needed"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Fitzpatrick's Dermatology in General Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Topical emollients and keratolytics such as urea, salicylic acid and alpha-hydroxy acids to reduce the honeycomb keratoderma",
-   "Systemic oral retinoids such as acitretin to soften the keratoderma and relieve or prevent constricting bands",
-   "Surgical release of constricting fibrous bands (pseudo-ainhum) to prevent digital strangulation and autoamputation",
-   "Regular clinical and photographic surveillance of digital constriction bands",
-   "Audiological assessment and hearing rehabilitation with hearing aids in the classic connexin 26 (GJB2) deafness form",
-   "Manage associated ichthyosis in the loricrin (LOR) variant",
-   "Genetic counselling given autosomal dominant inheritance, with dermatology and clinical genetics multidisciplinary care"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "vohwinkel_syndrome-pathway",
-   "title": "Vohwinkel syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A mutilating palmoplantar keratoderma characterised by a distinctive honeycomb (honeycomb-patterned) hyperkeratosis of the palms and soles",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive pseudo-ainhum threatening digital viability or autoamputation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Skin biopsy showing orthohyperkeratosis and, in the loricrin variant, retained nuclei within the stratum corneum, Molecular genetic testing of GJB2 and LOR, Audiological assessment for sensorineural hearing loss (classic"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Topical emollients and keratolytics such as urea, salicylic acid and alpha-hydroxy acids to reduce the honeycomb keratoderma"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to recognise and release pseudo-ainhum bands early, allowing digital autoamputation"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of vohwinkel syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "vohwinkel_syndrome-matrix",
-   "title": "Vohwinkel syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A mutilating palmoplantar keratoderma characterised by a distinctive honeycomb (honeycomb-patterned) hyperkeratosis of the palms",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Dermatology / Genetics",
+  "specialty": "Dermatology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A mutilating palmoplantar keratoderma characterised by a distinctive honeycomb (honeycomb-patterned) hyperkeratosis of the palms and soles",
+      "Starfish-shaped (stellate) keratoses over the knuckles and dorsa of the digits are a highly suggestive sign",
+      "Constricting fibrous bands (pseudo-ainhum) form around digits and can progress to autoamputation",
+      "The classic form is associated with sensorineural deafness and results from dominant GJB2 (connexin 26) mutations",
+      "A variant form (Camisa) has associated ichthyosis and is caused by loronin mutations in the LOR gene",
+      "Onset is usually in infancy or early childhood with progression of the keratoderma over time",
+      "Management is supportive with emollients/keratolytics and oral retinoids, with surgical release of constricting bands to prevent digital loss"
     ],
-    [
-     "Key Investigations",
-     "Skin biopsy showing orthohyperkeratosis and, in the loricrin variant, retained nuclei within the stratum corneum, Molecular",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Vohwinkel syndrome exists in two genetically distinct forms. The classic form with deafness is caused by dominant mutations in GJB2 encoding connexin 26, a gap-junction protein; abnormal gap-junction channels disturb epidermal cell-to-cell communication and cochlear function. The variant form associated with ichthyosis arises from mutations in LOR encoding loricrin, a major component of the cornified cell envelope, leading to defective envelope assembly and abnormal terminal differentiation of keratinocytes. In both, disordered keratinisation produces the honeycomb keratoderma and stellate keratoses, and progressive fibrous constriction (pseudo-ainhum) around digits can strangulate them, causing autoamputation.",
+    "additionalDifferentials": [
+      "Mal de Meleda (transgrediens palmoplantar keratoderma)",
+      "Olmsted syndrome",
+      "Papillon-Lefevre syndrome",
+      "Other mutilating/constricting keratodermas with pseudo-ainhum",
+      "True ainhum (idiopathic constricting band)",
+      "Keratoderma associated with KID syndrome"
     ],
-    [
-     "Primary Differentials",
-     "Mal de Meleda (transgrediens palmoplantar keratoderma), Olmsted syndrome, Papillon-Lefevre syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Skin biopsy showing orthohyperkeratosis and, in the loricrin variant, retained nuclei within the stratum corneum",
+      "Molecular genetic testing of GJB2 and LOR",
+      "Audiological assessment for sensorineural hearing loss (classic form)",
+      "Clinical and photographic monitoring of digital constriction bands",
+      "Radiographs of digits where bony involvement or impending autoamputation is suspected",
+      "Assessment for associated ichthyosis in the variant form"
     ],
-    [
-     "Management Strategy",
-     "Topical emollients and keratolytics such as urea, salicylic acid and alpha-hydroxy acids to reduce the honeycomb keratoderma",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive pseudo-ainhum threatening digital viability or autoamputation",
+      "Secondary infection or ulceration of fissured keratotic skin",
+      "New or worsening hearing loss requiring audiological input",
+      "Functional impairment of the hands limiting activity"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to recognise and release pseudo-ainhum bands early, allowing digital autoamputation",
-     "Prevent diagnostic or management error"
+    "prognosis": "The keratoderma is chronic and progressive, and the principal threat is loss of digits from constricting bands. With emollient/keratolytic care, oral retinoids and timely surgical band release, digital function can often be preserved, though the condition is not curable.",
+    "pitfalls": [
+      "Failing to recognise and release pseudo-ainhum bands early, allowing digital autoamputation",
+      "Not distinguishing the deafness-associated (GJB2) form from the ichthyosis (loricrin) variant, which affects counselling",
+      "Overlooking the honeycomb pattern and stellate knuckle keratoses that distinguish it from other keratodermas",
+      "Reliance on keratolytics alone when retinoids and surgery may be needed"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Fitzpatrick's Dermatology in General Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Topical emollients and keratolytics such as urea, salicylic acid and alpha-hydroxy acids to reduce the honeycomb keratoderma",
+      "Systemic oral retinoids such as acitretin to soften the keratoderma and relieve or prevent constricting bands",
+      "Surgical release of constricting fibrous bands (pseudo-ainhum) to prevent digital strangulation and autoamputation",
+      "Regular clinical and photographic surveillance of digital constriction bands",
+      "Audiological assessment and hearing rehabilitation with hearing aids in the classic connexin 26 (GJB2) deafness form",
+      "Manage associated ichthyosis in the loricrin (LOR) variant",
+      "Genetic counselling given autosomal dominant inheritance, with dermatology and clinical genetics multidisciplinary care"
     ]
-   ],
-   "caption": "Overview comparison matrix for vohwinkel syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "vohwinkel-syndrome-real-image",
-   "title": "Vohwinkel syndrome: Clinical Cutaneous Dermatology Photograph",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/herpes-zoster-rash.jpg?v=kbri3",
-   "caption": "Diagnostic clinical photograph displaying epidermal primary lesions, morphology, margin demarcation, and dermatomal distribution.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Primary Lesions",
-     "description": "Macules, papules, plaques, vesicles, or bullae characteristics and coloration."
-    },
-    {
-     "label": "Demarcation & Margins",
-     "description": "Edge borders, surrounding erythema, and epidermal surface changes."
-    },
-    {
-     "label": "Anatomical Distribution",
-     "description": "Dermatomal, flexural, extensor, or photo-exposed localization pattern."
+      "id": "vohwinkel_syndrome-pathway",
+      "title": "Vohwinkel syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A mutilating palmoplantar keratoderma characterised by a distinctive honeycomb (honeycomb-patterned) hyperkeratosis of the palms and soles",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive pseudo-ainhum threatening digital viability or autoamputation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Skin biopsy showing orthohyperkeratosis and, in the loricrin variant, retained nuclei within the stratum corneum, Molecular genetic testing of GJB2 and LOR, Audiological assessment for sensorineural hearing loss (classic"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Topical emollients and keratolytics such as urea, salicylic acid and alpha-hydroxy acids to reduce the honeycomb keratoderma"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to recognise and release pseudo-ainhum bands early, allowing digital autoamputation"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of vohwinkel syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "vohwinkel_syndrome-matrix",
+      "title": "Vohwinkel syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A mutilating palmoplantar keratoderma characterised by a distinctive honeycomb (honeycomb-patterned) hyperkeratosis of the palms",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Skin biopsy showing orthohyperkeratosis and, in the loricrin variant, retained nuclei within the stratum corneum, Molecular",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Mal de Meleda (transgrediens palmoplantar keratoderma), Olmsted syndrome, Papillon-Lefevre syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Topical emollients and keratolytics such as urea, salicylic acid and alpha-hydroxy acids to reduce the honeycomb keratoderma",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to recognise and release pseudo-ainhum bands early, allowing digital autoamputation",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for vohwinkel syndrome."
+    }
+  ],
+  "diagrams": []
 }

@@ -1,170 +1,148 @@
 {
- "id": "subacute_thyroiditis",
- "name": "Subacute thyroiditis",
- "aliases": [
-  "de Quervain thyroiditis",
-  "subacute granulomatous thyroiditis",
-  "giant cell thyroiditis",
-  "painful subacute thyroiditis"
- ],
- "class": "non_infective",
- "system": "Endocrine / Metabolic",
- "specialty": "Endocrinology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine",
-  "sourceEdition": "22e",
-  "pages": null,
-  "clinicalPearls": [
-   "Typically follows a viral upper respiratory illness by a few weeks and presents with a painful, tender thyroid and referred pain to the jaw or ears",
-   "Classically evolves through phases: an early thyrotoxic phase from follicular disruption, followed by transient hypothyroidism, and usually a return to euthyroidism",
-   "In the thyrotoxic phase radioiodine uptake is characteristically low, which distinguishes it from Graves' disease where uptake is high",
-   "The erythrocyte sedimentation rate and C-reactive protein are markedly elevated, reflecting the inflammatory process",
-   "Thyrotoxic symptoms arise from release of preformed hormone rather than increased synthesis, so antithyroid drugs are ineffective",
-   "Management is largely symptomatic, with anti-inflammatory agents for milder disease and corticosteroids reserved for severe pain, alongside beta-blockade for adrenergic symptoms",
-   "A minority of patients are left with permanent hypothyroidism, so thyroid function should be monitored during recovery"
+  "id": "subacute_thyroiditis",
+  "name": "Subacute thyroiditis",
+  "aliases": [
+    "de Quervain thyroiditis",
+    "subacute granulomatous thyroiditis",
+    "giant cell thyroiditis",
+    "painful subacute thyroiditis"
   ],
-  "pathophysiology": "Subacute thyroiditis is thought to result from a viral infection or post-viral inflammatory response affecting the thyroid, producing granulomatous inflammation with giant cells and destruction of thyroid follicles. Disruption of follicles releases stored thyroid hormone into the circulation, causing an initial destructive thyrotoxicosis with suppressed TSH and low radioiodine uptake. As follicular stores are depleted and the gland heals, patients pass through a hypothyroid phase before glandular recovery restores normal hormone production in most cases.",
-  "additionalDifferentials": [
-   "Graves' disease",
-   "Painless (silent) thyroiditis and postpartum thyroiditis",
-   "Acute suppurative thyroiditis",
-   "Haemorrhage into a thyroid cyst or nodule",
-   "Toxic multinodular goitre or toxic adenoma"
-  ],
-  "additionalInvestigations": [
-   "Thyroid function tests to characterise the phase of disease",
-   "Erythrocyte sedimentation rate and C-reactive protein",
-   "Radioactive iodine uptake scan showing low uptake in the thyrotoxic phase",
-   "Thyroid ultrasound with reduced vascularity distinguishing it from Graves' disease",
-   "TSH-receptor antibody testing when Graves' disease is a serious consideration"
-  ],
-  "redFlags": [
-   "Severe fever, fluctuance, or a rapidly enlarging tender gland suggesting suppurative thyroiditis needing drainage and antimicrobials",
-   "Marked thyrotoxic symptoms with cardiac compromise",
-   "Persistent hypothyroid symptoms indicating the need for hormone replacement",
-   "Compressive symptoms or an atypical mass raising concern for malignancy"
-  ],
-  "prognosis": "The illness is usually self-limiting over weeks to months with full recovery of thyroid function in most patients, though pain can be prolonged, recurrences occur occasionally, and a small proportion develop permanent hypothyroidism.",
-  "pitfalls": [
-   "Mistaking destructive thyrotoxicosis for Graves' disease and prescribing ineffective antithyroid drugs",
-   "Failing to check radioiodine uptake or ultrasound vascularity to separate the two",
-   "Overlooking the later hypothyroid phase and not monitoring thyroid function through recovery",
-   "Attributing a painful gland to malignancy without recognising the inflammatory picture"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Anti-inflammatory analgesia with NSAIDs for thyroid pain in milder disease",
-   "Oral corticosteroids for severe or unremitting thyroid pain not controlled by NSAIDs",
-   "Beta-blockade for adrenergic thyrotoxic symptoms during the destructive phase, noting antithyroid drugs are ineffective and not indicated",
-   "Reassurance that the illness is self-limiting, with no antithyroid therapy for the transient thyrotoxic phase",
-   "Levothyroxine replacement during a symptomatic hypothyroid phase, which is usually temporary",
-   "Monitor thyroid function through the disease phases and to detect the small proportion who develop permanent hypothyroidism"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "subacute_thyroiditis-pathway",
-   "title": "Subacute thyroiditis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Typically follows a viral upper respiratory illness by a few weeks and presents with a painful, tender thyroid and referred pain to the jaw or ears",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe fever, fluctuance, or a rapidly enlarging tender gland suggesting suppurative thyroiditis needing drainage and antimicrobials",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Thyroid function tests to characterise the phase of disease, Erythrocyte sedimentation rate and C-reactive protein, Radioactive iodine uptake scan showing low uptake in the thyrotoxic phase"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Anti-inflammatory analgesia with NSAIDs for thyroid pain in milder disease"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking destructive thyrotoxicosis for Graves' disease and prescribing ineffective antithyroid drugs"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of subacute thyroiditis."
-  }
- ],
- "tables": [
-  {
-   "id": "subacute_thyroiditis-matrix",
-   "title": "Subacute thyroiditis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Typically follows a viral upper respiratory illness by a few weeks and presents with a painful, tender thyroid and referred pain",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine / Metabolic",
+  "specialty": "Endocrinology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine",
+    "sourceEdition": "22e",
+    "pages": null,
+    "clinicalPearls": [
+      "Typically follows a viral upper respiratory illness by a few weeks and presents with a painful, tender thyroid and referred pain to the jaw or ears",
+      "Classically evolves through phases: an early thyrotoxic phase from follicular disruption, followed by transient hypothyroidism, and usually a return to euthyroidism",
+      "In the thyrotoxic phase radioiodine uptake is characteristically low, which distinguishes it from Graves' disease where uptake is high",
+      "The erythrocyte sedimentation rate and C-reactive protein are markedly elevated, reflecting the inflammatory process",
+      "Thyrotoxic symptoms arise from release of preformed hormone rather than increased synthesis, so antithyroid drugs are ineffective",
+      "Management is largely symptomatic, with anti-inflammatory agents for milder disease and corticosteroids reserved for severe pain, alongside beta-blockade for adrenergic symptoms",
+      "A minority of patients are left with permanent hypothyroidism, so thyroid function should be monitored during recovery"
     ],
-    [
-     "Key Investigations",
-     "Thyroid function tests to characterise the phase of disease, Erythrocyte sedimentation rate and C-reactive protein, Radioactive",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Subacute thyroiditis is thought to result from a viral infection or post-viral inflammatory response affecting the thyroid, producing granulomatous inflammation with giant cells and destruction of thyroid follicles. Disruption of follicles releases stored thyroid hormone into the circulation, causing an initial destructive thyrotoxicosis with suppressed TSH and low radioiodine uptake. As follicular stores are depleted and the gland heals, patients pass through a hypothyroid phase before glandular recovery restores normal hormone production in most cases.",
+    "additionalDifferentials": [
+      "Graves' disease",
+      "Painless (silent) thyroiditis and postpartum thyroiditis",
+      "Acute suppurative thyroiditis",
+      "Haemorrhage into a thyroid cyst or nodule",
+      "Toxic multinodular goitre or toxic adenoma"
     ],
-    [
-     "Primary Differentials",
-     "Graves' disease, Painless (silent) thyroiditis and postpartum thyroiditis, Acute suppurative thyroiditis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Thyroid function tests to characterise the phase of disease",
+      "Erythrocyte sedimentation rate and C-reactive protein",
+      "Radioactive iodine uptake scan showing low uptake in the thyrotoxic phase",
+      "Thyroid ultrasound with reduced vascularity distinguishing it from Graves' disease",
+      "TSH-receptor antibody testing when Graves' disease is a serious consideration"
     ],
-    [
-     "Management Strategy",
-     "Anti-inflammatory analgesia with NSAIDs for thyroid pain in milder disease",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe fever, fluctuance, or a rapidly enlarging tender gland suggesting suppurative thyroiditis needing drainage and antimicrobials",
+      "Marked thyrotoxic symptoms with cardiac compromise",
+      "Persistent hypothyroid symptoms indicating the need for hormone replacement",
+      "Compressive symptoms or an atypical mass raising concern for malignancy"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking destructive thyrotoxicosis for Graves' disease and prescribing ineffective antithyroid drugs",
-     "Prevent diagnostic or management error"
+    "prognosis": "The illness is usually self-limiting over weeks to months with full recovery of thyroid function in most patients, though pain can be prolonged, recurrences occur occasionally, and a small proportion develop permanent hypothyroidism.",
+    "pitfalls": [
+      "Mistaking destructive thyrotoxicosis for Graves' disease and prescribing ineffective antithyroid drugs",
+      "Failing to check radioiodine uptake or ultrasound vascularity to separate the two",
+      "Overlooking the later hypothyroid phase and not monitoring thyroid function through recovery",
+      "Attributing a painful gland to malignancy without recognising the inflammatory picture"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Anti-inflammatory analgesia with NSAIDs for thyroid pain in milder disease",
+      "Oral corticosteroids for severe or unremitting thyroid pain not controlled by NSAIDs",
+      "Beta-blockade for adrenergic thyrotoxic symptoms during the destructive phase, noting antithyroid drugs are ineffective and not indicated",
+      "Reassurance that the illness is self-limiting, with no antithyroid therapy for the transient thyrotoxic phase",
+      "Levothyroxine replacement during a symptomatic hypothyroid phase, which is usually temporary",
+      "Monitor thyroid function through the disease phases and to detect the small proportion who develop permanent hypothyroidism"
     ]
-   ],
-   "caption": "Overview comparison matrix for subacute thyroiditis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "subacute-thyroiditis-real-image",
-   "title": "Subacute thyroiditis: Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "subacute_thyroiditis-pathway",
+      "title": "Subacute thyroiditis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Typically follows a viral upper respiratory illness by a few weeks and presents with a painful, tender thyroid and referred pain to the jaw or ears",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe fever, fluctuance, or a rapidly enlarging tender gland suggesting suppurative thyroiditis needing drainage and antimicrobials",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Thyroid function tests to characterise the phase of disease, Erythrocyte sedimentation rate and C-reactive protein, Radioactive iodine uptake scan showing low uptake in the thyrotoxic phase"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Anti-inflammatory analgesia with NSAIDs for thyroid pain in milder disease"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking destructive thyrotoxicosis for Graves' disease and prescribing ineffective antithyroid drugs"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of subacute thyroiditis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "subacute_thyroiditis-matrix",
+      "title": "Subacute thyroiditis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Typically follows a viral upper respiratory illness by a few weeks and presents with a painful, tender thyroid and referred pain",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Thyroid function tests to characterise the phase of disease, Erythrocyte sedimentation rate and C-reactive protein, Radioactive",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Graves' disease, Painless (silent) thyroiditis and postpartum thyroiditis, Acute suppurative thyroiditis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Anti-inflammatory analgesia with NSAIDs for thyroid pain in milder disease",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking destructive thyrotoxicosis for Graves' disease and prescribing ineffective antithyroid drugs",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for subacute thyroiditis."
+    }
+  ],
+  "diagrams": []
 }

@@ -1,177 +1,155 @@
 {
- "id": "androgen_insensitivity",
- "name": "Androgen insensitivity syndrome",
- "aliases": [
-  "AIS",
-  "testicular feminisation",
-  "androgen resistance syndrome",
-  "complete androgen insensitivity syndrome (CAIS)",
-  "partial androgen insensitivity syndrome (PAIS)"
- ],
- "class": "non_infective",
- "system": "Endocrine / Metabolic",
- "specialty": "Endocrinology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / Endocrine Society",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A disorder of sex development in which a 46,XY individual with functioning testes cannot respond normally to androgens because of an androgen receptor defect",
-   "In the complete form, external genitalia are female, and the condition may present as primary amenorrhoea or as inguinal or labial masses (testes) in an otherwise typical-appearing girl",
-   "The partial form produces a spectrum of undervirilised or ambiguous genitalia depending on the degree of residual receptor function",
-   "Testes produce anti-Mullerian hormone, so Mullerian structures (uterus, upper vagina, fallopian tubes) are absent, but wolffian development is also impaired by androgen resistance",
-   "Biochemically, testosterone is in the normal or high male range with elevated LH, reflecting androgen resistance at the receptor rather than a synthetic defect",
-   "Breast development at puberty occurs through peripheral aromatisation of testosterone to oestrogen despite the absence of androgen action",
-   "Undescended testes carry a risk of malignancy that increases with age, informing decisions about the timing of gonadectomy",
-   "Care is best delivered by a multidisciplinary team addressing hormone replacement, psychological support, and sensitive discussion of gender identity and fertility"
+  "id": "androgen_insensitivity",
+  "name": "Androgen insensitivity syndrome",
+  "aliases": [
+    "AIS",
+    "testicular feminisation",
+    "androgen resistance syndrome",
+    "complete androgen insensitivity syndrome (CAIS)",
+    "partial androgen insensitivity syndrome (PAIS)"
   ],
-  "pathophysiology": "Androgen insensitivity syndrome results from mutations in the X-linked androgen receptor gene that impair the receptor's ability to bind androgen or transduce its signal. Although the testes of a 46,XY individual produce normal or elevated testosterone and dihydrotestosterone, target tissues cannot respond, so male external genital development and other androgen-dependent processes fail to varying degrees. Anti-Mullerian hormone from Sertoli cells still causes regression of Mullerian structures, so no uterus develops. Impaired negative feedback of androgens on the hypothalamic-pituitary axis raises LH, further increasing testosterone, part of which is aromatised peripherally to oestrogen, driving breast development at puberty. The severity of undervirilisation correlates with the degree of receptor dysfunction.",
-  "additionalDifferentials": [
-   "5-alpha-reductase deficiency",
-   "Gonadal dysgenesis (e.g. Swyer syndrome)",
-   "Mullerian agenesis (Mayer-Rokitansky-Kuster-Hauser syndrome)",
-   "Defects of testosterone biosynthesis",
-   "Congenital adrenal hyperplasia causing genital ambiguity",
-   "Other disorders of sex development"
-  ],
-  "additionalInvestigations": [
-   "Karyotype demonstrating 46,XY",
-   "Testosterone, dihydrotestosterone, and LH/FSH",
-   "Anti-Mullerian hormone and assessment of internal Mullerian structures by imaging",
-   "Pelvic and inguinal imaging to locate gonads",
-   "Androgen receptor gene analysis to confirm the diagnosis and guide counselling",
-   "Bone density assessment given long-term implications of hormone status and gonadectomy"
-  ],
-  "redFlags": [
-   "Malignant transformation of intra-abdominal or undescended testes, an increasing risk over time",
-   "Inguinal hernia or labial mass in a phenotypic girl warranting evaluation for gonads",
-   "Post-gonadectomy hypogonadism with accelerated bone loss if hormone replacement is inadequate",
-   "Significant psychological distress requiring timely support"
-  ],
-  "prognosis": "With appropriate hormone replacement, gonadal management, and multidisciplinary support, individuals generally have good physical health and quality of life; the main long-term concerns are gonadal malignancy risk, bone health after gonadectomy, and psychosocial wellbeing. Fertility is not possible in the complete form.",
-  "pitfalls": [
-   "Assuming a phenotypic female with primary amenorrhoea has a uterus without imaging",
-   "Overlooking androgen insensitivity in a girl presenting with inguinal or labial gonads",
-   "Neglecting oestrogen replacement and bone protection after gonadectomy",
-   "Communicating the diagnosis insensitively without multidisciplinary and psychological support",
-   "Confusing it with 5-alpha-reductase deficiency, which has a different hormonal profile and pubertal course"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "Endocrine Society guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Individualised gonadal management, with gonadectomy timing balanced against germ-cell malignancy risk and the option to retain gonads until after spontaneous puberty in complete cases",
-   "Oestrogen replacement therapy after gonadectomy to induce or maintain secondary sexual characteristics and protect bone",
-   "Graduated vaginal dilation as first-line for vaginal hypoplasia in complete androgen insensitivity, with surgical vaginoplasty reserved for selected cases",
-   "In partial forms, sex-of-rearing and any genital surgery decisions individualised to phenotype and, where possible, the person's own gender identity",
-   "Bone-density surveillance with calcium and vitamin D optimisation given hypogonadism and post-gonadectomy fracture risk",
-   "Psychological support and care coordinated through a specialist disorders-of-sex-development multidisciplinary team",
-   "Genetic counselling for the X-linked androgen receptor mutation with testing of at-risk maternal-line relatives"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "androgen_insensitivity-pathway",
-   "title": "Androgen insensitivity syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A disorder of sex development in which a 46,XY individual with functioning testes cannot respond normally to androgens because of an androgen receptor defect",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Malignant transformation of intra-abdominal or undescended testes, an increasing risk over time",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Karyotype demonstrating 46,XY, Testosterone, dihydrotestosterone, and LH/FSH, Anti-Mullerian hormone and assessment of internal Mullerian structures by imaging"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Individualised gonadal management, with gonadectomy timing balanced against germ-cell malignancy risk and the option to retain gonads until after spontaneous puberty in complete cases"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming a phenotypic female with primary amenorrhoea has a uterus without imaging"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of androgen insensitivity syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "androgen_insensitivity-matrix",
-   "title": "Androgen insensitivity syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A disorder of sex development in which a 46,XY individual with functioning testes cannot respond normally to androgens because of",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine / Metabolic",
+  "specialty": "Endocrinology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / Endocrine Society",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A disorder of sex development in which a 46,XY individual with functioning testes cannot respond normally to androgens because of an androgen receptor defect",
+      "In the complete form, external genitalia are female, and the condition may present as primary amenorrhoea or as inguinal or labial masses (testes) in an otherwise typical-appearing girl",
+      "The partial form produces a spectrum of undervirilised or ambiguous genitalia depending on the degree of residual receptor function",
+      "Testes produce anti-Mullerian hormone, so Mullerian structures (uterus, upper vagina, fallopian tubes) are absent, but wolffian development is also impaired by androgen resistance",
+      "Biochemically, testosterone is in the normal or high male range with elevated LH, reflecting androgen resistance at the receptor rather than a synthetic defect",
+      "Breast development at puberty occurs through peripheral aromatisation of testosterone to oestrogen despite the absence of androgen action",
+      "Undescended testes carry a risk of malignancy that increases with age, informing decisions about the timing of gonadectomy",
+      "Care is best delivered by a multidisciplinary team addressing hormone replacement, psychological support, and sensitive discussion of gender identity and fertility"
     ],
-    [
-     "Key Investigations",
-     "Karyotype demonstrating 46,XY, Testosterone, dihydrotestosterone, and LH/FSH, Anti-Mullerian hormone and assessment of internal",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Androgen insensitivity syndrome results from mutations in the X-linked androgen receptor gene that impair the receptor's ability to bind androgen or transduce its signal. Although the testes of a 46,XY individual produce normal or elevated testosterone and dihydrotestosterone, target tissues cannot respond, so male external genital development and other androgen-dependent processes fail to varying degrees. Anti-Mullerian hormone from Sertoli cells still causes regression of Mullerian structures, so no uterus develops. Impaired negative feedback of androgens on the hypothalamic-pituitary axis raises LH, further increasing testosterone, part of which is aromatised peripherally to oestrogen, driving breast development at puberty. The severity of undervirilisation correlates with the degree of receptor dysfunction.",
+    "additionalDifferentials": [
+      "5-alpha-reductase deficiency",
+      "Gonadal dysgenesis (e.g. Swyer syndrome)",
+      "Mullerian agenesis (Mayer-Rokitansky-Kuster-Hauser syndrome)",
+      "Defects of testosterone biosynthesis",
+      "Congenital adrenal hyperplasia causing genital ambiguity",
+      "Other disorders of sex development"
     ],
-    [
-     "Primary Differentials",
-     "5-alpha-reductase deficiency, Gonadal dysgenesis (e.g. Swyer syndrome), Mullerian agenesis (Mayer-Rokitansky-Kuster-Hauser",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Karyotype demonstrating 46,XY",
+      "Testosterone, dihydrotestosterone, and LH/FSH",
+      "Anti-Mullerian hormone and assessment of internal Mullerian structures by imaging",
+      "Pelvic and inguinal imaging to locate gonads",
+      "Androgen receptor gene analysis to confirm the diagnosis and guide counselling",
+      "Bone density assessment given long-term implications of hormone status and gonadectomy"
     ],
-    [
-     "Management Strategy",
-     "Individualised gonadal management, with gonadectomy timing balanced against germ-cell malignancy risk and the option to retain",
-     "Core treatment modality"
+    "redFlags": [
+      "Malignant transformation of intra-abdominal or undescended testes, an increasing risk over time",
+      "Inguinal hernia or labial mass in a phenotypic girl warranting evaluation for gonads",
+      "Post-gonadectomy hypogonadism with accelerated bone loss if hormone replacement is inadequate",
+      "Significant psychological distress requiring timely support"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming a phenotypic female with primary amenorrhoea has a uterus without imaging",
-     "Prevent diagnostic or management error"
+    "prognosis": "With appropriate hormone replacement, gonadal management, and multidisciplinary support, individuals generally have good physical health and quality of life; the main long-term concerns are gonadal malignancy risk, bone health after gonadectomy, and psychosocial wellbeing. Fertility is not possible in the complete form.",
+    "pitfalls": [
+      "Assuming a phenotypic female with primary amenorrhoea has a uterus without imaging",
+      "Overlooking androgen insensitivity in a girl presenting with inguinal or labial gonads",
+      "Neglecting oestrogen replacement and bone protection after gonadectomy",
+      "Communicating the diagnosis insensitively without multidisciplinary and psychological support",
+      "Confusing it with 5-alpha-reductase deficiency, which has a different hormonal profile and pubertal course"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "Endocrine Society guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Individualised gonadal management, with gonadectomy timing balanced against germ-cell malignancy risk and the option to retain gonads until after spontaneous puberty in complete cases",
+      "Oestrogen replacement therapy after gonadectomy to induce or maintain secondary sexual characteristics and protect bone",
+      "Graduated vaginal dilation as first-line for vaginal hypoplasia in complete androgen insensitivity, with surgical vaginoplasty reserved for selected cases",
+      "In partial forms, sex-of-rearing and any genital surgery decisions individualised to phenotype and, where possible, the person's own gender identity",
+      "Bone-density surveillance with calcium and vitamin D optimisation given hypogonadism and post-gonadectomy fracture risk",
+      "Psychological support and care coordinated through a specialist disorders-of-sex-development multidisciplinary team",
+      "Genetic counselling for the X-linked androgen receptor mutation with testing of at-risk maternal-line relatives"
     ]
-   ],
-   "caption": "Overview comparison matrix for androgen insensitivity syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "androgen-insensitivity-real-image",
-   "title": "Androgen insensitivity syndrome: Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "androgen_insensitivity-pathway",
+      "title": "Androgen insensitivity syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A disorder of sex development in which a 46,XY individual with functioning testes cannot respond normally to androgens because of an androgen receptor defect",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Malignant transformation of intra-abdominal or undescended testes, an increasing risk over time",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Karyotype demonstrating 46,XY, Testosterone, dihydrotestosterone, and LH/FSH, Anti-Mullerian hormone and assessment of internal Mullerian structures by imaging"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Individualised gonadal management, with gonadectomy timing balanced against germ-cell malignancy risk and the option to retain gonads until after spontaneous puberty in complete cases"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming a phenotypic female with primary amenorrhoea has a uterus without imaging"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of androgen insensitivity syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "androgen_insensitivity-matrix",
+      "title": "Androgen insensitivity syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A disorder of sex development in which a 46,XY individual with functioning testes cannot respond normally to androgens because of",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Karyotype demonstrating 46,XY, Testosterone, dihydrotestosterone, and LH/FSH, Anti-Mullerian hormone and assessment of internal",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "5-alpha-reductase deficiency, Gonadal dysgenesis (e.g. Swyer syndrome), Mullerian agenesis (Mayer-Rokitansky-Kuster-Hauser",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Individualised gonadal management, with gonadectomy timing balanced against germ-cell malignancy risk and the option to retain",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming a phenotypic female with primary amenorrhoea has a uterus without imaging",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for androgen insensitivity syndrome."
+    }
+  ],
+  "diagrams": []
 }

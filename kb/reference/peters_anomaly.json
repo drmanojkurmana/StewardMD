@@ -1,173 +1,151 @@
 {
- "id": "peters_anomaly",
- "name": "Peters anomaly",
- "aliases": [
-  "anterior segment dysgenesis",
-  "Peters anomaly with corneal opacity",
-  "PAX6",
-  "central corneal leukoma with iridocorneal adhesions"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Kanski's Clinical Ophthalmology / Taylor and Hoyt's Pediatric Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A form of anterior segment dysgenesis defined by a central corneal opacity (leukoma) with a defect in the underlying corneal endothelium and Descemet membrane",
-   "Iridocorneal or keratolenticular adhesions strand from the iris or lens to the back of the corneal opacity",
-   "Presents in the newborn with central corneal clouding, and may be unilateral or bilateral",
-   "Glaucoma is a frequent and important association, so intraocular pressure must be assessed and monitored",
-   "Peters-plus syndrome adds systemic features such as short stature, developmental delay and cleft lip or palate",
-   "Implicated developmental genes include PAX6, PITX2, FOXC1 and CYP1B1, reflecting overlap with other anterior segment dysgenesis disorders",
-   "Dense bilateral corneal opacity threatens vision through both media opacity and deprivation amblyopia"
+  "id": "peters_anomaly",
+  "name": "Peters anomaly",
+  "aliases": [
+    "anterior segment dysgenesis",
+    "Peters anomaly with corneal opacity",
+    "PAX6",
+    "central corneal leukoma with iridocorneal adhesions"
   ],
-  "pathophysiology": "Peters anomaly is a developmental defect of the anterior segment arising from abnormal migration and differentiation of neural-crest-derived tissues that form the cornea, iris and anterior chamber angle. Failure of normal separation of the lens and iris from the developing cornea leaves a central defect in the corneal endothelium and Descemet membrane, producing a central opacity, and persistent adhesions between the iris or lens and the posterior cornea. Disruption of the same developmental structures frequently affects the drainage angle, predisposing to glaucoma. Mutations in transcription-factor and related developmental genes underlie many cases and account for the overlap with the broader anterior segment dysgenesis spectrum.",
-  "additionalDifferentials": [
-   "Congenital glaucoma with corneal oedema and clouding",
-   "Sclerocornea and other congenital corneal opacities",
-   "Axenfeld-Rieger syndrome within the anterior segment dysgenesis spectrum",
-   "Congenital hereditary endothelial dystrophy",
-   "Birth-related corneal injury with Descemet tears",
-   "Mucopolysaccharidoses and metabolic corneal clouding"
-  ],
-  "additionalInvestigations": [
-   "Examination under anaesthesia with slit-lamp assessment of the cornea and anterior segment",
-   "Intraocular pressure measurement and gonioscopy to detect glaucoma and angle anomalies",
-   "Anterior segment imaging or ultrasound biomicroscopy to define adhesions and lens position",
-   "Systemic and dysmorphology assessment for Peters-plus features",
-   "Molecular genetic testing of anterior segment dysgenesis genes where indicated"
-  ],
-  "redFlags": [
-   "Raised intraocular pressure indicating associated glaucoma",
-   "Dense bilateral corneal opacity risking irreversible deprivation amblyopia",
-   "Progressive corneal decompensation or worsening opacity",
-   "Systemic features suggesting Peters-plus syndrome requiring paediatric evaluation"
-  ],
-  "prognosis": "Prognosis depends on the density and laterality of the opacity and on glaucoma control; milder unilateral cases may retain useful vision, while dense bilateral disease has a guarded outlook even after corneal transplantation, which carries high rejection and complication rates in infants.",
-  "pitfalls": [
-   "Failing to detect and treat associated glaucoma, a major cause of poor outcome",
-   "Overlooking amblyopia management alongside surgical treatment of the opacity",
-   "Assuming an isolated eye disorder and missing Peters-plus systemic features",
-   "Underestimating the difficulty and risks of paediatric corneal transplantation"
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology",
-   "Taylor and Hoyt's Pediatric Ophthalmology and Strabismus"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Prioritise amblyopia management with optical correction and occlusion therapy to maximise visual development",
-   "Detect and control glaucoma, escalating from medical therapy to surgery, with regular intraocular pressure monitoring",
-   "Consider penetrating keratoplasty or keratoprosthesis for dense or bilateral corneal opacity, accepting the high rejection and complication rates in infants, while optical iridectomy may suffice for milder cases",
-   "Examination under anaesthesia and regular ophthalmic review to guide the timing of intervention",
-   "Systemic and dysmorphology assessment for Peters-plus syndrome with broader paediatric input",
-   "Genetic counselling and molecular testing of anterior segment dysgenesis genes such as PAX6, PITX2, FOXC1 and CYP1B1",
-   "Low-vision support and coordinated paediatric ophthalmology follow-up"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "peters_anomaly-pathway",
-   "title": "Peters anomaly: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A form of anterior segment dysgenesis defined by a central corneal opacity (leukoma) with a defect in the underlying corneal endothelium and Descemet membrane",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Raised intraocular pressure indicating associated glaucoma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Examination under anaesthesia with slit-lamp assessment of the cornea and anterior segment, Intraocular pressure measurement and gonioscopy to detect glaucoma and angle anomalies, Anterior segment imaging or ultrasound"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Prioritise amblyopia management with optical correction and occlusion therapy to maximise visual development"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to detect and treat associated glaucoma, a major cause of poor outcome"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of peters anomaly."
-  }
- ],
- "tables": [
-  {
-   "id": "peters_anomaly-matrix",
-   "title": "Peters anomaly: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A form of anterior segment dysgenesis defined by a central corneal opacity (leukoma) with a defect in the underlying corneal",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kanski's Clinical Ophthalmology / Taylor and Hoyt's Pediatric Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A form of anterior segment dysgenesis defined by a central corneal opacity (leukoma) with a defect in the underlying corneal endothelium and Descemet membrane",
+      "Iridocorneal or keratolenticular adhesions strand from the iris or lens to the back of the corneal opacity",
+      "Presents in the newborn with central corneal clouding, and may be unilateral or bilateral",
+      "Glaucoma is a frequent and important association, so intraocular pressure must be assessed and monitored",
+      "Peters-plus syndrome adds systemic features such as short stature, developmental delay and cleft lip or palate",
+      "Implicated developmental genes include PAX6, PITX2, FOXC1 and CYP1B1, reflecting overlap with other anterior segment dysgenesis disorders",
+      "Dense bilateral corneal opacity threatens vision through both media opacity and deprivation amblyopia"
     ],
-    [
-     "Key Investigations",
-     "Examination under anaesthesia with slit-lamp assessment of the cornea and anterior segment, Intraocular pressure measurement and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Peters anomaly is a developmental defect of the anterior segment arising from abnormal migration and differentiation of neural-crest-derived tissues that form the cornea, iris and anterior chamber angle. Failure of normal separation of the lens and iris from the developing cornea leaves a central defect in the corneal endothelium and Descemet membrane, producing a central opacity, and persistent adhesions between the iris or lens and the posterior cornea. Disruption of the same developmental structures frequently affects the drainage angle, predisposing to glaucoma. Mutations in transcription-factor and related developmental genes underlie many cases and account for the overlap with the broader anterior segment dysgenesis spectrum.",
+    "additionalDifferentials": [
+      "Congenital glaucoma with corneal oedema and clouding",
+      "Sclerocornea and other congenital corneal opacities",
+      "Axenfeld-Rieger syndrome within the anterior segment dysgenesis spectrum",
+      "Congenital hereditary endothelial dystrophy",
+      "Birth-related corneal injury with Descemet tears",
+      "Mucopolysaccharidoses and metabolic corneal clouding"
     ],
-    [
-     "Primary Differentials",
-     "Congenital glaucoma with corneal oedema and clouding, Sclerocornea and other congenital corneal opacities, Axenfeld-Rieger",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Examination under anaesthesia with slit-lamp assessment of the cornea and anterior segment",
+      "Intraocular pressure measurement and gonioscopy to detect glaucoma and angle anomalies",
+      "Anterior segment imaging or ultrasound biomicroscopy to define adhesions and lens position",
+      "Systemic and dysmorphology assessment for Peters-plus features",
+      "Molecular genetic testing of anterior segment dysgenesis genes where indicated"
     ],
-    [
-     "Management Strategy",
-     "Prioritise amblyopia management with optical correction and occlusion therapy to maximise visual development",
-     "Core treatment modality"
+    "redFlags": [
+      "Raised intraocular pressure indicating associated glaucoma",
+      "Dense bilateral corneal opacity risking irreversible deprivation amblyopia",
+      "Progressive corneal decompensation or worsening opacity",
+      "Systemic features suggesting Peters-plus syndrome requiring paediatric evaluation"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to detect and treat associated glaucoma, a major cause of poor outcome",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis depends on the density and laterality of the opacity and on glaucoma control; milder unilateral cases may retain useful vision, while dense bilateral disease has a guarded outlook even after corneal transplantation, which carries high rejection and complication rates in infants.",
+    "pitfalls": [
+      "Failing to detect and treat associated glaucoma, a major cause of poor outcome",
+      "Overlooking amblyopia management alongside surgical treatment of the opacity",
+      "Assuming an isolated eye disorder and missing Peters-plus systemic features",
+      "Underestimating the difficulty and risks of paediatric corneal transplantation"
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology",
+      "Taylor and Hoyt's Pediatric Ophthalmology and Strabismus"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Prioritise amblyopia management with optical correction and occlusion therapy to maximise visual development",
+      "Detect and control glaucoma, escalating from medical therapy to surgery, with regular intraocular pressure monitoring",
+      "Consider penetrating keratoplasty or keratoprosthesis for dense or bilateral corneal opacity, accepting the high rejection and complication rates in infants, while optical iridectomy may suffice for milder cases",
+      "Examination under anaesthesia and regular ophthalmic review to guide the timing of intervention",
+      "Systemic and dysmorphology assessment for Peters-plus syndrome with broader paediatric input",
+      "Genetic counselling and molecular testing of anterior segment dysgenesis genes such as PAX6, PITX2, FOXC1 and CYP1B1",
+      "Low-vision support and coordinated paediatric ophthalmology follow-up"
     ]
-   ],
-   "caption": "Overview comparison matrix for peters anomaly."
-  }
- ],
- "diagrams": [
-  {
-   "id": "peters-anomaly-real-image",
-   "title": "Peters anomaly: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "peters_anomaly-pathway",
+      "title": "Peters anomaly: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A form of anterior segment dysgenesis defined by a central corneal opacity (leukoma) with a defect in the underlying corneal endothelium and Descemet membrane",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Raised intraocular pressure indicating associated glaucoma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Examination under anaesthesia with slit-lamp assessment of the cornea and anterior segment, Intraocular pressure measurement and gonioscopy to detect glaucoma and angle anomalies, Anterior segment imaging or ultrasound"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Prioritise amblyopia management with optical correction and occlusion therapy to maximise visual development"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to detect and treat associated glaucoma, a major cause of poor outcome"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of peters anomaly."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "peters_anomaly-matrix",
+      "title": "Peters anomaly: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A form of anterior segment dysgenesis defined by a central corneal opacity (leukoma) with a defect in the underlying corneal",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Examination under anaesthesia with slit-lamp assessment of the cornea and anterior segment, Intraocular pressure measurement and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Congenital glaucoma with corneal oedema and clouding, Sclerocornea and other congenital corneal opacities, Axenfeld-Rieger",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Prioritise amblyopia management with optical correction and occlusion therapy to maximise visual development",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to detect and treat associated glaucoma, a major cause of poor outcome",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for peters anomaly."
+    }
+  ],
+  "diagrams": []
 }

@@ -1,177 +1,155 @@
 {
- "id": "fuchs_heterochromic_iridocyclitis",
- "name": "fuchs heterochromic iridocyclitis",
- "aliases": [
-  "Fuchs uveitis syndrome",
-  "Fuchs heterochromic cyclitis"
- ],
- "class": "non_infective",
- "system": "ophthalmology",
- "specialty": "ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Kanski's Clinical Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A chronic, low-grade, usually unilateral anterior uveitis that is characteristically white and painless, often discovered incidentally or when cataract reduces vision.",
-   "Diffuse, small, stellate keratic precipitates scattered across the whole corneal endothelium, rather than clustered inferiorly, are a hallmark.",
-   "Iris heterochromia results from stromal atrophy; the affected iris is typically hypochromic and lighter, though in brown irides the loss of the anterior stroma can make it appear darker.",
-   "Posterior synechiae are characteristically absent even after years of inflammation, an important distinguishing feature.",
-   "Fine iris and angle vessels are fragile, and a filiform anterior chamber haemorrhage on paracentesis or cataract surgery is the Amsler-Verrey sign.",
-   "Posterior subcapsular cataract and secondary open-angle glaucoma are the two principal complications.",
-   "An association with rubella virus, and in some regions cytomegalovirus, is increasingly recognised as an aetiological factor.",
-   "The inflammation responds poorly to and generally does not warrant long-term topical corticosteroids, which risk steroid-induced pressure rise without altering the course."
+  "id": "fuchs_heterochromic_iridocyclitis",
+  "name": "fuchs heterochromic iridocyclitis",
+  "aliases": [
+    "Fuchs uveitis syndrome",
+    "Fuchs heterochromic cyclitis"
   ],
-  "pathophysiology": "Fuchs uveitis is a chronic low-grade iridocyclitis characterised by diffuse iris stromal atrophy and depigmentation, mild persistent anterior chamber inflammation and abnormal fragile vasculature in the iris and anterior chamber angle. Progressive atrophy of the iris stroma and pigment epithelium produces the heterochromia and, on transillumination, diffuse thinning. Chronic low-grade inflammation, with lymphocytic infiltration and scattered stellate keratic precipitates, occurs without the fibrinous exudation that produces synechiae in other uveitides, which explains the notable absence of posterior synechiae. Rubella virus, and cytomegalovirus in some populations, has been implicated as a chronic antigenic stimulus. New fragile vessels in the angle and iris account for the tendency to hyphaema with minor trauma or surgery, and chronic trabecular involvement leads to secondary open-angle glaucoma.",
-  "additionalDifferentials": [
-   "herpetic (herpes simplex or varicella-zoster) anterior uveitis",
-   "cytomegalovirus anterior uveitis",
-   "Posner-Schlossman syndrome (glaucomatocyclitic crisis)",
-   "sarcoid anterior uveitis",
-   "idiopathic chronic anterior uveitis",
-   "pigment dispersion syndrome",
-   "congenital or acquired Horner syndrome causing heterochromia"
-  ],
-  "additionalInvestigations": [
-   "slit-lamp examination for diffuse stellate keratic precipitates and absent synechiae",
-   "iris transillumination and comparison of iris colour between eyes",
-   "gonioscopy for fine angle vessels and pigmentation",
-   "intraocular pressure measurement and glaucoma work-up",
-   "aqueous polymerase chain reaction for rubella and cytomegalovirus in selected cases",
-   "optical coherence tomography of the optic nerve and perimetry when glaucoma is suspected",
-   "cataract assessment and biometry before surgery"
-  ],
-  "redFlags": [
-   "rising intraocular pressure signalling secondary glaucoma",
-   "spontaneous hyphaema or unexpected bleeding during surgery",
-   "atypical bilateral or granulomatous features suggesting an alternative diagnosis",
-   "rapid visual decline from dense posterior subcapsular cataract"
-  ],
-  "prognosis": "The prognosis for vision is generally good, with cataract surgery usually well tolerated and effective; the main threat to sight is secondary glaucoma, which can be difficult to control and requires long-term monitoring.",
-  "pitfalls": [
-   "Treating the low-grade inflammation with prolonged topical steroids, which add steroid-induced pressure rise without benefit.",
-   "Overlooking the diagnosis because the eye is white and painless and the patient asymptomatic.",
-   "Missing early secondary glaucoma, the principal cause of visual loss.",
-   "Being surprised by intraoperative filiform hyphaema during cataract surgery.",
-   "Misclassifying the unilateral heterochromia and cataract as another uveitic entity and instituting inappropriate immunosuppression."
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology: A Systematic Approach",
-   "American Academy of Ophthalmology Basic and Clinical Science Course, Uveitis and Ocular Inflammation",
-   "Standardisation of Uveitis Nomenclature classification criteria"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Avoid unnecessary long-term topical corticosteroids, as the chronic low-grade inflammation responds poorly and rarely warrants aggressive immunosuppression",
-   "Reserve a short course of topical corticosteroid only for genuinely symptomatic inflammatory flares",
-   "Lower intraocular pressure with topical anti-glaucoma agents for secondary open-angle glaucoma, escalating to glaucoma surgery when medically uncontrolled",
-   "Offer cataract surgery for visually significant posterior subcapsular cataract, which is generally well tolerated",
-   "Anticipate fragile iris and angle vessels and the risk of intraoperative filiform haemorrhage (Amsler-Verrey sign) during surgery",
-   "Monitor intraocular pressure, optic nerve and visual fields long-term, as secondary glaucoma is the main threat to sight",
-   "Consider aqueous PCR for rubella or cytomegalovirus in atypical cases to support the diagnosis"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "fuchs_heterochromic_iridocyclitis-pathway",
-   "title": "fuchs heterochromic iridocyclitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A chronic, low-grade, usually unilateral anterior uveitis that is characteristically white and painless, often discovered incidentally or when cataract reduces vision.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: rising intraocular pressure signalling secondary glaucoma",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: slit-lamp examination for diffuse stellate keratic precipitates and absent synechiae, iris transillumination and comparison of iris colour between eyes, gonioscopy for fine angle vessels and pigmentation"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Avoid unnecessary long-term topical corticosteroids, as the chronic low-grade inflammation responds poorly and rarely warrants aggressive immunosuppression"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating the low-grade inflammation with prolonged topical steroids, which add steroid-induced pressure rise without benefit."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of fuchs heterochromic iridocyclitis."
-  }
- ],
- "tables": [
-  {
-   "id": "fuchs_heterochromic_iridocyclitis-matrix",
-   "title": "fuchs heterochromic iridocyclitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A chronic, low-grade, usually unilateral anterior uveitis that is characteristically white and painless, often discovered",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "ophthalmology",
+  "specialty": "ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kanski's Clinical Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A chronic, low-grade, usually unilateral anterior uveitis that is characteristically white and painless, often discovered incidentally or when cataract reduces vision.",
+      "Diffuse, small, stellate keratic precipitates scattered across the whole corneal endothelium, rather than clustered inferiorly, are a hallmark.",
+      "Iris heterochromia results from stromal atrophy; the affected iris is typically hypochromic and lighter, though in brown irides the loss of the anterior stroma can make it appear darker.",
+      "Posterior synechiae are characteristically absent even after years of inflammation, an important distinguishing feature.",
+      "Fine iris and angle vessels are fragile, and a filiform anterior chamber haemorrhage on paracentesis or cataract surgery is the Amsler-Verrey sign.",
+      "Posterior subcapsular cataract and secondary open-angle glaucoma are the two principal complications.",
+      "An association with rubella virus, and in some regions cytomegalovirus, is increasingly recognised as an aetiological factor.",
+      "The inflammation responds poorly to and generally does not warrant long-term topical corticosteroids, which risk steroid-induced pressure rise without altering the course."
     ],
-    [
-     "Key Investigations",
-     "slit-lamp examination for diffuse stellate keratic precipitates and absent synechiae, iris transillumination and comparison of",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Fuchs uveitis is a chronic low-grade iridocyclitis characterised by diffuse iris stromal atrophy and depigmentation, mild persistent anterior chamber inflammation and abnormal fragile vasculature in the iris and anterior chamber angle. Progressive atrophy of the iris stroma and pigment epithelium produces the heterochromia and, on transillumination, diffuse thinning. Chronic low-grade inflammation, with lymphocytic infiltration and scattered stellate keratic precipitates, occurs without the fibrinous exudation that produces synechiae in other uveitides, which explains the notable absence of posterior synechiae. Rubella virus, and cytomegalovirus in some populations, has been implicated as a chronic antigenic stimulus. New fragile vessels in the angle and iris account for the tendency to hyphaema with minor trauma or surgery, and chronic trabecular involvement leads to secondary open-angle glaucoma.",
+    "additionalDifferentials": [
+      "herpetic (herpes simplex or varicella-zoster) anterior uveitis",
+      "cytomegalovirus anterior uveitis",
+      "Posner-Schlossman syndrome (glaucomatocyclitic crisis)",
+      "sarcoid anterior uveitis",
+      "idiopathic chronic anterior uveitis",
+      "pigment dispersion syndrome",
+      "congenital or acquired Horner syndrome causing heterochromia"
     ],
-    [
-     "Primary Differentials",
-     "herpetic (herpes simplex or varicella-zoster) anterior uveitis, cytomegalovirus anterior uveitis, Posner-Schlossman syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "slit-lamp examination for diffuse stellate keratic precipitates and absent synechiae",
+      "iris transillumination and comparison of iris colour between eyes",
+      "gonioscopy for fine angle vessels and pigmentation",
+      "intraocular pressure measurement and glaucoma work-up",
+      "aqueous polymerase chain reaction for rubella and cytomegalovirus in selected cases",
+      "optical coherence tomography of the optic nerve and perimetry when glaucoma is suspected",
+      "cataract assessment and biometry before surgery"
     ],
-    [
-     "Management Strategy",
-     "Avoid unnecessary long-term topical corticosteroids, as the chronic low-grade inflammation responds poorly and rarely warrants",
-     "Core treatment modality"
+    "redFlags": [
+      "rising intraocular pressure signalling secondary glaucoma",
+      "spontaneous hyphaema or unexpected bleeding during surgery",
+      "atypical bilateral or granulomatous features suggesting an alternative diagnosis",
+      "rapid visual decline from dense posterior subcapsular cataract"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating the low-grade inflammation with prolonged topical steroids, which add steroid-induced pressure rise without benefit.",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis for vision is generally good, with cataract surgery usually well tolerated and effective; the main threat to sight is secondary glaucoma, which can be difficult to control and requires long-term monitoring.",
+    "pitfalls": [
+      "Treating the low-grade inflammation with prolonged topical steroids, which add steroid-induced pressure rise without benefit.",
+      "Overlooking the diagnosis because the eye is white and painless and the patient asymptomatic.",
+      "Missing early secondary glaucoma, the principal cause of visual loss.",
+      "Being surprised by intraoperative filiform hyphaema during cataract surgery.",
+      "Misclassifying the unilateral heterochromia and cataract as another uveitic entity and instituting inappropriate immunosuppression."
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology: A Systematic Approach",
+      "American Academy of Ophthalmology Basic and Clinical Science Course, Uveitis and Ocular Inflammation",
+      "Standardisation of Uveitis Nomenclature classification criteria"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Avoid unnecessary long-term topical corticosteroids, as the chronic low-grade inflammation responds poorly and rarely warrants aggressive immunosuppression",
+      "Reserve a short course of topical corticosteroid only for genuinely symptomatic inflammatory flares",
+      "Lower intraocular pressure with topical anti-glaucoma agents for secondary open-angle glaucoma, escalating to glaucoma surgery when medically uncontrolled",
+      "Offer cataract surgery for visually significant posterior subcapsular cataract, which is generally well tolerated",
+      "Anticipate fragile iris and angle vessels and the risk of intraoperative filiform haemorrhage (Amsler-Verrey sign) during surgery",
+      "Monitor intraocular pressure, optic nerve and visual fields long-term, as secondary glaucoma is the main threat to sight",
+      "Consider aqueous PCR for rubella or cytomegalovirus in atypical cases to support the diagnosis"
     ]
-   ],
-   "caption": "Overview comparison matrix for fuchs heterochromic iridocyclitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "fuchs-heterochromic-iridocyclitis-real-image",
-   "title": "fuchs heterochromic iridocyclitis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "fuchs_heterochromic_iridocyclitis-pathway",
+      "title": "fuchs heterochromic iridocyclitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A chronic, low-grade, usually unilateral anterior uveitis that is characteristically white and painless, often discovered incidentally or when cataract reduces vision.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: rising intraocular pressure signalling secondary glaucoma",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: slit-lamp examination for diffuse stellate keratic precipitates and absent synechiae, iris transillumination and comparison of iris colour between eyes, gonioscopy for fine angle vessels and pigmentation"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Avoid unnecessary long-term topical corticosteroids, as the chronic low-grade inflammation responds poorly and rarely warrants aggressive immunosuppression"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating the low-grade inflammation with prolonged topical steroids, which add steroid-induced pressure rise without benefit."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of fuchs heterochromic iridocyclitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "fuchs_heterochromic_iridocyclitis-matrix",
+      "title": "fuchs heterochromic iridocyclitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A chronic, low-grade, usually unilateral anterior uveitis that is characteristically white and painless, often discovered",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "slit-lamp examination for diffuse stellate keratic precipitates and absent synechiae, iris transillumination and comparison of",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "herpetic (herpes simplex or varicella-zoster) anterior uveitis, cytomegalovirus anterior uveitis, Posner-Schlossman syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Avoid unnecessary long-term topical corticosteroids, as the chronic low-grade inflammation responds poorly and rarely warrants",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating the low-grade inflammation with prolonged topical steroids, which add steroid-induced pressure rise without benefit.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for fuchs heterochromic iridocyclitis."
+    }
+  ],
+  "diagrams": []
 }

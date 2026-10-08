@@ -1,174 +1,152 @@
 {
- "id": "kcnma1_channelopathy",
- "name": "KCNMA1 channelopathy",
- "aliases": [
-  "KCNMA1",
-  "BK channel channelopathy",
-  "KCNMA1-related disorder",
-  "PNKD3",
-  "Slo1 channelopathy"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurogenetics",
- "specialty": "Neurology / Epileptology",
- "referenceOnly": true,
- "reference": {
-  "source": "GeneReviews / ILAE",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by variants in KCNMA1, which encodes the pore-forming alpha subunit of the large-conductance calcium- and voltage-activated potassium (BK, Slo1) channel that couples intracellular calcium to potassium efflux and shapes the afterhyperpolarisation",
-   "The phenotype combines epilepsy, a paroxysmal movement disorder, and variable developmental impairment, with considerable overlap between features",
-   "A characteristic presentation is paroxysmal non-kinesigenic dyskinesia, sometimes co-occurring with generalised epilepsy in the same individual or family",
-   "Gain-of-function variants tend to associate with paroxysmal dyskinesia and absence-type epilepsy, whereas loss-of-function variants more often cause developmental delay, ataxia, and structural or movement abnormalities",
-   "Seizure types include absence, generalised tonic-clonic, and other generalised or focal seizures depending on the variant",
-   "Distinguishing gain from loss of function is therapeutically relevant, as the two ends of the spectrum behave differently",
-   "Cerebellar signs, ataxia, and cognitive impairment can feature at the loss-of-function end"
+  "id": "kcnma1_channelopathy",
+  "name": "KCNMA1 channelopathy",
+  "aliases": [
+    "KCNMA1",
+    "BK channel channelopathy",
+    "KCNMA1-related disorder",
+    "PNKD3",
+    "Slo1 channelopathy"
   ],
-  "pathophysiology": "KCNMA1 encodes the alpha subunit of the BK channel (Slo1), a large-conductance potassium channel activated jointly by membrane depolarisation and rising intracellular calcium. By linking calcium entry to rapid potassium efflux, BK channels sharpen action potentials, drive the fast afterhyperpolarisation, and regulate neurotransmitter release and neuronal and smooth-muscle excitability. Gain-of-function variants increase potassium current and can produce paroxysmal dyskinesia and absence epilepsy through altered firing dynamics, whereas loss-of-function variants reduce the current and are associated with developmental delay, ataxia, and cerebellar involvement. The dual calcium and voltage sensitivity of the channel explains why disturbances manifest as paroxysmal movement and seizure phenomena.",
-  "additionalDifferentials": [
-   "PRRT2-related paroxysmal kinesigenic dyskinesia",
-   "PNKD (MR-1) paroxysmal non-kinesigenic dyskinesia",
-   "ADCY5-related dyskinesia",
-   "GLUT1 deficiency with paroxysmal movement and epilepsy",
-   "Genetic generalised epilepsies with absence seizures",
-   "Episodic ataxias and other channelopathies"
-  ],
-  "additionalInvestigations": [
-   "Gene panel or whole-exome sequencing to identify the KCNMA1 variant",
-   "Electroencephalography to characterise absence or other seizure types",
-   "Brain magnetic resonance imaging, particularly to assess for cerebellar or structural changes",
-   "Video documentation of paroxysmal dyskinetic episodes and their triggers",
-   "Functional characterisation to distinguish gain from loss of function where available",
-   "Developmental and cerebellar/ataxia assessment"
-  ],
-  "redFlags": [
-   "Frequent or prolonged paroxysmal dyskinetic attacks impairing function",
-   "Status epilepticus or escalating seizure frequency",
-   "Progressive ataxia or developmental regression",
-   "Falls or injury from paroxysmal episodes"
-  ],
-  "prognosis": "Outcome depends on the variant and phenotype: gain-of-function paroxysmal dyskinesia with absence epilepsy may have relatively preserved cognition, while loss-of-function disease with developmental delay and ataxia typically carries greater long-term impairment.",
-  "pitfalls": [
-   "Treating the paroxysmal dyskinesia as psychogenic rather than a channelopathy",
-   "Assuming a single functional mechanism when gain and loss of function diverge clinically",
-   "Overlooking the co-occurrence of movement disorder and epilepsy in the same patient",
-   "Missing cerebellar signs at the loss-of-function end"
-  ],
-  "references": [
-   "GeneReviews and OMIM resources on KCNMA1-related disorders",
-   "ILAE and movement disorder resources on BK channelopathy"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Determine whether the variant is gain- or loss-of-function, as this steers therapy across the paroxysmal dyskinesia and epilepsy spectrum",
-   "Anti-absence antiseizure medication such as ethosuximide or valproate for absence and generalised seizures",
-   "Benzodiazepines such as clonazepam, together with avoidance of triggers like stress, fatigue, caffeine and alcohol, for paroxysmal non-kinesigenic dyskinesia",
-   "Developmental, physiotherapy and cerebellar rehabilitation, particularly for loss-of-function disease with developmental delay and ataxia",
-   "Video-EEG and clinical review to reassess treatment response and reclassify paroxysmal episodes",
-   "Clinical genetics referral with counselling and assessment of at-risk family members"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "kcnma1_channelopathy-pathway",
-   "title": "KCNMA1 channelopathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by variants in KCNMA1, which encodes the pore-forming alpha subunit of the large-conductance calcium- and voltage-activated potassium (BK, Slo1) channel that couples intracellular calcium to potassium efflux and shapes the",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Frequent or prolonged paroxysmal dyskinetic attacks impairing function",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Gene panel or whole-exome sequencing to identify the KCNMA1 variant, Electroencephalography to characterise absence or other seizure types, Brain magnetic resonance imaging, particularly to assess for cerebellar or"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Determine whether the variant is gain- or loss-of-function, as this steers therapy across the paroxysmal dyskinesia and epilepsy spectrum"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating the paroxysmal dyskinesia as psychogenic rather than a channelopathy"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of kcnma1 channelopathy."
-  }
- ],
- "tables": [
-  {
-   "id": "kcnma1_channelopathy-matrix",
-   "title": "KCNMA1 channelopathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by variants in KCNMA1, which encodes the pore-forming alpha subunit of the large-conductance calcium- and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurogenetics",
+  "specialty": "Neurology / Epileptology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "GeneReviews / ILAE",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by variants in KCNMA1, which encodes the pore-forming alpha subunit of the large-conductance calcium- and voltage-activated potassium (BK, Slo1) channel that couples intracellular calcium to potassium efflux and shapes the afterhyperpolarisation",
+      "The phenotype combines epilepsy, a paroxysmal movement disorder, and variable developmental impairment, with considerable overlap between features",
+      "A characteristic presentation is paroxysmal non-kinesigenic dyskinesia, sometimes co-occurring with generalised epilepsy in the same individual or family",
+      "Gain-of-function variants tend to associate with paroxysmal dyskinesia and absence-type epilepsy, whereas loss-of-function variants more often cause developmental delay, ataxia, and structural or movement abnormalities",
+      "Seizure types include absence, generalised tonic-clonic, and other generalised or focal seizures depending on the variant",
+      "Distinguishing gain from loss of function is therapeutically relevant, as the two ends of the spectrum behave differently",
+      "Cerebellar signs, ataxia, and cognitive impairment can feature at the loss-of-function end"
     ],
-    [
-     "Key Investigations",
-     "Gene panel or whole-exome sequencing to identify the KCNMA1 variant, Electroencephalography to characterise absence or other",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "KCNMA1 encodes the alpha subunit of the BK channel (Slo1), a large-conductance potassium channel activated jointly by membrane depolarisation and rising intracellular calcium. By linking calcium entry to rapid potassium efflux, BK channels sharpen action potentials, drive the fast afterhyperpolarisation, and regulate neurotransmitter release and neuronal and smooth-muscle excitability. Gain-of-function variants increase potassium current and can produce paroxysmal dyskinesia and absence epilepsy through altered firing dynamics, whereas loss-of-function variants reduce the current and are associated with developmental delay, ataxia, and cerebellar involvement. The dual calcium and voltage sensitivity of the channel explains why disturbances manifest as paroxysmal movement and seizure phenomena.",
+    "additionalDifferentials": [
+      "PRRT2-related paroxysmal kinesigenic dyskinesia",
+      "PNKD (MR-1) paroxysmal non-kinesigenic dyskinesia",
+      "ADCY5-related dyskinesia",
+      "GLUT1 deficiency with paroxysmal movement and epilepsy",
+      "Genetic generalised epilepsies with absence seizures",
+      "Episodic ataxias and other channelopathies"
     ],
-    [
-     "Primary Differentials",
-     "PRRT2-related paroxysmal kinesigenic dyskinesia, PNKD (MR-1) paroxysmal non-kinesigenic dyskinesia, ADCY5-related dyskinesia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Gene panel or whole-exome sequencing to identify the KCNMA1 variant",
+      "Electroencephalography to characterise absence or other seizure types",
+      "Brain magnetic resonance imaging, particularly to assess for cerebellar or structural changes",
+      "Video documentation of paroxysmal dyskinetic episodes and their triggers",
+      "Functional characterisation to distinguish gain from loss of function where available",
+      "Developmental and cerebellar/ataxia assessment"
     ],
-    [
-     "Management Strategy",
-     "Determine whether the variant is gain- or loss-of-function, as this steers therapy across the paroxysmal dyskinesia and epilepsy",
-     "Core treatment modality"
+    "redFlags": [
+      "Frequent or prolonged paroxysmal dyskinetic attacks impairing function",
+      "Status epilepticus or escalating seizure frequency",
+      "Progressive ataxia or developmental regression",
+      "Falls or injury from paroxysmal episodes"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating the paroxysmal dyskinesia as psychogenic rather than a channelopathy",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome depends on the variant and phenotype: gain-of-function paroxysmal dyskinesia with absence epilepsy may have relatively preserved cognition, while loss-of-function disease with developmental delay and ataxia typically carries greater long-term impairment.",
+    "pitfalls": [
+      "Treating the paroxysmal dyskinesia as psychogenic rather than a channelopathy",
+      "Assuming a single functional mechanism when gain and loss of function diverge clinically",
+      "Overlooking the co-occurrence of movement disorder and epilepsy in the same patient",
+      "Missing cerebellar signs at the loss-of-function end"
+    ],
+    "references": [
+      "GeneReviews and OMIM resources on KCNMA1-related disorders",
+      "ILAE and movement disorder resources on BK channelopathy"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Determine whether the variant is gain- or loss-of-function, as this steers therapy across the paroxysmal dyskinesia and epilepsy spectrum",
+      "Anti-absence antiseizure medication such as ethosuximide or valproate for absence and generalised seizures",
+      "Benzodiazepines such as clonazepam, together with avoidance of triggers like stress, fatigue, caffeine and alcohol, for paroxysmal non-kinesigenic dyskinesia",
+      "Developmental, physiotherapy and cerebellar rehabilitation, particularly for loss-of-function disease with developmental delay and ataxia",
+      "Video-EEG and clinical review to reassess treatment response and reclassify paroxysmal episodes",
+      "Clinical genetics referral with counselling and assessment of at-risk family members"
     ]
-   ],
-   "caption": "Overview comparison matrix for kcnma1 channelopathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "kcnma1-channelopathy-real-image",
-   "title": "KCNMA1 channelopathy: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "kcnma1_channelopathy-pathway",
+      "title": "KCNMA1 channelopathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by variants in KCNMA1, which encodes the pore-forming alpha subunit of the large-conductance calcium- and voltage-activated potassium (BK, Slo1) channel that couples intracellular calcium to potassium efflux and shapes the",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Frequent or prolonged paroxysmal dyskinetic attacks impairing function",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Gene panel or whole-exome sequencing to identify the KCNMA1 variant, Electroencephalography to characterise absence or other seizure types, Brain magnetic resonance imaging, particularly to assess for cerebellar or"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Determine whether the variant is gain- or loss-of-function, as this steers therapy across the paroxysmal dyskinesia and epilepsy spectrum"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating the paroxysmal dyskinesia as psychogenic rather than a channelopathy"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of kcnma1 channelopathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "kcnma1_channelopathy-matrix",
+      "title": "KCNMA1 channelopathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by variants in KCNMA1, which encodes the pore-forming alpha subunit of the large-conductance calcium- and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Gene panel or whole-exome sequencing to identify the KCNMA1 variant, Electroencephalography to characterise absence or other",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "PRRT2-related paroxysmal kinesigenic dyskinesia, PNKD (MR-1) paroxysmal non-kinesigenic dyskinesia, ADCY5-related dyskinesia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Determine whether the variant is gain- or loss-of-function, as this steers therapy across the paroxysmal dyskinesia and epilepsy",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating the paroxysmal dyskinesia as psychogenic rather than a channelopathy",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for kcnma1 channelopathy."
+    }
+  ],
+  "diagrams": []
 }

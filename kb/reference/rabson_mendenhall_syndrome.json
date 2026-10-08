@@ -1,177 +1,155 @@
 {
- "id": "rabson_mendenhall_syndrome",
- "name": "Rabson-Mendenhall syndrome (INSR)",
- "aliases": [
-  "RMS",
-  "INSR mutation",
-  "insulin receptor gene defect",
-  "severe insulin resistance syndrome"
- ],
- "class": "non_infective",
- "system": "Endocrine / Genetics",
- "specialty": "Endocrinology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Textbook of Endocrinology / Endocrine Society clinical guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal recessive disorder from biallelic INSR mutations causing severe insulin resistance, intermediate in severity between Donohue syndrome and type A insulin resistance",
-   "Presents in childhood with growth impairment, acanthosis nigricans, coarse features, dental and nail dysplasia, and pineal hyperplasia in some patients",
-   "Extreme endogenous hyperinsulinaemia accompanies fasting hypoglycaemia and severe postprandial hyperglycaemia, reflecting defective receptor signalling",
-   "Diabetic ketoacidosis and difficult-to-control hyperglycaemia often develop as the child grows",
-   "Because the block is at the insulin receptor, escalating exogenous insulin is largely ineffective",
-   "Recombinant IGF-1 (with or without IGFBP-3) can engage the IGF-1 receptor to improve glycaemic control in these severe INSR defects",
-   "Longer survival than Donohue syndrome allows accumulation of chronic complications",
-   "Diagnosis rests on the phenotype, the fasting-hypoglycaemia/postprandial-hyperglycaemia pattern with extreme hyperinsulinaemia, and INSR genetics"
+  "id": "rabson_mendenhall_syndrome",
+  "name": "Rabson-Mendenhall syndrome (INSR)",
+  "aliases": [
+    "RMS",
+    "INSR mutation",
+    "insulin receptor gene defect",
+    "severe insulin resistance syndrome"
   ],
-  "pathophysiology": "Rabson-Mendenhall syndrome is caused by biallelic mutations in the insulin receptor gene (INSR) that severely, though not completely, impair receptor function. With markedly reduced insulin signalling, tissues cannot take up glucose or grow normally despite very high insulin levels, and hepatic glucose output is poorly suppressed. The result is severe insulin resistance manifest as fasting hypoglycaemia alternating with pronounced postprandial hyperglycaemia, together with acanthosis nigricans, growth impairment, and the characteristic dysmorphic, dental, and nail features. Because residual receptor function is greater than in Donohue syndrome, the course is less rapidly fatal but progresses to overt, ketosis-prone diabetes.",
-  "additionalDifferentials": [
-   "Donohue syndrome (more severe INSR defect)",
-   "Type A insulin resistance syndrome",
-   "Congenital generalised lipodystrophy",
-   "Poorly controlled type 1 diabetes with acanthosis",
-   "Other syndromic causes of short stature with acanthosis nigricans",
-   "Endocrinopathies with hyperinsulinaemia and dysmorphism",
-   "Severe monogenic diabetes syndromes"
-  ],
-  "additionalInvestigations": [
-   "Fasting and postprandial glucose to demonstrate the characteristic oscillation",
-   "Fasting insulin and C-peptide, markedly elevated",
-   "INSR gene sequencing to confirm biallelic mutations",
-   "HbA1c and ketone monitoring given ketoacidosis risk",
-   "Dental, skeletal, and pineal imaging where clinically indicated",
-   "Lipid profile and leptin to characterise the metabolic phenotype"
-  ],
-  "redFlags": [
-   "Diabetic ketoacidosis or severe uncontrolled hyperglycaemia",
-   "Recurrent fasting hypoglycaemia",
-   "Progressive growth failure and metabolic decompensation",
-   "Emergence of chronic microvascular diabetic complications"
-  ],
-  "prognosis": "Children with Rabson-Mendenhall syndrome generally survive longer than those with Donohue syndrome, often into the second decade or beyond, but face progressive, difficult-to-control diabetes with ketoacidosis and chronic complications; IGF-1-based therapy may improve control.",
-  "pitfalls": [
-   "Interpreting extreme hyperinsulinaemia as an insulin-secreting tumour",
-   "Escalating exogenous insulin doses that fail to overcome receptor resistance",
-   "Missing the fasting-hypoglycaemia/postprandial-hyperglycaemia pattern",
-   "Attributing growth failure and acanthosis to obesity alone",
-   "Neglecting INSR genetic confirmation and family counselling"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "Endocrine Society clinical practice guidance on severe insulin resistance"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Recombinant IGF-1, with or without IGFBP-3, to bypass the defective insulin receptor by signalling through the IGF-1 receptor and improve glycaemic control",
-   "Insulin sensitisers such as metformin and, where used, high-dose insulin, recognising that receptor-level blockade limits the benefit of exogenous insulin",
-   "A dietary strategy of frequent complex-carbohydrate feeds to blunt the swings between fasting hypoglycaemia and postprandial hyperglycaemia",
-   "Regular monitoring of glycaemic control and ketones given the ketosis-prone, difficult-to-control diabetes, together with surveillance for chronic complications",
-   "Prompt treatment of diabetic ketoacidosis with fluids, electrolyte correction and insulin during acute decompensation",
-   "Multidisciplinary follow-up with paediatric endocrinology, dietetics, and dental and growth surveillance",
-   "Genetic counselling for this autosomal recessive disorder and testing of at-risk relatives"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "rabson_mendenhall_syndrome-pathway",
-   "title": "Rabson-Mendenhall syndrome (INSR): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal recessive disorder from biallelic INSR mutations causing severe insulin resistance, intermediate in severity between Donohue syndrome and type A insulin resistance",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Diabetic ketoacidosis or severe uncontrolled hyperglycaemia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Fasting and postprandial glucose to demonstrate the characteristic oscillation, Fasting insulin and C-peptide, markedly elevated, INSR gene sequencing to confirm biallelic mutations"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Recombinant IGF-1, with or without IGFBP-3, to bypass the defective insulin receptor by signalling through the IGF-1 receptor and improve glycaemic control"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Interpreting extreme hyperinsulinaemia as an insulin-secreting tumour"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of rabson-mendenhall syndrome (insr)."
-  }
- ],
- "tables": [
-  {
-   "id": "rabson_mendenhall_syndrome-matrix",
-   "title": "Rabson-Mendenhall syndrome (INSR): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal recessive disorder from biallelic INSR mutations causing severe insulin resistance, intermediate in severity between",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine / Genetics",
+  "specialty": "Endocrinology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Textbook of Endocrinology / Endocrine Society clinical guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal recessive disorder from biallelic INSR mutations causing severe insulin resistance, intermediate in severity between Donohue syndrome and type A insulin resistance",
+      "Presents in childhood with growth impairment, acanthosis nigricans, coarse features, dental and nail dysplasia, and pineal hyperplasia in some patients",
+      "Extreme endogenous hyperinsulinaemia accompanies fasting hypoglycaemia and severe postprandial hyperglycaemia, reflecting defective receptor signalling",
+      "Diabetic ketoacidosis and difficult-to-control hyperglycaemia often develop as the child grows",
+      "Because the block is at the insulin receptor, escalating exogenous insulin is largely ineffective",
+      "Recombinant IGF-1 (with or without IGFBP-3) can engage the IGF-1 receptor to improve glycaemic control in these severe INSR defects",
+      "Longer survival than Donohue syndrome allows accumulation of chronic complications",
+      "Diagnosis rests on the phenotype, the fasting-hypoglycaemia/postprandial-hyperglycaemia pattern with extreme hyperinsulinaemia, and INSR genetics"
     ],
-    [
-     "Key Investigations",
-     "Fasting and postprandial glucose to demonstrate the characteristic oscillation, Fasting insulin and C-peptide, markedly elevated,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Rabson-Mendenhall syndrome is caused by biallelic mutations in the insulin receptor gene (INSR) that severely, though not completely, impair receptor function. With markedly reduced insulin signalling, tissues cannot take up glucose or grow normally despite very high insulin levels, and hepatic glucose output is poorly suppressed. The result is severe insulin resistance manifest as fasting hypoglycaemia alternating with pronounced postprandial hyperglycaemia, together with acanthosis nigricans, growth impairment, and the characteristic dysmorphic, dental, and nail features. Because residual receptor function is greater than in Donohue syndrome, the course is less rapidly fatal but progresses to overt, ketosis-prone diabetes.",
+    "additionalDifferentials": [
+      "Donohue syndrome (more severe INSR defect)",
+      "Type A insulin resistance syndrome",
+      "Congenital generalised lipodystrophy",
+      "Poorly controlled type 1 diabetes with acanthosis",
+      "Other syndromic causes of short stature with acanthosis nigricans",
+      "Endocrinopathies with hyperinsulinaemia and dysmorphism",
+      "Severe monogenic diabetes syndromes"
     ],
-    [
-     "Primary Differentials",
-     "Donohue syndrome (more severe INSR defect), Type A insulin resistance syndrome, Congenital generalised lipodystrophy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Fasting and postprandial glucose to demonstrate the characteristic oscillation",
+      "Fasting insulin and C-peptide, markedly elevated",
+      "INSR gene sequencing to confirm biallelic mutations",
+      "HbA1c and ketone monitoring given ketoacidosis risk",
+      "Dental, skeletal, and pineal imaging where clinically indicated",
+      "Lipid profile and leptin to characterise the metabolic phenotype"
     ],
-    [
-     "Management Strategy",
-     "Recombinant IGF-1, with or without IGFBP-3, to bypass the defective insulin receptor by signalling through the IGF-1 receptor and",
-     "Core treatment modality"
+    "redFlags": [
+      "Diabetic ketoacidosis or severe uncontrolled hyperglycaemia",
+      "Recurrent fasting hypoglycaemia",
+      "Progressive growth failure and metabolic decompensation",
+      "Emergence of chronic microvascular diabetic complications"
     ],
-    [
-     "Clinical Pitfall",
-     "Interpreting extreme hyperinsulinaemia as an insulin-secreting tumour",
-     "Prevent diagnostic or management error"
+    "prognosis": "Children with Rabson-Mendenhall syndrome generally survive longer than those with Donohue syndrome, often into the second decade or beyond, but face progressive, difficult-to-control diabetes with ketoacidosis and chronic complications; IGF-1-based therapy may improve control.",
+    "pitfalls": [
+      "Interpreting extreme hyperinsulinaemia as an insulin-secreting tumour",
+      "Escalating exogenous insulin doses that fail to overcome receptor resistance",
+      "Missing the fasting-hypoglycaemia/postprandial-hyperglycaemia pattern",
+      "Attributing growth failure and acanthosis to obesity alone",
+      "Neglecting INSR genetic confirmation and family counselling"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "Endocrine Society clinical practice guidance on severe insulin resistance"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Recombinant IGF-1, with or without IGFBP-3, to bypass the defective insulin receptor by signalling through the IGF-1 receptor and improve glycaemic control",
+      "Insulin sensitisers such as metformin and, where used, high-dose insulin, recognising that receptor-level blockade limits the benefit of exogenous insulin",
+      "A dietary strategy of frequent complex-carbohydrate feeds to blunt the swings between fasting hypoglycaemia and postprandial hyperglycaemia",
+      "Regular monitoring of glycaemic control and ketones given the ketosis-prone, difficult-to-control diabetes, together with surveillance for chronic complications",
+      "Prompt treatment of diabetic ketoacidosis with fluids, electrolyte correction and insulin during acute decompensation",
+      "Multidisciplinary follow-up with paediatric endocrinology, dietetics, and dental and growth surveillance",
+      "Genetic counselling for this autosomal recessive disorder and testing of at-risk relatives"
     ]
-   ],
-   "caption": "Overview comparison matrix for rabson-mendenhall syndrome (insr)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "rabson-mendenhall-syndrome-real-image",
-   "title": "Rabson-Mendenhall syndrome (INSR): Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "rabson_mendenhall_syndrome-pathway",
+      "title": "Rabson-Mendenhall syndrome (INSR): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal recessive disorder from biallelic INSR mutations causing severe insulin resistance, intermediate in severity between Donohue syndrome and type A insulin resistance",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Diabetic ketoacidosis or severe uncontrolled hyperglycaemia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Fasting and postprandial glucose to demonstrate the characteristic oscillation, Fasting insulin and C-peptide, markedly elevated, INSR gene sequencing to confirm biallelic mutations"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Recombinant IGF-1, with or without IGFBP-3, to bypass the defective insulin receptor by signalling through the IGF-1 receptor and improve glycaemic control"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Interpreting extreme hyperinsulinaemia as an insulin-secreting tumour"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of rabson-mendenhall syndrome (insr)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "rabson_mendenhall_syndrome-matrix",
+      "title": "Rabson-Mendenhall syndrome (INSR): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal recessive disorder from biallelic INSR mutations causing severe insulin resistance, intermediate in severity between",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Fasting and postprandial glucose to demonstrate the characteristic oscillation, Fasting insulin and C-peptide, markedly elevated,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Donohue syndrome (more severe INSR defect), Type A insulin resistance syndrome, Congenital generalised lipodystrophy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Recombinant IGF-1, with or without IGFBP-3, to bypass the defective insulin receptor by signalling through the IGF-1 receptor and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Interpreting extreme hyperinsulinaemia as an insulin-secreting tumour",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for rabson-mendenhall syndrome (insr)."
+    }
+  ],
+  "diagrams": []
 }

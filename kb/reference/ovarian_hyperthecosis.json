@@ -1,173 +1,151 @@
 {
- "id": "ovarian_hyperthecosis",
- "name": "Ovarian hyperthecosis",
- "aliases": [
-  "stromal hyperthecosis",
-  "ovarian stromal hyperthecosis",
-  "hyperthecosis of the ovary"
- ],
- "class": "non_infective",
- "system": "Endocrine / Gynaecology",
- "specialty": "Reproductive Endocrinology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Textbook of Endocrinology / Yen and Jaffe's Reproductive Endocrinology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The condition features nests of luteinised theca cells scattered through the ovarian stroma, driving marked ovarian androgen production",
-   "Hyperandrogenism is typically more severe than in polycystic ovary syndrome and often produces frank virilisation, with hirsutism, temporal balding, deepening of the voice, and clitoromegaly",
-   "It is strongly linked to insulin resistance and hyperinsulinaemia, and may present as part of the HAIR-AN phenotype with acanthosis nigricans",
-   "It is most often recognised in peri- and postmenopausal women but also occurs in younger women, in whom it can be mistaken for severe polycystic ovary syndrome",
-   "Serum testosterone is usually substantially elevated, and a key task is to distinguish it from an androgen-secreting ovarian or adrenal tumour",
-   "Diagnosis integrates the clinical picture with hormonal profiling and imaging, since ovaries may be enlarged and solid rather than polycystic in appearance",
-   "Management options include suppression of ovarian androgen output with a GnRH agonist, insulin-sensitising strategies, and bilateral oophorectomy in postmenopausal women when malignancy must be excluded or symptoms are severe"
+  "id": "ovarian_hyperthecosis",
+  "name": "Ovarian hyperthecosis",
+  "aliases": [
+    "stromal hyperthecosis",
+    "ovarian stromal hyperthecosis",
+    "hyperthecosis of the ovary"
   ],
-  "pathophysiology": "Ovarian hyperthecosis is a non-neoplastic disorder in which islands of luteinised theca-type cells are distributed throughout the ovarian stroma and secrete androgens, chiefly testosterone. Unlike the follicle-based dysfunction of polycystic ovary syndrome, the androgen excess here arises from these stromal luteinised cells, whose activity is amplified by hyperinsulinaemia; insulin and insulin-like growth factor stimulate ovarian theca and stromal cells to produce androgens, creating a self-reinforcing link between insulin resistance and hyperandrogenism. The resulting high circulating testosterone produces the virilising features. Because the androgen source is diffuse ovarian stroma rather than a discrete mass, imaging typically shows bilaterally enlarged solid ovaries rather than a tumour.",
-  "additionalDifferentials": [
-   "Polycystic ovary syndrome",
-   "Androgen-secreting ovarian tumour (e.g. Sertoli-Leydig cell tumour)",
-   "Androgen-secreting adrenal tumour",
-   "Non-classic congenital adrenal hyperplasia",
-   "Cushing syndrome",
-   "Exogenous androgen exposure"
-  ],
-  "additionalInvestigations": [
-   "Serum total testosterone and other androgens to quantify hyperandrogenism",
-   "Assessment for insulin resistance, including fasting glucose and lipid profile",
-   "Transvaginal or pelvic ultrasound to assess ovarian size and morphology",
-   "Cross-sectional imaging of the adrenals and ovaries if a tumour is suspected",
-   "17-hydroxyprogesterone and adrenal workup to exclude congenital adrenal hyperplasia and Cushing syndrome",
-   "Gonadotrophin measurement to help interpret the hormonal picture"
-  ],
-  "redFlags": [
-   "Rapid onset or rapidly progressive virilisation suggesting an androgen-secreting tumour",
-   "Very high serum testosterone raising concern for a neoplastic source",
-   "A discrete ovarian or adrenal mass on imaging",
-   "Symptoms or signs suggesting coexisting Cushing syndrome"
-  ],
-  "prognosis": "The condition itself is benign, but it causes considerable distress from virilisation and carries the metabolic consequences of associated insulin resistance, including increased cardiometabolic risk. Androgen suppression or oophorectomy can control hyperandrogenism, and addressing insulin resistance improves the broader metabolic profile.",
-  "pitfalls": [
-   "Labelling the presentation as polycystic ovary syndrome despite disproportionately severe virilisation and testosterone elevation",
-   "Failing to exclude an androgen-secreting tumour before attributing symptoms to hyperthecosis",
-   "Neglecting the associated insulin resistance and its cardiometabolic implications",
-   "Expecting a polycystic appearance on imaging when the ovaries are typically enlarged and solid"
-  ],
-  "references": [
-   "Williams Textbook of Endocrinology",
-   "Yen and Jaffe's Reproductive Endocrinology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Suppress ovarian androgen production with a GnRH agonist or, in the appropriate patient, a combined oral contraceptive to lower circulating testosterone",
-   "Add an anti-androgen such as spironolactone or cyproterone acetate to control hirsutism and virilisation, with mechanical and cosmetic hair-reduction measures",
-   "Offer bilateral oophorectomy as definitive treatment where fertility is not desired, particularly in peri- and postmenopausal women, since the diffuse stromal source responds poorly to medical therapy alone",
-   "Address the underlying insulin resistance with lifestyle modification and an insulin sensitiser such as metformin, given the self-reinforcing hyperinsulinaemia and hyperandrogenism link",
-   "Manage associated cardiometabolic risk by treating dyslipidaemia, dysglycaemia and hypertension and monitoring weight and glycaemic status",
-   "Maintain surveillance to distinguish and exclude an androgen-secreting ovarian or adrenal tumour with cross-sectional imaging and biochemical follow-up",
-   "Refer to reproductive endocrinology, with gynaecology input for surgical decisions and psychological support for distressing virilisation"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "ovarian_hyperthecosis-pathway",
-   "title": "Ovarian hyperthecosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The condition features nests of luteinised theca cells scattered through the ovarian stroma, driving marked ovarian androgen production",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid onset or rapidly progressive virilisation suggesting an androgen-secreting tumour",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum total testosterone and other androgens to quantify hyperandrogenism, Assessment for insulin resistance, including fasting glucose and lipid profile, Transvaginal or pelvic ultrasound to assess ovarian size and"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Suppress ovarian androgen production with a GnRH agonist or, in the appropriate patient, a combined oral contraceptive to lower circulating testosterone"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Labelling the presentation as polycystic ovary syndrome despite disproportionately severe virilisation and testosterone elevation"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of ovarian hyperthecosis."
-  }
- ],
- "tables": [
-  {
-   "id": "ovarian_hyperthecosis-matrix",
-   "title": "Ovarian hyperthecosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The condition features nests of luteinised theca cells scattered through the ovarian stroma, driving marked ovarian androgen",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Endocrine / Gynaecology",
+  "specialty": "Reproductive Endocrinology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Textbook of Endocrinology / Yen and Jaffe's Reproductive Endocrinology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The condition features nests of luteinised theca cells scattered through the ovarian stroma, driving marked ovarian androgen production",
+      "Hyperandrogenism is typically more severe than in polycystic ovary syndrome and often produces frank virilisation, with hirsutism, temporal balding, deepening of the voice, and clitoromegaly",
+      "It is strongly linked to insulin resistance and hyperinsulinaemia, and may present as part of the HAIR-AN phenotype with acanthosis nigricans",
+      "It is most often recognised in peri- and postmenopausal women but also occurs in younger women, in whom it can be mistaken for severe polycystic ovary syndrome",
+      "Serum testosterone is usually substantially elevated, and a key task is to distinguish it from an androgen-secreting ovarian or adrenal tumour",
+      "Diagnosis integrates the clinical picture with hormonal profiling and imaging, since ovaries may be enlarged and solid rather than polycystic in appearance",
+      "Management options include suppression of ovarian androgen output with a GnRH agonist, insulin-sensitising strategies, and bilateral oophorectomy in postmenopausal women when malignancy must be excluded or symptoms are severe"
     ],
-    [
-     "Key Investigations",
-     "Serum total testosterone and other androgens to quantify hyperandrogenism, Assessment for insulin resistance, including fasting",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Ovarian hyperthecosis is a non-neoplastic disorder in which islands of luteinised theca-type cells are distributed throughout the ovarian stroma and secrete androgens, chiefly testosterone. Unlike the follicle-based dysfunction of polycystic ovary syndrome, the androgen excess here arises from these stromal luteinised cells, whose activity is amplified by hyperinsulinaemia; insulin and insulin-like growth factor stimulate ovarian theca and stromal cells to produce androgens, creating a self-reinforcing link between insulin resistance and hyperandrogenism. The resulting high circulating testosterone produces the virilising features. Because the androgen source is diffuse ovarian stroma rather than a discrete mass, imaging typically shows bilaterally enlarged solid ovaries rather than a tumour.",
+    "additionalDifferentials": [
+      "Polycystic ovary syndrome",
+      "Androgen-secreting ovarian tumour (e.g. Sertoli-Leydig cell tumour)",
+      "Androgen-secreting adrenal tumour",
+      "Non-classic congenital adrenal hyperplasia",
+      "Cushing syndrome",
+      "Exogenous androgen exposure"
     ],
-    [
-     "Primary Differentials",
-     "Polycystic ovary syndrome, Androgen-secreting ovarian tumour (e.g. Sertoli-Leydig cell tumour), Androgen-secreting adrenal tumour",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum total testosterone and other androgens to quantify hyperandrogenism",
+      "Assessment for insulin resistance, including fasting glucose and lipid profile",
+      "Transvaginal or pelvic ultrasound to assess ovarian size and morphology",
+      "Cross-sectional imaging of the adrenals and ovaries if a tumour is suspected",
+      "17-hydroxyprogesterone and adrenal workup to exclude congenital adrenal hyperplasia and Cushing syndrome",
+      "Gonadotrophin measurement to help interpret the hormonal picture"
     ],
-    [
-     "Management Strategy",
-     "Suppress ovarian androgen production with a GnRH agonist or, in the appropriate patient, a combined oral contraceptive to lower",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid onset or rapidly progressive virilisation suggesting an androgen-secreting tumour",
+      "Very high serum testosterone raising concern for a neoplastic source",
+      "A discrete ovarian or adrenal mass on imaging",
+      "Symptoms or signs suggesting coexisting Cushing syndrome"
     ],
-    [
-     "Clinical Pitfall",
-     "Labelling the presentation as polycystic ovary syndrome despite disproportionately severe virilisation and testosterone elevation",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition itself is benign, but it causes considerable distress from virilisation and carries the metabolic consequences of associated insulin resistance, including increased cardiometabolic risk. Androgen suppression or oophorectomy can control hyperandrogenism, and addressing insulin resistance improves the broader metabolic profile.",
+    "pitfalls": [
+      "Labelling the presentation as polycystic ovary syndrome despite disproportionately severe virilisation and testosterone elevation",
+      "Failing to exclude an androgen-secreting tumour before attributing symptoms to hyperthecosis",
+      "Neglecting the associated insulin resistance and its cardiometabolic implications",
+      "Expecting a polycystic appearance on imaging when the ovaries are typically enlarged and solid"
+    ],
+    "references": [
+      "Williams Textbook of Endocrinology",
+      "Yen and Jaffe's Reproductive Endocrinology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Suppress ovarian androgen production with a GnRH agonist or, in the appropriate patient, a combined oral contraceptive to lower circulating testosterone",
+      "Add an anti-androgen such as spironolactone or cyproterone acetate to control hirsutism and virilisation, with mechanical and cosmetic hair-reduction measures",
+      "Offer bilateral oophorectomy as definitive treatment where fertility is not desired, particularly in peri- and postmenopausal women, since the diffuse stromal source responds poorly to medical therapy alone",
+      "Address the underlying insulin resistance with lifestyle modification and an insulin sensitiser such as metformin, given the self-reinforcing hyperinsulinaemia and hyperandrogenism link",
+      "Manage associated cardiometabolic risk by treating dyslipidaemia, dysglycaemia and hypertension and monitoring weight and glycaemic status",
+      "Maintain surveillance to distinguish and exclude an androgen-secreting ovarian or adrenal tumour with cross-sectional imaging and biochemical follow-up",
+      "Refer to reproductive endocrinology, with gynaecology input for surgical decisions and psychological support for distressing virilisation"
     ]
-   ],
-   "caption": "Overview comparison matrix for ovarian hyperthecosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "ovarian-hyperthecosis-real-image",
-   "title": "Ovarian hyperthecosis: Diagnostic Endocrine Cross-Sectional Imaging",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "High-resolution cross-sectional computed tomography visualizing endocrine organ architecture and retroperitoneal boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Gland Morphology",
-     "description": "Organ dimensions, bilateral symmetry, and parenchymal attenuation."
-    },
-    {
-     "label": "Focal Lesions",
-     "description": "Nodularity, adenoma attenuation, and washout dynamics."
-    },
-    {
-     "label": "Surrounding Structures",
-     "description": "Vascular abutment, retroperitoneal fat planes, and tissue interfaces."
+      "id": "ovarian_hyperthecosis-pathway",
+      "title": "Ovarian hyperthecosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The condition features nests of luteinised theca cells scattered through the ovarian stroma, driving marked ovarian androgen production",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid onset or rapidly progressive virilisation suggesting an androgen-secreting tumour",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum total testosterone and other androgens to quantify hyperandrogenism, Assessment for insulin resistance, including fasting glucose and lipid profile, Transvaginal or pelvic ultrasound to assess ovarian size and"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Suppress ovarian androgen production with a GnRH agonist or, in the appropriate patient, a combined oral contraceptive to lower circulating testosterone"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Labelling the presentation as polycystic ovary syndrome despite disproportionately severe virilisation and testosterone elevation"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of ovarian hyperthecosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "ovarian_hyperthecosis-matrix",
+      "title": "Ovarian hyperthecosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The condition features nests of luteinised theca cells scattered through the ovarian stroma, driving marked ovarian androgen",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum total testosterone and other androgens to quantify hyperandrogenism, Assessment for insulin resistance, including fasting",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Polycystic ovary syndrome, Androgen-secreting ovarian tumour (e.g. Sertoli-Leydig cell tumour), Androgen-secreting adrenal tumour",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Suppress ovarian androgen production with a GnRH agonist or, in the appropriate patient, a combined oral contraceptive to lower",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Labelling the presentation as polycystic ovary syndrome despite disproportionately severe virilisation and testosterone elevation",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for ovarian hyperthecosis."
+    }
+  ],
+  "diagrams": []
 }

@@ -1,179 +1,157 @@
 {
- "id": "mdr_tuberculosis",
- "name": "Multidrug-resistant tuberculosis",
- "aliases": [
-  "MDR-TB",
-  "drug-resistant TB",
-  "DR-TB",
-  "pre-XDR-TB"
- ],
- "class": "infective",
- "system": "Infectious Diseases",
- "specialty": "Infectious Diseases",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / WHO / India NTEP",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Multidrug-resistant tuberculosis is defined by resistance to at least isoniazid and rifampicin, the two most important first-line drugs",
-   "Rifampicin resistance detected on rapid molecular testing is treated as a marker for probable MDR-TB and triggers a drug-resistant TB treatment pathway",
-   "Resistance may be primary, from transmission of a resistant strain, or acquired through inadequate, interrupted or poorly supervised prior treatment",
-   "Further resistance to fluoroquinolones and other key agents defines pre-XDR and extensively drug-resistant tuberculosis, which are harder to treat",
-   "Rapid molecular tests such as cartridge-based nucleic acid amplification and line-probe assays allow early detection of resistance and should be used up front",
-   "Modern treatment favours all-oral, shorter, drug-susceptibility-guided regimens including newer agents such as bedaquiline and linezolid, delivered under programmatic support",
-   "India's NTEP provides free universal drug-susceptibility testing and standardised drug-resistant TB regimens, with active follow-up to improve adherence and outcomes"
+  "id": "mdr_tuberculosis",
+  "name": "Multidrug-resistant tuberculosis",
+  "aliases": [
+    "MDR-TB",
+    "drug-resistant TB",
+    "DR-TB",
+    "pre-XDR-TB"
   ],
-  "pathophysiology": "Drug resistance in Mycobacterium tuberculosis arises from spontaneous chromosomal mutations in genes encoding drug targets or activating enzymes, for example rpoB mutations conferring rifampicin resistance and katG or inhA mutations conferring isoniazid resistance. Selective pressure from inadequate drug exposure, poor adherence, or malabsorption allows resistant mutants to become the dominant population. Sequential accumulation of mutations produces multidrug and extensively drug-resistant strains. These resistant organisms can be transmitted directly to new hosts, so resistance is propagated both by acquisition during treatment and by primary transmission within communities.",
-  "additionalDifferentials": [
-   "Drug-susceptible tuberculosis with treatment failure from non-adherence",
-   "Malabsorption of anti-tuberculosis drugs mimicking resistance",
-   "Non-tuberculous mycobacterial disease",
-   "Paradoxical reaction or immune reconstitution rather than true failure",
-   "Reinfection with a new strain"
-  ],
-  "infectionMimics": [
-   "Non-tuberculous mycobacterial pulmonary disease",
-   "Drug-susceptible TB failing due to poor adherence",
-   "Chronic fungal lung infection",
-   "Post-tuberculous lung damage with secondary infection"
-  ],
-  "additionalInvestigations": [
-   "Rapid molecular testing (cartridge-based nucleic acid amplification) for rifampicin resistance at diagnosis",
-   "Line-probe assays and phenotypic drug-susceptibility testing to define the resistance pattern",
-   "Culture-based monitoring of treatment response",
-   "Baseline and monitoring investigations for drug toxicity (audiometry, ECG for QT, liver and renal function)",
-   "HIV testing and screening of close contacts"
-  ],
-  "redFlags": [
-   "Rifampicin resistance on molecular testing requiring urgent switch to a drug-resistant TB pathway",
-   "Extensive or progressive disease with respiratory compromise",
-   "Emergence of additional resistance (pre-XDR or XDR) narrowing treatment options",
-   "Public health emergency of transmission of resistant strains, especially in congregate or HIV settings"
-  ],
-  "prognosis": "Outcomes have improved substantially with all-oral shorter regimens containing newer agents, but MDR-TB still carries higher treatment failure, relapse and mortality than drug-susceptible disease, with worse outcomes as resistance broadens or when treatment is delayed.",
-  "pitfalls": [
-   "Adding a single new drug to a failing regimen, which amplifies resistance",
-   "Delaying drug-susceptibility testing and treating empirically as drug-susceptible disease",
-   "Under-recognising drug toxicities such as QT prolongation and peripheral neuropathy during monitoring",
-   "Neglecting adherence support and contact tracing, allowing transmission"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "WHO/NTEP guidelines"
-  ],
-  "crossLinks": [],
-  "management": [
-   "All-oral, shorter, susceptibility-guided regimen built around bedaquiline with companion agents such as pretomanid, linezolid and a later-generation fluoroquinolone (BPaLM)",
-   "Tailor the regimen to line-probe and phenotypic drug-susceptibility results, substituting agents as resistance broadens",
-   "Deliver treatment with programmatic or directly observed support and adherence measures to prevent amplification of resistance",
-   "Baseline and serial toxicity monitoring: ECG for QT prolongation, full blood count for linezolid myelosuppression, visual acuity, and liver and renal function",
-   "Culture-conversion monitoring to confirm treatment response",
-   "Airborne infection control with isolation and screening of close contacts",
-   "HIV testing with antiretroviral co-management and nutritional support",
-   "Refer to a specialist drug-resistant tuberculosis service for multidisciplinary management"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "mdr_tuberculosis-pathway",
-   "title": "Multidrug-resistant tuberculosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Multidrug-resistant tuberculosis is defined by resistance to at least isoniazid and rifampicin, the two most important first-line drugs",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rifampicin resistance on molecular testing requiring urgent switch to a drug-resistant TB pathway",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Rapid molecular testing (cartridge-based nucleic acid amplification) for rifampicin resistance at diagnosis, Line-probe assays and phenotypic drug-susceptibility testing to define the resistance pattern, Culture-based"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: All-oral, shorter, susceptibility-guided regimen built around bedaquiline with companion agents such as pretomanid, linezolid and a later-generation fluoroquinolone (BPaLM)"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Adding a single new drug to a failing regimen, which amplifies resistance"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of multidrug-resistant tuberculosis."
-  }
- ],
- "tables": [
-  {
-   "id": "mdr_tuberculosis-matrix",
-   "title": "Multidrug-resistant tuberculosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Multidrug-resistant tuberculosis is defined by resistance to at least isoniazid and rifampicin, the two most important first-line",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Infectious Diseases",
+  "specialty": "Infectious Diseases",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / WHO / India NTEP",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Multidrug-resistant tuberculosis is defined by resistance to at least isoniazid and rifampicin, the two most important first-line drugs",
+      "Rifampicin resistance detected on rapid molecular testing is treated as a marker for probable MDR-TB and triggers a drug-resistant TB treatment pathway",
+      "Resistance may be primary, from transmission of a resistant strain, or acquired through inadequate, interrupted or poorly supervised prior treatment",
+      "Further resistance to fluoroquinolones and other key agents defines pre-XDR and extensively drug-resistant tuberculosis, which are harder to treat",
+      "Rapid molecular tests such as cartridge-based nucleic acid amplification and line-probe assays allow early detection of resistance and should be used up front",
+      "Modern treatment favours all-oral, shorter, drug-susceptibility-guided regimens including newer agents such as bedaquiline and linezolid, delivered under programmatic support",
+      "India's NTEP provides free universal drug-susceptibility testing and standardised drug-resistant TB regimens, with active follow-up to improve adherence and outcomes"
     ],
-    [
-     "Key Investigations",
-     "Rapid molecular testing (cartridge-based nucleic acid amplification) for rifampicin resistance at diagnosis, Line-probe assays",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Drug resistance in Mycobacterium tuberculosis arises from spontaneous chromosomal mutations in genes encoding drug targets or activating enzymes, for example rpoB mutations conferring rifampicin resistance and katG or inhA mutations conferring isoniazid resistance. Selective pressure from inadequate drug exposure, poor adherence, or malabsorption allows resistant mutants to become the dominant population. Sequential accumulation of mutations produces multidrug and extensively drug-resistant strains. These resistant organisms can be transmitted directly to new hosts, so resistance is propagated both by acquisition during treatment and by primary transmission within communities.",
+    "additionalDifferentials": [
+      "Drug-susceptible tuberculosis with treatment failure from non-adherence",
+      "Malabsorption of anti-tuberculosis drugs mimicking resistance",
+      "Non-tuberculous mycobacterial disease",
+      "Paradoxical reaction or immune reconstitution rather than true failure",
+      "Reinfection with a new strain"
     ],
-    [
-     "Primary Differentials",
-     "Drug-susceptible tuberculosis with treatment failure from non-adherence, Malabsorption of anti-tuberculosis drugs mimicking",
-     "Rule out key mimics"
+    "infectionMimics": [
+      "Non-tuberculous mycobacterial pulmonary disease",
+      "Drug-susceptible TB failing due to poor adherence",
+      "Chronic fungal lung infection",
+      "Post-tuberculous lung damage with secondary infection"
     ],
-    [
-     "Management Strategy",
-     "All-oral, shorter, susceptibility-guided regimen built around bedaquiline with companion agents such as pretomanid, linezolid and",
-     "Core treatment modality"
+    "additionalInvestigations": [
+      "Rapid molecular testing (cartridge-based nucleic acid amplification) for rifampicin resistance at diagnosis",
+      "Line-probe assays and phenotypic drug-susceptibility testing to define the resistance pattern",
+      "Culture-based monitoring of treatment response",
+      "Baseline and monitoring investigations for drug toxicity (audiometry, ECG for QT, liver and renal function)",
+      "HIV testing and screening of close contacts"
     ],
-    [
-     "Clinical Pitfall",
-     "Adding a single new drug to a failing regimen, which amplifies resistance",
-     "Prevent diagnostic or management error"
+    "redFlags": [
+      "Rifampicin resistance on molecular testing requiring urgent switch to a drug-resistant TB pathway",
+      "Extensive or progressive disease with respiratory compromise",
+      "Emergence of additional resistance (pre-XDR or XDR) narrowing treatment options",
+      "Public health emergency of transmission of resistant strains, especially in congregate or HIV settings"
+    ],
+    "prognosis": "Outcomes have improved substantially with all-oral shorter regimens containing newer agents, but MDR-TB still carries higher treatment failure, relapse and mortality than drug-susceptible disease, with worse outcomes as resistance broadens or when treatment is delayed.",
+    "pitfalls": [
+      "Adding a single new drug to a failing regimen, which amplifies resistance",
+      "Delaying drug-susceptibility testing and treating empirically as drug-susceptible disease",
+      "Under-recognising drug toxicities such as QT prolongation and peripheral neuropathy during monitoring",
+      "Neglecting adherence support and contact tracing, allowing transmission"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "WHO/NTEP guidelines"
+    ],
+    "crossLinks": [],
+    "management": [
+      "All-oral, shorter, susceptibility-guided regimen built around bedaquiline with companion agents such as pretomanid, linezolid and a later-generation fluoroquinolone (BPaLM)",
+      "Tailor the regimen to line-probe and phenotypic drug-susceptibility results, substituting agents as resistance broadens",
+      "Deliver treatment with programmatic or directly observed support and adherence measures to prevent amplification of resistance",
+      "Baseline and serial toxicity monitoring: ECG for QT prolongation, full blood count for linezolid myelosuppression, visual acuity, and liver and renal function",
+      "Culture-conversion monitoring to confirm treatment response",
+      "Airborne infection control with isolation and screening of close contacts",
+      "HIV testing with antiretroviral co-management and nutritional support",
+      "Refer to a specialist drug-resistant tuberculosis service for multidisciplinary management"
     ]
-   ],
-   "caption": "Overview comparison matrix for multidrug-resistant tuberculosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "mdr-tuberculosis-real-image",
-   "title": "Multidrug-resistant tuberculosis: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "mdr_tuberculosis-pathway",
+      "title": "Multidrug-resistant tuberculosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Multidrug-resistant tuberculosis is defined by resistance to at least isoniazid and rifampicin, the two most important first-line drugs",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rifampicin resistance on molecular testing requiring urgent switch to a drug-resistant TB pathway",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Rapid molecular testing (cartridge-based nucleic acid amplification) for rifampicin resistance at diagnosis, Line-probe assays and phenotypic drug-susceptibility testing to define the resistance pattern, Culture-based"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: All-oral, shorter, susceptibility-guided regimen built around bedaquiline with companion agents such as pretomanid, linezolid and a later-generation fluoroquinolone (BPaLM)"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Adding a single new drug to a failing regimen, which amplifies resistance"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of multidrug-resistant tuberculosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "mdr_tuberculosis-matrix",
+      "title": "Multidrug-resistant tuberculosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Multidrug-resistant tuberculosis is defined by resistance to at least isoniazid and rifampicin, the two most important first-line",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Rapid molecular testing (cartridge-based nucleic acid amplification) for rifampicin resistance at diagnosis, Line-probe assays",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Drug-susceptible tuberculosis with treatment failure from non-adherence, Malabsorption of anti-tuberculosis drugs mimicking",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "All-oral, shorter, susceptibility-guided regimen built around bedaquiline with companion agents such as pretomanid, linezolid and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Adding a single new drug to a failing regimen, which amplifies resistance",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for multidrug-resistant tuberculosis."
+    }
+  ],
+  "diagrams": []
 }

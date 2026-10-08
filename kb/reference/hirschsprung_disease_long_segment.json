@@ -1,178 +1,156 @@
 {
- "id": "hirschsprung_disease_long_segment",
- "name": "Hirschsprung disease (long-segment)",
- "aliases": [
-  "Long-segment aganglionosis",
-  "Long-segment congenital megacolon"
- ],
- "class": "non_infective",
- "system": "Gastrointestinal developmental",
- "specialty": "Paediatric surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Clinical genetics and paediatric surgery references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Hirschsprung disease is congenital aganglionosis arising from failed craniocaudal migration of vagal neural crest cells, leaving distal bowel without submucosal (Meissner) and myenteric (Auerbach) ganglion cells.",
-   "In the long-segment form the aganglionosis extends proximal to the rectosigmoid, sometimes involving the entire colon (total colonic aganglionosis).",
-   "Long-segment disease is more often familial and shows a stronger association with RET proto-oncogene variants than short-segment disease.",
-   "The marked male predominance of short-segment disease is less pronounced, with a more equal sex distribution in the long-segment form.",
-   "Neonates present with delayed passage of meconium, abdominal distension and bilious vomiting.",
-   "Diagnosis rests on rectal biopsy showing absent ganglion cells, hypertrophied nerve trunks, increased acetylcholinesterase activity and loss of calretinin staining.",
-   "Contrast enema is less reliable for locating the transition zone in long-segment and total colonic disease, where colonic calibre can appear deceptively normal.",
-   "Hirschsprung-associated enterocolitis is the principal life-threatening complication."
+  "id": "hirschsprung_disease_long_segment",
+  "name": "Hirschsprung disease (long-segment)",
+  "aliases": [
+    "Long-segment aganglionosis",
+    "Long-segment congenital megacolon"
   ],
-  "pathophysiology": "Hirschsprung disease results from failure of the craniocaudal migration, proliferation, differentiation or survival of vagal neural crest-derived cells that form the enteric nervous system, leaving a distal bowel segment devoid of submucosal and myenteric ganglion cells. The aganglionic segment remains tonically contracted because of the loss of inhibitory nitrergic and other enteric neuronal input, with relatively unopposed cholinergic and sympathetic tone, so it fails to relax and produces a functional obstruction with proximal dilatation. In the long-segment form the arrest of neural crest migration occurs earlier in development, so the aganglionosis extends proximal to the rectosigmoid and may involve the entire colon as total colonic aganglionosis. Long-segment disease carries a higher genetic loading, is more frequently familial and is more strongly associated with coding variants of the RET proto-oncogene, which encodes a receptor tyrosine kinase central to enteric neural crest development; this contrasts with the predominantly short-segment, more sporadic pattern seen with lower genetic burden.",
-  "additionalDifferentials": [
-   "Functional constipation",
-   "Meconium ileus or meconium plug syndrome and cystic fibrosis",
-   "Megacystis-microcolon-intestinal hypoperistalsis syndrome and other pseudo-obstruction (ganglia present)",
-   "Intestinal neuronal dysplasia",
-   "Anorectal malformation",
-   "Ileal atresia",
-   "Small left colon syndrome in the infant of a diabetic mother"
-  ],
-  "additionalInvestigations": [
-   "Rectal suction or full-thickness biopsy for ganglion cells, which is diagnostic",
-   "Acetylcholinesterase histochemistry and calretinin immunostaining",
-   "Contrast enema, interpreted cautiously in extensive disease",
-   "Anorectal manometry to assess the rectoanal inhibitory reflex",
-   "RET and associated gene testing, especially in familial or syndromic cases",
-   "Intraoperative seromuscular mapping biopsies to define the proximal extent of aganglionosis",
-   "Screening for associated conditions such as Down syndrome, RET-related MEN2A and Waardenburg-Shah features"
-  ],
-  "redFlags": [
-   "Hirschsprung-associated enterocolitis with fever, explosive foul-smelling diarrhoea, distension and sepsis",
-   "Delayed meconium passage with bilious vomiting and distension in a neonate",
-   "Signs of bowel perforation or toxic megacolon",
-   "Failure to thrive with persistent abdominal distension",
-   "Syndromic features or a family history implying higher genetic risk"
-  ],
-  "prognosis": "After a correctly performed pull-through most children achieve acceptable continence, but long-segment and total colonic disease carry higher rates of persistent bowel dysfunction, faecal incontinence or constipation and recurrent enterocolitis than short-segment disease. Enterocolitis remains the leading cause of morbidity and mortality.",
-  "pitfalls": [
-   "Relying on the contrast-enema transition zone, which is unreliable in long-segment and total colonic disease",
-   "Failing to recognise and urgently treat enterocolitis",
-   "Inadequate proximal mapping biopsies leading to pull-through of aganglionic bowel and persistent obstruction",
-   "Dismissing symptoms as functional constipation and delaying diagnosis",
-   "Missing associated syndromes with important implications, such as RET-related MEN2A"
-  ],
-  "references": [
-   "Clinical genetics references",
-   "Paediatric surgery reference texts",
-   "Paediatric gastroenterology references"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Definitive pull-through resecting to healthy ganglionic bowel, often requiring extensive colonic resection in total colonic aganglionosis",
-   "Initial diverting stoma placed in ganglionic bowel, its level guided by intraoperative seromuscular mapping biopsies",
-   "Fluid, electrolyte and nutritional support given high stoma output and malabsorption in extensive disease",
-   "Vigilant prevention and treatment of enterocolitis with routine washouts and antibiotics",
-   "Postoperative bowel management for faecal incontinence or constipation with washouts and dietary measures",
-   "Genetic counselling and family screening given the stronger RET association and higher familial rate",
-   "Multidisciplinary long-term follow-up with paediatric surgery, gastroenterology, stoma care and dietetics"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hirschsprung_disease_long_segment-pathway",
-   "title": "Hirschsprung disease (long-segment): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Hirschsprung disease is congenital aganglionosis arising from failed craniocaudal migration of vagal neural crest cells, leaving distal bowel without submucosal (Meissner) and myenteric (Auerbach) ganglion cells.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Hirschsprung-associated enterocolitis with fever, explosive foul-smelling diarrhoea, distension and sepsis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Rectal suction or full-thickness biopsy for ganglion cells, which is diagnostic, Acetylcholinesterase histochemistry and calretinin immunostaining, Contrast enema, interpreted cautiously in extensive disease"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Definitive pull-through resecting to healthy ganglionic bowel, often requiring extensive colonic resection in total colonic aganglionosis"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Relying on the contrast-enema transition zone, which is unreliable in long-segment and total colonic disease"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hirschsprung disease (long-segment)."
-  }
- ],
- "tables": [
-  {
-   "id": "hirschsprung_disease_long_segment-matrix",
-   "title": "Hirschsprung disease (long-segment): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Hirschsprung disease is congenital aganglionosis arising from failed craniocaudal migration of vagal neural crest cells, leaving",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastrointestinal developmental",
+  "specialty": "Paediatric surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Clinical genetics and paediatric surgery references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Hirschsprung disease is congenital aganglionosis arising from failed craniocaudal migration of vagal neural crest cells, leaving distal bowel without submucosal (Meissner) and myenteric (Auerbach) ganglion cells.",
+      "In the long-segment form the aganglionosis extends proximal to the rectosigmoid, sometimes involving the entire colon (total colonic aganglionosis).",
+      "Long-segment disease is more often familial and shows a stronger association with RET proto-oncogene variants than short-segment disease.",
+      "The marked male predominance of short-segment disease is less pronounced, with a more equal sex distribution in the long-segment form.",
+      "Neonates present with delayed passage of meconium, abdominal distension and bilious vomiting.",
+      "Diagnosis rests on rectal biopsy showing absent ganglion cells, hypertrophied nerve trunks, increased acetylcholinesterase activity and loss of calretinin staining.",
+      "Contrast enema is less reliable for locating the transition zone in long-segment and total colonic disease, where colonic calibre can appear deceptively normal.",
+      "Hirschsprung-associated enterocolitis is the principal life-threatening complication."
     ],
-    [
-     "Key Investigations",
-     "Rectal suction or full-thickness biopsy for ganglion cells, which is diagnostic, Acetylcholinesterase histochemistry and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Hirschsprung disease results from failure of the craniocaudal migration, proliferation, differentiation or survival of vagal neural crest-derived cells that form the enteric nervous system, leaving a distal bowel segment devoid of submucosal and myenteric ganglion cells. The aganglionic segment remains tonically contracted because of the loss of inhibitory nitrergic and other enteric neuronal input, with relatively unopposed cholinergic and sympathetic tone, so it fails to relax and produces a functional obstruction with proximal dilatation. In the long-segment form the arrest of neural crest migration occurs earlier in development, so the aganglionosis extends proximal to the rectosigmoid and may involve the entire colon as total colonic aganglionosis. Long-segment disease carries a higher genetic loading, is more frequently familial and is more strongly associated with coding variants of the RET proto-oncogene, which encodes a receptor tyrosine kinase central to enteric neural crest development; this contrasts with the predominantly short-segment, more sporadic pattern seen with lower genetic burden.",
+    "additionalDifferentials": [
+      "Functional constipation",
+      "Meconium ileus or meconium plug syndrome and cystic fibrosis",
+      "Megacystis-microcolon-intestinal hypoperistalsis syndrome and other pseudo-obstruction (ganglia present)",
+      "Intestinal neuronal dysplasia",
+      "Anorectal malformation",
+      "Ileal atresia",
+      "Small left colon syndrome in the infant of a diabetic mother"
     ],
-    [
-     "Primary Differentials",
-     "Functional constipation, Meconium ileus or meconium plug syndrome and cystic fibrosis, Megacystis-microcolon-intestinal",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Rectal suction or full-thickness biopsy for ganglion cells, which is diagnostic",
+      "Acetylcholinesterase histochemistry and calretinin immunostaining",
+      "Contrast enema, interpreted cautiously in extensive disease",
+      "Anorectal manometry to assess the rectoanal inhibitory reflex",
+      "RET and associated gene testing, especially in familial or syndromic cases",
+      "Intraoperative seromuscular mapping biopsies to define the proximal extent of aganglionosis",
+      "Screening for associated conditions such as Down syndrome, RET-related MEN2A and Waardenburg-Shah features"
     ],
-    [
-     "Management Strategy",
-     "Definitive pull-through resecting to healthy ganglionic bowel, often requiring extensive colonic resection in total colonic",
-     "Core treatment modality"
+    "redFlags": [
+      "Hirschsprung-associated enterocolitis with fever, explosive foul-smelling diarrhoea, distension and sepsis",
+      "Delayed meconium passage with bilious vomiting and distension in a neonate",
+      "Signs of bowel perforation or toxic megacolon",
+      "Failure to thrive with persistent abdominal distension",
+      "Syndromic features or a family history implying higher genetic risk"
     ],
-    [
-     "Clinical Pitfall",
-     "Relying on the contrast-enema transition zone, which is unreliable in long-segment and total colonic disease",
-     "Prevent diagnostic or management error"
+    "prognosis": "After a correctly performed pull-through most children achieve acceptable continence, but long-segment and total colonic disease carry higher rates of persistent bowel dysfunction, faecal incontinence or constipation and recurrent enterocolitis than short-segment disease. Enterocolitis remains the leading cause of morbidity and mortality.",
+    "pitfalls": [
+      "Relying on the contrast-enema transition zone, which is unreliable in long-segment and total colonic disease",
+      "Failing to recognise and urgently treat enterocolitis",
+      "Inadequate proximal mapping biopsies leading to pull-through of aganglionic bowel and persistent obstruction",
+      "Dismissing symptoms as functional constipation and delaying diagnosis",
+      "Missing associated syndromes with important implications, such as RET-related MEN2A"
+    ],
+    "references": [
+      "Clinical genetics references",
+      "Paediatric surgery reference texts",
+      "Paediatric gastroenterology references"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Definitive pull-through resecting to healthy ganglionic bowel, often requiring extensive colonic resection in total colonic aganglionosis",
+      "Initial diverting stoma placed in ganglionic bowel, its level guided by intraoperative seromuscular mapping biopsies",
+      "Fluid, electrolyte and nutritional support given high stoma output and malabsorption in extensive disease",
+      "Vigilant prevention and treatment of enterocolitis with routine washouts and antibiotics",
+      "Postoperative bowel management for faecal incontinence or constipation with washouts and dietary measures",
+      "Genetic counselling and family screening given the stronger RET association and higher familial rate",
+      "Multidisciplinary long-term follow-up with paediatric surgery, gastroenterology, stoma care and dietetics"
     ]
-   ],
-   "caption": "Overview comparison matrix for hirschsprung disease (long-segment)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hirschsprung-disease-long-segment-real-image",
-   "title": "Hirschsprung disease (long-segment): Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "hirschsprung_disease_long_segment-pathway",
+      "title": "Hirschsprung disease (long-segment): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Hirschsprung disease is congenital aganglionosis arising from failed craniocaudal migration of vagal neural crest cells, leaving distal bowel without submucosal (Meissner) and myenteric (Auerbach) ganglion cells.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Hirschsprung-associated enterocolitis with fever, explosive foul-smelling diarrhoea, distension and sepsis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Rectal suction or full-thickness biopsy for ganglion cells, which is diagnostic, Acetylcholinesterase histochemistry and calretinin immunostaining, Contrast enema, interpreted cautiously in extensive disease"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Definitive pull-through resecting to healthy ganglionic bowel, often requiring extensive colonic resection in total colonic aganglionosis"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Relying on the contrast-enema transition zone, which is unreliable in long-segment and total colonic disease"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hirschsprung disease (long-segment)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hirschsprung_disease_long_segment-matrix",
+      "title": "Hirschsprung disease (long-segment): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Hirschsprung disease is congenital aganglionosis arising from failed craniocaudal migration of vagal neural crest cells, leaving",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Rectal suction or full-thickness biopsy for ganglion cells, which is diagnostic, Acetylcholinesterase histochemistry and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Functional constipation, Meconium ileus or meconium plug syndrome and cystic fibrosis, Megacystis-microcolon-intestinal",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Definitive pull-through resecting to healthy ganglionic bowel, often requiring extensive colonic resection in total colonic",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Relying on the contrast-enema transition zone, which is unreliable in long-segment and total colonic disease",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hirschsprung disease (long-segment)."
+    }
+  ],
+  "diagrams": []
 }

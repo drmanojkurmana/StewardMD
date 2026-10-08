@@ -1,173 +1,151 @@
 {
- "id": "vestibular_neuritis",
- "name": "Vestibular neuritis",
- "aliases": [
-  "vestibular neuronitis",
-  "acute peripheral vestibulopathy",
-  "acute vestibular neuritis"
- ],
- "class": "non_infective",
- "system": "Neurology",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / Bradley's Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Presents as acute, prolonged, spontaneous vertigo lasting days, with nausea, vomiting, and gait imbalance but without hearing loss",
-   "When hearing is also affected the term labyrinthitis is used, implying inflammation of the whole labyrinth rather than the vestibular nerve alone",
-   "The spontaneous nystagmus is horizontal-torsional, beats away from the affected ear, and is suppressed by visual fixation, consistent with a peripheral lesion",
-   "The head impulse test shows a corrective saccade toward the affected side, indicating a peripheral vestibular deficit",
-   "The HINTS examination (head impulse, nystagmus direction, test of skew) is more sensitive than early MRI for distinguishing peripheral neuritis from a posterior circulation stroke",
-   "Central features such as direction-changing nystagmus, skew deviation, or a normal head impulse test in an acutely vertiginous patient should raise concern for stroke",
-   "Management centres on short-term symptom relief and early vestibular rehabilitation to promote central compensation, avoiding prolonged vestibular suppressants",
-   "A thought to be post-viral or inflammatory process, it usually follows a monophasic course with gradual recovery"
+  "id": "vestibular_neuritis",
+  "name": "Vestibular neuritis",
+  "aliases": [
+    "vestibular neuronitis",
+    "acute peripheral vestibulopathy",
+    "acute vestibular neuritis"
   ],
-  "pathophysiology": "Vestibular neuritis is attributed to inflammation of the vestibular nerve, possibly from reactivation of latent herpes simplex virus in the vestibular ganglion, causing acute unilateral loss of peripheral vestibular input. The superior vestibular division is most often affected. The sudden asymmetry between the two vestibular systems generates a strong sense of rotational vertigo and spontaneous nystagmus. Over subsequent days to weeks, central adaptive mechanisms recalibrate the vestibular imbalance (central compensation), which underlies clinical recovery even if peripheral function does not fully return.",
-  "additionalDifferentials": [
-   "Posterior circulation ischaemic stroke (cerebellar or brainstem)",
-   "Labyrinthitis (with hearing loss)",
-   "Benign paroxysmal positional vertigo",
-   "Meniere disease",
-   "Vestibular migraine",
-   "Multiple sclerosis affecting brainstem vestibular pathways"
-  ],
-  "additionalInvestigations": [
-   "Bedside HINTS examination in acute continuous vertigo to separate peripheral from central causes",
-   "MRI with attention to the posterior fossa when central features or vascular risk are present",
-   "Audiometry to detect associated hearing loss suggesting labyrinthitis or other cause",
-   "Caloric testing or video head impulse testing to quantify vestibular function",
-   "Assessment of vascular risk factors when stroke is a consideration"
-  ],
-  "redFlags": [
-   "Central signs (direction-changing nystagmus, skew deviation, normal head impulse test) suggesting stroke rather than neuritis",
-   "Acute vertigo with other focal neurological deficits such as dysarthria, limb ataxia, or weakness",
-   "New severe headache or neck pain raising concern for vertebral artery dissection",
-   "Sudden hearing loss accompanying vertigo, which may indicate a vascular or other serious cause"
-  ],
-  "prognosis": "Most patients recover over days to weeks as central compensation develops, though some have persistent unsteadiness or motion sensitivity; early vestibular rehabilitation improves recovery and reduces chronic dizziness.",
-  "pitfalls": [
-   "Misdiagnosing a cerebellar stroke as vestibular neuritis by relying on imaging that can be falsely reassuring early",
-   "Prescribing prolonged vestibular suppressants, which impair central compensation",
-   "Assuming any acute vertigo is peripheral without performing the HINTS examination",
-   "Overlooking associated hearing loss that changes the differential",
-   "Delaying vestibular rehabilitation and prolonging disability"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "Bradley's Neurology in Clinical Practice"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Short-term vestibular sedatives and antiemetics such as antihistamines and prochlorperazine for severe acute vertigo and vomiting, discontinued early to avoid delaying central compensation",
-   "A short tapering course of corticosteroids in the acute phase, which may improve recovery of peripheral vestibular function",
-   "Early vestibular rehabilitation exercises to promote central compensation and reduce chronic unsteadiness",
-   "Rehydration and antiemetic support for patients unable to tolerate oral intake",
-   "Exclude posterior circulation stroke using the HINTS examination and arrange MRI when central features or vascular risk are present",
-   "Address vascular risk factors and arrange neurology or neuro-otology review for incomplete recovery or diagnostic doubt"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "vestibular_neuritis-pathway",
-   "title": "Vestibular neuritis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Presents as acute, prolonged, spontaneous vertigo lasting days, with nausea, vomiting, and gait imbalance but without hearing loss",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Central signs (direction-changing nystagmus, skew deviation, normal head impulse test) suggesting stroke rather than neuritis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Bedside HINTS examination in acute continuous vertigo to separate peripheral from central causes, MRI with attention to the posterior fossa when central features or vascular risk are present, Audiometry to detect"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Short-term vestibular sedatives and antiemetics such as antihistamines and prochlorperazine for severe acute vertigo and vomiting, discontinued early to avoid delaying central compensation"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Misdiagnosing a cerebellar stroke as vestibular neuritis by relying on imaging that can be falsely reassuring early"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of vestibular neuritis."
-  }
- ],
- "tables": [
-  {
-   "id": "vestibular_neuritis-matrix",
-   "title": "Vestibular neuritis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Presents as acute, prolonged, spontaneous vertigo lasting days, with nausea, vomiting, and gait imbalance but without hearing loss",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neurology",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / Bradley's Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Presents as acute, prolonged, spontaneous vertigo lasting days, with nausea, vomiting, and gait imbalance but without hearing loss",
+      "When hearing is also affected the term labyrinthitis is used, implying inflammation of the whole labyrinth rather than the vestibular nerve alone",
+      "The spontaneous nystagmus is horizontal-torsional, beats away from the affected ear, and is suppressed by visual fixation, consistent with a peripheral lesion",
+      "The head impulse test shows a corrective saccade toward the affected side, indicating a peripheral vestibular deficit",
+      "The HINTS examination (head impulse, nystagmus direction, test of skew) is more sensitive than early MRI for distinguishing peripheral neuritis from a posterior circulation stroke",
+      "Central features such as direction-changing nystagmus, skew deviation, or a normal head impulse test in an acutely vertiginous patient should raise concern for stroke",
+      "Management centres on short-term symptom relief and early vestibular rehabilitation to promote central compensation, avoiding prolonged vestibular suppressants",
+      "A thought to be post-viral or inflammatory process, it usually follows a monophasic course with gradual recovery"
     ],
-    [
-     "Key Investigations",
-     "Bedside HINTS examination in acute continuous vertigo to separate peripheral from central causes, MRI with attention to the",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Vestibular neuritis is attributed to inflammation of the vestibular nerve, possibly from reactivation of latent herpes simplex virus in the vestibular ganglion, causing acute unilateral loss of peripheral vestibular input. The superior vestibular division is most often affected. The sudden asymmetry between the two vestibular systems generates a strong sense of rotational vertigo and spontaneous nystagmus. Over subsequent days to weeks, central adaptive mechanisms recalibrate the vestibular imbalance (central compensation), which underlies clinical recovery even if peripheral function does not fully return.",
+    "additionalDifferentials": [
+      "Posterior circulation ischaemic stroke (cerebellar or brainstem)",
+      "Labyrinthitis (with hearing loss)",
+      "Benign paroxysmal positional vertigo",
+      "Meniere disease",
+      "Vestibular migraine",
+      "Multiple sclerosis affecting brainstem vestibular pathways"
     ],
-    [
-     "Primary Differentials",
-     "Posterior circulation ischaemic stroke (cerebellar or brainstem), Labyrinthitis (with hearing loss), Benign paroxysmal positional",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Bedside HINTS examination in acute continuous vertigo to separate peripheral from central causes",
+      "MRI with attention to the posterior fossa when central features or vascular risk are present",
+      "Audiometry to detect associated hearing loss suggesting labyrinthitis or other cause",
+      "Caloric testing or video head impulse testing to quantify vestibular function",
+      "Assessment of vascular risk factors when stroke is a consideration"
     ],
-    [
-     "Management Strategy",
-     "Short-term vestibular sedatives and antiemetics such as antihistamines and prochlorperazine for severe acute vertigo and",
-     "Core treatment modality"
+    "redFlags": [
+      "Central signs (direction-changing nystagmus, skew deviation, normal head impulse test) suggesting stroke rather than neuritis",
+      "Acute vertigo with other focal neurological deficits such as dysarthria, limb ataxia, or weakness",
+      "New severe headache or neck pain raising concern for vertebral artery dissection",
+      "Sudden hearing loss accompanying vertigo, which may indicate a vascular or other serious cause"
     ],
-    [
-     "Clinical Pitfall",
-     "Misdiagnosing a cerebellar stroke as vestibular neuritis by relying on imaging that can be falsely reassuring early",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most patients recover over days to weeks as central compensation develops, though some have persistent unsteadiness or motion sensitivity; early vestibular rehabilitation improves recovery and reduces chronic dizziness.",
+    "pitfalls": [
+      "Misdiagnosing a cerebellar stroke as vestibular neuritis by relying on imaging that can be falsely reassuring early",
+      "Prescribing prolonged vestibular suppressants, which impair central compensation",
+      "Assuming any acute vertigo is peripheral without performing the HINTS examination",
+      "Overlooking associated hearing loss that changes the differential",
+      "Delaying vestibular rehabilitation and prolonging disability"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "Bradley's Neurology in Clinical Practice"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Short-term vestibular sedatives and antiemetics such as antihistamines and prochlorperazine for severe acute vertigo and vomiting, discontinued early to avoid delaying central compensation",
+      "A short tapering course of corticosteroids in the acute phase, which may improve recovery of peripheral vestibular function",
+      "Early vestibular rehabilitation exercises to promote central compensation and reduce chronic unsteadiness",
+      "Rehydration and antiemetic support for patients unable to tolerate oral intake",
+      "Exclude posterior circulation stroke using the HINTS examination and arrange MRI when central features or vascular risk are present",
+      "Address vascular risk factors and arrange neurology or neuro-otology review for incomplete recovery or diagnostic doubt"
     ]
-   ],
-   "caption": "Overview comparison matrix for vestibular neuritis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "vestibular-neuritis-real-image",
-   "title": "Vestibular neuritis: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "vestibular_neuritis-pathway",
+      "title": "Vestibular neuritis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Presents as acute, prolonged, spontaneous vertigo lasting days, with nausea, vomiting, and gait imbalance but without hearing loss",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Central signs (direction-changing nystagmus, skew deviation, normal head impulse test) suggesting stroke rather than neuritis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Bedside HINTS examination in acute continuous vertigo to separate peripheral from central causes, MRI with attention to the posterior fossa when central features or vascular risk are present, Audiometry to detect"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Short-term vestibular sedatives and antiemetics such as antihistamines and prochlorperazine for severe acute vertigo and vomiting, discontinued early to avoid delaying central compensation"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Misdiagnosing a cerebellar stroke as vestibular neuritis by relying on imaging that can be falsely reassuring early"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of vestibular neuritis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "vestibular_neuritis-matrix",
+      "title": "Vestibular neuritis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Presents as acute, prolonged, spontaneous vertigo lasting days, with nausea, vomiting, and gait imbalance but without hearing loss",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Bedside HINTS examination in acute continuous vertigo to separate peripheral from central causes, MRI with attention to the",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Posterior circulation ischaemic stroke (cerebellar or brainstem), Labyrinthitis (with hearing loss), Benign paroxysmal positional",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Short-term vestibular sedatives and antiemetics such as antihistamines and prochlorperazine for severe acute vertigo and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Misdiagnosing a cerebellar stroke as vestibular neuritis by relying on imaging that can be falsely reassuring early",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for vestibular neuritis."
+    }
+  ],
+  "diagrams": []
 }

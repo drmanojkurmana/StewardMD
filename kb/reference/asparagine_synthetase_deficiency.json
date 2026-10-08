@@ -1,174 +1,152 @@
 {
- "id": "asparagine_synthetase_deficiency",
- "name": "Asparagine synthetase deficiency",
- "aliases": [
-  "asparagine synthetase deficiency",
-  "ASNS deficiency",
-  "ASNSD",
-  "congenital microcephaly-severe encephalopathy"
- ],
- "class": "non_infective",
- "system": "Metabolic / Genetics",
- "specialty": "Metabolic Medicine / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by deficiency of asparagine synthetase (ASNS), which synthesises asparagine from aspartate and glutamine, making asparagine conditionally essential for the developing brain",
-   "Presents with congenital or progressive microcephaly, severe developmental impairment, intractable seizures, and hyperekplexia-like exaggerated startle or spasticity",
-   "Because the blood-brain barrier restricts asparagine entry, brain tissue depends on local synthesis, so the defect causes a functional cerebral asparagine deficiency",
-   "The biochemical picture is subtle: plasma amino acids may be near-normal, and low or low-normal asparagine (sometimes with low glutamine or raised aspartate/glutamate) in plasma or CSF is a clue rather than a definitive marker",
-   "Diagnosis usually rests on molecular confirmation of ASNS mutations rather than a striking metabolite abnormality",
-   "There is no established effective therapy; dietary asparagine supplementation has uncertain benefit because brain uptake is limited, and care is largely supportive",
-   "Inheritance is autosomal recessive with a severe, often early-fatal course",
-   "British spelling and paediatric context apply"
+  "id": "asparagine_synthetase_deficiency",
+  "name": "Asparagine synthetase deficiency",
+  "aliases": [
+    "asparagine synthetase deficiency",
+    "ASNS deficiency",
+    "ASNSD",
+    "congenital microcephaly-severe encephalopathy"
   ],
-  "pathophysiology": "Asparagine synthetase catalyses the ATP-dependent transfer of an amino group from glutamine to aspartate, forming asparagine and glutamate. Neurons depend on endogenous synthesis because asparagine crosses the blood-brain barrier poorly, so loss of enzyme activity produces a functional asparagine deficiency in the central nervous system, and possibly local accumulation of aspartate and glutamate that may be excitotoxic. The resulting disturbance of protein synthesis and amino acid homeostasis in the developing brain causes impaired neuronal proliferation and connectivity, manifesting as congenital microcephaly, severe encephalopathy, and refractory seizures. The peripheral biochemical changes are often mild, reflecting the primarily central nature of the deficiency.",
-  "additionalDifferentials": [
-   "Other genetic causes of congenital microcephaly with epileptic encephalopathy",
-   "Serine biosynthesis defects (PHGDH and related)",
-   "Hyperekplexia from glycine-receptor or transporter mutations",
-   "Congenital infections causing microcephaly",
-   "Neonatal-onset mitochondrial encephalopathies",
-   "Other early epileptic encephalopathies (e.g. channelopathies)"
-  ],
-  "additionalInvestigations": [
-   "Plasma and CSF amino acids looking for low/low-normal asparagine and related changes",
-   "Brain MRI for microcephaly, simplified gyration, and atrophy",
-   "EEG to characterise the epileptic encephalopathy",
-   "Molecular analysis of the ASNS gene (the definitive test)",
-   "Metabolic screen to exclude other treatable encephalopathies",
-   "Genetic counselling given autosomal recessive recurrence risk"
-  ],
-  "redFlags": [
-   "Progressive microcephaly with refractory neonatal or infantile seizures",
-   "Severe startle, spasticity, or encephalopathy from birth",
-   "Rapid neurological deterioration and early mortality",
-   "Recurrence risk in future pregnancies requiring counselling"
-  ],
-  "prognosis": "The prognosis is generally poor, with severe neurodevelopmental impairment, intractable epilepsy, and frequent death in infancy or early childhood. No disease-modifying therapy is established, and management is supportive.",
-  "pitfalls": [
-   "Expecting a marked plasma metabolite abnormality when the biochemical changes are subtle",
-   "Missing the diagnosis without molecular testing",
-   "Assuming dietary asparagine supplementation will correct the central deficiency",
-   "Not offering genetic counselling for an autosomal recessive disorder"
-  ],
-  "references": [
-   "Scriver's OMMBID: asparagine synthetase deficiency",
-   "Nyhan, Atlas of Inherited Metabolic Diseases"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Antiepileptic therapy to control the intractable seizures of this epileptic encephalopathy, often requiring combination anticonvulsants",
-   "Supportive neurological care for spasticity and the exaggerated startle, with antispasticity agents and management of irritability",
-   "Nutritional support and airway protection, including safe feeding and gastrostomy where there is dysphagia or aspiration risk",
-   "Consideration of dietary asparagine supplementation, acknowledging uncertain benefit because blood-brain-barrier uptake is limited",
-   "Multidisciplinary developmental, respiratory and palliative input given the severe neurodevelopmental impairment and high early mortality",
-   "Genetic counselling and family screening for this autosomal recessive disorder, with prenatal or preimplantation testing offered"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "asparagine_synthetase_deficiency-pathway",
-   "title": "Asparagine synthetase deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by deficiency of asparagine synthetase (ASNS), which synthesises asparagine from aspartate and glutamine, making asparagine conditionally essential for the developing brain",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Progressive microcephaly with refractory neonatal or infantile seizures",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Plasma and CSF amino acids looking for low/low-normal asparagine and related changes, Brain MRI for microcephaly, simplified gyration, and atrophy, EEG to characterise the epileptic encephalopathy"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Antiepileptic therapy to control the intractable seizures of this epileptic encephalopathy, often requiring combination anticonvulsants"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Expecting a marked plasma metabolite abnormality when the biochemical changes are subtle"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of asparagine synthetase deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "asparagine_synthetase_deficiency-matrix",
-   "title": "Asparagine synthetase deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by deficiency of asparagine synthetase (ASNS), which synthesises asparagine from aspartate and glutamine, making",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Metabolic / Genetics",
+  "specialty": "Metabolic Medicine / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by deficiency of asparagine synthetase (ASNS), which synthesises asparagine from aspartate and glutamine, making asparagine conditionally essential for the developing brain",
+      "Presents with congenital or progressive microcephaly, severe developmental impairment, intractable seizures, and hyperekplexia-like exaggerated startle or spasticity",
+      "Because the blood-brain barrier restricts asparagine entry, brain tissue depends on local synthesis, so the defect causes a functional cerebral asparagine deficiency",
+      "The biochemical picture is subtle: plasma amino acids may be near-normal, and low or low-normal asparagine (sometimes with low glutamine or raised aspartate/glutamate) in plasma or CSF is a clue rather than a definitive marker",
+      "Diagnosis usually rests on molecular confirmation of ASNS mutations rather than a striking metabolite abnormality",
+      "There is no established effective therapy; dietary asparagine supplementation has uncertain benefit because brain uptake is limited, and care is largely supportive",
+      "Inheritance is autosomal recessive with a severe, often early-fatal course",
+      "British spelling and paediatric context apply"
     ],
-    [
-     "Key Investigations",
-     "Plasma and CSF amino acids looking for low/low-normal asparagine and related changes, Brain MRI for microcephaly, simplified",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Asparagine synthetase catalyses the ATP-dependent transfer of an amino group from glutamine to aspartate, forming asparagine and glutamate. Neurons depend on endogenous synthesis because asparagine crosses the blood-brain barrier poorly, so loss of enzyme activity produces a functional asparagine deficiency in the central nervous system, and possibly local accumulation of aspartate and glutamate that may be excitotoxic. The resulting disturbance of protein synthesis and amino acid homeostasis in the developing brain causes impaired neuronal proliferation and connectivity, manifesting as congenital microcephaly, severe encephalopathy, and refractory seizures. The peripheral biochemical changes are often mild, reflecting the primarily central nature of the deficiency.",
+    "additionalDifferentials": [
+      "Other genetic causes of congenital microcephaly with epileptic encephalopathy",
+      "Serine biosynthesis defects (PHGDH and related)",
+      "Hyperekplexia from glycine-receptor or transporter mutations",
+      "Congenital infections causing microcephaly",
+      "Neonatal-onset mitochondrial encephalopathies",
+      "Other early epileptic encephalopathies (e.g. channelopathies)"
     ],
-    [
-     "Primary Differentials",
-     "Other genetic causes of congenital microcephaly with epileptic encephalopathy, Serine biosynthesis defects (PHGDH and related),",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Plasma and CSF amino acids looking for low/low-normal asparagine and related changes",
+      "Brain MRI for microcephaly, simplified gyration, and atrophy",
+      "EEG to characterise the epileptic encephalopathy",
+      "Molecular analysis of the ASNS gene (the definitive test)",
+      "Metabolic screen to exclude other treatable encephalopathies",
+      "Genetic counselling given autosomal recessive recurrence risk"
     ],
-    [
-     "Management Strategy",
-     "Antiepileptic therapy to control the intractable seizures of this epileptic encephalopathy, often requiring combination",
-     "Core treatment modality"
+    "redFlags": [
+      "Progressive microcephaly with refractory neonatal or infantile seizures",
+      "Severe startle, spasticity, or encephalopathy from birth",
+      "Rapid neurological deterioration and early mortality",
+      "Recurrence risk in future pregnancies requiring counselling"
     ],
-    [
-     "Clinical Pitfall",
-     "Expecting a marked plasma metabolite abnormality when the biochemical changes are subtle",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis is generally poor, with severe neurodevelopmental impairment, intractable epilepsy, and frequent death in infancy or early childhood. No disease-modifying therapy is established, and management is supportive.",
+    "pitfalls": [
+      "Expecting a marked plasma metabolite abnormality when the biochemical changes are subtle",
+      "Missing the diagnosis without molecular testing",
+      "Assuming dietary asparagine supplementation will correct the central deficiency",
+      "Not offering genetic counselling for an autosomal recessive disorder"
+    ],
+    "references": [
+      "Scriver's OMMBID: asparagine synthetase deficiency",
+      "Nyhan, Atlas of Inherited Metabolic Diseases"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Antiepileptic therapy to control the intractable seizures of this epileptic encephalopathy, often requiring combination anticonvulsants",
+      "Supportive neurological care for spasticity and the exaggerated startle, with antispasticity agents and management of irritability",
+      "Nutritional support and airway protection, including safe feeding and gastrostomy where there is dysphagia or aspiration risk",
+      "Consideration of dietary asparagine supplementation, acknowledging uncertain benefit because blood-brain-barrier uptake is limited",
+      "Multidisciplinary developmental, respiratory and palliative input given the severe neurodevelopmental impairment and high early mortality",
+      "Genetic counselling and family screening for this autosomal recessive disorder, with prenatal or preimplantation testing offered"
     ]
-   ],
-   "caption": "Overview comparison matrix for asparagine synthetase deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "asparagine-synthetase-deficiency-real-image",
-   "title": "Asparagine synthetase deficiency: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "asparagine_synthetase_deficiency-pathway",
+      "title": "Asparagine synthetase deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by deficiency of asparagine synthetase (ASNS), which synthesises asparagine from aspartate and glutamine, making asparagine conditionally essential for the developing brain",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Progressive microcephaly with refractory neonatal or infantile seizures",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Plasma and CSF amino acids looking for low/low-normal asparagine and related changes, Brain MRI for microcephaly, simplified gyration, and atrophy, EEG to characterise the epileptic encephalopathy"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Antiepileptic therapy to control the intractable seizures of this epileptic encephalopathy, often requiring combination anticonvulsants"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Expecting a marked plasma metabolite abnormality when the biochemical changes are subtle"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of asparagine synthetase deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "asparagine_synthetase_deficiency-matrix",
+      "title": "Asparagine synthetase deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by deficiency of asparagine synthetase (ASNS), which synthesises asparagine from aspartate and glutamine, making",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Plasma and CSF amino acids looking for low/low-normal asparagine and related changes, Brain MRI for microcephaly, simplified",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Other genetic causes of congenital microcephaly with epileptic encephalopathy, Serine biosynthesis defects (PHGDH and related),",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Antiepileptic therapy to control the intractable seizures of this epileptic encephalopathy, often requiring combination",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Expecting a marked plasma metabolite abnormality when the biochemical changes are subtle",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for asparagine synthetase deficiency."
+    }
+  ],
+  "diagrams": []
 }

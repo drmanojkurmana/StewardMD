@@ -1,176 +1,154 @@
 {
- "id": "poststreptococcal_glomerulonephritis",
- "name": "Post-streptococcal Glomerulonephritis",
- "aliases": [
-  "PSGN",
-  "acute post-streptococcal glomerulonephritis",
-  "APSGN",
-  "acute post-infectious glomerulonephritis"
- ],
- "class": "infective",
- "system": "Renal",
- "specialty": "Paediatrics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics",
-  "sourceEdition": "22e",
-  "pages": null,
-  "clinicalPearls": [
-   "A classic cause of acute nephritic syndrome in children, most often between about 5 and 12 years of age.",
-   "Follows infection with specific nephritogenic strains of group A streptococcus, typically 1-2 weeks after pharyngitis or 3-6 weeks after skin infection.",
-   "Presents with the nephritic picture of haematuria (often cola- or tea-coloured urine), oedema, hypertension, and variable reduction in urine output.",
-   "Complement C3 is characteristically low and typically returns to normal within about 6-8 weeks; persistently low C3 beyond this window suggests another diagnosis.",
-   "Evidence of preceding streptococcal infection is supported by elevated or rising antistreptococcal antibodies such as ASO or anti-DNase B.",
-   "Management is largely supportive, centred on salt and fluid restriction and control of hypertension and fluid overload.",
-   "Antibiotics treat any active streptococcal infection but do not alter the course of the established nephritis.",
-   "Renal biopsy is usually unnecessary and reserved for atypical features such as persistent low complement, progressive kidney failure, or nephrotic-range proteinuria.",
-   "The prognosis in children is excellent, with the large majority recovering complete renal function."
+  "id": "poststreptococcal_glomerulonephritis",
+  "name": "Post-streptococcal Glomerulonephritis",
+  "aliases": [
+    "PSGN",
+    "acute post-streptococcal glomerulonephritis",
+    "APSGN",
+    "acute post-infectious glomerulonephritis"
   ],
-  "pathophysiology": "Infection with nephritogenic strains of group A beta-haemolytic streptococcus triggers an immune-complex-mediated glomerular injury. Streptococcal antigens (such as nephritis-associated plasmin receptor and streptococcal pyrogenic exotoxin B) deposit in the glomeruli and, together with circulating and in situ immune complexes, activate the complement system, predominantly via the alternative pathway. The resulting inflammation causes endocapillary proliferation and neutrophil infiltration, reducing glomerular filtration and producing sodium and water retention, which manifests as haematuria, oedema, and hypertension.",
-  "additionalDifferentials": [
-   "IgA nephropathy",
-   "Membranoproliferative glomerulonephritis",
-   "Lupus nephritis",
-   "Henoch-Schonlein purpura (IgA vasculitis) nephritis",
-   "Haemolytic uraemic syndrome",
-   "Alport syndrome or thin basement membrane disease"
-  ],
-  "additionalInvestigations": [
-   "Serum complement C3 (and C4) with follow-up to document normalisation",
-   "Antistreptococcal serology (ASO, anti-DNase B) or streptozyme panel",
-   "Throat or skin swab and culture if active infection present",
-   "Urinalysis with microscopy for red cell casts and dysmorphic red cells",
-   "Serum urea, creatinine, and electrolytes to assess renal function",
-   "Renal biopsy only in atypical or progressive cases"
-  ],
-  "redFlags": [
-   "Severe or refractory hypertension, including hypertensive encephalopathy",
-   "Rapidly rising creatinine suggesting rapidly progressive glomerulonephritis",
-   "Pulmonary oedema or heart failure from fluid overload",
-   "Marked oliguria or anuria",
-   "Persistently low complement or nephrotic-range proteinuria indicating an alternative diagnosis"
-  ],
-  "prognosis": "Most children recover fully; acute complications resolve over days to weeks, complement normalises within about two months, and microscopic haematuria may persist for up to a year with an excellent long-term outlook.",
-  "pitfalls": [
-   "Attributing every child with haematuria and low C3 to PSGN without follow-up complement testing",
-   "Overlooking hypertensive complications by not monitoring blood pressure closely",
-   "Failing to consider alternative glomerulonephritides when complement stays low beyond eight weeks",
-   "Aggressive fluid administration worsening volume overload in an oliguric child"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Management is largely supportive; eradicate any residual streptococcal infection with a penicillin (or a macrolide if penicillin-allergic), recognising this does not reverse the established glomerulonephritis",
-   "Dietary salt and fluid restriction to limit oedema and circulatory congestion",
-   "Loop diuretics to relieve fluid overload, oedema and volume-dependent hypertension",
-   "Control hypertension with antihypertensives such as calcium-channel blockers or vasodilators",
-   "Manage acute deterioration including hypertensive encephalopathy and pulmonary oedema, with short-term dialysis for severe acute kidney injury, refractory hyperkalaemia or intractable fluid overload",
-   "Monitor renal function and serial urinalysis, and confirm that complement C3 normalises as expected, since persistently low C3 prompts re-evaluation for another diagnosis",
-   "Refer to paediatric nephrology for renal biopsy and specialist input in atypical, progressive or non-resolving disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "poststreptococcal_glomerulonephritis-pathway",
-   "title": "Post-streptococcal Glomerulonephritis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A classic cause of acute nephritic syndrome in children, most often between about 5 and 12 years of age.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Severe or refractory hypertension, including hypertensive encephalopathy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum complement C3 (and C4) with follow-up to document normalisation, Antistreptococcal serology (ASO, anti-DNase B) or streptozyme panel, Throat or skin swab and culture if active infection present"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Management is largely supportive; eradicate any residual streptococcal infection with a penicillin (or a macrolide if penicillin-allergic), recognising this does not reverse the established glomerulonephritis"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing every child with haematuria and low C3 to PSGN without follow-up complement testing"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of post-streptococcal glomerulonephritis."
-  }
- ],
- "tables": [
-  {
-   "id": "poststreptococcal_glomerulonephritis-matrix",
-   "title": "Post-streptococcal Glomerulonephritis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A classic cause of acute nephritic syndrome in children, most often between about 5 and 12 years of age.",
-     "Cardinal clinical findings"
+  "class": "infective",
+  "system": "Renal",
+  "specialty": "Paediatrics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics",
+    "sourceEdition": "22e",
+    "pages": null,
+    "clinicalPearls": [
+      "A classic cause of acute nephritic syndrome in children, most often between about 5 and 12 years of age.",
+      "Follows infection with specific nephritogenic strains of group A streptococcus, typically 1-2 weeks after pharyngitis or 3-6 weeks after skin infection.",
+      "Presents with the nephritic picture of haematuria (often cola- or tea-coloured urine), oedema, hypertension, and variable reduction in urine output.",
+      "Complement C3 is characteristically low and typically returns to normal within about 6-8 weeks; persistently low C3 beyond this window suggests another diagnosis.",
+      "Evidence of preceding streptococcal infection is supported by elevated or rising antistreptococcal antibodies such as ASO or anti-DNase B.",
+      "Management is largely supportive, centred on salt and fluid restriction and control of hypertension and fluid overload.",
+      "Antibiotics treat any active streptococcal infection but do not alter the course of the established nephritis.",
+      "Renal biopsy is usually unnecessary and reserved for atypical features such as persistent low complement, progressive kidney failure, or nephrotic-range proteinuria.",
+      "The prognosis in children is excellent, with the large majority recovering complete renal function."
     ],
-    [
-     "Key Investigations",
-     "Serum complement C3 (and C4) with follow-up to document normalisation, Antistreptococcal serology (ASO, anti-DNase B) or",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Infection with nephritogenic strains of group A beta-haemolytic streptococcus triggers an immune-complex-mediated glomerular injury. Streptococcal antigens (such as nephritis-associated plasmin receptor and streptococcal pyrogenic exotoxin B) deposit in the glomeruli and, together with circulating and in situ immune complexes, activate the complement system, predominantly via the alternative pathway. The resulting inflammation causes endocapillary proliferation and neutrophil infiltration, reducing glomerular filtration and producing sodium and water retention, which manifests as haematuria, oedema, and hypertension.",
+    "additionalDifferentials": [
+      "IgA nephropathy",
+      "Membranoproliferative glomerulonephritis",
+      "Lupus nephritis",
+      "Henoch-Schonlein purpura (IgA vasculitis) nephritis",
+      "Haemolytic uraemic syndrome",
+      "Alport syndrome or thin basement membrane disease"
     ],
-    [
-     "Primary Differentials",
-     "IgA nephropathy, Membranoproliferative glomerulonephritis, Lupus nephritis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum complement C3 (and C4) with follow-up to document normalisation",
+      "Antistreptococcal serology (ASO, anti-DNase B) or streptozyme panel",
+      "Throat or skin swab and culture if active infection present",
+      "Urinalysis with microscopy for red cell casts and dysmorphic red cells",
+      "Serum urea, creatinine, and electrolytes to assess renal function",
+      "Renal biopsy only in atypical or progressive cases"
     ],
-    [
-     "Management Strategy",
-     "Management is largely supportive; eradicate any residual streptococcal infection with a penicillin (or a macrolide if",
-     "Core treatment modality"
+    "redFlags": [
+      "Severe or refractory hypertension, including hypertensive encephalopathy",
+      "Rapidly rising creatinine suggesting rapidly progressive glomerulonephritis",
+      "Pulmonary oedema or heart failure from fluid overload",
+      "Marked oliguria or anuria",
+      "Persistently low complement or nephrotic-range proteinuria indicating an alternative diagnosis"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing every child with haematuria and low C3 to PSGN without follow-up complement testing",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most children recover fully; acute complications resolve over days to weeks, complement normalises within about two months, and microscopic haematuria may persist for up to a year with an excellent long-term outlook.",
+    "pitfalls": [
+      "Attributing every child with haematuria and low C3 to PSGN without follow-up complement testing",
+      "Overlooking hypertensive complications by not monitoring blood pressure closely",
+      "Failing to consider alternative glomerulonephritides when complement stays low beyond eight weeks",
+      "Aggressive fluid administration worsening volume overload in an oliguric child"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Management is largely supportive; eradicate any residual streptococcal infection with a penicillin (or a macrolide if penicillin-allergic), recognising this does not reverse the established glomerulonephritis",
+      "Dietary salt and fluid restriction to limit oedema and circulatory congestion",
+      "Loop diuretics to relieve fluid overload, oedema and volume-dependent hypertension",
+      "Control hypertension with antihypertensives such as calcium-channel blockers or vasodilators",
+      "Manage acute deterioration including hypertensive encephalopathy and pulmonary oedema, with short-term dialysis for severe acute kidney injury, refractory hyperkalaemia or intractable fluid overload",
+      "Monitor renal function and serial urinalysis, and confirm that complement C3 normalises as expected, since persistently low C3 prompts re-evaluation for another diagnosis",
+      "Refer to paediatric nephrology for renal biopsy and specialist input in atypical, progressive or non-resolving disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for post-streptococcal glomerulonephritis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "poststreptococcal-glomerulonephritis-real-image",
-   "title": "Post-streptococcal Glomerulonephritis: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "poststreptococcal_glomerulonephritis-pathway",
+      "title": "Post-streptococcal Glomerulonephritis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A classic cause of acute nephritic syndrome in children, most often between about 5 and 12 years of age.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Severe or refractory hypertension, including hypertensive encephalopathy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum complement C3 (and C4) with follow-up to document normalisation, Antistreptococcal serology (ASO, anti-DNase B) or streptozyme panel, Throat or skin swab and culture if active infection present"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Management is largely supportive; eradicate any residual streptococcal infection with a penicillin (or a macrolide if penicillin-allergic), recognising this does not reverse the established glomerulonephritis"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing every child with haematuria and low C3 to PSGN without follow-up complement testing"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of post-streptococcal glomerulonephritis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "poststreptococcal_glomerulonephritis-matrix",
+      "title": "Post-streptococcal Glomerulonephritis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A classic cause of acute nephritic syndrome in children, most often between about 5 and 12 years of age.",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum complement C3 (and C4) with follow-up to document normalisation, Antistreptococcal serology (ASO, anti-DNase B) or",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "IgA nephropathy, Membranoproliferative glomerulonephritis, Lupus nephritis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Management is largely supportive; eradicate any residual streptococcal infection with a penicillin (or a macrolide if",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing every child with haematuria and low C3 to PSGN without follow-up complement testing",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for post-streptococcal glomerulonephritis."
+    }
+  ],
+  "diagrams": []
 }

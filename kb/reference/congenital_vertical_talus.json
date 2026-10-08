@@ -1,177 +1,155 @@
 {
- "id": "congenital_vertical_talus",
- "name": "Congenital vertical talus",
- "aliases": [
-  "vertical talus",
-  "congenital convex pes valgus",
-  "rocker-bottom foot",
-  "CVT"
- ],
- "class": "non_infective",
- "system": "Paediatric orthopaedics",
- "specialty": "Paediatric Orthopaedics",
- "referenceOnly": true,
- "reference": {
-  "source": "Tachdjian's Pediatric Orthopaedics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A rare rigid flatfoot deformity in which the talus is fixed in a near-vertical position and the navicular is irreversibly dislocated dorsally onto the talar neck",
-   "The classic appearance is a rocker-bottom foot with a convex plantar surface, a prominent talar head medially in the sole, and the forefoot dorsiflexed and everted",
-   "The deformity is rigid and cannot be passively corrected, which is the crucial distinction from a flexible calcaneovalgus or positional flatfoot",
-   "About half of cases are associated with neuromuscular disease, chromosomal abnormalities, or syndromes such as arthrogryposis, so a broader examination is essential",
-   "Lateral radiographs taken in maximal plantarflexion show the talus remaining vertical and failing to align with the first metatarsal, confirming the fixed dislocation",
-   "Modern management favours a reverse-Ponseti (Dobbs) serial-casting technique to stretch the dorsolateral soft tissues, usually followed by minimally invasive surgery to reduce the talonavicular joint",
-   "Untreated, the foot becomes painful and functionally disabling with callosity over the prominent talar head and difficulty with shoe wear"
+  "id": "congenital_vertical_talus",
+  "name": "Congenital vertical talus",
+  "aliases": [
+    "vertical talus",
+    "congenital convex pes valgus",
+    "rocker-bottom foot",
+    "CVT"
   ],
-  "pathophysiology": "Congenital vertical talus is a fixed dorsal dislocation of the navicular on the talus, locking the talus into a vertical, plantarflexed orientation while the calcaneus is held in equinus and valgus. Contracture of the dorsolateral soft tissues, including the tibialis anterior, extensor tendons, and the peroneals, together with a tight Achilles tendon, maintains the deformity, and the head of the talus is forced plantar-medially to create the convex sole. The condition may be an isolated idiopathic malformation but is frequently a manifestation of an underlying neuromuscular imbalance or genetic syndrome, and abnormalities of the HOXD10 gene have been described in some familial idiopathic cases.",
-  "additionalDifferentials": [
-   "Flexible calcaneovalgus foot, which is supple and positional",
-   "Oblique talus, a milder reducible variant intermediate between normal and vertical talus",
-   "Flexible flatfoot with a supple, correctable arch",
-   "Tarsal coalition presenting as a rigid flatfoot in older children",
-   "Congenital talipes equinovarus at the opposite end of the deformity spectrum",
-   "Paralytic or neuromuscular flatfoot from cerebral palsy or myelomeningocele"
-  ],
-  "additionalInvestigations": [
-   "Weight-bearing or simulated weight-bearing anteroposterior and lateral foot radiographs",
-   "Forced plantarflexion lateral radiograph to confirm the irreducible talonavicular dislocation",
-   "Forced dorsiflexion lateral view to demonstrate fixed hindfoot equinus",
-   "Assessment for associated neuromuscular disease including a full neurological examination",
-   "Genetic evaluation and karyotype where a syndrome or chromosomal disorder is suspected",
-   "Spinal imaging when a neural-tube or cord anomaly is considered"
-  ],
-  "redFlags": [
-   "A truly rigid rocker-bottom foot that resists all passive correction",
-   "Features of arthrogryposis, a chromosomal disorder, or another syndrome",
-   "Signs of an underlying neuromuscular condition or spinal dysraphism",
-   "Bilateral deformity with a positive family history suggesting a genetic cause",
-   "Progressive callosity, pain, or skin breakdown over the plantar talar prominence"
-  ],
-  "prognosis": "With early serial casting and appropriately timed surgery a plantigrade, functional foot can usually be achieved, though results are less predictable in syndromic or neuromuscular cases; late or untreated deformity leads to a painful, stiff, poorly shod foot.",
-  "pitfalls": [
-   "Mislabelling the rigid deformity as a benign flexible flatfoot and delaying treatment",
-   "Omitting the forced plantarflexion radiograph, which is needed to distinguish vertical from oblique talus",
-   "Failing to screen for associated neuromuscular disease or genetic syndromes",
-   "Attempting correction with casting alone and expecting full reduction without surgery",
-   "Underestimating the likelihood of recurrence and the need for prolonged follow-up"
-  ],
-  "references": [
-   "Tachdjian's Pediatric Orthopaedics",
-   "Lovell and Winter's Pediatric Orthopaedics",
-   "Dobbs MB et al., idiopathic congenital vertical talus reviews"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Begin treatment with the reverse-Ponseti (Dobbs) serial-casting technique to progressively stretch the contracted dorsolateral soft tissues",
-   "Follow casting with minimally invasive surgery — talonavicular joint reduction and pinning with percutaneous Achilles tenotomy — to correct the fixed dislocation",
-   "Maintain correction with post-operative bracing and orthotic support to prevent recurrence",
-   "Evaluate for and manage an underlying neuromuscular disorder, chromosomal abnormality or syndrome such as arthrogryposis, as roughly half of cases are non-idiopathic",
-   "Obtain spinal imaging where a neural-tube or spinal cord anomaly is suspected",
-   "Arrange genetic evaluation and counselling for syndromic or familial cases",
-   "Manage within a paediatric orthopaedic multidisciplinary team"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "congenital_vertical_talus-pathway",
-   "title": "Congenital vertical talus: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A rare rigid flatfoot deformity in which the talus is fixed in a near-vertical position and the navicular is irreversibly dislocated dorsally onto the talar neck",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A truly rigid rocker-bottom foot that resists all passive correction",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Weight-bearing or simulated weight-bearing anteroposterior and lateral foot radiographs, Forced plantarflexion lateral radiograph to confirm the irreducible talonavicular dislocation, Forced dorsiflexion lateral view to"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Begin treatment with the reverse-Ponseti (Dobbs) serial-casting technique to progressively stretch the contracted dorsolateral soft tissues"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mislabelling the rigid deformity as a benign flexible flatfoot and delaying treatment"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of congenital vertical talus."
-  }
- ],
- "tables": [
-  {
-   "id": "congenital_vertical_talus-matrix",
-   "title": "Congenital vertical talus: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A rare rigid flatfoot deformity in which the talus is fixed in a near-vertical position and the navicular is irreversibly",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Paediatric orthopaedics",
+  "specialty": "Paediatric Orthopaedics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Tachdjian's Pediatric Orthopaedics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A rare rigid flatfoot deformity in which the talus is fixed in a near-vertical position and the navicular is irreversibly dislocated dorsally onto the talar neck",
+      "The classic appearance is a rocker-bottom foot with a convex plantar surface, a prominent talar head medially in the sole, and the forefoot dorsiflexed and everted",
+      "The deformity is rigid and cannot be passively corrected, which is the crucial distinction from a flexible calcaneovalgus or positional flatfoot",
+      "About half of cases are associated with neuromuscular disease, chromosomal abnormalities, or syndromes such as arthrogryposis, so a broader examination is essential",
+      "Lateral radiographs taken in maximal plantarflexion show the talus remaining vertical and failing to align with the first metatarsal, confirming the fixed dislocation",
+      "Modern management favours a reverse-Ponseti (Dobbs) serial-casting technique to stretch the dorsolateral soft tissues, usually followed by minimally invasive surgery to reduce the talonavicular joint",
+      "Untreated, the foot becomes painful and functionally disabling with callosity over the prominent talar head and difficulty with shoe wear"
     ],
-    [
-     "Key Investigations",
-     "Weight-bearing or simulated weight-bearing anteroposterior and lateral foot radiographs, Forced plantarflexion lateral radiograph",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Congenital vertical talus is a fixed dorsal dislocation of the navicular on the talus, locking the talus into a vertical, plantarflexed orientation while the calcaneus is held in equinus and valgus. Contracture of the dorsolateral soft tissues, including the tibialis anterior, extensor tendons, and the peroneals, together with a tight Achilles tendon, maintains the deformity, and the head of the talus is forced plantar-medially to create the convex sole. The condition may be an isolated idiopathic malformation but is frequently a manifestation of an underlying neuromuscular imbalance or genetic syndrome, and abnormalities of the HOXD10 gene have been described in some familial idiopathic cases.",
+    "additionalDifferentials": [
+      "Flexible calcaneovalgus foot, which is supple and positional",
+      "Oblique talus, a milder reducible variant intermediate between normal and vertical talus",
+      "Flexible flatfoot with a supple, correctable arch",
+      "Tarsal coalition presenting as a rigid flatfoot in older children",
+      "Congenital talipes equinovarus at the opposite end of the deformity spectrum",
+      "Paralytic or neuromuscular flatfoot from cerebral palsy or myelomeningocele"
     ],
-    [
-     "Primary Differentials",
-     "Flexible calcaneovalgus foot, which is supple and positional, Oblique talus, a milder reducible variant intermediate between",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Weight-bearing or simulated weight-bearing anteroposterior and lateral foot radiographs",
+      "Forced plantarflexion lateral radiograph to confirm the irreducible talonavicular dislocation",
+      "Forced dorsiflexion lateral view to demonstrate fixed hindfoot equinus",
+      "Assessment for associated neuromuscular disease including a full neurological examination",
+      "Genetic evaluation and karyotype where a syndrome or chromosomal disorder is suspected",
+      "Spinal imaging when a neural-tube or cord anomaly is considered"
     ],
-    [
-     "Management Strategy",
-     "Begin treatment with the reverse-Ponseti (Dobbs) serial-casting technique to progressively stretch the contracted dorsolateral",
-     "Core treatment modality"
+    "redFlags": [
+      "A truly rigid rocker-bottom foot that resists all passive correction",
+      "Features of arthrogryposis, a chromosomal disorder, or another syndrome",
+      "Signs of an underlying neuromuscular condition or spinal dysraphism",
+      "Bilateral deformity with a positive family history suggesting a genetic cause",
+      "Progressive callosity, pain, or skin breakdown over the plantar talar prominence"
     ],
-    [
-     "Clinical Pitfall",
-     "Mislabelling the rigid deformity as a benign flexible flatfoot and delaying treatment",
-     "Prevent diagnostic or management error"
+    "prognosis": "With early serial casting and appropriately timed surgery a plantigrade, functional foot can usually be achieved, though results are less predictable in syndromic or neuromuscular cases; late or untreated deformity leads to a painful, stiff, poorly shod foot.",
+    "pitfalls": [
+      "Mislabelling the rigid deformity as a benign flexible flatfoot and delaying treatment",
+      "Omitting the forced plantarflexion radiograph, which is needed to distinguish vertical from oblique talus",
+      "Failing to screen for associated neuromuscular disease or genetic syndromes",
+      "Attempting correction with casting alone and expecting full reduction without surgery",
+      "Underestimating the likelihood of recurrence and the need for prolonged follow-up"
+    ],
+    "references": [
+      "Tachdjian's Pediatric Orthopaedics",
+      "Lovell and Winter's Pediatric Orthopaedics",
+      "Dobbs MB et al., idiopathic congenital vertical talus reviews"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Begin treatment with the reverse-Ponseti (Dobbs) serial-casting technique to progressively stretch the contracted dorsolateral soft tissues",
+      "Follow casting with minimally invasive surgery — talonavicular joint reduction and pinning with percutaneous Achilles tenotomy — to correct the fixed dislocation",
+      "Maintain correction with post-operative bracing and orthotic support to prevent recurrence",
+      "Evaluate for and manage an underlying neuromuscular disorder, chromosomal abnormality or syndrome such as arthrogryposis, as roughly half of cases are non-idiopathic",
+      "Obtain spinal imaging where a neural-tube or spinal cord anomaly is suspected",
+      "Arrange genetic evaluation and counselling for syndromic or familial cases",
+      "Manage within a paediatric orthopaedic multidisciplinary team"
     ]
-   ],
-   "caption": "Overview comparison matrix for congenital vertical talus."
-  }
- ],
- "diagrams": [
-  {
-   "id": "congenital-vertical-talus-real-image",
-   "title": "Congenital vertical talus: Diagnostic Musculoskeletal Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/osteomyelitis-xray.jpg?v=kbri3",
-   "caption": "Diagnostic musculoskeletal radiograph illustrating cortical margins, trabecular bone mineralization, and articular alignment.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cortical Margins",
-     "description": "Cortical bone continuity, periosteal reaction, and endosteal scalloping."
-    },
-    {
-     "label": "Trabecular Architecture",
-     "description": "Medullary bone density, lucencies, and subchondral mineralization."
-    },
-    {
-     "label": "Joint Articulation",
-     "description": "Joint space width, alignment, and periarticular soft tissue contours."
+      "id": "congenital_vertical_talus-pathway",
+      "title": "Congenital vertical talus: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A rare rigid flatfoot deformity in which the talus is fixed in a near-vertical position and the navicular is irreversibly dislocated dorsally onto the talar neck",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A truly rigid rocker-bottom foot that resists all passive correction",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Weight-bearing or simulated weight-bearing anteroposterior and lateral foot radiographs, Forced plantarflexion lateral radiograph to confirm the irreducible talonavicular dislocation, Forced dorsiflexion lateral view to"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Begin treatment with the reverse-Ponseti (Dobbs) serial-casting technique to progressively stretch the contracted dorsolateral soft tissues"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mislabelling the rigid deformity as a benign flexible flatfoot and delaying treatment"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of congenital vertical talus."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "congenital_vertical_talus-matrix",
+      "title": "Congenital vertical talus: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A rare rigid flatfoot deformity in which the talus is fixed in a near-vertical position and the navicular is irreversibly",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Weight-bearing or simulated weight-bearing anteroposterior and lateral foot radiographs, Forced plantarflexion lateral radiograph",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Flexible calcaneovalgus foot, which is supple and positional, Oblique talus, a milder reducible variant intermediate between",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Begin treatment with the reverse-Ponseti (Dobbs) serial-casting technique to progressively stretch the contracted dorsolateral",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mislabelling the rigid deformity as a benign flexible flatfoot and delaying treatment",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for congenital vertical talus."
+    }
+  ],
+  "diagrams": []
 }

@@ -1,171 +1,149 @@
 {
- "id": "iodine_deficiency",
- "name": "Iodine deficiency",
- "aliases": [
-  "iodine deficiency disorders",
-  "endemic goitre",
-  "endemic cretinism"
- ],
- "class": "non_infective",
- "system": "Nutrition / Metabolic",
- "specialty": "Nutrition & Metabolic Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / WHO nutrition guidance",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Iodine deficiency is the leading preventable cause of goitre and of acquired intellectual disability worldwide",
-   "It occurs in regions with iodine-poor soil and water, historically including large parts of the Himalayan and sub-Himalayan belt of India, and salt iodisation is the mainstay of control",
-   "Deficiency in pregnancy is the most serious consequence, causing impaired fetal brain development and, in severe cases, endemic cretinism",
-   "The clinical spectrum ranges from diffuse or nodular goitre to hypothyroidism, growth and developmental delay, and neurological deficits",
-   "The population iodine status is assessed by median urinary iodine concentration rather than by individual blood tests",
-   "Rapid correction of longstanding deficiency, or excess iodine, can occasionally provoke thyroid dysfunction, so replacement is at physiological population levels",
-   "Neurological damage sustained in fetal life and infancy is largely irreversible, making prevention through adequate maternal intake essential"
+  "id": "iodine_deficiency",
+  "name": "Iodine deficiency",
+  "aliases": [
+    "iodine deficiency disorders",
+    "endemic goitre",
+    "endemic cretinism"
   ],
-  "pathophysiology": "Iodine is an essential substrate for the synthesis of the thyroid hormones thyroxine and triiodothyronine. When dietary intake is inadequate, reduced hormone production lowers feedback inhibition and raises thyroid-stimulating hormone, driving thyroid hyperplasia and goitre as a compensatory response; over time nodularity and, if compensation fails, hypothyroidism develop. Thyroid hormone is critical for normal neuronal migration and myelination in the developing brain, so maternal and early-life deficiency impairs neurodevelopment irreversibly, producing the cognitive and neurological features of iodine deficiency disorders, including cretinism in severe endemic areas.",
-  "additionalDifferentials": [
-   "Autoimmune thyroid disease (Hashimoto or Graves)",
-   "Sporadic non-toxic goitre and thyroid nodules",
-   "Congenital hypothyroidism from thyroid dysgenesis or dyshormonogenesis",
-   "Goitre from goitrogen exposure",
-   "Other causes of developmental delay"
-  ],
-  "additionalInvestigations": [
-   "Thyroid function tests including TSH and free thyroid hormones",
-   "Urinary iodine concentration for assessing population and individual status",
-   "Thyroid ultrasound to characterise goitre or nodules",
-   "Neonatal thyroid screening where available",
-   "Developmental and neurological assessment in affected children"
-  ],
-  "redFlags": [
-   "Deficiency in pregnancy threatening fetal neurodevelopment",
-   "Large goitre causing airway or oesophageal compression",
-   "Overt hypothyroidism, especially in infants where it threatens development",
-   "Signs of endemic cretinism requiring urgent public health and clinical action"
-  ],
-  "prognosis": "Goitre and hypothyroidism from deficiency can improve with adequate iodine intake, but neurodevelopmental damage from fetal and early-life deficiency is largely permanent, underscoring prevention.",
-  "pitfalls": [
-   "Relying on individual blood iodine levels rather than urinary iodine for status assessment",
-   "Overlooking maternal iodine adequacy in pregnancy",
-   "Assuming a goitre is always autoimmune and missing endemic iodine deficiency",
-   "Causing iodine-induced thyroid dysfunction through excessive supplementation"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "WHO nutrition guidance"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Correct the deficiency through universal salt iodisation and iodine supplementation delivered at physiological population levels",
-   "Ensure adequate iodine intake in pregnancy and lactation with iodine-containing supplements to protect foetal neurodevelopment",
-   "Treat established hypothyroidism with levothyroxine replacement",
-   "Introduce repletion gradually in longstanding or nodular goitre to avoid provoking iodine-induced thyrotoxicosis",
-   "Monitor with thyroid function tests and track population status with median urinary iodine concentration",
-   "Refer children with developmental delay for neurodevelopmental assessment and early intervention",
-   "Consider surgery for large, compressive or obstructive goitre"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "iodine_deficiency-pathway",
-   "title": "Iodine deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Iodine deficiency is the leading preventable cause of goitre and of acquired intellectual disability worldwide",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Deficiency in pregnancy threatening fetal neurodevelopment",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Thyroid function tests including TSH and free thyroid hormones, Urinary iodine concentration for assessing population and individual status, Thyroid ultrasound to characterise goitre or nodules"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Correct the deficiency through universal salt iodisation and iodine supplementation delivered at physiological population levels"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Relying on individual blood iodine levels rather than urinary iodine for status assessment"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of iodine deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "iodine_deficiency-matrix",
-   "title": "Iodine deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Iodine deficiency is the leading preventable cause of goitre and of acquired intellectual disability worldwide",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nutrition / Metabolic",
+  "specialty": "Nutrition & Metabolic Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / WHO nutrition guidance",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Iodine deficiency is the leading preventable cause of goitre and of acquired intellectual disability worldwide",
+      "It occurs in regions with iodine-poor soil and water, historically including large parts of the Himalayan and sub-Himalayan belt of India, and salt iodisation is the mainstay of control",
+      "Deficiency in pregnancy is the most serious consequence, causing impaired fetal brain development and, in severe cases, endemic cretinism",
+      "The clinical spectrum ranges from diffuse or nodular goitre to hypothyroidism, growth and developmental delay, and neurological deficits",
+      "The population iodine status is assessed by median urinary iodine concentration rather than by individual blood tests",
+      "Rapid correction of longstanding deficiency, or excess iodine, can occasionally provoke thyroid dysfunction, so replacement is at physiological population levels",
+      "Neurological damage sustained in fetal life and infancy is largely irreversible, making prevention through adequate maternal intake essential"
     ],
-    [
-     "Key Investigations",
-     "Thyroid function tests including TSH and free thyroid hormones, Urinary iodine concentration for assessing population and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Iodine is an essential substrate for the synthesis of the thyroid hormones thyroxine and triiodothyronine. When dietary intake is inadequate, reduced hormone production lowers feedback inhibition and raises thyroid-stimulating hormone, driving thyroid hyperplasia and goitre as a compensatory response; over time nodularity and, if compensation fails, hypothyroidism develop. Thyroid hormone is critical for normal neuronal migration and myelination in the developing brain, so maternal and early-life deficiency impairs neurodevelopment irreversibly, producing the cognitive and neurological features of iodine deficiency disorders, including cretinism in severe endemic areas.",
+    "additionalDifferentials": [
+      "Autoimmune thyroid disease (Hashimoto or Graves)",
+      "Sporadic non-toxic goitre and thyroid nodules",
+      "Congenital hypothyroidism from thyroid dysgenesis or dyshormonogenesis",
+      "Goitre from goitrogen exposure",
+      "Other causes of developmental delay"
     ],
-    [
-     "Primary Differentials",
-     "Autoimmune thyroid disease (Hashimoto or Graves), Sporadic non-toxic goitre and thyroid nodules, Congenital hypothyroidism from",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Thyroid function tests including TSH and free thyroid hormones",
+      "Urinary iodine concentration for assessing population and individual status",
+      "Thyroid ultrasound to characterise goitre or nodules",
+      "Neonatal thyroid screening where available",
+      "Developmental and neurological assessment in affected children"
     ],
-    [
-     "Management Strategy",
-     "Correct the deficiency through universal salt iodisation and iodine supplementation delivered at physiological population levels",
-     "Core treatment modality"
+    "redFlags": [
+      "Deficiency in pregnancy threatening fetal neurodevelopment",
+      "Large goitre causing airway or oesophageal compression",
+      "Overt hypothyroidism, especially in infants where it threatens development",
+      "Signs of endemic cretinism requiring urgent public health and clinical action"
     ],
-    [
-     "Clinical Pitfall",
-     "Relying on individual blood iodine levels rather than urinary iodine for status assessment",
-     "Prevent diagnostic or management error"
+    "prognosis": "Goitre and hypothyroidism from deficiency can improve with adequate iodine intake, but neurodevelopmental damage from fetal and early-life deficiency is largely permanent, underscoring prevention.",
+    "pitfalls": [
+      "Relying on individual blood iodine levels rather than urinary iodine for status assessment",
+      "Overlooking maternal iodine adequacy in pregnancy",
+      "Assuming a goitre is always autoimmune and missing endemic iodine deficiency",
+      "Causing iodine-induced thyroid dysfunction through excessive supplementation"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "WHO nutrition guidance"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Correct the deficiency through universal salt iodisation and iodine supplementation delivered at physiological population levels",
+      "Ensure adequate iodine intake in pregnancy and lactation with iodine-containing supplements to protect foetal neurodevelopment",
+      "Treat established hypothyroidism with levothyroxine replacement",
+      "Introduce repletion gradually in longstanding or nodular goitre to avoid provoking iodine-induced thyrotoxicosis",
+      "Monitor with thyroid function tests and track population status with median urinary iodine concentration",
+      "Refer children with developmental delay for neurodevelopmental assessment and early intervention",
+      "Consider surgery for large, compressive or obstructive goitre"
     ]
-   ],
-   "caption": "Overview comparison matrix for iodine deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "iodine-deficiency-real-image",
-   "title": "Iodine deficiency: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "iodine_deficiency-pathway",
+      "title": "Iodine deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Iodine deficiency is the leading preventable cause of goitre and of acquired intellectual disability worldwide",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Deficiency in pregnancy threatening fetal neurodevelopment",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Thyroid function tests including TSH and free thyroid hormones, Urinary iodine concentration for assessing population and individual status, Thyroid ultrasound to characterise goitre or nodules"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Correct the deficiency through universal salt iodisation and iodine supplementation delivered at physiological population levels"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Relying on individual blood iodine levels rather than urinary iodine for status assessment"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of iodine deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "iodine_deficiency-matrix",
+      "title": "Iodine deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Iodine deficiency is the leading preventable cause of goitre and of acquired intellectual disability worldwide",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Thyroid function tests including TSH and free thyroid hormones, Urinary iodine concentration for assessing population and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Autoimmune thyroid disease (Hashimoto or Graves), Sporadic non-toxic goitre and thyroid nodules, Congenital hypothyroidism from",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Correct the deficiency through universal salt iodisation and iodine supplementation delivered at physiological population levels",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Relying on individual blood iodine levels rather than urinary iodine for status assessment",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for iodine deficiency."
+    }
+  ],
+  "diagrams": []
 }

@@ -1,176 +1,154 @@
 {
- "id": "hemolytic_uremic_syndrome",
- "name": "Haemolytic uraemic syndrome",
- "aliases": [
-  "HUS",
-  "hemolytic uremic syndrome",
-  "atypical HUS",
-  "aHUS",
-  "STEC-HUS"
- ],
- "class": "non_infective",
- "system": "Haematology",
- "specialty": "Haematology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine",
-  "sourceEdition": "22e",
-  "pages": null,
-  "clinicalPearls": [
-   "A thrombotic microangiopathy defined by the triad of microangiopathic haemolytic anaemia, thrombocytopenia, and acute kidney injury",
-   "The typical form follows a Shiga-toxin-producing enteric infection (often E. coli O157:H7), classically preceded by bloody diarrhoea, and predominantly affects children",
-   "Atypical HUS results from dysregulated activation of the alternative complement pathway, is often familial, and tends to relapse and progress to end-stage renal disease",
-   "The blood film shows fragmented red cells (schistocytes) with a raised LDH, low haptoglobin, and a negative direct antiglobulin test, indicating mechanical (non-immune) haemolysis",
-   "Renal involvement dominates the clinical picture, distinguishing HUS from thrombotic thrombocytopenic purpura, in which neurological features and severe ADAMTS13 deficiency predominate",
-   "Measuring ADAMTS13 activity helps separate TTP (severely reduced) from HUS (usually normal or only modestly reduced), which is critical because treatments differ",
-   "Shiga-toxin-associated HUS is largely managed with meticulous supportive care and dialysis when needed, and antibiotics are generally avoided as they may worsen toxin release",
-   "Complement-mediated atypical HUS responds to terminal complement blockade, which has substantially improved renal and overall outcomes"
+  "id": "hemolytic_uremic_syndrome",
+  "name": "Haemolytic uraemic syndrome",
+  "aliases": [
+    "HUS",
+    "hemolytic uremic syndrome",
+    "atypical HUS",
+    "aHUS",
+    "STEC-HUS"
   ],
-  "pathophysiology": "HUS is a thrombotic microangiopathy in which endothelial injury triggers platelet-rich microthrombi in small vessels, especially the renal microvasculature. In Shiga-toxin-associated disease, toxin absorbed from the gut binds glomerular and endothelial cells, causing injury, platelet activation, and microvascular thrombosis. In atypical HUS, uncontrolled activation of the alternative complement pathway, from inherited or acquired defects in complement regulatory proteins, drives endothelial damage. The resulting microthrombi mechanically shear passing red cells (producing schistocytes and haemolysis), consume platelets (causing thrombocytopenia), and obstruct renal perfusion (causing acute kidney injury).",
-  "additionalDifferentials": [
-   "Thrombotic thrombocytopenic purpura",
-   "Disseminated intravascular coagulation",
-   "Severe pre-eclampsia / HELLP syndrome",
-   "Malignant hypertension causing microangiopathy",
-   "Systemic vasculitis or scleroderma renal crisis",
-   "Drug-induced thrombotic microangiopathy"
-  ],
-  "additionalInvestigations": [
-   "Full blood count and blood film for schistocytes and thrombocytopenia",
-   "Haemolysis markers: LDH, haptoglobin, bilirubin, and a direct antiglobulin test (expected negative)",
-   "Renal function, urinalysis, and monitoring of urine output",
-   "Stool testing and culture for Shiga-toxin-producing organisms",
-   "ADAMTS13 activity to exclude thrombotic thrombocytopenic purpura",
-   "Complement studies and genetic testing for regulatory protein defects in suspected atypical HUS"
-  ],
-  "redFlags": [
-   "Rapidly progressive acute kidney injury with oliguria or anuria requiring urgent dialysis",
-   "Severe thrombocytopenia with active bleeding",
-   "Neurological deterioration raising concern for overlapping TTP or CNS involvement",
-   "Hyperkalaemia, fluid overload, or refractory hypertension as life-threatening complications of renal failure"
-  ],
-  "prognosis": "Shiga-toxin-associated HUS in children often recovers with supportive care, though a minority sustain chronic kidney damage; atypical, complement-mediated HUS historically carried a high risk of end-stage renal disease and death, but outcomes have improved markedly with complement-blocking therapy.",
-  "pitfalls": [
-   "Confusing HUS with TTP and delaying the correct treatment; ADAMTS13 testing helps distinguish them",
-   "Giving antibiotics in Shiga-toxin-associated HUS, which may increase toxin release and worsen disease",
-   "Attributing thrombocytopenia and anaemia to sepsis or DIC without examining the film for schistocytes",
-   "Failing to consider atypical HUS in relapsing or familial disease and missing the opportunity for complement inhibition",
-   "Transfusing platelets reflexively, which can aggravate microvascular thrombosis"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "In diarrhoea-associated (Shiga-toxin) disease, give supportive care alone and avoid antibiotics and antimotility agents, which may worsen toxin release",
-   "In atypical, complement-mediated disease, initiate terminal complement blockade with a C5-inhibiting monoclonal antibody such as eculizumab, with meningococcal vaccination and antibiotic prophylaxis before treatment",
-   "Commence plasma exchange empirically when thrombotic thrombocytopenic purpura cannot yet be excluded, pending ADAMTS13 results",
-   "Provide supportive care with careful fluid and electrolyte correction, control of hypertension, and transfusion of red cells for symptomatic anaemia",
-   "Institute renal replacement therapy for oliguric acute kidney injury, fluid overload, or refractory electrolyte disturbance",
-   "Monitor haemolysis markers, platelet count, and renal function to track response and detect relapse",
-   "Refer to nephrology and haematology, and arrange complement genetic testing with family screening and counselling in atypical disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hemolytic_uremic_syndrome-pathway",
-   "title": "Haemolytic uraemic syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A thrombotic microangiopathy defined by the triad of microangiopathic haemolytic anaemia, thrombocytopenia, and acute kidney injury",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly progressive acute kidney injury with oliguria or anuria requiring urgent dialysis",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full blood count and blood film for schistocytes and thrombocytopenia, Haemolysis markers: LDH, haptoglobin, bilirubin, and a direct antiglobulin test (expected negative), Renal function, urinalysis, and monitoring of"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: In diarrhoea-associated (Shiga-toxin) disease, give supportive care alone and avoid antibiotics and antimotility agents, which may worsen toxin release"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Confusing HUS with TTP and delaying the correct treatment; ADAMTS13 testing helps distinguish them"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of haemolytic uraemic syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "hemolytic_uremic_syndrome-matrix",
-   "title": "Haemolytic uraemic syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A thrombotic microangiopathy defined by the triad of microangiopathic haemolytic anaemia, thrombocytopenia, and acute kidney",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Haematology",
+  "specialty": "Haematology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine",
+    "sourceEdition": "22e",
+    "pages": null,
+    "clinicalPearls": [
+      "A thrombotic microangiopathy defined by the triad of microangiopathic haemolytic anaemia, thrombocytopenia, and acute kidney injury",
+      "The typical form follows a Shiga-toxin-producing enteric infection (often E. coli O157:H7), classically preceded by bloody diarrhoea, and predominantly affects children",
+      "Atypical HUS results from dysregulated activation of the alternative complement pathway, is often familial, and tends to relapse and progress to end-stage renal disease",
+      "The blood film shows fragmented red cells (schistocytes) with a raised LDH, low haptoglobin, and a negative direct antiglobulin test, indicating mechanical (non-immune) haemolysis",
+      "Renal involvement dominates the clinical picture, distinguishing HUS from thrombotic thrombocytopenic purpura, in which neurological features and severe ADAMTS13 deficiency predominate",
+      "Measuring ADAMTS13 activity helps separate TTP (severely reduced) from HUS (usually normal or only modestly reduced), which is critical because treatments differ",
+      "Shiga-toxin-associated HUS is largely managed with meticulous supportive care and dialysis when needed, and antibiotics are generally avoided as they may worsen toxin release",
+      "Complement-mediated atypical HUS responds to terminal complement blockade, which has substantially improved renal and overall outcomes"
     ],
-    [
-     "Key Investigations",
-     "Full blood count and blood film for schistocytes and thrombocytopenia, Haemolysis markers: LDH, haptoglobin, bilirubin, and a",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "HUS is a thrombotic microangiopathy in which endothelial injury triggers platelet-rich microthrombi in small vessels, especially the renal microvasculature. In Shiga-toxin-associated disease, toxin absorbed from the gut binds glomerular and endothelial cells, causing injury, platelet activation, and microvascular thrombosis. In atypical HUS, uncontrolled activation of the alternative complement pathway, from inherited or acquired defects in complement regulatory proteins, drives endothelial damage. The resulting microthrombi mechanically shear passing red cells (producing schistocytes and haemolysis), consume platelets (causing thrombocytopenia), and obstruct renal perfusion (causing acute kidney injury).",
+    "additionalDifferentials": [
+      "Thrombotic thrombocytopenic purpura",
+      "Disseminated intravascular coagulation",
+      "Severe pre-eclampsia / HELLP syndrome",
+      "Malignant hypertension causing microangiopathy",
+      "Systemic vasculitis or scleroderma renal crisis",
+      "Drug-induced thrombotic microangiopathy"
     ],
-    [
-     "Primary Differentials",
-     "Thrombotic thrombocytopenic purpura, Disseminated intravascular coagulation, Severe pre-eclampsia / HELLP syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full blood count and blood film for schistocytes and thrombocytopenia",
+      "Haemolysis markers: LDH, haptoglobin, bilirubin, and a direct antiglobulin test (expected negative)",
+      "Renal function, urinalysis, and monitoring of urine output",
+      "Stool testing and culture for Shiga-toxin-producing organisms",
+      "ADAMTS13 activity to exclude thrombotic thrombocytopenic purpura",
+      "Complement studies and genetic testing for regulatory protein defects in suspected atypical HUS"
     ],
-    [
-     "Management Strategy",
-     "In diarrhoea-associated (Shiga-toxin) disease, give supportive care alone and avoid antibiotics and antimotility agents, which",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly progressive acute kidney injury with oliguria or anuria requiring urgent dialysis",
+      "Severe thrombocytopenia with active bleeding",
+      "Neurological deterioration raising concern for overlapping TTP or CNS involvement",
+      "Hyperkalaemia, fluid overload, or refractory hypertension as life-threatening complications of renal failure"
     ],
-    [
-     "Clinical Pitfall",
-     "Confusing HUS with TTP and delaying the correct treatment; ADAMTS13 testing helps distinguish them",
-     "Prevent diagnostic or management error"
+    "prognosis": "Shiga-toxin-associated HUS in children often recovers with supportive care, though a minority sustain chronic kidney damage; atypical, complement-mediated HUS historically carried a high risk of end-stage renal disease and death, but outcomes have improved markedly with complement-blocking therapy.",
+    "pitfalls": [
+      "Confusing HUS with TTP and delaying the correct treatment; ADAMTS13 testing helps distinguish them",
+      "Giving antibiotics in Shiga-toxin-associated HUS, which may increase toxin release and worsen disease",
+      "Attributing thrombocytopenia and anaemia to sepsis or DIC without examining the film for schistocytes",
+      "Failing to consider atypical HUS in relapsing or familial disease and missing the opportunity for complement inhibition",
+      "Transfusing platelets reflexively, which can aggravate microvascular thrombosis"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "In diarrhoea-associated (Shiga-toxin) disease, give supportive care alone and avoid antibiotics and antimotility agents, which may worsen toxin release",
+      "In atypical, complement-mediated disease, initiate terminal complement blockade with a C5-inhibiting monoclonal antibody such as eculizumab, with meningococcal vaccination and antibiotic prophylaxis before treatment",
+      "Commence plasma exchange empirically when thrombotic thrombocytopenic purpura cannot yet be excluded, pending ADAMTS13 results",
+      "Provide supportive care with careful fluid and electrolyte correction, control of hypertension, and transfusion of red cells for symptomatic anaemia",
+      "Institute renal replacement therapy for oliguric acute kidney injury, fluid overload, or refractory electrolyte disturbance",
+      "Monitor haemolysis markers, platelet count, and renal function to track response and detect relapse",
+      "Refer to nephrology and haematology, and arrange complement genetic testing with family screening and counselling in atypical disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for haemolytic uraemic syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hemolytic-uremic-syndrome-real-image",
-   "title": "Haemolytic uraemic syndrome: Diagnostic Peripheral Blood Smear Examination",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/normal-blood-smear.jpg?v=kbri3",
-   "caption": "High-power microscopic Giemsa-stained peripheral blood smear displaying erythrocyte morphology, leukocyte differentiation, and platelet estimation.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Erythrocyte Indices",
-     "description": "Normocytic normochromic cell size, central pallor, and membrane stability."
-    },
-    {
-     "label": "Leukocyte Differential",
-     "description": "Nuclear lobulation, cytoplasmic granules, and mature lineage ratios."
-    },
-    {
-     "label": "Platelet Count",
-     "description": "Thrombocyte density, granule distribution, and clumping evaluation."
+      "id": "hemolytic_uremic_syndrome-pathway",
+      "title": "Haemolytic uraemic syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A thrombotic microangiopathy defined by the triad of microangiopathic haemolytic anaemia, thrombocytopenia, and acute kidney injury",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly progressive acute kidney injury with oliguria or anuria requiring urgent dialysis",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full blood count and blood film for schistocytes and thrombocytopenia, Haemolysis markers: LDH, haptoglobin, bilirubin, and a direct antiglobulin test (expected negative), Renal function, urinalysis, and monitoring of"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: In diarrhoea-associated (Shiga-toxin) disease, give supportive care alone and avoid antibiotics and antimotility agents, which may worsen toxin release"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Confusing HUS with TTP and delaying the correct treatment; ADAMTS13 testing helps distinguish them"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of haemolytic uraemic syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hemolytic_uremic_syndrome-matrix",
+      "title": "Haemolytic uraemic syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A thrombotic microangiopathy defined by the triad of microangiopathic haemolytic anaemia, thrombocytopenia, and acute kidney",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full blood count and blood film for schistocytes and thrombocytopenia, Haemolysis markers: LDH, haptoglobin, bilirubin, and a",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Thrombotic thrombocytopenic purpura, Disseminated intravascular coagulation, Severe pre-eclampsia / HELLP syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "In diarrhoea-associated (Shiga-toxin) disease, give supportive care alone and avoid antibiotics and antimotility agents, which",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Confusing HUS with TTP and delaying the correct treatment; ADAMTS13 testing helps distinguish them",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for haemolytic uraemic syndrome."
+    }
+  ],
+  "diagrams": []
 }

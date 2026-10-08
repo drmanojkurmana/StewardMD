@@ -1,177 +1,155 @@
 {
- "id": "megacystis_microcolon_intestinal_hypoperistalsis",
- "name": "Megacystis-microcolon-intestinal hypoperistalsis syndrome",
- "aliases": [
-  "MMIHS",
-  "Berdon syndrome"
- ],
- "class": "non_infective",
- "system": "Gastrointestinal / Genitourinary (visceral smooth muscle)",
- "specialty": "Paediatric surgery",
- "referenceOnly": true,
- "reference": {
-  "source": "Clinical genetics and paediatric surgery references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Rare, severe congenital visceral myopathy defined by a massively distended, non-obstructed urinary bladder (megacystis), a narrow unused microcolon and intestinal hypoperistalsis.",
-   "In contrast to most neonatal obstructive disorders, it shows a female predominance.",
-   "The commonest cause is a heterozygous, usually de novo, variant in ACTG2, encoding smooth-muscle gamma-actin; autosomal recessive forms involve other contractile-apparatus genes such as MYH11, LMOD1, MYLK and MYL9.",
-   "Antenatal clues include an enlarged fetal bladder with upper urinary tract dilatation.",
-   "Neonates present with abdominal distension, bilious vomiting, failure to pass meconium and functional urinary retention requiring catheterisation.",
-   "Enteric ganglion cells are present, which distinguishes the condition from Hirschsprung disease.",
-   "Malrotation is a frequent association.",
-   "Most affected infants develop intestinal failure and become dependent on parenteral nutrition."
+  "id": "megacystis_microcolon_intestinal_hypoperistalsis",
+  "name": "Megacystis-microcolon-intestinal hypoperistalsis syndrome",
+  "aliases": [
+    "MMIHS",
+    "Berdon syndrome"
   ],
-  "pathophysiology": "The syndrome is a congenital visceral myopathy in which the smooth muscle of the bladder and gastrointestinal tract fails to generate effective contraction despite the absence of any mechanical obstruction. The commonest genetic cause is a heterozygous, usually de novo, variant in ACTG2, which encodes enteric smooth-muscle gamma-actin; such variants act in a dominant-negative fashion, impairing actin polymerisation and thus force generation. Autosomal recessive forms arise from biallelic variants in other genes of the contractile apparatus and its regulation, such as MYH11, LMOD1, MYLK and MYL9. The consequence is ineffective peristalsis: the bladder becomes massively distended and thin-walled with functional urinary retention and secondary upper-tract dilatation, while the small intestine shows hypoperistalsis or aperistalsis and the unused distal bowel remains narrow as a microcolon. Histology may reveal vacuolar degeneration of smooth muscle, at times with fibrosis, but enteric ganglion cells are characteristically preserved, which is central to distinguishing the condition from Hirschsprung disease.",
-  "additionalDifferentials": [
-   "Hirschsprung disease (aganglionosis, whereas ganglion cells are present here)",
-   "Chronic intestinal pseudo-obstruction of other cause",
-   "Prune belly (Eagle-Barrett) syndrome",
-   "Posterior urethral valves and other mechanical bladder outlet obstruction",
-   "Meconium ileus and cystic fibrosis",
-   "Intestinal atresia"
-  ],
-  "additionalInvestigations": [
-   "Antenatal and postnatal ultrasound of the bladder and urinary tract",
-   "Contrast studies demonstrating microcolon, malrotation and a functional, non-mechanical obstruction",
-   "Genetic testing beginning with ACTG2, followed by a panel for recessive visceral-myopathy genes",
-   "Full-thickness intestinal biopsy showing visceral myopathy with preserved ganglion cells",
-   "Rectal biopsy to exclude Hirschsprung disease",
-   "Bladder catheterisation and urodynamic assessment"
-  ],
-  "redFlags": [
-   "An antenatally enlarged fetal bladder (megacystis)",
-   "Bilious vomiting with abdominal distension and failure to pass meconium",
-   "Inability to establish enteral feeding and wean from parenteral nutrition",
-   "Recurrent central venous line sepsis and intestinal-failure-associated liver disease",
-   "Progressive upper urinary tract dilatation with declining renal function"
-  ],
-  "prognosis": "Historically associated with high early mortality from intestinal failure, sepsis and complications of long-term parenteral nutrition. Survival has improved with contemporary intestinal-failure care and intestinal or multivisceral transplantation, although morbidity remains substantial.",
-  "pitfalls": [
-   "Mistaking the functional obstruction for a mechanical one and performing futile bowel resections",
-   "Confusing the condition with Hirschsprung disease despite the presence of ganglion cells",
-   "Attributing the megacystis solely to urological outlet obstruction",
-   "Overlooking associated malrotation",
-   "Underusing antenatal bladder findings as an early diagnostic clue"
-  ],
-  "references": [
-   "Clinical genetics references",
-   "Paediatric surgery reference texts",
-   "Paediatric gastroenterology and intestinal failure references"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Decompress the massively distended bladder with intermittent catheterisation or vesicostomy to relieve functional urinary retention and protect the upper renal tracts",
-   "Manage intestinal failure with total parenteral nutrition, attempting cautious enteral feeding as tolerated since prokinetic agents are generally ineffective in this visceral myopathy",
-   "Maintain meticulous central venous catheter care and treat line-associated and urinary sepsis promptly with appropriate antimicrobials",
-   "Use surgical measures such as decompressive or diverting stomas for the functional obstruction rather than expecting mechanical relief",
-   "Refer early to an intestinal-failure centre for consideration of isolated intestinal or multivisceral transplantation",
-   "Coordinate multidisciplinary paediatric surgical, urological, nutritional and gastroenterological care",
-   "Offer genetic counselling and family testing given the dominant ACTG2 and recessive contractile-apparatus gene causes",
-   "Escalate promptly for sepsis, upper urinary tract deterioration or parenteral-nutrition-associated liver disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "megacystis_microcolon_intestinal_hypoperistalsis-pathway",
-   "title": "Megacystis-microcolon-intestinal hypoperistalsis syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Rare, severe congenital visceral myopathy defined by a massively distended, non-obstructed urinary bladder (megacystis), a narrow unused microcolon and intestinal hypoperistalsis.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: An antenatally enlarged fetal bladder (megacystis)",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Antenatal and postnatal ultrasound of the bladder and urinary tract, Contrast studies demonstrating microcolon, malrotation and a functional, non-mechanical obstruction, Genetic testing beginning with ACTG2, followed by a"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Decompress the massively distended bladder with intermittent catheterisation or vesicostomy to relieve functional urinary retention and protect the upper renal tracts"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking the functional obstruction for a mechanical one and performing futile bowel resections"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of megacystis-microcolon-intestinal hypoperistalsis syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "megacystis_microcolon_intestinal_hypoperistalsis-matrix",
-   "title": "Megacystis-microcolon-intestinal hypoperistalsis syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Rare, severe congenital visceral myopathy defined by a massively distended, non-obstructed urinary bladder (megacystis), a narrow",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastrointestinal / Genitourinary (visceral smooth muscle)",
+  "specialty": "Paediatric surgery",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Clinical genetics and paediatric surgery references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Rare, severe congenital visceral myopathy defined by a massively distended, non-obstructed urinary bladder (megacystis), a narrow unused microcolon and intestinal hypoperistalsis.",
+      "In contrast to most neonatal obstructive disorders, it shows a female predominance.",
+      "The commonest cause is a heterozygous, usually de novo, variant in ACTG2, encoding smooth-muscle gamma-actin; autosomal recessive forms involve other contractile-apparatus genes such as MYH11, LMOD1, MYLK and MYL9.",
+      "Antenatal clues include an enlarged fetal bladder with upper urinary tract dilatation.",
+      "Neonates present with abdominal distension, bilious vomiting, failure to pass meconium and functional urinary retention requiring catheterisation.",
+      "Enteric ganglion cells are present, which distinguishes the condition from Hirschsprung disease.",
+      "Malrotation is a frequent association.",
+      "Most affected infants develop intestinal failure and become dependent on parenteral nutrition."
     ],
-    [
-     "Key Investigations",
-     "Antenatal and postnatal ultrasound of the bladder and urinary tract, Contrast studies demonstrating microcolon, malrotation and a",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The syndrome is a congenital visceral myopathy in which the smooth muscle of the bladder and gastrointestinal tract fails to generate effective contraction despite the absence of any mechanical obstruction. The commonest genetic cause is a heterozygous, usually de novo, variant in ACTG2, which encodes enteric smooth-muscle gamma-actin; such variants act in a dominant-negative fashion, impairing actin polymerisation and thus force generation. Autosomal recessive forms arise from biallelic variants in other genes of the contractile apparatus and its regulation, such as MYH11, LMOD1, MYLK and MYL9. The consequence is ineffective peristalsis: the bladder becomes massively distended and thin-walled with functional urinary retention and secondary upper-tract dilatation, while the small intestine shows hypoperistalsis or aperistalsis and the unused distal bowel remains narrow as a microcolon. Histology may reveal vacuolar degeneration of smooth muscle, at times with fibrosis, but enteric ganglion cells are characteristically preserved, which is central to distinguishing the condition from Hirschsprung disease.",
+    "additionalDifferentials": [
+      "Hirschsprung disease (aganglionosis, whereas ganglion cells are present here)",
+      "Chronic intestinal pseudo-obstruction of other cause",
+      "Prune belly (Eagle-Barrett) syndrome",
+      "Posterior urethral valves and other mechanical bladder outlet obstruction",
+      "Meconium ileus and cystic fibrosis",
+      "Intestinal atresia"
     ],
-    [
-     "Primary Differentials",
-     "Hirschsprung disease (aganglionosis, whereas ganglion cells are present here), Chronic intestinal pseudo-obstruction of other",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Antenatal and postnatal ultrasound of the bladder and urinary tract",
+      "Contrast studies demonstrating microcolon, malrotation and a functional, non-mechanical obstruction",
+      "Genetic testing beginning with ACTG2, followed by a panel for recessive visceral-myopathy genes",
+      "Full-thickness intestinal biopsy showing visceral myopathy with preserved ganglion cells",
+      "Rectal biopsy to exclude Hirschsprung disease",
+      "Bladder catheterisation and urodynamic assessment"
     ],
-    [
-     "Management Strategy",
-     "Decompress the massively distended bladder with intermittent catheterisation or vesicostomy to relieve functional urinary",
-     "Core treatment modality"
+    "redFlags": [
+      "An antenatally enlarged fetal bladder (megacystis)",
+      "Bilious vomiting with abdominal distension and failure to pass meconium",
+      "Inability to establish enteral feeding and wean from parenteral nutrition",
+      "Recurrent central venous line sepsis and intestinal-failure-associated liver disease",
+      "Progressive upper urinary tract dilatation with declining renal function"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking the functional obstruction for a mechanical one and performing futile bowel resections",
-     "Prevent diagnostic or management error"
+    "prognosis": "Historically associated with high early mortality from intestinal failure, sepsis and complications of long-term parenteral nutrition. Survival has improved with contemporary intestinal-failure care and intestinal or multivisceral transplantation, although morbidity remains substantial.",
+    "pitfalls": [
+      "Mistaking the functional obstruction for a mechanical one and performing futile bowel resections",
+      "Confusing the condition with Hirschsprung disease despite the presence of ganglion cells",
+      "Attributing the megacystis solely to urological outlet obstruction",
+      "Overlooking associated malrotation",
+      "Underusing antenatal bladder findings as an early diagnostic clue"
+    ],
+    "references": [
+      "Clinical genetics references",
+      "Paediatric surgery reference texts",
+      "Paediatric gastroenterology and intestinal failure references"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Decompress the massively distended bladder with intermittent catheterisation or vesicostomy to relieve functional urinary retention and protect the upper renal tracts",
+      "Manage intestinal failure with total parenteral nutrition, attempting cautious enteral feeding as tolerated since prokinetic agents are generally ineffective in this visceral myopathy",
+      "Maintain meticulous central venous catheter care and treat line-associated and urinary sepsis promptly with appropriate antimicrobials",
+      "Use surgical measures such as decompressive or diverting stomas for the functional obstruction rather than expecting mechanical relief",
+      "Refer early to an intestinal-failure centre for consideration of isolated intestinal or multivisceral transplantation",
+      "Coordinate multidisciplinary paediatric surgical, urological, nutritional and gastroenterological care",
+      "Offer genetic counselling and family testing given the dominant ACTG2 and recessive contractile-apparatus gene causes",
+      "Escalate promptly for sepsis, upper urinary tract deterioration or parenteral-nutrition-associated liver disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for megacystis-microcolon-intestinal hypoperistalsis syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "megacystis-microcolon-intestinal-hypoperistalsis-real-image",
-   "title": "Megacystis-microcolon-intestinal hypoperistalsis syndrome: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "megacystis_microcolon_intestinal_hypoperistalsis-pathway",
+      "title": "Megacystis-microcolon-intestinal hypoperistalsis syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Rare, severe congenital visceral myopathy defined by a massively distended, non-obstructed urinary bladder (megacystis), a narrow unused microcolon and intestinal hypoperistalsis.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: An antenatally enlarged fetal bladder (megacystis)",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Antenatal and postnatal ultrasound of the bladder and urinary tract, Contrast studies demonstrating microcolon, malrotation and a functional, non-mechanical obstruction, Genetic testing beginning with ACTG2, followed by a"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Decompress the massively distended bladder with intermittent catheterisation or vesicostomy to relieve functional urinary retention and protect the upper renal tracts"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking the functional obstruction for a mechanical one and performing futile bowel resections"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of megacystis-microcolon-intestinal hypoperistalsis syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "megacystis_microcolon_intestinal_hypoperistalsis-matrix",
+      "title": "Megacystis-microcolon-intestinal hypoperistalsis syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Rare, severe congenital visceral myopathy defined by a massively distended, non-obstructed urinary bladder (megacystis), a narrow",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Antenatal and postnatal ultrasound of the bladder and urinary tract, Contrast studies demonstrating microcolon, malrotation and a",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Hirschsprung disease (aganglionosis, whereas ganglion cells are present here), Chronic intestinal pseudo-obstruction of other",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Decompress the massively distended bladder with intermittent catheterisation or vesicostomy to relieve functional urinary",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking the functional obstruction for a mechanical one and performing futile bowel resections",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for megacystis-microcolon-intestinal hypoperistalsis syndrome."
+    }
+  ],
+  "diagrams": []
 }

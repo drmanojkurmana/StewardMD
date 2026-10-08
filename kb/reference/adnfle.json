@@ -1,174 +1,152 @@
 {
- "id": "adnfle",
- "name": "Autosomal dominant sleep-related hypermotor epilepsy",
- "aliases": [
-  "ADSHE",
-  "autosomal dominant nocturnal frontal lobe epilepsy",
-  "ADNFLE",
-  "nocturnal frontal lobe epilepsy"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurology",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Autosomal dominant focal epilepsy classically linked to variants in neuronal nicotinic acetylcholine receptor subunit genes CHRNA4, CHRNB2 and CHRNA2, with additional cases from KCNT1 and DEPDC5",
-   "Seizures arise predominantly from sleep and consist of clusters of brief, stereotyped hypermotor events with dystonic or hyperkinetic posturing",
-   "Attacks are often abrupt, occur multiple times a night and may include vocalisation, thrashing or complex motor automatisms with preserved or rapidly recovered awareness",
-   "The nocturnal, stereotyped and clustering pattern frequently leads to misdiagnosis as a parasomnia or non-epileptic sleep disorder",
-   "Interictal and even ictal scalp EEG can be normal, so a normal EEG does not exclude the diagnosis",
-   "Video-EEG and polysomnography help distinguish these seizures from arousal parasomnias and REM behaviour disorder",
-   "KCNT1-related disease tends to be more severe and drug-resistant, sometimes with cognitive or psychiatric comorbidity"
+  "id": "adnfle",
+  "name": "Autosomal dominant sleep-related hypermotor epilepsy",
+  "aliases": [
+    "ADSHE",
+    "autosomal dominant nocturnal frontal lobe epilepsy",
+    "ADNFLE",
+    "nocturnal frontal lobe epilepsy"
   ],
-  "pathophysiology": "This disorder, now termed autosomal dominant sleep-related hypermotor epilepsy, is most often caused by gain-of-function variants in genes encoding subunits of the neuronal nicotinic acetylcholine receptor (CHRNA4, CHRNB2, CHRNA2), which alter cholinergic modulation of thalamocortical and frontal networks during sleep. Additional causes include KCNT1, encoding a sodium-activated potassium channel, and DEPDC5, part of the GATOR1 complex regulating the mTOR pathway. Abnormal excitability of frontal-lobe circuits during non-REM sleep generates the recurrent, brief, stereotyped hypermotor seizures, and the sleep-state dependence reflects the physiological modulation of these networks across the sleep-wake cycle.",
-  "additionalDifferentials": [
-   "Non-REM arousal parasomnias (confusional arousals, sleep terrors, sleepwalking)",
-   "REM sleep behaviour disorder",
-   "Periodic limb movement disorder",
-   "Nocturnal panic attacks",
-   "Psychogenic non-epileptic events",
-   "Other structural or genetic focal epilepsies"
-  ],
-  "additionalInvestigations": [
-   "Video-EEG monitoring to capture and characterise nocturnal events",
-   "Polysomnography to distinguish seizures from parasomnias and sleep disorders",
-   "Brain MRI to look for focal cortical dysplasia or other structural causes",
-   "Genetic testing including CHRNA4, CHRNB2, CHRNA2, KCNT1 and DEPDC5",
-   "Detailed sleep and family history with attack description from a bed partner",
-   "Home video recording of typical events"
-  ],
-  "redFlags": [
-   "Injuries sustained during violent nocturnal events",
-   "Daytime seizures or evolving neurological deficits suggesting a structural lesion",
-   "Drug-resistant seizures, particularly with KCNT1 variants",
-   "Cognitive or psychiatric decline requiring further evaluation"
-  ],
-  "prognosis": "Seizures often persist through life but are typically well controlled with appropriate antiseizure medication, and cognition is usually preserved in the common receptor-subunit forms. KCNT1-related disease carries a less favourable outlook, being more often drug-resistant and associated with cognitive and behavioural difficulties.",
-  "pitfalls": [
-   "Dismissing recurrent nocturnal events as parasomnias and delaying epilepsy diagnosis",
-   "Concluding that a normal scalp EEG excludes the condition",
-   "Failing to obtain video or polysomnographic evidence to characterise events",
-   "Not recognising that KCNT1-associated disease may need a different, targeted therapeutic approach"
-  ],
-  "references": [
-   "Bradley and Daroff Neurology in Clinical Practice",
-   "ILAE classification and epilepsy syndrome resources"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat with antiseizure medication, with carbamazepine or oxcarbazepine classically effective for the receptor-subunit forms",
-   "Use alternative or adjunctive antiseizure agents for incomplete control, considering targeted therapy such as quinidine in KCNT1-related disease",
-   "Advise good sleep hygiene and avoidance of sleep deprivation and other seizure triggers",
-   "Confirm the diagnosis and exclude parasomnia with video-EEG and polysomnography before committing to long-term therapy",
-   "Monitor seizure frequency and medication tolerability with a seizure diary",
-   "Offer genetic counselling and family assessment given the autosomal dominant inheritance",
-   "Refer to an epilepsy specialist for drug-resistant seizures and evaluate for a focal structural cause such as cortical dysplasia in DEPDC5-related disease amenable to surgery"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "adnfle-pathway",
-   "title": "Autosomal dominant sleep-related hypermotor epilepsy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Autosomal dominant focal epilepsy classically linked to variants in neuronal nicotinic acetylcholine receptor subunit genes CHRNA4, CHRNB2 and CHRNA2, with additional cases from KCNT1 and DEPDC5",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Injuries sustained during violent nocturnal events",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Video-EEG monitoring to capture and characterise nocturnal events, Polysomnography to distinguish seizures from parasomnias and sleep disorders, Brain MRI to look for focal cortical dysplasia or other structural causes"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat with antiseizure medication, with carbamazepine or oxcarbazepine classically effective for the receptor-subunit forms"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing recurrent nocturnal events as parasomnias and delaying epilepsy diagnosis"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of autosomal dominant sleep-related hypermotor epilepsy."
-  }
- ],
- "tables": [
-  {
-   "id": "adnfle-matrix",
-   "title": "Autosomal dominant sleep-related hypermotor epilepsy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Autosomal dominant focal epilepsy classically linked to variants in neuronal nicotinic acetylcholine receptor subunit genes",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurology",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Autosomal dominant focal epilepsy classically linked to variants in neuronal nicotinic acetylcholine receptor subunit genes CHRNA4, CHRNB2 and CHRNA2, with additional cases from KCNT1 and DEPDC5",
+      "Seizures arise predominantly from sleep and consist of clusters of brief, stereotyped hypermotor events with dystonic or hyperkinetic posturing",
+      "Attacks are often abrupt, occur multiple times a night and may include vocalisation, thrashing or complex motor automatisms with preserved or rapidly recovered awareness",
+      "The nocturnal, stereotyped and clustering pattern frequently leads to misdiagnosis as a parasomnia or non-epileptic sleep disorder",
+      "Interictal and even ictal scalp EEG can be normal, so a normal EEG does not exclude the diagnosis",
+      "Video-EEG and polysomnography help distinguish these seizures from arousal parasomnias and REM behaviour disorder",
+      "KCNT1-related disease tends to be more severe and drug-resistant, sometimes with cognitive or psychiatric comorbidity"
     ],
-    [
-     "Key Investigations",
-     "Video-EEG monitoring to capture and characterise nocturnal events, Polysomnography to distinguish seizures from parasomnias and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "This disorder, now termed autosomal dominant sleep-related hypermotor epilepsy, is most often caused by gain-of-function variants in genes encoding subunits of the neuronal nicotinic acetylcholine receptor (CHRNA4, CHRNB2, CHRNA2), which alter cholinergic modulation of thalamocortical and frontal networks during sleep. Additional causes include KCNT1, encoding a sodium-activated potassium channel, and DEPDC5, part of the GATOR1 complex regulating the mTOR pathway. Abnormal excitability of frontal-lobe circuits during non-REM sleep generates the recurrent, brief, stereotyped hypermotor seizures, and the sleep-state dependence reflects the physiological modulation of these networks across the sleep-wake cycle.",
+    "additionalDifferentials": [
+      "Non-REM arousal parasomnias (confusional arousals, sleep terrors, sleepwalking)",
+      "REM sleep behaviour disorder",
+      "Periodic limb movement disorder",
+      "Nocturnal panic attacks",
+      "Psychogenic non-epileptic events",
+      "Other structural or genetic focal epilepsies"
     ],
-    [
-     "Primary Differentials",
-     "Non-REM arousal parasomnias (confusional arousals, sleep terrors, sleepwalking), REM sleep behaviour disorder, Periodic limb",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Video-EEG monitoring to capture and characterise nocturnal events",
+      "Polysomnography to distinguish seizures from parasomnias and sleep disorders",
+      "Brain MRI to look for focal cortical dysplasia or other structural causes",
+      "Genetic testing including CHRNA4, CHRNB2, CHRNA2, KCNT1 and DEPDC5",
+      "Detailed sleep and family history with attack description from a bed partner",
+      "Home video recording of typical events"
     ],
-    [
-     "Management Strategy",
-     "Treat with antiseizure medication, with carbamazepine or oxcarbazepine classically effective for the receptor-subunit forms",
-     "Core treatment modality"
+    "redFlags": [
+      "Injuries sustained during violent nocturnal events",
+      "Daytime seizures or evolving neurological deficits suggesting a structural lesion",
+      "Drug-resistant seizures, particularly with KCNT1 variants",
+      "Cognitive or psychiatric decline requiring further evaluation"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing recurrent nocturnal events as parasomnias and delaying epilepsy diagnosis",
-     "Prevent diagnostic or management error"
+    "prognosis": "Seizures often persist through life but are typically well controlled with appropriate antiseizure medication, and cognition is usually preserved in the common receptor-subunit forms. KCNT1-related disease carries a less favourable outlook, being more often drug-resistant and associated with cognitive and behavioural difficulties.",
+    "pitfalls": [
+      "Dismissing recurrent nocturnal events as parasomnias and delaying epilepsy diagnosis",
+      "Concluding that a normal scalp EEG excludes the condition",
+      "Failing to obtain video or polysomnographic evidence to characterise events",
+      "Not recognising that KCNT1-associated disease may need a different, targeted therapeutic approach"
+    ],
+    "references": [
+      "Bradley and Daroff Neurology in Clinical Practice",
+      "ILAE classification and epilepsy syndrome resources"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat with antiseizure medication, with carbamazepine or oxcarbazepine classically effective for the receptor-subunit forms",
+      "Use alternative or adjunctive antiseizure agents for incomplete control, considering targeted therapy such as quinidine in KCNT1-related disease",
+      "Advise good sleep hygiene and avoidance of sleep deprivation and other seizure triggers",
+      "Confirm the diagnosis and exclude parasomnia with video-EEG and polysomnography before committing to long-term therapy",
+      "Monitor seizure frequency and medication tolerability with a seizure diary",
+      "Offer genetic counselling and family assessment given the autosomal dominant inheritance",
+      "Refer to an epilepsy specialist for drug-resistant seizures and evaluate for a focal structural cause such as cortical dysplasia in DEPDC5-related disease amenable to surgery"
     ]
-   ],
-   "caption": "Overview comparison matrix for autosomal dominant sleep-related hypermotor epilepsy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "adnfle-real-image",
-   "title": "Autosomal dominant sleep-related hypermotor epilepsy: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "adnfle-pathway",
+      "title": "Autosomal dominant sleep-related hypermotor epilepsy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Autosomal dominant focal epilepsy classically linked to variants in neuronal nicotinic acetylcholine receptor subunit genes CHRNA4, CHRNB2 and CHRNA2, with additional cases from KCNT1 and DEPDC5",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Injuries sustained during violent nocturnal events",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Video-EEG monitoring to capture and characterise nocturnal events, Polysomnography to distinguish seizures from parasomnias and sleep disorders, Brain MRI to look for focal cortical dysplasia or other structural causes"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat with antiseizure medication, with carbamazepine or oxcarbazepine classically effective for the receptor-subunit forms"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing recurrent nocturnal events as parasomnias and delaying epilepsy diagnosis"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of autosomal dominant sleep-related hypermotor epilepsy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "adnfle-matrix",
+      "title": "Autosomal dominant sleep-related hypermotor epilepsy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Autosomal dominant focal epilepsy classically linked to variants in neuronal nicotinic acetylcholine receptor subunit genes",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Video-EEG monitoring to capture and characterise nocturnal events, Polysomnography to distinguish seizures from parasomnias and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Non-REM arousal parasomnias (confusional arousals, sleep terrors, sleepwalking), REM sleep behaviour disorder, Periodic limb",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat with antiseizure medication, with carbamazepine or oxcarbazepine classically effective for the receptor-subunit forms",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing recurrent nocturnal events as parasomnias and delaying epilepsy diagnosis",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for autosomal dominant sleep-related hypermotor epilepsy."
+    }
+  ],
+  "diagrams": []
 }

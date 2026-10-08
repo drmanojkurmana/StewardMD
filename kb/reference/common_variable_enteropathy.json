@@ -1,178 +1,156 @@
 {
- "id": "common_variable_enteropathy",
- "name": "common variable enteropathy",
- "aliases": [
-  "CVID enteropathy",
-  "CVID-associated enteropathy"
- ],
- "class": "non_infective",
- "system": "Gastrointestinal",
- "specialty": "Gastroenterology",
- "referenceOnly": true,
- "reference": {
-  "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Common variable enteropathy is a chronic non-infective enteropathy of common variable immunodeficiency (CVID), presenting with chronic diarrhoea, malabsorption and weight loss despite immunoglobulin replacement.",
-   "Histology often resembles coeliac disease with villous atrophy, but characteristically shows a paucity or absence of lamina propria plasma cells and increased intraepithelial lymphocytes, and does not respond to a gluten-free diet.",
-   "Other patterns include lymphoid nodular hyperplasia, a graft-versus-host-like appearance and changes resembling inflammatory bowel disease; gastric involvement may cause atrophic gastritis.",
-   "Treatable infective mimics such as Giardia, cytomegalovirus, Cryptosporidium, small-intestinal bacterial overgrowth and Campylobacter must be excluded first.",
-   "IgA-based coeliac serology is unreliable in antibody deficiency, so diagnosis rests on histology and exclusion of infection rather than serology.",
-   "The enteropathy is associated with other non-infective CVID complications, including nodular regenerative hyperplasia of the liver, granulomatous-lymphocytic interstitial lung disease, autoimmune cytopenias and an increased lymphoma risk.",
-   "Immunoglobulin replacement corrects infection risk but does not treat the enteropathy; corticosteroids (including budesonide) and steroid-sparing immunomodulators are used for refractory disease.",
-   "Nutritional support and surveillance for gastric carcinoma and lymphoma are important components of long-term care."
+  "id": "common_variable_enteropathy",
+  "name": "common variable enteropathy",
+  "aliases": [
+    "CVID enteropathy",
+    "CVID-associated enteropathy"
   ],
-  "pathophysiology": "The enteropathy reflects the dysregulated mucosal immunity of CVID rather than a single mechanism. Deficient B-cell differentiation and a striking reduction in mucosal plasma cells impair local secretory antibody, while T-cell dysregulation, aberrant innate immune signalling and an altered gut microbiome contribute to immune-mediated small-bowel injury. The result is villous atrophy and chronic inflammation histologically overlapping with coeliac disease and inflammatory bowel disease, but distinguished by the paucity of plasma cells. Chronic infection and immune dysregulation coexist, and the same immune defects underlie the systemic non-infective complications seen in CVID.",
-  "additionalDifferentials": [
-   "coeliac disease",
-   "giardiasis and other chronic gastrointestinal infections",
-   "inflammatory bowel disease, particularly Crohn's disease",
-   "autoimmune enteropathy",
-   "small intestinal bacterial overgrowth",
-   "intestinal lymphoma",
-   "tropical sprue"
-  ],
-  "additionalInvestigations": [
-   "quantitative immunoglobulins and vaccine responses to establish CVID",
-   "duodenal and colonic biopsies for villous atrophy and reduced plasma cells",
-   "stool microscopy and antigen testing for Giardia and Cryptosporidium with stool culture",
-   "cytomegalovirus PCR and immunohistochemistry on biopsy",
-   "faecal calprotectin",
-   "nutritional panel including iron, B12, folate and fat-soluble vitamins",
-   "cross-sectional imaging or enteroscopy and a hydrogen breath test for bacterial overgrowth"
-  ],
-  "redFlags": [
-   "rapid weight loss or severe malabsorption",
-   "refractory diarrhoea despite treatment of identified infection",
-   "features suggesting lymphoma such as a mass, night sweats or rising LDH",
-   "gastrointestinal bleeding",
-   "hepatosplenomegaly or signs of portal hypertension from nodular regenerative hyperplasia"
-  ],
-  "prognosis": "The course is variable but often chronic and difficult to treat, and the enteropathy is associated with poorer outcomes in CVID and with increased risks of lymphoma and malnutrition.",
-  "pitfalls": [
-   "relying on coeliac serology in an antibody-deficient patient",
-   "assuming villous atrophy equals coeliac disease and prescribing a gluten-free diet",
-   "missing treatable infection such as Giardia or cytomegalovirus",
-   "attributing symptoms solely to CVID without obtaining biopsies",
-   "neglecting malignancy surveillance"
-  ],
-  "references": [
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-   "Middleton's Allergy: Principles and Practice",
-   "Oxford Textbook of Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Continue immunoglobulin replacement (intravenous or subcutaneous) as the backbone of CVID care, recognising it controls infection but does not reliably reverse the enteropathy",
-   "Exclude and treat infective mimics before immunosuppression - antiparasitic therapy for Giardia and Cryptosporidium, antiviral therapy for cytomegalovirus, antibiotics for Campylobacter, and directed antibiotics for small-intestinal bacterial overgrowth",
-   "For biopsy-proven immune-mediated enteropathy, use corticosteroids including the topically-acting agent budesonide, escalating to immunomodulators or biologic therapy in refractory disease",
-   "Avoid reliance on a gluten-free diet, which does not help this plasma-cell-poor villous atrophy despite the coeliac-like histology",
-   "Provide nutritional support with replacement of iron, vitamin B12, folate and fat-soluble vitamins, and dietetic input for malabsorption and weight loss",
-   "Undertake surveillance for associated CVID complications - nodular regenerative hyperplasia of the liver, granulomatous-lymphocytic interstitial lung disease, autoimmune cytopenias and lymphoma",
-   "Manage through a joint gastroenterology and clinical immunology multidisciplinary team"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "common_variable_enteropathy-pathway",
-   "title": "common variable enteropathy: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Common variable enteropathy is a chronic non-infective enteropathy of common variable immunodeficiency (CVID), presenting with chronic diarrhoea, malabsorption and weight loss despite immunoglobulin replacement.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: rapid weight loss or severe malabsorption",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: quantitative immunoglobulins and vaccine responses to establish CVID, duodenal and colonic biopsies for villous atrophy and reduced plasma cells, stool microscopy and antigen testing for Giardia and Cryptosporidium with"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Continue immunoglobulin replacement (intravenous or subcutaneous) as the backbone of CVID care, recognising it controls infection but does not reliably reverse the enteropathy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: relying on coeliac serology in an antibody-deficient patient"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of common variable enteropathy."
-  }
- ],
- "tables": [
-  {
-   "id": "common_variable_enteropathy-matrix",
-   "title": "common variable enteropathy: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Common variable enteropathy is a chronic non-infective enteropathy of common variable immunodeficiency (CVID), presenting with",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastrointestinal",
+  "specialty": "Gastroenterology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Common variable enteropathy is a chronic non-infective enteropathy of common variable immunodeficiency (CVID), presenting with chronic diarrhoea, malabsorption and weight loss despite immunoglobulin replacement.",
+      "Histology often resembles coeliac disease with villous atrophy, but characteristically shows a paucity or absence of lamina propria plasma cells and increased intraepithelial lymphocytes, and does not respond to a gluten-free diet.",
+      "Other patterns include lymphoid nodular hyperplasia, a graft-versus-host-like appearance and changes resembling inflammatory bowel disease; gastric involvement may cause atrophic gastritis.",
+      "Treatable infective mimics such as Giardia, cytomegalovirus, Cryptosporidium, small-intestinal bacterial overgrowth and Campylobacter must be excluded first.",
+      "IgA-based coeliac serology is unreliable in antibody deficiency, so diagnosis rests on histology and exclusion of infection rather than serology.",
+      "The enteropathy is associated with other non-infective CVID complications, including nodular regenerative hyperplasia of the liver, granulomatous-lymphocytic interstitial lung disease, autoimmune cytopenias and an increased lymphoma risk.",
+      "Immunoglobulin replacement corrects infection risk but does not treat the enteropathy; corticosteroids (including budesonide) and steroid-sparing immunomodulators are used for refractory disease.",
+      "Nutritional support and surveillance for gastric carcinoma and lymphoma are important components of long-term care."
     ],
-    [
-     "Key Investigations",
-     "quantitative immunoglobulins and vaccine responses to establish CVID, duodenal and colonic biopsies for villous atrophy and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The enteropathy reflects the dysregulated mucosal immunity of CVID rather than a single mechanism. Deficient B-cell differentiation and a striking reduction in mucosal plasma cells impair local secretory antibody, while T-cell dysregulation, aberrant innate immune signalling and an altered gut microbiome contribute to immune-mediated small-bowel injury. The result is villous atrophy and chronic inflammation histologically overlapping with coeliac disease and inflammatory bowel disease, but distinguished by the paucity of plasma cells. Chronic infection and immune dysregulation coexist, and the same immune defects underlie the systemic non-infective complications seen in CVID.",
+    "additionalDifferentials": [
+      "coeliac disease",
+      "giardiasis and other chronic gastrointestinal infections",
+      "inflammatory bowel disease, particularly Crohn's disease",
+      "autoimmune enteropathy",
+      "small intestinal bacterial overgrowth",
+      "intestinal lymphoma",
+      "tropical sprue"
     ],
-    [
-     "Primary Differentials",
-     "coeliac disease, giardiasis and other chronic gastrointestinal infections, inflammatory bowel disease, particularly Crohn's",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "quantitative immunoglobulins and vaccine responses to establish CVID",
+      "duodenal and colonic biopsies for villous atrophy and reduced plasma cells",
+      "stool microscopy and antigen testing for Giardia and Cryptosporidium with stool culture",
+      "cytomegalovirus PCR and immunohistochemistry on biopsy",
+      "faecal calprotectin",
+      "nutritional panel including iron, B12, folate and fat-soluble vitamins",
+      "cross-sectional imaging or enteroscopy and a hydrogen breath test for bacterial overgrowth"
     ],
-    [
-     "Management Strategy",
-     "Continue immunoglobulin replacement (intravenous or subcutaneous) as the backbone of CVID care, recognising it controls infection",
-     "Core treatment modality"
+    "redFlags": [
+      "rapid weight loss or severe malabsorption",
+      "refractory diarrhoea despite treatment of identified infection",
+      "features suggesting lymphoma such as a mass, night sweats or rising LDH",
+      "gastrointestinal bleeding",
+      "hepatosplenomegaly or signs of portal hypertension from nodular regenerative hyperplasia"
     ],
-    [
-     "Clinical Pitfall",
-     "relying on coeliac serology in an antibody-deficient patient",
-     "Prevent diagnostic or management error"
+    "prognosis": "The course is variable but often chronic and difficult to treat, and the enteropathy is associated with poorer outcomes in CVID and with increased risks of lymphoma and malnutrition.",
+    "pitfalls": [
+      "relying on coeliac serology in an antibody-deficient patient",
+      "assuming villous atrophy equals coeliac disease and prescribing a gluten-free diet",
+      "missing treatable infection such as Giardia or cytomegalovirus",
+      "attributing symptoms solely to CVID without obtaining biopsies",
+      "neglecting malignancy surveillance"
+    ],
+    "references": [
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "Middleton's Allergy: Principles and Practice",
+      "Oxford Textbook of Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Continue immunoglobulin replacement (intravenous or subcutaneous) as the backbone of CVID care, recognising it controls infection but does not reliably reverse the enteropathy",
+      "Exclude and treat infective mimics before immunosuppression - antiparasitic therapy for Giardia and Cryptosporidium, antiviral therapy for cytomegalovirus, antibiotics for Campylobacter, and directed antibiotics for small-intestinal bacterial overgrowth",
+      "For biopsy-proven immune-mediated enteropathy, use corticosteroids including the topically-acting agent budesonide, escalating to immunomodulators or biologic therapy in refractory disease",
+      "Avoid reliance on a gluten-free diet, which does not help this plasma-cell-poor villous atrophy despite the coeliac-like histology",
+      "Provide nutritional support with replacement of iron, vitamin B12, folate and fat-soluble vitamins, and dietetic input for malabsorption and weight loss",
+      "Undertake surveillance for associated CVID complications - nodular regenerative hyperplasia of the liver, granulomatous-lymphocytic interstitial lung disease, autoimmune cytopenias and lymphoma",
+      "Manage through a joint gastroenterology and clinical immunology multidisciplinary team"
     ]
-   ],
-   "caption": "Overview comparison matrix for common variable enteropathy."
-  }
- ],
- "diagrams": [
-  {
-   "id": "common-variable-enteropathy-real-image",
-   "title": "common variable enteropathy: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "common_variable_enteropathy-pathway",
+      "title": "common variable enteropathy: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Common variable enteropathy is a chronic non-infective enteropathy of common variable immunodeficiency (CVID), presenting with chronic diarrhoea, malabsorption and weight loss despite immunoglobulin replacement.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: rapid weight loss or severe malabsorption",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: quantitative immunoglobulins and vaccine responses to establish CVID, duodenal and colonic biopsies for villous atrophy and reduced plasma cells, stool microscopy and antigen testing for Giardia and Cryptosporidium with"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Continue immunoglobulin replacement (intravenous or subcutaneous) as the backbone of CVID care, recognising it controls infection but does not reliably reverse the enteropathy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: relying on coeliac serology in an antibody-deficient patient"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of common variable enteropathy."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "common_variable_enteropathy-matrix",
+      "title": "common variable enteropathy: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Common variable enteropathy is a chronic non-infective enteropathy of common variable immunodeficiency (CVID), presenting with",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "quantitative immunoglobulins and vaccine responses to establish CVID, duodenal and colonic biopsies for villous atrophy and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "coeliac disease, giardiasis and other chronic gastrointestinal infections, inflammatory bowel disease, particularly Crohn's",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Continue immunoglobulin replacement (intravenous or subcutaneous) as the backbone of CVID care, recognising it controls infection",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "relying on coeliac serology in an antibody-deficient patient",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for common variable enteropathy."
+    }
+  ],
+  "diagrams": []
 }

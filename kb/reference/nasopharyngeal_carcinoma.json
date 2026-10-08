@@ -1,177 +1,155 @@
 {
- "id": "nasopharyngeal_carcinoma",
- "name": "Nasopharyngeal carcinoma",
- "aliases": [
-  "NPC",
-  "nasopharyngeal cancer",
-  "carcinoma of the nasopharynx"
- ],
- "class": "non_infective",
- "system": "ENT / Otorhinolaryngology",
- "specialty": "ENT",
- "referenceOnly": true,
- "reference": {
-  "source": "Dhingra, Diseases of Ear, Nose and Throat",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Nasopharyngeal carcinoma arises from the epithelium of the nasopharynx, most often in the fossa of Rosenmuller, and shows a strong association with Epstein-Barr virus and with certain geographic and dietary factors",
-   "A very common presentation is a painless neck lump from cervical nodal metastasis, which may be the first and only sign",
-   "Unilateral serous otitis media with hearing loss in an adult should raise strong suspicion, as the tumour blocks the Eustachian tube opening",
-   "Nasal symptoms include blockage and blood-stained nasal or postnasal discharge",
-   "Skull base and cavernous sinus invasion can cause cranial nerve palsies, producing diplopia, facial numbness or other neurological deficits",
-   "Because the tumour hides in the nasopharynx, diagnosis relies on endoscopic examination and biopsy, supported by imaging and Epstein-Barr virus serology or DNA levels",
-   "MRI best defines local and skull base extension while CT and PET assess bony involvement and distant spread",
-   "Treatment is primarily radiotherapy, often with concurrent chemotherapy, because the tumour is radiosensitive and surgery has a limited primary role"
+  "id": "nasopharyngeal_carcinoma",
+  "name": "Nasopharyngeal carcinoma",
+  "aliases": [
+    "NPC",
+    "nasopharyngeal cancer",
+    "carcinoma of the nasopharynx"
   ],
-  "pathophysiology": "Nasopharyngeal carcinoma develops in the epithelial lining of the nasopharynx, typically in the recess of the fossa of Rosenmuller near the Eustachian tube opening. Malignant transformation is closely linked to latent Epstein-Barr virus infection, together with genetic susceptibility and environmental exposures such as diets rich in preserved salted foods and nitrosamines. The tumour tends to spread submucosally and infiltrate early, obstructing the Eustachian tube to cause middle ear effusion, and eroding through the skull base foramina to involve cranial nerves and the cavernous sinus. Its rich lymphatic drainage leads to early and often bilateral cervical lymph node metastasis, and distant spread to bone, lung and liver can occur.",
-  "additionalDifferentials": [
-   "Reactive or tuberculous cervical lymphadenopathy",
-   "Lymphoma of the nasopharynx or neck",
-   "Adenoid hypertrophy (in younger patients)",
-   "Juvenile nasopharyngeal angiofibroma",
-   "Other nasopharyngeal tumours such as minor salivary gland tumours",
-   "Chronic adenoiditis or Thornwaldt cyst",
-   "Metastasis from another primary site"
-  ],
-  "additionalInvestigations": [
-   "Nasopharyngeal endoscopy with biopsy of any suspicious lesion",
-   "MRI of the nasopharynx and skull base to assess local and perineural extension",
-   "CT to evaluate bony erosion and nodal disease",
-   "PET-CT for staging and detection of distant metastases",
-   "Epstein-Barr virus serology and plasma EBV DNA levels",
-   "Fine needle aspiration of a neck node when the primary is not yet identified",
-   "Audiometry and tympanometry to document middle ear effusion"
-  ],
-  "redFlags": [
-   "Unilateral serous otitis media in an adult, which mandates nasopharyngeal examination to exclude this tumour",
-   "A persistent painless neck mass, especially in the upper deep cervical chain",
-   "Blood-stained nasal or postnasal discharge",
-   "Cranial nerve palsies, diplopia or facial numbness suggesting skull base invasion",
-   "Trismus, persistent headache or unexplained weight loss"
-  ],
-  "prognosis": "Outcome depends heavily on stage at presentation; early disease treated with radiotherapy has a favourable prognosis, whereas advanced disease with skull base invasion or distant metastasis carries a poorer outlook, and the frequently late presentation makes vigilance for early signs important.",
-  "pitfalls": [
-   "Treating adult unilateral middle ear effusion as simple Eustachian tube dysfunction without examining the nasopharynx",
-   "Attributing a neck node to benign causes and delaying evaluation of the primary",
-   "Taking an inadequate or superficial biopsy of a submucosal tumour",
-   "Underestimating skull base and perineural spread by relying on CT alone rather than MRI",
-   "Overlooking cranial nerve findings as unrelated"
-  ],
-  "references": [
-   "Dhingra, Diseases of Ear, Nose and Throat"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Radical intensity-modulated radiotherapy as the primary curative treatment for localised disease",
-   "Concurrent platinum-based chemoradiotherapy, with induction or adjuvant chemotherapy, for locoregionally advanced tumours",
-   "Platinum-based systemic chemotherapy and anti-PD-1 immune checkpoint inhibitors for recurrent or metastatic disease",
-   "Salvage nasopharyngectomy, neck dissection or re-irradiation for local or nodal recurrence",
-   "Supportive care for treatment toxicity, including pre-radiotherapy dental assessment and management of mucositis, xerostomia and nutrition",
-   "Coordination through a head and neck oncology multidisciplinary team",
-   "Post-treatment surveillance with endoscopy, imaging and plasma Epstein-Barr virus DNA monitoring for recurrence and distant metastasis"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "nasopharyngeal_carcinoma-pathway",
-   "title": "Nasopharyngeal carcinoma: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Nasopharyngeal carcinoma arises from the epithelium of the nasopharynx, most often in the fossa of Rosenmuller, and shows a strong association with Epstein-Barr virus and with certain geographic and dietary factors",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Unilateral serous otitis media in an adult, which mandates nasopharyngeal examination to exclude this tumour",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Nasopharyngeal endoscopy with biopsy of any suspicious lesion, MRI of the nasopharynx and skull base to assess local and perineural extension, CT to evaluate bony erosion and nodal disease"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Radical intensity-modulated radiotherapy as the primary curative treatment for localised disease"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating adult unilateral middle ear effusion as simple Eustachian tube dysfunction without examining the nasopharynx"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of nasopharyngeal carcinoma."
-  }
- ],
- "tables": [
-  {
-   "id": "nasopharyngeal_carcinoma-matrix",
-   "title": "Nasopharyngeal carcinoma: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Nasopharyngeal carcinoma arises from the epithelium of the nasopharynx, most often in the fossa of Rosenmuller, and shows a",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "ENT / Otorhinolaryngology",
+  "specialty": "ENT",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Dhingra, Diseases of Ear, Nose and Throat",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Nasopharyngeal carcinoma arises from the epithelium of the nasopharynx, most often in the fossa of Rosenmuller, and shows a strong association with Epstein-Barr virus and with certain geographic and dietary factors",
+      "A very common presentation is a painless neck lump from cervical nodal metastasis, which may be the first and only sign",
+      "Unilateral serous otitis media with hearing loss in an adult should raise strong suspicion, as the tumour blocks the Eustachian tube opening",
+      "Nasal symptoms include blockage and blood-stained nasal or postnasal discharge",
+      "Skull base and cavernous sinus invasion can cause cranial nerve palsies, producing diplopia, facial numbness or other neurological deficits",
+      "Because the tumour hides in the nasopharynx, diagnosis relies on endoscopic examination and biopsy, supported by imaging and Epstein-Barr virus serology or DNA levels",
+      "MRI best defines local and skull base extension while CT and PET assess bony involvement and distant spread",
+      "Treatment is primarily radiotherapy, often with concurrent chemotherapy, because the tumour is radiosensitive and surgery has a limited primary role"
     ],
-    [
-     "Key Investigations",
-     "Nasopharyngeal endoscopy with biopsy of any suspicious lesion, MRI of the nasopharynx and skull base to assess local and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Nasopharyngeal carcinoma develops in the epithelial lining of the nasopharynx, typically in the recess of the fossa of Rosenmuller near the Eustachian tube opening. Malignant transformation is closely linked to latent Epstein-Barr virus infection, together with genetic susceptibility and environmental exposures such as diets rich in preserved salted foods and nitrosamines. The tumour tends to spread submucosally and infiltrate early, obstructing the Eustachian tube to cause middle ear effusion, and eroding through the skull base foramina to involve cranial nerves and the cavernous sinus. Its rich lymphatic drainage leads to early and often bilateral cervical lymph node metastasis, and distant spread to bone, lung and liver can occur.",
+    "additionalDifferentials": [
+      "Reactive or tuberculous cervical lymphadenopathy",
+      "Lymphoma of the nasopharynx or neck",
+      "Adenoid hypertrophy (in younger patients)",
+      "Juvenile nasopharyngeal angiofibroma",
+      "Other nasopharyngeal tumours such as minor salivary gland tumours",
+      "Chronic adenoiditis or Thornwaldt cyst",
+      "Metastasis from another primary site"
     ],
-    [
-     "Primary Differentials",
-     "Reactive or tuberculous cervical lymphadenopathy, Lymphoma of the nasopharynx or neck, Adenoid hypertrophy (in younger patients)",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Nasopharyngeal endoscopy with biopsy of any suspicious lesion",
+      "MRI of the nasopharynx and skull base to assess local and perineural extension",
+      "CT to evaluate bony erosion and nodal disease",
+      "PET-CT for staging and detection of distant metastases",
+      "Epstein-Barr virus serology and plasma EBV DNA levels",
+      "Fine needle aspiration of a neck node when the primary is not yet identified",
+      "Audiometry and tympanometry to document middle ear effusion"
     ],
-    [
-     "Management Strategy",
-     "Radical intensity-modulated radiotherapy as the primary curative treatment for localised disease",
-     "Core treatment modality"
+    "redFlags": [
+      "Unilateral serous otitis media in an adult, which mandates nasopharyngeal examination to exclude this tumour",
+      "A persistent painless neck mass, especially in the upper deep cervical chain",
+      "Blood-stained nasal or postnasal discharge",
+      "Cranial nerve palsies, diplopia or facial numbness suggesting skull base invasion",
+      "Trismus, persistent headache or unexplained weight loss"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating adult unilateral middle ear effusion as simple Eustachian tube dysfunction without examining the nasopharynx",
-     "Prevent diagnostic or management error"
+    "prognosis": "Outcome depends heavily on stage at presentation; early disease treated with radiotherapy has a favourable prognosis, whereas advanced disease with skull base invasion or distant metastasis carries a poorer outlook, and the frequently late presentation makes vigilance for early signs important.",
+    "pitfalls": [
+      "Treating adult unilateral middle ear effusion as simple Eustachian tube dysfunction without examining the nasopharynx",
+      "Attributing a neck node to benign causes and delaying evaluation of the primary",
+      "Taking an inadequate or superficial biopsy of a submucosal tumour",
+      "Underestimating skull base and perineural spread by relying on CT alone rather than MRI",
+      "Overlooking cranial nerve findings as unrelated"
+    ],
+    "references": [
+      "Dhingra, Diseases of Ear, Nose and Throat"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Radical intensity-modulated radiotherapy as the primary curative treatment for localised disease",
+      "Concurrent platinum-based chemoradiotherapy, with induction or adjuvant chemotherapy, for locoregionally advanced tumours",
+      "Platinum-based systemic chemotherapy and anti-PD-1 immune checkpoint inhibitors for recurrent or metastatic disease",
+      "Salvage nasopharyngectomy, neck dissection or re-irradiation for local or nodal recurrence",
+      "Supportive care for treatment toxicity, including pre-radiotherapy dental assessment and management of mucositis, xerostomia and nutrition",
+      "Coordination through a head and neck oncology multidisciplinary team",
+      "Post-treatment surveillance with endoscopy, imaging and plasma Epstein-Barr virus DNA monitoring for recurrence and distant metastasis"
     ]
-   ],
-   "caption": "Overview comparison matrix for nasopharyngeal carcinoma."
-  }
- ],
- "diagrams": [
-  {
-   "id": "nasopharyngeal-carcinoma-real-image",
-   "title": "Nasopharyngeal carcinoma: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "nasopharyngeal_carcinoma-pathway",
+      "title": "Nasopharyngeal carcinoma: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Nasopharyngeal carcinoma arises from the epithelium of the nasopharynx, most often in the fossa of Rosenmuller, and shows a strong association with Epstein-Barr virus and with certain geographic and dietary factors",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Unilateral serous otitis media in an adult, which mandates nasopharyngeal examination to exclude this tumour",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Nasopharyngeal endoscopy with biopsy of any suspicious lesion, MRI of the nasopharynx and skull base to assess local and perineural extension, CT to evaluate bony erosion and nodal disease"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Radical intensity-modulated radiotherapy as the primary curative treatment for localised disease"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating adult unilateral middle ear effusion as simple Eustachian tube dysfunction without examining the nasopharynx"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of nasopharyngeal carcinoma."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "nasopharyngeal_carcinoma-matrix",
+      "title": "Nasopharyngeal carcinoma: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Nasopharyngeal carcinoma arises from the epithelium of the nasopharynx, most often in the fossa of Rosenmuller, and shows a",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Nasopharyngeal endoscopy with biopsy of any suspicious lesion, MRI of the nasopharynx and skull base to assess local and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Reactive or tuberculous cervical lymphadenopathy, Lymphoma of the nasopharynx or neck, Adenoid hypertrophy (in younger patients)",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Radical intensity-modulated radiotherapy as the primary curative treatment for localised disease",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating adult unilateral middle ear effusion as simple Eustachian tube dysfunction without examining the nasopharynx",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for nasopharyngeal carcinoma."
+    }
+  ],
+  "diagrams": []
 }

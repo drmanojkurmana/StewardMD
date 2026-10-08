@@ -1,177 +1,155 @@
 {
- "id": "coarctation_of_aorta",
- "name": "Coarctation of the Aorta",
- "aliases": [
-  "CoA",
-  "Coarctation of the aorta",
-  "aortic coarctation",
-  "coarctation",
-  "coarctation of the aorta"
- ],
- "class": "non_infective",
- "system": "Paediatric cardiology",
- "specialty": "Paediatrics",
- "referenceOnly": true,
- "reference": {
-  "source": "Nelson Textbook of Pediatrics",
-  "sourceEdition": "22e",
-  "pages": null,
-  "clinicalPearls": [
-   "A narrowing of the aorta, most often just distal to the left subclavian artery near the ductal region, obstructing flow to the lower body.",
-   "The hallmark examination finding is diminished, delayed, or absent femoral pulses compared with the upper limbs, with a blood pressure gradient higher in the arms than the legs.",
-   "Severe coarctation may be duct-dependent in the neonate: as the ductus arteriosus closes, lower-body perfusion falls, producing shock, acidosis, and heart failure.",
-   "A prostaglandin infusion is used to reopen or maintain ductal patency and restore lower-body perfusion while stabilising a critically ill neonate before repair.",
-   "Older children may be asymptomatic and present with an incidentally found murmur, upper-limb hypertension, headaches, or leg claudication.",
-   "Coarctation is commonly associated with a bicuspid aortic valve and may occur with other left-sided obstructive lesions and Turner syndrome.",
-   "Chest radiograph in older children can show rib notching from collateral vessels and a figure-3 aortic contour.",
-   "Echocardiography defines the site and severity of narrowing and associated lesions; CT or MR angiography is useful for detailed anatomy.",
-   "Repair by surgery or catheter intervention relieves the obstruction, but lifelong follow-up is needed for recoarctation and persistent hypertension."
+  "id": "coarctation_of_aorta",
+  "name": "Coarctation of the Aorta",
+  "aliases": [
+    "CoA",
+    "Coarctation of the aorta",
+    "aortic coarctation",
+    "coarctation",
+    "coarctation of the aorta"
   ],
-  "pathophysiology": "A discrete or long-segment narrowing of the aortic lumen creates a mechanical obstruction to systemic outflow. Proximal to the obstruction, pressure rises, producing upper-body hypertension and left ventricular pressure overload; distal to it, perfusion pressure falls, causing weak lower-body pulses. In severe neonatal coarctation, lower-body perfusion depends on right-to-left flow through the ductus arteriosus, so ductal closure precipitates hypoperfusion, metabolic acidosis, and circulatory collapse. In slowly progressive disease, collateral arterial channels develop to bypass the obstruction.",
-  "additionalDifferentials": [
-   "Interrupted aortic arch",
-   "Hypoplastic left heart syndrome",
-   "Critical aortic stenosis",
-   "Other duct-dependent systemic circulation lesions",
-   "Essential hypertension in an older child",
-   "Peripheral vascular disease"
-  ],
-  "additionalInvestigations": [
-   "Four-limb blood pressure measurement and simultaneous upper- and lower-limb pulse assessment",
-   "Echocardiography to define coarctation site, severity, and associated lesions such as bicuspid valve",
-   "Chest radiograph for rib notching and aortic contour in older children",
-   "CT or MR angiography for detailed arch anatomy",
-   "Assessment for acidosis and end-organ perfusion in the collapsing neonate"
-  ],
-  "redFlags": [
-   "Neonatal circulatory collapse with shock and acidosis as the ductus arteriosus closes in duct-dependent coarctation",
-   "Absent or markedly weak femoral pulses with an upper-to-lower limb blood pressure gradient",
-   "Signs of heart failure and poor lower-body perfusion in an infant",
-   "Severe upper-limb hypertension with headaches or hypertensive complications",
-   "Evidence of end-organ hypoperfusion such as oliguria or feeding intolerance"
-  ],
-  "prognosis": "Early repair of significant coarctation gives a good outlook, but patients need lifelong surveillance for recoarctation, residual or late hypertension, aneurysm formation, and associated valve disease. Unrecognised severe neonatal coarctation can be rapidly fatal.",
-  "pitfalls": [
-   "Failing to palpate femoral pulses and compare limb blood pressures in an unwell neonate or hypertensive child",
-   "Missing a duct-dependent coarctation until the neonate collapses as the ductus closes",
-   "Attributing upper-limb hypertension in a child to essential hypertension without checking for a gradient",
-   "Overlooking associated bicuspid aortic valve and other left-sided lesions",
-   "Assuming successful repair eliminates the need for ongoing hypertension and recoarctation surveillance"
-  ],
-  "references": [
-   "Nelson Textbook of Pediatrics, 22e"
-  ],
-  "crossLinks": [],
-  "management": [
-   "In the duct-dependent neonate, prostaglandin E1 infusion to reopen and maintain ductal patency and restore lower-body perfusion, with correction of acidosis and heart failure before repair.",
-   "Definitive relief of the obstruction by surgical repair (resection with end-to-end anastomosis or subclavian flap) or by balloon angioplasty with stenting in suitable cases.",
-   "Antihypertensive therapy to control upper-limb hypertension before and after repair.",
-   "Assessment and management of associated lesions, particularly bicuspid aortic valve and other left-sided obstructions.",
-   "Lifelong surveillance for recoarctation, persistent or late hypertension, and aortic aneurysm formation.",
-   "Screening for Turner syndrome and associated anomalies where relevant.",
-   "Ongoing paediatric cardiology follow-up with periodic imaging of the aortic arch."
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "coarctation_of_aorta-pathway",
-   "title": "Coarctation of the Aorta: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A narrowing of the aorta, most often just distal to the left subclavian artery near the ductal region, obstructing flow to the lower body.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Neonatal circulatory collapse with shock and acidosis as the ductus arteriosus closes in duct-dependent coarctation",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Four-limb blood pressure measurement and simultaneous upper- and lower-limb pulse assessment, Echocardiography to define coarctation site, severity, and associated lesions such as bicuspid valve, Chest radiograph for rib"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: In the duct-dependent neonate, prostaglandin E1 infusion to reopen and maintain ductal patency and restore lower-body perfusion, with correction of acidosis and heart failure before repair."
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to palpate femoral pulses and compare limb blood pressures in an unwell neonate or hypertensive child"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of coarctation of the aorta."
-  }
- ],
- "tables": [
-  {
-   "id": "coarctation_of_aorta-matrix",
-   "title": "Coarctation of the Aorta: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A narrowing of the aorta, most often just distal to the left subclavian artery near the ductal region, obstructing flow to the",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Paediatric cardiology",
+  "specialty": "Paediatrics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Nelson Textbook of Pediatrics",
+    "sourceEdition": "22e",
+    "pages": null,
+    "clinicalPearls": [
+      "A narrowing of the aorta, most often just distal to the left subclavian artery near the ductal region, obstructing flow to the lower body.",
+      "The hallmark examination finding is diminished, delayed, or absent femoral pulses compared with the upper limbs, with a blood pressure gradient higher in the arms than the legs.",
+      "Severe coarctation may be duct-dependent in the neonate: as the ductus arteriosus closes, lower-body perfusion falls, producing shock, acidosis, and heart failure.",
+      "A prostaglandin infusion is used to reopen or maintain ductal patency and restore lower-body perfusion while stabilising a critically ill neonate before repair.",
+      "Older children may be asymptomatic and present with an incidentally found murmur, upper-limb hypertension, headaches, or leg claudication.",
+      "Coarctation is commonly associated with a bicuspid aortic valve and may occur with other left-sided obstructive lesions and Turner syndrome.",
+      "Chest radiograph in older children can show rib notching from collateral vessels and a figure-3 aortic contour.",
+      "Echocardiography defines the site and severity of narrowing and associated lesions; CT or MR angiography is useful for detailed anatomy.",
+      "Repair by surgery or catheter intervention relieves the obstruction, but lifelong follow-up is needed for recoarctation and persistent hypertension."
     ],
-    [
-     "Key Investigations",
-     "Four-limb blood pressure measurement and simultaneous upper- and lower-limb pulse assessment, Echocardiography to define",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "A discrete or long-segment narrowing of the aortic lumen creates a mechanical obstruction to systemic outflow. Proximal to the obstruction, pressure rises, producing upper-body hypertension and left ventricular pressure overload; distal to it, perfusion pressure falls, causing weak lower-body pulses. In severe neonatal coarctation, lower-body perfusion depends on right-to-left flow through the ductus arteriosus, so ductal closure precipitates hypoperfusion, metabolic acidosis, and circulatory collapse. In slowly progressive disease, collateral arterial channels develop to bypass the obstruction.",
+    "additionalDifferentials": [
+      "Interrupted aortic arch",
+      "Hypoplastic left heart syndrome",
+      "Critical aortic stenosis",
+      "Other duct-dependent systemic circulation lesions",
+      "Essential hypertension in an older child",
+      "Peripheral vascular disease"
     ],
-    [
-     "Primary Differentials",
-     "Interrupted aortic arch, Hypoplastic left heart syndrome, Critical aortic stenosis",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Four-limb blood pressure measurement and simultaneous upper- and lower-limb pulse assessment",
+      "Echocardiography to define coarctation site, severity, and associated lesions such as bicuspid valve",
+      "Chest radiograph for rib notching and aortic contour in older children",
+      "CT or MR angiography for detailed arch anatomy",
+      "Assessment for acidosis and end-organ perfusion in the collapsing neonate"
     ],
-    [
-     "Management Strategy",
-     "In the duct-dependent neonate, prostaglandin E1 infusion to reopen and maintain ductal patency and restore lower-body perfusion,",
-     "Core treatment modality"
+    "redFlags": [
+      "Neonatal circulatory collapse with shock and acidosis as the ductus arteriosus closes in duct-dependent coarctation",
+      "Absent or markedly weak femoral pulses with an upper-to-lower limb blood pressure gradient",
+      "Signs of heart failure and poor lower-body perfusion in an infant",
+      "Severe upper-limb hypertension with headaches or hypertensive complications",
+      "Evidence of end-organ hypoperfusion such as oliguria or feeding intolerance"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to palpate femoral pulses and compare limb blood pressures in an unwell neonate or hypertensive child",
-     "Prevent diagnostic or management error"
+    "prognosis": "Early repair of significant coarctation gives a good outlook, but patients need lifelong surveillance for recoarctation, residual or late hypertension, aneurysm formation, and associated valve disease. Unrecognised severe neonatal coarctation can be rapidly fatal.",
+    "pitfalls": [
+      "Failing to palpate femoral pulses and compare limb blood pressures in an unwell neonate or hypertensive child",
+      "Missing a duct-dependent coarctation until the neonate collapses as the ductus closes",
+      "Attributing upper-limb hypertension in a child to essential hypertension without checking for a gradient",
+      "Overlooking associated bicuspid aortic valve and other left-sided lesions",
+      "Assuming successful repair eliminates the need for ongoing hypertension and recoarctation surveillance"
+    ],
+    "references": [
+      "Nelson Textbook of Pediatrics, 22e"
+    ],
+    "crossLinks": [],
+    "management": [
+      "In the duct-dependent neonate, prostaglandin E1 infusion to reopen and maintain ductal patency and restore lower-body perfusion, with correction of acidosis and heart failure before repair.",
+      "Definitive relief of the obstruction by surgical repair (resection with end-to-end anastomosis or subclavian flap) or by balloon angioplasty with stenting in suitable cases.",
+      "Antihypertensive therapy to control upper-limb hypertension before and after repair.",
+      "Assessment and management of associated lesions, particularly bicuspid aortic valve and other left-sided obstructions.",
+      "Lifelong surveillance for recoarctation, persistent or late hypertension, and aortic aneurysm formation.",
+      "Screening for Turner syndrome and associated anomalies where relevant.",
+      "Ongoing paediatric cardiology follow-up with periodic imaging of the aortic arch."
     ]
-   ],
-   "caption": "Overview comparison matrix for coarctation of the aorta."
-  }
- ],
- "diagrams": [
-  {
-   "id": "coarctation-of-aorta-real-image",
-   "title": "Coarctation of the Aorta: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "coarctation_of_aorta-pathway",
+      "title": "Coarctation of the Aorta: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A narrowing of the aorta, most often just distal to the left subclavian artery near the ductal region, obstructing flow to the lower body.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Neonatal circulatory collapse with shock and acidosis as the ductus arteriosus closes in duct-dependent coarctation",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Four-limb blood pressure measurement and simultaneous upper- and lower-limb pulse assessment, Echocardiography to define coarctation site, severity, and associated lesions such as bicuspid valve, Chest radiograph for rib"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: In the duct-dependent neonate, prostaglandin E1 infusion to reopen and maintain ductal patency and restore lower-body perfusion, with correction of acidosis and heart failure before repair."
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to palpate femoral pulses and compare limb blood pressures in an unwell neonate or hypertensive child"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of coarctation of the aorta."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "coarctation_of_aorta-matrix",
+      "title": "Coarctation of the Aorta: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A narrowing of the aorta, most often just distal to the left subclavian artery near the ductal region, obstructing flow to the",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Four-limb blood pressure measurement and simultaneous upper- and lower-limb pulse assessment, Echocardiography to define",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Interrupted aortic arch, Hypoplastic left heart syndrome, Critical aortic stenosis",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "In the duct-dependent neonate, prostaglandin E1 infusion to reopen and maintain ductal patency and restore lower-body perfusion,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to palpate femoral pulses and compare limb blood pressures in an unwell neonate or hypertensive child",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for coarctation of the aorta."
+    }
+  ],
+  "diagrams": []
 }

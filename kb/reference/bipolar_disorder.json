@@ -1,176 +1,154 @@
 {
- "id": "bipolar_disorder",
- "name": "Bipolar disorder",
- "aliases": [
-  "bipolar affective disorder",
-  "manic depression",
-  "manic-depressive illness",
-  "BPAD"
- ],
- "class": "non_infective",
- "system": "Psychiatry / Mental health",
- "specialty": "Psychiatry",
- "referenceOnly": true,
- "reference": {
-  "source": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Defined by episodes of abnormally elevated, expansive, or irritable mood with increased energy and activity, alternating over time with depressive episodes",
-   "A manic episode involves a distinct sustained period (about a week or requiring hospitalisation) with features such as inflated self-esteem or grandiosity, reduced need for sleep, pressured speech, racing thoughts, distractibility, and risky goal-directed behaviour",
-   "Bipolar I requires at least one full manic episode; bipolar II is defined by hypomania plus major depressive episodes without a full mania",
-   "Bipolar depression is easily misdiagnosed as unipolar depression; a careful history for past highs is essential, since antidepressant monotherapy can precipitate mania or rapid cycling",
-   "Mood stabilisers (such as lithium or certain anticonvulsants) and atypical antipsychotics are the mainstays of acute and maintenance treatment, described here as principles without specific dosing",
-   "Lithium reduces suicide risk but has a narrow therapeutic index and requires monitoring of serum levels, renal function, and thyroid function",
-   "Psychoeducation, regularising sleep and daily routines, and treatment adherence are central to preventing relapse",
-   "Screen for psychotic features, which may accompany severe mania or depression and can be mood-congruent or incongruent"
+  "id": "bipolar_disorder",
+  "name": "Bipolar disorder",
+  "aliases": [
+    "bipolar affective disorder",
+    "manic depression",
+    "manic-depressive illness",
+    "BPAD"
   ],
-  "pathophysiology": "Bipolar disorder is a highly heritable condition involving dysregulation of monoaminergic and intracellular signalling systems, disturbances of circadian rhythm and sleep, and abnormalities in the connectivity and function of prefrontal-limbic circuits governing mood and reward. Episodes are often precipitated by sleep disruption, stress, or substances acting on an underlying biological vulnerability.",
-  "additionalDifferentials": [
-   "Major depressive disorder (unipolar)",
-   "Schizoaffective disorder",
-   "Schizophrenia",
-   "Attention-deficit/hyperactivity disorder",
-   "Borderline personality disorder",
-   "Substance-induced mood or psychotic disorder",
-   "Hyperthyroidism or steroid-induced mood elevation"
-  ],
-  "additionalInvestigations": [
-   "Collateral history to identify prior manic or hypomanic episodes",
-   "Thyroid, renal function, and pregnancy testing prior to mood stabiliser use",
-   "Serum drug-level monitoring for agents with narrow therapeutic indices such as lithium",
-   "Substance use screening",
-   "Structured mood charting to track episode pattern"
-  ],
-  "redFlags": [
-   "Suicidal ideation, which carries high risk across both manic and depressive phases",
-   "Psychotic symptoms or severe agitation requiring urgent stabilisation",
-   "Reckless behaviour endangering the patient or others during mania",
-   "Signs of lithium toxicity such as tremor, confusion, vomiting, and ataxia"
-  ],
-  "prognosis": "Bipolar disorder is a lifelong, recurrent illness with substantial risk of functional impairment and elevated suicide rate. Prognosis improves with early diagnosis, mood-stabiliser adherence, and relapse-prevention strategies, whereas repeated episodes, substance misuse, and poor adherence worsen outcomes.",
-  "pitfalls": [
-   "Treating bipolar depression with an antidepressant alone and triggering a manic switch or rapid cycling",
-   "Missing a history of hypomania and misdiagnosing unipolar depression",
-   "Failing to monitor lithium levels and organ function",
-   "Overlooking suicide risk during depressive and mixed states",
-   "Attributing early mania to intoxication and delaying appropriate treatment"
-  ],
-  "references": [
-   "Kaplan & Sadock's Synopsis of Psychiatry",
-   "DSM-5-TR"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Mood stabilisers such as lithium or certain anticonvulsants, with atypical antipsychotics, as the mainstay of acute mania and long-term maintenance",
-   "Treat bipolar depression with mood-stabiliser or antipsychotic-based regimens and avoid antidepressant monotherapy, which can precipitate mania or rapid cycling",
-   "Psychoeducation, structured psychotherapy and regularisation of sleep and circadian rhythm to reduce relapse",
-   "Screen for and address substance misuse as an episode precipitant",
-   "Monitor lithium serum levels with renal and thyroid function given its narrow therapeutic index",
-   "Admit for severe mania, psychosis or high suicide risk, exploiting lithium's anti-suicidal effect in maintenance",
-   "Relapse-prevention planning with mood charting and coordinated psychiatric follow-up"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "bipolar_disorder-pathway",
-   "title": "Bipolar disorder: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Defined by episodes of abnormally elevated, expansive, or irritable mood with increased energy and activity, alternating over time with depressive episodes",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Suicidal ideation, which carries high risk across both manic and depressive phases",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Collateral history to identify prior manic or hypomanic episodes, Thyroid, renal function, and pregnancy testing prior to mood stabiliser use, Serum drug-level monitoring for agents with narrow therapeutic indices such as"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Mood stabilisers such as lithium or certain anticonvulsants, with atypical antipsychotics, as the mainstay of acute mania and long-term maintenance"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating bipolar depression with an antidepressant alone and triggering a manic switch or rapid cycling"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of bipolar disorder."
-  }
- ],
- "tables": [
-  {
-   "id": "bipolar_disorder-matrix",
-   "title": "Bipolar disorder: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Defined by episodes of abnormally elevated, expansive, or irritable mood with increased energy and activity, alternating over",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Psychiatry / Mental health",
+  "specialty": "Psychiatry",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Defined by episodes of abnormally elevated, expansive, or irritable mood with increased energy and activity, alternating over time with depressive episodes",
+      "A manic episode involves a distinct sustained period (about a week or requiring hospitalisation) with features such as inflated self-esteem or grandiosity, reduced need for sleep, pressured speech, racing thoughts, distractibility, and risky goal-directed behaviour",
+      "Bipolar I requires at least one full manic episode; bipolar II is defined by hypomania plus major depressive episodes without a full mania",
+      "Bipolar depression is easily misdiagnosed as unipolar depression; a careful history for past highs is essential, since antidepressant monotherapy can precipitate mania or rapid cycling",
+      "Mood stabilisers (such as lithium or certain anticonvulsants) and atypical antipsychotics are the mainstays of acute and maintenance treatment, described here as principles without specific dosing",
+      "Lithium reduces suicide risk but has a narrow therapeutic index and requires monitoring of serum levels, renal function, and thyroid function",
+      "Psychoeducation, regularising sleep and daily routines, and treatment adherence are central to preventing relapse",
+      "Screen for psychotic features, which may accompany severe mania or depression and can be mood-congruent or incongruent"
     ],
-    [
-     "Key Investigations",
-     "Collateral history to identify prior manic or hypomanic episodes, Thyroid, renal function, and pregnancy testing prior to mood",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Bipolar disorder is a highly heritable condition involving dysregulation of monoaminergic and intracellular signalling systems, disturbances of circadian rhythm and sleep, and abnormalities in the connectivity and function of prefrontal-limbic circuits governing mood and reward. Episodes are often precipitated by sleep disruption, stress, or substances acting on an underlying biological vulnerability.",
+    "additionalDifferentials": [
+      "Major depressive disorder (unipolar)",
+      "Schizoaffective disorder",
+      "Schizophrenia",
+      "Attention-deficit/hyperactivity disorder",
+      "Borderline personality disorder",
+      "Substance-induced mood or psychotic disorder",
+      "Hyperthyroidism or steroid-induced mood elevation"
     ],
-    [
-     "Primary Differentials",
-     "Major depressive disorder (unipolar), Schizoaffective disorder, Schizophrenia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Collateral history to identify prior manic or hypomanic episodes",
+      "Thyroid, renal function, and pregnancy testing prior to mood stabiliser use",
+      "Serum drug-level monitoring for agents with narrow therapeutic indices such as lithium",
+      "Substance use screening",
+      "Structured mood charting to track episode pattern"
     ],
-    [
-     "Management Strategy",
-     "Mood stabilisers such as lithium or certain anticonvulsants, with atypical antipsychotics, as the mainstay of acute mania and",
-     "Core treatment modality"
+    "redFlags": [
+      "Suicidal ideation, which carries high risk across both manic and depressive phases",
+      "Psychotic symptoms or severe agitation requiring urgent stabilisation",
+      "Reckless behaviour endangering the patient or others during mania",
+      "Signs of lithium toxicity such as tremor, confusion, vomiting, and ataxia"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating bipolar depression with an antidepressant alone and triggering a manic switch or rapid cycling",
-     "Prevent diagnostic or management error"
+    "prognosis": "Bipolar disorder is a lifelong, recurrent illness with substantial risk of functional impairment and elevated suicide rate. Prognosis improves with early diagnosis, mood-stabiliser adherence, and relapse-prevention strategies, whereas repeated episodes, substance misuse, and poor adherence worsen outcomes.",
+    "pitfalls": [
+      "Treating bipolar depression with an antidepressant alone and triggering a manic switch or rapid cycling",
+      "Missing a history of hypomania and misdiagnosing unipolar depression",
+      "Failing to monitor lithium levels and organ function",
+      "Overlooking suicide risk during depressive and mixed states",
+      "Attributing early mania to intoxication and delaying appropriate treatment"
+    ],
+    "references": [
+      "Kaplan & Sadock's Synopsis of Psychiatry",
+      "DSM-5-TR"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Mood stabilisers such as lithium or certain anticonvulsants, with atypical antipsychotics, as the mainstay of acute mania and long-term maintenance",
+      "Treat bipolar depression with mood-stabiliser or antipsychotic-based regimens and avoid antidepressant monotherapy, which can precipitate mania or rapid cycling",
+      "Psychoeducation, structured psychotherapy and regularisation of sleep and circadian rhythm to reduce relapse",
+      "Screen for and address substance misuse as an episode precipitant",
+      "Monitor lithium serum levels with renal and thyroid function given its narrow therapeutic index",
+      "Admit for severe mania, psychosis or high suicide risk, exploiting lithium's anti-suicidal effect in maintenance",
+      "Relapse-prevention planning with mood charting and coordinated psychiatric follow-up"
     ]
-   ],
-   "caption": "Overview comparison matrix for bipolar disorder."
-  }
- ],
- "diagrams": [
-  {
-   "id": "bipolar-disorder-real-image",
-   "title": "Bipolar disorder: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "bipolar_disorder-pathway",
+      "title": "Bipolar disorder: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Defined by episodes of abnormally elevated, expansive, or irritable mood with increased energy and activity, alternating over time with depressive episodes",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Suicidal ideation, which carries high risk across both manic and depressive phases",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Collateral history to identify prior manic or hypomanic episodes, Thyroid, renal function, and pregnancy testing prior to mood stabiliser use, Serum drug-level monitoring for agents with narrow therapeutic indices such as"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Mood stabilisers such as lithium or certain anticonvulsants, with atypical antipsychotics, as the mainstay of acute mania and long-term maintenance"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating bipolar depression with an antidepressant alone and triggering a manic switch or rapid cycling"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of bipolar disorder."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "bipolar_disorder-matrix",
+      "title": "Bipolar disorder: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Defined by episodes of abnormally elevated, expansive, or irritable mood with increased energy and activity, alternating over",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Collateral history to identify prior manic or hypomanic episodes, Thyroid, renal function, and pregnancy testing prior to mood",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Major depressive disorder (unipolar), Schizoaffective disorder, Schizophrenia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Mood stabilisers such as lithium or certain anticonvulsants, with atypical antipsychotics, as the mainstay of acute mania and",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating bipolar depression with an antidepressant alone and triggering a manic switch or rapid cycling",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for bipolar disorder."
+    }
+  ],
+  "diagrams": []
 }

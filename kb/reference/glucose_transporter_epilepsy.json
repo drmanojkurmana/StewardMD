@@ -1,174 +1,152 @@
 {
- "id": "glucose_transporter_epilepsy",
- "name": "GLUT1 deficiency epilepsy phenotype",
- "aliases": [
-  "GLUT1 deficiency syndrome",
-  "GLUT1DS",
-  "De Vivo disease",
-  "SLC2A1",
-  "glucose transporter type 1 deficiency"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurology",
- "specialty": "Neurology / Epileptology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "ILAE classification / Nelson Textbook of Paediatrics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by variants in SLC2A1 encoding the GLUT1 glucose transporter, impairing glucose transport across the blood-brain barrier",
-   "Early-onset epilepsy, often in infancy, is common and may include absence, myoclonic, generalised tonic-clonic or focal seizures",
-   "The clinical picture combines seizures with developmental delay, acquired microcephaly and a complex movement disorder including ataxia and dystonia",
-   "Symptoms characteristically fluctuate and may worsen with fasting or exertion and improve after eating",
-   "A paroxysmal exercise-induced dyskinesia phenotype and early-onset absence epilepsy are recognised presentations",
-   "The ketogenic diet is the specific and highly effective treatment, providing ketones as an alternative cerebral fuel",
-   "Prompt recognition matters because early dietary treatment can improve seizures, movement and cognitive outcomes"
+  "id": "glucose_transporter_epilepsy",
+  "name": "GLUT1 deficiency epilepsy phenotype",
+  "aliases": [
+    "GLUT1 deficiency syndrome",
+    "GLUT1DS",
+    "De Vivo disease",
+    "SLC2A1",
+    "glucose transporter type 1 deficiency"
   ],
-  "pathophysiology": "GLUT1 deficiency syndrome results from variants in SLC2A1 encoding the GLUT1 transporter responsible for facilitated glucose entry across the blood-brain barrier and into astrocytes. Reduced transporter function causes a chronic shortfall of glucose in the brain despite normal blood glucose, so cerebral energy supply becomes inadequate, particularly at times of increased demand such as fasting or exertion. This energy deficit produces seizures, movement disorder and impaired brain development, and it is bypassed therapeutically by providing ketone bodies through the ketogenic diet as an alternative fuel.",
-  "additionalDifferentials": [
-   "Childhood and early-onset absence epilepsy of other cause",
-   "Myoclonic-atonic epilepsy (Doose syndrome)",
-   "Mitochondrial and other metabolic epilepsies",
-   "Primary movement disorders with paroxysmal dyskinesia",
-   "Other developmental and epileptic encephalopathies",
-   "Idiopathic developmental delay with epilepsy"
-  ],
-  "additionalInvestigations": [
-   "Lumbar puncture showing a low CSF glucose with a low CSF-to-blood glucose ratio in the fasting state, with normal blood glucose",
-   "SLC2A1 gene testing to confirm the diagnosis",
-   "EEG, which may show generalised or focal discharges and can improve after eating",
-   "Brain MRI, usually unremarkable or non-specific, to exclude other pathology",
-   "Assessment of development, movement and head growth over time"
-  ],
-  "redFlags": [
-   "Early-onset epilepsy with a movement disorder and acquired microcephaly",
-   "Seizures or symptoms that clearly worsen with fasting and improve with food",
-   "Low CSF glucose with normal blood glucose",
-   "Paroxysmal exercise-induced dyskinesia with cognitive or seizure involvement"
-  ],
-  "prognosis": "With early institution of the ketogenic diet, seizure control and movement symptoms often improve substantially, though some cognitive and motor impairment may persist. Delayed diagnosis and treatment are associated with worse neurodevelopmental outcomes.",
-  "pitfalls": [
-   "Measuring CSF glucose without a paired fasting blood glucose, obscuring the diagnostic ratio",
-   "Attributing early-onset absence or myoclonic epilepsy solely to a common genetic generalised epilepsy",
-   "Overlooking the fasting-dependent fluctuation of symptoms",
-   "Failing to consider the ketogenic diet as specific, effective treatment"
-  ],
-  "references": [
-   "ILAE classification of the epilepsies",
-   "Nelson Textbook of Paediatrics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Start a ketogenic diet (classic or modified Atkins) as the specific treatment, supplying ketone bodies as an alternative cerebral fuel that bypasses the GLUT1 defect",
-   "Avoid substances that further impair GLUT1 function or blunt ketosis, such as caffeine and other methylxanthines",
-   "Use antiseizure medication as an adjunct for breakthrough seizures while the diet is optimised, favouring agents that do not hinder ketogenesis",
-   "Encourage regular meals and avoid fasting or excessive exertion that precipitate symptomatic cerebral energy failure",
-   "Manage the associated movement disorder and provide developmental, physiotherapy and educational support",
-   "Monitor growth, degree of ketosis, lipid profile and for renal calculi and other adverse effects of the ketogenic diet",
-   "Offer genetic counselling for SLC2A1 variants and coordinate care through neurology, dietetics and clinical genetics"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "glucose_transporter_epilepsy-pathway",
-   "title": "GLUT1 deficiency epilepsy phenotype: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by variants in SLC2A1 encoding the GLUT1 glucose transporter, impairing glucose transport across the blood-brain barrier",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Early-onset epilepsy with a movement disorder and acquired microcephaly",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Lumbar puncture showing a low CSF glucose with a low CSF-to-blood glucose ratio in the fasting state, with normal blood glucose, SLC2A1 gene testing to confirm the diagnosis, EEG, which may show generalised or focal"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Start a ketogenic diet (classic or modified Atkins) as the specific treatment, supplying ketone bodies as an alternative cerebral fuel that bypasses the GLUT1 defect"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Measuring CSF glucose without a paired fasting blood glucose, obscuring the diagnostic ratio"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of glut1 deficiency epilepsy phenotype."
-  }
- ],
- "tables": [
-  {
-   "id": "glucose_transporter_epilepsy-matrix",
-   "title": "GLUT1 deficiency epilepsy phenotype: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by variants in SLC2A1 encoding the GLUT1 glucose transporter, impairing glucose transport across the blood-brain barrier",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurology",
+  "specialty": "Neurology / Epileptology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "ILAE classification / Nelson Textbook of Paediatrics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by variants in SLC2A1 encoding the GLUT1 glucose transporter, impairing glucose transport across the blood-brain barrier",
+      "Early-onset epilepsy, often in infancy, is common and may include absence, myoclonic, generalised tonic-clonic or focal seizures",
+      "The clinical picture combines seizures with developmental delay, acquired microcephaly and a complex movement disorder including ataxia and dystonia",
+      "Symptoms characteristically fluctuate and may worsen with fasting or exertion and improve after eating",
+      "A paroxysmal exercise-induced dyskinesia phenotype and early-onset absence epilepsy are recognised presentations",
+      "The ketogenic diet is the specific and highly effective treatment, providing ketones as an alternative cerebral fuel",
+      "Prompt recognition matters because early dietary treatment can improve seizures, movement and cognitive outcomes"
     ],
-    [
-     "Key Investigations",
-     "Lumbar puncture showing a low CSF glucose with a low CSF-to-blood glucose ratio in the fasting state, with normal blood glucose,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "GLUT1 deficiency syndrome results from variants in SLC2A1 encoding the GLUT1 transporter responsible for facilitated glucose entry across the blood-brain barrier and into astrocytes. Reduced transporter function causes a chronic shortfall of glucose in the brain despite normal blood glucose, so cerebral energy supply becomes inadequate, particularly at times of increased demand such as fasting or exertion. This energy deficit produces seizures, movement disorder and impaired brain development, and it is bypassed therapeutically by providing ketone bodies through the ketogenic diet as an alternative fuel.",
+    "additionalDifferentials": [
+      "Childhood and early-onset absence epilepsy of other cause",
+      "Myoclonic-atonic epilepsy (Doose syndrome)",
+      "Mitochondrial and other metabolic epilepsies",
+      "Primary movement disorders with paroxysmal dyskinesia",
+      "Other developmental and epileptic encephalopathies",
+      "Idiopathic developmental delay with epilepsy"
     ],
-    [
-     "Primary Differentials",
-     "Childhood and early-onset absence epilepsy of other cause, Myoclonic-atonic epilepsy (Doose syndrome), Mitochondrial and other",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Lumbar puncture showing a low CSF glucose with a low CSF-to-blood glucose ratio in the fasting state, with normal blood glucose",
+      "SLC2A1 gene testing to confirm the diagnosis",
+      "EEG, which may show generalised or focal discharges and can improve after eating",
+      "Brain MRI, usually unremarkable or non-specific, to exclude other pathology",
+      "Assessment of development, movement and head growth over time"
     ],
-    [
-     "Management Strategy",
-     "Start a ketogenic diet (classic or modified Atkins) as the specific treatment, supplying ketone bodies as an alternative cerebral",
-     "Core treatment modality"
+    "redFlags": [
+      "Early-onset epilepsy with a movement disorder and acquired microcephaly",
+      "Seizures or symptoms that clearly worsen with fasting and improve with food",
+      "Low CSF glucose with normal blood glucose",
+      "Paroxysmal exercise-induced dyskinesia with cognitive or seizure involvement"
     ],
-    [
-     "Clinical Pitfall",
-     "Measuring CSF glucose without a paired fasting blood glucose, obscuring the diagnostic ratio",
-     "Prevent diagnostic or management error"
+    "prognosis": "With early institution of the ketogenic diet, seizure control and movement symptoms often improve substantially, though some cognitive and motor impairment may persist. Delayed diagnosis and treatment are associated with worse neurodevelopmental outcomes.",
+    "pitfalls": [
+      "Measuring CSF glucose without a paired fasting blood glucose, obscuring the diagnostic ratio",
+      "Attributing early-onset absence or myoclonic epilepsy solely to a common genetic generalised epilepsy",
+      "Overlooking the fasting-dependent fluctuation of symptoms",
+      "Failing to consider the ketogenic diet as specific, effective treatment"
+    ],
+    "references": [
+      "ILAE classification of the epilepsies",
+      "Nelson Textbook of Paediatrics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Start a ketogenic diet (classic or modified Atkins) as the specific treatment, supplying ketone bodies as an alternative cerebral fuel that bypasses the GLUT1 defect",
+      "Avoid substances that further impair GLUT1 function or blunt ketosis, such as caffeine and other methylxanthines",
+      "Use antiseizure medication as an adjunct for breakthrough seizures while the diet is optimised, favouring agents that do not hinder ketogenesis",
+      "Encourage regular meals and avoid fasting or excessive exertion that precipitate symptomatic cerebral energy failure",
+      "Manage the associated movement disorder and provide developmental, physiotherapy and educational support",
+      "Monitor growth, degree of ketosis, lipid profile and for renal calculi and other adverse effects of the ketogenic diet",
+      "Offer genetic counselling for SLC2A1 variants and coordinate care through neurology, dietetics and clinical genetics"
     ]
-   ],
-   "caption": "Overview comparison matrix for glut1 deficiency epilepsy phenotype."
-  }
- ],
- "diagrams": [
-  {
-   "id": "glucose-transporter-epilepsy-real-image",
-   "title": "GLUT1 deficiency epilepsy phenotype: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "glucose_transporter_epilepsy-pathway",
+      "title": "GLUT1 deficiency epilepsy phenotype: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by variants in SLC2A1 encoding the GLUT1 glucose transporter, impairing glucose transport across the blood-brain barrier",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Early-onset epilepsy with a movement disorder and acquired microcephaly",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Lumbar puncture showing a low CSF glucose with a low CSF-to-blood glucose ratio in the fasting state, with normal blood glucose, SLC2A1 gene testing to confirm the diagnosis, EEG, which may show generalised or focal"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Start a ketogenic diet (classic or modified Atkins) as the specific treatment, supplying ketone bodies as an alternative cerebral fuel that bypasses the GLUT1 defect"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Measuring CSF glucose without a paired fasting blood glucose, obscuring the diagnostic ratio"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of glut1 deficiency epilepsy phenotype."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "glucose_transporter_epilepsy-matrix",
+      "title": "GLUT1 deficiency epilepsy phenotype: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by variants in SLC2A1 encoding the GLUT1 glucose transporter, impairing glucose transport across the blood-brain barrier",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Lumbar puncture showing a low CSF glucose with a low CSF-to-blood glucose ratio in the fasting state, with normal blood glucose,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Childhood and early-onset absence epilepsy of other cause, Myoclonic-atonic epilepsy (Doose syndrome), Mitochondrial and other",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Start a ketogenic diet (classic or modified Atkins) as the specific treatment, supplying ketone bodies as an alternative cerebral",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Measuring CSF glucose without a paired fasting blood glucose, obscuring the diagnostic ratio",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for glut1 deficiency epilepsy phenotype."
+    }
+  ],
+  "diagrams": []
 }

@@ -1,168 +1,146 @@
 {
- "id": "functional_abdominal_bloating",
- "name": "Functional abdominal bloating and distension",
- "aliases": [
-  "functional bloating"
- ],
- "class": "non_infective",
- "system": "Gastrointestinal",
- "specialty": "Gastroenterology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rome IV criteria / gastroenterology references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Recurrent sensation of abdominal bloating or visible distension not sufficiently explained by another disorder",
-   "Bloating is the subjective feeling of pressure, whereas distension is a measurable increase in abdominal girth, and they may occur together or separately",
-   "Symptoms typically worsen through the day and after meals and improve overnight",
-   "It frequently overlaps with other functional gut disorders such as irritable bowel syndrome and constipation",
-   "Organic causes such as carbohydrate malabsorption, bacterial overgrowth and, importantly, ovarian and other intra-abdominal pathology should be considered",
-   "Management addresses coexisting constipation, dietary triggers and, in some, gut microbiota and abdominal wall behaviour"
+  "id": "functional_abdominal_bloating",
+  "name": "Functional abdominal bloating and distension",
+  "aliases": [
+    "functional bloating"
   ],
-  "pathophysiology": "Functional abdominal bloating and distension arise from a combination of factors including altered handling and perception of intestinal gas, visceral hypersensitivity, abnormal abdominal wall muscle behaviour (an abdomino-phrenic dyssynergia in which the diaphragm descends and the abdominal wall relaxes), and changes in gut microbiota and fermentation. These mechanisms produce the sensation of bloating and, when the abdominal wall protrudes, visible distension, without a defining structural abnormality. Overlap with other functional gut disorders reflects shared gut-brain mechanisms.",
-  "additionalDifferentials": [
-   "Irritable bowel syndrome and functional constipation",
-   "Carbohydrate malabsorption (for example lactose)",
-   "Small intestinal bacterial overgrowth",
-   "Coeliac disease",
-   "Ovarian or other intra-abdominal mass or ascites"
-  ],
-  "additionalInvestigations": [
-   "Clinical assessment of the pattern and diurnal variation of symptoms",
-   "Coeliac serology and assessment for carbohydrate malabsorption where indicated",
-   "Consideration of breath testing for bacterial overgrowth",
-   "Imaging or gynaecological assessment if an organic mass or ascites is suspected",
-   "Review of coexisting constipation as a driver"
-  ],
-  "redFlags": [
-   "Persistent distension with weight loss or a palpable mass",
-   "New symptoms in an older woman raising concern for ovarian pathology",
-   "Ascites",
-   "Alarm features suggesting organic disease"
-  ],
-  "prognosis": "The condition is benign and often chronic, with symptoms fluctuating; many patients improve when coexisting constipation and dietary triggers are addressed.",
-  "pitfalls": [
-   "Overlooking ovarian or other intra-abdominal pathology causing distension",
-   "Ignoring treatable coexisting constipation",
-   "Attributing all bloating to gas rather than abdominal wall behaviour",
-   "Missing carbohydrate malabsorption or bacterial overgrowth"
-  ],
-  "references": [
-   "Rome IV diagnostic criteria",
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat coexisting constipation with laxatives, as it is a key reversible driver of bloating and distension",
-   "Dietary modification, including a trial of a low-FODMAP diet and reduction of fermentable, gas-producing foods",
-   "Probiotics or a trial of the non-absorbable antibiotic rifaximin where bacterial overgrowth is suspected",
-   "Antispasmodics or peppermint oil for associated abdominal discomfort",
-   "Neuromodulators such as low-dose tricyclic antidepressants for visceral hypersensitivity in refractory cases",
-   "Biofeedback and diaphragmatic-abdominal retraining for abdomino-phrenic dyssynergia",
-   "Exclude organic disease, including ovarian and other intra-abdominal pathology, before settling on the diagnosis"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "functional_abdominal_bloating-pathway",
-   "title": "Functional abdominal bloating and distension: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Recurrent sensation of abdominal bloating or visible distension not sufficiently explained by another disorder",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Persistent distension with weight loss or a palpable mass",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Clinical assessment of the pattern and diurnal variation of symptoms, Coeliac serology and assessment for carbohydrate malabsorption where indicated, Consideration of breath testing for bacterial overgrowth"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat coexisting constipation with laxatives, as it is a key reversible driver of bloating and distension"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Overlooking ovarian or other intra-abdominal pathology causing distension"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of functional abdominal bloating and distension."
-  }
- ],
- "tables": [
-  {
-   "id": "functional_abdominal_bloating-matrix",
-   "title": "Functional abdominal bloating and distension: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Recurrent sensation of abdominal bloating or visible distension not sufficiently explained by another disorder",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Gastrointestinal",
+  "specialty": "Gastroenterology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rome IV criteria / gastroenterology references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Recurrent sensation of abdominal bloating or visible distension not sufficiently explained by another disorder",
+      "Bloating is the subjective feeling of pressure, whereas distension is a measurable increase in abdominal girth, and they may occur together or separately",
+      "Symptoms typically worsen through the day and after meals and improve overnight",
+      "It frequently overlaps with other functional gut disorders such as irritable bowel syndrome and constipation",
+      "Organic causes such as carbohydrate malabsorption, bacterial overgrowth and, importantly, ovarian and other intra-abdominal pathology should be considered",
+      "Management addresses coexisting constipation, dietary triggers and, in some, gut microbiota and abdominal wall behaviour"
     ],
-    [
-     "Key Investigations",
-     "Clinical assessment of the pattern and diurnal variation of symptoms, Coeliac serology and assessment for carbohydrate",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Functional abdominal bloating and distension arise from a combination of factors including altered handling and perception of intestinal gas, visceral hypersensitivity, abnormal abdominal wall muscle behaviour (an abdomino-phrenic dyssynergia in which the diaphragm descends and the abdominal wall relaxes), and changes in gut microbiota and fermentation. These mechanisms produce the sensation of bloating and, when the abdominal wall protrudes, visible distension, without a defining structural abnormality. Overlap with other functional gut disorders reflects shared gut-brain mechanisms.",
+    "additionalDifferentials": [
+      "Irritable bowel syndrome and functional constipation",
+      "Carbohydrate malabsorption (for example lactose)",
+      "Small intestinal bacterial overgrowth",
+      "Coeliac disease",
+      "Ovarian or other intra-abdominal mass or ascites"
     ],
-    [
-     "Primary Differentials",
-     "Irritable bowel syndrome and functional constipation, Carbohydrate malabsorption (for example lactose), Small intestinal",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Clinical assessment of the pattern and diurnal variation of symptoms",
+      "Coeliac serology and assessment for carbohydrate malabsorption where indicated",
+      "Consideration of breath testing for bacterial overgrowth",
+      "Imaging or gynaecological assessment if an organic mass or ascites is suspected",
+      "Review of coexisting constipation as a driver"
     ],
-    [
-     "Management Strategy",
-     "Treat coexisting constipation with laxatives, as it is a key reversible driver of bloating and distension",
-     "Core treatment modality"
+    "redFlags": [
+      "Persistent distension with weight loss or a palpable mass",
+      "New symptoms in an older woman raising concern for ovarian pathology",
+      "Ascites",
+      "Alarm features suggesting organic disease"
     ],
-    [
-     "Clinical Pitfall",
-     "Overlooking ovarian or other intra-abdominal pathology causing distension",
-     "Prevent diagnostic or management error"
+    "prognosis": "The condition is benign and often chronic, with symptoms fluctuating; many patients improve when coexisting constipation and dietary triggers are addressed.",
+    "pitfalls": [
+      "Overlooking ovarian or other intra-abdominal pathology causing distension",
+      "Ignoring treatable coexisting constipation",
+      "Attributing all bloating to gas rather than abdominal wall behaviour",
+      "Missing carbohydrate malabsorption or bacterial overgrowth"
+    ],
+    "references": [
+      "Rome IV diagnostic criteria",
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat coexisting constipation with laxatives, as it is a key reversible driver of bloating and distension",
+      "Dietary modification, including a trial of a low-FODMAP diet and reduction of fermentable, gas-producing foods",
+      "Probiotics or a trial of the non-absorbable antibiotic rifaximin where bacterial overgrowth is suspected",
+      "Antispasmodics or peppermint oil for associated abdominal discomfort",
+      "Neuromodulators such as low-dose tricyclic antidepressants for visceral hypersensitivity in refractory cases",
+      "Biofeedback and diaphragmatic-abdominal retraining for abdomino-phrenic dyssynergia",
+      "Exclude organic disease, including ovarian and other intra-abdominal pathology, before settling on the diagnosis"
     ]
-   ],
-   "caption": "Overview comparison matrix for functional abdominal bloating and distension."
-  }
- ],
- "diagrams": [
-  {
-   "id": "functional-abdominal-bloating-real-image",
-   "title": "Functional abdominal bloating and distension: Diagnostic Abdominal Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-abdomen-ct.jpg?v=kbri3",
-   "caption": "Axial contrast-enhanced abdominal computed tomography scan demonstrating solid visceral parenchyma, bowel wall caliber, and vascular enhancement.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Solid Viscera",
-     "description": "Hepatosplenic parenchymal attenuation, pancreatic contour, and renal enhancement."
-    },
-    {
-     "label": "Gastrointestinal Tract",
-     "description": "Gastric, small bowel, and colonic caliber with mural enhancement symmetry."
-    },
-    {
-     "label": "Mesentery & Peritoneum",
-     "description": "Mesenteric fat clarity, lymph node stations, and peritoneal reflections."
+      "id": "functional_abdominal_bloating-pathway",
+      "title": "Functional abdominal bloating and distension: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Recurrent sensation of abdominal bloating or visible distension not sufficiently explained by another disorder",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Persistent distension with weight loss or a palpable mass",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Clinical assessment of the pattern and diurnal variation of symptoms, Coeliac serology and assessment for carbohydrate malabsorption where indicated, Consideration of breath testing for bacterial overgrowth"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat coexisting constipation with laxatives, as it is a key reversible driver of bloating and distension"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Overlooking ovarian or other intra-abdominal pathology causing distension"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of functional abdominal bloating and distension."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "functional_abdominal_bloating-matrix",
+      "title": "Functional abdominal bloating and distension: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Recurrent sensation of abdominal bloating or visible distension not sufficiently explained by another disorder",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Clinical assessment of the pattern and diurnal variation of symptoms, Coeliac serology and assessment for carbohydrate",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Irritable bowel syndrome and functional constipation, Carbohydrate malabsorption (for example lactose), Small intestinal",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat coexisting constipation with laxatives, as it is a key reversible driver of bloating and distension",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Overlooking ovarian or other intra-abdominal pathology causing distension",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for functional abdominal bloating and distension."
+    }
+  ],
+  "diagrams": []
 }

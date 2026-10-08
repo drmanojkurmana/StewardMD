@@ -1,174 +1,152 @@
 {
- "id": "branchio_oto_renal_syndrome",
- "name": "Branchio-oto-renal syndrome",
- "aliases": [
-  "BOR syndrome",
-  "EYA1",
-  "SIX1",
-  "SIX5",
-  "Melnick-Fraser syndrome"
- ],
- "class": "non_infective",
- "system": "Ear / Audiology / Genetics",
- "specialty": "Otology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Cummings Otolaryngology / Emery's Principles of Medical Genetics",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Characterised by branchial anomalies, otological abnormalities with hearing loss, and renal malformations",
-   "Branchial defects include lateral cervical fistulae, sinuses or cysts along the line of the second branchial cleft",
-   "Otological features include preauricular pits, malformed pinnae, and hearing loss that may be sensorineural, conductive or mixed",
-   "Most commonly caused by mutations in EYA1, with SIX1 and SIX5 also implicated; inheritance is autosomal dominant with variable expressivity",
-   "Renal anomalies range from mild dysplasia to agenesis and can significantly affect prognosis, so renal imaging is essential",
-   "Temporal-bone imaging often shows cochlear hypoplasia or other inner-ear malformations",
-   "Preauricular pits with hearing loss should prompt evaluation for the full syndrome including the kidneys"
+  "id": "branchio_oto_renal_syndrome",
+  "name": "Branchio-oto-renal syndrome",
+  "aliases": [
+    "BOR syndrome",
+    "EYA1",
+    "SIX1",
+    "SIX5",
+    "Melnick-Fraser syndrome"
   ],
-  "pathophysiology": "Branchio-oto-renal syndrome results from mutations in transcription-factor and cofactor genes, most often EYA1 and the SIX family, which regulate development of structures derived from the branchial apparatus, the otic placode and the metanephric kidney. Disruption of this shared developmental network during embryogenesis produces the coexisting branchial (cleft-derived), otological (external, middle and inner ear) and renal abnormalities. Because expression is variable, affected individuals within a family can show markedly different combinations and severities of features, and penetrance is incomplete.",
-  "additionalDifferentials": [
-   "Isolated branchial cleft cyst, sinus or fistula",
-   "Isolated preauricular pit or sinus without syndromic features",
-   "Other syndromic hearing loss such as Pendred or Waardenburg syndrome",
-   "CHARGE syndrome with ear and other anomalies",
-   "Townes-Brocks syndrome with ear, anal and limb anomalies",
-   "Isolated congenital renal dysplasia or agenesis"
-  ],
-  "additionalInvestigations": [
-   "Audiometry to characterise the type and severity of hearing loss",
-   "Renal ultrasound and further imaging to detect dysplasia, agenesis or collecting-system anomalies",
-   "High-resolution CT or MRI of the temporal bones for inner-ear malformation",
-   "Clinical assessment for branchial fistulae, sinuses and preauricular pits",
-   "Molecular genetic testing of EYA1 and related genes with family screening"
-  ],
-  "redFlags": [
-   "Signs of renal impairment or a solitary or absent kidney requiring nephrology input",
-   "Recurrent infection or discharge from a branchial fistula or sinus",
-   "Progressive hearing loss threatening speech development in a child",
-   "Family history of hearing loss with renal or branchial anomalies indicating dominant inheritance"
-  ],
-  "prognosis": "Prognosis is largely determined by the severity of renal involvement, which can range from clinically silent to end-stage renal failure; hearing loss is managed with amplification or surgery, and branchial anomalies are treated surgically when symptomatic.",
-  "pitfalls": [
-   "Treating a preauricular pit or branchial fistula in isolation without evaluating hearing and kidneys",
-   "Assuming normal renal function without imaging, given the wide range of renal involvement",
-   "Underestimating variability within a family and missing mildly affected relatives",
-   "Overlooking inner-ear malformations that influence surgical and rehabilitation planning"
-  ],
-  "references": [
-   "Cummings Otolaryngology: Head and Neck Surgery",
-   "Emery's Elements of Medical Genetics and Genomics"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Hearing rehabilitation with amplification or cochlear implantation, and surgery to address any conductive component",
-   "Surgical excision of symptomatic branchial fistulae, sinuses and cysts",
-   "Renal surveillance and management extending to renal replacement therapy or transplantation for progressive renal failure",
-   "Temporal-bone imaging and monitoring of inner-ear malformations such as cochlear hypoplasia",
-   "Speech, language and educational support for children with hearing loss",
-   "Multidisciplinary otology, nephrology and clinical genetics follow-up",
-   "Molecular testing of EYA1 and related genes with family screening and genetic counselling for autosomal dominant inheritance"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "branchio_oto_renal_syndrome-pathway",
-   "title": "Branchio-oto-renal syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Characterised by branchial anomalies, otological abnormalities with hearing loss, and renal malformations",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Signs of renal impairment or a solitary or absent kidney requiring nephrology input",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Audiometry to characterise the type and severity of hearing loss, Renal ultrasound and further imaging to detect dysplasia, agenesis or collecting-system anomalies, High-resolution CT or MRI of the temporal bones for"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Hearing rehabilitation with amplification or cochlear implantation, and surgery to address any conductive component"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating a preauricular pit or branchial fistula in isolation without evaluating hearing and kidneys"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of branchio-oto-renal syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "branchio_oto_renal_syndrome-matrix",
-   "title": "Branchio-oto-renal syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Characterised by branchial anomalies, otological abnormalities with hearing loss, and renal malformations",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Ear / Audiology / Genetics",
+  "specialty": "Otology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Cummings Otolaryngology / Emery's Principles of Medical Genetics",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Characterised by branchial anomalies, otological abnormalities with hearing loss, and renal malformations",
+      "Branchial defects include lateral cervical fistulae, sinuses or cysts along the line of the second branchial cleft",
+      "Otological features include preauricular pits, malformed pinnae, and hearing loss that may be sensorineural, conductive or mixed",
+      "Most commonly caused by mutations in EYA1, with SIX1 and SIX5 also implicated; inheritance is autosomal dominant with variable expressivity",
+      "Renal anomalies range from mild dysplasia to agenesis and can significantly affect prognosis, so renal imaging is essential",
+      "Temporal-bone imaging often shows cochlear hypoplasia or other inner-ear malformations",
+      "Preauricular pits with hearing loss should prompt evaluation for the full syndrome including the kidneys"
     ],
-    [
-     "Key Investigations",
-     "Audiometry to characterise the type and severity of hearing loss, Renal ultrasound and further imaging to detect dysplasia,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Branchio-oto-renal syndrome results from mutations in transcription-factor and cofactor genes, most often EYA1 and the SIX family, which regulate development of structures derived from the branchial apparatus, the otic placode and the metanephric kidney. Disruption of this shared developmental network during embryogenesis produces the coexisting branchial (cleft-derived), otological (external, middle and inner ear) and renal abnormalities. Because expression is variable, affected individuals within a family can show markedly different combinations and severities of features, and penetrance is incomplete.",
+    "additionalDifferentials": [
+      "Isolated branchial cleft cyst, sinus or fistula",
+      "Isolated preauricular pit or sinus without syndromic features",
+      "Other syndromic hearing loss such as Pendred or Waardenburg syndrome",
+      "CHARGE syndrome with ear and other anomalies",
+      "Townes-Brocks syndrome with ear, anal and limb anomalies",
+      "Isolated congenital renal dysplasia or agenesis"
     ],
-    [
-     "Primary Differentials",
-     "Isolated branchial cleft cyst, sinus or fistula, Isolated preauricular pit or sinus without syndromic features, Other syndromic",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Audiometry to characterise the type and severity of hearing loss",
+      "Renal ultrasound and further imaging to detect dysplasia, agenesis or collecting-system anomalies",
+      "High-resolution CT or MRI of the temporal bones for inner-ear malformation",
+      "Clinical assessment for branchial fistulae, sinuses and preauricular pits",
+      "Molecular genetic testing of EYA1 and related genes with family screening"
     ],
-    [
-     "Management Strategy",
-     "Hearing rehabilitation with amplification or cochlear implantation, and surgery to address any conductive component",
-     "Core treatment modality"
+    "redFlags": [
+      "Signs of renal impairment or a solitary or absent kidney requiring nephrology input",
+      "Recurrent infection or discharge from a branchial fistula or sinus",
+      "Progressive hearing loss threatening speech development in a child",
+      "Family history of hearing loss with renal or branchial anomalies indicating dominant inheritance"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating a preauricular pit or branchial fistula in isolation without evaluating hearing and kidneys",
-     "Prevent diagnostic or management error"
+    "prognosis": "Prognosis is largely determined by the severity of renal involvement, which can range from clinically silent to end-stage renal failure; hearing loss is managed with amplification or surgery, and branchial anomalies are treated surgically when symptomatic.",
+    "pitfalls": [
+      "Treating a preauricular pit or branchial fistula in isolation without evaluating hearing and kidneys",
+      "Assuming normal renal function without imaging, given the wide range of renal involvement",
+      "Underestimating variability within a family and missing mildly affected relatives",
+      "Overlooking inner-ear malformations that influence surgical and rehabilitation planning"
+    ],
+    "references": [
+      "Cummings Otolaryngology: Head and Neck Surgery",
+      "Emery's Elements of Medical Genetics and Genomics"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Hearing rehabilitation with amplification or cochlear implantation, and surgery to address any conductive component",
+      "Surgical excision of symptomatic branchial fistulae, sinuses and cysts",
+      "Renal surveillance and management extending to renal replacement therapy or transplantation for progressive renal failure",
+      "Temporal-bone imaging and monitoring of inner-ear malformations such as cochlear hypoplasia",
+      "Speech, language and educational support for children with hearing loss",
+      "Multidisciplinary otology, nephrology and clinical genetics follow-up",
+      "Molecular testing of EYA1 and related genes with family screening and genetic counselling for autosomal dominant inheritance"
     ]
-   ],
-   "caption": "Overview comparison matrix for branchio-oto-renal syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "branchio-oto-renal-syndrome-real-image",
-   "title": "Branchio-oto-renal syndrome: Diagnostic Renal Ultrasonography",
-   "type": "ultrasound",
-   "src": "/assets/kb-real-images/hydronephrosis-ultrasound.jpg?v=kbri3",
-   "caption": "Diagnostic renal ultrasonography demonstrating renal parenchymal depth, corticomedullary differentiation, and pelvicalyceal collecting system.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Renal Cortex",
-     "description": "Cortical echogenicity relative to adjacent liver/spleen and parenchymal thickness."
-    },
-    {
-     "label": "Corticomedullary Junction",
-     "description": "Medullary pyramid definition and structural architecture."
-    },
-    {
-     "label": "Collecting System",
-     "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
+      "id": "branchio_oto_renal_syndrome-pathway",
+      "title": "Branchio-oto-renal syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Characterised by branchial anomalies, otological abnormalities with hearing loss, and renal malformations",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Signs of renal impairment or a solitary or absent kidney requiring nephrology input",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Audiometry to characterise the type and severity of hearing loss, Renal ultrasound and further imaging to detect dysplasia, agenesis or collecting-system anomalies, High-resolution CT or MRI of the temporal bones for"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Hearing rehabilitation with amplification or cochlear implantation, and surgery to address any conductive component"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating a preauricular pit or branchial fistula in isolation without evaluating hearing and kidneys"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of branchio-oto-renal syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "branchio_oto_renal_syndrome-matrix",
+      "title": "Branchio-oto-renal syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Characterised by branchial anomalies, otological abnormalities with hearing loss, and renal malformations",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Audiometry to characterise the type and severity of hearing loss, Renal ultrasound and further imaging to detect dysplasia,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Isolated branchial cleft cyst, sinus or fistula, Isolated preauricular pit or sinus without syndromic features, Other syndromic",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Hearing rehabilitation with amplification or cochlear implantation, and surgery to address any conductive component",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating a preauricular pit or branchial fistula in isolation without evaluating hearing and kidneys",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for branchio-oto-renal syndrome."
+    }
+  ],
+  "diagrams": []
 }

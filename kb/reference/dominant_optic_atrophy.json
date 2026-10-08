@@ -1,177 +1,155 @@
 {
- "id": "dominant_optic_atrophy",
- "name": "Dominant optic atrophy (Kjer, OPA1)",
- "aliases": [
-  "autosomal dominant optic atrophy",
-  "ADOA",
-  "Kjer type optic atrophy",
-  "OPA1",
-  "DOA"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Kanski / Taylor & Hoyt Paediatric Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The commonest inherited optic neuropathy, typically presenting in the first two decades with insidious, painless, bilateral and symmetrical loss of central vision",
-   "Colour vision is affected early, classically with a subtle blue-yellow (tritan) or generalised dyschromatopsia disproportionate to acuity",
-   "Fundus shows temporal or diffuse optic disc pallor, often with a characteristic temporal wedge of atrophy",
-   "Most cases arise from mutations in OPA1, a nuclear gene encoding a mitochondrial inner-membrane fusion protein, giving marked variability in severity even within one family",
-   "Visual fields typically show a centrocaecal or central scotoma reflecting preferential loss of the papillomacular bundle",
-   "A subset develop DOA-plus with sensorineural deafness, ophthalmoplegia, peripheral neuropathy or a mitochondrial myopathy",
-   "Diagnosis rests on the clinical picture supported by OCT thinning of the retinal nerve fibre layer and confirmed by genetic testing",
-   "Penetrance is incomplete, so mildly affected relatives may be unaware of any deficit"
+  "id": "dominant_optic_atrophy",
+  "name": "Dominant optic atrophy (Kjer, OPA1)",
+  "aliases": [
+    "autosomal dominant optic atrophy",
+    "ADOA",
+    "Kjer type optic atrophy",
+    "OPA1",
+    "DOA"
   ],
-  "pathophysiology": "Dominant optic atrophy usually results from heterozygous mutations in OPA1, a nuclear-encoded protein embedded in the inner mitochondrial membrane that governs mitochondrial fusion, cristae architecture and control of programmed cell death. Impaired mitochondrial dynamics render the metabolically demanding retinal ganglion cells vulnerable, with preferential degeneration of the small fibres of the papillomacular bundle. The result is progressive loss of ganglion cells and their axons, clinically expressed as central visual and colour deficits with temporal disc pallor. Because the mechanism is one of haploinsufficiency or a dominant-negative effect with incomplete penetrance and variable expressivity, phenotype ranges from asymptomatic carriers to severe syndromic disease.",
-  "additionalDifferentials": [
-   "Leber hereditary optic neuropathy",
-   "Behr syndrome and other syndromic optic atrophies",
-   "Toxic or nutritional optic neuropathy (including B12 deficiency)",
-   "Compressive optic nerve or chiasmal lesion",
-   "Demyelinating optic neuritis",
-   "Glaucomatous optic neuropathy",
-   "Hereditary spastic paraplegia with optic atrophy"
-  ],
-  "additionalInvestigations": [
-   "Optical coherence tomography of the retinal nerve fibre layer and macular ganglion cell complex",
-   "Formal colour vision assessment and automated perimetry",
-   "Pattern visual evoked potentials to document optic nerve dysfunction",
-   "Neuroimaging (MRI) to exclude a compressive or demyelinating cause",
-   "Targeted genetic testing for OPA1 and wider mitochondrial/optic atrophy gene panels",
-   "Audiometry and neurological assessment when a DOA-plus phenotype is suspected"
-  ],
-  "redFlags": [
-   "Rapid or markedly asymmetrical visual loss suggesting an alternative compressive or inflammatory cause",
-   "Additional neurological features (deafness, ataxia, neuropathy) indicating a DOA-plus syndrome",
-   "Pain on eye movement pointing towards optic neuritis rather than a hereditary atrophy",
-   "New field defect respecting the vertical midline suggesting chiasmal or retrochiasmal pathology"
-  ],
-  "prognosis": "Vision usually declines slowly and often stabilises at a moderate level, with most patients retaining useful sight, though a minority progress to legal blindness and DOA-plus cases carry additional systemic morbidity.",
-  "pitfalls": [
-   "Attributing early symptoms to refractive error or amblyopia and missing the hereditary pattern",
-   "Overlooking mildly affected relatives because of incomplete penetrance",
-   "Assuming a diagnosis without imaging and thereby missing a compressive lesion",
-   "Failing to screen for the systemic features of DOA-plus"
-  ],
-  "references": [
-   "Kanski's Clinical Ophthalmology",
-   "Taylor & Hoyt's Paediatric Ophthalmology and Strabismus"
-  ],
-  "crossLinks": [],
-  "management": [
-   "No proven disease-modifying therapy; management focuses on low-vision rehabilitation with visual aids, magnifiers and support for education and work",
-   "Avoidance of mitochondrial toxins such as tobacco and excess alcohol, with caution over drugs that impair mitochondrial function",
-   "Regular ophthalmic monitoring with acuity, colour vision, visual fields and optical coherence tomography of the retinal nerve fibre layer",
-   "Audiometry and neurological review for DOA-plus features such as sensorineural deafness, ophthalmoplegia and peripheral neuropathy",
-   "Registration as sight-impaired where appropriate with provision of low-vision services",
-   "Multidisciplinary input including ophthalmology, clinical genetics and audiology",
-   "Genetic counselling and family testing given autosomal dominant OPA1 inheritance with variable expressivity"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "dominant_optic_atrophy-pathway",
-   "title": "Dominant optic atrophy (Kjer, OPA1): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The commonest inherited optic neuropathy, typically presenting in the first two decades with insidious, painless, bilateral and symmetrical loss of central vision",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapid or markedly asymmetrical visual loss suggesting an alternative compressive or inflammatory cause",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Optical coherence tomography of the retinal nerve fibre layer and macular ganglion cell complex, Formal colour vision assessment and automated perimetry, Pattern visual evoked potentials to document optic nerve dysfunction"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: No proven disease-modifying therapy; management focuses on low-vision rehabilitation with visual aids, magnifiers and support for education and work"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Attributing early symptoms to refractive error or amblyopia and missing the hereditary pattern"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of dominant optic atrophy (kjer, opa1)."
-  }
- ],
- "tables": [
-  {
-   "id": "dominant_optic_atrophy-matrix",
-   "title": "Dominant optic atrophy (Kjer, OPA1): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The commonest inherited optic neuropathy, typically presenting in the first two decades with insidious, painless, bilateral and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Kanski / Taylor & Hoyt Paediatric Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The commonest inherited optic neuropathy, typically presenting in the first two decades with insidious, painless, bilateral and symmetrical loss of central vision",
+      "Colour vision is affected early, classically with a subtle blue-yellow (tritan) or generalised dyschromatopsia disproportionate to acuity",
+      "Fundus shows temporal or diffuse optic disc pallor, often with a characteristic temporal wedge of atrophy",
+      "Most cases arise from mutations in OPA1, a nuclear gene encoding a mitochondrial inner-membrane fusion protein, giving marked variability in severity even within one family",
+      "Visual fields typically show a centrocaecal or central scotoma reflecting preferential loss of the papillomacular bundle",
+      "A subset develop DOA-plus with sensorineural deafness, ophthalmoplegia, peripheral neuropathy or a mitochondrial myopathy",
+      "Diagnosis rests on the clinical picture supported by OCT thinning of the retinal nerve fibre layer and confirmed by genetic testing",
+      "Penetrance is incomplete, so mildly affected relatives may be unaware of any deficit"
     ],
-    [
-     "Key Investigations",
-     "Optical coherence tomography of the retinal nerve fibre layer and macular ganglion cell complex, Formal colour vision assessment",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Dominant optic atrophy usually results from heterozygous mutations in OPA1, a nuclear-encoded protein embedded in the inner mitochondrial membrane that governs mitochondrial fusion, cristae architecture and control of programmed cell death. Impaired mitochondrial dynamics render the metabolically demanding retinal ganglion cells vulnerable, with preferential degeneration of the small fibres of the papillomacular bundle. The result is progressive loss of ganglion cells and their axons, clinically expressed as central visual and colour deficits with temporal disc pallor. Because the mechanism is one of haploinsufficiency or a dominant-negative effect with incomplete penetrance and variable expressivity, phenotype ranges from asymptomatic carriers to severe syndromic disease.",
+    "additionalDifferentials": [
+      "Leber hereditary optic neuropathy",
+      "Behr syndrome and other syndromic optic atrophies",
+      "Toxic or nutritional optic neuropathy (including B12 deficiency)",
+      "Compressive optic nerve or chiasmal lesion",
+      "Demyelinating optic neuritis",
+      "Glaucomatous optic neuropathy",
+      "Hereditary spastic paraplegia with optic atrophy"
     ],
-    [
-     "Primary Differentials",
-     "Leber hereditary optic neuropathy, Behr syndrome and other syndromic optic atrophies, Toxic or nutritional optic neuropathy",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Optical coherence tomography of the retinal nerve fibre layer and macular ganglion cell complex",
+      "Formal colour vision assessment and automated perimetry",
+      "Pattern visual evoked potentials to document optic nerve dysfunction",
+      "Neuroimaging (MRI) to exclude a compressive or demyelinating cause",
+      "Targeted genetic testing for OPA1 and wider mitochondrial/optic atrophy gene panels",
+      "Audiometry and neurological assessment when a DOA-plus phenotype is suspected"
     ],
-    [
-     "Management Strategy",
-     "No proven disease-modifying therapy; management focuses on low-vision rehabilitation with visual aids, magnifiers and support for",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapid or markedly asymmetrical visual loss suggesting an alternative compressive or inflammatory cause",
+      "Additional neurological features (deafness, ataxia, neuropathy) indicating a DOA-plus syndrome",
+      "Pain on eye movement pointing towards optic neuritis rather than a hereditary atrophy",
+      "New field defect respecting the vertical midline suggesting chiasmal or retrochiasmal pathology"
     ],
-    [
-     "Clinical Pitfall",
-     "Attributing early symptoms to refractive error or amblyopia and missing the hereditary pattern",
-     "Prevent diagnostic or management error"
+    "prognosis": "Vision usually declines slowly and often stabilises at a moderate level, with most patients retaining useful sight, though a minority progress to legal blindness and DOA-plus cases carry additional systemic morbidity.",
+    "pitfalls": [
+      "Attributing early symptoms to refractive error or amblyopia and missing the hereditary pattern",
+      "Overlooking mildly affected relatives because of incomplete penetrance",
+      "Assuming a diagnosis without imaging and thereby missing a compressive lesion",
+      "Failing to screen for the systemic features of DOA-plus"
+    ],
+    "references": [
+      "Kanski's Clinical Ophthalmology",
+      "Taylor & Hoyt's Paediatric Ophthalmology and Strabismus"
+    ],
+    "crossLinks": [],
+    "management": [
+      "No proven disease-modifying therapy; management focuses on low-vision rehabilitation with visual aids, magnifiers and support for education and work",
+      "Avoidance of mitochondrial toxins such as tobacco and excess alcohol, with caution over drugs that impair mitochondrial function",
+      "Regular ophthalmic monitoring with acuity, colour vision, visual fields and optical coherence tomography of the retinal nerve fibre layer",
+      "Audiometry and neurological review for DOA-plus features such as sensorineural deafness, ophthalmoplegia and peripheral neuropathy",
+      "Registration as sight-impaired where appropriate with provision of low-vision services",
+      "Multidisciplinary input including ophthalmology, clinical genetics and audiology",
+      "Genetic counselling and family testing given autosomal dominant OPA1 inheritance with variable expressivity"
     ]
-   ],
-   "caption": "Overview comparison matrix for dominant optic atrophy (kjer, opa1)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "dominant-optic-atrophy-real-image",
-   "title": "Dominant optic atrophy (Kjer, OPA1): Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "dominant_optic_atrophy-pathway",
+      "title": "Dominant optic atrophy (Kjer, OPA1): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The commonest inherited optic neuropathy, typically presenting in the first two decades with insidious, painless, bilateral and symmetrical loss of central vision",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapid or markedly asymmetrical visual loss suggesting an alternative compressive or inflammatory cause",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Optical coherence tomography of the retinal nerve fibre layer and macular ganglion cell complex, Formal colour vision assessment and automated perimetry, Pattern visual evoked potentials to document optic nerve dysfunction"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: No proven disease-modifying therapy; management focuses on low-vision rehabilitation with visual aids, magnifiers and support for education and work"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Attributing early symptoms to refractive error or amblyopia and missing the hereditary pattern"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of dominant optic atrophy (kjer, opa1)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "dominant_optic_atrophy-matrix",
+      "title": "Dominant optic atrophy (Kjer, OPA1): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The commonest inherited optic neuropathy, typically presenting in the first two decades with insidious, painless, bilateral and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Optical coherence tomography of the retinal nerve fibre layer and macular ganglion cell complex, Formal colour vision assessment",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Leber hereditary optic neuropathy, Behr syndrome and other syndromic optic atrophies, Toxic or nutritional optic neuropathy",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "No proven disease-modifying therapy; management focuses on low-vision rehabilitation with visual aids, magnifiers and support for",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Attributing early symptoms to refractive error or amblyopia and missing the hereditary pattern",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for dominant optic atrophy (kjer, opa1)."
+    }
+  ],
+  "diagrams": []
 }

@@ -1,173 +1,151 @@
 {
- "id": "hereditary_hyperekplexia",
- "name": "Hereditary hyperekplexia",
- "aliases": [
-  "familial startle disease",
-  "stiff baby syndrome",
-  "GLRA1-related hyperekplexia",
-  "startle syndrome"
- ],
- "class": "non_infective",
- "system": "Nervous system / Neurology",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Bradley and Daroff Neurology in Clinical Practice",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Most commonly caused by variants in GLRA1, encoding the alpha-1 subunit of the inhibitory glycine receptor, with additional genetic causes including SLC6A5 (the glycine transporter GlyT2), GLRB, GPHN and ARHGEF9",
-   "Characterised by an exaggerated, non-habituating startle response to unexpected auditory, tactile or visual stimuli",
-   "Neonates present with generalised stiffness (hypertonia) that resolves during sleep, giving the classic 'stiff baby' picture",
-   "A pathognomonic sign is sustained tonic stiffness after a tap on the nose or glabella, which does not habituate on repetition",
-   "Excessive startle can cause sudden falls 'like a log' with preserved consciousness, risking injury",
-   "Neonatal stiffness and startle-induced apnoea can be life-threatening and require prompt recognition",
-   "Symptoms typically respond well to clonazepam, which enhances residual inhibitory GABAergic transmission"
+  "id": "hereditary_hyperekplexia",
+  "name": "Hereditary hyperekplexia",
+  "aliases": [
+    "familial startle disease",
+    "stiff baby syndrome",
+    "GLRA1-related hyperekplexia",
+    "startle syndrome"
   ],
-  "pathophysiology": "Hereditary hyperekplexia results from disruption of inhibitory glycinergic neurotransmission, most often through variants in GLRA1 that impair the alpha-1 subunit of the postsynaptic glycine receptor, or through variants affecting glycine reuptake (SLC6A5), the receptor beta subunit (GLRB), receptor clustering (gephyrin, GPHN) or collybistin (ARHGEF9). Loss of glycine-mediated inhibition in the brainstem and spinal cord removes a key brake on motor reflex circuits, so ordinary stimuli provoke an excessive, non-habituating startle and sustained tonic muscle contraction. Because glycinergic inhibition normally restrains brainstem and spinal excitability, its failure produces the neonatal stiffness and the risk of startle-induced apnoea.",
-  "additionalDifferentials": [
-   "Epileptic startle-induced seizures",
-   "Stiff-person syndrome",
-   "Neonatal seizures and other causes of neonatal hypertonia",
-   "Tetanus",
-   "Functional or psychogenic startle response",
-   "Startle-elicited tics or exaggerated physiological startle"
-  ],
-  "additionalInvestigations": [
-   "Molecular genetic testing of GLRA1 and related genes (SLC6A5, GLRB, GPHN, ARHGEF9)",
-   "Electroencephalography to distinguish from startle-induced epilepsy",
-   "Electromyography assessing the startle reflex latency and pattern",
-   "Brain MRI to exclude structural or acquired causes",
-   "Metabolic screen in neonates with hypertonia",
-   "Clinical glabellar tap test observing for non-habituating response"
-  ],
-  "redFlags": [
-   "Neonatal apnoea or cyanosis during stiffness episodes, which can be fatal",
-   "Recurrent unprotected falls causing significant injury",
-   "Diagnostic uncertainty with possible epileptic seizures",
-   "Severe hypertonia interfering with feeding and breathing"
-  ],
-  "prognosis": "Hereditary hyperekplexia is generally non-progressive; neonatal stiffness tends to improve over the first years of life and the exaggerated startle often becomes more manageable, with clonazepam substantially reducing symptoms. The main early risk is startle-induced apnoea, and prognosis is good once this is recognised and treated.",
-  "pitfalls": [
-   "Mistaking neonatal stiffness and startle for seizures and using inappropriate antiepileptic strategies",
-   "Failing to recognise startle-induced apnoea as a preventable cause of neonatal collapse",
-   "Overlooking the non-habituating glabellar tap sign, which is a valuable bedside clue",
-   "Attributing exaggerated startle to anxiety or functional causes and missing a treatable genetic disorder"
-  ],
-  "references": [
-   "Bradley and Daroff Neurology in Clinical Practice",
-   "Swaiman's Pediatric Neurology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Clonazepam, which enhances GABAergic inhibition, is the mainstay and markedly reduces exaggerated startle and tonic stiffness",
-   "Teach carers the Vigevano manoeuvre of forced flexion of the head and limbs towards the trunk to abort life-threatening tonic and apnoeic episodes in neonates",
-   "Neonatal apnoea and airway vigilance with monitoring and prompt resuscitation for startle-induced apnoea, the main early life-threatening risk",
-   "Injury prevention against sudden startle-induced falls, with practical safety measures at home and school",
-   "Reassure that neonatal stiffness and startle tend to improve with age, and provide developmental support",
-   "Genetic counselling and molecular testing of GLRA1, SLC6A5, GLRB, GPHN and ARHGEF9 for the affected family"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hereditary_hyperekplexia-pathway",
-   "title": "Hereditary hyperekplexia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Most commonly caused by variants in GLRA1, encoding the alpha-1 subunit of the inhibitory glycine receptor, with additional genetic causes including SLC6A5 (the glycine transporter GlyT2), GLRB, GPHN and ARHGEF9",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Neonatal apnoea or cyanosis during stiffness episodes, which can be fatal",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Molecular genetic testing of GLRA1 and related genes (SLC6A5, GLRB, GPHN, ARHGEF9), Electroencephalography to distinguish from startle-induced epilepsy, Electromyography assessing the startle reflex latency and pattern"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Clonazepam, which enhances GABAergic inhibition, is the mainstay and markedly reduces exaggerated startle and tonic stiffness"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking neonatal stiffness and startle for seizures and using inappropriate antiepileptic strategies"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hereditary hyperekplexia."
-  }
- ],
- "tables": [
-  {
-   "id": "hereditary_hyperekplexia-matrix",
-   "title": "Hereditary hyperekplexia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Most commonly caused by variants in GLRA1, encoding the alpha-1 subunit of the inhibitory glycine receptor, with additional",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Nervous system / Neurology",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Bradley and Daroff Neurology in Clinical Practice",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Most commonly caused by variants in GLRA1, encoding the alpha-1 subunit of the inhibitory glycine receptor, with additional genetic causes including SLC6A5 (the glycine transporter GlyT2), GLRB, GPHN and ARHGEF9",
+      "Characterised by an exaggerated, non-habituating startle response to unexpected auditory, tactile or visual stimuli",
+      "Neonates present with generalised stiffness (hypertonia) that resolves during sleep, giving the classic 'stiff baby' picture",
+      "A pathognomonic sign is sustained tonic stiffness after a tap on the nose or glabella, which does not habituate on repetition",
+      "Excessive startle can cause sudden falls 'like a log' with preserved consciousness, risking injury",
+      "Neonatal stiffness and startle-induced apnoea can be life-threatening and require prompt recognition",
+      "Symptoms typically respond well to clonazepam, which enhances residual inhibitory GABAergic transmission"
     ],
-    [
-     "Key Investigations",
-     "Molecular genetic testing of GLRA1 and related genes (SLC6A5, GLRB, GPHN, ARHGEF9), Electroencephalography to distinguish from",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Hereditary hyperekplexia results from disruption of inhibitory glycinergic neurotransmission, most often through variants in GLRA1 that impair the alpha-1 subunit of the postsynaptic glycine receptor, or through variants affecting glycine reuptake (SLC6A5), the receptor beta subunit (GLRB), receptor clustering (gephyrin, GPHN) or collybistin (ARHGEF9). Loss of glycine-mediated inhibition in the brainstem and spinal cord removes a key brake on motor reflex circuits, so ordinary stimuli provoke an excessive, non-habituating startle and sustained tonic muscle contraction. Because glycinergic inhibition normally restrains brainstem and spinal excitability, its failure produces the neonatal stiffness and the risk of startle-induced apnoea.",
+    "additionalDifferentials": [
+      "Epileptic startle-induced seizures",
+      "Stiff-person syndrome",
+      "Neonatal seizures and other causes of neonatal hypertonia",
+      "Tetanus",
+      "Functional or psychogenic startle response",
+      "Startle-elicited tics or exaggerated physiological startle"
     ],
-    [
-     "Primary Differentials",
-     "Epileptic startle-induced seizures, Stiff-person syndrome, Neonatal seizures and other causes of neonatal hypertonia",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Molecular genetic testing of GLRA1 and related genes (SLC6A5, GLRB, GPHN, ARHGEF9)",
+      "Electroencephalography to distinguish from startle-induced epilepsy",
+      "Electromyography assessing the startle reflex latency and pattern",
+      "Brain MRI to exclude structural or acquired causes",
+      "Metabolic screen in neonates with hypertonia",
+      "Clinical glabellar tap test observing for non-habituating response"
     ],
-    [
-     "Management Strategy",
-     "Clonazepam, which enhances GABAergic inhibition, is the mainstay and markedly reduces exaggerated startle and tonic stiffness",
-     "Core treatment modality"
+    "redFlags": [
+      "Neonatal apnoea or cyanosis during stiffness episodes, which can be fatal",
+      "Recurrent unprotected falls causing significant injury",
+      "Diagnostic uncertainty with possible epileptic seizures",
+      "Severe hypertonia interfering with feeding and breathing"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking neonatal stiffness and startle for seizures and using inappropriate antiepileptic strategies",
-     "Prevent diagnostic or management error"
+    "prognosis": "Hereditary hyperekplexia is generally non-progressive; neonatal stiffness tends to improve over the first years of life and the exaggerated startle often becomes more manageable, with clonazepam substantially reducing symptoms. The main early risk is startle-induced apnoea, and prognosis is good once this is recognised and treated.",
+    "pitfalls": [
+      "Mistaking neonatal stiffness and startle for seizures and using inappropriate antiepileptic strategies",
+      "Failing to recognise startle-induced apnoea as a preventable cause of neonatal collapse",
+      "Overlooking the non-habituating glabellar tap sign, which is a valuable bedside clue",
+      "Attributing exaggerated startle to anxiety or functional causes and missing a treatable genetic disorder"
+    ],
+    "references": [
+      "Bradley and Daroff Neurology in Clinical Practice",
+      "Swaiman's Pediatric Neurology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Clonazepam, which enhances GABAergic inhibition, is the mainstay and markedly reduces exaggerated startle and tonic stiffness",
+      "Teach carers the Vigevano manoeuvre of forced flexion of the head and limbs towards the trunk to abort life-threatening tonic and apnoeic episodes in neonates",
+      "Neonatal apnoea and airway vigilance with monitoring and prompt resuscitation for startle-induced apnoea, the main early life-threatening risk",
+      "Injury prevention against sudden startle-induced falls, with practical safety measures at home and school",
+      "Reassure that neonatal stiffness and startle tend to improve with age, and provide developmental support",
+      "Genetic counselling and molecular testing of GLRA1, SLC6A5, GLRB, GPHN and ARHGEF9 for the affected family"
     ]
-   ],
-   "caption": "Overview comparison matrix for hereditary hyperekplexia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hereditary-hyperekplexia-real-image",
-   "title": "Hereditary hyperekplexia: Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "hereditary_hyperekplexia-pathway",
+      "title": "Hereditary hyperekplexia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Most commonly caused by variants in GLRA1, encoding the alpha-1 subunit of the inhibitory glycine receptor, with additional genetic causes including SLC6A5 (the glycine transporter GlyT2), GLRB, GPHN and ARHGEF9",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Neonatal apnoea or cyanosis during stiffness episodes, which can be fatal",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Molecular genetic testing of GLRA1 and related genes (SLC6A5, GLRB, GPHN, ARHGEF9), Electroencephalography to distinguish from startle-induced epilepsy, Electromyography assessing the startle reflex latency and pattern"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Clonazepam, which enhances GABAergic inhibition, is the mainstay and markedly reduces exaggerated startle and tonic stiffness"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking neonatal stiffness and startle for seizures and using inappropriate antiepileptic strategies"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hereditary hyperekplexia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hereditary_hyperekplexia-matrix",
+      "title": "Hereditary hyperekplexia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Most commonly caused by variants in GLRA1, encoding the alpha-1 subunit of the inhibitory glycine receptor, with additional",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Molecular genetic testing of GLRA1 and related genes (SLC6A5, GLRB, GPHN, ARHGEF9), Electroencephalography to distinguish from",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Epileptic startle-induced seizures, Stiff-person syndrome, Neonatal seizures and other causes of neonatal hypertonia",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Clonazepam, which enhances GABAergic inhibition, is the mainstay and markedly reduces exaggerated startle and tonic stiffness",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking neonatal stiffness and startle for seizures and using inappropriate antiepileptic strategies",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hereditary hyperekplexia."
+    }
+  ],
+  "diagrams": []
 }

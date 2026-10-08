@@ -1,177 +1,155 @@
 {
- "id": "hypertensive_lower_oesophageal_sphincter",
- "name": "hypertensive lower oesophageal sphincter",
- "aliases": [
-  "hypertensive LOS",
-  "isolated LOS hypertension"
- ],
- "class": "non_infective",
- "system": "gastrointestinal",
- "specialty": "gastroenterology",
- "referenceOnly": true,
- "reference": {
-  "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Historically defined by an elevated resting lower oesophageal sphincter pressure with otherwise normal deglutitive relaxation and preserved oesophageal body peristalsis.",
-   "In the modern Chicago Classification the isolated finding is no longer a stand-alone diagnosis; the key clinical question is whether relaxation is normal or whether the picture actually represents oesophagogastric junction outflow obstruction or early achalasia.",
-   "Symptoms, when present, are dysphagia and chest pain, but the finding is frequently incidental and of uncertain clinical significance in an asymptomatic patient.",
-   "Normal integrated relaxation pressure argues against a true outflow-obstructing disorder and supports a benign interpretation of the elevated basal tone.",
-   "Coexisting gastro-oesophageal reflux and oesophageal hypersensitivity should be evaluated as alternative explanations for symptoms.",
-   "Management is directed by symptoms: reassurance where mild, smooth-muscle relaxants and neuromodulators for troublesome chest pain or dysphagia.",
-   "Botulinum toxin injection into the sphincter may be tried in refractory symptomatic cases, with pneumatic dilatation or myotomy reserved for those reclassified as outflow obstruction or achalasia.",
-   "Because isolated sphincter hypertension can be an early or evolving stage of an outflow disorder, follow-up assessment is prudent when symptoms persist or worsen."
+  "id": "hypertensive_lower_oesophageal_sphincter",
+  "name": "hypertensive lower oesophageal sphincter",
+  "aliases": [
+    "hypertensive LOS",
+    "isolated LOS hypertension"
   ],
-  "pathophysiology": "Hypertensive lower oesophageal sphincter denotes an abnormally elevated resting tone of the sphincter in the setting of preserved swallow-induced relaxation and normal oesophageal body peristalsis. The mechanism is incompletely understood but is thought to reflect an imbalance between excitatory cholinergic tone and inhibitory nitrergic input at the sphincter, producing sustained hypertonicity without the failure of relaxation that characterises achalasia. When relaxation becomes impaired, the disorder is better classified as oesophagogastric junction outflow obstruction, and some patients with sphincter hypertension progress along this spectrum toward achalasia. Symptom generation, particularly chest pain, is amplified by oesophageal hypersensitivity, which accounts for the weak correlation between the manometric abnormality and clinical severity.",
-  "additionalDifferentials": [
-   "oesophagogastric junction outflow obstruction",
-   "achalasia (early or evolving)",
-   "distal oesophageal spasm",
-   "jackhammer (hypercontractile) oesophagus",
-   "gastro-oesophageal reflux disease",
-   "functional chest pain and oesophageal hypersensitivity",
-   "mechanical obstruction at the oesophagogastric junction (stricture, tumour, tight fundoplication)"
-  ],
-  "additionalInvestigations": [
-   "high-resolution oesophageal manometry with integrated relaxation pressure measurement",
-   "upper gastrointestinal endoscopy to exclude mechanical obstruction and mucosal disease",
-   "timed barium oesophagram to assess emptying",
-   "functional lumen imaging probe (FLIP) to characterise oesophagogastric junction distensibility",
-   "ambulatory pH-impedance monitoring for reflux",
-   "provocative manometric manoeuvres (rapid drink challenge, solid swallows)",
-   "cardiac assessment when chest pain is prominent"
-  ],
-  "redFlags": [
-   "progressive dysphagia or weight loss suggesting evolving achalasia or malignancy",
-   "impaired oesophagogastric junction relaxation on manometry indicating an outflow-obstructing disorder",
-   "food bolus impaction",
-   "chest pain requiring cardiac exclusion",
-   "endoscopic resistance at the oesophagogastric junction or a mass lesion"
-  ],
-  "prognosis": "The isolated finding is generally benign and may be asymptomatic or respond to conservative measures; however, a proportion of patients evolve toward oesophagogastric junction outflow obstruction or achalasia, warranting surveillance when symptoms persist. Prognosis in the latter groups follows that of the reclassified disorder.",
-  "pitfalls": [
-   "Treating an incidental elevated sphincter pressure in an asymptomatic patient.",
-   "Failing to measure and interpret the integrated relaxation pressure, thereby missing true outflow obstruction or achalasia.",
-   "Not excluding a mechanical cause such as a tumour or overly tight fundoplication at the oesophagogastric junction.",
-   "Overlooking reflux and hypersensitivity as the actual source of chest pain.",
-   "Assuming the finding is static and omitting follow-up when symptoms progress."
-  ],
-  "references": [
-   "Sleisenger and Fordtran's Gastrointestinal and Liver Disease, current edition",
-   "Chicago Classification of Oesophageal Motility Disorders (current version)",
-   "ACG Clinical Guideline on oesophageal motility disorders"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Reassurance and conservative management where the finding is mild, incidental or asymptomatic",
-   "Smooth-muscle relaxants such as calcium-channel blockers or nitrates for troublesome dysphagia or chest pain",
-   "Neuromodulators such as low-dose tricyclic antidepressants to address oesophageal hypersensitivity-driven chest pain",
-   "Treat coexisting gastro-oesophageal reflux with a proton pump inhibitor as an alternative explanation for symptoms",
-   "If the picture evolves into oesophagogastric junction outflow obstruction or achalasia, consider botulinum toxin injection, pneumatic dilatation or myotomy",
-   "Surveillance with repeat high-resolution manometry when symptoms persist or progress"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "hypertensive_lower_oesophageal_sphincter-pathway",
-   "title": "hypertensive lower oesophageal sphincter: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Historically defined by an elevated resting lower oesophageal sphincter pressure with otherwise normal deglutitive relaxation and preserved oesophageal body peristalsis.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: progressive dysphagia or weight loss suggesting evolving achalasia or malignancy",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: high-resolution oesophageal manometry with integrated relaxation pressure measurement, upper gastrointestinal endoscopy to exclude mechanical obstruction and mucosal disease, timed barium oesophagram to assess emptying"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Reassurance and conservative management where the finding is mild, incidental or asymptomatic"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating an incidental elevated sphincter pressure in an asymptomatic patient."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of hypertensive lower oesophageal sphincter."
-  }
- ],
- "tables": [
-  {
-   "id": "hypertensive_lower_oesophageal_sphincter-matrix",
-   "title": "hypertensive lower oesophageal sphincter: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Historically defined by an elevated resting lower oesophageal sphincter pressure with otherwise normal deglutitive relaxation and",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "gastrointestinal",
+  "specialty": "gastroenterology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Historically defined by an elevated resting lower oesophageal sphincter pressure with otherwise normal deglutitive relaxation and preserved oesophageal body peristalsis.",
+      "In the modern Chicago Classification the isolated finding is no longer a stand-alone diagnosis; the key clinical question is whether relaxation is normal or whether the picture actually represents oesophagogastric junction outflow obstruction or early achalasia.",
+      "Symptoms, when present, are dysphagia and chest pain, but the finding is frequently incidental and of uncertain clinical significance in an asymptomatic patient.",
+      "Normal integrated relaxation pressure argues against a true outflow-obstructing disorder and supports a benign interpretation of the elevated basal tone.",
+      "Coexisting gastro-oesophageal reflux and oesophageal hypersensitivity should be evaluated as alternative explanations for symptoms.",
+      "Management is directed by symptoms: reassurance where mild, smooth-muscle relaxants and neuromodulators for troublesome chest pain or dysphagia.",
+      "Botulinum toxin injection into the sphincter may be tried in refractory symptomatic cases, with pneumatic dilatation or myotomy reserved for those reclassified as outflow obstruction or achalasia.",
+      "Because isolated sphincter hypertension can be an early or evolving stage of an outflow disorder, follow-up assessment is prudent when symptoms persist or worsen."
     ],
-    [
-     "Key Investigations",
-     "high-resolution oesophageal manometry with integrated relaxation pressure measurement, upper gastrointestinal endoscopy to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Hypertensive lower oesophageal sphincter denotes an abnormally elevated resting tone of the sphincter in the setting of preserved swallow-induced relaxation and normal oesophageal body peristalsis. The mechanism is incompletely understood but is thought to reflect an imbalance between excitatory cholinergic tone and inhibitory nitrergic input at the sphincter, producing sustained hypertonicity without the failure of relaxation that characterises achalasia. When relaxation becomes impaired, the disorder is better classified as oesophagogastric junction outflow obstruction, and some patients with sphincter hypertension progress along this spectrum toward achalasia. Symptom generation, particularly chest pain, is amplified by oesophageal hypersensitivity, which accounts for the weak correlation between the manometric abnormality and clinical severity.",
+    "additionalDifferentials": [
+      "oesophagogastric junction outflow obstruction",
+      "achalasia (early or evolving)",
+      "distal oesophageal spasm",
+      "jackhammer (hypercontractile) oesophagus",
+      "gastro-oesophageal reflux disease",
+      "functional chest pain and oesophageal hypersensitivity",
+      "mechanical obstruction at the oesophagogastric junction (stricture, tumour, tight fundoplication)"
     ],
-    [
-     "Primary Differentials",
-     "oesophagogastric junction outflow obstruction, achalasia (early or evolving), distal oesophageal spasm",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "high-resolution oesophageal manometry with integrated relaxation pressure measurement",
+      "upper gastrointestinal endoscopy to exclude mechanical obstruction and mucosal disease",
+      "timed barium oesophagram to assess emptying",
+      "functional lumen imaging probe (FLIP) to characterise oesophagogastric junction distensibility",
+      "ambulatory pH-impedance monitoring for reflux",
+      "provocative manometric manoeuvres (rapid drink challenge, solid swallows)",
+      "cardiac assessment when chest pain is prominent"
     ],
-    [
-     "Management Strategy",
-     "Reassurance and conservative management where the finding is mild, incidental or asymptomatic",
-     "Core treatment modality"
+    "redFlags": [
+      "progressive dysphagia or weight loss suggesting evolving achalasia or malignancy",
+      "impaired oesophagogastric junction relaxation on manometry indicating an outflow-obstructing disorder",
+      "food bolus impaction",
+      "chest pain requiring cardiac exclusion",
+      "endoscopic resistance at the oesophagogastric junction or a mass lesion"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating an incidental elevated sphincter pressure in an asymptomatic patient.",
-     "Prevent diagnostic or management error"
+    "prognosis": "The isolated finding is generally benign and may be asymptomatic or respond to conservative measures; however, a proportion of patients evolve toward oesophagogastric junction outflow obstruction or achalasia, warranting surveillance when symptoms persist. Prognosis in the latter groups follows that of the reclassified disorder.",
+    "pitfalls": [
+      "Treating an incidental elevated sphincter pressure in an asymptomatic patient.",
+      "Failing to measure and interpret the integrated relaxation pressure, thereby missing true outflow obstruction or achalasia.",
+      "Not excluding a mechanical cause such as a tumour or overly tight fundoplication at the oesophagogastric junction.",
+      "Overlooking reflux and hypersensitivity as the actual source of chest pain.",
+      "Assuming the finding is static and omitting follow-up when symptoms progress."
+    ],
+    "references": [
+      "Sleisenger and Fordtran's Gastrointestinal and Liver Disease, current edition",
+      "Chicago Classification of Oesophageal Motility Disorders (current version)",
+      "ACG Clinical Guideline on oesophageal motility disorders"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Reassurance and conservative management where the finding is mild, incidental or asymptomatic",
+      "Smooth-muscle relaxants such as calcium-channel blockers or nitrates for troublesome dysphagia or chest pain",
+      "Neuromodulators such as low-dose tricyclic antidepressants to address oesophageal hypersensitivity-driven chest pain",
+      "Treat coexisting gastro-oesophageal reflux with a proton pump inhibitor as an alternative explanation for symptoms",
+      "If the picture evolves into oesophagogastric junction outflow obstruction or achalasia, consider botulinum toxin injection, pneumatic dilatation or myotomy",
+      "Surveillance with repeat high-resolution manometry when symptoms persist or progress"
     ]
-   ],
-   "caption": "Overview comparison matrix for hypertensive lower oesophageal sphincter."
-  }
- ],
- "diagrams": [
-  {
-   "id": "hypertensive-lower-oesophageal-sphincter-real-image",
-   "title": "hypertensive lower oesophageal sphincter: 12-Lead Diagnostic Electrocardiogram",
-   "type": "ecg",
-   "src": "/assets/kb-real-images/stemi-ecg.jpg?v=kbri3",
-   "caption": "Diagnostic 12-lead electrocardiogram demonstrating myocardial repolarization architecture, ST-segment vectors, and rate/rhythm intervals.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Conduction & Axis",
-     "description": "Sinoatrial to atrioventricular nodal conduction vector and QRS electrical axis."
-    },
-    {
-     "label": "Repolarization",
-     "description": "ST-segment elevation/depression and T-wave morphology reflecting myocardial perfusion."
-    },
-    {
-     "label": "Rhythm & Intervals",
-     "description": "PR, QRS, and QTc duration analysis across precordial and limb leads."
+      "id": "hypertensive_lower_oesophageal_sphincter-pathway",
+      "title": "hypertensive lower oesophageal sphincter: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Historically defined by an elevated resting lower oesophageal sphincter pressure with otherwise normal deglutitive relaxation and preserved oesophageal body peristalsis.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: progressive dysphagia or weight loss suggesting evolving achalasia or malignancy",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: high-resolution oesophageal manometry with integrated relaxation pressure measurement, upper gastrointestinal endoscopy to exclude mechanical obstruction and mucosal disease, timed barium oesophagram to assess emptying"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Reassurance and conservative management where the finding is mild, incidental or asymptomatic"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating an incidental elevated sphincter pressure in an asymptomatic patient."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of hypertensive lower oesophageal sphincter."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "hypertensive_lower_oesophageal_sphincter-matrix",
+      "title": "hypertensive lower oesophageal sphincter: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Historically defined by an elevated resting lower oesophageal sphincter pressure with otherwise normal deglutitive relaxation and",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "high-resolution oesophageal manometry with integrated relaxation pressure measurement, upper gastrointestinal endoscopy to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "oesophagogastric junction outflow obstruction, achalasia (early or evolving), distal oesophageal spasm",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Reassurance and conservative management where the finding is mild, incidental or asymptomatic",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating an incidental elevated sphincter pressure in an asymptomatic patient.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for hypertensive lower oesophageal sphincter."
+    }
+  ],
+  "diagrams": []
 }

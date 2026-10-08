@@ -1,179 +1,157 @@
 {
- "id": "dapsone_hypersensitivity_syndrome",
- "name": "Dapsone hypersensitivity syndrome",
- "aliases": [
-  "DHS",
-  "dapsone syndrome",
-  "sulfone syndrome",
-  "dapsone-induced DRESS",
-  "HLA-B*13:01"
- ],
- "class": "non_infective",
- "system": "Clinical pharmacology / Toxicology",
- "specialty": "Clinical Pharmacology",
- "referenceOnly": true,
- "reference": {
-  "source": "Rook's Textbook of Dermatology / Harrison's Principles of Internal Medicine",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "A severe multiorgan drug hypersensitivity reaction, within the DRESS spectrum, occurring typically within the first few weeks of dapsone therapy",
-   "Presents with fever, an extensive rash, lymphadenopathy and internal organ involvement, most often hepatitis",
-   "Eosinophilia and atypical lymphocytes are commonly found on the blood film",
-   "The HLA-B*13:01 allele is strongly associated with the syndrome, and screening can identify at-risk individuals in populations where it is prevalent",
-   "It is distinct from the dose-related haematological effects of dapsone (methaemoglobinaemia and haemolysis, the latter marked in G6PD deficiency)",
-   "Management is prompt withdrawal of dapsone, supportive care and systemic corticosteroids for significant organ involvement",
-   "Recovery can be prolonged and relapsing, and the drug must not be reintroduced",
-   "A high index of suspicion is needed as the delayed multiorgan presentation can mimic infection"
+  "id": "dapsone_hypersensitivity_syndrome",
+  "name": "Dapsone hypersensitivity syndrome",
+  "aliases": [
+    "DHS",
+    "dapsone syndrome",
+    "sulfone syndrome",
+    "dapsone-induced DRESS",
+    "HLA-B*13:01"
   ],
-  "pathophysiology": "Dapsone hypersensitivity syndrome is a delayed, T-cell-mediated immune reaction. Dapsone is metabolised, partly via cytochrome P450, to reactive hydroxylamine and other intermediates; these reactive metabolites can act as haptens that modify host proteins and trigger an adaptive immune response, with the risk shaped by genetic factors including the HLA-B*13:01 allele. The activated immune response, similar to other DRESS reactions, produces fever, a widespread cutaneous eruption, eosinophilia, lymphadenopathy and inflammation of internal organs, especially the liver. This immune-mediated syndrome is mechanistically separate from dapsone's predictable, dose-dependent oxidant effects on red cells, which cause methaemoglobinaemia and haemolysis (the latter particularly in glucose-6-phosphate dehydrogenase deficiency).",
-  "additionalDifferentials": [
-   "Anticonvulsant and other drug-induced DRESS",
-   "Stevens-Johnson syndrome / toxic epidermal necrolysis",
-   "Viral infection with exanthem (e.g. EBV, CMV)",
-   "Sepsis",
-   "Acute viral hepatitis",
-   "Lymphoma",
-   "Underlying disease flare (e.g. leprosy reaction) being treated with dapsone"
-  ],
-  "additionalInvestigations": [
-   "Full blood count with differential for eosinophilia and atypical lymphocytes",
-   "Liver function tests and renal function for organ involvement",
-   "Methaemoglobin level and haemolysis screen to assess the separate oxidant effects",
-   "Glucose-6-phosphate dehydrogenase status where relevant",
-   "HLA-B*13:01 testing in appropriate populations before or during evaluation",
-   "Skin biopsy in diagnostically uncertain cases"
-  ],
-  "redFlags": [
-   "Marked transaminitis or evidence of acute liver failure",
-   "Extensive rash with mucosal involvement or skin detachment",
-   "Renal impairment or other organ dysfunction",
-   "Persistent high fever with haemodynamic instability",
-   "Severe methaemoglobinaemia or haemolysis compounding the picture"
-  ],
-  "prognosis": "With early withdrawal and corticosteroid treatment most patients recover, but the syndrome can be fatal, chiefly from hepatic failure. The course may be prolonged with relapses, and lifelong avoidance of dapsone is required.",
-  "pitfalls": [
-   "Mistaking the delayed multiorgan reaction for infection and continuing dapsone",
-   "Confusing the immune syndrome with the separate dose-related methaemoglobinaemia and haemolysis",
-   "Stopping corticosteroids too rapidly and precipitating relapse",
-   "Reintroducing dapsone after recovery",
-   "Not considering HLA-B*13:01 screening in high-prevalence populations"
-  ],
-  "references": [
-   "Rook's Textbook of Dermatology",
-   "Harrison's Principles of Internal Medicine"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Withdraw dapsone immediately and permanently, with lifelong avoidance thereafter",
-   "Give systemic corticosteroids for significant organ involvement, especially hepatitis, with a slow taper to avoid relapse",
-   "Provide supportive care with fluid balance, skin care and temperature control, managing as for other DRESS reactions",
-   "Monitor liver and renal function and the blood count closely, as hepatic failure is the main cause of death",
-   "Assess and treat the separate oxidant effects of methaemoglobinaemia and haemolysis, checking glucose-6-phosphate dehydrogenase status",
-   "Screen for the HLA-B*13:01 allele in at-risk populations before dapsone exposure to prevent the syndrome",
-   "Record a clear drug allergy, counsel the patient and family, and escalate to critical care or a liver unit if hepatic failure develops"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "dapsone_hypersensitivity_syndrome-pathway",
-   "title": "Dapsone hypersensitivity syndrome: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "A severe multiorgan drug hypersensitivity reaction, within the DRESS spectrum, occurring typically within the first few weeks of dapsone therapy",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Marked transaminitis or evidence of acute liver failure",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Full blood count with differential for eosinophilia and atypical lymphocytes, Liver function tests and renal function for organ involvement, Methaemoglobin level and haemolysis screen to assess the separate oxidant effects"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Withdraw dapsone immediately and permanently, with lifelong avoidance thereafter"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mistaking the delayed multiorgan reaction for infection and continuing dapsone"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of dapsone hypersensitivity syndrome."
-  }
- ],
- "tables": [
-  {
-   "id": "dapsone_hypersensitivity_syndrome-matrix",
-   "title": "Dapsone hypersensitivity syndrome: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "A severe multiorgan drug hypersensitivity reaction, within the DRESS spectrum, occurring typically within the first few weeks of",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Clinical pharmacology / Toxicology",
+  "specialty": "Clinical Pharmacology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Rook's Textbook of Dermatology / Harrison's Principles of Internal Medicine",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "A severe multiorgan drug hypersensitivity reaction, within the DRESS spectrum, occurring typically within the first few weeks of dapsone therapy",
+      "Presents with fever, an extensive rash, lymphadenopathy and internal organ involvement, most often hepatitis",
+      "Eosinophilia and atypical lymphocytes are commonly found on the blood film",
+      "The HLA-B*13:01 allele is strongly associated with the syndrome, and screening can identify at-risk individuals in populations where it is prevalent",
+      "It is distinct from the dose-related haematological effects of dapsone (methaemoglobinaemia and haemolysis, the latter marked in G6PD deficiency)",
+      "Management is prompt withdrawal of dapsone, supportive care and systemic corticosteroids for significant organ involvement",
+      "Recovery can be prolonged and relapsing, and the drug must not be reintroduced",
+      "A high index of suspicion is needed as the delayed multiorgan presentation can mimic infection"
     ],
-    [
-     "Key Investigations",
-     "Full blood count with differential for eosinophilia and atypical lymphocytes, Liver function tests and renal function for organ",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Dapsone hypersensitivity syndrome is a delayed, T-cell-mediated immune reaction. Dapsone is metabolised, partly via cytochrome P450, to reactive hydroxylamine and other intermediates; these reactive metabolites can act as haptens that modify host proteins and trigger an adaptive immune response, with the risk shaped by genetic factors including the HLA-B*13:01 allele. The activated immune response, similar to other DRESS reactions, produces fever, a widespread cutaneous eruption, eosinophilia, lymphadenopathy and inflammation of internal organs, especially the liver. This immune-mediated syndrome is mechanistically separate from dapsone's predictable, dose-dependent oxidant effects on red cells, which cause methaemoglobinaemia and haemolysis (the latter particularly in glucose-6-phosphate dehydrogenase deficiency).",
+    "additionalDifferentials": [
+      "Anticonvulsant and other drug-induced DRESS",
+      "Stevens-Johnson syndrome / toxic epidermal necrolysis",
+      "Viral infection with exanthem (e.g. EBV, CMV)",
+      "Sepsis",
+      "Acute viral hepatitis",
+      "Lymphoma",
+      "Underlying disease flare (e.g. leprosy reaction) being treated with dapsone"
     ],
-    [
-     "Primary Differentials",
-     "Anticonvulsant and other drug-induced DRESS, Stevens-Johnson syndrome / toxic epidermal necrolysis, Viral infection with exanthem",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Full blood count with differential for eosinophilia and atypical lymphocytes",
+      "Liver function tests and renal function for organ involvement",
+      "Methaemoglobin level and haemolysis screen to assess the separate oxidant effects",
+      "Glucose-6-phosphate dehydrogenase status where relevant",
+      "HLA-B*13:01 testing in appropriate populations before or during evaluation",
+      "Skin biopsy in diagnostically uncertain cases"
     ],
-    [
-     "Management Strategy",
-     "Withdraw dapsone immediately and permanently, with lifelong avoidance thereafter",
-     "Core treatment modality"
+    "redFlags": [
+      "Marked transaminitis or evidence of acute liver failure",
+      "Extensive rash with mucosal involvement or skin detachment",
+      "Renal impairment or other organ dysfunction",
+      "Persistent high fever with haemodynamic instability",
+      "Severe methaemoglobinaemia or haemolysis compounding the picture"
     ],
-    [
-     "Clinical Pitfall",
-     "Mistaking the delayed multiorgan reaction for infection and continuing dapsone",
-     "Prevent diagnostic or management error"
+    "prognosis": "With early withdrawal and corticosteroid treatment most patients recover, but the syndrome can be fatal, chiefly from hepatic failure. The course may be prolonged with relapses, and lifelong avoidance of dapsone is required.",
+    "pitfalls": [
+      "Mistaking the delayed multiorgan reaction for infection and continuing dapsone",
+      "Confusing the immune syndrome with the separate dose-related methaemoglobinaemia and haemolysis",
+      "Stopping corticosteroids too rapidly and precipitating relapse",
+      "Reintroducing dapsone after recovery",
+      "Not considering HLA-B*13:01 screening in high-prevalence populations"
+    ],
+    "references": [
+      "Rook's Textbook of Dermatology",
+      "Harrison's Principles of Internal Medicine"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Withdraw dapsone immediately and permanently, with lifelong avoidance thereafter",
+      "Give systemic corticosteroids for significant organ involvement, especially hepatitis, with a slow taper to avoid relapse",
+      "Provide supportive care with fluid balance, skin care and temperature control, managing as for other DRESS reactions",
+      "Monitor liver and renal function and the blood count closely, as hepatic failure is the main cause of death",
+      "Assess and treat the separate oxidant effects of methaemoglobinaemia and haemolysis, checking glucose-6-phosphate dehydrogenase status",
+      "Screen for the HLA-B*13:01 allele in at-risk populations before dapsone exposure to prevent the syndrome",
+      "Record a clear drug allergy, counsel the patient and family, and escalate to critical care or a liver unit if hepatic failure develops"
     ]
-   ],
-   "caption": "Overview comparison matrix for dapsone hypersensitivity syndrome."
-  }
- ],
- "diagrams": [
-  {
-   "id": "dapsone-hypersensitivity-syndrome-real-image",
-   "title": "Dapsone hypersensitivity syndrome: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "dapsone_hypersensitivity_syndrome-pathway",
+      "title": "Dapsone hypersensitivity syndrome: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "A severe multiorgan drug hypersensitivity reaction, within the DRESS spectrum, occurring typically within the first few weeks of dapsone therapy",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Marked transaminitis or evidence of acute liver failure",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Full blood count with differential for eosinophilia and atypical lymphocytes, Liver function tests and renal function for organ involvement, Methaemoglobin level and haemolysis screen to assess the separate oxidant effects"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Withdraw dapsone immediately and permanently, with lifelong avoidance thereafter"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mistaking the delayed multiorgan reaction for infection and continuing dapsone"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of dapsone hypersensitivity syndrome."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "dapsone_hypersensitivity_syndrome-matrix",
+      "title": "Dapsone hypersensitivity syndrome: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "A severe multiorgan drug hypersensitivity reaction, within the DRESS spectrum, occurring typically within the first few weeks of",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Full blood count with differential for eosinophilia and atypical lymphocytes, Liver function tests and renal function for organ",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Anticonvulsant and other drug-induced DRESS, Stevens-Johnson syndrome / toxic epidermal necrolysis, Viral infection with exanthem",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Withdraw dapsone immediately and permanently, with lifelong avoidance thereafter",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mistaking the delayed multiorgan reaction for infection and continuing dapsone",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for dapsone hypersensitivity syndrome."
+    }
+  ],
+  "diagrams": []
 }

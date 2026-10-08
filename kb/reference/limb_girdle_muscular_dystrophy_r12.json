@@ -1,175 +1,153 @@
 {
- "id": "limb_girdle_muscular_dystrophy_r12",
- "name": "Limb-girdle muscular dystrophy R12 (anoctamin-5-related)",
- "aliases": [
-  "LGMD2L",
-  "ANO5-related LGMD",
-  "Anoctaminopathy"
- ],
- "class": "non_infective",
- "system": "Neuromuscular / Limb-girdle muscular dystrophy",
- "specialty": "Neurology",
- "referenceOnly": true,
- "reference": {
-  "source": "Neurogenetics references",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Caused by biallelic ANO5 variants; anoctamin-5 participates in sarcolemmal membrane repair.",
-   "One of the commoner adult-onset recessive limb-girdle dystrophies in Northern Europe, linked to the c.191dupA founder allele.",
-   "Male-predominant and often asymmetric, with prominent calf and quadriceps involvement.",
-   "May present with exercise-induced myalgia, cramps, rhabdomyolysis or asymptomatic hyperCKaemia before overt weakness.",
-   "Creatine kinase is usually markedly elevated, frequently preceding clinical weakness.",
-   "Allelic with distal Miyoshi-type myopathy (MMD3), so the phenotype spans a proximal-to-distal continuum.",
-   "The course is relatively benign with ambulation often preserved for a long period.",
-   "Cardiac involvement is uncommon but has been reported."
+  "id": "limb_girdle_muscular_dystrophy_r12",
+  "name": "Limb-girdle muscular dystrophy R12 (anoctamin-5-related)",
+  "aliases": [
+    "LGMD2L",
+    "ANO5-related LGMD",
+    "Anoctaminopathy"
   ],
-  "pathophysiology": "Limb-girdle muscular dystrophy R12 is caused by biallelic variants in ANO5 on chromosome 11p14.3, which encodes anoctamin-5, a member of the TMEM16 family that functions at the sarcolemma and its internal membranes as a phospholipid scramblase and putative calcium-activated ion channel involved in membrane repair. The recurrent c.191dupA founder variant is common in Northern European populations, making ANO5-related disease one of the more frequent adult-onset recessive limb-girdle dystrophies in that region. Defective resealing of the membrane after contraction-induced injury is thought to drive myofibre necrosis, producing a characteristically asymmetric and often male-predominant phenotype with prominent calf and quadriceps involvement, exercise-related myalgia and marked hyperCKaemia. The same gene underlies distal Miyoshi-type myopathy (MMD3) and isolated hyperCKaemia, so ANO5 disease spans a proximal-to-distal continuum.",
-  "additionalDifferentials": [
-   "LGMD R2 (dysferlinopathy, with overlapping distal Miyoshi phenotype)",
-   "LGMD R1 (calpainopathy, CAPN3)",
-   "Miyoshi myopathy due to dysferlin (phenotypic overlap)",
-   "Metabolic and glycogen-storage myopathies presenting with rhabdomyolysis",
-   "Idiopathic or paucisymptomatic hyperCKaemia",
-   "Idiopathic inflammatory myopathy (when asymmetry raises suspicion)"
-  ],
-  "additionalInvestigations": [
-   "Serum creatine kinase (characteristically high)",
-   "Next-generation sequencing gene panel or whole-exome sequencing including ANO5 and DYSF",
-   "Muscle MRI (asymmetric posterior thigh and calf involvement)",
-   "Muscle biopsy with dysferlin and anoctamin studies",
-   "Electromyography",
-   "Baseline ECG and echocardiography",
-   "Renal function and urinary myoglobin assessment during rhabdomyolysis episodes"
-  ],
-  "redFlags": [
-   "Rhabdomyolysis with dark urine and risk of acute kidney injury",
-   "Chest symptoms or breathlessness suggesting cardiomyopathy",
-   "Rapidly worsening weakness",
-   "Severe exertional myalgia limiting activity"
-  ],
-  "prognosis": "The prognosis is generally favourable, with slow progression and ambulation retained for many years. Episodes of rhabdomyolysis require vigilance because of the associated risk to the kidneys.",
-  "pitfalls": [
-   "Isolated hyperCKaemia may be wrongly dismissed as benign.",
-   "Phenotypic overlap with dysferlinopathy can lead to misdiagnosis without genetic testing.",
-   "Marked asymmetry may prompt inappropriate suspicion of an acquired or inflammatory cause.",
-   "Affected or carrier women may be under-recognised because of the male predominance."
-  ],
-  "references": [
-   "Standard neuromuscular medicine textbooks",
-   "Consensus classification of the limb-girdle muscular dystrophies",
-   "Clinical neurogenetics reference texts"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Recognise there is no disease-modifying drug and use physiotherapy and occupational therapy to maintain strength and function while avoiding overexertion that can trigger rhabdomyolysis",
-   "Recognise and treat episodes of rhabdomyolysis promptly with fluid resuscitation and renal protection",
-   "Advise on graded exercise and avoidance of muscle-injury triggers given exercise-induced myalgia and cramps",
-   "Perform baseline cardiac assessment with ECG and echocardiography and respiratory monitoring",
-   "Deliver multidisciplinary neuromuscular rehabilitation, with ambulation usually retained for many years",
-   "Provide genetic counselling for autosomal recessive inheritance and family screening"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "limb_girdle_muscular_dystrophy_r12-pathway",
-   "title": "Limb-girdle muscular dystrophy R12 (anoctamin-5-related): Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Caused by biallelic ANO5 variants; anoctamin-5 participates in sarcolemmal membrane repair.",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rhabdomyolysis with dark urine and risk of acute kidney injury",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum creatine kinase (characteristically high), Next-generation sequencing gene panel or whole-exome sequencing including ANO5 and DYSF, Muscle MRI (asymmetric posterior thigh and calf involvement)"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Recognise there is no disease-modifying drug and use physiotherapy and occupational therapy to maintain strength and function while avoiding overexertion that can trigger rhabdomyolysis"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Isolated hyperCKaemia may be wrongly dismissed as benign."
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of limb-girdle muscular dystrophy r12 (anoctamin-5-related)."
-  }
- ],
- "tables": [
-  {
-   "id": "limb_girdle_muscular_dystrophy_r12-matrix",
-   "title": "Limb-girdle muscular dystrophy R12 (anoctamin-5-related): Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Caused by biallelic ANO5 variants; anoctamin-5 participates in sarcolemmal membrane repair.",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Neuromuscular / Limb-girdle muscular dystrophy",
+  "specialty": "Neurology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Neurogenetics references",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Caused by biallelic ANO5 variants; anoctamin-5 participates in sarcolemmal membrane repair.",
+      "One of the commoner adult-onset recessive limb-girdle dystrophies in Northern Europe, linked to the c.191dupA founder allele.",
+      "Male-predominant and often asymmetric, with prominent calf and quadriceps involvement.",
+      "May present with exercise-induced myalgia, cramps, rhabdomyolysis or asymptomatic hyperCKaemia before overt weakness.",
+      "Creatine kinase is usually markedly elevated, frequently preceding clinical weakness.",
+      "Allelic with distal Miyoshi-type myopathy (MMD3), so the phenotype spans a proximal-to-distal continuum.",
+      "The course is relatively benign with ambulation often preserved for a long period.",
+      "Cardiac involvement is uncommon but has been reported."
     ],
-    [
-     "Key Investigations",
-     "Serum creatine kinase (characteristically high), Next-generation sequencing gene panel or whole-exome sequencing including ANO5",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Limb-girdle muscular dystrophy R12 is caused by biallelic variants in ANO5 on chromosome 11p14.3, which encodes anoctamin-5, a member of the TMEM16 family that functions at the sarcolemma and its internal membranes as a phospholipid scramblase and putative calcium-activated ion channel involved in membrane repair. The recurrent c.191dupA founder variant is common in Northern European populations, making ANO5-related disease one of the more frequent adult-onset recessive limb-girdle dystrophies in that region. Defective resealing of the membrane after contraction-induced injury is thought to drive myofibre necrosis, producing a characteristically asymmetric and often male-predominant phenotype with prominent calf and quadriceps involvement, exercise-related myalgia and marked hyperCKaemia. The same gene underlies distal Miyoshi-type myopathy (MMD3) and isolated hyperCKaemia, so ANO5 disease spans a proximal-to-distal continuum.",
+    "additionalDifferentials": [
+      "LGMD R2 (dysferlinopathy, with overlapping distal Miyoshi phenotype)",
+      "LGMD R1 (calpainopathy, CAPN3)",
+      "Miyoshi myopathy due to dysferlin (phenotypic overlap)",
+      "Metabolic and glycogen-storage myopathies presenting with rhabdomyolysis",
+      "Idiopathic or paucisymptomatic hyperCKaemia",
+      "Idiopathic inflammatory myopathy (when asymmetry raises suspicion)"
     ],
-    [
-     "Primary Differentials",
-     "LGMD R2 (dysferlinopathy, with overlapping distal Miyoshi phenotype), LGMD R1 (calpainopathy, CAPN3), Miyoshi myopathy due to",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum creatine kinase (characteristically high)",
+      "Next-generation sequencing gene panel or whole-exome sequencing including ANO5 and DYSF",
+      "Muscle MRI (asymmetric posterior thigh and calf involvement)",
+      "Muscle biopsy with dysferlin and anoctamin studies",
+      "Electromyography",
+      "Baseline ECG and echocardiography",
+      "Renal function and urinary myoglobin assessment during rhabdomyolysis episodes"
     ],
-    [
-     "Management Strategy",
-     "Recognise there is no disease-modifying drug and use physiotherapy and occupational therapy to maintain strength and function",
-     "Core treatment modality"
+    "redFlags": [
+      "Rhabdomyolysis with dark urine and risk of acute kidney injury",
+      "Chest symptoms or breathlessness suggesting cardiomyopathy",
+      "Rapidly worsening weakness",
+      "Severe exertional myalgia limiting activity"
     ],
-    [
-     "Clinical Pitfall",
-     "Isolated hyperCKaemia may be wrongly dismissed as benign.",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis is generally favourable, with slow progression and ambulation retained for many years. Episodes of rhabdomyolysis require vigilance because of the associated risk to the kidneys.",
+    "pitfalls": [
+      "Isolated hyperCKaemia may be wrongly dismissed as benign.",
+      "Phenotypic overlap with dysferlinopathy can lead to misdiagnosis without genetic testing.",
+      "Marked asymmetry may prompt inappropriate suspicion of an acquired or inflammatory cause.",
+      "Affected or carrier women may be under-recognised because of the male predominance."
+    ],
+    "references": [
+      "Standard neuromuscular medicine textbooks",
+      "Consensus classification of the limb-girdle muscular dystrophies",
+      "Clinical neurogenetics reference texts"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Recognise there is no disease-modifying drug and use physiotherapy and occupational therapy to maintain strength and function while avoiding overexertion that can trigger rhabdomyolysis",
+      "Recognise and treat episodes of rhabdomyolysis promptly with fluid resuscitation and renal protection",
+      "Advise on graded exercise and avoidance of muscle-injury triggers given exercise-induced myalgia and cramps",
+      "Perform baseline cardiac assessment with ECG and echocardiography and respiratory monitoring",
+      "Deliver multidisciplinary neuromuscular rehabilitation, with ambulation usually retained for many years",
+      "Provide genetic counselling for autosomal recessive inheritance and family screening"
     ]
-   ],
-   "caption": "Overview comparison matrix for limb-girdle muscular dystrophy r12 (anoctamin-5-related)."
-  }
- ],
- "diagrams": [
-  {
-   "id": "limb-girdle-muscular-dystrophy-r12-real-image",
-   "title": "Limb-girdle muscular dystrophy R12 (anoctamin-5-related): Diagnostic Head Computed Tomography",
-   "type": "ct",
-   "src": "/assets/kb-real-images/normal-head-ct.jpg?v=kbri3",
-   "caption": "Axial non-contrast head computed tomography scan displaying cerebral parenchyma, ventricular symmetry, and basal cisterns.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cerebral Parenchyma",
-     "description": "Gray-white matter differentiation, cortical ribbon, and deep nuclear structures."
-    },
-    {
-     "label": "Ventricular System",
-     "description": "Lateral, third, and fourth ventricle volume; midline shift and symmetry."
-    },
-    {
-     "label": "Extra-Axial Spaces",
-     "description": "Subarachnoid cisterns, sulcal patency, and calvarial bone margins."
+      "id": "limb_girdle_muscular_dystrophy_r12-pathway",
+      "title": "Limb-girdle muscular dystrophy R12 (anoctamin-5-related): Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Caused by biallelic ANO5 variants; anoctamin-5 participates in sarcolemmal membrane repair.",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rhabdomyolysis with dark urine and risk of acute kidney injury",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum creatine kinase (characteristically high), Next-generation sequencing gene panel or whole-exome sequencing including ANO5 and DYSF, Muscle MRI (asymmetric posterior thigh and calf involvement)"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Recognise there is no disease-modifying drug and use physiotherapy and occupational therapy to maintain strength and function while avoiding overexertion that can trigger rhabdomyolysis"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Isolated hyperCKaemia may be wrongly dismissed as benign."
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of limb-girdle muscular dystrophy r12 (anoctamin-5-related)."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "limb_girdle_muscular_dystrophy_r12-matrix",
+      "title": "Limb-girdle muscular dystrophy R12 (anoctamin-5-related): Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Caused by biallelic ANO5 variants; anoctamin-5 participates in sarcolemmal membrane repair.",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum creatine kinase (characteristically high), Next-generation sequencing gene panel or whole-exome sequencing including ANO5",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "LGMD R2 (dysferlinopathy, with overlapping distal Miyoshi phenotype), LGMD R1 (calpainopathy, CAPN3), Miyoshi myopathy due to",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Recognise there is no disease-modifying drug and use physiotherapy and occupational therapy to maintain strength and function",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Isolated hyperCKaemia may be wrongly dismissed as benign.",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for limb-girdle muscular dystrophy r12 (anoctamin-5-related)."
+    }
+  ],
+  "diagrams": []
 }

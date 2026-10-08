@@ -1,171 +1,149 @@
 {
- "id": "ptosis",
- "name": "Ptosis",
- "aliases": [
-  "blepharoptosis",
-  "drooping eyelid"
- ],
- "class": "non_infective",
- "system": "Eye / Ophthalmology",
- "specialty": "Ophthalmology",
- "referenceOnly": true,
- "reference": {
-  "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Ptosis is abnormal drooping of the upper eyelid; severity is gauged by the margin-reflex distance and the effect on the visual axis",
-   "Assessing levator function is central to classification and surgical planning",
-   "Aponeurotic (involutional) ptosis is the commonest, showing good levator function, a high skin crease, and often thinning of the eyelid",
-   "A ptosis with a small pupil and ipsilateral anhidrosis suggests Horner syndrome; a ptosis with a dilated pupil and an eye deviated down and out suggests a third nerve palsy",
-   "Variable, fatigable ptosis worsening through the day points to myasthenia gravis and warrants systemic evaluation",
-   "Congenital ptosis usually reflects levator dystrophy with poor function and risks amblyopia if the visual axis is occluded in a child",
-   "The rare Marcus Gunn jaw-winking phenomenon links lid elevation to jaw movement"
+  "id": "ptosis",
+  "name": "Ptosis",
+  "aliases": [
+    "blepharoptosis",
+    "drooping eyelid"
   ],
-  "pathophysiology": "Ptosis results from impaired elevation of the upper lid, which is normally raised by the levator palpebrae superioris (oculomotor nerve) and Muller muscle (sympathetic). Aponeurotic ptosis is caused by dehiscence or stretching of the levator aponeurosis with age. Neurogenic ptosis follows interruption of the nerve supply, as in third nerve palsy or sympathetic denervation (Horner syndrome). Myogenic ptosis reflects muscle disease such as myasthenia gravis, chronic progressive external ophthalmoplegia, or myotonic dystrophy. Mechanical ptosis arises from lid mass or scarring, and congenital ptosis from maldevelopment of the levator muscle.",
-  "additionalDifferentials": [
-   "Aponeurotic (involutional) ptosis",
-   "Third nerve palsy",
-   "Horner syndrome",
-   "Myasthenia gravis and other myogenic causes",
-   "Mechanical ptosis from lid mass or oedema",
-   "Pseudoptosis from dermatochalasis, brow ptosis, or contralateral lid retraction"
-  ],
-  "additionalInvestigations": [
-   "Measurement of margin-reflex distance, palpebral aperture, levator function, and skin crease position",
-   "Pupil examination to identify Horner syndrome or third nerve palsy",
-   "Assessment for fatigability and ice-pack or targeted testing when myasthenia is suspected",
-   "Neuroimaging when a compressive or neurogenic cause is suspected",
-   "Systemic and antibody testing for suspected myasthenia gravis"
-  ],
-  "redFlags": [
-   "Painful ptosis with a dilated pupil and ophthalmoplegia suggesting a compressive third nerve palsy (possible aneurysm) requiring urgent imaging",
-   "Ptosis with anisocoria and anhidrosis (Horner syndrome), which may indicate serious underlying pathology such as an apical lung lesion or carotid dissection",
-   "Fatigable or variable ptosis with diplopia or bulbar symptoms suggesting myasthenia gravis",
-   "Ptosis occluding the visual axis in a child, threatening amblyopia"
-  ],
-  "prognosis": "Aponeurotic and congenital ptosis generally respond well to surgery; the outlook for neurogenic and myogenic ptosis depends on the underlying cause, and childhood ptosis carries a risk of amblyopia if not managed promptly.",
-  "pitfalls": [
-   "Treating ptosis as purely cosmetic and missing a serious neurological cause such as third nerve palsy or Horner syndrome",
-   "Failing to test for fatigability and overlooking myasthenia gravis",
-   "Not recognising amblyopia risk in congenital ptosis",
-   "Mistaking pseudoptosis from brow droop or dermatochalasis for true ptosis"
-  ],
-  "references": [
-   "Parsons' Diseases of the Eye",
-   "Kanski's Clinical Ophthalmology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Direct treatment at the underlying mechanism, which differs for aponeurotic, neurogenic, myogenic and mechanical ptosis",
-   "Levator advancement or resection surgery for aponeurotic and congenital ptosis with adequate levator function, and a frontalis sling when levator function is poor",
-   "Urgently evaluate a painful third nerve palsy with a dilated pupil to exclude a compressive aneurysm, and investigate Horner syndrome for its cause",
-   "Treat myasthenia gravis medically with acetylcholinesterase inhibitors and immunosuppression before considering lid surgery, since the ptosis fluctuates",
-   "In children, correct promptly when the visual axis is occluded to prevent amblyopia, with orthoptic follow-up",
-   "Remove or treat mechanical causes such as lid masses or scarring",
-   "Ophthalmology and oculoplastic referral, with neurology input for neurogenic and myogenic causes"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "ptosis-pathway",
-   "title": "Ptosis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Ptosis is abnormal drooping of the upper eyelid; severity is gauged by the margin-reflex distance and the effect on the visual axis",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Painful ptosis with a dilated pupil and ophthalmoplegia suggesting a compressive third nerve palsy (possible aneurysm) requiring urgent imaging",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Measurement of margin-reflex distance, palpebral aperture, levator function, and skin crease position, Pupil examination to identify Horner syndrome or third nerve palsy, Assessment for fatigability and ice-pack or"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Direct treatment at the underlying mechanism, which differs for aponeurotic, neurogenic, myogenic and mechanical ptosis"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Treating ptosis as purely cosmetic and missing a serious neurological cause such as third nerve palsy or Horner syndrome"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of ptosis."
-  }
- ],
- "tables": [
-  {
-   "id": "ptosis-matrix",
-   "title": "Ptosis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Ptosis is abnormal drooping of the upper eyelid; severity is gauged by the margin-reflex distance and the effect on the visual",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Eye / Ophthalmology",
+  "specialty": "Ophthalmology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Ptosis is abnormal drooping of the upper eyelid; severity is gauged by the margin-reflex distance and the effect on the visual axis",
+      "Assessing levator function is central to classification and surgical planning",
+      "Aponeurotic (involutional) ptosis is the commonest, showing good levator function, a high skin crease, and often thinning of the eyelid",
+      "A ptosis with a small pupil and ipsilateral anhidrosis suggests Horner syndrome; a ptosis with a dilated pupil and an eye deviated down and out suggests a third nerve palsy",
+      "Variable, fatigable ptosis worsening through the day points to myasthenia gravis and warrants systemic evaluation",
+      "Congenital ptosis usually reflects levator dystrophy with poor function and risks amblyopia if the visual axis is occluded in a child",
+      "The rare Marcus Gunn jaw-winking phenomenon links lid elevation to jaw movement"
     ],
-    [
-     "Key Investigations",
-     "Measurement of margin-reflex distance, palpebral aperture, levator function, and skin crease position, Pupil examination to",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Ptosis results from impaired elevation of the upper lid, which is normally raised by the levator palpebrae superioris (oculomotor nerve) and Muller muscle (sympathetic). Aponeurotic ptosis is caused by dehiscence or stretching of the levator aponeurosis with age. Neurogenic ptosis follows interruption of the nerve supply, as in third nerve palsy or sympathetic denervation (Horner syndrome). Myogenic ptosis reflects muscle disease such as myasthenia gravis, chronic progressive external ophthalmoplegia, or myotonic dystrophy. Mechanical ptosis arises from lid mass or scarring, and congenital ptosis from maldevelopment of the levator muscle.",
+    "additionalDifferentials": [
+      "Aponeurotic (involutional) ptosis",
+      "Third nerve palsy",
+      "Horner syndrome",
+      "Myasthenia gravis and other myogenic causes",
+      "Mechanical ptosis from lid mass or oedema",
+      "Pseudoptosis from dermatochalasis, brow ptosis, or contralateral lid retraction"
     ],
-    [
-     "Primary Differentials",
-     "Aponeurotic (involutional) ptosis, Third nerve palsy, Horner syndrome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Measurement of margin-reflex distance, palpebral aperture, levator function, and skin crease position",
+      "Pupil examination to identify Horner syndrome or third nerve palsy",
+      "Assessment for fatigability and ice-pack or targeted testing when myasthenia is suspected",
+      "Neuroimaging when a compressive or neurogenic cause is suspected",
+      "Systemic and antibody testing for suspected myasthenia gravis"
     ],
-    [
-     "Management Strategy",
-     "Direct treatment at the underlying mechanism, which differs for aponeurotic, neurogenic, myogenic and mechanical ptosis",
-     "Core treatment modality"
+    "redFlags": [
+      "Painful ptosis with a dilated pupil and ophthalmoplegia suggesting a compressive third nerve palsy (possible aneurysm) requiring urgent imaging",
+      "Ptosis with anisocoria and anhidrosis (Horner syndrome), which may indicate serious underlying pathology such as an apical lung lesion or carotid dissection",
+      "Fatigable or variable ptosis with diplopia or bulbar symptoms suggesting myasthenia gravis",
+      "Ptosis occluding the visual axis in a child, threatening amblyopia"
     ],
-    [
-     "Clinical Pitfall",
-     "Treating ptosis as purely cosmetic and missing a serious neurological cause such as third nerve palsy or Horner syndrome",
-     "Prevent diagnostic or management error"
+    "prognosis": "Aponeurotic and congenital ptosis generally respond well to surgery; the outlook for neurogenic and myogenic ptosis depends on the underlying cause, and childhood ptosis carries a risk of amblyopia if not managed promptly.",
+    "pitfalls": [
+      "Treating ptosis as purely cosmetic and missing a serious neurological cause such as third nerve palsy or Horner syndrome",
+      "Failing to test for fatigability and overlooking myasthenia gravis",
+      "Not recognising amblyopia risk in congenital ptosis",
+      "Mistaking pseudoptosis from brow droop or dermatochalasis for true ptosis"
+    ],
+    "references": [
+      "Parsons' Diseases of the Eye",
+      "Kanski's Clinical Ophthalmology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Direct treatment at the underlying mechanism, which differs for aponeurotic, neurogenic, myogenic and mechanical ptosis",
+      "Levator advancement or resection surgery for aponeurotic and congenital ptosis with adequate levator function, and a frontalis sling when levator function is poor",
+      "Urgently evaluate a painful third nerve palsy with a dilated pupil to exclude a compressive aneurysm, and investigate Horner syndrome for its cause",
+      "Treat myasthenia gravis medically with acetylcholinesterase inhibitors and immunosuppression before considering lid surgery, since the ptosis fluctuates",
+      "In children, correct promptly when the visual axis is occluded to prevent amblyopia, with orthoptic follow-up",
+      "Remove or treat mechanical causes such as lid masses or scarring",
+      "Ophthalmology and oculoplastic referral, with neurology input for neurogenic and myogenic causes"
     ]
-   ],
-   "caption": "Overview comparison matrix for ptosis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "ptosis-real-image",
-   "title": "Ptosis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "ptosis-pathway",
+      "title": "Ptosis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Ptosis is abnormal drooping of the upper eyelid; severity is gauged by the margin-reflex distance and the effect on the visual axis",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Painful ptosis with a dilated pupil and ophthalmoplegia suggesting a compressive third nerve palsy (possible aneurysm) requiring urgent imaging",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Measurement of margin-reflex distance, palpebral aperture, levator function, and skin crease position, Pupil examination to identify Horner syndrome or third nerve palsy, Assessment for fatigability and ice-pack or"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Direct treatment at the underlying mechanism, which differs for aponeurotic, neurogenic, myogenic and mechanical ptosis"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Treating ptosis as purely cosmetic and missing a serious neurological cause such as third nerve palsy or Horner syndrome"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of ptosis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "ptosis-matrix",
+      "title": "Ptosis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Ptosis is abnormal drooping of the upper eyelid; severity is gauged by the margin-reflex distance and the effect on the visual",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Measurement of margin-reflex distance, palpebral aperture, levator function, and skin crease position, Pupil examination to",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Aponeurotic (involutional) ptosis, Third nerve palsy, Horner syndrome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Direct treatment at the underlying mechanism, which differs for aponeurotic, neurogenic, myogenic and mechanical ptosis",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Treating ptosis as purely cosmetic and missing a serious neurological cause such as third nerve palsy or Horner syndrome",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for ptosis."
+    }
+  ],
+  "diagrams": []
 }

@@ -1,178 +1,156 @@
 {
- "id": "obstetric_cholestasis",
- "name": "Obstetric Cholestasis",
- "aliases": [
-  "intrahepatic cholestasis of pregnancy",
-  "ICP",
-  "cholestasis of pregnancy",
-  "pruritus gravidarum with cholestasis"
- ],
- "class": "non_infective",
- "system": "Obstetrics / Gynaecology",
- "specialty": "Obstetrics & Gynaecology",
- "referenceOnly": true,
- "reference": {
-  "source": "Williams Obstetrics / Novak's Gynecology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Obstetric cholestasis is a pregnancy-specific liver disorder characterised by pruritus and raised bile acids, typically presenting in the second half of pregnancy",
-   "The hallmark symptom is generalised itching, often severe and worse at night, classically involving the palms and soles, in the absence of a primary skin rash",
-   "Diagnosis rests on elevated serum bile acids with or without raised transaminases once other causes of itch and abnormal liver function are excluded",
-   "The main concern is fetal rather than maternal, as high bile acid concentrations are associated with an increased risk of stillbirth, preterm birth, and meconium-stained liquor",
-   "The risk of stillbirth rises with the degree of bile acid elevation, so severity is graded on peak bile acid levels and guides timing of delivery",
-   "Ursodeoxycholic acid is commonly used to relieve maternal itching, though its effect on fetal outcome is limited, and vitamin K may be considered if there is prolonged clotting from fat malabsorption",
-   "Symptoms and biochemistry resolve after delivery, but the condition recurs in a high proportion of future pregnancies and with oestrogen-containing contraception",
-   "Persistent abnormal liver function after delivery should prompt investigation for underlying hepatobiliary disease"
+  "id": "obstetric_cholestasis",
+  "name": "Obstetric Cholestasis",
+  "aliases": [
+    "intrahepatic cholestasis of pregnancy",
+    "ICP",
+    "cholestasis of pregnancy",
+    "pruritus gravidarum with cholestasis"
   ],
-  "pathophysiology": "Obstetric cholestasis reflects impaired hepatocellular secretion and enterohepatic circulation of bile acids in genetically susceptible women, in whom the high oestrogen and progesterone levels of pregnancy reduce the function of bile acid transport proteins. This leads to accumulation of bile acids in the maternal circulation, causing pruritus, and their transfer across the placenta is thought to underlie the fetal risks, with high concentrations having arrhythmogenic and vasoconstrictive effects that may contribute to sudden fetal death. Cholestasis can also impair absorption of fat-soluble vitamins including vitamin K.",
-  "additionalDifferentials": [
-   "Physiological pruritus of pregnancy without cholestasis",
-   "Pregnancy-specific skin conditions such as polymorphic eruption or pemphigoid gestationis",
-   "Pre-eclampsia or HELLP syndrome with liver involvement",
-   "Acute fatty liver of pregnancy",
-   "Viral hepatitis or other intrinsic liver disease",
-   "Gallstone disease or biliary obstruction"
-  ],
-  "additionalInvestigations": [
-   "Serum bile acid measurement, ideally with serial monitoring of peak levels",
-   "Liver function tests including transaminases and bilirubin",
-   "Coagulation studies where cholestasis is prolonged or severe",
-   "Viral hepatitis screen and liver autoantibodies to exclude other liver disease",
-   "Liver ultrasound to exclude biliary obstruction",
-   "Fetal surveillance, recognising that routine monitoring poorly predicts sudden stillbirth"
-  ],
-  "redFlags": [
-   "Markedly elevated bile acids indicating higher stillbirth risk and need for planned delivery",
-   "Coexisting features of pre-eclampsia or HELLP suggesting an alternative or additional diagnosis",
-   "Jaundice, right upper quadrant pain, or systemic upset suggesting significant hepatic pathology",
-   "Reduced fetal movements or other signs of fetal compromise",
-   "Prolonged clotting from vitamin K deficiency increasing bleeding risk"
-  ],
-  "prognosis": "For the mother the condition is usually self-limiting and resolves promptly after birth, though it recurs frequently in later pregnancies and with oestrogen exposure. The principal concern is the fetus, and careful monitoring of bile acid levels with timely delivery reduces perinatal risk; failure of liver function to normalise postpartum should prompt further hepatological assessment.",
-  "pitfalls": [
-   "Dismissing severe pruritus in pregnancy without checking bile acids and liver function",
-   "Failing to exclude pre-eclampsia, HELLP, and acute fatty liver in a woman with abnormal liver tests",
-   "Over-reliance on cardiotocography to predict a sudden stillbirth it cannot reliably foresee",
-   "Not grading severity by bile acid level to guide timing of delivery",
-   "Overlooking persistent postpartum liver dysfunction that signals underlying disease"
-  ],
-  "references": [
-   "Williams Obstetrics",
-   "Novak's Gynecology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Ursodeoxycholic acid to relieve maternal pruritus, recognising its limited effect on foetal outcome",
-   "Emollients and topical antipruritics for symptomatic skin relief",
-   "Vitamin K supplementation where cholestasis is prolonged or clotting is deranged from fat malabsorption",
-   "Serial monitoring of serum bile acids and liver function, grading severity on peak bile acid levels",
-   "Planned timing of delivery guided by bile acid severity to reduce the risk of stillbirth",
-   "Foetal surveillance, acknowledging that routine monitoring poorly predicts sudden foetal death",
-   "Postnatal confirmation that liver function has resolved, with counselling on recurrence and avoidance of oestrogen-containing contraception",
-   "Multidisciplinary obstetric and hepatology input for atypical or severe disease"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "obstetric_cholestasis-pathway",
-   "title": "Obstetric Cholestasis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Obstetric cholestasis is a pregnancy-specific liver disorder characterised by pruritus and raised bile acids, typically presenting in the second half of pregnancy",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Markedly elevated bile acids indicating higher stillbirth risk and need for planned delivery",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum bile acid measurement, ideally with serial monitoring of peak levels, Liver function tests including transaminases and bilirubin, Coagulation studies where cholestasis is prolonged or severe"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Ursodeoxycholic acid to relieve maternal pruritus, recognising its limited effect on foetal outcome"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Dismissing severe pruritus in pregnancy without checking bile acids and liver function"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of obstetric cholestasis."
-  }
- ],
- "tables": [
-  {
-   "id": "obstetric_cholestasis-matrix",
-   "title": "Obstetric Cholestasis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Obstetric cholestasis is a pregnancy-specific liver disorder characterised by pruritus and raised bile acids, typically",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Obstetrics / Gynaecology",
+  "specialty": "Obstetrics & Gynaecology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Williams Obstetrics / Novak's Gynecology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Obstetric cholestasis is a pregnancy-specific liver disorder characterised by pruritus and raised bile acids, typically presenting in the second half of pregnancy",
+      "The hallmark symptom is generalised itching, often severe and worse at night, classically involving the palms and soles, in the absence of a primary skin rash",
+      "Diagnosis rests on elevated serum bile acids with or without raised transaminases once other causes of itch and abnormal liver function are excluded",
+      "The main concern is fetal rather than maternal, as high bile acid concentrations are associated with an increased risk of stillbirth, preterm birth, and meconium-stained liquor",
+      "The risk of stillbirth rises with the degree of bile acid elevation, so severity is graded on peak bile acid levels and guides timing of delivery",
+      "Ursodeoxycholic acid is commonly used to relieve maternal itching, though its effect on fetal outcome is limited, and vitamin K may be considered if there is prolonged clotting from fat malabsorption",
+      "Symptoms and biochemistry resolve after delivery, but the condition recurs in a high proportion of future pregnancies and with oestrogen-containing contraception",
+      "Persistent abnormal liver function after delivery should prompt investigation for underlying hepatobiliary disease"
     ],
-    [
-     "Key Investigations",
-     "Serum bile acid measurement, ideally with serial monitoring of peak levels, Liver function tests including transaminases and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Obstetric cholestasis reflects impaired hepatocellular secretion and enterohepatic circulation of bile acids in genetically susceptible women, in whom the high oestrogen and progesterone levels of pregnancy reduce the function of bile acid transport proteins. This leads to accumulation of bile acids in the maternal circulation, causing pruritus, and their transfer across the placenta is thought to underlie the fetal risks, with high concentrations having arrhythmogenic and vasoconstrictive effects that may contribute to sudden fetal death. Cholestasis can also impair absorption of fat-soluble vitamins including vitamin K.",
+    "additionalDifferentials": [
+      "Physiological pruritus of pregnancy without cholestasis",
+      "Pregnancy-specific skin conditions such as polymorphic eruption or pemphigoid gestationis",
+      "Pre-eclampsia or HELLP syndrome with liver involvement",
+      "Acute fatty liver of pregnancy",
+      "Viral hepatitis or other intrinsic liver disease",
+      "Gallstone disease or biliary obstruction"
     ],
-    [
-     "Primary Differentials",
-     "Physiological pruritus of pregnancy without cholestasis, Pregnancy-specific skin conditions such as polymorphic eruption or",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Serum bile acid measurement, ideally with serial monitoring of peak levels",
+      "Liver function tests including transaminases and bilirubin",
+      "Coagulation studies where cholestasis is prolonged or severe",
+      "Viral hepatitis screen and liver autoantibodies to exclude other liver disease",
+      "Liver ultrasound to exclude biliary obstruction",
+      "Fetal surveillance, recognising that routine monitoring poorly predicts sudden stillbirth"
     ],
-    [
-     "Management Strategy",
-     "Ursodeoxycholic acid to relieve maternal pruritus, recognising its limited effect on foetal outcome",
-     "Core treatment modality"
+    "redFlags": [
+      "Markedly elevated bile acids indicating higher stillbirth risk and need for planned delivery",
+      "Coexisting features of pre-eclampsia or HELLP suggesting an alternative or additional diagnosis",
+      "Jaundice, right upper quadrant pain, or systemic upset suggesting significant hepatic pathology",
+      "Reduced fetal movements or other signs of fetal compromise",
+      "Prolonged clotting from vitamin K deficiency increasing bleeding risk"
     ],
-    [
-     "Clinical Pitfall",
-     "Dismissing severe pruritus in pregnancy without checking bile acids and liver function",
-     "Prevent diagnostic or management error"
+    "prognosis": "For the mother the condition is usually self-limiting and resolves promptly after birth, though it recurs frequently in later pregnancies and with oestrogen exposure. The principal concern is the fetus, and careful monitoring of bile acid levels with timely delivery reduces perinatal risk; failure of liver function to normalise postpartum should prompt further hepatological assessment.",
+    "pitfalls": [
+      "Dismissing severe pruritus in pregnancy without checking bile acids and liver function",
+      "Failing to exclude pre-eclampsia, HELLP, and acute fatty liver in a woman with abnormal liver tests",
+      "Over-reliance on cardiotocography to predict a sudden stillbirth it cannot reliably foresee",
+      "Not grading severity by bile acid level to guide timing of delivery",
+      "Overlooking persistent postpartum liver dysfunction that signals underlying disease"
+    ],
+    "references": [
+      "Williams Obstetrics",
+      "Novak's Gynecology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Ursodeoxycholic acid to relieve maternal pruritus, recognising its limited effect on foetal outcome",
+      "Emollients and topical antipruritics for symptomatic skin relief",
+      "Vitamin K supplementation where cholestasis is prolonged or clotting is deranged from fat malabsorption",
+      "Serial monitoring of serum bile acids and liver function, grading severity on peak bile acid levels",
+      "Planned timing of delivery guided by bile acid severity to reduce the risk of stillbirth",
+      "Foetal surveillance, acknowledging that routine monitoring poorly predicts sudden foetal death",
+      "Postnatal confirmation that liver function has resolved, with counselling on recurrence and avoidance of oestrogen-containing contraception",
+      "Multidisciplinary obstetric and hepatology input for atypical or severe disease"
     ]
-   ],
-   "caption": "Overview comparison matrix for obstetric cholestasis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "obstetric-cholestasis-real-image",
-   "title": "Obstetric Cholestasis: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "obstetric_cholestasis-pathway",
+      "title": "Obstetric Cholestasis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Obstetric cholestasis is a pregnancy-specific liver disorder characterised by pruritus and raised bile acids, typically presenting in the second half of pregnancy",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Markedly elevated bile acids indicating higher stillbirth risk and need for planned delivery",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum bile acid measurement, ideally with serial monitoring of peak levels, Liver function tests including transaminases and bilirubin, Coagulation studies where cholestasis is prolonged or severe"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Ursodeoxycholic acid to relieve maternal pruritus, recognising its limited effect on foetal outcome"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Dismissing severe pruritus in pregnancy without checking bile acids and liver function"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of obstetric cholestasis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "obstetric_cholestasis-matrix",
+      "title": "Obstetric Cholestasis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Obstetric cholestasis is a pregnancy-specific liver disorder characterised by pruritus and raised bile acids, typically",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum bile acid measurement, ideally with serial monitoring of peak levels, Liver function tests including transaminases and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Physiological pruritus of pregnancy without cholestasis, Pregnancy-specific skin conditions such as polymorphic eruption or",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Ursodeoxycholic acid to relieve maternal pruritus, recognising its limited effect on foetal outcome",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Dismissing severe pruritus in pregnancy without checking bile acids and liver function",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for obstetric cholestasis."
+    }
+  ],
+  "diagrams": []
 }

@@ -1,178 +1,156 @@
 {
- "id": "azoospermia_nonobstructive",
- "name": "Non-obstructive azoospermia",
- "aliases": [
-  "NOA",
-  "testicular azoospermia",
-  "spermatogenic failure",
-  "secretory azoospermia"
- ],
- "class": "non_infective",
- "system": "Urology / Andrology",
- "specialty": "Andrology / Reproductive Medicine",
- "referenceOnly": true,
- "reference": {
-  "source": "Campbell-Walsh-Wein Urology / WHO laboratory manual for semen analysis",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "Non-obstructive azoospermia is the absence of ejaculated sperm due to failed or severely impaired sperm production rather than a blockage",
-   "The typical picture is of small, soft testes with a raised follicle-stimulating hormone, reflecting loss of the negative feedback normally provided by an intact germinal epithelium",
-   "This contrasts with obstructive azoospermia, where testicular volume and follicle-stimulating hormone are normal, and the distinction guides the entire management pathway",
-   "Recognised causes include Klinefelter syndrome, Y-chromosome microdeletions, prior cryptorchidism, gonadotoxic chemotherapy or radiotherapy, and idiopathic testicular failure",
-   "Karyotype and Y-chromosome microdeletion analysis are essential, both to establish a cause and because certain deletions predict whether surgical sperm retrieval is likely to succeed",
-   "Despite globally impaired production, focal areas of spermatogenesis may persist, so microdissection testicular sperm extraction can recover sperm in a meaningful proportion of men",
-   "Any retrieved sperm are used with intracytoplasmic sperm injection, and genetic counselling is important given the heritable causes",
-   "A trial of hormonal optimisation may be considered in selected men with a secondary (hypogonadotropic) component before retrieval"
+  "id": "azoospermia_nonobstructive",
+  "name": "Non-obstructive azoospermia",
+  "aliases": [
+    "NOA",
+    "testicular azoospermia",
+    "spermatogenic failure",
+    "secretory azoospermia"
   ],
-  "pathophysiology": "Non-obstructive azoospermia results from a primary failure of the seminiferous epithelium to produce sperm in sufficient numbers to appear in the ejaculate, with a patent excurrent duct system. The spectrum of histology ranges from maturation arrest to hypospermatogenesis and complete germ-cell aplasia (Sertoli-cell-only pattern). Because functioning germ cells are reduced or absent, inhibin feedback falls and pituitary follicle-stimulating hormone rises, while the testes lose volume and become soft. Underlying mechanisms include chromosomal disorders such as Klinefelter syndrome, deletions of the azoospermia factor regions of the Y chromosome, the aftermath of undescended testes, and damage from cytotoxic treatment, though many cases remain idiopathic. Even in severely affected testes, spermatogenesis can be patchy, which underpins the rationale for meticulous surgical exploration.",
-  "additionalDifferentials": [
-   "Obstructive azoospermia with preserved spermatogenesis",
-   "Klinefelter syndrome and other chromosomal disorders",
-   "Y-chromosome microdeletion",
-   "History of cryptorchidism or testicular torsion",
-   "Gonadotoxic chemotherapy or radiotherapy",
-   "Hypogonadotropic hypogonadism producing a secretory picture with low gonadotropins"
-  ],
-  "additionalInvestigations": [
-   "Repeat centrifuged semen analysis to confirm the absence of sperm",
-   "Serum follicle-stimulating hormone, luteinising hormone, and testosterone, with a raised follicle-stimulating hormone supporting spermatogenic failure",
-   "Karyotype to detect Klinefelter syndrome and other chromosomal abnormalities",
-   "Y-chromosome microdeletion analysis to establish cause and guide retrieval prospects",
-   "Scrotal ultrasound to assess testicular volume and exclude associated pathology",
-   "Prolactin and, where a central cause is suspected, pituitary assessment",
-   "Diagnostic and therapeutic testicular sperm extraction, ideally by microdissection technique"
-  ],
-  "redFlags": [
-   "A testicular mass detected on examination or ultrasound",
-   "Features of Klinefelter syndrome prompting broader endocrine and metabolic surveillance",
-   "A complete azoospermia-factor deletion predicting little chance of retrievable sperm",
-   "Signs of a pituitary lesion where gonadotropins are inappropriately low"
-  ],
-  "prognosis": "The reproductive outlook is more guarded than in obstructive disease, but microdissection testicular sperm extraction retrieves usable sperm in a substantial minority to allow fatherhood through intracytoplasmic sperm injection; the likelihood is influenced by the underlying cause and specific genetic findings.",
-  "pitfalls": [
-   "Failing to differentiate non-obstructive from obstructive azoospermia by integrating testicular size with follicle-stimulating hormone",
-   "Omitting karyotype and Y-microdeletion testing before attempting retrieval",
-   "Proceeding to sperm extraction without genetic counselling about heritable causes",
-   "Assuming no sperm can be found and denying a man a properly performed microdissection retrieval",
-   "Overlooking a treatable secondary hypogonadotropic component"
-  ],
-  "references": [
-   "Campbell-Walsh-Wein Urology",
-   "WHO laboratory manual for the examination and processing of human semen",
-   "European Association of Urology guidelines on sexual and reproductive health"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Identify and correct contributory factors, withdrawing gonadotoxic agents where possible and treating any endocrine abnormality, with gonadotrophin therapy where a hypogonadotropic cause is found",
-   "The principal route to biological fatherhood is microdissection testicular sperm extraction to recover focal sperm, used with intracytoplasmic sperm injection",
-   "Perform genetic testing and counselling before retrieval, with karyotype for Klinefelter syndrome and Y-chromosome microdeletion analysis, which predict retrieval success and heritable risk",
-   "Consider hormonal optimisation with agents such as aromatase inhibitors, selective oestrogen-receptor modulators or human chorionic gonadotrophin in selected men to improve the intratesticular milieu before retrieval",
-   "Cryopreserve any sperm recovered at surgery to maximise assisted-reproduction attempts",
-   "Counsel the couple on alternatives should retrieval fail, including donor insemination and adoption, with psychological support throughout",
-   "Manage within an andrology and reproductive medicine multidisciplinary team"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "azoospermia_nonobstructive-pathway",
-   "title": "Non-obstructive azoospermia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Non-obstructive azoospermia is the absence of ejaculated sperm due to failed or severely impaired sperm production rather than a blockage",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: A testicular mass detected on examination or ultrasound",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Repeat centrifuged semen analysis to confirm the absence of sperm, Serum follicle-stimulating hormone, luteinising hormone, and testosterone, with a raised follicle-stimulating hormone supporting spermatogenic failure,"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Identify and correct contributory factors, withdrawing gonadotoxic agents where possible and treating any endocrine abnormality, with gonadotrophin therapy where a hypogonadotropic cause is found"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Failing to differentiate non-obstructive from obstructive azoospermia by integrating testicular size with follicle-stimulating hormone"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of non-obstructive azoospermia."
-  }
- ],
- "tables": [
-  {
-   "id": "azoospermia_nonobstructive-matrix",
-   "title": "Non-obstructive azoospermia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Non-obstructive azoospermia is the absence of ejaculated sperm due to failed or severely impaired sperm production rather than a",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Urology / Andrology",
+  "specialty": "Andrology / Reproductive Medicine",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Campbell-Walsh-Wein Urology / WHO laboratory manual for semen analysis",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "Non-obstructive azoospermia is the absence of ejaculated sperm due to failed or severely impaired sperm production rather than a blockage",
+      "The typical picture is of small, soft testes with a raised follicle-stimulating hormone, reflecting loss of the negative feedback normally provided by an intact germinal epithelium",
+      "This contrasts with obstructive azoospermia, where testicular volume and follicle-stimulating hormone are normal, and the distinction guides the entire management pathway",
+      "Recognised causes include Klinefelter syndrome, Y-chromosome microdeletions, prior cryptorchidism, gonadotoxic chemotherapy or radiotherapy, and idiopathic testicular failure",
+      "Karyotype and Y-chromosome microdeletion analysis are essential, both to establish a cause and because certain deletions predict whether surgical sperm retrieval is likely to succeed",
+      "Despite globally impaired production, focal areas of spermatogenesis may persist, so microdissection testicular sperm extraction can recover sperm in a meaningful proportion of men",
+      "Any retrieved sperm are used with intracytoplasmic sperm injection, and genetic counselling is important given the heritable causes",
+      "A trial of hormonal optimisation may be considered in selected men with a secondary (hypogonadotropic) component before retrieval"
     ],
-    [
-     "Key Investigations",
-     "Repeat centrifuged semen analysis to confirm the absence of sperm, Serum follicle-stimulating hormone, luteinising hormone, and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Non-obstructive azoospermia results from a primary failure of the seminiferous epithelium to produce sperm in sufficient numbers to appear in the ejaculate, with a patent excurrent duct system. The spectrum of histology ranges from maturation arrest to hypospermatogenesis and complete germ-cell aplasia (Sertoli-cell-only pattern). Because functioning germ cells are reduced or absent, inhibin feedback falls and pituitary follicle-stimulating hormone rises, while the testes lose volume and become soft. Underlying mechanisms include chromosomal disorders such as Klinefelter syndrome, deletions of the azoospermia factor regions of the Y chromosome, the aftermath of undescended testes, and damage from cytotoxic treatment, though many cases remain idiopathic. Even in severely affected testes, spermatogenesis can be patchy, which underpins the rationale for meticulous surgical exploration.",
+    "additionalDifferentials": [
+      "Obstructive azoospermia with preserved spermatogenesis",
+      "Klinefelter syndrome and other chromosomal disorders",
+      "Y-chromosome microdeletion",
+      "History of cryptorchidism or testicular torsion",
+      "Gonadotoxic chemotherapy or radiotherapy",
+      "Hypogonadotropic hypogonadism producing a secretory picture with low gonadotropins"
     ],
-    [
-     "Primary Differentials",
-     "Obstructive azoospermia with preserved spermatogenesis, Klinefelter syndrome and other chromosomal disorders, Y-chromosome",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Repeat centrifuged semen analysis to confirm the absence of sperm",
+      "Serum follicle-stimulating hormone, luteinising hormone, and testosterone, with a raised follicle-stimulating hormone supporting spermatogenic failure",
+      "Karyotype to detect Klinefelter syndrome and other chromosomal abnormalities",
+      "Y-chromosome microdeletion analysis to establish cause and guide retrieval prospects",
+      "Scrotal ultrasound to assess testicular volume and exclude associated pathology",
+      "Prolactin and, where a central cause is suspected, pituitary assessment",
+      "Diagnostic and therapeutic testicular sperm extraction, ideally by microdissection technique"
     ],
-    [
-     "Management Strategy",
-     "Identify and correct contributory factors, withdrawing gonadotoxic agents where possible and treating any endocrine abnormality,",
-     "Core treatment modality"
+    "redFlags": [
+      "A testicular mass detected on examination or ultrasound",
+      "Features of Klinefelter syndrome prompting broader endocrine and metabolic surveillance",
+      "A complete azoospermia-factor deletion predicting little chance of retrievable sperm",
+      "Signs of a pituitary lesion where gonadotropins are inappropriately low"
     ],
-    [
-     "Clinical Pitfall",
-     "Failing to differentiate non-obstructive from obstructive azoospermia by integrating testicular size with follicle-stimulating",
-     "Prevent diagnostic or management error"
+    "prognosis": "The reproductive outlook is more guarded than in obstructive disease, but microdissection testicular sperm extraction retrieves usable sperm in a substantial minority to allow fatherhood through intracytoplasmic sperm injection; the likelihood is influenced by the underlying cause and specific genetic findings.",
+    "pitfalls": [
+      "Failing to differentiate non-obstructive from obstructive azoospermia by integrating testicular size with follicle-stimulating hormone",
+      "Omitting karyotype and Y-microdeletion testing before attempting retrieval",
+      "Proceeding to sperm extraction without genetic counselling about heritable causes",
+      "Assuming no sperm can be found and denying a man a properly performed microdissection retrieval",
+      "Overlooking a treatable secondary hypogonadotropic component"
+    ],
+    "references": [
+      "Campbell-Walsh-Wein Urology",
+      "WHO laboratory manual for the examination and processing of human semen",
+      "European Association of Urology guidelines on sexual and reproductive health"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Identify and correct contributory factors, withdrawing gonadotoxic agents where possible and treating any endocrine abnormality, with gonadotrophin therapy where a hypogonadotropic cause is found",
+      "The principal route to biological fatherhood is microdissection testicular sperm extraction to recover focal sperm, used with intracytoplasmic sperm injection",
+      "Perform genetic testing and counselling before retrieval, with karyotype for Klinefelter syndrome and Y-chromosome microdeletion analysis, which predict retrieval success and heritable risk",
+      "Consider hormonal optimisation with agents such as aromatase inhibitors, selective oestrogen-receptor modulators or human chorionic gonadotrophin in selected men to improve the intratesticular milieu before retrieval",
+      "Cryopreserve any sperm recovered at surgery to maximise assisted-reproduction attempts",
+      "Counsel the couple on alternatives should retrieval fail, including donor insemination and adoption, with psychological support throughout",
+      "Manage within an andrology and reproductive medicine multidisciplinary team"
     ]
-   ],
-   "caption": "Overview comparison matrix for non-obstructive azoospermia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "azoospermia-nonobstructive-real-image",
-   "title": "Non-obstructive azoospermia: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "azoospermia_nonobstructive-pathway",
+      "title": "Non-obstructive azoospermia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Non-obstructive azoospermia is the absence of ejaculated sperm due to failed or severely impaired sperm production rather than a blockage",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: A testicular mass detected on examination or ultrasound",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Repeat centrifuged semen analysis to confirm the absence of sperm, Serum follicle-stimulating hormone, luteinising hormone, and testosterone, with a raised follicle-stimulating hormone supporting spermatogenic failure,"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Identify and correct contributory factors, withdrawing gonadotoxic agents where possible and treating any endocrine abnormality, with gonadotrophin therapy where a hypogonadotropic cause is found"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Failing to differentiate non-obstructive from obstructive azoospermia by integrating testicular size with follicle-stimulating hormone"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of non-obstructive azoospermia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "azoospermia_nonobstructive-matrix",
+      "title": "Non-obstructive azoospermia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Non-obstructive azoospermia is the absence of ejaculated sperm due to failed or severely impaired sperm production rather than a",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Repeat centrifuged semen analysis to confirm the absence of sperm, Serum follicle-stimulating hormone, luteinising hormone, and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Obstructive azoospermia with preserved spermatogenesis, Klinefelter syndrome and other chromosomal disorders, Y-chromosome",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Identify and correct contributory factors, withdrawing gonadotoxic agents where possible and treating any endocrine abnormality,",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Failing to differentiate non-obstructive from obstructive azoospermia by integrating testicular size with follicle-stimulating",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for non-obstructive azoospermia."
+    }
+  ],
+  "diagrams": []
 }

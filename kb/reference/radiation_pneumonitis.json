@@ -1,180 +1,158 @@
 {
- "id": "radiation_pneumonitis",
- "name": "Radiation pneumonitis",
- "aliases": [
-  "radiation-induced lung injury",
-  "radiation lung injury",
-  "post-radiation pneumonitis"
- ],
- "class": "non_infective",
- "system": "Oncology",
- "specialty": "Oncology",
- "referenceOnly": true,
- "reference": {
-  "source": "Harrison's Principles of Internal Medicine / DeVita's Cancer: Principles & Practice of Oncology",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "It is a subacute inflammatory lung injury that typically develops weeks to a few months after thoracic radiotherapy, most often for lung, breast, oesophageal, or mediastinal tumours",
-   "Presenting features include dry cough, exertional breathlessness, low-grade fever, and sometimes pleuritic chest pain, which can mimic infection or cancer progression",
-   "Risk is influenced by the volume of lung irradiated, total dose and fractionation, pre-existing lung disease, and concurrent or prior chemotherapy or immunotherapy",
-   "Imaging classically shows ground-glass or consolidative change corresponding to the radiation field, though the distribution may extend beyond classic field borders with modern conformal techniques",
-   "It is fundamentally a diagnosis of exclusion, requiring careful exclusion of infection, pulmonary embolism, lymphangitic tumour spread, and drug-induced pneumonitis",
-   "Mild cases may be managed with observation and supportive care, while symptomatic disease is treated principally with corticosteroids and gradual tapering",
-   "Concurrent immune checkpoint inhibitor therapy can potentiate or complicate lung toxicity, making the distinction from immune-related pneumonitis important",
-   "Untreated or severe pneumonitis can progress over months to irreversible radiation-induced pulmonary fibrosis"
+  "id": "radiation_pneumonitis",
+  "name": "Radiation pneumonitis",
+  "aliases": [
+    "radiation-induced lung injury",
+    "radiation lung injury",
+    "post-radiation pneumonitis"
   ],
-  "pathophysiology": "Ionising radiation damages alveolar epithelial and vascular endothelial cells within the treated lung volume, triggering release of inflammatory cytokines and reactive oxygen species. This produces an acute to subacute alveolitis with increased capillary permeability, protein-rich exudate, and impaired gas exchange, seen clinically as radiation pneumonitis. If inflammation and fibroblast activation persist, the process evolves into progressive collagen deposition and radiation fibrosis with permanent architectural distortion and volume loss. The severity relates to the dose delivered and the volume of normal lung exposed, modified by patient and treatment factors.",
-  "additionalDifferentials": [
-   "Infective pneumonia, including opportunistic infection",
-   "Lymphangitic carcinomatosis or tumour progression in the lung",
-   "Pulmonary embolism",
-   "Drug-induced or immune checkpoint inhibitor pneumonitis",
-   "Cardiogenic pulmonary oedema",
-   "Exacerbation of underlying interstitial lung disease"
-  ],
-  "additionalInvestigations": [
-   "Chest radiograph and high-resolution CT correlating changes with the radiation field",
-   "Oxygen saturation and, where indicated, arterial blood gas and lung function testing",
-   "Inflammatory markers and cultures to help exclude infection",
-   "Bronchoscopy with lavage in selected cases to exclude infection or alternative diagnoses",
-   "Review of the radiotherapy plan and concurrent systemic therapy including immunotherapy"
-  ],
-  "redFlags": [
-   "Rapidly worsening breathlessness with hypoxaemia",
-   "High fever or purulent sputum suggesting superimposed infection",
-   "Extensive bilateral changes extending beyond the radiation field",
-   "Progression toward respiratory failure despite corticosteroid therapy"
-  ],
-  "prognosis": "Most mild to moderate cases respond well to corticosteroids and resolve, but severe pneumonitis, extensive lung involvement, or progression to fibrosis can cause lasting respiratory impairment and, uncommonly, death.",
-  "pitfalls": [
-   "Assuming symptoms represent infection and delaying appropriate anti-inflammatory treatment",
-   "Missing tumour progression or pulmonary embolism by anchoring on radiation pneumonitis",
-   "Tapering corticosteroids too rapidly and provoking a symptom flare",
-   "Failing to consider concurrent immune-related pneumonitis in patients on checkpoint inhibitors"
-  ],
-  "references": [
-   "Harrison's Principles of Internal Medicine, 22e",
-   "DeVita's Cancer: Principles & Practice of Oncology"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Mild or asymptomatic radiographic change requires observation only, with no specific drug therapy needed.",
-   "Moderate to severe symptomatic disease (significant cough, dyspnea, fever) is treated with glucocorticoids, only after infection has been excluded.",
-   "First-line corticosteroid therapy should be tapered slowly over weeks to months to minimize relapse of symptoms.",
-   "Corticosteroid-refractory disease or pneumonitis in patients on concurrent checkpoint inhibitors may warrant escalation to steroid-sparing immunosuppression.",
-   "Prophylactic antibiotics and anticoagulants have no established role in preventing or treating radiation pneumonitis.",
-   "Established chronic pulmonary fibrosis is managed with supportive care such as supplemental oxygen and pulmonary rehabilitation, since no intervention, including steroids, reverses established fibrosis.",
-   "Surgery has no role in treating radiation pneumonitis.",
-   "Radiotherapy planning that limits irradiated lung volume and mean lung dose (favoring smaller-volume techniques such as SBRT over larger-volume conventional fractionation) reduces risk but does not treat established pneumonitis.",
-   "Risk is increased with older age and concurrent chemotherapy, particularly taxane or gemcitabine-based regimens and platinum-taxane combinations, which should heighten monitoring vigilance but does not change treatment once pneumonitis occurs.",
-   "In patients on checkpoint inhibitors, immune-related pneumonitis should be distinguished from radiation pneumonitis, since management, including whether to hold the checkpoint inhibitor, can differ.",
-   "Serial clinical assessment of cough, dyspnea, fever, and function should continue for months after radiotherapy given the delayed and variable onset of this toxicity.",
-   "Follow-up imaging and oxygenation monitoring (pulse oximetry, blood gas, or lung function testing) help track evolution and catch respiratory compromise early.",
-   "Before attributing new respiratory symptoms to radiation pneumonitis, infection, tumor progression, and pulmonary embolism must be actively excluded, as this remains a diagnosis of exclusion.",
-   "Rapidly worsening breathlessness, hypoxemia, or suspicion of infection or an alternative diagnosis warrants urgent respiratory and oncology reassessment rather than continued empiric treatment."
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "radiation_pneumonitis-pathway",
-   "title": "Radiation pneumonitis: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "It is a subacute inflammatory lung injury that typically develops weeks to a few months after thoracic radiotherapy, most often for lung, breast, oesophageal, or mediastinal tumours",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Rapidly worsening breathlessness with hypoxaemia",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Chest radiograph and high-resolution CT correlating changes with the radiation field, Oxygen saturation and, where indicated, arterial blood gas and lung function testing, Inflammatory markers and cultures to help exclude"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Mild or asymptomatic radiographic change requires observation only, with no specific drug therapy needed."
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming symptoms represent infection and delaying appropriate anti-inflammatory treatment"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of radiation pneumonitis."
-  }
- ],
- "tables": [
-  {
-   "id": "radiation_pneumonitis-matrix",
-   "title": "Radiation pneumonitis: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "It is a subacute inflammatory lung injury that typically develops weeks to a few months after thoracic radiotherapy, most often",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Oncology",
+  "specialty": "Oncology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Harrison's Principles of Internal Medicine / DeVita's Cancer: Principles & Practice of Oncology",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "It is a subacute inflammatory lung injury that typically develops weeks to a few months after thoracic radiotherapy, most often for lung, breast, oesophageal, or mediastinal tumours",
+      "Presenting features include dry cough, exertional breathlessness, low-grade fever, and sometimes pleuritic chest pain, which can mimic infection or cancer progression",
+      "Risk is influenced by the volume of lung irradiated, total dose and fractionation, pre-existing lung disease, and concurrent or prior chemotherapy or immunotherapy",
+      "Imaging classically shows ground-glass or consolidative change corresponding to the radiation field, though the distribution may extend beyond classic field borders with modern conformal techniques",
+      "It is fundamentally a diagnosis of exclusion, requiring careful exclusion of infection, pulmonary embolism, lymphangitic tumour spread, and drug-induced pneumonitis",
+      "Mild cases may be managed with observation and supportive care, while symptomatic disease is treated principally with corticosteroids and gradual tapering",
+      "Concurrent immune checkpoint inhibitor therapy can potentiate or complicate lung toxicity, making the distinction from immune-related pneumonitis important",
+      "Untreated or severe pneumonitis can progress over months to irreversible radiation-induced pulmonary fibrosis"
     ],
-    [
-     "Key Investigations",
-     "Chest radiograph and high-resolution CT correlating changes with the radiation field, Oxygen saturation and, where indicated,",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Ionising radiation damages alveolar epithelial and vascular endothelial cells within the treated lung volume, triggering release of inflammatory cytokines and reactive oxygen species. This produces an acute to subacute alveolitis with increased capillary permeability, protein-rich exudate, and impaired gas exchange, seen clinically as radiation pneumonitis. If inflammation and fibroblast activation persist, the process evolves into progressive collagen deposition and radiation fibrosis with permanent architectural distortion and volume loss. The severity relates to the dose delivered and the volume of normal lung exposed, modified by patient and treatment factors.",
+    "additionalDifferentials": [
+      "Infective pneumonia, including opportunistic infection",
+      "Lymphangitic carcinomatosis or tumour progression in the lung",
+      "Pulmonary embolism",
+      "Drug-induced or immune checkpoint inhibitor pneumonitis",
+      "Cardiogenic pulmonary oedema",
+      "Exacerbation of underlying interstitial lung disease"
     ],
-    [
-     "Primary Differentials",
-     "Infective pneumonia, including opportunistic infection, Lymphangitic carcinomatosis or tumour progression in the lung, Pulmonary",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Chest radiograph and high-resolution CT correlating changes with the radiation field",
+      "Oxygen saturation and, where indicated, arterial blood gas and lung function testing",
+      "Inflammatory markers and cultures to help exclude infection",
+      "Bronchoscopy with lavage in selected cases to exclude infection or alternative diagnoses",
+      "Review of the radiotherapy plan and concurrent systemic therapy including immunotherapy"
     ],
-    [
-     "Management Strategy",
-     "Mild or asymptomatic radiographic change requires observation only, with no specific drug therapy needed.",
-     "Core treatment modality"
+    "redFlags": [
+      "Rapidly worsening breathlessness with hypoxaemia",
+      "High fever or purulent sputum suggesting superimposed infection",
+      "Extensive bilateral changes extending beyond the radiation field",
+      "Progression toward respiratory failure despite corticosteroid therapy"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming symptoms represent infection and delaying appropriate anti-inflammatory treatment",
-     "Prevent diagnostic or management error"
+    "prognosis": "Most mild to moderate cases respond well to corticosteroids and resolve, but severe pneumonitis, extensive lung involvement, or progression to fibrosis can cause lasting respiratory impairment and, uncommonly, death.",
+    "pitfalls": [
+      "Assuming symptoms represent infection and delaying appropriate anti-inflammatory treatment",
+      "Missing tumour progression or pulmonary embolism by anchoring on radiation pneumonitis",
+      "Tapering corticosteroids too rapidly and provoking a symptom flare",
+      "Failing to consider concurrent immune-related pneumonitis in patients on checkpoint inhibitors"
+    ],
+    "references": [
+      "Harrison's Principles of Internal Medicine, 22e",
+      "DeVita's Cancer: Principles & Practice of Oncology"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Mild or asymptomatic radiographic change requires observation only, with no specific drug therapy needed.",
+      "Moderate to severe symptomatic disease (significant cough, dyspnea, fever) is treated with glucocorticoids, only after infection has been excluded.",
+      "First-line corticosteroid therapy should be tapered slowly over weeks to months to minimize relapse of symptoms.",
+      "Corticosteroid-refractory disease or pneumonitis in patients on concurrent checkpoint inhibitors may warrant escalation to steroid-sparing immunosuppression.",
+      "Prophylactic antibiotics and anticoagulants have no established role in preventing or treating radiation pneumonitis.",
+      "Established chronic pulmonary fibrosis is managed with supportive care such as supplemental oxygen and pulmonary rehabilitation, since no intervention, including steroids, reverses established fibrosis.",
+      "Surgery has no role in treating radiation pneumonitis.",
+      "Radiotherapy planning that limits irradiated lung volume and mean lung dose (favoring smaller-volume techniques such as SBRT over larger-volume conventional fractionation) reduces risk but does not treat established pneumonitis.",
+      "Risk is increased with older age and concurrent chemotherapy, particularly taxane or gemcitabine-based regimens and platinum-taxane combinations, which should heighten monitoring vigilance but does not change treatment once pneumonitis occurs.",
+      "In patients on checkpoint inhibitors, immune-related pneumonitis should be distinguished from radiation pneumonitis, since management, including whether to hold the checkpoint inhibitor, can differ.",
+      "Serial clinical assessment of cough, dyspnea, fever, and function should continue for months after radiotherapy given the delayed and variable onset of this toxicity.",
+      "Follow-up imaging and oxygenation monitoring (pulse oximetry, blood gas, or lung function testing) help track evolution and catch respiratory compromise early.",
+      "Before attributing new respiratory symptoms to radiation pneumonitis, infection, tumor progression, and pulmonary embolism must be actively excluded, as this remains a diagnosis of exclusion.",
+      "Rapidly worsening breathlessness, hypoxemia, or suspicion of infection or an alternative diagnosis warrants urgent respiratory and oncology reassessment rather than continued empiric treatment."
     ]
-   ],
-   "caption": "Overview comparison matrix for radiation pneumonitis."
-  }
- ],
- "diagrams": [
-  {
-   "id": "radiation-pneumonitis-real-image",
-   "title": "Radiation pneumonitis: Diagnostic Chest Radiograph",
-   "type": "xray",
-   "src": "/assets/kb-real-images/cap-pneumonia-xray.jpg?v=kbri3",
-   "caption": "Diagnostic posteroanterior chest radiograph demonstrating parenchymal aeration, bronchovascular markings, and pleural interfaces.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Parenchyma & Airspaces",
-     "description": "Alveolar aeration, infiltrates, consolidation opacities, and volume symmetry."
-    },
-    {
-     "label": "Bronchovascular Tree",
-     "description": "Central hilar anatomy, bronchovascular branching, and air bronchograms."
-    },
-    {
-     "label": "Pleural Margins",
-     "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+      "id": "radiation_pneumonitis-pathway",
+      "title": "Radiation pneumonitis: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "It is a subacute inflammatory lung injury that typically develops weeks to a few months after thoracic radiotherapy, most often for lung, breast, oesophageal, or mediastinal tumours",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Rapidly worsening breathlessness with hypoxaemia",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Chest radiograph and high-resolution CT correlating changes with the radiation field, Oxygen saturation and, where indicated, arterial blood gas and lung function testing, Inflammatory markers and cultures to help exclude"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Mild or asymptomatic radiographic change requires observation only, with no specific drug therapy needed."
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming symptoms represent infection and delaying appropriate anti-inflammatory treatment"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of radiation pneumonitis."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "radiation_pneumonitis-matrix",
+      "title": "Radiation pneumonitis: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "It is a subacute inflammatory lung injury that typically develops weeks to a few months after thoracic radiotherapy, most often",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Chest radiograph and high-resolution CT correlating changes with the radiation field, Oxygen saturation and, where indicated,",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Infective pneumonia, including opportunistic infection, Lymphangitic carcinomatosis or tumour progression in the lung, Pulmonary",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Mild or asymptomatic radiographic change requires observation only, with no specific drug therapy needed.",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming symptoms represent infection and delaying appropriate anti-inflammatory treatment",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for radiation pneumonitis."
+    }
+  ],
+  "diagrams": []
 }

@@ -1,175 +1,153 @@
 {
- "id": "patulous_eustachian_tube",
- "name": "Patulous eustachian tube",
- "aliases": [
-  "patulous ET",
-  "PET",
-  "abnormally patent eustachian tube",
-  "patulous auditory tube"
- ],
- "class": "non_infective",
- "system": "Ear-Nose-Throat / Otology",
- "specialty": "Otolaryngology",
- "referenceOnly": true,
- "reference": {
-  "source": "Cummings Otolaryngology - Head and Neck Surgery",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The eustachian tube stays abnormally open at rest instead of remaining closed and opening only briefly on swallowing or yawning",
-   "The cardinal symptom is autophony - patients hear their own voice, and often their own breathing, unnaturally loudly in the affected ear",
-   "Breathing-synchronous tinnitus or aural fullness that fluctuates with the respiratory cycle is characteristic",
-   "Symptoms typically improve or resolve on lying down, bending forward, or lowering the head, as venous engorgement of the tubal mucosa closes the lumen, and worsen when upright or after exertion",
-   "Strongly associated with weight loss, including rapid loss from illness, bariatric surgery, or GLP-1 receptor agonist therapy, as well as dehydration, pregnancy, and oestrogen use",
-   "Otoscopy may show a tympanic membrane that moves medially and laterally with respiration, and tympanometry can demonstrate pressure swings synchronous with breathing",
-   "Reassurance and explanation are the mainstay, as the condition is benign and often self-limiting; correcting dehydration or weight loss and using measures to plump the tubal lining help selected patients",
-   "It is frequently mistaken for obstructive eustachian tube dysfunction, and inappropriate ventilation-tube insertion can make the autophony worse"
+  "id": "patulous_eustachian_tube",
+  "name": "Patulous eustachian tube",
+  "aliases": [
+    "patulous ET",
+    "PET",
+    "abnormally patent eustachian tube",
+    "patulous auditory tube"
   ],
-  "pathophysiology": "The eustachian tube is normally closed at rest, opening momentarily during swallowing or yawning to equalise middle-ear pressure. In a patulous tube the lumen remains open, so sound and airflow from the nasopharynx pass directly into the middle ear, producing autophony and breathing-synchronous symptoms. The usual mechanism is loss of the peritubal soft-tissue and mucosal bulk that normally keeps the tube collapsed, as occurs with weight loss, dehydration, or reduction of the fat around Ostmann's pad. Lying down or lowering the head increases venous congestion of the tubal mucosa, which closes the lumen and relieves symptoms, accounting for the strongly positional pattern.",
-  "additionalDifferentials": [
-   "Superior semicircular canal dehiscence",
-   "Obstructive eustachian tube dysfunction",
-   "Meniere's disease",
-   "Middle-ear effusion",
-   "Temporomandibular joint dysfunction",
-   "Palatal or middle-ear myoclonus",
-   "Third-window lesions producing conductive-type autophony"
-  ],
-  "additionalInvestigations": [
-   "Tympanometry during quiet and forced respiration to detect breathing-related pressure swings",
-   "Pure-tone audiometry to exclude other causes of aural symptoms",
-   "Nasoendoscopy of the eustachian tube orifice",
-   "Otoscopy observing tympanic membrane movement synchronous with breathing",
-   "High-resolution CT of the temporal bone to exclude superior canal dehiscence",
-   "Nutritional and weight assessment, including recent weight loss or GLP-1 agonist use"
-  ],
-  "redFlags": [
-   "Persistently unilateral symptoms with a possible nasopharyngeal mass, requiring exclusion of tumour",
-   "Rapidly progressive or profound hearing loss",
-   "Associated neurological signs",
-   "Sound- or pressure-induced vertigo suggesting superior canal dehiscence rather than a patulous tube"
-  ],
-  "prognosis": "Often benign and self-limiting, especially when a reversible precipitant such as dehydration or recent weight loss is corrected; a minority have persistent troublesome autophony that may require procedural intervention.",
-  "pitfalls": [
-   "Mislabelling it as obstructive eustachian tube dysfunction and inserting a ventilation tube, which usually fails and can worsen autophony",
-   "Overlooking recent weight loss, GLP-1 agonist use, or dehydration as the trigger",
-   "Not recognising the improvement on lying down as a key diagnostic clue",
-   "Missing a nasopharyngeal lesion in a persistently unilateral case"
-  ],
-  "references": [
-   "Cummings Otolaryngology - Head and Neck Surgery",
-   "Scott-Brown's Otorhinolaryngology, Head and Neck Surgery"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Correct reversible precipitants first by rehydrating, encouraging restoration of lost weight, and reviewing causative oestrogen or GLP-1 receptor agonist therapy",
-   "Reassure and advise positional manoeuvres such as lowering the head, which engorge the tubal mucosa and relieve autophony",
-   "Trial topical measures that bulk or irritate the tubal mucosa, such as nasal saline or oestrogen or irritant nasal drops",
-   "Consider procedural intervention for persistent troublesome autophony, including peritubal injection augmentation of the tubal orifice or eustachian tube obliteration",
-   "Insert a ventilation tube in selected patients, recognising the response is variable",
-   "Refer to otolaryngology when symptoms persist despite conservative measures and exclude mimics such as superior canal dehiscence"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "patulous_eustachian_tube-pathway",
-   "title": "Patulous eustachian tube: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The eustachian tube stays abnormally open at rest instead of remaining closed and opening only briefly on swallowing or yawning",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Persistently unilateral symptoms with a possible nasopharyngeal mass, requiring exclusion of tumour",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Tympanometry during quiet and forced respiration to detect breathing-related pressure swings, Pure-tone audiometry to exclude other causes of aural symptoms, Nasoendoscopy of the eustachian tube orifice"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Correct reversible precipitants first by rehydrating, encouraging restoration of lost weight, and reviewing causative oestrogen or GLP-1 receptor agonist therapy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Mislabelling it as obstructive eustachian tube dysfunction and inserting a ventilation tube, which usually fails and can worsen autophony"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of patulous eustachian tube."
-  }
- ],
- "tables": [
-  {
-   "id": "patulous_eustachian_tube-matrix",
-   "title": "Patulous eustachian tube: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The eustachian tube stays abnormally open at rest instead of remaining closed and opening only briefly on swallowing or yawning",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Ear-Nose-Throat / Otology",
+  "specialty": "Otolaryngology",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Cummings Otolaryngology - Head and Neck Surgery",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The eustachian tube stays abnormally open at rest instead of remaining closed and opening only briefly on swallowing or yawning",
+      "The cardinal symptom is autophony - patients hear their own voice, and often their own breathing, unnaturally loudly in the affected ear",
+      "Breathing-synchronous tinnitus or aural fullness that fluctuates with the respiratory cycle is characteristic",
+      "Symptoms typically improve or resolve on lying down, bending forward, or lowering the head, as venous engorgement of the tubal mucosa closes the lumen, and worsen when upright or after exertion",
+      "Strongly associated with weight loss, including rapid loss from illness, bariatric surgery, or GLP-1 receptor agonist therapy, as well as dehydration, pregnancy, and oestrogen use",
+      "Otoscopy may show a tympanic membrane that moves medially and laterally with respiration, and tympanometry can demonstrate pressure swings synchronous with breathing",
+      "Reassurance and explanation are the mainstay, as the condition is benign and often self-limiting; correcting dehydration or weight loss and using measures to plump the tubal lining help selected patients",
+      "It is frequently mistaken for obstructive eustachian tube dysfunction, and inappropriate ventilation-tube insertion can make the autophony worse"
     ],
-    [
-     "Key Investigations",
-     "Tympanometry during quiet and forced respiration to detect breathing-related pressure swings, Pure-tone audiometry to exclude",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "The eustachian tube is normally closed at rest, opening momentarily during swallowing or yawning to equalise middle-ear pressure. In a patulous tube the lumen remains open, so sound and airflow from the nasopharynx pass directly into the middle ear, producing autophony and breathing-synchronous symptoms. The usual mechanism is loss of the peritubal soft-tissue and mucosal bulk that normally keeps the tube collapsed, as occurs with weight loss, dehydration, or reduction of the fat around Ostmann's pad. Lying down or lowering the head increases venous congestion of the tubal mucosa, which closes the lumen and relieves symptoms, accounting for the strongly positional pattern.",
+    "additionalDifferentials": [
+      "Superior semicircular canal dehiscence",
+      "Obstructive eustachian tube dysfunction",
+      "Meniere's disease",
+      "Middle-ear effusion",
+      "Temporomandibular joint dysfunction",
+      "Palatal or middle-ear myoclonus",
+      "Third-window lesions producing conductive-type autophony"
     ],
-    [
-     "Primary Differentials",
-     "Superior semicircular canal dehiscence, Obstructive eustachian tube dysfunction, Meniere's disease",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Tympanometry during quiet and forced respiration to detect breathing-related pressure swings",
+      "Pure-tone audiometry to exclude other causes of aural symptoms",
+      "Nasoendoscopy of the eustachian tube orifice",
+      "Otoscopy observing tympanic membrane movement synchronous with breathing",
+      "High-resolution CT of the temporal bone to exclude superior canal dehiscence",
+      "Nutritional and weight assessment, including recent weight loss or GLP-1 agonist use"
     ],
-    [
-     "Management Strategy",
-     "Correct reversible precipitants first by rehydrating, encouraging restoration of lost weight, and reviewing causative oestrogen",
-     "Core treatment modality"
+    "redFlags": [
+      "Persistently unilateral symptoms with a possible nasopharyngeal mass, requiring exclusion of tumour",
+      "Rapidly progressive or profound hearing loss",
+      "Associated neurological signs",
+      "Sound- or pressure-induced vertigo suggesting superior canal dehiscence rather than a patulous tube"
     ],
-    [
-     "Clinical Pitfall",
-     "Mislabelling it as obstructive eustachian tube dysfunction and inserting a ventilation tube, which usually fails and can worsen",
-     "Prevent diagnostic or management error"
+    "prognosis": "Often benign and self-limiting, especially when a reversible precipitant such as dehydration or recent weight loss is corrected; a minority have persistent troublesome autophony that may require procedural intervention.",
+    "pitfalls": [
+      "Mislabelling it as obstructive eustachian tube dysfunction and inserting a ventilation tube, which usually fails and can worsen autophony",
+      "Overlooking recent weight loss, GLP-1 agonist use, or dehydration as the trigger",
+      "Not recognising the improvement on lying down as a key diagnostic clue",
+      "Missing a nasopharyngeal lesion in a persistently unilateral case"
+    ],
+    "references": [
+      "Cummings Otolaryngology - Head and Neck Surgery",
+      "Scott-Brown's Otorhinolaryngology, Head and Neck Surgery"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Correct reversible precipitants first by rehydrating, encouraging restoration of lost weight, and reviewing causative oestrogen or GLP-1 receptor agonist therapy",
+      "Reassure and advise positional manoeuvres such as lowering the head, which engorge the tubal mucosa and relieve autophony",
+      "Trial topical measures that bulk or irritate the tubal mucosa, such as nasal saline or oestrogen or irritant nasal drops",
+      "Consider procedural intervention for persistent troublesome autophony, including peritubal injection augmentation of the tubal orifice or eustachian tube obliteration",
+      "Insert a ventilation tube in selected patients, recognising the response is variable",
+      "Refer to otolaryngology when symptoms persist despite conservative measures and exclude mimics such as superior canal dehiscence"
     ]
-   ],
-   "caption": "Overview comparison matrix for patulous eustachian tube."
-  }
- ],
- "diagrams": [
-  {
-   "id": "patulous-eustachian-tube-real-image",
-   "title": "Patulous eustachian tube: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "patulous_eustachian_tube-pathway",
+      "title": "Patulous eustachian tube: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The eustachian tube stays abnormally open at rest instead of remaining closed and opening only briefly on swallowing or yawning",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Persistently unilateral symptoms with a possible nasopharyngeal mass, requiring exclusion of tumour",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Tympanometry during quiet and forced respiration to detect breathing-related pressure swings, Pure-tone audiometry to exclude other causes of aural symptoms, Nasoendoscopy of the eustachian tube orifice"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Correct reversible precipitants first by rehydrating, encouraging restoration of lost weight, and reviewing causative oestrogen or GLP-1 receptor agonist therapy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Mislabelling it as obstructive eustachian tube dysfunction and inserting a ventilation tube, which usually fails and can worsen autophony"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of patulous eustachian tube."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "patulous_eustachian_tube-matrix",
+      "title": "Patulous eustachian tube: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The eustachian tube stays abnormally open at rest instead of remaining closed and opening only briefly on swallowing or yawning",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Tympanometry during quiet and forced respiration to detect breathing-related pressure swings, Pure-tone audiometry to exclude",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Superior semicircular canal dehiscence, Obstructive eustachian tube dysfunction, Meniere's disease",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Correct reversible precipitants first by rehydrating, encouraging restoration of lost weight, and reviewing causative oestrogen",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Mislabelling it as obstructive eustachian tube dysfunction and inserting a ventilation tube, which usually fails and can worsen",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for patulous eustachian tube."
+    }
+  ],
+  "diagrams": []
 }

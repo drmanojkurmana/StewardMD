@@ -1,177 +1,155 @@
 {
- "id": "il12_receptor_deficiency",
- "name": "IL-12/IL-23 receptor beta-1 deficiency",
- "aliases": [
-  "IL12RB1 deficiency",
-  "interleukin-12 receptor beta-1 deficiency",
-  "IL-12Rbeta1 deficiency",
-  "IL-23 receptor pathway defect"
- ],
- "class": "non_infective",
- "system": "Immunology / Genetics",
- "specialty": "Clinical Immunology / Clinical Genetics",
- "referenceOnly": true,
- "reference": {
-  "source": "Stiehm's Immunologic Disorders / IUIS classification",
-  "sourceEdition": "current",
-  "pages": null,
-  "clinicalPearls": [
-   "The commonest recognised genetic cause of Mendelian susceptibility to mycobacterial disease, inherited in an autosomal recessive fashion through loss of the shared beta-1 chain of the interleukin-12 and interleukin-23 receptors",
-   "Loss of the receptor blunts interferon-gamma production by lymphocytes, weakening defence against intramacrophage organisms",
-   "Typical presentation is disseminated BCG disease after vaccination, recurrent non-tuberculous mycobacterial infection, and non-typhoidal Salmonella septicaemia or gastroenteritis",
-   "Mucocutaneous or invasive candidiasis can occur because the same receptor drives interleukin-23-dependent T-helper-17 responses that guard mucosal surfaces",
-   "Clinical penetrance is incomplete, so some individuals carrying biallelic defects remain healthy or present only in later childhood",
-   "Diagnosis is supported by absent surface expression of the receptor beta-1 chain on activated lymphocytes and impaired interferon-gamma production after interleukin-12 stimulation",
-   "Most patients respond to prolonged targeted antimicrobial therapy, and prognosis is generally more favourable than for complete interferon-gamma receptor defects"
+  "id": "il12_receptor_deficiency",
+  "name": "IL-12/IL-23 receptor beta-1 deficiency",
+  "aliases": [
+    "IL12RB1 deficiency",
+    "interleukin-12 receptor beta-1 deficiency",
+    "IL-12Rbeta1 deficiency",
+    "IL-23 receptor pathway defect"
   ],
-  "pathophysiology": "Interleukin-12 and interleukin-23 share a common receptor beta-1 subunit encoded by IL12RB1, and this subunit is essential for both cytokines to signal into T and natural killer cells. Interleukin-12 signalling drives these lymphocytes to produce interferon-gamma, which then activates macrophages to kill ingested mycobacteria and Salmonella; interleukin-23 signalling supports the maintenance of interleukin-17-producing T cells that protect mucosal surfaces against fungi. When the beta-1 chain is absent, cells cannot respond to either cytokine, interferon-gamma output collapses, and the phagocyte activation loop fails, leaving the host unable to contain weakly virulent intracellular organisms; the accompanying weakness in the interleukin-23/interleukin-17 arm explains the added tendency to candidiasis.",
-  "additionalDifferentials": [
-   "Interferon-gamma receptor chain deficiency",
-   "Interleukin-12 subunit p40 (IL12B) deficiency",
-   "STAT1 loss-of-function deficiency",
-   "Chronic granulomatous disease",
-   "Chronic mucocutaneous candidiasis from STAT1 gain-of-function or other causes",
-   "Acquired anti-interferon-gamma autoantibody syndrome"
-  ],
-  "additionalInvestigations": [
-   "Flow cytometry for surface interleukin-12 receptor beta-1 expression on activated T and natural killer cells",
-   "Whole-blood assay of interferon-gamma production after stimulation with interleukin-12 and mycobacterial antigen",
-   "Genetic sequencing of IL12RB1 and related MSMD genes",
-   "Mycobacterial and Salmonella cultures with species-level identification",
-   "Assessment for candidal infection at mucosal and invasive sites",
-   "Screening for HIV and other acquired immunodeficiency",
-   "Imaging to map disseminated infection"
-  ],
-  "redFlags": [
-   "Disseminated disease after BCG vaccination",
-   "Recurrent non-typhoidal Salmonella septicaemia",
-   "Progressive or multifocal non-tuberculous mycobacterial infection",
-   "Invasive candidiasis accompanying mycobacterial disease",
-   "Consanguinity with a family history of childhood mycobacterial or Salmonella infection"
-  ],
-  "prognosis": "The prognosis is comparatively good among the mycobacterial susceptibility disorders; many patients survive into adulthood with prolonged antimicrobial therapy, although infections may recur and a minority succumb to overwhelming early disease.",
-  "pitfalls": [
-   "Assuming healthy relatives who share the genotype exclude the diagnosis, given incomplete penetrance",
-   "Stopping antibiotics prematurely and precipitating relapse",
-   "Administering live BCG before the diagnosis is considered in an at-risk family",
-   "Overlooking coexistent candidiasis attributable to the interleukin-23 arm",
-   "Relying on a normal immunoglobulin and lymphocyte profile to rule out the condition"
-  ],
-  "references": [
-   "Stiehm's Immunologic Disorders in Infants and Children",
-   "IUIS Expert Committee classification of inborn errors of immunity"
-  ],
-  "crossLinks": [],
-  "management": [
-   "Treat mycobacterial disease and non-typhoidal Salmonella infection with prolonged, culture-directed multidrug antimicrobial therapy",
-   "Administer recombinant interferon-gamma as adjunctive therapy, effective because the downstream interferon-gamma receptor and STAT1 pathway are intact",
-   "Treat mucocutaneous or invasive candidiasis with antifungals, reflecting the impaired interleukin-23 and interleukin-17 arm",
-   "Provide antimicrobial prophylaxis against recurrent infection and avoid live BCG vaccination",
-   "Manage disseminated or septicaemic deterioration urgently with blood cultures and directed antimicrobials",
-   "Monitor with serial mycobacterial and Salmonella cultures and screen for coexisting acquired immunodeficiency such as HIV",
-   "Offer genetic counselling and family screening, noting incomplete penetrance in this autosomal recessive condition"
-  ]
- },
- "review": {
-  "status": "ai_drafted",
-  "reviewedBy": null,
-  "reviewedAt": null,
-  "clinicianApproved": false
- },
- "version": 1,
- "algorithms": [
-  {
-   "id": "il12_receptor_deficiency-pathway",
-   "title": "IL-12/IL-23 receptor beta-1 deficiency: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "The commonest recognised genetic cause of Mendelian susceptibility to mycobacterial disease, inherited in an autosomal recessive fashion through loss of the shared beta-1 chain of the interleukin-12 and interleukin-23 receptors",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Disseminated disease after BCG vaccination",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Flow cytometry for surface interleukin-12 receptor beta-1 expression on activated T and natural killer cells, Whole-blood assay of interferon-gamma production after stimulation with interleukin-12 and mycobacterial"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Treat mycobacterial disease and non-typhoidal Salmonella infection with prolonged, culture-directed multidrug antimicrobial therapy"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Assuming healthy relatives who share the genotype exclude the diagnosis, given incomplete penetrance"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of il-12/il-23 receptor beta-1 deficiency."
-  }
- ],
- "tables": [
-  {
-   "id": "il12_receptor_deficiency-matrix",
-   "title": "IL-12/IL-23 receptor beta-1 deficiency: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "The commonest recognised genetic cause of Mendelian susceptibility to mycobacterial disease, inherited in an autosomal recessive",
-     "Cardinal clinical findings"
+  "class": "non_infective",
+  "system": "Immunology / Genetics",
+  "specialty": "Clinical Immunology / Clinical Genetics",
+  "referenceOnly": true,
+  "reference": {
+    "source": "Stiehm's Immunologic Disorders / IUIS classification",
+    "sourceEdition": "current",
+    "pages": null,
+    "clinicalPearls": [
+      "The commonest recognised genetic cause of Mendelian susceptibility to mycobacterial disease, inherited in an autosomal recessive fashion through loss of the shared beta-1 chain of the interleukin-12 and interleukin-23 receptors",
+      "Loss of the receptor blunts interferon-gamma production by lymphocytes, weakening defence against intramacrophage organisms",
+      "Typical presentation is disseminated BCG disease after vaccination, recurrent non-tuberculous mycobacterial infection, and non-typhoidal Salmonella septicaemia or gastroenteritis",
+      "Mucocutaneous or invasive candidiasis can occur because the same receptor drives interleukin-23-dependent T-helper-17 responses that guard mucosal surfaces",
+      "Clinical penetrance is incomplete, so some individuals carrying biallelic defects remain healthy or present only in later childhood",
+      "Diagnosis is supported by absent surface expression of the receptor beta-1 chain on activated lymphocytes and impaired interferon-gamma production after interleukin-12 stimulation",
+      "Most patients respond to prolonged targeted antimicrobial therapy, and prognosis is generally more favourable than for complete interferon-gamma receptor defects"
     ],
-    [
-     "Key Investigations",
-     "Flow cytometry for surface interleukin-12 receptor beta-1 expression on activated T and natural killer cells, Whole-blood assay",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Interleukin-12 and interleukin-23 share a common receptor beta-1 subunit encoded by IL12RB1, and this subunit is essential for both cytokines to signal into T and natural killer cells. Interleukin-12 signalling drives these lymphocytes to produce interferon-gamma, which then activates macrophages to kill ingested mycobacteria and Salmonella; interleukin-23 signalling supports the maintenance of interleukin-17-producing T cells that protect mucosal surfaces against fungi. When the beta-1 chain is absent, cells cannot respond to either cytokine, interferon-gamma output collapses, and the phagocyte activation loop fails, leaving the host unable to contain weakly virulent intracellular organisms; the accompanying weakness in the interleukin-23/interleukin-17 arm explains the added tendency to candidiasis.",
+    "additionalDifferentials": [
+      "Interferon-gamma receptor chain deficiency",
+      "Interleukin-12 subunit p40 (IL12B) deficiency",
+      "STAT1 loss-of-function deficiency",
+      "Chronic granulomatous disease",
+      "Chronic mucocutaneous candidiasis from STAT1 gain-of-function or other causes",
+      "Acquired anti-interferon-gamma autoantibody syndrome"
     ],
-    [
-     "Primary Differentials",
-     "Interferon-gamma receptor chain deficiency, Interleukin-12 subunit p40 (IL12B) deficiency, STAT1 loss-of-function deficiency",
-     "Rule out key mimics"
+    "additionalInvestigations": [
+      "Flow cytometry for surface interleukin-12 receptor beta-1 expression on activated T and natural killer cells",
+      "Whole-blood assay of interferon-gamma production after stimulation with interleukin-12 and mycobacterial antigen",
+      "Genetic sequencing of IL12RB1 and related MSMD genes",
+      "Mycobacterial and Salmonella cultures with species-level identification",
+      "Assessment for candidal infection at mucosal and invasive sites",
+      "Screening for HIV and other acquired immunodeficiency",
+      "Imaging to map disseminated infection"
     ],
-    [
-     "Management Strategy",
-     "Treat mycobacterial disease and non-typhoidal Salmonella infection with prolonged, culture-directed multidrug antimicrobial",
-     "Core treatment modality"
+    "redFlags": [
+      "Disseminated disease after BCG vaccination",
+      "Recurrent non-typhoidal Salmonella septicaemia",
+      "Progressive or multifocal non-tuberculous mycobacterial infection",
+      "Invasive candidiasis accompanying mycobacterial disease",
+      "Consanguinity with a family history of childhood mycobacterial or Salmonella infection"
     ],
-    [
-     "Clinical Pitfall",
-     "Assuming healthy relatives who share the genotype exclude the diagnosis, given incomplete penetrance",
-     "Prevent diagnostic or management error"
+    "prognosis": "The prognosis is comparatively good among the mycobacterial susceptibility disorders; many patients survive into adulthood with prolonged antimicrobial therapy, although infections may recur and a minority succumb to overwhelming early disease.",
+    "pitfalls": [
+      "Assuming healthy relatives who share the genotype exclude the diagnosis, given incomplete penetrance",
+      "Stopping antibiotics prematurely and precipitating relapse",
+      "Administering live BCG before the diagnosis is considered in an at-risk family",
+      "Overlooking coexistent candidiasis attributable to the interleukin-23 arm",
+      "Relying on a normal immunoglobulin and lymphocyte profile to rule out the condition"
+    ],
+    "references": [
+      "Stiehm's Immunologic Disorders in Infants and Children",
+      "IUIS Expert Committee classification of inborn errors of immunity"
+    ],
+    "crossLinks": [],
+    "management": [
+      "Treat mycobacterial disease and non-typhoidal Salmonella infection with prolonged, culture-directed multidrug antimicrobial therapy",
+      "Administer recombinant interferon-gamma as adjunctive therapy, effective because the downstream interferon-gamma receptor and STAT1 pathway are intact",
+      "Treat mucocutaneous or invasive candidiasis with antifungals, reflecting the impaired interleukin-23 and interleukin-17 arm",
+      "Provide antimicrobial prophylaxis against recurrent infection and avoid live BCG vaccination",
+      "Manage disseminated or septicaemic deterioration urgently with blood cultures and directed antimicrobials",
+      "Monitor with serial mycobacterial and Salmonella cultures and screen for coexisting acquired immunodeficiency such as HIV",
+      "Offer genetic counselling and family screening, noting incomplete penetrance in this autosomal recessive condition"
     ]
-   ],
-   "caption": "Overview comparison matrix for il-12/il-23 receptor beta-1 deficiency."
-  }
- ],
- "diagrams": [
-  {
-   "id": "il12-receptor-deficiency-real-image",
-   "title": "IL-12/IL-23 receptor beta-1 deficiency: Diagnostic Imaging Evaluation",
-   "type": "xray",
-   "src": "/assets/kb-real-images/normal-chest-xray.jpg?v=kbri3",
-   "caption": "Standard diagnostic imaging examination displaying cardiopulmonary silhouette, anatomical landmarks, and visceral boundaries.",
-   "annotations": [
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null,
+    "clinicianApproved": false
+  },
+  "version": 1,
+  "algorithms": [
     {
-     "label": "Cardiothoracic Ratio",
-     "description": "Heart size, mediastinal width, and great vessel contours."
-    },
-    {
-     "label": "Visceral Fields",
-     "description": "Parenchymal lucency, vascular distribution, and baseline symmetry."
-    },
-    {
-     "label": "Bony Thorax & Soft Tissues",
-     "description": "Costal contours, diaphragmatic arches, and soft tissue boundaries."
+      "id": "il12_receptor_deficiency-pathway",
+      "title": "IL-12/IL-23 receptor beta-1 deficiency: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "The commonest recognised genetic cause of Mendelian susceptibility to mycobacterial disease, inherited in an autosomal recessive fashion through loss of the shared beta-1 chain of the interleukin-12 and interleukin-23 receptors",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Disseminated disease after BCG vaccination",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Flow cytometry for surface interleukin-12 receptor beta-1 expression on activated T and natural killer cells, Whole-blood assay of interferon-gamma production after stimulation with interleukin-12 and mycobacterial"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Treat mycobacterial disease and non-typhoidal Salmonella infection with prolonged, culture-directed multidrug antimicrobial therapy"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Assuming healthy relatives who share the genotype exclude the diagnosis, given incomplete penetrance"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of il-12/il-23 receptor beta-1 deficiency."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "il12_receptor_deficiency-matrix",
+      "title": "IL-12/IL-23 receptor beta-1 deficiency: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "The commonest recognised genetic cause of Mendelian susceptibility to mycobacterial disease, inherited in an autosomal recessive",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Flow cytometry for surface interleukin-12 receptor beta-1 expression on activated T and natural killer cells, Whole-blood assay",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Interferon-gamma receptor chain deficiency, Interleukin-12 subunit p40 (IL12B) deficiency, STAT1 loss-of-function deficiency",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Treat mycobacterial disease and non-typhoidal Salmonella infection with prolonged, culture-directed multidrug antimicrobial",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Assuming healthy relatives who share the genotype exclude the diagnosis, given incomplete penetrance",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for il-12/il-23 receptor beta-1 deficiency."
+    }
+  ],
+  "diagrams": []
 }
