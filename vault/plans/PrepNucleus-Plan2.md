@@ -82,3 +82,58 @@ cannot copy. Every claim we print is sourced; every number we show the student i
 2. Exams to add after FMGE (needs banks).
 3. Whether to publish the accuracy page.
 4. Native build timing for widgets and Live Activity (needs App Store / Play releases).
+
+## 8. Owner instructions log (standing rules; read before any PrepNucleus work)
+Recorded 2026-10-08 at the owner's request so nothing is lost when context is compacted. Newest last. Each line is
+the owner's instruction in substance; where a choice was made from options, the chosen option is given.
+
+### Ship and money
+- Finish = merge to main + deploy + `smd_prep` and `smd_prep_arena` ON for all (app not public yet). Done 2026-10-06.
+- `smd_prep_pro_enforce` stays OFF until a real payment test by the owner.
+- Paid AI: show a dry-run cost first and get the owner's yes, except within an explicit grant. Use the cheapest Gemini
+  (gemini-3.1-flash-lite) at Batch price. Grants so far: $25 for content (2026-10-06), $50 total for "100x better than
+  Revisable" UI and content (2026-10-07; image spend $2.56 by round 7), explanations scope (b) $28 approved 2026-10-08.
+- Pricing: list Rs 5,999/year; launch price Rs 1,499 first year until 2027-03-31 23:59 IST, labelled launch price;
+  one-time win-back Rs 999 with a real 48 h expiry; "Cancel anytime" always shown and true; 7-day refund; student
+  discount 20%; referral credit 1 month. No fake discounts, no resetting timers, no countdown paywalls. Free tier: 50
+  Q/day, 1 lesson/day, 10 cards/day, daily sprint, first 2 modules per subject.
+- Social: friends, challenge a friend, college boards, study groups, public accuracy page.
+
+### Content rules
+- Repo is PUBLIC: no StatPearls text, PYQ text/images, competitor teardown or publisher branding in git (R2 and the
+  private GCS bucket only).
+- No "AI-written / AI-generated / AI-powered" label and no per-item source line anywhere in the app. Sources and credits
+  (MedMCQA MIT licence, AI-assisted writing, image credits under CC-BY/CC-BY-SA) live only in terms.html and privacy.html.
+- No emoji, no em-dash in app text.
+- PYQs: every explanation says why the correct answer is right and why each other option is wrong. Recall papers are
+  labelled memory-based. Delete the owner's source zip/PDF copies after use (done 2026-10-07).
+- Explanations must never be missing and must read like the market leader's QBank: a bold key line, topic notes with
+  headings, bold key terms, bullets, numbered points and comparison tables, "why the others are wrong" per option, a
+  "Remember" pearl, easy to scan in 30-60 s (pipeline tools/prep-explain.mjs, branch feat/prep-explain, bank v5).
+- Images: questions need real images (X-ray, CT, MRI, USG, histology, ECG, clinical photos). Only openly licensed
+  sources (Wikimedia Commons, NLM Open-i / PMC OA with CC-BY or CC0; CC0, PD, CC-BY, CC-BY-SA only; never NC/ND,
+  Radiopaedia, textbooks or Google Images). Haiku verifies every image twice against question, key and explanation;
+  doubtful = reject. Image goes in the stem only when the stem refers to an image, else in the explanation. Scale to
+  all ~4,086 image-related bank items, radiology and pathology first (approved 2026-10-08).
+- Answer keys the image checks flag as likely wrong go to a review list for the owner; never change keys silently.
+
+### Product and UI
+- Premium UI "100x better than Revisable": immersive world, motion (motion.dev vanilla Motion, Aceternity-style effects
+  rebuilt in CSS/ES5), every surface scored against the competitor and kept at 8/10 or above; follow all owner UI
+  skills (ui-ux-pro-max, anti-ui-slop, impeccable, taste-skill, Emil skills, web-design-guidelines).
+- Smart nudges: playful, personal, true; no guilt, no fake social proof; opt-in, quiet hours, caps.
+- Practice setup sheet before practice in EVERY QBank module, subject, Custom module, Mistakes, Bookmarks, PYQ sets
+  and user decks: question type (All / Image-based / Clinical scenario / One-liner / Mix), number of questions,
+  new or repeat (New / Incorrect before / Bookmarked / Due / All / Mix), difficulty (Easy / Moderate / Hard / Mix),
+  mode (Practice / Timed) and timer (Off / per question / whole set); remembers the last choice; one-tap "last
+  settings" (branch feat/prep-practice-setup, 2026-10-08).
+- Create a deck from a PDF: cut the images out of the PDF on the device and make image-based MCQs from them, plus the
+  text questions (same branch).
+- New module: Radiology NEET-SS (DM / DNB level) for radiology residents, image-based questions with real images and,
+  where licences allow, CT/MRI scroll stacks or loops (like a scrollable CT series), reusing the RadioAnatome stack
+  viewer (owner request 2026-10-08).
+
+### Working rules
+- Keep the Mac disk healthy: delete headless Chrome profiles after test batches, clean build outputs, never fill the
+  disk; work outputs must live in git or the cloud, not only on the Mac.
+- Long jobs run in `screen` or resumable tools; keep going until everything is done (owner's repeated loop instruction).
