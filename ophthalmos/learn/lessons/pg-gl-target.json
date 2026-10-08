@@ -37,8 +37,8 @@
           "hi": "कप वाली डिस्क"
         },
         "note": {
-          "en": "Record the rim now. Later photos and OCT are judged against this baseline.",
-          "hi": "अभी रिम दर्ज करें। बाद की फ़ोटो और OCT इसी बेसलाइन से तौले जाते हैं।"
+          "en": "Record the rim now. Later photos and optical coherence tomography (OCT) are judged against this baseline.",
+          "hi": "अभी रिम दर्ज करें। बाद की फ़ोटो और ऑप्टिकल कोहेरेंस टोमोग्राफ़ी (optical coherence tomography, OCT) इसी बेसलाइन से तौले जाते हैं।"
         }
       },
       {
@@ -49,57 +49,107 @@
           "hi": "मैक्युला"
         },
         "note": {
-          "en": "Damage near fixation needs a lower target and closer follow-up.",
-          "hi": "फ़िक्सेशन के पास नुकसान हो तो टारगेट और कम, और जाँच जल्दी-जल्दी।"
+          "en": "Damage near fixation (the point you look at) needs a lower target and closer follow-up.",
+          "hi": "फ़िक्सेशन (fixation, जिस बिंदु को आप देखते हैं) के पास नुकसान हो तो टारगेट और कम, और जाँच जल्दी-जल्दी।"
         }
       },
       {
         "x": 0.7,
         "y": 0.22,
         "label": {
-          "en": "Upper arcade",
-          "hi": "ऊपर की नसें"
+          "en": "Upper arcade (arch of vessels)",
+          "hi": "ऊपर की नसें (upper arcade)"
         },
         "note": {
-          "en": "Fibres here serve the lower field. Match rim loss to field loss.",
-          "hi": "यहाँ के तंतु नीचे के दायरे को देखते हैं। रिम का नुकसान दायरे के नुकसान से मिलाएँ।"
+          "en": "Fibres here serve the lower visual field (the area you can see). Match rim loss to visual field loss.",
+          "hi": "यहाँ के तंतु नीचे के दृष्टि क्षेत्र (visual field, यानी जितना आप देख पाते हैं) को देखते हैं। रिम का नुकसान दृष्टि क्षेत्र के नुकसान से मिलाएँ।"
         }
       },
       {
         "x": 0.72,
         "y": 0.72,
         "label": {
-          "en": "Lower arcade",
-          "hi": "नीचे की नसें"
+          "en": "Lower arcade (arch of vessels)",
+          "hi": "नीचे की नसें (lower arcade)"
         },
         "note": {
-          "en": "Fibres here serve the upper field, often hit first.",
-          "hi": "यहाँ के तंतु ऊपर के दायरे को देखते हैं, जिस पर अक्सर पहले असर होता है।"
+          "en": "Fibres here serve the upper visual field, often hit first.",
+          "hi": "यहाँ के तंतु ऊपर के दृष्टि क्षेत्र को देखते हैं, जिस पर अक्सर पहले असर होता है।"
         }
+      }
+    ]
+  },
+  "fields": {
+    "intro": {
+      "en": "Glaucoma field loss starts away from the centre, so each eye must be tested alone.",
+      "hi": "ग्लूकोमा (glaucoma) में दृष्टि क्षेत्र (visual field) की कमी बीच से दूर शुरू होती है, इसलिए हर आँख को अलग से जाँचें।"
+    },
+    "items": [
+      {
+        "id": "arcuate-superior",
+        "label": {
+          "en": "Superior arcuate scotoma (curved blind patch above the centre)",
+          "hi": "ऊपरी आर्कुएट स्कोटोमा (superior arcuate scotoma, बीच के ऊपर मुड़ा हुआ अंधा हिस्सा)"
+        },
+        "le": "full",
+        "re": "arcuate-sup",
+        "where": {
+          "en": "Right eye, early glaucoma: nerve fibres lost at the lower rim of the optic disc.",
+          "hi": "दाईं आँख, शुरुआती ग्लूकोमा (glaucoma): ऑप्टिक डिस्क (optic disc) के निचले किनारे (rim) के तंतु नष्ट।"
+        },
+        "lesion": "optic-nerve"
+      },
+      {
+        "id": "arcuate-inferior",
+        "label": {
+          "en": "Inferior arcuate scotoma (curved blind patch below the centre)",
+          "hi": "निचला आर्कुएट स्कोटोमा (inferior arcuate scotoma, बीच के नीचे मुड़ा हुआ अंधा हिस्सा)"
+        },
+        "le": "arcuate-inf",
+        "re": "full",
+        "where": {
+          "en": "Left eye, early glaucoma: nerve fibres lost at the upper rim of the optic disc.",
+          "hi": "बाईं आँख, शुरुआती ग्लूकोमा (glaucoma): ऑप्टिक डिस्क (optic disc) के ऊपरी किनारे (rim) के तंतु नष्ट।"
+        },
+        "lesion": "optic-nerve"
+      },
+      {
+        "id": "tunnel-late",
+        "label": {
+          "en": "Tunnel vision (only a small central island left)",
+          "hi": "टनल विज़न (tunnel vision, बीच में सिर्फ़ छोटा सा हिस्सा बचता है)"
+        },
+        "le": "tunnel",
+        "re": "tunnel",
+        "where": {
+          "en": "Advanced glaucoma in both eyes: the edges are lost, the centre goes last.",
+          "hi": "दोनों आँखों में बढ़ा हुआ ग्लूकोमा: किनारे पहले जाते हैं, बीच का हिस्सा सबसे आख़िर में।"
+        },
+        "lesion": "optic-nerve"
       }
     ]
   },
   "why": {
     "steps": [
       {
-        "en": "The AAO guideline suggests a first target about 20% to 30% below the pre-treatment pressure.",
-        "hi": "AAO की गाइडलाइन कहती है कि पहला टारगेट इलाज से पहले के प्रेशर से लगभग 20% से 30% कम रखें।"
+        "en": "The American Academy of Ophthalmology (AAO) guideline suggests a first target about 20% to 30% below the pre-treatment pressure.",
+        "hi": "American Academy of Ophthalmology (AAO) की गाइडलाइन कहती है कि पहला टारगेट इलाज से पहले के प्रेशर से लगभग 20% से 30% कम रखें।"
       },
       {
         "en": "Aim lower if damage is advanced, pressure was very high, or the patient is young.",
         "hi": "अगर नुकसान ज़्यादा है, प्रेशर बहुत ज़्यादा था, या मरीज़ जवान है, तो टारगेट और कम रखें।"
       },
       {
-        "en": "In EMGT, each 1 mmHg of lowering cut the risk of progression by about 10%.",
-        "hi": "EMGT में प्रेशर हर 1 mmHg घटने पर बीमारी बढ़ने का ख़तरा लगभग 10% कम हुआ।"
+        "en": "In the Early Manifest Glaucoma Trial (EMGT), each 1 millimetre of mercury (mmHg) of lowering cut the risk of progression by about 10%.",
+        "hi": "Early Manifest Glaucoma Trial (EMGT) में प्रेशर हर 1 मिलीमीटर पारा (mmHg) घटने पर बीमारी बढ़ने का ख़तरा लगभग 10% कम हुआ।"
       },
       {
         "en": "In LiGHT, [[slt]] first worked as well as drops. At 3 years, 74% of patients needed no drops.",
         "hi": "LiGHT में पहले [[slt]] देना ड्रॉप्स जितना असरदार रहा। 3 साल पर 74% मरीज़ों को ड्रॉप्स की ज़रूरत नहीं पड़ी।"
       },
       {
-        "en": "Judge progression with repeat fields and OCT, by event or trend. Confirm a change before acting.",
-        "hi": "बीमारी बढ़ी या नहीं, यह बार-बार फ़ील्ड और OCT से, घटना या रुझान देखकर तय करें। कुछ करने से पहले बदलाव की पुष्टि करें।"
+        "en": "Judge progression with repeat visual fields and OCT, by event or trend. Confirm a change before acting.",
+        "hi": "बीमारी बढ़ी या नहीं, यह बार-बार दृष्टि क्षेत्र जाँच और OCT से, घटना या रुझान देखकर तय करें। कुछ करने से पहले बदलाव की पुष्टि करें।"
       },
       {
         "en": "To step up: check drop use first, then add or switch drugs, laser, or surgery.",
@@ -113,8 +163,8 @@
   },
   "spot": [
     {
-      "en": "Progression on fields or OCT despite reaching target: lower the target.",
-      "hi": "टारगेट पाने के बाद भी फ़ील्ड या OCT पर बढ़ोतरी: टारगेट और घटाएँ।"
+      "en": "Progression on visual fields or OCT despite reaching target: lower the target.",
+      "hi": "टारगेट पाने के बाद भी दृष्टि क्षेत्र जाँच या OCT पर बढ़ोतरी: टारगेट और घटाएँ।"
     },
     {
       "en": "Wide swings in pressure between visits: think of missed drops.",
@@ -146,8 +196,8 @@
   "check": [
     {
       "q": {
-        "en": "Untreated IOP is 30 mmHg. What is a reasonable first target?",
-        "hi": "बिना इलाज IOP 30 mmHg है। पहला उचित टारगेट क्या है?"
+        "en": "Untreated intraocular pressure (IOP) is 30 mmHg. What is a reasonable first target?",
+        "hi": "बिना इलाज आँख के अंदर का दबाव (intraocular pressure, IOP) 30 mmHg है। पहला उचित टारगेट क्या है?"
       },
       "o": [
         {
@@ -171,8 +221,8 @@
     },
     {
       "q": {
-        "en": "IOP is at target, but fields show confirmed progression. What next?",
-        "hi": "IOP टारगेट पर है, पर फ़ील्ड में बढ़ोतरी की पुष्टि हुई है। आगे क्या?"
+        "en": "IOP is at target, but visual fields show confirmed progression. What next?",
+        "hi": "IOP टारगेट पर है, पर दृष्टि क्षेत्र जाँच में बढ़ोतरी की पुष्टि हुई है। आगे क्या?"
       },
       "o": [
         {
