@@ -355,7 +355,8 @@ body:not(.dark):not(.v3-dark) .nrk-root .vl-al.danger, body:not(.dark):not(.v3-d
 .nrk-root .vl-co-link { min-height: 44px; margin-top: 4px; padding: 0; border: 0; background: none; color: var(--sp-link); font: inherit; font-size: 14px; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--sp-link-line); }
 .nrk-root .vl-co-need { margin: 10px 0 0; font-size: 13.5px; line-height: 1.4; font-weight: 600; color: var(--vl-acc); text-wrap: pretty; }
 /* round 6 (U1, U2): wrong value named in the coach; the asked dial's live value; the rest of a long Level 1 line */
-.nrk-root .vl-co-wrong { margin: 6px 0 0; padding: 6px 10px; border-radius: 10px; background: color-mix(in srgb, var(--nk-warn) 14%, transparent); font-size: 14px; line-height: 1.4; font-weight: 600; text-wrap: pretty; }
+.nrk-root .vl-co-wrong { margin: 8px 0 8px; padding: 6px 10px; border-radius: 10px; background: color-mix(in srgb, var(--nk-warn) 14%, transparent); font-size: 14px; line-height: 1.4; font-weight: 600; text-wrap: pretty; }
+.nrk-root .vl-ackwhy { flex: 1 1 100%; margin: 0; font-size: 13px; line-height: 1.4; color: var(--sp-mut); text-wrap: pretty; }
 .nrk-root .vl-co-dial { color: var(--vl-acc); font-weight: 700; }
 .nrk-root .vl-co-more { margin: 2px 0 0; font-size: 14.5px; line-height: 1.45; }
 .nrk-root .vl-co-more summary { min-height: 44px; display: inline-flex; align-items: center; color: var(--sp-link); font-weight: 600; font-size: 14px; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--sp-link-line); }
@@ -390,7 +391,7 @@ body:not(.dark):not(.v3-dark) .nrk-root .vl-al.danger, body:not(.dark):not(.v3-d
 .nrk-root .vl-sheet-b { overflow-y: auto; overscroll-behavior: contain; padding: 0 18px 16px; font-size: 15px; line-height: 1.5; }
 .nrk-root .vl-sheet-b ul, .nrk-root .vl-sheet-b ol { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
 .nrk-root .vl-sheet-b p { margin: 0; }
-.nrk-root .vl-sheet-f { display: flex; gap: 8px; padding: 10px 16px calc(12px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--vl-cline); }
+.nrk-root .vl-sheet-f { display: flex; flex-wrap: wrap; gap: 8px; padding: 10px 16px calc(12px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--vl-cline); }
 .nrk-root .vl-sheet-f .sp-btn { flex: 1 1 0; }
 .nrk-root .vl-fix { font-weight: 650; }
 .nrk-root .vl-range { margin: 0 0 10px !important; font-size: 13px; color: var(--sp-mut); font-variant-numeric: tabular-nums; }
